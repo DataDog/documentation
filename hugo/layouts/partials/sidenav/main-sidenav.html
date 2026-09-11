@@ -16,7 +16,16 @@
             {{ end}}
 
             <div class="sidenav-nav sidenav-nav-js-load">
-                {{ partialCached "nav/left-nav.html" . .Section .Site.Language.Lang }}
+                {{/*
+                    left-nav.html's rendered HTML depends on which top-level main-menu entry the
+                    current page belongs to (see nav/current-top-section.html), not on .Section --
+                    two pages can share a Hugo content section while mapping to different (or no)
+                    top-level menu entries. Caching by .Section alone previously let a single
+                    page's render (whichever one Hugo happened to build first for that section)
+                    be served, incorrectly, for every other page in that section.
+                */}}
+                {{ $currentTopSection := partial "nav/current-top-section.html" . }}
+                {{ partialCached "nav/left-nav.html" . $currentTopSection .Site.Language.Lang }}
             </div>
         </div>
     </div>
