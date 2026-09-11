@@ -298,7 +298,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance Provisioned IOPS
-      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks.
+      recommendation_description: RDS instances using less than 80% of provisioned IOPS over the past two weeks. Not applicable to Amazon Aurora instances, which do not have a configurable provisioned IOPS setting.
       recommendation_prerequisites: ""
     - category: Migrate
       cloud_provider: AWS
@@ -443,6 +443,12 @@ multifiltersearch:
       resource_type: Container Registry
       recommendation_type: Delete Container Registry
       recommendation_description: A Container Registry that has never received successful pulls.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: Azure
+      resource_type: Foundry Account
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies Azure Foundry accounts already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure

@@ -20,11 +20,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-agent-builder/"
   tag: "Blog"
   text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
+- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+  tag: "Blog"
+  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Work Management integration is in Preview" >}}
-Automatically assign custom agents to work on your Cases.
-{{< /callout >}}
 
 ## Overview
 
@@ -118,6 +117,10 @@ The **Run Agent** step also supports the following optional fields:
 
 The agent executes with its configured tools and instructions, then returns its output to the workflow. You can combine rule-based automation with AI reasoning in a single workflow.
 
+### Automatically Assign Agents to Work Items
+
+[Work Management][17] is Datadog's built-in ticketing tool for tracking human and agentic work. You can create custom agents to help triage and resolve your work, and automatically assign these agents to work items.
+
 ## Troubleshooting
 
 **Agent not using a tool**: Verify the tool has been added to the agent's configuration. Agents can use only tools that are explicitly added.
@@ -145,3 +148,4 @@ The agent executes with its configured tools and instructions, then returns its 
 [14]: /actions/workflows/trigger/#monitor-triggers
 [15]: /actions/workflows/trigger/#incident-triggers
 [16]: /actions/workflows/trigger/#security-triggers
+[17]: /incident_response/work_management/ai/custom_agents/

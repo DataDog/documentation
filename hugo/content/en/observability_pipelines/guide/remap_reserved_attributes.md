@@ -1,5 +1,6 @@
 ---
 title: Remap Reserved Attributes
+description: Learn how to remap the value of reserved log attributes, such as host, source, and service, with the Edit Fields or Custom Processor in Observability Pipelines.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/processors/edit_fields/"

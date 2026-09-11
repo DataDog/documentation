@@ -1119,34 +1119,6 @@
       "description": "Update a personal access token returns \"OK\" response"
     }
   ],
-  "CreateLLMObsPromptVersion": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Create a new LLM Observability prompt version returns \"OK\" response"
-    }
-  ],
-  "CreateLLMObsPrompt": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Create an LLM Observability prompt returns \"OK\" response"
-    }
-  ],
-  "UpdateLLMObsPromptVersion": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Update a specific LLM Observability prompt version returns \"OK\" response"
-    }
-  ],
-  "UpdateLLMObsPrompt": [
-    {
-      "group": "llm_observability",
-      "suffix": "",
-      "description": "Update an LLM Observability prompt returns \"OK\" response"
-    }
-  ],
   "AggregateLogs": [
     {
       "group": "logs",
@@ -1773,6 +1745,11 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_1874470273",
+      "description": "Validate an observability pipeline with Splunk HEC destination endpoint_target returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1267410221",
       "description": "Validate an observability pipeline with Splunk HEC destination token_strategy returns \"OK\" response"
     },
@@ -1785,6 +1762,11 @@
       "group": "observability_pipelines",
       "suffix": "_1130701356",
       "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3116312807",
+      "description": "Validate an observability pipeline with Splunk TCP source max_connection_duration_secs returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2220,11 +2202,6 @@
     },
     {
       "group": "security_monitoring",
-      "suffix": "_914562040",
-      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     },
@@ -2288,6 +2265,13 @@
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationSeverityModifierRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a severity modifier rule returns \"Successfully created the severity modifier rule\" response"
+    }
+  ],
   "CreateSecurityMonitoringSuppression": [
     {
       "group": "security_monitoring",
@@ -2348,6 +2332,11 @@
   "SearchSecurityMonitoringSignals": [
     {
       "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a list of security signals returns \"OK\" response"
+    },
+    {
+      "group": "security_monitoring",
       "suffix": "_1309350146",
       "description": "Get a list of security signals returns \"OK\" response with pagination"
     }
@@ -2404,6 +2393,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Reorder mute rules returns \"Successfully reordered the mute rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationSeverityModifierRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder severity modifier rules returns \"Successfully reordered the severity modifier rules\" response"
     }
   ],
   "ReorderSecurityFindingsAutomationTicketCreationRules": [
@@ -2491,6 +2487,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationSeverityModifierRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a severity modifier rule returns \"Successfully updated the severity modifier rule\" response"
     }
   ],
   "UpdateSecurityMonitoringSuppression": [
@@ -2886,6 +2889,13 @@
       "group": "teams",
       "suffix": "",
       "description": "Update team notification rule returns \"OK\" response"
+    }
+  ],
+  "AddSTIXThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
     }
   ],
   "CreateUser": [

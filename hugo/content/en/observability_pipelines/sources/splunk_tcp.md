@@ -1,5 +1,6 @@
 ---
 title: Splunk Heavy or Universal Forwarders (TCP) Source
+description: Learn how to collect logs from Splunk Heavy or Universal Forwarders over TCP using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

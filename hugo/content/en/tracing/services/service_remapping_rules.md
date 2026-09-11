@@ -18,7 +18,7 @@ Update how your services appear across Datadog without changing tracer configura
 
 ## Prerequisites
 
-You must have the `apm_service_renaming_write` permission to create remapping rules. See [Permissions][1] for details on Datadog role-based access control.
+You must have the **APM Service Remapping Write** permission (`apm_service_renaming_write`) to create, edit, and delete remapping rules. See [Permissions][1] for details on Datadog role-based access control.
 
 ### Tracer version requirements
 

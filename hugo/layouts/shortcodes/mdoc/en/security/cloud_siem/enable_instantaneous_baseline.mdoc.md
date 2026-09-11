@@ -1,0 +1,1 @@
+Toggle **Enable instantaneous baseline** if you want to build the baseline based on past events for the first event received.

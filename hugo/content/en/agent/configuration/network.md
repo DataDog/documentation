@@ -89,17 +89,21 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
-
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `dbquery-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /remote_configuration
+[End User Device Monitoring][103]
+: `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
+`eudm-intake.`{{< region-param key="dd_site" code="true" >}}
+
 [102]: /database_monitoring/
+[103]: /infrastructure/end_user_device_monitoring/
 
 {{% /site-region %}}
 
@@ -338,3 +342,4 @@ If you are installing the Datadog Operator in a Kubernetes environment with limi
 [31]: /data_security/logs/#hipaa-enabled-customers
 [32]: /logs/log_collection/#logging-endpoints
 [33]: /network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /remote_configuration

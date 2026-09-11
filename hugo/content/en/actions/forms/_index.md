@@ -1,7 +1,6 @@
 ---
 title: Forms
 description: Build forms to collect input, analyze responses, and trigger automations.
-disable_toc: false
 further_reading:
   - link: https://www.datadoghq.com/blog/datadog-forms
     tag: Blog
@@ -78,6 +77,16 @@ To preview or share your form:
 1. Click {{< ui >}}Preview{{< /ui >}} to view the form as it appears to respondents.
 1. Click {{< ui >}}Share{{< /ui >}} to copy the form link or configure sharing options.
 
+## Customize start and end pages
+
+Forms can include a start page shown before the first question, and an end page shown after a respondent submits the form. Customize the title and message on both pages. By default, forms don't include a start page, and the end page shows a generic completion message.
+
+To add or customize a start or end page:
+1. From the [Forms][2] page, click a form to open it in the editor.
+1. In the {{< ui >}}Pages{{< /ui >}} panel, click {{< ui >}}Start Page{{< /ui >}} or {{< ui >}}End Page{{< /ui >}}. If no start page exists, click the plus **+** icon to add one.
+1. Edit the title and message.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to apply your changes.
+
 ## Form settings
 
 From the [Forms][2] page, click a form to open it in the editor. In the editor header, click the gear <i class="icon-cog-2"></i> icon to access the following settings:
@@ -102,7 +111,9 @@ To configure sharing for a form:
 The following sharing options are available:
 
 {{% collapse-content title="Share within Datadog" level="h3" expanded=false %}}
-Share the form with users in your Datadog organization.
+Share the form with users or teams in your Datadog organization.
+
+Add individual users or teams as recipients. Enable {{< ui >}}Notify added teammates{{< /ui >}} to send a notification, and optionally add a custom message. Teams are notified in their configured Slack channel or by email; individual users are notified by email.
 
 Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
 
@@ -116,7 +127,7 @@ The following options are available:
 
 - **Specific individuals**: Add recipients by individual email address. For example, `alice@example.com` and `bob@example.com`.
 - **Company domain**: Share with anyone in a specific email domain. For example, `*@yourcompany.com`.
-- **Shareable link**: Generate a link that anyone can use to access the form without a Datadog account.
+- **Anyone with a link**: Generate a link that anyone can use to access the form after verifying their email address.
 {{% /collapse-content %}}
 
 To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Pause Sharing{{< /ui >}} or {{< ui >}}Delete Sharing{{< /ui >}}.

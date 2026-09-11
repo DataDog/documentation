@@ -2,10 +2,10 @@
 title: Instrument a Next.js Application for Agent Observability
 description: Learn how to set up Agent Observability in a Next.js application using auto-instrumentation to monitor and trace your LLM calls.
 further_reading:
-    - link: '/llm_observability/instrumentation/auto_instrumentation'
+    - link: '/llm_observability/instrument/auto_instrumentation'
       tag: 'Documentation'
       text: 'Supported auto-instrumentation frameworks and libraries'
-    - link: '/llm_observability/instrumentation/sdk'
+    - link: '/llm_observability/instrument/sdk'
       tag: 'Documentation'
       text: 'Agent Observability SDK Reference for manual instrumentation'
 ---
@@ -125,9 +125,9 @@ Each trace shows token usage, model, latency, and the full input and output for 
 The Datadog SDK requires the Node.js runtime. Ensure your Route Handlers and Server Actions that make LLM calls do not set `export const runtime = 'edge'`.
 
 [1]: /llm_observability/
-[2]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
+[2]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
 [3]: https://app.datadoghq.com/organization-settings/api-keys
 [4]: https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation
-[5]: /llm_observability/instrumentation/auto_instrumentation/?tab=nodejs
+[5]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
 [6]: https://nextjs.org/docs/app/building-your-application/routing/route-handlers
 [7]: https://app.datadoghq.com/llm/traces

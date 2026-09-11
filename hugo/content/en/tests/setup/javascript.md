@@ -34,7 +34,8 @@ further_reading:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=6.1.0`. [Browser mode](https://vitest.dev/guide/browser/) is supported from `dd-trace>=6.8.0`. |
+| WebdriverIO | >= 9.0.0 | Supported with the Mocha and Jasmine framework adapters from `dd-trace>=6.10.0`. |
 
 `dd-trace` v6 requires Node.js 22 or later.
 
@@ -48,7 +49,8 @@ further_reading:
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. |
+| Vitest | >= 1.6.0 | Supported from `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) is supported from `dd-trace>=5.112.0`. [Browser mode](https://vitest.dev/guide/browser/) is supported from `dd-trace>=5.119.0`. |
+| WebdriverIO | >= 9.0.0 | Supported with the Mocha and Jasmine framework adapters from `dd-trace>=5.121.0`. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -204,29 +206,10 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
 
-### Upload test failure screenshots
-
-When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. View the screenshots in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
-
-{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
-
-Use [`dd-trace` v5.116.0 or later][5] on the v5 release line, or [`dd-trace` v6.5.0 or later][6] on the v6 release line.
-
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][7] under `use` to one of the following values:
-
-- `'on'`: Capture screenshot after each test.
-- `'only-on-failure'`: Capture screenshot after each test failure.
-- `'on-first-failure'`: Capture screenshot after each test's first failure.
-
-**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
-
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
-[5]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
-[6]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
-[7]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -421,16 +404,6 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][6], the Cypress test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][7].
 
-### Upload test failure screenshots
-
-When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
-
-{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
-
-Use [`dd-trace` v5.112.0 or later][8] on the v5 release line, or [`dd-trace` v6.1.0 or later][9] on the v6 release line.
-
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][10] is set to `true` (the default).
-
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
 [3]: https://docs.cypress.io/api/plugins/after-spec-api
@@ -438,9 +411,6 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
 [7]: /continuous_integration/guides/rum_integration/
-[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
-[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
-[10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
@@ -449,6 +419,7 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 </div>
 
 Use a Node.js version supported by your `dd-trace` major version for Vitest instrumentation:
+
 - `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
 - `dd-trace` v6 requires Node.js 22 or later.
 
@@ -497,6 +468,70 @@ test('sum function can sum', () => {
   testSpan.setTag('memory_allocations', 16)
 
   expect(1 + 2).toBe(3)
+})
+```
+
+For more information about custom measures, see the [Add Custom Measures Guide][2].
+
+[1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
+{{% /tab %}}
+
+{{% tab "WebdriverIO" %}}
+Use a Node.js version supported by your `dd-trace` major version for WebdriverIO instrumentation:
+
+- `dd-trace` v5 requires Node.js 18.19+ or Node.js 20.6+.
+- `dd-trace` v6 requires Node.js 22 or later.
+
+Set the `NODE_OPTIONS` environment variable to `--import dd-trace/register.js -r dd-trace/ci/init`. Run your tests as you normally would, optionally specifying a name for your test session with `DD_TEST_SESSION_NAME`:
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
+```
+
+**Note**: If you set a value for `NODE_OPTIONS`, make sure it does not overwrite `--import dd-trace/register.js -r dd-trace/ci/init`. This can be done using the `${NODE_OPTIONS:-}` clause:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:e2e": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+  }
+}
+{{< /code-block >}}
+
+### Adding custom tags or measures to tests
+
+You can add custom tags to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('team_owner', 'my_team')
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+To create filters or `group by` fields for these tags, you must first create facets. For more information about adding tags, see the [Adding Tags][1] section of the Node.js custom instrumentation documentation.
+
+You can also add custom measures to your tests by using the current active span:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('memory_allocations', 16)
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
 })
 ```
 
@@ -620,13 +655,97 @@ For more information about `service` and `env` reserved tags, see [Unified Servi
 
 {{% ci-git-metadata %}}
 
+## Browser testing media upload
+
+Test Optimization can upload test failure screenshots from Cypress, Playwright, and WebdriverIO. It can also upload failed test videos from Cypress and Playwright.
+
+{{< tabs >}}
+{{% tab "Cypress" %}}
+
+### Upload test failure screenshots
+
+When enabled, Test Optimization uploads screenshots that Cypress captures when a test fails. Use them to inspect browser state at the time of failure.
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
+Use [`dd-trace` v5.112.0 or later][1] on the v5 release line, or [`dd-trace` v6.1.0 or later][2] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][3] is set to `true` (the default).
+
+### Upload failed test videos
+
+When enabled, Test Optimization uploads the video that Cypress records for a spec file when the test suite fails. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test suite details page. Select a video to open it in the video player.
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-video-videos-tab.png" alt="A Cypress failed test video displayed in the Videos tab of the Test Optimization test suite details page." style="width:100%;" >}}
+
+{{< img src="continuous_integration/tests/setup/cypress-failure-video-player.png" alt="The video player displaying a Cypress failed test video." style="width:100%;" >}}
+
+To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Cypress configuration, set [`video`][4] or `e2e.video` to `true`.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+[3]: https://docs.cypress.io/app/references/configuration#Screenshots
+[4]: https://docs.cypress.io/app/guides/screenshots-and-videos#Videos
+{{% /tab %}}
+
+{{% tab "Playwright" %}}
+
+### Upload test failure screenshots
+
+When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. Use them to inspect browser state at the time of failure.
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
+Use [`dd-trace` v5.116.0 or later][1] on the v5 release line, or [`dd-trace` v6.5.0 or later][2] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][3] under `use` to one of the following values:
+
+- `'on'`: Capture screenshot after each test.
+- `'only-on-failure'`: Capture screenshot after each test failure.
+- `'on-first-failure'`: Capture screenshot after each test's first failure.
+
+**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
+
+### Upload failed test videos
+
+When enabled, Test Optimization uploads videos that Playwright records for failed tests. View uploaded videos in the {{< ui >}}Videos{{< /ui >}} tab of the Test Optimization test details page. Select a video to open it in the video player.
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-video-videos-tab.png" alt="A Playwright failed test video displayed in the Videos tab of the Test Optimization test details page." style="width:100%;" >}}
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-video-player.png" alt="The video player displaying a Playwright failed test video." style="width:100%;" >}}
+
+To upload videos from failed tests, set the `DD_TEST_FAILURE_VIDEOS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`video`][4] under `use` to `'on'`, `'retain-on-failure'`, or `'on-first-retry'`.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+[3]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
+[4]: https://playwright.dev/docs/videos#record-video
+{{% /tab %}}
+
+{{% tab "WebdriverIO" %}}
+
+### Upload test failure screenshots
+
+When enabled, Test Optimization captures and uploads a screenshot when a WebdriverIO test fails. Use it to inspect browser state at the time of failure.
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A browser test failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
+Use [`dd-trace` v5.125.0 or later][1] on the v5 release line, or [`dd-trace` v6.14.0 or later][2] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. No additional WebdriverIO configuration is required.
+
+[1]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.125.0
+[2]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.14.0
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Manual testing API
 
 <div class="alert alert-danger">
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 
-If you use Jest, Mocha, Cypress, Playwright, Cucumber, or Vitest, **do not use the manual testing API**, as Test Optimization automatically instruments them and sends the test results to Datadog. The manual testing API is **incompatible** with already supported testing frameworks.
+If you use Jest, Mocha, Cypress, Playwright, Cucumber, Vitest, or WebdriverIO, **do not use the manual testing API**. Test Optimization automatically instruments these frameworks and sends the test results to Datadog. The manual testing API is **incompatible** with supported testing frameworks.
 
 Use the manual testing API only if you use an unsupported testing framework or have a different testing mechanism.
 
@@ -744,14 +863,24 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
+### Retries require Cypress test isolation
+
+Cypress [test isolation][13] must be enabled (the default) for
+retry-based Test Optimization features to work. When `testIsolation` is set to
+`false` in your Cypress configuration, `dd-trace` disables all test
+retries—[Early Flake Detection][22], [Auto Test Retries][23], and
+[attempt to fix][24]—because these features re-run each test in place, which requires isolation.
+
+When isolation is disabled, the tracer logs the warning `Test isolation is
+disabled, retries will not be enabled`, and no test executions are tagged with
+`@test.test_management.is_attempt_to_fix`. Because the tracer reads the global
+`testIsolation` value, per-suite `describe` overrides do not re-enable retries.
+
 ### Jest's `--forceExit`
 Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
 ### Mocha's `--exit`
 Mocha's [--exit][16] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--exit` with caution.
-
-### Vitest's browser mode
-Vitest's [browser mode][17] is not supported.
 
 ### Vitest's test duration overhead
 
@@ -840,10 +969,13 @@ The test session name should be unique within a repository to help you distingui
 [10]: /continuous_integration/guides/rum_integration/
 [11]: https://docs.cypress.io/api/plugins/before-run-api
 [12]: https://docs.cypress.io/guides/references/configuration#Configuration-File
+[13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
-[17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle
 [21]: https://vitest.dev/config/isolate
+[22]: /tests/flaky_tests/early_flake_detection/
+[23]: /tests/flaky_tests/auto_test_retries/
+[24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests

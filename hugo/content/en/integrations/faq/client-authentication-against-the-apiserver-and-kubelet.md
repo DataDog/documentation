@@ -39,4 +39,4 @@ kubernetes_kubeconfig_path: /path/to/file
 [1]: https://kubernetes.io/docs/concepts/configuration/secret/#using-secrets-as-files-from-a-pod
 [2]: https://kubernetes.io/docs/concepts/configuration/secret
 [3]: https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig
-[4]: https://github.com/DataDog/datadog-agent/blob/a9e0c4f534482170817300edb3cce01df9abea4a/pkg/config/config_template.yaml#L687-L692
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

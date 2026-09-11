@@ -97,8 +97,8 @@ Additionally, you can view the execution graph view of the trace, which shows th
 {{< img src="llm_observability/guides/crewai/execution_graph.png" alt="The same trace in Agent Observability, toggled to 'Execution Graph' view. Control and data flow of the trace is displayed." style="width:100%;" >}}
 
 [1]: https://docs.crewai.com/en/introduction
-[2]: /llm_observability/instrumentation/auto_instrumentation
-[3]: /llm_observability/monitoring/agent_monitoring
+[2]: /llm_observability/instrument/auto_instrumentation
+[3]: /llm_observability/guide/agent_monitoring
 [4]: /account_management/api-app-keys/#api-keys
-[5]: /llm_observability/instrumentation/sdk?tab=python#application-naming-guidelines
+[5]: /llm_observability/instrument/sdk?tab=python#application-naming-guidelines
 [6]: https://app.datadoghq.com/llm/traces

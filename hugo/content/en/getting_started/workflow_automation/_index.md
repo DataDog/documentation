@@ -46,7 +46,7 @@ Add and configure the monitor:
 
 ### Add the Jira and Slack actions
 Add and configure the Jira step:
-1. On the workflow canvas, click the {{< ui >}}+{{< /ui >}} icon.
+1. On the workflow canvas, click the {{< ui >}}\+{{< /ui >}} icon.
 1. Search for the Jira action and select {{< ui >}}Create issue{{< /ui >}}.
 1. On the workflow canvas, click the {{< ui >}}Create issue{{< /ui >}} step.
 1. In the {{< ui >}}Configure{{< /ui >}} tab, select a {{< ui >}}Jira Account{{< /ui >}}. The account should correspond to the Jira URL found in the {{< ui >}}Accounts{{< /ui >}} section of the Jira integration tile.
