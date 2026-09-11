@@ -94,7 +94,9 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 A rule covers whichever instances match its query, and Datadog re-resolves that query against your current fleet on an ongoing basis. An instance that starts matching later, because it was launched after you saved the rule or because its tags changed, is instrumented automatically. Datadog does not instrument anything outside the query.
 
-To pin coverage to a fixed set of instances, write a rule that matches a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags.
+To pin coverage to a fixed set of instances, select those instances individually. The rule then matches the instances you picked and nothing else, so re-evaluation never widens it.
+
+When a fixed set is too large to pick by hand, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags.
 
 ### How Datadog keeps covered instances in sync
 
