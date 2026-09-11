@@ -159,6 +159,35 @@ You can fine tune this behavior with the following environment variables:
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
 * `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` - a non-negative number to set the maximum total number of failed tests to retry (default: `1000`)
 
+### Dynamic Auto Test Retries
+
+`dd-trace-py >= 4.15.0`
+
+By default, Auto Test Retries applies the same retry limit to every failing test. Dynamic Auto Test Retries (Dynamic ATR) bases the number of retries on how long the test takes to run on its first attempt. Faster tests receive more retries and slower tests receive fewer.
+
+The retry budget for a test is determined once, from the duration of its initial attempt, and applies to all of its retries. A test stops being retried as soon as a retry passes.
+
+The duration buckets are the same as the ones [Early Flake Detection][3] uses:
+
+| First attempt duration | Default retries |
+| ---------------------- | --------------- |
+| 5 seconds or fewer | 10 |
+| 5-10 seconds | 5 |
+| 10-30 seconds | 3 |
+| 30 seconds-5 minutes | 2 |
+| More than 5 minutes | 1 |
+
+By default, the budgets come from the Early Flake Detection retry settings provided by the backend. Every failing test is retried at least once, regardless of its duration.
+
+To enable Dynamic Auto Test Retries, set the following environment variables:
+
+* `DD_CIVISIBILITY_DYNAMIC_ATR_ENABLED` - set to `true` to base the number of retries on the test's first attempt duration instead of the flat `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` limit (default: `false`). The flat limit is ignored while Dynamic ATR is enabled. Auto Test Retries must be enabled in [{{< ui >}}CI/CD Settings{{< /ui >}}][1].
+* `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` - five comma-separated integers between `1` and `20` that override the default budgets in the table above, from the fastest to the slowest duration bucket (for example, `10,4,1,1,1`). If this variable is unset or empty, the Early Flake Detection retry settings from the backend are used.
+
+If `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` contains an invalid value, the library ignores it, logs a warning, and uses the default budgets.
+
+**Note**: The session-level limit `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` still applies when Dynamic ATR is enabled.
+
 [1]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 
 {{% /tab %}}
