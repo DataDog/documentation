@@ -171,6 +171,81 @@ if (dataVersionToggles.length) {
     });
 }
 
+// API changelog filters (/api/changelog/)
+const changelogRoot = document.querySelector('.api-changelog');
+
+if (changelogRoot) {
+    const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
+    const tagSelect = document.getElementById('api-changelog-tag-filter');
+    const tagSections = changelogRoot.querySelectorAll('.api-changelog-tag-section');
+    const shownCountEl = document.getElementById('api-changelog-shown-count');
+    const changeLabelEl = document.getElementById('api-changelog-change-label');
+    const tagCountEl = document.getElementById('api-changelog-tag-count');
+    const tagLabelEl = document.getElementById('api-changelog-tag-label');
+    const clearButtons = changelogRoot.querySelectorAll('#api-changelog-clear-filters, [data-changelog-reset]');
+    const emptyState = document.getElementById('api-changelog-empty-state');
+
+    let activeBucket = 'all';
+    let activeTag = 'all';
+
+    function applyChangelogFilters() {
+        let shownCount = 0;
+        let shownTagCount = 0;
+
+        tagSections.forEach((section) => {
+            const tagMatches = activeTag === 'all' || section.dataset.tag === activeTag;
+            let visibleInSection = 0;
+
+            section.querySelectorAll('.api-changelog-entry').forEach((entry) => {
+                const typeMatches = activeBucket === 'all' || entry.dataset.bucket === activeBucket;
+                const isVisible = tagMatches && typeMatches;
+                entry.classList.toggle('d-none', !isVisible);
+                if (isVisible) visibleInSection += 1;
+            });
+
+            section.classList.toggle('d-none', visibleInSection === 0);
+            if (visibleInSection > 0) shownTagCount += 1;
+            shownCount += visibleInSection;
+        });
+
+        if (shownCountEl) shownCountEl.textContent = shownCount;
+        if (changeLabelEl) changeLabelEl.textContent = shownCount === 1 ? 'change' : 'changes';
+        if (tagCountEl) tagCountEl.textContent = shownTagCount;
+        if (tagLabelEl) tagLabelEl.textContent = shownTagCount === 1 ? 'API area' : 'API areas';
+        if (emptyState) emptyState.classList.toggle('d-none', shownCount !== 0);
+
+        const isFiltered = activeBucket !== 'all' || activeTag !== 'all';
+        clearButtons.forEach((button) => {
+            if (button.id === 'api-changelog-clear-filters') button.classList.toggle('d-none', !isFiltered);
+        });
+    }
+
+    filterTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            activeBucket = tab.dataset.changelogFilter;
+            filterTabs.forEach((item) => item.classList.toggle('is-active', item === tab));
+            applyChangelogFilters();
+        });
+    });
+
+    if (tagSelect) {
+        tagSelect.addEventListener('change', () => {
+            activeTag = tagSelect.value;
+            applyChangelogFilters();
+        });
+    }
+
+    clearButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            activeBucket = 'all';
+            activeTag = 'all';
+            filterTabs.forEach((tab) => tab.classList.toggle('is-active', tab.dataset.changelogFilter === 'all'));
+            if (tagSelect) tagSelect.value = 'all';
+            applyChangelogFilters();
+        });
+    });
+}
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();
