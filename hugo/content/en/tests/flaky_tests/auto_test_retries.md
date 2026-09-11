@@ -153,7 +153,7 @@ After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI
 
 The default behavior of the feature is to retry any failing test case up to five times. Tests that originally fail either the original setup, teardown, or fixtures in Pytest, are not retried.
 
-Customize this behavior with the following environment variables:
+You can fine tune this behavior with the following environment variables:
 
 * `DD_CIVISIBILITY_FLAKY_RETRY_ENABLED` - set to `0` or `false` to explicitly disable retries even if the remote setting is enabled (default: `true`)
 * `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` - a non-negative number to change the maximum number of retries per test case (default: `5`).
