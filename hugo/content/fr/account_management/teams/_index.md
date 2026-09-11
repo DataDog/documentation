@@ -1,33 +1,33 @@
 ---
-description: Organisez les ressources de l'équipe, filtrez les expériences Datadog
-  et gérez l'appartenance à l'équipe avec des identifiants d'équipe, des notifications
-  et des associations de ressources.
+description: Organisez les ressources d'équipe, filtrez l'expérience Datadog et gérez
+  l'appartenance à l'équipe avec des identifiants d'équipe, des notifications et des
+  associations de ressources.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
   tag: Blog
-  text: Maintenez la propriété du service à jour avec l'intégration GitHub des équipes
-    Datadog.
-title: Équipes
+  text: Maintenez la propriété des services à jour grâce à l'intégration GitHub de
+    Datadog Teams.
+title: Teams
 ---
-## Aperçu {#overview}
-Les équipes Datadog permettent à des groupes d'utilisateurs d'organiser leurs ressources d'équipe au sein de Datadog et de filtrer automatiquement leur expérience à l'échelle de Datadog pour prioriser ces ressources.
+## Présentation {#overview}
+Datadog Teams permet à des groupes d'utilisateurs d'organiser leurs ressources d'équipe au sein de Datadog et de filtrer automatiquement leur expérience Datadog globale pour donner la priorité à ces ressources.
 
-Utilisez les équipes pour lier des ressources telles que des tableaux de bord, des services, des moniteurs et des incidents à un groupe d'utilisateurs. Vous pouvez également ajouter des liens spécifiques à l'équipe vers des canaux Slack, des tableaux Jira, des dépôts GitHub, et plus encore.
+Utilisez Teams pour lier des ressources telles que des dashboards, services, monitors et incidents à un groupe d'utilisateurs. Vous pouvez également ajouter des liens spécifiques à l'équipe vers des canaux Slack, des tableaux Jira, des dépôts GitHub, et plus encore.
 
-L'appartenance à l'équipe est flexible. Les utilisateurs peuvent rejoindre des équipes, être ajoutés par d'autres membres ou être ajoutés par un administrateur. Les utilisateurs peuvent appartenir à plusieurs équipes.
+L'appartenance à une équipe est flexible. Les utilisateurs peuvent rejoindre des équipes, être ajoutés par d'autres membres ou être ajoutés par un administrateur. Les utilisateurs peuvent appartenir à plusieurs équipes.
 
 ## Configuration {#setup}
 
 ### Navigation {#navigation}
 
-Accédez à la page du répertoire des équipes depuis [Paramètres de l'organisation][1] ou en naviguant vers [**Équipes**][2]. La [page du répertoire des équipes][1] répertorie toutes les équipes au sein de votre organisation.
+Accédez à la page de l'annuaire des équipes depuis [Paramètres de l'organisation][1] ou depuis [**Teams**][2]. La [page de l'annuaire des équipes][1] répertorie toutes les équipes au sein de votre organisation.
 
 ### Créer une équipe {#create-team}
 
-1. Sur la [page du répertoire des équipes][1], cliquez sur {{< ui >}}New Team{{< /ui >}} en haut à droite.
+1. Sur la [page de l'annuaire des équipes][1], cliquez sur {{< ui >}}New Team{{< /ui >}} en haut à droite.
 1. Choisissez un {{< ui >}}Team Name{{< /ui >}}.
 1. Le {{< ui >}}Handle{{< /ui >}} se remplit en fonction du nom de votre équipe.
-1. Utilisez le menu déroulant pour sélectionner les membres de l'équipe et les responsables d'équipe.
+1. Utilisez le menu déroulant pour sélectionner les membres et les responsables d'équipe.
 1. Fournissez un {{< ui >}}Description{{< /ui >}} facultatif.
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
@@ -38,17 +38,17 @@ Accédez à la page du répertoire des équipes depuis [Paramètres de l'organis
 
 ### Modifier l'équipe {#modify-team}
 
-1. Sur la [page du répertoire des équipes][1], cliquez sur l'équipe que vous souhaitez modifier. La [page de détails de l'équipe][3] apparaît. 
-1. Cliquez sur l'icône d'engrenage {{< ui >}}Settings{{< /ui >}} en haut de l'écran. Une fenêtre contextuelle apparaît.
+1. Sur la [page de l'annuaire des équipes][1], cliquez sur l'équipe que vous souhaitez modifier. La [page de détails de l'équipe][3] s'affiche. 
+1. Cliquez sur la roue dentée {{< ui >}}Settings{{< /ui >}} en haut de l'écran. Une fenêtre contextuelle s'affiche.
 1. Sélectionnez l'élément que vous souhaitez modifier.
-1. Apportez vos modifications, puis cliquez sur {{< ui >}}Save{{< /ui >}}.
+1. Effectuez vos modifications, puis cliquez sur {{< ui >}}Save{{< /ui >}}.
 
 ### Choisissez la source de provisionnement {#choose-provisioning-source}
 
-Choisissez parmi trois options pour déterminer comment les administrateurs et les gestionnaires d'équipe peuvent mettre à jour l'appartenance à l'équipe:
+Choisissez parmi trois options pour déterminer comment les administrateurs et les responsables d'équipe peuvent mettre à jour l'appartenance à l'équipe :
 
 UI et API
-: Mettre à jour l'appartenance uniquement par des actions de l'interface utilisateur et des appels API
+: Mettre à jour l'appartenance uniquement via les actions de l'interface utilisateur et les appels API
 
 SAML
 : Utilisez un modèle *SAML strict* afin que les données du fournisseur d'identité déterminent l'appartenance à l'équipe
@@ -56,51 +56,55 @@ SAML
 Toutes les sources
 : Utilisez SAML comme point de départ et autorisez les remplacements via l'interface utilisateur et l'API
 
-1. Sur la [page du répertoire des équipes][1], cliquez sur {{< ui >}}Teams Settings{{< /ui >}}.
+1. Sur la [page de l'annuaire des équipes][1], cliquez sur {{< ui >}}Teams Settings{{< /ui >}}.
 1. Sélectionnez l'une des options sous {{< ui >}}Team Provisioning Sources{{< /ui >}}.
 
-Si vous avez des équipes avec des membres existants, choisir l'option SAML stricte remplace vos paramètres et retire les membres de ces équipes. Choisir l'option Toutes les sources préserve l'appartenance existante des équipes. Pour gérer les équipes et l'appartenance à celles-ci en utilisant les attributs SAML, voir [Mapper les attributs SAML aux équipes][4].
+Si vous avez des équipes avec des membres existants, le choix de l'option SAML strict remplace vos paramètres et supprime les membres de ces équipes. Choisir l'option Toutes les sources préserve les appartenances existantes. Pour gérer les équipes et l'appartenance aux équipes à l'aide d'attributs SAML, consultez [Mapper des attributs SAML avec des équipes][4].
 
-## Identifiant d'équipe {#team-handle}
+## Hiérarchies d'équipes {#team-hierarchies}
+
+Imbriquez les équipes les unes dans les autres (sous-équipes) pour refléter la structure de votre organisation et visualisez le résultat sous forme de carte des équipes. Pour définir des relations hiérarchiques entre les équipes avec GitHub Teams, l'API Teams, Terraform ou l'interface utilisateur Datadog, consultez [Hiérarchies d'équipes][39].
+
+## Identifiants d'équipe {#team-handle}
 
 Un identifiant d'équipe lie les équipes aux ressources Datadog. Les identifiants d'équipe apparaissent dans les barres de recherche et les facettes au format `team:<team-handle>` ou `teams:<team-handle>`. 
 
 Pour trouver un identifiant d'équipe :
-1. Cliquez sur le nom de l'équipe dans la page du répertoire d'équipe. La page de détails de l'équipe apparaît.
+1. Cliquez sur le nom de l'équipe dans la page du répertoire des équipes. La page de détails de l'équipe s'affiche.
 1. L'identifiant d'équipe apparaît à droite du nom, en haut de la page.
 
 Pour associer une ressource à une équipe définie, une équipe doit exister dans Datadog avec un identifiant d'équipe correspondant. Lorsque vous cliquez sur une ressource associée à une équipe définie, une petite fenêtre apparaît avec l'identifiant d'équipe et des informations supplémentaires. Les équipes définies offrent des fonctionnalités supplémentaires telles que le filtre d'équipe ci-dessous. 
 
-Les identifiants d'équipe qui ne sont pas associés à une équipe définie dans Datadog se comportent de manière similaire aux tags. Convertissez tous les identifiants d'équipe non définis en équipes définies pour profiter des fonctionnalités des équipes.
+Les identifiants d'équipe qui ne sont pas associés à une équipe définie dans Datadog se comportent de la même manière que les tags. Convertissez tous les identifiants d'équipe non définis en équipes définies pour tirer parti des fonctionnalités de Teams.
 
-### Associez des ressources avec des identifiants d'équipe {#associate-resources-with-team-handles}
+### Associer des ressources à des identifiants d'équipe {#associate-resources-with-team-handles}
 
 Datadog prend en charge l'association des ressources suivantes avec des identifiants d'équipe :
 
 - [Tableaux de bord][5]
 - [Incidents][6]
-- [Moniteurs][7]
-- [Catalogue de ressources][8]
-- [Catalogue de logiciels][9]
-- [Objectifs de niveau de service][10]
-- Tests synthétiques, variables globales, emplacements privés
+- [Monitors][7]
+- [Resource Catalog][8]
+- [Catalogue][9]
+- [Service Level Objectives][10]
+- Tests Synthetic, variables globales, emplacements privés
 
-### Envoyer des notifications à un canal de communication spécifique {#send-notifications-to-a-specific-communication-channel}
+### Envoyez des notifications vers un canal de communication spécifique {#send-notifications-to-a-specific-communication-channel}
 
-Ajoutez un canal de notification à votre équipe pour acheminer les alertes vers des canaux de communication tels que Slack ou Microsoft Teams. Les alertes ciblant `@team-<handle>` sont redirigées vers le canal sélectionné. 
+Ajoutez un canal de notification à votre équipe pour acheminer les alertes vers des canaux de communication tels que Slack ou Microsoft Teams. Les alertes de monitor ciblant `@team-<handle>` sont redirigées vers le canal sélectionné. 
 
-1. Sur la [page du répertoire des équipes][1], cliquez sur l'équipe que vous souhaitez modifier. 
-1. Cliquez sur l'icône d'engrenage {{< ui >}}Settings{{< /ui >}} en haut de l'écran. Une fenêtre contextuelle apparaît.
+1. Sur la [page de l'annuaire des équipes][1], cliquez sur l'équipe que vous souhaitez modifier. 
+1. Cliquez sur la roue dentée {{< ui >}}Settings{{< /ui >}} en haut de l'écran. Une fenêtre contextuelle s'affiche.
 1. Sélectionnez {{< ui >}}Notifications{{< /ui >}}.
 1. Ajoutez un canal, puis cliquez sur {{< ui >}}Save{{< /ui >}}.
 
 ## Filtre d'équipe {#team-filter}
 
-Le filtre d'équipe personnalise votre expérience sur Datadog en vous montrant le contenu associé à vos équipes. La liste {{< ui >}}My Teams{{< /ui >}} comprend les équipes dont vous êtes membre et les équipes que vous avez sélectionnées comme favorites.
+Le filtre d'équipe personnalise votre expérience dans Datadog en vous montrant le contenu associé à vos équipes. La liste {{< ui >}}My Teams{{< /ui >}} inclut les équipes dont vous êtes membre et les équipes que vous avez sélectionnées comme favorites.
 
-{{< img src="/account_management/teams/team-filter.png" alt="Page de liste de surveillance avec une boîte rouge autour du filtre d'équipe. Deux sur trois de mes équipes sélectionnées.">}}
+{{< img src="/account_management/teams/team-filter.png" alt="Page de liste des monitors avec un cadre rouge autour du filtre d'équipe. Deux équipes sur trois sélectionnées dans My Teams.">}}
 
-Lorsque vous activez le filtre d'équipe, vous ne voyez que les ressources associées à vos équipes ou aux services détenus par vos équipes. L'état du filtre d'équipe est global et persistant, donc Datadog applique votre contexte d'équipe lorsque vous naviguez à travers différents produits.
+Lorsque vous activez le filtre d'équipe, vous ne voyez que les ressources associées à vos équipes ou aux services appartenant à vos équipes. L'état du filtre d'équipe est global et persistant, de sorte que Datadog applique votre contexte d'équipe lorsque vous naviguez entre différents produits.
 
 Le filtre d'équipe fonctionne en ajoutant des termes de recherche basés sur l'équipe à la requête de recherche. Lorsque vous activez le filtre d'équipe, vous pouvez voir les termes de recherche basés sur l'équipe qu'il ajoute dans la barre de recherche.
 
@@ -108,25 +112,25 @@ Le filtre d'équipe fonctionne en ajoutant des termes de recherche basés sur l'
 
 Vous pouvez être intéressé par les ressources d'une équipe particulière sans en être membre. Ajouter une équipe à vos équipes favorites vous permet d'obtenir des vues filtrées sur les ressources de cette équipe sans rejoindre l'équipe.
 
-Vos équipes favorites apparaissent aux côtés des équipes auxquelles vous appartenez en haut de la page du répertoire d'équipe et dans le filtre d'équipe.
+Vos équipes favorites apparaissent aux côtés des équipes auxquelles vous appartenez en haut de la page de l'annuaire des équipes et dans le filtre d'équipe.
 
-#### Ajouter ou retirer des équipes favorites {#add-or-remove-favorite-teams}
+#### Ajouter ou supprimer des équipes favorites {#add-or-remove-favorite-teams}
 
-Vous pouvez ajouter ou retirer une équipe de vos favoris depuis la page du répertoire des équipes ou depuis le filtre d'équipe.
+Vous pouvez ajouter ou supprimer une équipe de vos favoris depuis la page de l'annuaire des équipes ou depuis le filtre d'équipe.
 
-Depuis la [page du répertoire d'équipe][1] :
-1. Cliquez sur l'équipe que vous souhaitez ajouter comme favorite. La [page de détails de l'équipe][3] apparaît.
-1. Cliquez sur {{< ui >}}Add Favorite{{< /ui >}} ou {{< ui >}}Remove Favorite{{< /ui >}} en haut à droite.
+Depuis la [page de l'annuaire des équipes][1] :
+1. Cliquez sur l'équipe que vous souhaitez ajouter aux favoris. La [page de détails de l'équipe][3] s'affiche.
+1. Cliquez sur {{< ui >}}Add Favorite{{< /ui >}} ou {{< ui >}}Remove Favorite{{< /ui >}} dans le coin supérieur droit.
 
-Alternativement, également depuis la page du répertoire des équipes :
-1. Survolez l'équipe que vous souhaitez ajouter ou retirer. Des icônes en ligne apparaissent à droite du nom de l'équipe.
+Alternativement, toujours depuis la page de l'annuaire des équipes :
+1. Survolez l'équipe que vous souhaitez ajouter ou supprimer. Des icônes en ligne apparaissent à droite du nom de l'équipe.
 1. Cliquez sur l'icône étoile ({{< ui >}}Add to Favorites{{< /ui >}} ou {{< ui >}}Remove from Favorites{{< /ui >}}).
 
-Depuis le filtre d'équipe :
-1. Si le filtre est réduit, cliquez sur {{< ui >}}My Teams{{< /ui >}} pour l'agrandir.
-1. Cliquez sur {{< ui >}}Add Favorites{{< /ui >}}. Une boîte de recherche et une liste d'équipes apparaissent.
-1. Pour affiner la liste des équipes, commencez à taper un nom d'équipe dans la boîte de recherche.
-1. Cliquez sur l'étoile à côté de l'équipe souhaitée pour l'ajouter ou la retirer de vos favoris.
+Depuis le filtre d'équipe :
+1. Si le filtre est réduit, cliquez sur {{< ui >}}My Teams{{< /ui >}} pour le développer.
+1. Cliquez sur {{< ui >}}Add Favorites{{< /ui >}}. Une zone de recherche et une liste d'équipes apparaissent.
+1. Pour restreindre la liste des équipes, commencez à saisir un nom d'équipe dans la zone de recherche.
+1. Cliquez sur l'étoile à côté de l'équipe souhaitée pour l'ajouter à vos favoris ou la supprimer.
 
 ### Produits pris en charge {#supported-products}
 
@@ -134,44 +138,44 @@ Le tableau suivant décrit les produits dans lesquels vous pouvez utiliser le fi
 
 | Page de liste des produits              | Base de filtrage                                                                       |
 |--------------------------------|------------------------------------------------------------------------------------|
-| [Suivi des erreurs APM][15]       | Service détenu par des équipes (déterminé par la propriété dans le [Catalogue de logiciels][12]) |
-| [Applications][21]                     | Identifiant d'équipe                                                                        |
-| [Projets de gestion de cas][22] | Identifiant d'équipe                                                                        |
-| [Connexions][23]              | Identifiant d'équipe                                                                        |
-| [Groupes de connexions][24]        | Identifiant d'équipe                                                                        |
-| [Connexions inter-organisationnelles][25]    | Identifiant d'équipe                                                                        |
-| [Magasins de données][26]               | Identifiant d'équipe                                                                        |
-| [Surveillance des flux de données][18]  | Identifiant d'équipe                                                                        |
-| [Tableaux de bord][11]               | Identifiant d'équipe                                                                        |
+| [APM Error Tracking][15]       | Service appartenant à des équipes (déterminé par la propriété dans le [Catalog][12]) |
+| [Apps][21]                     | Identifiant d'équipe                                                                        |
+| [Work Management projects][22] | Identifiant d'équipe                                                                        |
+| [Connections][23]              | Identifiant d'équipe                                                                        |
+| [Connection Groups][24]        | Identifiant d'équipe                                                                        |
+| [Cross Org Connections][25]    | Identifiant d'équipe                                                                        |
+| [Datastores][26]               | Identifiant d'équipe                                                                        |
+| [Data Streams Monitoring][18]  | Identifiant d'équipe                                                                        |
+| [Dashboards][11]               | Identifiant d'équipe                                                                        |
 | [Incidents][13]                | Identifiant d'équipe                                                                        |
-| [Intégrations][27]             | Identifiant d'équipe                                                                        |
-| [Suivi des erreurs de journaux][16]      | Service détenu par des équipes (déterminé par la propriété dans le [Catalogue de logiciels][12]) |
-| [Logs Pipelines][28]           | Team handle (Identifiant de l'équipe)                                                                        |
-| [Monitors][14]                 | Team handle (Identifiant de l'équipe)                                                                        |
-| [Notebooks][20]                | Team handle (Identifiant de l'équipe)                                                                        |
-| [Observability Pipelines][29]  | Team handle (Identifiant de l'équipe)                                                                        |
-| [On-Call][30]                  | Service géré par les équipes (défini par la propriété dans le [Software Catalog][12]) |
-| [Powerpacks][32]               | Team handle (Identifiant de l'équipe)                                                                        |
-| [Private Action Runner][31]    | Team handle (Identifiant de l'équipe)                                                                        |
-| [Reference tables][33]         | Team handle (Identifiant de l'équipe)                                                                        |
-| [Resource Catalog][8]          | Team handle (Identifiant de l'équipe)                                                                        |
-| [RUM apps][34]                 | Team handle (Identifiant de l'équipe)                                                                        |
-| [Security rules][35]           | Team handle (Identifiant de l'équipe)                                                                        |
-| [Security suppressions][36]    | Team handle (Identifiant de l'équipe)                                                                        |
-| [Service Level Objectives][17] | Team handle (Identifiant de l'équipe)                                                                        |
-| [Sheets][37]                   | Team handle (Identifiant de l'équipe)                                                                        |
-| [Software Catalog][12]         | Team handle (Identifiant de l'équipe)                                                                        |
-| [Synthetic Tests][19]          | Team handle (Identifiant de l'équipe)                                                                        |
-| [Workflows][38]                | Team handle (Identifiant de l'équipe)                                                                        |
+| [Integrations][27]             | Identifiant d'équipe                                                                        |
+| [Logs Error Tracking][16]      | Service appartenant à des équipes (déterminé par la propriété dans le [Catalog][12]) |
+| [Logs Pipelines][28]           | Identifiant d'équipe                                                                        |
+| [Monitors][14]                 | Identifiant d'équipe                                                                        |
+| [Notebooks][20]                | Identifiant d'équipe                                                                        |
+| [Observability Pipelines][29]  | Identifiant d'équipe                                                                        |
+| [On-Call][30]                  | Service appartenant à des équipes (déterminé par la propriété dans le [Catalog][12]) |
+| [Powerpacks][32]               | Identifiant d'équipe                                                                        |
+| [Private Action Runner][31]    | Identifiant d'équipe                                                                        |
+| [Tables de référence][33]         | Identifiant d'équipe                                                                        |
+| [Resource Catalog][8]          | Identifiant d'équipe                                                                        |
+| [Applications RUM][34]                 | Identifiant d'équipe                                                                        |
+| [Règles de sécurité][35]           | Identifiant d'équipe                                                                        |
+| [Suppressions de sécurité][36]    | Identifiant d'équipe                                                                        |
+| [Service Level Objectives][17] | Identifiant d'équipe                                                                        |
+| [Sheets][37]                   | Identifiant d'équipe                                                                        |
+| [Catalogue][12]         | Identifiant d'équipe                                                                        |
+| [Tests Synthetic][19]          | Identifiant d'équipe                                                                        |
+| [Workflows][38]                | Identifiant d'équipe                                                                        |
 
 
-## Permissions {#permissions}
+## Autorisations {#permissions}
 
-Tout utilisateur dont le rôle inclut l’autorisation Teams Manage peut créer des équipes, renommer des équipes, supprimer des équipes et modifier les team handles (identifiants d'équipe). Les utilisateurs disposant de `user_access_manage` peuvent ajouter, supprimer et promouvoir des membres et managers d’équipe.
+Tout utilisateur disposant d'un rôle avec l'autorisation de gestion des équipes peut créer, renommer, supprimer des équipes et modifier les identifiants d'équipe. Les utilisateurs disposant de `user_access_manage` peuvent ajouter, supprimer et promouvoir des membres et des responsables d'équipe.
 
-## Manage teams (Gérer les équipes) {#manage-teams}
+## Gérer les équipes {#manage-teams}
 
-Pour personnaliser votre équipe, consultez [Team Management (Gestion des équipes)][3].
+Pour personnaliser votre équipe, consultez [Gestion d'équipe][3].
 
 
 [1]: https://app.datadoghq.com/organization-settings/teams
@@ -182,7 +186,7 @@ Pour personnaliser votre équipe, consultez [Team Management (Gestion des équip
 [6]: /fr/incident_response/incident_management/
 [7]: /fr/monitors/configuration/?tab=thresholdalert#add-metadata
 [8]: https://app.datadoghq.com/infrastructure/catalog
-[9]: /fr/tracing/software_catalog/adding_metadata/#add-metadata-from-the-datadog-ui
+[9]: /fr/internal_developer_portal/catalog/entity_model/
 [10]: /fr/service_level_objectives/#slo-tags
 [11]: https://app.datadoghq.com/dashboard/lists
 [12]: https://app.datadoghq.com/services
@@ -195,7 +199,7 @@ Pour personnaliser votre équipe, consultez [Team Management (Gestion des équip
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
 [21]: https://app.datadoghq.com/app-builder/apps/list
-[22]: https://app.datadoghq.com/cases
+[22]: https://app.datadoghq.com/work
 [23]: https://app.datadoghq.com/actions/connections
 [24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
 [25]: https://app.datadoghq.com/organization-settings/cross-org-visibility
@@ -212,3 +216,4 @@ Pour personnaliser votre équipe, consultez [Team Management (Gestion des équip
 [36]: https://app.datadoghq.com/security/configuration/suppressions
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
+[39]: /fr/account_management/teams/manage/#team-hierarchies

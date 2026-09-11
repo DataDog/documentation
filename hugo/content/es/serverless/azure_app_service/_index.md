@@ -2,61 +2,64 @@
 aliases:
 - /es/infrastructure/serverless/azure_app_services/
 - /es/serverless/azure_app_services/
+- /es/serverless/azure
 further_reading:
 - link: /integrations/azure_app_services/
   tag: Documentación
   text: Azure App Service
 - link: /integrations/azure_app_service_environment/
   tag: Documentación
-  text: Entorno de Azure App Service
+  text: Azure App Service Environment
 - link: /serverless/guide/disable_serverless
   tag: Documentación
-  text: Desactivar Serverless Monitoring
+  text: Deshabilitar Serverless Monitoring
+- link: /opentelemetry/setup/otlp_ingest/serverless/?tab=azure#web-apps-app-service
+  tag: Documentación
+  text: Enviar trazas de Azure App Service a Datadog con OTLP
 - link: https://www.datadoghq.com/blog/azure-app-service-extension/
   tag: Blog
-  text: Monitoriza las aplicaciones web de .NET con la extensión de Datadog para Azure
-    App Service
+  text: Hacer un seguimiento de las aplicaciones web .NET con la extensión de Datadog
+    para Azure App Service
 - link: https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/
   tag: Blog
-  text: Despliega las aplicaciones de ASP.NET Core en Azure App Service
-- link: https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services
+  text: Implementar aplicaciones ASP.NET Core en Azure App Service
+- link: https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=azure-app-service#products
   tag: Precios
-  text: Precios de APM para Azure App Service
+  text: Precios de APM de Azure App Service
 title: Serverless Monitoring para Azure App Service
 ---
+## Descripción general {#overview}
 
-## Información general
+[Azure App Service][1] es una plataforma que aloja aplicaciones web, API REST y backends móviles. Datadog Serverless Monitoring proporciona métricas, registros y trazas para sus aplicaciones de Azure App Service.
 
-[Azure App Service][1] es una plataforma que aloja aplicaciones web, API REST y backends móviles. Serverless Monitoring de Datadog proporciona métricas, logs y traces (trazas) de tus aplicaciones de Azure App Service.
+{{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Interfaz de usuario de Datadog, página de Serverless Monitoring con Azure App Service seleccionado." style="width:100%;" >}}
 
-{{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Interfaz de usuario de Datadog, page (página) de Serverless Monitoring con Azure App Service seleccionado." style="width:100%;" >}}
+En Datadog, utilice la página [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][4] para solucionar problemas de todos sus recursos de Azure.
 
-En Datadog, utiliza la page (página) [Serverless > Azure][4] para solucionar problemas de todos tus recursos de Azure.
+### Métricas y registros de Azure {#azure-metrics-and-logs}
 
-### Métricas y logs de Azure
+Instale la [integración de Azure][2] para obtener [métricas enriquecidas][3] y metadatos de recursos para Azure App Service.
 
-Instala la [integración de Azure][2] para [métricas enriquecidas][3] y metadatos de recursos para Azure App Service. 
+Configure el [reenvío de registros de Azure][6] para recopilar y enviar automáticamente los registros de recursos y aplicaciones de Azure App Service a Datadog.
 
-Configura el [reenvío de logs de Azure][6] para recopilar y enviar automáticamente logs de recursos y aplicaciones de Azure App Service a Datadog.
+### APM y métricas personalizadas {#apm-and-custom-metrics}
 
-### APM y métricas personalizadas
+Para hacer un seguimiento de las cargas de trabajo de Azure App Service con APM y métricas personalizadas, puede instrumentar sus cargas de trabajo de Azure App Service.
 
-Para monitorizar cargas de trabajo de Azure App Service con APM y métricas personalizadas, puedes instrumentar tus cargas de trabajo de Azure App Service.
-
-| Sistema operativo      | Tiempo de ejecución   | Documentación               |
+| SO      | Entorno de ejecución   | Documentación               |
 |---------|-----------|-----------------------------|
 | Linux   | Java, Node.js, .NET, PHP, Python | [Linux - Instrumentación de código][7] |
-| Linux   | Contenedor | [Linux - Instrumentación de contenedores][8] |
+| Linux   | Contenedor | [Linux - Instrumentación de contenedor][8] |
 | Windows | Java, Node.js, .NET | [Windows - Instrumentación de código][9]
 
 Capacidades:
-- Rastreo totalmente distribuido de APM mediante la instrumentación automática.
-- Vistas personalizadas de servicios y trazas (traces) de APM que incluyen las métricas y los metadatos pertinentes de Azure App Service.
-- Instrumentación manual de APM para personalizar tramos (spans).
-- Inyección del `Trace_ID` en los logs de aplicación.
+- Trazas APM totalmente distribuidas mediante instrumentación automática
+- Vistas de servicio y de trazas de APM personalizadas que muestran métricas y metadatos relevantes de Azure App Service
+- Instrumentación APM manual para personalizar los tramos
+- `Trace_ID` inyección en los registros de la aplicación
 - Métricas personalizadas con [DogStatsD][10]
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -69,4 +72,4 @@ Capacidades:
 [7]: /es/serverless/azure_app_service/linux_code
 [8]: /es/serverless/azure_app_service/linux_container
 [9]: /es/serverless/azure_app_service/windows_code
-[10]: /es/developers/dogstatsd/
+[10]: /es/extend/dogstatsd/

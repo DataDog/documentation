@@ -359,11 +359,10 @@ const filterJson = (actionType, data, parentExample = null, requiredKeys = [], l
         }
       }
 
-      if(actionType === "request" && value.readOnly) {
-        // skip
-      } else if(actionType === "curl" && value.readOnly) {
-        // skip
-      } else {
+      const shouldSkip = ((actionType === "request" || actionType === "curl") && value.readOnly)
+        || (actionType === "response" && value.writeOnly);
+
+      if(!shouldSkip) {
 
         let prefixType = '';
         let suffixType = '';
@@ -977,6 +976,10 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
     if (typeof data === 'object') {
       Object.entries(data).forEach(([key, value]) => {
+
+        if(tableType === "response" && value.writeOnly) {
+          return;
+        }
 
         // calculate child data in advance
         // we do this here so that we can add classes to html with this knowledge

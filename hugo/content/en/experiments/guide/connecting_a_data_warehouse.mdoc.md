@@ -266,15 +266,15 @@ If you turn on other features in the {% ui %}Configure{% /ui %} tab, additional 
 <!-- Redshift -->
 {% if equals($database, "redshift") %}
 
-To set this up for Amazon Redshift, connect a Redshift cluster to Datadog using the AWS integration and configure your experiment settings. This guide covers:
+To set this up for Amazon Redshift, connect a provisioned cluster or Redshift Serverless workgroup to Datadog using the AWS integration and configure your experiment settings. This guide covers:
 
-- [Preparing the Redshift cluster](#step-1-prepare-the-redshift-cluster)
+- [Preparing Redshift database access](#step-1-prepare-redshift-database-access)
 - [Creating AWS resources and granting IAM permissions](#step-2-create-aws-resources-and-grant-iam-permissions)
 - [Configuring experiment settings in Datadog](#step-3-configure-experiment-settings)
 
 ## Prerequisites
 
-Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services (AWS) integration][14]. If you already have the AWS integration configured for the account containing your Redshift cluster, skip to [Step 1](#step-1-prepare-the-redshift-cluster).
+Datadog Experiments connects to Redshift through [Datadog's Amazon Web Services (AWS) integration][14]. If you already have the AWS integration configured for the account containing your provisioned cluster or Serverless workgroup, skip to [Step 1](#step-1-prepare-redshift-database-access).
 
 {% collapse-content title="Set up the AWS integration" level="h3" %}
 
@@ -304,7 +304,7 @@ If you plan to use other warehouse observability functionality in Datadog, see [
 
 ## Allow Datadog IP addresses
 
-Add Datadog's outbound IP addresses as inbound rules to the VPC security group associated with your Redshift cluster. This allows Datadog to connect to your cluster and run experiment queries.
+Add Datadog's outbound IP addresses as inbound rules to the VPC security group associated with your provisioned cluster or Serverless workgroup. This allows Datadog to connect to Redshift and run experiment queries.
 
 ### Find Datadog's outbound IP addresses
 
@@ -317,45 +317,47 @@ Datadog's outbound IP addresses vary by Datadog site. To get the current list:
 
 ### Update the Redshift security group
 
-Add each IP address as an inbound rule in the [VPC security group][25] associated with your Redshift cluster, allowing TCP traffic on port `5439` (or your cluster's configured port). See [Amazon's documentation on VPC security groups][25] for instructions.
+For a provisioned cluster, add each IP address as an inbound rule in the [VPC security group][25] associated with the cluster. For Redshift Serverless, add the rules to the VPC security group associated with the workgroup. Allow TCP traffic on port `5439` or the port configured for your connection.
 
-## Step 1: Prepare the Redshift cluster
+## Step 1: Prepare Redshift database access
 
-Create a Datadog service user and a dedicated schema for Datadog to store experiment results and intermediate tables.
+Configure database access and create a dedicated schema for Datadog to store experiment results and intermediate tables.
 
 {% alert %}
-You must have `superuser` or `admin` privileges in the Redshift database to create the Datadog service user.
+You must have `superuser` or `admin` privileges in the Redshift database to configure database access.
 {% /alert %}
 
-### Create a Datadog service user in your Redshift database
+### Identify the Datadog database user
 
-Run the following command to create a service user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password.
+For a provisioned cluster, run the following command to create a service user with a strong password that Datadog can use to execute queries. Replace `datadog_experiments_user` with your user value and `Your_Strong_Password` with your password. Use this service user as `<DATADOG_DATABASE_USER>` in the following commands.
 
 ```sql
 CREATE USER datadog_experiments_user PASSWORD 'Your_Strong_Password';
 ```
 
+For Redshift Serverless, database users map automatically from IAM identities. For example, an IAM role named `DatadogIntegrationRole` maps to the database user `IAMR:DatadogIntegrationRole`. Use `"IAMR:<YOUR_IAM_ROLE_NAME>"` as `<DATADOG_DATABASE_USER>` in the following commands.
+
 ### Create a Redshift output schema
 
-Run the following commands to create a schema where Datadog can store experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name and `datadog_experiments_user` with your service user value.
+Run the following commands to create a schema where Datadog can store experiment results and intermediate tables. Replace `datadog_experiments_output` with your schema name.
 
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog_experiments_output;
-GRANT ALL ON SCHEMA datadog_experiments_output TO datadog_experiments_user;
+GRANT ALL ON SCHEMA datadog_experiments_output TO <DATADOG_DATABASE_USER>;
 ```
 
-### Grant the service user read access to your metric data
+### Grant the database user read access to your metric data
 
-Grant the service user read access to the tables or schemas that contain your source data. These are the tables you plan to use for experiment metrics, and are typically in a different schema than the output schema created above. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that matches your access needs. Replace `datadog_experiments_user`, `<schema>`, and `<table>` with the appropriate values.
+Grant the database user read access to the tables or schemas that contain your source data. These are the tables you plan to use for experiment metrics, and are typically in a different schema than the output schema created above. Run the `GRANT USAGE` command, then run the `GRANT SELECT` option that matches your access needs. Replace `<schema>` and `<table>` with the appropriate values.
 
 ```sql
-GRANT USAGE ON SCHEMA <schema> TO datadog_experiments_user;
+GRANT USAGE ON SCHEMA <schema> TO <DATADOG_DATABASE_USER>;
 
 -- Option 1: Give read access to a single table
-GRANT SELECT ON TABLE <schema>.<table> TO datadog_experiments_user;
+GRANT SELECT ON TABLE <schema>.<table> TO <DATADOG_DATABASE_USER>;
 
 -- Option 2: Give read access to all tables in the schema
-GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO datadog_experiments_user;
+GRANT SELECT ON ALL TABLES IN SCHEMA <schema> TO <DATADOG_DATABASE_USER>;
 ```
 
 ## Step 2: Create AWS resources and grant IAM permissions
@@ -368,14 +370,20 @@ Create an S3 bucket for importing exposure events into your warehouse. The bucke
 
 In addition to the permissions listed in the [AWS integration documentation][15], Datadog Experiments requires additional IAM permissions to run warehouse-native experiment analysis.
 
-Use the following table to gather the values for your environment, then add the policy statement below to the IAM role that your Datadog AWS integration uses.
+Use the following table to gather the values for your environment. Attach the credentials policy for your connection mode and the shared query and S3 policy to the IAM role that your Datadog AWS integration uses.
 
-| Field | Example |
-|-------|---------|
-| `[Redshift cluster ARN]` | `arn:aws:redshift:us-east-1:[account-id]:namespace:[namespace-id]` |
-| `[Redshift user ARN]` | `arn:aws:redshift:us-east-1:[account-id]:dbuser:[cluster-name]/[user]` |
-| `[Redshift database ARN]` | `arn:aws:redshift:us-east-1:[account-id]:dbname:[cluster-name]` |
-| `[S3 bucket ARN]` | `arn:aws:s3:::[bucket-name]` |
+| Field | Connection mode | Example |
+|-------|-----------------|---------|
+| `[Redshift cluster ARN]` | Provisioned cluster | `arn:aws:redshift:us-east-1:[account-id]:namespace:[namespace-id]` |
+| `[Redshift user ARN]` | Provisioned cluster | `arn:aws:redshift:us-east-1:[account-id]:dbuser:[cluster-name]/[user]` |
+| `[Redshift database ARN]` | Provisioned cluster | `arn:aws:redshift:us-east-1:[account-id]:dbname:[cluster-name]` |
+| `[Redshift Serverless workgroup ARN]` | Redshift Serverless | `arn:aws:redshift-serverless:us-east-1:[account-id]:workgroup/[workgroup-id]` |
+| `[S3 bucket ARN]` | Both modes | `arn:aws:s3:::[bucket-name]` |
+
+{% tabs %}
+{% tab label="Provisioned cluster" %}
+
+Grant `redshift:GetClusterCredentials` on the provisioned cluster, database user, and database resources:
 
 ```json
 {
@@ -392,7 +400,41 @@ Use the following table to gather the values for your environment, then add the 
         "[Redshift user ARN]",
         "[Redshift database ARN]"
       ]
-    },
+    }
+  ]
+}
+```
+
+{% /tab %}
+{% tab label="Redshift Serverless" %}
+
+Grant `redshift-serverless:GetCredentials` on the Serverless workgroup:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "RedshiftServerlessGetCredentials",
+      "Effect": "Allow",
+      "Action": [
+        "redshift-serverless:GetCredentials"
+      ],
+      "Resource": "[Redshift Serverless workgroup ARN]"
+    }
+  ]
+}
+```
+
+{% /tab %}
+{% /tabs %}
+
+For either connection mode, grant the following permissions to query Redshift and access the S3 bucket:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
     {
       "Sid": "QueryRedshift",
       "Effect": "Allow",
@@ -429,11 +471,11 @@ Use the following table to gather the values for your environment, then add the 
 
 ### (Optional) Create an IAM role for Redshift to read exposure data
 
-This step is required only if you use Datadog Feature Flagging. It enables Datadog to synchronize your feature flag exposures into Redshift so that metrics in your warehouse can be used in experiments. Datadog Experiments stages exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your Redshift cluster assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
+This step is required only if you use Datadog Feature Flagging. It enables Datadog to synchronize your feature flag exposures into Redshift so that metrics in your warehouse can be used in experiments. Datadog Experiments stages exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your provisioned cluster or Serverless namespace assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
 
 If you use your own feature flagging solution, exposure data already lives in your systems and Datadog does not synchronize exposures into Redshift. In that case, skip this step and leave the **Copy IAM role ARN** field blank in [Step 3](#step-3-configure-experiment-settings).
 
-If you do need to synchronize exposures, create this role and associate it with your cluster.
+If you do need to synchronize exposures, create this role and associate it with your provisioned cluster or Serverless namespace.
 
 #### Create an IAM policy
 
@@ -485,9 +527,9 @@ Create an IAM role and use the following trust policy so the Redshift service ca
 
 Attach the policy you created to the role. For instructions, see [Adding and removing IAM identity permissions][26] in the AWS documentation.
 
-#### Associate the role with your Redshift cluster
+#### Associate the role with Redshift
 
-Associate the role with your cluster so the `COPY` command can assume it:
+Associate the role with your provisioned cluster or Serverless namespace so the `COPY` command can assume it:
 
 - For a provisioned cluster, open your cluster in the [Amazon Redshift console][27], select {% ui %}Actions{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
 - For Redshift Serverless, open your namespace, go to {% ui %}Security and encryption{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
@@ -529,7 +571,7 @@ The examples in this guide use `datadog_experiments_user` and `datadog_experimen
 
 ### Create a dedicated service user and role in Snowflake
 
-1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog only supports unencrypted private keys.
+1. Use the [Snowflake documentation][18] to create a public-private key pair for enhanced authentication. Datadog supports both unencrypted private keys and passphrase-protected PKCS#8 private keys.
 1. Run the following commands in Snowflake to create the user and role in the service account. Replace `<public_key>` with the public key you generated in the previous step.
 
 ```sql
@@ -596,7 +638,7 @@ To connect your Snowflake account to Datadog for warehouse-native experiment ana
 1. Add your {% ui %}Account URL{% /ui %}. To find your account URL, see the [Snowflake guide][19].
 1. Toggle off all resources (these are not needed for experiment analysis).
 1. Enter the Snowflake {% ui %}User Name{% /ui %} you created in [Step 1](#step-1-prepare-the-snowflake-service-account) (for example, `datadog_experiments_user`).
-1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your unencrypted {% ui %}private key{% /ui %}.
+1. Scroll to the {% ui %}Configure a key pair authentication{% /ui %} section and upload your {% ui %}private key{% /ui %}. If your private key is passphrase-protected, enter the passphrase in the {% ui %}Private Key Password{% /ui %} field.
 1. Click {% ui %}Save{% /ui %}.
 
 {% alert %}
@@ -675,7 +717,7 @@ Datadog supports one warehouse connection per organization. Connecting Redshift 
 Configuring experiment settings requires the **Product Analytics Settings Write** permission. If your organization uses custom roles, verify that your role includes this permission.
 {% /alert %}
 
-After you set up your AWS integration and Redshift cluster, configure the experiment settings in Datadog:
+After you set up your AWS integration and Redshift database access, configure the experiment settings in Datadog:
 
 1. Open [Datadog Product Analytics][2].
 1. In the left navigation, hover over {% ui %}Settings{% /ui %} and click {% ui %}Experiments{% /ui %}.
@@ -683,20 +725,21 @@ After you set up your AWS integration and Redshift cluster, configure the experi
 1. Click {% ui %}Connect a data warehouse{% /ui %}. If you already have a warehouse connected, click {% ui %}Edit{% /ui %} instead.
 1. Select the {% ui %}Redshift{% /ui %} tile.
 1. Select your {% ui %}AWS account{% /ui %} from the dropdown.
-1. Under {% ui %}Cluster Connection{% /ui %}, enter:
-   - {% ui %}AWS region{% /ui %}: The region your Redshift cluster is in (for example, `us-east-1`).
-   - {% ui %}Cluster identifier{% /ui %}: The name of your Redshift cluster.
-   - {% ui %}Cluster endpoint{% /ui %}: The full endpoint URL for your cluster.
-   - {% ui %}Port{% /ui %}: The port your cluster is listening on (default: `5439`).
+1. Under {% ui %}Cluster Connection{% /ui %}, enter the following fields and exactly one connection target:
+   - {% ui %}AWS region{% /ui %}: The region of your provisioned cluster or Serverless workgroup (for example, `us-east-1`).
+   - {% ui %}Cluster identifier{% /ui %} (provisioned cluster only): The name of your Redshift cluster.
+   - {% ui %}Workgroup name{% /ui %} (Redshift Serverless only): The name of your Serverless workgroup.
+   - {% ui %}Cluster endpoint{% /ui %} (provisioned cluster only): The full endpoint URL for your cluster.
+   - {% ui %}Port{% /ui %}: The port configured for your connection (default: `5439`).
 1. Under {% ui %}Database and Storage{% /ui %}, enter:
    - {% ui %}Database{% /ui %}: The name of the database containing your source tables.
-   - {% ui %}Database user{% /ui %}: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
+   - {% ui %}Database user{% /ui %} (provisioned cluster only): The service user you created in [Step 1](#identify-the-datadog-database-user) (for example, `datadog_experiments_user`).
    - {% ui %}Schema{% /ui %}: The schema you created in [Step 1](#create-a-redshift-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - {% ui %}Temp S3 bucket{% /ui %}: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
    - {% ui %}Copy IAM role ARN{% /ui %} (optional): The ARN of the IAM role you created in [Step 2](#optional-create-an-iam-role-for-redshift-to-read-exposure-data) for Redshift to read exposure data from S3 (for example, `arn:aws:iam::[aws_account_id]:role/[role-name]`). Provide this only if you use Datadog Feature Flagging and want Datadog to synchronize exposures into Redshift. If you use your own feature flagging solution, leave this blank.
 1. Click {% ui %}Save{% /ui %}.
 
-{% img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" /%}
+{% img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing the fields for a provisioned cluster: AWS account, AWS region, cluster identifier, cluster endpoint, port, database, database user, schema, and temporary S3 bucket." style="width:90%;" /%}
 
 After you save your warehouse connection, [create experiment metrics][1] using your Redshift data.
 

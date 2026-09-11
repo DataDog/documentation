@@ -15,6 +15,9 @@ further_reading:
 - link: "/experiments/statistics/analysis_methods"
   tag: "Documentation"
   text: "Analysis Methods"
+- link: "https://www.datadoghq.com/blog/two-ways-to-measure-cumulative-impact/"
+  tag: "Blog"
+  text: "Two ways to measure the cumulative impact of experiments"
 ---
 
 ## Overview

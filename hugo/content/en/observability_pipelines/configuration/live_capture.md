@@ -1,5 +1,6 @@
 ---
 title: Live Capture
+description: Learn how to use Live Capture to see the data a source receives and the data a processor sends through an Observability Pipelines pipeline.
 disable_toc: false
 aliases:
   - /observability_pipelines/live_capture/
@@ -20,9 +21,6 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
-- name: Traces
-  icon: apm
-  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}

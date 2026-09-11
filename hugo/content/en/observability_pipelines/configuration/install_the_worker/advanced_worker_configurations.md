@@ -1,5 +1,6 @@
 ---
 title: Advanced Worker Configurations
+description: Learn about Worker bootstrap options and other configuration options.
 disable_toc: false
 aliases:
   - /observability_pipelines/setup_opw/

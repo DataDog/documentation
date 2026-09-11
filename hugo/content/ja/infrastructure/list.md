@@ -28,7 +28,7 @@ title: ホストリスト
 
 左側のフィルターパネルを使用してホストのリストを絞り込みます。
 
-- **My Teams**: トグルをオンにしてチームに関連するホストのみを表示します。
+- **Teams**: [チームフィルター][19]を使用して、選択したTeamsに関連付けられたホストのみを表示します。
 - **クイックフィルター**: パネル上部のチェックボックスを使用して、クラウドプロバイダー (AWS、Azure、Google Cloud、Oracle、または Alibaba Cloud)、テレメトリソース (Datadog Agent または OpenTelemetry)、オペレーティングシステム (Windows、Linux、または Darwin)、またはハードウェア (GPU) でフィルタリングします。
 - **メトリクスのフィルタリング**: メトリクスを選択し、メトリクス値でホストをフィルタリングする値の範囲を定義します。
 - **ファセットの検索**: クラウドプロバイダー、環境、リージョン、リソースタイプ、インスタンスタイプ、OS、OS バージョン、Agent、または Docker バージョンなど、任意のホストプロパティまたはタグでフィルタリングします。
@@ -149,3 +149,4 @@ for host in infra['rows']:
 [16]: /ja/getting_started/search/
 [17]: https://app.datadoghq.com/reports/v2/overview?metrics=avg%3Aaws.ec2.cpuutilization%2Cavg%3Aazure.vm.percentage_cpu%2Cavg%3Agcp.gce.instance.cpu.utilization%2Cavg%3Asystem.cpu.idle%2Cavg%3Asystem.cpu.iowait%2Cavg%3Asystem.load.norm.15%2Cavg%3Avsphere.cpu.usage%2Cavg%3Avsphere.cpu.usage.avg%2Cavg%3Aalibabacloud.ecs.cpu_utilization.average&with_apps=true&with_sources=true&with_aliases=true&with_meta=true&with_mute_status=true&with_tags=true
 [18]: /ja/ddsql_editor/#save-and-share-queries
+[19]: /ja/account_management/teams/#team-filter

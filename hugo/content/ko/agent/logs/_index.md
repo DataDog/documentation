@@ -38,7 +38,7 @@ logs_config:
     force_use_http: true
 {{< /code-block >}}
 
-사용 가능한 모든 구성 옵션은 [샘플 config_template.yaml file][6]을 참조하세요.
+사용 가능한 모든 구성 옵션은 운영 체제에 맞는 [예제 Agent 구성 파일][6]을 참조하십시오.
 
 <div class="alert alert-info">Agent v6.19+/v7.19+부터는 HTTPS 전송 방식이 기본값으로 사용됩니다. 자세한 내용은 <a href="/agent/logs/log_transport/">Agent 전송</a>을 참조하세요.</div>
 
@@ -61,6 +61,8 @@ Datadog Agent v6는 로그를 수집하여 파일, 네트워크(TCP 또는 UDP),
 5. [Agent의 상태 하위 명령][9]을 실행한 후 검사 섹션에서 `<CUSTOM_LOG_SOURCE>`을 확인합니다.
 
 권한 오류가 있는 경우, [로그 파일 테일링 권한 문제][10]를 참조하여 문제를 해결하세요.
+
+각 호스트에서 파일을 편집하지 않고 여러 Agent에 사용자 지정 로그 수집 구성을 한 번에 배포하려면 Fleet Automation을 사용한 [사용자 지정 로그 구성][15]을 참조하십시오.
 
 다음은 사용자 지정 로그 수집 설정의 예입니다.
 
@@ -256,7 +258,7 @@ file 및 journald 테일러 유형 모두에서 `end` 또는 `beginning` 위치�
 [3]: /ko/containers/kubernetes/log/
 [4]: /ko/containers/docker/log/
 [5]: /ko/agent/configuration/agent-configuration-files/
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[6]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 [7]: /ko/agent/logs/log_transport/
 [8]: /ko/agent/configuration/agent-commands/#restart-the-agent
 [9]: /ko/agent/configuration/agent-commands/#agent-status-and-information
@@ -265,3 +267,4 @@ file 및 journald 테일러 유형 모두에서 `end` 또는 `beginning` 위치�
 [12]: /ko/getting_started/tagging/unified_service_tagging
 [13]: /ko/metrics/custom_metrics/#overview
 [14]: /ko/getting_started/tagging/
+[15]: /ko/agent/fleet_automation/configure_logs/

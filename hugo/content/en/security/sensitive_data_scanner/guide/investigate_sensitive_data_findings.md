@@ -37,10 +37,6 @@ Navigate to the [Findings][1] page to see all sensitive data findings within the
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The Logs Findings explorer is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
 The Logs Findings explorer is an updated experience for investigating log findings. If you have at least one log finding, this explorer opens by default. APM, RUM, and Events findings are not available in this explorer. To view those findings, click {{< ui >}}Go back{{< /ui >}} in the banner at the top of the page.
 
 To investigate a log finding:

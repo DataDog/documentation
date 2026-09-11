@@ -1,5 +1,9 @@
 ---
 title: Azure Database and Messaging Services
+further_reading:
+- link: "https://www.datadoghq.com/blog/monitor-azure-functions-hosting-plans/"
+  tag: "Blog"
+  text: "Monitor Azure Functions across every hosting plan with Datadog"
 ---
 
 ## Overview
@@ -11,5 +15,9 @@ Datadog APM uses **inferred spans** to collect traces and trace metrics from Azu
   {{< image-card href="/serverless/azure_database_messaging_services/azure_event_hubs/" src="integrations_logos/azure_event_hub.png" alt="azure_event_hubs" >}}
   {{< image-card href="/serverless/azure_database_messaging_services/azure_service_bus/" src="integrations_logos/azure_service_bus.png" alt="azure_service_bus" >}}
 {{< /card-grid >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless

@@ -1,5 +1,6 @@
 ---
 title: Syslog Destinations
+description: Learn how to send logs to rsyslog or syslog-ng using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

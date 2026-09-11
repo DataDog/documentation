@@ -65,6 +65,22 @@ Set up Bits Code for one of the [supported source code providers][11].
 [7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
 {{% /tab %}}
 
+{{% tab "Azure DevOps" %}}
+1. Install the [Azure DevOps Source Code integration][101]. For full installation and configuration steps, see the [Azure DevOps Source Code integration guide][102].
+2. Verify that the Microsoft Entra app's service principal is a Project Contributor on each project, or belongs to a custom group with the following [repository permissions][103]:
+   - Contribute
+   - Contribute to pull requests
+   - Create branch
+   - Read
+
+If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to the allowed email addresses. Bits Code uses this address for commits it creates.
+
+[101]: https://app.datadoghq.com/integrations/azure-devops-source-code
+[102]: /integrations/azure-devops-source-code/
+[103]: https://learn.microsoft.com/en-us/azure/devops/repos/git/set-git-repository-permissions
+[104]: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#commit-author-email-validation-policy
+{{% /tab %}}
+
 {{< /tabs >}}
 
 ## Additional configuration  
@@ -122,7 +138,7 @@ The default allowlist includes the following domains. This list will evolve over
 | Clojure/JVM | `repo.clojars.org` |
 | Go | `pkg.go.dev`, `proxy.golang.org`, `sum.golang.org`, `vuln.go.dev` |
 | Java/JVM | `repo1.maven.org` |
-| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com` |
+| JavaScript/TypeScript | `registry.npmjs.org`, `registry.yarnpkg.com`, `repo.yarnpkg.com` |
 | .NET/C# | `api.nuget.org` |
 | PHP | `packagist.org`, `repo.packagist.org` |
 | Python | `files.pythonhosted.org`, `pypi.org`, `pypi.python.org`, `pythonhosted.org` |
@@ -140,14 +156,22 @@ To configure a repository environment:
 1. Click {{< ui >}}Add Environment{{< /ui >}} to create a repository configuration:
    1. Select a repository from the dropdown.
    1. (Optional) Under {{< ui >}}Pre-installed Languages{{< /ui >}}, click {{< ui >}}Select Versions{{< /ui >}} to specify the language versions the sandbox should use.
-   1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Bits Code execution. Secrets are available as environment variables only during environment setup.
+   1. (Optional) Define environment variables and secrets. Environment variables are available during both environment setup and Bits Code execution. Secrets are available as environment variables only during environment setup. A value defined here replaces the [organization value](#configure-organization-environment-variables-and-secrets) with the same name.
    1. (Optional) Add a shell script with setup commands to execute (for example: `pip install -r requirements.txt`).
-1. Run the setup command to ensure it runs successfully.
+1. Run the setup command to verify that it completes successfully. You need write access to the selected repository.
 1. Save the configuration.
 
 Bits Code runs the setup command at startup and can use any tools installed in your environment. The setup command runs with network access enabled to download dependencies. After setup is complete, your [internet access](#configure-internet-access) policy controls outbound network access during agent execution. Because setup commands execute against code in your repository, enable them only if you trust the repository's code.
 
 **Note**: For best results, add a [custom instructions file](#configure-custom-instructions) (like `claude.md`) to your repository with instructions on how to build and test your code.
+
+#### Configure organization environment variables and secrets
+
+Define environment variables and secrets once for your organization instead of repeating them in each repository. Every repository environment inherits them. Organization environment variables are available during environment setup and Bits Code execution. Organization secrets are available as environment variables only during environment setup. A repository environment with no setup command still inherits organization environment variables, but not organization secrets.
+
+To configure them, go to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Repositories{{< /ui >}}][5], and find the {{< ui >}}Environments{{< /ui >}} section. Names must be valid shell environment variable identifiers. A repository environment can also opt out of an inherited environment variable or secret, which makes that name unavailable in the repository. Remove the opt-out to inherit the value again.
+
+Managing organization environment variables and secrets requires one of the following permissions: [`Bits Code Write`][1], `Integrations Manage`, `User Access Manage`, or `Org Management`. None of these permissions require source code access to repositories that inherit the values. Users with any of these permissions can influence environment setup and agent execution across all repositories in your organization. Grant these permissions only to users who need them.
 
 ## Troubleshooting
 

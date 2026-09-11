@@ -5,134 +5,138 @@ aliases:
 further_reading:
 - link: /infrastructure/containers/container_images/#enable-sbom-collection
   tag: Documentación
-  text: Habilitar la recopilación de SBOM en Vulnerabilidades de Seguridad en la Nube
+  text: Habilitar la recopilación de SBOM en Cloud Security Vulnerabilities
 - link: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts
   tag: Documentación
-  text: Configurando vulnerabilidades del host
+  text: Configuración de vulnerabilidades de servidor
 - link: /infrastructure/containers/container_images
   tag: Documentación
-  text: Visualizando Imágenes de Contenedores
+  text: Visualización de Container Images
 - link: /security/cloud_security_management/troubleshooting/vulnerabilities
   tag: Documentación
-  text: Resolviendo problemas de Vulnerabilidades de Seguridad en la Nube
+  text: Solución de problemas de Cloud Security Vulnerabilities
 - link: https://www.datadoghq.com/blog/datadog-container-image-view/
   tag: Blog
-  text: Mejore su flujo de trabajo de resolución de problemas con Imágenes de Contenedores
-    en Datadog Container Monitoring
+  text: Mejore su flujo de trabajo de solución de problemas con Container Images en
+    Datadog Container Monitoring
 - link: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
   tag: Documentación
   text: Vincule un Dockerfile a las vulnerabilidades detectadas en producción
-title: Vulnerabilidades de Seguridad en la Nube
+title: Cloud Security Vulnerabilities
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Las Vulnerabilidades de Seguridad en la Nube le ayudan a mejorar su postura de seguridad y lograr cumplimiento, al escanear continuamente imágenes de contenedores, hosts, imágenes de hosts y funciones sin servidor en busca de vulnerabilidades, desde canalizaciones de CI/CD hasta producción en vivo. Aprovechando la observabilidad en tiempo de ejecución, le ayuda a priorizar y remediar vulnerabilidades explotables en sus flujos de trabajo diarios, todo en una sola vista, y sin depender de otros productos de Datadog.
+Cloud Security Vulnerabilities le ayuda a mejorar su postura de seguridad y lograr el cumplimiento, mediante el escaneo continuo de imágenes de contenedores, servidores, imágenes de servidor y funciones sin servidor en busca de vulnerabilidades, desde canalizaciones de CI/CD hasta la producción en vivo. Aprovechando la observabilidad en tiempo de ejecución, le ayuda a priorizar y remediar vulnerabilidades explotables en sus flujos de trabajo diarios, todo en una sola visualización, y sin dependencias de otros productos de Datadog.
 
-Con las Vulnerabilidades de Seguridad en la Nube, puede gestionar su estrategia de seguridad en la nube, todo en un solo lugar:
+Con Cloud Security Vulnerabilities, puede gestionar su estrategia de gestión de seguridad en la nube, todo en un solo lugar:
 
-- Cree un programa de gestión de vulnerabilidades, desde canalizaciones de CI/CD hasta recursos de producción
-- Aprobar auditorías de cumplimiento (como SOC2, PCI, HIPAA, CIS y FedRamp)
-- Remediar vulnerabilidades emergentes (CVE de 0 días)
+- Cree un programa de gestión de vulnerabilidades, desde CI/CD pipelines hasta recursos de producción
+- Supere auditorías de cumplimiento (como SOC2, PCI, HIPAA, CIS y FedRamp)
+- Remedie vulnerabilidades emergentes (CVE de día cero)
 
-**Nota**: Para la gestión de vulnerabilidades en bibliotecas de aplicaciones, consulte [Análisis de Composición de Software][5]. Para el código de aplicación, consulte [Code Security][10].
+**Nota**: Para la gestión de vulnerabilidades en bibliotecas de aplicaciones, consulte [Software Composition Analysis][5]. Para código de aplicación, consulte [Code Security][10].
 
 ## Capacidades clave {#key-capabilities}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentless Scanning no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">El Agentless Scanning no está disponible en el sitio seleccionado ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Despliegue utilizando Agentless o el Unified Datadog Agent
-: Escanee rápidamente toda su infraestructura en busca de vulnerabilidades, ya sea utilizando Agentless, o mediante el Unified Datadog Agent que ya tiene desplegado.
+Implemente utilizando Agentless o Unified Datadog Agent
+: Escanee rápidamente toda su infraestructura en busca de vulnerabilidades, ya sea usando Agentless o utilizando el Unified Datadog Agent que ya tiene implementado.
 
-Inventario de recursos en la nube, en tiempo real
-: Inventario de imágenes de contenedor, hosts, funciones sin servidor y todos los paquetes desplegados en su infraestructura, en tiempo real, y exporte su SBOM (Software Bill of Materials).
+Haga un inventario de los recursos en la nube, en tiempo real
+: Haga un inventario de las imágenes de contenedor, los servidores, las funciones sin servidor y todos los paquetes implementados en su infraestructura, en tiempo real, y exporte su SBOM.
 
-Detecte vulnerabilidades de manera continua
-: Escanee actualizaciones recientes y CVEs recién publicados, a través de imágenes de contenedor en ejecución desde hosts y registros, imágenes de host y funciones sin servidor, e identifique las capas de imágenes de contenedor vulnerables.
+Detecte vulnerabilidades continuamente
+: Analice las actualizaciones recientes y las CVE recién publicadas en las imágenes de contenedor en ejecución desde servidores y registros, servidores, imágenes de servidor y sin servidor, e identifique las capas de imágenes de contenedor vulnerables.
 
-Priorice las vulnerabilidades explotables, utilizando la observabilidad en tiempo de ejecución
-: Aproveche la puntuación de seguridad de Datadog, que se basa en CVSS, incorporando información de CISA KEV, EPSS y la disponibilidad pública de exploits. Con la observabilidad en tiempo de ejecución, puede monitorear la producción, la exposición a ataques, el procesamiento de datos sensibles y el acceso privilegiado.
+Priorice las vulnerabilidades explotables mediante la observabilidad en tiempo de ejecución
+: Aproveche la puntuación de seguridad de Datadog, que se basa en CVSS, incorporando información de CISA KEV, EPSS y la disponibilidad vulneraciones públicas. Con la observabilidad en tiempo de ejecución, puede hacer un seguimiento de la producción, la exposición a ataques, el procesamiento de datos confidenciales y el acceso privilegiado.
 
 Aproveche la remediación guiada
-: Vea qué capas están afectadas, obtenga sugerencias específicas para cada imagen y actúe en la gestión del ciclo de vida de sus vulnerabilidades.
+: Vea qué capas están afectadas, obtenga sugerencias específicas para cada imagen y actúe sobre la gestión del ciclo de vida de sus vulnerabilidades.
 
 Implemente automatización e integraciones
-: Automatice la creación de tickets de Jira e implemente SLAs. Utilice la API pública de Datadog para exportar vulnerabilidades, cobertura y SBOMs.
+: Automatice la creación de tickets de Jira e implemente SLAs. Utilice la API pública de Datadog para exportar vulnerabilidades, cobertura y SBOM.
 
-Explore informes
-: Vea y realice seguimiento de los datos de vulnerabilidad en sus tableros.
+Explore los informes
+: Visualice y haga un seguimiento de los datos de vulnerabilidad en sus paneles.
 
 ## Métodos de implementación {#deployment-methods}
 
-Comience con las Vulnerabilidades de Seguridad en la Nube y cubra su infraestructura en minutos, utilizando:
+Comience con Cloud Security Vulnerabilities y cubra su infraestructura en minutos, utilizando:
 - [Agentless Scanning][11]
 - [Unified Datadog Agent][12]
 - [CI/CD Container Image Scanning][21]
 
-También puede utilizar múltiples métodos de implementación en conjunto: use el Unified Datadog Agent donde ya lo tenga desplegado, Agentless en otros casos, y CI/CD Container Image Scanning para detectar vulnerabilidades antes de la producción.
+También puede utilizar varios métodos de implementación juntos: utilice el Unified Datadog Agent donde ya lo tenga implementado, la Agentless en otros lugares y el escaneo en CI/CD para detectar vulnerabilidades antes de la producción.
 
-Después de habilitarlo, Datadog comienza a escanear sus recursos de manera continua y empieza a reportar vulnerabilidades priorizadas en su [Cloud Security Vulnerabilities Findings page][1] en menos de una hora.
+Después de habilitarlo, Datadog comienza a escanear sus recursos continuamente y comienza a informar vulnerabilidades priorizadas en su [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} página][1] en el transcurso de una hora.
 
 Utilice estas tablas para decidir con qué solución comenzar:
 | Feature | Agentless | Unified Datadog Agent |
 |-------------------------------------------|-----------------------------------------------|--------------------------------|
-| Tiempo para implementar en su infraestructura | Minutos                                       | Horas a semanas                 |
-| Priorización de vulnerabilidades              | Sí                                           | Sí, con contexto en tiempo de ejecución      |
-| Frecuencia de escaneo de vulnerabilidades          | 12 horas                                      | En tiempo real                      |
+| Tiempo de despliegue en su infraestructura | Minutos                                       | Horas a semanas                 |
+| Priorización de vulnerabilidades              | Sí                                           | Sí, con contexto de tiempo de ejecución      |
+| Frecuencia de escaneo de vulnerabilidades          | 12 horas                                      | Tiempo real                      |
 
-| Vulnerability detection scope | Agentless | Unified Datadog Agent |
-|-------------------------------|-----------------------------------------------------------------------------------|--------------------------------|
-| Host e imagen del host           | Paquetes de OS y paquetes de aplicaciones, mapeados a la imagen                                     | Paquetes de OS                    |
-| Imagen de contenedor               | Paquetes de OS y paquetes de aplicaciones, mapeados a la imagen                                     | Paquetes de OS                    |
-| Proveedor de nube                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, en local, etc. |
-| Sistema operativo              | Linux, Windows                                                                    | Linux, Windows                 |
-| Serverless | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only) | Not applicable |
-| Registros de contenedores          | Amazon ECR (en ejecución + en reposo), Google Artifact Registry (solo cargas de trabajo en ejecución), Azure Container Registry (solo imágenes de contenedores en ejecución) | No aplicable                 |
+| Contexto de detección de vulnerabilidades | Agentless | Unified Datadog Agent |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Servidor e imagen de servidor           | Paquetes de SO y paquetes de aplicaciones, asignados a la imagen                                                                                                                | Paquetes de SO                    |
+| Imagen de contenedor               | Paquetes de SO y paquetes de aplicaciones, asignados a la imagen                                                                                                                | Paquetes de SO                    |
+| Proveedor de nube                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on‑prem, etc. |
+| Sistema operativo              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (solo despliegue de contenedores)                                   | No aplica                 |
+| Registros de contenedores          | Amazon ECR y Google Artifact Registry (en ejecución + en reposo); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry y registro de Kubernetes (solo extracción autenticada). Consulte [Registros de imágenes de contenedor][24] para obtener más detalles | No aplica                 |
 
-Para más información sobre compatibilidad, consulte [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. Si necesita asistencia, consulte la [troubleshooting guide][14], o comuníquese con support@datadoghq.com.
+Para obtener más información sobre la compatibilidad, consulte [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. Si necesita ayuda, consulte la [guía de solución de problemas][14] o comuníquese con support@datadoghq.com.
 
-## Detectar, priorizar y remediar continuamente vulnerabilidades explotables {#continuously-detect-prioritize-and-remediate-exploitable-vulnerabilities}
-La [Cloud Security Vulnerabilities Findings page][1] le ayuda a investigar vulnerabilidades detectadas en sus imágenes de contenedor, imágenes de host, hosts en ejecución y funciones sin servidor utilizando capacidades de filtrado y agrupamiento.
+## Detecte, priorice y remedie continuamente las vulnerabilidades explotables {#continuously-detect-prioritize-and-remediate-exploitable-vulnerabilities}
+La página [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}}][1] le ayuda a investigar las vulnerabilidades detectadas en sus imágenes de contenedor, imágenes de host, hosts en ejecución y funciones sin servidor mediante capacidades de filtrado y agrupación.
 
-Enfóquese primero en las vulnerabilidades explotables, utilizando el Puntaje de Severidad de Datadog, combinando el puntaje base de CVSS con muchos factores de riesgo, incluidos datos sensibles, sensibilidad del entorno, exposición a ataques, disponibilidad de explotación o fuentes de inteligencia de amenazas.
+Concéntrese primero en las vulnerabilidades explotables, utilizando el Datadog Severity Score, que combina la puntuación base CVSS con muchos factores de riesgo, incluidos datos confidenciales, sensibilidad del entorno, exposición a ataques, disponibilidad de vulneraciones o fuentes de inteligencia de amenazas.
 
-Para las vulnerabilidades con soluciones disponibles, la página de Resultados proporciona pasos de remediación guiados para ayudar a los equipos de Dev y Ops a resolver problemas de manera más rápida y efectiva. También puede clasificar, silenciar, comentar y asignar vulnerabilidades para gestionar su ciclo de vida.
+Para las vulnerabilidades con correcciones disponibles, la página {{< ui >}}Findings{{< /ui >}} proporciona pasos de remediación guiados para ayudar a los equipos de desarrollo y operaciones a resolver problemas de manera más rápida y efectiva. También puede realizar triaje, silenciar, comentar y asignar vulnerabilidades para gestionar su ciclo de vida.
 
-{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="La página de Resultados de Vulnerabilidades de Seguridad en la Nube que muestra una vulnerabilidad y las acciones que un usuario puede tomar para remediarla" width="100%">}}
+<div class="alert alert-info">Para reutilizar su configuración del explorador en la página de Hallazgos de vulnerabilidades, marque la URL completa de la página. Su consulta de búsqueda y las selecciones de facetas se conservan en la URL.</div>
 
-En [Imágenes de Contenedor][7], puedes rastrear vulnerabilidades encontradas en una imagen a capas específicas, para que puedas identificar y remediar tus riesgos de seguridad más rápido.
+{{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="La página de Cloud Security Vulnerabilities Findings que muestra una vulnerabilidad y las acciones que un usuario puede tomar para remediarla" width="100%">}}
+
+En [{{< ui >}}Container Images{{< /ui >}}][7], puede rastrear las vulnerabilidades encontradas en una imagen hasta capas específicas, para que pueda identificar y remediar sus riesgos de seguridad más rápido.
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="Una lista de vulnerabilidades asociadas con cada capa de una imagen" width="100%">}}
 
-## Rastree las vulnerabilidades de producción hasta el código fuente {#trace-production-vulnerabilities-to-source-code}
+Para imágenes de contenedor de una sola etapa no aplanadas creadas a partir de una imagen base pública, Datadog identifica automáticamente la imagen base y distingue las vulnerabilidades heredadas de ella de los paquetes agregados por su imagen. Cuando la atribución está disponible, Datadog muestra el nombre y el resumen de la imagen base, indicando cuándo la remediación requiere actualizar esa imagen base en lugar de cambiar el código de la aplicación. [Visualizar imágenes de contenedor en Datadog][23].
 
-Cuando Datadog detecta un CVE en una imagen de contenedor en ejecución, puede vincular el CVE directamente al Dockerfile y al commit que introdujo el paquete vulnerable. Esto cierra la brecha entre una alerta de producción y el cambio de código que la causó, proporcionando a los desarrolladores el contexto que necesitan para remediar en la fuente en lugar de perseguir versiones de paquetes a través de registros.
+## Rastrear vulnerabilidades de producción hasta el código fuente {#trace-production-vulnerabilities-to-source-code}
 
-Para habilitar este mapeo de código a nube, agregue anotaciones de imagen OCI a sus imágenes de contenedor en el momento de la construcción. Datadog utiliza estas anotaciones para mostrar una vista previa del Dockerfile dentro del panel de Container Image Vulnerabilities y para mostrar el repositorio exacto, commit y ruta de archivo asociados con la vulnerabilidad.
+Cuando Datadog detecta un CVE en una imagen de contenedor en ejecución, puede vincular el CVE directamente al Dockerfile y la confirmación que introdujeron el paquete vulnerable. Esto cierra la brecha entre una alerta de producción y el cambio de código que la causó, brindando a los desarrolladores el contexto que necesitan para remediar en la fuente en lugar de buscar versiones de paquetes en los registros.
 
-Para configurar el enlace de origen, consulte [Link Dockerfile to vulnerabilities][22] en la guía de CI/CD Container Image Scanning.
+Para habilitar este mapeo de código a la nube, agregue anotaciones de imagen OCI a sus imágenes de contenedor en el momento de la compilación. Datadog utiliza estas anotaciones para mostrar una vista previa del Dockerfile dentro del panel de Vulnerabilidades de imágenes de contenedor y para mostrar el repositorio, la confirmación y la ruta de archivo exactos asociados con la vulnerabilidad.
+
+Para configurar la vinculación de fuentes, consulte [Vincular Dockerfile a vulnerabilidades][22] en la guía de escaneo de imágenes de contenedor de CI/CD.
 
 ## Automatización e integración con Jira {#automation-and-jira-integration}
-Haga que las Vulnerabilidades de Seguridad en la Nube sean parte de su flujo de trabajo diario configurando [security notification rules][17] y [automation pipelines (in Preview)][20]:
-- Reciba alertas al detectar una vulnerabilidad explotable para su contexto
+Haga que Cloud Security Vulnerabilities sea parte de su flujo de trabajo diario configurando [{{< ui >}}security notification rules{{< /ui >}}][17] y [pipelines de automatización (en vista previa)][20]:
+- Reciba una alerta tras la detección de una vulnerabilidad explotable para su contexto
 - Cree tickets de Jira automáticamente
 - Configure SLAs para remediar vulnerabilidades
 
 {{< img src="security/vulnerabilities/csm-notifications.png" alt="La pantalla de configuración de reglas de notificación" width="100%">}}
 
-## Seguimiento e informes {#tracking-and-reporting}
-Utilice el out-of-the-box [Cloud Security Vulnerabilities dashboard][18] para rastrear e informar el progreso a las partes interesadas. Clónelo y modifíquelo según sea necesario para adaptarlo a sus necesidades únicas.
+## Seguimiento y generación de informes {#tracking-and-reporting}
+Utilice el [{{< ui >}}Cloud Security Vulnerabilities{{< /ui >}} dashboard][18] predeterminado para realizar el seguimiento e informar del progreso a las partes interesadas. Clónelo y modifíquelo según sea necesario para adaptarlo a sus necesidades específicas.
 
-{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="El Cloud Security Vulnerabilities dashboard" width="100%">}}
+{{< img src="security/vulnerabilities/csm-vm-reporting.png" alt="El dashboard de Cloud Security Vulnerabilities" width="100%">}}
 
 ## Explorar paquetes de infraestructura {#explore-infrastructure-packages}
 
-El [Catálogo de Paquetes de Infraestructura][19] proporciona un inventario en tiempo real de todos los paquetes en servidores, imágenes de servidor e imágenes de contenedor desplegadas en su infraestructura. Ofrece una interfaz que puede usar para investigar sus SBOMs, enriquecida con contexto de vulnerabilidad y tiempo de ejecución.
+El [{{< ui >}}Infrastructure Packages Catalog{{< /ui >}}][19] proporciona un inventario en tiempo real de todos los paquetes en servidores, imágenes de servidor e imágenes de contenedor implementados en su infraestructura. Ofrece una interfaz que puede utilizar para investigar sus SBOMs, enriquecida con contexto de vulnerabilidad y de tiempo de ejecución.
 
-Evalúe rápidamente el impacto de una vulnerabilidad crítica emergente buscando versiones de paquetes afectadas e identificando todos los recursos que la utilizan.
+Evalúe rápidamente el impacto de una vulnerabilidad emergente crítica buscando las versiones de paquete afectadas e identificando todos los recursos que la utilizan.
 
-{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="El inventario de paquetes desplegados en la infraestructura, con contexto de vulnerabilidad y posibilidad de pivotar hacia los recursos que los utilizan." width="100%">}}
+{{< img src="security/vulnerabilities/csm_package_explorer_3.png" alt="El inventario de paquetes implementados en la infraestructura con contexto de vulnerabilidad y pivot a los recursos que los utilizan" width="100%">}}
 
 [1]: https://app.datadoghq.com/security/csm/vm
 [2]: https://app.datadoghq.com/containers/images
@@ -154,7 +158,9 @@ Evalúe rápidamente el impacto de una vulnerabilidad crítica emergente buscand
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
 [21]: /es/security/cloud_security_management/setup/ci_cd
 [22]: /es/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
+[24]: /es/security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

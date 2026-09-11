@@ -153,11 +153,21 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by addViewLoadingTime(override:) call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                     |
 | `view.interaction_to_next_view_time` | number (ns) | Time between the last user interaction in the previous view and start of this (current) view. |
+| `view.memory_average` | number (bytes) | Exact arithmetic mean of successful whole-process memory samples collected while this view is on screen. |
+| `view.memory_max` | number (bytes) | Largest successful whole-process memory sample collected while this view is on screen. |
 | `view.name`    | string | Customizable name of the view corresponding to the event.       |
 | `view.network_settled_time` | number (ns) | Time it took for a view to be fully initiated at the start of the view. |
 | `view.resource.count` | number      | Count of all resources collected for this view.                              |
 | `view.time_spent`     | number (ns) | Time spent on this view.                                                     |
 | `view.url`     | string | URL of the `UIViewController` class corresponding to the event. |
+
+#### View memory collection
+
+The iOS SDK reads the `phys_footprint` value from the process's `task_vm_info` structure. This value measures the app's physical memory footprint.
+
+Each view tracks the exact running mean and maximum of successful samples. Calculations reset when the view starts, so they reflect only the samples collected during that view, not a rolling average carried over from previous views.
+
+By default, the SDK samples memory every 500 ms (`.average`). Use [`vitalsUpdateFrequency`][11] to change the frequency (`.frequent` for every 100 ms or `.rare` for every 1 s) or disable vitals collection by setting it to `nil`. If the SDK cannot read `task_vm_info`, it skips that sample without reporting an error.
 
 ### View accessibility attributes
 
@@ -206,6 +216,7 @@ The following attributes are collected for each view after collection is enabled
 | `resource.duration`            | number         | Entire time spent loading the resource.                                                         |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - requestStart). |
 | `resource.id`              | string | Unique identifier of the resource.                                                       |
+| `resource.local_cache_hit` | Boolean | Whether the resource was served from the device's local cache. Sent only when `true`; absent otherwise.       |
 | `resource.method`          | string | The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).                       |
 | `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                        |
 | `resource.provider.domain` | string | The resource provider domain.                                                            |
@@ -273,3 +284,4 @@ Before data is uploaded to Datadog, it is stored in cleartext in the cache direc
 [8]: /data_security/real_user_monitoring/#geolocation
 [9]: /data_security/real_user_monitoring/#ip-address
 [10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
+[11]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration

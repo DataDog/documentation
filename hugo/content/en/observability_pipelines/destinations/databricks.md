@@ -1,5 +1,6 @@
 ---
 title: Databricks (Zerobus) Destination
+description: Learn how to send logs to a Databricks Unity Catalog table using the Databricks (Zerobus) destination.
 disable_toc: false
 products:
 - name: Logs
@@ -101,7 +102,14 @@ Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. 
 
 After you select the Databricks (Zerobus) destination in the pipeline UI:
 
-<div class="alert alert-warning">Databricks (Zerobus) doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
+<div class="alert alert-warning">
+
+<ul>
+<li>Databricks (Zerobus) doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.
+
+<li> Log field values must match the data type of their corresponding column in the table schema. See <a href="#data-type-of-log-field-values">Data type of log field values</a> for more information.
+</ul>
+</div>
 
 1. Enter the {{< ui >}}Ingestion Endpoint{{< /ui >}} for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
 1. Enter the {{< ui >}}Table Name{{< /ui >}} in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.
@@ -117,7 +125,7 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 {{% observability_pipelines/destination_buffer %}}
 
-### Convert string timestamps to timestamp format
+## Convert string timestamps to timestamp format
 
 If your logs have timestamps in string format and your Databricks table has a timestamp column declared as a [`TIMESTAMP` type][11], you must convert the string to timestamp format before sending logs to the Databricks (Zerobus) destination. Databricks (Zerobus) can only convert the timestamp format to its `TIMESTAMP` type.
 
@@ -135,6 +143,16 @@ To convert timestamps in string format to timestamp format:
     .timestamp = parse_timestamp!(.timestamp, format: "%+")
     ```
     See [parse_timestamp][13] for more information.
+
+## Data type of log field values
+
+Log field values must match the data type of their corresponding column in the table schema. For example, if the table schema defines `message` as `STRING`, but an incoming log's `message` field is an object, such as `{"message": {"some": "string"}}`, the Worker can't encode the event and drops the entire batch and throws an error similar to:
+
+```
+error=Some(EncodingError { message: "Failed to encode batch: SerializingError(Arrow JSON decoding error: Json error: whilst decoding field 'message': expected string got {...})" }) request_id=1142 error_type="request_failed" stage="sending"
+```
+
+To prevent this error, use the [Custom Processor][17] to convert log fields to the data type expected by the table schema.
 
 ## Secret defaults
 
@@ -186,3 +204,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[17]: /observability_pipelines/processors/custom_processor/
