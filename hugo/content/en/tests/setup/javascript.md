@@ -629,7 +629,7 @@ The following is a list of the most important configuration settings that can be
 `service`
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: For `dd-trace` v6, the Nx project name when available. Otherwise, the nearest `package.json` package name, or `node` if unavailable.<br/>
+**Default**: The Nx project name when available. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.<br/>
 **Example**: `my-ui`
 
 `env`
@@ -662,7 +662,7 @@ The following settings are available only as environment variables:
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
-**Default**: For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`. For `dd-trace` v5, a combination of CI job name and test command.<br/>
+**Default**: The Lage package name when available. Otherwise, the CI job name and framework command, or the framework command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][7]. All other [Datadog Tracer configuration][8] options can also be used.
