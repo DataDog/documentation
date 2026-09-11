@@ -111,6 +111,8 @@ To unrevoke an API key:
 
 The key returns to {{< ui >}}Active{{< /ui >}} status with its original name, ID, and value unchanged.
 
+Unrevoking an API key is available in the UI only; there is no public API endpoint for it.
+
 ## Add application keys
 
 To add a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create application keys, click {{< ui >}}New Key{{< /ui >}}.
@@ -134,6 +136,8 @@ Because API keys and application keys are long-lived and have no built-in expira
 ## Remove application keys
 
 To remove a Datadog application key, navigate to [**Organization Settings** > **Application Keys**][2]. If you have the [permission][3] to create and manage application keys, you can see your own keys and click {{< ui >}}Revoke{{< /ui >}} next to the key you want to revoke. If you have the permission to manage all org application keys, you can search for the key you want to revoke and click {{< ui >}}Revoke{{< /ui >}} next to it.
+
+**Note**: Revoking an application key is permanent. The 7-day restoration window described in [Unrevoke an API key](#unrevoke-an-api-key) applies only to API keys.
 
 ## Key propagation delay and eventual consistency
 
