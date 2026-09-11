@@ -412,7 +412,6 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
 
-**Mapping Requirements** 
 
 Agent Observability requires at least one of the following attributes present on a span, or the span (and its entire trace, if no span qualifies) is dropped before reaching Agent Observability:
 - gen_ai.operation.name
