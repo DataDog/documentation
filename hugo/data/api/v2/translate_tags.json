@@ -187,6 +187,10 @@
     "name": "Data Observability",
     "description": "Manage and run data observability monitors."
   },
+  "databricks-integration": {
+    "name": "Databricks Integration",
+    "description": "Manage your Datadog Databricks integration accounts and account resources directly\nthrough the Datadog API. See the\n[Databricks integration page](https://docs.datadoghq.com/integrations/databricks/) for\nmore information."
+  },
   "datasets": {
     "name": "Datasets",
     "description": "Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate\naccess to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can\nview certain types of telemetry (for example, logs, traces, metrics, and RUM data)."
