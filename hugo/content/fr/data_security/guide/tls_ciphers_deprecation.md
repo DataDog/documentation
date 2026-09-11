@@ -21,19 +21,24 @@ Pour tester la compatibilité de la suite de chiffrement de votre client, connec
 
 À compter du 1er septembre 2026, Datadog accepte uniquement les suites de chiffrement suivantes :
 
+### TLS 1.2 {#tls-12}
+
 | Code         | Nom IANA                                         |
 |--------------|---------------------------------------------------|
-| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`        |
-| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`          |
-| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`        |
-| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`          |
-| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256` |
-| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`   |
-| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`          |
-| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`          |
-| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`                        |
-| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`                        |
-| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`                  |
+| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`         |
+| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`           |
+| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`         |
+| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`           |
+| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`   |
+| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`     |
+
+### TLS 1.3 {#tls-13}
+
+| Code         | Nom&nbsp;IANA                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
+| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`   |
 
 {{< /site-region >}}
 
@@ -41,12 +46,21 @@ Pour tester la compatibilité de la suite de chiffrement de votre client, connec
 
 Datadog accepte les suites de chiffrement suivantes pour {{< region-param key="dd_site_name" >}}:
 
+### TLS 1.2 {#tls-12-1}
+
 | Code         | Nom IANA                                  |
 |--------------|--------------------------------------------|
 | `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`    |
 | `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`    |
 | `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`  |
 | `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`  |
+
+### TLS 1.3 {#tls-13-1}
+
+| Code         | Nom&nbsp;IANA                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
 
 {{< /site-region >}}
 
@@ -62,6 +76,8 @@ Datadog a désactivé la prise en charge des suites de chiffrement suivantes, co
 
 | Code         | Nom IANA                                  | Nom OpenSSL             |
 |--------------|--------------------------------------------|--------------------------|
+| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`     | `ECDHE-ECDSA-AES128-SHA` |
+| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`     | `ECDHE-ECDSA-AES256-SHA` |
 | `0xC0,0x14`  | `TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA`       | `ECDHE-RSA-AES256-SHA`   |
 | `0xC0,0x13`  | `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA`       | `ECDHE-RSA-AES128-SHA`   |
 | `0x00,0x9D`  | `TLS_RSA_WITH_AES_256_GCM_SHA384`          | `AES256-GCM-SHA384`      |
