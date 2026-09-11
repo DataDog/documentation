@@ -265,10 +265,7 @@ Attributes
 
 Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
-**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
-
-**Note**: [Reserved tag keys](https://docs.datadoghq.com/getting_started/tagging/) will exist independently regardless of the group-by dimension
-
+**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically, so any alerts or configurations set on the monitored endpoint could apply to each group resulting from the aggregation. [Reserved tag keys][21] are exceptions. They're available in every alert regardless of the selected group-by dimension.
 {{< tabs >}}
 {{% tab "Group by tag" %}}
 
