@@ -61,7 +61,7 @@ The customer table shows the contract status for each customer, so you can see w
 Select a customer to open their contract detail panel. The {{< ui >}}Current Contract{{< /ui >}} tab shows:
 
 - {{< ui >}}Spend Overview{{< /ui >}}: last month's CMRR, last month's UMRR, and contract utilization.
-- {{< ui >}}Contract Info{{< /ui >}}: influence status (e.g. sourced, influenced, pass-through), contract start date, and contract end date.
+- {{< ui >}}Contract Info{{< /ui >}}: influence status (either Influenced or Not Influenced), contract start date, and contract end date.
 - {{< ui >}}Drawdown Depletion{{< /ui >}}: for drawdown contracts, the total commitment, spend to date, remaining funds, projected total, projected overshoot, and projected depletion date compared to the contract end date.
 
 {{< img src="account_management/plan_and_usage/customer-contracts-detail.png" alt="Contract detail panel for a customer showing the spend overview, drawdown depletion progress bar, and contract info sidebar" >}}
