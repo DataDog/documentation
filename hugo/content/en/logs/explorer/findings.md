@@ -70,16 +70,16 @@ In both cases, the finding stores the text you selected. You can use the text to
 
 **Double-click** a finding to return to it in Log Explorer, or hover over the finding and click {{< ui >}}Open in Explorer{{< /ui >}}. Log Explorer reloads the query, time range, and visualization that the finding was captured with.
 
-Each finding keeps its own query and time range. Change your search as often as you need, then return to any earlier finding without rebuilding its query.
+Each finding keeps the query and absolute time range. In the log explorer, you can change your search as often as you need, then return to any earlier finding without needing to rebuild the query.
 
 ## Send findings to Bits AI and Notebooks
 
 Select one or more findings to act on them together:
 
-- To ask [Bits AI][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel. Bits AI chat opens with the selected findings attached as context.
-- To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. The findings you send remain in the Findings panel.
+- To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also just click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat will open with the selected findings attached as context.
+- To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. 
 
-Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Log Explorer also sends notes on those findings.
+Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Notes on findings will also be sent.
 
 ## Organize your findings
 
