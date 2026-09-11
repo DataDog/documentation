@@ -1,12 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { parseSdkVersions, SDK_REPOS } from "./websitesSourcesData.ts";
 
-/**
- * A trimmed copy of the real `data/sdk_versions.json`, kept verbatim for the
- * two properties that matter: tag conventions differ per repo, and the file
- * carries clients that are not SDKs.
- */
-const REAL_SHAPE = JSON.stringify([
+/** A trimmed copy of the real `data/sdk_versions.json`. */
+const SDK_VERSIONS_JSON = JSON.stringify([
   { client: "datadog-api-client-go", version: "v2.65.0" },
   { client: "datadog-api-client-java", version: "datadog-api-client-2.60.0" },
   { client: "datadog-api-client-python", version: "2.60.0" },
@@ -18,12 +14,12 @@ const REAL_SHAPE = JSON.stringify([
 
 describe("parseSdkVersions", () => {
   it("returns a pin for each of the six SDK repos", () => {
-    const pins = parseSdkVersions(REAL_SHAPE);
+    const pins = parseSdkVersions(SDK_VERSIONS_JSON);
     expect(Object.keys(pins).sort()).toEqual([...SDK_REPOS].sort());
   });
 
   it("keeps each repo's tag verbatim, since conventions differ per repo", () => {
-    const pins = parseSdkVersions(REAL_SHAPE);
+    const pins = parseSdkVersions(SDK_VERSIONS_JSON);
     expect(pins).toEqual({
       "datadog-api-client-go": "v2.65.0",
       "datadog-api-client-java": "datadog-api-client-2.60.0",
@@ -35,12 +31,12 @@ describe("parseSdkVersions", () => {
   });
 
   it("ignores clients that are not SDK repos", () => {
-    const pins = parseSdkVersions(REAL_SHAPE);
+    const pins = parseSdkVersions(SDK_VERSIONS_JSON);
     expect(pins).not.toHaveProperty("integrations-core");
   });
 
   it("names the missing repo when a pin is absent", () => {
-    const missingRuby = JSON.parse(REAL_SHAPE).filter(
+    const missingRuby = JSON.parse(SDK_VERSIONS_JSON).filter(
       (entry: { client: string }) => entry.client !== "datadog-api-client-ruby",
     );
     expect(() => parseSdkVersions(JSON.stringify(missingRuby))).toThrow(
@@ -54,7 +50,7 @@ describe("parseSdkVersions", () => {
   });
 
   it("rejects an empty version string, rather than cloning a nameless ref", () => {
-    const blankVersion = JSON.parse(REAL_SHAPE).map(
+    const blankVersion = JSON.parse(SDK_VERSIONS_JSON).map(
       (entry: { client: string; version: string }) =>
         entry.client === "datadog-api-client-go"
           ? { ...entry, version: "" }

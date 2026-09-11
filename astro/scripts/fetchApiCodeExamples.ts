@@ -2,26 +2,20 @@
 /**
  * Stages the API docs' SDK code examples into `astro/api-code-examples/`.
  *
- * A port of `EXAMPLES_template` / `all-examples` in `hugo/Makefile:207-256`,
- * owned and run by Astro so the build no longer depends on Hugo's make step
- * having been run. Same six repos, same pinned tags, same output layout — the
- * process shape is deliberately still recognizable as the Makefile's:
+ * The steps:
  *
- *   resolve pins -> clone six repos -> rename -> nest Rust -> copy examples/v*
- *   -> stage Hugo's 148 committed legacy files
+ *   resolve pins -> clone six SDK repos -> rename -> nest Rust
+ *   -> copy examples/v* -> stage the committed legacy .py/.rb files from hugo/
  *
- * Three deliberate divergences, each self-contained:
+ * Three choices worth knowing about:
  *
  *   1. Clones are `--filter=blob:none --sparse` with only `examples/` checked
- *      out, rather than six plain `--depth 1` clones. Hugo's six full trees
- *      are ~900 MB.
+ *      out. The six full trees are ~900 MB.
  *   2. Branch matching asks `git ls-remote` whether a same-named branch exists
- *      instead of attempting a clone and letting it fail. Same outcome, and it
- *      does not print six clone failures on every fetch from a normal branch —
- *      which is the *expected* path, not an error.
- *   3. The staged tree is cleared before a real fetch. Hugo's `cp -Rn` never
- *      removes, so its tree accumulates files from older SDK tags; ours is
- *      exactly what the current refs produce.
+ *      rather than attempting a clone and letting it fail, so a fetch from a
+ *      normal branch — the expected path — prints no clone failures.
+ *   3. The staged tree is cleared before a real fetch, so it holds exactly what
+ *      the current refs produce and never accumulates files from older tags.
  *
  * Runs as TypeScript directly under Node 24's type-stripping — no build step,
  * which is why relative imports carry their `.ts` extension.
@@ -97,17 +91,16 @@ interface StageStamp {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Path transforms — the Makefile's rename/nest/copy-scope rules      */
+/*  Path transforms — rename, nest, copy-scope                         */
 /* ------------------------------------------------------------------ */
 
 /**
  * Maps a path relative to a clone's `examples/` directory onto its path
  * relative to the staged tree, or null if it should not be staged at all.
  *
- * This one function carries all three of the Makefile's transform steps: the
- * beta rename (`:240-241`), the flat-Rust nesting (`:242`), and the `examples/v*`
- * copy scope (`:243`). Computing the target path is equivalent to Hugo's
- * rename-then-copy and leaves the clone untouched.
+ * Carries all three transforms: the beta rename, the flat-Rust nesting, and the
+ * `examples/v*` copy scope. Computing the target path rather than renaming in
+ * place leaves the clone untouched.
  */
 export function stagedRelativePathFor(
   exampleRelativePath: string,
@@ -136,11 +129,9 @@ export function stagedRelativePathFor(
 /**
  * `v1_aws-integration_CreateAWSAccount.rs` -> `v1/aws-integration/CreateAWSAccount.rs`
  *
- * Splits on the **first two underscores only**, which is what the two `sed`
- * expressions at `hugo/Makefile:242` do (2nd underscore, then 1st). That is
- * what leaves suffixed names like
- * `v1_usage-metering_GetUsageNetworkHosts_1249907835.rs` intact. Category slugs
- * use hyphens and never underscores, so two splits is always right.
+ * Splits on the **first two underscores only**, which leaves suffixed names
+ * like `v1_usage-metering_GetUsageNetworkHosts_1249907835.rs` intact. Category
+ * slugs use hyphens and never underscores, so two splits is always right.
  */
 export function resolveNestedRustPath(flatFilename: string): string | null {
   const match = /^(v\d+)_([^_]+)_(.+)$/.exec(flatFilename);
@@ -154,12 +145,11 @@ export function resolveNestedRustPath(flatFilename: string): string | null {
 /**
  * `.py` -> `.pybeta`, `.rb` -> `.rbbeta`, everything else unchanged.
  *
- * Not a Hugo rendering workaround: `hugo/config/_default/params.yaml:12-35`
- * declares `py` and `pybeta` as two distinct languages, and the rename exists
- * so fresh SDK output lands *beside* the committed legacy files rather than
- * over them. Astro collapses the pair into one Python entry with `.pybeta`
- * preferred (`src/lib/api/codeExampleLoader.ts:70-71`), so the rename's value
- * here is keeping those legacy files reachable.
+ * The rename exists so fresh SDK output lands *beside* Hugo's committed legacy
+ * files rather than over them — Hugo treats `py` and `pybeta` as two distinct
+ * languages. Astro collapses the pair into one Python entry with `.pybeta`
+ * preferred (`src/lib/api/codeExampleLoader.ts`), so the rename's value here is
+ * keeping those legacy files reachable.
  */
 export function applyBetaExtensionRename(filename: string): string {
   if (filename.endsWith(".py") || filename.endsWith(".rb")) {
@@ -194,10 +184,9 @@ export function stripHugoApiContentPrefix(indexPath: string): string | null {
  * On `master`, the pinned tag. On any other branch, a same-named branch in the
  * SDK repo if one exists, else the pinned tag.
  *
- * This is `hugo/Makefile:214-220`, and it preserves the coordinated-preview
- * workflow: a spec-repo PR can be previewed against unreleased client code by
- * pushing a matching branch name to the client repo. No such branch is the
- * normal case.
+ * This preserves the coordinated-preview workflow: a spec-repo PR can be
+ * previewed against unreleased client code by pushing a matching branch name to
+ * the client repo. No such branch is the normal case.
  */
 export async function resolveSdkRef({
   repo,
@@ -365,8 +354,7 @@ async function main(options: FetchOptions): Promise<void> {
 }
 
 /**
- * The documentation repo's own branch, which is what Hugo compares against
- * (`hugo/Makefile:25`) — not a branch of any SDK repo.
+ * The documentation repo's own branch — not a branch of any SDK repo.
  */
 async function readDocsBranch(): Promise<string> {
   const { stdout } = await execFileAsync(

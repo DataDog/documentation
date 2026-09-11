@@ -1,17 +1,5 @@
 /**
- * The one file under `astro/` that knows where the websites-sources data lives
- * or how it is packaged. See the carve-out in `astro/CLAUDE.md`: this is a read
- * of a public, unauthenticated artifact — no credentials, no AWS SDK, no `aws`
- * CLI, no write path, no deploy target. Nothing else here may import `tar` or
- * repeat the URL.
- *
- * The tarball is the same one Hugo unpacks in
- * `hugo/local/bin/py/build/get_websites_sources_data.py`, and the member we
- * want is the same file Hugo's Makefile greps at
- * `hugo/_vendor/data/sdk_versions.json`. It is streamed and filtered to that
- * one member, so unlike Hugo nothing is written to disk — but the ~8.8 MB
- * still crosses the wire, because the member happens to sit at the end of the
- * archive. Roughly a second, once per fetch.
+ * Reads the pinned SDK versions out of the websites-sources data tarball.
  */
 
 import { Readable } from "node:stream";
@@ -64,8 +52,8 @@ const SdkVersionsFileSchema = z.array(
  * pins. Exported so the fetch script's offline `--pins <path>` flag reads a
  * local file through exactly the same validation as the network path.
  *
- * Throws — loudly and by name — rather than returning a partial map. A missing
- * pin would otherwise surface much later as a clone of a nonexistent ref.
+ * Throws rather than returning a partial map. A missing pin would otherwise
+ * surface much later as a clone of a nonexistent ref.
  */
 export function parseSdkVersions(rawJson: string): SdkPins {
   let parsed: unknown;
@@ -118,9 +106,8 @@ export async function fetchSdkVersions(
   fetchImpl: typeof fetch = fetch,
 ): Promise<SdkPins> {
   const url = buildTarballUrl();
-  const controller = new AbortController();
 
-  const response = await fetchImpl(url, { signal: controller.signal });
+  const response = await fetchImpl(url);
   if (!response.ok) {
     throw new Error(
       `Could not download ${url}: ${response.status} ${response.statusText}`,
@@ -140,10 +127,6 @@ export async function fetchSdkVersions(
       entry.on("data", (chunk: Buffer) => chunks.push(chunk));
       entry.on("end", () => {
         rawJson = Buffer.concat(chunks).toString("utf8");
-        // Nothing after this member is of any use. Today it is the last one,
-        // so this saves ~47 KB and not the ~8.8 MB you might assume; it is
-        // here so that stays true if upstream reorders the archive.
-        controller.abort();
       });
     },
   });
@@ -153,15 +136,7 @@ export async function fetchSdkVersions(
   // bridges two declarations of the same runtime object.
   const body = response.body as NodeReadableStream<Uint8Array>;
 
-  try {
-    await pipeline(Readable.fromWeb(body), parser);
-  } catch (error) {
-    // The abort above is our own success signal, not a failure. Anything else
-    // — and any abort that happened before the member was read — is real.
-    if (rawJson === null || !isAbortError(error)) {
-      throw error;
-    }
-  }
+  await pipeline(Readable.fromWeb(body), parser);
 
   if (rawJson === null) {
     throw new Error(
@@ -173,11 +148,6 @@ export async function fetchSdkVersions(
   return parseSdkVersions(rawJson);
 }
 
-/**
- * Bucket and path follow Hugo's environment variables so a CI job can point
- * both generators at the same data. Defaults match
- * `get_websites_sources_data.py`.
- */
 function buildTarballUrl(): string {
   const bucket = process.env.FF_S3_BUCKET || "dd-websites-sources";
   const dataPath = (process.env.FF_S3_PATH || "staging").replace(
@@ -190,8 +160,4 @@ function buildTarballUrl(): string {
 /** Members are archived as `./data/…`; tar may or may not keep the `./`. */
 function normalizeMemberPath(memberPath: string): string {
   return memberPath.replace(/^\.\//, "");
-}
-
-function isAbortError(error: unknown): boolean {
-  return error instanceof Error && error.name === "AbortError";
 }
