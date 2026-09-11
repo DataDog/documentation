@@ -22,6 +22,7 @@
 {{ $url_without_anchor := "" }}
 
 {{ $currentPage := . }}
+{{ $curURL := trim $currentPage.RelPermalink "/" }}
 {{ range $menu }}
     {{ if .HasChildren }}
         {{/*  HEADER  */}}
@@ -31,9 +32,13 @@
                 {{/*  LEVEL 1  */}}
                 {{/* Levels 3-4 are only rendered for the top-level section containing the current page, to avoid
                      shipping every product's full sub-nav on every page (see DOCS nav HTML size investigation).
-                     HasMenuCurrent is true only for descendants of this entry, not the entry's own page, so it's
-                     combined with IsMenuCurrent to also cover being on the section's own landing page. */}}
-                {{ $isCurrentTopSection := or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}
+                     This site's main menu is defined entirely in config as plain url: strings, not via page
+                     front matter, so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent (which rely on
+                     .Page identity) never match -- comparing URLs directly is what actually works here. Keep
+                     this in sync with nav/current-top-section.html, which computes the same thing for use as
+                     this partial's cache key. */}}
+                {{ $menuURL := trim (.URL | relLangURL) "/" }}
+                {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $isCurrentTopSection }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
