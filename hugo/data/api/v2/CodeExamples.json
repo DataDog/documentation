@@ -1576,6 +1576,11 @@
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
+      "suffix": "_1934105875",
+      "description": "Create a downtime duration monitor configuration policy returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor configuration policy returns \"OK\" response"
     }
