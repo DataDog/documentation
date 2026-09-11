@@ -626,27 +626,31 @@ For more information, see [Code Coverage][6].
 
 The following is a list of the most important configuration settings that can be used with the SDK.
 
-`service`
+When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+
+`service` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: The Nx project name when available. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.<br/>
+**Default**: The Nx project name<br/>
 **Example**: `my-ui`
 
-`env`
+`env` (Optional)
 : Name of the environment where tests are being run.<br/>
 **Environment variable**: `DD_ENV`<br/>
-**Default**: `none`<br/>
+**Default**: `(empty)`<br/>
 **Examples**: `local`, `ci`
 
 `site` (Optional for Agentless mode)
-: The [Datadog site][25] to upload test results to. Set this value when using a site other than US1.<br/>
+: The [Datadog site][25] to upload test results to. Set this configuration when using a site other than US1.<br/>
 **Environment variable**: `DD_SITE`<br/>
 **Default**: `datadoghq.com`
 
 `url` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This setting is needed only when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
-**Default**: `http://localhost:8126`
+**Default**: `http://127.0.0.1:8126`
 
 ### Environment variables
 
@@ -657,11 +661,11 @@ The following settings are available only as environment variables:
 **Default**: `false`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to upload test results.<br/>
+: The Datadog API key used to authenticate test result uploads.<br/>
 **Default**: `(empty)`
 
 `DD_TEST_SESSION_NAME` (Optional)
-: Identifies a group of tests, such as `integration-tests`, `unit-tests`, or `smoke-tests`.<br/>
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
 **Default**: The Lage package name when available. Otherwise, the CI job name and framework command, or the framework command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
@@ -964,10 +968,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 - `ui-tests`
 - `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value is:
-
-- For `dd-trace` v6, the framework invocation, such as `jest`, `mocha`, `playwright test`, or `cucumber-js`
-- For `dd-trace` v5, a combination of the CI job name and the command used to run the tests (for example, `my-ci-job yarn test`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the Lage package name when available. Otherwise, the default is the CI job name and framework command. If the CI job name is unavailable, the framework command is used.
 
 The test session name should be unique within a repository to help you distinguish different groups of tests.
 

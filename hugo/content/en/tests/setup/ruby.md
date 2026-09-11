@@ -99,40 +99,44 @@ bundle exec ddcirb exec rspec
 
 The following environment variables configure the test optimization library and its reporting method:
 
+When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
+
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+
 `DD_CIVISIBILITY_ENABLED=true` (Required)
-: Enables the Test Optimization product.
+: Enables Test Optimization.<br/>
 **Default**: `false`
 
-`DD_ENV` (Required)
-: Environment where the tests are being run (`ci` when running them on a CI provider).
-**Default**: `none`
-**Example**: `ci`
+`DD_ENV` (Optional)
+: Name of the environment where tests are being run.<br/>
+**Default**: `(empty)`<br/>
+**Examples**: `local`, `ci`
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
-: Enables Agentless mode to send test results directly to Datadog.
+: Enables Agentless mode to send test results directly to Datadog.<br/>
 **Default**: `false`
-**Example**: `true`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to upload test results.
+: The Datadog API key used to authenticate test result uploads.<br/>
 **Default**: `(empty)`
 
 `DD_SITE` (Optional for Agentless mode)
-: The [Datadog site][11] to upload test results to. Set this variable when using a site other than US1.
+: The [Datadog site][11] to upload test results to. Set this configuration when using a site other than US1.<br/>
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection in the form `http://hostname:port`. This variable is needed only when test results are reported through the Datadog Agent.<br/>
-**Default**: `http://localhost:8126`
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+**Default**: `http://127.0.0.1:8126`
 
 `DD_SERVICE` (Optional)
-: Name of the service or library under test.
-**Default**: The repository name. If unavailable, the test framework name.<br/>
+: Name of the service or library under test.<br/>
+**Default**: The repository name<br/>
 **Example**: `my-ruby-app`
 
 `DD_TEST_SESSION_NAME` (Optional)
-: Use this to identify a group of tests (see ["Test session name"](#test-session-name-dd_test_session_name))
-**Example**: `integration-tests`
+: Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
+**Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
+**Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
 All other [Datadog Tracer configuration][5] options can also be used.
 
@@ -296,10 +300,7 @@ Use `DD_TEST_SESSION_NAME` to define the name of the test session and the relate
 -   `ui-tests`
 -   `backend-tests`
 
-If `DD_TEST_SESSION_NAME` is not specified, the default value used is a combination of the:
-
--   CI job name
--   Command used to run the tests (such as `yarn test`)
+If `DD_TEST_SESSION_NAME` is not specified, the default is the CI job name and test command. If the CI job name is unavailable, the test command is used.
 
 The test session name needs to be unique within a repository to help you distinguish different groups of tests.
 
