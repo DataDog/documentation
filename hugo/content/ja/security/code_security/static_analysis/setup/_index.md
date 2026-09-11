@@ -16,12 +16,12 @@ title: Static Code Analysis (SAST) のセットアップ
 ---
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security は、このサイトでは利用できません. {{< region-param key="dd_site_name" >}} Code Security は、このサイトでは利用できません.
+    Code Security は、 {{< region-param key="dd_site_name" >}} サイトでは利用できません。
 </div>
 {{% /site-region %}}
 
 ## 概要 {#overview}
-Datadog SAST をアプリ内で設定するには、[**Security** > **Code Security**][1] に移動します。
+Datadog SAST をアプリ内で設定するには、[{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][1] に移動します。
 
 ## Static Code Analysis スキャンの実行場所を選択 {#select-where-to-run-static-code-analysis-scans}
 ### Datadog ホスト型スキャンでスキャンする {#scan-with-datadog-hosted-scanning}
@@ -30,15 +30,16 @@ Datadog のインフラストラクチャー上で直接 Datadog Static Code Ana
 - [GitHub][18] ([Git Large File Storage][17] を使用しているリポジトリを除く)
 - [GitLab.com および GitLab Self-Managed][20]
 - [Azure DevOps][19]
+- [Bitbucket Cloud][21]
 
-始めるには、[**Code Security** ページ][1]に移動します。
+始めるには、[{{< ui >}}Code Security{{< /ui >}} ページ][1]に移動します。
 
 ### CI パイプラインでスキャンする {#scan-in-ci-pipelines}
 Datadog Static Code Analysis は、[`datadog-ci` CLI][8] を使用して CI パイプラインで実行されます。
 
 まず、Datadog の API キーとアプリケーションキーを構成します。`DD_APP_KEY` と`DD_API_KEY` をシークレットとして追加します。Datadog のアプリケーションキーに `code_analysis_read` スコープがあることを確認してください。
 
-次に、選択した CI プロバイダーの以下の手順に従って Static Code Analysis を実行します。
+次に、選択した CI プロバイダーの下記の手順に従って Static Code Analysis を実行します。
 
 {{< whatsnext desc="CI プロバイダー別の手順を参照してください。">}}
     {{< nextlink href="security/code_security/static_analysis/setup/github_actions" >}}GitHub Actions{{< /nextlink >}}
@@ -46,17 +47,17 @@ Datadog Static Code Analysis は、[`datadog-ci` CLI][8] を使用して CI パ�
 {{< /whatsnext >}}
 
 ## ソースコード管理プロバイダーを選択する {#select-your-source-code-management-provider}
-Datadog Static Code Analysis は、すべてのソースコード管理プロバイダーをサポートしており、GitHub、GitLab、および Azure DevOps に対してネイティブサポートを提供しています。
+Datadog Static Code Analysis は、すべてのソースコード管理プロバイダーをサポートしており、GitHub、GitLab、Azure DevOps、および Bitbucket Cloud Premium に対してネイティブサポートを提供しています。
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
 [GitHub インテグレーションタイル][1]を使用して GitHub App を構成し、インラインコードスニペットと[プルリクエストコメント][3]を有効にするために[ソースコードインテグレーション][2]を設定します。
 
-GitHub App をインストールする際には、特定の機能を有効にするために以下の権限が必要です。
+GitHub App をインストールする際には、特定の機能を有効にするために次の権限が必要です。
 
 - `Content: Read` は、Datadog に表示されるコードスニペットを確認できるようにします。
-- `Pull Request: Read & Write` は、Datadog が[プルリクエストコメント][3]を使用してプルリクエスト内で違反に対するフィードバックを直接追加できるようにし、[脆弱性を修正][4]のためのプルリクエストを開くことも可能にします。
+- `Pull Request: Read & Write` は、Datadog が[プルリクエストコメント][3]を使用してプルリクエスト内で違反に対するフィードバックを直接追加できるようにし、[脆弱性を修正][4]するためのプルリクエストを開くことも可能にします。
 - `Checks: Read & Write` は、SAST 違反に対するチェックを作成してプルリクエストをブロックできるようにします。
 
 [1]: /ja/integrations/github/#link-a-repository-in-your-organization-or-personal-account
@@ -74,7 +75,7 @@ GitLab リポジトリを Datadog に接続するための [GitLab ソースコ�
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
 
-**注:** Azure DevOps integrations は Microsoft Entra テナントに接続されている必要があります。Azure DevOps Serverは**サポートされていません**。
+**注:** Azure DevOps インテグレーションは Microsoft Entra テナントに接続されている必要があります。Azure DevOps Server は**サポートされていません**。
 
 Azure DevOps リポジトリを Datadog に接続するための [Azure ソースコードセットアップ手順][4]を参照してください。
 
@@ -85,10 +86,17 @@ Azure DevOps リポジトリを Datadog に接続するための [Azure ソー�
 [5]: /ja/getting_started/site/
 
 {{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+Bitbucket Cloud ワークスペースを Datadog に接続するための [Bitbucket ソースコードセットアップ手順][1]を参照してください。
+
+[1]: /ja/integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
 {{% tab "その他" %}}
 
-別のソースコード管理プロバイダーを使用している場合は、`datadog-ci` CLI ツールを使用して CI パイプラインで Static Code Analysis を実行し、Datadog に [upload the results](#upload-third-party-static-analysis-results-to-datadog) してください。
-結果が **Code Security** ページに表示され始める前に、リポジトリのデフォルトブランチで分析を実行する**必要があります**。
+別のソースコード管理プロバイダーを使用している場合は、`datadog-ci` CLI ツールを使用して CI パイプラインで Static Code Analysis を実行し、Datadog に[結果をアップロード](#upload-third-party-static-analysis-results-to-datadog)してください。
+結果が {{< ui >}}Code Security{{< /ui >}} ページに表示され始める前に、リポジトリのデフォルトブランチで分析を実行する**必要があります**。
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -106,9 +114,9 @@ Azure DevOps リポジトリを Datadog に接続するための [Azure ソー�
 
 Diff-aware scanning により、Datadog の静的アナライザーは、機能ブランチのコミットで変更されたファイルのみをスキャンします。リポジトリ内のすべてのファイルに対して毎回分析を実行しないことで、スキャン時間を大幅に短縮します。CI パイプラインで Diff-aware scanning を有効にするには、次の手順に従ってください。
 
-1. CI パイプラインで`DD_APP_KEY`、`DD_SITE`、および`DD_API_KEY` の変数が設定されていることを確認してください。
+1. CI パイプラインで `DD_APP_KEY`、`DD_SITE`、および `DD_API_KEY` の変数が設定されていることを確認してください。
 2. 静的アナライザーを呼び出す前に `datadog-ci git-metadata upload` を呼び出してください。このコマンドは、Git メタデータが Datadog バックエンドで利用可能になることを保証します。Git メタデータは、分析対象のファイル数を算出するために必要です。
-3. datadog-static-analyzerが `--diff-aware` フラグ付きで呼び出されることを確認してください。
+3. datadog-static-analyzer が `--diff-aware` フラグ付きで呼び出されることを確認してください。
 
 コマンドの実行順の例 (これらのコマンドは Git リポジトリ内で実行する必要があります)
 
@@ -130,7 +138,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 SARIF レポートをアップロードするには
 
-1. [`DD_API_KEY` および `DD_APP_KEY` 変数が定義されている][4]を確認してください。
+1. [`DD_API_KEY` および `DD_APP_KEY` 変数が定義][4]されていることを確認してください。
 2. 必要に応じて [`DD_SITE` 変数][7]を設定します (デフォルトは `datadoghq.com`)。
 3. `datadog-ci` ユーティリティをインストールします。
 
@@ -149,18 +157,18 @@ SARIF レポートをアップロードするには
 
 Datadog は、[2.1.0 SARIF スキーマ][15]に準拠したサードパーティの SARIF ファイルの取り込みをサポートしています。SARIF
 schema は静的アナライザーツールによって異なる方法で使用されます。サードパーティの SARIF ファイルを Datadog に送信する場合は、
-以下の詳細に準拠していることを確認してください。
+次の詳細に準拠していることを確認してください。
 
  - 違反の場所は、結果の `physicalLocation` オブジェクトを通じて指定されます。
     - `artifactLocation` とその `uri` は、リポジトリのルートに対して**相対的でなければなりません**。
     - `region` オブジェクトは、Datadog UI で強調表示されたコードの部分です。
  - `partialFingerprints` は、リポジトリ全体で発見を一意に識別するために使用されます。
- - `properties`および`tags`は、さらに情報を追加します。
+ - `properties` および `tags` は、さらに情報を追加します。
     - タグ `DATADOG_CATEGORY` は、発見のカテゴリを指定します。許容される値は `SECURITY`、`PERFORMANCE`、`CODE_STYLE`、`BEST_PRACTICES`、`ERROR_PRONE` です。
-    - カテゴリ `SECURITY` で注釈された違反は、Vulnerabilities explorer およびリポジトリビューの Security タブに表示されます。
- - `tool` セクションには、有効な `driver` セクションと `name` および`version` 属性が必要です。
+    - カテゴリ `SECURITY` で注釈された違反は、Vulnerabilities explorer およびリポジトリビューの [Security] (セキュリティ) タブに表示されます。
+ - `tool` セクションには、有効な `driver` セクションと `name` および `version` 属性が必要です。
 
-例えば、Datadog によって処理された SARIF ファイルの例は次のとおりです。
+たとえば、Datadog によって処理された SARIF ファイルの例は次のとおりです。
 
 
 ```json
@@ -234,14 +242,14 @@ schema は静的アナライザーツールによって異なる方法で使用�
 
 ## SARIF から CVSS 重大度へのマッピング {#sarif-to-cvss-severity-mapping}
 
-[SARIF フォーマット][15]は、none、note、warning、および error の4つの重大度を定義しています。
+[SARIF フォーマット][15]は、none、note、warning、および error の 4 つの重大度を定義しています。
 ただし、Datadog は[共通脆弱性評価システム][16] (CVSS) を使用して違反および脆弱性の重大度を報告しており、
 そこでは critical、high、medium、low、none の5つの重大度が定義されています。
 
-SARIF ファイルを取り込む際、Datadog は以下のマッピングルールを使用して SARIF の重大度を CVSS の重大度にマッピングします。
+SARIF ファイルを取り込む際、Datadog は下記のマッピングルールを使用して SARIF の重大度を CVSS の重大度にマッピングします。
 
 
-| SARIF の重大度| CVSS の重大度|
+| SARIF の重大度 | CVSS の重大度 |
 |----------------|---------------|
 | Error          | Critical      |
 | Warning        | High          |
@@ -250,7 +258,7 @@ SARIF ファイルを取り込む際、Datadog は以下のマッピングルー
 
 ## データ保持 {#data-retention}
 
-Datadog は、当社の [Data Retention Periods](https://docs.datadoghq.com/ja/data_security/data_retention_periods/) に従って発見を保存します。Datadog は顧客のソースコードを保存または保持しません。
+Datadog は、当社の[データ保持期間](https://docs.datadoghq.com/ja/data_security/data_retention_periods/)に従って発見を保存します。Datadog は顧客のソースコードを保存または保持しません。
 
 ## <!-- 参考資料
 
@@ -274,10 +282,11 @@ Datadog は、当社の [Data Retention Periods](https://docs.datadoghq.com/ja/d
 [18]: /ja/security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /ja/security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /ja/security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
-[22]: https://docs.datadoghq.com/ja/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[21]: /ja/security/code_security/static_analysis/setup/?tab=bitbucketcloud#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/ja/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/ja/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [27]: /ja/security/code_security/static_analysis/configuration/
-[101]: https://docs.datadoghq.com/ja/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/ja/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/ja/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/ja/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/ja/data_security/data_retention_periods/

@@ -33,7 +33,8 @@ type: multi-code-lang
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 12.0.0 |
 | Playwright | >= 1.38.0 |
-| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=6.1.0`. |
+| Vitest | >= 1.6.0 | [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=6.1.0`. [El modo navegador](https://vitest.dev/guide/browser/) es compatible a partir de `dd-trace>=6.8.0`. |
+| WebdriverIO | >= 9.0.0 | Es compatible con los adaptadores de marcos de trabajo Mocha y Jasmine a partir de `dd-trace>=6.10.0`. |
 
 `dd-trace` v6 requiere Node.js 22 o posterior.
 
@@ -47,7 +48,8 @@ type: multi-code-lang
 | Cucumber | >= 7.0.0 |
 | Cypress | >= 6.7.0 |
 | Playwright | >= 1.18.0 |
-| Vitest | >= 1.6.0 |  es compatible a partir de `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=5.112.0`. |
+| Vitest | >= 1.6.0 |  es compatible a partir de `dd-trace>=5.18.0`. [`test.concurrent`](https://vitest.dev/api/#test-concurrent) es compatible a partir de `dd-trace>=5.112.0`. [El modo navegador](https://vitest.dev/guide/browser/) es compatible a partir de `dd-trace>=5.119.0`. |
+| WebdriverIO | >= 9.0.0 | Es compatible con los adaptadores de marcos de trabajo Mocha y Jasmine a partir de `dd-trace>=5.121.0`. |
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -449,6 +451,7 @@ Para habilitar la carga de capturas de pantalla, establezca la variable de entor
 </div>
 
 Utilice una versión de Node.js compatible con su versión principal de `dd-trace` para la instrumentación de Vitest:
+
 - `dd-trace` v5 requiere Node.js 18.19+ o Node.js 20.6+.
 - `dd-trace` v6 requiere Node.js 22 o posterior.
 
@@ -497,6 +500,70 @@ test('sum function can sum', () => {
   testSpan.setTag('memory_allocations', 16)
 
   expect(1 + 2).toBe(3)
+})
+```
+
+Para obtener más información sobre medidas personalizadas, consulte la [Guía para agregar medidas personalizadas][2].
+
+[1]: /es/tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
+[2]: /es/tests/guides/add_custom_measures/?tab=javascripttypescript
+{{% /tab %}}
+
+{{% tab "WebdriverIO" %}}
+Utilice una versión de Node.js compatible con su versión principal de `dd-trace` para la instrumentación de WebdriverIO:
+
+- `dd-trace` v5 requiere Node.js 18.19+ o Node.js 20.6+.
+- `dd-trace` v6 requiere Node.js 22 o posterior.
+
+Establezca la variable de entorno `NODE_OPTIONS` en `--import dd-trace/register.js -r dd-trace/ci/init`. Ejecute sus pruebas como lo haría normalmente, especificando opcionalmente un nombre para su sesión de prueba con `DD_TEST_SESSION_NAME`:
+
+```bash
+NODE_OPTIONS="--import dd-trace/register.js -r dd-trace/ci/init" DD_TEST_SESSION_NAME=e2e-tests yarn test:e2e
+```
+
+**Nota**: Si establece un valor para `NODE_OPTIONS`, asegúrese de que no sobrescriba `--import dd-trace/register.js -r dd-trace/ci/init`. Esto se puede hacer utilizando la cláusula `${NODE_OPTIONS:-}`:
+
+{{< code-block lang="json" filename="package.json" >}}
+{
+  "scripts": {
+    "test:e2e": "NODE_OPTIONS=\"--max-old-space-size=12288 ${NODE_OPTIONS:-}\" wdio run ./wdio.conf.js"
+  }
+}
+{{< /code-block >}}
+
+### Agregar etiquetas o medidas personalizadas a las pruebas {#adding-custom-tags-or-measures-to-tests-1}
+
+Puede agregar etiquetas personalizadas a sus pruebas utilizando el tramo activo actual:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('team_owner', 'my_team')
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
+})
+```
+
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Agregar etiquetas][1] de la documentación de instrumentación personalizada de Node.js.
+
+También puede agregar medidas personalizadas a sus pruebas utilizando el tramo activo actual:
+
+```javascript
+import tracer from 'dd-trace'
+
+describe('home page', () => {
+  it('displays the heading', async () => {
+    const testSpan = tracer.scope().active()
+    testSpan.setTag('memory_allocations', 16)
+
+    await browser.url('/')
+    await expect($('h1')).toBeDisplayed()
+  })
 })
 ```
 
@@ -628,7 +695,7 @@ Para obtener más información sobre las etiquetas reservadas `service` y `env`,
   <strong>Nota</strong>: La API de prueba manual está disponible a partir de las <code>dd-trace</code> versiones <code>5.23.0</code> y <code>4.47.0</code>.
 </div>
 
-Si usa Jest, Mocha, Cypress, Playwright, Cucumber o Vitest, **no use la API de prueba manual**, ya que Test Optimization los instrumenta automáticamente y envía los resultados de las pruebas a Datadog. La API de prueba manual es **incompatible** con los marcos de pruebas ya compatibles.
+Si utiliza Jest, Mocha, Cypress, Playwright, Cucumber, Vitest o WebdriverIO, **no utilice la API de prueba manual**. Test Optimization instrumenta automáticamente estos marcos de pruebas y envía los resultados de las pruebas a Datadog. La API de prueba manual es **incompatible** con los marcos de pruebas compatibles.
 
 Utilice la API de prueba manual solo si usa un marco de pruebas no compatible o si tiene un mecanismo de pruebas diferente.
 
@@ -765,9 +832,6 @@ La opción [--forceExit][15] de Jest puede causar pérdida de datos. Datadog int
 ### Mocha's `--exit` {#mochas-exit}
 La opción [--exit][16] de Mocha puede causar pérdida de datos. Datadog intenta enviar datos inmediatamente después de que finalizan sus pruebas, pero cerrar el proceso abruptamente puede causar que algunas solicitudes fallen. Use `--exit` con precaución.
 
-### Vitest's browser mode {#vitests-browser-mode}
-Vitest's [browser mode][17] no es compatible.
-
 ### Sobrecarga de duración de la prueba de Vitest {#vitests-test-duration-overhead}
 
 De forma predeterminada, la opción [`isolate`][21] de Vitest es `true`, por lo que cada archivo de prueba se ejecuta en su propia bifurcación o hilo. Vitest prioriza ESM y depende de [import-in-the-middle][20] para la instrumentación, lo que conlleva un costo de configuración cada vez que se inicia una suite. Con el aislamiento, ese costo de configuración se repite para cada archivo. El efecto es mayor cuando tiene muchas suites pequeñas y rápidas, porque el tiempo de configuración puede dominar el tiempo total de ejecución.
@@ -858,7 +922,6 @@ El nombre de la sesión de prueba debe ser único dentro de un repositorio para 
 [13]: https://docs.cypress.io/app/core-concepts/test-isolation
 [15]: https://jestjs.io/docs/cli#--forceexit
 [16]: https://mochajs.org/running/cli/#--exit
-[17]: https://vitest.dev/guide/browser/
 [18]: https://jestjs.io/docs/api#testeachtablename-fn-timeout
 [19]: https://www.npmjs.com/package/mocha-each
 [20]: https://github.com/nodejs/import-in-the-middle
