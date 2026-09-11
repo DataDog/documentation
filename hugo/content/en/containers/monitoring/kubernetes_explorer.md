@@ -80,7 +80,7 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][1].
 
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][1] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][2] orchestrator explorer functionality.
 
-The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. To collect those metrics and populate Explorer, follow [Kubernetes Metrics with OpenTelemetry][6] instead.
+The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. This setup does not require `kube-state-metrics` or a Prometheus server. To collect those metrics and populate Explorer, follow [Kubernetes Metrics with OpenTelemetry][6] instead.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
@@ -130,6 +130,10 @@ extraEnvs:
       secretKeyRef:
         name: datadog-secret
         key: api-key
+  - name: K8S_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
 
 presets:
   kubernetesObjects:

@@ -41,7 +41,7 @@ further_reading:
   This foundation enablement session will focus on how Datadog can monitor Kubernetes. Learn how to configure Datadog for Kubernetes and how to get started. Explore the various views and tools Datadog offers to visualize and analyze your cluster and application metrics, traces, and logs.
 {{< /learning-center-callout >}}
 
-To collect Kubernetes infrastructure metrics with OpenTelemetry instead of the Datadog Agent, see [Kubernetes Metrics with OpenTelemetry][10].
+To collect Kubernetes infrastructure metrics and populate Kubernetes Explorer with OpenTelemetry instead of the Datadog Agent, see [Kubernetes Metrics with OpenTelemetry][10].
 
 ## Agent installation
 
