@@ -47,12 +47,18 @@ const displayType =
 const optionFields: SchemaField[] =
   field.unionOptions?.map((option) => ({
     name: option.label,
-    type: "object",
+    // The branch's own type, so a scalar variant reads `double` rather than
+    // `object`. Scalar variants carry no nested rows.
+    type: option.type,
     required: false,
     deprecated: false,
     readOnly: false,
     description: option.description ?? "",
-    children: option.fields,
+    ...(option.enumValues ? { enumValues: option.enumValues } : {}),
+    ...(option.defaultValue !== undefined
+      ? { defaultValue: option.defaultValue }
+      : {}),
+    ...(option.fields.length > 0 ? { children: option.fields } : {}),
   })) ?? [];
 ---
 

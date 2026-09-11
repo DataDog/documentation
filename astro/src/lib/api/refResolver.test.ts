@@ -6,7 +6,9 @@ import {
   topLevelSchemaToFields,
   getBestDiscriminant,
   unionOptionLabels,
+  stripReadOnlyFields,
 } from "@lib/api/refResolver";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
 
 describe("resolveRef", () => {
   it("resolves a simple $ref path", () => {
@@ -723,5 +725,323 @@ describe("unionOptionLabels", () => {
       { type: "object", properties: { type: { type: "string", enum: ["b"] } } },
     ];
     expect(unionOptionLabels({}, items)[0]).not.toContain("&lt;");
+  });
+});
+
+describe("type column: enum and format", () => {
+  const typeOf = (schema: object) =>
+    schemaToFields({}, { type: "object", properties: { f: schema } })[0].type;
+
+  it("reports enum for an enumerated field, not its base type", () => {
+    // Hugo's typeColumn: `else if (value.enum) typeVal = 'enum'`.
+    expect(typeOf({ type: "string", enum: ["contains", "isNot"] })).toBe("enum");
+    expect(typeOf({ type: "integer", enum: [1, 2] })).toBe("enum");
+  });
+
+  it("still carries the permitted values in enumValues", () => {
+    const [field] = schemaToFields(
+      {},
+      {
+        type: "object",
+        properties: { f: { type: "string", enum: ["a", "b"] } },
+      },
+    );
+    expect(field.type).toBe("enum");
+    expect(field.enumValues).toEqual(["a", "b"]);
+  });
+
+  it("reports enum ahead of format when both are present", () => {
+    expect(typeOf({ type: "string", format: "uuid", enum: ["x"] })).toBe("enum");
+  });
+
+  it("reports the format alone, not `type (format)`", () => {
+    expect(typeOf({ type: "integer", format: "int64" })).toBe("int64");
+    expect(typeOf({ type: "string", format: "date-time" })).toBe("date-time");
+    expect(typeOf({ type: "number", format: "double" })).toBe("double");
+    expect(typeOf({ type: "string", format: "uuid" })).toBe("uuid");
+  });
+
+  it("falls back to the base type when there is no format", () => {
+    expect(typeOf({ type: "string" })).toBe("string");
+    expect(typeOf({ type: "boolean" })).toBe("boolean");
+  });
+
+  it("does NOT apply the format rule to parameters", () => {
+    // Parameters render from `layouts/partials/api/arguments.html`, which
+    // prints `.schema.type` and ignores `format`. So `list_id` is `integer`,
+    // not `int64` — the opposite of the body rule above.
+    const params = [
+      {
+        name: "list_id",
+        in: "path",
+        schema: { type: "integer", format: "int64" },
+      },
+      { name: "start", in: "query", schema: { type: "string", format: "date-time" } },
+      { name: "name", in: "query", schema: { type: "string" } },
+    ];
+    expect(paramsToFields({}, params).map((f) => f.type)).toEqual([
+      "integer",
+      "string",
+      "string",
+    ]);
+  });
+
+  it("still reports enum for an enumerated parameter", () => {
+    const params = [
+      {
+        name: "sort",
+        in: "query",
+        schema: { type: "string", enum: ["asc", "desc"] },
+      },
+    ];
+    const [field] = paramsToFields({}, params);
+    expect(field.type).toBe("enum");
+    expect(field.enumValues).toEqual(["asc", "desc"]);
+  });
+
+  it("resolves a $ref'd parameter schema before typing it", () => {
+    const spec = {
+      components: {
+        schemas: {
+          PageSize: { type: "integer", format: "int32" },
+        },
+      },
+    };
+    const params = [
+      {
+        name: "page_size",
+        in: "query",
+        schema: { $ref: "#/components/schemas/PageSize" },
+      },
+    ];
+    expect(paramsToFields(spec, params)[0].type).toBe("integer");
+  });
+});
+
+describe("union option types", () => {
+  it("reports a scalar variant's own type, not object", () => {
+    // SyntheticsAssertionTargetValue: a number branch and a string branch.
+    // Hugo renders these as `double` and `string`.
+    const spec = {
+      components: {
+        schemas: {
+          TargetValueNumber: {
+            description: "Numeric value.",
+            type: "number",
+            format: "double",
+          },
+          TargetValueString: { description: "String value.", type: "string" },
+        },
+      },
+    };
+    const schema = {
+      type: "object",
+      properties: {
+        target: {
+          oneOf: [
+            { $ref: "#/components/schemas/TargetValueNumber" },
+            { $ref: "#/components/schemas/TargetValueString" },
+          ],
+        },
+      },
+    };
+
+    const [target] = schemaToFields(spec, schema);
+    expect(target.type).toBe("oneOf");
+    expect(target.unionOptions?.map((o) => [o.label, o.type])).toEqual([
+      ["Object 1", "double"],
+      ["Object 2", "string"],
+    ]);
+  });
+
+  it("gives a scalar variant no nested rows", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        value: { oneOf: [{ type: "string" }, { type: "boolean" }] },
+      },
+    };
+    const [value] = schemaToFields({}, schema);
+    expect(value.unionOptions?.map((o) => o.fields.length)).toEqual([0, 0]);
+    expect(value.unionOptions?.map((o) => o.type)).toEqual([
+      "string",
+      "boolean",
+    ]);
+  });
+
+  it("keeps object variants as object, with their rows", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        thing: {
+          oneOf: [
+            { type: "object", properties: { a: { type: "string" } } },
+            { type: "string" },
+          ],
+        },
+      },
+    };
+    const [thing] = schemaToFields({}, schema);
+    expect(thing.unionOptions?.map((o) => o.type)).toEqual([
+      "object",
+      "string",
+    ]);
+    expect(thing.unionOptions?.[0].fields.map((f) => f.name)).toEqual(["a"]);
+    expect(thing.unionOptions?.[1].fields).toEqual([]);
+  });
+
+  it("reports an array variant with its item type", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        thing: {
+          oneOf: [
+            { type: "array", items: { type: "string" } },
+            { type: "string" },
+          ],
+        },
+      },
+    };
+    expect(
+      schemaToFields({}, schema)[0].unionOptions?.map((o) => o.type),
+    ).toEqual(["[string]", "string"]);
+  });
+
+  it("carries enum values from a scalar variant onto the option", () => {
+    const schema = {
+      type: "object",
+      properties: {
+        thing: {
+          oneOf: [
+            { type: "string", enum: ["a", "b"] },
+            { type: "integer" },
+          ],
+        },
+      },
+    };
+    const [thing] = schemaToFields({}, schema);
+    expect(thing.unionOptions?.[0].type).toBe("enum");
+    expect(thing.unionOptions?.[0].enumValues).toEqual(["a", "b"]);
+    expect(thing.unionOptions?.[1].type).toBe("integer");
+  });
+
+  it("reports a nested union variant as <oneOf>", () => {
+    const spec = {
+      components: {
+        schemas: {
+          Nested: { oneOf: [{ type: "string" }, { type: "integer" }] },
+        },
+      },
+    };
+    const schema = {
+      type: "object",
+      properties: {
+        thing: {
+          oneOf: [
+            { $ref: "#/components/schemas/Nested" },
+            { type: "string" },
+          ],
+        },
+      },
+    };
+    expect(
+      schemaToFields(spec, schema)[0].unionOptions?.map((o) => o.type),
+    ).toEqual(["<oneOf>", "string"]);
+  });
+});
+
+describe("stripReadOnlyFields", () => {
+  const field = (name: string, extra: Partial<SchemaField> = {}) => ({
+    name,
+    type: "string",
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: "",
+    ...extra,
+  });
+
+  it("drops read-only fields and keeps the rest", () => {
+    const fields = [
+      field("name"),
+      field("creator", { readOnly: true }),
+      field("monitor_id", { readOnly: true }),
+      field("tags"),
+    ];
+    expect(stripReadOnlyFields(fields).map((f) => f.name)).toEqual([
+      "name",
+      "tags",
+    ]);
+  });
+
+  it("drops read-only fields nested in children", () => {
+    const fields = [
+      field("data", {
+        type: "object",
+        children: [field("attributes"), field("id", { readOnly: true })],
+      }),
+    ];
+    const [data] = stripReadOnlyFields(fields);
+    expect(data.children?.map((c) => c.name)).toEqual(["attributes"]);
+  });
+
+  it("drops a read-only object together with its subtree", () => {
+    const fields = [
+      field("creator", {
+        type: "object",
+        readOnly: true,
+        children: [field("email"), field("handle")],
+      }),
+      field("name"),
+    ];
+    expect(stripReadOnlyFields(fields).map((f) => f.name)).toEqual(["name"]);
+  });
+
+  it("removes the children key when every child was read-only", () => {
+    const fields = [
+      field("wrapper", {
+        type: "object",
+        children: [field("a", { readOnly: true })],
+      }),
+    ];
+    const [wrapper] = stripReadOnlyFields(fields);
+    expect(wrapper.children).toBeUndefined();
+    expect("children" in wrapper).toBe(false);
+  });
+
+  it("filters inside union options", () => {
+    const fields = [
+      field("variant", {
+        type: "oneOf",
+        unionOptions: [
+          {
+            label: "<type=a>",
+            type: "object",
+            fields: [field("keep"), field("drop", { readOnly: true })],
+          },
+        ],
+      }),
+    ];
+    const [variant] = stripReadOnlyFields(fields);
+    expect(variant.unionOptions?.[0].fields.map((f) => f.name)).toEqual([
+      "keep",
+    ]);
+  });
+
+  it("does not mutate the input tree", () => {
+    const fields = [
+      field("data", {
+        type: "object",
+        children: [field("id", { readOnly: true }), field("name")],
+      }),
+    ];
+    stripReadOnlyFields(fields);
+    expect(fields[0].children).toHaveLength(2);
+  });
+
+  it("returns an empty array when everything is read-only", () => {
+    expect(
+      stripReadOnlyFields([field("a", { readOnly: true })]),
+    ).toEqual([]);
   });
 });

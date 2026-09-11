@@ -62,7 +62,8 @@ function schemaFieldsToTableRows(
         rows.push({
           parent: field.name || UNNAMED_FIELD_LABEL,
           field: opt.label,
-          type: "object",
+          // The branch's own type: a scalar variant reads `double`, not `object`.
+          type: getFieldType({ type: opt.type } as SchemaField),
           description: opt.description ?? "",
         });
         rows.push(...schemaFieldsToTableRows(opt.fields, opt.label));

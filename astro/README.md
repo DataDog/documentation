@@ -11,6 +11,7 @@ This is the next-generation Datadog documentation site, built with Astro 7, Mark
 ## Getting started
 
 ```bash
+yarn --cwd shared/packages/ask-ai install
 cd astro
 yarn install
 yarn dev
