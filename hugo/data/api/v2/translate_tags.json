@@ -507,6 +507,10 @@
     "name": "Slack Integration",
     "description": "Configure your [Datadog Slack integration](https://docs.datadoghq.com/integrations/slack/)\ndirectly through the Datadog API."
   },
+  "snowflake-integration": {
+    "name": "Snowflake Integration",
+    "description": "Manage your Datadog Snowflake integration accounts and account resources directly\nthrough the Datadog API. See the\n[Snowflake integration page](https://docs.datadoghq.com/integrations/snowflake_web/) for\nmore information."
+  },
   "software-catalog": {
     "name": "Software Catalog",
     "description": "API to create, update, retrieve, and delete Software Catalog entities."

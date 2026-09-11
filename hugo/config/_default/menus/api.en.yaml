@@ -4674,84 +4674,6 @@ menu:
         unstable:
           - v2
         order: 134
-    - name: Update an inbox rule
-      url: /api/latest/security-monitoring/update-an-inbox-rule/
-      identifier: security-monitoring-update-an-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateSecurityFindingsAutomationInboxRule
-        unstable:
-          - v2
-        order: 168
-    - name: Get an inbox rule
-      url: /api/latest/security-monitoring/get-an-inbox-rule/
-      identifier: security-monitoring-get-an-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSecurityFindingsAutomationInboxRule
-        unstable:
-          - v2
-        order: 167
-    - name: Delete an inbox rule
-      url: /api/latest/security-monitoring/delete-an-inbox-rule/
-      identifier: security-monitoring-delete-an-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteSecurityFindingsAutomationInboxRule
-        unstable:
-          - v2
-        order: 169
-    - name: Reorder inbox rules
-      url: /api/latest/security-monitoring/reorder-inbox-rules/
-      identifier: security-monitoring-reorder-inbox-rules
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ReorderSecurityFindingsAutomationInboxRules
-        unstable:
-          - v2
-        order: 166
-    - name: Create an inbox rule
-      url: /api/latest/security-monitoring/create-an-inbox-rule/
-      identifier: security-monitoring-create-an-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateSecurityFindingsAutomationInboxRule
-        unstable:
-          - v2
-        order: 165
-    - name: Get all inbox rules
-      url: /api/latest/security-monitoring/get-all-inbox-rules/
-      identifier: security-monitoring-get-all-inbox-rules
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListSecurityFindingsAutomationInboxRules
-        unstable:
-          - v2
-        order: 164
     - name: Update a due date rule
       url: /api/latest/security-monitoring/update-a-due-date-rule/
       identifier: security-monitoring-update-a-due-date-rule
@@ -4830,58 +4752,6 @@ menu:
         unstable:
           - v2
         order: 140
-    - name: Enable a default inbox rule
-      url: /api/latest/security-monitoring/enable-a-default-inbox-rule/
-      identifier: security-monitoring-enable-a-default-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - EnableSecurityFindingsAutomationDefaultInboxRule
-        unstable:
-          - v2
-        order: 172
-    - name: Disable a default inbox rule
-      url: /api/latest/security-monitoring/disable-a-default-inbox-rule/
-      identifier: security-monitoring-disable-a-default-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DisableSecurityFindingsAutomationDefaultInboxRule
-        unstable:
-          - v2
-        order: 173
-    - name: Get a default inbox rule
-      url: /api/latest/security-monitoring/get-a-default-inbox-rule/
-      identifier: security-monitoring-get-a-default-inbox-rule
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetSecurityFindingsAutomationDefaultInboxRule
-        unstable:
-          - v2
-        order: 171
-    - name: Get all default inbox rules
-      url: /api/latest/security-monitoring/get-all-default-inbox-rules/
-      identifier: security-monitoring-get-all-default-inbox-rules
-      parent: security-monitoring
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListSecurityFindingsAutomationDefaultInboxRules
-        unstable:
-          - v2
-        order: 170
     - name: Assign or unassign security findings
       url: /api/latest/security-monitoring/assign-or-unassign-security-findings/
       identifier: security-monitoring-assign-or-unassign-security-findings
@@ -20878,6 +20748,75 @@ menu:
           - ListServiceNowAssignmentGroups
         unstable: []
         order: 6
+    - name: Snowflake Integration
+      url: /api/latest/snowflake-integration/
+      identifier: snowflake-integration
+      generated: true
+    - name: Update a Snowflake integration account
+      url: /api/latest/snowflake-integration/update-a-snowflake-integration-account/
+      identifier: snowflake-integration-update-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Snowflake integration account
+      url: /api/latest/snowflake-integration/get-a-snowflake-integration-account/
+      identifier: snowflake-integration-get-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Snowflake integration account
+      url: /api/latest/snowflake-integration/delete-a-snowflake-integration-account/
+      identifier: snowflake-integration-delete-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Snowflake integration account
+      url: /api/latest/snowflake-integration/create-a-snowflake-integration-account/
+      identifier: snowflake-integration-create-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Snowflake integration accounts
+      url: /api/latest/snowflake-integration/list-snowflake-integration-accounts/
+      identifier: snowflake-integration-list-snowflake-integration-accounts
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSnowflakeIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog
