@@ -34,8 +34,6 @@ Findings appears in the side panel on the left of Log Explorer. To open it:
 1. Navigate to [Log Explorer][1].
 2. Click the **Findings** tab on the top left.
 
-{{< img src="logs/explorer/findings/panel_location.png" alt="The Findings tab beside My View in the Log Explorer header" style="width:50%;" >}}
-
 The Findings panel is where you work with findings: arrange them, reopen them in Log Explorer, and select them to send elsewhere. The panel keeps the findings and their layout across page reloads and browser sessions until you delete them.
 
 ## Capture a finding
@@ -46,19 +44,19 @@ Add a finding from anywhere in Log Explorer by pressing **Cmd**/**Ctrl** + **S**
 
 In the toolbar above your results, click the {{< ui >}}Add Finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. You can also click {{< ui >}}Add current page as a finding{{< /ui >}} in the Findings panel.
 
-{{< img src="logs/explorer/findings/add_finding_toolbar.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:80%;" >}}
-
 The **Add Finding** button appears in the same place for every visualization.
 
 The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list, a timeseries, or other visualization.
+
+{{< img src="logs/explorer/findings/add_finding_timeseries_viz.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:80%;" >}}
 
 ### Individual log events
 
 Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press **Cmd**/**Ctrl** + **S**. This captures the whole log event side panel to return to later.
 
-{{< img src="logs/explorer/findings/add_finding_log_event.png" alt="The add a finding icon in the Log Message section of the log side panel" style="width:80%;" >}}
-
 Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel with the corresponding query in the background.
+
+{{< img src="logs/explorer/findings/add_finding_log_message.png" alt="The add a finding button in the Log Message section of the log side panel" style="width:80%;" >}}
 
 ### Specific text in a log message or attributes
 
