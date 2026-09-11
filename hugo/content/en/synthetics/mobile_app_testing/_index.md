@@ -111,6 +111,8 @@ You can configure advanced options when creating a mobile test to dynamically ad
 
 You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
 
+For example, see [this guide][17] to pass a live authentication token and skip your app's login flow.
+
 **Examples:**
 
 {{< tabs >}}
@@ -302,3 +304,4 @@ If you are using the [custom role feature][9], add your user to any custom role 
 [14]: /continuous_testing/cicd_integrations/configuration/?tab=npm#global-configuration-file-options
 [15]: /real_user_monitoring/application_monitoring/
 [16]: /synthetics/mobile_app_testing/devices
+[17]: /synthetics/guide/mobile-test-auth-tokens/
