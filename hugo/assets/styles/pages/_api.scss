@@ -38,6 +38,290 @@ $ddpurple: #632ca6;
     }
 }
 
+// Single API changelog page. Entries are sourced from data/changelog/<tag>.yml.
+.api-changelog {
+    max-width: 900px;
+
+    .api-intro-header {
+        margin-bottom: 0.5rem;
+    }
+}
+
+.api-changelog-intro {
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+    color: $gray-darkish;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.api-changelog-filterbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid $gray-border;
+    border-radius: 6px 6px 0 0;
+    background: $gray-lightest;
+}
+
+.api-changelog-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.api-changelog-tab {
+    padding: 0.35rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 50rem;
+    background: transparent;
+    color: $gray-darkish;
+    font-size: 0.8125rem;
+    font-weight: 600;
+
+    &:hover,
+    &.is-active {
+        background: rgba($ddpurple, 0.1);
+        color: $ddpurple;
+    }
+
+    &.is-active {
+        border-color: rgba($ddpurple, 0.25);
+    }
+}
+
+.api-changelog-filter-divider {
+    width: 1px;
+    align-self: stretch;
+    background: $gray-border;
+}
+
+.api-changelog-filter-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-left: auto;
+}
+
+.api-changelog-filter-label {
+    margin: 0;
+    color: $gray-darkish;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.api-changelog-select {
+    min-width: 150px;
+    height: 34px;
+    padding: 0 2rem 0 0.625rem;
+    border: 1px solid $gray-light;
+    border-radius: 4px;
+    background-color: white;
+    color: $gray-dark;
+    font-size: 0.8125rem;
+}
+
+.api-changelog-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 44px;
+    padding: 0.625rem 1rem;
+    border: 1px solid $gray-border;
+    border-top: 0;
+    color: $gray-darkish;
+    font-size: 0.8125rem;
+}
+
+.api-changelog-clear {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: $brand-primary;
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.api-changelog-timeline {
+    margin-top: 2rem;
+}
+
+.api-changelog-tag-section {
+    position: relative;
+    padding: 0 0 2rem 2rem;
+    border-left: 2px solid rgba($ddpurple, 0.18);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0.5rem;
+        left: -7px;
+        width: 12px;
+        height: 12px;
+        border: 3px solid white;
+        border-radius: 50%;
+        background: $ddpurple;
+        box-shadow: 0 0 0 1px rgba($ddpurple, 0.3);
+    }
+
+    &:last-child {
+        border-left-color: transparent;
+    }
+}
+
+.api-changelog-tag-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+
+    h2 {
+        margin: 0;
+        font-size: 1.25rem;
+
+        a {
+            color: $gray-dark;
+            text-decoration: none;
+        }
+    }
+}
+
+.api-changelog-tag-count {
+    padding: 0.15rem 0.55rem;
+    border-radius: 50rem;
+    background: rgba($ddpurple, 0.1);
+    color: $ddpurple;
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+.api-changelog-entries {
+    overflow: hidden;
+    border: 1px solid $gray-border;
+    border-radius: 6px;
+    background: white;
+}
+
+.api-changelog-entry {
+    display: grid;
+    grid-template-columns: 90px minmax(0, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid $gray-border;
+
+    &:last-child {
+        border-bottom: 0;
+    }
+}
+
+.api-changelog-pill {
+    align-self: start;
+    justify-self: start;
+    padding: 0.2rem 0.55rem;
+    border-radius: 50rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.2;
+    white-space: nowrap;
+
+    &--added {
+        background: rgba($brand-success, 0.12);
+        color: $brand-success;
+    }
+
+    &--modified {
+        background: rgba($ddpurple, 0.12);
+        color: $ddpurple;
+    }
+
+    &--deprecated {
+        background: rgba($brand-warning, 0.14);
+        color: darken($brand-warning, 15%);
+    }
+
+    &--removed {
+        background: rgba($brand-danger, 0.12);
+        color: $brand-danger;
+    }
+}
+
+.api-changelog-entry-date {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: $gray;
+    font-size: 0.75rem;
+}
+
+.api-changelog-entry-title {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.4;
+
+    a {
+        color: $gray-dark;
+
+        &:hover {
+            color: $brand-primary;
+        }
+    }
+}
+
+.api-changelog-operations {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.625rem;
+    color: $gray-darkish;
+    font-size: 0.75rem;
+
+    code {
+        padding: 0.1rem 0.35rem;
+        border-radius: 3px;
+        background: $gray-lightest;
+        color: $gray-dark;
+        font-size: 0.75rem;
+    }
+}
+
+.api-changelog-empty {
+    margin-top: 2rem;
+    padding: 2rem;
+    border: 1px dashed $gray-light;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.api-changelog-empty-title {
+    margin-bottom: 0.25rem;
+    color: $gray-dark;
+    font-weight: 600;
+}
+
+.api-changelog-empty-subtitle {
+    margin-bottom: 0.75rem;
+    color: $gray-darkish;
+    font-size: 0.875rem;
+}
+
+@include media-breakpoint-down(md) {
+    .api-changelog-filter-divider {
+        display: none;
+    }
+
+    .api-changelog-filter-group {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .api-changelog-entry {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}
+
 // Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
 .api-intro-header .api-copy-btn {
     flex-shrink: 0;
