@@ -5177,6 +5177,12 @@ components:
           example: 54.0
           format: double
           type: number
+        local_cache_count:
+          description: Number of requests served from the local browser cache without a network round trip.
+          example: 20
+          format: int32
+          maximum: 2147483647
+          type: integer
         max_duration_ms:
           description: Maximum duration in milliseconds.
           example: 945.6
@@ -5192,6 +5198,12 @@ components:
           example: 812.7
           format: double
           type: number
+        non_blocking_count:
+          description: Number of requests reported by the browser as non-render-blocking.
+          example: 23
+          format: int32
+          maximum: 2147483647
+          type: integer
         p75_duration_ms:
           description: 75th percentile duration in milliseconds.
           example: 844.1
@@ -5200,6 +5212,17 @@ components:
         p95_duration_ms:
           description: 95th percentile duration in milliseconds.
           example: 861.8
+          format: double
+          type: number
+        render_blocking_count:
+          description: Number of requests reported by the browser as render-blocking.
+          example: 4
+          format: int32
+          maximum: 2147483647
+          type: integer
+        render_blocking_pct:
+          description: Percentage of render-blocking requests among those reporting a render-blocking status.
+          example: 14.8
           format: double
           type: number
         resource_type:
@@ -5211,6 +5234,12 @@ components:
           description: URL path group used to aggregate similar resources.
           example: /api/gallery
           type: string
+        server_validated_cache_count:
+          description: Number of cached requests revalidated by the server with a 304 response.
+          example: 7
+          format: int32
+          maximum: 2147483647
+          type: integer
         timing_breakdown:
           $ref: '#/components/schemas/AggregatedResourceTimingBreakdown'
         total_requests:
@@ -5243,6 +5272,11 @@ components:
         - cached_count
         - downloaded_count
         - cache_hit_rate_pct
+        - render_blocking_count
+        - non_blocking_count
+        - render_blocking_pct
+        - local_cache_count
+        - server_validated_cache_count
       type: object
     AggregatedResourceTimingBreakdown:
       description: Average timing breakdown per network phase for a resource.
@@ -5709,7 +5743,7 @@ components:
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
           type: string
         criteria:
-          $ref: '#/components/schemas/AggregatedWaterfallPerformanceCriteria'
+          $ref: '#/components/schemas/AggregatedWaterfallResponseAttributesCriteria'
         from:
           description: Start of the analyzed time range as a Unix timestamp in seconds.
           example: 1762437564
@@ -5754,9 +5788,29 @@ components:
         - view_count
         - from
         - to
+        - criteria
         - sampled_view_ids
         - total_cache_hit_rate_pct
         - resources
+      type: object
+    AggregatedWaterfallResponseAttributesCriteria:
+      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      nullable: true
+      properties:
+        max:
+          description: Maximum threshold in seconds (inclusive).
+          example: 5.0
+          format: double
+          type: number
+        metric:
+          $ref: '#/components/schemas/AggregatedWaterfallPerformanceCriteriaMetric'
+        min:
+          description: Minimum threshold in seconds (inclusive).
+          example: 2.5
+          format: double
+          type: number
+      required:
+        - metric
       type: object
     AggregatedWaterfallResponseData:
       description: Data envelope for an aggregated waterfall response.
@@ -200485,13 +200539,18 @@ paths:
                             downloaded_count: 0
                             http_method: GET
                             load_frequency_pct: 54.0
+                            local_cache_count: 20
                             max_duration_ms: 945.6
                             median_duration_ms: 836.2
                             min_duration_ms: 812.7
+                            non_blocking_count: 23
                             p75_duration_ms: 844.1
                             p95_duration_ms: 861.8
+                            render_blocking_count: 4
+                            render_blocking_pct: 14.8
                             resource_type: fetch
                             resource_url_path_group: /api/gallery
+                            server_validated_cache_count: 7
                             timing_breakdown:
                               avg_connect_ms: 0.0
                               avg_dns_ms: 0.0
