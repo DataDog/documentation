@@ -25,7 +25,7 @@ You can select a specific index to narrow your search, or select all indexes in 
 BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
 ```
-byoc--<CLUSTER_NAME>--<INDEX_NAME>
+byoc--<cluster_id>--<index_name>
 ```
 
 ## Search limitations
