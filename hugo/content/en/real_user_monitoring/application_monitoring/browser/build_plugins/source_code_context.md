@@ -1,6 +1,6 @@
 ---
 title: Source Code Context
-description: "Display source code inline in Error Tracking stack traces by injecting debug ID or service and version metadata at build time."
+description: "Display source code inline in Error Tracking stack traces by injecting service and version metadata at build time."
 algolia:
   tags: ['source code context', 'build plugins', 'error tracking', 'stack traces']
 further_reading:
@@ -20,30 +20,28 @@ further_reading:
 
 ## Overview
 
-When viewing errors in [Error Tracking][1], Datadog can display the source code lines surrounding each frame in the stack trace. The Source Code Context build plugin enables this feature by injecting a small runtime snippet into your bundle. This snippet associates stack traces with a debug ID or with `service` and `version` metadata.
+When viewing errors in [Error Tracking][1], Datadog can display the source code lines surrounding each frame in the stack trace. The Source Code Context build plugin enables this feature by injecting a small runtime snippet into your bundle that associates stack traces with your `service` and `version` metadata.
 
-At build time, the plugin injects a snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads this metadata to associate stack frames with [uploaded source maps][2].
+At build time, the plugin injects a snippet that writes metadata to `window.DD_SOURCE_CODE_CONTEXT`. At runtime, the RUM SDK reads `window.DD_SOURCE_CODE_CONTEXT` to tag errors with the correct service and version for source code resolution. This works in conjunction with [uploaded source maps][2] — source maps provide the file mapping, and `window.DD_SOURCE_CODE_CONTEXT` provides the service and version association.
 
 ## Prerequisites
 
 - Source maps uploaded to Datadog, either through the [Source Maps build plugin][3] or [manually][2].
-- For service and version matching, initialize the RUM SDK with matching `service` and `version` parameters.
+- The RUM SDK initialized with matching `service` and `version` parameters.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][4] for installation instructions.
 
 ## Configuration
 
-Use a debug ID for new configurations. You can also provide `service` and `version` alongside a debug ID to identify and filter events from a specific application or micro-frontend. This metadata is independent of the debug ID used to associate stack frames with source maps.
+Configure the `rum.sourceCodeContext` object in your build plugin options:
 
-The service and version configuration below documents the legacy matching method without debug IDs.
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `rum.sourceCodeContext.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
+| `rum.sourceCodeContext.version` | String | No | None | Release version. If omitted, source code context is not associated with a specific version. If set, must match the RUM SDK `version` initialization parameter. |
 
-{{< tabs >}}
-{{% tab "Debug ID (Recommended)" %}}
+## Example
 
-Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
-
-Debug ID support requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
-
-Set `debugId` to `true` in `sourcemaps` to inject a debug ID into each JavaScript bundle.
+The following example shows source code context combined with source maps, a common pairing:
 
 ```javascript
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
@@ -51,30 +49,16 @@ const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 module.exports = {
   plugins: [
     datadogWebpackPlugin({
-      sourcemaps: {
-        debugId: true,
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
       },
-    }),
-  ],
-};
-```
-
-{{% /tab %}}
-{{% tab "Service and version" %}}
-
-Service and version matching associates stack frames with source maps using metadata from the RUM SDK and the uploaded source maps.
-
-Configure the following options in `rum.sourceCodeContext`:
-
-- `service` (String, required): The service name. It must match the RUM SDK `service` initialization parameter.
-- `version` (String, optional): The release version. If set, it must match the RUM SDK `version` initialization parameter. If omitted, source code context is not associated with a specific version.
-
-```javascript
-const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
-
-module.exports = {
-  plugins: [
-    datadogWebpackPlugin({
+      errorTracking: {
+        sourcemaps: {
+          service: 'my-application',
+          releaseVersion: '1.0.0',
+          minifiedPathPrefix: 'https://example.com/static/',
+        },
+      },
       rum: {
         sourceCodeContext: {
           service: 'my-application',
@@ -85,11 +69,6 @@ module.exports = {
   ],
 };
 ```
-
-The `service` and `version` values must match the metadata used when uploading the source maps.
-
-{{% /tab %}}
-{{< /tabs >}}
 
 <div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
