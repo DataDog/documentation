@@ -322,8 +322,8 @@ A parallel API is available for associating an account (such as an organization,
 
 | Attribute | Type | Description |
 | --- | --- | --- |
-| `acc.id` | String | (Required) Unique account identifier. |
-| `acc.name` | String | (Optional) Account name, displayed in the Datadog UI. |
+| `account.id` | String | (Required) Unique account identifier. |
+| `account.name` | String | (Optional) Account name, displayed in the Datadog UI. |
 
 {% tabs %}
 {% tab label="C++" %}
