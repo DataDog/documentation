@@ -8,6 +8,7 @@ import {
   unionOptionLabels,
   stripReadOnlyFields,
 } from "@lib/api/refResolver";
+import type { SchemaField } from "@lib/api/schemas/schemaField";
 
 describe("resolveRef", () => {
   it("resolves a simple $ref path", () => {
@@ -950,7 +951,7 @@ describe("union option types", () => {
 });
 
 describe("stripReadOnlyFields", () => {
-  const field = (name: string, extra: object = {}) => ({
+  const field = (name: string, extra: Partial<SchemaField> = {}) => ({
     name,
     type: "string",
     required: false,
@@ -1015,6 +1016,7 @@ describe("stripReadOnlyFields", () => {
         unionOptions: [
           {
             label: "<type=a>",
+            type: "object",
             fields: [field("keep"), field("drop", { readOnly: true })],
           },
         ],
