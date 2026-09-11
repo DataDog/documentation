@@ -108,9 +108,50 @@ You can run the `java -jar $DD_TRACER_FOLDER/dd-java-agent.jar` command to check
 
 ### Running your tests
 
-Set the following environment variables to configure the SDK and its reporting method:
-
 When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
+
+First, set the following required environment variables for your build tool:
+
+{{< tabs >}}
+{{% tab "Maven" %}}
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the SDK into the Maven build process.
+
+{{% /tab %}}
+{{% tab "Gradle" %}}
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the SDK into the Gradle launcher process.
+
+{{% /tab %}}
+{{% tab "SBT" %}}
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the SDK into the JVMs that execute your tests.
+
+{{% /tab %}}
+{{% tab "Other" %}}
+
+`DD_TRACER_FOLDER` (Required)
+: Path to the folder where the downloaded Java Tracer is located.
+
+`JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
+: Injects the SDK into the JVMs that execute your tests.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Then, set the following common environment variables to configure the SDK and its reporting method:
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
 
@@ -148,54 +189,7 @@ When using environment variables, set them before starting the test process. For
 **Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>
 **Example**: `unit-tests`, `integration-tests`, `smoke-tests`
 
-Set the following environment variables for your build tool:
-
-{{< tabs >}}
-{{% tab "Maven" %}}
-
-`DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java Tracer is located.
-
-`MAVEN_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the SDK into the Maven build process.
-
-Run your tests as you normally do (for example: `mvn test` or `mvn verify`).
-
-{{% /tab %}}
-{{% tab "Gradle" %}}
-
-`DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java Tracer is located.
-
-`GRADLE_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the SDK into the Gradle launcher process.
-
-Run your tests as you normally do (for example: `./gradlew clean test`).
-
-{{% /tab %}}
-{{% tab "SBT" %}}
-
-`DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java Tracer is located.
-
-`SBT_OPTS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the SDK into the JVMs that execute your tests.
-
-Run your tests as you normally do (for example: `sbt test`).
-
-{{% /tab %}}
-{{% tab "Other" %}}
-
-`DD_TRACER_FOLDER` (Required)
-: Path to the folder where the downloaded Java Tracer is located.
-
-`JAVA_TOOL_OPTIONS=-javaagent:$DD_TRACER_FOLDER/dd-java-agent.jar` (Required)
-: Injects the SDK into the JVMs that execute your tests.
-
-Run your tests as you normally do.
-
-{{% /tab %}}
-{{< /tabs >}}
+Run your tests as you normally do (for example: `mvn test`, `mvn verify`, `./gradlew clean test`, or `sbt test`).
 
 ## Configuration
 
