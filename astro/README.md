@@ -11,13 +11,15 @@ This is the next-generation Datadog documentation site, built with Astro 7, Mark
 ## Getting started
 
 ```bash
-yarn --cwd shared/packages/ask-ai install
 cd astro
 yarn install
 yarn dev
 ```
 
 The dev server starts at **http://localhost:4321**.
+
+The shared Ask AI package in `shared/packages/ask-ai` is a separate Yarn project with its own
+lockfile, so `yarn install` here does not cover it. `yarn dev` installs and builds it for you.
 
 ## Running alongside the Hugo site (Caddy proxy)
 

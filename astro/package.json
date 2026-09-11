@@ -7,7 +7,9 @@
   },
   "scripts": {
     "//build:ask-ai": "Called explicitly by every script that needs dist/, because Yarn Berry ignores arbitrary pre* hooks. TODO: assumes the Astro CI job invokes one of the build:* scripts rather than astro build directly — confirm when that job is written in DataDog/documentation-ci.",
-    "build:ask-ai": "yarn --cwd ../shared/packages/ask-ai build",
+    "//install:ask-ai": "The Ask AI package is a separate Yarn project with its own lockfile, so its dependencies are not installed by `yarn install` here. Building it without this step fails on a fresh checkout.",
+    "install:ask-ai": "yarn --cwd ../shared/packages/ask-ai install --immutable",
+    "build:ask-ai": "yarn install:ask-ai && yarn --cwd ../shared/packages/ask-ai build",
     "dev": "yarn build:ask-ai && astro dev --port 4321",
     "dev:proxied": "yarn build:ask-ai && PROXIED=1 astro dev --port 4321",
     "build": "yarn build:ask-ai && astro build",
