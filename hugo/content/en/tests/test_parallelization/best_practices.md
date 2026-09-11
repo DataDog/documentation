@@ -120,7 +120,7 @@ If you execute tests with another command, set the same environment variable for
 
 ## Configure pytest
 
-`ddtest` runs pytest as `python -m pytest` and appends the selected test files. It appends `--ddtrace` to `PYTEST_ADDOPTS`, preserving any existing value, so the `ddtrace` pytest plugin loads without changing your pytest config.
+`ddtest` runs pytest as `python -m pytest` by default and appends the selected test files. For versions 1.7.0 and later, set `--command` to override the base command. For example, `--command pytest` runs the `pytest` console script instead of `python -m pytest`. `ddtest` runs `<command> <files>` and does not add `-m pytest`. It appends `--ddtrace` to `PYTEST_ADDOPTS`, preserving any existing value, so the `ddtrace` pytest plugin loads without changing your pytest config. To pass extra pytest flags without changing the base command, use `PYTEST_ADDOPTS`.
 
 For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.ini`, `pyproject.toml`, `tox.ini`, or `setup.cfg`. If no pytest config defines those settings, `ddtest` uses `**/{test_*,*_test}.py`.
 

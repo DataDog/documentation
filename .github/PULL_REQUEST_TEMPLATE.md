@@ -1,6 +1,8 @@
 <!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
 ### What does this PR do? What is the motivation?
 
+<!-- _Brief_ description of context for changes, the problem you're solving, from the user's and reviewer's perspectives, NOT a detailed itemization or justification. The reviewer needs to be able to quickly understand why the changes were made. Keep it short. See [PR Etiquette](https://github.com/DataDog/documentation#pr-etiquette) for examples. -->
+
 ### Merge readiness
 
 - [ ] Ready for merge

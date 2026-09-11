@@ -24,7 +24,7 @@ Sheets lets you manipulate, transform, and analyze data from logs, real user mon
 
 - [{{< ui >}}Table{{< /ui >}}](#table): Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
 - [{{< ui >}}Pivot{{< /ui >}}](#pivot): Summarize and aggregate data from a table with custom dimensions and calculations.
-- [{{< ui >}}Sheet{{< /ui >}}](#sheet-preview) (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
+- [{{< ui >}}Sheet{{< /ui >}}](#sheet): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
 
 ## Table
 
@@ -77,15 +77,11 @@ After you add a table of data to a spreadsheet, analyze and add context to your 
 
 After you have your pivot table, you can click {{< ui >}}Show Graphs{{< /ui >}} and add up to six widgets to graph your data. Supported widget types include {{< ui >}}Top List{{< /ui >}}, {{< ui >}}Treemap{{< /ui >}}, and {{< ui >}}Pie Chart{{< /ui >}} widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
 
-## Sheet (Preview)
-
-{{< callout url="https://www.datadoghq.com/product-preview/flexible-spreadsheets-in-datadog-sheets/">}}
-Create flexible spreadsheets: built to let you start from scratch, build models, track operations, and more.
-{{< /callout >}}
+## Sheet
 
 A sheet is a flexible, blank-canvas spreadsheet with a full formula engine. Use it to build financial models, operational trackers, planning templates, or any freeform calculation that doesn't fit a query-based workflow.
 
-To add a sheet, click the {{< ui >}}+{{< /ui >}} tab at the bottom of your spreadsheet and select {{< ui >}}Add Sheet{{< /ui >}}.
+To add a sheet, click the {{< ui >}}\+{{< /ui >}} tab at the bottom of your spreadsheet and select {{< ui >}}Add Sheet{{< /ui >}}.
 
 {{< img src="/sheets/flexible_spreadsheet.png" alt="A flexible sheet showing a 2025 cloud spend by provider model, with SUMIFS and VLOOKUP formulas referencing Cloud cost and Currency conversion table tabs" style="width:90%;" >}}
 

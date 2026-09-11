@@ -13,7 +13,7 @@ BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution that runs 
 
 Here is a high-level overview of how BYOC Logs works:
 
-{{< img src="/cloudprem/overview_diagram_cloudprem.png" alt="BYOC Logs architecture overview showing how logs flow from sources through BYOC Logs to the Datadog platform" style="width:100%;" >}}
+{{< img src="/cloudprem/overview_diagram_byoc.png" alt="BYOC Logs architecture overview showing how logs flow from sources through BYOC Logs to the Datadog platform" style="width:100%;" >}}
 
 The diagram illustrates the BYOC Logs hybrid architecture, highlighting how data is processed and stored within your infrastructure:
 
