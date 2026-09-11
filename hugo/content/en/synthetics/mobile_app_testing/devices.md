@@ -148,6 +148,11 @@ multifiltersearch:
       platform: Android
       eu: 'No'
       us: 'Yes'
+    - device: Samsung Galaxy A15 5G
+      os: Android 14
+      platform: Android
+      eu: 'No'
+      us: 'Yes'
     - device: Samsung Galaxy A71
       os: Android 11
       platform: Android
