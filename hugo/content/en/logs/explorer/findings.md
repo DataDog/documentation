@@ -46,13 +46,13 @@ In the toolbar above your results, click the {{< ui >}}Add Finding{{< /ui >}} bu
 
 The **Add Finding** button appears in the same place for every visualization.
 
-The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured. Capture the same query as a list, a timeseries, or other visualization.
+The finding stores your search query, time range, and [visualization][4], including any group-by and aggregation you configured.
 
 {{< img src="logs/explorer/findings/add_finding_timeseries_viz.png" alt="The Add Finding button in the results toolbar, with a tooltip showing the keyboard shortcut" style="width:80%;" >}}
 
 ### Individual log events
 
-Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} icon, or press **Cmd**/**Ctrl** + **S**. This captures the whole log event side panel to return to later.
+Click a log event in your results to open the [log side panel][5]. Hover over the **Log Message** section and click the {{< ui >}}Add a finding{{< /ui >}} button, or press **Cmd**/**Ctrl** + **S**. This captures the whole log event side panel to return to later.
 
 Capturing the log event also captures the query that produced the log side panel. Returning to the finding reopens the log side panel with the corresponding query in the background.
 
@@ -64,7 +64,7 @@ To capture part of a log message, select the text in the **Log Message** section
 
 To capture attribute values, select the text and press **Cmd**/**Ctrl** + **S**.
 
-In both cases, the finding stores the text you selected. You can use the text to return to the log event side panel.
+In both cases, the finding stores the text you selected. You can use the finding to return to the log event side panel.
 
 ## Return to a finding
 
@@ -76,7 +76,7 @@ Each finding keeps the query and absolute time range. In the log explorer, you c
 
 Select one or more findings to act on them together:
 
-- To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also just click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat will open with the selected findings attached as context.
+- To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat will open with the selected findings attached as context.
 - To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. 
 
 Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Notes on findings will also be sent.
@@ -95,7 +95,7 @@ To delete one finding, hover over it and use the delete button on the top right 
 The clear all button in the Findings panel deletes all findings.
 <!-- Does the clear all button warn before emptying a full panel? -->
 
-To restore a finding right after deleting it, click {{< ui >}}Undo{{< /ui >}} in the message that appears, or press **Cmd**/**Ctrl** + **Z**.
+To restore a finding after deleting it, click {{< ui >}}Undo{{< /ui >}} in the message that appears, or press **Cmd**/**Ctrl** + **Z**.
 
 ## Keyboard shortcuts
 
