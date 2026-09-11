@@ -567,7 +567,7 @@
           "entries": [
             {
               "description": "",
-              "code": "\"\"\"\nList all AWS integrations returns \"AWS Accounts List object\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nList all AWS integrations returns \"AWS Accounts List object\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v2.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
               "syntax": "python"
             }
           ]
@@ -578,7 +578,7 @@
           "entries": [
             {
               "description": "",
-              "code": "# List all AWS integrations returns \"AWS Accounts List object\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V2::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n# List all AWS integrations returns \"AWS Accounts List object\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V2::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
               "syntax": "ruby"
             }
           ]
@@ -589,7 +589,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV2.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"AWS Accounts List object\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV2\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV2.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV2.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
             }
           ]
@@ -600,7 +600,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v2.api.AwsIntegrationApi;\nimport com.datadog.api.client.v2.model.AWSAccountsResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountsResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"AWS Accounts List object\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v2.api.AwsIntegrationApi;\nimport com.datadog.api.client.v2.model.AWSAccountsResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountsResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
               "syntax": "java"
             }
           ]
@@ -611,7 +611,7 @@
           "entries": [
             {
               "description": "",
-              "code": "/**\n * List all AWS integrations returns \"AWS Accounts List object\" response\n */\n\nimport { client, v2 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v2.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v2.AWSAccountsResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n/**\n * List all AWS integrations returns \"AWS Accounts List object\" response\n */\n\nimport { client, v2 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v2.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v2.AWSAccountsResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
               "syntax": "typescript"
             }
           ]
@@ -622,7 +622,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"AWS Accounts List object\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV2::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV2::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"AWS Accounts List object\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV2::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV2::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
               "syntax": "rust"
             }
           ]
@@ -902,7 +902,7 @@
           "entries": [
             {
               "description": "",
-              "code": "\"\"\"\nList all AWS integrations returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nList all AWS integrations returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.aws_integration_api import AWSIntegrationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AWSIntegrationApi(api_client)\n    response = api_instance.list_aws_accounts()\n\n    print(response)\n",
               "syntax": "python"
             }
           ]
@@ -913,7 +913,7 @@
           "entries": [
             {
               "description": "",
-              "code": "# List all AWS integrations returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n# List all AWS integrations returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::AWSIntegrationAPI.new\np api_instance.list_aws_accounts()\n",
               "syntax": "ruby"
             }
           ]
@@ -924,7 +924,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV1.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewAWSIntegrationApi(apiClient)\n\tresp, r, err := api.ListAWSAccounts(ctx, *datadogV1.NewListAWSAccountsOptionalParameters())\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AWSIntegrationApi.ListAWSAccounts`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AWSIntegrationApi.ListAWSAccounts`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
             }
           ]
@@ -935,7 +935,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.AwsIntegrationApi;\nimport com.datadog.api.client.v1.model.AWSAccountListResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountListResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.AwsIntegrationApi;\nimport com.datadog.api.client.v1.model.AWSAccountListResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    AwsIntegrationApi apiInstance = new AwsIntegrationApi(defaultClient);\n\n    try {\n      AWSAccountListResponse result = apiInstance.listAWSAccounts();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling AwsIntegrationApi#listAWSAccounts\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
               "syntax": "java"
             }
           ]
@@ -946,7 +946,7 @@
           "entries": [
             {
               "description": "",
-              "code": "/**\n * List all AWS integrations returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v1.AWSAccountListResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n/**\n * List all AWS integrations returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.AWSIntegrationApi(configuration);\n\napiInstance\n  .listAWSAccounts()\n  .then((data: v1.AWSAccountListResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
               "syntax": "typescript"
             }
           ]
@@ -957,7 +957,7 @@
           "entries": [
             {
               "description": "",
-              "code": "// List all AWS integrations returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV1::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// List all AWS integrations returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_aws_integration::AWSIntegrationAPI;\nuse datadog_api_client::datadogV1::api_aws_integration::ListAWSAccountsOptionalParams;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = AWSIntegrationAPI::with_config(configuration);\n    let resp = api\n        .list_aws_accounts(ListAWSAccountsOptionalParams::default())\n        .await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
               "syntax": "rust"
             }
           ]

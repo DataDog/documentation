@@ -3322,6 +3322,7 @@ __metadata:
     rollup-plugin-visualizer: "npm:^7.0.1"
     sass: "npm:^1.102.0"
     shiki: "npm:^4.3.1"
+    tar: "npm:^7.5.4"
     turndown: "npm:^7.2.4"
     typescript: "npm:^5.9.3"
     typesense: "npm:^3.0.6"
