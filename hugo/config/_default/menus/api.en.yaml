@@ -16999,6 +16999,19 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get OpenID Connect provider metadata
+      url: /api/latest/oauth2-client-public/get-openid-connect-provider-metadata/
+      identifier: oauth2-client-public-get-openid-connect-provider-metadata
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCDiscoveryDocument
+        unstable:
+          - v2
+        order: 6
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration

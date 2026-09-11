@@ -74540,6 +74540,55 @@ components:
       required:
         - data
       type: object
+    OIDCDiscoveryDocument:
+      description: OpenID Connect provider metadata.
+      properties:
+        authorization_endpoint:
+          description: URL of the OAuth2 authorization endpoint.
+          example: https://app.datadoghq.com/oauth2/v1/authorize
+          type: string
+        id_token_signing_alg_values_supported:
+          description: Signing algorithms supported for ID tokens.
+          example:
+            - RS256
+          items:
+            type: string
+          type: array
+        issuer:
+          description: URL identifying the OpenID Connect issuer.
+          example: https://app.datadoghq.com/api/v2/oauth2
+          type: string
+        jwks_uri:
+          description: URL of the JSON Web Key Set used to verify ID token signatures.
+          example: https://app.datadoghq.com/oauth2/v1/keys
+          type: string
+        response_types_supported:
+          description: OAuth2 response types supported by the provider.
+          example:
+            - code
+          items:
+            type: string
+          type: array
+        subject_types_supported:
+          description: Subject identifier types supported by the provider.
+          example:
+            - public
+          items:
+            type: string
+          type: array
+        token_endpoint:
+          description: URL of the OAuth2 token endpoint.
+          example: https://app.datadoghq.com/api/v2/oauth2/token
+          type: string
+      required:
+        - issuer
+        - authorization_endpoint
+        - token_endpoint
+        - jwks_uri
+        - response_types_supported
+        - subject_types_supported
+        - id_token_signing_alg_values_supported
+      type: object
     ObservabilityPipeline:
       description: Top-level schema representing a pipeline.
       properties:
@@ -185434,6 +185483,40 @@ paths:
         operator: OR
         permissions:
           - network_connections_read
+  /api/v2/oauth2/.well-known/openid-configuration:
+    get:
+      description: Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.
+      operationId: GetOIDCDiscoveryDocument
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    authorization_endpoint: https://app.datadoghq.com/oauth2/v1/authorize
+                    id_token_signing_alg_values_supported:
+                      - RS256
+                    issuer: https://app.datadoghq.com/api/v2/oauth2
+                    jwks_uri: https://app.datadoghq.com/oauth2/v1/keys
+                    response_types_supported:
+                      - code
+                    subject_types_supported:
+                      - public
+                    token_endpoint: https://app.datadoghq.com/api/v2/oauth2/token
+              schema:
+                $ref: "#/components/schemas/OIDCDiscoveryDocument"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security: []
+      summary: Get OpenID Connect provider metadata
+      tags:
+        - OAuth2 Client Public
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/oauth2/.well-known/sites:
     get:
       description: Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.
