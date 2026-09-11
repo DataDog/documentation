@@ -9,7 +9,7 @@
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
-import { SDK_REPOS, type SdkRepo } from "../lib/websitesSourcesData.ts";
+import { SDK_REPOS, type SdkRepo } from "../websitesSourcesData.ts";
 import { runGit, sdkRepositoryUrl } from "./git.ts";
 import { logProgress } from "./logging.ts";
 import { stagedRelativePathFor } from "./pathResolution.ts";

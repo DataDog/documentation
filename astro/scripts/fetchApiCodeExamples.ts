@@ -7,7 +7,7 @@
  *   resolve pins -> resolve refs -> clone six SDK repos -> transform paths
  *   -> stage examples/v* -> stage the committed legacy .py/.rb files from hugo/
  *
- * Each step lives in `apiCodeExamples/`; `main` below is the whole sequence.
+ * Each step lives in `lib/apiCodeExamples/`; `main` below is the whole sequence.
  *
  * Runs as TypeScript directly under Node 24's type-stripping — no build step,
  * which is why relative imports carry their `.ts` extension.
@@ -25,22 +25,25 @@
  */
 
 import { fileURLToPath } from "node:url";
-import { readDocsBranch } from "./apiCodeExamples/git.ts";
+import { readDocsBranch } from "./lib/apiCodeExamples/git.ts";
 import {
   logError,
   logProgress,
   logWarning,
-} from "./apiCodeExamples/logging.ts";
-import { readSdkPins, resolveAllSdkRefs } from "./apiCodeExamples/sdkRefs.ts";
-import { stageHugoLegacyExamples } from "./apiCodeExamples/stageHugoLegacyExamples.ts";
-import { stageSdkExamples } from "./apiCodeExamples/stageSdkExamples.ts";
-import { resetStagedTree } from "./apiCodeExamples/stagedTree.ts";
+} from "./lib/apiCodeExamples/logging.ts";
+import {
+  readSdkPins,
+  resolveAllSdkRefs,
+} from "./lib/apiCodeExamples/sdkRefs.ts";
+import { stageHugoLegacyExamples } from "./lib/apiCodeExamples/stageHugoLegacyExamples.ts";
+import { stageSdkExamples } from "./lib/apiCodeExamples/stageSdkExamples.ts";
+import { resetStagedTree } from "./lib/apiCodeExamples/stagedTree.ts";
 import {
   describeBestEffortFallback,
   readStampIfAny,
   stagedTreeIsCurrent,
   writeStamp,
-} from "./apiCodeExamples/stamp.ts";
+} from "./lib/apiCodeExamples/stamp.ts";
 
 interface FetchOptions {
   pinsPath: string | null;

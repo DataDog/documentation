@@ -9,7 +9,7 @@ import {
   SDK_REPOS,
   type SdkPins,
   type SdkRepo,
-} from "../lib/websitesSourcesData.ts";
+} from "../websitesSourcesData.ts";
 import { runGit, sdkRepositoryUrl } from "./git.ts";
 import { logProgress } from "./logging.ts";
 
