@@ -13,7 +13,7 @@ further_reading:
 ---
 
 {{< beta-callout url="#" btn_hidden="true" >}}
-Continuous tracing with GPU Monitoring is in Early Access Preview. 
+Continuous tracing with GPU Monitoring is in Early Access Preview.
 {{< /beta-callout >}}
 
 ## Overview
