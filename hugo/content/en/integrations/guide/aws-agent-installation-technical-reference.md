@@ -44,7 +44,7 @@ Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, 
 
 ## How Agent installation works
 
-After you save an installation rule, Datadog resolves the query you defined into a fixed list of covered instances. Datadog then runs the following sequence against each one. For prerequisites, including supported platforms, see [Prerequisites][2] in the setup guide.
+After you save an installation rule, Datadog resolves the query you defined into the set of covered instances, and re-resolves it over time. Datadog runs the following sequence against each covered instance. For prerequisites, including supported platforms, see [Prerequisites][2] in the setup guide.
 
 1. Datadog checks that each covered instance is running, on a supported platform, and reachable by AWS Systems Manager.
 2. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
@@ -90,21 +90,23 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 ## Agent lifecycle and reconciliation
 
-### Rule coverage is fixed at save time
+### Rule coverage is evaluated over time
 
-A rule covers the list of instances it resolved to when you saved it, and Datadog does not instrument anything outside that list. Instances launched later are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
+A rule covers whichever instances match its query, and Datadog re-resolves that query against your current fleet on an ongoing basis. An instance that starts matching later, because it was launched after you saved the rule or because its tags changed, is instrumented automatically. Datadog does not instrument anything outside the query.
+
+To pin coverage to a fixed set of instances, write a rule that matches a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags.
 
 ### How Datadog keeps covered instances in sync
 
 Datadog continuously maintains the state you define on the covered instances:
 
-- A full reconciliation runs hourly per AWS account. Reconciliation reinstalls the Agent if it goes missing, retries anything that failed, and cleans up instances that no longer exist.
+- A full reconciliation runs hourly per AWS account. Reconciliation re-resolves each rule and installs the Agent on instances that have started matching. It also reinstalls the Agent if it goes missing, retries anything that failed, and cleans up instances that no longer exist.
 - Already-installed instances are re-verified about once per day rather than every hour, to avoid unnecessary activity.
 - Change events from the CloudFormation stack let Datadog react to covered instances within minutes, instead of waiting for the hourly pass.
 
-### What happens when you edit a rule
+### What happens when coverage changes
 
-Datadog re-resolves your query and compares it against the previous list. Instances no longer covered have the Agent uninstalled. Newly covered instances have the Agent installed. Deleting a rule uninstalls the Agent from everything the rule covered.
+Whenever Datadog re-resolves a rule, either because you edited it or as part of ongoing evaluation, it compares the result against the previous set. Instances no longer covered have the Agent uninstalled. Newly covered instances have the Agent installed. Deleting a rule uninstalls the Agent from everything the rule covered.
 
 ### Terminated or stopped instances
 
@@ -115,12 +117,12 @@ Datadog detects terminated instances on the next hourly pass and cleans up the I
 Datadog retries with an increasing delay (1 hour, then 2 hours, up to once per day) and continues retrying. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
 
 <div class="alert alert-warning">
-When someone manually removes the Agent from a covered instance, the next reconciliation reinstalls it. The rule is the source of truth. To stop coverage, change the rule.
+When someone manually removes the Agent from a covered instance, the next reconciliation reinstalls it. The rule is the source of truth. To stop coverage, change the rule so that the instance no longer matches it.
 </div>
 
 ## Uninstall the Agent
 
-Uninstalling removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for that instance. To uninstall, remove instances from a rule, edit the rule's query, or delete the rule.
+Uninstalling removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for that instance. To uninstall, edit the rule's query so the instances no longer match, remove instances from a rule, or delete the rule.
 
 ## Further reading
 
