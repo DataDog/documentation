@@ -6,9 +6,9 @@ We support auto-instrumentation for the following CI providers:
 | GitLab | [Datadog Test Visibility GitLab Script][3] |
 | CircleCI | [Datadog Test Visibility CircleCI Orb][4] |
 
-Auto-instrumentation cannot cross a container boundary. If your CI job launches tests in a separate container, use manual instrumentation unless the job builds the test image after the auto-instrumentation step. For more information, see [Tests in Containers][5].
+Auto-instrumentation runs on the CI executor and does not automatically apply to tests in a separate container. Before using it for containerized tests, see [Tests in Containers][5].
 
-If you are using auto-instrumentation for one of these providers, you can skip the rest of the setup steps below.
+If the auto-instrumentation step configures the process that runs your tests, you can skip the rest of the setup steps below.
 
 [1]: https://github.com/marketplace/actions/configure-datadog-test-visibility
 [2]: /continuous_integration/pipelines/jenkins/#enable-test-optimization

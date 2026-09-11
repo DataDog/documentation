@@ -24,12 +24,10 @@ Variables set in the CI job or exported by an auto-instrumentation step are not 
 
 ## Choose an instrumentation method
 
-Auto-instrumentation injects tracer code into the checked-out project. Whether that code reaches the test container depends on how the test image is created.
+Auto-instrumentation runs on the CI executor and does not automatically cross into a separately launched test container.
 
-- **Image built in the current CI job:** The job builds the exact image used for tests with `docker build`, `docker compose build <SERVICE>`, `docker compose run --build`, or an equivalent command. A separate build step earlier in the same job still counts as a current-job build. Place the auto-instrumentation step before the image build. Confirm that the build copies the modified dependency files or workspace and installs dependencies after auto-instrumentation runs.
-- **Prebuilt image:** The job only pulls or references an image tag or digest and never builds that exact image from the checked-out repository. A Dockerfile in the repository does not count unless the job uses it to build the test image. Use manual instrumentation so the tracer library is installed in the test container. Do not add the tracer dependency manually while retaining an auto-instrumentation step that cannot affect the image.
-
-Do not select manual instrumentation only because tests run in Docker. When the current job builds the test image from the instrumented workspace, use auto-instrumentation before the build.
+- **Image built in the current CI job:** Run auto-instrumentation before the image build. Use this method only if the build copies the tracer artifacts or dependency changes produced by the integration and you forward its runtime variables. Otherwise, use manual instrumentation.
+- **Prebuilt image:** If the job only pulls or references an image tag or digest, use manual instrumentation. A Dockerfile in the repository does not count unless the job uses it to build the test image.
 
 ## Manage environment variables
 
