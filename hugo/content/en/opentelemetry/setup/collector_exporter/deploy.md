@@ -9,6 +9,9 @@ further_reading:
 - link: "https://opentelemetry.io/docs/collector/deployment/"
   tag: "External Site"
   text: "OpenTelemetry Collector Deployment"
+- link: "https://www.datadoghq.com/architecture/opentelemetry-collector-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "OpenTelemetry Collector in Kubernetes"
 ---
 
 This page guides you through various deployment options for the OpenTelemetry Collector with the Datadog Exporter, allowing you to send traces, metrics, and logs to Datadog.

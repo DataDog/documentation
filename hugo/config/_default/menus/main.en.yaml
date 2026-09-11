@@ -7528,6 +7528,11 @@ menu:
       url: logs/explorer/archive_search/
       parent: log_explorer
       weight: 515
+    - name: Findings
+      identifier: log_explorer_findings
+      url: logs/explorer/findings/
+      parent: log_explorer
+      weight: 516
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
