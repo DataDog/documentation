@@ -21,19 +21,24 @@ Datadog Agent는 최신 암호 스위트를 사용하도록 구성되어 있으�
 
 2026년 9월 1일부터 Datadog은 다음 암호 스위트만 허용합니다.
 
+### TLS 1.2 {#tls-12}
+
 | 코드         | IANA 이름                                         |
 |--------------|---------------------------------------------------|
-| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`        |
-| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`          |
-| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`        |
-| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`          |
-| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256` |
-| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`   |
-| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`          |
-| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`          |
-| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`                        |
-| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`                        |
-| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`                  |
+| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`         |
+| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`           |
+| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`         |
+| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`           |
+| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`   |
+| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`     |
+
+### TLS 1.3 {#tls-13}
+
+| 코드         | IANA Name                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
+| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`   |
 
 {{< /site-region >}}
 
@@ -41,12 +46,21 @@ Datadog Agent는 최신 암호 스위트를 사용하도록 구성되어 있으�
 
 Datadog은 다음 암호 스위트를 허용합니다 {{< region-param key="dd_site_name" >}}.
 
+### TLS 1.2 {#tls-12-1}
+
 | 코드         | IANA 이름                                  |
 |--------------|--------------------------------------------|
 | `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`    |
 | `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`    |
 | `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`  |
 | `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`  |
+
+### TLS 1.3 {#tls-13-1}
+
+| 코드         | IANA Name                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
 
 {{< /site-region >}}
 
@@ -62,6 +76,8 @@ Datadog은 최신 보안 표준에 따라 취약하다고 간주되는 다음 �
 
 | 코드         | IANA 이름                                  | OpenSSL 이름             |
 |--------------|--------------------------------------------|--------------------------|
+| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`     | `ECDHE-ECDSA-AES128-SHA` |
+| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`     | `ECDHE-ECDSA-AES256-SHA` |
 | `0xC0,0x14`  | `TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA`       | `ECDHE-RSA-AES256-SHA`   |
 | `0xC0,0x13`  | `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA`       | `ECDHE-RSA-AES128-SHA`   |
 | `0x00,0x9D`  | `TLS_RSA_WITH_AES_256_GCM_SHA384`          | `AES256-GCM-SHA384`      |

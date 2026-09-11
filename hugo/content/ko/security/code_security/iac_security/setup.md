@@ -16,7 +16,7 @@ further_reading:
   text: IaC Security 규칙
 title: IaC Security 설정
 ---
-다음 지침을 따라 Code Security용 Infrastructure as Code (IaC) Security를 활성화하세요. IaC Security는 GitHub, GitLab 및 Azure DevOps 리포지토리에 저장된 여러 IaC 구성을 지원합니다.
+다음 지침을 따라 Code Security용 Infrastructure as Code (IaC) Security를 활성화하세요. IaC Security는 GitHub, GitLab, Azure DevOps, Bitbucket Cloud Premium 리포지토리에 저장된 여러 IaC 구성을 지원합니다.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -88,6 +88,30 @@ Azure DevOps 통합을 설정한 후 리포지토리에 대해 IaC Security를 �
     -  단일 리포지토리에 대해 활성화하려면 해당 리포지토리의 {{< ui >}}IaC{{< /ui >}} 스위치를 ON으로 전환하세요.
 
 [1]: /ko/integrations/azure-devops-source-code/#source-code-functionality
+[2]: https://app.datadoghq.com/security/configuration/code-security/setup
+
+{{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+### Bitbucket 통합 설치 {#install-the-bitbucket-integration}
+
+Bitbucket Cloud 워크스페이스를 연결하고 PR 댓글을 활성화하려면 [Bitbucket 소스 코드][1]의 설정 지침을 참조하세요.
+
+### 리포지토리에 대해 IaC Security 활성화 {#enable-iac-security-for-your-repositories-3}
+
+Bitbucket 통합을 설정한 후 리포지토리에 대해 IaC Security를 활성화합니다.
+
+1. [Code Security 설정 페이지][2]에서 {{< ui >}}Activate scanning for your repositories{{< /ui >}} 섹션을 확장합니다.
+1.  {{< ui >}}Select your source code management provider{{< /ui >}}아래에서 {{< ui >}}Bitbucket{{< /ui >}}을 선택합니다.
+1. {{< ui >}}Select where your scans should run{{< /ui >}} 아래에서 {{< ui >}}Datadog{{< /ui >}}을 선택합니다.
+1. {{< ui >}}Connect your Bitbucket repositories{{< /ui >}} 아래에서 다음 중 하나를 수행합니다.
+    - 새 Bitbucket Cloud 워크스페이스를 연결하려면 {{< ui >}}Connect Bitbucket Account{{< /ui >}}를 클릭합니다.
+    - 기존 워크플레이스에 대해 IaC Security를 활성화하려면 {{< ui >}}Select repositories{{< /ui >}}를 클릭하거나 Code Security가 이미 활성화된 경우 {{< ui >}}Edit{{< /ui >}}를 클릭합니다.
+1. IaC Security를 활성화하려면 다음 중 하나를 수행합니다.
+    -  모든 리포지토리에 대해 활성화하려면 {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}}을 ON 위치로 전환하세요.
+    -  단일 리포지토리에 대해 활성화하려면 해당 리포지토리의 {{< ui >}}IaC{{< /ui >}} 스위치를 ON으로 전환하세요.
+
+[1]: /ko/integrations/bitbucket-source-code/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
