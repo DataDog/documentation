@@ -88,6 +88,16 @@ Because Datadog re-checks the rule over time, the query you write determines how
 Coverage works in both directions. When an instance stops matching the rule, Datadog uninstalls the Agent from it. A tag change made in AWS can therefore remove monitoring from an instance without anyone editing the rule in Datadog.
 </div>
 
+### Best practices for rules and tags
+
+**Match tags your team owns.** When a rule matches a tag that another team controls, that team can add or remove monitoring by retagging, without opening Datadog. Keeping the tag and the rule under the same ownership keeps that decision with the people who made it.
+
+**Avoid tags that change during normal operations.** Tags that move with an environment promotion, a deployment, or an autoscaling template rewrite instances in and out of coverage each time they change. Match on attributes that stay stable for the life of the instance.
+
+**Treat the rule as the full picture for the account.** Each AWS account has one rule per resource type. Every edit re-scopes all coverage for that resource type at once, rather than adding to what you had. Review the matching instances before you save.
+
+**Carve out exceptions with exclusions.** When a broad rule covers instances you want to skip, exclude them from the same rule instead of switching to a hand-picked list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
+
 ## Install the Agent
 
 You can start Agent installation from two entry points, depending on how much control you want over which instances are instrumented:
