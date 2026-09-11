@@ -21,7 +21,7 @@ further_reading:
 
 Findings helps you capture, organize, and reuse important context during investigations in [Log Explorer][1].
 
-Use findings to collect evidence, compare results, and build context as your investigation evolves. Save findings as checkpoints so you can easily backtrack or return to useful queries and logs. Arrange findings to visualize and remember your investigation path, and add notes to findings to record what you observed. You can also use findings as context to [Ask Bits][2], or add them to a [Notebook][3] for a report to share with others.
+Use findings to collect evidence, compare results, and build context as your investigation evolves. Save findings as checkpoints so you can backtrack or return to useful queries and logs. Arrange findings to visualize and remember your investigation path, and add notes to findings to record what you observed. You can also use findings as context to [Ask Bits][2], or add them to a [Notebook][3] for a report to share with others.
 
 Save log lines, visualizations, and queries as Findings with the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. **Double-click** or use **Open in Explorer** to return to findings in the Log Explorer. Branch into new questions without losing track of earlier observations or investigative paths.
 
@@ -76,16 +76,16 @@ Each finding keeps the query and absolute time range. In the log explorer, you c
 
 Select one or more findings to act on them together:
 
-- To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat will open with the selected findings attached as context.
+- To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat opens with the selected findings attached as context.
 - To add findings to a [Notebook][3], click {{< ui >}}Open in Notebooks{{< /ui >}}. Choose a new or existing notebook. 
 
-Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Notes on findings will also be sent.
+Send only the findings that relate to your question. For example, if three of the eight findings in your panel cover the error you're asking about, select those three. Notes on findings are also sent.
 
 ## Organize your findings
 
 Drag a finding to move or resize it. Datadog saves the layout you build, so the organization looks the same the next time you open the panel.
 
-To reset your organization, you can use the auto-organize option. This will group findings by the query they came from. So if you made different visualizations from the same query or saved specific log lines from that query, those findings will be grouped together with auto-organize. Moving, resizing, or deleting a finding removes the visual grouping indication in the background.
+To reset your organization, use the auto-organize option, which groups findings by the query they came from. If you made different visualizations from the same query or saved specific log lines from that query, those findings are grouped together. Moving, resizing, or deleting a finding removes the visual grouping indication in the background.
 <!-- A screenshot of the panel controls would make the auto-organize option findable. Add one alongside the GA video. -->
 
 ## Delete findings
@@ -111,7 +111,7 @@ To restore a finding after deleting it, click {{< ui >}}Undo{{< /ui >}} in the m
 
 <!-- Confirm the Undo and Redo bindings, which have not been verified against the build. -->
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
