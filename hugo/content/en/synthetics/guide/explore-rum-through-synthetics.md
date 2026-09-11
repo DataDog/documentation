@@ -41,7 +41,7 @@ For more information, see [Synthetic Monitoring Settings][6].
 
 ## Synthetic Monitoring to RUM Explorer
 
-Navigate to your [list of browser tests][7] and click on a sample test run. 
+Navigate to your [list of browser tests][7] and open a test to view the Test Details page. Open a test run from the {{< ui >}}Activity{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} tab. Select a step (for example, `Click on div Checkout`), then select the {{< ui >}}Traces{{< /ui >}} tab to view RUM data from the Synthetic browser test.
 
 {{< img src="synthetics/guide/rum_in_synthetics/synthetic_test_generated_rum_data.png" alt="Browser test step details side panel with a note that the synthetic test generated RUM data." style="width:100%;" >}}
 
