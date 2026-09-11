@@ -179,12 +179,9 @@ function loadPage(newUrl) {
                 // update mainContent-wrapper classes
                 mainContentWrapper.className = `${newmainContentWrapper.classList}`;
 
-                // The left nav is server-rendered scoped to the current page's top-level section
-                // (see hugo/layouts/partials/nav/left-nav.html), so its content must be synced on
-                // every navigation -- otherwise navigating into a different section would leave the
-                // old section's nav items in place instead of the new section's. Swapping innerHTML
-                // (rather than replacing the container node) preserves the click listener bound to
-                // it in datadog-docs.js.
+                // left-nav.html renders scoped to the page's section, so it must be resynced on
+                // every pjax nav or the old section's items would linger. innerHTML swap (not node
+                // replacement) preserves the click listener bound to this container in datadog-docs.js.
                 const currentLeftNav = document.querySelector('.sidenav-nav-js-load');
                 const newLeftNav = newDocument.querySelector('.sidenav-nav-js-load');
 
