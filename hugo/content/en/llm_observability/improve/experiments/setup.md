@@ -9,7 +9,10 @@ further_reading:
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
-This page describes how to set up and use Agent Observability Experiments with the Python SDK.
+This page describes how to set up and use Agent Observability Experiments with the Python or Node.js SDK.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ## Set up Agent Observability
 
@@ -342,14 +345,148 @@ To create an experiment:
    print(f"View experiment: {experiment.url}")
    ```
 
-Note: LLM Experiments traces are retained for 90 days.
-
 [1]: /llm_observability/improve/datasets
 [2]: /llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrument/auto_instrumentation?tab=python
 [4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: /llm_observability/instrument/agent_observability_and_apm/
 [6]: /llm_observability/instrument/otel_instrumentation
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+## Set up Agent Observability
+
+If you have not already set up Agent Observability:
+
+1. Install the Agent Observability Node.js SDK:
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. Set the API key, application key, and Datadog site:
+
+   ```shell
+   export DD_API_KEY="<YOUR_API_KEY>"
+   export DD_APP_KEY="<YOUR_APP_KEY>"
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Initialize the tracer with the ML application and Experiments project names:
+
+   ```javascript
+   const tracer = require('dd-trace').init({
+     llmobs: {
+       mlApp: 'capitals-app',
+       projectName: 'capitals-project'
+     }
+   })
+   ```
+
+   <div class="alert alert-warning">You must supply both <code>DD_API_KEY</code> and <code>DD_APP_KEY</code>.</div>
+
+## Create a project
+
+Projects contain datasets and experiments. The SDK uses the configured Experiments project name and
+creates the project if it does not exist.
+
+Set `llmobs.projectName` during tracer initialization. You can also set `DD_LLMOBS_PROJECT_NAME`. If neither value is
+set, the SDK uses `default-project`.
+
+## Create a dataset
+
+Create a dataset with the `tracer.llmobs.experiments` API:
+
+```javascript
+const { experiments } = tracer.llmobs
+
+const dataset = experiments.createDataset('capitals-of-the-world', {
+  description: 'Questions and expected capital cities',
+  records: [
+    {
+      inputData: { question: 'What is the capital of China?' },
+      expectedOutput: 'Beijing',
+      metadata: { difficulty: 'medium' }
+    },
+    {
+      inputData: { question: 'What is the capital of Japan?' },
+      expectedOutput: 'Tokyo',
+      metadata: { difficulty: 'medium' }
+    }
+  ]
+})
+```
+
+The SDK pushes the dataset when the experiment starts. To use an existing dataset, call
+`await experiments.pullDataset('<DATASET_NAME>')`.
+
+## Create an experiment
+
+An experiment runs a task for each dataset record and evaluates each result.
+
+### 1. Define a task
+
+The task receives the record input. It can also receive the experiment configuration and optional record metadata.
+
+```javascript
+function task (inputData) {
+  const { question } = inputData
+
+  // Add the LLM or agent call to evaluate.
+  return question.includes('China') ? 'Beijing' : 'Tokyo'
+}
+```
+
+Calls to [supported Node.js integrations](/llm_observability/instrument/auto_instrumentation?tab=nodejs) inside the task
+are traced as children of the experiment span.
+
+### 2. Define evaluators
+
+An evaluator receives the record input, task output, and expected output. Return a boolean, number, string, or JSON
+value to create the corresponding evaluation metric.
+
+```javascript
+function exactMatch (_inputData, outputData, expectedOutput) {
+  return outputData === expectedOutput
+}
+```
+
+### 3. Create and run the experiment
+
+```javascript
+async function runExperiment () {
+  const experiment = experiments.experiment({
+    name: 'capital-cities-test',
+    dataset,
+    task,
+    evaluators: {
+      exact_match: exactMatch
+    },
+    description: 'Testing capital cities knowledge',
+    config: {
+      modelName: 'gpt-4',
+      version: '1.0'
+    }
+  })
+
+  const result = await experiment.run()
+  console.log(`View experiment: ${result.url}`)
+}
+
+runExperiment().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+The result contains each record output, evaluator score, error, and a URL for the experiment in Datadog.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Note: LLM Experiments traces are retained for 90 days.
 
 ## Further reading
 
