@@ -19,11 +19,11 @@ further_reading:
 
 ## Overview
 
-Findings helps you capture, organize, and reuse important context during log investigations in [Log Explorer][1].
+Findings helps you capture, organize, and reuse important context during investigations in [Log Explorer][1].
 
-Use findings as checkpoints in an investigation. Save a query or aggregation worth returning to, then branch into new questions and backtrack if a path doesn't provide helpful results. Arrange findings in the panel to map how your paths relate, and add notes to record what you observed. Select findings to use as context for [Bits AI][2] questions, or send them to a [Notebook][3] to share with others.
+Use findings to collect evidence, compare results, and build context as your investigation evolves. Save findings as checkpoints so you can easily backtrack or return to useful queries and logs. Arrange findings to visualize and remember your investigation path, and add notes to findings to record what you observed. You can also use findings as context to [Ask Bits][2], or add them to a [Notebook][3] for a report to share with others.
 
-To save log events, visualizations, and queries as findings while investigating, use the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. To go back to a finding in Log Explorer, **double-click** it, or click **Open in Explorer** on the finding.
+Save log lines, visualizations, and queries as Findings with the **Add Finding** button or the **Cmd**/**Ctrl** + **S** keyboard shortcut. **Double-click** or use **Open in Explorer** to return to findings in the Log Explorer. Branch into new questions without losing track of earlier observations or investigative paths.
 
 {{< img src="logs/explorer/findings_demo-2.mp4" alt="Findings demo in Log Explorer" video=true style="width:100%;" >}}
 
