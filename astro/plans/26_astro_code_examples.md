@@ -409,8 +409,16 @@ a filesystem glob would return whatever Hugo happens to have staged.
 
 #### D13 — Freeze the example sources as a test fixture
 
-Add `tests/fixtures/api/examples/` holding the 48 files the seven `getOperationView`
-snapshots actually embed, and point the unit suite at it.
+Add `tests/fixtures/api/examples/` holding 24 of the files the seven `getOperationView`
+snapshots embed, and point the unit suite at it.
+
+**What decides which 24.** `aws-integration/ListAWSAccounts` carries all six languages, in
+both `v1` and `v2` — it is the one operation that exists in both, so it also covers
+`FILE_KEY_RE`'s version capture, and keeping it complete is what pins the `LANGUAGES`
+table's order, extensions and `syntax` values. Every other operation carries two, `.pybeta`
+and `.go`: one beta-renamed extension and one plain, enough that each snapshot still
+asserts a multi-tab render. The full matrix on all eight directories was 48 files that
+re-asserted the same table eight times.
 
 **This closes a hole that predates this plan:** `vitest.unit.config.ts:15-43` redirects
 only the two `full_spec.yaml` and two `CodeExamples.json`; the `import.meta.glob` at
@@ -542,8 +550,7 @@ scripts/
 api-code-examples/               # gitignored staging target; the build's only input
   v1/<category>/<Operation>.<ext>
   v2/<category>/<Operation>.<ext>
-tests/fixtures/api/examples/     # 48 frozen files, banner-prefixed (192 KB, not the
-                                 # ~40 KB estimated — real examples run longer)
+tests/fixtures/api/examples/     # 24 frozen files, banner-prefixed (96 KB)
 tests/integration/
   exampleBaseline.scaffold.test.ts   # throwaway (Step 2), deleted in Step 8
   example-baseline.json              # throwaway, deliberately not gitignored
@@ -647,8 +654,8 @@ where red-to-green is genuinely available: the seven `getOperationView` snapshot
 today by reading live Hugo build output, so a correct fixture makes them fail loudly the
 moment the glob moves.
 
-- Freeze the 48 files the snapshots actually embed into `tests/fixtures/api/examples/`,
-  each with the D14 provenance banner in its own comment syntax.
+- Freeze 24 of the files the snapshots embed into `tests/fixtures/api/examples/`, each with
+  the D14 provenance banner in its own comment syntax.
 - Repoint the new alias in `vitest.unit.config.ts` — one line, no `resolveId` interception
   and no double-slash workaround (contrast `:37-39`).
 - Regenerate both snapshot sets (`yarn test -u`), since the banner is now part of the

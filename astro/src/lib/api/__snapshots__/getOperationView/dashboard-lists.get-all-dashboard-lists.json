@@ -229,17 +229,6 @@
           ]
         },
         {
-          "language": "ruby",
-          "label": "Ruby",
-          "entries": [
-            {
-              "description": "",
-              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n# Get all dashboard lists returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::DashboardListsAPI.new\np api_instance.list_dashboard_lists()\n",
-              "syntax": "ruby"
-            }
-          ]
-        },
-        {
           "language": "go",
           "label": "Go",
           "entries": [
@@ -247,39 +236,6 @@
               "description": "",
               "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Get all dashboard lists returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewDashboardListsApi(apiClient)\n\tresp, r, err := api.ListDashboardLists(ctx)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `DashboardListsApi.ListDashboardLists`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `DashboardListsApi.ListDashboardLists`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
-            }
-          ]
-        },
-        {
-          "language": "java",
-          "label": "Java",
-          "entries": [
-            {
-              "description": "",
-              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Get all dashboard lists returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.DashboardListsApi;\nimport com.datadog.api.client.v1.model.DashboardListListResponse;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    DashboardListsApi apiInstance = new DashboardListsApi(defaultClient);\n\n    try {\n      DashboardListListResponse result = apiInstance.listDashboardLists();\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling DashboardListsApi#listDashboardLists\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
-              "syntax": "java"
-            }
-          ]
-        },
-        {
-          "language": "typescript",
-          "label": "TypeScript",
-          "entries": [
-            {
-              "description": "",
-              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n/**\n * Get all dashboard lists returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.DashboardListsApi(configuration);\n\napiInstance\n  .listDashboardLists()\n  .then((data: v1.DashboardListListResponse) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
-              "syntax": "typescript"
-            }
-          ]
-        },
-        {
-          "language": "rust",
-          "label": "Rust",
-          "entries": [
-            {
-              "description": "",
-              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Get all dashboard lists returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_dashboard_lists::DashboardListsAPI;\n\n#[tokio::main]\nasync fn main() {\n    let configuration = datadog::Configuration::new();\n    let api = DashboardListsAPI::with_config(configuration);\n    let resp = api.list_dashboard_lists().await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
-              "syntax": "rust"
             }
           ]
         }
