@@ -55,6 +55,8 @@ To use autocomplete and search, opt in to the [preview][17].
 
 ## Requirements
 
+### Datadog SDK
+
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
 
@@ -132,7 +134,7 @@ Enable Dynamic Instrumentation in-app in one of two ways:
 
 ### Enable manually {% #enable-manually %}
 
-Follow these steps if your SDK is below the [in-app minimum](#requirements), or if you want to manage enablement outside the Datadog UI.
+Follow these steps if your SDK is below the [in-app minimum](#datadog-sdk), or if you want to manage enablement outside the Datadog UI.
 
 {% /if %}
 
