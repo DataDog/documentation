@@ -4,170 +4,101 @@ aliases:
 - /product_analytics/user_retention/
 - /product_analytics/charts/user_retention/
 description: Measure user retention to understand overall user satisfaction with your application.
-further_reading:
-    - link: '/product_analytics/'
-      tag: Documentation
-      text: Product Analytics
-    - link: 'real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session'
-      tag: Documentation
-      text: Set user sessions
 ---
 
-## Overview
-Retention Analysis measures how often users are successfully returning to a page or action helping you assess the ongoing value of your products and features.
+Retention charts visualize how often users return to a page or action, helping you assess the ongoing value of your products and features.
 
-User retention is measured within a given cohort of users that you define. A cohort is a group of users who performed the start event, such as clicking a link. A user in the cohort is considered retained if they subsequently complete the configured return event, such as clicking the same link again or clicking a **Proceed to Payment** button.
+{{< img src="/product_analytics/retention/retention_chart.png" alt="An example Retention Analysis chart." style="width:90%;" >}}
+
+User retention is measured within a *cohort*, a group of users who performed a defined start event, such as clicking a specified link. A user in the cohort is *retained* if they subsequently complete the specified return event, such as clicking the same link again or proceeding to payment.
 
 Only views and actions can act as events.
 
 ## Prerequisites
 
-For user retention data to populate, you must set the `usr.id` attribute in your SDK. See the [instructions for sending unique user attributes][4].
-
-## Measuring retention events
-Product analytics support two types of retention event measurements:
-
-{{< img src="product_analytics/retention/pana_retention_measureby.png" alt="The two types of retention measurements available with product analytics" style="width:80%;" >}}
-
-
-### Return on
-For each cohort and return period, `Return on` calculates the percentage of users who triggered the return event during that specific period.
-
-`Return on` highlights the likelihood of users completing the return event, some period of time (for example, days or weeks), after the start event. This is especially helpful when assessing overall retention across your features and products.
-
-
-### Return on or after
-For each cohort and return period, `Return on or after` calculates the percentage of users who triggered the return event during that specific period or any subsequent period.
-
-`Return on or after` highlights users who either fully leave your product or stop using key functionalities, which is helpful when assessing the effectiveness of onboarding experiences.
+To populate retention data, set the `usr.id` attribute in your SDK. See [instructions for sending unique user attributes][1].
 
 ## Calculating retention events
-### What is a weighted average cohort
-The weighted average cohort summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average.
 
-This weighted average calculation is applied across all [visualization types](#visualization-types). For example, in the retention grid, the weighted average is used to populate the summary cell for each time interval.
+Retention values are calculated as a weighted average cohort, which summarizes overall cohort behavior by accounting for cohort size. Larger cohorts have more influence on the final value, making the result more representative than an average. Datadog applies this calculation across all visualization types. For example, in the retention grid, the weighted average populates the summary cell for each time interval.
 
-### Calculate a weighted average cohort
-To compute the value for a specific interval (such as Week 1 in the retention grid), multiply each cohort's value by its size, sum the results, and divide by the total cohort size. The formula is:
+To calculate the value for a specific interval, such as week 1 in the retention grid, multiply each cohort's value by its size. Sum the results, then divide by the total cohort size:
 
 ```
 Weighted Average = (Σ (cohort_value × cohort_size)) / (Σ cohort_size)
 ```
 
-The weighted average retention of **91% after 1 week** shown in the following retention graph is calculated as follows:
+For example, the weighted average retention of 91% after 1 week is calculated as:
 
 ```
 (99 * 1.8k + 92 * 2.35k + 81 * 1.75k) / (1.8k + 2.35k + 1.75k)
 ```
 
-This means each cohort's retention rate is scaled by its number of users before contributing to the overall metric.
+Each cohort's retention rate is scaled by its number of users before it contributes to the overall metric.
 
+{{< img src="/product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph showing a weighted average retention value." style="width:90%;" >}}
 
-{{< img src="product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph" style="width:80%;" >}}
+{{< alert level="info" >}}
+The retention chart displays disabled values when data is partial or incomplete. This occurs when the time period is ongoing and retention can't yet be fully calculated.
+{{< /alert >}}
 
+## Create a retention chart
 
-<div class="alert alert-info">
-<strong>Note:</strong> The retention chart displays greyed-out values when data is partial or incomplete. This occurs when the time period is ongoing and retention cannot yet be fully calculated.
-</div>
+1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Retention{{< /ui >}}.
 
-## Grouping retention events
-Use the `group by` function to break down retention based on events' attributes. This is helpful is you want to, for example, see how retention compares across user countries. The `group by` function is applied to the **start event**.
+2. Define start and return steps that you want to understand retention for.
 
+3. (Optional) Filter or group chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} or {{< ui >}}Compare by{{< /ui >}}.
 
-## Build a graph
+## Analyze a retention chart
 
-To build a retention graph, navigate to [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Charts{{< /ui >}}][1], click the {{< ui >}}Retention{{< /ui >}} tab, then follow the steps below.
+After you build a retention chart, it displays retention as a percentage or count for each cohort, broken down by the return periods you defined.
 
-### Step 1 - Define the starting and return events
-1. Select the view or action to act as the starting event for defining a group of users.<br>
-2. Select the view or action to act as the return event.
+{{< img src="/product_analytics/retention/retention_analysis.png" alt="A Retention chart with numbered callouts for the Advanced options return setting, the viewing and grouping controls, the chart type selector, the time range selector, and a cohort cell tooltip." style="width:90%;" >}}
 
-### Step 2 - Define the measures
-1. Select {{< ui >}}Retention rate{{< /ui >}} to see the data in percentages, or {{< ui >}}Unique users{{< /ui >}} to see the absolute number of users.
-2. Scope the retention measure {{< ui >}}Return on or after{{< /ui >}} or {{< ui >}}Return on{{< /ui >}} based on when the return event occurs.
-3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis. Consider the following when selecting a period size:
-- {{< ui >}}Daily retention{{< /ui >}}: Can be applied for up to a month.
-- {{< ui >}}Weekly retention{{< /ui >}}: Can be applied for up to a year.
-- {{< ui >}}Monthly retention{{< /ui >}}: Can be applied for up to 16 months.
+1. Use {{< ui >}}Advanced options{{< /ui >}} to scope which return events count toward retention.
 
-{{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
+   - {{< ui >}}Returned on{{< /ui >}}: Calculates the percentage of users who triggered the return event during a specific return period. Use this to see the likelihood of users completing the return event some period of time (for example, days or weeks) after the start event, which is useful for assessing overall retention across your features and products.
+   - {{< ui >}}Returned on or after{{< /ui >}}: Calculates the percentage of users who triggered the return event during a specific return period or any subsequent period. Use this to see users who either fully leave your product or stop using key functionality, which is useful for assessing the effectiveness of onboarding experiences.
 
+2. Use the {{< ui >}}Viewing{{< /ui >}} row to control what displays.
 
-### Step 3 - Define users and add filters
-Optionally, select a specific [segment][6] to measure the retention of its users. This defaults to all users. You can also add any desired filter criteria, such as `user country`, `device type`, or `operating system`.
+   - {{< ui >}}All Cohorts{{< /ui >}}, {{< ui >}}Weighted Average{{< /ui >}}, or a specific cohort: Selects which cohort is plotted. See [Calculating retention events](#calculating-retention-events) for how the weighted average is calculated.
+   - {{< ui >}}Unique users{{< /ui >}} or {{< ui >}}Unique accounts{{< /ui >}}: Selects whether retention is measured by `@usr.id`, which can reset when a user clears cookies or switches devices, or by `@account.id`, which tracks the same signed-in account across a longer period.
+   - {{< ui >}}Rate{{< /ui >}} or {{< ui >}}Count{{< /ui >}}: Selects whether to display retention as a percentage or an absolute number.
+   - {{< ui >}}Each day{{< /ui >}}, {{< ui >}}Each week{{< /ui >}}, or {{< ui >}}Each month{{< /ui >}}: Selects the time frame that groups return events. Daily retention can be applied for up to a month, weekly retention for up to a year, and monthly retention for up to 16 months.
 
+3. Use the chart type selector to switch between chart types.
 
-### Step 4 - Group by
-Optionally, `group by` event attributes to compare retention by device type, for example.
+   - {{< ui >}}Retention{{< /ui >}}: Includes both a retention curve, showing the change in retention for specified cohorts, and a retention grid, showing detailed data on cohorts across time periods.
+   - {{< ui >}}Timeseries{{< /ui >}}: Shows retention over calendar time for a single return period you choose, without a specific cohort focus.
+   - {{< ui >}}Query value{{< /ui >}}: Shows a single number, as a rate or count, for a single return period you choose, using whichever cohort is selected: the weighted average across cohorts, or one specific cohort.
+   - {{< ui >}}Top list{{< /ui >}}: If a {{< ui >}}Compare{{< /ui >}} property is specified, shows an ordered ranking of grouped results by retention rate or count for the specified period.
 
-## Analyze the graph
-For insights on user retention week over week, read each row of the graph horizontally from left to right.
+4. Use the time range selector to change the period of data the chart analyzes.
 
-You can click on an individual diagram cell to view a list of users, and export the list as a CSV:
+5. Hover over a cell to view the exact number of users who returned during that period, the return rate, and how it changed from the previous period. Click a cell to view a list of users, and export the list as a CSV.
 
-{{< img src="product_analytics/retention/pana_retention_export_ui.png" alt="Details panel for a diagram cell" style="width:90%;" >}}
+### Using matching vs. differing events
 
-The graph displays slightly different information depending on whether the initial and return events match.
+You can configure retention charts with the same or different start and return events.
 
-### Matching events
-If the starting and returning events match:
-- **Week 0** is always 100%, since it represents all of the users who completed the initial event.
-- The other cells compare the viewers in a given week to **Week 0**, displaying the percentage of the cohort who completed the event in that week.
+If the events match, week 0 is always 100%, since it represents everyone who completed the initial event. Every other cell compares that week's viewers back to week 0, showing the percentage of the original cohort who completed the event again in that week.
 
-{{< img src="real_user_monitoring/retention_analysis/matching-events-retention-graph.png" alt="Retention graph for matching events" style="width:90%;" >}}
+{{< img src="/product_analytics/retention/retention_matching_events.png" alt="Retention graph for matching events" style="width:90%;" >}}
 
-Reading the **Dec 04 2023** row of the above graph from left to right:
-- 94% of the people who completed the event in **Week 0** came back and completed it again in **Week 1**.
-- 92% of the people who completed the event in **Week 0** came back and completed it again in **Week 2**.
+Reading the **Aug 17 2026** row of the above graph from left to right:
+- 23% of the 10.43k users who completed the event that week returned to complete it again after 1 week.
+- 21% of those users returned to complete it again after 2 weeks.
+- 11% of those users returned to complete it again after 3 weeks.
 
-### Differing events
-If the starting and returning events differ:
-- **Week 0** represents users who completed both the initial and return events.
-- After **Week 0**, each cell displays the percentage of the **Users** column who completed the return event in that week.
+If the events differ, week 0 represents users who completed both the initial and return events. Every cell after that shows the percentage of the original cohort who completed the return event in that week.
 
-{{< img src="real_user_monitoring/retention_analysis/differing-events-retention-graph.png" alt="Retention graph for differing events" style="width:90%;" >}}
+{{< img src="/product_analytics/retention/retention_differing_events.png" alt="Retention graph for differing events" style="width:90%;" >}}
 
-Reading the **Dec 04 2023** row of the above graph from left to right:
-- 144 users completed the initial event.
-- In **Week 0**, 94% of those 144 users completed the return event.
-- In **Week 1**, 92% of the 144 users completed the return event.
+Reading the **Aug 17 2026** row of the above graph from left to right:
+- 10.43k users completed the start event that week.
+- 41% of those users also completed the return event within the same week.
+- 23% completed the return event after 1 week, 20% after 2 weeks, and 11% after 3 weeks.
 
-
-## Visualization types
-After building your graph, select the relevant visualization type to surface the information you need under the search query.
-
-Retention curve
-: Shows the change in retention (including the weighted average) for all or specified cohorts.
-{{< img src="product_analytics/retention/pana_retention_viz_curve2.png" alt="Retention curve visualization graph" style="width:90%;" >}}
-
-
-Retention grid
-: Displays detailed data on cohorts across time periods.
-{{< img src="product_analytics/retention/pana_retention_viz_grid.png" alt="Retention grid visualization graph" style="width:90%;" >}}
-
-
-Timeseries
-: Shows the overall retention rate trend over time.
-{{< img src="product_analytics/retention/pana_retention_viz_timeseries.png" alt="Timeseries visualization graph" style="width:90%;" >}}
-
-
-Query value
-: Displays a single value that highlights the retention rate of a time period and cohort.
-{{< img src="product_analytics/retention/pana_retention_viz_query_value.png" alt="Query value visualization graph" style="width:90%;" >}}
-
-
-Top list
-: Shows an ordered ranking of tags by metric.
-{{< img src="product_analytics/retention/pana_retention_viz_top_list.png" alt="Top List visualization graph" style="width:90%;" >}}
-
-
-## Further reading
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/rum/retention-analysis
-[2]: /real_user_monitoring/application_monitoring/browser/data_collected/#view-attributes
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/#action-timing-metrics
-[4]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session
-[5]: /help
-[6]: https://app.datadoghq.com/product-analytics/segments
-real_user_monitoring/application_monitoring
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#user-session

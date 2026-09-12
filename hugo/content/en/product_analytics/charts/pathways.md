@@ -6,70 +6,56 @@ aliases:
 - /product_analytics/journeys/sankey
 - /product_analytics/journeys/pathways
 further_reading:
-- link: '/product_analytics/journeys'
-  tag: Documentation
-  text: Charts
 - link: '/dashboards/widgets/sankey/'
   tag: Documentation
   text: Build Sankey widgets in Dashboards
 ---
 
-## Overview
+Pathways charts visualize all user journeys across your application to analyze the critical path.
 
-Pathways diagrams allow you to visualize all user journeys across your application to analyze the critical path.
-
-{{< img src="/product_analytics/journeys/pathways/ga_pathway_diagrams_page.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors has a thinner node in the diagram.
 
 If a user visits the same page multiple times during their session, that page is only counted once.
 
-Action events are not supported in the Pathways diagram.
+Action events are not supported in pathways charts.
 
-## Build a Pathways diagram
+## Create a pathways chart
 
-### View the default diagram
+Build a pathways chart around a single view, then choose whether to show the steps users take before or after it.
 
-1. Navigate to [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Charts{{< /ui >}}][1].
-2. Click {{< ui >}}Pathways{{< /ui >}} if it's not already selected. This displays the default visualization that represents the most popular user journeys in your application.
+1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Pathways{{< /ui >}}.
 
-### Start or end the diagram at a given view
+1. {{< ui >}}Select a step{{< /ui >}} in your user journey to explore, and use the adjacent dropdown to display steps {{< ui >}}before{{< /ui >}} or {{< ui >}}after{{< /ui >}} it.
 
-You can use the left menu to customize this diagram and display:
-- the steps users took *after* visiting a given view
-- the steps users took *before* visiting a given view
+   <div class="alert alert-tip">Pathways charts support [Datadog wildcards][1], so you can match multiple views with a single entry, such as `/department/*`.</div>
 
-The example below displays the four steps that users in the United States take after visiting `/department/lighting`:
+1. (Optional) Filter chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} criteria.
 
-{{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img2.png" alt="A customized Pathways diagram for an app" style="width:90%;" >}}
+## Analyze a pathways chart
 
-### Graph all views containing a given phrase
+After you build a pathways chart, the diagram displays the most common paths users took across the selected number of steps.
 
-Pathways diagrams support [Datadog wildcards][2], allowing you to build a diagram of all views containing a given phrase.
+Each node shows the percentage and number of sessions that reached that view relative to the previous step. Hover over a node to see the exact count. Dropoff represents sessions that stopped before reaching another view within the selected number of steps.
 
-To match multiple routes, type a wildcard instead of choosing a single view name. The example below displays the five steps that users take after visiting any view matching `/department/*`:
+{{< img src="/product_analytics/journeys/pathways/pathways_analysis.png" alt="A Pathways chart with numbered callouts for the top paths and steps controls, the time range selector, a diagram node, an open node menu, and the Build Funnel button." style="width:90%;" >}}
 
-{{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img3.png" alt="A Pathways diagram that uses a wildcard to match several routes" style="width:90%;" >}}
+You can refine a pathways chart in various ways to zero in on the paths you want to analyze.
 
-## Analyze a pathways diagram
+1. Use the view controls to change how many paths display, and how many steps each path includes.
 
-You can hover over a diagram node to view the number of sessions that included visits to that view.
+2. Use the time range selector to change the period of data the chart analyzes.
 
-Click a node for a list of analysis options, such as viewing a sample [Session Replay][3] or building a Pathways diagram that starts with that view.
+3. A node represents a view a user visited. The thickness of a node reflects the number of sessions that reached that view.
 
-{{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img4.png" alt="The actions menu of a Pathways diagram node" style="width:90%;" >}}
+4. Click a node to open a menu with options to start a new pathways chart from that view (in either direction), view all visits to the view in Analytics, view a sample session replay, or view heatmap data.
 
-### Convert the diagram to a funnel
-
-1. From the Pathways diagram page, click the {{< ui >}}Build Funnel{{< /ui >}} button.
-2. In the Pathways diagram, click the nodes of the views you want to include in the funnel.
-3. Click {{< ui >}}Create Funnel From Selection{{< /ui >}}.
-
-{{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img5.png" alt="A Pathway to funnel conversion in process" style="width:90%;" >}}
+5. Click {{< ui >}}Build Funnel{{< /ui >}}, then click the nodes you want to include. Click {{< ui >}}Create Funnel From Selection{{< /ui >}} to convert your selection into a [funnel][2], a chart that tracks conversion through a fixed, ordered sequence of steps.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/product-analytics/user-journey/pathways
-[2]: /real_user_monitoring/explorer/search_syntax/#wildcards
-[3]: /session_replay/
+[1]: /real_user_monitoring/explorer/search_syntax/#wildcards
+[2]: /product_analytics/charts/funnel_analysis/
+
