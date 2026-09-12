@@ -3632,7 +3632,7 @@
     "request_schema_description": "Request to create a new version of an Agent Observability prompt."
   },
   "GetLLMObsPromptVersion": {
-    "description": "Get the full template of a single, specific version of an Agent Observability prompt.",
+    "description": "Get the full template and configuration of a single, specific version of an Agent Observability prompt.",
     "summary": "Get a specific Agent Observability prompt version"
   },
   "UpdateLLMObsPromptVersion": {
