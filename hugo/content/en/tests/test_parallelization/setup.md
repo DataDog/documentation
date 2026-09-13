@@ -23,7 +23,7 @@ Before setting up Test Parallelization:
 - Set up [Test Optimization][1].
 - For Ruby: use the `datadog-ci` gem version `1.31.0` or later.
 - For Python: use the `ddtrace` package version `4.11.0` or later and `pytest`.
-- For JavaScript: use the `dd-trace` package version `5.111.0` or later for `v5` or `v6.0.0` or later for `v6`, Node.js, and Jest.
+- For JavaScript: use the `dd-trace` package version `5.111.0` or later for `v5` or `v6.0.0` or later for `v6`, Node.js, and a [supported framework version][8]. Cucumber.js, Cypress, Mocha, Playwright, and Vitest require `ddtest` 1.6.0 or later.
 - Enable [Test Impact Analysis][2] for the test service when you want Test Parallelization to split only the tests affected by a code change.
 
 ## Concepts
@@ -95,7 +95,7 @@ bin/ddtest plan \
   --max-parallelism 8
 {{< /code-block >}}
 
-`--platform` identifies the language platform, and `--framework` identifies the test framework. Supported combinations include `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with `jest`. For all supported values and defaults, see [Configuration][4].
+`--platform` identifies the language platform, and `--framework` identifies the test framework. Supported combinations include `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, or `vitest`. For all supported values and defaults, see [Configuration][4].
 
 Planning discovers tests, retrieves test duration and Test Impact Analysis data, and chooses a parallelism level. It does not execute tests. The generated `.testoptimization/` directory contains the test files and splits selected for execution.
 
@@ -554,7 +554,7 @@ workflows:
 
 {{< collapse-content title="JavaScript" level="h3" >}}
 
-Use the same plan and test job structure as the Ruby and Python examples. Configure the runner and setup steps for Jest.
+Use the same plan and test job structure as the Ruby and Python examples. Set `DD_TEST_OPTIMIZATION_RUNNER_FRAMEWORK` to `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, or `vitest`. The following examples use Jest; replace `jest` with the framework for your test suite.
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -638,7 +638,7 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 {{% /tab %}}
 {{< /tabs >}}
 
-`ddtest` prepends `NODE_OPTIONS=-r dd-trace/ci/init` for Jest worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`.
+`ddtest` prepends `NODE_OPTIONS=-r dd-trace/ci/init` for JavaScript worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`. This does not replace the framework-specific [Test Optimization setup][8]. For example, Cypress requires manual instrumentation in its configuration file.
 
 {{< /collapse-content >}}
 
@@ -653,3 +653,4 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 [5]: /tests/test_parallelization/configuration/#plan-artifacts
 [6]: /tests/explorer/
 [7]: /continuous_integration/explorer/
+[8]: /tests/setup/javascript/

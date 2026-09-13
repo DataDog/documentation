@@ -23,7 +23,9 @@ Test Parallelization is supported for the following language and frameworks:
 | -------- | ---------- | ----------------------- |
 | Ruby     | RSpec, Minitest | `datadog-ci` gem `1.31.0` or later |
 | Python   | pytest | `ddtrace` package `4.11.0` or later |
-| JavaScript | Jest | `dd-trace` package `5.111.0` or later for `v5` and `6.0.0` or later for `v6` |
+| JavaScript | Cucumber.js, Cypress, Jest, Mocha, Playwright, Vitest | `dd-trace` package `5.111.0` or later for `v5` and `6.0.0` or later for `v6` |
+
+For JavaScript, `ddtest` requires Cypress 12 or later, Mocha 8 or later, Playwright 1.18 or later, and Vitest 1.6 or later. Cucumber.js support is tested with versions 7 through 13. These frameworks require `ddtest` 1.6.0 or later. Your framework version must also meet the [`dd-trace` compatibility requirements][4].
 
 ## How it works
 
@@ -47,3 +49,4 @@ For single-node and multi-node examples, see [Set Up Test Parallelization][3].
 [1]: /tests/test_impact_analysis/
 [2]: /tests/setup/
 [3]: /tests/test_parallelization/setup/
+[4]: /tests/setup/javascript/#compatibility

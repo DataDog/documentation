@@ -59,7 +59,7 @@ end
 
 ## Custom commands do not run the expected files
 
-When using `--command`, do not include test files or the `--` separator in the command. `ddtest` appends the selected test files itself.
+Do not include the `--` separator in a custom command. For Ruby, Python, Jest, Vitest, Mocha, and Cypress, omit test files because `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them during execution.
 
 Incorrect:
 
@@ -72,6 +72,19 @@ Correct:
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform ruby --framework rspec --command "bundle exec rspec"
 {{< /code-block >}}
+
+For Cucumber.js, Cypress, Mocha, Playwright, and Vitest, the command must invoke the selected framework directly. Package manager wrappers are supported. For example:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run --platform javascript --framework playwright --command "pnpm exec playwright test --project chromium"
+{{< /code-block >}}
+
+If a custom JavaScript command runs an unexpected selection, check the framework inputs that `ddtest` replaces:
+
+- Cucumber.js positional paths and rerun files
+- Cypress `--spec`
+- Mocha configured `spec` inputs
+- Playwright `--shard` and interactive UI options
 
 ## Further reading
 
