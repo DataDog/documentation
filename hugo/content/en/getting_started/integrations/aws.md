@@ -2,6 +2,9 @@
 title: Getting Started with AWS
 description: Integrate your Amazon Web Services account with Datadog using CloudFormation. Set up IAM roles, enable service integrations, and configure log forwarding.
 further_reading:
+    - link: 'https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/'
+      tag: 'Architecture Center'
+      text: 'A Guide to Integrating 100+ AWS Accounts with Datadog'
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
       text: 'Key metrics for AWS monitoring'
