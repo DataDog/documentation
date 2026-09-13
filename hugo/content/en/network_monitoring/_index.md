@@ -3,6 +3,9 @@ title: Network Monitoring
 disable_sidebar: true
 description: Explore Datadog Network Monitoring Products
 further_reading:
+  - link: "https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/"
+    tag: "Architecture Center"
+    text: "Hybrid Multi-cloud Network Observability Reference Architecture"
   - link: "https://app.datadoghq.com/release-notes?category=Network%20Monitoring"
     tag: "Release Notes"
     text: "Check out the latest Datadog Network Monitoring releases! (App login required)."
