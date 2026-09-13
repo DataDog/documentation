@@ -520,9 +520,8 @@ After sending your events, check the following:
 - [**OpenLineage events**][12]: Every event Datadog received from you, newest first, with a
   validation status of `Ok`, `Warning`, or `Error`. Select an event to see the exact
   payload as received, and filter by validation status to find events that were
-  accepted over HTTP but rejected during validation. Start here whenever an event returned
-  `201` but nothing appeared in the two views above — a `201` confirms delivery, not
-  that the event described something Datadog could use.
+  accepted over HTTP but rejected during validation. Start here if you're not seeing
+  the results you'd expect in the two views above.
 
 ## Correlate logs with job runs
 
