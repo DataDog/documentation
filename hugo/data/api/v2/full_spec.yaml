@@ -64382,6 +64382,25 @@ components:
       required:
         - data
       type: object
+    LLMObsPromptAuthoringChatTemplate:
+      description: A chat prompt containing messages, pinned includes, or both.
+      items:
+        $ref: "#/components/schemas/LLMObsPromptAuthoringItem"
+      minItems: 1
+      type: array
+    LLMObsPromptAuthoringItem:
+      description: A chat message or an explicitly versioned prompt include.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptIncludeItem"
+    LLMObsPromptAuthoringMessagesTemplate:
+      description: A chat prompt whose authored items are stored under `messages`.
+      properties:
+        messages:
+          $ref: "#/components/schemas/LLMObsPromptAuthoringChatTemplate"
+      required:
+        - messages
+      type: object
     LLMObsPromptChatMessage:
       description: A single chat message in a prompt template.
       properties:
@@ -64505,6 +64524,47 @@ components:
       required:
         - id
       type: object
+    LLMObsPromptInclude:
+      additionalProperties: false
+      description: >-
+        An explicitly versioned prompt included as chat items. Omitting `items` includes every child message in its original order. When `items` is present, its zero-based indexes are inserted in the order provided; duplicate indexes are preserved.
+      properties:
+        items:
+          description: Optional ordered zero-based child-message indexes. Order and duplicate indexes are preserved.
+          items:
+            format: int64
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+          minItems: 1
+          type: array
+        prompt_id:
+          description: >-
+            Customer-provided identifier of the included prompt. It cannot contain spaces, tabs, line breaks, braces, an equals sign, a comma, or quotes.
+          example: "response-policy"
+          minLength: 1
+          pattern: "^[^\\s{}=,\"']+$"
+          type: string
+        version:
+          description: Positive sequential version number of the included prompt.
+          example: 3
+          format: int64
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - prompt_id
+        - version
+      type: object
+    LLMObsPromptIncludeItem:
+      additionalProperties: false
+      description: An explicitly versioned whole-chat or selective-message include.
+      properties:
+        include:
+          $ref: "#/components/schemas/LLMObsPromptInclude"
+      required:
+        - include
+      type: object
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -64609,11 +64669,13 @@ components:
         - data
       type: object
     LLMObsPromptTemplate:
-      description: A text template or a list of chat messages.
+      description: >-
+        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`. Use an authored chat object when including prompts as chat messages.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
         - $ref: "#/components/schemas/LLMObsPromptChatTemplate"
+        - $ref: "#/components/schemas/LLMObsPromptAuthoringMessagesTemplate"
     LLMObsPromptTextTemplate:
       description: A text prompt template.
       minLength: 1
@@ -64644,11 +64706,14 @@ components:
         - attributes
       type: object
     LLMObsPromptVersionDataAttributes:
-      description: Attributes of a specific version of an Agent Observability prompt.
+      description: >-
+        Attributes of a specific version of an Agent Observability prompt. For a composed version, `authoring_template` contains its pinned include-bearing source; ordinary versions omit that attribute.
       properties:
         author:
           description: UUID of the user who authored this version.
           type: string
+        authoring_template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
         created_at:
           description: Timestamp stored on this prompt version.
           format: date-time
@@ -175461,6 +175526,31 @@ paths:
         content:
           application/json:
             examples:
+              composed_chat:
+                summary: Create a version with whole-chat and selective pinned includes
+                value:
+                  data:
+                    attributes:
+                      template:
+                        messages:
+                          - include:
+                              prompt_id: "assistant-introduction"
+                              version: 2
+                          - include:
+                              items: [2, 0, 0]
+                              prompt_id: "response-examples"
+                              version: 4
+                          - content: "Answer {{question}}."
+                            role: "user"
+                    type: prompt-template-versions
+              composed_text:
+                summary: Create a version with an inline pinned include
+                value:
+                  data:
+                    attributes:
+                      description: "Reuse the exact response policy."
+                      template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                    type: prompt-template-versions
               default:
                 value:
                   data:
@@ -175481,6 +175571,50 @@ paths:
           content:
             application/json:
               examples:
+                composed_chat:
+                  summary: A composed chat version preserves structured authored includes
+                  value:
+                    data:
+                      attributes:
+                        authoring_template:
+                          messages:
+                            - include:
+                                prompt_id: "assistant-introduction"
+                                version: 2
+                            - include:
+                                items: [2, 0, 0]
+                                prompt_id: "response-examples"
+                                version: 4
+                            - content: "Answer {{question}}."
+                              role: "user"
+                        prompt_id: "support-chat"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Here is one concise example."
+                            role: "assistant"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Answer {{question}}."
+                            role: "user"
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+                composed_text:
+                  summary: A composed text version returns compiled and authored templates
+                  value:
+                    data:
+                      attributes:
+                        authoring_template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                        prompt_id: "support-answer"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template: "Follow the approved response policy.\n\nAnswer {{question}}."
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
                 default:
                   value:
                     data:
