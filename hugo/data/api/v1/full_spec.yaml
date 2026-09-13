@@ -1495,11 +1495,12 @@ components:
           nullable: true
           type: array
         tags:
-          description: List of team names representing ownership of a dashboard.
+          description: Tags associated with the dashboard. Supports up to five team tags and two AI tags.
           items:
-            description: The name of a Datadog team of the form `team:<name>`
+            description: A tag of the form `team:<name>` or `ai:<value>`.
+            pattern: "^(team|ai):.+$"
             type: string
-          maxItems: 5
+          maxItems: 7
           nullable: true
           type: array
         template_variable_presets:
@@ -1981,7 +1982,7 @@ components:
         dataset_provider:
           $ref: "#/components/schemas/PublishedDatasetProvider"
         filter:
-          description: Filter applied to the dataset's rows, using events-style search syntax.
+          description: Filter applied to the rows of the dataset, using events-style search syntax.
           example: "service:web-store"
           type: string
         limit:
