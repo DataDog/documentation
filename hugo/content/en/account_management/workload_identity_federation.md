@@ -267,28 +267,29 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
-### Supported Agent versions and credential sources
+### Requirements
 
-Support for Workload Identity Federation on the Agent depends on the Agent version, the credential source, and the Agent flavor:
-
-| Credential source | Agent 7.78-7.81 | Agent 7.82 | Agent 7.83+ |
-|---|---|---|---|
-| Static environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) | All flavors | All flavors | All flavors |
-| EC2 instance metadata service (IMDS) role | Core flavors only | Core flavors only | All flavors |
-| EKS IRSA (`AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core flavors only | All flavors |
-| ECS task role or EKS Pod Identity (`AWS_CONTAINER_CREDENTIALS_*`) | Not supported | Core flavors only | All flavors |
-
-**Core flavors** (built with the `ec2` build tag): the main Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. Starting in Agent 7.83, support extends to the trace-agent, standalone DogStatsD, the private action runner, the IoT Agent, and the Heroku Agent.
-
-The OpenTelemetry Collector (`otel-agent`) does not yet support Workload Identity Federation. AWS is the only supported cloud provider for the Agent; Azure, Google Cloud, and generic OIDC providers are not yet supported.
-
-<div class="alert alert-info">If you need support for an Agent flavor, cloud provider, or credential source that isn't listed here, <a href="/help/">open a feature request with Datadog Support</a>.</div>
-
-**Requirements**:
-- Version `7.78.0` or later of the Datadog Agent. See the table above for what each version and flavor supports.
+- The Agent version and type required depend on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
 - The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+#### Supported Agent versions and AWS credentials
+
+Support depends on the Agent version, which Agent you run, and how that Agent obtains AWS credentials.
+
+**Core Agents**: the Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. In Agent 7.83 and later, support also includes the Trace Agent, standalone DogStatsD, the private action runner, the IoT Agent, and the Heroku Agent.
+
+| How the Agent gets AWS credentials | Agent 7.78-7.81 | Agent 7.82 | Agent 7.83+ |
+|---|---|---|---|
+| Static environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) | All Agents | All Agents | All Agents |
+| EC2 instance metadata service (IMDS) role | Core Agents only | Core Agents only | All Agents |
+| EKS IRSA (`AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core Agents only | All Agents |
+| ECS task role or EKS Pod Identity (`AWS_CONTAINER_CREDENTIALS_*`) | Not supported | Core Agents only | All Agents |
+
+The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. AWS is the only supported cloud provider for the Agent; Azure, Google Cloud, and generic OIDC providers are not supported.
+
+<div class="alert alert-info">For an unsupported Agent type, cloud provider, or way of supplying credentials, <a href="/help/">open a feature request with Datadog Support</a>.</div>
 
 Setting up Workload Identity Federation for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
