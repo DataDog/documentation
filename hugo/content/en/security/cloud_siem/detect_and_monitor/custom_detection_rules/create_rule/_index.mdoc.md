@@ -621,6 +621,8 @@ For the current step and the next step:
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
+<!-- #toBeRemoved -->
+
 #### Decrease severity for non-production environments {% #decrease-severity-rt-threshold %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
