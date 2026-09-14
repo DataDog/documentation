@@ -28,7 +28,7 @@ title: 여정 경로
 
 각 경로는 해당 경로를 따른 세션의 비율과 수, 그 경로에서 보낸 평균 시간을 보여줍니다. 나열된 이벤트가 없는 경로는 중간 조회나 작업 없이 시작 이벤트에서 종료 이벤트로 직접 이동한 세션을 나타냅니다.
 
-{{< img src="product_analytics/journeys/journey_paths/journey-paths-customization-2.png" alt="전환/이탈 선택기, 단계 선택기, 시간 범위, 이벤트 유형 토글, 더 보기, 경로 옵션 메뉴, 더 많은 경로/더 적은 경로 컨트롤에 대한 번호가 매겨진 콜아웃이 있는 여정 경로 차트입니다." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="전환/이탈 선택기, 단계 선택기, 시간 범위, 이벤트 유형 토글, 더 보기, 경로 옵션 메뉴, 더 많은 경로/더 적은 경로 컨트롤에 대한 번호가 매겨진 콜아웃이 있는 여정 경로 차트입니다." style="width:100%;" >}}
 
 분석하려는 경로에 집중할 수 있도록 다양한 방법으로 여정 경로 차트를 구체화할 수 있습니다.
 
