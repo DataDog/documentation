@@ -20,8 +20,6 @@ Use the direct OTLP intake endpoints on this page when deploying a Collector or 
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
 
-<div class="alert alert-danger">Telemetry sent directly to this endpoint without an OpenTelemetry Collector does not populate the <a href="/infrastructure/list/">Infrastructure List</a>.</div>
-
 Your setup depends on where your telemetry is coming from. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. Otherwise, use the serverless or signal-specific pages.
 
 | If your telemetry comes from... | Start here |

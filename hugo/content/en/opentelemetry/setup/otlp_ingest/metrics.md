@@ -42,8 +42,6 @@ This endpoint is particularly useful in the following scenarios:
 
 <div class="alert alert-info">If you are sending metrics from a managed platform (Cloudflare, Vercel, Heroku, and others), see <a href="/opentelemetry/setup/otlp_ingest/managed_platforms/">Managed platforms</a> for the correct endpoint configuration.</div>
 
-<div class="alert alert-danger">Metrics sent directly to this endpoint without an OpenTelemetry Collector do not populate the <a href="/infrastructure/list/">Infrastructure List</a>.</div>
-
 ## Configuration
 
 To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
