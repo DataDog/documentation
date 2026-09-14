@@ -2,6 +2,9 @@
 title: Journey Monitoring
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
 further_reading:
+- link: '/journey_monitoring/guide/configuring_journeys/'
+  tag: 'Guide'
+  text: 'Best practices for configuring Journey Monitoring'
 - link: "https://www.datadoghq.com/blog/journey-monitoring/"
   tag: "Blog"
   text: "Monitor critical user journeys with Datadog Journey Monitoring"
@@ -81,6 +84,10 @@ In the journey's details report, you can extend monitoring coverage based on the
 
 If you already have pre-created RUM operations or Synthetic tests that cover the journey, Datadog surfaces the operation or test in the journey's details report.
 
+## API
+
+Journeys can be queried, created, updated, and delete through the [APIs][15].
+
 ## Metrics
 
 Each journey and its variants have the following performance metrics:
@@ -113,6 +120,7 @@ Each journey and its variants have the following performance metrics:
 [12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
 [14]: /synthetics/test_suites/#service-level-objectives
+[15]: /api/latest/dem/
 
 ## Further reading
 
