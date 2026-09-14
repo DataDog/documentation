@@ -39,9 +39,6 @@ further_reading:
   text: "Block Application Attacks with App and API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
-site_support_id: application_security_override
-cascade:
-    site_support_id: application_security_override
 ---
 
 {{< site-region region="gov" >}}
