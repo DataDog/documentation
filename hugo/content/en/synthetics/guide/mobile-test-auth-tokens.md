@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Logging in through your app's UI at the start of every [mobile application test][1] adds time and flakiness unrelated to what you're testing. This guide describes how to skip that login step. Inject a live authentication token into your mobile app test, so it starts already authenticated.
+Logging in through your app UI at the start of every [mobile application test][1] adds duration and flakiness unrelated to the test. This guide shows how to skip that login step by injecting a live authentication token so the test starts already authenticated.
 
 The flow has three parts:
 
@@ -39,7 +39,7 @@ Set the test to run [on a schedule][5] at an interval shorter than your token's 
 
 [Create a global variable][3] from the token-fetch test:
 
-1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Settings{{< /ui >}} page][6]. Click {{< ui >}}+ New Global Variable{{< /ui >}}.
+1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Settings{{< /ui >}} page][6]. Click **+ New Global Variable**.
 2. Select the {{< ui >}}Create From Test{{< /ui >}} tab.
 3. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `MOBILE_AUTH_TOKEN`.
 4. Select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} so the token doesn't appear in test results.
