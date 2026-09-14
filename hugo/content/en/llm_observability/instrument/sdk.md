@@ -176,6 +176,10 @@ You can supply the following parameters as environment variables (for example, `
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
+`DD_LLMOBS_SAMPLE_RATE` or `dd.llmobs.sample.rate`
+: optional - _float_ - **default**: `1.0`
+<br />The fraction of traces retained by Agent Observability. Requires `dd-trace-java` 1.66.0 or later. See [Trace sampling](#trace-sampling).
+
 `DD_API_KEY` or `dd.api.key`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
@@ -319,7 +323,7 @@ After installing the SDK and running your application you should expect to see s
 
 ## Trace sampling
 
-<div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later) and the Node.js SDK (<code>dd-trace</code> 5.110.0 or later). The Java SDK does not support trace sampling.</div>
+<div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later), the Node.js SDK (<code>dd-trace</code> 5.110.0 or later), and the Java SDK (<code>dd-trace-java</code> 1.66.0 or later).</div>
 
 Trace sampling sets the fraction of traces that Agent Observability retains. Because Agent Observability billing is based on the volume of spans you send, setting a sample rate is one way to control your Agent Observability cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
@@ -327,8 +331,8 @@ Sampling does not affect your [Agent Observability metrics](/llm_observability/i
 
 Configure the sample rate through either of two mechanisms:
 
-- **Environment variable** (`DD_LLMOBS_SAMPLE_RATE`): applies to both [command-line setup](#command-line-setup) and [in-code setup](#in-code-setup).
-- **In-code parameter** (`sample_rate` in Python, `sampleRate` in Node.js): passed to `LLMObs.enable()` in Python, or under `llmobs` in Node.js, when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`.
+- **Environment variable** (`DD_LLMOBS_SAMPLE_RATE`): applies to both [command-line setup](#command-line-setup) and [in-code setup](#in-code-setup). In Java, the `dd.llmobs.sample.rate` system property sets the same value.
+- **In-code parameter** (`sample_rate` in Python, `sampleRate` in Node.js): passed to `LLMObs.enable()` in Python, or under `llmobs` in Node.js, when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`. The Java SDK has no in-code equivalent.
 
 The sample rate is a float between `0.0` (retain no traces) and `1.0` (retain all traces). The default is `1.0`. Out-of-range values are ignored.
 
@@ -370,6 +374,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+Set the sample rate with the environment variable:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+Or set the equivalent `dd.llmobs.sample.rate` system property:
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}

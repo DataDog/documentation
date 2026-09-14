@@ -23,6 +23,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
   tag: "Learning Center"
   text: "Detect Host and Container Compromises with Workload Protection"
+- link: "https://www.datadoghq.com/blog/stop-runtime-threats-with-workload-protection-response-actions/"
+  tag: "Blog"
+  text: "Stop runtime threats with Workload Protection response actions"
 ---
 
 Workload Protection acts on threats by terminating processes and containers or blocking network traffic. The Datadog Agent runs these actions automatically when an Agent rule matches, or when you trigger them manually from a signal. Both methods depend on Agent enforcement.

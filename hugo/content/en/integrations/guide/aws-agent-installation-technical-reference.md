@@ -174,9 +174,15 @@ A rule is not a one-time selection. Datadog re-evaluates its query on every reco
 
 A rule you built by selecting specific resources holds a query naming those resources, so nothing else ever matches it.
 
-### What happens when you edit a rule
+When a fixed set is too large to select individually, match a tag you control, such as `datadog:true`, and apply that tag only to the resources you want instrumented. Coverage then changes only when you change the tags.
+
+### What happens when coverage changes
 
 Datadog re-evaluates the rule and compares the covered resources against the previous set. Resources no longer covered have instrumentation removed. Newly covered resources are instrumented. Deleting a rule removes instrumentation from everything the rule covered.
+
+<div class="alert alert-warning">
+Datadog removes instrumentation when a resource no longer matches the rule, whether the change comes from an edit in Datadog or from retagging or reconfiguring the resource in AWS. Keep this behavior in mind when you write a rule based on tags that other teams can change.
+</div>
 
 ### Terminated, stopped, or deleted resources
 

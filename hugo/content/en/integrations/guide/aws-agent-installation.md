@@ -167,8 +167,6 @@ Instrumentation is based on an **instrumentation rule**: an AWS account paired w
 
 A rule keeps matching after you save it. Datadog re-evaluates it over time, so a resource that starts matching later is instrumented automatically, whether it was created after you saved the rule or picked up a tag that brings it into scope.
 
-A rule built by selecting specific resources names those resources, so nothing else ever matches it.
-
 You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch each time.
 
 For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and the reconciliation model, see [How Datadog instrumentation through the AWS integration works][6].
@@ -176,6 +174,30 @@ For the full technical and security details, including the AWS resources Datadog
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
 <!-- TODO(DOCS-14545): the "How it works" diagram shows the EC2 flow only. Add a Lambda equivalent (or a workload-agnostic version) before publish. -->
+
+### Choose how your rule matches resources
+
+Because Datadog re-evaluates the rule over time, the query you write determines how coverage behaves as your infrastructure changes.
+
+**To cover resources as they appear**, match tags and attributes already present in your infrastructure, such as `env:prod`. Any resource that matches is instrumented, including resources created or retagged after you save the rule. Use this when you want new matching resources monitored automatically without updating the rule.
+
+**To cover a fixed set**, select the resources individually from the resource list. The rule matches only the resources you selected, so resources that appear later are not added.
+
+**When a fixed set is too large to select individually**, match a tag you control, such as `datadog:true`. Apply that tag only to the resources you want instrumented. Coverage then changes only when you change the tags, so your infrastructure-as-code determines which resources are covered.
+
+<div class="alert alert-warning">
+Coverage works in both directions. When a resource stops matching the rule, Datadog removes instrumentation from it. A tag change made in AWS can therefore remove monitoring from a resource without anyone editing the rule in Datadog.
+</div>
+
+### Best practices for rules and tags
+
+**Match tags your team owns.** When a rule matches a tag that another team controls, that team can add or remove monitoring by retagging, without opening Datadog. Keeping the tag and the rule under the same ownership keeps that decision with the people who made it.
+
+**Avoid tags that change during normal operations.** Tags that change with an environment promotion, a deployment, or an autoscaling template can move resources in and out of coverage. Match on attributes that stay stable for the life of the resource.
+
+**Treat the rule as the complete configuration for the account.** Each AWS account has one rule per resource type. Every edit re-scopes all coverage for that resource type rather than adding to the existing coverage. Review the matching resources before you save.
+
+**Carve out exceptions with exclusions.** When a broad rule covers resources you want to skip, exclude them from the same rule instead of switching to an individually selected list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
 
 ## Install
 
