@@ -17,9 +17,9 @@ aliases:
 
 ## Overview
 
-The Datadog Agent and Datadog OTLP intake can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
+The Datadog Agent and OpenTelemetry Collector can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications.
 
-The Datadog Agent and Datadog OTLP intake support the following OTLP metric types:
+The Datadog Agent and OpenTelemetry Collector support the following OTLP metric types:
 - Sums
 - Gauges
 - Histograms
