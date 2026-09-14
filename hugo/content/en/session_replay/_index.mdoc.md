@@ -225,11 +225,13 @@ To view your own playback history, check out the [{% ui %}My Watch History{% /ui
 
 You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][7].
 
+<!-- Browser -->
 {% if equals($platform, "browser") %}
 ## Heatmaps
 
 Heatmaps overlay click, top elements, and scroll data on top of your Session Replay recordings, helping you understand how users interact with your pages. Learn more about [Heatmaps][12].
 {% /if %}
+<!-- end Browser -->
 
 ## Dev Tools
 
