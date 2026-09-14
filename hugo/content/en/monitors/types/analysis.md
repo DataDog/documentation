@@ -49,9 +49,11 @@ Published analyses are supported only when every data source they depend on is a
 Logs stored in Flex Logs are not supported for monitoring. 
 
 Unsupported data sources include: 
+- AI Usage
 - Cloud Cost
 - Database Queries
 - Dora Metrics
+- Errors
 - Infrastructure Resources
 - Monitor Groups, Monitors
 - Product Analytics
