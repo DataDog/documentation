@@ -15,9 +15,12 @@ further_reading:
 
 ## Prerequisite
 
-To set up Bits Code, you need the [`Bits Code Write` (`bits_dev_write`) permission][1]. 
+To set up Bits Code, your Datadog user needs:
+- The [Bits Code Write (`bits_dev_write`) permission][1].
+   - This permission is included in managed Datadog roles such as the Datadog Standard Role.
+- (If you'd like to enable [Slack code channels][13]) One of the following perimssions: Integrations Manage (`manage_integrations`), User Access Manage (`user_access_manage`), or Org Management (`org_management`).
 
-This permission is included in managed Datadog roles such as the Datadog Standard Role. If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
+ If your organization uses custom roles, an admin must add these permission manually. For details, see [Access Control][1].
 
 ## Setup
 
@@ -91,7 +94,7 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
          - `channels:manage`
          - `app_mentions:read`
          - (Optional) `chat:write.customize`
-      - In Bits Code settings, enable code channels for your organization.
+      - On [{{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}][16], set the {{< ui >}}Enable Slack Code Channels{{< /ui >}} toggle on.
 
 3. (Optional) See the additional configuration options, below.
 
@@ -197,6 +200,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [13]: /bits_ai/bits_code/slack_code_channels/
 [14]: /bits_ai/bits_chat/#slack
 [15]: https://docs.slack.dev/reference/scopes/
+[16]: https://app.datadoghq.com/code/settings/slack
 
 ## Further reading
 
