@@ -46,7 +46,7 @@ From the results, open the query in the [Log Explorer][5] or the [DDSQL Editor][
 
 ## Migrate assets in batch
 
-The Batch Migration tool imports a Splunk inventory, translates each asset, and publishes the results into Datadog. It handles the following resource types:
+The Batch Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named batch. It translates each asset in the batch, and you review and publish the results to Datadog. The following resource types are supported:
 
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
