@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Ruby on Linux
 code_lang: linux
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{% app-and-api-protection-ruby-setup-options platform="linux" %}}
 
 {{% app-and-api-protection-ruby-overview %}}

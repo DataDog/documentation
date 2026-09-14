@@ -1,4 +1,5 @@
 ---
+
 title: Library Configuration
 aliases:
   - /security/application_security/policies/library_configuration/
@@ -23,6 +24,7 @@ further_reading:
   tag: "Documentation"
   text: "How App and API Protection Works in Datadog"
 ---
+
 ## Configuring a client IP header
 
 AAP automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable. If this variable is set, the library only checks the specified header for the client IP.

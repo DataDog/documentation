@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Python
 aliases:
   - /security_platform/application_security/getting_started/python
@@ -24,6 +25,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% app_and_api_protection_python_overview showSetup="false" %}}

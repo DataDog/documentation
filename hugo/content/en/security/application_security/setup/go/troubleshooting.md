@@ -1,6 +1,8 @@
 ---
+
 title: Troubleshooting App and API Protection for Go
 ---
+
 ## Common Issues
 
 ### No security signals appearing

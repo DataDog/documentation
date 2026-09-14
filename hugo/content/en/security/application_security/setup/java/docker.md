@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Java in Docker
 code_lang: docker
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{% app_and_api_protection_java_setup_options platform="docker" %}}
 
 {{% app_and_api_protection_java_overview %}}

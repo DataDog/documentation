@@ -1,6 +1,8 @@
 ---
+
 title: Troubleshooting .NET App and API Protection
 ---
+
 ## Common Issues
 
 ### No Security Signals appear

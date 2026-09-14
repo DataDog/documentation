@@ -1,7 +1,9 @@
 ---
+
 title: Sensitive Data
 description: Detect and classify sensitive data processed by your API endpoints.
 ---
+
 [App and API Protection][1] matches known patterns for sensitive data in API requests and responses. If it finds a match, the endpoint is tagged with the category and type of sensitive data processed and displayed in [API Endpoints][2].
 
 The matching occurs within your application, and none of the sensitive data is sent to Datadog.

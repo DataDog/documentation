@@ -1,7 +1,9 @@
 ---
+
 title: API Findings
 description: Triage detected API risks across definitions, gateways, and live traffic.
 ---
+
 The [API Findings][1] explorer provides a central triage view of the API risks detected across your definitions, gateways, and live traffic. Default rules detect common vulnerabilities and misconfigurations. You can also add [custom rules][2] for specific use cases.
 
 **API Findings** columns:

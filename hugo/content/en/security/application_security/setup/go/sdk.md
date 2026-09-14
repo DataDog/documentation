@@ -1,4 +1,5 @@
 ---
+
 title: App and API Protection SDK for Go
 further_reading:
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec"
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 If you need flexibility and features beyond those available when instrumenting your application automatically using [Orchestrion][12], Datadog provides an App and API Protection API located at [github.com/DataDog/dd-trace-go/v2/appsec][2]. This API improves flexibility and offers additional features.
 
 ## Error event handling

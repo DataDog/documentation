@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Nginx
 code_lang: nginx
 code_lang_weight: 50
@@ -22,6 +23,7 @@ further_reading:
       tag: "Documentation"
       text: "Standalone App and API Protection"
 ---
+
 The Datadog nginx tracing module has experimental support for threat detection and blocking.
 
 ## Enabling threat detection

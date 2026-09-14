@@ -1,4 +1,5 @@
 ---
+
 title: Troubleshooting PHP App and API Protection
 further_reading:
   - link: "/security/application_security/how-it-works/"
@@ -11,6 +12,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 ## Overview
 
 This document provides diagnostic information for common issues and unexpected behavior with Datadog App and API Protection. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.

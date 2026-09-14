@@ -1,4 +1,5 @@
 ---
+
 title: API Posture
 description: Discover API endpoints, assess endpoint risk, and verify endpoint behavior with API Posture in App and API Protection.
 further_reading:
@@ -6,6 +7,7 @@ further_reading:
   tag: "Blog"
   text: "From discovery to defense: Securing APIs with Datadog App and API Protection"
 ---
+
 Use API Posture in [App and API Protection][1] (AAP) to discover your APIs, assess the risks they expose, and track your security posture.
 
 To get started, [set up AAP][2] on your services to discover endpoints from your live traffic. Other data sources, such as Amazon API Gateway and source code, require additional setup; see [API Endpoints][3] for details.

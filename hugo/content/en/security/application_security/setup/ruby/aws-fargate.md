@@ -1,4 +1,5 @@
 ---
+
 code_lang: aws-fargate
 type: multi-code-lang
 code_lang_weight: 60
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{% app-and-api-protection-ruby-overview %}}
 
 ## Prerequisites

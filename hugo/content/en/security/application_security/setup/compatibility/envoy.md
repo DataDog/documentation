@@ -1,4 +1,5 @@
 ---
+
 title: Envoy Compatibility Requirements
 code_lang: envoy
 type: multi-code-lang
@@ -6,6 +7,7 @@ code_lang_weight: 40
 aliases:
   - /security/application_security/threats/setup/compatibility/envoy
 ---
+
 The following table lists App and API Protection capabilities for the Envoy integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |

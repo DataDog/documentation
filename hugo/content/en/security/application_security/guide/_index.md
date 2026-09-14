@@ -1,8 +1,10 @@
 ---
+
 title: App and API Protection Guides
 private: true
 disable_toc: true
 ---
+
 {{< whatsnext desc="Getting Started" >}}
     {{< nextlink href="/getting_started/security/application_security/" >}}First steps with App and API Protection{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -1,4 +1,5 @@
 ---
+
 title: Troubleshooting Python App and API Protection
 further_reading:
   - link: "/security/application_security/how-it-works/"
@@ -11,6 +12,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 ## Common Issues
 
 ### No security signals appearing

@@ -1,4 +1,5 @@
 ---
+
 title: Attacker Clustering
 disable_toc: false
 aliases:
@@ -21,6 +22,7 @@ further_reading:
   tag: "blog"
   text: "Detect and respond to evolving attacks with Attacker Clustering"
 ---
+
 ## Overview
 
 Attacker Clustering improves distributed attack blocking. Datadog App and API Protection (AAP) identifies security signal traffic attacker patterns and to help you mitigate distributed attacks more efficiently.

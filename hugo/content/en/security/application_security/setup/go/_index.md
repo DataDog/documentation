@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Go
 aliases:
   - /security/application_security/setup/standalone/go
@@ -18,6 +19,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 ## Overview
 
 App and API Protection (AAP) leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrates seamlessly into your workflow using [Orchestrion][6], an automatic compile-time instrumentation of Go code that does not require code changes.

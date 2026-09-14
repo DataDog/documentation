@@ -1,4 +1,5 @@
 ---
+
 title: Enabling AAP for Azure App Services
 aliases:
   - /security/application_security/getting_started/serverless
@@ -20,6 +21,7 @@ further_reading:
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
+
 ## Compatibility
 
 Only *web applications* are supported. Azure Functions are not supported.

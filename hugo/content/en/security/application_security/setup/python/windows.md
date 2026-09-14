@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Python on Windows
 code_lang: windows
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 {{% app_and_api_protection_python_overview %}}
 
 ## Prerequisites

@@ -1,4 +1,5 @@
 ---
+
 title: Building your Go application for App and API Protection
 further_reading:
 - link: "/security/application_security/how-it-works/"
@@ -11,6 +12,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 App and API Protection for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 

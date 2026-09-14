@@ -1,4 +1,5 @@
 ---
+
 title: Investigate Security Signals
 aliases:
   - /security/application_security/security_signals/
@@ -14,6 +15,7 @@ further_reading:
     tag: "Documentation"
     text: "AAP threat intelligence"
 ---
+
 ## Overview
 
 AAP security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.

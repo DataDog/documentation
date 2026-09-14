@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for HAProxy
 code_lang: haproxy
 code_lang_weight: 40
@@ -16,6 +17,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{< callout url="https://www.datadoghq.com/product-preview/haproxy-integration/">}}
 App and API Protection for HAProxy is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
 {{< /callout >}}

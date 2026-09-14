@@ -1,4 +1,5 @@
 ---
+
 title: In-App WAF Rules
 aliases:
   - /security/application_security/policies/inapp_waf_rules/
@@ -6,6 +7,7 @@ aliases:
   - /security/application_security/event_rules
   - /security/application_security/threats/inapp_waf_rules
 ---
+
 ## Overview
 
 With App and API Protection (AAP) enabled, the Datadog SDK actively monitors all web services and API requests for suspicious security activity.

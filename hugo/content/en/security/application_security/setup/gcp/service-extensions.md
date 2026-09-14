@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
 code_lang_weight: 50
@@ -24,6 +25,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection Service Extensions is in Preview" >}}
 To try the preview of App and API Protection Service Extensions for GCP, use the following setup instructions.
 {{< /callout >}}

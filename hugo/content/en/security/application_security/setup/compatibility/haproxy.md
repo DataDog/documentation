@@ -1,9 +1,11 @@
 ---
+
 title: HAProxy Compatibility Requirements
 code_lang: haproxy
 type: multi-code-lang
 code_lang_weight: 40
 ---
+
 The following table lists App and API Protection capabilities for the HAProxy integration according to the specified Datadog HAProxy SPOA image version:
 
 | App and API Protection capability              | Minimum Datadog HAProxy SPOA image version |

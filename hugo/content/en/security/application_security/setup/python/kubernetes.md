@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Python in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 {{% app_and_api_protection_python_setup_options platform="kubernetes" %}}
 
 {{% app_and_api_protection_python_overview %}}

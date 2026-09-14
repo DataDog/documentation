@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Istio
 code_lang: istio
 code_lang_weight: 50
@@ -17,6 +18,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Istio is in Preview" >}}
 To try the preview of App and API Protection for Istio, use the following setup instructions.
 {{< /callout >}}
@@ -160,6 +162,7 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 20
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

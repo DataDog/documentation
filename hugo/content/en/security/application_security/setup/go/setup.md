@@ -1,4 +1,5 @@
 ---
+
 title: Getting started for App and API Protection for Go
 aliases:
   - /security_platform/application_security/getting_started/go
@@ -25,6 +26,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 ## Prerequisite
 
 - The [Datadog Agent][16] is installed and configured for your application's operating system or container, cloud, or virtual environment. 

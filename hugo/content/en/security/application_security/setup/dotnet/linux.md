@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for .NET on Linux
 code_lang: linux
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{% aap/aap_and_api_protection_dotnet_setup_options platform="linux" %}}
 {{% aap/aap_and_api_protection_dotnet_overview %}}
 

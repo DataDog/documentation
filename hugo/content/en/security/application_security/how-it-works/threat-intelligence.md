@@ -1,4 +1,5 @@
 ---
+
 title: Threat Intelligence
 aliases:
   - /security/application_security/threats/threat-intelligence
@@ -9,6 +10,7 @@ further_reading:
     text: "Datadog Cloud SIEM: Driving innovation in security operations"
 
 ---
+
 ## Overview
 
 This topic describes [threat intelligence][1] for App and API Protection (AAP).

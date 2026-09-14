@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Google Kubernetes Engine (GKE)
 aliases:
   - /security/application_security/setup/gke
@@ -24,6 +25,7 @@ further_reading:
     tag: "Source Code"
     text: "App and API Protection Service Extension source code"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for GKE is in Preview" >}}
 To try the Preview of App and API Protection for GKE, use the following setup instructions.
 {{< /callout >}}
@@ -97,6 +99,7 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

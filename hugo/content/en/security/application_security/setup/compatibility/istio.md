@@ -1,9 +1,11 @@
 ---
+
 title: Istio Compatibility Requirements
 code_lang: istio
 type: multi-code-lang
 code_lang_weight: 40
 ---
+
 The following table lists App and API Protection capabilities for the Istio integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |

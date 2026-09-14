@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection
 aliases:
   - /security/application_security/threats/setup/
@@ -10,6 +11,7 @@ aliases:
 disable_toc: false
 disable_sidebar: true
 ---
+
 Learn how to enable App and API Protection on all the following supported platforms and environments.
 
 <div class="alert alert-info">

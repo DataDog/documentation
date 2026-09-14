@@ -1,4 +1,5 @@
 ---
+
 title: Azure API Management policies for App and API Protection
 description: Understand how the Azure API Management policy calls the App and API Protection callout service, applies block decisions, and propagates trace context.
 further_reading:
@@ -15,6 +16,7 @@ further_reading:
       tag: "Source Code"
       text: "App and API Protection Azure API Management callout source code"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Azure API Management is in Preview" >}}
 To try the preview of App and API Protection for Azure API Management, use the following setup instructions.
 {{< /callout >}}

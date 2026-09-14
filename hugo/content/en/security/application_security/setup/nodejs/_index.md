@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Node.js
 aliases:
   - /security_platform/application_security/getting_started/nodejs
@@ -23,6 +24,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% aap/aap_and_api_protection_nodejs_overview showSetup="false" %}}

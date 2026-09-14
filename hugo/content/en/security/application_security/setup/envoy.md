@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Envoy
 code_lang: envoy
 code_lang_weight: 50
@@ -18,6 +19,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites

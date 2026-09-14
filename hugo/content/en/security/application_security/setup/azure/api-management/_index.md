@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Azure API Management
 description: Add threat detection and blocking to your Azure API Management gateway with the App and API Protection callout service.
 further_reading:
@@ -18,6 +19,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Azure API Management is in Preview" >}}
 To try the preview of App and API Protection for Azure API Management, use the following setup instructions.
 {{< /callout >}}

@@ -1,9 +1,11 @@
 ---
+
 aliases:
   - /security/application_security/security_signals/users_explorer/
 title: Users Explorer
 disable_toc: false
 ---
+
 This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
 
 ## Overview

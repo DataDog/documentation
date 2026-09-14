@@ -1,4 +1,5 @@
 ---
+
 title: Threat Protection
 description: Detect, investigate, and block application and API attacks in real time with Threat Protection in App and API Protection.
 further_reading:
@@ -6,6 +7,7 @@ further_reading:
   tag: "Blog"
   text: "Protect your applications from zero-day attacks with Datadog Exploit Prevention"
 ---
+
 Use Threat Protection in [App and API Protection][1] (AAP) to detect attacks against your applications and APIs, perform investigations, and block malicious traffic in real time.
 
 To get started, [set up AAP][2] on your services so they report security traces. AAP then detects threats from your live application traffic and lets you respond to them.

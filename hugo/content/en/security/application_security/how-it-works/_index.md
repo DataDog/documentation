@@ -1,4 +1,5 @@
 ---
+
 title: How App and API Protection Works in Datadog
 aliases:
   - /security_platform/guide/how-appsec-works/
@@ -6,6 +7,7 @@ aliases:
   - /security/application_security/how-appsec-works/
   - /security/guide/how-appsec-works/
 ---
+
 ## Overview
 
 Datadog App and API Protection (AAP) provides observability into application and API-level attacks that aim to exploit vulnerabilities and abuse app business logic, and observability into any bad actors targeting your systems. AAP performs actions such as the following:

@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for AWS Lambda functions in Java
 further_reading:
     - link: "/security/application_security/how-it-works/"
@@ -17,6 +18,7 @@ further_reading:
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
+
 Configuring App and API Protection for AWS Lambda involves:
 
 1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].

@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Google Cloud Run functions in PHP
 further_reading:
     - link: "/security/application_security/how-it-works/"
@@ -17,6 +18,7 @@ further_reading:
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
+
 <div class="alert alert-info">AAP support for Google Cloud Run is in Preview.</div>
 
 See [compatibility requirements][4] for information about what AAP features are available for serverless functions.

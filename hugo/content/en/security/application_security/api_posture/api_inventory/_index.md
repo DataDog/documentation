@@ -1,4 +1,5 @@
 ---
+
 title: API Inventory
 description: Catalog API endpoints and services, and assess API security risk across your environment.
 aliases:
@@ -11,6 +12,7 @@ further_reading:
   tag: "Blog"
   text: "Improve API authentication detection with Datadog"
 ---
+
 [API Inventory][1] is a continuously updated catalog of the API endpoints and services API Posture discovers across your environment. It shows security context for each endpoint, such as authentication status, public exposure, sensitive data flows, and associated findings.
 
 Inventory consists of two explorers:

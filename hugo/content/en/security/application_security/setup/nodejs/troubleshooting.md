@@ -1,6 +1,8 @@
 ---
+
 title: Troubleshooting Node.js App and API Protection
 ---
+
 ## Common Issues
 
 ### No security signals appearing

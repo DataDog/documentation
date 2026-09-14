@@ -1,8 +1,10 @@
 ---
+
 title: Trace Qualification
 aliases:
   - /security/application_security/threats/trace_qualification
 ---
+
 ## Overview
 
 App and API Protection (AAP) provides observability into application-level attacks, and evaluates the conditions in which each trace was generated. AAP trace qualification then labels each attack as harmful or safe to help you take action on the most impactful attacks.

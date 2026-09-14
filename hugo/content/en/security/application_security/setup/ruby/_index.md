@@ -1,4 +1,5 @@
 ---
+
 title: Enabling AAP for Ruby
 aliases:
   - /security_platform/application_security/getting_started/ruby
@@ -25,6 +26,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{% app-and-api-protection-ruby-overview showSetup="false" %}}
 
 ## Environments

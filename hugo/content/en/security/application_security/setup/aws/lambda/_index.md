@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for AWS Lambda
 aliases:
   - /security/application_security/getting_started/serverless
@@ -21,6 +22,7 @@ further_reading:
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
+
 Learn how to setup App and API Protection on your AWS Lambda functions by selecting the programming language your function is written with.
 
 <div class="alert alert-info">

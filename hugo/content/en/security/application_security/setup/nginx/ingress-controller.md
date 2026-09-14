@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Nginx in Kubernetes
 type: multi-code-lang
 aliases:
@@ -14,6 +15,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 # Ingress-nginx support for Datadog

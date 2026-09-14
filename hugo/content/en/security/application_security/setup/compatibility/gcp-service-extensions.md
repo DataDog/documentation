@@ -1,4 +1,5 @@
 ---
+
 title: App and API Protection GCP Service Extensions Compatibility Requirements
 code_lang: gcp-service-extensions
 type: multi-code-lang
@@ -6,6 +7,7 @@ code_lang_weight: 40
 aliases:
   - /security/application_security/threats/setup/compatibility/gcp-service-extensions
 ---
+
 The following table lists App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
 
 | App and API Protection capability        | Minimum App and API Protection Service Extensions callout image version  |

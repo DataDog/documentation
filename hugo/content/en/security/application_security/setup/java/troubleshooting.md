@@ -1,6 +1,8 @@
 ---
+
 title: Troubleshooting Java App and API Protection
 ---
+
 ## Common Issues
 
 ### No security signals appearing

@@ -1,4 +1,5 @@
 ---
+
 title: Attacker Fingerprint
 disable_toc: false
 aliases:
@@ -9,6 +10,7 @@ further_reading:
   tag: "Documentation"
   text: "Attacker Clustering"
 ---
+
 This topic describes a feature called **Datadog Attacker Fingerprint** to identify attackers beyond IP addresses.
 
 ## Overview

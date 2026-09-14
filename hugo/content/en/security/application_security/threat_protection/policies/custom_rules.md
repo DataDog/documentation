@@ -1,4 +1,5 @@
 ---
+
 title: Custom Detection Rules
 aliases:
   - /security/application_security/policies/custom_rules/
@@ -22,6 +23,7 @@ further_reading:
   tag: "Documentation"
   text: "Syntax for defining the AAP query"
 ---
+
 ## Overview
 
 App and API Protection (AAP) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.

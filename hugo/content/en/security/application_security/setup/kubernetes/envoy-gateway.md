@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Envoy Gateway
 aliases:
   - /security/application_security/setup/envoy-gateway
@@ -15,6 +16,7 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy Gateway is in Preview" >}}
 App and API Protection for Envoy Gateway is in Preview. Use the following instructions to try the preview.
 {{< /callout >}}
@@ -173,6 +175,7 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 20
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

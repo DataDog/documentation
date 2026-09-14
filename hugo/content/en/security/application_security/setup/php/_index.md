@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for PHP
 aliases:
   - /security_platform/application_security/getting_started/php
@@ -11,6 +12,7 @@ aliases:
   - /security/application_security/enabling/compatibility/php
   - /security/application_security/setup/php/compatibility
 ---
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% app_and_api_protection_php_overview showSetup="false" %}}

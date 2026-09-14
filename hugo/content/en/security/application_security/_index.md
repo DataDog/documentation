@@ -1,4 +1,5 @@
 ---
+
 title: App and API Protection
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:
@@ -43,6 +44,7 @@ site_support_id: application_security_override
 cascade:
     site_support_id: application_security_override
 ---
+
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 
 <div class="alert alert-info">

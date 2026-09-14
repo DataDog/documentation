@@ -1,4 +1,5 @@
 ---
+
 title: Set up App and API Protection for Node.js in Docker
 code_lang: docker
 type: multi-code-lang
@@ -14,6 +15,7 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
 {{% aap/aap_and_api_protection_nodejs_setup_options platform="docker" %}}
 
 {{% aap/aap_and_api_protection_nodejs_overview %}}

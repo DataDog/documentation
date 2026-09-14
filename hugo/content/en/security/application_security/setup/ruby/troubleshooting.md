@@ -1,6 +1,8 @@
 ---
+
 title: Troubleshooting Ruby App and API Protection
 ---
+
 ## Common Issues
 
 ### No security signals appearing

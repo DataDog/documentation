@@ -1,4 +1,5 @@
 ---
+
 title: Terms and Concepts
 disable_toc: false
 further_reading:
@@ -12,6 +13,7 @@ further_reading:
   tag: "Blog"
   text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
+
 Datadog App and API Protection monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General App and API Protection terms

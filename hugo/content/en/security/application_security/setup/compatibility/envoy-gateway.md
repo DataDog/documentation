@@ -1,9 +1,11 @@
 ---
+
 title: Envoy Gateway Compatibility Requirements
 code_lang: envoy-gateway
 type: multi-code-lang
 code_lang_weight: 40
 ---
+
 The following table lists App and API Protection capabilities for the Envoy Gateway integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |

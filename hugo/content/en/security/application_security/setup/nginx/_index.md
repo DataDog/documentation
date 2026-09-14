@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for Nginx
 aliases:
   - /security/application_security/setup/standalone/nginx
@@ -14,6 +15,7 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 ## Overview

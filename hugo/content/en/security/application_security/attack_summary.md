@@ -1,4 +1,5 @@
 ---
+
 title: Attack Summary
 aliases:
   - /security/application_security/overview/
@@ -12,6 +13,7 @@ further_reading:
   tag: "Documentation"
   text: "Threat Protection Overview"
 ---
+
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->
 
 The App and API Protection (AAP) [Attack Summary][2] provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.

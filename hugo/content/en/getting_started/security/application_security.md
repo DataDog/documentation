@@ -1,4 +1,5 @@
 ---
+
 title: Getting Started with App and API Protection
 description: Set up Datadog App and API Protection to secure web applications and APIs. Enable threat detection, code security, and vulnerability scanning for production.
 aliases:
@@ -23,6 +24,7 @@ further_reading:
 site_support_id: application_security_override
 
 ---
+
 ## Overview
 
 Datadog App and API Protection (AAP) helps secure your web applications and APIs in production.

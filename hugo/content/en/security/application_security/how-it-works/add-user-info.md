@@ -1,4 +1,5 @@
 ---
+
 title: User Monitoring and Protection
 aliases:
   - /security_platform/application_security/add-user-info
@@ -9,6 +10,7 @@ further_reading:
   tag: "Blog"
   text: "Detect runtime threats in Python Lambda functions with Datadog AAP"
 ---
+
 ## Overview
 
 Instrument your services and track user activity to detect and block bad actors.

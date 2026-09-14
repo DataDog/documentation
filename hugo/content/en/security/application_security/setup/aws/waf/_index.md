@@ -1,4 +1,5 @@
 ---
+
 title: Enabling App and API Protection for AWS WAF
 further_reading:
     - link: "/security/application_security/how-it-works/"
@@ -17,6 +18,7 @@ further_reading:
       tag: "Blog"
       text: "Monitor AWS WAF activity with Datadog"
 ---
+
 App and API Protection integrates with AWS Web Application Firewall (WAF) by:
 
 1. Converting logs to traces to gain visibility into monitored and blocked requests
