@@ -33,11 +33,11 @@ Find your code channels in a dedicated {{<ui>}}Code channels{{</ui>}} section in
 
 ### Permissions and access
 
-Only the user who prompted `@Datadog` is added to the new code channel automatically. Code channels match the visibilty of the channel from which they are created (that is, if you mentioned `@Datadog` in a public channel, the resulting code channel is also public). **Note**: Bits can bring repository code and Datadog telemetry into the code channel—-consider the channel's visibility, and who should have access to that data, when creating the channel.
+Only the user who prompted `@Datadog` is added to the new code channel automatically. Code channels match the visibilty of the channel from which they are created (that is, if you mentioned `@Datadog` in a public channel, the resulting code channel is also public).
+
+<div class="alert alert-warning">Bits Code can access source code repositories with the permissions of the user who prompted <code>@Datadog</code> and created the channel. It can access all Datadog telemetry (with <a href="/account_management/rbac/data_access/">Data Access Control</a> restrictions applied) of all users in the channel. Bits Code may bring this repository data and telemetry into the code channel. As the creator of a code channel, is your responsibility to ensure that anyone who can view a code channel is authorized to view its contents, and that anyone who can join a code channel is authorized to steer Bits Code.</div>
 
 Any user who wants to steer the agent must have a Datadog account connected to Slack. (If you post in a code channel but do not have a connected Datadog account, Bits ignores your message.)
-
-In a code channel, Bits Code acts using the Datadog permissions and source code provider access of the user who created the channel. 
 
 ## Work in a code channel
 
@@ -77,3 +77,4 @@ The general [Bits Code limitations][5] also apply to code channels.
 [4]: /bits_ai/bits_code/setup/
 [5]: /bits_ai/bits_code/#limitations
 [6]: https://slack.com/help/articles/54310833022355-Build-with-AI-as-a-team-using-Slack-Code
+[7]: /account_management/rbac/data_access/
