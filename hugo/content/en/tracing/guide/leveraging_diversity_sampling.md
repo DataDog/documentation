@@ -5,6 +5,9 @@ further_reading:
 - link: "/tracing/trace_pipeline/trace_retention/"
   tag: "Documentation"
   text: "Controlling trace indexing for retention"
+- link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
+  tag: "Architecture Center"
+  text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"
 ---
 
 ## Ingesting and retaining the traces you care about

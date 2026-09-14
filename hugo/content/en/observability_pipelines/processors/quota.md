@@ -1,5 +1,6 @@
 ---
 title: Quota Processor
+description: Learn how to use the Quota processor to measure logging traffic and keep, drop, or route logs after hitting your daily quota.
 disable_toc: false
 products:
 - name: Logs

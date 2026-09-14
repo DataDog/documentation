@@ -1,17 +1,14 @@
 ---
+description: Créez des tests Datadog API pour surveiller vos endpoints de manière
+  proactive. Créez des tests d'API en une ou plusieurs étapes avec des assertions,
+  configurez des alertes et résolvez les problèmes.
 further_reading:
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: Centre d'apprentissage
-  text: Présentation des tests Synthetic
 - link: /api/latest/synthetics/#create-an-api-test
   tag: API
   text: Créer un test API par programmation
 - link: /synthetics/api_tests
   tag: Documentation
   text: En savoir plus sur les tests API uniques
-- link: /synthetics/multistep
-  tag: Documentation
-  text: En savoir plus sur les tests API à plusieurs étapes
 - link: /getting_started/synthetics/private_location
   tag: Documentation
   text: En savoir plus sur les emplacements privés
@@ -24,65 +21,78 @@ further_reading:
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentation
   text: En savoir plus sur les monitors de test Synthetic
+- link: /synthetics/guide/export-tests-to-terraform
+  tag: Guide
+  text: Exporter les tests Synthetic vers Terraform
 title: Débuter avec les tests API
 ---
+## Présentation {#overview}
 
-## Présentation
+Les tests d'API **surveillent de manière proactive** que vos **services les plus importants** sont disponibles à tout moment et depuis n'importe où. [Les tests d'API uniques][1] se déclinent en huit sous-types qui vous permettent de lancer des requêtes sur les différentes couches réseau de vos systèmes (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` et `gRPC`). [Les tests d'API en plusieurs étapes][2] vous permettent d'exécuter des tests d'API en séquence pour surveiller la disponibilité des parcours clés au niveau de l'API.
 
-Les tests API **vérifient de façon proactive** que vos **services essentiels** sont disponibles en tout temps et tout lieu. Il existe huit sous-types de [tests API uniques][1]. Ces tests vous permettent de lancer des requêtes sur différentes couches réseau de vos systèmes (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` et `gRPC`). Avec les [tests API à plusieurs étapes][2], vous pouvez exécuter une série de tests API afin de surveiller la disponibilité de parcours clés au niveau de l'API.
-
-## Créer un test API unique
+## Créer un test d'API unique {#create-a-single-api-test}
 
 Les tests HTTP surveillent les endpoints de votre API. Ils génèrent des alertes lorsque la latence des réponses est élevée ou si l'une des conditions que vous avez définies n'est pas respectée, par exemple un code de statut attendu, des en-têtes de réponse ou le contenu d'un corps de réponse.
 
-{{< img src="getting_started/synthetics/api-test.png" alt="Présentation d'un test HTTP Synthetic" style="width:100%;" >}}
+Les exemples ci-dessous montrent comment créer un [test HTTP][3], un sous-type de [tests d'API uniques][1].
 
-L'exemple ci-dessous décrit la marche à suivre pour créer un [test HTTP][3], à savoir un sous-type des [tests API uniques][1].
+1. Sur le site Datadog, survolez {{< ui >}}Digital Experience{{< /ui >}} et sélectionnez [{{< ui >}}Tests{{< /ui >}}][4] (sous {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}).
 
-### Définir la requête
+2. Cliquez sur {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}New API test{{< /ui >}}][5].
 
-1. Sur le site Datadog, survolez **Digital Experience** et sélectionnez **[Tests][4]** (sous **Synthetic Monitoring & Testing**).
-2. Cliquez sur **New Test** > **[New API test][5]**.
-3. Sélectionnez le type de requête `HTTP`.
-4. Définissez votre requête :
+3. Vous pouvez créer un test en utilisant l'une des options suivantes :
 
-    - Ajoutez l'URL de l'endpoint à surveiller. Si vous n'avez pas d'endpoint, vous pouvez utiliser `https://www.shopist.io/`. Il s'agit d'une application Web d'e-commerce utilisable pour des tests. Lorsque vous définissez l'endpoint pour un test, le nom de votre test est automatiquement rempli : ici, `Test on www.shopist.io`.
-    - Vous pouvez sélectionner **Advanced Options** pour définir des options de requête personnalisées, des certificats, des identifiants d'authentification, etc.
+   - **Créer un test à partir d'un modèle** :
 
-      **Remarque** : vous pouvez créer des [variables globales][6] sécurisées pour stocker des identifiants et créer des [variables locales][7] pour générer des timestamps dynamiques afin de les utiliser dans la charge utile de votre requête. Une fois ces variables créées, saisissez `{{` dans un champ pertinent, puis sélectionnez la variable pour injecter sa valeur dans les options de vos tests.
+      1. Survolez l'un des modèles pré-remplis et cliquez sur {{< ui >}}View Template{{< /ui >}}. Cela ouvre un panneau latéral affichant des informations de configuration pré-remplies, notamment : Détails du test, Détails de la requête, Assertions, Conditions d'alerte et Paramètres du monitor.
+      2. Cliquez sur {{< ui >}}+Create Test{{< /ui >}} pour ouvrir la page {{< ui >}}Define Request{{< /ui >}}, où vous pouvez examiner et modifier les options de configuration pré-remplies. Les champs présentés sont identiques à ceux disponibles lors de la création d'un test à partir de zéro.
+      3. Cliquez sur {{< ui >}}Save Details{{< /ui >}} pour soumettre votre test d'API.<br /><br>
 
-      Pour cet exemple, aucune option avancée n'est requise.
-    - Vous pouvez ajouter des tags, comme `env:prod` et `app:shopist`, à votre test. Les tags vous permettent d'organiser votre collection de tests et d'accéder rapidement à ceux qui vous intéressent sur la page d'accueil.
+        {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Vidéo de la page d'accueil des tests d'API Synthetics avec des modèles" video="true" >}}
 
-5. Cliquez sur **Test URL** pour lancer l'exécution de l'exemple de test.
+   - **Créer un test à partir de zéro** :
 
-{{< img src="getting_started/synthetics/api-test-config-3.png" alt="Configuration de test API" style="width:100%;">}}
+      1. Pour créer un test à partir de zéro, cliquez sur le modèle {{< ui >}}+ Start from scratch{{< /ui >}}, puis sélectionnez le type de requête `HTTP`.
 
-### Définir des assertions
+      2. Ajoutez l'URL de l'endpoint que vous souhaitez surveiller. Si vous ne savez pas par où commencer, vous pouvez utiliser `https://www.shopist.io/`, une application web de commerce électronique de test. Si vous utilisez l'URL de test Shopist, le nom de votre test est automatiquement renseigné en tant que `Test on shopist.io`.  
 
-Lorsque vous cliquez sur **Test URL**, des assertions de base sont automatiquement ajoutées à la réponse de votre endpoint. Les assertions définissent les critères de réussite d'un test.
+      3. Optionnellement, sélectionnez {{< ui >}}Advanced Options{{< /ui >}} pour définir des options de requête personnalisées, ajouter des certificats et des identifiants d'authentification, et créer des [variables globales][6] ou [variables locales][7] sécurisées pour des entrées dynamiques.
+
+         **Remarque** : Tapez `{{` dans tout champ pertinent pour sélectionner une variable et injecter sa valeur dans vos options de test. 
+          
+      4. Optionally, set tags such as `env:prod` and `app:shopist` on your test. Tags allow you to keep your test suite organized and quickly find tests you're interested in on the homepage.
+
+      5. Click {{< ui >}}Send{{< /ui >}} to trigger a sample test run.
+
+         {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Configuration de test d'API" style="width:90%;">}}
+
+      6. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
+
+### Définissez des assertions {#define-assertions}
+
+Cliquez sur {{< ui >}}Send{{< /ui >}} pour remplir automatiquement les assertions de base concernant la réponse de votre endpoint. Les assertions définissent ce qu'est une exécution de test réussie.
 
 Ici, trois assertions par défaut sont ajoutées après l'exécution de l'exemple de test :
 
 {{< img src="getting_started/synthetics/assertions-example-2.png" alt="Assertions par défaut" style="width:100%;">}}
 
-Les assertions sont entièrement personnalisables. Pour ajouter une assertion personnalisée, cliquez sur des éléments de l'aperçu de réponse, comme les en-têtes, ou cliquez sur **New Assertion** pour définir une nouvelle assertion de toute pièce.
+Les assertions sont entièrement personnalisables. Pour ajouter une assertion personnalisée, cliquez sur des éléments de l'aperçu de la réponse tels que les en-têtes ou cliquez sur {{< ui >}}New Assertion{{< /ui >}} pour définir une nouvelle assertion à partir de zéro. 
 
-{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Exemple de configuration de test API" video="true" >}}
+{{< img src="getting_started/synthetics/api-test-configuration-2.mp4" alt="Exemple de configuration de test d'API" video="true" >}}
 
-### Sélectionner des emplacements
+### Sélectionnez des emplacements {#select-locations}
 
-Sélectionnez un ou plusieurs **emplacements gérés** ou **emplacements privés** à partir desquels vous souhaitez exécuter votre test. {{% managed-locations %}}
+Sélectionnez un ou plusieurs {{< ui >}}Managed Locations{{< /ui >}} ou {{< ui >}}Private Locations{{< /ui >}} depuis lesquels exécuter votre test. {{% managed-locations %}}
 
-L'application Shopist est accessible au public à l'adresse `https://www.shopist.io/`, vous pouvez donc choisir n'importe quel emplacement géré pour exécuter votre test. Pour tester des applications internes ou simuler le comportement d'utilisateurs dans des régions géographiques distinctes, utilisez plutôt [les emplacements privés][8].
+L'application Shopist est accessible publiquement à `https://www.shopist.io/`, vous pouvez donc choisir n'importe quel emplacement géré pour exécuter votre test. Pour tester des applications internes ou simuler le comportement des utilisateurs dans des régions géographiques distinctes, utilisez plutôt des [emplacements privés][8].
 
-### Indiquer la fréquence du test
+### Spécifiez la fréquence du test {#specify-test-frequency}
 
-Sélectionnez la fréquence à laquelle vous souhaitez exécuter votre test. Vous pouvez conserver la fréquence par défaut d'une minute.
+Sélectionnez la fréquence à laquelle vous souhaitez que votre test s'exécute. Vous pouvez conserver la fréquence par défaut de 1 minute.
 
-Vous pouvez non seulement planifier l'exécution de votre test Synthetic, mais également le déclencher manuellement, ou directement depuis vos [pipelines CI/CD][9].
+Vous pouvez non seulement planifier l'exécution de votre test Synthetic, mais également le déclencher manuellement, ou directement depuis vos [pipelines CI/CD][9]. 
 
-### Définir des conditions d'alerte
+### Définir les conditions d'alerte {#define-alert-conditions}
 
 Vous pouvez définir des conditions d'alerte afin de veiller à ce que votre test n'échoue pas en cas d'erreur réseau isolée. Ainsi, vous recevez uniquement des alertes lorsque votre endpoint rencontre un réel problème.
 
@@ -92,83 +102,101 @@ Vous pouvez spécifier le nombre d'échecs consécutifs avant qu'un emplacement 
 Retry test 2 times after 300 ms in case of failure
 ```
 
-Vous pouvez également configurer votre test de façon à ce qu'il envoie uniquement une notification lorsque l'endpoint n'est plus disponible pendant une certaine durée, et pour un certain nombre d'emplacements. La règle d'alerte ci-dessous stipule qu'une notification est envoyée lorsque le test échoue pendant trois minutes, sur deux emplacements différents :
+Vous pouvez également configurer votre test pour qu'il ne déclenche une notification que lorsque votre endpoint est hors service pendant une certaine durée et un certain nombre d'emplacements. Dans l'exemple ci-dessous, la règle d'alerte est configurée pour envoyer une notification si le test échoue pendant trois minutes sur deux emplacements différents :
 
 ```text
 An alert is triggered if your test fails for 3 minutes from any 2 of 13 locations
 ```
 
-### Configurer le monitor de test
+### Configurer le monitor de test {#configure-the-test-monitor}
 
-Indiquez un message dans votre alerte et ajoutez les adresses e-mail auxquelles vous souhaitez envoyer des alertes. Vous pouvez également utiliser des [intégrations de notification][10], comme Slack, PagerDuty, Microsoft Teams ou encore des webhooks. Pour déclencher une alerte Synthetic avec ces outils, vous devez auparavant configurer l'[intégration correspondante][11].
+Utilisez cette section pour créer le **message** que vous souhaitez envoyer avec la notification. La notification inclut votre message personnalisé et des détails sur les emplacements en échec. Des messages de monitor pré-remplis sont inclus dans le corps du message :
 
-Lorsque vous êtes prêt à enregistrer votre configuration de test et votre monitor, cliquez sur **Create**.
+{{< img src="/synthetics/browser_tests/browser_tests_pre-filled.png" alt="Section du monitor Synthetic Monitoring, mettant en évidence les messages de monitor pré-remplis" style="width:100%;" >}}
 
-## Créer un test API à plusieurs étapes
+Par exemple, le message de monitor suivant crée un monitor qui itère sur des étapes et extrait des variables pour des tests de navigateur :
 
-Les [tests API à plusieurs étapes][2] vous permettent de surveiller des transactions commerciales essentielles au niveau de l'API.
+   ```text
+   {{! Lister les variables extraites de toutes les étapes réussies }}
+   # Variables extraites
+   {{#each synthetics.attributes.result.steps}}
+   {{#if extractedValue}}
+   * **Nom** : `{{extractedValue.name}}`
+   **Valeur :** {{#if extractedValue.secure}}*Obfusqué (valeur masquée)*{{else}}`{{{extractedValue.value}}}`{{/if}}
+   {{/if}}
+   {{/each}}
+   ```
 
-{{< img src="getting_started/synthetics/multistep-api-test.png" alt="Présentation d'un test API à plusieurs étapes Synthetic" style="width:100%;" >}}
+When you're ready to save your test configuration and monitor, click {{< ui >}}Save & Edit Recording{{< /ui >}}.
 
-Tout comme les [tests API][3], les tests API à plusieurs étapes vous envoient des alertes lorsque vos endpoints sont trop lents ou lorsqu'ils ne répondent pas aux conditions que vous avez définies. Vous pouvez créer des variables à partir des réponses d'une étape, puis réinjecter leurs valeurs dans les étapes ultérieures. Ainsi, les étapes s'enchaînent et reproduisent le comportement de votre application ou service.
+For more information, see [Using Synthetic Test Monitors][13].
 
-L'exemple ci-dessous vous explique comment créer un test API à plusieurs étapes afin de surveiller l'ajout d'un article à un panier. Il inclut trois étapes :
 
-- Création d'un panier
-- Récupération d'un produit
+## Create a multistep API test 
+
+[Multistep API tests][2] allow you to monitor key business transactions at the API level. 
+
+{{< img src="getting_started/synthetics/multistep-api-test.png" alt="Présentation d'un test API Synthetics à plusieurs étapes" style="width:100%;" >}}
+
+Similaires aux [tests API][3], les tests API à plusieurs étapes vous alertent lorsque vos endpoints deviennent trop lents ou ne respectent pas les conditions que vous avez définies. Vous pouvez créer des variables à partir des réponses de chaque étape et réinjecter leurs valeurs dans les étapes suivantes, en enchaînant les étapes de manière à imiter le comportement de votre application ou service.
+
+L'exemple de test ci-dessous démontre la création d'un test API à plusieurs étapes qui surveille l'ajout d'un article à un panier. Ce test contient trois étapes : 
+
+- Obtention d'un panier
+- Obtention d'un produit
 - Ajout du produit au panier
 
-Si vous ne savez pas quels endpoints d'API utiliser pour créer votre test API à plusieurs étapes, utilisez les exemples d'endpoint ci-dessous :
+Si vous ne savez pas quels endpoints d'API utiliser pour créer votre test API à plusieurs étapes, utilisez les exemples d'endpoint ci-dessous : 
 
-Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Multistep API test][12]**. Attribuez un nom à votre test, par exemple `Ajout de produit au panier`, ajoutez des tags et sélectionnez des emplacements.
+Pour créer un nouveau test API à plusieurs étapes, cliquez sur {{< ui >}}New Test{{< /ui >}} > [{{< ui >}}Multistep API test{{< /ui >}}][12]. Ajoutez un nom de test tel que `Add product to cart`, incluez des tags et sélectionnez des emplacements. 
 
-### Création d'un panier
+### Obtenir un panier {#get-a-cart}
 
-1. Dans **Define steps**, cliquez sur **Create Your First Step**.
-2. Attribuez un nom à votre étape, par exemple `Création d'un panier`.
-3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/carts`.
-4. Cliquez sur **Test URL**. Cela crée un panier dans le backend de l'application Shopist.
-5. Conservez les assertions par défaut ou modifiez-les.
-6. Vous avez également la possibilité de définir des paramètres d'exécution.
+1. Dans {{< ui >}}Define steps{{< /ui >}}, cliquez sur {{< ui >}}Create Your First Step{{< /ui >}}. 
+2. Ajoutez un nom à votre étape, par exemple : `Get a cart`.
+3. Spécifiez la méthode HTTP et l'URL que vous souhaitez interroger. Vous pouvez saisir `POST` et `https://api.shopist.io/carts`. 
+4. Cliquez sur {{< ui >}}Test URL{{< /ui >}}. Ceci crée un article de panier dans le backend de l'application Shopist.
+5. Laissez les assertions par défaut ou modifiez-les.
+6. Définissez éventuellement des paramètres d'exécution. 
 
-    Pour vous assurer que le test s'applique à l'ensemble de la collecte de données de l'endpoint ou pour vérifier que la dernière étape de nettoyage est bien exécutée, peu importe le résultat des étapes précédentes, cochez la case **Continue with test if this step fails**. La fonctionnalité **Retry** peut s'avérer utile si l'endpoint de votre API n'est pas toujours très réactif.
+    La sélection de {{< ui >}}Continue with test if this step fails{{< /ui >}} est utile pour garantir qu'une collection complète d'endpoints est testée ou pour s'assurer que la dernière étape de nettoyage est exécutée, indépendamment du succès ou de l'échec des étapes précédentes. La fonctionnalité d'étape {{< ui >}}Retry{{< /ui >}} est pratique dans les situations où vous savez que votre endpoint d'API peut prendre un certain temps avant de répondre. 
+    
+    Pour cet exemple, aucun paramètre d'exécution n'est requis. 
 
-    Pour cet exemple, aucun paramètre d'exécution n'est requis.
+7. Pour créer une variable à partir de la valeur de l'ID de panier située à la fin de l'en-tête `location` :
+    - Cliquez sur {{< ui >}}Extract a variable from response content{{< /ui >}}.
+    - Nommez votre variable `CART_ID`.
+    - Dans {{< ui >}}Response Header{{< /ui >}}, sélectionnez `location`.
+    - Dans le champ {{< ui >}}Parsing Regex{{< /ui >}}, ajoutez une expression régulière telle que `(?:[^\\/](?!(\\|/)))+$`.
 
-7. Pour créer une variable à partir de la valeur de l'ID du panier situé à la fin de l'en-tête `location` :
-    - Cliquez sur **Extract a variable from response content**.
-    - Définissez le nom de votre variable sur `CART_ID`.
-    - Pour **Response Header**, sélectionnez `location`.
-    - Ajoutez une expression régulière, par exemple `(?:[^\\/](?!(\\|/)))+$` dans le champ **Parsing Regex**.
+   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Variable extraite du contenu de la réponse" style="width:100%;" >}}
 
-   {{< img src="getting_started/synthetics/multistep-test-extract-variables.png" alt="Variable extraite à partir du contenu de la réponse" style="width:100%;" >}}
+8. Cliquez sur {{< ui >}}Save Variable{{< /ui >}}.
+9. Une fois la création de cette étape de test terminée, cliquez sur {{< ui >}}Save Step{{< /ui >}}.
 
-8. Cliquez sur **Save Variable**.
-9. Une fois votre étape terminée, cliquez sur **Save Step**.
+### Obtenir un produit {#get-a-product}
+   
+1. Dans {{< ui >}}Define another step{{< /ui >}}, cliquez sur {{< ui >}}Add Another Step{{< /ui >}}. Par défaut, vous pouvez créer jusqu'à dix étapes.
+2. Ajoutez un nom à votre étape, par exemple : `Get a product`.
+3. Spécifiez la méthode HTTP et l'URL que vous souhaitez interroger. Ici, vous pouvez ajouter : `GET` et `https://api.shopist.io/products.json`. 
+4. Cliquez sur {{< ui >}}Test URL{{< /ui >}}. Ceci récupère une liste de produits disponibles dans l'application Shopist.
+5. Laissez les assertions par défaut ou modifiez-les.
+6. Définissez éventuellement des paramètres d'exécution. Pour cet exemple, aucun paramètre d'exécution n'est requis.
+7. Pour créer une variable à partir de l'identifiant de produit situé dans le corps de la réponse :
+    - Cliquez sur {{< ui >}}Extract a variable from response content{{< /ui >}}
+    - Nommez votre variable `PRODUCT_ID`.
+    - Cliquez sur l'onglet {{< ui >}}Response Body{{< /ui >}}.
+    - Cliquez sur la clé `$oid` de n'importe quel produit pour générer un chemin JSON tel que `$[0].id['$oid']`.
+8. Cliquez sur {{< ui >}}Save Variable{{< /ui >}}.
+9. Une fois la création de cette étape de test terminée, cliquez sur {{< ui >}}Save Step{{< /ui >}}.
 
-### Récupération d'un produit
+### Ajouter le produit au panier {#add-product-to-cart}
 
-1. Sous **Define another step**, cliquez sur **Add Another Step**. Par défaut, vous pouvez créer jusqu'à 10 étapes.
-2. Attribuez un nom à votre étape, par exemple `Récupération d'un produit`.
-3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `GET` et `https://api.shopist.io/products.json`.
-4. Cliquez sur **Test URL**. La liste des produits disponibles dans l'application Shopist est alors récupérée.
-5. Conservez les assertions par défaut ou modifiez-les.
-6. Vous avez la possibilité de définir des paramètres d'exécution. Pour cet exemple, aucun paramètre d'exécution spécifique n'est requis.
-7. Pour créer une variable à partir de l'ID de produit situé dans le corps de la réponse :
-    - Cliquez sur **Extract a variable from response content**.
-    - Définissez le nom de votre variable sur `PRODUCT_ID`.
-    - Cliquez sur l'onglet **Response Body**.
-    - Cliquez sur la clé `$oid` de l'un des produits pour générer un chemin JSON. Exemple : `$[0].id['$oid']`.
-8. Cliquez sur **Save Variable**.
-9. Une fois votre étape terminée, cliquez sur **Save Step**.
-
-### Ajout du produit au panier
-
-1. Cliquez sur **Add Another Step** pour ajouter la dernière étape, à savoir l'ajout du produit au panier.
-2. Attribuez un nom à votre étape, par exemple `Ajout du produit au panier`.
-3. Indiquez la méthode HTTP et l'URL à interroger. Saisissez par exemple `POST` et `https://api.shopist.io/add_item.json`.
-4. Dans l'onglet **Request Body**, choisissez le type de corps `application/json` et ajoutez ce qui suit :
-
+1. Cliquez sur {{< ui >}}Add Another Step{{< /ui >}} pour ajouter l'étape finale, l'ajout d'un produit dans votre panier.
+2. Ajoutez un nom à votre étape, par exemple : `Add product to cart`.
+3. Spécifiez la méthode HTTP et l'URL que vous souhaitez interroger. Ici, vous pouvez ajouter : `POST` et `https://api.shopist.io/add_item.json`. 
+4. Dans l'onglet {{< ui >}}Request Body{{< /ui >}}, choisissez le type de corps `application/json` et insérez ce qui suit :
+        
     {{< code-block lang="java" disable_copy="true" collapsible="true" >}}
     {
       "cart_item": {
@@ -177,31 +205,35 @@ Pour créer un test API à plusieurs étapes, cliquez sur **New Test** > **[Mul
         "quantity": 1
       },
       "cart_id": "{{ CART_ID }}"
-    }
+    } 
     {{< /code-block >}}
+        
+5. Cliquez sur {{< ui >}}Test URL{{< /ui >}}. Ceci ajoute le produit que vous avez extrait à l'étape 2 au panier que vous avez créé à l'étape 1 et renvoie une URL de paiement.
+6. Dans {{< ui >}}Add assertions (optional){{< /ui >}}, cliquez sur {{< ui >}}Response Body{{< /ui >}} puis sur la touche `url` pour que votre test confirme que le parcours s'est terminé avec une réponse contenant l'URL de paiement.
+7. Aucun paramètre d'exécution ni aucune extraction de variable ne sont nécessaires lors de cette dernière étape.
+10. Une fois la création de cette étape de test terminée, cliquez sur {{< ui >}}Save Step{{< /ui >}}.
 
-5. Cliquez sur **Test URL**. Cela ajoute le produit extrait lors de l'étape 2 au panier créé lors de l'étape 1 et renvoie une URL de paiement.
-6. Sous **Add assertions (optional)**, cliquez sur **Response Body** et sur la clé `url` pour que votre test vérifie que le parcours s'est terminé avec une réponse contenant l'URL de paiement.
-7. Aucun paramètre d'exécution ni aucune extraction de variables ne sont requis lors de cette dernière étape.
-10. Une fois votre étape terminée, cliquez sur **Save Step**.
+{{< img src="getting_started/synthetics/defined-steps.png" alt="Étapes de test créées" style="width:100%;" >}}
 
-{{< img src="getting_started/synthetics/defined-steps.png" alt="Étapes du test créées" style="width:100%;" >}}
-
-Vous pouvez ensuite configurer les autres conditions de votre test, notamment sa fréquence, ses conditions d'alerte et le monitor de test. Une fois que vous êtes prêt à enregistrer la configuration de votre test et votre monitor, cliquez sur **Create**.
+Vous pouvez ensuite configurer le reste de vos conditions de test, telles que la fréquence de test et les conditions d'alerte, ainsi que le monitor de test. Lorsque vous êtes prêt à enregistrer votre configuration de test et votre monitor, cliquez sur {{< ui >}}Create{{< /ui >}}. 
 
 Pour en savoir plus, consultez la section [Utiliser des monitors de test Synthetic][13].
 
-## Visualiser les résultats du test
+## Consultez les résultats de test {#look-at-test-results}
 
-Les pages de détails des **tests API** et **tests API à plusieurs étapes** comprennent une vue d'ensemble de la configuration du test, l'uptime global associé aux endpoints testés pour chaque emplacement, des graphiques sur les temps de réponse et les délais réseau, ainsi que la liste des résultats et des événements du test.
+Les pages {{< ui >}}API test{{< /ui >}} et {{< ui >}}Multistep API test detail{{< /ui >}} affichent une vue d'ensemble de la configuration du test, la disponibilité globale associée aux endpoints testés par emplacement, des graphiques sur le temps de réponse et les timings réseau, ainsi qu'une liste des résultats de test et des événements.
 
-Pour découvrir le motif d'un échec de test, faites défiler la page jusqu'à la section **Test Results** et cliquez sur les résultats d'un test ayant échoué. Afin de résoudre le problème, passez en revue les assertions qui ont échoué et les détails de la réponse, tels que le code de statut, le temps de réponse ainsi que les en-têtes et le corps associés.
+Pour dépanner un test ayant échoué, examinez les échecs dans l'onglet **Activity** ou **Test Runs** et cliquez sur un résultat de test en échec. Examinez les assertions ayant échoué et les détails de la réponse tels que le code d'état, le temps de réponse, ainsi que les en-têtes et le corps associés pour diagnostiquer le problème.
 
-{{< img src="getting_started/synthetics/api-test-failure-5.png" alt="Échec d'un test API" style="width:100%;">}}
+{{< img src="synthetics/api_tests/api_test_summary_updated.png" alt="Page de détails du test d'API affichant l'onglet Activity avec la disponibilité globale, la chronologie des alertes et une liste des Test Runs récentes" style="width:100%;">}}
 
-Grâce à l'[intégration de la solution APM Datadog à la surveillance Synthetic][14], vous pouvez identifier la cause de l'échec d'un test en consultant les traces générées par l'exécution du test dans l'onglet **Traces**.
+Avec l'[intégration d'APM avec Synthetic Monitoring][14] de Datadog, accédez à la cause première d'une exécution de test ayant échoué en consultant la trace générée par l'exécution du test dans l'onglet {{< ui >}}Traces{{< /ui >}}.
 
-## Pour aller plus loin
+### Lancez Bits Investigation {#launch-a-bits-investigation}
+
+Pour identifier la cause première d'un test Synthetic API ayant échoué, lancez une [Bits Investigation][16]. Bits Investigation analyse les résultats de test, les traces, les logs et les métriques pour faire ressortir une cause première et signaler si l'échec est dû à une régression ou à une mauvaise configuration.
+
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -217,6 +249,7 @@ Grâce à l'[intégration de la solution APM Datadog à la surveillance Syntheti
 [10]: /fr/integrations/#cat-notification
 [11]: https://app.datadoghq.com/account/settings
 [12]: https://app.datadoghq.com/synthetics/multi-step/create
-[13]: /fr/synthetics/guide/synthetic-test-monitors
+[13]: /fr/monitors/types/synthetic_monitoring/
 [14]: /fr/synthetics/apm/
 [15]: /fr/synthetics/api_tests/grpc_tests
+[16]: /fr/bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page

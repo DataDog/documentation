@@ -1,5 +1,5 @@
 ---
-title: Retention Analysis
+title: Retention
 aliases:
 - /product_analytics/user_retention/
 - /product_analytics/charts/user_retention/

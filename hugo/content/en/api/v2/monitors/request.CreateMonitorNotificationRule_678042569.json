@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "filter": {
+        "tags": [
+          "test:example-monitor"
+        ]
+      },
+      "name": "test rule",
+      "recipients": [
+        "slack-test-channel"
+      ],
+      "bundle_config": {
+        "duration": 3600
+      }
+    },
+    "type": "monitor-notification-rule"
+  }
+}

@@ -15,6 +15,12 @@ further_reading:
 - link: "/tracing/trace_pipeline/metrics/"
   tag: "Documentation"
   text: "Usage Metrics"
+- link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
+  tag: "Architecture Center"
+  text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"
+- link: "https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/"
+  tag: "Architecture Center"
+  text: "Optimizing Distributed Tracing: Best practices for remaining within budget and capturing critical traces"
 ---
 
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Ingestion Sampling Rules" >}}

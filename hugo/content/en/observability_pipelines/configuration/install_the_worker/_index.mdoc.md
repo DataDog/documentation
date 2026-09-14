@@ -1,11 +1,18 @@
 ---
 title: Install the Worker
+description: Install and set up the Observability Pipelines Worker on your platform.
 disable_toc: false
 aliases:
     - /observability_pipelines/install_the_worker/
     - /observability_pipelines/install_the_worker/set_up_the_worker_in_ecs_fargate/
     - /observability_pipelines/guide/set_up_the_worker_in_ecs_fargate/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-kubernetes-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines Kubernetes Deployment"
+- link: "https://www.datadoghq.com/architecture/op-vm-deployment/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines VM Deployment"
 - link: "/observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/"
   tag: "Documentation"
   text: "Advanced Worker configurations"
@@ -46,7 +53,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 {% /if %}
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your {% tooltip contents="Contact your account manager to discuss use cases and pricing." %}logs, metrics, and traces{% /tooltip %}, and then route them to different destinations.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs and metrics, and then route them to different destinations.
 
 <!-- Kubernetes - Overview -->
 {% if equals($platform, "kubernetes") %}

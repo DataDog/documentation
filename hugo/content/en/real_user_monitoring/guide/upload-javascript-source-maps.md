@@ -8,12 +8,15 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
-- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
-  tag: 'Source Code'
-  text: 'Sourcemaps command reference'
 - link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
   tag: "Learning Center"
   text: "Tracking errors with RUM for JavaScript Web Applications"
+- link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
+  tag: "Blog"
+  text: "A practical guide to React error monitoring"
+- link: 'https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps'
+  tag: 'Source Code'
+  text: 'Sourcemaps command reference'
 
 ---
 

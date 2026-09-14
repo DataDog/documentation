@@ -3,9 +3,14 @@
     "type": "feature-flags",
     "attributes": {
       "default_variant_key": "variant-Example-Feature-Flag-1",
-      "description": "Test feature flag for BDD scenarios",
+      "distribution_channel": "SERVER",
       "key": "test-feature-flag-Example-Feature-Flag",
       "name": "Test Feature Flag Example-Feature-Flag",
+      "require_approval": false,
+      "staleness_status": "PERMANENT",
+      "tags": [
+        "env:api-client-test"
+      ],
       "value_type": "BOOLEAN",
       "variants": [
         {

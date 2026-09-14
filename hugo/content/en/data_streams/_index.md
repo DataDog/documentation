@@ -14,6 +14,9 @@ further_reading:
     - link: '/internal_developer_portal/catalog/'
       tag: 'Documentation'
       text: 'Catalog'
+    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
+      tag: "Learning Center"
+      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
     - link: 'https://www.datadoghq.com/blog/data-streams-monitoring/'
       tag: 'Blog'
       text: 'Track and improve the performance of streaming data pipelines with Datadog Data Streams Monitoring'
@@ -29,9 +32,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-observability/"
       tag: "Blog"
       text: "Ensure trust across the entire data life cycle with Datadog Data Observability"
-    - link: "https://learn.datadoghq.com/courses/monitor-a-kafka-pipeline-with-dsm"
-      tag: "Learning Center"
-      text: "Monitor a Kafka Pipeline with Data Streams Monitoring"
+    - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
+      tag: "Blog"
+      text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
 cascade:
     algolia:
         rank: 70
@@ -146,6 +149,14 @@ Datadog automatically links the infrastructure powering your services and relate
 
 Datadog can automatically detect your managed [Confluent Cloud][8] connectors and visualize them in the Data Streams Monitoring topology map. Install and configure the [Confluent Cloud integration][9] to collect information from your Confluent Cloud connectors—including throughput, status, and topic dependencies.
 
+## Troubleshooting
+
+### End-to-end latency metric doesn't look accurate
+
+Latency calculations for a pathway require single-threaded message processing. If messages in your pipeline use multiple threads, add manual instrumentation. Manual instrumentation is available for [Go][12] and [Java][13] applications. For other languages, see the [manual instrumentation guide][14]. For .NET manual instrumentation, contact [Support][15].
+
+In the Pathways tab, the message **latency values may be approximate for these pathways** appears for pathways that need manual instrumentation for accurate latency values.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -161,3 +172,7 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
 [11]: /opentelemetry/compatibility
+[12]: /data_streams/go#manual-instrumentation
+[13]: /data_streams/java#manual-instrumentation
+[14]: /data_streams/manual_instrumentation/
+[15]: /help/
