@@ -35,6 +35,8 @@ sca:
     - "Go:golang.org/x/text"
 {{< /code-block >}}
 
+<div class="alert alert-warning">Ecosystem and package names in <code>ignore-ecosystems</code> and <code>ignore-packages</code> are matched case-sensitively. For example, <code>go:golang.org/x/text</code> does not match the <code>Go</code> ecosystem, and <code>npm:Lodash</code> does not match the <code>lodash</code> package.</div>
+
 If you run the SCA scanner directly from the CLI, the equivalent `--exclude`, `--exclude-ecosystem`, and `--exclude-package` flags are unioned with the exclusions configured above.
 
 For more information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
