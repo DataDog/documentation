@@ -41,7 +41,7 @@ For more information, see [Synthetic Monitoring Settings][6].
 
 ## Synthetic Monitoring to RUM Explorer
 
-Navigate to your [list of browser tests][7] and open a test to view the Test Details page. Open a test run from the {{< ui >}}Activity{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} tab to view the _run_ details page. The {{< ui >}}RUM{{< /ui >}} widget on this page shows the number of sessions generated, along with the {{< ui >}}View session in RUM{{< /ui >}} button.
+From your [list of browser tests][7], open a browser test. On the test details page, select a test run from the {{< ui >}}Activity{{< /ui >}} or {{< ui >}}Test Runs{{< /ui >}} tab to open the test run details page. The {{< ui >}}RUM{{< /ui >}} widget on that page shows how many sessions were generated and includes the {{< ui >}}View session in RUM{{< /ui >}} button.
 
 {{< img src="synthetics/guide/rum_in_synthetics/view_session_in_rum.png" alt="The View session in RUM button in the RUM widget on the run details page." style="width:100%;" >}}
 
