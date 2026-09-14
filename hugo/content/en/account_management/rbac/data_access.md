@@ -67,7 +67,7 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - Error Tracking issues
 - Logs
 - RUM sessions
-- Security signals (Cloud SIEM signals only)
+- Security signals (Cloud SIEM and Workload Protection signals )
 - Software Delivery repository info (in CI Visibility pipelines)
 - Workload Protection Agent Events
 

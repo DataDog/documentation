@@ -5,57 +5,68 @@ further_reading:
   text: Cómo funciona App and API Protection
 - link: /security/application_security/waf-integration/
   tag: Documentación
-  text: Más información sobre integraciones WAF
+  text: Más información sobre las integraciones de WAF
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solucionar problemas de App and API Protection
+  text: Solución de problemas de protección de aplicaciones y API
 - link: /security/application_security/threats/
   tag: Documentación
   text: App and API Protection
 - link: https://www.datadoghq.com/blog/aws-waf-datadog/
   tag: Blog
-  text: Monitorización de actividades WAF de AWS con Datadog
-title: Activación de App and API Protection para AWS WAF
+  text: Hacer un seguimiento de la actividad de AWS WAF con Datadog
+title: Habilitación de App and API Protection para AWS WAF
 ---
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection se encuentra en versión preliminar en el sitio de Datadog Government US1-FED.
+</div>
+{{< /site-region >}}
 
-App and API Protection se integra con AWS Web Application Firewall (WAF) mediante lo siguiente:
+App and API Protection se integra con AWS Web Application Firewall (WAF) mediante:
 
-1. Conversión de logs en trazas para obtener visibilidad de las solicitudes supervisadas y bloqueadas.
-2. Bloqueo de direcciones IP con conjuntos de IP de AWS WAF.
+1. La conversión de registros en trazas para obtener visibilidad de las solicitudes monitoreadas y bloqueadas
+2. El bloqueo de direcciones IP con IPsets de AWS WAF
 
-Ambas pueden configurarse independientemente, pero se recomienda configurar primero la conversión de logs a trazas para poder inspeccionar las acciones de AWS WAF.
+Ambos se pueden configurar de forma independiente, pero se recomienda configurar primero la conversión de registros en trazas para inspeccionar las acciones de AWS WAF.
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
- - La [integración de Amazon Web Services][1] está configurada.
- - La recopilación de métricas y logs está activada en la [integración de AWS WAF][2].
- - Se crea un [conexión][3] con la cuenta de AWS que aloja el AWS WAF utilizado para el bloqueo.
+- La [integración de Amazon Web Services][1] está configurada.
+- Los siguientes permisos están habilitados para el [AWS Resource Collection][7]:
+  - `wafv2:GetWebACL`
+  - `wafv2:ListResourcesForWebACL`
+  - `wafv2:ListWebACLs`
+  - `wafv2:GetIPSet`
+  - `wafv2:ListIPSets`
+ - La recopilación de métricas y registros está habilitada en la [integración de AWS WAF][2]. Tenga en cuenta que solo los registros enviados a un bucket de S3 son recopilados por la integración de AWS WAF.
+ - Se crea una [Conexión][3] con la cuenta de AWS que aloja el AWS WAF utilizado para el bloqueo.
 
-## Convertir los logs de AWS WAF en trazas
+## Convertir registros de AWS WAF en trazas {#convert-aws-waf-logs-to-traces}
 
-En primer lugar, **habilita** la conversión de logs a trazas en la [página de configuración][4]. 
+Primero, **habilite** la conversión de registros a trazas en la [página de Configuración][4].
 
-A continuación, asegúrate de que la tabla de ACLs web contiene métricas de solicitud, así como logs y trazas.
+Luego, asegúrese de que la tabla de ACL web contenga métricas de solicitud, así como registros y trazas.
 
-Las trazas de seguridad se informan en [AAP Traces Explorer][5] con el nombre de servicio `aws.waf`.
+Las trazas de Security se reportan en el [AAP Traces Explorer][5] con el nombre de servicio `aws.waf`.
 
-## Bloqueo con conjuntos de IP de AWS WAF
+## Bloquear con IPsets de AWS WAF {#block-with-aws-waf-ipsets}
 
-Para bloquear a los atacantes, Datadog necesita gestionar un conjunto de IP dedicado. Este conjunto de IP debe ser referenciado por la ACL web con una regla en modo de bloqueo.
+Para bloquear a los atacantes, Datadog necesita administrar un IPset dedicado. Este IPset debe ser referenciado por la ACL web con una regla en modo de bloqueo.
 
-Se pueden configurar múltiples ACLs web en la misma o en diferentes cuentas de AWS. Debe crearse una [conexión][3] en cada cuenta de AWS.
+Se pueden configurar múltiples ACL web en la misma cuenta de AWS o en diferentes. Se debe crear una [Conexión][3] en cada cuenta de AWS.
 
-Asegúrate de que el rol de AWS adjunto a la [conexión][3] tiene los siguientes permisos:
+Asegúrese de que el rol de AWS adjunto a la [Conexión][3] tenga los siguientes permisos:
 
- - `GetIPSet`
- - `UpdateIPSet`
+ - `wafv2:GetIPSet`
+ - `wafv2:UpdateIPSet`
 
 {{< tabs >}}
-{{% tab "Setup with Terraform" %}}
+{{% tab "Configuración con Terraform" %}}
 
-1. Edita tu configuración de Terraform con el siguiente contenido:
+1. Edite su configuración de Terraform con el siguiente contenido:
    ```tf
-   resource "aws_wafv2_ip_set" "Datadog-blocked-ipv4s" {
+   resource "aws_wafv2_ip_set" "datadog_blocked_ipv4s" {
      name               = "Datadog-blocked-ipv4s"
      ip_address_version = "IPV4"
      scope              = "CLOUDFRONT"
@@ -87,7 +98,7 @@ Asegúrate de que el rol de AWS adjunto a la [conexión][3] tiene los siguientes
 
        statement {
          ip_set_reference_statement {
-           arn = aws_wafv2_ip_set."Datadog-blocked-ipv4s".arn
+           arn = aws_wafv2_ip_set.datadog_blocked_ipv4s.arn
          }
        }
 
@@ -106,12 +117,12 @@ Asegúrate de que el rol de AWS adjunto a la [conexión][3] tiene los siguientes
    }
    ```
 
-2. Ejecuta `terraform apply` para crear y actualizar los recursos de WAF.
+2. Ejecute `terraform apply` para crear y actualizar los recursos de WAF.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Una vez finalizada la configuración, haz clic en **Block New Attackers** (Bloquear nuevos atacantes) en la [página de la lista de denegación][6] de App & API Protection. Selecciona la ACL web y la conexión de AWS asociada para bloquear las direcciones IP.
+Una vez completada la configuración, haga clic en **Block New Attackers** en la [página de denylist][6]. Seleccione la ACL web y la conexión AWS asociada para bloquear direcciones IP.
 
 [1]: /es/integrations/amazon-web-services/
 [2]: /es/integrations/amazon_waf/
@@ -119,3 +130,4 @@ Una vez finalizada la configuración, haz clic en **Block New Attackers** (Bloqu
 [4]: https://app.datadoghq.com/security/configuration/asm/setup
 [5]: https://app.datadoghq.com/security/appsec/traces?query=service%3Aaws.waf
 [6]: https://app.datadoghq.com/security/appsec/denylist
+[7]: /es/integrations/amazon-web-services/#resource-collection
