@@ -72,7 +72,7 @@ To get started, go to the [{{< ui >}}Code Security{{< /ui >}} setup page][12] or
 
 ### IDEs
 {{< whatsnext desc="You can identify code vulnerabilities in real time as you edit a file in your Integrated Development Environment (IDE). See integration-specific documentation for more information:">}}
-    {{< nextlink href="ide_plugins/idea/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/code_security/" >}}Datadog Plugin for JetBrains IDEs{{< /nextlink >}}
     {{< nextlink href="ide_plugins/vscode/code_security/" >}}Datadog Extension for Visual Studio Code & Cursor{{< /nextlink >}}
 {{< /whatsnext >}}
 

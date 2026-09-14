@@ -19,8 +19,8 @@ disable_toc: false
 | [Infrastructure as Code (IaC) Scanning][6] | Supported | Not supported |
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="ide_plugins/idea/code_security/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
-    {{< nextlink href="ide_plugins/vscode/code_security/" >}}<u>Visual Studio Code & Cursor</u>{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/" >}}<u>Visual Studio Code & Cursor</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
