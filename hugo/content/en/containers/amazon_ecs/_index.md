@@ -139,13 +139,6 @@ To have one Datadog Agent container running on each EC2 instance, run the Datado
 #### Schedule a daemon service in AWS using Datadog's ECS task
 
 {{< tabs >}}
-{{% tab "Web UI" %}}
-1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
-2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
-3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
-4. You do not need to configure load balancing or autoscaling.
-5. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
-{{% /tab %}}
 {{% tab "AWS CLI" %}}
 Use the [AWS CLI][9] to create a daemon service from the task definition registered in the previous steps:
 
@@ -158,6 +151,13 @@ aws ecs create-service \
     --launch-type EC2 \
     --region <AWS_REGION>
 ```
+{{% /tab %}}
+{{% tab "Web UI" %}}
+1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
+2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
+3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
+4. You do not need to configure load balancing or autoscaling.
+5. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
 {{% /tab %}}
 {{< /tabs >}}
 
