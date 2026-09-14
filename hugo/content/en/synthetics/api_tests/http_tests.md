@@ -366,6 +366,10 @@ The {{< ui >}}Summary{{< /ui >}} panel identifies unique issues causing failures
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
+## Launch a Bits Investigation
+
+To identify the root cause of a failing Synthetic HTTP test, launch a [Bits Investigation][18]. Bits Investigation analyzes test results, traces, logs, and metrics to surface a root cause and flag if the failure is a regression or a misconfiguration.
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
@@ -394,3 +398,4 @@ If you are using the [custom role feature][14], add your user to any custom role
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
 [17]: /api_catalog
+[18]: /bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page

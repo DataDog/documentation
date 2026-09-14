@@ -21,7 +21,7 @@ Queries are actions that populate your app with data from Datadog APIs or suppor
 
 The [Action Catalog][10] within the Datadog App provides actions that can be performed as queries against your infrastructure and integrations using App Builder. You can orchestrate and automate your end-to-end processes by linking together actions that perform tasks in your cloud providers, SaaS tools, and Datadog accounts.
 
-To add a query, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab. Click the plus ({{< ui >}}+{{< /ui >}}), select {{< ui >}}Actions{{< /ui >}}, and search "query" for an action to add to your app. After you've added the query action, it appears in the {{< ui >}}Actions{{< /ui >}} List. Select a query to configure it.
+To add a query, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab. Click the plus ({{< ui >}}\+{{< /ui >}}), select {{< ui >}}Actions{{< /ui >}}, and search "query" for an action to add to your app. After you've added the query action, it appears in the {{< ui >}}Actions{{< /ui >}} List. Select a query to configure it.
 
 You can also use Bits AI to add, configure, and trigger queries. Click the {{< ui >}}Build with AI{{< /ui >}} icon (**<i class="icon-bits-ai"></i>**) to get started. 
 
@@ -108,7 +108,7 @@ To provide mocked outputs manually, perform the following steps:
 1. Add a query and fill out the rest of your query's parameters.
 1. In the {{< ui >}}Mocked outputs{{< /ui >}} section of the query, click the {{< ui >}}GUI{{< /ui >}} tab.
 1. Fill in all required fields, which the GUI view automatically displays.
-1. Optionally, to add additional fields, click ({{< ui >}}+{{< /ui >}}). Choose a key from the dropdown and fill in a value. If you want to enter a value that is an object or an array, click the {{< ui >}}{}{{< /ui >}} or {{< ui >}}[]{{< /ui >}}, respectively, after the {{< ui >}}Enter value{{< /ui >}} field.
+1. Optionally, to add additional fields, click ({{< ui >}}\+{{< /ui >}}). Choose a key from the dropdown and fill in a value. If you want to enter a value that is an object or an array, click the {{< ui >}}{}{{< /ui >}} or {{< ui >}}[]{{< /ui >}}, respectively, after the {{< ui >}}Enter value{{< /ui >}} field.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Using JSON" level="p" %}}
@@ -150,16 +150,16 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 ##### Create workflow
 
 1. In a new workflow canvas, under {{< ui >}}Datadog Triggers{{< /ui >}}, click {{< ui >}}App{{< /ui >}}.
-1. Under the {{< ui >}}App{{< /ui >}} trigger step, click the plus ({{< ui >}}+{{< /ui >}}) icon, then search for "Make a decision" and select the {{< ui >}}Make a decision{{< /ui >}} Slack action.
+1. Under the {{< ui >}}App{{< /ui >}} trigger step, click the plus ({{< ui >}}\+{{< /ui >}}) icon, then search for "Make a decision" and select the {{< ui >}}Make a decision{{< /ui >}} Slack action.
 1. Select your workspace and choose a channel to poll.
 1. Fill in the prompt text "Cat fact or dog fact?" and change the button choices to "Cat fact" and "Dog fact".
-1. Under the {{< ui >}}Make a decision{{< /ui >}} step in the canvas, click the plus ({{< ui >}}+{{< /ui >}}) icon above {{< ui >}}Cat fact{{< /ui >}} and add the {{< ui >}}Make request{{< /ui >}} HTTP action.
+1. Under the {{< ui >}}Make a decision{{< /ui >}} step in the canvas, click the plus ({{< ui >}}\+{{< /ui >}}) icon above {{< ui >}}Cat fact{{< /ui >}} and add the {{< ui >}}Make request{{< /ui >}} HTTP action.
 1. Name the step "Get cat fact". Under {{< ui >}}Inputs{{< /ui >}}, for the {{< ui >}}URL{{< /ui >}}, keep {{< ui >}}GET{{< /ui >}} selected and enter the URL `https://catfact.ninja/fact`.
-1. Under the {{< ui >}}Make a decision{{< /ui >}} step in the canvas, click the plus ({{< ui >}}+{{< /ui >}}) icon above {{< ui >}}Dog fact{{< /ui >}}. Follow the same steps to add the {{< ui >}}Make request{{< /ui >}} HTTP action, but this time name the step "Get dog fact" and use the following parameters:
+1. Under the {{< ui >}}Make a decision{{< /ui >}} step in the canvas, click the plus ({{< ui >}}\+{{< /ui >}}) icon above {{< ui >}}Dog fact{{< /ui >}}. Follow the same steps to add the {{< ui >}}Make request{{< /ui >}} HTTP action, but this time name the step "Get dog fact" and use the following parameters:
     * {{< ui >}}URL{{< /ui >}}: `https://dogapi.dog/api/v2/facts`.
     * {{< ui >}}Request Headers{{< /ui >}}: `Content-Type` of `application/json`
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon under the cat fact step. Search for "Function" and choose the {{< ui >}}Function{{< /ui >}} data transformation step.
-1. Connect the plus ({{< ui >}}+{{< /ui >}}) icon under the dog fact step to this {{< ui >}}JS Function{{< /ui >}} step by clicking and dragging from the plus to the dot that appears above the JS Function step.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon under the cat fact step. Search for "Function" and choose the {{< ui >}}Function{{< /ui >}} data transformation step.
+1. Connect the plus ({{< ui >}}\+{{< /ui >}}) icon under the dog fact step to this {{< ui >}}JS Function{{< /ui >}} step by clicking and dragging from the plus to the dot that appears above the JS Function step.
 1. In the JS Function, under {{< ui >}}Configure{{< /ui >}}, for {{< ui >}}Script{{< /ui >}}, use the following code snippet:
     ```javascript
     const catFact = $.Steps.Get_cat_fact?.body?.fact;
@@ -183,7 +183,7 @@ This app provides a button to trigger a workflow. The workflow sends a poll to a
 
 To connect App Builder to the workflow, perform the following steps:
 
-1. In your app, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon, click the plus ({{< ui >}}+{{< /ui >}}), and select {{< ui >}}Query{{< /ui >}}.
+1. In your app, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon, click the plus ({{< ui >}}\+{{< /ui >}}), and select {{< ui >}}Query{{< /ui >}}.
 1. Search for "Trigger Workflow" and select the {{< ui >}}Trigger Workflow{{< /ui >}} Datadog Workflow Automation item.
 1. Set {{< ui >}}Run Settings{{< /ui >}} to Manual and name the query `triggerWorkflow0`.
 1. Under {{< ui >}}Inputs{{< /ui >}}, for {{< ui >}}App Workflow{{< /ui >}}, select {{< ui >}}My AB Workflow{{< /ui >}}.
@@ -192,7 +192,7 @@ To connect App Builder to the workflow, perform the following steps:
 1. Add a button component. Use the following values:
     * {{< ui >}}Label{{< /ui >}}: "Trigger Workflow"
     * {{< ui >}}Is Loading{{< /ui >}}: `${triggerWorkflow0.isLoading}` (click {{< ui >}}</>{{< /ui >}} to enter an expression)
-1. Under the button's {{< ui >}}Events{{< /ui >}}, click the plus ({{< ui >}}+{{< /ui >}}) to add an event. Use the following values:
+1. Under the button's {{< ui >}}Events{{< /ui >}}, click the plus ({{< ui >}}\+{{< /ui >}}) to add an event. Use the following values:
     * {{< ui >}}Event{{< /ui >}}: click
     * {{< ui >}}Reaction{{< /ui >}}: Trigger Query
     * {{< ui >}}Query{{< /ui >}}: `triggerWorkflow0`
@@ -218,11 +218,11 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 ##### Create queries
 
 1. In a new app, click the Data ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the Data tab.
-1. Click the plus ({{< ui >}}+{{< /ui >}}), then select {{< ui >}}Query{{< /ui >}}. Search for "Make request" and choose the {{< ui >}}HTTP Make request{{< /ui >}} action.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}), then select {{< ui >}}Query{{< /ui >}}. Search for "Make request" and choose the {{< ui >}}HTTP Make request{{< /ui >}} action.
 1. Use the following values:
     * {{< ui >}}Name{{< /ui >}}: `mathFact1`
     * Under {{< ui >}}Inputs{{< /ui >}}, for {{< ui >}}URL{{< /ui >}}: GET `http://numbersapi.com/random/trivia`
-1. Click the ({{< ui >}}+{{< /ui >}}) to add another {{< ui >}}HTTP Make request{{< /ui >}} query. Use the following values:
+1. Click the ({{< ui >}}\+{{< /ui >}}) to add another {{< ui >}}HTTP Make request{{< /ui >}} query. Use the following values:
     * {{< ui >}}Name{{< /ui >}}: `mathFact2`
     * Under {{< ui >}}Inputs{{< /ui >}}, for {{< ui >}}URL{{< /ui >}}: GET `http://numbersapi.com/random/trivia`
 
