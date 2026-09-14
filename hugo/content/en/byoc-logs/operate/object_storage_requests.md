@@ -22,21 +22,27 @@ Each indexer runs several **indexing pipelines**. Every 30 seconds (the default 
 
 $$\text"splits per pipeline per day" = {86400} / 30 = 2880$$
 
-Splits store **compressed** data (3x or more), so at typical volumes they stay below the 128 MiB multipart threshold and upload as a **single PUT request**. Larger splits use multipart upload and cost 3 or more PUT requests.
+Splits store **compressed** data (3x or more). At typical volumes, they stay below the 128 MiB multipart threshold and upload as a **single PUT request**. Larger splits use multipart upload and cost 3 or more PUT requests.
 
 ## Compactors
 
-Compactors **merge 10 splits into 1**, repeatedly, over three *generations* (gen 1, 2, 3). Merged splits are large (over 1 GB) and use multipart upload (3 or more PUT requests each), but the 10:1 fan-in means each generation has 10x fewer splits. In total, compaction adds only about **0.4 PUT per indexer split**.
+Compactors **merge 10 splits into 1**, repeatedly, over three *generations* (gen 1, 2, 3). Merged splits are large (over 1 GB) and use multipart upload, so each one costs 3 or more PUT requests.
 
-## Estimation table
+The 10:1 fan-in means every generation produces 10x fewer splits than the one before it. In total, compaction adds only about **one-third more PUT requests** on top of the indexer splits.
 
-Assumptions: **4-vCPU indexer** ingesting ~3 TB/day with **5 pipelines**, 30-second commit timeout, and a PUT price of **$0.005 per 1,000 requests** (S3 Standard, `us-east-1`).
+## Request estimates
 
-| Daily volume | Indexers (4 vCPUs each) | Total PUT requests per day | Approx. cost per month |
-|-------------|-------------------------|----------------------------|------------------------|
-| **3 TB per day** | 1 | ~20,000 | ~$3 |
-| **12 TB per day** | 4 | ~78,000 | ~$12 |
-| **120 TB per day** | 40 | ~780,000 | ~$117 |
+The following estimates assume:
+
+- A **4-vCPU indexer** ingesting ~3 TB/day with **5 indexing pipelines**
+- The default 30-second commit timeout
+- A PUT price of **$0.005 per 1,000 requests** (S3 Standard, `us-east-1`)
+
+| Daily volume | Indexers (4 vCPUs each) | Total PUT requests per day | Approx. PUT cost per month |
+|-------------|-------------------------|----------------------------|----------------------------|
+| **3 TB/day** | 1 | ~20,000 | ~$3 |
+| **12 TB/day** | 4 | ~78,000 | ~$12 |
+| **120 TB/day** | 40 | ~780,000 | ~$117 |
 
 <div class="alert alert-tip">
 PUT requests scale with <strong>pipeline count and commit cadence, not raw ingestion volume</strong>. Raising the commit timeout (for example, to 60 seconds) roughly halves the request count, at the cost of higher search latency.
