@@ -156,14 +156,14 @@ Lists available metrics, with options for filtering and metadata.
 ### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Searches Datadog's Catalog for service identity, ownership and upstream/downstream dependencies.
+Searches Datadog's Catalog for service identity, ownership and upstream and downstream dependencies.
 
 - Find services related to payment processing.
 - List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
 
-<div class="alert alert-info">`search_datadog_services` and `search_datadog_service_dependencies` tools are deprecated. `search_datadog_entities` has replaced these tools.</div>
+<div class="alert alert-info"><code>search_datadog_services</code> and <code>search_datadog_service_dependencies</code> tools are deprecated, use <code>search_datadog_entities</code> instead.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
