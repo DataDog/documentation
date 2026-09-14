@@ -98,6 +98,10 @@ To set up your account in Snowflake:
 4. Grant read-only access to your data. `grant_database_access` grants schema-level access (rather than database-level) to preserve precedence over other roles' grants, as noted above, and accepts a JSON array so you can grant access to more than one database in a single call.
 
    ```sql
+   -- A database must be selected in order to create a procedure. This can be
+   -- any database.
+   USE DATABASE SNOWFLAKE;
+
    CREATE OR REPLACE PROCEDURE grant_database_access(
        databaseNamesJson STRING,
        roleName STRING
