@@ -1,5 +1,5 @@
 ---
-description: 필요에 따라 Datadog에서 아카이빙 및 리하이드레이션하기 위해 로그를 Azure 스토리지 버킷으로 전송하는 방법을 알아보세요.
+description: 필요시 Datadog에서 아카이빙 및 리하이드레이션하기 위해 로그를 Azure 스토리지 버킷으로 전송하는 방법을 알아보세요.
 disable_toc: false
 products:
 - icon: logs
@@ -45,7 +45,7 @@ Datadog Log Archives를 설정하려면 Datadog의 [Azure 통합][3]이 설치�
 
 1. Datadog [Log Forwarding][16]으로 이동합니다.
 1. **New archive**를 클릭합니다.
-1. 아카이브를 설명하는 이름을 입력합니다.
+1. 설명이 포함된 아카이브 이름을 입력합니다.
 1. 로그 파이프라인을 통과하는 모든 로그를 필터링하여 해당 로그가 이 아카이브로 들어가지 않도록 쿼리를 추가하세요. 예를 들어, 파이프라인을 통과하는 로그에 해당 태그가 추가되지 않았다고 가정하여 쿼리 `observability_pipelines_read_only_archive`를 추가하세요.
 1. **Azure Storage**를 선택합니다.
 1. 스토리지 계정이 속한 Azure 테넌트 및 클라이언트를 선택합니다.
@@ -55,15 +55,15 @@ Datadog Log Archives를 설정하려면 Datadog의 [Azure 통합][3]이 설치�
 1. 필요시 권한을 설정하고, 태그를 추가하며, 리하이드레이션을 위한 최대 스캔 크기를 정의합니다. 자세한 내용은 [고급 설정][17]을 참조하세요.
 1. **Save**를 클릭합니다.
 
-추가 정보는 [Log Archives 설명서][1]을 참조하세요.
+추가 정보는 [Log Archives 설명서][1]를 참조하세요.
 
-## 파이프라인 목적지 설정하기{#set-up-the-destination-for-your-pipeline}
+## 파이프라인 목적지 설정 {#set-up-the-destination-for-your-pipeline}
 
 <div class="alert alert-danger">시크릿 관리의 경우 Azure 연결 문자열의 식별자만 입력하세요. 실제 값은 <b>입력하지 마세요.</b></div>
 
 [파이프라인을 설정][4]할 때 Azure Storage 목적지를 구성하세요. 파이프라인은 [UI][7]에서 설정할 수 있으며, [API][8] 또는 [Terraform][9]을 사용하여 설정할 수 있습니다. 이 섹션에서 설명하는 단계는 UI에서 설정합니다.
 
-파이프라인 UI에서 Azure Storage 목적지를 선택한 후:
+파이프라인 UI에서 Azure Storage 목적지를 선택한 후 다음 단계를 따르세요.
 
 1. Azure 연결 문자열의 식별자를 입력하세요. 비워두면 [기본값](#secret-defaults)이 사용됩니다.
 1. 이전에 만든 Azure 컨테이너의 이름을 입력하세요.
@@ -82,7 +82,7 @@ Datadog Log Archives를 설정하려면 Datadog의 [Azure 통합][3]이 설치�
 
 #### 압축 {#compression}
 
-1.  {{< ui >}}Compression - Algorithm{{< /ui >}} 드롭다운 메뉴에서 아카이브된 로그에 대한 압축 알고리즘을 선택하십시오({{< ui >}}gzip{{< /ui >}} 또는 {{< ui >}}zstd{{< /ui >}}).
+1.  {{< ui >}}Compression - Algorithm{{< /ui >}} 드롭다운 메뉴에서 아카이브된 로그에 대한 압축 알고리즘을 선택합니다({{< ui >}}gzip{{< /ui >}} 또는 {{< ui >}}zstd{{< /ui >}}).
     - **참고**: 압축 알고리즘을 지정하지 않으면 압축 수준 `6`의 gzip이 사용됩니다.
 1.  {{< ui >}}Compression - Level {{< /ui >}} 필드에 압축 수준을 입력해야 합니다. Datadog은 gzip의 경우 `6`, zstd의 경우 `3`을 권장합니다.
 
@@ -120,7 +120,7 @@ Datadog Log Archives를 설정하려면 Datadog의 [Azure 통합][3]이 설치�
 
 이벤트 배치는 다음 중 하나의 파라미터를 충족하면 플러시됩니다. 자세한 내용은 [목적지 이벤트 일괄 처리][5]를 참조하세요.
 
-| 최대 이벤트 | 최대 크기(MB) | 타임아웃(초)   |
+| 최대 이벤트 | 최대 크기(MB) | 시간 초과(초)   |
 |----------------|-------------------|---------------------|
 | 없음           | 100               | 900                 |
 
