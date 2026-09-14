@@ -16,11 +16,6 @@ further_reading:
 
 Object storage (Amazon S3, Google Cloud Storage, Azure Blob Storage) bills both **stored data** and **API requests**. This page estimates the **PUT requests** generated on the write path by **indexers** and **compactors**.
 
-<div class="alert alert-info">
-GET requests and searcher request estimation are covered in a separate page.
-</div>
-</div>
-
 ## Indexers
 
 Each indexer runs several **indexing pipelines**. Every 30 seconds (the default commit timeout), each pipeline uploads one index file (a *split*) to object storage:
@@ -31,7 +26,7 @@ Splits store **compressed** data (3x or more), so at typical volumes they stay b
 
 ## Compactors
 
-Compactors **merge 10 splits into 1**, repeatedly, over three *generations* (gen 1, 2, 3). Merged splits are large (over 1 GB) and use multipart upload (3 or more PUT requests each), but the 10:1 fan-in means each generation has 10x fewer splits. In total, compaction adds only about **0.4 PUT per indexer split** (~36% more).
+Compactors **merge 10 splits into 1**, repeatedly, over three *generations* (gen 1, 2, 3). Merged splits are large (over 1 GB) and use multipart upload (3 or more PUT requests each), but the 10:1 fan-in means each generation has 10x fewer splits. In total, compaction adds only about **0.4 PUT per indexer split**.
 
 ## Estimation table
 
