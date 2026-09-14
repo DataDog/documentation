@@ -169,7 +169,7 @@ A rule keeps matching after you save it. Datadog re-evaluates it over time, so a
 
 You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch each time.
 
-For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and the reconciliation model, see [How Datadog instrumentation through the AWS integration works][6].
+For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and how Datadog keeps instrumentation in place, see [How Datadog instrumentation through the AWS integration works][6].
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
@@ -260,7 +260,7 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it on the next reconciliation. Manage Agent configuration and version upgrades through [Fleet Automation][4].
+The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. Manage Agent configuration and version upgrades through [Fleet Automation][4].
 
 ## Uninstall
 
@@ -281,13 +281,13 @@ If instrumentation can't complete because of missing permissions, Datadog shows 
 
 ### A Lambda function is skipped as already instrumented
 
-Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. This prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it, then wait for the next reconciliation.
+Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. This prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it. Datadog then instruments the function automatically.
 
 Functions managed by [remote instrumentation][9] are also skipped, and Datadog tells you which of the two applies. A function can be managed by only one Datadog instrumentation product.
 
 ### A Lambda function exceeds the layer limit
 
-AWS limits a function to five layers, and Datadog adds up to two. When a function already carries enough layers that instrumentation would exceed the limit, Datadog reports it and stops rather than retrying. Remove a layer from the function to make room, then wait for the next reconciliation.
+AWS limits a function to five layers, and Datadog adds up to two. When a function already carries enough layers that instrumentation would exceed the limit, Datadog reports it and stops rather than retrying. Remove a layer from the function to make room. Datadog then instruments the function automatically.
 
 ### A Lambda function uses a non-Datadog execution wrapper
 

@@ -1,6 +1,6 @@
 ---
 title: How Datadog Instrumentation through the AWS Integration Works
-description: "Understand how Datadog instruments Amazon EC2 instances and AWS Lambda functions through the AWS integration: the AWS resources created, the instrumentation mechanism, the security model, and the reconciliation behavior."
+description: "Understand how Datadog instruments Amazon EC2 instances and AWS Lambda functions through the AWS integration: the AWS resources created, the instrumentation mechanism, the security model, and how Datadog keeps instrumentation in place."
 private: true # TODO(DOCS-14545): remove at v1 rollout to publish, at the same time as the setup guide this page links to; also add the nextlink entry under "AWS guides" in hugo/content/en/integrations/guide/_index.md at that time
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation/"
@@ -32,7 +32,7 @@ The CloudFormation template you launch creates the following resources one time,
 | Resource | Name | Purpose |
 |---|---|---|
 | EventBridge connection | `datadog-agent-resource-update-intake-connection` | Holds your Datadog API and application keys so events can be sent to Datadog |
-| EventBridge API destination | `datadog-agent-resource-update-intake-destination` | Sends events to `https://api.<YOUR_DD_SITE>/api/unstable/instrumenter/events` (capped at 10 events per second) |
+| EventBridge API destination | `datadog-agent-resource-update-intake-destination` | Sends resource change events to Datadog |
 | EventBridge rule | `datadog-agent-resource-update-rule-ec2` | Notifies Datadog when a covered instance changes. Created when you select the EC2 workload |
 | EventBridge rule | `datadog-agent-resource-update-rule-lambda` | Notifies Datadog when a covered function changes. Created when you select the Lambda workload |
 | IAM role | auto-named | Lets EventBridge send events to the `datadog-agent-resource-update-intake-destination` API destination |
@@ -66,7 +66,7 @@ After you save an instrumentation rule, Datadog evaluates the query you defined 
 2. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
 3. Datadog checks whether an Agent is already present. When an Agent is present that Datadog did not install, Datadog stops and leaves the instance alone.
 4. Datadog calls `ssm:SendCommand`, one instance at a time, running the `datadog-ec2-instrumenter` document.
-5. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role. It then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled. The command times out after 6 minutes.
+5. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role. It then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled.
 
 Datadog does not reboot or restart your instances. The only service Datadog touches is the Datadog Agent itself, which is started on install and stopped on uninstall. Your applications and other services are untouched.
 
@@ -76,7 +76,7 @@ Lambda instrumentation runs entirely from Datadog. Datadog does not deploy anyth
 
 1. Datadog reads the function's current configuration and tags, and checks that it meets the [Lambda prerequisites][3].
 2. Datadog checks whether the function is already instrumented. A function carrying Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply is skipped, as is a function managed by [remote instrumentation][4]. Datadog reports which of the two applies.
-3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Layer versions come from a pinned set that advances with Datadog's layer releases, so an installation is reproducible rather than tracking whatever is newest at that moment.
+3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Datadog applies layer versions it has validated rather than whatever is newest at that moment, so an installation is reproducible.
 4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
 5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated).
 6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. Datadog marks the change as applied only after AWS reports success.
@@ -144,9 +144,9 @@ Because a single execution role is often shared across functions, Datadog create
 
 - Datadog never removes instrumentation it did not install.
 - Datadog tracks which resources it instrumented, so it cleans up only its own work.
-- On EC2, when some regions cannot be listed, Datadog skips cleanup for that pass rather than risk uninstalling in bulk.
+- On EC2, when some regions cannot be listed, Datadog skips cleanup rather than risk removing instrumentation in bulk.
 - On Lambda, Datadog restores a function from the configuration it recorded before instrumenting it, so an uninstall reverses exactly the change Datadog made.
-- A failure is scoped to the individual resource. One throttled or invalid resource does not cause Datadog to reprocess resources that already succeeded.
+- A failure is scoped to the individual resource. One resource that fails does not affect resources that are already instrumented.
 
 ## How Datadog maintains instrumentation
 
@@ -154,22 +154,22 @@ Because a single execution role is often shared across functions, Datadog create
 
 Datadog continuously maintains the state you define on the covered resources:
 
-- A full reconciliation runs hourly per AWS account. Reconciliation restores instrumentation if it goes missing, retries anything that failed, and cleans up resources that no longer exist.
-- Change events forwarded from your account let Datadog react within minutes, instead of waiting for the hourly pass, both to a covered resource that changed and to a newly created resource that a query-based rule matches. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
-- On EC2, already-installed instances are re-verified about once per day rather than every hour, to avoid unnecessary activity.
-- On Lambda, the hourly scan checks each covered function against the layer versions Datadog deploys, and does per-function work only for functions that need a change. A fleet already on current layer versions produces no per-function activity, so Datadog makes no unnecessary calls to the Lambda API in your account.
+- Datadog re-checks the covered resources on a regular schedule, restoring instrumentation that goes missing, retrying anything that failed, and cleaning up resources that no longer exist.
+- Change events forwarded from your account let Datadog react within minutes, rather than waiting for the next scheduled check, both to a covered resource that changed and to a newly created resource that a query-based rule matches. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
+- On EC2, instances that already have the Agent are re-verified less frequently, to avoid unnecessary activity.
+- On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet already on current layer versions produces no per-function activity.
 
 ### How Lambda functions pick up new layer versions
 
-Datadog resolves layer versions from a pinned set on every reconciliation, rather than from whatever the function was first instrumented with. When Datadog releases new layer versions and that pinned set advances, the next reconciliation sees that a covered function's layers no longer match the desired versions and updates it. Your functions therefore move forward with Datadog's layer releases without any action from you.
+Datadog compares a covered function's layers against the versions Datadog deploys, rather than against whatever the function was first instrumented with. When Datadog releases new layer versions, covered functions are updated to them. Your functions therefore move forward with Datadog's layer releases without any action from you.
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
 ### How a rule determines coverage
 
-A rule is not a one-time selection. Datadog re-evaluates its query on every reconciliation and against forwarded change events, so a resource is instrumented as soon as Datadog sees it match, however it came to match:
+A rule is not a one-time selection. Datadog re-evaluates its query over time and reacts to the change events forwarded from your account, so a resource is instrumented as soon as Datadog sees it match, however it came to match:
 
-- **It was created after you saved the rule.** `RunInstances` and `CreateFunction` events are forwarded, so a new resource is picked up within minutes rather than at the next hourly pass.
+- **It was created after you saved the rule.** `RunInstances` and `CreateFunction` events are forwarded, so a new resource is picked up within minutes.
 - **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, `TagResource` and `UntagResource` on Lambda. This supports writing a rule such as `@Tags:datadog:true` first, then tagging resources into it as you go.
 
 A rule you built by selecting specific resources holds a query naming those resources, so nothing else ever matches it.
@@ -186,14 +186,14 @@ Datadog removes instrumentation when a resource no longer matches the rule, whet
 
 ### Terminated, stopped, or deleted resources
 
-On EC2, Datadog detects terminated instances on the next hourly pass and cleans up the IAM resources it created for them. Datadog leaves stopped instances alone until they return. On Lambda, a deleted function drops out of reconciliation on the next pass.
+On EC2, Datadog detects terminated instances and cleans up the IAM resources it created for them. Datadog leaves stopped instances alone until they return. On Lambda, a deleted function drops out of coverage.
 
 ### When instrumentation fails
 
-Datadog retries with an increasing delay (1 hour, then 2 hours, up to once per day) and continues retrying. Problems that need your action, such as a missing permission or a function at the layer limit, are reported and stop being retried indefinitely. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
+Datadog retries automatically, with an increasing delay between attempts. Problems that need your action, such as a missing permission or a function at the layer limit, are reported and stop being retried indefinitely. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
 
 <div class="alert alert-warning">
-When someone removes instrumentation from a covered resource by hand, the next reconciliation restores it. The rule is the source of truth. To stop coverage, change the rule.
+When someone removes instrumentation from a covered resource by hand, Datadog restores it. The rule is the source of truth. To stop coverage, change the rule.
 </div>
 
 ## Uninstall
