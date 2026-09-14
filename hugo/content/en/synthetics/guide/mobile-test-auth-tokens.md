@@ -23,7 +23,7 @@ The flow has three parts:
 2. A [global variable][3] sourced from that test holds the token's value.
 3. Your mobile app test passes the global variable into the app as a launch argument or intent extra. Your app reads it at startup and skips its normal login flow.
 
-The API test refreshes the token on a schedule. The global variable's value updates on its own, without any manual work or Datadog API calls.
+Because the API test refreshes the token on a schedule, the global variable's value updates on its own, without any manual work or Datadog API calls.
 
 ## Step 1: Create the token-fetch API test
 
