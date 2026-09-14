@@ -508,8 +508,6 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
-
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
@@ -944,6 +942,15 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
+
+### `manage_datadog_error_tracking_issue_links`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an Error Tracking Issue.
+
+- File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
+- Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ## Experiments
 
