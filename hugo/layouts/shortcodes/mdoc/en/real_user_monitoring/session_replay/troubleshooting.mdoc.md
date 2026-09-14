@@ -148,7 +148,7 @@ Learn more about [image privacy settings][9].
 {% if equals($platform, "ios") %}
 Image visibility depends on your SDK privacy configuration. If `maskNonBundledOnly` is enabled, only bundled images with UIKit and images up to 100x100 pts on SwiftUI are captured. All other images are replaced by a "Content Image" placeholder in the UI.
 
-Learn more about [image privacy settings][10].
+Learn more about [image privacy settings][9].
 {% /if %}
 <!-- end iOS -->
 
@@ -160,7 +160,7 @@ Image visibility depends on your SDK privacy configuration. If `MASK_LARGE_ONLY`
 
 All other images are replaced by a "Content Image" placeholder in the UI.
 
-Learn more about [image privacy settings][11].
+Learn more about [image privacy settings][9].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -172,7 +172,7 @@ Image visibility depends on your SDK privacy configuration:
 
 All other images are replaced by a "Content Image" placeholder in the UI.
 
-Learn more about [image privacy settings][12].
+Learn more about [image privacy settings][9].
 {% /if %}
 <!-- end React Native -->
 
@@ -182,7 +182,7 @@ Image visibility depends on your SDK privacy configuration. If `maskNonAssetsOnl
 
 For performance reasons, large images (those exceeding 1000x1000 total pixels) are masked and display "Large Image" in the Session Replay player.
 
-Learn more about [image privacy settings][13].
+Learn more about [image privacy settings][9].
 {% /if %}
 <!-- end Flutter -->
 
@@ -224,9 +224,5 @@ At any time during the lifetime of the host app, it's possible to change the tra
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleSheet
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API/Using_the_Web_Animations_API
-[8]: /session_replay/setup_and_configuration/?platform=flutter
-[9]: /session_replay/privacy_options/?platform=android#image-masking
-[10]: /session_replay/privacy_options/?platform=ios#image-masking
-[11]: /session_replay/privacy_options/?platform=kotlin_multiplatform#image-masking
-[12]: /session_replay/privacy_options/?platform=react_native#image-masking
-[13]: /session_replay/privacy_options/?platform=flutter#image-masking
+[8]: /session_replay/setup_and_configuration/
+[9]: /session_replay/privacy_options/#image-masking
