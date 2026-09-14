@@ -29373,7 +29373,7 @@ openapi: 3.0.0
 paths:
   /:
     get:
-      description: Get information about Datadog IP ranges.
+      description: Get information about Datadog IP ranges, including service-specific prefixes.
       operationId: GetIPRanges
       responses:
         "200":
