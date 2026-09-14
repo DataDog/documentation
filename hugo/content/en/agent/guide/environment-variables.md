@@ -22,7 +22,7 @@ For Agent v5, reference the <a href="https://github.com/DataDog/docker-dd-agent#
 
 ## Overview
 
-For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables.
+For Agent v6, most of the configuration options in the [Agent's main configuration file][1] (`datadog.yaml`) can be set through environment variables. See the [example configuration files][15] in the Datadog Agent GitHub repo for a fully commented reference of all available `datadog.yaml` settings.
 
 ## Recommendations
 
@@ -63,37 +63,46 @@ In general, use the following rules:
 
 ### Exceptions
 
-- Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+- Not all `datadog.yaml` options are available with environment variables. See the [core_schema.yaml][4] configuration schema in the Datadog Agent GitHub repo. Settings tagged `no-env` in the schema don't support environment variables.
 
-- Component-specific environment variables not listed in [config.go][4] may also be supported.
- 
-  - **APM Trace Agent**
+  For earlier Agent versions, the configuration source moved between locations:
 
-      - [Docker APM Agent Environment Variables][5]
-      - [trace-agent config/apm.go][6]
-      - example
+  | Agent version       | Configuration source                                                          |
+  | -------------------- | ------------------------------------------------------------------------------ |
+  | 7.51 through 7.83    | `*_settings.go` files under [pkg/config/setup on the 7.83.x branch][13]        |
+  | 7.50 and earlier     | [config.go on the 7.50.x branch][9]                                            |
 
-          ```yaml
-             apm_config:
-                 enabled: true
-                 env: dev
-             # DD_APM_ENABLED=true
-             # DD_APM_ENV=dev
-          ```
+- Component-specific environment variables not listed in [core_schema.yaml][4] may also be supported:
 
-  - **Live Process Agent**
+  | Component              | Configuration source                        | Agent 7.51-7.83                                                | Agent 7.50 and earlier                              |
+  | ----------------------- | -------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
+  | APM Trace Agent          | [apm_config.yaml][6], [Docker APM Agent Environment Variables][5] | `apm_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `apm.go` in [pkg/config on the 7.50.x branch][14]    |
+  | Live Process Agent       | [process_config.yaml][7]                     | `process_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `process.go` in [pkg/config on the 7.50.x branch][14] |
+  | OTLP Ingest              | [core_schema.yaml (otlp_config)][4]          | `otlp_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `otlp.go` in [pkg/config on the 7.50.x branch][14]   |
+  | System Probe             | [system-probe_schema.yaml][10]               | `system_probe_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `system_probe.go` in [pkg/config on the 7.50.x branch][14] |
+  | Private Action Runner    | [private_action_runner.yaml][11]             | `privateactionrunner_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | Not available                                       |
+  | Multi-Region Failover    | [multi_region_failover.yaml][12]             | `multi_region_failover_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | Not available                                       |
 
-      - [process-agent config/process.go][7]
-      - example
+  APM Trace Agent example:
 
-          ```yaml
-             process_config:
-                 process_collection:
-                     enabled: true
-                 process_dd_url: https://process.datadoghq.com
-             # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
-             # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
-          ```
+  ```yaml
+     apm_config:
+         enabled: true
+         env: dev
+     # DD_APM_ENABLED=true
+     # DD_APM_ENV=dev
+  ```
+
+  Live Process Agent example:
+
+  ```yaml
+     process_config:
+         process_collection:
+             enabled: true
+         process_dd_url: https://process.datadoghq.com
+     # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
+     # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
+  ```
 
 ## Using environment variables in systemd units
 
@@ -117,8 +126,15 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/configuration/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/core_schema.yaml
 [5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/apm_config.yaml
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/process_config.yaml
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment
+[9]: https://github.com/DataDog/datadog-agent/blob/7.50.x/pkg/config/config.go
+[10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/system-probe_schema.yaml
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/private_action_runner.yaml
+[12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/schema/yaml/multi_region_failover.yaml
+[13]: https://github.com/DataDog/datadog-agent/tree/7.83.x/pkg/config/setup
+[14]: https://github.com/DataDog/datadog-agent/tree/7.50.x/pkg/config
+[15]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example

@@ -1,0 +1,164 @@
+---
+title: Install the Datadog Agent through the AWS Integration
+description: "Install and manage the Datadog Agent on your Amazon EC2 instances directly from the AWS integration, without connecting to each host or running per-host scripts."
+private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry under "AWS guides" in hugo/content/en/integrations/guide/_index.md at that time
+further_reading:
+- link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/"
+  tag: "Documentation"
+  text: "How Agent installation through the AWS integration works"
+- link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
+  tag: "Documentation"
+  text: "AWS Integration"
+- link: "https://docs.datadoghq.com/integrations/guide/aws-manual-setup/"
+  tag: "Documentation"
+  text: "AWS Manual Setup Guide"
+- link: "https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/"
+  tag: "Documentation"
+  text: "Why install the Datadog Agent on your cloud instances?"
+- link: "https://docs.datadoghq.com/agent/fleet_automation/"
+  tag: "Documentation"
+  text: "Fleet Automation"
+- link: "https://docs.datadoghq.com/agent/configuration/"
+  tag: "Documentation"
+  text: "Agent Configuration"
+---
+
+## Overview
+
+The [AWS integration][1] collects metrics, events, and logs from Amazon CloudWatch without installing anything on your hosts. Installing the Datadog Agent adds telemetry from inside your AWS workloads that CloudWatch alone can't provide, including host-level metrics, distributed traces (APM), live processes, and detailed logs.
+
+You can deploy the Datadog Agent to your Amazon EC2 instances directly from Datadog, without connecting to each host or running per-host scripts. Enable Agent installation while you set up the AWS integration, or at any time afterward.
+
+Amazon EKS is not supported.
+
+## Prerequisites
+
+Before you begin, confirm the following:
+
+- **CloudFormation access**: You can approve a CloudFormation stack in the target AWS account. Installation deploys a stack in your account, so you (or a teammate) need permission to review and create it. For the required permissions and why they're needed, see the [Required AWS permissions](#required-aws-permissions) section.
+- **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
+- **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
+
+## Required AWS permissions
+
+{{% aws-agent-installation %}}
+
+Datadog uses each of these permissions for a specific task:
+
+| Permission | Why Datadog needs it |
+|---|---|
+| `ec2:DescribeInstances` | Find your instances and check which ones match your rule (state, tags, OS, architecture) |
+| `ssm:DescribeInstanceInformation` | Confirm the SSM Agent is running before Datadog attempts anything |
+| `ssm:GetDocument`, `ssm:CreateDocument`, `ssm:UpdateDocument`, `ssm:UpdateDocumentDefaultVersion` | Publish the install script in your account and keep it up to date |
+| `ssm:SendCommand`, `ssm:ListCommandInvocations` | Run the install and confirm when it finishes |
+| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret` | Store the API key so it is never passed in a command |
+| `iam:CreateRole`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:AttachRolePolicy`, `iam:PutRolePolicy`, `iam:PassRole`, `ec2:AssociateIamInstanceProfile`, and the matching `Get` and `List` reads | Give an instance the minimum access it needs in case it does not have an IAM role: reachable by Systems Manager, and able to read its own API key secret |
+| `iam:Detach*`, `iam:Delete*`, `iam:RemoveRoleFromInstanceProfile`, `ec2:Disassociate*`, `ec2:DescribeIamInstanceProfileAssociations` | Cleanly undo the resources above when you uninstall |
+| `ecs:ListClusters`, `ecs:ListContainerInstances` | Recognize Amazon Elastic Container Service (ECS) container instances so Datadog skips them (they are handled at the cluster level) |
+| `events:PutRule`, `events:PutTargets`, `events:RemoveTargets`, `events:DeleteRule` | Set up the change notifications that let Datadog react to instance changes |
+
+`iam:CreateRole` and `iam:PassRole` are the most sensitive grants. `iam:CreateRole` is restricted to role names matching `datadog-ec2-instrumenter/datadog-ssm-*` in your account, and `iam:PassRole` is further restricted to the Amazon EC2 service.
+
+## How it works
+
+Agent installation is based on an **installation rule**: an AWS account paired with a query that describes which EC2 instances to cover. Datadog re-checks the rule over time and installs the Agent on each matching instance in your AWS account:
+
+1. You select the EC2 instances to cover, or opt in to all eligible instances.
+1. Datadog identifies the instances your selection covers.
+1. Datadog installs the Agent on each covered instance through AWS Systems Manager, adding any missing IAM configuration automatically.
+1. Datadog re-checks the rule over time. Instances that match it later, whether newly launched or newly tagged, are instrumented automatically.
+
+You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
+
+For the full technical and security details, including the AWS resources Datadog creates, the installation mechanism, and how Datadog keeps instances covered, see [How Agent installation through the AWS integration works][6].
+
+{{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
+
+### Choose how your rule matches instances
+
+Because Datadog re-checks the rule over time, the query you write determines how coverage behaves as your infrastructure changes.
+
+**To cover instances as they appear**, match tags and attributes already present in your infrastructure, such as `env:prod`. Any instance that matches is instrumented, including instances launched or retagged after you save the rule. Use this when you want new matching instances monitored automatically without updating the rule.
+
+**To cover a fixed set**, select the instances individually from the resource list. The rule matches only the instances you selected, so instances that appear later are not added.
+
+**When a fixed set is too large to select individually**, match a tag you control, such as `datadog:true`. Apply that tag only to the instances you want instrumented. Coverage then changes only when you change the tags, so your infrastructure-as-code determines which instances are covered.
+
+<div class="alert alert-warning">
+Coverage works in both directions. When an instance stops matching the rule, Datadog uninstalls the Agent from it. A tag change made in AWS can therefore remove monitoring from an instance without anyone editing the rule in Datadog.
+</div>
+
+### Best practices for rules and tags
+
+**Match tags your team owns.** When a rule matches a tag that another team controls, that team can add or remove monitoring by retagging, without opening Datadog. Keeping the tag and the rule under the same ownership keeps that decision with the people who made it.
+
+**Avoid tags that change during normal operations.** Tags that change with an environment promotion, a deployment, or an autoscaling template can move instances in and out of coverage. Match on attributes that stay stable for the life of the instance.
+
+**Treat the rule as the complete configuration for the account.** Each AWS account has one rule per resource type. Every edit re-scopes all coverage for that resource type rather than adding to the existing coverage. Review the matching instances before you save.
+
+**Carve out exceptions with exclusions.** When a broad rule covers instances you want to skip, exclude them from the same rule instead of switching to an individually selected list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
+
+## Install the Agent
+
+You can start Agent installation from two entry points, depending on how much control you want over which instances are instrumented:
+
+- **AWS integration setup (install on all eligible instances)**: When you [set up the AWS integration][5], enable the Agent installation toggle on the [AWS integration page][7], shown alongside log and resource collection. The Agent installs on all eligible EC2 instances.
+- **Fleet Automation (install on specific instances)**: Open the [AWS Install Agents page][8] at any time to select the specific EC2 instances you want.
+
+<!-- TODO(DOCS-14545): per AWS team, surfacing the Agent install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
+
+The Agent installation toggle appears during setup:
+
+{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) workload toggle turned on." style="width:80%;" >}}
+
+To install from the AWS Install Agents page:
+
+1. Opt in to all eligible instances, or select specific EC2 instances from the resource list.
+1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
+1. Return to Datadog. The installation proceeds automatically, and Datadog reports progress as Agents come online.
+
+<!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
+
+## Verify the installation
+
+After the installation completes:
+
+- The newly installed Agents appear in the [Infrastructure List][3] and on the host map.
+- Fleet Automation lists the same Agents in the Fleet View.
+
+<!-- TODO(DOCS-14545): add expected time-to-data once confirmed. -->
+
+## Manage installed Agents
+
+Use the [AWS Install Agents page][8] in Fleet Automation to manage the Agents you've installed through the AWS integration.
+
+From this page, you can:
+
+- View the installed Agents and their status.
+- Install the Agent on new instances in your AWS environment.
+- Uninstall Agents from instances you no longer want to monitor.
+
+To stop coverage, update the rule so that the instances no longer match it. If you manually remove the Agent from a covered instance, Datadog reinstalls it. Manage Agent configuration and version upgrades through [Fleet Automation][4].
+
+## Troubleshooting
+
+### The SSM Agent is not present on an EC2 instance
+
+Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which Datadog can't install for you. Datadog flags any instance that lacks it as ineligible, including those built from custom AMIs. Install the SSM Agent on the instance, then retry. See [Working with SSM Agent][2] in the AWS documentation.
+
+### A permission or IAM error occurs
+
+If installation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://docs.datadoghq.com/integrations/amazon_web_services/
+[2]: https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-agent.html
+[3]: https://app.datadoghq.com/infrastructure
+[4]: https://docs.datadoghq.com/agent/fleet_automation/
+[5]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/
+[7]: https://app.datadoghq.com/integrations/amazon-web-services
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws

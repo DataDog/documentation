@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-fips-enabled-agent/"
   tag: "Blog"
   text: "Monitor highly regulated workloads with Datadog's FIPS-enabled Agent"
+- link: "https://www.datadoghq.com/blog/engineering-the-datadog-agent-for-fedramp-high/"
+  tag: "Blog"
+  text: "Engineering the Datadog Agent for FedRAMP High® Certification"
 algolia:
   rank: 80
   tags: ["fips", "fips proxy", "compliance", "fedramp", "govcloud", "fips agent"]

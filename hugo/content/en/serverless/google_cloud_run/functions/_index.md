@@ -17,6 +17,10 @@ further_reading:
 
 ## Set up with agentic onboarding
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Use agentic onboarding to set up monitoring for your Cloud Run functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
 
 - **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.

@@ -5,6 +5,9 @@ further_reading:
   - link: /actions/forms/
     tag: Documentation
     text: Forms
+  - link: /actions/forms/guide/prefill/
+    tag: Documentation
+    text: Prefill form fields
 ---
 
 ## Overview
@@ -38,7 +41,7 @@ Each component has a set of configurable elements in the component editor:
 |-----|-------------|
 | {{< ui >}}Add a description{{< /ui >}} | An optional description displayed below the component question. |
 | {{< ui >}}Required{{< /ui >}} | Toggle to determine whether the question requires an answer. Required questions are marked with a red asterisk. |
-| {{< ui >}}Advanced{{< /ui >}} | Configure the placeholder text and default value for the component. |
+| {{< ui >}}Advanced{{< /ui >}} | Configure the field name, placeholder text, [default value](#default-values), and option values for the component. |
 | {{< ui >}}Rules{{< /ui >}} | Configure validation rules to restrict the values respondents can submit. See [Validation rules](#validation-rules). |
 | {{< ui >}}Conditions{{< /ui >}} | Configure conditional logic to show or hide the component based on a respondent's previous answers. See [Conditional fields](#conditional-fields). |
 | {{< ui >}}Style{{< /ui >}} | Change the component type while preserving its existing options. For example, switch a dropdown to checkboxes without removing and recreating the component. |
@@ -50,6 +53,19 @@ You can configure validation rules on individual components to restrict the valu
 For short answer and paragraph components, you can set a minimum and maximum character length, or restrict input to a specific pattern: email, URL, alphanumeric, or a custom regex.
 
 For number input components, you can set a minimum and maximum value.
+
+## Default values
+
+A default value prefills a component with the same answer for every respondent. For example, you might default a rating field to `3` so respondents adjust it only when their answer differs.
+
+To set a default value:
+1. Click a component to open its editor panel.
+1. Click {{< ui >}}Advanced{{< /ui >}}.
+1. Enter a value in the {{< ui >}}Default Value{{< /ui >}} field.
+
+Default values are available on Short answer, Paragraph, Number input, Dropdown, Rating, and Toggle components. As with query parameters, the value must match the option's underlying value rather than its label.
+
+To prefill values that vary by respondent, use URL query parameters instead. For more information, see [Prefill form fields][1].
 
 ## Conditional fields
 
@@ -94,3 +110,5 @@ In addition to the visual component editor, you can edit the underlying JSON Sch
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /actions/forms/guide/prefill/

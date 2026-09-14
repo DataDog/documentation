@@ -203,6 +203,57 @@ See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+To set up Mobile Session Replay for .NET MAUI:
+
+### Step 1 - Set up the .NET MAUI RUM SDK
+
+Make sure you've [set up and initialized the Datadog .NET MAUI SDK][34] with RUM enabled.
+
+Session Replay is included in the `Datadog.Maui` NuGet package. There is no additional package to install.
+
+### Step 2 - Enable Session Replay {% #enable-maui %}
+
+Enable Session Replay after RUM. If you configure the SDK with the builder extensions, chain `UseDatadogSessionReplay`:
+
+```csharp {% filename="MauiProgram.cs" %}
+using Datadog.Maui.Configuration;
+using Datadog.Maui.Hosting;
+
+builder
+    .UseDatadog(new DdSdkConfiguration
+    {
+        ClientToken = "<CLIENT_TOKEN>",
+        Environment = "<ENV_NAME>",
+        TrackingConsent = TrackingConsent.Granted,
+    })
+    .UseDatadogRum(new DdRumConfiguration
+    {
+        ApplicationId = "<RUM_APPLICATION_ID>",
+    })
+    .UseDatadogSessionReplay(new SessionReplayConfiguration
+    {
+        ReplaySampleRate = <SAMPLE_RATE>,
+    });
+```
+
+If you call the static APIs directly instead, call `DdSessionReplay.Enable` after `DdRum.Enable`:
+
+```csharp
+using Datadog.Maui;
+using Datadog.Maui.Configuration;
+
+DdSessionReplay.Enable(new SessionReplayConfiguration
+{
+    ReplaySampleRate = <SAMPLE_RATE>,
+});
+```
+
+Recording begins as soon as Session Replay is enabled.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 
@@ -451,6 +502,12 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+The .NET MAUI SDK does not support webview tracking, so consolidated web and native Session Replay views are not available for .NET MAUI applications.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 To instrument your consolidated web and native Session Replay views for React Native:
@@ -513,6 +570,19 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+The sample rate is set through the `ReplaySampleRate` property on `SessionReplayConfiguration`:
+
+```csharp {% filename="MauiProgram.cs" %}
+.UseDatadogSessionReplay(new SessionReplayConfiguration
+{
+    ReplaySampleRate = <SAMPLE_RATE>,
+});
+```
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -645,6 +715,14 @@ SessionReplay.stopRecording()
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Starting and stopping the recording manually is not supported in the .NET MAUI SDK. Recording begins when Session Replay is enabled and continues for the lifetime of the session.
+
+To control which sessions are recorded, use `ReplaySampleRate`. To decide at runtime whether a session is recorded at all, enable Session Replay conditionally rather than unconditionally on the builder chain.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 ```typescript {% filename="App.tsx" %}
@@ -695,6 +773,22 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Set the SDK verbosity to `DEBUG` when you initialize the SDK:
+
+```csharp {% filename="MauiProgram.cs" %}
+.UseDatadog(new DdSdkConfiguration
+{
+    Verbosity = SdkVerbosity.DEBUG,
+    // ...
+})
+```
+
+Session Replay upload messages from the underlying iOS and Android SDKs then appear in the platform device log.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -767,4 +861,4 @@ See [Connect Session Replay to your third-party tools][30].
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
-[34]: /session_replay/app_performance/
+[34]: /real_user_monitoring/application_monitoring/maui/setup

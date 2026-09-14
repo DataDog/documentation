@@ -47,7 +47,7 @@ By default, checks are informational, but you can make them blocking to prevent 
 
 ### Inline exclusions
 
-You can add inline exclusions to prevent certain findings from appearing in scan results. Comment `dd-no-secrets` to ignore secrets detected on the next line.
+You can add inline exclusions to prevent certain findings from appearing in scan results. Comment `no-dd-secrets` to ignore secrets detected on the next line.
 
 ### View and filter findings
 

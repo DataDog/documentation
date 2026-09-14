@@ -16,13 +16,13 @@ Use this guide to set up log forwarding from an Azure Event Hub to any Datadog s
 
 ## Setup
 
-{{% collapse-content title="Azure portal" level="h4" expanded=false id="azure-portal-setup" %}}
+{{% collapse-content title="Azure portal" level="h3" expanded=false id="azure-portal-setup" %}}
 Click the button below and fill in the form on the Azure Portal. The Azure resources required to get activity logs streaming into your Datadog account are deployed for you. To forward Activity Logs, set the **Send Activity Logs** option to true.
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fdatadog-serverless-functions%2Frefs%2Fheads%2Fmaster%2Fazure%2Feventhub_log_forwarder%2Fparent_template.json)
 {{% /collapse-content %}} 
 
-{{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
+{{% collapse-content title="Terraform" level="h3" expanded=false id="terraform-setup" %}}
 See the [terraform-azure-datadog-log-forwarder repo][3] for the Terraform code to set up the Azure resources required to collect and forward Azure resource logs to Datadog.
 {{% /collapse-content %}} 
 

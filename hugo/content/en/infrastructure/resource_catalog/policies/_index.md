@@ -41,7 +41,7 @@ Specifically, you can:
 
 ## Example Resource Policies
 
-{{% collapse-content title="Operational excellence and versioning" level="h4" expanded=true %}}
+{{% collapse-content title="Operational excellence and versioning" level="h3" expanded=true %}}
 
 - Amazon EC2 instances should only use approved Golden AMIs.
 - Amazon RDS instances running Postgres should use the latest compatible engine versions.
@@ -50,7 +50,7 @@ Specifically, you can:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Reliability" level="h4" expanded=false %}}
+{{% collapse-content title="Reliability" level="h3" expanded=false %}}
 
 - Amazon RDS instances should have at least 1 day of backup retention configured.
 - Amazon ECS services should have desired task count > 1.
@@ -60,7 +60,7 @@ Specifically, you can:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Security" level="h4" expanded=false %}}
+{{% collapse-content title="Security" level="h3" expanded=false %}}
 
 - Amazon RDS instances should be encrypted.
 - Amazon CloudFront distributions should use TLS protocol version 1.2.
@@ -68,7 +68,7 @@ Specifically, you can:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Cost optimization" level="h4" expanded=false %}}
+{{% collapse-content title="Cost optimization" level="h3" expanded=false %}}
 
 - Amazon EBS volumes should use GP3 instead of GP2.
 - Google Compute Engine instances should use ARM architecture where possible.

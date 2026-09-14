@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/microsoft-teams"
   tag: "Documentation"
   text: "Microsoft Teams Integration"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response"
 ---
 
 ## Overview

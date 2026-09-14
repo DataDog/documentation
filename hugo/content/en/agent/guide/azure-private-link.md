@@ -51,7 +51,7 @@ You can configure Azure Private Link to expose a private IP address for each Dat
 5. After the Private DNS zone is created, select it from the list.
 6. In the panel that opens, select {{< ui >}}+ Record set{{< /ui >}}.
 7. In the {{< ui >}}Add record set{{< /ui >}} panel, configure the following:
-   - For {{< ui >}}Name{{< /ui >}}, enter `*`.
+   - For {{< ui >}}Name{{< /ui >}}, enter `@`.
    - For {{< ui >}}Type{{< /ui >}}, select {{< ui >}}A - Address record{{< /ui >}}.
    - For {{< ui >}}IP address{{< /ui >}}, enter the IP address you noted at the end of the previous section.
 

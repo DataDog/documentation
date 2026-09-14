@@ -91,7 +91,7 @@ For example, if you want to add information about which VPs, organizations, and 
 
 {{< img src="cloud_cost/pipelines-map-multiple-tags-2.png" alt="Add account metadata like customer_name using reference tables for tag pipelines" style="width:60%;" >}}
 
-Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after the first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
+Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after the first match is found. For example, if an `application` is found, then the rule no longer attempts to find a `subscription_id`.
 
 Under the {{< ui >}}Additional options{{< /ui >}} section, you have the following options:
 

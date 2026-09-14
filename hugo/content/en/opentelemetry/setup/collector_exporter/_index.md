@@ -8,6 +8,9 @@ further_reading:
 - link: "/opentelemetry/compatibility/"
   tag: "Documentation"
   text: "Feature Compatibility"
+- link: "https://www.datadoghq.com/architecture/opentelemetry-collector-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "OpenTelemetry Collector in Kubernetes"
 ---
 
 ## Overview

@@ -16,6 +16,9 @@ further_reading:
 - link: "/opentelemetry/runtime_metrics/"
   tag: "Documentation"
   text: "OpenTelemetry Runtime Metrics"
+- link: "https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "Datadog Agent OTLP Receiver in Kubernetes"
 ---
 
 
@@ -374,8 +377,9 @@ env:
  - name: OTEL_EXPORTER_OTLP_ENDPOINT
    value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
 ```
-**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute to the pod's UID.
+**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute using a container [resource detector][1].
 
+[1]: https://opentelemetry.io/docs/concepts/resources/#resource-detectors
 {{% /tab %}}
 {{< /tabs >}}
 

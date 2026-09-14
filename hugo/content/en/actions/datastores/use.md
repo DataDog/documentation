@@ -44,7 +44,7 @@ Datadog creates an app prepopulated with your datastore ID. From here, follow th
 
 To use a datastore in an existing app, add a datastore action:
 1. Click the {{< ui >}}Data{{< /ui >}} ({{< ui >}}{&nbsp;}{{< /ui >}}) icon to open the {{< ui >}}Data{{< /ui >}} tab.
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon, select {{< ui >}}Action{{< /ui >}}, and add a Datastore action to add to your app. For a list of available datastore actions, see the [Action Catalog][4].
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon, select {{< ui >}}Action{{< /ui >}}, and add a Datastore action to add to your app. For a list of available datastore actions, see the [Action Catalog][4].
 1. Choose an existing connection or [create one][10].
 1. From the {{< ui >}}Datastore ID{{< /ui >}} drop-down menu, select an existing datastore, or select {{< ui >}}New Datastore{{< /ui >}} to create one.
 
@@ -86,7 +86,7 @@ To retrieve the UUID for a datastore:
 ## Use a datastore in a workflow {#use-workflow}
 
 To use a datastore in an existing workflow, add a datastore action:
-1. Click the plus ({{< ui >}}+{{< /ui >}}) icon to add a step to your workflow.
+1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon to add a step to your workflow.
 1. Search for `datastore` and select a Datastore action to add to your workflow. For a list of available datastore actions, see the [Action Catalog][4].
 1. Click on the step in the workflow canvas.
 1. From the {{< ui >}}Datastore ID{{< /ui >}} drop-down menu, select an existing datastore, or select {{< ui >}}New Datastore{{< /ui >}} to create one.

@@ -78,6 +78,7 @@ All authentication to Datadog is handled by the underlying Private Action Runner
       1. Click **Add members** and select the service principal added above.
       1. Click **Add**.
    1. To access Databricks cost data or monitor serverless jobs, grant the service principal `CAN USE` on the SQL Warehouse and read access to [system tables][20] in Unity Catalog. See [Permissions][11] for details.
+   1. To monitor serverless jobs, or to use SQL warehouse and query monitoring, add the service principal to the `databricks_pii_access` account-level group. Databricks masks SQL query text for principals outside this group. See [Query text access][21] for details.
 
 ### Step 3: Set up the Private Action Runner
 
@@ -100,7 +101,7 @@ Set up your Private Action Runner using **one** of the following options.
     - Use cloud secret storage. Ensure an identity is assigned to the pod ([Azure Workload Identity][5], [AWS IAM Role][6], or [GKE Workload Identity][7]) with permissions to read the secret created in [Step 2](#step-2-databrick-prerequisites), and provide the path to the secret either via the `DATABRICKS_SECRET_PATH` environment variable, or by providing it to the "Secret Path" field in the integration tile.
 1. Restart the deployment for these changes to take effect.
 
-[1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
+[1]: https://docs.datadoghq.com/actions/private_actions/set_up_standalone/?tab=kuberneteshelm#install-the-runner
 [2]: https://github.com/DataDog/helm-charts/tree/main/charts/private-action-runner
 [3]: https://app.datadoghq.com/actions/private-action-runners/new
 [4]: https://github.com/DataDog/helm-charts/blob/main/charts/private-action-runner/values.yaml
@@ -126,7 +127,7 @@ Set up your Private Action Runner using **one** of the following options.
 
 1. Restart the Docker container for the changes to take effect.
 
-[1]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=kubernetes#overview
+[1]: https://docs.datadoghq.com/actions/private_actions/set_up_standalone/?tab=docker#install-the-runner
 [2]: https://app.datadoghq.com/actions/private-action-runners/new
 [3]: https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/how-to-configure-managed-identities?pivots=qs-configure-portal-windows-vm
 [4]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/attach-iam-role.html
@@ -180,7 +181,7 @@ After completing the setup, jobs and cluster information should appear in [Data 
 [1]: https://docs.databricks.com/aws/en/security/network/front-end/front-end-private-connect
 [2]: https://docs.datadoghq.com/actions/private_actions/
 [3]: https://docs.datadoghq.com/agent/guide/private-link/?tab=crossregionprivatelinkendpoints&site=us
-[4]: https://docs.datadoghq.com/actions/private_actions/#how-it-works
+[4]: https://docs.datadoghq.com/actions/private_actions/#private-action-runner
 [5]: https://docs.datadoghq.com/actions/private_actions/run_script/
 [6]: https://docs.datadoghq.com/agent/guide/azure-private-link/?site=us3
 [7]: https://docs.datadoghq.com/agent/guide/gcp-private-service-connect/?site=us5
@@ -192,7 +193,8 @@ After completing the setup, jobs and cluster information should appear in [Data 
 [13]: https://app.datadoghq.com/integrations?search=databr&configPage=new&integrationId=databricks
 [14]: /data_observability/jobs_monitoring/databricks/#configure-the-datadog-databricks-integration
 [15]: https://app.datadoghq.com/data-jobs/
-[16]: https://docs.datadoghq.com/actions/private_actions/use_private_actions/?tab=docker#manage-access
+[16]: https://docs.datadoghq.com/actions/private_actions/enroll_runner/#manage-access-to-owned-runners
 [17]: https://app.datadoghq.com/organization-settings/remote-config
 [19]: /data_observability/jobs_monitoring/databricks/#install-the-datadog-agent
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
+[21]: /data_observability/jobs_monitoring/databricks/#query-text-access

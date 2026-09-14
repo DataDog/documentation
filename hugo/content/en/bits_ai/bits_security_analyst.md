@@ -41,7 +41,7 @@ In the side panel, you can see Bits AI's investigative findings, including:
 - Analysis on each investigative step
 
 You can also take additional steps directly from the side panel:
-- Create a case with pre-populated Bits AI investigation results
+- Create a work item with pre-populated Bits AI investigation results
 - Run a workflow with a SOAR blueprint
 - Declare an incident
 - Add a rule suppression

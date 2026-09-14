@@ -288,6 +288,11 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  remediate_with_ai: [gov, gov2]
+  cloudcraft_apm_overlay: [gov, gov2]
+  code_locations: [gov, gov2]
+  ownership_of_views: [gov, gov2]
+  ai_credit_limits: [gov, gov2]
   amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
@@ -319,6 +324,8 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   bits_investigation: [gov,gov2]
+  dashboard_anomaly_detection: [gov,gov2]
+  bits_remediation: [gov,gov2]
   byoti: [gov, gov2]
   case_management: [gov2]
   ci_visibility: [gov,gov2]
@@ -335,6 +342,7 @@ unsupported_sites:
   continuous_integration: [gov,gov2]
   correlation: [gov,gov2] #Event management correlation
   coterm: [gov,gov2]
+  cross_app_access: [gov,gov2]
   csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
   cpp_log_collection: [gov,gov2]
   data_jobs: [gov,gov2]
@@ -379,6 +387,7 @@ unsupported_sites:
   linear_error_tracking: [gov,gov2]
   live_debugger: [gov,gov2]
   llm_observability: [gov,gov2]
+  dd.llm_observability.dataset: [gov,gov2]
   mcp_server: [gov,gov2]
   mobile_app_testing: [gov,gov2]
   nebius-cloud: [gov,gov2]
@@ -409,7 +418,7 @@ unsupported_sites:
   safety_center: [gov,gov2]
   scaleway: [gov,gov2]
   service_override_removal: [gov,gov2]
-  service_remapping_rules: [gov,gov2]
+  service_remapping_rules: [gov2]
   setup_remote_config: [gov,gov2]
   snmp_profile_manager: [gov,gov2]
   software_delivery_mcp_tools: [gov,gov2]
@@ -425,3 +434,4 @@ unsupported_sites:
   workflow-automation: [gov,gov2]
   workflows: [gov,gov2]
   workload_security_active_protection: [gov,gov2]
+  work_management_ai_site_support: [gov,gov2]

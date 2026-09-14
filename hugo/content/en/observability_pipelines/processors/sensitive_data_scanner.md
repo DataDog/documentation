@@ -1,5 +1,6 @@
 ---
 title: Sensitive Data Scanner Processor
+description: Learn how to use the Sensitive Data Scanner processor to detect and redact or hash sensitive information such as Personally Identifiable Information (PII) and Payment Card Industry (PCI) data in logs or traces.
 disable_toc: false
 further_reading:
 - link: "/logs/guide/regex_log_parsing/"
@@ -29,8 +30,8 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 To set up the processor:
 
 1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
-    - Only logs matching the filter are scanned and processed.
-    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+    - Only events matching the filter are scanned and processed.
+    - All events, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select one of the following:
 
@@ -311,7 +312,7 @@ Use the following widgets to evaluate your Sensitive Data Scanner processors' sc
 
 After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
 
-**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. 
+**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid.
 
 ### Only enable rules you need
 

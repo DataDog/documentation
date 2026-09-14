@@ -28,7 +28,7 @@ integrations_repos = {
 def update_repos(integrations_repos):
     for repo, cfg in integrations_repos.items():
         branch = cfg['branch']
-        local_repo_path = os.path.join('..', repo)
+        local_repo_path = os.path.join('..', '..', repo)
         if isdir(local_repo_path):
             try:
                 print(f'Updating {repo}')
@@ -58,7 +58,7 @@ def find_integration(integrations_repos, integration_name):
     for repo, cfg in integrations_repos.items():
         branch = cfg['branch']
         is_github = cfg['github']
-        location = os.path.join('..', repo)
+        location = os.path.join('..', '..', repo)
         if not os.path.isdir(location):
             continue
         dirs = [f.name for f in os.scandir(location) if f.is_dir()]

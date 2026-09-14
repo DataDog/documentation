@@ -4,112 +4,111 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management/agentless_scanning
   tag: Documentation
-  text: Agentless Scanning Cloud Security
+  text: Cloud Security Agentless Scanning
 - link: /security/cloud_security_management/setup/agentless_scanning/enable
   tag: Documentation
-  text: Activer Agentless Scanning
+  text: Activation de Agentless Scanning
 - link: /security/cloud_security_management/setup/agentless_scanning/update
   tag: Documentation
-  text: Mise à jour d'Agentless Scanning
-title: Déploiement d'Agentless Scanning
+  text: Mise à jour de Agentless Scanning
+title: Déploiement de Agentless Scanning
 ---
+Ce guide vous aide à choisir la topologie de déploiement adaptée à Agentless Scanning en fonction de votre environnement cloud. Pour les instructions de configuration, consultez [Activation de Agentless Scanning][3].
 
-Ce guide vous aide à choisir la bonne topologie de déploiement pour Agentless Scanning en fonction de votre environnement cloud. Pour les instructions de configuration, consultez la section [Activer Agentless Scanning][3].
+## Présentation {#overview}
 
-## Présentation
-
-Datadog recommande de suivre les directives suivantes :
+Datadog recommande les directives suivantes :
 - Utilisez un compte de scanner dédié pour les environnements multi-comptes.
-- Déployez un scanner dans chaque région contenant plus de 150 hosts.
-- Si vous utilisez [Cloud Storage Scanning][1], déployez un scanner dans chaque région contenant un datastore (par exemple, des compartiments S3 ou des instances RDS).
+- Déployez un scanner dans chaque région contenant plus de 150 hôtes.
+- Si vous utilisez [Cloud Storage Scanning][1], déployez un scanner dans chaque région contenant un magasin de données (par exemple, des compartiments S3).
 
-<div class="alert alert-info">Les scanners envoient uniquement à Datadog la liste collectée de packages et les métadonnées du host (hostnames, identifiants d'instances EC2/VM/Compute Engine). Toutes les données scannées restent dans votre infrastructure.</div>
+<div class="alert alert-info">Les scanners envoient uniquement la liste collectée des paquets et les métadonnées des host (noms d'hôte, identifiants d'instance EC2/VM/Compute Engine) à Datadog. Toutes les données analysées restent dans votre infrastructure.</div>
 
-## Configuration du compte cloud et de la région
+## Configuration du compte cloud et de la région {#cloud-account-and-region-configuration}
 
-La topologie de déploiement que vous utilisez dépend du nombre de comptes cloud (comptes AWS, abonnements Azure ou projets GCP) à scanner et des régions qu'ils couvrent.
+La topologie de déploiement que vous utilisez dépend du nombre de comptes cloud (comptes AWS, abonnements Azure ou projets GCP) que vous devez analyser et des régions qu'ils couvrent.
 
-- **Comptes cloud** : si vous n'avez besoin de scanner qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte. Dans le cas contraire, utilisez un compte de scanner dédié et des rôles délégués pour lui accorder l'accès nécessaire au scan des autres comptes. C'est ce qu'on appelle le **scan inter-comptes**.
-- **Régions** : un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Cependant, le scan inter-régions entraîne des coûts de transfert de données. Le déploiement de scanners supplémentaires dépend du nombre de hosts présents dans chaque région.
+- **Comptes cloud** : Si vous n'avez besoin d'analyser qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte. Sinon, utilisez un compte de scanner dédié et utilisez des rôles délégués pour lui accorder l'accès à l'analyse d'autres comptes. C'est ce qu'on appelle l'**analyse inter-comptes**.
+- **Régions** : Un seul scanner peut analyser des hôtes dans n'importe quelle région, y compris des régions autres que la sienne. Cependant, l'analyse inter-régions entraîne des coûts de transfert de données. Le déploiement de scanners supplémentaires dépend du nombre d'hôtes dont vous disposez dans chaque région.
 
-Ces onglets contiennent des informations sur la configuration de votre topologie de déploiement. Sélectionnez l'onglet correspondant au nombre de comptes à scanner, puis apprenez-en plus en fonction du nombre de régions à couvrir.
+Ces onglets contiennent des informations sur la façon de configurer votre topologie de déploiement. Sélectionnez l'onglet qui décrit le nombre de comptes que vous devez analyser, puis apprenez-en davantage en fonction du nombre de régions que vous devez couvrir.
 
 {{< tabs >}}
-{{% tab "Single account" %}}
+{{% tab "Compte unique" %}}
 
-Si vous n'avez besoin de scanner qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte.
+Si vous n'avez besoin d'analyser qu'un seul compte, déployez un ou plusieurs scanners directement dans ce compte.
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless appliqué dans un compte couvrant plusieurs régions" width="40%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagramme de Agentless Scanning montrant le scanner sans agent appliqué dans un compte qui couvre plusieurs régions" width="40%" >}}
 
-### Déterminer le nombre de scanners à déployer
+### Décidez du nombre de scanners à déployer {#decide-how-many-scanners-to-deploy}
 
-Un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Le scan inter-régions entraîne des coûts de transfert de données. La décision de déployer des scanners supplémentaires dépend donc du nombre de hosts présents dans chaque région.
+Un seul scanner peut analyser des hôtes dans n'importe quelle région, y compris des régions autres que la sienne. L'analyse inter-régions entraîne des coûts de transfert de données ; la décision de déployer des scanners supplémentaires dépend donc du nombre d'hôtes dont vous disposez dans chaque région.
 
-- **Moins de ~150 hosts au total dans toutes les régions** : un scanner unique dans une seule région est la configuration la plus économique. Les coûts de transfert de données inter-régions pour le scan des hosts distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
-- **Plus de ~150 hosts dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies réalisées sur les coûts d'egress grâce au scan local compensent le coût d'exécution du scanner.
-- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hosts. Les régions en dessous du seuil peuvent être scannées en inter-régions depuis le scanner le plus proche.
+- **Moins de ~150 hôtes au total dans toutes les régions** : un seul scanner dans une région est la configuration la plus rentable. Les coûts de transfert de données inter-régions pour l'analyse d'hôtes distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
+- **Plus de ~150 hôtes dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies de sortie réalisées grâce à une analyse locale l'emportent sur le coût d'exécution du scanner.
+- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hôtes. Les régions en dessous du seuil peuvent être analysées de manière inter-régionale à partir du scanner le plus proche.
 
-Datadog achemine automatiquement les scans vers le scanner régional approprié afin de minimiser les coûts inter-régions.
+Datadog achemine automatiquement les analyses vers le scanner régional approprié afin de minimiser les coûts inter-régions.
 
-#### Limites de capacité du scanner
+#### Limites de capacité du scanner {#scanner-capacity-limits}
 
-Chaque scanner est soumis à des limites de débit régies par les quotas d'API du fournisseur cloud :
+Chaque scanner possède des limites de débit régies par les quotas d'API du fournisseur cloud :
 
 | Limite | Valeur |
 |-------|-------|
-| Nombre maximum de scanners par compte et par région | 4 (limite stricte ; les fournisseurs cloud tels qu'AWS limitent les snapshots simultanés à 100 par compte et par région) |
-| Intervalle de scan | Toutes les 12 heures |
+| Nombre maximal de scanners par compte et par région | 4 (plafond strict ; les fournisseurs cloud comme AWS limitent les instantanés simultanés à 100 par compte et par région) |
+| Intervalle d'analyse | Toutes les 12 heures |
 
-<div class="alert alert-danger">N'augmentez pas le nombre souhaité dans le groupe Auto Scaling (ASG) au-delà de quatre scanners par région. Les scanners supplémentaires ne peuvent pas créer de snapshots en raison de la limite de snapshots simultanés imposée par les fournisseurs cloud.</div>
+<div class="alert alert-danger">N'augmentez pas le nombre souhaité du groupe Autoscaling (ASG) au-delà de quatre scanners par région. Des scanners supplémentaires ne peuvent pas créer d'instantanés en raison de la limite d'instantanés simultanés des fournisseurs cloud.</div>
 
 {{% /tab %}}
-{{% tab "Multiple accounts" %}}
+{{% tab "Comptes multiples" %}}
 
-### Déterminer les comptes dans lesquels déployer des scanners
+### Décidez dans quels comptes déployer les scanners {#decide-which-accounts-to-deploy-scanners-in}
 
-Datadog recommande d'utiliser un **compte de scanner dédié** pour y déployer des scanners, et des **rôles délégués inter-comptes** pour accorder aux scanners l'accès aux comptes cibles (y compris le compte de scanner).
+Datadog recommande d'utiliser un **compte de scanner dédié** pour déployer les scanners, et d'utiliser des **rôles de délégation inter-comptes** pour accorder aux scanners l'accès aux comptes cibles (y compris le compte de scanner).
 
-Pour AWS Organizations, utilisez un [CloudFormation StackSet][1] pour déployer un rôle délégué dans tous les comptes membres, ce qui automatise l'intégration pour le scan inter-comptes.
+Pour AWS Organizations, utilisez un [CloudFormation StackSet][1] pour déployer un rôle de délégation dans tous les comptes membres, automatisant ainsi l'intégration pour l'analyse inter-comptes.
 
-Le diagramme suivant illustre le scan inter-comptes depuis un compte central (Compte 4) :
+Le diagramme suivant illustre l'analyse inter-comptes à partir d'un compte central (Compte 4) :
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless déployé dans un compte cloud central" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagramme de Agentless Scanning montrant le scanner sans agent déployé dans un compte cloud central" width="90%" >}}
 
-**Si vous ne souhaitez pas accorder d'autorisations inter-comptes**, déployez plutôt un scanner dans chaque compte. Cela entraîne des coûts plus élevés, car chaque scanner effectue des scans inter-régions au sein de son propre compte.
+**Si vous ne souhaitez pas accorder d'autorisations inter-comptes**, déployez plutôt un scanner dans chaque compte. Cela entraîne des coûts plus élevés car chaque scanner effectue des analyses inter-régions au sein de son compte.
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagramme d'Agentless Scanning montrant le scanner Agentless déployé dans chaque compte cloud" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagramme de Agentless Scanning montrant le scanner sans agent déployé dans chaque compte cloud" width="90%" >}}
 
-### Déterminer le nombre de scanners à déployer
+### Décidez du nombre de scanners à déployer {#decide-how-many-scanners-to-deploy-1}
 
-Un scanner unique peut scanner les hosts de n'importe quelle région, y compris des régions autres que la sienne. Le scan inter-régions entraîne des coûts de transfert de données. La décision de déployer des scanners supplémentaires dépend donc du nombre de hosts présents dans chaque région.
+Un seul scanner peut analyser des hôtes dans n'importe quelle région, y compris des régions autres que la sienne. L'analyse inter-régions entraîne des coûts de transfert de données ; la décision de déployer des scanners supplémentaires dépend donc du nombre d'hôtes dont vous disposez dans chaque région.
 
-- **Moins de ~150 hosts au total dans toutes les régions** : un scanner unique dans une seule région est la configuration la plus économique. Les coûts de transfert de données inter-régions pour le scan des hosts distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
-- **Plus de ~150 hosts dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies réalisées sur les coûts d'egress grâce au scan local compensent le coût d'exécution du scanner.
-- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hosts. Les régions en dessous du seuil peuvent être scannées en inter-régions depuis le scanner le plus proche.
+- **Moins de ~150 hôtes au total dans toutes les régions** : un seul scanner dans une région est la configuration la plus rentable. Les coûts de transfert de données inter-régions pour l'analyse d'hôtes distants sont inférieurs au coût fixe d'exécution d'un scanner supplémentaire.
+- **Plus de ~150 hôtes dans une région spécifique** : déployez un scanner dédié dans cette région. À ce seuil, les économies de sortie réalisées grâce à une analyse locale l'emportent sur le coût d'exécution du scanner.
+- **Plusieurs régions au-dessus du seuil** : déployez un scanner dans chaque région dépassant ~150 hôtes. Les régions en dessous du seuil peuvent être analysées de manière inter-régionale à partir du scanner le plus proche.
 
-Datadog achemine automatiquement les scans vers le scanner régional approprié afin de minimiser les coûts inter-régions.
+Datadog achemine automatiquement les analyses vers le scanner régional approprié afin de minimiser les coûts inter-régions.
 
-#### Limites de capacité du scanner
+#### Limites de capacité du scanner {#scanner-capacity-limits-1}
 
-Chaque scanner est soumis à des limites de débit régies par les quotas d'API du fournisseur cloud :
+Chaque scanner possède des limites de débit régies par les quotas d'API du fournisseur cloud :
 
 | Limite | Valeur |
 |-------|-------|
-| Nombre maximum de scanners par compte et par région | 4 (limite stricte ; les fournisseurs cloud tels qu'AWS limitent les snapshots simultanés à 100 par compte et par région) |
-| Intervalle de scan | Toutes les 12 heures |
+| Nombre maximal de scanners par compte et par région | 4 (plafond strict ; les fournisseurs cloud comme AWS limitent les instantanés simultanés à 100 par compte et par région) |
+| Intervalle d'analyse | Toutes les 12 heures |
 
-<div class="alert alert-danger">N'augmentez pas le nombre souhaité dans le groupe Auto Scaling (ASG) au-delà de quatre scanners par région. Les scanners supplémentaires ne peuvent pas créer de snapshots en raison de la limite de snapshots simultanés imposée par les fournisseurs cloud.</div>
+<div class="alert alert-danger">N'augmentez pas le nombre souhaité du groupe Autoscaling (ASG) au-delà de quatre scanners par région. Des scanners supplémentaires ne peuvent pas créer d'instantanés en raison de la limite d'instantanés simultanés des fournisseurs cloud.</div>
 
 [1]: /fr/security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Considérations relatives aux réseaux d'entreprise
+## Considérations sur le réseau d'entreprise {#enterprise-networking-considerations}
 
-Par défaut, le scanner crée un nouveau VPC lors du déploiement. Si votre organisation utilise Terraform et dispose de politiques de contrôle des services (SCP) qui restreignent la création de VPC, utilisez l'option [**VPC personnalisé**][2] lors de la configuration pour utiliser un VPC existant plutôt que d'en créer un nouveau.
+Par défaut, le scanner crée un nouveau VPC lors du déploiement. Si votre organisation utilise Terraform et dispose de politiques de contrôle de service (SCP) qui restreignent la création de VPC, utilisez l'option [{{< ui >}}custom VPC{{< /ui >}}][2] lors de la configuration pour utiliser un VPC existant au lieu d'en créer un nouveau.
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
