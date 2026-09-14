@@ -6,142 +6,148 @@ aliases:
 - /ja/tracing/app_analytics/
 - /ja/tracing/guide/ingestion_control_page/
 - /ja/tracing/trace_ingestion/ingestion_controls
-description: APM で取り込み率を制御する方法。
+description: APM を使用して取り込みレートを制御する方法をご確認ください。
 further_reading:
 - link: /tracing/trace_pipeline/ingestion_mechanisms/
   tag: ドキュメント
-  text: 取り込みのメカニズム
+  text: 取り込みメカニズム
 - link: /tracing/trace_pipeline/metrics/
   tag: ドキュメント
-  text: 使用量メトリクス
-title: 取り込みのコントロール
+  text: 使用状況に関するメトリクス
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: アーキテクチャセンター
+  text: '分散トレーシングの習得: データ量の課題と、効率的なサンプリングに向けた Datadog のアプローチ'
+- link: https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/
+  tag: アーキテクチャセンター
+  text: '分散トレーシングの最適化: 予算内で重要なトレースをキャプチャするためのベストプラクティス'
+title: Ingestion Control
 ---
 {{< img src="tracing/apm_lifecycle/ingestion_sampling_rules.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="取り込みサンプリングルール" >}}
 
-Ingestion Controls は、アプリケーションから Datadog に送信されるトレースに影響します。[APM メトリクス][1]は常にすべてのトレースに基づいて計算され、Ingestion Controls の影響を受けません。
+Ingestion Control は、アプリケーションから Datadog にどのトレースが送信されるかに影響を与えます。[APM メトリクス][1] は常にすべてのトレースに基づいて計算され、Ingestion Control には影響されません。
 
-Ingestion Control ページは、アプリケーションおよびサービスの取り込み構成を可視化します。[取り込みのコントロールページ][2]から:
+Ingestion Control ページには、アプリケーションとサービスでの取り込み構成が可視化されます。[Ingestion Control ページ][2] は、次の目的で使用できます。
 
-- サービスレベルの取り込み構成を可視化します。
-- 高スループットのサービスやエンドポイントのトレースサンプリングレートを調整し、取り込み予算をより適切に管理します。
-- 低スループットでトラフィックがまれなサービスやエンドポイントのトレースサンプリングレートを調整して、可視性を高めます。
-- どの[取り込みメカニズム][11]がトレースの大部分をサンプリングしているかを理解します。
-- 取り込み構成の潜在的な問題 (Agent の CPU または RAM リソースの制限など) を調査し、対処します。
+- サービスレベルの取り込み構成を把握する。
+- 取り込みの予算を適切に管理するために、高スループットのサービスやエンドポイントのトレースサンプリングレートを調整する。
+- 可視性を高めるために、低スループットでトラフィックの少ないサービスやエンドポイントのトレースサンプリングレートを調整する。
+- どの [取り込みメカニズム][11] がトレースサンプリングの大部分を担っているかを把握する。
+- Agent で使用できる CPU リソースや RAM リソースの制限など、取り込み構成に関する潜在的な問題を調査し、対処する。
 
 {{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Ingestion Control ページの概要" >}}
 
-## 取り込み構成を理解する {#understanding-your-ingestion-configuration}
+## 取り込み構成について {#understanding-your-ingestion-configuration}
 
-Ingestion Control ヘッダーのデータを使用して、トレースの取り込みを監視します。ヘッダーには、過去 1 時間に取り込まれたデータの総量、推定月間使用量、およびアクティブな APM インフラストラクチャー (ホスト、Fargate タスク、サーバーレス関数など) に基づいて計算された割り当て済みの月間取り込み制限の割合が表示されます。
+トレース取り込みを監視するには、Ingestion Control ヘッダーのデータを使用します。ヘッダーには、過去 1 時間に取り込まれたデータの合計量、推定月間使用量、およびアクティブな APM インフラストラクチャー (ホスト、Fargate タスク、サーバーレス関数など) に基づいて計算された、割り当てられた月間の取り込み制限の割合が表示されます。
 
-月間使用量が `100%` 未満の場合、予測される取り込みデータは月間割り当て内に収まります。月間使用量が `100%` を超える場合、月間取り込みデータは月間割り当てを超えると予測されます。
+月間使用量が `100%` 未満であれば、取り込まれると予測されるデータ量は月間割り当て量に収まります。月間使用量の値が `100%` を超える場合、これは、1 か月あたりに取り込まれるデータ量が月間割り当て量を超える見込みであることを意味します。
 
 ### サービス別の取り込みレベル {#ingestion-levels-by-service}
 
-サービステーブルには、取り込まれたボリュームと取り込みの構成に関する情報が、サービスごとに分類されて表示されます。
+サービステーブルには、取り込み量と取り込み構成に関する情報がサービスごとに分類されて記載されます。
 
-Type
-: サービスの種類: ウェブサービス、データベース、キャッシュ、ブラウザなど...
+タイプ
+: サービスタイプ: Web サービス、データベース、キャッシュ、ブラウザなど。
 
-Name
-: トレースを Datadog に送信する各サービスの名前。このテーブルには、過去 1 時間にデータが取り込まれたルートサービスと非ルートサービスが含まれています。
+名前
+: Datadog にトレースを送信している各サービスの名前。このテーブルには、過去 1 時間にデータ取り込みの対象となったルートサービスと非ルートサービスが記載されます。
 
-Ingested Traces/s
-: 過去 1 時間にサービスから取り込まれた 1 秒あたりの平均トレース数。
+取り込まれたトレース数/秒
+: 過去 1 時間に取り込まれた、当該サービスを起点とするトレースの 1 秒あたりの平均数。
 
-Ingested Bytes/s
-: 過去 1 時間にサービスのために取り込まれた 1 秒あたりの平均バイト数。
+取り込まれたバイト数/秒
+: 過去 1 時間に当該サービスを対象に 1 秒あたりに取り込まれた平均バイト数。
 
-Downstream Bytes/s
-: サービスが_サンプリングの決定を行った_結果として取り込まれた 1 秒あたりの平均バイト数。これは、トレースの先頭で行われた決定に続くコールスタック内のすべての下流サービスのスパンのバイト数を含みます。この列のデータは、`sampling_service` 次元に基づいており、`datadog.estimated_usage.apm.ingested_bytes` メトリクスに設定されています。詳しくは、[APM 使用状況メトリクス][15]をご覧ください。
+ダウンストリームバイト数/秒
+: 当該サービスが_サンプリングの決定_を行えるように 1 秒あたりに取り込まれた平均バイト数。これには、トレースの先頭で行われた決定に従った、コールスタック内のすべてのダウンストリームサービスのスパンのバイト数が含まれます。この列のデータは、`datadog.estimated_usage.apm.ingested_bytes` メトリクスで設定された `sampling_service` ディメンションに基づきます。詳細については、[APM 使用状況に関するメトリクス][15] をお読みください。
 
-Traffic Breakdown
-: サービスから開始されたトレースにおける、サンプリングされたトラフィックとサンプリングされていないトラフィックの詳細な内訳。詳細については、[Traffic breakdown](#traffic-breakdown) を参照してください。
+トラフィックの内訳
+: サービスを起点とするトレースを目的にサンプリングされたトラフィックとサンプリングされなかったトラフィックの詳細な内訳。詳細については、[トラフィックの内訳](#traffic-breakdown)を参照してください。
 
-Ingestion Configuration
-: [デフォルトのヘッドベースサンプリングメカニズム][4]が Agent から適用される場合は `Automatic` を表示します。取り込みが[トレースサンプリングルール][8]で構成されている場合、サービスは `Configured` としてマークされ、SDK の設定からサンプリングルールが適用されると `Local` ラベルが設定され、UI からリモートでサンプリングルールが適用されると `Remote` ラベルが設定されます。サービスの取り込み設定についての詳細は、[デフォルトの取り込みレートの変更](#configure-the-service-ingestion-rate)を参照してください。
+取り込み構成
+: Agent の [デフォルトのヘッドベースサンプリングメカニズム][4] が適用されている場合は、`Automatic` と示されます。取り込み構成に [トレースサンプリングルール][8] が設定されている場合、そのサービスは `Configured` としてマークされます。SDK の構成に含まれるサンプリングルールが適用されている場合は `Local` ラベルが、UI からリモートでサンプリングルールが適用されている場合は `Remote` ラベルが設定されます。サービスでの取り込みを構成する方法の詳細については、[デフォルトの取り込みレートの変更](#configure-the-service-ingestion-rate)に関するドキュメントをお読みください。
 
-Infrastructure
-: サービスが実行しているホスト、コンテナ、および関数。
+インフラストラクチャー
+: サービスが実行されているホスト、コンテナ、および関数。
 
-Service status
-: Datadog Agent が[その構成で][9]設定された CPU や RAM の限界に達したために一部のスパンがドロップされた場合は `Limited Resource`、一部のスパンがレガシーの [App Analytics メカニズム][7]を通じて取り込まれた場合は `Legacy Setup`、それ以外は `OK` と表示されます。
+サービスステータス
+: Datadog Agent が [その構成][9] で設定されている CPU または RAM の制限に達したために一部のスパンがドロップされた場合は `Limited Resource`と示されます。レガシーの [App Analytics メカニズム][7] によって一部のスパンが取り込まれた場合は `Legacy Setup` と示されます。それ以外の場合は `OK` と示されます。
 
-環境、設定、およびステータスでページをフィルタリングして、対応が必要なサービスを表示します。グローバルな取り込み量を減らすには、`Downstream Bytes/s` 列でテーブルをソートし、取り込みの最大シェアを占めるサービスを表示します。
+環境、構成、ステータスでページをフィルタリングして、アクションが必要なサービスを表示します。全体的な取り込み量を削減するには、`Downstream Bytes/s` 列でテーブルを並べ替えて、取り込みの大部分を占めているサービスを確認します。
 
-**注**: テーブルは[使用状況メトリクス][10]の `datadog.estimated_usage.apm.ingested_spans`と`datadog.estimated_usage.apm.ingested_bytes` によって提供されています。これらのメトリクスは `service`、`env` および `ingestion_reason` にタグ付けされています。
+**注**: このテーブルには、[使用状況メトリクス][10]`datadog.estimated_usage.apm.ingested_spans`および `datadog.estimated_usage.apm.ingested_bytes` が活用されています。これらのメトリクスには、`service`、`env` および `ingestion_reason` でタグが付けられています。
 
-#### Traffic breakdown {#traffic-breakdown}
+#### トラフィックの内訳 {#traffic-breakdown}
 
-Traffic Breakdown 列は、サービスから開始されるすべてのトレースの宛先を内訳表示します。取り込まれたトラフィックおよびドロップされたトラフィックの割合と、その理由の推定値を提供します。
+トラフィックの内訳列には、当該サービスを起点とするすべてのトレースの宛先の内訳が表示されます。取り込まれたトラフィックとドロップされたトラフィックの割合の推定値、およびドロップされた理由を確認できます。
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="トレース取り込みの Traffic breakdown" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/service_traffic_breakdown.png" style="width:100%;" alt="トレース取り込みのトラフィック内訳" >}}
 
-詳細は、以下の部分に分かれています。
+この内訳は、次の要素で構成されています。
 
-- **Complete traces ingested** (青色): Datadog により取り込まれたトレースの割合。
-- **Complete traces not retained** (灰色): Datadog により取り込まれていないトレースの割合。いくつかのトレースは以下の理由でドロップされる可能性があります。
+- {{< ui >}}Complete traces ingested{{< /ui >}} (青): Datadog に取り込まれたトレースの割合。
+- {{< ui >}}Complete traces not retained{{< /ui >}}(グレー): Datadog に取り込まれなかったトレースの割合。一部のトレースは、次の理由でドロップされる可能性があります。
 
-    1. デフォルトでは、[Agent が自動的にサンプリングレートを設定][4]がサービスのトラフィックに応じて設定されます。
-    2. サービスは、[サンプリングルール][8]を使用して特定の割合のトレースを取り込むように構成されています。
+    1. デフォルトでは、サービスのトラフィックに応じて、[Agent が自動的にサンプリングレートを設定][4] します。
+    2. 当該サービスが、[サンプリングルール][8] に従って特定の割合のトレースを取り込むように構成されています。
 
-- **Complete traces dropped by the SDK rate limiter** (オレンジ色): トレースサンプリングルールでサービスの取り込み率を手動で設定することを選択した場合、デフォルトで 100 トレース/秒に設定されているレートリミッターが自動的に有効になっています。このレートを変更するには、[レートリミッター][8]のドキュメントを参照してください。
+- {{< ui >}}Complete traces dropped by the SDK rate limiter{{< /ui >}}(オレンジ): トレースサンプリングルールでサービスの取り込みレートをパーセンテージとして手動で設定した場合、レートリミッターが自動的に有効になります。この場合、デフォルトではレート制限が 1 秒あたり 100 トレースに設定されます。このレートを変更するには、[レートリミッター][8] のドキュメントを参照してください。
 
-- **Traces dropped due to the Agent CPU or RAM limit** (赤色): このメカニズムはスパンをドロップし、不完全なトレースを生成する可能性があります。これを修正するには、Agent が実行されるインフラストラクチャーの CPU およびメモリの割り当てを増やしてください。
+- {{< ui >}}Traces dropped due to the Agent CPU or RAM limit{{< /ui >}}(赤): このメカニズムでは、スパンがドロップされて不完全なトレースが作成される可能性があります。これを修正するには、Agent が実行されているインフラストラクチャーの CPU およびメモリ割り当てを増やしてください。
 
-## サービスの取り込みを構成する {#configuring-ingestion-for-a-service}
+## サービスでの取り込みを構成する {#configuring-ingestion-for-a-service}
 
-任意のサービスをクリックすると、サービス取り込みの概要が表示され、そのサービスのトレース取り込みを管理するための実用的なインサイトと構成オプションを確認できます。
+任意のサービスをクリックすると、そのサービスでお取り込みの概要が表示され、そのサービスでのトレース取り込みを管理するための実用的なインサイトと構成オプションが提示されます。
 
 ### サービスの取り込み構成 {#ingestion-configuration-for-a-service}
 
 #### リソース別のサンプリングレート {#sampling-rates-by-resource}
 
-この表は、サービスのリソースごとに適用されたサンプリングレートを一覧表示します。
+このテーブルには、サービスで適用されるサンプリングレートがリソース別に一覧表示されます。
 
 {{< img src="/tracing/trace_indexing_and_ingestion/resource_sampling_rates.png" alt="リソース別のサンプリングレートテーブル" style="width:100%;">}}
 
-- `Ingested bytes` 列は、サービスとリソースのスパンから取り込まれたバイト数を示し、`Downstream bytes` 列は、そのサービスとリソースから開始されるサンプリングの決定が行われたスパンから取り込まれたバイト数を示し、コールチェーン内の下流サービスからのバイトも含まれます。
-- `Configuration` 列は、リソースのサンプリングレートがどこから適用されているかを示します。
-  - `Automatic` [デフォルトのヘッドベースサンプリングメカニズム][4]が Agent から適用される場合。
-  - `Local Configured` SDK 内で[サンプリングルール][8]がローカルに設定されている場合。
-  - `Remote Configured` Datadog UI からリモートの sampling rule が設定されている場合。取り込みのコントロールページからサンプリングルールを構成する方法については、[リモートでのサンプリングルールの構成](#configure-the-service-ingestion-rates-by-resource)のセクションを参照してください。
+- `Ingested bytes` 列には、サービスとリソースのスパンから取り込まれたバイト数が示されます。一方、`Downstream bytes` 列には、そのサービスとリソースからサンプリングの決定が開始されたスパンから取り込まれたバイト数が示されます (これには、呼び出しチェーン内のダウンストリームサービスから取り込まれたバイト数も含まれます)。
+- `Configuration` 列には、リソースのサンプリングレートがどこから適用されているかが示されます。
+  - `Automatic`: Agent の [デフォルトのヘッドベースサンプリングメカニズム][4] が適用されている場合。
+  - `Local Configured`: [サンプリングルール][8] が SDK でローカルに設定されている場合。
+  - `Remote Configured`: Datadog UI からリモートでサンプリングルールが設定される場合。Ingestion Control ページでサンプリングルールを構成する方法については、[リモートでのサンプリングルールの構成](#configure-the-service-ingestion-rates-by-resource)に関するセクションをお読みください。
 
-**注**: サービスがサンプリングの決定を行っていない場合、そのサービスのリソースは `Resources not making sampling decisions` 行の下にまとめられます。
+**注**: サービスがサンプリングの決定を行わない場合は、そのサービスのリソースは `Resources not making sampling decisions` 行の下に折りたたまれます。
 
-**注**: 短い時間枠 (1〜4 時間) では、Effective Sampling Rate が100%に設定されていても100%未満で表示されることがあります。これは、統計計算の収束により多くのデータポイントが必要となるために発生する想定された動作です。すべてのトレースは引き続き正しくキャプチャされています。より正確に表示するには、より長い期間でのサンプリングレートを確認してください。
+**注**: 短い時間枠 (1 〜 4 時間) では、有効サンプリングレートが 100% に設定されている場合でも、100% 未満として表示されることがあります。これは、収束するためにより多くのデータポイントを必要とする統計計算による想定内の動作です。すべてのトレースは引き続き正しくキャプチャされます。最も正確な表示にするには、サンプリングレートを表示する対象の期間を長くしてください。
 
-#### 取り込み理由とサンプリングの決定要因 {#ingestion-reasons-and-sampling-decision-makers}
+#### 取り込みの理由とサンプリングの決定を下す要素 {#ingestion-reasons-and-sampling-decision-makers}
 
-**取り込み理由の内訳**を確認して、サービスの取り込みに影響しているメカニズムを把握してください。各取り込み理由は、特定の[取り込みメカニズム][11]に関連しています。サービスの取り込み設定を変更した後、過去 1 時間の取り込みデータに基づく取り込みバイト数およびスパン数の増減を、この時系列グラフで確認できます。
+{{< ui >}}Ingestion reasons breakdown{{< /ui >}} を調べて、どのメカニズムがサービスでの取り込みに関与しているかを確認します。各インジェクションの理由は、特定の [インジェクトメカニズム][11] に関連しています。サービスでの取り込み構成を変更した後、過去 1 時間に取り込まれたデータに基づくこの時系列グラフで、取り込まれたバイト数およびスパン数の増減を確認できます。
 
-サービスの取り込み量の大部分が上流サービスによる判断に起因している場合は、**サンプリングの決定要因**のトップリストの詳細を確認してください。例えば、サービスが非ルートである場合 (つまり、トレースをサンプリングすることを**決して判断しない**場合)、非ルートサービスの取り込みに影響しているすべての上流サービスを確認してください。上流のルートサービスを構成して、全体の取り込み量を削減してください。
+サービスのデータ取り込み量の大部分がアップストリームサービスによる決定に起因する場合は、{{< ui >}}Sampling decision makers{{< /ui >}} トップリストの詳細を調査します。たとえば、サービスが非ルートである場合 (つまり、トレースをサンプリングするかどうかを**決定しない**場合)、非ルートサービスの取り込みを担当するすべてのアップストリームサービスを観察してください。全体的な取り込み量を削減するには、アップストリームのルートサービスを構成します。
 
-[APM Trace - 推定使用量ダッシュボード][12]は、グローバルな取り込み情報と、`service`、`env`、`ingestion reason` 別の内訳グラフを提供し、さらなる調査を行うことができます。
+詳細な調査を行うには、[APM Trace - Estimated Usage Dashboard][12] を使用します。このダッシュボードには、グローバルな取り込み情報に加え、`service`、`env`、`ingestion reason` 別の内訳グラフが表示されます。
 
 #### Agent と SDK のバージョン {#agent-and-sdk-versions}
 
-サービスが使用している **Datadog Agent と SDK のバージョン**を確認してください。使用中のバージョンを最新のリリースされたバージョンと比較し、最新かつ最新の Agent とライブラリを実行していることを確認してください。
+サービスで使用している {{< ui >}}Datadog Agent and SDK versions{{< /ui >}} を確認します。使用中のバージョンを最新のリリースバージョンと比較して、最新の Agent とライブラリを実行するようにしてください。
 
 {{< img src="tracing/trace_indexing_and_ingestion/agent_tracer_version.png" style="width:90%;" alt="Agent と SDK のバージョン" >}}
 
 ### サービスのサンプリングレートの管理 {#managing-services-sampling-rates}
 
-サービスのサンプリングレートを制御するには、次の方法を使用してください。
-- **Adaptive sampling**: 設定された月間取り込みボリューム予算に合わせて、サンプリングレートを自動的に調整します。
-- **Resource-based sampling**: リソースごとに明示的なサンプリングレートを手動で設定します。
+サービスのサンプリングレートを制御するには、次の方法を使用できます。
+- {{< ui >}}Adaptive sampling{{< /ui >}}: 構成済みの月間取り込み量予算に合わせて、サンプリングレートを自動的に調整します。
+- {{< ui >}}Resource-based sampling{{< /ui >}}: リソースごとに明示的なサンプリングレートを手動で設定します。
 
-これらの戦略の設定は、Datadog UI を通じて**リモートで**適用できます。この方法では、サービスを再デプロイすることなく、変更を即座に有効化できます。**Resource-based Sampling** では、サービスの設定ファイルを更新して再デプロイすることにより、設定を**ローカルに**適用するオプションもあります。
+これらの戦略の構成は、Datadog UI を使用して{{< ui >}}Remotely{{< /ui >}}適用できます。この方法では、サービスを再デプロイすることなく、変更を即座に反映させることができます。{{< ui >}}Resource-based Sampling{{< /ui >}} については、サービスの構成ファイルを更新して再デプロイすることで、**ローカル**に構成を適用するオプションもあります。
 
-サービスの取り込みレートに **Remote Configuration** を使用するには、特定の要件があります。
+サービスのインジェクションレートに **Remote Configuration** を使用するには、特定の要件が適用されます。
 
 {{% collapse-content title="Remote Configuration の要件" level="h4" expanded="false" id="remote-configuration-requirements" %}}
 
-- Datadog Agent [7.41.1][19] 以上。
-- [リモート構成][3]が Agent で有効になっていること
-- `APM Remote Configuration Write`[権限][20]。これらの権限がない場合は、Datadog の管理者に組織の設定から権限を更新してもらうよう依頼してください。
+- Datadog Agent [7.41.1][19] 以降。
+- Agent で [Remote Configuration][3] が有効になっていること。
+- `APM Remote Configuration Write`[権限][20]。これらの権限がない場合は、Datadog 管理者に依頼して、組織設定で権限を更新してもらってください。
 
-機能に必要な最小 SDK バージョンは以下のとおりです。
+この機能に必要な最小 SDK バージョンは次のとおりです。
 
 | 言語 | 必要な最小バージョン |
 |----------|--------------------------|
@@ -156,93 +162,93 @@ Traffic Breakdown 列は、サービスから開始されるすべてのトレ�
 
 {{% /collapse-content %}}
 
-#### Adaptive sampling {#adaptive-sampling}
+#### 適応型サンプリング {#adaptive-sampling}
 
-Adaptive sampling を使用して、Datadog がサービスのサンプリングレートを代わりに管理できるようにします。1 つまたは複数のサービスに対してターゲット月間取り込み量を指定し、すべてのサービスとエンドポイントの可視性を維持します。
+Datadog がお客様に代わってサービスのサンプリングレートを管理できるようにするには、適応型サンプリングを使用します。すべてのサービスとエンドポイントの可視性を維持しながら、1 つまたは複数のサービスの目標月間取り込み量を指定できます。
 
-Adaptive sampling を構成するには:
+適応型サンプリングを構成するには:
 
-1. [取り込みのコントロール][2]ページに移動します。
-2. サービスをクリックして、**Service Ingestion Summary** を確認します。
-3. **Manage Ingestion Rate** をクリックします。
-4. **Datadog adaptive sampling rates** をサービスのサンプリング戦略として選択します。
-5. **Apply** をクリックします。
+1. [Ingestion Control][2] ページに移動します。
+2. サービスをクリックして、{{< ui >}}Service Ingestion Summary{{< /ui >}} を表示します。
+3. {{< ui >}}Manage Ingestion Rate{{< /ui >}} をクリックします。
+4. サービスのサンプリング戦略として {{< ui >}}Datadog adaptive sampling rates{{< /ui >}} を選択します。
+5. {{< ui >}}Apply{{< /ui >}} をクリックします。
 
-<div class="alert alert-info">この構成を<strong>リモート</strong>で適用することが無効になっている場合は、<a href="#remote-configuration-requirements">Remote Configuration の要件</a> が満たされていることを確認してください。</div>
+<div class="alert alert-info">この構成を <strong>Remotely</strong> で適用できない場合は、<a href="#remote-configuration-requirements">Remote Configuration の要件</a>が満たされていることを確認してください。</div>
 
-詳細については、[アダプティブサンプリング][17]を参照してください。
+詳細については、[適応型サンプリング][17] を参照してください。
 
 
-#### Resource-based sampling {#resource-based-sampling}
+#### リソースベースのサンプリング {#resource-based-sampling}
 
-リソース名によってサービスのカスタムサンプリングレートを構成するには:
-1. [取り込みのコントロール][2]ページに移動します。
-2. サービスをクリックして、**Service Ingestion Summary** を確認します。
-3. **Manage Ingestion Rate** をクリックします。
-4. **Custom sampling rates only** をクリックします。
-5. **Add new rule** をクリックして、一部のリソースのサンプリングレートを設定します。 
-   **注**: サンプリングルールはグロブパターンマッチングを使用するため、ワイルドカード (`*`) を使用して複数のリソースに同時に一致させることができます。
+リソース名ごとにサービスのカスタムサンプリングレートを構成するには:
+1. [Ingestion Control][2] ページに移動します。
+2. サービスをクリックして、{{< ui >}}Service Ingestion Summary{{< /ui >}} を表示します。
+3. {{< ui >}}Manage Ingestion rate{{< /ui >}} をクリックします。
+4. {{< ui >}}Custom sampling rates only{{< /ui >}} をクリックします。
+5. {{< ui >}}Add new rule{{< /ui >}} をクリックし、一部のリソースのサンプリングレートを設定します。 
+   **注**: サンプリングルールはグロブパターンマッチングを使用するため、ワイルドカード (`*`) を使用して複数のリソースを同時に照合できます。
    {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_custom.png" alt="構成モーダル" style="width:100%;">}}
-6. 構成を**リモートで**または**ローカルで**適用します。
+6. 構成を{{< ui >}}Remotely{{< /ui >}}または{{< ui >}}Locally{{< /ui >}}で適用します。
 {{< tabs >}}
-{{% tab "リモートで" %}}
+{{% tab "Remotely" %}}
 
-このオプションは Remote Configuration を使用して構成を適用するため、変更を有効にするためにサービスを再デプロイする**必要はありません**。構成の変更は [Live Search Explorer][100] で確認できます。
+このオプションは Remote Configuration を使用して構成を適用するため、変更を有効にするためにサービスを再デプロイする必要は**ありません**。構成の変更は、[Live Search Explorer][100] から確認できます。
 
-**Apply** をクリックして構成を保存します。
+{{< ui >}}Apply{{< /ui >}} をクリックして構成を保存します。
 
-リモートで構成されたリソースは、**Configuration** 列に `Configured Remote` として表示されます。 
+Remotely で構成されたリソースは、`Configured Remote` 列に {{< ui >}}Configuration{{< /ui >}} として表示されます。 
 
-<br><div class="alert alert-info">この構成を<strong>リモート</strong>で適用することが無効になっている場合は、<a href="#remote-configuration-requirements">Remote Configuration の要件</a> が満たされていることを確認してください。</div>
+<br><div class="alert alert-info">この構成を <strong>Remotely</strong> で適用できない場合は、<a href="#remote-configuration-requirements">Remote Configuration の要件</a>が満たされていることを確認してください。</div>
 
 [100]: /ja/tracing/trace_explorer/?tab=listview#live-search-for-15-minutes
 
 {{% /tab %}}
 
-{{% tab "ローカルで" %}}
+{{% tab "Locally" %}}
 
-このオプションは、手動で適用するための構成を生成します。
+このオプションにより、手動で適用するための構成が生成されます。
 1. 生成された構成をサービスに適用します。 
-   **注**: サービス名の値は大文字と小文字を区別します。サービス名の大文字・小文字を一致させる必要があります。
+   **注**: サービス名の値では、大文字と小文字が区別されます。サービス名の大文字と小文字は一致していなければなりません。
 1. サービスを再デプロイします。
-1. 新しい割合が **Traffic Breakdown** 列に適用されたことを確認します。ローカルで構成されたリソースは、**Configuration** 列に `Configured Local` として表示されます。
+1. {{< ui >}}Traffic Breakdown{{< /ui >}} 列を調べて、新しいパーセンテージが適用されていることを確認します。ローカルで構成されたリソースは、`Configured Local` 列に {{< ui >}}Configuration{{< /ui >}} として表示されます。
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Datadog Agent の取り込み構成を管理する {#managing-datadog-agent-ingestion-configuration}
+## Datadog Agent 取り込み構成の管理 {#managing-datadog-agent-ingestion-configuration}
 
-**Configure Datadog Agent Ingestion** をクリックして、デフォルトのヘッドベースのサンプリングレート、エラーサンプリング、およびレアサンプリングを管理します。
+{{< ui >}}Configure Datadog Agent Ingestion{{< /ui >}} をクリックして、デフォルトのヘッドベースサンプリングレート、エラーサンプリング、レアサンプリングを管理します。
 
-{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="エージェントレベル構成モーダル" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/agent_level_configurations_modal.png" style="width:70%;" alt="Agent レベルの構成モーダル" >}}
 
-- **[ヘッドベースサンプリング][4]**: サービスに対してサンプリングルールが設定されていない場合、Datadog Agent は自動的にサービスに適用されるサンプリングレートを計算し、**Agent あたり 10 トレース/秒**を目標とします。Datadog でこの目標トレース数を変更するか、Agent レベルでローカルに `DD_APM_TARGET_TPS` を設定します。
-- **[エラースパンサンプリング][5]**: ヘッドベースサンプリングで捕捉されなかったトレースについて、Datadog Agent は、**Agent あたり最大 10 トレース/秒**でローカルエラートレースを捕捉します。Datadog でこの目標トレース数を変更するか、Agent レベルでローカルに `DD_APM_ERROR_TPS` を設定します。
-- **[レアスパンサンプリング][6]**: ヘッドベースのサンプリングで捕捉されないトレースについて、Datadog Agent は、**Agent ごとに最大で毎秒 5 トレースの**ローカルレアレースを捕捉します。この設定はデフォルトで無効になっています。Datadog でレアトレースの収集を有効にするか、`DD_APM_ENABLE_RARE_SAMPLER` を Agent レベルでローカルに設定します。
+- [{{< ui >}}Head-based Sampling{{< /ui >}}][4]: サービスにサンプリングルールが設定されていない場合、Datadog Agent は **Agent あたり毎秒 10 トレース**をターゲットに自動的にサンプリングレートを計算してサービスに適用します。このターゲットトレース数を Datadog で変更するか、Agent レベルでローカルに `DD_APM_TARGET_TPS` を設定します。
+- [{{< ui >}}Error Spans Sampling{{< /ui >}}][5]: ヘッドベースサンプリングでキャプチャされなかったトレースについて、Datadog Agent は **Agent あたり毎秒最大 10 トレース**としてローカルのエラートレースをキャプチャします。このターゲットトレース数を Datadog で変更するか、Agent レベルでローカルに `DD_APM_ERROR_TPS` を設定します。
+- [{{< ui >}}Rare Spans Sampling{{< /ui >}}][6]: ヘッドベースサンプリングでキャプチャされなかったトレースについて、Datadog Agent は **Agent あたり毎秒最大 5 トレース**としてローカルのエラートレースをキャプチャします。この設定はデフォルトで無効になっています。Datadog でレアトレースの収集を有効にするか、Agent レベルでローカルに `DD_APM_ENABLE_RARE_SAMPLER` を設定します。
 
-Remote Configuration を使用すると、これらのパラメーターを更新するために Agent を再起動する必要はありません。`Apply` をクリックして構成の変更を保存すると、新しい構成が即座に有効になります。Agent のサンプリングパラメーターの Remote Configuration は、Agent バージョン [7.42.0][13] 以上を使用している場合に利用可能です。
+リモート構成を使用すると、Agent を再起動しなくても、これらのパラメーターを更新できます。`Apply` をクリックして構成の変更を保存すると、新しい構成がすぐに有効になります。Agent サンプリングパラメーターのリモート構成は、Agent バージョン [7.42.0][13] 以降を使用している場合にご利用いただけます。
 
-**注**: 円グラフの `Other Ingestion Reasons` (グレー) セクションは、Datadog Agent レベルで_構成不可能_なその他の取り込み理由を表します。
+**注**: 円グラフの `Other Ingestion Reasons` (グレー) セクションは、Datadog Agent レベルでは_構成できない_その他の取り込み理由を表しています。
 
-**注**: リモートで構成されたパラメーターは、環境変数や `datadog.yaml` の構成など、ローカルでの構成よりも優先されます。
+**注**: リモートで構成されたパラメーターは、環境変数や `datadog.yaml` 構成などのローカル構成よりも優先されます。
 
 ## サンプリングルールの優先順位 {#sampling-rules-precedence}
 
-複数の場所にサンプリングルールが設定されている場合、次の優先順位ルールが順に適用されます。リストの上位にあるルールは、下位の優先順位のルールを上書きできます。
+サンプリングルールが複数の場所に設定されている場合、次の優先順位ルールが順に適用されます。この場合、リストの最初に表示されているルールで低い優先順位のルールを上書きできます。
 
-1. リモートで構成されたサンプリングルールは、[resource-based sampling](#configure-the-service-ingestion-rates-by-resource) を通じて設定されます。
-1. [アダプティブサンプリングルール][17]
+1. リモートで構成されたサンプリングルール ([リソースベースのサンプリング](#configure-the-service-ingestion-rates-by-resource) によって設定)
+1. [適応型サンプリングルール][17]
 1. [ローカルで構成されたサンプリングルール][8] (`DD_TRACE_SAMPLING_RULES`)
 1. [リモートで構成されたグローバルサンプリングレート][8]
 1. [ローカルで構成されたグローバルサンプリングレート][8] (`DD_TRACE_SAMPLE_RATE`)
-1. [トレース Agent のレート (Agent 設定によって間接的に制御)](#managing-datadog-agent-ingestion-configuration) をリモートまたはローカルで (`DD_APM_TARGET_TPS`)
+1. [リモートまたはローカルの Agent 設定で間接的に制御される Trace Agent によるレート](#managing-datadog-agent-ingestion-configuration) (`DD_APM_TARGET_TPS`)
 
-別の言い方をすれば、Datadog は以下の優先順位ルールを使用します。
-- Tracer settings > Agent settings
-- Sampling rules > Global sampling rate
-- Remote > Local
+言い換えると、Datadog は次の優先順位ルールに従います。
+- トレース設定 > Agent 設定
+- サンプリングルール > グローバルサンプリングレート
+- リモート > ローカル
 
-## 参考資料 {#further-reading}
+## 参考文献 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -16,7 +16,7 @@ further_reading:
   text: CIDR 표기법 쿼리를 사용해 네트워크 트래픽 로그 필터링
 - link: https://learn.datadoghq.com/courses/log-investigations
   tag: 학습 센터
-  text: Alerting 및 Investigations 로그 추적
+  text: 경보 및 조사를 위한 로그 추적
 title: 수집된 로그에서 메트릭 생성
 ---
 ## 개요 {#overview}
@@ -27,19 +27,19 @@ Datadog의 [Logging without Limits][1]\*를 사용하면 스토리지 및 쿼리
 
 로그 기반 메트릭을 사용하면 쿼리와 일치하는 로그의 개수 메트릭을 생성하거나, 로그에 포함된 숫자 값(예: 요청 기간)의 [분포 메트릭][3]을 생성할 수 있습니다.
 
-**청구 참고 사항:** 수집된 로그에서 생성된 메트릭은 [Custom Metrics][4]으로 청구됩니다.
+**청구 참고 사항:** 수집된 로그에서 생성된 메트릭은 [Custom Metrics][4]로 청구됩니다.
 
 ## 로그 기반 메트릭 생성 {#generate-a-log-based-metric}
 
 {{< img src="logs/processing/logs_to_metrics/generate_logs_to_metric.png" alt="로그를 메트릭으로 생성" style="width:80%;">}}
 
-새 로그 기반 메트릭을 생성하는 방법:
+새 로그 기반 메트릭을 생성하려면 다음 단계를 따르세요.
 
 1. [메트릭 생성][5] 페이지로 이동합니다.
-1. **메트릭 생성** 탭을 선택합니다.
-1. **+새 메트릭**을 클릭합니다.
+1. {{< ui >}}Generate Metrics{{< /ui >}} 탭을 선택합니다.
+1. {{< ui >}}+New Metric{{< /ui >}}을 클릭합니다.
 
-내보내기 메뉴에서 "새 메트릭 생성" 옵션을 선택하여 Analytics 검색에서 메트릭을 생성할 수도 있습니다.
+{{< ui >}}Export{{< /ui >}} 메뉴에서 {{< ui >}}Generate new metric{{< /ui >}} 옵션을 선택하여 Analytics 검색에서 메트릭을 생성할 수도 있습니다.
 
 {{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="로그를 메트릭으로 생성" style="width:80%;">}}
 
@@ -47,17 +47,19 @@ Datadog의 [Logging without Limits][1]\*를 사용하면 스토리지 및 쿼리
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="로그를 메트릭으로 만들기" style="width:80%;">}}
 
-1. **로그 스트림을 필터링할 쿼리 입력**: 쿼리 구문은 [Log Explorer Search][6]에 대한 것과 같습니다. 지난 20분 내에 타임스탬프를 포함하여 수집된 로그만 집계 대상으로 간주됩니다. 인덱스는 쿼리에서 제외해야 합니다.
-2. **추적하려는 필드 선택**: 쿼리와 일치하는 모든 로그의 개수를 생성하려면 `*`를 선택하고, 아니면 로그 속성을 입력하여(예: `@network.bytes_written`) 숫자 값을 집계하고 그에 상응하는 `count`, `min`,`max`, `sum` 및 `avg` 집계된 메트릭을 만듭니다. 로그 속성 패싯이 [measure][7]인 경우, 메트릭의 값은 로그 속성의 값입니다.
-3. **`group by`**에 디멘션 추가: 기본적으로 로그 기반으로 생성된 메트릭에는 명시적으로 추가하지 않은 한 태그가 없습니다. 로그에 존재하는 모든 속성 또는 태그 디멘션(예: `@network.bytes_written`, `env`)을 사용하여 메트릭 [태그][8]를 만들 수 있습니다. 메트릭 태그는 출처 속성 또는 태그 이름과 같고, @을 포함하지 않습니다.
-4. **백분위수 집계 추가**: 분포 메트릭의 경우, 선택적으로 p50, p75, p90, p95, p99 백분위수를 생성할 수 있습니다. 백분위수 메트릭도 사용자 지정 메트릭으로 간주하며, [그에 따라 청구][9]됩니다.
-5. **메트릭 이름 지정**: 로그 기반 메트릭 이름은 [사용자 지정 메트릭 명명 규칙][10]을 따라야 합니다.
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: [Log Explorer 검색 구문][6]을 사용하여 쿼리를 작성합니다. Datadog은 인덱싱된 로그가 아닌 수집 시점의 로그 스트림에 대해 스트림 필터 쿼리를 평가합니다. 이 필터는 [전체 텍스트 검색][12](`*:search_term`)을 포함하여 모든 Log Explorer 검색 기능을 지원하지 않습니다. Log Explorer에서 결과를 반환하는 쿼리라도 여기서는 일치하는 로그가 없을 수 있습니다. 지난 20분 내에 타임스탬프를 포함하여 수집된 로그만 집계 대상으로 간주됩니다. 인덱스는 쿼리에서 제외됩니다.
 
-**참고**: 로그 기반 메트릭에 대한 데이터 포인트는 10초 간격으로 생성됩니다. 로그 기반 메트릭에 대하여 [대시보드 그래프][11]를 작성하면 `count unique` 파라미터는 10초 간격 이내의 값에 기반합니다.
+   메트릭을 저장한 후, [Metrics Explorer][13]에서 데이터 포인트가 생성되는지 확인한 다음 사용하세요. 쿼리가 Log Explorer에서는 로그와 일치하지만 메트릭이 비어 있는 경우, 해당 용어를 따옴표로 묶인 구문으로 다시 작성하세요(예: `message:"Database operation failed."`).
+2. {{< ui >}}Select the field you would like to track{{< /ui >}}: 쿼리와 일치하는 모든 로그의 개수를 생성하려면 `*`를 선택하고, 아니면 로그 특성을 입력하여(예: `@network.bytes_written`) 숫자 값을 집계하고 그에 상응하는 `count`, `min`, `max`, `sum` 및 `avg`의 집계된 메트릭을 생성합니다. 로그 특성 패싯이 [측정값][7]인 경우, 메트릭의 값이 로그 특성의 값입니다.
+3. {{< ui >}}Add dimensions to `group by`{{< /ui >}}: 기본적으로 로그 기반으로 생성된 메트릭에는 명시적으로 추가하지 않은 한 태그가 없습니다. 로그에 존재하는 모든 특성 또는 태그 차원(예: `@network.bytes_written`, `env`)을 사용하여 메트릭 [태그][8]를 생성할 수 있습니다. 메트릭 태그 이름은 출처 특성 또는 태그 이름과 같고, `@` 기호를 포함하지 않습니다.
+4. {{< ui >}}Add percentile aggregations{{< /ui >}}: 분포 메트릭의 경우, 필요시 p50, p75, p90, p95, p99 백분위수를 생성할 수 있습니다. 백분위수 메트릭도 Custom Metrics로 간주하며, [그에 따라 청구][9]됩니다.
+5. {{< ui >}}Name your metric{{< /ui >}}: 로그 기반 메트릭 이름은 [Custom Metrics 명명 규칙][10]을 따라야 합니다.
+
+**참고**: Datadog은 10초 간격으로 로그 기반 메트릭에 대한 데이터 포인트를 생성합니다. 로그 기반 메트릭에 대하여 [대시보드 그래프][11]를 작성하면 `count unique` 파라미터는 10초 간격 이내의 값을 사용합니다.
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="count unique 쿼리 파라미터가 강조 표시된 시계열 그래프 구성 페이지" style="width:80%;">}}
 
-<div class="alert alert-danger">로그 기반 메트릭은 <a href="/metrics/custom_metrics/">사용자 지정 메트릭</a>으로 간주하며 그에 따라 청구됩니다. 청구에 영향을 미치지 않도록 타임스탬프, 사용자 ID, 요청 ID 또는 세션 ID와 같이 한계가 없거나 카디널리티가 극히 높은 속성을 기준으로 그룹화하지 마세요.</div>
+<div class="alert alert-danger">로그 기반 메트릭은 <a href="/metrics/custom_metrics/">Custom Metrics</a>로 간주하며 그에 따라 청구됩니다. 청구에 영향을 미치지 않도록 타임스탬프, 사용자 ID, 요청 ID 또는 세션 ID와 같이 한계가 없거나 카디널리티가 극히 높은 특성을 기준으로 그룹화하지 마세요.</div>
 
 ### 로그 기반 메트릭 업데이트 {#update-a-log-based-metric}
 
@@ -65,7 +67,7 @@ Datadog의 [Logging without Limits][1]\*를 사용하면 스토리지 및 쿼리
 
 - 스트림 필터 쿼리: 메트릭으로 집계될 일치하는 로그 세트를 변경하기 위해
 - 집계 그룹: 생성된 메트릭의 태그를 업데이트하거나 카디널리티를 관리하기 위해
-- 백분위수 선택: **백분위수 계산** 상자를 선택하거나 선택 취소하여 백분위수 메트릭 제거 또는 생성
+- 백분위수 선택: {{< ui >}}Calculate percentiles{{< /ui >}} 상자를 선택하거나 선택 취소하여 백분위수 메트릭 제거 또는 생성
 
 메트릭 유형 또는 이름을 변경하려면 새 메트릭을 만들어야 합니다.
 
@@ -86,7 +88,7 @@ Log Management 사용량 메트릭에는 3가지 태그가 함께 제공되어 �
 | ----------------------- | --------------------------------------------------------------------- |
 |  `datadog_index`        | 로그를 의도한 인덱스와 매칭하는 라우팅 쿼리를 나타냅니다.  |
 |  `datadog_is_excluded`  | 로그가 제외 쿼리와 일치하는지 아닌지를 나타냅니다.            |
-|  `service`              | 로그 이벤트의 서비스 속성입니다.                               |
+|  `service`              | 로그 이벤트의 서비스 특성입니다.                               |
 
 **참고**: `datadog_is_excluded` 및 `datadog_index` 필드에는 `N/A` 값이 있을 수 있습니다. 이는 로그가 수집되었지만, 명시적으로 인덱스로 라우팅될 포함 또는 제외 기준과 일치하지 않았음을 나타냅니다.
 
@@ -109,3 +111,5 @@ Log Management 사용량 메트릭에는 3가지 태그가 함께 제공되어 �
 [9]: /ko/account_management/billing/custom_metrics/?tab=countrategauge
 [10]: /ko/metrics/custom_metrics/#naming-custom-metrics
 [11]: /ko/dashboards/querying/
+[12]: /ko/logs/explorer/search_syntax/#full-text-search
+[13]: /ko/metrics/explorer/

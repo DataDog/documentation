@@ -10,6 +10,9 @@ further_reading:
   - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
     tag: 'Blog'
     text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'
+  - link: "https://www.datadoghq.com/blog/monitor-azure-functions-hosting-plans/"
+    tag: "Blog"
+    text: "Monitor Azure Functions across every hosting plan with Datadog"
 ---
 
 ## Overview

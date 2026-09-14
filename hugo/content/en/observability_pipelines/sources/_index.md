@@ -1,6 +1,8 @@
 ---
 title: Sources
 description: Learn about the sources available for the Observability Pipelines Worker.
+aliases:
+  - /observability_pipelines/sources/prometheus
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/configuration/set_up_pipelines/"
@@ -79,19 +81,6 @@ These are the available sources:
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
-
-- [Datadog Agent][1]
-- [OpenTelemetry][2]
-- [Prometheus][25]
-
-[1]: /observability_pipelines/sources/datadog_agent/
-[2]: /observability_pipelines/sources/opentelemetry/
-[25]: /observability_pipelines/sources/prometheus/
-
-{{% /tab %}}
-{{% tab "Traces" %}}
-
-<div class="alert alert-info">Traces Pipeline is in Preview. Contact your account manager to request access.</div>
 
 - [Datadog Agent][1]
 - [OpenTelemetry][2]

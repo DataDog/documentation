@@ -162,7 +162,7 @@ The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all env
 
 ## Enabling APM tracing
 
-By default, the request mirror traces won't enable Datadog's APM product. If you want to use Application & API Protection without APM tracing functionality, this is the default behavior. 
+By default, the request mirror traces won't enable Datadog's APM product. If you want to use App and API Protection without APM tracing functionality, this is the default behavior. 
 
 To enable APM tracing, set the environment variable `DD_APM_TRACING_ENABLED=true` in the request mirror deployment.
 

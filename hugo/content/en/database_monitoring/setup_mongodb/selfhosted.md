@@ -186,6 +186,57 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 {{% /tab %}}
 {{< /tabs >}}
 
+## Query Metrics
+
+Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
+
+### MongoDB 8.0.20 or later
+
+Set `internalQueryStatsSampleRate` to `1.0` (100% sampling).
+
+Add the parameter to the MongoDB configuration file:
+
+{{< code-block lang="yaml" >}}
+setParameter:
+  internalQueryStatsSampleRate: 1.0
+{{< /code-block >}}
+
+Or pass it on the command line:
+
+{{< code-block lang="shell" >}}
+mongod --setParameter internalQueryStatsSampleRate=1.0
+{{< /code-block >}}
+
+To enable it at runtime until the next restart, run:
+
+{{< code-block lang="javascript" >}}
+db.adminCommand({setParameter: 1, internalQueryStatsSampleRate: 1.0})
+{{< /code-block >}}
+
+### MongoDB 8.0.0 through 8.0.19
+
+Set `internalQueryStatsRateLimit` to `-1` (no rate limit).
+
+Add the parameter to the MongoDB configuration file:
+
+{{< code-block lang="yaml" >}}
+setParameter:
+  internalQueryStatsRateLimit: -1
+{{< /code-block >}}
+
+Or pass it on the command line:
+
+{{< code-block lang="shell" >}}
+mongod --setParameter internalQueryStatsRateLimit=-1
+{{< /code-block >}}
+
+To enable it at runtime until the next restart, run:
+
+{{< code-block lang="javascript" >}}
+db.adminCommand({setParameter: 1, internalQueryStatsRateLimit: -1})
+{{< /code-block >}}
+
+For more information about the server parameters that control query stats collection, see the [MongoDB Query Stats documentation][4].
 
 ## Data Collected
 
@@ -235,3 +286,4 @@ instances:
 [1]: /account_management/api-app-keys/
 [2]: /integrations/mongo/?tab=standalone#metrics
 [3]: /database_monitoring/query_metrics/
+[4]: https://github.com/mongodb/mongo/blob/master/src/mongo/db/query/query_stats/README.md#server-parameters

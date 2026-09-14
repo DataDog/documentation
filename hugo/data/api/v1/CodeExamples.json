@@ -876,6 +876,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1553931399",
+      "description": "Create a Data Quality monitor with a model configuration returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2986418353",
+      "description": "Create a Data Quality monitor with a source to target configuration returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1532893480",
       "description": "Create a Data Quality monitor with sensitivity returns \"OK\" response"
     },
