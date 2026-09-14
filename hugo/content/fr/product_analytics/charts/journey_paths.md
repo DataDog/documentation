@@ -29,7 +29,7 @@ Une fois que vous avez défini les étapes d'un parcours utilisateur, le graphiq
 
 Chaque chemin indique le pourcentage et le nombre de sessions ayant suivi ce chemin, ainsi que le temps moyen passé sur celui-ci. Les chemins sans événements listés représentent les sessions qui sont passées directement de l'événement de début à l'événement de fin, sans vues ou actions intermédiaires.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="Un graphique de parcours utilisateur avec des légendes numérotées pour le sélecteur de conversion/abandon, le sélecteur d'étape, la plage de dates, les bascules de type d'événement, View more, le menu des options de chemin et les commandes More Paths/Fewer Paths." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/journey-paths-customization-2.png" alt="Un graphique de parcours utilisateur avec des légendes numérotées pour le sélecteur de conversion/abandon, le sélecteur d'étape, la plage de dates, les bascules de type d'événement, View more, le menu des options de chemin et les commandes More Paths/Fewer Paths." style="width:100%;" >}}
 
 Vous pouvez affiner les graphiques de parcours utilisateur de différentes manières pour vous concentrer sur les chemins que vous souhaitez analyser.
 

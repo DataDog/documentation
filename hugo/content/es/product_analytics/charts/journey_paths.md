@@ -28,7 +28,7 @@ Después de definir los pasos en un recorrido, el gráfico muestra las rutas má
 
 Cada ruta muestra el porcentaje y el número de sesiones que siguieron esa ruta, así como el tiempo promedio dedicado a ella. Las rutas sin eventos enumerados representan sesiones que fueron directamente del evento inicial al evento final sin vistas o acciones intermedias.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_customization.png" alt="Un gráfico de Rutas de recorrido con llamadas numeradas para el selector de conversiones/abandonos, el selector de pasos, el rango de tiempo, los interruptores de tipo de evento, View more, el menú de opciones de ruta y los controles More Paths/Fewer Paths." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/journey-paths-customization-2.png" alt="Un gráfico de Rutas de recorrido con llamadas numeradas para el selector de conversiones/abandonos, el selector de pasos, el rango de tiempo, los interruptores de tipo de evento, View more, el menú de opciones de ruta y los controles More Paths/Fewer Paths." style="width:100%;" >}}
 
 Puede refinar los gráficos de rutas de recorrido de varias maneras para centrarse en las rutas que desea analizar.
 
