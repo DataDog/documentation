@@ -26,8 +26,6 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 
 The following table shows feature compatibility across different setups:
 
-The **OTel SDK + OpenTelemetry Collector Contrib** column reflects the recommended OTLP HTTP exporter and `span_metrics` connector configuration. The Datadog Exporter and Datadog Connector remain supported, and existing configurations do not need to migrate.
-
 | Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OpenTelemetry Collector Contrib | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
