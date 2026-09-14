@@ -1489,7 +1489,7 @@ Sensitive text can be detected in:
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
-Sensitive text can be detected in the following components.
+Sensitive text can be detected in the following components:
 
 {% table %}
 - Component
@@ -1565,7 +1565,7 @@ The following `TextInputType`s are considered sensitive:
 
 Input and option text is text entered by the user with a keyboard or other text-input device, or a custom (non-generic) value in selection elements.
 
-This includes the below.
+This includes the below:
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
@@ -1854,7 +1854,7 @@ The following chart shows how we apply different touch interaction strategies, u
 
 ### Image masking {% #image-masking-definition %}
 
-The following chart shows how we apply different image masking strategies:
+The following chart shows how Datadog applies different image masking strategies:
 
 {% table %}
 - Type
