@@ -64,36 +64,44 @@
         </div>
 
         <main class="container pb-2">
-
+            <section class="home-enablement-banner d-flex flex-column py-1 align-items-center flex-md-row flex-md-nowrap py-md-0">
+                <p class="col-12 col-md-7 col-lg-5">
+                    <span class="icon-container" aria-hidden="true">{{ partial "icon" (dict "name" "books" "color" "#632CA6") }}</span>
+                    {{ i18n "home_enablement_banner_title" }}
+                </p>
+                <a class="col-12 col-md-5 col-lg-7" href="https://www.datadoghq.com/technical-enablement/" target="_blank" rel="noopener" data-dd-action-name="homepage-enablement-banner-view-sessions">
+                    {{ i18n "home_enablement_banner_cta" }}
+                </a>
+            </section>
             <section class="row guides justify-content-center">
-                    {{ range $i, $guide := $datafile.guides }}
-                        <div class=" guide-col d-flex flex-column">
-                                <div class="inner-content">
-                                <div class="guide-no">{{ add $i 1}}.</div>
-                            <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
+                {{ range $i, $guide := $datafile.guides }}
+                    <div class=" guide-col d-flex flex-column">
+                            <div class="inner-content">
+                            <div class="guide-no">{{ add $i 1}}.</div>
+                        <h5 class="text-black text-uppercase pt-0 mt-0">{{ $guide.title}} </h5>
 
-                                <p class="small">{{ $guide.desc }}</p>
-                                <div class="mt-auto">
-                                        <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
-                                </div>
+                            <p class="small">{{ $guide.desc }}</p>
+                            <div class="mt-auto">
+                                    <a class="smaller font-semibold text-primary" href="{{ $guide.link | absLangURL }}">{{ $guide.link_text }} ></a>
                             </div>
-
-
                         </div>
 
-                        {{ if ne $i 2 }}
-                        <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
-                            <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                <path d="M0,0 L100,50 L0,100" />
-                            </svg>
-                        </div>
 
-                        <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1"  viewBox="0 0 100 100" preserveAspectRatio="none">
-                            <path d="M0 0 L50 100 L100 0" />
+                    </div>
+
+                    {{ if ne $i 2 }}
+                    <div class="px-0 mx-0 right-arrow-container d-none d-md-flex">
+                        <svg class="right-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <path d="M0,0 L100,50 L0,100" />
                         </svg>
+                    </div>
 
-                        {{ end }}
+                    <svg class="d-block d-md-none down-arrow" xmlns="http://www.w3.org/2000/svg" version="1.1"  viewBox="0 0 100 100" preserveAspectRatio="none">
+                        <path d="M0 0 L50 100 L100 0" />
+                    </svg>
+
                     {{ end }}
+                {{ end }}
             </section>
 
         </main>
