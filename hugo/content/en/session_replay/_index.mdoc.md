@@ -73,7 +73,7 @@ Datadog also reduces the load on a browser's UI thread by delegating most of the
 <!-- end Browser -->
 
 <!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ## Mobile Session Replay
 
 Mobile Session Replay expands visibility into your mobile applications by visually replaying each user interaction, such as taps, swipes, and scrolls. It is available for native apps on Android and iOS, Kotlin Multiplatform, React Native, and Flutter. Visually replaying user interactions on your applications makes it easier to reproduce crashes and errors, as well as understand the user journey for making UI improvements.
@@ -147,7 +147,7 @@ Below are examples showing how incremental snapshots only send updates for impac
 In summary, the Session Replay recorder breaks your app's screen into rectangles called wireframes. It only tracks and sends updates for the parts that change, making replays efficient and accurate.
 
 {% alert level="info" %}
-For Session Replay, Datadog supports RUM for native iOS and Android mobile apps, but not for smart TVs or wearables.
+Mobile Session Replay is not available for smart TVs or wearables.
 {% /alert %}
 {% /if %}
 <!-- end Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
@@ -156,7 +156,7 @@ For Session Replay, Datadog supports RUM for native iOS and Android mobile apps,
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
-This feature is not supported for your selected [Datadog site]({% region-param key="dd_site_name" /%}).
+This feature is not supported for your selected [Datadog site](https://docs.datadoghq.com/getting_started/site/) ({% region-param key="dd_site_name" /%}).
 {% /alert %}
 {% /site-region %}
 
@@ -176,7 +176,7 @@ AI summaries and smart chapters are generated for sessions with at least four us
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
-This feature is not supported for your selected [Datadog site]({% region-param key="dd_site_name" /%}). If you require this capability, contact [Datadog Support][6].
+This feature is not supported for your selected [Datadog site](https://docs.datadoghq.com/getting_started/site/) ({% region-param key="dd_site_name" /%}). If you require this capability, contact [Datadog Support][6].
 {% /alert %}
 {% /site-region %}
 

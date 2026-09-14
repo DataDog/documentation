@@ -16,7 +16,7 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 {% if equals($platform, "browser") %}
 By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
 
@@ -137,7 +137,7 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 <!-- end Browser -->
 
 <!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ## Fine-grained masking
 
 Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs.
@@ -794,7 +794,7 @@ Overrides operate using a "nearest parent" principle: if a view has an override,
 
 
 <!-- Android, iOS, Kotlin Multiplatform, or Flutter -->
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "flutter", "maui"]) %}
 
 <!-- Kotlin Multiplatform -->
 {% if equals($platform, "kotlin_multiplatform") %}

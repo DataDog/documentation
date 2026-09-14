@@ -57,7 +57,7 @@ Additionally, authorize the `example.com` domain in the `assets.example.com`. Th
 <!-- end Browser -->
 
 <!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 ## Overview
 
 If you experience unexpected behavior with Datadog Mobile Session Replay, use this page to help resolve issues. If you continue to have trouble, contact [Datadog Support][1] for further assistance. Regularly update to the latest version of the RUM Mobile SDK, as each release contains improvements and fixes.
