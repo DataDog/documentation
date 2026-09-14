@@ -4,7 +4,7 @@ aliases:
 - /llm_observability/evaluations/annotation_queues/
 description: Enable systematic human review of LLM traces to identify failure modes, validate automated evaluations, and build golden datasets.
 further_reading:
-  - link: /llm_observability/configure/evaluations/
+  - link: /llm_observability/investigate/evaluations/
     tag: Documentation
     text: Learn about evaluation types
   - link: /llm_observability/configure/automation_rules
@@ -325,8 +325,11 @@ You can manage annotation queues programmatically. The following endpoints are a
 
 | Data              | Retention period                                    |
 | ----------------- | ----------------------------------------------------|
-| Traces in queues  | Capped by your organization's trace retention period|
-| Annotation labels | Indefinite                                          |
+| Traces in queues  | Not retained beyond your organization's span retention period, unless annotated |
+| Annotated traces  | 90 days from the time of annotation, or your span retention period if that is longer |
+| Annotation labels | The same period as the trace they annotate           |
+
+Annotating a trace extends its retention at no additional charge: a trace that would otherwise expire under a shorter span retention period is retained for 90 days from the time you annotate it. For details, see [Data Governance][16].
 
 
 ## Example workflows
@@ -402,3 +405,4 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
+[16]: /llm_observability/data_governance/

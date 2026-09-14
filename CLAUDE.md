@@ -103,7 +103,7 @@ Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 Fixes DOCS-XXXXX
 
-[Brief description of changes]
+[_Brief_ description of context for changes, the problem you're solving, from the user's and reviewer's perspectives, NOT a detailed itemization or justification. The reviewer needs to be able to quickly understand why the changes were made. Keep it short. See PR Etiquette https://github.com/DataDog/documentation#pr-etiquette for examples.]
 
 ### Merge readiness
 

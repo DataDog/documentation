@@ -87,6 +87,6 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 [2]: /llm_observability/instrument/agent_observability_and_apm
 [3]: /llm_observability/investigate/patterns/
 [4]: /llm_observability/guide/agent_monitoring
-[5]: /llm_observability/configure/evaluations/
+[5]: /llm_observability/investigate/evaluations/
 [6]: https://app.datadoghq.com/dash/integration/llm_operational_insights?fromUser=false&refresh_mode=sliding&from_ts=1758905575629&to_ts=1758909175629&live=true
 [7]: /llm_observability/configure/prompt_management

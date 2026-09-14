@@ -1,6 +1,6 @@
 ---
 title: Set Up APM Trace Enrichment for Feature Flags
-description: Automatically attach feature flag evaluation data to APM traces so you can filter traces by flag variant and use APM metrics in experiments.
+description: Automatically attach feature flag evaluation data to APM traces so you can inspect and filter traces by flag variant.
 further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
@@ -8,9 +8,6 @@ further_reading:
 - link: "/feature_flags/guide/server_flag_evaluation_metrics/"
   tag: "Guide"
   text: "Set Up Server-Side Flag Evaluation Metrics"
-- link: "/experiments/"
-  tag: "Documentation"
-  text: "Experiments"
 - link: "/tracing/trace_explorer/"
   tag: "Documentation"
   text: "Trace Explorer"
@@ -21,7 +18,6 @@ further_reading:
 APM trace enrichment automatically attaches feature flag evaluation data to your APM traces. When a feature flag is evaluated during a traced request, the SDK records which flags were evaluated and which variants were returned. This data is written to the root span and processed server-side so you can:
 
 - **Filter traces by flag variant** in [Trace Explorer][1] using `@feature_flags.<flag_key>:<variant>` facets.
-- **Use APM error rates and latency as experiment metrics** to measure the impact of flag changes on application performance.
 - **Debug flag-related issues** by seeing which flags were active when an error occurred.
 
 <div class="alert alert-warning">APM trace enrichment is experimental and may change in a future release.</div>
@@ -187,18 +183,8 @@ Feature flag attributes on traces are available across Datadog:
 
 - **Monitors**: Alert when the error count for a specific variant exceeds a threshold to catch variant-specific regressions.
 - **Dashboards**: Add a timeseries widget comparing p99 latency across variants using `@feature_flags.<flag_key>` as a group-by dimension.
-- **Notebooks**: Build an investigation notebook comparing control and treatment performance during an experiment.
+- **Notebooks**: Build an investigation notebook comparing performance across feature flag variants.
 - **Visualizations**: Use the Top List view in Trace Explorer to verify that rollout traffic distribution matches your targeting rules.
-
-## Use with experiments
-
-APM trace enrichment enables APM-derived metrics as experiment metrics. After enrichment is enabled, Datadog Experiments correlate feature flag allocations with trace-level data. You can measure the impact of flag variants on:
-
-- **Error rate**: Compare error rates between control and treatment variants.
-- **Latency**: Measure p50, p95, and p99 latency differences per variant.
-- **Throughput**: Track request volume by variant.
-
-See [Experiments][4] for details on defining metrics and launching experiments.
 
 ## Limits
 
@@ -220,4 +206,3 @@ Evaluations beyond these limits are dropped for that span.
 [1]: /tracing/trace_explorer/
 [2]: /feature_flags/server/
 [3]: /tracing/
-[4]: /experiments/
