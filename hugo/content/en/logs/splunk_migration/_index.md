@@ -35,14 +35,14 @@ Use the Query Translator as a sandbox for SPL. It is designed for exploring tran
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
+{{< img src="logs/splunk_migration/single-translation.mp4" alt="An SPL query is entered in the Single Translation page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL" video="true" width="100%" >}}
+
 The page returns:
 
-- **Translated query**: the Datadog equivalent, in log search syntax or DDSQL.
-- **Preview**: the data matching the translated query, over a time range you control.
-- **Reasoning**: an explanation of which SPL commands produced which parts of the Datadog query.
-- **Warnings**: the original SPL annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
-
-From the results, open the query in the [Log Explorer][5] or the [DDSQL Editor][4], or create a monitor from it.
+- The translated Datadog query, in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart, in log search syntax or DDSQL.
+- {{< ui >}}Translation preview{{< /ui >}}: the data matching the translated query, over a time range you control. Click {{< ui >}}View in Log Explorer{{< /ui >}} to continue in the [Log Explorer][5].
+- {{< ui >}}Translated SPL{{< /ui >}}: your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
+- {{< ui >}}How did we translate?{{< /ui >}}: an explanation of which SPL commands produced which parts of the Datadog query.
 
 ## Migrate assets in batch
 
