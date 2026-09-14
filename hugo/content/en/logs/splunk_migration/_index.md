@@ -18,11 +18,9 @@ further_reading:
 
 ## Overview
 
-Moving from Splunk to Datadog means learning a new query syntax and rebuilding the alerts and dashboards your teams depend on. Translating those assets by hand takes time better spent on the logic behind your observability.
+The Migration App translates Splunk Processing Language (SPL) into Datadog query syntax and converts Splunk assets into their Datadog equivalents. It provides two tools:
 
-The Splunk Migration tools translate Splunk Processing Language (SPL) into Datadog query syntax and convert Splunk assets into their Datadog equivalents:
-
-| Tool | Use it to |
+| Tool | Use case |
 |------|-----------|
 | [Query Translator][1] | Translate a single SPL query and see the Datadog equivalent, with an explanation of how the translation was built. |
 | [Batch Migration][2] | Import batches of Splunk alerts and dashboards, review the translated results, and publish them as Datadog monitors and dashboards. |
@@ -50,11 +48,11 @@ From the results, open the query in the [Log Explorer][5] or the [DDSQL Editor][
 
 The [Batch Migration][2] tool imports a Splunk inventory, translates each asset, and publishes the results into Datadog. It handles the following resource types:
 
-| Splunk resource | Becomes | Notes |
-|-----------------|---------|-------|
+| Splunk resource | Datadog equivalent | Notes |
+|-----------------|--------------------|-------|
 | Alert (saved search) | [Monitor][6] | Translates to a log monitor when possible, and to an analysis monitor with a DDSQL query otherwise. |
 | Dashboard | [Dashboard][7] | Both Studio (JSON) and Classic (XML) dashboards are supported. Each panel is translated independently. |
-| Search macro | Not published | Macros expand the SPL in your alerts and dashboards before translation. They have no Datadog equivalent of their own. |
+| Search macro | None | Macros expand the SPL in your alerts and dashboards before translation. They are not published as Datadog assets. |
 
 ### Export your assets from Splunk
 
