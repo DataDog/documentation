@@ -91,6 +91,11 @@ An @notification must have a space between it and the last line character:
 {{% notifications-email %}}
 {{% /collapse-content %}}
 
+### Threading notifications in Slack
+Monitor notifications sent to Slack through [notification rules][22] can be threaded. When threading is enabled, all monitor alerts for a given alert cycle are grouped under a single Slack thread, with the top-level message reflecting the latest status of the monitor. To enable monitor threading, set up or edit a [notification rule][22] scoped to the monitor alerts you want to target. Select Thread Notifications and save.
+
+**Note**: An alert cycle is defined as starting from a non-recovered state to a recovered state. 
+
 ### Bulk editing monitor @-handles
 Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
 
@@ -106,7 +111,7 @@ Before you add a workflow to a monitor, [add a monitor trigger to the workflow][
 After you add the monitor trigger, [add an existing workflow to your monitor][10] or create a new workflow. To create a new workflow from the monitors page:
 
 1. Click {{< ui >}}Add Workflow{{< /ui >}}.
-1. Click the {{< ui >}}+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
+1. Click the {{< ui >}}\+{{< /ui >}} icon and select a Blueprint, or select {{< ui >}}Start From Scratch{{< /ui >}}.
    {{< img src="/monitors/notifications/create-workflow.png" alt="Click the + button to add a new workflow" style="width:90%;">}}
 
 For more information on building a workflow, see [Build workflows][11].

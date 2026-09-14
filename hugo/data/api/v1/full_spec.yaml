@@ -9104,6 +9104,61 @@ components:
       type: string
       x-enum-varnames:
         - DATA_QUALITY_METRICS
+    MonitorFormulaAndFunctionDataQualityDiffFunction:
+      description: |-
+        Function applied to the measure before it is compared against the predicted bounds.
+      enum:
+        - DIFF
+        - DIFF_PERCENT
+      example: "DIFF"
+      type: string
+      x-enum-varnames:
+        - DIFF
+        - DIFF_PERCENT
+    MonitorFormulaAndFunctionDataQualityDiffType:
+      description: |-
+        How the difference between the source and target measures is computed.
+        `absolute` subtracts the two values, `diff_percent` expresses the difference
+        as a percentage of the source value.
+      enum:
+        - absolute
+        - diff_percent
+      example: "absolute"
+      type: string
+      x-enum-varnames:
+        - ABSOLUTE
+        - DIFF_PERCENT
+    MonitorFormulaAndFunctionDataQualityEntityMetricConfig:
+      description: |-
+        Measure configuration for one side of a source to target comparison.
+      properties:
+        custom_sql:
+          description: Custom SQL query used to compute the measure for this entity.
+          example: "SELECT COUNT(*) FROM users AS dd_value"
+          type: string
+        custom_where:
+          description: Custom WHERE clause applied when computing the measure for this entity.
+          example: "USER_ID = 123"
+          type: string
+        entity_id:
+          description: Identifier of the data entity to measure.
+          example: "01234567-89ab-cdef-0123-456789abcdef"
+          type: string
+        entity_type:
+          description: Type of the data entity to measure.
+          example: "table"
+          type: string
+        group_by_columns:
+          description: Columns to group results by when computing the measure for this entity.
+          example: ["col1", "col2"]
+          items:
+            description: A column name to group results by.
+            type: string
+          type: array
+      required:
+        - entity_id
+        - entity_type
+      type: object
     MonitorFormulaAndFunctionDataQualityMeasure:
       description: |-
         The data quality measure to query. Common values include:
@@ -9112,6 +9167,59 @@ components:
         `sum`, `uniqueness`. Additional values may be supported.
       example: "row_count"
       type: string
+    MonitorFormulaAndFunctionDataQualityModelBoundsOverride:
+      description: |-
+        Restricts which predicted bound the monitor alerts on. `UPPER_ONLY` alerts only when
+        the measure rises above the upper bound, `LOWER_ONLY` only when it falls below the
+        lower bound. When unset, the monitor alerts on both.
+      enum:
+        - UPPER_ONLY
+        - LOWER_ONLY
+      example: "UPPER_ONLY"
+      type: string
+      x-enum-varnames:
+        - UPPER_ONLY
+        - LOWER_ONLY
+    MonitorFormulaAndFunctionDataQualityModelConfiguration:
+      description: |-
+        Tuning options for the anomaly detection model used by the monitor.
+      properties:
+        auto_resolve_days:
+          description: |-
+            Number of days after which an open alert is automatically resolved.
+            When unset, alerts stay open until the measure returns within bounds.
+          example: 7
+          format: int32
+          maximum: 365
+          minimum: 1
+          type: integer
+        enable_flatline_detection:
+          description: |-
+            Whether to alert when the measure stops changing entirely.
+            Defaults to `true`.
+          example: true
+          type: boolean
+        function:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDiffFunction"
+        min_lower_bound_size:
+          description: |-
+            Minimum distance between the predicted value and the lower bound. Widening the
+            lower bound to at least this size suppresses alerts on small downward deviations.
+            When unset, no minimum is enforced.
+          example: 10.0
+          format: double
+          type: number
+        min_upper_bound_size:
+          description: |-
+            Minimum distance between the predicted value and the upper bound. Widening the
+            upper bound to at least this size suppresses alerts on small upward deviations.
+            When unset, no minimum is enforced.
+          example: 10.0
+          format: double
+          type: number
+        model_bounds_override:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelBoundsOverride"
+      type: object
     MonitorFormulaAndFunctionDataQualityModelTypeOverride:
       description: Override for the model type used in anomaly detection.
       enum:
@@ -9145,6 +9253,8 @@ components:
             description: A column name to group results by.
             type: string
           type: array
+        model_configuration:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelConfiguration"
         model_type_override:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride"
         sensitivity:
@@ -9155,6 +9265,8 @@ components:
           example: 3.0
           format: double
           type: number
+        source_to_target_config:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualitySourceToTargetConfig"
       type: object
     MonitorFormulaAndFunctionDataQualityQueryDefinition:
       description: A formula and functions data quality query.
@@ -9196,6 +9308,27 @@ components:
         - data_source
         - measure
         - filter
+      type: object
+    MonitorFormulaAndFunctionDataQualitySourceToTargetConfig:
+      description: |-
+        Configuration for a source to target monitor, which compares the same measure
+        across two data entities and alerts on the difference between them.
+      properties:
+        diff_type:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityDiffType"
+        entity_type:
+          description: Type of the data entities being compared.
+          example: "table"
+          type: string
+        source:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityEntityMetricConfig"
+        target:
+          $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityEntityMetricConfig"
+      required:
+        - source
+        - target
+        - diff_type
+        - entity_type
       type: object
     MonitorFormulaAndFunctionEventAggregation:
       description: Aggregation methods for event platform queries.

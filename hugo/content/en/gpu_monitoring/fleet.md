@@ -39,7 +39,7 @@ GPU Fleet Explorer gives you visibility from your AI workloads down to the under
 
 Use the filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
-You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices for that service.
+You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}\>{{< /ui >}} button next to any entry to see the devices for that service.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 

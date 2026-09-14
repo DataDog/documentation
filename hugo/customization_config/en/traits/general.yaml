@@ -83,11 +83,6 @@ traits:
   type: text
   internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is sequence.
 
-- id: cloud_siem_detection_signal_correlation_rule_query_language
-  label: "Query language"
-  type: text
-  internal_notes: The search query language a user wants to use when creating a custom detection rule for Cloud SIEM, when the search query type is signal correlation.
-
 - id: interface
   label: Interface
   type: text

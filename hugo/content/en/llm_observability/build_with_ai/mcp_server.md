@@ -357,6 +357,9 @@ The `llmobs` toolset includes the following tools:
 `list_llmobs_evals_by_ml_app`
 : List all LLM-judge evaluators configured for a specific ML application.
 
+`list_llmobs_feedback_labels`
+: List all feedback labels submitted by end users for a specific ML application.
+
 `get_llmobs_evaluator`
 : Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template.
 
@@ -408,6 +411,44 @@ The `llmobs` toolset includes the following tools:
 
 `get_llmobs_pattern_points`
 : Get a cursor-paginated page of clustering points (individual spans) assigned to a single topic. Each point includes the `span_id`, `session_id`, and a span input preview. Pass `next_page_token` back as `page_token` to continue paging.
+
+### Annotation queue tools
+
+`list_llmobs_annotation_queues`
+: List all [annotation queues][10] for the org.
+
+`create_llmobs_annotation_queue`
+: Create an annotation queue for human review of traces, optionally defining its label schema at creation time.
+
+`update_llmobs_annotation_queue`
+: Update an annotation queue's name, description, or label schema.
+
+`delete_llmobs_annotation_queue`
+: Delete an annotation queue.
+
+`get_llmobs_annotation_label_schema`
+: Get the label schema for an annotation queue, which defines the labels that annotators apply during review.
+
+`update_llmobs_annotation_label_schema`
+: Create or replace the label schema for an annotation queue.
+
+`add_llmobs_annotation_queue_interactions`
+: Add one or more traces to an annotation queue for review.
+
+`delete_llmobs_annotation_queue_interactions`
+: Remove traces from an annotation queue.
+
+`get_llmobs_annotated_interactions`
+: Get the annotated interactions in an annotation queue along with the labels that annotators applied to them.
+
+`get_llmobs_annotations_by_content_ids`
+: Get the annotations applied to specific traces or sessions by their content IDs.
+
+`upsert_llmobs_annotations`
+: Create or update the annotations applied to interactions in a queue.
+
+`delete_llmobs_annotations`
+: Delete annotations applied to interactions in a queue.
 
 ## Recommended workflows
 
@@ -492,3 +533,4 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [7]: /account_management/org_settings/service_accounts/
 [8]: https://github.com/datadog-labs/agent-skills
 [9]: /llm_observability/build_with_ai/claude_code_skills
+[10]: /llm_observability/investigate/annotation_queues

@@ -19,14 +19,14 @@ Datadog supports several configurations for using OpenTelemetry. The primary dif
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**Datadog SDK + DDOT (Recommended)**][29]           | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
 | [**OTel SDK + DDOT**][29]                            | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + Community OTel Collector**][7]         | OTel API                | OTel SDK    | Community OTel Collector                      |
+| [**OTel SDK + OTLP OTel Collector**][7]         | OTel API                | OTel SDK    | OTLP OTel Collector                      |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
 The following table shows feature compatibility across different setups:
 
-| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + Community OTel Collector | Direct OTLP Ingest |
+| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OTLP OTel Collector | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -61,7 +61,7 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
-| [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
+| [PHP][37] | {{< X >}} | {{< X >}} | {{< X >}} |
 
 ## More details
 

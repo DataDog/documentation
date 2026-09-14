@@ -11,6 +11,12 @@ further_reading:
     - link: 'getting_started/profiler'
       tag: 'Documentation'
       text: 'Getting Started with Profiler'
+    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
+      tag: "Learning Center"
+      text: "Diagnose Code Performance Issues with Continuous Profiler"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
     - link: 'https://www.datadoghq.com/blog/introducing-datadog-profiling/'
       tag: 'Blog'
       text: 'Introducing always-on production profiling in Datadog'
@@ -20,12 +26,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/profiling-visualizations/'
       tag: 'Blog'
       text: 'Accessible profiling visualizations'
-    - link: "https://learn.datadoghq.com/courses/continuous-profiler-course"
-      tag: "Learning Center"
-      text: "Diagnose Code Performance Issues with Continuous Profiler"
-    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
-      tag: "Learning Center"
-      text: "Optimize Request Latency with Profiling Timeline"
 
 ---
 
