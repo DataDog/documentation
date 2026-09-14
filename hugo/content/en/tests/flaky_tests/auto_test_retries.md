@@ -172,9 +172,9 @@ The duration buckets are the same as the ones [Early Flake Detection][3] uses:
 | First attempt duration | Default retries |
 | ---------------------- | --------------- |
 | 5 seconds or fewer | 10 |
-| 5-10 seconds | 5 |
-| 10-30 seconds | 3 |
-| 30 seconds-5 minutes | 2 |
+| More than 5 seconds, up to 10 | 5 |
+| More than 10 seconds, up to 30 | 3 |
+| More than 30 seconds, up to 5 minutes | 2 |
 | More than 5 minutes | 1 |
 
 By default, the budgets come from the Early Flake Detection retry settings provided by the backend. Every failing test is retried at least once, regardless of its duration.
