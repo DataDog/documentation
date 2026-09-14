@@ -22,14 +22,14 @@ The Migration App translates Splunk Processing Language (SPL) into Datadog query
 
 | Tool | Use case |
 |------|-----------|
-| [Query Translator][1] | Translate a single SPL query and see the Datadog equivalent, with an explanation of how the translation was built. |
+| [Query Translator][1] | Translate a single SPL query and see the Datadog equivalent with an explanation of how the translation was built. |
 | [Batch Migration][2] | Import batches of Splunk alerts and dashboards, review the translated results, and publish them as Datadog monitors and dashboards. |
 
-Translation is deterministic: queries are parsed and converted by translation libraries, not by a large language model. Each query is translated into [log search syntax][3] when possible, because that syntax powers the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
+The Migration App parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Translate a single query
 
-Use the [Query Translator][1] as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
+Use the Query Translator as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
 
 1. Go to [Logs > Query Translator][1].
 2. Paste an SPL query into the query box, or select one of the provided examples.
@@ -46,7 +46,7 @@ From the results, open the query in the [Log Explorer][5] or the [DDSQL Editor][
 
 ## Migrate assets in batch
 
-The [Batch Migration][2] tool imports a Splunk inventory, translates each asset, and publishes the results into Datadog. It handles the following resource types:
+The Batch Migration tool imports a Splunk inventory, translates each asset, and publishes the results into Datadog. It handles the following resource types:
 
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
