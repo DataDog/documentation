@@ -53,9 +53,7 @@ Install the [Datadog IDE plugins][5] to identify Code Security issues directly i
 - Secret Scanning
 - Infrastructure as Code (IaC) Scanning
 
-For setup instructions and details about supported capabilities, see the documentation for your code editor of choice.
-
-{{< whatsnext desc="See the documentation for information about the following integrations:">}}
+{{< whatsnext desc="For setup instructions and details about supported capabilities, see the documentation for your code editor of choice:">}}
     {{< nextlink href="ide_plugins/idea/code_security/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="ide_plugins/vscode/code_security/" >}}<u>Visual Studio Code & Cursor</u>{{< /nextlink >}}
 {{< /whatsnext >}}
