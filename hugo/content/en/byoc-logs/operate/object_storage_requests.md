@@ -17,7 +17,8 @@ further_reading:
 Object storage (Amazon S3, Google Cloud Storage, Azure Blob Storage) bills both **stored data** and **API requests**. This page estimates the **PUT requests** generated on the write path by **indexers** and **compactors**.
 
 <div class="alert alert-info">
-GET requests and searcher request estimation are covered separately.
+GET requests and searcher request estimation are covered in a separate page.
+</div>
 </div>
 
 ## Indexers
