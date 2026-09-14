@@ -12,18 +12,18 @@ further_reading:
 
 Datadog Software Composition Analysis (SCA) detects open source libraries and their vulnerabilities in your code. You can exclude specific paths, ecosystems, or packages from Static SCA analysis. Configure these settings under the `sca` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
-The `sca` key requires `schema-version: v1.1` and supports the following fields:
+The `sca` key requires at least `schema-version: v1.1` and supports the following fields:
 
-| **Property** | **Type** | **Description** | **Default** |
-| --- | --- | --- | --- |
-| `ignore-paths` | Array | File paths or glob patterns to exclude from Static SCA analysis. | None |
-| `ignore-ecosystems` | Array | Ecosystems (for example, `npm`, `Go`, `PyPI`) to exclude from Static SCA analysis. | None |
-| `ignore-packages` | Array | Packages, at any version, to exclude from Static SCA analysis. Each entry uses the `<ecosystem>:<name>` format (for example, `npm:lodash`). | None |
+| **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
+| --- | --- | --- | --- | --- |
+| `ignore-paths` | Array | File paths or glob patterns to exclude from Static SCA analysis. | None | `v1.1` |
+| `ignore-ecosystems` | Array | Ecosystems (for example, `npm`, `Go`, `PyPI`) to exclude from Static SCA analysis. | None | `v1.7` |
+| `ignore-packages` | Array | Packages, at any version, to exclude from Static SCA analysis. Each entry uses the `<ecosystem>:<name>` format (for example, `npm:lodash`). | None | `v1.7` |
 
 Example:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.1
+schema-version: v1.7
 sca:
   ignore-paths:
     - "vendor/"
