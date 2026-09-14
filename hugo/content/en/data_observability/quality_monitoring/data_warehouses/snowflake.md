@@ -95,7 +95,7 @@ To set up your account in Snowflake:
 
    <div class="alert alert-info">To avoid missing new tables, use schema-level future grants. Snowflake gives schema-level grants precedence over database-level ones. If Datadog only has database-level grants but other roles have schema-level grants on the same schemas, new tables may not appear in Datadog. See <a href="https://docs.snowflake.com/en/sql-reference/sql/grant-privilege#considerations">Snowflake's documentation</a> for details.</div>
 
-4. Grant read-only access to your data. `grant_database_access` grants schema-level access rather than database-level access for the reason described above, and accepts a JSON array so you can grant access to more than one database in a single call.
+4. Grant read-only access to your data. `grant_database_access` grants schema-level access (rather than database-level) to preserve precedence over other roles' grants, as noted above, and accepts a JSON array so you can grant access to more than one database in a single call.
 
    ```sql
    CREATE OR REPLACE PROCEDURE grant_database_access(
@@ -123,7 +123,7 @@ To set up your account in Snowflake:
    }
 
    // the role is always uppercased, so its name here matches regardless of
-   // how it was typed when calling this procedure.
+   // how it was entered when calling this procedure.
    var role = quoteIdentifier(String(ROLENAME).toUpperCase());
 
    // Grants on TABLE do not apply to dynamic tables, so they are listed
@@ -207,7 +207,7 @@ To set up your account in Snowflake:
    CALL grant_database_access('["<YOUR_DATABASE>"]', '<ROLE_NAME>');
    ```
 
-   Run the `CALL` statement again (with an updated database list) any time you want to grant access to a new database, or [as part of your CI setup](/data_observability/cicd/#drift-detection) so ephemeral databases stay readable.
+   Run the `CALL` statement again (with an updated database list) any time you want to grant access to a new database, or [as part of your CI setup][8] so ephemeral databases stay readable.
 
 5. (Optional) If your organization uses [Snowflake event tables][2], you can grant the Datadog role access to them.
 
@@ -328,3 +328,4 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 [5]: /monitors/types/data_observability/
 [6]: https://docs.snowflake.com/en/user-guide/object-tagging
 [7]: /api/latest/ip-ranges/
+[8]: /data_observability/cicd/#drift-detection
