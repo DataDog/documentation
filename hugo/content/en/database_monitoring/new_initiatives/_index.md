@@ -10,5 +10,5 @@ cascade:
 ---
 
 {{< whatsnext desc="DBM initiatives:" >}}
-    {{< nextlink href="database_monitoring/new_initiatives/dbm_dev_material" >}}DBM Dev Material{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/new_initiatives/dbm_dev_material" >}}DBM DEV PLACEHOLDER{{< /nextlink >}}
 {{< /whatsnext >}}
