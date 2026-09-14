@@ -46,13 +46,19 @@ Credentials and account authentication that you set up in the following Datadog 
 
 Configure the integration tiles by following instructions in [Datadog Integrations][6].
 
-For GitHub actions, you can use credentials from the integration tile or authenticate with an installation of your own GitHub App. To use your own app, set up a [GitHub App connection][16].
+For the GitHub integration, you can use credentials from the integration tile or authenticate with an installation of your own GitHub App. To use your own app, set up a [GitHub App connection][16].
 
 If the integration you need to set up is not listed above, set up connection credentials.
 
 ## Connection credentials
 
-Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate a [generic action][8], to use your own GitHub App, or to authenticate any action for which the integration tile does not offer authentication. For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
+Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate:
+
+- A [generic action][8]
+- As your own [GitHub App](#github-app-connection)
+- Any action for which the integration tile does not offer authentication
+
+For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
 
 Connections support the following example use cases:
 - The integration you need is not available as a built-in connection.

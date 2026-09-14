@@ -16,7 +16,7 @@ With this connection, Datadog authenticates as an installation of your GitHub Ap
 
 ## Create and install a GitHub App
 
-If you already have an installed GitHub App with the permissions required by your actions, skip to [Gather the connection credentials](#gather-the-connection-credentials).
+If you already have an installed GitHub App with the permissions required by your actions, skip to [Gather the connection credentials](#gather-the-connection-credentials). For full details on GitHub App creation options, see GitHub's [Registering a GitHub App][5] guide.
 
 1. In GitHub, navigate to your organization's **Settings** > **Developer settings** > **GitHub Apps**.
 1. Click **New GitHub App**.
@@ -35,10 +35,12 @@ Depending on your organization's GitHub Apps policy, installing the app might re
 Gather the following values from GitHub:
 
 - **App ID**: On the GitHub App's settings page, copy the numeric App ID displayed near the top of the page.
-- **Installation ID**: Open the app's installation settings. The installation ID is the numeric value in the URL, such as `github.com/settings/installations/12345678`.
-- **Private key**: On the GitHub App's settings page, under **Private keys**, click **Generate a private key**. GitHub downloads a `.pem` file. Store the file securely because GitHub does not allow you to download the same private key again.
+- **Installation ID**: Open the app's installation settings. The installation ID is the numeric value at the end of the URL, such as `github.com/organizations/<org>/settings/installations/12345678`.
+- **Private key**: On the GitHub App's settings page, under **Private keys**, click **Generate a private key**. GitHub downloads a `.pem` file. Store the file securely; you cannot download the same private key from GitHub again.
 
 ## Create the connection in Datadog
+
+Once you have set up the GitHub App, create the connection in Datadog:
 
 1. From the [Action Catalog page][1], click the {{< ui >}}Connections{{< /ui >}} tab.
 1. Click {{< ui >}}New Connection{{< /ui >}}.
@@ -76,3 +78,4 @@ Check the permissions configured for the GitHub App and the repositories availab
 [2]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [3]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection
 [4]: https://chat.datadoghq.com/
+[5]: https://docs.github.com/apps/creating-github-apps/registering-a-github-app/registering-a-github-app
