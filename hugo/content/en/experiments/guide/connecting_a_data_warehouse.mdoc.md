@@ -674,6 +674,7 @@ After you set up your Google Cloud resources and IAM roles, configure the experi
 1. Under {% ui %}Dataset and GCS Bucket{% /ui %}, enter:
    - {% ui %}Dataset{% /ui %}: The dataset you created in [Step 1](#create-a-bigquery-dataset) (for example, `datadog_experiments_output`).
    - {% ui %}GCS Bucket{% /ui %}: The Cloud Storage bucket you created in [Step 1](#create-a-cloud-storage-bucket).
+   - {% ui %}Location{% /ui %} (optional): The location of the dataset you created in [Step 1](#create-a-bigquery-dataset) (for example, `europe-west2`). Datadog submits experiment queries in this location. If you leave this blank, BigQuery infers the location.
 1. Click {% ui %}Save{% /ui %}.
 
 {% img src="/product_analytics/experiment/guide/bigquery_experiment_setup_dd.png" alt="The Edit Data Warehouse modal with BigQuery selected, showing two sections: Select BigQuery Account with fields for GCP service account and Project, and Dataset and GCS Bucket with fields for Dataset and GCS Bucket." style="width:90%;" /%}
