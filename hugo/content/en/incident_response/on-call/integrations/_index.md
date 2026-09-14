@@ -23,19 +23,21 @@ Each native integration listed on this page includes setup instructions on its o
 
 Datadog On-Call includes native paging support for the following tools:
 
-- [Amazon SNS][3]
-- [Azure Monitor][4]
-- [Bugsnag][5]
-- [Catchpoint][6]
-- [Microsoft Teams][7]
-- [Nagios][8]
-- [New Relic][9]
-- [Pingdom][10]
-- [Prometheus Alertmanager][11]
-- [Sentry][12]
-- [Slack][13]
-- [Sumo Logic][14]
-- [Zabbix][15]
+{{< card-grid >}}
+  {{< image-card href="/integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns" src="integrations_logos/amazon-sns_small.svg" alt="Amazon SNS" >}}
+  {{< image-card href="/integrations/azure-monitor-alerts/#page-a-datadog-on-call-team" src="integrations_logos/azure-monitor_small.svg" alt="Azure Monitor" >}}
+  {{< image-card href="/integrations/bugsnag/#page-a-datadog-on-call-team" src="integrations_logos/bugsnag_small.svg" alt="Bugsnag" >}}
+  {{< image-card href="/integrations/catchpoint/#trigger-on-call-pages" src="integrations_logos/catchpoint_small.svg" alt="Catchpoint" >}}
+  {{< image-card href="/incident_response/on-call/pages/#through-microsoft-teams" src="integrations_logos/microsoft-teams_small.svg" alt="Microsoft Teams" >}}
+  {{< image-card href="/integrations/nagios/?tab=host#trigger-on-call-pages" src="integrations_logos/nagios_small.svg" alt="Nagios" >}}
+  {{< image-card href="/integrations/new-relic/#trigger-on-call-pages" src="integrations_logos/new-relic_small.svg" alt="New Relic" >}}
+  {{< image-card href="/integrations/pingdom-v3/#page-a-datadog-on-call-team" src="integrations_logos/pingdom-v3_small.svg" alt="Pingdom" >}}
+  {{< image-card href="/integrations/prometheus/?tab=v2preferred#prometheus-alertmanager" src="integrations_logos/prometheus_small.svg" alt="Prometheus Alertmanager" >}}
+  {{< image-card href="/integrations/sentry/#page-a-datadog-on-call-team" src="integrations_logos/sentry_small.svg" alt="Sentry"  >}}
+  {{< image-card href="/incident_response/on-call/pages/#through-slack" src="integrations_logos/slack_small.svg" alt="Slack" >}}
+  {{< image-card href="/integrations/sumo-logic/#trigger-on-call-pages" src="integrations_logos/sumo-logic_small.svg" alt="Sumo Logic" >}}
+  {{< image-card href="/integrations/zabbix/#trigger-on-call-pages" src="integrations_logos/zabbix_small.svg" alt="Zabbix" >}}
+{{< /card-grid >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/on-call-integrations/" >}}
 The following integrations are available as a Preview: BigPanda, Checkly, Chronosphere, Coralogix, Cronitor, Dynatrace, Grafana, Jenkins, Jira, LogicMonitor, NodePing, PRTG (Paessler), ServiceNow, Site24x7, Splunk, StatusCake, uptime.com, and UptimeRobot. To request access, see the product preview form.
@@ -84,16 +86,3 @@ The `@oncall-<TEAM_HANDLE>` mention in `text` determines which On-Call Team rece
 
 [1]: /incident_response/on-call/pages/#trigger-a-page
 [2]: https://docs.datadoghq.com/api/latest/events/post-an-event/
-[3]: /integrations/amazon-sns/#page-a-datadog-on-call-team-from-sns
-[4]: /integrations/azure-monitor-alerts/#page-a-datadog-on-call-team
-[5]: /integrations/bugsnag/#page-a-datadog-on-call-team
-[6]: /integrations/catchpoint/#trigger-on-call-pages
-[7]: /incident_response/on-call/pages/#through-microsoft-teams
-[8]: /integrations/nagios/?tab=host#trigger-on-call-pages
-[9]: /integrations/new-relic/#trigger-on-call-pages
-[10]: /integrations/pingdom-v3/#page-a-datadog-on-call-team
-[11]: /integrations/prometheus/?tab=v2preferred#prometheus-alertmanager
-[12]: /integrations/sentry/#page-a-datadog-on-call-team
-[13]: /incident_response/on-call/pages/#through-slack
-[14]: /integrations/sumo-logic/#trigger-on-call-pages
-[15]: /integrations/zabbix/#trigger-on-call-pages
