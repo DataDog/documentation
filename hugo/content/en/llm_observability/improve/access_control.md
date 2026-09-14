@@ -96,6 +96,7 @@ Being an admin does not exempt you from a restriction. The `user_access_manage` 
 - **Spans and evaluation metrics that were not tagged with the project at ingestion are not restricted.** The project is attached to these events as a tag at ingestion time, and past events are not re-tagged. Events that carry the tag are hidden as soon as the restriction is saved. List views, metadata, and dataset records are hidden regardless of when they were created.
 - **Annotation queues and managed prompts are not supported** by Data Access Control. See [Data Access Control][1] for the full list of supported telemetry.
 - **A project with no Restricted Dataset is visible to everyone** with Agent Observability read access. Data Access Control is permissive by default unless your organization has enabled [Strict Mode][6] for Agent Observability. A Restricted Dataset whose value matches no project silently restricts nothing. Confirm every new restriction with a user outside the granted teams or roles.
+- **In [Strict Mode][6], a project is visible only if a Restricted Dataset names its project ID.** An `ml_app` value that is an application name grants nothing in Experiments, so the project stays hidden from everyone, including the teams and roles on your other Restricted Datasets. See [Find a project's ID](#find-a-projects-id).
 
 ## Further reading
 
