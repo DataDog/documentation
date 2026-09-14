@@ -39,6 +39,8 @@ AI-native SAST を有効にすると、リポジトリで検出されたサポ�
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
 
+AIネイティブSASTルールIDは、`datadog/<rule-name>`という形式を使用します（例：`datadog/typescript-promptinjection`）。`rule-configs`または`no-dd-sa`コメントで特定のAIネイティブSASTルールを指定するには、`datadog/`プレフィックスを含む完全なルールIDを使用してください。
+
 `use-default-rulesets` 設定は、従来の SAST ルールセットと AI-native SAST ルールセットの両方に適用されます。`use-default-rulesets: false` に設定する場合は、実行するすべての従来の SAST ルールセットと AI-native SAST ルールセットを指定してください。たとえば、次の設定では Ruby のセキュリティルールセットと AI-native SAST ルールセットが実行されます。
 
 {{< code-block lang="yaml" >}}
