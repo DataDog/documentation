@@ -209,7 +209,7 @@ Search Datadog RUM events using advanced query syntax.
 
 ### `aggregate_rum_events`
 *Toolset: **core**, **rum***\
-*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+*Permissions Required: `RUM Apps Read`*\
 Aggregates RUM events to compute counts, sums, averages, min, max, cardinality, and percentiles, with grouping support. Use this for statistical analysis and trend data, not for inspecting individual events.
 
 - Count JavaScript errors by page in the last 24 hours.
