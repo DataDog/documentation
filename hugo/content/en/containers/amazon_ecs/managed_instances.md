@@ -123,7 +123,7 @@ To enable integrations, add Docker label annotations to your application contain
 
 1. Log in to your [AWS Web Console][1] and navigate to the ECS section.
 2. Choose the cluster your application is running on.
-3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} name containing the application container you want to monitor.
+3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} for your application.
 4. Click the {{< ui >}}Create new revision{{< /ui >}} button.
 5. Select the application container you want to monitor and click {{< ui >}}Edit{{< /ui >}}.
 6. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
