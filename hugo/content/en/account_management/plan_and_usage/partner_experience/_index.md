@@ -17,6 +17,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/account_management/plan_and_usage/partner_experience/customer_pricing/"
   tag: "Documentation"
   text: "Customer Pricing"
+- link: "https://docs.datadoghq.com/account_management/plan_and_usage/partner_experience/customer_contracts/"
+  tag: "Documentation"
+  text: "Customer Contracts"
 ---
 
 Datadog partners see a tailored version of the Plan & Usage page designed for managing multiple customer organizations. This page describes the Plan & Usage experience available to partners viewing the UI from a **Datadog admin organization**.
@@ -31,7 +34,7 @@ Partners must have the **Datadog Admin** role, or a custom role with `billing_re
 
 ## Overview
 
-Partners accessing Plan & Usage from their Datadog admin organization see cost and usage data across all of their customer organizations. Only the **Usage & Cost** tab is available in the partner view; the Plan, Billing History, and Usage Notifications tabs are not displayed.
+Partners accessing Plan & Usage from their Datadog admin organization see cost and usage data across all of their customer organizations. The partner view provides the **Usage & Cost** tab alongside partner-only tabs such as **Customer Pricing** and **Customer Contracts**. The Plan, Billing History, and Usage Notifications tabs are not displayed.
 
 ### Cost details
 
@@ -53,6 +56,10 @@ The following features are available only to partners viewing Plan & Usage from 
 
 Set customer-specific rates so your reseller customers can see their estimated Datadog costs in their own organization. See [Customer Pricing][12] for setup steps.
 
+### Customer contracts
+
+View your end customer contract portfolio in one place, including recurring revenue, renewal dates, drawdown balances, invoices, cost visibility status, and account contacts. See [Customer Contracts][13].
+
 ## Feature availability
 
 The following table lists each Plan & Usage feature and its availability for direct customers and partners viewing from a Datadog admin organization.
@@ -64,6 +71,7 @@ The following table lists each Plan & Usage feature and its availability for dir
 | Usage summary | {{< X >}} | {{< X >}} |  |
 | Cost & usage API endpoints | {{< X >}} | {{< X >}} | See [Supported API endpoints](#supported-api-endpoints) for the full list |
 | [Customer Pricing][12] | | {{< X >}} | Partner-only. Enables cost visibility for reseller customers |
+| [Customer Contracts][13] | | {{< X >}} | Partner-only. Contract portfolio, renewals, invoices, and account contacts |
 | Cost attribution | {{< X >}} |  | Individual customer organizations can access cost attribution from their own [Plan & Usage][1] page |
 | Usage attribution | {{< X >}} |  | Individual customer organizations can access usage attribution from their own [Plan & Usage][1] page |
 | Product-specific usage tables (for example, custom metrics, logs usage by index) | {{< X >}} |  | Individual customer organizations can view these tables from their own [Usage Details][3] page |
@@ -101,3 +109,4 @@ Partners can also access cost and usage data programmatically through the follow
 [10]: /api/latest/usage-metering/#get-projected-cost-across-your-account
 [11]: /api/latest/usage-metering/#get-usage-across-your-account
 [12]: /account_management/plan_and_usage/partner_experience/customer_pricing/
+[13]: /account_management/plan_and_usage/partner_experience/customer_contracts/
