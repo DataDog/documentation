@@ -181,6 +181,8 @@ content/en/containers/datadog_operator/secret_management.md
 content/en/containers/guide/v2alpha1_migration.md
 content/en/containers/datadog_operator/kubectl_plugin.md
 content/en/containers/datadog_operator/migration.md
+content/en/containers/datadog_operator/datadog_agent_profiles.md
+content/en/containers/datadog_operator/providers.md
 
 # serverless
 content/en/serverless/libraries_integrations/plugin.md
@@ -311,7 +313,7 @@ assets/jsconfig.json
 local/bin/py/build/*
 # Unignore the configurations folder, so we can apply exceptions to it
 !local/bin/py/build/configurations/
-# Ignore everything inside the configurations folder, 
+# Ignore everything inside the configurations folder,
 # except for the files we add explicit exceptions for
 local/bin/py/build/configurations/*
 !local/bin/py/build/configurations/pull_config_preview.yaml

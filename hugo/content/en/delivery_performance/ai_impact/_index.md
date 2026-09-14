@@ -14,6 +14,15 @@ further_reading:
 - link: '/delivery_performance/dora_metrics/calculation/'
   tag: 'Documentation'
   text: 'Learn how DORA metrics are calculated'
+- link: "https://www.datadoghq.com/blog/devex-measurement-pitfalls-ai-era/"
+  tag: "Blog"
+  text: "5 pitfalls to avoid when measuring developer experience in the AI era"
+- link: "https://www.datadoghq.com/blog/ai-impact/"
+  tag: "Blog"
+  text: "Measure the real impact of AI coding tools on software delivery with Datadog AI Impact"
+- link: "https://www.datadoghq.com/blog/how-to-measure-developer-experience-in-the-ai-era/"
+  tag: "Blog"
+  text: "How to measure developer experience in the AI era"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Join the Preview!" >}}

@@ -52,12 +52,13 @@ Click a session to view its details and continue working with Bits Code. To remo
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
-- **GitLab**: GitLab.com
+- **GitHub**: GitHub.com, [GitHub Enterprise Cloud][30], [GitHub Enterprise Cloud with data residency][31], and [GitHub Enterprise Server][38].
+- **GitLab**: GitLab.com and GitLab Self-Managed.
+- **Azure DevOps Cloud**: [dev.azure.com and *.visualstudio.com][39].
 
 The following plans are not supported:
-- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+- **Azure DevOps Server**: On-premises instances are not supported by Bits Code or Datadog [Source Code Integration][37].
+- **Bitbucket**: Neither Bitbucket.org, Bitbucket Data Center, nor Bitbucket Data Server (On-Prem) are supported by Bits Code. Datadog [Source Code Integration][37] does not support On-Prem Bitbucket deployments.
 
 ## Supported Datadog products
 
@@ -109,8 +110,10 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
-- Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
+- Iterate on pull or merge requests in response to comments on GitHub, GitLab, and Azure DevOps: mention `@Datadog` in a comment to ask Bits Code for updates
 - Monitor CI logs and pull or merge request state to fix failures and merge blockers
+
+While Bits Code works on your request, it keeps a single status comment up to date on the pull or merge request. The comment shows the state of the run and the actions and links available to you, including a link to the Datadog session when the request is backed by one. When CI Auto-fix is available, the comment also shows its status and controls to fix failing CI checks.
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
@@ -118,7 +121,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 
 - Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
 - Bits Code does not support multi-repository investigations.
-- When using GitLab, mentioning `@Datadog` in a comment to prompt Bits for updates is not supported.
 
 ## Further reading
 
@@ -155,3 +157,6 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
 [33]: /bits_ai/bits_code/setup/#configure-custom-instructions
+[37]: /source_code/source-code-management#source-code-management-providers
+[38]: https://docs.github.com/en/enterprise-server@3.17/admin/overview/about-github-enterprise-server
+[39]: https://learn.microsoft.com/en-us/azure/devops/?view=azure-devops

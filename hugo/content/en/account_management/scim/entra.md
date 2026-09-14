@@ -51,8 +51,8 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 2. In the {{< ui >}}Provisioning Mode{{< /ui >}} menu, select {{< ui >}}Automatic{{< /ui >}}
 3. Open {{< ui >}}Admin Credentials{{< /ui >}}
 4. Complete the {{< ui >}}Admin Credentials{{< /ui >}} section as follows:
-    - {{< ui >}}Tenant URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim?aadOptscim062020`
-        - **Note:** Use the appropriate subdomain for your site. To find your URL, see [Datadog sites][3].
+    - {{< ui >}}Tenant URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim?aadOptscim062020`
+        - **Note:** Use the API host for your site, not the app host. For the SCIM endpoints for each site, see the [SCIM API reference][3].
         - **Note:** The `?aadOptscim062020` part of the Tenant URL is specifically for Entra ID. This is a flag that tells Entra to correct its SCIM behavior as outlined in this [Microsoft Entra documentation][8]. If you are not using Entra ID, you should not include this suffix on the URL.
     - {{< ui >}}Secret Token{{< /ui >}}: Use a valid Datadog application key. You can create an application key on [your organization settings page][4]. To maintain continuous access to your data, use a [service account][5] application key.
 
@@ -94,7 +94,7 @@ Group mapping is not supported.
 
 [1]: /account_management/scim/
 [2]: /account_management/scim/#using-a-service-account-with-scim
-[3]: /getting_started/site
+[3]: /api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /account_management/org_settings/service_accounts
 [6]: https://entra.microsoft.com/

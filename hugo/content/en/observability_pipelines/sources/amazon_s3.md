@@ -1,5 +1,6 @@
 ---
 title: Amazon S3 Source
+description: Learn how to collect logs from Amazon S3 using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

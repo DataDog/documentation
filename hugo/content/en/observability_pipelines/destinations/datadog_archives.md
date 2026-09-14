@@ -1,5 +1,6 @@
 ---
 title: Datadog Archives Destination
+description: Learn how to send logs to Amazon S3 in Datadog-rehydratable format for archiving and rehydration.
 disable_toc: false
 products:
 - name: Logs
@@ -13,9 +14,7 @@ products:
 
 Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
-**Notes**: 
-- The Datadog Archives destination compresses logs using gzip.
-- Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
+**Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -83,7 +82,21 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 {{% /tab %}}
 {{< /tabs >}}
 
-{{% observability_pipelines/configure_log_archive/amazon_s3/connect_s3_to_datadog_log_archives %}}
+### Connect the S3 bucket to Datadog Log Archives
+
+1. Navigate to Datadog [Log Forwarding][17].
+1. Click **New archive**.
+1. Enter a descriptive archive name.
+1. Add a query that filters out all logs going through log pipelines so that none of those logs go into this archive. For example, add the query `observability_pipelines_read_only_archive`, assuming no logs going through the pipeline have that tag added.
+1. Select **AWS S3**.
+1. Select the AWS account that your bucket is in.
+1. Enter the name of the S3 bucket.
+1. Optionally, enter a path.
+1. Check the confirmation statement.
+1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
+1. Click **Save**.
+
+See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline
 
@@ -107,6 +120,16 @@ After you select the Datadog Archives destination in the pipeline UI:
     - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
 
 ### Optional settings
+
+#### Compression
+
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+    - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
+
+#### Server-side encryption
+
+Select an encryption type for your S3 bucket in the {{< ui >}}Server-Side Encryption{{< /ui >}} dropdown menu ({{< ui >}}AWS KMS{{< /ui >}} or {{< ui >}}AES256{{< /ui >}}). If you selected {{< ui >}}AWS KMS{{< /ui >}}, enter the AWS KMS key ID.
 
 #### AWS authentication
 
@@ -199,3 +222,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [14]: /api/latest/observability-pipelines/
 [16]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
+[18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings

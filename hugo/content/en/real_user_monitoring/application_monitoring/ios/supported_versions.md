@@ -39,7 +39,7 @@ The RUM iOS SDK supports the following platforms and versions:
 | visionOS | {{< X >}} | 1.0+ | |
 | watchOS | {{< X >}} | 7.0+ | |
 | macOS (Designed for iPad) | {{< X >}} | 11+ | |
-| macOS (Catalyst) | partially supported | 12+ | Catalyst is supported in build mode only, which means that macOS targets build, but functionalities for the SDK might not work for this target. |
+| macOS (Catalyst) | | 12+ | macOS (Catalyst) is not officially supported |
 | macOS | | 12+ | macOS is not officially supported by the Datadog SDK. Some features may not be fully functional. **Note**:  `DatadogRUM`, `DatadogSessionReplay`, and `DatadogObjc`, which heavily depend on `UIKit`, do not build on macOS. |
 | Linux | | n/a | |
 

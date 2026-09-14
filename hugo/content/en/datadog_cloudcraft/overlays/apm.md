@@ -17,6 +17,7 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "APM"
+site_support_id: cloudcraft_apm_overlay
 ---
 
 <div class="alert alert-info">The APM overlay is in Preview and is available for AWS accounts only.</div>
