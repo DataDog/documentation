@@ -186,6 +186,14 @@ A visual chart accompanies each indicator to show where the burn rate falls rela
 
 SLOs can be filtered by burn rate status: Critical, Elevated, and Healthy. For SLOs with a service tag, each burn rate indicator includes a direct link to the related service page for further investigation.
 
+### SLO diagnostics and recommendations
+
+For SLOs with a `service` tag, the SLO details side panel includes {{< ui >}}Diagnostics{{< /ui >}} and {{< ui >}}Recommendations{{< /ui >}} tabs that surface context from other Datadog products for the SLO's services, so you can investigate degraded performance without leaving the SLO.
+
+The {{< ui >}}Diagnostics{{< /ui >}} tab shows a burn rate chart alongside a table of incidents, [Watchdog][29] alerts, and faulty changes for the SLO's services. Select a time range on the burn rate chart to filter the table to that period. Use the {{< ui >}}Open in Watchdog{{< /ui >}} and {{< ui >}}Open in Incidents{{< /ui >}} links to investigate further.
+
+The {{< ui >}}Recommendations{{< /ui >}} tab shows [APM recommendations][30] for the SLO's services over the last 7 days. Use the {{< ui >}}Open in APM Recommendations{{< /ui >}} link to investigate further.
+
 ### SLO default view
 
 The default SLO view is loaded when you land on the SLO list view.
@@ -374,3 +382,5 @@ The SLO Calendar View is available on the [SLO manage page][2]. On the top right
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /events/explorer/
 [28]: /monitors/types/event/
+[29]: /watchdog/faulty_deployment_detection/
+[30]: https://app.datadoghq.com/apm/recommendations
