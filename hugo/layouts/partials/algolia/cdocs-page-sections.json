@@ -1,0 +1,40 @@
+{{- /* Temporary fallback for Cdocs pages compiled to raw HTML. Hugo renders their
+       headings but does not expose them through .Fragments.Headings. */ -}}
+
+{{- $ctx := .ctx -}}
+{{- $html := replaceRE `(?s)^<article[^>]*>(.*)</article>$` "$1" .html -}}
+{{- $heading_re := `(?s)<h[1-4][^>]*>.*?</h[1-4]>` -}}
+{{- $toggleable_re := `<div[^>]*class=["'][^"']*cdoc__toggleable[^"']*["'][^>]*>` -}}
+{{- $boundary_re := printf `%s|%s` $heading_re $toggleable_re -}}
+{{- $boundaries := findRE $boundary_re $html -}}
+
+{{- /* Keep article content before its first heading or conditional block. */ -}}
+{{- $first_boundary := index $boundaries 0 | default "" -}}
+{{- $lead_html := $html -}}
+{{- if $first_boundary -}}
+    {{- $lead_html = index (split $html $first_boundary) 0 -}}
+{{- end -}}
+{{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "anchor" "" "order" -1) -}}
+
+{{- /* Partition the article at headings and Cdocs condition boundaries so content
+       from one hidden variant is not attributed to the preceding heading. */ -}}
+{{- range $order, $boundary := $boundaries -}}
+    {{- $content_after_boundary := index (split $html $boundary) 1 -}}
+    {{- $next_boundary := index (findRE $boundary_re $content_after_boundary 1) 0 | default "" -}}
+    {{- $content_block := index (split $content_after_boundary $next_boundary) 0 -}}
+    {{- $section_header := "" -}}
+    {{- $section_anchor := "" -}}
+
+    {{- if findRE `^<h[1-4]` $boundary 1 -}}
+        {{- $section_header = trim ($boundary | plainify | htmlUnescape) " \r\n\t" | safeHTML -}}
+        {{- $section_anchor = $section_header | anchorize -}}
+        {{- $id_attribute := index (findRE `\sid=["'][^"']+["']` $boundary 1) 0 | default "" -}}
+        {{- if $id_attribute -}}
+            {{- $section_anchor = replaceRE `\sid=["']([^"']+)["']` "$1" $id_attribute -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if ne $section_header "Further Reading" -}}
+        {{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $content_block "header" $section_header "anchor" $section_anchor "order" $order) -}}
+    {{- end -}}
+{{- end -}}

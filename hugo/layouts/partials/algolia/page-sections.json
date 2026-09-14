@@ -42,7 +42,7 @@
   {{- end -}}
 
   {{- /* Segments to index; each: header, html, tab (data-lang for ?tab= link), anchor. */ -}}
-  {{- $baseAnchor := $baseHeader | anchorize -}}
+  {{- $baseAnchor := .anchor | default ($baseHeader | anchorize) -}}
   {{- $segments := slice -}}
   {{- if $tabSplit -}}
       {{- /* Capture any intro content before the first tab, so it isn't dropped. */ -}}
@@ -160,14 +160,21 @@
   {{- return $order -}}
 {{- end -}}
 
-{{- /* Index the lead content (before the first H2/H3 heading), tab-split if applicable. */ -}}
 {{- $ctx := (dict "context" $hugo_context "page" $page "title" $title "category" $category "subcategory" $subcategory "rank" $rank) -}}
-{{- $first_heading := index (findRE `<h[23][^>]*>.*?</h[23]>` $page.Content 1) 0 | default "" -}}
-{{- $lead_html := $page.Content -}}
-{{- if $first_heading -}}
-    {{- $lead_html = index (split $page.Content $first_heading) 0 -}}
-{{- end -}}
-{{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "order" -1) -}}
+{{- $cdocs_article := index (findRE `(?s)<article[^>]*>.*?</article>` $page.Content 1) 0 | default "" -}}
+{{- $is_cdocs_without_fragments := and $cdocs_article (findRE `id=["']cdoc-content["']` $page.Content 1) (eq (len $page.Fragments.Headings) 0) -}}
 
-{{- /* Index each H2/H3 heading section. */ -}}
-{{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" $ctx "order" 0) -}}
+{{- if $is_cdocs_without_fragments -}}
+    {{- partial "algolia/cdocs-page-sections.json" (dict "ctx" $ctx "html" $cdocs_article) -}}
+{{- else -}}
+    {{- /* Index the lead content (before the first H2/H3 heading), tab-split if applicable. */ -}}
+    {{- $first_heading := index (findRE `<h[23][^>]*>.*?</h[23]>` $page.Content 1) 0 | default "" -}}
+    {{- $lead_html := $page.Content -}}
+    {{- if $first_heading -}}
+        {{- $lead_html = index (split $page.Content $first_heading) 0 -}}
+    {{- end -}}
+    {{- partial "algolia-section-chunks" (dict "ctx" $ctx "html" $lead_html "header" "" "order" -1) -}}
+
+    {{- /* Index each H2/H3 heading section. */ -}}
+    {{- $ord := partial "heading-sections" (dict "data" $page.Fragments.Headings "ctx" $ctx "order" 0) -}}
+{{- end -}}
