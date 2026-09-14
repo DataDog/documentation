@@ -14574,6 +14574,7 @@ components:
       type: string
       x-enum-varnames: ["CIPIPELINE_RESOURCE_REQUEST"]
     CIAppEventAttributes:
+      additionalProperties: {}
       description: JSON object containing all event attributes and their associated values.
       properties:
         attributes:
@@ -14895,6 +14896,7 @@ components:
           $ref: "#/components/schemas/CIAppPipelineEventTypeName"
       type: object
     CIAppPipelineEventAttributes:
+      additionalProperties: {}
       description: JSON object containing all event attributes and their associated values.
       properties:
         attributes:
@@ -15789,7 +15791,7 @@ components:
         options:
           $ref: "#/components/schemas/CIAppQueryOptions"
         page:
-          $ref: "#/components/schemas/CIAppQueryPageOptions"
+          $ref: "#/components/schemas/CIAppTestQueryPageOptions"
         sort:
           $ref: "#/components/schemas/CIAppSort"
       type: object
@@ -15812,6 +15814,28 @@ components:
       example: test
       type: string
       x-enum-varnames: ["SESSION", "MODULE", "SUITE", "TEST"]
+    CIAppTestQueryPageLimit:
+      default: 10
+      description: Maximum number of events in the response, supplied as an integer or a string containing decimal digits.
+      example: 25
+      oneOf:
+        - format: int32
+          maximum: 1000
+          minimum: 0
+          type: integer
+        - pattern: "^(?:[0-9]{1,3}|1000)$"
+          type: string
+    CIAppTestQueryPageOptions:
+      description: Paging attributes for listing test events.
+      properties:
+        cursor:
+          description: |-
+            List following results with a cursor provided in the previous query.
+          example: "eyJzdGFydEF0IjoiQVFBQUFYS2tMS3pPbm40NGV3QUFBQUJCV0V0clRFdDZVbG8zY3pCRmNsbHJiVmxDWlEifQ=="
+          type: string
+        limit:
+          $ref: "#/components/schemas/CIAppTestQueryPageLimit"
+      type: object
     CIAppTestsAggregateRequest:
       description: The object sent with the request to retrieve aggregation buckets of test events from your organization.
       properties:
@@ -35596,21 +35620,6 @@ components:
           description: The number of interfaces that are in a warning state
           format: int64
           type: integer
-      type: object
-    DeviceTagsBySource:
-      description: Tags associated with a device from a specific source.
-      properties:
-        source:
-          description: The source of the tags.
-          example: user
-          type: string
-        tags:
-          description: The list of tags for the source.
-          example: ["tag:test", "tag:testbis"]
-          items:
-            description: A tag string in `key:value` format.
-            type: string
-          type: array
       type: object
     DevicesListData:
       description: The devices list data
@@ -67411,12 +67420,6 @@ components:
     ListTagsResponseDataAttributes:
       description: The definition of ListTagsResponseDataAttributes object.
       properties:
-        by_source:
-          description: The list of device tags grouped by source.
-          items:
-            $ref: "#/components/schemas/DeviceTagsBySource"
-          readOnly: true
-          type: array
         tags:
           description: The list of tags
           example: ["tag:test", "tag:testbis"]
@@ -185077,20 +185080,6 @@ paths:
           content:
             application/json:
               examples:
-                by_source:
-                  value:
-                    data:
-                      attributes:
-                        by_source:
-                          - source: user
-                            tags:
-                              - "tag:test"
-                              - "tag:testbis"
-                          - source: snmp
-                            tags:
-                              - "device_ip:1.2.3.4"
-                      id: foiwf7rgw38fh
-                      type: tags
                 default:
                   value:
                     data:
