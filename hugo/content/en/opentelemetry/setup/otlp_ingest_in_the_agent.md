@@ -16,6 +16,9 @@ further_reading:
 - link: "/opentelemetry/runtime_metrics/"
   tag: "Documentation"
   text: "OpenTelemetry Runtime Metrics"
+- link: "https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "Datadog Agent OTLP Receiver in Kubernetes"
 ---
 
 

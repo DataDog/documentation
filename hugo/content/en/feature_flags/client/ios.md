@@ -10,6 +10,9 @@ further_reading:
 - link: "/real_user_monitoring/ios/"
   tag: "Documentation"
   text: "iOS and tvOS Monitoring"
+- link: "/feature_flags/guide/proxy_sdk_traffic/"
+  tag: "Guide"
+  text: "Proxy Feature Flag SDK Traffic"
 ---
 
 ## Overview
@@ -328,7 +331,8 @@ Datadog.initialize(
     trackingConsent: .granted
 )
 
-Flags.enable()
+let flagsConfiguration = Flags.Configuration(initializationTimeout: 2)
+Flags.enable(with: flagsConfiguration)
 
 let context = MutableContext(targetingKey: "user-123")
 let provider = DatadogProvider()
@@ -443,9 +447,16 @@ final class FeatureFlagEventObserver {
 The `Flags.enable()` API accepts optional configuration with options listed below.
 
 {{< code-block lang="swift" >}}
-var config = Flags.Configuration()
+let config = Flags.Configuration(initializationTimeout: 2)
 Flags.enable(with: config)
 {{< /code-block >}}
+
+`initializationTimeout`
+: Maximum time, in seconds, to wait for the first evaluation context to become ready. The timeout covers loading cached data, fetching assignments, reading and decoding the response, and publishing the ready state. It does not change the HTTP client's timeout. The assignment operation continues after the timeout and can move the client to `ready` when it completes.
+
+The timeout applies only to the first `setEvaluationContext` call. That call consumes the timeout even if the operation fails or never starts. Later calls have no initialization timer. The default is `5` seconds. Set it to `nil`, zero, a negative value, or a non-finite value to disable the timeout.
+
+<div class="alert alert-info"><code>initializationTimeout</code> is available in <code>dd-sdk-ios</code> 3.17.0 and later.</div>
 
 `trackExposures`
 : When `true` (default), the SDK automatically records an _exposure event_ when a flag is evaluated. These events contain metadata about which flag was accessed, which variant was served, and under what context. They are sent to Datadog so you can later analyze feature adoption. If you only need local evaluation without telemetry, you can disable this option.

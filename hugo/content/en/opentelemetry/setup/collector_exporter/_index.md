@@ -23,6 +23,12 @@ further_reading:
 - link: "/opentelemetry/setup/ddot_collector/install/"
   tag: "Documentation"
   text: "Install the DDOT Collector (Recommended)"
+- link: "/opentelemetry/compatibility/"
+  tag: "Documentation"
+  text: "Feature Compatibility"
+- link: "https://www.datadoghq.com/architecture/opentelemetry-collector-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "OpenTelemetry Collector in Kubernetes"
 ---
 
 ## Overview

@@ -92,7 +92,7 @@ Alternatively, add a connection from a workflow or app page:
 1. Navigate to the [Workflow Automation list][1].
 1. Select the workflow containing the action to which you need to add a credential. The workflow builder appears.
 1. In the workflow visualization, click the action to which you need to add a credential. The right side panel populates with the action details.
-1. Under the {{< ui >}}Configure{{< /ui >}} tab, look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. Under the {{< ui >}}Configure{{< /ui >}} tab, look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}\+{{< /ui >}} icon.
 1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
@@ -104,7 +104,7 @@ Alternatively, add a connection from a workflow or app page:
 1. Select the app containing the action you need to add a credential to. The app canvas appears.
 1. Click {{< ui >}}Edit{{< /ui >}} in the upper right.
 1. Under {{< ui >}}Data{{< /ui >}} on the left-hand side, click the action to which you need to add a credential. The left side panel populates with the action details.
-1. Look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}+{{< /ui >}} icon.
+1. Look for the {{< ui >}}Connection{{< /ui >}} dropdown and click the {{< ui >}}\+{{< /ui >}} icon.
 1. In the {{< ui >}}New Connection{{< /ui >}} dialog box, name the connection and enter the required authentication details.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
