@@ -136,7 +136,10 @@ After upload, symbols take up to 5 minutes to process. You can confirm they were
 
 Managed C# exception stack traces resolve to method names only. File names and line numbers are not available yet.
 
-.NET MAUI Release builds AOT-compile C# ahead of shipping, so the runtime on the device cannot map a frame back to a source location: on iOS the minimal runtime cannot read Portable PDB files at all, and on Android AOT-compiled frames report `Unknown Source`. Resolving these frames requires combining your app's Portable PDB (`.pdb`) with the platform's native debug information server-side, which is not supported. Portable PDB files are not uploaded to Datadog, and bundling them into the app does not add file or line information to reported stack traces.
+.NET MAUI Release builds AOT-compile C# ahead of shipping, so the runtime on the device cannot map a frame back to a source location.
+- On iOS, the minimal runtime cannot read Portable PDB files at all. 
+- On Android, AOT-compiled frames report `Unknown Source`. 
+Resolving these frames requires combining your app's Portable PDB (`.pdb`) with the platform's native debug information server-side, which is not supported. Portable PDB files are not uploaded to Datadog, and bundling them into the app does not add file or line information to reported stack traces.
 
 ### Android symbol upload
 
