@@ -45,13 +45,19 @@ Datadog can act as an automatic code reviewer to flag vulnerabilities and qualit
 
 ### Install IDE integrations
 
-Install the [Datadog IDE plugins][5] to run Static Code Analysis (SAST) scans locally and see results directly in your code editor. You can detect and fix problems such as security vulnerabilities, maintainability issues, or bugs in your code before you commit your changes.
+Install the [Datadog IDE plugins][5] to identify Code Security issues directly in your code editor. Depending on your IDE, the plugins support the following capabilities:
+
+- Static Code Analysis (SAST)
+- Software Composition Analysis (SCA)
+- Runtime Code Analysis (IAST)
+- Secret Scanning
+- Infrastructure as Code (IaC) Scanning
 
 To start running code scans in your IDE, see the respective documentation for your code editor of choice.
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
-    {{< nextlink href="ide_plugins/idea/#static-analysis" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
-    {{< nextlink href="ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/idea/code_security/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/code_security/" >}}<u>Visual Studio Code & Cursor</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ### Customize your repository settings
