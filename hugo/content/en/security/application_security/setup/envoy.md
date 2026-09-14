@@ -18,13 +18,6 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
 ## Prerequisites

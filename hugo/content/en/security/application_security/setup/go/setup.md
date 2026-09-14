@@ -25,13 +25,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Prerequisite
 
 - The [Datadog Agent][16] is installed and configured for your application's operating system or container, cloud, or virtual environment. 

@@ -4,13 +4,6 @@ external_redirect: /security/application_security/threats/threat_detection/
 aliases:
   - /security/application_security/threats/setup/single_step
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 <div class="alert alert-info">Enabling AAP threat detection and protection using single step instrumentation is in Preview.</div>
 
 ## Requirements

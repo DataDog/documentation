@@ -9,13 +9,6 @@ further_reading:
   tag: "Documentation"
   text: "Attacker Clustering"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 This topic describes a feature called **Datadog Attacker Fingerprint** to identify attackers beyond IP addresses.
 
 ## Overview

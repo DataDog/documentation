@@ -6,13 +6,6 @@ code_lang_weight: 40
 aliases:
   - /security/application_security/threats/setup/compatibility/nginx
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## App and API Protection capabilities support
 
 The following App and API Protection capabilities are supported in the nginx integration, for the

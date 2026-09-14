@@ -14,13 +14,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 If you need flexibility and features beyond those available when instrumenting your application automatically using [Orchestrion][12], Datadog provides an App and API Protection API located at [github.com/DataDog/dd-trace-go/v2/appsec][2]. This API improves flexibility and offers additional features.
 
 ## Error event handling

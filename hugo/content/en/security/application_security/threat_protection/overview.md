@@ -9,13 +9,6 @@ further_reading:
   tag: "Documentation"
   text: "Attack Summary"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 The **Threat Protection** overview page shows how well your services are instrumented and protected against attacks, the security signals they generate, the services most exposed to threats, and the trends in attack activity. The following sections describe each area of the page.
 
 {{< img src="security/application_security/overview/threat_protection.png" alt="Threat Protection overview page" >}}
