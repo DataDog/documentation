@@ -53,7 +53,7 @@ As you define the search query, the top graph updates.
 
    If there are multiple queries or formulas defined in an Event Monitor, you can select the number of top or bottom values for each dimension.
 
-   The total limit, irrespective of the number of facets, is 1000 top values. If you increase this above 1000, Datadog adjusts the top values for the other dimensions to ensure the number of the resulting combinations is less than 1000. The default top values for every group-by is 10, with the exception of the fourth, which defaults to 5 top values.
+   The total limit for top values is 1,000, regardless of the number of facets. If you increase the top value to a number greater than 1,000, Datadog adjusts the top values for the other dimensions to ensure the number of the resulting combinations is less than 1,000. The default top values for every group-by is 10, with the exception of the fourth, which defaults to 5 top values.
 
    As an example, an Event Monitor with four groupings on the search query could have:
    * **First facet**: 10 top values
