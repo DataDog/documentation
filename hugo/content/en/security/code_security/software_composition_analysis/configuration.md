@@ -12,7 +12,7 @@ further_reading:
 
 Datadog Software Composition Analysis (SCA) detects open source libraries and their vulnerabilities in your code. You can exclude specific paths, ecosystems, or packages from Static SCA analysis. Configure these settings under the `sca` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.
 
-The `sca` key requires at least `schema-version: v1.1` and supports the following fields:
+The `sca` key was introduced in `schema-version: v1.1` and supports the following fields. Each field has its own minimum `schema-version`, so use the highest version required by the fields you configure:
 
 | **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
 | --- | --- | --- | --- | --- |
