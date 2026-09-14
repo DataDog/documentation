@@ -72,6 +72,7 @@ Set up Bits Code for one of the [supported source code providers][11].
    - Contribute to pull requests
    - Create branch
    - Read
+3. To make CI Auto-fix available in the status comment on pull requests, verify that the service principal can [view builds][105] on each project. Without this permission, the status comment prompts you to grant it instead of offering to fix failing CI checks.
 
 If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to the allowed email addresses. Bits Code uses this address for commits it creates.
 
@@ -79,6 +80,7 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
 [102]: /integrations/azure-devops-source-code/
 [103]: https://learn.microsoft.com/en-us/azure/devops/repos/git/set-git-repository-permissions
 [104]: https://learn.microsoft.com/en-us/azure/devops/repos/git/repository-settings#commit-author-email-validation-policy
+[105]: https://learn.microsoft.com/en-us/azure/devops/pipelines/policies/permissions
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -145,6 +147,12 @@ The default allowlist includes the following domains. This list will evolve over
 | Ruby | `api.rubygems.org`, `index.rubygems.org`, `rubygems.org` |
 | Rust | `index.crates.io`, `static.crates.io` |
 | Ubuntu | `archive.ubuntu.com`, `ports.ubuntu.com`, `security.ubuntu.com` |
+
+### Use Docker and Docker Compose
+
+Bits Code sessions support Docker and Docker Compose commands. You can build images and run containers as part of repository setup, testing, and validation.
+
+Access to container registries during a session is controlled by your organization's [internet access](#configure-internet-access) policy.
 
 ### Configure repository environment
 

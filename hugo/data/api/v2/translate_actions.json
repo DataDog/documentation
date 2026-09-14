@@ -7481,7 +7481,7 @@
     "request_schema_description": "The request for a flaky tests search."
   },
   "CreateTimeseriesAnomalyInvestigation": {
-    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "description": "Investigates a metrics timeseries request for its most significant anomalies and returns\ndeterministic findings. Metrics queries with or without grouping are supported. This\nAPI version accepts exactly one request and returns at most three anomalies.",
     "summary": "Investigate a timeseries anomaly",
     "request_description": "Metrics timeseries request to investigate. The request body must not exceed 2 MiB.",
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
