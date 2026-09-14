@@ -38,9 +38,7 @@ Each cohort's retention rate is scaled by its number of users before it contribu
 
 {{< img src="/product_analytics/retention/pana_retention_weighed_avg.png" alt="Example Retention Analysis graph showing a weighted average retention value." style="width:90%;" >}}
 
-{{< alert level="info" >}}
-The retention chart displays disabled values when data is partial or incomplete. This occurs when the time period is ongoing and retention can't yet be fully calculated.
-{{< /alert >}}
+<div class="alert alert-info">The retention chart displays disabled values when data is partial or incomplete. This occurs when the time period is ongoing and retention can't yet be fully calculated.</div>
 
 ## Create a retention chart
 

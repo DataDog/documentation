@@ -27,7 +27,7 @@ Use analytics charts to:
 
 A query defines what an analytics chart measures, independent of how you later choose to display it.
 
-{{< img src="/product_analytics/analytics/analytics_query_builder.png" alt="An Analytics query builder with numbered callouts for the query display name, the event picker, the measure selector, and the filter, breakdown, function, and additional query controls." style="width:90%;" >}}
+{{< img src="/product_analytics/analytics/analytics_query_builder.png" alt="An Analytics query builder with numbered callouts for the query display name, the event picker, the measure selector, and the filter, breakdown, function, and additional query controls." style="width:50%;" >}}
    
 1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Analytics{{< /ui >}}.
 
