@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Istio
 code_lang: istio
 code_lang_weight: 50
@@ -162,7 +161,6 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 20
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

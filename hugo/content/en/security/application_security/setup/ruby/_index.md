@@ -1,5 +1,4 @@
 ---
-
 title: Enabling AAP for Ruby
 aliases:
   - /security_platform/application_security/getting_started/ruby

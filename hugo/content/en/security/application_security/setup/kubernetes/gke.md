@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Google Kubernetes Engine (GKE)
 aliases:
   - /security/application_security/setup/gke
@@ -99,7 +98,6 @@ spec:
             initialDelaySeconds: 15
             periodSeconds: 20
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

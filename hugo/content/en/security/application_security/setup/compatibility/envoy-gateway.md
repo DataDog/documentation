@@ -1,5 +1,4 @@
 ---
-
 title: Envoy Gateway Compatibility Requirements
 code_lang: envoy-gateway
 type: multi-code-lang

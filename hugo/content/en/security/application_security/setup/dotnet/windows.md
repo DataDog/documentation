@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for .NET on Windows
 code_lang: windows
 type: multi-code-lang

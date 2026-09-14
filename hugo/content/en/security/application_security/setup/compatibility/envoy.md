@@ -1,5 +1,4 @@
 ---
-
 title: Envoy Compatibility Requirements
 code_lang: envoy
 type: multi-code-lang

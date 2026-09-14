@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for Python on macOS
 code_lang: macos
 type: multi-code-lang

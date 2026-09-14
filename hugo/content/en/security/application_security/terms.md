@@ -1,5 +1,4 @@
 ---
-
 title: Terms and Concepts
 disable_toc: false
 further_reading:

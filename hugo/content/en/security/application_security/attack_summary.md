@@ -1,5 +1,4 @@
 ---
-
 title: Attack Summary
 aliases:
   - /security/application_security/overview/

@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Envoy
 code_lang: envoy
 code_lang_weight: 50

@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection on Windows
 disable_sidebar: true
 further_reading:

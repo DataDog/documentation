@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Envoy Gateway
 aliases:
   - /security/application_security/setup/envoy-gateway
@@ -175,7 +174,6 @@ spec:
           initialDelaySeconds: 15
           periodSeconds: 20
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

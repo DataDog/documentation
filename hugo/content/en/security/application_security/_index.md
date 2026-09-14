@@ -1,5 +1,4 @@
 ---
-
 title: App and API Protection
 description: Monitor threats targeting production system, leveraging the execution context provided by distributed traces.
 aliases:

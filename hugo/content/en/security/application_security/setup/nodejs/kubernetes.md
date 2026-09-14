@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for Node.js in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang

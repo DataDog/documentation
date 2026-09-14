@@ -1,5 +1,4 @@
 ---
-
 title: Custom Detection Rules
 aliases:
   - /security/application_security/policies/custom_rules/

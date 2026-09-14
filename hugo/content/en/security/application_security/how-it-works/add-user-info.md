@@ -1,5 +1,4 @@
 ---
-
 title: User Monitoring and Protection
 aliases:
   - /security_platform/application_security/add-user-info

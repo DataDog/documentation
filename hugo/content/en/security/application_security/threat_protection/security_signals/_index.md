@@ -1,5 +1,4 @@
 ---
-
 title: Investigate Security Signals
 aliases:
   - /security/application_security/security_signals/

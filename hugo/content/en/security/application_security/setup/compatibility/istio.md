@@ -1,5 +1,4 @@
 ---
-
 title: Istio Compatibility Requirements
 code_lang: istio
 type: multi-code-lang

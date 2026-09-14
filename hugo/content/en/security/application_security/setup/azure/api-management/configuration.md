@@ -1,5 +1,4 @@
 ---
-
 title: Configuring the Azure API Management callout
 description: Deploy the App and API Protection callout service with the Azure CLI, Bicep, or Docker, and configure its environment variables.
 further_reading:

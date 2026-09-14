@@ -1,5 +1,4 @@
 ---
-
 title: API Posture Overview
 disable_toc: false
 further_reading:

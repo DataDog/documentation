@@ -1,5 +1,4 @@
 ---
-
 title: App and API Protection GCP Service Extensions Compatibility Requirements
 code_lang: gcp-service-extensions
 type: multi-code-lang

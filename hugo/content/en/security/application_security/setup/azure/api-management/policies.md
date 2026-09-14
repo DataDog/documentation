@@ -1,5 +1,4 @@
 ---
-
 title: Azure API Management policies for App and API Protection
 description: Understand how the Azure API Management policy calls the App and API Protection callout service, applies block decisions, and propagates trace context.
 further_reading:

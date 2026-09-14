@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting Ruby App and API Protection
 ---
 

@@ -1,5 +1,4 @@
 ---
-
 title: Endpoint Scanning
 description: Verify whether discovered API endpoints are publicly accessible and require authentication.
 ---

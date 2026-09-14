@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for Python in Kubernetes
 code_lang: kubernetes
 type: multi-code-lang

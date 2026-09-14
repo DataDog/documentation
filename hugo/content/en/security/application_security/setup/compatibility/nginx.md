@@ -1,5 +1,4 @@
 ---
-
 title: Nginx Compatibility Requirements
 code_lang: nginx
 type: multi-code-lang

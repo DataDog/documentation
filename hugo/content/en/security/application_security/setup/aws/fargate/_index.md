@@ -1,5 +1,4 @@
 ---
-
 title: Setup App and API Protection on AWS Fargate
 disable_sidebar: true
 further_reading:

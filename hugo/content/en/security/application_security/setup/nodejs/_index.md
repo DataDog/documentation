@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Node.js
 aliases:
   - /security_platform/application_security/getting_started/nodejs

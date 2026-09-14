@@ -1,5 +1,4 @@
 ---
-
 title: Library Configuration
 aliases:
   - /security/application_security/policies/library_configuration/

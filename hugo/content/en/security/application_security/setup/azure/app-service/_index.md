@@ -1,5 +1,4 @@
 ---
-
 title: Enabling AAP for Azure App Services
 aliases:
   - /security/application_security/getting_started/serverless

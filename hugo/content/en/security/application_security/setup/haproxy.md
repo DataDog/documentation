@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for HAProxy
 code_lang: haproxy
 code_lang_weight: 40

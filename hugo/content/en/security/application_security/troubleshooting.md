@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting App and API Protection
 aliases:
   - /security_platform/application_security/troubleshooting

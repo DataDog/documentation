@@ -1,5 +1,4 @@
 ---
-
 title: App and API Protection SDK for Go
 further_reading:
 - link: "https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2/appsec"

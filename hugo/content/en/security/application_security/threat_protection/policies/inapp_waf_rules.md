@@ -1,5 +1,4 @@
 ---
-
 title: In-App WAF Rules
 aliases:
   - /security/application_security/policies/inapp_waf_rules/

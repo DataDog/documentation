@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Nginx
 aliases:
   - /security/application_security/setup/standalone/nginx

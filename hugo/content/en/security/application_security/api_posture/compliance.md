@@ -1,5 +1,4 @@
 ---
-
 title: Compliance
 description: Evaluate your API security posture against industry-standard compliance frameworks using App and API Protection.
 further_reading:

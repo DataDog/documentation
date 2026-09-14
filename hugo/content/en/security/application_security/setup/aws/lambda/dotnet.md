@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for AWS Lambda functions in .NET
 further_reading:
     - link: "/security/application_security/how-it-works/"

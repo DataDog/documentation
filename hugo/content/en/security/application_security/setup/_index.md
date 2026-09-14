@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection
 aliases:
   - /security/application_security/threats/setup/

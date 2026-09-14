@@ -1,5 +1,4 @@
 ---
-
 title: HAProxy Compatibility Requirements
 code_lang: haproxy
 type: multi-code-lang

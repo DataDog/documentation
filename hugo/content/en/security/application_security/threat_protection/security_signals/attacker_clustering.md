@@ -1,5 +1,4 @@
 ---
-
 title: Attacker Clustering
 disable_toc: false
 aliases:

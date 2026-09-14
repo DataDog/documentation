@@ -1,5 +1,4 @@
 ---
-
 title: Threat Protection
 description: Detect, investigate, and block application and API attacks in real time with Threat Protection in App and API Protection.
 further_reading:

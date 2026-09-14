@@ -1,5 +1,4 @@
 ---
-
 title: App and API Protection Guides
 private: true
 disable_toc: true

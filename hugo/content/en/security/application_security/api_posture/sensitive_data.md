@@ -1,5 +1,4 @@
 ---
-
 title: Sensitive Data
 description: Detect and classify sensitive data processed by your API endpoints.
 ---

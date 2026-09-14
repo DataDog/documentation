@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for AWS WAF
 further_reading:
     - link: "/security/application_security/how-it-works/"

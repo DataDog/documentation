@@ -1,5 +1,4 @@
 ---
-
 aliases:
   - /security/application_security/security_signals/users_explorer/
 title: Users Explorer

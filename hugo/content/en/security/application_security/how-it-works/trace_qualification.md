@@ -1,5 +1,4 @@
 ---
-
 title: Trace Qualification
 aliases:
   - /security/application_security/threats/trace_qualification

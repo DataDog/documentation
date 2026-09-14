@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for Node.js on Windows
 code_lang: windows
 type: multi-code-lang

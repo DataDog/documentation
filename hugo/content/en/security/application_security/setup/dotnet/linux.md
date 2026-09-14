@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for .NET on Linux
 code_lang: linux
 type: multi-code-lang

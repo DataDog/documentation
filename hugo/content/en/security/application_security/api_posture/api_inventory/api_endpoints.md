@@ -1,5 +1,4 @@
 ---
-
 title: API Endpoints
 description: Monitor API traffic to assess endpoint risk, authentication, sensitive data flows, and exposure.
 ---

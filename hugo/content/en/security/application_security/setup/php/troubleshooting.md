@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting PHP App and API Protection
 further_reading:
   - link: "/security/application_security/how-it-works/"

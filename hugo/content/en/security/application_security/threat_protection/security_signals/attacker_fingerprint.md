@@ -1,5 +1,4 @@
 ---
-
 title: Attacker Fingerprint
 disable_toc: false
 aliases:

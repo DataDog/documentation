@@ -1,5 +1,4 @@
 ---
-
 title: Account Takeover Protection
 disable_toc: false
 aliases:

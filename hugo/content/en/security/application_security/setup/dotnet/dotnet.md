@@ -1,5 +1,4 @@
 ---
-
 title: Enabling AAP for .NET
 code_lang: dotnet
 type: multi-code-lang

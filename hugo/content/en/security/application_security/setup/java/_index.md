@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for Java
 aliases:
   - /security_platform/application_security/getting_started/java

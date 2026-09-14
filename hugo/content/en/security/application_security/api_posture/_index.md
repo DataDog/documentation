@@ -1,5 +1,4 @@
 ---
-
 title: API Posture
 description: Discover API endpoints, assess endpoint risk, and verify endpoint behavior with API Posture in App and API Protection.
 further_reading:

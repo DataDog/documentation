@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for GCP Service Extensions
 code_lang: gcp-service-extensions
 code_lang_weight: 50

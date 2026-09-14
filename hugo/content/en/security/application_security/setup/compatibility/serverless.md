@@ -1,5 +1,4 @@
 ---
-
 title: Serverless Compatibility Requirements 
 code_lang: serverless
 type: multi-code-lang

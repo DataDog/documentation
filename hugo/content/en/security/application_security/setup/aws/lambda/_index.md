@@ -1,5 +1,4 @@
 ---
-
 title: Enabling App and API Protection for AWS Lambda
 aliases:
   - /security/application_security/getting_started/serverless

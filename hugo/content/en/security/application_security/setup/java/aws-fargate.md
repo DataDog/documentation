@@ -1,5 +1,4 @@
 ---
-
 code_lang: aws-fargate
 type: multi-code-lang
 code_lang_weight: 60

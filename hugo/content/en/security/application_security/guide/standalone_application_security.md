@@ -1,5 +1,4 @@
 ---
-
 title: Set Up App and API Protection Without APM or Infrastructure Monitoring
 disable_toc: false
 ---

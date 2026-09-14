@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting Java App and API Protection
 ---
 

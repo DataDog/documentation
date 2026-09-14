@@ -1,5 +1,4 @@
 ---
-
 title: API Inventory
 description: Catalog API endpoints and services, and assess API security risk across your environment.
 aliases:

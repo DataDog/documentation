@@ -1,5 +1,4 @@
 ---
-
 title: Enabling AAP for Gateway API in Kubernetes
 aliases:
   - /security/application_security/threats/setup/threat_detection/gateway_api
@@ -134,7 +133,6 @@ spec:
             - name: DD_AGENT_HOST
               value: "datadog-agent"  # Adjust to your Agent service name
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

@@ -1,5 +1,4 @@
 ---
-
 title: WAF Integrations
 disable_toc: false
 aliases:

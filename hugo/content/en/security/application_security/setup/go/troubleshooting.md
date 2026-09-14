@@ -1,5 +1,4 @@
 ---
-
 title: Troubleshooting App and API Protection for Go
 ---
 

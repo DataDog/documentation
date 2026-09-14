@@ -1,5 +1,4 @@
 ---
-
 title: Set up App and API Protection for Nginx in Kubernetes
 type: multi-code-lang
 aliases:
