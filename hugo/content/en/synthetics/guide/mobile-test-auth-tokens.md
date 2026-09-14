@@ -19,37 +19,52 @@ Logging in through your app UI at the start of every [mobile application test][1
 
 The flow has three parts:
 
-1. An [API test][2] logs in to your authentication provider on a schedule and extracts an access token into a [global variable][3].
-2. Your mobile app test passes that global variable into the app as a launch argument or intent extra.
-3. Your app reads the argument at startup, and if present, uses it to skip its normal login flow.
+1. An [API test][2] logs in to your authentication provider on a schedule and extracts an access token.
+2. A [global variable][3] sourced from that test holds the token's current value.
+3. Your mobile app test passes the global variable into the app as a launch argument or intent extra. Your app reads it at startup and skips its normal login flow.
 
-Because the API test refreshes the token on a schedule, the token available to your mobile test stays valid without any manual updates.
+Because the API test refreshes the token on a schedule, the global variable's value stays current without any manual updates or Datadog API calls.
 
-## Create a token-fetch API test
+## Step 1: Create the token-fetch API test
 
-Create an [HTTP test][2] that requests a token from your authentication provider's token endpoint. For example, use a `POST` request to `https://auth.yourdomain.com/oauth/token` with your client credentials in the body.
+If your authentication provider requires a client secret, store it as a secure [global variable][3] first, instead of hardcoding it in the request. Enter a name such as `AUTH_CLIENT_SECRET` and select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} when you create it.
 
-If your provider requires a client secret, store it as a secure [global variable][3] instead of hardcoding it in the request. Select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} when you create it.
+Create an [HTTP test][2] that requests a token from your provider's token endpoint:
 
-In the test's assertions, [extract a variable][4] from the response body using a `jsonpath` expression that matches your token field, such as `$.access_token`.
+- **Request**: `POST` to your token endpoint, such as `https://auth.yourdomain.com/oauth/token`.
+- **Header**: `Content-Type: application/json`.
+- **Body**: a JSON payload with your client credentials, referencing the `AUTH_CLIENT_SECRET` global variable:
 
-Set the test to run [on a schedule][5] at an interval shorter than your token's expiration window. This keeps the extracted token from going stale before your mobile test runs.
+{{< code-block lang="json" >}}
+{
+  "client_id": "synthetic_bot",
+  "client_secret": "{{ AUTH_CLIENT_SECRET }}",
+  "grant_type": "client_credentials"
+}
+{{< /code-block >}}
 
-## Create a global variable from the test
+- **Assertion**: status code is `200`.
+- **Extracted variable**: [extract a variable][4] named `EXTRACTED_TOKEN` from the response body, using a `jsonpath` expression that matches your token field, such as `$.access_token`. Select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} so the token doesn't appear in test results.
 
-[Create a global variable][3] from the token-fetch test:
+Set the test [frequency][5] shorter than your token's expiration window, so the token doesn't go stale between runs. For example, run the test every 30 minutes for a token that expires after an hour. You can also attach a failure alert to the test to know if it stops refreshing the token.
 
-1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Settings{{< /ui >}} page][6]. Click **+ New Global Variable**.
-2. Select the {{< ui >}}Create From Test{{< /ui >}} tab.
+## Step 2: Create a global variable from the test
+
+[Create a global variable][3] from the token-fetch test so your mobile test can reference its value:
+
+1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Settings{{< /ui >}} page][6]. Click {{< ui >}}\+ New Global Variable{{< /ui >}}.
+2. Select the {{< ui >}}Create From Test{{< /ui >}} tab, and select your token-fetch test.
 3. Enter a {{< ui >}}Variable Name{{< /ui >}}, such as `MOBILE_AUTH_TOKEN`.
 4. Select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} so the token doesn't appear in test results.
-5. Select your token-fetch test, extract the value from {{< ui >}}Response Body{{< /ui >}}, and use the same `jsonpath` expression as your test assertion (for example, `$.access_token`).
+5. Select where to source the value from:
+   - If your token-fetch test is a single HTTP request, select {{< ui >}}Response Body{{< /ui >}} and reuse the `jsonpath` expression from your test assertion, for example `$.access_token`.
+   - If your token-fetch test has multiple steps, select the {{< ui >}}EXTRACTED_TOKEN{{< /ui >}} local variable you extracted in Step 1.
 
 This variable's value updates automatically whenever the token-fetch test runs.
 
-## Pass the token to your mobile test
+## Step 3: Pass the token to your mobile test
 
-Mobile app tests support passing `key:value` pairs to your app at launch through [Advanced Options][7]. Reference your global variable with handlebar syntax, so its current value is substituted in at runtime:
+Mobile app tests support passing `key:value` pairs to your app at launch through [advanced options][7]. Reference your global variable with handlebar syntax, so its current value is substituted in at runtime:
 
 {{< tabs >}}
 {{% tab "Android (Initial Intent Extras)" %}}
@@ -76,46 +91,58 @@ Mobile app tests support passing `key:value` pairs to your app at launch through
 {{% /tab %}}
 {{< /tabs >}}
 
-## Handle the token in your app
+## Step 4: Handle the token in your app
 
-Your app must read the injected value at startup and use it to skip its login flow. Gate this behavior behind a build flag so the code path only exists in your test or automation builds.
+Your app must read the injected value at startup, store it securely, and use it to skip its login flow. Gate this behavior behind a build flag so the code path only exists in your test or automation builds.
 
 {{< tabs >}}
 {{% tab "iOS (Swift)" %}}
 
-```swift
+{{< code-block lang="swift" >}}
 #if AUTOMATION
 if let index = ProcessInfo.processInfo.arguments.firstIndex(of: "-auth_token"),
    index + 1 < ProcessInfo.processInfo.arguments.count {
     let authToken = ProcessInfo.processInfo.arguments[index + 1]
+    KeychainManager.shared.save(token: authToken)
     SessionManager.shared.restoreSession(with: authToken)
 }
 #endif
-```
+{{< /code-block >}}
+
+Store the token in the Keychain rather than `UserDefaults`, so it's protected at rest like a token your app receives from a real login.
 
 {{% /tab %}}
 {{% tab "Android (Java)" %}}
 
-```java
+{{< code-block lang="java" >}}
 if (BuildConfig.AUTOMATION) {
     String authToken = getIntent().getStringExtra("auth_token");
     if (authToken != null) {
+        SecureTokenStore.getInstance(this).save(authToken);
         SessionManager.getInstance().restoreSession(authToken);
     }
 }
-```
+{{< /code-block >}}
+
+Back `SecureTokenStore` with `EncryptedSharedPreferences` and a `MasterKey`, rather than storing the token in plain `SharedPreferences`.
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
-```javascript
+{{< code-block lang="javascript" >}}
+import { LaunchArguments } from 'react-native-launch-arguments';
+import * as Keychain from 'react-native-keychain';
+
 if (__DEV__ || Config.AUTOMATION) {
-  const authToken = NativeModules.LaunchArguments?.auth_token;
+  const { auth_token: authToken } = LaunchArguments.value();
   if (authToken) {
+    await Keychain.setGenericPassword('auth_token', authToken);
     SessionManager.restoreSession(authToken);
   }
 }
-```
+{{< /code-block >}}
+
+`react-native-launch-arguments` reads process arguments on iOS and intent extras on Android through one API. `react-native-keychain` stores the token in the platform Keychain or Keystore instead of `AsyncStorage`.
 
 {{% /tab %}}
 {{< /tabs >}}

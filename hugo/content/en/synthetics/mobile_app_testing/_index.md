@@ -15,9 +15,9 @@ further_reading:
 - link: "/continuous_testing/"
   tag: "Documentation"
   text: "Learn about Continuous Testing & CI/CD"
-- link: "/synthetics/guide/version_history/"
+- link: "/synthetics/guide/mobile-test-auth-tokens/"
   tag: "Guide"
-  text: "Version History for Synthetic Monitoring"
+  text: "Inject and Auto-Refresh Auth Tokens in Mobile Application Tests"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -111,7 +111,7 @@ You can configure advanced options when creating a mobile test to dynamically ad
 
 You can pass `key:value` pairs to your application when the test starts, allowing you to programmatically modify app behavior. Your application code must be configured to explicitly read and process these key-value pairs. 
 
-For example, see [this guide][17] to pass a live authentication token and skip your app's login flow.
+For example, [inject an auto-refreshing auth token][17] to skip your app's login flow.
 
 **Examples:**
 

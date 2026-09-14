@@ -128,7 +128,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite.
 
-To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click **+ New Global Variable**.
+To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
 Choose the type of variable you want to create:
 
