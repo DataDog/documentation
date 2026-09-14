@@ -153,23 +153,17 @@ Lists available metrics, with options for filtering and metadata.
 - List CPU-related metrics for our infrastructure.
 - Find metrics tagged with `service:api`.
 
-### `search_datadog_services`
+### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Catalog with details and team information.
+Searches Datadog's Catalog for service identity, ownership and upstream/downstream dependencies.
 
-- Show me all services in our microservices architecture.
-- List services owned by the platform team.
 - Find services related to payment processing.
-
-### `search_datadog_service_dependencies`
-*Toolset: **core***\
-*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
-Retrieves service dependencies (upstream/downstream) and services owned by a team.
-
+- List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
-- List all services owned by the platform team.
+
+<div class="alert alert-info">`search_datadog_services` and `search_datadog_service_dependencies` tools are deprecated. `search_datadog_entities` has replaced these tools.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
