@@ -106793,6 +106793,9 @@ components:
     SecurityMonitoringStandardRuleResponse:
       description: Rule.
       properties:
+        blocking:
+          description: Whether the rule blocks requests.
+          type: boolean
         calculatedFields:
           description: Calculated fields. Only allowed for scheduled rules - in other words, when schedulingOptions is also defined.
           items:
@@ -106813,18 +106816,28 @@ components:
           description: User ID of the user who created the rule.
           format: int64
           type: integer
+        creator:
+          $ref: "#/components/schemas/SecurityMonitoringUser"
         customMessage:
           description: Custom/Overridden message for generated signals (used in case of Default rule update).
           type: string
         customName:
           description: Custom/Overridden name of the rule (used in case of Default rule update).
           type: string
+        dataSource:
+          $ref: "#/components/schemas/SecurityMonitoringStandardDataSource"
         defaultTags:
           description: Default Tags for default rules (included in tags)
           example:
             - security:attacks
           items:
             description: Default Tag.
+            type: string
+          type: array
+        dependencies:
+          description: Dependencies used by the rule.
+          items:
+            description: A dependency used by the rule.
             type: string
           type: array
         deprecationDate:
@@ -106850,18 +106863,31 @@ components:
         id:
           description: The ID of the rule.
           type: string
+        isBeta:
+          description: Whether the rule is in beta.
+          type: boolean
         isDefault:
           description: Whether the rule is included by default.
           type: boolean
         isDeleted:
           description: Whether the rule has been deleted.
           type: boolean
+        isDeprecated:
+          description: Whether the rule is deprecated.
+          type: boolean
         isEnabled:
           description: Whether the rule is enabled.
+          type: boolean
+        isPartner:
+          description: Whether the rule is provided by a partner.
           type: boolean
         message:
           description: Message for generated signals.
           type: string
+        metadata:
+          additionalProperties: {}
+          description: Additional metadata about the rule.
+          type: object
         name:
           description: The name of the rule.
           type: string
@@ -106901,6 +106927,8 @@ components:
           description: The date the rule was last updated, in milliseconds.
           format: int64
           type: integer
+        updater:
+          $ref: "#/components/schemas/SecurityMonitoringUser"
         version:
           description: The version of the rule.
           format: int64
