@@ -14045,6 +14045,13 @@ components:
           example: 202501
           format: int64
           type: integer
+        tags:
+          description: The tag keys used to group costs for the budget.
+          example:
+            - service
+          items:
+            type: string
+          type: array
         total_amount:
           description: The sum of all budget entries' amounts.
           example: 1000
