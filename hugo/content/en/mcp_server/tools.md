@@ -1399,7 +1399,7 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 - What's the day-7 retention rate for users who joined in January?
 
 ## Profiling
-Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
 
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
@@ -2111,6 +2111,65 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 - Summarize what happened in session `abc-123-def`.
 - Give me a play-by-play of the replay for the user who reported a checkout error.
 
+## Sheets
+
+The Sheets toolset exposes tools for creating, reading, updating, and deleting [Datadog Spreadsheets][74] programmatically through the MCP Server.
+
+### `upsert_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Create or update a Datadog spreadsheet's tables, sheets, and pivots in a single call.
+
+- In a spreadsheet, create a logs table with columns for service, status, host, timestamp, and message — filter to errors only.
+- Create a pivot table with average duration by db.statement and service for queries over 1 second.
+- Create a spreadsheet showing monthly cloud spend broken down by provider and service, with month-over-month percentage change.
+
+### `get_datadog_spreadsheet_reference`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Returns the field reference guides for building inputs to `upsert_datadog_spreadsheet`.
+
+- How to build a Datadog spreadsheet?
+- How to build a tab that imports Log data into a Datadog spreadsheet?
+- How to format cells in a tab in a Datadog spreadsheet?
+
+### `search_datadog_spreadsheets`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Search Datadog spreadsheets by name or owner. Returns a paginated list of spreadsheets with their IDs and names.
+
+- List the last 10 created spreadsheets.
+- List 10 spreadsheets whose name started with "ABC".
+- Show the last spreadsheet that I updated.
+
+### `get_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Retrieve a Datadog spreadsheet by ID. Returns tables (`tables[].id`), pivots (`pivots[].id`), and sheets (`sheets[].id`) with their configurations.
+
+- Show me the details of spreadsheet "ABC".
+- Show me the spreadsheet with id "abee1403-badb-445f-acd5-38a2b8e17f78".
+
+### `get_datadog_spreadsheet_tab_data`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and the read permission for the underlying data source (for example, `Logs Read Data` for log-backed tables)*\
+Retrieve paginated data from a table, sheet, or legacy pivot tab in a Datadog spreadsheet.
+
+- Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
+- Get the data for tab "Pivot 1" in spreadsheet "ABC".
+- Get cells for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `delete_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Write`*\
+Permanently delete a Datadog spreadsheet by ID.
+
+**Note**: This action is irreversible.
+
+- Delete spreadsheet "ABC".
+- Remove my last created spreadsheet.
+- Remove spreadsheet with id "abee1403-badb-445f-acd5-38a2b8e17f78".
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
@@ -2489,16 +2548,16 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [49]: /error_tracking/
 [50]: /tracing/
 [51]: /feature_flags/
+[52]: /getting_started/profiler/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
-[60]: /security/detection_rules/
-[61]: /security/suppressions/
-[62]: /getting_started/profiler/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[60]: /security/detection_rules/
+[61]: /security/suppressions/
 [62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
@@ -2511,6 +2570,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
 [73]: /real_user_monitoring/operations_monitoring/
+[74]: /sheets/
 
 ## Further reading
 
