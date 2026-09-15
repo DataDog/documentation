@@ -1,4 +1,4 @@
-### Modify the content of a RUM event
+## Modify the content of a RUM event
 
 For example, to redact email addresses from your web application URLs:
 <!-- NPM -->
@@ -81,7 +81,7 @@ beforeSend: (event) => {
 }
 ```
 
-### Discard a RUM event
+## Discard a RUM event
 
 With the `beforeSend` API, discard a RUM event by returning `false`:
 <!-- NPM -->

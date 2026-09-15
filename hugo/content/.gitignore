@@ -99,6 +99,7 @@
 /*/real_user_monitoring/setup/enable_rum.md
 /*/real_user_monitoring/setup/enable_rum/_index.md
 /*/real_user_monitoring/setup/enable_rum/manage_sessions.md
+/*/real_user_monitoring/setup/enable_rum/manage_data_collection.md
 /*/real_user_monitoring/setup/enable_rum/track_errors.md
 /*/real_user_monitoring/setup/enable_rum/track_network_requests.md
 /*/real_user_monitoring/setup/enable_rum/track_application_startups.md
@@ -125,7 +126,6 @@
 /*/synthetics/notifications/template_variables/mobile.md
 /*/synthetics/notifications/template_variables/multistep.md
 /*/dd_e2e/cdocs/components/card_grid.md
-/*/dd_e2e/cdocs/components/stepper_customizable.md
 /en/serverless/azure_container_apps/_index.md
 /en/serverless/azure_container_apps/manual_instrumentation/_index.md
 /*/observability_pipelines/configuration/install_the_worker/_index.md
@@ -137,4 +137,3 @@
 /*/tracing/error_tracking/error_grouping.md
 /*/tracing/trace_collection/custom_instrumentation/server-side/_index.md
 /*/tracing/trace_collection/dynamic_instrumentation/_index.md
-
