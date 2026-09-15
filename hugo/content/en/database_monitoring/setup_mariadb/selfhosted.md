@@ -70,11 +70,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-To collect blocking query and foreign-key information on MariaDB 10.5 and later, also grant the `REFERENCES` privilege:
-
-```sql
-GRANT REFERENCES ON *.* TO datadog@'%';
-```
+Blocking-query collection uses `information_schema.INNODB_LOCK_WAITS` and `INNODB_TRX`, together with `performance_schema`, so the `PROCESS` and `SELECT ON performance_schema.*` grants above are sufficient; no additional grant is required. Blocking-query collection is disabled by default. Enable it with `query_activity.collect_blocking_queries: true` in your instance configuration.
 
 Create the following schema:
 
@@ -137,6 +133,28 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 
 ### Securely store your password
 {{% dbm-secret %}}
+
+## Collecting schemas
+
+Starting with Agent 7.65, the Datadog Agent can collect schema information from MariaDB databases. Enable it with `collect_schemas.enabled: true` in your instance configuration (use `schemas_collection` instead on Agent 7.68 and earlier). Schema collection is disabled by default.
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_schemas:
+      enabled: true
+```
+
+On MariaDB 10.5 and later (like MySQL), `INFORMATION_SCHEMA` only exposes a table to a user that holds a privilege on it, so without a grant the `datadog` user sees no tables. Grant the `REFERENCES` privilege to make table metadata visible without giving the Agent the ability to read table data:
+
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
+
+`REFERENCES` is also required to collect foreign-key `delete_rule` and `update_rule` values from `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`; the table-level `SELECT` privilege does not expose that view.
+
+See [Exploring Database Schemas][14] for the available `collect_schemas` tuning options.
 
 ## Install the Agent
 
@@ -273,5 +291,6 @@ If you have installed and configured the integrations and Agent as described and
 [9]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
-[12]: /database_monitoring/troubleshooting/?tab=mysql
+[12]: /database_monitoring/setup_mariadb/troubleshooting/
 [13]: /database_monitoring/setup_mariadb/troubleshooting/#mariadb-known-limitations
+[14]: /database_monitoring/schema_explorer/

@@ -149,7 +149,9 @@ The query may not have been sampled for selection because it does not represent 
 
 Before following these steps to diagnose missing query metric data, check that the Agent is running successfully and you have followed [the steps to diagnose missing agent data](#no-data-is-showing-after-configuring-database-monitoring). Below are possible causes for missing query metrics.
 
-Query metrics and prepared statement metrics require MariaDB 10.5.2 or later. On earlier versions, this data isn't collected.
+Prepared-statement metrics require MariaDB 10.5.2 or later (`performance_schema.prepared_statements_instances`). Query metrics from `events_statements_summary_by_digest` are collected on all supported MariaDB versions.
+
+If `performance_schema` is disabled, neither query metrics nor prepared-statement metrics are collected. See [`performance_schema` is not enabled](#performance-schema-not-enabled).
 
 ### Index metrics are missing
 
@@ -168,12 +170,9 @@ The Agent requires the `performance_schema` option to be enabled. **Unlike MySQL
 
 ### Blocking queries are missing or incomplete
 
-#### Missing `REFERENCES` privilege {#references-privilege-missing}
-Starting with MariaDB 10.5, collecting blocking query and foreign-key information requires the `REFERENCES` privilege in addition to the base grants. Grant it to the `datadog` user:
+#### Blocking-query collection is disabled
 
-```sql
-GRANT REFERENCES ON *.* TO datadog@'%';
-```
+Blocking-query collection is disabled by default. Enable it with `query_activity.collect_blocking_queries: true` in your instance configuration. It requires no additional grants beyond the `PROCESS` and `SELECT ON performance_schema.*` privileges from the [setup instructions][1].
 
 #### Fewer blocking-query columns than MySQL 8.0
 
@@ -227,6 +226,20 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 ```
 
 **Note:** This option additionally requires `performance_schema` to be enabled.
+
+### Tables are missing from collected schemas
+
+If the Agent logs a warning starting with:
+```
+No tables were found across any of the N databases.
+```
+MariaDB exposes a table in `INFORMATION_SCHEMA` only to users that hold a privilege on that table, so the `datadog` user sees no tables at all without one. Resolve the warning by granting the `REFERENCES` privilege, which makes your table metadata visible without giving the Agent any ability to read your data:
+
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
+
+See [Collecting schemas][10] for more information.
 
 ### Schema or Database missing on MariaDB Query Metrics & Samples
 
@@ -288,3 +301,4 @@ Cluster tags aren't collected for MariaDB.
 [7]: /database_monitoring/data_collected/#which-queries-are-tracked
 [8]: https://mariadb.com/kb/en/server-system-variables/#max_digest_length
 [9]: https://mariadb.com/kb/en/use/
+[10]: /database_monitoring/setup_mariadb/selfhosted/#collecting-schemas

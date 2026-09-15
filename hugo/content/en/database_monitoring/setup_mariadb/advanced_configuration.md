@@ -30,13 +30,13 @@ SELECT * FROM daily_aggregates_002
 SELECT * FROM daily_aggregates_003
 ```
 
-In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query:
+In these cases, track these queries as a single normalized query using the `replace_digits` option, so all metrics for those queries are rolled up into a single query. This reduces the number of distinct normalized queries counted against your DBM quota, and doesn't affect digest limits on the MariaDB performance schema side:
 
 ```sql
 SELECT * FROM daily_aggregates_?
 ```
 
-Add the `replace_digits` option to your database instance configuration in the Datadog Agent:
+Add the `replace_digits` option under `obfuscator_options` in your database instance configuration in the Datadog Agent:
 
 ```yaml
 init_config:
@@ -44,7 +44,8 @@ init_config:
 instances:
   - dbm: true
     ...
-    replace_digits: true
+    obfuscator_options:
+      replace_digits: true
 ```
 
 ## Raising the sampling rate
@@ -60,5 +61,7 @@ instances:
     query_samples:
         collection_interval: 0.1
 ```
+
+**Note**: If you run multiple instances of the MariaDB integration check against the same database, use the same `collection_interval` value for all of them. Mixed collection intervals for the same metric can cause metric anomalies.
 
 [1]: https://mariadb.com/kb/en/performance-schema-performance_schema_digests_size/

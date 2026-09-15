@@ -23,11 +23,11 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MariaDB versions
-: 10.5, 10.6, or 10.11 <br/><br/>
+: 10.5, 10.6, 10.11, or 11.4 <br/><br/>
 Database Monitoring for MariaDB is supported with [known limitations][11].
 
 Supported Agent versions
-: 7.36.1+
+: 7.61.0+. This version added the `dbms_flavor` tag needed to identify MariaDB and correctly display MariaDB data, including its more limited explain plan parsing.
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than 1% of query execution time on the database and less than 1% of CPU. <br/><br/>
@@ -49,12 +49,10 @@ Configure the following in the [DB Parameter Group][3] and then **restart the se
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [performance schema][1]. MariaDB does not enable this by default. |
+| `performance_schema` | `1` | Required. Enables the [performance schema][12]. MariaDB does not enable this by default. |
 | `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value, queries longer than `1024` characters aren't collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
-
-[1]: https://mariadb.com/kb/en/performance-schema-overview/
 
 ## Grant the Agent access
 
@@ -72,11 +70,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-To collect blocking query and foreign-key information on MariaDB 10.5 and later, also grant the `REFERENCES` privilege:
-
-```sql
-GRANT REFERENCES ON *.* TO datadog@'%';
-```
+Blocking-query collection uses `information_schema.INNODB_LOCK_WAITS` and `INNODB_TRX`, together with `performance_schema`, so the `PROCESS` and `SELECT ON performance_schema.*` grants above are sufficient; no additional grant is required. Blocking-query collection is disabled by default. Enable it with `query_activity.collect_blocking_queries: true` in your instance configuration.
 
 Create the following schema:
 
@@ -140,6 +134,28 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 ### Securely store your password
 {{% dbm-secret %}}
 
+## Collecting schemas
+
+Starting with Agent 7.65, the Datadog Agent can collect schema information from MariaDB databases. Enable it with `collect_schemas.enabled: true` in your instance configuration (use `schemas_collection` instead on Agent 7.68 and earlier). Schema collection is disabled by default.
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_schemas:
+      enabled: true
+```
+
+On MariaDB 10.5 and later (like MySQL), `INFORMATION_SCHEMA` only exposes a table to a user that holds a privilege on it, so without a grant the `datadog` user sees no tables. Grant the `REFERENCES` privilege to make table metadata visible without giving the Agent the ability to read table data:
+
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
+
+`REFERENCES` is also required to collect foreign-key `delete_rule` and `update_rule` values from `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`; the table-level `SELECT` privilege does not expose that view.
+
+See [Exploring Database Schemas][13] for the available `collect_schemas` tuning options.
+
 ## Install and configure the Agent
 
 To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
@@ -170,7 +186,7 @@ instances:
 
 If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
 
-**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field. IAM database authentication requires Agent 7.67.0 or later, and AWS doesn't support IAM database authentication on all RDS MariaDB versions. See the [IAM database authentication feature matrix][14] to confirm support for your RDS MariaDB version and region.
 
 ```yaml
 init_config:
@@ -432,6 +448,9 @@ If you have installed and configured the integrations and Agent as described and
 [6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[9]: /database_monitoring/setup_mariadb/troubleshooting/
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
 [11]: /database_monitoring/setup_mariadb/troubleshooting/#mariadb-known-limitations
+[12]: https://mariadb.com/kb/en/performance-schema-overview/
+[13]: /database_monitoring/schema_explorer/
+[14]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html
