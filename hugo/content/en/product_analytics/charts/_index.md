@@ -3,7 +3,7 @@ title: Charts
 description: Product Analytics charts help you understand the path your users follow as they discover your product, service, or brand.
 ---
 
-Use product analytics charts to visualize users' journeys from end-to-end to discover the different ways users navigate your application. You can extract the data to identify friction points in the user journey, measure the success of UI changes, and inform design decisions. 
+Use Product Analytics charts to visualize users' journeys from end-to-end to discover the different ways users navigate your application. You can extract the data to identify friction points in the user journey, measure the success of UI changes, and inform design decisions. 
 
 ## Deciding which chart to use
 
