@@ -19,7 +19,7 @@ algolia:
   tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
 
-When the Agent runs as a container, [Autodiscovery][47] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
+When the Agent runs as a container, [Autodiscovery][44] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
 | Integration                    | Auto-configuration file |
 | ------                         | --------                |
@@ -41,7 +41,7 @@ When the Agent runs as a container, [Autodiscovery][47] tries to discover other 
 | [Kyototycoon][29]              | [auto_conf.yaml][30]    |
 | [MemCached][31]                | [auto_conf.yaml][32]    |
 | [Presto][33]                   | [auto_conf.yaml][34]    |
-| [RabbitMQ][45]                 | [auto_conf.yaml][46]    |
+| [RabbitMQ][42]                 | [auto_conf.yaml][43]    |
 | [Redis][35]                    | [auto_conf.yaml][36]    |
 | [Riak][37]                     | [auto_conf.yaml][38]    |
 | [Tomcat][39]                   | [auto_conf.yaml][40]    |
@@ -49,7 +49,7 @@ When the Agent runs as a container, [Autodiscovery][47] tries to discover other 
 The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][41] in place to take into account the containerized environment.
 
 ## Override auto-configuration
-Each `auto_conf.yaml` file provides a default configuration. To override this on Kubernetes, you can add a custom configuration in [Kubernetes annotations][48] or use the [`DatadogInstrumentation` custom resource][50]. For Docker, use [Docker Labels][49].
+Each `auto_conf.yaml` file provides a default configuration. To override this on Kubernetes, you can add a custom configuration in [Kubernetes annotations][45] or use the [`DatadogInstrumentation` custom resource][47]. For Docker, use [Docker Labels][46].
 
 Kubernetes annotations take precedence over `DatadogInstrumentation` resources and `auto_conf.yaml` files. `DatadogInstrumentation` resources take precedence over `auto_conf.yaml` files, and `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
 
@@ -150,12 +150,9 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [39]: /integrations/tomcat/
 [40]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
 [41]: /agent/guide/template_variables/
-[42]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
-[43]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[44]: /agent/docker/integrations/#configuration
-[45]: /integrations/rabbitmq/
-[46]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
-[47]: /getting_started/containers/autodiscovery
-[48]: /containers/kubernetes/integrations/?tab=annotations#configuration
-[49]: /containers/docker/integrations/
-[50]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+[42]: /integrations/rabbitmq/
+[43]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
+[44]: /getting_started/containers/autodiscovery
+[45]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[46]: /containers/docker/integrations/
+[47]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
