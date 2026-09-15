@@ -130472,6 +130472,11 @@ components:
             event_correlation_config_read: View event correlation configurations.
             event_correlation_config_write: Create and update event correlation configurations.
             events_read: Read Events data.
+            feature_flag_approvals_override: Override Feature Flag Approvals.
+            feature_flag_config_read: View Feature Flag Configurations.
+            feature_flag_config_write: Edit Feature Flag Configurations.
+            feature_flag_environment_config_read: View Feature Flag Environment settings.
+            feature_flag_environment_config_write: Modify Feature Flag Environment settings.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_read: View Incident Notification Rule Settings.
             incident_notification_settings_write: Configure Incidents Notification Rule settings.
@@ -155552,6 +155557,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+            - feature_flag_environment_config_read
       summary: List feature flags
       tags:
         - Feature Flags
@@ -155646,6 +155654,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Create a feature flag
       tags:
         - Feature Flags
@@ -155721,6 +155732,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_read
       summary: List environments
       tags:
         - Feature Flags
@@ -155794,6 +155807,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Create an environment
       tags:
         - Feature Flags
@@ -155829,6 +155844,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Delete an environment
       tags:
         - Feature Flags
@@ -155882,6 +155899,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_read
       summary: Get an environment
       tags:
         - Feature Flags
@@ -155958,6 +155977,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Update an environment
       tags:
         - Feature Flags
@@ -156025,6 +156046,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Pause a progressive rollout
       tags:
         - Feature Flags
@@ -156092,6 +156115,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Resume a progressive rollout
       tags:
         - Feature Flags
@@ -156159,6 +156184,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Start a progressive rollout
       tags:
         - Feature Flags
@@ -156226,6 +156253,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Stop a progressive rollout
       tags:
         - Feature Flags
@@ -156288,6 +156317,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+            - feature_flag_environment_config_read
       summary: Get a feature flag
       tags:
         - Feature Flags
@@ -156371,6 +156403,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Update a feature flag
       tags:
         - Feature Flags
@@ -156440,6 +156475,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Archive a feature flag
       tags:
         - Feature Flags
@@ -156561,6 +156599,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Create targeting rules for a flag env
       tags:
         - Feature Flags
@@ -156664,6 +156704,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Update targeting rules for a flag
       tags:
         - Feature Flags
@@ -156702,6 +156744,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Disable a feature flag in an environment
       tags:
         - Feature Flags
@@ -156741,6 +156786,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Enable a feature flag in an environment
       tags:
         - Feature Flags
@@ -156809,6 +156857,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Unarchive a feature flag
       tags:
         - Feature Flags
@@ -156894,6 +156945,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Add a variant to a feature flag
       tags:
         - Feature Flags
@@ -156944,6 +156997,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Delete a variant
       tags:
         - Feature Flags
@@ -157024,6 +157079,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Update a variant
       tags:
         - Feature Flags
