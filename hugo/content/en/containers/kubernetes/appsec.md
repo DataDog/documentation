@@ -118,17 +118,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-This option requires Datadog Operator version 1.27.1 or later.
+This option requires Datadog Operator version 1.31.0 or later.
 
-Add annotations to your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
+Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 Apply the configuration:
@@ -142,58 +145,58 @@ kubectl apply -f datadog-agent.yaml
 
 ### Sidecar configuration reference
 
-All sidecar parameters are available as Helm values nested under `datadog.appsec.injector.sidecar`, or as `DatadogAgent` annotations (Datadog Operator version 1.27.1 or later):
+All sidecar parameters are available as Helm values nested under `datadog.appsec.injector.sidecar`, or as `DatadogAgent` fields under `spec.features.appsec.injector.sidecar` (Datadog Operator version 1.31.0 or later):
 
 `sidecar.image`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.image`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.image`
 : **Type**: String
 : **Default**: `ghcr.io/datadog/dd-trace-go/service-extensions-callout`
 : **Description**: Sidecar container image
 
 `sidecar.imageTag`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.image_tag`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.imageTag`
 : **Type**: String
 : **Default**: `v2.6.0`
 : **Description**: Sidecar container image tag
 
 `sidecar.port`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.port`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.port`
 : **Type**: Integer
 : **Default**: `8080`
 : **Description**: gRPC listening port for the sidecar processor
 
 `sidecar.healthPort`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.health_port`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.healthPort`
 : **Type**: Integer
 : **Default**: `8081`
 : **Description**: Health check port for the sidecar processor
 
 `sidecar.bodyParsingSizeLimit`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.body_parsing_size_limit`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.bodyParsingSizeLimit`
 : **Type**: Integer
 : **Default**: `0`
 : **Description**: Maximum request body size in bytes to process. `0` disables body processing. Use `-1` to disable body parsing entirely.
 
 `sidecar.resources.requests.cpu`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.resources.requests.cpu`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.resources.requests.cpu`
 : **Type**: String
 : **Default**: `10m`
 : **Description**: CPU request for the sidecar container
 
 `sidecar.resources.requests.memory`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.resources.requests.memory`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.resources.requests.memory`
 : **Type**: String
 : **Default**: `128Mi`
 : **Description**: Memory request for the sidecar container
 
 `sidecar.resources.limits.cpu`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.resources.limits.cpu`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.resources.limits.cpu`
 : **Type**: String
 : **Default**: `""`
 : **Description**: CPU limit for the sidecar container (optional)
 
 `sidecar.resources.limits.memory`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.sidecar.resources.limits.memory`
+: **Datadog Operator field**: `spec.features.appsec.injector.sidecar.resources.limits.memory`
 : **Type**: String
 : **Default**: `""`
 : **Description**: Memory limit for the sidecar container (optional)
@@ -297,20 +300,25 @@ Point the Datadog Cluster Agent at your security processor service using Helm or
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-This option requires Datadog Operator version 1.27.1 or later.
+This option requires Datadog Operator version 1.31.0 or later.
 
-Add annotations to your `DatadogAgent` resource. The service name annotation is required and must match your security processor service:
+Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource. The processor service name is required and must match your security processor service:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
-    agent.datadoghq.com/appsec.injector.mode: "external"
-    agent.datadoghq.com/appsec.injector.processor.service.name: "datadog-aap-extproc-service"  # Required: must match your security processor service name
-    agent.datadoghq.com/appsec.injector.processor.service.namespace: "datadog"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
+        mode: external
+        processor:
+          service:
+            name: datadog-aap-extproc-service  # Required: must match your security processor service name
+            namespace: datadog
 ```
 
 Apply the configuration:
@@ -369,52 +377,54 @@ Send requests through your gateway and verify they appear in the Datadog [App an
 
 ## Configuration reference
 
+**Note**: The `agent.datadoghq.com/appsec.*` annotations are deprecated in Datadog Operator version 1.31.0 and are removed in version 1.32.0. Configure the injector through `spec.features.appsec.injector` instead. The two sources are mutually exclusive: when `spec.features.appsec.injector` is set, the annotations are ignored entirely, including for fields the CRD leaves unset, so migrate the whole configuration in one step.
+
 ### Automatic configuration options
 
 `enabled`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.enabled`
+: **Datadog Operator field**: `spec.features.appsec.injector.enabled`
 : **Type**: Boolean
 : **Default**: `false`
 : **Description**: Enable or disable the integration
 
 `mode`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.mode`
+: **Datadog Operator field**: `spec.features.appsec.injector.mode`
 : **Type**: String
 : **Default**: `""`; when empty, defaults to sidecar
 : **Description**: Injection mode: `"sidecar"` or `"external"`
 
 `autoDetect`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.autoDetect`
+: **Datadog Operator field**: `spec.features.appsec.injector.autoDetect`
 : **Type**: Boolean
 : **Default**: `true`
 : **Description**: Automatically detect and configure supported proxies
 
 `proxies`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.proxies`
-: **Type**: JSON array
+: **Datadog Operator field**: `spec.features.appsec.injector.proxies`
+: **Type**: Array of strings
 : **Default**: `[]`
 : **Description**: Manual list of proxy types to configure. For valid values, see the [setup page][10].
 
 `processor.service.name`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.processor.service.name`
+: **Datadog Operator field**: `spec.features.appsec.injector.processor.service.name`
 : **Type**: String
 : **Default**: None
 : **Description**: **Required.** Name of the security processor Kubernetes Service
 
 `processor.service.namespace`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.processor.service.namespace`
+: **Datadog Operator field**: `spec.features.appsec.injector.processor.service.namespace`
 : **Type**: String
 : **Default**: Defaults to the namespace where the Cluster Agent is running
 : **Description**: Namespace where the security processor service is deployed
 
 `processor.address`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.processor.address`
+: **Datadog Operator field**: `spec.features.appsec.injector.processor.address`
 : **Type**: String
 : **Default**: `{service.name}.{service.namespace}.svc`
 : **Description**: Full service address override
 
 `processor.port`
-: **Datadog Operator annotation**: `agent.datadoghq.com/appsec.injector.processor.port`
+: **Datadog Operator field**: `spec.features.appsec.injector.processor.port`
 : **Type**: Integer
 : **Default**: `443`
 : **Description**: Port of the security processor service
