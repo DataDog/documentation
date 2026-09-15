@@ -13,10 +13,6 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 With **Just-In-Time (JIT)** Deployment Gates, rules are defined inline in the evaluation request. No gate needs to exist in Datadog ahead of time, which makes JIT a good fit for rules-as-code and per-deployment flexibility.
 
 Looking for persistent gates managed in the Datadog UI, API, or Terraform? See [Preconfigured Deployment Gates][5].
