@@ -95,7 +95,6 @@ To use Bits Security Analyst:
 - Ensure your organization is using a non-legacy version of Cloud SIEM. If you need assistance, contact [Datadog support][1].
 - To set up Bits Security Analyst, you need the **Bits Security Analyst Config Write** [permission][2].
 
-<!-- The 14-day log history requirement no longer applies. -->
 
 ### Setup
 
