@@ -1,6 +1,6 @@
 ---
 title: Getting Started with OpenTelemetry at Datadog
-description: Configure OpenTelemetry SDK with Datadog Exporter to send standardized observability data including metrics, traces, and logs.
+description: Configure a sample application to send OpenTelemetry metrics, traces, and logs to Datadog.
 further_reading:
 - link: 'https://opentelemetry.io/docs/'
   tag: 'External Site'
@@ -34,6 +34,8 @@ further_reading:
 [OpenTelemetry][11] is an open source observability framework that provides IT teams with standardized protocols and tools for collecting and routing observability data from software applications. OpenTelemetry provides a consistent format for {{< tooltip text="instrumenting" tooltip="Instrumentation is the process of adding code to your application to capture and report observability data to Datadog, such as traces, metrics, and logs.">}}, generating, gathering, and exporting application observability data---namely metrics, logs, and traces---to monitoring platforms for analysis and insight.
 
 This guide demonstrates how to configure [a sample OpenTelemetry application][12] to send observability data to Datadog using the OpenTelemetry SDK, OpenTelemetry Collector, and [Datadog Exporter][14]. This guide also shows you how to explore this data in the Datadog UI.
+
+<div class="alert alert-info">This guide uses the Datadog Exporter and Datadog Connector. For new Collector configurations, Datadog recommends the OTLP pipeline in <a href="/opentelemetry/setup/collector_exporter/">Set Up the OpenTelemetry Collector</a>.</div>
 
 Follow this guide to:
 
@@ -157,7 +159,7 @@ In this example, configure your OpenTelemetry Collector to send infrastructure m
 
 <div class="alert alert-info">To send infrastructure metrics from the OpenTelemetry Collector to Datadog, you must use Linux. This is a limitation of the Docker Stats receiver.</div>
 
-To collect container metrics, configure the [Docker stats receiver][5] in your Datadog Exporter:
+To collect container metrics, configure the [Docker stats receiver][5] in your OpenTelemetry Collector:
 
 1. Add a `docker_stats` block to the `receivers` section of `otel-config.yaml`:
 
@@ -339,6 +341,6 @@ View traces and spans to observe the status and performance of requests processe
 [11]: https://opentelemetry.io/
 [12]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[14]: /opentelemetry/collector_exporter/
+[14]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [15]: /tracing/trace_collection/custom_instrumentation/otel_instrumentation/
 [16]: /getting_started/site/
