@@ -62,12 +62,12 @@ Insights appear on an application's overview page. Cost Insights also appear on 
 
 Connect the [Datadog MCP Server][2] to an MCP-compatible coding agent. The agent can retrieve an Insight's root cause, evidence, recommended fix, and validation guidance to implement and test a change.
 
-### Automate Insight reviews
+### Automate Insight reviews and fixes
 
-If your coding agent supports scheduled tasks or automations, schedule a weekly Insight review. For example:
+Set up a recurring workflow in your coding agent to review and fix Insights. For example:
 
 ```text
-List Agent Observability Insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity, then review the evidence and recommended fix for the highest-priority Insight. Propose a change. Do not change code or update the Insight status without my approval.
+Use Datadog MCP to list Agent Observability Insights with status `for_review` for `<ML_APP>`. Prioritize the returned Insights by severity. For each Insight, review the evidence, implement and validate the recommended fix, and update the Insight status based on the result.
 ```
 
 ## Further reading
