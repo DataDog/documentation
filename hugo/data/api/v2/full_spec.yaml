@@ -35651,6 +35651,21 @@ components:
           format: int64
           type: integer
       type: object
+    DeviceTagsBySource:
+      description: Tags associated with a device from a specific source.
+      properties:
+        source:
+          description: The source of the tags.
+          example: user
+          type: string
+        tags:
+          description: The list of tags for the source.
+          example: ["tag:test", "tag:testbis"]
+          items:
+            description: A tag string in `key:value` format.
+            type: string
+          type: array
+      type: object
     DevicesListData:
       description: The devices list data
       properties:
@@ -67450,6 +67465,12 @@ components:
     ListTagsResponseDataAttributes:
       description: The definition of ListTagsResponseDataAttributes object.
       properties:
+        by_source:
+          description: The list of device tags grouped by source.
+          items:
+            $ref: "#/components/schemas/DeviceTagsBySource"
+          readOnly: true
+          type: array
         tags:
           description: The list of tags
           example: ["tag:test", "tag:testbis"]
@@ -72319,6 +72340,32 @@ components:
       required:
         - data
       type: object
+    MonitorConfigPolicyDowntimePolicy:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
+    MonitorConfigPolicyDowntimePolicyCreateRequest:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
     MonitorConfigPolicyEditData:
       description: A monitor configuration policy data.
       properties:
@@ -72356,10 +72403,12 @@ components:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicy"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicy"
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicyCreateRequest"
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -72388,6 +72437,7 @@ components:
           $ref: "#/components/schemas/MonitorConfigPolicyResourceType"
       type: object
     MonitorConfigPolicyTagPolicy:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72409,6 +72459,7 @@ components:
           type: array
       type: object
     MonitorConfigPolicyTagPolicyCreateRequest:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72435,13 +72486,18 @@ components:
       type: object
     MonitorConfigPolicyType:
       default: tag
-      description: The monitor configuration policy type.
+      description: |-
+        The monitor configuration policy type.
+        `tag` enforces required tags on monitors.
+        `downtime` sets a maximum downtime duration for the organization.
       enum:
         - tag
+        - downtime
       example: "tag"
       type: string
       x-enum-varnames:
         - TAG
+        - DOWNTIME
     MonitorDowntimeMatchResourceType:
       default: downtime_match
       description: Monitor Downtime Match resource type.
@@ -96909,7 +96965,7 @@ components:
           example: true
           type: boolean
         trace_sample_rate:
-          description: The sample rate for the APM cross-product retention filter, between 0 and 100.
+          description: The sample rate for the APM cross-product retention filter, between 0 and 100. Values returned by the API are rounded to two decimal places.
           example: 25.0
           format: double
           maximum: 100
@@ -97560,7 +97616,7 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterData"
       type: object
     RumRetentionFilterSampleRate:
-      description: The sample rate for a RUM retention filter, between 0.1 and 100.
+      description: The sample rate for a RUM retention filter, between 0.1 and 100. Values are truncated to one decimal place.
       example: 50.5
       format: double
       maximum: 100
@@ -184315,6 +184371,16 @@ paths:
                           policy_type: tag
                         id: "00000000-0000-1234-0000-000000000000"
                         type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      - attributes:
+                          policy:
+                            max_duration_ms: 3600000
+                          policy_type: downtime
+                        id: "00000000-0000-1234-0000-000000000000"
+                        type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyListResponse"
           description: OK
@@ -184358,6 +184424,15 @@ paths:
                           - staging
                       policy_type: tag
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyCreateRequest"
         description: Create a monitor configuration policy request body.
@@ -184378,6 +184453,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -184478,6 +184563,16 @@ paths:
                         policy_type: tag
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyResponse"
           description: OK
@@ -184536,6 +184631,16 @@ paths:
                       policy_type: tag
                     id: 00000000-0000-1234-0000-000000000000
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    id: 00000000-0000-1234-0000-000000000000
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyEditRequest"
         description: Description of the update.
@@ -184556,6 +184661,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -185274,6 +185389,20 @@ paths:
           content:
             application/json:
               examples:
+                by_source:
+                  value:
+                    data:
+                      attributes:
+                        by_source:
+                          - source: user
+                            tags:
+                              - "tag:test"
+                              - "tag:testbis"
+                          - source: snmp
+                            tags:
+                              - "device_ip:1.2.3.4"
+                      id: foiwf7rgw38fh
+                      type: tags
                 default:
                   value:
                     data:
