@@ -98,7 +98,7 @@ You select the authentication method when you create or configure an app registr
 
 ### Instructions
 
-1. In the Azure integration tile, click {{< ui >}}\+ Add New App registration{{< /ui >}}, then select {{< ui >}}Quickstart{{< /ui >}}.
+1. In the Azure integration tile, click {{< ui >}}+ Add New App registration{{< /ui >}}, then select {{< ui >}}Quickstart{{< /ui >}}.
 2. Copy the setup script, and run it in the Azure Cloud shell.
 3. Return to the Datadog UI. You should see {{< ui >}}CONNECTED{{< /ui >}} at the top right corner of the setup script.
 4. Select the subscriptions and management groups to collect data from.
@@ -143,7 +143,7 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
 {{< tabs >}}
 {{% tab "Create an app registration" %}}
 
-1. In the [Azure integration tile][100], click {{< ui >}}\+ Add New App registration{{< /ui >}}, then select {{< ui >}}Terraform{{< /ui >}}.
+1. In the [Azure integration tile][100], click {{< ui >}}+ Add New App registration{{< /ui >}}, then select {{< ui >}}Terraform{{< /ui >}}.
 2. Select the subscriptions and management groups to collect data from.
 3. Under {{< ui >}}Authentication Method{{< /ui >}}, select {{< ui >}}Secretless Auth{{< /ui >}} (recommended) to authenticate with a federated credential, or {{< ui >}}Client Secret{{< /ui >}} to store and authenticate with a client secret.
 4. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
