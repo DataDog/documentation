@@ -1,6 +1,6 @@
 ---
 title: AI-Enhanced Static Code Analysis
-description: Use AI to augment security decision-making across the entire static analysis life cycle
+description: Use AI to augment security decision-making across the entire static analysis life cycle.
 disable_toc: false
 aliases:
     - /security/code_security/static_analysis/malicious_pr_protection/
