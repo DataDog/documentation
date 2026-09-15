@@ -1278,6 +1278,11 @@ menu:
       identifier: mcp_server_tools
       parent: mcp_server
       weight: 2
+    - name: Code Execution
+      url: mcp_server/code_execution
+      identifier: mcp_server_code_execution
+      parent: mcp_server
+      weight: 3
     - name: Partners
       url: partners/
       pre: colab

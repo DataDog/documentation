@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution"
 - link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
   tag: "Blog"
   text: "Investigate Kubernetes resources with Datadog MCP tools"
@@ -710,7 +713,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
-- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
+- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution][73] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
@@ -996,4 +999,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [69]: /data_observability/
 [70]: /account_management/audit_trail/
 [71]: https://x.ai/build 
-[72]: https://github.com/xai-org/plugin-marketplace 
+[72]: https://github.com/xai-org/plugin-marketplace
+[73]: /mcp_server/code_execution/ 
