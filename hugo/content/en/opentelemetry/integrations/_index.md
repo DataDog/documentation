@@ -48,7 +48,7 @@ Gain insights into your containerized environments and host systems:
 
 - [Docker Metrics][5] - Monitor Docker container performance
 - [Host Metrics][6] - Track system metrics such as CPU, disk, and memory usage
-- [Kubernetes Monitoring][18] - Monitor Kubernetes infrastructure and send resource data to Kubernetes Explorer
+- [Kubernetes Metrics][18] - Collect Kubernetes infrastructure metrics and send resource data to Kubernetes Explorer
 - [Podman Metrics][16] - Monitor Podman container performance
 
 ### Web servers and proxies

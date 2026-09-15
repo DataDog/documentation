@@ -78,7 +78,7 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][1].
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
-You can populate Kubernetes Explorer by sending Kubernetes resource data directly to Datadog through OTLP HTTP. This capability is generally available. The setup uses the [`k8sobjects`][1] receiver and does not require the Datadog Agent or Datadog Exporter.
+You can populate Kubernetes Explorer by sending Kubernetes resource data directly to Datadog through OTLP HTTP. The setup uses the [`k8sobjects`][1] receiver and does not require the Datadog Agent or Datadog Exporter.
 
 The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. This setup does not require `kube-state-metrics` or a Prometheus server. To collect those metrics and populate Explorer, follow [Monitor Kubernetes with OpenTelemetry][6] instead.
 

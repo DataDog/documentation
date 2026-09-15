@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Monitoring
+title: Kubernetes Metrics
 description: Send Kubernetes resource data and infrastructure metrics to Datadog with OpenTelemetry.
 further_reading:
 - link: "/opentelemetry/setup/"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Monitor Kubernetes with OpenTelemetry, without installing the Datadog Agent. Choose the setup that matches the data you need:
+Use OpenTelemetry to send Kubernetes data to Datadog without installing the Datadog Agent. Choose the setup that matches the data you need:
 
 | Goal | Components | Setup |
 |---|---|---|
@@ -120,34 +120,13 @@ kubectl create secret generic datadog-secret \
 
    Replace each `datadog/exporter` entry in a pipeline's `exporters` list with `otlp_http`. In the cluster Collector, do not include the Datadog Exporter's `orchestrator_explorer` option; Datadog recognizes resource data from the `k8sobjects` receiver when it arrives over OTLP.
 
-4. Configure trace processing in `daemonset-collector.yaml`:
-   - If the node Collector does not receive application traces, remove `datadog/connector` and the `traces` and `traces/sampling` pipelines. Also remove `datadog/connector` from the `metrics` pipeline's receivers.
-   - If the node Collector receives application traces, replace `datadog/connector` with the `forward/traces_sample` and `span_metrics` connectors from the [recommended Collector configuration][18]. Copy the complete `span_metrics` dimensions list, then change only the fields shown below. Keep the existing receivers and processors unless a change is shown, and leave the Datadog extension unchanged.
+4. Update trace processing in `daemonset-collector.yaml`. The reference file also supports application traces:
+   - If the node Collector does not receive application traces, remove `datadog/connector`, the `traces` and `traces/sampling` pipelines, and `datadog/connector` from the `metrics` pipeline's receivers.
+   - If the node Collector receives application traces, use the [recommended Collector configuration][18] to replace `datadog/connector` with the upstream `forward/traces_sample` and `span_metrics` connectors.
 
-   ```yaml
-   service:
-     pipelines:
-       traces:
-         exporters: [forward/traces_sample, span_metrics]
-
-       traces/sampling:
-         receivers: [forward/traces_sample]
-         exporters: [otlp_http]
-
-       metrics:
-         receivers: [otlp]
-         exporters: [otlp_http]
-
-       metrics/span_metrics:
-         receivers: [span_metrics]
-         exporters: [otlp_http]
-   ```
-
-   The `span_metrics` connector generates the trace metrics used by APM views. It is not required for Kubernetes Explorer or Kubernetes dashboards.
-
-5. Configure cluster name detection in both files:
-   - For automatic detection, review the `resourcedetection` processor's configuration and permissions for [EKS][14], [AKS][16], or [GKE][17].
-   - If automatic detection is unavailable, uncomment the `resource/add-cluster-name` processor and replace `<YOUR_CLUSTER_NAME>` with the same cluster name in both files. Add `resource/add-cluster-name` after `resourcedetection` in each pipeline's `processors` list that uses `resourcedetection`. Keep the other processors in place.
+5. Make sure both Collectors report the same cluster name:
+   - To detect it automatically, configure the `resourcedetection` processor and its permissions for [EKS][14], [AKS][16], or [GKE][17].
+   - Otherwise, uncomment `resource/add-cluster-name` and replace `<YOUR_CLUSTER_NAME>` with the same value in both files. In each pipeline that uses `resourcedetection`, add `resource/add-cluster-name` immediately after it. Keep the other processors in place.
 
 6. Run the following commands from the directory containing the values files:
 

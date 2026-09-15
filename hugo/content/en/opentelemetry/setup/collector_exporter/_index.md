@@ -471,7 +471,7 @@ docker run \
 
 Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
 
-To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Monitor Kubernetes with OpenTelemetry][13].
+To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Kubernetes Metrics][13].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
