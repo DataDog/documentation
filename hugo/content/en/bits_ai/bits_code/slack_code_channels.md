@@ -51,6 +51,8 @@ As Bits Code works, the code channel shows:
 
 After Bits Code has generated a code diff, you can comment on specific lines directly in the code channel.
 
+{{< img src="bits_ai/dev_agent/slack_code_channels/commenting_on_code.png" alt="A question is drafted for specific lines of code" style="width:100%;" >}}
+
 Bits Code does not automatically open a pull or merge request from a code channel—click {{< ui >}}Create PR{{< /ui >}} when you're ready. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
 
 The work in every code channel is also reflected in a [Bits Code session][2] in Datadog. To view it, at the bottom-right corner of the code channel, click {{< ui >}}</> Code session{{< /ui >}}.
