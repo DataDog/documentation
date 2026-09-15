@@ -28,6 +28,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+  tag: "Blog"
+  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 algolia:
   tags: ["mcp", "mcp server"]
   rank: 90

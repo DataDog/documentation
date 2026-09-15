@@ -16,6 +16,9 @@ further_reading:
 - link: "/actions/workflows/trigger"
   tag: "Documentation"
   text: "Trigger workflows"
+- link: "https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/"
+  tag: "Blog"
+  text: "Build and run Datadog workflows from Bits Chat or AI agents"
 ---
 
 ## Test a monitor trigger

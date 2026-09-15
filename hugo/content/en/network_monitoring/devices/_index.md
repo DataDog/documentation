@@ -4,6 +4,9 @@ description: Gain visibility into your network-connected devices, such as router
 aliases:
     - /network_performance_monitoring/devices/
 further_reading:
+    - link: '/network_monitoring/devices/glossary'
+      tag: 'Doc'
+      text: 'NDM Terms and Concepts'
     - link: 'https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/'
       tag: 'Knowledge Center'
       text: 'SNMP Monitoring Overview'
@@ -22,12 +25,12 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/'
       tag: 'Blog'
       text: 'Monitor and diagnose network performance issues with SNMP Traps'
-    - link: '/network_monitoring/devices/glossary'
-      tag: 'Doc'
-      text: 'NDM Terms and Concepts'
     - link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
       tag: "Blog"
       text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
+    - link: "https://www.datadoghq.com/blog/understanding-netflow-duplication/"
+      tag: "Blog"
+      text: "Understanding NetFlow duplication: Why it happens, and how to deduplicate"
 algolia:
   tags: ['network device monitoring']
 ---

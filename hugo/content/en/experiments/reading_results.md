@@ -4,15 +4,18 @@ description: Read and understand the results of your experiments.
 aliases:
   - /product_analytics/experimentation/reading_results/
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
-  tag: "Blog"
-  text: "Make data-driven design decisions with Product Analytics"
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
 - link: "/experiments/diagnostics/"
   tag: "Documentation"
   text: "Experiment Diagnostics"
+- link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
+  tag: "Blog"
+  text: "Make data-driven design decisions with Product Analytics"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 ## Overview

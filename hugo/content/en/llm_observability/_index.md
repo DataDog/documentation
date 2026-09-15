@@ -4,9 +4,6 @@ description: Overview of Agent Observability, a platform for monitoring, trouble
 aliases:
     - /tracing/llm_observability/
 further_reading:
-- link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
-  tag: "Pricing"
-  text: "Agent Observability pricing"
 - link: "/llm_observability/data_governance/"
   tag: "Documentation"
   text: "Learn how long Agent Observability retains your data"
@@ -61,6 +58,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://www.datadoghq.com/blog/monitor-prompt-caching-optimize-token-usage/"
+  tag: "Blog"
+  text: "Monitor prompt caching to optimize your token usage"
+- link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
+  tag: "Pricing"
+  text: "Agent Observability pricing"
 
 ---
 

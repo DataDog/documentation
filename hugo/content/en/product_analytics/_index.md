@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 {{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
