@@ -29,8 +29,8 @@ _A human_ reads and reviews every docs contribution that is marked Ready for Rev
 
 **Bad PR descriptions:**
 - Detailed lists of changes made
-- Detailed background of who the customer is, how they found the problem, how badly they need the fix -- we believe you and don't need convincing.
-- Unfiltered Claude output describing the PR for Claude's perspective
+- Detailed background of who the customer is, how they found the problem, how badly they need the fix -- we believe you and don't need convincing
+- Unfiltered Claude output describing the PR from Claude's perspective
 
 >[!NOTE]
 >**AI and content quality**
