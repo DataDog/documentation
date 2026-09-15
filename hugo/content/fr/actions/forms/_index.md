@@ -1,7 +1,6 @@
 ---
 description: Créez des formulaires pour recueillir des entrées, analyser les réponses
   et déclencher des automatisations.
-disable_toc: false
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-forms
   tag: Blog
@@ -13,7 +12,7 @@ further_reading:
     avec Datadog Forms et Sheets
 title: Forms
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Les formulaires Datadog vous permettent de recueillir des entrées, d'analyser les réponses et de déclencher des automatisations dans Datadog. Les formulaires et leurs réponses peuvent être partagés au sein de votre organisation, vous permettant de recueillir et d'analyser des données avec votre équipe.
 
@@ -79,6 +78,16 @@ Pour prévisualiser ou partager votre formulaire :
 1. Cliquez sur {{< ui >}}Preview{{< /ui >}} pour afficher le formulaire tel qu'il apparaît aux répondants.
 1. Cliquez sur {{< ui >}}Share{{< /ui >}} pour copier le lien du formulaire ou configurer les options de partage.
 
+## Personnalisez les pages de début et de fin {#customize-start-and-end-pages}
+
+Les formulaires peuvent inclure une page de début affichée avant la première question, et une page de fin affichée après qu'un répondant a soumis le formulaire. Personnalisez le titre et le message sur les deux pages. Par défaut, les formulaires n'incluent pas de page de début, et la page de fin affiche un message de fin générique.
+
+Pour ajouter ou personnaliser une page de début ou de fin :
+1. Depuis la page [Formulaires][2], cliquez sur un formulaire pour l'ouvrir dans l'éditeur.
+1. Dans le panneau {{< ui >}}Pages{{< /ui >}}, cliquez sur {{< ui >}}Start Page{{< /ui >}} ou {{< ui >}}End Page{{< /ui >}}. Si aucune page de début n'existe, cliquez sur l'icône plus **+** pour en ajouter une.
+1. Modifiez le titre et le message.
+1. Cliquez sur {{< ui >}}Publish{{< /ui >}} ou {{< ui >}}Publish Changes{{< /ui >}} pour appliquer vos modifications.
+
 ## Form settings {#form-settings}
 
 Depuis la page [Forms][2], cliquez sur un formulaire pour l'ouvrir dans l'éditeur. Dans l'en-tête de l'éditeur, cliquez sur l'icône en forme de roue dentée <i class="icon-cog-2"></i> pour accéder aux paramètres suivants :
@@ -103,11 +112,13 @@ Pour configurer le partage d'un formulaire :
 Les options de partage suivantes sont disponibles :
 
 {{% collapse-content title="Partager au sein de Datadog" level="h3" expanded=false %}}
-Partagez le formulaire avec les utilisateurs de votre organisation Datadog.
+Partagez le formulaire avec des utilisateurs ou des équipes de votre organisation Datadog.
+
+Ajoutez des utilisateurs individuels ou des équipes en tant que destinataires. Activez {{< ui >}}Notify added teammates{{< /ui >}} pour envoyer une notification et ajoutez éventuellement un message personnalisé. Les équipes sont notifiées dans leur canal Slack configuré ou par e-mail ; les utilisateurs individuels sont notifiés par e-mail.
 
 Sous {{< ui >}}Add to Dashboard{{< /ui >}}, utilisez le menu déroulant pour ajouter le formulaire à un dashboard existant ou pour créer un dashboard.
 
-Activez le toggle {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} pour afficher le formulaire dans le catalogue [Self-Service Actions][5]. Il s'agit d'un emplacement central où les équipes de plateforme et d'infrastructure publient des outils que le reste de l'organisation peut découvrir et utiliser.
+Activez le commutateur {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} pour afficher le formulaire dans le catalogue [Self-Service Actions][5]. Il s'agit d'un emplacement central où les équipes de plateforme et d'infrastructure publient des outils que le reste de l'organisation peut découvrir et utiliser.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Partager avec des utilisateurs externes" level="h3" expanded=false %}}
@@ -115,9 +126,9 @@ Partagez le formulaire avec des utilisateurs en dehors de votre organisation Dat
 
 Les options suivantes sont disponibles :
 
-- **Specific individuals** : Ajoutez des destinataires par adresse e-mail individuelle. Par exemple, `alice@example.com` et `bob@example.com`.
-- **Company domain** : Partagez avec toute personne disposant d'un domaine e-mail spécifique. Par exemple, `*@yourcompany.com`.
-- **Shareable link** : Générez un lien que n'importe qui peut utiliser pour accéder au formulaire sans compte Datadog.
+- **Individus spécifiques** : Ajoutez des destinataires par adresse e-mail individuelle. Par exemple, `alice@example.com` et `bob@example.com`.
+- **Domaine d'entreprise** : Partagez avec toute personne disposant d'un domaine e-mail spécifique. Par exemple, `*@yourcompany.com`.
+- **Toute personne disposant d’un lien** : Générez un lien que n’importe qui peut utiliser pour accéder au formulaire après avoir vérifié son adresse e-mail.
 {{% /collapse-content %}}
 
 Pour suspendre ou supprimer le partage externe, cliquez sur {{< ui >}}Share{{< /ui >}}, puis cliquez sur {{< ui >}}Edit{{< /ui >}} et sélectionnez {{< ui >}}Pause Sharing{{< /ui >}} ou {{< ui >}}Delete Sharing{{< /ui >}}.
@@ -128,7 +139,7 @@ Pour préremplir des champs dans un lien partagé afin que les répondants comme
 
 Pour ajouter un formulaire à un dashboard depuis l'éditeur de formulaire :
 1. Depuis la page [Formulaires][2], cliquez sur un formulaire pour l'ouvrir dans l'éditeur.
-1. Cliquez sur le dropdown {{< ui >}}Share{{< /ui >}} et sélectionnez {{< ui >}}Share within Datadog{{< /ui >}}.
+1. Cliquez sur la liste déroulante {{< ui >}}Share{{< /ui >}} et sélectionnez {{< ui >}}Share within Datadog{{< /ui >}}.
 1. Sous {{< ui >}}Add to Dashboard{{< /ui >}}, sélectionnez un dashboard existant ou créez-en un, puis cliquez sur {{< ui >}}Add{{< /ui >}}.
 
 Vous pouvez également ajouter un formulaire à un dashboard directement depuis le dashboard :
@@ -144,12 +155,12 @@ Après avoir créé un formulaire, vous pouvez ajouter une [action][7] ou un [wo
 1. Depuis la page [Forms][2], cliquez sur un formulaire.
 1. En haut du formulaire, sélectionnez {{< ui >}}Automation{{< /ui >}}.
 1. Choisissez une action ou un blueprint.
-1. L'action ou le blueprint s'ouvre dans un workflow canvas, où vous pouvez [le modifier][9].
+1. L'action ou le blueprint s'ouvre dans un canevas de workflow, où vous pouvez [le modifier][9].
 1. Cliquez sur {{< ui >}}Create{{< /ui >}}.
 
 **Remarque** : Les automatisations déclenchées par des formulaires apparaissent sous [Workflow Automation][10].
 
-## Create and manage Forms with MCP {#create-and-manage-forms-with-mcp}
+## Créer et gérer des formulaires avec MCP {#create-and-manage-forms-with-mcp}
 
 Connectez un agent IA externe au [Datadog MCP Server][11] pour créer, mettre à jour, publier et lire des formulaires ainsi que leurs réponses. Activez l'ensemble d'outils `forms` (ou `all`) lorsque vous vous [connectez au MCP Server][12]. Vous pouvez également demander à [Bits Chat][13] de créer un formulaire depuis n'importe où dans Datadog. Consultez [Forms][14] dans la référence des outils du Datadog MCP Server pour obtenir la liste complète des outils disponibles.
 

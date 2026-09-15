@@ -22,19 +22,19 @@ title: AWS
 Datadog で Cloud Cost Management をセットアップするには以下が必要です。
 1. 請求アクセス権がある AWS アカウント
 2. Datadog にインストールされた AWS インテグレーション
-3. コストと使用状況レポート (以下の手順に従って作成)
+3. Cost and Usage Report (以下の手順に従って作成)
 
 ## セットアップ {#setup}
 
-[API][21]、[Terraform][22]、または以下の手順に従って Datadog で直接セットアップできます。
+[API][21]、[Terraform][22]、**[Set up with AI Agent]** ガイド付きフロー、または以下の手順に従って Datadog で直接セットアップできます。
 
 ### AWS インテグレーションを構成する {#configure-the-aws-integration}
 
 [Setup & Configuration][7] に移動し、AWS アカウントを追加して AWS インテグレーションを構成する手順に従います。
 
-**注**: Datadog では、関連する**メンバーアカウント**のコストを視覚化するために、[AWS **管理アカウント**][2]からコストと使用量のレポートを構成することを推奨しています。
+**注**: Datadog では、関連する **メンバーアカウント**のコストを可視化するために、委任された管理者アカウントではなく、[AWS **管理アカウント**][2] から Cost and Usage Report を構成することを推奨しています。委任された管理者アカウントは、他のメンバーアカウントを検出できません。
 
-AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、**管理アカウント**の[設定][3]で次のオプションが選択されていることを確認してください。
+AWS **メンバーアカウント**からコストと使用量レポートを送信する場合、**管理アカウント**の [設定][3] で次のオプションが選択されていることを確認してください。
 - {{< ui >}}Linked Account Access{{< /ui >}}
 - {{< ui >}}Linked Account Refunds and Credits{{< /ui >}}
 - {{< ui >}}Linked Account Discounts{{< /ui >}}
@@ -53,21 +53,26 @@ CloudFormation スタックは、既存の AWS リソースに応じて 3 つの
 
 * **新しいセットアップ**: {{< ui >}}Create Cost and Usage Report{{< /ui >}} を選択して、レポートとその S3 バケットの両方を作成する
 * **既存のバケット**: {{< ui >}}Create Cost and Usage Report{{< /ui >}} を選択して {{< ui >}}Create S3 Bucket{{< /ui >}} の選択を解除し、既存の S3 バケットを使用する
-* **既存のレポート**: {{< ui >}}Create Cost and Usage Report{{< /ui >}} の選択を解除して、既存のコストと使用状況レポートをインポートする
+* **既存のレポート**: {{< ui >}}Create Cost and Usage Report{{< /ui >}} の選択を解除して、既存の Cost and Usage Report をインポートする
 
-### コストと使用状況レポートの設定を構成する {#configure-the-cost-and-usage-report-settings}
+### Cost and Usage Report の設定を構成する {#configure-the-cost-and-usage-report-settings}
 
-コストと使用状況レポートのために以下の詳細を入力します。
+既存の Cost and Usage Report 2.0 とバケットを使用している場合は、{{< ui >}}Data Export{{< /ui >}} フィールドからレポートを選択し、次のステップに進みます。
 
+{{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page で、Create Cost and Usage Report と Create S3 Bucket の選択を解除し、既存のエクスポートを選択するために使用される Data Export セレクターを表示した状態" style="width:100%" >}}
+
+それ以外の場合は、Cost and Usage Report に以下の詳細を入力します。
+
+* {{< ui >}}Report Content{{< /ui >}}: Cost and Usage Report のバージョン (Legacy CUR または CUR 2.0)。
 * {{< ui >}}Bucket Name{{< /ui >}}: レポートファイルが保存されている S3 バケット名。
 * {{< ui >}}Bucket Region{{< /ui >}}: S3 バケットを含むリージョンの AWS [リージョンコード][100]。例: `us-east-1`。
 * {{< ui >}}Export Path Prefix{{< /ui >}}: レポートファイルが保存されている S3 パスプレフィックス。
   * **注:** 次のプレフィックス形式はサポート対象外: 空白、`/` で始まるもの (`/` や `/cost` など)、または `/` で終わるもの (`cost/` など)。中間に `/` を含むプレフィックスはサポートされています (`cost/hourly` など)。
-* {{< ui >}}Export Name{{< /ui >}}: コストと使用状況レポートの名前。
+* {{< ui >}}Export Name{{< /ui >}}: Cost and Usage Report の名前。
 
 **注**:
-- これらの値は、既存のコストと使用状況レポートを特定したり、新しく作成されるリソースの設定を定義したりします。
-- 完全なコストと使用状況レポートが生成された後、すべての利用可能なデータが Datadog 組織に反映されるまでには、48 時間から 72 時間かかる場合があります。72 時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][101]にお問い合わせください。
+- これらの値は、既存の Cost and Usage Report を特定したり、新しく作成されるリソースの設定を定義したりします。
+- 完全な Cost and Usage Report が生成された後、すべての利用可能なデータが Datadog 組織に反映されるまでには、48 時間から 72 時間かかる場合があります。72 時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][101] にお問い合わせください。
 
 [100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
 [101]: /ja/help/
@@ -76,7 +81,7 @@ CloudFormation スタックは、既存の AWS リソースに応じて 3 つの
 
 {{% tab "Terraform" %}}
 
-{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="コストと使用状況レポートの設定 (バケット名、リージョン、エクスポートの詳細を含む) を構成するために展開されたステップ 1 が表示されている、Terraform オプションが選択された CCM 設定ページ" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="Cost and Usage Report の設定 (バケット名、リージョン、エクスポートの詳細を含む) を構成するために展開されたステップ 1 が表示されている、Terraform オプションが選択された CCM 設定ページ" style="width:100%" >}}
 
 ### 作成するリソースを選択する {#select-the-resources-to-create-1}
 
@@ -88,19 +93,24 @@ Terraform の構成は、既存の AWS リソースに応じて 3 つのステ�
 
 **注**: 既存のバケットを使用する場合は、AWS がそのバケットに CUR を書き込む権限を持っていることを確認してください。そうでない場合は、バケットのポリシーを更新する必要があるかもしれません。
 
-### コストと使用状況レポートの設定を構成する {#configure-the-cost-and-usage-report-settings-1}
+### Cost and Usage Report の設定を構成する {#configure-the-cost-and-usage-report-settings-1}
 
-コストと使用状況レポートのために以下の詳細を入力します。
+既存の Cost and Usage Report 2.0 とバケットを使用している場合は、{{< ui >}}Data Export{{< /ui >}} フィールドからレポートを選択し、次のステップに進みます。
 
+{{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page で、Create Cost and Usage Report と Create S3 Bucket の選択を解除し、既存のエクスポートを選択するために使用される Data Export セレクターを表示した状態" style="width:100%" >}}
+
+それ以外の場合は、Cost and Usage Report に以下の詳細を入力します。
+
+* {{< ui >}}Report Content{{< /ui >}}: Cost and Usage Report のバージョン (Legacy CUR または CUR 2.0)。
 * {{< ui >}}Bucket Name{{< /ui >}}: レポートファイルが保存されている S3 バケット名。
 * {{< ui >}}Bucket Region{{< /ui >}}: S3 バケットを含むリージョンの AWS [リージョンコード][100]。例: `us-east-1`。
 * {{< ui >}}Export Path Prefix{{< /ui >}}: レポートファイルが保存されている S3 パスプレフィックス。
   * **注:** 次のプレフィックス形式はサポート対象外: 空白、`/` で始まるもの (`/` や `/cost` など)、または `/` で終わるもの (`cost/` など)。中間に `/` を含むプレフィックスはサポートされています (`cost/hourly` など)。
-* {{< ui >}}Export Name{{< /ui >}}: コストと使用状況レポートの名前。
+* {{< ui >}}Export Name{{< /ui >}}: Cost and Usage Report の名前。
 
 **注**:
-- これらの値は、既存のコストと使用状況レポートを特定したり、新しく作成されるリソースの設定を定義したりします。
-- 完全なコストと使用状況レポートが生成された後、すべての利用可能なデータが Datadog 組織に反映されるまでには、48 時間から 72 時間かかる場合があります。72 時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][101]にお問い合わせください。
+- これらの値は、既存の Cost and Usage Report を特定したり、新しく作成されるリソースの設定を定義したりします。
+- 完全な Cost and Usage Report が生成された後、すべての利用可能なデータが Datadog 組織に反映されるまでには、48 時間から 72 時間かかる場合があります。72 時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][101] にお問い合わせください。
 
 [100]: https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html
 [101]: /ja/help/
@@ -117,16 +127,15 @@ CCM Terraform セットアップ UI で、{{< ui >}}Apply Terraform Configuratio
 
 ### 前提条件: Cost and Usage Report を作成する{#prerequisite-generate-a-cost-and-usage-report}
 
-{{< ui >}}Data Exports{{< /ui >}} セクションの AWS で[レガシーコストと使用状況レポートを作成][201]します。
-
-エクスポートタイプ {{< ui >}}Legacy CUR export{{< /ui >}} を選択します。
+AWS の {{< ui >}}Data Exports{{< /ui >}} セクションで、[Cost and Usage Report 2.0][202] または [Legacy Cost and Usage Report][201] のいずれかを作成します。
 
 以下のコンテンツオプションを選択します。
 
-* エクスポートタイプ: {{< ui >}}Legacy CUR export{{< /ui >}}
+* エクスポートタイプ: {{< ui >}}CUR 2.0 export{{< /ui >}} または {{< ui >}}Legacy CUR export{{< /ui >}}
 * {{< ui >}}Include resource IDs{{< /ui >}}
-* {{< ui >}}Split cost allocation data{{< /ui >}} (ECS Cost Allocation を有効にします。Cost Explorer 設定で、[AWS Split コスト割り当て][210]へのオプトインも行う必要があります。
+* {{< ui >}}Split cost allocation data{{< /ui >}} (ECS Cost Allocation を有効にします。Cost Explorer 設定で、[AWS Split コスト割り当て][210] へのオプトインも行う必要があります。
 * {{< ui >}}Refresh automatically{{< /ui >}}
+* オプション: 粒度の細かいユーザーレベルの IAM プリンシパル Bedrock コスト配分を行うには、{{< ui >}}IAM Principal Allocation Data{{< /ui >}} を有効にします。
 
 以下の配信オプションを選択します。
 
@@ -134,9 +143,11 @@ CCM Terraform セットアップ UI で、{{< ui >}}Apply Terraform Configuratio
 * レポートのバージョン管理: {{< ui >}}Create new report version{{< /ui >}}
 * 圧縮タイプ: {{< ui >}}GZIP{{< /ui >}} または {{< ui >}}Parquet{{< /ui >}}
 
-### コストと使用状況レポートを探す {#locate-the-cost-and-usage-report}
+**注**: Datadog は、メンバーアカウントごとに 1 つの Cost and Usage Report のみをサポートしています。
 
-セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って[データエクスポートを表示][204]します。作成したレガシー CUR エクスポートを選択し、次に {{< ui >}}Edit{{< /ui >}} を選択してエクスポートの詳細を表示します。
+### Cost and Usage Report を探す {#locate-the-cost-and-usage-report}
+
+セットアップの前提条件のセクションで作成したレポートから移動してしまった場合は、AWS のドキュメントに従って [データエクスポートを表示][204] します。作成した CUR エクスポートを選択し、次に {{< ui >}}Edit{{< /ui >}} を選択してエクスポートの詳細を表示します。
 
 Datadog が Cost and Usage Report を検索できるようにするには、対応する詳細情報をフィールドに入力します。
 
@@ -146,15 +157,15 @@ Datadog が Cost and Usage Report を検索できるようにするには、対�
   * **注:** 次のプレフィックス形式はサポート対象外: 空白、`/` で始まるもの (`/` や `/cost` など)、または `/` で終わるもの (`cost/` など)。中間に `/` を含むプレフィックスはサポートされています (`cost/hourly` など)。
 * {{< ui >}}Export Name{{< /ui >}}: これはエクスポート名セクションのエクスポート名です。
 
-**注**: Datadog は、AWS によって生成されたレガシーコストと使用状況レポート (CUR) のみをサポートしています。AWS によって生成されたファイルを変更または移動したり、サードパーティによって生成されたファイルへのアクセスを提供しようとしたりしないでください。
+**注**: Datadog は、AWS によって生成された Cost and Usage Report (CUR) のみをサポートしています。AWS によって生成されたファイルを変更または移動したり、サードパーティによって生成されたファイルへのアクセスを提供しようとしたりしないでください。
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">AWS コストと使用状況レポートエンドポイントは、上記のフィールドを S3 バケット内の CUR エクスポートと照合するために使用されます。このエンドポイントは FIPS 検証されていません。</div>
+<div class="alert alert-danger">AWS Cost and Usage Reports エンドポイントは、上記のフィールドと S3 バケット内の CUR エクスポートを照合するために使用されます。このエンドポイントは FIPS 検証されていません。</div>
 {{< /site-region >}}
 
-### コストと使用状況レポートへのアクセスを構成する {#configure-access-to-the-cost-and-usage-report}
+### Cost and Usage Report へのアクセスを構成する{#configure-access-to-the-cost-and-usage-report}
 
-AWS で[ポリシーを作成][205]して、Datadog が CUR とそれが格納されている S3 バケットにアクセスできる権限を持つようにします。以下の JSON を使用します。
+AWS で [ポリシーを作成][205] して、Datadog が CUR とそれが格納されている S3 バケットにアクセスできる権限を持つようにします。以下の JSON を使用します。
 
 {{< code-block lang="yaml" collapsible="true" >}}
 {
@@ -217,16 +228,61 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 4. 上記で作成した S3 バケットポリシーの名称を入力します。
 5. {{< ui >}}Attach policy{{< /ui >}} をクリックします。
 
-**注**: 完全なコストと使用状況レポートが生成された後、すべての利用可能なデータが Datadog 組織に反映されるまでには、48 時間から 72 時間かかる場合があります。72時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][18]にお問い合わせください。
+**注**: 完全な Cost and Usage Report が生成された後、利用可能なすべてのデータが Datadog 組織に反映されるまで、48～72 時間かかる場合があります。72 時間が経過してもデータがまだ反映されていない場合は、[Datadog サポート][18] にお問い合わせください。
 
 [201]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-legacy.html
+[202]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-create-standard.html
 [204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
 [205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
 
 {{% /tab %}}
 
+{{% tab "AI Agent" %}}
+
+**[Set up with AI Agent]** フローは、Cost and Usage Report を作成またはインポートし、適用前に確認できる Terraform を生成します。Datadog は、Claude Code や Cursor などの独自のコーディング Agent で実行するセットアッププロンプトを提供します。
+
+### 前提条件 {#prerequisites}
+
+- ロールベースのインテグレーションを通じて Datadog にすでに接続されている AWS アカウント。レポート読み取りポリシーを IAM ロールにアタッチする必要があるため、アクセスキーペアで認証するアカウントはサポートされていません。
+- **AWS Configurations Manage** 権限。
+- ローカルにインストールされたコーディングエージェント。Datadog は、Claude Code および Cursor の手順を提供します。
+
+### Datadog でフローを開始 {#start-the-flow-in-datadog}
+
+1. [Setup & Configuration][300] に移動し、{{< ui >}}Amazon Web Services{{< /ui >}} を見つけて {{< ui >}}Add Account{{< /ui >}} をクリックします。
+2. {{< ui >}}Set up with AI agent{{< /ui >}} を選択します。Datadog は、セッション用に管理された API キーとアプリケーションキーを生成します。
+3.  エージェントを開始します。
+    - **Claude Code**: 生成されたコマンドをコピーし、ターミナルで実行します。
+    - **Cursor**: {{< ui >}}Open in Cursor{{< /ui >}} をクリックして認証情報をダウンロードし、プロンプトが事前入力された状態で Cursor を開きます。
+4.  エージェントが動作している間は、Datadog のセットアップページを開いたままにしてください。Datadog が新しい構成を検出すると、{{< ui >}}Waiting for agent{{< /ui >}} ボタンが {{< ui >}}Setup complete{{< /ui >}} に変わります。クリックして完了します。
+
+###  エージェントでセットアップを完了 {#complete-the-setup-with-the-agent}
+
+1. Cost and Usage Report の形式を選択します。
+    - **CUR 2.0**: 推奨されており、新しいレポートではデフォルトで選択されます。
+    - **Legacy CUR**: 既存のレガシーレポート用、またはフォールバックとして利用できます。
+2. 作成するリソースを選択します。このフローでは、新しい Cost and Usage Report を作成する前に、既存のレポートを確認します。以下が可能です。
+    -  Cost and Usage Report とその S3 バケットを作成する
+    - 既存のレポートと S3 バケットを使用する
+3.  生成された Terraform 構成を確認し、適用してアカウントのセットアップを完了します。
+
+[300]: https://app.datadoghq.com/cost/setup
+
+{{% /tab %}}
+
 {{< /tabs >}}
+
+#### AWS Cost Optimization Hub の推奨事項に対する権限{#permissions-for-aws-cost-optimization-hub-recommendations}
+
+Cloud Cost Management は、[AWS Cost Optimization Hub][31] から取得したデータに基づいて、いくつかの [推奨事項][30] を生成します。Datadog がこれらの推奨事項を受け取るには、Datadog AWS インテグレーション IAM ロールに以下の権限が含まれている必要があります。
+
+- `cost-optimization-hub:GetRecommendation`
+- `cost-optimization-hub:ListRecommendations`
+
+これらの権限は、デフォルトの AWS インテグレーション IAM ポリシーに含まれています。[CloudFormation または Terraform テンプレート][32] を使用して最近 AWS インテグレーションを構成した場合、これらの権限はすでに付与されています。
+
+これらの権限がデフォルトポリシーに追加される前に AWS インテグレーションを構成した場合は、IAM ポリシーを更新してこれらの権限を含めてください。現在のポリシーについては、[Amazon Web Services インテグレーション][32] のドキュメントを参照してください。
 
 ### アカウントフィルタリング {#account-filtering}
 
@@ -238,7 +294,7 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 
 #### 既存のアカウントのアカウントフィルターを構成する {#configure-account-filters-for-an-existing-account}
 
-[**Cloud Cost** > **設定**、**アカウント**][17]の順に移動し、フィルタリングしたい管理アカウントの {{< ui >}}Manage Account{{< /ui >}} をクリックします。
+[**Cloud Cost** > **設定**、**アカウント**][17] の順に移動し、フィルタリングしたい管理アカウントの {{< ui >}}Manage Account{{< /ui >}} をクリックします。
 
 {{< img src="cloud_cost/account_filtering/manage_account.png" alt="アカウントカードの管理アカウントボタン" style="width:100%;" >}}
 
@@ -248,7 +304,7 @@ Datadog のインテグレーションロールに新しい S3 ポリシーを�
 
 ### 履歴データの取得 {#getting-historical-data}
 
-S3 で利用可能な履歴データがすでにあるコストと使用状況レポートを構成する場合、Datadog は最大 15 か月分の履歴コストデータを自動的に取り込みます。
+S3 で利用可能な履歴データがすでにある Cost and Usage Report を構成する場合、Datadog は最大 15 か月分の履歴コストデータを自動的に取り込みます。
 
 新しく構成したレポートに履歴データがない場合は、AWS からのバックフィルをリクエストできます。
 
@@ -262,7 +318,7 @@ AWS によってデータがバックフィルされると、Datadog は 24 時�
 
 AWS は、AWS アカウント以前のコストデータや以前の AWS Organizations 構造を反映したコストデータをバックフィルすることはできません。
 
-詳細については、[AWS コストと使用状況レポートのトラブルシューティングガイド][20]を参照してください。
+詳細については、[AWS Cost and Usage Report のトラブルシューティングガイド][20] を参照してください。
 
 ## コストタイプ {#cost-types}
 
@@ -286,7 +342,7 @@ AWS は、AWS アカウント以前のコストデータや以前の AWS Organiz
 **正味減価償却**コストは、コスト割り当てのための最も正確な表現を提供し、すべての節約は使用量に直接適用されます。AWS アカウントに非公開交渉によるエンタープライズ割引がある場合、正味コストメトリクスが利用可能です。アカウントに企業割引がない場合、**正味減価償却**コストと**減価償却**コストは同等です。
 
 ### コンテナ割り当て{#container-allocation}
-**コンテナ割り当て**メトリクスには、AWS メトリクスと同じコストがすべて含まれていますが、コンテナワークロードのための追加の内訳とインサイトも含まれています。詳細は[コンテナコスト割り当て][11]を参照してください。
+**コンテナ割り当て**メトリクスには、AWS メトリクスと同じコストがすべて含まれていますが、コンテナワークロードのための追加の内訳とインサイトも含まれています。詳細は [コンテナコスト割り当て][11] を参照してください。
 
 ### 例 {#example}
 次のシナリオは、異なるコストタイプがどのように振る舞うかを示しています。以下を想定してみます。
@@ -314,21 +370,21 @@ AWS は、AWS アカウント以前のコストデータや以前の AWS Organiz
 
 | メトリクス               | 説明           |
 | -------------------- | --------------------- |
-| `aws.cost.net.amortized.shared.resources.allocated` | AWS の正味減価償却コストすべてと、コンテナワークロードのための追加の内訳とインサイト。[コンテナコスト割り当て][11]が必要です。|
+| `aws.cost.net.amortized.shared.resources.allocated` | AWS の正味減価償却コストすべてと、コンテナワークロードのための追加の内訳とインサイト。[コンテナコスト割り当て][11] が必要です。|
 | `aws.cost.net.amortized` | コンテナコストの内訳を含まない正味減価償却コスト。|
 | `aws.cost.net.unblended` | コンテナコストの内訳を含まない正味非混合コスト。AWS の請求書と一致し、使用量コスト内で特別な割引が事前に計算されます。|
-| `aws.cost.amortized.shared.resources.allocated` | AWS の減価償却コストすべてと、コンテナワークロードのための追加の内訳とインサイト。[コンテナコスト割り当て][11]が必要です。|
+| `aws.cost.amortized.shared.resources.allocated` | AWS の減価償却コストすべてと、コンテナワークロードのための追加の内訳とインサイト。[コンテナコスト割り当て][11] が必要です。|
 | `aws.cost.amortized` | コンテナコストの内訳を含まない減価償却コスト。|
 | `aws.cost.unblended` | コンテナコストの内訳を含まない非混合コスト。AWS の請求書と一致します。|
 | `aws.cost.ondemand`  | コストは AWS が提供するリストレートに基づいており、すべての節約プラン、予約、割引、税金、手数料は含まれていません。|
 
 ## Datadog がタグで AWS コストデータを強化する方法 {#how-datadog-enriches-your-aws-cost-data-with-tags}
 
-Datadog は、複数のソースからのタグで AWS コストデータを自動的に強化します。コストデータにタグがどのように適用されるかの包括的な概要については、[タグ][19]を参照してください。
+Datadog は、複数のソースからのタグで AWS コストデータを自動的に強化します。コストデータにタグがどのように適用されるかの包括的な概要については、[タグ][19] を参照してください。
 
 以下のタグソースを AWS で利用できます。
 
-- コストと使用状況レポート列
+- Cost and Usage Report 列
 - AWS リソースタグ
 - AWS アカウントタグ
 - AWS インテグレーションタグ
@@ -336,11 +392,11 @@ Datadog は、複数のソースからのタグで AWS コストデータを自�
 - コンテナワークロードタグ
 - タグパイプライン
 
-### コストと使用状況レポート列 {#cost-and-usage-report-columns}
+### Cost and Usage Report 列 {#cost-and-usage-report-columns}
 
-AWS の[コストと使用状況レポート (CUR)][6] のすべての文字列値の列がコストメトリクスのタグとして追加されます。
+AWS の [Cost and Usage Report (CUR)][6] のすべての文字列値の列がコストメトリクスのタグとして追加されます。
 
-Datadog は一貫性を確保するために、アンダースコアと小文字を使用してタグキーを正規化します。例えば、CUR 列 `lineItem/ResourceId` はタグキー `line_item/resource_id` にマッピングされます。タグの値は一般的に変更されず、大文字と小文字の区別とほとんどの特殊文字が維持されます。
+Datadog は一貫性を確保するために、アンダースコアと小文字を使用してタグキーを正規化します。たとえば、CUR 列 `lineItem/ResourceId` はタグキー `line_item/resource_id` にマッピングされます。タグの値は一般的に変更されず、大文字と小文字の区別とほとんどの特殊文字が維持されます。
 
 **例:**
 
@@ -350,16 +406,18 @@ Datadog は一貫性を確保するために、アンダースコアと小文字
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
 
+CUR 2.0 エクスポートの追加列の詳細については、[AWS CUR 2.0 ドキュメント][33] を参照してください。
+
 ### AWS リソースタグ {#aws-resource-tags}
 
-[AWS リソースタグ][12]は、EC2 インスタンスや S3 バケットなど、特定のリソースを表示する際に AWS コンソールに表示されるユーザー定義のタグです。
+[AWS リソースタグ][12] は、EC2 インスタンスや S3 バケットなど、特定のリソースを表示する際に AWS コンソールに表示されるユーザー定義のタグです。
 
 Datadog AWS インテグレーションを有効にすると、Datadog は自動的にほとんどの AWS リソースのリソースタグを収集します。これらのタグは、指定されたリソースの CUR で見つかったすべてのコストに適用されます。リソースタグは定期的に取得され、作成または変更された日からコストデータに適用されます。タグが変更されても、過去のタグ値は上書きされません。
 
-AWS インテグレーションが有効になっていない場合、AWS 請求の[コスト割り当てタグ][13]をアクティブにすることで、リソースタグのリッチ化を有効にすることができます。これにより、AWS CUR の列として含めるリソースタグキーのサブセットを選択することができます。Datadog は、CUR を処理する際に、これらの列を自動的にタグとして含めます。
+AWS インテグレーションが有効になっていない場合、AWS 請求の [コスト割り当てタグ][13] をアクティブにすることで、リソースタグのリッチ化を有効にすることができます。これにより、AWS CUR の列として含めるリソースタグキーのサブセットを選択することができます。Datadog は、CUR を処理する際に、これらの列を自動的にタグとして含めます。
 
 ### AWS の組織とアカウントタグ {#aws-organization-and-account-tags}
-AWS 組織は、組織単位とアカウントに関する[ユーザー定義タグ][14]をサポートしています。Datadog は自動的にこれらのタグを取得し、コストデータに適用します。アカウントタグは、そのアカウントに関連するすべての使用量に適用されます。組織タグは、一致する支払者アカウントのすべての請求データに適用されます。
+AWS 組織は、組織単位とアカウントに関する [ユーザー定義タグ][14] をサポートしています。Datadog は自動的にこれらのタグを取得し、コストデータに適用します。アカウントタグは、そのアカウントに関連するすべての使用量に適用されます。組織タグは、一致する支払者アカウントのすべての請求データに適用されます。
 
 _組織アカウントの Datadog AWS インテグレーションが必要です。_
 
@@ -368,7 +426,7 @@ _組織アカウントの Datadog AWS インテグレーションが必要です
 AWS インテグレーションタグは、Datadog インテグレーションページの AWS Integration タイルで設定されるタグです。これらは、関連する AWS アカウントの CUR で見つかったすべてのコストに適用されます。
 
 ### すぐに使えるタグ {#out-of-the-box-tags}
-Datadog は、取り込んだコストデータにすぐに使えるタグを追加し、コストの細分化と割り当てを支援します。これらのタグは、[コストと使用状況レポート (CUR)][6] から導き出され、コストデータの発見と理解を容易にします。
+Datadog は、取り込んだコストデータにすぐに使えるタグを追加し、コストの細分化と割り当てを支援します。これらのタグは、[Cost and Usage Report (CUR)][6] から導き出され、コストデータの発見と理解を容易にします。
 
 データのフィルタリングやグループ化には、以下のすぐに使えるタグが利用できます。
 
@@ -440,7 +498,7 @@ Datadog は、取り込んだコストデータにすぐに使えるタグを追
 
 監視可能性データの文脈でコストを確認することは、インフラストラクチャーの変更がコストにどのように影響するかを理解し、コストが変動する理由を特定し、コストとパフォーマンスの両方のインフラストラクチャーを最適化するために重要です。Datadog は、監視可能性とコストメトリクスの相関を簡素化するため、主要な AWS 製品のコストデータにおけるリソース識別タグを更新します。
 
-例えば、各 RDS データベースのコストと使用状況を表示するには、`aws.cost.amortized`、`aws.rds.cpuutilization`、および `aws.rds.freeable_memory` (または他の RDS メトリック) を使ってテーブルを作成し、`dbinstanceidentifier` でグループ化できます。Lambda の使用状況とコストを並べて表示するには、`aws.lambda.concurrent_executions` および `aws.cost.amortized` を `functionname` でグループ化してグラフ化できます。
+たとえば、各 RDS データベースのコストと使用状況を表示するには、`aws.cost.amortized`、`aws.rds.cpuutilization`、および `aws.rds.freeable_memory` (または他の RDS メトリック) を使ってテーブルを作成し、`dbinstanceidentifier` でグループ化できます。Lambda の使用状況とコストを並べて表示するには、`aws.lambda.concurrent_executions` および `aws.cost.amortized` を `functionname` でグループ化してグラフ化できます。
 
 以下のすぐに使えるタグが利用可能です。
 
@@ -464,24 +522,24 @@ Datadog は、取り込んだコストデータにすぐに使えるタグを追
 
 ### コンテナオーケストレーター {#container-orchestrators}
 
-コンテナのコスト割り当てでは、コストが発生するワークロードのタグが追加されます。例えば、Kubernetes のポッドやノード、ECS のタスクやコンテナのタグなどです。
+コンテナのコスト割り当てでは、コストが発生するワークロードのタグが追加されます。たとえば、Kubernetes のポッドやノード、ECS のタスクやコンテナのタグなどです。
 
-_[コンテナのコスト割り当て][11]が必要で、`shared.resources.allocated` メトリクスにのみ適用されます。_
+_[コンテナのコスト割り当て][11] が必要で、`shared.resources.allocated` メトリクスにのみ適用されます。_
 
 ### タグパイプライン {#tag-pipelines}
 
-最後に、[タグパイプライン][15]のすべてのルールセットが適用され、インフラストラクチャーのタグ付けが不可能な場合に、完全なコスト割り当てが提供されます。タグパイプラインは最終的なエンリッチメントレイヤーであり、コストデータに新しいタグを追加します。
+最後に、[タグパイプライン][15] のすべてのルールセットが適用され、インフラストラクチャーのタグ付けが不可能な場合に、完全なコスト割り当てが提供されます。タグパイプラインは最終的なエンリッチメントレイヤーであり、コストデータに新しいタグを追加します。
 
 ## 請求コンダクター {#billing-conductor}
-[AWS 請求コンダクター][16]は、AWS Marketplace Channel Partners およびチャージバック要件を持つ組織向けのカスタム請求サービスです。
+[AWS 請求コンダクター][16] は、AWS Marketplace Channel Partners およびチャージバック要件を持つ組織向けのカスタム請求サービスです。
 Billing Conductor は、お客様がコストのセカンドプロフォーマバージョンを作成してお客様やアカウント所有者と共有できるようにします。
 請求レート、クレジットおよび手数料、オーバーヘッドコストは、任意でカスタマイズできます。CUR に含めるアカウントを選択することもできます。
 
 **重要な制限**:
-- プロフォーマのコストと使用状況レポートには割引や税金が含まれていないため、Datadog のコストを AWS Cost Explorer と比較するのが難しくなります。
+- プロフォーマの Cost and Usage Report には割引や税金が含まれていないため、Datadog のコストを AWS Cost Explorer と比較するのが難しくなります。
 - 請求グループにアカウントを追加すると、予約および節約プランが AWS アカウント間でどのように共有されるかに影響します。
 
-AWS Billing Conductor CUR を作成するには、[AWS コストと使用状況レポートユーザーガイド][8]に従います。CUR が [Datadog の要件][9]を満たしていることを確認してください。
+AWS Billing Conductor CUR を作成するには、[AWS Cost and Usage Report ユーザーガイド][8] に従います。CUR が [Datadog の要件][9] を満たしていることを確認してください。
 Billing Conductor CUR が作成された後、上記の Cloud Cost Management の指示に従って Datadog に設定してください。
 
 ## 参考資料 {#further-reading}
@@ -509,3 +567,7 @@ Billing Conductor CUR が作成された後、上記の Cloud Cost Management �
 [20]: https://docs.aws.amazon.com/cur/latest/userguide/troubleshooting.html#backfill-data
 [21]: /ja/api/latest/cloud-cost-management/#create-cloud-cost-management-aws-cur-config
 [22]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/aws_cur_config
+[30]: /ja/cloud_cost_management/recommendations/
+[31]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
+[32]: /ja/integrations/amazon_web_services/
+[33]: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-cur2.html
