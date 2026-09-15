@@ -757,12 +757,7 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel_collect
       weight: 402
-    - name: Deploy
-      url: /opentelemetry/setup/collector_exporter/deploy
-      identifier: otel-setup-collector-exporter-deploy
-      parent: otel-setup-collector-exporter
-      weight: 40211
-    - name: Batch and Memory Settings
+    - name: Collector Memory Limits
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
@@ -792,6 +787,11 @@ menu:
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
       weight: 404
+    - name: Traces Endpoint
+      url: /opentelemetry/setup/otlp_ingest/traces
+      parent: otel-setup-intake-endpoint
+      weight: 40230
+      identifier: otel_setup_agentless_traces
     - name: Logs Endpoint
       url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
@@ -1565,6 +1565,11 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 104
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 105
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
@@ -5774,6 +5779,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 50305
+    - name: Data Access Control
+      url: llm_observability/improve/access_control
+      parent: llm_obs_improve
+      identifier: llm_obs_improve_access_control
+      weight: 504
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs

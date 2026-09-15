@@ -46,7 +46,7 @@ Under {{< ui >}}Group By{{< /ui >}}, use tags such as `location` and `vendor` to
 
 ### Filter devices
 
-Select the {{< ui >}}+ Filter{{< /ui >}} dropdown to refine which devices are displayed on the Device Topology Map.
+Select the {{< ui >}}\+ Filter{{< /ui >}} dropdown to refine which devices are displayed on the Device Topology Map.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_3.png" alt="The Device Topology Map with the filter dropdown open." style="width:90%;" >}}
 

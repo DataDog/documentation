@@ -593,7 +593,7 @@ The Datadog MCP server connection is managed by Copilot (or whichever agent you 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. In the Warp app, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Servers{{< /ui >}} and click {{< ui >}}+ Add{{< /ui >}}.
+1. In the Warp app, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Servers{{< /ui >}} and click {{< ui >}}\+ Add{{< /ui >}}.
 
 1. Paste the following configuration:
 
@@ -793,6 +793,22 @@ For most users, OAuth 2.0 is the recommended authentication method, and your MCP
 ### OAuth 2.0 (recommended)
 
 Most clients complete the OAuth 2.0 flow automatically during setup. Select your client at the top of this page for instructions. With OAuth, you don't manage long-lived credentials directly. For details, see the [MCP authorization specification][14].
+
+#### Custom subdomains
+
+If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?subdomain=&lt;SUBDOMAIN&gt;</code></pre>
+
+To combine `subdomain` with [toolsets](#toolsets) or other query parameters, separate them with `&`:
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?subdomain=&lt;SUBDOMAIN&gt;&amp;toolsets=apm,llmobs</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ### Personal or Service Access Token
 

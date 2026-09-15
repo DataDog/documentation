@@ -153,23 +153,17 @@ Lists available metrics, with options for filtering and metadata.
 - List CPU-related metrics for our infrastructure.
 - Find metrics tagged with `service:api`.
 
-### `search_datadog_services`
+### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Catalog with details and team information.
+Searches Datadog's Catalog for service identity, ownership and upstream and downstream dependencies.
 
-- Show me all services in our microservices architecture.
-- List services owned by the platform team.
 - Find services related to payment processing.
-
-### `search_datadog_service_dependencies`
-*Toolset: **core***\
-*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
-Retrieves service dependencies (upstream/downstream) and services owned by a team.
-
+- List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
-- List all services owned by the platform team.
+
+<div class="alert alert-info"><code>search_datadog_services</code> and <code>search_datadog_service_dependencies</code> tools are deprecated, use <code>search_datadog_entities</code> instead.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
@@ -780,6 +774,15 @@ Runs health checks to surface potential PostgreSQL issues such as CPU saturation
 - Run health checks on `db-prod-1` for the last hour versus the previous hour.
 - Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
+
+### `get_datadog_database_instance_settings`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves collected PostgreSQL configuration settings for a Database Monitoring instance, the same values shown on the Configuration tab. Returns parameters that affect performance and behavior, including memory (`shared_buffers`, `work_mem`), connections (`max_connections`), autovacuum, logging, WAL, and query planner settings. Filter by setting name to narrow results.
+
+- Show autovacuum settings for `db-prod-1`.
+- What logging settings are enabled on the payments PostgreSQL instance?
+- What is `shared_buffers` set to on `db-prod-1`?
 
 ### `get_datadog_database_query_performance`
 *Toolset: **dbm***\
@@ -1594,6 +1597,14 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
+
+### `get_rum_view_waterfall`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen. For the aggregated, cross-session view, use `get_rum_insight`.
+
+- Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
+- Why did the checkout page load with view UUID `d64b1e7c-8f2a-4c3b-9e1d-5a6b7c8d9e0f` take 12 seconds?
 
 ### `search_rum_operations`
 *Toolset: **rum***\
