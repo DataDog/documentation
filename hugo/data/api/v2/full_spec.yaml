@@ -5177,6 +5177,12 @@ components:
           example: 54.0
           format: double
           type: number
+        local_cache_count:
+          description: Number of requests served from the local browser cache without a network round trip.
+          example: 20
+          format: int32
+          maximum: 2147483647
+          type: integer
         max_duration_ms:
           description: Maximum duration in milliseconds.
           example: 945.6
@@ -5192,6 +5198,12 @@ components:
           example: 812.7
           format: double
           type: number
+        non_blocking_count:
+          description: Number of requests reported by the browser as non-render-blocking.
+          example: 23
+          format: int32
+          maximum: 2147483647
+          type: integer
         p75_duration_ms:
           description: 75th percentile duration in milliseconds.
           example: 844.1
@@ -5200,6 +5212,17 @@ components:
         p95_duration_ms:
           description: 95th percentile duration in milliseconds.
           example: 861.8
+          format: double
+          type: number
+        render_blocking_count:
+          description: Number of requests reported by the browser as render-blocking.
+          example: 4
+          format: int32
+          maximum: 2147483647
+          type: integer
+        render_blocking_pct:
+          description: Percentage of render-blocking requests among those reporting a render-blocking status.
+          example: 14.8
           format: double
           type: number
         resource_type:
@@ -5211,6 +5234,12 @@ components:
           description: URL path group used to aggregate similar resources.
           example: /api/gallery
           type: string
+        server_validated_cache_count:
+          description: Number of cached requests revalidated by the server with a 304 response.
+          example: 7
+          format: int32
+          maximum: 2147483647
+          type: integer
         timing_breakdown:
           $ref: "#/components/schemas/AggregatedResourceTimingBreakdown"
         total_requests:
@@ -5243,6 +5272,11 @@ components:
         - cached_count
         - downloaded_count
         - cache_hit_rate_pct
+        - render_blocking_count
+        - non_blocking_count
+        - render_blocking_pct
+        - local_cache_count
+        - server_validated_cache_count
       type: object
     AggregatedResourceTimingBreakdown:
       description: Average timing breakdown per network phase for a resource.
@@ -5709,7 +5743,7 @@ components:
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
           type: string
         criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
+          $ref: "#/components/schemas/AggregatedWaterfallResponseAttributesCriteria"
         from:
           description: Start of the analyzed time range as a Unix timestamp in seconds.
           example: 1762437564
@@ -5754,9 +5788,29 @@ components:
         - view_count
         - from
         - to
+        - criteria
         - sampled_view_ids
         - total_cache_hit_rate_pct
         - resources
+      type: object
+    AggregatedWaterfallResponseAttributesCriteria:
+      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      nullable: true
+      properties:
+        max:
+          description: Maximum threshold in seconds (inclusive).
+          example: 5.0
+          format: double
+          type: number
+        metric:
+          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteriaMetric"
+        min:
+          description: Minimum threshold in seconds (inclusive).
+          example: 2.5
+          format: double
+          type: number
+      required:
+        - metric
       type: object
     AggregatedWaterfallResponseData:
       description: Data envelope for an aggregated waterfall response.
@@ -19505,6 +19559,8 @@ components:
     CloudWorkloadSecurityAgentRuleAction:
       description: "The action the rule can perform if triggered"
       properties:
+        coredump:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionCoreDump"
         disabled:
           description: "Whether the action is disabled"
           example: false
@@ -19516,16 +19572,50 @@ components:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionHash"
         kill:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleKill"
+        log:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionLog"
         metadata:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata"
+        network_filter:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionNetworkFilter"
         set:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet"
+      type: object
+    CloudWorkloadSecurityAgentRuleActionCoreDump:
+      description: "The core dump action applied on the process matching the rule."
+      properties:
+        dentry:
+          description: "Whether the directory entry information is included in the core dump."
+          type: boolean
+        mount:
+          description: "Whether the mount information is included in the core dump."
+          type: boolean
+        no_compression:
+          description: "Whether the core dump is left uncompressed."
+          type: boolean
+        process:
+          description: "Whether the process memory is included in the core dump."
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
       description: "Hash file specified by the field attribute"
       properties:
         field:
           description: "The field of the hash action"
+          type: string
+        max_file_size:
+          description: "The maximum size of the files to hash, in bytes."
+          format: int64
+          type: integer
+      type: object
+    CloudWorkloadSecurityAgentRuleActionLog:
+      description: "The log action applied when the rule is triggered."
+      properties:
+        level:
+          description: "The level of the log action."
+          type: string
+        message:
+          description: "The message of the log action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
@@ -19539,6 +19629,19 @@ components:
           type: string
         short_image:
           description: "The short image of the metadata action"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleActionNetworkFilter:
+      description: "The network filter action applied on the network traffic matching the rule."
+      properties:
+        filter:
+          description: "The filter expression of the network filter action."
+          type: string
+        policy:
+          description: "The policy of the network filter action."
+          type: string
+        scope:
+          description: "The scope of the network filter action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionSet:
@@ -19562,8 +19665,14 @@ components:
         name:
           description: "The name of the set action"
           type: string
+        private:
+          description: "Whether the value of the set action is private."
+          type: boolean
         scope:
           description: "The scope of the set action."
+          type: string
+        scope_field:
+          description: "The scope field of the set action."
           type: string
         size:
           description: "The size of the set action."
@@ -19819,6 +19928,15 @@ components:
     CloudWorkloadSecurityAgentRuleKill:
       description: "Kill system call applied on the container matching the rule"
       properties:
+        disable_container_disarmer:
+          description: "Whether the automatic container safeguard of the kill action is disabled."
+          type: boolean
+        disable_executable_disarmer:
+          description: "Whether the automatic executable safeguard of the kill action is disabled."
+          type: boolean
+        scope:
+          description: "The scope of the kill action."
+          type: string
         signal:
           description: "Supported signals for the kill system call"
           type: string
@@ -72286,6 +72404,32 @@ components:
       required:
         - data
       type: object
+    MonitorConfigPolicyDowntimePolicy:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
+    MonitorConfigPolicyDowntimePolicyCreateRequest:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
     MonitorConfigPolicyEditData:
       description: A monitor configuration policy data.
       properties:
@@ -72323,10 +72467,12 @@ components:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicy"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicy"
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicyCreateRequest"
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -72355,6 +72501,7 @@ components:
           $ref: "#/components/schemas/MonitorConfigPolicyResourceType"
       type: object
     MonitorConfigPolicyTagPolicy:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72376,6 +72523,7 @@ components:
           type: array
       type: object
     MonitorConfigPolicyTagPolicyCreateRequest:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72402,13 +72550,18 @@ components:
       type: object
     MonitorConfigPolicyType:
       default: tag
-      description: The monitor configuration policy type.
+      description: |-
+        The monitor configuration policy type.
+        `tag` enforces required tags on monitors.
+        `downtime` sets a maximum downtime duration for the organization.
       enum:
         - tag
+        - downtime
       example: "tag"
       type: string
       x-enum-varnames:
         - TAG
+        - DOWNTIME
     MonitorDowntimeMatchResourceType:
       default: downtime_match
       description: Monitor Downtime Match resource type.
@@ -75895,6 +76048,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
@@ -75994,6 +76148,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
+        - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
@@ -78889,6 +79044,168 @@ components:
       type: string
       x-enum-varnames:
         - PARSE_XML
+    ObservabilityPipelinePrometheusRemoteWriteDestination:
+      description: |-
+        The `prometheus_remote_write` destination forwards metrics to an endpoint that supports the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        auth_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy"
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        default_namespace:
+          description: The default namespace to add as a prefix to metric names that do not already have one.
+          example: datadog
+          type: string
+        endpoint_url_key:
+          description: |-
+            Name of the environment variable or secret that holds the Prometheus Remote Write endpoint URL.
+            Defaults to `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL` (prefixed with `DD_OP_` at runtime).
+          example: PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["metrics-filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        tenant_id:
+          description: The tenant ID to include with outgoing requests. Used by multi-tenant Prometheus Remote Write receivers.
+          example: my-tenant
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationType"
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy:
+      description: The authentication strategy to use for outgoing Prometheus Remote Write requests.
+      enum:
+        - none
+        - basic
+        - bearer
+      example: basic
+      type: string
+      x-enum-varnames:
+        - NONE
+        - BASIC
+        - BEARER
+    ObservabilityPipelinePrometheusRemoteWriteDestinationType:
+      default: prometheus_remote_write
+      description: The destination type. The value should always be `prometheus_remote_write`.
+      enum:
+        - prometheus_remote_write
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSource:
+      description: |-
+        The `prometheus_remote_write` source ingests metrics pushed over the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen address for the Prometheus Remote Write endpoint.
+          example: PROMETHEUS_REMOTE_WRITE_ADDRESS
+          type: string
+        auth_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy"
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-source
+          type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        path:
+          description: The HTTP path on which the source listens for incoming Prometheus Remote Write requests.
+          example: "/api/v1/write"
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceType"
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+        valid_tokens:
+          description: |-
+            A list of tokens that are accepted for authenticating incoming requests. When set,
+            the source rejects any request whose token does not match an enabled entry in this list.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceValidToken"
+          type: array
+      required:
+        - id
+        - type
+        - auth_strategy
+        - path
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy:
+      description: HTTP authentication method.
+      enum:
+        - none
+        - plain
+      example: plain
+      type: string
+      x-enum-varnames:
+        - NONE
+        - PLAIN
+    ObservabilityPipelinePrometheusRemoteWriteSourceType:
+      default: prometheus_remote_write
+      description: The source type. The value should always be `prometheus_remote_write`.
+      enum: [prometheus_remote_write]
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSourceValidToken:
+      description: An accepted token used to authenticate incoming Prometheus Remote Write requests.
+      properties:
+        enabled:
+          default: true
+          description: |-
+            Indicates whether this token is currently accepted. Disabled tokens are rejected without
+            being removed from the configuration.
+          example: true
+          type: boolean
+        path_to_token:
+          $ref: "#/components/schemas/ObservabilityPipelineHttpServerSourceValidTokenPathToToken"
+        token_key:
+          description: Name of the environment variable or secret that holds the expected token value.
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+      required:
+        - token_key
+      type: object
     ObservabilityPipelineQuotaProcessor:
       description: |-
         The `quota` processor measures logging traffic for logs that match a specified filter. When the configured daily quota is met, the processor can drop or alert.
@@ -184118,6 +184435,16 @@ paths:
                           policy_type: tag
                         id: "00000000-0000-1234-0000-000000000000"
                         type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      - attributes:
+                          policy:
+                            max_duration_ms: 3600000
+                          policy_type: downtime
+                        id: "00000000-0000-1234-0000-000000000000"
+                        type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyListResponse"
           description: OK
@@ -184161,6 +184488,15 @@ paths:
                           - staging
                       policy_type: tag
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyCreateRequest"
         description: Create a monitor configuration policy request body.
@@ -184181,6 +184517,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -184281,6 +184627,16 @@ paths:
                         policy_type: tag
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyResponse"
           description: OK
@@ -184339,6 +184695,16 @@ paths:
                       policy_type: tag
                     id: 00000000-0000-1234-0000-000000000000
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    id: 00000000-0000-1234-0000-000000000000
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyEditRequest"
         description: Description of the update.
@@ -184359,6 +184725,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -200889,13 +201265,18 @@ paths:
                             downloaded_count: 0
                             http_method: GET
                             load_frequency_pct: 54.0
+                            local_cache_count: 20
                             max_duration_ms: 945.6
                             median_duration_ms: 836.2
                             min_duration_ms: 812.7
+                            non_blocking_count: 23
                             p75_duration_ms: 844.1
                             p95_duration_ms: 861.8
+                            render_blocking_count: 4
+                            render_blocking_pct: 14.8
                             resource_type: fetch
                             resource_url_path_group: /api/gallery
+                            server_validated_cache_count: 7
                             timing_breakdown:
                               avg_connect_ms: 0.0
                               avg_dns_ms: 0.0
