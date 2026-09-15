@@ -44,9 +44,9 @@ Each cohort's retention rate is scaled by its number of users before it contribu
 
 1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Retention{{< /ui >}}.
 
-2. Define start and return steps that you want to understand retention for.
+1. Define start and return steps that you want to understand retention for.
 
-3. (Optional) Filter or group chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} or {{< ui >}}Compare by{{< /ui >}}.
+1. (Optional) Filter or group chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} or {{< ui >}}Compare by{{< /ui >}}.
 
 ## Analyze a retention chart
 

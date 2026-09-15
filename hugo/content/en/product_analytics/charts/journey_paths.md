@@ -16,11 +16,11 @@ Use journey paths to:
 
 1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Journey Paths{{< /ui >}}.
 
-2. Define {{< ui >}}User steps{{< /ui >}} by selecting at least two events that you want to analyze paths between. 
+1. Define {{< ui >}}User steps{{< /ui >}} by selecting at least two events that you want to analyze paths between. 
 
    For a given step, click {{< ui >}}or...{{< /ui >}} to specify multiple events, or click the filter icon to filter the step by specified properties. 
 
-3. (Optional) Filter chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} criteria.
+1. (Optional) Filter chart results based on properties such as country or device type using {{< ui >}}Filter by{{< /ui >}} criteria.
 
 ## Analyze a journey paths chart
 
