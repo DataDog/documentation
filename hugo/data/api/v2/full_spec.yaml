@@ -147592,13 +147592,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147662,19 +147662,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -148167,13 +148167,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
+                $ref: "#/components/schemas/APIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
