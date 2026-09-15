@@ -1,5 +1,6 @@
 ---
 title: Remap to OCSF Processor
+description: Learn how to use the Remap to OCSF processor to map logs to Open Cybersecurity Schema Framework (OCSF) events.
 disable_toc: false
 products:
 - name: Logs
@@ -75,7 +76,7 @@ To set up a custom mapping:
 1. Enter a log sample so that you can reference it when you add fields.
 1. Click {{< ui >}}Continue{{< /ui >}}.
 1. Select any OCSF profiles that you want to add. See [OCSF Schema Browser][1] for more information.
-1. All required fields are shown. Enter the required {{< ui >}}Source Logs Fields{{< /ui >}} and {{< ui >}}Fallback Values{{< /ui >}} for them. If you want to manually add additional fields, click {{< ui >}}+ Field{{< /ui >}}. Click the trash can icon to delete a field. **Note**: Required fields cannot be deleted.
+1. All required fields are shown. Enter the required {{< ui >}}Source Logs Fields{{< /ui >}} and {{< ui >}}Fallback Values{{< /ui >}} for them. If you want to manually add additional fields, click {{< ui >}}\+ Field{{< /ui >}}. Click the trash can icon to delete a field. **Note**: Required fields cannot be deleted.
     - The fallback value is used for the OCSF field if the log doesn't have the source log field.
     - You can add multiple fields for {{< ui >}}Source Log Fields{{< /ui >}}. For example, Okta's `user.system.start` logs have either the `eventType` or `legacyEventType` field. You can map both fields to the same OCSF field.
     - If you have your own OCSF mappings in JSON or saved a previous mapping that you want to use, click {{< ui >}}Import Configuration File{{< /ui >}}.
@@ -86,7 +87,7 @@ To set up a custom mapping:
     | `INFO`           | `Informational` |
     | `WARN`           | `Medium`        |
     | `ERROR`          | `High`          |
-1. All values that are required to be mapped to an OCSF value are listed. Click {{< ui >}}+ Add Row{{< /ui >}} if you want to map additional values.
+1. All values that are required to be mapped to an OCSF value are listed. Click {{< ui >}}\+ Add Row{{< /ui >}} if you want to map additional values.
 1. Click {{< ui >}}Save Mapping{{< /ui >}}.
 
 [1]: https://schema.ocsf.io/

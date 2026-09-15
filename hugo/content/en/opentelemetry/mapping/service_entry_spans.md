@@ -12,17 +12,22 @@ further_reading:
 ## Overview
 Datadog uses [service-entry spans][1] throughout the platform for features such as [Trace Metrics][2] and the [APM Trace Explorer][3]. This convention is unique to Datadog, but can be mapped from the [`SpanKind`][4] attribute in OpenTelemetry by following the opt-in guide below.
 
-## Requirements
-
-- OTel Collector Contrib v0.100.0 or greater
-- Datadog Agent v7.53.0 or greater
-
 ## Setup
 
-Enable the config option based on your ingestion path:
+Requirements and configuration depend on your ingestion path:
 
 {{< tabs >}}
-{{% tab "OTel Collector and Datadog Exporter" %}}
+{{% tab "OTLP HTTP and span_metrics" %}}
+
+This setup requires OpenTelemetry Collector Contrib v0.154.0 or later.
+
+Use the [recommended OpenTelemetry Collector configuration][6]. Its `span_metrics` dimensions enable Datadog to identify service-entry spans and operation names without additional configuration.
+
+[6]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
+{{% /tab %}}
+{{% tab "Datadog Exporter and Connector" %}}
+
+This setup requires OpenTelemetry Collector Contrib v0.100.0 or later.
 
 The new service-entry span identification logic can be enabled by setting the `traces::compute_top_level_by_span_kind` config option to true in the [Datadog exporter][2] and [Datadog connector][1]. This config option needs to be enabled in both the exporter and connector if both components are being used.
 
@@ -31,9 +36,11 @@ The new service-entry span identification logic can be enabled by setting the `t
 {{% /tab %}}
 {{% tab "OTLP ingest pipeline in the Datadog Agent" %}}
 
+This setup requires Datadog Agent v7.53.0 or later.
+
 The new service-entry span identification logic can be enabled by adding `"enable_otlp_compute_top_level_by_span_kind"` to [apm_config.features][1] in the Datadog Agent config.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/7.53.0/pkg/config/config_template.yaml#L1585-L1591
+[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
 

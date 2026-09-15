@@ -36,7 +36,7 @@ Enabling a default rule applies `team` or `system` to all telemetry of services 
 
 Custom rules let you target a specific set of services and configure exactly how each tag value is sourced and applied.
 
-1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}+ Add Rule{{< /ui >}}.
+1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}\+ Add Rule{{< /ui >}}.
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select {{< ui >}}Build Advanced Query{{< /ui >}}.
    {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
    - Select {{< ui >}}Add Condition{{< /ui >}} to add an `AND` condition to your query.
@@ -66,6 +66,7 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 - **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.
 - **Interaction with remapping rules**: Tag enrichment rules are applied after service remapping rules. If a service remapping rule modifies the `service` tag, enrichment uses the updated service name when looking up IDP metadata.
+- **Primary tags** Tag enrichment applies after primary tags resolution, so enriched tags cannot be used as primary tags.
 
 ## Further reading
 

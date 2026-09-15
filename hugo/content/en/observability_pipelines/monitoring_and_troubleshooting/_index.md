@@ -1,5 +1,6 @@
 ---
 title: Monitoring and Troubleshooting
+description: Find links to Worker CLI commands, pipeline monitoring, usage metrics, and troubleshooting resources for Observability Pipelines.
 disable_toc: false
 ---
 

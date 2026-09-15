@@ -26,6 +26,8 @@ When AI-native SAST is enabled, its default rulesets run for the supported langu
 | Language | Ruleset |
 | --- | --- |
 | C# | `csharp-ai_sast` |
+| C++ | `cpp-ai_sast` |
+| Dart | `dart-ai_sast` |
 | Elixir | `elixir-ai_sast` |
 | Go | `go-ai_sast` |
 | Java | `java-ai_sast` |
@@ -35,7 +37,10 @@ When AI-native SAST is enabled, its default rulesets run for the supported langu
 | Python | `python-ai_sast` |
 | Ruby | `ruby-ai_sast` |
 | Rust | `rust-ai_sast` |
+| Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
+
+AI-native SAST rule IDs use the format `datadog/<rule-name>` (for example, `datadog/typescript-promptinjection`). To target a specific AI-native SAST rule in `rule-configs` or a `no-dd-sa` comment, use the full rule ID, including the `datadog/` prefix.
 
 The `use-default-rulesets` setting applies to both traditional SAST and AI-native SAST rulesets. If you set `use-default-rulesets: false`, include every traditional and AI-native SAST ruleset that you want to run. For example, the following configuration runs the Ruby security and AI-native SAST rulesets:
 

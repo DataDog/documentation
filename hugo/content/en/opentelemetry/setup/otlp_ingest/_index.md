@@ -14,15 +14,11 @@ further_reading:
 
 ## Overview
 
-For production workloads, Datadog recommends sending OpenTelemetry data through a [Datadog Agent][1] or [OpenTelemetry Collector with the Datadog Exporter][2]. These components provide metadata enrichment, signal normalization, and centralized sampling.
-
-<div class="alert alert-info">You can also send data from an OpenTelemetry Collector without Datadog-specific components. This experience is <a href="https://www.datadoghq.com/product-preview/otel-native-instrumentation/">in Preview</a>.</div>
+For production workloads, Datadog recommends sending OpenTelemetry data through a [Datadog Agent][1] or [OpenTelemetry Collector][2]. These components provide metadata enrichment, signal processing, and centralized sampling. The recommended Collector setup exports telemetry to Datadog over OTLP.
 
 Use the direct OTLP intake endpoints on this page when deploying a Collector or Agent is not feasible. Examples include serverless functions, managed platforms that export telemetry on your behalf, and environments with strict resource constraints.
 
 {{< img src="/opentelemetry/setup/direct-ingest.png" alt="Diagram: OpenTelemetry SDK sends data directly to Datadog through the intake endpoint." style="width:100%;" >}}
-
-<div class="alert alert-danger">Host metadata sent to this endpoint does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
 Your setup depends on where your telemetry is coming from. Check the [Managed platforms][6] list first; if your platform has a dedicated endpoint, use it. Otherwise, use the serverless or signal-specific pages.
 
@@ -52,7 +48,7 @@ Datadog enforces a maximum payload size per request on each OTLP intake endpoint
 [2]: /opentelemetry/setup/collector_exporter/
 [3]: /opentelemetry/setup/otlp_ingest/logs/
 [4]: /opentelemetry/setup/otlp_ingest/metrics/
-[5]: /llm_observability/instrumentation/otel_instrumentation/?tab=python#setup
+[5]: /llm_observability/instrument/otel_instrumentation/?tab=python#setup
 [6]: /opentelemetry/setup/otlp_ingest/managed_platforms/
 [7]: /opentelemetry/setup/otlp_ingest/serverless/
 [8]: /opentelemetry/setup/otlp_ingest/traces/
