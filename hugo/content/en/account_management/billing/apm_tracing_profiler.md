@@ -180,9 +180,9 @@ APM is billed on the basis of [hosts][5] deployed with agents sending traces and
 
 As of October 20, 2020, all existing App Analytics filters are automatically transitioned to Retention Filters. You can continue to let the filters remain unchanged or modify them as needed. Transitioned filters are marked with an *i* representing Legacy App Analytics Filters within the [retention filters][3] page.
 
-**8. How do you estimate your ingested or indexed span volume?**
+**8. How do you estimate your ingested span volume or indexed span count?**
 
-Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.ingested_spans` for monitoring ingested and indexed span volume. More information is available in the [Usage Metrics][14] documentation.
+Datadog provides the metrics `datadog.estimated_usage.apm.ingested_bytes` and `datadog.estimated_usage.apm.indexed_spans` for monitoring ingested span volume and indexed span counts. More information is available in the [Usage Metrics][14] documentation.
 
 **9. Is the Continuous Profiler available as a standalone product?**
 

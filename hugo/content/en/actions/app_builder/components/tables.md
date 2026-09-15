@@ -44,7 +44,7 @@ One common use case is filtering a table component using the value in a text inp
 
 For example, if you want to list your dashboards in a table that you can filter using a text input component, you could do the following:
 
-1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Add a new query using the {{< ui >}}\+{{< /ui >}} button.
 1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component.
@@ -62,7 +62,7 @@ Another common use case is filtering a table using a select component.
 
 For example, if you want to list your dashboards in a table that you can filter using a select component, you could do the following:
 
-1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Add a new query using the {{< ui >}}\+{{< /ui >}} button.
 1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a select component to your app. Name it `selectInput`.
 1. Add a table component.
@@ -78,7 +78,7 @@ You can select a value from the select component and the rows of table are filte
 
 If you want to filter the results of a query itself, then use those results in your table, perform the following steps:
 
-1. Add a new query using the {{< ui >}}+{{< /ui >}} button.
+1. Add a new query using the {{< ui >}}\+{{< /ui >}} button.
 1. Search for "list dashboards" and click the {{< ui >}}List Dashboards{{< /ui >}} action. Name your query `listDashboards0`.
 1. Add a text input or search component to your app. Name it `searchInput`.
 1. Add a table component and set its {{< ui >}}data source{{< /ui >}} property to the query that you added.

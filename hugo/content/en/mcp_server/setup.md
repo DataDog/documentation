@@ -49,7 +49,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 Install the [Datadog Connector](https://claude.ai/directory/connectors/datadog) from the Claude Connectors Directory. The official connector is the recommended way to connect Datadog to Claude (including Claude Cowork) and includes MCP Apps for in-product visualizations. If you previously added Datadog as a custom connector, remove it to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-1. In Claude, click the {{< ui >}}+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
+1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 1. Find **Datadog** in the directory and enable the connector.
 1. Complete the OAuth login flow when prompted.
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
@@ -78,7 +78,9 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 
 {{% tab "Claude Code" %}}
 
-Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin). If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
+Install the Datadog plugin from the [official Anthropic Plugin Marketplace](https://code.claude.com/docs/en/discover-plugins#official-anthropic-marketplace). The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see the [plugin repository](https://github.com/datadog-labs/claude-code-plugin).
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Claude Code configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. Install the Datadog plugin:
@@ -166,7 +168,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Copilot CLI" %}}
 
-Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository. If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration before installing the plugin to avoid conflicts.
+Install the Datadog plugin from the [`awesome-copilot`](https://awesome-copilot.github.com/) plugin marketplace. The plugin packages the Datadog MCP Server with bundled skills and auto-updates when new plugin versions ship. For more details, see Datadog's [copilot-plugin](https://github.com/datadog-labs/copilot-plugin) repository.
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Copilot configuration before installing the plugin to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 1. Install the Datadog plugin:
@@ -215,7 +219,9 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 {{% tab "Cursor" %}}
 
-Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources. If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
+Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin includes the Datadog MCP Server and other resources.
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from the IDE's configuration to avoid conflicts.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. You can install the plugin from the Cursor Marketplace or from within Cursor:
@@ -326,6 +332,30 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 [3]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "Grok Build" %}}
+
+Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin packages the Datadog MCP Server with auto-updates when new plugin versions ship. For more details, see the [plugin marketplace repository][1].
+
+**Note**: If you previously installed the Datadog MCP Server manually, remove it from your Grok Build configuration to avoid conflicts.
+
+[1]: https://github.com/xai-org/plugin-marketplace
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+1. In Grok Build, type `/marketplace` to open the Marketplace catalog. Under xAI Official, find and install the Datadog plugin.
+
+1. Open the **MCP Servers** tab or type `/mcps`. Under **Plugin: datadog**, find **datadog-grok** and press `i` to authenticate. Select your [Datadog site][2] and complete the OAuth login flow.
+
+1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
+
+[2]: /getting_started/site/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{% /tab %}}
 
 {{% tab "JetBrains IDEs" %}}
@@ -680,6 +710,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
+- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
@@ -695,7 +726,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `product-analytics`: Tools for interacting with [Product Analytics][41] queries
 - `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
-- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, exploring metrics, managing retention filters, and managing custom RUM metrics
+- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
@@ -707,7 +738,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
-- `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
 ## Supported clients
@@ -721,6 +751,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [Gemini CLI][50] | Google | |
+| [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
 | [JetBrains IDEs][18] | JetBrains | [Datadog plugin][18] recommended. |
@@ -762,6 +793,22 @@ For most users, OAuth 2.0 is the recommended authentication method, and your MCP
 ### OAuth 2.0 (recommended)
 
 Most clients complete the OAuth 2.0 flow automatically during setup. Select your client at the top of this page for instructions. With OAuth, you don't manage long-lived credentials directly. For details, see the [MCP authorization specification][14].
+
+#### Custom subdomains
+
+If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?subdomain=&lt;SUBDOMAIN&gt;</code></pre>
+
+To combine `subdomain` with [toolsets](#toolsets) or other query parameters, separate them with `&`:
+
+<pre><code>{{< region-param key="mcp_server_endpoint" >}}?subdomain=&lt;SUBDOMAIN&gt;&amp;toolsets=apm,llmobs</code></pre>
+
+[17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
+{{< /site-region >}}
 
 ### Personal or Service Access Token
 
@@ -938,7 +985,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [57]: /real_user_monitoring/
 [58]: /getting_started/profiler/
 [59]: https://chatgpt.com/
-[60]: https://www.datadoghq.com/product-preview/mcp-codexec/
 [61]: https://partners.datadoghq.com/s/login/SelfRegister
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
@@ -949,3 +995,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
 [70]: /account_management/audit_trail/
+[71]: https://x.ai/build 
+[72]: https://github.com/xai-org/plugin-marketplace 

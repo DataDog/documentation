@@ -54,8 +54,8 @@ ci-dessous pour plus de détails.
 |---|---|---|---|
 | **How to Enable** | Enabled by default | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
-| **Remote Configuration Required?** | Yes | Yes | No |
+| **Versions minimales du traceur :** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
+| **Remote Configuration requis ?** | Oui | Oui | Non |
 
 Pour activer Exception Replay in-app, accédez à la page Exception Replay {{< ui >}}Settings{{< /ui >}} dans Error Tracking, puis sélectionnez
 l'environnement ou le service souhaité, puis activez-le sur {{< ui >}}Enabled{{< /ui >}}.
