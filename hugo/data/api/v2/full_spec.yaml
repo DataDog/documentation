@@ -22529,6 +22529,7 @@ components:
           type: string
       type: object
     ContentEncoding:
+      default: gzip
       description: HTTP header used to compress the media-type.
       enum:
         - identity
