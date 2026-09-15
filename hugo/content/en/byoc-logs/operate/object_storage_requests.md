@@ -34,15 +34,18 @@ The 10:1 fan-in means every generation produces 10x fewer splits than the one be
 
 The following estimates assume:
 
-- A **4-vCPU indexer** ingesting ~3 TB/day with **5 indexing pipelines**
+- **5 indexing pipelines** per 4 indexer vCPUs, or 1.25 pipelines per vCPU
 - The default 30-second commit timeout
+- **2 indexer vCPUs per TB/day**, the starting point from the [Cluster Sizing][1] guide
 - A PUT price of **$0.005 per 1,000 requests** (S3 Standard, `us-east-1`)
 
-| Daily volume | Indexers (4 vCPUs each) | Total PUT requests per day | Approx. PUT cost per month |
-|-------------|-------------------------|----------------------------|----------------------------|
-| **3 TB/day** | 1 | ~20,000 | ~$3 |
-| **12 TB/day** | 4 | ~78,000 | ~$12 |
-| **120 TB/day** | 40 | ~780,000 | ~$117 |
+Together these work out to roughly **4,800 PUT requests per day for each indexer vCPU**:
+
+| Daily volume | Indexer total vCPUs | Total PUT requests per day | Approx. PUT cost per month |
+|-------------|--------------------|----------------------------|----------------------------|
+| **1 TB/day** | 2 | ~10,000 | ~$1 |
+| **10 TB/day** | 20 | ~96,000 | ~$14 |
+| **100 TB/day** | 200 | ~960,000 | ~$144 |
 
 <div class="alert alert-tip">
 PUT requests scale with <strong>pipeline count and commit cadence, not raw ingestion volume</strong>. Raising the commit timeout (for example, to 60 seconds) roughly halves the request count, at the cost of higher search latency.
@@ -51,3 +54,5 @@ PUT requests scale with <strong>pipeline count and commit cadence, not raw inges
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /byoc-logs/operate/sizing/#sizing-examples
