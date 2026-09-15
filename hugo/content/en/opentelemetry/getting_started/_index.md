@@ -31,7 +31,7 @@ For a new OpenTelemetry Collector configuration, start with the recommended OTLP
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/opentelemetry/setup/collector_exporter/" >}}
     <h3>Set up the OpenTelemetry Collector</h3>
-    Configure the OpenTelemetry Collector Contrib distribution to send telemetry to Datadog with the recommended OTLP HTTP exporter and <code>span_metrics</code> connector setup.
+    Configure the OpenTelemetry Collector to send telemetry to Datadog with the recommended OTLP HTTP exporter and <code>span_metrics</code> connector setup.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/getting_started/datadog_example" >}}
     <h3>Explore a Datadog Exporter example</h3>
