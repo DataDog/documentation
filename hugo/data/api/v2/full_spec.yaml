@@ -112246,6 +112246,689 @@ components:
       type: string
       x-enum-varnames:
         - SNAPSHOTS
+    SnowflakeAccountUsageMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Account-level usage metrics read from the Snowflake `ACCOUNT_USAGE` schema, covering storage usage, credit consumption, and query activity.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Account-level usage metrics read from the Snowflake `ACCOUNT_USAGE` schema, covering storage usage, credit consumption, and query activity.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the account usage metrics dataflow. Only the fields provided are changed.
+      properties:
+        account_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. Set to `true` to aggregate the past 24 hours on a rolling basis, or `false` to aggregate the current day so far. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the account usage metrics dataflow.
+      properties:
+        account_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. When `true`, metrics aggregate the past 24 hours on a rolling basis; when `false`, they aggregate the current day so far.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Cost data aggregated from the Snowflake `ORGANIZATION_USAGE` schema. [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) must be enabled for your organization while this dataflow is enabled. Any request that enables this dataflow without Cloud Cost Management is rejected with a `422` response. The Snowflake role also needs the ORGANIZATION_BILLING_VIEWER database role to read the underlying cost views; without that role this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        Cost data aggregated from the Snowflake `ORGANIZATION_USAGE` schema. Requires [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) to be set up for your organization, and the ORGANIZATION_BILLING_VIEWER database role on the Snowflake role; without both this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Cloud Cost Management dataflow. Only the fields provided are changed.
+      properties:
+        query_tags:
+          description: >-
+            Snowflake query tags to ingest, so that cost data can be broken down by them in Cloud Cost Management. Provide the tag names as a comma-separated list without spaces, using only letters, digits, underscores, dots, and hyphens. Datadog does not collect query tags by default.
+          example: env,team,cost_center
+          pattern: "^([a-zA-Z0-9_.-]+(,[a-zA-Z0-9_.-]+)*)?$"
+          type: string
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the Cloud Cost Management dataflow.
+      properties:
+        query_tags:
+          description: >-
+            Snowflake query tags ingested as a comma-separated list of tag names, so that cost data can be broken down by them in Cloud Cost Management.
+          example: env,team,cost_center
+          type: string
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Snowflake databases so you can explore how data flows and detect and resolve quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowResponse:
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Snowflake databases so you can explore how data flows and detect and resolve quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Data Observability dataflow. Only the fields provided are changed.
+      properties:
+        do_table_crawler_cron:
+          description: >-
+            Cron expression setting how often Datadog crawls your Snowflake table metadata. It takes the five standard fields, with the restriction that the month must be `*` and that the day of the month and the day of the week cannot both be constrained. Common values are hourly (`0 * * * *`) and daily (`0 0 * * *`). Defaults to hourly (`0 * * * *`).
+          example: "0 */6 * * *"
+          type: string
+        sync_snowflake_system_database:
+          description: >-
+            Whether metadata from the Snowflake `SNOWFLAKE` system database is included in Data Observability alongside your own databases. Defaults to `true`.
+          example: true
+          type: boolean
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse:
+      description: Settings of the Data Observability dataflow.
+      properties:
+        do_table_crawler_cron:
+          description: Cron expression setting how often Datadog crawls your Snowflake table metadata.
+          example: "0 */6 * * *"
+          type: string
+        sync_snowflake_system_database:
+          description: >-
+            Whether metadata from the Snowflake `SNOWFLAKE` system database is included in Data Observability alongside your own databases.
+          example: true
+          type: boolean
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Records from your Snowflake event tables, used to monitor application behavior and identify issues. `enabled` turns the dataflow on and off as a whole, and the per-record-type toggles in `settings` select which kinds of record it collects while it is on. The Snowflake role needs usage granted on the database, the schema, and the event table itself; without those grants this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowResponse:
+      description: >-
+        Records from your Snowflake event tables, used to monitor application behavior and identify issues. `enabled` turns the dataflow on and off as a whole, and the per-record-type toggles in `settings` select which kinds of record it collects while it is on. The Snowflake role needs usage granted on the database, the schema, and the event table itself; without those grants this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: >-
+        Settings of the event table dataflow. Each record type is collected independently so that you can control ingestion costs, and every record type is ingested into Datadog as logs tagged with its `record_type`. Only the fields provided are changed.
+      properties:
+        event_table_events_enabled:
+          description: >-
+            Whether records with a `record_type` of `event` are collected. Defaults to `false`.
+          example: true
+          type: boolean
+        event_table_logs_enabled:
+          description: >-
+            Whether records with a `record_type` of `log` are collected. Defaults to `false`.
+          example: true
+          type: boolean
+        event_table_logs_interval_min:
+          description: >-
+            How often event table records are collected, in minutes. One of `5`, `15`, `30`, `60`, or `1440`. Defaults to `5`.
+          example: 15
+          format: int64
+          type: integer
+        event_table_span_events_enabled:
+          description: >-
+            Whether records with a `record_type` of `span_event` are collected. Defaults to `false`.
+          example: false
+          type: boolean
+        event_table_spans_enabled:
+          description: >-
+            Whether records with a `record_type` of `span` are collected. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowSettingsResponse:
+      description: >-
+        Settings of the event table dataflow. Each record type is collected independently so that you can control ingestion costs, and every record type is ingested into Datadog as logs tagged with its `record_type`.
+      properties:
+        event_table_events_enabled:
+          description: Whether records with a `record_type` of `event` are collected.
+          example: true
+          type: boolean
+        event_table_logs_enabled:
+          description: Whether records with a `record_type` of `log` are collected.
+          example: true
+          type: boolean
+        event_table_logs_interval_min:
+          description: How often event table records are collected, in minutes.
+          example: 15
+          format: int64
+          type: integer
+        event_table_span_events_enabled:
+          description: Whether records with a `record_type` of `span_event` are collected.
+          example: false
+          type: boolean
+        event_table_spans_enabled:
+          description: Whether records with a `record_type` of `span` are collected.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Snowflake integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthRequest"
+    SnowflakeIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Snowflake integration account.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthResponse"
+    SnowflakeIntegrationAccountAuthenticationUpdate:
+      description: >-
+        Authentication for updating the Snowflake integration account. Exactly one method is set. An update replaces the authentication object entirely, so it requires the same fields as creating an account.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthRequest"
+    SnowflakeIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Snowflake integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsRequest"
+        name:
+          description: |-
+            Human-readable name of the Snowflake integration account. Must be
+            unique within your Datadog organization.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    SnowflakeIntegrationAccountCreateData:
+      description: Data envelope for creating a Snowflake integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    SnowflakeIntegrationAccountCreateRequest:
+      description: Request payload to create a Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthRequest:
+      additionalProperties: false
+      description: >-
+        RSA key pair authentication, the only method Snowflake integration accounts support. Generate an RSA key pair and assign the public key to the Snowflake user named in `settings.username`. Because an update replaces this object entirely, every required field must be sent again on each update, even when only one of them is changing.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthType"
+        private_key:
+          description: The private key, in PEM format.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        private_key_name:
+          description: Name that distinguishes this private key from other keys in Datadog.
+          example: my-rsa-key
+          type: string
+        private_key_passphrase:
+          description: >-
+            Passphrase that decrypts the private key. Provide it only when the key is encrypted. Because an update replaces the authentication object entirely, omitting it removes any stored passphrase, so an encrypted key must always be sent together with its passphrase.
+          example: your-private-key-passphrase
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - private_key_name
+        - private_key
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthResponse:
+      description: The RSA key pair authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthType"
+        private_key_name:
+          description: Name that distinguishes this private key from other keys in Datadog.
+          example: my-rsa-key
+          type: string
+      required:
+        - auth_type
+        - private_key_name
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthType:
+      default: snowflake-private-key
+      description: The authentication method type.
+      enum:
+        - snowflake-private-key
+      example: snowflake-private-key
+      type: string
+      x-enum-varnames:
+        - SNOWFLAKE_PRIVATE_KEY
+    SnowflakeIntegrationAccountResponse:
+      description: Response payload for a single Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountResponseAttributes:
+      description: Attributes of a Snowflake integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Snowflake integration account.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    SnowflakeIntegrationAccountResponseData:
+      description: Data envelope of a Snowflake integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Snowflake integration account.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    SnowflakeIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Snowflake integration account.
+      properties:
+        snowflake_account_identifier:
+          description: >-
+            Identifier of the Snowflake account to monitor, either as `organization-account` or as the legacy `account_name.region_id.cloud_provider` account locator. An account identifier can be configured once per Datadog organization; reusing one is rejected with a `422` response. Accounts reached through AWS PrivateLink are not supported.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: >-
+            Snowflake user Datadog authenticates as. Create a dedicated user for Datadog and grant it a role with access to the data you want to collect.
+          example: datadog_user
+          type: string
+      required:
+        - snowflake_account_identifier
+        - username
+      type: object
+    SnowflakeIntegrationAccountSettingsResponse:
+      description: Settings configured on the Snowflake integration account.
+      properties:
+        snowflake_account_identifier:
+          description: Identifier of the Snowflake account being monitored.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: Snowflake user Datadog authenticates as.
+          example: datadog_user
+          type: string
+      required:
+        - snowflake_account_identifier
+        - username
+      type: object
+    SnowflakeIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Snowflake integration account. Only the fields provided are changed.
+      properties:
+        snowflake_account_identifier:
+          description: >-
+            Identifier of the Snowflake account to monitor, either as `organization-account` or as the legacy `account_name.region_id.cloud_provider` account locator. An account identifier can be configured once per Datadog organization; reusing one is rejected with a `422` response. Accounts reached through AWS PrivateLink are not supported.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: >-
+            Snowflake user Datadog authenticates as. Create a dedicated user for Datadog and grant it a role with access to the data you want to collect.
+          example: datadog_user
+          type: string
+      type: object
+    SnowflakeIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Snowflake integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`. `authentication` is the exception to partial updates: when provided, it is replaced entirely, so it must carry every field that creating an account requires.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsRequest"
+        name:
+          description: |-
+            Human-readable name of the Snowflake integration account. Must be
+            unique within your Datadog organization.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsUpdate"
+      type: object
+    SnowflakeIntegrationAccountUpdateData:
+      description: Data envelope for updating a Snowflake integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Snowflake integration account to update.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SnowflakeIntegrationAccountUpdateRequest:
+      description: Request payload to update a Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountsResponse:
+      description: Response payload for a list of Snowflake integration accounts.
+      properties:
+        data:
+          description: List of Snowflake integration accounts.
+          items:
+            $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Snowflake, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it, and use `settings` to configure what it collects. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow reads from Snowflake as the user in `settings.username`, so that user's role must be granted access to the underlying views; a dataflow enabled without those grants is stored but collects no data.
+      properties:
+        snowflake-account-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowRequest"
+        snowflake-cloud-cost-metrics:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowRequest"
+        snowflake-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowRequest"
+        snowflake-event-table-logs:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowRequest"
+        snowflake-organization-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowRequest"
+        snowflake-query-history-logs:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowRequest"
+        snowflake-security-logs:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowRequest"
+        snowflake-task-history-logs:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowRequest"
+      type: object
+    SnowflakeIntegrationDataflowsResponse:
+      description: Data Datadog collects from Snowflake, keyed by dataflow id.
+      properties:
+        snowflake-account-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowResponse"
+        snowflake-cloud-cost-metrics:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowResponse"
+        snowflake-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowResponse"
+        snowflake-event-table-logs:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowResponse"
+        snowflake-organization-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowResponse"
+        snowflake-query-history-logs:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowResponse"
+        snowflake-security-logs:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowResponse"
+        snowflake-task-history-logs:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowResponse"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Organization-level usage metrics read from the Snowflake `ORGANIZATION_USAGE` schema, covering the credit consumption of every account in the organization and the history of data transferred out of Snowflake. Reading that schema requires the ORGADMIN role; without it this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Organization-level usage metrics read from the Snowflake `ORGANIZATION_USAGE` schema, covering the credit consumption of every account in the organization and the history of data transferred out of Snowflake. Reading that schema requires the ORGADMIN role; without it this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the organization usage metrics dataflow. Only the fields provided are changed.
+      properties:
+        organization_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. Set to `true` to aggregate the past 24 hours on a rolling basis, or `false` to aggregate the current day so far. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the organization usage metrics dataflow.
+      properties:
+        organization_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. When `true`, metrics aggregate the past 24 hours on a rolling basis; when `false`, they aggregate the current day so far.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Per-query logs that let you identify long-running, poorly performing, and expensive queries.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowResponse:
+      description: >-
+        Per-query logs that let you identify long-running, poorly performing, and expensive queries.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the query history logs dataflow. Only the fields provided are changed.
+      properties:
+        join_query_history_with_access_history_enabled:
+          description: >-
+            Whether query logs are joined with Snowflake access history, which adds the objects each query read and wrote so you can follow how data is used and where it came from. Defaults to `false`.
+          example: true
+          type: boolean
+        query_history_logs_interval_min:
+          description: >-
+            How often query history logs are collected, in minutes. One of `5`, `15`, `30`, `60`, `720`, or `1440`. Defaults to `5`.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the query history logs dataflow.
+      properties:
+        join_query_history_with_access_history_enabled:
+          description: >-
+            Whether query logs are joined with Snowflake access history, which adds the objects each query read and wrote so you can follow how data is used and where it came from.
+          example: true
+          type: boolean
+        query_history_logs_interval_min:
+          description: How often query history logs are collected, in minutes.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Security logs from the Snowflake `ACCOUNT_USAGE` schema, for analyzing the security of your Snowflake account and running threat detection with [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowResponse:
+      description: >-
+        Security logs from the Snowflake `ACCOUNT_USAGE` schema, for analyzing the security of your Snowflake account and running threat detection with [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the security logs dataflow. Only the fields provided are changed.
+      properties:
+        security_logs_interval_min:
+          description: >-
+            How often security logs are collected, in minutes. One of `5`, `15`, `30`, `60`, `360`, `720`, or `1440`. Defaults to `5`.
+          example: 60
+          format: int64
+          type: integer
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the security logs dataflow.
+      properties:
+        security_logs_interval_min:
+          description: How often security logs are collected, in minutes.
+          example: 60
+          format: int64
+          type: integer
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Execution logs for your scheduled Snowflake tasks, covering start time, end time, status, and any error message.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowResponse:
+      description: >-
+        Execution logs for your scheduled Snowflake tasks, covering start time, end time, status, and any error message.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the task history logs dataflow. Only the fields provided are changed.
+      properties:
+        task_history_logs_interval_min:
+          description: >-
+            How often task history logs are collected, in minutes. One of `5`, `15`, `30`, `60`, or `1440`. Defaults to `5`.
+          example: 30
+          format: int64
+          type: integer
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the task history logs dataflow.
+      properties:
+        task_history_logs_interval_min:
+          description: How often task history logs are collected, in minutes.
+          example: 30
+          format: int64
+          type: integer
+      type: object
     SoftwareCatalogTriggerWrapper:
       description: "Schema for a Software Catalog-based trigger."
       properties:
@@ -166750,6 +167433,385 @@ paths:
           - manage_integrations
       x-unstable: |-
         **Note**: This endpoint is in public beta.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/snowflake/accounts:
+    get:
+      description: List Snowflake integration accounts.
+      operationId: ListSnowflakeIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: snowflake-private-key
+                            private_key_name: my-rsa-key
+                          dataflows:
+                            snowflake-account-usage-metrics:
+                              enabled: true
+                              settings:
+                                account_usage_metrics_aggregate_last_24h: false
+                            snowflake-cloud-cost-metrics:
+                              enabled: true
+                              settings:
+                                query_tags: env,team,cost_center
+                            snowflake-data-observability-quality-monitoring:
+                              enabled: true
+                              settings:
+                                do_table_crawler_cron: "0 */6 * * *"
+                                sync_snowflake_system_database: true
+                            snowflake-event-table-logs:
+                              enabled: true
+                              settings:
+                                event_table_events_enabled: true
+                                event_table_logs_enabled: true
+                                event_table_logs_interval_min: 15
+                                event_table_span_events_enabled: false
+                                event_table_spans_enabled: false
+                            snowflake-organization-usage-metrics:
+                              enabled: true
+                              settings:
+                                organization_usage_metrics_aggregate_last_24h: false
+                            snowflake-query-history-logs:
+                              enabled: true
+                              settings:
+                                join_query_history_with_access_history_enabled: true
+                                query_history_logs_interval_min: 15
+                            snowflake-security-logs:
+                              enabled: true
+                              settings:
+                                security_logs_interval_min: 60
+                            snowflake-task-history-logs:
+                              enabled: true
+                              settings:
+                                task_history_logs_interval_min: 30
+                          name: prod-snowflake
+                          settings:
+                            snowflake_account_identifier: myorg-myaccount
+                            username: datadog_user
+                        id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Snowflake integration accounts
+      tags:
+        - Snowflake Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Snowflake integration account.
+      operationId: CreateSnowflakeIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake-private-key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/snowflake/accounts/{account_id}:
+    delete:
+      description: Delete a Snowflake integration account.
+      operationId: DeleteSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Snowflake integration account.
+      operationId: GetSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake-private-key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Snowflake integration account. Only the fields provided are changed.
+      operationId: UpdateSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake-private-key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/twilio/accounts:
     get:
@@ -233519,6 +234581,15 @@ tags:
       description: For more information about the Datadog Slack integration, see the integration page.
       url: https://docs.datadoghq.com/integrations/slack/
     name: Slack Integration
+  - description: |-
+      Manage your Datadog Snowflake integration accounts and account resources
+      directly through the Datadog API. See the
+      [Snowflake integration page](https://docs.datadoghq.com/integrations/snowflake_web/) for
+      more information.
+    externalDocs:
+      description: Snowflake integration.
+      url: https://docs.datadoghq.com/integrations/snowflake_web/
+    name: Snowflake Integration
   - description: |-
       API to create, update, retrieve, and delete Software Catalog entities.
     externalDocs:
