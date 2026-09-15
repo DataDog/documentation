@@ -4,10 +4,13 @@ aliases:
 - /bits_ai/bits_ai_sre/help_bits_learn/
 - /bits_ai/bits_investigation/help_bits_learn/
 - /bits_ai/bits_ai_sre/knowledge_sources/
-
+further_reading:
+- link: "/bits_ai/bits_investigation/improve_accuracy/"
+  tag: "Documentation"
+  text: "Improve Bits Investigation Accuracy"
 ---
 
-Bits Investigation improves over time by combining four distinct sources of knowledge:
+Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
 - [**Skills:**](#skills) Reusable procedures Bits can invoke during an investigation
@@ -132,3 +135,7 @@ To manage memories, including viewing and deleting them, go to the {{< ui >}}Mem
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
 [3]: https://app.datadoghq.com/actions/skills
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
