@@ -22,16 +22,16 @@ The Migration App translates Splunk Processing Language (SPL) into Datadog query
 
 | Tool | Use case |
 |------|-----------|
-| [Query Translator][1] | Translate a single SPL query and see the Datadog equivalent with an explanation of how the translation was built. |
+| [Single Translation][1] | Translate a single SPL query and see the Datadog equivalent with an explanation of how the translation was built. |
 | [Batch Migration][2] | Import batches of Splunk alerts and dashboards, review the translated results, and publish them as Datadog monitors and dashboards. |
 
 The Migration App parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Translate a single query
 
-Use the Query Translator as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
+Use Single Translation as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
 
-1. Go to [Logs > Query Translator][1].
+1. Go to [Logs > Single Translation][1].
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
@@ -113,11 +113,13 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 
 ### Import your assets into Datadog
 
-1. Go to [Logs > Batch Migration][2] and click {{< ui >}}Start a new migration{{< /ui >}}.
-2. In {{< ui >}}Export your assets from Splunk{{< /ui >}}, confirm that you have your CSV exports.
-3. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
-4. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
-5. In {{< ui >}}More info{{< /ui >}}, give the batch a name that identifies it later, then click {{< ui >}}Start migration{{< /ui >}}.
+1. Go to [Logs > Batch Migration][2] and click {{< ui >}}Start migration{{< /ui >}}.
+2. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
+3. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
+4. In {{< ui >}}Name your import{{< /ui >}}, give the batch a name that identifies it later.
+5. Click {{< ui >}}Import{{< /ui >}}.
+
+{{< img src="logs/splunk_migration/import-wizard.png" alt="The Import page, with steps for uploading assets from Splunk, uploading a macros file, and naming the import" style="width:100%;" >}}
 
 Translation starts as soon as the batch is created and runs in the background. You can close the page and come back to it.
 
