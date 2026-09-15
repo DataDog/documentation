@@ -35,19 +35,26 @@ The following table provides baseline configurations for common daily log volume
 As a starting point, plan for approximately:
 
 - 2 indexer vCPUs per TB of logs ingested per day
-- 1 compactor vCPU per TB of logs ingested per day
+- 1 compactor vCPU per 2 TB of logs ingested per day
 
 Searcher capacity depends on query concurrency, query complexity, and the amount of data scanned. It should therefore be sized based on the expected search workload rather than ingestion volume alone. Analytics-heavy workloads may require up to twice the baseline search capacity shown below.
 
 These recommendations assume modern x86 CPUs, such as those used in AWS M6 instance types, or equivalent CPUs from other cloud providers. ARM-based CPUs, such as AWS Graviton, may provide better cost efficiency at comparable throughput.
 
-The examples below assume 4 vCPUs per indexer and compactor pod and 8 vCPUs per searcher pod. Pod counts are rounded up to the nearest whole number.
+The examples below show the reference total vCPU capacity for each component.
 
-|   Daily volume | Indexer pods | Compactor pods | Searcher pods | Object storage (30-day retention, ~6× compression) |
-|---------------:|-------------:|---------------:|--------------:|---------------------------------------------------:|
-|   **1 TB/day** |            1 |              1 |             1 |                                              ~5 TB |
-|  **10 TB/day** |            5 |              3 |            10 |                                             ~50 TB |
-| **100 TB/day** |           50 |             25 |           100 |                                            ~500 TB |
+|   Daily volume | Indexer Total vCPUs | Compactor Total vCPUs | Searcher Total vCPUs |
+|---------------:|--------------------:|----------------------:|---------------------:|
+|   **1 TB/day** |                   2 |                   0.5 |                    4 |
+|  **10 TB/day** |                  20 |                     5 |                   40 |
+| **100 TB/day** |                 200 |                    50 |                  400 |
+
+Use the following per-pod CPU and memory allocations as a starting point for distributing the total capacity across pods.
+
+| Daily volume    | Indexer per Pod | Compactor per Pod | Searcher per Pod |
+|-----------------|----------------:|------------------:|-----------------:|
+| Up to 30 TB/day |  4 vCPUs, 16 GB |    4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
+| Above 30 TB/day |  8 vCPUs, 32 GB |    8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
 
 <div class="alert alert-info">
 <strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
@@ -57,14 +64,14 @@ The examples below assume 4 vCPUs per indexer and compactor pod and 8 vCPUs per 
 
 Indexers receive logs from Datadog Agents, then process, index, and store them as index files (called _splits_) in object storage. Proper sizing is critical for maintaining ingestion throughput and ensuring your cluster can handle your log volume.
 
-| Specification        | Recommendation                 | Notes                                                                                                                                                                                                                                                                                                                                                               |
-|----------------------|--------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Performance**      | 8 MB/s per vCPU                | Baseline throughput to determine initial sizing. Actual performance depends on log characteristics (size, number of attributes, nesting level)                                                                                                                                                                                                                      |
-| **Memory**           | 4 GB RAM per vCPU              |                                                                                                                                                                                                                                                                                                                                                                     |
-| **Minimum Pod Size** | 2 vCPUs, 8 GB RAM              | Recommended minimum for indexer pods                                                                                                                                                                                                                                                                                                                                |
-| **Storage Capacity** | At least 30 GB                 | Required for temporary data while creating and merging index files                                                                                                                                                                                                                                                                                                  |
+| Specification        | Recommendation                 | Notes                                                                                                                                                                                                                                                                                                                                                                  |
+|----------------------|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Performance**      | 8 MB/s per vCPU                | Baseline throughput to determine initial sizing. Actual performance depends on log characteristics (size, number of attributes, nesting level)                                                                                                                                                                                                                         |
+| **Memory**           | 4 GB RAM per vCPU              |                                                                                                                                                                                                                                                                                                                                                                        |
+| **Minimum Pod Size** | 2 vCPUs, 8 GB RAM              | Recommended minimum for indexer pods                                                                                                                                                                                                                                                                                                                                   |
+| **Storage Capacity** | At least 30 GB                 | Required for temporary data while creating and merging index files                                                                                                                                                                                                                                                                                                     |
 | **Storage Type**     | Network-attached block storage | For example: Amazon EBS gp3, Azure Managed Disks, or GCP Persistent Disk. Data is temporarily stored in a write-ahead log (WAL) before being uploaded to object storage. The WAL is not replicated, so using local (ephemeral) SSDs increases the risk of losing a few minutes of data if the disk fails. Network-attached block storage provides built-in redundancy. |
-| **Disk I/O**         | ~20 MB/s per vCPU              | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS). For example, the default Amazon EBS gp3 throughput of 125 MiB/s is sufficient for a 4-vCPU indexer.                                                                                                                                                                                |
+| **Disk I/O**         | ~20 MB/s per vCPU              | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS). For example, the default Amazon EBS gp3 throughput of 125 MiB/s is sufficient for a 4-vCPU indexer.                                                                                                                                                                                              |
 
 
 {{% collapse-content title="Example: Sizing for 100 TB of logs per day" level="h3" expanded=false %}}
@@ -95,11 +102,11 @@ The compactor merges small index splits into larger ones to reduce fragmentation
 
 The compactor merges small index splits into larger ones to reduce fragmentation and improve search efficiency. It also removes obsolete splits to reclaim storage.
 
-| Specification    | Recommendation    | Notes                                                        |
-|------------------|-------------------|--------------------------------------------------------------|
-| **Performance**  | 1 vCPU per TB/day | Baseline for initial sizing                                  |
-| **Memory**       | 4 GB RAM per vCPU |                                                              |
-| **Storage type** | Local SSD         | Instances with local SSDs, such as AWS M8gd, are recommended |
+| Specification    | Recommendation      | Notes                                                        |
+|------------------|---------------------|--------------------------------------------------------------|
+| **Performance**  | 1 vCPU per 2 TB/day | Baseline for initial sizing                                  |
+| **Memory**       | 4 GB RAM per vCPU   |                                                              |
+| **Storage type** | Local SSD           | Instances with local SSDs, such as AWS M8gd, are recommended |
 
 ## Searchers
 
@@ -135,6 +142,14 @@ To estimate your object storage requirements:
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
+
+The following examples assume a 30-day retention period and a 6x compression ratio:
+
+|   Daily volume | Object storage |
+|---------------:|---------------:|
+|   **1 TB/day** |          ~5 TB |
+|  **10 TB/day** |         ~50 TB |
+| **100 TB/day** |        ~500 TB |
 
 {{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h3" expanded=false %}}
 Assuming a 6x compression ratio:
