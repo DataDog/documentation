@@ -72,6 +72,7 @@ The authentication process uses the [AWS Security Token Service (STS)][1] to ver
 - Datadog Terraform provider version 3.70 or later.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+- The identity that creates the mapping has every permission assigned to the target Datadog user or service account.
 
 Setting up Workload Identity Federation for AWS involves two parts:
 1. [Configuring your AWS identity mapping in Datadog](#configure-aws-identity-mapping-in-datadog)
@@ -110,10 +111,31 @@ To create an identity mapping:
 
 <div class="alert alert-info">Prefer service accounts over user accounts to avoid tying access to individuals.</div>
 
+#### Using Terraform
+
+Use the [`datadog_aws_wif_persona_mapping` resource][7] to manage an identity mapping with Terraform. Set `account_identifier` to a user or service account email or handle. When Terraform manages the service account, use the `id` exported by `datadog_service_account`, which is the service account handle.
+
+```hcl
+resource "datadog_service_account" "terraform" {
+  email = "terraform-service-account@example.com"
+  name  = "Terraform service account"
+  roles = var.datadog_role_ids
+}
+
+resource "datadog_aws_wif_persona_mapping" "terraform" {
+  account_identifier = datadog_service_account.terraform.id
+  arn_pattern         = "arn:aws:sts::123456789012:assumed-role/terraform-runner/*"
+}
+```
+
+Terraform sends `arn_pattern` to Datadog unchanged. Specify an exact assumed-role ARN to match one session, or add a trailing `/*` to match every session for a specific role.
+
+<div class="alert alert-warning">Configure the provider with API and application keys when creating the initial mapping. The mapping must exist before the provider can authenticate with Workload Identity Federation, so a Workload Identity Federation configuration cannot bootstrap its own access.</div>
+
 #### Using the API
 
 ##### Map an AWS ARN to a Datadog user account
-For `account_identifier`, use the email shown in the user's Datadog profile.
+For `account_identifier`, use the email or handle shown in the user's Datadog profile. Do not use the user's UUID.
 
 **Example**: An API call that maps an AWS ARN to a Datadog user account, `john.doe@myorg.com`.
 
@@ -135,14 +157,14 @@ curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/
 ```
 
 ##### Map an AWS ARN to a Datadog service account
-For `account_identifier`, you can use either:
-- The service account's **UUID**: Go to {{< ui >}}Organization settings{{< /ui >}} > {{< ui >}}Service accounts{{< /ui >}}, click the service account you want to map, and copy the `service_account_id` from the URL. For example, if the URL ends in `/organization-settings/service-accounts?service_account_id=3fa85f64-5717-4562-b3fc-2c963f66afa6`, then use `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
-- The service account's **email address**: Use the email address shown in the service account's details.
+For `account_identifier`, use either:
+- The service account's **handle**. A service account handle is the same UUID shown as `service_account_id` in its URL and exported as `datadog_service_account.id` by Terraform.
+- The service account's **email address** shown in its details.
 
-**Example**: An API call that maps an AWS ARN to a Datadog service account using the UUID, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
+**Example**: An API call that maps an AWS ARN to a Datadog service account using the handle, `3fa85f64-5717-4562-b3fc-2c963f66afa6`.
 
 ```bash
-# Example: map an AWS ARN to a Datadog Service Account using UUID
+# Example: map an AWS ARN to a Datadog Service Account using its handle
 curl -X POST "{{< region-param key=dd_api code="true" >}}/api/v2/cloud_auth/aws/persona_mapping" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_API_KEY}" \
@@ -460,3 +482,4 @@ delegated_auth:
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
 [6]: https://app.datadoghq.com/organization-settings/workload-identity-federation
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/aws_wif_persona_mapping
