@@ -78,7 +78,7 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][1].
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
-You can populate Kubernetes Explorer by sending Kubernetes resource data directly to Datadog through OTLP HTTP. The setup uses the [`k8sobjects`][1] receiver and does not require the Datadog Agent or Datadog Exporter.
+You can populate Kubernetes Explorer by sending Kubernetes resource data directly to Datadog over OTLP HTTP. This setup uses the [`k8sobjects`][1] receiver and the OpenTelemetry Collector's OTLP HTTP exporter.
 
 The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. This setup does not require `kube-state-metrics` or a Prometheus server. To collect those metrics and populate Explorer, follow [Monitor Kubernetes with OpenTelemetry][6] instead.
 
@@ -139,6 +139,10 @@ extraEnvs:
       secretKeyRef:
         name: datadog-secret
         key: dd-site
+  - name: K8S_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
 
 presets:
   kubernetesObjects:
@@ -151,7 +155,7 @@ config:
       interval: 3m
 
   processors:
-    resourcedetection:
+    resource_detection:
       detectors: [k8s_api]
       override: false
     resource/add-cluster-name:
@@ -178,17 +182,17 @@ config:
     pipelines:
       logs:
         receivers: [k8sobjects]
-        processors: [resourcedetection, resource/add-cluster-name]
+        processors: [resource_detection, resource/add-cluster-name]
         exporters: [otlp_http]
 ```
 
-The `kubernetesObjects` preset configures the receiver, service account, and RBAC permissions. Keep the `3m` collection interval and the `k8s_api` detector, which identifies the cluster UID. The `logs` pipeline sends Kubernetes resource objects over OTLP; it does not collect application logs. The `orchestrator_explorer` option is specific to the Datadog Exporter and is not used in this setup.
+The `kubernetesObjects` preset configures the receiver, service account, and RBAC permissions. Keep the `3m` collection interval and the `k8s_api` detector. The detector uses `K8S_NODE_NAME` to identify the cluster UID. The `logs` pipeline sends Kubernetes resource objects over OTLP; it does not collect application logs.
 
 ##### Automatic cluster name detection (optional)
 
 If you prefer automatic cluster name detection, make these changes in `deployment-collector.yaml` before deploying:
 
-1. Add your provider's detector to `resourcedetection.detectors`, keeping `k8s_api`. Follow the configuration and permissions guidance for [EKS][12], [AKS][13], or [GKE][14], including enabling the `k8s.cluster.name` resource attribute.
+1. Add your provider's detector to `resource_detection.detectors`, keeping `k8s_api`. Follow the configuration and permissions guidance for [EKS][12], [AKS][13], or [GKE][14], including enabling the `k8s.cluster.name` resource attribute.
 2. Remove `resource/add-cluster-name` from both `config.processors` and the `logs` pipeline's `processors` list.
 
 #### 3. Deploy with Helm
@@ -279,7 +283,7 @@ For a complete application-telemetry Collector example, see the [DaemonSet colle
 
 You can populate the Kubernetes Explorer using the `opentelemetry-kube-stack` Helm chart instead of the Datadog Agent.
 
-The reference configuration in this tab uses the Datadog Exporter. For a new setup that sends Kubernetes resource data directly to Datadog over OTLP HTTP, use the **OpenTelemetry Collector** tab.
+<div class="alert alert-info">The reference configuration in this tab uses the Datadog Exporter. For new deployments, use the <strong>OpenTelemetry Collector</strong> tab to send Kubernetes resource data directly to Datadog over OTLP HTTP.</div>
 
 The [`opentelemetry-kube-stack`][1] Helm chart installs the OpenTelemetry Operator and manages collectors as `OpenTelemetryCollector` custom resources (CRs). Datadog maintains a reference [`values.yaml`][2] that configures two collectors:
 

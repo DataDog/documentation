@@ -124,9 +124,11 @@ kubectl create secret generic datadog-secret \
    - If the node Collector does not receive application traces, remove `datadog/connector`, the `traces` and `traces/sampling` pipelines, and `datadog/connector` from the `metrics` pipeline's receivers.
    - If the node Collector receives application traces, use the [recommended Collector configuration][18] to replace `datadog/connector` with the upstream `forward/traces_sample` and `span_metrics` connectors.
 
+   Keep the `datadog` extension and its entry under `service.extensions`. The extension reports Collector metadata used for host enrichment; it does not export telemetry.
+
 5. Make sure both Collectors report the same cluster name:
-   - To detect it automatically, configure the `resourcedetection` processor and its permissions for [EKS][14], [AKS][16], or [GKE][17].
-   - Otherwise, uncomment `resource/add-cluster-name` and replace `<YOUR_CLUSTER_NAME>` with the same value in both files. In each pipeline that uses `resourcedetection`, add `resource/add-cluster-name` immediately after it. Keep the other processors in place.
+   - To detect it automatically, keep `k8s_api` and your provider's detector under `resourcedetection.detectors`, and remove the other cloud-provider detectors. Configure the provider detector and its permissions for [EKS][14], [AKS][16], or [GKE][17].
+   - Otherwise, set `resourcedetection.detectors` to `[k8s_api]`. Uncomment `resource/add-cluster-name` and replace `<YOUR_CLUSTER_NAME>` with the same value in both files. In each pipeline that uses `resourcedetection`, add `resource/add-cluster-name` immediately after it. Keep the other processors in place.
 
 6. Run the following commands from the directory containing the values files:
 
