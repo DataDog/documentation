@@ -50,8 +50,6 @@ The Datadog Envoy integration for App and API Protection relies on features that
 
 ## Datadog Istio integration support
 
-<div class="alert alert-info">The Datadog Istio integration for App and API Protection is in Preview.</div>
-
 Only the Linux version and both the arm64 and arm64 architectures are supported.
 
 <div class="alert alert-info">If you would like to see support added for any of
