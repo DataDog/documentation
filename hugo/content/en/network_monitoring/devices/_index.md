@@ -5,7 +5,7 @@ aliases:
     - /network_performance_monitoring/devices/
 further_reading:
     - link: '/network_monitoring/devices/glossary'
-      tag: 'Doc'
+      tag: 'Documentation'
       text: 'NDM Terms and Concepts'
     - link: 'https://www.datadoghq.com/knowledge-center/network-monitoring/snmp-monitoring/'
       tag: 'Knowledge Center'
