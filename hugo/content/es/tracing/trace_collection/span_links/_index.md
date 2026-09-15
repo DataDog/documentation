@@ -1,67 +1,70 @@
 ---
-description: Correlaciona tramos en trazas (traces) y operaciones utilizando enlaces
-  de tramos de OpenTelemetry para complejos flujos de trabajo de sistemas distribuidos.
+description: Correlacione tramos entre trazas y operaciones mediante enlaces de tramo
+  de OpenTelemetry para flujos de trabajo complejos de sistemas distribuidos.
 further_reading:
 - link: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
   tag: Documentación
-  text: Enlaces de tramos de OpenTelemetry
+  text: Enlaces de tramo de OpenTelemetry
 - link: /tracing/trace_collection/otel_instrumentation/
   tag: Documentación
   text: Instrumentación personalizada con la API de OpenTelemetry
 - link: /tracing/trace_collection/custom_instrumentation/
   tag: Documentación
   text: Instrumentación personalizada con bibliotecas de Datadog
-title: Enlaces de tramos (spans)
+- link: https://www.datadoghq.com/blog/monitor-azure-functions-hosting-plans/
+  tag: Blog
+  text: Haga un seguimiento de Azure Functions en todos los planes de hospedaje con
+    Datadog
+title: Enlaces de tramo
 ---
+{{< img src="tracing/span_links/span_links_tab_2.png" alt="Pestaña de enlaces de tramo" style="width:90%;">}}
 
-{{< img src="tracing/span_links/span_links_tab_2.png" alt="Pestaña Enlaces de tramos" style="width:90%;">}}
+## Descripción general {#overview}
 
-## Información general
-
-Los enlaces de tramos son un [concepto de OpenTelemetry][5] y son parte de la [API de rastreo OpenTelemetry][2]. Datadog admite enlaces de tramos para:
+Los enlaces de tramo son un [concepto de OpenTelemetry][5] y parte de la [API de traza de OpenTelemetry][2]. Datadog admite enlaces de tramo para:
 
 - Aplicaciones instrumentadas con [SDK de OpenTelemetry][6].
-- Aplicaciones instrumentadas con [SDK Datadog][9].
+- Aplicaciones instrumentadas con [SDK de Datadog][9].
 
-Los enlaces de tramos correlacionan uno o más tramos que están causalmente relacionados pero no tienen una relación típica elemento principal-secundario. Estos enlaces pueden correlacionar tramos dentro de una misma traza o entre diferentes trazas.
+Los enlaces de tramo correlacionan uno o más tramos que están relacionados causalmente pero que no tienen una relación típica de padre-hijo. Estos enlaces pueden correlacionar tramos dentro de la misma traza o entre diferentes trazas.
 
-Los enlaces de tramos ayudan a rastrear operaciones en sistemas distribuidos, donde los flujos de trabajo a menudo se desvían de los patrones de ejecución lineales. Son útiles para rastrear el flujo de operaciones en sistemas que ejecutan solicitudes por lotes o eventos de procesos de forma asíncrona.
+Los enlaces de tramo ayudan a rastrear operaciones en sistemas distribuidos, donde los flujos de trabajo a menudo se desvían de los patrones de ejecución lineal. Son útiles para rastrear el flujo de operaciones en sistemas que ejecutan solicitudes en lotes o procesan eventos de forma asíncrona.
 
-Datadog admite enlaces de tramos prospectivos y retrospectivos, lo que permite a los usuarios visualizar y recorrer las relaciones de tramos entre trazas en ambas direcciones.
+Datadog admite enlaces de tramo tanto hacia adelante como hacia atrás, lo que permite a los usuarios visualizar y navegar por las relaciones de tramo entre trazas en ambas direcciones.
 
-- Enlaces prospectivos: Un tramo puede vincularse con otro que se produce más tarde en el tiempo, tanto si pertenece a la misma traza o a uno diferente. Esto te permite navegar desde operaciones anteriores a otras posteriores entre trazas.
-- Enlaces retrospectivos: Del mismo modo, un tramo puede vincularse con otro que haya ocurrido antes en el tiempo, tanto dentro de la misma traza como entre diferentes trazas. Esto te permite rastrear desde operaciones recientes a otras anteriores.
+- Enlaces hacia adelante: Un tramo puede vincularse a otro tramo que ocurre más tarde en el tiempo, ya sea que pertenezca a la misma traza o a una diferente. Esto le permite navegar desde operaciones anteriores a las posteriores entre trazas.
+- Enlaces hacia atrás: De manera similar, un tramo puede vincularse a un tramo que ocurrió anteriormente en el tiempo, ya sea dentro de la misma traza o entre diferentes trazas. Esto le permite rastrear desde operaciones posteriores a las anteriores.
 
-## Casos de uso común
+## Casos de uso comunes {#common-use-cases}
 
-Los enlaces de tramos son más aplicables en escenarios fan-in, en los que múltiples operaciones convergen en un único tramo. El único tramo vincula con múltiples operaciones convergentes.
+Los enlaces de tramo son más aplicables en escenarios de fan-in, donde múltiples operaciones convergen en un solo tramo. El único tramo se vincula a múltiples operaciones convergentes.
 
 Por ejemplo:
 
-- **Scatter-Gather y Map-Reduce**: Aquí, los enlaces de tramos rastrean y correlacionan varios procesos paralelos que convergen en un único proceso combinado. Conectan los resultados de estos procesos paralelos con su resultado colectivo.
+- **Scatter-Gather y Map-Reduce**: Aquí, los enlaces de tramo rastrean y correlacionan múltiples procesos paralelos que convergen en un único proceso combinado. Conectan los resultados de estos procesos paralelos con su resultado colectivo.
 
-- **Agregación de mensajes**: En sistemas como Kafka Streams, los enlaces de tramos conectan cada mensaje de un grupo de mensajes con su resultado agregado, mostrando cómo los mensajes individuales contribuyen al resultado final.
+- **Agregación de mensajes**: En sistemas como Kafka Streams, los enlaces de tramo conectan cada mensaje en un grupo de mensajes con su resultado agregado, mostrando cómo los mensajes individuales contribuyen al resultado final.
 
-- **Mensajería transaccional**: En situaciones en las que varios mensajes forman parte de una única transacción, como en las colas de mensajes, los enlaces de tramos rastrean la relación entre cada mensaje y el proceso transacción global.
+- **Mensajería transaccional**: En escenarios donde múltiples mensajes son parte de una sola transacción, como en las colas de mensajes, los enlaces de tramo trazan la relación entre cada mensaje y el proceso transaccional general.
 
-- **Suministro de eventos**: Los enlaces de tramos del suministro de eventos rastrean cómo múltiples mensajes de cambio contribuyen al estado actual de una entidad.
+- **Event Sourcing**: Los enlaces de tramo en event sourcing rastrean cómo múltiples mensajes de cambio contribuyen al estado actual de una entidad.
 
-## Creación de enlaces de tramos
+## Creación de enlaces de tramo {#creating-span-links}
 
-Si tu aplicación está instrumentada con:
+Si su aplicación está instrumentada con:
 
-- El SDK de OpenTelemetry, sigue la documentación de OpenTelemetry para encontrar tu idioma. Por ejemplo, [crea tramos con enlaces para Java][3].
-- El SDK Datadog, sigue los ejemplos de [Añadir enlaces de tramos][1].
+- El SDK de OpenTelemetry, siga la documentación de instrumentación manual de OpenTelemetry para su lenguaje. Por ejemplo, [Crear tramos con enlaces para Java][3].
+- El SDK de Datadog, siga los ejemplos de [Agregar enlaces de tramo][1].
 
-## Compatibilidad mínima
+## Soporte mínimo {#minimum-support}
 
-**Nota***: Esta sección documenta la compatibilidad mínima necesaria para generar enlaces de tramos con bibliotecas cliente APM de Datadog (con la API de OpenTelemetry). Los enlaces de tramos generados por el SDK de OpenTelemetry se envían a Datadog a través del [consumo de OTLP][8].
+**Nota***: Esta sección documenta el soporte mínimo para generar enlaces de tramo con las bibliotecas cliente de Datadog APM (con la API de OpenTelemetry). Los enlaces de tramo generados por el SDK de OpenTelemetry se envían a Datadog a través de [OTLP Ingest][8].
 
-Agent v7.52.0 o posterior para generar enlaces de tramos) utilizando [bibliotecas de rastreo de Datadog][7]. La compatibilidad con los enlaces de tramos se introdujo en las siguientes versiones:
+Se requiere Agent v7.52.0 o superior para generar enlaces de tramo utilizando [SDKs de Datadog][7]. El soporte para enlaces de tramo se introdujo en las siguientes versiones:
 
-| Lenguaje  | Versión mínima de biblioteca de rastreo |
+| Lenguaje  | Versión mínima del SDK |
 |-----------|---------------------------------|
-| C++/proxy | Aún no es compatible               |
+| C++/Proxy | Aún no compatible               |
 | Go        | 1.61.0                          |
 | Java      | 1.26.0                          |
 | .NET      | 2.53.0                          |
@@ -70,11 +73,11 @@ Agent v7.52.0 o posterior para generar enlaces de tramos) utilizando [biblioteca
 | Python    | 2.5.0                           |
 | Ruby      | 2.0.0                           |
 
-## Visualizar enlaces de tramos
+## Visualización de enlaces de tramo {#viewing-span-links}
 
-Puedes consultar los enlaces de tramos desde el [Explorador de trazas][4] en Datadog.
+Puede visualizar los enlaces de tramo desde el [Trace Explorer][4] en Datadog.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

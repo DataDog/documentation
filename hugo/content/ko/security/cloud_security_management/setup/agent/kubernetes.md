@@ -8,7 +8,7 @@ code_lang_weight: 60
 title: Kubernetes에서 Cloud Security 설정하기
 type: multi-code-lang
 ---
-다음 지침을 따라 잘못된 구성 및 Vulnerability Management를 활성화하세요.
+다음 지침에 따라 잘못된 구성 및 Vulnerability Management를 활성화하세요.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
@@ -56,7 +56,7 @@ type: multi-code-lang
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # Enables runtime package prioritization (Agent 7.79+)
           # See Runtime Package Prioritization section below.
           enrichment:
             usage:
@@ -97,7 +97,7 @@ type: multi-code-lang
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # Enables runtime package prioritization (Agent 7.79+)
         # See Runtime Package Prioritization section below.
         enrichment:
           usage:
@@ -165,9 +165,9 @@ type: multi-code-lang
 
 {{< /tabs >}}
 
-**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. 요구 사항은 [ 런타임 패키지 우선순위 ](#runtime-package-prioritization-preview) 섹션을 참조하세요.
+**참고**: `enrichment.usage.enabled: true`는 Datadog Agent **7.79.0 이상**이 필요합니다. 요구 사항은 [ 런타임 패키지 우선순위](#runtime-package-prioritization) 섹션을 참조하세요.
 
-**참고**: `languages` 분석기는 Datadog Agent **7.70 이상**이 필요합니다. 활성화되면 OS 패키지 외에도 아래 패키지 관리자가 관리하는 애플리케이션 라이브러리의 취약점도 탐지합니다. `analyzers` 필드가 생략되면 Datadog은 컨테이너 이미지의 OS 패키지만 스캔합니다.
+**참고**: `languages` 분석기는 Datadog Agent **7.70 이상**이 필요합니다. 활성화되면 OS 패키지 외에도 아래 패키지 관리자가 관리하는 애플리케이션 라이브러리의 취약성도 탐지합니다. `analyzers` 필드가 생략되면 Datadog은 컨테이너 이미지의 OS 패키지만 스캔합니다.
 
 ### 지원되는 애플리케이션 라이브러리 패키지 관리자 {#supported-application-library-package-managers}
 
@@ -189,11 +189,11 @@ type: multi-code-lang
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## 런타임 패키지 우선순위(미리 보기) {#runtime-package-prioritization-preview}
+## 런타임 패키지 우선순위 지정{#runtime-package-prioritization}
 
-런타임 패키지 우선순위 지정은 컨테이너 이미지 내에서 어떤 패키지가 런타임에 사용되는지 식별하여, 설치되었지만 실행되지 않는 패키지보다 실제로 실행되는 코드의 취약점을 우선적으로 처리할 수 있도록 합니다.
+런타임 패키지 우선순위 지정은 컨테이너 이미지 내에서 어떤 패키지가 런타임에 사용되는지 식별하여, 설치되었지만 실행되지 않는 패키지보다 실제로 실행되는 코드의 취약성을 우선적으로 처리할 수 있도록 합니다.
 
-활성화되면 Agent는 eBPF를 사용하여 워크로드의 파일 액세스를 관찰하고, 이러한 신호를 해당 이미지의 취약점 결과에 추가합니다.
+활성화되면 Agent는 eBPF를 사용하여 워크로드의 파일 액세스를 관찰하고, 이러한 신호를 해당 이미지의 취약성 결과에 추가합니다.
 
 |  신호 |  제공 정보 |
 |--------|-------------------|
@@ -207,7 +207,7 @@ type: multi-code-lang
 - Datadog Agent **7.79.0 이상**. Kubernetes의 경우, 가장 완벽한 신호 적용 범위를 확보하려면 **7.81.0 이상**을 사용하세요.
 - Linux 전용(eBPF 종속성). 지원되는 배포판 및 커널 버전은 [Workload Protection 설정][11]을 참조하세요.
 
-런타임 신호는 컨테이너 이미지 취약점 탐지 결과에서 운영 체제 패키지 관리자(`apt`, `yum` 또는 `apk`)를 통해 설치된 패키지에 적용됩니다.
+런타임 신호는 컨테이너 이미지 취약성 탐지 결과에서 운영 체제 패키지 관리자(`apt`, `yum` 또는 `apk`)를 통해 설치된 패키지에 적용됩니다.
 
 {{< tabs >}}
 
@@ -222,7 +222,7 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      # Enables runtime package prioritization (Agent 7.79+)
       enrichment:
         usage:
           enabled: true
@@ -241,7 +241,7 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    # Enables runtime package prioritization (Agent 7.79+)
     enrichment:
       usage:
         enabled: true
@@ -274,7 +274,7 @@ Agent를 재시작하세요
 
 {{< /tabs >}}
 
-설정을 확인하려면 [런타임 신호][10]별로 취약점 결과를 필터링하세요.
+설정을 확인하려면 [런타임 신호][10]별로 취약성 결과를 필터링하세요.
 
 [1]: /ko/security/cloud_security_management/misconfigurations/
 [2]: /ko/security/threats

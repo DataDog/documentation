@@ -1,13 +1,47 @@
 ---
+description: Deduplicate プロセッサを使用して、ログデータの重複を削除し、ボリュームとノイズを低減する方法を学びます。
 disable_toc: false
 products:
-- icon: logs-send-logs
+- icon: logs
   name: ログ
-title: Deduplicate Processor
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+title: Deduplicate プロセッサ
 ---
-
 {{< product-availability >}}
 
-{{% observability_pipelines/processors/dedupe %}}
+## 概要 {#overview}
 
-{{% observability_pipelines/processors/filter_syntax %}}
+Deduplicate プロセッサは、データの重複を削除してボリュームとノイズを削減します。メッセージをキャッシュし、受信したログトラフィックをキャッシュされたメッセージと比較します。たとえば、このプロセッサは、同一の警告ログが連続して複数送信される場合に、一意の警告ログのみを保持するために使用できます。
+
+## セットアップ {#setup}
+
+Deduplicate プロセッサをセットアップするには、
+
+1. {{< ui >}}filter query{{< /ui >}} を定義します。詳細については、[ログ検索構文][1]を参照してください。
+   - 指定されたフィルタークエリに一致するログのみが処理されます。
+   - フィルタークエリに一致するかどうかにかかわらず、すべてのログがパイプラインの次のステップに送信されます。
+1. {{< ui >}}Type of deduplication{{< /ui >}} ドロップダウンメニューで、以下で指定するフィールドを `Match` するか、`Ignore` するかを選択します。
+    - `Match` が選択されている場合、ログが通過した後、以下で指定したすべてのフィールドの値が同じである後続のログは削除されます。
+    - `Ignore` が選択されている場合、ログが通過した後、以下で指定したフィールド* 以外*のすべてのフィールドの値が同じである後続のログは削除されます。
+1. 一致または無視するフィールドを入力します。少なくとも 1 つのフィールドが必要で、最大 3 つのフィールドを指定できます。
+    - サブフィールドを一致させるには、パス表記 `<OUTER_FIELD>.<INNER_FIELD>` を使用します。以下の[パス表記の例](#path-notation-example)を参照してください。
+1. {{< ui >}}Add field{{< /ui >}} をクリックして、フィルタリングするフィールドを追加します。
+
+### オプション設定 {#optional-settings}
+
+#### キャッシュサイズ {#cache-size}
+
+デフォルトのキャッシュサイズは 5,000 メッセージです (推奨)。キャッシュされたメッセージは、受信したメッセージが重複しているかどうかを判断するためにメモリ内に保持されます。ニーズに合わせてキャッシュサイズを増やすことができます。
+
+**注**:
+- キャッシュサイズを増やすと、メモリ使用量が増加します。
+- キャッシュは LRU キャッシュによってサポートされており、LRU キャッシュサイズは設定されたキャッシュサイズと同じです。
+- キャッシュはワーカー間で共有されていないため、同じワーカーによって処理された重複イベントのみがドロップされます。
+
+### パス表記の例 {#path-notation-example}
+
+{{% observability_pipelines/path_notation %}}
+
+{{% observability_pipelines/path_notation_dots %}}
+
+[1]: /ja/observability_pipelines/search_syntax/logs/
