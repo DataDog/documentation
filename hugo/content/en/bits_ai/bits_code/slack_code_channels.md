@@ -29,7 +29,7 @@ To create a code channel, mention `@Datadog` in Slack and describe a code change
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel_creation.png" alt="A Slack message mentioning @Datadog, followed by a card showing the resulting code channel that was created" style="width:100%;" >}}
 
-Find your code channels in a dedicated {{<ui>}}Code channels{{</ui>}} section in your Slack sidebar.
+Bits Code names the code channel automatically based on your initial request. Find your code channels in a dedicated {{<ui>}}Code channels{{</ui>}} section in your Slack sidebar.
 
 ### Permissions and access
 
@@ -49,7 +49,9 @@ As Bits Code works, the code channel shows:
 - Datadog graph widgets, when relevant to the task
 - A {{< ui >}}Create PR{{< /ui >}} button to open a pull or merge request from the changes, when you're ready
 
-Bits Code does not automatically open a pull or merge request from a code channel. Click {{< ui >}}Create PR{{< /ui >}} when you're ready. Whichever user clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request. 
+After Bits Code has generated a code diff, you can comment on specific lines directly in the code channel.
+
+Bits Code does not automatically open a pull or merge request from a code channel—click {{< ui >}}Create PR{{< /ui >}} when you're ready. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request. 
 
 The work in every code channel is also reflected in a [Bits Code session][2] in Datadog. To view it, at the bottom-right corner of the code channel, click {{< ui >}}</> Code session{{< /ui >}}.
 
@@ -57,11 +59,7 @@ Learn more about how to work in a code channel in the [Slack documentation][6].
 
 ## Set up code channels
 
-Code channels require the [Bits Chat Slack integration][1] to be configured, plus a Slack permission grant. For setup steps, see [Bits Code Setup][4].
-
-## Session life cycle
-
-A code channel is meant for a single task. Slack removes inactive code channels from your sidebar after seven days.
+Code channels require the [Bits Chat Slack integration][1], a Slack app scope grant, and a Bits Code setting enabled. See [Bits Code Setup][4] for full setup instructions.
 
 ## Limitations
 
