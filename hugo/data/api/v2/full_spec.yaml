@@ -14259,6 +14259,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/BudgetWithEntriesData"
+        meta:
+          $ref: "#/components/schemas/BudgetWithEntriesMeta"
       type: object
     BudgetWithEntriesData:
       description: A budget and all its entries.
@@ -14388,6 +14390,16 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET
+    BudgetWithEntriesMeta:
+      description: Additional information about errors encountered while retrieving budget cost data.
+      properties:
+        error:
+          description: A user-facing explanation of why budget cost data could not be retrieved.
+          example: ""
+          type: string
+      required:
+        - error
+      type: object
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
