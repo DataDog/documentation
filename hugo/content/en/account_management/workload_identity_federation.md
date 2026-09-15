@@ -285,7 +285,7 @@ Workload Identity Federation support depends on Agent version, Agent type, and h
 | EKS IRSA (`AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core Agents only | All Agents |
 | ECS task role or EKS Pod Identity (`AWS_CONTAINER_CREDENTIALS_*`) | Not supported | Core Agents only | All Agents |
 
-**Core Agents**: the Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. 
+**Core Agents**: The Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. 
 
 **All Agents**: Core Agents plus the Trace Agent, standalone DogStatsD, the Private Action Runner, the IoT Agent, and the Heroku Agent.
 
