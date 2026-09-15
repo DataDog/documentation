@@ -67,12 +67,12 @@ Indexers receive logs from Datadog Agents, then process, index, and store them a
 | **Disk I/O**         | ~20 MB/s per vCPU              | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS)                                                                                                                                                                                                                                                                                                   |
 
 
-{{% collapse-content title="Example: Sizing for 1 TB of logs per day" level="h3" expanded=false %}}
-To index 1 TB of logs per day (~11.6 MB/s), follow these steps:
+{{% collapse-content title="Example: Sizing for 100 TB of logs per day" level="h3" expanded=false %}}
+To index 100 TB of logs per day (~1,160 MB/s), follow these steps:
 
-1. **Calculate vCPUs:** `11.6 MB/s ÷ 8 MB/s per vCPU ≈ 1.45 vCPUs`
-2. **Calculate RAM:** `1.45 vCPUs × 4 GB RAM per vCPU ≈ 5.8 GB RAM`
-3. **Add headroom:** Start with one indexer pod configured with **2 vCPUs, 8 GB RAM, and a 30 GB disk**. Adjust these values based on observed performance and redundancy needs.
+1. **Calculate vCPUs:** `1,160 MB/s ÷ 8 MB/s per vCPU ≈ 145 vCPUs`
+2. **Calculate RAM:** `145 vCPUs × 4 GB RAM per vCPU ≈ 580 GB RAM`
+3. **Add headroom:** Start with 50 indexer pods, each configured with **4 vCPUs, 16 GB RAM, and a 30 GB disk**. Adjust these values based on observed performance and redundancy needs.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Sizing by event count" level="h3" expanded=false %}}
