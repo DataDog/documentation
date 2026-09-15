@@ -762,7 +762,7 @@ Be sure to enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging log
 
 Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][9].
 
-If Automatic Scaling is enabled on the App Service Plan and you see unrelated traces merged together, this may be caused by Azure's platform health probes (`User-Agent: HttpScaleManager`) carrying W3C trace context from an unrelated, concurrently in-flight request. Setting `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` on the affected app restricts propagation to Datadog's format and resolves this, but also stops the app from accepting W3C context from legitimate external callers, so only apply it if all callers are Datadog-instrumented.
+If Automatic Scaling is enabled on the App Service Plan and you see unrelated traces merged together, this may be caused by Azure's platform health probes (`User-Agent: HttpScaleManager`) carrying stale W3C trace context. Setting `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` on the affected app resolves this by restricting propagation to Datadog's format, but also stops the app from accepting W3C context from legitimate external callers, so only apply it if all callers are Datadog-instrumented.
 
 ## Further reading
 
