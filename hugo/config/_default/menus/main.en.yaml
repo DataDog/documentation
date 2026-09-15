@@ -1565,6 +1565,11 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 104
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 105
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
