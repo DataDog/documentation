@@ -24,7 +24,7 @@ Each Insight includes:
 - Trace and span evidence that supports the finding
 - A recommended fix and a way to validate it
 
-<div class="alert alert-info">Trace-based Insights require no additional configuration. If your application sends traces to Agent Observability, Datadog can analyze them for supported cost and reliability problems.</div>
+<div class="alert alert-info">Insights require no additional configuration. Datadog analyzes traces that your application already sends to Agent Observability.</div>
 
 ## How Insights works
 
@@ -41,9 +41,6 @@ Datadog groups findings with the same root cause into one Insight. Later analyse
 | Cost | Verbose model output | Model responses or reasoning that use more output tokens than the task requires. |
 | Reliability | Tool call retry loops | Repeated calls to the same tool that use nearly identical arguments and do not make progress. |
 | Reliability | Prompt rule violations | Agent behavior that breaks an explicit rule in a prompt, skill, or tool description. |
-| Reliability | Evaluator-detected failure patterns | Recurring managed evaluation failures that share the same root cause. |
-
-Evaluator-detected failure patterns use managed evaluation results that already exist in Agent Observability. The other Insight types do not require an evaluation.
 
 ## Understand impact and evidence
 
@@ -51,14 +48,14 @@ Depending on the type, a Cost Insight shows estimated recoverable spend or the e
 
 Reliability Insights show the confirmed calls or sessions affected by the problem. When an analysis uses a sample, the affected count is a confirmed lower bound, not an extrapolated rate.
 
-Open the linked traces and spans to compare the evidence with the stated root cause. The analysis details show the steps and supporting evidence that produced the finding.
+Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
 
 ## Review and act on Insights
 
 1. In Datadog, go to [**AI Observability > Agent Observability > Insights**][1].
 2. Use the overview and filters to prioritize Insights by application, type, severity, status, or impact.
 3. Open an Insight to review the finding.
-4. Apply and validate the recommended fix. You can also send the Insight to Bits or use it with an MCP-compatible coding agent.
+4. Apply and validate the recommended fix. You can use **Fix with Bits** or an MCP-compatible coding agent. With Work Management read and write access, you can also create or link a Jira ticket or Linear issue.
 5. Set the status to **For Review**, **In Progress**, **Completed**, or **Ignored** to record your decision. Datadog sets the status to **Automatically Resolved** when later analysis no longer finds the problem.
 
 Insights appear on an application's overview page. Cost Insights also appear on the **Cost** page next to the related spend.

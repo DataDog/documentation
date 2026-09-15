@@ -295,7 +295,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
-- **Reviewing Insights**: Review recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback after assessment.
+- **Reviewing Insights**: Prioritize recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
@@ -342,7 +342,7 @@ The `llmobs` toolset includes the following tools:
 : Set an Insight's life cycle status to `for_review`, `in_progress`, `completed`, or `ignored`.
 
 `submit_llmobs_agent_insight_feedback`
-: Submit usefulness feedback for an Insight or recommendation. Use the target keys returned by `list_llmobs_agent_insights` or `get_llmobs_agent_insight`, and submit feedback only when you have assessed the result.
+: Submit usefulness feedback for an Insight or recommendation. Use a target key returned by `list_llmobs_agent_insights` or `get_llmobs_agent_insight`, and submit feedback only after you assess that target.
 
 Listing and retrieving Insights require Agent Observability read permission. Updating a status or submitting feedback requires Agent Observability read and write permissions. A status update also records status feedback.
 
