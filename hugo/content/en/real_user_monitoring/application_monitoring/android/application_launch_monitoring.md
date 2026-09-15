@@ -51,34 +51,10 @@ Each time to initial display and time to full display is categorized by launch t
 The Android SDK automatically measures the TTID. The TTID can be optionally profiled using the Android Mobile Profiler.
 
 ### Measuring the time to full display
+
+For setup steps, see [Track application startups][8].
+
 The time to full display is manually defined using the `GlobalRumMonitor.get().reportAppFullyDisplayed()` API in the Android SDK based on the application’s specific definition of “fully drawn.” 
-
-Below is an example where time to full display is determined when home activity is fully loaded.
-
-{{< tabs >}}
-{{% tab "Kotlin" %}}
-
-```kotlin
-class HomeActivity : AppCompatActivity() {
-
-    private val viewModel: HomeViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setContentView(R.layout.activity_home)
-        super.onCreate(savedInstanceState)
-
-        viewModel.uiState.observe(this) { state ->
-            if (state.isLoaded) {
-                 GlobalRumMonitor.get().reportAppFullyDisplayed()
-            }
-        }
-    }
-}
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-If you use `reportFullyDrawn` to identify the moment of full display, you can use [getFullyDrawnReporter][7] to subscribe to `reportFullyDrawn` and call `GlobalRumMonitor.get().reportAppFullyDisplayed()`. 
 
 <div class="alert alert-danger">
   If the time to full display is not defined, the Android SDK only collects the TTID.
@@ -127,3 +103,4 @@ These metrics contain the `@vital.startup_type` attribute to specify the launch 
 [5]: https://developer.android.com/reference/android/app/Activity#reportFullyDrawn()
 [6]: https://developer.android.com/reference/androidx/activity/ComponentActivity#getFullyDrawnReporter%28%29
 [7]: https://developer.android.com/reference/androidx/activity/ComponentActivity#getFullyDrawnReporter() 
+[8]: /real_user_monitoring/setup/enable_rum/track_application_startups/?platform=android

@@ -39,4 +39,4 @@ DatadogSdk.Instance.AddUserExtraInfo(new ()
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=unity

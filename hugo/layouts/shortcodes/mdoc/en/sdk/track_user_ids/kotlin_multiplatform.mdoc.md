@@ -28,4 +28,4 @@ Datadog.addUserExtraInfo(extraInfo)
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/data_collected
+[3]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform

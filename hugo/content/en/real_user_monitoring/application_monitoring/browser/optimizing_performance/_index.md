@@ -104,7 +104,7 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#core-web-vitals
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /session_replay/
@@ -114,6 +114,6 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [9]: https://web.dev/articles/fcp
 [10]: https://web.dev/articles/cls/
 [11]: https://web.dev/articles/inp/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[12]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling
 [13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
 [14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#diagnose-core-web-vitals-with-subparts
