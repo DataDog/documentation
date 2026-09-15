@@ -271,7 +271,7 @@ Workload Identity Federation for the Agent allows you to authenticate your Agent
 
 - A supported Agent version and type based on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
 - An Agent running in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, an ECS task, or an EKS pod).
-- A configured [Datadog-AWS integration][4] with your AWS account added. See the [AWS Integration docs][3]
+- A configured [Datadog-AWS integration][4] with your AWS account added. See the [AWS Integration docs][3].
 - The `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
 
 #### Supported Agent versions and AWS credentials
