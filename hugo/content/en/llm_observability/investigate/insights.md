@@ -44,9 +44,7 @@ Datadog groups findings with the same root cause into one Insight. Later analyse
 
 ## Understand impact and evidence
 
-Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. These values are different measurements.
-
-Reliability Insights show the confirmed calls or sessions affected by the problem. When an analysis uses a sample, the affected count is a confirmed lower bound, not an extrapolated rate.
+Depending on the type, a Cost Insight shows estimated recoverable spend or the exact cost of model work that did not produce a usable result. Reliability Insights show the confirmed calls or sessions affected by the problem.
 
 Open the linked traces and spans to compare the evidence with the stated root cause. The investigation trail shows the steps and supporting evidence that produced the finding.
 
