@@ -312,8 +312,7 @@ unsupported_sites:
   amazon-event-bridge: [gov,gov2]
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
-  application_security: [gov,gov2]
-  application_security_override: [gov2] # docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov
+  application_security: []
   autocomplete_search: [gov,gov2]
   bitbucket-source-code: [gov,gov2]
   azure-automated-log-forwarding: [gov,gov2]
