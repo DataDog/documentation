@@ -645,6 +645,11 @@ menu:
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
       parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
+      parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
       identifier: agent_guides
