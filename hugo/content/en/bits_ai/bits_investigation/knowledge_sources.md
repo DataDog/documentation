@@ -132,10 +132,10 @@ All positive feedback, as well as any negative feedback that includes details pr
 
 To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
 
-[1]: https://app.datadoghq.com/bits-ai/monitors/supported
-[2]: https://app.datadoghq.com/bits-ai/settings/bits-md
-[3]: https://app.datadoghq.com/actions/skills
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/bits-ai/monitors/supported
+[2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: https://app.datadoghq.com/actions/skills
