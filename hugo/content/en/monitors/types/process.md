@@ -39,7 +39,7 @@ Live Process Monitors are best used in the following scenarios:
 There are two ways to create a Live Process Monitor:
 
 - Using the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Live Process{{< /ui >}}.
-- On the [Processes page][4], search for a process you want to monitor. Then click the dropdown menu next to {{< ui >}}\+New Metric{{< /ui >}} and click {{< ui >}}Create monitor{{< /ui >}}.
+- On the [Processes page][4], search for a process you want to monitor. Then click the dropdown menu next to {{< ui >}}\+ New Metric{{< /ui >}} and click {{< ui >}}Create monitor{{< /ui >}}.
 
 ### Select processes
 

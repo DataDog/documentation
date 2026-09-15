@@ -45,7 +45,7 @@ You may create a test using one of the following options:
    - **Create a test from a template**:
 
        1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings.
-       2. Click {{< ui >}}\+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+       2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
        3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test.<br /><br>
           {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
