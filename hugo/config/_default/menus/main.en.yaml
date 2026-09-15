@@ -922,7 +922,7 @@ menu:
       identifier: otel_kafka_metrics
       parent: otel_integrations
       weight: 809
-    - name: Kubernetes Metrics
+    - name: Kubernetes Monitoring
       url: opentelemetry/integrations/kubernetes_metrics/
       identifier: otel_kubernetes_metrics
       parent: otel_integrations

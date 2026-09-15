@@ -1,6 +1,6 @@
 ---
-title: Kubernetes Metrics with OpenTelemetry
-description: Set up OpenTelemetry Collectors for Kubernetes infrastructure metrics and Kubernetes Explorer.
+title: Monitor Kubernetes with OpenTelemetry
+description: Send Kubernetes resource data and infrastructure metrics to Datadog with OpenTelemetry.
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/hugo/content/en/opentelemetry/integrations/kubernetes_metrics.md
 ---

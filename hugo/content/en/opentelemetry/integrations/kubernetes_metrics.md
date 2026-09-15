@@ -1,6 +1,6 @@
 ---
-title: Kubernetes Metrics
-description: Collect Kubernetes infrastructure metrics and populate Kubernetes Explorer with OpenTelemetry Collectors.
+title: Kubernetes Monitoring
+description: Send Kubernetes resource data and infrastructure metrics to Datadog with OpenTelemetry.
 further_reading:
 - link: "/opentelemetry/setup/"
   tag: "Documentation"
@@ -15,7 +15,14 @@ further_reading:
 
 ## Overview
 
-Collect Kubernetes infrastructure metrics with OpenTelemetry to populate the [Kubernetes - Overview][1] dashboard. The reference configurations also collect resource data for [Kubernetes Explorer][10]. This setup does not install the Datadog Agent or instrument your applications.
+Monitor Kubernetes with OpenTelemetry, without installing the Datadog Agent. Choose the setup that matches the data you need:
+
+| Goal | Components | Setup |
+|---|---|---|
+| View pods, deployments, and other resource data in Kubernetes Explorer | One cluster Collector with the `k8sobjects` receiver | [Send Kubernetes resources over OTLP][15] |
+| Populate Kubernetes dashboards and Kubernetes Explorer | `kube-state-metrics`, one cluster Collector, and one node Collector per node | Follow this guide |
+
+The full setup below collects Kubernetes infrastructure metrics for the [Kubernetes - Overview][1] dashboard and resource data for [Kubernetes Explorer][10]. It does not instrument your applications.
 
 {{< img src="/opentelemetry/collector_exporter/kubernetes_metrics.png" alt="The 'Kubernetes - Overview' dashboard, showing metrics for containers, including status and resource usage of your cluster and its containers." style="width:100%;" >}}
 
@@ -27,8 +34,6 @@ The setup uses three components:
 
 The cluster Collector scrapes `kube-state-metrics` with its Prometheus receiver. You do not need to install a Prometheus server.
 
-If you only need Kubernetes Explorer's resource views, follow the [OpenTelemetry setup for Kubernetes Explorer][15] instead.
-
 ## Setup
 
 These steps deploy new Collectors in the `default` namespace. If you already collect Kubernetes metrics, review your existing configuration before deploying additional Collectors to avoid duplicate collection.
@@ -38,7 +43,7 @@ These steps deploy new Collectors in the `default` namespace. If you already col
 - [Helm][2] and `kubectl`, with permission to deploy workloads and create RBAC resources in the cluster.
 - A [Datadog API key][6] and your [Datadog site][5].
 
-Use OpenTelemetry Collector [Helm chart][9] v0.156.2 or later. The commands below use the `otel/opentelemetry-collector-contrib:0.154.0` image.
+Use OpenTelemetry Collector [Helm chart][9] v0.156.2 or later and OpenTelemetry Collector Contrib v0.159.0 or later. The commands below pin the Collector image to v0.159.0.
 
 The `k8sobjects` receiver used for Explorer can increase Kubernetes API server load. Datadog recommends Kubernetes 1.33 or later and testing on smaller clusters before expanding collection. See [Kubernetes Explorer limitations][12].
 
@@ -90,11 +95,61 @@ kubectl create secret generic datadog-secret \
    curl -fsSLo daemonset-collector.yaml "$CONFIG_URL/daemonset-collector.yaml"
    ```
 
-3. Configure cluster name detection in both files:
+3. In both files, replace the `datadog/exporter` block under `config.exporters` with the recommended OTLP HTTP exporter:
+
+   ```yaml
+   exporters:
+     otlp_http:
+       endpoint: https://otlp.${env:DD_SITE}
+       headers:
+         dd-api-key: ${env:DD_API_KEY}
+         dd-otel-metric-config: >-
+           {
+           "resource_attributes_as_tags": true,
+           "instrumentation_scope_metadata_as_tags": true
+           }
+       compression: zstd
+       compression_params:
+         level: 3
+       sending_queue:
+         batch:
+           sizer: bytes
+           min_size: 2097152
+           max_size: 4194304
+   ```
+
+   Replace each `datadog/exporter` entry in a pipeline's `exporters` list with `otlp_http`. In the cluster Collector, do not include the Datadog Exporter's `orchestrator_explorer` option; Datadog recognizes resource data from the `k8sobjects` receiver when it arrives over OTLP.
+
+4. Configure trace processing in `daemonset-collector.yaml`:
+   - If the node Collector does not receive application traces, remove `datadog/connector` and the `traces` and `traces/sampling` pipelines. Also remove `datadog/connector` from the `metrics` pipeline's receivers.
+   - If the node Collector receives application traces, replace `datadog/connector` with the `forward/traces_sample` and `span_metrics` connectors from the [recommended Collector configuration][18]. Copy the complete `span_metrics` dimensions list, then change only the fields shown below. Keep the existing receivers and processors unless a change is shown, and leave the Datadog extension unchanged.
+
+   ```yaml
+   service:
+     pipelines:
+       traces:
+         exporters: [forward/traces_sample, span_metrics]
+
+       traces/sampling:
+         receivers: [forward/traces_sample]
+         exporters: [otlp_http]
+
+       metrics:
+         receivers: [otlp]
+         exporters: [otlp_http]
+
+       metrics/span_metrics:
+         receivers: [span_metrics]
+         exporters: [otlp_http]
+   ```
+
+   The `span_metrics` connector generates the trace metrics used by APM views. It is not required for Kubernetes Explorer or Kubernetes dashboards.
+
+5. Configure cluster name detection in both files:
    - For automatic detection, review the `resourcedetection` processor's configuration and permissions for [EKS][14], [AKS][16], or [GKE][17].
    - If automatic detection is unavailable, uncomment the `resource/add-cluster-name` processor and replace `<YOUR_CLUSTER_NAME>` with the same cluster name in both files. Add `resource/add-cluster-name` after `resourcedetection` in each pipeline's `processors` list that uses `resourcedetection`. Keep the other processors in place.
 
-4. Run the following commands from the directory containing the values files:
+6. Run the following commands from the directory containing the values files:
 
    ```sh
    # Install the node Collector (DaemonSet)
@@ -102,14 +157,14 @@ kubectl create secret generic datadog-secret \
      --namespace default \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.154.0
+     --set image.tag=0.159.0
 
    # Install the cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      --namespace default \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.154.0
+     --set image.tag=0.159.0
    ```
 
 ### Verify the setup
@@ -220,3 +275,4 @@ The [count connector][11] generates object-count metrics by counting the number 
 [15]: /containers/monitoring/kubernetes_explorer/?tab=opentelemetrycollector#enable-kubernetes-explorer
 [16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
+[18]: /opentelemetry/setup/collector_exporter/?tab=kubernetesmanifestreference#2-configure-and-deploy-the-collector

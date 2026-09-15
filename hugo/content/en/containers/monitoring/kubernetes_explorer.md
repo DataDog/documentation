@@ -78,40 +78,44 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][1].
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
-You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][1] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][2] orchestrator explorer functionality.
+You can populate Kubernetes Explorer by sending Kubernetes resource data directly to Datadog through OTLP HTTP. This capability is generally available. The setup uses the [`k8sobjects`][1] receiver and does not require the Datadog Agent or Datadog Exporter.
 
-The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. This setup does not require `kube-state-metrics` or a Prometheus server. To collect those metrics and populate Explorer, follow [Kubernetes Metrics with OpenTelemetry][6] instead.
+The following steps enable Explorer's resource views without collecting the metrics used by related dashboards. This setup does not require `kube-state-metrics` or a Prometheus server. To collect those metrics and populate Explorer, follow [Monitor Kubernetes with OpenTelemetry][6] instead.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### Prerequisites
 
-- OpenTelemetry Collector Contrib [v0.154.0][3] or later.
+- OpenTelemetry Collector Contrib [v0.159.0][3] or later.
 - OpenTelemetry Collector [Helm chart][4] v0.156.2 or later.
+- A [Datadog API key][15] and your [Datadog site][7].
 
 #### Limitations
 
-The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
+The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server. An [upstream informer-based migration][16] tracks improvements to its scalability.
 
 Recommendations:
 
 - Use Kubernetes 1.33 or later, which includes [streaming list improvements][5] that reduce API server impact.
 - Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
-#### 1. Create a Datadog API key secret
+#### 1. Create a Datadog secret
 
-Create a Kubernetes secret to store your Datadog API key. These steps use the `default` namespace for both the secret and the Collector:
+Set your Datadog API key and site, then create a Kubernetes secret. These steps use the `default` namespace for both the secret and the Collector:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
+export DD_SITE="{{< region-param key="dd_site" >}}"
+
 kubectl create secret generic datadog-secret \
   --namespace default \
-  --from-literal="api-key=$DD_API_KEY"
+  --from-literal="api-key=$DD_API_KEY" \
+  --from-literal="dd-site=$DD_SITE"
 ```
 
 #### 2. Configure the cluster collector
 
-Create `deployment-collector.yaml` with the following complete Helm values. Replace `<YOUR_DATADOG_SITE>` with your [Datadog site][7] and `<YOUR_CLUSTER_NAME>` with your cluster name.
+Create `deployment-collector.yaml` with the following complete Helm values. Replace `<YOUR_CLUSTER_NAME>` with your cluster name.
 
 This configuration runs one Collector as a Deployment. It sets the cluster name explicitly, so cloud-provider detection is not required.
 
@@ -121,7 +125,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.154.0
+  tag: 0.159.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -130,10 +134,11 @@ extraEnvs:
       secretKeyRef:
         name: datadog-secret
         key: api-key
-  - name: K8S_NODE_NAME
+  - name: DD_SITE
     valueFrom:
-      fieldRef:
-        fieldPath: spec.nodeName
+      secretKeyRef:
+        name: datadog-secret
+        key: dd-site
 
 presets:
   kubernetesObjects:
@@ -156,22 +161,28 @@ config:
           action: upsert
 
   exporters:
-    datadog:
-      api:
-        site: "<YOUR_DATADOG_SITE>"
-        key: ${env:DD_API_KEY}
-      orchestrator_explorer:
-        enabled: true
+    otlp_http:
+      endpoint: https://otlp.${env:DD_SITE}
+      headers:
+        dd-api-key: ${env:DD_API_KEY}
+      compression: zstd
+      compression_params:
+        level: 3
+      sending_queue:
+        batch:
+          sizer: bytes
+          min_size: 2097152
+          max_size: 4194304
 
   service:
     pipelines:
       logs:
         receivers: [k8sobjects]
         processors: [resourcedetection, resource/add-cluster-name]
-        exporters: [datadog]
+        exporters: [otlp_http]
 ```
 
-The `kubernetesObjects` preset configures the receiver, service account, and RBAC permissions. Keep the `3m` collection interval and the `k8s_api` detector, which identifies the cluster UID. The `logs` pipeline sends Kubernetes resource objects to Explorer; it does not collect application logs.
+The `kubernetesObjects` preset configures the receiver, service account, and RBAC permissions. Keep the `3m` collection interval and the `k8s_api` detector, which identifies the cluster UID. The `logs` pipeline sends Kubernetes resource objects over OTLP; it does not collect application logs. The `orchestrator_explorer` option is specific to the Datadog Exporter and is not used in this setup.
 
 ##### Automatic cluster name detection (optional)
 
@@ -248,8 +259,7 @@ service:
 For a complete application-telemetry Collector example, see the [DaemonSet collector configuration][11].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [4]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [6]: /containers/kubernetes/opentelemetry/#setup
@@ -261,11 +271,15 @@ For a complete application-telemetry Collector example, see the [DaemonSet colle
 [12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#amazon-eks
 [13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
 [14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
+[15]: /account_management/api-app-keys/#api-keys
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
 
 You can populate the Kubernetes Explorer using the `opentelemetry-kube-stack` Helm chart instead of the Datadog Agent.
+
+The reference configuration in this tab uses the Datadog Exporter. For a new setup that sends Kubernetes resource data directly to Datadog over OTLP HTTP, use the **OpenTelemetry Collector** tab.
 
 The [`opentelemetry-kube-stack`][1] Helm chart installs the OpenTelemetry Operator and manages collectors as `OpenTelemetryCollector` custom resources (CRs). Datadog maintains a reference [`values.yaml`][2] that configures two collectors:
 
