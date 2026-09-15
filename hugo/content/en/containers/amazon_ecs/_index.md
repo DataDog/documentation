@@ -140,7 +140,7 @@ To have one Datadog Agent container running on each EC2 instance, run the Datado
 
 {{< tabs >}}
 {{% tab "AWS CLI" %}}
-Use the [AWS CLI][9] to create a daemon service from the task definition registered in the previous steps:
+Use the AWS CLI to create a daemon service from the task definition registered in the previous steps:
 
 ```bash
 aws ecs create-service \
