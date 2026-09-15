@@ -59,7 +59,7 @@ Datadog Agent 구성 파일은 `/etc/datadog-agent/datadog.yaml`에 위치해 �
 - `proxy`: 아웃바운드 트래픽에 대한 HTTP/HTTPS 프록시 엔드포인트([Datadog Agent 프록시 구성][8] 참조)
 -  기본 태그, 로그 레벨 및 Datadog 구성
 
-완전 주석형 참조 파일은 `/etc/datadog-agent/datadog.yaml.example`에 위치해 있으며, 비교하거나 복사하여 붙여넣을 수 있는 모든 사용 가능한 옵션을 나열합니다. 또는 사용 가능한 모든 구성 옵션은 샘플 `config_template.yaml` 파일을 참조하세요.
+완전 주석형 참조 파일은 `/etc/datadog-agent/datadog.yaml.example`에 위치해 있으며, 비교하거나 복사하여 붙여넣을 수 있는 모든 사용 가능한 옵션을 나열합니다. 또는 GitHub에 있는 [Linux용 예제 Agent 구성 파일][11]을 참조하십시오.
 
 ### 통합 파일 {#integration-files}
 통합용 구성 파일은 `/etc/datadog-agent/conf.d/`에 있습니다. 각 통합에는 `<INTEGRATION>.d/`라는 자체 하위 디렉터리가 있으며, 여기에는 다음이 포함됩니다.
@@ -162,3 +162,4 @@ Agent는 `/opt/datadog-agent/embedded/`에 임베디드 Python 환경을 포함�
 [8]: https://docs.datadoghq.com/ko/agent/configuration/proxy/
 [9]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [10]: /ko/tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

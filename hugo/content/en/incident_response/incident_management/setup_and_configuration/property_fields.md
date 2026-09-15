@@ -70,11 +70,11 @@ If you mark a field as "Required at Declaration," users are required to enter a 
 
 ### Prompt user
 
-Incident Management can be configured to prompt responders to set particular fields when changing the incident's state. To set this behavior for a field, edit the field's "Prompt user" option.
+Incident Management can be configured to prompt responders to set particular fields when changing the incident's state.
 
-**During declaration**: Users are prompted to enter a value for the field during declaration and at all state changes if the field is empty.
+**During declaration**: To prompt responders to enter a value for the field during declaration, edit the field's "Prompt user" option.
 
-**When the incident is moved to Stable/Resolved/Completed**: Users are prompted to enter a value for the field when moving the incident to the selected state and any later state. For example, if you select "When the incident is moved to Stable," users are prompted to fill out the field when moving incidents to Stable, Resolved, or Completed.
+**When the incident is moved to Stable/Resolved/Completed**: To prompt users for a field when an incident moves to a given status, use [transition forms][14].
 
 ### Custom fields in search and analytics
 
@@ -95,3 +95,4 @@ In Incident Management Analytics, number fields appear as measures that can be g
 [11]: /incident_response/incident_management/investigate/declare
 [12]: /incident_response/incident_management/setup_and_configuration/property_fields/#custom-fields-in-search-and-analytics
 [13]: /actions/workflows/
+[14]: /incident_response/incident_management/setup_and_configuration/transition_forms

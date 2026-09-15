@@ -61,7 +61,9 @@ Responders then have the following options:
 
 #### Escalation logic
 
-For direct call routing, escalation proceeds as follows:
+For direct call routing, On-Call calls the responders in each step of the escalation policy. If no one answers, On-Call immediately advances to the next step and calls its responders. It does not wait for the delay configured between steps, helping connect the caller to an available responder as quickly as possible.
+
+Escalation proceeds as follows:
 
 - **Multiple responders at the same level**: All responders are called simultaneously. The first to answer is connected.
 - **Responder rejects a call**: The system immediately escalates to the next responder.

@@ -43,7 +43,7 @@ Live Heap (v1.61.0+)
 : The objects and memory allocated by each method that have not yet been garbage collected. This is useful for investigating the overall memory usage of your service and identifying potential memory leaks. The profiler automatically uses the most accurate engine available for your JVM version.<br />
 _Requires: Java 11+_
 
-Wall Time in Native Code
+Wall Time
 : The elapsed time spent by each method. Elapsed time includes time when code is running on CPU, waiting for I/O, and anything else that happens while the method is running.
 
 Class Load

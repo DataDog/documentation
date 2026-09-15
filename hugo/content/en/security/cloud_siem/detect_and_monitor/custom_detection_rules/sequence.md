@@ -15,9 +15,9 @@ The sequence method enables you to detect multi-stage attacks by identifying ord
 
 You can define a sequence of steps that must occur within a defined time frame and across related entities, such as a user, host, or IP address. Each sequence can combine conditions from multiple logs or signals to identify coordinated activity that might be missed by individual rules.
 
-{{< img src="security/security_monitoring/detection_rules/sequence/preview.png" alt="Sequence editor page showing a preview of the steps" style="width:100%;" >}}
-
 See [Create Rule][1] for instructions on how to configure a sequence rule.
+
+{{< img src="security/security_monitoring/detection_rules/sequence/preview.png" alt="Sequence editor page showing a preview of the steps" style="width:100%;" >}}
 
 ## How the sequence method works
 
@@ -65,4 +65,4 @@ When you [create a sequence detection rule][1], you can configure these options:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=sequence
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=sequence
