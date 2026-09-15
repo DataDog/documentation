@@ -775,6 +775,15 @@ Runs health checks to surface potential PostgreSQL issues such as CPU saturation
 - Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
 
+### `get_datadog_database_instance_settings`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves collected PostgreSQL configuration settings for a Database Monitoring instance, the same values shown on the Configuration tab. Returns parameters that affect performance and behavior, including memory (`shared_buffers`, `work_mem`), connections (`max_connections`), autovacuum, logging, WAL, and query planner settings. Filter by setting name to narrow results.
+
+- Show autovacuum settings for `db-prod-1`.
+- What logging settings are enabled on the payments PostgreSQL instance?
+- What is `shared_buffers` set to on `db-prod-1`?
+
 ### `get_datadog_database_query_performance`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
