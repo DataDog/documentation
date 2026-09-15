@@ -70,7 +70,7 @@ When upgrading from Agent v5 to Agent v6, there might be a difference in the hos
 
 `sub.domain.tld` --> `sub`
 
-**Note**: Starting from Agent v6.3, the `hostname_fqdn` configuration option was introduced that allows Agent v6 to have the same behavior as Agent v5. This flag is disabled by default on version 6.3+. See the [example datadog.yaml][1] for enabling this option.
+**Note**: Starting from Agent v6.3, the `hostname_fqdn` configuration option was introduced that allows Agent v6 to have the same behavior as Agent v5. This flag is disabled by default on version 6.3+. See the [Agent's main configuration][2] file for enabling this option.
 
 #### Determine if you're affected
 
@@ -115,7 +115,6 @@ By default, Agent v6 uses the instance's hostname provided by GCE. This matches 
 
 If you're upgrading from Agent v5 with `gce_updated_hostname` unset or set to false, and the hostname of the Agent is not hardcoded in `datadog.conf`/`datadog.yaml`, the reported hostname on Datadog changes from the GCE instance `name` to the full GCE instance `hostname` (which includes the GCE project id).
 
-[1]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [2]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 {{% /tab %}}
 {{% tab "Agent v5" %}}

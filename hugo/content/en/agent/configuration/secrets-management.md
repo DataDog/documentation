@@ -24,6 +24,7 @@ The Datadog Agent helps you securely manage your secrets by integrating with the
 - [File Text](#id-for-json-yaml-text)
 - [File JSON](#id-for-json-yaml-text)
 - [File YAML](#id-for-json-yaml-text)
+- [Windows Registry Key](#id-for-windows-regkey)
 
 Instead of hardcoding sensitive values like API keys or passwords in plaintext within configuration files, the Agent can retrieve them dynamically at runtime. To reference a secret in your configuration, use the `ENC[<secret_id>]` notation. The secret is fetched and loaded in memory but is never written to disk or sent to the Datadog backend.
 
@@ -54,7 +55,7 @@ secret_backend_config:
 More specific setup instructions depend on the backend type used. See the appropriate section below for further information:
 
 
-{{% collapse-content title="AWS Secrets" level="h4" expanded=false id="id-for-secrets" %}}
+{{% collapse-content title="AWS Secrets" level="h5" expanded=false id="id-for-secrets" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -232,6 +233,8 @@ clusterChecksRunner:
 
 Configure the Datadog Agent to use AWS Secrets to resolve secrets with the Datadog Operator using the following configuration:
 
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+
 ##### Integration check
 
 
@@ -243,11 +246,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "aws.secrets"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
+    secretBackend:
+      type: "aws.secrets"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
   override:
     nodeAgent:
       # IAM role ARN is required to grant the Agent permissions to access the AWS secret
@@ -280,11 +283,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "aws.secrets"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
+    secretBackend:
+      type: "aws.secrets"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
   override:
     nodeAgent:
       # IAM role ARN required to grant the Agent permissions to access the AWS secret
@@ -313,11 +316,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "aws.secrets"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"aws_session":{"aws_region":"<AWS_REGION>"}}'
+    secretBackend:
+      type: "aws.secrets"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -339,7 +342,7 @@ spec:
 
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "aws.secrets"` and `spec.global.secretBackend.config` with `aws_session.aws_region: "<AWS_REGION>"`.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.secrets"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -347,7 +350,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="AWS SSM" level="h4" expanded=false id="id-for-ssm" %}}
+{{% collapse-content title="AWS SSM" level="h5" expanded=false id="id-for-ssm" %}}
 The following AWS services are supported:
 
 |secret_backend_type value                                | AWS Service                             |
@@ -359,6 +362,9 @@ The following AWS services are supported:
 Datadog recommends using the [instance profile method][1006] of retrieving secrets, as AWS handles all environment variables and session profiles for you. More instructions on how to do this can be found at the official [AWS Secrets Manager documentation][1001].
 
 ##### Configuration example
+
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
 
 The AWS System Manager Parameter Store supports a hierarchical model. For example, assuming the following AWS System Manager Parameter Store paths:
 
@@ -395,10 +401,207 @@ The following `aws_session` fields configure how the Agent authenticates to AWS.
 | `aws_role_arn` | IAM role ARN to assume with `sts:AssumeRole`. |
 | `aws_external_id` | External ID to pass when assuming a cross-account role. |
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use AWS SSM to resolve secrets in Helm using the following configuration:
+
+##### Integration check
+
+```yaml
+datadog:
+  secretBackend:
+    type: "aws.ssm"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <SHORT_IMAGE>
+      instances:
+        - [...]
+          password: "ENC[/DatadogAgent/Production/ParameterKey]"
+agents:
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+```
+
+<div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS SSM parameter. </div>
+
+##### Cluster check: without cluster check runners enabled
+```yaml
+datadog:
+  secretBackend:
+    type: "aws.ssm"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
+agents:
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+clusterAgent:
+  confd:
+    # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[/DatadogAgent/Production/ParameterKey]"
+```
+
+##### Cluster check: with cluster check runners enabled
+```yaml
+datadog:
+  secretBackend:
+    type: "aws.ssm"
+    config:
+      aws_session:
+        aws_region: "<AWS_REGION>"
+    enableGlobalPermissions: true
+clusterAgent:
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[/DatadogAgent/Production/ParameterKey]"
+clusterChecksRunner:
+  enabled: true
+  rbac:
+    # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
+    serviceAccountAnnotations:
+      eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use AWS SSM to resolve secrets with the Datadog Operator using the following configuration:
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+
+##### Integration check
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "aws.ssm"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
+  override:
+    nodeAgent:
+      # IAM role ARN is required to grant the Agent permissions to access the AWS SSM parameter
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <SHORT_IMAGE>
+            instances:
+              - [...]
+                password: "ENC[/DatadogAgent/Production/ParameterKey]"
+
+```
+
+<div class="alert alert-info"> You must include the <code>serviceAccountAnnotations</code> to grant the Agent permissions to access the AWS SSM parameter. </div>
+
+##### Cluster check: without cluster check runners enabled
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "aws.ssm"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
+  override:
+    nodeAgent:
+      # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[/DatadogAgent/Production/ParameterKey]"
+```
+
+##### Cluster check: with cluster check runners enabled
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "aws.ssm"
+      config:
+        aws_session:
+          aws_region: <AWS_REGION>
+  features:
+    clusterChecks:
+      useClusterChecksRunners: true
+  override:
+    [...]
+    clusterChecksRunner:
+      # IAM role ARN required to grant the Agent permissions to access the AWS SSM parameter
+      serviceAccountAnnotations:
+        eks.amazonaws.com/role-arn: <IAM_ROLE_ARN>
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[/DatadogAgent/Production/ParameterKey]"
+
+```
+
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="aws.ssm"` and `DD_SECRET_BACKEND_CONFIG='{"aws_session":{"aws_region":"<AWS_REGION>"}}'`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Azure Keyvault Backend" level="h4" expanded=false id="id-for-azure" %}}
+{{% collapse-content title="Azure Keyvault Backend" level="h5" expanded=false id="id-for-azure" %}}
 
 
 The following Azure services are supported:
@@ -537,6 +740,8 @@ clusterChecksRunner:
 
 Configure the Datadog Agent to use Azure Key Vault to resolve secrets with the Datadog Operator using the following configuration:
 
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+
 ##### Integration check
 
 ```sh
@@ -547,11 +752,12 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "azure.keyvault"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+    secretBackend:
+      type: "azure.keyvault"
+      config:
+        keyvaulturl: <KEY_VAULT_URL>
+        azure_session:
+          azure_client_id: <CLIENT_ID>
   override:
     nodeAgent:
       extraConfd:
@@ -575,11 +781,12 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "azure.keyvault"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+    secretBackend:
+      type: "azure.keyvault"
+      config:
+        keyvaulturl: <KEY_VAULT_URL>
+        azure_session:
+          azure_client_id: <CLIENT_ID>
   override:
     clusterAgent:
       extraConfd:
@@ -602,11 +809,12 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "azure.keyvault"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"keyvaulturl": "<keyVaultURL>", "azure_session": {"azure_client_id": "<CLIENT_ID>"}}'
+    secretBackend:
+      type: "azure.keyvault"
+      config:
+        keyvaulturl: <KEY_VAULT_URL>
+        azure_session:
+          azure_client_id: <CLIENT_ID>
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -622,14 +830,14 @@ spec:
                 password: "ENC[secretKeyNameInKeyVault]"
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "azure.keyvault"` and `spec.global.secretBackend.config` with `keyvaulturl` and `azure_session.azure_client_id` keys.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="GCP Secret Manager" level="h4" expanded=false id="id-for-gcp" %}}
+{{% collapse-content title="GCP Secret Manager" level="h5" expanded=false id="id-for-gcp" %}}
 
 *Available in Agent version 7.74+*
 
@@ -787,6 +995,8 @@ clusterChecksRunner:
 
 Configure the Datadog Agent to use GCP Secret Manager to resolve secrets with the Datadog Operator using the following configuration:
 
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+.
+
 ##### Integration check
 
 ```sh
@@ -797,11 +1007,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "gcp.secretmanager"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+    secretBackend:
+      type: "gcp.secretmanager"
+      config:
+        gcp_session:
+          project_id: <PROJECT_ID>
   override:
     nodeAgent:
       extraConfd:
@@ -825,11 +1035,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "gcp.secretmanager"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+    secretBackend:
+      type: "gcp.secretmanager"
+      config:
+        gcp_session:
+          project_id: <PROJECT_ID>
   override:
     clusterAgent:
       extraConfd:
@@ -852,11 +1062,11 @@ metadata:
 spec:
   [...]
   global:
-    env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "gcp.secretmanager"
-      - name: DD_SECRET_BACKEND_CONFIG
-        value: '{"gcp_session":{"project_id":"<PROJECT_ID>"}}'
+    secretBackend:
+      type: "gcp.secretmanager"
+      config:
+        gcp_session:
+          project_id: <PROJECT_ID>
   features:
     clusterChecks:
       useClusterChecksRunners: true
@@ -872,7 +1082,7 @@ spec:
                 password: "ENC[secret-name]"
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use native `secretBackend.type` and `secretBackend.config` fields instead of environment variables. For example: `spec.global.secretBackend.type: "gcp.secretmanager"` and `spec.global.secretBackend.config` with `gcp_session.project_id: "<PROJECT_ID>"`.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -892,7 +1102,7 @@ The Datadog Agent supports extracting specific keys from JSON-formatted secrets 
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="HashiCorp Vault Backend" level="h4" expanded=false id="id-for-hashicorp" %}}
+{{% collapse-content title="HashiCorp Vault Backend" level="h5" expanded=false id="id-for-hashicorp" %}}
 
 The following HashiCorp services are supported:
 
@@ -924,7 +1134,7 @@ path "sys/mounts" {
 ```
 3. Run `vault policy write <policy_name> <path_to_*.hcl_file>`
 
-4. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`.
+4. Choose the method of authenticating to your vault. If using the AWS instance profile method, run `vault auth enable aws`. If deploying with Helm or the Datadog Operator, use the [Kubernetes auth method](#kubernetes-auth-method-instructions) instead.
 
 ##### AWS instance profile instructions
 
@@ -932,7 +1142,43 @@ Datadog recommends that you authenticate using the [instance profile method][300
 
 After this has been set up, write an [authentication-specific vault policy][3004].
 
+##### Kubernetes auth method instructions
+
+**Prerequisite**: Vault's `kubernetes` auth method validates the Agent's ServiceAccount token by calling the Kubernetes `TokenReview` API. The identity Vault uses for this call (its own ServiceAccount by default, or the identity set with `token_reviewer_jwt`) must have the `system:auth-delegator` ClusterRole bound to it:
+
+```sh
+kubectl create clusterrolebinding vault-tokenreview-binding \
+    --clusterrole=system:auth-delegator \
+    --serviceaccount=<VAULT_NAMESPACE>:<VAULT_SERVICE_ACCOUNT>
+```
+
+This is already configured if you installed Vault with the official [Vault Helm chart][3006].
+
+To authenticate using the Agent pod's Kubernetes ServiceAccount token (the method used by the Helm and Operator configuration examples), enable the `kubernetes` auth method in Vault:
+
+```sh
+vault auth enable kubernetes
+
+vault write auth/kubernetes/config \
+    kubernetes_host="https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_SERVICE_PORT"
+```
+
+Then create a role that binds the policy from step 2 to the Agent's ServiceAccount name and namespace:
+
+```sh
+vault write auth/kubernetes/role/<VAULT_ROLE> \
+    bound_service_account_names=<AGENT_SERVICE_ACCOUNT_NAME> \
+    bound_service_account_namespaces=<AGENT_NAMESPACE> \
+    policies=<policy_name> \
+    ttl=1h
+```
+
+Use this `<VAULT_ROLE>` value for `vault_kubernetes_role` in the Helm and Operator configuration examples.
+
 ##### Configuration example
+
+{{< tabs >}}
+{{% tab "Agent YAML file" %}}
 
 In the following example, assume the HashiCorp Vault secret path prefix is `/Datadog/Production` with a parameter key of `apikey`:
 
@@ -1011,9 +1257,193 @@ secret_backend_config:
 | `tls_server` | Expected server name for TLS SNI verification. |
 | `insecure` | Set to `true` to disable TLS certificate verification. Do not use in production. |
 
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Configure the Datadog Agent to use HashiCorp Vault to resolve secrets in Helm using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required for the Agent. Vault itself needs RBAC permissions to validate that token; see the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above.
+
+**Note**: In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
+
+##### Integration check
+
+```yaml
+datadog:
+  secretBackend:
+    type: "hashicorp.vault"
+    config:
+      vault_address: "https://myvaultaddress.net"
+      vault_session:
+        vault_auth_type: kubernetes
+        vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      ad_identifiers:
+        - <SHORT_IMAGE>
+      instances:
+        - [...]
+          password: "ENC[/Datadog/Production;apikey]"
+```
+
+##### Cluster check: without cluster check runners enabled
+```yaml
+datadog:
+  secretBackend:
+    type: "hashicorp.vault"
+    config:
+      vault_address: "https://myvaultaddress.net"
+      vault_session:
+        vault_auth_type: kubernetes
+        vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
+clusterAgent:
+  confd:
+    # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[/Datadog/Production;apikey]"
+```
+
+##### Cluster check: with cluster check runners enabled
+```yaml
+datadog:
+  secretBackend:
+    type: "hashicorp.vault"
+    config:
+      vault_address: "https://myvaultaddress.net"
+      vault_session:
+        vault_auth_type: kubernetes
+        vault_kubernetes_role: "<VAULT_ROLE>"
+        vault_kubernetes_mount_path: "auth/kubernetes/login"
+    enableGlobalPermissions: true
+clusterAgent:
+  confd:
+  # This is an example
+    <INTEGRATION_NAME>.yaml: |-
+      cluster_check: true
+      instances:
+        - [...]
+          password: "ENC[/Datadog/Production;apikey]"
+clusterChecksRunner:
+  enabled: true
+```
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+Configure the Datadog Agent to use HashiCorp Vault to resolve secrets with the Datadog Operator using the following configuration. This uses Vault's `kubernetes` auth method, which relies on the Agent's automatically mounted ServiceAccount token, so no extra Kubernetes RBAC or annotations are required for the Agent. Vault itself needs RBAC permissions to validate that token; see the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above.
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.29.0+. In your Vault server, enable the `kubernetes` auth method and bind `vault_kubernetes_role` to the Agent's ServiceAccount name and namespace. See the [Kubernetes auth method instructions](#kubernetes-auth-method-instructions) above and the official [HashiCorp Vault Kubernetes auth method documentation][3005] for more information.
+
+##### Integration check
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "hashicorp.vault"
+      config:
+        vault_address: "https://myvaultaddress.net"
+        vault_session:
+          vault_auth_type: kubernetes
+          vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
+  override:
+    nodeAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            ad_identifiers:
+              - <SHORT_IMAGE>
+            instances:
+              - [...]
+                password: "ENC[/Datadog/Production;apikey]"
+```
+
+##### Cluster check: without cluster check runners enabled
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "hashicorp.vault"
+      config:
+        vault_address: "https://myvaultaddress.net"
+        vault_session:
+          vault_auth_type: kubernetes
+          vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[/Datadog/Production;apikey]"
+```
+
+##### Cluster check: with cluster check runners enabled
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  [...]
+  global:
+    secretBackend:
+      type: "hashicorp.vault"
+      config:
+        vault_address: "https://myvaultaddress.net"
+        vault_session:
+          vault_auth_type: kubernetes
+          vault_kubernetes_role: "<VAULT_ROLE>"
+          vault_kubernetes_mount_path: "auth/kubernetes/login"
+  features:
+    clusterChecks:
+      useClusterChecksRunners: true
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+        # This is an example
+          <INTEGRATION_NAME>.yaml: |-
+            cluster_check: true
+            instances:
+              - [...]
+                password: "ENC[/Datadog/Production;apikey]"
+```
+
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields. For example: `DD_SECRET_BACKEND_TYPE="hashicorp.vault"` and `DD_SECRET_BACKEND_CONFIG='{"vault_address":"https://myvaultaddress.net","vault_session":{"vault_auth_type":"kubernetes","vault_kubernetes_role":"<VAULT_ROLE>","vault_kubernetes_mount_path":"auth/kubernetes/login"}}'`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 {{% /collapse-content %}}
 
-{{% collapse-content title="Kubernetes Secrets" level="h4" expanded=false id="id-for-kubernetes" %}}
+{{% collapse-content title="Kubernetes Secrets" level="h5" expanded=false id="id-for-kubernetes" %}}
 
 *Available in Agent version 7.75+*
 
@@ -1121,22 +1551,25 @@ Configure the Datadog Agent to use Kubernetes Secrets with Helm:
 datadog:
   apiKey: "placeholder-will-be-overridden"
 
+  secretBackend:
+    type: "k8s.secrets"
+
   env:
-  - name: DD_SECRET_BACKEND_TYPE
-    value: "k8s.secrets"
   - name: DD_API_KEY
     value: "ENC[secrets-ns/dd-api-key;api_key]"
 ```
 
 **Note:** A placeholder `apiKey` is required for Helm chart validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-**Alternatively**, with Helm chart v3.171.0+ and Agent v7.70+, you can use the native `datadog.secretBackend.type` field instead of environment variables.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` environment variable instead of the native `datadog.secretBackend.type` field.
 
 {{% /tab %}}
 
 {{% tab "Operator" %}}
 
 Configure the Datadog Agent to use Kubernetes Secrets with the Datadog Operator:
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1147,19 +1580,19 @@ spec:
   global:
     credentials:
       apiKey: "placeholder-will-be-overridden"
+    secretBackend:
+      type: "k8s.secrets"
 
   override:
     nodeAgent:
       env:
-      - name: DD_SECRET_BACKEND_TYPE
-        value: "k8s.secrets"
       - name: DD_API_KEY
         value: "ENC[secrets-ns/dd-api-key;api_key]"
 ```
 
 **Note:** A placeholder API key satisfies Operator validation when using secret backend to resolve the API key. The `DD_API_KEY` environment variable overrides it. You must manually create RBAC (Role + RoleBinding) for each namespace containing secrets. For more information, see the [RBAC setup](#rbac-setup) section.
 
-**Alternatively**, with Datadog Operator v1.25.0+ and Agent v7.70+, you can use the native `spec.global.secretBackend.type` field instead of environment variables.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` environment variable instead of the native `spec.global.secretBackend.type` field.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1178,31 +1611,38 @@ secret_backend_config:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
+
+**Note**: The native `secretBackend` fields require Helm chart v3.171.0+.
+
 ```yaml
 datadog:
-  env:
-  - name: DD_SECRET_BACKEND_TYPE
-    value: "k8s.secrets"
-  - name: DD_SECRET_BACKEND_CONFIG
-    value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+  secretBackend:
+    type: "k8s.secrets"
+    config:
+      token_path: /custom/path/to/token
+      ca_path: /custom/path/to/ca.crt
+    enableGlobalPermissions: true
 ```
 
-**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with `token_path` and `ca_path` keys.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `datadog.secretBackend.type` and `datadog.secretBackend.config` fields.
 
 {{% /tab %}}
 
 {{% tab "Operator" %}}
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
+
 ```yaml
-override:
-  nodeAgent:
-    env:
-    - name: DD_SECRET_BACKEND_TYPE
-      value: "k8s.secrets"
-    - name: DD_SECRET_BACKEND_CONFIG
-      value: '{"token_path":"/custom/path/to/token","ca_path":"/custom/path/to/ca.crt"}'
+spec:
+  global:
+    secretBackend:
+      type: "k8s.secrets"
+      config:
+        token_path: /custom/path/to/token
+        ca_path: /custom/path/to/ca.crt
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with `token_path` and `ca_path` keys.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -1221,38 +1661,43 @@ secret_backend_config:
 {{% /tab %}}
 
 {{% tab "Helm" %}}
+
+**Note**: The native `secretBackend` fields require Helm chart v3.171.0+.
+
 ```yaml
 datadog:
-  env:
-  - name: DD_SECRET_BACKEND_TYPE
-    value: "k8s.secrets"
-  - name: DD_SECRET_BACKEND_CONFIG
-    value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+  secretBackend:
+    type: "k8s.secrets"
+    config:
+      api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
+    enableGlobalPermissions: true
 ```
 
-**Alternatively**, with Helm chart v3.171.0+, you can use: `datadog.secretBackend.type: "k8s.secrets"` and `datadog.secretBackend.config` with the `api_server` key.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `datadog.secretBackend.type` and `datadog.secretBackend.config` fields.
 
 {{% /tab %}}
 
 {{% tab "Operator" %}}
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
+
 ```yaml
-override:
-  nodeAgent:
-    env:
-    - name: DD_SECRET_BACKEND_TYPE
-      value: "k8s.secrets"
-    - name: DD_SECRET_BACKEND_CONFIG
-      value: '{"api_server":"https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}"}'
+spec:
+  global:
+    secretBackend:
+      type: "k8s.secrets"
+      config:
+        api_server: https://{KUBERNETES_SERVICE_HOST}:{KUBERNETES_SERVICE_PORT}
 ```
 
-**Alternatively**, with Datadog Operator v1.25.0+, you can use: `spec.global.secretBackend.type: "k8s.secrets"` and `spec.global.secretBackend.config` with the `api_server` key.
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
 
 {{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Docker Secrets" level="h4" expanded=false id="id-for-docker" %}}
+{{% collapse-content title="Docker Secrets" level="h5" expanded=false id="id-for-docker" %}}
 
 *Available in Agent version 7.75+*
 
@@ -1341,7 +1786,7 @@ The secret file `./secrets/api_key.txt` is mounted at `/run/secrets/dd_api_key` 
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h4" expanded=false id="id-for-json-yaml-text" %}}
+{{% collapse-content title="JSON, YAML, or TEXT File Secret Backends" level="h5" expanded=false id="id-for-json-yaml-text" %}}
 
 | secret_backend_type value                                 | File Service                             |
 |---------------------------------------------|-----------------------------------------|
@@ -1452,6 +1897,126 @@ secret_backend_config:
 
 {{% /tab %}}
 {{< /tabs >}}
+
+##### Deploying with Helm or the Datadog Operator
+
+To use a file-based secret backend (`file.json`, `file.yaml`, or `file.text`) with Helm or the Datadog Operator, mount the secret file into every Agent component that resolves it. The following examples mount it only into the node Agent. If the Cluster Agent or Cluster Checks Runner contains an `ENC[]` value, mount the same volume into that component. Substitute `file.yaml` or `file.text` and the corresponding config key (`file_path` or `secrets_path`) as needed.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+```yaml
+datadog:
+  secretBackend:
+    type: "file.json"
+    config:
+      file_path: /etc/secret-volume/secret.json
+    enableGlobalPermissions: true
+agents:
+  volumes:
+    - name: secret-volume
+      secret:
+        secretName: <SECRET_NAME>
+  volumeMounts:
+    - name: secret-volume
+      mountPath: /etc/secret-volume
+      readOnly: true
+```
+
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `datadog.secretBackend.type` and `datadog.secretBackend.config` fields.
+
+{{% /tab %}}
+
+{{% tab "Operator" %}}
+
+**Note**: The native `secretBackend` fields require Datadog Operator v1.25.0+.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    secretBackend:
+      type: "file.json"
+      config:
+        file_path: /etc/secret-volume/secret.json
+  override:
+    nodeAgent:
+      volumes:
+        - name: secret-volume
+          secret:
+            secretName: <SECRET_NAME>
+      containers:
+        agent:
+          volumeMounts:
+            - name: secret-volume
+              mountPath: /etc/secret-volume
+              readOnly: true
+```
+
+**Alternatively**, you can use the `DD_SECRET_BACKEND_TYPE` and `DD_SECRET_BACKEND_CONFIG` environment variables instead of the native `spec.global.secretBackend.type` and `spec.global.secretBackend.config` fields.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Windows Registry Key" level="h4" expanded=false id="id-for-windows-regkey" %}}
+
+**Available in Agent version 7.82+**
+
+The following Windows services are supported:
+
+| secret_backend_type value | Service |
+|---------------------------|---------|
+| `windows.regkey` | Windows Registry |
+
+##### Prerequisites
+
+This backend is supported on Windows only. The registry key must be readable by the account the Datadog Agent runs under (by default `ddagentuser`). Keys under `HKLM` are readable by all local users by default. Datadog recommends restricting the ACL so only `ddagentuser` and `SYSTEM` can read the key.
+
+##### Configuration example
+
+Configure the Datadog Agent to use the Windows Registry Key backend with the following configuration:
+
+```yaml
+# datadog.yaml
+secret_backend_type: windows.regkey
+
+api_key: 'ENC[SOFTWARE\Datadog\secrets:api_key]'
+```
+
+Reference secrets using the format `ENC[<registry-path>:<value-name>]`, where `registry-path` is the subpath beneath the root key and `value-name` is the registry value to read.
+
+By default, the root key is `HKLM`. To use a different hive, set `root_key`. Only the following values are accepted (any other value returns an error):
+
+`HKLM`, `HKCU`, `HKCR`, `HKU`, `HKCC` (long forms such as `HKEY_LOCAL_MACHINE` are also supported)
+
+```yaml
+secret_backend_type: windows.regkey
+secret_backend_config:
+  root_key: HKCU
+```
+
+##### Set up the registry key
+
+This example PowerShell shell script demonstrates how to set up a registry (to be run as Administrator after installing):
+
+```powershell
+# Create the key and set the secret value
+New-Item -Path "HKLM:\SOFTWARE\Datadog\secrets" -Force
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Datadog\secrets" -Name "api_key" -Value "<YOUR_API_KEY>"
+
+# Restrict read access to ddagentuser and SYSTEM (recommended)
+$acl = Get-Acl "HKLM:\SOFTWARE\Datadog\secrets"
+$acl.SetAccessRuleProtection($true, $false)
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "SYSTEM", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "ddagentuser", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "Administrators", "FullControl", "Allow"))
+Set-Acl "HKLM:\SOFTWARE\Datadog\secrets" $acl
+```
 
 {{% /collapse-content %}}
 
@@ -2183,6 +2748,8 @@ instances:
 [3001]: https://developer.hashicorp.com/
 [3003]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
 [3004]: https://developer.hashicorp.com/vault/docs/auth/aws#iam-authentication-inferences
+[3005]: https://developer.hashicorp.com/vault/docs/auth/kubernetes
+[3006]: https://developer.hashicorp.com/vault/docs/platform/k8s/helm
 
 <!-- File Backend Links (JSON/YAML) -->
 [4001]: https://en.wikipedia.org/wiki/JSON

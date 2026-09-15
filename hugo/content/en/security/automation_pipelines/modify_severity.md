@@ -17,6 +17,9 @@ further_reading:
   - link: "/security/automation_pipelines"
     tag: "Documentation"
     text: "Automation Pipelines"
+  - link: "/security/manual_severity_adjustment/"
+    tag: "Documentation"
+    text: "Severity Adjustment"
 ---
 
 {{< product-availability >}}

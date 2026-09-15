@@ -17,7 +17,7 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 
 ## Setup
 
-{{% collapse-content title="Quick Start (recommended)" level="h4" id="quick-start-log-setup" %}}
+{{% collapse-content title="Quick Start (recommended)" level="h3" id="quick-start-log-setup" %}}
 #### Choose the Quick Start setup method if…
 
 - You are setting up log forwarding from Google Cloud for the first time.
@@ -55,7 +55,7 @@ Logs are forwarded by [Google Cloud Dataflow][4] using the [Datadog Dataflow tem
 [105]: https://cloud.google.com/logging/docs/view/logging-query-language
 {{% /collapse-content %}}
 
-{{% collapse-content title="Terraform" level="h4" id="terraform-log-setup" %}}
+{{% collapse-content title="Terraform" level="h3" id="terraform-log-setup" %}}
 #### Choose the Terraform setup method if…
 
 - You manage infrastructure as code and want to keep the Datadog Google Cloud integration under version control.
@@ -98,7 +98,7 @@ See the instructions on the [`terraform-gcp-datadog-integration`][300] repo to s
 {{< /tabs >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Manual" level="h4" id="manual-logging-setup" %}}
+{{% collapse-content title="Manual" level="h3" id="manual-logging-setup" %}}
 The instructions in this section guide you through the process of:
 
 1. Creating a Pub/Sub [topic][401] and [pull subscription][402] to receive logs from a configured log sink
@@ -244,7 +244,7 @@ The default behavior for Dataflow pipeline workers is to use your project's [Com
 [430]: https://cloud.google.com/dataflow/docs/guides/specifying-networks#shared
 {{% /collapse-content %}}
 
-{{% collapse-content title="Pub/Sub Push subscription (legacy)" level="h4" id="pub-sub-push-logging-setup" %}}
+{{% collapse-content title="Pub/Sub Push subscription (legacy)" level="h3" id="pub-sub-push-logging-setup" %}}
 <a href="https://docs.datadoghq.com/logs/guide/collect-google-cloud-logs-with-push/" target="_blank">Collecting Google Cloud logs with a Pub/Sub Push subscription</a> is in the process of being **deprecated**.
 
 The above documentation for the **Push** subscription is only maintained for troubleshooting or modifying legacy setups.

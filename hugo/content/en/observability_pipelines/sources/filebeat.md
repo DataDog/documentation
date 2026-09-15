@@ -1,5 +1,6 @@
 ---
 title: Send Logs to Observability Pipelines with Filebeat
+description: Learn how to send logs to Observability Pipelines with Filebeat through the Logstash source.
 disable_toc: false
 ---
 

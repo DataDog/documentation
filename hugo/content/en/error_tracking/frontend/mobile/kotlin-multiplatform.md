@@ -408,7 +408,7 @@ To test your implementation:
 
 
 ## Advanced Error Tracking Features
-{{% collapse-content title="Sending data when device is offline" level="h4" %}}
+{{% collapse-content title="Sending data when device is offline" level="h3" %}}
 
 The Datadog SDK ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. 
 
@@ -418,7 +418,7 @@ This means that even if users open your application while offline, no data is lo
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" %}}
+{{% collapse-content title="Set tracking consent (GDPR compliance)" level="h3" %}}
 
 To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:

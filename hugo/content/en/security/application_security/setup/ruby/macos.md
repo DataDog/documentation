@@ -15,12 +15,6 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 {{% app-and-api-protection-ruby-overview %}}
 
 ## Prerequisites
@@ -40,7 +34,7 @@ Install the Datadog Agent by following the [setup instructions for macOS](/agent
 
 Install and configure the `datadog` gem in your Ruby application.
 
-{{% collapse-content title="APM Tracing Enabled" level="h4" %}}
+{{% collapse-content title="APM Tracing Enabled" level="h3" %}}
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 
@@ -104,7 +98,7 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /tabs >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="APM Tracing Disabled" level="h4" %}}
+{{% collapse-content title="APM Tracing Disabled" level="h3" %}}
 
 To disable APM tracing while keeping App and API Protection enabled, you must set the APM tracing configuration to false.
 

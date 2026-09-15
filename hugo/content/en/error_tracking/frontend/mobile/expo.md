@@ -339,7 +339,7 @@ DdSdkReactNative.initialize(config);
 
 ## Additional configuration options
 
-{{% collapse-content title="Disable file uploads" level="h4" expanded=false id="disable-file-uploads" %}}
+{{% collapse-content title="Disable file uploads" level="h3" expanded=false id="disable-file-uploads" %}}
 
 You can disable some files from uploading by setting the `iosDsyms`, `iosSourcemaps`, `androidProguardMappingFiles`, or `androidSourcemaps` parameters to `false`.
 
@@ -364,7 +364,7 @@ If you want to disable **all file uploads**, remove `expo-datadog` from the list
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="List uploaded source maps" level="h4" expanded=false id="list-uploaded-source-maps" %}}
+{{% collapse-content title="List uploaded source maps" level="h3" expanded=false id="list-uploaded-source-maps" %}}
 
 To verify that your source maps, dSYMs, and Proguard mapping files have been successfully uploaded and are available for symbolication, you can list all uploaded debug symbols.
 
@@ -372,7 +372,7 @@ See the [RUM Debug Symbols][13] page to view all uploaded symbols.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Specify a custom release version" level="h4" expanded=false id="specify-custom-release-version" %}}
+{{% collapse-content title="Specify a custom release version" level="h3" expanded=false id="specify-custom-release-version" %}}
 
 Use the `DATADOG_RELEASE_VERSION` environment variable to specify a different release version for your source maps, starting from `@datadog/mobile-react-native@2.3.5` and `@datadog/datadog-ci@v2.37.0`.
 
@@ -380,7 +380,7 @@ When the SDK is initialized with a version suffix, you must manually override th
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Use Expo with Datadog and Sentry" level="h4" expanded=false id="use-expo-with-datadog-sentry" %}}
+{{% collapse-content title="Use Expo with Datadog and Sentry" level="h3" expanded=false id="use-expo-with-datadog-sentry" %}}
 
 Both Datadog and Sentry config plugins use regular expressions to modify the "Bundle React Native code and images" iOS build phase to send the source map. This can make your EAS builds fail with a `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context` error.
 
@@ -397,7 +397,7 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Check source map file size limits" level="h4" expanded=false id="check-source-map-size" %}}
+{{% collapse-content title="Check source map file size limits" level="h3" expanded=false id="check-source-map-size" %}}
 
 Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
 

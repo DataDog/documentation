@@ -163,11 +163,21 @@ To review recommendations that need your attention:
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 5. (Optional) To use [Bits Code][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
-6. (Optional) To track the fix in Jira or Case Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
+6. (Optional) To track the fix in Jira or Work Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Work Item{{< /ui >}}.
 
 After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 
 **Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}Error Tracking{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the Error Tracking {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
+
+## Viewing recommendations on a dashboard
+
+Add a List widget with APM Recommendations as its data source to review recommendations alongside your team's performance metrics.
+
+{{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="A List widget configured with APM Recommendations as the data source, showing recommendations by priority, service, summary, issue, and status" style="width:100%;" >}}
+
+1. On any dashboard, create a widget and select {{< ui >}}List{{< /ui >}} as the visualization.
+2. Select {{< ui >}}APM Recommendations{{< /ui >}} as the data source.
+3. Filter by environment, service, team, recommendation type, and status.
 
 ## Supported recommendations
 
