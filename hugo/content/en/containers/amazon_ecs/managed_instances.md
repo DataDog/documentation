@@ -125,8 +125,7 @@ To enable integrations, add Docker label annotations to your application contain
 2. Choose the cluster your application is running on.
 3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} for your application.
 4. Click the {{< ui >}}Create new revision{{< /ui >}} button.
-5. Select the application container you want to monitor and click {{< ui >}}Edit{{< /ui >}}.
-6. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
+5. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
 
 | Key                           | Value                                           |
 |-------------------------------|-------------------------------------------------|
@@ -134,7 +133,7 @@ To enable integrations, add Docker label annotations to your application contain
 | com.datadoghq.ad.check_names  | `["<CHECK_NAME>"]`                              |
 | com.datadoghq.ad.init_configs | `[{}]`                                          |
 
-7. Click the {{< ui >}}Update{{< /ui >}} button, then click the {{< ui >}}Create{{< /ui >}} button.
+6. Click the {{< ui >}}Update{{< /ui >}} button, then click the {{< ui >}}Create{{< /ui >}} button.
 
 [1]: https://aws.amazon.com/console
 {{% /tab %}}
