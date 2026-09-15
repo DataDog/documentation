@@ -120,7 +120,7 @@ The easiest way to create a facet is to add it from the trace side panel so that
 
 ### Creating facets from the facet list
 
-If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}+ Add{{< /ui >}}.
+If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}\+ Add{{< /ui >}}.
 
 Define the underlying field (key) name for this facet:
 

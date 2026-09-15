@@ -122,7 +122,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then add a name, select {{< ui
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
 3. Within your storage account, navigate to {{< ui >}}Access Control (IAM){{< /ui >}} and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 4. Input and select the {{< ui >}}Storage Blob Data Reader{{< /ui >}} role. The [{{< ui >}}Storage Blob Data Reader{{< /ui >}} role][3] allows Datadog to read and list storage containers and blobs.
-5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
+5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}\+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
 
    {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 

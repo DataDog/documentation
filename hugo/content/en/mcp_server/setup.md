@@ -593,7 +593,7 @@ The Datadog MCP server connection is managed by Copilot (or whichever agent you 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
 
-1. In the Warp app, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Servers{{< /ui >}} and click {{< ui >}}+ Add{{< /ui >}}.
+1. In the Warp app, go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}MCP Servers{{< /ui >}} and click {{< ui >}}\+ Add{{< /ui >}}.
 
 1. Paste the following configuration:
 
