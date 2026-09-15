@@ -19,7 +19,7 @@ algolia:
   tags: ['auto conf','ignore auto conf', 'autoconf','ignore autoconf']
 ---
 
-When the Agent runs as a container, [Autodiscovery][49] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
+When the Agent runs as a container, [Autodiscovery][47] tries to discover other containers based on default configuration files named `auto_conf.yaml`. You can find these files in the corresponding `conf.d/<INTEGRATION>.d/` folders for the following integrations:
 
 | Integration                    | Auto-configuration file |
 | ------                         | --------                |
@@ -32,25 +32,24 @@ When the Agent runs as a container, [Autodiscovery][49] tries to discover other 
 | [Elastic][13]                  | [auto_conf.yaml][14]    |
 | [Etcd][15]                     | [auto_conf.yaml][16]    |
 | [External DNS][17]             | [auto_conf.yaml][18]    |
-| [Harbor][19]                   | [auto_conf.yaml][20]    |
-| [Istio][21]                    | [auto_conf.yaml][22]    |
-| [Kube APIserver][23]           | [auto_conf.yaml][24]    |
-| [Kube Controller Manager][25]  | [auto_conf.yaml][26]    |
-| [KubeDNS][23]                  | [auto_conf.yaml][27]    |
-| [Kube Scheduler][28]           | [auto_conf.yaml][29]    |
-| [Kubernetes State][23]         | [auto_conf.yaml][30]    |
-| [Kyototycoon][31]              | [auto_conf.yaml][32]    |
-| [MemCached][33]                | [auto_conf.yaml][34]    |
-| [Presto][35]                   | [auto_conf.yaml][36]    |
-| [RabbitMQ][47]                 | [auto_conf.yaml][48]    |
-| [Redis][37]                    | [auto_conf.yaml][38]    |
-| [Riak][39]                     | [auto_conf.yaml][40]    |
-| [Tomcat][41]                   | [auto_conf.yaml][42]    |
+| [Istio][19]                    | [auto_conf.yaml][20]    |
+| [Kube APIserver][21]           | [auto_conf.yaml][22]    |
+| [Kube Controller Manager][23]  | [auto_conf.yaml][24]    |
+| [KubeDNS][21]                  | [auto_conf.yaml][25]    |
+| [Kube Scheduler][26]           | [auto_conf.yaml][27]    |
+| [Kubernetes State][21]         | [auto_conf.yaml][28]    |
+| [Kyototycoon][29]              | [auto_conf.yaml][30]    |
+| [MemCached][31]                | [auto_conf.yaml][32]    |
+| [Presto][33]                   | [auto_conf.yaml][34]    |
+| [RabbitMQ][45]                 | [auto_conf.yaml][46]    |
+| [Redis][35]                    | [auto_conf.yaml][36]    |
+| [Riak][37]                     | [auto_conf.yaml][38]    |
+| [Tomcat][39]                   | [auto_conf.yaml][40]    |
 
-The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][43] in place to take into account the containerized environment.
+The `auto_conf.yaml` configuration files cover all required parameters to set up a specific integration, with their corresponding [Autodiscovery Templates Variables][41] in place to take into account the containerized environment.
 
 ## Override auto-configuration
-Each `auto_conf.yaml` file provides a default configuration. To override this on Kubernetes, you can add a custom configuration in [Kubernetes annotations][50] or use the [`DatadogInstrumentation` custom resource][52]. For Docker, use [Docker Labels][51].
+Each `auto_conf.yaml` file provides a default configuration. To override this on Kubernetes, you can add a custom configuration in [Kubernetes annotations][48] or use the [`DatadogInstrumentation` custom resource][50]. For Docker, use [Docker Labels][49].
 
 Kubernetes annotations take precedence over `DatadogInstrumentation` resources and `auto_conf.yaml` files. `DatadogInstrumentation` resources take precedence over `auto_conf.yaml` files, and `auto_conf.yaml` files take precedence over Autodiscovery configuration set in the Datadog Operator and Helm charts. To use Datadog Operator or Helm to configure Autodiscovery for an integration in the table on this page, you must [disable auto-configuration](#disable-auto-configuration).
 
@@ -128,37 +127,35 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [16]: https://github.com/DataDog/integrations-core/blob/master/etcd/datadog_checks/etcd/data/auto_conf.yaml
 [17]: /integrations/external_dns
 [18]: https://github.com/DataDog/integrations-core/blob/master/external_dns/datadog_checks/external_dns/data/auto_conf.yaml
-[19]: /integrations/harbor/
-[20]: https://github.com/DataDog/integrations-core/blob/master/harbor/datadog_checks/harbor/data/auto_conf.yaml
-[21]: /integrations/istio
-[22]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
-[23]: /agent/kubernetes/
-[24]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/datadog_checks/kube_apiserver_metrics/data/auto_conf.yaml
-[25]: /integrations/kube_controller_manager
-[26]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/auto_conf.yaml
-[27]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
-[28]: /integrations/kube_scheduler
-[29]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/auto_conf.yaml
-[30]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
-[31]: /integrations/kyototycoon/
-[32]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
-[33]: /integrations/mcache/
-[34]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
-[35]: /integrations/presto/
-[36]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/auto_conf.yaml
-[37]: /integrations/redisdb/
-[38]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
-[39]: /integrations/riak/
-[40]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
-[41]: /integrations/tomcat/
-[42]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
-[43]: /agent/guide/template_variables/
-[44]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
-[45]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
-[46]: /agent/docker/integrations/#configuration
-[47]: /integrations/rabbitmq/
-[48]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
-[49]: /getting_started/containers/autodiscovery
-[50]: /containers/kubernetes/integrations/?tab=annotations#configuration
-[51]: /containers/docker/integrations/
-[52]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+[19]: /integrations/istio
+[20]: https://github.com/DataDog/integrations-core/blob/master/istio/datadog_checks/istio/data/auto_conf.yaml
+[21]: /agent/kubernetes/
+[22]: https://github.com/DataDog/integrations-core/blob/master/kube_apiserver_metrics/datadog_checks/kube_apiserver_metrics/data/auto_conf.yaml
+[23]: /integrations/kube_controller_manager
+[24]: https://github.com/DataDog/integrations-core/blob/master/kube_controller_manager/datadog_checks/kube_controller_manager/data/auto_conf.yaml
+[25]: https://github.com/DataDog/integrations-core/blob/master/kube_dns/datadog_checks/kube_dns/data/auto_conf.yaml
+[26]: /integrations/kube_scheduler
+[27]: https://github.com/DataDog/integrations-core/blob/master/kube_scheduler/datadog_checks/kube_scheduler/data/auto_conf.yaml
+[28]: https://github.com/DataDog/integrations-core/blob/master/kubernetes_state/datadog_checks/kubernetes_state/data/auto_conf.yaml
+[29]: /integrations/kyototycoon/
+[30]: https://github.com/DataDog/integrations-core/blob/master/kyototycoon/datadog_checks/kyototycoon/data/auto_conf.yaml
+[31]: /integrations/mcache/
+[32]: https://github.com/DataDog/integrations-core/blob/master/mcache/datadog_checks/mcache/data/auto_conf.yaml
+[33]: /integrations/presto/
+[34]: https://github.com/DataDog/integrations-core/blob/master/presto/datadog_checks/presto/data/auto_conf.yaml
+[35]: /integrations/redisdb/
+[36]: https://github.com/DataDog/integrations-core/blob/master/redisdb/datadog_checks/redisdb/data/auto_conf.yaml
+[37]: /integrations/riak/
+[38]: https://github.com/DataDog/integrations-core/blob/master/riak/datadog_checks/riak/data/auto_conf.yaml
+[39]: /integrations/tomcat/
+[40]: https://github.com/DataDog/integrations-core/blob/master/tomcat/datadog_checks/tomcat/data/auto_conf.yaml
+[41]: /agent/guide/template_variables/
+[42]: /agent/kubernetes/integrations/?tab=keyvaluestore#configuration
+[43]: /agent/kubernetes/integrations/?tab=kubernetes#configuration
+[44]: /agent/docker/integrations/#configuration
+[45]: /integrations/rabbitmq/
+[46]: https://github.com/DataDog/integrations-core/blob/master/rabbitmq/datadog_checks/rabbitmq/data/auto_conf.yaml
+[47]: /getting_started/containers/autodiscovery
+[48]: /containers/kubernetes/integrations/?tab=annotations#configuration
+[49]: /containers/docker/integrations/
+[50]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
