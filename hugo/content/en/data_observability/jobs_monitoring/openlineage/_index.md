@@ -516,7 +516,12 @@ client.emit(fail_event)
 After sending your events, check the following:
 
 - [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
-- [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, your job appears as a node connected to the dataset nodes.
+- [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, you can see your job and its input/output lineage.
+- [**OpenLineage events**][12]: Every event Datadog received from you, newest first, with a
+  validation status of `Ok`, `Warning`, or `Error`. Select an event to see the exact
+  payload as received, and filter by validation status to find events that were
+  accepted over HTTP but rejected during validation. Start here if you're not seeing
+  the results you'd expect in the two views above.
 
 ## Correlate logs with job runs
 
@@ -629,3 +634,4 @@ Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 [9]: https://app.datadoghq.com/data-obs/lineage
 [10]: /logs/log_collection/
 [11]: /tracing/trace_explorer/?tab=listview
+[12]: https://app.datadoghq.com/data-obs/settings/open-lineage
