@@ -250,6 +250,30 @@ If a key:value pair contains any commas, surround it with quotes. For example, t
 
 ## Advanced configuration
 
+### Set a pipeline name
+
+By default, Datadog uses your GitLab project's path as the pipeline name. As a result, every downstream (child) pipeline triggered with the [`trigger`][33] keyword from the same project appears under the same name in Datadog.
+
+To give a pipeline a more meaningful name, use GitLab's [`workflow:name`][34] keyword in your `.gitlab-ci.yml`. For example, to name a downstream pipeline after the job that triggered it:
+
+```yaml
+trigger-job:
+  trigger:
+    include:
+      - local: path/to/child-pipeline.yml
+  variables:
+    CHILD_PIPELINE_NAME: $CI_JOB_NAME
+```
+
+In the child pipeline's `.gitlab-ci.yml` (or a file it includes), use the forwarded variable to set the pipeline name:
+
+```yaml
+workflow:
+  name: '$CHILD_PIPELINE_NAME'
+```
+
+**Note**: The example above uses variable expansion in the pipeline name, which requires GitLab 16.3 or later. `workflow:name` itself is available starting with GitLab 15.11 for plain string names. The pipeline name is only visible in Datadog starting with GitLab 16.1, when it was added to the pipeline webhook payload.
+
 ### Set custom tags
 
 You can set custom tags for all pipeline and job spans from your GitLab projects to improve traceability. For more information, see [Custom Tags and Measures][13].
@@ -470,3 +494,5 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [30]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [31]: /continuous_integration/pipelines/automatic_retries/
 [32]: /glossary/#running-job
+[33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
+[34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname

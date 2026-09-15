@@ -61,7 +61,7 @@ For example, you can:
 - Get valuable insights about your customers' behavior by
 making data-driven decisions to improve your store
 - Increase conversion by watching browser recordings enriched sessions with [Session Replay][3]
-- [Generate metrics][5] from newly captured sessions
+- [Generate metrics][4] from newly captured sessions
 
 ## Further Reading
 
@@ -70,5 +70,5 @@ making data-driven decisions to improve your store
 [1]: /real_user_monitoring/application_monitoring/browser/setup/#choose-the-right-installation-method/
 [2]: https://help.shopify.com/en/manual/online-store/themes/theme-structure/extend/edit-theme-code
 [3]: /session_replay/browser/
-[5]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
+[4]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
 

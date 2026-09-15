@@ -16,10 +16,6 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 Deployment Gates have two main components:
 
 - A **Gate** is defined for a service and environment (and optionally an identifier), and evaluates one or more rules to decide whether a deployment should proceed.

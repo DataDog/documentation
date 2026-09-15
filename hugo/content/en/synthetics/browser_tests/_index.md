@@ -50,7 +50,7 @@ You may create a test using one of the following options:
 
 ### Build a test from scratch
 
-  1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+  1. Click the {{< ui >}}\+{{< /ui >}} template to start a new Browser Test from scratch.
   1. Enter a {{< ui >}}Starting URL{{< /ui >}}: The URL from which your browser test starts the scenario.
   1. Add a {{< ui >}}name{{< /ui >}}: The name of your browser test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}}: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.

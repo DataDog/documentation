@@ -37,7 +37,10 @@ Upgrade to  **v7.82+**  of the Datadog Agent and Cluster Agent and install the `
 
 ## Setup
 
-The `DatadogInstrumentation` controller runs in the Cluster Agent and is disabled by default. Enable it with the Datadog Operator or Helm.
+To use `DatadogInstrumentation` (DDI), a controller in your Agent must be enabled to track and reconcile each CR.
+
+<div class="alert alert-info">Skip setup if you're using <code>v1.30+</code> of the Datadog Operator or <code>v3.241.0+</code> of the Datadog Helm Chart since the
+controller is enabled by default starting from these versions.</div>
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -129,6 +132,7 @@ You can target the following Kubernetes resources:
 | Deployment | `apps/v1/deployments` | 7.82.0 | |
 | DaemonSet | `apps/v1/daemonsets` | 7.82.0 | |
 | StatefulSet | `apps/v1/statefulsets` | 7.82.0 | |
+| StrimziPodSet | `apps.strimzi.io/v1beta2/strimzipodsets` | 7.84.0 | |
 | CronJob | `batch/v1/cronjobs` | 7.82.0 | |
 | Job | `batch/v1/jobs` | 7.82.0 | |
 | Service | `core/v1/services` | 7.82.0 | Supports checks only. See [Target services](#target-services). |

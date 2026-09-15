@@ -122,10 +122,28 @@ Most Kubernetes view features are available without version requirements. Specif
 | View `DatadogAgent` configuration | Datadog Operator v1.24 or later |
 | View Helm Chart values | Datadog Helm Chart v3.157.0 or later |
 | Edit configuration | [Remote Configuration][6] enabled and Datadog Operator v1.27 or later |
+| Edit configuration without setting a cluster name | Datadog Operator v1.30.0 or later |
 | View integrations on a Cluster Agent | Agent v7.72.0 or later |
 | View integration status on a Cluster Agent | Agent v7.79.0 or later |
 
-To edit configuration from Fleet View, also set the following flags in your [Operator configuration][7]: `remoteConfigEnabled`, `remoteUpdatesEnabled`, and `createControllerRevisions`. Editing Helm Chart values from Fleet View is not supported.
+To edit configuration from Fleet View, set the following flags in your [Operator configuration][7]: `remoteConfigEnabled`, `remoteUpdatesEnabled`, and `createControllerRevisions`. Editing also requires a Datadog API key and application key to be configured. Editing Helm Chart values from Fleet View is not supported.
+
+On Datadog Operator versions earlier than v1.30.0, you must also set a cluster name (`clusterName`), otherwise the {{< ui >}}Edit{{< /ui >}} button remains disabled. As of Datadog Operator v1.30.0, a cluster name is optional.
+
+If you install the Datadog Operator with its Helm chart, you can enable the required flags together using the `previewFleetRollouts` value:
+
+{{< code-block lang="shell" >}}
+helm repo add datadog https://helm.datadoghq.com
+helm repo update
+
+helm upgrade --install datadog-operator datadog/datadog-operator \
+  --set previewFleetRollouts=true \
+  --set apiKeyExistingSecret=datadog-secret \
+  --set appKeyExistingSecret=datadog-secret \
+  --devel
+{{< /code-block >}}
+
+Replace `datadog-secret` with the name of the Kubernetes Secret that holds your Datadog API and application keys. The `--devel` flag installs the latest development release of the chart.
 
 ### View Kubernetes clusters
 

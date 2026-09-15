@@ -38,8 +38,8 @@ These configurations can then be customized to add any Datadog feature.
 * [Red Hat OpenShift](#Openshift)
 * [Rancher](#Rancher)
 * [Oracle Container Engine for Kubernetes (OKE)](#OKE)
-* [vSphere Kubernetes Service (VKS)](#VKS)
-* [vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
+* [VMware vSphere Kubernetes Service (VKS)](#VKS)
+* [VMware vSphere Tanzu Kubernetes Grid (TKG)](#TKG)
 
 ## AWS Elastic Kubernetes Service (EKS) {#EKS}
 
@@ -678,7 +678,7 @@ agents:
 
 No specific configuration is required.
 
-## vSphere Kubernetes Service (VKS) {#VKS}
+## VMware vSphere Kubernetes Service (VKS) {#VKS}
 
 VKS requires the namespace where the Datadog Agent is deployed to use the privileged Pod Security Standard. Before deploying the Datadog Agent, replace `<namespace>` with the namespace where you deploy `datadog-agent` and run:
 
@@ -752,7 +752,7 @@ agents:
 
 {{< /tabs >}}
 
-## vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
+## VMware vSphere Tanzu Kubernetes Grid (TKG) {#TKG}
 
 TKG requires some small configuration changes, shown below. For example, setting a toleration is required for the controller to schedule the Node Agent on the `master` nodes.
 

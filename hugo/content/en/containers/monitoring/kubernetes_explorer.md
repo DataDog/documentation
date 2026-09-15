@@ -80,6 +80,8 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][1].
 
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][1] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][2] orchestrator explorer functionality.
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+
 #### Prerequisites
 
 - OpenTelemetry Collector Contrib [v0.154.0][3] or later.
@@ -303,6 +305,8 @@ The [`opentelemetry-kube-stack`][1] Helm chart installs the OpenTelemetry Operat
 
 - **`cluster`** (Deployment): Scrapes kube-state-metrics, watches Kubernetes objects, and enables `orchestrator_explorer` to populate Kubernetes Explorer.
 - **`daemon`** (DaemonSet): Collects host and kubelet metrics, and exposes an OTLP endpoint for application telemetry data.
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">This feature is not available for {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### Prerequisites
 

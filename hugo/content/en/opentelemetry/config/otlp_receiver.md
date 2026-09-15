@@ -9,6 +9,9 @@ further_reading:
 - link: "/opentelemetry/otlp_ingest_in_the_agent/"
   tag: "Documentation"
   text: "OTLP Ingestion by the Datadog Agent"
+- link: "https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "Datadog Agent OTLP Receiver in Kubernetes"
 ---
 
 ## Overview

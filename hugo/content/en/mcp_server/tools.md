@@ -153,23 +153,17 @@ Lists available metrics, with options for filtering and metadata.
 - List CPU-related metrics for our infrastructure.
 - Find metrics tagged with `service:api`.
 
-### `search_datadog_services`
+### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Catalog with details and team information.
+Searches Datadog's Catalog for service identity, ownership and upstream and downstream dependencies.
 
-- Show me all services in our microservices architecture.
-- List services owned by the platform team.
 - Find services related to payment processing.
-
-### `search_datadog_service_dependencies`
-*Toolset: **core***\
-*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
-Retrieves service dependencies (upstream/downstream) and services owned by a team.
-
+- List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
-- List all services owned by the platform team.
+
+<div class="alert alert-info"><code>search_datadog_services</code> and <code>search_datadog_service_dependencies</code> tools are deprecated, use <code>search_datadog_entities</code> instead.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
@@ -508,8 +502,6 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
 
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
-
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
@@ -783,6 +775,15 @@ Runs health checks to surface potential PostgreSQL issues such as CPU saturation
 - Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
 
+### `get_datadog_database_instance_settings`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves collected PostgreSQL configuration settings for a Database Monitoring instance, the same values shown on the Configuration tab. Returns parameters that affect performance and behavior, including memory (`shared_buffers`, `work_mem`), connections (`max_connections`), autovacuum, logging, WAL, and query planner settings. Filter by setting name to narrow results.
+
+- Show autovacuum settings for `db-prod-1`.
+- What logging settings are enabled on the payments PostgreSQL instance?
+- What is `shared_buffers` set to on `db-prod-1`?
+
 ### `get_datadog_database_query_performance`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -944,6 +945,15 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
+
+### `manage_datadog_error_tracking_issue_links`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an Error Tracking Issue.
+
+- File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
+- Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ## Experiments
 
@@ -1192,7 +1202,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Kubernetes
 
-Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
 
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
@@ -1203,6 +1213,17 @@ Searches for [Kubernetes][55] resources across all clusters. Use this tool inste
 - Find deployments with in-progress rollouts in the `general2` cluster.
 - List all nodes in my cluster sorted by CPU usage.
 - Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `analyse_datadog_k8s_rollout`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Logs Read Data` and `APM Read`*\
+Assembles a [Kubernetes][55] Deployment rollout in one call: rollout status and progress, timing (ETA while the rollout is in progress, duration after it finishes), the new, previous, and old ReplicaSet split by revision, and before/after impact series (RED, resource utilization, and log counts). Identify the Deployment by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). Use this tool for rollout questions instead of combining `search_datadog_k8s_resources` and `describe_datadog_k8s_resource`.
+
+- Analyze the rollout of deployment `checkout-api` in cluster `prod`, namespace `default`.
+- What's the ETA for the in-progress rollout of deployment `api-server` in cluster `staging`?
+- Did the last rollout of deployment `payments` affect error rates, traffic, or resource utilization?
+
+**Note**: The tool only reports on Deployments whose `kube_rollout_status` is `inprogress`, `recentlycompleted`, or `recentlyfailed`. For other Deployments, it returns the Deployment's fields with a warning that there is no recent rollout to analyze.
 
 ### `describe_datadog_k8s_resource`
 *Toolset: **kubernetes***\
@@ -1551,7 +1572,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, monitoring and managing [operations][73], exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1576,6 +1597,62 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
+
+### `get_rum_view_waterfall`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen. For the aggregated, cross-session view, use `get_rum_insight`.
+
+- Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
+- Why did the checkout page load with view UUID `d64b1e7c-8f2a-4c3b-9e1d-5a6b7c8d9e0f` take 12 seconds?
+
+### `search_rum_operations`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Lists the [operations][73] in your organization, including both SDK-instrumented and UI-configured operations, and resolves an operation name to its `operation_id` and `application_id`. Operations observed only through the SDK have no ID.
+
+- List the RUM operations on the "checkout-web" application.
+- Find the operation ID for the "checkout-flow" operation.
+
+### `get_rum_operation_summary`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries` or `SLOs Read` or `Monitors Read`*\
+Returns a health summary for a single operation: volume, success rate, failure breakdown by reason, latency percentiles, a per-bucket success and failure trend, and related SLOs and monitors.
+
+- Is the "checkout-flow" operation healthy over the last 24 hours?
+- Show me the p95 latency baseline and trend for the checkout operation.
+
+### `get_rum_operation_insights`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Investigates why an operation is failing, slow, or abandoned. The `failures` mode returns top failing endpoints, custom context attributes on failed runs, and correlated crash errors. The `latency` mode compares slow and fast cohorts and returns top slow resources. The `abandonment` mode shows how often users give up instead of completing, which views and in-flight resources are involved, and where users navigate next.
+
+- Why is the "checkout-flow" operation slow over the last four hours?
+- Users are dropping out of checkout without any errors. Show me abandonment insights.
+
+### `create_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Write`*\
+Creates a UI-configured operation that tracks a user journey between a start event and a success, failure, or abandonment event, matched by search queries against RUM events. This tool does not create SDK-instrumented operations, which are defined in application code. Confirm the operation name, queries, and event types before applying.
+
+- Create an operation on "checkout-web" that starts on the `/checkout` view and succeeds on `/checkout/complete`.
+- Set up an operation for the signup flow that fails when a validation error occurs.
+
+### `update_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Updates a UI-configured operation in place. Only the fields you pass are changed, and the rest keep their current values. This tool cannot rename an operation, and does not affect SDK-instrumented operations. Confirm the change before applying.
+
+- Change the failure query on the "checkout" operation to match declined payments.
+- Add abandonment tracking to the signup operation.
+
+### `delete_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Permanently deletes a UI-configured operation by ID or name. The response lists any SLOs and monitors still tagged for the operation, which are not deleted with it. Confirm the deletion before applying. This tool does not affect SDK-instrumented operations.
+
+- Delete the "legacy-checkout" operation from "checkout-web".
+- Remove the operation with ID `abc-123-def`.
 
 ### `search_rum_metrics`
 *Toolset: **rum***\
@@ -2433,6 +2510,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
+[73]: /real_user_monitoring/operations_monitoring/
 
 ## Further reading
 

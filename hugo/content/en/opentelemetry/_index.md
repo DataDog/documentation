@@ -47,6 +47,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/understanding-opentelemetry"
   tag: "Learning Center"
   text: "Understanding OpenTelemetry"
+- link: "https://www.datadoghq.com/blog/control-trace-volume-with-opentelemetry-tail-based-sampling/"
+  tag: "Blog"
+  text: "Control trace volume with OpenTelemetry tail-based sampling"
 algolia:
   tags: ['opentelemetry', 'open telemetry', 'otel']
 cascade:
@@ -120,11 +123,11 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Option 2: Use the OpenTelemetry Collector
 
-{{< img src="/opentelemetry/setup/otel-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running OpenTelemetry Collector with Datadog Exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to a host running the OpenTelemetry Collector, which forwards data to Datadog over OTLP." style="width:100%;" >}}
 
-**Best for**: New or existing OTel users wanting a completely vendor-neutral setup.
+**Best for**: New or existing OTel users who want to manage their own OpenTelemetry Collector.
 
-- Complete vendor neutrality for sending OpenTelemetry data to Datadog
+- Standard OpenTelemetry pipeline that exports to Datadog over OTLP
 - Flexible configuration options like tail-based sampling and data transformations
 
 {{< whatsnext desc=" " >}}
