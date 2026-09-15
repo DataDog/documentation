@@ -125,7 +125,7 @@ To enable integrations, add Docker label annotations to your application contain
 2. Choose the cluster your application is running on.
 3. Click the {{< ui >}}Tasks{{< /ui >}} tab, then click the {{< ui >}}Task definition{{< /ui >}} for your application.
 4. Click the {{< ui >}}Create new revision{{< /ui >}} button.
-5. Under {{< ui >}}Docker labels{{< /ui >}}, add the following:
+5. Under the application container, add the following {{< ui >}}Docker labels{{< /ui >}}:
 
 | Key                           | Value                                           |
 |-------------------------------|-------------------------------------------------|
