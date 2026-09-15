@@ -5,6 +5,12 @@ aliases:
 - /data_streams/data_pipeline_lineage
 - /data_streams/business_transaction_tracking
 further_reading:
+    - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+      tag: 'Architecture Center'
+      text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+    - link: 'https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/'
+      tag: 'Architecture Center'
+      text: 'Observability in Event-Driven Architectures'
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
