@@ -513,15 +513,11 @@ client.emit(fail_event)
 
 ## Step 4: Verify in Datadog
 
-After sending your events, check the following:
+After sending your events, use the following pages to verify that Datadog received and processed them:
 
-- [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
-- [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, you can see your job and its input/output lineage.
-- [**OpenLineage events**][12]: Every event Datadog received from you, newest first, with a
-  validation status of `Ok`, `Warning`, or `Error`. Select an event to see the exact
-  payload as received, and filter by validation status to find events that were
-  accepted over HTTP but rejected during validation. Start here if you're not seeing
-  the results you'd expect in the two views above.
+- [**Jobs Overview**][7]: Confirm that your job run appears with its start time, duration, and status.
+- [**Lineage**][9]: Search for your job name to see the job and its connections to any datasets included in the event.
+- [**OpenLineage events**][12]: Check the validation status of your events: `Ok`, `Warning`, or `Error`. Select an event to view the exact payload Datadog received, or filter by validation status to troubleshoot events that did not process successfully. Start here if the results don't appear as expected in the other two views.
 
 ## Correlate logs with job runs
 
