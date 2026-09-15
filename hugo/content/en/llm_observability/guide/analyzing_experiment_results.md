@@ -1,6 +1,7 @@
 ---
 title: Analyze Your Experiments Results
 aliases:
+- /llm_observability/improve/experiments/analyzing_results/
 - /llm_observability/experiments/analyzing_results/
 description: How to analyze Agent Observability Experiments results.
 ---
