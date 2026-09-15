@@ -19,7 +19,7 @@ Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerab
 
 ## Instalación {#installation}
 
-Para una implementación basada en paquetes, [instale el paquete de Datadog][6] con su administrador de paquetes y, a continuación, actualice los archivos listados a continuación.
+Para una implementación basada en paquetes, [instale el paquete de Datadog][6] con su administrador de paquetes y luego actualice los archivos enumerados a continuación.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/datadog.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -43,14 +43,14 @@ sbom:
     enabled: true
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   # See Runtime Package Prioritization section below.
   enrichment:
     usage:
       enabled: true
 {{< /code-block >}}
 
-**Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Runtime Package Prioritization](#runtime-package-prioritization-preview) para conocer los requisitos.
+**Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Priorización de paquetes en tiempo de ejecución](#runtime-package-prioritization) para conocer los requisitos.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -62,7 +62,7 @@ compliance_config:
     enabled: true
 {{< /code-block >}}
 
-**Nota**: El analizador `languages` requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en bibliotecas de aplicaciones administradas por administradores de paquetes como npm, pip, Maven/Gradle, NuGet, módulos de Go, Cargo y Bundler, además de paquetes del SO. Cuando se omite el campo `analyzers`, solo se escanean los paquetes del SO para las imágenes de contenedor. Consulte [Administradores de paquetes de bibliotecas de aplicaciones compatibles](#supported-application-library-package-managers) para ver la lista completa.
+**Nota**: El analizador `languages` requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en bibliotecas de aplicaciones administradas por administradores de paquetes como npm, pip, Maven/Gradle, NuGet, módulos de Go, Cargo y Bundler, además de paquetes del SO. Cuando se omite el campo `analyzers`, solo se escanean los paquetes del SO para las imágenes de contenedor. Consulte [Administradores de paquetes de bibliotecas de aplicaciones compatibles](#supported-application-library-package-managers) para obtener la lista completa.
 
 ### Administradores de paquetes de bibliotecas de aplicaciones compatibles {#supported-application-library-package-managers}
 
@@ -73,34 +73,34 @@ El analizador `languages` cubre los siguientes ecosistemas de paquetes:
 | Ruby | Bundler, GemSpec |
 | Rust | Cargo, binario de Rust |
 | PHP | Composer |
-| Java | Jar, Maven (pom.xml), lock de Gradle, lock de Sbt |
+| Java | Jar, Maven (pom.xml), bloqueo de Gradle, bloqueo de Sbt |
 | JavaScript | npm (package-lock.json), Yarn, pnpm, paquete de Node |
 | .NET | NuGet, .NET Core, PackagesProps |
 | Python | Paquete de Python (egg), pip, Pipenv, Poetry, uv, paquete de Conda, entorno de Conda |
 | Go | Binario de Go, módulos de Go |
-| C/C++ | lock de Conan |
+| C/C++ | Conan lock |
 | Swift / Objective-C | CocoaPods, Swift |
-| Dart | lock de PubSpec |
-| Elixir | lock de Mix |
+| Dart | PubSpec lock |
+| Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Prioritization (Preview) {#runtime-package-prioritization-preview}
+## Priorización de paquetes en tiempo de ejecución {#runtime-package-prioritization}
 
-Runtime Package Prioritization identifica qué paquetes en una imagen de contenedor se utilizan durante la ejecución, para que pueda priorizar las vulnerabilidades en el código que se ejecuta sobre las vulnerabilidades en paquetes que están instalados pero nunca se ejecutan.
+La priorización de paquetes en tiempo de ejecución identifica qué paquetes en una imagen de contenedor se utilizan durante la ejecución, para que pueda priorizar las vulnerabilidades en el código que se ejecuta sobre las vulnerabilidades en los paquetes que están instalados pero nunca se ejecutan.
 
-Cuando se habilita, el Agent utiliza eBPF para observar el acceso a archivos en sus cargas de trabajo y añade estas señales a los hallazgos de vulnerabilidades para esa imagen:
+Cuando está habilitado, el Agent utiliza eBPF para observar el acceso a archivos en sus cargas de trabajo y agrega estas señales a los hallazgos de vulnerabilidades para esa imagen:
 
 | Señal | Qué le indica |
 |--------|-------------------|
 | El paquete se está ejecutando | Se observó que los archivos del paquete fueron accedidos por un proceso en ejecución. |
-| Accedido por proceso raíz | El paquete fue accedido por un proceso que se ejecuta como root (UID 0). |
+| Accedido por proceso raíz | El paquete fue accedido por un proceso ejecutándose como root (UID 0). |
 | Binario SUID presente | El paquete contiene un binario con el bit SUID establecido, lo cual puede permitir la escalada de privilegios. |
 
 *El paquete se está ejecutando* alimenta la dimensión de **Reachability** del [Runtime Prioritization Engine][8]. Para consultar estas señales directamente, consulte [Filtrar hallazgos por señales de tiempo de ejecución][9].
 
 **Requisitos**:
 - Datadog Agent **7.79.0 o posterior**.
-- Solo Linux (dependencia de eBPF). Consulte la [Workload Protection setup][10] para conocer las distribuciones y versiones de kernel compatibles.
+- Solo Linux (dependencia de eBPF). Consulte [Workload Protection setup][10] para conocer las distribuciones y versiones de kernel compatibles.
 
 Las señales de tiempo de ejecución se aplican a los paquetes instalados por un administrador de paquetes del sistema operativo (`apt`, `yum` o `apk`) en los hallazgos de vulnerabilidades de imágenes de contenedor.
 
@@ -111,7 +111,7 @@ sbom:
   enabled: true
   container_image:
     enabled: true
-  # Enables runtime package prioritization (Preview, Agent 7.79+)
+  # Enables runtime package prioritization (Agent 7.79+)
   enrichment:
     usage:
       enabled: true
@@ -129,7 +129,7 @@ Para verificar la configuración, filtre los hallazgos de vulnerabilidades por [
   DD_COMPLIANCE_CONFIG_ENABLED=true DD_API_KEY=<DATADOG_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
   ```
 
-- Si usa el script de instalación del Agent para habilitar Misconfigurations and Vulnerability Management, debe actualizar manualmente el archivo `datadog.yaml` para habilitar `host_benchmarks` para Misconfigurations, y `sbom` y `container_image` para Vulnerability Management.
+- Si usa el [Agent install script] para habilitar Misconfigurations y Vulnerability Management, debe actualizar manualmente el archivo `datadog.yaml` para habilitar `host_benchmarks` para Misconfigurations, y `sbom` y `container_image` para Vulnerability Management.
 
 ```shell
 sudo cp /etc/datadog-agent/security-agent.yaml.example /etc/datadog-agent/security-agent.yaml

@@ -206,23 +206,21 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### AudioPart
 
-An audio segment on a message. Provide either `content` or `attachment_key`.
+An audio segment on a message. For supported formats and size limits, see [Multimodal Support][6].
 
 | Field | Type | Description |
 |-------|------|-------------|
-| mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/pcm`. |
-| content | string | The base64-encoded audio, carried inline with the message. |
-| attachment_key | string | A reference to audio stored outside the span payload, instead of inline `content`. |
+| mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/mpeg`. |
+| content [*required*] | string | The base64-encoded audio, carried inline with the message. |
 
 #### ImagePart
 
-An image on a message. Provide either `content` or `attachment_key`.
+An image on a message. For supported formats and size limits, see [Multimodal Support][6].
 
 | Field | Type | Description |
 |-------|------|-------------|
 | mime_type [*required*] | string | The media type of the image, such as `image/png` or `image/jpeg`. |
-| content | string | The base64-encoded image, carried inline with the message. |
-| attachment_key | string | A reference to an image stored outside the span payload, instead of inline `content`. |
+| content [*required*] | string | The base64-encoded image, carried inline with the message. |
 
 #### ToolDefinition
 
@@ -704,3 +702,4 @@ For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`,
 [3]: /getting_started/tagging/
 [4]: /llm_observability/investigate/evaluations/end_user_feedback
 [5]: /llm_observability/instrument/sdk/?tab=python#enriching-spans
+[6]: /llm_observability/instrument/multimodal/

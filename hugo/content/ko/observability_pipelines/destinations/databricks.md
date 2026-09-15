@@ -1,4 +1,6 @@
 ---
+description: Databricks (Zerobus) 목적지를 사용하여 Databricks Unity Catalog 표로 로그를 보내는 방법을
+  알아보세요.
 disable_toc: false
 products:
 - icon: logs
@@ -69,7 +71,7 @@ Databricks 작업 공간에서:
     ```
     - See Databricks' [Create a Unity Catalog Managed Table][3] documentation for more information.
 
-정규화된 전체 표 이름은 `catalog.schema.table`이며, 예를 들어 `main.obs_pipelines.apache_common_logs`입니다. Observability Pipelines Databricks 목적지를 설정할 때 **표 이름**에 입력하는 값입니다.
+정규화된 전체 표 이름은 `catalog.schema.table`이며, 예를 들어 `main.obs_pipelines.apache_common_logs`입니다. Observability Pipelines Databricks 목적지를 설정할 때 {{< ui >}}Table Name{{< /ui >}}에 입력하는 값입니다.
 
 ### 서비스 주체 설정 {#set-up-a-service-principal}
 
@@ -92,23 +94,30 @@ Databricks [Zerobus Ingest API][1]는 OAuth 인증을 사용합니다. 서비스
 
 ## 설정 {#setup}
 
-파이프라인을 [설정할 때][6] Databricks(Zerobus) 목적지를 구성하세요. 파이프라인은 [UI][7]에서 설정할 수 있으며, [API][8] 또는 [Terraform][9]을 사용하여 설정할 수 있습니다. 이 섹션에서는 UI를 기준으로 단계를 설명합니다.
+<div class="alert alert-danger">시크릿 관리: OAuth 클라이언트 시크릿의 식별자만 입력하세요. 실제 값은 입력하지 <b>마세요</b></div>.
+
+파이프라인을 [설정할 때][6] Databricks(Zerobus) 목적지를 구성하세요. 파이프라인은 [UI][7]에서 설정할 수 있으며, [API][8] 또는 [Terraform][9]을 사용하여 설정할 수 있습니다. 이 섹션에서 설명하는 단계는 UI에서 설정합니다.
 
 **참고**: 표 스키마에 없는 로그 필드는 삭제됩니다. 예를 들어 로그에 `id`, `name`, `host` 필드가 있고 표 스키마에 `name` 및 `host` 열만 포함되어 있다면 `id` 필드는 삭제되어 표에 기록되지 않습니다.
 
 파이프라인 UI에서 Databricks(Zerobus) 목적지를 선택한 후:
 
-<div class="alert alert-warning">Databricks(Zerobus)는 문자열 형식의 타임스탬프를 Databricks의 <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> 유형</a>으로 변환하지 않습니다. 표에 타임스탬프 열을 사용하는 경우, 자세한 내용은 <a href="#convert-string-timestamps-to-timestamp-format">문자열 타임스탬프를 타임스탬프 형식으로 변환하기</a>를 참조하세요.</div>
+<div class="alert alert-warning">
 
-<div class="alert alert-danger">시크릿 관리: OAuth 클라이언트 시크릿의 식별자만 입력하세요. 실제 값은 입력하지 <b>마세요.</b></div>
+<ul>
+<li>Databricks(Zerobus)는 문자열 형식의 타임스탬프를 Databricks의 <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> 유형</a>으로 변환하지 않습니다. 표에 타임스탬프 열을 사용하는 경우, 자세한 내용은 <a href="#convert-string-timestamps-to-timestamp-format">문자열 타임스탬프를 타임스탬프 형식으로 변환하기</a>를 참조하세요.
+
+<li> 로그 필드 값은 표 스키마의 해당 열 데이터 유형과 일치해야 합니다. 자세한 내용은 <a href="#data-type-of-log-field-values">로그 필드 값의 데이터 유형</a>을 참조하세요.
+</ul>
+</div>
+
+1. Databricks 작업 영역의 {{< ui >}}Ingestion Endpoint{{< /ui >}}(예: `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`)를 입력하세요. Worker는 이 엔드포인트로 로그를 전송합니다.
+1. {{< ui >}}Table Name{{< /ui >}}을 `catalog.schema.table` 형식(예: `main.obs_pipelines.apache_common_logs`)으로 입력하세요.
+1. Databricks 작업 영역의 {{< ui >}}Unity Catalog Endpoint{{< /ui >}}(예: `https://<workspace>.cloud.databricks.com`)를 입력하세요. Worker는 이 엔드포인트를 사용하여 표의 스키마를 읽습니다.
+1. {{< ui >}}Auth - Client ID{{< /ui >}} 필드에 서비스 주체의 애플리케이션 ID(예: `abcdefgh-1234-5678-abcd-ef0123456789`)를 입력하세요.
+1. {{< ui >}}Auth - Client Secret{{< /ui >}} 필드에 OAuth 클라이언트 시크릿의 식별자를 입력하십시오. 비워두면 [기본값](#secret-defaults)이 사용됩니다.
 
 {{% observability_pipelines/secrets_env_var_note %}}
-
-1. Databricks 작업 공간의 **수집 엔드포인트**(예: `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`)를 입력하세요. Worker는 이 엔드포인트로 로그를 전송합니다.
-1. **표 이름**을 `catalog.schema.table` 형식으로 입력합니다(예: `main.obs_pipelines.apache_common_logs`).
-1. Databricks 작업 공간의 **Unity Catalog 엔드포인트**(예: `https://<workspace>.cloud.databricks.com`)를 입력하세요. Worker는 이 엔드포인트를 사용하여 표의 스키마를 읽습니다.
-1. **인증 - 클라이언트 ID** 필드에 서비스 주체의 애플리케이션 ID(예: `abcdefgh-1234-5678-abcd-ef0123456789`)를 입력하세요.
-1. 인증 - 클라이언트 시크릿**** 필드에 OAuth 클라이언트 시크릿의 식별자를 입력하세요. 비워두면 [기본값](#secret-defaults)이 사용됩니다.
 
 ### 선택적 설정 {#optional-settings}
 
@@ -116,7 +125,7 @@ Databricks [Zerobus Ingest API][1]는 OAuth 인증을 사용합니다. 서비스
 
 {{% observability_pipelines/destination_buffer %}}
 
-### 문자열 타임스탬프를 타임스탬프 형식으로 변환 {#convert-string-timestamps-to-timestamp-format}
+## 문자열 타임스탬프를 타임스탬프 형식으로 변환하기{#convert-string-timestamps-to-timestamp-format}
 
 로그에 문자열 형식의 타임스탬프가 있고 Databricks 표에 [`TIMESTAMP` 유형][11]으로 선언된 타임스탬프 열이 있는 경우, 로그를 Databricks(Zerobus) 목적지로 전송하기 전에 문자열을 타임스탬프 형식으로 변환해야 합니다. Databricks(Zerobus)는 타임스탬프 형식을 `TIMESTAMP` 유형으로만 변환할 수 있습니다.
 
@@ -134,6 +143,16 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
     .timestamp = parse_timestamp!(.timestamp, format: "%+")
     ```
     See [parse_timestamp][13] for more information.
+
+## 로그 필드 값의 데이터 유형 {#data-type-of-log-field-values}
+
+로그 필드 값은 표 스키마의 해당 열 데이터 유형과 일치해야 합니다. 예를 들어, 표 스키마에서 `message`를 `STRING`으로 정의했지만 들어오는 로그의 `message` 필드가 `{"message": {"some": "string"}}`과 같은 객체인 경우, Worker는 이벤트를 인코딩할 수 없어 전체 배치를 삭제하고 다음과 유사한 오류를 발생시킵니다.
+
+```
+error=Some(EncodingError { message: "Failed to encode batch: SerializingError(Arrow JSON decoding error: Json error: whilst decoding field 'message': expected string got {...})" }) request_id=1142 error_type="request_failed" stage="sending"
+```
+
+이 오류를 방지하려면 [Custom Processor][17]를 사용하여 로그 필드를 표 스키마에서 예상하는 데이터 유형으로 변환하세요.
 
 ## 시크릿 기본값 {#secret-defaults}
 
@@ -155,11 +174,15 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 {{% /tab %}}
 {{< /tabs >}}
 
-## 목적지가 작동하는 방식 {#how-the-destination-works}
+## 상태 메트릭 {#health-metrics}
 
-### 이벤트 배치 {#event-batching}
+모든 목적지에서 내보내는 [구성 요소 메트릭][14] 및 [목적지 버퍼 메트릭][15]에 대해서는 [Pipelines 사용량 메트릭][16] 문서를 참조하세요. Databricks 목적지 메트릭을 필터링하거나 그룹화하려면 태그 `component_type:databricks_zerobus`를 사용하세요.
 
-이벤트 배치는 다음 중 하나의 파라미터를 충족하면 플러시됩니다. 자세한 내용은 [이벤트 배치][10]를 참조하세요.
+## 목적지 작동 방식 {#how-the-destination-works}
+
+### 이벤트 배치 처리 {#event-batching}
+
+이벤트 배치는 다음 중 하나의 파라미터를 충족하면 플러시됩니다. 자세한 내용은 [목적지 이벤트 배치 처리][10]를 참조하세요.
 
 | 최대 이벤트 | 최대 크기(MB) | 타임아웃(초)   |
 |----------------|-------------------|---------------------|
@@ -178,3 +201,7 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 [11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
 [12]: /ko/observability_pipelines/processors/custom_processor#setup
 [13]: /ko/observability_pipelines/processors/custom_processor/#parse_timestamp
+[14]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[15]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[16]: /ko/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[17]: /ko/observability_pipelines/processors/custom_processor/
