@@ -15,7 +15,7 @@
       {{ if $src }}<p class="card-grid-card-title m-0">{{ . }}</p>{{ else }}<h5 class="m-0">{{ . }}</h5>{{ end }}
     {{ end }}
     {{ with $subtitle }}
-      <small>{{ . }}</small>
+      <span class="card-grid-card-ribbon">{{ . }}</span>
     {{ end }}
   </div>
 </a>
