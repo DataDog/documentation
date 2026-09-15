@@ -10,9 +10,9 @@ further_reading:
 - link: "/llm_observability/improve/experiments"
   tag: "Documentation"
   text: "Set up and use Agent Observability Experiments"
-- link: "/llm_observability/investigate"
+- link: "/llm_observability/investigate/insights/"
   tag: "Documentation"
-  text: "Monitor your application with Agent Observability"
+  text: "Review Agent Observability Insights"
 - link: "/llm_observability/build_with_ai/claude_code_skills"
   tag: "Guide"
   text: "Analyze LLM Applications with Claude Code Skills"
@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-The [Datadog MCP Server][1] enables AI agents to access your [Agent Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset provides tools for searching and analyzing traces, inspecting span details and content, and evaluating experiment results directly from AI-powered clients like Cursor, Claude Code, or OpenAI Codex.
+The [Datadog MCP Server][1] enables AI agents to access your [Agent Observability][2] data through the Model Context Protocol (MCP). The `llmobs` toolset supports trace analysis, [Insights][11] review, span inspection, and experiment evaluation. Use these tools in MCP-compatible clients such as Cursor, Claude Code, or OpenAI Codex.
 
 ## Setup
 
@@ -295,6 +295,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
+- **Reviewing Insights**: Prioritize recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
@@ -328,6 +329,22 @@ The `llmobs` toolset includes the following tools:
 
 `get_llmobs_agent_loop`
 : Get a chronological view of an agent's execution loop, showing each step (LLM calls, tool invocations, decisions) in order.
+
+### Insights tools
+
+`list_llmobs_agent_insights`
+: List Agent Observability Insights for review. Filter by ML application, life cycle status, or Insight type.
+
+`get_llmobs_agent_insight`
+: Get one Insight by ID, including its full details, recommendation summaries, and feedback targets.
+
+`update_llmobs_agent_insight_status`
+: Set an Insight's life cycle status to `for_review`, `in_progress`, `completed`, or `ignored`.
+
+`submit_llmobs_agent_insight_feedback`
+: Submit usefulness feedback for an Insight or recommendation. Use a target key returned by `list_llmobs_agent_insights` or `get_llmobs_agent_insight`, and submit feedback only after you assess that target.
+
+Listing and retrieving Insights require Agent Observability read permission. Updating a status or submitting feedback requires Agent Observability read and write permissions. A status update also records status feedback.
 
 ### Experiment tools
 
@@ -462,6 +479,13 @@ The `llmobs` toolset includes the following tools:
 6. **Expand**: Use `expand_llmobs_spans` to load children of collapsed spans for deeper exploration.
 7. **Agent review**: Use `get_llmobs_agent_loop` to see the step-by-step execution flow of an agent span.
 
+### Insights review
+
+1. **List**: Use `list_llmobs_agent_insights` to find Insights by application, status, or type.
+2. **Inspect**: Use `get_llmobs_agent_insight` to review the root cause, impact, evidence, and recommended fix.
+3. **Act and update**: Review the recommended fix against its evidence, apply and test it, then use `update_llmobs_agent_insight_status` to record progress.
+4. **Submit feedback**: After you assess the Insight or recommendation, use `submit_llmobs_agent_insight_feedback` with the feedback targets returned by the list or get tool.
+
 ### Experiment analysis
 
 1. **Summarize**: Use `get_llmobs_experiment_summary` to get overall statistics and discover available metrics and dimensions.
@@ -494,6 +518,7 @@ After connecting, try prompts like:
 - Review error traces for my `customer-support-bot` app over the past week. Summarize the most common failure patterns, how often they occur, and recommend which ones to fix first.
 - Find traces where my agent's responses were flagged by evaluations as low quality. Look at the inputs and outputs, then suggest specific changes to my system prompt to improve response quality.
 - Look at recent agent traces for my app and find cases where the agent looped more than necessary. Analyze the decision-making at each step and suggest how to improve my tool descriptions to reduce unnecessary tool calls.
+- List Agent Observability Insights with status `for_review` for `customer-support-bot`. Rank them by severity, inspect the highest-severity Insight, and explain its recommended fix. Wait for approval before you implement the change, run the relevant tests, and update the Insight status. Set it to `completed` only if the tests pass.
 - A user reported a bad response. Here's the trace ID: `trace-123`. Walk me through exactly what happened: what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
@@ -534,3 +559,4 @@ For custom visualizations that go beyond standard Datadog widgets, like comparis
 [8]: https://github.com/datadog-labs/agent-skills
 [9]: /llm_observability/build_with_ai/claude_code_skills
 [10]: /llm_observability/investigate/annotation_queues
+[11]: /llm_observability/investigate/insights/
