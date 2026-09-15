@@ -15,7 +15,9 @@ further_reading:
 
 ## Overview
 
-Bits Investigation reasons through incomplete signals rather than following a fixed script, so its accuracy depends on how well it's configured for your environment. No two organizations share the same tagging, escalation paths, or tribal knowledge, so getting good results means tailoring Bits Investigation for your organization.
+Bits Investigation reasons through your telemetry, integrations, source code, and memories, investigating all the information available at the time.
+
+However, no two organizations share the same technical architecture, tagging, escalation paths, or tribal knowledge, so getting the best results means tailoring Bits Investigation for your organization.
 
 This guide covers the practices with the biggest impact on accuracy:
 - [Strengthen your knowledge sources](#strengthen-your-knowledge-sources)
@@ -25,7 +27,7 @@ This guide covers the practices with the biggest impact on accuracy:
 
 ## Strengthen your knowledge sources
 
-Bits Investigation reads from four places during an investigation: `bits.md`, monitor messages and runbooks, Skills, and past feedback. The more specific each one is, the more accurate future investigations get.
+Bits Investigation reads from four places during an investigation: `bits.md`, monitor messages and runbooks, Skills, and past feedback. The more specific each one is, the more accurate future investigations get. Start by using Bits Investigation and observing its results. This gives you direction on where to focus your tuning.
 
 ### Write specific rules
 
