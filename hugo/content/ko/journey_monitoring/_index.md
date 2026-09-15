@@ -1,5 +1,9 @@
 ---
 description: 중요한 사용자 흐름을 모니터링하고 분석하여 사용자 경험 및 기술 관련 문제를 해결하세요.
+further_reading:
+- link: https://www.datadoghq.com/blog/journey-monitoring/
+  tag: 블로그
+  text: Datadog Journey Monitoring을 사용하여 중요한 사용자 여정을 모니터링하십시오.
 title: Journey Monitoring
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="미리 보기에 참여하세요!">}}
@@ -108,3 +112,7 @@ Journey Monitoring을 사용하려면 프론트엔드 애플리케이션에서 �
 [12]: /ko/journey_monitoring/details_report/
 [13]: /ko/real_user_monitoring/operations_monitoring/
 [14]: /ko/synthetics/test_suites/#service-level-objectives
+
+## 추가 자료 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
