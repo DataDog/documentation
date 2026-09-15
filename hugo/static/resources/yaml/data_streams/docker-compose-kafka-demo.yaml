@@ -442,7 +442,7 @@ configs:
       })
       consumer.subscribe(['connector-source-events'])
 
-      print("🚀 Consumer started - processing orders...")
+      print("🚀 Consumer started - processing events...")
       count = 0
       cycle_start = time.time()
       pending = []
