@@ -33,7 +33,7 @@ Save a chart to track key product metrics over time, or share it so your team ca
 
 1. Click the chart name to rename it.
 
-2. Click {{< ui >}}Save{{< /ui >}} to save the chart to a dashboard or notebook. Saved charts appear on the {{< ui >}}Charts{{< /ui >}} page. 
+2. Click {{< ui >}}Save{{< /ui >}} to save the chart to the {{< ui >}}Charts{{< /ui >}} page. Use the dropdown to save the chart to a dashboard or notebook. 
 
    Click {{< ui >}}Share{{< /ui >}} to copy the chart to your clipboard. Use the dropdown to export the chart as a PNG, or to export the chart data to CSV, if available.
 
