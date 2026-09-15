@@ -10,11 +10,13 @@ further_reading:
   text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
 ---
 
-This guide describes how to set up and use Agent Observability Experiments with the Python or Node.js SDK. For complete runnable Node.js examples, see the [Node.js experiments examples](https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs).
+This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. For complete runnable Node.js examples, see the [Node.js experiments examples](https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs).
 
 ## Set up Agent Observability
 
 If you have not already set up Agent Observability, use one of the following SDKs. Experiments require both a Datadog API key and application key.
+
+Your Datadog site is {{< region-param key="dd_site" code="true" >}}. Replace the `site` value in the examples with your site as necessary.
 
 1. Install the Agent Observability SDK:
 
@@ -68,8 +70,8 @@ const { experiments } = tracer.llmobs
 The `projectName` value identifies the Experiments project that contains your datasets and experiments. The `mlApp` value identifies the LLM application used for Agent Observability traces. You can configure these values independently. If `projectName` is not configured, Experiments uses `default-project`; `mlApp` and `service` are not used as Experiments project-name fallbacks. If you use command-line setup, also provide the application key because experiments use the Experiments API:
 
 ```shell
-DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_APP_KEY=<YOUR_APP_KEY> \\
-DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<YOUR_PROJECT> \\
+DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_APP_KEY=<YOUR_APP_KEY> \
+DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> DD_LLMOBS_PROJECT_NAME=<YOUR_PROJECT> \
 NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 ```
 
@@ -79,11 +81,9 @@ For more information, see the [Node.js tracer command-line setup](/llm_observabi
 
 <div class="alert alert-warning">You must supply both an <code>api_key</code> and <code>app_key</code> for Python, or set both <code>DD_API_KEY</code> and <code>DD_APP_KEY</code> for Node.js.</div>
 
-Your Datadog site is {{< region-param key="dd_site" code="true" >}}. If your site differs, replace `datadoghq.com` in the examples with your Datadog site.
-
 ### APM Trace correlation
 
-To correlate your Experiment spans with [APM Traces](/llm_observability/instrument/agent_observability_and_apm/), run Agent Observability through a Datadog Agent and keep `agentless_enabled` or `agentlessEnabled` set to `False` or `false` (the default). The Agent forwards trace data to APM, which enables Experiment ↔ APM Trace correlation.
+To correlate your Experiment spans with [APM Traces](/llm_observability/instrument/agent_observability_and_apm/), run Agent Observability through a Datadog Agent and keep the default `agentless_enabled=False` (for Python) or `agentlessEnabled: false` (for Node.js). The Agent forwards trace data to APM, which enables Experiment ↔ APM Trace correlation.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -92,7 +92,7 @@ LLMObs.enable(
     api_key="<YOUR_API_KEY>",
     app_key="<YOUR_APP_KEY>",
     site="datadoghq.com",
-    agentless_enabled=False,  # default — required for APM Trace correlation
+    agentless_enabled=False,  # default — required for APM trace correlation
     project_name="<YOUR_PROJECT>",
 )
 ```
@@ -106,18 +106,18 @@ const tracer = require('dd-trace').init({
   llmobs: {
     mlApp: '<YOUR_ML_APP_NAME>',
     projectName: '<YOUR_PROJECT>',
-    agentlessEnabled: false, // default — required for APM Trace correlation
+    agentlessEnabled: false, // default — required for APM trace correlation
   },
 })
 ```
 {{% /tab %}}
 {{< /tabs >}}
 
-If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True` or `agentlessEnabled: true`, but corresponding APM spans are not generated for Experiment spans from agentless runs.
+If you are running without an Agent (for example, in a notebook or CI environment), you can set `agentless_enabled=True` or `agentlessEnabled: true`, but corresponding APM spans are not generated for experiment spans from agentless runs.
 
 ## Create a project
 
-_Projects_ are the core organizational layer for LLM Experiments. All datasets and experiments live in a project. You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist.
+_Projects_ are the core organizational layer for LLM experiments. All datasets and experiments live in a project. You can create a project manually in the Datadog console, API, or SDK by specifying a project name that does not already exist.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -185,9 +185,9 @@ You can also pass `projectName` to `pullDataset()` to pull a dataset from anothe
 
 A _dataset_ is a collection of _inputs_, _expected outputs_, and _metadata_ that represent scenarios you want to test your agent on. Each dataset is associated with a _project_.
 
-- **input** (required): Represents all the information that the agent can access in a task.
-- **expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assess.
-- **metadata** (optional): Contains useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, and notes.
+- **Input** (required): Represents all the information that the agent can access in a task.
+- **Expected output** (optional): Also called _ground truth_, represents the ideal answer that the agent should output. You can use _expected output_ to store the actual output of the app, as well as any intermediary results you want to assess.
+- **Metadata** (optional): Contains useful information to categorize the record and use for further analysis. For example: topics, tags, descriptions, and notes.
 
 To create a dataset from a CSV file, use `LLMObs.create_dataset_from_csv()`:
 
@@ -245,9 +245,9 @@ See [Datasets][1] for more information about datasets, including how to manually
 
 An _experiment_ lets you systematically test your LLM application by running your agent across a set of scenarios from your dataset and measuring performance against the expected outputs using evaluators. You can then compare how different app configurations perform, side by side.
 
-- **task**: Defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
-- **evaluator**: A function, executed on each record, that measures how well the model or agent performs. Evaluators allow you to compare the output to either the expected output or the original input.
-- **summary evaluators**: Optional functions executed against all the data of the experiment (input, output, expected output, and evaluator results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset.
+- **Task**: Defines the core workflow you want to evaluate. It can range from a single LLM call to a more complex flow involving multiple LLM calls and RAG steps. The task is executed sequentially across all records in the dataset.
+- **Evaluator**: A function, executed on each record, that measures how well the model or agent performs. Evaluators allow you to compare the output to either the expected output or the original input.
+- **Summary evaluators**: Optional functions executed against all the data of the experiment (input, output, expected output, and evaluator results). Summary evaluators allow you to compute more advanced metrics like precision, recall, and accuracy across your dataset.
 
 To create an experiment:
 
@@ -322,7 +322,7 @@ function task (inputData, config, metadata) {
 {{% /tab %}}
 {{< /tabs >}}
 
-You can trace the different parts of your Experiment task (workflow, tool calls, and so on) using the same tracing APIs you use in production. For Python, see the [custom tracing decorators][2]. For Node.js, use the `llmobs.trace()` API. If you use a [supported Python framework][3] or [supported Node.js framework][7] (OpenAI, Amazon Bedrock, and so on), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+You can trace the different parts of your experiment task (workflow, tool calls, and so on) using the same tracing APIs you use in production. For Python, see the [custom tracing decorators][2]. For Node.js, use the `llmobs.trace()` API. If you use a [supported Python framework][3] or [supported Node.js framework][7] (OpenAI, Amazon Bedrock, and so on), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -448,9 +448,9 @@ For detailed information on building evaluators, including the full data model r
 Datadog supports the following evaluator return types:
 
 - **Boolean**: returns true or false
-- **score**: returns a numeric value (float)
-- **categorical**: returns a labeled category (string)
-- **json**: returns structured data (dict or object)
+- **Score**: Returns a numeric value (float)
+- **Categorical**: Returns a labeled category (string)
+- **JSON**: Returns structured data (dict or object)
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -701,7 +701,7 @@ console.log(experiment.url())
 {{% /tab %}}
 {{< /tabs >}}
 
-Note: LLM Experiments traces are retained for 90 days.
+**Note:** LLM Experiments traces are retained for 90 days.
 
 [1]: /llm_observability/improve/datasets
 [2]: /llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
