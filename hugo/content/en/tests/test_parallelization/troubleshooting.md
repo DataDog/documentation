@@ -59,7 +59,7 @@ end
 
 ## Custom commands do not run the expected files
 
-Do not include the `--` separator in a custom command. For Ruby, Python, Jest, Vitest, Mocha, and Cypress, omit test files because `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them during execution.
+When using `--command`, do not include test files or the `--` separator in the command. `ddtest` appends the selected test files itself.
 
 Incorrect:
 

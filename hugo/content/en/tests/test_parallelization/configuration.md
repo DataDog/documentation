@@ -30,10 +30,10 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Supported values:** `rspec`, `minitest`, `pytest`, `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, `vitest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_COMMAND`
-: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for all frameworks. Python support requires ddtest 1.7.0 or later. For ddtest versions prior to 1.7.0 with pytest, the command cannot be changed. Pass extra flags with `PYTEST_ADDOPTS`. For more information, see [Custom test commands](#custom-test-commands).<br/>
+: Overrides the default test command. `ddtest` appends selected test files and framework-specific flags to the command. Supported for all frameworks. For more information, see [Custom test commands](#custom-test-commands).<br/>
 **CLI flag:** `--command`<br/>
 **Default:** Empty<br/>
-**Example:** `bundle exec rspec --profile`, `pnpm exec mocha --parallel`, `pytest`
+**Example:** `bundle exec rspec --profile`, `pnpm jest --runInBand`, `pytest`
 
 `DD_TEST_OPTIMIZATION_RUNNER_MIN_PARALLELISM`
 : Minimum CI node or worker count `ddtest` considers when planning.<br/>
@@ -78,7 +78,7 @@ Most `ddtest` settings can be passed as a CLI flag or as an environment variable
 **Example:** `DB_NAME=testdb{{nodeIndex}}_{{workerIndex}};FIXTURE=fixture{{nodeIndex}}`
 
 `DD_TEST_OPTIMIZATION_RUNNER_TESTS_LOCATION`
-: Glob pattern used to discover test files. Defaults to `spec/**/*_spec.rb` for RSpec, `test/**/*_test.rb` for Minitest, pytest configuration (`testpaths` and `python_files`) or `**/{test_*,*_test}.py` for pytest, and the effective configuration or default test matching for each JavaScript framework.<br/>
+: Glob pattern used to discover test files. Defaults to the selected framework's default test file glob.<br/>
 **CLI flag:** `--tests-location`<br/>
 **Alias:** `KNAPSACK_PRO_TEST_FILE_PATTERN`<br/>
 **Default:** Framework default<br/>
@@ -154,19 +154,13 @@ Use `--command` to override the default test command for any supported framework
 bin/ddtest run --platform ruby --framework rspec --command "bin/integration-tests"
 {{< /code-block >}}
 
-For Ruby, Python, Jest, Vitest, Mocha, and Cypress, do not include test files in the command. `ddtest` provides the files assigned to each worker. Cucumber.js paths and Playwright positional filters can restrict discovery, but `ddtest` replaces them with the files assigned to the worker during execution.
+When using `--command`, do not include test files in the command. `ddtest` appends test files and framework-specific flags to the command.
 
 Do not include the `--` separator in `--command`. If the command contains `--`, `ddtest` emits a warning and removes the separator and everything after it.
 
 For pytest, `ddtest` runs `python -m pytest <files>` by default. For versions 1.7.0 and later, set `--command` to override the base command. For example, `--command pytest` runs the `pytest` console script instead of `python -m pytest`. `ddtest` runs `<command> <files>` and does not add `-m pytest`. To pass extra pytest flags without changing the base command, use `PYTEST_ADDOPTS`. `ddtest` appends `--ddtrace` to `PYTEST_ADDOPTS` automatically so the `ddtrace` pytest plugin loads without changing your pytest config.
 
-For JavaScript, the custom command must invoke the selected framework directly. Package manager and executable wrappers are supported. For example:
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform javascript --framework mocha --command "pnpm exec mocha --parallel"
-{{< /code-block >}}
-
-`ddtest` preserves supported framework options and replaces inputs that conflict with its assigned test files. See [Test Parallelization best practices](/tests/test_parallelization/best_practices/#configure-javascript-frameworks) for framework-specific examples and constraints.
+For Jest, `ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present, so the `dd-trace` package must be installed in the project where `ddtest` runs.
 
 ## Pytest test discovery
 
@@ -180,7 +174,7 @@ Pytest does not have an equivalent to RSpec's pattern flag, so `ddtest` resolves
 
 ## JavaScript test discovery and instrumentation
 
-JavaScript support uses suite-level Test Impact Analysis. `ddtest` plans, skips, and distributes test files rather than individual tests. It uses each framework's native configuration during discovery:
+JavaScript support uses suite-level Test Impact Analysis. It uses each framework's native configuration during discovery:
 
 | Framework | Discovery behavior | Execution behavior |
 | --------- | ------------------ | ------------------ |

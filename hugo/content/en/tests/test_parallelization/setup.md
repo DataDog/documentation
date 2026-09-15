@@ -95,7 +95,7 @@ bin/ddtest plan \
   --max-parallelism 8
 {{< /code-block >}}
 
-`--platform` identifies the language platform, and `--framework` identifies the test framework. Supported combinations include `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with `cucumber`, `cypress`, `jest`, `mocha`, `playwright`, or `vitest`. For all supported values and defaults, see [Configuration][4].
+`--platform` identifies the language platform, and `--framework` identifies the test framework. For all supported values and defaults, see [Configuration][4].
 
 Planning discovers tests, retrieves test duration and Test Impact Analysis data, and chooses a parallelism level. It does not execute tests. The generated `.testoptimization/` directory contains the test files and splits selected for execution.
 
