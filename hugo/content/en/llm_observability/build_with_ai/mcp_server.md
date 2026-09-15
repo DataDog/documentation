@@ -295,7 +295,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Debugging agent execution**: Search for traces by ML app, error status, or custom tags, then examine span hierarchies and content to identify failures.
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
-- **Acting on Insights**: Find recurring cost and reliability problems, inspect the supporting evidence and recommended fix, update the Insight status, and submit feedback.
+- **Reviewing Insights**: Review recurring cost and reliability problems that Datadog identified, inspect their evidence and recommended fixes, update their status, and optionally submit feedback after assessment.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
 - **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
@@ -333,7 +333,7 @@ The `llmobs` toolset includes the following tools:
 ### Insights tools
 
 `list_llmobs_agent_insights`
-: List Agent Observability Insights as compact triage cards. Filter by ML application, life cycle status, or Insight type.
+: List Agent Observability Insights for review. Filter by ML application, life cycle status, or Insight type.
 
 `get_llmobs_agent_insight`
 : Get one Insight by ID, including its full details, recommendation summaries, and feedback targets.
@@ -344,7 +344,7 @@ The `llmobs` toolset includes the following tools:
 `submit_llmobs_agent_insight_feedback`
 : Submit usefulness feedback for an Insight or recommendation. Use the target keys returned by `list_llmobs_agent_insights` or `get_llmobs_agent_insight`, and submit feedback only when you have assessed the result.
 
-Listing and retrieving Insights require Agent Observability read permission. Updating status or submitting feedback requires read and write permission.
+Listing and retrieving Insights require Agent Observability read permission. Updating a status or submitting feedback requires Agent Observability read and write permissions. A status update also records status feedback.
 
 ### Experiment tools
 
@@ -483,9 +483,8 @@ Listing and retrieving Insights require Agent Observability read permission. Upd
 
 1. **List**: Use `list_llmobs_agent_insights` to find Insights by application, status, or type.
 2. **Inspect**: Use `get_llmobs_agent_insight` to review the root cause, impact, evidence, and recommended fix.
-3. **Act**: Apply and validate the recommended fix in your codebase.
-4. **Update**: Use `update_llmobs_agent_insight_status` to record progress.
-5. **Submit feedback**: After you assess the result, use `submit_llmobs_agent_insight_feedback` with the feedback targets returned by the list or get tool.
+3. **Act and update**: Review the recommended fix against its evidence, apply and test it, then use `update_llmobs_agent_insight_status` to record progress.
+4. **Submit feedback**: After you assess the Insight or recommendation, use `submit_llmobs_agent_insight_feedback` with the feedback targets returned by the list or get tool.
 
 ### Experiment analysis
 
@@ -519,8 +518,7 @@ After connecting, try prompts like:
 - Review error traces for my `customer-support-bot` app over the past week. Summarize the most common failure patterns, how often they occur, and recommend which ones to fix first.
 - Find traces where my agent's responses were flagged by evaluations as low quality. Look at the inputs and outputs, then suggest specific changes to my system prompt to improve response quality.
 - Look at recent agent traces for my app and find cases where the agent looped more than necessary. Analyze the decision-making at each step and suggest how to improve my tool descriptions to reduce unnecessary tool calls.
-- List open Agent Observability Insights for `customer-support-bot`. Rank them by impact, inspect the top Insight, and propose a fix based on its evidence.
-- Get Agent Observability Insight `<INSIGHT_ID>`, implement and test the recommended fix, and update its status as the work progresses.
+- List Agent Observability Insights with status `for_review` for `customer-support-bot`. Rank them by severity, inspect the highest-severity Insight, and explain its recommended fix. Wait for approval before you implement the change, run the relevant tests, and update the Insight status. Set it to `completed` only if the tests pass.
 - A user reported a bad response. Here's the trace ID: `trace-123`. Walk me through exactly what happened: what the user asked, what the agent did at each step, and where things went wrong. Suggest a code fix.
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
