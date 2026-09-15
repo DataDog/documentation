@@ -69,9 +69,11 @@
                     <span class="icon-container" aria-hidden="true">{{ partial "icon" (dict "name" "books" "color" "#632CA6") }}</span>
                     {{ i18n "home_enablement_banner_title" }}
                 </p>
-                <a class="col-12 col-md-5 col-lg-7" href="https://www.datadoghq.com/technical-enablement/" target="_blank" rel="noopener" data-dd-action-name="homepage-enablement-banner-view-sessions">
-                    {{ i18n "home_enablement_banner_cta" }}
-                </a>
+                <span class="col-12 col-md-5 col-lg-7">
+                    <a href="https://www.datadoghq.com/technical-enablement/" target="_blank" rel="noopener" data-dd-action-name="homepage-enablement-banner-view-sessions">
+                        {{ i18n "home_enablement_banner_cta" }}
+                    </a>
+                </span>
             </section>
             <section class="row guides justify-content-center">
                 {{ range $i, $guide := $datafile.guides }}
