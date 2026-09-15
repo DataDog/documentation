@@ -111,7 +111,7 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 
 ### Code channels in Slack
 
-When you ask [Bits Chat][16] in Slack to make a code change, Bits Code creates a dedicated [code channel][40] for that task. In the code channel you and your team can steer the agent, view a diff of proposed changes, and open a pull or merge request.
+When you ask [Bits Chat][16] in Slack to make a code change, Bits Code creates a dedicated [code channel][40] for that task. In the code channel, you and your team can steer the agent, view a diff of proposed changes, and open a pull or merge request.
 
 ### Pull or merge request collaboration
 

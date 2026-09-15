@@ -15,10 +15,12 @@ further_reading:
 
 ## Prerequisites
 
-To set up Bits Code, your Datadog user needs:
-- The [Bits Code Write (`bits_dev_write`) permission][1].
-   - This permission is included in managed Datadog roles such as the Datadog Standard Role.
-- (If you'd like to enable [Slack code channels][13]) One of the following perimssions: Integrations Manage (`manage_integrations`), User Access Manage (`user_access_manage`), or Org Management (`org_management`).
+To use Bits Code, a Datadog user needs:
+- The [Bits Code Write (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+- To enable [Slack code channels][13], one of the following permissions is required: 
+  - Integrations Manage (`manage_integrations`)
+  - User Access Manage (`user_access_manage`)
+  - Org Management (`org_management`)
 
 If your organization uses custom roles, an admin must add these permissions manually. For details, see [Access Control][1].
 

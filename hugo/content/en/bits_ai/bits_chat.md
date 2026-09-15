@@ -165,7 +165,7 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 
 #### Code channels with Bits Code
 
-If you ask Bits Chat to make a code change, it creates a dedicated [code channel][13] for the task. In the code channel, [Bits Code][14] works on the change alongside you and your team. See [Code Channels in Slack with Bits Code][13] for more information.
+Ask Bits Chat to make a code change, and it creates a dedicated [code channel][13] for the task. In the code channel, [Bits Code][14] works on the change alongside you and your team.
 
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
