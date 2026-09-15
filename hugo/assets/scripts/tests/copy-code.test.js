@@ -27,7 +27,7 @@ describe('initCopyCode', () => {
         document.body.innerHTML = `
             <div class="append-copy-btn">
                 <div class="highlight">
-                    <pre><code data-lang="python">some code</code></pre>
+                    <pre><code data-lang="text">some code</code></pre>
                 </div>
             </div>
         `;
