@@ -215,8 +215,8 @@ services:
         done
         kafka-configs --bootstrap-server kafka:19092 \
           --entity-type topics --entity-name connector-source-events \
-          --alter --add-config retention.ms=130000
-        echo "Set connector-source-events retention.ms to 130000 (3 min)"
+          --alter --add-config retention.ms=180000
+        echo "Set connector-source-events retention.ms to 180000 (3 min)"
     restart: "no"
 
   consumer:
