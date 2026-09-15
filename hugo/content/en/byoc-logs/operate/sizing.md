@@ -41,20 +41,20 @@ Searcher capacity depends on query concurrency, query complexity, and the amount
 
 These recommendations assume modern x86 CPUs, such as those used in AWS M6 instance types, or equivalent CPUs from other cloud providers. ARM-based CPUs, such as AWS Graviton, may provide better cost efficiency at comparable throughput.
 
-The examples below show the reference total vCPU capacity for each component.
+The following table shows the total vCPU capacity for each component.
 
-|   Daily volume | Indexer Total vCPUs | Compactor Total vCPUs | Searcher Total vCPUs |
+|   Daily volume | Indexer total vCPUs | Compactor total vCPUs | Searcher total vCPUs |
 |---------------:|--------------------:|----------------------:|---------------------:|
 |   **1 TB/day** |                   2 |                   0.5 |                    4 |
 |  **10 TB/day** |                  20 |                     5 |                   40 |
 | **100 TB/day** |                 200 |                    50 |                  400 |
 
-Use the following per-pod CPU and memory allocations as a starting point for distributing the total capacity across pods.
+Use the following per-pod CPU and memory allocations as a starting point for distributing the total capacity across pods:
 
-| Daily volume    | Indexer per Pod | Compactor per Pod | Searcher per Pod |
+| Daily volume    | Indexer per pod | Compactor per pod | Searcher per pod |
 |-----------------|----------------:|------------------:|-----------------:|
-| Up to 30 TB/day |  4 vCPUs, 16 GB |    4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
-| Above 30 TB/day |  8 vCPUs, 32 GB |    8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
+| **Up to 30 TB/day** |  4 vCPUs, 16 GB |    4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
+| **Above 30 TB/day** |  8 vCPUs, 32 GB |    8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
 
 <div class="alert alert-info">
 <strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
