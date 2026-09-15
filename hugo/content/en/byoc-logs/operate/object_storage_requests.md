@@ -18,9 +18,11 @@ Object storage (Amazon S3, Google Cloud Storage, Azure Blob Storage) bills both 
 
 ## Indexers
 
-Each indexer runs several **indexing pipelines**. Every 30 seconds (the default commit timeout), each pipeline uploads one index file (a *split*) to object storage:
+Each indexer runs several **indexing pipelines**, one per vCPU. Every 30 seconds (the default commit timeout), each pipeline uploads one index file (a *split*) to object storage:
 
 $$\text"splits per pipeline per day" = {86400} / 30 = 2880$$
+
+A 4-vCPU indexer runs 4 pipelines, so it uploads **11,520 splits per day**.
 
 Splits store **compressed** data (3x or more). At typical volumes, they stay below the 128 MiB multipart threshold and upload as a **single PUT request**. Larger splits use multipart upload and cost 3 or more PUT requests.
 
@@ -34,18 +36,17 @@ The 10:1 fan-in means every generation produces 10x fewer splits than the one be
 
 The following estimates assume:
 
-- **5 indexing pipelines** per 4 indexer vCPUs, or 1.25 pipelines per vCPU
-- The default 30-second commit timeout
-- **2 indexer vCPUs per TB/day**, the starting point from the [Cluster Sizing][1] guide
+- **8 MB/s per indexer vCPU**, so a 4-vCPU indexer sustains 32 MB/s, or ~2.8 TB/day. See [Cluster Sizing][1].
+- **4 indexing pipelines** per indexer, with the default 30-second commit timeout
 - A PUT price of **$0.005 per 1,000 requests** (S3 Standard, `us-east-1`)
 
-Together these work out to roughly **4,800 PUT requests per day for each indexer vCPU**:
+Each indexer uploads 11,520 splits per day. Compaction adds about one-third, for a total of **~15,360 PUT requests per indexer per day**:
 
-| Daily volume | Indexer total vCPUs | Total PUT requests per day | Approx. PUT cost per month |
-|-------------|--------------------|----------------------------|----------------------------|
-| **1 TB/day** | 2 | ~10,000 | ~$1 |
-| **10 TB/day** | 20 | ~96,000 | ~$14 |
-| **100 TB/day** | 200 | ~960,000 | ~$144 |
+| Daily volume | Indexers (4 vCPUs each) | Total PUT requests per day | Approx. PUT cost per month |
+|-------------|-------------------------|----------------------------|----------------------------|
+| **1 TB/day** | 1 | ~15,000 | ~$2 |
+| **10 TB/day** | 4 | ~61,000 | ~$9 |
+| **100 TB/day** | 37 | ~568,000 | ~$85 |
 
 <div class="alert alert-tip">
 PUT requests scale with <strong>pipeline count and commit cadence, not raw ingestion volume</strong>. Raising the commit timeout (for example, to 60 seconds) roughly halves the request count, at the cost of higher search latency.
@@ -55,4 +56,4 @@ PUT requests scale with <strong>pipeline count and commit cadence, not raw inges
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /byoc-logs/operate/sizing/#sizing-examples
+[1]: /byoc-logs/operate/sizing/#indexers
