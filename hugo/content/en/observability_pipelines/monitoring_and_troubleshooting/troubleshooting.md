@@ -151,6 +151,18 @@ The curl command you use is based on the port you are using, as well as the path
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
+### Source send canceled error
+
+If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. An error is logged when a source shuts down or restarts while events are in transit.
+
+To determine if the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
+
+1. Destination buffer utilization
+    - A buffer near its maximum capacity is a sign of backpressure. Consider [choosing a disk buffer][26] or increasing the buffer size to help absorb traffic spikes and mitigate backpressure. See [buffer metrics][25] to monitor buffer utilization.
+2. Worker CPU utilization
+    - Sustained high CPU usage on Workers during traffic spikes indicates the pipeline doesn't have enough compute capacity. See [Best practices for scaling Observability Pipelines][27] for guidance on sizing and autoscaling Workers.
+    - The Sensitive Data Scanner processor is CPU-intensive and can also cause high CPU usage. See [Best practices to optimize performance][28] for more information.
+
 ## General pipeline issues
 
 ### Missing environment variable
@@ -220,3 +232,8 @@ If your log timestamps are in string format and your Databricks table has a time
 [22]: /observability_pipelines/destinations/databricks#convert-string-timestamps-to-timestamp-format
 [23]: /observability_pipelines/processors/generate_metrics/#convert-string-timestamp-to-timestamp-format
 [24]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers
+[25]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#buffer-metrics
+[26]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#choosing-buffer-types
+[27]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
+[28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
+[29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
