@@ -64,7 +64,7 @@ For any [generic widget][16], enter its edit mode to access its {{< ui >}}Contex
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Edit links" style="width:75%;" >}}
 
-To define custom links or override the default links, specify the link name in the {{< ui >}}Label{{< /ui >}} field and the link path in the {{< ui >}}URL{{< /ui >}} field. Click {{< ui >}}+ Add URL Parameter{{< /ui >}} to use the key-value helper.
+To define custom links or override the default links, specify the link name in the {{< ui >}}Label{{< /ui >}} field and the link path in the {{< ui >}}URL{{< /ui >}} field. Click {{< ui >}}\+ Add URL Parameter{{< /ui >}} to use the key-value helper.
 
 
 #### Context Links variables

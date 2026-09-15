@@ -100,7 +100,7 @@ To find the assumed-role ARN for your workload, run <code>aws sts get-caller-ide
 
 To create an identity mapping:
 
-1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+1. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
 3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/terraform-runner/*`).
 4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
@@ -304,7 +304,7 @@ To find the assumed-role ARN for your workload, run <code>aws sts get-caller-ide
 
 To create an intake mapping:
 
-1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+1. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
 3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*`).
 4. Click {{< ui >}}Create Mapping{{< /ui >}}.
