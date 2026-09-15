@@ -19559,6 +19559,8 @@ components:
     CloudWorkloadSecurityAgentRuleAction:
       description: "The action the rule can perform if triggered"
       properties:
+        coredump:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionCoreDump"
         disabled:
           description: "Whether the action is disabled"
           example: false
@@ -19570,16 +19572,50 @@ components:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionHash"
         kill:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleKill"
+        log:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionLog"
         metadata:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata"
+        network_filter:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionNetworkFilter"
         set:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet"
+      type: object
+    CloudWorkloadSecurityAgentRuleActionCoreDump:
+      description: "The core dump action applied on the process matching the rule."
+      properties:
+        dentry:
+          description: "Whether the directory entry information is included in the core dump."
+          type: boolean
+        mount:
+          description: "Whether the mount information is included in the core dump."
+          type: boolean
+        no_compression:
+          description: "Whether the core dump is left uncompressed."
+          type: boolean
+        process:
+          description: "Whether the process memory is included in the core dump."
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
       description: "Hash file specified by the field attribute"
       properties:
         field:
           description: "The field of the hash action"
+          type: string
+        max_file_size:
+          description: "The maximum size of the files to hash, in bytes."
+          format: int64
+          type: integer
+      type: object
+    CloudWorkloadSecurityAgentRuleActionLog:
+      description: "The log action applied when the rule is triggered."
+      properties:
+        level:
+          description: "The level of the log action."
+          type: string
+        message:
+          description: "The message of the log action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
@@ -19593,6 +19629,19 @@ components:
           type: string
         short_image:
           description: "The short image of the metadata action"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleActionNetworkFilter:
+      description: "The network filter action applied on the network traffic matching the rule."
+      properties:
+        filter:
+          description: "The filter expression of the network filter action."
+          type: string
+        policy:
+          description: "The policy of the network filter action."
+          type: string
+        scope:
+          description: "The scope of the network filter action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionSet:
@@ -19616,8 +19665,14 @@ components:
         name:
           description: "The name of the set action"
           type: string
+        private:
+          description: "Whether the value of the set action is private."
+          type: boolean
         scope:
           description: "The scope of the set action."
+          type: string
+        scope_field:
+          description: "The scope field of the set action."
           type: string
         size:
           description: "The size of the set action."
@@ -19873,6 +19928,15 @@ components:
     CloudWorkloadSecurityAgentRuleKill:
       description: "Kill system call applied on the container matching the rule"
       properties:
+        disable_container_disarmer:
+          description: "Whether the automatic container safeguard of the kill action is disabled."
+          type: boolean
+        disable_executable_disarmer:
+          description: "Whether the automatic executable safeguard of the kill action is disabled."
+          type: boolean
+        scope:
+          description: "The scope of the kill action."
+          type: string
         signal:
           description: "Supported signals for the kill system call"
           type: string
@@ -35650,6 +35714,21 @@ components:
           description: The number of interfaces that are in a warning state
           format: int64
           type: integer
+      type: object
+    DeviceTagsBySource:
+      description: Tags associated with a device from a specific source.
+      properties:
+        source:
+          description: The source of the tags.
+          example: user
+          type: string
+        tags:
+          description: The list of tags for the source.
+          example: ["tag:test", "tag:testbis"]
+          items:
+            description: A tag string in `key:value` format.
+            type: string
+          type: array
       type: object
     DevicesListData:
       description: The devices list data
@@ -67450,6 +67529,12 @@ components:
     ListTagsResponseDataAttributes:
       description: The definition of ListTagsResponseDataAttributes object.
       properties:
+        by_source:
+          description: The list of device tags grouped by source.
+          items:
+            $ref: "#/components/schemas/DeviceTagsBySource"
+          readOnly: true
+          type: array
         tags:
           description: The list of tags
           example: ["tag:test", "tag:testbis"]
@@ -72319,6 +72404,32 @@ components:
       required:
         - data
       type: object
+    MonitorConfigPolicyDowntimePolicy:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
+    MonitorConfigPolicyDowntimePolicyCreateRequest:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
     MonitorConfigPolicyEditData:
       description: A monitor configuration policy data.
       properties:
@@ -72356,10 +72467,12 @@ components:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicy"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicy"
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicyCreateRequest"
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -72388,6 +72501,7 @@ components:
           $ref: "#/components/schemas/MonitorConfigPolicyResourceType"
       type: object
     MonitorConfigPolicyTagPolicy:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72409,6 +72523,7 @@ components:
           type: array
       type: object
     MonitorConfigPolicyTagPolicyCreateRequest:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72435,13 +72550,18 @@ components:
       type: object
     MonitorConfigPolicyType:
       default: tag
-      description: The monitor configuration policy type.
+      description: |-
+        The monitor configuration policy type.
+        `tag` enforces required tags on monitors.
+        `downtime` sets a maximum downtime duration for the organization.
       enum:
         - tag
+        - downtime
       example: "tag"
       type: string
       x-enum-varnames:
         - TAG
+        - DOWNTIME
     MonitorDowntimeMatchResourceType:
       default: downtime_match
       description: Monitor Downtime Match resource type.
@@ -96909,7 +97029,7 @@ components:
           example: true
           type: boolean
         trace_sample_rate:
-          description: The sample rate for the APM cross-product retention filter, between 0 and 100.
+          description: The sample rate for the APM cross-product retention filter, between 0 and 100. Values returned by the API are rounded to two decimal places.
           example: 25.0
           format: double
           maximum: 100
@@ -97560,7 +97680,7 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterData"
       type: object
     RumRetentionFilterSampleRate:
-      description: The sample rate for a RUM retention filter, between 0.1 and 100.
+      description: The sample rate for a RUM retention filter, between 0.1 and 100. Values are truncated to one decimal place.
       example: 50.5
       format: double
       maximum: 100
@@ -184315,6 +184435,16 @@ paths:
                           policy_type: tag
                         id: "00000000-0000-1234-0000-000000000000"
                         type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      - attributes:
+                          policy:
+                            max_duration_ms: 3600000
+                          policy_type: downtime
+                        id: "00000000-0000-1234-0000-000000000000"
+                        type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyListResponse"
           description: OK
@@ -184358,6 +184488,15 @@ paths:
                           - staging
                       policy_type: tag
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyCreateRequest"
         description: Create a monitor configuration policy request body.
@@ -184378,6 +184517,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -184478,6 +184627,16 @@ paths:
                         policy_type: tag
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyResponse"
           description: OK
@@ -184536,6 +184695,16 @@ paths:
                       policy_type: tag
                     id: 00000000-0000-1234-0000-000000000000
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    id: 00000000-0000-1234-0000-000000000000
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyEditRequest"
         description: Description of the update.
@@ -184556,6 +184725,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -185274,6 +185453,20 @@ paths:
           content:
             application/json:
               examples:
+                by_source:
+                  value:
+                    data:
+                      attributes:
+                        by_source:
+                          - source: user
+                            tags:
+                              - "tag:test"
+                              - "tag:testbis"
+                          - source: snmp
+                            tags:
+                              - "device_ip:1.2.3.4"
+                      id: foiwf7rgw38fh
+                      type: tags
                 default:
                   value:
                     data:
