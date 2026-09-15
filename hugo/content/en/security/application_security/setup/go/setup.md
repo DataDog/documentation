@@ -8,7 +8,7 @@ aliases:
 further_reading:
 - link: "/security/application_security/setup/go/sdk"
   tag: "Documentation"
-  text: "App & API Protection SDK for Go"
+  text: "App and API Protection SDK for Go"
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
   text: "Adding user information to traces"
@@ -25,12 +25,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
 
 ## Prerequisite
 
@@ -90,7 +84,7 @@ Add the following environment variable value to your application container's Doc
 ENV DD_APPSEC_ENABLED=true
 ```
 
-For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App & API Protection for Go</a>.
+For more information on how to create a fitting docker image, See <a href="/security/application_security/setup/go/dockerfile">Creating a Dockerfile for App and API Protection for Go</a>.
 
 {{% /tab %}}
 {{% tab "Kubernetes" %}}

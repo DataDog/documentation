@@ -11,10 +11,13 @@ further_reading:
 - link: /product_analytics/analytics_explorer/
   tag: Documentation
   text: Analytics Explorer
+- link: /product_analytics/charts/journey_paths/
+  tag: Documentation
+  text: Analyse des parcours de navigation
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centre d'apprentissage
   text: Bien démarrer avec Product Analytics
-title: Analyse d'entonnoirs
+title: Entonnoir
 ---
 ## Présentation {#overview}
 
@@ -119,19 +122,19 @@ Lors du calcul de vos conversions, sélectionnez la manière dont les conversion
 Une fois que vous avez défini les événements d'étape et la mesure de conversion, vous pouvez passer à une visualisation différente pour mieux comprendre les conversions des utilisateurs pour votre application.
 
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Changez la visualisation de Steps à Timeseries à l'aide d'un menu déroulant." video=true >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Changez la visualisation de Étapes à Séries temporelles à l'aide d'un menu déroulant." video=true >}}
 
 
-### Timeseries {#timeseries}
+### Séries temporelles {#timeseries}
 Visualiser l'entonnoir sous forme de série temporelle peut être utile pour comprendre les tendances de conversion. Vous pouvez sélectionner la période pour représenter graphiquement la conversion, et vous pouvez afficher les conversions sous forme de nombre absolu ou de taux.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualisation Timeseries, configurée pour afficher les utilisateurs convertis uniques quotidiens sur la semaine écoulée." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualisation Séries temporelles, configurée pour afficher les utilisateurs convertis uniques quotidiens sur la semaine écoulée." style="width:80%;" >}}
 
 ### Query value {#query-value}
 
-La visualisation Query Value affiche la valeur actuelle d'une métrique.
+La visualisation Valeur de requête affiche la valeur actuelle d'une métrique.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualisation Query Value, configurée pour afficher le nombre total de sessions converties uniques sur la semaine écoulée." style="width:80%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualisation Valeur de requête, configurée pour afficher le nombre total de sessions converties uniques sur la semaine écoulée." style="width:80%;" >}}
 
 ### Top list {#top-list}
 
@@ -139,19 +142,15 @@ La visualisation Top list identifie les valeurs les plus élevées d'une facette
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="La visualisation Top list, configurée pour afficher les quatre principales sources de conversion par continent." style="width:80%;" >}}
 
-## Afficher les facteurs de conversion et les parcours utilisateur {#view-conversion-drivers-and-journey-paths}
+## Afficher les facteurs de conversion {#view-conversion-drivers}
 
-Pour obtenir plus de contexte sur les conversions et les abandons des utilisateurs, cliquez sur une étape de l'entonnoir pour accéder à l'analyse de conversion et aux parcours utilisateur.
+Pour obtenir plus de contexte sur les conversions et les abandons des utilisateurs, cliquez sur une étape de l'entonnoir pour accéder à l'analyse de conversion.
 
 <div class="alert alert-info">L'analyse de conversion est en préversion.</div>
 
-- **Analyse de conversion** : Affichez les facteurs de conversion, les parcours utilisateur, les replays utilisateur disponibles pour les conversions et les abandons, ainsi que les détails des utilisateurs.
+Afficher les facteurs de conversion, les parcours de navigation, les replays disponibles pour les conversions et les abandons, ainsi que les détails des utilisateurs.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vue du panneau latéral après avoir cliqué sur une étape de l'entonnoir, montrant les facteurs de conversion, les replays disponibles et les utilisateurs convertis." style="width:100%;" >}}
-
-- **Parcours utilisateur** : Affichez les chemins de conversion et d'abandon des utilisateurs pour la séquence d'étapes sélectionnée, y compris les chemins de ramification vers d'autres étapes en dehors de l'entonnoir.
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="Un parcours utilisateur montrant les cinq principaux chemins d'abandon suivant l'étape 1 dans l'entonnoir." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vue du panneau latéral après avoir cliqué sur une étape de l'entonnoir, montrant les facteurs de conversion, les replays disponibles et les utilisateurs convertis." style="width:100%;" >}}
 
 ## Partager un entonnoir {#share-a-funnel}
 
