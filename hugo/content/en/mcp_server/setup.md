@@ -796,7 +796,7 @@ Most clients complete the OAuth 2.0 flow automatically during setup. Select your
 
 #### Custom subdomains
 
-If your organization signs in through a custom subdomain (for example, `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can authorize.
+If your organization signs in through a custom subdomain, such as `<SUBDOMAIN>.datadoghq.com`), add the `subdomain` query parameter to the endpoint URL. The MCP client uses this value to send the OAuth flow directly to your subdomain. Without it, the flow starts on the default Datadog domain, so users already signed in on their subdomain are redirected and have to sign in again before they can be authorized.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
