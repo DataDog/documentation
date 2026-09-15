@@ -108,18 +108,9 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by Agent Observability" style="width:100%;" >}}
 
-## See anomalies highlighted as insights
+## Find agent problems with Insights
 
-Agent Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their [out-of-the-box (OOTB) evaluations][9].
-
-Outlier detection is performed across key dimensions:
-- Span name
-- Workflow type
-- [Patterns input/output topics][10]
-
-These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
-
-{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the Agent Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+[Agent Observability Insights][12] automatically identifies recurring cost and reliability problems from the traces your applications already send. Each Insight includes the root cause, impact, supporting evidence, and a recommended fix. Trace-based Insights require no additional configuration.
 
 ## Use integrations with Agent Observability
 
@@ -149,6 +140,6 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
-[9]: /llm_observability/investigate/evaluations/managed_evaluations
 [10]: /llm_observability/investigate/patterns
 [11]: https://www.datadoghq.com/pricing/?product=llm-observability#products
+[12]: /llm_observability/investigate/insights/
