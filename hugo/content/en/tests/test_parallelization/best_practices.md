@@ -146,7 +146,7 @@ bin/ddtest run --platform javascript --framework jest --command "pnpm jest --run
 
 ### Vitest
 
-Vitest 1.6 or later is required. Use `--command` when your project uses a package manager or Vitest projects:
+Use `--command` when your project uses a package manager or Vitest projects:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework vitest --command "pnpm exec vitest run --project unit*"
@@ -156,7 +156,7 @@ The command must invoke Vitest directly. During planning, `ddtest` changes the `
 
 ### Mocha
 
-Mocha 8 or later is required. Use a command that invokes Mocha directly when passing framework options:
+Use a command that invokes Mocha directly when passing framework options:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework mocha --command "pnpm exec mocha --parallel"
@@ -166,7 +166,7 @@ bin/ddtest run --platform javascript --framework mocha --command "pnpm exec moch
 
 ### Cypress
 
-Cypress 12 or later is required. Use a command that invokes Cypress directly when selecting component testing, an alternate project root, or a custom configuration file:
+Use a command that invokes Cypress directly when selecting component testing, an alternate project root, or a custom configuration file:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework cypress --command "pnpm exec cypress run --project apps/web --component"
@@ -176,7 +176,7 @@ bin/ddtest run --platform javascript --framework cypress --command "pnpm exec cy
 
 ### Playwright
 
-Playwright 1.18 or later is required. If you use `dd-trace` v6, Playwright 1.38 or later is required. Use a command that invokes `playwright test` directly when selecting a configuration, projects, or other Playwright options:
+Use a command that invokes `playwright test` directly when selecting a configuration, projects, or other Playwright options:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework playwright --command "pnpm exec playwright test --config apps/web/playwright.config.ts --project chromium"
@@ -186,7 +186,7 @@ Do not include Playwright's `--shard` option. `ddtest` asks Playwright to list t
 
 ### Cucumber.js
 
-`ddtest` is tested with `@cucumber/cucumber` versions 7 through 13. Use a command that invokes `cucumber-js` directly when selecting profiles or passing Cucumber filters:
+Use a command that invokes `cucumber-js` directly when selecting profiles or passing Cucumber filters:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run --platform javascript --framework cucumber --command "pnpm exec cucumber-js --profile ci --tags=@smoke"
