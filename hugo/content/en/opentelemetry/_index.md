@@ -136,7 +136,7 @@ If your applications and services are instrumented with OpenTelemetry libraries,
 
 ### Additional setup options
 
-**Direct OTLP ingestion** is best for serverless workloads, managed platforms, and other environments where running a Datadog Agent or OpenTelemetry Collector is not feasible. Send OpenTelemetry data directly to Datadog's [OTLP intake endpoints][10].
+Running a Datadog Agent or OpenTelemetry Collector isn't always feasible, especially for serverless workloads, managed platforms, and environments with strict resource constraints. In these cases, you can send your OpenTelemetry data directly to Datadog using [direct OTLP ingestion][10].
 
 For all available methods, see [Send OpenTelemetry Data to Datadog][7].
 
