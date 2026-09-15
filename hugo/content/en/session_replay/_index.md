@@ -36,9 +36,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/session-replay-investigate-collaborate/"
   tag: "Blog"
   text: "Find, analyze, and collaborate on user sessions in Datadog Session Replay"
-- link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
-  tag: "Blog"
-  text: "Coordinate product launches with Datadog"
 
 ---
 

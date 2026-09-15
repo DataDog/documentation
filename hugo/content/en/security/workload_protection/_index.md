@@ -24,9 +24,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/workload-protection-findings"
     tag: "Blog"
     text: "Surface and remediate runtime posture issues with Workload Protection Findings"
-  - link: "https://www.datadoghq.com/blog/stop-runtime-threats-with-workload-protection-response-actions/"
-    tag: "Blog"
-    text: "Stop runtime threats with Workload Protection response actions"
 cascade:
 - _target:
     path: /security/workload_protection/backend_linux
