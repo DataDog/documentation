@@ -394,7 +394,6 @@ unsupported_sites:
   network_config_management: [gov,gov2]
   observability_pipelines: [gov,gov2]
   on-call: [gov,gov2]
-  oracle-cloud-infrastructure: [gov,gov2]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]

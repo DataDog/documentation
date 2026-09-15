@@ -45,7 +45,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 | Red Hat Enterprise Linux                                      | 7, 8, and 9                           |
 | Oracle Linux                                                  | 7, 8, and 9                           |
 | CentOS                                                        | 7                                     |
-| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher                         |
+| Google Container Optimized OS (default on GKE)                | 93 and higher                         |
 
 **Notes:**
 
