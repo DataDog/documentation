@@ -4309,6 +4309,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOIDCDiscoveryDocument": {
+    "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
+    "summary": "Get OpenID Connect provider metadata"
+  },
   "GetOAuth2WellKnownSites": {
     "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
     "summary": "Get OAuth2 well-known sites"
