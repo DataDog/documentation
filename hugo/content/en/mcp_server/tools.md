@@ -516,6 +516,15 @@ Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code rec
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
 
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
+
 ## Dashboards
 
 Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
