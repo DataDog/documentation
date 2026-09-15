@@ -135,7 +135,11 @@ Open a batch to see every resource it contains and the state of its translation:
 
 Click a resource to see its original SPL, the translated query, and the explanation of the translation. Review the translation before publishing, because a translated query is not guaranteed to return the same results as the Splunk original. Publishing creates the monitor or dashboard in your Datadog organization.
 
-Resources in an error state cannot be published. Correct the cause of the error in Splunk, re-export, and import the corrected assets in a new batch.
+Resources in an error state cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a resource, fix it at the source and import it again:
+
+1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
+2. Delete the original batch if you want to reuse its name.
+3. Import the corrected file as a new batch.
 
 ## Translation gaps
 
