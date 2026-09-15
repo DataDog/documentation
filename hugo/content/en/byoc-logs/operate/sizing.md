@@ -98,10 +98,6 @@ Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with
 
 The compactor merges small index splits into larger ones to reduce fragmentation and improve search efficiency. It also removes obsolete splits to reclaim storage.
 
-## Compactors
-
-The compactor merges small index splits into larger ones to reduce fragmentation and improve search efficiency. It also removes obsolete splits to reclaim storage.
-
 | Specification    | Recommendation      | Notes                                                        |
 |------------------|---------------------|--------------------------------------------------------------|
 | **Performance**  | 1 vCPU per 2 TB/day | Baseline for initial sizing                                  |
