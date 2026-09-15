@@ -26,6 +26,7 @@ Missing log bytes indicate that file rotation outpaced the Agent's reads during 
 - Network or intake latency slows successful log submissions.
 - Encoding, batching, or compression is limiting a logs pipeline.
 - Processing rules or multi-line processing are limiting a logs pipeline.
+- The log rate exceeds the CPU or network capacity available to the Agent.
 - The affected file rotates before the Agent can read the data written during the rotation interval, even when the downstream pipeline is not saturated.
 
 ## Diagnose missing log bytes
@@ -125,26 +126,13 @@ If the Agent does not tail all matching files, check `logs_config.open_files_lim
 | Component | Interpretation | Start with |
 | --- | --- | --- |
 | `destination_reliable_N` | Log submissions are delayed or retried. | [Resolve delivery errors](#resolve-delivery-errors) |
-| `worker` | Payloads are waiting to be sent. | [Resolve delivery errors](#resolve-delivery-errors), then [increase HTTP send concurrency](#increase-http-send-concurrency) if delivery succeeds |
+| `worker` | Payloads are waiting to be sent. | [Resolve delivery errors](#resolve-delivery-errors) |
 | `strategy` | Encoding, batching, or compression work is at capacity. | [Disable compression](#disable-compression) or [increase pipeline parallelism](#increase-pipeline-parallelism) |
 | `processor` | Log processing is at capacity. | [Reduce log processing](#reduce-log-processing) or [increase pipeline parallelism](#increase-pipeline-parallelism) |
 
 ### Resolve delivery errors
 
 If `destination_reliable_N` is saturated, open the [Agent log file][10] and inspect entries near the missing-byte warning timestamp for failed or retried submissions. Resolve authentication, rejection, proxy, DNS, and connection errors. Verify the [proxy configuration][5], [network access to Datadog endpoints][6], and [Datadog site][4].
-
-Increase `batch_max_concurrent_send` only when submissions succeed and the **Logs Agent** status shows HTTPS.
-
-### Increase HTTP send concurrency
-
-On Agent 7.82.x, the default `batch_max_concurrent_send: 0` scales from one to 10 sends per logs pipeline based on intake latency. If `worker` or `destination_reliable_N` remains saturated while deliveries succeed, consider setting a fixed value such as `16`:
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-logs_config:
-  batch_max_concurrent_send: 16
-{{< /code-block >}}
-
-A fixed value applies to each pipeline and uses more Agent CPU, memory, network bandwidth, and outbound connections.
 
 ### Disable compression
 
