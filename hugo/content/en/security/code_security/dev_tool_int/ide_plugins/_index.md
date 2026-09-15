@@ -8,7 +8,15 @@ disable_toc: false
 
 ## Overview
 
-[Code Security][1] integrates directly with integrated development environment (IDE) tools to provide real-time feedback on the security and quality of your code. IDE integrations are supported for SAST, SCA, and IAST.
+[Code Security][1] integrates with VS Code, Cursor, and JetBrains IDEs to provide real-time feedback on code security and quality. Support varies by IDE:
+
+| Capability | Visual Studio Code & Cursor | JetBrains IDEs |
+|---|---|---|
+| [Static Code Analysis (SAST)][2] | Supported | Supported |
+| [Software Composition Analysis (SCA)][3] | Supported | Supported |
+| [Runtime Code Analysis (IAST)][4] | Supported | Supported |
+| [Secret Scanning][5] | Supported | Supported |
+| [Infrastructure as Code (IaC) Scanning][6] | Supported | Not supported |
 
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="ide_plugins/idea/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
@@ -17,3 +25,8 @@ disable_toc: false
 
 
 [1]: /security/code_security/
+[2]: /security/code_security/static_analysis/
+[3]: /security/code_security/software_composition_analysis/
+[4]: /security/code_security/iast/
+[5]: /security/code_security/secret_scanning/
+[6]: /security/code_security/iac_security/

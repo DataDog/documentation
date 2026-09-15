@@ -3,6 +3,9 @@ title: NetFlow Monitoring
 aliases:
 - /network_monitoring/devices/netflow/
 further_reading:
+- link: "https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/"
+  tag: "Architecture Center"
+  text: "Hybrid Multi-cloud Network Observability Reference Architecture"
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
@@ -15,6 +18,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/"
   tag: "Blog"
   text: "Monitor and diagnose network performance issues with SNMP Traps"
+- link: "https://www.datadoghq.com/blog/understanding-netflow-duplication/"
+  tag: "Blog"
+  text: "Understanding NetFlow duplication: Why it happens, and how to deduplicate"
 ---
 
 ## Overview
