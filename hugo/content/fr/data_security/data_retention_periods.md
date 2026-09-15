@@ -8,7 +8,7 @@ aliases:
 attributes:
 - data_type: '- **Erreurs** : 15 jours
 
-    - **Indexed spans** : 15 ou 30 jours, déterminés par le forfait client
+    - **Spans indexés** : 15 ou 30 jours, déterminés par le forfait client
 
     - **Statistiques des services/ressources** : 30 jours
 
@@ -49,12 +49,12 @@ attributes:
 - data_type: '- **Cas** : conservés pendant toute la durée du compte
 
     '
-  product: Case Management
+  product: Work Management
 - data_type: '- **Déploiements** : 30 jours
 
     '
   product: CD Visibility
-- data_type: '- **Pipelines, stages, jobs, setups, commands** : 15 mois
+- data_type: '- **Pipelines, étapes, jobs, configurations, commandes** : 15 mois
 
     '
   product: CI Pipeline Visibility
@@ -97,9 +97,9 @@ attributes:
 
     '
   product: Container and Process Monitoring
-- data_type: '- **Flame graphs, call graphs, and thread timelines** : 8 jours
+- data_type: '- **Flame graphs, call graphs et chronologies de thread** : 8 jours
 
-    - **Flame graphs exported to a notebook** : 1 an
+    - **Flame graphs exportés vers un notebook** : 1 an
 
     - **Profils individuels ouverts au moins une fois dans l''interface utilisateur**
     : 1 an
@@ -108,13 +108,13 @@ attributes:
 
     '
   product: Continuous Profiler
-- data_type: '- **Batch results** : 2 mois
+- data_type: '- **Résultats de lots** : 2 mois
 
     - **Résultats de test** : 2 mois
 
     '
   product: Continuous Testing
-- data_type: '- **Job traces** : 90 jours
+- data_type: '- **Traces de jobs** : 90 jours
 
     '
   product: 'Data Observability: Jobs Monitoring'
@@ -153,15 +153,13 @@ attributes:
     - **Traces et spans d''expérimentation** : 15 (par défaut), 90, 180, 270, 365
     jours, selon le forfait client
 
-    - **Datasets** : 3 ans
+    - **Jeux de données** : 3 ans
 
     '
   product: Agent Observability
 - data_type: '- **Logs** : déterminés par le forfait client
 
-    - **Sensitive Data Scanner example logs** : <span class="d-none site-region-container"
-    data-region="us,us3,us5,eu,ap1,ap2,uk1">3 jours</span><span class="d-none site-region-container"
-    data-region="gov,gov2">7 jours</span>
+    - **Exemples de logs Sensitive Data Scanner** : 7 jours
 
     '
   product: Log Management
@@ -205,7 +203,7 @@ attributes:
 
     '
   product: Product Analytics
-- data_type: '- **Gate evaluations** : 30 jours
+- data_type: '- **Évaluations Deployment Gate** : 30 jours
 
     '
   product: Quality Gates
@@ -213,11 +211,12 @@ attributes:
 
     '
   product: Reference Tables
-- data_type: '- **Service metadata** : conservées pendant toute la durée du compte
+- data_type: '- **Métadonnées de service** : conservées pendant toute la durée du
+    compte
 
     '
   product: Service Catalog
-- data_type: '- **SLO results** : 15 mois
+- data_type: '- **Résultats SLO** : 15 mois
 
     '
   product: Service Level Objectives
@@ -264,6 +263,6 @@ further_reading:
 title: Périodes de rétention des données
 type: data_retention_periods
 ---
-### Lectures complémentaires {#further-reading}
+### Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

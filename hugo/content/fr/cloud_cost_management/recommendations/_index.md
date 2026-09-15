@@ -326,7 +326,8 @@ multifiltersearch:
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: Instances RDS utilisant moins de 80 % des IOPS provisionnées
-      au cours des deux dernières semaines.
+      au cours des deux dernières semaines. Non applicable aux instances Amazon Aurora,
+      qui ne disposent pas d'un paramètre IOPS provisionné configurable.
     recommendation_prerequisites: ''
     recommendation_type: Downsize RDS Instance Provisioned IOPS
     resource_type: RDS Instance
@@ -399,17 +400,17 @@ multifiltersearch:
     resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: Les coûts d'un compartiment proviennent presque entièrement
-      du per-GB standard storage, mais les requêtes GET indiquent que peu d'objets
-      sont consultés.
+    recommendation_description: Les coûts d'un bucket proviennent presque entièrement
+      du stockage standard facturé au Go, mais les requêtes GET indiquent que peu
+      d'objets sont consultés.
     recommendation_prerequisites: ''
     recommendation_type: Transition S3 Standard objects to Intelligent Tiering
     resource_type: S3 Bucket
   - category: Migrate
     cloud_provider: AWS
-    recommendation_description: Les coûts d'un préfixe de compartiment proviennent
-      presque entièrement du per-GB standard storage, mais les requêtes GET indiquent
-      que peu d'objets dans le préfixe sont consultés.
+    recommendation_description: Les coûts d'un préfixe de bucket proviennent presque
+      entièrement du stockage standard facturé au Go, mais les requêtes GET indiquent
+      que peu d’objets de ce préfixe sont consultés.
     recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
     recommendation_type: Transition S3 objects to Infrequent Access by Prefix
     resource_type: S3 Bucket
@@ -429,11 +430,10 @@ multifiltersearch:
     resource_type: SageMaker Endpoint
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: Points de terminaison d'inférence en temps réel SageMaker
-      dont l'utilisation du processeur et de la mémoire correspond aux ressources
-      de l'instance immédiatement inférieure de la famille. Les points de terminaison
-      utilisant des instances GPU ou accélérateurs, ou la mise à l'échelle gérée,
-      sont exclus.
+    recommendation_description: Endpoints d'inférence en temps réel SageMaker dont
+      l'utilisation du processeur et de la mémoire correspond aux ressources de l'instance
+      immédiatement inférieure de la famille. Les endpoints utilisant des instances
+      GPU ou accélérateurs, ou la mise à l'échelle gérée, sont exclus.
     recommendation_prerequisites: ''
     recommendation_type: Downsize SageMaker Endpoint
     resource_type: SageMaker Endpoint
@@ -510,6 +510,14 @@ multifiltersearch:
     recommendation_prerequisites: ''
     recommendation_type: Delete Container Registry
     resource_type: Container Registry
+  - category: Configure
+    cloud_provider: Azure
+    recommendation_description: Identifie les comptes Azure Foundry utilisant déjà
+      la mise en cache des invites en dessous du taux de réussite cible et recommande
+      d'améliorer la configuration du cache afin de réduire les coûts des jetons d'entrée.
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: Foundry Account
   - category: Terminate
     cloud_provider: Azure
     recommendation_description: Un cluster est considéré comme inutilisé et arrêté
@@ -807,38 +815,39 @@ multifiltersearch:
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: Les conteneurs n'utilisent qu'une fraction de leur
+    recommendation_description: Les containers n'utilisent qu'une fraction de leur
       CPU ou de leur mémoire demandés.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: Les conteneurs n'utilisent qu'une fraction de leur
+    recommendation_description: Les containers n'utilisent qu'une fraction de leur
       CPU ou de leur mémoire demandés.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: GCP
-    recommendation_description: Les conteneurs n'utilisent qu'une fraction de leur
+    recommendation_description: Les containers n'utilisent qu'une fraction de leur
       CPU ou de leur mémoire demandés.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Configure
     cloud_provider: OpenAI
-    recommendation_description: Identifie les clés d'API OpenAI qui utilisent déjà
-      le prompt caching en dessous du taux de hit ciblé et recommande d'améliorer
-      la configuration du cache pour réduire les coûts des jetons d'entrée.
+    recommendation_description: Identifie les clés d'API OpenAI utilisant déjà la
+      mise en cache des invites en dessous du taux de réussite cible et recommande
+      d'améliorer la configuration du cache pour réduire les coûts des jetons d'entrée.
     recommendation_prerequisites: ''
     recommendation_type: Optimize Prompt Caching
     resource_type: API Key
   - category: Configure
     cloud_provider: OpenAI
-    recommendation_description: Identifie les clés d'API OpenAI avec des dépenses
-      significatives de priority-processing et recommande de déplacer le trafic tolérant
-      à la latence vers le standard afin de supprimer la prime de priorité.
+    recommendation_description: Identifie les clés d'API OpenAI générant des dépenses
+      importantes en traitement prioritaire et recommande de transférer le trafic
+      tolérant à la latence vers le traitement standard afin de réduire le surcoût
+      lié à la priorité.
     recommendation_prerequisites: ''
     recommendation_type: Reduce OpenAI Priority Processing
     resource_type: API Key
@@ -860,7 +869,7 @@ multifiltersearch:
     name: Prérequis de la recommandation
 title: Cloud Cost Recommendations
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 [Cloud Cost Recommendations][1] fournit des recommandations pour réduire vos dépenses cloud et IA en optimisant l'utilisation de vos ressources cloud et de vos API IA/LLM. Datadog génère un ensemble de recommandations en combinant vos données d'observabilité avec vos données de facturation du fournisseur sous-jacent pour identifier les ressources cloud orphelines, héritées ou surdimensionnées, ainsi qu'une utilisation non optimisée de l'IA.
 

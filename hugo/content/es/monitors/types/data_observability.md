@@ -60,7 +60,7 @@ A menos que se indique lo contrario, las secciones a continuación describen el 
 
 ## Creación de un seguimiento {#monitor-creation}
 
-Para crear un seguimiento de Data Observability en Datadog, navegue a [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] o [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. Para ver todos los seguimientos de Data Observability existentes, consulte la [página de monitores de Data Observability][7].
+Para crear un seguimiento de Data Observability en Datadog, navegue a [{{< ui >}}Data Observability{{< /ui >}} > {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] o [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Data Observability{{< /ui >}}][6]. Para visualizar todos los seguimientos de Data Observability existentes, consulte la [página de monitores de Data Observability][7].
 
 ## Elegir datos para hacer un seguimiento {#choose-data-to-monitor}
 
@@ -115,7 +115,7 @@ Combine cualquiera de estos filtros con `AND` o `OR`, use paréntesis para agrup
 
 **Filtrar por relación de linaje:**
 
-Para limitar su selección a activos que están conectados a otro activo en su gráfico de linaje, haga clic en {{< ui >}}Add Relation Filter{{< /ui >}}. Elija {{< ui >}}Upstream of{{< /ui >}} o {{< ui >}}Downstream of{{< /ui >}}, luego seleccione un activo específico o use los mismos filtros `key:value` para coincidir con un conjunto de activos. Por ejemplo, supervise cada tabla que esté aguas arriba de un tablero crítico, o cada columna aguas abajo de una tabla de fuente específica.
+Para limitar su selección a activos que están conectados a otro activo en su gráfico de linaje, haga clic en {{< ui >}}Add Relation Filter{{< /ui >}}. Elija {{< ui >}}Upstream of{{< /ui >}} o {{< ui >}}Downstream of{{< /ui >}}, luego seleccione un activo específico o use los mismos filtros `key:value` para coincidir con un conjunto de activos. Por ejemplo, haga un seguimiento de cada tabla que esté aguas arriba de un tablero crítico, o cada columna aguas abajo de una tabla de fuente específica.
 
 **Filtrar por relación de jerarquía:**
 
@@ -205,7 +205,15 @@ Puede agregar una cláusula {{< ui >}}Group by{{< /ui >}} para dividir un solo m
 
 El límite predeterminado es de 500 grupos por monitor. Para aumentar este límite, [contacte a Soporte][9].
 
+### Datos faltantes {#missing-data}
+
+En el menú desplegable {{< ui >}}If data is missing to evaluate{{< /ui >}}, seleccione lo que informa el monitor cuando no hay datos disponibles para una evaluación.
+
 ### Configuración del modelo {#model-configuration}
+
+{{< callout url="#" btn_hidden="true" header="Preview" >}}
+La siguiente configuración del modelo se encuentra en versión preliminar. Comuníquese con su representante de Datadog para habilitarlos en su organización.
+{{< /callout >}}
 
 Para monitores que utilizan el método de detección {{< ui >}}Anomalies{{< /ui >}}, expanda {{< ui >}}Model configuration{{< /ui >}} para refinar cómo se comporta el modelo:
 
@@ -214,8 +222,6 @@ Para monitores que utilizan el método de detección {{< ui >}}Anomalies{{< /ui 
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | La cantidad de evaluaciones fallidas consecutivas antes de que el monitor envíe una alerta. Configure este ajuste para suprimir picos aislados. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Restringe qué tan estrictamente el modelo rastrea sus datos en el extremo superior. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Restringe qué tan estrictamente el modelo rastrea sus datos en el extremo inferior. |
-
-En el menú desplegable {{< ui >}}If data is missing to evaluate{{< /ui >}}, seleccione lo que informa el monitor cuando no hay datos disponibles para una evaluación.
 
 ### Programación del monitor {#monitor-schedule}
 
