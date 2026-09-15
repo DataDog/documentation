@@ -456,7 +456,7 @@ configs:
                   else:
                       with tracer.trace("consume.event", service='events-consumer'):
                           count += 1
-                          print(f"📬 Event #$${count} [P$${msg.partition()}:$${msg.offset()}]")
+                          print(f"📬 Message #$${count} [P$${msg.partition()}:$${msg.offset()}]")
                           pending.append(msg)
               elapsed_in_cycle = (time.time() - cycle_start) % CYCLE_SECONDS
               if elapsed_in_cycle >= CLIMB_SECONDS:
