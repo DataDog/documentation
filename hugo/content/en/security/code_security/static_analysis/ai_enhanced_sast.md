@@ -39,7 +39,7 @@ Detection capabilities include identifying potentially malicious intent in pull 
 ### Malicious PR protection
 
 {{< callout url="https://www.datadoghq.com/product-preview/malicious-pr-protection/" >}}
-Malicious PR protection is in preview and supports GitHub repositories only.
+Malicious PR protection is in Preview and supports GitHub repositories only.
 {{< /callout >}}
 
 Malicious PR protection uses LLMs to scan PRs submitted to your repositories' default branches for harmful code changes, including:
@@ -62,7 +62,7 @@ For any given vulnerability, you can assign signals for investigation, create a 
 ### AI-native SAST
 
 {{< callout btn_hidden="true" >}}
-AI-Native SAST is in preview and is available only for Datadog-hosted scans.
+AI-Native SAST is in Preview and is available only for Datadog-hosted scans.
 {{< /callout >}}
 
 AI-native SAST uses LLMs to detect security vulnerabilities by reasoning about how data flows through your code. Unlike rule-based static analysis, AI-native SAST can contextually identify vulnerabilities using a two-phase approach:
