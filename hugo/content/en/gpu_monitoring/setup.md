@@ -1,9 +1,6 @@
 ---
 title: Set up GPU Monitoring
 further_reading:
-- link: "https://www.datadoghq.com/architecture/gpu-monitoring/"
-  tag: "Architecture Center"
-  text: "GPU Monitoring Reference Architecture"
 - link: "/gpu_monitoring/summary"
   tag: "Documentation"
   text: "GPU Monitoring Summary Page"
