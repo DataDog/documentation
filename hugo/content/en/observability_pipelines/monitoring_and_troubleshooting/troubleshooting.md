@@ -153,7 +153,7 @@ If you see the error `Too many files` and the Worker processes repeatedly restar
 
 ### Source send canceled error
 
-If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. In the case of shut down or restarts, the error occurs when a source shuts down or restarts while events are in transit.
+If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. An error is logged when a source shuts down or restarts while events are in transit.
 
 To determine if the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
 
