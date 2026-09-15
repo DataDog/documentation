@@ -269,25 +269,27 @@ Workload Identity Federation for the Agent allows you to authenticate your Agent
 
 ### Requirements
 
-- The Agent version and type required depend on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
-- The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
-- You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
-- Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+- A supported Agent version and type based on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
+- An Agent running in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, an ECS task, or an EKS pod).
+- A configured [Datadog-AWS integration][4] with your AWS account added. See the [AWS Integration docs][3]
+- The `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
 
 #### Supported Agent versions and AWS credentials
 
-Support depends on the Agent version, which Agent you run, and how that Agent obtains AWS credentials.
-
-**Core Agents**: the Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. In Agent 7.83 and later, support also includes the Trace Agent, standalone DogStatsD, the private action runner, the IoT Agent, and the Heroku Agent.
+Workload Identity Federation support depends on Agent version, Agent type, and how the Agent obtains AWS credentials.
 
 | How the Agent gets AWS credentials | Agent 7.78-7.81 | Agent 7.82 | Agent 7.83+ |
 |---|---|---|---|
-| Static environment variables (`AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`) | All Agents | All Agents | All Agents |
+| Environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) | All Agents | All Agents | All Agents |
 | EC2 instance metadata service (IMDS) role | Core Agents only | Core Agents only | All Agents |
-| EKS IRSA (`AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core Agents only | All Agents |
+| EKS IRSA (`AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core Agents only | All Agents |
 | ECS task role or EKS Pod Identity (`AWS_CONTAINER_CREDENTIALS_*`) | Not supported | Core Agents only | All Agents |
 
-The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. AWS is the only supported cloud provider for the Agent; Azure, Google Cloud, and generic OIDC providers are not supported.
+**Core Agents**: the Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. 
+
+**All Agents**: Core Agents plus the Trace Agent, standalone DogStatsD, the Private Action Runner, the IoT Agent, and the Heroku Agent.
+
+The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. AWS is the only supported cloud provider. Azure, Google Cloud, and generic OIDC providers are not supported.
 
 <div class="alert alert-info">For an unsupported Agent type, cloud provider, or way of supplying credentials, <a href="/help/">open a feature request with Datadog Support</a>.</div>
 
