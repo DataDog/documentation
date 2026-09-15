@@ -29,13 +29,13 @@ To create a code channel, mention `@Datadog` in Slack and describe a code change
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel_creation.png" alt="A Slack message mentioning @Datadog, followed by a card showing the resulting code channel that was created" style="width:100%;" >}}
 
-Bits Code names the code channel automatically based on your initial request. Find your code channels in a dedicated {{<ui>}}Code channels{{</ui>}} section in your Slack sidebar.
+Bits Code names the code channel automatically based on your initial request. Find your code channels in a dedicated {{< ui >}}Code channels{{< /ui >}} section in your Slack sidebar.
 
 ### Permissions and access
 
-Only the user who prompted `@Datadog` is added to the new code channel automatically. Code channels match the visibilty of the channel from which they are created (that is, if you mentioned `@Datadog` in a public channel, the resulting code channel is also public).
+Only the user who prompted `@Datadog` is added to the new code channel automatically. Code channels match the visibility of the channel from which they are created (that is, if you mentioned `@Datadog` in a public channel, the resulting code channel is also public).
 
-<div class="alert alert-warning">Bits Code can access source code repositories with the permissions of the user who prompted <code>@Datadog</code> and created the channel. It can access all Datadog telemetry (with <a href="/account_management/rbac/data_access/">Data Access Control</a> restrictions applied) of all users in the channel. Bits Code may bring this repository data and telemetry into the code channel. As the creator of a code channel, is your responsibility to ensure that anyone who can view a code channel is authorized to view its contents, and that anyone who can join a code channel is authorized to steer Bits Code.</div>
+<div class="alert alert-warning">Bits Code can access source code repositories with the permissions of the user who prompted <code>@Datadog</code> and created the channel. It can access all Datadog telemetry (with <a href="/account_management/rbac/data_access/">Data Access Control</a> restrictions applied) of all users in the channel. Bits Code may bring this repository data and telemetry into the code channel. As the creator of a code channel, it is your responsibility to ensure that anyone who can view a code channel is authorized to view its contents, and that anyone who can join a code channel is authorized to steer Bits Code.</div>
 
 Any user who wants to steer the agent must have a Datadog account connected to Slack. (If you post in a code channel but do not have a connected Datadog account, Bits ignores your message.)
 
@@ -51,7 +51,7 @@ As Bits Code works, the code channel shows:
 
 After Bits Code has generated a code diff, you can comment on specific lines directly in the code channel.
 
-Bits Code does not automatically open a pull or merge request from a code channel—click {{< ui >}}Create PR{{< /ui >}} when you're ready. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request. 
+Bits Code does not automatically open a pull or merge request from a code channel—click {{< ui >}}Create PR{{< /ui >}} when you're ready. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
 
 The work in every code channel is also reflected in a [Bits Code session][2] in Datadog. To view it, at the bottom-right corner of the code channel, click {{< ui >}}</> Code session{{< /ui >}}.
 
