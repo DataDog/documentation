@@ -621,7 +621,7 @@ To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops col
 <!-- end Browser -->
 
 <!-- Mobile -->
-{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter", "maui"]) %}
 To stop session recordings, set the sample rate shown in the [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) section to `0`.
 {% /if %}
 <!-- end Mobile -->
@@ -877,4 +877,4 @@ See [Connect Session Replay to your third-party tools][30].
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /real_user_monitoring/application_monitoring/maui/setup
-[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
+[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
