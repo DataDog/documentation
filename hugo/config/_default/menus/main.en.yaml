@@ -10107,7 +10107,7 @@ menu:
       identifier: rum_reference_external_resources
       weight: 1
     - name: Integrated Libraries
-      url: client_sdks/integrated_libraries/
+      url: real_user_monitoring/reference/integrated_libraries/
       parent: rum_reference
       identifier: rum_reference_integrated_libraries
       weight: 2
@@ -10117,7 +10117,7 @@ menu:
       identifier: rum_reference_sdk_performance_impact
       weight: 3
     - name: Troubleshooting
-      url: client_sdks/troubleshooting/
+      url: real_user_monitoring/reference/troubleshooting/
       parent: rum_reference
       identifier: rum_reference_troubleshooting
       weight: 4
