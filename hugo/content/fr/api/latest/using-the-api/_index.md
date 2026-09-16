@@ -27,12 +27,13 @@ Endpoints d'intégrations disponibles :
 - [PagerDuty Integration][6]
 - [Slack Integration][5]
 - [Webhooks Integration][7]
+- [Oracle Cloud Integration][43]
 
 **Endpoints de la plateforme**
 
 Utilisez ces endpoints pour envoyer et récupérer des données dans Datadog : 
 
-- Les endpoints [metrics][8] vous permettent de publier des données de [metrics][9] afin qu'elles puissent être représentées graphiquement sur les tableaux de bord Datadog et d'interroger des métriques pour n'importe quelle période.
+- Les endpoints [metrics][8] vous permettent de publier des données de [metrics][9] afin qu'elles puissent être représentées graphiquement sur les dashboards Datadog et d'interroger des métriques pour n'importe quelle période.
 - Les endpoints [events][10] vous permettent de publier et de récupérer des événements vers et depuis l'[Datadog event explorer][11].
 - Utilisez les endpoints [Synthetic Monitoring][12] pour créer, démarrer, arrêter et consulter les résultats des [tests Synthetic][13].
 - Utilisez l'[API Tracing Agent][14] pour envoyer des traces à votre Datadog Agent, qui les transmet ensuite à Datadog.
@@ -49,8 +50,8 @@ Lorsque vous envoyez des données à Datadog, vous pouvez utiliser l'API pour cr
 - [Service Dependencies][20] - consultez une liste de vos services APM et leurs dépendances
 - Créez des [Monitors][21]
 - [Service Checks][22] - publiez des statuts de vérification à utiliser avec les monitors
-- Créez et gérez des [Logs], des [Logs Indexes] et des [Logs Pipelines][25]
-- Obtenez des informations sur les [Host] de votre organisation
+- Créez et gérez des [Logs][23], des [Logs Indexes][24] et des [Logs Pipelines][25]
+- Obtenez des informations sur les [Host][17] de votre organisation
 - Créez et gérez des [Service Level Objectives][26]
 - Générez des signaux de [Security Monitoring][27]
 
@@ -103,10 +104,11 @@ Vous pouvez également utiliser la Datadog API pour gérer automatiquement votre
 [33]: /fr/api/v1/key-management/
 [34]: /fr/api/v1/usage-metering/
 [35]: /fr/api/v1/ip-ranges/
-[36]: /fr/llm_observability/evaluations/export_api
+[36]: /fr/llm_observability/investigate/export_api
 [37]: /fr/api/latest/cloudflare-integration/
 [38]: /fr/api/latest/fastly-integration/
 [39]: /fr/api/latest/jira-integration/
 [40]: /fr/api/latest/microsoft-teams-integration/
 [41]: /fr/api/latest/okta-integration/
 [42]: /fr/api/latest/opsgenie-integration/
+[43]: /fr/api/latest/oci-integration/
