@@ -130049,6 +130049,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -130129,6 +130132,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -130250,6 +130256,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
           nullable: true
