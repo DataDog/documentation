@@ -60,7 +60,7 @@ hugo defaults to environment development with hugo server
 {{/* the RUM bundle above lazy-loads its Session Replay/Profiler chunks via import("./chunks/<file>")
      relative to its own URL, so those chunk files must be published unmodified next to it */}}
 {{ range resources.Match "node_modules/chunks/*" }}
-  {{ (resources.Copy (printf "static/chunks/%s" .Name) .).Publish }}
+  {{ (resources.Copy (printf "static/chunks/%s" (path.Base .Name)) .).Publish }}
 {{ end }}
 
 
