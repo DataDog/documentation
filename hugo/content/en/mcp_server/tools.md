@@ -529,16 +529,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
 
-## Code Execution
+## Code execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+Tools for discovering available Datadog API operations and running agent-authored JavaScript in a Datadog-managed sandbox. Use them to combine API calls, correlate data across products, and return a focused result in one execution.
 
-Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
+API calls use your Datadog user identity. The sandbox exposes only supported read-only operations allowed by your existing [role permissions][56]. Scripts don't receive credentials and can't access the file system or make arbitrary network requests.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: Product-specific role permissions for the Datadog API operations included in the catalog.*\
+Searches the catalog of official Datadog SDK operations and enabled code-exec extensions available to `execute_code`. Agent-authored JavaScript filters the catalog and returns selected operation signatures, type definitions, and usage notes. This tool searches API metadata, not your Datadog data. Use it before `execute_code` to discover method names and request shapes instead of guessing them.
+
+- Find the SDK operation and request fields for aggregating error logs by service.
+- Show the request and response types for querying metric timeseries.
+- List the available monitor search operations.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox and returns a structured result to the agent. Scripts import Datadog APIs from `@datadog/datadog-api-client` and enabled extensions from `@datadog/code-exec`. They can combine queries, join results across products, and return selected fields or aggregates instead of full API responses.
+
+Write plain JavaScript, not TypeScript. The `dd` global provides only `dd.time.*` helpers, not product APIs. Top-level `await` is supported; use `return` to send a value back to the agent. The optional `timeout` parameter accepts 1 to 180 seconds and defaults to 60 seconds.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
