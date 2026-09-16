@@ -153,8 +153,6 @@ First, set the following required environment variables for your build tool:
 
 Then, set the following common environment variables to configure the SDK and its reporting method:
 
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
-
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables Test Optimization.<br/>
 **Default**: `false`
