@@ -16,7 +16,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 
 Remote configuration requires the following RUM SDK versions:
 
-- Browser SDK version 7.6.0+
+- Browser SDK version 7.13.0+
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.0+
 
