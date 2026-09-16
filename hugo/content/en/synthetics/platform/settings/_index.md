@@ -128,7 +128,7 @@ For more information, see [Run Synthetic Tests from Private Locations][3].
 
 Global variables are variables that are accessible from all your Synthetic tests. They can be used in all [single][4], [multistep API tests][5], [browser tests][6], and [mobile app tests][17] of your test suite.
 
-To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
+To create a global variable, navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} page][7] and click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
 Choose the type of variable you want to create:
 
@@ -216,7 +216,7 @@ To generate and use a TOTP in your tests, create a global variable where you ent
 2. In {{< ui >}}Define Variable{{< /ui >}}, enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores.
 3. Optionally, enter a {{< ui >}}Description{{< /ui >}} and select {{< ui >}}Tags{{< /ui >}} to associate with your variable.
 4. Enter the {{< ui >}}Secret Key{{< /ui >}} to your variable or upload a QR code image.
-5. Click {{< ui >}}+ Generate{{< /ui >}} to create an OTP. You can copy the generated OTP with the {{< ui >}}Copy{{< /ui >}} icon.
+5. Click {{< ui >}}\+ Generate{{< /ui >}} to create an OTP. You can copy the generated OTP with the {{< ui >}}Copy{{< /ui >}} icon.
 
 {{< img src="synthetics/guide/browser-tests-totp/new-variable-totp.png" alt="Create a MFA token" style="width:100%;" >}}
 
@@ -231,7 +231,7 @@ For more information about TOTP-based MFA in a browser test, see [TOTPs For Mult
 
 To complete a user journey with a passkey in your Synthetics tests, create a Virtual Authenticator global variable. This global variable is used to generate and store passkeys for all your Synthetics browser tests. For more information, see [Using passkeys In Browser Tests][1].
 
-1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab in [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] and click {{< ui >}}+ New Global Variable{{< /ui >}}.
+1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab in [{{< ui >}}Synthetic Monitoring & Continuous Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][1] and click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 
 1. In the {{< ui >}}Choose variable type{{< /ui >}} section, select {{< ui >}}Virtual Authenticator{{< /ui >}}.
 2. In the {{< ui >}}Specify variable details{{< /ui >}} section, enter a {{< ui >}}Variable Name{{< /ui >}}. Your variable name can only use uppercase letters, numbers, and underscores.
@@ -245,7 +245,7 @@ To complete a user journey with a passkey in your Synthetics tests, create a Vir
 {{% /tab %}}
 {{< /tabs >}}
 
-Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click {{< ui >}}+ Variables{{< /ui >}}, type `{{` in a field you want to add the variable, and select your global variable.
+Once created, global variables can be used in all Synthetic tests. To import your global variables into your test, click {{< ui >}}\+ Variables{{< /ui >}}, type `{{` in a field you want to add the variable, and select your global variable.
 
 
 For more information about variables, see the [HTTP test][8], [Multistep API test][9], [Browser test][10], [Mobile app test][19], and [Browser Test Steps documentation][16].

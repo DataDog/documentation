@@ -1,4 +1,6 @@
 ---
+description: Aprenda a usar el Lenguaje de remapeo de vectores (VRL) en el Procesador
+  Personalizado para modificar y enriquecer sus registros, métricas o trazas.
 disable_toc: false
 further_reading:
 - link: /observability_pipelines/guide/remap_reserved_attributes/
@@ -34,7 +36,7 @@ Use este procesador con Vector Remap Language (VRL) para modificar y enriquecer 
 - Enriquecer valores usando [tablas de enriquecimiento](#enrichment).
 - [Manipular valores de IP](#ip).
 - Calcular [distancias geográficas](#map) y orientación con haversine.
-- [Parseo](#parse) valores con reglas personalizadas (por ejemplo, grok, regex, etcétera) y funciones listas para usar (por ejemplo, syslog, apache, registros de flujo de VPC, etcétera). Consulte [Writing Effective Grok Parsing Rules with Regular Expressions][3] para obtener información.
+- [Parseo](#parse) valores con reglas personalizadas (por ejemplo, grok, regex, etcétera) y funciones listas para usar (por ejemplo, syslog, apache, registros de flujo de VPC, etcétera). Consulte [Escritura efectiva de reglas de parseo grok con expresiones regulares][3] para obtener información.
 - Manipule [rutas](#path) de eventos.
 
 Consulte [Funciones personalizadas](#custom-functions) para obtener la lista completa de funciones disponibles.
@@ -51,7 +53,7 @@ Para configurar este procesador:
 ### Agregar una función {#add-a-function}
 
 1. Ingrese un nombre para su procesador personalizado.
-1. Agregue su script para modificar sus datos usando [custom functions][1]. También puede hacer clic en {{< ui >}}Autofill with Example{{< /ui >}} y seleccionar uno de los casos de uso comunes para comenzar. Haga clic en el icono de copiar para el script de ejemplo y péguelo en su script. Consulte [Get Started with the Custom Processor][2] para obtener más información.
+1. Agregue su script para modificar sus datos usando [funciones personalizadas][1]. También puede hacer clic en {{< ui >}}Autofill with Example{{< /ui >}} y seleccionar uno de los casos de uso comunes para comenzar. Haga clic en el icono de copiar para el script de ejemplo y péguelo en su script. Consulte [Primeros pasos con el procesador personalizado][2] para obtener más información.
 1. Opcionalmente, marque {{< ui >}}Drop events on error{{< /ui >}} si desea descartar los eventos que encuentren un error durante el procesamiento.
 1. Ingrese un evento de muestra.
 1. Haga clic en {{< ui >}}Run{{< /ui >}} para obtener una vista previa de cómo las funciones procesan el evento. Después de que el script se haya ejecutado, puede ver el resultado para el evento.
