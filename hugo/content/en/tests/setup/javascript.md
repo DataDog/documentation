@@ -631,7 +631,7 @@ If you set these as environment variables, set them before starting the test pro
 `service` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: The Nx project name<br/>
+**Default**: The Nx project name when available. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.
 **Example**: `my-ui`
 
 `env` (Optional)
