@@ -3,6 +3,9 @@ title: Sensitive Data Scanner Processor
 description: Learn how to use the Sensitive Data Scanner processor to detect and redact or hash sensitive information such as Personally Identifiable Information (PII) and Payment Card Industry (PCI) data in logs or traces.
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines Sensitive Data Scanner Optimization"
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
   text: "Writing Effective Grok Parsing Rules with Regular Expressions"
