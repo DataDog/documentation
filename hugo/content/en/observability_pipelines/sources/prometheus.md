@@ -28,6 +28,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 After you select the Prometheus source in the pipeline UI:
 
 1. Enter the identifier for your Prometheus address. An example of the socket address that the identifier references: `0.0.0.0:9091`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
+1. Enter the URL path on which metric POST requests are accepted, such as `/api/v1/write`.
 1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for your Prometheus username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
 
@@ -37,13 +38,9 @@ After you select the Prometheus source in the pipeline UI:
 
 #### Configure authentication tokens
 
-If you store tokens as credentials in your Prometheus client's authorization header, you can configure the Worker to check if incoming requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
+If you store tokens as credentials in your Prometheus client's authorization header, you can configure the Worker to check if incoming requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header. You can only set authentication tokens when the authorization strategy is set to **None**.
 
 {{% observability_pipelines/configure_authentication_tokens %}}
-
-#### Aggregate metrics
-
-Select {{< ui >}}Aggregate metrics{{< /ui >}} to combine metrics that share the same name, tags, and timestamp before they are sent downstream.
 
 #### Configure keepalive
 
@@ -67,10 +64,10 @@ To configure keepalive settings for connections to the source, enable the {{< ui
 
 - Prometheus address identifier:
 	- References the socket address on which the Observability Pipelines Worker listens for Prometheus metrics. An example of the socket address that the identifier references: `0.0.0.0:9091`.
-	- The default identifier is `SOURCE_PROMETHEUS_ADDRESS`.
+	- The default identifier is `SOURCE_PROMETHEUS_REMOTE_WRITE_ADDRESS`.
 - If you are using plain authentication:
 	- Prometheus username identifier:
-		- The default identifier is `SOURCE_PROMETHEUS_USERNAME`.
+		- The default identifier is `SOURCE_PROMETHEUS_REMOTE_WRITE_USERNAME`.
 	- Prometheus password identifier:
 		- The default identifier is `SOURCE_PROMETHEUS_PASSWORD`.
 
