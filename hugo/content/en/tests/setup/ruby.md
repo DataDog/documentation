@@ -83,16 +83,16 @@ gem "datadog-ci", "~> 1.0", group: :test
 
 2. [Configure the reporting method](#configuring-reporting-method)
 
-3. Set `RUBYOPT` environment variable:
+3. Set the `RUBYOPT` environment variable on the command that runs your tests:
 
-   `RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument"`
+   ```bash
+   RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument" bundle exec rake test
+   ```
 
-4. Run your tests as you normally do.
-
-4a. (Optional) If you would prefer not to set `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
+4. (Optional) If you prefer not to set the `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
 
 ```bash
-bundle exec ddcirb exec rspec
+bundle exec ddcirb exec rake test
 ```
 
 ## Configuration settings

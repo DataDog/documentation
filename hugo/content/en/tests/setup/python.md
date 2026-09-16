@@ -384,13 +384,11 @@ To configure the SDK, set the following environment variables before starting th
 
 `DD_SERVICE` (Optional)
 : Name of the service or library under test.<br/>
-**Environment variable**: `DD_SERVICE`<br/>
-**Default**: The repository name<br/>
+**Default**: The repository name. If unavailable, `test` for pytest or `unittest` for unittest.<br/>
 **Example**: `my-python-app`
 
 `DD_ENV` (Optional)
 : Name of the environment where tests are being run.<br/>
-**Environment variable**: `DD_ENV`<br/>
 **Default**: `none`<br/>
 **Examples**: `local`, `ci`
 
