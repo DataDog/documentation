@@ -1,0 +1,36 @@
+{{- /*
+  Renders the supported Fleet Automation datadog.yaml configuration fields as
+  grouped definition lists, sourced from the config-validator schema vendored at
+  _vendor/data/data_installer_config.json (exposed as .Site.Data.data_installer_config).
+  Top-level scalar and array fields are shown first, then one section per
+  nested-object field (apm_config, logs_config, and so on).
+  Call with Markdown-processing (percent-sign) shortcode delimiters.
+*/ -}}
+{{- $data := .Site.Data.data_installer_config -}}
+{{- $props := $data.properties -}}
+{{- $exclude := slice "config_id" -}}
+{{- /* Split top-level fields into scalars/arrays (shown together) and objects (own sections). */ -}}
+{{- $top := dict -}}
+{{- $objects := dict -}}
+{{- range $k, $v := $props -}}
+{{- if not (in $exclude $k) -}}
+{{- $tp := $v.type -}}
+{{- if not (reflect.IsSlice $tp) }}{{ $tp = slice $tp }}{{ end -}}
+{{- $t := "" -}}
+{{- range $tp }}{{ if ne . "null" }}{{ $t = . }}{{ end }}{{ end -}}
+{{- if and (eq $t "object") $v.properties -}}
+{{- $objects = merge $objects (dict $k $v) -}}
+{{- else -}}
+{{- $top = merge $top (dict $k $v) -}}
+{{- end -}}
+{{- end -}}
+{{- end }}
+### Top-level fields
+{{ partial "fa-config-rows.html" (dict "props" $top "prefix" "") }}
+{{ range $k, $v := $objects }}
+### `{{ $k }}`
+{{ with $v.description }}
+{{ . }}
+{{ end }}
+{{- partial "fa-config-rows.html" (dict "props" $v.properties "prefix" (printf "%s." $k)) }}
+{{ end -}}

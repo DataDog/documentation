@@ -1,0 +1,54 @@
+{{- /*
+  Renders definition-list entries for Fleet Automation datadog.yaml config fields.
+  Recurses into nested objects and arrays-of-objects, building dotted field paths.
+  Called by the fa-config-fields shortcode, whose output is rendered as Markdown
+  (invoked with percent-sign delimiters). Input: dict "props" (a schema
+  properties map) and "prefix" (dotted path prefix, e.g. "apm_config.").
+  Output lines must start at column 0 so Goldmark parses the definition list.
+*/ -}}
+{{- $props := .props -}}
+{{- $prefix := .prefix -}}
+{{- range $name, $spec := $props -}}
+{{- $full := printf "%s%s" $prefix $name -}}
+{{- /* Normalize type: it may be a string or a ["type", "null"] slice. */ -}}
+{{- $tp := $spec.type -}}
+{{- if not (reflect.IsSlice $tp) }}{{ $tp = slice $tp }}{{ end -}}
+{{- $type := "" -}}
+{{- range $tp }}{{ if ne . "null" }}{{ $type = . }}{{ end }}{{ end -}}
+{{- if and (eq $type "object") $spec.properties -}}
+{{- /* Container object: skip its own entry, recurse into leaf fields. */ -}}
+{{- partial "fa-config-rows.html" (dict "props" $spec.properties "prefix" (printf "%s." $full)) -}}
+{{- else -}}
+{{- /* Build the display type (arrays show their item type). */ -}}
+{{- $disp := $type -}}
+{{- if eq $type "array" -}}
+{{- $itype := "" -}}
+{{- with $spec.items.type -}}
+{{- $itp := . -}}
+{{- if not (reflect.IsSlice $itp) }}{{ $itp = slice $itp }}{{ end -}}
+{{- range $itp }}{{ if ne . "null" }}{{ $itype = . }}{{ end }}{{ end -}}
+{{- end -}}
+{{- if $itype }}{{ $disp = printf "array[%s]" $itype }}{{ else }}{{ $disp = "array" }}{{ end -}}
+{{- end -}}
+{{- /* Build the valid-values string from enum, else a numeric range. */ -}}
+{{- $vals := slice -}}
+{{- with $spec.enum -}}
+{{- range . }}{{ if ne . nil }}{{ $vals = $vals | append (printf "<code>%v</code>" .) }}{{ end }}{{ end -}}
+{{- end -}}
+{{- $valid := delimit $vals ", " -}}
+{{- if not $valid -}}
+{{- $hasMin := isset $spec "minimum" -}}
+{{- $hasMax := isset $spec "maximum" -}}
+{{- if and $hasMin $hasMax }}{{ $valid = printf "%v&ndash;%v" $spec.minimum $spec.maximum -}}
+{{- else if $hasMin }}{{ $valid = printf "&ge; %v" $spec.minimum -}}
+{{- else if $hasMax }}{{ $valid = printf "&le; %v" $spec.maximum }}{{ end -}}
+{{- end }}
+`{{ $full }}`
+: **Type**: {{ $disp }}<br>
+**Description**: {{ $spec.description }}{{ with $valid }}<br>
+**Valid values**: {{ . | safeHTML }}{{ end }}
+{{ if and (eq $type "array") $spec.items.properties -}}
+{{- partial "fa-config-rows.html" (dict "props" $spec.items.properties "prefix" (printf "%s." $full)) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
