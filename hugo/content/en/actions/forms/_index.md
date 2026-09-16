@@ -27,10 +27,10 @@ On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}, then select a creat
 {{< tabs >}}
 {{% tab "Create with AI" %}}
 1. Select {{< ui >}}Create with AI{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}. The form editor opens with [Bits Chat][100].
-1. Describe the form you want to build in the Bits Chat panel.
+1. Describe the form you want to build in the Bits Chat panel. Select one of the rotating example prompts to use it as a starting point, or press **Tab** to accept an inline prompt suggestion.
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
-You can also ask Bits Chat to create a form from anywhere in Datadog, not only from the Forms editor. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
+You can also ask Bits Chat to create a form from anywhere in Datadog, or use a preferred AI coding assistant connected to the Datadog MCP Server. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
 
 [100]: /bits_ai/bits_chat/
 
