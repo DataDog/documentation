@@ -82,15 +82,15 @@ See [Enable debug logs][7] for instruction on enabling full debug logs.
 	- References the Remote Write endpoint URL. An example of an endpoint URL the identifier references: `http://localhost:9090/api/v1/write`.
 	- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT`.
 - Prometheus TLS passphrase identifier (when TLS is enabled):
-	- The default identifier is `DESTINATION_PROMETHEUS_KEY_PASS`.
+	- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_KEY_PASS`.
 - If you are using basic authentication:
 	- Prometheus username identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_USERNAME`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_USERNAME`.
 	- Prometheus password identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_PASSWORD`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_PASSWORD`.
 - If you are using bearer authentication:
 	- Prometheus bearer token identifier:
-		- The default identifier is `DESTINATION_PROMETHEUS_BEARER_TOKEN`.
+		- The default identifier is `DESTINATION_PROMETHEUS_REMOTE_WRITE_BEARER_TOKEN`.
 
 {{% /tab %}}
 
