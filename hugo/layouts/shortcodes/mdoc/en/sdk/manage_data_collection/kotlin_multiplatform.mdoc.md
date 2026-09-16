@@ -1,4 +1,4 @@
-The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification](/real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline) conditions are met.
+The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification](/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/#sending-data-when-device-is-offline) conditions are met.
 
 ### Clear all data
 

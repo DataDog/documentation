@@ -116,8 +116,6 @@
 /*/real_user_monitoring/enrich_rum_data/collect_frontend_profiles.md
 /*/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/_index.md
 /*/real_user_monitoring/reference/sdk_performance_impact.md
-/*/real_user_monitoring/reference/integrated_libraries.md
-/*/real_user_monitoring/reference/troubleshooting.md
 /*/dd_e2e/cdocs/components/stepper_customizable.md
 /*/session_replay/_index.md
 /*/session_replay/privacy_options.md
