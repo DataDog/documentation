@@ -97,11 +97,7 @@ bundle exec ddcirb exec rspec
 
 ## Configuration settings
 
-The following environment variables configure the test optimization library and its reporting method:
-
-When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+To configure the Test Optimization library, set the following environment variables before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
 
 `DD_CIVISIBILITY_ENABLED=true` (Required)
 : Enables Test Optimization.<br/>
@@ -117,7 +113,7 @@ When using environment variables, set them before starting the test process. For
 **Default**: `false`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to authenticate test result uploads.<br/>
+: The Datadog API key used to authenticate test result uploads. This variable does not enable Agentless mode.<br/>
 **Default**: `(empty)`
 
 `DD_SITE` (Optional for Agentless mode)
@@ -125,7 +121,7 @@ When using environment variables, set them before starting the test process. For
 **Default**: `datadoghq.com`
 
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Default**: `http://127.0.0.1:8126`
 
 `DD_SERVICE` (Optional)

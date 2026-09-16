@@ -626,9 +626,7 @@ For more information, see [Code Coverage][6].
 
 The following is a list of the most important configuration settings that can be used with the SDK.
 
-When using environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
-
-`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` selects Agentless transport. `DD_API_KEY` provides authentication but does not enable Agentless mode.
+If you set these as environment variables, set them before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.
 
 `service` (Optional)
 : Name of the service or library under test.<br/>
@@ -648,7 +646,7 @@ When using environment variables, set them before starting the test process. For
 **Default**: `datadoghq.com`
 
 `url` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://127.0.0.1:8126`
 
@@ -661,7 +659,7 @@ The following settings are available only as environment variables:
 **Default**: `false`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to authenticate test result uploads.<br/>
+: The Datadog API key used to authenticate test result uploads. This variable does not enable Agentless mode.<br/>
 **Default**: `(empty)`
 
 `DD_TEST_SESSION_NAME` (Optional)

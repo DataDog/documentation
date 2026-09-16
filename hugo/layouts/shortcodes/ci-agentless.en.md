@@ -2,7 +2,7 @@ If you are using a cloud CI provider without access to the underlying worker nod
 
 <div class="alert alert-warning">
 <p>Set these variables before starting the test process. For parallel test runners, set them on the parent process so every worker inherits them.</p>
-<p><code>DD_CIVISIBILITY_AGENTLESS_ENABLED=true</code> selects Agentless transport. <code>DD_API_KEY</code> provides authentication but does not enable Agentless mode.</p>
+<p><code>DD_CIVISIBILITY_AGENTLESS_ENABLED=true</code> selects Agentless mode. <code>DD_API_KEY</code> provides authentication but does not enable Agentless mode.</p>
 </div>
 
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
@@ -10,14 +10,15 @@ If you are using a cloud CI provider without access to the underlying worker nod
 **Default**: `false`
 
 `DD_API_KEY` (Required for Agentless mode)
-: The Datadog API key used to authenticate test result uploads.<br/>
+: The [Datadog API key][101] used to authenticate test result uploads.<br/>
 **Default**: `(empty)`
 
 If you use a Datadog site other than US1, set the following variable:
 
 `DD_SITE` (Optional for Agentless mode)
-: The [Datadog site][102] to upload test results to. Set this configuration when using a site other than US1.<br/>
+: The [Datadog site][102] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 
 
+[101]: https://app.datadoghq.com/organization-settings/api-keys
 [102]: /getting_started/site/

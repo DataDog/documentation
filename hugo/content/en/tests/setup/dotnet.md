@@ -154,11 +154,11 @@ The following list shows the default values for key configuration settings:
 **Examples**: `local`, `ci`
 
 `--agent-url` (Only when using the Datadog Agent)
-: The Datadog Agent URL for trace collection, in the form `http://hostname:port`. This configuration is used only when test results are reported through the Datadog Agent.<br/>
+: The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Environment variable**: `DD_TRACE_AGENT_URL`<br/>
 **Default**: `http://localhost:8126`
 
-`test_session.name` (only available as an environment variable)
+`test_session.name` (Only available as an environment variable)
 : Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
 **Environment variable**: `DD_TEST_SESSION_NAME`<br/>
 **Default**: The CI job name and test command, or the test command if the CI job name is unavailable.<br/>

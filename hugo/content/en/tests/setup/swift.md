@@ -179,7 +179,7 @@ Set all these variables in your test target:
 **Recommended**: `$(DD_TEST_RUNNER)`
 
 `DD_API_KEY` (Required)
-: The Datadog API key used to authenticate test result uploads.<br/>
+: The [Datadog API key][2] used to authenticate test result uploads.<br/>
 **Default**: `(empty)`
 
 `DD_TEST_SESSION_NAME` (Optional)
@@ -206,10 +206,10 @@ Set all these variables in your test target:
 
 For more information about `service` and `env` reserved tags, see [Unified Service Tagging][8].
 
-Additionally, configure the Datadog site to use the selected one ({{< region-param key="dd_site_name" >}}):
+Configure `DD_SITE` for your site ({{< region-param key="dd_site_name" >}}):
 
 `DD_SITE` (Optional)
-: The [Datadog site][3] to upload test results to. Set this configuration when using a site other than US1.<br/>
+: The [Datadog site][3] to upload results to.<br/>
 **Default**: `datadoghq.com`<br/>
 **Selected site**: {{< region-param key="dd_site" code="true" >}}
 
