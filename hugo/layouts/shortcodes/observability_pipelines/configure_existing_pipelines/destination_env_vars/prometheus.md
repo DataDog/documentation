@@ -1,5 +1,5 @@
 - Prometheus endpoint URL:
-	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_ENDPOINT`.
+	- The default environment variable is `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT`.
 - Prometheus TLS passphrase (when enabled):
 	- The default environment variable is `DD_OP_DESTINATION_PROMETHEUS_KEY_PASS`.
 - If you are using basic authentication:
