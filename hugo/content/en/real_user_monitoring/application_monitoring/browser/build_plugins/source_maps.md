@@ -211,7 +211,7 @@ module.exports = {
 };
 ```
 
-<div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers — only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
+<div class="alert alert-info">This example uses webpack. The configuration object is identical across all supported bundlers: only the import and plugin function name differ. See <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/">Build Plugins</a> for installation instructions for your bundler.</div>
 
 To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source Code Context][5] plugin.
 

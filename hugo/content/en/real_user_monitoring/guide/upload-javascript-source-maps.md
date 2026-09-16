@@ -87,7 +87,7 @@ export default defineConfig({
 })
 ```
 
-**Note**: If you are using TypeScript, ensure `compilerOptions.sourceMap` is set to `true` in your `tsconfig.json` file.
+**Note**: If you are using TypeScript, set `compilerOptions.sourceMap` to `true` in your `tsconfig.json` file.
 
 {{% /tab %}}
 {{% tab "esbuild" %}}
@@ -317,7 +317,7 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{% tab "datadog-ci" %}}
+{{% tab "Datadog CLI" %}}
 
 Use the `datadog-ci` CLI if your bundler is not supported by the Datadog build plugins, or if you inject debug IDs outside of your build. This requires [`@datadog/datadog-ci` version 5.24.0][1] or later.
 
