@@ -87,7 +87,9 @@ datadog:
 
 #### Limited configuration options for Windows deployments
 
-<div class="alert alert-info">The Datadog Operator is not supported on Windows nodes in any configuration, including mixed-node (Windows and Linux) clusters. Use the <a href="/containers/kubernetes/installation/?tab=helm">Helm chart</a> to deploy the Agent on Windows nodes.</div>
+<div class="alert alert-info">Deploying the Agent on Windows nodes with the <code>DatadogAgent</code> resource alone is not supported.</div>
+
+As of Datadog Operator v1.30.0, Windows node support is available for mixed-node (Windows and Linux) clusters. To use it, add a Windows-targeted [DatadogAgentProfile](/containers/datadog_operator/datadog_agent_profiles) alongside your `DatadogAgent` resource. If you're not using a `DatadogAgentProfile`, use the [Helm chart](/containers/kubernetes/installation/?tab=helm) to deploy the Agent on Windows nodes.
 
 Some configuration options are not available on Windows. The following is a list of **unsupported** options:
 
