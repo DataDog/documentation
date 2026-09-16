@@ -33,7 +33,7 @@ The list above is not comprehensive of all rate limits on Datadog APIs. If you a
 
 All Datadog APIs have a usage limit for a given period of time. APIs can have unique, distinct rate limit buckets or be grouped together into a single bucket depending on the resource(s) being used. For example, the monitor status API has a rate limit that allows a human or automation script to query only so many times per minute. The endpoint rejects excess requests with a 429 response code and a hint to back off until a reset period has expired. API usage metrics allow Datadog users to self-service and audit API rate limit consumption for API endpoints (excluding metrics, logs, and event submission endpoints). Use the following dashboard, metrics, and tags to view allowed and blocked requests:
 
-[Datadog API Rate Limit Visibility dashboard][5]
+See the [Datadog API Rate Limit Visibility dashboard][5] for a prebuilt view of these metrics.
 
 #### Rate limit visibility metrics
 
@@ -55,7 +55,7 @@ In addition to the per-scope metrics, the `datadog.apis.rate_limit.usage.limit_c
 
 | Tag name | Description | Availability |
 |----------|-------------|--------------|
-| `app_key_id` | Application key ID associated with the request. The value is empty when the request does not use an application key. | Count, blocked count, and utilization metrics |
+| `app_key_id` | Application key ID associated with the request. The tag is present with an empty value when the request does not use an application key. | Count, blocked count, and utilization metrics |
 | `limit_name` | Name of the rate limit. Different endpoints can share the same name. | All metrics |
 | `limit_type` | Scope of the rate limit: `per_org`, `per_user`, or `per_api_key`. | All metrics |
 | `user_uuid` | UUID of the user associated with the request. | Count, blocked count, and utilization metrics |
@@ -83,7 +83,11 @@ The `datadog.apis.rate_limit.usage.*` metrics replace the `datadog.apis.usage.*`
 | `datadog.apis.usage.per_api_key` | `datadog.apis.rate_limit.usage.per_api_key_count` |
 | `datadog.apis.usage.per_api_key_ratio` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
 
-The replacement metrics do not emit the legacy `child_org`, `limit_period`, or `rate_limit_status` tags. Organization ownership is implicit because these metrics are submitted to the customer organization. Use the corresponding `*_blocked_count` metric for blocked requests instead of filtering on `rate_limit_status:blocked`. The configured limit previously supplied by the `limit_count` tag is available as the `datadog.apis.rate_limit.usage.limit_count` gauge.
+The replacement metrics differ from the legacy metrics in the following ways:
+
+- The `child_org`, `limit_period`, and `rate_limit_status` tags are no longer emitted. Organization ownership is implicit because these metrics are submitted to the customer organization.
+- Use the corresponding `*_blocked_count` metric for blocked requests instead of filtering on `rate_limit_status:blocked`.
+- The configured limit previously supplied by the `limit_count` tag is available as the `datadog.apis.rate_limit.usage.limit_count` gauge.
 
 ### Increase your rate limit
 You can request increased rate limits by creating a Support ticket with the below details under **Help** > **New Support Ticket**. Upon receiving a rate limit increase, our Support Engineering team reviews the request on a case-by-case basis and, if needed, works with internal engineering resources to confirm the viability of the rate limit increase request.
