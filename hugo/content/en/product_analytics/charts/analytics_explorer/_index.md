@@ -14,12 +14,11 @@ Analytics charts start from a single query: an event, a measure, and any filters
 
 Use analytics charts to:
 
-- Scope results to a specific event type, such as sessions, views, or actions.
-- Filter events down to the specific set you want to analyze.
-- Split results across one or more dimensions.
-- Choose the visualization that best fits your aggregated data.
-- Turn a visualization into a dashboard widget.
-- Examine the underlying events behind any chart.
+- See how many users triggered an event, and how feature adoption changes over time.
+- Measure how often users perform an action and how deeply they engage with your product.
+- Break down a metric by user or event properties, and visualize the composition of events.
+- Build custom metrics with formulas, combining any events or metrics into a rate, ratio, or score.
+- Clarify which users or segments are driving a spike, drop, or trend.
 
 {{< img src="/product_analytics/analytics/analytics_chart.png" alt="An example Analytics chart." style="width:90%;" >}}
 
@@ -46,8 +45,6 @@ A query defines what an analytics chart measures, independent of how you later c
 7. (Optional) Apply a function that transforms the query, such as calculating a rate of change or smoothing the data, using {{< ui >}}Σ{{< /ui >}}. See [Functions][1] for details.
    
 8. (Optional) Run a second, independent query alongside the first using {{< ui >}}Add Query{{< /ui >}}. Combine multiple queries into a single result, using {{< ui >}}Add Formula{{< /ui >}}.
-
-   <div class="alert alert-info">Formulas are supported only for the {{< ui >}}Timeseries{{< /ui >}}, {{< ui >}}Table{{< /ui >}}, and {{< ui >}}Change{{< /ui >}} chart types.</div>
 
 ## Understand an analytics chart
 

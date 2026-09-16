@@ -131,8 +131,6 @@ Top list and bar chart require a breakdown. Add one under [Compare](#compare-dat
 
 To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis.
 
-<div class="alert alert-info">Conversion analysis is in Preview.</div>
-
 View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}

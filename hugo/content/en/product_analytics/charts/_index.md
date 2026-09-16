@@ -12,7 +12,7 @@ Use Product Analytics charts to visualize users' journeys from end-to-end to dis
 [Funnel][2] charts help you understand the end-to-end conversion of a single essential workflow. You can view details in the side panel to understand why conversation rates are what they are.
 For example, you can determine if there was there a performance issue that caused user drop-off. Are customers experiencing an error that occurred in a recent release? Watch a Session Replay of a user who converted or dropped off to see exactly what happened.
 
-{{< img src="/product_analytics/overview_funnel_ga.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
+{{< img src="/product_analytics/funnel_chart.png" alt="Understand end-to-end conversions with Funnel Analysis.">}}
 
 ### Journey Paths
 
