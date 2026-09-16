@@ -108,6 +108,11 @@ To configure the Test Optimization library, set the following environment variab
 **Default**: `(empty)`<br/>
 **Examples**: `local`, `ci`
 
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.<br/>
+**Default**: The repository name<br/>
+**Example**: `my-ruby-app`
+
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
 : Enables Agentless mode to send test results directly to Datadog.<br/>
 **Default**: `false`
@@ -123,11 +128,6 @@ To configure the Test Optimization library, set the following environment variab
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
 : The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Default**: `http://127.0.0.1:8126`
-
-`DD_SERVICE` (Optional)
-: Name of the service or library under test.<br/>
-**Default**: The repository name<br/>
-**Example**: `my-ruby-app`
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>

@@ -164,6 +164,10 @@ Then, set the following common environment variables to configure the SDK and it
 **Default**: `(empty)`<br/>
 **Examples**: `local`, `ci`
 
+`DD_SERVICE` (Optional)
+: Name of the service or library under test.<br/>
+**Default**: `unnamed-java-app`
+
 `DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Required for Agentless mode)
 : Enables Agentless mode to send test results directly to Datadog.<br/>
 **Default**: `false`
@@ -179,10 +183,6 @@ Then, set the following common environment variables to configure the SDK and it
 `DD_TRACE_AGENT_URL` (Only when using the Datadog Agent)
 : The Datadog Agent URL for trace collection, in the form `http://hostname:port`.<br/>
 **Default**: `http://localhost:8126`
-
-`DD_SERVICE` (Optional)
-: Name of the service or library under test.<br/>
-**Default**: `unnamed-java-app`
 
 `DD_TEST_SESSION_NAME` (Optional)
 : Identifies a group of tests, such as `unit-tests`, `integration-tests`, or `smoke-tests`.<br/>
