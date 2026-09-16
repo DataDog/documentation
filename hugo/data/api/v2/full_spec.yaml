@@ -14099,6 +14099,13 @@ components:
           example: 202501
           format: int64
           type: integer
+        tags:
+          description: The tag keys used to group costs for the budget.
+          example:
+            - service
+          items:
+            type: string
+          type: array
         total_amount:
           description: The sum of all budget entries' amounts.
           example: 1000
@@ -14261,6 +14268,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/BudgetWithEntriesData"
+        meta:
+          $ref: "#/components/schemas/BudgetWithEntriesMeta"
       type: object
     BudgetWithEntriesData:
       description: A budget and all its entries.
@@ -14390,6 +14399,16 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET
+    BudgetWithEntriesMeta:
+      description: Additional information about errors encountered while retrieving budget cost data.
+      properties:
+        error:
+          description: A user-facing explanation of why budget cost data could not be retrieved.
+          example: ""
+          type: string
+      required:
+        - error
+      type: object
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
