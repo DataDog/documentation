@@ -45183,6 +45183,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
@@ -85211,6 +85214,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
