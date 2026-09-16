@@ -18,6 +18,16 @@ further_reading:
 - link: "actions/connections/"
   tag: "Documentation"
   text: "Connections"
+further_reading_fed:
+- link: "actions/private_actions/"
+  tag: "Documentation"
+  text: "Private Actions Overview"
+- link: "actions/private_actions/set_up_standalone/"
+  tag: "Documentation"
+  text: "Set up a standalone private action runner"
+- link: "actions/connections/"
+  tag: "Documentation"
+  text: "Connections"
 ---
 
 ## Overview
@@ -26,6 +36,7 @@ When your workflows and apps use private actions, Datadog decides whether the ac
 
 This page explains how that authorization decision is made. It covers the models Datadog uses to allow or deny an action, and which model applies to your runner.
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 ## Find your authorization model
 
 A runner is authorized using one of two models: [**Execution Policies**](#execution-policies) or [**Connections**](#connections). The model is determined by the runner's ownership, set once when the runner is enrolled. A given runner uses exactly one of these models for its entire lifetime; you cannot mix the two on the same runner. Because ownership is set per runner, a single Agent-based fleet can include both ownerless and owned runners, each authorized by its own model.
@@ -51,10 +62,17 @@ For how enrollment sets a runner's ownership, see [Enrollment and ownership][1].
 Execution Policies also provide fine-grained control. A policy can allow or deny specific actions or sets of actions. It can also apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action. Access is granted through Agent tags rather than stored credentials, so Execution Policies store no credentials and are used by ownerless runners in the Agent.
 
 To learn more about Execution Policies and how to set them up (targets, rules, access control, and using Execution Policies in workflows), see [Execution Policies][2].
+{{< /site-region >}}
 
 ## Connections
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Connections work for both standalone runners and runners in the Datadog Agent, and are the model used by owned runners.
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+Standalone private action runners use Connections for authorization on Datadog government sites. A standalone runner is always owned, and each Connection can be attached to one runner.
+{{< /site-region >}}
 
 A connection does two things:
 
@@ -67,7 +85,9 @@ For the full setup instructions (creating, editing, and restricting connections,
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+
+{{< partial name="whats-next/whats-next.html" param="further_reading_fed" region="gov,gov2" >}}
 
 [1]: /actions/private_actions/enroll_runner/
 [2]: /actions/private_actions/execution_policies/

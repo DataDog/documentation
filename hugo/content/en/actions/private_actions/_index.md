@@ -15,8 +15,19 @@ further_reading:
 - link: "/actions/private_actions/authorize_private_actions/"
   tag: "Documentation"
   text: "Authorize Private Actions"
+further_reading_fed:
+- link: "actions/private_actions/set_up_standalone"
+  tag: "Documentation"
+  text: "Set up a standalone private action runner"
+- link: "actions/connections"
+  tag: "Documentation"
+  text: "Connections"
+- link: "/actions/private_actions/authorize_private_actions/"
+  tag: "Documentation"
+  text: "Authorize Private Actions"
 ---
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 ## Overview
 
 Private actions allow you to run actions against services in your private network, such as Kubernetes clusters, internal hosts, databases, and internal APIs, without exposing those services to the public internet. You run them through a private action runner that you deploy in your environment, either inside the Datadog Agent (recommended) or as a standalone runner. Datadog products that use private actions include Workflow Automation, App Builder, Datadog MCP, and Bits AI investigations.
@@ -57,10 +68,6 @@ To compare the two models and decide which one applies to your runner, see [Auth
 - **You have a runner in the Datadog Agent and want fleet-wide access control**: Authorize it with [Execution Policies][5].
 - **You have a runner in the Agent or a standalone runner and want to authorize a single runner**: Authorize it with [Connections][6].
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /actions/private_actions/set_up_agent_based/
 [2]: /actions/private_actions/set_up_standalone/
 [3]: /actions/private_actions/enroll_runner/
@@ -68,3 +75,36 @@ To compare the two models and decide which one applies to your runner, see [Auth
 [5]: /actions/private_actions/execution_policies/
 [6]: /actions/connections/
 [7]: /actions/private_actions/getting_started/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+## Overview
+
+Private actions allow you to run actions against services in your private network, such as Kubernetes clusters, internal hosts, databases, and internal APIs, without exposing those services to the public internet. On Datadog government sites, private actions run through a **standalone private action runner** that you deploy and manage in your environment.
+
+Private actions rely on two components:
+
+- A [**standalone private action runner**][8] executes the actions. The runner opens an outbound connection to Datadog, polls for action tasks, runs each task against the target service, and returns the result.
+- A [**Connection**][9] authorizes access to the runner and references any credentials the action needs. Each Connection can be attached to one standalone runner.
+
+## Standalone private action runner
+
+The standalone private action runner is a dedicated container that you install with Docker, Docker Compose, or Kubernetes. The runner is always owned and is authorized through Connections.
+
+When the runner enrolls, it generates a private key that Datadog cannot access. Datadog uses the corresponding public key to authenticate the runner, and the runner verifies the signature of every task before running it.
+
+## Next steps
+
+1. [Set up a standalone private action runner][8].
+2. [Create Connections][9] for the private services and integrations the runner needs to access.
+3. Select the Connection when you configure a private action in a workflow or app.
+
+[8]: /actions/private_actions/set_up_standalone/
+[9]: /actions/connections/
+{{< /site-region >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+
+{{< partial name="whats-next/whats-next.html" param="further_reading_fed" region="gov,gov2" >}}

@@ -5,12 +5,25 @@ further_reading:
 - link: "actions/private_actions/set_up_agent_based"
   tag: "Documentation"
   text: "Set up a private action runner in the Datadog Agent"
+- link: "actions/private_actions/set_up_standalone"
+  tag: "Documentation"
+  text: "Set up a standalone private action runner"
 - link: "actions/private_actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
 - link: "actions/private_actions/reference"
   tag: "Documentation"
   text: "Reference"
+further_reading_fed:
+- link: "actions/private_actions/set_up_standalone"
+  tag: "Documentation"
+  text: "Set up a standalone private action runner"
+- link: "actions/connections"
+  tag: "Documentation"
+  text: "Connections"
+- link: "actions/private_actions"
+  tag: "Documentation"
+  text: "Private Actions Overview"
 ---
 
 ## Overview
@@ -346,7 +359,9 @@ inside the runner.
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+
+{{< partial name="whats-next/whats-next.html" param="further_reading_fed" region="gov,gov2" >}}
 
 [1]: /actions/private_actions/set_up_agent_based/
 [2]: /actions/private_actions/set_up_standalone/
