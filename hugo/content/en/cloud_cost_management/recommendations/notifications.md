@@ -1,6 +1,6 @@
 ---
 title: Notifications
-description: Set up notification rules that send a recurring Slack summary of Cloud Cost Recommendations matching a scope you define.
+description: Set up notification rules that send a recurring Slack or Microsoft Teams summary of Cloud Cost Recommendations matching a scope you define.
 further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
@@ -16,14 +16,14 @@ further_reading:
 
 ## Overview
 
-A notification rule sends a recurring Slack summary of [Cloud Cost Recommendations][1] matching a scope you define, without taking any action on your resources. Use a notification rule when you want visibility into new savings opportunities without configuring Datadog to make changes automatically.
+A notification rule sends a recurring Slack or Microsoft Teams summary of [Cloud Cost Recommendations][1] matching a scope you define, without taking any action on your resources. Use a notification rule when you want visibility into new savings opportunities without configuring Datadog to make changes automatically.
 
 Notification rules are different from [Cost Optimization Automations][2], which act on recommendations directly on a recurring schedule.
 
 ## Prerequisites
 
-- A Slack connection. See [Slack integration][3].
 - The **Cloud Cost Management - Cloud Cost Management Write** permission to create or edit a notification rule.
+- A Slack workspace or Microsoft Teams tenant with the Datadog app installed. See [Slack integration][3] or [Microsoft Teams integration][5]. For a private Slack channel, add the Datadog Slack app to that channel before you select it as a destination.
 
 ## Set up a notification rule
 
@@ -33,7 +33,7 @@ To set up a notification rule:
 1. Select the {{< ui >}}Notification{{< /ui >}} tab.
 1. In the {{< ui >}}Define scope{{< /ui >}} section, use the {{< ui >}}Team{{< /ui >}}, {{< ui >}}Recommendation Type{{< /ui >}}, and {{< ui >}}Env{{< /ui >}} filters to restrict the notification to matching resources. Click {{< ui >}}\+ Filter{{< /ui >}} to add more filters. Leave the filters empty to include all resources.
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
-1. In the {{< ui >}}Destination{{< /ui >}} section, select a Slack workspace connection and channel.
+1. In the {{< ui >}}Destination{{< /ui >}} section, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, then select a workspace and channel (Slack) or a tenant, team, and channel (Microsoft Teams).
 1. Enter a name for the notification rule.
 1. (Optional) Mention specific Slack users in the notification message.
 1. (Optional) Turn off the {{< ui >}}Notification enabled{{< /ui >}} toggle to create the rule without activating it.
@@ -55,3 +55,4 @@ The {{< ui >}}Notification{{< /ui >}} tab lists every notification rule in your 
 [2]: /cloud_cost_management/recommendations/cost_optimization_automation/
 [3]: /integrations/slack/
 [4]: https://app.datadoghq.com/cost/optimize/automations
+[5]: /integrations/microsoft_teams/
