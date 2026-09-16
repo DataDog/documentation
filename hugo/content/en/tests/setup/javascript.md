@@ -631,7 +631,7 @@ If you set these as environment variables, set them before starting the test pro
 `service` (Optional)
 : Name of the service or library under test.<br/>
 **Environment variable**: `DD_SERVICE`<br/>
-**Default**: The Nx project name when available. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.
+**Default**: When tests run with [Nx][27], the Nx package name. Otherwise, the name in the nearest `package.json`, or `node` if unavailable.<br/>
 **Example**: `my-ui`
 
 `env` (Optional)
@@ -999,3 +999,4 @@ The test session name should be unique within a repository to help you distingui
 [24]: /tests/flaky_management/#confirm-fixes-for-flaky-tests
 [25]: /getting_started/site/
 [26]: https://microsoft.github.io/lage/docs/introduction
+[27]: https://nx.dev/docs/features/run-tasks
