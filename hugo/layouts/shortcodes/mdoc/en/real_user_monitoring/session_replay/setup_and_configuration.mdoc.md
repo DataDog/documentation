@@ -622,7 +622,7 @@ To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops col
 
 <!-- Mobile -->
 {% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
-To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+To stop session recordings, set the sample rate shown in the [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) section to `0`.
 {% /if %}
 <!-- end Mobile -->
 
