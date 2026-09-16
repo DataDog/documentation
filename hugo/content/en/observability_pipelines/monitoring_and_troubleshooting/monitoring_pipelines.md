@@ -17,9 +17,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
   tag: "Blog"
   text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
-- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
-  tag: "Architecture Center"
-  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 ---
 
 ## Overview
