@@ -145,8 +145,6 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
-
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -198,7 +196,6 @@ When working with JSON responses, use `JSON.parse(dd.response.body)` to parse th
 
 <div class="alert alert-info">
   <ul>
-    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
     <li>If a failed JavaScript assertion's error message might include sensitive data, under {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Privacy{{< /ui >}}, enable {{< ui >}}Do not save response body{{< /ui >}}. This truncates the assertion error message.</li>
   </ul>
 </div>
