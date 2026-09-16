@@ -20,9 +20,9 @@ further_reading_fed:
   text: "Connections"
 ---
 
-{{< site-region region="gov,gov2" >}}
 ## Overview
 
+{{< site-region region="gov,gov2" >}}
 On Datadog government sites, deploy the private action runner as a standalone container and authorize it with Connections.
 
 To get started:
@@ -38,8 +38,6 @@ The standalone runner polls Datadog for tasks, runs each task against the target
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-## Overview
-
 Follow this guide to deploy a private action runner inside the Datadog Agent with the Datadog Operator, then run a read-only action that Datadog authorizes for you automatically.
 
 This is the recommended path to get started. It uses the following configuration:

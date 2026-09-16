@@ -27,9 +27,9 @@ further_reading_fed:
   text: "Authorize Private Actions"
 ---
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 ## Overview
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Private actions allow you to run actions against services in your private network, such as Kubernetes clusters, internal hosts, databases, and internal APIs, without exposing those services to the public internet. You run them through a private action runner that you deploy in your environment, either inside the Datadog Agent (recommended) or as a standalone runner. Datadog products that use private actions include Workflow Automation, App Builder, Datadog MCP, and Bits AI investigations.
 
 Private actions rely on two layers:
@@ -51,41 +51,25 @@ The private action runner is available in two forms: a standalone runner that yo
 
 <div class="alert alert-tip">Datadog recommends running the private action runner in the Datadog Agent</div>
 
-For installation steps, see [Set up a private action runner in the Datadog Agent][1] or [Set up a standalone runner][2].
+For installation steps, see [Set up a private action runner in the Datadog Agent](/actions/private_actions/set_up_agent_based/) or [Set up a standalone runner](/actions/private_actions/set_up_standalone/).
 
 ## Authorization models
 
-Datadog offers two authorization models. The model a runner uses is set when the runner is enrolled, and it follows from the runner's ownership. For more information, see [Enrollment and ownership][3].
+Datadog offers two authorization models. The model a runner uses is set when the runner is enrolled, and it follows from the runner's ownership. For more information, see [Enrollment and ownership](/actions/private_actions/enroll_runner/).
 
 - **Execution Policies** apply to runners in the Datadog Agent and are built for managing access at scale. Instead of creating a separate connection for each integration on each runner, you use Agent tags to target one or more sets of runners. Execution Policies also give you fine-grained control: you can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action.
 - **Connections** are available for both the runner in the Agent and the standalone runner. They can be attached to at most a single runner. A connection can store credentials for a service.
 
-To compare the two models and decide which one applies to your runner, see [Authorize private actions][4].
-
-## Next steps
-
-- **New to private actions**: Follow [Getting started with private actions][7] to deploy a runner and run your first action.
-- **You have a runner in the Datadog Agent and want fleet-wide access control**: Authorize it with [Execution Policies][5].
-- **You have a runner in the Agent or a standalone runner and want to authorize a single runner**: Authorize it with [Connections][6].
-
-[1]: /actions/private_actions/set_up_agent_based/
-[2]: /actions/private_actions/set_up_standalone/
-[3]: /actions/private_actions/enroll_runner/
-[4]: /actions/private_actions/authorize_private_actions/
-[5]: /actions/private_actions/execution_policies/
-[6]: /actions/connections/
-[7]: /actions/private_actions/getting_started/
+To compare the two models and decide which one applies to your runner, see [Authorize private actions](/actions/private_actions/authorize_private_actions/).
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-## Overview
-
 Private actions allow you to run actions against services in your private network, such as Kubernetes clusters, internal hosts, databases, and internal APIs, without exposing those services to the public internet. On Datadog government sites, private actions run through a **standalone private action runner** that you deploy and manage in your environment.
 
 Private actions rely on two components:
 
-- A [**standalone private action runner**][8] executes the actions. The runner opens an outbound connection to Datadog, polls for action tasks, runs each task against the target service, and returns the result.
-- A [**Connection**][9] authorizes access to the runner and references any credentials the action needs. Each Connection can be attached to one standalone runner.
+- A [**standalone private action runner**](/actions/private_actions/set_up_standalone/) executes the actions. The runner opens an outbound connection to Datadog, polls for action tasks, runs each task against the target service, and returns the result.
+- A [**Connection**](/actions/connections/) authorizes access to the runner and references any credentials the action needs. Each Connection can be attached to one standalone runner.
 
 ## Standalone private action runner
 
@@ -93,14 +77,27 @@ The standalone private action runner is a dedicated container that you install w
 
 When the runner enrolls, it generates a private key that Datadog cannot access. Datadog uses the corresponding public key to authenticate the runner, and the runner verifies the signature of every task before running it.
 
+{{< /site-region >}}
+
 ## Next steps
 
-1. [Set up a standalone private action runner][8].
-2. [Create Connections][9] for the private services and integrations the runner needs to access.
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+- **New to private actions**: Follow [Getting started with private actions][7] to deploy a runner and run your first action.
+- **You have a runner in the Datadog Agent and want fleet-wide access control**: Authorize it with [Execution Policies][8].
+- **You have a runner in the Agent or a standalone runner and want to authorize a single runner**: Authorize it with [Connections][9].
+
+[7]: /actions/private_actions/getting_started/
+[8]: /actions/private_actions/execution_policies/
+[9]: /actions/connections/
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+1. [Set up a standalone private action runner][10].
+2. [Create Connections][11] for the private services and integrations the runner needs to access.
 3. Select the Connection when you configure a private action in a workflow or app.
 
-[8]: /actions/private_actions/set_up_standalone/
-[9]: /actions/connections/
+[10]: /actions/private_actions/set_up_standalone/
+[11]: /actions/connections/
 {{< /site-region >}}
 
 ## Further reading
