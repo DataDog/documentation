@@ -155,9 +155,10 @@ aws ecs create-service \
 {{% tab "Web UI" %}}
 1. Log in to the AWS Console and navigate to the ECS section. On the {{< ui >}}Clusters{{< /ui >}} page, choose the cluster you run the Agent on.
 2. On your cluster's {{< ui >}}Services{{< /ui >}} tab, select {{< ui >}}Create{{< /ui >}}.
-3. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
-4. You do not need to configure load balancing or autoscaling.
-5. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
+3. For {{< ui >}}Service name{{< /ui >}}, enter `datadog-agent`.
+4. Under {{< ui >}}Deployment configuration{{< /ui >}}, for {{< ui >}}Service type{{< /ui >}}, select {{< ui >}}Daemon{{< /ui >}}.
+5. You do not need to configure load balancing or autoscaling.
+6. Click {{< ui >}}Next Step{{< /ui >}}, and then {{< ui >}}Create Service{{< /ui >}}.
 {{% /tab %}}
 {{< /tabs >}}
 
