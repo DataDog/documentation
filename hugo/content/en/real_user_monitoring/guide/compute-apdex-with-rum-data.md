@@ -57,13 +57,13 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 
 #### Query B
 
-1. To create query `b`, click {{< ui >}}+ Add Query{{< /ui >}}.
+1. To create query `b`, click {{< ui >}}\+ Add Query{{< /ui >}}.
 2. Select `RUM` as the data source for query `b` and enter `@view.largest_contentful_paint:[2s TO 8s]`.
 3. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 8s]` query appears next to `RUM` for query `b`.
 
 #### Query C
 
-1. To create query `c`, click {{< ui >}}+ Add Query{{< /ui >}}.
+1. To create query `c`, click {{< ui >}}\+ Add Query{{< /ui >}}.
 2. Select `RUM` as the data source for query `c` and enter `@Type:view`.
 3. Press Enter or click **Update query** in the dropdown menu. The `Type:view` query appears next to `RUM` for query `c`.
 

@@ -2,6 +2,9 @@
 title: APM
 description: Instrument your code to improve performance
 further_reading:
+  - link: "https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/"
+    tag: "Architecture Center"
+    text: "Observability in Event-Driven Architectures"
   - link: "https://learn.datadoghq.com/courses/getting-started-apm"
     tag: "Learning Center"
     text: "Getting Started with APM Metrics and Traces"

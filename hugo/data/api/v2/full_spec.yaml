@@ -14099,6 +14099,13 @@ components:
           example: 202501
           format: int64
           type: integer
+        tags:
+          description: The tag keys used to group costs for the budget.
+          example:
+            - service
+          items:
+            type: string
+          type: array
         total_amount:
           description: The sum of all budget entries' amounts.
           example: 1000
@@ -14146,7 +14153,9 @@ components:
           type: string
         id:
           description: The unique identifier for the unit.
-          type: string
+          example: 42
+          format: int64
+          type: integer
         name:
           description: The full name of the unit.
           type: string
@@ -14259,6 +14268,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/BudgetWithEntriesData"
+        meta:
+          $ref: "#/components/schemas/BudgetWithEntriesMeta"
       type: object
     BudgetWithEntriesData:
       description: A budget and all its entries.
@@ -14388,6 +14399,16 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET
+    BudgetWithEntriesMeta:
+      description: Additional information about errors encountered while retrieving budget cost data.
+      properties:
+        error:
+          description: A user-facing explanation of why budget cost data could not be retrieved.
+          example: ""
+          type: string
+      required:
+        - error
+      type: object
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
@@ -130047,6 +130068,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -130127,6 +130151,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -130248,6 +130275,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
           nullable: true
@@ -145906,7 +145936,7 @@ paths:
                         costs_period_start: 1738281600000
                         costs_unit:
                           family: currency
-                          id: "1"
+                          id: 42
                           name: dollar
                           plural: dollars
                           scale_factor: 1.0
@@ -147592,13 +147622,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147662,19 +147692,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -148167,13 +148197,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
