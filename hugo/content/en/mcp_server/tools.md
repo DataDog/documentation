@@ -538,7 +538,7 @@ API calls use your Datadog user identity. The sandbox exposes only supported rea
 ### `search_datadog_sdk`
 *Toolset: **code-exec***\
 *Permissions Required: Product-specific role permissions for the Datadog API operations included in the catalog.*\
-Searches the catalog of official Datadog SDK operations and enabled code-exec extensions available to `execute_code`. Agent-authored JavaScript filters the catalog and returns selected operation signatures, type definitions, and usage notes. This tool searches API metadata, not your Datadog data. Use it before `execute_code` to discover method names and request shapes instead of guessing them.
+Searches the Datadog SDK available to `execute_code`. Agent-authored JavaScript filters the catalog and returns selected operation signatures, type definitions, and usage notes. This tool searches API metadata, not your Datadog data. Use it before `execute_code` to discover method names and request shapes instead of guessing them.
 
 - Find the SDK operation and request fields for aggregating error logs by service.
 - Show the request and response types for querying metric timeseries.
@@ -547,7 +547,7 @@ Searches the catalog of official Datadog SDK operations and enabled code-exec ex
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored JavaScript in a Datadog-managed sandbox and returns a structured result to the agent. Scripts import Datadog APIs from `@datadog/datadog-api-client` and enabled extensions from `@datadog/code-exec`. They can combine queries, join results across products, and return selected fields or aggregates instead of full API responses.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox and returns a structured result to the agent. Scripts import Datadog APIs from `@datadog/datadog-api-client`. They can combine queries, join results across products, and return selected fields or aggregates instead of full API responses.
 
 Write plain JavaScript, not TypeScript. The `dd` global provides only `dd.time.*` helpers, not product APIs. Top-level `await` is supported; use `return` to send a value back to the agent. The optional `timeout` parameter accepts 1 to 180 seconds and defaults to 60 seconds.
 
