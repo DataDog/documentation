@@ -10,9 +10,10 @@
 1. If you are creating a **Simple condition**, enter the condition when a signal should be created. If you are creating a **Then condition**, enter the conditions required for a signal to be generated.
     - All rule conditions are evaluated as condition statements. Thus, the order of the conditions affects which notifications are sent because the first condition to match generates the signal. Click and drag your rule conditions to change their order.
     - A rule condition contains logical operations (`>`, `>=`, `<`, `&&`, `||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
-    - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
+    - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`. To detect a silent source, use a below-threshold condition, such as `a < 1` or `a <= 0`.
       {% alert level="info" %}
-      The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+      - The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
+      - For below-threshold cases such as `a < 1` or `a <= 0`, the sliding evaluation window must be empty of matching events before the case is true. After you enable the rule, it must match at least one event before creating cases that indicate that there were no detections. If you group by an attribute, Cloud SIEM only evaluates groups that have matching events.
       {% /alert %}
 1. (Optional) In the **And notify** section, click **Add Recipient** to configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
