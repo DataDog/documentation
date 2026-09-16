@@ -12,6 +12,7 @@
 #   - Datadog Agent with Kafka Consumer integration
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
+#   - Schema evolver (registers a new schema version every 4 min, renaming field 7 to region_vN)
 #
 # View in Datadog (wait 2-3 min):
 #  - Navigate to Data Streams Monitoring and view your Kafka cluster & consumer / producer apps.
@@ -280,6 +281,24 @@ services:
       "
     restart: unless-stopped
 
+  schema-evolver:
+    image: python:3.11-slim
+    depends_on:
+      schema-registry:
+        condition: service_healthy
+      producer:
+        condition: service_started
+    configs:
+      - source: schema_evolver_script
+        target: /app/schema_evolver.py
+    command: >
+      bash -c "
+      pip install -q requests &&
+      cd /app &&
+      python schema_evolver.py
+      "
+    restart: unless-stopped
+
 configs:
   kafka_consumer_config:
     content: |
@@ -420,6 +439,70 @@ configs:
           print("\n🛑 Shutting down...")
       finally:
           consumer.close()
+
+  schema_evolver_script:
+    content: |
+      #!/usr/bin/env python3
+      import time, requests
+
+      REGISTRY = 'http://schema-registry:8081'
+      SUBJECT = 'demo-orders-value'
+      CYCLE_SECONDS = 240
+
+      def build_schema(n):
+          return (
+              'syntax = "proto3";\n'
+              'package ecommerce;\n'
+              'message Order {\n'
+              '  string order_id = 1;\n'
+              '  string customer_id = 2;\n'
+              '  string product_name = 3;\n'
+              '  int32 quantity = 4;\n'
+              '  double price = 5;\n'
+              '  double total_amount = 6;\n'
+              f'  string region_v{n} = 7;\n'
+              '  int64 timestamp = 8;\n'
+              '}\n'
+          )
+
+      def wait_for_initial_registration():
+          for _ in range(120):
+              try:
+                  r = requests.get(f'{REGISTRY}/subjects/{SUBJECT}/versions', timeout=3)
+                  if r.status_code == 200 and r.json():
+                      print(f'Producer registered v1, evolving from: {r.json()}', flush=True)
+                      return
+              except requests.RequestException:
+                  pass
+              time.sleep(2)
+          print('Producer never registered v1, evolving anyway', flush=True)
+
+      def register(n):
+          body = {'schemaType': 'PROTOBUF', 'schema': build_schema(n)}
+          try:
+              r = requests.post(
+                  f'{REGISTRY}/subjects/{SUBJECT}/versions',
+                  json=body,
+                  headers={'Content-Type': 'application/vnd.schemaregistry.v1+json'},
+                  timeout=10,
+              )
+              if r.ok:
+                  print(f'📝 Rename #{n} registered (field 7 -> region_v{n}): schema_id={r.json().get("id")}', flush=True)
+              else:
+                  print(f'Rename #{n} rejected: {r.status_code} {r.text}', flush=True)
+          except requests.RequestException as e:
+              print(f'Rename #{n} error: {e}', flush=True)
+
+      def main():
+          wait_for_initial_registration()
+          n = 1
+          while True:
+              time.sleep(CYCLE_SECONDS)
+              register(n)
+              n += 1
+
+      if __name__ == '__main__':
+          main()
 
   events_consumer_script:
     content: |
