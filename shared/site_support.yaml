@@ -1,24 +1,3 @@
-# Site support — single source of truth for which Datadog sites (regions) do
-# NOT support a given product or feature.
-#
-# Consumed by Astro via the `@shared` alias. Hugo will mount this file after
-# the Astro API docs ship; until then Hugo keeps its own copy in
-# hugo/config/_default/params.yaml under the `unsupported_sites` key.
-#
-# Each key under `site_support_ids` is a site support ID. A page declares one
-# in frontmatter (`site_support_id: <key>`), or a key claims URLs directly
-# with `url_paths`.
-#
-# Fields:
-#   regions     required; region keys from regions.yaml that do NOT support this
-#   url_paths   optional; URL-path globs this key applies to. Only `*` (within
-#               one segment) and `**` (any depth) are supported. A pattern
-#               covers its base path and everything beneath it.
-#   description optional; note for writers
-#
-# Note: Hugo also matches a key name against page path segments. Astro does
-# not — it matches only frontmatter IDs and `url_paths`.
-
 site_support_ids:
   remediate_with_ai:
     regions: [gov, gov2]
