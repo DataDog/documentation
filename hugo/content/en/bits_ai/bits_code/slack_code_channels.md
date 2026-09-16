@@ -1,5 +1,6 @@
 ---
 title: Code Channels in Slack with Bits Code
+description: "Learn how to create and work in temporary code channels in Slack, where you can steer Bits Code, view code diffs, and create PRs."
 further_reading:
 - link: "/bits_ai/bits_code/"
   tag: "Documentation"
@@ -17,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Code channels are dedicated, temporary Slack channels for working with a coding agent on a specific task. When you ask [Bits Chat][1] in Slack to make a code change, Bits Code creates a code channel for that task. You and your team can follow the work, steer it, and review the result there, without cluttering the original conversation.
+Code channels are dedicated, temporary Slack channels for working with a coding agent on a specific task. When you ask [Bits Chat][1] in Slack to make a code change, [Bits Code][3] creates a code channel for that task. You and your team can follow the work, steer it, and review the result there, without cluttering the original conversation.
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel.png" alt="A Slack code channel showing a conversation with Bits Code alongside a diff view of proposed code changes" style="width:100%;" >}}
 
@@ -25,7 +26,7 @@ Learn more about code channels in the [Slack documentation][6].
 
 ## Create a code channel
 
-To create a code channel, mention `@Datadog` in Slack and describe a code change you'd like to make. If Bits Chat determines the request requires code changes, it hands the task off to Bits Code, which creates a code channel. Bits posts a link to the new code channel in the location where it was originally prompted.
+After [setting up Bits Code][4], create a code channel by mentioning `@Datadog` in Slack and describing a code change you'd like to make. If Bits Chat determines the request requires code changes, it hands the task off to Bits Code, which creates a code channel. Bits posts a link to the new code channel in the location where it was originally prompted.
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel_creation.png" alt="A Slack message mentioning @Datadog, followed by a card showing the resulting code channel that was created" style="width:100%;" >}}
 
@@ -59,22 +60,16 @@ The work in every code channel is also reflected in a [Bits Code session][2] in 
 
 Learn more about how to work in a code channel in the [Slack documentation][6].
 
-## Set up code channels
-
-Code channels require the [Bits Chat Slack integration][1], a Slack app scope grant, and a Bits Code setting enabled. See [Bits Code Setup][4] for full setup instructions.
-
 ## Limitations
 
-The general [Bits Code limitations][5] also apply to code channels.
+The overall [Bits Code limitations][5] also apply to code channels.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_chat/#slack
 [2]: /bits_ai/bits_code/#sessions
 [3]: https://app.datadoghq.com/code
 [4]: /bits_ai/bits_code/setup/
 [5]: /bits_ai/bits_code/#limitations
 [6]: https://slack.com/help/articles/54310833022355-Build-with-AI-as-a-team-using-Slack-Code
-[7]: /account_management/rbac/data_access/
