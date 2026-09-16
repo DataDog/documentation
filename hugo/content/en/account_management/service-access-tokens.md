@@ -50,7 +50,7 @@ For Personal Access Tokens, see [Personal Access Tokens][2].
 ## Create a Service Access Token
 
 1. Navigate to [**Organization Settings** > **Service Accounts**][3] and click a service account.
-2. In the details panel, under **Access Tokens**, click {{< ui >}}+ New Token{{< /ui >}}.
+2. In the details panel, under **Access Tokens**, click {{< ui >}}\+ New Token{{< /ui >}}.
 3. Enter a {{< ui >}}Name{{< /ui >}} for the token.
 4. Select an {{< ui >}}Expiration Date{{< /ui >}}: **1 day**, **1 month**, **1 year**, **Never**,
    or **Custom**. Select **Never** for a token with no expiration.
