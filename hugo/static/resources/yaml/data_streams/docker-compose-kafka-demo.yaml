@@ -293,7 +293,6 @@ services:
         target: /app/schema_evolver.py
     command: >
       bash -c "
-      pip install -q requests &&
       cd /app &&
       python schema_evolver.py
       "
@@ -443,7 +442,7 @@ configs:
   schema_evolver_script:
     content: |
       #!/usr/bin/env python3
-      import time, requests
+      import json, time, urllib.error, urllib.request
 
       REGISTRY = 'http://schema-registry:8081'
       SUBJECT = 'demo-orders-value'
@@ -468,29 +467,31 @@ configs:
       def wait_for_initial_registration():
           for _ in range(120):
               try:
-                  r = requests.get(f'{REGISTRY}/subjects/{SUBJECT}/versions', timeout=3)
-                  if r.status_code == 200 and r.json():
-                      print(f'Producer registered v1, evolving from: {r.json()}', flush=True)
-                      return
-              except requests.RequestException:
+                  with urllib.request.urlopen(f'{REGISTRY}/subjects/{SUBJECT}/versions', timeout=3) as r:
+                      versions = json.loads(r.read())
+                      if versions:
+                          print(f'Producer registered v1, evolving from: {versions}', flush=True)
+                          return
+              except (urllib.error.URLError, urllib.error.HTTPError):
                   pass
               time.sleep(2)
           print('Producer never registered v1, evolving anyway', flush=True)
 
       def register(n):
-          body = {'schemaType': 'PROTOBUF', 'schema': build_schema(n)}
+          body = json.dumps({'schemaType': 'PROTOBUF', 'schema': build_schema(n)}).encode('utf-8')
+          req = urllib.request.Request(
+              f'{REGISTRY}/subjects/{SUBJECT}/versions',
+              data=body,
+              headers={'Content-Type': 'application/vnd.schemaregistry.v1+json'},
+              method='POST',
+          )
           try:
-              r = requests.post(
-                  f'{REGISTRY}/subjects/{SUBJECT}/versions',
-                  json=body,
-                  headers={'Content-Type': 'application/vnd.schemaregistry.v1+json'},
-                  timeout=10,
-              )
-              if r.ok:
-                  print(f'📝 Rename #{n} registered (field 7 -> region_v{n}): schema_id={r.json().get("id")}', flush=True)
-              else:
-                  print(f'Rename #{n} rejected: {r.status_code} {r.text}', flush=True)
-          except requests.RequestException as e:
+              with urllib.request.urlopen(req, timeout=10) as r:
+                  schema_id = json.loads(r.read()).get('id')
+                  print(f'📝 Rename #{n} registered (field 7 -> region_v{n}): schema_id={schema_id}', flush=True)
+          except urllib.error.HTTPError as e:
+              print(f'Rename #{n} rejected: {e.code} {e.read().decode()}', flush=True)
+          except urllib.error.URLError as e:
               print(f'Rename #{n} error: {e}', flush=True)
 
       def main():
