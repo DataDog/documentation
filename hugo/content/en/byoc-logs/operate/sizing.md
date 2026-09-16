@@ -46,10 +46,12 @@ Object storage totals assume 30-day retention and a 6x compression ratio.
 |  **10 TB/day** |  20 vCPU |     5 vCPU |   40 vCPU |         ~50 TB |
 | **100 TB/day** | 200 vCPU |    50 vCPU |  400 vCPU |        ~500 TB |
 
-Distribute the totals across pods:
+Recommended size for each pod:
 
-- **Up to 30 TB/day:** indexer and compactor pods: 4 vCPUs, 16 GB. Searcher pods: 16 vCPUs, 64 GB.
-- **Above 30 TB/day:** indexer and compactor pods: 8 vCPUs, 32 GB. Searcher pods: 64 vCPUs, 256 GB.
+| Daily volume        | Indexers        | Compactors      | Searchers        |
+|---------------------|----------------:|----------------:|-----------------:|
+| **Up to 30 TB/day** |  4 vCPUs, 16 GB |  4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
+| **Above 30 TB/day** |  8 vCPUs, 32 GB |  8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
 
 <div class="alert alert-info">
 <strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
@@ -61,13 +63,9 @@ The following sections explain how to adjust the starter configuration. For the 
 
 ### Indexers
 
-Baseline throughput is 8 MB/s per vCPU, or about 1.5 vCPU per TB/day. The starter configurations use 2 vCPUs per TB/day to leave headroom for ingestion spikes.
-
+- **Performance:** 2 vCPUs per TB/day
 - **Memory:** 4 GB RAM per vCPU
-- **Minimum pod size:** 2 vCPUs, 8 GB RAM
-- **Disk I/O:** ~20 MB/s per vCPU (320 IOPS per vCPU for Amazon EBS at 64 KB IOPS). The default Amazon EBS gp3 throughput of 125 MiB/s is sufficient for a 4-vCPU indexer.
-
-Indexers need persistent, network-attached block storage for the write-ahead log. See [Configure persistent storage for indexers][3].
+- **Storage type:** Network-attached block storage for the write-ahead log. See [Configure persistent storage for indexers][3].
 
 {{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
 If you know your daily event count but not your byte volume, use this formula to estimate:
