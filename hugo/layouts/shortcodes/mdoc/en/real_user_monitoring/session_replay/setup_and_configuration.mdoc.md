@@ -98,6 +98,10 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 
 SessionReplay.enable(sessionReplayConfig)
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Android -->
 
@@ -136,6 +140,10 @@ SessionReplay.enable(
   )
 )
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end iOS -->
@@ -188,6 +196,10 @@ If your app uses Material on Android, add:
 ```kotlin
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -344,7 +356,7 @@ DdSdkReactNative.initialize(configuration)
 
 During this step, you can also configure multiple [privacy levels][17] that apply to Session Replays.
 
-### Step 4 - (iOS only) Update your iOS pods.
+### Step 4 - (iOS only) Update your iOS pods
 
 ```shell
 cd ios && pod install
@@ -352,7 +364,11 @@ cd ios && pod install
 
 ### Step 5 - Rebuild your app
 
-Rebuild your iOS and Android apps
+Rebuild your iOS and Android apps.
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 
@@ -440,6 +456,10 @@ class _MyAppState extends State<MyApp> {
 Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end Flutter -->
@@ -823,7 +843,7 @@ See [Connect Session Replay to your third-party tools][30].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
