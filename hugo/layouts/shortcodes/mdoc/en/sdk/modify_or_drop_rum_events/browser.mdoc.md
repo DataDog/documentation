@@ -1,3 +1,11 @@
+<!--
+Pages using this partial must declare these filters:
+
+content_filters:
+  - trait_id: lib_src
+    option_group_id: rum_browser_sdk_source_options
+-->
+
 ## Modify the content of a RUM event
 
 For example, to redact email addresses from your web application URLs:

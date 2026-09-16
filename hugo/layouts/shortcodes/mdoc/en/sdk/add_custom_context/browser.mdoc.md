@@ -1,3 +1,11 @@
+<!--
+Pages using this partial must declare these filters:
+
+content_filters:
+  - trait_id: lib_src
+    option_group_id: rum_browser_sdk_source_options
+-->
+
 Along with attributes added with the [Global Context API][1] or the [Feature Flag data collection][2], you can add additional context attributes to the event. For example, tag your RUM resource events when requests are aborted:
 <!-- NPM -->
    {% if equals($lib_src, "npm") %}
