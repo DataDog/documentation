@@ -86,7 +86,13 @@ final configuration = DatadogConfiguration(
   rumConfiguration: DatadogRumConfiguration(
     applicationId: '<RUM_APPLICATION_ID>',
   ),
-)..addPlugin(const DatadogFlagsPluginConfiguration());
+)..addPlugin(
+    const DatadogFlagsPluginConfiguration(
+      flagsConfiguration: DatadogFlagsConfiguration(
+        initializationTimeout: Duration(seconds: 2),
+      ),
+    ),
+  );
 
 await DatadogSdk.instance.initialize(configuration, TrackingConsent.granted);
 {{< /code-block >}}
@@ -100,15 +106,19 @@ if (flags == null) {
 }
 
 final flagsClient = flags.sharedClient();
-await flagsClient.initialize(
-  const FlagsEvaluationContext(
-    targetingKey: 'user-123',
-    attributes: {
-      'companyId': 'company-456',
-      'plan': 'enterprise',
-    },
-  ),
-);
+try {
+  await flagsClient.initialize(
+    const FlagsEvaluationContext(
+      targetingKey: 'user-123',
+      attributes: {
+        'companyId': 'company-456',
+        'plan': 'enterprise',
+      },
+    ),
+  );
+} on FlagsInitializationTimeoutException {
+  // Continue startup with stored assignments or evaluation defaults.
+}
 {{< /code-block >}}
 
 Successful evaluations are sent through the Datadog Feature Flags telemetry pipeline. With the Flutter-integrated setup, successful evaluations that return a variant are also added to the active RUM view as feature flag evaluations.
@@ -126,6 +136,7 @@ final datadogFlags = DatadogFlags.instance;
 
 await datadogFlags.enable(
   configuration: DatadogFlagsConfiguration(
+    initializationTimeout: const Duration(seconds: 2),
     datadogConfig: const DatadogFlagsConfig(
       clientToken: '<CLIENT_TOKEN>',
       env: '<ENV_NAME>',
@@ -289,6 +300,7 @@ print(details.error?.code);
 {{< code-block lang="dart" >}}
 DatadogFlagsConfiguration(
   datadogConfig: datadogConfig,
+  initializationTimeout: const Duration(seconds: 2),
   trackExposures: true,
   trackEvaluations: true,
   evaluationFlushInterval: const Duration(seconds: 10),
@@ -301,6 +313,17 @@ DatadogFlagsConfiguration(
 
 `trackEvaluations`
 : When `true` (default), the SDK records aggregated flag evaluation telemetry. Set to `false` to disable evaluation tracking.
+
+`initializationTimeout`
+: Maximum time to wait for the first evaluation context to become ready. The timeout uses one wall-clock budget for the complete initialization operation. It covers loading stored assignments, encoding the request, fetching assignments, reading the response body, decoding JSON, publishing assignments, and storing assignments. It does not change the HTTP client's timeout.
+
+The timeout applies only to the first `initialize()` call for each client. The first call consumes the timeout even if the operation fails or is superseded. Later calls have no initialization timer. The default is five seconds. Set the value to `null`, zero, or a negative duration to disable the timeout.
+
+When the timeout expires, `initialize()` throws `FlagsInitializationTimeoutException`. The assignment operation continues and can publish a late successful result. Matching stored assignments remain available. Evaluations without assignments return the caller-provided default with `FlagEvaluationError.providerNotReady`.
+
+Dart runs the timeout timer on the same isolate as synchronous initialization work. Therefore, synchronous work can make the observed wait longer than the configured timeout.
+
+<div class="alert alert-info"><code>initializationTimeout</code> is available in <code>datadog_flags</code> and <code>datadog_flags_flutter</code> 1.1.0 and later.</div>
 
 `evaluationFlushInterval`
 : The interval at which aggregated flag evaluation telemetry is sent to Datadog. Accepted values are between 1 and 60 seconds. The default is 10 seconds.
@@ -326,6 +349,7 @@ final configuration = DatadogConfiguration(
 )..addPlugin(
     const DatadogFlagsPluginConfiguration(
       flagsConfiguration: DatadogFlagsConfiguration(
+        initializationTimeout: Duration(seconds: 2),
         trackExposures: true,
         trackEvaluations: true,
       ),
@@ -391,6 +415,7 @@ Future<void> initializeFlags() async {
 
   await datadogFlags.enable(
     configuration: DatadogFlagsConfiguration(
+      initializationTimeout: const Duration(seconds: 2),
       datadogConfig: const DatadogFlagsConfig(
         clientToken: '<CLIENT_TOKEN>',
         env: '<ENV_NAME>',
@@ -403,15 +428,19 @@ Future<void> initializeFlags() async {
   );
 
   final flagsClient = datadogFlags.sharedClient();
-  await flagsClient.initialize(
-    const FlagsEvaluationContext(
-      targetingKey: 'user-123',
-      attributes: {
-        'companyId': 'company-456',
-        'plan': 'enterprise',
-      },
-    ),
-  );
+  try {
+    await flagsClient.initialize(
+      const FlagsEvaluationContext(
+        targetingKey: 'user-123',
+        attributes: {
+          'companyId': 'company-456',
+          'plan': 'enterprise',
+        },
+      ),
+    );
+  } on FlagsInitializationTimeoutException {
+    // Continue startup with stored assignments or evaluation defaults.
+  }
 
   final details = flagsClient.getBooleanDetails(
     key: 'checkout.enabled',
