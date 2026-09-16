@@ -8,6 +8,7 @@
 {{- $contentEncoding := "" -}}
 {{- $exampleDefinition := .exampleDefinition -}}
 {{- $exampleId := .exampleId -}}
+{{- $authData := .authData -}}
 
 {{/* Determine contentencoding */}}
 {{- with $parameters.headerParams -}}
@@ -72,6 +73,9 @@
     {{- end -}}
 {{- end -}}
 
+{{- if $authData.useBearerToken -}}
+<span class="c1"># Use a Personal Access Token or Service Access Token</span><br/><span class="kn">export</span> <span class="n">DD_BEARER_TOKEN</span><span class="o">=</span><span class="s1">"&lt;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN&gt;"</span><br/><br/>
+{{- end -}}
 <span class="c1"># Curl command</span><br/>
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
@@ -103,15 +107,13 @@
 {{- end -}}
 
 {{- /* Render authentication query parameters "?api_key=XXX" */ -}}
-{{- with $endpoint.action.security -}}
+{{- with $authData.requirement -}}
     {{- $i := 0 -}}
-    {{- range . -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $securitySchemes $key) }}
-            {{- if eq $authSchema.in "query" -}}
-                <span class="kn">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="kn">{{ $authSchema.name }}</span><span class="kn">=</span><span class="kn">${ {{- index $authSchema "x-env-name" -}} }</span>
-                {{- $i = add $count 1 -}}
-            {{- end -}}
+    {{- range $key, $val := . -}}
+        {{ $authSchema := (index $securitySchemes $key) }}
+        {{- if eq $authSchema.in "query" -}}
+            <span class="kn">{{- if eq $i 0 -}}?{{- else -}}&{{- end -}}</span><span class="kn">{{ $authSchema.name }}</span><span class="kn">=</span><span class="kn">${ {{- index $authSchema "x-env-name" -}} }</span>
+            {{- $i = add $i 1 -}}
         {{- end -}}
     {{- end -}}
 {{- end -}}
@@ -142,26 +144,7 @@
 {{- end -}}
 
 {{- /* Render authentication in headers "DD-API-KEY: XXX" */ -}}
-{{- if isset $endpoint.action "security" -}}
-    {{- /* Find authentication per operationId */ -}}
-    {{- range $endpoint.action.security -}}
-        {{- range $key, $val := . -}}
-            {{ $authSchema := (index $securitySchemes $key) }}
-            {{- if eq $authSchema.in "header" -}}
-                {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"{{ $authSchema.name }}: <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
-            {{- else if eq $authSchema.scheme "bearer" -}}
-                {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"Authorization: Bearer <span class="n">${ {{- index $authSchema "x-env-name" -}} }</span>"</span>
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- else -}}
-    {{- /* Use global authentication */ -}}
-    {{ " \\" }}
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.apiKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.apiKeyAuth "x-env-name" -}} }</span>"</span> \
-<span class="o">-H</span> <span class="s1">"{{ $securitySchemes.appKeyAuth.name }}: <span class="n">${ {{- index $securitySchemes.appKeyAuth "x-env-name" -}} }</span>"</span>
-{{- end -}}
+{{- partial "api/curl-auth.html" (dict "authData" $authData "securitySchemes" $securitySchemes) -}}
 {{- /* Render binary data (usually compressed) */ -}}
 {{- if gt (len $contentEncoding) 0 -}}
 {{- if eq $contentEncoding "gzip" -}}
