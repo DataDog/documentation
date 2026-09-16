@@ -68,6 +68,7 @@ The overall [Bits Code limitations][5] also apply to code channels.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: /bits_ai/bits_chat/#slack
 [2]: /bits_ai/bits_code/#sessions
 [3]: https://app.datadoghq.com/code
 [4]: /bits_ai/bits_code/setup/
