@@ -188,18 +188,12 @@ To upload your source maps, choose one of the following matching methods: Debug 
 
 Debug IDs associate a JavaScript bundle with its source map without relying on the bundle URL, service, or release version.
 
-Choose one of the following upload methods.
-
-#### Datadog Build Plugins
-
-Datadog Build Plugins can inject debug IDs and upload source maps directly during the build. You do not need to install or run `datadog-ci` separately.
-
-Debug ID support requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
-
-Enable debug ID injection and source map uploads in your build plugin:
+Inject debug IDs and upload source maps with a Datadog build plugin during your build, or with the `datadog-ci` CLI after your build. With a build plugin, you do not need to install or run `datadog-ci` separately. Choose one of the following methods:
 
 {{< tabs >}}
 {{% tab "Webpack" %}}
+
+Requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
 
 ```javascript
 // webpack.config.js
@@ -223,6 +217,8 @@ module.exports = {
 
 {{% /tab %}}
 {{% tab "Vite" %}}
+
+Requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
 
 ```javascript
 // vite.config.js
@@ -248,6 +244,8 @@ export default defineConfig({
 {{% /tab %}}
 {{% tab "esbuild" %}}
 
+Requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
+
 ```javascript
 // esbuild.config.js
 const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
@@ -270,6 +268,8 @@ require('esbuild').build({
 
 {{% /tab %}}
 {{% tab "Rollup" %}}
+
+Requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
 
 ```javascript
 // rollup.config.js
@@ -294,6 +294,8 @@ export default {
 {{% /tab %}}
 {{% tab "Rspack" %}}
 
+Requires [Datadog Build Plugins version 3.3.0](https://github.com/DataDog/build-plugins/releases/tag/v3.3.0) or later.
+
 ```javascript
 // rspack.config.js
 const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
@@ -315,17 +317,13 @@ module.exports = {
 ```
 
 {{% /tab %}}
-{{< /tabs >}}
+{{% tab "datadog-ci" %}}
 
-The plugin uploads each source map with the debug ID injected into its corresponding JavaScript bundle. For the full list of plugin options, see [Build Plugins: Source Maps][8].
-
-#### `datadog-ci`
-
-Debug ID support requires [`@datadog/datadog-ci` version 5.24.0](https://github.com/DataDog/datadog-ci/releases/tag/v5.24.0) or later.
+Use the `datadog-ci` CLI if your bundler is not supported by the Datadog build plugins, or if you inject debug IDs outside of your build. This requires [`@datadog/datadog-ci` version 5.24.0][1] or later.
 
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][6] and export it as an environment variable named `DD_API_KEY`.
-3. For sites other than US1, configure the CLI by exporting `DD_SITE` with your [Datadog site][7].
+2. [Create a dedicated Datadog API key][2] and export it as an environment variable named `DD_API_KEY`.
+3. For sites other than US1, configure the CLI by exporting `DD_SITE` with your [Datadog site][3].
 4. Inject debug IDs after the build:
 
    ```bash
@@ -341,6 +339,14 @@ Debug ID support requires [`@datadog/datadog-ci` version 5.24.0](https://github.
 Do not pass `--service`, `--release-version`, or `--minified-path-prefix` with `--debug-id`.
 
 The `inject` command modifies JavaScript bundles and source maps in place. Run it after the build and before generating byte-dependent artifacts such as SRI hashes, compressed assets, signatures, or checksum manifests. Deploy the same modified artifacts that you upload.
+
+[1]: https://github.com/DataDog/datadog-ci/releases/tag/v5.24.0
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
+
+Each source map is uploaded with the debug ID injected into its corresponding JavaScript bundle. For the full list of build plugin options, see [Build Plugins: Source Maps][8].
 
 ### Service and version
 
@@ -437,7 +443,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[7]: /getting_started/site/
 [8]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
 [9]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [10]: /logs/log_collection/javascript/#initialization-parameters
