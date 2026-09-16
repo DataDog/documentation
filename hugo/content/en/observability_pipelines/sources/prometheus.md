@@ -69,7 +69,7 @@ To configure keepalive settings for connections to the source, enable the {{< ui
 	- Prometheus username identifier:
 		- The default identifier is `SOURCE_PROMETHEUS_REMOTE_WRITE_USERNAME`.
 	- Prometheus password identifier:
-		- The default identifier is `SOURCE_PROMETHEUS_PASSWORD`.
+		- The default identifier is `SOURCE_PROMETHEUS_REMOTE_WRITE_PASSWORD`.
 
 {{% /tab %}}
 
