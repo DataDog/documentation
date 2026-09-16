@@ -36,7 +36,7 @@ To generate a new log-based metric:
 
 1. Navigate to the [Generate Metrics][5] page.
 1. Select the {{< ui >}}Generate Metrics{{< /ui >}} tab.
-1. Click {{< ui >}}+New Metric{{< /ui >}}.
+1. Click {{< ui >}}\+ New Metric{{< /ui >}}.
 
 You can also create metrics from an Analytics search by selecting the {{< ui >}}Generate new metric{{< /ui >}} option from the {{< ui >}}Export{{< /ui >}} menu.
 

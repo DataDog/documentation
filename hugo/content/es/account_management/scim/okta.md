@@ -51,7 +51,7 @@ Al usar SAML y SCIM juntos, Datadog recomienda encarecidamente deshabilitar el a
 2. Haga clic en {{< ui >}}Configure API integration{{< /ui >}}.
 3. Seleccione {{< ui >}}Enable API integration{{< /ui >}}.
 4. Complete la sección {{< ui >}}Credentials{{< /ui >}} de la siguiente manera:
-    - {{< ui >}}Base URL{{< /ui >}}: `https://{{< region-param key="dd_full_site" >}}/api/v2/scim` **Nota:** Utilice el subdominio adecuado para su sitio. Para encontrar su URL, consulte [Datadog sites][3].
+    - {{< ui >}}Base URL{{< /ui >}}: `{{< region-param key="dd_api" >}}/api/v2/scim` **Nota:** Utilice el servidor de la API para su sitio, no el servidor de la aplicación. Para los endpoints de SCIM de cada sitio, consulte la [referencia de la API de SCIM][3].
     - {{< ui >}}API Token{{< /ui >}}: Utilice una clave de aplicación de Datadog válida. Puede crear una clave de aplicación en [la página de configuración de su organización][4]. Para mantener el acceso continuo a sus datos, utilice una clave de aplicación de [cuenta de servicio][5].
 
 {{< img src="/account_management/scim/okta-admin-credentials.png" alt="Pantalla de configuración de credenciales de administrador de Okta">}}
@@ -141,7 +141,7 @@ Este procedimiento le permite administrar la membresía del equipo en Datadog en
 
 #### Eliminar miembros del equipo de Datadog {#remove-team-members-from-datadog}
 
-Este procedimiento le permite administrar la membresía del equipo en Datadog en lugar de Okta y elimina a los miembros del Datadog Team.
+Este procedimiento le permite gestionar la membresía del equipo en Datadog en lugar de Okta y elimina a los miembros del equipo del Datadog Team.
 
 1. En su aplicación de Datadog en Okta, navegue a la pestaña {{< ui >}}Push Groups{{< /ui >}}.
 1. Haga clic en el botón {{< ui >}}Push Groups{{< /ui >}}. Se abre la interfaz de grupos enviados.
@@ -159,7 +159,7 @@ Este procedimiento le permite administrar la membresía del equipo en Datadog en
 
 [1]: /es/account_management/scim/
 [2]: /es/account_management/scim/#using-a-service-account-with-scim
-[3]: /es/getting_started/site
+[3]: /es/api/latest/scim/
 [4]: https://app.datadoghq.com/organization-settings/application-keys
 [5]: /es/account_management/org_settings/service_accounts
 [6]: /es/account_management/teams/manage/#manage-teams-through-an-identity-provider

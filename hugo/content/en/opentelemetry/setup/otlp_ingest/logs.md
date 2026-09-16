@@ -18,9 +18,9 @@ further_reading:
 
 ## Overview
 
-Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows you to send logs directly to Datadog. With this feature, you don't need to run the [Datadog Agent][2] or [OpenTelemetry Collector + Datadog Exporter][1].
+Datadog's OpenTelemetry Protocol (OTLP) logs intake API endpoint allows applications, managed platforms, and OpenTelemetry Collectors to send logs to Datadog over OTLP HTTP.
 
-Choose this option for a straightforward setup to send logs directly to Datadog without using the Datadog Agent or OpenTelemetry Collector.
+Use the direct configuration on this page when you need to send logs without the [Datadog Agent][2] or an OpenTelemetry Collector. For production Collector deployments, use [Set Up the OpenTelemetry Collector][1].
 
 <div class="alert alert-info">If you are sending logs from a managed platform (Cloudflare, Vercel, Heroku, and others), see <a href="/opentelemetry/setup/otlp_ingest/managed_platforms/">Managed platforms</a> for the correct endpoint configuration.</div>
 
@@ -81,14 +81,20 @@ logExporter, err := otlploghttp.New(
 
 ## OpenTelemetry Collector
 
-If you are using the OpenTelemetry Collector and don't want to use the Datadog Exporter, you can configure [`otlphttpexporter`][4] to export logs to the Datadog OTLP logs intake endpoint.
+If your OpenTelemetry Collector distribution does not include all the components used by Datadog's recommended Collector setup, configure the OTLP HTTP exporter in your own distribution:
 
-Configure your `config.yaml` like this:
+These examples use component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
 ```yaml
+receivers:
+  otlp:
+    protocols:
+      http:
+        endpoint: 0.0.0.0:4318
+
 exporters:
-  otlphttp:
-    logs_endpoint: ${YOUR_ENDPOINT} // Replace this with the correct endpoint
+  otlp_http:
+    logs_endpoint: {{< region-param key="otlp_logs_endpoint" >}}
     headers:
       dd-api-key: ${env:DD_API_KEY}
 
@@ -96,9 +102,12 @@ service:
   pipelines:
     logs:
       receivers: [otlp]
-      processors: [batch]
-      exporters: [otlphttp]
+      exporters: [otlp_http]
 ```
+
+Add any receivers and processors required by your Collector distribution.
+
+For a production deployment using OpenTelemetry Collector Contrib, use the [recommended OpenTelemetry Collector setup][1]. It also configures sending-queue batching, resource detection, and host metadata enrichment.
 
 ## Troubleshooting
 
@@ -116,4 +125,3 @@ If you receive a `403 Forbidden` error when sending logs to the Datadog OTLP log
 [1]: /opentelemetry/collector_exporter/
 [2]: /opentelemetry/otlp_ingest_in_the_agent/
 [3]: https://opentelemetry.io/docs/specs/otel/glossary/#automatic-instrumentation
-[4]: https://github.com/open-telemetry/opentelemetry-collector/tree/main/exporter/otlphttpexporter
