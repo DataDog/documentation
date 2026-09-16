@@ -54,21 +54,9 @@ In addition to the per-scope metrics, the `datadog.apis.rate_limit.usage.limit_c
 | Tag name | Description | Availability |
 |----------|-------------|--------------|
 | `app_key_id` | Application key ID associated with the request. The value is empty when the request does not use an application key. | Count, blocked count, and utilization metrics |
-| `client_type` | General category of the API client. | Count and blocked count metrics |
 | `limit_name` | Name of the rate limit. Different endpoints can share the same name. | All metrics |
 | `limit_type` | Scope of the rate limit: `per_org`, `per_user`, or `per_api_key`. | All metrics |
 | `user_uuid` | UUID of the user associated with the request. | Count, blocked count, and utilization metrics |
-
-The `client_type` tag has the following values:
-
-- `browser`: Requests from a web browser.
-- `datadog_sdk`: Requests from Datadog API clients, libraries, infrastructure-as-code providers, and IDE plugins.
-- `pup`: Requests from the pup command-line tool.
-- `datadog_agent`: Requests from the Datadog Agent and compatible collectors.
-- `synthetic_monitoring`: Requests from Synthetic Monitoring test runners.
-- `http_library`: Requests from generic HTTP clients and libraries.
-- `integration`: Requests from third-party integrations.
-- `other`: Requests that do not match another client category.
 
 ##### Query examples
 
@@ -79,10 +67,6 @@ Allowed requests by rate limit name
 Blocked requests by rate limit name
 : Graph the sum of the three `*_blocked_count` metrics by `limit_name`.<br /><br />
   **Example:** `default_zero(sum:datadog.apis.rate_limit.usage.per_org_blocked_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_user_blocked_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_api_key_blocked_count{*} by {limit_name})`
-
-Requests by client type
-: Graph the sum of the allowed-request metrics by `client_type`.<br /><br />
-  **Example:** `default_zero(sum:datadog.apis.rate_limit.usage.per_org_count{*} by {client_type}) + default_zero(sum:datadog.apis.rate_limit.usage.per_user_count{*} by {client_type}) + default_zero(sum:datadog.apis.rate_limit.usage.per_api_key_count{*} by {client_type})`
 
 #### Migrate from legacy usage metrics
 
