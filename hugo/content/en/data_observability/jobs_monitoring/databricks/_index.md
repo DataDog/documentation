@@ -38,7 +38,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
 1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
 
-   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
+   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. This OAuth setup does not support "Microsoft Entra ID managed" service principals. If your workspace uses Private Link, see the <strong>Private Link Connectivity</strong> tab, which supports Microsoft Entra ID managed service principals.</div>
 1. Enter a name and enable the following workspace entitlements for the service principal:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
