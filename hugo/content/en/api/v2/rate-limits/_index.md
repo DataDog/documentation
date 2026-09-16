@@ -47,7 +47,7 @@ The rate limit visibility metrics use the `datadog.apis.rate_limit.usage` namesp
 
 The `*_count` metrics count requests that the API allowed. The `*_blocked_count` metrics count requests that the API rejected because they exceeded a rate limit. The `*_pct` metrics measure total attempted requests, including allowed and blocked requests, as a percentage of the configured limit. A value of `100` represents full utilization, and values can exceed `100`.
 
-The `datadog.apis.rate_limit.usage.limit_count` gauge reports the configured request limit for each rate limit name and scope.
+In addition to the per-scope metrics, the `datadog.apis.rate_limit.usage.limit_count` gauge reports the configured request limit for each rate limit name and scope.
 
 ##### Available tags
 
@@ -97,7 +97,7 @@ The `datadog.apis.rate_limit.usage.*` metrics replace the `datadog.apis.usage.*`
 | `datadog.apis.usage.per_api_key` | `datadog.apis.rate_limit.usage.per_api_key_count` |
 | `datadog.apis.usage.per_api_key_ratio` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
 
-Use the corresponding `*_blocked_count` metric for blocked requests instead of filtering on `rate_limit_status:blocked`. The `*_pct` metrics use a percentage scale where `100` represents full utilization.
+Use the corresponding `*_blocked_count` metric for blocked requests instead of filtering on `rate_limit_status:blocked`.
 
 ### Increase your rate limit
 You can request increased rate limits by creating a Support ticket with the below details under **Help** > **New Support Ticket**. Upon receiving a rate limit increase, our Support Engineering team reviews the request on a case-by-case basis and, if needed, works with internal engineering resources to confirm the viability of the rate limit increase request.
