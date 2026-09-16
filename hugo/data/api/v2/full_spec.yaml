@@ -102549,7 +102549,7 @@ components:
         severity:
           $ref: "#/components/schemas/SecurityEntityRiskScoreAttributesSeverity"
         signalsDetected:
-          description: Number of security signals detected for this entity.
+          description: Number of risk-contributing security signals detected for this entity.
           example: 15
           format: int64
           type: integer
