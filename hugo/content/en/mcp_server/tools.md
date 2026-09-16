@@ -1245,7 +1245,7 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Metrics Governance
 
-Tools for analyzing metric volume and cardinality and managing Metrics Without Limits tag configurations and indexing rules.
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics Without Limits tag configurations and indexing rules.
 
 ### `estimate_datadog_metric_cardinality`
 *Toolset: **metrics-governance***\
@@ -1259,10 +1259,10 @@ Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys
 ### `get_metric_cardinality_profile`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Read`*\
-Identifies the tag-level drivers of a metric's indexed volume, including tag cardinality, recent query activity, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
 
 - Profile the cardinality drivers for `custom.checkout.requests` over the last day.
-- Which high-cardinality tags on `custom.api.latency` have not been queried recently?
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
 - Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
 
 ### `get_metric_governance_status`
@@ -1277,7 +1277,7 @@ Retrieves the Metrics Without Limits governance status for up to 20 metrics, inc
 ### `get_metric_tag_configuration`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Read`*\
-Retrieves the direct Metrics Without Limits tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a direct configuration might still be governed by a tag indexing rule.
+Retrieves the direct Metrics Without Limits tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
 
 - Which tags are enabled for `custom.checkout.requests`?
 - Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
