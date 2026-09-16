@@ -108,6 +108,19 @@ az role assignment create \
 {{% /tab %}}
 {{< /tabs >}}
 
+### Optional: Monitor debug runs
+
+Datadog can also monitor pipeline runs started with **Debug** from the ADF authoring canvas. Debug runs use separate ARM endpoints from published pipeline runs.
+
+To collect debug pipeline and activity runs with the minimal custom role, add these permissions to the `Actions` array in the role definition:
+
+| Endpoint | Required permission |
+|---|---|
+| `POST .../queryDebugPipelineRuns` | `Microsoft.DataFactory/factories/querydebugpipelineruns/action` |
+| `GET .../sandboxPipelineRuns/{id}/sandboxActivityRuns` | `Microsoft.DataFactory/factories/sandboxpipelineruns/sandboxActivityRuns/read` |
+
+These permissions are optional. Without them, Datadog continues to monitor published pipeline and activity runs, and the integration connection remains healthy. Debug runs or their activities don't appear in Jobs Monitoring. The built-in **Data Factory Contributor** role already includes these permissions.
+
 ### Step 2: Enable Azure Data Factory in Datadog
 
 1. In Datadog, navigate to [Data Observability > Settings > Integrations][5].
