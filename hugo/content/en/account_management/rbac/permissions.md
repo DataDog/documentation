@@ -46,7 +46,7 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
 
-To remove the following permissions through the [Create Role][4] or [Update a Role][5] API, set `default_permissions_opt_out: true` in the request body:
+To remove the following permissions through the [Create Role][4], [Update a Role][5], or [Revoke Permission][6] APIs, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
@@ -58,6 +58,25 @@ To remove the following permissions through the [Create Role][4] or [Update a Ro
 - CI Visibility Read (`ci_visibility_read`)
 - CD Visibility Read (`cd_visibility_read`)
 - Vulnerability Management Read (`appsec_vm_read`)
+
+Example request to create a role without restricted permissions:
+
+```sh
+curl -X POST "https://api.datadoghq.com/api/v2/roles" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "attributes": {
+      "name": "developers",
+      "default_permissions_opt_out": true
+    },
+    "type": "roles"
+  }
+}'
+```
 
 By default, the following restricted permissions cannot be removed through the UI or API. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and include them in the permissions removed by `default_permissions_opt_out: true`:
 
@@ -121,7 +140,7 @@ Enabling Minimal Access Roles makes the following permissions removable from cus
 - Static Analysis Settings Read (`static_analysis_settings_read`)
 - Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 
-If you use `default_permissions_opt_out` to remove restricted permissions from Terraform resources, update your automation to account for these additional permissions before enabling Minimal Access Roles. This helps prevent unintended changes to existing access configurations.
+If you use `default_permissions_opt_out` to remove restricted permissions in your [Terraform role resources][7], update that automation to include these additional permissions before enabling Minimal Access Roles.
 
 ## Permissions list
 
@@ -143,3 +162,5 @@ Each managed role inherits all of the permissions from the less powerful roles. 
 [3]: /api/latest/roles/#list-permissions
 [4]: /api/latest/roles/#create-role
 [5]: /api/latest/roles/#update-a-role
+[6]: https://docs.datadoghq.com/api/latest/roles/revoke-permission/
+[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
