@@ -128,7 +128,7 @@ Minimal Access Roles give your organization more granular control over what user
 
 By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and typically cannot be removed, as they support core functionality across Datadog. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
 
-Enabling Minimal Access Roles makes the following permissions removable from custom roles, allowing you to create restricted roles for specialized workflows:
+Minimal Access Roles is an organization-wide setting. Once enabled, the following permissions become removable from any custom role in your organization, allowing you to create restricted roles for specialized workflows:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
@@ -140,7 +140,7 @@ Enabling Minimal Access Roles makes the following permissions removable from cus
 - Static Analysis Settings Read (`static_analysis_settings_read`)
 - Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 
-If you use `default_permissions_opt_out` to remove restricted permissions in your [Terraform role resources][7], update that automation to include these additional permissions before enabling Minimal Access Roles.
+If you use `default_permissions_opt_out` in [Terraform role resources][7] or direct API calls, update your automation to account for these additional permissions before enabling Minimal Access Roles.
 
 ## Permissions list
 
