@@ -1,60 +1,59 @@
 ---
-title: Set Up the OTLP OpenTelemetry Collector
 aliases:
-- /opentelemetry/setup/collector_exporter/oss_setup/
-- /opentelemetry/setup/collector_exporter/community_collector/
-private: true
-description: 'Send OpenTelemetry data to Datadog using the OTLP OpenTelemetry Collector'
+- /ko/opentelemetry/setup/collector_exporter/oss_setup/
+- /ko/opentelemetry/setup/collector_exporter/community_collector/
+description: OTLP OpenTelemetry Collector를 사용하여 Datadog으로 OpenTelemetry 데이터 전송
 further_reading:
-- link: "https://opentelemetry.io/docs/collector/"
-  tag: "External Site"
-  text: "Collector documentation"
-- link: "/opentelemetry/setup/collector_exporter/deploy"
-  tag: "Documentation"
-  text: "Deploy the OpenTelemetry Collector"
-- link: "/opentelemetry/config/hostname_tagging"
-  tag: "Documentation"
-  text: "Configure Hostname and Tagging"
+- link: https://opentelemetry.io/docs/collector/
+  tag: 외부 사이트
+  text: Collector 설명서
+- link: /opentelemetry/setup/collector_exporter/deploy
+  tag: 설명서
+  text: OpenTelemetry Collector 배포
+- link: /opentelemetry/config/hostname_tagging
+  tag: 설명서
+  text: 호스트 이름 및 태깅 구성
+private: true
+title: OTLP OpenTelemetry Collector 설정
 ---
+## 개요 {#overview}
 
-## Overview
+OTLP OpenTelemetry Collector를 사용하여 [OpenTelemetry Collector Contrib][1] 배포 및 표준 OpenTelemetry 구성 요소를 기반으로 하는 트레이스, 메트릭, 로그를 Datadog으로 전송할 수 있습니다. 이 설정은 다음과 같은 주요 구성 요소를 사용합니다.
 
-Send traces, metrics, and logs to Datadog using the OTLP OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
+- **OTLP HTTP 익스포터**: Datadog의 OTLP 수집 엔드포인트로 텔레메트리를 전송합니다.
+- **스팬 메트릭 커넥터**: 트레이스 데이터에서 RED(Rate, Error, Duration) 메트릭을 생성하여 Service Catalog 및 Service Page와 같은 APM 기능을 지원합니다.
+- **리소스 탐지 프로세서**: 호스트 및 클라우드 리소스 속성을 탐지하며, Datadog은 이러한 속성을 호스트 이름 확인 및 태깅에 사용합니다.
 
-- **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
-- **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
-- **Resource detection processor**: Detects host and cloud resource attributes, which Datadog uses for hostname resolution and tagging.
+{{< img src="/opentelemetry/setup/oss-collector.png" alt="다이어그램: 코드의 OpenTelemetry SDK가 OTLP HTTP 익스포터를 사용해 OpenTelemetry Collector를 실행 중인 호스트로 OTLP를 통해 데이터를 전송하고, 여기에서 Datadog의 Observability Platform으로 전달됩니다." style="width:100%;" >}}
 
-{{< img src="/opentelemetry/setup/oss-collector.png" alt="Diagram: OpenTelemetry SDK in code sends data through OTLP to host running any OpenTelemetry Collector with OTLP HTTP exporter, which forwards to Datadog's Observability Platform." style="width:100%;" >}}
+<div class="alert alert-warning">이 설정은 미리 보기 상태입니다. 일부 Datadog 기능은 Datadog 익스포터 설정과 다르게 작동할 수 있습니다. 예를 들어, 호스트 메타데이터 수집 지원이 완료될 때까지 <a href="/infrastructure/list/">인프라 목록</a>에 호스트 메타데이터가 적게 표시될 수 있으며, Kubernetes Explorer 관련 보기가 비어 있을 수 있습니다.</div>
 
-<div class="alert alert-warning">This setup is in Preview. Some Datadog features may behave differently compared to the Datadog Exporter setup. For example, the <a href="/infrastructure/list/">Infrastructure List</a> may show less host metadata until host metadata ingestion support is finalized and the Kubernetes Explorer related views may be empty.</div>
+## 전제 조건 {#prerequisites}
 
-## Prerequisites
+이 설정은 베어 메탈, VM, Docker 및 Kubernetes를 지원합니다. 지원되는 관리형 Kubernetes 배포에는 Amazon EKS(Auto Mode 포함), Google GKE(Standard 및 Autopilot), Azure AKS(Automatic 포함)가 포함됩니다.
 
-This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
+이 설정은 ECS Fargate 또는 AWS Lambda와 같은 서버리스 또는 작업 기반 컨테이너 런타임을 지원하지 않습니다. 지원되는 Datadog 기능은 **OTel SDK + OTLP OTel Collector** 아래의 [기능 호환성 표][7]를 참조하세요.
 
-This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + OTLP OTel Collector**.
+- [OpenTelemetry Collector Contrib][1] v0.154.0 이상
+- [Datadog API 키][2]
+- [Datadog 사이트][3](예: `datadoghq.com` 또는 `datadoghq.eu`)
 
-- [OpenTelemetry Collector Contrib][1] v0.154.0 or later
-- A [Datadog API key][2]
-- Your [Datadog site][3] (for example, `datadoghq.com` or `datadoghq.eu`)
+## 설치 및 구성 {#install-and-configure}
 
-## Install and configure
+### 1. OpenTelemetry Collector를 다운로드합니다.{#1-download-the-opentelemetry-collector}
 
-### 1. Download the OpenTelemetry Collector
+[릴리스 페이지][100]에서 OpenTelemetry Collector Contrib 배포의 최신 릴리스를 다운로드합니다.
 
-Download the latest release of the OpenTelemetry Collector Contrib distribution from the [releases page][100].
+### 2. Collector 구성을 생성합니다.{#2-create-the-collector-configuration}
 
-### 2. Create the Collector configuration
-
-Create a configuration file named `collector.yaml`. The configuration varies depending on your environment. Select the tab that matches your setup:
+이름이 `collector.yaml`인 구성 파일을 만듭니다. 구성은 환경에 따라 다릅니다. 설정에 맞는 탭을 선택합니다.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
 
-Use this configuration for an uncontainerized Collector running directly on a host (bare metal or VM).
+컨테이너화되지 않은 Collector가 호스트(베어 메탈 또는 VM)에서 직접 실행되는 경우 이 구성을 사용합니다.
 
-Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+Collector를 시작하기 전에 `DD_API_KEY` 및 `DD_SITE` 환경 변수를 설정합니다.
 
 ```yaml
 receivers:
@@ -225,12 +224,12 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-For cloud-specific environments, add the appropriate resource detection detector:
+클라우드 관련 환경의 경우 적절한 리소스 탐지 탐지기를 추가합니다.
 - **Amazon EC2**: `detectors: [ec2, env, system]`
 - **Google Cloud**: `detectors: [gcp, env, system]`
 - **Azure**: `detectors: [azure, env, system]`
 
-See the [full configuration files][500] for an optional config to gather additional metadata about the system.
+시스템에 대한 추가 메타데이터를 수집하는 선택적 구성은 [전체 구성 파일][500]을 참조하세요.
 
 [500]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
@@ -238,12 +237,12 @@ See the [full configuration files][500] for an optional config to gather additio
 
 {{% tab "Docker" %}}
 
-Use this configuration for a containerized Collector. The `host_metrics` receiver requires mounting the host filesystem at `/hostfs`.
+컨테이너화된 Collector에는 이 구성을 사용합니다. `host_metrics` 수신기는 `/hostfs`에 호스트 파일 시스템을 마운트해야 합니다.
 
-Set the following environment variables before starting the Collector:
+Collector를 시작하기 전에 다음 환경 변수를 설정합니다.
 
-- `DD_API_KEY` and `DD_SITE`
-- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot detect host information from inside a container, so provide it here (for example, `host.name=<YOUR_HOST_NAME>`).
+- `DD_API_KEY` 및 `DD_SITE`
+- `OTEL_RESOURCE_ATTRIBUTES`: Collector는 컨테이너 내부에서 호스트 정보를 탐지할 수 없으므로 여기에 호스트 정보를 제공합니다(예: `host.name=<YOUR_HOST_NAME>`).
 
 ```yaml
 receivers:
@@ -416,7 +415,7 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-Run the Collector with the host filesystem mounted:
+호스트 파일 시스템이 마운트된 상태로 Collector를 실행합니다.
 
 ```shell
 docker run \
@@ -435,16 +434,16 @@ docker run \
 
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
+클라우드 이외 환경에서 Kubernetes DaemonSet으로 배포된 Collector에는 이 구성을 사용합니다. 여기에는 Kubernetes 메타데이터로 텔레메트리를 보강하기 위한 `k8s_attributes` 프로세서와 노드, 포드, 컨테이너 및 볼륨 메트릭을 위한 `kubelet_stats` 수신기가 포함됩니다. 관리형 Kubernetes 배포에서는 구성 후 [관리형 Kubernetes 배포](#managed-kubernetes-distributions)에 설명된 변경 사항을 적용합니다.
 
-Set the following environment variables in the Collector pod spec, using the Kubernetes downward API where noted:
+명시된 경우 Kubernetes downward API를 사용하여 Collector 포드 사양에 다음 환경 변수를 설정합니다.
 
-- `DD_API_KEY` and `DD_SITE`
-- `K8S_NODE_NAME`: The name of the Kubernetes node, used by the `kubelet_stats` receiver. Set it from the `spec.nodeName` field.
-- `MY_POD_IP`: The pod IP, used by the `health_check` extension. Set it from the `status.podIP` field.
-- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot determine the host name from inside a container, so provide host information here (for example, `k8s.node.name=$(K8S_NODE_NAME)`). The `$(VAR)` syntax is expanded by Kubernetes, so set this in the pod spec rather than in a shell.
+- `DD_API_KEY` 및 `DD_SITE`
+- `K8S_NODE_NAME`: `kubelet_stats` 수신기가 사용하는 Kubernetes 노드의 이름입니다. 이 이름은 `spec.nodeName` 필드에서 설정합니다.
+- `MY_POD_IP`: `health_check` 확장 프로그램이 사용하는 포드 IP입니다. 이 IP는 `status.podIP` 필드에서 설정합니다.
+- `OTEL_RESOURCE_ATTRIBUTES`: Collector가 컨테이너 내부에서 호스트 이름을 확인할 수 없으므로 여기에 호스트 정보를 제공합니다(예: `k8s.node.name=$(K8S_NODE_NAME)`). `$(VAR)` 구문은 Kubernetes에서 확장하므로 셸이 아닌 포드 사양에서 설정합니다.
 
-Mount the host filesystem at `/hostfs` so the `host_metrics` receiver can collect host metrics.
+`host_metrics` 수신기가 호스트 메트릭을 수집할 수 있도록 `/hostfs`에 호스트 파일 시스템을 마운트합니다.
 
 ```yaml
 receivers:
@@ -679,13 +678,13 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-This configuration requires a ServiceAccount bound to a ClusterRole that grants `get`, `list`, and `watch` on `pods`, `namespaces`, `nodes`, `nodes/stats`, and `replicasets`. The `k8s_attributes` processor reads pod metadata, and the `kubelet_stats` receiver reads `nodes/stats`. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions, and add `nodes/stats` to the rules it lists.
+이 구성에는 `pods`, `namespaces`, `nodes`, `nodes/stats` 및 `replicasets`에 대해 `get`, `list` 및 `watch` 권한을 부여하는 ClusterRole에 바인딩된 ServiceAccount가 필요합니다. `k8s_attributes` 프로세서는 포드 메타데이터를 읽고 `kubelet_stats` 수신기는 `nodes/stats`를 읽습니다. RBAC 설정 지침은 [Kubernetes Attributes Processor 설명서][101]를 참조하고 여기 나열된 규칙에 `nodes/stats`를 추가합니다.
 
-#### Managed Kubernetes distributions
+#### 관리형 Kubernetes 배포{#managed-kubernetes-distributions}
 
-On a managed Kubernetes distribution, replace the `resource_detection` processor in the previous configuration with the variant for your environment. The cloud detectors provide host information, so you do not need to set `OTEL_RESOURCE_ATTRIBUTES`.
+관리형 Kubernetes 배포에서는 이전 구성의 `resource_detection` 프로세서를 사용자 환경에 맞는 변형으로 교체할 수 있습니다. 클라우드 탐지기가 호스트 정보를 제공하므로 `OTEL_RESOURCE_ATTRIBUTES`를 설정할 필요가 없습니다.
 
-##### Amazon EKS
+##### Amazon EKS {#amazon-eks}
 
 ```yaml
 processors:
@@ -704,9 +703,9 @@ processors:
           enabled: false
 ```
 
-The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings. The `timeout` is raised to `15s` to allow for IMDS latency.
+`ec2` 및 `eks` 탐지기는 컨테이너 내부에서 IMDS 엔드포인트에 액세스해야 합니다. 노드 시작 템플릿 또는 계정 설정에서 IMDS 토큰 홉 제한을 2로 설정합니다. IMDS 지연 시간을 허용할 수 있도록 `timeout`이 `15s`로 상향 조정됩니다.
 
-##### Amazon EKS Auto Mode
+##### Amazon EKS Auto Mode {#amazon-eks-auto-mode}
 
 ```yaml
 processors:
@@ -730,9 +729,9 @@ processors:
           enabled: false
 ```
 
-The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
+`eks` 탐지기를 사용하려면 Collector에 `EC2:DescribeInstances` 권한이 있는 IAM 역할을 할당하는 포드 ID 연결이 필요합니다.
 
-##### Google GKE
+##### Google GKE {#google-gke}
 
 ```yaml
 processors:
@@ -746,9 +745,9 @@ processors:
           enabled: false
 ```
 
-On older GKE versions, the `gcp` detector may not return a host name. If that happens, supply the node name as `host.name` in `OTEL_RESOURCE_ATTRIBUTES`.
+이전 GKE 버전에서는 `gcp` 탐지기가 호스트 이름을 반환하지 않을 수 있습니다. 이런 경우, `OTEL_RESOURCE_ATTRIBUTES`에 노드 이름을 `host.name`으로 제공합니다.
 
-##### Azure AKS
+##### Azure AKS {#azure-aks}
 
 ```yaml
 processors:
@@ -765,41 +764,41 @@ processors:
           enabled: false
 ```
 
-##### GKE Autopilot and AKS Automatic
+##### GKE Autopilot 및 AKS Automatic {#gke-autopilot-and-aks-automatic}
 
-These modes do not allow mounting `/hostfs` or using host ports. Use the GKE or AKS `resource_detection` processor, then make these additional changes:
+이러한 모드에서는 `/hostfs` 마운트나 호스트 포트 사용이 허용되지 않습니다. GKE 또는 AKS `resource_detection` 프로세서를 사용한 후 다음과 같이 추가 변경을 수행합니다.
 
-- Remove the `host_metrics` receiver from the `receivers` block and from the `metrics` pipeline. Node, pod, container, and volume metrics still come from the `kubelet_stats` receiver.
-- Disable host ports on the Collector and expose it through a node-local Service instead. Point your applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
+-  `host_metrics` 수신기를 `receivers` 블록과 `metrics` 파이프라인에서 제거합니다. 노드, 포드, 컨테이너 및 볼륨 메트릭은 여전히 `kubelet_stats` 수신기에서 가져옵니다.
+- Collector에서 호스트 포트를 비활성화하고 대신 노드 로컬 서비스를 통해 노출하세요. [애플리케이션 구성](#4-configure-your-application)에 표시된 호스트 IP 대신 해당 서비스에서 애플리케이션을 지정합니다.
 
-For the complete configuration files for each environment, see the [`opentelemetry-examples` repository][501].
+각 환경에 대한 전체 구성 파일은 [`opentelemetry-examples` 리포지토리][501]를 참조하세요.
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
 [501]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
-{{% tab "Kubernetes (Helm chart)" %}}
+{{% tab "Kubernetes(Helm 차트)" %}}
 
-You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources.
+[공식 OpenTelemetry Collector Helm 차트][102] v0.147.1 이상을 사용하여 Kubernetes에서 Collector를 DaemonSet으로 배포할 수 있습니다. 아래의 값 파일은 필요한 마운트, 환경 변수 및 RBAC 리소스를 설정합니다.
 
-1. Create a Kubernetes secret with your Datadog API key:
+1. Datadog API 키를 사용하여 Kubernetes 시크릿을 생성합니다.
 
    ```shell
    kubectl create secret generic datadog-secrets --from-literal=api-key='<YOUR_API_KEY>'
    ```
 
-1. Add the OpenTelemetry Helm repository:
+1. OpenTelemetry Helm 리포지토리를 추가합니다.
 
    ```shell
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    ```
 
-1. Download the example values file for your environment and save it as `values.yaml`. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
+1. 환경에 맞는 예시 값 파일을 다운로드하여 `values.yaml`로 저장합니다. Datadog 사이트가 `datadoghq.com`이 아닌 경우 설치하기 전에 `DD_SITE`에서 `values.yaml` 값을 업데이트합니다.
 
-   | Environment | Values file |
+   | 환경 | 값 파일 |
    |---|---|
-   | Kubernetes (non-cloud) | [`daemonset.yaml`][103] |
+   | Kubernetes(비클라우드) | [`daemonset.yaml`][103] |
    | Amazon EKS | [`daemonset-eks.yaml`][104] |
    | Amazon EKS Auto Mode | [`daemonset-eks-auto.yaml`][105] |
    | Google GKE | [`daemonset-gke.yaml`][106] |
@@ -807,12 +806,12 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
    | Azure AKS | [`daemonset-aks.yaml`][108] |
    | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
 
-   On Amazon EKS, the values files cannot configure the required AWS-side settings. Apply the following outside of Helm:
+   Amazon EKS에서는 값 파일이 필요한 AWS 측 설정을 구성할 수 없습니다. Helm 외부에서 다음을 적용합니다.
 
-   - **Amazon EKS**: The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
-   - **Amazon EKS Auto Mode**: The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
+   - **Amazon EKS**: `ec2` 및 `eks` 탐지기는 컨테이너 내부에서 IMDS 엔드포인트에 액세스해야 합니다. 노드 시작 템플릿 또는 계정 설정에서 IMDS 토큰 홉 제한을 2로 설정합니다.
+   - **Amazon EKS Auto Mode**: `eks` 탐지기에는 Collector에 `EC2:DescribeInstances` 권한이 있는 IAM 역할을 할당하는 포드 ID 연결이 필요합니다.
 
-1. Install the Collector:
+1. Collector를 설치합니다.
 
    ```shell
    helm install otelcol open-telemetry/opentelemetry-collector --values values.yaml
@@ -830,23 +829,24 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 {{% /tab %}}
 {{< /tabs >}}
 
-### 3. Run the Collector
+### 3. Collector 실행 {#3-run-the-collector}
 
-Start the Collector. If you are using Docker or Kubernetes, the run command is included in the [Create the collector configuration](#2-create-the-collector-configuration) section.
+Collector를 시작합니다. Docker 또는 Kubernetes를 사용하는 경우 실행 명령은 [Collector 구성 생성](#2-create-the-collector-configuration) 섹션에 포함되어 있습니다.
 
-For Host installations, run:
+호스트 설치의 경우 다음을 실행합니다.
 
 ```shell
 DD_SITE={{< region-param key="dd_site" >}} DD_API_KEY=<YOUR_API_KEY> \
   otelcol-contrib --config collector.yaml
 ```
 
-### 4. Configure your application
+### 4. 애플리케이션 구성 {#4-configure-your-application}
 
-Configure your OpenTelemetry-instrumented application to send data to the Collector. Set the `OTEL_EXPORTER_OTLP_ENDPOINT` environment variable to point to the Collector:
+데이터를 Collector로 전송하도록 OpenTelemetry 계측 애플리케이션을 구성합니다. Collector를 가리키도록 `OTEL_EXPORTER_OTLP_ENDPOINT` 환경 변수를 설정하여 합니다.
 
 {{< tabs >}}
-{{% tab "Host" %}}
+{{% tab "호스트" %}}
+
 ```shell
 export OTEL_EXPORTER_OTLP_ENDPOINT="http://localhost:4318"
 export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
@@ -854,16 +854,18 @@ export OTEL_EXPORTER_OTLP_PROTOCOL="http/protobuf"
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-Set the following environment variables in your application container:
+애플리케이션 컨테이너에 다음 환경 변수를 설정합니다.
+
 ```
 OTEL_EXPORTER_OTLP_ENDPOINT=http://<collector-hostname>:4318
 OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 ```
-Both containers must be on the same network. If you use Docker Compose, this is handled automatically.
+컨테이너가 둘 다 동일한 네트워크에 있어야 합니다. Docker Compose를 사용하는 경우에는 자동으로 처리됩니다.
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-In your application deployment manifest, configure the endpoint using the host IP:
+애플리케이션 배포 매니페스트에서 호스트 IP를 사용하여 다음과 같이 엔드포인트를 구성합니다.
+
 ```yaml
 env:
   - name: HOST_IP
@@ -878,46 +880,46 @@ env:
 {{% /tab %}}
 {{< /tabs >}}
 
-Set the `service.name`, `deployment.environment.name`, and `service.version` resource attributes in your application's OpenTelemetry configuration. Datadog maps these to [Unified Service Tagging][4], which correlates your traces, metrics, and logs.
+애플리케이션의 OpenTelemetry 구성에서 `service.name`, `deployment.environment.name`, `service.version` 리소스 속성을 설정합니다. Datadog은 이러한 속성을 [Unified Service Tagging][4]에 매핑하여 트레이스, 메트릭 및 로그를 상호 연결합니다.
 
-## Verify the setup
+## 설정 확인 {#verify-the-setup}
 
-After your application sends telemetry to the Collector, verify that data appears in Datadog:
+사용자의 애플리케이션이 Collector로 텔레메트리를 전송한 후 Datadog에 데이터가 나타나는지 확인합니다.
 
-1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}} and confirm that your `service.name` appears.
-2. Open {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}} and search for your service.
-3. Go to {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host Map{{< /ui >}} and confirm that the host running the Collector appears.
-4. If you send logs through OTLP, go to {{< ui >}}Logs Explorer{{< /ui >}} and search for your service name.
+1. Datadog에서 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}로 이동하여 `service.name`이 나타나는지 확인합니다.
+2. {{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}를 열고 서비스를 검색합니다.
+3. {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host Map{{< /ui >}}으로 이동하여 Collector를 실행 중인 호스트가 나타나는지 확인합니다.
+4. OTLP를 통해 로그를 전송하는 경우 {{< ui >}}Logs Explorer{{< /ui >}}로 이동하여 서비스 이름을 검색합니다.
 
-## Key components
+## 주요 구성 요소 {#key-components}
 
-### Span metrics connector
+### 스팬 메트릭 커넥터 {#span-metrics-connector}
 
-The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+`span_metrics` 커넥터는 트레이스 데이터에서 RED 메트릭을 생성합니다. 이러한 메트릭은 Service Catalog, Service Page 및 Resource Page를 포함한 APM 기능을 지원합니다. 이 커넥터는 Datadog이 트레이스에서 호스트 태그, 피어 서비스 및 작업 이름을 계산하도록 지원하는 차원으로 구성됩니다.
 
-For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository. Those files also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
+컨테이너 태그 관련 차원을 포함하여 권장 구성에 포함된 전체 차원 목록은 `opentelemetry-examples` 리포지토리의 [전체 구성 파일][5]을 참조하세요. 또한 이러한 파일은 `- glob: container.**`와 같은 Glob 패턴으로 컨테이너 태그 차원 그룹을 대체하는 방법을 보여줍니다.
 
-### OTLP HTTP exporter
+### OTLP HTTP 익스포터 {#otlp-http-exporter}
 
-The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints. Key configuration details:
+`otlp_http` 익스포터는 텔레메트리 데이터를 Datadog의 OTLP 수집 엔드포인트로 전송합니다. 주요 구성 세부 정보:
 
-- **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
-- **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
-- **Batching**: The `sending_queue.batch` settings begin flushing at 2 MiB and split serialized batches at 4 MiB. If you receive a 413 response, reduce these sizes.
+- **엔드포인트**: `https://otlp.<YOUR_DD_SITE>`(트레이스, 로그 및 메트릭용).
+- **압축**: `zstd`는 줄어든 대역폭 사용량에 권장됩니다. `zstd`를 사용할 때는 기본값이 가장 낮은 압축 수준을 사용하므로 `compression_params.level`을 명시적으로 설정합니다.
+- **배치 처리**: `sending_queue.batch` 설정은 2 MiB에서 플러싱을 시작하고 4 MiB에서는 직렬화된 배치를 분할합니다. 413 응답을 받으면 이러한 크기를 줄이세요.
 
 #### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
 
-The `dd-otel-metric-config` header is a JSON payload sent with metrics requests that configures how Datadog processes OTLP metrics. Set it in the `headers` section of the `otlp_http` exporter.
+`dd-otel-metric-config` 헤더는 Datadog이 OTLP 메트릭을 처리하는 방법을 구성하는 메트릭 요청과 함께 전송되는 JSON 페이로드입니다. `otlp_http` 익스포터의 `headers` 섹션에서 설정하세요.
 
-| Field | Type | Default | Description |
+| 필드 | 유형 | 기본값 | 설명 |
 |---|---|---|---|
-| `resource_attributes_as_tags` | Boolean | `false` | Propagates OTLP resource attributes as Datadog tags on emitted metrics. |
-| `instrumentation_scope_metadata_as_tags` | Boolean | `false` | Propagates OTLP instrumentation scope metadata (scope name and version) as tags on emitted metrics. |
-| `trace_metrics.namespace` | String | `traces.span.metrics` | Namespace prefix applied to trace-derived metrics. |
-| `trace_metrics.instrumentation_metrics_calc` | Boolean | `false` | When `true`, routes supported HTTP instrumentation metrics to power APM trace metrics. |
-| `raw_instrumentation_metrics_drop` | Boolean | `false` | When `true`, drops the raw HTTP instrumentation metrics from the regular metrics intake after routing them for APM trace metrics. Only applies when `trace_metrics.instrumentation_metrics_calc` is `true`. |
+| `resource_attributes_as_tags` | 불리언 | `false` | OTLP 리소스 속성을 내보낸 메트릭의 Datadog 태그로 전파합니다. |
+| `instrumentation_scope_metadata_as_tags` | 불리언 | `false` | OTLP 계측 범위 메타데이터(범위 이름 및 버전)를 내보낸 메트릭의 태그로 전파합니다. |
+| `trace_metrics.namespace` | 문자열 | `traces.span.metrics` | 트레이스 파생 메트릭에 적용되는 네임스페이스 접두사입니다. |
+| `trace_metrics.instrumentation_metrics_calc` | 불리언 | `false` |  `true`일 때, 지원되는 HTTP 계측 메트릭을 APM 트레이스 메트릭에 사용하도록 라우팅합니다. |
+| `raw_instrumentation_metrics_drop` | 불리언 | `false` | `true`일 때 APM 트레이스 메트릭을 위해 라우팅한 후 일반 메트릭 수집에서 원시 HTTP 계측 메트릭을 삭제합니다. `trace_metrics.instrumentation_metrics_calc`가 `true`일 때만 적용됩니다. |
 
-Example with instrumentation metrics enabled:
+계측 메트릭이 활성화된 예시:
 
 ```json
 {
@@ -931,44 +933,44 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OTLP OTel Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">권장되는 OTLP OTel Collector 구성에서는 <code>span_metrics</code> 커넥터를 사용하여 APM 보기를 구동하는 RED 메트릭을 생성합니다. 여기에서 <code>trace_metrics.instrumentation_metrics_calc</code> 및 <code>raw_instrumentation_metrics_drop</code> 필드는 대신 HTTP 계측 메트릭에서 APM 트레이스 메트릭을 파생하는 설정을 위한 대체 구성을 지원합니다. 단, <code>instrumentation_metrics_calc</code> 은(는). <code>span_metrics</code> 커넥터와 함께 활성화하지 마세요. 두 소스 모두에서 트레이스 메트릭을 계산하기 때문입니다.</div>
 
-### Datadog extension
+### Datadog 확장 프로그램 {#datadog-extension}
 
-The `datadog` extension sends Collector metadata to Datadog for host enrichment. It does not export telemetry data. All telemetry flows through the OTLP HTTP exporter. This extension is part of the [OpenTelemetry Collector Contrib][1] project and handles API key validation and deployment type reporting.
+`datadog` 확장 프로그램은 호스트 보강을 위해 Collector 메타데이터를 Datadog으로 전송합니다. 텔레메트리 데이터는 내보내지 않습니다. 모든 텔레메트리는 OTLP HTTP 익스포터를 통해 흐릅니다. 이 확장 프로그램은 [OpenTelemetry Collector Contrib][1] 프로젝트의 일부이며 API 키 유효성 검사 및 배포 유형 보고를 처리합니다.
 
-### Cumulative-to-delta processor
+### Cumulative-to-delta 프로세서 {#cumulative-to-delta-processor}
 
-The `cumulativetodelta` processor converts cumulative metrics to delta temporality, which is [Datadog's recommended configuration][6] for OpenTelemetry metrics.
+`cumulativetodelta` 프로세서는 누적 메트릭을 델타 시간성으로 변환하며, 이는 OpenTelemetry 메트릭에 대한 [Datadog 권장 구성][6]입니다.
 
-### Kubelet stats receiver
+### Kubelet 통계 수신기 {#kubelet-stats-receiver}
 
-In Kubernetes deployments, the `kubelet_stats` receiver collects node, pod, container, and volume metrics from the kubelet on each node. The `deltatorate` processor converts the pod network metrics it produces to rates.
+Kubernetes 배포에서 `kubelet_stats` 수신기는 각 노드의 kubelet에서 노드, 포드, 컨테이너 및 볼륨 메트릭을 수집합니다. `deltatorate` 프로세서는 생성하는 파드 네트워크 메트릭을 비율로 변환합니다.
 
-### Self-monitoring telemetry
+### 자가 모니터링 텔레메트리 {#self-monitoring-telemetry}
 
-The configuration sends the Collector's own metrics back to its local OTLP receiver (`http://localhost:4318`). This routes the Collector's internal metrics through its own pipelines so they are enriched with resource attributes before being exported to Datadog.
+이 구성은 Collector 자체 메트릭을 로컬 OTLP 수신기로 다시 보냅니다(`http://localhost:4318`). 이는 Collector의 내부 메트릭을 자체 파이프라인을 통해 라우팅하여 Datadog으로 내보내기 전에 리소스 속성으로 보강되도록 합니다.
 
-## OTLP intake limits
+##  OTLP 수집 제한 {#otlp-intake-limits}
 
-Datadog enforces the following limits when ingesting OTLP data. Data that exceeds a limit is rejected or dropped as noted.
+Datadog은 OTLP 데이터를 수집할 때 다음 제한을 적용합니다. 제한을 초과하는 데이터는 명시된 대로 거부되거나 삭제됩니다.
 
-**Payload size**
-: Each intake endpoint enforces a maximum payload size per request. Requests above the limit are rejected with an `HTTP 413 Request Entity Too Large` response. If you receive a 413, reduce the batch size or flush more frequently so each request stays under the limit. For the payload size limit of each endpoint, see [Intake limits][8].
+**페이로드 크기**
+: 각 수집 엔드포인트는 요청당 최대 페이로드 크기를 제한합니다. 제한을 초과하는 요청은 거부되며`HTTP 413 Request Entity Too Large` 응답이 표시됩니다. 413 오류가 발생하면 배치 크기를 줄이거나 더 자주 플러시하여 각 요청이 제한을 넘지 않도록 합니다. 각 엔드포인트의 페이로드 크기 제한은 [수집 제한][8]을 참조하세요.
 
-**Histogram bucket count**
-: Each histogram datapoint is validated on ingestion, with a maximum per-bucket count (the number of observations in any single bucket) of 2,147,483,647 (2<sup>31</sup> − 1). If any bucket exceeds this, the entire datapoint is dropped.
+**히스토그램 버킷 수**
+:  각 히스토그램 데이터 포인트는 수집 시 유효성이 검사되며, 버킷당 최대 수(단일 버킷의 관측값 수)는 2,147,483,647(2<sup>31</sup> − 1)입니다. 어떤 버킷이든 이 값을 초과하면 전체 데이터 포인트가 삭제됩니다.
 
-## Further reading
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib
-[2]: /account_management/api-app-keys/
-[3]: /getting_started/site/
-[4]: /getting_started/tagging/unified_service_tagging/
+[2]: /ko/account_management/api-app-keys/
+[3]: /ko/getting_started/site/
+[4]: /ko/getting_started/tagging/unified_service_tagging/
 [5]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
-[6]: /opentelemetry/guide/otlp_delta_temporality/
-[7]: /opentelemetry/compatibility/
-[8]: /opentelemetry/setup/otlp_ingest/#intake-limits
+[6]: /ko/opentelemetry/guide/otlp_delta_temporality/
+[7]: /ko/opentelemetry/compatibility/
+[8]: /ko/opentelemetry/setup/otlp_ingest/#intake-limits
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

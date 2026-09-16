@@ -26,6 +26,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
       tag: "Blog"
       text: "The product signal latency gap slowing your growth"
+    - link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
+      tag: "Blog"
+      text: "Coordinate product launches with Datadog"
 site_support_id: getting_started_feature_flags
 ---
 
