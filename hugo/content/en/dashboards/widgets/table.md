@@ -31,7 +31,7 @@ The table visualization displays columns of aggregated data grouped by tag key. 
     * Metric: See the [Main graphing documentation][1] to configure a metric query.
     * Non-metric data sources: See the [Log search documentation][2] to configure an event query.
 
-2. Add additional columns to the table by using the {{< ui >}}+ Add Query{{< /ui >}} and {{< ui >}}+ Add Formula{{< /ui >}} buttons.
+2. Add additional columns to the table by using the {{< ui >}}\+ Add Query{{< /ui >}} and {{< ui >}}\+ Add Formula{{< /ui >}} buttons.
 
 ### Options
 

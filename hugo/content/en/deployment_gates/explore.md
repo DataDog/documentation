@@ -7,10 +7,6 @@ further_reading:
   text: "Set up Deployment Gates"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 To explore your Deployment Gates and rules evaluations, navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Deployment Gates{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][1]. 
 
 On this page you can:
