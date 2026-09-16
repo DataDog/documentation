@@ -14146,7 +14146,9 @@ components:
           type: string
         id:
           description: The unique identifier for the unit.
-          type: string
+          example: 42
+          format: int64
+          type: integer
         name:
           description: The full name of the unit.
           type: string
@@ -145906,7 +145908,7 @@ paths:
                         costs_period_start: 1738281600000
                         costs_unit:
                           family: currency
-                          id: "1"
+                          id: 42
                           name: dollar
                           plural: dollars
                           scale_factor: 1.0
