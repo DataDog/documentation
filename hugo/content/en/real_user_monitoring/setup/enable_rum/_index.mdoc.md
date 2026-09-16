@@ -220,6 +220,8 @@ RUM is enabled automatically when you initialize the SDK. No further action is n
 
 ## Start monitoring
 
+As a next step, [configure retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control which sessions RUM without Limits retains.
+
 {% if equals($platform, "browser") %}
 After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
 
