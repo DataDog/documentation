@@ -5,9 +5,6 @@ disable_toc: false
 aliases:
   - /observability_pipelines/monitoring/
 further_reading:
-- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
-  tag: "Architecture Center"
-  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 - link: "observability_pipelines/set_up_pipelines"
   tag: "Documentation"
   text: "Set up a pipeline"
@@ -20,6 +17,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
   tag: "Blog"
   text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 ---
 
 ## Overview

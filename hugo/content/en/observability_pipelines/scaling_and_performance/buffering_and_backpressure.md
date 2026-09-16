@@ -6,9 +6,6 @@ aliases:
   - /observability_pipelines/performance/
   - /observability_pipelines/scaling_and_performance/handling_load_and_backpressure/
 further_reading:
-- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
-  tag: "Architecture Center"
-  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 - link: "observability_pipelines/set_up_pipelines#set-up-a-pipeline"
   tag: "Documentation"
   text: "Set up a pipeline"
@@ -21,6 +18,9 @@ further_reading:
 - link: "observability_pipelines/destinations"
   tag: "Documentation"
   text: "Destinations"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 ---
 
 ## Overview
