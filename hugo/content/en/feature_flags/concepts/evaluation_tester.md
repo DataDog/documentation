@@ -11,6 +11,9 @@ further_reading:
 - link: "/feature_flags/concepts/environments"
   tag: "Documentation"
   text: "Environments"
+- link: "/feature_flags/concepts/evaluation_results"
+  tag: "Documentation"
+  text: "Flag Evaluation Results"
 ---
 
 ## Overview
@@ -59,7 +62,7 @@ The matched rule is also highlighted on the {{< ui >}}Targeting rules{{< /ui >}}
 
 ## Testing a disabled flag
 
-If the flag is disabled in the selected environment, the evaluation tester shows what a subject would receive if the flag were enabled, rather than returning the coded default. A warning banner reminds you that your application receives the coded default value while the flag remains disabled. Client SDKs always resolve to the coded default for disabled flags; only server SDKs evaluate targeting rules for disabled flags.
+If the flag is disabled in the selected environment, the evaluation tester shows what a subject would receive if the flag were enabled. This simulation differs from runtime SDK behavior: client-side and server-side SDKs return the default value supplied by your application for disabled flags. Detailed evaluations report `ERROR` with `FLAG_NOT_FOUND`. For more information, see [Flag Evaluation Results][5].
 
 ## Further reading
 
@@ -69,3 +72,4 @@ If the flag is disabled in the selected environment, the evaluation tester shows
 [2]: /feature_flags/concepts/targeting_attributes/
 [3]: /feature_flags/concepts/targeting_rules/
 [4]: /feature_flags/concepts/environments/
+[5]: /feature_flags/concepts/evaluation_results/
