@@ -149,10 +149,10 @@ Resources in an error state cannot be published, and a translation cannot be edi
 
 ## Translation gaps
 
-A translated query is a faithful conversion of the SPL, not a guarantee of identical results. Four gaps account for most of the differences:
+A translated query is a faithful conversion of the SPL, not a guarantee of identical results. These gaps account for most of the differences:
 
 Logs have a different shape in each platform
-: Pipelines, processors, and log-shipping agents differ between the two platforms. The attributes available on a log differ as a result. The translator preserves attribute names as written, other than mapping [standard attributes][8]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. Add the missing [processors][9] to your Datadog pipelines.
+: Pipelines, processors, and log-shipping agents differ between the two platforms. As a result, the attributes available on a log differ. The translator preserves attribute names as written, other than mapping [standard attributes][8]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. Add the missing [processors][9] to your Datadog pipelines.
 
 Indexes do not match
 : Splunk index names rarely map one-to-one onto Datadog [log indexes][10]. An index filter that does not resolve causes a query error. The translator strips index terms that have no Datadog equivalent and flags them as a warning. Review the warning and scope the query with tags or attributes instead.
