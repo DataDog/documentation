@@ -1,0 +1,323 @@
+# Site support — single source of truth for which Datadog sites (regions) do
+# NOT support a given product or feature.
+#
+# Consumed by Astro via the `@shared` alias. Hugo will mount this file after
+# the Astro API docs ship; until then Hugo keeps its own copy in
+# hugo/config/_default/params.yaml under the `unsupported_sites` key.
+#
+# Each key under `site_support_ids` is a site support ID. A page declares one
+# in frontmatter (`site_support_id: <key>`), or a key claims URLs directly
+# with `url_paths`.
+#
+# Fields:
+#   regions     required; region keys from regions.yaml that do NOT support this
+#   url_paths   optional; URL-path globs this key applies to. Only `*` (within
+#               one segment) and `**` (any depth) are supported. A pattern
+#               covers its base path and everything beneath it.
+#   description optional; note for writers
+#
+# Note: Hugo also matches a key name against page path segments. Astro does
+# not — it matches only frontmatter IDs and `url_paths`.
+
+site_support_ids:
+  remediate_with_ai:
+    regions: [gov, gov2]
+  cloudcraft_apm_overlay:
+    regions: [gov, gov2]
+  code_locations:
+    regions: [gov, gov2]
+  ownership_of_views:
+    regions: [gov, gov2]
+  ai_credit_limits:
+    regions: [gov, gov2]
+  amazon-security-lake:
+    regions: [gov, gov2]
+  resource_catalog_policies:
+    regions: [gov, gov2]
+  runtime_prioritization_engine:
+    regions: [gov, gov2]
+  ai_agents_console:
+    regions: [gov, gov2]
+  byoc-logs:
+    regions: [gov, gov2]
+  actions:
+    regions: [gov, gov2]
+  app_builder_override:
+    regions: [gov2]
+    description: "docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)"
+  adaptive_sampling:
+    regions: [gov, gov2]
+  advanced_analysis:
+    regions: [gov, gov2]
+  agent_flare:
+    regions: [gov, gov2]
+  agentic_onboarding:
+    regions: [gov, gov2]
+  agentless-scanning:
+    regions: [gov, gov2]
+    description: "api page"
+  agentless_scanning:
+    regions: [gov, gov2]
+    description: "docs page"
+  ai_impact:
+    regions: [gov, gov2]
+  alibaba-cloud:
+    regions: [gov, gov2]
+  amazon-compute-optimizer:
+    regions: [gov, gov2]
+  amazon-event-bridge:
+    regions: [gov, gov2]
+  apm_processing_pipelines:
+    regions: [gov, gov2]
+  apm_recommendations:
+    regions: [gov, gov2]
+  application_security:
+    regions: [gov, gov2]
+  application_security_override:
+    regions: [gov2]
+    description: "docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov"
+  autocomplete_search:
+    regions: [gov, gov2]
+  bitbucket-source-code:
+    regions: [gov, gov2]
+  azure-automated-log-forwarding:
+    regions: [gov, gov2]
+  azure-devops-source-code:
+    regions: [gov, gov2]
+  azure-private-link:
+    regions: [us, us5, eu, gov, gov2, ap1, ap2, uk1]
+  backstage:
+    regions: [gov, gov2]
+  bits_ai:
+    regions: [gov, gov2]
+  bits_ai_sre:
+    regions: [gov, gov2]
+  bits_data_analysis:
+    regions: [gov, gov2]
+  bits_investigation:
+    regions: [gov, gov2]
+  dashboard_anomaly_detection:
+    regions: [gov, gov2]
+  bits_remediation:
+    regions: [gov, gov2]
+  byoti:
+    regions: [gov, gov2]
+  case_management:
+    regions: [gov2]
+  ci_visibility:
+    regions: [gov, gov2]
+  cloudcraft_monitors_overlay:
+    regions: [gov, gov2]
+  cloudprem:
+    regions: [gov, gov2]
+  code_coverage:
+    regions: [gov, gov2]
+  code_security:
+    regions: [gov, gov2]
+  configuration_at_runtime:
+    regions: [gov, gov2]
+  confluence:
+    regions: [gov, gov2]
+  confluent_cloud_integration:
+    regions: [gov, gov2]
+  containers_autoscaling:
+    regions: [gov, gov2]
+  containers_kubernetes_appsec:
+    regions: [gov, gov2]
+  continuous_delivery:
+    regions: [gov, gov2]
+  continuous_integration:
+    regions: [gov, gov2]
+  correlation:
+    regions: [gov, gov2]
+    description: "Event management correlation"
+  coterm:
+    regions: [gov, gov2]
+  cross_app_access:
+    regions: [gov, gov2]
+  csm_jira:
+    regions: [us, us3, us5, eu, ap1, ap2, uk1]
+  cpp_log_collection:
+    regions: [gov, gov2]
+  data_jobs:
+    regions: [gov, gov2]
+  data_observability:
+    regions: [gov, gov2]
+  data_streams:
+    regions: [gov, gov2]
+  datadog_disaster_recovery:
+    regions: [gov, gov2]
+  delivery_performance:
+    regions: [gov, gov2]
+  deployment_gates:
+    regions: [gov, gov2]
+  developers_ide_plugins:
+    regions: [gov, gov2]
+  dora_metrics:
+    regions: [gov, gov2]
+  dynamic_instrumentation:
+    regions: [gov, gov2]
+  dynamic_quotas:
+    regions: [gov, gov2]
+  email_delivery:
+    regions: [us3, us5, eu, ap1, ap2, gov, gov2, uk1]
+    description: "US1 only"
+  events_from_sns_emails:
+    regions: [gov, gov2]
+  exception_replay:
+    regions: [gov, gov2]
+  experiments:
+    regions: [gov, gov2]
+  feature_flags:
+    regions: [gov, gov2]
+  fips-compliance:
+    regions: [us, us3, us5, eu, ap1, ap2, uk1]
+  fips-integrations:
+    regions: [us, us3, us5, eu, ap1, ap2, uk1]
+  fips-proxy:
+    regions: [us, us3, us5, eu, ap1, ap2, gov2, uk1]
+  fleet-automation-standard-features:
+    regions: [gov, gov2]
+  forwarding_audit_events:
+    regions: [gov, gov2]
+  gcp-private-service-connect:
+    regions: [us, us3, gov, gov2, ap1, ap2, uk1]
+  getting_started_feature_flags:
+    regions: [gov, gov2]
+  gitlab-source-code:
+    regions: [gov, gov2]
+  google-hangouts-chat:
+    regions: [gov, gov2]
+  google_chat:
+    regions: [gov, gov2]
+  governance_console:
+    regions: [gov, gov2]
+  gpu_monitoring:
+    regions: [gov, gov2]
+  heatmaps:
+    regions: [gov, gov2]
+  high_availability_datadog_agent:
+    regions: [gov, gov2]
+  iac_security:
+    regions: [gov, gov2]
+  incident_ai:
+    regions: [gov, gov2]
+  inferred_entity_remapping_rules:
+    regions: [gov, gov2]
+  idp:
+    regions: [gov, gov2]
+  ioc_explorer:
+    regions: [gov, gov2]
+  jetbrains-ides:
+    regions: [gov, gov2]
+  jira-service-management-ops:
+    regions: [gov, gov2]
+  jira_error_tracking:
+    regions: [gov, gov2]
+  launchdarkly:
+    regions: [gov, gov2]
+  linear:
+    regions: [gov, gov2]
+  linear_error_tracking:
+    regions: [gov, gov2]
+  live_debugger:
+    regions: [gov, gov2]
+  llm_observability:
+    regions: [gov, gov2]
+  dd.llm_observability.dataset:
+    regions: [gov, gov2]
+  mcp_server:
+    regions: [gov, gov2]
+  mobile_app_testing:
+    regions: [gov, gov2]
+  nebius-cloud:
+    regions: [gov, gov2]
+  network_config_management:
+    regions: [gov, gov2]
+  observability_pipelines:
+    regions: [gov, gov2]
+  on-call:
+    regions: [gov, gov2]
+  oracle-cloud-infrastructure:
+    regions: [gov, gov2]
+  oracle-fusion:
+    regions: [gov, gov2]
+  oracle_fusion_integration_setup:
+    regions: [gov, gov2]
+  ovhcloud:
+    regions: [gov, gov2]
+  pr_gates:
+    regions: [gov, gov2]
+  product_analytics:
+    regions: [gov, gov2]
+  recorded-future:
+    regions: [gov, gov2]
+  remote_config:
+    regions: [gov, gov2]
+  remote_config_for_fa:
+    regions: [gov, gov2]
+    description: "For the Guides page"
+  remote_configuration:
+    regions: [gov, gov2]
+  resource_based_sampling:
+    regions: [gov, gov2]
+  roku_error_tracking:
+    regions: [gov, gov2]
+  roku_log_collection:
+    regions: [gov, gov2]
+  rum_cpp:
+    regions: [gov, gov2]
+  rum_roku:
+    regions: [gov, gov2]
+  rum_server_auto_instrumentation:
+    regions: [gov, gov2]
+  rum_server_apache:
+    regions: [gov, gov2]
+  rum_server_ibm:
+    regions: [gov, gov2]
+  rum_server_java:
+    regions: [gov, gov2]
+  rum_server_nginx:
+    regions: [gov, gov2]
+  rum_server_windows_iis:
+    regions: [gov, gov2]
+  safety_center:
+    regions: [gov, gov2]
+  scaleway:
+    regions: [gov, gov2]
+  service_override_removal:
+    regions: [gov, gov2]
+  service_remapping_rules:
+    regions: [gov2]
+  setup_remote_config:
+    regions: [gov, gov2]
+  snmp_profile_manager:
+    regions: [gov, gov2]
+  software_delivery_mcp_tools:
+    regions: [gov, gov2]
+  status_pages:
+    regions: [gov, gov2]
+  storage_management:
+    regions: [gov, gov2]
+  supported_deployment_types:
+    regions: [gov, gov2]
+  synthetics_email_validation:
+    regions: [gov, gov2]
+  synthetics_safari:
+    regions: [gov, gov2]
+  test_optimization:
+    regions: [gov, gov2]
+  universal_service_monitoring:
+    regions: [gov, gov2]
+  watchdog_faulty_service_deployment:
+    regions: [us3, us5, eu, ap1, ap2, gov, gov2, uk1]
+  wiz:
+    regions: [gov, gov2]
+  workflow-automation:
+    regions: [gov, gov2]
+  workflows:
+    regions: [gov, gov2]
+  workload_security_active_protection:
+    regions: [gov, gov2]
+  work_management_ai_site_support:
+    regions: [gov, gov2]
