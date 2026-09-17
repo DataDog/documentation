@@ -74,7 +74,6 @@
       {{ partial "breadcrumbs.html" . }}
   </div>
 </div>
-{{ partial "site_support_banner/site_support_banner.html" . }}
 {{ .Content }}
 <div class="form-group clearfix">
   <input type="input" data-ref="search" class="form-control grouped-item-search mb-3 position-relative" id="keywords" placeholder="Search here" aria-label="keywords"/>
@@ -89,10 +88,18 @@
       {{ $icon_id := .icon.id }}
       {{ $icon_name := .icon.name }}
       {{ $icon_type := .icon.type }}
+      {{ $supported_regions := "us,us3,us5,eu,ap1,ap2,uk1" }}
+      {{ $gov_available := false }}
+      {{ if isset . "govAvailable" }}
+        {{ $gov_available = index . "govAvailable" }}
+      {{ end }}
+      {{ if $gov_available }}
+        {{ $supported_regions = printf "%s,gov,gov2" $supported_regions }}
+      {{ end }}
 
       {{ $logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" $icon_id "variant" "avatar" "fallback" "cloud") $icon_id "avatar" }}
       {{ $default_dd_logo_path := partialCached "integrations-logo.html" (dict "context" $dot "basename" "_datadog" "variant" "avatar" "fallback" "cloud") "_datadog" "avatar" }}
-      <div class="js-group js-group-{{ $workflow_title | anchorize }}" id="{{ $workflow_title | anchorize }}">
+      <div class="js-group js-group-{{ $workflow_title | anchorize }} d-none site-region-container" id="{{ $workflow_title | anchorize }}" data-region="{{ $supported_regions }}">
         <div class="group-header-container">
           <button class="js-group-header mb-1 d-flex align-items-center" aria-expanded="false" aria-label="Toggle {{ $workflow_title }} content">
             <div class="js-group-header__icon d-inline font-semibold h-100 text-uppercase px-2">
