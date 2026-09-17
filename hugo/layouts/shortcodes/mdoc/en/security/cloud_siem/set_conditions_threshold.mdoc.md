@@ -13,7 +13,7 @@
     - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`. To detect a silent source, use a below-threshold condition, such as `a < 1` or `a <= 0`.
       {% alert level="info" %}
       - The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
-      - For below-threshold cases such as `a < 1` or `a <= 0`, the sliding evaluation window must be empty of matching events before the case is true. After you enable the rule, it must match at least one event before a below-threshold condition can trigger a security signal. If you group by an attribute, Cloud SIEM only evaluates groups that have matching events.
+      - For below-threshold cases such as `a < 1` or `a <= 0`, after you enable the rule, it must match at least one event before it can evaluate a below-threshold condition. After this initial match, the rule triggers a security signal when the sliding evaluation window contains no matching events. If you group by an attribute, Cloud SIEM only evaluates groups that have matching events.
       {% /alert %}
 1. (Optional) In the **And notify** section, click **Add Recipient** to configure [notification targets][101].
     - You can also create [notification rules][102] to avoid manual edits to notification preferences for individual detection rules.
