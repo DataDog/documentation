@@ -111,11 +111,12 @@ After you select the Datadog Archives destination in the pipeline UI:
     - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
-    - **Note**: Rehydration only supports the following [storage classes][9]:
+    - **Note**: [Archive Search][16] only supports the following [storage classes][9]:
         - Standard
-        - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
         - Standard-IA
         - One Zone-IA
+        - Glacier Instant Retrieval
+        - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
     - If you wish to rehydrate from archives in another storage class, you must first move them to one of the supported storage classes above.
     - See the [Example destination and log archive setup](#example-destination-and-log-archive-setup) section of this page for how to configure your Log Archive based on your Amazon S3 destination setup.
 
@@ -220,7 +221,7 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [12]: /observability_pipelines/destinations/amazon_s3/
 [13]: https://app.datadoghq.com/observability-pipelines
 [14]: /api/latest/observability-pipelines/
-[16]: /logs/explorer/archive_search/
 [15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[16]: /logs/explorer/archive_search/
 [17]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [18]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
