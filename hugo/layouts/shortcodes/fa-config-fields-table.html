@@ -5,7 +5,7 @@
   the table of contents; call with Markdown-processing (percent-sign) delimiters.
   Each <table> is a contiguous raw-HTML block with no blank lines inside it.
 */ -}}
-{{- $data := .Site.Data.data_installer_config -}}
+{{- $data := .Site.Data.agent_config_schema -}}
 {{- $props := $data.properties -}}
 {{- $exclude := slice "config_id" -}}
 {{- $top := dict -}}

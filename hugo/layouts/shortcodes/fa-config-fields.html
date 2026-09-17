@@ -1,12 +1,12 @@
 {{- /*
   Renders the supported Fleet Automation datadog.yaml configuration fields as
   grouped definition lists, sourced from the config-validator schema vendored at
-  _vendor/data/data_installer_config.json (exposed as .Site.Data.data_installer_config).
+  _vendor/data/agent_config_schema.json (exposed as .Site.Data.agent_config_schema).
   Top-level scalar and array fields are shown first, then one section per
   nested-object field (apm_config, logs_config, and so on).
   Call with Markdown-processing (percent-sign) shortcode delimiters.
 */ -}}
-{{- $data := .Site.Data.data_installer_config -}}
+{{- $data := .Site.Data.agent_config_schema -}}
 {{- $props := $data.properties -}}
 {{- $exclude := slice "config_id" -}}
 {{- /* Split top-level fields into scalars/arrays (shown together) and objects (own sections). */ -}}

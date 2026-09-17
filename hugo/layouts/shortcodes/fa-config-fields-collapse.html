@@ -4,7 +4,7 @@
   <details> block matching the collapse-content shortcode's markup, with the
   field definition list inside. Call with raw-HTML (angle-bracket) delimiters.
 */ -}}
-{{- $data := .Site.Data.data_installer_config -}}
+{{- $data := .Site.Data.agent_config_schema -}}
 {{- $props := $data.properties -}}
 {{- $exclude := slice "config_id" -}}
 {{- /* Human-readable section titles per object key; unmapped keys fall back to the raw key. */ -}}
