@@ -694,6 +694,8 @@ service:
 {{% /tab %}}
 {{< /tabs >}}
 
+Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
+
 #### Key components
 
 To send telemetry data to Datadog, the following components are defined in the configuration:
@@ -974,3 +976,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [55]: /containers/datadog_operator
 [56]: https://kubernetes.io/docs/concepts/extend-kubernetes/operator/
 [57]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog-operator/README.md
+[58]: /opentelemetry/config/hostname_tagging/#ddot-collector-exporting-directly-to-datadog
