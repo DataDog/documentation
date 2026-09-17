@@ -116,6 +116,9 @@
         "sass": "^1.72.0",
         "serialize-javascript": "^2.1.2"
     },
+    "resolutions": {
+        "typesense@npm:3.0.1/axios": "1.18.0"
+    },
     "hugo-bin": {
         "buildTags": "extended,withdeploy"
     },
