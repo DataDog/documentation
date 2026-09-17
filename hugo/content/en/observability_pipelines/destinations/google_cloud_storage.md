@@ -97,6 +97,16 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
+## Using template syntax in Observability Pipelines for dynamic partitioning
+
+When you [set up the Google Cloud Storage destination](#set-up-the-destinations), you can use [template syntax][7] in the **Prefix** field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the **Prefix** field to route logs to the Log Archive for that specific attribute value.
+
+{{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
+
+However, you must manually create a Log Archive for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the **Path** field when you create the Log Archive.
+
+{{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
+
 ## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
