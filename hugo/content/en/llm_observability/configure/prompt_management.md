@@ -289,6 +289,12 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ## Version prompt configuration
 
+Configuration authoring must be enabled for your organization to use the configuration editor or send `config` in
+create-prompt and create-version requests. When disabled, requests that explicitly include `config`, including `{}`,
+return HTTP `403`. Omitting `config` still stores `{}` for a new prompt or inherits the latest version's configuration
+for a new version. Disabling configuration authoring does not remove configuration from saved versions or their delivery
+to applications.
+
 A prompt version contains its template and an optional customer-owned JSON configuration object. Keeping both values on
 the same immutable version prevents an environment from mixing settings from one version with a template from another.
 An environment selects, promotes, or rolls back the complete behavior bundle.
