@@ -1,107 +1,86 @@
 ---
 title: Visualize
+description: Choose a chart type, such as a timeseries, table, or treemap, to display your Product Analytics query results.
 aliases:
 - /product_analytics/analytics_explorer/visualize
-further_reading:
-- link: "/real_user_monitoring/explorer/search/"
-  tag: "Documentation"
-  text: "Search for your events"
 ---
 
-## Overview
+After building an analytics query, use the chart type selector to control how results display.
 
-Visualizations define the outcomes of the filters and aggregates displayed in the [Analytics Explorer][1]. Select the relevant visualization type to surface the information you need under the search query.
+Most chart types visualize a measure, a facet, or both:
+
+Measure
+: An attribute with a numerical value contained in your Product Analytics events, such as loading time.
+
+Facet
+: An attribute whose unique values you group or compare, such as country or browser.
+
+You can click into most chart components for more detail, such as the underlying events for a datapoint or a narrower time range. The available options vary by chart type.
+
+<div class="alert alert-tip">To see paginated, event-level results instead of an aggregated chart, use the {{< ui >}}Events{{< /ui >}} page. Events are ideal when individual results matter and you don't need prior knowledge of what defines a matching result.</div>
 
 ## Timeseries
 
-Visualize the evolution of a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) over a selected time frame.
+Visualize the evolution of a single measure or facet over a selected time frame.
 
-{{< img src="product_analytics/analytics/visualize/analytics-timeseries-2.png" alt="A view of the Timeseries graph in the Analytics Explorer" style="width:90%;" >}}
+Choose additional display options, such as:
 
-The timeseries graph depicts the evolution of the number of pageviews on an example web application over the past day for every view path.
+- Display: Results display as bars (recommended for counts and unique counts), lines (recommended for statistical aggregations), or areas. Several color sets are available.
+- Rollup interval: Determines the width of buckets in the bars.
 
-You can choose additional display options such as:
+{{< img src="product_analytics/analytics/visualize/analytics-timeseries-3.png" alt="A view of the Timeseries chart in the Analytics chart builder" style="width:90%;" >}}
 
-- Display: Results are shown as bars (recommended for counts and unique counts), lines (recommended for statistical aggregations), areas, and several color sets are available.
-- The roll-up interval: Determines the width of buckets in the bars.
+## Query value
+
+Display a single aggregated value for a measure or facet over the selected time frame. Query value charts don't support breakdowns.
+
+Optionally enable {{< ui >}}Change{{< /ui >}} to show how the value increased or decreased over a comparison period, such as the previous hour, day, or week.
+
+{{< img src="product_analytics/analytics/visualize/analytics-query-value-1.png" alt="A view of the Query value chart in the Analytics chart builder" style="width:90%;" >}}
 
 ## Top list
 
-Visualize the top values from a facet based on your chosen measure.
+Visualize an ordered ranking of a facet's top or bottom values by your chosen measure.
 
-{{< img src="product_analytics/analytics/visualize/analytics-top-list-2.png" alt="A view of the Top list bar graph in the Analytics Explorer" style="width:90%;" >}}
+{{< img src="product_analytics/analytics/visualize/analytics-top-list-3.png" alt="A view of the Top list chart in the Analytics chart builder" style="width:90%;" >}}
 
-The top list includes the top browsers used to visit the Shopist website over the last day.
+## Bar chart
 
-## Nested tables
+Compare a measure across the values of a facet using vertical columns.
 
-Visualize the top values from up to three facets according to your chosen measure (the first measure you choose in the list) and display the value of additional measures for elements that appear in the nested table. Update the search query or investigate the events corresponding to either dimension.
+{{< img src="product_analytics/analytics/visualize/analytics-bar-chart-1.png" alt="A view of the Bar chart in the Analytics chart builder" style="width:90%;" >}}
 
-* When there are multiple measures, the top or bottom list is determined according to the first measure.
-* The subtotal may differ from the actual sum of values in a group since only a subset (top or bottom) is displayed. Events with a null or empty value for this dimension are not displayed as a sub-group.
+## Table
 
- **Note**: A table visualization used for one single measure and one single dimension is the same as a [top list](#top-list), just with a different display.
+Visualize the top or bottom values from up to four facets, according to your chosen measure (the first measure you choose in the list). Additional measures display their values for elements that appear in the table. Update the search query or investigate the events corresponding to a dimension.
 
- The following Analytics table shows the **top 5 URL paths** for **two countries**, US and Japan, grouped by browser, over the last day:
+- When a table includes multiple measures, the top or bottom ranking is determined by the first measure.
+- The subtotal may differ from the actual sum of values in a group, since only a subset (top or bottom) displays. Events with a null or empty value for a dimension don't display as a subgroup.
 
-{{< img src="product_analytics/analytics/visualize/analytics-nested-table-2.png" alt="A view of the Nested table in the Analytics Explorer" style="width:90%;">}}
+<div class="alert alert-info">A table with a single measure and a single breakdown is equivalent to a <a href="#top-list">top list</a>, displayed differently.</div>
 
-## Distributions
+{{< img src="product_analytics/analytics/visualize/analytics-table-1.png" alt="A view of the Table chart in the Analytics chart builder" style="width:90%;">}}
 
-You can display the distribution of measure attributes over the selected time frame to see the values fluctuate. 
+## Change
 
-{{< img src="product_analytics/analytics/visualize/analytics-distribution.png" alt="Distribution graph in the Analytics Explorer" style="width:90%;">}}
+Show how a measure increased or decreased between the selected time period and a comparison period, such as the previous hour, day, or week. Optionally add a facet to see the change broken down by its values.
 
-The distribution graph displays the distribution of the Largest Contentful Paint that measures the user experience of the Shopist landing page. 
+{{< img src="product_analytics/analytics/visualize/analytics-change-1.png" alt="A view of the Change chart in the Analytics chart builder" style="width:90%;" >}}
 
-## Tree Maps
-A tree map helps you organize and show data as a percentage of a whole in a visually appealing format. Tree maps display data in nested rectangles. Compare different dimensions using both size and colors of the rectangles. You can also select multiple attributes to view a hierarchy of rectangles.
+## Treemap
 
-The following tree map shows the percentage breakdown by {{< ui >}}View Name{{< /ui >}}.
+A treemap helps you organize and show data as a percentage of a whole in a visually appealing format. Treemaps display data in nested rectangles. Compare different facets using both the size and color of the rectangles.
 
-{{< img src="product_analytics/analytics/visualize/analytics-tree-maps-1.png" alt="A view of the Tree map in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-treemap-1.png" alt="A view of the Treemap chart in the Analytics chart builder" style="width:90%;">}}
 
-## Pie charts
-A pie chart helps you organize and show data as a percentage of a whole. It is useful when comparing the relationship between different dimensions such as services, users, hosts, and countries. within your log data.
+## Pie chart
 
-The following pie chart shows the percentage breakdown by {{< ui >}}View Path{{< /ui >}}.
+A pie chart helps you organize and show data as a percentage of a whole. It's useful when comparing the relationship between different facets, such as countries, browsers, or view names.
 
-{{< img src="product_analytics/analytics/visualize/analytics-pie-chart-1.png" alt="A view of the Pie chart in the Analytics Explorer" style="width:90%;">}}
+{{< img src="product_analytics/analytics/visualize/analytics-pie-chart-2.png" alt="A view of the Pie chart in the Analytics chart builder" style="width:90%;">}}
 
-## Geomaps
+## Geomap
 
-Visualize a single measure (an attribute with a numerical value contained in your Product Analytics events), or a facet (unique count of values) on the world map.
+Visualize a single measure or facet on a world map.
 
-{{< img src="product_analytics/analytics/visualize/analytics-geomaps-1.png" alt="A view of the Geographical map in the Analytics Explorer" style="width:90%;">}}
-
-The Analytics geomap shows the 75th percentile of the **Largest Contentful Paint** over the past day.
-
-## Lists
-
-Lists are paginated results of events and are ideal when individual results matter. You do not need prior knowledge of what defines a matching result to use lists.
-
-{{< img src="product_analytics/analytics/visualize/analytics-lists.mp4" alt="A view of the Lists chart in the Analytics Explorer" video="true" style="width:70%;" >}}
-
-The information you search for is displayed in columns. You can manage the following:
-
-- The table with available interactions on the first row. You can sort, rearrange, and remove columns.
-- The facet dropdown at the top of each column.
-
-By default, events in the list visualization are organized by timestamp, with the most recent events listed first. You can sort events in any way you want, such as with facets. Surface events with the lowest or highest value for a measure first, then sort your events lexicographically for the unique value of a facet. This orders a column according to the facet.
-
-## Related events
-
-For all visualizations besides the [funnel][2], select a section of the graph or click on the graph to either zoom in or see a list of events that correspond to your selection.
-
-{{< img src="product_analytics/analytics/visualize/analytics-related-events.png" alt="Related events link available when you click on the graph" width="90%" >}}
-
-For funnel graphs, click on the graph to see a list of converted and dropped off sessions that correspond to your queries.
-
-For the remaining visualization options, click on the graph and click {{< ui >}}View events{{< /ui >}} to see a list of events that correspond to your selection. 
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/explorer
-[2]: /product_analytics/charts/funnel_analysis
+{{< img src="product_analytics/analytics/visualize/analytics-geomap-1.png" alt="A view of the Geomap chart in the Analytics chart builder" style="width:90%;">}}
