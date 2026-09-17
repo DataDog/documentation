@@ -8353,10 +8353,10 @@ menu:
       parent: vulnerabilities
       identifier: vulnerabilities_hosts_containers_compatibility
       weight: 101
-    - name: Critical Assets
-      url: security/cloud_security_management/critical_assets/
+    - name: Crown Jewels
+      url: security/cloud_security_management/crown_jewels/
       parent: csm
-      identifier: csm_critical_assets
+      identifier: csm_crown_jewels
       weight: 7
     - name: OOTB Rules
       url: security/default_rules/#cat-cloud-security-management
