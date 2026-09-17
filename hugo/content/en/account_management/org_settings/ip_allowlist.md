@@ -4,7 +4,7 @@ description: Control network access to Datadog by restricting API and UI access 
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
+The IP allowlist feature is available for customers on a Pro+ or Enterprise plan. To request access, contact support.
 {{< /callout >}}
 
 ## Overview
