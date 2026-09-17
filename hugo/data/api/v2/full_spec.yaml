@@ -227423,6 +227423,7 @@ paths:
       description: |-
         Get all teams.
         Can be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.
+        This temporary description change exercises SDK generation.
       operationId: ListTeams
       parameters:
         - $ref: "#/components/parameters/PageNumber"

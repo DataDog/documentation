@@ -7318,7 +7318,7 @@
     "request_schema_description": "The definition of `UpdateRulesetRequest` object."
   },
   "ListTeams": {
-    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
+    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.\nThis temporary description change exercises SDK generation.",
     "summary": "Get all teams"
   },
   "CreateTeam": {
