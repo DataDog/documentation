@@ -128,6 +128,8 @@ Managed prompts cannot reference other managed prompts in their templates. To co
 
 ### Insert runtime messages with a message placeholder
 
+Creating message placeholders and starting Playground or experiment runs with them requires the feature to be enabled for your organization. If access is disabled, saved templates remain readable and compatible SDKs can continue formatting previously deployed prompts.
+
 Use a message placeholder when a managed chat prompt must include per-request conversation history or another runtime message list. Every inserted message must have a string `role` and either string `content` or a non-empty `tool_calls` or `tool_results` list. `content` can be `null` or omitted when tool content is present. Add the placeholder as a complete item in the existing chat-template array:
 
 ```json
