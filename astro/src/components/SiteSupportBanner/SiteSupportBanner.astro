@@ -1,0 +1,55 @@
+---
+/**
+ * Caution banner for a product or feature that is not supported on the
+ * reader's selected Datadog site. Mirrors Hugo's
+ * `partials/site_support_banner/site_support_banner.html`.
+ *
+ * One element renders per unsupported region, each hidden by default; the CSS
+ * generated in BaseLayout reveals only the one matching
+ * `html[data-active-region]`. Hugo instead emits a single element whose
+ * `data-region` is a comma-joined list, which works there because its client JS
+ * does substring matching. Astro's reveal rules compare exact values, so the
+ * variants are split out — and splitting them also lets the site name be
+ * resolved at build time instead of stamped in by client JS.
+ *
+ * That site name is where this departs from Hugo in mechanism but not in
+ * result. Hugo renders an empty `region-param` span and fills it at runtime;
+ * here each variant already knows its own region, so the label is baked in.
+ */
+import Alert from "@components/Alert/Alert.astro";
+import styles from "./SiteSupportBanner.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { getUnsupportedRegions } from "@config/siteSupport";
+import { datacenterLabel } from "@config/regions";
+import { useTranslations } from "@lib/i18n/i18n";
+
+interface Props {
+  /** Page path, used for the `url_paths` resolution tier. */
+  pathname: string;
+  /** The page's `site_support_id` frontmatter, if it has one. */
+  siteSupportId?: string;
+}
+
+const { pathname, siteSupportId } = Astro.props;
+
+const unsupportedRegions = getUnsupportedRegions(pathname, siteSupportId);
+const translate = useTranslations(Astro.currentLocale);
+// The string contains a link to the site-selection docs, so it is inserted as
+// HTML. It comes from `shared/i18n`, not from page content.
+const bannerHtml = translate("site_support_banner");
+const cl = classListFactory(styles);
+---
+
+{
+  unsupportedRegions.map((regionKey) => (
+    <div
+      class={cl("site-support-banner")}
+      data-region={regionKey}
+      data-nosnippet
+    >
+      <Alert level="danger">
+        <span set:html={bannerHtml} /> ({datacenterLabel(regionKey)}).
+      </Alert>
+    </div>
+  ))
+}

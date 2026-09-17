@@ -28,6 +28,9 @@ const en = defineCollection({
     content_filters: z.array(contentFilterSchema).optional(),
     // Preserved from Hugo but unused in the PoC (redirects handled later).
     aliases: z.array(z.string()).optional(),
+    // Names a key in `shared/site_support.yaml`, for the site-support banner.
+    // Pages under a path covered by that key's `url_paths` need not set it.
+    site_support_id: z.string().optional(),
     // Pages only reachable through a filtered parent view.
     private: z.boolean().optional(),
     further_reading: z

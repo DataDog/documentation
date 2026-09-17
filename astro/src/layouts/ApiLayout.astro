@@ -5,6 +5,7 @@ import { getOverviewPages, resolveOverviewState } from "@lib/api/overviewPages";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
+import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolveLocale, stripLocalePrefix } from "@lib/i18n/locale";
@@ -68,6 +69,11 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
           <RegionSelectorIsland />
         </div>
       </div>
+      {
+        /* Outside `.prose` so the `h1:first-child` rule below still matches
+        the page's heading rather than the banner. */
+      }
+      <SiteSupportBanner pathname={Astro.url.pathname} />
       <div class="prose">
         <slot />
       </div>

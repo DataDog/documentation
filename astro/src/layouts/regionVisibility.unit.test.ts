@@ -51,3 +51,34 @@ describe("BaseLayout region visibility", () => {
     expect(emitted.filter((k) => !known.has(k))).toEqual([]);
   });
 });
+
+/**
+ * The site-support banner rides the same region-visibility mechanism: it
+ * renders one `[data-region]` element per unsupported region and relies on the
+ * generated CSS above to reveal the matching one.
+ *
+ * It lives in the *content column* (ApiLayout / the cdoc page), not in
+ * BaseLayout, so it is bounded by the same column as Hugo's banner instead of
+ * spanning the full page width above the side nav. These tests pin that: the
+ * banner must NOT come from BaseLayout.
+ *
+ * The banner's own rendering is covered in
+ * `src/components/SiteSupportBanner/tests/unit.test.ts`, and its placement in
+ * the API column by `src/layouts/apiLayoutBanner.unit.test.ts`.
+ */
+describe("BaseLayout site-support banner", () => {
+  it("does not render the banner itself", async () => {
+    // BaseLayout has no pathname-derived banner: putting it here made it span
+    // the full page width, above the side nav and breadcrumb.
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    const html = await container.renderToString(BaseLayout, {
+      props: { title: "Test page" },
+      request: new Request("https://docs.example.com/fake/scoped/deep/page"),
+    });
+    expect(html).not.toContain('class="site-support-banner');
+  });
+});

@@ -315,5 +315,11 @@
   },
   "alert_tip": {
     "other": "TIP"
+  },
+  "site_support_banner": {
+    "other": "This product is not supported for your selected <a href=\"/getting_started/site\">Datadog site</a>."
+  },
+  "site_support_banner_plaintext": {
+    "other": "This product or feature is not supported for the following sites:"
   }
 }

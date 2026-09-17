@@ -12,6 +12,7 @@ export const prerender = false;
 
 import { getEntry, render } from "astro:content";
 import BaseLayout from "@layouts/BaseLayout.astro";
+import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import CdocsFilterBar from "@components/CdocsFilterBar/CdocsFilterBar";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
 import { resolveCdocRender } from "@lib/cdocs/resolveCdocRender";
@@ -85,6 +86,10 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
 >
   <div class="cdoc-layout">
     <main class="cdoc">
+      <SiteSupportBanner
+        pathname={Astro.url.pathname}
+        siteSupportId={entry.data.site_support_id}
+      />
       <h1 transition:name="cdoc-title">{entry.data.title}</h1>
       {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
       <div class="cdoc__content" transition:name="cdoc-content">
