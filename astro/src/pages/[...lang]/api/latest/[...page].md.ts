@@ -4,7 +4,8 @@ export const prerender = true;
 import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection, getEntry } from "astro:content";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { format, parse } from "@lib/plaintext/helpers";
+import { buildMarkdocStr, parse } from "@lib/plaintext/helpers";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import { API_CONTENT_DIR, isApiSubPage } from "@lib/api/overviewPages";
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -23,7 +24,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, url }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -39,7 +40,10 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = format(parse(entry.body ?? "")).trim() + "\n";
+  const body = buildMarkdocStr([
+    ...siteSupportNoteNodes(url.pathname, lang, entry.data.site_support_id),
+    ...parse(entry.body ?? "").children,
+  ]);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

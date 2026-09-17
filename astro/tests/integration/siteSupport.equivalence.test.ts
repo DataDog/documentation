@@ -120,3 +120,50 @@ describe("the banner string matches Hugo's site params", () => {
     expect(sharedI18n[lang]).toBe(hugoParamsByLocale[lang]);
   });
 });
+
+/**
+ * Astro resolves a page's support status from `url_paths` only. Hugo instead
+ * walks the page's path segments and matches any segment against a key name,
+ * so in Hugo a key called `on-call` implicitly covers `/api/latest/on-call`
+ * with no `url_paths` at all.
+ *
+ * That implicit behavior is what Astro deliberately drops (see the design
+ * notes). The risk is a key whose *name* happens to match an API category
+ * slug: Hugo would banner that page, Astro would not. This test names the
+ * exact set that is allowed to rely on paths, so adding a key that collides
+ * with an API slug fails here rather than quietly diverging.
+ */
+describe("no key name silently covers an API page", () => {
+  const KEYS_WITH_PATHS = [
+    "agentless-scanning",
+    "app_builder_override",
+    "on-call",
+    "workflow-automation",
+  ];
+
+  it("pins the set of keys carrying url_paths", () => {
+    const withPaths = Object.entries(sharedIds)
+      .filter(([, entry]) => (entry.url_paths?.length ?? 0) > 0)
+      .map(([id]) => id)
+      .sort();
+    expect(withPaths).toEqual([...KEYS_WITH_PATHS].sort());
+  });
+
+  it("gives every API-slug-shaped key an explicit url_paths", async () => {
+    // Any key whose name matches an API category slug is one Hugo's segment
+    // walk would banner implicitly. Astro only matches `url_paths`, so such a
+    // key must carry them or that page loses its banner.
+    const { getCategoryStubsView } = await import("@lib/api/viewsBuilder");
+    const slugs = new Set(
+      (await getCategoryStubsView("en")).map((cat) => cat.slug),
+    );
+
+    const collidesButHasNoPaths = Object.entries(sharedIds)
+      .filter(
+        ([id, entry]) => slugs.has(id) && (entry.url_paths?.length ?? 0) === 0,
+      )
+      .map(([id]) => id);
+
+    expect(collidesButHasNoPaths).toEqual([]);
+  }, 30_000); // Builds the category view from the full live API spec.
+});

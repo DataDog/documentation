@@ -205,15 +205,24 @@ export function getUnsupportedRegions(
 }
 
 /**
- * Drop a trailing slash so `/api/latest/on-call/` and `/api/latest/on-call`
- * match the same pattern. Astro emits directory-style URLs, while the patterns
- * in the dataset are written without the trailing slash.
+ * Reduce a request path to the form the dataset's patterns are written in.
+ *
+ * Two things are stripped:
+ *   - A trailing slash, because Astro emits directory-style URLs while the
+ *     patterns are written without one.
+ *   - A trailing `.md`, because the plaintext twin of every page is served at
+ *     `<path>.md`. Without this, no `.md` route would ever match a pattern and
+ *     the plaintext note would silently never render.
  */
 function normalizePath(pathname: string): string {
-  if (pathname.length > 1 && pathname.endsWith("/")) {
-    return pathname.slice(0, -1);
+  let normalized = pathname;
+  if (normalized.endsWith(".md")) {
+    normalized = normalized.slice(0, -".md".length);
   }
-  return pathname;
+  if (normalized.length > 1 && normalized.endsWith("/")) {
+    normalized = normalized.slice(0, -1);
+  }
+  return normalized;
 }
 
 /** The parsed dataset, for the equivalence and divergence tests. */

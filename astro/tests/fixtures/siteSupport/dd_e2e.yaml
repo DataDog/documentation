@@ -9,5 +9,7 @@ site_support_ids:
   dd_e2e_unsupported_product:
     regions: [gov, gov2]
     url_paths:
+      # The `.mdoc` content page (which covers the `.md` twin) and the `.astro`
+      # page (which carries a region selector, for the interactive tests).
       - /dd_e2e/components/site-support
-      - /dd_e2e/components/site-support/**
+      - /dd_e2e/components/site-support-banner

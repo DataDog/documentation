@@ -13,6 +13,7 @@ import type { ApiCategoryStub } from "@lib/api/schemas/views";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
 import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 import {
   buildMarkdocStr,
   heading,
@@ -23,7 +24,11 @@ import {
   paragraphFromText,
 } from "@lib/plaintext/helpers";
 
-function apiLandingBody(categories: ApiCategoryStub[], lang: Locale): string {
+function apiLandingBody(
+  categories: ApiCategoryStub[],
+  lang: Locale,
+  pathname: string,
+): string {
   const items = categories.map((cat) => {
     const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
     return listItem([inline([link(href, cat.name)])]);
@@ -31,6 +36,7 @@ function apiLandingBody(categories: ApiCategoryStub[], lang: Locale): string {
 
   const contents: MarkdocNode[] = [
     heading(1, "API Reference"),
+    ...siteSupportNoteNodes(pathname, lang),
     paragraphFromText(
       "Welcome to the Datadog API Reference. Select a category to get started.",
     ),
@@ -46,14 +52,14 @@ export const getStaticPaths: GetStaticPaths = () => {
   }));
 };
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, url }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
   }
 
   const categories = await getCategoryStubsView(lang);
-  const body = apiLandingBody(categories, lang);
+  const body = apiLandingBody(categories, lang, url.pathname);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

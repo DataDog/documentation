@@ -81,6 +81,7 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, "")}.md${Astro.url.se
   title={entry.data.title}
   description={entry.data.description}
   canonical={canonicalUrl.href}
+  siteSupportId={entry.data.site_support_id}
   enableViewTransitions
 >
   <div class="cdoc-layout">

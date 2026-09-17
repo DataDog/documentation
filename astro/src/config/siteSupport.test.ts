@@ -51,6 +51,23 @@ describe("getUnsupportedRegions", () => {
     });
   });
 
+  describe("the .md plaintext routes", () => {
+    it("resolves a .md path the same as its HTML path", () => {
+      // The `.md` twins are served at `<path>.md`, so the extension has to be
+      // stripped or every plaintext page would silently skip the banner.
+      expect(getUnsupportedRegions("/fake/scoped/deep.md")).toEqual(["gov"]);
+      expect(getUnsupportedRegions("/fake/single.md")).toEqual(["gov2"]);
+    });
+
+    it("resolves a locale-prefixed .md path", () => {
+      expect(getUnsupportedRegions("/fr/fake/scoped/deep.md")).toEqual(["gov"]);
+    });
+
+    it("does not strip a non-.md suffix", () => {
+      expect(getUnsupportedRegions("/fake/scopedother.md")).toEqual([]);
+    });
+  });
+
   describe("locale prefixes", () => {
     it("resolves a prefixed path identically to an unprefixed one", () => {
       for (const lang of ["fr", "es", "ja", "ko"]) {

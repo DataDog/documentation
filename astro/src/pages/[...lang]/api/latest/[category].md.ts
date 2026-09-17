@@ -20,11 +20,19 @@ import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
 import { buildMarkdocStr, heading, nodesFromMd } from "@lib/plaintext/helpers";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 
-function apiCategoryBody(category: ApiCategory, lang: Locale): string {
+function apiCategoryBody(
+  category: ApiCategory,
+  lang: Locale,
+  pathname: string,
+): string {
   const categoryBaseHref = localizedHref(lang, `/api/latest/${category.slug}/`);
 
-  const contents: MarkdocNode[] = [heading(1, category.name)];
+  const contents: MarkdocNode[] = [
+    heading(1, category.name),
+    ...siteSupportNoteNodes(pathname, lang),
+  ];
 
   if (category.deprecated) {
     contents.push(
@@ -65,7 +73,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, url }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -81,7 +89,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = apiCategoryBody(category, lang);
+  const body = apiCategoryBody(category, lang, url.pathname);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
