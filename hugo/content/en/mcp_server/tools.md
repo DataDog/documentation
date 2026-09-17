@@ -1344,7 +1344,7 @@ Tools for debugging running applications with [Live Debugger][77] logpoints, whi
 
 ### `discover_datadog_logpoint`
 *Toolset: **live-debugger***\
-*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
 Discovers the deployment environments and supported features for a service running [Live Debugger][77]. The response lists every environment where the service runs and the features each one supports (for example, `message_templates`, `conditions`, and `capture_expressions`). Call this tool before `create_datadog_logpoint`, and only create logpoints in environments that report `can_create_logpoints: true`.
 
 - Which environments can I debug for the checkout service?
@@ -1352,7 +1352,7 @@ Discovers the deployment environments and supported features for a service runni
 
 ### `enable_live_debugger`
 *Toolset: **live-debugger***\
-*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
 Enables [Live Debugger][77] (dynamic instrumentation) for a service in a specific environment. Call this tool only when `discover_datadog_logpoint` reports `implicitly_enableable: true` for the environment. The tool waits up to 3 minutes for the tracers to begin reporting Live Debugger capabilities. After Live Debugger is enabled, run `discover_datadog_logpoint` again before creating logpoints.
 
 - Enable Live Debugger for the checkout service in `staging`.
@@ -1360,7 +1360,7 @@ Enables [Live Debugger][77] (dynamic instrumentation) for a service in a specifi
 
 ### `create_debugger_session`
 *Toolset: **live-debugger***\
-*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
 Creates a [Live Debugger][77] session. Create a session after calling `discover_datadog_logpoint` and before creating your first logpoint, then reuse the returned `session_id` for every subsequent Live Debugger tool call. If a `session_id` is already available, use it instead of creating another session.
 
 - Create a debugging session so I can add logpoints to the checkout service.
@@ -1368,7 +1368,7 @@ Creates a [Live Debugger][77] session. Create a session after calling `discover_
 
 ### `create_datadog_logpoint`
 *Toolset: **live-debugger***\
-*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
 Creates a logpoint, a non-breaking breakpoint in a deployed service that captures runtime variables and execution state in real time, without source code changes or redeployment. Use it when the data you need isn't already in logs, metrics, or traces. Call `discover_datadog_logpoint` first. Logpoints can only be created in environments that report `can_create_logpoints: true` and take about 30 seconds to propagate before they begin capturing data.
 
 - Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
@@ -1392,7 +1392,7 @@ Retrieves captured variable data from a [Live Debugger][77] snapshot. Use variab
 
 ### `disable_datadog_logpoints`
 *Toolset: **live-debugger***\
-*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
 Disables all logpoints in a [Live Debugger][77] session. The session stays active so new logpoints can be added.
 
 - Disable all logpoints in session `session-12345`.
