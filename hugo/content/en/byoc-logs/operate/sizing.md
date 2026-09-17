@@ -36,7 +36,7 @@ Use these totals as a starting point:
 
 - **Indexers:** 2 vCPUs per TB/day
 - **Compactors:** 1 vCPU per 2 TB/day
-- **Searchers:** about twice the indexer vCPU total. Analytics-heavy workloads may need up to twice the searcher capacity in the table.
+- **Searchers:** about twice the indexer vCPU total. Analytics-heavy workloads may need up to twice the values shown in the table.
 
 Object storage totals assume 30-day retention and a 6x compression ratio.
 
@@ -89,7 +89,7 @@ Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with
 
 Size searchers for the expected search workload, not ingest volume alone. A starting point is about twice the indexer vCPU total.
 
-- **Performance:** Term queries (`status:error AND message:exception`) usually cost less CPU than wildcard or whole-event searches. Aggregation queries need more CPU and memory.
+- **Performance:** Term queries (`status:error AND message:exception`) usually use less CPU than wildcard or whole-event searches. Aggregation queries need more CPU and memory.
 - **Memory:** 4 GB RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
 If search latency is high, add searcher replicas or increase memory per pod. See [Scale searchers based on your query patterns][4].
@@ -114,7 +114,7 @@ Enable automated backups on the metastore database. See [Enable automated backup
 
 ### Object storage
 
-BYOC Logs compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, or about 125-200 GB stored per TB ingested per day.
+BYOC Logs compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
 
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
