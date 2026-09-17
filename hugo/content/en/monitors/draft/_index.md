@@ -65,7 +65,7 @@ A user with only the Draft Monitors Write permission cannot:
 
 These restrictions apply in both the Datadog UI and API.
 
-**Note**: The Draft Monitors Write permission is currently in private beta.
+**Note**: The Draft Monitors Write permission is in private beta.
 
 ## Best practices
 
