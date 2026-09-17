@@ -46,6 +46,8 @@ This is the recommended setup for a Collector you manage yourself. If you want a
 
 The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
 
+For cluster-wide Kubernetes metrics and Kubernetes Explorer, see [Kubernetes Metrics][13].
+
 <div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
 ## Prerequisites

@@ -20,7 +20,7 @@ Use OpenTelemetry to send Kubernetes data to Datadog without installing the Data
 | Goal | Components | Setup |
 |---|---|---|
 | View pods, deployments, and other resource data in Kubernetes Explorer | One cluster Collector with the `k8sobjects` receiver | [Send Kubernetes resources over OTLP][15] |
-| Populate Kubernetes dashboards and Kubernetes Explorer | `kube-state-metrics`, one cluster Collector, and one node Collector per node | Follow this guide |
+| Populate Datadog's out-of-the-box Kubernetes dashboards | `kube-state-metrics`, one cluster Collector, and one node Collector per node | Follow this guide |
 
 The full setup below collects Kubernetes infrastructure metrics for the [Kubernetes - Overview][1] dashboard and resource data for [Kubernetes Explorer][10]. It does not instrument your applications.
 
@@ -32,7 +32,7 @@ The setup uses three components:
 - **A cluster Collector**, running as a single-replica Deployment, collects cluster-wide metrics and resource data for Explorer.
 - **A node Collector**, running as a DaemonSet, collects metrics from each node, such as CPU and memory usage.
 
-The cluster Collector scrapes `kube-state-metrics` with its Prometheus receiver. You do not need to install a Prometheus server.
+The cluster Collector scrapes `kube-state-metrics` with its Prometheus receiver. You do not need to install a Prometheus server. These metrics populate the dashboards linked from Kubernetes Explorer. The `k8sobjects` receiver supplies Explorer's resource data.
 
 ## Setup
 
