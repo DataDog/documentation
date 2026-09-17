@@ -40,11 +40,11 @@ Use these totals as a starting point:
 
 Object storage totals assume 30-day retention and a 6x compression ratio.
 
-|   Daily volume | Indexers | Compactors | Searchers | Object storage |
-|---------------:|---------:|-----------:|----------:|---------------:|
-|   **1 TB/day** |   2 vCPU |   0.5 vCPU |    4 vCPU |          ~5 TB |
-|  **10 TB/day** |  20 vCPU |     5 vCPU |   40 vCPU |         ~50 TB |
-| **100 TB/day** | 200 vCPU |    50 vCPU |  400 vCPU |        ~500 TB |
+|   Daily volume |  Indexers | Compactors |  Searchers | Object storage |
+|---------------:|----------:|-----------:|-----------:|---------------:|
+|   **1 TB/day** |   2 vCPUs |   0.5 vCPUs |    4 vCPUs |          ~5 TB |
+|  **10 TB/day** |  20 vCPUs |     5 vCPUs |   40 vCPUs |         ~50 TB |
+| **100 TB/day** | 200 vCPUs |    50 vCPUs |  400 vCPUs |        ~500 TB |
 
 Recommended size for each pod:
 
@@ -59,7 +59,7 @@ Recommended size for each pod:
 
 ## Size each component
 
-The following sections explain how to adjust the starter configuration. For the role of each component, see [Architecture][2].
+Adjust the starter configuration component by component. For the role each component plays, see [Architecture][2].
 
 ### Indexers
 
@@ -83,7 +83,7 @@ Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with
 
 - **Performance:** 1 vCPU per 2 TB/day
 - **Memory:** 4 GB RAM per vCPU
-- **Storage type:** Local SSD. Instances with local SSDs, such as AWS M8gd, are recommended.
+- **Storage type:** Local SSD. Use instances with local SSDs, such as AWS M8gd.
 
 ### Searchers
 
@@ -107,7 +107,7 @@ Allocate the following resources for these lightweight components:
 ### PostgreSQL database
 
 - **Instance size:** For most use cases, a PostgreSQL instance with 1 vCPU and 4 GB of RAM is sufficient.
-- **AWS RDS recommendation:** If using AWS RDS, the `t4g.medium` instance type is a suitable starting point.
+- **Amazon RDS recommendation:** On Amazon RDS, start with the `t4g.medium` instance type.
 - **High availability:** Enable Multi-AZ deployment with one standby replica.
 
 Enable automated backups on the metastore database. See [Enable automated backups on your metastore database][5].
@@ -140,7 +140,7 @@ Set `indexer.podSize` and `searcher.podSize` to match the per-pod CPU and memory
 | `8xlarge` | 32 | 128Gi |
 
 {{% collapse-content title="Actual Kubernetes requests" level="h3" expanded=false %}}
-Requests are lower than the nominal values above, to leave room for kube-system, DaemonSets, and add-ons. The reservation amounts are based on the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations). An additional 250m CPU and 512Mi memory per node is reserved for DaemonSets and add-ons.
+Each `podSize` requests less than its nominal CPU and memory, to leave room for kube-system, DaemonSets, and add-ons. The reservation amounts follow the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations), plus 250m CPU and 512Mi memory per node for DaemonSets and add-ons.
 
 | `podSize` | Actual CPU request | Actual memory request/limit |
 |---|---:|---:|
