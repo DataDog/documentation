@@ -89,11 +89,11 @@ gem "datadog-ci", "~> 1.0", group: :test
    RUBYOPT="-rbundler/setup -rdatadog/ci/auto_instrument" bundle exec rake test
    ```
 
-4. (Optional) If you prefer not to set the `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
+   **Note**: If you prefer not to set the `RUBYOPT` environment variable, prepend `bundle exec ddcirb exec` to your test command:
 
-```bash
-bundle exec ddcirb exec rake test
-```
+   ```bash
+   bundle exec ddcirb exec rake test
+   ```
 
 ## Configuration settings
 
