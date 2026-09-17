@@ -3,6 +3,7 @@ if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
+import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 
 const title = "SiteSupportBanner";
 ---
@@ -10,6 +11,7 @@ const title = "SiteSupportBanner";
 <BaseLayout title={title}>
   <div class="docs-page">
     <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
+    <SiteSupportBanner pathname={Astro.url.pathname} />
     <div class="prose">
       <h1>SiteSupportBanner</h1>
 

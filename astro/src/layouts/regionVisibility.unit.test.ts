@@ -57,50 +57,28 @@ describe("BaseLayout region visibility", () => {
  * renders one `[data-region]` element per unsupported region and relies on the
  * generated CSS above to reveal the matching one.
  *
- * These read the frozen fixture, not real product data —
- * `vitest.unit.config.ts` redirects `@shared/site_support.yaml`.
+ * It lives in the *content column* (ApiLayout / the cdoc page), not in
+ * BaseLayout, so it is bounded by the same column as Hugo's banner instead of
+ * spanning the full page width above the side nav. These tests pin that: the
+ * banner must NOT come from BaseLayout.
+ *
+ * The banner's own rendering is covered in
+ * `src/components/SiteSupportBanner/tests/unit.test.ts`, and its placement in
+ * the API column by `src/layouts/apiLayoutBanner.unit.test.ts`.
  */
 describe("BaseLayout site-support banner", () => {
-  async function renderAt(
-    pathname: string,
-    props: Record<string, unknown> = {},
-  ): Promise<string> {
+  it("does not render the banner itself", async () => {
+    // BaseLayout has no pathname-derived banner: putting it here made it span
+    // the full page width, above the side nav and breadcrumb.
     const container = await AstroContainer.create();
     container.addServerRenderer({
       renderer: preactRenderer,
       name: "@astrojs/preact",
     });
-    return container.renderToString(BaseLayout, {
-      props: { title: "Test page", ...props },
-      request: new Request(`https://docs.example.com${pathname}`),
+    const html = await container.renderToString(BaseLayout, {
+      props: { title: "Test page" },
+      request: new Request("https://docs.example.com/fake/scoped/deep/page"),
     });
-  }
-
-  it("renders the banner for a path matching url_paths", async () => {
-    const html = await renderAt("/fake/scoped/deep/page");
-    expect(html).toContain("site-support-banner");
-  });
-
-  it("renders no banner for an unaffected path", async () => {
-    const html = await renderAt("/totally/unrelated");
-    expect(html).not.toContain("site-support-banner");
-  });
-
-  it("resolves the siteSupportId prop ahead of the path", async () => {
-    const html = await renderAt("/totally/unrelated", {
-      siteSupportId: "fake_product",
-    });
-    expect(html).toContain(`data-region="gov2"`);
-  });
-
-  it("places the banner inside the body wrapper, above the page slot", async () => {
-    // Hugo puts the banner at the top of the content area. Keeping it inside
-    // `.base-layout__body` means it sits below the fixed header rather than
-    // under it.
-    const html = await renderAt("/fake/scoped/deep/page");
-    const bodyIdx = html.indexOf("base-layout__body");
-    const bannerIdx = html.indexOf("site-support-banner");
-    expect(bodyIdx).toBeGreaterThan(-1);
-    expect(bannerIdx).toBeGreaterThan(bodyIdx);
+    expect(html).not.toContain('class="site-support-banner');
   });
 });

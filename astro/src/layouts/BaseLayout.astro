@@ -11,7 +11,6 @@ import {
 import { DevBadge } from "@components/DevBadge/DevBadge";
 import Telemetry from "@components/Telemetry/Telemetry.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
-import SiteSupportBanner from "@components/SiteSupportBanner/SiteSupportBanner.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
 import {
@@ -45,11 +44,6 @@ interface Props {
    * instead of a full-page blink. Off by default so other routes are unaffected.
    */
   enableViewTransitions?: boolean;
-  /**
-   * The page's `site_support_id` frontmatter, for the site-support banner.
-   * Pages without one resolve by path instead, so this is rarely needed.
-   */
-  siteSupportId?: string;
 }
 
 const {
@@ -61,7 +55,6 @@ const {
   hreflang,
   announcementBanner,
   enableViewTransitions = false,
-  siteSupportId,
 } = Astro.props;
 
 // Resolve the banner the same way the component does, so the body's
@@ -209,10 +202,6 @@ const activeRegionSelectors = allowedRegions
     <AnnouncementBanner override={announcementBanner} />
     <Header />
     <div class="base-layout__body">
-      <SiteSupportBanner
-        pathname={Astro.url.pathname}
-        siteSupportId={siteSupportId}
-      />
       <slot />
     </div>
     <Footer />
