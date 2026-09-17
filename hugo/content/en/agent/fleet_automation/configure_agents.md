@@ -65,13 +65,31 @@ Fleet Automation provides an API to apply configuration updates programmatically
 
 **Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API. See [Supported `datadog.yaml` configuration fields](#supported-datadogyaml-configuration-fields).
 
-## Supported `datadog.yaml` configuration fields
+<!-- TEMPORARY: table version below for comparison; remove before merge -->
+## Supported `datadog.yaml` configuration fields (table)
+
+Fleet Automation supports a subset of `datadog.yaml` fields. When writing your configuration, see the following tables for which fields are supported.
+
+Any `datadog.yaml` change you supply through Fleet Automation is validated against a schema, and any field not listed here is rejected.
+
+{{% fa-config-fields-table %}}
+
+## Supported `datadog.yaml` configuration fields (list)
 
 Fleet Automation supports a subset of `datadog.yaml` fields. When writing your configuration, see the following tables for which fields are supported.
 
 Any `datadog.yaml` change you supply through Fleet Automation is validated against a schema, and any field not listed here is rejected.
 
 {{% fa-config-fields %}}
+
+<!-- TEMPORARY: collapsible definition-list version below for comparison; remove before merge -->
+## Supported `datadog.yaml` configuration fields (collapsible)
+
+Fleet Automation supports a subset of `datadog.yaml` fields. When writing your configuration, expand a section below to see which fields are supported.
+
+Any `datadog.yaml` change you supply through Fleet Automation is validated against a schema, and any field not listed here is rejected.
+
+{{< fa-config-fields-collapse >}}
 
 ## Configuration precedence
 

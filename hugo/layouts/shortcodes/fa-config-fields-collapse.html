@@ -1,0 +1,71 @@
+{{- /*
+  TEMPORARY collapsible variant of fa-config-fields.html, for comparing layouts.
+  Renders each section (top-level fields, apm_config, and so on) as a collapsed
+  <details> block matching the collapse-content shortcode's markup, with the
+  field definition list inside. Call with raw-HTML (angle-bracket) delimiters.
+*/ -}}
+{{- $data := .Site.Data.data_installer_config -}}
+{{- $props := $data.properties -}}
+{{- $exclude := slice "config_id" -}}
+{{- /* Human-readable section titles per object key; unmapped keys fall back to the raw key. */ -}}
+{{- $titles := dict
+  "apm_config" "APM"
+  "compliance_config" "Compliance"
+  "container_image" "Container Image"
+  "enable_payloads" "Enable Payloads"
+  "ha_agent" "HA Agent"
+  "logs_config" "Logs"
+  "network_devices" "Network Devices"
+  "network_path" "Network Path"
+  "observability_pipelines_worker" "Observability Pipelines Worker"
+  "private_action_runner" "Private Action Runner"
+  "process_config" "Process Monitoring"
+  "runtime_security_config" "Runtime Security"
+  "sbom" "SBOM"
+  "synthetics" "Synthetics"
+-}}
+{{- $top := dict -}}
+{{- $objects := dict -}}
+{{- range $k, $v := $props -}}
+{{- if not (in $exclude $k) -}}
+{{- $tp := $v.type -}}
+{{- if not (reflect.IsSlice $tp) }}{{ $tp = slice $tp }}{{ end -}}
+{{- $t := "" -}}
+{{- range $tp }}{{ if ne . "null" }}{{ $t = . }}{{ end }}{{ end -}}
+{{- if and (eq $t "object") $v.properties -}}
+{{- $objects = merge $objects (dict $k $v) -}}
+{{- else -}}
+{{- $top = merge $top (dict $k $v) -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- /* Reusable chevron + details wrapper. $title is HTML, $body is Markdown. */ -}}
+{{- define "_facollapse" -}}
+<details class="collapsible-section">
+  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+    <div class="header-content">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
+          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </div>
+      <div class="header-text">
+        <h3 class="header-text-inner">{{ .title | safeHTML }}</h3>
+      </div>
+    </div>
+  </summary>
+  <div class="collapsible-content">
+    {{ .body | markdownify }}
+  </div>
+</details>
+{{- end -}}
+{{- $topMd := partial "fa-config-rows.html" (dict "props" $top "prefix" "") -}}
+{{- template "_facollapse" (dict "title" "Top-level fields" "body" $topMd) -}}
+{{- range $k, $v := $objects -}}
+{{- $body := partial "fa-config-rows.html" (dict "props" $v.properties "prefix" (printf "%s." $k)) -}}
+{{- with $v.description }}{{ $body = printf "%s\n\n%s" . $body }}{{ end -}}
+{{- $friendly := index $titles $k -}}
+{{- $title := printf "<code>%s</code>" $k -}}
+{{- if $friendly }}{{ $title = printf "%s (<code>%s</code>)" $friendly $k }}{{ end -}}
+{{- template "_facollapse" (dict "title" $title "body" $body) -}}
+{{- end -}}
