@@ -729,6 +729,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
+- `sheets`: Tools for creating, reading, updating, and deleting [Datadog spreadsheets][75]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
 - `widgets`: Tools for [dashboard][46] and [notebook][54] widget visualization, validation, and type conversion.
@@ -1002,3 +1003,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [72]: https://github.com/xai-org/plugin-marketplace 
 [73]: /bits_ai/bits_chat/
 [74]: /bits_ai/bits_investigation/
+[75]: /sheets/
