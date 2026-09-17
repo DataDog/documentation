@@ -1,7 +1,7 @@
 ---
-description: Configura una monitorización exhaustiva de tu entorno de Google Cloud.
-  Configura cuentas de servicio, activa la recopilación de métricas, y explora el
-  reenvío de logs y la instalación del Agent.
+description: Configure un seguimiento integral para su entorno de Google Cloud. Configure
+  cuentas de servicio, habilite la recopilación de métricas y explore el reenvío de
+  registro y la instalación del Agent.
 further_reading:
 - link: https://docs.datadoghq.com/integrations/google_cloud_platform/?tab=dataflowmethodrecommended
   tag: Documentación
@@ -11,107 +11,114 @@ further_reading:
   text: Facturación de la integración de Google Cloud
 - link: https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
   tag: Guía
-  text: Tiempo de respuesta de las métricas en la nube
+  text: Retraso de métricas en la nube
 - link: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: Guía
-  text: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
+  text: ¿Por qué debería instalar el Datadog Agent en mis instancias en la nube?
 - link: https://www.datadoghq.com/blog/gke-dashboards-integration-improvements/
   tag: Blog
-  text: Los nuevos dashboards y métricas de GKE permiten una mayor visibilidad de
-    tu entorno
+  text: Los nuevos paneles y métricas de GKE brindan una visibilidad más profunda
+    de su entorno
 - link: https://www.datadoghq.com/blog/google-cloud-private-service-connect/
   tag: Blog
-  text: Acceder a Datadog de forma privada y monitorizar tu uso de Google Cloud Private
-    Service Connect
+  text: Acceda a Datadog de forma privada y haga un seguimiento de su uso de Google
+    Cloud Private Service Connect
 - link: https://www.datadoghq.com/blog/track-bigquery-costs-performance/
   tag: Blog
-  text: Monitorizar BigQuery con Datadog
+  text: Haga un seguimiento de BigQuery con Datadog
 - link: https://www.datadoghq.com/blog/google-cloud-cost-management/
   tag: Blog
-  text: Permitir a los ingenieros hacerse cargo de los costes de Google Cloud con
-    Datadog
+  text: Faculte a los ingenieros para que se hagan cargo de los costos de Google Cloud
+    con Datadog
 - link: https://www.datadoghq.com/blog/collect-traces-logs-from-cloud-run-with-datadog/
   tag: Blog
-  text: Recopilar trazas (traces), logs y métricas personalizadas de servicios de
-    Google Cloud Run con Datadog
+  text: Recopile trazas, registros y métricas personalizadas de sus servicios de Google
+    Cloud Run con Datadog
 - link: https://learn.datadoghq.com/courses/getting-started-gcp
   tag: Centro de aprendizaje
-  text: Empezando con la observabilidad en Google Cloud con Datadog
-title: Empezando con Google Cloud
+  text: Introducción a la observabilidad en Google Cloud con Datadog
+title: Introducción a Google Cloud
 ---
+## Descripción general {#overview}
 
-## Información general
+Utilice esta guía para comenzar a hacer un seguimiento de su entorno de Google Cloud. Este enfoque simplifica la configuración para entornos de Google Cloud con múltiples proyectos, lo que le permite maximizar su cobertura de seguimiento.
 
-Utiliza esta guía para empezar a monitorizar tu entorno de Google Cloud. Esta estrategia simplifica la configuración de los entornos de Google Cloud con varios proyectos, lo que te permite maximizar la cobertura de la monitorización.
+## Cómo llegan los datos de Google Cloud a Datadog {#how-google-cloud-data-reaches-datadog}
 
-## Configuración
+{{% google-cloud-data-collection-paths %}}
 
-### Requisitos previos
-1) Crear una [cuenta de Datadog][1]
-2) Configurar una [cuenta de servicio][2] en cualquiera de tus proyectos de Google Cloud
-3) Revisar estos requisitos previos de Google Cloud:
+## Configuración {#setup}
 
-{{% site-region region="us,us3,us5,eu,ap1,ap2" %}}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● Si tu organización restringe las identidades por dominio, debes añadir un `C0147pk0i`de identidad de cliente de Datadog como valor permitido en tu política.
+### Requisitos previos {#prerequisites}
+1) Cree una [cuenta de Datadog][1]
+2) Configure una [cuenta de servicio][2] en cualquiera de sus proyectos de Google Cloud
+3) Revise estos requisitos previos de Google Cloud:
+
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● Si su organización restringe las identidades por dominio, debe agregar la identidad de cliente de Datadog `C0147pk0i` como un valor permitido en su política.
 {{% /site-region %}}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;● La integración de Google Cloud requiere que las siguientes API estén activadas **para cada uno de los proyectos** que quieres monitorizar:
+La integración de Google Cloud requiere que las siguientes API estén habilitadas **para cada uno de los proyectos** que desea hacer un seguimiento:
 
-<div class="alert alert-danger">Asegúrate de que los proyectos que se están monitorizando no están configurados como <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">proyectos de contexto</a> que extraen métricas de otros muchos proyectos.</div>
+<div class="alert alert-danger">Asegúrese de que los proyectos que se están haciendo un seguimiento no estén configurados como <a href="https://cloud.google.com/monitoring/settings#:~:text=A%20scoping%20project%20hosts%20a,is%20also%20a%20scoping%20project.">proyectos de alcance</a> que extraigan métricas de otros proyectos.</div>
 
-[API de Cloud Monitoring][3]
-: Permite a Datadog consultar datos de métricas de Google Cloud.
+[Cloud Monitoring API][3]
+: Permite que Datadog consulte los datos de métricas de Google Cloud.
 
-[API de Compute Engine][4]
-: Permite a Datadog detectar datos de instancias de cálculo.
+[Compute Engine API][4]
+: Permite que Datadog descubra datos de instancias de cómputo.
 
-[API de Cloud Asset][5]
-: Permite a Datadog solicitar recursos de Google Cloud y vincular etiquetas (labels) relevantes a métricas como etiquetas (tags).
+[Cloud Asset API][5]
+: Permite que Datadog solicite recursos de Google Cloud y vincule etiquetas relevantes a las métricas como etiquetas.
 
-[API de Cloud Resource Manager][6]
-: Permite a Datadog añadir métricas con recursos y etiquetas (tags) correctos.
+[Cloud Resource Manager API][6]
+: Permite que Datadog añada métricas con los recursos y etiquetas correctos.
 
-[API IAM][7]
-: Permite a Datadog autenticarse con Google Cloud.
+[IAM API][7]
+: Permite que Datadog se autentique con Google Cloud.
 
-[API de Cloud Billing][8]
-: Permite a los desarrolladores gestionar la facturación de sus proyectos de Google Cloud Platform mediante programación. Consulta la sección [Cloud Cost Management (CCM)](#cloud-cost-management-ccm) para obtener más información.
+[Cloud Billing API][8]
+: Permite a los desarrolladores administrar la facturación de sus proyectos de Google Cloud Platform mediante programación. Consulte la sección [Cloud Cost Management (CCM)](#cloud-cost-management-ccm) para obtener más información.
 
-<div class="alert alert-info">Puedes confirmar si estas API están activadas accediendo a <a href="https://console.cloud.google.com/apis/dashboard">API y servicios activados</a>.</div>
+<div class="alert alert-info">Puede confirmar si estas API están habilitadas yendo a <a href="https://console.cloud.google.com/apis/dashboard">Enabled APIs & Services</a>.</div>
 
-### Recopilación de métricas
+### Recopilación de métricas {#metric-collection}
+
+{{% google-cloud-collection-scope %}}
+
+<div class="alert alert-info">Si su organización de Google Cloud utiliza <a href="https://cloud.google.com/vpc-service-controls/docs/overview">Controles de servicio de VPC</a>, debe permitir explícitamente que las cuentas de servicio de Datadog accedan a los recursos protegidos. Si estas cuentas de servicio no tienen permiso dentro de su perímetro de servicio, la recopilación de métricas, recursos y metadatos podría fallar. Comuníquese con <a href="/help/">Soporte de Datadog</a> para obtener los identificadores de cuenta de servicio para su sitio o región.</div>
 
 {{< tabs >}}
 
-{{% tab "Nivel de organización" %}}
+{{% tab "A nivel de organización" %}}
 
-Se recomienda la monitorización a nivel de organización para una cobertura completa de todos los proyectos, incluidos los futuros proyectos que puedan crearse en una organización.
+Se recomienda hacer un seguimiento a nivel de organización para una cobertura integral de todos los proyectos, incluidos los proyectos futuros que puedan crearse en una organización.
 
-**Nota**: Tu cuenta de usuario de [Google Cloud Identity][408] debe tener asignado el rol `Admin` en el contexto deseado para completar la configuración en Google Cloud (por ejemplo, `Organization Admin`).
+**Nota**: Su cuenta de usuario de [Google Cloud Identity][408] debe tener asignado el rol `Admin` en el contexto deseado para completar la configuración en Google Cloud (por ejemplo, `Organization Admin`).
 
-{{% collapse-content title="1. Crear una cuenta de servicio de Google Cloud en el proyecto por defecto" level="h5" %}}
-1. Abre tu [consola de Google Cloud][401].
-2. Ve a **IAM & Admin** > **Cuentas de servicio**.
-3. Haz clic en **Create service account** (Crear cuenta de servicio) en la parte superior.
-4. Asigna un nombre único a la cuenta de servicio.
-5. Haz clic en **Done** (Listo) para finalizar la creación de la cuenta de servicio.
+{{% collapse-content title="1. Cree una cuenta de servicio de Google Cloud en el proyecto predeterminado" level="h4" %}}
+1. Open your [Google Cloud console][401].
+2. Navegue a {{< ui >}}IAM & Admin{{< /ui >}} > {{< ui >}}Service Accounts{{< /ui >}}.
+3. Haga clic en {{< ui >}}Create service account{{< /ui >}} en la parte superior.
+4. Asigne un nombre único a la cuenta de servicio.
+5. Haga clic en {{< ui >}}Done{{< /ui >}} para completar la creación de la cuenta de servicio.
 
 [401]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
-{{% collapse-content title="2. Añadir la cuenta de servicio a nivel de organización o de carpeta" level="h5" %}}
-1. En la consola de Google Cloud, ve a la página **IAM**.
-2. Selecciona una carpeta u organización.
-3. Para conceder un rol a una entidad que aún no tenga otros roles en el recurso, haz clic en **Grant Access** (Conceder acceso) e introduce el correo electrónico de la cuenta de servicio que creaste anteriormente.
-4. Introduce la dirección de correo electrónico de la cuenta de servicio.
-5. Asigna los siguientes roles:
-   - [Visor de cálculos][402] proporciona acceso de **solo lectura** a los recursos Get y List de Compute Engine
-   - [Visor de monitorización][403] proporciona acceso de **sólo lectura** a los datos de monitorización disponibles en su entorno Google Cloud
-   - [Visor de recursos en la nube][404] proporciona acceso de **sólo lectura** a los metadatos de recursos en la nube
-   - [Navegador][405] proporciona acceso de **sólo lectura** para navegar por la jerarquía de un proyecto
-   - [Consumidor de uso de servicios][406] (**opcional**, para entornos con varios proyectos) proporciona [una atribución de costes y cuotas de API por proyecto](#enable-per-project-cost-and-api-quota-attribution)
-6. Haz clic en **Save** (Guardar).
+{{% collapse-content title="2. Agregue la cuenta de servicio a nivel de organización o carpeta" level="h4" %}}
+1. En el Google Cloud console, vaya a la página {{< ui >}}IAM{{< /ui >}}.
+2. Seleccione una carpeta u organización.
+3. Para otorgar un rol a un principal que aún no tenga otros roles en el recurso, haga clic en {{< ui >}}Grant Access{{< /ui >}} y luego ingrese el correo electrónico de la cuenta de servicio que creó anteriormente.
+4. Ingrese la dirección de correo electrónico de la cuenta de servicio.
+5. Asigne los siguientes roles:
+   - [Compute Viewer][402] proporciona acceso de **solo lectura** para obtener y listar recursos de Compute Engine
+   - [Monitoring Viewer][403] proporciona acceso de **solo lectura** a los datos de seguimiento disponibles en su entorno de Google Cloud.
+   - [Cloud Asset Viewer][404] proporciona acceso de **solo lectura** a los metadatos de los recursos en la nube
+   - [Browser][405] proporciona acceso de **solo lectura** para explorar la jerarquía de un proyecto
+   - [Service Usage Consumer][406] (**opcional**, para entornos de múltiples proyectos) proporciona [atribución de costos y cuotas de API por proyecto](#enable-per-project-cost-and-api-quota-attribution)
+6. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-**Nota**: El rol `Browser` sólo es necesario en el proyecto por defecto proyecto de la cuenta de servicio. Otros proyectos sólo requieren los otros roles mencionados.
+**Nota**: El `Browser`rol solo es necesario en el proyecto predeterminado de la cuenta de servicio. Los demás proyectos solo requieren los otros roles enumerados.
 
 [402]: https://cloud.google.com/compute/docs/access/iam#compute.viewer
 [403]: https://cloud.google.com/monitoring/access-control#monitoring_roles
@@ -120,37 +127,37 @@ Se recomienda la monitorización a nivel de organización para una cobertura com
 [406]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
 {{% /collapse-content %}}
 
-{{% collapse-content title="3. Añadir la entidad de Datadog a tu cuenta de servicio" level="h5" %}}
-**Nota**: Si previamente configuraste el acceso utilizando una entidad compartida de Datadog, puedes revocar el permiso de esa entidad después de completar estos pasos.
+{{% collapse-content title="3. Agregue el principal de Datadog a su cuenta de servicio" level="h4" %}}
+**Nota**: Si configuró previamente el acceso mediante un principal de Datadog compartido, puede revocar el permiso para ese principal después de completar estos pasos.
 
-1. En Datadog, ve a **Integrations** (Integraciones) > [**Google Cloud Platform**][407].
-2. Haz clic en **Add Google Cloud Account** (Añadir cuenta de Google Cloud).
-Si no tienes proyectos configurados, se te redirigirá automáticamente a esta página.
-3. Copia tu entidad de Datadog y guárdala para la siguiente sección.
+1. En Datadog, navegue a {{< ui >}}Integrations{{< /ui >}} > [{{< ui >}}Google Cloud Platform{{< /ui >}}][407].
+2. Haga clic en {{< ui >}}Add Google Cloud Account{{< /ui >}}.
+Si no tiene proyectos configurados, se le redirigirá automáticamente a esta página.
+3. Copie su principal de Datadog y guárdelo para la siguiente sección.
 
-{{< img src="integrations/google_cloud_platform/principal-2.png" alt="Página para añadir una nueva cuenta de Google Cloud, en el cuadro de la integración de Google Cloud de Datadog" style="width:70%;">}}
+{{< img src="integrations/google_cloud_platform/principal-2.png" alt="La página para agregar una nueva cuenta de Google Cloud en el mosaico de integración de Google Cloud de Datadog" style="width:70%;">}}
 
-**Nota**: Mantén esta ventana abierta para la sección 4.
+**Nota**: Mantenga esta ventana abierta para la Sección 4.
 
-4. En la [consola de Google Cloud][409], en el menú **Cuentas de servicio**, busca la cuenta de servicio que creaste en la sección 1.
-5. Ve a la pestaña **Permisos** y haz clic en **Grant Access** (Conceder acceso).
+4. En [Google Cloud console][409], en el menú {{< ui >}}Service Accounts{{< /ui >}}, busque la cuenta de servicio que creó en la Sección 1.
+5. Vaya a la pestaña {{< ui >}}Permissions{{< /ui >}} y haga clic en {{< ui >}}Grant Access{{< /ui >}}.
 
-{{< img src="integrations/google_cloud_platform/grant-access.png" alt="Interfaz de la consola de Google Cloud que muestra la pestaña Permisos en Cuentas de servicio." style="width:70%;">}}
+{{< img src="integrations/google_cloud_platform/grant-access.png" alt="Interfaz de la consola de Google Cloud, que muestra la pestaña Permisos en Cuentas de servicio." style="width:70%;">}}
 
-6. Pega tu entidad de Datadog en el cuadro de texto **Nuevas entidades**.
-7. Asigna el rol de **Creador de token de cuenta de servicio**.
-8. Haz clic en **Save** (Guardar).
+6. Pegue su principal de Datadog en el cuadro de texto {{< ui >}}New principals{{< /ui >}}.
+7. Asigne el rol de {{< ui >}}Service Account Token Creator{{< /ui >}}.
+8. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
 [407]: https://app.datadoghq.com/integrations/google-cloud-platform
 [409]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
-{{% collapse-content title="4. Finalizar la configuración de la integración en Datadog" level="h5" %}}
-1. En su consola de Google Cloud, ve a la pestaña **Cuenta de servicio** > **Detalles**. En esta página, busca el correo electrónico asociado a esta cuenta de servicio de Google. Tiene el formato `<SA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com`.
-2. Copia este correo electrónico.
-3. Vuelve al cuadro de configuración de la integración en Datadog (donde copiaste tu entidad de Datadog en la sección anterior).
-4. Pega el correo electrónico que copiaste en **Añadir correo electrónico de cuenta de servicio**.
-5. Haz clic en **Verify and Save Account** (Verificar y guardar cuenta).
+{{% collapse-content title="4. Complete la configuración de la integración en Datadog" level="h4" %}}
+1. In your Google Cloud console, navigate to the {{< ui >}}Service Account{{< /ui >}} > {{< ui >}}Details{{< /ui >}} tab. En esta página, busque el correo electrónico asociado con esta cuenta de servicio de Google. Tiene el formato `<SA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com`.
+2. Copie este correo electrónico.
+3. Regrese al mosaico de configuración de integración en Datadog (donde copió su principal de Datadog en la sección anterior).
+4. Pegue el correo electrónico que copió en {{< ui >}}Add Service Account Email{{< /ui >}}.
+5. Haga clic en {{< ui >}}Verify and Save Account{{< /ui >}}.
 {{% /collapse-content %}}
 
 Las métricas aparecen en Datadog aproximadamente **15 minutos** después de la configuración.
@@ -159,44 +166,44 @@ Las métricas aparecen en Datadog aproximadamente **15 minutos** después de la 
 
 {{% /tab %}}
 
-{{% tab "Nivel de proyecto y carpeta" %}}
+{{% tab "A nivel de proyecto y carpeta" %}}
 
 {{% collapse-content title="Inicio rápido (recomendado)" level="h4" expanded=false id="quickstart-setup" %}}
 
-### Requisitos previos
+### Requisitos previos {#prerequisites-1}
 
-Para utilizar el método de inicio rápido, tu rol de usuario Datadog debe poder crear claves de API y de aplicación. Si utilizas un [rol gestionado por Datadog][202], debe tener el rol **Administrador Datadog**. Si utilizas un [rol personalizado][203], tu rol debe tener al menos los permisos `api_keys_write` y `user_app_keys`.
+Para usar el método de Inicio rápido, su rol de usuario de Datadog debe tener permisos para crear claves de API y de aplicación. Si utiliza un [rol administrado por Datadog][202], debe tener {{< ui >}}Datadog Admin role{{< /ui >}}. Si utiliza un [rol personalizado][203], su rol debe tener al menos los permisos `api_keys_write` y `user_app_keys`.
 
-### Selecciona la configuración de inicio rápido si...
+### Elija la configuración de Inicio rápido si... {#choose-quick-start-setup-if}
 
-- Estás configurando la integración de Google Cloud por primera vez.
-- Prefieres un flujo de trabajo basado en una interfaz de usuario y quieres minimizar el tiempo que se tarda en crear una cuenta de servicio con los permisos de monitorización necesarios.
-- Quieres automatizar los pasos de configuración en scripts o pipelines de CI/CD.
+- Está configurando la integración de Google Cloud por primera vez.
+- Prefiere un flujo de trabajo basado en la interfaz de usuario y desea minimizar el tiempo necesario para crear una cuenta de servicio con los permisos de seguimiento requeridos.
+- Desea automatizar los pasos de configuración en scripts o canalizaciones de CI/CD.
 
-### Instrucciones
+### Instrucciones{#instructions}
 
-1. En la [página de la integración de Google Cloud][200], selecciona **+ Add GCP Account** (+ Añadir cuenta de GCP).
-2. Haz clic en **Quick Start** (Inicio rápido).
-3. Haz clic en **Copy** (Copiar) en la sección del script de configuración.<br>
-   **Nota**: Datadog recomienda ejecutar este script localmente a través de la [CLI de gcloud][201], ya que puede ser más rápido. Para ello, necesitas tener tus credenciales de Google Cloud disponibles localmente y la CLI de gcloud instalada en tu máquina.
-4. Haz clic en **Open Google Cloud Shell** (Abrir Google Cloud Shell) o ve a [Google Cloud Shell][204].
-5. Pega el script en el intérprete de comandos y ejecútalo.
-6. Selecciona las carpetas y los proyectos que quieres monitorizar. Solo podrás ver los proyectos y las carpetas para los que tienes el acceso y los permisos necesarios.
-7. En **Provide Service Account Details** (Proporcionar detalles de la cuenta de servicio):
-   1. Asigna un nombre a la cuenta de servicio.
-   2. Selecciona el proyecto que contendrá la cuenta de servicio.
-8. Configura la **Recopilación de métricas** (opcional).
-   1. Elige si quieres desactivar la opción de silenciar los monitores en caso de cierres de instancias y eventos de autoescalado GCE previstos.
-   2. Elige si quieres aplicar etiquetas (tags) a las métricas asociadas a la cuenta de servicio creada.
-   3. Elige si quieres desactivar la recopilación de métricas de servicios específicos de Google Cloud para ayudar a controlar los costes de Google Cloud Monitoring.
-   4. Elige si quieres aplicar filtros de métricas granulares para cualquier servicio de Google Cloud activado para la recopilación de métricas.
-   5. Elige si quieres filtrar las métricas por etiquetas (tags) de los tipos de recursos GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costes de Datadog.
-   **Nota**: El filtrado `VM Instance` no afecta a las métricas `gcp.logging.*` relacionadas y no causa ningún impacto en la facturación de estas métricas.
-9. Configura la **Recopilación de recursos** (atributos e información de configuración de los recursos en tu entorno de Google Cloud, opcional).
-10. Se muestra un resumen de los cambios que se van a realizar. Si se confirma, el script:
-    - Activa las API necesarias
-    - Asigna los permisos necesarios para monitorizar cada proyecto y carpeta seleccionados.
-    - Finaliza la configuración de la integración en Datadog
+1. En la [página de integración de Google Cloud][200], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Haga clic en {{< ui >}}Quick Start{{< /ui >}}.
+3. Haga clic en {{< ui >}}Copy{{< /ui >}} en la sección de script de configuración.<br>
+   **Nota**: Datadog recomienda ejecutar este script localmente a través de la [CLI de gcloud][201], ya que puede ser más rápido. Esto requiere tener sus credenciales de Google Cloud disponibles localmente y tener instalada la gcloud CLI en su máquina.
+4. Haga clic en {{< ui >}}Open Google Cloud Shell{{< /ui >}}, o vaya a [Google Cloud Shell][204].
+5. Pegue el script en el símbolo del sistema del shell y ejecútelo.
+6. Seleccione las carpetas y proyectos sobre los cuales desee hacer un seguimiento. Solo puede ver los proyectos y carpetas para los que tiene el acceso y los permisos necesarios.
+7. En {{< ui >}}Provide Service Account Details{{< /ui >}}:
+   1. Asigne un nombre a la cuenta de servicio.
+   2. Seleccione el proyecto que contendrá la cuenta de servicio.
+8. Configure {{< ui >}}Metric Collection{{< /ui >}} (opcional).
+   1. Elija si desea deshabilitar la opción para silenciar monitores para apagados de instancias de GCE esperados y eventos de escalado automático.
+   2. Elija si desea aplicar etiquetas a las métricas asociadas con la cuenta de servicio creada.
+   3. Elija si desea deshabilitar la recopilación de métricas para servicios específicos de Google Cloud para ayudar a controlar los costos de Google Cloud Monitoring.
+   4. Elija si desea aplicar filtros de métricas granulares para cualquier servicio de Google Cloud habilitado para la recopilación de métricas.
+   5. Elija si desea filtrar métricas por etiquetas para tipos de recursos de GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costos de Datadog.
+   **Nota**: `VM Instance` el filtrado no afecta a las métricas de `gcp.logging.*` relacionadas y no causa ningún impacto en la facturación de esas métricas.
+9. Configure {{< ui >}}Resource Collection{{< /ui >}} (atributos e información de configuración de los recursos en su entorno de Google Cloud, opcional).
+10. Se muestra un resumen de los cambios que se realizarán. Si se confirma, el script:
+    - Habilita las API necesarias
+    - Asigna los permisos necesarios para hacer un seguimiento de cada proyecto y carpeta seleccionados
+    - Completa la configuración de la integración en Datadog
 
 [200]: https://app.datadoghq.com/integrations/google-cloud-platform
 [201]: https://cloud.google.com/sdk/docs/install
@@ -207,64 +214,64 @@ Para utilizar el método de inicio rápido, tu rol de usuario Datadog debe poder
 
 {{% collapse-content title="Terraform" level="h4" expanded=false id="terraform-setup" %}}
 
-### Elige la configuración de Terraform si...
+### Elija la configuración de Terraform si... {#choose-terraform-setup-if}
 
-- Gestionas la infraestructura como código y quieres mantener la integración de Google Cloud y Datadog bajo el control de versiones.
-- Necesitas configurar varias carpetas o proyectos de forma coherente con bloques de proveedores reutilizables.
-- Quieres un proceso de despliegue repetible y auditable que se adapte a tu entorno gestionado por Terraform.
+- Usted administra la infraestructura como código y desea mantener la integración de Datadog con Google Cloud bajo control de versiones.
+- Necesita configurar varias carpetas o proyectos de manera consistente con bloques de proveedor reutilizables.
+- Desea un proceso de implementación repetible y auditable que se ajuste a su entorno administrado por Terraform.
 
-### Instrucciones
+### Instrucciones{#instructions-1}
 
-1. En la [página de la integración de Google Cloud][500], selecciona **+ Add GCP Account** (+ Añadir cuenta de GCP).
-2. Selecciona **Terraform**.
-3. En **Provide GCP Resources** (Proporcionar recursos GCP), añade cualquier ID de proyecto y cualquier ID de carpeta que quieras monitorizar.
-4. Selecciona las carpetas y los proyectos que quieres monitorizar.
-5. En **Provide Service Account Details** (Proporcionar detalles de la cuenta de servicio):
-   1. Asigna un nombre a la cuenta de servicio.
-   2. Selecciona el proyecto que contendrá la cuenta de servicio.
-6. Configura la **Recopilación de métricas** (opcional).
-   1. Elige si quieres desactivar la opción de silenciar los monitores en caso de cierres de instancias y eventos de autoescalado GCE previstos.
-   2. Elige si quieres aplicar etiquetas (tags) a las métricas asociadas a la cuenta de servicio creada.
-   3. Elige si quieres desactivar la recopilación de métricas de servicios específicos de Google Cloud para ayudar a controlar los costes de Google Cloud Monitoring.
-   4. Elige si quieres aplicar filtros de métricas granulares para cualquier servicio de Google Cloud activado para la recopilación de métricas.
-   5. Elige si quieres filtrar las métricas por etiquetas (tags) de los tipos de recursos GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costes de Datadog.
-7. Configura la **Recopilación de recursos** (atributos e información de configuración de los recursos en tu entorno de Google Cloud).
-8. Copia el **código de Terraform** proporcionado.
-9. Pega el código en un archivo `.tf` y ejecuta el comando **Initialize and apply the Terraform** (Inicializar y aplicar Terraform). Si todo sale bien, el comando:
-   - Activa las API necesarias
-   - Asigna los permisos necesarios para monitorizar cada proyecto y carpeta seleccionados
-   - Finaliza la configuración de la integración en Datadog
+1. En la [página de integración de Google Cloud][500], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Seleccione {{< ui >}}Terraform{{< /ui >}}.
+3. En {{< ui >}}Provide GCP Resources{{< /ui >}}, agregue los ID de proyecto y de carpeta sobre los cuales desee hacer un seguimiento.
+4. Seleccione las carpetas y los proyectos sobre los cuales desee hacer un seguimiento.
+5. En {{< ui >}}Provide Service Account Details{{< /ui >}}:
+   1. Asigne un nombre a la cuenta de servicio.
+   2. Seleccione el proyecto que contendrá la cuenta de servicio.
+6. Configure {{< ui >}}Metric Collection{{< /ui >}} (opcional).
+   1. Elija si desea deshabilitar la opción para silenciar monitores para apagados de instancias de GCE esperados y eventos de escalado automático.
+   2. Elija si desea aplicar etiquetas a las métricas asociadas con la cuenta de servicio creada.
+   3. Elija si desea deshabilitar la recopilación de métricas para servicios específicos de Google Cloud para ayudar a controlar los costos de Google Cloud Monitoring.
+   4. Elija si desea aplicar filtros de métricas granulares para cualquier servicio de Google Cloud habilitado para la recopilación de métricas.
+   5. Elija si desea filtrar métricas por etiquetas para tipos de recursos de GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costos de Datadog.
+7. Configure {{< ui >}}Resource Collection{{< /ui >}} (atributos e información de configuración de los recursos en su entorno de Google Cloud).
+8. Copie el {{< ui >}}Terraform Code{{< /ui >}} proporcionado.
+9. Pegue el código en un archivo `.tf` y ejecute el comando {{< ui >}}Initialize and apply the Terraform{{< /ui >}}. Si tiene éxito, el comando:
+   - Habilita las API necesarias
+   - Asigna los permisos necesarios para hacer un seguimiento de cada proyecto y carpeta seleccionados
+   - Completa la configuración de la integración en Datadog
 
 [500]: https://app.datadoghq.com/integrations/google-cloud-platform
 {{% /collapse-content %}}
 
 {{% collapse-content title="Manual" level="h4" expanded=false id="manual-setup" %}}
 
-### Elige la configuración manual si...
+### Elija la configuración manual si... {#choose-manual-setup-if}
 
-- Necesitas configurar manualmente el acceso para un número más reducido de proyectos o carpetas.
-- Quieres un mayor control paso a paso de la asignación de permisos y credenciales dentro de la interfaz de usuario de GCP.
+- Necesita configurar el acceso manualmente para una cantidad menor de proyectos o carpetas.
+- Desea tener más control paso a paso sobre la asignación de permisos y credenciales dentro de la interfaz de usuario de GCP.
 
-### Instrucciones
+### Instrucciones{#instructions-2}
 
-1. En la [página de la integración de Google Cloud][600], selecciona **+ Add GCP Account** (+ Añadir cuenta de GCP).
-2. Haz clic en **Manual**.
-3. Copia el valor del **principal de Datadog** y haz clic en **Open the Google Console** (Abrir la consola de Google).
-4. Crea una cuenta de servicio:
-   1. Asigna un nombre descriptivo a la cuenta de servicio y haz clic en **Create and continue** (Crear y continuar).
-   2. En **Permissions** (Permisos), busca y añade el rol **Service Account Token Creator** (Creador de tokens de cuentas de servicio) en el menú desplegable y haz clic en **Continue** (Continuar).
-   3. En **Principals with access** (Principales con acceso), pega el valor del **principal de Datadog** en el campo **Service account users role** (Rol de los usuarios de cuentas de servicio) y haz clic en **Done** (Listo).
-5. Haz clic en el enlace de la cuenta de servicio bajo la columna **Email** (Correo electrónico).
-6. Copia el valor del **correo electrónico**.
-7. En Datadog, pega el correo electrónico de la cuenta de servicio en la sección **Add Service Account Email** (Añadir correo electrónico de la cuenta de servicio).
-8. Configura la **Recopilación de métricas** (opcional).
-   1. Elige si quieres desactivar la opción de silenciar los monitores en caso de cierres de instancias y eventos de autoescalado GCE previstos.
-   2. Elige si quieres aplicar etiquetas (tags) a las métricas asociadas a la cuenta de servicio creada.
-   3. Elige si quieres desactivar la recopilación de métricas de servicios específicos de Google Cloud para ayudar a controlar los costes de Google Cloud Monitoring.
-   4. Elige si quieres aplicar filtros de métricas granulares para cualquier servicio de Google Cloud activado para la recopilación de métricas.
-   5. Elige si quieres filtrar las métricas por etiquetas (tags) de los tipos de recursos GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costes de Datadog.
-9. Configura la **Recopilación de recursos** (atributos e información de configuración de los recursos en tu entorno de Google Cloud, opcional).
-10. Haz clic en **Verify and Save Account** (Verificar y guardar cuenta).
+1. En la [página de integración de Google Cloud][600], seleccione {{< ui >}}+ Add GCP Account{{< /ui >}}.
+2. Haga clic en {{< ui >}}Manual{{< /ui >}}.
+3. Copie el valor {{< ui >}}Datadog Principal{{< /ui >}} y haga clic en {{< ui >}}Open the Google Console{{< /ui >}}.
+4. Cree una cuenta de servicio:
+   1. Asigne a la cuenta de servicio un nombre descriptivo y haga clic en {{< ui >}}Create and continue{{< /ui >}}.
+   2. En {{< ui >}}Permissions{{< /ui >}}, busque y agregue el rol {{< ui >}}Service Account Token Creator{{< /ui >}} desde el menú desplegable, y haga clic en {{< ui >}}Continue{{< /ui >}}.
+   3. En {{< ui >}}Principals with access{{< /ui >}}, pegue el valor {{< ui >}}Datadog Principal{{< /ui >}} en el campo {{< ui >}}Service account users role{{< /ui >}} y haga clic en {{< ui >}}Done{{< /ui >}}.
+5. Haga clic en el enlace de la cuenta de servicio en la columna {{< ui >}}Email{{< /ui >}}.
+6. Copie el valor {{< ui >}}Email{{< /ui >}}.
+7. En Datadog, pegue el correo electrónico de la cuenta de servicio en la sección {{< ui >}}Add Service Account Email{{< /ui >}}.
+8. Configure {{< ui >}}Metric Collection{{< /ui >}} (opcional).
+   1. Elija si desea deshabilitar la opción para silenciar monitores para apagados de instancias de GCE esperados y eventos de escalado automático.
+   2. Elija si desea aplicar etiquetas a las métricas asociadas con la cuenta de servicio creada.
+   3. Elija si desea deshabilitar la recopilación de métricas para servicios específicos de Google Cloud para ayudar a controlar los costos de Google Cloud Monitoring.
+   4. Elija si desea aplicar filtros de métricas granulares para cualquier servicio de Google Cloud habilitado para la recopilación de métricas.
+   5. Elija si desea filtrar métricas por etiquetas para tipos de recursos de GCP `Cloud Run Revision`, `VM Instance` o `Cloud Function` para ayudar a controlar los costos de Datadog.
+9. Configure {{< ui >}}Resource Collection{{< /ui >}} (atributos e información de configuración de los recursos en su entorno de Google Cloud, opcional).
+10. Haga clic en {{< ui >}}Verify and Save Account{{< /ui >}}.
 
 [600]: https://app.datadoghq.com/integrations/google-cloud-platform
 {{% /collapse-content %}}
@@ -273,191 +280,191 @@ Para utilizar el método de inicio rápido, tu rol de usuario Datadog debe poder
 
 {{< /tabs >}}
 
-#### Validación
+#### Validación {#validation}
 
-Para ver tus métricas, utiliza el menú de la izquierda para ir a **Métricas** > **Resumen** y busca `gcp`:
+Para visualizar sus métricas, use el menú de la izquierda para navegar a {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} y busque `gcp`:
 
-{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="Página de resumen de métricas en Datadog filtrada para mostrar las métricas que empiezan con GCP" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/gcp_metric_summary.png" alt="La página de Resumen de métricas en Datadog filtrada para métricas que comienzan con GCP" style="width:100%;" >}}
 
-### Integraciones de Google Cloud
+### Integraciones de Google Cloud {#google-cloud-integrations}
 
-La integración de Google Cloud recopila todas las [métricas de Google Cloud][12] disponibles de tus proyectos a través de la API de Google Cloud Monitoring. Las integraciones se instalan automáticamente cuando Datadog reconoce que se están ingiriendo datos desde tu cuenta de Google Cloud, como BigQuery.
+La integración de Google Cloud recopila todas las [métricas de Google Cloud][12] disponibles de sus proyectos a través de la Google Cloud Monitoring API. Integrations se instalan automáticamente cuando Datadog reconoce que se están ingiriendo datos desde su cuenta de Google Cloud, como BigQuery.
 
-{{% collapse-content title="Ver las integraciones de Google Cloud de las que Datadog recopila métricas" level="h5" %}}
+{{% collapse-content title="Vea las Integrations de Google Cloud de las que Datadog recopila métricas" level="h4" %}}
 {{% google-cloud-integrations %}}
 {{% /collapse-content %}}
 
-Para profundizar en la monitorización de varios de los servicios más populares, consulta los enlaces de blogs a continuación.
+Para obtener información detallada sobre el monitoreo de muchos de los servicios más populares, verifique los blogs vinculados a continuación.
 
-{{% collapse-content title="Blogs de integración" level="h5" %}}
+{{% collapse-content title="Blogs de Integrations" level="h4" %}}
 [Cloud Armor][20]
-: Google Cloud Armor es un servicio de seguridad de red que protege contra ataques DDoS y a aplicaciones.
+: Google Cloud Armor es un servicio de seguridad de red que protege contra ataques DDoS y de aplicaciones.
 
 [BigQuery][21]
-: BigQuery es un almacén de datos sin servidor y multinube que puede proporcionarte información valiosa a partir de tus datos empresariales.
+: BigQuery es un almacén de datos sin servidor y multinube que puede proporcionarle información valiosa a partir de sus datos empresariales.
 
 [Cloud Run][22]
-: Cloud Run es una plataforma totalmente gestionada que te permite ejecutar tu código directamente en una infraestructura escalable en Google Cloud.
+: Cloud Run es una plataforma totalmente administrada que le permite ejecutar su código directamente en una infraestructura escalable en Google Cloud.
 
 [Cloud SQL][23]
-: Cloud SQL es un servicio de base de datos relacional totalmente gestionado que funciona con MySQL, PostgreSQL y SQL Server.
+: Cloud SQL es un servicio de base de datos relacional totalmente administrado que funciona con MySQL, PostgreSQL y SQL Server.
 
 [Compute Engine][24]
-: Compute Engine es un servicio de cálculo y alojamiento que permite crear y ejecutar máquinas virtuales en Google Cloud.
+: Compute Engine es un servicio de computación y alojamiento que le brinda la capacidad de crear y ejecutar máquinas virtuales en Google Cloud.
 
 [Dataflow][25]
-: Dataflow es un servicio de análisis de flujos totalmente gestionado que utiliza el autoescalado y el procesamiento de datos en tiempo real.
+: Dataflow es un servicio de análisis de streaming totalmente administrado que utiliza escalado automático y procesamiento de datos en tiempo real.
 
 [Eventarc][26]
-: Eventarc es un servicio totalmente gestionado que permite crear arquitecturas basadas en eventos.
+: Eventarc es un servicio totalmente administrado que le permite crear arquitecturas basadas en eventos.
 
 [Google Kubernetes Engine (GKE)][27]
-: GKE es un servicio totalmente gestionado de Kubernetes.
+: GKE es un servicio de Kubernetes totalmente administrado.
 
 [Private Service Connect][28]
-: Private Service Connect te permite acceder de forma privada a los servicios gestionados de Google desde tu red de VPC.
+: Private Service Connect le permite acceder a servicios administrados de Google de forma privada desde su red de VPC.
 
 [Security Command Center][29]
-: Security Command Center proporciona gestión de posturas y detección de amenazas a códigos, identidades y datos.
+: Security Command Center proporciona gestión de postura y detección de amenazas para código, identidades y datos.
 
 [Vertex AI][30]
-: Vertex AI es una plataforma de desarrollo de IA generativa totalmente gestionada.
+: Vertex AI es una plataforma de desarrollo de IA generativa totalmente administrada.
 {{% /collapse-content %}}
 
-### Limitar los filtros de recopilación de métricas
+### Limitar filtros de recopilación de métricas {#limit-metric-collection-filters}
 
-Puedes elegir de qué servicios y recursos recopilar métricas. Esto puede ayudar a controlar los costes al reducir el número de llamadas a la API realizadas en tu nombre.
+Puede elegir de qué servicios y recursos recopilar métricas. Esto puede ayudar a controlar los costos al reducir la cantidad de llamadas a la API realizadas en su nombre.
 
-{{% collapse-content title="Limitar la recopilación de métricas por servicio de Google Cloud y por filtros granulares de métricas" level="h4" %}}
+{{% collapse-content title="Limite la recopilación de métricas por servicio de Google Cloud y mediante filtros de métricas granulares" level="h4" %}}
 
-En la pestaña **Metric Collection** (Recopilación de métricas) de la [página de la integración de Google Cloud][11] de Datadog, deselecciona los espacios de nombres de métricas que quieres excluir.
+En la pestaña {{< ui >}}Metric Collection{{< /ui >}} de la [página de integración de Google Cloud][11] de Datadog, deseleccione los espacios de nombres de métricas que desea excluir.
 
-Para aplicar un filtrado granular de métricas a los servicios activos, haz clic en el servicio en cuestión y aplica tus filtros en el campo `Add filters for gcp.<service>`.
+Para aplicar un filtrado de métricas granular para los servicios habilitados, haga clic en el servicio en cuestión y aplique sus filtros en el campo `Add filters for gcp.<service>`.
 
-{{< img src="integrations/google_cloud_platform/limit_metric_collection_2025-11-11.png" alt="Pestaña de recopilación de métricas en la página de la integración de Google Cloud de Datadog, con el servicio AI Platform expandido para mostrar el campo para añadir filtros para gcp.ml" style="width:80%;">}}
+{{< img src="integrations/google_cloud_platform/limit_metric_collection_2025-11-11.png" alt="La pestaña de recopilación de métricas en la página de integración de Google Cloud de Datadog, con el servicio AI Platform expandido para mostrar el campo Add filters for gcp.ml" style="width:80%;">}}
 
-**Filtros de ejemplo**:
+**Ejemplos de filtros**:
 
 `subscription.*` `topic.*`
-: Limitar la recopilación a las métricas **que coincidan con** `gcp.<service>.subscription.*` **o** `gcp.<service>.topic.*`
+: Limitar la recopilación a métricas **que coincidan con** `gcp.<service>.subscription.*` **o** `gcp.<service>.topic.*`
 
 `!*_cost` `!*_count`
-: Limitar la recopilación a las métricas **que no coincidan con** `gcp.<service>.*_cost` **ni** `gcp.<service>.*_count`
+: Limitar la recopilación a métricas que **no coincidan con** `gcp.<service>.*_cost` **ni con** `gcp.<service>.*_count`
 
 `snapshot.*` `!*_by_region`
-: Limitar la recopilación a las métricas **que coincidan con** `gcp.<service>.snapshot.*` **pero que no coincidan con** `gcp.<service>.*_by_region`
+: Limitar la recopilación a métricas que **coincidan con** `gcp.<service>.snapshot.*` **pero que no coincidan con** `gcp.<service>.*_by_region`
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Limitar la recopilación de métricas por región de Google Cloud y por recursos globales" level="h4" %}}
 
-En la pestaña **Metric Collection** (Recopilación de métricas) de la [página de la integración de Google Cloud][11] de Datadog, deselecciona las regiones que quieres excluir de la recopilación de métricas.
+En la pestaña {{< ui >}}Metric Collection{{< /ui >}} de la [página de integración de Google Cloud][11] de Datadog, deseleccione las regiones que desea excluir de la recopilación de métricas.
 
-También puedes especificar ubicaciones adicionales no incluidas en la lista y desactivar cualquier métrica global no asociada a una región.
+Si un valor de región o ubicación no aparece en las casillas de verificación, agréguelo en el campo {{< ui >}}Additional Locations{{< /ui >}}. El filtro realiza una coincidencia exacta con el valor de la etiqueta reportado por Google Cloud, así que ingrese los valores exactamente como aparecen en sus recursos (por ejemplo, `us-central`).
 
-{{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="Pestaña de recopilación de métricas en la página de la integración de Google Cloud de Datadog, con la opción para activar métricas globales resaltada y un subconjunto de regiones seleccionada. La opción para ubicaciones adicionales también está resaltada con un filtro multirregión definido" style="width:80%;">}}
+También puede deshabilitar cualquier métrica global que no esté asociada con una región.
+
+{{< img src="integrations/google_cloud_platform/metric_region_filtering.png" alt="La pestaña de recopilación de métricas en la página de integración de Google Cloud de Datadog, con la opción Habilitar métricas globales resaltada y un subconjunto de regiones seleccionado. La opción Ubicaciones adicionales también está resaltada con un filtro multirregión definido" style="width:80%;">}}
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Limitar la recopilación de métricas por host o instancia de Cloud Run" level="h4" %}}
-1. Asigna una etiqueta (tag) (como `datadog:true`) a los hosts o instancias de Cloud Run que quieres monitorizar con Datadog.
-2. En la pestaña **Metric Collection** (Recopilación de métricas) de la [página de la integración de Google Cloud][11] de Datadog, introduce las etiquetas (tags) en el cuadro de texto **Limit Metric Collection Filters** (Limitar filtros de recopilación de métricas). Solo se importarán a Datadog los hosts que coincidan con una de las etiquetas (tags) definidas. Puedes utilizar comodines (`?` para un solo carácter, `*` para varios caracteres), para emparejar varios hosts, o `!`, para excluir determinados hosts. Este ejemplo incluye todas las instancias de tamaño `c1*`, pero excluye los hosts de staging:
+{{% collapse-content title="Limitar la recopilación de métricas por servidor o instancia de Cloud Run" level="h4" %}}
+1. Asigne una etiqueta (como `datadog:true`) a los servidores o instancias de Cloud Run a las que desea hacer un seguimiento con Datadog.
+2. En la pestaña {{< ui >}}Metric Collection{{< /ui >}} de la [página de integración de Google Cloud][11] de Datadog, ingrese las etiquetas en el cuadro de texto {{< ui >}}Limit Metric Collection Filters{{< /ui >}}. Solo se importan a Datadog los servidores que coinciden con una de las etiquetas definidas. Puede usar comodines (`?` para un solo carácter, `*` para varios caracteres) para hacer coincidir muchos servidores, o `!` para excluir ciertos servidores. Este ejemplo incluye todas las instancias de tamaño `c1*`, pero excluye los servidores de staging:
 
 ```text
 datadog:monitored,env:production,!env:staging,instance-type:c1.*
 ```
 
-Consulta la documentación de Google sobre [creación y gestión de etiquetas (labels)][44] para obtener más información.
+Consulte la documentación de Google sobre [Creación y gestión de etiquetas][44] para obtener más detalles.
 {{% /collapse-content %}}
 
-En el siguiente ejemplo, solo los hosts de Google Cloud con la etiqueta (label) `datadog:true` son monitorizados por Datadog:
+En el siguiente ejemplo, solo los servidores de Google Cloud con la etiqueta `datadog:true` son monitoreados por Datadog:
 
-{{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="Campos para limitar la recopilación de métricas en el cuadro de la integración de Google Cloud" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/limit_metric_collection.png" alt="Los campos para limitar la recopilación de métricas en el mosaico de integración de Google Cloud" style="width:100%;" >}}
 
-#### Prácticas recomendadas para monitorizar varios proyectos
+#### Habilitar la atribución de costos y cuotas de API por proyecto {#enable-per-project-cost-and-api-quota-attribution}
 
-##### Permitir la asignación de costes y cuotas de API por proyecto 
+De forma predeterminada, Google Cloud atribuye el costo de las llamadas a la API de monitoreo, así como el uso de la cuota de la API, al proyecto que contiene la cuenta de servicio para esta integración. Como práctica recomendada para entornos de Google Cloud con múltiples proyectos, habilite la atribución de costos por proyecto de las llamadas a la API de monitoreo y el uso de la cuota de la API. Con esto habilitado, los costos y el uso de la cuota se atribuyen al proyecto que se está *consultando*, en lugar del proyecto que contiene la cuenta de servicio. Esto proporciona visibilidad sobre los costos de monitoreo incurridos por cada proyecto y también ayuda a evitar alcanzar los límites de tasa de la API.
 
-Por defecto, Google Cloud asigna el coste de monitorización de llamadas de API, así como el uso de cuotas de API, al proyecto que contiene la cuenta de servicio de esta integración. Como práctica recomendada para entornos Google Cloud con varios proyectos, activa la asignación de costes por proyecto de monitorización de las llamadas de API y del uso de cuotas de API. Con esta opción activada, los costes y el uso de cuotas se asignan al proyecto que se *consulta*, en lugar del proyecto que contiene la cuenta de servicio. Esto proporciona visibilidad de los costes de monitorización generados por cada proyecto y también ayuda a prevenir que se alcancen los límites de tasa de API.
-
-Para activar esta función:
-1. Asegúrate de que la cuenta de servicio Datadog tiene el rol [Consumidor de uso de servicios][410] en el contexto deseado (carpeta u organización).
-2. Haz clic en el conmutador **Enable Per Project Quota** (Habilitar cuota por proyecto) en la pestaña **Projects** (Proyectos) de la [página de la integración de Google Cloud][411].
+Para habilitar esta función:
+1. Asegúrese de que la cuenta de servicio de Datadog tenga el rol [Consumidor de uso de servicio][410] en el contexto deseado (carpeta u organización).
+2. Haga clic en el interruptor {{< ui >}}Enable Per Project Quota{{< /ui >}} en la pestaña {{< ui >}}Projects{{< /ui >}} de la [página de integración de Google Cloud][411].
 
 [410]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
 [411]: https://app.datadoghq.com/integrations/google-cloud-platform/
 
-## Recopilación de logs
+## Recopilación de registros {#log-collection}
 
-El reenvío de logs desde tu entorno de Google Cloud permite la monitorización casi en tiempo real de los recursos y las actividades que tienen lugar en tu organización o carpeta. Puedes configurar [monitores de logs][37] para recibir notificaciones de problemas, utilizar [Cloud SIEM][38] para detectar amenazas o aprovechar [Watchdog][39] para identificar incidentes desconocidos o comportamientos anómalos.
+El reenvío de registros desde su entorno de Google Cloud permite el monitoreo casi en tiempo real de los recursos y actividades que tienen lugar en su organización o carpeta. Puede configurar [monitores de registros][37] para recibir notificaciones sobre problemas, usar [Cloud SIEM][38] para detectar amenazas o aprovechar [Watchdog][39] para identificar problemas desconocidos o comportamiento anómalo.
 
-Utiliza la [plantilla Datadog Dataflow][14] para agrupar y comprimir tus eventos de logs antes de reenviarlos a Datadog a través de [Google Cloud Dataflow][15]. Esta es la forma más eficiente de reenviar logs. Para especificar qué logs se reenvían, configura el [sumidero de logs de Google Cloud][40] con cualquier consulta de inclusión o exclusión, utilizando el [lenguaje de consulta de logs][56] de Google Cloud. Consulta la [página de configuración del reenvío de logs de Google Cloud][67] para ver las opciones de configuración del reenvío de logs (incluido Terraform) y las instrucciones.
+Utilice la [plantilla de Dataflow de Datadog][14] para procesar por lotes y comprimir sus eventos de registro antes de reenviarlos a Datadog a través de [Google Cloud Dataflow][15]. Esta es la forma más eficiente en cuanto a red para reenviar sus registros. Para especificar qué registros se reenvían, configure el [receptor de registros de Google Cloud][40] con cualquier consulta de inclusión o exclusión utilizando el [lenguaje de consulta de registros][56] de Google Cloud. Consulte la [página de configuración de reenvío de registros de Google Cloud][67] para conocer las opciones de configuración de reenvío de registros (incluido Terraform) e instrucciones.
 
-<div class="alert alert-danger">La <b>API de Dataflow</b> debe estar activada para utilizar Google Cloud Dataflow. Consulta <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Activación de las API</b></a> en la documentación de Google Cloud para obtener más información.</div>
+<div class="alert alert-danger">La <b>API de Dataflow</b> debe estar habilitada para usar Google Cloud Dataflow. Consulte <a href="https://cloud.google.com/apis/docs/getting-started#enabling_apis"><b>Habilitación de API</b></a> en la documentación de Google Cloud para obtener más información.</div>
 
-## Aprovechar las ventajas del Datadog Agent
+## Aproveche el Datadog Agent {#leveraging-the-datadog-agent}
 
-Una vez configurada la integración de Google Cloud, Datadog empieza a recopilar automáticamente métricas de Google Cloud. Sin embargo, puedes aprovechar el Datadog Agent para obtener información más detallada sobre tu infraestructura.
+Una vez configurada la integración de Google Cloud, Datadog comienza a recopilar automáticamente las métricas de Google Cloud. Sin embargo, puede utilizar el Datadog Agent para obtener información más detallada sobre su infraestructura.
 
-El [Datadog Agent][31] proporciona [métricas más granulares y de baja latencia][32] de tu infraestructura, ofreciendo información en tiempo real sobre el uso de CPU, memoria y disco, entre otros, de tus hosts de Google Cloud.
-El Agent puede instalarse en cualquier host, incluido [GKE][33].
+El [Datadog Agent][31] proporciona las [métricas más granulares y de baja latencia][32] de su infraestructura, ofreciendo información en tiempo real sobre la CPU, la memoria, el uso del disco y más para sus servidores de Google Cloud.
+El Agent se puede instalar en cualquier servidor, incluido [GKE][33].
 
-El Agent también admite una amplia gama de [integraciones][34], que te permiten ampliar la visibilidad a aquellos servicios y bases de datos específicos que se ejecutan en tus hosts.
+El Agent también admite una amplia gama de [integraciones][34], lo que le permite ampliar la visibilidad a servicios y bases de datos específicos que se ejecutan en sus servidores.
 
-Las [trazas][35] recopiladas a través del Agent permiten una monitorización exhaustiva del rendimiento de las aplicaciones (APM) para ayudarte a comprender el rendimiento de un servicio de extremo a extremo.
+Los [rastreos][35] recopilados a través del Agent permiten una Application Performance Monitoring (APM) integral, lo que le ayuda a comprender el rendimiento del servicio de extremo a extremo.
 
-Los [logs][57] recopilados a través del Agent proporcionan una visibilidad de los recursos de Google Cloud y de las actividades que tienen lugar en el entorno de Google Cloud.
+Los [registros][57] recopilados a través del Agent brindan visibilidad de sus recursos de Google Cloud y de las actividades que tienen lugar en su entorno de Google Cloud.
 
-Para consultar la lista completa de las ventajas de instalar el Agent en tus instancias en la nube, consulta [¿Por qué debería instalar el Datadog Agent en mis instancias en la nube?][36].
+Para obtener la lista completa de beneficios de instalar el Agent en sus instancias en la nube, consulte [¿Por qué debería instalar el Datadog Agent en mis instancias en la nube?][36]
 
-## Recopilación de cambios de recursos
+## Recopilación de cambios de recursos {#resource-changes-collection}
 
-La recopilación de cambios en recursos te permite monitorizar cambios de infraestructura en tu entorno de Google Cloud. Cuando el Inventario de recursos en la nube de Google detecta cambios en tus recursos en la nube, se envía un evento a [Event Management][62] de Datadog a través de un tema y una suscripción Cloud Pub/Sub. Utiliza estos eventos para recibir notificaciones proactivas sobre cambios riesgosos en tu infraestructura y para solucionar problemas.
+La recopilación de cambios de recursos le permite hacer un seguimiento de los cambios de infraestructura en su entorno de Google Cloud. Cuando Cloud Asset Inventory de Google detecta cambios en sus recursos en la nube, se reenvía un evento a la [Event Management][62] de Datadog a través de un tema y una suscripción de Cloud Pub/Sub. Utilice estos eventos para recibir notificaciones proactivas sobre cambios riesgosos en su infraestructura y para ayudar con la resolución de problemas.
 
-Para obtener instrucciones de configuración detalladas, consulta la [sección de recopilación de cambios en recursos][18] en la documentación de la integración de Google Cloud.
+Para obtener instrucciones de configuración detalladas, consulte la [sección de recopilación de cambios de recursos][18] de la documentación de integración de Google Cloud.
 
-## Explorar servicios relacionados
+## Explorar servicios relacionados {#explore-related-services}
 
-### Private Service Connect
+### Private Service Connect {#private-service-connect}
 
-<div class="alert alert-info">Private Service Connect solo está disponible para los sitios Datadog US5 y EU.</div>
+<div class="alert alert-info">Private Service Connect solo está disponible para los sitios de Datadog US5 y EU.</div>
 
-Utiliza la [integración de Google Cloud Private Service Connect][58] para visualizar conexiones, datos transferidos y paquetes descartados a través de Private Service Connect. Esto te proporciona una visibilidad de las métricas importantes de tus conexiones de Private Service Connect, tanto de productores como de consumidores.
-[Private Service Connect (PSC)][59] es un producto de red de Google Cloud que te permite acceder a [servicios de Google Cloud][60], a [servicios de socios externos][61] y a aplicaciones de propiedad de la empresa directamente desde tu Virtual Private Cloud (VPC).
+Utilice la [integración de Google Cloud Private Service Connect][58] para visualizar las conexiones, los datos transferidos y los paquetes descartados a través de Private Service Connect. Esto le brinda visibilidad de métricas importantes de sus conexiones de Private Service Connect, tanto para productores como para consumidores.
+[Private Service Connect (PSC)][59] es un producto de red de Google Cloud que le permite acceder a [servicios de Google Cloud][60], [servicios de socios externos][61] y aplicaciones propias de la empresa directamente desde su Virtual Private Cloud (VPC).
 
-Consulta [Acceder a Datadog de forma privada y monitorizar tu uso de Google Cloud Private Service Connect][28] en el blog de Datadog para obtener más información.
+Consulte [Acceda a Datadog de forma privada y haga un seguimiento de su uso de Google Cloud Private Service Connect][28] en el blog de Datadog para obtener más información.
 
-### Google Cloud Run
+### Google Cloud Run {#google-cloud-run}
 
-Utiliza la [integración de Google Cloud Run][42] para obtener información detallada sobre tus contenedores Cloud Run, como métricas y logs de auditoría.
+Utilice la [integración de Google Cloud Run][42] para obtener información detallada sobre sus contenedores de Cloud Run, como métricas y registros de auditoría.
 
-### Cloud Cost Management (CCM)
+### Cloud Cost Management (CCM) {#cloud-cost-management-ccm}
 
-Datadog Google Cloud Cost Management][45] proporciona información para que los departamentos de ingeniería y los equipos de finanzas comprendan cómo afectan los cambios en la infraestructura a los costes, asignen los gastos en toda la organización e identifiquen posibles mejoras.
+[Google Cloud Cost Management][45] de Datadog proporciona información para que los equipos de ingeniería y finanzas comprendan cómo los cambios en la infraestructura afectan los costos, asignen el gasto en toda su organización e identifiquen posibles mejoras.
 
-### Cloud SIEM
+### Cloud SIEM {#cloud-siem}
 
-Cloud SIEM proporciona análisis en tiempo real de logs operativos y de seguridad, al tiempo que utiliza integraciones y reglas predefinidas para detectar e investigar amenazas.
-Para utilizar esta función, consulta [Empezando con Cloud SIEM][46].
+Cloud SIEM proporciona análisis en tiempo real de registros operativos y de seguridad, mientras utiliza integraciones y reglas listas para usar para detectar e investigar amenazas.
+Para usar esta función, consulte [Introducción a Cloud SIEM][46].
 
-Para ver los resultados de seguridad del [Security Command Center de Google][47] en Cloud SIEM, activa la opción **Enable collection of security findings** (Activar la recopilación de hallazgos de seguridad) en la pestaña **Security Findings** (Hallazgos de seguridad) y sigue las instrucciones de configuración de la [guía del Security Command Center de Google][48].
+Para visualizar los hallazgos de seguridad de [Google Cloud Security Command Center][47] en Cloud SIEM, active la opción {{< ui >}}Enable collection of security findings{{< /ui >}} en la pestaña {{< ui >}}Security Findings{{< /ui >}} y siga las instrucciones de configuración en la [guía de Google Cloud Security Command Center][48].
 
-{{< img src="integrations/google_cloud_platform/security_findings.png" alt="Pestaña de los hallazgos de seguridad en el cuadro de la integración de Google Cloud" style="width:90%;" >}}
+{{< img src="integrations/google_cloud_platform/security_findings.png" alt="La pestaña de hallazgos de seguridad en el mosaico de integración de Google Cloud" style="width:90%;" >}}
 
-### Cloud Security
+### Cloud Security {#cloud-security}
 
-Datadog Cloud Security ofrece detección de amenazas en tiempo real y auditorías de configuración continuas en toda tu infraestructura de nube.
-Consulta la [guía de configuración de Cloud Security][49] para empezar.
+Datadog Cloud Security ofrece detección de amenazas en tiempo real y auditorías de configuración continuas en toda su infraestructura en la nube.
+Consulte la [guía de configuración de Cloud Security][49] para comenzar.
 
-Después de configurar Cloud Security, activa la opción **Enable Resource Collection** (Activar la recopilación de recursos) en la pestaña **Resource Collection** (Recopilación de recursos) para empezar a recopilar datos de configuración del [Catálogo de recursos][50] y Cloud Security. A continuación, sigue estas instrucciones para activar [Misconfigurations and Identity Risks (CIEM)][51] en Google Cloud.
+Después de configurar Cloud Security, active la opción {{< ui >}}Enable Resource Collection{{< /ui >}} en la pestaña {{< ui >}}Resource Collection{{< /ui >}} para comenzar a recopilar datos de configuración para el [Resource Catalog][50] y Cloud Security. Luego, siga estas instrucciones para habilitar [Misconfigurations and Identity Risks (CIEM)][51] en Google Cloud.
 
-{{< img src="integrations/google_cloud_platform/resource_collection.png" alt="Pestaña de recopilación de recursos en el cuadro de la integración de Google Cloud" style="width:100%;" >}}
+{{< img src="integrations/google_cloud_platform/resource_collection.png" alt="La pestaña de recopilación de recursos en el mosaico de integración de Google Cloud" style="width:100%;" >}}
 
-### Monitorización ampliada de BigQuery
+### Monitoreo ampliado de BigQuery {#expanded-bigquery-monitoring}
 
-Puedes obtener una visibilidad granular de tus entornos de BigQuery para monitorizar el rendimiento de tus trabajos de BigQuery y la calidad de tus datos de BigQuery. Consulta la [sección de monitorización ampliada de BigQuery][65] en la página principal de la integración de Google Cloud para obtener más información e instrucciones de configuración.
+El monitoreo ampliado de BigQuery proporciona visibilidad granular de sus entornos de BigQuery. Consulte la documentación de [BigQuery Data Observability][68] para obtener más información.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -521,6 +528,6 @@ Puedes obtener una visibilidad granular de tus entornos de BigQuery para monitor
 [61]: https://cloud.google.com/vpc/docs/private-service-connect-compatibility#third-party-services
 [62]: https://app.datadoghq.com/event/overview
 [63]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
-[65]: /es/integrations/google_cloud_platform/#expanded-bigquery-monitoring
 [66]: https://cloud.google.com/identity/docs/overview
 [67]: https://docs.datadoghq.com/es/logs/guide/google-cloud-log-forwarding
+[68]: https://docs.datadoghq.com/es/data_observability/quality_monitoring/data_warehouses/bigquery/

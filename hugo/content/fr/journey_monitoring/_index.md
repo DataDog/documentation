@@ -1,6 +1,10 @@
 ---
 description: Surveillez et analysez les flux utilisateur critiques pour résoudre les
   problèmes d'expérience utilisateur et les problèmes techniques.
+further_reading:
+- link: https://www.datadoghq.com/blog/journey-monitoring/
+  tag: Blog
+  text: Surveillez les parcours critiques des utilisateurs avec Datadog Journey Monitoring
 title: Journey Monitoring
 ---
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Rejoignez la Preview !">}}
@@ -83,7 +87,7 @@ Chaque parcours et ses variantes disposent des métriques de performance suivant
 - **Trafic** : Nombre total de tentatives de parcours au cours des sessions utilisateur. Basé sur la métrique `rum.measure.journey`.
 - **Conversion** : Pourcentage de tentatives de parcours ayant abouti. Basé sur la métrique `rum.measure.journey`.
 - **Temps de conversion** : Temps moyen nécessaire pour terminer le parcours sur l'ensemble des sessions utilisateur. Basé sur la métrique `rum.measure.journey.duration`.
-- **Uptime** : Disponibilité du parcours basée sur l'uptime de sa [collection de tests Synthetic][14].
+- **Uptime** : Disponibilité du parcours basée sur le temps de disponibilité de sa [collection de tests Synthetic][14].
 
 ## Prochaines étapes {#whats-next}
 
@@ -92,7 +96,7 @@ Chaque parcours et ses variantes disposent des métriques de performance suivant
    {{< nextlink href="/journey_monitoring/map/suggested_journeys/" >}}<strong>Suggested Journeys</strong> : Obtenez des suggestions de parcours générées automatiquement en fonction du comportement réel des utilisateurs dans votre application.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/details_report/" >}}<strong>Details Report</strong> : Analysez le trafic, la conversion, les erreurs et la disponibilité d'un parcours dans un rapport unifié.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/details_report/variants/" >}}<strong>Variants</strong> : Suivez et comparez les différents chemins empruntés par les utilisateurs au cours d'un parcours.{{< /nextlink >}}
-   {{< nextlink href="/journey_monitoring/uptime/" >}}<strong>Uptime</strong> : Mesurez la disponibilité d’un parcours grâce à une collection de tests Synthetic créée automatiquement.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/uptime/" >}}<strong>Uptime</strong> : Mesurez la disponibilité d'un parcours grâce à une collection de tests Synthetic créée automatiquement.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /fr/real_user_monitoring/
@@ -109,3 +113,7 @@ Chaque parcours et ses variantes disposent des métriques de performance suivant
 [12]: /fr/journey_monitoring/details_report/
 [13]: /fr/real_user_monitoring/operations_monitoring/
 [14]: /fr/synthetics/test_suites/#service-level-objectives
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
