@@ -27,132 +27,27 @@ The percentage rate at which Datadog sends internal telemetry data. A value of 1
 
 ### Automatic view tracking
 
-For setup steps covering both automatic and manual view tracking, see [Track navigation][5].
-
-If you select `Enable Automatic Scene Tracking`, Datadog hooks into Unity's `SceneManager` to detect scenes loading and unloading, and start RUM Views appropriately. If you are using methods to move between scenes other than `SceneManager`, or would like to track changes in views that occur without `SceneManager`, you need to track views manually using `DdRum.StartView` and `DdRum.StopView`.
+For setup steps, see [Track Navigation](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity).
 
 ### Track user actions
 
-For setup steps, see [Track user interactions][6].
-
-You can track specific user actions such as taps, clicks, and scrolls using `DdRum.AddAction`.
-
-To manually register instantaneous RUM actions such as `RumActionType.Tap`, use `DdRum.AddAction()`. For continuous RUM actions such as `RumActionType.Scroll`, use `DdRum.StartAction()` or `DdRum.StopAction()`.
-
-For example:
-
-```csharp
-void DownloadResourceTapped(string resourceName) {
-    DatadogSdk.Instance.Rum.AddAction(
-        RumActionType.Tap,
-        resourceName,
-    );
-}
-```
-
-When using `DdRum.StartAction` and `DdRum.StopAction`, the `type` action must be the same for the Datadog Unity SDK to match an action's start with its completion.
+For setup steps, see [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=unity).
 
 ### Track resources
 
-For setup steps covering both automatic and manual resource tracking, see [Track network requests][4].
-
-Datadog provides `DatadogTrackedWebRequest` as a drop in replacement for `UnityWebRequest` to enable tracking of resources and HTTP calls from your RUM views.
-
-You can use it the same way as you would any other `UnityWebRequest`:
-
-```csharp
-var request = DatadogTrackedWebRequest.Get("https://httpbin.org/headers");
-yield return request.SendWebRequest();
-
-Debug.Log("Got result: " + request.downloadHandler.text);
-```
-
-### Track custom resources
-
-In addition to tracking resources automatically using `DatadogTrackedWebRequest`, you can track specific custom resources such as network requests or third-party provider APIs using the following methods:
-
-- `DdRum.StartResource`
-- `DdRum.StopResource`
-- `DdRum.StopResourceWithError`
-- `DdRum.StopResourceWithErrorInfo`
-
-For example:
-
-```csharp
-// in your network client:
-
-DatadogSdk.Instance.Rum.StartResource(
-    "resource-key",
-    RumHttpMethod.Get,
-    url,
-);
-
-// Later
-
-DatadogSdk.Instance.Rum.StopResource(
-    "resource-key",
-    200,
-    RumResourceType.Image
-);
-```
-
-The `string` used for `resourceKey` in both calls must be unique for the resource you are calling in order for the Unity Datadog SDK to match a resource's start with its completion.
+For setup steps covering both automatic and manual resource tracking, see [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity).
 
 ### Track custom errors
 
-To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
-
-```csharp
-try
-{
-  // Error prone code
-}
-catch(Exception e)
-{
-  DatadogSdk.Instance.Rum.AddError(e, RumErrorSource.Source);
-}
-```
+For setup steps, see [Track Errors and Crashes](/real_user_monitoring/setup/enable_rum/track_errors/?platform=unity).
 
 ## Track custom global attributes
 
-In addition to the [default RUM attributes][3] captured by the Datadog Unity SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
-
-Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
-
-### Set a custom global attribute
-
-To set a custom global attribute, use `DdRum.AddAttribute`.
-
-* To add or update an attribute, use `DdRum.AddAttribute`.
-* To remove the key, use `DdRum.RemoveAttribute`.
-
-### Track user sessions
-
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity) for instructions on adding user information to your RUM sessions.
-
-### Add custom user attributes
-
-You can add custom attributes to your user session. This additional information is automatically applied to logs, traces, and RUM events.
-
-To remove an existing attribute, set it to `null`.
-
-For example:
-
-```csharp
-DatadogSdk.Instance.AddUserExtraInfo(new ()
-{
- { "attribute_1", "foo" },
- { "attribute_2", null },
-});
-```
+For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=unity).
 
 ## Clear all data
 
-Use `ClearAllData` to clear all data that has not been sent to Datadog.
-
-```csharp
-DatadogSdk.instance.ClearAllData();
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=unity).
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/unity/setup/

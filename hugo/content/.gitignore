@@ -137,3 +137,4 @@
 /*/tracing/error_tracking/error_grouping.md
 /*/tracing/trace_collection/custom_instrumentation/server-side/_index.md
 /*/tracing/trace_collection/dynamic_instrumentation/_index.md
+/*/real_user_monitoring/setup/enable_rum/advanced_configuration.md

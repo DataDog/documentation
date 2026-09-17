@@ -7,118 +7,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ## Enrich user sessions
 
-.NET MAUI RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collected documentation][3] for the events and default attributes the SDK reports. You can also enrich user session information and gain finer control over what's collected by tracking custom events.
-
-### Custom views
-
-For setup steps covering both automatic and manual view tracking, see [Track navigation][6].
-
-In addition to [tracking views automatically](#customize-automatic-tracking), you can track specific views manually. Stop tracking when the view is no longer visible.
-
-```csharp
-// Start a view
-DdRum.StartView("home_screen", "Home");
-
-// Stop the view
-DdRum.StopView("home_screen");
-```
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time with the `AddTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
-
-```csharp
-void OnHeroImageLoaded()
-{
-    DdRum.AddTiming("hero_image");
-}
-```
-
-After the timing is sent, it is accessible as `@view.custom_timings.<timing_name>` — for example, `@view.custom_timings.hero_image`. You must [create a measure][4] before graphing it in RUM analytics or in dashboards.
-
-### Set the view loading time
-
-The SDK can record how long a view took to become interactive. Call `AddViewLoadingTime` from the page code that knows when the view is fully ready:
-
-```csharp
-// Record the view's loading time once
-DdRum.AddViewLoadingTime(overwrite: false);
-```
-
-Pass `overwrite: true` to replace a previously-recorded value for the same view.
-
-### Add view attributes
-
-`AddViewAttribute` and `RemoveViewAttribute` attach key-value pairs to the active view event. Call `AddViewAttribute` **after** the view has been started by the SDK — with automatic view tracking enabled, override `OnNavigatedTo` on your page (not the constructor or `OnAppearing`). By the time `OnNavigatedTo` runs, the SDK has already called `StartView` for the destination, so the attribute is attached to the right view.
-
-```csharp
-protected override void OnNavigatedTo(NavigatedToEventArgs args)
-{
-    base.OnNavigatedTo(args);
-    DdRum.AddViewAttribute("screen_variant", "A");
-}
-
-// Later, to remove it:
-DdRum.RemoveViewAttribute("screen_variant");
-```
-
-### Custom actions
-
-For setup steps, see [Track user interactions][7].
-
-In addition to [tracking actions automatically](#customize-automatic-tracking), you can track specific custom user actions (such as taps, clicks, and scrolls) with `DdRum.AddAction`. For continuous action tracking (for example, a user scrolling a list), use `StartAction` and `StopAction`.
-
-```csharp
-// Single-shot action
-DdRum.AddAction(RumActionType.Tap, "Login Button");
-
-// Continuous action
-DdRum.StartAction(RumActionType.Scroll, "Feed Scroll");
-// ... user scrolling ...
-DdRum.StopAction(RumActionType.Scroll, "Feed Scroll");
-```
-
-### Custom resources
-
-For setup steps covering both automatic and manual resource tracking, see [Track network requests][5].
-
-In addition to [tracking resources automatically](#customize-automatic-tracking), you can track specific custom resources (such as network requests and third-party provider APIs) with `DdRum.StartResource` and `DdRum.StopResource`. Provide a stable resource key, the HTTP method, and the URL when you start, and the status code, kind, and size when you stop.
-
-```csharp
-DdRum.StartResource("api-call-1", RumResourceMethod.Get, "https://api.example.com/users");
-// ... fetch the resource ...
-DdRum.StopResource("api-call-1", 200, RumResourceKind.Xhr, 2048);
-```
-
-### Track long-running operations
-
-Use the operation API to track multi-step flows such as a checkout, file upload, or onboarding sequence. Operations span across views.
-
-```csharp
-// Start the operation
-DdRum.StartOperation(
-    "checkout",
-    operationKey: "op-1",
-    new Dictionary<string, object> { { "step", "payment" } });
-
-// On success
-DdRum.SucceedOperation("checkout", operationKey: "op-1");
-
-// On failure
-DdRum.FailOperation(
-    "checkout",
-    OperationFailure.Error,
-    operationKey: "op-1",
-    new Dictionary<string, object> { { "error_code", 500 } });
-```
-
-### Custom errors
-
-To track a specific error, notify the SDK with the message, source, and a stack trace string. See the [Attributes collected documentation][3].
-
-```csharp
-DdRum.AddError("Something went wrong", RumErrorSource.Source, "stacktrace here");
-```
+For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=maui).
 
 ## Track custom global attributes
 
@@ -235,40 +124,11 @@ Use `ActionEventMapper` to override the resolved name further.
 
 ## Modify or drop RUM events
 
-Use `ErrorEventMapper` to modify or drop error events before they're sent to Datadog. The mapper receives a `DdRumErrorEvent` with `Message`, `Source`, `Stacktrace`, `Context`, and `TimestampMs` properties, and applies to both automatic and manual errors.
-
-```csharp
-DdRum.Enable(new DdRumConfiguration
-{
-    ApplicationId = "<APPLICATION_ID>",
-    ErrorEventMapper = errorEvent =>
-    {
-        // Attach extra context to every error
-        errorEvent.Context["team"] = "mobile";
-
-        // Drop errors matching a pattern
-        if (errorEvent.Message.Contains("ignore-this"))
-            return null;
-
-        // Modify the message
-        errorEvent.Message = "[MyApp] " + errorEvent.Message;
-
-        return errorEvent;
-    }
-});
-```
-
-Return `null` to drop the event entirely.
-
-`ActionEventMapper` and `ResourceEventMapper` work the same way and apply to actions and resources captured by the automatic trackers.
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=maui).
 
 ## Stop the current session
 
-Call `DdRum.StopSession` to terminate the current RUM session. A new session is created the next time an event is recorded (for example, a new view or a tap).
-
-```csharp
-DdRum.StopSession();
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=maui).
 
 ## Proxy configuration
 

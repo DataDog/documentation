@@ -9436,6 +9436,11 @@ menu:
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_frustration_signals
       weight: 308
+    - name: Advanced Configuration
+      url: real_user_monitoring/setup/enable_rum/advanced_configuration/
+      parent: rum_setup_enable
+      identifier: rum_setup_enable_advanced_configuration
+      weight: 309
     - name: Collect Session Replays
       url: session_replay/
       parent: rum_setup

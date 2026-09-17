@@ -403,61 +403,7 @@ DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 
 ## Track custom global attributes
 
-You can attach user information to all RUM events to get more detailed information from your RUM sessions.
-
-### Track user sessions
-
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native) for instructions on adding user information to your RUM sessions.
-
-### Global attributes
-
-You can keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status. These attributes are attached to all future Logs, Spans, and RUM events.
-
-**Add multiple global attributes**
-
-Use `addAttributes` to add or update several attributes at once.
-
-```js
-DdSdkReactNative.addAttributes({
-    profile_mode: 'wall',
-    chat_enabled: true,
-    campaign_origin: 'example_ad_network'
-});
-```
-
-**Add a single global attribute**
-
-Use `addAttribute` when you want to add or update a single attribute.
-
-```js
-DdSdkReactNative.addAttribute('profile_mode', 'wall');
-DdSdkReactNative.addAttribute('chat_enabled', true);
-```
-
-If the attribute already exists, its value is overwritten.
-
-**Remove a single global attribute**
-
-Use `removeAttribute` to remove a specific attribute from the global context.
-
-```js
-DdSdkReactNative.removeAttribute('campaign_origin');
-```
-
-After removal, the attribute is no longer attached to future Logs, Spans, or RUM events.
-
-**Remove multiple global attributes**
-
-Use `removeAttributes` to remove several attributes at once.
-
-```js
-DdSdkReactNative.removeAttributes([
-    'profile_mode',
-    'chat_enabled'
-]);
-```
-
-This is useful when cleaning up session-specific data, such as when a user logs out or exits a feature flow.
+For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=react_native).
 
 ## Track view navigation
 
@@ -490,92 +436,11 @@ If you experience any issues setting up View tracking with `@datadog/mobile-reac
 
 ## Clear all data
 
-Use `clearAllData` to clear all data that has not been sent to Datadog.
-
-```js
-DdSdkReactNative.clearAllData();
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=react_native).
 
 ## Modify or drop RUM events
 
-To modify attributes of a RUM event before it is sent to Datadog, or to drop an event entirely, use the Event Mappers API when configuring the RUM React Native SDK:
-
-```javascript
-import {
-    SdkVerbosity,
-    DatadogProvider,
-    DatadogProviderConfiguration,
-    RumConfiguration,
-    LogsConfiguration,
-    TraceConfiguration
-} from '@datadog/mobile-react-native';
-
-const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    {
-        rumConfiguration: {
-            applicationId: '<APPLICATION_ID>',
-            trackInteractions: true, // Track user interactions (such as a tap on buttons).
-            trackResources: true, // Track XHR resources
-            trackErrors: true, // Track errors
-            // RUM Event Mappers
-            errorEventMapper: (event) => event,
-            resourceEventMapper: (event) => event,
-            actionEventMapper: (event) => event
-        },
-
-        // Log Event Mappers
-        logsConfiguration: {
-            logEventMapper: (event) => event
-        },
-
-        traceConfiguration: {}
-    }
-)
-```
-
-Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent, or dropping the event entirely.
-
-For example, to redact sensitive information from a RUM error `message`, implement a custom `redacted` function and use it in `errorEventMapper`:
-
-```javascript
-config.rumConfiguration.errorEventMapper = (event) => {
-    event.message = redacted(event.message);
-    return event;
-};
-```
-
-Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog.
-
-Depending on the event type, only some specific properties can be modified:
-
-| Event Type    | Attribute key            | Description                        |
-| ------------- | ------------------------ | ---------------------------------- |
-| LogEvent      | `logEvent.message`       | Message of the log.                |
-|               | `logEvent.context`       | Custom attributes of the log.      |
-| ActionEvent   | `actionEvent.context`    | Custom attributes of the action.   |
-| ErrorEvent    | `errorEvent.message`     | Error message.                     |
-|               | `errorEvent.source`      | Source of the error.               |
-|               | `errorEvent.stacktrace`  | Stacktrace of the error.           |
-|               | `errorEvent.context`     | Custom attributes of the error.    |
-|               | `errorEvent.timestampMs` | Timestamp of the error.            |
-| ResourceEvent | `resourceEvent.context`  | Custom attributes of the resource. |
-
-Events include additional context:
-
-| Event Type    | Context attribute key                            | Description                                                             |
-| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
-| LogEvent      | `logEvent.additionalInformation.userInfo`        | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `logEvent.additionalInformation.attributes`      | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`. |
-|               | `actionEvent.additionalInformation.userInfo`     | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `actionEvent.additionalInformation.attributes`   | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.      |
-|               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=react_native).
 
 ## Retrieve the RUM session ID
 

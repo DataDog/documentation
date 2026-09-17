@@ -7,144 +7,11 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ## Enrich user sessions
 
-Kotlin Multiplatform RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
-
-### Custom views
-
-For setup steps covering both automatic and manual view tracking, see [Track navigation][13].
-
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) manually. Stop tracking when the view is no longer visible.
-
-```kotlin
-// to start view
-GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
-
-// to stop view
-GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
-```
-
-### Add your own performance timing
-
-For setup steps, see [Track UI latency][12].
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using the `addTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
-
-```kotlin
-fun onHeroImageLoaded() {
-    GlobalRumMonitor.get().addTiming("hero_image")
-}
-```
-
-After the timing is sent, the timing is accessible as `@view.custom_timings.<timing_name>`. For example: `@view.custom_timings.hero_image`. You must [create a measure][8] before graphing it in RUM analytics or in dashboards.
-
-### Custom actions
-
-For setup steps covering action tracking, see [Track user interactions][14].
-
-In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
-
-The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
-
-```kotlin
-fun onUserInteraction() {
-    GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
-}
-```
-
-### Enrich resources
-
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` instance to add custom attributes to each tracked network request/response. For example, if you want to track a network request's headers, create an implementation like the following, and pass it in the `datadogKtorPlugin` initialization call.
-
-```kotlin
-class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
-    override fun onRequest(request: HttpRequestSnapshot) =
-        request.headers.names().associateWith { request.headers[it] }.mapKeys { "header.$it" }
-
-    override fun onResponse(response: HttpResponse) = emptyMap<String, Any?>()
-
-    override fun onError(request: HttpRequestSnapshot, throwable: Throwable) = emptyMap<String, Any?>()
-}
-
-val ktorClient = HttpClient {
-    install(
-        datadogKtorPlugin(
-            tracedHosts = mapOf(
-                "example.com" to setOf(TracingHeaderType.DATADOG),
-                "example.eu" to setOf(TracingHeaderType.DATADOG)
-            ),
-            rumResourceAttributesProvider = CustomRumResourceAttributesProvider()
-        )
-    )
-}
-```
-
-### Custom resources
-
-For setup steps covering both automatic and manual resource tracking, see [Track network requests][11].
-
-In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
-
-```kotlin
-fun loadResource() {
-    GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
-    try {
-        // do load the resource
-        GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-    } catch (e: Exception) {
-        GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-    }
-}
-```
-
-**Note**: `stopResource` / `stopResourceWithError` methods accepting `NSURLConnection` and `NSError` are also available from iOS source set.
-
-### Custom errors
-
-To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. See the [Attributes collected documentation][7].
-
-```kotlin
-GlobalRumMonitor.get().addError(message, source, throwable, attributes)
-```
-
-**Note**: `addError` method accepting `NSError` is also available from iOS source set.
-
-### Add user properties
-
-You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
-
-```kotlin
-Datadog.addUserExtraInfo(extraInfo)
-```
+For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=kotlin_multiplatform).
 
 ## Event and data management
 
-The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification][9] conditions are met.
-
-### Clear all data
-
-You have the option of deleting all unsent data stored by the SDK with the `clearAllData` API.
-
-```kotlin
-Datadog.clearAllData()
-```
-
-### Stop data collection
-
-You can use the `stopInstance` API to stop the SDK instance from collecting and uploading data further.
-
-```kotlin
-Datadog.stopInstance()
-```
-
-### Set remote log threshold
-
-You can define the minimum log level (priority) to send events to Datadog in a logger instance. If the log priority is below the one you set at this threshold, it does not get sent. The default value is to allow all.
-
-```kotlin
-val logger = Logger.Builder()
-  .setRemoteLogThreshold(LogLevel.INFO)
-  .build()
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=kotlin_multiplatform).
 
 ## Track custom global attributes
 
@@ -367,45 +234,7 @@ val rumConfig = RumConfiguration.Builder(applicationId)
 
 ## Modify or drop RUM events
 
-To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Kotlin Multiplatform SDK:
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // ...
-  .setErrorEventMapper(rumErrorEventMapper)
-  .setActionEventMapper(rumActionEventMapper)
-  .setResourceEventMapper(rumResourceEventMapper)
-  .setViewEventMapper(rumViewEventMapper)
-  .setLongTaskEventMapper(rumLongTaskEventMapper)
-  .build()
-```
-
-When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
-
-| Event type    | Attribute key        | Description                                      |
-| ------------- | -------------------- | ------------------------------------------------ |
-| ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ActionEvent   | `action.target.name` | Target name.                                     |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ErrorEvent    | `error.message`      | Error message.                                   |
-|               | `error.stack`        | Stacktrace of the error.                         |
-|               | `error.resource.url` | URL of the resource.                             |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ResourceEvent | `resource.url`       | URL of the resource.                             |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-
-**Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=kotlin_multiplatform).
 
 ## Retrieve the RUM session ID
 
