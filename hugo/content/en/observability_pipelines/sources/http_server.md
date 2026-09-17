@@ -87,7 +87,7 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 - [Set up a pipeline with the HTTP/S Server source](#set-up-a-pipeline).
 - [Deploy the Datadog Forwarder](#deploy-the-datadog-lambda-forwarder).
 
-**Note**: This is available for Worker versions 2.51 or later.
+**Note**: This is available for Worker versions 2.15 or later.
 
 ### Set up a pipeline
 

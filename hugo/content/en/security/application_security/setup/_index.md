@@ -11,12 +11,6 @@ disable_toc: false
 disable_sidebar: true
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 Learn how to enable App and API Protection on all the following supported platforms and environments.
 
 <div class="alert alert-info">
@@ -87,4 +81,5 @@ Learn how to enable App and API Protection on all the following supported platfo
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="./azure/app-service" >}}
+  {{< appsec-integration name="Azure API Management" avatar="azure-apimanagement" link="./azure/api-management" >}}
 {{< /appsec-integrations >}}
