@@ -68,7 +68,7 @@ cascade:
 {{< /header-list >}}
 
 {{< header-list header="Alibaba Cloud guides" >}}
-    {{< nextlink href="integrations/guide/alibaba-cloud-integration-troubleshooting" tag=" alibaba cloud" >}}Alibaba Cloud Integration Troubleshooting{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/alibaba-cloud-integration-troubleshooting" tag="Alibaba Cloud" >}}Alibaba Cloud Integration Troubleshooting{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="OCI guides" >}}
