@@ -182,9 +182,7 @@ Every failing test is retried at least once, regardless of its duration.
 To enable Dynamic Auto Test Retries, set the following environment variables:
 
 * `DD_CIVISIBILITY_DYNAMIC_ATR_ENABLED` - set to `true` to base the number of retries on the test's first attempt duration instead of the flat `DD_CIVISIBILITY_FLAKY_RETRY_COUNT` limit (default: `false`) - the flat limit is ignored while Dynamic ATR is enabled. Auto Test Retries must be enabled in [{{< ui >}}CI/CD Settings{{< /ui >}}][1].
-* `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` - five comma-separated integers between `1` and `20` that override the default budgets in the table above, from the fastest to the slowest duration bucket (for example, `10,4,1,1,1`). If this variable is unset or empty, the default budgets in the table above are used.
-
-If `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` contains an invalid value, the library ignores it, logs a warning, and uses the default budgets.
+* `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` - five comma-separated integers between `1` and `20` that override the default budgets in the table above, from the fastest to the slowest duration bucket (for example, `10,4,1,1,1`). If this variable is unset or empty, the default budgets in the table above are used. If `DD_CIVISIBILITY_DYNAMIC_ATR_BUCKETS` contains an invalid value, the library ignores it, logs a warning, and uses the default budgets.
 
 **Note**: The session-level limit `DD_CIVISIBILITY_TOTAL_FLAKY_RETRY_COUNT` still applies when Dynamic ATR is enabled.
 
