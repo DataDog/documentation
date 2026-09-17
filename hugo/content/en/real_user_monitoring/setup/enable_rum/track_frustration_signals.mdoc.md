@@ -4,6 +4,19 @@ content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
     label: "SDK"
+further_reading:
+- link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
+  tag: 'Blog'
+  text: 'Detect user pain points with Datadog Frustration Signals'
+- link: '/real_user_monitoring/administer_and_extend_rum/dashboards/usage#frustration-signals'
+  tag: 'Documentation'
+  text: 'Frustration Signals Dashboard'
+- link: '/real_user_monitoring/explorer'
+  tag: 'Documentation'
+  text: 'Learn about the RUM Explorer'
+- link: '/session_replay/'
+  tag: 'Documentation'
+  text: 'Learn about Session Replay'
 ---
 
 ## Overview
