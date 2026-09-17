@@ -64,7 +64,7 @@ You can create the following types of custom detection rules:
 
 The following detection methods are available when you create a custom detection rule or historical job:
 
-- Threshold: Detects when events exceed a user-defined threshold.
+- Threshold: Detects when the query count meets a specified case, including above-threshold (`a > N`) or below-threshold (`a < N` or `a <= 0`) cases.
 - New value: Detects when an attributes changes to a brand new value.
 - Anomaly: Detects when a behavior deviates from its historical baseline.
 - [Content anomaly][6]: Detects when an event's content is an anomaly compared to the historical baseline
