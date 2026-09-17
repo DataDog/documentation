@@ -14,7 +14,7 @@ Use this guide to troubleshoot issues related to the Datadog [Alibaba Cloud inte
 
 ## Integration issues
 
-See configuration issues with your Alibaba Cloud integration on the **Issues** tab of the [Alibaba Cloud integration tile][2].
+See configuration issues with your Alibaba Cloud integration at the top of the [Alibaba Cloud integration tile][2].
 
 ## Alibaba Cloud access key is invalid or no longer exists
 
