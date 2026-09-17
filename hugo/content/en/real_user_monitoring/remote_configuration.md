@@ -12,9 +12,10 @@ further_reading:
 As your application evolves, you may need to adjust the data that the RUM SDK collects and its collection frequency. RUM remote configuration lets you update supported Browser, iOS, and Android SDK settings from Datadog without deploying a new version of your application.
 
 {{< img src="/real_user_monitoring/remote_configuration/rum_remote_configuration_menu.png" alt="View of remote configuration for a web application." >}}
+
 ## Prerequisites
 
-Remote configuration requires the following RUM SDK versions:
+[Remote configuration][2] has to be enabled in your organization and requires the following RUM SDK versions:
 
 - Browser SDK version 7.13.0+
 - iOS SDK version 3.17.0+
@@ -196,3 +197,4 @@ Remote configuration does not override any SDK settings by default. To manage a 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/permissions/#real-user-monitoring
+[2]: /remote_configuration/
