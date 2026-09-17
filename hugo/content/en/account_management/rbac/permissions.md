@@ -78,7 +78,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles" \
 }'
 ```
 
-By default, the following restricted permissions cannot be removed through the UI or API. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and include them in the excluded permissions when using `default_permissions_opt_out: true`:
+By default, the following restricted permissions cannot be removed through the UI or API. To make these permissions removable and automatically exclude them from roles when `default_permissions_opt_out: true` is set, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
