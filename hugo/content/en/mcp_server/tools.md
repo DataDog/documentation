@@ -1345,7 +1345,7 @@ Tools for debugging running applications with [Live Debugger][77] logpoints, whi
 ### `discover_datadog_logpoint`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Discovers the deployment environments and supported features for a service running [Live Debugger][77]. The response lists every environment where the service runs and the features each one supports (for example, `message_templates`, `conditions`, and `capture_expressions`). Call this tool before `create_datadog_logpoint`, and only create logpoints in environments that report `can_create_logpoints: true`.
+Discovers the deployment environments and supported features for a service running [Live Debugger][77]. The response lists every environment where the service runs and the features each one supports (for example, `message_templates`, `conditions`, and `capture_expressions`). Call this tool before `create_datadog_logpoint`.
 
 - Which environments can I debug for the checkout service?
 - Does `service:web-store` support capture expressions in `production`?
@@ -1353,7 +1353,7 @@ Discovers the deployment environments and supported features for a service runni
 ### `enable_live_debugger`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Enables [Live Debugger][77] (dynamic instrumentation) for a service in a specific environment. Call this tool only when `discover_datadog_logpoint` reports `implicitly_enableable: true` for the environment. The tool waits up to 3 minutes for the tracers to begin reporting Live Debugger capabilities. After Live Debugger is enabled, run `discover_datadog_logpoint` again before creating logpoints.
+Enables [Live Debugger][77] (dynamic instrumentation) for a service in an environment where `discover_datadog_logpoint` reports `implicitly_enableable: true`. The tool waits up to 3 minutes for the tracers to begin reporting Live Debugger capabilities.
 
 - Enable Live Debugger for the checkout service in `staging`.
 - Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
@@ -1361,7 +1361,7 @@ Enables [Live Debugger][77] (dynamic instrumentation) for a service in a specifi
 ### `create_debugger_session`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Creates a [Live Debugger][77] session. Create a session after calling `discover_datadog_logpoint` and before creating your first logpoint, then reuse the returned `session_id` for every subsequent Live Debugger tool call. If a `session_id` is already available, use it instead of creating another session.
+Creates a [Live Debugger][77] session. Use the returned `session_id` for subsequent Live Debugger tool calls.
 
 - Create a debugging session so I can add logpoints to the checkout service.
 - Start a Live Debugger session to investigate a null pointer error in the payments service.
