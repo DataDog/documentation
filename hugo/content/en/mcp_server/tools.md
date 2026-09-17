@@ -1312,7 +1312,7 @@ Lists Metrics Without Limits tag indexing rules in priority order. The first rul
 
 ### `manage_metric_tag_configuration`
 *Toolset: **metrics-governance***\
-*Permissions Required: `Metric Tags Write`*\
+*Permissions Required: `Metrics Write`*\
 Creates, updates, or deletes a direct Metrics Without Limits tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
 
 - Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
@@ -1321,7 +1321,7 @@ Creates, updates, or deletes a direct Metrics Without Limits tag configuration f
 
 ### `manage_tag_indexing_rule`
 *Toolset: **metrics-governance***\
-*Permissions Required: `Metrics Read` and `Metric Tags Write`*\
+*Permissions Required: `Metrics Write`*\
 Creates, updates, deletes, or reorders Metrics Without Limits tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
 
 - Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
