@@ -36150,6 +36150,8 @@ components:
           $ref: "#/components/schemas/DowntimeNotifyEndStates"
         notify_end_types:
           $ref: "#/components/schemas/DowntimeNotifyEndTypes"
+        run_as:
+          $ref: "#/components/schemas/DowntimeRunAs"
         schedule:
           $ref: "#/components/schemas/DowntimeScheduleResponse"
         scope:
@@ -36176,6 +36178,49 @@ components:
       oneOf:
         - $ref: "#/components/schemas/User"
         - $ref: "#/components/schemas/DowntimeMonitorIncludedItem"
+    DowntimeRunAs:
+      description: |-
+        The principals (users, roles, or teams) allowed to act on behalf of the downtime.
+
+        **Note**: This feature is currently in Preview and may not be available for all organizations.
+      items:
+        $ref: "#/components/schemas/DowntimeRunAsItem"
+      readOnly: true
+      type: array
+    DowntimeRunAsItem:
+      description: A set of principals allowed to act on behalf of the downtime.
+      properties:
+        principals:
+          description: List of principals allowed to act on behalf of the downtime.
+          items:
+            $ref: "#/components/schemas/DowntimeRunAsPrincipal"
+          type: array
+      type: object
+    DowntimeRunAsPrincipal:
+      description: A principal (user, role, or team) allowed to act on behalf of the downtime.
+      properties:
+        id:
+          description: The ID of the principal.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/DowntimeRunAsPrincipalType"
+      required:
+        - id
+        - type
+      type: object
+    DowntimeRunAsPrincipalType:
+      description: The type of principal allowed to act on behalf of the downtime.
+      enum:
+        - user
+        - role
+        - team
+      example: "user"
+      type: string
+      x-enum-varnames:
+        - USER
+        - ROLE
+        - TEAM
     DowntimeScheduleCreateRequest:
       description: Schedule for the downtime.
       oneOf:
@@ -154792,6 +154837,17 @@ paths:
           schema:
             example: "created_by,monitor"
             type: string
+        - description: |-
+            If `true`, include the `run_as` attribute in the response, which lists the principals allowed to
+            act on behalf of the downtime.
+
+            **Note**: This feature is currently in Preview and may not be available for all organizations.
+          in: query
+          name: with_run_as
+          required: false
+          schema:
+            default: false
+            type: boolean
       responses:
         "200":
           content:
