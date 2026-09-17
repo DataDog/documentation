@@ -11,11 +11,11 @@ further_reading:
 
 As your application evolves, you may need to adjust the data that the RUM SDK collects and its collection frequency. RUM remote configuration lets you update supported Browser, iOS, and Android SDK settings from Datadog without deploying a new version of your application.
 
-{{< img src="/real_user_monitoring/remote_configuration/rum_remote_configuration_menu.png" alt="View of remote configuration for a web application." >}}
+{{< img src="/real_user_monitoring/remote_configuration/rum_remote_configuration_menu.png" alt="The SDK configuration page listing available Browser RUM settings for remote configuration." >}}
 
 ## Prerequisites
 
-[Remote configuration][2] has to be enabled in your organization and requires the following RUM SDK versions:
+[Remote configuration][2] must be enabled in your organization and requires the following RUM SDK versions:
 
 - Browser SDK version 7.13.0+
 - iOS SDK version 3.17.0+
@@ -31,7 +31,7 @@ When the SDK initializes, it applies cached remote settings. If no cached settin
 
 A remote configuration applies to all users and sessions initialized with its ID. You cannot target individual users or sessions. If you change the ID, the SDK treats it as a new configuration and does not use settings cached under the previous ID.
 
-<div class="alert alert-warning">The SDK retrieves remote configuration settings from a public CDN endpoint. Do not include secrets or personal information in configuration values.</div>
+<div class="alert alert-warning">The SDK retrieves remote configuration settings from a public content delivery network (CDN) endpoint. Do not include secrets or personal information in configuration values.</div>
 
 ## Permissions
 
@@ -55,7 +55,7 @@ To configure remote settings for an application:
 
 Remote configuration does not override any SDK settings by default. To manage a setting remotely, explicitly enable its override in Datadog, then configure its value. Settings without an enabled override continue to use the values configured in the SDK.
 
-1. Enable the override for a setting that you want to manage remotely. Choose from the [settings available for your platform](#configurable-settings).
+1. Enable the override for a setting that you want to manage remotely. Choose from the settings listed in the [Configurable settings](#configurable-settings) section for your platform.
 
    <div class="alert alert-danger">Certain settings require corresponding module imports in the iOS and Android SDKs. If your application does not import these modules, remote configuration does not work for Session Replay, distributed tracing, or profiling.</div>
 
