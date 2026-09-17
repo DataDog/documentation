@@ -537,7 +537,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "description": "Trigger a new Bits AI investigation from either a monitor alert or a general investigation request.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
