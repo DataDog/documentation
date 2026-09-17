@@ -192,6 +192,8 @@ Feature flag attributes on traces are available across Datadog:
 
 ## Use with canary rollouts
 
+<div class="alert alert-info">APM guardrail metrics for canary rollouts are in Preview. Contact your Datadog representative to request access.</div>
+
 APM trace enrichment is required to use APM metrics as guardrails for [canary rollouts][4]. Enrichment associates each retained trace with the feature flag allocation, variant, and subject used by the canary. Without this metadata, the canary cannot compare APM data between the control and treatment groups.
 
 Canary rollouts support the following APM guardrail metrics:

@@ -49,6 +49,8 @@ When the canary detects a statistically significant adverse change in a guardrai
 
 ### Use APM guardrail metrics
 
+<div class="alert alert-info">APM guardrail metrics for canary rollouts are in Preview. Contact your Datadog representative to request access.</div>
+
 APM guardrail metrics use retained spans to compare application performance between the control and treatment groups. You can monitor:
 
 - Mean span duration
