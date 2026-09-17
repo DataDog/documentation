@@ -2214,7 +2214,7 @@ Tools for creating, reading, updating, and deleting [Datadog spreadsheets][74].
 Creates or updates a Datadog spreadsheet's tables, sheets, and pivots in a single call.
 
 - Create a logs table in a spreadsheet with columns for service, status, host, timestamp, and message — filter to errors only.
-- Create a pivot table with average duration by db.statement and service for queries over 1 second.
+- Create a pivot table with average duration by `db.statement` and service for queries over 1 second.
 - Create a spreadsheet showing monthly cloud spend broken down by provider and service, with month-over-month percentage change.
 
 ### `get_datadog_spreadsheet_reference`
