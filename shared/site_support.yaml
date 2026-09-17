@@ -24,6 +24,9 @@ site_support_ids:
   app_builder_override:
     regions: [gov2]
     description: "docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)"
+    url_paths:
+      - /api/latest/app-builder
+      - /api/latest/app-builder/**
   adaptive_sampling:
     regions: [gov, gov2]
   advanced_analysis:
@@ -35,6 +38,9 @@ site_support_ids:
   agentless-scanning:
     regions: [gov, gov2]
     description: "api page"
+    url_paths:
+      - /api/latest/agentless-scanning
+      - /api/latest/agentless-scanning/**
   agentless_scanning:
     regions: [gov, gov2]
     description: "docs page"
@@ -217,6 +223,9 @@ site_support_ids:
     regions: [gov, gov2]
   on-call:
     regions: [gov, gov2]
+    url_paths:
+      - /api/latest/on-call
+      - /api/latest/on-call/**
   oracle-cloud-infrastructure:
     regions: [gov, gov2]
   oracle-fusion:
@@ -294,6 +303,9 @@ site_support_ids:
     regions: [gov, gov2]
   workflow-automation:
     regions: [gov, gov2]
+    url_paths:
+      - /api/latest/workflow-automation
+      - /api/latest/workflow-automation/**
   workflows:
     regions: [gov, gov2]
   workload_security_active_protection:

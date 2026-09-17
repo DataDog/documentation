@@ -279,5 +279,11 @@
   },
   "alert_tip": {
     "other": "CONSEIL"
+  },
+  "site_support_banner": {
+    "other": "Ce produit n'est pas pris en charge par le <a href=\"/getting_started/site\">site Datadog </a> que vous avez sélectionné."
+  },
+  "site_support_banner_plaintext": {
+    "other": "This product or feature is not supported for the following sites:"
   }
 }
