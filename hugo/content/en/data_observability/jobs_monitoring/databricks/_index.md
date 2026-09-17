@@ -96,7 +96,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
 [21]: /data_observability/quality_monitoring/data_warehouses/databricks/
-[22]: https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal
+[22]: https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal
 [23]: https://entra.microsoft.com
 
 {{% /tab %}}
