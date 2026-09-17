@@ -7593,10 +7593,10 @@ menu:
       parent: log_management
       identifier: log_reports
       weight: 8
-    - name: Splunk Migration
-      url: logs/splunk_migration/
+    - name: Log Migration
+      url: logs/migration/
       parent: log_management
-      identifier: log_splunk_migration
+      identifier: log_migration
       weight: 9
     - name: Guides
       url: logs/guide/

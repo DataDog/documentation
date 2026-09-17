@@ -1,5 +1,5 @@
 ---
-title: Splunk Migration
+title: Log Migration
 description: "Translate Splunk SPL queries into Datadog syntax and convert Splunk alerts and dashboards into Datadog monitors and dashboards."
 further_reading:
 - link: "/logs/explorer/search_syntax/"
@@ -35,7 +35,7 @@ Use Single Translation as a sandbox for SPL. It is designed for exploring transl
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
-{{< img src="logs/splunk_migration/single-translation.mp4" alt="An SPL query is entered in the Single Translation page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL" video="true" width="100%" >}}
+{{< img src="logs/migration/single-translation.mp4" alt="An SPL query is entered in the Single Translation page and translated, showing the Translation preview chart, the translated Datadog query, and the Translated SPL" video="true" width="100%" >}}
 
 The page returns:
 
@@ -119,7 +119,7 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 4. In {{< ui >}}Name your import{{< /ui >}}, give the batch a name that identifies it later.
 5. Click {{< ui >}}Import{{< /ui >}}.
 
-{{< img src="logs/splunk_migration/import-wizard.png" alt="The Import page, with steps for uploading assets from Splunk, uploading a macros file, and naming the import" style="width:100%;" >}}
+{{< img src="logs/migration/import-wizard.png" alt="The Import page, with steps for uploading assets from Splunk, uploading a macros file, and naming the import" style="width:100%;" >}}
 
 Translation starts as soon as the batch is created and runs in the background. You can close the page and come back to it.
 
@@ -139,7 +139,7 @@ Click a resource to see its original SPL, the translated query, and the explanat
 
 A dashboard carries a status for each of its widgets, and publishes as a single dashboard. Open it to see which widgets translated and which returned an error.
 
-{{< img src="logs/splunk_migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget" style="width:100%;" >}}
+{{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget" style="width:100%;" >}}
 
 Resources in an error state cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a resource, fix it at the source and import it again:
 
