@@ -9,7 +9,7 @@
 # This starts:
 #   - Kafka (KRaft mode, no ZooKeeper) + Schema Registry
 #   - Kafka Connect with an instrumented source and sink connector
-#   - Datadog Agent with Kafka Consumer integration
+#   - Datadog Agent with Kafka Consumer and Kafka Broker integrations
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
 #   - Schema evolver (registers a new schema version every 4 min, renaming field 7 to region_vN)
@@ -40,6 +40,8 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       CLUSTER_ID: 'Mka3OEVBNTcwNTJENDM2Qk'
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: kafka
     command: >
       bash -c "
       sed -i '/KAFKA_ZOOKEEPER_CONNECT/d' /etc/confluent/docker/configure &&
@@ -138,7 +140,7 @@ services:
       retries: 12
 
   datadog-agent:
-    image: gcr.io/datadoghq/agent:7.83.1
+    image: gcr.io/datadoghq/agent:7.83.1-jmx
     depends_on:
       kafka:
         condition: service_healthy
@@ -162,6 +164,8 @@ services:
     configs:
       - source: kafka_consumer_config
         target: /etc/datadog-agent/conf.d/kafka_consumer.d/conf.yaml
+      - source: kafka_broker_config
+        target: /etc/datadog-agent/conf.d/kafka.d/conf.yaml
 
   producer:
     image: python:3.11-slim
@@ -311,6 +315,20 @@ configs:
           tags:
             - env:demo
             - cluster:kafka-demo
+
+  kafka_broker_config:
+    content: |
+      init_config:
+        is_jmx: true
+        collect_default_metrics: true
+
+      instances:
+        - host: kafka
+          port: 9999
+          tags:
+            - env:demo
+            - cluster:kafka-demo
+            - kafka_cluster_id:Mka3OEVBNTcwNTJENDM2Qg
 
   order_proto:
     content: |
