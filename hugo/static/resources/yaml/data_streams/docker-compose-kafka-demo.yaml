@@ -1,5 +1,5 @@
 # Kafka Consumer Integration Demo
-# 
+#
 # Quick Start:
 #   DD_API_KEY=your_key_here docker compose up
 #
@@ -12,6 +12,7 @@
 #   - Datadog Agent with Kafka Consumer integration
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
+#   - Schema evolver (registers a new schema version every 4 min, renaming field 7 to region_vN)
 #
 # View in Datadog (wait 2-3 min):
 #  - Navigate to Data Streams Monitoring and view your Kafka cluster & consumer / producer apps.
@@ -121,6 +122,10 @@ services:
           -H 'Content-Type: application/json' \
           http://localhost:8083/connectors/demo-file-sink/config \
           -d '{"connector.class":"org.apache.kafka.connect.file.FileStreamSinkConnector","tasks.max":"1","file":"/tmp/sink-records.txt","topics":"demo-orders"}'
+        curl --fail --silent --show-error -X PUT \
+          -H 'Content-Type: application/json' \
+          http://localhost:8083/connectors/demo-file-sink-broken/config \
+          -d '{"connector.class":"org.apache.kafka.connect.file.FileStreamSinkConnector","tasks.max":"1","file":"/proc/1/status/orders-out.txt","topics":"demo-orders"}'
         while kill -0 "$$connect_pid" 2> /dev/null; do
           echo "connector event $$(date +%s)" >> /tmp/source-records.txt
           sleep 2
@@ -133,7 +138,7 @@ services:
       retries: 12
 
   datadog-agent:
-    image: gcr.io/datadoghq/agent:7.82.0
+    image: gcr.io/datadoghq/agent:7.83.1
     depends_on:
       kafka:
         condition: service_healthy
@@ -190,6 +195,31 @@ services:
       "
     restart: unless-stopped
 
+  topic-config:
+    image: confluentinc/cp-kafka:7.5.0
+    depends_on:
+      producer:
+        condition: service_started
+    command:
+      - bash
+      - -c
+      - |
+        until kafka-topics --bootstrap-server kafka:19092 --describe --topic demo-orders > /dev/null 2>&1; do
+          sleep 2
+        done
+        kafka-configs --bootstrap-server kafka:19092 \
+          --entity-type topics --entity-name demo-orders \
+          --alter --add-config retention.ms=300000
+        echo "Set demo-orders retention.ms to 300000 (5 min)"
+        until kafka-topics --bootstrap-server kafka:19092 --describe --topic connector-source-events > /dev/null 2>&1; do
+          sleep 2
+        done
+        kafka-configs --bootstrap-server kafka:19092 \
+          --entity-type topics --entity-name connector-source-events \
+          --alter --add-config retention.ms=180000
+        echo "Set connector-source-events retention.ms to 180000 (3 min)"
+    restart: "no"
+
   consumer:
     image: python:3.11-slim
     depends_on:
@@ -219,6 +249,52 @@ services:
       cd /app &&
       protoc --python_out=. order.proto &&
       ddtrace-run python consumer.py
+      "
+    restart: unless-stopped
+
+  events-consumer:
+    image: python:3.11-slim
+    depends_on:
+      kafka:
+        condition: service_healthy
+      kafka-connect:
+        condition: service_healthy
+      datadog-agent:
+        condition: service_started
+    environment:
+      DD_SERVICE: events-consumer
+      DD_ENV: demo
+      DD_VERSION: "1.0.0"
+      DD_AGENT_HOST: datadog-agent
+      DD_TRACE_AGENT_PORT: 8126
+      DD_DATA_STREAMS_ENABLED: "true"
+    configs:
+      - source: events_consumer_script
+        target: /app/events_consumer.py
+    command: >
+      bash -c "
+      apt-get update -qq &&
+      apt-get install -y -qq gcc g++ librdkafka-dev &&
+      pip install -q confluent-kafka==2.3.0 ddtrace>=2.0.0 &&
+      cd /app &&
+      ddtrace-run python events_consumer.py
+      "
+    restart: unless-stopped
+
+  schema-evolver:
+    image: python:3.11-slim
+    depends_on:
+      schema-registry:
+        condition: service_healthy
+      producer:
+        condition: service_started
+    configs:
+      - source: schema_evolver_script
+        target: /app/schema_evolver.py
+    command: >
+      bash -c "
+      cd /app &&
+      python schema_evolver.py
       "
     restart: unless-stopped
 
@@ -313,37 +389,166 @@ configs:
       patch(kafka=True)
       from order_pb2 import Order
 
+      CLIMB_SECONDS = 330
+      RESOLVE_SECONDS = 30
+      CYCLE_SECONDS = CLIMB_SECONDS + RESOLVE_SECONDS
+
       schema_client = SchemaRegistryClient({'url': 'http://schema-registry:8081'})
       deserializer = ProtobufDeserializer(Order, {'use.deprecated.format': False})
       consumer = Consumer({
           'bootstrap.servers': 'kafka:19092',
           'group.id': 'demo-order-processor',
           'client.id': 'order-consumer',
-          'auto.offset.reset': 'earliest'
+          'auto.offset.reset': 'earliest',
+          'enable.auto.commit': False
       })
       consumer.subscribe(['demo-orders'])
 
       print("🚀 Consumer started - processing orders...")
       count = 0
+      cycle_start = time.time()
+      pending = []  # (msg, order_timestamp) read and processed, but not yet committed
       try:
           while True:
               msg = consumer.poll(1.0)
-              if msg is None: continue
-              if msg.error():
-                  if msg.error().code() != KafkaError._PARTITION_EOF:
-                      print(f"❌ Error: $${msg.error()}")
-                  continue
-              
-              with tracer.trace("consume.order", service="order-consumer"):
-                  count += 1
-                  ctx = SerializationContext('demo-orders', MessageField.VALUE)
-                  order = deserializer(msg.value(), ctx)
-                  print(f"📬 Message #$${count} [P$${msg.partition()}:$${msg.offset()}]")
-                  
-                  with tracer.trace("process.order"):
-                      time.sleep(0.1)
-                      if order.total_amount > 500: time.sleep(0.3)
-                      print(f"✅ Processed $${order.order_id} | $${order.customer_id} | $$$${order.total_amount:.2f}")
+              if msg is not None:
+                  if msg.error():
+                      if msg.error().code() != KafkaError._PARTITION_EOF:
+                          print(f"❌ Error: $${msg.error()}")
+                  else:
+                      with tracer.trace("consume.order", service="order-consumer"):
+                          count += 1
+                          ctx = SerializationContext('demo-orders', MessageField.VALUE)
+                          order = deserializer(msg.value(), ctx)
+                          print(f"📬 Message #$${count} [P$${msg.partition()}:$${msg.offset()}]")
+                          pending.append((msg, order.timestamp))
+
+                          with tracer.trace("process.order"):
+                              time.sleep(0.1)
+                              if order.total_amount > 500: time.sleep(0.3)
+                              print(f"✅ Processed $${order.order_id} | $${order.customer_id} | $$$${order.total_amount:.2f}")
+              elapsed_in_cycle = (time.time() - cycle_start) % CYCLE_SECONDS
+              if elapsed_in_cycle >= CLIMB_SECONDS:
+                  # resolve phase: drain everything so lag falls back toward 0
+                  while pending:
+                      oldest_msg, _ = pending.pop(0)
+                      consumer.commit(message=oldest_msg, asynchronous=True)
+              # else: climb phase - hold all commits back, let pending grow
+      except KeyboardInterrupt:
+          print("\n🛑 Shutting down...")
+      finally:
+          consumer.close()
+
+  schema_evolver_script:
+    content: |
+      #!/usr/bin/env python3
+      import json, time, urllib.error, urllib.request
+
+      REGISTRY = 'http://schema-registry:8081'
+      SUBJECT = 'demo-orders-value'
+      CYCLE_SECONDS = 240
+
+      def build_schema(n):
+          return (
+              'syntax = "proto3";\n'
+              'package ecommerce;\n'
+              'message Order {\n'
+              '  string order_id = 1;\n'
+              '  string customer_id = 2;\n'
+              '  string product_name = 3;\n'
+              '  int32 quantity = 4;\n'
+              '  double price = 5;\n'
+              '  double total_amount = 6;\n'
+              f'  string region_v{n} = 7;\n'
+              '  int64 timestamp = 8;\n'
+              '}\n'
+          )
+
+      def wait_for_initial_registration():
+          for _ in range(120):
+              try:
+                  with urllib.request.urlopen(f'{REGISTRY}/subjects/{SUBJECT}/versions', timeout=3) as r:
+                      versions = json.loads(r.read())
+                      if versions:
+                          print(f'Producer registered v1, evolving from: {versions}', flush=True)
+                          return
+              except (urllib.error.URLError, urllib.error.HTTPError):
+                  pass
+              time.sleep(2)
+          print('Producer never registered v1, evolving anyway', flush=True)
+
+      def register(n):
+          body = json.dumps({'schemaType': 'PROTOBUF', 'schema': build_schema(n)}).encode('utf-8')
+          req = urllib.request.Request(
+              f'{REGISTRY}/subjects/{SUBJECT}/versions',
+              data=body,
+              headers={'Content-Type': 'application/vnd.schemaregistry.v1+json'},
+              method='POST',
+          )
+          try:
+              with urllib.request.urlopen(req, timeout=10) as r:
+                  schema_id = json.loads(r.read()).get('id')
+                  print(f'📝 Rename #{n} registered (field 7 -> region_v{n}): schema_id={schema_id}', flush=True)
+          except urllib.error.HTTPError as e:
+              print(f'Rename #{n} rejected: {e.code} {e.read().decode()}', flush=True)
+          except urllib.error.URLError as e:
+              print(f'Rename #{n} error: {e}', flush=True)
+
+      def main():
+          wait_for_initial_registration()
+          n = 1
+          while True:
+              time.sleep(CYCLE_SECONDS)
+              register(n)
+              n += 1
+
+      if __name__ == '__main__':
+          main()
+
+  events_consumer_script:
+    content: |
+      #!/usr/bin/env python3
+      import time
+      from confluent_kafka import Consumer, KafkaError
+      from ddtrace import tracer, patch
+      patch(kafka=True)
+
+      CLIMB_SECONDS = 600
+      RESOLVE_SECONDS = 30
+      CYCLE_SECONDS = CLIMB_SECONDS + RESOLVE_SECONDS
+
+      consumer = Consumer({
+          'bootstrap.servers': 'kafka:19092',
+          'group.id': 'demo-events-processor',
+          'client.id': 'events-consumer',
+          'auto.offset.reset': 'earliest',
+          'enable.auto.commit': False
+      })
+      consumer.subscribe(['connector-source-events'])
+
+      print("🚀 Consumer started - processing events...")
+      count = 0
+      cycle_start = time.time()
+      pending = []
+      try:
+          while True:
+              msg = consumer.poll(1.0)
+              if msg is not None:
+                  if msg.error():
+                      if msg.error().code() != KafkaError._PARTITION_EOF:
+                          print(f"❌ Error: $${msg.error()}")
+                  else:
+                      with tracer.trace("consume.event", service='events-consumer'):
+                          count += 1
+                          print(f"📬 Message #$${count} [P$${msg.partition()}:$${msg.offset()}]")
+                          pending.append(msg)
+              elapsed_in_cycle = (time.time() - cycle_start) % CYCLE_SECONDS
+              if elapsed_in_cycle >= CLIMB_SECONDS:
+                  # resolve phase: drain everything so lag falls back toward 0
+                  while pending:
+                      oldest_msg = pending.pop(0)
+                      consumer.commit(message=oldest_msg, asynchronous=True)
+              # else: climb phase - hold all commits back, let pending grow
       except KeyboardInterrupt:
           print("\n🛑 Shutting down...")
       finally:
