@@ -70,13 +70,30 @@ While investigating a device, click the {{< ui >}}Open Device Page{{< /ui >}} dr
 
 ### Dependencies
 
-The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of network devices, end user devices, and VPN tunnels at a glance, along with a visual graph of neighboring devices.
+The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of network devices, endpoints, and VPN tunnels at a glance, along with a visual graph of neighboring devices.
 
 {{< img src="/network_device_monitoring/network_topology_map/topology_dependencies_2.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
 
-Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, use the {{< ui >}}Network Devices{{< /ui >}} or {{< ui >}}VPN{{< /ui >}} filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
+Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, select {{< ui >}}VPN tunnels{{< /ui >}}, {{< ui >}}Network devices{{< /ui >}}, or {{< ui >}}Endpoints{{< /ui >}} filters to switch between dependency views.
 
-{{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="The Dependencies tab on the NDM device page with the Physical filter selected, showing a topology graph and a table of connected devices with status, IP address, and interface details." style="width:100%;" >}}
+<div class="alert alert-info">
+VPN dependencies require <a href="/network_monitoring/devices/vpn_monitoring/">VPN Monitoring</a> to be configured. Endpoint dependencies require <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring (EUDM)</a> to be configured. 
+</div>
+
+#### VPN tunnels
+The {{< ui >}}VPN tunnels{{< /ui >}} view displays a topology graph alongside a table of connected VPNs showing peer IPs, protocol, interface, and destination subnets.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_VPN_tunnels.png" alt="The Dependencies tab on the NDM device page with the VPN tunnels tab selected, showing a topology graph and a table of connected VPNs." style="width:100%;" >}}
+
+#### Network devices
+The {{< ui >}}Network devices{{< /ui >}} view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_network_devices.png" alt="The Dependencies tab on the NDM device page with the Network devices tab selected, showing a topology graph with eleven connected devices, color-coded by status, and a table with more details about connected devices." style="width:100%;" >}}
+
+#### Endpoints
+The {{< ui >}}Endpoints{{< /ui >}} view displays a topology graph alongside a table of end user devices and statuses. Select an endpoint in the graph to view more details and access it in [EUDM][12].
+
+{{< img src="/network_device_monitoring/network_topology_map/network_topology_map_endpoints.png" alt="The Dependencies tab on the NDM device page with the endpoints tab selected, showing a topology graph with five connected end user devices with one device's detail view open, plus a table with more details about connected devices." style="width:100%;" >}}
 
 ### Metrics
 
@@ -239,4 +256,4 @@ NDM provides multiple visualization tools to monitor your infrastructure:
 [9]: /network_monitoring/devices/geomap
 [10]: https://app.datadoghq.com/devices
 [11]: https://app.datadoghq.com/devices/netflow
-[12]: /network_monitoring/devices/vpn_monitoring/
+[12]: /infrastructure/end_user_device_monitoring/
