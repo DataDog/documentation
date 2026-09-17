@@ -92,7 +92,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
-    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the **Prefix** field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the {{< ui >}}Prefix{{< /ui >}} field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
 1. Check the confirmation statement.
 1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
 1. Click **Save**.
@@ -145,11 +145,11 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 ## Using template syntax in Observability Pipelines for dynamic partitioning
 
-When you [set up the Datadog Archives destination](#set-up-the-destination-for-your-pipeline), you can use [template syntax][8] in the **Prefix** field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the **Prefix** field to route logs to the Log Archive for the specific attribute value.
+When you [set up the Datadog Archives destination](#set-up-the-destination-for-your-pipeline), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
-However, you must manually create a Log Archive for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the **Path** field when you create the Log Archive.
+However, you must manually create a Log Archive for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
 

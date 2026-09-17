@@ -90,11 +90,11 @@ Enter a prefix that you want to apply to all key objects.
 
 ## Using template syntax in Observability Pipelines for dynamic partitioning
 
-When you set up the Datadog Archives (Azure Storage) destination, you can use [template syntax][6] in the **Prefix** field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the **Prefix** field to route logs to the Log Archive for the specific attribute value.
+When you set up the Datadog Archives (Azure Storage) destination, you can use [template syntax][6] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/azure_storage_prefix_template.png" alt="The Azure Storage destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
-However, you must manually create a Log Archive for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the **Path** field when you create the Log Archive.
+However, you must manually create a Log Archive for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/azure_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
 
