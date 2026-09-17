@@ -1,6 +1,15 @@
 /* The banner is hidden or revealed by the global `[data-region]` rules (see
    styles/global.css and the generated CSS in BaseLayout.astro), so this block
-   only owns its spacing. */
-.site-support-banner {
-  margin-bottom: var(--space-md);
+   only owns its spacing.
+
+   The banner adds no bottom margin of its own. It sits directly above the page
+   title, and that title already carries a top margin (`.prose h1:first-child`
+   in ApiLayout.astro). Adding one here would stack with the title's and double
+   the gap, which is what Hugo shows as a single margin.
+
+   The inner Alert's own bottom margin collapses through this wrapper, so
+   zeroing the wrapper alone has no effect — the child is what has to be
+   zeroed. */
+.site-support-banner > :global(*:last-child) {
+  margin-bottom: 0;
 }
