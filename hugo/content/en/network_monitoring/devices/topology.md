@@ -70,7 +70,7 @@ While investigating a device, click the {{< ui >}}Open Device Page{{< /ui >}} dr
 
 ### Dependencies
 
-The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of network devices, endpoints, and VPN tunnels at a glance, along with a visual graph of neighboring devices.
+The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of physically connected network devices, endpoints, and VPN tunnels at a glance, along with a visual graph of neighboring devices.
 
 {{< img src="/network_device_monitoring/network_topology_map/topology_dependencies_2.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
 
