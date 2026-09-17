@@ -6,9 +6,6 @@
   color: var(--color-status-text);
   font-size: var(--font-size-base);
   line-height: var(--line-height);
-  /* Slightly heavier than body copy, so an alert reads as set apart from the
-     prose around it rather than as part of it. */
-  font-weight: var(--font-weight-medium);
 }
 
 .alert--info {
