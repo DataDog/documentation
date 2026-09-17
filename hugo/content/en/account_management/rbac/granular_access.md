@@ -77,4 +77,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
 [26]: /security/cloud_siem/detect_and_monitor/critical_assets/#restrict-edit-permissions
-[27]: /llm_observability/improve/experiments/
+[27]: /llm_observability/improve/access_control/
