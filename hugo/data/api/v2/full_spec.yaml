@@ -93013,16 +93013,42 @@ components:
       x-enum-varnames:
         - RECOMMENDATION
     RecommendationsFilterRequest:
-      description: Request body for filtering cost recommendations.
+      description: JSON:API request body for filtering cost recommendations.
       example:
-        filter: "@resource_table:aws_ec2_instance"
-        sort:
-          - expression: potential_daily_savings.amount
-            order: DESC
+        data:
+          attributes:
+            scope: ccm
+            sort:
+              - expression: potential_daily_savings.amount
+                order: DESC
+          id: "@resource_table:aws_ec2_instance"
+          type: recommendations_filter
       properties:
-        filter:
-          description: Filter expression applied to the recommendations.
+        data:
+          $ref: "#/components/schemas/RecommendationsFilterRequestData"
+      required:
+        - data
+      type: object
+    RecommendationsFilterRequestData:
+      description: |-
+        JSON:API resource containing the cost recommendations filter. This legacy search contract
+        uses the resource ID for the filter expression rather than as a persistent resource identifier.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
+        id:
+          description: |-
+            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
+            and returns all recommendations.
           type: string
+        type:
+          $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
+      required:
+        - type
+      type: object
+    RecommendationsFilterRequestDataAttributes:
+      description: Attributes used to filter and sort cost recommendations.
+      properties:
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -93034,6 +93060,15 @@ components:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
+    RecommendationsFilterRequestDataType:
+      default: recommendations_filter
+      description: Legacy JSON:API resource type required by the cost recommendations search decoder.
+      enum:
+        - recommendations_filter
+      example: recommendations_filter
+      type: string
+      x-enum-varnames:
+        - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
       description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
       enum:
@@ -147297,10 +147332,14 @@ paths:
             examples:
               default:
                 value:
-                  filter: "@resource_table:aws_ec2_instance"
-                  sort:
-                    - expression: potential_daily_savings.amount
-                      order: DESC
+                  data:
+                    attributes:
+                      scope: ccm
+                      sort:
+                        - expression: potential_daily_savings.amount
+                          order: DESC
+                    id: "@resource_table:aws_ec2_instance"
+                    type: recommendations_filter
             schema:
               $ref: "#/components/schemas/RecommendationsFilterRequest"
         required: true
