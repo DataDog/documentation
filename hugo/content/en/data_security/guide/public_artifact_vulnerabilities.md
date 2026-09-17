@@ -40,7 +40,7 @@ The table loads and shows one row per vulnerability affecting that image/version
 |--------|---------|
 | Severity | Severity of the vulnerability (for example, Critical, High, Medium, Low, and Info). |
 | Vulnerability | CVE or vulnerability identifier and name. |
-| Platform | Platform(s) the statement applies to (for example, Linux, Windows). The platform column also shows the list of variants affected by the CVE (for example, fips, jmx, and servercore). |
+| Platform | Applicable platforms. Hover over a platform value to see the specific variants it covers, including FIPS and non-FIPS builds. |
 | Status | Current status: for example, Not affected, Affected, Fixed, and Under investigation. |
 | Additional Information | More information on the status of the CVE and justification of the status if needed. For example, if the status is component_not_present, this column explains why the CVE does not affect the artifact and how that conclusion was reached. Some statuses, such as Under investigation, do not have additional information because the impact is still being analyzed. |
 
@@ -64,7 +64,7 @@ The table switches to CVE mode and shows one row per (CVE, artifact, version, st
 | CVE | The CVE ID. |
 | Artifact Name | Name of the artifact (for example, agent, library name). |
 | Version | Version of the artifact. |
-| Platform | Platform(s) for this row (for example, Linux, Windows). |
+| Platform | Applicable platforms. Hover over a platform value to see the specific variants it covers, including FIPS and non-FIPS builds. |
 | Status | Status for this CVE/artifact/version (for example, Not affected, Affected, Fixed, and Under investigation). |
 | Additional Information | More information on the status of the CVE and justification of the status if needed. |
 
