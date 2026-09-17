@@ -29,6 +29,7 @@ The Public Artifact Vulnerabilities page is accessible through the Help page und
 
 Use this to see all vulnerabilities for a specific artifact and version (for example, the Datadog Agent image version 7.52.0).
 
+- {{< ui >}}Family{{< /ui >}}: Choose a category from the {{< ui >}}Family{{< /ui >}} dropdown (for example, Agent platform, APM library injection, Telemetry collectors, Serverless, Private deployments, Build & CI). This narrows the {{< ui >}}Image{{< /ui >}} dropdown to artifacts in that category.
 - {{< ui >}}Image{{< /ui >}}: Choose an artifact from the {{< ui >}}Image{{< /ui >}} dropdown (for example, agent, cluster-agent, synthetic-private-location-worker). The list is built from available public artifacts.
 - {{< ui >}}Version{{< /ui >}}: Choose a {{< ui >}}Version{{< /ui >}} for that image. Versions are sorted by newest first.
 
