@@ -46,7 +46,7 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
 
-To remove the following permissions through the [Create Role][4], [Update a Role][5], or [Revoke Permission][6] APIs, set `default_permissions_opt_out: true` in the request body:
+To exclude the following permissions when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
@@ -78,7 +78,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles" \
 }'
 ```
 
-By default, the following restricted permissions cannot be removed through the UI or API. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and include them in the permissions removed by `default_permissions_opt_out: true`:
+By default, the following restricted permissions cannot be removed through the UI or API. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and include them in the excluded permissions when using `default_permissions_opt_out: true`:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
@@ -140,7 +140,7 @@ Minimal Access Roles is an organization-wide setting. Once enabled, the followin
 - Static Analysis Settings Read (`static_analysis_settings_read`)
 - Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
 
-If you use `default_permissions_opt_out` in [Terraform role resources][7] or direct API calls, update your automation to account for these additional permissions before enabling Minimal Access Roles.
+If you use `default_permissions_opt_out` in [Terraform role resources][6] or direct API calls, update your automation to account for these additional permissions before enabling Minimal Access Roles.
 
 ## Permissions list
 
@@ -162,5 +162,4 @@ Each managed role inherits all of the permissions from the less powerful roles. 
 [3]: /api/latest/roles/#list-permissions
 [4]: /api/latest/roles/#create-role
 [5]: /api/latest/roles/#update-a-role
-[6]: https://docs.datadoghq.com/api/latest/roles/revoke-permission/
-[7]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
