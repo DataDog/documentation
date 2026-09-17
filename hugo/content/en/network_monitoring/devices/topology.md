@@ -70,11 +70,11 @@ While investigating a device, click the {{< ui >}}Open Device Page{{< /ui >}} dr
 
 ### Dependencies
 
-The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of physically connected devices and VPN tunnels at a glance, along with a visual graph of neighboring devices.
+The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of network devices, end user devices, and VPN tunnels at a glance, along with a visual graph of neighboring devices.
 
-{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
+{{< img src="/network_device_monitoring/network_topology_map/topology_dependencies_2.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
 
-Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, use the {{< ui >}}Physical{{< /ui >}} or {{< ui >}}VPN{{< /ui >}} filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
+Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, use the {{< ui >}}Network Devices{{< /ui >}} or {{< ui >}}VPN{{< /ui >}} filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
 
 {{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="The Dependencies tab on the NDM device page with the Physical filter selected, showing a topology graph and a table of connected devices with status, IP address, and interface details." style="width:100%;" >}}
 
