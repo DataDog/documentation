@@ -15,6 +15,8 @@ The IP allowlist controls which networks can be used to access your data in Data
 
 When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
 
+The IP allowlist is an organization-wide setting. It applies uniformly to all traffic listed under [Blocked and allowed resources](#blocked-and-allowed-resources) and cannot be scoped to a specific token, API key, user, or endpoint.
+
 ### Blocked and allowed resources
 
 If a user's IP is not contained in the IP allowlist, they are effectively blocked from accessing and using:
