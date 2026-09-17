@@ -92,10 +92,9 @@
       {{ if isset . "govAvailable" }}
         {{ $gov_available = index . "govAvailable" }}
       {{ end }}
-      {{ $fed_regions := slice "gov" "gov2" }}
       {{ $supported_regions := slice }}
       {{ range site.Params.allowedRegions }}
-        {{ if or $gov_available (not (in $fed_regions .value)) }}
+        {{ if or $gov_available (not (hasPrefix .value "gov")) }}
           {{ $supported_regions = $supported_regions | append .value }}
         {{ end }}
       {{ end }}
