@@ -26,7 +26,7 @@ Tag Indexing Rules operate on groups of metrics identified by name or prefix. Th
 After you create a rule, Datadog automatically applies it to all matching metrics.
 
 1. Navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][3].
-2. Click {{< ui >}}+ Create Rule{{< /ui >}}.
+2. Click {{< ui >}}\+ Create Rule{{< /ui >}}.
 3. Select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 
 {{< img src="metrics/guide/tag_indexing_rules/configure_tag_indexing_rule.png" alt="The Create Rule dropdown menu in Metrics Settings, showing the Configure Tag Indexing Rule option highlighted." style="width:50%;">}}
