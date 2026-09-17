@@ -51,3 +51,56 @@ describe("BaseLayout region visibility", () => {
     expect(emitted.filter((k) => !known.has(k))).toEqual([]);
   });
 });
+
+/**
+ * The site-support banner rides the same region-visibility mechanism: it
+ * renders one `[data-region]` element per unsupported region and relies on the
+ * generated CSS above to reveal the matching one.
+ *
+ * These read the frozen fixture, not real product data —
+ * `vitest.unit.config.ts` redirects `@shared/site_support.yaml`.
+ */
+describe("BaseLayout site-support banner", () => {
+  async function renderAt(
+    pathname: string,
+    props: Record<string, unknown> = {},
+  ): Promise<string> {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    return container.renderToString(BaseLayout, {
+      props: { title: "Test page", ...props },
+      request: new Request(`https://docs.example.com${pathname}`),
+    });
+  }
+
+  it("renders the banner for a path matching url_paths", async () => {
+    const html = await renderAt("/fake/scoped/deep/page");
+    expect(html).toContain("site-support-banner");
+  });
+
+  it("renders no banner for an unaffected path", async () => {
+    const html = await renderAt("/totally/unrelated");
+    expect(html).not.toContain("site-support-banner");
+  });
+
+  it("resolves the siteSupportId prop ahead of the path", async () => {
+    const html = await renderAt("/totally/unrelated", {
+      siteSupportId: "fake_product",
+    });
+    expect(html).toContain(`data-region="gov2"`);
+  });
+
+  it("places the banner inside the body wrapper, above the page slot", async () => {
+    // Hugo puts the banner at the top of the content area. Keeping it inside
+    // `.base-layout__body` means it sits below the fixed header rather than
+    // under it.
+    const html = await renderAt("/fake/scoped/deep/page");
+    const bodyIdx = html.indexOf("base-layout__body");
+    const bannerIdx = html.indexOf("site-support-banner");
+    expect(bodyIdx).toBeGreaterThan(-1);
+    expect(bannerIdx).toBeGreaterThan(bodyIdx);
+  });
+});

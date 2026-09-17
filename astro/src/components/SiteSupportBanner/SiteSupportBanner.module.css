@@ -1,0 +1,6 @@
+/* The banner is hidden or revealed by the global `[data-region]` rules (see
+   styles/global.css and the generated CSS in BaseLayout.astro), so this block
+   only owns its spacing. */
+.site-support-banner {
+  margin-bottom: var(--space-md);
+}
