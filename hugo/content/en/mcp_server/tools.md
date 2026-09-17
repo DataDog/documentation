@@ -1245,7 +1245,7 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Metrics Governance
 
-Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics Without Limits tag configurations and indexing rules.
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
 
 ### `estimate_datadog_metric_cardinality`
 *Toolset: **metrics-governance***\
@@ -1268,7 +1268,7 @@ Identifies the tag-level drivers of a metric's indexed timeseries volume, includ
 ### `get_metric_governance_status`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Read`*\
-Retrieves the Metrics Without Limits governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
 
 - Show the governance status for `custom.checkout.requests`.
 - Which tag indexing rule applies to `custom.api.latency`?
@@ -1277,7 +1277,7 @@ Retrieves the Metrics Without Limits governance status for up to 20 metrics, inc
 ### `get_metric_tag_configuration`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Read`*\
-Retrieves the direct Metrics Without Limits tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
 
 - Which tags are enabled for `custom.checkout.requests`?
 - Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
@@ -1304,7 +1304,7 @@ Retrieves series volume for up to 20 metrics. Custom metrics return indexed and 
 ### `get_tag_indexing_rules`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Read`*\
-Lists Metrics Without Limits tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
 
 - List all tag indexing rules in priority order.
 - Which rules match metrics with the `custom.checkout.*` naming pattern?
@@ -1313,7 +1313,7 @@ Lists Metrics Without Limits tag indexing rules in priority order. The first rul
 ### `manage_metric_tag_configuration`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Write`*\
-Creates, updates, or deletes a direct Metrics Without Limits tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
 
 - Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
 - Update `custom.api.latency` to exclude the `request_id` tag.
@@ -1322,7 +1322,7 @@ Creates, updates, or deletes a direct Metrics Without Limits tag configuration f
 ### `manage_tag_indexing_rule`
 *Toolset: **metrics-governance***\
 *Permissions Required: `Metrics Write`*\
-Creates, updates, deletes, or reorders Metrics Without Limits tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
 
 - Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
 - Move the checkout metrics rule to the highest priority.
