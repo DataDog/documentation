@@ -83,7 +83,7 @@ You can also create a restriction with the Data Access Control [Datasets API][5]
 
 ## Annotation queues
 
-An annotation queue that belongs to a project inherits that project's restriction. Restricting a project hides its queues, the traces they hold for review, the labels reviewers applied, and each queue's label schema. Users outside the granted teams or roles cannot annotate, edit, or delete a queue, and cannot export its annotated interactions to a dataset or to CSV.
+An annotation queue that belongs to a project inherits that project's restriction. Restricting a project hides its queues, the traces they hold for review, the labels that reviewers applied, and each queue's label schema. Users outside the granted teams or roles cannot annotate, edit, or delete a queue, and cannot export its annotated interactions to a dataset or to CSV.
 
 A queue's own [access settings][7] are separate: the reviewer and assignee restrictions control who can annotate a queue that a user can already see. Data Access Control controls who can see the queue at all.
 
