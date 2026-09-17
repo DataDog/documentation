@@ -36,19 +36,19 @@
     "other": "Nos ingénieurs sont là pour vous aider !"
   },
   "email_support_sentence": {
-    "other": "Vous pouvez contacter notre équipe de support en visitant le <a href=\\\"http://help.datadoghq.com\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">site de support de Datadog</a>. (tous les sites). <br><br> Pour plus de détails sur la façon de vous connecter au site de support, consultez <a href=\\\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\\\" target=\\\"_blank\\\"> Accéder à votre ticket de support</a>."
+    "other": "Vous pouvez contacter notre équipe de support en visitant le <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">site de support de Datadog</a>. (tous les sites). <br><br> Pour plus de détails sur la façon de vous connecter au site de support, consultez <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\"> Accéder à votre ticket de support</a>."
   },
   "live_chat_support_sentence": {
-    "other": "Discutez avec l'équipe d'assistance Datadog du lundi au vendredi entre 16 h et 1 h HNEC (Heure normale d'Europe centrale) via le chat intégré à l'application. Consultez <a href=\\\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">Contacter le support par chat</a> pour connaître les bonnes pratiques."
+    "other": "Discutez avec l'équipe d'assistance Datadog du lundi au vendredi entre 16 h et 1 h HNEC (Heure normale d'Europe centrale) via le chat intégré à l'application. Consultez <a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">Contacter le support par chat</a> pour connaître les bonnes pratiques."
   },
   "event_stream_support_sentence": {
     "other": "Le <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">programme de la communauté Slack</a> est un réseau conçu par les utilisateurs Datadog, pour les utilisateurs Datadog, afin d'obtenir des réponses ou de partager des conseils et astuces sur les différentes solutions de Datadog."
   },
   "foundation_enablement_sentence": {
-    "other": "<a href=\\\"https://dtdg.co/fe_sessions\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">Inscrivez-vous</a> à l'une de nos sessions de formation fondamentales en direct, animées par des experts, sur diverses fonctionnalités et produits Datadog."
+    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">Inscrivez-vous</a> à l'une de nos sessions de formation fondamentales en direct, animées par des experts, sur diverses fonctionnalités et produits Datadog."
   },
   "learning_center_sentence": {
-    "other": "Suivez un <a href=\\\"https://dtdg.co/47QnE99\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">cours pratique</a> en autonomie pour apprendre et mettre en pratique les concepts clés de Datadog."
+    "other": "Suivez un <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">cours pratique</a> en autonomie pour apprendre et mettre en pratique les concepts clés de Datadog."
   },
   "learning_resources": {
     "other": "Ressources d'apprentissage"
@@ -57,7 +57,7 @@
     "other": "Enrichissez vos connaissances sur la plateforme Datadog grâce à des ressources d'apprentissage gratuites."
   },
   "webinars_sentence": {
-    "other": "Assistez aux <a href=\\\"https://dtdg.co/3PeuldT\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">webinaires Datadog</a> à venir ou regardez les enregistrements sur divers sujets liés aux produits."
+    "other": "Assistez aux <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">webinaires Datadog</a> à venir ou regardez les enregistrements sur divers sujets liés aux produits."
   },
   "agent_started_sentence": {
     "other": "Pour commencer à utiliser l'Agent, sélectionnez votre plateforme."
