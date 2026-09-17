@@ -99,7 +99,7 @@ Enter a prefix that you want to apply to all key objects.
 
 ## Using template syntax in Observability Pipelines for dynamic partitioning
 
-When you [set up the Google Cloud Storage destination](#set-up-the-destinations), you can use [template syntax][7] in the **Prefix** field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the **Prefix** field to route logs to the Log Archive for that specific attribute value.
+When you [set up the Google Cloud Storage destination](#set-up-the-destinations), you can use [template syntax][7] in the **Prefix** field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the **Prefix** field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
