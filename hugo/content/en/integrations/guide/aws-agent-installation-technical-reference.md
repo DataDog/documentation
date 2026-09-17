@@ -21,7 +21,7 @@ This page explains how Datadog instruments and maintains your AWS workloads thro
 
 This page covers Amazon EC2 instances and AWS Lambda functions. Amazon EKS is not supported.
 
-Datadog also offers [remote instrumentation][4] for Lambda functions, which deploys an instrumenter function into your own account rather than making the changes from Datadog. For a comparison of the two, see [Choose between this guide and remote instrumentation][6].
+Datadog also offers [remote instrumentation][4] for Lambda functions, which deploys an instrumenter function into your own account rather than making the changes from Datadog. For a comparison of the two, see [Choose between the AWS integration and remote instrumentation][6] in the setup guide.
 
 ## AWS resources that Datadog creates
 
@@ -38,7 +38,7 @@ The CloudFormation template you launch creates the following resources one time,
 | IAM role | auto-named | Lets EventBridge send events to the `datadog-agent-resource-update-intake-destination` API destination |
 | IAM role | `datadog-eventbridge-cross-region-role` | Lets other regions forward events to your primary region |
 
-The stack also attaches the IAM permissions for the workloads you selected to your AWS integration role. A Lambda-only selection receives no EC2 permissions.
+The stack also attaches the IAM permissions for the workloads you selected to your AWS integration role. If you select only the Lambda workload, the stack grants no EC2 permissions.
 
 ### Created as needed, for EC2 instances
 
@@ -78,10 +78,10 @@ Lambda instrumentation runs entirely from Datadog. Datadog does not deploy anyth
 2. Datadog checks whether the function is already instrumented. A function carrying Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply is skipped, as is a function managed by [remote instrumentation][4]. Datadog reports which of the two applies.
 3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Datadog applies layer versions it has validated rather than whatever is newest at that moment, so an installation is reproducible.
 4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
-5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated).
+5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See the [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated) section.
 6. Datadog calls `lambda:UpdateFunctionConfiguration` once, submitting the complete layer list and environment map. Datadog marks the change as applied only after AWS reports success.
 
-A Lambda update is a replace-style operation: the submitted layer list and environment map become the new configuration. Datadog therefore computes the full desired state rather than appending to it, preserving your existing layers and environment variables. The update carries the function's revision ID, so a change made in your account between Datadog's read and write causes the update to fail rather than overwrite it.
+A Lambda update is a replace-style operation: the submitted layer list and environment map become the new configuration. Datadog therefore computes the full desired state rather than appending to it, which preserves your existing layers and environment variables. The update carries the function's revision ID, so a change made in your account between Datadog's read and write causes the update to fail instead of overwriting the change.
 
 ### What Datadog changes on a function
 
@@ -155,7 +155,7 @@ Because a single execution role is often shared across functions, Datadog create
 Datadog continuously maintains the state you define on the covered resources:
 
 - Datadog re-checks the covered resources on a regular schedule, restoring instrumentation that goes missing, retrying anything that failed, and cleaning up resources that no longer exist.
-- Change events forwarded from your account let Datadog react within minutes, rather than waiting for the next scheduled check, both to a covered resource that changed and to a newly created resource that a query-based rule matches. For EC2, these come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
+- Change events forwarded from your account let Datadog react within minutes, rather than waiting for the next scheduled check. Datadog reacts both to a covered resource that changed and to a newly created resource that a query-based rule matches. For EC2, these events come from the CloudFormation stack's EventBridge rule. For Lambda, the `datadog-agent-resource-update-rule-lambda` rule forwards function create, configuration update, tag, and untag events.
 - On EC2, instances that already have the Agent are re-verified less frequently, to avoid unnecessary activity.
 - On Lambda, Datadog calls the Lambda API in your account only for functions that need a change. A fleet already on current layer versions produces no per-function activity.
 
@@ -196,7 +196,7 @@ Datadog retries automatically, with an increasing delay between attempts. Proble
 When someone removes instrumentation from a covered resource by hand, Datadog restores it. The rule is the source of truth. To stop coverage, change the rule.
 </div>
 
-## Uninstall
+## Uninstall Datadog instrumentation
 
 To uninstall, remove resources from a rule, edit the rule's query, or delete the rule.
 
@@ -212,4 +212,4 @@ To uninstall, remove resources from a rule, edit the rule's query, or delete the
 [3]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#aws-lambda-functions
 [4]: https://docs.datadoghq.com/serverless/aws_lambda/remote_instrumentation/
 [5]: https://docs.datadoghq.com/account_management/workload_identity_federation/
-[6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-between-this-guide-and-remote-instrumentation
+[6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#choose-between-the-aws-integration-and-remote-instrumentation
