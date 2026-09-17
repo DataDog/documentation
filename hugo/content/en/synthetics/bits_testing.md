@@ -71,7 +71,7 @@ An Agent Profile stores context that Bits Testing uses while interacting with yo
 
 To create an Agent Profile:
 
-1. Open the {{< ui >}}Agent Profile{{< /ui >}} dropdown menu and select {{< ui >}}+ New Profile{{< /ui >}}.
+1. Open the {{< ui >}}Agent Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
 1. Name the profile.
 1. Add one or more variables. For each variable, set:
    - **Usage**: The variable's purpose, for example, `username` or `password`.
