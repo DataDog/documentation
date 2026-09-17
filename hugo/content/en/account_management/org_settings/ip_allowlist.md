@@ -56,7 +56,7 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 
 ## Managing the IP allowlist in the UI
 
-**Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on.
+**Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on. If you don't see this page, [contact support](/help/) to request access.
 
 To find the [IP allowlist UI][6]:
 
