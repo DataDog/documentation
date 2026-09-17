@@ -1336,6 +1336,68 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][77] logpoints, which capture runtime data in real time without stopping execution or redeploying code.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+Discovers the deployment environments and supported features for a service running [Live Debugger][77]. The response lists every environment where the service runs and the features each one supports (for example, `message_templates`, `conditions`, and `capture_expressions`). Call this tool before `create_datadog_logpoint`, and only create logpoints in environments that report `can_create_logpoints: true`.
+
+- Which environments can I debug for the checkout service?
+- Does `service:web-store` support capture expressions in `production`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+Enables [Live Debugger][77] (dynamic instrumentation) for a service in a specific environment. Call this tool only when `discover_datadog_logpoint` reports `implicitly_enableable: true` for the environment. The tool waits up to 3 minutes for the tracers to begin reporting Live Debugger capabilities. After Live Debugger is enabled, run `discover_datadog_logpoint` again before creating logpoints.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+Creates a [Live Debugger][77] session. Create a session after calling `discover_datadog_logpoint` and before creating your first logpoint, then reuse the returned `session_id` for every subsequent Live Debugger tool call. If a `session_id` is already available, use it instead of creating another session.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+Creates a logpoint, a non-breaking breakpoint in a deployed service that captures runtime variables and execution state in real time, without source code changes or redeployment. Use it when the data you need isn't already in logs, metrics, or traces. Call `discover_datadog_logpoint` first. Logpoints can only be created in environments that report `can_create_logpoints: true` and take about 30 seconds to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][77] session, with the service, file and line number, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variable data from a [Live Debugger][77] snapshot. Use variable paths to select nested values and depth to control how many levels to expand. To analyze the same captured value across many snapshots, pass its `extra_columns` block, when present, to `analyze_datadog_logs` instead of calling this tool repeatedly.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` or `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][77] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
@@ -2606,6 +2668,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [73]: /real_user_monitoring/operations_monitoring/
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
+[77]: /tracing/live_debugger/
 
 ## Further reading
 
