@@ -79,7 +79,7 @@ After you select the Google Cloud Storage destination in the pipeline UI:
 Enter a prefix that you want to apply to all key objects.
 
 - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-- Use [template syntax][7] to route logs to different object keys based on specific fields in your logs. See [Using template syntax in Observability Pipelines for dynamic partitioning](#using-template-syntax-in-observability-pipelines-for-dynamic-partitioning) for more information.
+- Use [template syntax][7] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
   - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
 #### Metadata
@@ -97,7 +97,7 @@ Enter a prefix that you want to apply to all key objects.
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Using template syntax in Observability Pipelines for dynamic partitioning
+## Using template syntax for dynamic partitioning
 
 When you [set up the Google Cloud Storage destination](#set-up-the-destinations), you can use [template syntax][7] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 

@@ -109,7 +109,7 @@ After you select the Datadog Archives destination in the pipeline UI:
 1. Enter the AWS region the S3 bucket is in.
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - Use [template syntax][8] to route logs to different object keys based on specific fields in your logs. See [Using template syntax in Observability Pipelines for dynamic partitioning](#using-template-syntax-in-observability-pipelines-for-dynamic-partitioning) for more information.
+    - Use [template syntax][8] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
     - **Note**: Rehydration only supports the following [storage classes][9]:
@@ -143,7 +143,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Using template syntax in Observability Pipelines for dynamic partitioning
+## Using template syntax for dynamic partitioning
 
 When you [set up the Datadog Archives destination](#set-up-the-destination-for-your-pipeline), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 

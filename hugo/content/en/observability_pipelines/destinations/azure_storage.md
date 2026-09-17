@@ -53,7 +53,7 @@ Create an [Azure storage account][13] if you don't already have one.
 1. Enter the name of the storage account.
 1. Enter the name of the container you created earlier.
 1. Optionally, enter a path.
-    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. See [Using template syntax in Observability Pipelines for dynamic partitioning](#using-template-syntax-in-observability-pipelines-for-dynamic-partitioning) for more information.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][17] for more information.
 1. Click **Save**.
 
@@ -79,7 +79,7 @@ After you select the Azure Storage destination in the pipeline UI:
 Enter a prefix that you want to apply to all key objects.
 
 - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-- Use [template syntax][6] to route logs to different object keys based on specific fields in your logs. See [Using template syntax in Observability Pipelines for dynamic partitioning](#using-template-syntax-in-observability-pipelines-for-dynamic-partitioning) for more information.
+- Use [template syntax][6] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
 	- **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
 #### Compression
@@ -88,7 +88,7 @@ Enter a prefix that you want to apply to all key objects.
     - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
 1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
-## Using template syntax in Observability Pipelines for dynamic partitioning
+## Using template syntax for dynamic partitioning
 
 When you set up the Datadog Archives (Azure Storage) destination, you can use [template syntax][6] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
