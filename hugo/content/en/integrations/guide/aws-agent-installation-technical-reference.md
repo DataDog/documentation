@@ -161,7 +161,7 @@ Datadog continuously maintains the state you define on the covered resources:
 
 ### How Lambda functions pick up new layer versions
 
-Datadog compares a covered function's layers against the versions Datadog deploys, rather than against whatever the function was first instrumented with. When Datadog releases new layer versions, covered functions are updated to them. Your functions therefore move forward with Datadog's layer releases without any action from you.
+Datadog compares a covered function's layers against the versions Datadog deploys, rather than against the versions applied at first instrumentation. When Datadog releases new layer versions, covered functions are updated to them. Your functions therefore move forward with Datadog's layer releases without any action from you.
 
 A Lambda configuration update that is still in progress is left alone and retried shortly afterward, so Datadog does not race a change already being applied.
 
@@ -190,7 +190,7 @@ On EC2, Datadog detects terminated instances and cleans up the IAM resources it 
 
 ### When instrumentation fails
 
-Datadog retries automatically, with an increasing delay between attempts. Problems that need your action, such as a missing permission or a function at the layer limit, are reported and stop being retried indefinitely. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
+Datadog retries automatically, with an increasing delay between attempts. Problems that need your action, such as a missing permission or a function at the layer limit, are reported and no longer retried until you resolve them. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
 
 <div class="alert alert-warning">
 When someone removes instrumentation from a covered resource by hand, Datadog restores it. The rule is the source of truth. To stop coverage, change the rule.

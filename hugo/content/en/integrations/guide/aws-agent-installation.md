@@ -108,7 +108,7 @@ For all workloads, confirm the following:
   | Node.js | 16.x, 18.x, 20.x, 22.x, 24.x |
   | Python | 3.8, 3.9, 3.10, 3.11, 3.12, 3.13, 3.14 |
   | Ruby | 3.2, 3.3, 3.4, 4.0 |
-  | Java | 8, 8 (Amazon Linux 2), 11, 17, 21, 25 |
+  | Java | 8 (`java8`), 8 (`java8.al2`), 11, 17, 21, 25 |
   | .NET | 6, 8, 10 |
   | OS-only (`provided.al2`, `provided.al2023`) | Datadog adds the extension layer only, with no tracing layer |
 
@@ -165,8 +165,6 @@ Instrumentation is based on an **instrumentation rule**: an AWS account paired w
 1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function.
 1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed.
 
-A rule keeps matching after you save it. Datadog re-evaluates it over time, so a resource that starts matching later is instrumented automatically, whether it was created after you saved the rule or picked up a tag that brings it into scope.
-
 You approve one CloudFormation stack, one time, during initial setup. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch each time.
 
 For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and how Datadog keeps instrumentation in place, see [How Datadog instrumentation through the AWS integration works][6].
@@ -199,6 +197,23 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 **Carve out exceptions with exclusions.** When a broad rule covers resources you want to skip, exclude them from the same rule instead of switching to an individually selected list. Exclusions keep the rule readable and preserve automatic coverage for everything else.
 
+## What Datadog changes on a Lambda function
+
+Datadog applies one `UpdateFunctionConfiguration` call per function. That call:
+
+- Adds the Datadog extension layer, and the Datadog tracing layer matching the function's runtime and architecture. OS-only runtimes receive the extension layer alone.
+- Sets `DD_SITE` and `DD_ORG_UUID`, which the extension uses to send telemetry to your Datadog organization.
+- For Node.js and Python, redirects the function handler to the Datadog handler and moves your original handler into `DD_LAMBDA_HANDLER`.
+- For Java and .NET, sets `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
+
+Your existing layers, environment variables, and handler are preserved. Datadog records exactly what it changed, so uninstalling restores your original configuration.
+
+**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so there is no Datadog credential stored in your account for Lambda instrumentation. Datadog sets up that authorization for you; there is nothing to configure.
+
+Datadog does not change your function code, memory size, timeout, VPC configuration, or any other setting.
+
+Datadog preserves environment variables you set yourself, so you can tune what the extension collects with the standard Datadog environment variables. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
+
 ## Install
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
@@ -223,23 +238,6 @@ To install from the AWS Install Agents page:
 1. Return to Datadog. Instrumentation proceeds automatically, and Datadog reports progress as resources are instrumented.
 
 <!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
-
-## What Datadog changes on a Lambda function
-
-Datadog applies one `UpdateFunctionConfiguration` call per function. That call:
-
-- Adds the Datadog extension layer, and the Datadog tracing layer matching the function's runtime and architecture. OS-only runtimes receive the extension layer alone.
-- Sets `DD_SITE` and `DD_ORG_UUID`, which the extension uses to send telemetry to your Datadog organization.
-- For Node.js and Python, redirects the function handler to the Datadog handler and moves your original handler into `DD_LAMBDA_HANDLER`.
-- For Java and .NET, sets `AWS_LAMBDA_EXEC_WRAPPER` to `/opt/datadog_wrapper`.
-
-Your existing layers, environment variables, and handler are preserved. Datadog records exactly what it changed, so uninstalling restores your original configuration.
-
-**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so there is no Datadog credential stored in your account for Lambda instrumentation. Datadog sets up that authorization for you; there is nothing to configure.
-
-Datadog does not change your function code, memory size, timeout, VPC configuration, or any other setting.
-
-Datadog preserves environment variables you set yourself, so you can tune what the extension collects with the standard Datadog environment variables. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
 
 ## Verify the installation
 
