@@ -49,7 +49,12 @@
       </div>
     </div>
   </div>
-  {{ partialCached "header/header.html" . }}
+  {{/* Mobile menu (nav/mobile-documentation.html, a local override of the vendored websites-modules
+       partial) scopes Levels 3-4 to the current top-level section, so this cache -- and the nested
+       partialCached "nav/main-nav" call inside header.html -- must be keyed on that section, not just
+       rendered once and reused for every page. */}}
+  {{ $currentTopSection := partial "nav/current-top-section.html" . }}
+  {{ partialCached "header/header.html" . $currentTopSection .Site.Language.Lang }}
 
   <div class="container container__content h-100 pt-1">
     <div class="row h-100 position-relative js-content-container">

@@ -8,5 +8,8 @@
 {{ end }}
 
 <div class="main-nav-wrapper">
-  {{ partialCached "nav/main-nav" . }} {{/* imported from websites-modules */}}
+  {{/* Keyed the same as the header/header.html cache wrapping this call -- see baseof.html --
+       since nav/mobile-documentation.html (a local override) scopes by current top-level section. */}}
+  {{ $currentTopSection := partial "nav/current-top-section.html" . }}
+  {{ partialCached "nav/main-nav" . $currentTopSection .Site.Language.Lang }} {{/* imported from websites-modules */}}
 </div>

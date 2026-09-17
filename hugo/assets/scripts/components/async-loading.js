@@ -189,6 +189,17 @@ function loadPage(newUrl) {
                     currentLeftNav.innerHTML = newLeftNav.innerHTML;
                     getPathElement();
                 }
+
+                // nav/mobile-documentation.html renders scoped to the page's section the same way,
+                // so the mobile menu needs the same resync. Matched by id (not the ambiguous
+                // .sidenav-nav-js-load class, which the header nav doesn't currently carry) since
+                // header/header.html renders before sidenav/main-sidenav.html in the DOM.
+                const currentMobileNav = document.getElementById('mobile-nav');
+                const newMobileNav = newDocument.getElementById('mobile-nav');
+
+                if (currentMobileNav && newMobileNav) {
+                    currentMobileNav.innerHTML = newMobileNav.innerHTML;
+                }
             } else {
                 window.location.href = newUrl;
             }

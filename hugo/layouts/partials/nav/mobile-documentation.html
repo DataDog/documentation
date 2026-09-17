@@ -1,0 +1,167 @@
+{{- /*
+  Local override of the vendored websites-modules partial of the same name (see the
+  layouts/partials/nav/mobile-documentation.html mount in config/_default/config.yaml -- a file at
+  this path in this repo takes precedence over the module's version).
+
+  Only change from the vendored version: Levels 3-4 of the "Docs main nav" branch render only for
+  the current page's top-level section, matching nav/left-nav.html's desktop scoping and using the
+  same URL-comparison approach (this menu is config-defined, so .IsMenuCurrent/.HasMenuCurrent never
+  match). Keep this file's Level 1-4 structure in sync with upstream websites-modules; keep the
+  scoping logic in sync with nav/left-nav.html and nav/current-top-section.html.
+*/ -}}
+{{ $dot := . }}
+
+
+{{/* account for branch name in preview site for data-path */}}
+
+{{ $path := (printf "%s/" $.Site.Params.branch) }}
+{{ if eq $.Site.Params.environment "preview"}}
+    {{ $.Scratch.Set "branch_path" $path }}
+{{ else }}
+    {{ $.Scratch.Set "branch_path" "" }}
+{{ end }}
+
+{{ $branchPath := trim ($.Scratch.Get "branch_path") "/" }}
+
+{{ $urlWithoutAnchor := "" }}
+{{ $curURL := trim $dot.RelPermalink "/" }}
+<ul class="">
+
+  <div class="mobilequicknav row align-items-center no-gutters pb-2 pt-2 border-bottom">
+    <a href="https://www.datadoghq.com" class="col text-center">
+      {{ partial "img.html" (dict "root" $dot "src" "icons/nav_home.png" "class" "static" "alt" "home" "width" "21") }}
+      {{ i18n "home" }}
+    </a>
+    <a href="{{ "" | absLangURL }}" class="col text-center">
+      {{ partial "img.html" (dict "root" $dot "src" "icons/nav_docs.png" "class" "static" "alt" "docs" "width" "21") }}
+      {{ i18n "docs" }}
+    </a>
+    <a href="{{ "api/" | absLangURL }}" class="col text-center">
+      {{ partial "img.html" (dict "root" $dot "src" "icons/nav_mobile_api.png" "class" "static" "alt" "api" "width" "21") }}
+      {{ i18n "api" }}
+    </a>
+  </div>
+
+  <!--
+  search doesn't exist in main menu which exists in the docs site,
+  so we can just add it directly here instead of checking for identifier search
+  -->
+  <li>
+    <div class="mobile-nav-search-wrapper position-relative">
+      {{ partial "search-mobile" $dot }}
+    </div>
+  </li>
+
+  {{ if in $dot.RelPermalink "/api/" }}
+    <!-- Docs api nav -->
+    <!-- if no api menu in other languages fallback to english -->
+    {{ $menu := (index .Sites.Default.Menus "api") }}
+    {{ with index .Site.Menus "api" }}
+      {{ $menu = . }}
+    {{ end }}
+    <!-- set current english url. If url in menu doesn't start with /lang/ this lets us compare still  -->
+    {{ $currentEnURL := $dot.RelPermalink }}
+    {{ if ne $dot.Lang "en" }}
+      {{ $currentEnURL = (print "/" (strings.TrimLeft (print "/" .Lang "/") $dot.RelPermalink)) }}
+    {{ end }}
+    {{ range $menu }}
+      <li class="{{ if .HasChildren }}dropdown{{ end }} {{ if in (.Params.disabled | default slice) site.Params.repo_name }}d-none{{ end }}">
+        <a href="{{ if .HasChildren }}#{{ else }}{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}{{ end }}" class="{{ if .HasChildren }}dropdown-toggle{{ end }} text-uppercase fw-semibold" {{ if .HasChildren }}data-bs-toggle="dropdown" role="button"{{ end }} aria-haspopup="true" aria-expanded="true">
+        <div class="nav-menu-item ms-2">
+          {{ .Name | safeHTML }}
+          {{ if .HasChildren }}
+            <span class="caret">
+                <svg viewBox="0 0 17.78 10.51" width="10px">
+                    <polyline class="dropdown-arrow" points="16.92 1.14 8.92 9.14 0.92 1.14" />
+                </svg>
+            </span>
+          {{ end }}
+        </div>
+        </a>
+        {{ if .HasChildren }}
+        {{ $parentMenuURL := .URL }}
+        <ul class="dropdown-menu">
+          {{ range .Children }}
+          <li>
+            {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
+            {{ $apiPath := newScratch }}
+            {{ $apiPath.Set "apiPath" (default $parentMenuURL $urlWithoutAnchor ) }}
+            <a class="mb-0 pb-0" href='{{ if hasPrefix .URL "#" }}{{ (strings.TrimLeft "/" $parentMenuURL) | absLangURL }}#{{ .Name | anchorize }}{{ else }}{{ (strings.TrimLeft "/" .URL) | absLangURL }}{{ end }}' data-path='{{ (trim (print $branchPath ((print ($apiPath.Get "apiPath")) | relLangURL)) "/") }}'>
+            <div class="nav-menu-item-children pb-0 mb-0">
+              {{ .Name | safeHTML }}
+            </div>
+            </a>
+          </li>
+          {{ end }}
+        </ul>
+        {{ end }}
+      </li>
+    {{ end }}
+  {{ else }}
+    <!-- Docs main nav -->
+    {{ range .Site.Menus.main }}
+      <li class="{{ if .HasChildren }}dropdown{{ end }} {{ if in (.Params.disabled | default slice) site.Params.repo_name }}d-none{{ end }}">
+        <a href="{{ if .HasChildren }}#{{ else }}{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}{{ end }}" class="{{ if .HasChildren }}dropdown-toggle{{ end }} text-uppercase fw-semibold" {{ if .HasChildren }}data-bs-toggle="dropdown" role="button"{{ end }} aria-haspopup="true" aria-expanded="true">
+          <div class="nav-menu-item ms-2">
+            {{ .Name | safeHTML }}
+            {{ if .HasChildren }}
+            <span class="caret">
+                <svg viewBox="0 0 17.78 10.51" width="10px">
+                    <polyline class="dropdown-arrow" points="16.92 1.14 8.92 9.14 0.92 1.14" />
+                </svg>
+            </span>
+            {{ end }}
+          </div>
+        </a>
+      <!-- level 2 -->
+      {{ if .HasChildren }}
+      <ul class="dropdown-menu">
+        <!-- add parent url as a child nav item so it can still be reached -->
+        {{ if and (not (hasPrefix .URL "#")) (gt (len .URL) 0) }}
+          <li>
+            <a class="mb-0 pb-0" href="{{- .URL | absLangURL -}}">
+              <div class="nav-menu-item-children pb-0 mb-0">
+                {{ .Name | safeHTML }}
+              </div>
+            </a>
+          </li>
+        {{ end }}
+        {{ range .Children }}
+        {{/* This is the real top-level nav item (e.g. "Tracing") -- .Site.Menus.main above this
+             is the group heading (e.g. "Application Performance"), which has no .URL. */}}
+        {{ $menuURL := trim (.URL | relLangURL) "/" }}
+        {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
+        <li>
+          {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
+          <a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
+            <div class="nav-menu-item-children pb-0 mb-0">
+              {{ .Name | safeHTML }}
+            </div>
+          </a>
+          <!-- level 3 -->
+          {{ if (and .HasChildren $isCurrentTopSection) }}
+          <ul class="sub-nav ms-2 d-none">
+            {{ range .Children }}
+            {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
+            <li><a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}" style="font-size:16px;">{{ .Name | safeHTML }}</a>
+              <!-- level 4 -->
+              {{ if .HasChildren }}
+              <ul class="sub-nav ms-2 d-none">
+                  {{ range .Children }}
+                  {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
+                    <li><a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}" style="font-size:16px;">{{ .Name | safeHTML }}</a></li>
+                  {{ end }}
+              </ul>
+              {{end}}
+            </li>
+            {{ end }}
+          </ul>
+          {{ end }}
+        </li>
+        {{ end }}
+      </ul>
+      {{ end }}
+    </li>
+    {{ end }}
+  {{ end }}
+</ul>
