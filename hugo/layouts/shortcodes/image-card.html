@@ -5,17 +5,49 @@
 {{ $subtitle := .Get "subtitle" }}
 {{ $img_width := .Get "image_width" | default (.Parent.Get "image_width") | default "150" }}
 {{ $tooltip := .Get "tooltip" }}
+{{ $integration_id := .Get "integration_id" }}
+{{ $style := .Get "style" | default "compact" }}
+{{ $cdn_src := "" }}
 
-<a class="card-grid-card{{ with $title }} has-title{{ end }}" href="{{ $href }}"{{ with $tooltip }} title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"{{ end }}>
-  <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
-    {{ with $src }}
-      {{ partial "img.html" (dict "root" $ "src" . "class" "img-fluid" "alt" $alt "width" $img_width) }}
-    {{ end }}
-    {{ with $title }}
-      {{ if $src }}<p class="card-grid-card-title m-0">{{ . }}</p>{{ else }}<h5 class="m-0">{{ . }}</h5>{{ end }}
-    {{ end }}
-    {{ with $subtitle }}
-      <span class="card-grid-card-ribbon">{{ . }}</span>
-    {{ end }}
+<!-- If no local src is given, try to resolve a logo from the CDN using the integration's id -->
+{{ if and $integration_id (not $src) }}
+  {{ $cdn_src = partialCached "integrations-logo.html" (dict "context" $ "basename" $integration_id "variant" "avatar" "fallback" "cloud") $integration_id "avatar" }}
+{{ end }}
+
+{{ if eq $style "catalog" }}
+  <!-- Reuses the .integration/.card-content/.picture-title styles from the integrations catalog page
+       (assets/styles/components/_integrations.scss) for a visually identical, static (non-interactive) tile. -->
+  <div class="integration">
+    <div class="card-content">
+      <a href="{{ $href }}" aria-label="{{ $title }} datadog integration docs link">
+        {{ if $src }}
+          {{ partial "img.html" (dict "root" $ "src" $src "class" "img-fluid mx-auto my-auto pt-2 pb-5 px-5" "alt" (print $alt " logo") "width" $img_width) }}
+          <div class="text-center picture-title">{{ $title }}</div>
+        {{ else if $cdn_src }}
+          <picture class="mx-auto my-auto">
+            <img class="img-fluid mx-auto my-auto pt-2 pb-5 px-5" src="{{ $cdn_src }}" alt="{{ $alt }} logo" loading="lazy">
+          </picture>
+          <div class="text-center picture-title">{{ $title }}</div>
+        {{ else }}
+          <div class="text-center picture-title"><h5 class="m-0">{{ $title }}</h5></div>
+        {{ end }}
+      </a>
+    </div>
   </div>
-</a>
+{{ else }}
+  <a class="card-grid-card{{ with $title }} has-title{{ end }}" href="{{ $href }}"{{ with $tooltip }} title="{{ . }}" data-bs-toggle="tooltip" data-bs-placement="top"{{ end }}>
+    <div class="card-body text-center py-2 px-1 d-flex flex-column align-items-center justify-content-center">
+      {{ if $src }}
+        {{ partial "img.html" (dict "root" $ "src" $src "class" "img-fluid" "alt" $alt "width" $img_width) }}
+      {{ else if $cdn_src }}
+        <img class="img-fluid" src="{{ $cdn_src }}" alt="{{ $alt }}" width="{{ $img_width }}" loading="lazy">
+      {{ end }}
+      {{ with $title }}
+        {{ if or $src $cdn_src }}<p class="card-grid-card-title m-0">{{ . }}</p>{{ else }}<h5 class="m-0">{{ . }}</h5>{{ end }}
+      {{ end }}
+      {{ with $subtitle }}
+        <small>{{ . }}</small>
+      {{ end }}
+    </div>
+  </a>
+{{ end }}
