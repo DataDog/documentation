@@ -6,8 +6,12 @@ content_filters:
     label: "SDK"
   - trait_id: lib_src
     option_group_id: rum_browser_sdk_source_options
+    show_if:
+      - platform: ["browser"]
   - trait_id: rum_browser_sdk_version
     option_group_id: rum_browser_sdk_version_for_advanced_config_options
+    show_if:
+      - platform: ["browser"]
 ---
 
 ## Overview
