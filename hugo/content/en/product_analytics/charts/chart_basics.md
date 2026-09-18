@@ -47,7 +47,7 @@ Use the pencil icon to **edit** the name of the chart. Then, click {{< ui >}}Sav
 ## Share a chart
 Share charts to make product insights available across dashboards, notebooks, and your teams. For example, you can add a conversion funnel to a weekly product dashboard to align stakeholders on product performance.
 
-To add a chart to a dashboard or a notebook, click {{< ui >}}+ Add To{{< /ui >}} in the top-right corner of the chart. Then, select whether to add it to an existing dashboard or notebook, or to a new one.
+To add a chart to a dashboard or a notebook, click {{< ui >}}\+ Add To{{< /ui >}} in the top-right corner of the chart. Then, select whether to add it to an existing dashboard or notebook, or to a new one.
 
 
 To share a link to a chart, click {{< ui >}}Share{{< /ui >}} to copy the link to your clipboard. Then paste and share this link through the method of your choice. Team members with Datadog access are directed to the live chart in Product Analytics, while users without Datadog access see a static snapshot of the chart.

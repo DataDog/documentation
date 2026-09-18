@@ -679,6 +679,16 @@
       "group": "deployment_gates",
       "suffix": "",
       "description": "Create deployment rule returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_2423265690",
+      "description": "Create monitor deployment rule with monitor IDs returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_4286388136",
+      "description": "Create monitor deployment rule with query returns \"OK\" response"
     }
   ],
   "TriggerDeploymentGatesEvaluation": [
@@ -1574,6 +1584,11 @@
     }
   ],
   "CreateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "_1934105875",
+      "description": "Create a downtime duration monitor configuration policy returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "",

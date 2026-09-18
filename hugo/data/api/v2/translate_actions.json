@@ -1368,7 +1368,7 @@
     "description": "List cost recommendations matching a filter, with pagination and sorting.",
     "summary": "Search cost recommendations",
     "request_description": "",
-    "request_schema_description": "Request body for filtering cost recommendations."
+    "request_schema_description": "JSON:API request body for filtering cost recommendations."
   },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
@@ -4308,6 +4308,10 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "GetOIDCDiscoveryDocument": {
+    "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
+    "summary": "Get OpenID Connect provider metadata"
   },
   "GetOAuth2WellKnownSites": {
     "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
@@ -7527,7 +7531,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {

@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  opentelemetry_collector_otlp_export: [gov, gov2]
   remediate_with_ai: [gov, gov2]
   cloudcraft_apm_overlay: [gov, gov2]
   code_locations: [gov, gov2]
@@ -394,7 +395,6 @@ unsupported_sites:
   network_config_management: [gov,gov2]
   observability_pipelines: [gov,gov2]
   on-call: [gov,gov2]
-  oracle-cloud-infrastructure: [gov,gov2]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]

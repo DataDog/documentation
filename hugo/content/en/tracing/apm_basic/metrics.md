@@ -87,7 +87,7 @@ You can create an [**SLO**][13] on a per-service basis to help ensure you are me
 To create an SLO from the Catalog:
 
 1. Navigate to the {{< ui >}}Reliability{{< /ui >}} tab of the [Catalog][8].
-2. Under the {{< ui >}}SLOs{{< /ui >}} column, hover over a service and click {{< ui >}}+ Create Availability SLO{{< /ui >}} or {{< ui >}}+ Create Latency SLO{{< /ui >}}.
+2. Under the {{< ui >}}SLOs{{< /ui >}} column, hover over a service and click {{< ui >}}\+ Create Availability SLO{{< /ui >}} or {{< ui >}}\+ Create Latency SLO{{< /ui >}}.
 
 {{< img src="universal_service_monitoring/guide/software_catalog_slo_setup.png" alt="Setting up an APM Basic SLO for BITSBOUTIQUE" style="width:100%;" >}}
 
@@ -99,9 +99,9 @@ Optionally, to create an SLO manually using APM Basic metrics:
    * Query A: Enter an APM Basic metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
    * Query B: Enter an APM Basic metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags, in addition to an `error:true` tag in the `from` field, and select `count` in the `as` field.
 
-3. Click {{< ui >}}+ Add Formula{{< /ui >}} and enter `a-b`.
+3. Click {{< ui >}}\+ Add Formula{{< /ui >}} and enter `a-b`.
 4. In the {{< ui >}}Total events (denominator){{< /ui >}} section, enter an APM Basic metric such as `universal.http.server`, filter to a specific service by adding primary `service` and `env` tags in the `from` field, and select `count` in the `as` field.
-5. Click {{< ui >}}+ New Target{{< /ui >}} to create a target threshold with the following settings:
+5. Click {{< ui >}}\+ New Target{{< /ui >}} to create a target threshold with the following settings:
 
    * The time window is `7 Days`, the target threshold is `95%`, and the warning threshold is `99.5%`. Datadog recommends setting the same target threshold across all time windows.
 

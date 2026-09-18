@@ -13,7 +13,7 @@ title: 評価
 ---
 ## 概要 {#overview}
 
-Agent Observability には、評価をサポートするためのいくつかの方法が用意されています。これらは、[{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8] に移動して構成できます。
+Agent Observability には、評価をサポートするためのいくつかの方法が用意されています。これらは、[{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8] に移動して設定できます。
 
 ### カスタム LLM-as-a-judge 評価 {#custom-llm-as-a-judge-evaluations}
 
