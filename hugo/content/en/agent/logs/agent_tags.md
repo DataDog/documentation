@@ -48,12 +48,21 @@ The following tags are automatically added to logs by the Datadog Agent:
 
 ## Filter tags before ingestion
 
-Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can use global tag filters to remove selected tags from every log source the Agent processes before logs are sent to Datadog. This can help reduce the size of log payloads. Before filtering a tag, review whether it supports pipelines, indexes, archives, monitors, dashboards, or other workflows.
+Depending on how you use your logs, some Agent-added tags might not be needed for search, analysis, routing, or correlation. You can filter selected tags before the Agent sends logs to Datadog, which can help reduce the size of log payloads. Log tag filtering is available in Agent 7.85.0 and later.
+
+Choose the filter scope based on where you want the rule to apply:
+
+* Use a global filter to apply the same rules to every supported log source processed by the Agent.
+* Use a per-source filter to target one log source or create an exception to a global filter.
+
+Before filtering a tag, review whether it supports pipelines, indexes, archives, monitors, dashboards, or other workflows.
+
+### Global filters
+
+Configure global filters in `datadog.yaml` or with the `DD_LOGS_CONFIG_TAG_FILTERS` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
-
-Add `logs_config.tag_filters` to `datadog.yaml`:
 
 ```yaml
 logs_config:
@@ -107,23 +116,28 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-This example removes all `filename` and `dirname` tags except the `filename:audit.log` tag. Patterns use `key:value` syntax. Keys must match exactly, values can contain `*` wildcards, and matching is not case-sensitive. An `include` pattern preserves tags that match an `exclude` pattern; it does not remove other tags.
+These examples remove all `filename` and `dirname` tags except the `filename:audit.log` tag from every supported log source.
+
+### Per-source filters
+
+Add `tag_filters` to a log source in its integration configuration to limit the filter to that source:
+
+```yaml
+logs:
+  - type: file
+    path: /var/log/my-app/*.log
+    service: my-app
+    source: custom_log
+    tag_filters:
+      exclude:
+        - "dirname:*"
+```
+
+This example removes the `dirname` tag only from logs collected from `/var/log/my-app/*.log`. Per-source rules are evaluated before global rules, so a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
+
+Patterns use `key:value` syntax. Keys must match exactly, values can contain `*` wildcards, and matching is not case-sensitive. An `include` pattern preserves tags that match an `exclude` pattern; it does not remove other tags.
 
 **Note**: The Agent sends `source`, `service`, and `host` separately from the tag list. Filtering these tags does not remove their values from the log.
-
-### Rule precedence
-
-You can also define `tag_filters` for an individual log source in its integration configuration. When both per-source and global filters apply, the Agent evaluates each tag in the following order. The first matching rule determines whether the tag is kept or removed:
-
-| Order | Rule | Result |
-|-------|------|--------|
-| 1 | Per-source `include` | The tag is kept. |
-| 2 | Per-source `exclude` | The tag is removed. |
-| 3 | Global `include` | The tag is kept. |
-| 4 | Global `exclude` | The tag is removed. |
-| 5 | No matching rule | The tag is kept. |
-
-The position of a pattern within an `include` or `exclude` list does not change its precedence. For example, a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
 
 ## Further reading
 
