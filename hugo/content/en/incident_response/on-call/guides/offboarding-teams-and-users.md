@@ -21,6 +21,7 @@ This guide shows you how to:
 - Identify which users are being charged for On-Call
 - Remove users from schedules and escalation policies
 - Clean up notification preferences and team memberships
+- Unassign seats so users stop being billed
 - Ensure coverage gaps don't disrupt your incident response
 
 **Who should use this guide**
@@ -71,8 +72,19 @@ As an admin, you can also manage this yourself by navigating to **On-Call > Sett
 
 **Note**, Notification Preferences make a user pageable and therefore billable. Having only contact methods (for example, push notifications) defined is a non-billable action and won't incur charges.
 
+### Unassign the seat
+
+After the user is removed from schedules, escalation policies, and notification preferences:
+
+1. **Open Seat Management**: Navigate to **Plan & Usage > Seat Management**
+2. **Find the user**: Check the box next to their name
+3. **Unassign the seat**: Click Unassign Seats and confirm your selection
+
+**Note**, removing a user's On-Call configuration does not unassign their seat. The seat remains billable until it is explicitly unassigned. For more information, see [Incident Response billing][6].
+
 [1]: /incident_response/on-call/
 [2]: /incident_response/on-call/teams/
 [3]: /incident_response/on-call/schedules/
 [4]: /incident_response/on-call/escalation_policies/
 [5]: /account_management/rbac/
+[6]: /account_management/billing/incident_response/
