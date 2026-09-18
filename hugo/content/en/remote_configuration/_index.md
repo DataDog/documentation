@@ -100,7 +100,6 @@ Real User Monitoring (RUM)
 
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
 
-RUM SDKs retrieve settings from a public CDN endpoint using a remote configuration ID instead of a Datadog API key. They do not use the infrastructure-based request flow or TLS connectivity test described below. For more information, see [RUM Remote Configuration][49].
 
 - Remote Configuration enabled Datadog components deployed in your infrastructure request configurations from Datadog.
   <div class="alert alert-info">Some components like private action runners are always remote configuration enabled. Others, like Agents, can be enabled or disabled using in-disk configuration options.</div>
@@ -111,6 +110,7 @@ RUM SDKs retrieve settings from a public CDN endpoint using a remote configurati
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
 - When Remote Configuration is enabled, components periodically perform a connectivity test to Datadog over TLS on port 8042/TCP. This is a raw TLS connection rather than HTTPS. This test is used for protocol development; it includes no customer data and no customer-identifying information. This connection is used only while Remote Configuration is enabled and can be safely blocked without affecting functionality.
 
+<div class="alert alert-info">RUM SDKs retrieve settings from a public CDN endpoint using a remote configuration ID instead of a Datadog API key. They do not use the infrastructure-based request flow or TLS connectivity test described above. For more information, see <a href="/real_user_monitoring/remote_configuration/">RUM Remote Configuration</a>.</div>
 ### Role-based access
 
 Enabling Remote Configuration impacts the following products. Each product defines a set of role-based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
