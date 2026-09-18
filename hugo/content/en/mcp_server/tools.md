@@ -1338,7 +1338,7 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Live Debugger
 
-Tools for debugging running applications with [Live Debugger][77] logpoints, which capture runtime variables and execution state without stopping execution or redeploying code.
+Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 
 <div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
@@ -1353,7 +1353,7 @@ Discovers the deployment environments where a service runs [Live Debugger][77] a
 ### `enable_live_debugger`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Enables [Live Debugger][77] for a service in an environment where it is supported but not yet enabled. The tool polls for up to 3 minutes to confirm enablement; run `discover_datadog_logpoint` again to confirm logpoint readiness.
+Enables [Live Debugger][77] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
 
 - Enable Live Debugger for the checkout service in `staging`.
 - Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
@@ -1369,7 +1369,7 @@ Creates a [Live Debugger][77] session. Use the returned `session_id` to create, 
 ### `create_datadog_logpoint`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Creates a [logpoint][77] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints; logpoints take about 30 seconds to propagate before they begin capturing data.
+Creates a [logpoint][77] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
 
 - Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
 - Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.

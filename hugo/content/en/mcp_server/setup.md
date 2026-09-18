@@ -742,7 +742,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
 - `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting
-- `live-debugger`: Tools for debugging running applications with [Live Debugger][76] logpoints, which capture runtime variables and execution state
+- `live-debugger`: Tools for debugging running applications with [Live Debugger][76] logpoints, which instrument code to capture runtime variables and execution state without a redeployment
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
 ## Supported clients
