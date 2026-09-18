@@ -103,7 +103,7 @@ When you [set up the Google Cloud Storage destination](#set-up-the-destinations)
 
 {{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
-However, you must manually create a Log Archive for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
+However, you must manually create a Datadog [Log Archive][19] for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
 

@@ -149,7 +149,7 @@ When you [set up the Datadog Archives destination](#set-up-the-destination-for-y
 
 {{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
-However, you must manually create a Log Archive for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
+However, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
 
