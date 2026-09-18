@@ -302,6 +302,8 @@ Use an SDK release that supports message placeholders.
 
 In the Prompt Editor, select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name such as `history`, and use the arrows to position it between messages. Use a different name from any text variable in the same prompt.
 
+{{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="Prompt Editor with a history message placeholder between system instructions and a user message containing the question variable." >}}
+
 Alternatively, create the prompt with the Python SDK. This setup operation places the conversation history between the system instructions and the new question:
 
 ```python
