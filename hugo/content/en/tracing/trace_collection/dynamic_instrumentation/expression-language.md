@@ -1,5 +1,6 @@
 ---
-title: Dynamic Instrumentation Expression Language
+title: Expression Language for Live Debugger and Dynamic Instrumentation
+description: Write logpoint templates, capture expressions, conditions, and metric expressions using Datadog's expression language.
 private: false
 aliases:
     - /dynamic_instrumentation/expression-language
@@ -8,94 +9,128 @@ aliases:
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language helps you formulate metric instrumentation expressions, span tag values, and instrumentation conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
+[Live Debugger][1] and [Dynamic Instrumentation][2] are separate, complementary products that use the same expression language. Use it to read values from running code, select when to capture data, or calculate a metric value with a built-in function such as `len`.
 
-Examples:
-- `someVar.someField`
-- `request.headers["Host"]`
-- `any(post.tags, {@it == "debugger"})`
-- `@duration > 10 && len(p.data) < 100`
+An expression reads variables, parameters, and object fields available at the selected code location. It is not arbitrary Python, Java, JavaScript, or another application language. For example, write `len(items)`, not `items.size()`, and `user.name`, not `user.getName()`.
 
-Generally, the Expression Language supports:
-* Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
-* Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
-* Using logical operators (`&&`, `||`, and `!` or `not(...)`) to build complex Boolean conditions, for example: `!isEmpty(user.email) && not(contains(user.name, "abc"))`.
-* Using the `null` literal (which is automatically translated to `None` in Python and `nil` in Ruby).
-
-It does **not** support:
-* Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
-* Other native programming language syntax beyond what is described on this page.
-
-Try [autocomplete and search (in Preview)](/dynamic_instrumentation/symdb/) for an improved user experience using the Expression Language.
+Syntax is only part of expression support. Features depend on the runtime and its SDK or Agent version. The instrumentation location also determines which values are available. For Live Debugger through MCP, check the features returned by `discover_datadog_logpoint` before supplying a template, condition, or capture expression.
 
 ## Applications
 
-Expressions can be used to produce metrics and as conditions to emit filtered data.
+| Where you enter an expression | Format | Example |
+|---|---|---|
+| Live Debugger log message or Dynamic Instrumentation span tag | Put each expression inside `{}` within the text. | `Order {order.id}: {len(order.items)} items` |
+| Condition | Enter a Boolean expression without outer `{}`. | `user.isActive == true && user.age > 18` |
+| Dynamic metric value | Enter an expression that evaluates to a number, without outer `{}`. | `len(order.items)` |
+| Live Debugger capture expression | Enter the value to capture, without outer `{}`. | `order.items[0].price` |
 
-For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
+A template can mix text and several expressions. A condition decides when to emit data. A metric expression supplies the value of a metric; it is not a log message or a condition.
 
-In span tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Tag value expressions can evaluate to any value.
+For MCP logpoints, `capture_expressions` replaces automatic variable capture with the named expressions you supply. Use it for specific values, such as a field beyond the normal capture depth. It does not add values to a full snapshot.
 
-Instrumentation conditions must evaluate to a Boolean, for example:
- - `startsWith(user.name, "abc")`
- - `len(str) > 20`
- - `a == b`
+## Access variables and fields
+
+| Value | Expression |
+|---|---|
+| Local variable or method parameter | `order` |
+| Object field | `order.id` |
+| Nested field | `order.customer.name` |
+| List element | `order.items[0]` |
+| Dictionary value | `request.headers["Host"]` |
+
+Use the actual variable and field names from your application. Getters and computed properties are not field access. If you do not know an object's runtime fields, capture the object and inspect its snapshot. Do not guess a field name from a getter.
+
+Variables must exist at the selected location. For a line logpoint, choose a location after the assignment of a local variable you want to read. A variable that is out of scope is different from one whose value is `null`.
+
+Use `isDefined` before reading a value that might be missing:
+
+```text
+isDefined(user) && user != null
+isDefined(user.email) && user.email != null && !isEmpty(user.email)
+```
+
+Use `null` for null checks, and `true` and `false` for Boolean values. Compare Boolean fields explicitly: write `user.isActive == true`, not `user.isActive` or `!user.isActive`, in a condition.
+
+## Operators
+
+| Operation | Syntax | Example |
+|---|---|---|
+| Compare values | `<`, `>`, `>=`, `<=`, `==`, `!=` | `status >= 400 && status < 500` |
+| Combine conditions | `&&`, `\|\|` | `status == 404 \|\| status == 500` |
+| Negate a condition | `!`, `not(...)` | `!isEmpty(items)` |
+| Check a runtime type | `instanceof` followed by a quoted type name | `obj instanceof "java.util.Map"` |
+
+Use parentheses to make a combined condition's intent clear. Type names for `instanceof` depend on the application language and runtime type.
+
+The language does not support calling application methods, arithmetic such as `i + 1`, ternary expressions, or assignments. Read a value already computed by the application, or use one of the supported built-in functions.
 
 ## Contextual variables
 
-The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are only available within predicate expressions for filtering and transforming collections.
+Contextual values depend on where and when instrumentation runs. Return values and execution duration require method-exit instrumentation; they are not ordinary local variables available at any line.
 
-| Keyword     | Description                                                                |
-|-------------|----------------------------------------------------------------------------|
-| `@return`   | Provides access to the method return value. |
-| `@duration` | Provides access to the method call execution duration, as a floating-point value in milliseconds. |
-| `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists). |
-| `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
-| `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
-| `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
+| Keyword | Description |
+|---|---|
+| `@return` | The method's return value, when available at method exit. |
+| `@duration` | The method's execution duration in milliseconds, when available at method exit. |
+| `@exception` | The exception from a throwing method invocation, when available in the instrumentation context. |
+| `@it` | The current element inside a list predicate, such as `any(items, {@it > 2})`. |
+
+Do not use `@key` or `@value` in expressions entered in the UI or through MCP. Use bracket indexing to read a dictionary value, such as `myMap["b"]`. The list-predicate examples below do not establish support for iterating dictionaries in every runtime.
 
 ## General operations
 
-The following examples assume a variable named `myString` with value `Hello, world!`:
+These examples assume the application has a string `myString` with the value `"Hello, world!"`.
 
-| Operation | Description | Example |
-|-----------|-------------|---------|
-| `isDefined(var)` | Checks whether a variable is defined. Returns `true` if the variable exists in the current scope, `false` otherwise. Useful for conditional logic when a variable may not be present. | {{< expression-language-evaluator expression="isDefined(myString)" >}} |
-| `len(value_src)` | Gets the string length. | {{< expression-language-evaluator expression="len(myString)" >}} |
-| `isEmpty(value_src)` | Checks whether the string is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(myString)" >}} |
-| `substring(value_src, startIndex, endIndex)` | Gets a substring. | {{< expression-language-evaluator expression="substring(myString, 0, 2)" >}} |
-| `startsWith(value_src, string_literal)` | Checks whether a string starts with the given string literal. | {{< expression-language-evaluator expression="startsWith(myString, \"He\")" >}} |
-| `endsWith(value_src, string_literal)` | Checks whether the string ends with the given string literal. | {{< expression-language-evaluator expression="endsWith(myString, \"rdl!\")" >}} |
-| `contains(value_src, string_literal)` | Checks whether the string contains the string literal, or whether a collection contains an element. | {{< expression-language-evaluator expression="contains(myString, \"ll\")" >}} |
-| `matches(value_src, string_literal)` | Checks whether the string matches the regular expression provided as a string literal. | {{< expression-language-evaluator expression="matches(myString, \"^H.*!$\")" >}} |
+| Operation | Description | Example | Result |
+|---|---|---|---|
+| `isDefined(value)` | Checks whether a variable or field can be resolved. A defined value can still be `null`. | `isDefined(myString)` | `true` |
+| `len(value)` | Gets the length of a string. | `len(myString)` | `13` |
+| `isEmpty(value)` | Checks whether a string is empty. Check nullable values explicitly rather than assuming identical null behavior across runtimes. | `isEmpty(myString)` | `false` |
+| `substring(value, start, end)` | Extracts characters from `start` up to, but not including, `end`. | `substring(myString, 0, 2)` | `"He"` |
+| `startsWith(value, string_literal)` | Checks for a prefix. | `startsWith(myString, "He")` | `true` |
+| `endsWith(value, string_literal)` | Checks for a suffix. | `endsWith(myString, "ld!")` | `true` |
+| `contains(value, string_literal)` | Checks for a substring. The second argument is a string literal. | `contains(myString, "ll")` | `true` |
+| `matches(value, string_literal)` | Checks a string against a regular expression. | `matches(myString, "^H.*!$")` | `true` |
+
+For a value that might be null, use a condition such as `user.email == null || isEmpty(user.email)`. If the variable or field itself might be missing, check `isDefined` first.
 
 ## Collection operations
 
-When working with collections (lists, maps, and so on), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
+These examples assume the application has `mySequence = [1, 2, 3, 4]` and `myMap = {"a": 1, "b": 2, "c": 3}`. The examples describe application data, not collection literals to enter as expressions.
 
-The following examples assume a variable named `mySequence` with value `[1,2,3,4]` and `myMap` with value `{"a": 1, "b": 2, "c": 3}`:
+| Operation | Description | Example | Result |
+|---|---|---|---|
+| `len(value)` | Gets the size of a collection. | `len(mySequence)` | `4` |
+| `isEmpty(value)` | Checks whether a collection is empty. | `isEmpty(mySequence)` | `false` |
+| `[index]` | Reads a list element using a zero-based index. | `mySequence[3]` | `4` |
+| `[key]` | Reads a dictionary value using a key of the appropriate type. | `myMap["b"]` | `2` |
+| `any(value, {predicate})` | Checks whether at least one list element matches. | `any(mySequence, {@it > 2})` | `true` |
+| `all(value, {predicate})` | Checks whether every list element matches. | `all(mySequence, {@it > 0})` | `true` |
+| `filter(value, {predicate})` | Returns the list elements that match. | `filter(mySequence, {@it > 1})` | `[2, 3, 4]` |
 
-| Operation | Description | Example |
-|-----------|-------------|---------|
-| `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(mySequence)" >}} {{< expression-language-evaluator expression="len(myMap)" >}}  |
-| `isEmpty(value_src)` | Checks whether the collection is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(mySequence)" >}} {{< expression-language-evaluator expression="isEmpty(myMap)" >}} |
-| `[ i ]`, `[ key ]` | For sequential containers returns the `i`-th item in the collection (where `i` must be an integer). For dictionaries, returns the value that corresponds to the `key` (where `key` must match the key type of the dictionary). If the item does not exist, the expression yields an error or returns null, depending on the language. | {{< expression-language-evaluator expression="mySequence[3]" >}} {{< expression-language-evaluator expression="myMap[\"b\"]" >}} |
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference for sequential containers, and with `@key`, `@value` for dictionaries. | {{< expression-language-evaluator expression="any(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="any(myMap, {@value > 2})" >}} |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="all(myMap, {@key == \"b\"})" >}} |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(mySequence, {@it > 1})" >}} {{< expression-language-evaluator expression="filter(myMap, {@value > 1})" >}} |
+For numeric membership, use `any(mySequence, {@it == 2})`, not `contains(mySequence, 2)`. You can compose supported functions, for example `len(filter(mySequence, {@it > 1}))`, which returns `3` for this list.
+
+Missing keys and out-of-range indexes can produce evaluation errors. Guard a lookup that might be absent with `isDefined(myMap["key"])` before using its value.
 
 ## Try your own conditions
 
-This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether data is captured when instrumenting a method.
-
-Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see whether data is captured based on your condition.
-
-Available variables in this example:
-
-- `loops`: The route parameter hardcoded to `5`
-- `myString`: A string `"Hello, world!"`
-- `mySequence`: An array of integers `[1, 2, 3]`
-- `myMap`: A dictionary `{"a": 1, "b": 2, "c": 3}`
-- `i`: The current loop iteration index
+The illustration below uses `myString = "Hello, world!"`, `mySequence = [1, 2, 3, 4]`, and `myMap = {"a": 1, "b": 2, "c": 3}`. The loop runs five times, with `i` from `0` to `4`.
 
 {{< expression-language-simulator >}}
+
+## Check an expression in your application
+
+Start with a value whose name and scope you know. Confirm that the code location executes, inspect the captured value, and then add a condition or a more specific expression.
+
+If an expression does not produce the expected result:
+
+1. Check syntax separately from runtime availability. A valid expression can still read a missing field or an unavailable contextual value.
+2. Check the selected service, environment, deployed code version, and instrumentation location.
+3. For a Live Debugger log event, inspect `debugger.snapshot.evaluationErrors`. Do not treat an event with a condition-evaluation error as evidence that the condition matched.
+4. If field access fails, capture the parent object and inspect its fields. Check for redacted, truncated, or uncaptured values before assuming a value is absent.
+
+For help finding code locations and variables, see [Autocomplete and Search][3].
+
+[1]: /tracing/live_debugger/
+[2]: /dynamic_instrumentation/
+[3]: /dynamic_instrumentation/symdb/

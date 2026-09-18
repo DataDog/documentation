@@ -1,6 +1,6 @@
 ---
-title: Dynamic Instrumentation Sensitive Data Scrubbing
-description: Protect sensitive information by configuring redaction and scrubbing mechanisms for Dynamic Instrumentation.
+title: Sensitive Data Scrubbing for Live Debugger and Dynamic Instrumentation
+description: Understand where sensitive data is redacted and configure identifier, type, and value-based scrubbing.
 aliases:
     - /dynamic_instrumentation/sensitive-data-scrubbing/
     - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
@@ -15,17 +15,19 @@ further_reading:
 
 ## Overview
 
-Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs as span tags.
+[Live Debugger][5] captures logs and variable snapshots for investigations. [Dynamic Instrumentation][6] adds metrics, spans, and span tags. Both can read application values that contain sensitive information.
 
-While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information.
+Choose the values you collect deliberately and understand where redaction occurs:
 
-By understanding and properly configuring these redaction mechanisms, you can use Dynamic Instrumentation with confidence and security.
+- **Identifier and type rules** redact matching values in your infrastructure, before upload.
+- **Live Debugger redaction modes** control which captured values are visible. Strict Mode and Targeted Mode cannot be disabled. See [Live Debugger redaction modes][7].
+- **Sensitive Data Scanner rules** redact matching data after it reaches Datadog. They are not a substitute for rules that prevent sensitive values from leaving your infrastructure.
 
 ## Redact based on identifiers
 
 ### Default behavior
 
-Dynamic Instrumentation automatically redacts values linked to specific identifiers deemed sensitive, such as `password` and `accessToken`. See [the full list of redacted identifiers][1].
+The SDK automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`. See [the Java SDK's redacted identifiers][1]. Built-in rules and configuration support can vary by SDK.
 
 ### Custom identifier redaction
 
@@ -54,7 +56,7 @@ When you first access [Dynamic Instrumentation Setup][2], you can optionally set
 
 ### Customizing Sensitive Data Scanner
 
-You can disable the default rules or create other rules through the [Sensitive Data Scanner][4]. To create a new Sensitive Data Scanner rule for Dynamic Instrumentation, set it to filter on `source:dd_debugger`.
+You can disable or customize these Sensitive Data Scanner rules through the [Sensitive Data Scanner][4]. This does not disable Live Debugger's Strict or Targeted redaction mode. To apply a rule to Live Debugger logs, set its filter to `source:dd_debugger`.
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 
@@ -66,3 +68,6 @@ You can disable the default rules or create other rules through the [Sensitive D
 [2]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
+[5]: /tracing/live_debugger/
+[6]: /dynamic_instrumentation/
+[7]: /tracing/live_debugger/#mode-based-redaction

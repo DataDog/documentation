@@ -3,15 +3,14 @@
   <div class="examples-list">
     <button class="example-button" data-expression="i > 3">i > 3</button>
     <button class="example-button" data-expression='i == mySequence[0]'>i == mySequence[0]</button>
-    <button class="example-button" data-expression="any(myMap, {@value == i})">any(myMap, {@value == i})</button>
+    <button class="example-button" data-expression='i &lt; myMap["b"]'>i &lt; myMap["b"]</button>
     <button class="example-button" data-expression="">Write your own!</button>
   </div>
 </div>
 
 <div class="expression-simulator-container">
-  <!-- Add a notice at the top to indicate this is a static illustration -->
   <div class="instrumentation-indicator">
-    <strong>Note:</strong> Condition evaluations and variable access patterns may vary when using the product.
+    <strong>Illustration only:</strong> This simulator is not a runtime validator. It accepts some syntax the product does not support and does not reproduce SDK behavior for missing values. Use the syntax in this reference and verify expressions in your application.
   </div>
 
   <div class="expression-simulator">
@@ -35,7 +34,7 @@
 
       <div class="code-line-container">
         <span class="line-number">14</span>
-        <div class="code-line"><span class="indent-1"></span><span class="variable">myString</span> = <span class="string">"hello world"</span></div>
+        <div class="code-line"><span class="indent-1"></span><span class="variable">myString</span> = <span class="string">"Hello, world!"</span></div>
       </div>
 
       <div class="code-line-container">
@@ -64,7 +63,7 @@
 
       <div class="template-container">
         <div class="template-label">with template</div>
-        <div class="template-input non-interactive" style="display: flex; align-items: center; height: 1.5rem;">Log on loop <span style="color: #2c63db; padding-left: 0.2rem; padding-right:0.2rem"> {i+1} </span> generated</div>
+        <div class="template-input non-interactive" style="display: flex; align-items: center; height: 1.5rem;">Loop matched the condition</div>
       </div>
 
       <div class="condition-container">

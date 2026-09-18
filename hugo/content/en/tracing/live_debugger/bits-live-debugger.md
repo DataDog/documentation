@@ -28,7 +28,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
-Bits Live Debugger functionality is only accessible from the Live Debugger page.
+Start Bits Live Debugger from the Live Debugger page. To use Live Debugger with a separate coding assistant, follow the [MCP setup steps][8]. That path does not require starting a Bits Live Debugger session.
 
 <div class="alert alert-info">
 Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
@@ -39,7 +39,8 @@ Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the under
 Before using Bits Live Debugger:
 
 - [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
-- Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
+- Your account must have the [permissions][2] required to use Live Debugger in the target environment.
+- The service and environment must use [Targeted redaction mode][9]. Bits Live Debugger is not available in Strict Mode.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
 
@@ -78,7 +79,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 
 **Language support**: Some features vary by language. For example, condition expressions are not supported for all runtimes. Bits notifies you when a requested feature is not available for the target service's language.
 
-**Sensitive data**: The [sensitive data scrubbing][3] behavior that applies to manually created logpoints also applies to logpoints created by Bits. In production environments, non-numeric and non-Boolean captured values are redacted by default.
+**Sensitive data**: Logpoints created by Bits use the same [sensitive data scrubbing][3] protections as manually created logpoints. Targeted Mode still redacts sensitive data; it does not disable redaction. Changing the mode requires the **Live Debugger Redaction Write** permission.
 
 ## Further reading
 
@@ -91,3 +92,5 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
 [7]: /tracing/live_debugger/#enable-live-debugger
+[8]: /tracing/live_debugger/#use-live-debugger-through-mcp
+[9]: /tracing/live_debugger/#mode-based-redaction
