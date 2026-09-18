@@ -395,7 +395,7 @@ This feature is enabled by default, but requires job log forwarding to be config
 
 #### Store job logs
 
-The following GitLab versions support storing job logs:
+The following GitLab versions support forwarding job logs to Datadog:
 
 * GitLab.com (SaaS)
 * GitLab >= 15.3 (self-hosted) only if you are using [object storage to store job logs][7]
