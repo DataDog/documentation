@@ -63,6 +63,9 @@ In the text box, enter a unique name for the selected entity (or entities). Alte
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
 1. Review and save your remapping rule. After you save your rule, _it may take about a minute for it to take effect_.
 
+## Service remapping with Bits Chat 
+Rename your services with the Bits Chat service remapping skill. To enable the skill, navigate to **Bits AI** > **Bits Chat** > **Settings**. Go to **Skills**, and turn on `service-remapping`. Then, prompt Bits Chat to create, delete, or update remapping rules.
+
 ## Remapping rules behavior
 
 Remapping rules work by overriding the `service` tag for remapping services, or the `peer.service` tag for remapping inferred services, datastores, and queues. Services are remapped at intake, and any preexisting configuration specifying a service name does not change when a remapping rule is created. Service remapping rules take precedence over all other service name configurations.

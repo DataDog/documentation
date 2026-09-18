@@ -147803,13 +147803,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147873,19 +147873,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -148378,13 +148378,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -230642,7 +230642,9 @@ paths:
   /api/v2/usage/quotas/{quota_namespace}:
     get:
       description: |-
-        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include
+        descendant organizations in the same datacenter as the caller. Requires the `billing_read` or
+        `billing_edit` permission.
       operationId: ListQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -230715,6 +230717,8 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
+            - billing_read
+        - AuthZ:
             - billing_edit
       summary: List usage quotas
       tags:
@@ -230728,6 +230732,7 @@ paths:
       "x-permission":
         operator: OR
         permissions:
+          - billing_read
           - billing_edit
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
