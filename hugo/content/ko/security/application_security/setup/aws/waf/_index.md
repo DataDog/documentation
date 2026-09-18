@@ -17,12 +17,6 @@ further_reading:
   text: Datadog로 AWS WAF 활동 모니터링
 title: AWS WAF용 App and API Protection 활성화
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection은 정부 기관용 Datadog 사이트 US1-FED에서 미리 보기로 제공되고 있습니다.
-</div>
-{{< /site-region >}}
-
 App and API Protection은 다음을 통해 AWS Web Application Firewall(WAF)과 통합됩니다.
 
 1. 로그를 트레이스로 변환하여 모니터링 및 차단된 요청에 대한 가시성을 확보합니다.

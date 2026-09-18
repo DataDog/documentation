@@ -24,7 +24,7 @@ Derived Metrics allow you to save any metrics query as a new metric, so you can 
 
 ## Create a derived metric
 
-To create a derived metric, navigate to [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] and click {{< ui >}}+ New Metric{{< /ui >}}.
+To create a derived metric, navigate to [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] and click {{< ui >}}\+ New Metric{{< /ui >}}.
 
 {{< img src="metrics/derived_metrics/generate_metrics_tab.png" alt="The generate metrics tab in Datadog" style="width:90%;" >}}
 

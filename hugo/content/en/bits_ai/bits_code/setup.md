@@ -15,15 +15,20 @@ further_reading:
 
 ## Prerequisites
 
-To set up Bits Code, you need the [`Bits Code Write` (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+To set up Bits Code, your Datadog user needs:
+- The [Bits Code Write (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+- (If you plan to enable [Slack code channels][13]) At least one of the following permissions: 
+  - Integrations Manage (`manage_integrations`)
+  - User Access Manage (`user_access_manage`)
+  - Org Management (`org_management`)
 
-If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
+If your organization uses custom roles, an admin must add these permissions manually. For details, see [Access Control][1].
 
 ## Setup
 
-Set up Bits Code for one of the [supported source code providers][11].
+1. Install one of the [supported source code providers][11] and grant the necessary permissions:
 
-{{< tabs >}}
+   {{< tabs >}}
 
 {{% tab "GitHub" %}}
 1. Install the [GitHub integration][1]. For full installation and configuration steps, see the [GitHub integration guide][2].
@@ -84,6 +89,18 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
 {{% /tab %}}
 
 {{< /tabs >}}
+
+2. (Optional) If you're planning to use [Slack code channels][13]:
+      - Set up the [Bits Chat Slack integration][14] and grant the [Slack scopes][15] required for code channels:
+         - `channels:history`
+         - `groups:history`
+         - `chat:write`
+         - `channels:manage`
+         - `app_mentions:read`
+         - (Optional) `chat:write.customize`
+      - On [{{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}][16], set the {{< ui >}}Enable Slack Code Channels{{< /ui >}} toggle on.
+
+3. (Optional) See the additional configuration options, below.
 
 ## Additional configuration  
 
@@ -198,6 +215,10 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
+[13]: /bits_ai/bits_code/slack_code_channels/
+[14]: /bits_ai/bits_chat/#slack
+[15]: https://docs.slack.dev/reference/scopes/
+[16]: https://app.datadoghq.com/code/settings/slack
 
 ## Further reading
 

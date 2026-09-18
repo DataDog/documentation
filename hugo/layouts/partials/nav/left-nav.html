@@ -22,6 +22,7 @@
 {{ $url_without_anchor := "" }}
 
 {{ $currentPage := . }}
+{{ $curURL := trim $currentPage.RelPermalink "/" }}
 {{ range $menu }}
     {{ if .HasChildren }}
         {{/*  HEADER  */}}
@@ -29,8 +30,15 @@
         <ul class="list-unstyled">
             {{ range .Children }}
                 {{/*  LEVEL 1  */}}
+                {{/* Levels 3-4 render only for the current page's top-level section, to avoid shipping every
+                     section's full sub-nav on every page. This menu is config-defined (plain url: strings, no
+                     page front matter), so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent never match
+                     -- comparing URLs directly is what works. Keep in sync with nav/current-top-section.html,
+                     which computes the same matches for this partial's cache key. */}}
+                {{ $menuURL := trim (.URL | relLangURL) "/" }}
+                {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
-                {{ if $currentPage.HasMenuCurrent "main" . }}active{{ end }}">
+                {{ if $isCurrentTopSection }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
                     <a href="{{ .URL | relLangURL }}" class="d-flex align-items-center" data-path="{{ trim (print $branchPath ((print $url_without_anchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
                         {{ if .Pre }}
@@ -52,7 +60,7 @@
                                     {{ end }}
                                     <span>{{ .Name }}</span>
                                 </a>
-                            {{ if .HasChildren }}
+                            {{ if (and .HasChildren $isCurrentTopSection) }}
                                 <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                                 {{/*  LEVEL 3  */}}
                                 {{ range .Children }}
