@@ -403,7 +403,7 @@ The following GitLab versions support storing job logs:
 
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
-To enable job log storage in GitLab:
+To enable job log forwarding from GitLab:
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
