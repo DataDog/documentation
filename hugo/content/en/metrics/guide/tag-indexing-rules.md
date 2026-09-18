@@ -185,7 +185,7 @@ You can review and remove these exemptions from the Tag Indexing Rules page. Dat
 - Safe to remove: Based on Datadog's analysis across your account's tag indexing rules, removing the exemption is expected to reduce your custom metrics usage.
 - Needs review: Removing the exemption may affect your custom metrics usage, or your tag indexing rules may not preserve all tags included in the existing MWL configuration. Review these exemptions carefully to avoid breaking dashboards, monitors, or other assets that depend on those tags.
 
-Exemptions apply across the account, not to individual tag indexing rules. Removing a metric’s exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
+Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
 
 ## Further reading
 
