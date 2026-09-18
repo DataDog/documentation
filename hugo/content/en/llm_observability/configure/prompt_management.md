@@ -316,6 +316,8 @@ Datadog does not automatically apply them to Playground runs or model calls. Do 
 
 The editor requires a valid JSON object. Its example text is a placeholder, not a saved configuration.
 
+{{< img src="llm_observability/monitoring/create-prompt-configuration-document-extractor.png" alt="Create new prompt dialog for document-extractor, with model, temperature, and JSON response format settings in the Configuration editor." style="width:100%;" >}}
+
 ### Update configuration
 
 1. Open a prompt version and select the {{< ui >}}Configuration{{< /ui >}} tab.
