@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -531,18 +534,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
 
 ## Dashboards
 
@@ -1338,14 +1350,14 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Live Debugger
 
-Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
 
 <div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
 ### `discover_datadog_logpoint`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Discovers the deployment environments where a service runs [Live Debugger][77] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
 
 - Which environments can I debug for the checkout service?
 - What Live Debugger features are available for `service:web-store`?
@@ -1353,7 +1365,7 @@ Discovers the deployment environments where a service runs [Live Debugger][77] a
 ### `enable_live_debugger`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Enables [Live Debugger][77] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
 
 - Enable Live Debugger for the checkout service in `staging`.
 - Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
@@ -1361,7 +1373,7 @@ Enables [Live Debugger][77] for a service in an environment where it is supporte
 ### `create_debugger_session`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Creates a [Live Debugger][77] session. Use the returned `session_id` to create, list, and disable logpoints.
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
 
 - Create a debugging session so I can add logpoints to the checkout service.
 - Start a Live Debugger session to investigate a null pointer error in the payments service.
@@ -1369,7 +1381,7 @@ Creates a [Live Debugger][77] session. Use the returned `session_id` to create, 
 ### `create_datadog_logpoint`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Creates a [logpoint][77] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
 
 - Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
 - Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
@@ -1377,7 +1389,7 @@ Creates a [logpoint][77] to capture runtime data unavailable in existing logs, m
 ### `list_datadog_session_logpoints`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read`*\
-Lists the logpoints in a [Live Debugger][77] session, with the service, source location, message template, and enabled state for each.
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
 
 - Show me all active logpoints in this session.
 - Which logpoints are enabled for the checkout service in this session?
@@ -1385,7 +1397,7 @@ Lists the logpoints in a [Live Debugger][77] session, with the service, source l
 ### `get_datadog_debugger_snapshot`
 *Toolset: **live-debugger***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
-Retrieves captured variables from a [Live Debugger][77] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
 
 - Show me the captured variables from snapshot event `abc123`.
 - Expand the nested `order` object in that snapshot to a depth of 3.
@@ -1393,7 +1405,7 @@ Retrieves captured variables from a [Live Debugger][77] snapshot. Use `variable_
 ### `disable_datadog_logpoints`
 *Toolset: **live-debugger***\
 *Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
-Disables all logpoints in a [Live Debugger][77] session. The session stays active so new logpoints can be added.
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
 
 - Disable all logpoints in session `session-12345`.
 - Stop all the logpoints in this debugging session.
@@ -2726,7 +2738,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [74]: /sheets/
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
-[77]: /tracing/live_debugger/
+[77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 

@@ -1278,6 +1278,11 @@ menu:
       identifier: mcp_server_tools
       parent: mcp_server
       weight: 2
+    - name: Code Execution
+      url: mcp_server/code_execution
+      identifier: mcp_server_code_execution
+      parent: mcp_server
+      weight: 3
     - name: Partners
       url: partners/
       pre: colab
@@ -2840,11 +2845,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Integrations
+      url: incident_response/on-call/integrations/
+      parent: oncall
+      identifier: oncall_integrations
+      weight: 8
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 8
+      weight: 9
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
@@ -10116,16 +10126,21 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
+    - name: RUM Remote Configuration
+      url: real_user_monitoring/remote_configuration/
+      parent: rum
+      identifier: rum_remote_configuration
+      weight: 15
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 16
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 17
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
