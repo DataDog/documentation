@@ -1,5 +1,5 @@
 ---
-title: Code Execution
+title: Code Execution with the MCP Server
 description: "Run agent-authored JavaScript against Datadog APIs in a single MCP tool call to investigate issues that span multiple Datadog products."
 algolia:
   tags: ["mcp", "mcp server", "code execution", "code-exec"]
