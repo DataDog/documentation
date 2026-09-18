@@ -1885,7 +1885,7 @@
     "request_schema_description": "Request to create a DORA incident event."
   },
   "ListDowntimes": {
-    "description": "Get all scheduled downtimes.",
+    "description": "List scheduled downtimes, optionally filtering to those that are active when the request is made.",
     "summary": "Get all downtimes"
   },
   "CreateDowntime": {
