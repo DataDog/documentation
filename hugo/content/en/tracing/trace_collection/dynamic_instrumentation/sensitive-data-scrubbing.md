@@ -27,7 +27,7 @@ Choose the values you collect deliberately and understand where redaction occurs
 
 ### Default behavior
 
-The SDK automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`. See [the Java SDK's redacted identifiers][1]. Built-in rules and configuration support can vary by SDK.
+Live Debugger automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`. See [redacted identifiers][1].
 
 ### Custom identifier redaction
 
@@ -52,11 +52,11 @@ Class-based redaction:
 
 ### Initial setup
 
-To scan Live Debugger logs, create a [Sensitive Data Scanner][4] rule with the filter `source:dd_debugger`.
+To create a [Sensitive Data Scanner][4] rule for Live Debugger, set it to filter on `source:dd_debugger`.
 
 ### Customizing Sensitive Data Scanner
 
-You can disable or customize rules through the [Sensitive Data Scanner][4]. This does not disable Live Debugger's Strict or Targeted redaction mode.
+You can disable or customize rules through the [Sensitive Data Scanner][4].
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 

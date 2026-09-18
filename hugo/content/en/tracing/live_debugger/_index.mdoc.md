@@ -1,6 +1,6 @@
 ---
 title: Live Debugger
-description: Inspect running applications with temporary logpoints that collect logs and variable snapshots without pausing execution or requiring a redeployment.
+description: Inspect running applications in real time using non-breaking logpoints that collect logs and variable snapshots without pausing execution or requiring a redeployment.
 content_filters:
   - trait_id: prog_lang
     option_group_id: live_debugger_language_options
@@ -47,7 +47,7 @@ Live Debugger lets you inspect application behavior in real time, directly in ru
 
 Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state at specific points in the code. This includes variable values, method parameters, and execution context. Live Debugger is well suited for diagnosing issues in production or other long-running environments.
 
-Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application.
+Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
 Live Debugger complements [Dynamic Instrumentation][38], which adds metrics, spans, and span tags using the same [expression language][15].
 

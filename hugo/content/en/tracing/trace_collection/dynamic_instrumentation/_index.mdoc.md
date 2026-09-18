@@ -1,6 +1,6 @@
 ---
 title: Dynamic Instrumentation
-description: Add metrics, spans, and span tags to running applications without changing application code.
+description: Add metrics, spans, and span tags to running production systems without restarts or code changes.
 content_filters:
   - trait_id: prog_lang
     option_group_id: dynamic_instrumentation_language_options
@@ -27,7 +27,7 @@ aliases:
 further_reading:
   - link: "/dynamic_instrumentation/expression-language/"
     tag: "Documentation"
-    text: "Expression Language"
+    text: "Learn more about the Expression Language"
   - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
     tag: "Documentation"
     text: "Removing sensitive information from your Dynamic Instrumentation data"

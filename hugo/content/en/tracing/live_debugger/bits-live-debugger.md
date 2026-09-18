@@ -28,7 +28,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
-Bits Live Debugger is the built-in agent on the Live Debugger page.
+Live Debugger is available through the built-in Bits agent or by configuring logpoints manually on the Live Debugger page.
 
 <div class="alert alert-info">
 Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
@@ -40,7 +40,7 @@ Before using Bits Live Debugger:
 
 - [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger in the target environment.
-- Agentic investigations require [Targeted redaction mode][8]. Manual Live Debugger sessions also work in Strict Mode.
+- Agentic investigations require [Targeted redaction mode][8]. Manual Live Debugger sessions work in both Strict and Targeted Mode.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
 
@@ -79,7 +79,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 
 **Language support**: Some features vary by language. For example, condition expressions are not supported for all runtimes. Bits notifies you when a requested feature is not available for the target service's language.
 
-**Sensitive data**: Logpoints created by Bits use the same [sensitive data scrubbing][3] protections as manually created logpoints. Targeted Mode still redacts sensitive data; it does not disable redaction. Changing the mode requires the **Live Debugger Redaction Write** permission.
+**Sensitive data**: Logpoints created by Bits use [sensitive data scrubbing][3]. In production environments, non-numeric and non-Boolean captured values are redacted by default. Targeted Mode still redacts sensitive data. It does not disable redaction. Changing the mode requires the **Live Debugger Redaction Write** permission.
 
 ## Further reading
 
