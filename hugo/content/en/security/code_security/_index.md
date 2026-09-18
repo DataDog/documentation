@@ -43,7 +43,7 @@ Code Security scans your first-party code and open source libraries used in your
 - [Runtime Code Analysis (IAST)][3] for identifying vulnerabilities in the first-party code within your services
 - [Secret Scanning][8] for identifying and validating leaked secrets
 - [Infrastructure as Code (IaC) Security][10] for identifying security misconfigurations in IaC stored in your repositories
-- [Supply Chain Security](#supply-chain-security-preview) for preventing malicious packages from entering your development environment and code repositories
+- [Supply Chain Firewall](#supply-chain-firewall-preview) for preventing malicious packages from entering your development environment and code repositories
 
 Code Security helps teams implement DevSecOps throughout the organization:
 - **Developers:** early vulnerability detection, code quality improvements, faster development as developers spend less time debugging and patching.
@@ -102,20 +102,16 @@ IaC Security analyzes infrastructure-as-code to detect misconfigurations before 
 
 With [Cloud Security Management (CSM)][18], you can see misconfigurations in IaC Security directly from runtime findings. See [IaC Security setup][17] to get started.
 
-## Supply Chain Security (Preview)
+## Supply Chain Firewall (Preview)
 
 {{< callout url=https://docs.google.com/forms/d/1Xqh5h1n3-jC7au2t30fdTq732dkTJqt_cb7C7T-AkPc/viewform?edit_requested=true
  btn_hidden="false" header="Join the Preview!">}}
-Use this form to submit your request to join the Supply Chain Security Preview.
+Join the Supply Chain Firewall preview.
 {{< /callout >}}
 
-Supply Chain Security prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
+Supply Chain Firewall (SCFW) prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
 
-Unlike SCA, which scans dependencies already in your codebase, the Datadog Supply Chain Firewall (SCFW) intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they are installed.
-
-Supply Chain Security evaluates every package install against Datadog's malicious package feed (powered by [GuardDog][21]), known vulnerability advisories, and configurable recency thresholds. If a package matches one of these checks, SCFW immediately blocks the installation and displays a clear, actionable message on developer laptops and [CI runners][20].
-
-In addition to protecting individual developer machines or CI pipelines, SCFW provides event observability to search, filter, and audit ALLOW, WARN, and BLOCK events across developer machines and CI systems in a unified event feed.
+Unlike SCA, which scans dependencies already in your codebase, SCFW intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they're installed. See [Supply Chain Firewall][22] to get started.
 
 ## Code Security MCP Server (Preview)
 The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
@@ -142,5 +138,4 @@ The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) serve
 [17]: /security/code_security/iac_security/setup/?tab=github
 [18]: /security/cloud_security_management/
 [19]: /security/code_security/dev_tool_int/mcp_server/
-[20]: /security/code_security/dev_tool_int/scfw_github_action/
-[21]: https://github.com/DataDog/guarddog
+[22]: /security/code_security/software_composition_analysis/supply_chain_firewall/
