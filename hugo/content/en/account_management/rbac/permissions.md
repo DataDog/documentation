@@ -42,6 +42,54 @@ Some permissions appear in "preview mode" before becoming fully enforced. During
 
 Preview mode gives your organization's administrators the ability to opt into certain new permissions, so they can prevent losing access to resources that were previously unrestricted. Release notes associated with each preview mode permission indicate when the permission is created and when it will be enforced. While these permissions don't restrict access during preview, Datadog recommends updating role configurations before they become enforced to prevent disruption.
 
+### Restricted permissions
+
+Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
+
+To exclude the following permissions when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
+
+- Dashboards Read (`dashboards_read`)
+- Monitors Read (`monitors_read`)
+- APM Read (`apm_read`)
+- Incidents Read (`incident_read`)
+- RUM Apps Read (`rum_apps_read`)
+- Notebooks Read (`notebooks_read`)
+- SLOs Read (`slos_read`)
+- CI Visibility Read (`ci_visibility_read`)
+- CD Visibility Read (`cd_visibility_read`)
+- Vulnerability Management Read (`appsec_vm_read`)
+
+Example request to create a role without restricted permissions:
+
+```sh
+curl -X POST "https://api.datadoghq.com/api/v2/roles" \
+-H "Accept: application/json" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: ${DD_API_KEY}" \
+-H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+-d '{
+  "data": {
+    "attributes": {
+      "name": "developers",
+      "default_permissions_opt_out": true
+    },
+    "type": "roles"
+  }
+}'
+```
+
+By default, the following restricted permissions cannot be removed through the UI or API. To make these permissions removable and automatically exclude them from roles when `default_permissions_opt_out: true` is set, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
+
+- Built-In Features (`built_in_features`)
+- Metrics Read (`metrics_read`)
+- Timeseries Query (`timeseries_query`)
+- Events Read (`events_read`)
+- Hosts Read (`hosts_read`)
+- User Self Profile Read (`user_self_profile_read`)
+- User Self Profile Write (`user_self_profile_write`)
+- Static Analysis Settings Read (`static_analysis_settings_read`)
+- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
+
 ## Roles
 
 ### Managed roles
@@ -72,6 +120,28 @@ If the custom role is configured to receive automatic updates, your custom role 
 
 **Note**: When adding a new custom role to a user, make sure to remove the managed Datadog role associated with that user to strictly enforce the new role permissions.
 
+### Minimal Access Roles (Preview)
+
+<div class="alert alert-info">Minimal Access Roles is in Preview. Contact your Datadog representative to request access.</div>
+
+Minimal Access Roles give your organization more granular control over what users can do in Datadog.
+
+By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and typically cannot be removed, as they support core functionality across Datadog. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
+
+Minimal Access Roles is an organization-wide setting. Once enabled, the following permissions become removable from any custom role in your organization, allowing you to create restricted roles for specialized workflows:
+
+- Built-In Features (`built_in_features`)
+- Metrics Read (`metrics_read`)
+- Timeseries Query (`timeseries_query`)
+- Events Read (`events_read`)
+- Hosts Read (`hosts_read`)
+- User Self Profile Read (`user_self_profile_read`)
+- User Self Profile Write (`user_self_profile_write`)
+- Static Analysis Settings Read (`static_analysis_settings_read`)
+- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
+
+If you use `default_permissions_opt_out` in [Terraform role resources][6] or direct API calls, update your automation to account for these additional permissions before enabling Minimal Access Roles.
+
 ## Permissions list
 
 The following table lists the name, description, and default role for all available permissions in Datadog. Each asset type has corresponding read and write permissions.
@@ -90,3 +160,6 @@ Each managed role inherits all of the permissions from the less powerful roles. 
 [1]: /account_management/rbac/granular_access
 [2]: /account_management/users/#edit-a-user-s-roles
 [3]: /api/latest/roles/#list-permissions
+[4]: /api/latest/roles/#create-role
+[5]: /api/latest/roles/#update-a-role
+[6]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role
