@@ -29,6 +29,12 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 
 You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
+### Multimodal support
+
+Audio and images on OpenTelemetry messages are rendered in the trace view. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions, as described in [Media in messages](#media-in-messages).
+
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. For the fields, formats, and size limits that apply once media reaches a span, see [Multimodal Support](/llm_observability/instrument/multimodal/).
+
 ### Span links
 
 Use [OpenTelemetry span links][9] on your GenAI spans to express non-parent-child relationships, such as when one span's output feeds another span's input. When two linked spans are in the same trace, the link appears as an edge in that trace's **Execution Graph**, so you can see how data flows between sibling spans (for example, a tool's output feeding a downstream LLM call).
@@ -406,6 +412,16 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
 
+
+Agent Observability requires at least one of these attributes on a span. If no span in a trace has one, the whole trace is dropped before reaching Agent Observability:
+- gen_ai.operation.name
+- gen_ai.provider.name
+- openinference.span.kind
+- langfuse.observation.type
+- gen_ai.system (deprecated)
+
+Spans without any `gen_ai.*` attribute are also dropped individually, even in a trace that qualifies.
+
 If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
 
 <div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
@@ -520,6 +536,23 @@ Input and output messages are extracted from the following sources, in priority 
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (others) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
 | `gen_ai.system_instructions` | Prepended to input | Added as system role messages |
+
+##### Media in messages
+
+Message parts that carry media are extracted into the typed `audio_parts` and `image_parts` fields on the message:
+
+| Part type | Behavior |
+|-----------|----------|
+| `blob` with `mime_type` and inline bytes | Extracted to `image_parts` or `audio_parts`. When the part omits `modality`, it is inferred from the MIME type. |
+| `uri` carrying a base64 image data URI, such as `data:image/png;base64,...` | Extracted to `image_parts`. |
+| `uri` carrying a remote URL | Recorded as the text reference `[<modality>: <uri>]`. The URL is not fetched. |
+| `file` with a `file_id` | Recorded as the text reference `[<modality> file: <file_id>]`. |
+
+A positional marker such as `[image blob: image/png]` is also added to the message text so that media keeps its place among the other parts.
+
+Audio reaches `audio_parts` through `blob` parts only. An audio data URI on a `uri` part is recorded as text, and the conventions specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+
+For the formats the trace view renders and the size limits that apply, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 ##### Embedding spans
 

@@ -72,6 +72,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
+- link: "https://www.datadoghq.com/blog/tines-observability-pipelines-security-automation/"
+  tag: "Blog"
+  text: "Respond to security threats faster with Tines and Observability Pipelines"
 
 ---
 ## Overview

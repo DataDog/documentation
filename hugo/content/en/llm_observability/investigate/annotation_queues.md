@@ -13,6 +13,9 @@ further_reading:
   - link: /llm_observability/improve/experiments
     tag: Documentation
     text: Run experiments to test improvements
+  - link: /llm_observability/improve/access_control
+    tag: Documentation
+    text: Restrict a queue to specific teams or roles
   - link: "https://www.datadoghq.com/blog/automations-annotation-queues"
     tag: "Blog"
     text: "Annotate traces to improve LLM quality with Datadog LLM Observability"
@@ -146,6 +149,8 @@ Access restrictions apply independently, so you can enable either restriction or
 - When both restrictions are enabled, reviewers can annotate unassigned interactions and assignees can annotate their assigned interactions.
 
 The queue owner retains access and can annotate all interactions.
+
+These settings control who can annotate a queue, not who can see it. To control which teams and roles can see a queue at all, restrict its project with [Data Access Control][17].
 
 ### Filtering traces by annotation labels
 
@@ -325,8 +330,11 @@ You can manage annotation queues programmatically. The following endpoints are a
 
 | Data              | Retention period                                    |
 | ----------------- | ----------------------------------------------------|
-| Traces in queues  | Capped by your organization's trace retention period|
-| Annotation labels | Indefinite                                          |
+| Traces in queues  | Not retained beyond your organization's span retention period, unless annotated |
+| Annotated traces  | 90 days from the time of annotation, or your span retention period if that is longer |
+| Annotation labels | The same period as the trace they annotate           |
+
+Annotating a trace extends its retention at no additional charge: a trace that would otherwise expire under a shorter span retention period is retained for 90 days from the time you annotate it. For details, see [Data Governance][16].
 
 
 ## Example workflows
@@ -402,3 +410,5 @@ Build benchmark datasets with human-verified labels for regression testing and c
 [13]: /api/latest/agent-observability/#get-annotation-queue-label-schema
 [14]: /api/latest/agent-observability/#update-annotation-queue-label-schema
 [15]: /account_management/#email-subscriptions
+[16]: /llm_observability/data_governance/
+[17]: /llm_observability/improve/access_control/
