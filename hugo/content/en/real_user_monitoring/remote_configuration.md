@@ -48,6 +48,39 @@ To configure remote settings for an application:
 3. Enable remote configuration to generate a remote configuration ID.
    **Note**: Datadog saves the configuration as a draft, so its values do not override your existing SDK settings before you publish it.
 4. Add the remote configuration ID to your SDK initialization.
+
+{{< tabs >}}
+{{% tab "Browser" %}}
+
+Add a `remoteConfiguration` object to your existing `datadogRum.init()` call:
+
+```javascript
+remoteConfiguration: {
+    id: '<REMOTE_CONFIGURATION_ID>',
+},
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Add `remoteConfiguration` to your `Datadog.Configuration`:
+
+```swift
+remoteConfiguration: .init(id: "<REMOTE_CONFIGURATION_ID>")
+```
+
+{{% /tab %}}
+{{% tab "Android" %}}
+
+Call `setRemoteConfigurationId()` on your `Configuration.Builder`:
+
+```kotlin
+.setRemoteConfigurationId("<REMOTE_CONFIGURATION_ID>")
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+ 
 5. Update the settings as described in the [Change SDK settings with remote configuration](#change-sdk-settings-with-remote-configuration) section.
 6. Publish the configuration to apply its enabled settings.
 
