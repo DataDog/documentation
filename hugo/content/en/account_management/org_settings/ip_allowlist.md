@@ -4,7 +4,7 @@ description: Control network access to Datadog by restricting API and UI access 
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
+The IP allowlist feature is available for customers on a Pro+ or Enterprise plan. To request access, contact support.
 {{< /callout >}}
 
 ## Overview
@@ -14,6 +14,8 @@ The IP allowlist feature is available for customers on an enterprise plan only. 
 The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
 
 When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
+
+The IP allowlist is an organization-wide setting. It applies uniformly to all traffic listed under [Blocked and allowed resources](#blocked-and-allowed-resources) and cannot be scoped to a specific token, API key, user, or endpoint.
 
 ### Blocked and allowed resources
 
