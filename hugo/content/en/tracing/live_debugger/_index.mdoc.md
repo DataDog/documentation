@@ -24,7 +24,7 @@ further_reading:
   - link: "/dynamic_instrumentation/expression-language/"
     tag: "Documentation"
     text: "Expression Language"
-  - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
+  - link: "/tracing/live_debugger/sensitive-data-scrubbing/"
     tag: "Documentation"
     text: "Sensitive Data Scrubbing"
   - link: "/dynamic_instrumentation/symdb/"
@@ -429,7 +429,7 @@ The following constraints apply to Live Debugger usage and configuration:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
 
-[1]: /dynamic_instrumentation/sensitive-data-scrubbing/
+[1]: /tracing/live_debugger/sensitive-data-scrubbing/
 [2]: /agent/
 [4]: /tracing/guide/remote_config
 [11]: /logs/log_configuration/indexes/#exclusion-filters

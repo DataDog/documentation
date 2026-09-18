@@ -10,7 +10,7 @@ further_reading:
 - link: "/tracing/live_debugger/"
   tag: "Documentation"
   text: "Live Debugger"
-- link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
+- link: "/tracing/live_debugger/sensitive-data-scrubbing/"
   tag: "Documentation"
   text: "Sensitive Data Scrubbing"
 - link: "https://www.datadoghq.com/blog/live-debugger/"
@@ -87,7 +87,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 
 [1]: /tracing/live_debugger/
 [2]: /tracing/live_debugger/#permissions
-[3]: /dynamic_instrumentation/sensitive-data-scrubbing/
+[3]: /tracing/live_debugger/sensitive-data-scrubbing/
 [4]: https://app.datadoghq.com/debugging/
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/

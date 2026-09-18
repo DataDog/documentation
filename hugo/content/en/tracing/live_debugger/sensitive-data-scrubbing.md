@@ -2,6 +2,7 @@
 title: Live Debugger Sensitive Data Scrubbing
 description: Protect sensitive application data captured by Live Debugger.
 aliases:
+    - /tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing/
     - /dynamic_instrumentation/sensitive-data-scrubbing/
     - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
 further_reading:
