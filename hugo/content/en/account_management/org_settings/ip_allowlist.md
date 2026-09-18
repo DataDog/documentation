@@ -41,6 +41,8 @@ To allow mobile app clients to connect to Datadog when the IP allowlist feature 
 
 Only users with the {{< ui >}}Org Management{{< /ui >}} permission can configure the IP allowlist.
 
+The IP allowlist doesn't inherit between parent and child organizations. Each organization must have its own IP allowlist configured separately.
+
 With the IP allowlist API or UI, you can:
 - Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
 - Turn the IP allowlist on and off.
