@@ -56,8 +56,12 @@ In addition to the per-scope metrics, the `datadog.apis.rate_limit.usage.limit_c
 | Tag name | Description | Availability |
 |----------|-------------|--------------|
 | `app_key_id` | Application key ID associated with the request. The tag is present with an empty value when the request does not use an application key. | Count, blocked count, and utilization metrics |
+| `child_org` | Name of the child organization. For child organizations, Datadog also submits a copy of each metric to the root organization in the same Datadog site and adds this tag to the copy. | All metrics in root-organization copies |
+| `limit_count` | Configured request limit. | Count, blocked count, and utilization metrics |
 | `limit_name` | Name of the rate limit. Different endpoints can share the same name. | All metrics |
+| `limit_period` | Rate limit period in seconds. | Count, blocked count, and utilization metrics |
 | `limit_type` | Scope of the rate limit: `per_org`, `per_user`, or `per_api_key`. | All metrics |
+| `rate_limit_status` | Whether requests were `passed` or `blocked`. Utilization metrics combine both statuses and do not include this tag. | Count and blocked count metrics |
 | `user_uuid` | UUID of the user associated with the request. | Count, blocked count, and utilization metrics |
 
 ##### Query examples
@@ -83,11 +87,13 @@ The `datadog.apis.rate_limit.usage.*` metrics replace the `datadog.apis.usage.*`
 | `datadog.apis.usage.per_api_key` | `datadog.apis.rate_limit.usage.per_api_key_count` |
 | `datadog.apis.usage.per_api_key_ratio` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
 
+The replacement metrics preserve the legacy `limit_count`, `limit_period`, and `rate_limit_status` tags. For child organizations, Datadog submits metrics to the child organization and also submits a copy to the root organization in the same Datadog site with the `child_org` tag.
+
 The replacement metrics differ from the legacy metrics in the following ways:
 
-- The `child_org`, `limit_period`, and `rate_limit_status` tags are no longer emitted. Organization ownership is implicit because these metrics are submitted to the customer organization.
-- Use the corresponding `*_blocked_count` metric for blocked requests instead of filtering on `rate_limit_status:blocked`.
-- The configured limit previously supplied by the `limit_count` tag is available as the `datadog.apis.rate_limit.usage.limit_count` gauge.
+- Allowed and blocked requests use separate metrics. Use the corresponding `*_blocked_count` metric for blocked requests. The allowed count has `rate_limit_status:passed`, and the blocked count has `rate_limit_status:blocked`.
+- Utilization metrics combine allowed and blocked requests, so they do not include the `rate_limit_status` tag.
+- The configured limit is available both in the `limit_count` tag on usage metrics and as the value of the `datadog.apis.rate_limit.usage.limit_count` gauge. Use the gauge when you need the configured limit as a numeric value.
 
 ### Increase your rate limit
 You can request increased rate limits by creating a Support ticket with the below details under **Help** > **New Support Ticket**. Upon receiving a rate limit increase, our Support Engineering team reviews the request on a case-by-case basis and, if needed, works with internal engineering resources to confirm the viability of the rate limit increase request.
