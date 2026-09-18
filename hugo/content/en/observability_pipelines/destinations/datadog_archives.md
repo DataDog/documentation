@@ -92,6 +92,7 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 1. Select the AWS account that your bucket is in.
 1. Enter the name of the S3 bucket.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the {{< ui >}}Prefix{{< /ui >}} field when you [set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline) instead.
 1. Check the confirmation statement.
 1. Optionally, add tags and define the maximum scan size for rehydration. See [Advanced settings][18] for more information.
 1. Click **Save**.
@@ -108,7 +109,7 @@ After you select the Datadog Archives destination in the pipeline UI:
 1. Enter the AWS region the S3 bucket is in.
 1. Enter the key prefix.
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-    - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
+    - Use [template syntax][8] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
     - **Note**: [Archive Search][16] only supports the following [storage classes][9]:
@@ -142,6 +143,16 @@ Select an AWS authentication option. If you are only using the [user or role you
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
+
+## Using template syntax for dynamic partitioning
+
+When you set up the Datadog Archives destination (Amazon S3), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
+
+{{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
+
+However, you must manually create a Datadog [Log Archive][17] for each attribute value. See [Connect the S3 bucket to Datadog Log Archives](#connect-the-s3-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
+
+{{< img src="observability_pipelines/destinations/datadog_archives_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
 
 ### Example destination and log archive setup
 
