@@ -104,9 +104,9 @@ OPW가 실행되는 동안 해당 위치의 파일을 수정하면 부정적인 
 
 ## 상태 확인 엔드포인트와 활성 및 준비 상태 프로브 활성화 {#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes}
 
-Worker가 정상적으로 실행 중인지 확인하기 위해 `/health` 엔드포인트로 로드 밸런서의 상태 확인을 구성하세요.
+Worker가 정상적으로 실행 중인지 확인하기 위해 `/health` 엔드포인트로 로드 밸런서의 상태 확인을 구성하세요. Worker 앞에 로드 밸런서를 설정하는 방법에 대한 자세한 권장 사항은 [로드 밸런서 구성][13]을 참조하십시오.
 
-Kubernetes의 경우, 활성 및 준비 상태 프로브는 [Helm 차트][9]와 [values.yaml][10] 파일에서 이미 활성화되어 있습니다.
+Kubernetes의 경우, 활성 및 준비 상태 프로브는 [Helm 차트][9]와 [values.yaml][10] 파일에서 기본적으로 활성화되어 있습니다. 이러한 프로브는 `/health` 엔드포인트 대신 Worker API 포트의 TCP 소켓을 검사합니다.
 
 VM 기반 설치와 같은 다른 설치의 경우, `DD_OP_API_ENABLED`를`true`로 설정하고 `DD_OP_API_ADDRESS`를 `0.0.0.0:8686`으로 설정하여 `/health` 엔드포인트를 노출하세요. 구성 예시:
 
@@ -132,3 +132,4 @@ api:
 [10]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml#L303-L329
 [11]: /ko/remote_configuration/#security-considerations
 [12]: /ko/observability_pipelines/configuration/secrets_management/
+[13]: /ko/observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/#load-balancer-configurations
