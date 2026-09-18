@@ -7,6 +7,7 @@ aliases:
 - /opentelemetry/setup/collector_exporter/install/
 - /opentelemetry/collector_exporter/
 description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector and OTLP'
+site_support_id: opentelemetry_collector_otlp_export
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"

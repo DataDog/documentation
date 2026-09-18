@@ -4,12 +4,16 @@ aliases:
 - /bits_ai/bits_ai_sre/help_bits_learn/
 - /bits_ai/bits_investigation/help_bits_learn/
 - /bits_ai/bits_ai_sre/knowledge_sources/
-
+further_reading:
+- link: "/bits_ai/bits_investigation/improve_accuracy/"
+  tag: "Documentation"
+  text: "Improve Bits Investigation Accuracy"
 ---
 
-Bits Investigation improves over time by combining three distinct sources of knowledge:
+Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
+- [**Skills:**](#skills) Reusable procedures Bits can invoke during an investigation
 - [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks
@@ -100,6 +104,14 @@ Rule:
 
 {{< /code-block >}}
 
+## Skills
+
+[Skills][3] are named, reusable procedures that you create and manage centrally, then make available to Bits products, including Bits Investigation. A skill packages instructions (and, where relevant, the tools or queries needed to carry them out) for a specific task, such as how to diagnose a particular subsystem, or how to query a specific external tool your team relies on.
+
+Bits Investigation automatically invokes a skill when its name and description match the situation at hand, the same way Bits Code discovers and invokes custom skills in your repository. This makes skills a good place to put a procedure you'd otherwise have to repeat across multiple monitors' runbooks or restate in `bits.md`, and to keep it consistent across investigations, chat, and other Bits products that draw on the same skill.
+
+To create or manage skills, go to [{{< ui >}}Actions{{< /ui >}} > {{< ui >}}Skills{{< /ui >}}][3].
+
 ## Feedback and memories
 
 At the end of an investigation, let Bits know whether the conclusion it made was correct.
@@ -117,5 +129,10 @@ All positive feedback, as well as any negative feedback that includes details pr
 
 To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
+[3]: https://app.datadoghq.com/actions/skills

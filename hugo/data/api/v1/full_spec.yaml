@@ -2722,6 +2722,71 @@ components:
             $ref: "#/components/schemas/EmbeddableGraph"
           type: array
       type: object
+    EmbeddedAppWidgetDefinition:
+      additionalProperties: false
+      description: The embedded app widget displays an App Builder app on a dashboard. Exactly one of `app_id` or `template_id` must be provided; they cannot be provided together.
+      properties:
+        app_id:
+          description: UUID of the App Builder app to embed.
+          example: "7e7745f9-4343-4927-b038-80934a355915"
+          type: string
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          maxLength: 5000
+          type: string
+        inputs:
+          description: Inputs passed to the embedded app.
+          items:
+            $ref: "#/components/schemas/EmbeddedAppWidgetInput"
+          type: array
+        template_id:
+          description: ID of the built-in app template to embed.
+          example: ec2_manager
+          type: string
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of the widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/EmbeddedAppWidgetDefinitionType"
+      required:
+        - type
+      type: object
+    EmbeddedAppWidgetDefinitionType:
+      default: embedded_app
+      description: Type of the embedded app widget.
+      enum:
+        - embedded_app
+      example: embedded_app
+      type: string
+      x-enum-varnames:
+        - EMBEDDED_APP
+    EmbeddedAppWidgetInput:
+      additionalProperties: false
+      description: An input passed to the embedded app.
+      properties:
+        name:
+          description: Name of the app input.
+          example: environment
+          type: string
+        value:
+          description: Value of the app input. The API accepts a string, number, boolean, object, or a non-empty homogeneous array of those types.
+          example: production
+      required:
+        - name
+        - value
+      type: object
     EnableEmbeddableGraphResponseSchema:
       description: A JSON object containing the success message
       properties:
@@ -28375,6 +28440,7 @@ components:
         - $ref: "#/components/schemas/CheckStatusWidgetDefinition"
         - $ref: "#/components/schemas/CohortWidgetDefinition"
         - $ref: "#/components/schemas/DistributionWidgetDefinition"
+        - $ref: "#/components/schemas/EmbeddedAppWidgetDefinition"
         - $ref: "#/components/schemas/EventStreamWidgetDefinition"
         - $ref: "#/components/schemas/EventTimelineWidgetDefinition"
         - $ref: "#/components/schemas/FreeTextWidgetDefinition"
@@ -29295,6 +29361,7 @@ components:
             incident_write: Create, view, and manage incidents in Datadog.
             metrics_read: View custom metrics.
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
+            monitors_draft_write: Create, edit, and delete draft monitors. Does not allow editing live monitors or publishing drafts to production.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
             org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
@@ -36786,6 +36853,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Create a monitor
       tags:
         - Monitors
@@ -36795,6 +36864,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
   /api/v1/monitor/can_delete:
     get:
       description: Check if the given monitors can be deleted.
@@ -37191,6 +37261,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Delete a monitor
       tags:
         - Monitors
@@ -37199,6 +37271,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
     get:
       description: Get details about the specified monitor from your organization.
       operationId: GetMonitor
@@ -37360,6 +37433,8 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - monitors_write
+        - AuthZ:
+            - monitors_draft_write
       summary: Edit a monitor
       tags:
         - Monitors
@@ -37369,6 +37444,7 @@ paths:
         operator: OR
         permissions:
           - monitors_write
+          - monitors_draft_write
   /api/v1/monitor/{monitor_id}/downtimes:
     get:
       deprecated: true

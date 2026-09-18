@@ -13,7 +13,6 @@
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
 #   - Schema evolver (registers a new schema version every 4 min, renaming field 7 to region_vN)
-#   - Second broker (kafka2) + chaos sidecar that pauses/unpauses it on a cycle
 #
 # View in Datadog (wait 2-3 min):
 #  - Navigate to Data Streams Monitoring and view your Kafka cluster & consumer / producer apps.
@@ -359,32 +358,6 @@ services:
       cd /app &&
       python schema_evolver.py
       "
-    restart: unless-stopped
-
-  chaos:
-    image: docker:cli
-    container_name: kafka-chaos
-    depends_on:
-      topic-config:
-        condition: service_completed_successfully
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command:
-      - sh
-      - -c
-      - |
-        TRIGGER_SECONDS=300
-        RESOLVE_SECONDS=420
-
-        sleep 30
-        while true; do
-          echo "Pausing kafka2 - offline partitions should fire"
-          docker pause kafka2 || true
-          sleep $$TRIGGER_SECONDS
-          echo "Unpausing kafka2 - offline partitions should resolve"
-          docker unpause kafka2 || true
-          sleep $$RESOLVE_SECONDS
-        done
     restart: unless-stopped
 
 configs:

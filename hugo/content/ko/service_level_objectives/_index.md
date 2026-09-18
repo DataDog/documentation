@@ -30,7 +30,7 @@ further_reading:
   text: Datadog으로 효과적인 임원 대시보드 설계
 - link: https://www.datadoghq.com/blog/slo-monitoring-tracking/
   tag: 블로그
-  text: Datadog를 사용하여 SLO의 상태 및 오류 예산 추적
+  text: Datadog을 사용하여 SLO의 상태 및 오류 예산 추적
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/service_level_objective
   tag: 외부 사이트
   text: Terraform을 사용한 SLO 생성 및 관리
@@ -79,7 +79,7 @@ Datadog의 [Service Level Objectives 관리 페이지][2]를 사용하여 새 SL
 
 ### 구성 {#configuration}
 
-1. [SLO 관리 페이지][2]에서 **새 SLO +**를 선택합니다.
+1. [SLO 관리 페이지][2]에서 {{< ui >}}New SLO +{{< /ui >}}를 선택합니다.
 2. SLO 유형을 선택합니다. [메트릭-기반][3], [모니터링 기반][4] 또는 [시간 슬라이스][5] 유형 중 하나로 SLO를 생성할 수 있습니다.
 3. SLO에 대한 목표와 롤링 시간 창(지난 7일, 30일 또는 90일)을 설정합니다. Datadog은 목표를 정해진 SLA보다 더 엄격하게 설정할 것을 권장합니다. 이 시간 창은 SLO 목록에 표시됩니다. 기본적으로 가장 짧은 시간 창이 선택됩니다.
 4. 마지막으로 SLO 제목을 입력하고 설명을 더 자세히 작성하거나 설명에 링크를 추가하고 태그를 추가한 후 저장합니다.
@@ -124,13 +124,13 @@ SLO를 편집하려면 목록 보기에서 SLO의 행 위에 마우스를 올려
 
 1. SLO를 클릭하여 세부 정보 사이드 패널을 엽니다.
 1. 패널 오른쪽 상단의 톱니바퀴 아이콘을 클릭합니다.
-1. **Permissions**를 선택합니다.
-1. **Restrict Access**를 클릭합니다.
-1. 대화 상자가 업데이트되며 조직 구성원은 기본적으로 **Viewer** 권한을 갖는 것으로 표시됩니다.
+1. {{< ui >}}Permissions{{< /ui >}}를 선택합니다.
+1. {{< ui >}}Restrict Access{{< /ui >}}를 클릭합니다.
+1. 대화 상자가 업데이트되어 조직의 모든 사용자가 기본적으로 전체 액세스 권한을 가지고 있음을 보여줍니다.
 1. 드롭다운을 사용하여 SLO를 수정할 수 있는 역할, 팀 또는 사용자를 하나 이상 선택합니다.
-1. **Add**를 클릭합니다.
-1. 대화 상자가 업데이트되며 선택한 역할에 **Editor** 권한이 부여된 것으로 표시됩니다.
-1. **Save**를 클릭합니다.
+1. {{< ui >}}Add{{< /ui >}}를 클릭합니다.
+1. 대화 상자가 업데이트되어 선택한 역할에 {{< ui >}}Editor{{< /ui >}} 권한이 있는 것으로 표시됩니다.
+1. {{< ui >}}Save{{< /ui >}}를 클릭합니다.
 
 SLO에 대한 편집 액세스를 유지하려면 저장하기 전에 사용자가 구성원인 역할을 최소 한 개 포함해야 합니다. 액세스 제어 목록에 있는 사용자는 역할을 추가할 수 있으며 자신의 역할 이외의 역할만 제거할 수 있습니다.
 
@@ -156,7 +156,7 @@ SLO를 *태그별로* 그룹화하여 데이터의 요약 보기를 확인하세
 
 {{< img src="service_level_objectives/slo_group_by_new.png" alt="팀별로 그룹화된 SLO의 요약 보기" style="width:100%;" >}}
 
-SLO를 *상태* 및 *오류 예산* 열로 정렬하여 주의가 필요한 SLO를 우선순위에 따라 정리하세요. SLO 목록은 [구성](#configuration)에서 선택한 주요 시간 창에 대한 SLO의 세부 정보를 표시합니다. 다른 모든 구성 시간 창은 개별 사이드 패널에서 볼 수 있습니다. 해당 테이블 행을 클릭하여 SLO 세부 정보 사이드 패널을 엽니다.
+{{< ui >}}status{{< /ui >}} 및 {{< ui >}}Error Budget Left{{< /ui >}} 열을 기준으로 SLO를 정렬하여 주의가 필요한 SLO의 우선순위를 정합니다. SLO 목록은 [구성](#configuration)에서 선택한 주요 시간 창에 대한 SLO의 세부 정보를 표시합니다. 다른 모든 구성 시간 창은 개별 사이드 패널에서 볼 수 있습니다. 해당 테이블 행을 클릭하여 SLO 세부 정보 사이드 패널을 엽니다.
 
 **참고**: 모바일 기기 홈 화면에서 [Datadog 모바일 앱][14]을 다운로드하여 [Apple 앱 스토어][15] 및 [Google Play 스토어][16]에서 SLO를 확인할 수 있습니다.
 
@@ -164,10 +164,10 @@ SLO를 *상태* 및 *오류 예산* 열로 정렬하여 주의가 필요한 SLO�
 
 ### SLO 태그{#slo-tags}
 
-SLO 태그는 [SLO 관리 페이지][2]에서 필터링, [SLO 저장된 뷰][17] 생성 또는 SLO를 그룹화하여 볼 때 사용할 수 있습니다. 태그는 다음 방법으로 SLO에 추가할 수 있습니다.
+SLO 태그는 [SLO 관리 페이지][2]에서 필터링, [SLO 저장된 보기][17] 생성 또는 SLO를 그룹화하여 볼 때 사용할 수 있습니다. 태그는 다음 방법으로 SLO에 추가할 수 있습니다.
 
 - SLO를 생성하거나 편집할 때 태그를 추가할 수 있습니다.
-- SLO 목록 보기에서 SLO 목록 상단의 *수정 태그* 및 *[팀 수정][18]* 드롭다운 옵션을 사용하여 태그를 일괄적으로 추가 및 업데이트할 수 있습니다.
+- SLO 목록 보기에서 SLO 목록 상단의 {{< ui >}}Edit Tags{{< /ui >}} 및 [{{< ui >}}Edit Teams{{< /ui >}}][18] 드롭다운 옵션을 사용하여 태그를 일괄 추가하고 업데이트할 수 있습니다.
 
 {{< img src="service_level_objectives/slo_bulk_tag.png" alt="SLO 목록 페이지는 대량 태그 편집을 위한 편집 태그 드롭다운을 표시합니다." >}}
 
@@ -195,38 +195,38 @@ SLO 목록 보기에서 기본 SLO 페이지가 나타납니다.
 - 조직에서 정의된 모든 SLO 목록
 - 왼쪽 패싯 목록에서 사용 가능한 패싯 목록
 
-### Saved Views {#saved-views}
+### 저장된 보기 {#saved-views}
 
-저장된 페이지를 사용하면 다음을 공유하여 SLO에 대한 맞춤 검색을 SLO 목록 보기에 저장하고 팀과 공유할 수 있습니다.
+저장된 보기를 사용하면 다음을 공유하여 SLO에 대한 맞춤 검색을 SLO 목록 보기에 저장하고 팀과 공유할 수 있습니다.
 
 - 검색 쿼리
 - 패싯의 선택된 하위 집합
 
-목록 보기에서 SLO의 하위 집합을 조회한 후 해당 쿼리를 저장된 페이지에 추가할 수 있습니다.
+목록 보기에서 SLO의 하위 집합을 조회한 후 해당 쿼리를 저장된 보기에 추가할 수 있습니다.
 
 #### Saved Views 추가 {#add-a-saved-view}
 
-저장된 페이지를 추가하려면:
+저장된 보기를 추가하려면 다음 단계를 따르세요.
 
 1. SLO를 조회합니다.
-2. 페이지 상단 왼쪽에 있는 **Save View +**를 클릭합니다.
+2. 페이지 왼쪽 상단의 {{< ui >}}Save{{< /ui >}}를 클릭합니다.
 3. 조회의 이름을 입력하고 저장합니다.
 
-#### Saved Views 불러오기 {#load-a-saved-view}
+#### 저장된 보기 불러오기 {#load-a-saved-view}
 
-Saved Views를 불러오려면, 페이지 상단 왼쪽에 있는 **조회 보기 표시** 버튼을 눌러 *Saved Views* 패널을 열고 목록에서 Saved Views를 선택합니다. 같은 *Saved Views* 패널의 상단에 있는 *Filter Saved Views* 검색 상자에서 저장된 뷰를 검색할 수도 있습니다.
+Saved Views를 불러오려면, 페이지 상단 왼쪽에 있는 {{< ui >}}Views{{< /ui >}} 버튼을 눌러 {{< ui >}}Saved Views{{< /ui >}} 패널을 열고 목록에서 Saved Views를 선택합니다. 같은 {{< ui >}}Saved Views{{< /ui >}} 패널의 상단에 있는 {{< ui >}}Filter Saved Views{{< /ui >}} 검색 상자에서 저장된 보기를 검색할 수도 있습니다.
 
 #### Saved Views 공유 {#share-a-saved-view}
 
-목록에 있는 저장된 페이지 위에 마우스를 놓으면 하이퍼링크 아이콘이 나타납니다. 아이콘을 클릭해 링크를 복사한 후 팀원들과 공유할 수 있습니다.
+목록에 있는 저장된 보기 위에 마우스를 놓으면 하이퍼링크 아이콘이 나타납니다. 아이콘을 클릭해 링크를 복사한 후 팀원들과 공유할 수 있습니다.
 
-#### 저장된 뷰 관리 {#manage-saved-views}
+#### 저장된 보기 관리 {#manage-saved-views}
 
-Saved Views를 사용 중인 경우, 해당 Saved Views를 선택하고 쿼리를 수정한 후 *Update* 버튼을 클릭하여 이름 아래의 *Saved Views* 패널에서 업데이트할 수 있습니다. Saved Views의 이름을 변경하거나 삭제하려면 *Saved Views* 패널에서 해당 행 위에 마우스를 올리고 연필 아이콘 또는 휴지통 아이콘을 클릭하세요.
+Saved Views를 사용 중인 경우, 해당 Saved Views를 선택하고 쿼리를 수정한 후 {{< ui >}}Update{{< /ui >}} 버튼을 클릭하여 이름 아래의 {{< ui >}}Saved Views{{< /ui >}} 패널에서 업데이트할 수 있습니다. Saved Views의 이름을 변경하거나 삭제하려면 {{< ui >}}Saved Views{{< /ui >}} 패널에서 해당 행 위에 마우스를 올리고 연필 아이콘 또는 휴지통 아이콘을 클릭하세요.
 
 ## SLO 및 SLO 상태 수정 감사 이벤트 {#slo-and-slo-status-correction-audit-events}
 
-SLO 감사 이벤트를 통해 [Event Explorer][27] 또는 SLO 세부정보의 **감사 기록** 탭을 사용하여 SLO 구성의 이력을 추적할 수 있습니다. SLO 또는 SLO 상태 수정을 생성, 수정 또는 삭제할 때마다 감사 이벤트가 Event Explorer에 추가됩니다. 각 이벤트는 SLO 또는 SLO 상태 수정의 구성에 대한 정보를 포함하며, 스트림은 시간에 따른 구성 변경 이력을 제공합니다.
+SLO 감사 이벤트를 통해 [Event Explorer][27] 또는 SLO 세부정보의 {{< ui >}}Audit History{{< /ui >}} 탭을 사용하여 SLO 구성의 이력을 추적할 수 있습니다. SLO 또는 SLO 상태 수정을 생성, 수정 또는 삭제할 때마다 감사 이벤트가 Event Explorer에 추가됩니다. 각 이벤트는 SLO 또는 SLO 상태 수정의 구성에 대한 정보를 포함하며, 스트림은 시간에 따른 구성 변경 이력을 제공합니다.
 
 ### SLO 감사 이벤트 {#slo-audit-events}
 
@@ -263,7 +263,7 @@ Event Explorer에 세 가지 유형의 SLO 상태 수정 감사 이벤트가 표
 
 {{< img src="service_level_objectives/slo-audit-events.png" alt="SLO 감사 이벤트" >}}
 
-또한 SLO 세부정보의 'Audit History' 탭을 사용하여 개별 SLO에 대한 모든 감사 이벤트를 조회할 수도 있습니다.
+또한 SLO 세부정보의 {{< ui >}}Audit History{{< /ui >}} 탭을 사용하여 개별 SLO에 대한 모든 감사 이벤트를 조회할 수도 있습니다.
 
 {{< img src="service_level_objectives/slo_audit_history_tab.png" alt="SLO 세부 정보 감사 기록 탭" >}}
 
@@ -296,7 +296,7 @@ SLO 위젯에 대한 자세한 정보는 [SLO 위젯][21] 및 [SLO 목록 위젯
 
 임시 조정을 위한 일회성 수정 또는 정기적으로 발생하는 예측 가능한 조정을 위한 반복 수정을 생성할 수 있습니다. 일회성 수정은 시작 및 종료 시간이 필요하며, 반복 수정은 시작 시간, 기간 및 간격이 필요합니다. 반복 수정은 [iCalendar RFC 5545의 RRULE 사양][24]을 기반으로 합니다. 지원되는 규칙은 `FREQ`, `INTERVAL`, `COUNT`, 및 `UNTIL`입니다. 반복 수정을 위한 종료 날짜를 지정하는 것은 선택 사항이며, 수정이 무한히 반복되도록 할 수 있습니다.
 
-어떤 유형의 수정이든 수정이 이루어지는 이유를 명시하는 수정 범주를 선택해야 합니다. 사용 가능한 카테고리는 `Scheduled Maintenance`, `Outside Business Hours`, `Deployment`, 및 `Other`입니다. 필요 시, 추가적인 맥락을 제공하기 위해 설명을 선택적으로 포함할 수 있습니다.
+어떤 유형의 수정이든 수정이 이루어지는 이유를 명시하는 수정 범주를 선택해야 합니다. 사용 가능한 카테고리는 {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}} 및 {{< ui >}}Other{{< /ui >}}입니다. 필요 시, 추가적인 맥락을 제공하기 위해 설명을 선택적으로 포함할 수 있습니다.
 
 각 SLO는 쿼리 성능을 보장하기 위해 구성할 수 있는 최대 수정 한도가 있습니다. 이 한도는 각 SLO에 대해 지난 90일에만 적용되므로, 지난 90일 이전의 기간에 대한 수정은 한도에 포함되지 않습니다. 즉, 다음과 같습니다.
 - 일회성 수정에 대한 종료 시간이 지난 90일 이전인 경우 제한에 포함됩니다.
@@ -311,7 +311,7 @@ SLO당 90일 제한은 다음과 같습니다.
 | 매주 반복  | 3             |
 | 매달 반복 | 5             |
 
-UI에서 상태 수정을 설정하려면 SLO의 사이드 패널에서 `Correct Status`를 선택하거나, [SLO 상태 수정 API][25] 또는 [Terraform 리소스][26]를 사용할 수 있습니다.
+UI에서 상태 수정을 설정하려면 SLO의 사이드 패널에서 {{< ui >}}Correct status{{< /ui >}}를 선택하거나, [SLO 상태 수정 API][25] 또는 [Terraform 리소스][26]를 사용할 수 있습니다.
 
 #### UI에서 액세스 {#access-in-the-ui}
 
@@ -319,25 +319,25 @@ UI에서 SLO 상태 수정에 액세스하려면:
 
 1. 새 SLO를 만들거나 기존 SLO를 클릭합니다.
 2. SLO의 세부 정보 사이드 패널 보기로 이동합니다.
-3. 도구 아이콘 아래에서 **상태 수정**을 선택하여 **상태 수정** 생성 모드에 액세스합니다.
-4. `One-Time`와 `Recurring` 중에서 선택하여 **시간 수정 창 선택**에서 수정할 기간을 지정합니다.
-5. **수정 유형**을 선택합니다.
-6. 필요 시 **참고 사항**을 추가합니다.
-7. **Apply Correction**을 클릭합니다.
+3. 톱니바퀴 아이콘 아래에서 {{< ui >}}Correct status{{< /ui >}}를 선택하여 수정 생성 모달을 엽니다.
+4. {{< ui >}}Correction Category{{< /ui >}}를 선택합니다.
+5. {{< ui >}}Select the Time Correction Window{{< /ui >}}에서 {{< ui >}}One-Time{{< /ui >}}과 {{< ui >}}Recurring{{< /ui >}} 중 하나를 선택하고 수정하려는 기간을 지정합니다.
+6. 필요에 따라 {{< ui >}}Notes{{< /ui >}}를 추가합니다.
+7. {{< ui >}}Apply Correction{{< /ui >}}을 클릭합니다.
 
 {{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO 수정 UI" style="width:80%;">}}
 
-기존 상태 수정을 조회, 편집 및 삭제하려면 SLO 세부 사이드 패널 보기 상단에 있는 **Corrections** 탭을 클릭하세요.
+기존 상태 수정을 조회, 편집 및 삭제하려면 SLO 세부 사이드 패널 보기 상단에 있는 {{< ui >}}Corrections{{< /ui >}} 탭을 클릭합니다.
 
 #### 상태 수정 시각화 {#visualizing-status-corrections}
 
-상태 수정이 있는 메트릭 기반 및 시간 분할 SLO의 경우, SLO 세부 정보 보기에서 UI에서 수정을 활성화하거나 비활성화할 수 있는 토글이 있습니다. 토글은 SLO 세부 정보 보기의 "이력" 섹션에 있는 차트와 데이터를 제어합니다. **참고:** 귀하의 전체 SLO 상태와 오류 예산은 항상 상태 수정을 고려합니다.
+상태 수정이 있는 SLO의 경우, SLO 세부 정보 보기에서 UI의 상태 수정을 활성화하거나 비활성화할 수 있는 토글이 있습니다. 토글은 SLO 세부 정보 보기의 {{< ui >}}Performance{{< /ui >}} 섹션에 있는 차트와 데이터를 제어합니다. **참고:** 귀하의 전체 SLO 상태와 오류 예산은 항상 상태 수정을 고려합니다.
 
 {{< img src="service_level_objectives/correction-toggle.png" alt="SLO 수정 UI" style="width:100%;">}}
 
 ## SLO 캘린더 보기 {#slo-calendar-view}
 
-SLO 캘린더 보기는 [SLO 관리 페이지][2]에서 사용할 수 있습니다. 오른쪽 상단 모서리에서 "기본" 보기에서 "일일", "주간" 또는 "월간" 보기로 전환하여 12개월의 과거 SLO 상태 데이터를 확인하세요. 캘린더 보기는 메트릭 기반 SLO와 시간 분할 SLO를 지원합니다.
+SLO 캘린더 보기는 [SLO 관리 페이지][2]에서 사용할 수 있습니다. 오른쪽 상단에서 {{< ui >}}Primary{{< /ui >}} 보기에서 {{< ui >}}Daily{{< /ui >}}, {{< ui >}}Weekly{{< /ui >}} 또는 {{< ui >}}Monthly{{< /ui >}} 보기로 전환하여 12개월의 과거 SLO 상태 데이터를 확인합니다. 캘린더 보기는 메트릭 기반 SLO와 시간 분할 SLO를 지원합니다.
 
 {{< img src="service_level_objectives/slo-calendar-view-2.png" alt="SLO 캘린더 보기" >}}
 
