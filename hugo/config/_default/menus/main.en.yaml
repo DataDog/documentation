@@ -8001,10 +8001,10 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 204
-    - name: Critical Assets
-      url: security/cloud_siem/detect_and_monitor/critical_assets
+    - name: Dynamic Severity
+      url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
-      identifier: cloud_siem_critical_assets
+      identifier: cloud_siem_dynamic_severity
       weight: 205
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
