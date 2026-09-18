@@ -353,13 +353,13 @@ The Datadog RUM SDK depends on the following third-party library:
 
 - [KSCrash][20] 2.5.0
 
-[1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#custom-actions
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-actions
 [2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
-[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-views
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios&tab=swift#automatically-track-views
 [4]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#instrument-views
-[5]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#track-background-events
-[6]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[7]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#track-user-sessions
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#track-background-events
+[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#enrich-user-sessions
+[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#track-user-sessions
 [8]: /data_security/real_user_monitoring/#geolocation
 [9]: /data_security/real_user_monitoring/#ip-address
 [10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web

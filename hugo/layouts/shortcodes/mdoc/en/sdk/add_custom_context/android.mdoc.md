@@ -207,9 +207,9 @@ fun addUserProperties(extraInfo: Map<String, Any?>, sdkCore: SdkCore = getInstan
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=android
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
-[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views
 [4]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android
-[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
+[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-network-requests
 [7]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
 [8]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes

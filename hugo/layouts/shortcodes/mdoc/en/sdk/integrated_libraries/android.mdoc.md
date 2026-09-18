@@ -366,5 +366,5 @@ If you use Kotlin Coroutines, see Datadog's [dedicated library with extensions f
 [9]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-rum-coroutines
 [10]: https://github.com/Datadog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-trace-coroutines
 [11]: https://github.com/DataDog/dd-sdk-android/tree/develop/integrations/dd-sdk-android-apollo
-[12]: /real_user_monitoring/application_monitoring/android/advanced_configuration?tab=kotlin#apollo-instrumentation
+[12]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android&tab=kotlin#apollo-instrumentation
 [13]: /real_user_monitoring/application_monitoring/android/setup?tab=rum#step-1---declare-the-android-sdk-as-a-dependency

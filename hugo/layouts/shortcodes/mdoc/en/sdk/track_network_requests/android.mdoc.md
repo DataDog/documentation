@@ -42,4 +42,4 @@ fun loadResource() {
 For header capture, custom resource attributes, and Apollo/GraphQL instrumentation, see [Android Advanced Configuration][2].
 
 [1]: https://square.github.io/okhttp/features/events/
-[2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-network-requests

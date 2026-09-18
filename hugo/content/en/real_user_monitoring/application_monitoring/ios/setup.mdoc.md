@@ -10,7 +10,7 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/setup/ios
   - /real_user_monitoring/mobile_and_tv_monitoring/ios/setup
 further_reading:
- - link: /real_user_monitoring/application_monitoring/ios/advanced_configuration
+ - link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios
    tag: Documentation
    text: RUM iOS Advanced Configuration
  - link: "https://github.com/DataDog/dd-sdk-ios"

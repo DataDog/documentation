@@ -33,4 +33,4 @@ If the request fails, use `stopResourceWithError` instead.
 
 For custom resource attributes, header capture, and Apollo/GraphQL instrumentation, see [iOS Advanced Configuration][1].
 
-[1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-network-requests

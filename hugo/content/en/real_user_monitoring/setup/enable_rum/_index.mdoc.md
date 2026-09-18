@@ -48,7 +48,7 @@ Rum.enable(rumConfig);
 {% /tab %}
 {% /tabs %}
 
-See [`ViewTrackingStrategy`](/real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views) to enable automatic tracking of all your views (activities, fragments, and more).
+See [`ViewTrackingStrategy`](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views) to enable automatic tracking of all your views (activities, fragments, and more).
 {% /if %}
 
 <!-- iOS -->
@@ -130,7 +130,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {% /tab %}
 {% /tabs %}
 
-**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/application_monitoring/ios/advanced_configuration#custom-resources) to manually track those network calls.
+**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-resources) to manually track those network calls.
 {% /if %}
 
 <!-- Flutter -->
@@ -181,7 +181,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views](/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views) to enable automatic tracking of all your views.
+See [Automatically track views](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views) to enable automatic tracking of all your views.
 {% /if %}
 
 <!-- C / C++ -->
@@ -197,7 +197,7 @@ By default, the SDK automatically tracks views, actions, and resources:
 - **Actions**: User interactions with buttons, switches, checkboxes, pickers, and gesture recognizers.
 - **Resources**: HTTP requests through `DiagnosticListener` (all `HttpClient` requests, including third-party libraries).
 
-To customize or disable automatic tracking, see [Advanced Configuration](/real_user_monitoring/application_monitoring/maui/advanced_configuration/).
+To customize or disable automatic tracking, see [Advanced Configuration](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui).
 
 When RUM is enabled, C# error tracking starts automatically. Unhandled exceptions (`AppDomain.UnhandledException`) and unobserved task exceptions (`TaskScheduler.UnobservedTaskException`) are captured and reported as RUM errors. You can also manually report errors with `DdRum.AddError`.
 

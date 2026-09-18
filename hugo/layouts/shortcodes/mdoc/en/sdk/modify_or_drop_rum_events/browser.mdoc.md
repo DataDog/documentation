@@ -73,7 +73,7 @@ You can update the following event properties:
 | `resource.url`                 | String | The resource URL.                                                                                                                                                                         |
 | `long_task.scripts.source_url` | String | The script resource url                                                                                                                                                                   |
 | `long_task.scripts.invoker`    | String | A meaningful name indicating how the script was called                                                                                                                                    |
-| `context`                      | Object | Attributes added with the [Global Context API](/real_user_monitoring/application_monitoring/browser/advanced_configuration/#global-context), the [View Context API](/real_user_monitoring/application_monitoring/browser/advanced_configuration/#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
+| `context`                      | Object | Attributes added with the [Global Context API](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#global-context), the [View Context API](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#view-context), or when generating events manually (for example, `addError` and **`addAction`**). |
 
 The RUM Browser SDK ignores modifications made to event properties not listed above. For more information about event properties, see the [RUM Browser SDK GitHub repository][1].
 

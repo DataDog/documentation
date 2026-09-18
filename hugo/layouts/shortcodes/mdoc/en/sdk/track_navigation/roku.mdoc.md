@@ -11,4 +11,4 @@ The Roku SDK does not automatically instrument your channel, so views must be tr
 For more advanced configuration options, see [Advanced Configuration][2].
 
 [1]: /getting_started/tagging/using_tags/#rum--session-replay
-[2]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=roku

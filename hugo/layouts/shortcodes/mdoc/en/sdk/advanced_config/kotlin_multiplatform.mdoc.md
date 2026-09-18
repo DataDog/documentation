@@ -251,8 +251,8 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
 [3]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
-[4]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
 [6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
 [7]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures

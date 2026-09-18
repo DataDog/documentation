@@ -30,4 +30,4 @@ For header capture and custom resource attributes, see [Flutter Advanced Configu
 
 [1]: https://pub.dev/packages/datadog_tracking_http_client
 [2]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
-[3]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#automatically-track-resources
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter#automatically-track-resources

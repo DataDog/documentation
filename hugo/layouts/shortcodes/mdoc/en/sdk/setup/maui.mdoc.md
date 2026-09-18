@@ -177,6 +177,6 @@ This means that even if users open your application while offline, no data is lo
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/maui/
 [3]: https://www.nuget.org/packages/Datadog.Maui
-[4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui
 [5]: /real_user_monitoring/error_tracking/mobile/maui/
 [6]: /real_user_monitoring/explorer/

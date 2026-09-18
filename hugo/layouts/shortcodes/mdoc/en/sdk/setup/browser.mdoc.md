@@ -383,7 +383,7 @@ To request support for a web server that is not listed here, [fill out this form
 [4]: /product_analytics/
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[7]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-tracking-consent
+[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#user-tracking-consent
 [8]: /integrations/content_security_policy_logs/
 [9]: /agentic_onboarding/setup/
 [10]: /real_user_monitoring/application_monitoring/browser/setup/client

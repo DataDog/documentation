@@ -64,5 +64,5 @@ If a user belongs to multiple teams, add additional key-value pairs in your call
 
 The RUM Browser SDK ignores attributes added outside of `event.context`.
 
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#global-context
-[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#enrich-rum-events-with-feature-flags
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#global-context
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#enrich-rum-events-with-feature-flags

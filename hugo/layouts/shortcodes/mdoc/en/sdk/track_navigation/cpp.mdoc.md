@@ -37,4 +37,4 @@ dd_rum_stop_view(rum, "gameplay_level1", NULL);
 
 For more advanced configuration options, see [Advanced Configuration][1].
 
-[1]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#track-views
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#track-views

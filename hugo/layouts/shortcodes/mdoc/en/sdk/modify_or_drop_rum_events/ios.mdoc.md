@@ -86,7 +86,7 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
 {% /tab %}
 {% /tabs %}
 
-Returning `nil` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `nil` (to drop views, customize your implementation of `UIKitRUMViewsPredicate`; read more in [tracking views automatically](/real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-views)).
+Returning `nil` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `nil` (to drop views, customize your implementation of `UIKitRUMViewsPredicate`; read more in [tracking views automatically](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-views)).
 
 Depending on the event's type, only some specific properties can be modified:
 

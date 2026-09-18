@@ -30,5 +30,5 @@ public void onUserInteraction() {
 Widgets are not automatically tracked with the SDK. To send UI interactions from your widgets manually, call the Datadog API. [See example][10].
 
 [1]: https://app.datadoghq.com/rum/application/create
-[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget

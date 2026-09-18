@@ -52,4 +52,4 @@ DdRum.StopView("home_screen");
 
 For more advanced configuration options, see [Advanced Configuration][1].
 
-[1]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#customize-automatic-tracking
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#customize-automatic-tracking

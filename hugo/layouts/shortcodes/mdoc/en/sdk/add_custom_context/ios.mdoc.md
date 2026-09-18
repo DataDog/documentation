@@ -188,10 +188,10 @@ For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] 
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=ios
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
-[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-views
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-views
 [4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
 [5]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios
-[6]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-user-actions
+[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-user-actions
 [7]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
-[8]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-network-requests
 [9]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=error#error-attributes

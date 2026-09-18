@@ -11,4 +11,4 @@ fun onUserInteraction() {
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[5]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#initialization-parameters
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters

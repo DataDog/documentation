@@ -44,6 +44,6 @@
       - `TracingHeaderType.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
 [1]: /real_user_monitoring/application_monitoring/flutter/setup/
-[2]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration#automatically-track-resources
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter#automatically-track-resources
 [3]: https://docs.flutter.dev/tools/devtools/overview
 [4]: https://docs.flutter.dev/tools/devtools/network

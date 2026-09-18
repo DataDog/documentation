@@ -113,7 +113,7 @@ DdRum.AddError("Something went wrong", RumErrorSource.Source, "stacktrace here")
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=maui
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui
-[3]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#customize-automatic-tracking
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#customize-automatic-tracking
 [4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui
 [6]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui

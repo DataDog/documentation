@@ -31,8 +31,8 @@ To customize or disable individual MAUI trackers in code, see [Advanced Configur
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=ios#event-specific-attributes
 [2]: /real_user_monitoring/setup/data_collected/?platform=android#event-specific-attributes
-[3]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#view-naming-priority
-[4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#action-target-naming-priority
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#view-naming-priority
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#action-target-naming-priority
 [5]: /real_user_monitoring/application_monitoring/maui/error_tracking/
 [6]: https://app.datadoghq.com/rum/list
-[7]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#customize-automatic-tracking
+[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#customize-automatic-tracking

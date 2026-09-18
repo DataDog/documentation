@@ -95,4 +95,4 @@ You can even come up with a more dynamic solution depending on your app's archit
 **Note**: By default, UIKit view tracking is not enabled.
 
 [1]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views

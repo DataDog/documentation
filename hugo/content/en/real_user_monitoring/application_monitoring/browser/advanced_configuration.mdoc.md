@@ -1634,7 +1634,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [17]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [18]: https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
 [19]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v5280
-[20]: /real_user_monitoring/application_monitoring/browser/advanced_configuration#override-default-rum-view-names
+[20]: #override-default-rum-view-names
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins

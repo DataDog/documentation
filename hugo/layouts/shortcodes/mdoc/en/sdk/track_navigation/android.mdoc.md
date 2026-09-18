@@ -120,4 +120,4 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
 [1]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views

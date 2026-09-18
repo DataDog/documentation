@@ -7,7 +7,7 @@ aliases:
     - /real_user_monitoring/mobile_and_tv_monitoring/setup/flutter
     - /real_user_monitoring/mobile_and_tv_monitoring/flutter/setup
 further_reading:
-- link: /real_user_monitoring/application_monitoring/flutter/advanced_configuration
+- link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter
   tag: Documentation
   text: RUM Flutter Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-flutter
