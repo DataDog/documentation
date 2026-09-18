@@ -13,7 +13,7 @@ title: 평가
 ---
 ## 개요 {#overview}
 
-Agent Observability는 평가를 지원하는 여러 가지 방법을 제공합니다. [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8]로 이동하여 구성할 수 있습니다.
+Agent Observability는 평가를 지원하는 여러 가지 방법을 제공합니다. 이들은 [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8]로 이동하여 구성할 수 있습니다.
 
 ### 사용자 지정 LLM-as-a-judge 평가 {#custom-llm-as-a-judge-evaluations}
 
