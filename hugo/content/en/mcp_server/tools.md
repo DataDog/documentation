@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -531,18 +534,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
 
 ## Dashboards
 
@@ -1336,6 +1348,68 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
@@ -1492,7 +1566,7 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 - What's the day-7 retention rate for users who joined in January?
 
 ## Profiling
-Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
 
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
@@ -2204,6 +2278,63 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 - Summarize what happened in session `abc-123-def`.
 - Give me a play-by-play of the replay for the user who reported a checkout error.
 
+## Sheets
+
+Tools for creating, reading, updating, and deleting [Datadog spreadsheets][74].
+
+### `upsert_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Creates or updates a Datadog spreadsheet's tables, sheets, and pivots in a single call.
+
+- Create a logs table in a spreadsheet with columns for service, status, host, timestamp, and message — filter to errors only.
+- Create a pivot table with average duration by `db.statement` and service for queries over 1 second.
+- Create a spreadsheet showing monthly cloud spend broken down by provider and service, with month-over-month percentage change.
+
+### `get_datadog_spreadsheet_reference`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Returns reference documentation for building inputs to `upsert_datadog_spreadsheet`. Call this before creating or updating a spreadsheet.
+
+- Show me how to build a Datadog spreadsheet.
+- Show me how to build a tab that imports log data into a Datadog spreadsheet.
+- Show me how to format cells in a tab in a Datadog spreadsheet.
+
+### `search_datadog_spreadsheets`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Searches Datadog spreadsheets by name or owner. Returns a paginated list of spreadsheets with their IDs and names.
+
+- List the last 10 created spreadsheets.
+- List 10 spreadsheets whose name starts with "ABC".
+- Show me the last spreadsheet that I updated.
+
+### `get_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Retrieves a Datadog spreadsheet by ID. Returns tables (`tables[].id`), pivots (`pivots[].id`), and sheets (`sheets[].id`) with their configurations. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Show me the details of spreadsheet "ABC".
+- Show me the spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
+
+### `get_datadog_spreadsheet_tab_data`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and the read permission for the underlying data source (for example, `Logs Read Data` for log-backed tables)*\
+Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog spreadsheet. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
+- Get the data for tab "Pivot 1" in spreadsheet "ABC".
+- Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `delete_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Write`*\
+Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Delete spreadsheet "ABC".
+- Remove my last created spreadsheet.
+- Remove spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
@@ -2582,16 +2713,16 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [49]: /error_tracking/
 [50]: /tracing/
 [51]: /feature_flags/
+[52]: /getting_started/profiler/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
-[60]: /security/detection_rules/
-[61]: /security/suppressions/
-[62]: /getting_started/profiler/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[60]: /security/detection_rules/
+[61]: /security/suppressions/
 [62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
@@ -2604,8 +2735,11 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
 [73]: /real_user_monitoring/operations_monitoring/
+[74]: /sheets/
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
+[77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 
