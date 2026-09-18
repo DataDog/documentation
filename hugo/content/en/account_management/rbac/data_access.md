@@ -61,7 +61,7 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 
 ### Supported telemetry types {#supported-telemetry}
 
-- Agent Observability traces, Experiments, and Datasets
+- Agent Observability traces, Experiments, Datasets, and Annotation Queues
 - APM traces
 - Cloud costs
 - Error Tracking issues
@@ -144,8 +144,8 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 * **Supported telemetry**:
   * Traces, using any tag.
-  * Experiments and Datasets, restricted by project. An `ml_app` filter set to a project ID hides that project and its experiments, datasets, dataset records, spans, and evaluation metrics from list views, search, and direct links. See [Data Access Control in Agent Observability][14].
-* **Not supported**: Annotation queues and managed prompts.
+  * Experiments, Datasets, and Annotation Queues, restricted by project. An `ml_app` filter set to a project ID hides that project and its experiments, datasets, dataset records, spans, evaluation metrics, and annotation queues from list views, search, and direct links. An annotation queue that does not belong to a project cannot be restricted. See [Data Access Control in Agent Observability][14].
+* **Not supported**: Managed prompts.
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 

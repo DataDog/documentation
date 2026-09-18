@@ -64,7 +64,7 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 #### 1. Create a role
 
 1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
-2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
+2. Click {{< ui >}}\+ New Role{{< /ui >}} in the top-right corner.
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
