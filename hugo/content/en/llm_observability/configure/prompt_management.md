@@ -293,7 +293,8 @@ Configuration authoring must be enabled for your organization to use the configu
 create-prompt and create-version requests. When disabled, requests that explicitly include `config`, including `{}`,
 return HTTP `403`. Omitting `config` still stores `{}` for a new prompt or inherits the latest version's configuration
 for a new version. Disabling configuration authoring does not remove configuration from saved versions or their delivery
-to applications.
+to applications. When authoring is disabled, API responses omit empty configuration; non-empty saved configuration is
+still returned. When authoring is enabled, responses include `config`, including `{}`. Treat an absent `config` as `{}`.
 
 A prompt version contains its template and an optional customer-owned JSON configuration object. Keeping both values on
 the same immutable version prevents an environment from mixing settings from one version with a template from another.
@@ -360,7 +361,7 @@ template and configuration in the same `data.attributes` object. Apply only the 
 ```python
 attributes = prompt_version_response["data"]["attributes"]
 messages = format_prompt(attributes["template"], document=document)
-declared_config = attributes["config"]
+declared_config = attributes.get("config", {})
 
 response = model_client.generate(
     messages=messages,
