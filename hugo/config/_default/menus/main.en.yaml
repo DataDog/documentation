@@ -1570,6 +1570,11 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 104
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 105
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
@@ -1595,6 +1600,11 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 303
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -7729,41 +7739,46 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
+    - name: Object Storage Request Estimation
+      url: /byoc-logs/operate/object_storage_requests
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_object_storage_requests
+      weight: 601
     - name: Autoscaling
       url: /byoc-logs/operate/autoscaling
       parent: cloudprem_operate
       identifier: cloudprem_operate_autoscaling
-      weight: 601
+      weight: 602
     - name: Monitoring
       url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
-      weight: 602
+      weight: 603
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
-      weight: 603
+      weight: 604
     - name: Production Best Practices
       url: /byoc-logs/operate/best_practices
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
-      weight: 604
+      weight: 605
     - name: Disk Buffer Durability
       url: /byoc-logs/operate/disk_buffer_durability
       parent: cloudprem_operate
       identifier: cloudprem_operate_disk_buffer_durability
-      weight: 605
+      weight: 606
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 606
+      weight: 607
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 607
+      weight: 608
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -10645,6 +10660,11 @@ menu:
       url: account_management/plan_and_usage/partner_experience/customer_pricing/
       parent: account_management_partner_experience
       weight: 140301
+    - name: Customer Contracts
+      identifier: account_management_customer_contracts
+      url: account_management/plan_and_usage/partner_experience/customer_contracts/
+      parent: account_management_partner_experience
+      weight: 140302
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
