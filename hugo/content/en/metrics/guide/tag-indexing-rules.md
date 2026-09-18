@@ -69,7 +69,7 @@ Applies this rule only to metrics submitted after the rule is created. Existing 
 
 Choose whether to use an allowlist or a blocklist for tag filtering.
 - {{< ui >}}Include tags{{< /ui >}}—use an allowlist of tags that remain queryable.
-- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags, or use tag usage to automatically unindex tags taht have not been queried in the last 30,60,90 days and are not used in any dashboards or other assets.
+- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags, or use tag usage to automatically unindex tags that have not been queried in the last 30, 60, or 90 days and are not used in any dashboards or other assets.
 
 Add the tag keys you want to include or exclude.
 
