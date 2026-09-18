@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Use this guide to troubleshoot issues related to the Datadog [Alibaba Cloud integration][1]. See configuration issues with your Alibaba Cloud integration at the top of the [Alibaba Cloud integration tile][2].
+Use this guide to troubleshoot the Datadog [Alibaba Cloud integration][1]. Configuration issues appear on the [Alibaba Cloud integration tile][2].
 
 ## Alibaba Cloud access key is invalid or no longer exists
 
@@ -22,7 +22,7 @@ To remediate this issue:
 - If the access key secret is invalid, update the Datadog integration with the correct secret.
 - If the access key no longer exists, or the correct secret is unavailable, create a replacement access key for the RAM user that Datadog uses. Copy the new key ID and secret, then update the Alibaba Cloud credentials in the Datadog integration. For instructions, see [Create an AccessKey pair][3] in the Alibaba Cloud documentation.
 
-Confirm that the RAM user has the permissions required by the [Alibaba Cloud integration][1].
+Then confirm that the RAM user has the permissions required by the [Alibaba Cloud integration][1].
 
 ## Cloud monitoring permissions are missing
 
@@ -50,12 +50,14 @@ For instructions on editing a RAM policy, see [Grant permissions to a RAM user][
 
 This issue occurs when the RAM user used by the Datadog integration lacks the permissions required to configure Alibaba Cloud Managed Service for Prometheus on an Alibaba Cloud Container Service for Kubernetes (ACK) cluster.
 
-To remediate this issue, add the following permissions to the policy attached to that RAM user. These permissions allow Datadog to install and reinstall the `ack-arms-prometheus` add-on on ACK clusters. Scope the policy to the intended clusters where possible. The policy must include at least:
+To remediate this issue, add the following permissions to the policy attached to that RAM user. Scope the policy to the intended clusters where possible. The policy must include at least:
 
 - `cs:InstallClusterAddons`
 - `cs:UnInstallClusterAddons`
 
-For instructions on editing a RAM policy, see [Grant permissions to a RAM user][4]. See [InstallClusterAddons][9] for resource-scoping options.
+These permissions allow Datadog to install and reinstall the `ack-arms-prometheus` add-on on ACK clusters.
+
+For instructions on editing a RAM policy, see [Grant permissions to a RAM user][4]. For resource-scoping options, see [InstallClusterAddons][9].
 
 <!-- vale Datadog.headings = NO -->
 ## Alibaba Cloud Resource Center is not enabled
