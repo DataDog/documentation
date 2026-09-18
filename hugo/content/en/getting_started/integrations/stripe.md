@@ -66,17 +66,6 @@ stripe projects upgrade datadog-observability
 1. Go to the [Datadog login page](https://app.datadoghq.com/account/login).
 1. Select **Sign in with Google** if you use a Google account to sign in to Stripe. Otherwise, select **Forgot password?** and enter the email address from your Stripe account to set a Datadog password.
 
-## Remove Datadog from Stripe Projects
-
-Remove Datadog from your Stripe project and update your local environment variables:
-
-```shell
-stripe projects remove datadog-observability
-stripe projects env --pull
-```
-
-This stops management of your Datadog organization through Stripe Projects. It doesn't delete your Datadog account or organization.
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
