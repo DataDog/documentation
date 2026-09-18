@@ -311,7 +311,7 @@ User: {{question}}
 
 The included policy supplies the instructions; the `question` variable supplies a value at runtime. Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual—there is no need to fetch the policy separately.
 
-<!-- Screenshot before publication: the Included Prompt row with response-policy version 1, followed by the User message {{question}}. Use publication-safe sample data. -->
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
 
 For a source with several messages, all messages are included by default. Select {{< ui >}}Customize messages{{< /ui >}} to choose, reorder, or repeat messages without changing the source.
 
