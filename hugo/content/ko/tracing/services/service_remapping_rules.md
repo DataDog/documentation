@@ -6,7 +6,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/service-remapping/
   tag: 블로그
   text: 서비스 재매핑을 사용하여 서비스 데이터를 포괄적으로 연결하세요.
-site_support_id: service_remapping_rules
 title: 서비스 재매핑 규칙
 ---
 ## 개요 {#overview}
