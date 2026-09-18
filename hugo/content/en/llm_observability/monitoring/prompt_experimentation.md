@@ -17,45 +17,76 @@ further_reading:
 
 ## Overview
 
-Prompt Experimentation lets you compare versions of a managed prompt with an A/B test or deploy a version progressively with a Guarded Rollout.
+Test a prompt change on live traffic before making it the default. Use an **A/B test** to compare versions against an outcome, such as checkout conversion. Use a **Guarded Rollout** to introduce a version gradually and pause if Datadog detects a regression.
 
-<div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. Access to A/B testing and Guarded Rollouts is available separately; you do not need access to Guarded Rollouts to run an A/B test.</div>
+<div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. A/B testing and Guarded Rollouts are available separately.</div>
 
-| Workflow | Use it to |
-|----------|-----------|
-| A/B test | Compare prompt versions and measure their effect on an outcome. |
-| Guarded Rollout | Deploy a version progressively and pause if Datadog detects a regression in the selected metric. |
+- **Which prompt performs better?** [Run an A/B test](#run-an-ab-test). Access to Guarded Rollouts is not required.
+- **How do I introduce a change gradually?** [Use a Guarded Rollout](#use-a-guarded-rollout).
 
 ## Before you begin
 
-Before using Prompt Experimentation:
+You need a managed prompt with at least two versions, a version deployed to the environment you want to use, and an [Experiment metric][2] that measures your outcome. Check the [permissions](#permissions) for your workflow.
 
-- Complete the Prompt Management [prerequisites][5].
-- Install `ddtrace[openfeature]` version `4.15.0` or later: `pip install --upgrade "ddtrace[openfeature]>=4.15.0"`.
-- Set `DD_ENV` to the environment where you want to experiment.
-- [Install and run a Datadog Agent][14] that your application can reach. Prompt Experimentation sends prompt-version assignment data through the Agent and does not support LLM Observability Agentless mode (`DD_LLMOBS_AGENTLESS_ENABLED=1`).
-- Confirm that your Datadog user role has the permissions for the actions you want to perform. See [Permissions](#permissions).
+**First time?** Complete the [one-time application setup](#set-up-your-application) before starting either workflow. It requires Python `ddtrace[openfeature]` 4.15.0 or later, a reachable Datadog Agent, and matching user identifiers in prompt requests and outcome events. Agentless mode is not supported.
 
-### Permissions
+## Run an A/B test
 
-Access to a feature does not grant permission to change its configuration. In addition to the Prompt Management prerequisites, check the permissions for your workflow:
+For example, compare two versions of a checkout assistant to see which produces a higher checkout conversion rate.
 
-| Action | Required permission |
-|--------|---------------------|
-| Create an A/B test draft from a prompt | Product Analytics **Experiments Write** (`product_analytics_experiments_write`). Configuring and starting the test also requires the applicable Product Analytics and Feature Flags permissions. |
-| Deploy a prompt through the guarded-deployment workflow | LLM Observability Write (`llm_observability_write`); the deployment UI also requires Feature Flags Environment Config Read (`feature_flag_environment_config_read`). |
-| Pause or resume a Guarded Rollout | Feature Flags Config Write (`feature_flag_config_write`). |
-| Stop a Guarded Rollout and restore its baseline | LLM Observability Read and Write (`llm_observability_read`, `llm_observability_write`). This action does not require Feature Flags write permission. |
+1. Open the prompt and click {{< ui >}}Set up A/B test{{< /ui >}}.
+1. Select an environment and click {{< ui >}}Create draft & continue{{< /ui >}}. This opens the test in Product Analytics. Creating a draft does not change live traffic.
+1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's `targeting_key`—for example, **User** when you pass a user ID.
+1. Start the test. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that it receives assignments, then [compare the results][12].
 
-See [Product Analytics permissions][3] and [Feature Flags permissions][6]. Environments that require approval may need additional serving changes to be approved in Feature Flags before you can proceed.
+<!-- SCREENSHOT TODO — A/B setup handoff: Product Analytics setup with a public-safe checkout-assistant prompt, environment, two version variants, and checkout conversion as the primary metric. Show where the reader lands after Create draft & continue. -->
 
-{{< agent-only >}}
-**Note for AI agents:** Prompt Experimentation supports Python managed-prompt retrieval. Use the minimum SDK version listed above, keep a reachable Datadog Agent, and do not enable `DD_LLMOBS_AGENTLESS_ENABLED`.
-{{< /agent-only >}}
+Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to open the results or finish a draft. Configure and conclude the test in Product Analytics; see [Plan and Launch Experiments][11] for detailed instructions.
 
-## Connect prompt versions to outcomes
+**Choosing a winner does not deploy it automatically.** Conclude the test, then return to the prompt and deploy the version you choose. Users outside the test's audience continue to follow the environment's other serving rules.
 
-Prompt Experimentation compares outcomes by subject. Use the same stable, non-empty string identifier when retrieving the prompt and recording outcome events:
+## Use a Guarded Rollout
+
+For example, introduce an updated checkout assistant while watching checkout conversion. The deployed version is the **baseline**; the new version is the **candidate**. If the environment has no deployed version, deploy one immediately first to establish a baseline.
+
+1. Open the candidate version and click {{< ui >}}Deploy Version{{< /ui >}}.
+1. Select the environment in {{< ui >}}Deploy to{{< /ui >}}.
+1. Expand {{< ui >}}Deployment strategy{{< /ui >}}, choose {{< ui >}}Guarded rollout{{< /ui >}}, and select a {{< ui >}}Guardrail metric{{< /ui >}}. Use {{< ui >}}Inspect metric{{< /ui >}} to check its definition and confirm whether higher or lower values are better.
+1. Review the proposed change and click {{< ui >}}Deploy Version{{< /ui >}} to start the rollout.
+
+<!-- SCREENSHOT TODO — Guarded deployment: expanded Deployment strategy for one public-safe environment, Guarded rollout selected, checkout conversion metric, Inspect metric, and the deployment confirmation button. -->
+
+### Follow its progress
+
+Open {{< ui >}}Active rollouts{{< /ui >}} on the prompt page to follow the candidate's exposure. Exposure increases automatically while the rollout is running. Use **Pause** to hold the current split and **Resume** to continue.
+
+If a guardrail detects a regression, the rollout pauses under {{< ui >}}Needs attention{{< /ui >}}. Open the metric to investigate, then choose:
+
+- **Resume anyway** to continue exposing the candidate.
+- **Stop** to end the rollout and restore its eligible traffic to the baseline.
+
+**A pause does not roll back the candidate:** the current traffic split stays in place until you act. Stopping affects only that environment's rollout, not other environments or A/B tests. To start again after stopping, deploy a version again.
+
+<!-- SCREENSHOT TODO — Paused rollout: Active rollouts > Needs attention, with a public-safe environment, version exposure, linked metric, Resume anyway, and Stop. Exclude internal experiment names and test-drive banners. -->
+
+When the rollout finishes, the candidate receives all traffic eligible for that rollout and disappears from {{< ui >}}Active rollouts{{< /ui >}}. Other targeting rules may still serve different versions.
+
+<div class="alert alert-warning">Guardrails depend on available outcome data. Sparse, missing, or unmatched data may not trigger a pause. Reaching full exposure does not prove that the candidate is better or safe.</div>
+
+## Set up your application
+
+Complete this setup once for either workflow. If your application already sends prompt assignments and matching outcomes, go directly to [A/B testing](#run-an-ab-test) or [Guarded Rollouts](#use-a-guarded-rollout).
+
+### Connect the application
+
+1. Complete the Prompt Management [prerequisites][5].
+1. Install the supported Python SDK: `pip install --upgrade "ddtrace[openfeature]>=4.15.0"`.
+1. Set `DD_ENV` to the environment you want to use.
+1. Ensure the application can reach a [Datadog Agent][14]. Prompt Experimentation sends assignment data through the Agent; do not enable Agentless mode (`DD_LLMOBS_AGENTLESS_ENABLED=1`).
+
+### Match prompt requests to outcomes
+
+Use the same user ID when fetching the prompt and recording the outcome. This lets Datadog connect a user's outcome to the prompt version they received.
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -67,7 +98,9 @@ prompt = LLMObs.get_prompt(
 )
 ```
 
-The selected Experiment metric must identify the subject with the same value. For example, if the outcome comes from Real User Monitoring (RUM) and the metric uses the default **User** subject, identify the browser user with the same user ID:
+Use a stable, non-empty string for `targeting_key`. Do not pass an exact `version`: that bypasses environment assignment and does not record an experiment exposure.
+
+For example, if your checkout metric uses RUM events and the **User** subject type, identify the browser user with the same ID:
 
 ```javascript
 datadogRum.setUser({
@@ -75,97 +108,52 @@ datadogRum.setUser({
 })
 ```
 
-The values passed as `targeting_key` and `id` must match. Reuse that value whenever the subject returns so assignment remains consistent. For another subject type, such as an organization, configure the Experiment subject attribute to use the same value. See [Subject Types][7] for details.
+RUM is only needed when it supplies your chosen outcome. For other outcome sources, or to compare organizations rather than users, configure the matching [subject type][7]. Outcomes must occur after the user's first exposure to the prompt version to be attributed to it.
 
-During an A/B test or Guarded Rollout, calling `LLMObs.get_prompt()` records when a subject is first exposed to a prompt version. Datadog attributes metric events to that version only when they use the same subject identifier and occur after that exposure. For example, if a subject receives a prompt version at 10:00, an outcome at 10:05 can be attributed to that version, but an outcome at 09:55 cannot.
+### Choose an outcome metric
 
-In a typical application flow, the application retrieves the prompt, uses it to produce an experience, and the user then performs the action measured by the metric.
+Create or select an [Experiment metric][2] under [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][8]. Metrics Explorer metrics and monitors are not selectable here.
 
-Do not pass `version` to `LLMObs.get_prompt()`. Requesting an exact version bypasses environment assignment and does not record an experiment exposure.
-
-{{< agent-only >}}
-**Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, and use the same value for the Experiment subject. If the identity or outcome source is unclear, ask the user instead of inventing one. Do not install RUM unless the selected outcome uses RUM. Do not request an exact prompt version. Preserve the existing fallback, prompt variables, provider, model, and application behavior.
-{{< /agent-only >}}
-
-### Prepare an Experiment metric
-
-Prompt Experimentation uses a [Datadog Experiment metric][2] to measure the outcome you want to improve or protect. Metrics Explorer metrics and monitors cannot be selected.
-
-Choose a metric that represents the intended outcome. Its outcome events must use the same subject identifier passed as `targeting_key`. Check that its **Desired metric direction** correctly indicates whether higher or lower values are better, and that the metric receives enough data for analysis.
-
-To create or edit a metric, navigate to [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][8]. See [Create Experiment Metrics][2] for instructions.
+For checkout conversion, check that the metric uses the same user ID as the prompt request and that its {{< ui >}}Desired metric direction{{< /ui >}} is higher is better. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
 
 {{< agent-only >}}
-**Note for AI agents:** Do not create or edit Experiment metrics, start or end experiments, deploy prompt versions, or control Guarded Rollouts unless the user explicitly requests those external changes. When asked only to prepare application code, implement the local integration and report the remaining Datadog UI steps.
+**Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, matching the Experiment subject. Ask if the identity or outcome source is unclear. Do not install RUM unless the outcome uses RUM. Preserve the existing fallback, prompt variables, provider, model, and application behavior. Do not request an exact prompt version. Creating or editing metrics, starting experiments, deploying versions, and controlling rollouts require an explicit user request; when asked only to prepare code, report the remaining Datadog UI steps.
 {{< /agent-only >}}
 
-## Run an A/B test
+## Permissions
 
-Before starting an A/B test, create at least two prompt versions and enable the prompt in the environment you want to test.
+Preview access and user permissions are separate. In addition to the Prompt Management prerequisites, your role needs the permissions for each action:
 
-1. Open a managed prompt and click {{< ui >}}Set up A/B test{{< /ui >}}.
-1. Select the environment in which to run the test.
-1. Click {{< ui >}}Create draft & continue{{< /ui >}}. Datadog creates a draft and opens the Product Analytics experiment setup with the prompt and environment associated. Creating the draft does not start the test or change serving.
-1. Under {{< ui >}}Calculate metrics by{{< /ui >}}, select the subject type that matches the prompt `targeting_key`, then choose the {{< ui >}}Primary metric{{< /ui >}}.
-1. Choose the prompt versions to compare, then configure the audience, traffic split, exposure, and optional duration.
-1. Start the experiment.
-1. Confirm that assignments appear on the {{< ui >}}Flag & Exposures{{< /ui >}} page before analyzing the results.
+| Action | Required permission |
+|--------|---------------------|
+| Create an A/B test draft | Product Analytics **Experiments Write** (`product_analytics_experiments_write`). Configuring and starting the test also requires the applicable Product Analytics and Feature Flags permissions. |
+| Deploy through the guarded-deployment workflow | LLM Observability Write (`llm_observability_write`); the deployment UI also requires Feature Flags Environment Config Read (`feature_flag_environment_config_read`). |
+| Pause or resume a Guarded Rollout | Feature Flags Config Write (`feature_flag_config_write`). |
+| Stop a Guarded Rollout and restore its baseline | LLM Observability Read and Write (`llm_observability_read`, `llm_observability_write`). Feature Flags write permission is not required. |
 
-<!-- SCREENSHOT TODO — A/B test setup: capture the prompt's "Set up an A/B test" modal with a selected environment and "Create draft & continue". Use a public-safe checkout-assistant prompt. -->
+See [Product Analytics permissions][3] and [Feature Flags permissions][6]. Environments with approval requirements may need serving changes approved in Feature Flags before you can proceed.
 
-Expand {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to see linked tests, their status, variants, and primary metric. For a draft, use {{< ui >}}Finish setup{{< /ui >}} to continue configuration. Open a test by its name to inspect it in Product Analytics.
+## Troubleshooting
 
-Use Product Analytics to start, monitor, conclude, or cancel the experiment. An experiment result does not change prompt serving on its own. To make a selected version the environment default, return to the prompt and deploy that version. Users outside the test's audience continue to follow the environment's other serving rules.
+### I cannot start a test or rollout
 
-For details about configuration and analysis, see [Plan and Launch Experiments][11] and [Read Experiment Results][12].
+- **Controls are missing or disabled:** confirm access to the relevant Preview and the [required permissions](#permissions). A/B setup also requires two prompt versions and an enabled environment whose serving configuration can be loaded.
+- **A guarded deployment is rejected:** establish a baseline first. Resolve the conflict shown for the environment, such as an active all-user experiment or a forced version override, before trying again.
+- **An A/B test cannot start:** select a primary metric and check Product Analytics setup, permissions, and required approvals.
 
-<!-- SCREENSHOT TODO — Product Analytics setup: show the associated checkout-assistant prompt, selected environment, version variants, and primary metric. Exclude internal IDs and customer data. -->
+### I do not see assignments or results
 
-## Use a Guarded Rollout
+- **Only the fallback is returned, or assignments are missing:** check the SDK installation, `DD_ENV`, Agent connectivity, and that retrieval does not specify `version`.
+- **Outcomes are missing:** check matching subject IDs, metric scope, and that events occur after exposure. Allow enough data to accumulate; see [Experiment Diagnostics][13].
 
-Use a Guarded Rollout when you want to introduce a new version gradually while monitoring an outcome, such as checkout conversion. The environment's existing serving version is the **baseline**; the version you deploy is the **candidate**.
+### I cannot control or inspect a rollout
 
-If the prompt has not been deployed to the environment, deploy a version immediately first to establish a baseline. You can then deploy a different version with a Guarded Rollout.
+- **Pause, Resume, or Stop is unavailable:** check the [permissions](#permissions). Stop requires different permissions from Pause and Resume.
+- **Status cannot be loaded:** refresh, then check the reported error or contact Datadog Support. An unavailable status does not mean the rollout stopped.
 
-1. Open the candidate prompt version and click {{< ui >}}Deploy Version{{< /ui >}}.
-1. Select the environments in {{< ui >}}Deploy to{{< /ui >}} and review the proposed updates.
-1. Expand {{< ui >}}Deployment strategy{{< /ui >}}. For each environment, choose {{< ui >}}Deploy immediately{{< /ui >}} or {{< ui >}}Guarded rollout{{< /ui >}}. Review the selection even if you have deployed here before: saved guarded settings may already be selected.
-1. For each guarded environment, select a {{< ui >}}Guardrail metric{{< /ui >}}. Use {{< ui >}}Inspect metric{{< /ui >}} to open its definition in a new tab. Confirm that the direction shown below the selector matches the outcome you want to protect.
-1. Click the {{< ui >}}Deploy Version{{< /ui >}} confirmation button. Guarded environments start progressive exposure; immediate environments switch without a rollout.
+### I am deploying again or to several environments
 
-<!-- SCREENSHOT TODO — Deployment strategy: show the expanded deployment modal, one immediate environment and one guarded environment, a selected checkout conversion metric, "Inspect metric", and the confirmation button. -->
-
-### Monitor and control the rollout
-
-Expand {{< ui >}}Active rollouts{{< /ui >}} on the prompt page. Its tabs separate rollouts that need attention, manually paused rollouts, and rolling rollouts. Each row shows the environment, baseline and candidate versions, candidate exposure, and guardrail metric. Open the metric to inspect its definition.
-
-Exposure grows automatically while the rollout is running. Controls act on one environment at a time:
-
-- **Pause** freezes exposure at its current share.
-- **Resume** continues the exposure schedule.
-- **Stop** ends the rollout and restores eligible traffic to the baseline after confirmation. Other environments and A/B tests are unaffected. Starting again requires a new deployment.
-
-If Datadog detects a regression in the selected metric, the rollout moves to {{< ui >}}Needs attention{{< /ui >}} and pauses. The current traffic split remains in place: a Guarded Rollout does **not** automatically roll back the candidate. Investigate the metric before choosing {{< ui >}}Resume anyway{{< /ui >}}, or choose {{< ui >}}Stop{{< /ui >}} to restore the baseline. Deploying another version can replace an existing rollout; review the replacement warning before confirming.
-
-If the rollout reaches its final step without pausing, the candidate reaches full exposure for traffic eligible for the rollout and no longer appears in {{< ui >}}Active rollouts{{< /ui >}}. Other targeting rules may still serve different versions to their audiences.
-
-<!-- SCREENSHOT TODO — Guardrail pause: show "Active rollouts" on the "Needs attention" tab with a public-safe environment, version exposure, named metric, pause timestamp, "Resume anyway", and "Stop". Do not show the backend-created experiment or internal test-drive banners. -->
-
-<div class="alert alert-warning">Guarded Rollouts can continue when outcome data is sparse, missing, or cannot be matched to prompt assignments. Reaching full exposure means Datadog did not detect a regression in the available data. It does not prove that the candidate improved or is safe.</div>
-
-## Verify and troubleshoot
-
-| Symptom | Check |
-|---------|-------|
-| A/B testing or Guarded Rollout controls are missing | Confirm that the relevant Preview is enabled for your organization. The two features may be available independently. |
-| A/B setup is disabled | Confirm that the managed prompt has at least two versions, is enabled in an environment, and that serving configuration can be loaded. Check your permissions and any required environment approvals. |
-| Guarded deployment is unavailable or rejected | Establish a baseline with an immediate deployment first. Review any conflict reported for the selected environment, such as an active experiment serving all users or a forced version override. Resolve that conflict before trying again. |
-| The prompt always returns its fallback, or the experiment receives no assignment data | Confirm the supported `ddtrace` version and `ddtrace[openfeature]` installation, `DD_ENV`, Agent connectivity, and that the retrieval does not specify an exact `version`. |
-| The A/B test cannot start | Select a primary metric, then review the Product Analytics and Feature Flags permissions and any required approvals. |
-| The experiment has no results, or the selected Guarded metric has no usable data | Confirm that prompt exposures and metric events use the same subject identifier, metric events occur after the first exposure, the metric has the correct scope, and enough data has been collected. Review [Experiment Diagnostics][13]. |
-| Pause or resume is denied | Confirm the user's Feature Flags permissions and any applicable approval requirements. |
-| Stop is unavailable or denied | Confirm that the user has LLM Observability Read and Write permissions. Stop uses different permissions from Pause and Resume. |
-| Rollout status is unavailable | Refresh the status. If the error persists, check permissions and the reported serving-state conflict or contact Datadog Support. Do not assume the rollout stopped because its status cannot be loaded. |
+Review each environment's deployment strategy: saved guarded settings may already be selected. Immediate environments switch without a rollout. Deploying another version can replace an active rollout; review the replacement warning before confirming.
 
 ## Further reading
 
