@@ -7531,7 +7531,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {

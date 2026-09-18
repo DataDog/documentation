@@ -1348,6 +1348,68 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
+
 ## Networks
 
 Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
@@ -2677,6 +2739,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 
