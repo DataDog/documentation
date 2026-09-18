@@ -24,7 +24,7 @@ Use the different principals to control access patterns in your organization and
 | [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | N/A                                 |
+| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                                  |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
