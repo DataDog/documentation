@@ -251,7 +251,7 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Agent skills
 
-Agent skills give AI coding agents reusable instructions for Datadog tasks. Each skill has a `SKILL.md` file with its purpose, prerequisites, and workflow. Use skills from the [agent skills repository][20] with a compatible agent, such as Claude Code, Codex CLI, or Cursor.
+Agent skills give AI coding agents reusable instructions for Datadog tasks. Each skill has a `SKILL.md` file with its purpose, prerequisites, and workflow. Use skills from the [agent skills repository][20] with a compatible agent, such as Claude Code, Codex, or Cursor.
 
 ### Guided setup with the orchestrator
 
