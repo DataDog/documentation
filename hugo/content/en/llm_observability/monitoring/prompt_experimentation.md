@@ -39,9 +39,9 @@ For example, compare two versions of a checkout assistant to see which produces 
 1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's `targeting_key`—for example, **User** when you pass a user ID.
 1. Start the test. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that it receives assignments, then [compare the results][12].
 
-<!-- SCREENSHOT TODO — A/B setup handoff: Product Analytics setup with a public-safe checkout-assistant prompt, environment, two version variants, and checkout conversion as the primary metric. Show where the reader lands after Create draft & continue. -->
-
 Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to open the results or finish a draft. Configure and conclude the test in Product Analytics; see [Plan and Launch Experiments][11] for detailed instructions.
+
+{{< img src="llm_observability/monitoring/prompt-ab-tests.png" alt="A/B tests using a prompt, showing a running test comparing concise and detailed answers, its versions, primary metric and audience, and a draft with a Finish Setup button." style="width:100%;" >}}
 
 **Choosing a winner does not deploy it automatically.** Conclude the test, then return to the prompt and deploy the version you choose. Users outside the test's audience continue to follow the environment's other serving rules.
 
@@ -54,7 +54,7 @@ For example, introduce an updated checkout assistant while watching checkout con
 1. Expand {{< ui >}}Deployment strategy{{< /ui >}}, choose {{< ui >}}Guarded rollout{{< /ui >}}, and select a {{< ui >}}Guardrail metric{{< /ui >}}. Use {{< ui >}}Inspect metric{{< /ui >}} to check its definition and confirm whether higher or lower values are better.
 1. Review the proposed change and click {{< ui >}}Deploy Version{{< /ui >}} to start the rollout.
 
-<!-- SCREENSHOT TODO — Guarded deployment: expanded Deployment strategy for one public-safe environment, Guarded rollout selected, checkout conversion metric, Inspect metric, and the deployment confirmation button. -->
+{{< img src="llm_observability/monitoring/prompt-guarded-rollout-setup.png" alt="Deploy version 3 dialog with Production selected, Guarded rollout enabled, and Checkout completion rate selected as the guardrail metric, with an Inspect metric link." style="width:80%;" >}}
 
 ### Follow its progress
 
@@ -67,7 +67,7 @@ If a guardrail detects a regression, the rollout pauses under {{< ui >}}Needs at
 
 **A pause does not roll back the candidate:** the current traffic split stays in place until you act. Stopping affects only that environment's rollout, not other environments or A/B tests. To start again after stopping, deploy a version again.
 
-<!-- SCREENSHOT TODO — Paused rollout: Active rollouts > Needs attention, with a public-safe environment, version exposure, linked metric, Resume anyway, and Stop. Exclude internal experiment names and test-drive banners. -->
+{{< img src="llm_observability/monitoring/prompt-guarded-rollout-paused.png" alt="A prompt page showing a Staging rollout under Needs Attention, paused at 25 percent exposure to version 2, with the Checkout Completion Rate metric and Resume Anyway and Stop actions." style="width:100%;" >}}
 
 When the rollout finishes, the candidate receives all traffic eligible for that rollout and disappears from {{< ui >}}Active rollouts{{< /ui >}}. Other targeting rules may still serve different versions.
 
