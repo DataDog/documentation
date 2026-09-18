@@ -335,6 +335,14 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
 
+### `apm_get_service_health`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
+
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
+
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
