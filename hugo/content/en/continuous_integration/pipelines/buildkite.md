@@ -25,6 +25,7 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
+| [CI jobs failure analysis][22] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
 | [Manual steps][12] | Manual steps | View manually triggered pipelines. |
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
