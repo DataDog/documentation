@@ -19,7 +19,7 @@ further_reading:
 
 Prompt Experimentation lets you compare versions of a managed prompt with an A/B test or deploy a version progressively with a Guarded Rollout.
 
-<div class="alert alert-info">Prompt Experimentation is in Preview. A/B testing and Guarded Rollouts may be enabled separately for your organization. You do not need access to Guarded Rollouts to run an A/B test. Contact Datadog Support to confirm availability.</div>
+<div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. Access to A/B testing and Guarded Rollouts is available separately; you do not need access to Guarded Rollouts to run an A/B test.</div>
 
 | Workflow | Use it to |
 |----------|-----------|
