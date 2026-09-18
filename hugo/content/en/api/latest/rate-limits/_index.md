@@ -61,7 +61,7 @@ In addition to the per-scope metrics, the `datadog.apis.rate_limit.usage.limit_c
 | `limit_name` | Name of the rate limit. Different endpoints can share the same name. | All metrics |
 | `limit_period` | Rate limit period in seconds. | Count, blocked count, and utilization metrics |
 | `limit_type` | Scope of the rate limit: `per_org`, `per_user`, or `per_api_key`. | All metrics |
-| `rate_limit_status` | Whether requests were `passed` or `blocked`. Utilization metrics combine both statuses and do not include this tag. | Count and blocked count metrics |
+| `rate_limit_status` | Whether the request was `passed` or `blocked`. The value is fixed per metric: `*_count` metrics always have `passed`, and `*_blocked_count` metrics always have `blocked`. Utilization metrics combine both statuses and do not include this tag. | Count and blocked count metrics |
 | `user_uuid` | UUID of the user associated with the request. | Count, blocked count, and utilization metrics |
 
 ##### Query examples
@@ -86,8 +86,6 @@ The `datadog.apis.rate_limit.usage.*` metrics replace the `datadog.apis.usage.*`
 | `datadog.apis.usage.per_user_ratio` | `datadog.apis.rate_limit.usage.per_user_pct` |
 | `datadog.apis.usage.per_api_key` | `datadog.apis.rate_limit.usage.per_api_key_count` |
 | `datadog.apis.usage.per_api_key_ratio` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
-
-The count and blocked count metrics preserve the `limit_count`, `limit_period`, and `rate_limit_status` tags. Utilization metrics preserve `limit_count` and `limit_period` but not `rate_limit_status`. For child organizations, Datadog submits metrics to the child organization and also submits a copy to the root organization in the same Datadog site with the `child_org` tag.
 
 The replacement metrics differ from the legacy metrics in the following ways:
 
