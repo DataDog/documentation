@@ -71,12 +71,13 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If job log collection is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
+If log storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
 
-Job log collection is supported for the following providers:
+Log storage is supported for the following providers:
 
 - [AWS CodePipeline][8]
 - [Azure][9]
+- [Buildkite][13]
 - [CircleCI][10]
 - [GitHub Actions][3]
 - [GitLab][4]
@@ -93,13 +94,14 @@ Use [CI jobs failure analysis][12] to identify the most common root causes of fa
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[3]: /continuous_integration/pipelines/github/#enable-log-collection
-[4]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[3]: /continuous_integration/pipelines/github/#store-job-logs
+[4]: /continuous_integration/pipelines/gitlab/#store-job-logs
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
-[9]: /continuous_integration/pipelines/azure/#collect-job-logs
-[10]: /continuous_integration/pipelines/circleci/#enable-log-collection
+[9]: /continuous_integration/pipelines/azure/#store-job-logs
+[10]: /continuous_integration/pipelines/circleci/#store-job-logs
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[13]: /continuous_integration/pipelines/buildkite/#store-job-logs
