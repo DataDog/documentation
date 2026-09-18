@@ -48,7 +48,7 @@ For instructions on editing a RAM policy, see [Grant permissions to a RAM user][
 
 ## Prometheus permissions for ACK are missing
 
-This issue occurs when the RAM user used by the Datadog integration lacks the required permissions. These permissions configure Alibaba Cloud Managed Service for Prometheus on an Alibaba Cloud Container Service for Kubernetes (ACK) cluster.
+This issue occurs when the RAM user used by the Datadog integration lacks the permissions required to configure Alibaba Cloud Managed Service for Prometheus on an Alibaba Cloud Container Service for Kubernetes (ACK) cluster.
 
 To remediate this issue, add the following permissions to the policy attached to that RAM user. These permissions allow Datadog to install and reinstall the `ack-arms-prometheus` add-on on ACK clusters. Scope the policy to the intended clusters where possible. The policy must include at least:
 
@@ -61,7 +61,7 @@ For instructions on editing a RAM policy, see [Grant permissions to a RAM user][
 ## Alibaba Cloud Resource Center is not enabled
 <!-- vale Datadog.headings = YES -->
 
-This issue occurs when Alibaba Cloud Resource Center is not enabled for the account. Datadog cannot discover resource types that depend on Resource Center until you enable the service.
+This issue occurs when Alibaba Cloud Resource Center is not enabled for the account. Datadog cannot collect metrics until you enable the service.
 
 To remediate this issue:
 
@@ -69,7 +69,7 @@ To remediate this issue:
 2. Open [Resource Center][5].
 3. Enable Resource Center for the account.
 4. Attach the `AliyunResourceCenterReadOnlyAccess` policy to the Datadog integration RAM user.
-5. Wait about 15 minutes for the next collection cycle to confirm that Datadog receives resources.
+5. Wait about 15 minutes for the next collection cycle to confirm that Datadog receives metrics.
 
 ## Alibaba Cloud API quota limit reached
 
