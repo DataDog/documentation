@@ -83,7 +83,7 @@ After you configure tag behavior, the preview shows a list of affected metrics (
 
 - {{< ui >}}Exclude{{< /ui >}} rules take effect after Datadog observes a tag on a metric.
 - Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations.
-- Tag Age: For rules using Tag Usage, new tags recieve a 15-day grace period before they become governed by the rule.
+- **Tag age**: For rules using Tag Usage, new tags receive a 15-day grace period before they become governed by the rule.
 
 ## Modify a rule
 
