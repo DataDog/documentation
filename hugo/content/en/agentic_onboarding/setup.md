@@ -255,14 +255,7 @@ Agent skills give AI coding agents reusable instructions for Datadog tasks. Each
 
 ### Guided setup with the orchestrator
 
-Use [`dd-orchestrator`][21] to turn a goal, such as "monitor this application", into a setup plan. The orchestrator:
-
-1. Validates your Datadog account through [`dd-account-setup`][22].
-2. Uses the products you name, or asks [`dd-product-recommender`][23] to recommend products for your goal.
-3. Detects the project's platform and cloud provider, then plans the required setup and verification steps.
-4. Asks you to approve the plan, then runs the required skills in order, loading them from their source when needed.
-
-Cloud integrations are optional. The orchestrator reports unsupported steps and stops dependent steps if a skill fails.
+Use [`dd-orchestrator`][21] to set up Datadog from a goal, such as "monitor this application". It helps connect your account, choose relevant products, and coordinate setup and verification for your environment. It asks you to approve the setup plan and identifies steps it cannot automate.
 
 ### Available skills
 
