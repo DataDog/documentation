@@ -289,14 +289,16 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ## Version prompt configuration
 
+<div class="alert alert-info"><strong>Preview:</strong> Versioned prompt configuration is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
 Store model settings, tool definitions, or other application settings alongside a prompt template. Each version saves
 the template and configuration together, so deploying or rolling back a version selects both.
 
 Configuration is a JSON object whose fields you define. Datadog stores these settings; your application decides how to
 use them. Saving a model name or temperature does not automatically apply it to Playground runs or model calls.
 
-**Availability:** Configuration authoring must be enabled for your organization. Use the UI or Prompt Management API
-for configuration reads and writes. Released Python, Go, and JavaScript SDKs do not support this field.
+Use the UI or Prompt Management API for configuration reads and writes. Released Python, Go, and JavaScript SDKs
+do not support this field.
 
 ### Create a prompt with configuration
 
