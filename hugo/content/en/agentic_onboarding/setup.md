@@ -1,7 +1,10 @@
 ---
 title: Agentic Onboarding Setup
-description: Instrument your applications with Datadog using the AI Setup CLI or the Datadog MCP Server.
+description: Set up Datadog with the AI Setup CLI, the Datadog MCP Server, or agent skills for AI coding agents.
 further_reading:
+- link: "https://github.com/datadog-labs/agent-skills"
+  tag: "GitHub"
+  text: "Datadog skills for AI agents"
 - link: "https://www.datadoghq.com/blog/serverless-agentic-onboarding/"
   tag: "Blog"
   text: "Instrument serverless apps with agentic onboarding"
@@ -13,8 +16,9 @@ Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumenta
 
 - [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
 - [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
+- [Agent skills](#agent-skills): Give an AI coding agent task-specific instructions for Datadog setup and other workflows.
 
-The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
+Use these tools together or choose the option that fits your workflow.
 
 ## AI Setup CLI
 
@@ -245,6 +249,59 @@ The agent detects your stack, requests permission before each tool call, applies
 
 After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
 
+## Agent skills
+
+Agent skills give AI coding agents reusable instructions for Datadog tasks. Each skill has a `SKILL.md` file with its purpose, prerequisites, and workflow. Use skills from the [agent skills repository][20] with a compatible agent, such as Claude Code, Codex, or Cursor.
+
+### Guided setup with the orchestrator
+
+Use [`dd-orchestrator`][21] to set up Datadog from a goal, such as "monitor this application". It helps connect your account, choose relevant products, and coordinate setup and verification for your environment. It asks you to approve the setup plan and identifies steps it cannot automate.
+
+### Available skills
+
+Use a specific skill when you already know the task. Follow the linked definitions for requirements and supported workflows.
+
+| Skill or group | Use it to |
+|----------------|-----------|
+| [`dd-account-setup`][22], [`dd-product-recommender`][23] | Connect a Datadog account and identify relevant products. |
+| [`dd-apm`][24] | Set up Single Step Instrumentation, verify tracing, and investigate service performance. |
+| [`dd-instrument-rum`][25] | Add or repair Browser RUM instrumentation. |
+| [`dd-browser-sdk`][26] | Configure RUM, Logs, and Session Replay, or upgrade SDK versions. |
+| [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] | Configure cloud integrations with Terraform. |
+| [`dd-logs`][31] | Search logs, manage archives, and control logging costs. |
+| [`dd-monitors`][32] | Find, create, update, and mute monitors. |
+| [`dd-audit`][33] | Investigate changes, key use, costs, and AI activity in Audit Trail. |
+| [Agent Observability][34] | Diagnose trace failures, compare experiments, generate evaluators, and classify sessions. |
+| [Software Delivery][35] | Investigate failing pull request pipelines and flaky tests. |
+| [`datadog-app`][36] | Create, run, and publish Datadog Apps. |
+| [`k9-ownership-byod-setup`][37] | Define resource ownership preferences in a reference table. |
+| [`dd-pup`][38] | Authenticate and use the Pup CLI for Datadog API operations. |
+| [`dd-docs`][39] | Find Datadog documentation and product limits. |
+
+To list all skills, including those within groups, run:
+
+```shell
+npx skills add datadog-labs/agent-skills --list --full-depth
+```
+
+### Install and use a skill
+
+With Node.js and `npx` installed, run this command from your project directory:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-orchestrator --full-depth
+```
+
+Select your agent and installation scope when prompted. Replace `dd-orchestrator` with another skill name to install it directly. Complete the skill's prerequisites, such as authenticating the [Pup CLI][40] or connecting the [Datadog MCP Server][41].
+
+Open the project in your agent and enter:
+
+```text
+Use the dd-orchestrator skill to set up Datadog for this project.
+```
+
+For product-specific examples, see [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43].
+
 ## Next steps
 
 Confirm data is flowing in the Datadog UI for the product you set up:
@@ -266,6 +323,30 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [17]: https://www.anthropic.com/claude-code
 [18]: https://cursor.com/
 [19]: /account_management/api-app-keys/
+[20]: https://github.com/datadog-labs/agent-skills
+[21]: https://github.com/datadog-labs/agent-skills/blob/main/dd-orchestrator/SKILL.md
+[22]: https://github.com/datadog-labs/agent-skills/blob/main/dd-account-setup/SKILL.md
+[23]: https://github.com/datadog-labs/agent-skills/blob/main/dd-product-recommender/SKILL.md
+[24]: https://github.com/datadog-labs/agent-skills/blob/main/dd-apm/SKILL.md
+[25]: https://github.com/datadog-labs/agent-skills/blob/main/dd-instrument-rum/SKILL.md
+[26]: https://github.com/datadog-labs/agent-skills/blob/main/dd-browser-sdk/SKILL.md
+[27]: https://github.com/datadog-labs/agent-skills/blob/main/dd-aws-integration/SKILL.md
+[28]: https://github.com/datadog-labs/agent-skills/blob/main/dd-azure-integration/SKILL.md
+[29]: https://github.com/datadog-labs/agent-skills/blob/main/dd-gcp-integration/SKILL.md
+[30]: https://github.com/datadog-labs/agent-skills/blob/main/dd-oci-integration/SKILL.md
+[31]: https://github.com/datadog-labs/agent-skills/blob/main/dd-logs/SKILL.md
+[32]: https://github.com/datadog-labs/agent-skills/blob/main/dd-monitors/SKILL.md
+[33]: https://github.com/datadog-labs/agent-skills/blob/main/dd-audit/SKILL.md
+[34]: https://github.com/datadog-labs/agent-skills/tree/main/agent-observability
+[35]: https://github.com/datadog-labs/agent-skills/tree/main/dd-software-delivery
+[36]: https://github.com/datadog-labs/agent-skills/blob/main/dd-apps/datadog-app/SKILL.md
+[37]: https://github.com/datadog-labs/agent-skills/blob/main/dd-security/csm/ownership-agent/SKILL.md
+[38]: https://github.com/datadog-labs/agent-skills/blob/main/dd-pup/SKILL.md
+[39]: https://github.com/datadog-labs/agent-skills/blob/main/dd-docs/SKILL.md
+[40]: /cli/
+[41]: /mcp_server/setup/
+[42]: /real_user_monitoring/application_monitoring/browser/
+[43]: /tracing/trace_collection/single-step-apm/
 
 ## Further reading
 
