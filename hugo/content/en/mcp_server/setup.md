@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/kubernetes-mcp-tools/"
   tag: "Blog"
   text: "Investigate Kubernetes resources with Datadog MCP tools"
@@ -711,7 +714,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
 - `assistant`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations
 - `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
-- `code-exec`: A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
+- `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
@@ -729,6 +732,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
 - `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics
 - `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
+- `sheets`: Tools for creating, reading, updating, and deleting [Datadog spreadsheets][75]
 - `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
 - `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
 - `widgets`: Tools for [dashboard][46] and [notebook][54] widget visualization, validation, and type conversion.
@@ -739,7 +743,6 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
-- `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
@@ -1002,3 +1005,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [72]: https://github.com/xai-org/plugin-marketplace 
 [73]: /bits_ai/bits_chat/
 [74]: /bits_ai/bits_investigation/
+[75]: /sheets/
+[76]: /mcp_server/code_execution/ 
