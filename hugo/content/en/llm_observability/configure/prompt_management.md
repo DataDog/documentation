@@ -291,80 +291,67 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 <div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
 
-Reuse shared instructions or examples across managed prompts by including an exact version of another prompt. For example, include the same response policy in several customer-support prompts without copying its text into each template.
+Keep shared instructions in one prompt and reuse them in others. For example, a support assistant and a billing assistant can include the same response policy without maintaining separate copies.
 
-Each include is pinned to a numeric version. Saving a composed prompt resolves its includes and stores the resulting text or messages. Publishing a new version of an included prompt does not change existing composed versions or their deployments.
+Each include uses an **exact version**. Updating the shared policy does not change prompts that already include it. You choose when each assistant adopts the update.
 
-### Include a prompt in the editor
+### Create and reuse a shared policy
 
-1. Create or edit a prompt and select {{< ui >}}Include Prompt{{< /ui >}}.
-2. Select the source prompt and its version. Preview its content before including it.
-3. For a text prompt, insert the reference into a message. For a chat prompt, include all its messages or choose individual messages.
-4. To change a selected message's position or repeat it, use the message ordering and duplication controls. Selection alone does not determine message order.
-5. Review the resulting prompt, supply sample variable values, and test it in the Playground before saving a version.
+This example creates a shared policy and includes it in a support assistant.
 
-Text references remain inline as `{{>prompt-id version=N}}`, so their placement and surrounding whitespace remain visible. Hover over a reference to inspect its source link. Chat includes appear as expandable {{< ui >}}Included Prompt{{< /ui >}} rows. Use the separate source link to open the referenced version without leaving the editor, or edit the include to change its version or selected messages.
+1. Create a prompt named `response-policy` with one System message:
 
-### Include text through the API
+   ```text
+   Answer concisely. If you do not know the answer, say so.
+   ```
 
-Use the permissions listed in [Prerequisites](#prerequisites). Send requests with `Content-Type: application/vnd.api+json`; see the [Agent Observability API reference][8] for authentication and request schemas.
+   Save it as version 1.
+2. Create another prompt named `support-assistant`. In its editor, select {{< ui >}}Include Prompt{{< /ui >}}.
+3. Select `response-policy`, version 1, review the preview, and click {{< ui >}}Add prompt{{< /ui >}}. The {{< ui >}}Included Prompt{{< /ui >}} row represents the shared policy.
+4. Add a User message containing `{{question}}` after the include. Use the include row's up and down arrows to adjust its position if needed.
+5. Enter a sample question, select a model, and click {{< ui >}}Run{{< /ui >}} to test the result. Save the prompt when you are satisfied.
 
-First, save a text prompt named `response-policy` whose version 1 contains:
+The model receives the policy's System message followed by your User message. If your new prompt already has an empty System message, remove it unless you want to add separate instructions there.
 
-```text
-Be concise and address {{customer_name}} by name.
-```
+For sources with several messages, the default is to include all of them in their original order. Select {{< ui >}}Customize messages{{< /ui >}} to choose a subset. Under {{< ui >}}Included order{{< /ui >}}, use {{< ui >}}Move up{{< /ui >}}, {{< ui >}}Move down{{< /ui >}}, {{< ui >}}Duplicate{{< /ui >}}, and {{< ui >}}Remove{{< /ui >}} to arrange the messages. Select {{< ui >}}Include entire prompt{{< /ui >}} to return to the complete source. Editing an include changes how you use the source, not the source itself.
 
-Create a parent prompt with `POST /api/v2/llm-obs/v1/prompts`:
+### Review what the model receives
 
-```json
-{
-  "data": {
-    "type": "prompt-templates",
-    "attributes": {
-      "prompt_id": "support-answer",
-      "template": "{{>response-policy version=1}}\n\nAnswer {{question}}."
-    }
-  }
-}
-```
+Open a saved version and compare its two views:
 
-The saved, resolved template is:
+- {{< ui >}}Prompt Template{{< /ui >}} shows your messages and references to included prompts.
+- {{< ui >}}Resolved Prompt{{< /ui >}} shows the text and messages after those references have been expanded. Variables such as `{{question}}` still receive their values at runtime.
 
-```text
-Be concise and address {{customer_name}} by name.
+Expand an {{< ui >}}Included Prompt{{< /ui >}} row to read its messages. Its external-link button opens the exact source version in a new tab.
 
-Answer {{question}}.
-```
+Retrieve and format `support-assistant` using the existing [Prompt Management workflow](#retrieve-format-and-use-a-prompt). Your application retrieves the assembled prompt; it does not need to fetch and combine the policy separately.
 
-Composition does not add separators. Include any spaces or line breaks you need around the reference. Variables from the included text remain runtime variables; supply `customer_name` and `question` when formatting the parent. A variable name shared by several includes uses the same runtime value.
+### Adopt an updated policy
 
-Only `{{>prompt-id version=N}}`, with a positive numeric version, is an inline include. Unversioned text such as `{{>response-policy}}` remains literal text. Inline includes must reference text prompts, not chat prompts.
+Suppose you save version 2 of `response-policy`. The support assistant still uses version 1 until you update it:
 
-### Include chat messages through the API
+1. Open version 1 of `response-policy`. In {{< ui >}}Used By{{< /ui >}}, find the prompt versions that reference it, including references through another prompt.
+2. Open `support-assistant` for editing. Replace the version 1 include with an include of version 2, keeping it before the User message.
+3. Test the result and save a new version of `support-assistant`.
+4. Deploy that support-assistant version when you are ready. Saving a version alone does not change the version served by an environment.
 
-Use an authored `messages` object to combine chat includes with ordinary messages. For example, assume version 1 of `response-examples` contains these messages:
+Repeat for other assistants when they are ready to adopt the policy. Nested includes also use exact versions; no reference follows the latest version automatically.
 
-```json
-[
-  { "role": "user", "content": "How do I reset my password?" },
-  { "role": "assistant", "content": "Select Reset password on the sign-in page." },
-  { "role": "user", "content": "Where can I find my invoices?" }
-]
-```
+### Create a composed prompt through the API
 
-Create a parent with this request:
+Use the permissions listed in [Prerequisites](#prerequisites) and send `Content-Type: application/vnd.api+json`. The [Agent Observability API reference][8] describes authentication and request schemas.
+
+After creating `response-policy` version 1 as above, send this request to `POST /api/v2/llm-obs/v1/prompts` to create the same support assistant:
 
 ```json
 {
   "data": {
     "type": "prompt-templates",
     "attributes": {
-      "prompt_id": "support-chat",
+      "prompt_id": "support-assistant",
       "template": {
         "messages": [
-          { "role": "system", "content": "You are a support assistant." },
-          { "include": { "prompt_id": "response-examples", "version": 1 } },
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
           { "role": "user", "content": "{{question}}" }
         ]
       }
@@ -373,29 +360,49 @@ Create a parent with this request:
 }
 ```
 
-Omitting `items` includes every source message in its original order. To select, reorder, or repeat messages, add an ordered list of zero-based indexes:
+For chat composition, put the message list under `template.messages`. Omit `items` to include every source message. To include a subset, add `items` with zero-based message indexes. For example, `"items": [0, 1]` includes the first two messages. Index order determines the output order, and repeated indexes repeat messages. An empty list or an index outside the source's message list is invalid. Check that the resulting role sequence suits your model provider.
 
-```json
-{ "include": { "prompt_id": "response-examples", "version": 1, "items": [2, 0, 0] } }
+To create another version of the assistant, send the updated `template` to `POST /api/v2/llm-obs/v1/prompts/support-assistant/versions`, using `"type": "prompt-template-versions"`.
+
+Version-detail responses return both `authoring_template`, which preserves the references you saved, and `template`, which contains the expanded result. Use `authoring_template` as the starting point for edits that should retain the references. Ordinary prompts omit that field.
+
+#### Include text inside a message
+
+Use a text include when you want to reuse part of a message rather than complete chat messages. The source must be a **text prompt**, not a chat prompt with a single message.
+
+For example, save a text prompt named `response-style` with this template:
+
+```text
+Address {{customer_name}} by name.
 ```
 
-This inserts the invoice question, followed by the password question twice. Review the resulting role sequence for compatibility with your model provider. Indexes must refer to existing source messages; an empty selection is not supported. Structured includes always require a version.
+Include its version 1 in another template:
 
-### Inspect and update a composed prompt
+```text
+{{>response-style version=1}}
 
-On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the authored references, and {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded content. When references are available, {{< ui >}}Used By{{< /ui >}} identifies parent versions that include the selected version directly or through another prompt. Open a parent version to inspect or update its include; creating a child version does not update those references automatically.
+Answer {{question}}.
+```
 
-To adopt an updated policy, edit the parent to reference the new child version, save a parent version, test it, and deploy that parent version. Each nested include is also pinned to an exact version.
+The result is:
 
-API version-detail responses return the resolved content in `template` and the authored references in `authoring_template` for composed versions. Use the authored template when creating another composed version. Ordinary versions omit `authoring_template`.
+```text
+Address {{customer_name}} by name.
 
-### Retrieve and handle unavailable sources
+Answer {{question}}.
+```
 
-Retrieve and format the parent using the existing Prompt Management workflow. Includes are resolved when saving, not by fetching each child from your application at runtime.
+Supply `customer_name` and `question` when formatting the prompt. Repeated uses of the same variable name share one value. Composition adds no spaces or line breaks; include any separators you need around the reference.
 
-Deleting a source prompt does not change the resolved content of existing parent versions. However, a new include cannot reference a deleted source. Recreating a prompt with the same name does not replace the original source identity in existing parents. Update the reference and save another parent version to use the recreated source.
+In the editor, select the text source through {{< ui >}}Include Prompt{{< /ui >}} and click {{< ui >}}Insert text{{< /ui >}}. This inserts the reference in the last editable message. The inline reference remains visible, and hovering over it exposes a link to the source version.
 
-If Preview access is removed, existing compiled versions remain available for execution. Creating or editing composition requires access. Without access, inline reference syntax remains literal text and structured includes are unsupported. Contact Datadog Support or your Customer Success Manager if the composition controls are unavailable.
+Always specify a positive numeric version: `{{>response-style version=1}}`. Unversioned text such as `{{>response-style}}` remains literal text, not an include.
+
+### Troubleshooting
+
+- **The composition controls are unavailable:** Contact Datadog Support or your Customer Success Manager to request Preview access.
+- **A source prompt was deleted:** Existing saved prompts keep their assembled content and remain usable. New includes cannot reference the deleted source. Recreating a prompt with the same name does not change existing saved prompts.
+- **Preview access was removed:** Existing saved versions remain available for execution. Do not create new templates with includes until access is restored: text references remain literal without access, and chat includes are rejected.
 
 
 ## Advanced usage
