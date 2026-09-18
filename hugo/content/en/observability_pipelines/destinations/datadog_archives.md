@@ -145,7 +145,7 @@ Select an AWS authentication option. If you are only using the [user or role you
 
 ## Using template syntax for dynamic partitioning
 
-When you [set up the Datadog Archives destination](#set-up-the-destination-for-your-pipeline), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
+When you set up the Datadog Archives destination (Amazon S3), you can use [template syntax][8] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
 {{< img src="observability_pipelines/destinations/datadog_archives_prefix_template.png" alt="The Datadog Archives destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
 
