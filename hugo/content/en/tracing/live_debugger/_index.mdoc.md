@@ -1,6 +1,6 @@
 ---
 title: Live Debugger
-description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
+description: Inspect running applications in real time using non-breaking logpoints that collect logs and variable snapshots without pausing execution or requiring a redeployment.
 content_filters:
   - trait_id: prog_lang
     option_group_id: live_debugger_language_options
@@ -23,8 +23,8 @@ further_reading:
     text: "Dynamic Instrumentation"
   - link: "/dynamic_instrumentation/expression-language/"
     tag: "Documentation"
-    text: "Dynamic Instrumentation Expression Language"
-  - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
+    text: "Expression Language"
+  - link: "/tracing/live_debugger/sensitive-data-scrubbing/"
     tag: "Documentation"
     text: "Sensitive Data Scrubbing"
   - link: "/dynamic_instrumentation/symdb/"
@@ -49,13 +49,15 @@ Instead of adding temporary debug logs or reproducing issues locally, you can dy
 
 Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
+Live Debugger complements [Dynamic Instrumentation][38], which adds metrics, spans, and span tags using the same [expression language][15].
+
 ## Key capabilities
 
 Live Debugger provides:
 
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
 - **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
-- **Dynamic logpoint placement** anywhere in your codebase, including in third-party libraries.
+- **Dynamic logpoint placement** at supported code locations in your application or third-party libraries.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
 - **Built-in sensitive data scrubbing** to help prevent exposure of personal data, secrets, and credentials.
@@ -262,7 +264,7 @@ export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-ddtrace-run python -m myapp.py
+ddtrace-run python -m myapp
 ```
 
 {% /if %}
@@ -325,6 +327,10 @@ After you enable Live Debugger, you can check and update the enablement status o
 - {% ui %}Enabled{% /ui %}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {% ui %}Disabled{% /ui %}: Logpoints cannot be created or reactivated on the given service and environment.
 
+### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
+
+Use Live Debugger with your own coding assistant through the `live-debugger` toolset (Preview). See the [Datadog MCP Server documentation][39] for setup and access requirements.
+
 ### Create a logs index {% #create-a-logs-index %}
 
 Live Debugger generates logs that are sent to Datadog and appear alongside your application logs. A dedicated logs index helps ensure these logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11].
@@ -372,7 +378,13 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
-After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. **Note**: If the selected code is not executed or the logpoint condition(s) are not met, then no log events are generated.
+After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. If no useful data appears, check that:
+
+- The selected service and environment are receiving traffic that executes the instrumented code.
+- The source file and location match the deployed version.
+- The condition matches that traffic, and the log events have no `debugger.snapshot.evaluationErrors`.
+- The [logs index](#create-a-logs-index) retains `source:dd_debugger` events.
+- The values you need are not redacted or outside the capture limits.
 
 ### Protecting sensitive data
 
@@ -413,12 +425,11 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Configuration scope**: Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
 - **Rate limits**:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
 
-[1]: /dynamic_instrumentation/sensitive-data-scrubbing/
+[1]: /tracing/live_debugger/sensitive-data-scrubbing/
 [2]: /agent/
 [4]: /tracing/guide/remote_config
 [11]: /logs/log_configuration/indexes/#exclusion-filters
@@ -443,3 +454,5 @@ The following constraints apply to Live Debugger usage and configuration:
 [35]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 [36]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [37]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[38]: /dynamic_instrumentation/
+[39]: /mcp_server/

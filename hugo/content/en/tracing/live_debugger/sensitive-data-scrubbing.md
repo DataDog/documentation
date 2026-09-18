@@ -1,13 +1,14 @@
 ---
-title: Dynamic Instrumentation Sensitive Data Scrubbing
-description: Protect sensitive information by configuring redaction and scrubbing mechanisms for Dynamic Instrumentation.
+title: Live Debugger Sensitive Data Scrubbing
+description: Protect sensitive application data captured by Live Debugger.
 aliases:
+    - /tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing/
     - /dynamic_instrumentation/sensitive-data-scrubbing/
     - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
 further_reading:
-- link: "/dynamic_instrumentation/#enable-dynamic-instrumentation"
+- link: "/tracing/live_debugger/#setup"
   tag: "Documentation"
-  text: "Setting Up Dynamic Instrumentation"
+  text: "Setting Up Live Debugger"
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
@@ -15,17 +16,19 @@ further_reading:
 
 ## Overview
 
-Datadog Dynamic Instrumentation enhances the observability and debugging capabilities of your applications by capturing variable data at arbitrary code locations in production environments. It also can craft and evaluate expressions in real-time, and integrate their outputs as span tags.
+[Live Debugger][5] captures logs and variable snapshots that can contain sensitive application data.
 
-While this functionality is powerful, it also presents the possibility of sensitive data leaks, both intentional and unintentional. Alongside the product's robust data capture capabilities, it also provides comprehensive measures to safeguard sensitive information.
+Choose the values you collect deliberately and understand where redaction occurs:
 
-By understanding and properly configuring these redaction mechanisms, you can use Dynamic Instrumentation with confidence and security.
+- **Identifier and type rules** redact matching values in your infrastructure, before upload.
+- **Live Debugger redaction modes** control which captured values are visible. Strict Mode and Targeted Mode cannot be disabled. See [Live Debugger redaction modes][7].
+- **Sensitive Data Scanner rules** redact matching data after it reaches Datadog. They are not a substitute for rules that prevent sensitive values from leaving your infrastructure.
 
 ## Redact based on identifiers
 
 ### Default behavior
 
-Dynamic Instrumentation automatically redacts values linked to specific identifiers deemed sensitive, such as `password` and `accessToken`. See [the full list of redacted identifiers][1].
+Live Debugger automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`. See [redacted identifiers][1].
 
 ### Custom identifier redaction
 
@@ -50,11 +53,11 @@ Class-based redaction:
 
 ### Initial setup
 
-When you first access [Dynamic Instrumentation Setup][2], you can optionally set up default Sensitive Data Scanner rules for Dynamic Instrumentation. These cover common regular expressions for likely sensitive data such as email addresses or JWT tokens.
+To create a [Sensitive Data Scanner][4] rule for Live Debugger, set it to filter on `source:dd_debugger`.
 
 ### Customizing Sensitive Data Scanner
 
-You can disable the default rules or create other rules through the [Sensitive Data Scanner][4]. To create a new Sensitive Data Scanner rule for Dynamic Instrumentation, set it to filter on `source:dd_debugger`.
+You can disable or customize rules through the [Sensitive Data Scanner][4].
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 
@@ -63,6 +66,7 @@ You can disable the default rules or create other rules through the [Sensitive D
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-debugger/debugger-bootstrap/src/main/java/datadog/trace/bootstrap/debugger/util/Redaction.java
-[2]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
+[5]: /tracing/live_debugger/
+[7]: /tracing/live_debugger/#mode-based-redaction
