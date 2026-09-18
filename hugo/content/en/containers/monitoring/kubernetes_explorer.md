@@ -167,6 +167,7 @@ config:
   exporters:
     otlp_http:
       endpoint: https://otlp.${env:DD_SITE}
+      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
       headers:
         dd-api-key: ${env:DD_API_KEY}
       compression: zstd
