@@ -24,6 +24,7 @@ Use the different principals to control access patterns in your organization and
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dynamic Severity][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -76,3 +77,5 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
 [26]: /security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
+[27]: /experiments/
+
