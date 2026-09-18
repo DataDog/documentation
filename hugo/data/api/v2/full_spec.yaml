@@ -22550,6 +22550,7 @@ components:
           type: string
       type: object
     ContentEncoding:
+      default: gzip
       description: HTTP header used to compress the media-type.
       enum:
         - identity
@@ -147803,13 +147804,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147873,19 +147874,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -148378,13 +148379,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
