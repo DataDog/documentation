@@ -1,14 +1,32 @@
 {{- /*
   Renders the supported Fleet Automation datadog.yaml configuration fields as
-  grouped definition lists, sourced from the config-validator schema vendored at
-  _vendor/data/agent_config_schema.json (exposed as .Site.Data.agent_config_schema).
-  Top-level scalar and array fields are shown first, then one section per
-  nested-object field (apm_config, logs_config, and so on).
-  Call with Markdown-processing (percent-sign) shortcode delimiters.
+  collapsible sections, each containing a table of fields. Sourced from the
+  config-validator schema vendored at _vendor/data/agent_config_schema.json
+  (exposed as .Site.Data.agent_config_schema). Top-level scalar and array fields
+  come first, then one section per nested-object field (apm_config, and so on),
+  using human-readable titles where mapped. Call with raw-HTML (angle-bracket)
+  shortcode delimiters.
 */ -}}
 {{- $data := .Site.Data.agent_config_schema -}}
 {{- $props := $data.properties -}}
 {{- $exclude := slice "config_id" -}}
+{{- /* Human-readable section titles per object key; unmapped keys fall back to the raw key. */ -}}
+{{- $titles := dict
+  "apm_config" "APM"
+  "compliance_config" "Compliance"
+  "container_image" "Container Image"
+  "enable_payloads" "Enable Payloads"
+  "ha_agent" "HA Agent"
+  "logs_config" "Logs"
+  "network_devices" "Network Devices"
+  "network_path" "Network Path"
+  "observability_pipelines_worker" "Observability Pipelines Worker"
+  "private_action_runner" "Private Action Runner"
+  "process_config" "Process Monitoring"
+  "runtime_security_config" "Runtime Security"
+  "sbom" "SBOM"
+  "synthetics" "Synthetics"
+-}}
 {{- /* Split top-level fields into scalars/arrays (shown together) and objects (own sections). */ -}}
 {{- $top := dict -}}
 {{- $objects := dict -}}
@@ -24,13 +42,37 @@
 {{- $top = merge $top (dict $k $v) -}}
 {{- end -}}
 {{- end -}}
-{{- end }}
-### Top-level fields
-{{ partial "fa-config-rows.html" (dict "props" $top "prefix" "") }}
-{{ range $k, $v := $objects }}
-### `{{ $k }}`
-{{ with $v.description }}
-{{ . }}
-{{ end }}
-{{- partial "fa-config-rows.html" (dict "props" $v.properties "prefix" (printf "%s." $k)) }}
-{{ end -}}
+{{- end -}}
+{{- /* Collapsible <details> wrapper matching the collapse-content shortcode markup.
+       $title is HTML; $rows is the rendered table-body HTML. */ -}}
+{{- define "_facollapse" -}}
+<details class="collapsible-section">
+  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
+    <div class="header-content">
+      <div class="header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
+          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </div>
+      <div class="header-text">
+        <h3 class="header-text-inner">{{ .title | safeHTML }}</h3>
+      </div>
+    </div>
+  </summary>
+  <div class="collapsible-content">
+    <table>
+      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+      <tbody>{{ .rows | safeHTML }}</tbody>
+    </table>
+  </div>
+</details>
+{{- end -}}
+{{- $toprows := partial "fa-config-rows.html" (dict "props" $top "prefix" "") -}}
+{{- template "_facollapse" (dict "title" "Top-level fields" "rows" $toprows) -}}
+{{- range $k, $v := $objects -}}
+{{- $rows := partial "fa-config-rows.html" (dict "props" $v.properties "prefix" (printf "%s." $k)) -}}
+{{- $friendly := index $titles $k -}}
+{{- $title := printf "<code>%s</code>" $k -}}
+{{- if $friendly }}{{ $title = printf "%s (<code>%s</code>)" $friendly $k }}{{ end -}}
+{{- template "_facollapse" (dict "title" $title "rows" $rows) -}}
+{{- end -}}

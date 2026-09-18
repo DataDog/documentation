@@ -560,9 +560,9 @@ menu:
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
       weight: 802
-    - name: Supported Configuration Fields
-      identifier: supported_config_fields
-      url: agent/fleet_automation/supported_config_fields
+    - name: Supported datadog.yaml Fields
+      identifier: supported_datadog_yaml_fields
+      url: agent/fleet_automation/supported_datadog_yaml_fields
       parent: agent_fleet_automation
       weight: 803
     - name: Configure Agent Integrations
