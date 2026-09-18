@@ -1,0 +1,56 @@
+{{/*
+  Renders changelog entries associated with one operation. Entries are grouped
+  by tag in data/changelog/<tag>.yml and matched to a v1/v2 operation in
+  layouts/api/single.html. Entry dates are informational until date-based API
+  versioning is introduced.
+
+  Params:
+    changes       - slice of {changeType, date, link, title, version}
+    operationSlug - stable slug used to build an accessible trigger id
+*/}}
+{{ $changes := .changes | default slice }}
+{{ $operationSlug := .operationSlug }}
+{{ $typeMeta := dict
+  "added"      (dict "label" "Added"      "class" "added")
+  "addition"   (dict "label" "Added"      "class" "added")
+  "modified"   (dict "label" "Modified"   "class" "modified")
+  "changed"    (dict "label" "Changed"    "class" "modified")
+  "deprecated" (dict "label" "Deprecated" "class" "deprecated")
+  "removed"    (dict "label" "Removed"    "class" "removed")
+  "breaking"   (dict "label" "Breaking"   "class" "removed")
+}}
+
+<div class="api-operation-changelog dropdown bootstrap-dropdown-custom">
+  <button id="{{ $operationSlug }}-changelog"
+          class="btn api-operation-changelog-toggle d-flex align-items-center"
+          type="button"
+          data-bs-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">
+    <span>Changes</span>
+    <span class="api-operation-changelog-count">{{ len $changes }}</span>
+    <span class="chevron chevron-down"></span>
+    <span class="chevron chevron-up d-none"></span>
+  </button>
+  <div class="dropdown-menu dropdown-menu-end api-operation-changelog-menu"
+       aria-labelledby="{{ $operationSlug }}-changelog">
+    <div class="api-operation-changelog-heading">Changes to this operation</div>
+    {{ range $changes }}
+      {{ $meta := index $typeMeta .changeType | default (dict "label" (.changeType | humanize) "class" "modified") }}
+      <div class="api-operation-changelog-entry">
+        <div class="api-operation-changelog-meta">
+          <span class="api-operation-changelog-pill api-operation-changelog-pill--{{ $meta.class }}">{{ $meta.label }}</span>
+          <code>{{ .version }}</code>
+          {{ with .date }}<time datetime="{{ . }}">{{ . }}</time>{{ end }}
+        </div>
+        <div class="api-operation-changelog-title">
+          {{ if .link }}
+            <a href="{{ .link }}">{{ .title }}</a>
+          {{ else }}
+            {{ .title }}
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</div>
