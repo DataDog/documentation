@@ -1,13 +1,13 @@
 ---
-title: Sensitive Data Scrubbing for Live Debugger and Dynamic Instrumentation
-description: Understand where sensitive data is redacted and configure identifier, type, and value-based scrubbing.
+title: Live Debugger Sensitive Data Scrubbing
+description: Protect sensitive application data captured by Live Debugger.
 aliases:
     - /dynamic_instrumentation/sensitive-data-scrubbing/
     - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
 further_reading:
-- link: "/dynamic_instrumentation/#enable-dynamic-instrumentation"
+- link: "/tracing/live_debugger/#setup"
   tag: "Documentation"
-  text: "Setting Up Dynamic Instrumentation"
+  text: "Setting Up Live Debugger"
 - link: "/security/sensitive_data_scanner/"
   tag: "Documentation"
   text: "Sensitive Data Scanner"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-[Live Debugger][5] captures logs and variable snapshots for investigations. [Dynamic Instrumentation][6] adds metrics, spans, and span tags. Both can read application values that contain sensitive information.
+[Live Debugger][5] captures logs and variable snapshots that can contain sensitive application data.
 
 Choose the values you collect deliberately and understand where redaction occurs:
 
@@ -52,11 +52,11 @@ Class-based redaction:
 
 ### Initial setup
 
-When you first access [Dynamic Instrumentation Setup][2], you can optionally set up default Sensitive Data Scanner rules for Dynamic Instrumentation. These cover common regular expressions for likely sensitive data such as email addresses or JWT tokens.
+To scan Live Debugger logs, create a [Sensitive Data Scanner][4] rule with the filter `source:dd_debugger`.
 
 ### Customizing Sensitive Data Scanner
 
-You can disable or customize these Sensitive Data Scanner rules through the [Sensitive Data Scanner][4]. This does not disable Live Debugger's Strict or Targeted redaction mode. To apply a rule to Live Debugger logs, set its filter to `source:dd_debugger`.
+You can disable or customize rules through the [Sensitive Data Scanner][4]. This does not disable Live Debugger's Strict or Targeted redaction mode.
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 
@@ -65,9 +65,7 @@ You can disable or customize these Sensitive Data Scanner rules through the [Sen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/dd-trace-java/blob/master/dd-java-agent/agent-debugger/debugger-bootstrap/src/main/java/datadog/trace/bootstrap/debugger/util/Redaction.java
-[2]: https://app.datadoghq.com/dynamic-instrumentation/setup
 [3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [5]: /tracing/live_debugger/
-[6]: /dynamic_instrumentation/
 [7]: /tracing/live_debugger/#mode-based-redaction

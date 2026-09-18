@@ -28,7 +28,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
-Start Bits Live Debugger from the Live Debugger page. To use Live Debugger with a separate coding assistant, follow the [MCP setup steps][8]. That path does not require starting a Bits Live Debugger session.
+Bits Live Debugger is the built-in agent on the Live Debugger page.
 
 <div class="alert alert-info">
 Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
@@ -40,7 +40,7 @@ Before using Bits Live Debugger:
 
 - [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger in the target environment.
-- The service and environment must use [Targeted redaction mode][9]. Bits Live Debugger is not available in Strict Mode.
+- Agentic investigations require [Targeted redaction mode][8]. Manual Live Debugger sessions also work in Strict Mode.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
 
@@ -92,5 +92,4 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
 [7]: /tracing/live_debugger/#enable-live-debugger
-[8]: /tracing/live_debugger/#use-live-debugger-through-mcp
-[9]: /tracing/live_debugger/#mode-based-redaction
+[8]: /tracing/live_debugger/#mode-based-redaction

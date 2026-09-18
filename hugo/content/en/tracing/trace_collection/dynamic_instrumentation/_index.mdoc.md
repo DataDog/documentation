@@ -47,19 +47,9 @@ further_reading:
 
 ## Overview
 
-Dynamic Instrumentation lets you add metrics, spans, and span tags to running applications, including third-party libraries, without changing application code. After the SDK and Agent are configured, adding instrumentation does not require restarting or redeploying the application.
+Dynamic Instrumentation lets you add metrics, spans, and span tags to running production systems without restarts or code changes, including in third-party libraries.
 
-### Choose Dynamic Instrumentation or Live Debugger
-
-Dynamic Instrumentation and [Live Debugger][23] are separate, complementary products that use the same [expression language][15]. Choose based on the data you need:
-
-| Your goal | Use |
-|---|---|
-| Inspect variable values or capture temporary logs while investigating an issue | Live Debugger logpoints and snapshots |
-| Count executions or track an in-code value on a dashboard or monitor | Dynamic Instrumentation metrics |
-| Add missing spans or enrich existing spans with tags | Dynamic Instrumentation spans and span tags |
-
-You can use both in the same investigation. For example, inspect an unexpected value with Live Debugger, then add a Dynamic Instrumentation metric to track how often the relevant code path executes.
+Dynamic Instrumentation complements [Live Debugger][23], which captures logs and variable snapshots using the same [expression language][15].
 
 To use autocomplete and search, opt in to the [preview][17].
 
@@ -128,8 +118,6 @@ The following permissions are required to use Dynamic Instrumentation:
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
 ## Enable Dynamic Instrumentation {% #enable-dynamic-instrumentation %}
-
-Complete the [requirements](#requirements) for the service you want to instrument. Installing or upgrading an SDK, or changing application startup environment variables, can require a restart or redeployment.
 
 {% if includes($prog_lang, ["java", "python", "dot_net"]) %}
 

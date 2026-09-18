@@ -1,6 +1,6 @@
 ---
 title: Live Debugger
-description: Inspect running applications with temporary logpoints that collect logs and variable snapshots without pausing execution.
+description: Inspect running applications with temporary logpoints that collect logs and variable snapshots without pausing execution or requiring a redeployment.
 content_filters:
   - trait_id: prog_lang
     option_group_id: live_debugger_language_options
@@ -47,16 +47,16 @@ Live Debugger lets you inspect application behavior in real time, directly in ru
 
 Instead of adding temporary debug logs or reproducing issues locally, you can dynamically capture application state at specific points in the code. This includes variable values, method parameters, and execution context. Live Debugger is well suited for diagnosing issues in production or other long-running environments.
 
-Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Use conditions and variable-capture settings to limit the data collected during an investigation.
+Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application.
 
-Live Debugger and [Dynamic Instrumentation][38] are separate, complementary products. Use Live Debugger when you need logs or variable snapshots to investigate a specific issue. Use Dynamic Instrumentation when you need metrics, spans, or span tags for monitoring. Both use the same [expression language][15].
+Live Debugger complements [Dynamic Instrumentation][38], which adds metrics, spans, and span tags using the same [expression language][15].
 
 ## Key capabilities
 
 Live Debugger provides:
 
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
-- **Non-breaking data capture** that collects debugging information without pausing applications.
+- **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
 - **Dynamic logpoint placement** at supported code locations in your application or third-party libraries.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
@@ -160,10 +160,6 @@ The following permissions are required to use Live Debugger:
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
 
 ## Setup
-
-First meet the SDK, Agent, and configuration [requirements](#requirements). Installing or upgrading an SDK, or changing application startup environment variables, can require a restart or redeployment. After setup, adding logpoints does not require changing or redeploying application code.
-
-You can investigate through the Datadog UI, [Bits Live Debugger](#bits-live-debugger), or an [MCP-connected assistant](#use-live-debugger-through-mcp). Bits and MCP are interfaces to Live Debugger, not prerequisites for manual debugging.
 
 <!-- Go: Agent configuration (prerequisite) -->
 {% if equals($prog_lang, "go") %}
@@ -333,20 +329,7 @@ After you enable Live Debugger, you can check and update the enablement status o
 
 ### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
 
-The `live-debugger` MCP toolset lets a connected coding assistant discover deployments, enable an eligible service, and create logpoints. The toolset is in Preview; contact [Datadog support][40] to request access.
-
-1. [Connect your assistant to the Datadog MCP Server][39]. Request `core,live-debugger` in the `toolsets` parameter. The `core` toolset provides tools for reading the captured logs. Selecting an MCP toolset does not enable Live Debugger on an application.
-2. Run `discover_datadog_logpoint` for the exact Datadog service name. Choose the environment you want to investigate and check its access, redaction, and readiness information.
-3. If that environment reports `implicitly_enableable: true`, call `enable_live_debugger` with its `service_name` and `environment`. The call can take up to three minutes. It does not override an explicit decision to disable Live Debugger.
-4. Run `discover_datadog_logpoint` again. An accepted enablement request does not mean logpoints are ready. Wait for the target environment to allow logpoint creation, and check the supported features before continuing.
-5. Create a session with `create_debugger_session`, then pass its `session_id` when calling `create_datadog_logpoint`. Check the creation response's warnings for unsupported options.
-6. Call `search_datadog_logs` for the logpoint's events. Include `event_id` and `debugger.snapshot.evaluationErrors` in `extra_fields`. Use `get_datadog_debugger_snapshot` with an event's `event_id` to inspect its variables. When the investigation is complete, call `disable_datadog_logpoints` for the session.
-
-For example, ask your assistant:
-
-> Investigate why the checkout service returns an empty cart in staging. Check whether Live Debugger is available before adding logpoints.
-
-If discovery or enablement reports a blocker, follow its guidance before retrying. Check the SDK version, environment tags, permissions, and redaction mode. Remote Configuration must also be enabled and available to the Agent's API key. If the service was explicitly disabled, an administrator must re-enable it from the [Live Debugger Settings page][26].
+Use Live Debugger with your own coding assistant through the `live-debugger` toolset (Preview). See the [Datadog MCP Server documentation][39] for setup and access requirements.
 
 ### Create a logs index {% #create-a-logs-index %}
 
@@ -373,7 +356,6 @@ A Debug Session lets you inspect running code using auto-expiring logpoints. To 
 1. Start a Debug Session from one of the following locations:
    - (Preview) On the [Live Debugger page][13], submit a question or investigation prompt to [Bits Live Debugger][29].
    - On the [Live Debugger page][13], click {% ui %}Create Debug Session{% /ui %} or {% ui %}New Session{% /ui %}.
-   - Use an [MCP-connected assistant](#use-live-debugger-through-mcp).
    - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {% ui %}Start Debug Session{% /ui %}.
 2. Select a code location to add the first logpoint and begin capturing log events.
 3. Add, remove, or modify logpoints as needed during the session.
@@ -403,8 +385,6 @@ After a logpoint is created, modified, or re-activated, it can take a couple of 
 - The condition matches that traffic, and the log events have no `debugger.snapshot.evaluationErrors`.
 - The [logs index](#create-a-logs-index) retains `source:dd_debugger` events.
 - The values you need are not redacted or outside the capture limits.
-
-The steps above describe the UI. The MCP toolset does not provide a logpoint-edit tool; use the UI to modify an existing logpoint.
 
 ### Protecting sensitive data
 
@@ -475,5 +455,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [36]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [37]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
 [38]: /dynamic_instrumentation/
-[39]: /mcp_server/setup/
-[40]: /help/
+[39]: /mcp_server/
