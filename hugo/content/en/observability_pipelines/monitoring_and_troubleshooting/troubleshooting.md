@@ -153,7 +153,9 @@ If you see the error `Too many files` and the Worker processes repeatedly restar
 
 ### Source send interrupted mid-flight
 
-If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. An error is logged when a source shuts down or restarts while events are in transit.
+If you see `Source send interrupted mid-flight; pipeline may be overloaded or shutting down` error logs, an issue interrupted the send operation before the Worker sent all events in the batch downstream. The Worker drops any remaining events in that batch and increments the `component_discarded_events_total` metric. Possible causes for the interruption can include backpressure, Worker shutdown, or Worker restarts.
+
+To investigate whether the interruption was due to a Worker restart or shutdown, try correlating the timestamp of the error with Worker lifecycle logs, such as `Vector has stopped`, `Shutting down...`, or with pod or container restart events around the same time.
 
 To investigate whether the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
 
