@@ -294,34 +294,31 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 Message placeholders insert conversation history or tool interactions into a saved prompt at runtime. A text variable replaces text inside a message; a message placeholder inserts a list of complete messages.
 
-The prompt version stores the placeholder's name and position, not the runtime list. Change its position in another version to compare message arrangements in experiments without hardcoding those arrangements in your application.
+The prompt version stores the placeholder's name and position, not the runtime list. This lets you version the conversation structure without hardcoding it in your application.
 
-Use a compatible SDK release before deploying a prompt that contains message placeholders. If access is disabled, saved templates remain readable and compatible SDKs can still format deployed prompts.
+Use an SDK release that supports message placeholders.
 
 ### Define the placeholder
 
 In the Prompt Editor, select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name such as `history`, and use the arrows to position it between messages. Use a different name from any text variable in the same prompt.
 
-For SDK or API authoring, add the placeholder as a complete chat-template item. This example places the conversation history between the system instructions and the new question:
+Alternatively, create the prompt with the Python SDK. This setup operation places the conversation history between the system instructions and the new question:
 
-```json
-[
-  {
-    "role": "system",
-    "content": "You are a concise assistant for {{plan}} customers."
-  },
-  {
-    "type": "placeholder",
-    "name": "history"
-  },
-  {
-    "role": "user",
-    "content": "{{question}}"
-  }
-]
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.create_prompt(
+    "support-assistant",
+    [
+        {"role": "system", "content": "You are a concise assistant for {{plan}} customers."},
+        {"type": "placeholder", "name": "history"},
+        {"role": "user", "content": "{{question}}"},
+    ],
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
 ```
 
-Save this template as `support-assistant`. The name `history` identifies the value the application supplies; it is not a message role.
+For setup requirements and environment IDs, see [Use the Python SDK](#use-the-python-sdk). The name `history` identifies the value the application supplies; it is not a message role.
 
 ### Supply runtime values
 
@@ -397,100 +394,15 @@ The result contains four messages, with no placeholder item:
 
 Pass the formatted messages to your model provider. The SDK does not replace text variables inside the inserted history.
 
-### Include tool interactions
+Use the same [prompt tracking](#track-prompt-usage) workflow as for other managed prompts. Prompt metadata preserves the placeholder definition rather than its runtime values; expanded messages follow the existing input-capture and privacy settings.
 
-A placeholder can also insert assistant tool calls and tool responses. For example, an OpenAI-style `history` value can contain:
+### Supported values
 
-```json
-[
-  {
-    "role": "assistant",
-    "tool_calls": [
-      {
-        "id": "call_1",
-        "type": "function",
-        "function": {"name": "get_report_status", "arguments": "{\"report_id\":\"weekly\"}"}
-      }
-    ]
-  },
-  {"role": "tool", "tool_call_id": "call_1", "content": "The weekly report is ready."}
-]
-```
-
-Use the message format expected by your provider, including matching tool-call IDs. The SDK preserves tool fields; it does not execute the tools or validate their provider-specific arguments.
-
-### Track placeholder usage
-
-The tracked prompt contains the placeholder definition, not the expanded runtime messages. Placeholder values are excluded from `prompt.variables`. Expanded messages follow the existing Agent Observability input-capture and privacy settings. When automatic prompt association is unavailable, annotate the prompt using the same variables passed to the formatter. The Python and JavaScript examples below assume an initialized model client and enabled automatic instrumentation:
-
-{{< tabs >}}
-{{% tab "Python" %}}
-```python
-with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
-    response = client.chat.completions.create(model="gpt-4o", messages=messages)
-```
-{{% /tab %}}
-
-{{% tab "Go" %}}
-```go
-span, ctx := llmobs.StartLLMSpan(ctx, "support-request")
-defer span.Finish()
-span.Annotate(llmobs.WithAnnotatedPrompt(prompt.Annotation(variables)))
-// Make the model call with ctx before this function returns.
-```
-{{% /tab %}}
-
-{{% tab "JavaScript" %}}
-```javascript
-const response = await tracer.llmobs.annotationContext(
-  { prompt: prompt.toAnnotation(variables) },
-  () => client.chat.completions.create({ model: 'gpt-4o', messages })
-)
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-### Test in the Playground
-
-1. Open the prompt in the Playground.
-2. Under {{< ui >}}Message placeholder test values{{< /ui >}}, enter a JSON array for `history`. Select {{< ui >}}Insert Example{{< /ui >}} for a starting value.
-3. Check {{< ui >}}Rendered messages{{< /ui >}} to confirm the order and content of the expanded messages.
-4. Select a model and click {{< ui >}}Run{{< /ui >}}.
-
-Each distinct placeholder has one test input, even if it appears multiple times in the template. Test values are not saved with the prompt. Running the prompt sends the expanded messages to the model; those messages follow your Agent Observability input-capture and privacy settings.
-
-### Compare versions in experiments
-
-Use the same dataset to compare prompt versions with different instructions or placeholder positions. Each dataset row supplies its own conversation or tool history.
-
-1. Create a [dataset][12] with `plan`, `question`, and `history` keys in each record's Input. For API-created records, these keys belong inside `input_data`:
-
-   ```json
-   {
-     "plan": "enterprise",
-     "question": "Can I export the report?",
-     "history": [
-       {"role": "user", "content": "Where are reports located?"},
-       {"role": "assistant", "content": "Under Analytics."}
-     ]
-   }
-   ```
-
-2. Open the prompt in the Playground, click {{< ui >}}Add Dataset{{< /ui >}}, and select the dataset.
-3. Check the placeholder mapping. The name `history` maps automatically to `input.history`; no separate mapping is needed. The displayed messages preview the first selected row.
-4. Correct any placeholder validation errors, select a model, and run a preview before saving and running the experiment.
-
-If the first selected row has a missing or malformed value, the UI blocks the preview until you correct the row or select another dataset. During experiment execution, an invalid placeholder value fails the affected row without calling the model for that row.
-
-### Supported values and troubleshooting
-
-- Supply a list for every placeholder. An empty list (`[]`) inserts no messages. If the entire prompt expands to no messages, add a message before running it in the Playground or an experiment.
-- Each message needs a string `role` and either string `content` or a non-empty `tool_calls` or `tool_results` list. For tool messages, `content` may be omitted or `null`. Use roles supported by the model provider; the Playground also validates supported roles.
+- Supply a list for every placeholder. An empty list (`[]`) inserts no messages.
+- Messages can contain text, assistant tool calls, or tool responses. Use the message format and roles expected by your model provider, including matching tool-call IDs. The SDK does not execute tools or validate provider-specific arguments.
 - Repeated placeholders reuse the same value. Different placeholder names can receive different lists.
-- Do not use the same name for a text variable and a message placeholder.
+- Use different names for text variables and message placeholders.
 - Nested placeholders and image, audio, or other multimodal content blocks are not supported.
-- If formatting reports a missing value, pass the placeholder's exact name to the formatter. For experiments, check the identically named key under the dataset's Input.
-- If {{< ui >}}Add Message Placeholder{{< /ui >}} is unavailable, check that the feature is enabled for your organization.
 
 ## Advanced usage
 
@@ -542,4 +454,3 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 
 [10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
 [11]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[12]: /llm_observability/improve/datasets/
