@@ -1,6 +1,6 @@
 ---
-title: Setting Up Database Monitoring for Amazon RDS managed MySQL
-description: Install and configure Database Monitoring for MySQL managed on Amazon RDS.
+title: Setting Up Database Monitoring for Amazon RDS managed MariaDB
+description: Install and configure Database Monitoring for MariaDB managed on Amazon RDS.
 further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
@@ -10,75 +10,55 @@ further_reading:
   text: "Autodiscovery for RDS"
 ---
 
-Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
+Database Monitoring provides deep visibility into your MariaDB databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
-**Note**: If you use MariaDB, see [Setting Up MariaDB][13] instead.
-
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MariaDB database:
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
-1. [Configure database parameters](#configure-mysql-settings)
+1. [Configure database parameters](#configure-mariadb-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
 ## Before you begin
 
-Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+Supported MariaDB versions
+: 10.5, 10.6, 10.11, or 11.4 <br/><br/>
+Database Monitoring for MariaDB is supported with [known limitations][11].
 
 Supported Agent versions
-: 7.36.1+
+: 7.61.0+
 
 Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than 1% of query execution time on the database and less than 1% of CPU. <br/><br/>
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][1]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored, preferably through the instance endpoint. The Agent should not connect to the database through a proxy, load balancer, or connection pooler. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
-: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+: See [Sensitive information][2] for information about what data the Agent collects from your databases and how to keep it secure.
 
 ## Configure the AWS integration
 
 Enable {{< ui >}}Standard Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][10].
 
-## Configure MySQL settings
+## Configure MariaDB settings
 
 Configure the following in the [DB Parameter Group][3] and then **restart the server** for the settings to take effect:
 
-{{< tabs >}}
-{{% tab "MySQL ≥ 5.7" %}}
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
+| `performance_schema` | `1` | Required. Enables the [performance schema][12]. MariaDB does not enable this by default. |
+| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value, queries longer than `1024` characters aren't collected. |
 | `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
 | `performance_schema_max_sql_text_length` | `4096` | Must match `max_digest_length`. |
 
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-{{% tab "MySQL 5.6" %}}
-| Parameter | Value | Description |
-| --- | --- | --- |
-| `performance_schema` | `1` | Required. Enables the [Performance Schema][1]. |
-| `max_digest_length` | `4096` | Required for collection of larger queries. Increases the size of SQL digest text in `events_statements_*` tables. If left at the default value then queries longer than `1024` characters will not be collected. |
-| `performance_schema_max_digest_length` | `4096` | Must match `max_digest_length`. |
-
-
-[1]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
-{{% /tab %}}
-{{< /tabs >}}
-
 ## Grant the Agent access
 
-The Datadog Agent requires read-only access to the database in order to collect statistics and queries.
+The Datadog Agent requires read-only access to the database to collect statistics and queries.
 
-The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MySQL documentation][4] for more info.
-
-{{< tabs >}}
-{{% tab "MySQL ≥ 5.7" %}}
+The following instructions grant the Agent permission to login from any host using `datadog@'%'`. You can restrict the `datadog` user to be allowed to login only from localhost by using `datadog@'localhost'`. See the [MariaDB documentation][4] for more info.
 
 Create the `datadog` user and grant basic permissions:
 
@@ -90,20 +70,7 @@ GRANT PROCESS ON *.* TO datadog@'%';
 GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
-{{% /tab %}}
-{{% tab "MySQL 5.6" %}}
-
-Create the `datadog` user and grant basic permissions:
-
-```sql
-CREATE USER datadog@'%' IDENTIFIED BY '<UNIQUEPASSWORD>';
-GRANT REPLICATION CLIENT ON *.* TO datadog@'%' WITH MAX_USER_CONNECTIONS 5;
-GRANT PROCESS ON *.* TO datadog@'%';
-GRANT SELECT ON performance_schema.* TO datadog@'%';
-```
-
-{{% /tab %}}
-{{< /tabs >}}
+Blocking-query collection uses `information_schema.INNODB_LOCK_WAITS` and `INNODB_TRX`, together with `performance_schema`, so the `PROCESS` and `SELECT ON performance_schema.*` grants above are sufficient; no additional grant is required. Blocking-query collection is disabled by default. Enable it with `query_activity.collect_blocking_queries: true` in your instance configuration.
 
 Create the following schema:
 
@@ -149,8 +116,6 @@ To collect index metrics, grant the `datadog` user an additional privilege:
 GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
 ```
 
-Starting from Agent v7.65, the Datadog Agent can collect schema information from MySQL databases. See the [Collecting schemas][12] section below for more info on how to grant the Agent permissions for this collection.
-
 ### Runtime setup consumers
 With RDS, performance schema consumers can't be enabled permanently in a configuration. Create the following procedure to give the Agent the ability to enable `performance_schema.events_*` consumers at runtime.
 
@@ -169,6 +134,28 @@ GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog
 ### Securely store your password
 {{% dbm-secret %}}
 
+## Collecting schemas
+
+Starting with Agent 7.65, the Datadog Agent can collect schema information from MariaDB databases. Enable it with `collect_schemas.enabled: true` in your instance configuration (use `schemas_collection` instead on Agent 7.68 and earlier). Schema collection is disabled by default.
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_schemas:
+      enabled: true
+```
+
+On MariaDB 10.5 and later (like MySQL), `INFORMATION_SCHEMA` only exposes a table to a user that holds a privilege on it, so without a grant the `datadog` user sees no tables. Grant the `REFERENCES` privilege to make table metadata visible without giving the Agent the ability to read table data:
+
+```sql
+GRANT REFERENCES ON *.* TO datadog@'%';
+```
+
+`REFERENCES` is also required to collect foreign-key `delete_rule` and `update_rule` values from `INFORMATION_SCHEMA.REFERENTIAL_CONSTRAINTS`; the table-level `SELECT` privilege does not expose that view.
+
+See [Exploring Database Schemas][13] for the available `collect_schemas` tuning options.
+
 ## Install and configure the Agent
 
 To monitor RDS hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance endpoint remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][5].
@@ -178,9 +165,9 @@ To monitor RDS hosts, install the Datadog Agent in your infrastructure and confi
 
 To configure this check for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an RDS database:
 
-Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MySQL metrics. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
+Edit the `mysql.d/conf.yaml` file, in the `conf.d/` folder at the root of your [Agent's configuration directory][1] to start collecting your MariaDB metrics. See the [sample mysql.d/conf.yaml][2] for all available configuration options, including those for custom metrics.
 
-Add this configuration block to your `mysql.d/conf.yaml` to collect MySQL metrics:
+Add this configuration block to your `mysql.d/conf.yaml` to collect MariaDB metrics:
 
 ```yaml
 init_config:
@@ -199,7 +186,7 @@ instances:
 
 If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
 
-**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field.
+**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field. IAM database authentication requires Agent 7.67.0 or later, and AWS doesn't support IAM database authentication on all RDS MariaDB versions. See the [IAM database authentication feature matrix][14] to confirm support for your RDS MariaDB version and region.
 
 ```yaml
 init_config:
@@ -217,7 +204,7 @@ instances:
 
 For information on configuring IAM authentication on your RDS instance, see [Connecting with Managed Authentication][3].
 
-[Restart the Agent][4] to start sending MySQL metrics to Datadog.
+[Restart the Agent][4] to start sending MariaDB metrics to Datadog.
 
 
 [1]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
@@ -233,7 +220,7 @@ To configure the Database Monitoring Agent running in a Docker container such as
 
 ### Command line
 
-Get up and running quickly by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
+Get up and running by executing the following command to run the agent from your command line. Replace the values to match your account and environment:
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -456,12 +443,14 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-[4]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
+[4]: https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/migrating-to-mariadb/migrating-to-mariadb-from-sql-server/mariadb-authorization-and-permissions-for-sql-server-users#permissions
 [5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
 [8]: /integrations/amazon_rds
-[9]: /database_monitoring/troubleshooting/?tab=mysql
+[9]: /database_monitoring/setup_mariadb/troubleshooting/
 [10]: https://app.datadoghq.com/integrations/amazon-web-services
-[12]: /database_monitoring/setup_mysql/rds?tab=mysql57#collecting-schemas
-[13]: /database_monitoring/setup_mariadb/
+[11]: /database_monitoring/setup_mariadb/troubleshooting/#mariadb-known-limitations
+[12]: https://mariadb.com/kb/en/performance-schema-overview/
+[13]: /database_monitoring/schema_explorer/
+[14]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html
