@@ -291,118 +291,55 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 <div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
 
-Keep shared instructions in one prompt and reuse them in others. For example, a support assistant and a billing assistant can include the same response policy without maintaining separate copies.
+Reuse shared instructions across prompts without copying them. For example, a support assistant and a billing assistant can include the same response policy.
 
-Each include uses an **exact version**. Updating the shared policy does not change prompts that already include it. You choose when each assistant adopts the update.
+Include **text** within a message or **chat messages** as a group. Each reference uses an exact version, so updating the source does not change prompts that already include it.
 
-### Create and reuse a shared policy
+### Include a prompt
 
-This example creates a shared policy and includes it in a support assistant.
+1. Save a prompt named `response-policy` with one System message: `Answer concisely. If you do not know the answer, say so.`
+2. In another prompt's editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
+3. Add a User message containing `{{question}}` after the include. Remove any unused empty messages.
+4. Enter a sample question, select a model, and click {{< ui >}}Run{{< /ui >}}. Save the prompt when you are satisfied.
 
-1. Create a prompt named `response-policy` with one System message:
-
-   ```text
-   Answer concisely. If you do not know the answer, say so.
-   ```
-
-   Save it as version 1.
-2. Create another prompt named `support-assistant`. In its editor, select {{< ui >}}Include Prompt{{< /ui >}}.
-3. Select `response-policy`, version 1, review the preview, and click {{< ui >}}Add prompt{{< /ui >}}. The {{< ui >}}Included Prompt{{< /ui >}} row represents the shared policy.
-4. Add a User message containing `{{question}}` after the include. Use the include row's up and down arrows to adjust its position if needed.
-5. Enter a sample question, select a model, and click {{< ui >}}Run{{< /ui >}} to test the result. Save the prompt when you are satisfied.
-
-The model receives the policy's System message followed by your User message. If your new prompt already has an empty System message, remove it unless you want to add separate instructions there.
-
-For sources with several messages, the default is to include all of them in their original order. Select {{< ui >}}Customize messages{{< /ui >}} to choose a subset. Under {{< ui >}}Included order{{< /ui >}}, use {{< ui >}}Move up{{< /ui >}}, {{< ui >}}Move down{{< /ui >}}, {{< ui >}}Duplicate{{< /ui >}}, and {{< ui >}}Remove{{< /ui >}} to arrange the messages. Select {{< ui >}}Include entire prompt{{< /ui >}} to return to the complete source. Editing an include changes how you use the source, not the source itself.
-
-### Review what the model receives
-
-Open a saved version and compare its two views:
-
-- {{< ui >}}Prompt Template{{< /ui >}} shows your messages and references to included prompts.
-- {{< ui >}}Resolved Prompt{{< /ui >}} shows the text and messages after those references have been expanded. Variables such as `{{question}}` still receive their values at runtime.
-
-Expand an {{< ui >}}Included Prompt{{< /ui >}} row to read its messages. Its external-link button opens the exact source version in a new tab.
-
-Retrieve and format `support-assistant` using the existing [Prompt Management workflow](#retrieve-format-and-use-a-prompt). Your application retrieves the assembled prompt; it does not need to fetch and combine the policy separately.
-
-### Adopt an updated policy
-
-Suppose you save version 2 of `response-policy`. The support assistant still uses version 1 until you update it:
-
-1. Open version 1 of `response-policy`. In {{< ui >}}Used By{{< /ui >}}, find the prompt versions that reference it, including references through another prompt.
-2. Open `support-assistant` for editing. Replace the version 1 include with an include of version 2, keeping it before the User message.
-3. Test the result and save a new version of `support-assistant`.
-4. Deploy that support-assistant version when you are ready. Saving a version alone does not change the version served by an environment.
-
-Repeat for other assistants when they are ready to adopt the policy. Nested includes also use exact versions; no reference follows the latest version automatically.
-
-### Create a composed prompt through the API
-
-Use the permissions listed in [Prerequisites](#prerequisites) and send `Content-Type: application/vnd.api+json`. The [Agent Observability API reference][8] describes authentication and request schemas.
-
-After creating `response-policy` version 1 as above, send this request to `POST /api/v2/llm-obs/v1/prompts` to create the same support assistant:
-
-```json
-{
-  "data": {
-    "type": "prompt-templates",
-    "attributes": {
-      "prompt_id": "support-assistant",
-      "template": {
-        "messages": [
-          { "include": { "prompt_id": "response-policy", "version": 1 } },
-          { "role": "user", "content": "{{question}}" }
-        ]
-      }
-    }
-  }
-}
-```
-
-For chat composition, put the message list under `template.messages`. Omit `items` to include every source message. To include a subset, add `items` with zero-based message indexes. For example, `"items": [0, 1]` includes the first two messages. Index order determines the output order, and repeated indexes repeat messages. An empty list or an index outside the source's message list is invalid. Check that the resulting role sequence suits your model provider.
-
-To create another version of the assistant, send the updated `template` to `POST /api/v2/llm-obs/v1/prompts/support-assistant/versions`, using `"type": "prompt-template-versions"`.
-
-Version-detail responses return both `authoring_template`, which preserves the references you saved, and `template`, which contains the expanded result. Use `authoring_template` as the starting point for edits that should retain the references. Ordinary prompts omit that field.
-
-#### Include text inside a message
-
-Use a text include when you want to reuse part of a message rather than complete chat messages. The source must be a **text prompt**, not a chat prompt with a single message.
-
-For example, save a text prompt named `response-style` with this template:
+Your prompt now contains:
 
 ```text
-Address {{customer_name}} by name.
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
 ```
 
-Include its version 1 in another template:
+The included policy supplies the instructions; the `question` variable supplies a value at runtime. Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual—there is no need to fetch the policy separately.
+
+<!-- Screenshot before publication: the Included Prompt row with response-policy version 1, followed by the User message {{question}}. Use publication-safe sample data. -->
+
+For a source with several messages, all messages are included by default. Select {{< ui >}}Customize messages{{< /ui >}} to choose, reorder, or repeat messages without changing the source.
+
+### Reuse text within a message
+
+To reuse a phrase rather than complete messages, select a **text prompt** through {{< ui >}}Include Prompt{{< /ui >}} and click {{< ui >}}Insert text{{< /ui >}}. This inserts a reference into the last editable message.
+
+For example, if `response-style` version 1 contains `Answer concisely.`, write:
 
 ```text
-{{>response-style version=1}}
-
-Answer {{question}}.
+{{>response-style version=1}} Answer {{question}}.
 ```
 
-The result is:
+The resolved template is:
 
 ```text
-Address {{customer_name}} by name.
-
-Answer {{question}}.
+Answer concisely. Answer {{question}}.
 ```
 
-Supply `customer_name` and `question` when formatting the prompt. Repeated uses of the same variable name share one value. Composition adds no spaces or line breaks; include any separators you need around the reference.
+Keep any spaces or line breaks you need around the reference. Always specify a version; `{{>response-style}}` alone is literal text, not an include.
 
-In the editor, select the text source through {{< ui >}}Include Prompt{{< /ui >}} and click {{< ui >}}Insert text{{< /ui >}}. This inserts the reference in the last editable message. The inline reference remains visible, and hovering over it exposes a link to the source version.
+### Review and update includes
 
-Always specify a positive numeric version: `{{>response-style version=1}}`. Unversioned text such as `{{>response-style}}` remains literal text, not an include.
+On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the references you authored. {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded messages, before runtime variables are filled in.
 
-### Troubleshooting
+When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find prompts that reference it. Open a consuming prompt, replace the include with the new source version, then test, save, and deploy the updated prompt. Existing versions keep their original content, even if the source is later deleted.
 
-- **The composition controls are unavailable:** Contact Datadog Support or your Customer Success Manager to request Preview access.
-- **A source prompt was deleted:** Existing saved prompts keep their assembled content and remain usable. New includes cannot reference the deleted source. Recreating a prompt with the same name does not change existing saved prompts.
-- **Preview access was removed:** Existing saved versions remain available for execution. Do not create new templates with includes until access is restored: text references remain literal without access, and chat includes are rejected.
+For API authoring, see the [Agent Observability API reference][8] for include syntax, message selection, and request examples.
 
 
 ## Advanced usage
