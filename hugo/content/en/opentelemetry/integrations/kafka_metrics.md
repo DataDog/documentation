@@ -11,7 +11,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OpenTelemetry Kafka metrics in the Kafka dashboard" style="width:100%;" >}}
 
-The [Kafka metrics receiver][1] and [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][7], **Kafka, Zookeeper, and Kafka Consumer Overview**.
+The [Kafka metrics receiver][1] and [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][6], **Kafka, Zookeeper, and Kafka Consumer Overview**.
 
 ## Kafka metrics receiver
 
@@ -61,6 +61,8 @@ receivers:
 ## JMX Scraper
 
 The JMX Scraper runs as a standalone Java application and sends metrics to the Collector's OTLP receiver.
+
+Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP receiver in its metrics pipeline. For configuration details, see [Set Up the OpenTelemetry Collector][5].
 
 ### Configure Kafka brokers
 
@@ -180,7 +182,7 @@ processors:
         action: insert
 ```
 
-To add this attribute only to Kafka logs, use [include/exclude filtering][8] in the attributes processor.
+To add this attribute only to Kafka logs, use [include/exclude filtering][7] in the attributes processor.
 
 ## Data collected
 
@@ -204,11 +206,7 @@ To add this attribute only to Kafka logs, use [include/exclude filtering][8] in 
 
 **Note:** Datadog replaces hyphens (`-`) with underscores (`_`) in metric names. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
 
-For the complete mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][9].
-
-## Full example configuration
-
-For a complete configuration with the Datadog exporter, see [`kafka.yaml`][5].
+For the complete mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][8].
 
 ## Example logging output
 
@@ -227,16 +225,11 @@ Timestamp: 2024-01-22 15:51:24.218 +0000 UTC
 Value: 25
 ```
 
-## Example application
-
-See the [Kafka metrics example application][6] for a producer, consumer, broker, and ZooKeeper setup.
-
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
 [3]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases/tag/v1.60.0
 [4]: /opentelemetry/collector_exporter/log_collection
-[5]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/kafka.yaml
-[6]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/kafka-metrics
-[7]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
-[8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[9]: /opentelemetry/guide/metrics_mapping/#kafka-metrics
+[5]: /opentelemetry/setup/collector_exporter/
+[6]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
+[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
+[8]: /opentelemetry/guide/metrics_mapping/#kafka-metrics
