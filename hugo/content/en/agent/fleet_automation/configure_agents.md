@@ -63,7 +63,7 @@ The example below shows the `logs_enabled` field changed from `false` to `true`,
 
 Fleet Automation provides an API to apply configuration updates programmatically. Deploy changes to any group of hosts with filter queries, supplying either full configuration files or targeted patches. Push configuration on demand or integrate it into your existing automation workflows. For full details, see the [Fleet Automation API][4].
 
-**Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API.
+**Note**: The API does not support all Agent configuration fields. Settings related to Agent connection or secrets (`site`, `api_key`, and other authentication parameters) cannot be managed through the API. For the fields you can manage, see [Supported datadog.yaml Configuration Fields][11].
 
 ## Configuration precedence
 
@@ -102,3 +102,4 @@ For instructions on using mirrored or air-gapped repositories, see:
 [8]: /agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /agent/guide/setup_remote_config
 [10]: /agent/fleet_automation/upgrade_agents/
+[11]: /agent/fleet_automation/supported_datadog_yaml_fields/
