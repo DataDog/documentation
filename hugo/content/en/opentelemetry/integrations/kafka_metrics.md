@@ -11,7 +11,7 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OpenTelemetry Kafka metrics in the Kafka dashboard" style="width:100%;" >}}
 
-The [Kafka metrics receiver][1] and [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][7], **Kafka, Zookeeper and Kafka Consumer Overview**.
+The [Kafka metrics receiver][1] and [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][7], **Kafka, Zookeeper, and Kafka Consumer Overview**.
 
 ## Kafka metrics receiver
 
