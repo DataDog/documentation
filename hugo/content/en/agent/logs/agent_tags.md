@@ -111,6 +111,20 @@ This example removes all `filename` and `dirname` tags except the `filename:audi
 
 **Note**: The Agent sends `source`, `service`, and `host` separately from the tag list. Filtering these tags does not remove their values from the log.
 
+### Rule precedence
+
+You can also define `tag_filters` for an individual log source in its integration configuration. When both per-source and global filters apply, the Agent evaluates each tag in the following order. The first matching rule determines whether the tag is kept or removed:
+
+| Order | Rule | Result |
+|-------|------|--------|
+| 1 | Per-source `include` | The tag is kept. |
+| 2 | Per-source `exclude` | The tag is removed. |
+| 3 | Global `include` | The tag is kept. |
+| 4 | Global `exclude` | The tag is removed. |
+| 5 | No matching rule | The tag is kept. |
+
+The position of a pattern within an `include` or `exclude` list does not change its precedence. For example, a per-source `include` rule can preserve a tag that a global `exclude` rule would otherwise remove.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
