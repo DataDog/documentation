@@ -64,7 +64,7 @@ CI jobs failure analysis uses LLM models to compute the analysis for failed CI j
 
 For a full explanation, see the guide on [using CI jobs failure analysis][22].
 
-This feature is enabled by default. To use it, add your API token in the [Buildkite integration tile][19]. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+Log Analysis is enabled by default in Datadog. To receive Buildkite job logs for analysis, add your API token in the [Buildkite integration tile][19]. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 #### Store job logs
 

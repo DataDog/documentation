@@ -71,9 +71,9 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If log storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
+If Log Storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
 
-Log storage is supported for the following providers:
+Log Storage is supported for the following providers:
 
 - [AWS CodePipeline][8]
 - [Azure][9]
