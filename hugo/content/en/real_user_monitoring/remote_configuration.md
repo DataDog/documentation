@@ -19,7 +19,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 
 - Browser SDK version 7.13.0+
 - iOS SDK version 3.17.0+
-- Android SDK version 3.14.0+
+- Android SDK version 3.15.0+
 
 <div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
