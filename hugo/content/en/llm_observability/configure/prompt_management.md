@@ -124,7 +124,7 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
-Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
+To reuse an exact version of another managed prompt, request access to the [prompt composition Preview](#reuse-prompts-with-composition).
 
 ### Select a version
 
@@ -286,6 +286,117 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 ### Use the API
 
 Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
+
+## Reuse prompts with composition
+
+<div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Reuse shared instructions or examples across managed prompts by including an exact version of another prompt. For example, include the same response policy in several customer-support prompts without copying its text into each template.
+
+Each include is pinned to a numeric version. Saving a composed prompt resolves its includes and stores the resulting text or messages. Publishing a new version of an included prompt does not change existing composed versions or their deployments.
+
+### Include a prompt in the editor
+
+1. Create or edit a prompt and select {{< ui >}}Include Prompt{{< /ui >}}.
+2. Select the source prompt and its version. Preview its content before including it.
+3. For a text prompt, insert the reference into a message. For a chat prompt, include all its messages or choose individual messages.
+4. To change a selected message's position or repeat it, use the message ordering and duplication controls. Selection alone does not determine message order.
+5. Review the resulting prompt, supply sample variable values, and test it in the Playground before saving a version.
+
+Text references remain inline as `{{>prompt-id version=N}}`, so their placement and surrounding whitespace remain visible. Hover over a reference to inspect its source link. Chat includes appear as expandable {{< ui >}}Included Prompt{{< /ui >}} rows. Use the separate source link to open the referenced version without leaving the editor, or edit the include to change its version or selected messages.
+
+### Include text through the API
+
+Use the permissions listed in [Prerequisites](#prerequisites). Send requests with `Content-Type: application/vnd.api+json`; see the [Agent Observability API reference][8] for authentication and request schemas.
+
+First, save a text prompt named `response-policy` whose version 1 contains:
+
+```text
+Be concise and address {{customer_name}} by name.
+```
+
+Create a parent prompt with `POST /api/v2/llm-obs/v1/prompts`:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-answer",
+      "template": "{{>response-policy version=1}}\n\nAnswer {{question}}."
+    }
+  }
+}
+```
+
+The saved, resolved template is:
+
+```text
+Be concise and address {{customer_name}} by name.
+
+Answer {{question}}.
+```
+
+Composition does not add separators. Include any spaces or line breaks you need around the reference. Variables from the included text remain runtime variables; supply `customer_name` and `question` when formatting the parent. A variable name shared by several includes uses the same runtime value.
+
+Only `{{>prompt-id version=N}}`, with a positive numeric version, is an inline include. Unversioned text such as `{{>response-policy}}` remains literal text. Inline includes must reference text prompts, not chat prompts.
+
+### Include chat messages through the API
+
+Use an authored `messages` object to combine chat includes with ordinary messages. For example, assume version 1 of `response-examples` contains these messages:
+
+```json
+[
+  { "role": "user", "content": "How do I reset my password?" },
+  { "role": "assistant", "content": "Select Reset password on the sign-in page." },
+  { "role": "user", "content": "Where can I find my invoices?" }
+]
+```
+
+Create a parent with this request:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-chat",
+      "template": {
+        "messages": [
+          { "role": "system", "content": "You are a support assistant." },
+          { "include": { "prompt_id": "response-examples", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+Omitting `items` includes every source message in its original order. To select, reorder, or repeat messages, add an ordered list of zero-based indexes:
+
+```json
+{ "include": { "prompt_id": "response-examples", "version": 1, "items": [2, 0, 0] } }
+```
+
+This inserts the invoice question, followed by the password question twice. Review the resulting role sequence for compatibility with your model provider. Indexes must refer to existing source messages; an empty selection is not supported. Structured includes always require a version.
+
+### Inspect and update a composed prompt
+
+On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the authored references, and {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded content. When references are available, {{< ui >}}Used By{{< /ui >}} identifies parent versions that include the selected version directly or through another prompt. Open a parent version to inspect or update its include; creating a child version does not update those references automatically.
+
+To adopt an updated policy, edit the parent to reference the new child version, save a parent version, test it, and deploy that parent version. Each nested include is also pinned to an exact version.
+
+API version-detail responses return the resolved content in `template` and the authored references in `authoring_template` for composed versions. Use the authored template when creating another composed version. Ordinary versions omit `authoring_template`.
+
+### Retrieve and handle unavailable sources
+
+Retrieve and format the parent using the existing Prompt Management workflow. Includes are resolved when saving, not by fetching each child from your application at runtime.
+
+Deleting a source prompt does not change the resolved content of existing parent versions. However, a new include cannot reference a deleted source. Recreating a prompt with the same name does not replace the original source identity in existing parents. Update the reference and save another parent version to use the recreated source.
+
+If Preview access is removed, existing compiled versions remain available for execution. Creating or editing composition requires access. Without access, inline reference syntax remains literal text and structured includes are unsupported. Contact Datadog Support or your Customer Success Manager if the composition controls are unavailable.
+
 
 ## Advanced usage
 
