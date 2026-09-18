@@ -53,7 +53,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 1. Select the project.
 1. Enter the name of the storage bucket you created earlier.
 1. Optionally, enter a path.
-    - **Note**: This path must be a static string. It does not support template syntax, such as `{{ tag_name }}`. To route logs to different object keys based on specific log fields, configure the {{< ui >}}Prefix{{< /ui >}} field when you [set up the destination for your pipeline](#set-up-the-destinations) instead.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{tag_name}}`. See the [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) section for more information.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][20] for more information.
 1. Click **Save**.
 
@@ -99,13 +99,13 @@ Enter a prefix that you want to apply to all key objects.
 
 ## Using template syntax for dynamic partitioning
 
-When you set up the Datadog Archives (Google Cloud Storage) destination, you can use [template syntax][7] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
+When you set up Google Cloud Storage destination, you can use [template syntax][7] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
 
-{{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/" style="width:60%;" >}}
+{{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
 However, you must manually create a Datadog [Log Archive][19] for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
 
-{{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/" style="width:60%;" >}}
+{{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
 
 ## Secret defaults
 
