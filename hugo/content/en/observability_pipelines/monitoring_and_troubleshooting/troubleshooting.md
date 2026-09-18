@@ -151,11 +151,11 @@ The curl command you use is based on the port you are using, as well as the path
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
-### Source send canceled error
+### Source send interrupted mid-flight
 
 If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. An error is logged when a source shuts down or restarts while events are in transit.
 
-To determine if the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
+To investigate whether the error is due to backpressure, use the [Observability Pipelines Overview][29] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
 
 1. Destination buffer utilization
     - A buffer near its maximum capacity is a sign of backpressure. Consider [choosing a disk buffer][26] or increasing the buffer size to help absorb traffic spikes and mitigate backpressure. See [buffer metrics][25] to monitor buffer utilization.
