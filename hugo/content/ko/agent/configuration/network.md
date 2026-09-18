@@ -93,10 +93,10 @@ Synthetics Worker > v0.1.6의 API 테스트 결과: `intake.synthetics.`{{< regi
 Synthetics Worker > v0.2.0의 브라우저 테스트 결과: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Synthetics Worker < v0.1.5의 API 테스트 결과: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
-
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -106,7 +106,6 @@ Synthetics Worker < v0.1.5의 API 테스트 결과: `api.`{{< region-param key="
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /ko/remote_configuration
 [102]: /ko/database_monitoring/
 [103]: /ko/infrastructure/end_user_device_monitoring/
 
@@ -347,3 +346,4 @@ Agent v7.27.0 이상은 메모리 한도에 도달했을 때 메트릭을 디스
 [31]: /ko/data_security/logs/#hipaa-enabled-customers
 [32]: /ko/logs/log_collection/#logging-endpoints
 [33]: /ko/network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /ko/remote_configuration
