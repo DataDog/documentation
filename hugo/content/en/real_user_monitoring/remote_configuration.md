@@ -21,7 +21,8 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.0+
 
-<div class="alert alert-info">If your network, proxy, or Content Security Policy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain.</div>
+<div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
+<br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
 
 ## How it works
 
@@ -49,37 +50,37 @@ To configure remote settings for an application:
    **Note**: Datadog saves the configuration as a draft, so its values do not override your existing SDK settings before you publish it.
 4. Add the remote configuration ID to your SDK initialization.
 
-{{< tabs >}}
-{{% tab "Browser" %}}
+   {{< tabs >}}
+   {{% tab "Browser" %}}
 
-Add a `remoteConfiguration` object to your existing `datadogRum.init()` call:
+   Add a `remoteConfiguration` object to your existing `datadogRum.init()` call:
 
-```javascript
-remoteConfiguration: {
-    id: '<REMOTE_CONFIGURATION_ID>',
-},
-```
+   ```javascript
+   remoteConfiguration: {
+       id: '<REMOTE_CONFIGURATION_ID>',
+   },
+   ```
 
-{{% /tab %}}
-{{% tab "iOS" %}}
+   {{% /tab %}}
+   {{% tab "iOS" %}}
 
-Add `remoteConfiguration` to your `Datadog.Configuration`:
+   Add `remoteConfiguration` to your `Datadog.Configuration`:
 
-```swift
-remoteConfiguration: .init(id: "<REMOTE_CONFIGURATION_ID>")
-```
+   ```swift
+   remoteConfiguration: .init(id: "<REMOTE_CONFIGURATION_ID>")
+   ```
 
-{{% /tab %}}
-{{% tab "Android" %}}
+   {{% /tab %}}
+   {{% tab "Android" %}}
 
-Call `setRemoteConfigurationId()` on your `Configuration.Builder`:
+   Call `setRemoteConfigurationId()` on your `Configuration.Builder`:
 
-```kotlin
-.setRemoteConfigurationId("<REMOTE_CONFIGURATION_ID>")
-```
+   ```kotlin
+   .setRemoteConfigurationId("<REMOTE_CONFIGURATION_ID>")
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
  
 5. Update the settings as described in the [Change SDK settings with remote configuration](#change-sdk-settings-with-remote-configuration) section.
 6. Publish the configuration to apply its enabled settings.
