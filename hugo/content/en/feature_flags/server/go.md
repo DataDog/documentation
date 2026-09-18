@@ -21,7 +21,9 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Go tracer (`dd-trace-go`).
+This page describes how to instrument your Go application with the Datadog Feature Flags SDK. The Go SDK integrates with [OpenFeature][1], an open standard for feature flag management. Configuration delivery is separate from telemetry delivery: the SDK receives flag updates through either agentless configuration delivery or Agent Remote Configuration in the Datadog Go tracer (`dd-trace-go`).
+
+Beginning with `dd-trace-go` 2.11.0, agentless applications can send both experiment exposure events and aggregated Event Platform Proxy (EVP) flag evaluation events without a Datadog Agent. The SDK uses a compatible local telemetry relay when available. Otherwise, it sends these events directly to Datadog using the application's `DD_API_KEY` and `DD_SITE`.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
