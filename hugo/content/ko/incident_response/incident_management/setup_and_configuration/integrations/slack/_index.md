@@ -125,6 +125,8 @@ Datadog은 새로 선언된 인시던트와 인시던트 상태, 심각도, 인�
 
 사용 가능한 전체 Slack 명령 목록을 언제든지 조회할 수 있습니다. Slack에서 `/datadog` 또는 `/dd`를 입력하여 명령 모달을 열고 Datadog 액션을 탐색 및 실행하거나 `/dd help`를 입력하여 해당 옵션을 대신 목록으로 조회하면 됩니다. 일반적인 인시던트 관리 액션을 위한 액션 트레이를 열려면 `/dd shortcuts`를 입력하세요.
 
+다음 명령어에서 `inc`을 `incident`의 축약 표현으로 사용할 수 있습니다.
+
 ### 전역 명령(어디서나 실행 가능) {#global-commands-run-anywhere}
 
 | 명령 | 설명 |
@@ -146,8 +148,6 @@ Datadog은 새로 선언된 인시던트와 인시던트 상태, 심각도, 인�
 | `/datadog incident private` | 인시던트를 프라이빗으로 설정합니다(프라이빗 인시던트가 활성화된 경우). |
 | `/datadog incident public` | 인시던트를 퍼블릭으로 설정합니다. |
 | `/datadog incident responders` | 인시던트 대응 팀을 관리합니다(대응자 추가 및 대응 역할 할당). |
-| `/datadog task` | 인시던트 작업을 생성합니다. |
-| `/datadog task list` | 기존 인시던트 작업을 나열합니다. |
 | `/datadog followup` | 인시던트에 대한 후속 조치를 생성합니다. |
 | `/datadog followup list` | 인시던트에 대한 기존 후속 조치를 조회하고 관리합니다. |
 | `/datadog incident summary` | 본인에게만 보이는 AI 생성 인시던트 요약을 가져옵니다. |
@@ -163,8 +163,6 @@ Datadog은 새로 선언된 인시던트와 인시던트 상태, 심각도, 인�
 | `/datadog incident private` | 인시던트를 프라이빗으로 설정합니다(프라이빗 인시던트가 활성화된 경우). |
 | `/datadog incident public` | 인시던트를 퍼블릭으로 설정합니다. |
 | `/datadog incident responders` | 인시던트 대응 팀을 관리합니다(대응자 추가 및 대응 역할 할당). |
-| `/datadog task` | 인시던트 작업을 생성합니다. |
-| `/datadog task list` | 기존 인시던트 작업을 나열합니다. |
 | `/datadog followup` | 인시던트에 대한 후속 조치를 생성합니다. |
 | `/datadog followup list` | 인시던트에 대한 기존 후속 조치를 조회하고 관리합니다. |
 {{< /site-region >}}

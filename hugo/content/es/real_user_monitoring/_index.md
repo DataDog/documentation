@@ -16,13 +16,13 @@ further_reading:
 - link: /real_user_monitoring/application_monitoring/browser/data_collected/
   tag: Documentación
   text: Datos de navegador de RUM recopilados
+- link: https://learn.datadoghq.com/courses/intro-to-rum
+  tag: Centro de aprendizaje
+  text: Introducción a Real User Monitoring (RUM)
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: Únase a una sesión interactiva para obtener información a través de Real User
     Monitoring (RUM)
-- link: https://learn.datadoghq.com/courses/intro-to-rum
-  tag: Centro de aprendizaje
-  text: Introducción a Real User Monitoring (RUM)
 - link: https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/
   tag: Blog
   text: Comprenda las sesiones de Session Replay más rápido con resúmenes de IA y
