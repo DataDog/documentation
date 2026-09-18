@@ -98,7 +98,7 @@ If [commit author email validation][104] is enabled, add `no-reply@dtdg.co` to t
          - `channels:manage`
          - `app_mentions:read`
          - (Optional) `chat:write.customize`
-      - On [{{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}][16], set the {{< ui >}}Enable Slack Code Channels{{< /ui >}} toggle on. Under {{< ui >}}Repositories{{< /ui >}}, you can elect to disable Slack code channel creation for certain repositories.
+      - On [{{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Slack{{< /ui >}}][16], toggle on {{< ui >}}Enable Slack Code Channels{{< /ui >}}. Under {{< ui >}}Repositories{{< /ui >}}, you can elect to disable Slack code channel creation for certain repositories.
          {{< img src="bits_ai/dev_agent/setup/slack_settings.png" alt="A Settings page with a Slack title displays various configuraitons, like Enable Slack Code Channels and Slack workspace" style="width:100%;" >}}
 
 3. (Optional) See the additional configuration options, below.
