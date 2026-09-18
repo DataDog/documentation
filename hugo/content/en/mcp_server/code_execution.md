@@ -18,13 +18,13 @@ further_reading:
 
 ## Overview
 
-The `code-exec` toolset lets your AI agent write and run JavaScript against Datadog APIs in a single MCP tool call, instead of one tool call per API request. The agent's generated code runs inside a Datadog-managed sandbox. Only the value the code returns is sent back to the agent. This keeps large API responses out of the model's context.
+The `code-exec` toolset in the Datadog MCP Server lets your AI agent write and run JavaScript against Datadog APIs in a single MCP tool call, instead of one tool call per API request. The agent's generated code runs inside a Datadog-managed sandbox. The only data sent back to the agent is the value the code returns. This keeps large API responses out of the model's context.
 
 Use code execution for investigations that span multiple Datadog products, or that need the agent to join, filter, or summarize data from several calls. An example is correlating error logs with APM latency for the same service and time window.
 
 ## Why use code execution
 
-Without code execution, an agent that wants to enrich the top error-generating services with APM latency data needs a separate tool call for each service. It also needs additional turns to combine the results. Each of those calls and turns consumes context window space.
+Without code execution, an agent instructed to enrich the top error-generating services with APM latency data needs a separate tool call for each service. It also needs additional turns to combine the results. Each of those calls and turns consumes context window space.
 
 With code execution, the agent expresses the same investigation as a single script:
 
@@ -45,12 +45,12 @@ Generated code is JavaScript based on the public [Datadog API Client for TypeScr
 
 ## What the sandbox can access
 
-Code executed by the `code-exec` toolset runs against Datadog APIs using your own user identity. An agent can only read data that you already have access to:
+Code executed by the `code-exec` toolset runs against Datadog APIs using your user identity. An agent can only read data that you have permission to access. Other access limitations include:
 
 - The sandbox is isolated. Scripts can't access your local machine, file system, arbitrary network destinations, or raw Datadog credentials.
 - The sandbox only exposes read-only Datadog API calls. An agent can't use `execute_code` to perform write actions, such as creating a monitor or updating a dashboard.
 - API calls made from a script apply your existing [role permissions][4]. If you don't have access to a dataset, the agent can't query it through `execute_code` either.
-- Raw API responses stay inside the sandbox while the script processes them. Only the value the script returns is sent to the agent. Review what a script returns if the underlying data is sensitive, such as customer data stored in logs.
+- Raw API responses stay inside the sandbox while the script processes them. The only data sent back to the agent is the value the code returns. Review what a script returns if the underlying data is sensitive, such as customer data stored in logs.
 
 ## Enable code execution
 
