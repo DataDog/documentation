@@ -221,7 +221,7 @@ In the Prompt Editor:
 
 1. Add one or more messages and assign each a role: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}}, or {{< ui >}}Assistant{{< /ui >}}.
 2. Use `{{variable_name}}` syntax in any message to add dynamic content.
-3. Optional: Select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name, and position the placeholder between messages. The editor shows the compatible SDK requirement before you save.
+3. Optional: If you have access to the [message placeholders Preview](#insert-messages-at-runtime), select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name, and position the placeholder between messages. The editor shows the compatible SDK requirement before you save.
 4. Optional: Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
 5. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
 
@@ -290,11 +290,13 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ## Insert messages at runtime
 
+<div class="alert alert-info"><strong>Preview:</strong> Message placeholders are available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
 Message placeholders insert conversation history or tool interactions into a saved prompt at runtime. A text variable replaces text inside a message; a message placeholder inserts a list of complete messages.
 
 The prompt version stores the placeholder's name and position, not the runtime list. Change its position in another version to compare message arrangements in experiments without hardcoding those arrangements in your application.
 
-Message placeholders must be enabled for your organization. Use a compatible SDK release before deploying a prompt that contains them. If access is disabled, saved templates remain readable and compatible SDKs can still format deployed prompts.
+Use a compatible SDK release before deploying a prompt that contains message placeholders. If access is disabled, saved templates remain readable and compatible SDKs can still format deployed prompts.
 
 ### Define the placeholder
 
