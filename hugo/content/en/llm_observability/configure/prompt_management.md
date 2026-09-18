@@ -289,43 +289,58 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ## Version prompt configuration
 
-Configuration authoring must be enabled for your organization to use the configuration editor or send `config` in
-create-prompt and create-version requests. When disabled, requests that explicitly include `config`, including `{}`,
-return HTTP `403`. Omitting `config` still stores `{}` for a new prompt or inherits the latest version's configuration
-for a new version. Disabling configuration authoring does not remove configuration from saved versions or their delivery
-to applications. When authoring is disabled, API responses omit empty configuration; non-empty saved configuration is
-still returned. When authoring is enabled, responses include `config`, including `{}`. Treat an absent `config` as `{}`.
+Store model settings, tool definitions, or other application settings alongside a prompt template. Each version saves
+the template and configuration together, so deploying or rolling back a version selects both.
 
-A prompt version contains its template and an optional customer-owned JSON configuration object. Keeping both values on
-the same immutable version prevents an environment from mixing settings from one version with a template from another.
-An environment selects, promotes, or rolls back the complete behavior bundle.
+Configuration is a JSON object whose fields you define. Datadog stores these settings; your application decides how to
+use them. Saving a model name or temperature does not automatically apply it to Playground runs or model calls.
 
-Use configuration for application settings such as a model name, temperature, tool definition, or structured-output
-schema. The value must be a top-level JSON object. Nested objects, arrays, numbers, strings, Booleans, and `null` values
-are supported, and unknown keys are preserved.
+**Availability:** Configuration authoring must be enabled for your organization. Use the UI or Prompt Management API
+for configuration reads and writes. Released Python, Go, and JavaScript SDKs do not support this field.
 
-Datadog stores and returns the declared configuration without interpolating it, validating provider-specific keys, or
-applying it to a model call. Your application chooses which values to apply. The effective configuration is the set of
-arguments that the application passes to the model provider, which can differ from the declared configuration. Do not
-store credentials, tokens, private keys, or other secrets in a prompt configuration.
+### Create a prompt with configuration
 
-### Language support
+1. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}+ New Prompt{{< /ui >}} and write the template.
+2. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
+3. Enter the prompt ID and add a JSON object in {{< ui >}}Configuration{{< /ui >}}. For example:
 
-Versioned prompt configuration is available through the Prompt Management API. Released SDK support is:
+   ```json
+   {
+     "model": "<MODEL_NAME>",
+     "temperature": 0.2
+   }
+   ```
 
-| SDK | Versioned prompt configuration |
-|-----|--------------------------------|
-| Python (`ddtrace`) | Not available in a released version |
-| Go (`dd-trace-go`) | Not available |
-| JavaScript (`dd-trace-js`) | Not available |
+4. Click {{< ui >}}Create prompt{{< /ui >}} to save the template and configuration as version 1.
 
-Use the API for configuration reads and writes. Continue to use the SDK support described elsewhere on this page for
-prompt templates and Prompt Tracking.
+Replace `<MODEL_NAME>` with a model supported by your application. The sample text in an empty configuration editor is
+a placeholder, not a saved default. Use {{< ui >}}Format JSON{{< /ui >}} to format the object. Invalid JSON or a top-level
+array, string, number, Boolean, or `null` prevents saving. Nested objects, arrays, and `null` values are supported.
 
-### Create a configured prompt
+Do not store credentials, tokens, or other secrets in configuration.
 
-In the {{< ui >}}Prompt Editor{{< /ui >}}, enter a JSON object in the {{< ui >}}Configuration{{< /ui >}} editor before
-saving the prompt. The following create-prompt request stores the template and configuration on version 1:
+### View and update configuration
+
+Open a prompt, select a version, and click the {{< ui >}}Configuration{{< /ui >}} tab beside
+{{< ui >}}Prompt Template{{< /ui >}}. Use {{< ui >}}Copy JSON{{< /ui >}} to copy its settings.
+
+To change the settings without changing the template:
+
+1. Click {{< ui >}}Update configuration{{< /ui >}}.
+2. Edit the JSON object. Replace it with `{}` to clear the configuration.
+3. Click {{< ui >}}Review changes{{< /ui >}} and inspect the template and configuration tabs.
+4. Click {{< ui >}}Save version{{< /ui >}}.
+
+Saving creates a version; it does not overwrite the selected version. To compare saved versions, use
+{{< ui >}}Compare{{< /ui >}} and select the {{< ui >}}Configuration{{< /ui >}} tab.
+
+### Create versions through the API
+
+Use the permissions listed in [Prerequisites](#prerequisites). Send requests to the API host for your
+[Datadog site][2] with `Content-Type: application/vnd.api+json`. See the [Agent Observability API reference][8]
+for authentication and complete request schemas.
+
+Create a prompt with `POST /api/v2/llm-obs/v1/prompts`:
 
 ```json
 {
@@ -340,44 +355,16 @@ saving the prompt. The following create-prompt request stores the template and c
         }
       ],
       "config": {
-        "model": "provider-model",
-        "temperature": 0,
-        "response_format": {
-          "type": "json_object"
-        }
+        "model": "<MODEL_NAME>",
+        "temperature": 0.2
       }
     }
   }
 }
 ```
 
-If `config` is omitted when version 1 is created, Datadog stores `{}`.
-
-### Retrieve and apply configuration
-
-Retrieve an exact version with `GET /api/v2/llm-obs/v1/prompts/document-extractor/versions/1`. The response returns the
-template and configuration in the same `data.attributes` object. Apply only the settings that your application supports:
-
-```python
-attributes = prompt_version_response["data"]["attributes"]
-messages = format_prompt(attributes["template"], document=document)
-declared_config = attributes.get("config", {})
-
-response = model_client.generate(
-    messages=messages,
-    model=declared_config["model"],
-    temperature=declared_config["temperature"],
-    response_format=declared_config["response_format"],
-)
-```
-
-This example applies every declared field, but applications can validate, transform, or ignore fields before calling the
-provider. Datadog does not copy declared prompt configuration into the configuration recorded from a model call.
-
-### Create a configuration-only version
-
-To change configuration without changing prompt text, create an ordinary version and send the same required template
-with the changed configuration. For example, the following request creates version 2 with a different temperature:
+To change only the configuration, send the same template and updated settings to
+`POST /api/v2/llm-obs/v1/prompts/document-extractor/versions`:
 
 ```json
 {
@@ -391,27 +378,62 @@ with the changed configuration. For example, the following request creates versi
         }
       ],
       "config": {
-        "model": "provider-model",
-        "temperature": 0.4,
-        "response_format": {
-          "type": "json_object"
-        }
+        "model": "<MODEL_NAME>",
+        "temperature": 0.4
       }
     }
   }
 }
 ```
 
-When creating a later version, omitting `config` carries forward the latest version's configuration. Sending
-`"config": {}` explicitly clears it. The `config` field cannot be changed with the prompt-version metadata update
-operation because configuration is immutable after version creation.
+The template is required even when only configuration changes. Metadata updates cannot change a saved version's
+configuration.
 
-### Promote and roll back a configuration
+| Request | If you omit `config` | If you send `"config": {}` |
+|---------|----------------------|---------------------------|
+| Create a prompt | Stores an empty object | Stores an empty object |
+| Create a version | Inherits the latest version's configuration | Clears the configuration |
 
-Deploy version 2 to a staging environment and retrieve it from an application configured for that environment. The
-selected bundle contains version 2's template and configuration. To promote the tested bundle, deploy version 2 to the
-production environment. To roll back, deploy version 1 to production again. Environment selection always moves the
-template and configuration together.
+API inheritance uses the latest version, not an older version you retrieved. To reuse an older version's settings,
+send its configuration explicitly.
+
+### Retrieve and use configuration
+
+Retrieve a specific version with `GET /api/v2/llm-obs/v1/prompts/document-extractor/versions/1`.
+The template and configuration are in `data.attributes`. Prompt and version list responses omit configuration;
+use a version-detail or prompt-retrieval response instead.
+
+Treat missing configuration as an empty object. The following Python example prepares model settings from a parsed
+API response named `prompt_version_response`, using application defaults for missing fields:
+
+```python
+defaults = {"model": "<MODEL_NAME>", "temperature": 0.2}
+config = prompt_version_response["data"]["attributes"].get("config", {})
+model_settings = {key: config.get(key, default) for key, default in defaults.items()}
+```
+
+Replace `<MODEL_NAME>` with your application's default model. Pass the supported settings to your model client
+alongside the formatted template from the same response. Validate settings according to your application's requirements;
+Datadog does not validate provider-specific fields or substitute template variables inside configuration.
+
+The settings stored on a prompt version are separate from those recorded on an LLM span. Tracing records the settings
+used for the model call, not every field in the saved configuration.
+
+### Deploy and roll back
+
+Deploy the version to an environment using the prompt's deployment controls. Applications that retrieve the prompt
+for that environment receive the selected version's template and configuration together.
+
+For example, test version 2 in staging, then deploy version 2 to production. To roll back both the template and its
+settings, deploy version 1 to production. Creating a version alone does not change which version an environment serves.
+
+### When configuration authoring is disabled
+
+The configuration controls are hidden. API create requests that explicitly include `config`, including `{}`, return
+HTTP `403`. Requests that omit it keep the defaults and inheritance behavior described above.
+
+Saved non-empty configuration remains retrievable and deployable. Version-detail, create, and prompt-retrieval responses
+omit empty configuration while authoring is disabled; when enabled, they include `config`, including `{}`.
 
 ## Advanced usage
 
