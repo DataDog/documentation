@@ -62,7 +62,7 @@ The matched rule is also highlighted on the {{< ui >}}Targeting rules{{< /ui >}}
 
 ## Testing a disabled flag
 
-If the flag is disabled in the selected environment, the evaluation tester shows what a subject would receive if the flag were enabled. This simulation differs from runtime SDK behavior: client-side and server-side SDKs return the default value supplied by your application for disabled flags. Detailed evaluations report `ERROR` with `FLAG_NOT_FOUND`. For more information, see [Flag Evaluation Results][5].
+If the flag is disabled in the selected environment, the evaluation tester shows what a subject would receive if the flag were enabled. This simulation differs from runtime SDK behavior: Client-side and server-side SDKs return the default value supplied by your application for disabled flags. Detailed evaluations report `ERROR` with `FLAG_NOT_FOUND`. For more information, see [Flag Evaluation Results][5].
 
 ## Further reading
 

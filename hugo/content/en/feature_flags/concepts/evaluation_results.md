@@ -19,7 +19,7 @@ Datadog Feature Flags SDKs use the [OpenFeature evaluation API][1]. Each flag ev
 
 ## Disabled flags
 
-OpenFeature defines [`FLAG_NOT_FOUND`][3] for evaluations where the provider cannot find the requested flag in its available configuration. Datadog applies this condition to the runtime configuration delivered for the selected environment.
+OpenFeature defines [`FLAG_NOT_FOUND`][3] for evaluations where the provider cannot find the requested flag in its available configuration. Datadog applies this condition when a flag is missing from the runtime configuration delivered for the selected environment.
 
 When you disable a flag in a Datadog environment, Datadog omits it from the runtime configuration delivered to client-side and server-side SDKs. The provider therefore cannot distinguish a disabled flag from an unknown flag key. Both conditions produce the following detailed evaluation result:
 
