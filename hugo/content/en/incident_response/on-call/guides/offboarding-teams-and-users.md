@@ -74,7 +74,7 @@ As an admin, you can also manage this yourself by navigating to **On-Call > Sett
 
 ### Unassign the seat
 
-Once the user is removed from schedules, escalation policies, and notification preferences:
+After the user is removed from schedules, escalation policies, and notification preferences:
 
 1. **Open Seat Management**: Navigate to **Plan & Usage > Seat Management**
 2. **Find the user**: Check the box next to their name
