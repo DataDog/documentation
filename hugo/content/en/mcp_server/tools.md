@@ -15,7 +15,7 @@ further_reading:
   text: "Set Up the Datadog MCP Server"
 - link: "mcp_server/code_execution"
   tag: "Documentation"
-  text: "Code Execution"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -534,7 +534,7 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution][77] for more information on how this toolset works and when to use it.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 

@@ -15,7 +15,7 @@ further_reading:
   text: "Datadog MCP Server Tools"
 - link: "mcp_server/code_execution"
   tag: "Documentation"
-  text: "Code Execution"
+  text: "Code Execution with the MCP Server"
 - link: "bits_ai/"
   tag: "Documentation"
   text: "Bits AI Overview"
