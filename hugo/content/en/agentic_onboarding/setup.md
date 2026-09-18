@@ -251,34 +251,41 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Agent skills
 
-An agent skill is a set of instructions and supporting files that an AI coding agent loads to perform a specific task. Datadog publishes skills for setting up monitoring, investigating issues, and working with Datadog APIs. Use them with agents that support skills, such as Claude Code, Codex CLI, and Cursor.
+Agent skills give AI coding agents reusable instructions for Datadog tasks. Each skill has a `SKILL.md` file with its purpose, prerequisites, and workflow. Use skills from the [agent skills repository][20] with a compatible agent, such as Claude Code, Codex CLI, or Cursor.
 
-Each skill has a `SKILL.md` file that describes when to use it and the steps to follow. The [agent skills repository][20] contains the source definitions and installation instructions.
+### Guided setup with the orchestrator
 
-Skills can use tools such as the [Pup CLI][40] or the [Datadog MCP Server][41] to carry out a task. Installing a skill does not configure these tools or grant access to Datadog data.
+Use [`dd-orchestrator`][21] to turn a goal, such as "monitor this application", into a setup plan. The orchestrator:
+
+1. Validates your Datadog account through [`dd-account-setup`][22].
+2. Uses the products you name, or asks [`dd-product-recommender`][23] to recommend products for your goal.
+3. Detects the project's platform and cloud provider, then plans the required setup and verification steps.
+4. Asks you to approve the plan, then runs the required skills in order, loading them from their source when needed.
+
+Cloud integrations are optional. The orchestrator reports unsupported steps and stops dependent steps if a skill fails.
 
 ### Available skills
 
-Choose a skill or skill group based on the task. Follow the linked definitions for prerequisites and supported workflows.
+Use a specific skill when you already know the task. Follow the linked definitions for requirements and supported workflows.
 
-| Task | Skills | What they help you do |
-|------|--------|----------------------|
-| Get started with Datadog | [`dd-orchestrator`][21], [`dd-account-setup`][22], [`dd-product-recommender`][23] | Plan setup for a project, connect a Datadog account, and identify relevant Datadog products. |
-| Set up and investigate APM | [`dd-apm`][24] | Set up Single Step Instrumentation, verify tracing, and investigate service performance. |
-| Add Browser RUM | [`dd-instrument-rum`][25] | Add or repair Browser RUM instrumentation for a web application. |
-| Configure the Browser SDK | [`dd-browser-sdk`][26] | Configure RUM, Logs, and Session Replay, or upgrade SDK versions. |
-| Connect cloud accounts | [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] | Configure Datadog cloud integrations with Terraform. |
-| Search logs | [`dd-logs`][31] | Search and analyze logs, manage archives, and control logging costs. |
-| Manage monitors | [`dd-monitors`][32] | Find, create, update, and mute monitors. |
-| Investigate Audit Trail data | [`dd-audit`][33] | Investigate configuration changes, key use, cost increases, and AI activity, or gather compliance evidence. |
-| Evaluate AI applications | [Agent Observability skills][34] | Diagnose trace failures, compare experiments, generate evaluators, and classify sessions. |
-| Investigate CI failures | [Software Delivery skills][35] | Investigate failing pull request pipelines and flaky tests. |
-| Build Datadog Apps | [`datadog-app`][36] | Create, run, and publish apps, and query data with DDSQL. |
-| Configure resource ownership | [`k9-ownership-byod-setup`][37] | Create and upload a reference table that defines resource ownership preferences. |
-| Work with Datadog APIs | [`dd-pup`][38] | Set up and authenticate the Pup CLI, and select commands for Datadog API operations. |
-| Find documentation | [`dd-docs`][39] | Find Datadog documentation and product limits. |
+| Skill or group | Use it to |
+|----------------|-----------|
+| [`dd-account-setup`][22], [`dd-product-recommender`][23] | Connect a Datadog account and identify relevant products. |
+| [`dd-apm`][24] | Set up Single Step Instrumentation, verify tracing, and investigate service performance. |
+| [`dd-instrument-rum`][25] | Add or repair Browser RUM instrumentation. |
+| [`dd-browser-sdk`][26] | Configure RUM, Logs, and Session Replay, or upgrade SDK versions. |
+| [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] | Configure cloud integrations with Terraform. |
+| [`dd-logs`][31] | Search logs, manage archives, and control logging costs. |
+| [`dd-monitors`][32] | Find, create, update, and mute monitors. |
+| [`dd-audit`][33] | Investigate changes, key use, costs, and AI activity in Audit Trail. |
+| [Agent Observability][34] | Diagnose trace failures, compare experiments, generate evaluators, and classify sessions. |
+| [Software Delivery][35] | Investigate failing pull request pipelines and flaky tests. |
+| [`datadog-app`][36] | Create, run, and publish Datadog Apps. |
+| [`k9-ownership-byod-setup`][37] | Define resource ownership preferences in a reference table. |
+| [`dd-pup`][38] | Authenticate and use the Pup CLI for Datadog API operations. |
+| [`dd-docs`][39] | Find Datadog documentation and product limits. |
 
-Some groups include skills for individual steps, such as verifying APM instrumentation or upgrading the Browser SDK. To list all installable skills, run:
+To list all skills, including those within groups, run:
 
 ```shell
 npx skills add datadog-labs/agent-skills --list --full-depth
@@ -286,22 +293,21 @@ npx skills add datadog-labs/agent-skills --list --full-depth
 
 ### Install and use a skill
 
-1. Install an AI coding agent that supports skills and Node.js with `npx`.
-2. From your project directory, install the skill you need. For example, to install the APM skill:
+With Node.js and `npx` installed, run this command from your project directory:
 
-   ```shell
-   npx skills add datadog-labs/agent-skills --skill dd-apm --full-depth
-   ```
+```shell
+npx skills add datadog-labs/agent-skills --skill dd-orchestrator --full-depth
+```
 
-3. Follow the installation prompts to select the agent and installation scope.
-4. Complete the prerequisites in the skill's `SKILL.md`. Set up any required tools, connections, and credentials.
-5. Open the project in the agent and describe the task. Name the skill to make the request explicit:
+Select your agent and installation scope when prompted. Replace `dd-orchestrator` with another skill name to install it directly. Complete the skill's prerequisites, such as authenticating the [Pup CLI][40] or connecting the [Datadog MCP Server][41].
 
-   ```text
-   Use the dd-apm skill to set up Single Step Instrumentation for this project.
-   ```
+Open the project in your agent and enter:
 
-For product-specific examples, see [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43]. These pages include a prompt or installation command for the relevant skill.
+```text
+Use the dd-orchestrator skill to set up Datadog for this project.
+```
+
+For product-specific examples, see [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43].
 
 ## Next steps
 
