@@ -129,7 +129,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
  | Container Autoscaling                  | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ`                                                                                                                                                                          |
  | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46].                                                                                                                                                             |
  | Feature Flags                          | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48].                                                                                           |
- | Real User Monitoring                   | `RUM Apps Write`<br><br>For more information, see [Real User Monitoring permissions][50].                                                                                                                                                                                                  |
+ | Real User Monitoring                   | `RUM_APPS_WRITE`<br><br>For more information, see [Real User Monitoring permissions][50].                                                                                                                                                                                                  |
 
 ## Enable Remote Configuration
 
