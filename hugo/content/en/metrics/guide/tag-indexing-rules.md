@@ -178,7 +178,7 @@ Starting tags:
 
 ## Metrics without Limits™ compatibility
 
-Existing [Metrics without Limits™][2] (MWL) per-metric configurations take precedence over tag indexing rules and act as exemptions. While an exemption remains active, the metric is not affected by any tag indexing rules. 
+Existing [Metrics without Limits™][2] (MWL) per-metric configurations take precedence over tag indexing rules and act as exemptions. While an exemption remains active, the metric is not affected by any tag indexing rules.
 
 You can review and remove these exemptions from the Tag Indexing Rules page. Datadog classifies each exemption as:
 
