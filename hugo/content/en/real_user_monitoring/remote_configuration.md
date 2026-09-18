@@ -21,6 +21,8 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.0+
 
+<div class="alert alert-info">If your network, proxy, or Content Security Policy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain.</div>
+
 ## How it works
 
 Each RUM application has a remote configuration ID that the SDK uses to retrieve its remote settings.
@@ -49,8 +51,6 @@ To configure remote settings for an application:
 5. Update the settings as described in the [Change SDK settings with remote configuration](#change-sdk-settings-with-remote-configuration) section.
 6. Publish the configuration to apply its enabled settings.
 
-<div class="alert alert-info">If your network, proxy, or Content Security Policy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain.</div>
-
 ## Change SDK settings with remote configuration
 
 Remote configuration does not override any SDK settings by default. To manage a setting remotely, explicitly enable its override in Datadog, then configure its value. Settings without an enabled override continue to use the values configured in the SDK.
@@ -73,7 +73,6 @@ Remote configuration does not override any SDK settings by default. To manage a 
 |----------|----------------|
 | Session Replay sample rate | `rum.sessionReplaySampleRate` |
 | Trace sample rate | `rum.traceSampleRate` |
-| Trace context injection | `rum.traceContextInjection` |
 | Profiling sample rate | `profiling.sampleRate` |
 
 **Privacy**
@@ -98,6 +97,7 @@ Remote configuration does not override any SDK settings by default. To manage a 
 | UI label | Parameter name |
 |----------|----------------|
 | Action name attribute | `rum.actionNameAttribute` |
+| Trace context injection | `rum.traceContextInjection` |
 | Allowed tracing URLs | `rum.allowedTracingUrls` |
 | Allowed tracking origins | `rum.allowedTrackingOrigins` |
 
