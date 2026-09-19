@@ -287,6 +287,98 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 
 Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
 
+## Version prompt configuration
+
+<div class="alert alert-info"><strong>Preview:</strong> Versioned prompt configuration is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Store settings alongside your prompt so you can update and roll back both as one version. Use configuration for:
+
+- **Model settings**, such as `model` and `temperature`.
+- **Structured output schemas**, such as `response_format`.
+- **Tool definitions**, such as `tools` and `tool_choice`.
+
+Configuration is a JSON object whose fields you define. Your application reads and applies these settings;
+Datadog does not automatically apply them to Playground runs or model calls. Do not store secrets in configuration.
+
+### Add configuration
+
+1. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}+ New Prompt{{< /ui >}} and write your template.
+2. Click {{< ui >}}Save Prompt{{< /ui >}}. Enter a prompt ID and add settings in {{< ui >}}Configuration{{< /ui >}}:
+
+   ```json
+   {
+     "model": "<MODEL_NAME>",
+     "temperature": 0.2
+   }
+   ```
+
+3. Replace `<MODEL_NAME>` with a model that supports these settings, then click {{< ui >}}Create prompt{{< /ui >}}.
+
+The editor requires a valid JSON object. Its example text is a placeholder, not a saved configuration.
+
+{{< img src="llm_observability/monitoring/create-prompt-configuration-document-extractor.png" alt="Create new prompt dialog for document-extractor, with model, temperature, and JSON response format settings in the Configuration editor." style="width:100%;" >}}
+
+### Update configuration
+
+1. Open a prompt version and select the {{< ui >}}Configuration{{< /ui >}} tab.
+2. Click {{< ui >}}Update configuration{{< /ui >}} and edit the settings.
+3. Click {{< ui >}}Review changes{{< /ui >}}, then {{< ui >}}Save version{{< /ui >}}.
+
+This creates a version without overwriting the original. Use {{< ui >}}Compare{{< /ui >}} to inspect configuration changes.
+
+Deploy the version to an environment when it is ready. Applications retrieving that environment receive its selected
+template and configuration together. To roll back both, deploy an earlier version. Saving alone does not change
+the version an environment serves.
+
+### Use configuration in your application
+
+Fetch a prompt version and pass its settings to your model client. Use the Prompt Management API for configuration;
+released Python, Go, and JavaScript SDKs do not support this field.
+
+For example, create a chat prompt named `summarizer` with the system message
+`Summarize the user's text in one sentence.` and the configuration above. This Python example retrieves version 1
+and uses its template, model, and temperature in an [OpenAI model call][10].
+
+Install `requests` and `openai`. Set `DD_API_KEY`, `DD_APP_KEY`, and `OPENAI_API_KEY` in your environment.
+Set `DD_API_HOST` to the API host for your [Datadog site][2], such as `https://api.datadoghq.com`.
+The Datadog keys need the read permissions in [Prerequisites](#prerequisites).
+
+```python
+import os
+
+import requests
+from openai import OpenAI
+
+response = requests.get(
+    f"{os.environ['DD_API_HOST']}/api/v2/llm-obs/v1/prompts/summarizer/versions/1",
+    headers={
+        "DD-API-KEY": os.environ["DD_API_KEY"],
+        "DD-APPLICATION-KEY": os.environ["DD_APP_KEY"],
+    },
+    timeout=10,
+)
+response.raise_for_status()
+version = response.json()["data"]["attributes"]
+config = version.get("config", {})
+
+completion = OpenAI().chat.completions.create(
+    model=config["model"],
+    temperature=config.get("temperature", 0.2),
+    messages=version["template"] + [
+        {"role": "user", "content": "Our checkout latency dropped by 30% after the release."}
+    ],
+)
+print(completion.choices[0].message.content)
+```
+
+This example requires `model` in the saved configuration and a chat template without variables. It pins version 1;
+use environment-based retrieval when you want deployments to select the version. Your application is responsible
+for formatting template variables and validating settings for its model provider.
+
+**API authoring:** You can also create prompts and versions with the [Prompt Management API][8].
+Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version.
+Send `{}` to clear it. See the API reference for request bodies and access requirements.
+
 ## Advanced usage
 
 ### Serve multiple versions from one environment
@@ -334,3 +426,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
+[10]: https://platform.openai.com/docs/api-reference/chat/create
