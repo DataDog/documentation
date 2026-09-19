@@ -124,7 +124,7 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
-Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
+To reuse an exact version of another managed prompt, request access to the [prompt composition Preview](#reuse-prompts-with-composition).
 
 ### Select a version
 
@@ -286,6 +286,61 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 ### Use the API
 
 Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
+
+## Reuse prompts with composition
+
+<div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Reuse shared instructions across prompts without copying them. For example, a support assistant and a billing assistant can include the same response policy.
+
+Include **text** within a message or **chat messages** as a group. Each reference uses an exact version, so updating the source does not change prompts that already include it.
+
+### Include a prompt
+
+1. Save a prompt named `response-policy` with one System message: `Answer concisely. If you do not know the answer, say so.`
+2. In another prompt's editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
+3. Add a User message containing `{{question}}` after the include. Remove any unused empty messages.
+4. Enter a sample question, select a model, and click {{< ui >}}Run{{< /ui >}}. Save the prompt when you are satisfied.
+
+Your prompt now contains:
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+The included policy supplies the instructions; the `question` variable supplies a value at runtime. Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual—there is no need to fetch the policy separately.
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
+
+For a source with several messages, all messages are included by default. Select {{< ui >}}Customize messages{{< /ui >}} to choose, reorder, or repeat messages without changing the source.
+
+### Reuse text within a message
+
+To reuse a phrase rather than complete messages, select a **text prompt** through {{< ui >}}Include Prompt{{< /ui >}} and click {{< ui >}}Insert text{{< /ui >}}. This inserts a reference into the last editable message.
+
+For example, if `response-style` version 1 contains `Answer concisely.`, write:
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+The resolved template is:
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+Keep any spaces or line breaks you need around the reference. Always specify a version; `{{>response-style}}` alone is literal text, not an include.
+
+### Review and update includes
+
+On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the references you authored. {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded messages, before runtime variables are filled in.
+
+When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find prompts that reference it. Open a consuming prompt, replace the include with the new source version, then test, save, and deploy the updated prompt. Existing versions keep their original content, even if the source is later deleted.
+
+For API authoring, see the [Agent Observability API reference][8] for include syntax, message selection, and request examples.
+
 
 ## Advanced usage
 
