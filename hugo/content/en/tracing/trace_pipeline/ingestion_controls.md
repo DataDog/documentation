@@ -30,7 +30,7 @@ Ingestion controls affect what traces are sent by your applications to Datadog. 
 The Ingestion Control page provides visibility into the ingestion configuration of your applications and services. From the [ingestion control page][2]:
 
 - Gain visibility on your service-level ingestion configuration.
-- Adjust trace sampling rates for high throughput services or endpoints to better manage ingestion budget.
+- Adjust trace sampling rates for high throughput services or endpoints to better manage your ingestion target.
 - Adjust trace sampling rates for low throughput, rare traffic services or endpoints to increase visibility.
 - Understand which [ingestion mechanisms][11] are responsible for sampling most of your traces.
 - Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
@@ -39,13 +39,22 @@ The Ingestion Control page provides visibility into the ingestion configuration 
 
 ## Understanding your ingestion configuration
 
-Use the data in the ingestion control header to monitor your trace ingestion. The header displays the total amount of data ingested over the past hour, your estimated monthly usage, and the percentage of your allocated monthly ingestion limit, calculated based on your active APM infrastructure (such as hosts, Fargate tasks, and serverless functions).
+Use the data in the page header to monitor your trace ingestion:
 
-If the monthly usage is under `100%`, the projected ingested data fits within your monthly allotment. A monthly usage value over `100%` means that the monthly ingested data is projected to be over your monthly allotment.
+Monthly Ingestion
+: Shows the amount of data ingested so far this month, your projected end-of-month ingestion, and your monthly allotment, along with a status message indicating whether the projected ingestion is on track to stay within your allotment.
+
+APM Adaptive Sampling
+: Shows how much of your monthly allotment is covered by your [adaptive sampling][17] target, and how many services are onboarded relative to the service limit.
+
+Ingestion Over Time
+: A graph of your ingestion volume over time, broken down by origin (APM, other Datadog products, or OTel), with your monthly allotment shown as a reference line.
+
+If the projected ingestion is under your monthly allotment, you are on track. If it is projected to exceed your allotment, adjust your [service ingestion rates](#configuring-ingestion-for-a-service) or your [adaptive sampling target](#adaptive-sampling).
 
 ### Ingestion levels by service
 
-The service table contains information about the ingested volumes and ingestion configuration, broken down by service:
+The service table contains information about the ingested volumes and ingestion configuration, broken down by service. Use the **All services**, **Managed by APM**, **Managed by other Datadog products**, and **Managed by OTel** tabs above the table to filter services by ingestion origin.
 
 Type
 : The service type: web service, database, cache, browser, etc...
@@ -63,18 +72,18 @@ Downstream Bytes/s
 : Average number of bytes per second ingested for which the service _makes the sampling decision_. This includes the bytes of all downstream services' spans in the call stack that follow the decision made at the head of the trace. This column's data is based on the `sampling_service` dimension, set on the `datadog.estimated_usage.apm.ingested_bytes` metrics. For more information, read [APM usage metrics][15].
 
 Traffic Breakdown
-: A detailed breakdown of traffic sampled and unsampled for traces starting from the service. See [Traffic breakdown](#traffic-breakdown) for more information.
+: A detailed breakdown of traffic sampled and unsampled for traces starting from the service. A warning icon appears next to the breakdown when 25% or more of the service's traffic is dropped. See [Traffic breakdown](#traffic-breakdown) for more information.
 
-Ingestion Configuration
-: Shows `Automatic` if the [default head-based sampling mechanism][4] from the Agent applies. If the ingestion was configured with [trace sampling rules][8], the service is marked as `Configured`; a `Local` label is set when the sampling rule is applied from configuration in the SDK, a `Remote` label is set when the sampling rule is applied remotely, from the UI. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+Configuration
+: Shows which product the service's ingestion originates from and, for APM services, how sampling is configured: `APM Agent` if the [default head-based sampling mechanism][4] from the Agent applies, `APM Local` if a [sampling rule][8] is applied from configuration in the SDK, or `APM Remote` if a sampling rule—including an [adaptive sampling][17] rule—is applied remotely from the UI. Ingestion from other Datadog products is labeled `OTel`, `RUM`, `Synthetics`, `AppSec`, `CI Visibility`, or `AWS X-Ray`. A service matching more than one category displays an `N Configurations` badge; hover over it to see the full list. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+
+Adaptive Sampling
+: Shows the service's [adaptive sampling][17] adoption status: `Full` or `Partial` when the service is covered by adaptive sampling (hover over the badge to see the coverage percentage), `Compatible` when the service could be onboarded but isn't yet, `Not Compatible` when the service's tracer or Agent version doesn't support adaptive sampling, or `Disabled` when adaptive sampling is explicitly turned off for the service.
 
 Infrastructure
-: Hosts, containers, and functions on which the service is running.
+: Hosts, containers, and functions on which the service is running. This column is hidden by default; enable it from the table's **Options** menu.
 
-Service status
-: Shows `Limited Resource` when some spans are dropped due to the Datadog Agent reaching CPU or RAM limits set [in its configuration][9], `Legacy Setup` when some spans are ingested through the legacy [App Analytics mechanism][7], or `OK` otherwise.
-
-Filter the page by environment, configuration, and status to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
+Filter the page by service name, environment, configuration, or adaptive sampling status, or toggle **Root services only** to view services for which you need to take an action. To reduce the global ingestion volume, sort the table by the `Downstream Bytes/s` column to view services responsible for the largest share of your ingestion.
 
 **Note**: The table is powered by the [usage metrics][10] `datadog.estimated_usage.apm.ingested_spans` and `datadog.estimated_usage.apm.ingested_bytes`. These metrics are tagged by `service`, `env` and `ingestion_reason`.
 
@@ -135,7 +144,7 @@ See the {{< ui >}}Datadog Agent and SDK versions{{< /ui >}} your service is usin
 ### Managing services' sampling rates
 
 To control sampling rates for a service, you might want to use:
-- {{< ui >}}Adaptive sampling{{< /ui >}}: Automatically adjust sampling rates to match a configured monthly ingested volume budget.
+- {{< ui >}}Adaptive sampling{{< /ui >}}: Automatically adjust sampling rates to match a configured monthly ingested volume target.
 - {{< ui >}}Resource-based sampling{{< /ui >}}: Manually set explicit sampling rates by resource.
 
 Configurations for these strategies can be applied {{< ui >}}Remotely{{< /ui >}} through the Datadog UI. This method allows changes to take effect immediately without redeploying your service. For {{< ui >}}Resource-based Sampling{{< /ui >}}, you also have the option to apply configurations **locally** by updating your service's configuration files and redeploying.
