@@ -1,4 +1,4 @@
-### Manually track RUM views
+## Manually track RUM views
 
 To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
 

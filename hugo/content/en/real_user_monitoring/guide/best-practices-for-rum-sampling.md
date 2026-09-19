@@ -106,5 +106,5 @@ To modify the **head-based** sampling rate for mobile SDKs, redeploy your applic
 [13]: /real_user_monitoring/rum_without_limits/metrics
 [14]: /real_user_monitoring/guide/retention_filter_best_practices/
 [15]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
-[16]: /real_user_monitoring/platform/generate_metrics
+[16]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics
 [17]: /real_user_monitoring/application_monitoring/browser/setup/server/

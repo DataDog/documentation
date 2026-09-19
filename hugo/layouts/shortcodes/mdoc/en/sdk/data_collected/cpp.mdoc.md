@@ -181,9 +181,9 @@ Network errors include information about failing HTTP requests. The following fa
 
 The SDK stores events on disk before uploading them to Datadog. Events are preserved across application restarts, so data collected before an unexpected shutdown is sent on the next launch. The SDK manages disk usage automatically, pruning the oldest events when limits are reached. You can configure the storage location using `SetApplicationStoragePath()` in `CoreConfig`. See [Event Storage Location][3] for details.
 
-[1]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#custom-attributes
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#custom-attributes
 [2]: /getting_started/tagging/unified_service_tagging/
-[3]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#application-storage-path
+[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#application-storage-path
 [4]: /data_security/real_user_monitoring/#geolocation
-[5]: /real_user_monitoring/application_monitoring/cpp/advanced_configuration/#track-user-and-account-information
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#track-user-and-account-information
 [6]: /data_security/real_user_monitoring/#ip-address

@@ -97,8 +97,8 @@ For additional information on sampling rate, distributed tracing, and adding cus
 [1]: https://github.com/Alamofire/Alamofire
 [2]: /real_user_monitoring/application_monitoring/ios/setup
 [3]: https://github.com/apollographql/apollo-ios
-[4]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#automatically-track-network-requests
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-network-requests
 [5]: https://github.com/SDWebImage/SDWebImage
 [6]: https://github.com/OpenAPITools/openapi-generator
 [7]: https://github.com/DataDog/dd-sdk-ios-apollo-interceptor
-[8]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#apollo-instrumentation
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#apollo-instrumentation

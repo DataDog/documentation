@@ -13,4 +13,18 @@ further_reading:
 
 ---
 
-{{< include-markdown "real_user_monitoring/error_tracking/mobile/kotlin-multiplatform" >}}
+## Overview
+
+Error Tracking processes errors collected from the Kotlin Multiplatform SDK, including crashes and ANRs on Android, and crashes and app hangs on iOS.
+
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+
+## Setup
+
+To enable Kotlin Multiplatform Crash Reporting and Error Tracking, see [Track errors and crashes][2].
+
+For deobfuscation and other advanced Error Tracking details, see [Kotlin Multiplatform Crash Reporting and Error Tracking][3].
+
+[1]: https://app.datadoghq.com/rum/error-tracking
+[2]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=kotlin_multiplatform
+[3]: /real_user_monitoring/error_tracking/mobile/kotlin-multiplatform

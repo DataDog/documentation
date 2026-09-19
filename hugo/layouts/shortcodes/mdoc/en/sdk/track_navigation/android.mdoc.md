@@ -1,6 +1,6 @@
-### Custom views
+## Custom views
 
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
+In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` life cycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
 
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -31,7 +31,7 @@ public void onPause() {
 {% /tab %}
 {% /tabs %}
 
-### Automatically track views
+## Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
 
@@ -120,4 +120,4 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
 **Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
 
 [1]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views

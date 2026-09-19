@@ -98,7 +98,7 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 [5]: https://app.datadoghq.com/rum/application/create
 [6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-symbolicated-stack-traces
 [7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#managed-c-stack-traces
-[8]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events
-[9]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#known-limitation-gesture-driven-navigation
-[10]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#add-view-attributes
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#modify-or-drop-rum-events
+[9]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#known-limitation-gesture-driven-navigation
+[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#add-view-attributes
 [11]: /real_user_monitoring/application_monitoring/maui/error_tracking/#troubleshooting
