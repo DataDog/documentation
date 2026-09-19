@@ -25,6 +25,7 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
+| [CI jobs failure analysis][22] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
 | [Manual steps][12] | Manual steps | View manually triggered pipelines. |
 | [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -32,7 +33,7 @@ Set up CI Visibility for Buildkite to optimize your resource usage, reduce overh
 | [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
 | [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][20]. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log storage][20]. |
 
 
 ### Terminology
@@ -57,11 +58,21 @@ To set up the Datadog integration for [Buildkite][1]:
    * {{< ui >}}Branch filtering{{< /ui >}}: Leave empty to trace all branches or select the subset of branches you want to trace.
 3. Click {{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} to save the integration.
 
-### Collect job logs
+### Manage job logs
+
+CI jobs failure analysis uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Buildkite.
+
+For a full explanation, see the guide on [using CI jobs failure analysis][22].
+
+Log Analysis is enabled by default in Datadog. To receive Buildkite job logs for analysis, add your API token in the [Buildkite integration tile][19]. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+
+#### Store job logs
 
 The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][19].
 
-Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
+To enable Log Storage, go to [CI/CD Repository settings][23], and enable Log Storage at the Datadog organization level or for the desired repositories.
+
+Log Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
 
 ## Advanced configuration
 
@@ -163,5 +174,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [18]: /glossary/#pipeline-execution-time
 [19]: /integrations/buildkite/
-[20]: /continuous_integration/pipelines/buildkite/#collect-job-logs
+[20]: /continuous_integration/pipelines/buildkite/#store-job-logs
 [21]: /logs/
+[22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
+[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
