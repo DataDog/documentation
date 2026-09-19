@@ -38,6 +38,7 @@ When Cloud SIEM processes a log, the log's IP, domain, hash, AWS account ID, con
       - `DNS_ANSWER_NAME`
       - `HTTP_URL`
       - `HTTP_URL_DETAILS_DOMAIN`
+      - `HTTP_URL_DETAILS_HOST`
       - `HOSTNAME`
     - **File hashes**: SHA1, SHA256, and ssdeep hashes found in file- and process-related log attributes.
     - **AWS account IDs**: Values from AWS-related log attributes (for example, `userIdentity.accountId`).
