@@ -7,9 +7,6 @@ aliases:
   - /opentelemetry/interoperability/otlp_ingest_in_the_agent/
 description: 'Ingest OTLP trace data through the Datadog Agent'
 further_reading:
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
-  tag: "Blog"
-  text: "OTLP ingestion in the Agent"
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
   text: "OTLP Metrics Types"

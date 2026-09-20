@@ -32,6 +32,8 @@ The IP allowlist feature does not block access to the following:
 - The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Agent flare submission][3]
 - [Public dashboards][4]
+- Actions Datadog Support takes on your behalf within your organization
+- Datadog-managed routes that deliver product configuration through Datadog's CDN
 
 Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
 
