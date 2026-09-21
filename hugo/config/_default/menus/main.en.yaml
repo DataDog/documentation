@@ -1278,6 +1278,11 @@ menu:
       identifier: mcp_server_tools
       parent: mcp_server
       weight: 2
+    - name: Code Execution
+      url: mcp_server/code_execution
+      identifier: mcp_server_code_execution
+      parent: mcp_server
+      weight: 3
     - name: Partners
       url: partners/
       pre: colab
@@ -1595,6 +1600,11 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 303
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -2835,11 +2845,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Integrations
+      url: incident_response/on-call/integrations/
+      parent: oncall
+      identifier: oncall_integrations
+      weight: 8
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 8
+      weight: 9
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
@@ -7986,10 +8001,10 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 204
-    - name: Critical Assets
-      url: security/cloud_siem/detect_and_monitor/critical_assets
+    - name: Dynamic Severity
+      url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
-      identifier: cloud_siem_critical_assets
+      identifier: cloud_siem_dynamic_severity
       weight: 205
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
@@ -8732,7 +8747,7 @@ menu:
       identifier: workload_protection_setup_windows
       weight: 70
     - name: Advanced Configuration
-      url: security/workload_protection/setup/advanced_configuration
+      url: security/workload_protection/workload_protection_agent_config
       parent: workload_protection_setup
       identifier: workload_protection_setup_advanced_configuration
       weight: 80
@@ -10650,6 +10665,11 @@ menu:
       url: account_management/plan_and_usage/partner_experience/customer_pricing/
       parent: account_management_partner_experience
       weight: 140301
+    - name: Customer Contracts
+      identifier: account_management_customer_contracts
+      url: account_management/plan_and_usage/partner_experience/customer_contracts/
+      parent: account_management_partner_experience
+      weight: 140302
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

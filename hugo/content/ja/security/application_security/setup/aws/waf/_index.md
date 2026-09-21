@@ -17,12 +17,6 @@ further_reading:
   text: Datadog を使用した AWS WAF のアクティビティの監視
 title: AWS WAF で App and API Protection を有効にする
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection は、Datadog Government サイト US1-FED でプレビュー版として提供されています。
-</div>
-{{< /site-region >}}
-
 App and API Protection は、以下の方法で AWS Web Application Firewall (WAF) と統合されます。
 
 1. ログをトレースに変換して、監視およびブロックされたリクエストを可視化する
@@ -30,7 +24,7 @@ App and API Protection は、以下の方法で AWS Web Application Firewall (WA
 
 両方とも個別に設定できますが、AWS WAF のアクションを調査するために、まずはログからトレースへの変換を設定することをお勧めします。
 
-## 前提条件 {#prerequisites}
+## 前提条件{#prerequisites}
 
 - [Amazon Web Services インテグレーション][1]が設定されていること。
 - [AWS リソース収集][7]に対して以下の権限が有効になっていること。
