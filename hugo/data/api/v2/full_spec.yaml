@@ -69713,6 +69713,68 @@ components:
       type: string
       x-enum-varnames:
         - MANAGED_ORGS
+    MatchingSignalAttributes:
+      description: Attributes of a matching security signal.
+      properties:
+        event_tracker_id:
+          description: The tracker ID linking the signal back to the originating event. Distinct from `id`, which identifies the matching signal itself.
+          example: AAAAAWgOAX0mtsWfeQAAAABzX1RyYWNrZXJfMTIzNDU2Nzg5MA
+          type: string
+        severity:
+          description: The severity of the signal.
+          example: high
+          type: string
+        title:
+          description: The title of the signal.
+          example: Unusual login activity detected
+          type: string
+        trigger_time_ms:
+          description: The Unix timestamp (in milliseconds) at which the signal was triggered.
+          example: 1707393746000
+          format: int64
+          type: integer
+      required:
+        - event_tracker_id
+        - severity
+        - title
+        - trigger_time_ms
+      type: object
+    MatchingSignalData:
+      description: A security signal that matches the queried event.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MatchingSignalAttributes"
+        id:
+          description: The ID of the matching signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/MatchingSignalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MatchingSignalType:
+      default: matching_signal
+      description: The type of the resource. The value should always be `matching_signal`.
+      enum:
+        - matching_signal
+      example: matching_signal
+      type: string
+      x-enum-varnames:
+        - MATCHING_SIGNAL
+    MatchingSignalsResponse:
+      description: Response containing the list of security signals matching an event.
+      properties:
+        data:
+          description: Array of matching signals.
+          items:
+            $ref: "#/components/schemas/MatchingSignalData"
+          type: array
+      required:
+        - data
+      type: object
     MaxSessionDurationType:
       description: Data type of a maximum session duration update.
       enum: [max_session_duration]
@@ -214777,6 +214839,64 @@ paths:
           - siem_entities_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/events/{event_id}/matching_signals:
+    get:
+      description: Returns the list of security signals that match a given event on the given track.
+      operationId: GetMatchingSignals
+      parameters:
+        - description: The ID of the event to find matching signals for.
+          in: path
+          name: event_id
+          required: true
+          schema:
+            type: string
+        - description: The product track that the event belongs to.
+          in: query
+          name: track
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          event_tracker_id: AAAAAWgOAX0mtsWfeQAAAABzX1RyYWNrZXJfMTIzNDU2Nzg5MA
+                          severity: high
+                          title: Unusual login activity detected
+                          trigger_time_ms: 1707393746000
+                        id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                        type: matching_signal
+              schema:
+                $ref: "#/components/schemas/MatchingSignalsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get signals matching an event
+      tags: ["Security Monitoring"]
+      x-menu-order: 174
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules:
     get:
