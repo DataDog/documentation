@@ -241,7 +241,7 @@ Group retention controls how long a monitor group is kept in the monitor's statu
 
 By default, a group keeps the status for 24 hours before it is dropped. Host monitors and service checks that notify on missing data keep the status for 48 hours.
 
-For monitors with a large number of groups, dynamic group retention is enabled by default. Datadog automatically shortens how long a group is kept after it stops reporting data. The more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent, groups actively reporting data are never removed.
+For monitors with many groups, dynamic group retention is enabled by default. Datadog automatically shortens the retention period for groups that stop reporting data. The more frequently groups appear and disappear, the shorter the retention period becomes, helping keep the monitor fast and efficient. This behavior affects only groups that have stopped reporting data; groups that are actively reporting are never removed.
 
 For the multi alert monitor types that support custom retention, you can set a value between 1 hour and 72 hours. Select {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
