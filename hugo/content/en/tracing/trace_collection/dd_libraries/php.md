@@ -56,7 +56,7 @@ In case you are using Alpine Linux you need to install `libgcc_s` prior to runni
 apk add libgcc
 ```
 
-Run the installer:
+Run the installer, passing only the flags for the capabilities you intend to enable:
 
 ```shell
 # APM only
