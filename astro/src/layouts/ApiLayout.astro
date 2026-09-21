@@ -69,10 +69,6 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
           <RegionSelectorIsland />
         </div>
       </div>
-      {
-        /* Outside `.prose` so the `h1:first-child` rule below still matches
-        the page's heading rather than the banner. */
-      }
       <SiteSupportBanner pathname={Astro.url.pathname} />
       <div class="prose">
         <slot />
