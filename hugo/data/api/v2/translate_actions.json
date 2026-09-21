@@ -2601,7 +2601,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
+    "description": "Create a page from an incident using the Cases service.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."
@@ -7318,7 +7318,7 @@
     "request_schema_description": "The definition of `UpdateRulesetRequest` object."
   },
   "ListTeams": {
-    "description": "Get all teams.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
+    "description": "Get all teams in your organization.\nCan be used to search for teams using the `filter[keyword]` and `filter[me]` query parameters.",
     "summary": "Get all teams"
   },
   "CreateTeam": {
