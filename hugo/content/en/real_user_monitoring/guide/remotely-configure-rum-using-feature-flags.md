@@ -2,11 +2,14 @@
 title: Remotely Configure RUM Using Feature Flags
 beta: false
 private: true
-description: Use Datadog Feature Flags or another flag provider to remotely configure Browser RUM sampling and other initialization settings.
+description: Use feature flags to configure Browser RUM for RUM without Limits, with 100% session sampling by default and reduced collection when needed.
 aliases:
 - /real_user_monitoring/guide/remote-config-launchdarkly/
 - /real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 further_reading:
+- link: '/real_user_monitoring/rum_without_limits/'
+  tag: 'Documentation'
+  text: 'RUM without Limits'
 - link: '/feature_flags/client/javascript/'
   tag: 'Documentation'
   text: 'Set up Datadog Feature Flags for JavaScript'
@@ -20,7 +23,11 @@ further_reading:
 
 ## Overview
 
-Use feature flags to change Browser RUM initialization settings without redeploying your application. For example, increase the session sample rate for users affected by an incident, then restore the usual rate after the incident ends.
+For applications using [RUM without Limits][13], Datadog recommends setting `sessionSampleRate` to `100` for optimal visibility and metrics accuracy. Use [retention filters][14] to choose which ingested sessions to index and retain. Performance metrics cover all ingested sessions, even when you retain only a fraction of them.
+
+Use feature flags to change Browser RUM initialization settings without redeploying your application. Start with 100% session sampling, and use a flag to reduce collection when technical constraints or ingestion costs prevent collecting all sessions. Restore 100% sampling when those constraints are resolved.
+
+Reducing `sessionSampleRate` drops sessions before they reach Datadog. Those sessions are unavailable to retention filters and do not contribute to RUM metrics. For routine control over indexed session volume, adjust retention filters while keeping session sampling at 100%.
 
 This guide uses [Datadog Feature Flags][1]. The same approach works with other browser feature flag providers, including LaunchDarkly: initialize the flag provider, evaluate the configuration flags, and pass their values to `datadogRum.init()`.
 
@@ -30,7 +37,7 @@ Datadog Feature Flags works independently of RUM. RUM does not need to be initia
 
 ## Prerequisites
 
-- A [Browser RUM application][2], its application ID, and a client token.
+- A [Browser RUM application][2] using RUM without Limits, its application ID, and a client token.
 - Access to Datadog Feature Flags and the environment you want to configure.
 - The [Datadog browser feature flag provider][3] version **1.4.0 or later** for the `withTimeout` helper used in this guide.
 
@@ -55,17 +62,17 @@ Create a numeric flag for `sessionSampleRate`:
 
    | Variant | Value | Purpose |
    | --- | --- | --- |
-   | Standard | `20` | Sample 20% of RUM sessions. |
-   | High fidelity | `100` | Sample 100% of RUM sessions. |
+   | Standard | `100` | Send 100% of RUM sessions, as recommended for RUM without Limits. |
+   | Reduced collection | `20` | Send 20% of RUM sessions when technical or budget constraints require lower ingestion. |
 
-<!-- TODO: Add a Datadog UI screenshot showing creation of rum-session-sample-rate, its browser distribution channel, and numeric variants Standard (20) and High fidelity (100). -->
+<!-- TODO: Add a Datadog UI screenshot showing creation of rum-session-sample-rate, its browser distribution channel, and numeric variants Standard (100) and Reduced collection (20). -->
 
-5. In the target environment, select **Standard** as the default variant. Add a [targeting rule][6] that serves **High fidelity** to the users you want to investigate, such as users with `org_id` equal to `example-org`.
+5. In the target environment, select **Standard** as the default variant. If you need to reduce ingestion for a group of users, add a [targeting rule][6] that serves **Reduced collection** to that group. For example, target users with `org_id` equal to `example-org`.
 6. Save the rules and enable the flag in that environment.
 
-<!-- TODO: Add a Datadog UI screenshot showing the org_id targeting rule, the Standard default variant, and the enabled flag in the selected environment. -->
+<!-- TODO: Add a Datadog UI screenshot showing the org_id targeting rule serving Reduced collection, the Standard (100) default variant, and the enabled flag in the selected environment. -->
 
-The values in this guide are examples. Choose sampling rates appropriate for your application's traffic and data collection needs. The code below also uses `20` as the local fallback when the flag is disabled, unavailable, or invalid.
+The reduced rate of `20` is an example, not a recommended baseline. Choose a reduced rate that addresses your constraints, and apply it only where needed. The code below uses `100` as the local fallback when the flag is disabled, unavailable, or invalid.
 
 ### Configure multiple settings together
 
@@ -75,25 +82,25 @@ To change several settings together, create a flag with the key `rum-configurati
 
 ```json
 {
+  "sessionSampleRate": 100,
+  "sessionReplaySampleRate": 10
+}
+```
+
+**Reduced collection**:
+
+```json
+{
   "sessionSampleRate": 20,
   "sessionReplaySampleRate": 0
 }
 ```
 
-**High fidelity**:
+Select **Standard** as the default variant, and target **Reduced collection** only to users for whom collection needs to be reduced. This example reduces session ingestion and disables Session Replay for that group. Optionally, add a JSON Schema to validate the configuration values. See [Dynamic Configuration][7].
 
-```json
-{
-  "sessionSampleRate": 100,
-  "sessionReplaySampleRate": 100
-}
-```
+<!-- TODO: Add a Datadog UI screenshot showing the rum-configuration JSON variants Standard (100% sessions, 10% replay) and Reduced collection (20% sessions, no replay), and validation schema, if configured. -->
 
-Configure the default variant and targeting rules as in the individual-setting example. Optionally, add a JSON Schema to validate the configuration values. See [Dynamic Configuration][7].
-
-<!-- TODO: Add a Datadog UI screenshot showing the rum-configuration JSON variants and validation schema, if configured. -->
-
-`sessionReplaySampleRate` is the percentage of sessions sampled by RUM that are also eligible for Session Replay. See [Browser RUM and Session Replay sampling][8]. Keep the application ID, client token, and other fixed settings in application code.
+RUM without Limits does not require 100% Session Replay sampling. Choose `sessionReplaySampleRate` independently based on your observability needs; `10` is an example. It is the percentage of sessions sampled by RUM that are also eligible for Session Replay, so changing `sessionSampleRate` also affects replay volume. See [Browser RUM and Session Replay sampling][8]. Keep the application ID, client token, and other fixed settings in application code.
 
 ## Initialize flags before RUM
 
@@ -123,8 +130,8 @@ const evaluationContext = {
 };
 
 let rumSettings = {
-  sessionSampleRate: 20,
-  sessionReplaySampleRate: 0,
+  sessionSampleRate: 100,
+  sessionReplaySampleRate: 10, // Example: choose a rate for your replay needs.
 };
 
 function validSampleRate(value, fallback) {
@@ -198,11 +205,11 @@ If you load the RUM SDK only after evaluating the flag, that earlier evaluation 
 After deploying the startup code:
 
 1. Open the configuration flag in Datadog and select the environment used by the application.
-2. Update its variant values or targeting rules. For example, serve **High fidelity** to an affected organization during an incident.
+2. If technical or budget constraints require lower ingestion, update the targeting rules to serve **Reduced collection** to the affected users. Keep **Standard** as the default for other users.
 3. Save the changes. Subsequent page loads that retrieve the updated configuration use it when initializing RUM.
-4. After the incident, restore the **Standard** variant for the affected users.
+4. When those constraints are resolved, restore the **Standard** variant to return the affected users to 100% session sampling.
 
-<!-- TODO: Add a Datadog UI screenshot showing a saved targeting change that serves High fidelity to the affected organization. -->
+<!-- TODO: Add a Datadog UI screenshot showing a saved targeting change that serves Reduced collection to the constrained organization while keeping Standard (100) as the default. -->
 
 RUM makes session sampling decisions for the session and preserves them across page loads. Changing `sessionSampleRate` does not resample an existing session. Validate sampling changes with a new RUM session. See [Best practices for RUM sampling][11].
 
@@ -233,3 +240,5 @@ For an OpenFeature-compatible provider, replace `DatadogProvider` with that prov
 [10]: /feature_flags/concepts/evaluation_context/
 [11]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
 [12]: /real_user_monitoring/feature_flag_tracking/
+[13]: /real_user_monitoring/rum_without_limits/
+[14]: /real_user_monitoring/rum_without_limits/retention_filters/
