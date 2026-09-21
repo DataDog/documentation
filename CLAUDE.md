@@ -103,20 +103,20 @@ Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 Fixes DOCS-XXXXX
 
-[Brief description of changes]
+[_Brief_ description of context for changes, the problem you're solving, from the user's and reviewer's perspectives, NOT a detailed itemization or justification. The reviewer needs to be able to quickly understand why the changes were made. Keep it short. See PR Etiquette https://github.com/DataDog/documentation#pr-etiquette for examples.]
 
 ### Merge readiness
 
 - [ ] Ready for merge
 
-## For Datadog employees:
-
-- ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
-- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
-
 ### AI assistance
 
 [If AI tools were used, briefly note how. Leave blank if not applicable.]
+
+### For Datadog employees:
+
+- ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
+- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
 
 ### Additional notes
 

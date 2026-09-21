@@ -22,9 +22,9 @@ Observability Pipelines의 HTTP/S Server 소스를 사용하여 HTTP 클라이�
 
 ## 설정 {#setup}
 
-<div class="alert alert-danger">시크릿 관리의 경우, HTTP/S Server 주소의 식별자만 입력하고, 해당하는 경우 일반(기본) 인증을 위한 사용자 이름 및 비밀번호의 식별자와 TLS 키 암호의 식별자만 입력하세요. 실제 값은 <b>입력하지 마세요</b>.</div>
+<div class="alert alert-danger">시크릿 관리의 경우, HTTP/S Server 주소의 식별자만 입력하고, 해당하는 경우 일반(기본) 인증을 위한 사용자 이름 및 비밀번호의 식별자와 TLS 키 암호의 식별자만 입력하세요. 실제 값은 입력하지 <b>마세요</b>.</div>
 
-[파이프라인을 설정할][3] 때 이 소스를 설정하세요. 파이프라인은 [UI][1], [API][4] 또는 [Terraform][5]을 사용하여 설정할 수 있습니다. 이 섹션의 지침은 UI에서 소스를 설정하는 방법을 설명합니다.
+[파이프라인을 설정할][3] 때 이 소스를 설정하세요. 파이프라인은 [UI][1], [API][4] 또는 [Terraform][5]을 사용하여 설정할 수 있습니다. 이 섹션의 지침은 UI에서 소스를 설정하기 위한 것입니다.
 
 파이프라인 UI에서 HTTP/S Server 소스를 선택한 후 다음 단계를 따르세요.
 
@@ -87,7 +87,7 @@ HTTP/S Server 소스를 사용하여 AWS vended 로그를 Observability Pipeline
 - [HTTP/S Server 소스로 파이프라인을 설정하세요](#set-up-a-pipeline).
 - [Datadog Forwarder를 배포하세요](#deploy-the-datadog-lambda-forwarder).
 
-**참고**: 이 기능은 Worker 버전 2.51 이상에서 사용할 수 있습니다.
+**참고 사항**: 이 기능은 Worker 버전 2.15 이상에서 사용할 수 있습니다.
 
 ### 파이프라인 설정 {#set-up-a-pipeline}
 

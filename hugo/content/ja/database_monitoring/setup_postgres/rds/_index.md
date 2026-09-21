@@ -2,23 +2,26 @@
 description: Amazon RDS 上の Postgres の Database Monitoring をインストールして構成します。
 further_reading:
 - link: /integrations/postgres/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Postgres インテグレーションの基本
 - link: /database_monitoring/guide/rds_autodiscovery
-  tag: よくあるご質問
+  tag: ドキュメント
   text: RDS の Autodiscovery
 - link: /database_monitoring/guide/parameterized_queries/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: SQL クエリパラメーター値のキャプチャ
+- link: https://www.datadoghq.com/architecture/dbm-quick-install-aws-rds-postgres/
+  tag: Architecture Center
+  text: AWS RDS向けDatadog DBMクイックインストール
 title: Amazon RDS マネージド Postgres の Database Monitoring のセットアップ
 ---
-Database Monitoring (DBM) は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを可視化することで、Postgres データベースの内部状態を詳細に把握できるようにします。
+Database Monitoring は、クエリメトリクス、クエリサンプル、実行計画、データベースの状態、フェイルオーバー、イベントを公開することで、Postgres データベースを詳細に可視化します。
 
-Agent は、読み取り専用ユーザーとしてログインして、データベースから直接テレメトリを収集します。Postgres データベースで DBM を有効にするには、以下のセットアップを実行します。
+読み取り専用ユーザーとしてログインし、Agent でデータベースから直接テレメトリを収集します。Postgres データベースで Database Monitoring を有効にするには、以下のセットアップを実行します。
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-postgres-settings)
-1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Agent にデータベースへのアクセス権を付与する](#grant-the-agent-access)
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
 
@@ -29,7 +32,7 @@ Agent は、読み取り専用ユーザーとしてログインして、デー�
 ## はじめに {#before-you-begin}
 
 サポート対象の PostgreSQL バージョン
-: 9.6、10、11、12、13、14、15、16、17
+: 9.6、10、11、12、13、14、15、16、17、18
 
 サポートされている Agent バージョン
 : 7.36.1+
@@ -210,14 +213,46 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
-### パスワードを安全に保管する{#securely-store-your-password}
+### 列統計関数を作成します{#create-the-column-statistics-function}
+
+**すべてのデータベースで**以下の関数を作成し、Agentが`pg_stats`から列レベルのテーブル統計を収集できるようにしてください：
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+関数を作成した後、Postgresインスタンスの設定で収集を有効にしてください：
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+チューニングオプションについては、[Advanced Configuration][15]を参照してください。
+
+### パスワードを安全に保管する {#securely-store-your-password}
 {{% dbm-secret %}}
 
-### データベースの権限を確認する{#verify-database-permissions}
+### データベースの権限を確認する {#verify-database-permissions}
 
 権限が正しく設定されていることを確認するために、次のコマンドを実行して、Agent ユーザーがデータベースに接続してコアテーブルを読み取れることを確認します。
 {{< tabs >}}
-{{% tab "Postgres ≥ 10" %}}
+{{% tab "Postgres 10 以上" %}}
 
 ```shell
 psql -h localhost -U datadog postgres -A \
@@ -256,15 +291,15 @@ psql -h localhost -U datadog postgres -A \
 
 パスワードの入力を求められた場合は、`datadog` ユーザーを作成したときに入力したパスワードを使用してください。
 
-## Agent をインストールし構成する{#install-and-configure-the-agent}
+## Agent をインストールし構成する {#install-and-configure-the-agent}
 
-RDS ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスエンドポイントにリモートで接続するように構成します。Agent をデータベース上で実行する必要はなく、接続するだけで構いません。ここに記載されていない、Agent のその他のインストール方法については、[Agent インストール手順][10] を参照してください。
+RDS ホストを監視するには、インフラストラクチャーに Datadog Agent をインストールし、各インスタンスエンドポイントにリモートで接続するように構成します。Agent はデータベース上で動作する必要はなく、データベースに接続するだけで構いません。ここに記載されていない、Agent のその他のインストール方法については、[Agent インストール手順][10] を参照してください。
 
 {{< tabs >}}
 {{% tab "ホスト" %}}
 ホスト上で実行されている Agent での Database Monitoring メトリクスの収集を構成するには (たとえば、RDS データベースから収集するために小規模な EC2 インスタンスを Agent 用にプロビジョニングする場合など)、次の手順に従ってください。
 
-1. `postgres.d/conf.yaml` ファイルを編集して、`host`/`port` を指定し、監視するマスターを設定します。使用可能なすべての構成オプションについては、[サンプルの postgres.d/conf.yaml][1] を参照してください。
+1. `postgres.d/conf.yaml` ファイルを編集して、`host`/`port` を指定し、モニターするマスターを設定します。使用可能なすべての構成オプションについては、[サンプルの postgres.d/conf.yaml][1] を参照してください。
 
    ```yaml
    init_config:
@@ -331,15 +366,15 @@ RDS ホストを監視するには、インフラストラクチャーに Datado
 {{% /tab %}}
 
 {{% tab "Docker" %}}
-ECS や Fargate のような Docker コンテナで実行されている Agent に対してインテグレーションを構成するには、いくつかの方法があり、すべて [Docker 醸成ドキュメント][1] で詳しく説明されています。
+ECS や Fargate のような Docker コンテナで実行されている Agent に対してインテグレーションを構成するには、いくつかの方法があり、すべて [Docker 構成ドキュメント][1] で詳しく説明されています。
 
-次の例では、[Docker ラベル][2] と [Autodiscovery テンプレート][3] を使用して Postgres インテグレーションを構成する方法を示します。
+次の例では、[Docker ラベル][2] と [Autodiscovery テンプレート][3] を使用して Postgres インテグレーションを構成する方法を示しています。
 
 **注**: Autodiscovery によるラベルの検出を有効にするには、Agent が Docker ソケットの読み取り権限を持っている必要があります。
 
 ### コマンドライン {#command-line}
 
-[コマンドライン][4] から次のコマンドを実行して Agent を起動します。プレースホルダーの値を、実際のアカウントと環境の値に置き換えてください。
+[コマンドライン][4] から次のコマンドを実行して Agent を起動します。プレースホルダーの値は、ご使用のアカウントと環境の値に置き換えてください。
 
 ```bash
 export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -374,7 +409,7 @@ Postgres 9.6 の場合、ホストとポートが指定されているインス�
 
 ### Dockerfile {#dockerfile}
 
-`Dockerfile` 内でラベルを指定することもできます。これにより、インフラストラクチャー構成を変更することなくカスタムの Agent を構築しデプロイできます。
+`Dockerfile` 内でラベルを指定することもできます。これにより、インフラストラクチャー構成を変更することなくカスタムの Agent を構築してデプロイできます。
 
 ```Dockerfile
 FROM registry.datadoghq.com/agent:<AGENT_VERSION>
@@ -391,7 +426,7 @@ Postgres 9.6 の場合、ホストとポートが指定されているインス�
 "pg_stat_activity_view": "datadog.pg_stat_activity()"
 ```
 
-`datadog`ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の [シークレット管理パッケージ][5] を使用し、`ENC[]` 構文を使ってパスワードを宣言します。または、[Autodiscovery テンプレート変数のドキュメント][6] を参照して、パスワードを環境変数として渡すこともできます。
+`datadog` ユーザーのパスワードがプレーンテキストで公開されることがないようにするために、Agent の [シークレット管理パッケージ][5] を使用し、`ENC[]` 構文でパスワードを宣言します。または、[Autodiscovery テンプレート変数のドキュメント][6] を参照して、パスワードを環境変数として渡すこともできます。
 
 [1]: /ja/containers/docker/integrations/?tab=labels#configuration
 [2]: https://docs.docker.com/engine/manage-resources/labels/
@@ -410,7 +445,7 @@ Kubernetes クラスターを実行している場合は、[Datadog Cluster Agen
 
 ### Operator {#operator}
 
-[Kubernetes と Integrations の Operator 手順][3] を参照し、次の手順に従って Postgres インテグレーションを設定してください。
+[Kubernetes と Integrations の Operator 手順][3] を参照し、次の手順に従って Postgres インテグレーションを設定します。
 
 1. 次の構成で `datadog-agent.yaml` ファイルを作成または更新します。
 
@@ -473,7 +508,7 @@ Kubernetes クラスターを実行している場合は、[Datadog Cluster Agen
 
 ### Helm {#helm}
 
-[Kubernetes と Integrations の Helm 手順][4] を参照し、次の手順で Postgres インテグレーションを設定してください。
+[Kubernetes と Integrations の Helm 手順][4] を参照し、次の手順に従って Postgres インテグレーションを設定します。
 
 1. Cluster Agent インストール手順で使用した `datadog-values.yaml` ファイルを、次の構成で更新します。
 
@@ -512,19 +547,19 @@ Kubernetes クラスターを実行している場合は、[Datadog Cluster Agen
     pg_stat_activity_view: datadog.pg_stat_activity()
     ```
 
-2. 上記の構成ファイルを使用して、次のコマンドで Agent をデプロイします。
+2. 上記の構成ファイルを使用し、次のコマンドで Agent をデプロイします。
 
     ```shell
     helm install datadog-agent -f datadog-values.yaml datadog/datadog
     ```
 
 <div class="alert alert-info">
-Windows の場合、 <code>--set targetSystem=windows</code> を <code>helm install</code> コマンドに追加します。
+Windows の場合、 <code>--set targetSystem=windows</code> を <code>helm install</code> コマンドに追記します。
 </div>
 
-### マウントされたファイルで構成する{#configure-with-mounted-files}
+### マウントされたファイルで構成する {#configure-with-mounted-files}
 
-マウントされた構成ファイルを使用してクラスターチェックを設定するには、構成ファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
+マウントされた構成ファイルを使用してクラスターチェックを構成するには、構成ファイルを Cluster Agent コンテナのパス `/conf.d/postgres.yaml` にマウントします。
 
 ```yaml
 cluster_check: true  # Make sure to include this flag
@@ -546,9 +581,9 @@ instances:
     # pg_stat_activity_view: datadog.pg_stat_activity()
 ```
 
-### Kubernetes サービスアノテーションで構成する{#configure-with-kubernetes-service-annotations}
+### Kubernetes サービスアノテーションで構成する {#configure-with-kubernetes-service-annotations}
 
-ファイルをマウントする代わりに、インスタンス構成を Kubernetes サービスとして宣言できます。Kubernetes 上で実行されているエージェントに対してこのチェックを構成するには、次の構文を使用してサービスを作成します。
+ファイルをマウントする代わりに、インスタンス構成を Kubernetes サービスとして宣言できます。Kubernetes 上で実行されている Agent に対してこのチェックを構成するには、次の構文を使用してサービスを作成します。
 
 #### Autodiscovery アノテーション v2 {#autodiscovery-annotations-v2}
 
@@ -593,7 +628,7 @@ spec:
 
 詳細については、[Autodiscovery アノテーション][5] を参照してください。
 
-Postgres 9.6 を使用している場合、インスタンス構成に次の内容を追加します。
+Postgres 9.6 を使用している場合は、インスタンス構成に次の内容を追加します。
 
 ```json
 "pg_stat_statements_view": "datadog.pg_stat_statements()",
@@ -602,7 +637,7 @@ Postgres 9.6 を使用している場合、インスタンス構成に次の内�
 
 Cluster Agent は自動的にこの構成を登録し、Postgres チェックを開始します。
 
-`datadog` ユーザーのパスワードをプレーンテキストで公開しないよう、Agent の [シークレット管理パッケージ][6] を使用し、`ENC[]` 構文を使ってパスワードを宣言します。
+`datadog` ユーザーのパスワードがプレーンテキストで公開されることがないようにするために、Agent の [シークレット管理パッケージ][6] を使用し、`ENC[]` 構文でパスワードを宣言します。
 
 [1]: /ja/containers/cluster_agent/setup/
 [2]: /ja/containers/cluster_agent/clusterchecks/
@@ -613,11 +648,11 @@ Cluster Agent は自動的にこの構成を登録し、Postgres チェックを
 {{% /tab %}}
 {{< /tabs >}}
 
-### Agent のセットアップを確認する{#verify-agent-setup}
+### Agent の設定を確認する {#verify-agent-setup}
 
 [Agent の status サブコマンドを実行][11] し、Checks セクションに `postgres` が表示されていることを確認します。または、[Databases][12] ページにアクセスして開始することもできます。
 
-## Agent の構成例{#example-agent-configurations}
+## Agent の構成例 {#example-agent-configurations}
 {{% dbm-postgres-agent-config-examples %}}
 
 ## RDS インテグレーションをインストールする {#install-the-rds-integration}
@@ -647,6 +682,7 @@ AWS のインフラストラクチャーメトリクス (CPU など) を DBM の
 [12]: https://app.datadoghq.com/databases
 [13]: /ja/integrations/amazon_rds
 [14]: /ja/database_monitoring/troubleshooting/?tab=postgres
+[15]: /ja/database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
 [15]: https://www.postgresql.org/docs/current/sql-explain.html
 [16]: https://www.postgresql.org/docs/current/auto-explain.html
 [17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups.html
