@@ -104,7 +104,7 @@ const handleHomepageEnablementBannerViewSessions = () => {
         const viewSessionsButton = enablementBanner.querySelector('a[data-dd-action-name="homepage-enablement-banner-view-sessions"]');
         if (viewSessionsButton) {
             viewSessionsButton.addEventListener('click', () => {
-                window.DD_RUM.addAction('homepage_enablement_banner_view_sessions_clicked', {
+                window.DD_RUM.addAction('enablement_sessions_banner_cta_clicked', {
                     button_text: viewSessionsButton.textContent,
                 });
                 console.log('viewSessionsButton clicked', viewSessionsButton);
