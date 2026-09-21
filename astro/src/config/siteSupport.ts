@@ -9,7 +9,7 @@
  * Resolution has two tiers and no path-segment walk. See the design notes for
  * why Hugo's segment walk is deliberately not reproduced.
  *
- * ⚠️ This module is build-time-only. It pulls in the `yaml` parser, `picomatch`
+ * This module is build-time-only. It pulls in the `yaml` parser, `picomatch`
  * and the full support table. Do not import it from client-bundled code
  * (Preact components, anything in the hydration graph). The banner is static,
  * so nothing client-side needs this data.

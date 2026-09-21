@@ -6,22 +6,12 @@
  *
  * One element renders per unsupported region, each hidden by default; the CSS
  * generated in BaseLayout reveals only the one matching
- * `html[data-active-region]`. Hugo instead emits a single element whose
- * `data-region` is a comma-joined list, which works there because its client JS
- * does substring matching. Astro's reveal rules compare exact values, so the
- * variants are split out — and splitting them also lets the site name be
- * resolved at build time instead of stamped in by client JS.
+ * `html[data-active-region]`. Astro's reveal rules compare exact values, so the
+ * variants are split out and the site name is resolved at build time.
  *
- * That site name is where this departs from Hugo in mechanism but not in
- * result. Hugo renders an empty `region-param` span and fills it at runtime;
- * here each variant already knows its own region, so the label is baked in.
- *
- * Placement is the caller's job, and it matters: mount this inside the page's
- * content column, directly above the page title. Hugo's banner sits in the
- * main content container, below the breadcrumb. Mounting it in BaseLayout
- * instead — tempting, because every route passes through there — puts it above
- * the side nav and breadcrumb, spanning the full page width. Current callers
- * are ApiLayout.astro and the `[...slug].astro` content route.
+ * Current callers are ApiLayout.astro and the `[...slug].astro` content route. 
+ * Callers control placement and the banner needs to sit inside the page's
+ * content column, directly above the page title and below the breadcrumb.
  */
 import Alert from "@components/Alert/Alert.astro";
 import styles from "./SiteSupportBanner.module.css";

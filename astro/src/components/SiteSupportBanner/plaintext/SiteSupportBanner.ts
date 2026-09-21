@@ -12,11 +12,6 @@ import type { Locale } from "@lib/i18n/locale";
  * Datadog site. A `.md` reader has no region switcher, so there is no selected
  * site to match: this twin instead emits a single block that names every
  * unsupported site by host.
- *
- * That shape is not new. `html-to-mdoc` (corp-node-packages,
- * `elementProcessing/processors/ddSites/siteRegion.ts`) already converts Hugo's
- * banners to one `{% callout %}` listing hosts, so the departure here is in the
- * wording only.
  */
 export function siteSupportNode(
   regionKeys: string[],
