@@ -13,11 +13,15 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI supports Linux hosts, Kubernetes, Docker, and Windows without requiring changes to application dependencies or images. Windows support includes .NET on IIS, or Java and .NET through the host-wide Preview. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI supports Linux hosts, Kubernetes, Docker, and Windows without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
 
-## Windows deployment completes but no traces appear
+## No traces appear after enabling SSI on Windows
 
-A completed Fleet deployment does not confirm application instrumentation. Check the [supported Windows runtimes][14], then [restart the application][15], generate traffic, and verify that traces appear in APM. Recycle the application pool for an IIS-hosted application, restart the specific Windows Service, or restart the standalone application process. Restarting IIS does not restart a separate service that IIS proxies traffic to.
+If your applications do not send traces after you enable SSI:
+
+1. Check the supported runtimes and requirements for [Windows IIS][16] or [Windows host-wide instrumentation (Preview)][14].
+1. [Restart your applications][15] using the instructions for each application type.
+1. Follow the [verification steps][17] to check Agent health, generate application traffic, and confirm that traces appear for each service in APM.
 
 ## Troubleshooting methods
 
@@ -521,3 +525,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 
 [14]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment
 [15]: /tracing/trace_collection/single-step-apm/windows/#restart-your-applications
+[16]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowsiis#compatibility-by-application-environment
+[17]: /tracing/trace_collection/single-step-apm/windows/#verify-the-installation
