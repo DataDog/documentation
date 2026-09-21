@@ -22,20 +22,9 @@ With Single Step Instrumentation (SSI), you can enable APM for your Java and .NE
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
 {{< /skill-callout >}}
 
-## Supported runtimes
-
-| Instrumentation mode | Supported runtimes | Availability |
-| --- | --- | --- |
-| IIS | .NET applications hosted by IIS | GA |
-| Host-wide | Java and .NET applications, including Windows Services and standalone processes | Preview |
-
-Host-wide instrumentation requires [Preview enrollment][8]. For .NET applications outside IIS, you must also [define an instrumentation rule](#define-instrumentation-rules) that allows instrumentation.
-
-Python, Node.js, Ruby, and PHP are not supported by SSI on Windows. For other instrumentation methods, see the [Datadog SDKs][9] and check the compatibility requirements for your language and operating system.
-
 ## Enable APM on Windows
 
-<div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
+Before proceeding, review the supported runtimes and requirements for [Windows IIS][8] or [Windows host-wide instrumentation (Preview)][9] in the SSI compatibility guide.
 
 ### New Agent installation
 
@@ -128,7 +117,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
-   The dialog can show additional languages, such as Python, Node.js, Ruby, and PHP. A detected runtime or an SDK installation option does not establish SSI support on Windows. Select SDKs for the [supported Windows runtimes](#supported-runtimes); installing another SDK does not enable automatic instrumentation for that runtime.
+   The dialog can show additional languages, such as Python, Node.js, Ruby, and PHP. A detected runtime or an SDK installation option does not establish SSI support on Windows. Select SDKs for the [supported Windows runtimes][9]; installing another SDK does not enable automatic instrumentation for that runtime.
 
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
@@ -277,5 +266,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
 [7]: https://app.datadoghq.com/apm/services
-[8]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
-[9]: /tracing/trace_collection/dd_libraries/
+[8]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowsiis#compatibility-by-application-environment
+[9]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment

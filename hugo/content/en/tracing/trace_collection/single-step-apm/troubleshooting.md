@@ -519,5 +519,5 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /tracing/troubleshooting/tracer_debug_logs/
 
-[14]: /tracing/trace_collection/single-step-apm/windows/#supported-runtimes
+[14]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment
 [15]: /tracing/trace_collection/single-step-apm/windows/#restart-your-applications
