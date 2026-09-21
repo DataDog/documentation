@@ -73,7 +73,7 @@
       - `TracingHeaderType.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `TracingHeaderType.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-[1]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
-[2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup?tab=rum#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
+[1]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform
+[2]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform#initialize-the-rum-ktor-plugin-to-track-network-events-made-with-ktor
 [3]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments
 [4]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview

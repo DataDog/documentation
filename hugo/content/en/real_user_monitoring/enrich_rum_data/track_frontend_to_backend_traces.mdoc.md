@@ -130,7 +130,7 @@ The following are the supported backend libraries that need to be on the service
 
 Datadog uses the distributed tracing protocol and sets up the following HTTP headers. By default, both trace context and Datadog-specific headers are used.
 
-These headers are added only when their corresponding propagator type is active. By default, RUM includes the `datadog` propagator alongside trace context. See OpenTelemetry support above to view or change which propagators are enabled.
+These headers are added only when their corresponding propagator type is active. By default, RUM includes the `datadog` propagator alongside trace context. See the OpenTelemetry support step in your platform's setup instructions above to view or change which propagators are enabled.
 
 {% tabs %}
 {% tab label="Datadog" %}

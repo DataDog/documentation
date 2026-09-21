@@ -19,4 +19,4 @@ RUM for Roku is not available on the {% region-param key="dd_datacenter" /%} Dat
         result = ddUrlTransfer.GetToString()
     ```
 
-[1]: /real_user_monitoring/application_monitoring/roku/setup/
+[1]: /real_user_monitoring/setup/install/?platform=roku

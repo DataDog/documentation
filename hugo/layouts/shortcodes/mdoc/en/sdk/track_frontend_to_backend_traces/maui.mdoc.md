@@ -38,4 +38,4 @@
     }
     ```
 
-[1]: /real_user_monitoring/application_monitoring/maui/setup/
+[1]: /real_user_monitoring/setup/install/?platform=maui

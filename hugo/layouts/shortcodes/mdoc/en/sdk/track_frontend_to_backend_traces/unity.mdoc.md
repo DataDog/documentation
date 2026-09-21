@@ -14,4 +14,4 @@
 
 5. _(Optional)_ Set {% ui %}Trace Context Injection{% /ui %} in your {% ui %}Project Settings{% /ui %} to {% ui %}All{% /ui %} or {% ui %}Only Sampled{% /ui %} to control whether trace context is injected into every resource request or only into sampled ones.
 
-[1]: /real_user_monitoring/application_monitoring/unity/setup/
+[1]: /real_user_monitoring/setup/install/?platform=unity
