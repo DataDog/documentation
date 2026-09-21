@@ -52,6 +52,10 @@ The minimum Datadog Agent version you need depends on which products you use:
 Datadog is continuously evaluating customer requests to support DDR for additional products. Contact the <a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery team</a> to learn about upcoming capabilities and your specific needs if they are not covered above.
 </div>
 
+Non-Agent telemetry sources, such as Lambda extensions, Fluent Bit, OpenTelemetry Collector, and custom API clients, handle DNS caching and connection reuse differently. For each supported source you use, you're responsible for verifying that it picks up DNS changes and sends telemetry to the secondary region after failover.
+
+**Requirements for customer-initiated DNS failover**: Telemetry is supported only if its type, source, and intake path are listed as supported in this documentation. The source must send telemetry to the Datadog-delegated domain and re-resolve DNS to pick up destination changes. Sources that never re-resolve DNS or cache DNS indefinitely are not supported.
+
 ## Setup
 
 Follow these steps to enable Datadog Disaster Recovery. If you have questions about any of the steps, contact your [Customer Success Manager][14] or [Datadog Support][15].
