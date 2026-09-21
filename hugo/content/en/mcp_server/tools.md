@@ -440,23 +440,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -464,16 +466,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -482,9 +484,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -498,22 +500,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -1347,6 +1349,68 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
+
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
 
 ## Networks
 
@@ -2677,6 +2741,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 

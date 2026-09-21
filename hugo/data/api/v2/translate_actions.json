@@ -2766,6 +2766,30 @@
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
   },
+  "ListSnowflakeIntegrationAccounts": {
+    "description": "List Snowflake integration accounts.",
+    "summary": "List Snowflake integration accounts"
+  },
+  "CreateSnowflakeIntegrationAccount": {
+    "description": "Create a Snowflake integration account.",
+    "summary": "Create a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Snowflake integration account."
+  },
+  "DeleteSnowflakeIntegrationAccount": {
+    "description": "Delete a Snowflake integration account.",
+    "summary": "Delete a Snowflake integration account"
+  },
+  "GetSnowflakeIntegrationAccount": {
+    "description": "Get a Snowflake integration account.",
+    "summary": "Get a Snowflake integration account"
+  },
+  "UpdateSnowflakeIntegrationAccount": {
+    "description": "Update a Snowflake integration account. Only the fields provided are changed.",
+    "summary": "Update a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Snowflake integration account."
+  },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
     "summary": "List Twilio integration accounts"
@@ -7531,7 +7555,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {

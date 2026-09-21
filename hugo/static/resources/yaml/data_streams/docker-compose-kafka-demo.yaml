@@ -9,10 +9,11 @@
 # This starts:
 #   - Kafka (KRaft mode, no ZooKeeper) + Schema Registry
 #   - Kafka Connect with an instrumented source and sink connector
-#   - Datadog Agent with Kafka Consumer integration
+#   - Datadog Agent with Kafka Consumer and Kafka Broker integrations
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
 #   - Schema evolver (registers a new schema version every 4 min, renaming field 7 to region_vN)
+#   - Second broker (kafka2) + chaos sidecar that pauses/unpauses it on a cycle
 #
 # View in Datadog (wait 2-3 min):
 #  - Navigate to Data Streams Monitoring and view your Kafka cluster & consumer / producer apps.
@@ -22,6 +23,7 @@ version: '3.8'
 services:
   kafka:
     image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka
     hostname: kafka
     ports:
       - "9092:9092"
@@ -40,6 +42,8 @@ services:
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
       CLUSTER_ID: 'Mka3OEVBNTcwNTJENDM2Qk'
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: kafka
     command: >
       bash -c "
       sed -i '/KAFKA_ZOOKEEPER_CONNECT/d' /etc/confluent/docker/configure &&
@@ -47,6 +51,47 @@ services:
       "
     healthcheck:
       test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  kafka2:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka2
+    hostname: kafka2
+    depends_on:
+      kafka:
+        condition: service_healthy
+      schema-registry:
+        condition: service_healthy
+      kafka-connect:
+        condition: service_healthy
+      producer:
+        condition: service_started
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: 'broker'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:29093'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_LISTENERS: 'PLAINTEXT://kafka2:19092,PLAINTEXT_HOST://0.0.0.0:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka2:19092,PLAINTEXT_HOST://localhost:9093'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      CLUSTER_ID: 'Mka3OEVBNTcwNTJENDM2Qk'
+    command: >
+      bash -c "
+      sed -i '/KAFKA_ZOOKEEPER_CONNECT/d' /etc/confluent/docker/configure &&
+      /etc/confluent/docker/run
+      "
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "kafka2:19092"]
       interval: 10s
       timeout: 10s
       retries: 5
@@ -138,7 +183,7 @@ services:
       retries: 12
 
   datadog-agent:
-    image: gcr.io/datadoghq/agent:7.83.1
+    image: gcr.io/datadoghq/agent:7.83.1-jmx
     depends_on:
       kafka:
         condition: service_healthy
@@ -162,6 +207,8 @@ services:
     configs:
       - source: kafka_consumer_config
         target: /etc/datadog-agent/conf.d/kafka_consumer.d/conf.yaml
+      - source: kafka_broker_config
+        target: /etc/datadog-agent/conf.d/kafka.d/conf.yaml
 
   producer:
     image: python:3.11-slim
@@ -200,6 +247,10 @@ services:
     depends_on:
       producer:
         condition: service_started
+      kafka2:
+        condition: service_healthy
+      kafka-connect:
+        condition: service_healthy
     command:
       - bash
       - -c
@@ -218,6 +269,18 @@ services:
           --entity-type topics --entity-name connector-source-events \
           --alter --add-config retention.ms=180000
         echo "Set connector-source-events retention.ms to 180000 (3 min)"
+        if ! kafka-topics --bootstrap-server kafka:19092 --list | grep -q '^demo-offline-test$$'; then
+          if kafka-topics --bootstrap-server kafka:19092 \
+              --create --topic demo-offline-test \
+              --replica-assignment 2,2,2; then
+            echo "Created demo-offline-test with all partitions on broker 2"
+          else
+            echo "Failed to create demo-offline-test" >&2
+            exit 1
+          fi
+        else
+          echo "demo-offline-test already exists"
+        fi
     restart: "no"
 
   consumer:
@@ -298,6 +361,32 @@ services:
       "
     restart: unless-stopped
 
+  chaos:
+    image: docker:cli
+    container_name: kafka-chaos
+    depends_on:
+      topic-config:
+        condition: service_completed_successfully
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command:
+      - sh
+      - -c
+      - |
+        TRIGGER_SECONDS=300
+        RESOLVE_SECONDS=420
+
+        sleep 30
+        while true; do
+          echo "Pausing kafka2 - offline partitions should fire"
+          docker pause kafka2 || true
+          sleep $$TRIGGER_SECONDS
+          echo "Unpausing kafka2 - offline partitions should resolve"
+          docker unpause kafka2 || true
+          sleep $$RESOLVE_SECONDS
+        done
+    restart: unless-stopped
+
 configs:
   kafka_consumer_config:
     content: |
@@ -311,6 +400,20 @@ configs:
           tags:
             - env:demo
             - cluster:kafka-demo
+
+  kafka_broker_config:
+    content: |
+      init_config:
+        is_jmx: true
+        collect_default_metrics: true
+
+      instances:
+        - host: kafka
+          port: 9999
+          tags:
+            - env:demo
+            - cluster:kafka-demo
+            - kafka_cluster_id:Mka3OEVBNTcwNTJENDM2Qg
 
   order_proto:
     content: |

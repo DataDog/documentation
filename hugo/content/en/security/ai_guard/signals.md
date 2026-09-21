@@ -76,17 +76,17 @@ To create AI Guard detection rules:
          <td><code>true</code> or <code>false</code></td>
        </tr>
        <tr>
-         <td><code>@ai_guard.tools</code></td>
+         <td><code>@ai_guard.tool_name</code></td>
          <td>Filter by specific tool names involved in the evaluation</td>
          <td><code>get_user_profile</code>, <code>user_recent_transactions</code>, etc.</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.categories</code></td>
+         <td><code>@ai_guard.sds.category</code></td>
          <td>Filter by sensitive data categories detected by Sensitive Data Scanner</td>
          <td><code>credentials</code>, <code>email_address</code>, etc.</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.rule_tags</code></td>
+         <td><code>@ai_guard.sds.rule_tag</code></td>
          <td>Filter by specific sensitive data rule tags</td>
          <td><code>aws_access_key_id</code>, <code>aws_secret_access_key</code>, <code>claude_api_key</code>, <code>email_address</code>, etc.</td>
        </tr>

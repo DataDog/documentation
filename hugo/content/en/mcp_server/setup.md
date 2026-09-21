@@ -744,6 +744,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
 - `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting
+- `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
 ## Supported clients
@@ -1007,3 +1008,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [74]: /bits_ai/bits_investigation/
 [75]: /sheets/
 [76]: /mcp_server/code_execution/ 
+[77]: /tracing/live_debugger/

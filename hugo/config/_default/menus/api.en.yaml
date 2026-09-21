@@ -20889,6 +20889,75 @@ menu:
           - ListServiceNowAssignmentGroups
         unstable: []
         order: 6
+    - name: Snowflake Integration
+      url: /api/latest/snowflake-integration/
+      identifier: snowflake-integration
+      generated: true
+    - name: Update a Snowflake integration account
+      url: /api/latest/snowflake-integration/update-a-snowflake-integration-account/
+      identifier: snowflake-integration-update-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Snowflake integration account
+      url: /api/latest/snowflake-integration/get-a-snowflake-integration-account/
+      identifier: snowflake-integration-get-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Snowflake integration account
+      url: /api/latest/snowflake-integration/delete-a-snowflake-integration-account/
+      identifier: snowflake-integration-delete-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Snowflake integration account
+      url: /api/latest/snowflake-integration/create-a-snowflake-integration-account/
+      identifier: snowflake-integration-create-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Snowflake integration accounts
+      url: /api/latest/snowflake-integration/list-snowflake-integration-accounts/
+      identifier: snowflake-integration-list-snowflake-integration-accounts
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSnowflakeIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog
