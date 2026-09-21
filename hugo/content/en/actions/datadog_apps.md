@@ -1,6 +1,8 @@
 ---
 title: Apps
 description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
+aliases:
+- /internal_developer_portal/plugins/
 further_reading:
 - link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
   tag: "Blog"
