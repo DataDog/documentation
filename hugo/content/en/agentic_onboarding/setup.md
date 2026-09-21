@@ -257,27 +257,6 @@ Agent skills give AI coding agents reusable instructions for Datadog tasks. Each
 
 Use [`dd-orchestrator`][21] to set up Datadog from a goal, such as "monitor this application". It helps connect your account, choose relevant products, and coordinate setup and verification for your environment. It asks you to approve the setup plan and identifies steps it cannot automate.
 
-### Available skills
-
-Browse by task, then follow the linked instructions for requirements and supported workflows.
-
-| Task | Skill documentation |
-|------|---------------------|
-| Connect a Datadog account or choose products | [Account setup][22], [Product recommendations][23] |
-| Set up tracing and investigate service performance | [APM][24] |
-| Add or repair Browser RUM instrumentation | [RUM instrumentation][25] |
-| Upgrade the Browser SDK | [Browser SDK upgrades][26] |
-| Connect cloud accounts with Terraform | [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] |
-| Search logs and manage logging configuration | [Log Management][31] |
-| Create monitors and manage alerts | [Monitors][32] |
-| Investigate account activity and configuration changes | [Audit Trail][33] |
-| Diagnose AI application failures and evaluate changes | [Agent Observability][34] |
-| Investigate failing pipelines and flaky tests | [Software Delivery][35] |
-| Build and publish Datadog Apps | [Datadog Apps][36] |
-| Define ownership preferences for cloud resources | [Resource ownership][37] |
-| Work with Datadog APIs from the command line | [Pup CLI][38] |
-| Find Datadog documentation | [Documentation search][39] |
-
 ### Install and use a skill
 
 With Node.js and `npx` installed, run this command from your project directory to install the orchestrator:
@@ -303,6 +282,32 @@ npx skills add datadog-labs/agent-skills --list --full-depth
 Use the selected name as the `--skill` value and name it in your prompt.
 
 For product-specific examples, see [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43].
+
+### Available skills
+
+Start with a skill below. Follow its link for prerequisites, supported tasks, and any supporting skills it uses.
+
+| Skill | Use it to |
+|-------|-----------|
+| [`dd-orchestrator`][21] | Coordinate Datadog setup for a project. |
+| [`dd-account-setup`][22] | Connect or create a Datadog account. |
+| [`dd-product-recommender`][23] | Choose products for an application or goal. |
+| [`dd-apm`][24] | Set up tracing and investigate service performance. |
+| [`dd-instrument-rum`][25] | Add or repair Browser RUM instrumentation. |
+| [`dd-browser-sdk`][26] | Configure browser monitoring and upgrade SDK versions. |
+| [`dd-aws-integration`][27] | Connect AWS with Terraform. |
+| [`dd-azure-integration`][28] | Connect Azure with Terraform. |
+| [`dd-gcp-integration`][29] | Connect Google Cloud with Terraform. |
+| [`dd-oci-integration`][30] | Connect Oracle Cloud Infrastructure with Terraform. |
+| [`dd-logs`][31] | Search logs and manage logging configuration. |
+| [`dd-monitors`][32] | Create monitors and manage alerts. |
+| [`dd-audit`][33] | Investigate account activity, configuration changes, and usage increases. |
+| [`datadog-app`][36] | Build and publish Datadog Apps. |
+| [`k9-ownership-byod-setup`][37] | Define ownership preferences for cloud resources. |
+| [`dd-pup`][38] | Authenticate and use the Pup CLI. |
+| [`dd-docs`][39] | Find Datadog documentation. |
+
+Additional collections provide skills for [Agent Observability][34] (experiments, evaluations, and trace analysis) and [Software Delivery][35] (failing pipelines and flaky tests).
 
 ## Next steps
 
