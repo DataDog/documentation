@@ -50,6 +50,21 @@ Find draft monitors from the [{{< ui >}}Monitors List{{< /ui >}}][3] by using th
 
 Anyone with [edit permissions][4] can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
 
+The **Draft Monitors Write** permission lets users manage draft monitors without the broader **Monitors Write** permission. Grant this permission to users who need to work on drafts without modifying published monitors.
+
+A user with only the **Draft Monitors Write** permission can:
+
+- Create a monitor, as long as it's saved with `draft_status` set to `draft`.
+- Edit an existing draft monitor, as long as the edit does not change `draft_status` away from `draft`.
+- Delete a draft monitor they created, or a draft owned by a team they belong to.
+
+A user with only the **Draft Monitors Write** permission cannot:
+
+- Publish draft monitors.
+- Edit or delete published monitors.
+
+These permissions apply in both the Datadog UI and API.
+
 ## Best practices
 
 * **Use drafts for peer reviews:** Collaborate before pushing changes live.  
