@@ -119320,15 +119320,43 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLE
     TableRowResourceArray:
-      description: List of rows from a reference table query.
+      description: List of rows from a reference table query, along with metadata about rows that were requested but not found.
       properties:
         data:
           description: The rows.
           items:
             $ref: "#/components/schemas/TableRowResourceData"
           type: array
+        meta:
+          $ref: "#/components/schemas/TableRowResourceArrayMeta"
       required:
         - data
+      type: object
+    TableRowResourceArrayMeta:
+      description: Metadata about the rows requested, including which ones were not found.
+      properties:
+        found_count:
+          description: Number of requested rows that were found and returned in `data`.
+          example: 1
+          format: int64
+          type: integer
+        not_found:
+          description: Row IDs from the request that do not exist in the reference table. Empty when every requested row was found.
+          example:
+            - row_id_2
+          items:
+            description: Row identifier, corresponding to the primary key value.
+            type: string
+          type: array
+        requested_count:
+          description: Number of row IDs supplied in the `row_id` query parameter.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - requested_count
+        - found_count
+        - not_found
       type: object
     TableRowResourceData:
       additionalProperties: false
@@ -165243,12 +165271,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/{incident_id}/cases/page:
     post:
-      deprecated: true
-      description: |-
-        Create a page from an incident using the Cases service.
-
-        **Deprecated**: This endpoint is deprecated. Use
-        [Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.
+      description: Create a page from an incident using the Cases service.
       operationId: CreatePageFromIncident
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"
@@ -195159,6 +195182,11 @@ paths:
                             name: Example Row
                         id: row_id_1
                         type: row
+                    meta:
+                      found_count: 1
+                      not_found:
+                        - row_id_2
+                      requested_count: 2
               schema:
                 $ref: "#/components/schemas/TableRowResourceArray"
           description: Some or all requested rows were found.
