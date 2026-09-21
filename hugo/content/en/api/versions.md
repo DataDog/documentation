@@ -37,7 +37,7 @@ Non-breaking, additive changes include:
 - Adding a new enum value
 - Adding new attributes to an existing payload
 
-Datadog releases a new version of an operation for breaking changes. Non-breaking changes don't require a new version and roll out to all existing versions.
+For operations that use date-based versioning, Datadog releases a new version to introduce a breaking change. Non-breaking changes don't require a new version and roll out to all existing versions.
 
 ## Specifying a version
 
