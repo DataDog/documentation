@@ -58,7 +58,7 @@ Follow these steps to enable Datadog Disaster Recovery. If you have questions ab
 
 ### 1. Create and link your secondary organization
 
-{{% collapse-content title="1\. Create your secondary organization" level="h4" id="1-create-your-secondary-organization" %}}
+{{% collapse-content title="1\. Create your secondary organization" level="h4" %}}
 
 [Sign up][16] for a new Datadog organization on a Datadog site in a different region and data center than your primary organization, to help ensure geographic separation.
 
@@ -68,7 +68,7 @@ If you use cloud provider integrations to send telemetry to Datadog, add those c
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="2\. Share organization details with Datadog" level="h4" id="2-share-organization-details-with-datadog" %}}
+{{% collapse-content title="2\. Share organization details with Datadog" level="h4" %}}
 
 Share your new organization's name and details with your Datadog account team.
 
@@ -76,7 +76,7 @@ Datadog configures your new organization as your secondary failover organization
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="3\. Retrieve organization IDs and link organizations" level="h4" id="3-retrieve-organization-ids-and-link-organizations" %}}
+{{% collapse-content title="3\. Retrieve organization IDs and link organizations" level="h4" %}}
 
 <div class="alert alert-info">For security reasons, Datadog is unable to link organizations on your behalf.</div>
 
