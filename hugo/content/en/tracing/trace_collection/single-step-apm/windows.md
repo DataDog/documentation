@@ -139,9 +139,9 @@ After installing the SDKs and applying the instrumentation configuration, restar
 | Windows Service | Restart the specific Windows Service that runs the application. |
 | Standalone application | Stop and start the application process. |
 
-Restarting IIS does not restart a separate service that IIS proxies traffic to, such as a Java or Python service. Restart that service separately after configuring a supported instrumentation method. Restarting a Python service alone does not enable SSI on Windows.
+If IIS proxies traffic to a separate service, restart that service separately. Restarting IIS does not restart it.
 
-After a successful SSI deployment, you do not need to reboot the Windows host or manually restart the Datadog Agent. Restarting the Agent does not replace restarting the application.
+After a successful SSI deployment, restart your applications. You do not need to reboot the Windows host or restart the Datadog Agent. Restarting the Agent does not replace restarting your applications.
 
 ## Verify the installation
 
