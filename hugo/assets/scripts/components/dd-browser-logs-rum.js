@@ -105,8 +105,8 @@ const handleHomepageEnablementBannerViewSessions = () => {
         if (viewSessionsButton) {
             viewSessionsButton.addEventListener('click', () => {
                 window.DD_RUM.addAction('homepage_enablement_banner_view_sessions', {});
+                console.log('viewSessionsButton clicked', viewSessionsButton);
             });
-            console.log('viewSessionsButton', viewSessionsButton);
         }
         console.log('no viewSessionsButton', enablementBanner);
     }
