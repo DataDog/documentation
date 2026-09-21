@@ -50,7 +50,7 @@ Find draft monitors from the [{{< ui >}}Monitors List{{< /ui >}}][3] by using th
 
 Anyone with [edit permissions][4] can update a draft monitor. You can use events to preview how often the monitor would have triggered without sending actual notifications.
 
-Datadog also offers a more granular **Draft Monitors Write** permission that lets a user create, edit, and delete draft monitors without requiring full Monitors Write access. This lets you delegate drafting and iteration on monitors to more users, while still restricting who can affect live, published monitors.
+Datadog offers a more granular **Draft Monitors Write** permission that allows a user to create, edit, and delete draft monitors without requiring full Monitors Write access. Use it to delegate drafting and iteration to more users while restricting who can affect live, published monitors.
 
 A user with only the Draft Monitors Write permission can:
 
