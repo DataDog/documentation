@@ -5,17 +5,13 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your web applications with the Datadog Browser SDK. The Browser SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][2], [Session Replay][3], and [Product Analytics][4].
 
-Select a setup method based on your application stack and workflow:
-
-- **Manual client-side setup**: Add the SDK directly to your frontend code when you need full control over initialization and configuration.
-- **Agentic Onboarding**: Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
-- **Server-side auto-instrumentation (RUM only)**: Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
-
 The Browser SDK supports all modern desktop and mobile browsers.
 
 ## Setup
 
 {% collapse-content title="Option 1: Manual client-side setup" level="h3" %}
+
+Add the SDK directly to your frontend code when you need full control over initialization and configuration.
 
 {% stepper level="h4" %}
 
@@ -337,11 +333,15 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
+Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
+
 Use the [Agentic Onboarding][9] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
 {% /collapse-content %}
 
 {% collapse-content title="Option 3: Server-side auto-instrumentation (RUM only)" level="h3" %}
+
+Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
 
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
