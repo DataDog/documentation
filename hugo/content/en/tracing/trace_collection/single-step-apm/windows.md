@@ -24,7 +24,7 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 
 ## Enable APM on Windows
 
-Before proceeding, review the supported runtimes and requirements for [Windows IIS][8] or [Windows host-wide instrumentation (Preview)][9] in the SSI compatibility guide.
+<div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
 
 ### New Agent installation
 
