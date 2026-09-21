@@ -6398,6 +6398,11 @@ menu:
       parent: delivery_performance
       identifier: delivery_performance_ai_impact
       weight: 2
+    - name: Setup
+      url: delivery_performance/ai_impact/setup/
+      parent: delivery_performance_ai_impact
+      identifier: delivery_performance_ai_impact_setup
+      weight: 1
     - name: Feature Flags
       url: feature_flags/
       pre: signpost

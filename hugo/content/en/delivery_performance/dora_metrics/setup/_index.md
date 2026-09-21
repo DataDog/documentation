@@ -41,6 +41,8 @@ To start using DORA Metrics, follow these steps:
 
 When configured, deployment events automatically populate your [DORA Metrics dashboard][1] with performance data filtered by team, service, environment, and [custom tags](#custom-tags).
 
+Delivery Performance general settings also identify the automation bots in your repositories. That configuration affects both DORA Metrics and AI Impact. For more information, see [Identify automation bots][7].
+
 ### Limitations
 
 - When you first select a data source option (such as APM Deployment Tracking), DORA Metrics begins populating data from that point forward. If you switch from source A to source B, then back to source A, the historical data from source A is only available from the time it was first selected.
@@ -380,3 +382,4 @@ For detailed information about how detection works and how to customize rules, s
 [4]: /internal_developer_portal/catalog/entity_model/
 [5]: /delivery_performance/dora_metrics/change_failure_detection/
 [6]: https://app.datadoghq.com/ci/settings/dora
+[7]: /delivery_performance/ai_impact/setup/#identify-automation-bots
