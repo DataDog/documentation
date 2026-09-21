@@ -22,9 +22,9 @@ The model learns from the metric's history to set expected bounds. When an obser
 
 When you create an anomaly detection monitor, it enters a training period. During training, the monitor collects historical values to learn the metric's baseline behavior. It does not trigger alerts during this period, and the monitor chart appears in blue.
 
-Training typically takes between 3 and 7 days, depending on how frequently the underlying metric updates. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior.
+Training typically takes between 3 and 9 days. Because many data pipelines behave differently on weekends, the model needs to observe both weekday and weekend behavior.
 
-After training completes, the monitor begins alerting. The chart uses color to indicate the current evaluation state:
+After training completes, the monitor can alert. The chart shows the observed values over time, with bounds above and below the line as a shaded area showing expected values. The color shows the current state:
 
 | Color | State | Description |
 |-------|-------|-------------|
@@ -32,13 +32,13 @@ After training completes, the monitor begins alerting. The chart uses color to i
 | Green | Normal | The observed value is within expected bounds. |
 | Red | Alerting | The observed value fell outside expected bounds. |
 
-## Model states
+## Alert state
 
-The model often reuses prior predictions rather than generating new ones, such as when a value hasn't changed or when the monitor is in an alerting state. As a result, adding [annotations][2] is the primary way to get an alerting monitor back to a normal state and resume learning from new values.
+When an anomaly is found, the model will remain in alert state for some time, until either the observed value returns to the original expected bounds or the anomaly has persisted long enough that the model considers it a new normal state. To resolve the monitor manually and return it to normal state, use [annotations][2].
 
 ## Metric-specific behavior
 
-While the core model logic is shared across metric types, each type has additional rules:
+The model works differently for different metrics:
 
 ### Freshness
 
@@ -46,19 +46,19 @@ Freshness monitors alert when the time since the last refresh is longer than exp
 
 ### Row count
 
-Row count monitors alert when a table's row count has flatlined, meaning it has not changed for longer than normal. A stalled row count may indicate a broken pipeline.
+Row count monitors alert not only when there is an unusual change, but also when a row count flatlines, meaning it has not changed for longer than normal. A stalled row count may indicate a broken pipeline.
 
-### Percentage (nullness, uniqueness)
+### Percentage (e.g. nullness, uniqueness)
 
-Percentage metrics are bounded between 0 and 100. If the metric stays away from those extremes, a jump to 0% or 100% triggers an alert.
+Percentage metrics are scaled from 0 to 100. If the metric has never been 0 or 100, a change to these values triggers an alert.
 
 ### Custom SQL
 
-For custom SQL monitors with the **Default** model type, the model infers the expected range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
+For Custom SQL monitors, select a model type for your metric: **Freshness**, **Percentage** or **Default**.  The **Default** model infers the range from the metric's history. For example, if a custom metric has never returned a negative value, the model constrains the lower bound to 0.
 
 ## Seasonality
 
-The model uses up to 400 days of history to detect seasonal patterns, account for trends, and incorporate feedback from past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
+The model uses up to 400 days of history to adjust for seasonal patterns, trends, and past annotations. For example, if a metric consistently drops on Sundays, the model treats lower values on Sundays as normal rather than anomalous.
 
 The following seasonal patterns are detected:
 
@@ -69,7 +69,7 @@ The following seasonal patterns are detected:
 | Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. |
 | Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. |
 
-Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal ("green") history before it can detect a given pattern.
+Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal history before it can detect a given pattern.
 
 ## Trends
 
@@ -77,11 +77,11 @@ The model accounts for whether a metric is growing or shrinking over time. For a
 
 ## Annotations
 
-Annotations let you provide feedback to the model when it misclassifies a point, either by missing an alert or by generating a false alert. Because data quality expectations are often business-specific, annotations are the primary way to tune the model to your team's needs over time.
+Annotations let you immediately retrain the model when it misclassifies a point, either by missing an alert or by generating a false alert. Because data quality expectations are often metric-specific, annotations are the primary way to tune the model to your team's needs.
 
 Annotations have two effects:
-- **Correcting the current state**: Marking a flagged point as expected moves the monitor out of the alerting state and resumes normal learning.
-- **Shaping future predictions**: The model weights annotated points when generating future bounds, so repeated feedback improves accuracy over time.
+- **Correcting the current state**: Marking a flagged point as expected moves the monitor out of the alerting state to normal state at the next observation, so it can then alert on new anomalies.
+- **Shaping future predictions**: The model uses annotated points to adjust future bounds, so feedback immediately improves accuracy.
 
 See [Annotate bounds][2] on the Data Observability Monitor page for available annotation types and how to apply them.
 
