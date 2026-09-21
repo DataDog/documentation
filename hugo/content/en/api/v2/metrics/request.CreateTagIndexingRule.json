@@ -9,10 +9,6 @@
       "name": "my-indexing-rule",
       "options": {
         "data": {
-          "dynamic_tags": {
-            "queried_tags_window_seconds": 3600,
-            "related_asset_tags": false
-          },
           "manage_preexisting_metrics": true,
           "metric_match": {
             "queried_window_seconds": 3600
