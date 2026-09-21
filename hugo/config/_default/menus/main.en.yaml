@@ -2819,6 +2819,11 @@ menu:
       parent: incidents_integrations
       identifier: incidents_integrations_statuspage
       weight: 507
+    - name: Zoom
+      url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
+      parent: incidents_integrations
+      identifier: incidents_integrations_zoom
+      weight: 508
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
