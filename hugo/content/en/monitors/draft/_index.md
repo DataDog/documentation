@@ -55,7 +55,7 @@ Datadog offers a more granular **Draft Monitors Write** permission that allows a
 A user with only the Draft Monitors Write permission can:
 
 - Create a monitor, as long as it's saved with `draft_status` set to `draft`.
-- Edit an existing draft monitor, as long as the edit doesn't publish it (that is, doesn't change `draft_status` away from `draft`).
+- Edit an existing draft monitor, as long as the edit does not change `draft_status` away from `draft`.
 - Delete a draft monitor they created, or a draft owned by a team they belong to.
 
 A user with only the Draft Monitors Write permission cannot:
