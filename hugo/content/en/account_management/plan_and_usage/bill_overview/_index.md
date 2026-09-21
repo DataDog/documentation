@@ -92,7 +92,7 @@ Toggle between {{< ui >}}Monthly{{< /ui >}} and {{< ui >}}Daily{{< /ui >}} views
 
 Click {{< ui >}}View Details{{< /ui >}} on a Trends card or click any row in the {{< ui >}}Product List{{< /ui >}} table to open the product detail page for a single billing dimension.
 
-{{< img src="account_management/plan_and_usage/bill-overview-detail-light-3.png" alt="Infra Hosts product detail page showing the Usage Overview section with a per-host-type breakdown and a Usage Types stacked bar chart, above the Resource Drilldown table and the Download Billable Resources as CSV button" >}}  
+{{< img src="account_management/plan_and_usage/bill-overview-detail-light-3.png" alt="Infra Hosts product detail page showing the Usage Overview section with a per-host-type breakdown and a Usage Types stacked bar chart, above the Resource Drilldown table and the Download Billable Resources as CSV button" >}}
 
 ### Cost Overview
 
