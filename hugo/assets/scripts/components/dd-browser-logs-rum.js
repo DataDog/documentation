@@ -102,9 +102,13 @@ const handleHomepageEnablementBannerViewSessions = () => {
     const enablementBanner = document.querySelector('.home-enablement-banner');
     if (enablementBanner) {
         const viewSessionsButton = enablementBanner.querySelector('a[data-dd-action-name="homepage-enablement-banner-view-sessions"]');
-        viewSessionsButton.addEventListener('click', () => {
-            window.DD_RUM.addAction('homepage_enablement_banner_view_sessions', {});
-        });
+        if (viewSessionsButton) {
+            viewSessionsButton.addEventListener('click', () => {
+                window.DD_RUM.addAction('homepage_enablement_banner_view_sessions', {});
+            });
+            console.log('viewSessionsButton', viewSessionsButton);
+        }
+        console.log('no viewSessionsButton', enablementBanner);
     }
 };
 
