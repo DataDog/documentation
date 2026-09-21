@@ -145,7 +145,7 @@ After a successful SSI deployment, you do not need to reboot the Windows host or
 
 ## Verify the installation
 
-A completed Fleet deployment confirms delivery of the configuration or SDKs. It does not confirm that the SDK has loaded into an application or that the application is sending traces.
+Follow these steps to check Agent health and confirm that your applications send traces to APM.
 
 1. From an administrator PowerShell session, confirm the Agent is healthy and the APM Agent is running:
 
@@ -155,7 +155,7 @@ A completed Fleet deployment confirms delivery of the configuration or SDKs. It 
 
    Check the **APM Agent** section of the output.
 
-1. After restarting your applications, generate traffic and confirm that your services and traces appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. Generate traffic to your applications, open each service on the [APM Services page][7], and confirm that traces appear. If traces don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
