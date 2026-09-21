@@ -116,7 +116,7 @@ Select your environment to see compatibility requirements and limitations:
 
 ### Limitations
 
-- **Other runtimes**: Python, Node.js, Ruby, and PHP are not supported by SSI on Windows, even if Fleet Automation displays SDK installation options for them.
+- **Other runtimes**: Python, Node.js, Ruby, and PHP are not supported by SSI on Windows.
 
 For setup and application restart instructions, see [Single Step APM Instrumentation on Windows][22].
 
