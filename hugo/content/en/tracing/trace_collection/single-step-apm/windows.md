@@ -117,7 +117,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
-   **Note**: The dialog can show additional languages, such as Python, Node.js, Ruby, and PHP. A detected runtime or an SDK installation option does not establish SSI support on Windows. Select SDKs for the [supported Windows runtimes][9]; installing another SDK does not enable automatic instrumentation for that runtime.
+   **Note**: The SDK installation dialog can list languages that SSI does not support on Windows. Select only SDKs for the [supported Windows runtimes][9].
 
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
