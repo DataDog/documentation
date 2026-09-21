@@ -48,9 +48,8 @@ Enabling Single Step Instrumentation across your cluster automatically sends tra
 
 **Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
-Use the following commands to enable SSI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
-
-Replace `<DATADOG_SITE>` with your [Datadog site][43]. Your site is {{< region-param key="dd_site" code="true" >}}. Select the correct **SITE** on the right.
+Use the following commands to enable SSI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. Replace `<DATADOG_SITE>` with your [Datadog site][43]: {{< region-param key="dd_site" code="true" >}}. 
+SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
 
 These examples use the `datadog` namespace. Replace it if your Agent is installed elsewhere.
 
