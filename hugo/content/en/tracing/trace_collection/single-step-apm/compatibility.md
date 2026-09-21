@@ -120,6 +120,10 @@ Select your environment to see compatibility requirements and limitations:
 
 For setup and application restart instructions, see [Single Step APM Instrumentation on Windows][22].
 
+[20]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
+[21]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
+[22]: /tracing/trace_collection/single-step-apm/windows/
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -346,7 +350,3 @@ The following Linux distributions and architectures are supported for SSI across
 
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/guide/injectors/
-
-[20]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
-[21]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
-[22]: /tracing/trace_collection/single-step-apm/windows/
