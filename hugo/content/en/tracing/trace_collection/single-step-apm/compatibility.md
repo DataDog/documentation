@@ -129,9 +129,9 @@ For setup and application restart instructions, see [Single Step APM Instrumenta
 
 ## Supported language runtimes
 
-Language support depends on the [application environment](#compatibility-by-application-environment). The language list below does not imply support on every operating system.
-
 SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language to see minimum SDK versions, supported runtime versions, and any limitations.
+
+Language support depends on the [application environment](#compatibility-by-application-environment). The following language list does not imply support on every operating system.
 
 <div class="alert alert-info">
 
