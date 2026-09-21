@@ -69,3 +69,9 @@ RUM can automatically track network requests as resources, and you can also trac
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_network_requests/unity.mdoc.md" /%}
 {% /if %}
+
+## Next steps
+
+To pinpoint issues across your stack, connect these resources to your backend traces. See [Connect RUM and Traces][101].
+
+[101]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

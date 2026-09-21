@@ -88,3 +88,9 @@ RUM measures how fast your UI responds, from page and view loading to user inter
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_ui_latency/unity.mdoc.md" /%}
 {% /if %}
+
+## Next steps
+
+To investigate the root cause of slow long tasks and poor Core Web Vitals, connect this data to your backend code. See [Collect Frontend Profiles][101].
+
+[101]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/
