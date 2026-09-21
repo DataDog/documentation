@@ -100,7 +100,7 @@ The CLI can set up the following products:
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
-After the CLI completes, see the [Next steps](#next-steps) section.
+After the CLI completes, see the [Next steps](#next-steps) section to confirm data is flowing.
 
 ### Headless mode
 
