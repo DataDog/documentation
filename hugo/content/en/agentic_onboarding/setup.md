@@ -55,7 +55,7 @@ The CLI can set up the following products:
 
 1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. You have two options, depending on whether you already have a Datadog account:
 
-    **Option 1: Interactive setup.** If you don't have a Datadog account yet, or you want to choose your product interactively, run without a `--product` flag. The CLI steps you through account setup and product choice.
+    **Option 1: Interactive setup.** Run without a `--product` flag if you don't have a Datadog account yet, or if you want a product recommendation based on your code. The CLI steps you through account setup, repository analysis, and product recommendations.
 
     ```shell
     npx @datadog/ai-setup-cli --site datadoghq.com
@@ -63,7 +63,7 @@ The CLI can set up the following products:
 
     Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, or `uk1.datadoghq.com`.
 
-    **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to skip product selection.
+    **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to go straight to setup. This skips repository analysis and product recommendations, because you've already specified what to instrument.
 
     ```shell
     npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
@@ -74,15 +74,27 @@ The CLI can set up the following products:
 
 1. Press <kbd>Enter</kbd> at the welcome screen and choose whether you have a Datadog account. A browser opens for OAuth (or for account creation if you don't have an account yet). Complete the flow and grant access to your Datadog account.
 
-1. If you ran the CLI without `--product`, select what to set up from the product menu. (Direct setup with `--product` skips this menu.)
+1. If you ran the CLI without `--product`, enter the path to the repository you want to instrument.
+
+   {{< img src="agentic_onboarding/instrument-repo.png" alt="CLI screen asking for the path to the repository to instrument." style="width:80%;" >}}
+
+1. With your consent, the CLI analyzes the repository in read-only mode to detect your stack.
+
+   {{< img src="agentic_onboarding/scanning-repo.png" alt="CLI screen scanning a repository and listing detected languages and frameworks." style="width:80%;" >}}
+
+1. Based on the detected stack, the CLI recommends up to three supported Datadog products. Recommendations are selected by default. Deselect individual recommendations, confirm the selection, or choose **View all setup options** to use the full list of setup options instead.
+
+   {{< img src="agentic_onboarding/recommendation-results.png" alt="CLI screen showing recommended Datadog products with checkboxes to confirm or deselect them." style="width:80%;" >}}
+
+1. If the CLI can't generate recommendations, or doesn't find a strong match for your repository, it directs you to the full list of setup options. (Direct setup with `--product` also skips to this menu.)
 
    {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing." style="width:80%;" >}}
 
-   The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
+1. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
 
    {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps." style="width:80%;" >}}
 
-   When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
+1. When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
 
    {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics." style="width:80%;" >}}
 
