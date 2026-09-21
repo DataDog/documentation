@@ -1,6 +1,6 @@
 ---
 title: Inject and Auto-Refresh Auth Tokens in Mobile Application Tests
-description: Pass a live, auto-refreshing authentication token into a Mobile Application Test to bypass the login flow.
+description: Pass a live, auto-refreshing authentication token into a mobile application test to bypass the login flow.
 further_reading:
 - link: '/synthetics/guide/authentication-protocols/'
   tag: 'Documentation'
@@ -50,7 +50,7 @@ Set the test [frequency][5] shorter than your token's expiration window, so the 
 
 ## Step 2: Create a global variable from the test
 
-[Create a global variable][3] from the token-fetch test so your mobile test can reference its value:
+[Create a global variable][3] from the token-fetch test so your mobile app test can reference its value:
 
 1. Navigate to the {{< ui >}}Global Variables{{< /ui >}} tab on the [{{< ui >}}Settings{{< /ui >}} page][6]. Click {{< ui >}}\+ New Global Variable{{< /ui >}}.
 2. Select the {{< ui >}}Create From Test{{< /ui >}} tab, and select your token-fetch test.
@@ -62,9 +62,9 @@ Set the test [frequency][5] shorter than your token's expiration window, so the 
 
 This variable's value updates automatically whenever the token-fetch test runs.
 
-## Step 3: Pass the token to your mobile test
+## Step 3: Pass the token to your mobile app test
 
-Mobile app tests support passing `key:value` pairs to your app at launch through [advanced options][7]. Reference your global variable with handlebar syntax, so its current value is substituted in at runtime:
+Mobile app tests support passing `key:value` pairs to your app at launch through [advanced options][7]. Reference your global variable by typing `{{` in the field, so its current value is substituted in at runtime:
 
 {{< tabs >}}
 {{% tab "Android (Initial Intent Extras)" %}}
@@ -149,11 +149,11 @@ if (__DEV__ || Config.AUTOMATION) {
 
 ## Security considerations
 
-Only accept an injected auth token in test or automation builds, never in production. Check a build flag before reading the argument, and make sure that flag is unset in the builds you ship to app stores.
+Accept an injected auth token only in test or automation builds, never in production. Check a build flag before reading the argument, and make sure that flag is unset in the builds you ship to app stores.
 
 This matters most on Android. An intent extra sent to an exported launcher `Activity` can come from any app on the device, not only Datadog's test runner. Without a build-flag check, a production app that reads and trusts `auth_token` from its launch intent lets any local app authenticate as the test account.
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
