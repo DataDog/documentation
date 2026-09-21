@@ -61,7 +61,6 @@ A user with only the Draft Monitors Write permission can:
 A user with only the Draft Monitors Write permission cannot:
 
 - Edit, publish, or delete a monitor that is already live (published).
-- Force delete a monitor, even if it is a draft.
 
 These restrictions apply in both the Datadog UI and API.
 
