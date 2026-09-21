@@ -12,7 +12,7 @@ products:
 
 ## Overview
 
-Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][18]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 ## Configure Log Archives
 
@@ -81,6 +81,12 @@ Enter a prefix that you want to apply to all key objects.
 - See [template syntax][6] if you want to route logs to different object keys based on specific fields in your logs.
 	- **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
+#### Compression
+
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+    - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
+1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
+
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
@@ -135,3 +141,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [15]: https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-immutability-policies-manage
 [16]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [17]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
+[18]: /logs/explorer/archive_search/

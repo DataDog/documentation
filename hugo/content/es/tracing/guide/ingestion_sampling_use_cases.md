@@ -1,155 +1,162 @@
 ---
-description: Explora diferentes casos de uso y estrategias de muestreo de trazas para
-  optimizar el volumen de ingesta y mantener al mismo tiempo la capacidad de resolución
-  de problemas.
+description: Explore diferentes casos de uso y estrategias para el muestreo de trazas
+  que le permitan optimizar el volumen de ingesta y mantener la capacidad de solucionar
+  problemas.
 further_reading:
 - link: /tracing/guide/trace_ingestion_volume_control/
   tag: Guía
   text: Cómo controlar los volúmenes ingeridos
-title: Casos de uso del muestreo de trazas
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: Centro de arquitectura
+  text: 'Dominio del rastreo distribuido: desafíos de volumen de datos y el enfoque
+    de Datadog para un muestreo eficiente'
+- link: https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/
+  tag: Centro de arquitectura
+  text: 'Optimización del rastreo distribuido: mejores prácticas para mantenerse dentro
+    del presupuesto y capturar trazas críticas'
+title: Casos de uso de muestreo de trazas
 ---
+## Descripción general {#overview}
 
-## Información general
+Los datos de trazas tienden a ser repetitivos. Un problema en su aplicación rara vez se identifica en una sola traza y ninguna otra. Para servicios de alto rendimiento, particularmente para incidentes que requieren su atención, un problema muestra síntomas repetidamente en múltiples trazas. En consecuencia, generalmente no es necesario que recopile cada traza para un servicio o punto de conexión, ni cada tramo dentro de una traza. Los [mecanismos de Ingestion Control][1] de Datadog APM le ayudan a mantener la visibilidad que necesita para solucionar problemas, mientras reduce el ruido y gestiona los costos.
 
-Los datos de traza (trace) tienden a ser repetitivos. Rara vez se identifica un problema en tu aplicación en una sola traza y en ninguna otra. Para servicios de alto rendimiento, en especial para incidencias que requieren tu atención, un problema muestra indicios repetidamente en múltiples trazas (traces). En consecuencia, no suele ser necesario recopilar todas y cada una de las trazas de un servicio o endpoint, ni todos y cada uno de los tramos (spans) dentro de una traza. Los [mecanismos de control de la ingesta][1] de Datadog APM ayudan a mantener la visibilidad que necesitas para solucionar problemas, al tiempo que reduce el ruido y gestiona los costes.
+Los mecanismos de ingesta son configuraciones dentro del Datadog Agent y los SDK de Datadog. Si utiliza SDK de OpenTelemetry para instrumentar sus aplicaciones, lea [Ingestion Sampling with OpenTelemetry][2].
 
-Los mecanismos de ingesta son configuraciones dentro del Datadog Agent y las bibliotecas de rastreo de Datadog. Si estás utilizando SDKs de OpenTelemetry para instrumentar tus aplicaciones, lee [Muestreo de ingesta con OpenTelemetry][2].
+Esta guía le ayuda a comprender cuándo y cómo utilizar las configuraciones de Ingestion Control según los casos de uso principales que pueda encontrar. Cubre:
 
-Esta guía te ayuda a comprender cuándo y cómo utilizar las configuraciones de control de la ingesta, en función de los principales casos de uso con los que te puedes encontrar. Abarca lo siguiente:
-
-- [Determinar qué mecanismos de ingesta se utilizan](#determining-which-ingestion-mechanisms-are-used) para un servicio específico
-- [Casos de uso centrados en la conservación de determinados tipos de trazas](#keeping-certain-types-of-traces)
-- [Casos de uso centrados en la reducción de la ingesta de trazas](#reducing-ingestion-for-high-volume-services)
+- [Determinar qué mecanismos de ingesta se utilizan](#determining-which-ingestion-mechanisms-are-used) para un servicio determinado
+- [Casos de uso que se centran en conservar tipos particulares de trazas](#keeping-certain-types-of-traces)
+- [Casos de uso que se centran en reducir las trazas ingeridas](#reducing-ingestion-for-high-volume-services)
 
 
-## Determinar qué mecanismos de ingesta se utilizan
+## Determinar qué mecanismos de ingesta se utilizan {#determining-which-ingestion-mechanisms-are-used}
 
-Para identificar qué mecanismos de ingesta se utilizan actualmente en tu entorno de Datadog, navega hasta la [Página de control de la ingesta][3].
+Para identificar qué mecanismos de ingesta se utilizan actualmente en su entorno de Datadog, navegue a la [página de Ingestion Control][3].
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Página de control de la ingesta" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/ingestion_control_page.png" alt="Página de Ingestion Control" style="width:90%;" >}}
 
-La tabla ofrece información sobre los volúmenes ingeridos *por servicio*. La columna Configuration (Configuración) proporciona una primera indicación de la configuración actual. Muestra lo siguiente:
-- `AUTOMATIC` si la frecuencia de muestreo calculada en el Datadog Agent se aplica a las trazas que parten del servicio. Lee más sobre los detalles de [la lógica de ingesta de Datadog Agent][5].
-- `CONFIGURED` si se aplica una frecuencia de muestreo personalizado de trazas configurada en la biblioteca de rastreo a las trazas que parten del servicio.
+La tabla ofrece información sobre los volúmenes ingeridos *por servicio*. La columna Configuration proporciona una primera indicación de la configuración actual. Muestra:
+- `AUTOMATIC` si la tasa de muestreo calculada en el Datadog Agent se aplica a las trazas que comienzan desde el servicio. Lea más sobre los detalles de la [lógica de ingesta del Datadog Agent][5].
+- `CONFIGURED` si una tasa de muestreo de trazas personalizada configurada en el SDK se aplica a las trazas que comienzan desde el servicio.
 
-Haz clic en los servicios para ver detalles sobre los responsables de la toma de decisiones de muestreo (por ejemplo, Agent o biblioteca de rastreo, reglas o frecuencias de muestreo) que se utilizan para cada servicio, así como los [mecanismos de muestreo de ingesta][1] que se aprovechan para los servicios de tramos ingeridos.
+Haga clic en los servicios para ver detalles sobre qué responsables de la decisión de muestreo (por ejemplo, Agent o SDK, reglas o tasas de muestreo) se utilizan para cada servicio, así como qué [mecanismos de muestreo de ingesta][1] se aprovechan para los servicios de los tramos ingeridos.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Resumen de ingesta del servicio" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary.png" alt="Resumen de ingesta de servicio" style="width:90%;" >}}
 
-En el ejemplo anterior del resumen de ingesta del servicio, la tabla **Ingestion reasons breakdown** (Desglose de motivos de la ingesta) muestra que la mayoría de los motivos de ingesta de este servicio proceden de `rule` ([regla de muestreo definida por el usuario][6]).
+En el ejemplo de Resumen de ingesta de servicio anterior, la tabla {{< ui >}}Ingestion reasons breakdown{{< /ui >}} muestra que la mayoría de las razones de ingesta para este servicio provienen de `rule` ([regla de muestreo definida por el usuario][6]).
 
-Los principales responsables de la toma de decisiones de muestreo para este servicio muestran que el servicio `web-store` obtiene decisiones de muestreo de `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser` y `product-recommendation`. Estos cinco servicios contribuyen a las decisiones generales de muestreo que afectan a tramos de servicio de`web-store`. A la hora de determinar cómo ajustar la ingesta para la tienda web, deben tenerse en cuenta los cinco servicios.
+Los principales responsables de la decisión de muestreo para este servicio muestran que el servicio `web-store` obtiene decisiones de muestreo de `web-store`, `shopist-web-ui`, `shipping-worker`, `synthetics-browser` y `product-recommendation`. Estos cinco servicios contribuyen en las decisiones de muestreo generales que afectan a los tramos del servicio `web-store`. Al determinar cómo ajustar la ingesta para web-store, se deben considerar los cinco servicios.
 
-## Mantener ciertos tipos de trazas
+## Conservar ciertos tipos de trazas {#keeping-certain-types-of-traces}
 
-### Mantener las trazas completas de la transacción
+### Conservar trazas de transacciones completas {#keeping-entire-transaction-traces}
 
-La ingesta de las trazas completas de transacciones garantiza la visibilidad sobre el **flujo de solicitudes de servicio de extremo a extremo** para solicitudes individuales específicas.
+Ingestar trazas de transacciones completas garantiza la visibilidad sobre el **flujo de solicitud de servicio de extremo a extremo** para solicitudes individuales específicas.
 
-#### Solución: muestreo basado en la fase inicial
+#### Solución: Muestreo basado en el inicio {#solution-head-based-sampling}
 
-Las trazas completas pueden ser ingeridas con mecanismos de [muestreo basado en la fase inicial][4]: la decisión de mantener o descartar la traza se determina a partir del primer tramo de la traza, la *fase inicial* (head), cuando se crea la traza. Esta decisión se propaga a través del contexto de la solicitud a los siguientes servicios de descarga.
+Se pueden ingestar trazas completas con mecanismos de [muestreo basado en el inicio][4]: la decisión de conservar o descartar la traza se determina a partir del primer tramo de la traza, el *inicio*, cuando se crea la traza. Esta decisión se propaga a través del contexto de la solicitud a los servicios descendentes.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestro basado en la fase inicial" style="width:100%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/head-based-sampling.png" alt="Muestreo basado en el inicio" style="width:100%;" >}}
 
-Para decidir qué trazas conservar y cuáles descartar, el Datadog Agent calcula [frecuencias de muestreo predeterminadas][5] para cada servicio para aplicar en la creación de trazas, basándose en el tráfico de la aplicación:
-- Para aplicaciones con poco tráfico, se aplica una frecuencia de muestreo del 100%.
-- Para aplicaciones con mucho tráfico, se aplica una frecuencia de muestreo más baja con un objetivo de 10 trazas completas por segundo por Agent.
+Para decidir qué trazas conservar y descartar, el Datadog Agent calcula [tasas de muestreo predeterminadas][5] para cada servicio que se aplican en la creación de la traza, según el tráfico de la aplicación:
+- Para aplicaciones con poco tráfico, se aplica una tasa de muestreo del 100%.
+- Para aplicaciones con mucho tráfico, se aplica una tasa de muestreo más baja con un objetivo de 10 trazas completas por segundo por Agent.
 
-También puedes anular la frecuencia de muestreo predeterminada del Agent al configurar la frecuencia de muestreo por servicio. Consulta cómo [mantener más trazas para servicios específicos (#keeping-more-traces-for-specific-services-or-resources) para obtener más información.
+También puede anular la tasa de muestreo predeterminada del Datadog Agent configurando la tasa de muestreo por servicio. Consulte cómo [mantener más trazas para servicios específicos](#keeping-more-traces-for-specific-services-or-resources) para obtener más información.
 
-#### Configuración del muestreo basado en la fase inicial
+#### Configuración del muestreo basado en el inicio {#configuring-head-based-sampling}
 
-Las frecuencias de muestreo predeterminadas se calculan para alcanzar 10 trazas completas por segundo, por Agent. Este es un número *objetivo* de trazas y es el resultado de promediar trazas durante un periodo. *No* es un límite estricto, y los picos de tráfico pueden hacer que se envíe un número significativamente mayor de trazas a Datadog durante breves periodos.
+Las tasas de muestreo predeterminadas se calculan para apuntar a 10 trazas completas por segundo, por Datadog Agent. Este es un número *objetivo* de trazas y es el resultado de promediar las trazas durante un período de tiempo. *No* es un límite estricto, y los picos de tráfico pueden causar que se envíen significativamente más trazas a Datadog durante períodos cortos de tiempo.
 
-Puedes aumentar o disminuir este objetivo configurando el parámetro del Datadog Agent `max_traces_per_second` o la variable de entorno `DD_APM_MAX_TPS`. Más información sobre [mecanismos de ingesta del muestreo basado en la fase inicial][5].
+Puede aumentar o disminuir este objetivo configurando el parámetro del Datadog Agent `target_traces_per_second` o la variable de entorno `DD_APM_TARGET_TPS`. Lea más sobre [head-based sampling ingestion mechanisms][5].
 
-**Nota:** Cambiar una configuración del Agent afecta a los porcentajes de muestreo de *todos los servicios* que informan trazas a este Datadog Agent.
+**Nota:** Cambiar una configuración del Datadog Agent afecta las tasas de muestreo porcentuales para *todos los servicios* que reportan trazas a este Datadog Agent.
 
-Para la mayoría de los casos, esta configuración a nivel de Agent se mantiene dentro de la cuota asignada, proporciona suficiente visibilidad del rendimiento de tu aplicación y te ayuda a tomar las decisiones adecuadas para tu negocio.
+Para la mayoría de los escenarios, esta configuración a nivel de Datadog Agent se mantiene dentro de la cuota asignada, proporciona suficiente visibilidad sobre el rendimiento de su aplicación y le ayuda a tomar decisiones adecuadas para su negocio.
 
-### Mantener más trazas para servicios o recursos específicos
+### Mantener más trazas para servicios o recursos específicos {#keeping-more-traces-for-specific-services-or-resources}
 
-Si algunos servicios o solicitudes son críticos para tu negocio, querrás tener una mayor visibilidad de ellos. Es posible que desees enviar todas las trazas relacionadas a Datadog para analizar cualquiera de las transacciones individuales.
+Si algunos servicios y solicitudes son críticos para su negocio, desea tener una mayor visibilidad sobre ellos. Es posible que desee enviar todas las trazas relacionadas a Datadog para que pueda examinar cualquiera de las transacciones individuales.
 
-#### Solución: reglas de muestreo
+#### Solución: Reglas de muestreo {#solution-sampling-rules}
 
-Por defecto, la frecuencia de muestreo se calcula para 10 trazas por segundo por Datadog Agent. Puedes anular la frecuencia de muestreo calculada por defecto al configurar [reglas de muestreo][6] en la biblioteca de rastreo.
+De forma predeterminada, las tasas de muestreo se calculan para apuntar a 10 trazas por segundo por Datadog Agent. Puede anular la tasa de muestreo calculada predeterminada configurando [sampling rules][6] en el SDK.
 
-Puedes configurar reglas de muestreo por servicio. Para trazas que comienzan a partir del servicio especificado en la regla, se aplica la frecuencia de muestreo porcentual definida en lugar de la frecuencia de muestreo predeterminada del Agent.
+Puede configurar reglas de muestreo por servicio. Para las trazas que comienzan desde el servicio especificado en la regla, se aplica la tasa de muestreo porcentual definida en lugar de la tasa de muestreo predeterminada del Agent.
 
-#### Configuración de una regla de muestreo
+#### Configuración de una regla de muestreo {#configuring-a-sampling-rule}
 
-Puedes configurar reglas de muestreo estableciendo la variable de entorno `DD_TRACE_SAMPLING_RULES` .
+Puede configurar reglas de muestreo estableciendo la variable de entorno `DD_TRACE_SAMPLING_RULES`.
 
-Por ejemplo, para enviar el 20% de las trazas para el servicio denominado `my-service`:
+Por ejemplo, para enviar el 20 por ciento de las trazas para el servicio llamado `my-service`:
 
 ```
 DD_TRACE_SAMPLING_RULES='[{"service": "my-service", "sample_rate": 0.2}]'
 ```
 
-Más información sobre [mecanismos de ingesta de reglas de muestreo][6].
+Lea más sobre los [mecanismos de ingestión de reglas de muestreo][6].
 
-### Mantener más trazas relacionadas con errores
+### Conservar más trazas relacionadas con errores {#keeping-more-error-related-traces}
 
-Las trazas con tramos de error suelen ser síntomas de fallos del sistema. Mantener una mayor proporción de transacciones con errores garantiza que siempre se tenga acceso a algunas solicitudes individuales relevantes.
+Las trazas con tramos de error suelen ser síntomas de fallas del sistema. Conservar una mayor proporción de transacciones con errores garantiza que siempre tenga acceso a algunas solicitudes individuales relevantes.
 
-#### Solución: frecuencia de muestreo de errores
+#### Solución: Tasa de muestreo de errores {#solution-error-sampling-rate}
 
-Además de las trazas de muestreo basado en la fase inicial, puedes aumentar la tasa de muestreo de errores para que cada Agent conserve tramos de errores adicionales, aunque las trazas relacionadas no se conserven mediante el muestreo basado en la fase inicial.
+Además de las trazas muestreadas basadas en el inicio, puede aumentar la tasa de muestreo de errores para que cada Datadog Agent conserve tramos de error adicionales, incluso si las trazas relacionadas no se conservan mediante el muestreo basado en el inicio.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/error-spans-sampling.png" alt="Muestreo de errores" style="width:100%;" >}}
 
 **Notas:**
-- Es posible que los fragmentos distribuidos de las partes de trazas no se ingieran, ya que el muestreo se realiza localmente a nivel del Datadog Agent.
-- A partir del **Datadog Agent 6/7.41.0 y versiones posteriores**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` puede configurarse para incluir tramos descartados mediante reglas de biblioteca de rastreo o `manual.drop`. Encontrarás más detalles en la sección [Trazas de errores del documento Mecanismos de ingesta][9].
+- Es posible que los fragmentos distribuidos de las trazas no se ingieran, ya que el muestreo ocurre localmente a nivel del Datadog Agent.
+- A partir de **Datadog Agent 6/7.41.0 y versiones superiores**, `DD_APM_FEATURES=error_rare_sample_tracer_drop` se puede configurar para incluir tramos descartados por reglas de SDK o `manual.drop`. Puede encontrar más detalles en la [sección de trazos de error del documento de Mecanismos de ingestión][9].
 
-#### Configuración del muestreo de errores
+#### Configuración del muestreo de errores {#configuring-error-sampling}
 
-Puedes configurar el número a capturar de partes de error por segundo, por Agent, configurando la variable de entorno `DD_APM_ERROR_TPS` . El valor por defecto es `10` errores por segundo. Para ingerir **todos los errores**, ajústalo a un valor alto arbitrario. Para desactivar el muestreo de errores, establece `DD_APM_ERROR_TPS` en `0`.
+Puede configurar la cantidad de fragmentos de error por segundo por Datadog Agent que se capturarán configurando la variable de entorno `DD_APM_ERROR_TPS`. El valor predeterminado es `10` errores por segundo. Para ingerir **todos los errores**, establézcalo en un valor arbitrariamente alto. Para deshabilitar el muestreo de errores, establezca `DD_APM_ERROR_TPS` en `0`.
 
-## Reducción de la ingesta para servicios de gran volumen
+## Reducción de la ingestión para servicios de alto volumen {#reducing-ingestion-for-high-volume-services}
 
-### Reducción del volumen desde base de datos o servicios en caché
+### Reducción del volumen de servicios de base de datos o caché {#reducing-volume-from-database-or-cache-services}
 
-Las llamadas a la base de datos rastreadas pueden representar una gran cantidad de datos ingeridos, mientras que las métricas de rendimiento de la aplicación (como recuento de errores, recuento de los resultados de la solicitud y latencia) son suficientes para monitorizar el estado de la base de datos.
+Las llamadas a bases de datos rastreadas pueden representar una gran cantidad de datos ingeridos, mientras que las métricas de rendimiento de la aplicación (como los conteos de errores, los conteos de aciertos de solicitudes y la latencia) son suficientes para hacer un seguimiento del estado de la base de datos.
 
-#### Solución: reglas de muestreo para trazas con llamadas a bases de datos
+#### Solución: Reglas de muestreo para trazos con llamadas a bases de datos {#solution-sampling-rules-for-traces-with-database-calls}
 
-Para reducir el volumen de tramo creado por el rastreo de llamadas a la base de datos, configura el muestreo en la fase inicial (head) de la traza.
+Para reducir el volumen de tramos creado al rastrear llamadas a bases de datos, configure el muestreo al inicio de la traza.
 
-Los servicios de base de datos rara vez inician una traza. Normalmente, los tramos de base de datos del cliente son secundarios de un tramo de servicio backend instrumentado.
+Los servicios de base de datos rara vez inician una traza. Por lo general, los tramos de base de datos del cliente son hijos de un tramo de servicio de backend instrumentado.
 
-Para saber **qué servicios inician trazas de base de datos**, utiliza el gráfico de lista principal `Top Sampling Decision Makers` del [Resumen de la ingesta del servicio][7] en la página de control de la ingesta. Configurar el muestreo basado en la fase inicial para estos servicios reduce el volumen de los tramos de base de datos ingeridos, a la vez que se asegura que no se ingieran ninguna traza incompleta. Las trazas distribuidas se conservan o se descartan por completo.
+Para saber **qué servicios inician trazas de base de datos**, utilice el gráfico de lista principal `Top Sampling Decision Makers` en la página de control de ingesta [Resumen de Ingesta de Servicios][7]. Configurar el muestreo basado en el inicio para estos servicios específicos reduce el volumen de tramos de base de datos ingeridos, al tiempo que garantiza que no se ingieran trazas incompletas. Las trazas distribuidas se conservan o se descartan por completo.
 
-{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary-database.png" alt="Responsables de la toma de decisiones de muestreo" style="width:90%;" >}}
+{{< img src="/tracing/guide/ingestion_sampling_use_cases/service-ingestion-summary-database.png" alt="Principales responsables de la toma de decisiones de muestreo" style="width:90%;" >}}
 
-Por ejemplo, para las llamadas a la base de datos rastreadas de `web-store-mongo`, las trazas se originan en servicios `web-store` y `shipping-worker` el 99% de las veces. En consecuencia, para reducir el volumen para `web-store-mongo`, configura el muestreo para los servicios `web-store` y `shipping-worker`.
+Por ejemplo, para las llamadas a bases de datos trazadas de `web-store-mongo`, las trazas se originan en los servicios `web-store` y `shipping-worker` el 99% de las veces. Como resultado, para reducir el volumen de `web-store-mongo`, configure el muestreo para los servicios `web-store` y `shipping-worker`.
 
-#### Configuración del muestreo para eliminar tramos de la base de datos
+#### Configure el muestreo para descartar tramos de base de datos {#configure-sampling-to-drop-database-spans}
 
-Consulta la sección [Configuración de la regla de muestreo](#configuring-a-sampling-rule) para obtener más información sobre la sintaxis de las reglas de muestreo.
+Consulte la [sección de configuración de reglas de muestreo](#configuring-a-sampling-rule) para obtener más información sobre la sintaxis de las reglas de muestreo.
 
-El servicio backend `web-store` está llamando a una base de datos Mongo múltiples veces por traza, y está creando mucho volumen de tramos no deseado:
+El servicio de backend `web-store` está llamando a una base de datos Mongo varias veces por traza, y está creando una gran cantidad de volumen de tramos no deseados:
 
-- Configura una **regla de muestreo de traza** para el servicio backend `web-store`, que garantiza que se conserve el 10% de la totalidad de trazas, incluidos tramos de Mongo.
+- Configure una **regla de muestreo de traza** para el servicio de backend `web-store`, asegurando que se conserve el 10 por ciento de las trazas completas, incluidos los tramos de Mongo.
 
   ```
   DD_TRACE_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 0.1}]'
   ```
 
-- Opcionalmente, si deseas conservar todos los tramos `web-store`, configura una **regla de muestreo de tramo único** para conservar el 100 por ciento de los tramos para el servicio backend `web-store`. Este muestreo no ingiere ningún tramo de llamada a la base de datos fuera del 10 por ciento identificado anteriormente.
+- Opcionalmente, si desea conservar todos los tramos `web-store`, configure una **regla de muestreo de un solo tramo** para conservar el 100 por ciento de los tramos para el servicio de backend `web-store`. Este muestreo no ingiere ningún tramo de llamada a base de datos fuera del 10 por ciento identificado anteriormente.
 
   ```
   DD_SPAN_SAMPLING_RULES='[{"service": "web-store", "sample_rate": 1}]'
   ```
 
-  **Nota**: Configurar una regla de muestreo de tramo único es especialmente útil si estás utilizando [métricas basadas en tramos][8], que se derivan de tramos ingeridos.
+  **Nota**: Configurar una regla de muestreo de un solo tramo es especialmente útil si está utilizando [métricas basadas en tramos][8], las cuales se derivan de los tramos ingeridos.
 
 {{< img src="/tracing/guide/ingestion_sampling_use_cases/single-span-sampling3.png" alt="Muestreo de tramos de base de datos" style="width:100%;" >}}
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

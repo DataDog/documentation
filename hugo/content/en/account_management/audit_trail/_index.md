@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/audit-trail-best-practices/"
   tag: "Blog"
   text: "Monitor critical Datadog assets and configurations with Audit Trail"
+- link: "/account_management/delete_data/"
+  tag: "Documentation"
+  text: "Delete data from Datadog"
 ---
 
 ## Overview
@@ -187,7 +190,7 @@ The Inspect Changes (Diff) tab in the audit event details panel compares the con
 
 Reference Tables allow you to combine metadata with audit events, providing more information to investigate Datadog user behavior. Add a query filter based on a Reference Table to perform lookup queries. For more information on activating and managing this feature, see the [Reference Tables][2] guide.
 
-To apply a query filter with Reference Tables, click on the {{< ui >}}+ Add{{< /ui >}} button next to the query editor and select {{< ui >}}Join with Reference Table{{< /ui >}}. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
+To apply a query filter with Reference Tables, click on the {{< ui >}}\+ Add{{< /ui >}} button next to the query editor and select {{< ui >}}Join with Reference Table{{< /ui >}}. In the following example, the Reference Table query filter is used to search for dashboards modified by users who are accessing Datadog from non-authorized IP addresses:
 
 {{< img src="account_management/audit_logs/reference_tables.png" alt="The Datadog Audit Trail explorer with reference table search options highlighted" border="true" popup="true" style="width:100%;" >}}
 

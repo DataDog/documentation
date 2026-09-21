@@ -137,7 +137,7 @@ The protected settings include:
 This example shows how to specify a configuration for the Datadog Agent to use.
 The Datadog Agent configuration URI must be an Azure blob storage URI.
 The Datadog Windows Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder.
+The Datataog Agent configuration should be created from the `%PROGRAMDATA%\Datadog` folder (see the [example Agent configuration file for Windows][101] for all available configuration options).
 
 <div class="alert alert-info">
 To reuse the configuration of an existing Agent:
@@ -173,6 +173,7 @@ Set-AzVMExtension -Name "DatadogAgent" -Publisher "Datadog.Agent" -Type "Datadog
 {{< /code-block >}}
 
 [100]: https://learn.microsoft.com/powershell/module/az.compute/set-azvmextension
+[101]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 {{% /tab %}}
 {{% tab "Linux" %}}
 
@@ -206,7 +207,7 @@ The protected settings include:
 This example shows how to specify a configuration for the Datadog Agent to use.
 - The Datadog Agent configuration URI must be an Azure blob storage URI.
 - The Datadog Linux Agent Azure Extension checks that the `agentConfiguration` URI comes from the `.blob.core.windows.net` domain.
-- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder.
+- The Datataog Agent configuration should be created from the `/etc/datadog-agent/` folder (see the [example Agent configuration file for Linux][201] for all available configuration options).
 
 <div class="alert alert-info">
 To reuse the configuration of an existing Agent by saving its <code>/etc/datadog-agent</code> folder as a ZIP file:
@@ -230,6 +231,7 @@ az vm extension set --publisher "Datadog.Agent" --name "DatadogLinuxAgent" --ver
 
 
 [200]: https://learn.microsoft.com/cli/azure/vm/extension
+[201]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 {{% /tab %}}
 {{< /tabs >}}
 

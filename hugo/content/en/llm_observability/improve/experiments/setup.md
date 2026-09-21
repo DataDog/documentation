@@ -347,7 +347,7 @@ Note: LLM Experiments traces are retained for 90 days.
 [1]: /llm_observability/improve/datasets
 [2]: /llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /llm_observability/instrument/auto_instrumentation?tab=python
-[4]: /llm_observability/guide/evaluation_developer_guide
+[4]: /llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: /llm_observability/instrument/agent_observability_and_apm/
 [6]: /llm_observability/instrument/otel_instrumentation
 

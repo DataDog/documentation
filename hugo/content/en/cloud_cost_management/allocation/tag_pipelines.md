@@ -41,9 +41,9 @@ To create a ruleset, navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Se
 
 <div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
-Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}+ New Ruleset{{< /ui >}}.
+Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}\+ New Ruleset{{< /ui >}}.
 
-Within each ruleset, click {{< ui >}}+ Add New Rule{{< /ui >}} and select a rule type: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}}, or {{< ui >}}Map multiple tags{{< /ui >}}. These rules execute in a sequential, deterministic order from top to bottom.
+Within each ruleset, click {{< ui >}}\+ Add New Rule{{< /ui >}} and select a rule type: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}}, or {{< ui >}}Map multiple tags{{< /ui >}}. These rules execute in a sequential, deterministic order from top to bottom.
 
 {{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:60%;" >}}
 
