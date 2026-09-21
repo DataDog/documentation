@@ -1,6 +1,6 @@
 ---
 title: Adaptive Sampling
-description: Automatically adjust sampling rates to match specific targets while maintaining visibility over service endpoints.
+description: Automatically adjust sampling rates to match a specific target while maintaining visibility over service endpoints.
 disable_toc: false
 aliases:
     - /tracing/guide/adaptive_sampling
