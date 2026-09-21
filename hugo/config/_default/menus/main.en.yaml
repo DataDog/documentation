@@ -2759,11 +2759,6 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_variables
       weight: 208
-    - name: Integrations
-      url: incident_response/incident_management/setup_and_configuration/integrations
-      parent: incidents_settings
-      identifier: incidents_integrations
-      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -2784,11 +2779,16 @@ menu:
       parent: incidents
       identifier: analytics_and_reporting
       weight: 4
+    - name: Integrations
+      url: incident_response/incident_management/setup_and_configuration/integrations
+      parent: incidents
+      identifier: incidents_integrations
+      weight: 5
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
       identifier: incidents_guides
-      weight: 5
+      weight: 6
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
