@@ -117,7 +117,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
-   **Note**: The SDK installation dialog can list languages that SSI does not support on Windows. Select only SDKs for the [supported Windows runtimes][9].
+   **Note**: The SDK installation dialog can list languages that SSI does not support on Windows. Select only SDKs for the [supported Windows runtimes][8].
 
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
@@ -141,7 +141,7 @@ After installing the SDKs and applying the instrumentation configuration, restar
 
 If IIS proxies traffic to a separate service, restart that service separately. Restarting IIS does not restart it.
 
-After a successful SSI deployment, restart your applications. You do not need to reboot the Windows host or restart the Datadog Agent. Restarting the Agent does not replace restarting your applications.
+After a successful SSI deployment, you do not need to reboot the Windows host or restart the Datadog Agent. Restarting the Agent does not replace restarting your applications.
 
 ## Verify the installation
 
@@ -155,7 +155,7 @@ Follow these steps to check Agent health and confirm that your applications send
 
    Check the **APM Agent** section of the output.
 
-1. Generate traffic to your applications, open each service on the [APM Services page][7], and confirm that traces appear. If traces don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. Generate traffic to your applications, open each service on the [APM Services page][7], and confirm that traces appear. If a service or its traces don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
@@ -266,5 +266,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
 [7]: https://app.datadoghq.com/apm/services
-[8]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowsiis#compatibility-by-application-environment
-[9]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment
+[8]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment

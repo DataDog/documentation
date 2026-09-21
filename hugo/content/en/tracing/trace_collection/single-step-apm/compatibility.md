@@ -102,7 +102,7 @@ Select your environment to see compatibility requirements and limitations:
 
 {{% /tab %}}
 
-{{% tab "Windows Host-wide (Preview)" %}}
+{{% tab "Windows host-wide (Preview)" %}}
 
 ### Compatibility
 
