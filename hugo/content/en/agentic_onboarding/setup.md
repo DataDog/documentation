@@ -259,46 +259,48 @@ Use [`dd-orchestrator`][21] to set up Datadog from a goal, such as "monitor this
 
 ### Available skills
 
-Use a specific skill when you already know the task. Follow the linked definitions for requirements and supported workflows.
+Browse by task, then follow the linked instructions for requirements and supported workflows.
 
-| Skill or group | Use it to |
-|----------------|-----------|
-| [`dd-account-setup`][22], [`dd-product-recommender`][23] | Connect a Datadog account and identify relevant products. |
-| [`dd-apm`][24] | Set up Single Step Instrumentation, verify tracing, and investigate service performance. |
-| [`dd-instrument-rum`][25] | Add or repair Browser RUM instrumentation. |
-| [`dd-browser-sdk`][26] | Configure RUM, Logs, and Session Replay, or upgrade SDK versions. |
-| [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] | Configure cloud integrations with Terraform. |
-| [`dd-logs`][31] | Search logs, manage archives, and control logging costs. |
-| [`dd-monitors`][32] | Find, create, update, and mute monitors. |
-| [`dd-audit`][33] | Investigate changes, key use, costs, and AI activity in Audit Trail. |
-| [Agent Observability][34] | Diagnose trace failures, compare experiments, generate evaluators, and classify sessions. |
-| [Software Delivery][35] | Investigate failing pull request pipelines and flaky tests. |
-| [`datadog-app`][36] | Create, run, and publish Datadog Apps. |
-| [`k9-ownership-byod-setup`][37] | Define resource ownership preferences in a reference table. |
-| [`dd-pup`][38] | Authenticate and use the Pup CLI for Datadog API operations. |
-| [`dd-docs`][39] | Find Datadog documentation and product limits. |
-
-To list all skills, including those within groups, run:
-
-```shell
-npx skills add datadog-labs/agent-skills --list --full-depth
-```
+| Task | Skill documentation |
+|------|---------------------|
+| Connect a Datadog account or choose products | [Account setup][22], [Product recommendations][23] |
+| Set up tracing and investigate service performance | [APM][24] |
+| Add or repair Browser RUM instrumentation | [RUM instrumentation][25] |
+| Upgrade the Browser SDK | [Browser SDK upgrades][26] |
+| Connect cloud accounts with Terraform | [AWS][27], [Azure][28], [Google Cloud][29], [Oracle Cloud Infrastructure][30] |
+| Search logs and manage logging configuration | [Log Management][31] |
+| Create monitors and manage alerts | [Monitors][32] |
+| Investigate account activity and configuration changes | [Audit Trail][33] |
+| Diagnose AI application failures and evaluate changes | [Agent Observability][34] |
+| Investigate failing pipelines and flaky tests | [Software Delivery][35] |
+| Build and publish Datadog Apps | [Datadog Apps][36] |
+| Define ownership preferences for cloud resources | [Resource ownership][37] |
+| Work with Datadog APIs from the command line | [Pup CLI][38] |
+| Find Datadog documentation | [Documentation search][39] |
 
 ### Install and use a skill
 
-With Node.js and `npx` installed, run this command from your project directory:
+With Node.js and `npx` installed, run this command from your project directory to install the orchestrator:
 
 ```shell
 npx skills add datadog-labs/agent-skills --skill dd-orchestrator --full-depth
 ```
 
-Select your agent and installation scope when prompted. Replace `dd-orchestrator` with another skill name to install it directly. Complete the skill's prerequisites, such as authenticating the [Pup CLI][40] or connecting the [Datadog MCP Server][41].
+Select your agent and installation scope when prompted. Complete the skill's prerequisites, such as authenticating the [Pup CLI][40] or connecting the [Datadog MCP Server][41].
 
 Open the project in your agent and enter:
 
 ```text
 Use the dd-orchestrator skill to set up Datadog for this project.
 ```
+
+To install a different skill, list the available names:
+
+```shell
+npx skills add datadog-labs/agent-skills --list --full-depth
+```
+
+Use the selected name as the `--skill` value and name it in your prompt.
 
 For product-specific examples, see [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43].
 
