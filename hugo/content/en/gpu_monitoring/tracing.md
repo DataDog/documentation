@@ -22,6 +22,30 @@ Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing 
 
 {{< img src="gpu_monitoring/gpu-tracing.png" alt="Flame graph view of a torch.step trace, showing CPU spans aligned with GPU stream activity, including NCCL allgather operations and CUDA kernel launches." style="width:100%;" >}}
 
+## Compatibility
+
+GPU tracing supports CUDA 13.x with CUPTI 13.x. CUDA 12.x and earlier versions are not supported.
+
+### Tracer versions
+
+| C tracer version | CUDA and CUPTI | Framework coverage | Important changes |
+|---|---|---|---|
+| 0.18.0 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, and TensorRT-LLM | Adds vLLM request correlation and improves profiling efficiency for short workloads. |
+| 0.19.0 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, and TensorRT-LLM | Improves startup reliability across PyTorch and CUDA environments. |
+| 0.19.1 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, and TensorRT-LLM | Improves completeness and accuracy of NCCL activity metrics. |
+| 0.20.0 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, TensorRT-LLM, and SGLang | Adds SGLang inference-step GPU tracing. |
+| 0.21.0 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, TensorRT-LLM, and SGLang | Adds CUDA Graph identity to kernel spans and reduces sampling overhead. |
+| 0.21.1 | CUDA 13.x and CUPTI 13.x | PyTorch, vLLM, TensorRT-LLM, and SGLang | Reduces workload overhead and improves GPU tracing reliability across x86_64 and ARM64. **Recommended.** |
+
+### Minimum framework versions
+
+| Framework | Minimum version | C tracer version | Coverage |
+|---|---|---|---|
+| PyTorch | 2.8.0 | 0.18.0+ | Training, inference, CUDA, and NCCL activity |
+| vLLM | 0.11.0 | 0.18.0+ | Prefill and decode boundaries with request correlation |
+| TensorRT-LLM | 1.2.0 | 0.18.0+ | PyTorch executor prefill and decode tracing |
+| SGLang | 0.5.10.post1 | 0.20.0+ | Prefill, decode, and mixed inference tracing |
+
 ## Setup
 
 ### Prerequisites
