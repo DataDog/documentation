@@ -123352,6 +123352,222 @@ components:
       required:
         - data
       type: object
+    TerraformBackendAttributes:
+      description: Terraform backend sync configuration and bucket statuses.
+      properties:
+        account_id:
+          description: AWS account ID that owns the S3 buckets.
+          example: "123456789012"
+          type: string
+        backend_type:
+          $ref: "#/components/schemas/TerraformBackendKind"
+        buckets:
+          description: Source buckets and their synchronization statuses.
+          items:
+            $ref: "#/components/schemas/TerraformBackendBucket"
+          type: array
+        org_id:
+          description: Datadog organization ID.
+          example: "12345"
+          type: string
+        region:
+          description: AWS region containing the S3 buckets.
+          example: us-east-1
+          type: string
+      required:
+        - org_id
+        - backend_type
+        - account_id
+        - region
+        - buckets
+      type: object
+    TerraformBackendBucket:
+      description: Synchronization status for an S3 bucket.
+      properties:
+        bucket_name:
+          description: Name of the source S3 bucket.
+          example: terraform-state-bucket
+          type: string
+        last_sync_error:
+          description: Error from the most recent failed synchronization, or an empty string otherwise.
+          example: ""
+          type: string
+        last_sync_status:
+          $ref: "#/components/schemas/TerraformBackendSyncStatus"
+        last_sync_time:
+          description: Time of the most recent synchronization outcome, or null if none has been recorded.
+          example: "2026-01-01T12:00:00Z"
+          format: date-time
+          nullable: true
+          type: string
+        recurring_blob_sync_id:
+          description: Identifier of the recurring synchronization job.
+          example: 12345678-1234-1234-1234-123456789012
+          type: string
+        statefile_count:
+          description: Number of synchronized Terraform state files in the bucket.
+          example: 3
+          format: int64
+          type: integer
+      required:
+        - bucket_name
+        - recurring_blob_sync_id
+        - last_sync_time
+        - last_sync_status
+        - last_sync_error
+        - statefile_count
+      type: object
+    TerraformBackendCreateAttributes:
+      description: Settings for a new Terraform backend sync configuration.
+      properties:
+        account_id:
+          description: AWS account ID that owns the S3 buckets.
+          example: "123456789012"
+          type: string
+        backend_type:
+          $ref: "#/components/schemas/TerraformBackendKind"
+        bucket_names:
+          description: Complete set of S3 bucket names to synchronize. Names must be nonempty and unique.
+          example:
+            - terraform-state-bucket
+          items:
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+        region:
+          description: AWS region containing the S3 buckets.
+          example: us-east-1
+          type: string
+      required:
+        - backend_type
+        - account_id
+        - region
+        - bucket_names
+      type: object
+    TerraformBackendCreateData:
+      description: Terraform backend configuration create data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformBackendCreateAttributes"
+        type:
+          $ref: "#/components/schemas/TerraformBackendType"
+      required:
+        - type
+        - attributes
+      type: object
+    TerraformBackendCreateRequest:
+      description: Request to create a Terraform backend sync configuration.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformBackendCreateData"
+      required:
+        - data
+      type: object
+    TerraformBackendData:
+      description: A Terraform backend sync configuration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformBackendAttributes"
+        id:
+          description: Configuration ID, serialized as a string to preserve integer precision.
+          example: "9007199254740993"
+          type: string
+        type:
+          $ref: "#/components/schemas/TerraformBackendType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TerraformBackendKind:
+      description: Backend type to synchronize.
+      enum:
+        - terraform
+      example: terraform
+      type: string
+      x-enum-varnames:
+        - TERRAFORM
+    TerraformBackendListResponse:
+      description: Response containing Terraform backend sync configurations.
+      properties:
+        data:
+          description: Configurations matching the optional account filter.
+          items:
+            $ref: "#/components/schemas/TerraformBackendData"
+          type: array
+      required:
+        - data
+      type: object
+    TerraformBackendResponse:
+      description: Response containing a Terraform backend sync configuration.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformBackendData"
+      required:
+        - data
+      type: object
+    TerraformBackendSyncStatus:
+      description: Most recent synchronization outcome, or pending if no outcome has been recorded.
+      enum:
+        - pending
+        - success
+        - failure
+      example: pending
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - SUCCESS
+        - FAILURE
+    TerraformBackendType:
+      description: Terraform backend configuration resource type.
+      enum:
+        - terraform-backends
+      example: terraform-backends
+      type: string
+      x-enum-varnames:
+        - TERRAFORM_BACKENDS
+    TerraformBackendUpdateAttributes:
+      description: Replacement bucket set for a Terraform backend sync configuration.
+      properties:
+        bucket_names:
+          description: Complete set of S3 bucket names to synchronize. Names must be nonempty and unique.
+          example:
+            - terraform-state-bucket
+          items:
+            minLength: 1
+            type: string
+          minItems: 1
+          type: array
+          uniqueItems: true
+      required:
+        - bucket_names
+      type: object
+    TerraformBackendUpdateData:
+      description: Terraform backend configuration update data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TerraformBackendUpdateAttributes"
+        id:
+          description: Configuration ID. Must match the ID in the request path.
+          example: "9007199254740993"
+          type: string
+        type:
+          $ref: "#/components/schemas/TerraformBackendType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TerraformBackendUpdateRequest:
+      description: Request to update a Terraform backend sync configuration.
+      properties:
+        data:
+          $ref: "#/components/schemas/TerraformBackendUpdateData"
+      required:
+        - data
+      type: object
     TestOptimizationDeleteServiceSettingsRequest:
       description: Request object for deleting Test Optimization service settings.
       properties:
@@ -161569,6 +161785,263 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in public beta and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/iac-api/terraform/backends:
+    get:
+      description: List Terraform backend sync configurations, optionally filtered by AWS account ID.
+      operationId: ListTerraformBackendSyncConfigs
+      parameters:
+        - description: AWS account ID used to filter configurations. Omit to list all configurations for the organization.
+          in: query
+          name: account_id
+          required: false
+          schema:
+            example: "123456789012"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_id: "123456789012"
+                          backend_type: terraform
+                          buckets:
+                            - bucket_name: terraform-state-bucket
+                              last_sync_error: ""
+                              last_sync_status: pending
+                              last_sync_time:
+                              recurring_blob_sync_id: 12345678-1234-1234-1234-123456789012
+                              statefile_count: 0
+                          org_id: "12345"
+                          region: us-east-1
+                        id: "9007199254740993"
+                        type: terraform-backends
+              schema:
+                $ref: "#/components/schemas/TerraformBackendListResponse"
+          description: OK
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Terraform backend sync configurations
+      tags:
+        - Terraform State Files
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - terraform_state_file_configurations_read
+          - terraform_state_file_configurations_write
+    post:
+      description: Create a Terraform backend sync configuration for an AWS account, region, and set of S3 buckets.
+      operationId: CreateTerraformBackendSyncConfig
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account_id: "123456789012"
+                      backend_type: terraform
+                      bucket_names:
+                        - terraform-state-bucket
+                      region: us-east-1
+                    type: terraform-backends
+            schema:
+              $ref: "#/components/schemas/TerraformBackendCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_id: "123456789012"
+                        backend_type: terraform
+                        buckets:
+                          - bucket_name: terraform-state-bucket
+                            last_sync_error: ""
+                            last_sync_status: pending
+                            last_sync_time:
+                            recurring_blob_sync_id: 12345678-1234-1234-1234-123456789012
+                            statefile_count: 0
+                        org_id: "12345"
+                        region: us-east-1
+                      id: "9007199254740993"
+                      type: terraform-backends
+              schema:
+                $ref: "#/components/schemas/TerraformBackendResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Terraform backend sync configuration
+      tags:
+        - Terraform State Files
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - terraform_state_file_configurations_write
+  /api/v2/iac-api/terraform/backends/{id}:
+    delete:
+      description: Delete a Terraform backend sync configuration and its synchronized state files.
+      operationId: DeleteTerraformBackendSyncConfig
+      parameters:
+        - description: Terraform backend sync configuration ID.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "9007199254740993"
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Terraform backend sync configuration
+      tags:
+        - Terraform State Files
+      x-menu-order: 4
+      x-permission:
+        operator: OR
+        permissions:
+          - terraform_state_file_configurations_write
+    patch:
+      description: Replace the complete set of buckets in a Terraform backend sync configuration. The account and region cannot be changed. The resource ID in the request body must match the path ID; a mismatch returns 409 Conflict.
+      operationId: UpdateTerraformBackendSyncConfig
+      parameters:
+        - description: Terraform backend sync configuration ID.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "9007199254740993"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      bucket_names:
+                        - terraform-state-bucket
+                    id: "9007199254740993"
+                    type: terraform-backends
+            schema:
+              $ref: "#/components/schemas/TerraformBackendUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account_id: "123456789012"
+                        backend_type: terraform
+                        buckets:
+                          - bucket_name: terraform-state-bucket
+                            last_sync_error: ""
+                            last_sync_status: pending
+                            last_sync_time:
+                            recurring_blob_sync_id: 12345678-1234-1234-1234-123456789012
+                            statefile_count: 0
+                        org_id: "12345"
+                        region: us-east-1
+                      id: "9007199254740993"
+                      type: terraform-backends
+              schema:
+                $ref: "#/components/schemas/TerraformBackendResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Terraform backend sync configuration
+      tags:
+        - Terraform State Files
+      x-codegen-request-body-name: body
+      x-menu-order: 3
+      x-permission:
+        operator: OR
+        permissions:
+          - terraform_state_file_configurations_write
   /api/v2/identity_providers:
     get:
       description: Get all identity providers available for the current organization.
@@ -165951,12 +166424,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/{incident_id}/cases/page:
     post:
-      deprecated: true
-      description: |-
-        Create a page from an incident using the Cases service.
-
-        **Deprecated**: This endpoint is deprecated. Use
-        [Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.
+      description: Create a page from an incident using the Cases service.
       operationId: CreatePageFromIncident
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"
@@ -235077,6 +235545,8 @@ tags:
     name: Tag Rules
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
+  - description: Configure synchronization of Terraform state files from S3 buckets and inspect synchronization status.
+    name: Terraform State Files
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
