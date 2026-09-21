@@ -50,7 +50,7 @@ APM Adaptive Sampling
 Ingestion Over Time
 : A graph of your ingestion volume over time, broken down by origin (APM, other Datadog products, or OTel), with your monthly allotment shown as a reference line.
 
-If the projected ingestion is under your monthly allotment, you are on track. If it is projected to exceed your allotment, adjust your [service ingestion rates](#configuring-ingestion-for-a-service) or your [adaptive sampling target](#adaptive-sampling).
+If the projected ingestion is under your monthly allotment, you are on track. If it is projected to exceed your allotment, adjust your [service ingestion rates](#configuring-ingestion-for-a-service) or your [adaptive sampling target][21].
 
 ### Ingestion levels by service
 
@@ -75,7 +75,7 @@ Traffic Breakdown
 : A detailed breakdown of traffic sampled and unsampled for traces starting from the service. A warning icon appears next to the breakdown when 25% or more of the service's traffic is dropped by the rate limiter. See [Traffic breakdown](#traffic-breakdown) for more information.
 
 Configuration
-: Shows which product the service's ingestion originates from and, for APM services, how sampling is configured: `APM Agent` if the [default head-based sampling mechanism][4] from the Agent applies, `APM Local` if a [sampling rule][8] is applied from configuration in the SDK, or `APM Remote` if a sampling rule—user-defined or [adaptive sampling][17]—is applied remotely from the UI. Ingestion through OpenTelemetry is labeled `OTel`. Ingestion from other Datadog products is labeled `RUM`, `Synthetics`, `AppSec`, `CI Visibility`, or `AWS X-Ray`. A service matching more than one category displays an `N Configurations` badge; hover over it to see the full list. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configure-the-service-ingestion-rate).
+: Shows which product the service's ingestion originates from and, for APM services, how sampling is configured: `APM Agent` if the [default head-based sampling mechanism][4] from the Agent applies, `APM Local` if a [sampling rule][8] is applied from configuration in the SDK, or `APM Remote` if a sampling rule—user-defined or [adaptive sampling][17]—is applied remotely from the UI. Ingestion through OpenTelemetry is labeled `OTel`. Ingestion from other Datadog products is labeled `RUM`, `Synthetics`, `AppSec`, `CI Visibility`, or `AWS X-Ray`. A service matching more than one category displays an `N Configurations` badge; hover over it to see the full list. For more information about configuring ingestion for a service, read about [changing the default ingestion rate](#configuring-ingestion-for-a-service).
 
 Adaptive Sampling
 : Shows the service's [adaptive sampling][17] adoption status: `Full` or `Partial` when the service is covered by adaptive sampling (hover over the badge to see the coverage percentage), `Compatible` when the service could be onboarded but isn't yet, `Not Compatible` when the service's tracer or Agent version doesn't support adaptive sampling, or `Disabled` when adaptive sampling is explicitly turned off for the service.
@@ -281,3 +281,4 @@ To phrase it another way, Datadog uses the following precedence rules:
 [18]: /tracing/guide/trace_ingestion_volume_control/#globally-configure-the-ingestion-sampling-rate-at-the-agent-level
 [19]: https://github.com/DataDog/datadog-agent/releases/tag/7.41.1
 [20]: /account_management/rbac/permissions/
+[21]: /tracing/trace_pipeline/adaptive_sampling/#configure-the-adaptive-sampling-target
