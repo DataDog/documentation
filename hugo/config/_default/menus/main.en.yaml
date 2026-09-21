@@ -2784,6 +2784,41 @@ menu:
       parent: incidents
       identifier: incidents_integrations
       weight: 5
+    - name: Slack
+      url: incident_response/incident_management/setup_and_configuration/integrations/slack
+      parent: incidents_integrations
+      identifier: incidents_integrations_slack
+      weight: 501
+    - name: Microsoft Teams
+      url: incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_integrations_microsoft_teams
+      weight: 502
+    - name: Google Chat
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_chat
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_chat
+      weight: 503
+    - name: Jira
+      url: incident_response/incident_management/setup_and_configuration/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 504
+    - name: ServiceNow
+      url: incident_response/incident_management/setup_and_configuration/integrations/servicenow
+      parent: incidents_integrations
+      identifier: incidents_integrations_servicenow
+      weight: 505
+    - name: Status Pages
+      url: incident_response/incident_management/setup_and_configuration/integrations/status_pages
+      parent: incidents_integrations
+      identifier: incidents_integrations_status_pages
+      weight: 506
+    - name: Atlassian Statuspage
+      url: incident_response/incident_management/setup_and_configuration/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_integrations_statuspage
+      weight: 507
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
