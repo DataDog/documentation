@@ -149,7 +149,6 @@ To see which services support automatic collection, and the storage locations th
     "lambda:GetPolicy",
     "lambda:InvokeFunction",
     "lambda:List*",
-    "lambda:ListMicrovmImages",
     "logs:DeleteSubscriptionFilter",
     "logs:DescribeDeliveries",
     "logs:DescribeDeliverySources",
@@ -210,7 +209,6 @@ To see which services support automatic collection, and the storage locations th
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
     | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
     | `lambda:GetMicrovmImageVersion`                             | Get information about a Lambda MicroVM image version.                        |
-    | `lambda:ListMicrovmImages`                                  | List all Lambda MicroVM images.                                              |
     | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
     | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
     | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |
