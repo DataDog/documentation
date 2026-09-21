@@ -12,13 +12,13 @@ further_reading:
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
 - [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
-- [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
+- [MCP Server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
 ## AI Setup CLI
 
-The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
+The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP Server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
 
 The CLI can:
 
@@ -70,7 +70,7 @@ The CLI can set up the following products:
     ```
 
     - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of the [supported products](#supported-products).
+    - Replace `<PRODUCT>` with one of the products listed in the [Supported products](#supported-products) section.
 
 1. Press <kbd>Enter</kbd> at the welcome screen and choose whether you have a Datadog account. A browser opens for OAuth (or for account creation if you don't have an account yet). Complete the flow and grant access to your Datadog account.
 
@@ -100,7 +100,7 @@ The CLI can set up the following products:
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
-After the CLI completes, see [Next steps](#next-steps).
+After the CLI completes, see the [Next steps](#next-steps) section.
 
 ### Headless mode
 
@@ -122,7 +122,7 @@ Alternatively, omit the API and application keys to authenticate with browser OA
 
 By using `--headless`, you confirm that source-code upload and automatic command execution are authorized for the target project.
 
-## MCP server
+## MCP Server
 
 The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible coding assistant. After you install and authenticate the server, you instrument a project by typing a one-line prompt. The agent reads your code, calls MCP tools (with your permission), applies changes, and verifies the result.
 
@@ -147,7 +147,7 @@ The Datadog MCP Server exposes the `onboarding` toolset to any MCP-compatible co
 | App and API Protection | Python, Node.js, Java, Go, Ruby, .NET, PHP, and proxies (Envoy, HAProxy) for Linux, Windows, Kubernetes, Docker, GCP Cloud Run, and AWS Lambda, AWS Fargate/ECS |
 | Code Coverage, Test Optimization | Jest, Vitest, Mocha, Playwright, Cypress, pytest, unittest, JUnit, TestNG, RSpec, minitest, xUnit, NUnit, MSTest v2, `go test`, XCTest / Swift Testing |
 
-### Step 1: Install the MCP server
+### Step 1: Install the MCP Server
 
 {{< tabs >}}
 {{% tab "Claude Code" %}}
@@ -159,7 +159,7 @@ In an active Claude Code session, run:
 {{% tab "Cursor" %}}
 **Option 1: Install deeplink (recommended)**
 
-Click the install deeplink for your [Datadog site][1], then confirm {{< ui >}}Install{{< /ui >}} for the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server when Cursor opens.
+Click the install deeplink for your [Datadog site][1], then confirm {{< ui >}}Install{{< /ui >}} for the `datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}` server when Cursor opens.
 
    <pre><code>{{< region-param key="cursor_mcp_install_deeplink" >}}</code></pre>
 
@@ -190,11 +190,11 @@ Any MCP client that supports HTTP transport can connect to the Datadog MCP Serve
 {{% /tab %}}
 {{< /tabs >}}
 
-### Step 2: Authenticate the MCP server
+### Step 2: Authenticate the MCP Server
 
-1. After you install the MCP server, your coding assistant prompts you to authenticate. Press <kbd>Enter</kbd> to open the Datadog OAuth screen in your browser.
-1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP server access to your Datadog account.
-1. Confirm that MCP tools appear under the **datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}** server.
+1. After you install the MCP Server, your coding assistant prompts you to authenticate. Press <kbd>Enter</kbd> to open the Datadog OAuth screen in your browser.
+1. After authentication completes, choose {{< ui >}}Open{{< /ui >}} to return to your IDE and grant the MCP Server access to your Datadog account.
+1. Confirm that MCP tools appear under the `datadog-onboarding-{{< region-param key="dd_datacenter_lowercase" >}}` server.
 
 ### Step 3: Instrument your project
 
@@ -255,7 +255,7 @@ Send the prompt that matches the product you want to set up:
 
 The agent detects your stack, requests permission before each tool call, applies changes locally (without committing them), and prints verification steps.
 
-After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see [Next steps](#next-steps) to confirm data is flowing.
+After the agent completes, commit the changes to your repository and set any new environment variables (API keys, application IDs) in your production environment. Then see the [Next steps](#next-steps) section to confirm data is flowing.
 
 ## Next steps
 
@@ -275,7 +275,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [10]: https://app.datadoghq.com/logs/livetail
 [11]: https://app.datadoghq.com/security/appsec
 [16]: /getting_started/site/
-[17]: https://www.anthropic.com/claude-code
+[17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
 [19]: /account_management/api-app-keys/
 
