@@ -15,6 +15,13 @@
  * That site name is where this departs from Hugo in mechanism but not in
  * result. Hugo renders an empty `region-param` span and fills it at runtime;
  * here each variant already knows its own region, so the label is baked in.
+ *
+ * Placement is the caller's job, and it matters: mount this inside the page's
+ * content column, directly above the page title. Hugo's banner sits in the
+ * main content container, below the breadcrumb. Mounting it in BaseLayout
+ * instead — tempting, because every route passes through there — puts it above
+ * the side nav and breadcrumb, spanning the full page width. Current callers
+ * are ApiLayout.astro and the `[...slug].astro` content route.
  */
 import Alert from "@components/Alert/Alert.astro";
 import styles from "./SiteSupportBanner.module.css";

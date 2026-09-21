@@ -66,7 +66,7 @@ describe("BaseLayout region visibility", () => {
  * `src/components/SiteSupportBanner/tests/unit.test.ts`, and its placement in
  * the API column by `src/layouts/apiLayoutBanner.unit.test.ts`.
  */
-describe("BaseLayout site-support banner", () => {
+describe("BaseLayout does not own the site-support banner", () => {
   it("does not render the banner itself", async () => {
     // BaseLayout has no pathname-derived banner: putting it here made it span
     // the full page width, above the side nav and breadcrumb.

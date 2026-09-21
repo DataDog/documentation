@@ -24,9 +24,14 @@ import { buildMarkdocStr } from "@lib/plaintext/helpers";
 const resolvePartial = makeBundledPartialResolver();
 
 /**
- * Splice a block in directly below the leading H1, so the site-support note
- * sits where it does on the HTML page. Falls back to prepending if the text
- * does not start with a heading.
+ * Splice a block in directly below the leading H1. Falls back to prepending if
+ * the text does not start with a heading.
+ *
+ * This is one place the plaintext twin deliberately diverges from the HTML
+ * page. There the banner sits *above* the title, because it is a page-level
+ * alert in the content column. In Markdown the title is the document's first
+ * line, so a note above it would read as preamble detached from the page;
+ * below the H1 is the conventional spot for a lede admonition.
  */
 function insertAfterTitle(text: string, block: string): string {
   if (!block) {
