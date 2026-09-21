@@ -1,15 +1,9 @@
 ---
-description: El triage detectó riesgos de API en definiciones, gateways y tráfico
+description: El triaje detectó riesgos de API en definiciones, gateways y tráfico
   en vivo.
 title: Hallazgos de API
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection se encuentra en versión preliminar en el sitio de Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
-El explorador de [Hallazgos de API][1] proporciona una vista central de triage de los riesgos de API detectados en sus definiciones, gateways y tráfico en vivo. Las reglas predeterminadas detectan vulnerabilidades y configuraciones incorrectas comunes. También puede agregar [reglas personalizadas][2] para casos de uso específicos.
+El explorador de [Hallazgos de API][1] proporciona una vista central de triaje de los riesgos de API detectados en sus definiciones, gateways y tráfico en vivo. Las reglas predeterminadas detectan vulnerabilidades y configuraciones incorrectas comunes. También puede agregar [reglas personalizadas][2] para casos de uso específicos.
 
 Columnas de **Hallazgos de API**:
 
