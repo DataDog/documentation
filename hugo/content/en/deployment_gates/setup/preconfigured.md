@@ -13,10 +13,6 @@ further_reading:
   text: "Deployment Gates API reference"
 ---
 
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates are in Preview. If you're interested in this feature, complete the form to request access.
-{{< /callout >}}
-
 With **preconfigured** Deployment Gates, gates and rules are persisted in Datadog and referenced by service and environment at evaluation time. Preconfigured gates are a good fit when you want to share rules across many deployments, manage configuration in Terraform, or let non-CI users edit rules in the Datadog UI.
 
 Looking to define rules inline in your deployment config? See [Just-In-Time (JIT) Deployment Gates][5].

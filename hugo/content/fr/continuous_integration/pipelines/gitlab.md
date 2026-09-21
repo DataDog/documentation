@@ -7,98 +7,99 @@ further_reading:
   text: Explorer les résultats et les performances de l'exécution du pipeline
 - link: /continuous_integration/troubleshooting/
   tag: Documentation
-  text: Dépannage de CI Visibility
+  text: Dépannage de CI Visibility
 - link: /continuous_integration/pipelines/custom_tags_and_measures/
   tag: Documentation
-  text: Développer Pipeline Visibility en ajoutant des tags et des mesures personnalisés
+  text: Étendez Pipeline Visibility en ajoutant des tags et des mesures personnalisés
 title: Configuration de GitLab pour CI Visibility
 ---
+## Présentation {#overview}
 
-## Présentation
+[GitLab][18] est une plateforme DevOps qui automatise le cycle de vie du développement logiciel avec des fonctionnalités CI/CD intégrées, permettant le déploiement automatisé et continu d'applications avec des contrôles de sécurité intégrés.
 
-[GitLab][18] est une plateforme DevOps qui automatise le cycle de vie du développement logiciel avec des fonctionnalités CI/CD intégrées, permettant le déploiement continu et automatisé d'applications avec des contrôles de sécurité intégrés.
+Configurez CI Visibility pour GitLab afin de collecter des données sur vos exécutions de pipeline, d'analyser les goulots d'étranglement de performance, de résoudre les problèmes opérationnels et d'optimiser vos workflows de déploiement.
 
-Configurez CI Visibility pour GitLab pour collecter des données sur vos exécutions de pipeline, analyser les goulots d'étranglement de performance, résoudre les problèmes opérationnels et optimiser vos workflows de déploiement.
-
-### Compatibilité
+### Compatibilité {#compatibility}
 
 | Pipeline Visibility | Plateforme | Définition |
 |---|---|---|
-| [Pipelines en cours d'exécution][24] | Pipelines en cours d'exécution | Afficher les exécutions de pipeline en cours d'exécution. Les pipelines en file d'attente ou en attente s'affichent avec le statut « Running » sur Datadog. |
-| [Analyse des échecs de tâches CI][28] | Analyse des échecs de tâches CI | Utilise des modèles LLM sur les logs pertinents pour analyser la cause racine des tâches CI ayant échoué. |
-| [Filtrer les tâches CI sur le chemin critique][29] | Filtrer les tâches CI sur le chemin critique | Filtrer par tâches sur le chemin critique. |
-| [Tentatives partielles][19] | Pipelines partiels | Consultez les exécutions de pipelines faisant lʼobjet de nouvelles tentatives. |
-| [Étapes manuelles][20] | Étapes manuelles | Consultez les pipelines déclenchés manuellement. |
-| [Durée de mise en file d'attente][21] | Temps de mise en file d'attente | Afficher le temps pendant lequel les tâches de pipeline restent dans la file d'attente avant le traitement. |
-| Corrélation de logs | Corrélation de logs | Mettre en corrélation les spans de pipeline avec les logs et activer la [collecte de logs de tâches][12]. |
-| Mise en corrélation des métriques d'infrastructure | Mise en corrélation des métriques d'infrastructure | Mettre en corrélation les tâches avec les [métriques d'hôte d'infrastructure][14] pour les runners GitLab auto-hébergés. |
-| Tags prédéfinis personnalisés | Tags prédéfinis personnalisés | Définir des [tags personnalisés][10] sur tous les spans de pipeline, stages et tâches générés. |
-| [Tags personnalisés][15] [et mesures au runtime][16] | Tags personnalisés et mesures au runtime | Configurer les [tags personnalisés et les mesures][13] au runtime. |
-| Paramètres | Paramètres | Définir des paramètres personnalisés `env` ou `service` lorsqu'un pipeline est déclenché. |
-| [Raisons d'échec du pipeline][11] | Raisons de la défaillance d'un pipeline | Identifiez les raisons de la défaillance dʼun pipeline en vous basant sur les [messages d'erreur][15]. |
-| [Temps d'attente d'approbation][22] | Temps d'attente d'approbation  | Afficher le temps d'attente des tâches et des pipelines pour les approbations manuelles. |
-| [Temps d'exécution][23] | Durée d'exécution  | Consulter la durée pendant laquelle les pipelines ont exécuté des tâches. GitLab fait référence à cette métrique sous le nom `duration`. La durée dans GitLab et la durée d'exécution peuvent afficher des valeurs différentes. GitLab ne prend pas en considération les tâches qui ont échoué en raison de certains types d'échecs (tels que les échecs du système de runner). |
-| [Spans personnalisées][25] | Spans personnalisées | Configurer des spans personnalisées pour vos pipelines. |
+| [Pipelines en cours d'exécution][24] | Pipelines en cours d'exécution | Affichez les exécutions de pipeline en cours d'exécution. Les pipelines en file d'attente ou en attente s'affichent avec le statut « Running » sur Datadog. |
+| [Jobs en cours d'exécution][32] | Jobs en cours d'exécution | Affichez les exécutions de jobs actuellement en cours d'exécution. |
+| [Analyse des échecs des jobs CI][28] | Analyse des échecs des jobs CI | Utilise des modèles LLM sur les logs pertinents pour analyser la cause racine des jobs CI ayant échoué. |
+| [Filtrer les jobs CI sur le chemin critique][29] | Filtrer les jobs CI sur le chemin critique | Filtrez par jobs sur le chemin critique. |
+| [Réessais partiels][19] | Pipelines partiels | Affichez les exécutions de pipeline ayant fait l'objet de réessais partiels. |
+| [Réessais automatiques de jobs][31] | Réessais automatiques de jobs | Datadog réessaie les jobs ayant échoué classés comme transitoires par son modèle d'erreur IA. |
+| [Étapes manuelles][20] | Étapes manuelles | Affichez les pipelines déclenchés manuellement. |
+| [Temps de file d'attente][21] | Temps de file d'attente | Affichez la durée pendant laquelle les jobs de pipeline restent dans la file d'attente avant d'être traités. |
+| Corrélation des logs | Corrélation des logs | Corrélez les spans de pipeline aux logs et activez la [collecte des logs de job][12]. |
+| Corrélation des métriques d'infrastructure | Corrélation des métriques d'infrastructure | Corrélez les jobs aux [métriques de host d'infrastructure][14] pour les runners GitLab auto-hébergés. |
+| Tags prédéfinis personnalisés | Tags prédéfinis personnalisés | Définissez des [tags personnalisés][10] pour tous les spans générés de pipeline, de phase et de job. |
+| [Tags personnalisés][15] [et mesures au moment de l'exécution][16] | Tags et mesures personnalisés au moment de l'exécution | Configurez des [tags et mesures personnalisés][13] au moment de l'exécution. |
+| Paramètres | Paramètres | Définissez des paramètres `env` ou `service` personnalisés lorsqu'un pipeline est déclenché. |
+| [Raisons d'échec du pipeline][11] | Raisons d'échec du pipeline | Identifiez les raisons d'échec du pipeline à partir des [messages d'erreur][15]. |
+| [Temps d'attente d'approbation][22] | Temps d'attente d'approbation  | Affichez la durée pendant laquelle les jobs et les pipelines attendent des approbations manuelles. |
+| [Temps d'exécution][23] | Temps d'exécution  | Affichez la durée pendant laquelle les pipelines ont exécuté des jobs. Gitlab désigne cette métrique sous le nom de `duration`. La durée dans Gitlab et le temps d'exécution peuvent afficher des valeurs différentes. Gitlab ne prend pas en considération les jobs qui ont échoué en raison de certains types de défaillances (telles que les défaillances du système de runner). |
+| [Spans personnalisés][25] | Spans personnalisés | Configurez des spans personnalisés pour vos pipelines. |
 
-Les versions suivantes de GitLab sont prises en charge :
+Les versions de GitLab suivantes sont prises en charge :
 
 - GitLab.com (SaaS)
 - GitLab >= 14.1 (auto-hébergé)
 - GitLab >= 13.7.0 (auto-hébergé) avec le feature flag `datadog_ci_integration` activé
 
-### Termes
+### Terminologie {#terminology}
 
-Ce tableau montre le mappage des concepts entre Datadog CI Visibility et GitLab :
+Ce tableau présente la correspondance des concepts entre Datadog CI Visibility et GitLab :
 
 | Datadog                    | GitLab   |
 |----------------------------|----------|
 | Pipeline                   | Pipeline |
-| Stage                      | Stage    |
+| Phase                      | Étape    |
 | Job                        | Job      |
 | _Non disponible dans Datadog_ | Script   |
 
-## Configurer l'intégration Datadog
+## Configurer l'intégration Datadog {#configure-the-datadog-integration}
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
 
-Configurez l'intégration sur un [projet][101] ou un [groupe][102] en accédant à **Settings > Integrations > Datadog** pour chaque projet ou groupe que vous souhaitez instrumenter.
+Configurez l'intégration sur un [projet][101] ou un [groupe][102] en accédant à {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} pour chaque projet ou groupe que vous souhaitez instrumenter.
 
 
 Remplissez les paramètres de configuration de l'intégration :
 
-**Active**
-: permet d'activer l'intégration.
+{{< ui >}}Active{{< /ui >}}
+: Active l'intégration.
 
-**Datadog site**
-: Permet d'indiquer le [site Datadog][103] auquel envoyer les données.<br/>
-**Valeur par défaut** : `datadoghq.com`<br/>
-**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
+{{< ui >}}Datadog site{{< /ui >}}
+: Spécifie le [site Datadog][103] vers lequel envoyer les données.<br/>
+**Par défaut** : `datadoghq.com`<br/>
+**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
 
-**API URL** (facultatif)
-: permet de remplacer l'URL d'API utilisée pour l'envoi direct des données, utilisé uniquement dans des scénarios avancés.<br/>
-**Valeur par défaut** : (vide, sans remplacement)
+{{< ui >}}API URL{{< /ui >}} (facultatif)
+: Permet de remplacer l'URL de l'API utilisée pour l'envoi direct de données, uniquement utilisé dans des scénarios avancés.<br/>
+**Par défaut**: (vide, aucun remplacement)
 
-**API key**
-: Spécifie quelle [clé d'API Datadog][104] utiliser lors de l'envoi de données.
+{{< ui >}}API key{{< /ui >}}
+: Spécifie la [clé d'API Datadog][104] à utiliser lors de l'envoi de données.
 
-**Enable CI Visibility**
-: Contrôle l'activation des fonctionnalités CI Visibility, y compris le traçage de pipeline, le calcul du chemin critique et la surveillance des performances. Assurez-vous que cette case est cochée pour activer ces fonctionnalités.
+{{< ui >}}Enable CI Visibility{{< /ui >}}
+: Contrôle l'activation des fonctionnalités de CI Visibility, y compris le traçage des pipelines, le calcul du chemin critique et la surveillance des performances. Assurez-vous que cette case est cochée pour activer ces fonctionnalités.
 
-**Service** (facultatif)
-: Permet d'indiquer le nom de service à associer à chaque span générée par l'intégration. Utilisez ce paramètre pour différencier les instances GitLab.<br/>
-**Valeur par défaut** : `gitlab-ci`
+{{< ui >}}Service{{< /ui >}} (facultatif)
+: Spécifie le nom de service à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les instances GitLab.<br/>
+**Par défaut**: `gitlab-ci`
 
-**Env** (facultatif)
-: Spécifie quel environnement (tag `env`) attacher à chaque span généré par l'intégration. Utilisez cela pour différencier les groupes d'instances GitLab (par exemple, staging ou production).<br/>
-**Valeur par défaut** : `none`
+{{< ui >}}Env{{< /ui >}} (facultatif)
+: Spécifie l'environnement (tag `env`) à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les groupes d'instances GitLab (par exemple, pré-production ou production).<br/>
+**Par défaut** : `none`
 
-**Tags** (facultatif)
-: Spécifie les tags personnalisés à attacher à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
-**Valeur par défaut** : (vide, pas de tags supplémentaires)<br/>
-**Remarque** : disponible uniquement dans GitLab.com et GitLab >= 14.8 auto-hébergé.
+{{< ui >}}Tags{{< /ui >}} (facultatif)
+: Spécifie tous les tags personnalisés à associer à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
+**Par défaut** : (vide, aucun tag supplémentaire)<br/>
+**Remarque** : Disponible uniquement sur GitLab.com et GitLab &gt;= 14.8 auto-hébergé.
 
-Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois réussi, cliquez sur **Save changes** pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur **Save changes** et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section "Recent events" ci-dessous.
+Vous pouvez tester l'intégration avec le bouton {{< ui >}}Test settings{{< /ui >}} (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois l'opération réussie, cliquez sur {{< ui >}}Save changes{{< /ui >}} pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur {{< ui >}}Save changes{{< /ui >}} et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section « Événements récents » ci-dessous.
 
 [101]: https://docs.gitlab.com/ee/user/admin_area/settings/project_integration_management.html#view-projects-that-use-custom-settings
 [102]: https://docs.gitlab.com/ee/user/project/integrations/index.html#manage-group-default-settings-for-a-project-integration
@@ -107,42 +108,42 @@ Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible u
 {{% /tab %}}
 {{% tab "GitLab &gt;&equals; 14.1" %}}
 
-Configurez l'intégration sur un [projet][101] ou un [groupe][102] en accédant à **Settings > Integrations > Datadog** pour chaque projet ou groupe que vous souhaitez instrumenter. Vous pouvez également activer l'intégration au niveau de l'[instance][103] GitLab en accédant à **Admin > Settings > Integrations > Datadog**.
+Configurez l'intégration sur un [projet][101] ou un [groupe][102] en accédant à {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} pour chaque projet ou groupe que vous souhaitez instrumenter. Vous pouvez également activer l'intégration au niveau de l'[instance][103] GitLab en allant dans {{< ui >}}Admin{{< /ui >}} &gt; {{< ui >}}Settings{{< /ui >}} &gt; {{< ui >}}Integrations{{< /ui >}} &gt; {{< ui >}}Datadog{{< /ui >}}.
 
 Remplissez les paramètres de configuration de l'intégration :
 
-**Active**
-: permet d'activer l'intégration.
+{{< ui >}}Active{{< /ui >}}
+: Active l'intégration.
 
-**Datadog site**
-: Permet d'indiquer le [site Datadog][104] auquel envoyer les données.<br/>
-**Valeur par défaut** : `datadoghq.com`<br/>
-**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
+{{< ui >}}Datadog site{{< /ui >}}
+: Spécifie le [site Datadog][104] vers lequel envoyer les données.<br/>
+**Par défaut** : `datadoghq.com`<br/>
+**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
 
-**API URL** (facultatif)
-: permet de remplacer l'URL d'API utilisée pour l'envoi direct des données, utilisé uniquement dans des scénarios avancés.<br/>
-**Valeur par défaut** : (vide, sans remplacement)
+{{< ui >}}API URL{{< /ui >}} (facultatif)
+: Permet de remplacer l'URL de l'API utilisée pour l'envoi direct de données, uniquement utilisé dans des scénarios avancés.<br/>
+**Par défaut**: (vide, aucun remplacement)
 
-**API key**
+{{< ui >}}API key{{< /ui >}}
 : Spécifie quelle [clé d'API Datadog][105] utiliser lors de l'envoi de données.
 
-**Enable CI Visibility**
-: Contrôle l'activation des fonctionnalités CI Visibility, y compris le traçage de pipeline, le calcul du chemin critique et la surveillance des performances. Assurez-vous que cette case est cochée pour activer ces capacités. Elle n'est présente qu'à partir de GitLab 17.7 et n'est pas requise dans les versions antérieures.
+{{< ui >}}Enable CI Visibility{{< /ui >}}
+: Contrôle l'activation des fonctionnalités de CI Visibility, y compris le traçage des pipelines, le calcul du chemin critique et la surveillance des performances. Assurez-vous que cette case est cochée pour activer ces fonctionnalités. Elle n'est présente qu'à partir de GitLab 17.7 et n'est pas requise dans les versions antérieures.
 
-**Service** (facultatif)
-: Permet d'indiquer le nom de service à associer à chaque span générée par l'intégration. Utilisez ce paramètre pour différencier les instances GitLab.<br/>
-**Valeur par défaut** : `gitlab-ci`
+{{< ui >}}Service{{< /ui >}} (facultatif)
+: Spécifie le nom de service à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les instances GitLab.<br/>
+**Par défaut**: `gitlab-ci`
 
-**Env** (facultatif)
-: Spécifie quel environnement (tag `env`) attacher à chaque span généré par l'intégration. Utilisez cela pour différencier les groupes d'instances GitLab (par exemple, staging ou production).<br/>
-**Valeur par défaut** : `none`
+{{< ui >}}Env{{< /ui >}} (facultatif)
+: Spécifie l'environnement (tag `env`) à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les groupes d'instances GitLab (par exemple, pré-production ou production).<br/>
+**Par défaut** : `none`
 
-**Tags** (facultatif)
-: Spécifie les tags personnalisés à attacher à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
-**Valeur par défaut** : (vide, pas de tags supplémentaires)<br/>
-**Remarque** : disponible uniquement dans GitLab.com et GitLab >= 14.8 auto-hébergé.
+{{< ui >}}Tags{{< /ui >}} (facultatif)
+: Spécifie tous les tags personnalisés à associer à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
+**Par défaut** : (vide, aucun tag supplémentaire)<br/>
+**Remarque** : Disponible uniquement sur GitLab.com et GitLab &gt;= 14.8 auto-hébergé.
 
-Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois réussi, cliquez sur **Save changes** pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur **Save changes** et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section "Recent events" ci-dessous.
+Vous pouvez tester l'intégration avec le bouton {{< ui >}}Test settings{{< /ui >}} (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois l'opération réussie, cliquez sur {{< ui >}}Save changes{{< /ui >}} pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur {{< ui >}}Save changes{{< /ui >}} et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section « Événements récents » ci-dessous.
 
 [101]: https://docs.gitlab.com/ee/administration/settings/project_integration_management.html#view-projects-that-use-custom-settings
 [102]: https://docs.gitlab.com/ee/user/project/integrations/index.html#manage-group-default-settings-for-a-project-integration
@@ -152,17 +153,17 @@ Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible u
 {{% /tab %}}
 {{% tab "GitLab &lt; 14.1" %}}
 
-Activez le [feature flag][101] `datadog_ci_integration` pour activer l'intégration.
+Activez le `datadog_ci_integration` feature flag [101] pour activer l'intégration.
 
-Exécutez l'une des commandes suivantes, qui utilisent le [Rails Runner][102] de GitLab, selon votre type d'installation :
+Exécutez l'une des commandes suivantes, qui utilisent le [Rails Runner][102] de GitLab, selon votre type d'installation :
 
-Depuis **Omnibus Installations** :
+Depuis **les installations Omnibus** :
 
 {{< code-block lang="shell" >}}
 sudo gitlab-rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-Depuis **Source Installations** :
+Depuis **les installations à partir des sources** :
 
 {{< code-block lang="shell" >}}
 sudo -u git -H bundle exec rails runner \
@@ -170,49 +171,49 @@ sudo -u git -H bundle exec rails runner \
   "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-Depuis **Kubernetes Installations** :
+Depuis **Installations Kubernetes** :
 
 {{< code-block lang="shell" >}}
 kubectl exec -it <task-runner-pod-name> -- \
   /srv/gitlab/bin/rails runner "Feature.enable(:datadog_ci_integration)"
 {{< /code-block >}}
 
-Ensuite, configurez l'intégration sur un [projet][103] en accédant à **Settings > Integrations > Datadog** pour chaque projet que vous souhaitez instrumenter.
+Ensuite, configurez l'intégration sur un [project][103] en allant dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}} pour chaque projet que vous souhaitez instrumenter.
 
-<div class="alert alert-warning">En raison d'un <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> dans les versions précédentes de GitLab, l'intégration Datadog ne peut pas être activée au niveau <strong>du groupe ou de l'instance</strong> sur <strong>GitLab versions < 14.1</strong>, même si l'option est disponible sur l'interface utilisateur de GitLab</div>
+<div class="alert alert-warning">En raison d'un <a href="https://gitlab.com/gitlab-org/gitlab/-/issues/335218">bug</a> dans les premières versions de GitLab, l'intégration Datadog ne peut pas être activée au niveau <strong>groupe ou instance</strong> sur les <strong>versions de GitLab < 14.1</strong>, même si l'option est disponible dans l'interface utilisateur de GitLab.</div>
 
 
 Remplissez les paramètres de configuration de l'intégration :
 
-**Active**
-: permet d'activer l'intégration.
+{{< ui >}}Active{{< /ui >}}
+: Active l'intégration.
 
-**Datadog site**
-: Permet d'indiquer le [site Datadog][104] auquel envoyer les données.<br/>
-**Valeur par défaut** : `datadoghq.com`<br/>
-**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
+{{< ui >}}Datadog site{{< /ui >}}
+: Spécifie le [site Datadog][104] vers lequel envoyer les données.<br/>
+**Par défaut** : `datadoghq.com`<br/>
+**Site sélectionné** : {{< region-param key="dd_site" code="true" >}}<br/>
 
-**API URL** (facultatif)
-: permet de remplacer l'URL d'API utilisée pour l'envoi direct des données, utilisé uniquement dans des scénarios avancés.<br/>
-**Valeur par défaut** : (vide, sans remplacement)
+{{< ui >}}API URL{{< /ui >}} (facultatif)
+: Permet de remplacer l'URL de l'API utilisée pour l'envoi direct de données, uniquement utilisé dans des scénarios avancés.<br/>
+**Par défaut**: (vide, aucun remplacement)
 
-**API key**
+{{< ui >}}API key{{< /ui >}}
 : Spécifie quelle [clé d'API Datadog][105] utiliser lors de l'envoi de données.
 
-**Service** (facultatif)
-: Permet d'indiquer le nom de service à associer à chaque span générée par l'intégration. Utilisez ce paramètre pour différencier les instances GitLab.<br/>
-**Valeur par défaut** : `gitlab-ci`
+{{< ui >}}Service{{< /ui >}} (facultatif)
+: Spécifie le nom de service à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les instances GitLab.<br/>
+**Par défaut**: `gitlab-ci`
 
-**Env** (facultatif)
-: Spécifie quel environnement (tag `env`) attacher à chaque span généré par l'intégration. Utilisez cela pour différencier les groupes d'instances GitLab (par exemple, staging ou production).<br/>
-**Valeur par défaut** : `none`
+{{< ui >}}Env{{< /ui >}} (facultatif)
+: Spécifie l'environnement (tag `env`) à associer à chaque span généré par l'intégration. Utilisez ceci pour différencier les groupes d'instances GitLab (par exemple, pré-production ou production).<br/>
+**Par défaut** : `none`
 
-**Tags** (facultatif)
-: Spécifie les tags personnalisés à attacher à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
-**Valeur par défaut** : (vide, pas de tags supplémentaires)<br/>
-**Remarque** : disponible uniquement dans GitLab.com et GitLab >= 14.8 auto-hébergé.
+{{< ui >}}Tags{{< /ui >}} (facultatif)
+: Spécifie tous les tags personnalisés à associer à chaque span généré par l'intégration. Fournissez un tag par ligne au format : `key:value`.<br/>
+**Par défaut** : (vide, aucun tag supplémentaire)<br/>
+**Remarque** : Disponible uniquement sur GitLab.com et GitLab &gt;= 14.8 auto-hébergé.
 
-Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois réussi, cliquez sur **Save changes** pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur **Save changes** et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section "Recent events" ci-dessous.
+Vous pouvez tester l'intégration avec le bouton {{< ui >}}Test settings{{< /ui >}} (disponible uniquement lors de la configuration de l'intégration sur un projet). Une fois l'opération réussie, cliquez sur {{< ui >}}Save changes{{< /ui >}} pour terminer la configuration de l'intégration. Si le bouton échoue, cliquez sur {{< ui >}}Save changes{{< /ui >}} et vérifiez que les premiers webhooks envoyés sont réussis en consultant l'historique dans la section « Événements récents » ci-dessous.
 
 [101]: https://docs.gitlab.com/ee/administration/feature_flags.html
 [102]: https://docs.gitlab.com/ee/administration/operations/rails_console.html#using-the-rails-runner
@@ -221,66 +222,90 @@ Vous pouvez tester l'intégration avec le bouton **Test settings** (disponible u
 [105]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 
-{{% tab "GitLab &lt; 13.7" %}}
+{{% tab "GitLab < 13.7" %}}
 
-<div class="alert alert-danger">La prise en charge directe avec les webhooks n'est pas en cours de développement. Des problèmes inattendus peuvent survenir. Datadog recommande de plutôt mettre à jour GitLab.</div>
+<div class="alert alert-danger">Le support direct avec les webhooks n'est pas en cours de développement. Des problèmes inattendus pourraient survenir. Datadog vous recommande de mettre à jour GitLab.</div>
 
-Pour les versions antérieures de GitLab, vous pouvez utiliser les [webhooks][101] pour envoyer des données de pipeline à Datadog.
+Pour les versions plus anciennes de GitLab, vous pouvez utiliser [webhooks][101] pour envoyer des données de pipeline à Datadog.
 
-Accédez à **Settings > Webhooks** dans votre référentiel (ou paramètres d'instance GitLab), puis ajoutez un nouveau webhook :
+Allez dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Webhooks{{< /ui >}} dans votre dépôt (ou les paramètres de l'instance GitLab), et ajoutez un nouveau webhook :
 
-- **URL** : <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> où `<API_KEY>` est votre [clé d'API Datadog][102].
-- **Secret Token** : laissez ce champ vide.
-- **Trigger** : sélectionnez `Job events` et `Pipeline events`.
+- {{< ui >}}URL{{< /ui >}} : <code>https://webhook-intake.{{< region-param key="dd_site" >}}/api/v2/webhook/?dd-api-key=<API_KEY></code> où `<API_KEY>` est votre [clé d'API Datadog][102].
+- {{< ui >}}Secret Token{{< /ui >}} : Laissez ce champ vide.
+- {{< ui >}}Trigger{{< /ui >}} : Sélectionnez `Job events` et `Pipeline events`.
 
-Pour définir des paramètres `env` ou `service` personnalisés, ajoutez plus de paramètres de requête dans l'URL des webhooks. Par exemple, `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
+Pour définir des paramètres `env` ou `service` personnalisés, ajoutez d'autres paramètres de requête dans l'URL des webhooks. Par exemple, `&env=<YOUR_ENV>&service=<YOUR_SERVICE_NAME>`.
 
-### Appliquer des tags personnalisés
+### Définir des tags personnalisés {#set-custom-tags}
 
-Pour définir des tags personnalisés sur tous les spans de pipeline et de tâche générés par l'intégration, ajoutez un paramètre de requête encodé en URL `tags` avec des paires `key:value` séparées par des virgules à l'URL.
+Pour définir des tags personnalisés pour tous les spans de pipeline et de job générés par l'intégration, ajoutez un paramètre de requête encodé en URL `tags` avec des paires `key:value` séparées par des virgules à l'URL.
 
-Si une paire clé:valeur contient des virgules, entourez-la de guillemets. Par exemple, pour ajouter `key1:value1,"key2: value with , comma",key3:value3`, la chaîne suivante devrait être ajoutée à l'**URL du webhook** : `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`.
+Si une paire clé:valeur contient des virgules, entourez-la de guillemets : Par exemple, pour ajouter `key1:value1,"key2: value with , comma",key3:value3`, la chaîne suivante devrait être ajoutée au {{< ui >}}Webhook URL{{< /ui >}} : `?tags=key1%3Avalue1%2C%22key2%3A+value+with+%2C+comma%22%2Ckey3%3Avalue3`.
 
 [101]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
 [102]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
 
-## Configuration avancée
+## Configuration avancée {#advanced-configuration}
 
-### Appliquer des tags personnalisés
+### Définir un nom de pipeline {#set-a-pipeline-name}
 
-Vous pouvez définir des tags personnalisés pour tous les spans de pipeline et de tâche de vos projets GitLab afin d'améliorer la traçabilité. Pour en savoir plus, consultez la section [Tags et mesures personnalisés][13].
+Par défaut, Datadog utilise le chemin de votre projet GitLab comme nom de pipeline. Par conséquent, chaque pipeline en aval (enfant) déclenché avec le mot-clé [`trigger`][33] depuis le même projet apparaît sous le même nom dans Datadog.
 
-#### Intégration avec Datadog Teams
+Pour donner un nom plus significatif à un pipeline, utilisez le mot-clé [`workflow:name`][34] de GitLab dans votre `.gitlab-ci.yml`. Par exemple, pour nommer un pipeline en aval d'après le job qui l'a déclenché :
 
-Pour afficher et filtrer les équipes associées à vos pipelines, ajoutez `team:<your-team>` en tant que tag personnalisé. Le nom du tag personnalisé doit correspondre exactement au nom de votre équipe [Datadog Teams][16].
+```yaml
+trigger-job:
+  trigger:
+    include:
+      - local: path/to/child-pipeline.yml
+  variables:
+    CHILD_PIPELINE_NAME: $CI_JOB_NAME
+```
 
-### Mettre les métriques d'infrastructure en corrélation avec les tâches
+Dans le `.gitlab-ci.yml` du pipeline enfant (ou un fichier qu'il inclut), utilisez la variable transmise pour définir le nom du pipeline :
 
-Si vous utilisez des runners GitLab auto-hébergés, vous pouvez mettre en corrélation les tâches avec l'infrastructure qui les exécute.
+```yaml
+workflow:
+  name: '$CHILD_PIPELINE_NAME'
+```
 
-Plusieurs méthodes sont disponibles pour la mise en corrélation d'infrastructure Datadog :
+**Remarque** : L'exemple ci-dessus utilise l'expansion de variable dans le nom du pipeline, ce qui nécessite GitLab 16.3 ou une version ultérieure. `workflow:name` lui-même est disponible à partir de GitLab 15.11 pour les noms sous forme de chaîne de caractères simple. Le nom du pipeline n'est visible dans Datadog qu'à partir de GitLab 16.1, date à laquelle il a été ajouté à la charge utile du webhook de pipeline.
+
+### Définir des tags personnalisés {#set-custom-tags-1}
+
+Vous pouvez définir des tags personnalisés pour tous les spans de pipeline et de job à partir de vos projets GitLab afin d'améliorer la traçabilité. Pour plus d'informations, consultez [Tags et mesures personnalisés][13].
+
+#### Intégration avec Datadog Teams {#integrate-with-datadog-teams}
+
+Pour afficher et filtrer les équipes associées à vos pipelines, ajoutez `team:<your-team>` comme tag personnalisé. Le nom du tag personnalisé doit correspondre exactement à l'identifiant de votre équipe [Datadog Teams][16].
+
+### Corréler les métriques d'infrastructure aux jobs {#correlate-infrastructure-metrics-to-jobs}
+
+Si vous utilisez des runners GitLab auto-hébergés, vous pouvez corréler les jobs avec l'infrastructure qui les exécute.
+
+La corrélation d'infrastructure Datadog est possible en utilisant différentes méthodes :
 
 {{< tabs >}}
-{{% tab "Exécuteurs sans autoscaling" %}}
-L'exécuteur GitLab doit disposer d'un tag au format `host:<hostname>`. Les tags peuvent être ajoutés lors de l'[enregistrement d'un nouvel exécuteur][1]. Par conséquent, cette méthode n'est disponible que lorsque l'exécuteur exécute directement la tâche.
+{{% tab "Exécuteurs sans mise à l'échelle automatique" %}}
+Le runner GitLab doit avoir un tag sous la forme `host:<hostname>`. Les tags peuvent être ajoutés lors de l'[enregistrement d'un nouveau runner][1]. Par conséquent, cette méthode n'est disponible que lorsque le runner exécute directement le job.
 
-Cela exclut les exécuteurs qui mettent automatiquement à l'échelle l'infrastructure afin d'exécuter la tâche (tels que les exécuteurs Kubernetes, Docker Autoscaler ou Instance), car il n'est pas possible d'ajouter des tags dynamiquement pour ces exécuteurs.
+Cela exclut les exécuteurs qui mettent à l'échelle l'infrastructure automatiquement afin d'exécuter le job (tels que les exécuteurs Kubernetes, Docker Autoscaler ou Instance), car il n'est pas possible d'ajouter des tags dynamiquement pour ces runners.
 
-Pour les exécuteurs existants :
+Pour les runners existants :
 
-- GitLab >= 15.8 : ajoutez des tags via l'interface en accédant à **Settings > CI/CD > Runners** et en modifiant l'exécuteur approprié.
+- GitLab >= 15.8 : Ajoutez des tags via l'interface utilisateur en allant dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}CI/CD{{< /ui >}} > {{< ui >}}Runners{{< /ui >}} et en modifiant le runner approprié.
 
-- GitLab < 15.8 : ajoutez des tags en mettant à jour le `config.toml` de l'exécuteur. Ou ajoutez des tags via l'interface en accédant à **Settings > CI/CD > Runners** et en modifiant l'exécuteur approprié.
+- GitLab < 15.8 : Ajoutez des tags en mettant à jour le `config.toml` du runner. Ou ajoutez des tags via l'interface utilisateur en allant dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}CI/CD{{< /ui >}} > {{< ui >}}Runners{{< /ui >}} et en modifiant le runner approprié.
 
-Après ces étapes, CI Visibility ajoute le nom d'host à chaque tâche. Pour voir les métriques, cliquez sur un span de tâche dans la vue des traces. Dans le panneau latéral, un nouvel onglet nommé **Infrastructure** apparaît et contient les métriques d'host.
+Après ces étapes, CI Visibility ajoute le nom de host à chaque job. Pour voir les métriques, cliquez sur un span de job dans la vue des traces. Dans le panneau latéral, un nouvel onglet nommé {{< ui >}}Infrastructure{{< /ui >}} apparaît, contenant les métriques du host.
 
 [1]: https://docs.gitlab.com/runner/register/
 {{% /tab %}}
 
 {{% tab "Docker Autoscaler" %}}
-CI Visibility prend en charge les métriques d'infrastructure pour les exécuteurs « Docker Autoscaler » via une corrélation basée sur les logs. Pour activer cette fonctionnalité, assurez-vous que les logs de tâches GitLab sont indexés afin que Datadog puisse lier les tâches aux hosts, et que les logs incluent des messages sous la forme `Instance <hostname> connected`. Les logs de tâches GitLab incluent les tags `datadog.product:cipipeline` et `source:gitlab`, que vous pouvez utiliser dans les filtres d'[index de logs][2]. Les utilisateurs doivent également disposer d'un [accès en lecture aux logs][3] pour voir les données d'infrastructure dans ce scénario. Pour en savoir plus, consultez le [guide Mettre en corrélation les métriques d'infrastructure avec les tâches GitLab][1].
+CI Visibility prend en charge les métriques d'infrastructure pour les exécuteurs « Docker Autoscaler » via une corrélation basée sur les logs. Pour activer cette fonctionnalité, assurez-vous que les logs de job GitLab sont indexés afin que Datadog puisse lier les jobs aux hosts, et que les logs incluent des messages sous la forme `Instance <hostname> connected`. Les logs de job GitLab incluent les tags `datadog.product:cipipeline` et `source:gitlab`, que vous pouvez utiliser dans les filtres [Log Indexes][2]. Les utilisateurs ont également besoin d'un [accès en lecture aux logs][3] pour voir les données d'infrastructure dans ce scénario. Pour plus d'informations, consultez le [guide de corrélation des métriques d'infrastructure avec les jobs GitLab][1].
 
 [1]: /fr/continuous_integration/guides/infrastructure_metrics_with_gitlab
 [2]: /fr/logs/indexes/
@@ -288,7 +313,7 @@ CI Visibility prend en charge les métriques d'infrastructure pour les exécute
 {{% /tab %}}
 
 {{% tab "Instance" %}}
-CI Visibility prend en charge les métriques d'infrastructure pour les exécuteurs « Instance » via une corrélation basée sur les logs. Pour activer cela, assurez-vous que les logs de tâches GitLab sont indexés afin que Datadog puisse lier les tâches aux hosts, et que les logs incluent des messages sous la forme `Instance <hostname> connected`. Les logs de tâches GitLab incluent les tags `datadog.product:cipipeline` et `source:gitlab`, que vous pouvez utiliser dans les filtres d'[index de logs][2]. Les utilisateurs doivent également disposer d'un [accès en lecture aux logs][3] pour voir les informations d'infrastructure dans ce scénario. Pour en savoir plus, consultez le [guide Mettre en corrélation les métriques d'infrastructure avec les tâches GitLab][1].
+CI Visibility prend en charge les métriques d'infrastructure pour les exécuteurs « Instance » via une corrélation basée sur les logs. Pour activer cette fonctionnalité, assurez-vous que les logs de job GitLab sont indexés afin que Datadog puisse lier les jobs aux hosts, et que les logs incluent des messages sous la forme `Instance <hostname> connected`. Les logs de job GitLab incluent les tags `datadog.product:cipipeline` et `source:gitlab`, que vous pouvez utiliser dans les filtres [Log Indexes][2]. Les utilisateurs ont également besoin d'un [accès en lecture aux logs][3] pour voir les informations d'infrastructure dans ce scénario. Pour plus d'informations, consultez le [guide de corrélation des métriques d'infrastructure avec les jobs GitLab][1].
 
 [1]: /fr/continuous_integration/guides/infrastructure_metrics_with_gitlab
 [2]: /fr/logs/indexes/
@@ -296,12 +321,12 @@ CI Visibility prend en charge les métriques d'infrastructure pour les exécuteu
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-CI Visibility prend en charge les métriques d'infrastructure pour l'exécuteur Kubernetes. Pour cela, il est nécessaire que l'Agent Datadog surveille l'infrastructure Kubernetes GitLab. Consultez la section [Installer l'Agent Datadog sur Kubernetes][1] pour installer l'Agent Datadog dans un cluster Kubernetes.
+CI Visibility prend en charge les métriques d'infrastructure pour l'exécuteur Kubernetes. Pour cela, il est nécessaire que le Datadog Agent surveille l'infrastructure Kubernetes GitLab. Consultez [Installer le Datadog Agent sur Kubernetes][1] pour installer le Datadog Agent dans un cluster Kubernetes.
 
-En raison de limitations de l'Agent Datadog, les tâches plus courtes que l'intervalle de collecte minimal de l'Agent Datadog peuvent ne pas toujours afficher les métriques de corrélation d'infrastructure. Pour ajuster cette valeur, consultez le [modèle de configuration de l'Agent Datadog][2] et ajustez la variable `min_collection_interval` pour qu'elle soit inférieure à 15 secondes.
+En raison des limitations du Datadog Agent, les jobs plus courts que l'intervalle de collecte minimal du Datadog Agent pourraient ne pas toujours afficher les métriques de corrélation d'infrastructure. Pour ajuster cette valeur, réglez `min_collection_interval` sur moins de 15 secondes dans votre [fichier de configuration de l'Agent][2].
 
 [1]: /fr/containers/kubernetes/installation/?tab=datadogoperator
-[2]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[2]: /fr/agent/configuration/agent-configuration-files/
 {{% /tab %}}
 
 {{% tab "Autres exécuteurs" %}}
@@ -310,23 +335,23 @@ CI Visibility ne prend pas en charge les métriques d'infrastructure pour les au
 
 {{< /tabs >}}
 
-### Consulter les messages d'erreur pour les échecs de pipeline
+### Afficher les messages d'erreur pour les échecs de pipeline {#view-error-messages-for-pipeline-failures}
 
-Pour les exécutions de pipeline GitLab ayant échoué, chaque erreur sous l'onglet `Errors` dans une exécution de pipeline spécifique affiche un message associé au type d'erreur de GitLab.
+Pour les exécutions de pipeline GitLab ayant échoué, chaque erreur sous l'onglet {{< ui >}}Errors{{< /ui >}} au sein d'une exécution de pipeline spécifique affiche un message associé au type d'erreur provenant de GitLab.
 
-{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="Raison d'échec GitLab" style="width:100%;">}}
+{{< img src="ci/ci_gitlab_failure_reason_new.png" alt="Raison de l'échec GitLab" style="width:100%;">}}
 
-#### Analyse des échecs de tâches CI
+#### Analyse des échecs de jobs CI {#ci-jobs-failure-analysis}
 
-Si la collecte de logs de tâches est activée, CI Visibility utilise des modèles LLM pour analyser les tâches CI ayant échoué en se basant sur les logs pertinents provenant de GitLab.
+Si la collecte des logs de jobs est activée, CI Visibility utilise des modèles LLM pour analyser les jobs CI ayant échoué en se basant sur les logs pertinents provenant de GitLab.
 
-Vous pouvez également ajouter une analyse d'échec de tâche à un commentaire de PR. Consultez le guide sur l'[utilisation des commentaires de PR][30].
+Vous pouvez également ajouter une analyse des échecs de jobs à un commentaire de PR. Consultez le guide sur [l'utilisation des commentaires de PR][30].
 
-Pour une explication complète, consultez le guide sur [l'utilisation de l'analyse des échecs de tâches CI][28].
+Pour une explication complète, consultez le guide sur [l'utilisation de l'analyse des échecs de jobs CI][28].
 
-#### Erreurs fournies par GitLab
+#### Erreurs fournies par GitLab {#errors-provided-by-gitlab}
 
-Les messages d'erreur sont pris en charge pour les versions GitLab 15.2.0 et ultérieures.
+Les messages d'erreur sont pris en charge pour les versions 15.2.0 ou supérieures de GitLab.
 
 Les informations d'erreur fournies par GitLab sont stockées dans les tags `error.provider_message` et `error.provider_domain`.
 
@@ -334,105 +359,105 @@ Le tableau suivant décrit le message et le domaine corrélés à chaque type d'
 
 | Type d'erreur                       | Domaine d'erreur | Message d'erreur                                              |
 |---------------------------------|--------------|------------------------------------------------------------|
-| `unknown_failure`                | unknown      | Échec dû à une raison inconnue.                             |
+| `unknown_failure`                | inconnu      | Échec dû à une raison inconnue.                             |
 | `config_error`                   | utilisateur         | Échec dû à une erreur dans le fichier de configuration CI/CD.           |
-| `external_validation_failure`    | unknown      | Échec dû à la validation de pipeline externe.                |
-| `user_not_verified`              | utilisateur         | Le pipeline a échoué car l'utilisateur n'est pas vérifié.    |
-| `activity_limit_exceeded`        | provider     | La limite d'activité du pipeline a été dépassée.                  |
-| `size_limit_exceeded`            | provider     | La limite de taille du pipeline a été dépassée.                      |
-| `job_activity_limit_exceeded`    | provider     | La limite d'activité de tâche du pipeline a été dépassée.              |
-| `deployments_limit_exceeded`     | provider     | La limite de déploiements du pipeline a été dépassée.               |
-| `project_deleted`                | provider     | Le projet associé à ce pipeline a été supprimé.     |
-| `api_failure`                    | provider     | Échec de l'API.                                               |
-| `stuck_or_timeout_failure`       | unknown      | Le pipeline est bloqué ou a expiré.                            |
-| `runner_system_failure`          | provider     | Échec dû à une défaillance système de l'exécuteur.                       |
-| `missing_dependency_failure`     | unknown      | Échec dû à une dépendance manquante.                          |
-| `runner_unsupported`             | provider     | Échec dû à un exécuteur non pris en charge.                          |
-| `stale_schedule`                 | provider     | Échec dû à une planification obsolète.                              |
-| `job_execution_timeout`          | unknown      | Échec dû au délai d'expiration de la tâche.                                |
-| `archived_failure`               | provider     | Échec archivé.                                         |
-| `unmet_prerequisites`            | unknown      | Échec dû à des prérequis non remplis.                          |
-| `scheduler_failure`              | provider     | Échec dû à une défaillance de planification.                            |
-| `data_integrity_failure`         | provider     | Échec dû à l'intégrité des données.                              |
-| `forward_deployment_failure`     | unknown      | Échec de déploiement.                                        |
+| `external_validation_failure`    | inconnu      | Échec dû à une validation de pipeline externe.                |
+| `user_not_verified`              | utilisateur         | Le pipeline a échoué car l'utilisateur n'a pas été vérifié.    |
+| `activity_limit_exceeded`        | fournisseur     | La limite d'activité du pipeline a été dépassée.                  |
+| `size_limit_exceeded`            | fournisseur     | La limite de taille du pipeline a été dépassée.                      |
+| `job_activity_limit_exceeded`    | fournisseur     | La limite d'activité des jobs du pipeline a été dépassée.              |
+| `deployments_limit_exceeded`     | fournisseur     | La limite de déploiements du pipeline a été dépassée.               |
+| `project_deleted`                | fournisseur     | Le projet associé à ce pipeline a été supprimé.     |
+| `api_failure`                    | fournisseur     | Échec de l'API.                                               |
+| `stuck_or_timeout_failure`       | inconnu      | Le pipeline est bloqué ou a expiré.                            |
+| `runner_system_failure`          | fournisseur     | Échec dû à une défaillance du système de l'exécuteur.                       |
+| `missing_dependency_failure`     | inconnu      | Échec dû à une dépendance manquante.                          |
+| `runner_unsupported`             | fournisseur     | Échec dû à un exécuteur non pris en charge.                          |
+| `stale_schedule`                 | fournisseur     | Échec dû à un planning obsolète.                              |
+| `job_execution_timeout`          | inconnu      | Échec dû à un dépassement de délai du job.                                |
+| `archived_failure`               | fournisseur     | Échec d'archivage.                                         |
+| `unmet_prerequisites`            | inconnu      | Échec dû à un prérequis non satisfait.                          |
+| `scheduler_failure`              | fournisseur     | Échec dû à une erreur de planning.                            |
+| `data_integrity_failure`         | fournisseur     | Échec dû à un problème d'intégrité des données.                              |
+| `forward_deployment_failure`     | inconnu      | Échec du déploiement.                                        |
 | `user_blocked`                   | utilisateur         | Bloqué par l'utilisateur.                                           |
-| `ci_quota_exceeded`              | provider     | Quota CI dépassé.                                         |
+| `ci_quota_exceeded`              | fournisseur     | Quota CI dépassé.                                         |
 | `pipeline_loop_detected`         | utilisateur         | Boucle de pipeline détectée.                                    |
 | `builds_disabled`                | utilisateur         | Build désactivé.                                            |
 | `deployment_rejected`            | utilisateur         | Déploiement rejeté.                                      |
-| `protected_environment_failure`  | provider     | Échec d'environnement.                                       |
-| `secrets_provider_not_found`     | utilisateur         | Fournisseur de secrets introuvable.                                 |
-| `reached_max_descendant_pipelines_depth` | utilisateur   | Profondeur maximale de pipelines descendants atteinte.                        |
-| `ip_restriction_failure`          | provider     | Échec de restriction IP.                                    |
+| `protected_environment_failure`  | fournisseur     | Échec de l'environnement.                                       |
+| `secrets_provider_not_found`     | utilisateur         | Fournisseur de secret introuvable.                                 |
+| `reached_max_descendant_pipelines_depth` | utilisateur   | Nombre maximal de pipelines descendants atteint.                        |
+| `ip_restriction_failure`          | fournisseur     | Échec de la restriction IP.                                    |
 
-### Collecter les logs de tâches
+### Collecter les logs des jobs {#collect-job-logs}
 
-Les versions suivantes de GitLab prennent en charge la collecte de logs de tâches :
+Les versions GitLab suivantes prennent en charge la collecte des logs des jobs :
 
 * GitLab.com (SaaS)
-* GitLab >= 15.3 (auto-hébergé) uniquement si vous utilisez le [stockage d'objets pour stocker les logs de tâches][7]
-* GitLab >= 14.8 (auto-hébergé) en activant l'indicateur de fonctionnalité `datadog_integration_logs_collection`
+* GitLab >= 15.3 (auto-hébergé) uniquement si vous utilisez le [stockage d'objets pour stocker les logs des jobs][7]
+* GitLab >= 14.8 (auto-hébergé) en activant le feature flag `datadog_integration_logs_collection`
 
-Les logs de tâches sont collectés dans [Log Management][9] et sont automatiquement corrélés au pipeline GitLab dans CI Visibility. Les fichiers de logs d'une taille supérieure à un GiB sont tronqués.
+Les logs des jobs sont collectés dans [Log Management][9] et sont automatiquement corrélés avec le pipeline GitLab dans CI Visibility. Les fichiers logs de plus d'un Gio sont tronqués.
 
-Pour activer la collecte de logs de tâches :
+Pour activer la collecte des logs des jobs :
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
-1. Cochez la case **Enable job logs collection** dans l'intégration GitLab sous **Settings > Integrations > Datadog**.
-2. Cliquez sur **Save changes**.
+1. Cochez la case {{< ui >}}Enable job logs collection{{< /ui >}} dans l'intégration GitLab {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}}.
+2. Cliquez sur {{< ui >}}Save changes{{< /ui >}}.
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 15.3" %}}
-<div class="alert alert-danger">Datadog télécharge les fichiers de logs directement depuis le <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">stockage d'objets</a> de vos logs GitLab avec des URL pré-signées temporaires.
-Cela signifie que pour que les serveurs Datadog puissent accéder au stockage, celui-ci ne doit pas avoir de restrictions réseau.
-Le <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, s'il est défini, doit être résolu en une URL accessible publiquement.</div>
+<div class="alert alert-danger">Datadog télécharge les fichiers logs directement depuis votre <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">stockage d'objets</a> de logs GitLab avec des URL temporaires pré-signées.
+Cela signifie que pour que les serveurs Datadog puissent accéder au stockage, celui-ci ne doit pas avoir de restrictions réseau
+L'<a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, s'il est défini, doit pointer vers une URL accessible publiquement.</div>
 
-1. Cochez la case **Enable job logs collection** dans l'intégration GitLab sous **Settings > Integrations > Datadog**.
-2. Cliquez sur **Save changes**.
+1. Cochez la case {{< ui >}}Enable job logs collection{{< /ui >}} dans l'intégration GitLab sous {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}}.
+2. Cliquez sur {{< ui >}}Save changes{{< /ui >}}.
 
 {{% /tab %}}
 
 {{% tab "GitLab &gt;&equals; 14.8" %}}
-<div class="alert alert-danger">Datadog télécharge les fichiers de logs directement depuis le <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">stockage d'objets</a> de vos logs GitLab avec des URL pré-signées temporaires.
-Cela signifie que pour que les serveurs Datadog puissent accéder au stockage, celui-ci ne doit pas avoir de restrictions réseau.
-Le <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, s'il est défini, doit être résolu en une URL accessible publiquement.</div>
+<div class="alert alert-danger">Datadog télécharge les fichiers logs directement depuis votre <a href="https://docs.gitlab.com/ee/administration/job_artifacts.html#using-object-storage">stockage d'objets</a> de logs GitLab avec des URL temporaires pré-signées.
+Cela signifie que pour que les serveurs Datadog puissent accéder au stockage, celui-ci ne doit pas avoir de restrictions réseau
+L'<a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazon-s3">endpoint</a>, s'il est défini, doit pointer vers une URL accessible publiquement.</div>
 
-1. Activez l'[indicateur de fonctionnalité][1] `datadog_integration_logs_collection` dans votre GitLab. Cela vous permet de voir la case **Enable job logs collection** dans l'intégration GitLab sous **Settings > Integrations > Datadog**.
-2. Cochez la case **Enable job logs collection**.
-3. Cliquez sur **Save changes**.
+1. Activez le `datadog_integration_logs_collection` [feature flag][1] dans votre GitLab. Cela vous permet de voir la {{< ui >}}Enable job logs collection{{< /ui >}} case à cocher dans l'intégration GitLab sous {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog{{< /ui >}}.
+2. Cliquez sur {{< ui >}}Enable job logs collection{{< /ui >}}.
+3. Cliquez sur {{< ui >}}Save changes{{< /ui >}}.
 
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 {{% /tab %}}
 {{< /tabs >}}
 
-Les logs sont facturés séparément de CI Visibility. La rétention, l'exclusion et les index de logs sont configurés dans [Log Management][6]. Les logs des tâches GitLab peuvent être identifiés par les tags `datadog.product:cipipeline` et `source:gitlab`.
+Les logs sont facturés séparément de CI Visibility. La rétention, l'exclusion et les index des logs sont configurés dans [Log Management][6]. Les logs des jobs GitLab peuvent être identifiés par les tags `datadog.product:cipipeline` et `source:gitlab`.
 
-Pour en savoir plus sur le traitement des logs de tâches collectés depuis l'intégration GitLab, consultez la [documentation sur les processeurs][17].
+Pour plus d'informations sur le traitement des logs de jobs collectés via l'intégration GitLab, consultez la [documentation des processeurs][17].
 
-## Afficher les pipelines partiels et en aval
+## Afficher les pipelines partiels et en aval {#view-partial-and-downstream-pipelines}
 
-Vous pouvez utiliser les filtres suivants pour personnaliser votre requête de recherche dans l'[Explorateur CI Visibility][26].
+Vous pouvez utiliser les filtres suivants pour personnaliser votre requête de recherche dans le [CI Visibility Explorer][26].
 
-{{< img src="ci/partial_retries_search_tags.png" alt="La page d'exécutions de pipeline avec Partial Pipeline:retry saisi dans la requête de recherche" style="width:100%;">}}
+{{< img src="ci/partial_retries_search_tags.png" alt="La page des exécutions de pipeline avec « Partial Pipeline:retry » saisi dans la requête de recherche." style="width:100%;">}}
 
-| Nom de la facette | ID de facette | Valeurs possibles |
+| Nom de la facette | ID de la facette | Valeurs possibles |
 |---|---|---|
-| Downstream Pipeline | `@ci.pipeline.downstream` | `true`, `false` |
-| Manually Triggered | `@ci.is_manual` | `true`, `false` |
+| Pipeline en aval | `@ci.pipeline.downstream` | `true`, `false` |
+| Déclenché manuellement | `@ci.is_manual` | `true`, `false` |
 | Partial Pipeline | `@ci.partial_pipeline` | `retry`, `paused`, `resumed` |
 
-Vous pouvez également appliquer ces filtres à l'aide du panneau de facettes sur le côté gauche de la page.
+Vous pouvez également appliquer ces filtres en utilisant le panneau des facettes sur le côté gauche de la page.
 
-{{< img src="ci/partial_retries_facet_panel.png" alt="Le panneau de facettes avec la facette Partial Pipeline développée et la valeur Retry sélectionnée, la facette Partial Retry développée et la valeur true sélectionnée" style="width:20%;">}}
+{{< img src="ci/partial_retries_facet_panel.png" alt="Le panneau des facettes avec la facette « Partial Pipeline » développée et la valeur « Retry » sélectionnée, ainsi que la facette « Partial Retry » développée et la valeur « true » sélectionnée." style="width:20%;">}}
 
-## Visualiser les données de pipeline dans Datadog
+## Visualisez les données de pipeline dans Datadog {#visualize-pipeline-data-in-datadog}
 
-Une fois l'intégration configurée avec succès, les pages [**CI Pipeline List**][4] et [**Executions**][5] se remplissent de données une fois les pipelines terminés.
+Une fois l'intégration configurée avec succès, les pages [**CI Pipeline List**][4] et [**Executions**][5] sont alimentées en données une fois les pipelines terminés.
 
-La page **CI Pipeline List** affiche uniquement les données de la branche par défaut de chaque référentiel. Pour en savoir plus, consultez la section [Rechercher et gérer les pipelines CI][27].
+La page {{< ui >}}CI Pipeline List{{< /ui >}} affiche uniquement les données de la branche par défaut de chaque dépôt. Pour plus d'informations, consultez [Search and Manage CI Pipelines][27].
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -466,3 +491,7 @@ La page **CI Pipeline List** affiche uniquement les données de la branche par d
 [28]: /fr/continuous_integration/guides/use_ci_jobs_failure_analysis/
 [29]: /fr/continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [30]: /fr/continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
+[31]: /fr/continuous_integration/pipelines/automatic_retries/
+[32]: /fr/glossary/#running-job
+[33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
+[34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
