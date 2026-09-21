@@ -1,12 +1,5 @@
 /**
  * Placement test for the site-support banner in the API column.
- *
- * Hugo renders its banner inside the main content container, below the
- * breadcrumb row and above the page's `<h1>`. The banner first went into
- * `BaseLayout` here, which sits above the layout that creates the content
- * column, so it spanned the full page width above the side nav. These tests
- * pin the corrected position: inside `.api-main`, after the toolbar and before
- * `.prose`.
  */
 import { describe, expect, it } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";

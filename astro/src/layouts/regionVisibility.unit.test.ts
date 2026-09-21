@@ -57,11 +57,6 @@ describe("BaseLayout region visibility", () => {
  * renders one `[data-region]` element per unsupported region and relies on the
  * generated CSS above to reveal the matching one.
  *
- * It lives in the *content column* (ApiLayout / the cdoc page), not in
- * BaseLayout, so it is bounded by the same column as Hugo's banner instead of
- * spanning the full page width above the side nav. These tests pin that: the
- * banner must NOT come from BaseLayout.
- *
  * The banner's own rendering is covered in
  * `src/components/SiteSupportBanner/tests/unit.test.ts`, and its placement in
  * the API column by `src/layouts/apiLayoutBanner.unit.test.ts`.
