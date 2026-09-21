@@ -124,7 +124,7 @@ Search by name, type, or organization using the field above the table. The table
 <div class="alert alert-warning">Downloading billable resources as a CSV is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Download a CSV of the individual hosts that make up your billable hosts for a given month. Use it to reconcile the total shown on the Bill Overview page, find the hosts driving the largest share of your count, attribute usage to teams by tag, or compare months to spot unexpected changes.
+Download a CSV of your billable resources for a given month. Use it to reconcile the total shown on the Bill Overview page, find the resources driving the largest share of your usage, attribute usage to teams by tag, or compare months to spot unexpected changes.
 
 To export the list:
 
