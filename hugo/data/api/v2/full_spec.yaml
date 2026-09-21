@@ -22550,6 +22550,7 @@ components:
           type: string
       type: object
     ContentEncoding:
+      default: gzip
       description: HTTP header used to compress the media-type.
       enum:
         - identity
@@ -165243,12 +165244,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/{incident_id}/cases/page:
     post:
-      deprecated: true
-      description: |-
-        Create a page from an incident using the Cases service.
-
-        **Deprecated**: This endpoint is deprecated. Use
-        [Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.
+      description: Create a page from an incident using the Cases service.
       operationId: CreatePageFromIncident
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"

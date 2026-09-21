@@ -1390,6 +1390,7 @@ components:
         - PREVIOUS_WEEK
         - PREVIOUS_MONTH
     ContentEncoding:
+      default: gzip
       description: HTTP header used to compress the media-type.
       enum:
         - gzip
