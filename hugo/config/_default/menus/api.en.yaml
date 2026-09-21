@@ -3510,6 +3510,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 73
+    - name: Get signals matching an event
+      url: /api/latest/security-monitoring/get-signals-matching-an-event/
+      identifier: security-monitoring-get-signals-matching-an-event
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMatchingSignals
+        unstable:
+          - v2
+        order: 174
     - name: Get a single entity context
       url: /api/latest/security-monitoring/get-a-single-entity-context/
       identifier: security-monitoring-get-a-single-entity-context
