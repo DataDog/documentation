@@ -5340,6 +5340,16 @@ menu:
       parent: dbm
       identifier: dbm_guides
       weight: 20
+    - name: New Initiatives
+      url: database_monitoring/new_initiatives/
+      parent: dbm
+      identifier: dbm_new_initiatives
+      weight: 21
+    - name: Database Monitoring Workbench
+      url: database_monitoring/new_initiatives/database_monitoring_workbench/
+      parent: dbm_new_initiatives
+      identifier: dbm_new_initiatives_workbench
+      weight: 1
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
