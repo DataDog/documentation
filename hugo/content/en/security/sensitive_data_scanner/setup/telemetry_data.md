@@ -207,6 +207,9 @@ The excluded namespaces are:
 - `syslog.timestamp`
 - `error.fingerprint`
 - `x-datadog-parent-id`
+- `x-datadog-trace-id`
+- `contextMap.dd.span_id`
+- `contextMap.dd.trace_id`
 
 {{% /tab %}}
 {{% tab "Spans" %}}
