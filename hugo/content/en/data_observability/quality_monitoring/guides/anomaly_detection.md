@@ -68,7 +68,6 @@ The following seasonal patterns are detected:
 | Hour of week | Metrics with consistent patterns across a full week at hourly granularity. |
 | Day of week | Metrics that differ across days of the week, such as lower activity on Sundays. |
 | Day of month | Metrics with recurring patterns tied to the calendar month, such as end-of-month spikes. |
-| Weekday vs. weekend | Metrics with systematically different behavior on weekends versus weekdays. |
 
 Not all seasonal patterns are available for all metric types. Additionally, the model requires multiple complete cycles of normal ("green") history before it can detect a given pattern.
 
