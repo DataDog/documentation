@@ -13,7 +13,11 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI supports Linux hosts, Kubernetes, Docker, and Windows without requiring changes to application dependencies or images. Windows support includes .NET on IIS, or Java and .NET through the host-wide Preview. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+
+## Windows deployment completes but no traces appear
+
+A completed Fleet deployment does not confirm application instrumentation. Check the [supported Windows runtimes][14], then [restart the application][15], generate traffic, and verify that traces appear in APM. Recycle the application pool for an IIS-hosted application, restart the specific Windows Service, or restart the standalone application process. Restarting IIS does not restart a separate service that IIS proxies traffic to.
 
 ## Troubleshooting methods
 
@@ -514,3 +518,6 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [11]: /tracing/guide/injectors/
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /tracing/troubleshooting/tracer_debug_logs/
+
+[14]: /tracing/trace_collection/single-step-apm/windows/#supported-runtimes
+[15]: /tracing/trace_collection/single-step-apm/windows/#restart-your-applications

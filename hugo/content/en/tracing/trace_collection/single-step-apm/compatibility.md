@@ -101,9 +101,31 @@ Select your environment to see compatibility requirements and limitations:
 - **IIS only**: Only .NET applications running in IIS are supported.
 
 {{% /tab %}}
+
+{{% tab "Windows Host-wide (Preview)" %}}
+
+### Compatibility
+
+- **Status**: Preview
+- **Supported runtimes**: Java and .NET only
+
+### Requirements
+
+- Enrollment in the [Windows host-wide SSI Preview][20]
+- For .NET applications outside IIS, an [instrumentation rule that allows instrumentation][21]
+
+### Limitations
+
+- **Other runtimes**: Python, Node.js, Ruby, and PHP are not supported by SSI on Windows, even if Fleet Automation displays SDK installation options for them.
+
+For setup and application restart instructions, see [Single Step APM Instrumentation on Windows][22].
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported language runtimes
+
+Language support depends on the [application environment](#compatibility-by-application-environment). The language list below does not imply support on every operating system.
 
 SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language to see minimum SDK versions, supported runtime versions, and any limitations.
 
@@ -324,3 +346,7 @@ The following Linux distributions and architectures are supported for SSI across
 
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/guide/injectors/
+
+[20]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
+[21]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
+[22]: /tracing/trace_collection/single-step-apm/windows/

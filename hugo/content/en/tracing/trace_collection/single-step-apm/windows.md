@@ -22,6 +22,17 @@ With Single Step Instrumentation (SSI), you can enable APM for your Java and .NE
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
 {{< /skill-callout >}}
 
+## Supported runtimes
+
+| Instrumentation mode | Supported runtimes | Availability |
+| --- | --- | --- |
+| IIS | .NET applications hosted by IIS | GA |
+| Host-wide | Java and .NET applications, including Windows Services and standalone processes | Preview |
+
+Host-wide instrumentation requires [Preview enrollment][8]. For .NET applications outside IIS, you must also [define an instrumentation rule](#define-instrumentation-rules) that allows instrumentation.
+
+Python, Node.js, Ruby, and PHP are not supported by SSI on Windows. For other instrumentation methods, see the [Datadog SDKs][9] and check the compatibility requirements for your language and operating system.
+
 ## Enable APM on Windows
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
@@ -58,7 +69,7 @@ To instrument only .NET applications running on IIS:
 
    **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 
-1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
+1. Recycle the IIS application pools for the applications you want instrumented. See [Restart your applications](#restart-your-applications).
 
 The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
@@ -92,7 +103,7 @@ To instrument Java and .NET applications across your entire Windows host:
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-1. Restart the services you want instrumented.
+1. [Restart the applications you want instrumented](#restart-your-applications).
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 
@@ -117,6 +128,8 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
+   The dialog can show additional languages, such as Python, Node.js, Ruby, and PHP. A detected runtime or an SDK installation option does not establish SSI support on Windows. Select SDKs for the [supported Windows runtimes](#supported-runtimes); installing another SDK does not enable automatic instrumentation for that runtime.
+
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
 1. Click {{< ui >}}Next{{< /ui >}}.
@@ -125,7 +138,25 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
+1. Wait for the deployment to complete, then [restart your applications](#restart-your-applications).
+
+### Restart your applications
+
+After installing the SDKs and applying the instrumentation configuration, restart each supported application so SSI can load the SDK into its process:
+
+| Application type | Restart action |
+| --- | --- |
+| IIS-hosted application | Recycle the relevant IIS application pool. You do not need to restart the entire IIS server. |
+| Windows Service | Restart the specific Windows Service that runs the application. |
+| Standalone application | Stop and start the application process. |
+
+Restarting IIS does not restart a separate service that IIS proxies traffic to, such as a Java or Python service. Restart that service separately after configuring a supported instrumentation method. Restarting a Python service alone does not enable SSI on Windows.
+
+After a successful SSI deployment, you do not need to reboot the Windows host or manually restart the Datadog Agent. Restarting the Agent does not replace restarting the application.
+
 ## Verify the installation
+
+A completed Fleet deployment confirms delivery of the configuration or SDKs. It does not confirm that the SDK has loaded into an application or that the application is sending traces.
 
 1. From an administrator PowerShell session, confirm the Agent is healthy and the APM Agent is running:
 
@@ -135,7 +166,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Check the **APM Agent** section of the output.
 
-1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. After restarting your applications, generate traffic and confirm that your services and traces appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
@@ -246,3 +277,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
 [7]: https://app.datadoghq.com/apm/services
+[8]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
+[9]: /tracing/trace_collection/dd_libraries/
