@@ -18,8 +18,8 @@ To get you started, Datadog automatically suggests [pattern-based correlations][
 
 To create a pattern:
 1. Navigate to [Correlation][1].
-1. Click {{< ui >}}+ Add a Pattern{{< /ui >}}, at the top of the Pattern table. This opens a pattern configuration page that displays out-of-the-box suggested patterns on the left side, and a pattern output preview on the right side. 
-1. You can adjust a suggested pattern by clicking {{< ui >}}+ Continue With Pattern{{< /ui >}}. This takes you to the pre-populated configuration page for additional tuning. Or, you can choose to create your own pattern by clicking {{< ui >}}+ Personalize From Scratch{{< /ui >}}
+1. Click {{< ui >}}\+ Add a Pattern{{< /ui >}}, at the top of the Pattern table. This opens a pattern configuration page that displays out-of-the-box suggested patterns on the left side, and a pattern output preview on the right side. 
+1. You can adjust a suggested pattern by clicking {{< ui >}}\+ Continue With Pattern{{< /ui >}}. This takes you to the pre-populated configuration page for additional tuning. Or, you can choose to create your own pattern by clicking {{< ui >}}\+ Personalize From Scratch{{< /ui >}}
 
 First, events are deduplicated to alert based on event aggregation key. Then, alerts are correlated to a work item based on configuration. 
 {{< img src="events/correlation/correlation_helper.mp4" alt="When events matches defined sources, filter, they get deduplicated to alerts. Alerts are correlated based on grouping attributes, and its events are de-duplicated withint the defined time window before the process repeats in a new work item. You can modify these configuration in settings" video=true >}}

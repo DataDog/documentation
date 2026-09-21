@@ -155,6 +155,10 @@
     "name": "DDSQL",
     "description": "Datadog データカタログに対して DDSQL クエリを実行し、その結果をポーリングします。\nクエリは非同期でディスパッチされます。最初のリクエストでは「query_id」を含む「running」状態が返される場合があり、\nクライアントはレスポンスが列指向の結果セットを伴う「completed」に遷移するまで、\nfetch エンドポイントをポーリングします。"
   },
+  "dem": {
+    "name": "DEM",
+    "description": "Digital Experience Monitoringのジャーニーを管理してください。"
+  },
   "dora-metrics": {
     "name": "DORA Metrics",
     "description": "DORA Metrics のイベントを検索、送信、または削除して、ソフトウェア配信のパフォーマンスを測定および改善します。詳細については、[DORA Metrics ページ](https://docs.datadoghq.com/dora_metrics/) を参照してください。\n\n**注**: DORA Metrics は US1-FED サイトでは利用できません。"
@@ -558,6 +562,10 @@
   "threat-intelligence": {
     "name": "脅威インテリジェンス",
     "description": "セキュリティの強化と調査のために、脅威インテリジェンスデータを取り込み、管理します。"
+  },
+  "timeseries-anomaly-investigations": {
+    "name": "時系列異常調査",
+    "description": "メトリクスの時系列異常を調査し、決定論的な調査結果を返します。"
   },
   "twilio-integration-accounts": {
     "name": "Twilio インテグレーションアカウント",

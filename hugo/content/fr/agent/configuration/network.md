@@ -93,10 +93,10 @@ Résultats des tests API pour Synthetics Worker > v0.1.6 : `intake.synthetics.`{
 Résultats des tests de navigateur pour Synthetics Worker > v0.2.0 : `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 Résultats des tests API pour Synthetics Worker < v0.1.5 : `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
-
-[Remote Configuration][101]
+[Remote Configuration][34]
 : `config.`{{< region-param key="dd_site" code="true" >}}
+
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Database Monitoring][102]
 : `dbm-metrics-intake.`{{< region-param key="dd_site" code="true" >}}<br>
@@ -106,7 +106,6 @@ Résultats des tests API pour Synthetics Worker < v0.1.5 : `api.`{{< region-para
 : `softinv-intake.`{{< region-param key="dd_site" code="true" >}}<br>
 `eudm-intake.`{{< region-param key="dd_site" code="true" >}}
 
-[101]: /fr/remote_configuration
 [102]: /fr/database_monitoring/
 [103]: /fr/infrastructure/end_user_device_monitoring/
 
@@ -119,7 +118,7 @@ Résultats des tests API pour Synthetics Worker < v0.1.5 : `api.`{{< region-para
 HTTP : {{< region-param key=agent_http_endpoint code="true" >}}<br>
 Autre : Voir [logs endpoints][32]
 
-[Journaux HIPAA hérités][31] (Obsolète, TCP non pris en charge)
+[Logs HIPAA hérités][31] (Obsolète, TCP non pris en charge)
 : {{< region-param key=hipaa_logs_legacy code="true" >}}
 
 [Metrics][26], [Service Checks][27], [Events][28] et autres métadonnées de l'Agent
@@ -131,7 +130,7 @@ Agent < v7.18.0 ou 6.18.0 : `app.`{{< region-param key="dd_site" code="true" >}}
 
 [Agent flare][12]
 : `<VERSION>-flare.agent.`{{< region-param key="dd_site" code="true" >}}<br>
-Par exemple, l'Agent v7.31.0 envoie des flare data à `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à votre liste d'inclusion dans votre/vos pare-feu.<br>
+Par exemple, l'Agent v7.31.0 envoie des données de flare à `7-31-0-flare.agent.`{{< region-param key="dd_site" code="true" >}}. Vous devez ajouter `*.agent.`{{< region-param key="dd_site" code="true" >}} à votre liste d'inclusion dans votre/vos pare-feu.<br>
 
 ### Adresses IP statiques {#static-ip-addresses}
 
@@ -347,3 +346,4 @@ Si vous installez le Datadog Operator dans un environnement Kubernetes avec une 
 [31]: /fr/data_security/logs/#hipaa-enabled-customers
 [32]: /fr/logs/log_collection/#logging-endpoints
 [33]: /fr/network_monitoring/network_path/setup/#source-public-ip-resolution
+[34]: /fr/remote_configuration

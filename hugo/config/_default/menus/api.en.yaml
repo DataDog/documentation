@@ -13288,14 +13288,14 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
-    - name: Elastic Cloud Integration Accounts
-      url: /api/latest/elastic-cloud-integration-accounts/
-      identifier: elastic-cloud-integration-accounts
+    - name: Elastic Cloud Integration
+      url: /api/latest/elastic-cloud-integration/
+      identifier: elastic-cloud-integration
       generated: true
     - name: Update an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/update-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-update-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/update-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-update-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -13306,9 +13306,9 @@ menu:
           - v2
         order: 4
     - name: Get an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/get-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-get-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/get-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-get-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -13319,9 +13319,9 @@ menu:
           - v2
         order: 3
     - name: Delete an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/delete-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-delete-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/delete-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-delete-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -13332,9 +13332,9 @@ menu:
           - v2
         order: 5
     - name: Create an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/create-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-create-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/create-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-create-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -13345,9 +13345,9 @@ menu:
           - v2
         order: 2
     - name: List Elastic Cloud integration accounts
-      url: /api/latest/elastic-cloud-integration-accounts/list-elastic-cloud-integration-accounts/
-      identifier: elastic-cloud-integration-accounts-list-elastic-cloud-integration-accounts
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/list-elastic-cloud-integration-accounts/
+      identifier: elastic-cloud-integration-list-elastic-cloud-integration-accounts
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -20889,6 +20889,75 @@ menu:
           - ListServiceNowAssignmentGroups
         unstable: []
         order: 6
+    - name: Snowflake Integration
+      url: /api/latest/snowflake-integration/
+      identifier: snowflake-integration
+      generated: true
+    - name: Update a Snowflake integration account
+      url: /api/latest/snowflake-integration/update-a-snowflake-integration-account/
+      identifier: snowflake-integration-update-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Snowflake integration account
+      url: /api/latest/snowflake-integration/get-a-snowflake-integration-account/
+      identifier: snowflake-integration-get-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Snowflake integration account
+      url: /api/latest/snowflake-integration/delete-a-snowflake-integration-account/
+      identifier: snowflake-integration-delete-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Snowflake integration account
+      url: /api/latest/snowflake-integration/create-a-snowflake-integration-account/
+      identifier: snowflake-integration-create-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Snowflake integration accounts
+      url: /api/latest/snowflake-integration/list-snowflake-integration-accounts/
+      identifier: snowflake-integration-list-snowflake-integration-accounts
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSnowflakeIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog
@@ -22742,14 +22811,14 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: Twilio Integration Accounts
-      url: /api/latest/twilio-integration-accounts/
-      identifier: twilio-integration-accounts
+    - name: Twilio Integration
+      url: /api/latest/twilio-integration/
+      identifier: twilio-integration
       generated: true
     - name: Update a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/update-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-update-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/update-a-twilio-integration-account/
+      identifier: twilio-integration-update-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22760,9 +22829,9 @@ menu:
           - v2
         order: 4
     - name: Get a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/get-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-get-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/get-a-twilio-integration-account/
+      identifier: twilio-integration-get-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22773,9 +22842,9 @@ menu:
           - v2
         order: 3
     - name: Delete a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/delete-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-delete-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/delete-a-twilio-integration-account/
+      identifier: twilio-integration-delete-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22786,9 +22855,9 @@ menu:
           - v2
         order: 5
     - name: Create a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/create-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-create-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/create-a-twilio-integration-account/
+      identifier: twilio-integration-create-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22799,9 +22868,9 @@ menu:
           - v2
         order: 2
     - name: List Twilio integration accounts
-      url: /api/latest/twilio-integration-accounts/list-twilio-integration-accounts/
-      identifier: twilio-integration-accounts-list-twilio-integration-accounts
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/list-twilio-integration-accounts/
+      identifier: twilio-integration-list-twilio-integration-accounts
+      parent: twilio-integration
       generated: true
       params:
         versions:

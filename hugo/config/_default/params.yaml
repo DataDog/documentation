@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  opentelemetry_collector_otlp_export: [gov, gov2]
   remediate_with_ai: [gov, gov2]
   cloudcraft_apm_overlay: [gov, gov2]
   code_locations: [gov, gov2]
@@ -417,7 +418,6 @@ unsupported_sites:
   safety_center: [gov,gov2]
   scaleway: [gov,gov2]
   service_override_removal: [gov,gov2]
-  service_remapping_rules: [gov2]
   setup_remote_config: [gov,gov2]
   snmp_profile_manager: [gov,gov2]
   software_delivery_mcp_tools: [gov,gov2]

@@ -56,31 +56,33 @@ Open Bits Testing from Synthetic Monitoring & Testing using any of the following
    - N. Virginia (AWS: `aws:us-east-1`)
    - Ohio (AWS: `aws:us-east-2`)
    - Virginia (Azure: `azure:eastus`)
-1. Optionally, select an [Agent Profile](#agent-profiles).
-1. Click {{< ui >}}Run Now{{< /ui >}}.
+1. Optionally, select an [Agent Profile](#agent-profiles-optional).
+1. Click {{< ui >}}Start Discovery{{< /ui >}}, or {{< ui >}}Start Discovery Without a Profile{{< /ui >}} if a profile isn't selected.
 
-{{< img src="synthetics/bits_testing/bits_testing_run_config.png" alt="The Bits Testing run configuration panel with a starting URL, location, and Agent Profile selectors" style="width:100%;" >}}
+{{< img src="synthetics/bits_testing/start_discovery.png" alt="The Bits Testing run configuration panel with a starting URL, location, and Agent Profile selectors" style="width:80%;" >}}
 
-Bits Testing explores your application starting from the URL you provide. At each new page it encounters, it determines a set of actions to try, and it repeats this process as it moves through your application.
+### Discovery in progress
 
-{{< img src="synthetics/bits_testing/bits_testing_exploration_in_progress.png" alt="A Bits Testing run in progress, exploring an application from its starting URL" style="width:100%;" >}}
+Bits Testing explores your application starting from the URL you provide. At each new page it encounters, it determines a set of actions to try, and it repeats this process as it moves through your application. Click {{< ui >}}View Discovery Run{{< /ui >}} to review a run in progress.
 
-### Agent Profiles
+{{< img src="synthetics/bits_testing/bits_testing_in_progress.png" alt="A Bits Testing run in progress, exploring an application from its starting URL" style="width:100%;" >}}
+
+## Agent Profiles (Optional)
 
 An Agent Profile stores context that Bits Testing uses while interacting with your application, such as login credentials.
 
 To create an Agent Profile:
 
-1. Open the {{< ui >}}Agent Profile{{< /ui >}} dropdown menu and select {{< ui >}}+ New Profile{{< /ui >}}.
+1. Open the {{< ui >}}Agent Profile{{< /ui >}} dropdown menu and select {{< ui >}}\+ New Profile{{< /ui >}}.
 1. Name the profile.
 1. Add one or more variables. For each variable, set:
    - **Usage**: The variable's purpose, for example, `username` or `password`.
    - **Value**: Either a typed value, or an existing [Global Variable][3].
 1. Click {{< ui >}}Create Profile{{< /ui >}}.
 
-{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating an Agent Profile, with fields for name, variable usage, and value" style="width:100%;" >}}
-
 The new profile is automatically selected for the current run. Saved Agent Profiles can be reused in later Bits Testing runs without redefining their variables.
+
+{{< img src="synthetics/bits_testing/bits_testing_agent_profile_modal.png" alt="The New Profile modal for creating an Agent Profile, with fields for name, variable usage, and value" style="width:100%;" >}}
 
 ## Review results
 

@@ -41,6 +41,8 @@ Cuando el SAST nativo de IA está habilitado, sus conjuntos de reglas predetermi
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
 
+Los ID de reglas SAST nativas de IA utilizan el formato `datadog/<rule-name>` (por ejemplo, `datadog/typescript-promptinjection`). Para apuntar a una regla SAST nativa de IA específica en `rule-configs` o en un comentario `no-dd-sa`, utilice el ID de regla completo, incluido el prefijo `datadog/`.
+
 La configuración `use-default-rulesets` se aplica tanto a los conjuntos de reglas de SAST tradicional como a los de SAST nativo de IA. Si configura `use-default-rulesets: false`, incluya todos los conjuntos de reglas SAST tradicionales y nativos de IA que desee ejecutar. Por ejemplo, la siguiente configuración ejecuta los conjuntos de reglas de seguridad de Ruby y SAST nativo de IA:
 
 {{< code-block lang="yaml" >}}
