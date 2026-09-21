@@ -757,12 +757,7 @@ menu:
       identifier: otel-setup-collector-exporter
       parent: otel_collect
       weight: 402
-    - name: Deploy
-      url: /opentelemetry/setup/collector_exporter/deploy
-      identifier: otel-setup-collector-exporter-deploy
-      parent: otel-setup-collector-exporter
-      weight: 40211
-    - name: Batch and Memory Settings
+    - name: Collector Memory Limits
       url: opentelemetry/config/collector_batch_memory/
       identifier: otel_batch_memory
       parent: otel-setup-collector-exporter
@@ -792,6 +787,11 @@ menu:
       identifier: otel-setup-intake-endpoint
       parent: otel_collect
       weight: 404
+    - name: Traces Endpoint
+      url: /opentelemetry/setup/otlp_ingest/traces
+      parent: otel-setup-intake-endpoint
+      weight: 40230
+      identifier: otel_setup_agentless_traces
     - name: Logs Endpoint
       url: /opentelemetry/setup/otlp_ingest/logs
       parent: otel-setup-intake-endpoint
@@ -1278,6 +1278,11 @@ menu:
       identifier: mcp_server_tools
       parent: mcp_server
       weight: 2
+    - name: Code Execution
+      url: mcp_server/code_execution
+      identifier: mcp_server_code_execution
+      parent: mcp_server
+      weight: 3
     - name: Partners
       url: partners/
       pre: colab
@@ -1565,6 +1570,11 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 104
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 105
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
@@ -1590,6 +1600,11 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_automations
       weight: 302
+    - name: Code Channels in Slack
+      url: bits_ai/bits_code/slack_code_channels
+      parent: bits_ai_dev_agent
+      identifier: bits_ai_dev_agent_slack_code_channels
+      weight: 303
     - name: Bits Security Analyst
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
@@ -2830,11 +2845,16 @@ menu:
       identifier: oncall_notification_preferences_countries
       parent: oncall_notification_preferences
       weight: 1
+    - name: Integrations
+      url: incident_response/on-call/integrations/
+      parent: oncall
+      identifier: oncall_integrations
+      weight: 8
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
       identifier: oncall_guides
-      weight: 8
+      weight: 9
     - name: Status Pages
       url: incident_response/status_pages/
       pre: status-page-wui
@@ -3397,76 +3417,81 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
       weight: 401
+    - name: OpenTelemetry
+      url: containers/kubernetes/opentelemetry/
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_opentelemetry
+      weight: 402
     - name: Migrate to the Datadog Operator
       url: containers/kubernetes/migration
       parent: containers_kubernetes
       identifier: containers_kubernetes_datadog_operator_migration
-      weight: 402
+      weight: 403
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 403
+      weight: 404
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 404
+      weight: 405
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 405
+      weight: 406
     - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
-      weight: 406
+      weight: 407
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 407
+      weight: 408
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 408
+      weight: 409
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 409
+      weight: 410
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 410
+      weight: 411
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 411
+      weight: 412
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 412
+      weight: 413
     - name: kubectl Plugin
       url: containers/kubernetes/kubectl_plugin
       parent: containers_kubernetes
       identifier: containers_kubernetes_kubectlplugin
-      weight: 413
+      weight: 414
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 414
+      weight: 415
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 415
+      weight: 416
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -5774,6 +5799,11 @@ menu:
       parent: llm_obs_experiments
       identifier: llm_obs_experiments_api
       weight: 50305
+    - name: Data Access Control
+      url: llm_observability/improve/access_control
+      parent: llm_obs_improve
+      identifier: llm_obs_improve_access_control
+      weight: 504
     - name: Configure
       url: llm_observability/configure/
       parent: llm_obs
@@ -7528,6 +7558,11 @@ menu:
       url: logs/explorer/archive_search/
       parent: log_explorer
       weight: 515
+    - name: Findings
+      identifier: log_explorer_findings
+      url: logs/explorer/findings/
+      parent: log_explorer
+      weight: 516
     - name: Error Tracking
       url: logs/error_tracking/
       parent: log_management
@@ -7714,41 +7749,46 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_sizing
       weight: 600
+    - name: Object Storage Request Estimation
+      url: /byoc-logs/operate/object_storage_requests
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_object_storage_requests
+      weight: 601
     - name: Autoscaling
       url: /byoc-logs/operate/autoscaling
       parent: cloudprem_operate
       identifier: cloudprem_operate_autoscaling
-      weight: 601
+      weight: 602
     - name: Monitoring
       url: /byoc-logs/operate/monitoring
       parent: cloudprem_operate
       identifier: cloudprem_operate_monitoring
-      weight: 602
+      weight: 603
     - name: Search Logs
       url: /byoc-logs/operate/search_logs
       parent: cloudprem_operate
       identifier: cloudprem_operate_search
-      weight: 603
+      weight: 604
     - name: Production Best Practices
       url: /byoc-logs/operate/best_practices
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
-      weight: 604
+      weight: 605
     - name: Disk Buffer Durability
       url: /byoc-logs/operate/disk_buffer_durability
       parent: cloudprem_operate
       identifier: cloudprem_operate_disk_buffer_durability
-      weight: 605
+      weight: 606
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 606
+      weight: 607
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 607
+      weight: 608
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -7966,10 +8006,10 @@ menu:
       parent: cloud_siem_detect_and_monitor
       identifier: cloud_siem_suppressions
       weight: 204
-    - name: Critical Assets
-      url: security/cloud_siem/detect_and_monitor/critical_assets
+    - name: Dynamic Severity
+      url: security/cloud_siem/detect_and_monitor/dynamic_severity
       parent: cloud_siem_detect_and_monitor
-      identifier: cloud_siem_critical_assets
+      identifier: cloud_siem_dynamic_severity
       weight: 205
     - name: Historical Jobs
       url: security/cloud_siem/detect_and_monitor/historical_jobs
@@ -8712,7 +8752,7 @@ menu:
       identifier: workload_protection_setup_windows
       weight: 70
     - name: Advanced Configuration
-      url: security/workload_protection/setup/advanced_configuration
+      url: security/workload_protection/workload_protection_agent_config
       parent: workload_protection_setup
       identifier: workload_protection_setup_advanced_configuration
       weight: 80
@@ -10630,6 +10670,11 @@ menu:
       url: account_management/plan_and_usage/partner_experience/customer_pricing/
       parent: account_management_partner_experience
       weight: 140301
+    - name: Customer Contracts
+      identifier: account_management_customer_contracts
+      url: account_management/plan_and_usage/partner_experience/customer_contracts/
+      parent: account_management_partner_experience
+      weight: 140302
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/

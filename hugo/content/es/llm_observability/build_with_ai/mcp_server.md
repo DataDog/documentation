@@ -358,6 +358,9 @@ El conjunto de herramientas `llmobs` incluye las siguientes herramientas:
 `list_llmobs_evals_by_ml_app`
 : Enumere todos los evaluadores de LLM-judge configurados para una aplicación de ML específica.
 
+`list_llmobs_feedback_labels`
+: Listar todas las etiquetas de comentarios enviadas por los usuarios finales para una aplicación de ML específica.
+
 `get_llmobs_evaluator`
 : Recupere una configuración de evaluador de LLM-judge por nombre, incluyendo su objetivo (ml_app, muestreo, filtro), proveedor de LLM y plantilla de prompt del evaluador.
 

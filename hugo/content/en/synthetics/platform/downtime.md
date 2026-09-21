@@ -38,7 +38,7 @@ With Synthetic Monitoring Scheduled Downtime, you can:
 ## Create a downtime
 
 1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][2] and click {{< ui >}}Downtimes{{< /ui >}} in the left sidebar.
-2. Click {{< ui >}}+ New Downtime{{< /ui >}}.
+2. Click {{< ui >}}\+ New Downtime{{< /ui >}}.
 3. Enter a name for the downtime.
 4. Define one or more time slots to support recurring or multi-window schedules.
 5. Select the Synthetic tests the downtime applies to.

@@ -56,12 +56,9 @@ In case you are using Alpine Linux you need to install `libgcc_s` prior to runni
 apk add libgcc
 ```
 
-Run the installer:
+Run the installer, passing only the flags for the capabilities you intend to enable:
 
 ```shell
-# Full installation: APM + AAP + Profiling
-php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
-
 # APM only
 php datadog-setup.php --php-bin=all
 
@@ -70,6 +67,9 @@ php datadog-setup.php --php-bin=all --enable-appsec
 
 # APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
+
+# Full installation: APM + AAP + Profiling
+php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 ```
 
 <div class="alert alert-warning">
