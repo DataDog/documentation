@@ -56,32 +56,36 @@ Non-Agent telemetry sources, such as Lambda extensions, Fluent Bit, OpenTelemetr
 
 Follow these steps to enable Datadog Disaster Recovery. If you have questions about any of the steps, contact your [Customer Success Manager][14] or [Datadog Support][15].
 
-### 1. Create a DDR org and link it to your primary org
+### 1. Create and link your secondary organization
 
-{{% collapse-content title="Create and share your DDR org" level="h4" %}}
+{{% collapse-content title="1\. Create your secondary organization" level="h4" id="1-create-your-secondary-organization" %}}
 
-<div class="alert alert-info">If you prefer, Datadog can set this up for you.</div>
+[Sign up][16] for a new Datadog organization on a Datadog site in a different region and data center than your primary organization, to help ensure geographic separation.
 
-#### Create your DDR org
+This organization should be standalone and not a child of any other organization. See the [Datadog site list][17] for available sites; work with your Datadog account team to determine the right secondary site for your organization.
 
-1. Go to [Get Started with Datadog][16]. You may need to log out of your current session, or use incognito mode, to access this page.
-2. Choose a different Datadog site than your primary (for example, if you're on `US1`, choose `EU` or `US5`). See the [Datadog site list][17] for options. All Datadog sites are geographically separated.
-3. Follow the prompts to create an account.
-
-#### Share the DDR org information with Datadog
-
-Email your new org name to your [Customer Success Manager][14]. Then, your Customer Success Manager sets this new org as your DDR org.
+If you use cloud provider integrations to send telemetry to Datadog, add those cloud provider accounts to your secondary organization too. See [Set up your cloud integrations](#set-up-cloud-integrations) for setup instructions. Datadog does not collect telemetry through these integrations while the secondary organization is passive (not in failover).
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Retrieve the public IDs and link your DDR and primary orgs" level="h4" %}}
+{{% collapse-content title="2\. Share organization details with Datadog" level="h4" id="2-share-organization-details-with-datadog" %}}
 
-<div class="alert alert-info">For security reasons, Datadog is unable to link the orgs on your behalf.</div>
+Share your new organization's name and details with your Datadog account team.
 
-After Datadog designates your DDR organization, link your DDR org to your primary org:
+Datadog configures your new organization as your secondary failover organization and starts the synchronization process. Wait for confirmation that synchronization has started.
 
-1. Use the [List your managed organizations][1] endpoint to retrieve the public IDs of your primary and DDR organizations.
-1. Add the `disaster_recovery_status_write` scope to your application key in the primary org.
+{{% /collapse-content %}}
+
+{{% collapse-content title="3\. Retrieve organization IDs and link organizations" level="h4" id="3-retrieve-organization-ids-and-link-organizations" %}}
+
+<div class="alert alert-info">For security reasons, Datadog is unable to link organizations on your behalf.</div>
+
+After your Datadog account team confirms that synchronization has started:
+
+1. Add the [`disaster_recovery_status_write` scope][18] to your [application key][19] in the primary organization.
+
+1. Use the [List your managed organizations][1] endpoint to retrieve the public IDs of your primary and secondary organizations.
+
 1. Run the following commands, replacing the placeholders with the appropriate values.
 
     ```shell
@@ -99,9 +103,7 @@ After Datadog designates your DDR organization, link your DDR org to your primar
     "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
     ```
 
-After you link your orgs, the failover org displays this banner:
-
-{{< img src="agent/guide/ddr/ddr-banner.png" alt="The DDR banner in the DDR org" >}}
+After you link your organizations, only your secondary organization displays the DDR banner.
 
 {{% /collapse-content %}}
 
@@ -117,7 +119,7 @@ Managed sync replicates user accounts from your primary org to your DDR org. Dat
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h4" %}}
+{{% collapse-content title="Set up your cloud integrations (AWS, Azure, Google Cloud)" level="h4" id="set-up-cloud-integrations" %}}
 
 See the [AWS][5], [Azure][6], and [Google Cloud][7] integrations for setup steps.
 
@@ -306,7 +308,7 @@ During testing, integration telemetry is spread over both organizations. If you 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /api/latest/organizations/#list-your-managed-organizations
+[1]: /api/latest/organizations/list-your-managed-organizations/
 [2]: https://app.datadoghq.com/organization-settings/users
 [3]: /account_management/saml/
 [4]: /account_management/saml/#just-in-time-jit-provisioning
@@ -323,3 +325,5 @@ During testing, integration telemetry is spread over both organizations. If you 
 [15]: https://www.datadoghq.com/support/
 [16]: https://app.datadoghq.com/signup
 [17]: /getting_started/site#access-the-datadog-site
+[18]: /account_management/guide/secure-configuration/#audit-and-compliance
+[19]: /account_management/api-app-keys#application-keys
