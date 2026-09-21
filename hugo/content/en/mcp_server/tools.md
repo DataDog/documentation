@@ -440,23 +440,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -464,16 +466,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -482,9 +484,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -498,22 +500,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
