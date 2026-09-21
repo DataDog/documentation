@@ -391,7 +391,7 @@ You can also add job failure analysis to a PR comment. See the guide on [using P
 
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
-This feature is enabled by default, but requires job log forwarding to be configured in GitLab. See [Store job logs](#store-job-logs).
+This feature is enabled by default, but requires job log forwarding to be configured in GitLab. See [Store job logs][12].
 
 #### Store job logs
 
