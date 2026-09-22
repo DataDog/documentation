@@ -98,7 +98,7 @@ Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeatur
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 
-Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][12]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][11]. The initial rules fetch and later refreshes still contribute to usage; local context changes do not.
+Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][12]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][11]. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
 
 Add the following to your project to initialize the SDK:
 

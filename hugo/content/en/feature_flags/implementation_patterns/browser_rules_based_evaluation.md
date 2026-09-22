@@ -43,7 +43,7 @@ Your application owns configuration availability, freshness, and the tracking li
 
 For browser applications that change evaluation context repeatedly during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider`. Load the rules once, then reuse the provider and configuration for subsequent evaluations and context changes.
 
-Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], not local evaluations. The initial rules fetch and later refreshes contribute to usage. Changing context with the loaded rules does not generate additional configuration requests.
+Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], not local evaluations. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
 
 ### Fetch rules and initialize
 

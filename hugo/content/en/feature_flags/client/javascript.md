@@ -58,7 +58,7 @@ pnpm add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 
 `DatadogCoreProvider` is an advanced, OpenFeature-compatible alternative for application-controlled configuration delivery and refreshes. It also supports local rules evaluation across context changes without fetching new assignments. It does not fetch configuration or install tracking hooks. See [Advanced: application-managed configuration](#advanced-application-managed-configuration).
 
-For repeated context changes during a session, follow [Load rules once, evaluate across changing contexts][6] with `DatadogCoreProvider`. This avoids configuration requests for those changes. The initial rules fetch and later refreshes still count toward [Monthly Flag Configuration Requests (MFCR)][5].
+For repeated context changes during a session, follow [Load rules once, evaluate across changing contexts][6] with `DatadogCoreProvider`. The initial rules fetch and later refreshes count toward [Monthly Flag Configuration Requests (MFCR)][5]; local context changes do not.
 
 `DatadogProvider` supports custom Fetch behavior and initial precomputed fallback data; these use cases alone do not require the advanced provider.
 
