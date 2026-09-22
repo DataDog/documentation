@@ -1,7 +1,12 @@
 ---
-title: Azure Storage Destination
+title: Datadog Archives - Azure Storage Destination
 description: Learn how to send logs to an Azure Storage bucket, optionally for archiving and rehydration in Datadog.
 disable_toc: false
+aliases:
+    - /observability_pipelines/destinations/azure_storage/
+code_lang: azure_storage
+type: multi-code-lang
+weight: 2
 products:
 - name: Logs
   icon: logs
@@ -12,7 +17,7 @@ products:
 
 ## Overview
 
-Use the Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][18]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
+Use the Datadog Archives - Azure Storage destination to send logs to an Azure Storage bucket. If you want to send logs to Azure Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][18]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you don't want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 
 ## Configure Log Archives
 
@@ -62,9 +67,9 @@ See the [Log Archives documentation][1] for additional information.
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Azure connection string. Do <b>not</b> enter the actual value.</div>
 
-Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
+Configure the Datadog Archives - Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
-After you select the Azure Storage destination in the pipeline UI:
+After you select the Datadog Archives - Azure Storage destination in the pipeline UI:
 
 1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the name of the Azure container you created earlier.
@@ -113,7 +118,7 @@ Enter a prefix that you want to apply to all key objects.
 
 ## Health metrics
 
-For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
+For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Datadog Archives - Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
 
 ## How the destination works
 

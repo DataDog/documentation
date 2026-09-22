@@ -149,6 +149,9 @@ code_language_ids:
     topology: "Topology Map"
     geomap: "Geomap"
     azure_apim: "Azure API Management"
+    amazon_s3: "Amazon S3"
+    azure_storage: "Azure Storage"
+    google_cloud_storage: "Google Cloud Storage"
 branch: ""
 
 signupclass: sign-up-trigger

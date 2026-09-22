@@ -1,7 +1,12 @@
 ---
-title: Google Cloud Storage Destination
+title: Datadog Archives - Google Cloud Storage Destination
 description: Learn how to send logs to a Google Cloud Storage bucket, optionally for archiving and rehydration in Datadog.
 disable_toc: false
+aliases:
+    - /observability_pipelines/destinations/google_cloud_storage/
+code_lang: google_cloud_storage
+type: multi-code-lang
+weight: 3
 products:
 - name: Logs
   icon: logs
@@ -12,9 +17,9 @@ products:
 
 ## Overview
 
-<div class="alert alert-info">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
+<div class="alert alert-info">For Worker versions 2.7 and later, the Datadog Archives - Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
-Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][21]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
+Use the Datadog Archives - Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][21]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][6] for more information about choosing the authentication method for your use case.
 
@@ -39,7 +44,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 
 1. Create a Google Cloud Storage [service account][17].
     - Grant the Service Account permissions to your bucket with `Storage Admin` and `Storage Object Admin` permissions.
-    - If you want to authenticate with a credentials file, download the service account key file and place it under `DD_OP_DATA_DIR/config`. You reference this file when you set up the [Google Cloud Storage destination](#set-up-the-destinations) later on.
+    - If you want to authenticate with a credentials file, download the service account key file and place it under `DD_OP_DATA_DIR/config`. You reference this file when you set up the [Datadog Archives - Google Cloud Storage destination](#set-up-the-destinations) later on.
 1. Follow these [instructions][18] to create a service account key. Choose `json` for the key type.
 
 ### Connect the storage bucket to Datadog Log Archives
@@ -60,9 +65,9 @@ See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline {#set-up-the-destinations}
 
-Configure the Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
+Configure the Datadog Archives - Google Cloud Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
-After you select the Google Cloud Storage destination in the pipeline UI:
+After you select the Datadog Archives - Google Cloud Storage destination in the pipeline UI:
 
 1. Enter the name of your Google Cloud storage bucket. If you configured Log Archives, it's the bucket you created earlier.
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. If you configured Log Archives it's the credentials you downloaded [earlier](#create-a-service-account-to-allow-workers-to-write-to-the-bucket). The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
@@ -116,7 +121,7 @@ There are no secret identifiers to configure.
 
 ## Health metrics
 
-For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Google Cloud Storage destination metrics, use the tag `component_type:datadog_archives_gcs`.
+For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Datadog Archives - Google Cloud Storage destination metrics, use the tag `component_type:datadog_archives_gcs`.
 
 ## How the destination works
 
