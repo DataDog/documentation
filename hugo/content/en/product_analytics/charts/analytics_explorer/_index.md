@@ -67,7 +67,7 @@ Not every option applies to every chart type. Rollup interval and display style,
 6. Hatched segments indicate intervals that are still in progress. 
 
 ## Learn more
-{{< whatsnext desc="Learn how to search, group, and visualize analytics events, and export or drill into individual events." >}}
+{{< whatsnext desc="Learn how to search, group, and visualize analytics events, and export or examine individual events." >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Search syntax{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}

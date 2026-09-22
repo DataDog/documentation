@@ -1,5 +1,5 @@
 ---
-title: Group Product Analytics events
+title: Group Product Analytics Events
 description: Add facet breakdowns to split your Product Analytics query into multiple values.
 ---
 

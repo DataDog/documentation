@@ -111,19 +111,19 @@ By default, a funnel displays as steps. Change the visualization to see the same
 
 - Timeseries: Plot the conversion metric over time.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="A funnel's conversion data displayed as a timeseries" style="width:90%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="A funnel's conversion data displayed as a timeseries." style="width:90%;" >}}
 
 - Query value: Display the conversion metric as a single number.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="The query value visualization, configured to show the total number of unique conversted sessions over the past week." style="width:80%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="The query value visualization, configured to show the total number of unique converted sessions over the past week." style="width:80%;" >}}
 
 - Top list: Rank the conversion metric by a breakdown, such as country or browser.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="A funnel's conversion data broken down by country, displayed as a top list" style="width:90%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="A funnel's conversion data broken down by country, displayed as a top list." style="width:90%;" >}}
 
 - Bar chart: Compare the conversion metric across a breakdown's values, displayed as columns.
 
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="A funnel's conversion data broken down by country, displayed as a bar chart" style="width:90%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="A funnel's conversion data broken down by country, displayed as a bar chart." style="width:90%;" >}}
 
 Top list and bar chart require a breakdown. Add one under [Compare](#compare-data) if the funnel doesn't already have one.
 
