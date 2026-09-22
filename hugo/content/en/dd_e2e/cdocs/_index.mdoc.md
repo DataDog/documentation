@@ -77,6 +77,9 @@ This folder contains a collection of pages used for e2e tests. These pages are n
 * [Site region](/dd_e2e/cdocs/components/site_region)
 * Variations of the site region component render as expected on initial page load.
 ---
+* [Skill callout](/dd_e2e/cdocs/components/skill_callout)
+* Variations of the skill callout component.
+---
 * [Stepper: Closed](/dd_e2e/cdocs/components/stepper_closed)
 * Variations of the stepper (closed) component render as expected on initial page load.
 ---
