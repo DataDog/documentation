@@ -679,6 +679,16 @@
       "group": "deployment_gates",
       "suffix": "",
       "description": "Create deployment rule returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_2423265690",
+      "description": "Create monitor deployment rule with monitor IDs returns \"OK\" response"
+    },
+    {
+      "group": "deployment_gates",
+      "suffix": "_4286388136",
+      "description": "Create monitor deployment rule with query returns \"OK\" response"
     }
   ],
   "TriggerDeploymentGatesEvaluation": [
@@ -801,11 +811,6 @@
       "group": "feature_flags",
       "suffix": "",
       "description": "Create a feature flag returns \"Created\" response"
-    },
-    {
-      "group": "feature_flags",
-      "suffix": "_2426084719",
-      "description": "Create a feature flag with notification rule targets returns \"Created\" response"
     }
   ],
   "CreateAllocationsForFeatureFlagInEnvironment": [
@@ -908,6 +913,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_2882283621",
+      "description": "Create a new entry for your service account with org folder resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_130557025",
       "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
     },
@@ -932,6 +942,11 @@
       "group": "gcp_integration",
       "suffix": "_3205636354",
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4285997499",
+      "description": "Update STS Service Account returns \"OK\" response with org folder resource collection enabled"
     }
   ],
   "CreateOrganizationHandle": [
@@ -1581,6 +1596,11 @@
   "CreateMonitorConfigPolicy": [
     {
       "group": "monitors",
+      "suffix": "_1934105875",
+      "description": "Create a downtime duration monitor configuration policy returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "",
       "description": "Create a monitor configuration policy returns \"OK\" response"
     }
@@ -1767,6 +1787,11 @@
       "group": "observability_pipelines",
       "suffix": "_1130701356",
       "description": "Validate an observability pipeline with Splunk HEC source valid_tokens returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3116312807",
+      "description": "Validate an observability pipeline with Splunk TCP source max_connection_duration_secs returns \"OK\" response"
     },
     {
       "group": "observability_pipelines",
@@ -2202,11 +2227,6 @@
     },
     {
       "group": "security_monitoring",
-      "suffix": "_914562040",
-      "description": "Create a detection rule with type 'signal_correlation' returns \"OK\" response"
-    },
-    {
-      "group": "security_monitoring",
       "suffix": "_498211763",
       "description": "Create a detection rule with type 'workload_security' returns \"OK\" response"
     },
@@ -2335,6 +2355,11 @@
     }
   ],
   "SearchSecurityMonitoringSignals": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Get a list of security signals returns \"OK\" response"
+    },
     {
       "group": "security_monitoring",
       "suffix": "_1309350146",

@@ -16,7 +16,7 @@ Utilisez la destination Datadog Logs d'Observability Pipelines pour envoyer des 
 
 ## Configuration {#setup}
 
-Configurez la destination Datadog Logs lorsque vous [configurez un pipeline][4]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][5], ou avec [Terraform][6]. Les étapes de cette section sont configurées dans l'UI.
+Configurez la destination Datadog Logs lorsque vous [configurez un pipeline][4]. Vous pouvez configurer un pipeline dans l'[interface utilisateur][1], en utilisant l'[API][5], ou avec [Terraform][6]. Les étapes de cette section sont configurées dans l'interface utilisateur.
 
 <div class="alert alert-info">Avant d'acheminer les logs via Observability Pipelines, examinez tous les index, pipelines ou filtres d'exclusion qui utilisent le <code>datadog.pipelines:false</code> tag. Pour les logs provenant d'une source Datadog Agent, la destination Datadog Logs définit <code>source_type</code> par <code>datadog_agent</code> (<code>@source_type:datadog_agent</code> dans la recherche de logs). Datadog évalue ensuite ces logs comme des logs <code>datadog_agent</code> lorsqu'il décide s'il doit appliquer le <code>datadog.pipelines:false</code> tag. Pour modifier ce comportement avant que les logs ne soient transmis, utilisez le <a href="/observability_pipelines/processors/edit_fields/">Edit Fields processor</a> ou le <a href="/observability_pipelines/processors/custom_processor/">Custom Processor</a> pour supprimer l' <code>source_type</code> attribut des logs.</div>
 
@@ -145,12 +145,12 @@ Pour envoyer des logs depuis Observability Pipelines vers Datadog en utilisant A
 - Le tag `component_type` est `datadog_logs` pour les métriques de destination Datadog Logs.
 
 `pipelines.datadog_logs_reserved_attribute_conflicts_total`
-: **Description**: Le nombre de conflits rencontrés lors du déplacement de champs ayant une signification sémantique vers un [reserved attribute][10] Datadog. Consultez l'[exemple](#example-of-relocating-fields-with-semantic-meaning-to-a-datadog-reserved-attribute). Disponible dans la version 2.18 de Worker et ultérieures.
+: **Description**: Le nombre de conflits rencontrés lors du déplacement de champs ayant une signification sémantique vers un [attribut réservé][10] Datadog. Consultez l'[exemple](#example-of-relocating-fields-with-semantic-meaning-to-a-datadog-reserved-attribute). Disponible dans la version 2.18 de Worker et ultérieures.
 : **Type de métrique** : count
 
-#### Example of relocating fields with semantic meaning to a Datadog reserved attribute {#example-of-relocating-fields-with-semantic-meaning-to-a-datadog-reserved-attribute}
+#### Exemple de déplacement de champs ayant une signification sémantique vers un attribut réservé Datadog {#example-of-relocating-fields-with-semantic-meaning-to-a-datadog-reserved-attribute}
 
-La source OpenTelemetry décode l'événement suivant, où `severity_text` correspond sémantiquement à the reserved `status` attribute:
+La source OpenTelemetry décode l'événement suivant, où `severity_text` correspond sémantiquement à l'attribut `status` réservé :
 
 ```json
 {
@@ -176,7 +176,7 @@ Un processeur aplatit ensuite l'événement, de sorte que `status` et `severity_
 }
 ```
 
-Comme the reserved `status` attribute existe déjà, la destination le renomme en `_RESERVED_severity` pour éviter qu'il ne soit écrasé par le champ en conflit :
+Comme l'attribut `status` réservé existe déjà, la destination le renomme en `_RESERVED_severity` pour éviter qu'il ne soit écrasé par le champ en conflit :
 
 ```json
 {
@@ -192,7 +192,7 @@ Comme the reserved `status` attribute existe déjà, la destination le renomme e
 
 ### Regroupement d'événements {#event-batching}
 
-Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Destinations event batching][2] pour plus d'informations.
+Un lot d'événements est vidé lorsque l'un de ces paramètres est atteint. Consultez [Regroupement d'événements par destination][2] pour plus d'informations.
 
 | Nombre maximal d'événements | Taille maximale (Mo) | Délai d'expiration (secondes)   |
 |----------------|-------------------|---------------------|
