@@ -45,7 +45,7 @@ Connectez un client compatible MCP au Datadog MCP Server avec l'ensemble d'outil
 L'endpoint du serveur MCP dépend de votre [site Datadog][5]. Utilisez le sélecteur {{< ui >}}Datadog Site{{< /ui >}} pour afficher l'endpoint de votre site. Ajoutez `?toolsets=llmobs,core` pour activer Agent Observability et les ensembles d'outils principaux.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Endpoint pour votre site sélectionné ({{< region-param key="dd_site_name" >}}):
+Endpoint pour votre site sélectionné ({{< region-param key="dd_site_name" >}}) :
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
 {{< /site-region >}}
 
@@ -357,6 +357,9 @@ L'ensemble d'outils `llmobs` comprend les outils suivants :
 
 `list_llmobs_evals_by_ml_app`
 : List all LLM-judge evaluators configured for a specific ML application. → Listez tous les évaluateurs LLM-judge configurés pour une application ML spécifique.
+
+`list_llmobs_feedback_labels`
+: Lister toutes les étiquettes de commentaires soumises par les utilisateurs finaux pour une application d'apprentissage automatique spécifique.
 
 `get_llmobs_evaluator`
 : Retrieve an LLM-judge evaluator configuration by name, including its target (ml_app, sampling, filter), LLM provider, and judge prompt template. → Récupérez la configuration d'un évaluateur LLM-judge par son nom, incluant sa cible (ml_app, échantillonnage, filtre), le fournisseur LLM et le modèle de prompt de l'évaluateur.
