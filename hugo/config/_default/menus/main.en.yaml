@@ -6062,10 +6062,10 @@ menu:
       parent: cicd_test_setup
       identifier: cicd_test_setup_containers
       weight: 211
-    - name: Health
-      url: cicd/health/
+    - name: Overview
+      url: cicd/overview/
       parent: cicd
-      identifier: cicd_health
+      identifier: cicd_overview
       weight: 3
     - name: Explorer
       url: continuous_integration/explorer/
