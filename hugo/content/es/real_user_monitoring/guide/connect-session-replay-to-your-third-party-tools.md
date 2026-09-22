@@ -1,28 +1,29 @@
 ---
+description: Integre Session Replay con herramientas de análisis y experiencia del
+  cliente de terceros accediendo a las URL de Session Replay desde el navegador.
 further_reading:
-- link: /real_user_monitoring/session_replay/browser/
+- link: /session_replay/
   tag: Documentación
-  text: Más información sobre Session Replay
-title: Conectar Session Replay a tus herramientas de terceros
+  text: Obtenga más información sobre Session Replay
+title: Conecte Session Replay a sus herramientas de terceros
 ---
+## Descripción general {#overview}
 
-## Información general
+Session Replay proporciona información visual para complementar los datos de análisis de usuario. Si utiliza herramientas de terceros para la experiencia del cliente, análisis de sitios web y más, puede conectarlas a Session Replay. Esta guía le explica cómo acceder a la URL de Session Replay para usarla en integraciones, directamente desde el navegador donde se está llevando a cabo la sesión. 
 
-Session Replay proporciona información visual para complementar los datos de análisis de usuarios. Si utilizas herramientas de terceros para la experiencia del cliente, el análisis de sitios web, etc., puedes conectarlas a Session Replay. En esta guía se explica cómo acceder a la URL de Session Replay para utilizarla en integraciones, en directo desde el navegador en el que se está produciendo la sesión. 
+## Casos de uso {#use-cases}
 
-## Casos de uso
+Es posible que desee conectar una herramienta de terceros con Session Replay para visualizar de forma más completa los indicadores de experiencia del usuario, tales como los siguientes:
 
-Es posible que quieras conectar una herramienta de terceros a Session Replay para tener una visión más completa de los indicadores de la experiencia del usuario, como los siguientes:
-
-- Resultados de la encuesta
+- Resultados de encuestas de formularios
 - Herramientas de experiencia del cliente
 - Análisis de datos
 
-## Ver el enlace a Session Replay
+## Obtenga el enlace de Session Replay {#get-the-session-replay-link}
 
-Para obtener la URL de la grabación de la sesión actual del usuario, utiliza el siguiente fragmento, dependiendo del método de instalación que hayas utilizado para configurar RUM:
+Para obtener la URL de la grabación de la sesión de usuario actual, utilice el siguiente fragmento, dependiendo del método de instalación que utilizó para configurar RUM:
 
-**Nota**: Proporcionar un valor para `subdomain` cuando se obtiene la URL de la grabación de la sesión del usuario es opcional, pero debe proporcionarse si estás accediendo a Datadog a través de un subdominio personalizado y quieres ver el dominio personalizado en la URL que se devuelve.
+**Nota**: Proporcionar un valor para `subdomain` al obtener la URL de grabación de la sesión de usuario es opcional, pero debe proporcionarse si accede a Datadog a través de un subdominio personalizado y desea ver el dominio personalizado en la URL que se devuelve.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -32,8 +33,8 @@ import { datadogRum } from '@datadog/browser-rum';
 
 datadogRum.init({
     ...,
-    // opcional, sólo es necesario si se utiliza un nombre de dominio personalizado
-    subdominio: ''
+    // optional, only needed if using a custom domain name
+    subdomain: ''
     ...
 });
 
@@ -42,14 +43,14 @@ const url = datadogRum.getSessionReplayLink();
 
 {{% /tab %}}
 
-{{% tab "CDN asínc" %}}
+{{% tab "CDN async" %}}
 
 ```javascript
 window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
         ...,
-        // opcional, sólo es necesario si se utiliza un nombre de dominio personalizado
-        subdominio: ''
+        // optional, only needed if using a custom domain name
+        subdomain: ''
         ...
     })
     const url = DD_RUM.getSessionReplayLink();
@@ -59,14 +60,14 @@ window.DD_RUM.onReady(function() {
 
 {{% /tab %}}
 
-{{% tab "CDN sínc" %}}
+{{% tab "CDN sync" %}}
 
 ```javascript
 window.DD_RUM &&
     window.DD_RUM.init({
         ...,
-         // opcional, sólo es necesario si se utiliza un nombre de dominio personalizado
-        subdominio: ''
+         // optional, only needed if using a custom domain name
+        subdomain: ''
         ...
     });
 const url = DD_RUM && DD_RUM.getSessionReplayLink();
@@ -76,15 +77,15 @@ const url = DD_RUM && DD_RUM.getSessionReplayLink();
 
 {{< /tabs >}}
 
-## Enviar el enlace a una herramienta de terceros
+## Enviar enlace a una herramienta de terceros {#send-link-to-a-third-party-tool}
 
-Una vez recuperado el enlace a través del fragmento anterior, existen varias formas de pasar los datos, dependiendo de las opciones que ofrezcan tus herramientas de terceros:
+Una vez que recupere el enlace a través del fragmento anterior, tiene varias formas diferentes de pasar los datos, dependiendo de la(s) opción(es) que ofrezca su herramienta de terceros:
 
-- Como campo oculto del formulario.
-- Como campo JSON.
-- A través de un parámetro URL.
-- Directamente en la integración de tu elección en JavaScript.
+- Como un campo de formulario oculto.
+- Como un campo JSON.
+- A través de un parámetro de URL.
+- Directamente en su integración de preferencia en JavaScript.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
