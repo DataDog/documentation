@@ -17,7 +17,7 @@ further_reading:
 
 AI Guard uses Sensitive Data Scanner to identify sensitive data, such as personally identifiable information (PII), credentials, and secrets, in messages evaluated by AI Guard. Matching data can be hashed, replaced with custom text, or partially redacted before it is sent to the model. To replace each match with a label or `****`, use the **Redact** action and enter the value as the replacement text.
 
-<div class="alert alert-warning">Sensitive data redaction is designed for the AI Guard SDK. Automatic instrumentation integrations, such as OpenAI and Anthropic, report Sensitive Data Scanner findings but don't redact the messages your application sends to the model. To redact sensitive data, call the SDK directly and forward the redacted conversation returned by the evaluation. See <a href="/security/ai_guard/setup/sdk/">AI Guard SDK</a>.</div>
+<div class="alert alert-warning">Sensitive data redaction is supported only with manual SDK integration. Automatic instrumentations, such as OpenAI or Anthropic, aren't supported yet: they report Sensitive Data Scanner findings, but they don't redact the messages your application sends to the model. To redact sensitive data, call the SDK directly and forward the redacted conversation returned by the evaluation. See <a href="/security/ai_guard/setup/sdk/">AI Guard SDK</a>.</div>
 
 ## Supported SDK versions
 
