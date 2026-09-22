@@ -45691,6 +45691,13 @@ components:
           description: When enabled, Datadog collects metrics where location is explicitly stated as "global" or where location information cannot be deduced from GCP labels.
           example: true
           type: boolean
+        is_org_folder_resource_collection_enabled:
+          default: false
+          description: |-
+            When enabled, Datadog scans for organization and folder-level resources
+            under the organization the service account belongs to.
+          example: false
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: |-
@@ -45730,7 +45737,7 @@ components:
           type: array
         resource_collection_enabled:
           description: |-
-            When enabled, Datadog scans for all resources in your GCP environment.
+            When enabled, Datadog scans for all project-level resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
