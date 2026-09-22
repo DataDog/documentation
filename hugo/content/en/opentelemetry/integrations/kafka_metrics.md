@@ -1,7 +1,7 @@
 ---
 title: Kafka Metrics
 further_reading:
-- link: "/opentelemetry/collector_exporter/"
+- link: "/opentelemetry/setup/collector_exporter/"
   tag: "Documentation"
   text: "Setting Up the OpenTelemetry Collector"
 ---
@@ -11,7 +11,9 @@ further_reading:
 
 {{< img src="/opentelemetry/collector_exporter/kafka_metrics.png" alt="OpenTelemetry Kafka metrics in the Kafka dashboard" style="width:100%;" >}}
 
-The [Kafka metrics receiver][1] and [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][6], **Kafka, Zookeeper, and Kafka Consumer Overview**.
+The [Kafka metrics receiver][1] and the [JMX Scraper][2] collect Kafka metrics for the out-of-the-box [Kafka Dashboard][3], **Kafka, Zookeeper, and Kafka Consumer Overview**.
+
+The two collect different data and most setups run both. The Kafka metrics receiver reads cluster state through the Kafka admin API. The JMX Scraper reads JMX beans exposed by brokers, producers, and consumers.
 
 ## Kafka metrics receiver
 
@@ -62,33 +64,39 @@ receivers:
 
 The JMX Scraper runs as a standalone Java application and sends metrics to the Collector's OTLP receiver.
 
-Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP receiver in its metrics pipeline. For configuration details, see [Set Up the OpenTelemetry Collector][5].
+Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP receiver in its metrics pipeline. For configuration details, see [Set Up the OpenTelemetry Collector][4].
 
 ### Configure Kafka brokers
 
-Configure JMX authentication and TLS for your environment. Add these JVM options to each Kafka broker:
+The following JVM options start an unsecured JMX endpoint suitable for evaluation. Add them to each Kafka broker:
 
 ```shell
 -Dcom.sun.management.jmxremote=true
 -Dcom.sun.management.jmxremote.port=9999
 -Dcom.sun.management.jmxremote.rmi.port=9999
 -Dcom.sun.management.jmxremote.local.only=false
+-Dcom.sun.management.jmxremote.authenticate=false
+-Dcom.sun.management.jmxremote.ssl=false
 -Djava.rmi.server.hostname=<BROKER_HOSTNAME_OR_IP>
 ```
 
+<div class="alert alert-warning">This configuration accepts unauthenticated, unencrypted JMX connections. <code>jmxremote.authenticate</code> and <code>jmxremote.ssl</code> both default to <code>true</code> and must be set explicitly, because at their defaults the broker does not start: <code>jmxremote.authenticate</code> fails with <code>Password file not found</code>, and <code>jmxremote.ssl</code> fails with <code>Port already in use</code> when <code>jmxremote.rmi.port</code> matches <code>jmxremote.port</code>, because the RMI registry is not TLS-protected by default and the two cannot share a port. For production, enable authentication and TLS, add <code>com.sun.management.jmxremote.registry.ssl=true</code> so the registry and connector can share a port, and configure the scraper with <code>otel.jmx.username</code>, <code>otel.jmx.password</code>, <code>otel.jmx.remote.registry.ssl</code>, and the <code>javax.net.ssl.trustStore</code> and <code>javax.net.ssl.trustStorePassword</code> properties.</div>
+
 Set `java.rmi.server.hostname` to the hostname or IP address that the scraper uses to connect. The broker includes this value in an RMI stub, and the scraper opens a second connection to it.
 
-- Do not use `0.0.0.0`, which is a bind address rather than a routable address.
-- Use a loopback address only when the scraper runs on the broker's host or Pod.
+- Use a loopback address only when the scraper runs on the broker's own host or Pod. Several Kafka distributions and container images, including Confluent Platform, default to loopback.
+- Do not use `0.0.0.0`. It is a bind address and the scraper cannot connect to it.
 - In Kubernetes, use the broker Pod IP or a DNS name.
 
-Set `jmxremote.rmi.port` to the same port as `jmxremote.port`. Without a fixed RMI port, the second connection uses a random port that a firewall or port mapping might block. For Kafka containers, set `KAFKA_JMX_HOSTNAME` to the same address as `java.rmi.server.hostname`.
+In Kafka container images, `KAFKA_JMX_HOSTNAME` sets `java.rmi.server.hostname`. Set it to the same address.
+
+Set `jmxremote.rmi.port` to the same port as `jmxremote.port`. Without a fixed RMI port, the second connection uses a random port that a firewall or port mapping might block.
 
 An unreachable address can allow the initial connection to succeed, but the scrape then fails with `Failed to retrieve RMIServer stub` or `Connection refused to host: <UNREACHABLE_ADDRESS>`.
 
 ### Run the JMX Scraper
 
-Set `otel.jmx.target.source` to `legacy` to preserve the JVM metric names expected by existing dashboards and monitors.
+Set `otel.jmx.target.source` to `legacy` to preserve the JVM metric names that existing dashboards and monitors expect. Without it, the scraper defaults to `auto` and every JVM metric name changes.
 
 {{< tabs >}}
 {{% tab "Host" %}}
@@ -100,7 +108,9 @@ apt-get update && \
 apt-get -y install default-jre-headless
 ```
 
-Download the [JMX Scraper JAR for OpenTelemetry Java Contrib v1.60.0][3]. Set each address variable in `host:port` format. Then run one or more of the following commands:
+Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][5]. Set each address variable in `host:port` format.
+
+Each scraper process scrapes a single JMX endpoint. Run one process per broker, producer, and consumer, using that JVM's address. Then run one or more of the following commands:
 
 ```shell
 # Kafka broker
@@ -138,7 +148,7 @@ java \
 Use the following Dockerfile to build an image with a JRE and the JMX Scraper JAR:
 
 ```Dockerfile
-FROM alpine:latest as prep
+FROM alpine:latest AS prep
 
 # JMX Scraper JAR
 ARG JMX_SCRAPER_JAR_VERSION=1.60.0
@@ -150,9 +160,8 @@ FROM gcr.io/distroless/java17-debian11:nonroot
 
 COPY --from=prep /opt/opentelemetry-jmx-scraper.jar /opt/opentelemetry-jmx-scraper.jar
 
-EXPOSE 4317 55680 55679
 ENTRYPOINT ["java"]
-CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:1099/jmxrmi", \
+CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:9999/jmxrmi", \
 "-Dotel.jmx.target.system=kafka,jvm", \
 "-Dotel.jmx.target.source=legacy", \
 "-Dotel.metrics.exporter=otlp", \
@@ -161,7 +170,11 @@ CMD ["-Dotel.jmx.service.url=service:jmx:rmi:///jndi/rmi://kafka:1099/jmxrmi", \
 "/opt/opentelemetry-jmx-scraper.jar"]
 ```
 
-Replace `kafka:1099` with the broker's JMX address and `otelcol:4317` with the Collector's OTLP gRPC endpoint.
+Replace `kafka:9999` with the broker's JMX address and `otelcol:4317` with the Collector's OTLP gRPC endpoint.
+
+To scrape producers or consumers, set `otel.jmx.target.system` to `kafka-producer` or `kafka-consumer` and point `otel.jmx.service.url` at that JVM's JMX endpoint.
+
+Run a single instance per JMX endpoint. Multiple replicas scraping the same endpoint produce duplicate metrics.
 
 {{% /tab %}}
 
@@ -169,7 +182,7 @@ Replace `kafka:1099` with the broker's JMX address and `otelcol:4317` with the C
 
 ## Log collection
 
-See [Log Collection][4] for instructions on how to collect logs using the OpenTelemetry Collector.
+See [Log Collection][6] for instructions on how to collect logs using the OpenTelemetry Collector.
 
 To include Kafka logs in the out-of-the-box Kafka Dashboard, use an attributes processor to add the `source:kafka` tag:
 
@@ -227,9 +240,9 @@ Value: 25
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kafkametricsreceiver
 [2]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
-[3]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases/tag/v1.60.0
-[4]: /opentelemetry/collector_exporter/log_collection
-[5]: /opentelemetry/setup/collector_exporter/
-[6]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
+[3]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
+[4]: /opentelemetry/setup/collector_exporter/
+[5]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
+[6]: /opentelemetry/config/log_collection
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[8]: /opentelemetry/guide/metrics_mapping/#kafka-metrics
+[8]: /opentelemetry/mapping/metrics_mapping/#kafka-metrics
