@@ -55,9 +55,9 @@ Live Debugger complements [Dynamic Instrumentation][38], which adds metrics, spa
 
 Live Debugger provides:
 
+- **Dynamic logpoints** (non-breaking breakpoints) placed at any supported code location you choose in your application or third-party libraries.
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
 - **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
-- **Dynamic logpoint placement** at supported code locations in your application or third-party libraries.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
 - **Built-in sensitive data scrubbing** to help prevent exposure of personal data, secrets, and credentials.
@@ -378,38 +378,11 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
-After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. If no useful data appears, check that:
-
-- The selected service and environment are receiving traffic that executes the instrumented code.
-- The source file and location match the deployed version.
-- The condition matches that traffic, and the log events have no `debugger.snapshot.evaluationErrors`.
-- The [logs index](#create-a-logs-index) retains `source:dd_debugger` events.
-- The values you need are not redacted or outside the capture limits.
+After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. If no useful data appears, see [Troubleshooting](#troubleshooting).
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the {% ui %}Capture Variables{% /ui %} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
-
-#### Mode-based redaction
-
-Live Debugger has two redaction modes:
-
-- {% ui %}Strict Mode{% /ui %}: Redacts all values except numbers and Booleans. [Bits Live Debugger][23] is not available for service and environment combinations set to {% ui %}Strict Mode{% /ui %}.
-- {% ui %}Targeted Mode{% /ui %}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
-
-These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
-
-#### Identifier-based redaction
-
-Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Additional language-specific redaction rules are built into each SDK.
-
-You can extend redaction behavior through:
-
-- Custom identifier-based redaction
-- Class/type-based redaction rules
-- Sensitive Data Scanner rules
-
-See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][17] documentation for configuration details.
+Configure redaction for captured logs and variables using the [sensitive data scrubbing guide][1].
 
 ### Using Bits Live Debugger {% #bits-live-debugger %}
 
@@ -429,6 +402,16 @@ The following constraints apply to Live Debugger usage and configuration:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
 
+## Troubleshooting
+
+If a logpoint produces no useful data, check that:
+
+- The selected service and environment are receiving traffic that executes the instrumented code.
+- The source file and location match the deployed version.
+- The condition matches that traffic, and the log events have no `debugger.snapshot.evaluationErrors`.
+- The [logs index](#create-a-logs-index) retains `source:dd_debugger` events.
+- The values you need are not redacted or outside the capture limits.
+
 [1]: /tracing/live_debugger/sensitive-data-scrubbing/
 [2]: /agent/
 [4]: /tracing/guide/remote_config
@@ -437,11 +420,10 @@ The following constraints apply to Live Debugger usage and configuration:
 [13]: https://app.datadoghq.com/debugging/
 [14]: https://app.datadoghq.com/apm/traces
 [15]: /dynamic_instrumentation/expression-language/
-[17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [23]: /tracing/live_debugger/bits-live-debugger/
-[24]: #mode-based-redaction
+[24]: /tracing/live_debugger/sensitive-data-scrubbing/#mode-based-redaction
 [26]: https://app.datadoghq.com/debugging/settings
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/

@@ -16,19 +16,28 @@ further_reading:
 
 ## Overview
 
-[Live Debugger][5] captures logs and variable snapshots that can contain sensitive application data.
+[Live Debugger][5] captures logs and variable snapshots that can contain sensitive application data, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option.
 
 Choose the values you collect deliberately and understand where redaction occurs:
 
 - **Identifier and type rules** redact matching values in your infrastructure, before upload.
-- **Live Debugger redaction modes** control which captured values are visible. Strict Mode and Targeted Mode cannot be disabled. See [Live Debugger redaction modes][7].
+- **Live Debugger redaction modes** control which captured values are visible. See [mode-based redaction][7].
 - **Sensitive Data Scanner rules** redact matching data after it reaches Datadog. They are not a substitute for rules that prevent sensitive values from leaving your infrastructure.
+
+## Mode-based redaction
+
+Live Debugger has two redaction modes:
+
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans. [Bits Live Debugger][8] is not available for service and environment combinations set to {{< ui >}}Strict Mode{{< /ui >}}.
+- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+
+These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
 ## Redact based on identifiers
 
 ### Default behavior
 
-Live Debugger automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`. See [redacted identifiers][1].
+Live Debugger automatically redacts values linked to sensitive identifiers, such as `password` and `accessToken`, before captured data leaves the host. Additional language-specific redaction rules are built into each SDK. See [redacted identifiers][1].
 
 ### Custom identifier redaction
 
@@ -69,4 +78,5 @@ You can disable or customize rules through the [Sensitive Data Scanner][4].
 [3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [5]: /tracing/live_debugger/
-[7]: /tracing/live_debugger/#mode-based-redaction
+[7]: #mode-based-redaction
+[8]: /tracing/live_debugger/bits-live-debugger/
