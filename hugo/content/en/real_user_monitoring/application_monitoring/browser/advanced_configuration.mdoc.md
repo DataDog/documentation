@@ -1103,6 +1103,29 @@ window.DD_RUM &&
 
 For a sampled out session, all pageviews and associated telemetry for that session are not collected.
 
+## Reduce network usage with partial view updates
+
+{% alert level="info" %}
+This is a beta feature. To use it, contact [Datadog support](https://docs.datadoghq.com/help/).
+{% /alert %}
+
+By default, the RUM Browser SDK resends a complete view event every time a view's data changes (for example, when a new resource, action, or error is attributed to that view). For views with many updates, this can add up to a meaningful amount of network traffic.
+
+Set `betaEnableViewUpdates` to `true` when initializing RUM to send incremental view update events instead of a full view event on every intermediate update. A full view event is still sent for the first update of a view (and periodically afterwards), so the view state can be fully reconstructed even if some intermediate updates are lost in transit.
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    applicationId: '<DATADOG_APPLICATION_ID>',
+    clientToken: '<DATADOG_CLIENT_TOKEN>',
+    site: '<DATADOG_SITE>',
+    betaEnableViewUpdates: true,
+});
+```
+
+This option is enabled by default when the SDK is loaded from the CDN and no `proxy` is configured. It is disabled by default in all other cases, because a proxy may not forward the `view_update` event type used to carry these incremental updates.
+
 ## User tracking consent
 
 To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information on tracking consent, see [Data Security][17].
