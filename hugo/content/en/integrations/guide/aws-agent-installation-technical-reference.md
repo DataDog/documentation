@@ -52,9 +52,9 @@ The stack also attaches the IAM permissions for the workloads you selected to yo
 
 Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, and does not tag your instances.
 
-### No resources created for Lambda functions
+### No additional resources created for Lambda functions
 
-Datadog creates no AWS resources for Lambda instrumentation. The only change is to the configuration of the functions your rule covers. Datadog does not create secrets, IAM roles, or SSM documents for Lambda, and does not tag your functions.
+Apart from the Lambda EventBridge rule that the CloudFormation stack creates, Datadog creates no AWS resources for Lambda instrumentation. The only other change is to the configuration of the functions your rule covers. Datadog does not create secrets, IAM roles, or SSM documents for Lambda, and does not tag your functions.
 
 ## How instrumentation works
 
@@ -72,10 +72,10 @@ Datadog does not reboot or restart your instances. The only service Datadog touc
 
 ### On AWS Lambda
 
-Lambda instrumentation runs entirely from Datadog. Datadog does not deploy anything into your account to instrument your functions.
+Lambda instrumentation runs entirely from Datadog. Datadog does not deploy any compute, such as an instrumenter function, into your account to instrument your functions.
 
 1. Datadog reads the function's current configuration and tags, and checks that it meets the [Lambda prerequisites][3].
-2. Datadog checks whether the function is already instrumented. A function carrying Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply is skipped, as is a function managed by [remote instrumentation][4]. Datadog reports which of the two applies.
+2. Datadog checks whether the function is already instrumented. Datadog skips a function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Datadog also skips a function managed by [remote instrumentation][4], and reports which of the two reasons applies.
 3. Datadog resolves the Datadog layer versions for the function's runtime, architecture, region, and AWS partition. Datadog applies layer versions it has validated rather than whatever is newest at that moment, so an installation is reproducible.
 4. Datadog computes the complete desired configuration and records exactly what it is about to change, before changing anything.
 5. Datadog authorizes the function's execution role to send telemetry to your Datadog organization. See the [How Lambda telemetry is authenticated](#how-lambda-telemetry-is-authenticated) section.
@@ -131,9 +131,9 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 
 Lambda instrumentation stores no Datadog credential in your account. The Datadog extension authenticates with the function's AWS execution identity through [Workload Identity Federation][5], using the `DD_ORG_UUID` and `DD_SITE` values Datadog sets on the function. No Datadog API key, secret ARN, or KMS-encrypted key is written into the function's configuration.
 
-For that authentication to succeed, Datadog authorizes the function's execution role to send telemetry to your Datadog organization. Datadog sets up this authorization before it updates a function, and matches the execution role exactly rather than by a broader pattern.
+For that authentication to succeed, Datadog authorizes the function's execution role to send telemetry to your Datadog organization. Datadog sets up this authorization before it updates a function and matches the execution role exactly, rather than by a broader pattern.
 
-Because a single execution role is often shared across functions, Datadog creates these mappings but does not remove them on uninstall. Removing a mapping for a shared role could break another function that still depends on it.
+Because a single execution role is often shared across functions, Datadog creates these authorizations but does not remove them on uninstall. Removing the authorization for a shared role could break another function that still depends on it.
 
 ### Who can change instrumentation
 
@@ -169,7 +169,7 @@ A Lambda configuration update that is still in progress is left alone and retrie
 
 ### How a rule determines coverage
 
-A rule is not a one-time selection. Datadog re-evaluates its query over time and reacts to the change events forwarded from your account, so a resource is instrumented as soon as Datadog sees it match, however it came to match:
+A rule is not a one-time selection. Datadog re-evaluates its query over time and reacts to the change events forwarded from your account. Datadog instruments a resource as soon as it detects a match, in either of the following cases:
 
 - **It was created after you saved the rule.** `RunInstances` and `CreateFunction` events are forwarded, so a new resource is picked up within minutes.
 - **It already existed and started matching.** Tagging a resource to bring it into scope is the common case, so tag events are forwarded too: `CreateTags` and `DeleteTags` on EC2, `TagResource` and `UntagResource` on Lambda. This supports writing a rule such as `@Tags:datadog:true` first, then tagging resources into it as you go.
@@ -202,8 +202,8 @@ When someone removes instrumentation from a covered resource by hand, Datadog re
 
 To remove instrumentation, remove resources from a rule, edit the rule's query, or delete the rule.
 
-- **EC2**: Datadog removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for that instance.
-- **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Datadog checks that record against the function's current configuration first, so it does not remove a layer or variable it did not add. The telemetry authorization for the execution role is left in place, because the role may be shared with other functions.
+- **EC2**: Datadog removes the Datadog Agent, the `/etc/datadog-agent` and `/opt/datadog-agent` directories on Linux (or performs an MSI uninstall on Windows), and any IAM role or instance profile Datadog created for each instance.
+- **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Datadog first compares its record of the original configuration against the function's current configuration, so it does not remove a layer or variable it did not add. The telemetry authorization for the execution role is left in place, because the role may be shared with other functions.
 
 ## Further reading
 

@@ -49,11 +49,38 @@ You can instrument your AWS workloads directly from Datadog, without connecting 
 | Workload | What Datadog installs |
 |---|---|
 | Amazon EC2 instances | The Datadog Agent |
-| AWS Lambda functions | The Datadog Lambda extension, and the Datadog tracing layer matching the function's runtime |
+| AWS Lambda functions | The Datadog Lambda extension and, for supported runtimes, the Datadog tracing layer that matches the function's runtime |
 
-Amazon EKS is not supported. For Lambda functions, Datadog also offers remote instrumentation, a separate product. To decide which to use, see the [Choose between the AWS integration and remote instrumentation](#choose-between-the-aws-integration-and-remote-instrumentation) section.
+Amazon EKS is not supported. For Lambda functions, Datadog also offers remote instrumentation, a separate product. To decide which to use, see the following section.
 
 <div class="alert alert-warning">A Lambda function can be managed by only one Datadog instrumentation product. Datadog skips any function that remote instrumentation already manages, and skips any function you instrumented yourself.</div>
+
+## Choose between the AWS integration and remote instrumentation
+
+Datadog offers two ways to add instrumentation to Lambda functions without redeploying them yourself:
+
+- **Instrumentation through the AWS integration**, covered by this guide, is managed entirely from Datadog. Datadog updates your functions with the AWS integration IAM role created by the CloudFormation stack, and deploys no compute into your account.
+- **[Remote instrumentation][9]** deploys a Datadog instrumenter function, `datadog-remote-instrumenter`, into your own account. That function applies the instrumentation and keeps it in place.
+
+Both add the same Datadog Lambda extension and tracing layers, and both restore instrumentation that is changed outside of Datadog. They differ in where the work runs, how functions are selected, and what you install.
+
+| Aspect | Instrumentation through the AWS integration | Remote instrumentation |
+|---|---|---|
+| Workloads | Amazon EC2 instances and AWS Lambda functions | AWS Lambda functions |
+| What runs in your account | No Datadog compute. Datadog calls the AWS APIs with the AWS integration IAM role created by the CloudFormation stack | The instrumenter Lambda function |
+| Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
+| Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
+| Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
+| Layer versions | Datadog selects and updates them | You set them, and they stay fixed until you change them |
+| How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
+| Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
+| Removing instrumentation | Remove from Datadog | Delete the CloudFormation stack in that region |
+
+Both products deploy a CloudFormation stack in your account. The stack for remote instrumentation also creates a CloudTrail trail and supporting resources. For what the stack in this guide creates, including the EventBridge resources that send change events to Datadog, see [How Datadog instrumentation through the AWS integration works][6].
+
+Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place, or when you want to narrow the function list by region, runtime, and memory size.
+
+Both products match on AWS resource tags. Use remote instrumentation when you want to match on the tags in `DD_TAGS`, or when you want to set the layer versions applied to your functions and keep them fixed.
 
 ## Prerequisites
 
@@ -70,10 +97,11 @@ For all workloads, confirm the following:
 ### AWS Lambda functions
 
 - **Resource collection**: [Resource collection][10] must be enabled on the AWS integration. Datadog uses it to list your functions and preview which ones a rule matches.
-- **AWS partition**: The commercial `aws` partition. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through [Workload Identity Federation][16], which those partitions don't support.
-- **Package type**: Zip. Container image functions are not supported, because Datadog instrumentation is distributed as Lambda layers, which container image functions can't use.
-- **Architecture**: `x86_64` or `arm64`. A function must report a single architecture.
-- **Layer count**: AWS limits a function to five layers. Datadog adds up to two, so a function that already carries four or more layers is not eligible.
+- **AWS partition**: The function must be in the commercial `aws` partition. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through [Workload Identity Federation][16], which those partitions don't support.
+- **Package type**: The function must use the Zip package type. Container image functions are not supported, because Datadog instrumentation is distributed as Lambda layers, which container image functions can't use.
+- **Architecture**: The function must use a single architecture, either `x86_64` or `arm64`.
+- **Lambda@Edge**: The function must not be a Lambda@Edge function. Datadog excludes both the replicas and the functions they replicate.
+- **Layer count**: AWS limits a function to five layers. Datadog adds two layers, or one for OS-only runtimes, so the function must have room for them after its existing layers.
 - **Supported runtimes**:
 
   | Runtime | Versions |
@@ -83,7 +111,7 @@ For all workloads, confirm the following:
   | Ruby | 3.2, 3.3, 3.4, 4.0 |
   | Java | 8 (`java8` and `java8.al2`), 11, 17, 21, 25 |
   | .NET | 6, 8, 10 |
-  | OS-only (`provided.al2`, `provided.al2023`) | Datadog adds the extension layer only, with no tracing layer |
+  | OS-only | `provided.al2` and `provided.al2023` (extension layer only, no tracing layer) |
 
 Datadog marks any function that doesn't meet these conditions as ineligible in the rule preview, so you can see what is excluded before you apply a rule.
 
@@ -91,7 +119,7 @@ Datadog marks any function that doesn't meet these conditions as ineligible in t
 
 {{% aws-agent-installation %}}
 
-The following sections list the permissions for each workload.
+The following sections list the permissions that all workloads share, followed by the permissions specific to each workload.
 
 ### Change notification permissions
 
@@ -172,9 +200,9 @@ Coverage works in both directions. When a resource stops matching the rule, Data
 
 ## What Datadog changes on a Lambda function
 
-Your existing layers, environment variables, and handler are preserved. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
+Datadog preserves your existing layers and environment variables. For Node.js and Python functions, Datadog redirects the handler to the Datadog handler and keeps your original handler in an environment variable. Datadog records exactly what it changed, so uninstalling restores your original configuration. For the specific layers, environment variables, and handler changes Datadog makes, see [What Datadog changes on a function][17] in the technical reference.
 
-**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so there is no Datadog credential stored in your account for Lambda instrumentation. Datadog sets up that authorization for you; there is nothing to configure.
+**No Datadog API key is written into your function.** The extension authenticates with the function's own execution role through [Workload Identity Federation][16], so no Datadog credential is stored in your account for Lambda instrumentation. Datadog sets up this authentication for you, so there is nothing to configure.
 
 To tune what the extension collects, set the standard Datadog environment variables on the function. For the full list, see [Configure Serverless Monitoring for AWS Lambda][14]. For what instrumentation collects and the Lambda monitoring features it enables, see [Serverless Monitoring for AWS Lambda][13].
 
@@ -182,7 +210,7 @@ To tune what the extension collects, set the standard Datadog environment variab
 
 You can start instrumentation from two entry points, depending on how much control you want over which resources are instrumented:
 
-- **AWS integration setup (instrument all eligible resources)**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], shown alongside log and resource collection, then select the workloads you want. Datadog instruments all eligible resources for those workloads, and keeps instrumenting eligible resources as they appear.
+- **AWS integration setup (instrument all eligible resources)**: When you [set up the AWS integration][5], enable the instrumentation toggle on the [AWS integration page][7], next to log and resource collection. Then select the workloads you want. Datadog instruments all eligible resources for those workloads and keeps instrumenting eligible resources as they appear.
 - **Fleet Automation (instrument specific resources)**: Open the [AWS Install Agents page][8] at any time to select the specific resources you want.
 
 <!-- TODO(DOCS-14545): per AWS team, surfacing the install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
@@ -203,33 +231,6 @@ To install from the AWS Install Agents page:
 
 <!-- TODO(DOCS-14545): add resource-selection / Manage Agents page screenshot (AWS Install Agents page) — setup-toggle screenshot added. -->
 
-## Choose between the AWS integration and remote instrumentation
-
-Datadog offers two ways to add instrumentation to Lambda functions without redeploying them yourself:
-
-- **Instrumentation through the AWS integration**, covered by this guide, is managed entirely from Datadog. Datadog updates your functions with the IAM role created by the CloudFormation stack, and deploys no compute into your account.
-- **[Remote instrumentation][9]** deploys a Datadog instrumenter function, `datadog-remote-instrumenter`, into your own account. That function applies the instrumentation and keeps it in place.
-
-Both add the same Datadog Lambda extension and tracing layers, and both restore instrumentation that is changed outside of Datadog. They differ in where the work runs, how functions are selected, and what you install.
-
-| Aspect | Instrumentation through the AWS integration | Remote instrumentation |
-|---|---|---|
-| Workloads | Amazon EC2 instances and AWS Lambda functions | AWS Lambda functions |
-| What runs in your account | No Datadog compute. Datadog calls the AWS APIs with the IAM role created by the CloudFormation stack | The instrumenter Lambda function |
-| Scope of setup | One CloudFormation stack per AWS account | One CloudFormation stack per account and region |
-| Selecting functions | You write a query on function attributes, select specific functions, or add all eligible functions. Datadog shows the matched set before you save | You write targeting rules on function names and tags, with logical operators |
-| Functions that match later | Instrumented automatically, whether they were created after you saved the rule or started matching it after a tag change | Instrumented automatically when they match your targeting rules |
-| Layer versions | Datadog selects and updates them | You set them, and they stay fixed until you change them |
-| How instrumented functions authenticate | [Workload Identity Federation][16], with no Datadog API key on the function | A Datadog API key with Remote Configuration enabled |
-| Datadog permissions | Hosts Read and Agent Install | Serverless AWS Instrumentation Read and Write |
-| Removing instrumentation | Remove from Datadog | Delete the CloudFormation stack in that region |
-
-Both products deploy a CloudFormation stack in your account. The stack for remote instrumentation also creates a CloudTrail and supporting resources. For what the stack in this guide creates, including the EventBridge resources that send change events to Datadog, see [How Datadog instrumentation through the AWS integration works][6].
-
-Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place.
-
-Use remote instrumentation when you want to target functions with rules on names and tags, or when you want to control the layer versions applied to your functions.
-
 ## Verify instrumentation
 
 After instrumentation completes:
@@ -249,13 +250,13 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. Manage Agent configuration and version upgrades through [Fleet Automation][4].
+The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, Datadog updates layer versions automatically.
 
 ## Remove Datadog instrumentation
 
 To remove instrumentation, remove resources from a rule, edit the rule's query, or delete the rule. Deleting a rule removes instrumentation from everything the rule covered.
 
-- **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for that instance.
+- **EC2**: Datadog removes the Datadog Agent and any IAM role or instance profile it created for each instance.
 - **Lambda**: Datadog removes the layers it added and restores the environment variables and handler the function had beforehand. Layers and environment variables you added yourself are left in place.
 
 ## Troubleshooting
@@ -270,17 +271,17 @@ If instrumentation can't complete because of missing permissions, Datadog shows 
 
 ### A Lambda function is skipped as already instrumented
 
-Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. This prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it. Datadog then instruments the function automatically.
+Datadog skips any function that carries Datadog layers, a Datadog handler, or Datadog environment variables that Datadog did not apply. Skipping these functions prevents layer and configuration conflicts. To manage the function from the AWS integration instead, remove your existing Datadog instrumentation from it. Datadog then instruments the function automatically.
 
 Functions managed by [remote instrumentation][9] are also skipped, and Datadog tells you which of the two applies. A function can be managed by only one Datadog instrumentation product.
 
 ### A Lambda function exceeds the layer limit
 
-AWS limits a function to five layers, and Datadog adds up to two. When a function already carries enough layers that instrumentation would exceed the limit, Datadog reports it and stops rather than retrying. Remove a layer from the function to make room. Datadog then instruments the function automatically.
+AWS limits a function to five layers, and Datadog adds two layers, or one for OS-only runtimes. When a function already carries enough layers that instrumentation would exceed the limit, Datadog reports it and stops rather than retrying. Remove a layer from the function to make room. Datadog then instruments the function automatically.
 
 ### A Lambda function uses a non-Datadog execution wrapper
 
-Java and .NET instrumentation sets `AWS_LAMBDA_EXEC_WRAPPER`. When a function already sets that variable to something other than the Datadog wrapper, Datadog skips the function rather than overwrite your wrapper.
+Java and .NET instrumentation sets `AWS_LAMBDA_EXEC_WRAPPER`. When a function already sets that variable to something other than the Datadog wrapper, Datadog skips the function rather than overwrite your wrapper. To instrument the function through the AWS integration, remove the custom wrapper from the function. If the function needs its own wrapper, instrument it yourself instead; see [Instrumenting AWS Lambda][18].
 
 ### A Lambda function appears as ineligible
 
@@ -307,3 +308,4 @@ Datadog marks a function ineligible when it doesn't meet the [Lambda prerequisit
 [15]: https://docs.datadoghq.com/serverless/aws_lambda/troubleshooting/
 [16]: https://docs.datadoghq.com/account_management/workload_identity_federation/
 [17]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/#what-datadog-changes-on-a-function
+[18]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
