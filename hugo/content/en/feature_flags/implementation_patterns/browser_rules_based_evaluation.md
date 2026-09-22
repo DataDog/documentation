@@ -110,11 +110,15 @@ Use [flat context attributes][5] and supply the attributes needed for targeting 
 The provider does not poll for flag changes. Choose when the application refreshes configuration, then replace it before subsequent evaluations:
 
 {{< code-block lang="javascript" >}}
-const nextConfiguration = await loadRulesConfiguration();
-provider.setConfiguration(nextConfiguration);
+try {
+  const nextConfiguration = await loadRulesConfiguration();
+  provider.setConfiguration(nextConfiguration);
+} catch (error) {
+  console.warn('Could not refresh flag configuration; keeping the previous configuration.', error);
+}
 {{< /code-block >}}
 
-In this example, a fetch or parsing failure prevents replacement, so the previous configuration remains installed. Handle the error and retry according to the application's freshness requirements. Changes made in Datadog do not reach this provider until the application supplies updated configuration.
+If fetching or parsing fails, the provider continues using the previous configuration. The example logs the error; add retries according to your application's freshness requirements. Changes made in Datadog do not reach this provider until the application supplies updated configuration.
 
 ## Optional: supply portable configuration
 
