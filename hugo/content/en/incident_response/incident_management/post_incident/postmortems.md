@@ -45,11 +45,6 @@ To generate a postmortem:
 1. Select a postmortem template.
 1. Click **Generate Postmortem**. Datadog creates the postmortem in the destination configured in the template and links it to the incident.
 
-After generating a postmortem:
-
-- **Datadog Notebooks**: The postmortem embeds directly in the **Post-Incident** tab.
-- **Confluence or Google Drive**: A link appears in the **Post-Incident** tab. Click the link to open the document in the configured destination.
-
 ### Generate a postmortem with Workflow Automation
 
 You can also generate a postmortem from a [workflow][5] using the **Generate postmortem** action. The action takes an incident and a postmortem template, and attaches the resulting postmortem to that incident. Use this path to create postmortems as part of an automated post-incident process, such as after an incident moves to resolved.
@@ -60,9 +55,11 @@ For the full list of variables available to postmortem templates, see [Templates
 
 ## View and edit a postmortem
 
-Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident** tab. You can read and edit the postmortem without leaving the incident view. Changes made in the embedded view are reflected in the underlying notebook.
+View and edit your postmortem based on its destination:
 
-Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
+- **Datadog Notebooks**: Embedded in the **Post-Incident** tab. Read and edit without leaving Datadog. Multiple users can edit simultaneously with cursor markers. Add inline comments. Changes are reflected in the underlying notebook.
+- **Confluence**: Edit in Confluence (click the link in the **Post-Incident** tab to open your Confluence workspace).
+- **Google Drive**: Edit in Google Docs (click the link in the **Post-Incident** tab to open Google Docs).
 
 ## Postmortem status and owner
 
