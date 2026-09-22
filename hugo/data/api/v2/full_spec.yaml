@@ -120325,15 +120325,6 @@ components:
             Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
           example: false
           type: boolean
-        queried_tags_window_seconds:
-          description: Window in seconds for evaluating queried tags.
-          example: 3600
-          format: int64
-          type: integer
-        related_asset_tags:
-          description: When true, tags from related assets are included.
-          example: false
-          type: boolean
       type: object
     TagIndexingRuleExemptionAttributes:
       description: Attributes of a tag indexing rule exemption.
