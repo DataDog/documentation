@@ -2496,7 +2496,7 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 ## Watchdog
 
-Tools for investigating [Watchdog][79] anomalies, explaining metric changes, checking deployment health and external provider outages, and forecasting timeseries.
+Tools for investigating [Watchdog][79] anomalies, explaining metric changes, and checking external provider outages.
 
 <div class="alert alert-info">The tools listed in this section are in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
 
@@ -2532,14 +2532,6 @@ Identifies tag dimensions associated with a spike, drop, or other change in a me
 - Which tags explain the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago?
 - Find the hosts or regions contributing to this metric change over the last hour.
 
-### `get_faulty_change_status`
-*Toolset: **watchdog***\
-*Permissions Required: `APM Read`*\
-Checks whether a deployed service version is associated with a performance degradation. Requires the service, environment, and version, and returns analysis status and impacted resources.
-
-- Check whether version `1.2.3` of the checkout service caused a degradation in production.
-- Which endpoints were affected by version `2.0.0` of the payments service in production?
-
 ### `get_external_provider_status`
 *Toolset: **watchdog***\
 *Permissions Required: `Built-in Features`*\
@@ -2547,30 +2539,6 @@ Retrieves external provider outages, including their status and impacted regions
 
 - Are any external provider outages affecting the checkout service?
 - Show AWS outages from the last 24 hours, including resolved outages.
-
-### `find_new_jumps`
-*Toolset: **watchdog***\
-*Permissions Required: `APM Read`*\
-Detects sudden changes in an APM timeseries for latency, error rate, or throughput. Provide a signal query and analysis window. Latency and error-rate analysis also require a request-count query.
-
-- Find sudden latency changes for the checkout service over the last four hours.
-- Check for sudden drops in throughput for the payments service over the last six hours.
-
-### `update_jump_state`
-*Toolset: **watchdog***\
-*Permissions Required: `APM Read`*\
-Reanalyzes an ongoing jump returned by `find_new_jumps` over a new time window to determine whether it is ongoing, resolved, expired, or invalidated. Reuse the returned jump state and original signal queries. This tool computes an updated result without modifying stored data.
-
-- Recheck the ongoing latency jump from the previous analysis using the latest data.
-- Has the throughput drop returned by `find_new_jumps` resolved?
-
-### `forecast_timeseries`
-*Toolset: **watchdog***\
-*Permissions Required: No specific permissions required.*\
-Forecasts future values from supplied historical timestamps and values, with optional confidence bounds. Provide at least 64 historical points per series. To forecast a Datadog metric, retrieve its history with a metrics query tool first.
-
-- Forecast the next 24 hourly values from these historical timestamps and values.
-- Use this timeseries to forecast the next 12 values with 95% confidence bounds.
 
 ## Widgets
 
