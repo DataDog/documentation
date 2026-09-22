@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ko/llm_observability/instrumentation/agentic/
-title: Agentic Instrumentation
+title: 에이전틱 계측
 ---
 ## 가이드라인 {#guidelines}
 
@@ -69,6 +69,94 @@ DD_SITE=<provided-dd-site>
 | Java | [Java 애플리케이션 에이전틱 계측](/llm_observability/instrument/agentic/java.md) |
 | OpenTelemetry | [OpenTelemetry 계측](/llm_observability/instrument/otel_instrumentation.md) |
 
+{{< agent-only >}}
+## 검사 추천을 위한 에이전트 컨텍스트 공유 {#share-agent-context-for-check-recommendations}
+
+초기 Datadog 온보딩 프롬프트에 에이전트 컨텍스트 업로드 URL, 업로드 토큰 및 스키마 버전이 포함된 경우에만 이 단계를 완료하세요.
+
+계측 후:
+
+1. 에이전트의 목적, 도구, 명시적 행동 규칙 및 핸드오프 조건을 이해하는 데 필요한 리포지토리 파일만 검사합니다.
+2. 인용된 프롬프트, 지침, 정책 또는 테스트에 의해 직접 지원되는 기대치만 포함합니다. 기대치당 하나의 원자적 행동을 기록하고, 에이전트 입력 또는 출력, 트레이스 컨텍스트, 도구 호출, 도구 결과 또는 해당 순서에서 관찰 가능한 측면으로 표현하며, 모호하거나 상충되는 규칙은 추측하기보다는 생략하세요.
+3. 온보딩 프롬프트의 스키마 버전과 이 정확한 형태를 사용하여 제한된 JSON 요약을 작성합니다.
+
+   ```json
+   {
+     "schema_version": "<schema-version-from-the-onboarding-prompt>",
+     "context": {
+       "agent_summary": "A short description of the agent",
+       "capabilities": [
+         {
+           "name": "...",
+           "description": "...",
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "tools": [
+         {
+           "name": "...",
+           "purpose": "...",
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "behavioral_expectations": [
+         {
+           "id": "expectation-1",
+           "behavior": "...",
+           "applicability": "...",
+           "failure": "...",
+           "observable_signals": ["agent_input", "agent_output"],
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "handoff_conditions": [
+         {
+           "id": "handoff-1",
+           "condition": "...",
+           "destination": "...",
+           "observable_signals": ["agent_input", "agent_output"],
+           "source_reference_ids": ["source-1"]
+         }
+       ],
+       "source_references": [
+         {
+           "id": "source-1",
+           "source_kind": "prompt",
+           "path": "relative/path",
+           "line_start": 1,
+           "line_end": 10,
+           "description": "Why this source supports the summary"
+         }
+       ]
+     }
+   }
+   ```
+
+   인코딩된 `context` 객체를 64 KiB 이하로 유지하고 다음 수집 제한 사항을 적용합니다.
+
+   - 최대 20개의 기능 및 30개의 도구.
+   - 1~30개의 행동 기대치.
+   - 최대 20개의 핸드오프 조건.
+   - 1~60개의 소스 참조.
+
+   각 기능, 도구, 행동 기대치 및 핸드오프 조건에 대해 1~10개의 고유한 소스 참조 ID를 사용하세요. 각 행동 기대치와 핸드오프 조건은 최소 하나의 `prompt`, `instruction`, `policy` 또는 `test` 소스를 인용해야 하며 1~6개의 고유한 관찰 가능한 신호를 포함해야 합니다.
+
+   `agent_summary`를 1~1,000자 사이로 유지합니다. 이름과 핸드오프 대상을 1~120자 사이로 유지합니다. 설명, 목적, 행동, 적용 가능성 진술, 실패, 핸드오프 조건 및 소스 경로를 1~500자 사이로 유지합니다. 소스 참조 설명을 1~300자 사이로 유지합니다.
+
+   모든 소스 참조, 행동 기대치 및 핸드오프 조건에 문자, 숫자, 하이픈 또는 밑줄만 포함하여 1~64자 사이의 ID를 부여합니다. 소스 참조 ID는 `source_references` 내에서 고유해야 합니다. 행동 기대치 및 핸드오프 조건 ID는 두 컬렉션 모두에서 고유해야 합니다. ID는 이 업로드 내에서 로컬로 적용되며 각 권장 검사가 증거를 인용할 수 있도록 합니다.
+
+   `source_kind`는 `prompt`, `instruction`, `policy`, `test`, `tool_definition` 또는 `implementation`에서만 사용합니다. `observable_signals`는 `agent_input`, `agent_output`, `trace_context`, `tool_call`, `tool_result` 또는 `tool_order`에서만 사용합니다. `line_end`를 포함하는 경우 긍정적인 `line_start`도 포함하고 `line_end`를 `line_start`보다 크거나 같게 만드세요.
+
+4. 온보딩 프롬프트의 업로드 URL로 JSON을 한 번 보냅니다. `POST`를 사용하고 `Content-Type: application/json`을 설정하며 업로드 토큰은 `Authorization: Bearer <upload-token>` 헤더로만 전달합니다.
+
+다음 보안 요구 사항을 따르세요.
+
+- 업로드 토큰을 일회성 시크릿으로 취급합니다. 소스 파일, 구성, 셸 기록, 출력 또는 로그에 기록하지 마세요.
+- 구조화된 요약만 업로드합니다. 원시 소스 코드, 전체 프롬프트, 시크릿, 자격 증명, 환경 변수, 고객 데이터, 트레이스 콘텐츠 또는 임의의 메타데이터를 업로드하지 마세요.
+- 정규화된 리포지토리 상대 POSIX 소스 경로와 가장 작은 유용한 줄 범위를 사용합니다. 절대 경로, 백슬래시, 콜론, 정규화되지 않은 구분 기호, `.` 또는 `..` 경로 세그먼트를 사용하지 마세요. 소스 참조는 증거를 식별하며, 그 내용을 복사해서는 안 됩니다.
+- 업로드에 실패하면 계측을 계속하고 Datadog이 선택적 컨텍스트를 수신하지 못했음을 사용자에게 알립니다. 더 광범위한 데이터로 재시도하지 마세요.
+
+{{< /agent-only >}}
 ## 프롬프트 계측 및 Prompt Management 제공 {#instrument-prompts-and-offer-prompt-management}
 
 Prompt Tracking은 기본 Agent Observability 계측에 포함됩니다. 선택한 각 LLM 호출에 대한 프롬프트 구성 경계를 식별하고 프롬프트 템플릿을 동적 변수와 별도로 보존하세요.
