@@ -408,7 +408,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 ### Reduce network usage with partial view updates
 
 {% alert level="warning" %}
-This feature is in early beta and not part of the stable public API. To use it, contact [Datadog support](https://docs.datadoghq.com/help/) first.
+This feature is in beta, and can change in future SDK releases.
 {% /alert %}
 
 By default, the RUM Android SDK resends a complete view event every time a view's data changes. To send incremental view update events instead of a full view event on every intermediate update, use the internal `_RumInternalProxy.setRumViewEventWriteConfig()` method with `RumViewEventWriteConfig.FullViewOnlyAtStart`:
