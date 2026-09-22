@@ -405,6 +405,43 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `collectAccessibility`
 : Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`.
 
+### Reduce network usage with partial view updates
+
+{% alert level="warning" %}
+This feature is in early beta and not part of the stable public API. To use it, contact [Datadog support](https://docs.datadoghq.com/help/) first.
+{% /alert %}
+
+By default, the RUM Android SDK resends a complete view event every time a view's data changes. To send incremental view update events instead of a full view event on every intermediate update, use the internal `_RumInternalProxy.setRumViewEventWriteConfig()` method with `RumViewEventWriteConfig.FullViewOnlyAtStart`:
+
+{% tabs %}
+{% tab label="Kotlin" %}
+```kotlin
+var rumConfigurationBuilder = RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .useViewTrackingStrategy(strategy)
+rumConfigurationBuilder = _RumInternalProxy.setRumViewEventWriteConfig(
+    rumConfigurationBuilder,
+    RumViewEventWriteConfig.FullViewOnlyAtStart
+)
+val rumConfiguration = rumConfigurationBuilder.build()
+```
+{% /tab %}
+{% tab label="Java" %}
+```java
+RumConfiguration.Builder rumConfigurationBuilder = new RumConfiguration.Builder(applicationId)
+    .trackUserInteractions()
+    .useViewTrackingStrategy(strategy);
+rumConfigurationBuilder = _RumInternalProxy.Companion.setRumViewEventWriteConfig(
+    rumConfigurationBuilder,
+    RumViewEventWriteConfig.FullViewOnlyAtStart
+);
+RumConfiguration rumConfiguration = rumConfigurationBuilder.build();
+```
+{% /tab %}
+{% /tabs %}
+
+A full view event is still sent periodically so the view state can be fully reconstructed even if some intermediate updates are lost in transit.
+
 ### Automatically track views
 
 To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
