@@ -177,7 +177,7 @@ const changelogRoot = document.querySelector('.api-changelog');
 if (changelogRoot) {
     const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
     const tagSelect = document.getElementById('api-changelog-tag-filter');
-    const tagSections = changelogRoot.querySelectorAll('.api-changelog-tag-section');
+    const dateSections = changelogRoot.querySelectorAll('.api-changelog-date-section');
     const shownCountEl = document.getElementById('api-changelog-shown-count');
     const changeLabelEl = document.getElementById('api-changelog-change-label');
     const tagCountEl = document.getElementById('api-changelog-tag-count');
@@ -190,28 +190,30 @@ if (changelogRoot) {
 
     function applyChangelogFilters() {
         let shownCount = 0;
-        let shownTagCount = 0;
+        const shownTags = new Set();
 
-        tagSections.forEach((section) => {
-            const tagMatches = activeTag === 'all' || section.dataset.tag === activeTag;
+        dateSections.forEach((section) => {
             let visibleInSection = 0;
 
             section.querySelectorAll('.api-changelog-entry').forEach((entry) => {
+                const tagMatches = activeTag === 'all' || entry.dataset.tag === activeTag;
                 const typeMatches = activeBucket === 'all' || entry.dataset.bucket === activeBucket;
                 const isVisible = tagMatches && typeMatches;
                 entry.classList.toggle('d-none', !isVisible);
-                if (isVisible) visibleInSection += 1;
+                if (isVisible) {
+                    visibleInSection += 1;
+                    shownTags.add(entry.dataset.tag);
+                }
             });
 
             section.classList.toggle('d-none', visibleInSection === 0);
-            if (visibleInSection > 0) shownTagCount += 1;
             shownCount += visibleInSection;
         });
 
         if (shownCountEl) shownCountEl.textContent = shownCount;
         if (changeLabelEl) changeLabelEl.textContent = shownCount === 1 ? 'change' : 'changes';
-        if (tagCountEl) tagCountEl.textContent = shownTagCount;
-        if (tagLabelEl) tagLabelEl.textContent = shownTagCount === 1 ? 'API area' : 'API areas';
+        if (tagCountEl) tagCountEl.textContent = shownTags.size;
+        if (tagLabelEl) tagLabelEl.textContent = shownTags.size === 1 ? 'API area' : 'API areas';
         if (emptyState) emptyState.classList.toggle('d-none', shownCount !== 0);
 
         const isFiltered = activeBucket !== 'all' || activeTag !== 'all';
