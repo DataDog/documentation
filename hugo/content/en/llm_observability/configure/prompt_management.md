@@ -28,7 +28,6 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 ## Prerequisites
 
 - For the Python setup below: Python 3.9 or later and `ddtrace>=4.13.0`.
-- For Go and JavaScript, install the [Go tracing SDK][10] or [JavaScript tracing SDK][11]. Message placeholders require an SDK release that supports them; the base Prompt Management requirements alone are not sufficient.
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
 - To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
@@ -296,7 +295,7 @@ Message placeholders insert conversation history or tool interactions into a sav
 
 The prompt version stores the placeholder's name and position, not the runtime list. This lets you version the conversation structure without hardcoding it in your application.
 
-Use an SDK release that supports message placeholders.
+**Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
 
 ### Define the placeholder
 
@@ -397,6 +396,27 @@ The result contains four messages, with no placeholder item:
 Pass the formatted messages to your model provider. The SDK does not replace text variables inside the inserted history.
 
 Use the same [prompt tracking](#track-prompt-usage) workflow as for other managed prompts. Prompt metadata preserves the placeholder definition rather than its runtime values; expanded messages follow the existing input-capture and privacy settings.
+
+### Include tool interactions
+
+The same placeholder can include a tool call and its response. Use your model provider's message format, and match the response's tool-call ID to the call. For example, with an OpenAI-compatible format:
+
+```python
+variables["history"] = [
+    {
+        "role": "assistant",
+        "tool_calls": [{
+            "id": "call_1",
+            "type": "function",
+            "function": {"name": "get_plan", "arguments": "{}"},
+        }],
+    },
+    {"role": "tool", "tool_call_id": "call_1", "content": "enterprise"},
+]
+messages = prompt.format(**variables)
+```
+
+The SDK inserts these messages unchanged. Your application executes the tool and supplies its response.
 
 ### Supported values
 
