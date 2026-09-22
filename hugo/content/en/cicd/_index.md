@@ -13,11 +13,11 @@ CI/CD Optimization combines Datadog's CI Visibility and Test Optimization experi
 
 This section provides an overview of CI/CD Optimization's key features, which retain essential functionality of CI Visibility and Test Optimization.
 
-### CI/CD Health
+### CI/CD Overview
 
-Explore key CI reliability and performance metrics in the [CI/CD {{< ui >}}Health{{< /ui >}} page][8]. The dashboard includes widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
+Explore key CI reliability and performance metrics in the [CI/CD {{< ui >}}Overview{{< /ui >}} page][8]. The dashboard includes widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
 
-{{< img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" style="width:100%;" >}}
+{{< img src="cicd_optimization/cicd_overview.png" alt="CI/CD Overview dashboard" style="width:100%;" >}}
 
 ### Unified explorer
 
@@ -26,17 +26,17 @@ Browse pipeline executions and test runs from a single view in the [CI/CD {{< ui
 - **Pipelines**: Pipeline, Stage, Job, Step, or Command
 - **Tests**: Session, Module, Suite, or Test
 
-{{< img src="cicd_optimization/explorer.png" alt="Unified explorer with toggle for pipeline and test data" style="width:100%;" >}}
+{{< img src="cicd_optimization/explorer-2.png" alt="Unified explorer with toggle for pipeline and test data" style="width:100%;" >}}
 
 ### Flaky Management
 
 Get a high-level view of flakiness across your repositories in the {{< ui >}}Flaky Management Overview{{< /ui >}}. This page provides trend charts, prioritization suggestions, and tooling to validate your setup.
 
-{{< img src="cicd_optimization/flaky_overview.png" alt="Flaky Management overview with trend charts and prioritization suggestions" style="width:100%;" >}}
+{{< img src="cicd_optimization/flaky_overview-2.png" alt="Flaky Management overview with trend charts and prioritization suggestions" style="width:100%;" >}}
 
 Track and remediate flaky tests directly from the {{< ui >}}Flaky Management Explorer{{< /ui >}}. You can view flaky test trends, identify problematic tests, and take action to improve test reliability. See [Flaky Tests Management][5] for more information.
 
-{{< img src="cicd_optimization/flaky_management.png" alt="Flaky Management interface showing flaky test trends and actions" style="width:100%;" >}}
+{{< img src="cicd_optimization/flaky_management-2.png" alt="Flaky Management interface showing flaky test trends and actions" style="width:100%;" >}}
 
 ### Continuous setup flow
 
