@@ -56,6 +56,12 @@ Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident
 
 Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
 
+### Automatic date chips
+
+When you edit a postmortem generated as a Datadog Notebook, Datadog automatically converts datetime text into [date chips][5]. Date chips display the timestamp in each viewer's local time zone.
+
+**Note**: Datetime text that's part of a link, such as a link to an event in the incident timeline, isn't converted to a date chip. A date chip can't also be a link.
+
 ## Postmortem status and owner
 
 Postmortems have two fields to help track completion and drive accountability:
@@ -97,3 +103,4 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [2]: /integrations/confluence/
 [3]: /integrations/google_drive/
 [4]: /incident_response/incident_management/setup_and_configuration/templates
+[5]: /notebooks/#smart-chips
