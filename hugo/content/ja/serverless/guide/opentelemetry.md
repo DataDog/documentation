@@ -3,18 +3,20 @@ further_reading:
 - link: /opentelemetry/
   tag: ドキュメント
   text: Datadog の OpenTelemetry
-title: サーバーレスと OpenTelemetry
+- link: https://www.datadoghq.com/architecture/enhancing-observability-in-aws-lambda-with-otel/
+  tag: Architecture Center
+  text: DatadogとOpenTelemetryを使用したAWS Lambdaにおけるアプリケーションの可観測性の向上
+title: ServerlessとOpenTelemetry
 ---
+[OpenTelemetry][1] は、テレメトリーデータの収集とルーティングのための標準化されたプロトコルとツールを IT チームに提供するオープンソースの可観測性フレームワークです。
 
-[OpenTelemetry][1] はオープンソースの観測可能性フレームワークで、テレメトリーデータの収集とルーティングのための標準化されたプロトコルとツールを IT チームに提供します。
+[OpenTelemetry API][2]を使用してコードをカスタムインスツルメンテーションしている場合、またはベンダーに依存しないカスタムインスツルメンテーションコードを作成したい場合は、Datadog形式のスパンとトレースを生成するように設定できます。その後、使用している言語用のDatadog SDKでこれらのスパンとトレースを処理し、データをDatadogに送信できます。
 
-コードが [OpenTelemetry API][2] でカスタムインスツルメントされている場合や、ベンダーに依存しないカスタムインスツルメンテーションコードを記述したい場合は、Datadog スタイルのスパンとトレースを生成するように構成することができます。そして、これらのスパンやトレースをお使いの言語の Datadog トレーシング ライブラリで処理し、データを Datadog に送信することができます。
-
-### AWS Lambda
+### AWS Lambda {#aws-lambda}
 
 [AWS Lambda と OpenTelemetry][4] を参照してください。
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -476,6 +476,20 @@ configs:
             - cluster:kafka-demo-chaos
             - kafka_cluster_id:Y2hhb3NDbHVzdGVyMDAwMA
 
+  kafka_broker_config:
+    content: |
+      init_config:
+        is_jmx: true
+        collect_default_metrics: true
+
+      instances:
+        - host: kafka
+          port: 9999
+          tags:
+            - env:demo
+            - cluster:kafka-demo
+            - kafka_cluster_id:Mka3OEVBNTcwNTJENDM2Qg
+
   order_proto:
     content: |
       syntax = "proto3";

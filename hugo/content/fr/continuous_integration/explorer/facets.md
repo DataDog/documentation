@@ -1,154 +1,153 @@
 ---
-description: Découvrez comment utiliser les facettes par défaut pour rechercher vos
-  exécutions de pipeline dans le CI Visibility Explorer.
+description: Découvrez les facettes par défaut que vous pouvez utiliser pour rechercher
+  vos exécutions de pipeline dans CI Visibility Explorer.
 further_reading:
 - link: continuous_integration/search/
   tag: Documentation
-  text: Découvrir comment rechercher vos pipelines
+  text: Découvrez comment effectuer une recherche sur vos pipelines.
 - link: continuous_integration/explorer/
   tag: Documentation
-  text: En savoir plus sur le CI Visibility Explorer
-title: Facettes pour les exécutions de pipeline
+  text: Découvrez CI Visibility Explorer.
+title: Facettes d'exécution de pipeline
 ---
+## Présentation {#overview}
 
-## Présentation
+Les facettes sont des tags et des attributs définis par l'utilisateur provenant de vos pipelines. Elles sont utiles pour l'analyse de données [qualitatives](#qualitative-facets) et [quantitatives](#quantitative-measures). Les facettes vous permettent de manipuler vos pipelines dans vos [monitors de pipeline CI][1], ainsi que dans les requêtes de recherche qui apparaissent sur les [tableaux de bord][2] et dans les [notebooks][3].
 
-Les facettes correspondent à des tags définis par l'utilisateur et à des attributs issus de vos pipelines. Elles servent à effectuer des analyses de données à la fois [qualitatives](#facettes-qualitatives) et [quantitatives](#mesures-quantitatives). Elles vous permettent de manipuler vos pipelines dans vos [monitors de pipeline de CI][1] ainsi que dans les requêtes de recherche qui figurent dans les [dashboards][2] et les [notebooks][3].
+[La création de facettes](#creating-facets) n'est **pas requise** pour [rechercher des exécutions de pipeline][5]. Les fonctionnalités de saisie semi-automatique utilisent les facettes existantes, mais toute entrée correspondant aux exécutions de pipeline entrantes s'applique également.
 
-Il n'est **pas nécessaire** de [créer des facettes] (#creer-des-facettes) pour [rechercher des exécutions de pipeline][5]. La fonctionnalité de remplissage automatique utilise les facettes existantes, mais toute entrée correspondant à des exécutions de pipeline entrantes s'applique également.
+## Facettes courantes {#common-facets}
 
-## Facettes communes
+Accédez à [**Software Delivery** > **CI Visibility** > **Executions**][7] pour accéder à la liste des facettes à gauche de la liste des exécutions de pipeline.
 
-Naviguez jusqu'à [**Software Delivery** > **CI Visibility** > **Executions**][7] pour accéder à la liste des facettes située à gauche de la liste des exécutions de pipeline.
+{{< img src="/continuous_integration/facets-pipelines.png" text="Facets list on the Pipeline Executions page of the CI Visibility Explorer" style="width:100%" >}}
 
-{{< img src="/continuous_integration/facets-pipelines.png" text="Liste des facettes sur la page Pipeline Executions du CI Visibility Explorer" style="width:100%" >}}
-
-Le [CI Visibility Explorer][4] inclut les facettes par défaut suivantes :
+[CI Vsibility Explorer][4] inclut les facettes prêtes à l'emploi suivantes :
 
 | Facette | Description |
 |---|---|
-| CI Provider | Le nom du fournisseur de CI (GitHub, GitLab, etc.). |
-| Pipeline Name | Le nom du pipeline de CI. |
-| Node Name | Le nom du nœud de CI qui a exécuté le pipeline, le stage ou le job. |
-| Node Labels | Les étiquettes associées au nœud de CI qui a exécuté le pipeline, le stage ou le job. |
-| Pipeline URL | L'URL du fournisseur pour une exécution de pipeline. |
-| Pipeline ID | L'ID du pipeline. |
-| Pipeline Number | Le numéro d'exécution d'un pipeline de CI, qui est défini par le fournisseur de CI. Cette valeur augmente en cas de nouvelle tentative partielle d'exécution d'un pipeline. |
-| Job URL | L'URL du fournisseur pour une exécution de job. |
-| Stage Name | Le nom du stage de CI. |
-| Job Name | Le nom du job de CI. |
-| Kubernetes Namespace | L'espace de nommage dans lequel le pod Kubernetes s'exécute. |
-| Kubernetes pod Nom | Le nom du pod Kubernetes. |
-| Image Tag | Le tag d'image du conteneur Kubernetes. |
-| Container Name | Le tag de nom du conteneur Kubernetes. |
-| Image Name | Le tag de nom de l'image du conteneur Kubernetes. |
-| Container ID | L'ID du conteneur Kubernetes. |
-| Kubernetes Container Name | Le nom du conteneur Kubernetes. |
-| Kubernetes Deployment | Le déploiement Kubernetes auquel le pod appartient. |
-| Kubernetes Stateful Set | Le StatefulSet Kubernet auquel le pod appartient. |
-| Repository URL | L'URL du référentiel Git. |
-| Repository ID | L'ID unique qui identifie un référentiel Git. |
-| Commit SHA | Le SHA du commit Git. |
-| Branch | La branche Git. |
-| Tag | Le tag Git. |
-| Author Email | L'adresse e-mail de l'auteur Git. |
-| Committer Email | L'adresse e-mail de l'auteur du commit Git. |
-| Committer Date | La date de l'auteur du commit Git. |
-| Author Date | La date de l'auteur Git. |
-| Env | L'environnement dans lequel le pipeline de CI s'exécute. |
-| Resource | La ressource utilisée par le pipeline de CI. |
-| Operation Name | L'opération réalisée au sein du pipeline de CI. |
-| Error Type | Le type d'erreur rencontrée lors de l'exécution du CI. |
-| Type | Le type de l'exécution ou de l'entité de CI. |
-| Complete Trace | La trace complète de l'exécution de pipeline de CI. |
-| Duration | La durée de l'exécution, en secondes. |
-| Version | La version du pipeline de CI ou de l'outil utilisé. |
-| Is Default Branch | Indique si l'exécution s'applique ou non à la branche par défaut du référentiel Git. |
+| Fournisseur CI | Nom du fournisseur CI (GitHub, GitLab, et plus). |
+| Nom du pipeline | Nom du pipeline CI. |
+| Nom du nœud | Nom du nœud CI qui a exécuté le pipeline, l'étape ou le job. |
+| Libellés du nœud | Libellés associés au nœud CI qui a exécuté le pipeline, l'étape ou le job. |
+| URL du pipeline | URL du fournisseur pour une exécution de pipeline. |
+| ID du pipeline | ID du pipeline. |
+| Numéro du pipeline | Numéro d'exécution d'un pipeline CI, fourni par le fournisseur CI. Ceci augmente lors d'une nouvelle tentative partielle d'un pipeline. |
+| URL du job | URL du fournisseur pour une exécution de job. |
+| Nom de l'étape | Nom de l'étape CI. |
+| Nom du job | Nom du job CI. |
+| Espace de noms Kubernetes | L'espace de noms dans lequel le pod Kubernetes est en cours d'exécution. |
+| Nom du pod Kubernetes | Nom du pod Kubernetes. |
+| Tag d'image | Tag d'image de conteneur Kubernetes. |
+| Nom du conteneur | Tag de nom de conteneur Kubernetes. |
+| Nom de l'image | Tag de nom d'image de conteneur Kubernetes. |
+| ID de conteneur | ID de conteneur Kubernetes. |
+| Nom du conteneur Kubernetes | Nom du conteneur Kubernetes. |
+| Déploiement Kubernetes | Le déploiement Kubernetes auquel appartient un pod. |
+| StatefulSet Kubernetes | Le StatefulSet Kubernetes auquel appartient un pod. |
+| URL du dépôt | URL du dépôt Git. |
+| ID du dépôt | ID qui identifie de manière unique un dépôt Git. |
+| SHA de commit | SHA de commit Git. |
+| Branche | Branche Git. |
+| Tag | Tag Git. |
+| E-mail de l'auteur | E-mail de l'auteur Git. |
+| E-mail du committer | E-mail du committer Git. |
+| Date du committer | Date du committer Git. |
+| Date de l'auteur | Date de l'auteur Git. |
+| Env | L'environnement dans lequel le pipeline CI est en cours d'exécution. |
+| Ressource | La ressource utilisée par le pipeline CI. |
+| Nom de l'opération | L'opération effectuée au sein du pipeline CI. |
+| Type d'erreur | Type d'erreur rencontrée lors de l'exécution du CI. |
+| Type | Type de l'exécution ou de l'entité CI. |
+| Trace complète | Trace complète de l'exécution du pipeline CI. |
+| Durée | La durée de l'exécution en secondes. |
+| Version | Version du pipeline CI ou de l'outil utilisé. |
+| Est la branche par défaut | Indique si l'exécution a été effectuée sur la branche par défaut du dépôt Git. |
 
-Vous pouvez utiliser des facettes dans le CI Visibility Explorer pour accomplir ce qui suit :
+Vous pouvez utiliser des facettes dans CI Visibility Explorer pour :
 
-- [Rechercher et filtrer des exécutions de pipeline][5]
-- Analyser des pipelines
-- Commencer à dépanner vos problèmes après l'exécution de vos pipelines
+- [Rechercher et filtrer les exécutions de pipeline][5]
+- Effectuer des analyses de pipeline
+- Commencer le dépannage une fois vos pipelines terminés
 
 
-### Facettes qualitatives
+### Facettes qualitatives {#qualitative-facets}
 
 Les facettes qualitatives vous permettent d'accomplir les tâches suivantes :
 
-- **Obtenir des insights relatives** sur les valeurs
-- **Compter des valeurs uniques**
-- **Filtrer** régulièrement vos exécutions de pipeline selon des valeurs données ; vous pouvez par exemple créer une facette sur le tag environment pour réduire vos recherches aux environnements de production, de développement et intermédiaires.<br>
+- **Obtenir des informations relatives** pour les valeurs.
+- **Compter les valeurs uniques**.
+- Filtrer**fréquemment** vos exécutions de pipeline par rapport à des valeurs particulières. Par exemple, créez une facette sur un tag d'environnement pour limiter le dépannage aux environnements de développement, de staging ou de production.<br>
 
-**Remarque :** bien que vous n'ayez pas besoin de créer des facettes pour appliquer un filtre sur des tags, vous pouvez accélérer la résolution des problèmes en définissant des facettes sur les tags que vous utilisez régulièrement.
+**Remarque&nbsp;:** Bien que les facettes ne soient pas nécessaires pour filtrer les tags, définir des facettes pour les tags que vous utilisez souvent lors de vos investigations peut vous aider à réduire votre temps de résolution.
 
-### Mesures quantitatives
+### Mesures quantitatives {#quantitative-measures}
 
-Utilisez des mesures quantitatives pour accomplir ce qui suit :
+Utilisez des mesures quantitatives lorsque vous devez :
 
-- **Agréger** des valeurs provenant de plusieurs exécutions de pipeline
-- **Appliquer un filtre** à vos exécutions de pipeline basé sur des plages de valeurs
-- **Trier** vos exécutions de pipeline en fonction de ces valeurs
+- **Agréger** des valeurs provenant de plusieurs exécutions de pipeline.
+- **Filtrer par plage** vos exécutions de pipeline.
+- **Trier** vos exécutions de pipeline par rapport à cette valeur.
 
-#### Types
+#### Types {#types}
 
-Les mesures disposent d'un nombre entier (long) ou d'une double valeur. Ces deux types de valeurs proposent des fonctionnalités équivalentes.
+Les mesures ont soit une valeur entière longue, soit une valeur double pour des capacités équivalentes.
 
-#### Unités
+#### Unités {#units}
 
-Les mesures ont une unité (de **temps** en secondes ou de **taille** en octets) afin de gérer les ordres de grandeur au moment de la requête et de l'affichage. L'unité est une propriété de la mesure, et non du champ.
+Les mesures prennent en charge des unités (**temps** en secondes ou **taille** en octets) pour la gestion des ordres de grandeur au moment de la requête et de l'affichage. L'unité est une propriété de la mesure elle-même, et non du champ.
 
-Prenons l'exemple d'une mesure `duration` en nanosecondes. Imaginons que les exécutions de pipeline du service `service:A` aient comme durée `duration:10000000`, soit `10 milliseconds`, et que les exécutions de pipeline du service `service:B` aient comme durée `duration:5000000`, soit `5 milliseconds`. Utilisez `duration:>2ms` pour interroger de manière cohérente les tags des exécutions de pipeline dans les deux services. Pour en savoir plus sur les requêtes de recherche, consultez la section [Syntaxe de recherche][6].
+Par exemple, considérez une `duration` mesure en nanosecondes. Supposons que les exécutions de pipeline de `service:A` aient `duration:10000000`, ce qui signifie `10 milliseconds`. Supposons que les exécutions de pipeline de `service:B` aient `duration:5000000`, ce qui signifie `5 milliseconds`. Utilisez `duration:>2ms` pour interroger systématiquement les tags d'exécution de pipeline des deux services à la fois. Pour plus d'informations sur les requêtes de recherche, consultez [Search Syntax][6].
 
-## Volet des facettes
+## Panneau de facettes {#facet-panel}
 
-La barre de recherche fournit un grand nombre de fonctionnalités interactives vous permettant de filtrer et regrouper vos données. Toutefois, dans de nombreuses situations, il est plus simple d'utiliser le volet des facettes pour parcourir vos données. Ouvrez une facette pour consulter une synthèse de son contenu en fonction du contexte de la requête actuellement appliquée.
+La barre de recherche offre l'ensemble d'interactions le plus complet pour filtrer et regrouper vos données. Cependant, dans de nombreux cas, le panneau des facettes est un moyen simple de naviguer dans vos données. Ouvrez une facette pour voir un résumé de son contenu pour la portée de la requête actuelle.
 
 La barre de recherche et l'URL s'adaptent automatiquement à vos sélections dans le volet des facettes.
 
-- L'interface des **facettes (qualitatives)** propose une top list des valeurs uniques et indique le nombre d'exécutions de pipeline correspondant à chacune de ces valeurs.
-- L'interface des **mesures (quantitatives)* comprend un curseur vous permettant de définir une valeur maximale ainsi qu'une valeur minimale. Utilisez le curseur, ou saisissez des valeurs numériques, pour restreindre la requête de recherche.
+- **Les facettes (qualitatives)** sont accompagnées d'une top list des valeurs uniques et d'un décompte des exécutions de pipeline correspondant à chacune d'elles.
+- **Les mesures (quantitatives)** sont accompagnées d'un curseur indiquant les valeurs minimale et maximale. Utilisez le curseur, ou saisissez des valeurs numériques, pour limiter la requête de recherche à différentes bornes.
 
 
-### Regrouper des facettes
+### Regroupement des facettes {#grouping-facets}
 
-Dans la liste des facettes, ces dernières sont regroupées selon différents thèmes pertinents. Les opérations d'attribution ou de réattribution d'une facette à un groupe affectent uniquement la liste des facettes et n'ont aucune incidence sur les fonctionnalités de recherche et d'analyse.
+Les facettes sont regroupées en thèmes significatifs dans la liste des facettes. L'attribution ou la réattribution d'un groupe pour une facette n'affecte que la liste des facettes et n'a aucun impact sur la recherche ou l'analyse.
 
-### Filtrer des facettes
+### Filtrage des facettes {#filtering-facets}
 
-Utilisez la zone de recherche du volet des facettes afin d'affiner la liste des facettes et d'accéder à celles dont vous avez besoin. La recherche de facette réduit le nombre de résultats affichés en se basant sur le nom d'affichage des facettes et sur le nom de leur champ.
+Utilisez la zone de recherche des facettes sur le panneau des facettes pour limiter toute la liste des facettes et naviguer vers la facette avec laquelle vous devez interagir. La recherche de facettes utilise le nom d'affichage de la facette et le nom du champ pour limiter les résultats.
 
-## Créer des facettes
+## Création de facettes {#creating-facets}
 
-Il n'est pas nécessaire de créer une facette sur un attribut ou un tag d'exécution de pipeline pour rechercher des exécutions de pipeline. Les facettes s'avèrent utiles lorsque vous souhaitez ajouter une description pertinente à un attribut d'exécution de pipeline spécifique, ou lorsque vous souhaitez que les valeurs de l'attribut apparaissent dans la liste des facettes.
+La création d'une facette sur un attribut ou un tag d'exécution de pipeline n'est pas une étape obligatoire pour rechercher des exécutions de pipeline. Les facettes sont utiles si vous souhaitez ajouter une description significative à un attribut d'exécution de pipeline spécifique, ou si vous voulez que les valeurs d'attribut apparaissent dans la liste des facettes.
 
-### Créer des facettes à partir du volet latéral des exécutions de pipeline
+### Création de facettes à partir des panneaux latéraux des exécutions de pipeline {#creating-facets-from-the-pipeline-executions-side-panels}
 
-Pour créer une facette, la méthode la plus simple consiste à l'ajouter depuis le volet latéral des exécutions de pipeline. Ainsi, la majorité des détails de la facette sont préremplis.
+Le moyen le plus simple de créer une facette consiste à l'ajouter depuis le panneau latéral des exécutions de pipeline afin que la plupart des détails de la facette soient pré-remplis.
 
-{{< img src="continuous_integration/create_facet.png" alt="Créer une facette à partir du volet latéral d'une exécution de pipeline de CI" style="width:100%;">}}
+{{< img src="continuous_integration/create_facet.png" alt="Créer une facette à partir du panneau latéral d'exécution de pipeline CI" style="width:100%;">}}
 
-1. Naviguez jusqu'à l'exécution de pipeline qui vous intéresse dans le [CI Visibility Explorer][4] et qui contient le champ à partir duquel vous souhaitez créer une facette.
-2. Ouvrez le volet latéral des exécutions de pipeline en sélectionnant l'exécution de pipeline dans la liste.
-3. Cliquez sur le champ de votre choix (dans l'onglet **Info** pour la span d'une exécution de pipeline) et créez une facette à partir des informations affichées :
+1. Accédez à une exécution de pipeline d'intérêt dans [CI Visibility Explorer][4] qui contient le champ sur lequel créer une facette.
+2. Ouvrez le panneau latéral des exécutions de pipeline en sélectionnant l'exécution de pipeline dans la liste.
+3. Cliquez sur le champ souhaité (dans l'onglet **Info** pour l'étendue d'une exécution de pipeline) et créez une facette à partir de là:
 
-   - Si la valeur du champ correspond à un nombre, vous pouvez créer une facette ou une mesure.
-   - Si la valeur du champ correspond à une chaîne, vous pouvez uniquement créer une facette.
+   - Si le champ a une valeur numérique, vous pouvez créer soit une facette, soit une mesure.
+   - Si le champ a une valeur de chaîne, seule la création de facette est disponible.
 
-### Créer des facettes à partir de la liste des facettes
+### Création de facettes à partir de la liste des facettes {#creating-facets-from-the-facet-list}
 
-Si vous ne trouvez pas d'exécution de pipeline contenant le champ souhaité, créez une facette directement à partir du volet des facettes en cliquant sur **+ Add**.
+S'il n'est pas possible de trouver une exécution de pipeline possédant le champ souhaité, créez une facette directement depuis le panneau des facettes en cliquant sur {{< ui >}}\+ Add{{< /ui >}}.
 
-{{< img src="continuous_integration/add_facet.png" alt="Ajouter une facette à partir du volet latéral des facettes" style="width:30%;">}}
+{{< img src="continuous_integration/add_facet.png" alt="Ajoutez une facette depuis le panneau latéral des facettes" style="width:30%;">}}
 
-Définissez le nom (à savoir la clé) du champ sous-jacent de votre facette.
+Définissez le nom (à savoir, la clé) du champ sous-jacent de votre facette.
 
-- Utilisez le nom de la clé du tag pour les tags d'infrastructure.
-- Utilisez le chemin d'attribut pour les attributs d'exécution de pipeline, en ajoutant le préfixe `@`.
+- Utilisez le nom de la clé de tag pour les tags d'infrastructure.
+- Utilisez le chemin d'attribut pour les attributs d'exécution de pipeline, avec le préfixe `@`.
 
-Grâce à la fonctionnalité de remplissage automatique, qui se base sur le contenu des exécutions de pipeline des vues actuelles, vous pouvez définir facilement un nom de champ adéquat. Toutefois, sachez que vous pouvez indiquer n'importe quelle valeur, surtout si aucune exécution de pipeline correspondante n'a été transmise à Datadog.
+La saisie semi-automatique basée sur le contenu des exécutions de pipeline des vues actuelles vous aide à définir le nom de champ approprié. Mais vous pouvez utiliser pratiquement n'importe quelle valeur ici, notamment dans le cas où vous n'avez pas encore reçu d'exécutions de pipeline correspondantes dans Datadog.
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

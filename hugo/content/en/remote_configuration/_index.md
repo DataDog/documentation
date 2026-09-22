@@ -138,6 +138,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Product                 | Setup instructions                                                                                             |
 |-------------------------|----------------------------------------------------------------------------------------------------------------|
 | Fleet Automation        | [Setup Fleet Automation][31]                                                                                   |
+| App and API Protection (AAP) | [App and API Protection setup][33]                                                                         |
 | APM                     | [Configuration at runtime](/tracing/guide/remote_config/)                                                      |
 | Dynamic Instrumentation | [Dynamic Instrumentation][11] |
 | Workload Protection     | [Workload Protection][3]                                                                                       |

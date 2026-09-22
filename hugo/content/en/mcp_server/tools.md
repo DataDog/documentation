@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -335,6 +338,14 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
 
+### `apm_get_service_health`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
+
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
+
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -437,23 +448,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -461,16 +474,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -479,9 +492,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -495,22 +508,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -531,18 +544,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
 
 ## Dashboards
 
@@ -1335,6 +1357,155 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
+
+## Metrics Governance
+
+<div class="alert alert-info">The <code>metrics-governance</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
+
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
 
 ## Networks
 
@@ -2664,6 +2835,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [74]: /sheets/
 [75]: /bits_ai/bits_chat/
 [76]: /bits_ai/bits_investigation/
+[77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 
