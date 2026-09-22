@@ -18,7 +18,7 @@ Fleet Automation supports a subset of `datadog.yaml` fields when you [configure 
 
 Expand a section below to see each supported field with its type, description, and valid values.
 
-{{< fa-config-fields >}}
+{{% fa-config-fields %}}
 
 ## Further reading
 

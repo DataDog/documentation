@@ -1,11 +1,12 @@
 {{- /*
-  Renders the supported Fleet Automation datadog.yaml configuration fields as
-  collapsible sections, each containing a table of fields. Sourced from the
-  config-validator schema vendored at _vendor/data/agent_config_schema.json
-  (exposed as .Site.Data.agent_config_schema). Top-level scalar and array fields
-  come first, then one section per nested-object field (apm_config, and so on),
-  using human-readable titles where mapped. Call with raw-HTML (angle-bracket)
-  shortcode delimiters.
+  Renders the supported Fleet Automation datadog.yaml configuration fields.
+  Each section has a Markdown h2 heading (so it appears in the table of contents),
+  with its table inside a collapsed <details> block to keep the page short.
+  Sourced from the config-validator schema vendored at
+  _vendor/data/agent_config_schema.json (exposed as .Site.Data.agent_config_schema).
+  Top-level scalar and array fields come first, then one section per nested-object
+  field (apm_config, and so on), using human-readable titles where mapped.
+  Call with Markdown-processing (percent-sign) shortcode delimiters.
 */ -}}
 {{- $data := .Site.Data.agent_config_schema -}}
 {{- $props := $data.properties -}}
@@ -43,36 +44,30 @@
 {{- end -}}
 {{- end -}}
 {{- end -}}
-{{- /* Collapsible <details> wrapper matching the collapse-content shortcode markup.
-       $title is HTML; $rows is the rendered table-body HTML. */ -}}
-{{- define "_facollapse" -}}
+{{- /* Collapsed <details> holding the table. $rows is the rendered table-body HTML;
+       $count is the number of field rows, shown in the summary. Kept free of blank
+       lines so Goldmark passes it through as one raw-HTML block. */ -}}
+{{- define "_fatable" -}}
 <details class="collapsible-section">
-  <summary class="collapsible-header" tabindex="0" aria-expanded="false">
-    <div class="header-content">
-      <div class="header-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right">
-          <path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-        </svg>
-      </div>
-      <div class="header-text">
-        <h3 class="header-text-inner">{{ .title | safeHTML }}</h3>
-      </div>
-    </div>
-  </summary>
-  <div class="collapsible-content">
-    <table>
-      <thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
-      <tbody>{{ .rows | safeHTML }}</tbody>
-    </table>
-  </div>
+<summary class="collapsible-header" tabindex="0" aria-expanded="false"><div class="header-content"><div class="header-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-chevron-right"><path fill="currentColor" d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" /></svg></div><div class="header-text">Show {{ .count }} fields</div></div></summary>
+<div class="collapsible-content">
+<table>
+<thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead>
+<tbody>{{ .rows | safeHTML }}</tbody>
+</table>
+</div>
 </details>
 {{- end -}}
 {{- $toprows := partial "fa-config-rows.html" (dict "props" $top "prefix" "") -}}
-{{- template "_facollapse" (dict "title" "Top-level fields" "rows" $toprows) -}}
-{{- range $k, $v := $objects -}}
+## Top-level fields
+
+{{ template "_fatable" (dict "rows" $toprows "count" (strings.Count "<tr>" (string $toprows))) }}
+{{ range $k, $v := $objects }}
 {{- $rows := partial "fa-config-rows.html" (dict "props" $v.properties "prefix" (printf "%s." $k)) -}}
 {{- $friendly := index $titles $k -}}
-{{- $title := printf "<code>%s</code>" $k -}}
-{{- if $friendly }}{{ $title = printf "%s (<code>%s</code>)" $friendly $k }}{{ end -}}
-{{- template "_facollapse" (dict "title" $title "rows" $rows) -}}
-{{- end -}}
+{{- $heading := printf "`%s`" $k -}}
+{{- if $friendly }}{{ $heading = printf "%s (`%s`)" $friendly $k }}{{ end }}
+## {{ $heading }}
+
+{{ template "_fatable" (dict "rows" $rows "count" (strings.Count "<tr>" (string $rows))) }}
+{{ end -}}
