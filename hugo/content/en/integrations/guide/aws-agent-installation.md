@@ -40,7 +40,7 @@ further_reading:
 
 ## Overview
 
-The [AWS integration][1] collects metrics, events, and logs from Amazon CloudWatch without installing anything on your resources. Datadog instrumentation collects telemetry from inside your AWS workloads that CloudWatch alone can't provide, including host-level metrics, distributed traces (APM), live processes, and detailed logs.
+The [AWS integration][1] collects metrics, events, and logs from Amazon CloudWatch without installing anything on your resources. Datadog instrumentation collects telemetry data from inside your AWS workloads that CloudWatch alone can't provide, including host-level metrics, distributed traces (APM), live processes, and detailed logs.
 
 You can instrument your AWS workloads directly from Datadog, without connecting to each host or redeploying each function. Enable instrumentation while you set up the AWS integration, or at any time afterward.
 
@@ -80,7 +80,7 @@ Both products deploy a CloudFormation stack in your account. The stack for remot
 
 Use instrumentation through the AWS integration when you want to instrument both EC2 instances and Lambda functions from one place, or when you want to narrow the function list by region, runtime, and memory size.
 
-Both products match on AWS resource tags. Use remote instrumentation when you want to match on the tags in `DD_TAGS`, or when you want to set the layer versions applied to your functions and keep them fixed.
+Use remote instrumentation when you want to match on the tags in `DD_TAGS`, or when you want to set the layer versions applied to your functions and keep them fixed. Both products can match on AWS resource tags.
 
 ## Prerequisites
 
@@ -97,7 +97,7 @@ For all workloads, confirm the following:
 ### AWS Lambda functions
 
 - **Resource collection**: [Resource collection][10] must be enabled on the AWS integration. Datadog uses it to list your functions and preview which ones a rule matches.
-- **AWS partition**: The function must be in the commercial `aws` partition. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through [Workload Identity Federation][16], which those partitions don't support.
+- **AWS partition**: The function must be in the commercial `aws` partition. Functions in AWS GovCloud or the AWS China partitions are not supported, because Lambda instrumentation authenticates through [Workload Identity Federation][16], which does not support those partitions.
 - **Package type**: The function must use the Zip package type. Container image functions are not supported, because Datadog instrumentation is distributed as Lambda layers, which container image functions can't use.
 - **Architecture**: The function must use a single architecture, either `x86_64` or `arm64`.
 - **Lambda@Edge**: The function must not be a Lambda@Edge function. Datadog excludes both the replicas and the functions they replicate.
