@@ -114,7 +114,7 @@ To avoid duplicate metrics, the Agent skips configuration discovery for an integ
 - any instance of a generic OpenMetrics or Prometheus check configured for the same container, or
 - any host-level instance of a generic OpenMetrics or Prometheus check that emits metrics under the same root namespace as the integration.
 
-Additionally, starting in Agent version 7.83, all check instances created by this mechanism include the tag `dd_config_discovery:true` in their metrics. This tag can be used to identify or exclude these metrics in queries.
+Additionally, starting in Agent version 7.83, all check instances created by this mechanism include the tag `dd_config_discovery:true` in their metrics. Use this tag to identify or exclude these metrics in queries.
 
 To prevent configuration discovery for an integration, [disable its auto-configuration](#disable-auto-configuration).
 
