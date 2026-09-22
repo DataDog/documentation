@@ -1,0 +1,21 @@
+entries:
+  - change_type: modified
+    date: '2026-09-10'
+    link: https://github.com/DataDog/documentation/pull/39853
+    operations:
+      - CreatePipeline
+      - UpdatePipeline
+      - GetPipeline
+      - ListPipelines
+      - ValidatePipeline
+    title: 'Add Prometheus remote write source and sink to Observability Pipelines'
+  - change_type: modified
+    date: '2026-09-10'
+    link: https://github.com/DataDog/documentation/pull/39831
+    operations:
+      - CreatePipeline
+      - UpdatePipeline
+      - GetPipeline
+      - ListPipelines
+      - ValidatePipeline
+    title: 'Add overflow and metrics destinations, deprecate generate_datadog_metrics, and add custom HTTP authentication'

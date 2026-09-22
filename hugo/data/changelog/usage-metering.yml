@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-09-17'
+    link: https://github.com/DataDog/documentation/pull/40035
+    operations:
+      - ListQuotas
+    title: 'Allow billing read for ListQuotas GET endpoint'

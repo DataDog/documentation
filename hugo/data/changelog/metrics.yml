@@ -1,0 +1,12 @@
+entries:
+  - change_type: removed
+    date: '2026-09-21'
+    link: https://github.com/DataDog/documentation/pull/40109
+    operations:
+      - CreateTagIndexingRule
+      - UpdateTagIndexingRule
+      - GetTagIndexingRule
+      - ListTagIndexingRules
+      - CreateTagIndexingRuleExemption
+      - GetTagIndexingRuleExemption
+    title: 'Remove deprecated queried_tags_window_seconds and related_asset_tags fields'

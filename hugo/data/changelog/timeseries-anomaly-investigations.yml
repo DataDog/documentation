@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-09-10'
+    link: https://github.com/DataDog/documentation/pull/39852
+    operations:
+      - CreateTimeseriesAnomalyInvestigation
+    title: 'Allow up to three timeseries anomaly investigation results'

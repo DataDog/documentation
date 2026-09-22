@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-09-08'
+    link: https://github.com/DataDog/documentation/pull/39771
+    operations:
+      - CreateAnnotation
+      - UpdateAnnotation
+      - GetPageAnnotations
+      - ListAnnotations
+    title: 'Support frontend annotation display blocks'
