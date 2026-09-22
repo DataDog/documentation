@@ -102,9 +102,9 @@ You can configure blocking at different levels of granularity, with more specifi
 
 #### Sensitive data scanning {#sensitive-data-scanning}
 
-AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can choose to enable or disable sensitive data scanning.
+AI Guard can detect personally identifiable information (PII) such as email addresses, phone numbers, and SSNs, as well as secrets such as API keys and tokens, in LLM conversations. When you create or edit a policy for a service, you can set sensitive data scanning to {{< ui >}}Disabled{{< /ui >}}, {{< ui >}}Scanning{{< /ui >}}, or {{< ui >}}Scanning and redacting{{< /ui >}}.
 
-When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. If a scanning rule has a redaction action, AI Guard also returns the replacement for each sensitive value that the rule mutates. See [Sensitive Data Redaction][20] to configure and apply these replacements.
+When scanning is enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. With {{< ui >}}Scanning and redacting{{< /ui >}}, AI Guard also returns the replacement for each sensitive value that a rule mutates. Redaction is designed for the AI Guard SDK: see [Sensitive Data Redaction][20] to configure it and apply the replacements.
 
 By default, AI Guard scans for a standard set of secrets, such as AWS keys and Datadog API keys. To customize which [scanning rules][14] AI Guard uses, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], where you can enable or disable individual rules, and create scanning groups with custom rules, scoped specifically to AI Guard evaluations.
 
