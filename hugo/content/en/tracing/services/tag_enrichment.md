@@ -36,7 +36,7 @@ Enabling a default rule applies `team` or `system` to all telemetry of services 
 
 Custom rules let you target a specific set of services and configure exactly how each tag value is sourced and applied.
 
-1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}+ Add Rule{{< /ui >}}.
+1. In Datadog, navigate to {{< ui >}}IDP{{< /ui >}} > {{< ui >}}Manage{{< /ui >}} > [{{< ui >}}Tag Enrichment{{< /ui >}}][1] and click {{< ui >}}\+ Add Rule{{< /ui >}}.
 1. Select entities to enrich. As you select entities, a query is built in the background. To edit the query, select {{< ui >}}Build Advanced Query{{< /ui >}}.
    {{< img src="tracing/services/tag_enrichment/tag-enrichment-adv-query.png" alt="The Add IDP tag enrichment rule modal with the Build Advanced Query tab selected, showing fields for tag key, operator, and value, with an Add Condition option." >}}
    - Select {{< ui >}}Add Condition{{< /ui >}} to add an `AND` condition to your query.

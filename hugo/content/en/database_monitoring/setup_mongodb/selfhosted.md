@@ -188,7 +188,11 @@ Datadog recommends installing the Agent directly on the MongoDB host, as that en
 
 ## Query Metrics
 
-Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Query stats collection is disabled by default on the MongoDB server. To enable it, set the `internalQueryStatsSampleRate` server parameter to `1.0` (100% sampling) on each `mongod` or `mongos` process.
+Query metrics for self-hosted MongoDB require MongoDB 8.0 or later and rely on the `$queryStats` aggregation pipeline. Query stats collection is disabled by default on the MongoDB server. Enable it on each `mongod` or `mongos` process. The required server parameter depends on your MongoDB version.
+
+### MongoDB 8.0.20 or later
+
+Set `internalQueryStatsSampleRate` to `1.0` (100% sampling).
 
 Add the parameter to the MongoDB configuration file:
 
@@ -203,10 +207,33 @@ Or pass it on the command line:
 mongod --setParameter internalQueryStatsSampleRate=1.0
 {{< /code-block >}}
 
-To enable it at runtime without restarting (not persistent — resets on restart), run:
+To enable it at runtime until the next restart, run:
 
 {{< code-block lang="javascript" >}}
 db.adminCommand({setParameter: 1, internalQueryStatsSampleRate: 1.0})
+{{< /code-block >}}
+
+### MongoDB 8.0.0 through 8.0.19
+
+Set `internalQueryStatsRateLimit` to `-1` (no rate limit).
+
+Add the parameter to the MongoDB configuration file:
+
+{{< code-block lang="yaml" >}}
+setParameter:
+  internalQueryStatsRateLimit: -1
+{{< /code-block >}}
+
+Or pass it on the command line:
+
+{{< code-block lang="shell" >}}
+mongod --setParameter internalQueryStatsRateLimit=-1
+{{< /code-block >}}
+
+To enable it at runtime until the next restart, run:
+
+{{< code-block lang="javascript" >}}
+db.adminCommand({setParameter: 1, internalQueryStatsRateLimit: -1})
 {{< /code-block >}}
 
 For more information about the server parameters that control query stats collection, see the [MongoDB Query Stats documentation][4].

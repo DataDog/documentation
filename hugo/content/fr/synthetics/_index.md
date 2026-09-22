@@ -13,40 +13,43 @@ description: Utilisez des tests automatisés pour vous assurer que les aspects l
 further_reading:
 - link: /synthetics/guide/
   tag: Documentation
-  text: Guides d'utilisation de la surveillance Synthetic
+  text: Guides d'utilisation de Synthetic Monitoring
 - link: https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing
   tag: Centre d'apprentissage
   text: 'Centre d''apprentissage Datadog : Premiers pas avec les tests de navigateur
     Synthetic'
 - link: https://dtdg.co/fe
   tag: Validation des bases
-  text: Participer à une session interactive pour améliorer vos capacités de testing
+  text: Participer à une session interactive pour améliorer vos capacités de test
     Synthetic
+- link: https://www.datadoghq.com/blog/network-test-protocols/
+  tag: Blog
+  text: Tester les chemins réseau avec TCP, UDP et ICMP dans Datadog
 - link: https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/
   tag: Blog
-  text: Comment sécuriser les en-têtes HTTP avec des tests synthétiques
+  text: Comment sécuriser les en-têtes HTTP avec des tests Synthetic
 - link: https://www.datadoghq.com/blog/synthetic-monitoring-updates/
   tag: Blog
-  text: Accélérez votre compréhension de l’expérience utilisateur avec Synthetic Monitoring
-    de Datadog
+  text: Accélérez votre compréhension de l’expérience utilisateur avec Datadog Synthetic
+    Monitoring
 - link: https://www.datadoghq.com/blog/smoke-testing-synthetic-monitoring/
   tag: Blog
   text: Créer des tests UX de fumée efficaces avec Synthetic Monitoring
 - link: https://www.datadoghq.com/blog/slo-synthetic-monitoring/
   tag: Blog
-  text: Améliorez la précision et les performances des SLO grâce à Synthetic Monitoring
-    de Datadog
+  text: Améliorez la précision et les performances des SLO grâce à Datadog Synthetic
+    Monitoring
 - link: https://www.datadoghq.com/blog/mobile-apps-synthetic-tests/
   tag: Blog
-  text: Comment construire des tests synthétiques fiables et précis pour vos applications
+  text: Comment créer des tests Synthetic fiables et précis pour vos applications
     mobiles
 - link: https://www.datadoghq.com/blog/ambassador-browser-tests/
   tag: Blog
-  text: Comment j'ai aidé mon client à faire évoluer ses tests de navigateur avec
-    Datadog
+  text: Comment j'ai aidé mon client à mettre à l'échelle ses tests de navigateur
+    avec Datadog
 - link: https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/
   tag: Blog
-  text: Automatiser votre infrastructure de tests synthétiques avec Datadog Synthetic
+  text: Automatiser votre infrastructure de tests Synthetic avec Datadog Synthetic
     Monitoring et Terraform
 - link: https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring
   tag: Blog
@@ -59,24 +62,24 @@ further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring
   tag: Notes de version
   text: Découvrez les dernières versions de Datadog Synthetic Monitoring ! (Connexion
-    requise pour l'application)
-title: Tests et surveillance Synthetic
+    à l'application requise)
+title: Synthetic Testing et Synthetic Monitoring
 ---
-{{< learning-center-callout header="Participez à une session de webinaire de formation" hide_image="true" btn_title="Inscrivez-vous" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
-  Explorez et inscrivez-vous aux sessions Foundation Enablement Découvrez comment Datadog Synthetic Monitoring est une solution de surveillance proactive qui vous permet de créer des tests API, de navigateur et mobiles sans code pour simuler automatiquement les flux et les requêtes des utilisateurs vers vos applications, vos points de terminaison clés et vos couches réseau.
+{{< learning-center-callout header="Rejoignez une session de webinaire de formation" hide_image="true" btn_title="S'inscrire" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
+  Explorez et inscrivez-vous aux sessions de formation fondamentale. Découvrez comment Datadog Synthetic Monitoring est une solution de surveillance proactive qui vous permet de créer des tests d'API, de navigateur et mobiles sans code pour simuler automatiquement les parcours utilisateur et les requêtes vers vos applications, points de terminaison clés et couches réseau.
 {{< /learning-center-callout >}}
 
-Les tests synthétiques vous permettent d'observer comment vos systèmes et applications fonctionnent en utilisant **des requêtes et actions simulées du monde entier**. Datadog suit la performance de vos pages web et de vos API, du backend au frontend, et à divers niveaux réseau (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP`, et `gRPC`) de manière contrôlée et stable, vous alertant sur des comportements défectueux tels que des régressions, des fonctionnalités cassées, des temps de réponse élevés et des codes d'état inattendus. 
+Les tests Synthetic vous permettent d'observer les performances de vos systèmes et applications à l'aide de **requêtes et actions simulées depuis le monde entier**. Datadog suit les performances de vos pages Web et API du backend au frontend, et à différents niveaux réseau (`HTTP`, `SSL`, `DNS`, `WebSocket`, `TCP`, `UDP`, `ICMP` et `gRPC`) de manière contrôlée et stable, en vous alertant sur les comportements défectueux tels que les régressions, les fonctionnalités cassées, les temps de réponse élevés et les codes d'état inattendus. 
 
-**Calculer les SLO** sur vos points de terminaison clés et vos parcours utilisateurs facilite le respect de vos objectifs de performance applicative et permet finalement de fournir une expérience client cohérente.
+**Calculer des SLO** sur vos points de terminaison clés et parcours utilisateur facilite le respect de vos objectifs de performance applicative et permet, en fin de compte, d'offrir une expérience client cohérente.
 
 Vous pouvez créer des tests Synthetic dans l'[application Datadog][1], avec l'[API][2] ou avec [Terraform][3].
 
-## Configurer des tests API et des tests API à étapes multiples {#set-up-api-tests-and-multistep-api-tests}
+## Configurer des tests d'API et des tests d'API en plusieurs étapes {#set-up-api-tests-and-multistep-api-tests}
 
 Les tests API vous permettent de lancer des requêtes [individuelles][4] ou des [chaînes][5] de requêtes afin d'effectuer des vérifications sur vos systèmes essentiels à différents niveaux du réseau : [test HTTP][6], [test SSL][7], [test DNS][8], [test WebSocket][9], [test TCP][10], [test UDP test][11], [test ICMP][12] et [test gRPC][13]. 
 
-{{< img src="synthetics/api_test.png" alt="Tests API" style="width:100%;">}}
+{{< img src="synthetics/api_tests/api_test_shopist.png" alt="Page de détails d'un test d'API HTTP affichant l'onglet Activité avec la disponibilité globale, une chronologie des alertes et une liste des dernières exécutions de test" style="width:100%;">}}
 
 ## Enregistrer des tests de navigateur {#record-browser-tests}
 
@@ -88,18 +91,24 @@ Utilisez des [tests Browser Synthetic][14] pour surveiller l'expérience de vos 
 
 Utilisez des [tests d'application mobile Synthetic][21] pour surveiller l'expérience de vos clients sur vos applications iOS et Android, de bout en bout et sur différents types d'appareils.
 
-{{< img src="synthetics/mobile_app_tests.png" alt="Exemples du flux de travail d'enregistrement pour un test mobile synthétique" style="width:100%;">}}
+{{< img src="synthetics/mobile_app_tests.png" alt="Exemples du workflow d'enregistrement pour un test mobile synthétique" style="width:100%;">}}
 
 ## Créer des tests de chemin réseau {#create-network-path-tests}
 
-Créer [des tests de chemin réseau synthétiques][25] à partir d'emplacements gérés pour effectuer des vérifications TCP, UDP et ICMP et visualiser les routes des paquets à travers des points de terminaison globaux.
+Créez des [tests de chemin réseau synthétiques][25] depuis des emplacements gérés pour effectuer des vérifications TCP, UDP et ICMP et visualiser les routes des paquets à travers des points de terminaison mondiaux.
 
-{{< img src="synthetics/network_tests/syn_network_path.png" alt="Exemples d'un test de réseau TCP synthétique" style="width:100%;">}}
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Exemples d'un test réseau TCP synthétique" style="width:100%;">}}
 ## Suites de tests {#test-suites}
 
-Utilisez [Suites de Tests Synthétiques][26] pour organiser plusieurs tests en collections logiques regroupées par parcours utilisateur, environnement, emplacement, service ou équipe pour une gestion et un dépannage simplifiés. 
+Utilisez les [collections de tests Synthetic][26] pour organiser plusieurs tests en collections logiques regroupées par parcours utilisateur, environnement, emplacement, service ou équipe pour une gestion et un dépannage rationalisés. 
 
-{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Page de résumé de la suite de tests de surveillance synthétique" style="width:100%;">}}
+{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Page récapitulative de la collection de tests Synthetic Monitoring" style="width:100%;">}}
+
+## Explorer Bits Testing et Goal-Based Testing {#explore-bits-testing-and-goal-based-testing}
+
+Utilisez [Bits Testing][27] pour explorer votre application, cartographier des parcours utilisateur critiques et générer des tests Synthetic qui les couvrent, y compris [Goal-Based tests][28] qui vérifient que les utilisateurs peuvent atteindre un objectif en utilisant des tests non déterministes et agentiques.
+
+{{< img src="synthetics/bits_testing/bits_testing_landing.png" alt="La page d'accueil de Bits Testing avec une invite pour décrire la couverture de test que vous souhaitez" style="width:100%;">}}
 
 ## Lancer des emplacements privés {#launch-private-locations}
 
@@ -107,57 +116,57 @@ Utilisez des [emplacements privés Synthetic][15] pour surveiller des API et sit
 
 {{< img src="synthetics/private_locations.png" alt="Emplacements privés" style="width:100%;">}}
 
-## Connecter les données et les traces {#connect-data-and-traces}
+## Connecter des données et des traces {#connect-data-and-traces}
 
 Datadog vous permet d'[intégrer vos tests Synthetic à vos traces APM][16] pour identifier l'origine des échecs parmi vos requêtes frontend, réseau et backend.
 
-{{< img src="synthetics/synthetics_traces.mp4" alt="Surveillance Synthetics" video=true style="width:100%;">}}
+{{< img src="synthetics/apm/synthetics_apm_new.mp4" alt="Un test d'API ayant échoué avec le panneau latéral ouvert sur l'onglet Trace, montrant la trace APM générée par l'exécution de test avec des spans codés par couleur à travers les services" video=true style="width:100%;">}}
 
-## Accéder aux tableaux de bord prêts à l'emploi {#access-out-of-the-box-dashboards}
+## Accéder aux dashboards prêts à l'emploi {#access-out-of-the-box-dashboards}
 
 Utilisez les [dashboards Synthetic prêts à l'emploi][17] pour analyser les données de performance liées à vos tests API, tests API à plusieurs étapes, tests Browser et emplacements privés, ainsi qu'aux événements Datadog. 
 
-{{< img src="synthetics/dashboards/test_dashboard.png" alt="Tableau de bord de résumé de la surveillance synthétique et des tests continus" style="width:100%;">}}
+{{< img src="synthetics/dashboards/test_dashboard.png" alt="Dashboard récapitulatif de Synthetic Monitoring et Continuous Testing" style="width:100%;">}}
 
-## Utilisez l'Explorateur des Résultats de Surveillance et de Tests Synthétiques {#use-the-synthetic-monitoring-testing-results-explorer}
+## Utiliser Synthetic Monitoring & Testing Results Explorer {#use-the-synthetic-monitoring-testing-results-explorer}
 
 Créez des [requêtes de recherche et des visualisations][20] pour vos exécutions de tests Synthetic ou vos lots de tests exécutés dans des pipelines CI/CD. 
 
-{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Explorateur de Tests Continus" style="width:100%;">}}
+{{< img src="continuous_testing/explorer_ci_batches_1.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
 ## Suivre la couverture des tests {#track-testing-coverage}
 
-Optimisez votre suite de tests en [vous assurant que les workflows les plus importants de votre applications sont testés][22].
+Optimisez votre collection de tests en [vous assurant que les workflows les plus importants de votre applications sont testés][22].
 
-{{< img src="synthetics/test_coverage/test_coverage.png" alt="Explorateur de Tests Continus" style="width:100%;">}}
+{{< img src="synthetics/test_coverage/test_coverage.png" alt="Continuous Testing Explorer" style="width:100%;">}}
 
-## Notifications de surveillance synthétique {#synthetic-monitoring-notifications}
+## Notifications de Synthetic Monitoring {#synthetic-monitoring-notifications}
 
-Utilisez et enrichissez les moniteurs synthétiques pour envoyer des notifications lorsque un test de surveillance synthétique échoue. Les fonctionnalités suivantes sont disponibles :
+Utilisez et enrichissez les monitors synthétiques pour envoyer des notifications lorsqu'un test de Synthetic Monitoring échoue. Les fonctionnalités suivantes sont disponibles :
 
-Messages de moniteur pré-remplis
-: Les messages de moniteur pré-remplis fournissent un point de départ structuré pour les alertes de tests synthétiques. Chaque message comprend un titre, un résumé et un pied de page standardisés contenant des métadonnées de test, ce qui facilite la compréhension de l'alerte d'un coup d'œil.
+Messages de monitor préremplis
+: Les messages de monitor préremplis fournissent un point de départ structuré pour les alertes de test Synthetic. Chaque message comprend un titre, un résumé et un pied de page standardisés contenant les métadonnées du test, ce qui facilite la compréhension de l'alerte en un coup d'œil.
 
 Template variables
-: Les variables de modèle vous permettent d'injecter des données spécifiques au test dans les notifications de moniteur de manière dynamique. Ces variables proviennent de l'objet `synthetics.attributes`.
+: Les variables de modèle vous permettent d'injecter dynamiquement des données spécifiques au test dans les notifications de monitor. Ces variables proviennent de l'objet `synthetics.attributes`.
 
 Utilisation avancée
-: L'utilisation avancée inclut des techniques pour faire ressortir des informations de test plus approfondies ou structurer des messages complexes en utilisant le modèle handlebars.
+: L'utilisation avancée inclut des techniques pour faire ressortir des informations de test plus approfondies ou structurer des messages complexes à l'aide de modèles Handlebars.
 
-Alerte conditionnelle
-: L'alerte conditionnelle vous permet de modifier le contenu d'une notification de moniteur en fonction de résultats de test spécifiques ou de conditions d'échec.
+Alertes conditionnelles
+: Les alertes conditionnelles vous permettent de modifier le contenu d'une notification de monitor en fonction de résultats de test ou de conditions d'échec spécifiques.
 
-Pour plus d'informations, voir [notifications de surveillance synthétique][24].
+Pour plus d'informations, consultez [Synthetic Monitoring notifications][24].
 
 ## Historique des versions {#version-history}
 
-Utilisez [l'historique des versions dans la surveillance synthétique][23] pour exécuter une version précédente d'un test, restaurer votre test à une version sauvegardée ou cloner une version pour créer un nouveau test de surveillance synthétique.
+Utilisez [Version History in Synthetic Monitoring][23] pour exécuter une version précédente d'un test, restaurer votre test à n'importe quelle version enregistrée ou cloner une version pour créer un nouveau test de Synthetic Monitoring.
 
 ## Prêt à commencer ? {#ready-to-start}
 
-Consultez [Démarrer avec la surveillance synthétique][18] pour des instructions sur la création de votre premier test synthétique et la surveillance de vos applications web. Ensuite, explorez [Démarrer avec des emplacements privés][19] pour des instructions sur la création de votre emplacement privé et l'exécution de tests synthétiques avec votre emplacement privé.
+Consultez [Débuter avec Synthetic Monitoring][18] pour obtenir des instructions sur la création de votre premier test Synthetic et la surveillance de vos applications web. Ensuite, consultez [Débuter avec les emplacements privés][19] pour savoir comment créer votre emplacement privé et exécuter des tests Synthetic avec celui-ci.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -188,3 +197,5 @@ Consultez [Démarrer avec la surveillance synthétique][18] pour des instruction
 [24]: /fr/synthetics/notifications/
 [25]: /fr/synthetics/network_path_tests/
 [26]: /fr/synthetics/test_suites/
+[27]: /fr/synthetics/bits_testing/
+[28]: /fr/synthetics/goal_based_testing/
