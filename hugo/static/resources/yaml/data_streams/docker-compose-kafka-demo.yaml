@@ -71,12 +71,12 @@ services:
     ports:
       - "9093:9093"
     environment:
-      KAFKA_NODE_ID: 2
-      KAFKA_PROCESS_ROLES: 'broker'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka:29093'
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: 'broker,controller'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka2:29093'
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_LISTENERS: 'PLAINTEXT://kafka2:19092,PLAINTEXT_HOST://0.0.0.0:9093'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka2:19092,PLAINTEXT_HOST://localhost:9093'
+      KAFKA_LISTENERS: 'PLAINTEXT://kafka2:19093,CONTROLLER://kafka2:29093,PLAINTEXT_HOST://0.0.0.0:9093'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka2:19093,PLAINTEXT_HOST://localhost:9093'
       KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
@@ -84,14 +84,53 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
-      CLUSTER_ID: 'Mka3OEVBNTcwNTJENDM2Qk'
+      CLUSTER_ID: 'Y2hhb3NDbHVzdGVyMDAwMA'
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: kafka2
     command: >
       bash -c "
       sed -i '/KAFKA_ZOOKEEPER_CONNECT/d' /etc/confluent/docker/configure &&
       /etc/confluent/docker/run
       "
     healthcheck:
-      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "kafka2:19092"]
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "kafka2:19093"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+
+  kafka3:
+    image: confluentinc/cp-kafka:7.5.0
+    container_name: kafka3
+    hostname: kafka3
+    depends_on:
+      kafka2:
+        condition: service_healthy
+    ports:
+      - "9094:9094"
+    environment:
+      KAFKA_NODE_ID: 2
+      KAFKA_PROCESS_ROLES: 'broker'
+      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@kafka2:29093'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
+      KAFKA_LISTENERS: 'PLAINTEXT://kafka3:19094,PLAINTEXT_HOST://0.0.0.0:9094'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://kafka3:19094,PLAINTEXT_HOST://localhost:9094'
+      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      CLUSTER_ID: 'Y2hhb3NDbHVzdGVyMDAwMA'
+      KAFKA_JMX_PORT: 9998
+      KAFKA_JMX_HOSTNAME: kafka3
+    command: >
+      bash -c "
+      sed -i '/KAFKA_ZOOKEEPER_CONNECT/d' /etc/confluent/docker/configure &&
+      /etc/confluent/docker/run
+      "
+    healthcheck:
+      test: ["CMD", "kafka-broker-api-versions", "--bootstrap-server", "kafka3:19094"]
       interval: 10s
       timeout: 10s
       retries: 5
@@ -249,6 +288,8 @@ services:
         condition: service_started
       kafka2:
         condition: service_healthy
+      kafka3:
+        condition: service_healthy
       kafka-connect:
         condition: service_healthy
     command:
@@ -269,11 +310,11 @@ services:
           --entity-type topics --entity-name connector-source-events \
           --alter --add-config retention.ms=180000
         echo "Set connector-source-events retention.ms to 180000 (3 min)"
-        if ! kafka-topics --bootstrap-server kafka:19092 --list | grep -q '^demo-offline-test$$'; then
-          if kafka-topics --bootstrap-server kafka:19092 \
+        if ! kafka-topics --bootstrap-server kafka2:19093 --list | grep -q '^demo-offline-test$$'; then
+          if kafka-topics --bootstrap-server kafka2:19093 \
               --create --topic demo-offline-test \
               --replica-assignment 2,2,2; then
-            echo "Created demo-offline-test with all partitions on broker 2"
+            echo "Created demo-offline-test on chaos cluster with all partitions pinned to kafka3 (node 2)"
           else
             echo "Failed to create demo-offline-test" >&2
             exit 1
@@ -381,11 +422,11 @@ services:
 
         sleep 30
         while true; do
-          echo "Pausing kafka2 - offline partitions should fire"
-          docker pause kafka2 || true
+          echo "Pausing kafka3 - offline partitions should fire (kafka2 stays up to serve metadata)"
+          docker pause kafka3 || true
           sleep $$TRIGGER_SECONDS
-          echo "Unpausing kafka2 - offline partitions should resolve"
-          docker unpause kafka2 || true
+          echo "Unpausing kafka3 - offline partitions should resolve"
+          docker unpause kafka3 || true
           sleep $$RESOLVE_SECONDS
         done
     restart: unless-stopped
@@ -403,6 +444,11 @@ configs:
           tags:
             - env:demo
             - cluster:kafka-demo
+        - kafka_connect_str: "kafka2:19093"
+          enable_cluster_monitoring: true
+          tags:
+            - env:demo
+            - cluster:kafka-demo-chaos
 
   kafka_broker_config:
     content: |
@@ -417,6 +463,18 @@ configs:
             - env:demo
             - cluster:kafka-demo
             - kafka_cluster_id:Mka3OEVBNTcwNTJENDM2Qg
+        - host: kafka2
+          port: 9999
+          tags:
+            - env:demo
+            - cluster:kafka-demo-chaos
+            - kafka_cluster_id:Y2hhb3NDbHVzdGVyMDAwMA
+        - host: kafka3
+          port: 9998
+          tags:
+            - env:demo
+            - cluster:kafka-demo-chaos
+            - kafka_cluster_id:Y2hhb3NDbHVzdGVyMDAwMA
 
   order_proto:
     content: |
