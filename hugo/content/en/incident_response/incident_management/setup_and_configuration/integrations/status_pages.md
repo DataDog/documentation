@@ -5,12 +5,15 @@ aliases:
 - /service_management/incident_management/integrations/status_pages/
 - /incident_response/incident_management/integrations/status_pages/
 further_reading:
-- link: https://www.datadoghq.com/blog/status-pages
-  tag: Blog
-  text: Keep stakeholders informed with Datadog Status Pages
 - link: "/incident_response/status_pages/"
   tag: "Documentation"
   text: "Learn more about Datadog Status Pages"
+- link: https://www.datadoghq.com/blog/status-pages
+  tag: Blog
+  text: Keep stakeholders informed with Datadog Status Pages
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview

@@ -3,6 +3,10 @@ title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
 - /incident_response/incident_management/declare
+further_reading:
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview
@@ -132,3 +136,7 @@ You can declare an incident from individual Handoff Notification cards.
 [13]: https://app.datadoghq.com/on-call/pages
 [14]: /integrations/google-hangouts-chat/
 [15]: /security/code_security/secret_scanning/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

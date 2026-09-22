@@ -13,18 +13,15 @@ aliases:
     - /integrations/faq/why-is-the-kubernetes-check-failing-with-a-connecttimeout-error-to-port-10250/
     - /agent/kubernetes/
 further_reading:
-    - link: "https://learn.datadoghq.com/courses/getting-started-k8s"
-      tag: "Learning Center"
-      text: "Getting Started with Kubernetes Observability"
-    - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
-      tag: "Release Notes"
-      text: "Check out the latest Datadog Containers releases (App login required)."
     - link: '/agent/guide/autodiscovery-management'
       tag: 'Documentation'
       text: 'Limit data collection to a subset of containers only'
     - link: '/agent/guide/docker-deprecation'
       tag: 'Documentation'
       text: 'Docker runtime deprecation in Kubernetes'
+    - link: "https://learn.datadoghq.com/courses/getting-started-k8s"
+      tag: "Learning Center"
+      text: "Getting Started with Kubernetes Observability"
     - link: 'https://dtdg.co/fe'
       tag: 'Foundation Enablement'
       text: 'Join an interactive session for insights on Kubernetes monitoring'
@@ -34,6 +31,12 @@ further_reading:
     - link: https://www.datadoghq.com/blog/kubernetes-operator-performance
       tag: Blog
       text: Monitor your Kubernetes operators to keep applications running smoothly
+    - link: "https://www.datadoghq.com/blog/monitor-tas-and-gang-scheduling-for-ai-training-in-kubernetes/"
+      tag: "Blog"
+      text: "Monitor TAS and gang scheduling for AI training in Kubernetes"
+    - link: "https://app.datadoghq.com/release-notes?category=Container%20Monitoring"
+      tag: "Release Notes"
+      text: "Check out the latest Datadog Containers releases (App login required)."
 ---
 
 

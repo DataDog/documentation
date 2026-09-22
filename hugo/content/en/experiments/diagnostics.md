@@ -14,6 +14,9 @@ further_reading:
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 ## Overview

@@ -2,6 +2,10 @@
 title: Chat with Bits Investigation
 aliases:
 - /bits_ai/bits_ai_sre/chat_bits_ai_sre/
+further_reading:
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 Within an investigation, you can chat with Bits to gather additional information about the investigation, related telemetry, and more.
@@ -33,3 +37,7 @@ The Bits Investigation chatbot has access to:
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
 [1]: /bits_ai/bits_investigation/configure#confluence
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

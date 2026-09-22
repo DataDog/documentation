@@ -23,6 +23,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
+- link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
+  tag: "Blog"
+  text: "Enforce custom rules in Datadog IaC Security scanning"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

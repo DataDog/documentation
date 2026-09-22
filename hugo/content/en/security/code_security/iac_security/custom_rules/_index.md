@@ -3,6 +3,10 @@ title: IaC Custom Rules
 description: Create, test, and publish custom Infrastructure as Code Security rules with Rego.
 algolia:
   tags: ['iac security', 'infrastructure as code', 'custom rule', 'rego']
+further_reading:
+- link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
+  tag: "Blog"
+  text: "Enforce custom rules in Datadog IaC Security scanning"
 ---
 
 Create custom security rules to enforce requirements specific to your organization.
@@ -170,3 +174,7 @@ Editing a rule creates a new revision. From the rule's details panel, you can:
 [4]: /security/code_security/iac_security/custom_rules/guide/#validation
 [5]: /security/code_security/iac_security/configuration/#rule-configuration
 [6]: /account_management/rbac/permissions/#cloud-security-platform
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-management-budget-forecasting/"
   tag: "Blog"
   text: "Project and manage cloud spend with Datadog budget forecasting"
+- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
+  tag: "Blog"
+  text: "Manage Cursor costs with Datadog Cloud Cost Management"
 ---
 
 ## Overview

@@ -20,6 +20,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
+- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
+  tag: "Blog"
+  text: "Manage Cursor costs with Datadog Cloud Cost Management"
 ---
 
 ## Overview
