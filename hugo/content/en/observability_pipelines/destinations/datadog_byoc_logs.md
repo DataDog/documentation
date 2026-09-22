@@ -25,7 +25,14 @@ Before configuring the destination, you need to deploy a BYOC Logs cluster. Lear
 
 Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
-### Optional buffering
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+- (Optional) `Server Name`: The hostname used for TLS server name indication (SNI) when verifying the BYOC Logs endpoint's certificate.
+
+#### Buffering
 
 After you select the BYOC Logs destination in the pipeline UI, you can configure buffering.
 
@@ -46,6 +53,8 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 		- Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
 	- The default identifier is `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+- BYOC Logs TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 
@@ -57,6 +66,8 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
+- BYOC Logs TLS passphrase (when TLS is enabled)
+  - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_KEY_PASS`.
 
 {{% /tab %}}
 {{< /tabs >}}
