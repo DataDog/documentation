@@ -2498,8 +2498,6 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 Tools for investigating [Watchdog][79] anomalies, explaining metric changes, and checking external provider outages.
 
-<div class="alert alert-info">The tools listed in this section are in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
-
 ### `search_watchdog_stories`
 *Toolset: **watchdog***\
 *Permissions Required: No specific permissions required.*\
