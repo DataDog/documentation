@@ -303,7 +303,7 @@ Datadog does not automatically apply them to Playground runs or model calls. Do 
 ### Add configuration
 
 1. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}+ New Prompt{{< /ui >}} and write your template.
-2. Click {{< ui >}}Save Prompt{{< /ui >}}. Enter a prompt ID and add settings in {{< ui >}}Configuration{{< /ui >}}:
+2. Click {{< ui >}}Save Prompt{{< /ui >}}. Enter a prompt ID, expand {{< ui >}}Configuration (optional){{< /ui >}}, and add settings:
 
    ```json
    {
@@ -316,13 +316,13 @@ Datadog does not automatically apply them to Playground runs or model calls. Do 
 
 The editor requires a valid JSON object. Its example text is a placeholder, not a saved configuration.
 
-{{< img src="llm_observability/monitoring/create-prompt-configuration-document-extractor.png" alt="Create new prompt dialog for document-extractor, with model, temperature, and JSON response format settings in the Configuration editor." style="width:100%;" >}}
+{{< img src="llm_observability/monitoring/create-prompt-configuration-document-extractor.png" alt="Create new prompt dialog with the optional Configuration section expanded, showing model, temperature, and JSON response format settings." style="width:100%;" >}}
 
 ### Update configuration
 
 1. Open a prompt version and select the {{< ui >}}Configuration{{< /ui >}} tab.
 2. Click {{< ui >}}Update configuration{{< /ui >}} and edit the settings.
-3. Click {{< ui >}}Review changes{{< /ui >}}, then {{< ui >}}Save version{{< /ui >}}.
+3. Click {{< ui >}}Save version{{< /ui >}}. To inspect the diff before saving, click {{< ui >}}Review changes{{< /ui >}} first.
 
 This creates a version without overwriting the original. Use {{< ui >}}Compare{{< /ui >}} to inspect configuration changes.
 
