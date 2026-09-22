@@ -333,12 +333,8 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `errorEventMapper`
 : The data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
-`featureFlags`
+`featureFlags` (Preview)
 : A dictionary of feature flags used to opt in to specific RUM behaviors, available since SDK 3.17.0. Because flags are added and removed as they graduate or get replaced, see the [`RUM.Configuration.FeatureFlag` definition][11] in the SDK source for the complete, current list of available flags and their behavior.
-
-{% alert level="warning" %}
-Feature flags may introduce beta functionality. Beta feature flags, and their behavior, may change in future SDK releases without following semantic versioning.
-{% /alert %}
 
 `longTaskEventMapper`
 : The data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
