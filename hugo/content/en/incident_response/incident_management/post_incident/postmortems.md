@@ -66,7 +66,7 @@ To convert timestamps in a postmortem:
 
 1. Open the postmortem notebook.
 1. Click the kebab menu in the upper right and select **Convert timestamps**.
-1. Review the detected timestamps. Each entry shows the original text and the time it resolves to. Times without an explicit offset are interpreted in your local time zone, and a missing year is inferred.
+1. Review the detected timestamps. Each entry shows the original text and the time it resolves to. Times without an explicit offset are interpreted in the time zone of the person performing the conversion, and a missing year is inferred.
 1. Clear the checkbox for any timestamp you want to leave as plain text.
 1. Click **Convert**.
 
