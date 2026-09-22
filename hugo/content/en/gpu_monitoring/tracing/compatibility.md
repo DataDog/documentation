@@ -12,9 +12,9 @@ further_reading:
   text: "Set up GPU Monitoring"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-[Continuous tracing](https://docs.datadoghq.com/gpu_monitoring/tracing/) with GPU Monitoring is in Early Access Preview.
-{{< /beta-callout >}}
+{{< callout url="#" btn_hidden="true" >}}
+<a href="/gpu_monitoring/tracing/">Continuous tracing</a> with GPU Monitoring is in Early Access Preview.
+{{< /callout >}}
 
 GPU tracing supports CUDA 13.x with CUPTI 13.x. CUDA 12.x and earlier are not supported.
 
