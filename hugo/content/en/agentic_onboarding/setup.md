@@ -53,43 +53,45 @@ The CLI can set up the following products:
 
 ### Install and run the CLI
 
-1. Run the CLI with `npx`, passing `--site` to target your [Datadog site][16]. You have two options, depending on whether you already have a Datadog account:
+Run the CLI with `npx`, passing `--site` to target your [Datadog site][16] ({{< region-param key=dd_site code="true" >}}). You have two options, depending on whether you already have a Datadog account:
 
-    **Option 1: Interactive setup.** Run without a `--product` flag if you don't have a Datadog account yet, or if you want a product recommendation based on your code. The CLI steps you through account setup, repository analysis, and product recommendations.
+   {{< tabs >}}
+   {{% tab "Interactive setup" %}}
+1. Use this option if you don't have a Datadog account, or if you want the CLI to recommend products based on your code analysis. The CLI steps you through account setup, repository analysis, and product recommendations.
 
-    ```shell
-    npx @datadog/ai-setup-cli --site datadoghq.com
-    ```
+   ```shell
+   npx @datadog/ai-setup-cli --site datadoghq.com
+   ```
+   Replace the value of `--site` with the Datadog site for your account: ({{< region-param key=dd_site code="true" >}}).
 
-    Replace the value of `--site` with the [Datadog site][16] for your account: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com`, `ap2.datadoghq.com`, or `uk1.datadoghq.com`.
+1. Press <kbd>Enter</kbd> at the welcome screen and choose whether you have a Datadog account. A browser opens for OAuth (or for account creation if you don't have an account yet). Complete the flow and grant access to your Datadog account.
+1. Enter the path to the repository you want to instrument.
+1. With your consent, the CLI analyzes the repository in read-only mode to detect your stack.
+1. Based on the detected stack, the CLI recommends up to three supported Datadog products. Recommendations are selected by default. Deselect individual recommendations, confirm the selection, or choose **View all setup options** to use the full list of setup options instead.
+   
+   {{% /tab %}}
+   
+   {{% tab "Direct setup" %}}
+1. Use this option if you already have a Datadog account and know which product you want to install. Add the `--product` flag to go straight to setup and skip repository analysis and product recommendations.
 
-    **Option 2: Direct setup.** If you already have a Datadog account and want to install a specific product, pass `--product` to go straight to setup. This skips repository analysis and product recommendations, because you've already specified what to instrument.
+   ```shell
+   npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
+   ```
 
-    ```shell
-    npx @datadog/ai-setup-cli --site datadoghq.com --product <PRODUCT>
-    ```
-
-    - Replace the value of `--site` with the [Datadog site][16] for your account.
-    - Replace `<PRODUCT>` with one of the products listed in the [Supported products](#supported-products) section.
+   - Replace the value of `--site` with the Datadog site for your account: ({{< region-param key=dd_site code="true" >}}).
+   - Replace `<PRODUCT>` with one of the products listed in the [Supported products](#supported-products) section.
 
 1. Press <kbd>Enter</kbd> at the welcome screen and choose whether you have a Datadog account. A browser opens for OAuth (or for account creation if you don't have an account yet). Complete the flow and grant access to your Datadog account.
 
-1. If you ran the CLI without `--product`, enter the path to the repository you want to instrument.
+   {{% /tab %}}
+   {{< /tabs >}}
 
-1. With your consent, the CLI analyzes the repository in read-only mode to detect your stack.
+#### Configure and verify your setup
 
-   {{< img src="agentic_onboarding/scanning-repo.png" alt="CLI screen scanning a repository and listing detected languages and frameworks." style="width:80%;" >}}
-
-1. Based on the detected stack, the CLI recommends up to three supported Datadog products. Recommendations are selected by default. Deselect individual recommendations, confirm the selection, or choose **View all setup options** to use the full list of setup options instead.
-
-1. If the CLI can't generate recommendations, or doesn't find a strong match for your repository, it directs you to the full list of setup options. (Direct setup with `--product` also skips to this menu.)
-
+1. If the CLI can't generate recommendations, or doesn't find a strong match for your repository, it directs you to the full list of setup options. For direct setup with `--product`, you start at this menu.
    {{< img src="agentic_onboarding/product-selection.png" alt="CLI menu 'What would you like to set up?' grouped by Infrastructure and Backend monitoring, Frontend Monitoring, LLM-Based applications, and CI Testing." style="width:80%;" >}}
-
 1. The CLI detects your project's frameworks, applies the required configuration, and provisions any necessary environment variables. Progress is reported stage by stage.
-
    {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps." style="width:80%;" >}}
-
 1. When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
@@ -262,6 +264,11 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 - [Serverless > Functions][9]
 - [Logs > Live Tail][10]
 
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [6]: https://app.datadoghq.com/error-tracking
 [7]: https://app.datadoghq.com/rum/list
 [8]: https://app.datadoghq.com/infrastructure
@@ -272,7 +279,3 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
 [19]: /account_management/api-app-keys/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
