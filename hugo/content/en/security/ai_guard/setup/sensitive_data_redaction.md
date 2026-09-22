@@ -82,7 +82,7 @@ When {{< ui >}}Scanning and redacting{{< /ui >}} is enabled, AI Guard redacts th
 
 When the SDK evaluates messages, the evaluation response includes a fully redacted replacement and its path for each value that a configured rule mutates. The SDK applies these replacements to a copy of the evaluated conversation and returns it with the evaluation result. Forward that conversation to the model, and keep it in your application state, so that sensitive data does not leave your application and is not reintroduced on the next turn.
 
-AI Guard scans only the last message in each evaluation call. This includes a user prompt, assistant response, tool call arguments, or tool call result when it is the last message being evaluated. Earlier messages in the conversation are not rescanned. Applying replacements does not modify your application-owned message objects.
+AI Guard scans only the last message in each evaluation call, and uses the preceding messages as context. This includes a user prompt, assistant response, tool call arguments, or tool call result when it is the last message being evaluated. Earlier messages in the conversation are not rescanned, so the result carries the full conversation you passed in with only the last message redacted. Applying replacements does not modify your application-owned message objects.
 
 The way you read the redacted conversation depends on the SDK language:
 
