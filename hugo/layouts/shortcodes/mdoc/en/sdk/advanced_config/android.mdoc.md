@@ -411,7 +411,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 This feature is in beta, and can change in future SDK releases.
 {% /alert %}
 
-By default, the RUM Android SDK resends a complete view event every time a view's data changes. To send incremental view update events instead of a full view event on every intermediate update, use the internal `_RumInternalProxy.setRumViewEventWriteConfig()` method with `RumViewEventWriteConfig.FullViewOnlyAtStart`:
+By default, the RUM Android SDK resends a complete view event every time a view's data changes. To send incremental view update events instead of a full view event on every intermediate update, use the internal `_RumInternalProxy.setRumViewEventWriteConfig()` method with `RumViewEventWriteConfig.FullViewOnlyAtStart`. Because this is an internal, unsupported API, its signature and available options can change without notice; see the [`_RumInternalProxy.setRumViewEventWriteConfig()`][15] and [`RumViewEventWriteConfig`][16] definitions in the SDK source for the current, authoritative details:
 
 {% tabs %}
 {% tab label="Kotlin" %}
@@ -787,3 +787,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[15]: https://github.com/DataDog/dd-sdk-android/blob/develop/features/dd-sdk-android-rum/src/main/kotlin/com/datadog/android/rum/_RumInternalProxy.kt
+[16]: https://github.com/DataDog/dd-sdk-android/blob/develop/features/dd-sdk-android-rum/src/main/kotlin/com/datadog/android/rum/configuration/RumViewEventWriteConfig.kt
