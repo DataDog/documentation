@@ -11,7 +11,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 ---
 
-Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files.
+Use [Fleet Automation][3] to roll out and manage Datadog Agent configuration at scale. Apply configuration changes through guided workflows in the UI or with custom YAML files. For the Agent settings you can manage with Fleet Automation, see [Supported datadog.yaml Configuration Fields][11].
 
 ## Prerequisites
 
