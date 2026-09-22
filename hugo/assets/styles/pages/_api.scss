@@ -148,7 +148,7 @@ $ddpurple: #632ca6;
     margin-top: 2rem;
 }
 
-.api-changelog-tag-section {
+.api-changelog-date-section {
     position: relative;
     padding: 0 0 2rem 2rem;
     border-left: 2px solid rgba($ddpurple, 0.18);
@@ -171,7 +171,7 @@ $ddpurple: #632ca6;
     }
 }
 
-.api-changelog-tag-header {
+.api-changelog-date-header {
     display: flex;
     align-items: center;
     gap: 0.75rem;
@@ -188,7 +188,9 @@ $ddpurple: #632ca6;
     }
 }
 
-.api-changelog-tag-count {
+.api-changelog-entry-tag {
+    display: inline-block;
+    margin-bottom: 0.35rem;
     padding: 0.15rem 0.55rem;
     border-radius: 50rem;
     background: rgba($ddpurple, 0.1);
@@ -245,13 +247,6 @@ $ddpurple: #632ca6;
         background: rgba($brand-danger, 0.12);
         color: $brand-danger;
     }
-}
-
-.api-changelog-entry-date {
-    display: block;
-    margin-bottom: 0.25rem;
-    color: $gray;
-    font-size: 0.75rem;
 }
 
 .api-changelog-entry-title {
