@@ -281,6 +281,54 @@ $ddpurple: #632ca6;
     }
 }
 
+.api-changelog-pagination {
+    margin-top: 1.5rem;
+}
+
+.api-changelog-pagination-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.api-changelog-pagination-item {
+    &::before {
+        content: none !important;
+    }
+
+    button {
+        display: block;
+        padding: 0.25rem 0.5rem;
+        border: 1px solid $gray-border;
+        border-radius: 3px;
+        background: white;
+        color: $brand-primary;
+        font-size: 0.875rem;
+        font-weight: 600;
+
+        &:hover:not(:disabled) {
+            border-color: $ddpurple;
+            background: $ddpurple;
+            color: white;
+        }
+
+        &:disabled {
+            color: $gray-light;
+            cursor: default;
+        }
+    }
+
+    &.is-active button {
+        border-color: $ddpurple;
+        background: $ddpurple;
+        color: white;
+        cursor: default;
+    }
+}
+
 .api-changelog-empty {
     margin-top: 2rem;
     padding: 2rem;
