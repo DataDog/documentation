@@ -34,6 +34,8 @@ Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set
 {{% observability_pipelines/tls_settings %}}
 - (Optional) `Server Name`: The hostname used for TLS server name indication when verifying the BYOC Logs endpoint's certificate.
 
+{{% observability_pipelines/secrets_env_var_note %}}
+
 #### Buffering
 
 After you select the BYOC Logs destination in the pipeline UI, you can configure buffering.
