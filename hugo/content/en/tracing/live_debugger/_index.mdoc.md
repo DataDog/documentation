@@ -49,8 +49,6 @@ Instead of adding temporary debug logs or reproducing issues locally, you can dy
 
 Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that collect diagnostic data without pausing the application. Since execution continues normally, Live Debugger can be used safely on production systems to investigate problems as they happen.
 
-Live Debugger complements [Dynamic Instrumentation][38], which adds metrics, spans, and span tags using the same [expression language][15].
-
 ## Key capabilities
 
 Live Debugger provides:
@@ -61,6 +59,12 @@ Live Debugger provides:
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
 - **Built-in sensitive data scrubbing** to help prevent exposure of personal data, secrets, and credentials.
+
+## Live Debugger vs. Dynamic Instrumentation
+
+Live Debugger and [Dynamic Instrumentation][38] are built on the same instrumentation technology. They share some overlapping configuration settings and conventions, such as the same [expression language][15] for log message templates and conditions. Both collect data from a code location you choose in a running service, with no code changes, redeploys, or restarts.
+
+They differ in what they capture and how long it lasts. Use Live Debugger to investigate a problem: logpoints capture log events and variable snapshots, and expire when the debug session ends. Use Dynamic Instrumentation to add APM custom instrumentation without modifying source code: dynamic spans, span tags, and metrics stay active until you disable them.
 
 ## Requirements
 

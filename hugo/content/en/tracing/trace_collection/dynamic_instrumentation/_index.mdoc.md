@@ -49,11 +49,15 @@ further_reading:
 
 Dynamic Instrumentation lets you add metrics, spans, and span tags to running production systems without restarts or code changes, including in third-party libraries.
 
-Dynamic Instrumentation complements [Live Debugger][23], which captures logs and variable snapshots using the same [expression language][15].
-
 To use autocomplete and search, opt in to the [preview][17].
 
 **Note**: Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
+
+## Live Debugger vs. Dynamic Instrumentation
+
+[Live Debugger][23] and Dynamic Instrumentation are built on the same instrumentation technology. They share some overlapping configuration settings and conventions, such as the same [expression language][15] for log message templates and conditions. Both collect data from a code location you choose in a running service, with no code changes, redeploys, or restarts.
+
+They differ in what they capture and how long it lasts. Use Live Debugger to investigate a problem: logpoints capture log events and variable snapshots, and expire when the debug session ends. Use Dynamic Instrumentation to add APM custom instrumentation without modifying source code: dynamic spans, span tags, and metrics stay active until you disable them.
 
 ## Requirements
 
