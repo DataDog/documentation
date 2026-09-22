@@ -23,7 +23,7 @@ Bits Security Analyst is an autonomous AI agent that investigates Cloud SIEM sig
 
 ### Key capabilities
 
-Bits Security Analyst investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it.
+Bits Security Analyst investigations are autonomous. If a detection rule is enabled, Bits AI autonomously investigates signals associated with it. For each investigation, Bits Security Analyst discovers and queries the relevant Datadog log indexes for the requested sources, so it can find supporting evidence even when those logs are stored outside the organization's default Cloud SIEM index. If it cannot identify an index for every requested source, it broadens the index search while retaining the source criteria rather than limiting the query to an unrelated default index.
 
 In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}Bits Security Analyst{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
 
