@@ -1,4 +1,7 @@
 ---
+algolia:
+  tags:
+  - addaction
 aliases:
 - /fr/real_user_monitoring/guide/send-custom-user-actions/
 beta: true
@@ -8,21 +11,23 @@ further_reading:
 - link: /real_user_monitoring/explorer
   tag: Documentation
   text: Visualiser vos données RUM dans le RUM Explorer
-
+- link: https://learn.datadoghq.com/courses/custom-data-rum-javascript
+  tag: Centre d'apprentissage
+  text: Collectez des données personnalisées avec RUM pour les applications Web JavaScript
 private: true
 title: Envoyer des actions RUM personnalisées
 ---
-## Présentation
+## Présentation {#overview}
 
-La solution Real User Monitoring [recueille automatiquement des actions][1] effectuées sur vos applications Web. Vous pouvez également recueillir des événements et des durées supplémentaires, par exemple pour le remplissage de formulaires et les transactions opérationnelles.
+Le Real User Monitoring [collecte automatiquement les actions][1] sur votre application Web. Vous pouvez collecter des événements supplémentaires et des durées, tels que la soumission de formulaires et les transactions commerciales.
 
-Les actions RUM personnalisées vous permettent de surveiller des événements pertinents tout en disposant de tous les éléments de contexte pertinents associés. Le SDK Browser de Datadog peut par exemple recueillir des informations sur le paiement d'un utilisateur (telles que le nombre d'articles dans le panier, la liste des articles et le montant des différents articles) lorsque celui-ci valide un paiement sur un site Web d'e-commerce.
+Les actions RUM personnalisées vous permettent de surveiller des événements intéressants avec tout le contexte pertinent associé. Par exemple, le Datadog Browser SDK peut collecter les informations de checkout d'un utilisateur (telles que le nombre d'articles dans le panier, la liste des articles et la valeur totale des articles du panier) lorsqu'il clique sur le bouton de checkout sur un site e-commerce.
 
-## Instrumenter votre code
+## Instrumentez votre code {#instrument-your-code}
 
-Créez une action RUM à l'aide de l'API `addAction`. Attribuez un nom à l'action et ajoutez-lui des attributs de contexte sous la forme d'un objet JavaScript.
+Créez une action RUM à l'aide de `addAction` l'API. Donnez un nom à votre action et joignez des attributs de contexte sous la forme d'un objet JavaScript.
 
-L'exemple suivant permet de créer une action `checkout` incluant des informations à propos du panier de l'utilisateur lorsqu'il clique sur le bouton de paiement.
+L'exemple suivant crée une action `checkout` avec des détails sur le panier de l'utilisateur lorsque celui-ci clique sur le bouton de checkout.
 
 {{< tabs >}}
 {{% tab "NPM" %}}
@@ -32,40 +37,40 @@ import { datadogRum } from '@datadog/browser-rum';
 
 function onCheckoutButtonClick(cart) {
     datadogRum.addAction('checkout', {
-        'value': cart.value, // par exemple, 42,12
-        'items': cart.items, // par exemple, ['tomate', 'fraises']
+        'value': cart.value, // for example, 42.12
+        'items': cart.items, // for example, ['tomato', 'strawberries']
     })
 }
 ```
 
 {{% /tab %}}
-{{% tab "CDN asynchrone" %}}
+{{% tab "CDN async" %}}
 
-Assurez-vous d'incorporer l'appel API avec le rappel `onReady` :
+Assurez-vous d'encapsuler l'appel d'API avec le rappel `onReady` :
 
 ```javascript
 function onCheckoutButtonClick(cart) {
     window.DD_RUM.onReady(function() {
         window.DD_RUM.addAction('checkout', {
-            'value': cart.value, // par exemple, 42.12
-            'items': cart.items, // par exemple, ['tomato', 'strawberries']
+            'value': cart.value, // for example, 42.12
+            'items': cart.items, // for example, ['tomato', 'strawberries']
         })
     })
 }
 ```
 
 {{% /tab %}}
-{{% tab "CDN synchrone" %}}
+{{% tab "CDN sync" %}}
 
-Assurez-vous de vérifier `window.DD_RUM` avant de procéder à l'appel API :
+Assurez-vous de vérifier `window.DD_RUM` avant l'appel d'API :
 
 ```javascript
-window.DD_RUM && window.DD_RUM.addAction('<NOM>', '<OBJET_JSON>');
+window.DD_RUM && window.DD_RUM.addAction('<NAME>', '<JSON_OBJECT>');
 
 function onCheckoutButtonClick(cart) {
     window.DD_RUM && window.DD_RUM.addAction('checkout', {
-        'value': cart.value, // par exemple, 42.12
-        'items': cart.items, // par exemple, ['tomato', 'strawberries']
+        'value': cart.value, // for example, 42.12
+        'items': cart.items, // for example, ['tomato', 'strawberries']
     })
 }
 ```
@@ -75,32 +80,32 @@ function onCheckoutButtonClick(cart) {
 
 Tout le contexte RUM, comme les informations sur l'affichage de la page en cours, les données geoIP et les informations sur le navigateur, est automatiquement associé. De plus, des attributs supplémentaires sont fournis via l'[API de contexte global][2].
 
-## Créer des facettes et des mesures sur les attributs
+## Créez des facettes et des mesures sur les attributs {#create-facets-and-measures-on-attributes}
 
-Après avoir déployé le code qui crée vos actions personnalisées, ces dernières s'affichent dans l'onglet **Actions** du [RUM Explorer][3].
+Après avoir déployé le code qui crée vos actions personnalisées, celles-ci apparaissent dans l'onglet {{< ui >}}Actions{{< /ui >}} du RUM Explorer [3].
 
-Pour filtrer vos actions personnalisées, utilisez l'attribut `Action Target Name` : `@action.target.name:<NOM_ACTION>`.
+Pour filtrer vos actions personnalisées, utilisez l'attribut `Action Target Name` : `@action.target.name:<ACTION_NAME>`.
 
-Dans l'exemple ci-dessous, le filtre `@action.target.name:checkout` est appliqué.
+L'exemple ci-dessous utilise le filtre suivant : `@action.target.name:checkout`.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Créer une facette pour des actions RUM personnalisées" video=true style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action-3.mp4" alt="Créez une facette pour les actions RUM personnalisées" video=true style="width:100%;">}}
 
-Lorsque vous cliquez sur une action, un volet latéral présentant des métadonnées s'affiche. Les attributs de vos actions se trouvent à la section **Custom Attributes**. Cliquez sur un attribut pour créer une facette ou une mesure.
+Après avoir cliqué sur une action, un panneau latéral contenant des métadonnées s'affiche. Vous pouvez trouver les attributs de votre action dans la section {{< ui >}}Custom Attributes{{< /ui >}} et créer des facettes ou des mesures pour ces attributs en cliquant dessus.
 
-Les facettes permettent d'utiliser des valeurs distinctives (comme des ID), tandis que les mesures sont dédiées aux valeurs quantitatives (comme des durées ou une latence). Vous pouvez par exemple créer une facette pour les articles du panier et une mesure pour la valeur du panier.
+Utilisez des facettes pour les valeurs distinctives (ID) et des mesures pour les valeurs quantitatives telles que les durées et la latence. Par exemple, créez une facette pour les articles du panier et une mesure pour la valeur du panier.
 
-## Utiliser des attributs dans le RUM Explorer
+## Utilisez des attributs dans le RUM Explorer {#use-attributes-in-the-rum-explorer}
 
 Vous pouvez utiliser des attributs d'action, ainsi que des facettes et mesures, dans le [RUM Explorer][3] pour créer des widgets de dashboard, des monitors et des requêtes avancées.
 
-L'exemple suivant permet d'afficher la valeur moyenne du panier par pays au cours des deux derniers jours. Cliquez sur le bouton **Export** pour exporter la requête de recherche au sein d'un widget de dashboard ou d'un monitor.
+L'exemple suivant affiche la valeur moyenne du panier par pays au cours des deux derniers jours. Cliquez sur le bouton {{< ui >}}Export{{< /ui >}} pour exporter la requête de recherche vers un widget de dashboard ou un monitor.
 
-{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Utiliser des actions RUM dans le RUM Explorer" style="width:100%;">}}
+{{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics-2.png" alt="Utilisez les actions RUM dans le RUM Explorer" style="width:100%;">}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/browser/data_collected/?tab=useraction#automatic-collection-of-actions
-[2]: /fr/real_user_monitoring/browser/modifying_data_and_context/#replace-global-context
+[1]: /fr/real_user_monitoring/application_monitoring/browser/data_collected/?tab=useraction#action-attributes
+[2]: /fr/real_user_monitoring/application_monitoring/browser/advanced_configuration/#replace-global-context
 [3]: /fr/real_user_monitoring/explorer

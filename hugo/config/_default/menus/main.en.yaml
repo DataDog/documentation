@@ -4783,21 +4783,26 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Env Remapping Rules
+      url: tracing/services/env_remapping_rules
+      parent: tracing_services
+      identifier: tracing_env_remapping_rules
+      weight: 909
     - name: Tag Enrichment
       url: tracing/services/tag_enrichment
       parent: tracing_services
       identifier: tracing_tag_enrichment
-      weight: 909
+      weight: 910
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 910
+      weight: 911
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 911
+      weight: 912
     - name: Endpoint Observability
       url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
@@ -10136,16 +10141,21 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
+    - name: Remote Configuration
+      url: real_user_monitoring/remote_configuration/
+      parent: rum
+      identifier: rum_remote_configuration
+      weight: 15
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 16
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 17
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
