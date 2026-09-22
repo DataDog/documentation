@@ -49,7 +49,7 @@ Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], no
 
 Import `DatadogCoreProvider` and `fetchRulesConfiguration` from `@datadog/openfeature-browser/rules-based`. Fetch the rules and validate the result before supplying it to the provider:
 
-{{< code-block lang="javascript" >}}
+```javascript
 import {
   DatadogCoreProvider,
   fetchRulesConfiguration,
@@ -82,7 +82,7 @@ await OpenFeature.setProviderAndWait(domain, provider, {
 
 const client = OpenFeature.getClient(domain);
 const enabled = client.getBooleanValue('checkout_new', false);
-{{< /code-block >}}
+```
 
 The fetch helper makes the configuration request. Registering the provider and evaluating the flag do not fetch configuration. The helper also accepts a `fetch` implementation and an abort `signal` for application-controlled transport.
 
@@ -149,7 +149,7 @@ The provider performs evaluations without tracking by default. Add only the inte
 
 Use `composeDatadogTrackingHooks()` to initialize and shut down the selected integrations together. Register its hooks on the client from the initialization example before evaluations that need tracking:
 
-{{< code-block lang="javascript" >}}
+```javascript
 import {
   composeDatadogTrackingHooks,
   createDatadogExposureLoggingHook,
@@ -175,7 +175,7 @@ await tracking.initialize();
 client.addHooks(...tracking.hooks);
 
 const trackedValue = client.getBooleanValue('checkout_new', false);
-{{< /code-block >}}
+```
 
 These hooks run only for evaluations made through this client instance. Continue using the same client for tracked evaluations. Omit an integration's import and factory call to exclude it. RUM tracking requires [Browser RUM][6] to be available as `DD_RUM` and can increase RUM-billed event counts.
 

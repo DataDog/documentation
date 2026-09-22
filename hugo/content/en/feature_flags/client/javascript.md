@@ -252,7 +252,7 @@ Use `initialFlagsConfiguration` to supply precomputed assignments, such as confi
 
 For a portable precomputed configuration string, parse it and restore its associated context:
 
-{{< code-block lang="javascript" >}}
+```javascript
 import {
   configurationFromString,
   DatadogProvider,
@@ -275,7 +275,7 @@ const provider = new DatadogProvider({
 });
 
 await OpenFeature.setProviderAndWait(provider, context);
-{{< /code-block >}}
+```
 
 Context matching includes any RUM user attributes added by the provider. Supply assignments computed for that effective context. Subsequent context changes still attempt to fetch assignments; initial data does not become a rules-based configuration.
 
