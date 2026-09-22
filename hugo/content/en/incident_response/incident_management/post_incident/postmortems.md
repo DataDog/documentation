@@ -56,11 +56,23 @@ Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident
 
 Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
 
-### Convert datetime text to date chips
+## Convert timestamps to date chips
 
-Datadog prompts you to convert datetime text in a postmortem notebook into [date chips][5]. Confirming the prompt converts all recognized datetime text in the notebook into date chips. Date chips display the timestamp in each viewer's local time zone.
+Postmortems often record times as plain text, such as `Jul 23, 4:30 pm UTC`. You can convert this text into [date chips][5], which display the time in each reader's own time zone.
 
-**Note**: Datetime text that's part of a link, such as a link to an event in the incident timeline, isn't converted to a date chip. A date chip can't also be a link.
+This option is available on notebooks with the **Postmortem** notebook type.
+
+To convert timestamps in a postmortem:
+
+1. Open the postmortem notebook.
+1. Click the kebab menu in the upper right and select **Convert timestamps**.
+1. Review the detected timestamps. Each entry shows the original text and the time it resolves to. Times without an explicit offset are interpreted in your local time zone, and a missing year is inferred.
+1. Clear the checkbox for any timestamp you want to leave as plain text.
+1. Click **Convert**.
+
+{{< img src="/incident_response/incident_management/post_incident/postmortems/convert_timestamps.png" alt="The Convert timestamps dialog listing detected timestamps with checkboxes, each showing the time it resolves to." style="width:80%;" >}}
+
+**Note**: Datetime text that is part of a link, such as a link to an event in the incident timeline, is not converted. A date chip cannot also be a link.
 
 ## Postmortem status and owner
 
