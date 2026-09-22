@@ -29,8 +29,6 @@ It does **not** support:
 * Arithmetic such as `i + 1`.
 * Other native programming language syntax beyond what is described on this page.
 
-For `instanceof`, quote the runtime type name, for example `obj instanceof "java.util.Map"`.
-
 Try [autocomplete and search (in Preview)](/dynamic_instrumentation/symdb/) for an improved user experience using the Expression Language.
 
 ## Applications
@@ -46,8 +44,6 @@ Instrumentation conditions must evaluate to a Boolean, for example:
  - `len(str) > 20`
  - `a == b`
  - `user.isActive == true`
-
-Compare Boolean fields explicitly.
 
 ## Contextual variables
 
