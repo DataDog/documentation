@@ -1,43 +1,57 @@
 ---
-title: Required settings for optimal Recovery Time Objective
+title: Required Settings for Optimal Recovery Time Objective
 site_support_id: datadog_disaster_recovery
+further_reading:
+- link: "/disaster_recovery/"
+  tag: "Documentation"
+  text: "Datadog Disaster Recovery (DDR)"
 ---
 
-This page gives the specific settings needed for minimizing DNS failover time for Datadog Disaster Recovery (DDR).
+Configure DNS caching and connection reuse to minimize DNS failover time for Datadog Disaster Recovery (DDR).
 
-The Recovery Time Objective (RTO) for DNS failover is essentially the sum of delays along the resolution-and-reconnection path, from the DNS change to telemetry actually landing in your secondary region. Get the fastest failover by tuning every layer along that path together, not just the DNS record itself, and many of these TTLs are additive which should be considered against your target RTO.
+Failover takes time because DNS caches must refresh and telemetry sources must reconnect before data reaches the secondary region. Configure these settings together to meet your recovery time objective (RTO). Delays across these layers can add up, so account for their combined effect when choosing time to live (TTL) and connection-reset settings.
 
-## 1. DNS record configuration
+## DNS record configuration
 
-| **Configuration / item** | **Description** | **Requirements** |
+| Setting | Required configuration | Description |
 | --- | --- | --- |
-| A/CNAME record TTL | **High impact.** Sets how long resolvers keep returning your primary region's intake IP after cutover. See [RFC 1035](https://www.rfc-editor.org/rfc/rfc1035) (TTL field) and [RFC 2181](https://www.rfc-editor.org/rfc/rfc2181) (TTL clarifications, including TTL=0 handling). | 60–300 seconds. |
-| Negative caching / SOA MINIMUM TTL | **Medium impact.** If any lookup returns NXDOMAIN or no-data during the swap, this governs how long that negative answer sticks. See [RFC 2308](https://www.rfc-editor.org/rfc/rfc2308). | 60–300 seconds, matching your record TTL. |
-| CNAME chain depth | **Medium impact.** The effective TTL of a CNAME chain is the *minimum* TTL across every hop, and each hop is a record you need to keep synchronized. | No more than 1 hop between your vanity record and the Datadog-managed endpoint. |
+| A or CNAME record TTL | Set to 60 to 300 seconds. | **High impact.** Controls how long resolvers cache the record before checking for an updated value after failover. See [RFC 1035][1] (TTL field) and [RFC 2181][2] (TTL clarifications, including TTL=0 handling). |
+| Negative caching TTL | Set to 60 to 300 seconds, matching your A or CNAME record TTL. Check both the SOA record's TTL and its `MINIMUM` field. | **Medium impact.** If a lookup returns NXDOMAIN (the domain does not exist) or NODATA (the requested record type does not exist) during failover, resolvers cache that response. The negative caching TTL is the lower of the SOA record's TTL and its `MINIMUM` field. See [RFC 2308][3]. |
+| CNAME chain depth | Use no more than one CNAME hop between your custom DNS record and the Datadog-managed endpoint. | **Medium impact.** Each record in the chain has its own TTL, and each hop adds a record you need to keep synchronized. |
 
-## 2. Recursive resolver, OS, and application caching
+## OS and application DNS caching
 
-| **Configuration / item** | **Description** | **Requirements** |
+| Setting | Required configuration | Description |
 | --- | --- | --- |
-| Application-level DNS caching (for example, JVM `networkaddress.cache.ttl`) | **High impact.** Some JVM-based applications cache DNS lookups indefinitely under default security configurations. This is the single most common cause of a failover taking far longer than the configured TTL suggests. Go and Node HTTP clients have similar caching behavior to verify. | Set `networkaddress.cache.ttl` (or the equivalent for your runtime) to 60–300 seconds, matching your record TTL, for any JVM-based application (or other client with its own DNS cache) in your telemetry pipeline. |
-| OS-level caches (for example, nscd, systemd-resolved, Windows DNS Client) | **Low-medium impact.** Usually short-lived, but can contribute to RTO length. | Confirm OS-level cache TTLs are 300 seconds or less on hosts running telemetry senders. |
+| Application DNS caching | For applications with a DNS cache, set the cache TTL to 60 to 300 seconds, matching your DNS record TTL. For JVM-based applications, configure `networkaddress.cache.ttl`. | **High impact.** Application DNS caches can retain old addresses after DNS records change. Some JVM configurations cache addresses indefinitely. Verify caching behavior for each runtime and HTTP client, including Go and Node.js clients. |
+| OS DNS caching | Confirm that OS DNS cache TTLs are 300 seconds or less on hosts running telemetry senders. | **Low to medium impact.** OS DNS caches, such as `nscd`, `systemd-resolved`, and Windows DNS Client, can also increase failover time. |
 
-## 3. Sender and Agent behavior
+## Sender and Agent behavior
 
 Any Datadog Agent using DDR's DNS-based failover should be version 7.21 or above. Version 7.62 or above is required to use the more advanced DDR Agent-based failover features.
 
-| **Configuration / item** | **Description** | **Requirements** |
+| Setting | Required configuration | Description |
 | --- | --- | --- |
-| Persistent-connection reuse / Agent TCP reconnect | **High impact.** Subtle but critical configuration. Even if TTL is configured to seconds, misconfiguration here can result in minutes-long failover when Agents and application clients hold a long-lived connection open to intake, and a DNS change only takes effect once that connection is torn down and re-established. | Set `connection_reset_interval` / `forwarder_connection_reset_interval` to 300 seconds or less for each telemetry type, so the Agent periodically tears down and re-establishes its connection, forcing DNS re-resolution. See configuration examples below. |
-| Non-Agent senders (for example, Lambda extensions, OpenTelemetry Collector, FluentBit, custom API clients) | **High impact.** Each has its own DNS caching and connection-reuse behavior, and requires configuration similar to Datadog Agents. | Verify each independently. Set the equivalent of `connection_reset_interval` to 300 seconds or less where configurable, and confirm connection failures trigger immediate re-resolution rather than retries against a cached IP. |
-| Connection-error re-resolution | **Medium-high impact.** Whether a sender re-resolves DNS immediately on a connection failure, or keeps retrying against a cached IP, changes the effective failover time independent of TTL. | Confirm this behavior for any non-Agent sender. Datadog Agents re-resolve DNS on a forced reconnect, per the setting above. |
+| Agent connection reuse | Set the connection-reset interval to 300 seconds or less for each telemetry type. See [Agent configuration examples][5] for the corresponding settings. | **High impact.** Long-lived connections can keep sending telemetry to the primary region after DNS changes. Configure periodic reconnections so the Agent performs DNS resolution again. |
+| Non-Agent telemetry sources | Validate each source independently. Configure periodic reconnections at intervals of 300 seconds or less, where supported. Verify that connection failures trigger immediate DNS resolution instead of repeated attempts against a cached IP. | **High impact.** Non-Agent telemetry sources, such as Lambda extensions, OpenTelemetry Collector, Fluent Bit, and custom API clients, each handle DNS caching and connection reuse differently. Their behavior after a connection failure also affects failover time. |
+
+Resolving DNS again can still return a cached address. Configure [DNS record TTLs][6] and [OS and application DNS caches][7] together with connection-reset intervals.
+
+### Agent configuration examples
+
+Update the settings for each telemetry type you send in `datadog.yaml`.
+
+| Telemetry | Setting |
+| --- | --- |
+| Metrics | `forwarder_connection_reset_interval` |
+| Logs | `logs_config.connection_reset_interval` |
+| APM traces | `apm_config.connection_reset_interval` |
 
 **Metrics** (`datadog.yaml`):
 
 ```yaml
 dd_url: <CUSTOM_INTAKE_URL>
-# How frequently (in seconds) a connection to Datadog's intake is reset,
-# in order to resolve the DNS entry. Recommended: 300 or less.
+# Reset connections every 300 seconds to resolve DNS again.
 forwarder_connection_reset_interval: 300
 ```
 
@@ -46,27 +60,26 @@ forwarder_connection_reset_interval: 300
 ```yaml
 logs_config:
   logs_dd_url: <CUSTOM_INTAKE_URL>
-  # How frequently (in seconds) a connection to Datadog's logs intake is
-  # reset, in order to resolve the DNS entry. Recommended: 300 or less.
+  # Reset connections every 300 seconds to resolve DNS again.
   connection_reset_interval: 300
 ```
 
-**APM/Traces** (`datadog.yaml`):
+**APM traces** (`datadog.yaml`):
 
 ```yaml
 apm_config:
   apm_dd_url: <CUSTOM_INTAKE_URL>
-  # How frequently (in seconds) a connection to Datadog's APM intake is
-  # reset, in order to resolve the DNS entry. Recommended: 300 or less.
+  # Reset connections every 300 seconds to resolve DNS again.
   connection_reset_interval: 300
 ```
 
-## Takeaways for prioritization
-
-- **Connection-reuse settings are critical.** Tuning TTL down to seconds will not succeed if senders hold persistent connections open to your primary region. Tune TTL and reconnect settings together.
-
-- **Give the JVM application-level cache specific attention.** It's the setting most likely to cause a failover to exceed your target RTO if left at its default.
-
 ## Further reading
 
-- [Datadog Disaster Recovery (DDR)](/disaster_recovery/)
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.rfc-editor.org/rfc/rfc1035
+[2]: https://www.rfc-editor.org/rfc/rfc2181
+[3]: https://www.rfc-editor.org/rfc/rfc2308
+[5]: #agent-configuration-examples
+[6]: #dns-record-configuration
+[7]: #os-and-application-dns-caching
