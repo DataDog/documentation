@@ -60,6 +60,8 @@ Multiple users can edit an embedded postmortem at the same time. Cursor markers 
 
 Postmortems often record times as plain text, such as `Jul 23, 4:30 pm UTC`. You can convert this text into [date chips][5], which display the time in each reader's own time zone.
 
+Times in a postmortem are often recorded in different time zones by different responders. Conversion makes them uniform. As long as each time states its time zone, you do not need to standardize times by hand while drafting.
+
 This option is available on notebooks with the **Postmortem** notebook type.
 
 To convert timestamps in a postmortem:
