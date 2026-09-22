@@ -338,6 +338,10 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
   - `.trackScrollAndSwipeActions`: When set to `false`, disables automatic scroll and swipe action tracking performed by the SDK. Enabled (`true`) by default. Disabling it also means these gestures no longer count as candidate "last interactions" for Interaction-to-Next-View (INV) attribution.
   - `.viewUpdates`: When set to `true`, changes how view updates are reported. After the first full view event for a view, subsequent updates are sent as delta events containing only the fields that changed, instead of resending the full event. A full event is still sent every 5 updates so the view state can be reconstructed even if some deltas are lost in transit. Disabled (`false`) by default.
 
+{% alert level="warning" %}
+Feature flags may introduce beta functionality. Beta feature flags, and their behavior, may change in future SDK releases without following semantic versioning. Check each flag's description above for its current stability before relying on it in production.
+{% /alert %}
+
 `longTaskEventMapper`
 : The data scrubbing callback for long tasks. This can be used to modify or drop long task events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
