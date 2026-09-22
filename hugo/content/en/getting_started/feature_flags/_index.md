@@ -98,7 +98,9 @@ Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeatur
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 
-Then, add the following to your project to initialize the SDK:
+Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][12]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][11]. The initial rules fetch and later refreshes still contribute to usage; local context changes do not.
+
+Add the following to your project to initialize the SDK:
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
@@ -403,3 +405,5 @@ For server-side applications, you can also enable flag evaluation metrics to tra
 [8]: /feature_flags/concepts/traffic_splitting/
 [9]: /feature_flags/guide/server_flag_evaluation_metrics/
 [10]: /feature_flags/guide/apm_trace_enrichment/
+[11]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started-load-rules-once-evaluate-across-changing-contexts
+[12]: /feature_flags/concepts/monthly_flag_configuration_requests/

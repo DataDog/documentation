@@ -39,7 +39,13 @@ Your application owns configuration availability, freshness, and the tracking li
 
 <div class="alert alert-warning">Configuration delivered to a browser is inspectable, including any targeting rules and values it contains. Keep sensitive configuration and authorization decisions on the server. Client-side feature flags are not an access-control mechanism.</div>
 
-## Fetch rules and initialize
+## Getting started: load rules once, evaluate across changing contexts
+
+For browser applications that change evaluation context repeatedly during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider`. Load the rules once, then reuse the provider and configuration for subsequent evaluations and context changes.
+
+Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], not local evaluations. The initial rules fetch and later refreshes contribute to usage. Changing context with the loaded rules does not generate additional configuration requests.
+
+### Fetch rules and initialize
 
 Import `DatadogCoreProvider` and `fetchRulesConfiguration` from `@datadog/openfeature-browser/rules-based`. Fetch the rules and validate the result before supplying it to the provider:
 
@@ -82,7 +88,7 @@ The fetch helper makes the configuration request. Registering the provider and e
 
 Catch initialization errors in your application's startup flow and decide whether to retry or continue with default behavior. Do not assume the provider is ready if `setProviderAndWait()` rejects.
 
-## Change the evaluation context
+### Change the evaluation context
 
 Use the same domain when updating context:
 
@@ -95,7 +101,7 @@ await OpenFeature.setContext(domain, {
 const enabledForUpdatedContext = client.getBooleanValue('checkout_new', false);
 {{< /code-block >}}
 
-The rules configuration remains in memory and is evaluated against the new context. No configuration request is made. Optional tracking hooks can still send telemetry for evaluations.
+The rules configuration remains in memory and is evaluated against the new context. Do not call `loadRulesConfiguration()` again for each context change. No configuration request is made. Optional tracking hooks can still send telemetry for evaluations.
 
 Use [flat context attributes][5] and supply the attributes needed for targeting explicitly. `DatadogCoreProvider` does not automatically copy user attributes from RUM.
 
@@ -194,3 +200,4 @@ await tracking.shutdown();
 [4]: /feature_flags/concepts/distribution_channels/
 [5]: /feature_flags/concepts/evaluation_context/#context-attributes
 [6]: /real_user_monitoring/application_monitoring/browser/
+[7]: /feature_flags/concepts/monthly_flag_configuration_requests/
