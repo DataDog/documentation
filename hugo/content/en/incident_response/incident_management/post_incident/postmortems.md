@@ -47,7 +47,7 @@ To generate a postmortem:
 
 ### Generate a postmortem with Workflow Automation
 
-You can also generate a postmortem from a [workflow][5] using the **Generate postmortem** action. The action takes an incident and a postmortem template, and attaches the resulting postmortem to that incident. Use this path to create postmortems as part of an automated post-incident process, such as after an incident moves to resolved.
+You can also generate a postmortem from a [workflow][5] using the **Generate postmortem** action. The action takes an incident and a postmortem template, and attaches the resulting postmortem to that incident. Use this path to create postmortems as part of an automated post-incident process, such as after an incident is resolved.
 
 <div class="alert alert-warning">The AI-generated variables available to postmortem templates, such as <code>{{incident.ai_summary}}</code>, populate only for postmortems generated from the <strong>Post-Incident</strong> tab. A postmortem generated through the <strong>Generate postmortem</strong> workflow action renders these variables empty. To include AI-generated content, generate the postmortem from the <strong>Post-Incident</strong> tab.</div>
 
