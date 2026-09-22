@@ -44,7 +44,7 @@ Datadog Synthetic Monitoring enables proactive monitoring of web applications an
    - **Browser Tests**: Record your test from a browser session running directly on a domain-joined Windows host. For example, connect to your Windows private location using Remote Desktop Protocol (RDP) and record from there. Recording from a machine outside the Active Directory domain sends requests over the public internet without any Kerberos credentials attached, causing a login prompt.
    - **API Tests**: Set the {{< ui >}}Domain{{< /ui >}} field under the {{< ui >}}Kerberos{{< /ui >}} tab to the full Service Principal Name (SPN) of the target service. For example, `HTTP/targetsite.yourdomain.com`, or `HTTP/targetsite.yourdomain.com:port` if the site is registered with a non-default port.
 
-     {{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
+{{< img src="synthetics/guide/kerberos-authentication/api_test_kerberos.png" alt="API Test creation with the Advanced options expanded, highlighting the Authentication tab and Kerberos authentication type" style="width:80%;" >}}
 
 ## Further Reading
 
