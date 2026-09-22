@@ -297,8 +297,7 @@ Store settings alongside your prompt so you can update and roll back both as one
 - **Structured output schemas**, such as `response_format`.
 - **Tool definitions**, such as `tools` and `tool_choice`.
 
-Configuration is a JSON object whose fields you define. Your application reads and applies these settings;
-Datadog does not automatically apply them to Playground runs or model calls. Do not store secrets in configuration.
+Configuration is a JSON object whose fields you define. Your application reads and applies these settings; Datadog does not automatically apply them to Playground runs or model calls. Do not store secrets in configuration.
 
 ### Add configuration
 
@@ -326,58 +325,73 @@ The editor requires a valid JSON object. Its example text is a placeholder, not 
 
 This creates a version without overwriting the original. Use {{< ui >}}Compare{{< /ui >}} to inspect configuration changes.
 
-Deploy the version to an environment when it is ready. Applications retrieving that environment receive its selected
-template and configuration together. To roll back both, deploy an earlier version. Saving alone does not change
-the version an environment serves.
+Deploy the version to an environment when it is ready. Applications retrieving that environment receive its selected template and configuration together. To roll back both, deploy an earlier version. Saving alone does not change the version an environment serves.
 
 ### Use configuration in your application
 
-Fetch a prompt version and pass its settings to your model client. Use the Prompt Management API for configuration;
-released Python, Go, and JavaScript SDKs do not support this field.
+Retrieve the prompt deployed to your application's environment, then pass its configuration to your model client.
 
-For example, create a chat prompt named `summarizer` with the system message
-`Summarize the user's text in one sentence.` and the configuration above. This Python example retrieves version 1
-and uses its template, model, and temperature in an [OpenAI model call][10].
+**Preview SDK access:** Contact Datadog Support or your Customer Success Manager for the SDK version to use for your language.
 
-Install `requests` and `openai`. Set `DD_API_KEY`, `DD_APP_KEY`, and `OPENAI_API_KEY` in your environment.
-Set `DD_API_HOST` to the API host for your [Datadog site][2], such as `https://api.datadoghq.com`.
-The Datadog keys need the read permissions in [Prerequisites](#prerequisites).
+These examples use a prompt named `summarizer` with the configuration shown above.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Access configuration through `prompt.config`:
 
 ```python
-import os
+from ddtrace.llmobs import LLMObs
 
-import requests
-from openai import OpenAI
+prompt = LLMObs.get_prompt("summarizer")
+config = prompt.config
 
-response = requests.get(
-    f"{os.environ['DD_API_HOST']}/api/v2/llm-obs/v1/prompts/summarizer/versions/1",
-    headers={
-        "DD-API-KEY": os.environ["DD_API_KEY"],
-        "DD-APPLICATION-KEY": os.environ["DD_APP_KEY"],
-    },
-    timeout=10,
-)
-response.raise_for_status()
-version = response.json()["data"]["attributes"]
-config = version.get("config", {})
-
-completion = OpenAI().chat.completions.create(
-    model=config["model"],
-    temperature=config.get("temperature", 0.2),
-    messages=version["template"] + [
-        {"role": "user", "content": "Our checkout latency dropped by 30% after the release."}
-    ],
-)
-print(completion.choices[0].message.content)
+model = config["model"]
+temperature = config.get("temperature", 0.2)
 ```
 
-This example requires `model` in the saved configuration and a chat template without variables. It pins version 1;
-use environment-based retrieval when you want deployments to select the version. Your application is responsible
-for formatting template variables and validating settings for its model provider.
+Use these values alongside `prompt.format(...)` in your [model call](#retrieve-format-and-use-a-prompt).
 
-**API authoring:** You can also create prompts and versions with the [Prompt Management API][8].
-Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version.
-Send `{}` to clear it. See the API reference for request bodies and access requirements.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+With `dd-trace` initialized, access `prompt.config` inside your async application code:
+
+```javascript
+const prompt = await tracer.llmobs.prompts.getPrompt('summarizer')
+const config = prompt.config
+
+const model = config.model
+const temperature = config.temperature ?? 0.2
+```
+
+Pass these values to your existing model client along with the formatted prompt.
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Access `prompt.Config()` in your request handler or application function:
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "summarizer")
+if err != nil {
+    return err
+}
+config := prompt.Config()
+
+model := config["model"].(string)
+temperature, ok := config["temperature"].(float64)
+if !ok {
+    temperature = 0.2
+}
+```
+
+Pass these values to your model client along with the messages returned by `prompt.Format(...)`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**API authoring:** You can also create prompts and versions with the [Prompt Management API][8]. Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version. Send `{}` to clear it.
 
 ## Advanced usage
 
