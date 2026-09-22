@@ -58,7 +58,7 @@ Multiple users can edit an embedded postmortem at the same time. Cursor markers 
 
 ### Convert datetime text to date chips
 
-When you duplicate a postmortem notebook, Datadog prompts you to convert datetime text in the notebook into [date chips][5]. Confirming the prompt converts all recognized datetime text in the notebook into date chips. Date chips display the timestamp in each viewer's local time zone.
+Datadog prompts you to convert datetime text in a postmortem notebook into [date chips][5]. Confirming the prompt converts all recognized datetime text in the notebook into date chips. Date chips display the timestamp in each viewer's local time zone.
 
 **Note**: Datetime text that's part of a link, such as a link to an event in the incident timeline, isn't converted to a date chip. A date chip can't also be a link.
 
