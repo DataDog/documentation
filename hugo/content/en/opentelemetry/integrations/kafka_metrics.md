@@ -68,31 +68,35 @@ Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP r
 
 ### Configure Kafka brokers
 
-The following JVM options start an unsecured JMX endpoint suitable for evaluation. Add them to each Kafka broker:
+1. Add the following JVM options to each Kafka broker to start an unsecured JMX endpoint suitable for evaluation:
 
-```shell
--Dcom.sun.management.jmxremote=true
--Dcom.sun.management.jmxremote.port=9999
--Dcom.sun.management.jmxremote.rmi.port=9999
--Dcom.sun.management.jmxremote.local.only=false
--Dcom.sun.management.jmxremote.authenticate=false
--Dcom.sun.management.jmxremote.ssl=false
--Djava.rmi.server.hostname=<BROKER_HOSTNAME_OR_IP>
-```
+   ```shell
+   -Dcom.sun.management.jmxremote=true
+   -Dcom.sun.management.jmxremote.port=9999
+   -Dcom.sun.management.jmxremote.rmi.port=9999
+   -Dcom.sun.management.jmxremote.local.only=false
+   -Dcom.sun.management.jmxremote.authenticate=false
+   -Dcom.sun.management.jmxremote.ssl=false
+   -Djava.rmi.server.hostname=<BROKER_HOSTNAME_OR_IP>
+   ```
 
-<div class="alert alert-warning">This configuration accepts unauthenticated, unencrypted JMX connections. <code>jmxremote.authenticate</code> and <code>jmxremote.ssl</code> both default to <code>true</code> and must be set explicitly, because at their defaults the broker does not start: <code>jmxremote.authenticate</code> fails with <code>Password file not found</code>, and <code>jmxremote.ssl</code> fails with <code>Port already in use</code> when <code>jmxremote.rmi.port</code> matches <code>jmxremote.port</code>, because the RMI registry is not TLS-protected by default and the two cannot share a port. For production, enable authentication and TLS, add <code>com.sun.management.jmxremote.registry.ssl=true</code> so the registry and connector can share a port, and configure the scraper with <code>otel.jmx.username</code>, <code>otel.jmx.password</code>, <code>otel.jmx.remote.registry.ssl</code>, and the <code>javax.net.ssl.trustStore</code> and <code>javax.net.ssl.trustStorePassword</code> properties.</div>
+   <div class="alert alert-warning">These options disable JMX authentication and TLS. Use this configuration only for evaluation. For production, enable authentication and TLS and configure the scraper with credentials and trust store settings.</div>
 
-Set `java.rmi.server.hostname` to the hostname or IP address that the scraper uses to connect. The broker includes this value in an RMI stub, and the scraper opens a second connection to it.
+   `jmxremote.authenticate` and `jmxremote.ssl` default to `true`, so set both properties explicitly for this evaluation configuration. Without a password file, authentication causes the broker to fail with `Password file not found`. When `jmxremote.rmi.port` matches `jmxremote.port`, SSL causes `Port already in use` because the RMI registry is not protected with TLS and cannot share the port.
 
-- Use a loopback address only when the scraper runs on the broker's own host or Pod. Several Kafka distributions and container images, including Confluent Platform, default to loopback.
-- Do not use `0.0.0.0`. It is a bind address and the scraper cannot connect to it.
-- In Kubernetes, use the broker Pod IP or a DNS name.
+   To enable authentication and TLS for production, add `com.sun.management.jmxremote.registry.ssl=true` so the registry and connector can share a port. Configure the scraper with the `otel.jmx.username`, `otel.jmx.password`, `otel.jmx.remote.registry.ssl`, `javax.net.ssl.trustStore`, and `javax.net.ssl.trustStorePassword` properties.
 
-In Kafka container images, `KAFKA_JMX_HOSTNAME` sets `java.rmi.server.hostname`. Set it to the same address.
+2. Set `java.rmi.server.hostname` to the hostname or IP address that the scraper uses to connect. The broker includes this value in an RMI stub, and the scraper opens a second connection to it.
 
-Set `jmxremote.rmi.port` to the same port as `jmxremote.port`. Without a fixed RMI port, the second connection uses a random port that a firewall or port mapping might block.
+   - Use a loopback address only when the scraper runs on the broker's own host or Pod. Several Kafka distributions and container images, including Confluent Platform, default to loopback.
+   - Do not use `0.0.0.0`. It is a bind address and the scraper cannot connect to it.
+   - In Kubernetes, use the broker Pod IP or a DNS name.
 
-An unreachable address can allow the initial connection to succeed, but the scrape then fails with `Failed to retrieve RMIServer stub` or `Connection refused to host: <UNREACHABLE_ADDRESS>`.
+   In Kafka container images, `KAFKA_JMX_HOSTNAME` sets `java.rmi.server.hostname`. Set it to the same address.
+
+   An unreachable address can allow the initial connection to succeed, but the scrape then fails with `Failed to retrieve RMIServer stub` or `Connection refused to host: <UNREACHABLE_ADDRESS>`.
+
+3. Set `jmxremote.rmi.port` to the same port as `jmxremote.port`. Without a fixed RMI port, the second connection uses a random port that a firewall or port mapping might block.
 
 ### Run the JMX Scraper
 
