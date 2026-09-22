@@ -145,7 +145,7 @@ You can also:
 
 To create a retention filter or an exclusion filter:
 
-1. In the section for the type of filter you want to create, click the {{< ui >}}+ Add Filter{{< /ui >}} button.
+1. In the section for the type of filter you want to create, click the {{< ui >}}\+ Add Filter{{< /ui >}} button.
 1. Give the filter a descriptive name.
 1. Select an event type from the dropdown and enter a query. Any query that can be written in the [RUM Explorer][4] works. Exclusion filters can also target {{< ui >}}All events{{< /ui >}}.
 1. For a custom retention filter, optionally set a retention rate against sessions that match the query. You can click {{< ui >}}Generate Estimate{{< /ui >}} to help guide you in setting this rate. Exclusion filters have no retention rate.

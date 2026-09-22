@@ -98,6 +98,6 @@ To turn off redaction in the tracer while keeping detection and reporting, set `
 
 [1]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 [2]: https://app.datadoghq.com/security/ai-guard/settings/services
-[3]: /security/ai_guard/setup/sdk/?tab=python#python-example-apply-sensitive-data-redaction
-[4]: /security/ai_guard/setup/sdk/?tab=javascript#javascript-example-apply-sensitive-data-redaction
-[5]: /security/ai_guard/setup/sdk/?tab=java#java-example-apply-sensitive-data-redaction
+[3]: /security/ai_guard/setup/sdk/?prog_lang=python#example-apply-sensitive-data-redaction
+[4]: /security/ai_guard/setup/sdk/?prog_lang=node_js#example-apply-sensitive-data-redaction
+[5]: /security/ai_guard/setup/sdk/?prog_lang=java#example-apply-sensitive-data-redaction
