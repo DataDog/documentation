@@ -122,20 +122,20 @@ If fetching or parsing fails, the provider continues using the previous configur
 
 ## Optional: supply portable configuration
 
-Instead of calling the fetch helper in the browser, your application can deliver a portable configuration string. Use `configurationToString()` in the configuration-producing integration and `configurationFromString()` in the browser. For rules-based configuration, import these helpers from `/rules-based`.
+Instead of fetching rules in the browser, your application can deliver a serialized rules configuration. Create this string by calling `configurationToString(configuration)` on a rules configuration that you already fetched. Import this helper from `@datadog/openfeature-browser/rules-based`.
 
-Replace the `loadRulesConfiguration()` call in the initialization example with:
+Deliver the resulting string to the browser through your application, for example in a server-rendered bootstrap payload. Replace `<SERIALIZED_RULES_CONFIGURATION>` below with that string, and use this code instead of the `loadRulesConfiguration()` call in the initialization example:
 
 {{< code-block lang="javascript" >}}
 import { configurationFromString } from '@datadog/openfeature-browser/rules-based';
 
-const configuration = configurationFromString('<RULES_CONFIGURATION_WIRE>');
+const configuration = configurationFromString('<SERIALIZED_RULES_CONFIGURATION>');
 if (!configuration.rules) {
   throw new Error(configuration.rulesError ?? 'Expected a rules-based configuration');
 }
 {{< /code-block >}}
 
-The placeholder represents a portable string produced by `configurationToString()`, not the raw binary response from the rules endpoint. Use the framework's safe serialization mechanism when embedding configuration in HTML. Parsing and supplying the string do not make a configuration request.
+The serialized string is not the raw binary response from the rules endpoint. Use the framework's safe serialization mechanism when embedding configuration in HTML. Parsing and supplying the string do not make a configuration request.
 
 ### Precomputed configurations
 
