@@ -37,9 +37,14 @@
     {{- if not $valid -}}
       {{- $hasMin := isset $spec "minimum" -}}
       {{- $hasMax := isset $spec "maximum" -}}
-      {{- if and $hasMin $hasMax }}{{ $valid = printf "%v&ndash;%v" $spec.minimum $spec.maximum -}}
-      {{- else if $hasMin }}{{ $valid = printf "&ge; %v" $spec.minimum -}}
-      {{- else if $hasMax }}{{ $valid = printf "&le; %v" $spec.maximum }}{{ end -}}
+      {{- /* Format bounds as integers when whole, to avoid float exponent notation (1e+09). */ -}}
+      {{- $minS := "" -}}
+      {{- if $hasMin }}{{ $m := $spec.minimum }}{{ $minS = cond (eq (math.Floor $m) $m) (printf "%d" (int $m)) (printf "%v" $m) }}{{ end -}}
+      {{- $maxS := "" -}}
+      {{- if $hasMax }}{{ $m := $spec.maximum }}{{ $maxS = cond (eq (math.Floor $m) $m) (printf "%d" (int $m)) (printf "%v" $m) }}{{ end -}}
+      {{- if and $hasMin $hasMax }}{{ $valid = printf "%s&ndash;%s" $minS $maxS -}}
+      {{- else if $hasMin }}{{ $valid = printf "&ge; %s" $minS -}}
+      {{- else if $hasMax }}{{ $valid = printf "&le; %s" $maxS }}{{ end -}}
     {{- end -}}
     {{- /* Fold valid values into the description cell, only when present. */ -}}
     {{- $descCell := $spec.description | htmlEscape -}}
