@@ -21,7 +21,7 @@ Test a prompt change on live traffic before making it the default. Use an **A/B 
 
 <div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. A/B testing and Guarded Rollouts are available separately.</div>
 
-- **Which prompt performs better?** [Run an A/B test](#run-an-ab-test). Access to Guarded Rollouts is not required.
+- **Which prompt performs better?** [Run an A/B test](#run-an-ab-test).
 - **How do I introduce a change gradually?** [Use a Guarded Rollout](#use-a-guarded-rollout).
 
 ## Before you begin
@@ -122,16 +122,16 @@ For checkout conversion, check that the metric uses the same user ID as the prom
 
 ## Permissions
 
-Preview access and user permissions are separate. In addition to the Prompt Management prerequisites, your role needs the permissions for each action:
+In addition to the [Prompt Management prerequisites][5], your role needs:
 
 | Action | Required permission |
 |--------|---------------------|
-| Create an A/B test draft | Product Analytics **Experiments Write** (`product_analytics_experiments_write`). Configuring and starting the test also requires the applicable Product Analytics and Feature Flags permissions. |
-| Deploy through the guarded-deployment workflow | LLM Observability Write (`llm_observability_write`); the deployment UI also requires Feature Flags Environment Config Read (`feature_flag_environment_config_read`). |
-| Pause or resume a Guarded Rollout | Feature Flags Config Write (`feature_flag_config_write`). |
-| Stop a Guarded Rollout and restore its baseline | LLM Observability Read and Write (`llm_observability_read`, `llm_observability_write`). Feature Flags write permission is not required. |
+| Set up an A/B test from a prompt | Product Analytics Experiments Write |
+| Start a Guarded Rollout | LLM Observability Write and Feature Flags Environment Config Read |
+| Pause or resume a Guarded Rollout | Feature Flags Config Write |
+| Stop a Guarded Rollout | LLM Observability Read and Write |
 
-See [Product Analytics permissions][3] and [Feature Flags permissions][6]. Environments with approval requirements may need serving changes approved in Feature Flags before you can proceed.
+To configure and launch an A/B test in Product Analytics, see [Product Analytics permissions][3] and [Feature Flags permissions][6]. If your environment requires approvals, request approval in Feature Flags before changing live traffic.
 
 ## Troubleshooting
 
