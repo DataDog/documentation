@@ -32,4 +32,4 @@ The Bits Investigation chatbot has access to:
 | Ask about Datadog products                     | `Does Bits Investigation connect to Datadog Work Management?`     | Datadog Documentation             |
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
-[1]: bits_ai/bits_investigation/configure#confluence
+[1]: /bits_ai/bits_investigation/configure#confluence

@@ -1,5 +1,3 @@
-### Track user sessions
-
 Adding user information to your RUM sessions helps you to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
@@ -18,14 +16,3 @@ To identify user sessions, use the `setUserInfo` API, for example:
 ```kotlin
 Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
 ```
-
-### Add user properties
-
-You can use the `addUserExtraInfo` API to append extra user properties to previously set properties.
-
-```kotlin
-Datadog.addUserExtraInfo(extraInfo)
-```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform

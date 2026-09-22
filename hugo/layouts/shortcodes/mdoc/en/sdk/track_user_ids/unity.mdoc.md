@@ -1,5 +1,3 @@
-### Track user sessions
-
 Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
@@ -21,22 +19,3 @@ For example:
 ```csharp
 DatadogSdk.Instance.SetUserInfo("1234", "John Doe", "john@doe.com");
 ```
-
-### Add custom user attributes
-
-You can add custom attributes to your user session. This additional information is automatically applied to logs, traces, and RUM events.
-
-To remove an existing attribute, set it to `null`.
-
-For example:
-
-```csharp
-DatadogSdk.Instance.AddUserExtraInfo(new ()
-{
- { "attribute_1", "foo" },
- { "attribute_2", null },
-});
-```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/setup/data_collected/?platform=unity

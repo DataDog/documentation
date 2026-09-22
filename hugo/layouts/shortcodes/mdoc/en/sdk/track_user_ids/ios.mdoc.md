@@ -1,5 +1,3 @@
-### Track user sessions
-
 Adding user information to your RUM sessions makes it possible to:
 
 * Follow the journey of a given user
@@ -36,16 +34,3 @@ Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
 
 {% /tab %}
 {% /tabs %}
-
-## Add user properties
-
-You can use the `Datadog.addUserExtraInfo(_:)` API to append extra user properties to previously set properties.
-
-```swift
-import DatadogCore
-
-Datadog.addUserExtraInfo(["company": "Foo"])
-```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/ios
