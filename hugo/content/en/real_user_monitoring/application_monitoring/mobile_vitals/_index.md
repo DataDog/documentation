@@ -158,10 +158,88 @@ The following telemetry provide insight into your mobile application's performan
 
 {{< /tabs >}}
 
+## Timeseries
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
+Timeseries is in Preview.
+{{< /callout >}}
+
+CPU ticks per second and memory utilization are reported as an average for an entire view, which hides short spikes and makes it hard to tell when resource usage changed. Timeseries samples memory and CPU once per second for the length of the session and graphs the result, so you can see the shape of resource usage over time and line it up against the views, actions, and operations that ran alongside it.
+
+Timeseries is available on the iOS and Android SDKs.
+
+### Data collected
+
+| Series | Description |
+| --- | --- |
+| `memory_footprint` | The physical memory used by your application, in kilobytes. |
+| `memory_percent` | The physical memory used by your application, as a percentage of total device memory. |
+| `cpu_usage` | The CPU used by your application, as a percentage of total device capacity across all cores. |
+
+Samples are taken every second and sent in batches, which produces roughly one event every two minutes for each metric. The sampling interval and the batch size are fixed and cannot be configured.
+
+Collection follows your [session sample rate][3]: timeseries are collected only for sessions that are sampled in. Collection also pauses while your application is in the background, so backgrounded time does not consume battery or appear as activity in the graph.
+
+### Enable timeseries
+
+Timeseries collection is off by default. Enable it when you configure RUM.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+Requires Android SDK v3.14.0 or later.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT)
+    .build()
+
+Rum.enable(rumConfig)
+```
+
+`TimeseriesConfiguration.DEFAULT` collects both CPU and memory. To collect only one, pass the types explicitly:
+
+```kotlin
+.setTimeseriesConfiguration(
+    TimeseriesConfiguration(setOf(TimeseriesType.MEMORY))
+)
+```
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Requires iOS SDK v3.17.0 or later.
+
+```swift
+var rumConfig = RUM.Configuration(applicationID: "<rum_application_id>")
+rumConfig.timeseries = .default
+
+RUM.enable(with: rumConfig)
+```
+
+`.default` collects both CPU and memory. To collect only one, pass the types explicitly:
+
+```swift
+rumConfig.timeseries = RUM.Configuration.Timeseries(collectTypes: [.memory])
+```
+
+**Note**: CPU collection is not available on watchOS. If you request `.cpu` on watchOS, it is ignored.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### View timeseries
+
+Open a session, a view, or an operation in the [RUM Explorer][4] and expand the {{< ui >}}Performance Timeseries{{< /ui >}} section of the side panel to see the {{< ui >}}Memory & CPU{{< /ui >}} graph.
+
+The graph always covers the full session. When you open it from a view or an operation, markers show where that view or operation starts and ends, so you can see its resource usage in the context of everything around it. Periods when the application was in the background are shaded.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
+[3]: /real_user_monitoring/guide/best-practices-for-rum-sampling/
+[4]: /real_user_monitoring/explorer/
 
