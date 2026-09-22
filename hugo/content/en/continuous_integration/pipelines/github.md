@@ -64,7 +64,7 @@ This table shows the mapping of concepts between Datadog CI Visibility and GitHu
 The [GitHub Actions][1] integration uses a private [GitHub App][11] to collect workflow information. If you already have an app, you can skip to the next section.
 
 1. Go to the [GitHub integration tile][12].
-2. Click {{< ui >}}+ Create GitHub App{{< /ui >}}.
+2. Click {{< ui >}}\+ Create GitHub App{{< /ui >}}.
 3. Configure the integration for a personal or organization account and enter the name of the GitHub organization.
 3. Select the Datadog features you want to enable for the GitHub App.
 4. In the {{< ui >}}Edit Permissions{{< /ui >}} section, grant `Actions: Read Only` access.
@@ -110,7 +110,7 @@ Logs are billed separately from CI Visibility. Log retention, exclusion, and ind
 
 The GitHub Actions CI Visibility integration allows for correlation between infrastructure and jobs. To achieve this, ensure the [Datadog Agent][20] is running on the host where the jobs are executed. Depending on the configuration, additional steps might be required:
 
-- For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, see [Datadog Agent configuration template][22] and change `min_collection_interval` to be less than 15 seconds.
+- For [Actions Runner Controller][21]: No additional setup required. Due to limitations in the Datadog Agent, jobs shorter than the minimum collection interval of the Datadog Agent might not always display infrastructure correlation metrics. To adjust this value, set `min_collection_interval` to less than 15 seconds in your [Agent configuration file][22].
 
 - For other configurations: To correlate jobs with the hosts running them, ensure the GitHub runner name matches the machine's hostname.
 
@@ -155,7 +155,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [19]: /continuous_integration/search/#search-for-pipelines
 [20]: /agent
 [21]: https://github.com/actions/actions-runner-controller
-[22]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[22]: /agent/configuration/agent-configuration-files/
 [23]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [24]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [25]: /glossary/#pipeline-execution-time

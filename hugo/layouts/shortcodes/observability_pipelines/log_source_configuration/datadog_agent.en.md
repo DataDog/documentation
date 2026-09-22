@@ -20,5 +20,5 @@ logs_config:
 
 After you [restart the Agent][1032], your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
 
-[1031]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[1031]: /agent/configuration/agent-configuration-files/
 [1032]: /agent/configuration/agent-commands/#restart-the-agent

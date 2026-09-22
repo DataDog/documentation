@@ -1,6 +1,13 @@
 ---
 title: Journey Monitoring
 description: "Monitor and analyze critical user flows to troubleshoot user experience and technical issues."
+further_reading:
+- link: "https://www.datadoghq.com/blog/journey-monitoring/"
+  tag: "Blog"
+  text: "Monitor critical user journeys with Datadog Journey Monitoring"
+- link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
+  tag: "Blog"
+  text: "Coordinate product launches with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
@@ -31,9 +38,10 @@ For each journey, you can:
 
 ## Prerequisites
 
-Journey Monitoring requires the following products for frontend applications, each contributing different data to your journeys:
+Journey Monitoring requires **at least one** of the following products to be enabled in frontend applications, each contributing different data to your journeys:
 
-- **[RUM without Limits][5]** and **[Product Analytics][8]**: Traffic, conversion rate, time-to-convert metrics, and performance.
+- **[RUM without Limits][5]**: Frontend errors and performance tracking through RUM operations.
+- **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics.
 - **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite.
 
 ## Journey structure
@@ -108,3 +116,7 @@ Each journey and its variants have the following performance metrics:
 [12]: /journey_monitoring/details_report/
 [13]: /real_user_monitoring/operations_monitoring/
 [14]: /synthetics/test_suites/#service-level-objectives
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

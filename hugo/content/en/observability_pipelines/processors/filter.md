@@ -1,5 +1,6 @@
 ---
 title: Filter Processor
+description: Learn how to use the Filter processor to send only logs, metrics, or traces that match a filter query to the next step in the pipeline.
 disable_toc: false
 further_reading:
 - link: "/getting_started/search/"
@@ -21,15 +22,17 @@ products:
 
 ## Overview
 
-This processor sends all logs or metrics that match the filter query to the next step in the pipeline. Logs or metrics that do not match the filter query are dropped and are not sent to any subsequent processors or destinations. **Note**: For all other processor queries, logs or metrics that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
+This processor sends all logs or metrics that match the filter query to the next step in the pipeline. Events that do not match the filter query are dropped and are not sent to any subsequent processors or destinations.
+
+**Note**: For all other processor queries, events that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
 
 ## Setup
 
 To set up the filter processor:
 
 - Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [Metrics Search Syntax][2] for more information.
-  - Logs or metrics that match the query are sent to the next component.
-  - Logs or metrics that don't match the query are dropped.
+  - Events that match the query are sent to the next component.
+  - Events that don't match the query are dropped.
 
 ## Health metrics
 

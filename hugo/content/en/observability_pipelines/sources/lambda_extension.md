@@ -13,6 +13,8 @@ This document describes how to use the Datadog Lambda Extension to send AWS vend
 
 See [Datadog Lambda Extension][1] to learn more about it.
 
+**Note**: The Datadog Lambda Extension sends logs tagged with `ddsource` and `ddtags`, not `source` and `tags`. When you define processor queries or filters for these logs, use `ddsource` and `ddtags`.
+
 ## Set up a pipeline
 
 {{% observability_pipelines/lambda_forwarder/pipeline_setup %}}

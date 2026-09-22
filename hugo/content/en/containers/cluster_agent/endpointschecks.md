@@ -20,7 +20,7 @@ further_reading:
 
 The cluster check feature provides the ability to [Autodiscover][1] and perform checks on load-balanced cluster services, such as Kubernetes services. _Endpoints checks_ extend this mechanism to monitor each endpoint managed by a Kubernetes service.
 
-The [Cluster Agent][2] discovers endpoint check configurations based on [Autodiscovery][1] annotations on the Kubernetes services. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
+The [Cluster Agent][2] discovers endpoint check configurations from [Autodiscovery][1] annotations on Kubernetes services or from a [`DatadogInstrumentation` custom resource][14]. The Cluster Agent then dispatches these configurations to node-based Agents to individually run. Endpoint checks are dispatched to Agents that run on the same node as the Pod(s) that back the endpoint(s) of the monitored Kubernetes service. This dispatching logic allows the Agent to add the Pod and container tags it has already collected for each respective Pod.
 
 The Agents connect to the Cluster Agent every ten seconds and retrieve the check configurations to run. Metrics coming from endpoints checks are submitted with service tags, [Kubernetes tags][3], host tags, and the `kube_endpoint_ip` tag based on the evaluated IP address.
 
@@ -319,7 +319,6 @@ spec:
 [11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [12]: /integrations/nginx/
 [13]: /getting_started/tagging/unified_service_tagging
-
 {{% /tab %}}
 
 {{% tab "Kubernetes (AD v1)" %}}
@@ -391,6 +390,28 @@ spec:
 {{% /tab %}}
 {{< /tabs >}}
 
+### Configuration from DatadogInstrumentation CRD
+
+Use a `DatadogInstrumentation` resource targeting the Service. For more details, see [Configure Autodiscovery with DatadogInstrumentation CRD][14].
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: nginx-endpoints
+spec:
+  targetRef:
+    apiVersion: v1
+    kind: Service
+    name: nginx
+  config:
+    checks:
+      - integration: nginx
+        instances:
+          - name: "My NGINX Service Endpoints"
+            nginx_status_url: "http://%%host%%:%%port%%/status/"
+```
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -408,3 +429,4 @@ spec:
 [11]: /agent/kubernetes/integrations/?tab=kubernetes#supported-template-variables
 [12]: /integrations/nginx/
 [13]: /getting_started/tagging/unified_service_tagging
+[14]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/#service-targets

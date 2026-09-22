@@ -17,13 +17,14 @@ Use the different principals to control access patterns in your organization and
 | [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [AWS Accounts][11]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Azure App Registrations][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Work Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
-| [Critical Assets][26]                            | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Dynamic Severity][26]                           | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Experiments][27]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -59,7 +60,7 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [7]: /security/suppressions/#restrict-edit-permissions
 [8]: /service_level_objectives/#permissions
 [9]: /synthetics/browser_tests/#permissions
-[10]: /incident_response/case_management/settings#granular-access-control
+[10]: /incident_response/work_management/settings#granular-access-control
 [11]: /getting_started/integrations/#granular-access-control
 [12]: /reference_tables/#permissions
 [13]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-app
@@ -75,4 +76,6 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [23]: /observability_pipelines/configuration/access_control/
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
-[26]: /security/cloud_siem/detect_and_monitor/critical_assets/#restrict-edit-permissions
+[26]: /security/cloud_siem/detect_and_monitor/dynamic_severity/#restrict-edit-permissions
+[27]: /experiments/
+

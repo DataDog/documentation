@@ -36,11 +36,12 @@ When you click a row with a Bits AI investigation, the Bits AI Investigation sid
 In the side panel, you can see Bits AI's investigative findings, including:
 - Overall conclusion
 - Key evidence used to come to that conclusion
+- Suggested next steps to remediate the issue or suppress detection rules with specific attributes
 - Investigative steps showing Bits AI's data queries, including embedded results and links to full queries
 - Analysis on each investigative step
 
 You can also take additional steps directly from the side panel:
-- Create a case with pre-populated Bits AI investigation results
+- Create a work item with pre-populated Bits AI investigation results
 - Run a workflow with a SOAR blueprint
 - Declare an incident
 - Add a rule suppression
@@ -51,7 +52,7 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 
 ### Supported sources
 
-Bits AI can run investigations on the following Security log sources:
+Bits AI can run investigations on the following Security log sources:\*
 - Amazon GuardDuty, where supported [finding types][6] cover:
   - Anomalous and compromised IAM credentials
   - EC2 and resource credential exfiltration and misuse
@@ -62,8 +63,10 @@ Bits AI can run investigations on the following Security log sources:
   - CloudTrail or S3 defense evasion
   - Attack sequences correlating IAM credential and S3 data compromise
 - AWS CloudTrail
+- Atlassian Event Logs
 - Azure
 - Cloudflare
+- Confluence Audit Records
 - CrowdStrike
 - GCP
 - Kubernetes
@@ -74,12 +77,15 @@ Bits AI can run investigations on the following Security log sources:
 - GitLab
 - GitHub
 - JumpCloud
+- Jira Audit Records
 - Salesforce
 - Slack
 - Snowflake
 - SentinelOne
 - Windows
 - Email phishing
+
+\*In rare cases, an out-of-the-box rule for a supported source is ineligible for Bits investigations because the investigation requires additional non-SIEM telemetry. To view these rules, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > {{< ui >}}Analyst Configuration{{< /ui >}}, then turn on {{< ui >}}Show currently ineligible rules{{< /ui >}}.
 
 ## Set up Bits Security Analyst
 
@@ -88,7 +94,7 @@ Bits AI can run investigations on the following Security log sources:
 To use Bits Security Analyst:
 - Ensure your organization is using a non-legacy version of Cloud SIEM. If you need assistance, contact [Datadog support][1].
 - To set up Bits Security Analyst, you need the **Bits Security Analyst Config Write** [permission][2].
-- To view investigations, you must have **14 days or more** of log history. If you have a shorter log history, you can still set up Bits Security Analyst, but won't see any investigations until you have that much history.
+
 
 ### Setup
 

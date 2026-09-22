@@ -12,10 +12,11 @@ parser.add_argument('--added', help="A list of added files")
 
 args=parser.parse_args()
 
-comment_template = Template(filename='local/bin/py/preview-links-template.mako')
+comment_template = Template(filename='hugo/local/bin/py/preview-links-template.mako')
 
-pattern1 = re.compile('content/en/(.*?).md')
-pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
+pattern1 = re.compile('hugo/content/en/(.*?).md')
+pattern2 = re.compile('hugo/content/en/glossary/terms/(.*?).md')
+pattern3 = re.compile('hugo/content/en/api/latest/(.*?).md')
 
 # Grab YAML frontmatter from markdown file
 def grab_glossary_title(filename):
@@ -29,11 +30,12 @@ def compile_filename(filename):
     if pattern2.match(filename):
         return grab_glossary_title(filename)
     elif pattern1.match(filename):
-        filename = filename.replace(
-            'content/en/', ''
-            ).replace('_index', ''
-            ).replace('.mdoc', ''
-            ).replace('.md', '')
+        filename = filename.split('content/en/', 1)[-1]
+        filename = filename.replace('_index', '').replace('.mdoc', '').replace('.md', '')
+        # API docs use bare `index.md` leaf bundles (no underscore), which the
+        # replace above doesn't strip, leaving a trailing /index in the URL.
+        if pattern3.match(f'hugo/content/en/{filename}.md'):
+            filename = re.sub(r'(^|/)index$', '', filename)
         return filename
 
 def sort_files(file_string):

@@ -1,38 +1,36 @@
 ---
-description: Más información sobre el funcionamiento del método de detección de anomalías.
+description: Aprenda cómo funciona el método de detección de anomalías.
 disable_toc: false
 title: Anomalía
 ---
+## Descripción general {#overview}
 
-## Información general
+La detección de anomalías analiza los registros para identificar picos anormales en su volumen de registros, lo que podría indicar problemas como un ataque, una configuración incorrecta o un proceso fuera de control.
 
-La detección de anomalías analiza logs para identificar picos anormales en tu volumen de logs, que podrían indicar problemas como un ataque, un error de configuración o un proceso fuera de control.
+Consulte [Crear regla][1] para obtener instrucciones sobre cómo configurar una regla de anomalía.
 
-Consulta [Crear regla][1] para obtener instrucciones sobre cómo configurar una regla de anomalías.
-
-## Funcionamiento de la detección de anomalías
+## Cómo funciona la detección de anomalías {#how-anomaly-detection-works}
 
 La regla de detección de anomalías:
 
-- Agrega los logs entrantes en buckets de tiempo y calcula una línea de base.
-    - El límite superior refleja el percentil 99,5 de tu historial reciente, utilizando hasta 2 semanas de logs históricos.
-- Comprueba en cada evaluación el periodo de evaluación más reciente y mide cuánto excede la serie ese límite.
-    - Se activa una señal si el exceso es suficientemente grande en todo el periodo.
+- Agrupa los registros entrantes en intervalos de tiempo y calcula una línea base.
+    - El límite superior refleja el percentil 99.5 de su historial reciente, utilizando hasta 2 semanas de registros históricos.
+- Comprueba en cada evaluación la ventana de evaluación más reciente y mide cuánto excede la serie ese límite.
+    - Se activa una señal si el exceso es lo suficientemente grande durante toda la ventana.
 
-El método de anomalías se adapta a tus patrones normales y reduce el ruido de las fluctuaciones rutinarias.
+El método de anomalías se adapta a sus patrones normales y reduce el ruido de las fluctuaciones rutinarias.
 
-**Nota**: El método de anomalías solo detecta picos, pero no alerta de caídas en el volumen de logs.
+**Nota**: El método de anomalías solo detecta picos. No alerta sobre caídas en el volumen de registros.
 
-### Estacionalidad y periodo de aprendizaje
+### Estacionalidad y periodo de aprendizaje {#seasonality-and-learning-period}
 
-El algoritmo tiene en cuenta automáticamente la estacionalidad diaria y semanal, de modo que los picos regulares, como los aumentos de fin de semana, no alertan.
+El algoritmo tiene en cuenta automáticamente la estacionalidad diaria y semanal, por lo que no alerta ante picos regulares, como los aumentos de fin de semana.
 
-Se aplica un breve periodo de aprendizaje de nuevas reglas o nuevos valores observados para un `group by`. Durante el periodo de aprendizaje, se recopilan datos para crear una línea de base.
+Se aplica un periodo de aprendizaje corto para reglas nuevas o valores recién observados para un `group by`. Durante el periodo de aprendizaje, se recopilan datos para crear una línea base.
 
-## Prácticas recomendadas
+## Mejores prácticas {#best-practices}
 
-- Limita la consulta. Filtra por servicio, entorno, equipo o endpoint para reducir el ruido.
-- Comienza con reglas predeterminadas gestionadas para una amplia cobertura y luego añade reglas de anomalías personalizadas para fuentes con grandes volúmenes de logs.
+- Delimite el contexto de la consulta de forma precisa. Filtre por servicio, entorno, equipo o punto de conexión para reducir el ruido.
+- Comience con reglas predeterminadas administradas para una cobertura amplia, luego agregue reglas de anomalía personalizadas para fuentes de registros de alto volumen.
 
-[1]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule?tab=anomaly
-[2]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/?tab=anomaly#rule-multi-triggering-rt-anomaly
+[1]: /es/security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=anomaly

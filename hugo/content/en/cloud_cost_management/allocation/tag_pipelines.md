@@ -41,9 +41,9 @@ To create a ruleset, navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Se
 
 <div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
-Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}+ New Ruleset{{< /ui >}}.
+Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}\+ New Ruleset{{< /ui >}}.
 
-Within each ruleset, click {{< ui >}}+ Add New Rule{{< /ui >}} and select a rule type: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}}, or {{< ui >}}Map multiple tags{{< /ui >}}. These rules execute in a sequential, deterministic order from top to bottom.
+Within each ruleset, click {{< ui >}}\+ Add New Rule{{< /ui >}} and select a rule type: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}}, or {{< ui >}}Map multiple tags{{< /ui >}}. These rules execute in a sequential, deterministic order from top to bottom.
 
 {{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="A list of tag rules on the Tag Pipelines page displaying various categories such as team, account, service, department, business unit, and more" style="width:60%;" >}}
 
@@ -91,7 +91,7 @@ For example, if you want to add information about which VPs, organizations, and 
 
 {{< img src="cloud_cost/pipelines-map-multiple-tags-2.png" alt="Add account metadata like customer_name using reference tables for tag pipelines" style="width:60%;" >}}
 
-Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after the first match is found. For example, if an `aws_member_account_id` is found, then the rule no longer attempts to find a `subscriptionid`.
+Similar to [Alias tag keys](#alias-tag-keys), the rule stops executing for each resource after the first match is found. For example, if an `application` is found, then the rule no longer attempts to find a `subscription_id`.
 
 Under the {{< ui >}}Additional options{{< /ui >}} section, you have the following options:
 

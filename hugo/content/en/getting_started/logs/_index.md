@@ -55,8 +55,6 @@ To begin collecting logs from a server:
 
 2. Collecting logs is **not enabled** by default in the Datadog Agent. To enable log collection, set `logs_enabled` to `true` in your `datadog.yaml` file.
 
-    {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
-
 3. Restart the [Datadog Agent][7].
 
 4. Follow the integration [activation steps][8] or the custom files log collection steps on the Datadog site.

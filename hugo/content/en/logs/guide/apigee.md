@@ -7,12 +7,15 @@ aliases:
 - /logs/log_collection/apigee
 - /integrations/apigee
 further_reading:
-- link: 'https://docs.apigee.com/api-platform/reference/policies/javascript-policy'
-  tag: 'Apigee'
-  text: 'Apigee JavaScript Policy'
 - link: 'logs/'
   tag: 'Documentation'
   text: 'Log Management'
+- link: "https://www.datadoghq.com/blog/monitor-apigee-x-api-traffic-and-security-with-datadog/"
+  tag: "Blog"
+  text: "Monitor Apigee X API traffic and security with Datadog"
+- link: 'https://docs.apigee.com/api-platform/reference/policies/javascript-policy'
+  tag: 'Apigee'
+  text: 'Apigee JavaScript Policy'
 integration_id: "apigee"
 ---
 
@@ -62,7 +65,7 @@ Send Apigee proxy logs to Datadog using Apigee's JavaScript policy. For detailed
 4. Select JavaScript and add flow variables into JavaScript from the [Apigee flow variable reference][4].
 
 
-{{% collapse-content title="Example JavaScript code snippet" level="h4" expanded=false %}}
+{{% collapse-content title="Example JavaScript code snippet" level="h5" expanded=false %}}
 
 See the following example JavaScript code snippet. Replace `<DATADOG_API_KEY>` in the `dd_api_url` variable with your [Datadog API KEY][3]. The JavaScript has been configured to capture the essential flow variables as log attributes in Datadog. The attributes are named according to the list of standard attributes.
 

@@ -17,6 +17,9 @@ further_reading:
 - link: "/agent/kubernetes/tag/"
   tag: "Documentation"
   text: "Assign tags to all data emitted by a container"
+- link: "/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/"
+  tag: "Documentation"
+  text: "Configure Autodiscovery with DatadogInstrumentation CRD"
 ---
 
 This page contains detailed example templates for configuring integrations in containerized environments in the following scenarios:
@@ -27,6 +30,8 @@ This page contains detailed example templates for configuring integrations in co
 For more information about containers and integrations, see [Docker and Integrations][2] and [Kubernetes and Integrations][3].
 
 All examples make use of Datadog's Autodiscovery feature, which allows you to define configuration templates for Agent Checks on designated sets of containers. For more information about Autodiscovery, see [Getting Started with Containers: Autodiscovery][1].
+
+To configure these checks for a specific workload without using pod annotations, see [Configure Autodiscovery with DatadogInstrumentation CRD][13].
 
 ## Redis integration for all Redis containers
 
@@ -128,6 +133,38 @@ spec:
       image: redis:latest
       ports:
         - containerPort: 6379
+```
+
+{{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+In a `DatadogInstrumentation` resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: redis-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: redis
+  config:
+    checks:
+      - integration: redisdb
+        containerName: redis
+        instances:
+          - host: "%%host%%"
+            port: "6379"
+            password: "%%env_REDIS_PASSWORD%%"
+    logs:
+      - containerName: redis
+        type: file
+        path: /var/log/redis_6379.log
+        source: redis
+        service: redis_service
 ```
 
 {{% /tab %}}
@@ -411,6 +448,40 @@ spec:
 ```
 
 {{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+In a `DatadogInstrumentation` resource:
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: apache-instrumentation
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: apache
+  config:
+    checks:
+      - integration: apache
+        containerName: apache
+        instances:
+          - apache_status_url: "http://%%host%%/server-status?auto"
+            min_collection_interval: 30
+      - integration: http_check
+        containerName: apache
+        instances:
+          - name: "my_website_1"
+            url: "http://%%host%%/website_1"
+            timeout: 1
+          - name: "my_website_2"
+            url: "http://%%host%%/website_2"
+            timeout: 1
+```
+
+{{% /tab %}}
 {{% tab "Docker labels" %}}
 
 **Dockerfile** 
@@ -636,3 +707,4 @@ All of these examples use [Autodiscovery template variables][7]:
 [10]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
 [11]: /extend/write_agent_check/#updating-the-collection-interval
 [12]: https://github.com/DataDog/integrations-core/blob/master/http_check/datadog_checks/http_check/data/conf.yaml.example
+[13]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/

@@ -3,7 +3,10 @@ title: Service remapping rules
 aliases:
 - /tracing/services/inferred_entity_remapping_rules/
 - /tracing/services/renaming_rules/
-site_support_id: service_remapping_rules
+further_reading:
+- link: "https://www.datadoghq.com/blog/service-remapping/"
+  tag: "Blog"
+  text: "Comprehensively connect your service data with Service Remapping"
 ---
 
 ## Overview
@@ -14,7 +17,7 @@ Update how your services appear across Datadog without changing tracer configura
 
 ## Prerequisites
 
-You must have the `apm_service_renaming_write` permission to create remapping rules. See [Permissions][1] for details on Datadog role-based access control.
+You must have the **APM Service Remapping Write** permission (`apm_service_renaming_write`) to create, edit, and delete remapping rules. See [Permissions][1] for details on Datadog role-based access control.
 
 ### Tracer version requirements
 
@@ -60,6 +63,9 @@ In the text box, enter a unique name for the selected entity (or entities). Alte
 1. Optionally, enter a descriptive name for the remapping rule so you can identify it later.
 1. Review and save your remapping rule. After you save your rule, _it may take about a minute for it to take effect_.
 
+## Service remapping with Bits Chat 
+Rename your services with the Bits Chat service remapping skill. To enable the skill, navigate to **Bits AI** > **Bits Chat** > **Settings**. Go to **Skills**, and turn on `service-remapping`. Then, prompt Bits Chat to create, delete, or update remapping rules.
+
 ## Remapping rules behavior
 
 Remapping rules work by overriding the `service` tag for remapping services, or the `peer.service` tag for remapping inferred services, datastores, and queues. Services are remapped at intake, and any preexisting configuration specifying a service name does not change when a remapping rule is created. Service remapping rules take precedence over all other service name configurations.
@@ -95,3 +101,7 @@ Remapping rules are applied across APM, Logs, Metrics, USM, DSM, DJM, DBM, Profi
 [14]: https://app.datadoghq.com/software
 [15]: /tracing/services/service_override_removal
 [16]: https://github.com/DataDog/dd-trace-js/releases/tag/v3.37.0
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

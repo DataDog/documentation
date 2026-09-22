@@ -359,7 +359,23 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 {{% /tab %}}
 {{% tab "Manual" %}}
 
-1. **Configure environment variables**.
+1. **Configure a sidecar container for Datadog**.
+
+   1. In Azure, navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}}. Select the {{< ui >}}Containers{{< /ui >}} tab.
+   1. Click {{< ui >}}Add{{< /ui >}} and select {{< ui >}}Custom container{{< /ui >}}.
+   1. In the {{< ui >}}Edit container{{< /ui >}} form, provide the following:
+      - {{< ui >}}Image source{{< /ui >}}: Other container registries
+      - {{< ui >}}Image type{{< /ui >}}: Public
+      - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+      - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+      - {{< ui >}}Port{{< /ui >}}: 8126
+      - Under {{< ui >}}Environment variables{{< /ui >}}, enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
+
+        {{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
+
+   1. Select {{< ui >}}Apply{{< /ui >}}.
+
+2. **Configure environment variables**.
    In Azure, add the following key-value pairs in {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Environment Variables{{< /ui >}} > {{< ui >}}App Settings{{< /ui >}}:
 
 `DD_API_KEY`
@@ -431,23 +447,6 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 [1]: https://www.nuget.org/packages/Datadog.Trace.Bundle#readme-body-tab
 
 {{% /collapse-content %}}
-
-2. **Configure a sidecar container for Datadog**.
-
-   1. In Azure, navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}}. Select the {{< ui >}}Containers{{< /ui >}} tab.
-   1. Click {{< ui >}}Add{{< /ui >}} and select {{< ui >}}Custom container{{< /ui >}}.
-   1. In the {{< ui >}}Edit container{{< /ui >}} form, provide the following:
-      - {{< ui >}}Image source{{< /ui >}}: Other container registries
-      - {{< ui >}}Image type{{< /ui >}}: Public
-      - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
-      - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
-      - {{< ui >}}Port{{< /ui >}}: 8126
-      - {{< ui >}}Environment Variables{{< /ui >}}: Include all previously configured Datadog environment variables.
-   1. Select {{< ui >}}Apply{{< /ui >}}.
-
-3. **Restart your application**.
-
-   If you modified a startup command, restart your application. Azure automatically restarts the application when new Application Settings are saved.
 
 [301]: https://app.datadoghq.com/organization-settings/api-keys
 [302]: /getting_started/site/
@@ -762,6 +761,8 @@ Be sure to enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging log
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
 Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][9].
+
+If Automatic Scaling is enabled on the App Service Plan and you see unrelated traces merged together, Azure platform health probes (`User-Agent: HttpScaleManager`) might carry stale W3C trace context. If all callers to the app are Datadog-instrumented, set `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` on the affected app to restrict trace context extraction to Datadog's format. For apps with callers that aren't Datadog-instrumented, this setting causes Datadog to ignore their W3C trace context, breaking those requests into disconnected traces instead of merging them into the parent trace.
 
 ## Further reading
 
