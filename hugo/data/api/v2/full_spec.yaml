@@ -7232,6 +7232,9 @@ components:
           description: The identifier of the user or system that created the rule. Server-assigned by the rulesets endpoints; ignored by this operation.
           readOnly: true
           type: string
+        creation_message:
+          description: The message associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          type: string
         cve:
           description: The CVE identifier associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           type: string
@@ -7289,6 +7292,11 @@ components:
         should_use_ai_fix:
           description: Whether an AI-generated fix should be offered. Forwarded from the rulesets endpoints; ignored by this operation.
           type: boolean
+        tags:
+          description: Tags associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          items:
+            type: string
+          type: array
         tests:
           description: The test cases associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           items:
@@ -7302,6 +7310,10 @@ components:
           description: The rule type indicating the detection mechanism (for example, `TREE_SITTER_QUERY`).
           example: TREE_SITTER_QUERY
           type: string
+        version_id:
+          description: The custom rule revision version. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          format: int64
+          type: integer
       required:
         - id
         - category
@@ -29696,13 +29708,14 @@ components:
         - PERFORMANCE
     CustomRuleRevisionAttributesSeverity:
       description: Rule severity
-      enum: [ERROR, WARNING, NOTICE]
+      enum: [ERROR, WARNING, NOTICE, NONE]
       example: ERROR
       type: string
       x-enum-varnames:
         - ERROR
         - WARNING
         - NOTICE
+        - NONE
     CustomRuleRevisionDataType:
       description: Resource type
       enum: [custom_rule_revision]
@@ -65813,6 +65826,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
       example: PYTHON
       type: string
       x-enum-varnames:
@@ -65827,6 +65852,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
     LatestVersionMatchPolicy:
       description: The policy for matching the latest form version during an upsert operation.
       enum:
