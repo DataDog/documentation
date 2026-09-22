@@ -334,12 +334,10 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The data scrubbing callback for errors. This can be used to modify or drop error events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `featureFlags`
-: A dictionary of feature flags used to opt in to specific RUM behaviors. Available since SDK 3.17.0:
-  - `.trackScrollAndSwipeActions`: When set to `false`, disables automatic scroll and swipe action tracking performed by the SDK. Enabled (`true`) by default. Disabling it also means these gestures no longer count as candidate "last interactions" for Interaction-to-Next-View (INV) attribution.
-  - `.viewUpdates`: When set to `true`, changes how view updates are reported. After the first full view event for a view, subsequent updates are sent as delta events containing only the fields that changed, instead of resending the full event. A full event is still sent every 5 updates so the view state can be reconstructed even if some deltas are lost in transit. Disabled (`false`) by default.
+: A dictionary of feature flags used to opt in to specific RUM behaviors, available since SDK 3.17.0. Because flags are added and removed as they graduate or get replaced, see the [`RUM.Configuration.FeatureFlag` definition][11] in the SDK source for the complete, current list of available flags and their behavior.
 
 {% alert level="warning" %}
-Feature flags may introduce beta functionality. Beta feature flags, and their behavior, may change in future SDK releases without following semantic versioning. Check each flag's description above for its current stability before relying on it in production.
+Feature flags may introduce beta functionality. Beta feature flags, and their behavior, may change in future SDK releases without following semantic versioning.
 {% /alert %}
 
 `longTaskEventMapper`
@@ -1225,3 +1223,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
 [10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
+[11]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMConfiguration.swift
