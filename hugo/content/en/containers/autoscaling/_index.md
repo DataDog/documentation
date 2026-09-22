@@ -649,7 +649,7 @@ Cluster Agent 7.79.0+ adds namespace-level activation, the `excluded` opt-out, a
 
 Profile activation supports `Deployment`, `StatefulSet`, and Argo `Rollout`. For other workload kinds, use [Path B: GitOps](#path-b-gitops) to author a `DatadogPodAutoscaler` directly.
 
-For Argo Rollouts, install the Argo Rollouts CRD before starting the Cluster Agent. CRD detection for profile support occurs at Cluster Agent startup; restart the Cluster Agent if you install the CRD afterward.
+**Note**: For Argo Rollouts, install the Argo Rollouts CRD before starting the Cluster Agent. CRD detection for profile support occurs at Cluster Agent startup; restart the Cluster Agent if you install the CRD afterward.
 
 ### Deploy recommendations manually
 
