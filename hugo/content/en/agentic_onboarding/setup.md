@@ -12,13 +12,13 @@ further_reading:
 Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumentation for your applications and infrastructure:
 
 - [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
-- [MCP Server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
+- [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
 
 The two paths are complementary and use the same Datadog account. You can install the Datadog MCP Server in your IDE and run the CLI in a terminal.
 
 ## AI Setup CLI
 
-The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP Server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
+The Datadog AI Setup CLI is a standalone terminal tool. Use it when you don't want to install an MCP server, or for tasks the MCP setup doesn't support, such as creating a Datadog account.
 
 The CLI can:
 
@@ -76,15 +76,11 @@ The CLI can set up the following products:
 
 1. If you ran the CLI without `--product`, enter the path to the repository you want to instrument.
 
-   {{< img src="agentic_onboarding/instrument-repo.png" alt="CLI screen asking for the path to the repository to instrument." style="width:80%;" >}}
-
 1. With your consent, the CLI analyzes the repository in read-only mode to detect your stack.
 
    {{< img src="agentic_onboarding/scanning-repo.png" alt="CLI screen scanning a repository and listing detected languages and frameworks." style="width:80%;" >}}
 
 1. Based on the detected stack, the CLI recommends up to three supported Datadog products. Recommendations are selected by default. Deselect individual recommendations, confirm the selection, or choose **View all setup options** to use the full list of setup options instead.
-
-   {{< img src="agentic_onboarding/recommendation-results.png" alt="CLI screen showing recommended Datadog products with checkboxes to confirm or deselect them." style="width:80%;" >}}
 
 1. If the CLI can't generate recommendations, or doesn't find a strong match for your repository, it directs you to the full list of setup options. (Direct setup with `--product` also skips to this menu.)
 
@@ -95,8 +91,6 @@ The CLI can set up the following products:
    {{< img src="agentic_onboarding/setup-example.png" alt="CLI showing 'Instrumenting your app, Stage 1 of 3: Datadog RUM (Real User Monitoring)' with progress steps." style="width:80%;" >}}
 
 1. When setup completes, the CLI lists the products it instrumented and links to the Datadog UI to verify incoming data.
-
-   {{< img src="agentic_onboarding/success.png" alt="CLI showing 'Setup complete!' with check marks next to RUM, Error Tracking, and Product Analytics." style="width:80%;" >}}
 
 1. Commit the changes to your repository. You can edit the Datadog environment variables (API keys, application IDs) for your specific environment.
 
