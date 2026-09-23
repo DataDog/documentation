@@ -269,7 +269,6 @@ Keep rule scopes clear and avoid unnecessary overlap. Clear scopes make it easie
 
 As new rules are added, verify that the Golden Rule remains in the first position.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
