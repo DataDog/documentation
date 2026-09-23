@@ -63,14 +63,14 @@ Create a numeric flag for `sessionSampleRate`:
    | Variant | Value | Purpose |
    | --- | --- | --- |
    | Standard | `100` | Send 100% of RUM sessions, as recommended for RUM without Limits. |
-   | Reduced collection | `20` | Send 20% of RUM sessions when technical or budget constraints require lower ingestion. |
+   | Reduced Collection | `20` | Send 20% of RUM sessions when technical or budget constraints require lower ingestion. |
 
-<!-- TODO: Add a Datadog UI screenshot showing creation of rum-session-sample-rate, its browser distribution channel, and numeric variants Standard (100) and Reduced collection (20). -->
+   {{< img src="real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/rum-session-sample-rate-variants.png" alt="Number flag variants with Standard set to 100 and marked as the default, and Reduced Collection set to 20." style="width:100%;" >}}
 
-5. In the target environment, select **Standard** as the default variant. If you need to reduce ingestion for a group of users, add a [targeting rule][6] that serves **Reduced collection** to that group. For example, target users with `org_id` equal to `example-org`.
+5. In the target environment, select **Standard** as the default variant. If you need to reduce ingestion for a group of users, add a [targeting rule][6] that serves **Reduced Collection** to that group. For example, set the filter to `business_id` **is one of** `example-company`. Set the rollout to 100% of matching traffic so all matching users receive the reduced session sample rate of 20%.
 6. Save the rules and enable the flag in that environment.
 
-<!-- TODO: Add a Datadog UI screenshot showing the org_id targeting rule serving Reduced collection, the Standard (100) default variant, and the enabled flag in the selected environment. -->
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/rum-reduced-collection-targeting-rule.png" alt="Targeting rule editor serving Reduced Collection (20) to 100% of matching traffic for example-company." style="width:70%;" >}}
 
 The reduced rate of `20` is an example, not a recommended baseline. Choose a reduced rate that addresses your constraints, and apply it only where needed. The code below uses `100` as the local fallback when the flag is disabled, unavailable, or invalid.
 
@@ -87,7 +87,7 @@ To change several settings together, create a flag with the key `rum-configurati
 }
 ```
 
-**Reduced collection**:
+**Reduced Collection**:
 
 ```json
 {
@@ -96,9 +96,9 @@ To change several settings together, create a flag with the key `rum-configurati
 }
 ```
 
-Select **Standard** as the default variant, and target **Reduced collection** only to users for whom collection needs to be reduced. This example reduces session ingestion and disables Session Replay for that group. Optionally, add a JSON Schema to validate the configuration values. See [Dynamic Configuration][7].
+Select **Standard** as the default variant, and target **Reduced Collection** only to users for whom collection needs to be reduced. This example reduces session ingestion and disables Session Replay for that group. Optionally, add a JSON Schema to validate the configuration values. See [Dynamic Configuration][7].
 
-<!-- TODO: Add a Datadog UI screenshot showing the rum-configuration JSON variants Standard (100% sessions, 10% replay) and Reduced collection (20% sessions, no replay), and validation schema, if configured. -->
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/rum-configuration-json-variants.png" alt="JSON variants: Standard uses sessionSampleRate 100 and sessionReplaySampleRate 10; Reduced Collection uses 20 and 0." style="width:100%;" >}}
 
 RUM without Limits does not require 100% Session Replay sampling. Choose `sessionReplaySampleRate` independently based on your observability needs; `10` is an example. It is the percentage of sessions sampled by RUM that are also eligible for Session Replay, so changing `sessionSampleRate` also affects replay volume. See [Browser RUM and Session Replay sampling][8]. Keep the application ID, client token, and other fixed settings in application code.
 
@@ -123,10 +123,10 @@ const datadogConfig = {
 };
 
 // Replace these values with identity and attributes from your application.
-const user = { id: '<USER_ID>', org_id: 'example-org' };
+const user = { id: '<USER_ID>', business_id: 'example-company' };
 const evaluationContext = {
   targetingKey: user.id,
-  org_id: user.org_id,
+  business_id: user.business_id,
 };
 
 let rumSettings = {
@@ -205,11 +205,11 @@ If you load the RUM SDK only after evaluating the flag, that earlier evaluation 
 After deploying the startup code:
 
 1. Open the configuration flag in Datadog and select the environment used by the application.
-2. If technical or budget constraints require lower ingestion, update the targeting rules to serve **Reduced collection** to the affected users. Keep **Standard** as the default for other users.
+2. If technical or budget constraints require lower ingestion, update the targeting rules to serve **Reduced Collection** to the affected users. Keep **Standard** as the default for other users.
 3. Save the changes. Subsequent page loads that retrieve the updated configuration use it when initializing RUM.
 4. When those constraints are resolved, restore the **Standard** variant to return the affected users to 100% session sampling.
 
-<!-- TODO: Add a Datadog UI screenshot showing a saved targeting change that serves Reduced collection to the constrained organization while keeping Standard (100) as the default. -->
+{{< img src="real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/rum-session-sample-rate-enabled.png" alt="RUM session sample rate flag enabled in prod, serving Reduced Collection when business_id is example-company and Standard otherwise." style="width:100%;" >}}
 
 RUM makes session sampling decisions for the session and preserves them across page loads. Changing `sessionSampleRate` does not resample an existing session. Validate sampling changes with a new RUM session. See [Best practices for RUM sampling][11].
 
