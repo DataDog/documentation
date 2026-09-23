@@ -168,6 +168,8 @@ The telemetry above is summarized per view, which shows you the average for a sc
 
 Once you enable collection, every interval is measured for the whole session. Timeseries are not sampled.
 
+{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel-temp.png" alt="The Performance Timeseries section of a RUM side panel, showing a Memory and CPU graph across a session" style="width:100%;" >}}
+
 Two series are collected:
 
 - **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores.
