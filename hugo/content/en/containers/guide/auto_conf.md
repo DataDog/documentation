@@ -110,9 +110,9 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 Starting in Agent version 7.82, several integrations (for example, [Pulsar][48]) ship `auto_conf.yaml` files that contain a `discovery` field and an empty `instances` list. In these cases, the Agent attempts to create a valid configuration for the integration at runtime by examining the service. Each integration defines its own discovery method. For example, an integration can probe exposed container ports for a metrics endpoint or use the container name to distinguish components that share the same image. If a valid configuration is found, the Agent schedules a check instance.
 
 To avoid duplicate metrics, the Agent skips configuration discovery for an integration if there is:
-- any instance of the same integration configured for the same container or at the host level, or
-- any instance of a generic OpenMetrics or Prometheus check configured for the same container, or
-- any host-level instance of a generic OpenMetrics or Prometheus check that emits metrics under the same root namespace as the integration.
+- any instance of the same integration configured for the same container or at the host level
+- any instance of a generic OpenMetrics or Prometheus check configured for the same container
+- any host-level instance of a generic OpenMetrics or Prometheus check that emits metrics under the same root namespace as the integration
 
 Additionally, starting in Agent version 7.83, all check instances created by this mechanism include the tag `dd_config_discovery:true` in their metrics. Use this tag to identify or exclude these metrics in queries.
 
