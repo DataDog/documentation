@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Bits Chat saves your conversations so you can come back to them later. To see your past chats, open the {{< ui >}}History{{< /ui >}} list in [Bits Chat][1], or click the {{< ui >}}History{{< /ui >}} icon (a clock with an arrow) in the Bits Chat panel.
+Bits Chat saves your conversations so you can come back to them later. To see your past chats, open the {{< ui >}}History{{< /ui >}} list in [Bits Chat][1], or click {{< img src="bits_ai/icons/clock_historical.svg" inline="true" style="width:16px;" alt="History icon" >}} (the {{< ui >}}History{{< /ui >}} icon) in the Bits Chat panel.
 
 ## Manage a chat
 
