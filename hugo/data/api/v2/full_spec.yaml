@@ -5177,6 +5177,12 @@ components:
           example: 54.0
           format: double
           type: number
+        local_cache_count:
+          description: Number of requests served from the local browser cache without a network round trip.
+          example: 20
+          format: int32
+          maximum: 2147483647
+          type: integer
         max_duration_ms:
           description: Maximum duration in milliseconds.
           example: 945.6
@@ -5192,6 +5198,12 @@ components:
           example: 812.7
           format: double
           type: number
+        non_blocking_count:
+          description: Number of requests reported by the browser as non-render-blocking.
+          example: 23
+          format: int32
+          maximum: 2147483647
+          type: integer
         p75_duration_ms:
           description: 75th percentile duration in milliseconds.
           example: 844.1
@@ -5200,6 +5212,17 @@ components:
         p95_duration_ms:
           description: 95th percentile duration in milliseconds.
           example: 861.8
+          format: double
+          type: number
+        render_blocking_count:
+          description: Number of requests reported by the browser as render-blocking.
+          example: 4
+          format: int32
+          maximum: 2147483647
+          type: integer
+        render_blocking_pct:
+          description: Percentage of render-blocking requests among those reporting a render-blocking status.
+          example: 14.8
           format: double
           type: number
         resource_type:
@@ -5211,6 +5234,12 @@ components:
           description: URL path group used to aggregate similar resources.
           example: /api/gallery
           type: string
+        server_validated_cache_count:
+          description: Number of cached requests revalidated by the server with a 304 response.
+          example: 7
+          format: int32
+          maximum: 2147483647
+          type: integer
         timing_breakdown:
           $ref: "#/components/schemas/AggregatedResourceTimingBreakdown"
         total_requests:
@@ -5243,6 +5272,11 @@ components:
         - cached_count
         - downloaded_count
         - cache_hit_rate_pct
+        - render_blocking_count
+        - non_blocking_count
+        - render_blocking_pct
+        - local_cache_count
+        - server_validated_cache_count
       type: object
     AggregatedResourceTimingBreakdown:
       description: Average timing breakdown per network phase for a resource.
@@ -5709,7 +5743,7 @@ components:
           example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
           type: string
         criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
+          $ref: "#/components/schemas/AggregatedWaterfallResponseAttributesCriteria"
         from:
           description: Start of the analyzed time range as a Unix timestamp in seconds.
           example: 1762437564
@@ -5754,9 +5788,29 @@ components:
         - view_count
         - from
         - to
+        - criteria
         - sampled_view_ids
         - total_cache_hit_rate_pct
         - resources
+      type: object
+    AggregatedWaterfallResponseAttributesCriteria:
+      description: Performance criteria used to filter view instances by a metric threshold, or null if no criteria were applied.
+      nullable: true
+      properties:
+        max:
+          description: Maximum threshold in seconds (inclusive).
+          example: 5.0
+          format: double
+          type: number
+        metric:
+          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteriaMetric"
+        min:
+          description: Minimum threshold in seconds (inclusive).
+          example: 2.5
+          format: double
+          type: number
+      required:
+        - metric
       type: object
     AggregatedWaterfallResponseData:
       description: Data envelope for an aggregated waterfall response.
@@ -7178,6 +7232,9 @@ components:
           description: The identifier of the user or system that created the rule. Server-assigned by the rulesets endpoints; ignored by this operation.
           readOnly: true
           type: string
+        creation_message:
+          description: The message associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          type: string
         cve:
           description: The CVE identifier associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           type: string
@@ -7235,6 +7292,11 @@ components:
         should_use_ai_fix:
           description: Whether an AI-generated fix should be offered. Forwarded from the rulesets endpoints; ignored by this operation.
           type: boolean
+        tags:
+          description: Tags associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          items:
+            type: string
+          type: array
         tests:
           description: The test cases associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           items:
@@ -7248,6 +7310,10 @@ components:
           description: The rule type indicating the detection mechanism (for example, `TREE_SITTER_QUERY`).
           example: TREE_SITTER_QUERY
           type: string
+        version_id:
+          description: The custom rule revision version. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          format: int64
+          type: integer
       required:
         - id
         - category
@@ -14045,6 +14111,13 @@ components:
           example: 202501
           format: int64
           type: integer
+        tags:
+          description: The tag keys used to group costs for the budget.
+          example:
+            - service
+          items:
+            type: string
+          type: array
         total_amount:
           description: The sum of all budget entries' amounts.
           example: 1000
@@ -14092,7 +14165,9 @@ components:
           type: string
         id:
           description: The unique identifier for the unit.
-          type: string
+          example: 42
+          format: int64
+          type: integer
         name:
           description: The full name of the unit.
           type: string
@@ -14205,6 +14280,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/BudgetWithEntriesData"
+        meta:
+          $ref: "#/components/schemas/BudgetWithEntriesMeta"
       type: object
     BudgetWithEntriesData:
       description: A budget and all its entries.
@@ -14334,6 +14411,16 @@ components:
       type: string
       x-enum-varnames:
         - BUDGET
+    BudgetWithEntriesMeta:
+      description: Additional information about errors encountered while retrieving budget cost data.
+      properties:
+        error:
+          description: A user-facing explanation of why budget cost data could not be retrieved.
+          example: ""
+          type: string
+      required:
+        - error
+      type: object
     BulkDeleteAppsDatastoreItemsRequest:
       description: Request to delete items from a datastore.
       properties:
@@ -19505,6 +19592,8 @@ components:
     CloudWorkloadSecurityAgentRuleAction:
       description: "The action the rule can perform if triggered"
       properties:
+        coredump:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionCoreDump"
         disabled:
           description: "Whether the action is disabled"
           example: false
@@ -19516,16 +19605,50 @@ components:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionHash"
         kill:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleKill"
+        log:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionLog"
         metadata:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionMetadata"
+        network_filter:
+          $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionNetworkFilter"
         set:
           $ref: "#/components/schemas/CloudWorkloadSecurityAgentRuleActionSet"
+      type: object
+    CloudWorkloadSecurityAgentRuleActionCoreDump:
+      description: "The core dump action applied on the process matching the rule."
+      properties:
+        dentry:
+          description: "Whether the directory entry information is included in the core dump."
+          type: boolean
+        mount:
+          description: "Whether the mount information is included in the core dump."
+          type: boolean
+        no_compression:
+          description: "Whether the core dump is left uncompressed."
+          type: boolean
+        process:
+          description: "Whether the process memory is included in the core dump."
+          type: boolean
       type: object
     CloudWorkloadSecurityAgentRuleActionHash:
       description: "Hash file specified by the field attribute"
       properties:
         field:
           description: "The field of the hash action"
+          type: string
+        max_file_size:
+          description: "The maximum size of the files to hash, in bytes."
+          format: int64
+          type: integer
+      type: object
+    CloudWorkloadSecurityAgentRuleActionLog:
+      description: "The log action applied when the rule is triggered."
+      properties:
+        level:
+          description: "The level of the log action."
+          type: string
+        message:
+          description: "The message of the log action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionMetadata:
@@ -19539,6 +19662,19 @@ components:
           type: string
         short_image:
           description: "The short image of the metadata action"
+          type: string
+      type: object
+    CloudWorkloadSecurityAgentRuleActionNetworkFilter:
+      description: "The network filter action applied on the network traffic matching the rule."
+      properties:
+        filter:
+          description: "The filter expression of the network filter action."
+          type: string
+        policy:
+          description: "The policy of the network filter action."
+          type: string
+        scope:
+          description: "The scope of the network filter action."
           type: string
       type: object
     CloudWorkloadSecurityAgentRuleActionSet:
@@ -19562,8 +19698,14 @@ components:
         name:
           description: "The name of the set action"
           type: string
+        private:
+          description: "Whether the value of the set action is private."
+          type: boolean
         scope:
           description: "The scope of the set action."
+          type: string
+        scope_field:
+          description: "The scope field of the set action."
           type: string
         size:
           description: "The size of the set action."
@@ -19819,6 +19961,15 @@ components:
     CloudWorkloadSecurityAgentRuleKill:
       description: "Kill system call applied on the container matching the rule"
       properties:
+        disable_container_disarmer:
+          description: "Whether the automatic container safeguard of the kill action is disabled."
+          type: boolean
+        disable_executable_disarmer:
+          description: "Whether the automatic executable safeguard of the kill action is disabled."
+          type: boolean
+        scope:
+          description: "The scope of the kill action."
+          type: string
         signal:
           description: "Supported signals for the kill system call"
           type: string
@@ -29557,13 +29708,14 @@ components:
         - PERFORMANCE
     CustomRuleRevisionAttributesSeverity:
       description: Rule severity
-      enum: [ERROR, WARNING, NOTICE]
+      enum: [ERROR, WARNING, NOTICE, NONE]
       example: ERROR
       type: string
       x-enum-varnames:
         - ERROR
         - WARNING
         - NOTICE
+        - NONE
     CustomRuleRevisionDataType:
       description: Resource type
       enum: [custom_rule_revision]
@@ -35206,7 +35358,7 @@ components:
       type: object
     DeploymentRuleOptionsMonitor:
       additionalProperties: false
-      description: Monitor options for deployment rules.
+      description: Monitor query options for deployment rules.
       properties:
         duration:
           description: Seconds the monitor needs to stay in OK status for the rule to pass.
@@ -35224,7 +35376,7 @@ components:
           example: false
           type: boolean
         query:
-          description: Monitors that match this query are evaluated.
+          description: A query that selects the monitors to evaluate.
           example: "service:my-service env:prod"
           type: string
         warmup:
@@ -35236,6 +35388,66 @@ components:
           type: integer
       required:
         - query
+      type: object
+    DeploymentRuleOptionsMonitorId:
+      additionalProperties: false
+      description: A specific monitor and the groups to evaluate for it.
+      properties:
+        groups:
+          description: The exact monitor group names to evaluate. An empty array evaluates all groups.
+          example: []
+          items:
+            description: An exact monitor group name.
+            minLength: 1
+            type: string
+          type: array
+          uniqueItems: true
+        id:
+          description: The monitor's decimal ID.
+          example: "123456"
+          pattern: "^[1-9][0-9]*$"
+          type: string
+      required:
+        - id
+        - groups
+      type: object
+    DeploymentRuleOptionsMonitorIds:
+      additionalProperties: false
+      description: Specific monitor options for deployment rules.
+      properties:
+        duration:
+          description: Seconds the monitors need to stay in OK status for the rule to pass.
+          example: 3600
+          format: int64
+          type: integer
+        fail_on_no_data:
+          default: true
+          description: Whether the rule should fail if a selected monitor group is in a NO DATA state.
+          example: false
+          type: boolean
+        fail_on_no_groups_found:
+          default: false
+          description: Whether the rule should fail if no monitor groups are found for the selected monitors.
+          example: false
+          type: boolean
+        monitor_ids:
+          description: A non-empty list of specific monitors to evaluate.
+          example:
+            - groups: []
+              id: "123456"
+          items:
+            $ref: "#/components/schemas/DeploymentRuleOptionsMonitorId"
+          minItems: 1
+          type: array
+        warmup:
+          default: 0
+          description: Seconds to wait after a deployment starts before evaluating the monitors' statuses.
+          example: 0
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+        - monitor_ids
       type: object
     DeploymentRuleResponse:
       description: Response for a deployment rule.
@@ -35351,6 +35563,7 @@ components:
       oneOf:
         - $ref: "#/components/schemas/DeploymentRuleOptionsFaultyDeploymentDetection"
         - $ref: "#/components/schemas/DeploymentRuleOptionsMonitor"
+        - $ref: "#/components/schemas/DeploymentRuleOptionsMonitorIds"
     DetachCaseRequest:
       description: Request for detaching security findings from their case.
       properties:
@@ -35535,6 +35748,21 @@ components:
           description: The number of interfaces that are in a warning state
           format: int64
           type: integer
+      type: object
+    DeviceTagsBySource:
+      description: Tags associated with a device from a specific source.
+      properties:
+        source:
+          description: The source of the tags.
+          example: user
+          type: string
+        tags:
+          description: The list of tags for the source.
+          example: ["tag:test", "tag:testbis"]
+          items:
+            description: A tag string in `key:value` format.
+            type: string
+          type: array
       type: object
     DevicesListData:
       description: The devices list data
@@ -35935,6 +36163,8 @@ components:
           $ref: "#/components/schemas/DowntimeNotifyEndStates"
         notify_end_types:
           $ref: "#/components/schemas/DowntimeNotifyEndTypes"
+        run_as:
+          $ref: "#/components/schemas/DowntimeRunAs"
         schedule:
           $ref: "#/components/schemas/DowntimeScheduleResponse"
         scope:
@@ -35961,6 +36191,49 @@ components:
       oneOf:
         - $ref: "#/components/schemas/User"
         - $ref: "#/components/schemas/DowntimeMonitorIncludedItem"
+    DowntimeRunAs:
+      description: |-
+        The principals (users, roles, or teams) allowed to act on behalf of the downtime.
+
+        **Note**: This feature is currently in Preview and may not be available for all organizations.
+      items:
+        $ref: "#/components/schemas/DowntimeRunAsItem"
+      readOnly: true
+      type: array
+    DowntimeRunAsItem:
+      description: A set of principals allowed to act on behalf of the downtime.
+      properties:
+        principals:
+          description: List of principals allowed to act on behalf of the downtime.
+          items:
+            $ref: "#/components/schemas/DowntimeRunAsPrincipal"
+          type: array
+      type: object
+    DowntimeRunAsPrincipal:
+      description: A principal (user, role, or team) allowed to act on behalf of the downtime.
+      properties:
+        id:
+          description: The ID of the principal.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/DowntimeRunAsPrincipalType"
+      required:
+        - id
+        - type
+      type: object
+    DowntimeRunAsPrincipalType:
+      description: The type of principal allowed to act on behalf of the downtime.
+      enum:
+        - user
+        - role
+        - team
+      example: "user"
+      type: string
+      x-enum-varnames:
+        - USER
+        - ROLE
+        - TEAM
     DowntimeScheduleCreateRequest:
       description: Schedule for the downtime.
       oneOf:
@@ -36591,36 +36864,40 @@ components:
         - severity
       type: object
     ElasticCloudDetailedIndexStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud detailed index stats dataflow.
+      additionalProperties: false
+      description: Primary shard metrics broken down per index, rather than aggregated across the cluster.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudDetailedIndexStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud detailed index stats dataflow.
+      description: Primary shard metrics broken down per index, rather than aggregated across the cluster.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudIndexStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud index stats dataflow.
+      additionalProperties: false
+      description: >-
+        Metrics for individual indices. Only the indices granted to the role of the user in `authentication` are collected.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudIndexStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud index stats dataflow.
+      description: >-
+        Metrics for individual indices. Only the indices granted to the role of the user in `authentication` are collected.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
@@ -36629,15 +36906,75 @@ components:
     ElasticCloudIntegrationAccountAuthenticationRequest:
       description: Authentication for creating the Elastic Cloud integration account. Exactly one method is set.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+        - $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthRequest"
     ElasticCloudIntegrationAccountAuthenticationResponse:
       description: Authentication configured on the Elastic Cloud integration account.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+        - $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthResponse"
     ElasticCloudIntegrationAccountAuthenticationUpdate:
       description: Authentication for updating the Elastic Cloud integration account. Exactly one method is set.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+        - $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthUpdate"
+    ElasticCloudIntegrationAccountBasicAuthRequest:
+      additionalProperties: false
+      description: Username and password authentication.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+        - password
+      type: object
+    ElasticCloudIntegrationAccountBasicAuthResponse:
+      description: The basic authentication method and username configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthType"
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+      type: object
+    ElasticCloudIntegrationAccountBasicAuthType:
+      default: basic
+      description: The authentication method type.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    ElasticCloudIntegrationAccountBasicAuthUpdate:
+      additionalProperties: false
+      description: Username and password authentication. Only the fields provided are changed; omit `password` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/ElasticCloudIntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+      type: object
     ElasticCloudIntegrationAccountCreateAttributes:
       description: Writable attributes used to create an Elastic Cloud integration account.
       properties:
@@ -36718,6 +37055,7 @@ components:
         - type
       type: object
     ElasticCloudIntegrationAccountSettingsRequest:
+      additionalProperties: false
       description: Settings for creating the Elastic Cloud integration account.
       properties:
         tags:
@@ -36746,6 +37084,7 @@ components:
         - url
       type: object
     ElasticCloudIntegrationAccountSettingsUpdate:
+      additionalProperties: false
       description: Settings for updating the Elastic Cloud integration account. Only the fields provided are changed.
       properties:
         tags:
@@ -36809,7 +37148,8 @@ components:
       type: object
     ElasticCloudIntegrationDataflowsRequest:
       additionalProperties: false
-      description: Dataflows to configure on the Elastic Cloud integration account, keyed by dataflow id.
+      description: >-
+        Data Datadog collects from Elastic Cloud, keyed by dataflow id. Node-level cluster statistics are always collected; each dataflow here adds a further set of metrics on top of that baseline, so set `enabled` to start or stop it. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow queries the deployment as the user in `authentication`, so that user's role must hold the required Elasticsearch privileges; a dataflow enabled without them is stored but collects no data.
       properties:
         elastic-cloud-detailed-index-stats:
           $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowRequest"
@@ -36827,7 +37167,7 @@ components:
           $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowRequest"
       type: object
     ElasticCloudIntegrationDataflowsResponse:
-      description: Dataflows configured on the Elastic Cloud integration account, keyed by dataflow id.
+      description: Data Datadog collects from Elastic Cloud, keyed by dataflow id.
       properties:
         elastic-cloud-detailed-index-stats:
           $ref: "#/components/schemas/ElasticCloudDetailedIndexStatsIntegrationDataflowResponse"
@@ -36847,10 +37187,11 @@ components:
           $ref: "#/components/schemas/ElasticCloudSlmStatsIntegrationDataflowResponse"
       type: object
     ElasticCloudMetricsIntegrationDataflowResponse:
-      description: The Elastic Cloud metrics dataflow.
+      description: >-
+        Node-level statistics for the clusters in your deployment, such as the number of nodes and the number of documents on each node. This is the integration's baseline collection: it is always on and cannot be turned off, which is why it appears in responses only.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Always `true`, because this collection cannot be turned off.
           example: true
           readOnly: true
           type: boolean
@@ -36858,90 +37199,99 @@ components:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudPendingTaskStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud pending task stats dataflow.
+      additionalProperties: false
+      description: Metrics for cluster-level changes that have been submitted but not yet executed.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudPendingTaskStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud pending task stats dataflow.
+      description: Metrics for cluster-level changes that have been submitted but not yet executed.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowRequest:
-      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      additionalProperties: false
+      description: >-
+        Tolerance for slow primary shard requests. Primary shard metrics can grow large enough for the request to time out; enabling this keeps the rest of the collection running when that happens instead of failing the run. Only has an effect alongside `elastic-cloud-primary-shard-stats`.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether this tolerance is applied. Defaults to `false`; set to `true` to apply it.
           example: true
           type: boolean
       type: object
     ElasticCloudPrimaryShardGracefulTimeoutIntegrationDataflowResponse:
-      description: The Elastic Cloud primary shard graceful timeout dataflow.
+      description: >-
+        Tolerance for slow primary shard requests, keeping the rest of the collection running when a primary shard request times out instead of failing the run. Only has an effect alongside `elastic-cloud-primary-shard-stats`.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether this tolerance is applied.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudPrimaryShardStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud primary shard stats dataflow.
+      additionalProperties: false
+      description: Metrics covering only the cluster's primary shards.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudPrimaryShardStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud primary shard stats dataflow.
+      description: Metrics covering only the cluster's primary shards.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudShardAllocationStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud shard allocation stats dataflow.
+      additionalProperties: false
+      description: Metrics for how many shards are allocated to each data node, and the disk space they use.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudShardAllocationStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud shard allocation stats dataflow.
+      description: Metrics for how many shards are allocated to each data node, and the disk space they use.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     ElasticCloudSlmStatsIntegrationDataflowRequest:
-      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      additionalProperties: false
+      description: >-
+        Metrics about the actions taken by snapshot lifecycle management. Requires the `read_slm` Elasticsearch cluster privilege on the role of the user in `authentication`; without it this dataflow collects no data.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     ElasticCloudSlmStatsIntegrationDataflowResponse:
-      description: The Elastic Cloud snapshot lifecycle management stats dataflow.
+      description: >-
+        Metrics about the actions taken by snapshot lifecycle management. Requires the `read_slm` Elasticsearch cluster privilege on the role of the user in `authentication`; without it this dataflow collects no data.
       properties:
         enabled:
-          description: Whether the Elastic Cloud dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
@@ -44968,6 +45318,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
@@ -45354,6 +45707,13 @@ components:
           description: When enabled, Datadog collects metrics where location is explicitly stated as "global" or where location information cannot be deduced from GCP labels.
           example: true
           type: boolean
+        is_org_folder_resource_collection_enabled:
+          default: false
+          description: |-
+            When enabled, Datadog scans for organization and folder-level resources
+            under the organization the service account belongs to.
+          example: false
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: |-
@@ -45393,7 +45753,7 @@ components:
           type: array
         resource_collection_enabled:
           description: |-
-            When enabled, Datadog scans for all resources in your GCP environment.
+            When enabled, Datadog scans for all project-level resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
@@ -55750,64 +56110,6 @@ components:
         - id
         - attributes
       type: object
-    IntegrationAccountBasicAuthRequest:
-      description: Username and password authentication.
-      properties:
-        auth_type:
-          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
-        password:
-          description: Secret password or private key.
-          example: your-password
-          type: string
-          writeOnly: true
-        username:
-          description: Non-secret username or public identifier for the credential pair.
-          example: datadog
-          type: string
-      required:
-        - auth_type
-        - username
-        - password
-      type: object
-    IntegrationAccountBasicAuthResponse:
-      description: The basic authentication method and username configured on the account.
-      properties:
-        auth_type:
-          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
-        username:
-          description: Non-secret username or public identifier for the credential pair.
-          example: datadog
-          type: string
-      required:
-        - auth_type
-        - username
-      type: object
-    IntegrationAccountBasicAuthType:
-      default: basic
-      description: The authentication method type.
-      enum:
-        - basic
-      example: basic
-      type: string
-      x-enum-varnames:
-        - BASIC
-    IntegrationAccountBasicAuthUpdate:
-      description: Username and password authentication. Only the fields provided are changed; omit `password` to keep the stored one.
-      properties:
-        auth_type:
-          $ref: "#/components/schemas/IntegrationAccountBasicAuthType"
-        password:
-          description: Secret password or private key.
-          example: your-password
-          type: string
-          writeOnly: true
-        username:
-          description: Non-secret username or public identifier for the credential pair.
-          example: datadog
-          type: string
-      required:
-        - auth_type
-      type: object
     IntegrationAccountDataflowHealth:
       description: Collection health of a single dataflow.
       enum:
@@ -65527,6 +65829,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
       example: PYTHON
       type: string
       x-enum-varnames:
@@ -65541,6 +65855,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
     LatestVersionMatchPolicy:
       description: The policy for matching the latest form version during an upsert operation.
       enum:
@@ -67335,6 +67661,12 @@ components:
     ListTagsResponseDataAttributes:
       description: The definition of ListTagsResponseDataAttributes object.
       properties:
+        by_source:
+          description: The list of device tags grouped by source.
+          items:
+            $ref: "#/components/schemas/DeviceTagsBySource"
+          readOnly: true
+          type: array
         tags:
           description: The list of tags
           example: ["tag:test", "tag:testbis"]
@@ -69428,6 +69760,68 @@ components:
       type: string
       x-enum-varnames:
         - MANAGED_ORGS
+    MatchingSignalAttributes:
+      description: Attributes of a matching security signal.
+      properties:
+        event_tracker_id:
+          description: The tracker ID linking the signal back to the originating event. Distinct from `id`, which identifies the matching signal itself.
+          example: AAAAAWgOAX0mtsWfeQAAAABzX1RyYWNrZXJfMTIzNDU2Nzg5MA
+          type: string
+        severity:
+          description: The severity of the signal.
+          example: high
+          type: string
+        title:
+          description: The title of the signal.
+          example: Unusual login activity detected
+          type: string
+        trigger_time_ms:
+          description: The Unix timestamp (in milliseconds) at which the signal was triggered.
+          example: 1707393746000
+          format: int64
+          type: integer
+      required:
+        - event_tracker_id
+        - severity
+        - title
+        - trigger_time_ms
+      type: object
+    MatchingSignalData:
+      description: A security signal that matches the queried event.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MatchingSignalAttributes"
+        id:
+          description: The ID of the matching signal.
+          example: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+          type: string
+        type:
+          $ref: "#/components/schemas/MatchingSignalType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MatchingSignalType:
+      default: matching_signal
+      description: The type of the resource. The value should always be `matching_signal`.
+      enum:
+        - matching_signal
+      example: matching_signal
+      type: string
+      x-enum-varnames:
+        - MATCHING_SIGNAL
+    MatchingSignalsResponse:
+      description: Response containing the list of security signals matching an event.
+      properties:
+        data:
+          description: Array of matching signals.
+          items:
+            $ref: "#/components/schemas/MatchingSignalData"
+          type: array
+      required:
+        - data
+      type: object
     MaxSessionDurationType:
       description: Data type of a maximum session duration update.
       enum: [max_session_duration]
@@ -72204,6 +72598,32 @@ components:
       required:
         - data
       type: object
+    MonitorConfigPolicyDowntimePolicy:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
+    MonitorConfigPolicyDowntimePolicyCreateRequest:
+      additionalProperties: false
+      description: Downtime duration attributes of a monitor configuration policy.
+      properties:
+        max_duration_ms:
+          description: The maximum allowed downtime duration, in milliseconds.
+          example: 3600000
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - max_duration_ms
+      type: object
     MonitorConfigPolicyEditData:
       description: A monitor configuration policy data.
       properties:
@@ -72241,10 +72661,12 @@ components:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicy"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicy"
     MonitorConfigPolicyPolicyCreateRequest:
       description: Configuration for the policy.
       oneOf:
         - $ref: "#/components/schemas/MonitorConfigPolicyTagPolicyCreateRequest"
+        - $ref: "#/components/schemas/MonitorConfigPolicyDowntimePolicyCreateRequest"
     MonitorConfigPolicyResourceType:
       default: monitor-config-policy
       description: Monitor configuration policy resource type.
@@ -72273,6 +72695,7 @@ components:
           $ref: "#/components/schemas/MonitorConfigPolicyResourceType"
       type: object
     MonitorConfigPolicyTagPolicy:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72294,6 +72717,7 @@ components:
           type: array
       type: object
     MonitorConfigPolicyTagPolicyCreateRequest:
+      additionalProperties: false
       description: Tag attributes of a monitor configuration policy.
       properties:
         tag_key:
@@ -72320,13 +72744,18 @@ components:
       type: object
     MonitorConfigPolicyType:
       default: tag
-      description: The monitor configuration policy type.
+      description: |-
+        The monitor configuration policy type.
+        `tag` enforces required tags on monitors.
+        `downtime` sets a maximum downtime duration for the organization.
       enum:
         - tag
+        - downtime
       example: "tag"
       type: string
       x-enum-varnames:
         - TAG
+        - DOWNTIME
     MonitorDowntimeMatchResourceType:
       default: downtime_match
       description: Monitor Downtime Match resource type.
@@ -74540,6 +74969,55 @@ components:
       required:
         - data
       type: object
+    OIDCDiscoveryDocument:
+      description: OpenID Connect provider metadata.
+      properties:
+        authorization_endpoint:
+          description: URL of the OAuth2 authorization endpoint.
+          example: https://app.datadoghq.com/oauth2/v1/authorize
+          type: string
+        id_token_signing_alg_values_supported:
+          description: Signing algorithms supported for ID tokens.
+          example:
+            - RS256
+          items:
+            type: string
+          type: array
+        issuer:
+          description: URL identifying the OpenID Connect issuer.
+          example: https://app.datadoghq.com/api/v2/oauth2
+          type: string
+        jwks_uri:
+          description: URL of the JSON Web Key Set used to verify ID token signatures.
+          example: https://app.datadoghq.com/oauth2/v1/keys
+          type: string
+        response_types_supported:
+          description: OAuth2 response types supported by the provider.
+          example:
+            - code
+          items:
+            type: string
+          type: array
+        subject_types_supported:
+          description: Subject identifier types supported by the provider.
+          example:
+            - public
+          items:
+            type: string
+          type: array
+        token_endpoint:
+          description: URL of the OAuth2 token endpoint.
+          example: https://app.datadoghq.com/api/v2/oauth2/token
+          type: string
+      required:
+        - issuer
+        - authorization_endpoint
+        - token_endpoint
+        - jwks_uri
+        - response_types_supported
+        - subject_types_supported
+        - id_token_signing_alg_values_supported
+      type: object
     ObservabilityPipeline:
       description: Top-level schema representing a pipeline.
       properties:
@@ -75813,6 +76291,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineDatabricksZerobusDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineDatadogMetricsDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetryMetricsDestination"
+        - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestination"
         - $ref: "#/components/schemas/ObservabilityPipelineSplunkHecMetricsDestination"
     ObservabilityPipelineConfigPipelineType:
       default: logs
@@ -75912,6 +76391,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineSyslogNgSource"
         - $ref: "#/components/schemas/ObservabilityPipelineWebsocketSource"
         - $ref: "#/components/schemas/ObservabilityPipelineOpentelemetrySource"
+        - $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSource"
     ObservabilityPipelineCrowdStrikeNextGenSiemDestination:
       description: |-
         The `crowdstrike_next_gen_siem` destination forwards logs to CrowdStrike Next Gen SIEM.
@@ -78807,6 +79287,168 @@ components:
       type: string
       x-enum-varnames:
         - PARSE_XML
+    ObservabilityPipelinePrometheusRemoteWriteDestination:
+      description: |-
+        The `prometheus_remote_write` destination forwards metrics to an endpoint that supports the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        auth_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy"
+        buffer:
+          $ref: "#/components/schemas/ObservabilityPipelineBufferOptions"
+        default_namespace:
+          description: The default namespace to add as a prefix to metric names that do not already have one.
+          example: datadog
+          type: string
+        endpoint_url_key:
+          description: |-
+            Name of the environment variable or secret that holds the Prometheus Remote Write endpoint URL.
+            Defaults to `DESTINATION_PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL` (prefixed with `DD_OP_` at runtime).
+          example: PROMETHEUS_REMOTE_WRITE_ENDPOINT_URL
+          type: string
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-destination
+          type: string
+        inputs:
+          description: A list of component IDs whose output is used as the `input` for this component.
+          example: ["metrics-filter-processor"]
+          items:
+            description: The ID of a component whose output is used as input for this destination.
+            type: string
+          type: array
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        tenant_id:
+          description: The tenant ID to include with outgoing requests. Used by multi-tenant Prometheus Remote Write receivers.
+          example: my-tenant
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
+        token_key:
+          description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteDestinationType"
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `basic`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+      required:
+        - id
+        - type
+        - inputs
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteDestinationAuthStrategy:
+      description: The authentication strategy to use for outgoing Prometheus Remote Write requests.
+      enum:
+        - none
+        - basic
+        - bearer
+      example: basic
+      type: string
+      x-enum-varnames:
+        - NONE
+        - BASIC
+        - BEARER
+    ObservabilityPipelinePrometheusRemoteWriteDestinationType:
+      default: prometheus_remote_write
+      description: The destination type. The value should always be `prometheus_remote_write`.
+      enum:
+        - prometheus_remote_write
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSource:
+      description: |-
+        The `prometheus_remote_write` source ingests metrics pushed over the Prometheus Remote Write protocol.
+
+        **Supported pipeline types:** metrics
+      properties:
+        address_key:
+          description: Name of the environment variable or secret that holds the listen address for the Prometheus Remote Write endpoint.
+          example: PROMETHEUS_REMOTE_WRITE_ADDRESS
+          type: string
+        auth_strategy:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy"
+        id:
+          description: The unique identifier for this component. Used in other parts of the pipeline to reference this component (for example, as the `input` to downstream components).
+          example: prometheus-remote-write-source
+          type: string
+        password_key:
+          description: Name of the environment variable or secret that holds the password (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_PASSWORD
+          type: string
+        path:
+          description: The HTTP path on which the source listens for incoming Prometheus Remote Write requests.
+          example: "/api/v1/write"
+          type: string
+        tls:
+          $ref: "#/components/schemas/ObservabilityPipelineMtlsServerTls"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceType"
+        username_key:
+          description: Name of the environment variable or secret that holds the username (used when `auth_strategy` is `plain`).
+          example: PROMETHEUS_REMOTE_WRITE_USERNAME
+          type: string
+        valid_tokens:
+          description: |-
+            A list of tokens that are accepted for authenticating incoming requests. When set,
+            the source rejects any request whose token does not match an enabled entry in this list.
+          items:
+            $ref: "#/components/schemas/ObservabilityPipelinePrometheusRemoteWriteSourceValidToken"
+          type: array
+      required:
+        - id
+        - type
+        - auth_strategy
+        - path
+      type: object
+      x-pipeline-types: [metrics]
+    ObservabilityPipelinePrometheusRemoteWriteSourceAuthStrategy:
+      description: HTTP authentication method.
+      enum:
+        - none
+        - plain
+      example: plain
+      type: string
+      x-enum-varnames:
+        - NONE
+        - PLAIN
+    ObservabilityPipelinePrometheusRemoteWriteSourceType:
+      default: prometheus_remote_write
+      description: The source type. The value should always be `prometheus_remote_write`.
+      enum: [prometheus_remote_write]
+      example: prometheus_remote_write
+      type: string
+      x-enum-varnames:
+        - PROMETHEUS_REMOTE_WRITE
+    ObservabilityPipelinePrometheusRemoteWriteSourceValidToken:
+      description: An accepted token used to authenticate incoming Prometheus Remote Write requests.
+      properties:
+        enabled:
+          default: true
+          description: |-
+            Indicates whether this token is currently accepted. Disabled tokens are rejected without
+            being removed from the configuration.
+          example: true
+          type: boolean
+        path_to_token:
+          $ref: "#/components/schemas/ObservabilityPipelineHttpServerSourceValidTokenPathToToken"
+        token_key:
+          description: Name of the environment variable or secret that holds the expected token value.
+          example: PROMETHEUS_REMOTE_WRITE_TOKEN
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+      required:
+        - token_key
+      type: object
     ObservabilityPipelineQuotaProcessor:
       description: |-
         The `quota` processor measures logging traffic for logs that match a specified filter. When the configured daily quota is met, the processor can drop or alert.
@@ -84742,6 +85384,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
@@ -92499,16 +93144,42 @@ components:
       x-enum-varnames:
         - RECOMMENDATION
     RecommendationsFilterRequest:
-      description: Request body for filtering cost recommendations.
+      description: JSON:API request body for filtering cost recommendations.
       example:
-        filter: "@resource_table:aws_ec2_instance"
-        sort:
-          - expression: potential_daily_savings.amount
-            order: DESC
+        data:
+          attributes:
+            scope: ccm
+            sort:
+              - expression: potential_daily_savings.amount
+                order: DESC
+          id: "@resource_table:aws_ec2_instance"
+          type: recommendations_filter
       properties:
-        filter:
-          description: Filter expression applied to the recommendations.
+        data:
+          $ref: "#/components/schemas/RecommendationsFilterRequestData"
+      required:
+        - data
+      type: object
+    RecommendationsFilterRequestData:
+      description: |-
+        JSON:API resource containing the cost recommendations filter. This legacy search contract
+        uses the resource ID for the filter expression rather than as a persistent resource identifier.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
+        id:
+          description: |-
+            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
+            and returns all recommendations.
           type: string
+        type:
+          $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
+      required:
+        - type
+      type: object
+    RecommendationsFilterRequestDataAttributes:
+      description: Attributes used to filter and sort cost recommendations.
+      properties:
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -92520,6 +93191,15 @@ components:
           description: Active view name (for example, `active`, `dismissed`, `open`, `in-progress`, or `completed`).
           type: string
       type: object
+    RecommendationsFilterRequestDataType:
+      default: recommendations_filter
+      description: Legacy JSON:API resource type required by the cost recommendations search decoder.
+      enum:
+        - recommendations_filter
+      example: recommendations_filter
+      type: string
+      x-enum-varnames:
+        - RECOMMENDATIONS_FILTER
     RecommendationsFilterRequestScope:
       description: Recommendations scope. Defaults to `ccm`; use `experiment` for experimental recommendations or `*` for both.
       enum:
@@ -96630,7 +97310,7 @@ components:
           example: true
           type: boolean
         trace_sample_rate:
-          description: The sample rate for the APM cross-product retention filter, between 0 and 100.
+          description: The sample rate for the APM cross-product retention filter, between 0 and 100. Values returned by the API are rounded to two decimal places.
           example: 25.0
           format: double
           maximum: 100
@@ -97281,7 +97961,7 @@ components:
           $ref: "#/components/schemas/RumRetentionFilterData"
       type: object
     RumRetentionFilterSampleRate:
-      description: The sample rate for a RUM retention filter, between 0.1 and 100.
+      description: The sample rate for a RUM retention filter, between 0.1 and 100. Values are truncated to one decimal place.
       example: 50.5
       format: double
       maximum: 100
@@ -111847,6 +112527,714 @@ components:
       type: string
       x-enum-varnames:
         - SNAPSHOTS
+    SnowflakeAccountUsageMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Account-level usage metrics read from the Snowflake `ACCOUNT_USAGE` schema, covering storage usage, credit consumption, and query activity.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Account-level usage metrics read from the Snowflake `ACCOUNT_USAGE` schema, covering storage usage, credit consumption, and query activity.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the account usage metrics dataflow. Only the fields provided are changed.
+      properties:
+        account_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. Set to `true` to aggregate the past 24 hours on a rolling basis, or `false` to aggregate the current day so far. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeAccountUsageMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the account usage metrics dataflow.
+      properties:
+        account_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. When `true`, metrics aggregate the past 24 hours on a rolling basis; when `false`, they aggregate the current day so far.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Cost data aggregated from the Snowflake `ORGANIZATION_USAGE` schema. [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) must be enabled for your organization while this dataflow is enabled. Any request that enables this dataflow without Cloud Cost Management is rejected with a `422` response. The Snowflake role also needs the ORGANIZATION_BILLING_VIEWER database role to read the underlying cost views; without that role this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        Cost data aggregated from the Snowflake `ORGANIZATION_USAGE` schema. Requires [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) to be set up for your organization, and the ORGANIZATION_BILLING_VIEWER database role on the Snowflake role; without both this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Cloud Cost Management dataflow. Only the fields provided are changed.
+      properties:
+        query_tags:
+          description: >-
+            Snowflake query tags to ingest, so that cost data can be broken down by them in Cloud Cost Management. Provide the tag names as a comma-separated list without spaces, using only letters, digits, underscores, dots, and hyphens. Datadog does not collect query tags by default.
+          example: env,team,cost_center
+          pattern: "^([a-zA-Z0-9_.-]+(,[a-zA-Z0-9_.-]+)*)?$"
+          type: string
+      type: object
+    SnowflakeCloudCostMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the Cloud Cost Management dataflow.
+      properties:
+        query_tags:
+          description: >-
+            Snowflake query tags ingested as a comma-separated list of tag names, so that cost data can be broken down by them in Cloud Cost Management.
+          example: env,team,cost_center
+          type: string
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Snowflake databases so you can explore how data flows and detect and resolve quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowResponse:
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Snowflake databases so you can explore how data flows and detect and resolve quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Data Observability dataflow. Only the fields provided are changed.
+      properties:
+        do_table_crawler_cron:
+          description: >-
+            Cron expression setting how often Datadog crawls your Snowflake table metadata. It takes the five standard fields, with the restriction that the month must be `*` and that the day of the month and the day of the week cannot both be constrained. Common values are hourly (`0 * * * *`) and daily (`0 0 * * *`). Defaults to hourly (`0 * * * *`).
+          example: "0 */6 * * *"
+          type: string
+        sync_snowflake_system_database:
+          description: >-
+            Whether metadata from the Snowflake `SNOWFLAKE` system database is included in Data Observability alongside your own databases. Defaults to `true`.
+          example: true
+          type: boolean
+      type: object
+    SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse:
+      description: Settings of the Data Observability dataflow.
+      properties:
+        do_table_crawler_cron:
+          description: Cron expression setting how often Datadog crawls your Snowflake table metadata.
+          example: "0 */6 * * *"
+          type: string
+        sync_snowflake_system_database:
+          description: >-
+            Whether metadata from the Snowflake `SNOWFLAKE` system database is included in Data Observability alongside your own databases.
+          example: true
+          type: boolean
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Records from your Snowflake event tables, used to monitor application behavior and identify issues. `enabled` turns the dataflow on and off as a whole, and the per-record-type toggles in `settings` select which kinds of record it collects while it is on. The Snowflake role needs usage granted on the database, the schema, and the event table itself; without those grants this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowResponse:
+      description: >-
+        Records from your Snowflake event tables, used to monitor application behavior and identify issues. `enabled` turns the dataflow on and off as a whole, and the per-record-type toggles in `settings` select which kinds of record it collects while it is on. The Snowflake role needs usage granted on the database, the schema, and the event table itself; without those grants this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: >-
+        Settings of the event table dataflow. Each record type is collected independently so that you can control ingestion costs, and every record type is ingested into Datadog as logs tagged with its `record_type`. Only the fields provided are changed.
+      properties:
+        event_table_events_enabled:
+          description: >-
+            Whether records with a `record_type` of `event` are collected. Defaults to `false`.
+          example: true
+          type: boolean
+        event_table_logs_enabled:
+          description: >-
+            Whether records with a `record_type` of `log` are collected. Defaults to `false`.
+          example: true
+          type: boolean
+        event_table_logs_interval_min:
+          description: >-
+            How often event table records are collected, in minutes. One of `5`, `15`, `30`, `60`, or `1440`. Defaults to `5`.
+          example: 15
+          format: int64
+          type: integer
+        event_table_span_events_enabled:
+          description: >-
+            Whether records with a `record_type` of `span_event` are collected. Defaults to `false`.
+          example: false
+          type: boolean
+        event_table_spans_enabled:
+          description: >-
+            Whether records with a `record_type` of `span` are collected. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeEventTableLogsIntegrationDataflowSettingsResponse:
+      description: >-
+        Settings of the event table dataflow. Each record type is collected independently so that you can control ingestion costs, and every record type is ingested into Datadog as logs tagged with its `record_type`.
+      properties:
+        event_table_events_enabled:
+          description: Whether records with a `record_type` of `event` are collected.
+          example: true
+          type: boolean
+        event_table_logs_enabled:
+          description: Whether records with a `record_type` of `log` are collected.
+          example: true
+          type: boolean
+        event_table_logs_interval_min:
+          description: How often event table records are collected, in minutes.
+          example: 15
+          format: int64
+          type: integer
+        event_table_span_events_enabled:
+          description: Whether records with a `record_type` of `span_event` are collected.
+          example: false
+          type: boolean
+        event_table_spans_enabled:
+          description: Whether records with a `record_type` of `span` are collected.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeIntegrationAccountAuthenticationRequest:
+      description: Authentication for creating the Snowflake integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthRequest"
+    SnowflakeIntegrationAccountAuthenticationResponse:
+      description: Authentication configured on the Snowflake integration account.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthResponse"
+    SnowflakeIntegrationAccountAuthenticationUpdate:
+      description: Authentication for updating the Snowflake integration account. Exactly one method is set.
+      oneOf:
+        - $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthUpdate"
+    SnowflakeIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Snowflake integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsRequest"
+        name:
+          description: |-
+            Human-readable name of the Snowflake integration account. Must be
+            unique within your Datadog organization.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    SnowflakeIntegrationAccountCreateData:
+      description: Data envelope for creating a Snowflake integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    SnowflakeIntegrationAccountCreateRequest:
+      description: Request payload to create a Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthRequest:
+      additionalProperties: false
+      description: >-
+        RSA key pair authentication, the only method Snowflake integration accounts support. Generate an RSA key pair and assign the public key to the Snowflake user named in `settings.username`.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthType"
+        private_key:
+          description: The private key, in PEM format.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        private_key_name:
+          description: Name that distinguishes this private key from other keys in Datadog.
+          example: my-rsa-key
+          type: string
+        private_key_passphrase:
+          description: >-
+            Passphrase that decrypts the private key. Provide it only when the key is encrypted.
+          example: your-private-key-passphrase
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - private_key_name
+        - private_key
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthResponse:
+      description: The RSA key pair authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthType"
+        private_key_name:
+          description: Name that distinguishes this private key from other keys in Datadog.
+          example: my-rsa-key
+          type: string
+      required:
+        - auth_type
+        - private_key_name
+      type: object
+    SnowflakeIntegrationAccountPrivateKeyAuthType:
+      default: snowflake_private_key
+      description: The authentication method type.
+      enum:
+        - snowflake_private_key
+      example: snowflake_private_key
+      type: string
+      x-enum-varnames:
+        - SNOWFLAKE_PRIVATE_KEY
+    SnowflakeIntegrationAccountPrivateKeyAuthUpdate:
+      additionalProperties: false
+      description: >-
+        RSA key pair authentication, the only method Snowflake integration accounts support. Only the fields provided are changed; omit `private_key` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountPrivateKeyAuthType"
+        private_key:
+          description: The private key, in PEM format.
+          example: "-----BEGIN PRIVATE KEY-----\nMIIE...\n-----END PRIVATE KEY-----"
+          type: string
+          writeOnly: true
+        private_key_name:
+          description: Name that distinguishes this private key from other keys in Datadog.
+          example: my-rsa-key
+          type: string
+        private_key_passphrase:
+          description: >-
+            Passphrase that decrypts the private key. Provide it only when the key is encrypted. Omit it to keep the stored passphrase, send `null` or an empty string to remove it, or send a value to replace it.
+          example: your-private-key-passphrase
+          nullable: true
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    SnowflakeIntegrationAccountResponse:
+      description: Response payload for a single Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountResponseAttributes:
+      description: Attributes of a Snowflake integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Snowflake integration account.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    SnowflakeIntegrationAccountResponseData:
+      description: Data envelope of a Snowflake integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Snowflake integration account.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    SnowflakeIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Snowflake integration account.
+      properties:
+        snowflake_account_identifier:
+          description: >-
+            Identifier of the Snowflake account to monitor, either as `organization-account` or as the legacy `account_name.region_id.cloud_provider` account locator. An account identifier can be configured once per Datadog organization; reusing one is rejected with a `422` response. Accounts reached through AWS PrivateLink are not supported.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: >-
+            Snowflake user Datadog authenticates as. Create a dedicated user for Datadog and grant it a role with access to the data you want to collect.
+          example: datadog_user
+          type: string
+      required:
+        - snowflake_account_identifier
+        - username
+      type: object
+    SnowflakeIntegrationAccountSettingsResponse:
+      description: Settings configured on the Snowflake integration account.
+      properties:
+        snowflake_account_identifier:
+          description: Identifier of the Snowflake account being monitored.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: Snowflake user Datadog authenticates as.
+          example: datadog_user
+          type: string
+      required:
+        - snowflake_account_identifier
+        - username
+      type: object
+    SnowflakeIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Snowflake integration account. Only the fields provided are changed.
+      properties:
+        snowflake_account_identifier:
+          description: >-
+            Identifier of the Snowflake account to monitor, either as `organization-account` or as the legacy `account_name.region_id.cloud_provider` account locator. An account identifier can be configured once per Datadog organization; reusing one is rejected with a `422` response. Accounts reached through AWS PrivateLink are not supported.
+          example: myorg-myaccount
+          type: string
+        username:
+          description: >-
+            Snowflake user Datadog authenticates as. Create a dedicated user for Datadog and grant it a role with access to the data you want to collect.
+          example: datadog_user
+          type: string
+      type: object
+    SnowflakeIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Snowflake integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/SnowflakeIntegrationDataflowsRequest"
+        name:
+          description: |-
+            Human-readable name of the Snowflake integration account. Must be
+            unique within your Datadog organization.
+          example: prod-snowflake
+          type: string
+        settings:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountSettingsUpdate"
+      type: object
+    SnowflakeIntegrationAccountUpdateData:
+      description: Data envelope for updating a Snowflake integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Snowflake integration account to update.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SnowflakeIntegrationAccountUpdateRequest:
+      description: Request payload to update a Snowflake integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationAccountsResponse:
+      description: Response payload for a list of Snowflake integration accounts.
+      properties:
+        data:
+          description: List of Snowflake integration accounts.
+          items:
+            $ref: "#/components/schemas/SnowflakeIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    SnowflakeIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Snowflake, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it, and use `settings` to configure what it collects. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Every dataflow reads from Snowflake as the user in `settings.username`, so that user's role must be granted access to the underlying views; a dataflow enabled without those grants is stored but collects no data.
+      properties:
+        snowflake-account-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowRequest"
+        snowflake-cloud-cost-metrics:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowRequest"
+        snowflake-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowRequest"
+        snowflake-event-table-logs:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowRequest"
+        snowflake-organization-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowRequest"
+        snowflake-query-history-logs:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowRequest"
+        snowflake-security-logs:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowRequest"
+        snowflake-task-history-logs:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowRequest"
+      type: object
+    SnowflakeIntegrationDataflowsResponse:
+      description: Data Datadog collects from Snowflake, keyed by dataflow id.
+      properties:
+        snowflake-account-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeAccountUsageMetricsIntegrationDataflowResponse"
+        snowflake-cloud-cost-metrics:
+          $ref: "#/components/schemas/SnowflakeCloudCostMetricsIntegrationDataflowResponse"
+        snowflake-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/SnowflakeDataObservabilityQualityMonitoringIntegrationDataflowResponse"
+        snowflake-event-table-logs:
+          $ref: "#/components/schemas/SnowflakeEventTableLogsIntegrationDataflowResponse"
+        snowflake-organization-usage-metrics:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowResponse"
+        snowflake-query-history-logs:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowResponse"
+        snowflake-security-logs:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowResponse"
+        snowflake-task-history-logs:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowResponse"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Organization-level usage metrics read from the Snowflake `ORGANIZATION_USAGE` schema, covering the credit consumption of every account in the organization and the history of data transferred out of Snowflake. Reading that schema requires the ORGADMIN role; without it this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowResponse:
+      description: >-
+        Organization-level usage metrics read from the Snowflake `ORGANIZATION_USAGE` schema, covering the credit consumption of every account in the organization and the history of data transferred out of Snowflake. Reading that schema requires the ORGADMIN role; without it this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the organization usage metrics dataflow. Only the fields provided are changed.
+      properties:
+        organization_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. Set to `true` to aggregate the past 24 hours on a rolling basis, or `false` to aggregate the current day so far. Defaults to `false`.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeOrganizationUsageMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the organization usage metrics dataflow.
+      properties:
+        organization_usage_metrics_aggregate_last_24h:
+          description: >-
+            The period each metric aggregates over. When `true`, metrics aggregate the past 24 hours on a rolling basis; when `false`, they aggregate the current day so far.
+          example: false
+          type: boolean
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Per-query logs that let you identify long-running, poorly performing, and expensive queries.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowResponse:
+      description: >-
+        Per-query logs that let you identify long-running, poorly performing, and expensive queries.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeQueryHistoryLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the query history logs dataflow. Only the fields provided are changed.
+      properties:
+        join_query_history_with_access_history_enabled:
+          description: >-
+            Whether query logs are joined with Snowflake access history, which adds the objects each query read and wrote so you can follow how data is used and where it came from. Defaults to `false`.
+          example: true
+          type: boolean
+        query_history_logs_interval_min:
+          description: >-
+            How often query history logs are collected, in minutes. One of `5`, `15`, `30`, `60`, `720`, or `1440`. Defaults to `5`.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    SnowflakeQueryHistoryLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the query history logs dataflow.
+      properties:
+        join_query_history_with_access_history_enabled:
+          description: >-
+            Whether query logs are joined with Snowflake access history, which adds the objects each query read and wrote so you can follow how data is used and where it came from.
+          example: true
+          type: boolean
+        query_history_logs_interval_min:
+          description: How often query history logs are collected, in minutes.
+          example: 15
+          format: int64
+          type: integer
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Security logs from the Snowflake `ACCOUNT_USAGE` schema, for analyzing the security of your Snowflake account and running threat detection with [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowResponse:
+      description: >-
+        Security logs from the Snowflake `ACCOUNT_USAGE` schema, for analyzing the security of your Snowflake account and running threat detection with [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/).
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeSecurityLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the security logs dataflow. Only the fields provided are changed.
+      properties:
+        security_logs_interval_min:
+          description: >-
+            How often security logs are collected, in minutes. One of `5`, `15`, `30`, `60`, `360`, `720`, or `1440`. Defaults to `5`.
+          example: 60
+          format: int64
+          type: integer
+      type: object
+    SnowflakeSecurityLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the security logs dataflow.
+      properties:
+        security_logs_interval_min:
+          description: How often security logs are collected, in minutes.
+          example: 60
+          format: int64
+          type: integer
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Execution logs for your scheduled Snowflake tasks, covering start time, end time, status, and any error message.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowSettingsRequest"
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowResponse:
+      description: >-
+        Execution logs for your scheduled Snowflake tasks, covering start time, end time, status, and any error message.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/SnowflakeTaskHistoryLogsIntegrationDataflowSettingsResponse"
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the task history logs dataflow. Only the fields provided are changed.
+      properties:
+        task_history_logs_interval_min:
+          description: >-
+            How often task history logs are collected, in minutes. One of `5`, `15`, `30`, `60`, or `1440`. Defaults to `5`.
+          example: 30
+          format: int64
+          type: integer
+      type: object
+    SnowflakeTaskHistoryLogsIntegrationDataflowSettingsResponse:
+      description: Settings of the task history logs dataflow.
+      properties:
+        task_history_logs_interval_min:
+          description: How often task history logs are collected, in minutes.
+          example: 30
+          format: int64
+          type: integer
+      type: object
     SoftwareCatalogTriggerWrapper:
       description: "Schema for a Software Catalog-based trigger."
       properties:
@@ -118987,15 +120375,6 @@ components:
             Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
           example: false
           type: boolean
-        queried_tags_window_seconds:
-          description: Window in seconds for evaluating queried tags.
-          example: 3600
-          format: int64
-          type: integer
-        related_asset_tags:
-          description: When true, tags from related assets are included.
-          example: false
-          type: boolean
       type: object
     TagIndexingRuleExemptionAttributes:
       description: Attributes of a tag indexing rule exemption.
@@ -123067,7 +124446,7 @@ components:
           type: array
       type: object
     TimeseriesAnomalyInvestigationAnomaly:
-      description: Most significant anomaly detected in the request.
+      description: One of the most significant anomalies detected in the request.
       properties:
         anomaly_detection:
           $ref: "#/components/schemas/TimeseriesAnomalyInvestigationDetection"
@@ -123243,8 +124622,11 @@ components:
       description: Formula evaluated by the timeseries request.
       properties:
         formula:
-          description: Formula expression referencing one or more named queries.
-          example: "anomalies(query1, 'agile', 3)"
+          description: |-
+            Formula expression referencing one or more named queries.
+            When the expression does not contain an explicit `anomalies()` call,
+            the endpoint applies the default Watchdog Explains anomaly detection configuration.
+          example: query1
           minLength: 1
           type: string
         limit:
@@ -123435,7 +124817,7 @@ components:
           description: Timeseries requests to investigate. This API version accepts exactly one request.
           example:
             - formulas:
-                - formula: "anomalies(query1, 'agile', 3)"
+                - formula: query1
               from: 1754406000000
               queries:
                 - data_source: metrics
@@ -123557,11 +124939,13 @@ components:
       description: Completed result for one timeseries request. The anomalies array is empty when no qualifying anomaly is found.
       properties:
         anomalies:
-          description: Detected anomalies. This API version returns at most one anomaly.
+          description: |-
+            Detected anomalies, ordered by significance. This API version returns at most
+            three anomalies across the submitted request.
           example: []
           items:
             $ref: "#/components/schemas/TimeseriesAnomalyInvestigationAnomaly"
-          maxItems: 1
+          maxItems: 3
           type: array
         status:
           $ref: "#/components/schemas/TimeseriesAnomalyInvestigationCompleteStatus"
@@ -123659,7 +125043,7 @@ components:
         formulas:
           description: Formulas to evaluate. Each formula may contain an explicit `anomalies()` call or a supported metrics expression.
           example:
-            - formula: "anomalies(query1, 'agile', 3)"
+            - formula: query1
           items:
             $ref: "#/components/schemas/TimeseriesAnomalyInvestigationFormula"
           minItems: 1
@@ -124137,72 +125521,84 @@ components:
       x-enum-varnames:
         - TRIGGER_WORKFLOW_AUTOMATION
     TwilioAlertsLogsIntegrationDataflowRequest:
-      description: The Twilio alerts logs dataflow.
+      additionalProperties: false
+      description: >-
+        Twilio Alert resource logs, which detail the errors and warnings raised when Twilio makes a webhook request to your server or when your application calls the Twilio REST API. This is the one kind of data the integration collects by default.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `true`; set to `false` to stop collection.
           example: true
           type: boolean
       type: object
     TwilioAlertsLogsIntegrationDataflowResponse:
-      description: The Twilio alerts logs dataflow.
+      description: >-
+        Twilio Alert resource logs, which detail the errors and warnings raised when Twilio makes a webhook request to your server or when your application calls the Twilio REST API.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     TwilioCallSummariesLogsIntegrationDataflowRequest:
-      description: The Twilio call summaries logs dataflow.
+      additionalProperties: false
+      description: >-
+        Twilio Call Summary resource logs, covering the metadata and performance of the calls made from your Twilio account. Requires Voice Insights Advanced Features to be enabled on the Twilio account; without it this dataflow collects no data.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     TwilioCallSummariesLogsIntegrationDataflowResponse:
-      description: The Twilio call summaries logs dataflow.
+      description: >-
+        Twilio Call Summary resource logs, covering the metadata and performance of the calls made from your Twilio account. Requires Voice Insights Advanced Features to be enabled on the Twilio account; without it this dataflow collects no data.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     TwilioCloudCostMetricsIntegrationDataflowRequest:
-      description: The Twilio cloud cost metrics dataflow.
+      additionalProperties: false
+      description: >-
+        Your Twilio cost data, so that Twilio spend can be broken down and attributed in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/). Cost data appears in Cloud Cost Management within 24 hours of enabling this dataflow.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     TwilioCloudCostMetricsIntegrationDataflowResponse:
-      description: The Twilio cloud cost metrics dataflow.
+      description: >-
+        Your Twilio cost data, so that Twilio spend can be broken down and attributed in [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/).
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
           $ref: "#/components/schemas/IntegrationAccountDataflowStatus"
       type: object
     TwilioEventsLogsIntegrationDataflowRequest:
-      description: The Twilio events logs dataflow.
+      additionalProperties: false
+      description: >-
+        Twilio Event resource logs, which record virtually every action taken in your Twilio account, such as provisioning a phone number, changing account security settings, or deleting a recording. Actions are recorded whether they came from the REST API, a user in the Twilio Console, or Twilio itself. [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/) analyzes and correlates these logs to detect threats in real time.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     TwilioEventsLogsIntegrationDataflowResponse:
-      description: The Twilio events logs dataflow.
+      description: >-
+        Twilio Event resource logs, which record virtually every action taken in your Twilio account, such as provisioning a phone number, changing account security settings, or deleting a recording. Actions are recorded whether they came from the REST API, a user in the Twilio Console, or Twilio itself. [Cloud SIEM](https://docs.datadoghq.com/security/cloud_siem/) analyzes and correlates these logs to detect threats in real time.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
@@ -124211,15 +125607,75 @@ components:
     TwilioIntegrationAccountAuthenticationRequest:
       description: Authentication for creating the Twilio integration account. Exactly one method is set.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthRequest"
+        - $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthRequest"
     TwilioIntegrationAccountAuthenticationResponse:
       description: Authentication configured on the Twilio integration account.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthResponse"
+        - $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthResponse"
     TwilioIntegrationAccountAuthenticationUpdate:
       description: Authentication for updating the Twilio integration account. Exactly one method is set.
       oneOf:
-        - $ref: "#/components/schemas/IntegrationAccountBasicAuthUpdate"
+        - $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthUpdate"
+    TwilioIntegrationAccountBasicAuthRequest:
+      additionalProperties: false
+      description: Username and password authentication.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+        - password
+      type: object
+    TwilioIntegrationAccountBasicAuthResponse:
+      description: The basic authentication method and username configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthType"
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+        - username
+      type: object
+    TwilioIntegrationAccountBasicAuthType:
+      default: basic
+      description: The authentication method type.
+      enum:
+        - basic
+      example: basic
+      type: string
+      x-enum-varnames:
+        - BASIC
+    TwilioIntegrationAccountBasicAuthUpdate:
+      additionalProperties: false
+      description: Username and password authentication. Only the fields provided are changed; omit `password` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/TwilioIntegrationAccountBasicAuthType"
+        password:
+          description: Secret password or private key.
+          example: your-password
+          type: string
+          writeOnly: true
+        username:
+          description: Non-secret username or public identifier for the credential pair.
+          example: datadog
+          type: string
+      required:
+        - auth_type
+      type: object
     TwilioIntegrationAccountCreateAttributes:
       description: Writable attributes used to create a Twilio integration account.
       properties:
@@ -124300,6 +125756,7 @@ components:
         - type
       type: object
     TwilioIntegrationAccountSettingsRequest:
+      additionalProperties: false
       description: Settings for creating the Twilio integration account.
       properties:
         account_sid:
@@ -124328,6 +125785,7 @@ components:
         - account_sid
       type: object
     TwilioIntegrationAccountSettingsUpdate:
+      additionalProperties: false
       description: Settings for updating the Twilio integration account. Only the fields provided are changed.
       properties:
         account_sid:
@@ -124391,7 +125849,8 @@ components:
       type: object
     TwilioIntegrationDataflowsRequest:
       additionalProperties: false
-      description: Dataflows to configure on the Twilio integration account, keyed by dataflow id.
+      description: >-
+        Data Datadog collects from Twilio, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Where a dataflow depends on a Twilio feature being enabled, that prerequisite is noted on the dataflow; a dataflow enabled without it is stored but collects no data.
       properties:
         twilio-alerts-logs:
           $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowRequest"
@@ -124405,7 +125864,7 @@ components:
           $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowRequest"
       type: object
     TwilioIntegrationDataflowsResponse:
-      description: Dataflows configured on the Twilio integration account, keyed by dataflow id.
+      description: Data Datadog collects from Twilio, keyed by dataflow id.
       properties:
         twilio-alerts-logs:
           $ref: "#/components/schemas/TwilioAlertsLogsIntegrationDataflowResponse"
@@ -124419,18 +125878,21 @@ components:
           $ref: "#/components/schemas/TwilioMessagesLogsIntegrationDataflowResponse"
       type: object
     TwilioMessagesLogsIntegrationDataflowRequest:
-      description: The Twilio messages logs dataflow.
+      additionalProperties: false
+      description: >-
+        Twilio Message resource logs for inbound and outbound messages, used to track delivery and troubleshoot message errors. A log is produced when you send a message through the REST API, when Twilio executes a TwiML instruction, and when someone messages one of your Twilio numbers or channel addresses. Message bodies are never collected.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
           example: true
           type: boolean
       type: object
     TwilioMessagesLogsIntegrationDataflowResponse:
-      description: The Twilio messages logs dataflow.
+      description: >-
+        Twilio Message resource logs for inbound and outbound messages, used to track delivery and troubleshoot message errors. A log is produced when you send a message through the REST API, when Twilio executes a TwiML instruction, and when someone messages one of your Twilio numbers or channel addresses. Message bodies are never collected.
       properties:
         enabled:
-          description: Whether the Twilio dataflow is enabled.
+          description: Whether Datadog collects this data.
           example: true
           type: boolean
         status:
@@ -129594,6 +131056,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -129674,6 +131139,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
         tags:
@@ -129795,6 +131263,9 @@ components:
         runAsUserMode:
           $ref: "#/components/schemas/WorkflowRunAsUserMode"
           readOnly: true
+        sensitivePrivileges:
+          description: Whether the workflow requires sensitive privileges to run. Only the workflow owner can update this field. This allows it to run actions that use [Execution Policies](https://docs.datadoghq.com/actions/private_actions/execution_policies/).
+          type: boolean
         spec:
           $ref: "#/components/schemas/Spec"
           nullable: true
@@ -130068,6 +131539,11 @@ components:
             event_correlation_config_read: View event correlation configurations.
             event_correlation_config_write: Create and update event correlation configurations.
             events_read: Read Events data.
+            feature_flag_approvals_override: Override Feature Flag Approvals.
+            feature_flag_config_read: View Feature Flag Configurations.
+            feature_flag_config_write: Edit Feature Flag Configurations.
+            feature_flag_environment_config_read: View Feature Flag Environment settings.
+            feature_flag_environment_config_write: Modify Feature Flag Environment settings.
             hosts_read: List hosts and their attributes.
             incident_notification_settings_read: View Incident Notification Rule Settings.
             incident_notification_settings_write: Configure Incidents Notification Rule settings.
@@ -145448,7 +146924,7 @@ paths:
                         costs_period_start: 1738281600000
                         costs_unit:
                           family: currency
-                          id: "1"
+                          id: 42
                           name: dollar
                           plural: dollars
                           scale_factor: 1.0
@@ -146764,10 +148240,14 @@ paths:
             examples:
               default:
                 value:
-                  filter: "@resource_table:aws_ec2_instance"
-                  sort:
-                    - expression: potential_daily_savings.amount
-                      order: DESC
+                  data:
+                    attributes:
+                      scope: ccm
+                      sort:
+                        - expression: potential_daily_savings.amount
+                          order: DESC
+                    id: "@resource_table:aws_ec2_instance"
+                    type: recommendations_filter
             schema:
               $ref: "#/components/schemas/RecommendationsFilterRequest"
         required: true
@@ -147134,13 +148614,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147204,19 +148684,19 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "404":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -147709,13 +149189,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Bad Request
         "403":
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/APIErrorResponse"
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
@@ -154304,6 +155784,17 @@ paths:
           schema:
             example: "created_by,monitor"
             type: string
+        - description: |-
+            If `true`, include the `run_as` attribute in the response, which lists the principals allowed to
+            act on behalf of the downtime.
+
+            **Note**: This feature is currently in Preview and may not be available for all organizations.
+          in: query
+          name: with_run_as
+          required: false
+          schema:
+            default: false
+            type: boolean
       responses:
         "200":
           content:
@@ -155148,6 +156639,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+            - feature_flag_environment_config_read
       summary: List feature flags
       tags:
         - Feature Flags
@@ -155242,6 +156736,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Create a feature flag
       tags:
         - Feature Flags
@@ -155317,6 +156814,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_read
       summary: List environments
       tags:
         - Feature Flags
@@ -155390,6 +156889,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Create an environment
       tags:
         - Feature Flags
@@ -155425,6 +156926,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Delete an environment
       tags:
         - Feature Flags
@@ -155478,6 +156981,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_read
       summary: Get an environment
       tags:
         - Feature Flags
@@ -155554,6 +157059,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_environment_config_write
       summary: Update an environment
       tags:
         - Feature Flags
@@ -155621,6 +157128,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Pause a progressive rollout
       tags:
         - Feature Flags
@@ -155688,6 +157197,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Resume a progressive rollout
       tags:
         - Feature Flags
@@ -155755,6 +157266,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Start a progressive rollout
       tags:
         - Feature Flags
@@ -155822,6 +157335,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Stop a progressive rollout
       tags:
         - Feature Flags
@@ -155884,6 +157399,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_read
+            - feature_flag_environment_config_read
       summary: Get a feature flag
       tags:
         - Feature Flags
@@ -155967,6 +157485,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Update a feature flag
       tags:
         - Feature Flags
@@ -156036,6 +157557,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Archive a feature flag
       tags:
         - Feature Flags
@@ -156157,6 +157681,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Create targeting rules for a flag env
       tags:
         - Feature Flags
@@ -156260,6 +157786,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Update targeting rules for a flag
       tags:
         - Feature Flags
@@ -156298,6 +157826,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Disable a feature flag in an environment
       tags:
         - Feature Flags
@@ -156337,6 +157868,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Enable a feature flag in an environment
       tags:
         - Feature Flags
@@ -156405,6 +157939,9 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
+            - feature_flag_environment_config_read
       summary: Unarchive a feature flag
       tags:
         - Feature Flags
@@ -156490,6 +158027,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Add a variant to a feature flag
       tags:
         - Feature Flags
@@ -156540,6 +158079,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Delete a variant
       tags:
         - Feature Flags
@@ -156620,6 +158161,8 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ:
+            - feature_flag_config_write
       summary: Update a variant
       tags:
         - Feature Flags
@@ -164511,7 +166054,12 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/{incident_id}/cases/page:
     post:
-      description: Create a page from an incident using the Cases service.
+      deprecated: true
+      description: |-
+        Create a page from an incident using the Cases service.
+
+        **Deprecated**: This endpoint is deprecated. Use
+        [Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.
       operationId: CreatePageFromIncident
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"
@@ -166135,14 +167683,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Elastic Cloud integration accounts
       tags:
-        - Elastic Cloud Integration Accounts
+        - Elastic Cloud Integration
       x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
           - integrations_read
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Create an Elastic Cloud integration account.
@@ -166194,7 +167742,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create an Elastic Cloud integration account
       tags:
-        - Elastic Cloud Integration Accounts
+        - Elastic Cloud Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
       "x-permission":
@@ -166202,7 +167750,7 @@ paths:
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/elastic-cloud/accounts/{account_id}:
     delete:
@@ -166223,14 +167771,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete an Elastic Cloud integration account
       tags:
-        - Elastic Cloud Integration Accounts
+        - Elastic Cloud Integration
       x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get an Elastic Cloud integration account.
@@ -166276,14 +167824,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get an Elastic Cloud integration account
       tags:
-        - Elastic Cloud Integration Accounts
+        - Elastic Cloud Integration
       x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
           - integrations_read
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: Update an Elastic Cloud integration account. Only the fields provided are changed.
@@ -166337,7 +167885,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update an Elastic Cloud integration account
       tags:
-        - Elastic Cloud Integration Accounts
+        - Elastic Cloud Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -166345,7 +167893,386 @@ paths:
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/snowflake/accounts:
+    get:
+      description: List Snowflake integration accounts.
+      operationId: ListSnowflakeIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: snowflake_private_key
+                            private_key_name: my-rsa-key
+                          dataflows:
+                            snowflake-account-usage-metrics:
+                              enabled: true
+                              settings:
+                                account_usage_metrics_aggregate_last_24h: false
+                            snowflake-cloud-cost-metrics:
+                              enabled: true
+                              settings:
+                                query_tags: env,team,cost_center
+                            snowflake-data-observability-quality-monitoring:
+                              enabled: true
+                              settings:
+                                do_table_crawler_cron: "0 */6 * * *"
+                                sync_snowflake_system_database: true
+                            snowflake-event-table-logs:
+                              enabled: true
+                              settings:
+                                event_table_events_enabled: true
+                                event_table_logs_enabled: true
+                                event_table_logs_interval_min: 15
+                                event_table_span_events_enabled: false
+                                event_table_spans_enabled: false
+                            snowflake-organization-usage-metrics:
+                              enabled: true
+                              settings:
+                                organization_usage_metrics_aggregate_last_24h: false
+                            snowflake-query-history-logs:
+                              enabled: true
+                              settings:
+                                join_query_history_with_access_history_enabled: true
+                                query_history_logs_interval_min: 15
+                            snowflake-security-logs:
+                              enabled: true
+                              settings:
+                                security_logs_interval_min: 60
+                            snowflake-task-history-logs:
+                              enabled: true
+                              settings:
+                                task_history_logs_interval_min: 30
+                          name: prod-snowflake
+                          settings:
+                            snowflake_account_identifier: myorg-myaccount
+                            username: datadog_user
+                        id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Snowflake integration accounts
+      tags:
+        - Snowflake Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Snowflake integration account.
+      operationId: CreateSnowflakeIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnowflakeIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake_private_key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/snowflake/accounts/{account_id}:
+    delete:
+      description: Delete a Snowflake integration account.
+      operationId: DeleteSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Snowflake integration account.
+      operationId: GetSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake_private_key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Snowflake integration account. Only the fields provided are changed.
+      operationId: UpdateSnowflakeIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SnowflakeIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: snowflake_private_key
+                          private_key_name: my-rsa-key
+                        dataflows:
+                          snowflake-account-usage-metrics:
+                            enabled: true
+                            settings:
+                              account_usage_metrics_aggregate_last_24h: false
+                          snowflake-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              query_tags: env,team,cost_center
+                          snowflake-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_table_crawler_cron: "0 */6 * * *"
+                              sync_snowflake_system_database: true
+                          snowflake-event-table-logs:
+                            enabled: true
+                            settings:
+                              event_table_events_enabled: true
+                              event_table_logs_enabled: true
+                              event_table_logs_interval_min: 15
+                              event_table_span_events_enabled: false
+                              event_table_spans_enabled: false
+                          snowflake-organization-usage-metrics:
+                            enabled: true
+                            settings:
+                              organization_usage_metrics_aggregate_last_24h: false
+                          snowflake-query-history-logs:
+                            enabled: true
+                            settings:
+                              join_query_history_with_access_history_enabled: true
+                              query_history_logs_interval_min: 15
+                          snowflake-security-logs:
+                            enabled: true
+                            settings:
+                              security_logs_interval_min: 60
+                          snowflake-task-history-logs:
+                            enabled: true
+                            settings:
+                              task_history_logs_interval_min: 30
+                        name: prod-snowflake
+                        settings:
+                          snowflake_account_identifier: myorg-myaccount
+                          username: datadog_user
+                      id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/SnowflakeIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Snowflake integration account
+      tags:
+        - Snowflake Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/twilio/accounts:
     get:
@@ -166388,14 +168315,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: List Twilio integration accounts
       tags:
-        - Twilio Integration Accounts
+        - Twilio Integration
       x-menu-order: 1
       "x-permission":
         operator: OR
         permissions:
           - integrations_read
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Create a Twilio integration account.
@@ -166445,7 +168372,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Create a Twilio integration account
       tags:
-        - Twilio Integration Accounts
+        - Twilio Integration
       x-codegen-request-body-name: body
       x-menu-order: 2
       "x-permission":
@@ -166453,7 +168380,7 @@ paths:
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration-interfaces/twilio/accounts/{account_id}:
     delete:
@@ -166474,14 +168401,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Delete a Twilio integration account
       tags:
-        - Twilio Integration Accounts
+        - Twilio Integration
       x-menu-order: 5
       "x-permission":
         operator: OR
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get a Twilio integration account.
@@ -166525,14 +168452,14 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Get a Twilio integration account
       tags:
-        - Twilio Integration Accounts
+        - Twilio Integration
       x-menu-order: 3
       "x-permission":
         operator: OR
         permissions:
           - integrations_read
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: Update a Twilio integration account. Only the fields provided are changed.
@@ -166584,7 +168511,7 @@ paths:
           $ref: "#/components/responses/TooManyRequestsResponse"
       summary: Update a Twilio integration account
       tags:
-        - Twilio Integration Accounts
+        - Twilio Integration
       x-codegen-request-body-name: body
       x-menu-order: 4
       "x-permission":
@@ -166592,7 +168519,7 @@ paths:
         permissions:
           - manage_integrations
       x-unstable: |-
-        **Note**: This endpoint is in public beta.
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/aws/accounts:
     get:
@@ -169263,7 +171190,6 @@ paths:
       tags:
         - OCI Integration
       x-menu-order: 2
-      x-unstable: "**Note**: This endpoint may be subject to changes."
     post:
       description: >-
         Create a new tenancy config to establish monitoring and data collection from your OCI environment. Requires OCI authentication credentials and tenancy details. Warning: Datadog recommends interacting with this endpoint only through the Datadog web UI to ensure all necessary OCI resources have been created and configured properly.
@@ -169341,7 +171267,6 @@ paths:
       tags:
         - OCI Integration
       x-menu-order: 3
-      x-unstable: "**Note**: This endpoint may be subject to changes."
   /api/v2/integration/oci/tenancies/{tenancy_ocid}:
     delete:
       description: >-
@@ -184031,6 +185956,16 @@ paths:
                           policy_type: tag
                         id: "00000000-0000-1234-0000-000000000000"
                         type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      - attributes:
+                          policy:
+                            max_duration_ms: 3600000
+                          policy_type: downtime
+                        id: "00000000-0000-1234-0000-000000000000"
+                        type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyListResponse"
           description: OK
@@ -184074,6 +186009,15 @@ paths:
                           - staging
                       policy_type: tag
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyCreateRequest"
         description: Create a monitor configuration policy request body.
@@ -184094,6 +186038,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -184194,6 +186148,16 @@ paths:
                         policy_type: tag
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
               schema:
                 $ref: "#/components/schemas/MonitorConfigPolicyResponse"
           description: OK
@@ -184252,6 +186216,16 @@ paths:
                       policy_type: tag
                     id: 00000000-0000-1234-0000-000000000000
                     type: monitor-config-policy
+              downtime:
+                summary: Downtime duration policy
+                value:
+                  data:
+                    attributes:
+                      policy:
+                        max_duration_ms: 3600000
+                      policy_type: downtime
+                    id: 00000000-0000-1234-0000-000000000000
+                    type: monitor-config-policy
             schema:
               $ref: "#/components/schemas/MonitorConfigPolicyEditRequest"
         description: Description of the update.
@@ -184272,6 +186246,16 @@ paths:
                             - prod
                             - staging
                         policy_type: tag
+                      id: "00000000-0000-1234-0000-000000000000"
+                      type: monitor-config-policy
+                downtime:
+                  summary: Downtime duration policy
+                  value:
+                    data:
+                      attributes:
+                        policy:
+                          max_duration_ms: 3600000
+                        policy_type: downtime
                       id: "00000000-0000-1234-0000-000000000000"
                       type: monitor-config-policy
               schema:
@@ -184990,6 +186974,20 @@ paths:
           content:
             application/json:
               examples:
+                by_source:
+                  value:
+                    data:
+                      attributes:
+                        by_source:
+                          - source: user
+                            tags:
+                              - "tag:test"
+                              - "tag:testbis"
+                          - source: snmp
+                            tags:
+                              - "device_ip:1.2.3.4"
+                      id: foiwf7rgw38fh
+                      type: tags
                 default:
                   value:
                     data:
@@ -185434,6 +187432,85 @@ paths:
         operator: OR
         permissions:
           - network_connections_read
+  /api/v2/oauth2/.well-known/openid-configuration:
+    get:
+      description: Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.
+      operationId: GetOIDCDiscoveryDocument
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    authorization_endpoint: https://app.datadoghq.com/oauth2/v1/authorize
+                    id_token_signing_alg_values_supported:
+                      - RS256
+                    issuer: https://app.datadoghq.com/api/v2/oauth2
+                    jwks_uri: https://app.datadoghq.com/oauth2/v1/keys
+                    response_types_supported:
+                      - code
+                    subject_types_supported:
+                      - public
+                    token_endpoint: https://app.datadoghq.com/api/v2/oauth2/token
+              schema:
+                $ref: "#/components/schemas/OIDCDiscoveryDocument"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security: []
+      servers:
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The regional site for Datadog customers.
+              enum:
+                - datadoghq.com
+                - us3.datadoghq.com
+                - us5.datadoghq.com
+                - ap1.datadoghq.com
+                - ap2.datadoghq.com
+                - uk1.datadoghq.com
+                - datadoghq.eu
+                - ddog-gov.com
+                - us2.ddog-gov.com
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - UK1
+                - EU1
+                - GOV
+                - US2_GOV
+            subdomain:
+              default: app
+              description: The subdomain where the API is deployed.
+        - url: "{protocol}://{name}"
+          variables:
+            name:
+              default: app.datadoghq.com
+              description: Full site DNS name.
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: Any Datadog deployment.
+            subdomain:
+              default: app
+              description: The subdomain where the API is deployed.
+      summary: Get OpenID Connect provider metadata
+      tags:
+        - OAuth2 Client Public
+      x-menu-order: 6
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/oauth2/.well-known/sites:
     get:
       description: Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.
@@ -200788,13 +202865,18 @@ paths:
                             downloaded_count: 0
                             http_method: GET
                             load_frequency_pct: 54.0
+                            local_cache_count: 20
                             max_duration_ms: 945.6
                             median_duration_ms: 836.2
                             min_duration_ms: 812.7
+                            non_blocking_count: 23
                             p75_duration_ms: 844.1
                             p95_duration_ms: 861.8
+                            render_blocking_count: 4
+                            render_blocking_pct: 14.8
                             resource_type: fetch
                             resource_url_path_group: /api/gallery
+                            server_validated_cache_count: 7
                             timing_breakdown:
                               avg_connect_ms: 0.0
                               avg_dns_ms: 0.0
@@ -212803,6 +214885,64 @@ paths:
           - siem_entities_read
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/events/{event_id}/matching_signals:
+    get:
+      description: Returns the list of security signals that match a given event on the given track.
+      operationId: GetMatchingSignals
+      parameters:
+        - description: The ID of the event to find matching signals for.
+          in: path
+          name: event_id
+          required: true
+          schema:
+            type: string
+        - description: The product track that the event belongs to.
+          in: query
+          name: track
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          event_tracker_id: AAAAAWgOAX0mtsWfeQAAAABzX1RyYWNrZXJfMTIzNDU2Nzg5MA
+                          severity: high
+                          title: Unusual login activity detected
+                          trigger_time_ms: 1707393746000
+                        id: AAAAAWgN8Xwgr1vKDQAAAABBV2dOOFh3ZzZobm1mWXJFYTR0OA
+                        type: matching_signal
+              schema:
+                $ref: "#/components/schemas/MatchingSignalsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - security_monitoring_signals_read
+      summary: Get signals matching an event
+      tags: ["Security Monitoring"]
+      x-menu-order: 174
+      x-permission:
+        operator: OR
+        permissions:
+          - security_monitoring_signals_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/rules:
     get:
@@ -228813,8 +230953,9 @@ paths:
   /api/v2/timeseries-anomaly-investigations:
     post:
       description: |-
-        Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.
-        Metrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.
+        Investigates a metrics timeseries request for its most significant anomalies and returns
+        deterministic findings. Metrics queries with or without grouping are supported. This
+        API version accepts exactly one request and returns at most three anomalies.
       operationId: CreateTimeseriesAnomalyInvestigation
       requestBody:
         content:
@@ -228826,7 +230967,7 @@ paths:
                     attributes:
                       requests:
                         - formulas:
-                            - formula: "anomalies(query1, 'agile', 3)"
+                            - formula: query1
                           from: 1754406000000
                           queries:
                             - data_source: metrics
@@ -228850,8 +230991,8 @@ paths:
                         results:
                           - anomalies:
                               - anomaly_detection:
-                                  configuration_source: request_formula
-                                  profile:
+                                  configuration_source: watchdog_explains_default
+                                  profile: watchdog_explains_v1
                                 detected_interval:
                                   end: 1754406120000
                                   start: 1754406060000
@@ -229754,7 +231895,9 @@ paths:
   /api/v2/usage/quotas/{quota_namespace}:
     get:
       description: |-
-        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.
+        Lists usage quotas for the caller's organization in a quota namespace. You can optionally include
+        descendant organizations in the same datacenter as the caller. Requires the `billing_read` or
+        `billing_edit` permission.
       operationId: ListQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -229827,6 +231970,8 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
+            - billing_read
+        - AuthZ:
             - billing_edit
       summary: List usage quotas
       tags:
@@ -229840,6 +231985,7 @@ paths:
       "x-permission":
         operator: OR
         permissions:
+          - billing_read
           - billing_edit
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
@@ -232632,16 +234778,14 @@ tags:
       end times, prevent all alerting related to specified Datadog tags.
     name: Downtimes
   - description: |-
-      Manage your Datadog Elastic Cloud integration accounts directly through the Datadog API.
-      Create, update, and delete accounts, configure authentication and settings, and
-      enable or disable dataflows such as cluster metrics, index stats, shard stats,
-      pending tasks, and snapshot lifecycle management stats. See the
+      Manage your Datadog Elastic Cloud integration accounts and account resources
+      directly through the Datadog API. See the
       [Elastic Cloud integration page](https://docs.datadoghq.com/integrations/elastic-cloud/) for
       more information.
     externalDocs:
       description: Elastic Cloud integration.
       url: https://docs.datadoghq.com/integrations/elastic-cloud/
-    name: Elastic Cloud Integration Accounts
+    name: Elastic Cloud Integration
   - description: Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog.
     name: Entity Integration Configs
   - description: Retrieves security risk scores for entities in your organization.
@@ -233037,6 +235181,15 @@ tags:
       url: https://docs.datadoghq.com/integrations/slack/
     name: Slack Integration
   - description: |-
+      Manage your Datadog Snowflake integration accounts
+      directly through the Datadog API. See the
+      [Snowflake integration page](https://docs.datadoghq.com/integrations/snowflake_web/) for
+      more information.
+    externalDocs:
+      description: Snowflake integration.
+      url: https://docs.datadoghq.com/integrations/snowflake_web/
+    name: Snowflake Integration
+  - description: |-
       API to create, update, retrieve, and delete Software Catalog entities.
     externalDocs:
       url: https://docs.datadoghq.com/service_catalog/service_definitions#metadata-schema-v30-beta
@@ -233093,16 +235246,14 @@ tags:
   - description: Investigate metrics timeseries anomalies and return deterministic findings.
     name: Timeseries Anomaly Investigations
   - description: |-
-      Manage your Datadog Twilio integration accounts directly through the Datadog API.
-      Create, update, and delete accounts, configure authentication and settings, and
-      enable or disable dataflows such as message logs, event logs, alerts, call
-      summaries, and Cloud Cost Management metrics. See the
+      Manage your Datadog Twilio integration accounts and account resources directly
+      through the Datadog API. See the
       [Twilio integration page](https://docs.datadoghq.com/integrations/twilio/) for
       more information.
     externalDocs:
       description: Twilio integration.
       url: https://docs.datadoghq.com/integrations/twilio/
-    name: Twilio Integration Accounts
+    name: Twilio Integration
   - description: |-
       The usage metering API allows you to get hourly, daily, and
       monthly usage across multiple facets of Datadog.

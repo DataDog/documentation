@@ -2,26 +2,21 @@
 aliases:
 - /es/agent/guide/datadog-disaster-recovery/
 further_reading:
-- link: agent/remote_config/?tab=configurationyamlfile
-  tag: Documentación
-  text: Remote Configuration
-- link: /getting_started/site/
-  tag: Documentación
-  text: Introducción a Datadog Sites
 - link: https://www.datadoghq.com/blog/ddr-mitigates-cloud-provider-outages/
   tag: Blog
   text: Datadog Disaster Recovery mitiga las interrupciones del proveedor de la nube
 site_support_id: datadog_disaster_recovery
 title: Datadog Disaster Recovery
 ---
-## Descripción general {#overview}
+Datadog Disaster Recovery (DDR) mantiene su observabilidad en funcionamiento cuando una región de proveedor de nube o los servicios de Datadog dentro de ella sufren interrupciones. Con DDR, usted configura una organización de Datadog secundaria en una región diferente con antelación y replica sus recursos en ella. Cuando realiza una conmutación por error, el sitio secundario ya cuenta con los dashboards, monitores y usuarios que su equipo necesita.
 
-Datadog Disaster Recovery (DDR) le proporciona continuidad de observabilidad durante eventos que pueden afectar a una región de proveedor de servicios en la nube o a los servicios de Datadog que se ejecutan dentro de una región de proveedor de la nube. Con DDR, puede recuperar la observabilidad en vivo en un sitio de Datadog alternativo y funcional, lo que le permite cumplir con sus objetivos críticos de disponibilidad de observabilidad.
+DDR utiliza un modelo activo-pasivo: su sitio secundario permanece sincronizado pero pasivo hasta que usted decida realizar la conmutación por error hacia él. La conmutación por error nunca es automática; usted elige cuándo realizar el cambio.
 
-DDR también le permite realizar periódicamente simulacros de recuperación ante desastres no solo para probar su capacidad de recuperación ante eventos de interrupción, sino también para cumplir con sus necesidades comerciales y de cumplimiento normativo.
+DDR también le permite realizar simulacros periódicos de recuperación ante desastres para probar su capacidad de recuperación ante interrupciones y cumplir con sus necesidades comerciales y de cumplimiento normativo.
 
 ## Requisitos previos {#prerequisites}
-La versión mínima del Datadog Agent que necesita depende de los tipos de telemetría que necesite usar:
+
+La versión mínima del Datadog Agent que necesita depende de los productos que utilice:
 
 |Telemetría admitida |Productos admitidos          |Versión de Agent requerida | 
 |--------------------|----------------------------|-----------------------|
@@ -29,32 +24,25 @@ La versión mínima del Datadog Agent que necesita depende de los tipos de telem
 |Métricas             |Infrastructure Monitoring   | v7.54+                |
 |Traces              |APM                         | v7.68+                |
 
-
-
 <div class="alert alert-info">
 Datadog evalúa continuamente las solicitudes de los clientes para admitir DDR en productos adicionales. Comuníquese con el <a href="mailto:disaster-recovery@datadoghq.com">equipo de Disaster Recovery</a> para obtener información sobre las próximas capacidades y sus necesidades específicas si no están cubiertas anteriormente.
 </div>
-<br>
 
 ## Configuración {#setup}
 
-Para habilitar Datadog Disaster Recovery, siga estos pasos. Si tiene alguna pregunta sobre cualquiera de los pasos, comuníquese con su [Customer Success Manager][14] o con el [Datadog Support][15].
+Siga estos pasos para habilitar Datadog Disaster Recovery. Si tiene preguntas sobre cualquiera de los pasos, comuníquese con su [Customer Success Manager][14] o con el [Datadog Support][15].
 
 ### 1. Cree una organización de DDR y vincúlela a su organización principal {#1-create-a-ddr-org-and-link-it-to-your-primary-org}
 
 {{% collapse-content title="Cree y comparta su organización de DDR" level="h4" %}}
 
-<div class="alert alert-info">Si es necesario, Datadog puede configurar esto por usted.</div>
+<div class="alert alert-info">Si lo prefiere, Datadog puede configurar esto por usted.</div>
 
 #### Cree su organización de DDR {#create-your-ddr-org}
 
 1. Vaya a [Comience con Datadog][16]. Es posible que deba cerrar la sesión actual o usar el modo incógnito para acceder a esta página.
-2. Elija un sitio de Datadog diferente al principal (por ejemplo, si está en `US1`, elija `EU` o `US5`).
+2. Elija un sitio de Datadog diferente al principal (por ejemplo, si está en `US1`, elija `EU` o `US5`). Consulte la [lista de sitios de Datadog][17] para ver las opciones. Todos los sitios de Datadog están separados geográficamente.
 3. Siga las instrucciones para crear una cuenta.
-
-Todos los sitios de Datadog están separados geográficamente. Consulte la [Lista de sitios de Datadog][17] para ver las opciones.
-
-Si también está enviando telemetría a Datadog mediante integraciones de proveedores de nube, debe agregar sus cuentas de proveedor de nube en la organización de DDR. Datadog no utiliza proveedores de nube para recibir datos de telemetría mientras el sitio de DDR está en modo pasivo (no en conmutación por error).
 
 #### Comparta la información de la organización de DDR con Datadog {#share-the-ddr-org-information-with-datadog}
 
@@ -64,31 +52,30 @@ Envíe por correo electrónico el nombre de su nueva organización a su [Custome
 
 {{% collapse-content title="Recupere los ID públicos y vincule su organización principal y la organización de DDR." level="h4" %}}
 
-Por razones de seguridad, Datadog no puede vincular las organizaciones en su nombre.
+<div class="alert alert-info">Por razones de seguridad, Datadog no puede vincular las organizaciones en su nombre.</div>
 
-Después de que el equipo de Datadog haya configurado su organización de DDR, utilice el [punto de conexión de API pública][1] de Datadog para recuperar los ID públicos de la organización principal y de la de DDR.
+Después de que Datadog designe su organización de DDR, vincule su organización de DDR a su organización principal:
 
-Para vincular su organización de DDR a su organización principal:
+1. Utilice el punto de conexión [List your managed organizations][1] para recuperar los ID públicos de sus organizaciones principal y de DDR.
+1. Agregue el contexto `disaster_recovery_status_write` a su clave de aplicación en la organización principal.
+1. Ejecute los siguientes comandos, reemplazando los marcadores de posición con los valores correspondientes.
 
-- Agregue el contexto `disaster_recovery_status_write` a su clave de aplicación en la organización principal.
-- Ejecute los siguientes comandos, reemplazando los marcadores de posición con los valores correspondientes.
+    ```shell
+    export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
+    export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
+    export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
 
-```shell
-export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
-export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
-export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
+    export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
+    export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
+    export USER_EMAIL=<USER_EMAIL>
+    export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
-export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
-export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
-export USER_EMAIL=<USER_EMAIL>
-export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
+    curl -v -H "Content-Type: application/json" -H \
+    "dd-api-key:${PRIMARY_DD_API_KEY}" -H \
+    "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
+    ```
 
-curl -v -H "Content-Type: application/json" -H \
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
-"dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
-```
-
-Después de vincular sus organizaciones, solo la organización de conmutación por error muestra este banner:
+Después de vincular sus organizaciones, la organización de conmutación por error muestra este banner:
 
 {{< img src="agent/guide/ddr/ddr-banner.png" alt="El banner de DDR en la organización de DDR" >}}
 
@@ -100,7 +87,7 @@ Después de vincular sus organizaciones, solo la organización de conmutación p
 
 **Datadog recomienda usar el inicio de sesión único (SSO)** para permitir que todos sus usuarios inicien sesión en su organización de DDR durante una interrupción.
 
-Vaya a la [Configuración de la organización][2] en su organización de DDR para configurar [SAML][3] o {{< ui >}}Google Login{{< /ui >}} para sus usuarios.
+Vaya a [Organization Settings][2] en su organización de DDR para configurar [SAML][3] o {{< ui >}}Google Login{{< /ui >}} para sus usuarios.
 
 La sincronización administrada replica las cuentas de usuario desde su organización principal a su organización de DDR. Datadog recomienda configurar el [aprovisionamiento Just-in-Time con SAML][4] para que los usuarios puedan acceder a la organización de DDR durante una conmutación por error sin necesidad de restablecer su contraseña.
 
@@ -110,7 +97,7 @@ La sincronización administrada replica las cuentas de usuario desde su organiza
 
 Consulte las integraciones de [AWS][5], [Azure][6] y [Google Cloud][7] para conocer los pasos de configuración.
 
-Sus integraciones en la nube deben configurarse tanto en la organización principal como en la de DDR, pero solo se ejecutan en una organización a la vez: de forma predeterminada en la organización principal y en la organización de DDR durante la conmutación por error.
+Sus integraciones en la nube deben configurarse tanto en la organización principal como en la de DDR, pero solo se ejecutan en una organización a la vez: de forma predeterminada en la organización principal y durante la conmutación por error en la organización de DDR.
 
 Para obtener más información, consulte la sección [Conmutación por error de integraciones en la nube](#id-for-cloud).
 
@@ -128,7 +115,7 @@ La sincronización administrada replica los recursos de su organización princip
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Habilitar Remote Configuration [**RECOMMENDED]" level="h4" %}}
+{{% collapse-content title="Habilitar Remote Configuration (RECOMMENDED)" level="h4" %}}
 
 [Remote Configuration (RC)][11] le permite configurar y cambiar de forma remota el comportamiento de los Datadog Agents implementados en su infraestructura.
 
@@ -140,7 +127,6 @@ Datadog recomienda encarecidamente usar Remote Configuration para un mejor contr
 
 {{% collapse-content title="Envío dual de telemetría a la organización de DDR durante la conmutación por error o los simulacros" level="h4" %}}
 
-
 Para habilitar el envío dual, Datadog recomienda usar [Fleet Automation][12] para la administración a escala. Alternativamente, puede configurarlo manualmente editando su archivo `datadog.yaml`.
 
 Comuníquese con su Customer Success Manager de Datadog para programar ventanas de tiempo dedicadas para las pruebas de conmutación por error a fin de medir el rendimiento y el Objetivo de Tiempo de Recuperación (RTO).
@@ -148,13 +134,13 @@ Comuníquese con su Customer Success Manager de Datadog para programar ventanas 
 {{< tabs >}}
 {{% tab "Uso de Fleet Automation (recomendado)" %}}
 
-Desde la página [Fleet Automation][100] en su organización de conmutación por error, en la pestaña {{< ui >}}Configure Agents{{< /ui >}}, puede crear una política de conmutación por error o reutilizar una existente, y aplicarla a su flota de Datadog Agents. Poco después de habilitar la política, los Datadog Agents comienzan a realizar el envío dual de telemetría tanto al sitio de observabilidad principal como al de DDR (conmutación por error).
+Vaya a [Fleet Automation][100] > {{< ui >}}Configure Agents{{< /ui >}} en su organización de DDR para crear una política de conmutación por error o reutilizar una existente, y aplíquela a su flota de Agents. Poco después de habilitar la política, los Datadog Agents comienzan a realizar el envío dual de telemetría tanto al sitio de observabilidad principal como al de DDR (conmutación por error).
 
 Para crear una política de conmutación por error, haga clic en {{< ui >}}Create Failover Policy{{< /ui >}}.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="Administrar políticas de DDR" style="width:80%;" >}}
 
-Luego, siga las instrucciones para definir el alcance de los hosts y la telemetría (métricas, Logs, Traces) que necesita incluir en la conmutación por error.
+Luego, siga las instrucciones para definir el contexto de los hosts y la telemetría (métricas, registros, trazas) que deben incluirse en la conmutación por error.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="Definir el alcance de los hosts y la telemetría necesarios para la conmutación por error" style="width:80%;" >}}
 
@@ -166,7 +152,7 @@ Luego, siga las instrucciones para definir el alcance de los hosts y la telemetr
 
 {{% tab "Manualmente" %}}
 
-Durante una conmutación por error o ejercicios de conmutación por error, actualice el archivo de configuración `datadog.yaml` de su Datadog Agent como se muestra en el ejemplo a continuación y reinicie el Datadog Agent.
+Durante una conmutación por error o ejercicios de conmutación por error, actualice el archivo de configuración `datadog.yaml` de su Datadog Agent como se muestra en el siguiente ejemplo y reinicie el Agent.
 
 - `enabled: true` permite que el Datadog Agent envíe {{< tooltip text="metadata" tooltip="Datos sobre el Datadog Agent y el servidor de infraestructura. Por ejemplo, `host name`, `host tags`, `Agent version`." >}} al sitio de Datadog DDR para que pueda visualizar los Agents y sus servidores de infraestructura en la organización DDR. Esto le permite ver sus Agents y servidores de infraestructura en la organización de conmutación por error.
 
@@ -178,7 +164,7 @@ multi_region_failover:
   failover_metrics: false
   failover_logs: false
   failover_apm: false
-  site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  site: <DDR_SITE>  # For example, "site: us5.datadoghq.com" for a US5 site
   api_key: <DDR_SITE_API_KEY>
 ```
 
@@ -195,11 +181,11 @@ La conmutación por error basada en DNS es un enfoque complementario a la conmut
 
 #### Reciba su punto de conexión DNS personalizado {#receive-your-custom-dns-endpoint}
 
-Si elige utilizar la conmutación por error basada en DNS, Datadog proporciona una URL de ingesta personalizada para su organización (por ejemplo, `<your-org>.intake.datadoghq.com`). Configure todas sus fuentes de datos (Datadog Agents, remitentes de registros e instrumentación personalizada) para enviar telemetría a este punto de conexión en lugar de a la URL de ingesta predeterminada de Datadog. Este es un cambio de configuración único.
+Si elige utilizar la conmutación por error basada en DNS, Datadog proporciona una URL de ingesta personalizada para su organización (por ejemplo, `<your-org>.intake.datadoghq.com`). Configure todas sus fuentes de datos (como Agent, remitentes de registros e instrumentación personalizada) para enviar telemetría a este punto de conexión en lugar de a la URL de ingesta predeterminada de Datadog. Este es un cambio de configuración único.
 
 #### Active una conmutación por error de DNS {#trigger-a-dns-failover}
 
-Para iniciar una conmutación por error de DNS, comuníquese con Datadog a través de su [Gerente de éxito del cliente][14] o [Soporte de Datadog][15]. Datadog actualiza el registro DNS para redirigir el tráfico de su sitio principal a su sitio de DDR. El objetivo de tiempo de recuperación (RTO) previsto desde el momento en que se inicia la conmutación por error es de 2 horas.
+Comuníquese con su [Customer Success Manager][14] o [Datadog Support][15] para iniciar una conmutación por error de DNS. Datadog actualiza el registro DNS para redirigir el tráfico de su sitio principal a su sitio de DDR. El objetivo de tiempo de recuperación (RTO) previsto es de 2 horas desde el momento en que se inicia la conmutación por error.
 
 <div class="alert alert-info">Una forma controlada por el cliente para activar la conmutación por error de DNS directamente desde la organización de DDR se encuentra en vista previa. Comuníquese con su <a href="mailto:success@datadoghq.com">Gerente de éxito del cliente</a> para obtener más información.</div>
 
@@ -209,7 +195,7 @@ Para iniciar una conmutación por error de DNS, comuníquese con Datadog a trav�
 
 {{% collapse-content title="Active y pruebe la conmutación por error de DDR en entornos basados en Agent." level="h4" %}}
 
-Para activar una conmutación por error de sus Agents, puede hacer clic en una de las políticas en [Fleet Automation][13] en su organización de DDR y, luego, hacer clic en {{< ui >}}Enable{{< /ui >}}. El estado de cada servidor se actualiza a medida que ocurre la conmutación por error.
+Para activar una conmutación por error de sus Agents, haga clic en una de las políticas en [Fleet Automation][13] en su organización de DDR y, luego, haga clic en {{< ui >}}Enable{{< /ui >}}. El estado de cada servidor se actualiza a medida que ocurre la conmutación por error.
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-enable3.png" alt="Habilite la política de conmutación por error en la organización de DDR" style="width:80%;" >}}
 
@@ -298,7 +284,7 @@ Durante las pruebas, la telemetría de integración se distribuye entre ambas or
 
 [1]: /es/api/latest/organizations/#list-your-managed-organizations
 [2]: https://app.datadoghq.com/organization-settings/users
-[3]: /es/account_management/saml/#overview
+[3]: /es/account_management/saml/
 [4]: /es/account_management/saml/#just-in-time-jit-provisioning
 [5]: /es/integrations/amazon-web-services/
 [6]: /es/integrations/azure/

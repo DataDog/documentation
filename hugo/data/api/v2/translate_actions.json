@@ -1368,7 +1368,7 @@
     "description": "List cost recommendations matching a filter, with pagination and sorting.",
     "summary": "Search cost recommendations",
     "request_description": "",
-    "request_schema_description": "Request body for filtering cost recommendations."
+    "request_schema_description": "JSON:API request body for filtering cost recommendations."
   },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
@@ -2601,7 +2601,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.",
+    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."
@@ -2765,6 +2765,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListSnowflakeIntegrationAccounts": {
+    "description": "List Snowflake integration accounts.",
+    "summary": "List Snowflake integration accounts"
+  },
+  "CreateSnowflakeIntegrationAccount": {
+    "description": "Create a Snowflake integration account.",
+    "summary": "Create a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Snowflake integration account."
+  },
+  "DeleteSnowflakeIntegrationAccount": {
+    "description": "Delete a Snowflake integration account.",
+    "summary": "Delete a Snowflake integration account"
+  },
+  "GetSnowflakeIntegrationAccount": {
+    "description": "Get a Snowflake integration account.",
+    "summary": "Get a Snowflake integration account"
+  },
+  "UpdateSnowflakeIntegrationAccount": {
+    "description": "Update a Snowflake integration account. Only the fields provided are changed.",
+    "summary": "Update a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Snowflake integration account."
   },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
@@ -4308,6 +4332,10 @@
   "GetAggregatedDns": {
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
+  },
+  "GetOIDCDiscoveryDocument": {
+    "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
+    "summary": "Get OpenID Connect provider metadata"
   },
   "GetOAuth2WellKnownSites": {
     "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
@@ -6307,6 +6335,10 @@
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get a single entity context"
   },
+  "GetMatchingSignals": {
+    "description": "Returns the list of security signals that match a given event on the given track.",
+    "summary": "Get signals matching an event"
+  },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
     "summary": "List rules"
@@ -7481,7 +7513,7 @@
     "request_schema_description": "The request for a flaky tests search."
   },
   "CreateTimeseriesAnomalyInvestigation": {
-    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "description": "Investigates a metrics timeseries request for its most significant anomalies and returns\ndeterministic findings. Metrics queries with or without grouping are supported. This\nAPI version accepts exactly one request and returns at most three anomalies.",
     "summary": "Investigate a timeseries anomaly",
     "request_description": "Metrics timeseries request to investigate. The request body must not exceed 2 MiB.",
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
@@ -7527,7 +7559,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {

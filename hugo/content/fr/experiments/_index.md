@@ -20,9 +20,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/experiments
   tag: Blog
   text: Mesurez l'impact commercial de chaque changement de produit avec Datadog Experiments
+- link: https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/
+  tag: Blog
+  text: Coordonnez les lancements de produits avec Datadog
+- link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
+  tag: Blog
+  text: Analysez vos expérimentations dans ChatGPT avec le plugin Datadog Experiments
 title: Experiments
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Datadog Experiments est une plateforme composable pour l'expérimentation de bout en bout. Une expérience dans Datadog se compose de deux éléments :
 
@@ -63,7 +69,7 @@ Les métriques d'expérience définissent ce que vous mesurez pour décider si u
 
 ### Mode natif d'entrepôt {#warehouse-native-mode}
 
-En mode natif d'entrepôt, Datadog exécute l'analyse d'expérience directement dans Snowflake, BigQuery, Redshift ou Databricks. Après avoir [connecté votre entrepôt][13], créez un **Modèle SQL de métrique** qui mappe les tables de l'entrepôt vers Datadog, puis définissez des métriques à partir de ce modèle. Mappez chaque modèle à un ou plusieurs [types de sujets][18] et spécifiez une colonne d'horodatage afin que Datadog puisse joindre les événements de métrique aux expositions de l'expérience.
+En mode natif d'entrepôt, Datadog exécute l'analyse d'expérience directement dans Snowflake, BigQuery, Redshift ou Databricks. Après avoir [connecté votre entrepôt][13], créez un **Modèle SQL de métrique** qui mappe les tableaux de l'entrepôt vers Datadog, puis définissez des métriques à partir de ce modèle. Mappez chaque modèle à un ou plusieurs [types de sujets][18] et spécifiez une colonne d'horodatage afin que Datadog puisse joindre les événements de métrique aux expositions de l'expérience.
 
 Le mode entrepôt est requis lorsque vous utilisez des [modèles SQL d'exposition][17] pour la randomisation. Il convient également aux équipes dont la source de vérité pour les métriques métier se trouve déjà dans l'entrepôt.
 
@@ -79,7 +85,7 @@ Datadog applique une analyse statistique pour comparer les variantes et estimer 
 
 {{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="La vue des métriques d'Experiments affichant les métriques métier, de funnel et de performance avec les valeurs de contrôle et de variante ainsi que le lift relatif pour chaque métrique. Une info-bulle est ouverte sur la métrique Revenue, affichant les valeurs sans CUPED pour le revenu par utilisateur, le revenu total et le nombre d'assignations d'utilisateurs dans les groupes de contrôle et de variante." style="width:90%;" >}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/feature_flags/

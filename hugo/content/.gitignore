@@ -99,8 +99,6 @@
 /*/real_user_monitoring/error_tracking/error_grouping.md
 /*/real_user_monitoring/guide/proxy-mobile-rum-data.md
 /*/real_user_monitoring/guide/proxy-rum-data.md
-/*/session_replay/mobile/privacy_options.md
-/*/session_replay/mobile/setup_and_configuration.md
 /*/synthetics/notifications/template_variables/api.md
 /*/synthetics/notifications/template_variables/browser.md
 /*/synthetics/notifications/template_variables/mobile.md
@@ -116,6 +114,7 @@
 /*/real_user_monitoring/application_monitoring/cpp/setup.md
 /*/real_user_monitoring/application_monitoring/cpp/troubleshooting.md
 /*/observability_pipelines/configuration/install_the_worker/_index.md
+/en/session_replay/_index.md
 /*/session_replay/privacy_options.md
 /*/session_replay/setup_and_configuration.md
 /*/session_replay/troubleshooting.md
@@ -124,4 +123,6 @@
 /*/dd_e2e/cdocs/components/stepper_customizable.md
 /*/serverless/azure_container_apps/_index.md
 /*/serverless/azure_container_apps/manual_instrumentation/_index.md
+/*/tracing/trace_collection/dynamic_instrumentation/_index.md
 /*/tracing/live_debugger/_index.md
+/*/session_replay/_index.md
