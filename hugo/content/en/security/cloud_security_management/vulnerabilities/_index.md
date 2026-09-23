@@ -7,7 +7,7 @@ further_reading:
 - link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
   text: "Enable SBOM collection in Cloud Security Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: "/security/cloud_security_management/setup/agent"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "/infrastructure/containers/container_images"

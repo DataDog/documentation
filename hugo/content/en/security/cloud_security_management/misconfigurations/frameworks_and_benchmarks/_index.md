@@ -86,7 +86,7 @@ Then, on the Compliance page, you can use the {{< ui >}}Show hidden frameworks{{
 [18]: /integrations/microsoft_teams/
 [19]: /integrations/webhooks/
 [20]: https://app.datadoghq.com/security/compliance
-[21]: /security/cloud_security_management/misconfigurations/detection_rules
+[21]: /security/cloud_security_management/misconfigurations/compliance_rules
 [26]: /security/cloud_security_management/misconfigurations/custom_rules/#tagging-misconfigurations
 [28]: /dashboards/template_variables/
 [29]: /api/latest/security-monitoring/#update-an-existing-rule

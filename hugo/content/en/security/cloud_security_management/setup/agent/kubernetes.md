@@ -280,7 +280,7 @@ To verify the setup, filter vulnerability findings by [runtime signals][10].
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[4]: /security/cloud_security_management/setup/choose_deployment_method
 [5]: /getting_started/agent
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

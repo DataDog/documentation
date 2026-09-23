@@ -6,7 +6,7 @@ further_reading:
 - link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
   text: "Enable SBOM collection in Cloud Security Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: "/security/cloud_security_management/setup/agent"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
@@ -90,7 +90,7 @@ datadog:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
-[2]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#configure-the-agent-for-vulnerabilities
+[2]: /security/cloud_security_management/setup/agent
 [3]: https://app.datadoghq.com/security/configuration/csm/setup
 [4]: https://app.datadoghq.com/metric/summary
 [5]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable

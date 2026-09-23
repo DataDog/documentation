@@ -19,4 +19,4 @@ Workload Protection supports the following Linux distributions:
 * For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see the [Troubleshooting page][102].
 
 [102]: /security/cloud_security_management/troubleshooting
-[103]: /security/cloud_security_management/setup/windows
+[103]: /security/workload_protection/setup/windows

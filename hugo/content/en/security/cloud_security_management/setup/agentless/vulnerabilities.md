@@ -103,13 +103,12 @@ By default, Agentless Scanning automatically scans your resources every 12 hours
 [3]: https://cyclonedx.org/
 [4]: /security/cloud_security_management/setup/agentless#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
-[6]: #terraform
 [7]: mailto:success@datadoghq.com
 [8]: /security/sensitive_data_scanner
 [9]: /security/cloud_security_management
 [10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
-[13]: /security/cloud_security_management/setup/agentless#recommended-configuration
+[13]: /security/cloud_security_management/setup/agentless#deployment-methods
 [14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
 [16]: /security/cloud_security_management/setup/agentless#deployment-methods

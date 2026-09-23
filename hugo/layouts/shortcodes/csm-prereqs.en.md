@@ -46,5 +46,5 @@ To use Cloud Security Identity Risks, you must [enable resource collection for A
 [103]: /containers/kubernetes/installation/?tab=helm
 [104]: https://kubernetes.io/docs/tasks/administer-cluster/migrating-from-dockershim/find-out-runtime-you-use/
 [105]: /integrations/amazon_web_services/?tab=roledelegation#cloud-security-posture-management
-[106]: /security/cloud_security_management/setup/csm_enterprise?tab=aws#enable-resource-scanning-for-cloud-accounts
-[107]: /security/cloud_security_management/setup/csm_enterprise/?tab=aws#enable-cloudtrail-logs-forwarding
+[106]: /security/cloud_security_management/setup/agentless/misconfigurations
+[107]: /security/cloud_security_management/setup/agentless/identity_risks

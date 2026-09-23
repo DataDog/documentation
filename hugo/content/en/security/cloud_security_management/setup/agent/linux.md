@@ -141,7 +141,7 @@ sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
 [3]: /security/cloud_security_management/vulnerabilities
-[4]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[4]: /security/cloud_security_management/setup/choose_deployment_method
 [5]: /getting_started/agent/#installation
 [6]: /agent/?tab=Linux
 [7]: /security/workload_protection/
