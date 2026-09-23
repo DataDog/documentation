@@ -46,7 +46,7 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
 
-The following permissions can be removed directly thrinough the UI. To exclude them when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
+The following permissions can be removed directly in the UI. To exclude them when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
