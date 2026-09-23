@@ -10,6 +10,18 @@ further_reading:
   text: "Code channels with Bits Code"
 ---
 
+## Permissions
+
+### Access to Bits Chat
+
+To use Bits Chat, your role must have the **Bits Chat Access** permission. This permission is enabled by default for all three standard Datadog roles: Datadog Admin, Datadog Standard, and Datadog Read Only.
+
+To manage this permission for custom roles, go to **Organization Settings** > **Roles**, select a role, and toggle **Bits Chat Access** under **General Permissions**.
+
+### Data access through Bits Chat
+
+Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view or modify. For example, if your role restricts access to a specific set of logs indexes, Bits Chat can only query logs from those indexes. Similarly, if you do not have permission to edit a dashboard, Bits Chat cannot edit that dashboard on your behalf.
+
 ## Web application
 There are multiple ways to open Bits Chat in the Datadog web application:
 - Go to [Bits Chat][1].
