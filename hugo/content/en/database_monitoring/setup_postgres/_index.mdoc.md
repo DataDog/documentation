@@ -3,25 +3,12 @@ title: Setting up Postgres
 description: Setting up Database Monitoring on a Postgres database
 content_filters:
   - trait_id: postgres_version
+    label: "Version"
     option_group_id: postgres_version_options
   - trait_id: host
+    label: "Host"
     option_group_id: postgres_hosting_options
 ---
-
-### Postgres versions supported
-
-| Version      | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL | Google AlloyDB | Azure     | Supabase  |
-| ------------ | ----------- | ---------- | ------------- | ---------------- | -------------- | --------- | --------- |
-| Postgres 9.6 | {{< X >}}   | {{< X >}}  | {{< X >}}     |                  |                | {{< X >}} |           |
-| Postgres 10  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 11  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 12  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 13  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        |                | {{< X >}} |           |
-| Postgres 14  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 15  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 16  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} | {{< X >}} |
-| Postgres 17  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      |           | {{< X >}} |
-| Postgres 18  | {{< X >}}   | {{< X >}}  | {{< X >}}     | {{< X >}}        | {{< X >}}      | {{< X >}} |           |
 
 {% if equals($host, "self_hosted") %}
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
@@ -64,7 +51,331 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 | `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
 
+**Optional parameters**
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `pg_stat_statements.track` | `ALL` | Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Increases the number of normalized queries tracked in `pg_stat_statements`. Recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `off` | Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
+| `track_io_timing` | `on` | Enables collection of block read and write times for queries. |
+
+## Grant the Agent access
+
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
+
+Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][6].
+
+Connect to your chosen database as a superuser (or another user with sufficient permissions). For example, to connect to the `postgres` database using [psql][7]:
+
+ ```bash
+ psql -h mydb.example.com -d postgres -U postgres
+ ```
+
+Create the `datadog` user:
+
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+```
+
+<!-- 15 or later -->
+{% if semverIsAtLeast($postgres_version, "15.0.0") %}
+Give the `datadog` user permission to relevant tables:
+
+```SQL
+ALTER ROLE datadog INHERIT;
+```
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
 {% /if %}
+<!-- Ends 15 or later -->
+
+<!-- 10 through 14 -->
+{% if includes($postgres_version, ["gte_10_0_0", "gte_11_0_0", "gte_12_0_0", "gte_13_0_0", "gte_14_0_0"]) %}
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{% /if %}
+<!-- Ends 10 through 14 -->
+
+<!-- 9.6 only -->
+{% if equals($postgres_version, "lt_10_0_0") %}
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT SELECT ON pg_stat_database TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+Create functions **in every database** to enable the Agent to read the full contents of `pg_stat_activity` and `pg_stat_statements`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.pg_stat_activity() RETURNS SETOF pg_stat_activity AS
+  $$ SELECT * FROM pg_catalog.pg_stat_activity; $$
+LANGUAGE sql
+SECURITY DEFINER;
+CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_statements AS
+    $$ SELECT * FROM pg_stat_statements; $$
+LANGUAGE sql
+SECURITY DEFINER;
+```
+
+{% /if %}
+<!-- Ends 9.6 only -->
+
+{% alert %}
+For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information.
+{% /alert %}
+
+### Create the explain plan function
+
+Create the following function **in every database** to enable the Agent to collect explain plans:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
+)
+RETURNS SETOF JSON AS
+$$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
+BEGIN
+   SET TRANSACTION READ ONLY;
+
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
+END;
+$$
+LANGUAGE 'plpgsql'
+RETURNS NULL ON NULL INPUT
+SECURITY DEFINER;
+```
+
+### Create the column statistics function
+
+Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+After the function exists, enable collection in your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][16].
+
+### Securely store your password
+{% partial file="database_monitoring/dbm-secret.mdoc.md" /%}
+
+### Verify database permissions
+
+To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+
+<!-- 10 or later -->
+{% if semverIsAtLeast($postgres_version, "10.0.0") %}
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+{% /if %}
+<!-- Ends 10 or later -->
+
+<!-- 9.6 only -->
+{% if equals($postgres_version, "lt_10_0_0") %}
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from datadog.pg_stat_activity() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from datadog.pg_stat_statements() limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+{% /if %}
+<!-- Ends 9.6 only -->
+
+When it prompts for a password, use the password you entered when you created the `datadog` user.
+
+## Install the Agent
+
+Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres.
+If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, continue with the instructions for your installation method.
+
+Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
+
+```yaml
+init_config:
+instances:
+ - dbm: true
+   host: localhost
+   port: 5432
+   username: datadog
+   password: 'ENC[datadog_user_database_password]'
+
+  ## Optional: Connect to a different database if needed for `custom_queries`
+  # dbname: '<DB_NAME>'
+```
+
+**Note**: If your password includes special characters, wrap it in single quotes.
+
+[Restart the Agent][10] to apply the changes.
+
+### Collecting logs (optional)
+
+PostgreSQL default logging is to `stderr`, and logs do not include detailed information. Log into a file with additional details specified in the log line prefix. See the PostgreSQL [documentation][11] for details.
+
+1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, set the following parameters in the log section:
+   ```ini
+     logging_collector = on
+     log_line_prefix = '%m [%p] %d %a %u %h %c ' # this pattern is required to correlate metrics in the Datadog product
+     log_file_mode = 0644
+
+     ## For Windows
+     #log_destination = 'eventlog'
+   ```
+2. To gather detailed duration metrics and make them searchable in the Datadog interface, configure them inline with the statement. The recommended configuration below logs all statements and their durations. To reduce output to statements above a certain duration, set `log_min_duration_statement` to the desired minimum in milliseconds. Check that logging the full SQL statement complies with your organization's privacy requirements.
+
+   **Note**: Both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
+
+   ```ini
+     log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
+                                       # and their durations, > 0 logs only
+                                       # statements running at least this number
+                                       # of milliseconds
+     #log_statement = 'all'
+     #log_duration = on
+   ```
+3. Collecting logs is disabled by default in the Datadog Agent. Enable it in your `datadog.yaml` file:
+   ```yaml
+   logs_enabled: true
+   ```
+4. Add and edit this configuration block to your `conf.d/postgres.d/conf.yaml` file to start collecting your PostgreSQL logs:
+   ```yaml
+   logs:
+     - type: file
+       path: "<LOG_FILE_PATH>"
+       source: postgresql
+       service: "<SERVICE_NAME>"
+       #To handle multi line that starts with yyyy-mm-dd use the following pattern
+       #log_processing_rules:
+       #  - type: multi_line
+       #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
+       #    name: new_log_start_with_date
+   ```
+   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
+5. [Restart the Agent][10].
+
+### Collecting plans with `auto_explain` (optional)
+
+By default, the agent only gathers [`EXPLAIN`][17] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
+
+{% alert level="danger" %}
+**Important:** `auto_explain` produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring">`dbm_parameterized_queries_read`</a> permission to control who can see the resulting plans, but the log lines themselves _are_ visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+{% /alert %}
+
+After you enable logging collection:
+
+1. Add `auto_explain` to your list of `shared_preload_libraries` in `postgresql.conf`. For instance, if `shared_preload_libraries` is set to `pg_stat_statements`, change it to `pg_stat_statements,auto_explain`
+
+2. Change the `log_line_prefix` to enable richer event correlation. This pattern is required to ingest auto_explain plans.
+   ```ini
+     log_line_prefix = '%m:%r:%u@%d:[%p]:%l:%e:%s:%v:%x:%c:%q%a:'
+   ```
+
+3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
+
+   ```ini
+    auto_explain.log_format = 'json'
+    auto_explain.log_min_duration = 1000
+    auto_explain.log_analyze = 'on'
+    auto_explain.log_buffers = 'on'
+    auto_explain.log_timing = 'off'
+    auto_explain.log_triggers = 'on'
+    auto_explain.log_verbose = 'on'
+    auto_explain.log_nested_statements = 'on'
+    auto_explain.sample_rate = 1
+   ```
+
+4. [Restart the Agent][10].
+
+### Verify Agent setup
+
+[Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
+
+## Example Agent Configurations
+{% partial file="database_monitoring/dbm-postgres-agent-config-examples.mdoc.md" /%}
+
+## Troubleshooting
+
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15].
+{% /if %}
+
 {% if equals($host, "rds") %}
 RDS Content!!
 
@@ -104,18 +415,3 @@ Data security considerations
 
 Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 {% /if %}
-
-### Setup instructions by hosting type
-
-To learn how to set up Database Monitoring on a Postgres database, select your hosting type:
-
-{{< card-grid card_width="200px" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/selfhosted" src="integrations_logos/postgres.png" alt="Selfhosted" title="Self-hosted" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/alloydb" src="integrations_logos/google_cloud_alloydb.png" alt="Google Cloud SQL" image_width="100">}}
-  {{< image-card href="/database_monitoring/setup_postgres/azure" src="integrations_logos/azure_db_for_postgresql.png" alt="PostgreSQL" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/heroku" src="integrations_logos/heroku.png" alt="PostgreSQL" >}}
-  {{< image-card href="/database_monitoring/setup_postgres/supabase" src="integrations_logos/supabase.png" alt="Supabase" >}}
-{{< /card-grid >}}
