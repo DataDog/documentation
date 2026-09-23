@@ -11,6 +11,7 @@ aliases:
     {{< nextlink href="/getting_started/cloud_security_management" >}}First Steps for Cloud Security{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/agent_variables" >}}Cloud Security Agent Variables{{< /nextlink >}}
     {{< nextlink href="/security/cloud_security_management/guide/frontier_group" >}}Cloud Security Frontier Group{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_security_management/guide/without_infrastructure_monitoring" >}}Cloud Security without Infrastructure Monitoring{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Cloud Security Misconfigurations Guides" >}}

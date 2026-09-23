@@ -1,5 +1,7 @@
 ---
 title: Setting Up Cloud Security without Infrastructure Monitoring
+aliases:
+  - /security/cloud_security_management/setup/without_infrastructure_monitoring
 ---
 
 ## Set up Cloud Security with your cloud provider

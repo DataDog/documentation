@@ -510,7 +510,7 @@ Expanded BigQuery monitoring provides granular visibility into your BigQuery env
 [48]: /integrations/google_cloud_security_command_center/#installation
 [49]: /security/cloud_security_management/setup/
 [50]: /infrastructure/resource_catalog/
-[51]: /security/cloud_security_management/setup/cloud_integrations/?tab=googlecloud
+[51]: /security/cloud_security_management/setup/agentless/misconfigurations/?tab=googlecloud
 [52]: https://cloud.google.com/compute/docs/access/iam#compute.viewer
 [53]: https://cloud.google.com/monitoring/access-control#monitoring_roles
 [54]: https://cloud.google.com/iam/docs/understanding-roles#cloudasset.viewer

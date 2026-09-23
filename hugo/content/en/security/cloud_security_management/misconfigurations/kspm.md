@@ -82,4 +82,4 @@ After you create the detection rule, you can customize its severity (`Critical`,
 [10]: /api/latest/security-monitoring/#list-findings
 [11]: https://app.datadoghq.com/security/compliance
 [12]: /security/cloud_security_management/setup/agent/
-[13]: /security/cloud_security_management/setup/cloud_integrations/
+[13]: /security/cloud_security_management/setup/agentless/misconfigurations/

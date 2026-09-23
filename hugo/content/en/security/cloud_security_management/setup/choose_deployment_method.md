@@ -1,5 +1,7 @@
 ---
 title: Cloud Security Supported Deployment Types
+aliases:
+  - /security/cloud_security_management/setup/supported_deployment_types
 ---
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}

@@ -15,7 +15,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_cloud_workload_security
   - /security/cloud_security_management/setup/csm_pro
 further_reading:
-    - link: "/security/cloud_security_management/setup/supported_deployment_types"
+    - link: "/security/cloud_security_management/setup/choose_deployment_method"
       tag: "Documentation"
       text: "Supported Deployment Types"
     - link: "/security/guide/aws_fargate_config_guide"
@@ -130,11 +130,11 @@ For information on disabling Cloud Security, see the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning/enable
-[2]: /security/cloud_security_management/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless
+[2]: /security/cloud_security_management/setup/agentless/vulnerabilities
 [3]: /security/cloud_security_management/setup/agent
-[4]: /security/cloud_security_management/setup/cloudtrail_logs
+[4]: /security/cloud_security_management/setup/agentless/identity_risks
 [6]: /security/cloud_security_management/identity_risks
 [7]: /security/cloud_security_management/setup/cloud_accounts
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[9]: /security/cloud_security_management/setup/ci_cd
+[9]: /security/cloud_security_management/setup/ci_cd/vulnerability_scanning

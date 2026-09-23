@@ -26,7 +26,7 @@ site_support_id: workflows
 
 [Datadog Workflow Automation][1] allows you to orchestrate and automate your end-to-end processes by building workflows made up of actions that connect to your infrastructure and tools.
 
-Use Workflow Automation with [Cloud Security][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](#automatically-create-and-assign-a-jira-issue).
+Use Workflow Automation with [Cloud Security][2] to automate your security-related workflows. For example, you can create workflows that allow you to [block access to a public Amazon S3 bucket via an interactive Slack message](#block-access-to-aws-s3-bucket-via-slack), or [automatically create a Jira issue and assign it to a team](/security/cloud_security_management/review_remediate/jira_issues/).
 
 ## Understanding how triggers and sources work
 
@@ -117,32 +117,6 @@ Next, add the JavaScript Data Transformation Function action to the canvas and c
     - **Message text**: The text that appears in the Slack message, for example, "User declined the action".
 4. Click **Save**.
 
-### Automatically create and assign a Jira issue
-
-This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security finding is detected.
-
-**Note**: To build this workflow, you must configure the [Jira integration][6].
-
-#### Initialize the workflow
-
-1. On the [Workflow Automation page][4], click **New Workflow**.
-1. Click **Add Trigger** > **Security**. 
-
-   **Note**: A workflow must include a security trigger before you can run it. 
-   
-   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
-1. Enter a name for the workflow and click **Save**.
-
-#### Add Jira action
-
-1. Click the plus (`+`) icon on the workflow canvas to add another step.
-2. Search for the **Create issue** Jira action and select it to add it as a step on your workflow canvas.
-3. Click the step in the workflow canvas and enter the following information:
-    - **Jira account**: The URL of your Jira account.
-    - **Project**: `{{ Source.securityFinding.tags_value.team }}`
-    - **Summary**: `{{ Source.securityFinding.attributes.title }}`
-4. Click **Save**.
-
 ## Trigger a workflow
 
 You can trigger an existing workflow from the misconfiguration or identity risks explorers, as well as when you have a resource open in a side panel.
@@ -164,6 +138,5 @@ After running the workflow, additional information is shown on the side panel. Y
 [3]: /actions/workflows/build/
 [4]: https://app.datadoghq.com/workflow
 [5]: /integrations/slack/
-[6]: /integrations/jira/
 [7]: /actions/workflows/variables/#context-variables
 [8]: /api/latest/security-monitoring/#get-a-finding

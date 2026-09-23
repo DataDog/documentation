@@ -5,7 +5,7 @@ disable_toc: false
 aliases:
   - /sensitive_data_scanner/setup/cloud_storage
 further_reading:
-  - link: "/security/cloud_security_management/agentless_scanning"
+  - link: "/security/cloud_security_management/setup/agentless/vulnerabilities"
     tag: "Documentation"
     text: "Cloud Security Agentless Scanning"
   - link: "/security/sensitive_data_scanner/scanning_rules/library_rules"

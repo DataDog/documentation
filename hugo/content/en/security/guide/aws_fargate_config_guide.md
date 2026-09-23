@@ -250,7 +250,7 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
 [8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
-[10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+[10]: /security/cloud_security_management/setup/agentless/?tab=existingawsaccount#set-up-aws-cloudformation
 
 
 {{% /tab %}}

@@ -3,6 +3,7 @@ title: Cloud Security Agentless Scanning
 aliases:
   - /security/agentless_scanning
   - /security/cloud_security_management/agentless_scanning
+  - /security/cloud_security_management/setup/agentless_scanning
 further_reading:
   - link: "/security/vulnerabilities"
     tag: "Documentation"
@@ -10,7 +11,7 @@ further_reading:
   - link: "/security/sensitive_data_scanner/setup/cloud_storage"
     tag: "Documentation"
     text: "Set up Sensitive Data Scanner for Cloud Storage"
-  - link: "/security/cloud_security_management/setup/agentless_scanning/update"
+  - link: "/security/cloud_security_management/setup/agentless#update-agentless-scanning"
     tag: "Documentation"
     text: "Updating Agentless Scanning"
   - link: "/security/cloud_security_management/troubleshooting/agentless_scanning"
@@ -97,10 +98,10 @@ By default, Agentless Scanning automatically scans your resources every 12 hours
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning#setup
+[1]: /security/cloud_security_management/setup/agentless#setup
 [2]: /remote_configuration
 [3]: https://cyclonedx.org/
-[4]: /security/cloud_security_management/setup/agentless_scanning/enable#prerequisites
+[4]: /security/cloud_security_management/setup/agentless#prerequisites
 [5]: https://app.datadoghq.com/security/csm/vm
 [6]: #terraform
 [7]: mailto:success@datadoghq.com
@@ -108,7 +109,7 @@ By default, Agentless Scanning automatically scans your resources every 12 hours
 [9]: /security/cloud_security_management
 [10]: /remote_configuration
 [11]: /security/sensitive_data_scanner/scanning_rules/library_rules/
-[13]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#recommended-configuration
+[13]: /security/cloud_security_management/setup/agentless#recommended-configuration
 [14]: /api/latest/agentless-scanning/#create-aws-on-demand-task
 [15]: /security/cloud_security_management/guide/resource_evaluation_filters
-[16]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[16]: /security/cloud_security_management/setup/agentless#deployment-methods

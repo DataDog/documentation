@@ -1,5 +1,7 @@
 ---
 title: Code Locations
+aliases:
+  - /security/cloud_security_management/code_locations
 description: Connect Cloud Security misconfiguration findings to the infrastructure as code (IaC) that defines the affected resource so you can remediate at the source.
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
@@ -90,4 +92,4 @@ If a misconfiguration doesn't apply to your environment or is an accepted risk, 
 [6]: /security/cloud_security_management/review_remediate/mute_issues/
 [7]: /bits_ai/bits_code/
 [8]: /security/cloud_security_management/review_remediate/remediate_with_ai/
-[9]: /security/cloud_security_management/setup/agentless_scanning/
+[9]: /security/cloud_security_management/setup/agentless/vulnerabilities/
