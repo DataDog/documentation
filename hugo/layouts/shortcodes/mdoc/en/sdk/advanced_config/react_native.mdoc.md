@@ -448,14 +448,16 @@ If your application is used by organizations, workspaces, or tenants, add accoun
 * Know which accounts are the most impacted by an issue
 * Prioritize fixes based on account value
 
-Account information is set alongside user information, not instead of it.
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
 
 | Attribute      | Type   | Description                                                 |
 | -------------- | ------ | ----------------------------------------------------------- |
 | `account.id`   | String | (Required) Unique account identifier.                       |
-| `account.name` | String | (Optional) Account friendly name, displayed in the RUM UI.  |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
 
-To identify accounts, use the `setAccountInfo` API, for example:
+To identify accounts, use the `setAccountInfo` API. For example:
 
 ```js
 DdSdkReactNative.setAccountInfo({
@@ -469,7 +471,7 @@ DdSdkReactNative.setAccountInfo({
 
 Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
 
-If you want to add or update account information, use the `addAccountExtraInfo` API. Call `setAccountInfo` first: adding extra info before an account exists is skipped and logs a warning.
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists is skipped and logs a warning.
 
 ```js
 DdSdkReactNative.addAccountExtraInfo({

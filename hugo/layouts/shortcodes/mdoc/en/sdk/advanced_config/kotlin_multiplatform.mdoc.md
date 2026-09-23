@@ -171,14 +171,16 @@ If your application is used by organizations, workspaces, or tenants, add accoun
 * Know which accounts are the most impacted by an issue
 * Prioritize fixes based on account value
 
-Account information is set alongside user information, not instead of it.
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
 
 | Attribute      | Type   | Description                                                 |
 | -------------- | ------ | ----------------------------------------------------------- |
 | `account.id`   | String | (Required) Unique account identifier.                       |
-| `account.name` | String | (Optional) Account friendly name, displayed in the RUM UI.  |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
 
-To identify accounts, use the `setAccountInfo` API, for example:
+To identify accounts, use the `setAccountInfo` API. For example:
 
 ```kotlin
 Datadog.setAccountInfo("acct-1234", "Acme Corp", mapOf("tier" to "enterprise"))
@@ -186,7 +188,7 @@ Datadog.setAccountInfo("acct-1234", "Acme Corp", mapOf("tier" to "enterprise"))
 
 Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
 
-To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first: adding extra info before an account exists has no effect.
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists has no effect.
 
 ```kotlin
 Datadog.addAccountExtraInfo(mapOf("seats" to 42))
