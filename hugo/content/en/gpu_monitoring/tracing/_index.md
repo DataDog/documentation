@@ -4,6 +4,9 @@ is_beta: true
 private: true
 description: Enable GPU activity tracing for selected Kubernetes workloads.
 further_reading:
+- link: "/gpu_monitoring/tracing/compatibility"
+  tag: "Documentation"
+  text: "GPU tracing compatibility"
 - link: "/gpu_monitoring/setup"
   tag: "Documentation"
   text: "Set up GPU Monitoring"
@@ -12,9 +15,9 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Continuous tracing with GPU Monitoring is in Early Access Preview.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -28,7 +31,7 @@ Continuous tracing with GPU Monitoring enables lightweight GPU activity tracing 
 
 To begin continuously tracing your workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
-- Minimum required CUDA and CUPTI version: 13.
+- Minimum required CUDA and CUPTI version: 13. For supported tracer and framework versions, see [GPU tracing compatibility][3].
 
 ### 1. Configure GPU tracing
 
@@ -99,3 +102,4 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 
 [1]: /gpu_monitoring/setup
 [2]: /tracing/trace_explorer/
+[3]: /gpu_monitoring/tracing/compatibility/
