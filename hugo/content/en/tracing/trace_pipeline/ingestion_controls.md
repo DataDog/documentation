@@ -35,7 +35,7 @@ The Ingestion Control page provides visibility into the ingestion configuration 
 - Understand which [ingestion mechanisms][11] are responsible for sampling most of your traces.
 - Investigate and act on potential ingestion configuration issues, such as limited CPU or RAM resources for the Agent.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page_redesigned.png" style="width:100%;" alt="Ingestion Control Page Overview" >}}
 
 ## Understanding your ingestion configuration
 
