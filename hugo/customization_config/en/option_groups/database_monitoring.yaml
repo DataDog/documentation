@@ -1,0 +1,23 @@
+postgres_version_options:
+  - id: lt_10_0_0
+  - id: gte_10_0_0
+  - id: gte_11_0_0
+  - id: gte_12_0_0
+  - id: gte_13_0_0
+  - id: gte_14_0_0
+  - id: gte_15_0_0
+  - id: gte_16_0_0
+  - id: gte_17_0_0
+  - id: gte_18_0_0
+    default: true
+
+postgres_hosting_options:
+  - id: self_hosted
+    default: true
+  - id: rds
+  - id: aurora
+  - id: cloud_sql
+  - id: alloydb
+  - id: azure
+  - id: supabase
+  - id: heroku
