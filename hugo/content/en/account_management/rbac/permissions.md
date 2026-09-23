@@ -46,7 +46,7 @@ Preview mode gives your organization's administrators the ability to opt into ce
 
 Restricted permissions support core parts of the Datadog experience and are automatically assigned to every role by default. Removing these default permissions can affect how users interact with Datadog. For example, users may be unable to view or edit their profile, or access standard platform functionality.
 
-To exclude the following permissions when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
+The following permissions can be removed directly through the UI. To exclude them using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
 
 - Dashboards Read (`dashboards_read`)
 - Monitors Read (`monitors_read`)
@@ -78,7 +78,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles" \
 }'
 ```
 
-By default, the following restricted permissions cannot be removed through the UI or API. To make these permissions removable and automatically exclude them from roles when `default_permissions_opt_out: true` is set, enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview):
+The following permissions were previously non-configurable and included on every role by default. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make them removable and automatically excluded when `default_permissions_opt_out: true` is set:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
@@ -126,9 +126,9 @@ If the custom role is configured to receive automatic updates, your custom role 
 
 Minimal Access Roles give your organization more granular control over what users can do in Datadog.
 
-By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and typically cannot be removed, as they support core functionality across Datadog. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
+By default, every role includes a foundational set of [restricted permissions](#restricted-permissions). These permissions are automatically assigned to every role and cannot be removed by default, as they support core functionality across Datadog. Enabling Minimal Access Roles makes these permissions removable across all custom roles in your organization. However, users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
 
-Minimal Access Roles is an organization-wide setting. Once enabled, the following permissions become removable from any custom role in your organization, allowing you to create restricted roles for specialized workflows:
+Once enabled, the following permissions become removable, allowing you to create restricted roles for specialized workflows:
 
 - Built-In Features (`built_in_features`)
 - Metrics Read (`metrics_read`)
