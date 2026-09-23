@@ -80,7 +80,7 @@ Bits Chat uses your Datadog role to fetch data, so it can only access the resour
 {{< whatsnext desc="Learn about how you can use Bits Chat:" >}}
    {{< nextlink href="bits_ai/bits_chat/access" >}}Access Bits Chat{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_chat/skills" >}}Skills{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_chat/previous_chats" >}}Previous chats{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_chat/chat_history" >}}Chat history{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_chat/reports" >}}Reports{{< /nextlink >}}
 {{< /whatsnext >}}
 

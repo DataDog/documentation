@@ -1625,9 +1625,9 @@ menu:
       identifier: bits_ai_bits_chat_skills
       parent: bits_ai_bits_chat
       weight: 602
-    - name: Previous Chats
-      url: bits_ai/bits_chat/previous_chats
-      identifier: bits_ai_bits_chat_previous_chats
+    - name: Chat History
+      url: bits_ai/bits_chat/chat_history
+      identifier: bits_ai_bits_chat_chat_history
       parent: bits_ai_bits_chat
       weight: 603
     - name: Reports
