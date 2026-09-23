@@ -253,7 +253,7 @@ Registering each alternative name as a {{< ui >}}Custom alias URL{{< /ui >}} tel
 - The account is reached through an AWS PrivateLink URL.
 - A dbt project, BI tool, or other connector is configured with an account identifier that does not match the canonical URL.
 
-To add an alias, expand {{< ui >}}Configure Data Observability{{< /ui >}} during integration setup and click {{< ui >}}+ Add Alias{{< /ui >}} under {{< ui >}}Custom alias URLs{{< /ui >}}. Add one entry per alternative name. Aliases apply only to the Snowflake account being configured; each Snowflake integration manages its own alias list.
+To add an alias, expand {{< ui >}}Configure Data Observability{{< /ui >}} during integration setup and click {{< ui >}}\+ Add Alias{{< /ui >}} under {{< ui >}}Custom alias URLs{{< /ui >}}. Add one entry per alternative name. Aliases apply only to the Snowflake account being configured; each Snowflake integration manages its own alias list.
 
 ## Snowflake tasks and Snowpipes
 

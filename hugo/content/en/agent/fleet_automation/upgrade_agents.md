@@ -42,7 +42,7 @@ Remote upgrading of Agents in containerized workloads is not supported.
 
 ## Schedule Agent upgrades
 
-1. From the [{{< ui >}}Upgrades{{< /ui >}} tab][1], click {{< ui >}}+ Create Schedule{{< /ui >}}.
+1. From the [{{< ui >}}Upgrades{{< /ui >}} tab][1], click {{< ui >}}\+ Create Schedule{{< /ui >}}.
 
 1. On the Upgrade Schedule page, add a {{< ui >}}Schedule name{{< /ui >}}.
 

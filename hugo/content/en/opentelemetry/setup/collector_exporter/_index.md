@@ -7,6 +7,7 @@ aliases:
 - /opentelemetry/setup/collector_exporter/install/
 - /opentelemetry/collector_exporter/
 description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector and OTLP'
+site_support_id: opentelemetry_collector_otlp_export
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
@@ -45,6 +46,8 @@ This is the recommended setup for a Collector you manage yourself. If you want a
 {{< img src="/opentelemetry/setup/oss-collector.png" alt="An OpenTelemetry SDK sends OTLP data to an OpenTelemetry Collector, which exports it to Datadog over OTLP HTTP." style="width:100%;" >}}
 
 The configurations on this page use the [agent deployment pattern][10]: one Collector runs on each host or Kubernetes node and receives telemetry from workloads on that host or node. For a gateway deployment, see the OpenTelemetry [gateway deployment pattern][11]. Stateful processing such as tail-based sampling in a multi-Collector environment requires a gateway architecture that routes all spans for a trace to the same Collector.
+
+For cluster-wide Kubernetes metrics and Kubernetes Explorer, see [Kubernetes Metrics][13].
 
 <div class="alert alert-info">Already using the Datadog Exporter and Datadog Connector? See <a href="/opentelemetry/setup/collector_exporter/datadog_exporter/">Configure the Datadog Exporter and Connector</a>.</div>
 
@@ -470,6 +473,8 @@ docker run \
 {{% tab "Kubernetes" %}}
 
 Use the [official OpenTelemetry Collector Helm chart][102] to deploy the Collector as a DaemonSet in Kubernetes. The example values files are tested with chart v0.147.1, pin the Collector to v0.154.0, and set up the required mounts, environment variables, RBAC resources, and port exposure.
+
+To collect cluster-wide metrics or send Kubernetes resource data to Kubernetes Explorer, deploy a cluster Collector alongside the DaemonSet. See [Kubernetes Metrics][13].
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -1009,4 +1014,5 @@ Datadog enforces the following limits when ingesting OTLP data. Data that exceed
 [10]: https://opentelemetry.io/docs/collector/deploy/agent/
 [11]: https://opentelemetry.io/docs/collector/deploy/gateway/
 [12]: /opentelemetry/setup/ddot_collector/install/
+[13]: /opentelemetry/integrations/kubernetes_metrics/
 [100]: https://github.com/open-telemetry/opentelemetry-collector-releases/releases/latest

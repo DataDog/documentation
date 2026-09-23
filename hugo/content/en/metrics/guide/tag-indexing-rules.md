@@ -26,7 +26,7 @@ Tag Indexing Rules operate on groups of metrics identified by name or prefix. Th
 After you create a rule, Datadog automatically applies it to all matching metrics.
 
 1. Navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][3].
-2. Click {{< ui >}}+ Create Rule{{< /ui >}}.
+2. Click {{< ui >}}\+ Create Rule{{< /ui >}}.
 3. Select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
 
 {{< img src="metrics/guide/tag_indexing_rules/configure_tag_indexing_rule.png" alt="The Create Rule dropdown menu in Metrics Settings, showing the Configure Tag Indexing Rule option highlighted." style="width:50%;">}}
@@ -69,7 +69,7 @@ Applies this rule only to metrics submitted after the rule is created. Existing 
 
 Choose whether to use an allowlist or a blocklist for tag filtering.
 - {{< ui >}}Include tags{{< /ui >}}—use an allowlist of tags that remain queryable.
-- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags.
+- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags, or use tag usage to automatically unindex tags that have not been queried in the last 30, 60, or 90 days and are not used in any dashboards or other assets.
 
 Add the tag keys you want to include or exclude.
 
@@ -83,6 +83,7 @@ After you configure tag behavior, the preview shows a list of affected metrics (
 
 - {{< ui >}}Exclude{{< /ui >}} rules take effect after Datadog observes a tag on a metric.
 - Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations.
+- **Tag age**: For rules using Tag Usage, new tags receive a 15-day grace period before they become governed by the rule.
 
 ## Modify a rule
 
@@ -177,11 +178,14 @@ Starting tags:
 
 ## Metrics without Limits™ compatibility
 
-Tag rules do not automatically override existing [Metrics without Limits™][2] (MWL) per-metric configurations. Existing MWL configurations take precedence, and Datadog preserves them when you create or modify tag rules.
+Existing [Metrics without Limits™][2] (MWL) per-metric configurations take precedence over tag indexing rules and act as exemptions. While an exemption remains active, the metric is not affected by any tag indexing rules.
 
-If a metric's MWL configuration is deleted, tag rules automatically apply to that metric based on the current rule order.
+You can review and remove these exemptions from the Tag Indexing Rules page. Datadog classifies each exemption as:
 
-To exclude a specific metric from all tag rules without deleting them, use the metric's details side panel to retain all tags. To reapply rules, restore the metric's default configuration from the same panel.
+- **Safe to remove**: Based on Datadog's analysis across your account's tag indexing rules, removing the exemption is expected to reduce your custom metrics usage.
+- **Needs review**: Removing the exemption may affect your custom metrics usage, or your tag indexing rules may not preserve all tags included in the existing MWL configuration. Review these exemptions carefully to avoid breaking dashboards, monitors, or other assets that depend on those tags.
+
+Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
 
 ## Further reading
 

@@ -38,7 +38,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 
 ### Set up your data source
 
-1. Click {{< ui >}}+ New Query{{< /ui >}}.
+1. Click {{< ui >}}\+ New Query{{< /ui >}}.
 1. Search for "search logs" and choose the Datadog {{< ui >}}Search logs{{< /ui >}} action to create a query called `searchLogs0`.
 1. Choose an existing Datadog Account Connection, or create a new one.
 1. Under {{< ui >}}Inputs{{< /ui >}}, for {{< ui >}}Time period{{< /ui >}}, choose {{< ui >}}Past 2 Days{{< /ui >}}.
@@ -48,7 +48,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 
 ### Add the custom chart component and choose a chart style
 
-1. Click {{< ui >}}+ All Components{{< /ui >}} and select {{< ui >}}Custom Chart{{< /ui >}} to add a component called `customChart0`.
+1. Click {{< ui >}}\+ All Components{{< /ui >}} and select {{< ui >}}Custom Chart{{< /ui >}} to add a component called `customChart0`.
 1. Click {{< ui >}}Show Chart Examples{{< /ui >}}.
 1. Select {{< ui >}}Simple Histogram{{< /ui >}} and click {{< ui >}}Confirm{{< /ui >}}.<br>The following value populates in the Vega-Lite Specification:
 
