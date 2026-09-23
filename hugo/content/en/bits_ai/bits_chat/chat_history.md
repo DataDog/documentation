@@ -27,7 +27,7 @@ Chats are private by default. To share one:
 2. Select {{< ui >}}Shared Chat{{< /ui >}}.
 3. Click {{< ui >}}Copy Link{{< /ui >}} and send the link.
 
-Anyone in your organization with the link can view the chat, including future messages.
+Anyone in your organization with the link can view the chat, including future messages. Only you can send messages in it.
 
 <div class="alert alert-warning">Shared chats show data that Bits Chat retrieved with your permissions. Check the chat before you share it.</div>
 
