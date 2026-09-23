@@ -105,10 +105,12 @@ Under the {{< ui >}}Additional options{{< /ui >}} section, you have the followin
 
 You can also use API-based reference tables in Tag Pipelines. Some older tables may need a data update to synchronize with Cloud Cost Management before you can use them in a rule.
 
+##### Troubleshooting synchronization errors
+
 If you receive an error indicating that a reference table has not synchronized with Cloud Cost Management when saving a rule:
 
-1. If you recently created or updated the table, wait a few minutes and try saving the rule again.
-2. If the error persists, try re-uploading the table's data or updating its rows through the API to trigger synchronization.
+1. **Wait for propagation:** If you recently created or updated the table, wait a few minutes for changes to propagate, then save the rule again.
+2. **Trigger synchronization:** If the error persists, re-upload the table's data file or update a row through the API to trigger synchronization with Cloud Cost Management.
 
 ## Reserved tags
 
