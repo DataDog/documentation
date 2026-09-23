@@ -217,7 +217,7 @@ Use Tag Indexing Rules as the default way to govern indexed tags across groups o
 The Golden Rule should be the first Tag Indexing Rule created and should remain first in the rule order. This establishes it as the baseline policy before you add more targeted rules or metric-level exceptions.
 
 The Golden Rule is:
-
+> Unindex all tag keys that have not been queried in the last 30/60/90 days and are not used in any Datadog assets, such as dashboards, monitors, or notebooks.
 >Unindex all tag keys that have not been queried in the last 30/60/90 days and are not used in any Datadog assets, such as dashboards, monitors, or notebooks.
 
 To configure the Golden Rule:
