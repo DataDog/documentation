@@ -1105,9 +1105,9 @@ For a sampled out session, all pageviews and associated telemetry for that sessi
 
 ## Reduce network usage with partial view updates
 
-{% alert level="info" %}
-This is a beta feature that can change in future SDK releases.
-{% /alert %}
+{% callout url="#" btn_hidden=true header="Reduce network usage with partial view updates is in Preview" %}
+See the following details for `betaEnableViewUpdates`.
+{% /callout %}
 
 By default, the RUM Browser SDK resends a complete view event every time a view's data changes (for example, when a new resource, action, or error is attributed to that view). For views with many updates, this can add up to a meaningful amount of network traffic.
 
