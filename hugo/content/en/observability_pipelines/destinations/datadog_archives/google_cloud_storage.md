@@ -1,5 +1,5 @@
 ---
-title: Datadog Archives - Google Cloud Storage Destination
+title: Google Cloud Storage Destination
 description: Learn how to send logs to a Google Cloud Storage bucket, optionally for archiving and rehydration in Datadog.
 disable_toc: false
 aliases:
