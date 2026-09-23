@@ -471,7 +471,7 @@ DdSdkReactNative.setAccountInfo({
 
 Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
 
-To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists is skipped and logs a warning.
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. If no account is set, the SDK ignores the additional account information and logs a warning.
 
 ```js
 DdSdkReactNative.addAccountExtraInfo({
@@ -479,7 +479,7 @@ DdSdkReactNative.addAccountExtraInfo({
 });
 ```
 
-If you want to clear the account information (for example, when the user signs out), you can do so by calling the `clearAccountInfo` API:
+To clear the account information (for example, when the user signs out), use `clearAccountInfo`:
 
 ```js
 DdSdkReactNative.clearAccountInfo();
