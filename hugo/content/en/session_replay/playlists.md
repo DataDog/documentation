@@ -87,7 +87,7 @@ In addition, the Session Replay read permission allows you to do the following:
 
 ### Keeping replays in a playlist for longer than the default 30-day Session Replay retention period
 
-By default, Session Replay retention is 30 days. With [extended retention][2], you have the ability to extend the retention of individual Session Replays for up to 15 months. Adding a Session Replay to a playlist automatically extends the retention of that replay. You may revoke extended retention on an individual Session Replay basis at any time.
+By default, Session Replay retention is 30 days. With [extended retention][2], you have the ability to extend the retention of individual Session Replays for up to 15 months. Adding a Session Replay to a playlist automatically extends the retention of that replay, provided you have the `rum_extend_retention` permission. Without this permission, adding a replay to a playlist does not extend its retention. You may revoke extended retention on an individual Session Replay basis at any time.
 
 ## Further Reading
 

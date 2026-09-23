@@ -197,7 +197,7 @@ To find replays that need your attention, use the {% ui %}All mentions to me{% /
 
 By default, Session Replay data is retained for 30 days.
 
-To extend Session Replay data retention to 15 months, you can enable {% ui %}Extended Retention{% /ui %} on individual session replays. These sessions must be non-active (the user has completed their experience).
+To extend Session Replay data retention to 15 months, you can enable {% ui %}Extended Retention{% /ui %} on individual session replays. These sessions must be non-active (the user has completed their experience). You need the `rum_extend_retention` permission to enable Extended Retention.
 
 To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][7].
 
