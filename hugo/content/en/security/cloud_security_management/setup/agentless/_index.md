@@ -24,7 +24,14 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting Agentless Scanning"
 ---
-Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Agentless Scanning runs entirely within your infrastructure, sending minimal data to Datadog, and leaving your sensitive data in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
+
+Agentless setup lets you use Cloud Security features without installing the Datadog Agent. Each agentless feature has its own setup:
+
+- [Misconfigurations: Cloud accounts and resource scanning][80]
+- [Vulnerabilities: Agentless Scanning][12]
+- [Identity Risks: AWS CloudTrail logs][81]
+
+This page explains how to deploy and manage the Agentless Scanning infrastructure. Agentless Scanning provides visibility into vulnerabilities that exist within your cloud infrastructure, without installing the Datadog Agent. Agentless Scanning runs entirely within your infrastructure, sending minimal data to Datadog, and leaving your sensitive data in your environment. Because the scanner runs in your cloud account, standard [cloud provider costs][20] apply. To learn more, see the [Agentless Scanning overview][12].
 
 Setup takes approximately 30 minutes per cloud account:
 
@@ -48,7 +55,7 @@ The following table provides a summary of Agentless Scanning technologies in rel
 | Package Manager                                 | Deb (debian, ubuntu) <br> RPM (amazon-linux, fedora, redhat, centos) <br> APK (alpine)                                        | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                          | Deb (debian, ubuntu) <br> RPM (fedora, redhat, centos) <br> APK (alpine)                                                                                                                                                  |
 | Encryption                                      | AWS </br> Unencrypted </br> Encrypted - Platform Managed Key (PMK) and Customer Managed Key (CMK)                             | Encrypted - Platform Managed Key (PMK): Azure Disk Storage Server-Side Encryption, Encryption at host </br> **Note**: Encrypted - Customer Managed Key (CMK) is **not** supported | Encrypted - Platform Managed Key (PMK): Persistent Disk Encryption, Confidential VM </br> **Note**: Encrypted - Customer Managed Encryption Key (CMEK) and Customer-Supplied Encryption Keys (CSEK) are **not** supported |
 | Container runtime                               | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                 | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                     | Docker, containerd </br> **Note**: CRI-O is **not** supported                                                                                                                                                             |
-| Serverless                                      | AWS Lambda <br> AWS Fargate for ECS                                                                                           | Azure Functions, Azure Container Apps, Azure Container Instances<br />**Note**: Requires the latest agentless scanner. See [Update Agentless Scanning][47].                                     | Cloud Run                                                                                                                                           |
+| Serverless                                      | AWS Lambda <br> AWS Fargate for ECS                                                                                           | Azure Functions, Azure Container Apps, Azure Container Instances<br />**Note**: Requires the latest agentless scanner. See [Update Agentless Scanning](#update-agentless-scanning).                                     | Cloud Run                                                                                                                                           |
 | Kubernetes                                      | EKS on EC2 nodes </br> EKS on Fargate </br> **Note**: EKS on Fargate requires the [Datadog Cluster Agent][48] to be installed | AKS on VMs, Virtual Machine Scale Sets (VMSS), and Azure Container Instances (ACI) </br> **Note**: AKS on ACI requires the [Datadog Cluster Agent][48] to be installed | GKE Standard and GKE Autopilot </br> **Note**: GKE Autopilot requires the [Datadog Cluster Agent][48] to be installed                                                              |
 | Application languages (in hosts and containers) | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                           | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                               | Java, .Net, Python, Node.js, Go, Ruby, Rust, PHP, Swift, Dart, Elixir, Conan, Conda                                                                                                                                       |
 | Container Registries                            | Amazon ECR (public and private): Scans running container images and the last 1,000 pushed images at rest                      | ACR: Scans running container images only<br />**Note:** At-rest registry scanning is not supported. To request it, contact [Datadog Support][46]   | Google Artifact Registry: Scans images from running workloads and images at rest<br />See the [Container image registries](#container-image-registries) section for the full list of supported registries                                                                                                                                        |
@@ -199,7 +206,7 @@ Before setting up Agentless Scanning, verify that the following prerequisites ar
 
 ## Deployment methods
 
-This guide helps you choose the right deployment topology for Agentless Scanning based on your cloud environment. For setup instructions, see [Enabling Agentless Scanning][63].
+Use the following guidelines to choose the right deployment topology for Agentless Scanning based on your cloud environment. For setup instructions, see [Setup](#setup).
 
 ### Overview
 
@@ -285,18 +292,18 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 
 <div class="alert alert-danger">Do not increase the Autoscaling Group (ASG) desired count beyond four scanners per region. Additional scanners cannot create snapshots due to cloud providers' concurrent snapshot limit.</div>
 
-[61]: /security/cloud_security_management/setup/agentless#aws-cloudformation-stackset-setup
+[61]: #aws-cloudformation-stackset-setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
 ### Enterprise networking considerations
 
-By default, the scanner creates a new VPC during deployment. If your organization is using Terraform and has Service Control Policies (SCPs) that restrict VPC creation, use the [{{< ui >}}custom VPC{{< /ui >}}][62] option during setup to use an existing VPC instead of creating a new one.
+By default, the scanner creates a VPC during deployment. If your organization is using Terraform and has Service Control Policies (SCPs) that restrict VPC creation, use the [{{< ui >}}custom VPC{{< /ui >}}][62] option during setup to use an existing VPC instead of creating a new one.
 
 ## Setup
 
-See [Deploying Agentless Scanning][2] for information on how to structure your deployment, including how many accounts and how many regions you deploy scanners across.
+See [Deployment methods](#deployment-methods) for information on how to structure your deployment, including how many accounts and how many regions you deploy scanners across.
 
 Select your cloud provider to see the available setup methods. If you are setting up Agentless Scanning across multiple cloud providers, complete the setup for each provider independently.
 
@@ -334,7 +341,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 1. Copy the new application key Datadog generates.
 1. Choose to either:
    - Use an existing scanner, then select the scanner you want to use.
-   - Deploy a nwe scanner.
+   - Deploy a new scanner.
 1. Toggle the features you want to enable, such as {{< ui >}}Agentless Vulnerability Management{{< /ui >}} or {{< ui >}}Sensitive Data Scanning for Cloud Storage{{< /ui >}}.
 1. Click {{< ui >}}Launch CloudFormation Template{{< /ui >}}. A new window opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack.
 1. Click {{< ui >}}Done{{< /ui >}}.
@@ -347,7 +354,7 @@ Use CloudFormation if you already have an AWS account integrated with Datadog an
 
 For AWS Organizations with multiple accounts, use a CloudFormation StackSet to deploy the Agentless Scanning delegate role across all member accounts. This approach automates onboarding and configures new accounts added to your AWS Organization.
 
-This setup deploys the delegate role required for [cross-account scanning](/security/cloud_security_management/setup/agentless#deployment-methods) across your AWS Organization or specific Organizational Units (OUs). First, set up Agentless Scanning in your central scanning account using [CloudFormation](#aws-cloudformation-setup) or [Terraform](#aws-terraform-setup), then deploy the StackSet to configure the remaining accounts.
+This setup deploys the delegate role required for [cross-account scanning](#deployment-methods) across your AWS Organization or specific Organizational Units (OUs). First, set up Agentless Scanning in your central scanning account using [CloudFormation](#aws-cloudformation-setup) or [Terraform](#aws-terraform-setup), then deploy the StackSet to configure the remaining accounts.
 
 #### Prerequisites
 
@@ -382,7 +389,7 @@ After the StackSet deploys, the member accounts are configured to allow cross-ac
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h4" id="aws-terraform-setup" %}}
 
-The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. Terraform is the recommended deployment method for multi-region environments. It deploys one scanner per region, which avoids cross-region networking costs. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless#deployment-methods). For usage examples including multi-region configurations, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
+The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. Terraform is the recommended deployment method for multi-region environments. It deploys one scanner per region, which avoids cross-region networking costs. For guidance on choosing your deployment topology, see [Deployment methods](#deployment-methods). For usage examples including multi-region configurations, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 #### New AWS account
 
@@ -429,7 +436,7 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% collapse-content title="Cloud Shell" level="h4" id="azure-cloud-shell-setup" %}}
 Use Azure Cloud Shell to set up Agentless Scanning for your Azure subscriptions. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/azure/agentless) that wraps the [Terraform Datadog Agentless Scanner module for Azure](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/azure#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
-1. Ensure the identity you use in Cloud Shell has the required Azure permissions:
+1. Verify that the identity you use in Cloud Shell has the required Azure permissions:
 
    - On the **scanner subscription**, the identity must have a role that grants role-assignment write and resource creation, such as **Owner**.
    - On **each scanned subscription**, the identity must have a role that grants the `Microsoft.Authorization/roleAssignments/write` permission, so the scanner's managed identity can be granted the permissions it needs to snapshot and read disks, such as **User Access Administrator** or **Owner**.
@@ -455,7 +462,7 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 
 #### New Azure subscription
 
-<div class="alert alert-info">Ensure you have the <a href="/integrations/guide/azure-manual-setup/?tab=azurecli">Datadog Azure integration</a> set up.</div>
+<div class="alert alert-info">Verify that you have the <a href="/integrations/guide/azure-manual-setup/?tab=azurecli">Datadog Azure integration</a> set up.</div>
 
 {{% csm-agentless-azure-resource-manager %}}
 
@@ -466,7 +473,7 @@ Use the Azure Resource Manager template to deploy the Agentless Scanner. The tem
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h4" id="azure-terraform-setup" %}}
 
-The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless#deployment-methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
+The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deployment methods](#deployment-methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click {{< ui >}}Cloud Integrations{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}.
 1. Click the Azure subscription where you want to deploy the Agentless scanner, which opens the side panel.
@@ -493,7 +500,7 @@ After completing any of the setup methods above, [verify your setup](#verify-you
 {{% collapse-content title="Cloud Shell" level="h4" id="gcp-cloud-shell-setup" %}}
 Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This method downloads a [setup script](https://github.com/DataDog/integrations-management/tree/main/gcp/agentless) that wraps the [Terraform Datadog Agentless Scanner module for GCP](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/gcp#readme), so you do not need to manage Terraform directly. You can review the script before running it.
 
-1. Ensure you have the required GCP permissions:
+1. Verify that you have the required GCP permissions:
 
    - On the **scanner project**, the identity you use in Cloud Shell must have **Owner** or equivalent.
    - **Storage**: Include permission to create Terraform state storage in the scanner project, or to use an existing bucket that you reference with `TF_STATE_BUCKET` (for example, `roles/storage.admin`, or the `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update` permissions).
@@ -518,7 +525,7 @@ Use Google Cloud Shell to set up Agentless Scanning for your GCP projects. This 
 [26]: /security/cloud_security_management/troubleshooting/agentless_scanning#gcp-failed-to-create-state-bucket-storagebucketscreate-403
 {{% /collapse-content %}}
 {{% collapse-content title="Terraform" level="h4" id="gcp-terraform-setup" %}}
-The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deploying Agentless Scanning](/security/cloud_security_management/setup/agentless#deployment-methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
+The [Terraform Datadog Agentless Scanner module](https://github.com/DataDog/terraform-module-datadog-agentless-scanner) provides a reusable configuration for installing the Datadog Agentless scanner. For guidance on choosing your deployment topology, see [Deployment methods](#deployment-methods). For usage examples, see the [examples directory](https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples) in the GitHub repository.
 
 1. On the [Cloud Security Setup](https://app.datadoghq.com/security/configuration/csm/setup) page, click {{< ui >}}Cloud Integrations{{< /ui >}} > {{< ui >}}GCP{{< /ui >}}.
 1. Click the GCP project where you want to deploy the Agentless scanner, which opens the side panel.
@@ -668,7 +675,6 @@ If you did not use a dedicated resource group, you must manually delete the scan
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/
-[2]: /security/cloud_security_management/setup/agentless#deployment-methods
 [3]: /remote_configuration
 [12]: /security/cloud_security_management/setup/agentless/vulnerabilities
 [20]: /security/cloud_security_management/setup/agentless/vulnerabilities#cloud-service-provider-cost
@@ -691,12 +697,11 @@ If you did not use a dedicated resource group, you must manually delete the scan
 [44]: https://www.debian.org/security/oval/
 [45]: https://ubuntu.com/security/cve
 [46]: /help
-[47]: /security/cloud_security_management/setup/agentless#update-agentless-scanning
 [48]: /containers/cluster_agent/setup/
 [61]: /security/cloud_security_management/setup/agentless/vulnerabilities#cloud-storage-scanning
 [62]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc
-[63]: /security/cloud_security_management/setup/agentless
-[64]: /security/cloud_security_management/setup/agentless#setup
 [71]: https://github.com/DataDog/cloudformation-template/blob/master/aws_quickstart/version.txt
 [72]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/releases
 [73]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples
+[80]: /security/cloud_security_management/setup/agentless/misconfigurations
+[81]: /security/cloud_security_management/setup/agentless/identity_risks

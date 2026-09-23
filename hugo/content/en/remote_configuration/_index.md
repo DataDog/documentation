@@ -205,7 +205,7 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [40]: /tracing/trace_pipeline/adaptive_sampling/#permissions
 [41]: /account_management/rbac/permissions/#apm
 [42]: /account_management/rbac/permissions/#cloud-security-platform
-[43]: /security/cloud_security_management/setup/#enable-agentless-scanning
+[43]: /security/cloud_security_management/setup/agentless
 [44]: /account_management/rbac/permissions/#observability-pipelines
 [45]: /account_management/rbac/permissions/#app-builder--workflow-automation
 [46]: /account_management/rbac/permissions/#serverless

@@ -11,11 +11,20 @@ products:
     url: /security/cloud_security_management/identity_risks/
     icon: cloud-security-management
 site_support_id: workflows
+further_reading:
+  - link: "/security/cloud_security_management/review_remediate/workflows"
+    tag: "Documentation"
+    text: "Automate Security Workflows with Workflow Automation"
+  - link: "/integrations/jira/"
+    tag: "Documentation"
+    text: "Jira integration"
 ---
 
 {{< product-availability >}}
 
-This example creates an automated ticket routing workflow that creates and assigns a Jira issue to the appropriate team when a security finding is detected.
+Use [Workflow Automation][1] to route Cloud Security findings to the right team. The following example creates a workflow that creates a Jira issue and assigns it to the appropriate team when Cloud Security detects a security finding.
+
+For other ways to automate security workflows, see [Automate Security Workflows][2].
 
 **Note**: To build this workflow, you must configure the [Jira integration][6].
 
@@ -26,7 +35,7 @@ This example creates an automated ticket routing workflow that creates and assig
 
    **Note**: A workflow must include a security trigger before you can run it. 
    
-   The trigger’s [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
+   The trigger's [source object variables][7] allow you to access security misconfiguration data, such as the title `{{ Source.securityFinding.attributes.title }}`.
 1. Enter a name for the workflow and click **Save**.
 
 ## Add Jira action
@@ -39,6 +48,15 @@ This example creates an automated ticket routing workflow that creates and assig
     - **Summary**: `{{ Source.securityFinding.attributes.title }}`
 4. Click **Save**.
 
+To run the workflow on a finding, see [Trigger a workflow][3].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /actions/workflows
+[2]: /security/cloud_security_management/review_remediate/workflows
+[3]: /security/cloud_security_management/review_remediate/workflows#trigger-a-workflow
 [4]: https://app.datadoghq.com/workflow
 [6]: /integrations/jira/
 [7]: /actions/workflows/variables/#context-variables

@@ -1,5 +1,5 @@
 ---
-title: Cloud Security Supported Deployment Types
+title: Choose a Deployment Method
 aliases:
   - /security/cloud_security_management/setup/supported_deployment_types
 ---

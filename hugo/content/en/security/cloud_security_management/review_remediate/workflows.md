@@ -30,9 +30,9 @@ Use Workflow Automation with [Cloud Security][2] to automate your security-relat
 
 ## Understanding how triggers and sources work
 
-Workflow Automation allows you to trigger a workflow manually or automatically. In the following examples, the workflows are triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
+Workflow Automation allows you to trigger a workflow manually or automatically. In the following example, the workflow is triggered manually by clicking the **Run Workflow** button in the **Next Steps** box at the top of the side panel.
 
-When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in subsequent steps. In the following examples, the trigger event is a new security finding.
+When you trigger a workflow, the [source object variables][7] specified in the trigger are passed into the workflow and can be used in subsequent steps. In the following example, the trigger event is a new security finding.
 
 ## Build a workflow
 

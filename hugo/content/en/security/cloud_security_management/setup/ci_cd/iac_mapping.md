@@ -1,5 +1,5 @@
 ---
-title: Code Locations
+title: IaC Mapping
 aliases:
   - /security/cloud_security_management/code_locations
 description: Connect Cloud Security misconfiguration findings to the infrastructure as code (IaC) that defines the affected resource so you can remediate at the source.
