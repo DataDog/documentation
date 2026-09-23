@@ -1075,9 +1075,9 @@ The following methods in `DatadogTracerBuilder` can be used when initializing th
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /tracing/visualization/#trace
+[1]: /glossary/#trace
 [2]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-trace
-[3]: /tracing/visualization/#spans
+[3]: /glossary/#span
 [4]: /account_management/api-app-keys/#client-tokens
 [5]: /account_management/api-app-keys/#api-keys
 [6]: https://square.github.io/okhttp/interceptors/

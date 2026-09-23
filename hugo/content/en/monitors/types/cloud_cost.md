@@ -39,7 +39,7 @@ Cloud Cost monitors use a 30-minute evaluation frequency and a 48-hour delayed e
 
 ## Create a monitor
 
-To create a Cloud Cost monitor in Datadog, navigate to [{{< ui >}}Cloud Cost > Analyze > Cost Monitors{{< /ui >}}][4] and click {{< ui >}}+ New Cost Monitor{{< /ui >}}.
+To create a Cloud Cost monitor in Datadog, navigate to [{{< ui >}}Cloud Cost > Analyze > Cost Monitors{{< /ui >}}][4] and click {{< ui >}}\+ New Cost Monitor{{< /ui >}}.
 
 Alternatively, you can set one up from [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Cloud Cost{{< /ui >}}][3], the main navigation, the [Cloud Cost Explorer][5], or through [Terraform][2].
 

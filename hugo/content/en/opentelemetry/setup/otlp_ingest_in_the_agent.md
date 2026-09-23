@@ -7,15 +7,15 @@ aliases:
   - /opentelemetry/interoperability/otlp_ingest_in_the_agent/
 description: 'Ingest OTLP trace data through the Datadog Agent'
 further_reading:
-- link: "https://www.datadoghq.com/about/latest-news/press-releases/datadog-announces-opentelemetry-protocol-support/"
-  tag: "Blog"
-  text: "OTLP ingestion in the Agent"
 - link: "/metrics/open_telemetry/otlp_metric_types"
   tag: "Documentation"
   text: "OTLP Metrics Types"
 - link: "/opentelemetry/runtime_metrics/"
   tag: "Documentation"
   text: "OpenTelemetry Runtime Metrics"
+- link: "https://www.datadoghq.com/architecture/datadog-agent-otlp-receiver-in-kubernetes/"
+  tag: "Architecture Center"
+  text: "Datadog Agent OTLP Receiver in Kubernetes"
 ---
 
 
@@ -23,7 +23,7 @@ OTLP Ingest in the Agent is a way to send telemetry data directly from applicati
 
 OTLP Ingest in the Agent allows you to use observability features in the Datadog Agent. Data from applications instrumented with OpenTelemetry SDK cannot be used in some Datadog proprietary products, such as App and API Protection, Continuous Profiler, and Ingestion Rules. [OpenTelemetry Runtime Metrics are supported for some languages][10].
 
-{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP protocol to a Collector with Datadog Exporter, which forwards to Datadog's platform." style="width:100%;" >}}
+{{< img src="/opentelemetry/setup/dd-agent-otlp-ingest.png" alt="Diagram: OpenTelemetry SDK sends data through OTLP to the Datadog Agent, which forwards it to Datadog." style="width:100%;" >}}
 
 <div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/">feature compatibility table</a> under <b>OTel to Datadog Agent (OTLP)</b>.</div>
 

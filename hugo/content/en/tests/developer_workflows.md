@@ -47,7 +47,7 @@ With this information, developers get instant feedback about their tests results
 You can enable test summaries in pull requests with the following steps:
 
 1. Install the [GitHub integration][4]:
-   1. Navigate to the {{< ui >}}Configuration{{< /ui >}} tab on the [GitHub integration tile][6] and click {{< ui >}}+ Create GitHub App{{< /ui >}}.
+   1. Navigate to the {{< ui >}}Configuration{{< /ui >}} tab on the [GitHub integration tile][6] and click {{< ui >}}\+ Create GitHub App{{< /ui >}}.
    1. Give the application read and write permissions for pull requests.
 1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
 1. Choose where to apply the setting:

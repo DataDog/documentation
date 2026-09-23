@@ -3510,6 +3510,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 73
+    - name: Get signals matching an event
+      url: /api/latest/security-monitoring/get-signals-matching-an-event/
+      identifier: security-monitoring-get-signals-matching-an-event
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMatchingSignals
+        unstable:
+          - v2
+        order: 174
     - name: Get a single entity context
       url: /api/latest/security-monitoring/get-a-single-entity-context/
       identifier: security-monitoring-get-a-single-entity-context
@@ -4674,6 +4687,84 @@ menu:
         unstable:
           - v2
         order: 134
+    - name: Update an inbox rule
+      url: /api/latest/security-monitoring/update-an-inbox-rule/
+      identifier: security-monitoring-update-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 168
+    - name: Get an inbox rule
+      url: /api/latest/security-monitoring/get-an-inbox-rule/
+      identifier: security-monitoring-get-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 167
+    - name: Delete an inbox rule
+      url: /api/latest/security-monitoring/delete-an-inbox-rule/
+      identifier: security-monitoring-delete-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 169
+    - name: Reorder inbox rules
+      url: /api/latest/security-monitoring/reorder-inbox-rules/
+      identifier: security-monitoring-reorder-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ReorderSecurityFindingsAutomationInboxRules
+        unstable:
+          - v2
+        order: 166
+    - name: Create an inbox rule
+      url: /api/latest/security-monitoring/create-an-inbox-rule/
+      identifier: security-monitoring-create-an-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSecurityFindingsAutomationInboxRule
+        unstable:
+          - v2
+        order: 165
+    - name: Get all inbox rules
+      url: /api/latest/security-monitoring/get-all-inbox-rules/
+      identifier: security-monitoring-get-all-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationInboxRules
+        unstable:
+          - v2
+        order: 164
     - name: Update a due date rule
       url: /api/latest/security-monitoring/update-a-due-date-rule/
       identifier: security-monitoring-update-a-due-date-rule
@@ -4752,6 +4843,58 @@ menu:
         unstable:
           - v2
         order: 140
+    - name: Enable a default inbox rule
+      url: /api/latest/security-monitoring/enable-a-default-inbox-rule/
+      identifier: security-monitoring-enable-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - EnableSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 172
+    - name: Disable a default inbox rule
+      url: /api/latest/security-monitoring/disable-a-default-inbox-rule/
+      identifier: security-monitoring-disable-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DisableSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 173
+    - name: Get a default inbox rule
+      url: /api/latest/security-monitoring/get-a-default-inbox-rule/
+      identifier: security-monitoring-get-a-default-inbox-rule
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSecurityFindingsAutomationDefaultInboxRule
+        unstable:
+          - v2
+        order: 171
+    - name: Get all default inbox rules
+      url: /api/latest/security-monitoring/get-all-default-inbox-rules/
+      identifier: security-monitoring-get-all-default-inbox-rules
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSecurityFindingsAutomationDefaultInboxRules
+        unstable:
+          - v2
+        order: 170
     - name: Assign or unassign security findings
       url: /api/latest/security-monitoring/assign-or-unassign-security-findings/
       identifier: security-monitoring-assign-or-unassign-security-findings
@@ -11249,6 +11392,71 @@ menu:
           - ListTagPipelinesRulesets
         unstable: []
         order: 16
+    - name: Update a unit cost
+      url: /api/latest/cloud-cost-management/update-a-unit-cost/
+      identifier: cloud-cost-management-update-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUnitCost
+        unstable:
+          - v2
+        order: 75
+    - name: Get a unit cost
+      url: /api/latest/cloud-cost-management/get-a-unit-cost/
+      identifier: cloud-cost-management-get-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUnitCost
+        unstable:
+          - v2
+        order: 74
+    - name: Delete a unit cost
+      url: /api/latest/cloud-cost-management/delete-a-unit-cost/
+      identifier: cloud-cost-management-delete-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUnitCost
+        unstable:
+          - v2
+        order: 76
+    - name: Create a unit cost
+      url: /api/latest/cloud-cost-management/create-a-unit-cost/
+      identifier: cloud-cost-management-create-a-unit-cost
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateUnitCost
+        unstable:
+          - v2
+        order: 73
+    - name: List unit costs
+      url: /api/latest/cloud-cost-management/list-unit-costs/
+      identifier: cloud-cost-management-list-unit-costs
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUnitCosts
+        unstable:
+          - v2
+        order: 72
     - name: List Cloud Cost Management tags
       url: /api/latest/cloud-cost-management/list-cloud-cost-management-tags/
       identifier: cloud-cost-management-list-cloud-cost-management-tags
@@ -12118,6 +12326,30 @@ menu:
       url: /api/latest/code-coverage/
       identifier: code-coverage
       generated: true
+    - name: Get code coverage summary for a pull request
+      url: /api/latest/code-coverage/get-code-coverage-summary-for-a-pull-request/
+      identifier: code-coverage-get-code-coverage-summary-for-a-pull-request
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoveragePRSummary
+        unstable: []
+        order: 3
+    - name: Get per-file code coverage data
+      url: /api/latest/code-coverage/get-per-file-code-coverage-data/
+      identifier: code-coverage-get-per-file-code-coverage-data
+      parent: code-coverage
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCodeCoverageFiles
+        unstable: []
+        order: 4
     - name: Get code coverage summary for a commit
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-commit/
       identifier: code-coverage-get-code-coverage-summary-for-a-commit
@@ -12128,8 +12360,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageCommitSummary
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Get code coverage summary for a branch
       url: /api/latest/code-coverage/get-code-coverage-summary-for-a-branch/
@@ -12141,8 +12372,7 @@ menu:
           - v2
         operationids:
           - GetCodeCoverageBranchSummary
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Compliance
       url: /api/latest/compliance/
@@ -12362,6 +12592,178 @@ menu:
           - ExecuteDdsqlTabularQuery
         unstable: []
         order: 1
+    - name: DEM
+      url: /api/latest/dem/
+      identifier: dem
+      generated: true
+    - name: Create a test suite for a DEM journey
+      url: /api/latest/dem/create-a-test-suite-for-a-dem-journey/
+      identifier: dem-create-a-test-suite-for-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTestSuiteForJourney
+        unstable: []
+        order: 6
+    - name: Create a DEM journey variant
+      url: /api/latest/dem/create-a-dem-journey-variant/
+      identifier: dem-create-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJourneyVariant
+        unstable: []
+        order: 13
+    - name: Get recommended tests for a DEM journey
+      url: /api/latest/dem/get-recommended-tests-for-a-dem-journey/
+      identifier: dem-get-recommended-tests-for-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJourneyRecommendedTests
+        unstable: []
+        order: 14
+    - name: Update a DEM journey
+      url: /api/latest/dem/update-a-dem-journey/
+      identifier: dem-update-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJourney
+        unstable: []
+        order: 3
+    - name: Get a DEM journey
+      url: /api/latest/dem/get-a-dem-journey/
+      identifier: dem-get-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetJourney
+        unstable: []
+        order: 2
+    - name: Delete a DEM journey
+      url: /api/latest/dem/delete-a-dem-journey/
+      identifier: dem-delete-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJourney
+        unstable: []
+        order: 4
+    - name: Update a DEM journey variant
+      url: /api/latest/dem/update-a-dem-journey-variant/
+      identifier: dem-update-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateJourneyVariant
+        unstable: []
+        order: 12
+    - name: Delete a DEM journey variant
+      url: /api/latest/dem/delete-a-dem-journey-variant/
+      identifier: dem-delete-a-dem-journey-variant
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteJourneyVariant
+        unstable: []
+        order: 11
+    - name: Batch get DEM journeys by test suite IDs
+      url: /api/latest/dem/batch-get-dem-journeys-by-test-suite-ids/
+      identifier: dem-batch-get-dem-journeys-by-test-suite-ids
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BatchGetJourneysByTestSuiteIDs
+        unstable: []
+        order: 7
+    - name: Search DEM journeys
+      url: /api/latest/dem/search-dem-journeys/
+      identifier: dem-search-dem-journeys
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchJourneys
+        unstable: []
+        order: 1
+    - name: Ignore an inferred DEM journey
+      url: /api/latest/dem/ignore-an-inferred-dem-journey/
+      identifier: dem-ignore-an-inferred-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - IgnoreInferredJourney
+        unstable: []
+        order: 9
+    - name: Search inferred DEM journeys
+      url: /api/latest/dem/search-inferred-dem-journeys/
+      identifier: dem-search-inferred-dem-journeys
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SearchInferredJourneys
+        unstable: []
+        order: 8
+    - name: Delete an ignored inferred DEM journey
+      url: /api/latest/dem/delete-an-ignored-inferred-dem-journey/
+      identifier: dem-delete-an-ignored-inferred-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIgnoredInferredJourney
+        unstable: []
+        order: 10
+    - name: Create a DEM journey
+      url: /api/latest/dem/create-a-dem-journey/
+      identifier: dem-create-a-dem-journey
+      parent: dem
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateJourney
+        unstable: []
+        order: 5
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
@@ -12642,6 +13044,75 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Databricks Integration
+      url: /api/latest/databricks-integration/
+      identifier: databricks-integration
+      generated: true
+    - name: Update a Databricks integration account
+      url: /api/latest/databricks-integration/update-a-databricks-integration-account/
+      identifier: databricks-integration-update-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Databricks integration account
+      url: /api/latest/databricks-integration/get-a-databricks-integration-account/
+      identifier: databricks-integration-get-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Databricks integration account
+      url: /api/latest/databricks-integration/delete-a-databricks-integration-account/
+      identifier: databricks-integration-delete-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Databricks integration account
+      url: /api/latest/databricks-integration/create-a-databricks-integration-account/
+      identifier: databricks-integration-create-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Databricks integration accounts
+      url: /api/latest/databricks-integration/list-databricks-integration-accounts/
+      identifier: databricks-integration-list-databricks-integration-accounts
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatabricksIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -12899,14 +13370,14 @@ menu:
           - GetDomainAllowlist
         unstable: []
         order: 1
-    - name: Elastic Cloud Integration Accounts
-      url: /api/latest/elastic-cloud-integration-accounts/
-      identifier: elastic-cloud-integration-accounts
+    - name: Elastic Cloud Integration
+      url: /api/latest/elastic-cloud-integration/
+      identifier: elastic-cloud-integration
       generated: true
     - name: Update an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/update-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-update-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/update-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-update-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -12917,9 +13388,9 @@ menu:
           - v2
         order: 4
     - name: Get an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/get-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-get-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/get-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-get-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -12930,9 +13401,9 @@ menu:
           - v2
         order: 3
     - name: Delete an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/delete-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-delete-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/delete-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-delete-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -12943,9 +13414,9 @@ menu:
           - v2
         order: 5
     - name: Create an Elastic Cloud integration account
-      url: /api/latest/elastic-cloud-integration-accounts/create-an-elastic-cloud-integration-account/
-      identifier: elastic-cloud-integration-accounts-create-an-elastic-cloud-integration-account
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/create-an-elastic-cloud-integration-account/
+      identifier: elastic-cloud-integration-create-an-elastic-cloud-integration-account
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -12956,9 +13427,9 @@ menu:
           - v2
         order: 2
     - name: List Elastic Cloud integration accounts
-      url: /api/latest/elastic-cloud-integration-accounts/list-elastic-cloud-integration-accounts/
-      identifier: elastic-cloud-integration-accounts-list-elastic-cloud-integration-accounts
-      parent: elastic-cloud-integration-accounts
+      url: /api/latest/elastic-cloud-integration/list-elastic-cloud-integration-accounts/
+      identifier: elastic-cloud-integration-list-elastic-cloud-integration-accounts
+      parent: elastic-cloud-integration
       generated: true
       params:
         versions:
@@ -16610,6 +17081,19 @@ menu:
         unstable:
           - v2
         order: 5
+    - name: Get OpenID Connect provider metadata
+      url: /api/latest/oauth2-client-public/get-openid-connect-provider-metadata/
+      identifier: oauth2-client-public-get-openid-connect-provider-metadata
+      parent: oauth2-client-public
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOIDCDiscoveryDocument
+        unstable:
+          - v2
+        order: 6
     - name: OCI Integration
       url: /api/latest/oci-integration/
       identifier: oci-integration
@@ -16660,8 +17144,7 @@ menu:
           - v2
         operationids:
           - CreateTenancyConfig
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Get tenancy configs
       url: /api/latest/oci-integration/get-tenancy-configs/
@@ -16673,8 +17156,7 @@ menu:
           - v2
         operationids:
           - GetTenancyConfigs
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List tenancy products
       url: /api/latest/oci-integration/list-tenancy-products/
@@ -17048,6 +17530,18 @@ menu:
           - CreateOnCallSchedule
         unstable: []
         order: 1
+    - name: List On-Call schedules
+      url: /api/latest/on-call/list-on-call-schedules/
+      identifier: on-call-list-on-call-schedules
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOnCallSchedules
+        unstable: []
+        order: 23
     - name: Update On-Call escalation policy
       url: /api/latest/on-call/update-on-call-escalation-policy/
       identifier: on-call-update-on-call-escalation-policy
@@ -20477,6 +20971,75 @@ menu:
           - ListServiceNowAssignmentGroups
         unstable: []
         order: 6
+    - name: Snowflake Integration
+      url: /api/latest/snowflake-integration/
+      identifier: snowflake-integration
+      generated: true
+    - name: Update a Snowflake integration account
+      url: /api/latest/snowflake-integration/update-a-snowflake-integration-account/
+      identifier: snowflake-integration-update-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Snowflake integration account
+      url: /api/latest/snowflake-integration/get-a-snowflake-integration-account/
+      identifier: snowflake-integration-get-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Snowflake integration account
+      url: /api/latest/snowflake-integration/delete-a-snowflake-integration-account/
+      identifier: snowflake-integration-delete-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Snowflake integration account
+      url: /api/latest/snowflake-integration/create-a-snowflake-integration-account/
+      identifier: snowflake-integration-create-a-snowflake-integration-account
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnowflakeIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Snowflake integration accounts
+      url: /api/latest/snowflake-integration/list-snowflake-integration-accounts/
+      identifier: snowflake-integration-list-snowflake-integration-accounts
+      parent: snowflake-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSnowflakeIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Software Catalog
       url: /api/latest/software-catalog/
       identifier: software-catalog
@@ -22313,14 +22876,31 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: Twilio Integration Accounts
-      url: /api/latest/twilio-integration-accounts/
-      identifier: twilio-integration-accounts
+    - name: Timeseries Anomaly Investigations
+      url: /api/latest/timeseries-anomaly-investigations/
+      identifier: timeseries-anomaly-investigations
+      generated: true
+    - name: Investigate a timeseries anomaly
+      url: /api/latest/timeseries-anomaly-investigations/investigate-a-timeseries-anomaly/
+      identifier: timeseries-anomaly-investigations-investigate-a-timeseries-anomaly
+      parent: timeseries-anomaly-investigations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTimeseriesAnomalyInvestigation
+        unstable:
+          - v2
+        order: 1
+    - name: Twilio Integration
+      url: /api/latest/twilio-integration/
+      identifier: twilio-integration
       generated: true
     - name: Update a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/update-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-update-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/update-a-twilio-integration-account/
+      identifier: twilio-integration-update-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22331,9 +22911,9 @@ menu:
           - v2
         order: 4
     - name: Get a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/get-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-get-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/get-a-twilio-integration-account/
+      identifier: twilio-integration-get-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22344,9 +22924,9 @@ menu:
           - v2
         order: 3
     - name: Delete a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/delete-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-delete-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/delete-a-twilio-integration-account/
+      identifier: twilio-integration-delete-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22357,9 +22937,9 @@ menu:
           - v2
         order: 5
     - name: Create a Twilio integration account
-      url: /api/latest/twilio-integration-accounts/create-a-twilio-integration-account/
-      identifier: twilio-integration-accounts-create-a-twilio-integration-account
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/create-a-twilio-integration-account/
+      identifier: twilio-integration-create-a-twilio-integration-account
+      parent: twilio-integration
       generated: true
       params:
         versions:
@@ -22370,9 +22950,9 @@ menu:
           - v2
         order: 2
     - name: List Twilio integration accounts
-      url: /api/latest/twilio-integration-accounts/list-twilio-integration-accounts/
-      identifier: twilio-integration-accounts-list-twilio-integration-accounts
-      parent: twilio-integration-accounts
+      url: /api/latest/twilio-integration/list-twilio-integration-accounts/
+      identifier: twilio-integration-list-twilio-integration-accounts
+      parent: twilio-integration
       generated: true
       params:
         versions:

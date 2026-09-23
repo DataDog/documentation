@@ -3,82 +3,82 @@
     "other": "1,000"
   },
   "beta_sentence": {
-    "other": "Beta - Para obtener asistencia o informar de cualquier problema, ponte en contacto con"
+    "other": "Beta - Para obtener soporte o informar cualquier problema, contacte a"
   },
   "additional_sentence": {
-    "other": "Más enlaces, artículos y documentación útiles"
+    "other": "Documentación, enlaces y artículos útiles adicionales"
   },
   "apiaccount_sentence1": {
-    "other": "Asegurarse de sustituir la clave de API o APP a continuación"
+    "other": "Asegúrese de reemplazar la clave de API y/o la clave de APP a continuación"
   },
   "apiaccount_sentence2": {
-    "other": "por la de tu cuenta"
+    "other": "con las de su cuenta"
   },
   "install_agent_sentence": {
-    "other": "Instalar y configurar el Agent para recopilar datos"
+    "other": "Instale y configure el Agent para recopilar datos"
   },
   "integrations_sentence": {
-    "other": "Reunir datos de todos tus sistemas, aplicaciones y servicios"
+    "other": "Recopile datos de todos sus sistemas, aplicaciones y servicios"
   },
   "graphing_sentence": {
-    "other": "Visualizar tus datos para <br> comprenderlos mejor"
+    "other": "Visualice sus datos para<br> obtener información"
   },
   "alerting_sentence": {
-    "other": "Crear y gestionar tus <br> monitores y notificaciones"
+    "other": "Cree y administre sus <br> monitores y notificaciones"
   },
   "apm_sentence": {
-    "other": "Instrumentar tu código <br> para mejorar el rendimiento"
+    "other": "Instrumente su código <br> para mejorar el rendimiento"
   },
   "developer_tools_sentence": {
-    "other": "Recopilar métricas personalizadas <br> y crear una nueva integración"
+    "other": "Recopile métricas personalizadas <br> y cree una nueva integración"
   },
   "help_sentence": {
-    "other": "Nuestros amables y expertos ingenieros de soluciones están a tu disposición para ayudarte."
+    "other": "¡Nuestros amables y expertos ingenieros de soluciones están aquí para ayudarle!"
   },
   "email_support_sentence": {
-    "other": "Puedes ponerte en contacto con nuestro equipo de asistencia ingresando al <a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Sitio web de asistencia de Datadog</a> (todos los sitios). <br><br>Para obtener más información sobre cómo acceder al sitio web de asistencia, consulta <a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">Acceder a tu ticket de asistencia</a>."
+    "other": "Puede contactar a nuestro Equipo de Soporte visitando el <a href=\\\"http://help.datadoghq.com\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">Sitio web de soporte de Datadog</a>. (todos los sitios). <br><br> Para obtener detalles sobre cómo iniciar sesión en el Sitio web de soporte, consulte <a href=\\\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\\\" target=\\\"_blank\\\"> Acceda a su ticket de soporte</a>."
   },
   "live_chat_support_sentence": {
-    "other": "Chatea con el equipo de asistencia de Datadog de lunes a viernes de 10:00 a 19:00 ET (hora del este) a través del chat de la aplicación. Para conocer las prácticas recomendadas, consulta <a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">Comunicarse por chat</a>."
+    "other": "Chatee con el Equipo de Soporte de Datadog de lunes a viernes de 10:00 a 19:00 ET (hora del este) usando el chat en la aplicación. Consulte <a href=\\\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">Cómo contactar por chat</a> para conocer las mejores prácticas."
   },
   "event_stream_support_sentence": {
-    "other": "El <a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">programa Slack Community</a> es una red creada por usuarios de Datadog para usuarios de Datadog para ayudarse a encontrar respuestas a preguntas o compartir trucos y consejos sobre los productos."
+    "other": "El <a href=\\\"http://chat.datadoghq.com/\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">programa de la comunidad de Slack</a> es una red creada por usuarios de Datadog para usuarios de Datadog, con el fin de ayudarse mutuamente a encontrar respuestas a preguntas o compartir consejos y trucos sobre el producto."
   },
   "foundation_enablement_sentence": {
-    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">Inscríbete</a> en una de nuestras sesiones en directo, dirigidas por expertos, sobre diversas funciones y productos de Datadog."
+    "other": "<a href=\\\"https://dtdg.co/fe_sessions\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">Regístrese</a> en una de nuestras sesiones de habilitación fundamentales en vivo, dirigidas por expertos, sobre una variedad de funciones y productos de Datadog."
   },
   "learning_center_sentence": {
-    "other": "Sigue un <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">curso práctico</a> autoguiado para aprender y practicar conceptos clave de Datadog."
+    "other": "Realice un <a href=\\\"https://dtdg.co/47QnE99\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">curso práctico</a> autoguiado para aprender y practicar conceptos clave de Datadog."
   },
   "learning_resources": {
     "other": "Recursos de aprendizaje"
   },
   "learning_sentence": {
-    "other": "Enriquece tus conocimientos en la plataforma Datadog mediante recursos de aprendizaje gratuitos."
+    "other": "Enriquezca sus conocimientos en la plataforma Datadog a través de recursos de aprendizaje gratuitos."
   },
   "webinars_sentence": {
-    "other": "Asiste o mira las grabaciones de los próximos <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">seminarios web de Datadog</a> sobre diversos temas relacionados con los productos."
+    "other": "Asista a los próximos <a href=\\\"https://dtdg.co/3PeuldT\\\" target=\\\"_blank\\\" rel=\\\"noopener\\\">seminarios web de Datadog</a> o vea las grabaciones sobre una variedad de temas de productos."
   },
   "agent_started_sentence": {
-    "other": "Para empezar a utilizar el Agent, selecciona tu plataforma."
+    "other": "Para comenzar a usar el Agent, seleccione su plataforma."
   },
   "choose_a_platform": {
-    "other": "Elegir una plataforma"
+    "other": "Elija una plataforma"
   },
   "get_started_datadog": {
-    "other": "Empezando con Datadog"
+    "other": "Comience con Datadog"
   },
   "all": {
-    "other": "Todas"
+    "other": "Todo"
   },
   "free_trial": {
     "other": "Prueba gratuita"
   },
   "agent_check": {
-    "other": "Check del Agent"
+    "other": "Verificación del Agent"
   },
   "statsd_check": {
-    "other": "Check de StatsD"
+    "other": "Verificación de StatsD"
   },
   "crawler": {
     "other": "Rastreador"
@@ -96,28 +96,28 @@
     "other": "Cookies"
   },
   "toc": {
-    "other": "Índice"
+    "other": "Tabla de contenido"
   },
   "get_started_free_short": {
     "other": "PRUEBA GRATUITA"
   },
   "documentation_search": {
-    "other": "Búsqueda de documentación"
+    "other": "Búsqueda en la documentación"
   },
   "guides": {
-    "one": "Guía",
+    "one": "Guide",
     "other": "Guías"
   },
   "tags": {
-    "one": "Etiqueta (tag)",
+    "one": "Tag",
     "other": "Etiquetas"
   },
   "language": {
-    "one": "Idioma",
-    "other": "Lenguajes"
+    "one": "Language",
+    "other": "Idiomas"
   },
   "library": {
-    "one": "Biblioteca",
+    "one": "Library",
     "other": "Bibliotecas"
   },
   "official": {
@@ -127,16 +127,16 @@
     "other": "API"
   },
   "docs": {
-    "other": "Documentos"
+    "other": "Documentación"
   },
   "home": {
     "other": "Inicio"
   },
   "datadog_docs": {
-    "other": "Documentos de Datadog"
+    "other": "Documentación de Datadog"
   },
   "datadog_api": {
-    "other": "API Datadog"
+    "other": "Datadog API"
   },
   "dogstatsd": {
     "other": "DogStatsD"
@@ -151,62 +151,62 @@
     "other": "Agent"
   },
   "integrations": {
-    "one": "Integración",
-    "other": "integrations"
+    "one": "integration",
+    "other": "integraciones"
   },
   "graphing": {
-    "other": "Gráficos"
+    "other": "Graphing"
   },
   "alerting": {
-    "other": "Alertar"
+    "other": "Alerting"
   },
   "apm_tracing": {
-    "other": "APM (Rastreo)"
+    "other": "APM (Tracing)"
   },
   "developer_tools": {
-    "other": "Herramientas de desarrollador"
+    "other": "Herramientas para desarrolladores"
   },
   "contact_us": {
-    "other": "Ponerse en contacto con nosotros"
+    "other": "Contáctenos"
   },
   "status_page": {
     "other": "Página de estado"
   },
   "ops_twitter": {
-    "other": "Ops Twitter"
+    "other": "Twitter de Ops"
   },
   "platform": {
-    "other": "Plataforma de asistencia<br>de Datadog "
+    "other": "Soporte de Datadog<br>Plataforma"
   },
   "live_chat": {
-    "other": "Chat en directo con<br>nuestro equipo de asistencia"
+    "other": "chat en vivo con<br>nuestro equipo de soporte"
   },
   "event_stream_messaging": {
-    "other": "Ponerse en contacto con nosotros<br>en Slack"
+    "other": "contáctenos<br>en Slack"
   },
   "learning_center": {
-    "other": "Centro de aprendizaje<br>de Datadog"
+    "other": "Centro de aprendizaje de<br>Datadog"
   },
   "foundation_enablement": {
-    "other": "Participar en una sesión<br>de capacitación en directo"
+    "other": "únase a una sesión de<br>capacitación en vivo"
   },
   "webinars": {
-    "other": "Seminarios web<br>de Datadog"
+    "other": "Datadog<br>webinars"
   },
   "questions": {
-    "other": "¿Tienes alguna pregunta?"
+    "other": "¿Preguntas?"
   },
   "type": {
-    "other": "Tipo"
+    "other": "Type"
   },
   "feel_free_contribute": {
-    "other": "No dudes en contribuir."
+    "other": "Siéntase libre de contribuir"
   },
   "mistake_in_docs": {
-    "other": "Error en los documentos"
+    "other": "Error en la documentación"
   },
   "groups_return_to_": {
-    "other": "Volver"
+    "other": "Volver a"
   },
   "table_of_contents_heading": {
     "other": "En esta página"
@@ -215,7 +215,7 @@
     "other": "Editar"
   },
   "overview": {
-    "other": "Información general"
+    "other": "Descripción general"
   },
   "arguments": {
     "other": "Argumentos"
@@ -227,19 +227,25 @@
     "other": "Cadenas de consulta"
   },
   "header_parameters": {
-    "other": "Parámetros de cabecera"
+    "other": "Parámetros de encabezado"
   },
   "request": {
     "other": "Solicitud"
   },
   "model": {
-    "other": "Modelo"
+    "other": "Model"
   },
   "example": {
     "other": "Ejemplo"
   },
   "copy": {
-    "other": "Copia"
+    "other": "Copiar"
+  },
+  "copy_page": {
+    "other": "Copiar página"
+  },
+  "copied": {
+    "other": "Copiado"
   },
   "response": {
     "other": "Respuesta"
@@ -257,13 +263,13 @@
     "other": "Campo"
   },
   "footer_blurb_heading": {
-    "other": "¿No encuentras algo?"
+    "other": "¿No encuentra algo?"
   },
   "footer_blurb_desc": {
-    "other": "Nuestros amables y expertos ingenieros de soluciones están a tu disposición para ayudarte."
+    "other": "¡Nuestros amables y expertos ingenieros de soluciones están aquí para ayudarle!"
   },
   "integration_version": {
-    "other": "Versión de la integración"
+    "other": "Versión de integración"
   },
   "beta_check": {
     "other": "Beta"
@@ -272,7 +278,7 @@
     "other": "Más información"
   },
   "personalized_demo": {
-    "other": "Solicitar una demostración personalizada"
+    "other": "Solicite una demostración personalizada"
   },
   "configuration_management": {
     "other": "Gestión de configuración"
@@ -281,22 +287,22 @@
     "other": "Nube y contenedor"
   },
   "source": {
-    "other": "Origen"
+    "other": "Fuente"
   },
   "legacy": {
-    "other": "Legacy"
+    "other": "Heredado"
   },
   "try_this_rule": {
-    "other": "PROBAR ESTA REGLA"
+    "other": "PRUEBE ESTA REGLA"
   },
   "available_for": {
     "other": "Disponible para"
   },
   "join_now": {
-    "other": "Únete ahora"
+    "other": "Únase ahora"
   },
   "datadog_partner_network": {
-    "other": "Documentación sobre redes de socios de Datadog"
+    "other": "Documentación de Datadog Partner Network"
   },
   "alert_note": {
     "other": "NOTA"

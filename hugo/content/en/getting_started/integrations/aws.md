@@ -2,6 +2,9 @@
 title: Getting Started with AWS
 description: Integrate your Amazon Web Services account with Datadog using CloudFormation. Set up IAM roles, enable service integrations, and configure log forwarding.
 further_reading:
+    - link: 'https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/'
+      tag: 'Architecture Center'
+      text: 'A Guide to Integrating 100+ AWS Accounts with Datadog'
     - link: 'https://www.datadoghq.com/blog/aws-monitoring/'
       tag: 'Blog'
       text: 'Key metrics for AWS monitoring'
@@ -36,7 +39,7 @@ further_reading:
 
 ## Overview
 
-This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations, install the Datadog Agent on EC2 instances and EKS clusters for deeper visibility, and configure log forwarding.
+This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations, instrument EC2 instances, Lambda functions, and EKS clusters for deeper visibility, and configure log forwarding.
 
 ## Prerequisites
 
@@ -179,9 +182,9 @@ Once you have enabled logs, find them in the [Log Explorer][15] using either the
 
 ## Get more from the Datadog platform
 
-### Deeper visibility with the Datadog Agent
+### Deeper visibility with Datadog instrumentation
 
-You can install and manage the Agent on eligible Amazon EC2 instances and Amazon EKS clusters directly through the AWS integration. See [Install the Datadog Agent through the AWS Integration][62].
+You can instrument eligible Amazon EC2 instances, AWS Lambda functions, and Amazon EKS clusters directly through the AWS integration. See [Install Datadog Instrumentation through the AWS Integration][62].
 
 #### EC2
 
@@ -213,7 +216,7 @@ Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the A
 
 #### EKS
 
-For eligible EKS clusters, you can install and manage the Agent automatically through the [AWS integration][62]. To install the Agent manually, see the [EKS guidance in Kubernetes Distributions][29] and the [Kubernetes installation documentation][30].
+For eligible EKS clusters, you can manage instrumentation automatically through the [AWS integration][62]. To install the Agent manually, see the [EKS guidance in Kubernetes Distributions][29] and the [Kubernetes installation documentation][30].
 
 #### EKS with Fargate
 
