@@ -74,7 +74,7 @@ To convert timestamps in a postmortem:
 
 {{< img src="/incident_response/incident_management/post_incident/postmortems/convert_timestamps.png" alt="The Convert timestamps dialog listing detected timestamps with checkboxes, each showing the time it resolves to." style="width:80%;" >}}
 
-**Note**: Datetime text that is part of a link, such as a link to an event in the incident timeline, is not converted. A date chip cannot also be a link.
+**Note**: Datadog doesn't convert datetime text that's part of a link, such as a link to an event in the incident timeline. A date chip cannot also be a link.
 
 ## Postmortem status and owner
 
