@@ -1615,6 +1615,26 @@ menu:
       identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 6
+    - name: Access Bits Chat
+      url: bits_ai/bits_chat/access
+      identifier: bits_ai_bits_chat_access
+      parent: bits_ai_bits_chat
+      weight: 601
+    - name: Skills
+      url: bits_ai/bits_chat/skills
+      identifier: bits_ai_bits_chat_skills
+      parent: bits_ai_bits_chat
+      weight: 602
+    - name: Previous Chats
+      url: bits_ai/bits_chat/previous_chats
+      identifier: bits_ai_bits_chat_previous_chats
+      parent: bits_ai_bits_chat
+      weight: 603
+    - name: Reports
+      url: bits_ai/bits_chat/reports
+      identifier: bits_ai_bits_chat_reports
+      parent: bits_ai_bits_chat
+      weight: 604
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder

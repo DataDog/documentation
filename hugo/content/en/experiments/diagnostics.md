@@ -212,6 +212,6 @@ The SQL you define depends on how the experiment is randomized. For experiments 
 [4]: /experiments/concepts/subject_types/#product-analytics-and-rum-metrics
 [5]: /experiments/concepts/subject_types/#warehouse-metrics
 [6]: /source_code/
-[7]: /bits_ai/bits_chat/#web-application
+[7]: /bits_ai/bits_chat/access/#web-application
 [8]: /experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional
 [9]: /help/
