@@ -116,7 +116,7 @@ import { OpenFeature } from '@openfeature/web-sdk';
 const datadogConfig = {
   applicationId: '<APPLICATION_ID>',
   clientToken: '<CLIENT_TOKEN>',
-  site: '<DATADOG_SITE>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
   service: 'my-web-application',
   env: '<ENV_NAME>',
   version: '1.0.0',
