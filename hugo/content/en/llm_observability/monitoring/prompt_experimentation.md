@@ -115,7 +115,7 @@ RUM is only needed when it supplies your chosen outcome. For other outcome sourc
 
 Create or select an [Experiment metric][2] under [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][8]. Metrics Explorer metrics and monitors are not selectable here.
 
-For checkout conversion, check that the metric uses the same user ID as the prompt request and that its {{< ui >}}Desired metric direction{{< /ui >}} is set to {{< ui >}}Higher is better{{< /ui >}}. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
+For example, for a checkout conversion metric, set {{< ui >}}Desired metric direction{{< /ui >}} to {{< ui >}}Higher is better{{< /ui >}}. Ensure the outcome events use the same user ID as the prompt request. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
 
 {{< agent-only >}}
 **Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, matching the Experiment subject. Ask if the identity or outcome source is unclear. Do not install RUM unless the outcome uses RUM. Preserve the existing fallback, prompt variables, provider, model, and application behavior. Do not request an exact prompt version. Creating or editing metrics, starting experiments, deploying versions, and controlling rollouts require an explicit user request; when asked only to prepare code, report the remaining Datadog UI steps.
