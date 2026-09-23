@@ -110,7 +110,7 @@ You can also use API-based reference tables in Tag Pipelines. Some older tables 
 If you receive an error indicating that a reference table has not synchronized with Cloud Cost Management when saving a rule:
 
 1. **Wait for propagation:** If you recently created or updated the table, wait a few minutes for changes to propagate, then save the rule again.
-2. **Trigger synchronization:** If the error persists, re-upload the table's data file or update a row through the API to trigger synchronization with Cloud Cost Management.
+2. **Trigger synchronization:** If the error persists, re-upload the table's data file or update a row to trigger synchronization with Cloud Cost Management.
 
 ## Reserved tags
 
