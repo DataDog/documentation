@@ -11,9 +11,9 @@ further_reading:
   - link: '/database_monitoring/setup_postgres/'
     tag: 'Documentation'
     text: 'Database Monitoring for PostgreSQL'
-  - link: '/agent/guide/setup_remote_config/'
+  - link: '/remote_configuration/'
     tag: 'Documentation'
-    text: 'Set up Remote Configuration'
+    text: 'Remote Configuration'
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
@@ -41,11 +41,14 @@ Data Observability uses [Remote Configuration][8] to deliver monitor queries to 
 
 Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but any monitor you create against them stays empty because the Agent never receives the query to run.
 
-Remote Configuration is enabled by default for most organizations and, starting with Agent `7.47.0`, in the Agent itself. Confirm all three of the following:
+Remote Configuration is on by default in most environments, but it has to be enabled in all three of the following places. Confirm each one:
 
 1. **Your organization.** On the [Remote Configuration][9] settings page, confirm Remote Configuration is enabled. Enabling it requires the [`org_management`][11] permission.
 2. **The Agent's API key.** The API key the Agent uses must have the Remote Configuration capability. Check it on the [API Keys][10] page. This requires the [`api_keys_write`][12] permission. An Agent using a key without this capability reports an `UNAUTHORIZED` status.
-3. **The Agent.** Make sure `remote_configuration.enabled` is not set to `false` in [`datadog.yaml`][13] (or through `DD_REMOTE_CONFIGURATION_ENABLED`). If you need to set it explicitly:
+3. **The Agent.** `remote_configuration.enabled` defaults to `true` in Agent `7.47.0` and later, so usually there is nothing to change. Set it explicitly in [`datadog.yaml`][13] (or through `DD_REMOTE_CONFIGURATION_ENABLED`) in two cases:
+
+   - It was previously set to `false`.
+   - The Agent reports to GovCloud (`ddog-gov.com`) or runs in FIPS mode. Remote Configuration is **disabled by default** in those environments and does not turn on unless you set it.
 
    ```yaml
    remote_configuration:
@@ -54,7 +57,7 @@ Remote Configuration is enabled by default for most organizations and, starting 
 
    [Restart the Agent][5] after changing this setting.
 
-Each Agent's Remote Configuration status is listed on the [Remote Configuration][9] settings page. `CONNECTED` is the state you want. For the meaning of the other statuses and for network requirements, see [Remote Configuration for Fleet Automation][8].
+Each Agent's Remote Configuration status is also listed on the [Remote Configuration][9] settings page, where `CONNECTED` is the state you want. For the meaning of the other statuses and for network requirements, see [Agent Remote Configuration status][14].
 
 ## Already using Database Monitoring?
 
@@ -193,13 +196,30 @@ sudo datadog-agent status | grep -A 20 'postgres'
 
 The output should show the `postgres` check with a `Total Runs` count greater than zero and a recent `Last Successful Execution` timestamp.
 
-Confirm the Agent is receiving Remote Configuration:
+Confirm the Agent is receiving Remote Configuration. The `Remote Configuration` section of the Agent status reports the organization and API key checks directly:
 
 ```shell
 sudo datadog-agent status | grep -A 10 'Remote Configuration'
 ```
 
-If the section reports a disabled reason such as `remote_configuration.enabled: false`, monitors cannot reach this Agent. See [Enable Remote Configuration](#enable-remote-configuration).
+A healthy Agent reports:
+
+```text
+====================
+Remote Configuration
+====================
+  Organization enabled: True
+  API Key: Authorized
+  Last error: None
+```
+
+Anything else maps back to one of the three checks in [Enable Remote Configuration](#enable-remote-configuration):
+
+- `Organization enabled: False`: enable Remote Configuration for your organization.
+- `API Key: Not authorized`: add the Remote Configuration capability to the API key this Agent uses.
+- `Remote Configuration is disabled because ...`: it is turned off on the Agent itself.
+
+Until this section is healthy, your tables still sync but your monitors cannot run.
 
 ## Explore your table metadata
 
@@ -248,9 +268,10 @@ Data Observability lists all PostgreSQL tables from instances where `dbm` and `c
 [5]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/upgrade_agent_fleet_automation/
 [7]: /data_observability/quality_monitoring/data_warehouses/
-[8]: /agent/guide/setup_remote_config/
+[8]: /remote_configuration/
 [9]: https://app.datadoghq.com/organization-settings/remote-config
 [10]: https://app.datadoghq.com/organization-settings/api-keys
 [11]: /account_management/rbac/permissions/#permissions-list
 [12]: /account_management/rbac/permissions/#permissions-list
 [13]: /agent/configuration/agent-configuration-files/#main-configuration-file
+[14]: /agent/guide/setup_remote_config/#agent-remote-configuration-status
