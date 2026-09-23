@@ -6,12 +6,14 @@ aliases:
 
 ## Instrumentation
 
-1. Install the latest `ddtrace` package.
+1. Inspect the installed `ddtrace` version and reuse it if it supports the required instrumentation APIs. If an update is required, explain why and ask before changing the existing dependency. An update required only for optional Prompt Management is a separate decision and does not block instrumentation with a compatible SDK.
+
+If `ddtrace` is not installed, install it with the application's existing package manager:
 
 ```bash
 pip install ddtrace # pip
-poetry install ddtrace # poetry
-uv install ddtrace # uv
+poetry add ddtrace # poetry
+uv add ddtrace # uv
 ```
 
 2. Initialize the Agent Observability package

@@ -8,6 +8,8 @@ aliases:
 
 Use an existing Datadog managed prompt or promote an application's local prompt, preserve the application's existing behavior as a fallback, and track use of the managed prompt in Agent Observability.
 
+Prompt Management is optional. When following the main [Agentic Instrumentation guide](/llm_observability/instrument/agentic.md), complete instrumentation and the requested context upload before starting this integration. Prompt Management is not required for context sharing or check recommendations.
+
 ## Select the workflow
 
 - **Use an existing managed prompt:** If the user's request includes a prompt ID, environment, and variable names, use them without asking whether to enable Prompt Management again.
@@ -28,7 +30,7 @@ Use an existing Datadog managed prompt or promote an application's local prompt,
 
 ## Install the Prompt Management SDK
 
-Use the application's existing package manager to install or upgrade to the latest `ddtrace` release in the application's Python environment. Make the installation repeatable from a clean environment and preserve the application's existing dependency-management conventions.
+Inspect the installed `ddtrace` version for the public Prompt Management APIs required by the selected workflow. Reuse a compatible installed version. If installation or an update is required, use the application's existing package manager and explain the dependency change. Ask before updating an existing dependency; treat this optional integration separately from any update required for instrumentation. Make the installation repeatable from a clean environment and preserve the application's existing dependency-management conventions.
 
 ## Promote a local prompt
 
