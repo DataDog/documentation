@@ -39,7 +39,7 @@ You can manage tag pipeline rulesets using the [API][7], [Terraform][8], or dire
 
 To create a ruleset, navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1].
 
-<div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
+<div class="alert alert-danger"> You can create up to 100 rules. </div>
 
 Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}\+ New Ruleset{{< /ui >}}.
 
@@ -100,6 +100,15 @@ Under the {{< ui >}}Additional options{{< /ui >}} section, you have the followin
   - {{< ui >}}Append the column{{< /ui >}} - Adds the new values to the existing columns without removing the original values.
   - {{< ui >}}Replace the column{{< /ui >}} - Replaces the existing column values with the new values. <div class="alert alert-warning">Replacing columns can overwrite existing data. Use this option with caution.</div>
 - {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}} - Enables case-insensitive matching between the primary key value from the reference table and the value of the tag in the cost data where the tag key matches the primary key. For example, if the primary key value pair from the UI is `foo:Bar` and the tag from the cost data is `foo:bar`, then the two can be matched.
+
+#### API-based reference tables
+
+Tag Pipelines support API-based reference tables. Some older tables may need a data update to synchronize with Cloud Cost Management before you can use them in a rule.
+
+If you receive an error indicating that a reference table has not synchronized with Cloud Cost Management when saving a rule:
+
+1. If you recently created or updated the table, wait a few minutes and try saving the rule again.
+2. If the error persists, try re-uploading the table's data or updating its rows through the API to trigger synchronization. Wait a few minutes, then save the rule again. Updating only the table's description does not trigger data synchronization.
 
 ## Reserved tags
 
