@@ -103,7 +103,7 @@ Under the {{< ui >}}Additional options{{< /ui >}} section, you have the followin
 
 #### API-based reference tables
 
-Tag Pipelines support API-based reference tables. Some older tables may need a data update to synchronize with Cloud Cost Management before you can use them in a rule.
+You can also use API-based reference tables in Tag Pipelines. Some older tables may need a data update to synchronize with Cloud Cost Management before you can use them in a rule.
 
 If you receive an error indicating that a reference table has not synchronized with Cloud Cost Management when saving a rule:
 
