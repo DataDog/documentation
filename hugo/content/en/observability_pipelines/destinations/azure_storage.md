@@ -84,7 +84,7 @@ Enter a prefix that you want to apply to all key objects.
 
 #### Compression
 
-1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Each gzip or zstd file is stored as one object.
     - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
 1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
@@ -98,9 +98,11 @@ When you set up Azure Storage destination, you can use [template syntax][6] in t
 
 {{< img src="observability_pipelines/destinations/azure_storage_prefix_template.png" alt="The Azure Storage destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
 
-However, you must manually create a Datadog [Log Archive][16] for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field when you create the Log Archive.
+However, you must manually create a Datadog [Log Archive][16] for each attribute value. See [Connect the Azure container to Datadog Log Archives](#connect-the-azure-container-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
 
 {{< img src="observability_pipelines/destinations/azure_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
+
+If the {{< ui >}}Prefix{{< /ui >}} field for the Azure Storage destination is `{{service}}/` and the Log Archive {{< ui >}}Path{{< /ui >}} is `/web-store/`, the archived log files are stored as `/web-store/<date>/<hour>/<filename>`.
 
 ## Secret defaults
 
