@@ -164,18 +164,16 @@ The following telemetry provide insight into your mobile application's performan
 Timeseries is in Preview and is available on the iOS and Android SDKs.
 {{< /callout >}}
 
-The telemetry above is summarized per view, which shows you the average for a screen but not how resource usage moved while the user was on it. Timeseries instead measures resource usage at a regular interval for the length of the session, and Datadog graphs the result in the session, view, and operation side panels.
+CPU ticks per second and Memory utilization described above are averaged over the lifetime of the view. RUM Timeseries enables you to capture these measurements at regular intervals for the length of the session, and see the outcome on an interactive graph in the session, view, and operation side panels.
 
-Once you enable collection, every interval is measured for the whole session. Timeseries are not sampled.
+Once collection is enabled, all sessions get timeseries captured.
 
-{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel-temp.png" alt="The Performance Timeseries section of a RUM side panel, showing a Memory and CPU graph across a session" style="width:100%;" >}}
+{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
 
 Two series are collected:
 
 - **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores.
 - **Memory**: what this measures differs by platform. On iOS, it is your application's physical footprint (`phys_footprint`), the value Xcode's memory gauge reports and the one iOS measures against your application's memory limit. On Android, it is your process's resident set size (`VmRSS`), the physical RAM currently mapped by your application, including pages shared with other processes.
-
-Because the two platforms measure different quantities, memory values are not directly comparable between iOS and Android.
 
 Timeseries collection is off by default. To turn it on, see the advanced configuration options for [iOS][3] or [Android][4].
 
