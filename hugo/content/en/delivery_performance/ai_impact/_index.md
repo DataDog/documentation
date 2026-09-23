@@ -61,7 +61,7 @@ The two modes have trade-offs against each other:
 
 By default, Datadog selects the most precise attribution mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
 
-To select the default attribution mode used for metrics in the AI Impact dashboard, set the {{< ui >}}Default AI attribution UI filter{{< /ui >}} in AI ImpacDatadogt settings. The setting applies to your whole organization and changes only what queries return, not what Datadog ingests. For more information, see [Set the AI attribution mode for metrics][3].
+To select the default attribution mode used for metrics in the AI Impact dashboard, set the {{< ui >}}Default AI attribution UI filter{{< /ui >}} in AI Impact settings. The setting applies to your whole organization and changes only what queries return, not what Datadog ingests. For more information, see [Set the AI attribution mode for the UI][3].
 
 ## Impact metrics
 
@@ -83,4 +83,4 @@ To select the default attribution mode used for metrics in the AI Impact dashboa
 
 [1]: /delivery_performance/dora_metrics/setup/
 [2]: /delivery_performance/ai_impact/setup/
-[3]: /delivery_performance/ai_impact/setup/#set-the-ai-attribution-mode-for-metrics
+[3]: /delivery_performance/ai_impact/setup/#set-the-ai-attribution-mode-for-the-ui
