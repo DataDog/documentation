@@ -2,7 +2,7 @@
 title: Administer and Extend RUM
 description: "Manage RUM dashboards, monitors, permissions, and correlations with other telemetry."
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 ---
@@ -17,7 +17,7 @@ After you start collecting data for your RUM applications, use these capabilitie
     Use out-of-the-box and custom dashboards to track, analyze, and display key performance and usage metrics.
     {{< /nextlink >}}
     {{< nextlink href="/monitors/types/real_user_monitoring/" >}}
-    <h3>Setup Monitors</h3>
+    <h3>Set Up Monitors</h3>
     Configure monitors to notify your teams and manage alerts on your RUM data.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/administer_and_extend_rum/configure_permissions/" >}}

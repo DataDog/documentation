@@ -35,10 +35,10 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 | [Error](#error)                         | A frontend error, unhandled exception, or crash captured during a session.                                                           |
 | [Long Task](#long-task)                 | A task that blocks the main thread long enough to affect the responsiveness of your application.                                     |
 | [Vitals](#vitals)                       | Performance scores, such as Core Web Vitals or Mobile Vitals, that measure the quality of the user experience.                       |
-| [Frustration Signal](#frustration-signals) | A user behavior, such as a rage click or error click, that indicates a poor experience.                                           |
+| [Frustration signals](#frustration-signals) | A user behavior, such as a rage click or error click, that indicates a poor experience.                                           |
 | [Session Replay](#session-replay)       | A visual, replayable recording of a user's browsing session.                                                                         |
 | [Sampling](#sampling)                   | The rate at which sessions or replays are collected and sent to Datadog.                                                             |
-| [Retention Filters and Quotas](#retention-filters-and-quotas) | Controls that determine which sessions Datadog retains and how many are retained per day.                        |
+| [Retention filters and quotas](#retention-filters-and-quotas) | Controls that determine which sessions Datadog retains and how many are retained per day.                        |
 | [Context](#context)                     | Custom or global attributes attached to RUM events to add business or user-specific information.                                     |
 
 ## RUM Application
