@@ -1111,7 +1111,7 @@ This is a beta feature that can change in future SDK releases.
 
 By default, the RUM Browser SDK resends a complete view event every time a view's data changes (for example, when a new resource, action, or error is attributed to that view). For views with many updates, this can add up to a meaningful amount of network traffic.
 
-Set `betaEnableViewUpdates` to `true` when initializing RUM to send incremental view update events instead of a full view event on every intermediate update. A full view event is still sent for the first update of a view (and periodically afterwards), so the view state can be fully reconstructed even if some intermediate updates are lost in transit. As a beta option, its default and behavior can change in future releases; see the [`betaEnableViewUpdates` reference][25] for the current, authoritative details.
+Set `betaEnableViewUpdates` to `true` when initializing RUM to send incremental view update events instead of a full view event on every intermediate update. A full view event is still sent for the first update of a view (and periodically afterward), so the view state can be fully reconstructed even if some intermediate updates are lost in transit. This option is in Preview and may change in future releases. See [`betaEnableViewUpdates`][25] for details.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
