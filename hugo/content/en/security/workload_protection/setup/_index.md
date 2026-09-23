@@ -124,7 +124,7 @@ The [advanced Agent configuration page][5] describes how to configure and tune t
 
 ### Enable automated response
 
-<div class="alert alert-danger">Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
+<div class="alert alert-caution">Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
 
 After you are granted access to Automated response, see the [Automated response][4] page.
 

@@ -90,7 +90,7 @@ See the [ingestion volume control guide][8] for information about the implicatio
 
 When using Datadog Agent OTLP ingest, a probabilistic sampler is available for Agent version 7.70.0 and later.
 
-<div class="alert alert-danger">Probabilistic sampling was introduced with Agent v7.54.0, but versions of the Agent prior to v7.70.0 may drop all incoming OTLP trace data when the sampler is enabled. Upgrade to v7.70.0 or later before using probabilistic sampling with OTLP ingest.</div>
+<div class="alert alert-caution">Probabilistic sampling was introduced with Agent v7.54.0, but versions of the Agent prior to v7.70.0 may drop all incoming OTLP trace data when the sampler is enabled. Upgrade to v7.70.0 or later before using probabilistic sampling with OTLP ingest.</div>
 
 #### Configuring
 
@@ -113,7 +113,7 @@ To configure probabilistic sampling, do one of the following:
 - Probabilistic sampling will apply to spans originating from both Datadog and OTel SDKs.
 - If you send spans both to the Datadog Agent **and** OTel collector instances, set the same seed between Datadog Agent (`DD_APM_PROBABILISTIC_SAMPLER_HASH_SEED`) and OTel collector (`hash_seed`) to ensure consistent sampling.
 
-<div class="alert alert-danger"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
+<div class="alert alert-caution"><code>DD_OTLP_CONFIG_TRACES_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code> is deprecated and has been replaced by <code>DD_APM_PROBABILISTIC_SAMPLER_SAMPLING_PERCENTAGE</code>.</div>
 
 #### Considerations
 

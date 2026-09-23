@@ -5,7 +5,7 @@ description: "Set up the Datadog Agent v5 to monitor Amazon ECS containers and w
 private: true
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 This documentation is to setup Amazon EC2 container Service with <strong>Datadog Agent 5</strong>
 </div>
 

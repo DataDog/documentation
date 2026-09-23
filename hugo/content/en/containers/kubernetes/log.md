@@ -146,7 +146,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Warning for unprivileged installations</strong>
 <br/><br/>
 When running an unprivileged installation, the Agent needs to be able to read log files in <code>/var/log/pods</code>.

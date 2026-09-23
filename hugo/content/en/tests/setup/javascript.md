@@ -65,7 +65,7 @@ To report test results to Datadog, you need to configure the Datadog JavaScript 
 {{% tab "CI Provider with Auto-Instrumentation Support" %}}
 {{% ci-autoinstrumentation %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note</strong>: Auto-instrumentation is not supported for Cypress tests. To instrument Cypress tests, follow the manual instrumentation steps outlined below.
 </div>
 
@@ -414,7 +414,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note</strong>: <a href="https://github.com/vitest-dev/vitest?tab=readme-ov-file#features">Vitest is ESM first</a>, so its configuration is different from other test frameworks.
 </div>
 
@@ -759,7 +759,7 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 
 ## Manual testing API
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note</strong>: The manual testing API is available starting in <code>dd-trace</code> versions <code>5.23.0</code> and <code>4.47.0</code>.
 </div>
 

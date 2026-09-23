@@ -82,7 +82,7 @@ Removing a user's notification preferences does not unassign their seat. If a us
 ### Assign seats
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Seat assignment is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Billing admins, or users with the `billing_edit` permission, can manually assign seats so team members have access before they need it.

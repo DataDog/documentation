@@ -512,7 +512,7 @@ data:
           exporters: [debug, datadog]
 {{< /code-block >}}
 
-<div class="alert alert-danger">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
+<div class="alert alert-caution">The field for Collector config in the ConfigMap must be called <code>otel-config.yaml</code>.</div>
 
 2. Reference the `otel-agent-config-map` ConfigMap in your `DatadogAgent` resource using `features.otelCollector.conf.configMap` parameter:
 {{< code-block lang="yaml" filename="datadog-agent.yaml" collapsible="false" >}}

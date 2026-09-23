@@ -99,7 +99,7 @@ Options for copying or exporting the JSON can also be accessed from the {{< ui >
 
 ### Delete dashboard
 
-<div class="alert alert-danger">Dashboards must be unstarred before deletion.</div>
+<div class="alert alert-caution">Dashboards must be unstarred before deletion.</div>
 
 Use this option to permanently delete your dashboard. Use the preset {{< ui >}}Recently Deleted{{< /ui >}} list to restore deleted dashboards. Dashboards in {{< ui >}}Recently Deleted{{< /ui >}} are permanently deleted after 30 days. For more information, see the [Dashboard list][9] documentation.
 

@@ -31,7 +31,7 @@ The `trackEarlyRequests` SDK init parameter allows you to capture:
 
 To enable early data collection, set `trackEarlyRequests` to `true` in your Browser SDK initialization script. This feature requires Browser SDK v6.21.0+.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   If you are using <code>beforeSend</code> with <code>trackEarlyRequests</code> enabled, properties associated with the request can be undefined. 
 </div>
 

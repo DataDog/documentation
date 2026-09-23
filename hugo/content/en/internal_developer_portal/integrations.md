@@ -18,7 +18,7 @@ further_reading:
   text: "Learn about the PagerDuty integration"
 ---
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 PagerDuty and Opsgenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}

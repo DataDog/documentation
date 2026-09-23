@@ -135,7 +135,7 @@ Store the SQL query that the Worker executes in a local file.
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
 
 Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 

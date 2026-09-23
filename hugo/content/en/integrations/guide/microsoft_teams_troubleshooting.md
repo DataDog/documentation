@@ -29,7 +29,7 @@ You can try to either:
 
 ### Remove and re-add {{< region-param key="microsoft_teams_app_name" >}} app
 
-<div class="alert alert-danger">This removes configured connectors for that team. Perform this action only when you are ready to migrate all connectors for that team to Datadog's tenant-based integration.</div>
+<div class="alert alert-caution">This removes configured connectors for that team. Perform this action only when you are ready to migrate all connectors for that team to Datadog's tenant-based integration.</div>
 
 1. Click the three dots next to the Team name in the left sidebar.
 2. Click **Manage Team**.

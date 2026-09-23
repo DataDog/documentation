@@ -86,7 +86,7 @@ Configure either gRPC or HTTP for this feature. Here is [an example application 
    - For gRPC: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT` to `0.0.0.0:4317` and expose port `4317`.
    - For HTTP: Set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_HTTP_ENDPOINT` to `0.0.0.0:4318` and expose port `4318`.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Known Issue</strong>: Starting with Agent version 7.61.0, OTLP ingestion pipelines may fail to start in Docker environments, displaying the error: <code>Error running the OTLP ingest pipeline: failed to register process metrics: process does not exist</code>.<br><br>
 If you are using an affected version, you can use one of these workarounds:<br><br>
 1. Set the environment variable <code>HOST_PROC</code> to <code>/proc</code> in your Agent Docker container.<br>

@@ -18,7 +18,7 @@ The Observability Pipelines Worker uses standard Google authentication methods. 
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Google SecOps endpoint URL. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the Google SecOps endpoint URL. Do <b>not</b> enter the actual value.</div>
 
 Configure the Google SecOps destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][1], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
 

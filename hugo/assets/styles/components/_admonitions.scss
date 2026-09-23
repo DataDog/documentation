@@ -10,7 +10,7 @@
   -webkit-font-smoothing: subpixel-antialiased;
 }
 
-.alert.alert-info p, .alert.alert-danger p, .alert.alert-warning p, .alert.alert-tip p {
+.alert.alert-info p, .alert.alert-caution p, .alert.alert-warning p, .alert.alert-tip p {
   color: #4a4a4a;
 }
 
@@ -43,16 +43,16 @@
 }
 
 
-.alert-danger {
+.alert-caution {
   background-color: transparent;
   padding-top: 32px;
 }
 
-.alert-danger::before {
+.alert-caution::before {
   background-color: #facc00;
 }
 
-.alert-danger::after {
+.alert-caution::after {
   content: 'CAUTION';
   position: absolute;
   top: 8px;

@@ -60,7 +60,7 @@ See the [Log Archives documentation][1] for additional information.
 
 ## Set up the destination for your pipeline
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Azure connection string. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the Azure connection string. Do <b>not</b> enter the actual value.</div>
 
 Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 

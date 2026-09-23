@@ -213,7 +213,7 @@ The {{< ui >}}APM traces filter{{< /ui >}} indexes APM traces for the specified 
 
   <div class="alert alert-info">The APM traces filter is only compatible with the following versions of the SDKs: <br> - Browser 6.5.0+ <br> - Android 3.0.0+ <br> - iOS 3.3.0+ <br> - React Native 3.0.0+ <br> - Flutter 3.0.0+ <br></div>
 
-<div class="alert alert-danger">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
+<div class="alert alert-caution">Configuring cross-product retention filters may increase APM-indexed volumes.</div>
 
 To **find sessions with indexed APM traces** in the RUM Explorer, query `@session.has_indexed_apm_traces:true`.
 
@@ -233,7 +233,7 @@ If you have configured the SDK to sample 40% of traces, then the outcome is the 
 
 Cross-product retention filters are also available on the <a href="/real_user_monitoring/rum_without_limits/retention_filters/#permanent-retention-filters">Permanent Retention Filters</a>. The APM traces filter is **only editable on Synthetic Monitoring Sessions and Sessions with forced replays filters**.
 
-<div class="alert alert-danger">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
+<div class="alert alert-caution">APM traces indexed through a cross-product retention filter on the Synthetics or Forced Replay permanent filters are subject to APM billing.</div>
 
 ## Best practices
 

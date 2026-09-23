@@ -35,7 +35,7 @@ further_reading:
 With Cloud Security, Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues. This guide walks you through best practices for getting your team up and running with Cloud Security.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Phase 1: Deployment

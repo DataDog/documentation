@@ -11,7 +11,7 @@ further_reading:
 
 The SMTP Configuration page in Organization Settings lets you connect your own SMTP server so that status page subscription emails are sent from your own domain instead of the default Datadog sender address. This improves branding, builds subscriber trust, and reduces the likelihood of notifications being filtered as spam.
 
-<div class="alert alert-danger">You must have <code>org_management</code> permissions to add and manage SMTP servers.</div>
+<div class="alert alert-caution">You must have <code>org_management</code> permissions to add and manage SMTP servers.</div>
 
 ## Add an SMTP server
 

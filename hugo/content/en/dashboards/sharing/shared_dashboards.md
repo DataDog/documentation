@@ -172,7 +172,7 @@ You can restrict access to shared dashboards based on IP address. Email [Datadog
 
 ## Edit Shared Dashboards
 
-<div class="alert alert-danger">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
+<div class="alert alert-caution">Any changes to a dashboard's content or layout are instantly reflected in the shared version. Be cautious when editing to avoid unintentionally sharing private data.</div>
 
 To make a change to the share type, configuration, or recipients of a shared dashboard:
 

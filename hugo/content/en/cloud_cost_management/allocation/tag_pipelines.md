@@ -39,7 +39,7 @@ You can manage tag pipeline rulesets using the [API][7], [Terraform][8], or dire
 
 To create a ruleset, navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1].
 
-<div class="alert alert-danger"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
+<div class="alert alert-caution"> You can create up to 100 rules. API-based Reference Tables are not supported. </div>
 
 Before creating individual rules, create a ruleset (a folder for your rules) by clicking {{< ui >}}\+ New Ruleset{{< /ui >}}.
 

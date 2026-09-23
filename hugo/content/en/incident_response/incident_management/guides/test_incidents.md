@@ -41,7 +41,7 @@ During declaration, you have the option to enable any of these behaviors if need
 
 ## Enabling test incidents
 
-<div class="alert alert-danger">Only users with the appropriate Datadog administrative permissions can enable test incidents. After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
+<div class="alert alert-caution">Only users with the appropriate Datadog administrative permissions can enable test incidents. After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
 
 Test incidents must be enabled before use. To enable:
 
@@ -51,7 +51,7 @@ Test incidents must be enabled before use. To enable:
 4. Click **Save Changes**.
 
 ## Declaring a test incident
-<div class="alert alert-danger">After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
+<div class="alert alert-caution">After test incidents are enabled, any user with the <strong>Incidents Write</strong> permission can declare them.</div>
 
 ### From the Incidents page
 

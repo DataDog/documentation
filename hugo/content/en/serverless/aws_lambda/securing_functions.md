@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [Datadog App and API Protection (AAP)][2] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, and into bad actors targeting your systems.

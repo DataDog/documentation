@@ -19,7 +19,7 @@ Use Observability Pipelines' Elasticsearch destination to send logs or metrics t
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
 Configure the Elasticsearch destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 

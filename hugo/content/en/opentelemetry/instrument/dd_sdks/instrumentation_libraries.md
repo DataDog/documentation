@@ -60,7 +60,7 @@ Datadog SDKs also support OpenTelemetry Metrics and Logs APIs in some langauges.
 4. The Datadog SDK for Java also accepts select individual instrumentation JARs produced by OpenTelemetry's [opentelemetry-java-instrumentation][9] build, for example the [R2DBC instrumentation JAR][11].
 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 OpenTelemetry incubator APIs are not supported.
 </div>
 
@@ -96,7 +96,7 @@ mvn spring-boot:run -Dstart-class=com.baeldung.pagination.PaginationApplication 
 Open `http://127.0.0.1:8080/products` to exercise the product query. With this setup, you are using OpenTelemetry's instrumentation to ensure full observability for R2DBC queries.
 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Versions 2.6.0-alpha and later of these OpenTelemetry instrumentations are not supported by the Datadog Java SDK.
 </div>
 

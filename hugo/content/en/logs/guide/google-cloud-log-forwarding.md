@@ -126,7 +126,7 @@ To collect logs from applications running in GCE or GKE, you can also use the [D
 
 4. Datadog recommends creating a secret in [Secret Manager][414] with your valid Datadog API key value, for later use in the Datadog Dataflow template.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Cloud Pub/Subs are subject to <a href="https://cloud.google.com/pubsub/quotas#quotas">Google Cloud quotas and limitations</a>. If the number of logs you have exceeds those limitations, Datadog recommends you split your logs over several topics. See the <a href="#monitor-the-cloud-pubsub-log-forwarding">Monitor the Pub/Sub Log Forwarding</a> section for information on setting up monitor notifications if you approach those limits.
 </div>
 

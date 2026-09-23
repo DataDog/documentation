@@ -27,7 +27,7 @@ To use Observability Pipelines' WebSocket source, you must have the following in
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the WebSocket URI and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifiers for the WebSocket URI and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 

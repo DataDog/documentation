@@ -45,7 +45,7 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts][
 
 **Download and install** the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;</strong> with the latest three component version of the library (ej: 3.21.0)
 </div>
 
@@ -63,7 +63,7 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.tar.gz && /opt
 
 **Download and install** the latest *Datadog .NET Tracer package* that supports your operating system and architecture.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note on version:</strong> replace <strong>&#60;TRACER_VERSION&#62;</strong> with the latest three component version of the library (ej: 3.21.0)
 </div>
 
@@ -80,7 +80,7 @@ sudo tar -C /opt/datadog -xzf datadog-dotnet-apm-<TRACER_VERSION>.arm64.tar.gz &
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   If you are having issues installing the SDK check the [Tracer Installation guide][5]
   *Note on version:* replace *<TRACER_VERSION>* with the latest three component version of the library (ej: 3.21.0)
 </div>

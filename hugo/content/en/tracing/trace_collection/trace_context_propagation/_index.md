@@ -667,7 +667,7 @@ opentelemetry-http = "0.31"
 http-body-util = "0.1"
 ```
 
-<div class="alert alert-danger">Use the same crate version for <code>opentelemetry-http</code> as the rest of your OpenTelemetry dependencies to avoid version conflicts.</div>
+<div class="alert alert-caution">Use the same crate version for <code>opentelemetry-http</code> as the rest of your OpenTelemetry dependencies to avoid version conflicts.</div>
 
 ### Injecting context (client side)
 

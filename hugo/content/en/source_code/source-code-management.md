@@ -23,7 +23,7 @@ To use most source code-related features, you must connect your Git repositories
 ## Source code management providers
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+<div class="alert alert-caution">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
 Datadog supports the following features for the SCM providers listed below. See [Features][1] for more details about each feature:
@@ -52,7 +52,7 @@ Install Datadog's [GitHub integration][101] using the [integration tile][102] or
 {{% tab "GitLab (SaaS & On-Prem)" %}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+<div class="alert alert-caution">The GitLab Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
 <div class="alert alert-info">
@@ -68,7 +68,7 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The Azure DevOps Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+<div class="alert alert-caution">The Azure DevOps Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
 <div class="alert alert-warning">
@@ -83,7 +83,7 @@ Install Datadog's Azure DevOps Source Code integration using the [integration ti
 {{% tab "Bitbucket (SaaS Only)" %}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The Bitbucket Cloud Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+<div class="alert alert-caution">The Bitbucket Cloud Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
 {{< /site-region >}}
 
 <div class="alert alert-warning">
@@ -98,7 +98,7 @@ Install Datadog's [Bitbucket Cloud Source Code integration][102] using the [inte
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Repositories on self-hosted instances or private URLs are not supported out-of-the-box. To enable this feature, <a href="/help">contact Support</a>.
 </div>
 

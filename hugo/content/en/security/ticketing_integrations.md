@@ -152,7 +152,7 @@ If you do not see the {{< ui >}}Work Management ↔ ServiceNow Integration{{< /u
 
 {{% tab "Linear" %}}
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 The following steps set up bidirectional syncing with Linear and verify that setup is successful.
@@ -229,7 +229,7 @@ The following steps create a bidirectional ticket for a Security finding.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Linear issue" level="h4" expanded=false %}}
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 1. Open the {{< ui >}}Linear Issue{{< /ui >}} modal. You can use a new or existing issue.
@@ -289,7 +289,7 @@ In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is pro
 
 {{% tab "Linear" %}}
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 Existing bidirectional Linear issues are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.

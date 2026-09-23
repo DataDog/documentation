@@ -5,7 +5,7 @@ description: Use Datadog Software Composition Analysis with GitHub Actions to de
 
 Run a Datadog Software Composition Analysis (SCA) job in your GitHub Actions workflows. The action invokes Datadog's recommended SBOM tool, [Datadog SBOM Generator][1], on your codebase and uploads the results to Datadog.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Datadog Software Composition Analysis CI jobs are only supported on <code>push</code> event triggers. Other event triggers (for example, <code>pull_request</code>) are not supported and can cause issues with the product.
 </div>
 

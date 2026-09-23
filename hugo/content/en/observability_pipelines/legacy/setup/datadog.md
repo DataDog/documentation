@@ -108,7 +108,7 @@ In order to run the Worker in your AWS account, you need administrative access t
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-<div class="alert alert-danger">CloudFormation installs only support Remote Configuration.</div>
+<div class="alert alert-caution">CloudFormation installs only support Remote Configuration.</div>
 <div class="alert alert-warning">Only use CloudFormation installs for non-production-level workloads.</div>
 
 In order to run the Worker in your AWS account, you need administrative access to that account. Collect the following pieces of information to run the Worker instances:

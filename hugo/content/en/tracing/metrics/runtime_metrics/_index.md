@@ -47,7 +47,7 @@ Runtime metrics are available for several programming languages and runtimes, wi
 - **Library Version**: 0.29.0+
 - **Runtimes**: Java 8+
 
-<div class="alert alert-danger">JMX metrics collection is not supported in AWS Lambda environments.</div>
+<div class="alert alert-caution">JMX metrics collection is not supported in AWS Lambda environments.</div>
 
 {{% /tab %}}
 
@@ -108,12 +108,12 @@ net localgroup "Performance Monitor Users" "IIS APPPOOL\DefaultAppPool" /add
 {{% /tab %}}
 {{% tab "PHP" %}}
 
-<div class="alert alert-danger">Runtime metrics for PHP is not supported.</div>
+<div class="alert alert-caution">Runtime metrics for PHP is not supported.</div>
 
 {{% /tab %}}
 {{% tab "C++" %}}
 
-<div class="alert alert-danger">Runtime metrics for C++ is not supported.</div>
+<div class="alert alert-caution">Runtime metrics for C++ is not supported.</div>
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -196,7 +196,7 @@ from ddtrace.runtime import RuntimeMetrics
 RuntimeMetrics.enable()
 ```
 
-<div class="alert alert-danger">This only applies if you are not using <code>ddtrace-run</code></div>
+<div class="alert alert-caution">This only applies if you are not using <code>ddtrace-run</code></div>
 {{% /tab %}}
 
 {{% tab "Ruby" %}}

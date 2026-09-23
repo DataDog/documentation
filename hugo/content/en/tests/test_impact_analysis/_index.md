@@ -18,7 +18,7 @@ further_reading:
     text: "Getting Started with Test Optimization"
 ---
 
-<div class="alert alert-danger"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
+<div class="alert alert-caution"> This feature was formerly known as Intelligent Test Runner, and some tags still contain "itr".</div>
 
 ## Overview
 

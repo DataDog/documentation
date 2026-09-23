@@ -19,7 +19,7 @@ There are two ways to deploy the Datadog Agent on Windows devices for End User D
 - **Manual install**: Run a PowerShell command directly on the device. Use this method to test a single machine or for devices that are not managed by a mobile device management (MDM) solution.
 - **MDM deploy**: Push the Agent to a fleet of enrolled Windows devices. This example uses Microsoft Intune to deploy the Agent as a Win32 app in the background with no interaction on each device.
 
-<div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
+<div class="alert alert-caution">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
 {{< tabs >}}
 {{% tab "Manual install" %}}

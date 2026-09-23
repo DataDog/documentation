@@ -30,7 +30,7 @@ With this feature, you can:
 
 During initialization, the RUM iOS SDK creates a view called `ApplicationLaunch`. This view’s start time matches the start of the iOS process. The `ApplicationLaunch` view includes any logs, actions, and resources created before your first call to `startView`. 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   The <code>application_start</code> action is not collected in iOS SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
 </div>
 
@@ -91,7 +91,7 @@ class HomeViewController: UIViewController {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   If the time to full display is not defined, the iOS SDK only collects the time to initial display. 
 </div>
 
@@ -127,7 +127,7 @@ These metrics contain attributes to specify the launch type for accurate monitor
 - `@vital.is_prewarmed`
 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   The <code>rum.measure.app.startup_to_full_display</code> metric are not calculated if the time to full display is undefined. 
 </div>
 

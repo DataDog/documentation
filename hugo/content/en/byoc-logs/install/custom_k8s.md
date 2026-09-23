@@ -121,7 +121,7 @@ If successful, the command lists the contents of your MinIO bucket.
 
 1. Store the PostgreSQL database connection string as a Kubernetes secret:
 
-   <div class="alert alert-danger">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
+   <div class="alert alert-caution">If your password contains special characters, URL-encode them first. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
    ```shell
    kubectl create secret generic byoc-logs-metastore-uri \
