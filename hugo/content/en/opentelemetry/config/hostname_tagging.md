@@ -31,13 +31,13 @@ The right configuration depends on how you send telemetry to Datadog. Find every
 | [OpenTelemetry Collector exporting to Datadog over OTLP](#opentelemetry-collector-exporting-to-datadog-over-otlp) | Use the recommended Collector setup. Add host or platform resource attributes before export. |
 | [Direct OTLP intake without a Collector](#direct-otlp-intake-without-a-collector) | Add host or platform resource attributes before exporting from your SDK or managed platform. |
 | [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Detect host information in the node-level Collector with the appropriate Kubernetes or resource detection processor, and preserve those resource attributes through the gateway. |
-| [Existing configurations using the Datadog Exporter](#existing-configurations-using-the-datadog-exporter) | Run a Collector on each host. Use `resource_detection` for hosts and cloud Kubernetes, or `k8s_attributes` for non-cloud Kubernetes. |
+| [Existing configurations using the Datadog Exporter](#existing-configurations-using-the-datadog-exporter) | Run a Collector on each host. Use `resource_detection` for hosts. On Kubernetes, use `k8s_attributes`, and on cloud Kubernetes also add `resource_detection`. |
 
 ### OTLP ingestion by the Datadog Agent
 
 Deploy the Datadog Agent on every host that generates OTLP telemetry. Sending telemetry from one host to an Agent on another host is not supported. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
 
-If incoming telemetry has no valid hostname attributes, Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, make its value match the Agent hostname to avoid duplicate hosts. To override hostname resolution explicitly, set the `datadog.host.name` resource attribute to the Agent hostname.
+If incoming telemetry has no valid [hostname attributes][8], Datadog uses the Agent hostname. If you set `host.name`, `host.id`, or another hostname attribute, make its value match the Agent hostname to avoid duplicate hosts. To override hostname resolution explicitly, set the `datadog.host.name` resource attribute to the Agent hostname.
 
 ### DDOT Collector exporting directly to Datadog
 
@@ -61,10 +61,10 @@ processors:
 
 This applies to the DDOT Collector on [ECS Fargate][16] and [EKS Fargate][17], where the Datadog Agent runs as a sidecar container in the same task or pod as your application.
 
-Fargate does not support host-based deployments, so the host guidance above does not apply. Supply the platform resource attributes that `infraattributes` needs instead:
+Fargate does not support host-based deployments, so the [host-based guidance](#host-based-deployments) does not apply. Instead, supply the platform resource attributes that `infraattributes` needs:
 
 - On ECS Fargate, add the ECS resource detector to your OpenTelemetry SDK to provide the `aws.ecs.task.arn` attribute.
-- On EKS Fargate, add the EKS resource detector to your SDK, or add the `resource_detection` processor with the `[env, eks]` detectors to your Collector configuration.
+- On EKS Fargate, add the EKS resource detector to your SDK, or add the `resourcedetection` processor with the `[env, eks]` detectors to your Collector configuration.
 
 ### OpenTelemetry Collector exporting to Datadog over OTLP
 
@@ -72,7 +72,7 @@ For new Collector deployments, use the [recommended OpenTelemetry Collector setu
 
 Use the `resource_detection` and `k8s_attributes` processors as appropriate for your environment. See [Collector configuration](#collector-configuration) for examples.
 
-<div class="alert alert-info">Hostname resource attributes identify telemetry but do not by themselves create an entry in the <a href="/infrastructure/list/">Infrastructure List</a>. To populate the Infrastructure List, collect the supported system metrics with the <a href="/opentelemetry/integrations/host_metrics/">host metrics receiver</a>.</div>
+<div class="alert alert-info">Hostname resource attributes identify telemetry but do not by themselves create an entry in the <a href="/infrastructure/list/">Infrastructure Host List</a>. To populate the Infrastructure Host List, collect the supported system metrics with the <a href="/opentelemetry/integrations/host_metrics/">host metrics receiver</a>.</div>
 
 ### Direct OTLP intake without a Collector
 
@@ -88,17 +88,26 @@ This applies to OpenTelemetry Collector gateway deployments, including Collector
 
 In a gateway deployment, the Collector that exports to Datadog does not run on the host that produced the telemetry. If host information is not attached before the data reaches the gateway, telemetry from many hosts can collapse onto the gateway's hostname, or each Collector pod can register as its own host.
 
-Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again. In non-cloud Kubernetes environments, use the `k8s_attributes` processor. In cloud Kubernetes environments, use the `resource_detection` processor with the detector for your cloud provider. See the **Kubernetes DaemonSet -> Gateway** example in [Collector configuration](#collector-configuration). If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
+Detect host information in the node-level Collector, then configure the gateway to preserve those resource attributes instead of detecting them again.
+
+On Kubernetes, use the `k8s_attributes` processor in the node-level Collector. On cloud Kubernetes, also add the `resource_detection` processor with the detector for your cloud provider. See the **Kubernetes DaemonSet -> Gateway** example in [Collector configuration](#collector-configuration).
+
+If a gateway deployment reports the wrong host, see [Gateway collector not forwarding host metadata][19].
 
 ### Existing configurations using the Datadog Exporter
 
-This applies to existing [OpenTelemetry Collector configurations with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet. The Datadog Exporter remains supported. For new Collector configurations, use the [recommended OpenTelemetry Collector setup][21].
+This applies to existing [OpenTelemetry Collector configurations with the Datadog Exporter][20] running on each host or as a Kubernetes DaemonSet. For new Collector configurations, use the [recommended OpenTelemetry Collector setup][21].
 
-Run a Collector on every host. For host-based environments, add the `resource_detection` processor with the detectors for your environment. For non-cloud Kubernetes, use the `k8s_attributes` processor. For cloud Kubernetes, use the `resource_detection` processor with the detector for your cloud provider. See [Collector configuration](#collector-configuration) for examples. If your Collector forwards to a gateway, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
+Run a Collector on every host:
+
+- For host-based environments, add the `resource_detection` processor with the detectors for your environment.
+- On Kubernetes, use the `k8s_attributes` processor. On cloud Kubernetes, also add the `resource_detection` processor with the detector for your cloud provider.
+
+See [Collector configuration](#collector-configuration) for examples. If your Collector forwards to a gateway, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
 
 ## Diagnose hostname issues
 
-Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems; it does not affect billing.
+Datadog emits the `datadog.apm.hostname_issue` gauge when an APM trace hostname is missing, resembles an ephemeral Kubernetes pod, or differs from the hostname reported by the Datadog Agent. This diagnostic metric helps identify hostname configuration problems. It does not affect billing.
 
 A trace has at most one `issue_type`. Use the table to identify the problem and select the appropriate action:
 
@@ -113,7 +122,7 @@ Available metric tags include `issue_type`, `host`, `env`, `service`, `version`,
 
 The pod-like issue types use common Kubernetes pod naming patterns as a heuristic. After updating your configuration, inspect new traces to confirm that they no longer have the issue type.
 
-## Collector configuration
+## Configure hostname processors in the Collector {#collector-configuration}
 
 Use the [resource detection processor][2] and the [Kubernetes attributes processor][3] to collect host and container resource attributes. Add the appropriate processors to the relevant metrics, traces, and logs pipelines. These examples apply whether the Collector exports telemetry to Datadog over OTLP or uses the Datadog Exporter.
 
@@ -153,7 +162,6 @@ For cloud environments, replace `detectors` with the appropriate list:
 
 - Amazon EC2: `[env, ec2, system]`
 - Amazon ECS on EC2: `[env, ecs, ec2, system]`
-- Amazon ECS Fargate: `[env, ecs]`
 - Google Cloud: `[env, gcp, system]`
 - Azure: `[env, azure, system]`
 
@@ -451,7 +459,7 @@ processors:
 
 ### Full example configuration
 
-For a full working example for an existing configuration with the Datadog Exporter, see [`k8s-values.yaml`][4]. This example is for Amazon EKS.
+For complete configuration files for the recommended setup, see the [`opentelemetry-examples` repository][23]. For an existing configuration with the Datadog Exporter on Amazon EKS, see [`k8s-values.yaml`][4].
 
 ### Example logging output
 
@@ -530,23 +538,9 @@ Attributes:
 
 ### Custom host tags
 
-#### In the Datadog exporter
-
-Set custom hosts tags directly in the Datadog exporter:
-```
-      ## @param tags - list of strings - optional - default: empty list
-      ## List of host tags to be sent as part of the host metadata.
-      ## These tags will be attached to telemetry signals that have the host metadata hostname.
-      ##
-      ## To attach tags to telemetry signals regardless of the host, use a processor instead.
-      #
-      tags: ["team:infra", "<TAG_KEY>:<TAG_VALUE>"]
-```
-See all configurations options [here][6].
-
 #### As OTLP resource attributes
 
-Custom host tags can also be set as resource attributes that start with the namespace `datadog.host.tag`.
+Custom host tags can be set as resource attributes that start with the namespace `datadog.host.tag`.
 
 This can be set as an env var `OTEL_RESOURCE_ATTRIBUTES=datadog.host.tag.<custom_tag_name>=<custom_tag_value>` in an [OTel SDK][5].
 Or this can be set in a processor: 
@@ -558,7 +552,21 @@ processors:
       action: upsert
       from_attribute: <custom_tag_name>
 ```
-**Note:** This is only supported if you have opted-in as described [here][7].
+**Note:** This is only supported if you have opted in as described in [Infrastructure List Host Information][7].
+
+#### In the Datadog Exporter
+
+For existing configurations with the [Datadog Exporter][20], you can also set custom host tags directly in the exporter:
+```
+      ## @param tags - list of strings - optional - default: empty list
+      ## List of host tags to be sent as part of the host metadata.
+      ## These tags will be attached to telemetry signals that have the host metadata hostname.
+      ##
+      ## To attach tags to telemetry signals regardless of the host, use a processor instead.
+      #
+      tags: ["team:infra", "<TAG_KEY>:<TAG_VALUE>"]
+```
+See all configuration options in the [example Datadog Exporter configuration][6].
 
 ### Host aliases
 You can set host aliases with the resource attribute `datadog.host.aliases`. 
@@ -573,7 +581,7 @@ processors:
           - set(attributes["datadog.host.aliases"], ["alias1", "alias2", "alias3"])
 ```
 
-**Note:** This is only supported if you have opted-in as described [here][7].
+**Note:** This is only supported if you have opted in as described in [Infrastructure List Host Information][7].
 
 ### Custom container tags
 
@@ -611,3 +619,4 @@ processors:
 [20]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [21]: /opentelemetry/setup/collector_exporter/
 [22]: /opentelemetry/setup/otlp_ingest/
+[23]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

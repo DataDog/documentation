@@ -20,7 +20,7 @@ Use this option when you run workloads on a managed platform where installing a 
 
 <div class="alert alert-danger">Host metadata sent to managed platform endpoints does not populate the <a href="/infrastructure/list/">Infrastructure Host List</a>.</div>
 
-For hostname recommendations across OpenTelemetry setups, see [Hostname and Tagging][19].
+For hostname recommendations for direct OTLP intake, see [Hostname and Tagging][19].
 
 Each endpoint supports the following signal paths:
 
@@ -123,4 +123,4 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
-[19]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-datadog-agent
+[19]: /opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector

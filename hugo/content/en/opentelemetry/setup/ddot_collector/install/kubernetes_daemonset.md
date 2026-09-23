@@ -282,6 +282,8 @@ datadog:
 
 ### Configure the OpenTelemetry Collector
 
+Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 The Datadog Operator provides a sample OpenTelemetry Collector configuration that you can use as a starting point. If you need to modify this configuration, the Datadog Operator supports two ways of providing a custom Collector configuration:
@@ -693,8 +695,6 @@ service:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Because the DDOT Collector runs inside the Datadog Agent, hostname attributes on incoming telemetry can resolve to a different name than the Agent's. The `infraattributes` processor can apply the Agent hostname instead. See [Hostname and Tagging][58] for the recommended configuration.
 
 #### Key components
 
