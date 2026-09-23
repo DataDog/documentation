@@ -92,7 +92,7 @@ For detailed information about each version, including full schemas and example 
 
 ## Version details
 
-{{< callout url="https://forms.gle/fwzarcSww6By7tn39" d_target="#signupModal" btn_hidden="false" header="Opt in to the Preview for the latest version of Catalog." >}}
+{{< callout url="https://forms.gle/fwzarcSww6By7tn39" header="Opt in to the Preview for the latest version of Catalog." >}}
 {{< /callout >}}
 
 {{< tabs >}}
