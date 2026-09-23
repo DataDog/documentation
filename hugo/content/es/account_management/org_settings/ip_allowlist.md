@@ -1,103 +1,104 @@
 ---
-description: Controla el acceso de red a Datadog restringiendo el acceso a la API
-  y a la interfaz de usuario a direcciones IP o rangos CIDR específicos para la seguridad
-  de la empresa.
-title: Lista de IP permitidas
+description: Controle el acceso a la red de Datadog restringiendo el acceso a la API
+  y a la UI a direcciones IP o rangos CIDR específicos para la seguridad empresarial.
+title: Lista de permitidos de IP
 ---
-
-{{< callout url="/ayuda/" header="Empezando con la lista de IP permitidas" >}}
-La función de lista de IP permitidas sólo está disponible para clientes con un plan de empresa. Solicita acceso poniéndote en contacto con el servicio de asistencia.
+{{< callout url="/help/" header="Comience con la lista de permitidas de IP" >}}
+La función de lista de permitidas de IP está disponible para clientes con un plan Pro+ o Enterprise. Para solicitar acceso, comuníquese con el soporte técnico.
 {{< /callout >}}
 
-## Información general
+## Descripción general {#overview}
 
-{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="Captura de pantalla de la interfaz de usuario de la lista de IP permitidas, que contiene cuatro rangos de IP" >}}
+{{< img src="account_management/org_settings/ip_allowlist_list.png" alt="Captura de pantalla que muestra la UI de la lista de permitidas de IP, que contiene cuatro rangos de IP." >}}
 
-La lista de IP permitidas controla qué redes se pueden utilizar para acceder a tus datos en Datadog. Al limitar las redes permitidas, puedes proteger tus recursos de la exfiltración de datos y las amenazas internas.
+La lista de permitidas de IP controla qué redes se pueden utilizar para acceder a sus datos en Datadog. Al limitar las redes permitidas, puede proteger sus recursos contra la filtración de datos y las amenazas internas.
 
-Cuando la lista de IP permitidas está activada, solo las direcciones IP o los rangos CIDR de la lista permitida pueden acceder a la API y la interfaz de usuario de Datadog. 
+Cuando la lista de permitidas de IP está habilitada, solo las direcciones IP o los rangos CIDR en la lista de permitidas pueden acceder a la API y a la UI de Datadog. 
 
-### Recursos bloqueados y permitidos
+La lista de permitidas de IP es una configuración para toda la organización. Se aplica de manera uniforme a todo el tráfico enumerado en [Recursos bloqueados y permitidos](#blocked-and-allowed-resources) y no puede limitarse a un token, clave de API, usuario o punto de conexión específico.
 
-Si la IP de un usuario no está incluida en la lista de IP permitidas, se bloquean el acceso y el uso de manera efectiva:
+### Recursos bloqueados y permitidos {#blocked-and-allowed-resources}
 
-- Interfaz web de Datadog
-- [API][1] pública de Datadog, incluidos los endpoints documentados e inéditos.
-- Aplicaciones móviles de Datadog (iOS, Android)
+Si la IP de un usuario no está incluida en la lista de permitidas, se le bloquea efectivamente el acceso y el uso de:
+
+- Datadog's web UI
+- La [API][1] pública de Datadog, incluidos los puntos de conexión documentados y no publicados
+- Las aplicaciones móviles de Datadog (iOS, Android)
 - Integraciones y aplicaciones de terceros que acceden a Datadog a través de OAuth
+- El [Datadog MCP Server][9], incluidas las conexiones remotas desde agentes de IA y clientes MCP
 
-La función de lista de IP permitidas no bloquea el acceso a lo siguiente:
-- Endpoints de ingesta de datos a los que el Agent envía datos, como métricas, trazas (traces) y logs
-- El endpoint [validar clave de API][2], que el Agent utiliza antes de enviar los datos.
-- [Presentación de flare del Agent][3]
-- [Dashboards públicos][4]
+La función de lista de permitidas de IP no bloquea el acceso a lo siguiente:
+- Puntos de conexión de ingesta de datos a los que el Agent envía datos, como métricas, trazas y registros
+- El punto de conexión de [validación de clave de API][2], que el Agent utiliza antes de enviar datos
+- [Envío de flare del Agent][3]
+- [Paneles públicos][4]
 
-Las aplicaciones e integraciones que envían telemetría desde el Agent (métricas, trazas (traces) y logs), y las que utilizan una clave de API proporcionada por el usuario, no se ven afectadas por la lista de IP permitidas. Datadog recomienda utilizar el [Audit Trail][5] para monitorizar las direcciones IP de aplicaciones e integraciones de terceros.
+Las aplicaciones e integraciones que envían telemetría desde el Agent (métricas, trazas y registros), y aquellas que utilizan una clave de API proporcionada por el usuario, no se ven afectadas por la lista de permitidos de IP. Datadog recomienda utilizar el [Audit Trail][5] para hacer un seguimiento de las direcciones IP de aplicaciones e integraciones de terceros.
 
-Para permitir que los clientes de aplicaciones móviles se conecten a Datadog cuando la función de lista de IP permitidas está activada, Datadog recomienda que los dispositivos móviles se conecten a un rango permitido de red a través de VPN.
+Para permitir que los clientes de aplicaciones móviles se conecten a Datadog cuando la función de lista de permitidos de IP está habilitada, Datadog recomienda que los dispositivos móviles se conecten a un rango de red permitido a través de una VPN.
 
-### Funcionalidad
+### Funcionalidad {#functionality}
 
-Sólo los usuarios con el permiso **Gestión de organización** pueden configurar la lista de IP permitidas.
+Solo los usuarios con el permiso {{< ui >}}Org Management{{< /ui >}} pueden configurar la lista de permitidos de IP.
 
-Con la API o la interfaz de usuario de la lista de IP permitidas, puedes realizar lo siguiente:
-- Controlar el estado de la lista de IP permitidas. Si la lista de IP permitidas está activada o desactivada determina si tu organización está restringiendo las solicitudes por pertenencia a la lista de IP permitidas.
-- Activar y desactivar la lista de IP permitidas.
-- Mostrar las direcciones IP (como rangos CIDR) que están cubiertas por tu lista de IP permitidas.
-- Añadir direcciones IP (IPv4 o IPv6) o rangos CIDR a la lista de IP permitidas con una nota opcional.
-- Editar la nota para una dirección IP que ya esté en la lista de IP permitidas.
-- Eliminar una sola entrada de la lista de IP permitidas.
-- Reemplazar toda la lista de IP permitidas con nuevas entradas (solo disponible a través de la API).
+Con la API o la UI de la lista de permitidos de IP, usted puede:
+- Verifique el estado de la lista de permitidos de IP. El hecho de que la lista de permitidos de IP esté activada o desactivada determina si su organización restringe las solicitudes según la pertenencia a la lista de permitidos de direcciones IP.
+- Active y desactive la lista de permitidos de IP.
+- Muestre las direcciones IP (como rangos CIDR) que están cubiertas por su lista de permitidos de IP.
+- Agregue direcciones IP (IPv4 o IPv6) o rangos CIDR a la lista de permitidos de IP con una nota opcional.
+- Edite la nota de una dirección IP que ya se encuentre en la lista de permitidos de IP.
+- Elimine una sola entrada de la lista de permitidos de IP.
+- Reemplace toda la lista de permitidos de IP con nuevas entradas (solo disponible a través de la API).
 
-### Prevención del bloqueo
+### Prevención de bloqueo {#lockout-prevention}
 
-Cuando activas o modificas la lista de IP permitidas, el sistema aplica restricciones para asegurarse de que puedas seguir accediendo a tus datos:
-- Al menos una entrada de la lista de IP permitidas contiene tu IP actual.
-- La lista de permitidos contiene al menos una entrada.
+Cuando habilita o modifica la lista de permitidos de IP, el sistema aplica restricciones para asegurarse de que aún pueda acceder a sus datos:
+- Al menos una entrada en la lista de permitidos de IP contiene su IP actual
+- La lista de permitidos contiene al menos una entrada
 
-## Gestión de la lista de IP permitidas en la interfaz de usuario
+## Administración de la lista de permitidos de IP en la UI {#managing-the-ip-allowlist-in-the-ui}
 
-**Nota:** La página de la lista de IP permitidas sólo aparece en la interfaz de usuario si tu organización de Datadog tiene la función activada.
+**Nota:** La página de la lista de permitidos de IP solo aparece en la UI si su organización de Datadog tiene la función activada.
 
-Para encontrar la [interfaz de usuario de la lista de IP permitidas][6]:
+Para encontrar la [IU de lista de permitidos de IP][6]:
 
-1. Ve a **Parámetros de la organización** desde el menú de tu cuenta.
-1. En **Seguridad**, selecciona **Lista de IP permitidas**.
+1. Navegue a {{< ui >}}Organization Settings{{< /ui >}} desde el menú de su cuenta.
+1. En {{< ui >}}Security{{< /ui >}}, seleccione {{< ui >}}IP Allowlist{{< /ui >}}.
 
-La tabla de la lista de IP permitidas enumera los rangos CIDR contenidos en la lista de IP permitidas.
+La tabla enumera los rangos CIDR contenidos en la lista de permitidos de IP.
 
-### Activar y desactivar la lista de IP permitidas
+### Habilitar y deshabilitar la lista de permitidos de IP {#enable-and-disable-the-ip-allowlist}
 
-Un banner en la parte superior de la página muestra el estado activado o desactivado de la lista de IP permitidas. También muestra tu IP y si esa IP está en la lista de permitidos.
+Un banner en la parte superior de la página muestra el estado habilitado o deshabilitado de la lista de permitidos de IP. También muestra su IP y si esa IP está en la lista de permitidos.
 
-Para cambiar el estado de la lista de IP permitidas, haz clic en el botón **Activar** o **Desactivar**.
+Para alternar el estado de la lista de permitidos de IP, haga clic en el botón {{< ui >}}Enable{{< /ui >}} o {{< ui >}}Disable{{< /ui >}}.
 
-### Añade direcciones IP o rangos CIDR
+### Agregar direcciones IP o rangos CIDR {#add-ip-addresses-or-cidr-ranges}
 
-{{< img src="account_management/org_settings/add_ip_2.png" alt="Captura de pantalla que muestra un cuadro de diálogo titulado Añadir lista de IP permitidas" >}}
+{{< img src="account_management/org_settings/add_ip_2.png" alt="Captura de pantalla que muestra un cuadro de diálogo titulado Agregar IP a la lista de permitidos de IP" >}}
 
-1. Pulsa el botón **Añadir IP** en la parte superior derecha de la página. 
-1. Introduce una dirección IP válida o un rango CIDR.
-1. Opcionalmente, añade una nota, por ejemplo, para recordar por qué permites el acceso a determinadas direcciones.
-1. Haz clic en **Confirmar**.
+1. Haga clic en el botón {{< ui >}}Add IP{{< /ui >}} en la parte superior derecha de la página. 
+1. Ingrese una dirección IP o un rango CIDR válido.
+1. Opcionalmente, agregue una nota, por ejemplo, para recordar por qué está permitiendo el acceso a ciertas direcciones.
+1. Haga clic en {{< ui >}}Confirm{{< /ui >}}.
 
-### Editar direcciones IP o rangos CIDR
+### Editar direcciones IP o rangos CIDR {#edit-ip-addresses-or-cidr-ranges}
 
-1. En la tabla de la lista de IP permitidas, pasa el cursor por encima de la fila que desees editar. 
-1. Haz clic en el icono del lápiz (**Editar**). 
-1. Cambia el texto descriptivo **Nota**.
-1. Haz clic en **Confirmar**.
+1. En la tabla de la lista de permitidos de IP, pase el cursor sobre la fila que desea editar. 
+1. Haga clic en el icono de lápiz ({{< ui >}}Edit{{< /ui >}}). 
+1. Cambie el texto descriptivo {{< ui >}}Note{{< /ui >}}.
+1. Haga clic en {{< ui >}}Confirm{{< /ui >}}.
 
-### Elimina direcciones IP o rangos CIDR
+### Eliminar direcciones IP o rangos CIDR {#delete-ip-addresses-or-cidr-ranges}
 
-1. En la tabla de la lista de IP permitidas, pasa el cursor sobre la fila que desees eliminar. 
-1. Haz clic en el icono de la papelera (**Eliminar**) y confirma que deseas borrarlo. 
+1. En la tabla de la lista de permitidos de IP, pase el cursor sobre la fila que desea eliminar. 
+1. Haga clic en el icono de la papelera ({{< ui >}}Delete{{< /ui >}}) y confirme que desea eliminarlo. 
 
-## Gestión programática de la lista de IP permitidas
+## Administración de la lista de permitidos de IP mediante programación {#managing-the-ip-allowlist-programmatically}
 
-Para gestionar la lista de IP permitidas a través de la API, consulta la [Documentación de la API de la lista de IP permitidas][7].
+Para administrar la lista de permitidos de IP a través de la API, consulte la [documentación de la API de lista de permitidos de IP][7].
 
-Consulta el [recurso `ip_allowlist`][8] para gestionar la lista de IP permitidas en Terraform.
+Consulte el recurso [`ip_allowlist`][8] para administrar la lista de permitidos de IP en Terraform.
 
 
 [1]: /es/api/latest/
@@ -108,3 +109,4 @@ Consulta el [recurso `ip_allowlist`][8] para gestionar la lista de IP permitidas
 [6]: https://app.datadoghq.com/organization-settings/ip-allowlist
 [7]: /es/api/latest/ip-allowlist/
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/ip_allowlist
+[9]: /es/mcp_server/

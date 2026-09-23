@@ -83,10 +83,10 @@ En organizaciones con facturación de Incident Management basada en el uso:
 * Crear un mensaje que se sincroniza con Datadog **no** lo convierte en un usuario facturable para el mes actual.
 * Fijar un mensaje que luego se sincroniza **sí** lo convierte en un usuario facturable.
 
-En organizaciones con facturación de Incident Management basada en asientos:
+En organizaciones con facturación de Incident Management basada en puestos:
 
-* Usted **no** necesita un seat para que Datadog sincronice sus mensajes con Incident Management.
-* Cuando fija un mensaje, **debe** tener un seat para que Datadog sincronice el mensaje que fijó.
+* Usted **no** necesita un puesto para que Datadog sincronice sus mensajes con Incident Management.
+* Cuando fija un mensaje, **debe** tener un puesto para que Datadog sincronice el mensaje que fijó.
 
 ### Comandos de Slack en el canal de incidentes {#slack-commands-in-the-incident-channel}
 
@@ -125,6 +125,8 @@ Internamente, esta función es una [regla de notificación de incidentes][5] int
 
 Puede visualizar la lista completa de comandos de Slack disponibles en cualquier momento escribiendo `/datadog` (o `/dd`) en Slack para abrir el modal de comandos, explorar y ejecutar cualquier acción de Datadog, o `/dd help` para visualizar esas opciones como una lista. Para abrir la bandeja de acciones para acciones comunes de gestión de incidentes, escriba `/dd shortcuts`.
 
+En los siguientes comandos, puede usar `inc` como abreviatura de `incident`.
+
 ### Comandos globales (ejecutar en cualquier lugar) {#global-commands-run-anywhere}
 
 | Comando | Descripción |
@@ -138,7 +140,7 @@ Puede visualizar la lista completa de comandos de Slack disponibles en cualquier
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 | Comando | Descripción |
 | ------- | ----------- |
-| `/datadog` | Abra el modal de comandos para ver todas las acciones de Datadog disponibles. |
+| `/datadog` | Abra el modal de comandos para visualizar todas las acciones de Datadog disponibles. |
 | `/datadog shortcuts` | Abra la bandeja de acciones de incidentes para realizar acciones comunes. |
 | `/datadog help` | Muestre un mensaje efímero que enumere todos los comandos de Slack disponibles. |
 | `/datadog incident update` | Actualice un atributo para el incidente, como el estado o la gravedad. |
@@ -146,8 +148,6 @@ Puede visualizar la lista completa de comandos de Slack disponibles en cualquier
 | `/datadog incident private` | Haga que el incidente sea privado (si los incidentes privados están habilitados). |
 | `/datadog incident public` | Haga que el incidente sea público. |
 | `/datadog incident responders` | Administre el equipo de respuesta del incidente (agregue responsables y asigne roles de respuesta). |
-| `/datadog task` | Cree una tarea de incidente. |
-| `/datadog task list` | Liste las tareas de incidente existentes. |
 | `/datadog followup` | Cree un seguimiento para el incidente. |
 | `/datadog followup list` | Visualice y administre los seguimientos existentes para el incidente. |
 | `/datadog incident summary` | Obtenga un resumen del incidente generado por IA que solo sea visible para usted. |
@@ -155,7 +155,7 @@ Puede visualizar la lista completa de comandos de Slack disponibles en cualquier
 {{< site-region region="gov,gov2" >}}
 | Comando | Descripción |
 | ------- | ----------- |
-| `/datadog` | Abra el modal de comandos para ver todas las acciones de Datadog disponibles. |
+| `/datadog` | Abra el modal de comandos para visualizar todas las acciones de Datadog disponibles. |
 | `/datadog shortcuts` | Abra la bandeja de acciones de incidentes para realizar acciones comunes. |
 | `/datadog help` | Muestre un mensaje efímero que enumere todos los comandos de Slack disponibles. |
 | `/datadog incident update` | Actualice un atributo para el incidente, como el estado o la gravedad. |
@@ -163,8 +163,6 @@ Puede visualizar la lista completa de comandos de Slack disponibles en cualquier
 | `/datadog incident private` | Haga que el incidente sea privado (si los incidentes privados están habilitados). |
 | `/datadog incident public` | Haga que el incidente sea público. |
 | `/datadog incident responders` | Administre el equipo de respuesta del incidente (agregue responsables y asigne roles de respuesta). |
-| `/datadog task` | Cree una tarea de incidente. |
-| `/datadog task list` | Liste las tareas de incidente existentes. |
 | `/datadog followup` | Cree un seguimiento para el incidente. |
 | `/datadog followup list` | Visualice y administre los seguimientos existentes para el incidente. |
 {{< /site-region >}}
@@ -190,8 +188,8 @@ Los siguientes botones están disponibles en la bandeja de acciones. Los tipos d
 | ✅ **Resolve Incident**             | Marcar el incidente como resuelto |   | {{< X >}} |   |
 | ✨ **Investigate with Bits AI**     | Usar Bits AI para investigar el incidente | {{< X >}} |   |   |
 | 📋 **Create Follow-Up**             | Crear tareas de seguimiento identificadas durante la respuesta al incidente |   | {{< X >}} | {{< X >}} |
-| 📋 **List Follow-Ups**              | Ver y realizar seguimiento de las tareas de seguimiento para el incidente |   |   | {{< X >}} |
-| 📝 **Create/View Postmortem**       | Crear o ver el postmortem para el incidente |   |   | {{< X >}} |
+| 📋 **List Follow-Ups**              | Visualizar y realizar seguimiento de las tareas de seguimiento para el incidente |   |   | {{< X >}} |
+| 📝 **Create/View Postmortem**       | Crear o visualizar el postmortem para el incidente |   |   | {{< X >}} |
 
 ## Lecturas adicionales {#further-reading}
 

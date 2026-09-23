@@ -26,6 +26,9 @@ further_reading:
 - link: /tracing/glossary/
   tag: ドキュメント
   text: サービス、リソース、トレースを調査する
+- link: https://learn.datadoghq.com/courses/configure-manage-apm-sdk
+  tag: ラーニングセンター
+  text: APM SDKをアプリケーション用に設定し、管理してください。
 title: PHP アプリケーションのトレース
 type: multi-code-lang
 ---
@@ -53,12 +56,9 @@ Alpine Linux をお使いの場合は、インストーラーを実行する前�
 apk add libgcc
 ```
 
-インストーラーを実行します。
+インストーラーを実行し、有効にする機能のフラグのみを渡してください。
 
 ```shell
-# Full installation: APM + AAP + Profiling
-php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
-
 # APM only
 php datadog-setup.php --php-bin=all
 
@@ -67,10 +67,13 @@ php datadog-setup.php --php-bin=all --enable-appsec
 
 # APM + Profiling
 php datadog-setup.php --php-bin=all --enable-profiling
+
+# Full installation: APM + AAP + Profiling
+php datadog-setup.php --php-bin=all --enable-appsec --enable-profiling
 ```
 
 <div class="alert alert-warning">
-<strong>注</strong>: Windows では APM のみがサポートされています。Windows で PHP アプリケーションをトレースする際は、 <code>--enable-appsec</code> および <code>--enable-profiling</code> フラグを使用しないでください。
+<strong>注</strong>: Windows では APM のみがサポートされています。Windows で PHP アプリケーションをトレースする際は、 <code>--enable-appsec</code> と <code>--enable-profiling</code> フラグを使用しないでください。
 </div>
 
 このコマンドは、ホストまたはコンテナ内で見つかったすべての PHP バイナリに拡張機能をインストールします。`--php-bin` が省略された場合、インストーラーは対話モードで実行され、ユーザーにインストールするバイナリを選択するように求めます。`--php-bin` の値は、`dd-trace-php` が特定のバイナリにのみインストールされる場合、そのバイナリへのパスにすることができます。
@@ -85,7 +88,7 @@ UI にトレースが表示されるまで、数分かかる場合がありま�
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-PHP CLI バイナリが NTS (非スレッドセーフ) としてビルドされている場合、Apache が ZTS (Zend スレッドセーフ) バージョンの PHP を使用しているときは、ZTS バイナリに対する拡張機能の読み込みを手動で変更する必要があります。  <code>/path/to/php-zts --ini</code> を実行して Datadog の <code>.ini</code> ファイルの場所を特定し、その後ファイル名から <code>-zts</code> のサフィックスを追加します。例えば、 <code>extension=ddtrace-20210902.so</code> から <code>extension=ddtrace-20210902-zts.so</code>まで。
+PHP CLI バイナリが NTS (非スレッドセーフ) としてビルドされている場合、Apache が ZTS (Zend スレッドセーフ) バージョンの PHP を使用しているときは、ZTS バイナリに対する拡張機能の読み込みを手動で変更する必要があります。実行 <code>/path/to/php-zts --ini</code> を実行して Datadog の <code>.ini</code> ファイルの場所を特定し、その後ファイル名から <code>-zts</code> のサフィックスを追加します。例えば、 <code>extension=ddtrace-20210902.so</code> から <code>extension=ddtrace-20210902-zts.so</code>まで。
 </div>
 
 <div class="alert alert-danger">
@@ -196,7 +199,7 @@ yum list installed | grep php
 debuginfo-install -y php-fpm
 ```
 
-**注**: PHP バイナリを提供するリポジトリがデフォルトで有効になっていない場合は、`debuginfo-install` コマンドを実行する際に有効にすることができます。例えば、以下のようになります。
+**注**: PHP バイナリを提供するリポジトリがデフォルトで有効になっていない場合は、`debuginfo-install` コマンドを実行する際に有効にすることができます。例:
 
 ```
 debuginfo-install --enablerepo=remi-php74 -y php-fpm
@@ -455,7 +458,7 @@ Apache を使用する場合、次のように実行します。
 外的要因によって問題が引き起こされる場合もあるため、このような場合に `strace` は貴重な情報源となります。
 
 <div class="alert alert-warning">
-<strong>注</strong>:  <code>strace</code> を通して実行されるアプリケーションは、ネイティブで実行される場合よりも桁違いに遅くなります。この方法は、非本番環境での使用が推奨されます。
+<strong>注</strong>: <code>strace</code> を通して実行されるアプリケーションは、ネイティブで実行される場合よりも桁違いに遅くなります。この方法は、非本番環境での使用が推奨されます。
 </div>
 
 お使いのパッケージマネージャーで `strace` をインストールしてください。Datadog サポートに送信する `strace` を生成する際には、`-f` オプションを使用して子プロセスを追跡します。

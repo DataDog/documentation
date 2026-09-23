@@ -77,42 +77,46 @@ datadog:
 {{% /tab %}}
 {{% tab "OpenTelemetry Collector" %}}
 
-Datadog Agent 대신 네이티브 OpenTelemetry 파이프라인을 사용하여 Kubernetes Explorer를 채울 수 있습니다. 이 설정은 [`k8sobjects`][1] 수신기를 사용하여 Kubernetes 리소스 데이터를 수집하고 [Datadog Exporter][2]의 Orchestrator Explorer 기능을 통해 전달합니다.
+OTLP HTTP를 통해 Kubernetes 리소스 데이터를 Datadog으로 직접 전송하여 Kubernetes Explorer에 데이터를 채울 수 있습니다. 이 설정은 [`k8sobjects`][1] 수신기와 OpenTelemetry Collector의 OTLP HTTP 익스포터를 사용합니다.
+
+다음 단계에서는 관련 대시보드에서 사용하는 메트릭을 수집하지 않고 Kubernetes Explorer의 리소스 보기를 활성화합니다. 이 설정은 `kube-state-metrics` 또는 Prometheus 서버가 필요하지 않습니다. 해당 메트릭을 수집하고 Kubernetes Explorer에 데이터를 채우려면 대신 [OpenTelemetry로 Kubernetes 모니터링][6]을 따르세요.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### 전제 조건 {#prerequisites}
 
-- OpenTelemetry Collector Contrib [v0.154.0][3] 이상.
+- OpenTelemetry Collector Contrib [v0.159.0][3] 이상.
 - OpenTelemetry Collector [Helm 차트][4] v0.156.2 이상.
+- [Datadog API 키][15] 및 [Datadog 사이트][7].
 
 #### 제한 사항 {#limitations}
 
-오픈 소스 `k8sobjects` 수신기는 클러스터의 Kubernetes API 서버에 상당한 부하를 줄 수 있습니다.
+오픈 소스 `k8sobjects` 수신기는 클러스터의 Kubernetes API 서버에 상당한 부하를 줄 수 있습니다. [업스트림 informer 기반 마이그레이션][16]에서는 확장성 개선 작업을 추적합니다.
 
 권장 사항:
 
 - API 서버 영향을 줄이는 [스트리밍 목록 개선 사항][5]이 포함된 Kubernetes 1.33 이상을 사용합니다.
 - 더 작은 클러스터로 시작합니다. 시작점으로 리소스 유형당 객체 수를 5,000개 미만으로 제한하고 클러스터 상태를 모니터링하면서 점진적으로 확장합니다.
 
-다음 단계에서는 Kubernetes Explorer에 필요한 구성 요소를 살펴봅니다. Kubernetes 인프라 메트릭도 수집하는 전체 참조 예시는 [Kubernetes 메트릭][6]을 참조하세요.
+#### 1. Datadog 시크릿 생성 {#1-create-a-datadog-secret}
 
-#### 1. Datadog API 키 시크릿 생성 {#1-create-a-datadog-api-key-secret}
-
-Datadog API 키를 저장할 Kubernetes 시크릿을 생성합니다.
+Datadog API 키와 사이트를 설정한 다음, Kubernetes 시크릿을 생성합니다. 이 단계에서는 시크릿과 Collector 모두에 `default` 네임스페이스를 사용합니다.
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+export DD_SITE="{{< region-param key="dd_site" >}}"
+
+kubectl create secret generic datadog-secret \
+  --namespace default \
+  --from-literal="api-key=$DD_API_KEY" \
+  --from-literal="dd-site=$DD_SITE"
 ```
 
 #### 2. 클러스터 Collector 구성 {#2-configure-the-cluster-collector}
 
-이 설정은 OTel Collector를 Kubernetes Deployment로 배포합니다. `deployment-collector.yaml` 파일을 생성하여 다음 구성 블록을 포함하거나 기존 OpenTelemetry Collector 값 파일에 병합합니다.
+다음의 전체 Helm 값을 사용하여 `deployment-collector.yaml`을 생성합니다. `<YOUR_CLUSTER_NAME>` 항목을 클러스터 이름으로 바꿉니다.
 
-##### Collector 이미지 및 모드 {#collector-image-and-mode}
-
-Contrib 배포를 사용하여 Collector를 단일 복제본 Deployment로 실행하도록 설정합니다.
+이 구성은 하나의 Collector를 Deployment로 실행합니다. 클러스터 이름을 명시적으로 설정하므로 클라우드 공급자 탐지는 필요하지 않습니다.
 
 ```yaml
 mode: deployment
@@ -120,7 +124,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.154.0
+  tag: 0.159.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -129,13 +133,16 @@ extraEnvs:
       secretKeyRef:
         name: datadog-secret
         key: api-key
-```
+  - name: DD_SITE
+    valueFrom:
+      secretKeyRef:
+        name: datadog-secret
+        key: dd-site
+  - name: K8S_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
 
-##### Kubernetes 객체 수집 {#kubernetes-objects-collection}
-
-`kubernetesObjects` [프리셋][4]은 Kubernetes Explorer를 채우는 데 필요한 서비스 계정, RBAC 권한 및 `k8sobjects` 수신기 기본값을 자동으로 프로비저닝합니다. Kubernetes Explorer에 필요한 수신기(`interval`)를 재정의(`3m`)합니다.
-
-```yaml
 presets:
   kubernetesObjects:
     enabled: true
@@ -145,79 +152,48 @@ config:
   receivers:
     k8sobjects:
       interval: 3m
-```
 
-##### Datadog Exporter {#datadog-exporter}
-
-Datadog Exporter에서 `orchestrator_explorer` 옵션을 활성화합니다. 이 설정은 Kubernetes 객체 데이터를 Kubernetes Explorer로 보냅니다. `<YOUR_DATADOG_SITE>` 항목을 [Datadog 사이트][7]로 바꿉니다.
-
-```yaml
-config:
-  exporters:
-    datadog:
-      api:
-        site: <YOUR_DATADOG_SITE>
-        key: ${env:DD_API_KEY}
-      orchestrator_explorer:
-        enabled: true
-```
-
-##### 프로세서 및 파이프라인 {#processors-and-pipeline}
-
-클러스터 UID와 이름을 탐지하려면 [`resourcedetection`][8] 프로세서를 추가합니다.
-
-- 클러스터 UID(`k8s.cluster.uid`)를 탐지하려면 `k8s_api` 탐지기가 필요합니다.
-- 클러스터 이름 탐지는 클라우드 공급자에 따라 다릅니다. 지원되는 공급자(EKS, AKS, GCP) 및 필요한 권한은 [`resourcedetection` 프로세서 문서][8]를 확인합니다.
-- 공급자가 지원되지 않는 경우 `resource/add-cluster-name` 프로세서를 사용하여 클러스터 이름을 수동으로 설정합니다. `<YOUR_CLUSTER_NAME>` 항목을 클러스터 이름으로 바꿉니다.
-
-그런 다음 `logs` 파이프라인에서 구성 요소를 연결합니다.
-
-다음 예시는 두 가지 접근 방식을 보여줍니다. EKS, AKS 또는 GCP에서 실행하는 경우 클라우드 공급자 예시를 사용합니다. 공급자가 지원되지 않는 경우 수동 대체를 사용합니다.
-
-**클라우드 공급자 탐지(EKS 예시):**
-
-```yaml
   processors:
-    resourcedetection:
-      detectors: [k8s_api, eks]
-      override: false
-      eks:
-        resource_attributes:
-          k8s.cluster.name:
-            enabled: true
-
-  service:
-    pipelines:
-      logs:
-        receivers: [k8sobjects]
-        processors: [resourcedetection]
-        exporters: [datadog]
-```
-
-`eks` 항목을 공급자의 탐지기(`aks`, `gcp`)로 바꿉니다. 공급자별 구성은 [`resourcedetection` 프로세서 문서][8]를 참조합니다.
-
-**수동 대체:**
-
-`resourcedetection` 프로세서가 클라우드 공급자를 지원하지 않는 경우 클러스터 이름을 수동으로 설정합니다. `<YOUR_CLUSTER_NAME>` 항목을 클러스터 이름으로 바꿉니다.
-
-```yaml
-  processors:
-    resourcedetection:
+    resource_detection:
       detectors: [k8s_api]
       override: false
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
-          value: <YOUR_CLUSTER_NAME>
+          value: "<YOUR_CLUSTER_NAME>"
           action: upsert
+
+  exporters:
+    otlp_http:
+      endpoint: https://otlp.${env:DD_SITE}
+      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
+      headers:
+        dd-api-key: ${env:DD_API_KEY}
+      compression: zstd
+      compression_params:
+        level: 3
+      sending_queue:
+        batch:
+          sizer: bytes
+          min_size: 2097152
+          max_size: 4194304
 
   service:
     pipelines:
       logs:
         receivers: [k8sobjects]
-        processors: [resourcedetection, resource/add-cluster-name]
-        exporters: [datadog]
+        processors: [resource_detection, resource/add-cluster-name]
+        exporters: [otlp_http]
 ```
+
+`kubernetesObjects` 프리셋은 수신기, 서비스 계정 및 RBAC 권한을 구성합니다. `3m` 수집 간격과 `k8s_api` 탐지기를 유지합니다. 탐지기는 `K8S_NODE_NAME`을 사용하여 클러스터 UID를 식별합니다. `logs` 파이프라인은 OTLP를 통해 Kubernetes 리소스 객체를 전송하며, 애플리케이션 로그는 수집하지 않습니다.
+
+##### 자동 클러스터 이름 탐지(선택 사항) {#automatic-cluster-name-detection-optional}
+
+자동 클러스터 이름 탐지를 선호하는 경우, 배포하기 전에 `deployment-collector.yaml`에서 다음 변경 사항을 적용합니다.
+
+1. 공급자의 탐지기를 `resource_detection.detectors`에 추가하고 `k8s_api`를 유지합니다. [EKS][12], [AKS][13] 또는 [GKE][14]에 대한 구성 및 권한 지침을 따르고 `k8s.cluster.name` 리소스 속성을 활성화합니다.
+2. `resource/add-cluster-name`을 `config.processors` 및 `logs` 파이프라인의 `processors` 목록 모두에서 제거합니다.
 
 #### 3. Helm으로 배포 {#3-deploy-with-helm}
 
@@ -228,6 +204,7 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 helm repo update
 
 helm install deployment-collector open-telemetry/opentelemetry-collector \
+  --namespace default \
   --values ./deployment-collector.yaml
 ```
 
@@ -237,7 +214,9 @@ helm install deployment-collector open-telemetry/opentelemetry-collector \
 
 #### 5. Kubernetes Explorer와 로그, 메트릭 및 트레이스 연결(선택 사항) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
-Kubernetes 리소스와 관련 로그, 메트릭 및 트레이스 간에 이동하려면 기존 수집기 파이프라인에 [`k8sattributes`][10] 및 [`resourcedetection`][8] 프로세서를 추가합니다. `resourcedetection` 구성은 위의 [프로세서 및 파이프라인](#processors-and-pipeline)을 참조하세요.
+이 단계는 애플리케이션 텔레메트리를 수신하는 Collector에 적용되며, 위에서 언급한 Explorer 전용 Collector에는 적용되지 않습니다. 해당 텔레메트리를 Kubernetes 리소스와 연관시키려면 [`k8sattributes`][10] 및 [`resourcedetection`][8] 프로세서를 해당 Collector의 파이프라인에 추가하세요. Explorer Collector와 동일한 클러스터 이름을 사용하세요.
+
+다음 조각은 프로세서 구성을 보여줍니다. 애플리케이션 텔레메트리 파이프라인의 기존 수신기, 익스포터 및 프로세서를 유지하고 각 파이프라인에서 `...`을 다른 프로세서로 교체하세요.
 
 ```yaml
 processors:
@@ -281,28 +260,34 @@ service:
       processors: [k8sattributes, resourcedetection, ...]
 ```
 
-전체 참조 예시는 [DaemonSet 수집기 구성][11]을 참조하세요.
+전체 애플리케이션 텔레메트리 Collector 예시는 [DaemonSet Collector 구성][11]을 참조하세요.
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [4]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
-[6]: /ko/opentelemetry/integrations/kubernetes_metrics/#setup
+[6]: /ko/containers/kubernetes/opentelemetry/#setup
 [7]: /ko/getting_started/site/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [9]: https://app.datadoghq.com/orchestration/overview
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
 [11]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#amazon-eks
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
+[15]: /ko/account_management/api-app-keys/#api-keys
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
 
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
 
 Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kubernetes Explorer를 채울 수 있습니다.
 
+<div class="alert alert-info">이 탭의 참조 구성은 Datadog Exporter를 사용합니다. 새 배포의 경우 <strong>OpenTelemetry Collector</strong> 탭을 사용하여 Kubernetes 리소스 데이터를 OTLP HTTP를 통해 Datadog으로 직접 전송하세요.</div>
+
 [`opentelemetry-kube-stack`][1] Helm 차트는 OpenTelemetry Operator를 설치하고 수집기를 `OpenTelemetryCollector` 사용자 지정 리소스(CR)로 관리합니다. Datadog은 두 개의 수집기를 구성하는 참조 [`values.yaml`][2]를 유지 관리합니다.
 
-- **`cluster`** (Deployment): kube-state-metrics를 수집하고, Kubernetes 객체를 감시하며, `orchestrator_explorer`를 활성화하여 Kubernetes Explorer를 채웁니다.
+- **`cluster`**(Deployment): kube-state-metrics를 수집하고, Kubernetes 객체를 감시하며, `orchestrator_explorer`를 활성화하여 Kubernetes Explorer를 채웁니다.
 - **`daemon`** (DaemonSet): 호스트 및 kubelet 메트릭을 수집하고 애플리케이션 텔레메트리 데이터를 위한 OTLP 엔드포인트를 노출합니다.
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">이 기능은 다음에서는 사용할 수 없습니다 {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
@@ -324,7 +309,7 @@ Datadog Agent 대신 `opentelemetry-kube-stack` Helm 차트를 사용하여 Kube
 
 #### 빠른 시작(대화형 설치 프로그램) {#quickstart-interactive-installer}
 
-[`opentelemetry-examples`][6] 저장소는 아래의 모든 단계를 처리하는 대화형 설치 프로그램을 제공합니다. `guides/kubernetes/configuration/opentelemetry-kube-stack/`에서:
+[`opentelemetry-examples`][6] 리포지토리는 아래의 모든 단계를 처리하는 대화형 설치 프로그램을 제공합니다. `guides/kubernetes/configuration/opentelemetry-kube-stack/`에서:
 
 ```sh
 ./install
@@ -508,7 +493,7 @@ clusterAgent:
 
 {{< img src="infrastructure/livecontainers/orch_ex_replicasets.png" alt="Orchestrator Explorer가 요약 모드에서 Workloads > Replica Sets를 표시하도록 열렸습니다." style="width:80%;">}}
 
-#### 기능 및 패싯별로 그룹화 {#group-by-functionality-and-facets}
+#### 그룹화 기능 및 패싯 {#group-by-functionality-and-facets}
 
 태그, Kubernetes 레이블 또는 Kubernetes 주석별로 포드를 그룹화하여 정보를 더 빠르게 찾을 수 있는 집계된 조회를 확인합니다. 페이지 오른쪽 상단에 있는 '그룹화(Group by)' 막대를 사용하거나 특정 태그 또는 레이블을 클릭하고 아래와 같이 컨텍스트 메뉴에서 그룹화 기능을 찾아 그룹화를 수행할 수 있습니다.
 
@@ -552,7 +537,7 @@ clusterAgent:
 * {{< ui >}}Processes{{< /ui >}}: 이 리소스의 컨테이너에서 실행 중인 모든 프로세스를 조회합니다.
 * {{< ui >}}Network{{< /ui >}}: 소스, 대상, 전송 및 수신 볼륨, 처리량 필드를 포함하여 컨테이너 또는 리소스의 네트워크 성능을 조회합니다. {{< ui >}}Destination{{< /ui >}} 필드를 사용하여 `DNS` 또는 `ip_type`과 같은 태그로 검색하거나, 이 조회에서 {{< ui >}}Group by{{< /ui >}} 필터를 사용하여 `pod_name` 또는 `service`와 같은 태그별로 네트워크 데이터를 그룹화할 수 있습니다.
 * [**이벤트**][5]: 리소스에 대한 모든 Kubernetes 이벤트를 조회합니다.
-* {{< ui >}}Monitors{{< /ui >}}: 이 리소스에 대해 태그가 지정되거나, 범위가 지정되거나, 그룹화된 모니터를 조회합니다.
+* {{< ui >}}Monitors{{< /ui >}}: 이 리소스에 대해 태그가 지정되거나, 범위가 지정되거나, 그룹화된 모니터링을 조회합니다.
 
 이 리소스에 대한 자세한 대시보드를 보려면 이 패널의 오른쪽 상단에 있는 대시보드 보기를 클릭합니다.
 
@@ -651,7 +636,7 @@ app_name:(web-server OR database OR event-consumer)
 
 ### 추출된 태그 {#extracted-tags}
 
-Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 그룹화 요구 사항에 도움이 될 수 있는 리소스 속성을 기반으로 생성된 태그를 삽입합니다. 이러한 태그는 관련이 있을 때 조건부로 리소스에 추가됩니다.
+Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 그룹화 요구 사항에 도움이 될 수 있는 리소스 속성을 기반으로 생성된 태그를 주입합니다. 이러한 태그는 관련이 있을 때 조건부로 리소스에 추가됩니다.
 
 #### 모든 리소스 {#all-resources}
 
@@ -687,7 +672,7 @@ Datadog Agent 내에서 [구성][7]한 태그 외에도, Datadog은 검색 및 �
 - 'XYZ' 배포의 일부인 포드에는 `kube_deployment:xyz` 태그가 지정됩니다.
 - 서비스 'A'를 가리키는 인그레스에는 `kube_service:a` 태그가 지정됩니다.
 
-'상위' 리소스에서 생성된 리소스에는 `kube_ownerref_kind` 및 `kube_ownerref_name` 태그(예: 포드 및 작업)가 지정됩니다.
+'상위' 리소스에서 생성된 리소스에는 `kube_ownerref_kind` 및 `kube_ownerref_name` 태그가 지정됩니다(예: 포드 및 작업).
 
 > **팁:** 필터 쿼리 자동 완성 기능을 활용하여 사용 가능한 관련 리소스 태그를 확인하세요. `kube_` 항목을 입력하고 어떤 결과가 제안되는지 확인하세요.
 
@@ -770,10 +755,10 @@ CPU 메트릭은 코어 수로 저장됩니다.
 
 백분율(`*_pct_*`)은 부동 소수점으로 저장되며, `0.0`은 0%, `1.0`은 100%입니다. 값은 표시된 두 메트릭의 비율입니다. 예를 들어 `cpu_usage_pct_limits_avg15`는 `usage / limits`의 값입니다. 요청의 CPU 사용률과 같은 메트릭 값은 100%를 초과할 수 있습니다.
 
-## 참고 사항 및 이슈 {#notes-and-known-issues}
+## 참고 사항 및 알려진 문제 {#notes-and-known-issues}
 
 * 데이터는 일정한 간격으로 자동 업데이트됩니다.
-* 1000개 이상의 배포 또는 레플리카셋이 있는 클러스터에서는 Cluster Agent의 CPU 사용량이 증가할 수 있습니다. Helm 차트에서 컨테이너 스크러빙을 비활성화하는 옵션이 있습니다. 자세한 내용은 [Helm 차트 저장소][11]를 참조하세요.
+* 1000개 이상의 배포 또는 레플리카셋이 있는 클러스터에서는 Cluster Agent의 CPU 사용량이 증가할 수 있습니다. Helm 차트에서 컨테이너 스크러빙을 비활성화하는 옵션이 있습니다. 자세한 내용은 [Helm 차트 리포지토리][11]를 참조하세요.
 
 ## 추가 자료 {#further-reading}
 
