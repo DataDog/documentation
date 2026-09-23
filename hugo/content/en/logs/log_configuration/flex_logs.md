@@ -78,6 +78,7 @@ Compute is the querying capacity to run queries for Flex Logs. It is used when q
 
 - Starter
 - Extra small (XS)
+- Extra small plus (XS+)
 - Small (S)
 - Medium (M)
 - Large (L)
@@ -104,12 +105,13 @@ The number of logs stored in the Flex tier has the largest impact on the size ne
 | ----------------------------------------- | ------------------------ |
 | Starter                                   | < 10 billion             |
 | Extra Small (XS)                          | 10 - 50 billion          |
-| Small (S)                                 | 50 - 200 billion         |
+| Extra Small Plus (XS+)                    | 50 - 100 billion          |
+| Small (S)                                 | 100 - 200 billion         |
 | Medium (M)                                | 200 - 500 billion        |
 | Large (L)                                 | 500 billion - 1 trillion |
 | Contact your [Customer Success Manager][7]| 1T+                      |
 
-Scalable (XS, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starter is billed at a bundled storage+compute rate. See the [pricing page][6] for more information.
+Scalable (XS, XS+, S, M, L) compute tiers are billed at a flat rate. Flex Logs Starter is billed at a bundled storage+compute rate. See the [pricing page][6] for more information.
 
 ## Enable and disable Flex Logs
 
@@ -123,7 +125,7 @@ To enable Flex Logs:
 1. Navigate to the [Flex Logs Control][5] page.
 1. Select {{< ui >}}Compute Type{{< /ui >}}.
     - Datadog recommends the {{< ui >}}Starter{{< /ui >}} compute size for organizations with less than 10B logs stored.
-    - Datadog recommends the scalable compute options (For example, XS, S, M, and L) for organizations with greater than 10B (or 2-3B per month) of logs stored.
+    - Datadog recommends the scalable compute options (For example, XS, XS+, S, M, and L) for organizations with greater than 10B (or 2-3B per month) of logs stored.
 1. Select the compute size you want. See [Determine the compute size that you need](#determine-the-compute-size-that-you-need) for more information.
 1. Click {{< ui >}}Enable Flex Logs{{< /ui >}}.
 
@@ -137,7 +139,7 @@ To disable Flex Logs:
 
 ## Upgrade and downgrade Flex Logs compute
 
-If you select one of the scalable compute options for Flex Logs (for example, XS, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
+If you select one of the scalable compute options for Flex Logs (for example, XS, XS+, S, M, or L), you can upgrade or downgrade your compute size on the [Flex Logs Control][5] page.
 
 **Notes**:
 - Only compute options on your contract are made available. Upgrading from Flex Starter to a scalable compute option does not apply the change automatically. To enable the new size, go to the [Flex Logs Controls][5] page, select the desired compute option, then click {{< ui >}}Save{{< /ui >}}.
@@ -227,7 +229,7 @@ The following list is an example of log sources that are good candidates for sen
 
 <div class="alert alert-danger">Each organization can only use one compute size at a time. Compute sizes cannot be shared across organizations, and starter and scalable compute cannot be used simultaneously within the same organization.</div>
 
-For each organization where you want to use Flex Logs, you must enable a compute size. Datadog recommends Flex Logs scalable compute sizes (XS, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
+For each organization where you want to use Flex Logs, you must enable a compute size. Datadog recommends Flex Logs scalable compute sizes (XS, XS+, S, M, and L) for organizations with large log volumes. In a multi-organization setup, there are often many organizations with lower log volumes, so for these organizations, Datadog recommends the Starter compute size for Flex Logs.
 
 ### When the compute limit is reached
 

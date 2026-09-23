@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -21,7 +24,9 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. Use `toolsets=all` to enable all generally available toolsets (best for clients that support tool filtering to reduce context window usage).
+
+For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -153,23 +158,17 @@ Lists available metrics, with options for filtering and metadata.
 - List CPU-related metrics for our infrastructure.
 - Find metrics tagged with `service:api`.
 
-### `search_datadog_services`
+### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Catalog with details and team information.
+Searches Datadog's Catalog for service identity, ownership and upstream and downstream dependencies.
 
-- Show me all services in our microservices architecture.
-- List services owned by the platform team.
 - Find services related to payment processing.
-
-### `search_datadog_service_dependencies`
-*Toolset: **core***\
-*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
-Retrieves service dependencies (upstream/downstream) and services owned by a team.
-
+- List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
-- List all services owned by the platform team.
+
+<div class="alert alert-info"><code>search_datadog_services</code> and <code>search_datadog_service_dependencies</code> tools are deprecated, use <code>search_datadog_entities</code> instead.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
@@ -341,6 +340,14 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
 
+### `apm_get_service_health`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
+
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
+
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -381,6 +388,37 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
+## Assistant
+
+Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
+
+**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_assistant`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+
+- Ask the assistant what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask the assistant for next steps.
+- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+
+### `get_assistant_conversation_history`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full conversation history for a specific assistant conversation by its ID.
+
+- Get the full conversation history for conversation `abc-123-def`.
+- Show me everything the assistant said in my last conversation about the payment outage.
+
+### `list_assistant_conversations`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Lists all Datadog Assistant conversations for the current user.
+
+- List all my past conversations with the Datadog Assistant.
+- Show me my most recent assistant conversations.
+
 ## Audit Trail
 
 Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
@@ -412,23 +450,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -436,16 +476,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -454,9 +494,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -470,22 +510,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -506,20 +546,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
-
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
 
 ## Dashboards
 
@@ -783,6 +830,15 @@ Runs health checks to surface potential PostgreSQL issues such as CPU saturation
 - Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
 
+### `get_datadog_database_instance_settings`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves collected PostgreSQL configuration settings for a Database Monitoring instance, the same values shown on the Configuration tab. Returns parameters that affect performance and behavior, including memory (`shared_buffers`, `work_mem`), connections (`max_connections`), autovacuum, logging, WAL, and query planner settings. Filter by setting name to narrow results.
+
+- Show autovacuum settings for `db-prod-1`.
+- What logging settings are enabled on the payments PostgreSQL instance?
+- What is `shared_buffers` set to on `db-prod-1`?
+
 ### `get_datadog_database_query_performance`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -944,6 +1000,15 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
+
+### `manage_datadog_error_tracking_issue_links`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an Error Tracking Issue.
+
+- File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
+- Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ## Experiments
 
@@ -1190,9 +1255,71 @@ Copies an existing form, including its latest definition, into a new form with a
 
 - Clone my incident review form to create a template for next quarter.
 
+## Investigations
+
+Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
+
+<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `trigger_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation for a monitor alert. This starts an automated investigation that analyzes the alert context and provides findings and conclusions. Use `get_bits_ai_investigation` to retrieve results.
+
+- Investigate why monitor `12345` fired at event `abc123`.
+- Kick off a Bits Investigation for the CPU alert on the checkout service.
+
+### `trigger_general_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation from a text description. For best results, scope the investigation with a `service:<name>` or `host:<name>` tag. Use `get_bits_ai_investigation` to poll for results after triggering.
+
+- Investigate the latency spike on `service:checkout` since 2pm today.
+- Start an investigation into elevated error rates on `host:web-01`.
+
+### `trigger_incident_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation scoped to a Datadog incident. The investigation analyzes the incident timeline and context to provide findings and conclusions. Use `get_investigations_from_incident_id` to check for existing investigations first.
+
+- Trigger an investigation for incident `1234` to help find the root cause.
+- Start a Bits Investigation scoped to the ongoing checkout incident.
+
+### `search_investigations`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Searches Bits AI investigations by keyword or query. Returns matching investigations with their IDs, status, and summaries.
+
+- Find investigations related to the checkout service.
+- Show me all completed investigations from this week.
+
+### `get_investigations_from_incident_id`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves Bits AI investigations linked to a specific Datadog incident.
+
+- What investigations have been triggered for incident `1234`?
+- List investigation IDs linked to the payments incident.
+
+### `get_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves the status, findings, and conclusions of a Bits AI investigation.
+
+- Get the findings for investigation `abc-123-def`.
+- What did the investigation conclude about the outage?
+
+### `steer_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Sends a steering message to a running Bits AI investigation to correct, redirect, or add context. Use `get_bits_ai_investigation` first to confirm the investigation is still active.
+
+- Tell the running investigation to focus on the database layer instead.
+- Redirect investigation `abc-123-def` to also check recent deployments.
+
 ## Kubernetes
 
-Tools for searching and describing [Kubernetes][55] resources and retrieving manifests across all clusters.
+Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
 
 ### `search_datadog_k8s_resources`
 *Toolset: **kubernetes***\
@@ -1203,6 +1330,17 @@ Searches for [Kubernetes][55] resources across all clusters. Use this tool inste
 - Find deployments with in-progress rollouts in the `general2` cluster.
 - List all nodes in my cluster sorted by CPU usage.
 - Group deployments by `service` and `env` to see how my services are distributed across environments.
+
+### `analyse_datadog_k8s_rollout`
+*Toolset: **kubernetes***\
+*Permissions Required: `Hosts Read` and `Timeseries` and `Logs Read Data` and `APM Read`*\
+Assembles a [Kubernetes][55] Deployment rollout in one call: rollout status and progress, timing (ETA while the rollout is in progress, duration after it finishes), the new, previous, and old ReplicaSet split by revision, and before/after impact series (RED, resource utilization, and log counts). Identify the Deployment by its UID from a previous search or by providing resource identifiers (cluster, namespace, and resource name). Use this tool for rollout questions instead of combining `search_datadog_k8s_resources` and `describe_datadog_k8s_resource`.
+
+- Analyze the rollout of deployment `checkout-api` in cluster `prod`, namespace `default`.
+- What's the ETA for the in-progress rollout of deployment `api-server` in cluster `staging`?
+- Did the last rollout of deployment `payments` affect error rates, traffic, or resource utilization?
+
+**Note**: The tool only reports on Deployments whose `kube_rollout_status` is `inprogress`, `recentlycompleted`, or `recentlyfailed`. For other Deployments, it returns the Deployment's fields with a warning that there is no recent rollout to analyze.
 
 ### `describe_datadog_k8s_resource`
 *Toolset: **kubernetes***\
@@ -1221,6 +1359,155 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
+
+## Metrics Governance
+
+<div class="alert alert-info">The <code>metrics-governance</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
+
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
 
 ## Networks
 
@@ -1378,7 +1665,7 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 - What's the day-7 retention rate for users who joined in January?
 
 ## Profiling
-Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
 
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
@@ -1551,7 +1838,7 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 
 ## RUM
 
-Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
+Tools for [Real User Monitoring][58], including resolving applications, summarizing performance, surfacing aggregated insights for views, monitoring and managing [operations][73], exploring metrics, inspecting application configuration, managing retention filters, and managing custom RUM metrics.
 
 ### `search_rum_applications`
 *Toolset: **rum***\
@@ -1576,6 +1863,62 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
+
+### `get_rum_view_waterfall`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen. For the aggregated, cross-session view, use `get_rum_insight`.
+
+- Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
+- Why did the checkout page load with view UUID `d64b1e7c-8f2a-4c3b-9e1d-5a6b7c8d9e0f` take 12 seconds?
+
+### `search_rum_operations`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Lists the [operations][73] in your organization, including both SDK-instrumented and UI-configured operations, and resolves an operation name to its `operation_id` and `application_id`. Operations observed only through the SDK have no ID.
+
+- List the RUM operations on the "checkout-web" application.
+- Find the operation ID for the "checkout-flow" operation.
+
+### `get_rum_operation_summary`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries` or `SLOs Read` or `Monitors Read`*\
+Returns a health summary for a single operation: volume, success rate, failure breakdown by reason, latency percentiles, a per-bucket success and failure trend, and related SLOs and monitors.
+
+- Is the "checkout-flow" operation healthy over the last 24 hours?
+- Show me the p95 latency baseline and trend for the checkout operation.
+
+### `get_rum_operation_insights`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` or `Timeseries`*\
+Investigates why an operation is failing, slow, or abandoned. The `failures` mode returns top failing endpoints, custom context attributes on failed runs, and correlated crash errors. The `latency` mode compares slow and fast cohorts and returns top slow resources. The `abandonment` mode shows how often users give up instead of completing, which views and in-flight resources are involved, and where users navigate next.
+
+- Why is the "checkout-flow" operation slow over the last four hours?
+- Users are dropping out of checkout without any errors. Show me abandonment insights.
+
+### `create_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Write`*\
+Creates a UI-configured operation that tracks a user journey between a start event and a success, failure, or abandonment event, matched by search queries against RUM events. This tool does not create SDK-instrumented operations, which are defined in application code. Confirm the operation name, queries, and event types before applying.
+
+- Create an operation on "checkout-web" that starts on the `/checkout` view and succeeds on `/checkout/complete`.
+- Set up an operation for the signup flow that fails when a validation error occurs.
+
+### `update_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Updates a UI-configured operation in place. Only the fields you pass are changed, and the rest keep their current values. This tool cannot rename an operation, and does not affect SDK-instrumented operations. Confirm the change before applying.
+
+- Change the failure query on the "checkout" operation to match declined payments.
+- Add abandonment tracking to the signup operation.
+
+### `delete_rum_operation`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read` and `RUM Apps Write`*\
+Permanently deletes a UI-configured operation by ID or name. The response lists any SLOs and monitors still tagged for the operation, which are not deleted with it. Confirm the deletion before applying. This tool does not affect SDK-instrumented operations.
+
+- Delete the "legacy-checkout" operation from "checkout-web".
+- Remove the operation with ID `abc-123-def`.
 
 ### `search_rum_metrics`
 *Toolset: **rum***\
@@ -2034,6 +2377,63 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 - Summarize what happened in session `abc-123-def`.
 - Give me a play-by-play of the replay for the user who reported a checkout error.
 
+## Sheets
+
+Tools for creating, reading, updating, and deleting [Datadog spreadsheets][74].
+
+### `upsert_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Creates or updates a Datadog spreadsheet's tables, sheets, and pivots in a single call.
+
+- Create a logs table in a spreadsheet with columns for service, status, host, timestamp, and message — filter to errors only.
+- Create a pivot table with average duration by `db.statement` and service for queries over 1 second.
+- Create a spreadsheet showing monthly cloud spend broken down by provider and service, with month-over-month percentage change.
+
+### `get_datadog_spreadsheet_reference`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Returns reference documentation for building inputs to `upsert_datadog_spreadsheet`. Call this before creating or updating a spreadsheet.
+
+- Show me how to build a Datadog spreadsheet.
+- Show me how to build a tab that imports log data into a Datadog spreadsheet.
+- Show me how to format cells in a tab in a Datadog spreadsheet.
+
+### `search_datadog_spreadsheets`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Searches Datadog spreadsheets by name or owner. Returns a paginated list of spreadsheets with their IDs and names.
+
+- List the last 10 created spreadsheets.
+- List 10 spreadsheets whose name starts with "ABC".
+- Show me the last spreadsheet that I updated.
+
+### `get_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Retrieves a Datadog spreadsheet by ID. Returns tables (`tables[].id`), pivots (`pivots[].id`), and sheets (`sheets[].id`) with their configurations. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Show me the details of spreadsheet "ABC".
+- Show me the spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
+
+### `get_datadog_spreadsheet_tab_data`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and the read permission for the underlying data source (for example, `Logs Read Data` for log-backed tables)*\
+Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog spreadsheet. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
+- Get the data for tab "Pivot 1" in spreadsheet "ABC".
+- Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `delete_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Write`*\
+Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Delete spreadsheet "ABC".
+- Remove my last created spreadsheet.
+- Remove spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
+
 ## Software Delivery
 
 Tools for interacting with Software Delivery ([CI Visibility][48], [Test Optimization][24], [Code Coverage][65], and [DORA metrics][66]).
@@ -2412,16 +2812,16 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [49]: /error_tracking/
 [50]: /tracing/
 [51]: /feature_flags/
+[52]: /getting_started/profiler/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
-[60]: /security/detection_rules/
-[61]: /security/suppressions/
-[62]: /getting_started/profiler/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[60]: /security/detection_rules/
+[61]: /security/suppressions/
 [62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
@@ -2433,6 +2833,12 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [70]: /data_observability/
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
+[73]: /real_user_monitoring/operations_monitoring/
+[74]: /sheets/
+[75]: /bits_ai/bits_chat/
+[76]: /bits_ai/bits_investigation/
+[77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
 
 ## Further reading
 

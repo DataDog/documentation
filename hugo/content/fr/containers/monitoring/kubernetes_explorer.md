@@ -81,6 +81,8 @@ Pour une configuration manuelle, consultez [Configurer Kubernetes Explorer avec 
 
 Vous pouvez alimenter Kubernetes Explorer à l'aide d'un pipeline OpenTelemetry natif au lieu du Datadog Agent. Cette configuration utilise le récepteur [`k8sobjects`][1] pour collecter les données des ressources Kubernetes et les transfère via la fonctionnalité Orchestrator Explorer de [Datadog Exporter][2].
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Cette fonctionnalité n'est pas disponible pour {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+
 #### Prérequis {#prerequisites}
 
 - OpenTelemetry Collector Contrib [v0.154.0][3] ou version ultérieure.
@@ -167,7 +169,7 @@ config:
 Ajoutez un processeur [`resourcedetection`][8] pour détecter l'UID et le nom du cluster.
 
 - Le détecteur `k8s_api` est requis pour détecter l'UID du cluster (`k8s.cluster.uid`).
-- La détection du nom du cluster dépend de votre fournisseur cloud. Consultez la [documentation du processeur `resourcedetection`][8] pour connaître les fournisseurs pris en charge (EKS, AKS, GCP) et les autorisations requises.
+- La détection du nom du cluster dépend de votre fournisseur cloud. Vérifiez la [documentation du processeur `resourcedetection`][8] pour connaître les fournisseurs pris en charge (EKS, AKS, GCP) et les autorisations requises.
 - Si votre fournisseur n'est pas pris en charge, utilisez un processeur `resource/add-cluster-name` pour définir le nom du cluster manuellement. Remplacez `<YOUR_CLUSTER_NAME>` par le nom de votre cluster.
 
 Connectez ensuite les composants dans un pipeline `logs`.
@@ -303,7 +305,9 @@ Vous pouvez remplir Kubernetes Explorer en utilisant le chart Helm `opentelemetr
 Le chart Helm [`opentelemetry-kube-stack`][1] installe l'opérateur OpenTelemetry et gère les collecteurs en tant que `OpenTelemetryCollector`Custom Resources (CR). Datadog maintient une référence [`values.yaml`][2] qui configure deux collecteurs :
 
 - **`cluster`** (Deployment) : récupère les métriques kube-state-metrics, surveille les objets Kubernetes et active `orchestrator_explorer` pour remplir Kubernetes Explorer.
-- **`daemon`** (DaemonSet) : collecte les métriques de l'host et du kubelet, et expose un endpoint OTLP pour les données de télémétrie des applications.
+- **`daemon`** (DaemonSet) : collecte les métriques du host et du kubelet, et expose un endpoint OTLP pour les données de télémétrie des applications.
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Cette fonctionnalité n'est pas disponible pour {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### Prérequis {#prerequisites-1}
 
@@ -328,7 +332,7 @@ Le dépôt [`opentelemetry-examples`][6] fournit un installateur interactif qui 
 ./install
 ```
 
-L'installateur demande votre clé d'API Datadog, votre [site Datadog][7], votre plateforme Kubernetes et votre environnement de déploiement. Pour EKS, GKE et AKS, il active le préréglage de détection de ressources correspondant. Pour les autres plateformes, il demande le nom du cluster. Il crée ensuite l'espace de nom `opentelemetry-operator-system` et `datadog-secret`, installe cert-manager si nécessaire, et installe ou met à niveau le chart.
+L'installateur demande votre clé d'API Datadog, votre [site Datadog][7], votre plateforme Kubernetes et votre environnement de déploiement. Pour EKS, GKE et AKS, il active le préréglage de détection de ressources correspondant. Pour les autres plateformes, il demande le nom du cluster. Il crée ensuite l'espace de nommage `opentelemetry-operator-system` et `datadog-secret`, installe cert-manager si nécessaire, et installe ou met à niveau le chart.
 
 #### Installation avec des fichiers de valeurs {#install-with-values-files}
 
@@ -554,21 +558,21 @@ Les autres onglets comportent des informations supplémentaires permettant de r�
 
 Pour obtenir un dashboard détaillé de cette ressource, cliquez sur l'option View Dashboard en haut à droite de ce volet.
 
-{{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="Un lien vers un dashboard pod depuis la vue d’ensemble de Live Containers." style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/view-pod-dashboard.png" alt="Un lien vers un dashboard pod depuis la vue d'ensemble de Live Containers." style="width:80%;">}}
 
-### Resource Utilization {#resource-utilization}
+### Utilisation des ressources {#resource-utilization}
 
 _Pour la page Resource Utilization, consultez [Resource Utilization][6]_.
 
 Dans l'onglet Kubernetes Explorer, vous pouvez explorer une sélection de métriques d'utilisation des ressources.
 
-{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Container Resource Utilization" style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Utilisation des ressources du conteneur" style="width:80%;">}}
 
 Toutes les colonnes de cette vue peuvent être triées, ce qui vous permet d'identifier des workloads spécifiques en fonction de leur utilisation des ressources.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Colonnes triées de l'utilisation des ressources du conteneur" style="width:50%;">}}
 
-## Query filter details {#query-filter-details}
+## Détails du filtre de requête {#query-filter-details}
 
 Vous pouvez filtrer les ressources affichées en fournissant une requête dans la barre de recherche Filter by, située en haut à gauche de la page.
 
@@ -584,11 +588,11 @@ Vous pouvez utiliser plusieurs types de termes :
 
 | Type | Examples |
 |---|---|
-| **Tags**: Attached to resources by [the agent collecting them][7]. Il existe également des tags supplémentaires que Datadog génère pour les ressources Kubernetes. | `datacenter:staging`, `tag#datacenter:staging`<br>_(le `tag#` est facultatif)_ |
-| **Labels**: Extracted from [a resource's metadata][8]. Ils sont généralement utilisés pour organiser votre cluster et cibler des ressources spécifiques avec selectors. | `label#chart_version:2.1.0` |
+| **Tags** : Appliqués aux ressources par [l'Agent qui les recueille][7]. Il existe également des tags supplémentaires que Datadog génère pour les ressources Kubernetes. | `datacenter:staging`, `tag#datacenter:staging`<br>_(le `tag#` est facultatif)_ |
+| **Étiquettes** : Extraites des [métadonnées d'une ressource][8]. Elles sont généralement utilisées pour organiser votre cluster et cibler des ressources spécifiques avec des sélecteurs. | `label#chart_version:2.1.0` |
 | **Annotations** : Extraites des [métadonnées d'une ressource][9]. Elles sont généralement utilisées pour prendre en charge des outils qui aident à la gestion du cluster. | `annotation#checksum/configmap:a1bc23d4` |
-| **Metrics**: ajoutées aux ressources de workloads (pods, deployments, etc.). Vous pouvez trouver des ressources en fonction de leur utilisation. Pour voir quelles métriques sont prises en charge, consultez [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
-| **String matching**: Supported by some specific resource attributes, see below.<br>_Note : string matching does not use the key-value format, and you cannot specify the attribute to match on._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (Nom) |
+| **Métriques** : Ajoutées aux ressources de workloads (pods, déploiements, etc.). Vous pouvez trouver des ressources en fonction de leur utilisation. Pour voir quelles métriques sont prises en charge, consultez [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
+| **Correspondance de chaîne** : Prise en charge par certains d'attributs de ressource spécifiques (voir ci-dessous).<br>_Remarque : cette fonctionnalité ne repose pas sur un format clé-valeur, et vous ne pouvez pas spécifier l'attribut de votre choix._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (Nom) |
 | **Champs** : Extraits des [métadonnées d'une ressource][10] ou des champs indexés des ressources personnalisées. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
 
 >  ***Remarque** : Vous pourriez trouver les mêmes paires clé-valeur à la fois comme tag et comme étiquette (ou annotation)a; cela dépend de la configuration de votre cluster.*
@@ -603,25 +607,25 @@ Les attributs de ressource suivants sont pris en charge dans la **Correspondance
 
 Vous n'avez pas besoin de spécifier une clé pour rechercher une ressource par nom ou par IP. Les guillemets ne sont pas requis, sauf si votre recherche de chaîne inclut certains caractères spéciaux.
 
-#### Comparators {#comparators}
+#### Comparateurs {#comparators}
 
-Tous les termes prennent en charge l'opérateur d'égalité `:`. [Metric value](#resource-utilization-filters) terms support numeric comparisons as well:
+Tous les termes prennent en charge l'opérateur d'égalité `:`. Les termes de [valeur métrique](#resource-utilization-filters) prennent également en charge les comparaisons numériques :
 
-- `:>` Greater than (for example, `metric#cpu_usage_avg15:>0.9`)
-- `:>=` Greater than or equal
-- `:<` Less than
-- `:<=` Less than or equal
+- `:>` Supérieur à (par exemple, `metric#cpu_usage_avg15:>0.9`)
+- `:>=` Supérieur ou égal à
+- `:<` Inférieur à
+- `:<=` Inférieur ou égal à
 
-#### Operators {#operators}
+#### Opérateurs {#operators}
 
 Pour combiner plusieurs termes dans une requête complexe, vous pouvez utiliser l'un des opérateurs booléens suivants (sensibles à la casse) :
 
-| Operator | Description | Example |
+| Opérateur | Description | Exemple |
 |---|---|---|
-| `AND` | **Intersection**: Both terms are in the selected events (if nothing is added, AND is taken by default) | `a AND b`   |
-| `OR` | **Union**: Either term is contained in the selected events                                             | `a OR b`   |
-| `NOT` / `-` | **Exclusion**: Le terme suivant n'est PAS dans l'événement (s'applique à chaque recherche dans le texte brut) | `a AND NOT b` or<br>`a AND -b` |
-|  `( )` | **Regroupement :** Spécifiez comment regrouper les termes logiquement. | `a AND (b OR c)` ou<br>`(a AND b) or c` |
+| `AND` | **Intersection** : Les deux termes figurent dans les événements sélectionnés (si aucun opérateur n'est ajouté, AND est utilisé par défaut) | `a AND b`   |
+| `OR` | **Union** : Un des deux termes figure dans les événements sélectionnés                                             | `a OR b`   |
+| `NOT` / `-` | **Exclusion** : Le terme suivant n'est PAS dans l'événement (s'applique à chaque recherche dans le texte brut) | `a AND NOT b` or<br>`a AND -b` |
+|  `( )` | **Regroupement :** Spécifiez comment regrouper les termes logiquement. | `a AND (b OR c)` ou <br>`(a AND b) or c` |
 
 ##### `OR` raccourci de valeur {#or-value-shorthand}
 
@@ -639,17 +643,17 @@ app_name:(web-server OR database OR event-consumer)
 
 ### Wildcards {#wildcards}
 
-Vous pouvez utiliser `*` wildcards dans un terme pour filtrer par correspondances partielles, aussi bien pour values que pour keys. Quelques exemples :
+Vous pouvez utiliser des wildcards `*` dans un terme pour filtrer par correspondances partielles, aussi bien pour les valeurs que pour les clés. Quelques exemples :
 
-- `kube_job:stats-*`: Find all resources with a `kube_deployment` tag value starting with `stats-`.
-- `pod_name:*canary`: Find all resources with a `pod_name` value ending in `canary`.
+- `kube_job:stats-*` : Trouver toutes les ressources avec une valeur de tag `kube_deployment` commençant par `stats-`.
+- `pod_name:*canary` : Trouver toutes les ressources avec une valeur `pod_name` se terminant par `canary`.
 - `label#release:*` : Trouver toutes les ressources avec un label `release`, quelle que soit sa valeur.
-- `-label#*.datadoghq.com/*` : Trouver les ressources qui n'ont aucun Datadog scoped label.
+- `-label#*.datadoghq.com/*` : Trouver les ressources qui n'ont aucun label Datadog.
 - `kube_*:*stats*canary` : Trouver les ressources qui ont des tags de ressources associés (`kube_*`), avec `stats` au milieu de la valeur, se terminant également par `canary`.
 
 ### Tags extraits {#extracted-tags}
 
-En plus des tags que vous avez [configurés][7] dans votre agent Datadog, Datadog injecte des tags générés basés sur les attributs des ressources qui peuvent répondre à vos besoins de recherche et de regroupement. Ces tags sont ajoutés aux ressources de manière conditionnelle, lorsqu'ils sont pertinents.
+En plus des tags que vous avez [configurés][7] dans votre Datadog Agent, Datadog injecte des tags générés basés sur les attributs des ressources qui peuvent répondre à vos besoins de recherche et de regroupement. Ces tags sont ajoutés aux ressources de manière conditionnelle, lorsqu'ils sont pertinents.
 
 #### Toutes les ressources {#all-resources}
 
@@ -683,7 +687,7 @@ Selon les étiquettes appliquées à la ressource, les tags suivants sont égale
 Les ressources associées se verront attribuer mutuellement des tags. Quelques exemples :
 
 - Un pod qui fait partie du déploiement « XYZ » aura un tag `kube_deployment:xyz`.
-- Une ingress qui pointe vers le service « A » aura un tag `kube_service:a`.
+- Une entrée qui pointe vers le service « A » aura un tag `kube_service:a`.
 
 Les ressources générées à partir de ressources « parent » auront les tags `kube_ownerref_kind` et `kube_ownerref_name` (tels que les pods et les jobs).
 
@@ -721,7 +725,7 @@ Certaines ressources possèdent des tags spécifiques qui sont extraits en fonct
 |---|---|
 | **Cluster** | `api_server_version`<br>`kubelet_version` |
 | **Custom Resource Definitions** &<br>**Custom Resources** | `kube_crd_kind`<br>`kube_crd_group`<br>`kube_crd_version`<br>`kube_crd_scope`<br>`kube_crd_resource` |
-| **Namespace** | `phase` |
+| **Espace de nommage** | `phase` |
 | **Nœud** | `kube_node_unschedulable`<br>`kube_node_kubelet_version`<br>`kube_node_kernel_version`<br>`kube_node_runtime_version`<br>`eks_fargate_node`<br>`node_schedulable`<br>`node_status` |
 | **Volume persistant** | `kube_reclaim_policy`<br>`kube_storage_class_name`<br>`pv_type`<br>`pv_phase` |
 | **Réclamation de volume persistant** | `pvc_phase`<br>`kube_storage_class_name` |
@@ -773,7 +777,7 @@ Les pourcentages (`*_pct_*`) sont stockés sous forme de nombres à virgule flot
 * Les données sont mises à jour automatiquement à intervalles constants.
 * Dans les clusters avec plus de 1000 déploiements ou ReplicaSets, vous pourriez remarquer une utilisation accrue du processeur par le Cluster Agent. Il existe une option pour désactiver le nettoyage des conteneurs dans le chart Helm. Consultez [le dépôt du chart Helm][11] pour plus de détails.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

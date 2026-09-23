@@ -54,13 +54,13 @@ You may create a test using one of the following options:
 ### Create a test from a template
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Alert Conditions, and Steps.
-  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
   3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Mobile Application Test.<br /><br>
        {{< img src="/mobile_app_testing/templates_mobile_app.mp4" alt="Video of Mobile Application test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
-  1. Click the {{< ui >}}+{{< /ui >}} template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [{{< ui >}}Applications List{{< /ui >}} section][2] on the [{{< ui >}}Synthetic Monitoring & Continuous Testing Settings{{< /ui >}} page][3]. 
+  1. Click the {{< ui >}}\+{{< /ui >}} template, then select a mobile application from the dropdown menu. If you haven't created one already, create a mobile application in the [{{< ui >}}Applications List{{< /ui >}} section][2] on the [{{< ui >}}Synthetic Monitoring & Continuous Testing Settings{{< /ui >}} page][3]. 
   1. Select a {{< ui >}}version{{< /ui >}} or click {{< ui >}}Always run the latest version{{< /ui >}} to use the latest version of your mobile application whenever your test is run.
   1. Add a {{< ui >}}name{{< /ui >}} for your test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}} that relate to your test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.

@@ -4,12 +4,16 @@ aliases:
 - /bits_ai/bits_ai_sre/help_bits_learn/
 - /bits_ai/bits_investigation/help_bits_learn/
 - /bits_ai/bits_ai_sre/knowledge_sources/
-
+further_reading:
+- link: "/bits_ai/bits_investigation/improve_accuracy/"
+  tag: "Documentation"
+  text: "Improve Bits Investigation Accuracy"
 ---
 
-Bits Investigation improves over time by combining three distinct sources of knowledge:
+Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
+- [**Skills:**](#skills) Reusable procedures Bits can invoke during an investigation
 - [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks
@@ -30,9 +34,6 @@ To maximize the value of this integration, document the services, dependencies, 
 {{< img src="bits_ai/optimization_example.png" alt="Example monitor with optimization steps applied" style="width:100%;" >}}
 
 ## Bits.md
-
-<div class="alert alert-info">
-Bits.md is in Preview for all customers.</div>
 
 You can proactively guide how Bits investigates your environment by creating a `bits.md` file at [{{< ui >}}Bits Investigation{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits.md{{< /ui >}}][2].
 
@@ -119,6 +120,10 @@ If the conclusion was inaccurate, provide Bits with the correct root cause, high
 All positive feedback, as well as any negative feedback that includes details provided in the Bits' chat, creates a **memory**. Bits dynamically selects which memories to use in future investigations to improve its performance. It applies past corrections in similar contexts, reuses effective queries, and refines how it prioritizes investigative steps. Over time, this enables Bits to adapt to your environment, becoming more accurate and efficient with each investigation.
 
 To manage memories, including viewing and deleting them, go to the {{< ui >}}Memories{{< /ui >}} column of the [Monitor Management][1] page.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md

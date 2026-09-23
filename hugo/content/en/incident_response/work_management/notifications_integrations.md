@@ -14,6 +14,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/forms-case-management-requests/"
   tag: "Blog"
   text: "Simplify request flows with Datadog Forms and Case Management"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
 ---
 
 ## Overview

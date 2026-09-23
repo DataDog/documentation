@@ -44,13 +44,13 @@ You may create a test using one of the following options:
 ### Create a test from a template
 
   1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, {{< ui >}}Steps{{< /ui >}}, and optionally {{< ui >}}Variables{{< /ui >}}.
-  2. Click {{< ui >}}+Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+  2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the configuration page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
   3. Click {{< ui >}}Save & Quit{{< /ui >}} in the upper right hand corner to submit your Browser Test.<br /><br>
        {{< img src="/synthetics/browser_tests/synthetics_templates_browser.mp4" alt="Video of Synthetics Browser Test landing page with templates" video="true" >}}
 
 ### Build a test from scratch
 
-  1. Click the {{< ui >}}+{{< /ui >}} template to start a new Browser Test from scratch.
+  1. Click the {{< ui >}}\+{{< /ui >}} template to start a new Browser Test from scratch.
   1. Enter a {{< ui >}}Starting URL{{< /ui >}}: The URL from which your browser test starts the scenario.
   1. Add a {{< ui >}}name{{< /ui >}}: The name of your browser test.
   1. Select {{< ui >}}environment and additional tags{{< /ui >}}: Set the `env` and related tags attached to your browser test. Use the `<KEY>:<VALUE>` format to filter on a `<VALUE>` for a given `<KEY>`.

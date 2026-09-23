@@ -7,9 +7,6 @@ This guide describes how to set up the Workload Protection eBPF-less solution fo
 
 This guide also describes some advantages of the ptrace solution.
 
-<div class="alert alert-info">Threat Detection for Linux Without eBPF Support is in Preview. Reach out to your Datadog representative to sign up.</div>
-
-
 ## Summary of Agent options
 
 Workload Protection includes two Agent options for threat detection and response:

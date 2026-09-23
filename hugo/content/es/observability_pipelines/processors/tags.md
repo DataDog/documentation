@@ -15,7 +15,9 @@ title: Procesador de etiquetas
 
 ## Descripción general {#overview}
 
-Para los registros provenientes del Datadog Agent, use este procesador para excluir o incluir etiquetas específicas en la matriz de etiquetas (`ddtags`) de Datadog. Las etiquetas que se excluyen o no se incluyen se descartan y pueden reducir el volumen de registros salientes.
+Para los registros que provienen del Datadog Agent, use este procesador para excluir o incluir etiquetas específicas en la matriz de etiquetas (`ddtags`) de Datadog. Las etiquetas que se excluyen o no se incluyen se descartan y pueden reducir el volumen de registros salientes.
+
+**Nota**: Este procesador solo conserva o descarta etiquetas que ya existen en la matriz `ddtags`. No agrega nuevas etiquetas ni atributos a un registro. Para agregar un nuevo atributo a un registro, use el procesador [Editar campos][3].
 
 ## Configuración {#setup}
 
@@ -29,3 +31,4 @@ Para configurar el procesador:
 
 [1]: /es/getting_started/tagging/#define-tags
 [2]: /es/observability_pipelines/search_syntax/logs/
+[3]: /es/observability_pipelines/processors/edit_fields/

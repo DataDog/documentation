@@ -187,7 +187,7 @@ A scope that is not allowed in Datadog is never granted, regardless of what the 
 
 ## Add Datadog as a connector in Claude
 
-1. In Claude, click the {{< ui >}}+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
+1. In Claude, click the {{< ui >}}\+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 2. Find **Datadog** in the directory and enable the connector.
 3. Complete the sign-in flow when prompted.
 

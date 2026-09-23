@@ -43,7 +43,7 @@ Rollups can be longer, such as 1 hour, to see costs on an hourly basis. Hourly c
 ## Real-time Kubernetes allocation
 
 Similar to the existing container cost allocation, EC2 instance costs are broken down into the Kubernetes pods that ran on them. All tags used on your pod are available in real time, including **custom tags on your pods**, such as team, service or env, and **out-of-the-box Kubernetes tags**:
-- `allocated_spend_type`
+- `allocated_spend_type`, which splits compute costs into CPU and memory used by a workload (`usage`), requested by a workload but not used (`workload_idle`), and not reserved by any workload (`cluster_idle`)
 - `kube_cluster_name`
 - `kube_namespace`
 - `kube_deployment`
@@ -51,6 +51,8 @@ Similar to the existing container cost allocation, EC2 instance costs are broken
 - `pod_name`
 - `pod_phase`
 - `pod_status`
+
+Nodes that are idle or running no pods keep their Kubernetes tags, such as `kube_cluster_name` and `orchestrator:kubernetes`, so that you can group and view the cost of clusters that are completely idle.
 
 ## Tags
 
