@@ -232,7 +232,7 @@ New tag keys receive a 15-day grace period before the rule evaluates their usage
 
 After establishing the Golden Rule, create narrower rules or Metrics without Limits configurations only for requirements that differ from this default.
 
-{{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="Golden Rule" style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="A Tag Indexing Rule configured as the Golden Rule, excluding unqueried tag keys across all custom metrics." style="width:100%;">}}
 
 ### Choose between Tag Indexing Rules and Metrics without Limits™
 
