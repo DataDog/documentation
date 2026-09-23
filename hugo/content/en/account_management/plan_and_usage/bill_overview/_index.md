@@ -145,7 +145,7 @@ The CSV contains one row per host with the following columns:
 
 The sum of `Usage Value` across all rows matches the hosts total shown on the Bill Overview page: a host count for organizations billed at the 99th percentile, and host-hours for organizations billed on a sum basis.
 
-**Note**: The in-app experience contains the following four columns only: `Resource Name`, `Resource Type`, `Usage Value`, and `Organization`.
+**Note**: The Resource Drilldown table in the UI shows only four columns: `Resource Name`, `Resource Type`, `Usage Value`, and `Organization` (equivalent to `Org Name` in the CSV).
 
 ## Revert to the previous layout
 
