@@ -11,6 +11,9 @@ further_reading:
   - link: '/database_monitoring/setup_postgres/'
     tag: 'Documentation'
     text: 'Database Monitoring for PostgreSQL'
+  - link: '/agent/guide/setup_remote_config/'
+    tag: 'Documentation'
+    text: 'Set up Remote Configuration'
 ---
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
@@ -28,8 +31,30 @@ PostgreSQL is collected through the [Datadog Agent][1] rather than through a dir
 Before you begin, make sure you have:
 
 - Datadog Agent `7.81.0` or later installed on a host that can reach your PostgreSQL instances. See [Agent installation][1] for your platform.
+- [Remote Configuration][8] enabled for your organization, on the API key the Agent uses, and on the Agent itself. Data quality monitors are delivered to the Agent over Remote Configuration, so without it your tables sync but your monitors never run. See [Enable Remote Configuration](#enable-remote-configuration).
 - Superuser access to your PostgreSQL instance, to create the Datadog user and grant privileges.
 - Preview access enabled for your organization by a Datadog representative.
+
+## Enable Remote Configuration
+
+Data Observability uses [Remote Configuration][8] to deliver monitor queries to the Agent. When you create a data quality monitor in Datadog, its query is pushed to the Agent that owns the instance, and the Agent's Postgres check runs it against your database on the monitor's schedule.
+
+Table metadata collection does not depend on Remote Configuration. If Remote Configuration is unavailable, your tables still appear in the catalog, but any monitor you create against them stays empty because the Agent never receives the query to run.
+
+Remote Configuration is enabled by default for most organizations and, starting with Agent `7.47.0`, in the Agent itself. Confirm all three of the following:
+
+1. **Your organization.** On the [Remote Configuration][9] settings page, confirm Remote Configuration is enabled. Enabling it requires the [`org_management`][11] permission.
+2. **The Agent's API key.** The API key the Agent uses must have the Remote Configuration capability. Check it on the [API Keys][10] page. This requires the [`api_keys_write`][12] permission. An Agent using a key without this capability reports an `UNAUTHORIZED` status.
+3. **The Agent.** Make sure `remote_configuration.enabled` is not set to `false` in [`datadog.yaml`][13] (or through `DD_REMOTE_CONFIGURATION_ENABLED`). If you need to set it explicitly:
+
+   ```yaml
+   remote_configuration:
+     enabled: true
+   ```
+
+   [Restart the Agent][5] after changing this setting.
+
+Each Agent's Remote Configuration status is listed on the [Remote Configuration][9] settings page. `CONNECTED` is the state you want. For the meaning of the other statuses and for network requirements, see [Remote Configuration for Fleet Automation][8].
 
 ## Already using Database Monitoring?
 
@@ -44,6 +69,8 @@ If [Database Monitoring][2] is already running against this database, most of th
    ```
 
    If the Agent is older than `7.81.0`, [upgrade the Agent][6]. Upgrading only the Postgres check with `datadog-agent integration install` is not sufficient: the Remote Configuration handler that delivers monitor queries ships with the Agent itself, not with the check.
+
+   Database Monitoring does not require Remote Configuration, so it may be disabled on an Agent that is otherwise healthy. Confirm it is enabled before you continue: see [Enable Remote Configuration](#enable-remote-configuration).
 
 2. **Grant `SELECT` on your data.** Database Monitoring grants `pg_monitor` and `USAGE` on the `public` schema, but it does not grant `SELECT` on your tables. Data Observability needs it to compute row counts, column-level metrics, and custom SQL results. Run the grants in [Set up the Datadog database user](#set-up-the-datadog-database-user) for each schema in each database you want to track, skipping the `CREATE USER` step.
 
@@ -166,6 +193,14 @@ sudo datadog-agent status | grep -A 20 'postgres'
 
 The output should show the `postgres` check with a `Total Runs` count greater than zero and a recent `Last Successful Execution` timestamp.
 
+Confirm the Agent is receiving Remote Configuration:
+
+```shell
+sudo datadog-agent status | grep -A 10 'Remote Configuration'
+```
+
+If the section reports a disabled reason such as `remote_configuration.enabled: false`, monitors cannot reach this Agent. See [Enable Remote Configuration](#enable-remote-configuration).
+
 ## Explore your table metadata
 
 Allow approximately one hour for the initial metadata collection to complete. You can then [view your PostgreSQL tables][3] in the Data Observability catalog.
@@ -193,9 +228,14 @@ Navigate to a table in the [Data Observability catalog][3], select the {{< ui >}
 
 Monitors run on the collection schedule. Keep `SELECT` privileges in place for the `datadog` user on all referenced tables; monitors fail if access is revoked.
 
+If a monitor reports no data, check that [Remote Configuration](#enable-remote-configuration) is enabled for your organization, for the Agent's API key, and on the Agent itself. The Agent cannot receive monitor queries without it.
+
 ## Known limitations
 
-Data Observability lists all PostgreSQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Scheduling a monitor against one of those databases produces a monitor with no data. If your tables are listed but your monitors stay empty, follow [Already using Database Monitoring?](#already-using-database-monitoring) to enable the job and grant the required `SELECT` privileges.
+Data Observability lists all PostgreSQL tables from instances where `dbm` and `collect_schemas` are enabled, including instances that do not have `data_observability.enabled: true`. Scheduling a monitor against one of those databases produces a monitor with no data. If your tables are listed but your monitors stay empty:
+
+- Follow [Already using Database Monitoring?](#already-using-database-monitoring) to enable the job and grant the required `SELECT` privileges.
+- Confirm [Remote Configuration](#enable-remote-configuration) is enabled. Table listings do not depend on it, but monitor queries do.
 
 ## Further reading
 
@@ -208,3 +248,9 @@ Data Observability lists all PostgreSQL tables from instances where `dbm` and `c
 [5]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/upgrade_agent_fleet_automation/
 [7]: /data_observability/quality_monitoring/data_warehouses/
+[8]: /agent/guide/setup_remote_config/
+[9]: https://app.datadoghq.com/organization-settings/remote-config
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: /account_management/rbac/permissions/#permissions-list
+[12]: /account_management/rbac/permissions/#permissions-list
+[13]: /agent/configuration/agent-configuration-files/#main-configuration-file
