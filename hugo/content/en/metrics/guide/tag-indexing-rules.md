@@ -257,7 +257,10 @@ Existing Metrics without Limits configurations take precedence over Tag Indexing
 
 After creating the Golden Rule, add narrower rules only where a group of metrics has requirements that differ from the default:
 
-Use a single metric when the policy applies to one metric but should remain dynamic.
+- Use a single metric when the policy applies to one metric but should remain dynamic.
+- Use a namespace or metric-name pattern for metrics owned by the same service, application, or team.
+- Use multiple patterns when the same policy applies to related groups of metrics.
+- Use `*` only when a policy should apply to all custom metrics.
 Use a namespace or metric-name pattern for metrics owned by the same service, application, or team.
 Use multiple patterns when the same policy applies to related groups of metrics.
 Use * only when a policy should apply to all custom metrics.
