@@ -61,7 +61,7 @@ Responders then have the following options:
 
 #### Keep the page open after the call ends
 
-By default, the Page created for a direct call route resolves after the caller hangs up. Select **Keep the page open after the call ends** to keep the Page open instead, so responders can continue tracking it after the call.
+By default, the Page created for a direct call route resolves after the caller hangs up. Select **Keep the page open after the call ends** to keep the Page open instead and continue following the On-Call Team's escalation policy and paging responders.
 
 #### Record the conversation
 
