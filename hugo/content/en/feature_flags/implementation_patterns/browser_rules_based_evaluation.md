@@ -45,6 +45,18 @@ For browser applications that change evaluation context repeatedly during a sess
 
 Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], not local evaluations. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
 
+### Enable client rules delivery
+
+Before fetching rules, enable client rules delivery for your organization. This setting is disabled by default.
+
+1. Open [**Feature Flags > Settings > Flag Delivery**][8].
+2. Enable **Allow local rule evaluation in client SDKs**.
+3. Click **Save**.
+
+Changing this setting requires **Feature Flag Environment Config Write** permission. See [Permissions and Access Control][9].
+
+This setting is separate from the per-flag [**Client** distribution channel][4]. The standard precomputed `DatadogProvider` setup does not require it.
+
 ### Fetch rules and initialize
 
 Import `DatadogCoreProvider` and `fetchRulesConfiguration` from `@datadog/openfeature-browser/rules-based`. Fetch the rules and validate the result before supplying it to the provider:
@@ -205,3 +217,5 @@ await tracking.shutdown();
 [5]: /feature_flags/concepts/evaluation_context/#context-attributes
 [6]: /real_user_monitoring/application_monitoring/browser/
 [7]: /feature_flags/concepts/monthly_flag_configuration_requests/
+[8]: https://app.datadoghq.com/feature-flags/settings/flag-delivery
+[9]: /feature_flags/concepts/permissions/
