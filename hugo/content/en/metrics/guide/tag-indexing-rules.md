@@ -226,7 +226,7 @@ To configure the Golden Rule:
 2. Select {{< ui >}}Exclude tags{{< /ui >}} and then {{< ui >}}By tag usage{{< /ui >}}.
 3. Set the query window to 30/60/90 days.
 4. Require tag keys to be unused in Datadog assets.
-5. Apply the rule to all custom metrics using *.
+5. Apply the rule to all custom metrics using `*`.
 
 New tag keys receive a 15-day grace period before the rule evaluates their usage. This gives teams time to query a new tag or use it in a Datadog asset before it can be unindexed.
 
