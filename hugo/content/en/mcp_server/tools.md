@@ -2496,11 +2496,11 @@ Preview and create Datadog Synthetics HTTP API Tests.
 
 ## Watchdog
 
-Tools for investigating [Watchdog][79] anomalies, explaining metric changes, and checking external provider outages.
+Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
 
 ### `search_watchdog_stories`
 *Toolset: **watchdog***\
-*Permissions Required: No specific permissions required.*\
+*Permissions Required: `Built-in Features`*\
 Searches Watchdog stories for anomalies and root cause analyses across APM, infrastructure, and logs. Returns story summaries and keys to use with `get_watchdog_story`.
 
 - Show Watchdog stories for the checkout service in the last 24 hours.
@@ -2508,7 +2508,7 @@ Searches Watchdog stories for anomalies and root cause analyses across APM, infr
 
 ### `get_watchdog_story`
 *Toolset: **watchdog***\
-*Permissions Required: `APM Read`*\
+*Permissions Required: `APM Read` and `Built-in Features`*\
 Retrieves a Watchdog story by its key, including insight details, the timeline, and available root cause analysis. Use a story key returned by `search_watchdog_stories`.
 
 - Get the details of the Watchdog story returned by that search.
@@ -2516,7 +2516,7 @@ Retrieves a Watchdog story by its key, including insight details, the timeline, 
 
 ### `search_watchdog_insights`
 *Toolset: **watchdog***\
-*Permissions Required: No specific permissions required.*\
+*Permissions Required: `Built-in Features`*\
 Searches Watchdog insights for a product context and time range, including anomalies, outliers, recommendations, and correlations. Supports contexts such as APM, logs, RUM, Kubernetes, and Database Monitoring.
 
 - Find Watchdog insights for the checkout service in production over the last hour.
@@ -2525,9 +2525,9 @@ Searches Watchdog insights for a product context and time range, including anoma
 ### `get_influential_tags`
 *Toolset: **watchdog***\
 *Permissions Required: `Metrics`*\
-Identifies tag dimensions associated with a spike, drop, or other change in a metric. Provide a metric query, a time range, and, when known, the anomaly start time to compare behavior before and after the change.
+Identifies tag dimensions associated with a spike, drop, or other change in a metric. Provide a metric query and a time range. Include the anomaly start time when known, to compare behavior before and after the change.
 
-- Which tags explain the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago?
+- Explain what's causing the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago.
 - Find the hosts or regions contributing to this metric change over the last hour.
 
 ### `get_external_provider_status`
@@ -2535,8 +2535,32 @@ Identifies tag dimensions associated with a spike, drop, or other change in a me
 *Permissions Required: `Built-in Features`*\
 Retrieves external provider outages, including their status and impacted regions. Filter by provider, affected service, or time range, and optionally include resolved outages and impacted services.
 
-- Are any external provider outages affecting the checkout service?
+- Check for external provider outages affecting the checkout service.
 - Show AWS outages from the last 24 hours, including resolved outages.
+
+### `find_new_jumps`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Detects sudden changes in an APM timeseries for latency, error rate, or throughput. Provide a signal query and analysis window. Latency and error-rate analysis also require a request-count query.
+
+- Find sudden latency changes for the checkout service over the last four hours.
+- Check for sudden drops in throughput for the payments service over the last six hours.
+
+### `update_jump_state`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Reanalyzes an ongoing jump returned by `find_new_jumps` over a new time window to determine whether it is ongoing, resolved, expired, or invalidated. Reuse the returned jump state and original signal queries. This tool computes an updated result without modifying stored data.
+
+- Recheck the ongoing latency jump from the previous analysis using the latest data.
+- Check whether the throughput drop returned by `find_new_jumps` has resolved.
+
+### `forecast_timeseries`
+*Toolset: **watchdog***\
+*Permissions Required: No specific permissions required.*\
+Forecasts future values from supplied historical timestamps and values, with optional confidence bounds. Provide at least 64 historical points per series. To forecast a Datadog metric, retrieve its history with a metrics query tool first.
+
+- Forecast the next 24 hourly values from these historical timestamps and values.
+- Use this timeseries to forecast the next 12 values with 95% confidence bounds.
 
 ## Widgets
 
