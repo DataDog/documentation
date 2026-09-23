@@ -17,7 +17,7 @@ The `sca` key was introduced in `schema-version: v1.1` and supports the followin
 | **Property** | **Type** | **Description** | **Default** | **Minimum `schema-version`** |
 | --- | --- | --- | --- | --- |
 | `ignore-paths` | Array | File paths or glob patterns to exclude from Static SCA analysis. | None | `v1.1` |
-| `ignore-ecosystems` | Array | Ecosystems (for example, `npm`, `Go`, `PyPI`) to exclude from Static SCA analysis. | None | `v1.7` |
+| `ignore-ecosystems` | Array | Ecosystems, such as `npm`, `Go`, `PyPI`, to exclude from Static SCA analysis. | None | `v1.7` |
 | `ignore-packages` | Array | Packages, at any version, to exclude from Static SCA analysis. Each entry uses the `<ecosystem>:<name>` format (for example, `npm:lodash`). | None | `v1.7` |
 
 Example:
