@@ -112,7 +112,7 @@ apt-get update && \
 apt-get -y install default-jre-headless
 ```
 
-Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][5]. Set each address variable in `host:port` format.
+Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][1]. Set each address variable in `host:port` format.
 
 Each scraper process scrapes a single JMX endpoint. Run one process per broker, producer, and consumer, using that JVM's address. Then run one or more of the following commands:
 
@@ -144,6 +144,8 @@ java \
   -Dotel.exporter.otlp.endpoint=http://localhost:4317 \
   -jar /path/to/opentelemetry-jmx-scraper.jar
 ```
+
+[1]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
 
 {{% /tab %}}
 
@@ -186,7 +188,7 @@ Run a single instance per JMX endpoint. Multiple replicas scraping the same endp
 
 ## Log collection
 
-See [Log Collection][6] for instructions on how to collect logs using the OpenTelemetry Collector.
+See [Log Collection][5] for instructions on how to collect logs using the OpenTelemetry Collector.
 
 To include Kafka logs in the out-of-the-box Kafka Dashboard, use an attributes processor to add the `source:kafka` tag:
 
@@ -199,7 +201,7 @@ processors:
         action: insert
 ```
 
-To add this attribute only to Kafka logs, use [include/exclude filtering][7] in the attributes processor.
+To add this attribute only to Kafka logs, use [include/exclude filtering][6] in the attributes processor.
 
 ## Data collected
 
@@ -223,7 +225,7 @@ To add this attribute only to Kafka logs, use [include/exclude filtering][7] in 
 
 **Note:** Datadog replaces hyphens (`-`) with underscores (`_`) in metric names. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
 
-For the complete mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][8].
+For the complete mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][7].
 
 ## Example logging output
 
@@ -246,7 +248,6 @@ Value: 25
 [2]: https://github.com/open-telemetry/opentelemetry-java-contrib/tree/main/jmx-scraper
 [3]: https://app.datadoghq.com/dash/integration/50/kafka-zookeeper-and-kafka-consumer-overview
 [4]: /opentelemetry/setup/collector_exporter/
-[5]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
-[6]: /opentelemetry/config/log_collection
-[7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[8]: /opentelemetry/mapping/metrics_mapping/#kafka-metrics
+[5]: /opentelemetry/config/log_collection
+[6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
+[7]: /opentelemetry/mapping/metrics_mapping/#kafka-metrics
