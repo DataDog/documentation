@@ -121,9 +121,10 @@ Datadog marks any function that doesn't meet these conditions as ineligible in t
 
 ### Amazon EKS clusters
 
+- **AWS partition**: The cluster must be in the commercial `aws` partition. Clusters in AWS GovCloud or the AWS China partitions are not supported.
 - **AWS Marketplace access**: The AWS account can accept the agreement for the Datadog Operator EKS add-on. The CloudFormation setup handles this one-time, account-level agreement.
 - **Supported add-on version**: Datadog Operator EKS add-on version 0.1.31 or later is available for the cluster's AWS region and Kubernetes version.
-- **Supported clusters**: The cluster status is `ACTIVE`, all workloads run on Amazon EC2-backed nodes, and at least one node runs Linux. Additional EC2 nodes can run Linux or Windows. Clusters with EKS Fargate workloads are not supported because this instrumentation method does not provide Agent coverage for Fargate workloads.
+- **Supported clusters**: The cluster status is `ACTIVE`, all workloads run on Amazon EC2-backed nodes, and at least one node runs Linux. Additional EC2 nodes can run Linux or Windows. Clusters with EKS Fargate profiles are excluded.
 
 ## Required AWS permissions
 
@@ -173,13 +174,14 @@ Datadog uses the following permissions for EKS instrumentation:
 
 | Permission | Why Datadog needs it |
 |---|---|
-| `eks:DescribeCluster` | Find the selected cluster and confirm that its status is `ACTIVE` |
+| `eks:DescribeCluster`, `eks:ListFargateProfiles` | Read the selected cluster's status and exclude clusters with Fargate profiles |
 | `eks:CreateAddon`, `eks:DescribeAddon`, `eks:UpdateAddon`, `eks:DescribeUpdate`, `eks:DeleteAddon`, `eks:TagResource` | Install and manage the Datadog Operator, AWS Secrets Store CSI Driver Provider, and EKS Pod Identity Agent add-ons |
 | `eks:CreatePodIdentityAssociation`, `eks:DescribePodIdentityAssociation`, `eks:ListPodIdentityAssociations`, `eks:DeletePodIdentityAssociation` | Give the credential synchronization service account access to its scoped IAM role |
-| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource` | Create or safely reuse the cluster-specific Datadog API and application key secrets |
-| `iam:GetRole`, `iam:CreateRole`, `iam:PutRolePolicy`, `iam:PassRole`, `iam:TagRole`, `iam:DeleteRolePolicy`, `iam:DeleteRole` | Create the credential synchronization role, scope it to the cluster's API and application key secrets, pass it to EKS Pod Identity, and remove the role during uninstall |
+| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`, `secretsmanager:TagResource` | Create or safely reuse the cluster-specific API key and Service Access Token secrets |
+| `secretsmanager:PutSecretValue`, `secretsmanager:UpdateSecretVersionStage` | Store and activate a replacement Service Access Token in its retained secret |
+| `iam:GetRole`, `iam:CreateRole`, `iam:PutRolePolicy`, `iam:PassRole`, `iam:TagRole`, `iam:DeleteRolePolicy`, `iam:DeleteRole` | Create the credential synchronization role, scope it to the cluster's API key and Service Access Token secrets, pass it to EKS Pod Identity, and remove the role during uninstall |
 
-Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API and application key secrets for the selected cluster.
+Datadog creates the credential synchronization role with a permissions boundary. Its inline policy can read only the API key and Service Access Token secrets for the selected cluster.
 
 ## How it works
 
@@ -188,11 +190,11 @@ Instrumentation is based on an **instrumentation rule**: an AWS account paired w
 1. You write a query describing the resources to cover, select specific resources, or add all eligible resources.
 1. Datadog evaluates the rule against your account and records which resources it covers.
 1. Datadog instruments each covered resource: on EC2, by installing the Agent through AWS Systems Manager; on Lambda, by adding the Datadog layers and environment variables to the function; on EKS, by installing the Datadog Operator and Agent.
-1. Datadog keeps the covered resources instrumented, reinstalling instrumentation that goes missing and retrying anything that failed.
+1. Datadog maintains instrumentation on covered resources. For EC2 and Lambda, it restores instrumentation that goes missing. For EKS, the Datadog Operator maintains the Agent resources inside each covered cluster.
 
 You approve one CloudFormation stack, one time, during initial setup. For EKS, the stack also handles the one-time Datadog Operator AWS Marketplace agreement. After that, instrumentation runs automatically from Datadog, with no new CloudFormation template to launch.
 
-For EKS, Datadog adds any missing prerequisite EKS add-ons and IAM configuration and creates or reuses cluster-specific Datadog API and application key secrets in AWS Secrets Manager.
+For EKS, Datadog adds any missing prerequisite EKS add-ons and IAM configuration and stores the API key and a cluster-specific Service Access Token in AWS Secrets Manager.
 
 For the full technical and security details, including the AWS resources Datadog creates, the instrumentation mechanism, and how Datadog keeps instrumentation in place, see [How Datadog instrumentation through the AWS integration works][6].
 
@@ -268,7 +270,7 @@ After instrumentation completes:
 
 ### Verify EKS instrumentation
 
-After Datadog reports that instrumentation is active:
+An active instrumentation status confirms that the Operator completed the installation workflow. Verify Agent workload health and telemetry separately:
 
 - Confirm that the `datadog_operator`, `aws-secrets-store-csi-driver-provider`, and `eks-pod-identity-agent` add-ons are active in Amazon EKS.
 - Open [Fleet View][19], switch to the Kubernetes view, and find the cluster.
@@ -291,7 +293,9 @@ From this page, you can:
 - Instrument new resources in your AWS environment.
 - Remove instrumentation from resources you no longer want to monitor.
 
-The rule is the source of truth. To stop coverage, update the rule. If you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, Datadog updates layer versions automatically.
+The rule is the source of truth. To stop coverage, update the rule. On EC2 and Lambda, if you remove instrumentation from a covered resource yourself, Datadog restores it. For EC2, manage Agent configuration and version upgrades through [Fleet Automation][4]. For Lambda, Datadog updates layer versions automatically.
+
+For EKS, keep the Datadog Operator add-on installed while the cluster is covered by a rule. The Operator maintains the Agent resources inside the cluster, but Datadog does not automatically recreate a manually deleted Operator add-on after installation completes.
 
 ## Remove Datadog instrumentation
 
@@ -306,9 +310,10 @@ Datadog performs cleanup in this order:
 
 1. The Datadog Operator deletes the `DatadogAgent` custom resource it created and its dependent Kubernetes resources.
 1. After the Operator reports that cleanup is complete, Datadog deletes the `datadog_operator` EKS add-on that it installed.
+1. Datadog revokes the Service Access Token for the installation.
 1. Datadog removes the Pod Identity association and scoped IAM role that it created.
 1. The AWS Secrets Store CSI Driver Provider and EKS Pod Identity Agent add-ons remain installed so you can use them with other workloads.
-1. Datadog preserves the Datadog API and application keys and their cluster-specific secrets in AWS Secrets Manager for safe reuse if the cluster is added to a rule again.
+1. Datadog preserves the API key and both cluster-specific AWS Secrets Manager secrets. If the cluster is added to a rule again, Datadog creates a replacement Service Access Token and updates the retained token secret.
 
 ## Troubleshooting
 
