@@ -83,7 +83,7 @@ You can configure retention charts with the same or different start and return e
 
 If the events match, week 0 is always 100%, since it represents everyone who completed the initial event. Every other cell compares that week's viewers back to week 0, showing the percentage of the original cohort who completed the event again in that week.
 
-{{< img src="/product_analytics/retention/retention_matching_events.png" alt="Retention graph for matching events" style="width:90%;" >}}
+{{< img src="/product_analytics/retention/retention_matching_events.png" alt="Retention graph for matching events." style="width:90%;" >}}
 
 Reading the **Aug 17 2026** row of the above graph from left to right:
 - 23% of the 10.43k users who completed the event that week returned to complete it again after 1 week.
@@ -92,7 +92,7 @@ Reading the **Aug 17 2026** row of the above graph from left to right:
 
 If the events differ, week 0 represents users who completed both the initial and return events. Every cell after that shows the percentage of the original cohort who completed the return event in that week.
 
-{{< img src="/product_analytics/retention/retention_differing_events.png" alt="Retention graph for differing events" style="width:90%;" >}}
+{{< img src="/product_analytics/retention/retention_differing_events.png" alt="Retention graph for differing events." style="width:90%;" >}}
 
 Reading the **Aug 17 2026** row of the above graph from left to right:
 - 10.43k users completed the start event that week.

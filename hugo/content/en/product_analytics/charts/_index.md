@@ -18,13 +18,13 @@ For example, you can determine if there was there a performance issue that cause
 
 [Journey Paths][5] diagrams let you see the most common paths users take between selected events, including view and action events, for both converted and dropped users.
 
-{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart.png" alt="A rendered Journey Paths chart showing the top paths users take between two views." style="width:100%;" >}}
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart_2.png" alt="A rendered Journey Paths chart showing the top paths users take between two views." style="width:100%;" >}}
 
 ### Pathways
 
 [Pathways][3] diagrams allow you to visualize all user journeys across your application to identify the most important contributions to a flow.
 
-{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="The default Pathways diagram for an app." style="width:90%;" >}}
 
 ### Retention
 

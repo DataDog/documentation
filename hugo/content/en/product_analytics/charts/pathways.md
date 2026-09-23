@@ -13,7 +13,7 @@ further_reading:
 
 Pathways charts visualize all user journeys across your application to analyze the critical path.
 
-{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="The default Pathways diagram for an app" style="width:90%;" >}}
+{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="The default Pathways diagram for an app." style="width:90%;" >}}
 
 Each node represents a view the user visited. The thickness of each node represents the count of user sessions on that page. A page with fewer visitors has a thinner node in the diagram.
 
