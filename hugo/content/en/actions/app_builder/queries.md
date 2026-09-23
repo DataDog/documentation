@@ -229,7 +229,7 @@ This app provides buttons to fetch facts about two numbers from an API. It then 
 ##### Add data transformer
 
 1. Click the {{< ui >}}Σ{{< /ui >}} (sigma) to open the {{< ui >}}Transformers{{< /ui >}} panel.
-1. Click {{< ui >}}+ Create Transformer{{< /ui >}}.
+1. Click {{< ui >}}\+ Create Transformer{{< /ui >}}.
 1. Name the transformer `numberTransformer`. Under {{< ui >}}Inputs{{< /ui >}}, under {{< ui >}}function () {{{< /ui >}}, enter the following:
     ```javascript
     // get both random facts
