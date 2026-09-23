@@ -269,6 +269,22 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 | `action.type`        | string | Type of the user action (for example, `tap` or `application_start`).                           |
 
+### Timeseries attributes
+
+Timeseries events are emitted when [timeseries collection is enabled][11]. Each event carries a batch of samples for one metric, taken at a regular interval across the session.
+
+Memory is the application's **physical footprint** (`phys_footprint`), the value Xcode's memory gauge reports and the one iOS measures against your application's memory limit. It excludes clean file-backed pages that the system can evict and reload.
+
+| Attribute | Type | Description |
+|---|---|---|
+| `timeseries.name` | string | The metric in this event, either `cpu` or `memory`. |
+| `timeseries.start` | number (ns) | Timestamp of the first sample in the event. |
+| `timeseries.end` | number (ns) | Timestamp of the last sample in the event. |
+| `timeseries.data.timestamps` | array (ns) | Timestamp of each sample. Values align index-for-index with the arrays below. |
+| `timeseries.data.values.cpu_usage` | array (number) | CPU used by the application, as a percentage of total device capacity across all cores. |
+| `timeseries.data.values.memory_footprint` | array (number) | Physical footprint, in kilobytes. |
+| `timeseries.data.values.memory_percent` | array (number) | Physical footprint as a percentage of total device memory. |
+
 ## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.

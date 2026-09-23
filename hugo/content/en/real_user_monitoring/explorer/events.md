@@ -58,18 +58,6 @@ Click on events in the waterfall to access related data:
 - {{< ui >}}Resources{{< /ui >}}: View connected backend traces.
 - {{< ui >}}Long Animation Frames{{< /ui >}}: Access associated profiles for performance analysis.
 
-## Performance Timeseries
-
-{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance Timeseries is in Preview.
-{{< /callout >}}
-
-For sessions from the iOS and Android SDKs, the {{< ui >}}Performance Timeseries{{< /ui >}} section shows a {{< ui >}}Memory & CPU{{< /ui >}} graph sampled once per second across the session.
-
-The graph always covers the full session. When you open it from a view or an operation, markers show where that view or operation begins and ends, so you can read its resource usage in the context of what ran before and after it. Periods when the application was in the background are shaded.
-
-This section requires timeseries collection to be enabled in your SDK. For setup and the list of series collected, see [Mobile Vitals][7].
-
 ## Additional tabs
 
 Use the other tabs to explore related data:
@@ -108,4 +96,3 @@ Use the other tabs to explore related data:
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings
 [5]: /real_user_monitoring/rum_without_limits/retention_filters
 [6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[7]: /real_user_monitoring/application_monitoring/mobile_vitals/#timeseries

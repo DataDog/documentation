@@ -389,16 +389,6 @@ Both metrics are retained for 15 months, and include several dimensions:
 
 Those metrics are included in the price of RUM Measure and available to all RUM without Limits customers that define one or more operations.
 
-## Inspect resource usage during an operation
-
-{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance Timeseries is in Preview.
-{{< /callout >}}
-
-For operations reported by the iOS and Android SDKs, the {{< ui >}}Performance Timeseries{{< /ui >}} section of the operation side panel shows a {{< ui >}}Memory & CPU{{< /ui >}} graph sampled once per second. Markers indicate where the operation starts and ends, so you can tell whether a slow or failed operation coincided with a spike in memory or CPU.
-
-This requires timeseries collection to be enabled in your SDK. For more information, see [Mobile Vitals][14].
-
 ## Investigate root causes with AI
 
 You can run an agentic investigation on a single operation directly from the Operations page. The agent analyzes both the success rate and the latency of the operation and surfaces focused investigations for each failure mode (errors, timeouts, abandonment) and for latency regressions. For more information, see [Operation AI Investigation][8].
@@ -435,5 +425,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [11]: /real_user_monitoring/rum_without_limits/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters/
 [13]: /mcp_server/tools/#rum
-[14]: /real_user_monitoring/application_monitoring/mobile_vitals/#timeseries
 

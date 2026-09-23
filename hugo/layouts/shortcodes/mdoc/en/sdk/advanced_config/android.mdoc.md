@@ -361,7 +361,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the preferred frequency for collecting mobile vitals.
 
 `setTimeseriesConfiguration(TimeseriesConfiguration)`
-: Determines whether memory and CPU are sampled at regular intervals for the length of the session and graphed in the RUM Explorer side panel. By default, nothing is collected. Pass `TimeseriesConfiguration.DEFAULT` to collect both memory and CPU. Requires v3.14.0 or later. For more information, see [Mobile Vitals][15].
+: Determines whether memory and CPU are sampled at regular intervals for the length of the session and graphed in the RUM Explorer side panel. By default, nothing is collected. Pass `TimeseriesConfiguration.DEFAULT` to collect both memory and CPU. Requires v3.14.0 or later. For more information, see [Data Collected][15].
 
 `setSessionSampleRate(<sampleRate>)`
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
@@ -753,4 +753,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
-[15]: /real_user_monitoring/application_monitoring/mobile_vitals/#timeseries
+[15]: /real_user_monitoring/application_monitoring/android/data_collected/#timeseries-attributes
