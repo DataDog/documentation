@@ -208,7 +208,7 @@ You can review and remove these exemptions from the Tag Indexing Rules page. Dat
 
 Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
 
-## Best Practices
+## Best practices
 
 Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Use Metrics without Limits™ when an individual metric requires a deliberate exception to the broader policy.
 
