@@ -16,12 +16,6 @@ further_reading:
     text: "Learn more about creating custom rules"
 ---
 
-{{< site-region region="gov,gov2" >}}
-
-<div class="alert alert-danger">Cloud Storage scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
-
-{{< /site-region >}}
-
 ## Overview
 
 Deploy Datadog Agentless scanners in your environment to scan for sensitive information in your cloud storage resources. Agentless scanners are EC2 instances that you control and run within your environment. The scanners use [Remote Configuration][1] to retrieve a list of S3 buckets as well as their dependencies. They scan many types of text files, such as CSVs and JSONs in your S3 buckets.
