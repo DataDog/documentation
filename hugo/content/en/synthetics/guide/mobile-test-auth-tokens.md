@@ -96,6 +96,21 @@ Mobile app tests support passing `key:value` pairs to your app at launch through
 Your app must read the injected value at startup, store it securely, and use it to skip its login flow. Gate this behavior behind a build flag so the code path only exists in your test or automation builds.
 
 {{< tabs >}}
+{{% tab "Android (Java)" %}}
+
+{{< code-block lang="java" >}}
+if (BuildConfig.AUTOMATION) {
+    String authToken = getIntent().getStringExtra("auth_token");
+    if (authToken != null) {
+        SecureTokenStore.getInstance(this).save(authToken);
+        SessionManager.getInstance().restoreSession(authToken);
+    }
+}
+{{< /code-block >}}
+
+Back `SecureTokenStore` with `EncryptedSharedPreferences` and a `MasterKey`, rather than storing the token in plain `SharedPreferences`.
+
+{{% /tab %}}
 {{% tab "iOS (Swift)" %}}
 
 {{< code-block lang="swift" >}}
@@ -110,21 +125,6 @@ if let index = ProcessInfo.processInfo.arguments.firstIndex(of: "-auth_token"),
 {{< /code-block >}}
 
 Store the token in the Keychain rather than `UserDefaults`, so it's protected at rest like a token your app receives from a real login.
-
-{{% /tab %}}
-{{% tab "Android (Java)" %}}
-
-{{< code-block lang="java" >}}
-if (BuildConfig.AUTOMATION) {
-    String authToken = getIntent().getStringExtra("auth_token");
-    if (authToken != null) {
-        SecureTokenStore.getInstance(this).save(authToken);
-        SessionManager.getInstance().restoreSession(authToken);
-    }
-}
-{{< /code-block >}}
-
-Back `SecureTokenStore` with `EncryptedSharedPreferences` and a `MasterKey`, rather than storing the token in plain `SharedPreferences`.
 
 {{% /tab %}}
 {{% tab "React Native" %}}
