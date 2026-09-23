@@ -442,4 +442,3 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-[10]: https://platform.openai.com/docs/api-reference/chat/create
