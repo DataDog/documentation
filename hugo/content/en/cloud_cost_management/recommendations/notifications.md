@@ -35,8 +35,8 @@ To set up a notification rule:
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
 1. In the {{< ui >}}Destination{{< /ui >}} section, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, then select a workspace and channel (Slack) or a tenant, team, and channel (Microsoft Teams).
 1. (Optional) In the {{< ui >}}Customize message{{< /ui >}} section, select which details to include:
-   - For the entire notification: {{< ui >}}Notification name{{< /ui >}}, {{< ui >}}Total est. savings{{< /ui >}}, and {{< ui >}}Custom text{{< /ui >}} (up to 500 characters; supports the `{{total_savings}}`, `{{rec_count}}`, and `{{digest_date}}` dynamic fields). All three are included by default.
-   - For each recommendation: {{< ui >}}Why{{< /ui >}}, {{< ui >}}Risk{{< /ui >}}, and {{< ui >}}Effort{{< /ui >}}. Recommendation type and estimated savings are always included. All three are included by default.
+   - For the entire notification: {{< ui >}}Notification name{{< /ui >}}, {{< ui >}}Total est. savings{{< /ui >}}, and {{< ui >}}Custom text{{< /ui >}} (up to 500 characters; supports the `{{total_savings}}`, `{{rec_count}}`, and `{{digest_date}}` dynamic fields).
+   - For each recommendation: {{< ui >}}Why{{< /ui >}}, {{< ui >}}Risk{{< /ui >}}, and {{< ui >}}Effort{{< /ui >}}. Recommendation type and estimated savings are always included.
    - {{< ui >}}Include tags{{< /ui >}}: select or type up to 10 tag keys, such as `env` or `service`, to show only matching tags for each recommendation. Leave this empty to include all tags.
 1. Enter a name for the notification rule.
 1. (Optional) Mention specific Slack users in the notification message.
