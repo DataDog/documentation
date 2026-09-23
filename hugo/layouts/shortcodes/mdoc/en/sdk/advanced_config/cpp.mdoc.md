@@ -85,30 +85,9 @@ if (login_succeeded) {
 
 For full details, see [Operations Monitoring][3].
 
-## Tracking consent
+## Managing data collection
 
-To update the SDK's tracking consent after initialization, call `SetTrackingConsent` on the core at any time. The SDK adjusts its behavior immediately:
-
-- `Granted`: The SDK sends all pending and future data to Datadog.
-- `Pending`: The SDK continues collecting data and storing it locally, but does not send it to Datadog.
-- `NotGranted`: The SDK deletes all pending data and stops collecting new data.
-
-{% tabs %}
-{% tab label="C++" %}
-
-```cpp
-core->SetTrackingConsent(datadog::TrackingConsent::Granted);
-```
-
-{% /tab %}
-{% tab label="C" %}
-
-```c
-dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_GRANTED);
-```
-
-{% /tab %}
-{% /tabs %}
+See [Manage Data Collection][8] for instructions on tracking consent.
 
 ## Custom attributes
 
@@ -118,7 +97,7 @@ For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/
 
 ### User information
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=cpp) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][9] for instructions on adding user information to your RUM sessions.
 
 ### Account information
 
@@ -335,3 +314,5 @@ dd_core_destroy(core);
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp
 [7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=cpp
+[8]: /real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=cpp
+[9]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=cpp

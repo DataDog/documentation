@@ -145,7 +145,7 @@ Enables [automatic collection of user frustrations][7]. Only error taps are supp
 : Optional  
 **Type**: Number  
 **Default**: `100`  
-The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events.
+The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more information, see [Managing sessions][28].
 
 `resourceTraceSampleRate`
 : Optional  
@@ -603,3 +603,4 @@ See [Monitor hybrid React Native applications][19].
 [25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
 [26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native
 [27]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=react_native
+[28]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native

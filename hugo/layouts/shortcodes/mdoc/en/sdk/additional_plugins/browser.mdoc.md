@@ -135,7 +135,9 @@ datadogWebpackPlugin({
     site: 'datadoghq.com',
   },
   logLevel: 'warn',
-  // Source map uploads (see Source Maps below)
+  // Source map uploads by debug ID (see Source maps below)
+  sourcemaps: { /* ... */ },
+  // Source map uploads by service and version (see Source maps below)
   errorTracking: {
     sourcemaps: { /* ... */ },
   },
@@ -147,41 +149,191 @@ datadogWebpackPlugin({
 })
 ```
 
+`sourcemaps` and `errorTracking.sourcemaps` are mutually exclusive: set one, based on the matching method you choose. See [Source maps](#source-maps) for details.
+
 ## Available plugins
 
 ### Source maps
 
 The Source maps build plugin automatically uploads JavaScript source maps to Datadog during your build, enabling deobfuscated stack traces in [Error Tracking][2] and [RUM][3]. This replaces the need to manually run `datadog-ci sourcemaps upload` or configure CI/CD pipelines for source map uploads.
 
-The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata.
+The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata. It can associate source maps with events by debug ID or by service and version.
 
 #### Prerequisites
 
 - A Datadog API key, set with `auth.apiKey` or the `DATADOG_API_KEY` environment variable.
 - Source maps enabled in your bundler configuration. The plugin uploads source maps but does not generate them. See [Upload JavaScript Source Maps][4] for bundler-specific source map generation setup.
-- The RUM SDK initialized with `service` and `version` parameters that match the plugin's `service` and `releaseVersion` configuration.
+- For debug ID uploads, enable debug ID injection in the build plugin.
+- For service and version uploads, initialize the RUM SDK with `service` and `version` parameters that match the plugin configuration.
 - The Datadog build plugin installed and registered with your bundler. See [Installation](#installation).
 
 #### Configuration
 
-Configure the `errorTracking.sourcemaps` object in your build plugin options:
+The following environment variables override configuration values:
+
+- `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
+- `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
+
+Choose one source map upload matching method: debug ID or service and version. These upload methods are mutually exclusive.
+
+##### Debug ID (recommended)
+
+Debug IDs associate each JavaScript bundle with its source map without relying on the bundle URL, service, or version. Use this method for new configurations.
+
+Debug ID support requires [Datadog Build Plugins version 3.3.0][6] or later.
+
+Configure the following options in `sourcemaps`:
+
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `sourcemaps.debugId` | Boolean | Yes | None | Set to `true` to inject a debug ID into each JavaScript bundle. |
+| `sourcemaps.upload` | Boolean | Yes, to upload | `false` | Set to `true` to upload source maps during the build. If omitted, the plugin only injects debug IDs. |
+| `sourcemaps.bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
+| `sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
+| `sourcemaps.maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
+
+Set `debugId` and `upload` to `true` to inject debug IDs and upload source maps during the build:
+
+{% tabs %}
+
+{% tab label="Webpack" %}
+
+```javascript
+// webpack.config.js
+const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogWebpackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{% /tab %}
+
+{% tab label="Vite" %}
+
+```javascript
+// vite.config.js
+import { datadogVitePlugin } from '@datadog/vite-plugin';
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  plugins: [
+    datadogVitePlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{% /tab %}
+
+{% tab label="esbuild" %}
+
+```javascript
+// esbuild.config.js
+const { datadogEsbuildPlugin } = require('@datadog/esbuild-plugin');
+
+require('esbuild').build({
+  plugins: [
+    datadogEsbuildPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+});
+```
+
+{% /tab %}
+
+{% tab label="Rollup" %}
+
+```javascript
+// rollup.config.js
+import { datadogRollupPlugin } from '@datadog/rollup-plugin';
+
+export default {
+  plugins: [
+    datadogRollupPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{% /tab %}
+
+{% tab label="Rspack" %}
+
+```javascript
+// rspack.config.js
+const { datadogRspackPlugin } = require('@datadog/rspack-plugin');
+
+module.exports = {
+  plugins: [
+    datadogRspackPlugin({
+      auth: {
+        apiKey: process.env.DATADOG_API_KEY,
+        site: 'datadoghq.com', // Optional: defaults to datadoghq.com
+      },
+      sourcemaps: {
+        debugId: true,
+        upload: true,
+      },
+    }),
+  ],
+};
+```
+
+{% /tab %}
+
+{% /tabs %}
+
+##### Service and version
+
+Configure the `errorTracking.sourcemaps` object to upload source maps using service and version matching:
 
 | Parameter | Type | Required | Default | Description |
 |-----------|------|----------|---------|-------------|
 | `errorTracking.sourcemaps.service` | String | Yes | None | Service name. Must match the RUM SDK `service` initialization parameter. |
-| `errorTracking.sourcemaps.releaseVersion` | String | Yes | None | Release version. Must match the RUM SDK `version` initialization parameter. |
-| `errorTracking.sourcemaps.minifiedPathPrefix` | String | Yes | None | URL or root-relative path prefix for your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
+| `errorTracking.sourcemaps.releaseVersion` | String | Yes, unless `metadata.version` is set | None | Release version. Must match the RUM SDK `version` initialization parameter. |
+| `errorTracking.sourcemaps.minifiedPathPrefix` | String | Yes | None | URL or root-relative path prefix where your minified JavaScript files are served. For example, `https://example.com/static/` or `/static/`. |
 | `errorTracking.sourcemaps.bailOnError` | Boolean | No | `false` | If `true`, the build fails when a source map upload error occurs. |
 | `errorTracking.sourcemaps.dryRun` | Boolean | No | `false` | If `true`, the plugin runs through the upload process without sending data to Datadog. Use this to verify your configuration. |
 | `errorTracking.sourcemaps.maxConcurrency` | Number | No | `20` | Maximum number of concurrent source map uploads. |
 
-The following environment variables override configuration values:
-- `DATADOG_SITE` or `DD_SITE`: Overrides `auth.site` for the intake URL.
-- `DATADOG_SOURCEMAP_INTAKE_URL`: Overrides the full intake URL directly.
-
-#### Example
-
 ```javascript
+// webpack.config.js
 const { datadogWebpackPlugin } = require('@datadog/webpack-plugin');
 
 module.exports = {
@@ -207,7 +359,7 @@ module.exports = {
 This example uses webpack. The configuration object is identical across all supported bundlers. Only the import and plugin function name differ. See [Installation](#installation) for installation instructions for your bundler.
 {% /alert %}
 
-To also display inline source code in Error Tracking stack traces, pair source map uploads with the [Source code context](#source-code-context) plugin. Source maps provide the file mapping; source code context provides the service and version association.
+To also display inline source code in Error Tracking stack traces, pair service and version source map uploads with the [Source code context](#source-code-context) plugin.
 
 ### Action name deobfuscation
 
@@ -331,3 +483,4 @@ This example uses webpack. The configuration object is identical across all supp
 [3]: /real_user_monitoring/
 [4]: /real_user_monitoring/guide/upload-javascript-source-maps
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions#mask-all-action-names
+[6]: https://github.com/DataDog/build-plugins/releases/tag/v3.3.0

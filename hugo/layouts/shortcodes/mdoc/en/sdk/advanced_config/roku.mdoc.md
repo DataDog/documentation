@@ -92,7 +92,7 @@ In addition to the default RUM attributes captured by the RUM Roku SDK automatic
 
 ### Identifying your users
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][4] for instructions on adding user information to your RUM sessions.
 
 ### Track custom global attributes
 
@@ -105,3 +105,4 @@ In addition to the default attributes captured by the SDK automatically, you can
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/roku/setup
 [3]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=roku
+[4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=roku

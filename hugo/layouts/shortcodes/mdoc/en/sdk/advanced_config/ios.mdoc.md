@@ -33,7 +33,7 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 ### Track user sessions
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][13] for instructions on adding user information to your RUM sessions.
 
 ## Track background events
 
@@ -137,7 +137,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `sessionSampleRate`
-: The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`.
+: The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`. For more information, see [Managing sessions][14].
 
 `telemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
@@ -834,22 +834,9 @@ RumMonitor.shared().currentSessionID(completion: { sessionId in
 })
 ```
 
-## Set tracking consent (GDPR compliance)
+## Managing sessions
 
-To be compliant with the GDPR regulation, the RUM iOS SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `.pending`: The RUM iOS SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOS SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `.granted`: The RUM iOS SDK starts collecting the data and sends it to Datadog.
-3. `.notGranted`: The RUM iOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `.pending`:
-
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
-- If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
+See [Managing sessions][14] for instructions on session sampling.
 
 ## Add user properties
 
@@ -877,3 +864,5 @@ For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable
 [10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
 [11]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
 [12]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios
+[13]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
+[14]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios

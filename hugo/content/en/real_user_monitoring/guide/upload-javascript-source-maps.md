@@ -443,6 +443,6 @@ On the other hand, an unminified stack trace provides you with all the context y
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: https://app.datadoghq.com/source-code/setup/rum
 [6]: https://app.datadoghq.com/organization-settings/api-keys
-[8]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_maps/
+[8]: /real_user_monitoring/setup/additional_plugins/#source-maps
 [9]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [10]: /logs/log_collection/javascript/#initialization-parameters

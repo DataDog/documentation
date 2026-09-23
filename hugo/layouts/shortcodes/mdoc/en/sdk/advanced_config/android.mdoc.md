@@ -68,7 +68,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Android SDK a
 
 ### Track user sessions
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][18] for instructions on adding user information to your RUM sessions.
 
 ### Track attributes
 
@@ -145,7 +145,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the preferred frequency for collecting mobile vitals.
 
 `setSessionSampleRate(<sampleRate>)`
-: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
+: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.) For more information, see [Managing sessions][19].
 
 `setSessionListener(RumSessionListener)`
 : Sets a listener to be notified on when a new RUM Session starts.
@@ -475,3 +475,5 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
 [16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
 [17]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android
+[18]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
+[19]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android

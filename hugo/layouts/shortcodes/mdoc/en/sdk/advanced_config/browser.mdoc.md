@@ -269,53 +269,9 @@ window.DD_RUM && window.DD_RUM.clearAccount()
 ```
 {% /if %}
 
-## Sampling
+## Managing sessions
 
-By default, no sampling is applied on the number of collected sessions. To apply a relative sampling (in %) to the number of sessions collected, use the `sessionSampleRate` parameter when initializing RUM.
-
-The following example collects only 90% of all sessions on a given RUM application:
-<!-- NPM -->
-{% if equals($lib_src, "npm") %}
-```javascript
-import { datadogRum } from '@datadog/browser-rum';
-
-datadogRum.init({
-    applicationId: '<DATADOG_APPLICATION_ID>',
-    clientToken: '<DATADOG_CLIENT_TOKEN>',
-    site: '<DATADOG_SITE>',
-    sessionSampleRate: 90,
-});
-```
-{% /if %}
-
-<!-- CDN async -->
-{% if equals($lib_src, "cdn_async") %}
-```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-        clientToken: '<CLIENT_TOKEN>',
-        applicationId: '<APPLICATION_ID>',
-        site: '<DATADOG_SITE>',
-        sessionSampleRate: 90,
-    })
-})
-```
-{% /if %}
-
-<!-- CDN sync -->
-{% if equals($lib_src, "cdn_sync") %}
-```javascript
-window.DD_RUM &&
-    window.DD_RUM.init({
-        clientToken: '<CLIENT_TOKEN>',
-        applicationId: '<APPLICATION_ID>',
-        site: '<DATADOG_SITE>',
-        sessionSampleRate: 90,
-    });
-```
-{% /if %}
-
-For a sampled out session, all pageviews and associated telemetry for that session are not collected.
+See [Managing sessions][25] for instructions on session sampling.
 
 ## User tracking consent
 
@@ -984,3 +940,4 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
 [24]: /real_user_monitoring/rum_without_limits/
+[25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser

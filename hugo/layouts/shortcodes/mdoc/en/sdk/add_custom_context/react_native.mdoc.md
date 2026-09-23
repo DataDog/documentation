@@ -2,7 +2,9 @@ You can attach user information to all RUM events to get more detailed informati
 
 ### Track user sessions
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][1] for instructions on adding user information to your RUM sessions.
+
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=react_native
 
 ### Global attributes
 

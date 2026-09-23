@@ -11,7 +11,7 @@ To set a custom global attribute, use `DdRum.AddAttribute`.
 
 ### Track user sessions
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][2] for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -30,3 +30,4 @@ DatadogSdk.Instance.AddUserExtraInfo(new ()
 ```
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=unity
+[2]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=unity

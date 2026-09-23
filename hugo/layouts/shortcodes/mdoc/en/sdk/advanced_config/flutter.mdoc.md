@@ -106,7 +106,7 @@ The RUM application ID.
 : Optional  
 **Type**: Double  
 **Default**: `100.0`  
-The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent).
+The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent). For more information, see [Managing sessions][25].
 
 `traceSampleRate`
 : Optional  
@@ -268,7 +268,7 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-See [Track user IDs](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter) for instructions on adding user information to your RUM sessions.
+See [Track user IDs][26] for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -372,3 +372,5 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
 [23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
 [24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
+[25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
+[26]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter

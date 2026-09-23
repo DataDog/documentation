@@ -112,6 +112,6 @@ This means that even if users open your application while offline, no data is lo
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: /getting_started/tagging/using_tags/#rum--session-replay
 [6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=roku#enrich-user-sessions
-[7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=roku
+[7]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=roku
 [8]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=roku
 [9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=roku

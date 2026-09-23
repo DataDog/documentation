@@ -114,6 +114,7 @@
 /*/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views.md
 /*/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces.md
 /*/real_user_monitoring/enrich_rum_data/collect_frontend_profiles.md
+/*/real_user_monitoring/enrich_rum_data/track_user_ids.md
 /*/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/_index.md
 /*/real_user_monitoring/reference/sdk_performance_impact.md
 /*/dd_e2e/cdocs/components/stepper_customizable.md
