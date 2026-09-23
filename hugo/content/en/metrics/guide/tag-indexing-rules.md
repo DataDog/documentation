@@ -223,7 +223,7 @@ The Golden Rule is:
 To configure the Golden Rule:
 
 1. Create the rule before creating any other Tag Indexing Rules. If rules already exist, move the Golden Rule to the first position.
-2. Select Exclude tags and then By tag usage.
+2. Select {{< ui >}}Exclude tags{{< /ui >}} and then {{< ui >}}By tag usage{{< /ui >}}.
 3. Set the query window to 30/60/90 days.
 4. Require tag keys to be unused in Datadog assets.
 5. Apply the rule to all custom metrics using *.
