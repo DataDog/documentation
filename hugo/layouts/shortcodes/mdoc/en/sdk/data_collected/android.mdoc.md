@@ -258,22 +258,6 @@ Network errors include information about failing HTTP requests. The following fa
 | `action.name` | string | Name of the user action. |
 | `action.target.name` | string | Element that the user interacted with. Only for automatically collected actions. |
 
-### Timeseries attributes
-
-Timeseries events are emitted when [timeseries collection is enabled][14]. Each event carries a batch of samples for one metric, taken at a regular interval across the session.
-
-Memory is the process's **resident set size** (`VmRSS`), the physical RAM currently mapped by your application. It includes pages shared with other processes, which are counted in full rather than apportioned.
-
-| Attribute | Type | Description |
-|---|---|---|
-| `timeseries.name` | string | The metric in this event, either `cpu` or `memory`. |
-| `timeseries.start` | number (ns) | Timestamp of the first sample in the event. |
-| `timeseries.end` | number (ns) | Timestamp of the last sample in the event. |
-| `timeseries.data.timestamps` | array (ns) | Timestamp of each sample. Values align index-for-index with the arrays below. |
-| `timeseries.data.values.cpu_usage` | array (number) | CPU used by the application, as a percentage of total device capacity across all cores. |
-| `timeseries.data.values.memory_footprint` | array (number) | Resident set size, in kilobytes. |
-| `timeseries.data.values.memory_percent` | array (number) | Resident set size as a percentage of total device memory. |
-
 ## Data storage
 
 Before data is uploaded to Datadog, it is stored in cleartext in your application's cache directory. This cache folder is protected by [Android's Application Sandbox][12], meaning that on most devices, this data can't be read by other applications. However, if the mobile device is rooted, or someone tampers with the Linux kernel, the stored data might become readable.

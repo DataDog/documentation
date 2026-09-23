@@ -158,10 +158,31 @@ The following telemetry provide insight into your mobile application's performan
 
 {{< /tabs >}}
 
+## Timeseries
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
+Timeseries is in Preview and is available on the iOS and Android SDKs.
+{{< /callout >}}
+
+The telemetry above is summarized per view, which shows you the average for a screen but not how resource usage moved while the user was on it. Timeseries instead measures resource usage at a regular interval for the length of the session, and Datadog graphs the result in the session, view, and operation side panels.
+
+Once you enable collection, every interval is measured for the whole session. Timeseries are not sampled.
+
+Two series are collected:
+
+- **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores.
+- **Memory**: what this measures differs by platform. On iOS, it is your application's physical footprint (`phys_footprint`), the value Xcode's memory gauge reports and the one iOS measures against your application's memory limit. On Android, it is your process's resident set size (`VmRSS`), the physical RAM currently mapped by your application, including pages shared with other processes.
+
+Because the two platforms measure different quantities, memory values are not directly comparable between iOS and Android.
+
+Timeseries collection is off by default. To turn it on, see the advanced configuration options for [iOS][3] or [Android][4].
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
+[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
+[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 
