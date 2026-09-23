@@ -19,7 +19,7 @@ further_reading:
 
 Test a prompt change on live traffic before making it the default. Use an **A/B test** to compare versions against an outcome, such as checkout conversion. Use a **Guarded Rollout** to introduce a version gradually and pause if Datadog detects a regression.
 
-<div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. A/B testing and Guarded Rollouts are available separately.</div>
+<div class="alert alert-info"><strong>Preview:</strong> Prompt Experimentation is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager. You can request access to A/B testing and Guarded Rollouts independently.</div>
 
 - **Which prompt performs better?** [Run an A/B test](#run-an-ab-test).
 - **How do I introduce a change gradually?** [Use a Guarded Rollout](#use-a-guarded-rollout).
@@ -51,19 +51,20 @@ For example, introduce an updated checkout assistant while watching checkout con
 
 1. Open the candidate version and click {{< ui >}}Deploy Version{{< /ui >}}.
 1. Select the environment in {{< ui >}}Deploy to{{< /ui >}}.
-1. Expand {{< ui >}}Deployment strategy{{< /ui >}}, choose {{< ui >}}Guarded rollout{{< /ui >}}, and select a {{< ui >}}Guardrail metric{{< /ui >}}. Use {{< ui >}}Inspect metric{{< /ui >}} to check its definition and confirm whether higher or lower values are better.
+1. Expand {{< ui >}}Deployment strategy{{< /ui >}}, choose {{< ui >}}Guarded rollout{{< /ui >}}, and select a {{< ui >}}Guardrail metric{{< /ui >}}.
+1. Use {{< ui >}}Inspect metric{{< /ui >}} to check its definition and confirm whether higher or lower values are better.
 1. Review the proposed change and click {{< ui >}}Deploy Version{{< /ui >}} to start the rollout.
 
 {{< img src="llm_observability/monitoring/prompt-guarded-rollout-setup.png" alt="Deploy version 3 dialog with Production selected, Guarded rollout enabled, and Checkout completion rate selected as the guardrail metric, with an Inspect metric link." style="width:80%;" >}}
 
 ### Follow its progress
 
-Open {{< ui >}}Active rollouts{{< /ui >}} on the prompt page to follow the candidate's exposure. Exposure increases automatically while the rollout is running. Use **Pause** to hold the current split and **Resume** to continue.
+Open {{< ui >}}Active rollouts{{< /ui >}} on the prompt page to follow the candidate's exposure. Exposure increases automatically while the rollout is running. Use {{< ui >}}Pause{{< /ui >}} to hold the current split and {{< ui >}}Resume{{< /ui >}} to continue.
 
 If a guardrail detects a regression, the rollout pauses under {{< ui >}}Needs attention{{< /ui >}}. Open the metric to investigate, then choose:
 
-- **Resume anyway** to continue exposing the candidate.
-- **Stop** to end the rollout and restore its eligible traffic to the baseline.
+- {{< ui >}}Resume anyway{{< /ui >}} to continue exposing the candidate.
+- {{< ui >}}Stop{{< /ui >}} to end the rollout and restore its eligible traffic to the baseline.
 
 **A pause does not roll back the candidate:** the current traffic split stays in place until you act. Stopping affects only that environment's rollout, not other environments or A/B tests. To start again after stopping, deploy a version again.
 
@@ -114,7 +115,7 @@ RUM is only needed when it supplies your chosen outcome. For other outcome sourc
 
 Create or select an [Experiment metric][2] under [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Metrics{{< /ui >}}][8]. Metrics Explorer metrics and monitors are not selectable here.
 
-For checkout conversion, check that the metric uses the same user ID as the prompt request and that its {{< ui >}}Desired metric direction{{< /ui >}} is higher is better. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
+For checkout conversion, check that the metric uses the same user ID as the prompt request and that its {{< ui >}}Desired metric direction{{< /ui >}} is set to {{< ui >}}Higher is better{{< /ui >}}. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
 
 {{< agent-only >}}
 **Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, matching the Experiment subject. Ask if the identity or outcome source is unclear. Do not install RUM unless the outcome uses RUM. Preserve the existing fallback, prompt variables, provider, model, and application behavior. Do not request an exact prompt version. Creating or editing metrics, starting experiments, deploying versions, and controlling rollouts require an explicit user request; when asked only to prepare code, report the remaining Datadog UI steps.
