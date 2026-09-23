@@ -20,7 +20,7 @@ Use the Amazon S3 destination to send logs in JSON or Parquet format to Amazon S
 
 You can also [route logs to Snowflake using the Amazon S3 destination](#route-logs-to-snowflake-using-the-amazon-s3-destination).
 
-**Note**: If you want to send logs to an S3 bucket, and later be able to [rehydrate][1] them for analysis and investigation in Datadog, use the [Datadog Archives][2] destination.
+**Note**: If you want to send logs to an S3 bucket, and be able to [rehydrate][1] them for analysis and investigation in Datadog, use the [Datadog Archives - Amazon S3][2] destination.
 
 ## Set up an Amazon S3 bucket
 
