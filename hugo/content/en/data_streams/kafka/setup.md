@@ -1,6 +1,10 @@
 ---
 title: Kafka Console Setup
 description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
+further_reading:
+- link: "https://www.datadoghq.com/blog/kafka-console/"
+  tag: "Blog"
+  text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
 ---
 
 This page covers the prerequisites and setup steps for Kafka Console.
@@ -88,6 +92,10 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 7. Look for a {{< ui >}}User updated{{< /ui >}} confirmation message to verify the change was successful.
 
 {{% /collapse-content %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [3]: /remote_configuration/
