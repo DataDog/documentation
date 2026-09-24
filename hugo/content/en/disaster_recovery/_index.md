@@ -68,7 +68,17 @@ If you use cloud provider integrations to send telemetry to Datadog, add those c
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="2\. Share organization details with Datadog" level="h4" %}}
+{{% collapse-content title="2\. Create a dedicated service account for sync" level="h4" id="syncing-data" %}}
+
+Datadog manages resource sync on your behalf using the open source [datadog-sync-cli][8] tool, which replicates dashboards, monitors, users, notebooks, and [34+ other resource types][9] from your primary organization into your secondary organization on a schedule.
+
+Create a Datadog [service account][10] in your secondary organization for managed sync, and share its UUID with your Datadog account team.
+
+Synced resources are provisioned under a user mapped to their original owner when possible. Otherwise, they are provisioned under the service account.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="3\. Share organization details with Datadog" level="h4" %}}
 
 Share your new organization's name and details with your Datadog account team.
 
@@ -76,7 +86,7 @@ Datadog configures your new organization as your secondary failover organization
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="3\. Retrieve organization IDs and link organizations" level="h4" %}}
+{{% collapse-content title="4\. Retrieve organization IDs and link organizations" level="h4" %}}
 
 <div class="alert alert-info">For security reasons, Datadog is unable to link organizations on your behalf.</div>
 
