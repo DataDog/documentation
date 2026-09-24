@@ -65415,12 +65415,20 @@ components:
         - content
       type: object
     LLMObsPromptChatTemplate:
-      description: A chat prompt template.
+      description: >-
+        A chat prompt template containing messages and optional named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       items:
-        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptChatTemplateItem:
+      description: A chat message or a named message placeholder in a prompt template.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptMessagePlaceholder"
     LLMObsPromptConfig:
       additionalProperties: {}
       description: >-
@@ -65533,6 +65541,33 @@ components:
       required:
         - id
       type: object
+    LLMObsPromptMessagePlaceholder:
+      additionalProperties: false
+      description: >-
+        A named placeholder that inserts a list of messages when a compatible SDK formats the prompt.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
+      properties:
+        name:
+          description: Name used to supply the message list when formatting the prompt.
+          example: "history"
+          minLength: 1
+          pattern: "^\\w+$"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptMessagePlaceholderType"
+      required:
+        - type
+        - name
+      type: object
+    LLMObsPromptMessagePlaceholderType:
+      description: Type of chat-template item.
+      enum:
+        - placeholder
+      example: "placeholder"
+      type: string
+      x-enum-varnames:
+        - PLACEHOLDER
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65588,9 +65623,11 @@ components:
       properties:
         chat_template:
           description: >-
-            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+            Chat template for this prompt version, as a list of messages and named message placeholders. Omitted for text templates.
+
+            **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
           items:
-            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+            $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
           type: array
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
@@ -65625,6 +65662,8 @@ components:
             chat_template:
               - content: "You are a helpful customer support assistant for {{company_name}}."
                 role: "system"
+              - name: "history"
+                type: "placeholder"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
             config:
@@ -65642,7 +65681,10 @@ components:
         - data
       type: object
     LLMObsPromptTemplate:
-      description: A text template or a list of chat messages.
+      description: >-
+        A text template or a list of chat messages and named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
