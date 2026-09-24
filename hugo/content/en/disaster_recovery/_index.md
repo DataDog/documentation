@@ -135,19 +135,7 @@ Configure your cloud integrations (AWS, Azure, and GCP) in both your primary and
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="3\. Create a dedicated service account for sync" level="h4" id="syncing-data" %}}
-
-Datadog manages resource sync on your behalf using the open source [datadog-sync-cli][8] tool, which replicates dashboards, monitors, users, notebooks, and [34+ other resource types][9] from your primary organization into your secondary organization on a schedule.
-
-Create a Datadog [service account][10] in your secondary organization for managed sync, and share its UUID with your Datadog account team.
-
-Synced resources are provisioned under a user mapped to their original owner when possible. Otherwise, they are provisioned under the service account.
-
-<!-- **Users are scoped to each Datadog site.** Managed sync replicates user accounts to your DDR org. However, users may need to reset their password on first login to the DDR org. Datadog recommends configuring [Just-in-Time provisioning with SAML][4] so users can access the DDR org without manual password resets. -->
-
-{{% /collapse-content %}}
-
-{{% collapse-content title="4\. Verify access and synced resources" level="h4" %}}
+{{% collapse-content title="3\. Verify access and synced resources" level="h4" %}}
 
 After synchronization is in place, confirm that:
 
