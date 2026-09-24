@@ -41,7 +41,7 @@ Each supported coding assistant has one recommended source per context, listed i
 |------------------|--------|-------------|
 | Claude Code (API or Platform) | [Anthropic Usage and Costs integration][4] | Inferred |
 | Claude Code (Enterprise plan) | [Claude Enterprise User Analytics integration][5] | Inferred |
-| Claude Code (Teams plan) | [OpenTelemetry](#configure-opentelemetry-for-ai-impact) | Direct |
+| Claude Code (Teams plan) | [OpenTelemetry](#configure-opentelemetry-for-ai-impact) | Inferred |
 | Claude Code (Amazon Bedrock or Google Vertex AI) | [OpenTelemetry](#configure-opentelemetry-for-ai-impact) | Inferred |
 | Codex | [OpenAI Codex integration][6] | Inferred |
 | Cursor | [Cursor integration][7] | Direct |
