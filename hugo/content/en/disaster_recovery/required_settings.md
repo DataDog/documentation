@@ -32,10 +32,10 @@ Any Datadog Agent using DDR's DNS-based failover must meet the [DDR prerequisite
 
 | Setting | Required configuration | Description |
 | --- | --- | --- |
-| Agent connection reuse | Set a connection-reset interval of 1-300 seconds for each telemetry type. See [Agent configuration examples][5] for the corresponding settings. | **High impact.** Long-lived connections can keep sending telemetry to the primary region after DNS changes. Configure periodic reconnections so the Agent performs DNS resolution again. |
+| Agent connection reuse | Set a connection-reset interval of 1-300 seconds for each telemetry type. See [Agent configuration examples](#agent-configuration-examples) for the corresponding settings. | **High impact.** Long-lived connections can keep sending telemetry to the primary region after DNS changes. Configure periodic reconnections so the Agent performs DNS resolution again. |
 | Non-Agent telemetry sources | Validate each source independently. Configure periodic reconnections at intervals of 300 seconds or less, where supported. Verify that connection failures trigger immediate DNS resolution instead of repeated attempts against a cached IP. | **High impact.** Non-Agent telemetry sources, such as Lambda extensions, OpenTelemetry Collector, Fluent Bit, and custom API clients, each handle DNS caching and connection reuse differently. Their behavior after a connection failure also affects failover time. |
 
-Resolving DNS again can still return a cached address. Configure [DNS record TTLs][6] and [OS and application DNS caches][7] together with connection-reset intervals.
+Resolving DNS again can still return a cached address. Configure [DNS record TTLs](#dns-record-configuration) and [OS and application DNS caches](#os-and-application-dns-caching) together with connection-reset intervals.
 
 ### Agent configuration examples
 
@@ -81,6 +81,3 @@ apm_config:
 [2]: https://www.rfc-editor.org/rfc/rfc2181
 [3]: https://www.rfc-editor.org/rfc/rfc2308
 [4]: /disaster_recovery/#prerequisites
-[5]: #agent-configuration-examples
-[6]: #dns-record-configuration
-[7]: #os-and-application-dns-caching
