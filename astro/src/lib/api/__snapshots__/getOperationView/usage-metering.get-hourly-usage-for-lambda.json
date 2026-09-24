@@ -31,7 +31,7 @@
       "queryParams": [
         {
           "name": "start_hr",
-          "type": "string (date-time)",
+          "type": "string",
           "required": true,
           "deprecated": false,
           "readOnly": false,
@@ -39,7 +39,7 @@
         },
         {
           "name": "end_hr",
-          "type": "string (date-time)",
+          "type": "string",
           "required": false,
           "deprecated": false,
           "readOnly": false,

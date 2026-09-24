@@ -83,6 +83,7 @@ describe("apiSchemaTableNode", () => {
         unionOptions: [
           {
             label: "AWSIntegration",
+            type: "object",
             fields: [
               field({
                 name: "aws_account_id",

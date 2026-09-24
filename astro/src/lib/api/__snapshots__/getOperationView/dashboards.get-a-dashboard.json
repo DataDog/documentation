@@ -61,7 +61,7 @@
             },
             {
               "name": "created_at",
-              "type": "string (date-time)",
+              "type": "date-time",
               "required": false,
               "deprecated": false,
               "readOnly": true,
@@ -93,7 +93,7 @@
             },
             {
               "name": "layout_type",
-              "type": "string",
+              "type": "enum",
               "required": true,
               "deprecated": false,
               "readOnly": false,
@@ -105,7 +105,7 @@
             },
             {
               "name": "modified_at",
-              "type": "string (date-time)",
+              "type": "date-time",
               "required": false,
               "deprecated": false,
               "readOnly": true,
@@ -121,7 +121,7 @@
             },
             {
               "name": "reflow_type",
-              "type": "string",
+              "type": "enum",
               "required": false,
               "deprecated": false,
               "readOnly": false,
@@ -149,7 +149,7 @@
               "children": [
                 {
                   "name": "id",
-                  "type": "string (uuid)",
+                  "type": "uuid",
                   "required": true,
                   "deprecated": false,
                   "readOnly": false,
@@ -325,6 +325,7 @@
                   "unionOptions": [
                     {
                       "label": "<type=alert_value>",
+                      "type": "object",
                       "description": "Alert values are query values showing the current value of the metric in any monitor defined on your system.",
                       "fields": [
                         {
@@ -345,7 +346,7 @@
                         },
                         {
                           "name": "precision",
-                          "type": "integer (int64)",
+                          "type": "int64",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -353,7 +354,7 @@
                         },
                         {
                           "name": "text_align",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -374,7 +375,7 @@
                         },
                         {
                           "name": "title_align",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -395,7 +396,7 @@
                         },
                         {
                           "name": "type",
-                          "type": "string",
+                          "type": "enum",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -417,6 +418,7 @@
                     },
                     {
                       "label": "<type=timeseries>",
+                      "type": "object",
                       "description": "The timeseries visualization allows you to display the evolution of one or more metrics, log events, or Indexed Spans over time.",
                       "fields": [
                         {
@@ -505,7 +507,7 @@
                         },
                         {
                           "name": "legend_layout",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -608,7 +610,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -634,7 +636,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -666,7 +668,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -714,7 +716,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -776,7 +778,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -802,7 +804,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -834,7 +836,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -882,7 +884,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -912,7 +914,7 @@
                             },
                             {
                               "name": "display_type",
-                              "type": "string",
+                              "type": "enum",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
@@ -958,7 +960,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -984,7 +986,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1016,7 +1018,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -1064,7 +1066,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1110,7 +1112,7 @@
                                 },
                                 {
                                   "name": "cell_display_mode",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1131,7 +1133,7 @@
                                   "children": [
                                     {
                                       "name": "trend_type",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1144,7 +1146,7 @@
                                     },
                                     {
                                       "name": "y_scale",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1166,7 +1168,7 @@
                                   "children": [
                                     {
                                       "name": "comparator",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1221,7 +1223,7 @@
                                     },
                                     {
                                       "name": "palette",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1258,7 +1260,7 @@
                                     },
                                     {
                                       "name": "value",
-                                      "type": "number (double)",
+                                      "type": "double",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1284,7 +1286,7 @@
                                   "children": [
                                     {
                                       "name": "count",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1292,7 +1294,7 @@
                                     },
                                     {
                                       "name": "order",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1323,6 +1325,7 @@
                                       "unionOptions": [
                                         {
                                           "label": "<type=canonical_unit>",
+                                          "type": "object",
                                           "description": "Canonical unit.",
                                           "fields": [
                                             {
@@ -1335,7 +1338,7 @@
                                             },
                                             {
                                               "name": "type",
-                                              "type": "string",
+                                              "type": "enum",
                                               "required": false,
                                               "deprecated": false,
                                               "readOnly": false,
@@ -1356,6 +1359,7 @@
                                         },
                                         {
                                           "label": "<type=custom_unit_label>",
+                                          "type": "object",
                                           "description": "Custom unit.",
                                           "fields": [
                                             {
@@ -1368,7 +1372,7 @@
                                             },
                                             {
                                               "name": "type",
-                                              "type": "string",
+                                              "type": "enum",
                                               "required": false,
                                               "deprecated": false,
                                               "readOnly": false,
@@ -1391,7 +1395,7 @@
                                       "children": [
                                         {
                                           "name": "type",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": false,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -1430,7 +1434,7 @@
                                     },
                                     {
                                       "name": "palette_index",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1474,7 +1478,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1500,7 +1504,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1532,7 +1536,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -1580,7 +1584,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1668,7 +1672,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1694,7 +1698,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1726,7 +1730,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -1774,7 +1778,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1828,7 +1832,7 @@
                                 },
                                 {
                                   "name": "limit",
-                                  "type": "integer (int64)",
+                                  "type": "int64",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1886,7 +1890,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1912,7 +1916,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -1944,7 +1948,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -1992,7 +1996,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2038,11 +2042,12 @@
                               "unionOptions": [
                                 {
                                   "label": "<data_source=metrics>",
+                                  "type": "object",
                                   "description": "A formula and functions metrics query.",
                                   "fields": [
                                     {
                                       "name": "aggregator",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2068,7 +2073,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2095,7 +2100,7 @@
                                     },
                                     {
                                       "name": "semantic_mode",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2109,6 +2114,7 @@
                                 },
                                 {
                                   "label": "Object 2",
+                                  "type": "object",
                                   "description": "A formula and functions events query.",
                                   "fields": [
                                     {
@@ -2121,7 +2127,7 @@
                                       "children": [
                                         {
                                           "name": "aggregation",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -2143,7 +2149,7 @@
                                         },
                                         {
                                           "name": "interval",
-                                          "type": "integer (int64)",
+                                          "type": "int64",
                                           "required": false,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -2169,7 +2175,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2200,6 +2206,7 @@
                                       "unionOptions": [
                                         {
                                           "label": "Object 1",
+                                          "type": "[object]",
                                           "description": "List of objects used to group by.",
                                           "fields": [
                                             {
@@ -2220,7 +2227,7 @@
                                                 },
                                                 {
                                                   "name": "limit",
-                                                  "type": "integer (int64)",
+                                                  "type": "int64",
                                                   "required": false,
                                                   "deprecated": false,
                                                   "readOnly": false,
@@ -2240,6 +2247,7 @@
                                         },
                                         {
                                           "label": "Object 2",
+                                          "type": "object",
                                           "description": "Flat group by configuration using multiple event facet fields.",
                                           "fields": [
                                             {
@@ -2252,7 +2260,7 @@
                                             },
                                             {
                                               "name": "limit",
-                                              "type": "integer (int64)",
+                                              "type": "int64",
                                               "required": false,
                                               "deprecated": false,
                                               "readOnly": false,
@@ -2268,7 +2276,7 @@
                                               "children": [
                                                 {
                                                   "name": "aggregation",
-                                                  "type": "string",
+                                                  "type": "enum",
                                                   "required": true,
                                                   "deprecated": false,
                                                   "readOnly": false,
@@ -2298,7 +2306,7 @@
                                                 },
                                                 {
                                                   "name": "order",
-                                                  "type": "string",
+                                                  "type": "enum",
                                                   "required": false,
                                                   "deprecated": false,
                                                   "readOnly": false,
@@ -2361,11 +2369,12 @@
                                 },
                                 {
                                   "label": "Object 3",
+                                  "type": "object",
                                   "description": "Process query using formulas and functions.",
                                   "fields": [
                                     {
                                       "name": "aggregator",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2391,7 +2400,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2411,7 +2420,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2435,7 +2444,7 @@
                                     },
                                     {
                                       "name": "sort",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2466,6 +2475,7 @@
                                 },
                                 {
                                   "label": "<data_source=apm_dependency_stats>",
+                                  "type": "object",
                                   "description": "A formula and functions APM dependency stats query.",
                                   "fields": [
                                     {
@@ -2478,7 +2488,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2553,7 +2563,7 @@
                                     },
                                     {
                                       "name": "stat",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2572,6 +2582,7 @@
                                 },
                                 {
                                   "label": "<data_source=apm_resource_stats>",
+                                  "type": "object",
                                   "description": "APM resource stats query using formulas and functions.",
                                   "fields": [
                                     {
@@ -2584,7 +2595,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2659,7 +2670,7 @@
                                     },
                                     {
                                       "name": "stat",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2682,11 +2693,12 @@
                                 },
                                 {
                                   "label": "<data_source=apm_metrics>",
+                                  "type": "object",
                                   "description": "A formula and functions APM metrics query.",
                                   "fields": [
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2769,7 +2781,7 @@
                                     },
                                     {
                                       "name": "span_kind",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2784,7 +2796,7 @@
                                     },
                                     {
                                       "name": "stat",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2812,6 +2824,7 @@
                                 },
                                 {
                                   "label": "<data_source=slo>",
+                                  "type": "object",
                                   "description": "A formula and functions metrics query.",
                                   "fields": [
                                     {
@@ -2832,7 +2845,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2843,7 +2856,7 @@
                                     },
                                     {
                                       "name": "group_mode",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2855,7 +2868,7 @@
                                     },
                                     {
                                       "name": "measure",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2889,7 +2902,7 @@
                                     },
                                     {
                                       "name": "slo_query_type",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2904,11 +2917,12 @@
                                 },
                                 {
                                   "label": "<data_source=cloud_cost>",
+                                  "type": "object",
                                   "description": "A formula and functions Cloud Cost query.",
                                   "fields": [
                                     {
                                       "name": "aggregator",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2932,7 +2946,7 @@
                                     },
                                     {
                                       "name": "data_source",
-                                      "type": "string",
+                                      "type": "enum",
                                       "required": true,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -2963,7 +2977,7 @@
                             },
                             {
                               "name": "response_format",
-                              "type": "string",
+                              "type": "enum",
                               "required": false,
                               "deprecated": false,
                               "readOnly": false,
@@ -3008,7 +3022,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3034,7 +3048,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3066,7 +3080,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -3114,7 +3128,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3176,7 +3190,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3202,7 +3216,7 @@
                                     },
                                     {
                                       "name": "limit",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3234,7 +3248,7 @@
                                         },
                                         {
                                           "name": "order",
-                                          "type": "string",
+                                          "type": "enum",
                                           "required": true,
                                           "deprecated": false,
                                           "readOnly": false,
@@ -3282,7 +3296,7 @@
                                     },
                                     {
                                       "name": "interval",
-                                      "type": "integer (int64)",
+                                      "type": "int64",
                                       "required": false,
                                       "deprecated": false,
                                       "readOnly": false,
@@ -3328,7 +3342,7 @@
                                 },
                                 {
                                   "name": "line_type",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3341,7 +3355,7 @@
                                 },
                                 {
                                   "name": "line_width",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3354,7 +3368,7 @@
                                 },
                                 {
                                   "name": "order_by",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3447,6 +3461,7 @@
                           "unionOptions": [
                             {
                               "label": "Object 1",
+                              "type": "object",
                               "description": "Wrapper for live span",
                               "fields": [
                                 {
@@ -3459,7 +3474,7 @@
                                 },
                                 {
                                   "name": "live_span",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": false,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3488,6 +3503,7 @@
                             },
                             {
                               "label": "<type=live>",
+                              "type": "object",
                               "description": "Used for arbitrary live span times, such as 17 minutes or 6 hours.",
                               "fields": [
                                 {
@@ -3500,7 +3516,7 @@
                                 },
                                 {
                                   "name": "type",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3511,7 +3527,7 @@
                                 },
                                 {
                                   "name": "unit",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3527,7 +3543,7 @@
                                 },
                                 {
                                   "name": "value",
-                                  "type": "integer (int64)",
+                                  "type": "int64",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3537,11 +3553,12 @@
                             },
                             {
                               "label": "<type=fixed>",
+                              "type": "object",
                               "description": "Used for fixed span times, such as 'March 1 to March 7'.",
                               "fields": [
                                 {
                                   "name": "from",
-                                  "type": "integer (int64)",
+                                  "type": "int64",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3557,7 +3574,7 @@
                                 },
                                 {
                                   "name": "to",
-                                  "type": "integer (int64)",
+                                  "type": "int64",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3565,7 +3582,7 @@
                                 },
                                 {
                                   "name": "type",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -3588,7 +3605,7 @@
                         },
                         {
                           "name": "title_align",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -3609,7 +3626,7 @@
                         },
                         {
                           "name": "type",
-                          "type": "string",
+                          "type": "enum",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -3676,6 +3693,7 @@
                     },
                     {
                       "label": "<type=group>",
+                      "type": "object",
                       "description": "The group widget allows you to keep similar graphs together on your dashboard. Each group has a custom header, can hold one to many graphs, and is collapsible.",
                       "fields": [
                         {
@@ -3696,7 +3714,7 @@
                         },
                         {
                           "name": "layout_type",
-                          "type": "string",
+                          "type": "enum",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -3724,7 +3742,7 @@
                         },
                         {
                           "name": "title_align",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -3737,7 +3755,7 @@
                         },
                         {
                           "name": "type",
-                          "type": "string",
+                          "type": "enum",
                           "required": true,
                           "deprecated": false,
                           "readOnly": false,
@@ -3771,7 +3789,7 @@
                 },
                 {
                   "name": "id",
-                  "type": "integer (int64)",
+                  "type": "int64",
                   "required": false,
                   "deprecated": false,
                   "readOnly": false,
@@ -3787,7 +3805,7 @@
                   "children": [
                     {
                       "name": "height",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": true,
                       "deprecated": false,
                       "readOnly": false,
@@ -3803,7 +3821,7 @@
                     },
                     {
                       "name": "width",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": true,
                       "deprecated": false,
                       "readOnly": false,
@@ -3811,7 +3829,7 @@
                     },
                     {
                       "name": "x",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": true,
                       "deprecated": false,
                       "readOnly": false,
@@ -3819,7 +3837,7 @@
                     },
                     {
                       "name": "y",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": true,
                       "deprecated": false,
                       "readOnly": false,

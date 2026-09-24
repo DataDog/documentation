@@ -6,7 +6,11 @@
  */
 
 import type { OpenAPIV3 } from "openapi-types";
-import { resolveRef, topLevelSchemaToFields } from "./refResolver";
+import {
+  resolveRef,
+  topLevelSchemaToFields,
+  stripReadOnlyFields,
+} from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
@@ -109,8 +113,11 @@ export function extractRequestBody(
   const jsonContent = content["application/json"];
   if (!jsonContent) return undefined;
 
+  // Read-only fields are omitted from request bodies: a client cannot send
+  // them. Responses keep theirs, so the filter belongs here rather than in
+  // `topLevelSchemaToFields`.
   const schema = jsonContent.schema
-    ? topLevelSchemaToFields(spec, jsonContent.schema)
+    ? stripReadOnlyFields(topLevelSchemaToFields(spec, jsonContent.schema))
     : [];
 
   const examples: Array<{ name: string; value: string }> = [];

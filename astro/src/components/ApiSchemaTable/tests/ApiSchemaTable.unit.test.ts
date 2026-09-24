@@ -69,6 +69,7 @@ describe("ApiSchemaTable type column", () => {
       unionOptions: [
         {
           label: "<type=web>",
+          type: "object",
           fields: [
             {
               name: "password",
@@ -142,6 +143,7 @@ describe("ApiSchemaTable expand-all toolbar", () => {
         unionOptions: [
           {
             label: "Option A",
+            type: "object",
             fields: [
               {
                 name: "value",
@@ -274,6 +276,7 @@ describe("ApiSchemaTable — modifiers and content", () => {
         unionOptions: [
           {
             label: "Option A",
+            type: "object",
             fields: [
               {
                 name: "value",

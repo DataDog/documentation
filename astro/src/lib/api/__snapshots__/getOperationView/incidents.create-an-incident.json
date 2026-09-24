@@ -91,11 +91,12 @@
                     "unionOptions": [
                       {
                         "label": "<cell_type=markdown>",
+                        "type": "object",
                         "description": "Timeline cell data for Markdown timeline cells for a create request.",
                         "fields": [
                           {
                             "name": "cell_type",
-                            "type": "string",
+                            "type": "enum",
                             "required": true,
                             "deprecated": false,
                             "readOnly": false,
@@ -214,7 +215,7 @@
                           },
                           {
                             "name": "type",
-                            "type": "string",
+                            "type": "enum",
                             "required": true,
                             "deprecated": false,
                             "readOnly": false,
@@ -232,7 +233,7 @@
               },
               {
                 "name": "type",
-                "type": "string",
+                "type": "enum",
                 "required": true,
                 "deprecated": false,
                 "readOnly": false,
@@ -275,7 +276,7 @@
                   "children": [
                     {
                       "name": "archived",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -283,7 +284,7 @@
                     },
                     {
                       "name": "case_id",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -291,7 +292,7 @@
                     },
                     {
                       "name": "created",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -299,7 +300,7 @@
                     },
                     {
                       "name": "customer_impact_duration",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -307,7 +308,7 @@
                     },
                     {
                       "name": "customer_impact_end",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -323,7 +324,7 @@
                     },
                     {
                       "name": "customer_impact_start",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -339,7 +340,7 @@
                     },
                     {
                       "name": "declared",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -381,7 +382,7 @@
                     },
                     {
                       "name": "detected",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -413,7 +414,7 @@
                     },
                     {
                       "name": "modified",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -473,7 +474,7 @@
                     },
                     {
                       "name": "public_id",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -481,7 +482,7 @@
                     },
                     {
                       "name": "resolved",
-                      "type": "string (date-time)",
+                      "type": "date-time",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -489,7 +490,7 @@
                     },
                     {
                       "name": "severity",
-                      "type": "string",
+                      "type": "enum",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -514,7 +515,7 @@
                     },
                     {
                       "name": "time_to_detect",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -522,7 +523,7 @@
                     },
                     {
                       "name": "time_to_internal_response",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -530,7 +531,7 @@
                     },
                     {
                       "name": "time_to_repair",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -538,7 +539,7 @@
                     },
                     {
                       "name": "time_to_resolve",
-                      "type": "integer (int64)",
+                      "type": "int64",
                       "required": false,
                       "deprecated": false,
                       "readOnly": true,
@@ -604,7 +605,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -644,7 +645,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -684,7 +685,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -724,7 +725,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -764,7 +765,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -803,7 +804,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -843,7 +844,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -883,7 +884,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -922,7 +923,7 @@
                             },
                             {
                               "name": "type",
-                              "type": "string",
+                              "type": "enum",
                               "required": true,
                               "deprecated": false,
                               "readOnly": false,
@@ -939,7 +940,7 @@
                 },
                 {
                   "name": "type",
-                  "type": "string",
+                  "type": "enum",
                   "required": true,
                   "deprecated": false,
                   "readOnly": false,
@@ -961,6 +962,7 @@
               "unionOptions": [
                 {
                   "label": "<type=users>",
+                  "type": "object",
                   "description": "User object returned by the API.",
                   "fields": [
                     {
@@ -1023,7 +1025,7 @@
                     },
                     {
                       "name": "type",
-                      "type": "string",
+                      "type": "enum",
                       "required": false,
                       "deprecated": false,
                       "readOnly": false,
@@ -1037,6 +1039,7 @@
                 },
                 {
                   "label": "<type=incident_attachments>",
+                  "type": "object",
                   "description": "Attachment data from a response.",
                   "fields": [
                     {
@@ -1075,7 +1078,7 @@
                         },
                         {
                           "name": "attachment_type",
-                          "type": "string",
+                          "type": "enum",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -1087,7 +1090,7 @@
                         },
                         {
                           "name": "modified",
-                          "type": "string (date-time)",
+                          "type": "date-time",
                           "required": false,
                           "deprecated": false,
                           "readOnly": false,
@@ -1137,7 +1140,7 @@
                                 },
                                 {
                                   "name": "type",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1177,7 +1180,7 @@
                                 },
                                 {
                                   "name": "type",
-                                  "type": "string",
+                                  "type": "enum",
                                   "required": true,
                                   "deprecated": false,
                                   "readOnly": false,
@@ -1195,7 +1198,7 @@
                     },
                     {
                       "name": "type",
-                      "type": "string",
+                      "type": "enum",
                       "required": true,
                       "deprecated": false,
                       "readOnly": false,

@@ -18,6 +18,9 @@ yarn dev
 
 The dev server starts at **http://localhost:4321**.
 
+The shared Ask AI package in `shared/packages/ask-ai` is a separate Yarn project with its own
+lockfile, so `yarn install` here does not cover it. `yarn dev` installs and builds it for you.
+
 ## Running alongside the Hugo site (Caddy proxy)
 
 The Astro site only serves API docs. To browse it inside the full Hugo site (header, footer, non-API pages), run both behind the Caddy proxy at [Caddyfile](../Caddyfile). The proxy listens on **http://localhost:1314** and routes `/api/*` (and Vite's dev paths) to Astro, everything else to Hugo.

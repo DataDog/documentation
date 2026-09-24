@@ -31,11 +31,25 @@ export const SchemaFieldSchema = z.strictObject({
       .array(
         z.strictObject({
           label: z.string(),
+          type: z
+            .string()
+            .describe(
+              'The variant schema\'s own display type, e.g. "object", "string", "double", "[object]". Hugo renders each option row with the branch\'s type, not a blanket "object".',
+            ),
           description: z
             .string()
             .optional()
             .describe("The variant schema's own description, if any"),
-          fields: z.array(SchemaFieldSchema),
+          enumValues: z
+            .array(z.string())
+            .optional()
+            .describe("Permitted values when the variant is an enum"),
+          defaultValue: z.string().optional(),
+          fields: z
+            .array(SchemaFieldSchema)
+            .describe(
+              "The variant's nested rows. Empty when the variant is a scalar, since its type is carried on the option itself.",
+            ),
         }),
       )
       .optional()
