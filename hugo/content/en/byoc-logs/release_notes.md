@@ -155,4 +155,4 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Further reading
 
-{{&lt; partial name="whats-next/whats-next.html" &gt;}}
+{{< partial name="whats-next/whats-next.html" >}}
