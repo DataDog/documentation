@@ -5,7 +5,7 @@ further_reading:
 - link: "/bits_ai/bits_code/"
   tag: "Documentation"
   text: "Bits Code"
-- link: "/bits_ai/bits_chat/#slack"
+- link: "/bits_ai/bits_chat/access/#slack"
   tag: "Documentation"
   text: "Bits Chat in Slack"
 - link: "/integrations/slack/"
@@ -68,7 +68,7 @@ The overall [Bits Code limitations][5] also apply to code channels.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /bits_ai/bits_chat/#slack
+[1]: /bits_ai/bits_chat/access/#slack
 [2]: /bits_ai/bits_code/#sessions
 [3]: https://app.datadoghq.com/code
 [4]: /bits_ai/bits_code/setup/

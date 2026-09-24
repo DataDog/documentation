@@ -216,7 +216,7 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [11]: /bits_ai/bits_code/#supported-source-code-providers
 [12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
 [13]: /bits_ai/bits_code/slack_code_channels/
-[14]: /bits_ai/bits_chat/#slack
+[14]: /bits_ai/bits_chat/access/#slack
 [15]: https://docs.slack.dev/reference/scopes/
 [16]: https://app.datadoghq.com/code/settings/slack
 
