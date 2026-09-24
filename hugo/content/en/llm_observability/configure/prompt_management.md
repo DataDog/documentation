@@ -287,6 +287,114 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 
 Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
 
+## Version prompt configuration
+
+<div class="alert alert-info"><strong>Preview:</strong> Versioned prompt configuration is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Store settings alongside your prompt so you can update and roll back both as one version. Use configuration for:
+
+- **Model settings**, such as `model` and `temperature`.
+- **Structured output schemas**, such as `response_format`.
+- **Tool definitions**, such as `tools` and `tool_choice`.
+
+Configuration is a JSON object whose fields you define. Your application reads and applies these settings; Datadog does not automatically apply them to Playground runs or model calls. Do not store secrets in configuration.
+
+### Add configuration
+
+1. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}New Prompt{{< /ui >}} and write your template.
+2. Click {{< ui >}}Save Prompt{{< /ui >}}. Enter a prompt ID, expand {{< ui >}}Configuration (optional){{< /ui >}}, and add settings:
+
+   ```json
+   {
+     "model": "<MODEL_NAME>",
+     "temperature": 0.2
+   }
+   ```
+
+3. Replace `<MODEL_NAME>` with a model that supports these settings, then click {{< ui >}}Create prompt{{< /ui >}}.
+
+The editor requires a valid JSON object. Its example text is a placeholder, not a saved configuration.
+
+{{< img src="llm_observability/monitoring/create-prompt-configuration-document-extractor.png" alt="Create new prompt dialog with the optional Configuration section expanded, showing model, temperature, and JSON response format settings." style="width:100%;" >}}
+
+### Update configuration
+
+1. Open a prompt version and select the {{< ui >}}Configuration{{< /ui >}} tab.
+2. Click {{< ui >}}Update configuration{{< /ui >}} and edit the settings.
+3. Click {{< ui >}}Save version{{< /ui >}}. To inspect the diff before saving, click {{< ui >}}Review changes{{< /ui >}} first.
+
+{{< img src="llm_observability/monitoring/configuration-tab-app-configured-cropped.png" alt="Configuration tab showing saved model settings and the Update Configuration button." style="width:100%;" >}}
+
+This creates a version without overwriting the original. Use {{< ui >}}Compare{{< /ui >}} to inspect configuration changes.
+
+Deploy the version to an environment when it is ready. Applications retrieving that environment receive its selected template and configuration together. To roll back both, deploy an earlier version. Saving alone does not change the version an environment serves.
+
+### Use configuration in your application
+
+Retrieve the prompt deployed to your application's environment, then pass its configuration to your model client.
+
+**Preview SDK access:** Contact Datadog Support or your Customer Success Manager for the SDK version to use for your language.
+
+These examples use a prompt named `summarizer` with the configuration shown above.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Access configuration through `prompt.config`:
+
+```python
+from ddtrace.llmobs import LLMObs
+
+prompt = LLMObs.get_prompt("summarizer")
+config = prompt.config
+
+model = config["model"]
+temperature = config.get("temperature", 0.2)
+```
+
+Use these values alongside `prompt.format(...)` in your [model call](#retrieve-format-and-use-a-prompt).
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+With `dd-trace` initialized, access `prompt.config` inside your async application code:
+
+```javascript
+const prompt = await tracer.llmobs.prompts.getPrompt('summarizer')
+const config = prompt.config
+
+const model = config.model
+const temperature = config.temperature ?? 0.2
+```
+
+Pass these values to your existing model client along with the formatted prompt.
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Access `prompt.Config()` in your request handler or application function:
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "summarizer")
+if err != nil {
+    return err
+}
+config := prompt.Config()
+
+model := config["model"].(string)
+temperature, ok := config["temperature"].(float64)
+if !ok {
+    temperature = 0.2
+}
+```
+
+Pass these values to your model client along with the messages returned by `prompt.Format(...)`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+**API authoring:** You can also create prompts and versions with the [Prompt Management API][8]. Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version. Send `{}` to clear it.
+
 ## Advanced usage
 
 ### Serve multiple versions from one environment

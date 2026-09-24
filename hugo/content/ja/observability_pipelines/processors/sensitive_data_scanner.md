@@ -1,14 +1,17 @@
 ---
-description: Sensitive Data Scanner プロセッサーを使用して、ログやトレースに含まれる個人識別情報 (PII) や決済カード業界
-  (PCI) データなどの機密情報を検出し、マスキングやハッシュ化を行う方法を学びます。
+description: Sensitive Data Scanner プロセッサーを使用して、ログやトレース内の個人識別情報 (PII) や決済カード業界 (PCI)
+  データなどの機密情報を検出し、マスクまたはハッシュ化する方法を説明します。
 disable_toc: false
 further_reading:
 - link: /logs/guide/regex_log_parsing/
   tag: ガイド
-  text: 正規表現を使用した効果的な Grok パースルールの記述
+  text: 正規表現を使用した効果的な Grok パースルールの作成
 - link: https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/
   tag: ブログ
-  text: Observability Pipelines を使用して AI アプリから ClickHouse および Datadog に OTel データをルーティングする
+  text: Observability Pipelines を使用して AI アプリから ClickHouse と Datadog に OTel データをルーティングする
+- link: https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/
+  tag: Architecture Center
+  text: Observability Pipelines Sensitive Data Scanner の最適化
 products:
 - icon: logs
   name: ログ
@@ -17,57 +20,57 @@ title: Sensitive Data Scanner プロセッサー
 ---
 {{< product-availability >}}
 
-## 概要 {#overview}
+## 概要{#overview}
 
-Sensitive Data Scanner プロセッサーは、ログをスキャンして、PII、PCI、カスタム機密データなどの機密情報を検出し、マスキングやハッシュ化を行います。Datadog のライブラリから事前定義済みのルールを使用するか、機密情報をスキャンするカスタムの正規表現ルールを入力できます。
+Sensitive Data Scanner プロセッサーは、ログをスキャンして、PII、PCI、カスタム機密データなどの機密情報を検出し、マスクまたはハッシュ化します。Datadog の定義済みルールライブラリから選択するか、カスタム Regex ルールを入力して機密データをスキャンできます。
 
-パイプラインとプロセッサーは、[UI](#set-up-the-processor-in-the-ui)、[API][10]、または [Terraform](#set-up-the-processor-using-terraform) でセットアップできます。
+パイプラインとプロセッサーは、[UI](#set-up-the-processor-in-the-ui)、[API][10]、または [Terraform](#set-up-the-processor-using-terraform) で設定できます。
 
 リソース使用量を削減するためのヒントについては、[パフォーマンスを最適化するためのベストプラクティス](#best-practices-to-optimize-performance)を参照してください。
 
-## UI でプロセッサーをセットアップする {#set-up-the-processor-in-the-ui}
+## UI でプロセッサーを設定する{#set-up-the-processor-in-the-ui}
 
-プロセッサーをセットアップするには:
+プロセッサーをセットアップするには、以下の手順に従います。
 
-1. {{< ui >}}filter query{{< /ui >}}を定義します。詳細については、[ログ検索構文][1]を参照してください。
+1. [{{< ui >}}filter query{{< /ui >}}] (フィルタークエリ) を定義します。詳細については、[ログ検索構文][1]を参照してください。
     - フィルターに一致するイベントのみがスキャンおよび処理されます。
-    - フィルタークエリに一致するかどうかに関係なく、すべてのイベントがパイプラインの次のステップに送信されます。
-1. {{< ui >}}Add Scanning Rule{{< /ui >}} をクリックします。
+    - フィルタークエリに一致するかどうかにかかわらず、すべてのイベントがパイプラインの次のステップに送信されます。
+1. [{{< ui >}}Add Scanning Rule{{< /ui >}}] (スキャンルールの追加) をクリックします。
 1. 次のいずれかを選択します。
 
 {{< tabs >}}
 {{% tab "ライブラリルール" %}}
 
 1. ドロップダウンメニューで、使用するライブラリルールを選択します。
-1. 選択したライブラリルールに基づいて、推奨キーワードが自動的に追加されます。スキャンルールが追加された後に、[他のキーワードの追加や推奨キーワードの削除](#add-additional-keywords)が可能です。
-1. {{< ui >}}Define rule target and conditions{{< /ui >}} セクションのドロップダウンメニューで、{{< ui >}}Entire Event{{< /ui >}}、{{< ui >}}Specific Attributes{{< /ui >}}、または {{< ui >}}Exclude Attributes{{< /ui >}} のいずれをスキャンするかを選択します。
-    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外することができます。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用します。指定した属性にネストされたデータがある場合、ネストされたすべてのデータが除外されます。
-    - 特定の属性をスキャンする場合、スキャンする属性を指定します。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用します。指定した属性にネストされたデータがある場合、ネストされたすべてのデータがスキャンされます。
-1. {{< ui >}}Define actions on match{{< /ui >}} で、一致した情報に対して実行するアクションを選択します。**注**: マスキング、部分マスキング、およびハッシュ化は、いずれも元に戻すことができないアクションです。
-    - {{< ui >}}Redact{{< /ui >}}: 一致するすべての値を、{{< ui >}}Replacement text{{< /ui >}} フィールドで指定したテキストに置き換えます。
-    - {{< ui >}}Partially Redact{{< /ui >}}: 一致したすべてのデータのうち、指定した部分を置き換えます。{{< ui >}}Redact{{< /ui >}} セクションで、マスキングする文字数と、一致したデータのどの部分をマスキングするかを指定します。
-    - {{< ui >}}Hash{{< /ui >}}: 一致したすべてのデータを一意の識別子に置き換えます。一致したデータの UTF-8 バイトは、FarmHash の 64 ビットフィンガープリントでハッシュ化されます。
-1. 必要に応じて、{{< ui >}}Add Field{{< /ui >}} をクリックして、一致したイベントに関連付けるタグを追加します。
+1. 選択したライブラリルールに基づいて、推奨キーワードが自動的に追加されます。スキャンルールを追加した後、[さらにキーワードを追加したり、推奨キーワードを削除したり](#add-additional-keywords)できます。
+1. {{< ui >}}Define rule target and conditions{{< /ui >}}セクションで、ドロップダウンメニューから {{< ui >}}Entire Event{{< /ui >}}、{{< ui >}}Specific Attributes{{< /ui >}}、{{< ui >}}Exclude Attributes{{< /ui >}} のいずれをスキャンするかを選択します。
+    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外できます。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用してください。ネストされたデータを持つ指定された属性の場合、ネストされたすべてのデータが除外されます。
+    - 特定の属性をスキャンする場合は、スキャンする属性を指定してください。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用してください。ネストされたデータを持つ指定された属性の場合、すべてのネストされたデータがスキャンされます。
+1. {{< ui >}}Define actions on match{{< /ui >}} には、一致した情報に対して実行するアクションを選択してください。**注**: マスク、部分的なマスク、およびハッシュ化はすべて元に戻せないアクションです。
+    - {{< ui >}}Redact{{< /ui >}}: 一致するすべての値を [{{< ui >}}Replacement text{{< /ui >}}] (置換テキスト) フィールドで指定したテキストに置き換えます。
+    - {{< ui >}}Partially Redact{{< /ui >}}: 一致したすべてのデータの指定された部分を置き換えます。[{{< ui >}}Redact{{< /ui >}}] (マスク) セクションで、マスクする文字数と、一致したデータのどの部分をマスクするかを指定します。
+    - {{< ui >}}Hash{{< /ui >}}: 一致したすべてのデータを一意の識別子に置き換えます。一致した UTF-8 バイトは FarmHash の 64 ビットフィンガープリントでハッシュ化されます。
+1. 必要に応じて、[{{< ui >}}Add Field{{< /ui >}}] (フィールドを追加) をクリックして、一致したイベントに関連付けるタグを追加します。
 1. スキャンルールの名前を追加します。
 1. 必要に応じて、ルールの説明を追加します。
-1. {{< ui >}}Save{{< /ui >}} をクリックします。
+1. [{{< ui >}}Save{{< /ui >}}] (保存) をクリックします。
 
-### 追加のキーワードを追加する{#add-additional-keywords}
+### さらにキーワードを追加する{#add-additional-keywords}
 
-ライブラリからスキャンルールを追加した後、各ルールを個別に編集し、キーワード辞書に追加のキーワードを追加できます。
+ライブラリからスキャンルールを追加した後、各ルールを個別に編集して、キーワード辞書に他のキーワードを追加できます。
 
-1. [パイプライン][1]に移動します。
-1. 編集するルールがある Sensitive Data Scanner プロセッサーで、{{< ui >}}Manage Scanning Rules{{< /ui >}} をクリックします。
-1. ルールでそれらを使用する場合は、{{< ui >}}Use recommended keywords{{< /ui >}} を切り替えます。それ以外の場合は、{{< ui >}}Create keyword dictionary{{< /ui >}} フィールドに独自のキーワードを追加します。これらのキーワードが一致した値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードは一致した値から 30 文字前までにある必要があります。
-1. {{< ui >}}Update{{< /ui >}} をクリックします。
+1. [パイプライン][1] に移動します。
+1. 編集するルールがある Sensitive Data Scanner プロセッサーで、[{{< ui >}}Manage Scanning Rules{{< /ui >}}] (スキャンルールの管理) をクリックします。
+1. ルールで推奨キーワードを使用する場合は、[{{< ui >}}Use recommended keywords{{< /ui >}}] (推奨キーワードの使用) を切り替えてください。それ以外の場合は、[{{< ui >}}Create keyword dictionary{{< /ui >}}] (キーワード辞書の作成) フィールドに独自のキーワードを追加します。これらのキーワードが一致した値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードは一致した値の前に 30 文字以内にあることが必要です。
+1. [{{< ui >}}Update{{< /ui >}}] (更新) をクリックします。
 
 [1]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 {{% tab "カスタムルール" %}}
 
-1. {{< ui >}}Define match conditions{{< /ui >}} セクションで、{{< ui >}}Define the regex{{< /ui >}} フィールドのイベントとの照合に使用する正規表現パターンを指定します。詳細については、[正規表現を使用した効果的な Grok パースルールの記述][1]を参照してください。
-    Sensitive Data Scanner は Perl 互換正規表現 (PCRE) をサポートしていますが、次のパターンはサポートされていません。
+1. [{{< ui >}}Define match conditions{{< /ui >}}] (一致条件の定義) セクションで、{{< ui >}}Define the regex{{< /ui >}} (正規表現の定義) フィールドにイベントとの照合に使用する正規表現パターンを指定してください。詳細については、[正規表現を使用した効果的な Grok パースルールの作成][1] を参照してください。
+    Sensitive Data Scanner は Perl 互換正規表現 (PCRE) をサポートしていますが、以下のパターンはサポートされていません。
     - 後方参照、およびサブマッチ文字列のキャプチャ (ルックアラウンド)
     - 任意のゼロ幅マッチ
     - サブルーチン参照および再帰的パターン
@@ -78,19 +81,19 @@ Sensitive Data Scanner プロセッサーは、ログをスキャンして、PII
     - `\K` マッチの開始位置のリセットディレクティブ
     - コールアウトおよび埋め込みコード
     - アトミックグループおよび絶対最大量指定子
-1. {{< ui >}}Add sample data{{< /ui >}} フィールドにサンプルデータを入力して、正規表現パターンが有効であることを確認します。
-1. {{< ui >}}Create keyword dictionary{{< /ui >}} で、正規表現条件を照合する際の検出精度を高めるためのキーワードを追加します。たとえば、16 桁の Visa クレジットカード番号をスキャンする場合、`visa`、`credit`、`card` のようなキーワードを追加できます。これらのキーワードが一致した値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードは一致した値から 30 文字前までにある必要があります。
-1. {{< ui >}}Define rule target and conditions{{< /ui >}} セクションのドロップダウンメニューで、{{< ui >}}Entire Event{{< /ui >}}、{{< ui >}}Specific Attributes{{< /ui >}}、または {{< ui >}}Exclude Attributes{{< /ui >}} のいずれをスキャンするかを選択します。
-    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外することができます。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用します。指定した属性にネストされたデータがある場合、ネストされたすべてのデータが除外されます。
-    - 特定の属性をスキャンする場合、スキャンする属性を指定します。ネストされたキーにアクセスするには、[パス表記](#path-notation-example-custom) (`outer_key.inner_key`) を使用します。指定した属性にネストされたデータがある場合、ネストされたすべてのデータがスキャンされます。
-1. {{< ui >}}Define actions on match{{< /ui >}} で、一致した情報に対して実行するアクションを選択します。**注**: マスキング、部分マスキング、およびハッシュ化は、いずれも元に戻すことができないアクションです。
-    - {{< ui >}}Redact{{< /ui >}}: 一致するすべての値を、{{< ui >}}Replacement text{{< /ui >}} フィールドで指定したテキストに置き換えます。
-    - {{< ui >}}Partially Redact{{< /ui >}}: 一致したすべてのデータのうち、指定した部分を置き換えます。{{< ui >}}Redact{{< /ui >}} セクションで、マスキングする文字数と、一致したデータのどの部分をマスキングするかを指定します。
-    - {{< ui >}}Hash{{< /ui >}}: 一致したすべてのデータを一意の識別子に置き換えます。一致したデータの UTF-8 バイトは、FarmHash の 64 ビットフィンガープリントでハッシュ化されます。
-1. 必要に応じて、{{< ui >}}Add Field{{< /ui >}} をクリックして、一致したイベントに関連付けるタグを追加します。
+1. 正規表現パターンが有効であることを確認するには、[{{< ui >}}Add sample data{{< /ui >}}] (サンプルデータの追加) フィールドにサンプルデータを入力してください。
+1. [{{< ui >}}Create keyword dictionary{{< /ui >}}] (キーワード辞書の作成) については、正規表現条件と一致させる際に検出精度を高めるためのキーワードを追加してください。たとえば、16 桁の Visa クレジットカード番号をスキャンする場合、`visa`、`credit`、`card` のようなキーワードを追加できます。これらのキーワードが一致した値から指定された文字数以内に存在するよう条件を設定することも可能です。デフォルトでは、キーワードは一致した値の前に 30 文字以内にあることが必要です。
+1. {{< ui >}}Define rule target and conditions{{< /ui >}}セクションで、ドロップダウンメニューから {{< ui >}}Entire Event{{< /ui >}}、{{< ui >}}Specific Attributes{{< /ui >}}、{{< ui >}}Exclude Attributes{{< /ui >}} のいずれをスキャンするかを選択します。
+    - イベント全体をスキャンする場合、オプションで特定の属性をスキャン対象から除外できます。ネストされたキーにアクセスするには、[パス表記](#path-notation-example) (`outer_key.inner_key`) を使用してください。ネストされたデータを持つ指定された属性の場合、ネストされたすべてのデータが除外されます。
+    - 特定の属性をスキャンする場合は、スキャンする属性を指定してください。ネストされたキーにアクセスするには、[パス表記](#path-notation-example-custom) (`outer_key.inner_key`) を使用してください。ネストされたデータを持つ指定された属性の場合、すべてのネストされたデータがスキャンされます。
+1. {{< ui >}}Define actions on match{{< /ui >}} には、一致した情報に対して実行するアクションを選択してください。**注**: マスク、部分的なマスク、およびハッシュ化はすべて元に戻せないアクションです。
+    - {{< ui >}}Redact{{< /ui >}}: 一致するすべての値を [{{< ui >}}Replacement text{{< /ui >}}] (置換テキスト) フィールドで指定したテキストに置き換えます。
+    - {{< ui >}}Partially Redact{{< /ui >}}: 一致したすべてのデータの指定された部分を置き換えます。[{{< ui >}}Redact{{< /ui >}}] (マスク) セクションで、マスクする文字数と、一致したデータのどの部分をマスクするかを指定します。
+    - {{< ui >}}Hash{{< /ui >}}: 一致したすべてのデータを一意の識別子に置き換えます。一致した UTF-8 バイトは、FarmHash の 64 ビットフィンガープリントでハッシュ化されます。
+1. 必要に応じて、[{{< ui >}}Add Field{{< /ui >}}] (フィールドを追加) をクリックして、一致したイベントに関連付けるタグを追加します。
 1. スキャンルールの名前を追加します。
 1. 必要に応じて、ルールの説明を追加します。
-1. {{< ui >}}Add Rule{{< /ui >}} をクリックします。
+1. [{{< ui >}}Add Rule{{< /ui >}}] (ルールの追加) をクリックします。
 
 [1]: /ja/logs/guide/regex_log_parsing/
 
@@ -99,14 +102,14 @@ Sensitive Data Scanner プロセッサーは、ログをスキャンして、PII
 
 ### ルールを削除する {#delete-a-rule}
 
-Sensitive Data Scanner でルールを削除するには:
+Sensitive Data Scanner でルールを削除するには、以下の手順に従います。
 
 1. [Observability Pipelines][2] に移動します。
 1. パイプラインを選択します。
-1. Sensitive Data Scanner プロセッサーをクリックして展開します。
-1. {{< ui >}}Manage Scanning Rules{{< /ui >}} をクリックします。
-1. 削除するルールを選択します。
-1. {{< ui >}}Delete{{< /ui >}} をクリックします。
+1. Sensitive Data Scanner プロセッサーをクリックして展開してください。
+1. [{{< ui >}}Manage Scanning Rules{{< /ui >}}] (スキャンルールの管理) をクリックしてください。
+1. 削除するルールを選択してください。
+1. [{{< ui >}}Delete{{< /ui >}}] (削除) をクリックします。
 
 ### パス表記の例{#path-notation-example}
 
@@ -116,9 +119,9 @@ Sensitive Data Scanner でルールを削除するには:
 
 ## Terraform を使用してプロセッサーをセットアップする{#set-up-the-processor-using-terraform}
 
-[Datadog Observability Pipeline Terraform リソース][4]を使用して、Sensitive Data Scanner プロセッサーを含むパイプラインをセットアップできます。Terraform を使用して Sensitive Data Scanner プロセッサーにルールを追加するには、次の手順に従います。
+[Datadog Observability Pipeline Terraform リソース][4] を使用して、Sensitive Data Scanner プロセッサーを含むパイプラインをセットアップできます。Terraform を使用して Sensitive Data Scanner プロセッサーにルールを追加するには、以下の手順に従います。
 
-1. [Datadog Sensitive Data Scanner Standard Pattern][5] データソースを使用して、Sensitive Data Scanner [ライブラリルール][6]のルール ID を取得します。
+1. [Datadog Sensitive Data Scanner Standard Pattern][5] データソースを使用して、Sensitive Data Scanner [ライブラリルール][6] のルール ID を取得します。
 
    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
@@ -126,21 +129,21 @@ data "datadog_sensitive_data_scanner_standard_pattern" "<RULE_IDENTIFIER>" {
 }
    {{< /code-block >}}
 
-   プレースホルダーを次のように置き換えます。
+   以下のようにプレースホルダーの値を置き換えてます。
 
-   - `<RULE_IDENTIFIER>`: 後で Observability Pipeline リソースで Sensitive Data Scanner プロセッサーをセットアップする際に使用する名前に置き換えます。
-   - `<RULE_NAME>`: ルールの正確な名前に置き換えます。ルールの全リストについては、[ライブラリルール][6]を参照してください。
+   - `<RULE_IDENTIFIER>` は、後ほど Observability Pipelines リソースで Sensitive Data Scanner プロセッサーをセットアップする際に使用する名前に置き換えます。
+   - `<RULE_NAME>` は、ルールの正確な名前に置き換えます。ルールの一覧については、「[ライブラリルール][6]」を参照してください。
 
-   たとえば、[AWS Access Key ID Scanner][7] を使用する場合は、データソースを次のように構成します。
+   たとえば、[AWS Access Key ID Scanner][7] を使用する場合は、以下のようにデータソースを構成します。
 
    {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   filter = "AWS Access Key ID Scanner"
 }
    {{< /code-block >}}
-    複数のルールに対してデータソースを追加する方法については、[完全な構成例](#full-configuration-example)を参照してください。
+    複数のルールのためのデータソースを追加する方法については、[詳細な構成例](#full-configuration-example)を参照してください。
 
-1. ライブラリルールの Observability Pipelines リソースに [rule][9] ブロックを追加します。
+1. ライブラリルール用に、Observability Pipelines リソースに [rule][9] ブロックを追加してください。
 
    {{< code-block lang="terraform" >}}
 ...
@@ -166,12 +169,12 @@ data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   }
    {{< /code-block >}}
 
-   プレースホルダーを次のように置き換えます。
+   以下のようにプレースホルダーの値を置き換えてます。
 
-   - `<YOUR_RULE_NAME>`: ルールの名前に置き換えます。この名前は Pipelines UI に表示されます。
-   - `<RULE_IDENTIFIER>`: ステップ 1 でデータソースに使用したルール識別子に置き換えます。
+   - `<YOUR_RULE_NAME>` は、ルールの名前に置き換えます。この名前は Pipelines UI に表示されます。
+   - `<RULE_IDENTIFIER>` は、ステップ 1 でデータソースに使用したルール識別子に置き換えます。
 
-   たとえば、ステップ 1 の [AWS Access Key ID Scanner][7] データソースを使用する場合は、rule ブロックを次のように構成します。
+   たとえば、ステップ 1 の [AWS Access Key ID Scanner][7] データソースを使用する場合、ルールブロックを次のように構成します。
 
    {{< code-block lang="terraform" >}}
 ...
@@ -197,18 +200,18 @@ data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
   }
    {{< /code-block >}}
 
-   複数のルールを追加する方法については、[完全な構成例](#full-configuration-example)を参照してください。
+   複数のルールを追加する方法については、[詳細な構成例](#full-configuration-example)を参照してください。
 
 1. 追加するすべてのライブラリルールについて、ステップ 1 と 2 を繰り返します。
 
-### 完全な構成例 {#full-configuration-example}
+### 詳細な構成例{#full-configuration-example}
 
-{{< img src="observability_pipelines/processors/sds_tf_ui.png" alt="「Redact AWS Access Key IDs」と「Redact US SSNs」という 2 つのスキャンルールが表示された Sensitive Data Scanner プロセッサーパネル" style="width:60%;" >}}
+{{< img src="observability_pipelines/processors/sds_tf_ui.png" alt="2 つのスキャンルール (Redact AWS Access Key IDs と Redact US SSNs) を表示する Sensitive Data Scanner プロセッサーパネル" style="width:60%;" >}}
 
-Sensitive Data Scanner プロセッサーを使用して AWS アクセスキー ID と米国社会保障番号をスキャンし、それらを文字列 `***` に置き換えてマスキングする場合は、次のようにします。
+Sensitive Data Scanner プロセッサーを使用して AWS Access Key ID と米国社会保障番号をスキャンし、それらを文字列 `***` に置き換えてマスクする場合は、次のようにします。
 
-1. [Datadog Sensitive Data Scanner Standard Pattern][5] データソースを使用して、[AWS Access Key ID Scanner][7] と [US Social Security Number Scanner][8] のルール ID を取得します。
-1. [Datadog Observability Pipeline][4] リソースの Sensitive Data Scanner プロセッサーで、データソースに定義されている Sensitive Data Scanner ルールを使用します。
+1. [Datadog Sensitive Data Scanner Standard Pattern][5] データソースを使用して、[AWS Access Key ID Scanner][7] および [US Social Security Number Scanner][8] のルール ID を取得します。
+1. [Datadog Observability Pipeline][4] リソースの Sensitive Data Scanner プロセッサーで、データソースで定義された Sensitive Data Scanner ルールを使用します。
 
 {{< code-block lang="terraform" >}}
 data "datadog_sensitive_data_scanner_standard_pattern" "aws_access_key" {
@@ -290,75 +293,75 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 }
 {{< /code-block >}}
 
-## パフォーマンスを最適化するためのベストプラクティス {#best-practices-to-optimize-performance}
+## パフォーマンスを最適化するためのベストプラクティス{#best-practices-to-optimize-performance}
 
-Sensitive Data Scanner プロセッサーは CPU を大量に消費します。パフォーマンスを最適化するために、下記のベストプラクティスに従ってください。
+Sensitive Data Scanner プロセッサーは CPU 集中型です。パフォーマンスを最適化するため、以下のベストプラクティスに従ってください。
 
-### Observability Pipelines Overview ダッシュボードでスキャンルールの使用状況を確認する {#view-scanning-rule-usage-with-the-observability-pipelines-overview-dashboard}
+### Observability Pipelines Overview ダッシュボードでスキャンルールの使用状況を確認する{#view-scanning-rule-usage-with-the-observability-pipelines-overview-dashboard}
 
-Observability Pipelines のすぐに使える [[Observability Pipelines Overview] (Observability Pipelines 概要)][16] ダッシュボードに、**[Sensitive data found by Observability Pipelines] (Observability Pipelines で見つかった機密データ)** というセクションがあります。そのセクションのウィジェットを使用して、どのスキャンルールがデータに一致しているかを確認します。
+Observability Pipelines には、すぐに使用できる [Observability Pipelines Overview][16] ダッシュボードと、**Observability Pipelines によって検出された機密データ**セクションがあります。そのセクションのウィジェットを使用して、どのスキャンルールがデータに一致しているかを確認します。
 
-1. [Dashboards] (ダッシュボード) > [[Observability Pipelines Overview]][16] に移動します。
-1. ダッシュボード上部のテンプレート変数 (`pipeline_id`、`host`、`worker_uuid`、`component_type`、`component_kind`、`component_id`) を使用して、特定のパイプラインまたはワーカーに表示を絞り込みます。
-1. 時間セレクターを使用して時間枠を広げます。
+1. [Dashboards] (ダッシュボード) > [[Observability Pipelines Overview][16]] (Observability Pipelines 概要) に移動します。
+1. ダッシュボード上部のテンプレート変数 (`pipeline_id`、`host`、`worker_uuid`、`component_type`、`component_kind`、`component_id`) を使用して、特定のパイプラインまたは Worker に表示を絞り込みます。
+1. 時間セレクターを使用して、より広い時間枠を範囲にします。
 
-次のウィジェットを使用して、Sensitive Data Scanner プロセッサーのスキャンルールの使用状況を評価します。
+以下のウィジェットを使用して、Sensitive Data Scanner プロセッサーのスキャンルールの使用状況を評価します。
 
-- **Logs containing sensitive data per scanning rule (スキャンルール別の機密データを含むログ)**: 各ルールの名前 (`visa_card_scanner_1x16_1x19_digits` や `redact_ipv4` など) の一覧を選択された時間枠における一致数と共に示します。カウントが高いルールは、アクティブにデータと一致しています。これは、どのルールが使用されているかを確認するための主要なウィジェットです。
-- **Total count of logs containing sensitive data (機密データを含むログの合計数)**: すべてのルールの一致する機密データの総量を示します。
-- **Logs containing sensitive data by Pipeline (パイプライン別の機密データを含むログ)**: 機密データを含む一致するログを示します。`pipeline_id` で一致を絞り込むことができます。これは、機密データを含むログがすべてのパイプラインで見つかるのか、特定のパイプラインのみで見つかるのかを確認するのに役立ちます。
-- **Logs containing sensitive data per host (ホスト別の機密データを含むログ)**: 一致する機密データのワーカーホスト別の内訳を示します。このウィジェットを使用して、デプロイ全体でのカバレッジを確認します。
-- **Patterns containing sensitive information (機密情報を含むパターン)** と **List of logs containing sensitive data (機密データを含むログの一覧)**: 機密データが見つかったログパターンとサンプルイベントを示します。
+- **スキャンルールに基づく機密データを含むログ**: 各ルールを名前 (例: `visa_card_scanner_1x16_1x19_digits` または `redact_ipv4`) で一覧表示し、選択した時間枠内の一致数を表示します。一致数が多いルールは、アクティブにデータと一致しています。これは、どのルールが使用されているかを確認するための主要なウィジェットです。
+- **機密データを含むログの合計数**: すべてのルールで一致した機密データの総量を示します。
+- **パイプライン別の機密データを含むログ**: 機密データを含む一致ログを表示します。`pipeline_id`で一致を絞り込むことができます。これは、機密データを含むログがすべてのパイプラインで見つかるのか、特定のパイプラインのみで見つかるのかを確認するのに役立ちます。
+- **ホスト別の機密データを含むログ**: Worker ホスト別に機密データの一致を分類します。このウィジェットを使用して、デプロイメント全体でのカバレッジを確認してください。
+- **機密情報を含むパターン**および**機密データを含むログの一覧**: 機密データが見つかったログパターンとサンプルイベントを表示します。
 
-代表的な時間枠に一致がないルールを特定したら、それらが不要であることを確認して削除します。[ルールを削除する](#delete-a-rule)を参照してください。
+代表的な期間中に一致がなかったルールを特定したら、それらが不要であることを確認して削除できます。[ルールを削除する](#delete-a-rule)を参照してください。
 
-**注**: 一致数がゼロのルールは、選択した時間枠に一致がなかったことを意味し、ルールが無効であることを意味するわけではありません。
+**注**: 一致件数がゼロのルールは、そのルールが無効であることを意味するのではなく、選択した期間内に一致しなかったことを意味します。
 
-### 必要なルールのみを有効にする {#only-enable-rules-you-need}
+### 必要なルールのみを有効にする{#only-enable-rules-you-need}
 
-有効になっていて使用されていないルールは、不要なリソースを消費します。Sensitive Data Scanner プロセッサーをチェックして、過去 24 時間に各ルールで何件の一致があったかを確認します。
+有効になっているが使用されていないルールは、不要なリソースを消費します。Sensitive Data Scanner プロセッサーをチェックして、過去 24 時間に各ルールで何件の一致があったかを表示してください。
 
 1. [Observability Pipelines][2] に移動します。
 1. パイプラインを選択します。
-1. Sensitive Data Scanner プロセッサーをクリックして展開します。
-1. {{< ui >}}View Scanning Rules{{< /ui >}} をクリックしてサイドパネルを開き、各ルールの {{< ui >}}Matches in the last 24 hours{{< /ui >}} を確認します。
+1. Sensitive Data Scanner プロセッサーをクリックして展開してください。
+1. [{{< ui >}}View Scanning Rules{{< /ui >}}] (スキャンルールの表示) をクリックしてサイドパネルを開き、各ルールの [{{< ui >}}Matches in the last 24 hours{{< /ui >}}] (過去 24 時間に一致) を確認してください。
 
-使用されていないルールを削除するには、[ルールを削除する](#delete-a-rule)を参照してください。
+未使用のルールを削除するには、『[ルールを削除する](#delete-a-rule)』を参照してください。
 
-### 機密データのスキャンが必要なイベントとフィールドのみをスキャンする {#only-scan-the-events-and-fields-that-need-to-be-scanned-for-sensitive-data}
+### 機密データをスキャンする必要があるイベントとフィールドのみをスキャンする{#only-scan-the-events-and-fields-that-need-to-be-scanned-for-sensitive-data}
 
-Sensitive Data Scanner でイベントをスキャンするのにかかる時間は、イベントのサイズにほぼ比例します。プロセッサーのパフォーマンスを最適化するには、次のようにします。
+Sensitive Data Scanner がイベントをスキャンするのにかかる時間は、イベントのサイズにほぼ比例します。プロセッサーのパフォーマンスを最適化するには、以下のようにします。
 
-- スキャンするイベントの種類がわかっている場合は、プロセッサークエリを定義して、目的のイベントのみをプロセッサーに送信します。
+- スキャンするイベントの種類がわかっている場合は、スキャン対象のイベントのみをプロセッサーに送信するプロセッサークエリを定義してください。
 
-- 特定のイベント属性をスキャン対象にしたり、イベント属性をスキャン対象から除外したりすることで、スキャン時間を短縮します。[プロセッサーをセットアップする](#set-up-the-processor-in-the-ui)の {{< ui >}}Define rule target and conditions{{< /ui >}} のステップを参照してください。
+- スキャン対象のイベント属性を指定したり、スキャン対象からイベント属性を除外したりすることで、スキャン時間を短縮してください。『[プロセッサーのセットアップ](#set-up-the-processor-in-the-ui)』の {{< ui >}}Define rule target and conditions{{< /ui >}} ステップを参照してください。
 
-### パフォーマンスの最適化を評価およびベンチマークする{#evaluate-and-benchmark-performance-optimizations}
+### パフォーマンス最適化の評価およびベンチマーク{#evaluate-and-benchmark-performance-optimizations}
 
-`pipelines.component_latency_seconds` メトリクスを使用して、次のことを行います。
+`pipelines.component_latency_seconds` メトリクスを使用して、次のことを行ってください。
 
-- ルールを追加する際のプロセッサーのパフォーマンスをベンチマークする
-- スキャンするフィールド数の削減や使用していないルールの削除など、最適化を行った後のパフォーマンスを評価する
+- ルールを追加するときのプロセッサーパフォーマンスのベンチマーク
+- スキャンされるフィールド数の削減や未使用ルールの削除など、最適化の変更を行った後のパフォーマンスの評価
 
-`pipelines.component_latency_seconds` メトリクスを表示するには、次の手順に従います。
+`pipelines.component_latency_seconds` メトリクスを表示するには、以下の手順に従います。
 
 1. [Metrics Explorer][11] に移動します。
-1. メトリクスフィールドに `pipelines.component_latency_seconds` と入力します。
-1. {{< ui >}}from{{< /ui >}} フィールドにタグ `component_id:<COMPONENT_ID>` を入力します。`<COMPONENT_ID>` は Sensitive Data Scanner プロセッサーの ID です。
+1. メトリクスフィールドに `pipelines.component_latency_seconds` を入力します。
+1. {{< ui >}}from{{< /ui >}}フィールドにタグ `component_id:<COMPONENT_ID>` を入力します。ここで `<COMPONENT_ID>` は Sensitive Data Scanner プロセッサーの ID です。
 
-**注**: `pipelines.component_latency_seconds` は分布メトリクスであるため、そのメトリクスのパーセンタイルを有効にする必要があります。手順については、[高度なクエリ機能の有効化][12]を参照してください。
+**注**: `pipelines.component_latency_seconds` は分布メトリクスであるため、そのメトリクスについてはパーセンタイルを有効にする必要があります。手順については、[高度なクエリ機能の有効化][12] を参照してください。
 
-## ヘルスメトリクス {#health-metrics}
+## 健全性メトリクス{#health-metrics}
 
-すべてのプロセッサーから出力される[コンポーネントメトリクス][13]および[プロセッサーバッファメトリクス][14]については、[Pipelines 使用状況メトリクス][15]のドキュメントを参照してください。
+すべてのプロセッサーから送信される [コンポーネントメトリクス][13] および [プロセッサーバッファメトリクス][14] については、[Pipelines 使用状況メトリクス][15] のドキュメントを参照してください。
 
-### Sensitive Data Scanner のメトリクス{#sensitive-data-scanner-metrics}
+### Sensitive Data Scanner メトリクス{#sensitive-data-scanner-metrics}
 
-- 個々のコンポーネントでフィルタリングまたはグループ化するには、`component_id` タグを使用します。
-- Sensitive Data Scanner プロセッサーのメトリクスの `component_type` タグは `sensitive_data_scanner` です。
+- `component_id` タグを使用して、個々のコンポーネントでフィルタリングまたはグループ化します。
+- `component_type` タグは、Sensitive Data Scanner プロセッサーメトリクスの場合 `sensitive_data_scanner` です。
 
 `pipelines.sds_rule_matched_total`
-: **説明**: Sensitive Data Scanner ルールに一致したイベントの数。一致するルールの名前のタグが付けられます。
+: **説明**: Sensitive Data Scanner ルールに一致したイベントの数。一致したルール名でタグ付けされます。
 : **メトリクスタイプ**: カウント
 
 `pipelines.scanned_events`
@@ -374,11 +377,11 @@ Sensitive Data Scanner でイベントをスキャンするのにかかる時間
 : **メトリクスタイプ**: カウント
 
 `pipelines.scanning.duration`
-: **説明**: イベントのスキャンに要した累積実時間 (秒単位)。このメトリクスを使用して、プロセッサーのパフォーマンスをベンチマークし、最適化を評価します。
+: **説明**: イベントのスキャンに費やされた累積ウォールクロック時間 (秒)。このメトリクスを使用して、プロセッサーパフォーマンスをベンチマークし、最適化を評価してください。
 : **メトリクスタイプ**: カウント
 
 `pipelines.scanning.cpu_duration`
-: **説明**: イベントのスキャンに要した累積 CPU 時間 (秒単位)。
+: **説明**: イベントのスキャンに費やされた累積 CPU 時間 (秒)。
 : **メトリクスタイプ**: カウント
 
 `pipelines.scanner.total_count`
@@ -386,10 +389,10 @@ Sensitive Data Scanner でイベントをスキャンするのにかかる時間
 : **メトリクスタイプ**: ゲージ
 
 `pipelines.scanner.total_regexes`
-: **説明**: すべての Sensitive Data Scanner の保持されている正規表現の数。
+: **説明**: すべての Sensitive Data Scanner 全体で保持されている正規表現の数。
 : **メトリクスタイプ**: ゲージ
 
-## 参考資料 {#further-reading}
+## 参考資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

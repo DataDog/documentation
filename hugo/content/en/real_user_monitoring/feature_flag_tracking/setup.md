@@ -30,51 +30,7 @@ To enable feature flag data collection for the Browser SDK:
 
 1. Set up [RUM browser monitoring][1]. You need the Browser RUM SDK version >= 4.25.0.
 
-2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with ` ["feature_flags"]`.
-
-   <details open>
-     <summary>npm</summary>
-
-   ```javascript
-     import { datadogRum } from '@datadog/browser-rum';
-
-     // Initialize Datadog Browser SDK
-     datadogRum.init({
-       ...
-       enableExperimentalFeatures: ["feature_flags"],
-       ...
-   });
-   ```
-
-   </details>
-
-   <details>
-     <summary>CDN async</summary>
-
-   ```javascript
-   window.DD_RUM.onReady(function() {
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   })
-   ```
-   </details>
-
-   <details>
-     <summary>CDN sync</summary>
-
-   ```javascript
-   window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   ```
-   </details>
-   <br/>
+By default, feature flag data is collected on view and error events. To collect feature flag data on additional event types, set the `trackFeatureFlagsForEvents` initialization parameter to a list including `vital`, `action`, `long_task`, or `resource`.
 
 [1]: /real_user_monitoring/application_monitoring/browser#setup
 {{% /tab %}}
@@ -946,8 +902,7 @@ Before you initialize this feature flag integration, make sure you've [set up RU
 Initialize Statsig's SDK with `statsig.initialize`.
 
 1. Update your Browser RUM SDK version 4.25.0 or above.
-2. Initialize the RUM SDK and configure the `enableExperimentalFeatures` initialization parameter with `["feature_flags"]`.
-3. Initialize Statsig's SDK (`>= v4.34.0`) and implement the `gateEvaluationCallback` option as shown below:
+2. Initialize Statsig's SDK (`>= v4.34.0`) and implement the `gateEvaluationCallback` option as shown below:
 
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
