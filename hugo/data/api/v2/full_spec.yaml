@@ -65399,6 +65399,26 @@ components:
       required:
         - data
       type: object
+    LLMObsPromptAuthoringChatTemplate:
+      description: A chat prompt containing messages, references to specific versions of other prompts, or both.
+      items:
+        $ref: "#/components/schemas/LLMObsPromptAuthoringItem"
+      minItems: 1
+      type: array
+    LLMObsPromptAuthoringItem:
+      description: >-
+        A chat message or a reference to a specific version of another prompt. A chat message must not contain an `include` field; the API rejects items that combine both forms.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptIncludeItem"
+    LLMObsPromptAuthoringMessagesTemplate:
+      description: A chat prompt whose authored items are stored under `messages`.
+      properties:
+        messages:
+          $ref: "#/components/schemas/LLMObsPromptAuthoringChatTemplate"
+      required:
+        - messages
+      type: object
     LLMObsPromptChatMessage:
       description: A single chat message in a prompt template.
       properties:
@@ -65533,6 +65553,46 @@ components:
       required:
         - id
       type: object
+    LLMObsPromptInclude:
+      additionalProperties: false
+      description: >-
+        Includes messages from a specific version of another prompt. Omitting `items` includes every message from that version in its original order. When `items` is present, messages are included in the specified order, including repetitions.
+      properties:
+        items:
+          description: >-
+            Zero-based indexes of messages from the included prompt. For example, `[2, 0, 0]` includes the third message, followed by the first message twice. Omit this field to include all messages in their original order.
+          items:
+            format: int64
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+          minItems: 1
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the included prompt.
+          example: "response-policy"
+          minLength: 1
+          type: string
+        version:
+          description: Positive sequential version number of the included prompt.
+          example: 3
+          format: int64
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - prompt_id
+        - version
+      type: object
+    LLMObsPromptIncludeItem:
+      additionalProperties: false
+      description: Includes all or selected messages from a specific version of another prompt.
+      properties:
+        include:
+          $ref: "#/components/schemas/LLMObsPromptInclude"
+      required:
+        - include
+      type: object
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65642,11 +65702,17 @@ components:
         - data
       type: object
     LLMObsPromptTemplate:
-      description: A text template or a list of chat messages.
+      description: >-
+        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+
+        **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+
+        Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
         - $ref: "#/components/schemas/LLMObsPromptChatTemplate"
+        - $ref: "#/components/schemas/LLMObsPromptAuthoringMessagesTemplate"
     LLMObsPromptTextTemplate:
       description: A text prompt template.
       minLength: 1
@@ -65678,11 +65744,13 @@ components:
       type: object
     LLMObsPromptVersionDataAttributes:
       description: >-
-        Attributes of a specific version of an Agent Observability prompt. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
+        Attributes of a specific version of an Agent Observability prompt. For a composed version, `authoring_template` contains its pinned include-bearing source; ordinary versions omit that attribute. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
       properties:
         author:
           description: UUID of the user who authored this version.
           type: string
+        authoring_template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
         created_at:
@@ -178047,7 +178115,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new prompt (and its first version) in the Agent Observability prompt registry.
+      description: |-
+        Create a new prompt (and its first version) in the Agent Observability prompt registry.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPrompt
       requestBody:
         content:
@@ -178429,7 +178500,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new version of an existing Agent Observability prompt.
+      description: |-
+        Create a new version of an existing Agent Observability prompt.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -178437,6 +178511,31 @@ paths:
         content:
           application/json:
             examples:
+              composed_chat:
+                summary: Create a version that includes all or selected messages from other prompts
+                value:
+                  data:
+                    attributes:
+                      template:
+                        messages:
+                          - include:
+                              prompt_id: "assistant-introduction"
+                              version: 2
+                          - include:
+                              items: [2, 0, 0]
+                              prompt_id: "response-examples"
+                              version: 4
+                          - content: "Answer {{question}}."
+                            role: "user"
+                    type: prompt-template-versions
+              composed_text:
+                summary: Create a version that includes text from another prompt
+                value:
+                  data:
+                    attributes:
+                      description: "Reuse the exact response policy."
+                      template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                    type: prompt-template-versions
               default:
                 value:
                   data:
@@ -178460,6 +178559,50 @@ paths:
           content:
             application/json:
               examples:
+                composed_chat:
+                  summary: A composed chat version preserves structured authored includes
+                  value:
+                    data:
+                      attributes:
+                        authoring_template:
+                          messages:
+                            - include:
+                                prompt_id: "assistant-introduction"
+                                version: 2
+                            - include:
+                                items: [2, 0, 0]
+                                prompt_id: "response-examples"
+                                version: 4
+                            - content: "Answer {{question}}."
+                              role: "user"
+                        prompt_id: "support-chat"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Here is one concise example."
+                            role: "assistant"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Answer {{question}}."
+                            role: "user"
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+                composed_text:
+                  summary: A composed text version returns compiled and authored templates
+                  value:
+                    data:
+                      attributes:
+                        authoring_template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                        prompt_id: "support-answer"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template: "Follow the approved response policy.\n\nAnswer {{question}}."
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
                 default:
                   value:
                     data:
