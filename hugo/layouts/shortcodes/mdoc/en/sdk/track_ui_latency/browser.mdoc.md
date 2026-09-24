@@ -1,4 +1,3 @@
-<a id="event-timings-and-core-web-vitals"></a>
 
 ## Core web vitals
 
