@@ -1901,9 +1901,8 @@ CREATE USER datadog WITH password '<PASSWORD>';
 **Note:** Microsoft Entra ID managed identity authentication is also supported. See [the guide][azure-13] on how to configure this for your Azure instance.
 
 
-{% tabs %}
-{% tab label="Postgres ≥ 16" %}
-
+<!-- 16 or later -->
+{% if semverIsAtLeast($postgres_version, "16.0.0") %}
 Create the following schema **in every database**:
 
 ```SQL
@@ -1914,10 +1913,11 @@ GRANT pg_read_all_settings TO datadog;
 GRANT pg_read_all_stats TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
-{% /tab %}
+{% /if %}
+<!-- Ends 16 or later -->
 
-{% tab label="Postgres 15" %}
-
+<!-- 15 only -->
+{% if equals($postgres_version, "gte_15_0_0") %}
 Create the following schema **in every database**:
 
 ```SQL
@@ -1927,10 +1927,11 @@ GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
 CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
 ```
-{% /tab %}
+{% /if %}
+<!-- Ends 15 only -->
 
-{% tab label="Postgres ≥ 10" %}
-
+<!-- 10 through 14 -->
+{% if includes($postgres_version, ["gte_10_0_0", "gte_11_0_0", "gte_12_0_0", "gte_13_0_0", "gte_14_0_0"]) %}
 Create the following schema **in every database**:
 
 ```SQL
@@ -1939,9 +1940,11 @@ GRANT USAGE ON SCHEMA datadog TO datadog;
 GRANT USAGE ON SCHEMA public TO datadog;
 GRANT pg_monitor TO datadog;
 ```
-{% /tab %}
-{% tab label="Postgres 9.6" %}
+{% /if %}
+<!-- Ends 10 through 14 -->
 
+<!-- 9.6 only -->
+{% if equals($postgres_version, "lt_10_0_0") %}
 Create the following schema **in every database**:
 
 ```SQL
@@ -1963,8 +1966,8 @@ CREATE OR REPLACE FUNCTION datadog.pg_stat_statements() RETURNS SETOF pg_stat_st
 LANGUAGE sql
 SECURITY DEFINER;
 ```
-{% /tab %}
-{% /tabs %}
+{% /if %}
+<!-- Ends 9.6 only -->
 
 {% alert %}
 For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection][azure-6] for more information.
@@ -2037,8 +2040,8 @@ For tuning options, see [Advanced Configuration][azure-14].
 ### Verify database permissions
 
 To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
-{% tabs %}
-{% tab label="Postgres ≥ 10" %}
+<!-- 10 or later -->
+{% if semverIsAtLeast($postgres_version, "10.0.0") %}
 
 ```shell
 psql -h mydb.example.com -U datadog postgres -A \
@@ -2054,9 +2057,11 @@ psql -h mydb.example.com -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{% /tab %}
-{% tab label="Postgres 9.6" %}
+{% /if %}
+<!-- Ends 10 or later -->
 
+<!-- 9.6 only -->
+{% if equals($postgres_version, "lt_10_0_0") %}
 ```shell
 psql -h mydb.example.com -U datadog postgres -A \
   -c "select * from pg_stat_database limit 1;" \
@@ -2071,8 +2076,8 @@ psql -h mydb.example.com -U datadog postgres -A \
   && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
   || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
 ```
-{% /tab %}
-{% /tabs %}
+{% /if %}
+<!-- Ends 9.6 only -->
 
 When it prompts for a password, use the password you entered when you created the `datadog` user.
 
