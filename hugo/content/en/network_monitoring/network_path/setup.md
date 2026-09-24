@@ -498,60 +498,74 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.73+` is required.
+Agent `v7.73+` and Helm chart `v3.124.0+` are required for dynamic tests. Configuring filters with Helm requires Agent `v7.83.2+` and Helm chart `v3.249.0+`.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+
+For more information, see the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
+# Network Path filters require Agent 7.83.2 or a later stable release.
+# agents:
+#   image:
+#     tag: "<AGENT_VERSION>"
+
 datadog:
-  networkPath:
-    connectionsMonitoring:
-      enabled: true
   ## Set to true to enable the Traceroute Module of the System Probe
   traceroute:
     enabled: true
 
-  ## @param collector - custom object - optional
-  ## Configuration related to Network Path Collector.
-  #
-  collector:
-    ## @param workers - integer - optional - default: 4
-    ## @env DD_WORKERS - integer - optional - default: 4
-    ## The `workers` refers to the number of concurrent workers available for network path execution.
-    #
-    # workers: 4
-    
-    ## @param pathtest_interval - integer - optional - default: 35m
-    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 30m
-    ## The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-    #
-    # pathtest_interval: 30m
+  networkPath:
+    connectionsMonitoring:
+      enabled: true
 
-    ## @param pathtest_ttl - integer - optional - default: 35m
-    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-    ## The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-    ## The TTL is reset each time the connection is seen again.
+    ## @param collector - custom object - optional
+    ## Configuration related to the Network Path Collector.
     #
-    # pathtest_ttl: 35m
+    # collector:
+      ## @param workers - integer - optional - default: 4
+      ## Number of workers that can collect paths in parallel.
+      ## Recommendation: leave at default.
+      #
+      # workers: 4
 
-    ## @param filters - list - optional
-    ## Include or exclude specific domains or IP ranges from dynamic monitoring.
-    ## Filters are applied sequentially, with later filters taking precedence.
-    ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
-    #
-    # filters:
-    #   - match_domain: '*.example.com'
-    #     type: exclude
-    #   - match_ip: 10.0.0.0/8
-    #     type: exclude
-    #   - match_domain: 'api.datadoghq.com'
-    #     type: include
+      ## @param pathtestInterval - string - optional - default: 30m
+      ## The interval between traceroute runs for monitored connections.
+      #
+      # pathtestInterval: 30m
 
+      ## @param pathtestTTL - string - optional - default: 70m
+      ## The duration a connection is monitored after it is no longer observed.
+      ## The TTL is reset each time the connection is observed again.
+      #
+      # pathtestTTL: 70m
+
+      ## @param pathtestContextsLimit - integer - optional - default: 1000
+      ## The maximum number of path test contexts that can be maintained.
+      #
+      # pathtestContextsLimit: 1000
+
+      ## @param pathtestMaxPerMinute - integer - optional - default: 150
+      ## The maximum number of path tests that can run per minute.
+      #
+      # pathtestMaxPerMinute: 150
+
+      ## @param filters - list - optional - default: []
+      ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+      ## Filters are applied sequentially, with later filters taking precedence.
+      ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+      #
+      # filters:
+      #   - match_domain: '*.example.com'
+      #     type: exclude
+      #   - match_ip: 10.0.0.0/8
+      #     type: exclude
+      #   - match_domain: 'api.datadoghq.com'
+      #     type: include
 ```
+
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
-
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -630,7 +644,9 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
+For Agent configuration, add filters to `network_path.collector.filters` in `datadog.yaml`. For Helm configuration, add filters to `datadog.networkPath.collector.filters` in `values.yaml`.
+
+The same filter syntax applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
 
 To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
@@ -642,11 +658,11 @@ network_path:
       - match_domain: 'api.slack.com'
         type: exclude
 
-      # exclude domain using `*` wildcard
-      - match_domain: '*.datadoghq.com'      # this translates to regex '.*\.datadoghq\.com
+      # exclude domains using wildcard matching (default)
+      - match_domain: '*.datadoghq.com'
         type: exclude
       - match_domain: '*.zoom.us'
-        match_domain_strategy: wildcard      # use simple wildcard matching (wildcard matching is the default)
+        match_domain_strategy: wildcard
         type: exclude
 
       # exclude single IP or using CIDR notation
@@ -655,9 +671,9 @@ network_path:
       - match_ip: 10.20.0.0/24
         type: exclude
 
-      # exclude using regex
+      # exclude a domain using regex
       - match_domain: '.*\.zoom\.us'
-        match_domain_strategy: regex         # use regex matching strategy
+        match_domain_strategy: regex
         type: exclude
 
       # include
@@ -665,8 +681,7 @@ network_path:
         type: include
 ```
 
-**Note**: 
-Filters are applied sequentially, with later filters taking precedence over earlier ones.
+**Note**: Filters are applied sequentially, with later filters taking precedence over earlier ones.
 
 For example, all domains matching `*.datadoghq.com` are ignored, except `api.datadoghq.com`.
 
