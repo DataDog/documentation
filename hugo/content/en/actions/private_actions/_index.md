@@ -6,12 +6,18 @@ aliases:
 - service_management/workflows/private_actions/
 - service_management/app_builder/private_actions/
 further_reading:
+- link: "/actions/private_actions/getting_started"
+  tag: "Documentation"
+  text: "Getting Started with Private Actions"
 - link: "actions/private_actions/set_up_agent_based"
   tag: "Documentation"
   text: "Set up a private action runner"
 - link: "actions/private_actions/enroll_runner"
   tag: "Documentation"
   text: "Enrollment and ownership"
+- link: "actions/connections"
+  tag: "Documentation"
+  text: "Connections"
 - link: "/actions/private_actions/authorize_private_actions/"
   tag: "Documentation"
   text: "Authorize Private Actions"
@@ -26,28 +32,25 @@ Private actions rely on two layers:
 - [**Private action runner**](#private-action-runner) executes the actions. It runs in your network, receives action tasks from Datadog, runs each task against the target service, and returns the result to Datadog.
 - [**The authorization layer**](#authorization-models) is managed in Datadog. It defines which users and products can run which actions on which runners, and grants or denies each action before it reaches a runner. The actions a runner is allowed to run are also restricted on the Agent side, by the actions allowlist in the Agent configuration (`datadog.yaml`).
 
+<div class="alert alert-danger">On US1-FED and US2-FED sites, the <a href="/actions/private_actions/set_up_standalone">standalone runner</a> is the supported private action runner and <a href="/actions/connections/">Connections</a> is the supported authorization model.</div>
+
 ## Private action runner
 
 The private action runner is the component you deploy in your environment to run private actions. It opens an outbound connection to Datadog, polls for action tasks, runs each task against the target service, and returns the result.
 
-The private action runner is available in two forms: a standalone runner that you deploy and manage yourself, or a runner built into the Datadog Agent.
+The private action runner is available in the following forms:
 
-| | Runner in the Datadog Agent | Standalone runner |
-|---|---|---|
-| **What it is** | A component of the Datadog Agent, turned on with a single configuration flag. | A dedicated container you can install and manage independently of the Datadog Agent. |
-| **Best when** | You already run the Datadog Agent and want to manage the runner through the Agent life cycle. | You need an integration that is not yet available in the Agent. |
-| **Status** | Recommended for new deployments. | Supported (maintenance mode). |
+**Runner in the Datadog Agent (Recommended)**: A component of the Datadog Agent that you enable with a single configuration flag. This option is recommended for new deployments on commercial Datadog sites, particularly if you already use the Agent and want to manage the runner through the Agent lifecycle. For installation steps, see [Set up a private action runner in the Datadog Agent][1].
 
-<div class="alert alert-tip">Datadog recommends running the private action runner in the Datadog Agent</div>
-
-For installation steps, see [Set up a private action runner in the Datadog Agent][1] or [Set up a standalone runner][2].
+**Standalone runner**: A dedicated container that you install and manage independently of the Datadog Agent. On commercial Datadog sites, use this option when you need an integration that is not yet available in the Agent. The standalone runner is supported in maintenance mode. On US1-FED and US2-FED, it is the supported deployment option for Private Actions. For installation steps, see [Set up a standalone runner][2].
 
 ## Authorization models
 
 Datadog offers two authorization models. The model a runner uses is set when the runner is enrolled, and it follows from the runner's ownership. For more information, see [Enrollment and ownership][3].
 
-- **Execution Policies** apply to runners in the Datadog Agent and are built for managing access at scale. Instead of creating a separate connection for each integration on each runner, you use Agent tags to target one or more sets of runners. Execution Policies also give you fine-grained control: you can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action.
-- **Connections** are available for both the runner in the Agent and the standalone runner. They can be attached to at most a single runner. A connection can store credentials for a service.
+**Execution Policies** apply to runners in the Datadog Agent and are built for managing access at scale. Instead of creating a separate connection for each integration on each runner, you use Agent tags to target one or more sets of runners. Execution Policies also give you fine-grained control: you can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action.
+
+**Connections** are available for both the runner in the Agent and the standalone runner. They can be attached to at most a single runner. A connection can store credentials for a service. On US1-FED and US2-FED, it is the supported authorization model for Private Actions.
 
 To compare the two models and decide which one applies to your runner, see [Authorize private actions][4].
 

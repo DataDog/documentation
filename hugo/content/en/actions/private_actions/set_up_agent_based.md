@@ -22,6 +22,9 @@ further_reading:
   text: "Set up a standalone private action runner"
 ---
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Datadog Agent runner is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Running the private action runner in the Datadog Agent is the recommended path for new deployments. If you already run the Datadog Agent, you enable the runner with a single configuration flag and manage it through the Agent life cycle.

@@ -28,7 +28,11 @@ This page explains how that authorization decision is made. It covers the models
 
 ## Find your authorization model
 
-A runner is authorized using one of two models: [**Execution Policies**](#execution-policies) or [**Connections**](#connections). The model is determined by the runner's ownership, set once when the runner is enrolled. A given runner uses exactly one of these models for its entire lifetime; you cannot mix the two on the same runner. Because ownership is set per runner, a single Agent-based fleet can include both ownerless and owned runners, each authorized by its own model.
+A runner is authorized using one of the following models, depending on your Datadog site: [**Execution Policies**](#execution-policies) or [**Connections**](#connections).
+
+<div class="alert alert-danger">On US1-FED and US2-FED, <a href="/actions/connections/">Connections</a> is the supported authorization model.</div>
+
+The model is determined by the runner's ownership, set once when the runner is enrolled. A given runner uses exactly one of these models for its entire lifetime; you cannot mix the two on the same runner. Because ownership is set per runner, a single Agent-based fleet can include both ownerless and owned runners, each authorized by its own model.
 
 - **Runner in the Datadog Agent** depends on how it was enrolled. An ownerless Agent runner uses [Execution Policies](#execution-policies); an owned Agent runner uses [Connections](#connections).
 - **Standalone runner** is always owned, so it always uses [Connections](#connections).
@@ -45,6 +49,9 @@ For how enrollment sets a runner's ownership, see [Enrollment and ownership][1].
 | **Control** | Fine-grained: allow or deny specific actions or sets of actions, plus integration-specific scopes such as the target Kubernetes namespaces for a Kubernetes action | Per-runner: a connection targets one specific runner |
 
 ## Execution Policies
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Execution Policies is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 **Execution Policies** are an authorization model for runners in the Datadog Agent. Each policy manages access across one or more sets of runners at once. Instead of a separate connection per integration per runner, you use **Agent tags** to define the target Agents. You then attach an allow or deny rule to them.
 
