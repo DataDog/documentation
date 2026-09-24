@@ -48,7 +48,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 - Speeds up indexer decommissioning during rolling updates and scale-downs.
 - Prioritizes monitor queries over other searches, and caches query filters so monitors run faster over shifting time windows.
-- Improved performance up to 10x`field:*` existence queries, and faster term and histogram aggregations.
+- Speeds up `field:*` existence queries by up to 10x and improves performance for term and histogram aggregations.
 - Adds support for numeric histogram group-by queries.
 - Improves Google Cloud Storage reliability with request timeouts, retries, and credential caching.
 - Removes the embedded web UIs.
