@@ -18,7 +18,12 @@ further_reading:
 
 On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][14] your applications in one step, with no additional configuration required. 
 
-{{% dd-apm-skill %}}
+{{< skill-callout
+    title="Set up APM with an agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Enable APM on your applications
 
@@ -138,6 +143,8 @@ To update the SDK versions:
 {{< /site-region >}}
 
 Instrumentation rules (available for Agent v7.73+) let you control which processes are automatically instrumented by SSI on Linux hosts.
+
+**Note**: You can use Bits AI to create instrumentation rules with natural language. Describe which processes you want to instrument, and Bits AI generates the corresponding rule.
 
 To configure instrumentation rules:
 

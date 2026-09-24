@@ -34,11 +34,17 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 #### Create and configure the service principal in Databricks
 
+1. If you want to use a **Microsoft Entra ID managed** service principal instead of a **Databricks managed** one, first register an application in Microsoft Entra ID ([Microsoft Entra documentation][22]):
+   1. Sign in to the [Microsoft Entra admin center][23] as at least a Cloud Application Administrator. If your organization has multiple tenants, switch to the correct one using **Directories + subscriptions**.
+   1. Go to **Entra ID > App registrations**, then click **New registration**.
+   1. Enter a name, select **Accounts in this organizational directory only (Single tenant)**, and click **Register**.
+   1. On the application's **Overview** page, note the **Application (client) ID** and **Directory (tenant) ID**.
+   1. Click **Certificates & secrets > Client secrets > New client secret**. Enter a description, set the expiry to the maximum allowed (730 days), and click **Add**. Copy the generated secret value. It is displayed only once.
 1. As a **Databricks workspace admin**, go to {{< ui >}}Settings{{< /ui >}} by clicking your profile in the upper-right corner of the workspace.
 1. On the {{< ui >}}Identity and access{{< /ui >}} tab, click {{< ui >}}Manage{{< /ui >}} next to {{< ui >}}Service principals{{< /ui >}}.
 1. Click {{< ui >}}Add service principal{{< /ui >}}, then click {{< ui >}}Add new{{< /ui >}}.
 
-   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. Datadog does NOT support "Microsoft Entra ID managed" service principals.</div>
+   <div class="alert alert-warning">For Azure Databricks, select the "Databricks managed" management type. If you registered a Microsoft Entra ID application above, select "Microsoft Entra ID managed" instead, and paste the <strong>Application (client) ID</strong> you noted.</div>
 1. Enter a name and enable the following workspace entitlements for the service principal:
    - {{< ui >}}Workspace access{{< /ui >}}
    - {{< ui >}}Databricks SQL access{{< /ui >}}
@@ -47,7 +53,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    <div class="alert alert-info">If you cannot grant the <strong>Admin access</strong> entitlement, provision granular access instead, as described in the <a href="#permissions">Permissions</a> section under Advanced Configuration.</div>
 1. Click **Add**.
 
-1. Click on the name of your new service principal. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
+1. If you created a **Databricks managed** service principal, click on its name. Under the {{< ui >}}Secrets{{< /ui >}} tab, click {{< ui >}}Generate secret{{< /ui >}}.
    1. Set {{< ui >}}Lifetime (days){{< /ui >}} to the maximum value allowed (730).
 
    1. Click {{< ui >}}Generate{{< /ui >}}.
@@ -55,6 +61,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
    1. Take note of your client ID and client secret.
 
   {{< img src="data_jobs/databricks/client-id-secret.png" alt="In Databricks, a modal showing the client ID and secret associated with a new OAuth secret is displayed." style="width:70%;" >}}
+
+   If you created a **Microsoft Entra ID managed** service principal, use the client ID and secret you generated in Microsoft Entra ID.
 
 1. On the {{< ui >}}Permissions{{< /ui >}} tab, click {{< ui >}}Grant access{{< /ui >}}. Search for the new service principal, grant it the {{< ui >}}Manage{{< /ui >}} permission, and click {{< ui >}}Save{{< /ui >}}.
 
@@ -64,7 +72,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the client ID and secret you generated.
    {{< img src="data_jobs/databricks/connect-workspace-form-m2m.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, client ID, and client secret." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+1. If you created a **Microsoft Entra ID managed** service principal, select the **Use Microsoft Entra ID managed service principal** checkbox and enter the **Directory (tenant) ID** you noted earlier.
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. Datadog uses this warehouse to read the Unity Catalog [system tables][20]. These tables power Databricks cost visibility in Jobs Monitoring and [Cloud Cost Management][18], serverless job monitoring, SQL warehouse and query monitoring, and [Quality Monitoring][21].
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the service principal `CAN USE`.
@@ -77,6 +86,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
+   1. Add the service principal to the `databricks_pii_access` account-level group. Serverless job monitoring and SQL warehouse and query monitoring require this membership, because Databricks masks SQL query text for principals outside the group. See [Query text access](#query-text-access) for the full requirements.
 1. In the **Select products to set up integration** section, ensure that Data Observability: Jobs Monitoring is {{< ui >}}Enabled{{< /ui >}}.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
@@ -86,6 +96,8 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 [19]: https://docs.databricks.com/aws/en/compute/sql-warehouse/
 [20]: https://docs.databricks.com/aws/en/admin/system-tables/
 [21]: /data_observability/quality_monitoring/data_warehouses/databricks/
+[22]: https://learn.microsoft.com/entra/identity-platform/howto-create-service-principal-portal
+[23]: https://entra.microsoft.com
 
 {{% /tab %}}
 
@@ -117,7 +129,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}Add Databricks Workspace{{< /ui >}}.
 1. Enter a workspace name, your Databricks workspace URL, and the Databricks token you generated.
    {{< img src="data_jobs/databricks/configure-workspace-form.png" alt="In the Datadog-Databricks integration tile, a Databricks workspace is displayed. This workspace has a name, URL, and API token." style="width:100%;" >}}
-1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. This gives you visibility into your Databricks costs in Jobs Monitoring or [Cloud Cost Management][18] and powers [Quality Monitoring][21].
+1. Provide the ID of a [Databricks SQL Warehouse][19] for Datadog to query. Datadog uses this warehouse to read the Unity Catalog [system tables][20]. These tables power Databricks cost visibility in Jobs Monitoring and [Cloud Cost Management][18], serverless job monitoring, SQL warehouse and query monitoring, and [Quality Monitoring][21].
    1. In Databricks, go to {{< ui >}}SQL Warehouses{{< /ui >}} and select the warehouse for Datadog to use. It must be Pro or Serverless. Classic Warehouses are not supported. To reduce costs, use a dedicated 2XS warehouse, with Auto Stop configured for 5-10 minutes.
    1. Copy the ID from the warehouse's overview page (it is also the last segment of the warehouse's URL) and enter it in the integration tile.
    1. On the warehouse's {{< ui >}}Permissions{{< /ui >}} tab (top right), grant the token's principal `CAN USE`.
@@ -130,6 +142,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
       ```
 
       <div class="alert alert-info">The user running these commands must have the <code>MANAGE</code> privilege on <code>CATALOG system</code>.</div>
+   1. Add the token's principal to the `databricks_pii_access` account-level group. Serverless job monitoring and SQL warehouse and query monitoring require this membership, because Databricks masks SQL query text for principals outside the group. See [Query text access](#query-text-access) for the full requirements.
 1. In the **Select products to set up integration** section, make sure the Data Observability: Jobs Monitoring product is **Enabled**.
 1. In the {{< ui >}}Datadog Agent Setup{{< /ui >}} section, choose either
     - [Managed by Datadog (recommended)](?tab=datadogmanagedglobalinitscriptrecommended#install-the-datadog-agent): Datadog installs and manages the Agent with a global init script in the workspace.
@@ -492,6 +505,32 @@ Additionally, for Datadog to access your Databricks cost data in Data Observabil
    ```
    The user granting these must have `MANAGE` privilege on `CATALOG system`.
 
+#### Query text access
+
+Databricks masks SQL query text for any principal that is not an account administrator or a member of the `databricks_pii_access` account-level group. For a masked principal, query text is returned as `<Redacted>` in:
+
+- The `statement_text` column of the [`system.query.history`][30] system table
+- The [Query History API][31]
+- The [List Queries API][32]
+- Audit log events that capture SQL statement text
+
+Add the service principal to `databricks_pii_access` to use the following capabilities, which read query text:
+
+- **Serverless job monitoring**: Monitoring jobs that run on [serverless compute][34], where no Datadog Agent runs on the cluster.
+- **SQL warehouse & query monitoring**: Visibility into the queries running on your SQL warehouses, and optimization recommendations generated by Datadog.
+
+Databricks cost data, job monitoring on all-purpose and job clusters, and table-level [Quality Monitoring][35] metrics do not depend on query text and are unaffected.
+
+Group membership is required in addition to the [system table grants](#cost-data-permissions). A principal that is in the group but lacks `SELECT` on `CATALOG system` still cannot read query history.
+
+To create the group and add the service principal:
+
+1. The `databricks_pii_access` group does not exist in a Databricks account by default, and workspace administrators are not members of it automatically. Create it with the exact name `databricks_pii_access`, which is case-sensitive.
+   - If you do not manage groups with SCIM or an external identity provider, go to {{< ui >}}Account Console{{< /ui >}} > {{< ui >}}User Management{{< /ui >}} > {{< ui >}}Groups{{< /ui >}} > {{< ui >}}Add Group{{< /ui >}}.
+   - If you manage groups with SCIM or an external identity provider, create the group there instead.
+1. Add the service principal or token principal used by the Datadog-Databricks integration to the group.
+
+For more details, see the Databricks documentation on [managing account-level groups][33].
 
 ### Tag spans at runtime
 
@@ -575,3 +614,9 @@ To monitor workspaces that use [Databricks Private Link][14] connectivity, see [
 [27]: https://docs.databricks.com/aws/en/admin/system-tables/
 [28]: /getting_started/tagging/
 [29]: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+[30]: https://docs.databricks.com/aws/en/admin/system-tables/query-history
+[31]: https://docs.databricks.com/api/workspace/queryhistory/list
+[32]: https://docs.databricks.com/api/workspace/queries/list
+[33]: https://docs.databricks.com/aws/en/admin/users-groups/groups
+[34]: https://docs.databricks.com/aws/en/compute/serverless/
+[35]: /data_observability/quality_monitoring/data_warehouses/databricks/

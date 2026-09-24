@@ -1,0 +1,15 @@
+# Allows DataDog/datadog-api-spec CI to push generated documentation and create PRs.
+issuer: https://token.actions.githubusercontent.com
+
+subject: repo:DataDog/datadog-api-spec:pull_request
+
+claim_pattern:
+  base_ref: master
+  event_name: pull_request
+  job_workflow_ref: DataDog/datadog-api-spec/\.github/workflows/ci-cd\.yml@refs/pull/[0-9]+/merge
+  ref: refs/pull/[0-9]+/merge
+  repository: DataDog/datadog-api-spec
+
+permissions:
+  contents: write
+  pull_requests: write

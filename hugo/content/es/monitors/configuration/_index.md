@@ -1,54 +1,55 @@
 ---
 aliases:
 - /es/monitors/create/configuration
-description: Describe la página de creación de seguimiento.
+description: Aprenda a configurar y personalizar los seguimientos utilizando la página
+  de creación de seguimientos en Datadog.
 further_reading:
 - link: /monitors/notify/
   tag: Documentación
-  text: Notifications de seguimiento
+  text: Notifications de seguimientos
 - link: /monitors/manage/
   tag: Documentación
-  text: Gestiona seguimientos
+  text: Administre seguimientos.
 - link: /monitors/status/
   tag: Documentación
-  text: Estado del Seguimiento
+  text: Estado del seguimiento
 - link: https://www.datadoghq.com/blog/manage-monitors-with-datadog-teams/
   tag: Blog
-  text: Gestiona tus seguimientos de manera más eficiente con Datadog Teams
+  text: Administre sus seguimientos de manera más eficiente con Datadog Teams.
 - link: https://learn.datadoghq.com/courses/alert-monitor-notifications
-  tag: Centro de Aprendizaje
-  text: Personaliza las Notifications de seguimiento de alerta
-title: Configura Seguimientos
+  tag: Centro de aprendizaje
+  text: Personalice las Notifications del seguimiento de alerta.
+title: Configure los seguimientos.
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
-Para comenzar a configurar el seguimiento, completa lo siguiente:
+Para comenzar a configurar el seguimiento, complete lo siguiente:
 
-* **Define la consulta de búsqueda:** Construye una consulta para contar eventos, medir métricas, agrupar por una o varias dimensiones, y más.
-* **Establece condiciones de alerta:** Define umbrales de alerta y advertencia, períodos de evaluación y configura opciones avanzadas de alerta.
-* **Configura notificaciones y automatizaciones:** Escribe un título y un mensaje de notificación personalizados con variables. Elige cómo se envían las Notifications a tus Teams. Incluye automatizaciones de flujo de trabajo o incidencias en la notificación de alerta.
-* **Define permisos y notificaciones de auditoría:** Configura controles de acceso granulares y designa roles y usuarios específicos que pueden editar un seguimiento. Habilita notificaciones de auditoría para alertar si un seguimiento es modificado.
+* {{< ui >}}Define the search query{{< /ui >}}: Construya una consulta para contar eventos, medir métricas, agrupar por una o varias dimensiones y más.
+* {{< ui >}}Set alert conditions{{< /ui >}}: Defina los umbrales de alerta y de advertencia, los periodos de tiempo de evaluación y configure las opciones avanzadas de alerta.
+* {{< ui >}}Configure notifications and automations{{< /ui >}}: Escriba un título y un mensaje de notificación personalizados con variables. Elija cómo se envían las Notifications a sus equipos (correo electrónico, Slack o PagerDuty). Incluya automatizaciones de flujo de trabajo o casos en la notificación de alerta.
+* {{< ui >}}Define permissions and audit notifications{{< /ui >}}: Configure controles de acceso granulares y designe roles y usuarios específicos que puedan editar un seguimiento. Habilite las Notifications de auditoría para alertar si se modifica un seguimiento.
 
-## Define la consulta de búsqueda {#define-the-search-query}
+## Defina la consulta de búsqueda {#define-the-search-query}
 
-Para aprender a construir la consulta de búsqueda, consulte las páginas de los [tipos de seguimiento][1] individuales.
+Para aprender a construir la consulta de búsqueda, consulte las páginas de [tipos de seguimiento][1] individuales.
 
 ## Vista previa de gráficos {#preview-graphs}
 
-A medida que construye o modifica su consulta, el gráfico de vista previa en la parte superior de la configuración se actualiza dinámicamente para reflejar los resultados en tiempo real.
+A medida que crea o modifica su consulta, el gráfico de vista previa en la parte superior de la configuración se actualiza dinámicamente para reflejar los resultados en tiempo real.
 
 {{< tabs >}}
 {{% tab "Datos evaluados" %}}
 
 {{< img src="/monitors/configuration/evaluated_data_preview_high_error_rate.png" alt="Gráfico de vista previa de datos evaluados" style="width:100%;" >}}
 
-El gráfico de datos evaluados muestra cómo su monitor habría evaluado los datos utilizando su consulta y umbrales actuales. Con la vista previa de evaluación, puedes
-- Ver transiciones de estado históricas (por ejemplo, `OK` → `ALERT`).
-- Comprende cómo se habría comportado tu seguimiento.
-- Vista previa de quién sería notificado (incluyendo las reglas de notificación)
-- Identifica rápidamente configuraciones incorrectas antes de guardar.
+El gráfico {{< ui >}}Evaluated Data{{< /ui >}} muestra cómo su seguimiento habría evaluado los datos usando su consulta y umbrales actuales. Con la vista previa de evaluación, puede
+- Vea las transiciones de estado históricas (por ejemplo, `OK` → `ALERT`).
+- Entienda cómo se habría comportado su seguimiento.
+- Obtenga una vista previa de quién sería notificado (incluyendo las reglas de notificación)
+- Detecte rápidamente configuraciones erróneas antes de guardar.
 
-Esta función es compatible con seguimientos de Métricas, Registros, APM, RUM, Eventos, Auditoría, Base de Datos, LLM Observability y Despliegue.
+Esta función es compatible con seguimientos de Metrics, Logs, APM, RUM, Eventos, Auditoría, Base de datos, Agent Observability y Despliegue.
 
 {{% /tab %}}
 
@@ -56,27 +57,27 @@ Esta función es compatible con seguimientos de Métricas, Registros, APM, RUM, 
 
 {{< img src="/monitors/configuration/source_data_graph_high_error_rate.png" alt="Gráfico de vista previa de datos de fuente" style="width:100%;" >}}
 
-El gráfico de datos de fuente muestra las series temporales o la salida de consulta en bruto para su seguimiento, sin ninguna evaluación de umbrales o lógica de alerta aplicada. Esto te permite:
+El gráfico {{< ui >}}Source Data{{< /ui >}} muestra las series temporales sin procesar o el resultado de la consulta para su seguimiento, sin ninguna evaluación de umbral o lógica de alerta aplicada. Esto le permite:
 
-- Visualiza los datos subyacentes que tu seguimiento está evaluando.
-- Correlaciona los cambios de estado de alerta con las tendencias de datos reales.
-- Identifica anomalías, brechas o patrones inesperados en tus datos antes de configurar las condiciones de alerta.
+- Visualice los datos subyacentes que su seguimiento está evaluando.
+- Correlacione los cambios de estado de alerta con las tendencias de datos reales.
+- Identifique anomalías, brechas o patrones inesperados en sus datos antes de configurar las condiciones de alerta.
 
-Utiliza el gráfico de datos de fuente para asegurarte de que tu consulta esté devolviendo los resultados esperados y para ayudar a refinar tus umbrales de alerta y ventanas de evaluación.
+Utilice el gráfico {{< ui >}}Source Data{{< /ui >}} para asegurarse de que su consulta devuelva los resultados esperados y para ayudar a refinar sus umbrales de alerta y ventanas de evaluación.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Establece condiciones de alerta {#set-alert-conditions}
+## Establezca condiciones de alerta {#set-alert-conditions}
 
-Las condiciones de alerta varían según el [tipo de seguimiento][1]. Configura tus seguimientos para que se activen si el valor de la consulta cruza un umbral o si un cierto número de verificaciones consecutivas fallan.
+Las condiciones de alerta varían según el [tipo de seguimiento][1]. Configure los seguimientos para que se activen si el valor de la consulta cruza un umbral, o si un cierto número de comprobaciones consecutivas fallaron.
 
 {{< tabs >}}
 {{% tab "Alerta de umbral" %}}
 
-* Activar cuando el `average`, `max`, `min` o `sum` de la métrica sea
-* `above`, `above or equal to`, `below` o `below or equal to` el umbral
-* durante los últimos `5 minutes`, `15 minutes`, `1 hour` o `custom` para establecer un valor entre 1 minuto y 48 horas (1 mes para seguimientos de métricas)
+* Activar cuando el {{< ui >}}average{{< /ui >}}, {{< ui >}}max{{< /ui >}}, {{< ui >}}min{{< /ui >}} o {{< ui >}}sum{{< /ui >}} de la métrica sea
+* {{< ui >}}above{{< /ui >}}, {{< ui >}}above or equal to{{< /ui >}}, {{< ui >}}below{{< /ui >}} o {{< ui >}}below or equal to{{< /ui >}} el umbral
+* durante los últimos {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}} o {{< ui >}}custom{{< /ui >}} para establecer un valor entre 1 minuto y 48 horas (1 mes para seguimientos de métricas)
 
 ### Método de agregación {#aggregation-method}
 
@@ -84,74 +85,76 @@ La consulta devuelve una serie de puntos, pero se necesita un solo valor para co
 
 | Opción                  | Descripción                                            |
 |-------------------------|--------------------------------------------------------|
-| promedio         | La serie se promedia para producir un solo valor que se verifica contra el umbral. Agrega la función `avg()` a tu consulta de seguimiento. |
-| máx | Si cualquier valor individual en la serie generada cruza el umbral, se activa una alerta. Agrega la función `max()` a tu consulta de seguimiento.* |
-| mín  | Si todos los puntos en la ventana de evaluación para tu consulta cruzan el umbral, se activa una alerta. Agrega la función `min()` a tu consulta de seguimiento.* |
-| suma | Si la suma de cada punto en la serie cruza el umbral, se activa una alerta. Agrega la función `sum()` a tu consulta de seguimiento. |
+| {{< ui >}}average{{< /ui >}}         | La serie se promedia para producir un solo valor que se compara con el umbral. Agrega la función `avg()` a la consulta de su seguimiento. |
+| {{< ui >}}max{{< /ui >}} | Si cualquier valor individual en la serie generada supera el umbral, se activa una alerta. Agrega la función `max()` a la consulta de su seguimiento.* |
+| {{< ui >}}min{{< /ui >}}  | Si todos los puntos en la ventana de evaluación de su consulta superan el umbral, se activa una alerta. Agrega la función `min()` a la consulta de su seguimiento.* |
+| {{< ui >}}sum{{< /ui >}} | Si la suma de cada punto en la serie supera el umbral, se activa una alerta. Agrega la función `sum()` a la consulta de su seguimiento. |
 
-\* Estas descripciones de máximo y mínimo asumen que el seguimiento alerta cuando la métrica supera _el_ umbral. Para seguimientos que alertan cuando están _por debajo_ del umbral, el comportamiento de máximo y mínimo se invierte. Para más ejemplos, consulta la guía de [agregadores de seguimiento][1].
+* Estas descripciones de máx. y mín. asumen que el seguimiento alerta cuando la métrica _supera_ el umbral. Para los seguimientos que alertan cuando está _por debajo_ del umbral, el comportamiento de máx. y mín. se invierte.
 
-**Nota**: Existen diferentes comportamientos al utilizar `as_count()`. Consulta [as_count() en Evaluaciones de seguimiento][2] para más detalles.
+<div class="alert alert-info">Para obtener un desglose de cómo funciona cada método de agregación con ejemplos, consulte la <a href="/monitors/guide/monitor_aggregators/">guía de agregadores de seguimientos</a>.</div>
+
+**Nota**: Existen diferentes comportamientos al utilizar `as_count()`. Consulte [as_count() en Evaluaciones de seguimiento][2] para obtener más detalles.
 
 ### Ventana de evaluación {#evaluation-window}
 
-Un seguimiento puede ser evaluado utilizando ventanas de tiempo acumulativas o ventanas de tiempo móviles. Las ventanas de tiempo acumulativas son más adecuadas para preguntas que requieren contexto histórico, como "¿Cuál es la suma de todos los datos disponibles hasta este momento?" Las ventanas de tiempo móviles son más adecuadas para responder preguntas que no requieren este contexto, como "¿Cuál es el promedio de los últimos _N_ puntos de datos?"
+Un seguimiento puede evaluarse utilizando ventanas de tiempo acumulativas o ventanas de tiempo móviles. Las ventanas de tiempo acumulativas son más adecuadas para preguntas que requieren contexto histórico, como: "¿Cuál es la suma de todos los datos disponibles hasta este momento?" Las ventanas de tiempo móviles son más adecuadas para responder preguntas que no requieren este contexto, como: "¿Cuál es el promedio de los últimos _N_ puntos de datos?"
 
-La figura a continuación ilustra la diferencia entre ventanas de tiempo acumulativas y móviles.
+La siguiente figura ilustra la diferencia entre las ventanas de tiempo acumulativas y móviles.
 
-{{< img src="/monitors/create/rolling_vs_expanding.png" alt="Dos gráficos que muestran ventanas de tiempo acumulativas vs. móviles. Las ventanas de tiempo acumulativas continúan expandiéndose a medida que pasa el tiempo. Las ventanas de tiempo móviles cubren momentos particulares en el tiempo." style="width:100%;">}}
+{{< img src="/monitors/create/rolling_vs_expanding.png" alt="Dos gráficos que muestran ventanas de tiempo acumulativas frente a móviles. Las ventanas de tiempo acumulativas continúan expandiéndose a medida que pasa el tiempo. Las ventanas de tiempo móviles cubren momentos particulares en el tiempo." style="width:100%;">}}
 
 #### Ventanas de tiempo móviles {#rolling-time-windows}
 
-Una ventana de tiempo móvil tiene un tamaño fijo y desplaza su punto de inicio con el tiempo. Los seguimientos pueden mirar hacia atrás en los últimos `5 minutes`, `15 minutes`, `1 hour`, o en una ventana de tiempo personalizada de hasta 1 mes.
+Una ventana de tiempo móvil tiene un tamaño fijo y desplaza su punto de inicio con el paso del tiempo. Los seguimientos pueden analizar los últimos {{< ui >}}5 minutes{{< /ui >}}, {{< ui >}}15 minutes{{< /ui >}}, {{< ui >}}1 hour{{< /ui >}}, o una ventana de tiempo personalizada de hasta 1 mes.
 
-**Nota**: [Seguimientos de registro][6] tienen una ventana de tiempo móvil máxima de `2 days`.
+**Nota**: Los [monitores de Logs][6] tienen una ventana de tiempo móvil máxima de `2 days`.
 
 #### Ventanas de tiempo acumulativas {#cumulative-time-windows}
-Una ventana de tiempo acumulativa tiene un punto de inicio fijo y se expande con el tiempo. Los seguimientos soportan tres diferentes ventanas de tiempo acumulativas:
+Una ventana de tiempo acumulativa tiene un punto de inicio fijo y se expande con el paso del tiempo. Los seguimientos admiten tres ventanas de tiempo acumulativas diferentes:
 
-- `Current hour`: Una ventana de tiempo con un máximo de una hora comenzando en un minuto configurable de una hora. Monitorea la cantidad de llamadas que recibe un punto de conexión HTTP en una hora, comenzando en el minuto 0.
-- `Current day`: Una ventana de tiempo con un máximo de 24 horas comenzando en una hora y minuto configurables de un día. Monitorea una [cuota de índice de registro diario][3] utilizando la ventana de tiempo `current day` y dejándola comenzar a las 2:00 p.m. UTC.
-- `Current month`: Mira hacia atrás en el mes actual comenzando en un día configurable del mes a una hora y minuto configurables. Esta opción representa una ventana de tiempo acumulativa hasta la fecha y solo está disponible para seguimientos de métricas.
+- {{< ui >}}Current hour{{< /ui >}}: Una ventana de tiempo con un máximo de una hora que comienza en un minuto configurable de la hora. Por ejemplo, haga un seguimiento de la cantidad de llamadas que recibe un punto de conexión HTTP en una hora comenzando en el minuto 0.
+- {{< ui >}}Current day{{< /ui >}}: Una ventana de tiempo con un máximo de 24 horas que comienza en una hora y un minuto configurables del día. Por ejemplo, haga un seguimiento de una [cuota de índice de registros diaria][3] usando la ventana de tiempo {{< ui >}}Current day{{< /ui >}} y permitiendo que comience a las 2:00pm UTC.
+- {{< ui >}}Current month{{< /ui >}}: Analiza el mes actual comenzando en un día configurable del mes a una hora y un minuto configurables. Esta opción representa una ventana de tiempo de mes a la fecha y solo está disponible para seguimientos de métricas.
 
-{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Captura de pantalla de cómo se configura una ventana acumulativa en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_messages_received. Las opciones están configuradas para evaluar la suma de la consulta durante el CURRENT MONTH." style="width:100%;">}}
+{{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Captura de pantalla de cómo se configura una ventana acumulativa en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_messages_received. Las opciones están configuradas para evaluar la SUMA de la consulta durante el MES ACTUAL." style="width:100%;">}}
 
-Una ventana de tiempo acumulativa se reinicia después de que se alcanza su máximo período de tiempo. Por ejemplo, una ventana de tiempo acumulativa que observa el `current month` se reinicia el primero de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de `current hour`, que comienza en el minuto 30, se reinicia cada hora. Por ejemplo, a las 6:30 a.m., 7:30 a.m., 8:30 a.m.
+Una ventana de tiempo acumulativa se restablece después de alcanzar su lapso de tiempo máximo. Por ejemplo, una ventana de tiempo acumulativa que observa el {{< ui >}}Current month{{< /ui >}} se restablece el primer día de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de {{< ui >}}Current hour{{< /ui >}}, que comienza en el minuto 30, se restablece cada hora. Por ejemplo, a las 6:30am, 7:30am, 8:30am.
 
 ### Frecuencia de evaluación {#evaluation-frequency}
 
-La frecuencia de evaluación define con qué frecuencia Datadog realiza la consulta del seguimiento. Para la mayoría de las configuraciones, la frecuencia de evaluación es `1 minute`, lo que significa que cada minuto, el seguimiento consulta los [datos seleccionados](#define-the-search-query) durante la [ventana de evaluación seleccionada](#evaluation-window) y compara el valor agregado contra los [umbrales definidos](#thresholds).
+La frecuencia de evaluación define con qué frecuencia Datadog realiza la consulta del seguimiento. Para la mayoría de las configuraciones, la frecuencia de evaluación es `1 minute`, lo que significa que cada minuto, el seguimiento consulta los [datos seleccionados](#define-the-search-query) durante la [ventana de evaluación seleccionada](#evaluation-window) y compara el valor agregado con los [umbrales definidos](#thresholds).
 
-Por defecto, las frecuencias de evaluación dependen de la [ventana de evaluación](#evaluation-window) que se utiliza. Una ventana más larga resulta en frecuencias de evaluación más bajas. La siguiente tabla ilustra cómo la frecuencia de evaluación es controlada por ventanas de tiempo más grandes:
+De forma predeterminada, las frecuencias de evaluación dependen de la [ventana de evaluación](#evaluation-window) que se utilice. Una ventana más larga resulta en frecuencias de evaluación más bajas. La siguiente tabla ilustra cómo la frecuencia de evaluación es controlada por ventanas de tiempo más grandes:
 
-| Rangos de Ventana de Evaluación        | Frecuencia de Evaluación  |
+| Rangos de ventana de evaluación        | Frecuencia de evaluación  |
 |---------------------------------|-----------------------|
 | ventana < 24 horas               | 1 minuto              |
 | 24 horas <= ventana < 48 horas   | 10 minutos            |
 | ventana >= 48 horas              | 30 minutos            |
 
-La frecuencia de evaluación también se puede configurar para que la condición de alerta del seguimiento se verifique a diario, semanalmente o mensualmente. En esta configuración, la frecuencia de evaluación ya no depende de la ventana de evaluación, sino del horario configurado.
+La frecuencia de evaluación también se puede configurar para que la condición de alerta del seguimiento se verifique de forma diaria, semanal o mensual. En esta configuración, la frecuencia de evaluación ya no depende de la ventana de evaluación, sino del horario configurado.
 
-Para más información, consulte la guía sobre cómo [Personalizar las frecuencias de evaluación del monitor][4].
+Para obtener más información, consulte la guía sobre cómo [Personalizar las frecuencias de evaluación del seguimiento][4].
 
 ### Umbrales {#thresholds}
 
-Utilice umbrales para establecer un valor numérico que active una alerta. Dependiendo de la métrica elegida, el editor muestra la unidad utilizada (`byte`, `kibibyte`, `gibibyte`, etc.).
+Utilice umbrales para establecer un valor numérico para activar una alerta. Dependiendo de la métrica elegida, el editor muestra la unidad utilizada (`byte`, `kibibyte`, `gibibyte`, etc.).
 
-Datadog tiene dos tipos de notificaciones (alerta y advertencia). Los monitores se recuperan automáticamente según el umbral de alerta o advertencia, pero se pueden especificar condiciones adicionales. Para información adicional sobre los umbrales de recuperación, consulte [¿Cuáles son los umbrales de recuperación?][5]. Por ejemplo, si un monitor emite una alerta cuando la métrica está por encima de `3` y no se especifican umbrales de recuperación, el monitor se recupera una vez que el valor de la métrica vuelve a estar por debajo de `3`.
+Datadog tiene dos tipos de notificaciones (alerta y advertencia). Los seguimientos se recuperan automáticamente según el umbral de alerta o advertencia, pero se pueden especificar condiciones adicionales. Para obtener información adicional sobre los umbrales de recuperación, consulte [¿Qué son los umbrales de recuperación?][5]. Por ejemplo, si un seguimiento alerta cuando la métrica está por encima de `3` y no se especifican umbrales de recuperación, el seguimiento se recupera una vez que el valor de la métrica vuelve a estar por debajo de `3`.
 
 | Opción                                   | Descripción                    |
 |------------------------------------------|--------------------------------|
-| Umbral&nbsp;de&nbsp;alerta&nbsp;**(requerido)** | El valor utilizado para activar una notificación de alerta. |
-| Umbral&nbsp;de&nbsp;advertencia                   | El valor utilizado para activar una notificación de advertencia. |
-| Umbral de recuperación de alerta | Un umbral opcional para indicar una condición adicional para la recuperación de alertas. |
-| Umbral de recuperación de advertencia | Un umbral opcional para indicar una condición adicional para la recuperación de advertencias. |
+| {{< ui >}}Alert threshold{{< /ui >}} (obligatorio) | El valor utilizado para activar una notificación de alerta. |
+| {{< ui >}}Warning threshold{{< /ui >}}                   | El valor utilizado para activar una notificación de advertencia. |
+| {{< ui >}}Alert recovery threshold{{< /ui >}}       | Un umbral opcional para indicar una condición adicional para la recuperación de la alerta. |
+| {{< ui >}}Warning recovery threshold{{< /ui >}}     | Un umbral opcional para indicar una condición adicional para la recuperación de la alerta. |
 
-A medida que cambias un umbral, el gráfico de vista previa en el editor muestra un marcador que indica el punto de corte.
+A medida que cambia un umbral, el gráfico de vista previa en el editor muestra un marcador que indica el punto de corte.
 
 {{< img src="/monitors/create/preview_graph_thresholds.png" alt="Gráfico de vista previa de umbrales" style="width:100%;">}}
 
-**Nota**: Al ingresar valores decimales para los umbrales, si su valor es `<1`, agregue un `0` delante del número. Por ejemplo, utilice `0.5`, no `.5`.
+**Nota**: Al ingresar valores decimales para los umbrales, si su valor es `<1`, agregue un `0` inicial al número. Por ejemplo, use `0.5`, no `.5`.
 
 
 [1]: /es/monitors/guide/monitor_aggregators/
@@ -165,19 +168,19 @@ A medida que cambias un umbral, el gráfico de vista previa en el editor muestra
 
 Una alerta de verificación rastrea los estados consecutivos enviados por grupo de verificación y los compara con sus umbrales. Configure la alerta de verificación para:
 
-1. Active la alerta después de fallos consecutivos seleccionados: `<NUMBER>`
+1. Activar la alerta después de las fallas consecutivas seleccionadas: `<NUMBER>`
 
-    Cada ejecución de verificación envía un único estado de `OK`, `WARN` o `CRITICAL`. Elija cuántas ejecuciones consecutivas con el estado `WARN` y `CRITICAL` activan una notificación. Por ejemplo, su proceso podría tener un solo fallo donde la conexión falla. Si establece este valor en `> 1`, el fallo se ignora, pero un problema con más de un fallo consecutivo activa una notificación.
+    Cada ejecución de verificación envía un único estado de `OK`, `WARN` o `CRITICAL`. Elija cuántas ejecuciones consecutivas con el estado `WARN` y `CRITICAL` activan una notificación. Por ejemplo, su proceso podría tener una pequeña interrupción donde la conexión falla. Si establece este valor en `> 1`, la interrupción se ignora, pero un problema con más de una falla consecutiva activa una notificación.
 
-    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Verifique los umbrales de Alerta/Advertencia" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_alert_warn.png" alt="Umbrales de verificación Alerta/Advertencia" style="width:90%;">}}
 
-2. Resuelva la alerta después de los éxitos consecutivos seleccionados: `<NUMBER>`
+2. Resolver la alerta después de los éxitos consecutivos seleccionados: `<NUMBER>`
 
     Elija cuántas ejecuciones consecutivas con el estado `OK` resuelven la alerta.
 
-    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Verificación de umbrales de recuperación" style="width:90%;">}}
+    {{< img src="/monitors/create/check_thresholds_recovery.png" alt="Umbrales de verificación Recuperación" style="width:90%;">}}
 
-Consulte la documentación para los monitores de [verificación de proceso][1], [verificación de integración][2] y [verificación personalizada][3] para obtener más información sobre la configuración de alertas de verificación.
+Consulte la documentación de los seguimientos de [verificación de proceso][1], [verificación de integración][2] y [verificación personalizada][3] para obtener más información sobre la configuración de alertas de verificación.
 
 
 
@@ -187,173 +190,179 @@ Consulte la documentación para los monitores de [verificación de proceso][1], 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Condiciones avanzadas de alerta {#advanced-alert-conditions}
+### Condiciones de alerta avanzadas {#advanced-alert-conditions}
 
 #### Sin datos {#no-data}
 
-Las notificaciones por datos faltantes son útiles si espera que una métrica siempre esté reportando datos en circunstancias normales. Por ejemplo, si un host con el Agent debe estar activo continuamente, puede esperar que la métrica `system.cpu.idle` siempre reporte datos.
+Las notificaciones de datos faltantes son útiles si espera que una métrica siempre reporte datos en circunstancias normales. Por ejemplo, si un servidor con el Agent debe estar activo continuamente, puede esperar que la métrica `system.cpu.idle` siempre reporte datos.
 
-En este caso, debe habilitar las Notifications por datos faltantes. Las secciones a continuación explican cómo lograr esto con cada opción.
+En este caso, debe habilitar las notificaciones de datos faltantes. Las secciones a continuación explican cómo lograr esto con cada opción.
 
-**Nota**: El monitor debe ser capaz de evaluar datos antes de alertar sobre datos faltantes. Por ejemplo, si crea un monitor para `service:abc` y los datos de ese `service` no se están reportando, el monitor no envía alertas.
+**Nota**: El seguimiento debe poder evaluar los datos antes de alertar sobre los datos faltantes. Por ejemplo, si crea un seguimiento para `service:abc` y los datos de ese `service` no se están reportando, el seguimiento no envía alertas.
 
 Si faltan datos durante `N` minutos, seleccione una opción del menú desplegable:
 
-{{< img src="/monitors/create/on_missing_data.png" alt="Sin datos disponibles" style="width:70%;">}}
+{{< img src="/monitors/create/on_missing_data.png" alt="Opciones sin datos" style="width:70%;">}}
 
-- `Evaluate as zero` / `Show last known status`
-- `Show NO DATA`
-- `Show NO DATA and notify`
-- `Show OK`.
+- {{< ui >}}Evaluate as zero{{< /ui >}} / {{< ui >}}Show last known status{{< /ui >}}
+- {{< ui >}}Show NO DATA{{< /ui >}}
+- {{< ui >}}Show NO DATA and notify{{< /ui >}}
+- {{< ui >}}Show OK{{< /ui >}}.
 
-El comportamiento seleccionado se aplica cuando la consulta del monitor no devuelve ningún dato. A diferencia de la opción `Do not notify`, la ventana de datos faltantes no es **configurable**.
+El comportamiento seleccionado se aplica cuando la consulta de un seguimiento no devuelve ningún dato. A diferencia de la opción {{< ui >}}Do not notify{{< /ui >}}, la ventana de datos faltantes **no** es configurable.
 
-| Opción                    | Estado del monitor y notificación                                             |
+| Opción                    | Estado del seguimiento y notificación                                             |
 |---------------------------|---------------------------------------------------------------------------|
-| `Evaluate as zero`        | El resultado vacío se reemplaza con cero y se compara con los umbrales de alerta/advertencia. Por ejemplo, si el umbral de alerta se establece en `> 10`, un cero no activaría esa condición, y el estado del monitor se establece en `OK`.   |
-| `Show last known status`  | El último estado conocido del grupo o monitor se establece.                        |
-| `Show NO DATA`            | El estado del monitor se establece en `NO DATA`.                                       |
-| `Show NO DATA and notify` | El estado del monitor se establece en `NO DATA` y se envía una notificación.        |
-| `Show OK`                 | El monitor se resuelve y el estado se establece en `OK`.                            |
+| {{< ui >}}Evaluate as zero{{< /ui >}}        | El resultado vacío se reemplaza con cero y se compara con los umbrales de alerta/advertencia. Por ejemplo, si el umbral de alerta está establecido en `> 10`, un cero no activaría esa condición y el estado del seguimiento se establecería en `OK`.   |
+| {{< ui >}}Show last known status{{< /ui >}}  | Se establece el último estado conocido del grupo o seguimiento.                        |
+| {{< ui >}}Show NO DATA{{< /ui >}}            | El estado del seguimiento se establece en `NO DATA`.                                       |
+| {{< ui >}}Show NO DATA and notify{{< /ui >}} | El estado del seguimiento se establece en `NO DATA` y se envía una notificación.        |
+| {{< ui >}}Show OK{{< /ui >}}                 | El seguimiento se resuelve y el estado se establece en `OK`.                            |
 
-Las opciones `Evaluate as zero` y `Show last known status` se muestran según el tipo de consulta:
+El uso de default_zero() en una consulta bloquea el comportamiento de datos faltantes al valor predeterminado de ese tipo de consulta y deshabilita las otras opciones:
 
-- **Evaluar como cero:** Esta opción está disponible para monitores que utilizan consultas `Count` sin la función `default_zero()`.
-- **Mostrar último estado conocido:** Esta opción está disponible para monitores que utilizan cualquier otro tipo de consulta que no sea `Count`, por ejemplo `Gauge`, `Rate` y `Distribution`, así como para consultas `Count` con `default_zero()`.
+- Para consultas con `default_zero()`, los datos faltantes siempre se evalúan como cero y los otros comportamientos de datos faltantes no están disponibles.
+- Para consultas sin `default_zero()`, las consultas `Count` tienen como valor predeterminado {{< ui >}}Evaluate as zero{{< /ui >}}, mientras que otros tipos de consulta tienen como valor predeterminado {{< ui >}}Show last known status{{< /ui >}}. Todos los comportamientos de datos faltantes permanecen disponibles.
 
 #### Resolución automática {#auto-resolve}
 
-`[Never]`, `After 1 hour`, `After 2 hours` y así sucesivamente. resuelve automáticamente este evento desde un estado activado.
+{{< ui >}}[Never]{{< /ui >}}, {{< ui >}}After 1 hour{{< /ui >}}, {{< ui >}}After 2 hours{{< /ui >}} y así sucesivamente. resolver automáticamente este evento desde un estado activado.
 
-La resolución automática funciona cuando ya no se están enviando datos. Los monitores no se resuelven automáticamente desde un estado de ALERTA o ADVERTENCIA si los datos aún se están reportando. Si los datos aún se están enviando, se puede utilizar la función [renotify][2] para informar a su equipo cuando un problema no se ha resuelto.
+La resolución automática funciona cuando ya no se envían datos. Los seguimientos no se resuelven automáticamente desde un estado de ALERTA o ADVERTENCIA si los datos siguen reportándose. Si los datos siguen enviándose, la función [renotify][2] puede utilizarse para informar a su equipo cuando un problema no se ha resuelto.
 
-Para algunas métricas que reportan periódicamente, puede tener sentido que las alertas activadas se resuelvan automáticamente después de un cierto período de tiempo. Por ejemplo, si tiene un contador que solo reporta cuando se registra un error, la alerta nunca se resuelve porque la métrica nunca reporta `0` como el número de errores. En este caso, configure su alerta para que se resuelva después de un cierto tiempo de inactividad en la métrica. **Nota**: Si un monitor se resuelve automáticamente y el valor de la consulta no cumple con el umbral de recuperación en la siguiente evaluación, el monitor activa una alerta nuevamente.
+Para algunas métricas que se reportan periódicamente, puede tener sentido que las alertas activadas se resuelvan automáticamente después de un cierto período de tiempo. Por ejemplo, si tiene un contador que solo reporta cuando se registra un error, la alerta nunca se resuelve porque la métrica nunca reporta `0` como el número de errores. En este caso, configure su alerta para que se resuelva después de un cierto tiempo de inactividad en la métrica. **Nota**: Si un seguimiento se resuelve automáticamente y el valor de la consulta no cumple con el umbral de recuperación en la siguiente evaluación, el seguimiento activa una alerta nuevamente.
 
-En la mayoría de los casos, esta configuración no es útil porque solo desea que una alerta se resuelva después de que realmente se haya solucionado. Por lo tanto, en general, tiene sentido dejar esto como `[Never]` para que las alertas solo se resuelvan cuando la métrica está por encima o por debajo del umbral establecido.
+En la mayoría de los casos, esta configuración no es útil porque solo desea que una alerta se resuelva después de que realmente se haya solucionado. Por lo tanto, en general, tiene sentido dejar esto como {{< ui >}}[Never]{{< /ui >}} para que las alertas solo se resuelvan cuando la métrica esté por encima o por debajo del umbral establecido.
 
 #### Tiempo de retención del grupo {#group-retention-time}
 
-Puede eliminar el grupo del estado del monitor después de `N` horas de datos faltantes. La duración puede ser de un mínimo de 1 hora y un máximo de 72 horas. Para monitores de múltiples alertas, seleccione **Eliminar el grupo que no reporta después de `N (length of time)`**.
+La retención de grupo controla cuánto tiempo se mantiene un grupo de seguimiento en el estado del seguimiento después de que los datos dejan de reportarse. Después de que pasa el período de retención, el grupo caduca y se elimina del estado del seguimiento.
 
-{{< img src="/monitors/create/group_retention_time.png" alt="Opción de Tiempo de Retención del Grupo" style="width:70%;">}}
+De forma predeterminada, un grupo mantiene el estado durante 24 horas antes de ser eliminado. Los seguimientos de servidor y las comprobaciones de servicio que notifican sobre la falta de datos mantienen el estado durante 48 horas.
 
-Similar a la [opción de resolución automática][3], la retención del grupo funciona cuando ya no se están enviando datos. Esta opción controla cuánto tiempo se mantiene el grupo en el estado del monitor una vez que los datos dejan de reportarse. Por defecto, un grupo mantiene el estado durante 24 horas antes de ser eliminado. El tiempo de inicio de la retención del grupo y la opción de Auto-resolución son **idénticos** tan pronto como la consulta del monitor no devuelve datos.
+Para los tipos de seguimiento de alertas múltiples que admiten retención personalizada, puede establecer un valor entre 1 hora y 72 horas. Seleccione {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
-Algunos casos de uso para definir un tiempo de retención de grupo incluyen:
+{{< img src="/monitors/create/group_retention_time.png" alt="Opción de tiempo de retención de grupo" style="width:70%;">}}
 
-- Cuando desee eliminar el grupo de inmediato o poco después de que los datos dejen de reportarse
-- Cuando desee mantener el grupo en el estado durante el tiempo que normalmente toma para la solución de problemas
+Similar a la [opción de resolución automática][3], la retención de grupo funciona cuando ya no se envían datos. La hora de inicio de la retención de grupo y la opción de resolución automática son **idénticas** tan pronto como la consulta del seguimiento no devuelve datos.
 
-**Nota**: La opción de tiempo de retención del grupo requiere un monitor de múltiples alertas que soporte la opción [`On missing data`][4]. Estos tipos de monitores son APM Trace Analytics, Registros de Auditoría, CI Pipelines, Error Tracking, Eventos, Registros y monitores RUM.
+Algunos casos de uso para definir un tiempo de retención de grupo personalizado incluyen:
 
-#### Nuevo retraso de grupo {#new-group-delay}
+- Cuando desee eliminar el grupo inmediatamente o poco después de que los datos dejen de reportarse
+- Cuando desee mantener el grupo en el estado durante el tiempo que usualmente le toma solucionar problemas
 
-Retrasar el inicio de la evaluación por `N` segundos para nuevos grupos.
+**Nota**: La opción de tiempo de retención de grupo personalizado requiere un seguimiento de alertas múltiples que admita la opción [`On missing data`][4]. Estos tipos de seguimiento son APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs y seguimientos RUM.
 
-El tiempo (en segundos) que se debe esperar antes de comenzar a alertar, para permitir que los grupos recién creados se inicien y las aplicaciones se inicien completamente. Esto debe ser un número entero no negativo.
+<div class="alert alert-info"><strong>Vista previa: Retención de grupo dinámica</strong><p>La retención de grupo dinámica está en vista previa y se aplica a los seguimientos creados recientemente. Para seguimientos con una gran cantidad de grupos, Datadog acorta automáticamente el tiempo que se mantiene un grupo después de que deja de reportar datos. Cuanto más frecuentemente aparecen y desaparecen los grupos, más corto se vuelve este período, manteniendo el seguimiento rápido y eficiente. Esto solo afecta a los grupos que han quedado en silencio; los grupos que reportan datos activamente nunca se eliminan.</p></div>
 
-Por ejemplo, si está utilizando una arquitectura de contenedores, establecer un retraso de grupo evita que los grupos de monitores con contexto en contenedores se activen debido a un alto uso de recursos o alta latencia cuando se crea un nuevo contenedor. El retraso se aplica a cada nuevo grupo (que no ha sido visto en las últimas 24 horas) y por defecto es de `60` segundos.
+#### Retraso de grupo nuevo {#new-group-delay}
 
-La opción está disponible con el modo de múltiples alertas.
+Retrase el inicio de la evaluación por `N` segundos para grupos nuevos.
 
-#### Retraso de evaluación {#evaluation-delay}
+El tiempo (en segundos) de espera antes de comenzar con Alerting, para permitir que los grupos recién creados inicien y que las aplicaciones arranquen por completo. Este debe ser un número entero no negativo.
 
-<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para métricas en la nube, que son completadas por proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe en valores completos. Vea la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
-">página de Cloud Metric Delay</a> para tiempos de retraso estimados.</div>
+Por ejemplo, si utiliza una arquitectura en contenedores, establecer un retraso de grupo evita que los grupos de seguimiento basados en contenedores se activen debido al alto uso de recursos o a la alta latencia cuando se crea un nuevo contenedor. El retraso se aplica a cada grupo nuevo (que no se ha visto en las últimas 24 horas) y es de `60` segundos de forma predeterminada.
 
-Retrasar la evaluación por `N` segundos.
+La opción está disponible con el modo de alerta múltiple.
 
-El tiempo (en segundos) para retrasar la evaluación. Esto debe ser un número entero no negativo. Entonces, si el retraso se establece en 900 segundos (15 minutos), la evaluación del seguimiento es durante los últimos `5 minutes`, y la hora es 7:00, el seguimiento evalúa datos desde las 6:40 hasta las 6:45. El retraso máximo configurable para la evaluación es de 86400 segundos (24 horas).
+#### Retraso en la evaluación {#evaluation-delay}
 
-## Configura notificaciones y automatizaciones {#configure-notifications-and-automations}
+<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para las métricas de la nube, las cuales son rellenadas por los proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe valores completos. Consulte la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/">
+\">Página de Cloud Metric Delay</a> para tiempos de retardo estimados.</div>
 
-Configura tus mensajes de notificación para incluir la información que más te interesa. Especifica a qué equipos enviar estas alertas, así como qué atributos activar para las alertas.
+Retrase la evaluación por `N` segundos.
+
+El tiempo (en segundos) para retrasar la evaluación. Este debe ser un número entero no negativo. Entonces, si el retraso se establece en 900 segundos (15 minutos), la evaluación del seguimiento es durante los últimos `5 minutes`, y la hora es las 7:00, el seguimiento evalúa los datos de 6:40 a 6:45. El retraso de evaluación máximo configurable es de 86400 segundos (24 horas).
+
+## Configure Notifications y automatizaciones {#configure-notifications-and-automations}
+
+Configure sus mensajes de Notifications para incluir la información que más le interesa. Especifique a qué equipos enviar estas alertas, así como los atributos para activar las alertas.
 
 ### Mensaje {#message}
 
-Utiliza esta sección para configurar notificaciones a tu equipo y configurar cómo enviar estas alertas:
+Utilice esta sección para configurar las Notifications para su equipo y configurar cómo enviar estas alertas:
 
-  - [Configura tu notificación con Variables de Plantilla][5]
-  - [Envía notificaciones a tu equipo a través de correo electrónico, Slack o PagerDuty][6]
+  - [Configure su Notifications con variables de plantilla][5]
+  - [Envíe Notifications a su equipo a través de correo electrónico, Slack o PagerDuty][6]
 
-Para más información sobre las opciones de configuración para el mensaje de notificación, consulta [Notificaciones de Alerta][7].
+Para obtener más información sobre las opciones de configuración del mensaje de notificación, consulte [Alerting Notifications][7].
 
-### Agrega metadatos {#add-metadata}
+### Agregar metadatos {#add-metadata}
 
-<div class="alert alert-info">Las etiquetas de seguimiento son independientes de las etiquetas enviadas por el Agente o integraciones. Consulta la <a href="/monitors/manage/">documentación de monitores</a>.</div>
+<div class="alert alert-info">Las etiquetas de seguimiento son independientes de las etiquetas enviadas por el Agent o las integraciones. Consulte la documentación de <a href="/monitors/manage/">Administrar seguimientos</a>.</div>
 
-1. Utiliza el desplegable **Etiquetas** para asociar [etiquetas][8] con tu monitor.
-1. Utiliza el desplegable **Equipos** para asociar [equipos][9] con tu monitor.
-1. Elige una **Prioridad**.
+1. Use el menú desplegable {{< ui >}}Tags{{< /ui >}} para asociar [etiquetas][8] con su seguimiento.
+1. Use el menú desplegable {{< ui >}}Teams{{< /ui >}} para asociar [equipos][9] con su seguimiento.
+1. Elija un {{< ui >}}Priority{{< /ui >}}.
 
-### Establece la agregación de alertas {#set-alert-aggregation}
+### Establecer agregación de alertas {#set-alert-aggregation}
 
-Las alertas se agrupan automáticamente según tu selección de la agregación elegida para tu consulta (por ejemplo, `avg by service`). Si la consulta no tiene agrupamiento, se establece por defecto en `Simple Alert`. Si la consulta está agrupada por alguna dimensión, el agrupamiento cambia a `Multi Alert`.
+Las Alerts se agrupan automáticamente según su selección de la agregación seleccionada para su consulta (por ejemplo, `avg by service`). Si la consulta no tiene agrupación, se establece de forma predeterminada en {{< ui >}}Simple Alert{{< /ui >}}. Si la consulta está agrupada por cualquier dimensión, la agrupación cambia a {{< ui >}}Multi Alert{{< /ui >}}.
 
-{{< img src="/monitors/create/notification-aggregation.png" alt="Opciones de configuración para la agregación de notificaciones de monitor" style="width:100%;">}}
+{{< img src="/monitors/create/notification-aggregation.png" alt="Opciones de configuración para la agregación de notificaciones de seguimiento" style="width:100%;">}}
 
 #### Alerta simple {#simple-alert}
 
-El modo `Simple Alert`activa una notificación al agregar todas las fuentes de informes. Recibes **una alerta** cuando el valor agregado cumple con las condiciones establecidas. Por ejemplo, podrías configurar un monitor para que te notifique si el uso promedio de CPU de todos los servidores supera cierto umbral. Si se cumple ese umbral, recibirás una única notificación, independientemente del número de servidores individuales que cumplan con el umbral. Esto puede ser útil para monitorear las tendencias o comportamientos generales del sistema.
+{{< ui >}}Simple Alert{{< /ui >}}El modo activa una notificación agregando todos los orígenes que informan. Usted recibe **una alerta** cuando el valor agregado cumple con las condiciones establecidas. Por ejemplo, puede configurar un seguimiento para que le notifique si el uso promedio de CPU de todos los servidores supera un cierto umbral. Si se alcanza ese umbral, recibirá una sola notificación, independientemente de la cantidad de servidores individuales que hayan alcanzado el umbral. Esto puede ser útil para supervisar tendencias o comportamientos generales del sistema.
 
 
-{{< img src="/monitors/create/simple-alert.png" alt="Diagrama que muestra cómo se envían las notificaciones del monitor en modo de alerta simple." style="width:90%;">}}
+{{< img src="/monitors/create/simple-alert.png" alt="Diagrama que muestra cómo se envían las notificaciones de seguimiento en modo de alerta simple" style="width:90%;">}}
 
 #### Alerta múltiple {#multi-alert}
 
-Un `Multi Alert` monitor activa notificaciones individuales para cada entidad en un monitor que cumple con el umbral de alerta.
+Un seguimiento {{< ui >}}Multi Alert{{< /ui >}} activa notificaciones individuales para cada entidad en un seguimiento que cumple con el umbral de alerta.
 
-{{< img src="/monitors/create/multi-alert.png" alt="Diagrama que muestra cómo se envían las notificaciones del monitor en modo de alerta múltiple." style="width:90%;">}}
+{{< img src="/monitors/create/multi-alert.png" alt="Diagrama de cómo se envían las notificaciones de seguimiento en modo de alerta múltiple" style="width:90%;">}}
 
-Por ejemplo, al configurar un monitor para que te notifique si la latencia P99, agregada por servicio, supera cierto umbral, recibirías una **alerta** separada para cada servicio individual cuya latencia P99 excede el umbral de alerta. Esto puede ser útil para identificar y abordar instancias específicas de problemas en el sistema o la aplicación. Permite rastrear problemas a un nivel más granular.
+Por ejemplo, al configurar un seguimiento para que le notifique si la latencia P99, agregada por servicio, supera un cierto umbral, recibiría una alerta **separada** para cada servicio individual cuya latencia P99 superara el umbral de alerta. Esto puede ser útil para identificar y abordar instancias específicas de problemas del sistema o de la aplicación. Le permite hacer un seguimiento de los problemas a un nivel más granular.
 
 ##### Agrupación de notificaciones {#notification-grouping}
 
-Al monitorear un gran grupo de entidades, las alertas múltiples pueden llevar a monitores ruidosos. Para mitigar esto, personaliza qué dimensiones activan alertas. Esto reduce el ruido y te permite concentrarte en las alertas que más importan. Por ejemplo, estás monitoreando el uso promedio de CPU de todos tus hosts. Si agrupas tu consulta por `service` y `host` pero solo deseas que se envíen alertas una vez por cada atributo `service` que cumpla con el umbral, elimina el atributo `host` de tus opciones de alerta múltiple y reduce el número de notificaciones que se envían.
+Al hacer un seguimiento de un grupo grande de entidades, las alertas múltiples pueden generar seguimientos ruidosos. Para mitigar esto, personalice qué dimensiones activan las alertas. Esto reduce el ruido y le permite concentrarse en las alertas que más importan. Por ejemplo, está haciendo un seguimiento del uso promedio de CPU de todos sus hosts. Si agrupa su consulta por `service` y `host` pero solo desea que se envíen alertas una vez por cada atributo `service` que cumpla con el umbral, elimine el atributo `host` de sus opciones de alerta múltiple y reduzca la cantidad de notificaciones que se envían.
 
-{{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagrama de cómo se envían las notificaciones cuando se configuran a dimensiones específicas en alertas múltiples." style="width:90%;">}}
+{{< img src="/monitors/create/multi-alert-aggregated.png" alt="Diagrama de cómo se envían las notificaciones cuando se configuran dimensiones específicas en alertas múltiples" style="width:90%;">}}
 
-Al agregar notificaciones en `Multi Alert`modo, las dimensiones que no se agregan se convierten en `Sub Groups` en la interfaz de usuario.
+Al agregar notificaciones en {{< ui >}}Multi Alert{{< /ui >}}modo, las dimensiones que no se agregan se vuelven {{< ui >}}Sub Groups{{< /ui >}} en la interfaz de usuario.
 
-**Nota**: Si tu métrica solo informa por `host` sin la etiqueta `service`, no es detectada por el monitor. Las métricas con las etiquetas `host` y `service` son detectadas por el monitor.
+**Nota**: Si su métrica solo informa por `host` sin ninguna etiqueta `service`, el seguimiento no la detecta. Las métricas con etiquetas `host` y `service` son detectadas por el seguimiento.
 
-Si configuras etiquetas o dimensiones en tu consulta, estos valores estarán disponibles para cada grupo evaluado en la alerta múltiple para completar dinámicamente las notificaciones con contexto útil. Consulta [Attribute and tag variables][10] para aprender cómo referenciar los valores de etiqueta en el mensaje de notificación.
+Si configura etiquetas o dimensiones en su consulta, estos valores estarán disponibles para cada grupo evaluado en la alerta múltiple para completar dinámicamente las notificaciones con contexto útil. Consulte [Variables de atributo y etiqueta][10] para aprender cómo hacer referencia a los valores de etiqueta en el mensaje de notificación.
 
 | Agrupar por                       | Modo de alerta simple | Modo de alerta múltiple |
 |-------------------------------------|------------------------|-----------------------|
-| _(todo)_                      | Un solo grupo activando una notificación | N/A |
-| 1&nbsp;o&nbsp;más&nbsp;dimensiones | Una notificación si uno o más grupos cumplen las condiciones de alerta | Una notificación por grupo que cumple las condiciones de alerta |
+| _(todo)_                      | Un solo grupo que activa una notificación | N/A |
+| 1 o más dimensiones | Una notificación si uno o más grupos cumplen las condiciones de alerta | Una notificación por grupo que cumpla las condiciones de alerta |
 
 ## Permisos {#permissions}
 
-Todos los usuarios pueden ver todos los monitores, independientemente del equipo o rol al que estén asociados. Por defecto, solo los usuarios asignados a roles con el [permiso de escritura de monitor][11] pueden editar monitores. [Rol de Administrador de Datadog y Rol Estándar de Datadog][12] tienen, por defecto, el permiso de escritura de monitores. Si tu organización utiliza [Custom Roles][13], otros roles personalizados pueden tener el permiso de escritura de monitores. Para más información sobre cómo configurar RBAC para Monitores y migrar monitores de la configuración bloqueada a usar restricciones de rol, consulte la guía sobre [Cómo configurar RBAC para Monitores][14].
+Todos los usuarios pueden visualizar todos los seguimientos, independientemente del equipo o rol con el que estén asociados. De forma predeterminada, solo los usuarios vinculados a roles con el [permiso de escritura de seguimientos][11] pueden editar seguimientos. El [rol de Datadog Admin y el rol estándar de Datadog][12] tienen el permiso de escritura de seguimientos de forma predeterminada. Si su organización utiliza [roles personalizados][13], otros roles personalizados pueden tener el permiso de escritura de seguimientos. Para obtener más información sobre cómo configurar RBAC para seguimientos y migrar seguimientos de la configuración bloqueada al uso de restricciones de roles, consulte la guía sobre [Cómo configurar RBAC para seguimientos][14].
 
-Puede restringir aún más su monitor especificando una lista de [equipos][17], [roles][15] o usuarios permitidos para editarlo. El creador del monitor tiene derechos de edición sobre el monitor por defecto. Editar incluye cualquier actualización a la configuración del monitor, eliminar el monitor y silenciar el monitor por cualquier período de tiempo.
+Puede restringir aún más su seguimiento especificando una lista de [equipos][17], [roles][15] o usuarios autorizados para editarlo. El creador del seguimiento tiene derechos de edición sobre el seguimiento de forma predeterminada. La edición incluye cualquier actualización a la configuración del seguimiento, eliminar el seguimiento y silenciar el seguimiento por cualquier cantidad de tiempo.
 
 **Nota**: Las limitaciones se aplican tanto en la interfaz de usuario como en la API.
 
 ### Controles de acceso granulares {#granular-access-controls}
 
-Utiliza [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar un monitor:
-1. Mientras editas o configuras un monitor, encuentra la sección **Definir permisos y notificaciones de auditoría**.
-  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Opciones de configuración del monitor para definir permisos" style="width:70%;" >}}
-1. Haz clic en **Editar acceso**.
-1. Haz clic en **Restringir acceso**.
-1. El cuadro de diálogo se actualiza para mostrar que los miembros de tu organización tienen acceso de **Visualización** por defecto.
-1. Usa el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar el monitor.
-1. Haz clic en **Agregar**.
-1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionaste tiene el permiso de **Editor**.
-1. Haz clic en **Listo**.
+Utilice [controles de acceso granulares][16] para limitar los equipos, roles o usuarios que pueden editar un seguimiento:
+1. Mientras edita o configura un seguimiento, busque la sección {{< ui >}}Define permissions and audit notifications{{< /ui >}}.
+  {{< img src="monitors/configuration/define_permissions_audit_notifications.png" alt="Opciones de configuración del seguimiento para definir permisos" style="width:70%;" >}}
+1. Haga clic en {{< ui >}}Edit Access{{< /ui >}}.
+1. Haga clic en {{< ui >}}Restrict Access{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que los miembros de su organización tienen acceso {{< ui >}}Viewer{{< /ui >}} de forma predeterminada.
+1. Use el menú desplegable para seleccionar uno o más equipos, roles o usuarios que puedan editar el seguimiento.
+1. Haga clic en {{< ui >}}Add{{< /ui >}}.
+1. El cuadro de diálogo se actualiza para mostrar que el rol que seleccionó tiene el permiso {{< ui >}}Editor{{< /ui >}}.
+1. Haga clic en {{< ui >}}Done{{< /ui >}}.
 
-**Nota:** Para mantener tu acceso de edición al monitor, el sistema requiere que incluyas al menos un rol o equipo del cual seas miembro antes de guardar.
+**Nota:** Para mantener su acceso de edición al seguimiento, el sistema requiere que incluya al menos un rol o equipo del que usted sea miembro antes de guardar.
 
-Para restaurar el acceso general a un monitor con acceso restringido, sigue los pasos a continuación:
-1. Mientras visualizas un monitor, haz clic en el menú desplegable **Más**.
-1. Selecciona **Permisos**.
-1. Haz clic en **Restaurar acceso completo**.
-1. Haz clic en **Guardar**.
+Para restaurar el acceso general a un seguimiento con acceso restringido, siga los pasos a continuación:
+1. Mientras visualiza un seguimiento, haga clic en el menú desplegable {{< ui >}}More{{< /ui >}}.
+1. Seleccione {{< ui >}}Permissions{{< /ui >}}.
+1. Haga clic en {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Haga clic en {{< ui >}}Save{{< /ui >}}.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

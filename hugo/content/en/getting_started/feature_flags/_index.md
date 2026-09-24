@@ -26,6 +26,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
       tag: "Blog"
       text: "The product signal latency gap slowing your growth"
+    - link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
+      tag: "Blog"
+      text: "Coordinate product launches with Datadog"
 site_support_id: getting_started_feature_flags
 ---
 
@@ -100,7 +103,7 @@ Then, add the following to your project to initialize the SDK:
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 {{< code-block lang="javascript" >}}
-import { DatadogProvider } from '@datadog/openfeature-browser';
+import { DatadogProvider, withTimeout } from '@datadog/openfeature-browser';
 import { OpenFeature } from '@openfeature/web-sdk';
 
 // Initialize the provider
@@ -111,7 +114,11 @@ const provider = new DatadogProvider({
     site: '{{< region-param key="dd_site" code="true" >}}',
     env: '<YOUR_ENV>', // Same environment normally passed to the RUM SDK
     service: '<SERVICE_NAME>',
-    version: '1.0.0'
+    version: '1.0.0',
+    // The provider does not add a request timeout by default.
+    // Limit each configuration request to five seconds (requires version 1.4.0+).
+    // See /feature_flags/client/javascript/#set-a-timeout-and-retries-for-flag-configuration-requests.
+    flagConfigurationFetch: withTimeout(globalThis.fetch, 5_000)
 });
 
 // Set the provider

@@ -25,7 +25,12 @@ further_reading:
 
 In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
 
-{{% dd-apm-skill %}}
+{{< skill-callout
+    title="Set up APM with an agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Requirements
 
@@ -43,9 +48,13 @@ Enabling Single Step Instrumentation across your cluster automatically sends tra
 
 **Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
-Use the following commands to enable SSI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
+Use the following commands to enable SSI, replacing:
 
-These examples use the `datadog` namespace. Replace it if your Agent is installed elsewhere.
+- `<YOUR_DD_API_KEY>` with your [Datadog API key][40]
+- `<YOUR_CLUSTER_NAME>` with your cluster name
+- `<DATADOG_SITE>` with your [Datadog site][43]: {{< region-param key="dd_site" code="true" >}}
+
+The examples enable SSI with `apm.instrumentation.enabled: true` and use the `datadog` namespace. Replace the namespace if your Agent is installed elsewhere.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -70,7 +79,7 @@ These examples use the `datadog` namespace. Replace it if your Agent is installe
    spec:
      global:
        clusterName: "<YOUR_CLUSTER_NAME>"
-       site: "{{< region-param key="dd_site" >}}"
+       site: "<DATADOG_SITE>"
        credentials:
          apiSecret:
            secretName: "datadog-secret"
@@ -107,7 +116,7 @@ To update an existing Operator installation, add the SSI configuration to your `
 
    ```yaml
    datadog:
-     site: "{{< region-param key="dd_site" >}}"
+     site: "<DATADOG_SITE>"
      clusterName: "<YOUR_CLUSTER_NAME>"
      apiKeyExistingSecret: "datadog-secret"
      apm:
@@ -1010,3 +1019,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [40]: https://app.datadoghq.com/organization-settings/api-keys
 [42]: https://app.datadoghq.com/apm/services
 [41]: /tracing/guide/injectors/
+[43]: /getting_started/site/
