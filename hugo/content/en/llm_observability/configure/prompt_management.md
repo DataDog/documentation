@@ -353,9 +353,9 @@ if err != nil {
 variables := map[string]any{
 	"plan":     "enterprise",
 	"question": "Can I export the report?",
-	"history": []llmobs.PromptMessage{
-		{Role: "user", Content: "Where are reports located?"},
-		{Role: "assistant", Content: "Under Analytics."},
+	"history": []map[string]any{
+		{"role": "user", "content": "Where are reports located?"},
+		{"role": "assistant", "content": "Under Analytics."},
 	},
 }
 rendered, err := prompt.Format(variables)
