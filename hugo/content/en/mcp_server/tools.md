@@ -952,6 +952,29 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+### `ddsql_search_saved_queries`
+*Toolset: **ddsql***\
+Searches saved DDSQL queries by name or description and returns their SQL text and metadata, sorted by most recently modified. Supports text filtering and pagination.
+
+- Find saved DDSQL queries about Kubernetes.
+- List the organization's most recently updated saved queries.
+- Search saved queries for CPU usage.
+
+### `ddsql_read_saved_query`
+*Toolset: **ddsql***\
+Gets a saved DDSQL query by its query ID, including its name, SQL text, columns, description, and author metadata.
+
+- Show the SQL for this saved query.
+- Get the details of the saved query with this ID.
+
+### `ddsql_upsert_saved_query`
+*Toolset: **ddsql***\
+Creates or updates a saved DDSQL query. To create a query, provide a name and SQL text. To update a query, provide its query ID and a new name, SQL text, or both. Fields omitted from an update are preserved.
+
+- Save this query as "CPU usage by host".
+- Rename this saved query to "Production hosts".
+- Update the SQL in this saved query to include only production hosts.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
