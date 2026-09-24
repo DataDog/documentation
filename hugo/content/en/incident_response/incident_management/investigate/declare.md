@@ -3,10 +3,6 @@ title: Declare an Incident
 aliases:
 - /service_management/incident_management/declare/
 - /incident_response/incident_management/declare
-further_reading:
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview
