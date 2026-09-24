@@ -28,7 +28,7 @@ Failover takes time because DNS caches must refresh and telemetry sources must r
 
 ## Sender and Agent behavior
 
-Any Datadog Agent using DDR's DNS-based failover should meet the [DDR prerequisites][4].
+Any Datadog Agent using DDR's DNS-based failover must meet the [DDR prerequisites][4].
 
 | Setting | Required configuration | Description |
 | --- | --- | --- |
@@ -39,7 +39,7 @@ Resolving DNS again can still return a cached address. Configure [DNS record TTL
 
 ### Agent configuration examples
 
-Update the connection-reset interval settings for each telemetry type you send in `datadog.yaml`. Configure an interval of no more than 300 seconds. Do not set the interval to `0`, which disables periodic reconnection.
+In `datadog.yaml`, update the connection-reset interval settings for each telemetry type you send. Configure an interval of no more than 300 seconds. Do not set the interval to `0`, which disables periodic reconnection.
 
 | Telemetry | Setting |
 | --- | --- |
