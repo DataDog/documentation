@@ -123044,6 +123044,11 @@ components:
           items:
             $ref: "#/components/schemas/RoutingRuleAction"
           type: array
+        id:
+          description: |-
+            Specifies the unique identifier of an existing routing rule to update.
+            If omitted, a new routing rule is created.
+          type: string
         policy_id:
           description: Identifies the policy to be applied when this routing rule matches.
           type: string
