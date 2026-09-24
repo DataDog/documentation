@@ -25,30 +25,30 @@ Supported PostgreSQL versions
 : 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 Prerequisites
-: Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][1].
+: Postgres additional supplied modules must be installed. For most installations, this is included by default but less conventional installations might require an additional installation of your version of [the `postgresql-contrib` package][selfhosted-1].
 
 Supported Agent versions
 : 7.36.1+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
-Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][2]).
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][selfhosted-2]).
 
 Proxies, load balancers, and connection poolers
 : The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, use `127.0.0.1` or the socket. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
 
 Data security considerations
-: See [Sensitive information][3] for information about what data the Agent collects from your databases and how to ensure it is secure.
+: See [Sensitive information][selfhosted-3] for information about what data the Agent collects from your databases and how to ensure it is secure.
 
 ## Configure Postgres settings
 
-Configure the following [parameters][4] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][5].
+Configure the following [parameters][selfhosted-4] in the `postgresql.conf` file and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][selfhosted-5].
 
 **Required parameters**
 
 | Parameter | Value | Description |
 | --- | --- | --- |
-| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][5] extension. |
+| `shared_preload_libraries` | `pg_stat_statements` | Required for `postgresql.queries.*` metrics. Enables collection of query metrics using the [pg_stat_statements][selfhosted-5] extension. |
 | `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
 
 **Optional parameters**
@@ -64,9 +64,9 @@ Configure the following [parameters][4] in the `postgresql.conf` file and then *
 
 The Datadog Agent requires read-only access to the database server to collect statistics and queries.
 
-Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][6].
+Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][selfhosted-6].
 
-Connect to your chosen database as a superuser (or another user with sufficient permissions). For example, to connect to the `postgres` database using [psql][7]:
+Connect to your chosen database as a superuser (or another user with sufficient permissions). For example, to connect to the `postgres` database using [psql][selfhosted-7]:
 
  ```bash
  psql -h mydb.example.com -d postgres -U postgres
@@ -207,7 +207,7 @@ instances:
       enabled: true
 ```
 
-For tuning options, see [Advanced Configuration][16].
+For tuning options, see [Advanced Configuration][selfhosted-16].
 
 ### Securely store your password
 {% partial file="database_monitoring/dbm-secret.mdoc.md" /%}
@@ -263,9 +263,9 @@ When it prompts for a password, use the password you entered when you created th
 ## Install the Agent
 
 Installing the Datadog Agent also installs the Postgres check, which is required for Database Monitoring on Postgres.
-If you haven't installed the Agent, see the [Agent installation instructions][8]. Then, continue with the instructions for your installation method.
+If you haven't installed the Agent, see the [Agent installation instructions][selfhosted-8]. Then, continue with the instructions for your installation method.
 
-Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][9].
+Edit the Agent's `conf.d/postgres.d/conf.yaml` file to point to the Postgres instance you want to monitor. For a complete list of configuration options, see the [sample postgres.d/conf.yaml][selfhosted-9].
 
 ```yaml
 init_config:
@@ -282,11 +282,11 @@ instances:
 
 **Note**: If your password includes special characters, wrap it in single quotes.
 
-[Restart the Agent][10] to apply the changes.
+[Restart the Agent][selfhosted-10] to apply the changes.
 
 ### Collecting logs (optional)
 
-PostgreSQL default logging is to `stderr`, and logs do not include detailed information. Log into a file with additional details specified in the log line prefix. See the PostgreSQL [documentation][11] for details.
+PostgreSQL default logging is to `stderr`, and logs do not include detailed information. Log into a file with additional details specified in the log line prefix. See the PostgreSQL [documentation][selfhosted-11] for details.
 
 1. Logging is configured within the file `/etc/postgresql/<VERSION>/main/postgresql.conf`. For regular log results, including statement outputs, set the following parameters in the log section:
    ```ini
@@ -299,7 +299,7 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
    ```
 2. To gather detailed duration metrics and make them searchable in the Datadog interface, configure them inline with the statement. The recommended configuration below logs all statements and their durations. To reduce output to statements above a certain duration, set `log_min_duration_statement` to the desired minimum in milliseconds. Check that logging the full SQL statement complies with your organization's privacy requirements.
 
-   **Note**: Both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][12].
+   **Note**: Both `log_statement` and `log_duration` options are commented out. See discussion on this topic [here][selfhosted-12].
 
    ```ini
      log_min_duration_statement = 0    # -1 is disabled, 0 logs all statements
@@ -326,14 +326,14 @@ PostgreSQL default logging is to `stderr`, and logs do not include detailed info
        #    pattern: \d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])
        #    name: new_log_start_with_date
    ```
-   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][9] for all available configuration options.
-5. [Restart the Agent][10].
+   Change the `service` and `path` parameter values to configure for your environment. See the [sample postgres.d/conf.yaml][selfhosted-9] for all available configuration options.
+5. [Restart the Agent][selfhosted-10].
 
 ### Collecting plans with `auto_explain` (optional)
 
-By default, the agent only gathers [`EXPLAIN`][17] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
+By default, the agent only gathers [`EXPLAIN`][selfhosted-17] plans for a sampling of in-flight queries. These plans are of a more general nature, especially when application code uses prepared statements.
 
-To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
+To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][selfhosted-18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
 
 {% alert level="danger" %}
 **Important:** `auto_explain` produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring">`dbm_parameterized_queries_read`</a> permission to control who can see the resulting plans, but the log lines themselves _are_ visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
@@ -362,18 +362,18 @@ After you enable logging collection:
     auto_explain.sample_rate = 1
    ```
 
-4. [Restart the Agent][10].
+4. [Restart the Agent][selfhosted-10].
 
 ### Verify Agent setup
 
-[Run the Agent's status subcommand][13] and look for `postgres` under the Checks section. Or visit the [Databases][14] page to get started!
+[Run the Agent's status subcommand][selfhosted-13] and look for `postgres` under the Checks section. Or visit the [Databases][selfhosted-14] page to get started!
 
 ## Example Agent Configurations
 {% partial file="database_monitoring/dbm-postgres-agent-config-examples.mdoc.md" /%}
 
 ## Troubleshooting
 
-If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][15].
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][selfhosted-15].
 {% /if %}
 
 {% if equals($host, "rds") %}
@@ -415,3 +415,23 @@ Data security considerations
 
 Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collection{{< /ui >}} section of your [Amazon Web Services integration tile][3].
 {% /if %}
+
+
+[selfhosted-1]: https://www.postgresql.org/docs/current/contrib.html
+[selfhosted-2]: /database_monitoring/agent_integration_overhead/?tab=postgres
+[selfhosted-3]: /database_monitoring/data_collected/#sensitive-information
+[selfhosted-4]: https://www.postgresql.org/docs/current/config-setting.html
+[selfhosted-5]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[selfhosted-6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[selfhosted-7]: https://www.postgresql.org/docs/current/app-psql.html
+[selfhosted-8]: https://app.datadoghq.com/account/settings/agent/latest
+[selfhosted-9]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[selfhosted-10]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[selfhosted-11]: https://www.postgresql.org/docs/11/runtime-config-logging.html
+[selfhosted-12]: https://www.postgresql.org/message-id/20100210180532.GA20138@depesz.com
+[selfhosted-13]: /agent/configuration/agent-commands/#agent-status-and-information
+[selfhosted-14]: https://app.datadoghq.com/databases
+[selfhosted-15]: /database_monitoring/troubleshooting/?tab=postgres
+[selfhosted-16]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
+[selfhosted-17]: https://www.postgresql.org/docs/current/sql-explain.html
+[selfhosted-18]: https://www.postgresql.org/docs/current/auto-explain.html
