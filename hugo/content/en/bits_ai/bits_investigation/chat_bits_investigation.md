@@ -33,7 +33,3 @@ The Bits Investigation chatbot has access to:
 | Create a Notebook                              | `Can you create a notebook with a summary of this investigation?` | Notebooks                         |
 
 [1]: /bits_ai/bits_investigation/configure#confluence
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

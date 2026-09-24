@@ -168,13 +168,13 @@ Editing a rule creates a new revision. From the rule's details panel, you can:
 - Compare any two revisions to see what changed.
 - Restore an earlier revision to make it the rule's current state.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://www.openpolicyagent.org/docs/policy-language
 [2]: /security/code_security/iac_security/custom_rules/guide/
 [3]: /security/code_security/iac_security/custom_rules/guide/#parsed-input
 [4]: /security/code_security/iac_security/custom_rules/guide/#validation
 [5]: /security/code_security/iac_security/configuration/#rule-configuration
 [6]: /account_management/rbac/permissions/#cloud-security-platform
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}

@@ -295,9 +295,9 @@ The editor checks more than Rego syntax. Before evaluating a sample, Datadog ver
 
 Fix all reported errors before interpreting an evaluation with no findings. Validation errors mean the policy didn't run successfully.
 
-[1]: https://www.openpolicyagent.org/docs/policy-language
-[2]: /security/code_security/iac_security/custom_rules/
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://www.openpolicyagent.org/docs/policy-language
+[2]: /security/code_security/iac_security/custom_rules/

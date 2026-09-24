@@ -93,6 +93,10 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 
 {{% /collapse-content %}}
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [3]: /remote_configuration/
 [5]: https://app.datadoghq.com/organization-settings/remote-config
@@ -101,7 +105,3 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 [9]: https://app.datadoghq.com/organization-settings/users
 [10]: /remote_configuration/#enable-remote-configuration
 [11]: /account_management/api-app-keys/
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
