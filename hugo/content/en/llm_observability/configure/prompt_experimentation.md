@@ -30,6 +30,8 @@ Test a prompt change on live traffic before making it the default. Use an **A/B 
 
 You need a managed prompt with at least two versions, a version deployed to the environment you want to use, and an [Experiment metric][2] that measures your outcome. Check the [permissions](#permissions) for your workflow.
 
+**Permissions:** A/B testing requires permissions in Product Analytics and Feature Flags, in addition to LLM Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
+
 **First time?** Complete the [one-time application setup](#set-up-your-application) before starting either workflow. It requires Python `ddtrace[openfeature]` 4.15.0 or later, a reachable Datadog Agent, and matching user identifiers in prompt requests and outcome events. Agentless mode is not supported.
 
 ## Run an A/B test
@@ -142,7 +144,7 @@ To configure and launch an A/B test in Product Analytics, see [Product Analytics
 
 - **Controls are missing or disabled:** confirm access to the relevant Preview and the [required permissions](#permissions). A/B setup also requires two prompt versions and an enabled environment whose serving configuration can be loaded.
 - **A guarded deployment is rejected:** establish a baseline first. Resolve the conflict shown for the environment, such as an active all-user experiment or a forced version override, before trying again.
-- **An A/B test cannot start:** select a primary metric and check Product Analytics setup, permissions, and required approvals.
+- **You can create a draft but cannot configure or launch the test:** check your [Product Analytics permissions][3] and [Feature Flags permissions][6] with your Datadog administrator, along with any required environment approvals. Confirm that the test has a primary metric selected.
 
 ### I do not see assignments or results
 
