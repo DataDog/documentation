@@ -528,8 +528,8 @@ LANGUAGE sql
 SECURITY DEFINER;
 ```
 {% /if %}
-<!-- Ends 9.6 only -->  
 
+<!-- Ends 9.6 only -->
 {% alert %}
 For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection][aurora-6] for more information.
 {% /alert %}
@@ -655,8 +655,8 @@ The Datadog Agent supports Autodiscovery for all Aurora endpoints within a clust
 If you require different configurations for specific instances, or prefer to manually specify Aurora endpoints, follow the manual setup section below.
 Otherwise, Datadog recommends using the [Autodiscovery setup instructions for Aurora DB clusters][aurora-9].
 
-{% tabs %}
-{% tab label="Host" %}
+<!-- Begin Host -->
+{% if equals($agent_env, "host") %}
 
 To configure collecting Database Monitoring metrics for an Agent running on a host, for example when you provision a small EC2 instance for the Agent to collect from an Aurora database:
 
@@ -683,9 +683,11 @@ Use the Aurora instance endpoint here, not the cluster endpoint.
 {% /alert %}
 
 2. [Restart the Agent][aurora-17].
-{% /tab %}
+{% /if %}
+<!-- End Host -->
 
-{% tab label="Docker" %}
+<!-- Begin Docker -->
+{% if equals($agent_env, "docker") %}
 To configure an integration for an Agent running in a Docker container such as in ECS or Fargate, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][aurora-18].
 
 The examples below show how to use [Docker Labels][aurora-19] and [Autodiscovery Templates][aurora-20] to configure the Postgres integration.
@@ -747,9 +749,11 @@ For Postgres 9.6, add the following settings to the instance config where host a
 ```
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][aurora-22] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][aurora-23] to provide the password as an environment variable.
-{% /tab %}
+{% /if %}
+<!-- End Docker -->
 
-{% tab label="Kubernetes" %}
+<!-- Begin Kubernetes -->
+{% if equals($agent_env, "kubernetes") %}
 If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][aurora-24] to enable Database Monitoring.
 
 **Note**: Make sure [cluster checks][aurora-25] are enabled for your Datadog Cluster Agent before proceeding.
@@ -946,8 +950,7 @@ If you're using Postgres 9.6, add the following to the instance configuration:
 The Cluster Agent automatically registers this configuration and begins running the Postgres check.
 
 To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][aurora-22] and declare the password using the `ENC[]` syntax.
-{% /tab %}
-{% /tabs %}
+{% /if %}
 
 ### Verify Agent setup
 
@@ -964,6 +967,8 @@ To see infrastructure metrics from AWS, such as CPU, alongside the database tele
 
 If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][aurora-13].
 {% /if %}
+
+
 
 
 
