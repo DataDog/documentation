@@ -14,7 +14,7 @@ products:
 
 <div class="alert alert-info">For Worker versions 2.7 and later, the Google Cloud destination supports <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access">uniform bucket-level access</a>. Google <a href = "https://cloud.google.com/storage/docs/uniform-bucket-level-access#should-you-use">recommends</a> using uniform bucket-level access. <br>For Worker version older than 2.7, only <a href = "https://cloud.google.com/storage/docs/access-control/lists">Access Control Lists</a> is supported.</div>
 
-Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
+Use the Google Cloud Storage destination to send your logs to a Google Cloud Storage bucket. If you want to send logs to Google Cloud Storage for [archiving][1] and [rehydration][2], you must [configure Log Archives](#configure-log-archives). You can then query these logs with [Archive Search][21]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access. If you do not want to rehydrate logs in Datadog, skip to [Set up the destination for your pipeline](#set-up-the-destinations).
 
 The Observability Pipelines Worker uses standard Google authentication methods. See [Authentication methods at Google][6] for more information about choosing the authentication method for your use case.
 
@@ -53,6 +53,7 @@ You need to have Datadog's [Google Cloud Platform integration][3] installed to s
 1. Select the project.
 1. Enter the name of the storage bucket you created earlier.
 1. Optionally, enter a path.
+    - **Note**: This path must be a static string. It does not support template syntax, such as `{{tag_name}}`. See the [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) section for more information.
 1. Optionally, set permissions, add tags, and define the maximum scan size for rehydration. See [Advanced settings][20] for more information.
 1. Click **Save**.
 
@@ -78,7 +79,7 @@ After you select the Google Cloud Storage destination in the pipeline UI:
 Enter a prefix that you want to apply to all key objects.
 
 - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
-- See [template syntax][7] if you want to route logs to different object keys based on specific fields in your logs.
+- Use [template syntax][7] to route logs to different object keys based on specific fields in your logs. See [Using template syntax for dynamic partitioning](#using-template-syntax-for-dynamic-partitioning) for more information.
   - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
 
 #### Metadata
@@ -88,13 +89,25 @@ Enter a prefix that you want to apply to all key objects.
 
 #### Compression
 
-1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}).
+1. In the {{< ui >}}Compression - Algorithm{{< /ui >}} dropdown menu, select the compression algorithm for your archived logs ({{< ui >}}gzip{{< /ui >}} or {{< ui >}}zstd{{< /ui >}}). Each gzip or zstd file is stored as one object.
     - **Note**: If a compression algorithm is not specified, gzip with a compression level of `6` is used.
 1. In the {{< ui >}}Compression - Level {{< /ui >}} field, you must enter a compression level. Datadog recommends `6` for gzip and `3` for zstd.
 
 #### Buffering
 
 {{% observability_pipelines/destination_buffer %}}
+
+## Using template syntax for dynamic partitioning
+
+When you set up Google Cloud Storage destination, you can use [template syntax][7] in the {{< ui >}}Prefix{{< /ui >}} field. This routes logs to a specific partition based on a log attribute. For example, your logs might have a `service` attribute with one of these values: `requests`, `web-store`, and `orders-app`. Enter `{{service}}/` in the {{< ui >}}Prefix{{< /ui >}} field to route logs to the Log Archive for the specific attribute value.
+
+{{< img src="observability_pipelines/destinations/google_cloud_storage_prefix_template.png" alt="The Google Cloud Storage destination with the Prefix field set to {{service}}/." style="width:60%;" >}}
+
+However, you must manually create a Datadog [Log Archive][19] for each attribute value. See [Connect the storage bucket to Datadog Log Archives](#connect-the-storage-bucket-to-datadog-log-archives) for instructions. Enter the attribute value in the {{< ui >}}Path{{< /ui >}} field, such as `/web-store/`, when you create the Log Archive.
+
+{{< img src="observability_pipelines/destinations/google_cloud_storage_path_template.png" alt="The Configure Bucket page with the Path field set to /web-store/." style="width:60%;" >}}
+
+If the {{< ui >}}Prefix{{< /ui >}} field for the Google Cloud Storage destination is `{{service}}/` and the Log Archive {{< ui >}}Path{{< /ui >}} is `/web-store/`, the archived log files are stored as `/web-store/<date>/<hour>/<filename>`.
 
 ## Secret defaults
 
@@ -148,3 +161,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [18]: https://cloud.google.com/iam/docs/keys-create-delete#creating
 [19]: https://app.datadoghq.com/logs/pipelines/log-forwarding
 [20]: /logs/log_configuration/archives/?tab=awss3#advanced-settings
+[21]: /logs/explorer/archive_search/

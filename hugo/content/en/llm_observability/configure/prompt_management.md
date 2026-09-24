@@ -215,7 +215,7 @@ To promote a prompt already tracked in Agent Observability to a managed prompt, 
 
 #### In the UI from scratch
 
-Navigate to the {{< ui >}}Prompts{{< /ui >}} page and click {{< ui >}}New Prompt{{< /ui >}}.
+Navigate to the {{< ui >}}Prompts{{< /ui >}} page and click {{< ui >}}\+ New Prompt{{< /ui >}}.
 
 In the Prompt Editor:
 

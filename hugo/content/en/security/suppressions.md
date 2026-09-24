@@ -52,7 +52,7 @@ The [suppression list][3] provides a centralized and organized way for you to ma
 ## Create a suppression rule
 
 1. Navigate to the [Suppressions][3] page.
-1. Click {{< ui >}}+ New Suppression{{< /ui >}}.
+1. Click {{< ui >}}\+ New Suppression{{< /ui >}}.
 1. Enter a name for the suppression query.
 1. Add a description to provide context on why this suppression is being applied.
 1. Optionally, add an expiration date on which this suppression will be deactivated.

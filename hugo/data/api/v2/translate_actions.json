@@ -537,7 +537,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -1121,6 +1121,18 @@
     "request_description": "",
     "request_schema_description": "Request object for getting code coverage summary for a commit."
   },
+  "GetCodeCoverageFiles": {
+    "description": "Retrieve per-file code coverage data for a specific commit, branch, or pull request.\nExactly one of `commit_sha`, `branch`, or `pr_number` must be provided.\nOptionally filter by `service`, `codeowner`, or `flag` (at most one).",
+    "summary": "Get per-file code coverage data",
+    "request_description": "",
+    "request_schema_description": "Request object for getting per-file code coverage data."
+  },
+  "GetCodeCoveragePRSummary": {
+    "description": "Retrieve aggregated code coverage statistics for a specific pull request in a repository.\nThis endpoint provides overall coverage metrics as well as breakdowns by service\nand code owner.",
+    "summary": "Get code coverage summary for a pull request",
+    "request_description": "",
+    "request_schema_description": "Request object for getting code coverage summary for a pull request."
+  },
   "GetRuleBasedView": {
     "description": "**This endpoint is deprecated.** Use the [Security Monitoring - Search Security Findings](https://docs.datadoghq.com/api/latest/security-monitoring/search-security-findings/) endpoint instead.\n\nGet an aggregated view of compliance rules with their pass, fail, and muted finding counts.\nSupports filtering by compliance framework, framework version, and additional query filters.",
     "summary": "Get the rule-based view of compliance findings"
@@ -1356,7 +1368,7 @@
     "description": "List cost recommendations matching a filter, with pagination and sorting.",
     "summary": "Search cost recommendations",
     "request_description": "",
-    "request_schema_description": "Request body for filtering cost recommendations."
+    "request_schema_description": "JSON:API request body for filtering cost recommendations."
   },
   "ListCostTagDescriptions": {
     "description": "List Cloud Cost Management tag key descriptions for the organization. Use `filter[cloud]` to scope the result to a single cloud provider; when omitted, both cross-cloud defaults and cloud-specific descriptions are returned.",
@@ -2589,7 +2601,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.",
+    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."
@@ -2730,6 +2742,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListDatabricksIntegrationAccounts": {
+    "description": "List Databricks integration accounts.",
+    "summary": "List Databricks integration accounts"
+  },
+  "CreateDatabricksIntegrationAccount": {
+    "description": "Create a Databricks integration account.",
+    "summary": "Create a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Databricks integration account."
+  },
+  "DeleteDatabricksIntegrationAccount": {
+    "description": "Delete a Databricks integration account.",
+    "summary": "Delete a Databricks integration account"
+  },
+  "GetDatabricksIntegrationAccount": {
+    "description": "Get a Databricks integration account.",
+    "summary": "Get a Databricks integration account"
+  },
+  "UpdateDatabricksIntegrationAccount": {
+    "description": "Update a Databricks integration account. Only the fields provided are changed.",
+    "summary": "Update a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Databricks integration account."
+  },
   "ListElasticCloudIntegrationAccounts": {
     "description": "List Elastic Cloud integration accounts.",
     "summary": "List Elastic Cloud integration accounts"
@@ -2753,6 +2789,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListSnowflakeIntegrationAccounts": {
+    "description": "List Snowflake integration accounts.",
+    "summary": "List Snowflake integration accounts"
+  },
+  "CreateSnowflakeIntegrationAccount": {
+    "description": "Create a Snowflake integration account.",
+    "summary": "Create a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Snowflake integration account."
+  },
+  "DeleteSnowflakeIntegrationAccount": {
+    "description": "Delete a Snowflake integration account.",
+    "summary": "Delete a Snowflake integration account"
+  },
+  "GetSnowflakeIntegrationAccount": {
+    "description": "Get a Snowflake integration account.",
+    "summary": "Get a Snowflake integration account"
+  },
+  "UpdateSnowflakeIntegrationAccount": {
+    "description": "Update a Snowflake integration account. Only the fields provided are changed.",
+    "summary": "Update a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Snowflake integration account."
   },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
@@ -4297,6 +4357,10 @@
     "description": "Get all aggregated DNS traffic.",
     "summary": "Get all aggregated DNS traffic"
   },
+  "GetOIDCDiscoveryDocument": {
+    "description": "Retrieve OpenID Connect provider metadata for the OAuth2 v2 token endpoint.",
+    "summary": "Get OpenID Connect provider metadata"
+  },
   "GetOAuth2WellKnownSites": {
     "description": "Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.",
     "summary": "Get OAuth2 well-known sites"
@@ -4388,6 +4452,10 @@
   "ResolveOnCallPage": {
     "description": "Resolves an On-Call Page.",
     "summary": "Resolve On-Call Page"
+  },
+  "ListOnCallSchedules": {
+    "description": "Retrieve a list of On-Call schedules.",
+    "summary": "List On-Call schedules"
   },
   "CreateOnCallSchedule": {
     "description": "Create a new On-Call schedule",
@@ -5729,12 +5797,28 @@
     "request_description": "",
     "request_schema_description": "Request to assign or unassign security findings."
   },
+  "ListSecurityFindingsAutomationDefaultInboxRules": {
+    "description": "Get all default inbox rules for the current organization.\nDatadog manages default inbox rules. Their name, rule, and action are\nread-only, and each organization can change only whether they are enabled.",
+    "summary": "Get all default inbox rules"
+  },
+  "GetSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Get the details of a default inbox rule by ID.\nDatadog manages default inbox rules. Their name, rule, and action are\nread-only, and each organization can change only whether they are enabled.",
+    "summary": "Get a default inbox rule"
+  },
+  "DisableSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Disable a default inbox rule for the current organization.",
+    "summary": "Disable a default inbox rule"
+  },
+  "EnableSecurityFindingsAutomationDefaultInboxRule": {
+    "description": "Enable a default inbox rule for the current organization.",
+    "summary": "Enable a default inbox rule"
+  },
   "ListSecurityFindingsAutomationDueDateRules": {
     "description": "Get all due date rules for the current organization.",
     "summary": "Get all due date rules"
   },
   "CreateSecurityFindingsAutomationDueDateRule": {
-    "description": "Create a new due date rule for the current organization.",
+    "description": "Create a due date rule for the current organization.",
     "summary": "Create a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule create request."
@@ -5746,7 +5830,7 @@
     "request_schema_description": "The body of the due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
-    "description": "Delete an existing due date rule by ID.",
+    "description": "Delete a due date rule by ID.",
     "summary": "Delete a due date rule"
   },
   "GetSecurityFindingsAutomationDueDateRule": {
@@ -5754,17 +5838,47 @@
     "summary": "Get a due date rule"
   },
   "UpdateSecurityFindingsAutomationDueDateRule": {
-    "description": "Update an existing due date rule by ID.",
+    "description": "Update a due date rule by ID.",
     "summary": "Update a due date rule",
     "request_description": "",
     "request_schema_description": "The body of a due date rule update request."
+  },
+  "ListSecurityFindingsAutomationInboxRules": {
+    "description": "Get all inbox rules for the current organization.",
+    "summary": "Get all inbox rules"
+  },
+  "CreateSecurityFindingsAutomationInboxRule": {
+    "description": "Create an inbox rule for the current organization.",
+    "summary": "Create an inbox rule",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule create request."
+  },
+  "ReorderSecurityFindingsAutomationInboxRules": {
+    "description": "Reorder the list of inbox rules for the current organization.",
+    "summary": "Reorder inbox rules",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationInboxRule": {
+    "description": "Delete an inbox rule by ID.",
+    "summary": "Delete an inbox rule"
+  },
+  "GetSecurityFindingsAutomationInboxRule": {
+    "description": "Get the details of an inbox rule by ID.",
+    "summary": "Get an inbox rule"
+  },
+  "UpdateSecurityFindingsAutomationInboxRule": {
+    "description": "Update an inbox rule by ID.",
+    "summary": "Update an inbox rule",
+    "request_description": "",
+    "request_schema_description": "The body of an inbox rule update request."
   },
   "ListSecurityFindingsAutomationMuteRules": {
     "description": "Get all mute rules for the current organization.",
     "summary": "Get all mute rules"
   },
   "CreateSecurityFindingsAutomationMuteRule": {
-    "description": "Create a new mute rule for the current organization.",
+    "description": "Create a mute rule for the current organization.",
     "summary": "Create a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule create request."
@@ -5776,7 +5890,7 @@
     "request_schema_description": "The body of the mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
-    "description": "Delete an existing mute rule by ID.",
+    "description": "Delete a mute rule by ID.",
     "summary": "Delete a mute rule"
   },
   "GetSecurityFindingsAutomationMuteRule": {
@@ -5784,7 +5898,7 @@
     "summary": "Get a mute rule"
   },
   "UpdateSecurityFindingsAutomationMuteRule": {
-    "description": "Update an existing mute rule by ID.",
+    "description": "Update a mute rule by ID.",
     "summary": "Update a mute rule",
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
@@ -5794,7 +5908,7 @@
     "summary": "Get all severity modifier rules"
   },
   "CreateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Create a new severity modifier rule for the current organization.",
+    "description": "Create a severity modifier rule for the current organization.",
     "summary": "Create a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule create request."
@@ -5806,7 +5920,7 @@
     "request_schema_description": "The body of a severity modifier rule reorder request."
   },
   "DeleteSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Delete an existing severity modifier rule by ID.",
+    "description": "Delete a severity modifier rule by ID.",
     "summary": "Delete a severity modifier rule"
   },
   "GetSecurityFindingsAutomationSeverityModifierRule": {
@@ -5814,7 +5928,7 @@
     "summary": "Get a severity modifier rule"
   },
   "UpdateSecurityFindingsAutomationSeverityModifierRule": {
-    "description": "Update an existing severity modifier rule by ID.",
+    "description": "Update a severity modifier rule by ID.",
     "summary": "Update a severity modifier rule",
     "request_description": "",
     "request_schema_description": "The body of a severity modifier rule update request."
@@ -5824,7 +5938,7 @@
     "summary": "Get all ticket creation rules"
   },
   "CreateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Create a new ticket creation rule for the current organization.",
+    "description": "Create a ticket creation rule for the current organization.",
     "summary": "Create a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule create request."
@@ -5836,7 +5950,7 @@
     "request_schema_description": "The body of the ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Delete an existing ticket creation rule by ID.",
+    "description": "Delete a ticket creation rule by ID.",
     "summary": "Delete a ticket creation rule"
   },
   "GetSecurityFindingsAutomationTicketCreationRule": {
@@ -5844,7 +5958,7 @@
     "summary": "Get a ticket creation rule"
   },
   "UpdateSecurityFindingsAutomationTicketCreationRule": {
-    "description": "Update an existing ticket creation rule by ID.",
+    "description": "Update a ticket creation rule by ID.",
     "summary": "Update a ticket creation rule",
     "request_description": "",
     "request_schema_description": "The body of a ticket creation rule update request."
@@ -6244,6 +6358,10 @@
   "GetSingleEntityContext": {
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get a single entity context"
+  },
+  "GetMatchingSignals": {
+    "description": "Returns the list of security signals that match a given event on the given track.",
+    "summary": "Get signals matching an event"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",
@@ -7419,7 +7537,7 @@
     "request_schema_description": "The request for a flaky tests search."
   },
   "CreateTimeseriesAnomalyInvestigation": {
-    "description": "Investigates a metrics timeseries request for its most significant anomaly and returns deterministic findings.\nMetrics queries with or without grouping are supported. This API version accepts exactly one request and returns at most one anomaly.",
+    "description": "Investigates a metrics timeseries request for its most significant anomalies and returns\ndeterministic findings. Metrics queries with or without grouping are supported. This\nAPI version accepts exactly one request and returns at most three anomalies.",
     "summary": "Investigate a timeseries anomaly",
     "request_description": "Metrics timeseries request to investigate. The request body must not exceed 2 MiB.",
     "request_schema_description": "Request to investigate a metrics timeseries for anomalies."
@@ -7465,7 +7583,7 @@
     "summary": "Get projected cost across your account"
   },
   "ListQuotas": {
-    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include descendant organizations in the same datacenter as the caller. Requires the `billing_edit` permission.",
+    "description": "Lists usage quotas for the caller's organization in a quota namespace. You can optionally include\ndescendant organizations in the same datacenter as the caller. Requires the `billing_read` or\n`billing_edit` permission.",
     "summary": "List usage quotas"
   },
   "CreateQuotas": {
