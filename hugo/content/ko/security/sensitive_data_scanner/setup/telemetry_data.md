@@ -5,6 +5,9 @@ aliases:
 - /ko/sensitive_data_scanner/guide/best_practices_for_creating_custom_rules
 - /ko/security/sensitive_data_scanner/guide/redact_uuids_in_logs/
 - /ko/security/sensitive_data_scanner/guide/redact_all_emails_except_from_specific_domain_logs/
+description: Datadog 로그, APM 스팬, RUM 이벤트 및 Event Management의 이벤트에서 민감한 데이터를 탐지하고 삭제하기
+  위한 Sensitive Data Scanner 스캔 그룹과 규칙을 설정합니다. 권한, Terraform 리소스, 샘플링 및 제외된 네임스페이스를
+  다룹니다.
 disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/scanning_rules/library_rules
@@ -13,7 +16,7 @@ further_reading:
 - link: /security/sensitive_data_scanner/scanning_rules/custom_rules
   tag: 설명서
   text: 사용자 지정 규칙 만들기에 대해 자세히 알아보기
-title: 텔레메트리 데이터
+title: 텔레메트리 데이터를 위한 Sensitive Data Scanner 설정
 ---
 ## 개요 {#overview}
 
@@ -24,22 +27,22 @@ Cloud의 Sensitive Data Scanner는 애플리케이션 로그, APM 이벤트, RUM
 - **RUM**: 이벤트 특성 값 전용
 - **이벤트**: 이벤트 특성 값만
 
-필요 시, 각 제품에 대해 샘플링 비율을 10%에서 99% 사이로 설정할 수 있습니다. 이는 민감한 정보를 스캔하는 데이터 양을 줄여 처음 시작할 때 비용을 관리하는 데 도움이 됩니다.
+필요시 각 제품에 대해 샘플링 비율을 10%에서 99% 사이로 설정할 수 있습니다. 이는 민감한 정보를 스캔하는 데이터 양을 줄여 처음 시작할 때 비용을 관리하는 데 도움이 됩니다.
 
 각 스캔 규칙에 대해, 일치하는 민감한 데이터에 다음 중 하나의 액션을 적용할 수 있습니다.
 
-- **비식별화**: 선택한 단일 토큰으로 일치하는 전체 데이터를 교체합니다. 예를 들어 `[sensitive_data]`.
-- **부분 비식별화**: 모든 일치하는 값의 특정 부분을 교체합니다.
+- **삭제**: 선택한 단일 토큰으로 일치하는 전체 데이터를 교체합니다. 예: `[sensitive_data]`.
+- **부분 삭제**: 모든 일치하는 값의 특정 부분을 교체합니다.
 - **해시**: 일치하는 전체 데이터를 비가역적인 고유 식별자로 교체합니다.
-- **마스킹**(로그에만 사용 가능): 일치하는 모든 값을 마스킹합니다. `Data Scanner Unmask`권한이 있는 사용자는 Datadog에서 이 데이터를 난독화 해제(마스킹 해제)하고 조회할 수 있습니다. 자세한 내용은 [마스킹 액션](#mask-action)을 참조하세요.
+- **마스킹**(로그, APM 스팬 및 RUM 이벤트에 사용 가능): 일치하는 모든 값을 난독화합니다. `Data Scanner Unmask`권한이 있는 사용자는 Datadog에서 이 데이터를 난독화 해제(마스킹 해제)하고 조회할 수 있습니다. 자세한 내용은 [마스킹 액션](#mask-action)을 참조하세요.
 
 **참고**:
 - 샘플링된 데이터를 스캔할 때는 데이터를 난독화하는 액션을 선택할 수 없습니다.
 - Sensitive Data Scanner는 integer, float 및 double 값은 스캔하지 않습니다. 숫자가 문자열 형식인 경우 문자열이 스캔됩니다.
 
-로그와 이벤트를 Datadog 백엔드에 제출하므로 데이터가 제거되기 전에 사용자의 환경을 거쳐 전송됩니다. 로그와 이벤트는 처리 중에 Datadog 백엔드에서 스캔되고 비식별화되므로 민감한 데이터는 이벤트가 인덱싱되고 Datadog UI에 표시되기 전에 비식별화됩니다.
+로그와 이벤트를 Datadog 백엔드에 제출하므로 데이터가 삭제되기 전에 사용자의 환경을 거쳐 전송됩니다. 로그와 이벤트는 처리 중에 Datadog 백엔드에서 스캔되고 삭제되므로 민감한 데이터는 이벤트가 인덱싱되고 Datadog UI에 표시되기 전에 삭제됩니다.
 
-데이터가 마스킹되기 전에 사용자 환경을 벗어나지 않도록 하려면 [Observability Pipelines][12]와 [Sensitive Data Scanner 프로세서][13]를 사용하여 민감한 데이터를 스캔하고 마스킹 처리합니다. 파이프라인과 해당 구성 요소를 설정하는 방법은 [파이프라인 설정][14]을 참조하세요.
+데이터가 삭제되기 전에 사용자 환경을 벗어나지 않도록 하려면 [Observability Pipelines][12]와 [Sensitive Data Scanner 프로세서][13]를 사용하여 민감한 데이터를 스캔하고 삭제합니다. 파이프라인과 해당 구성 요소를 설정하는 방법은 [파이프라인 설정][14]을 참조하세요.
 
 Cloud에서 Sensitive Data Scanner를 사용하려면 먼저 스캔 그룹을 설정하여 스캔할 데이터를 정의한 다음, 스캔 규칙을 추가하여 데이터에서 일치시킬 민감한 정보를 지정합니다.
 
@@ -49,7 +52,7 @@ Cloud에서 Sensitive Data Scanner를 사용하려면 먼저 스캔 그룹을 �
 - [스캔 그룹 추가](#add-a-scanning-group)
 - [스캔 규칙 추가](#add-scanning-rules)
 - [민감 데이터가 있는 로그 접근 제어 방법](#control-access-to-logs-with-sensitive-data)
-- [태그 내 민감 데이터 제거 방법](#redact-sensitive-data-in-tags)
+- [태그 내 민감 데이터 삭제 방법](#redact-sensitive-data-in-tags)
 
 ## 설정 {#setup}
 
@@ -57,25 +60,31 @@ Cloud에서 Sensitive Data Scanner를 사용하려면 먼저 스캔 그룹을 �
 
 기본적으로 Datadog Admin 역할이 있는 사용자는 스캔 규칙을 확인하고 설정할 수 있습니다. 다른 사용자에게도 권한을 부여하려면 [Compliance][1] 아래의 `data_scanner_read` 또는 `data_scanner_write` 권한을 사용자 지정 역할에 부여합니다. 역할 및 권한 설정 방법에 대한 자세한 내용은 [Access Control][2]을 참조하세요.
 
-스캔 규칙이 일치하는 민감한 데이터에 대해 **마스킹** 액션(로그에서만 사용 가능)을 사용하는 경우 `data_scanner_unmask` 권한이 있는 사용자는 Datadog에서 해당 데이터를 난독화 해제(마스킹 해제)하여 조회할 수 있습니다. **참고**: Datadog은 유출된 모든 자격 증명에 대응하고 교체할 계획이 없는 한 자격 증명에는 **마스킹** 액션을 사용하는 것을 권장하지 않습니다. 자세한 내용은 [마스킹 액션](#mask-action)을 참조하세요.
+스캔 규칙이 일치하는 민감한 데이터에 대해 **마스킹** 액션을 사용하는 경우, `data_scanner_unmask` 권한이 있는 사용자는 Datadog에서 해당 데이터의 마스킹을 해제하여 조회할 수 있습니다. **참고**: Datadog은 유출된 모든 자격 증명에 대응하고 교체할 계획이 없는 한 자격 증명에는 **마스킹** 액션을 사용하는 것을 권장하지 않습니다. 자세한 내용은 [마스킹 액션](#mask-action)을 참조하세요.
 
 {{< img src="sensitive_data_scanner/read_write_permissions.png" alt="데이터 스캐너 읽기 및 쓰기 권한을 보여주는 Compliance 권한 섹션" style="width:80%;">}}
 
+### 단계별 설정{#guided-setup}
+
+Sensitive Data Scanner를 처음 설정하거나 조직에 구성된 스캔 그룹이 없는 경우 Datadog에서 인앱 단계별 설정을 제공합니다. [Sensitive Data Scanner][5] 설정 페이지를 열고 화면의 단계에 따라 스캔할 데이터를 선택하고, 스캔 그룹을 생성하고, 스캔 규칙을 추가하세요. 이 방법으로 시작하는 것이 좋습니다.
+
+스캔 그룹 및 규칙을 수동으로 구성하거나 기존 구성을 조정하려면 아래 섹션의 지침을 따르세요.
+
 ### 스캔 그룹 추가 {#add-a-scanning-group}
 
-스캔 그룹은 어떤 데이터를 스캔할지 결정합니다. 스캔 그룹은 쿼리 필터, 로그/APM/RUM/이벤트에 대한 스캔 활성화 버튼 세트, 그리고 각 제품별로 10%~99%의 샘플링 레이트를 설정하는 옵션으로 구성됩니다. 쿼리 필터에 대한 자세한 내용은 [로그 검색 구문][3] 설명서를 참조하세요.
+스캔 그룹은 어떤 데이터를 스캔할지 결정합니다. 스캔 그룹은 쿼리 필터, 로그/APM/RUM/이벤트에 대한 스캔 활성화 버튼 세트, 그리고 각 제품별로 10%~99%의 샘플링 비율을 설정하는 옵션으로 구성됩니다. 쿼리 필터에 대한 자세한 내용은 [로그 검색 구문][3] 설명서를 참조하세요.
 
 Terraform을 사용하는 경우 [Datadog Sensitive Data Scanner 그룹][4] 리소스를 참조하세요.
 
 스캔 그룹을 설정하려면 다음 단계를 따르세요.
 
 1. [Sensitive Data Scanner][5] 설정 페이지로 이동합니다.
-1. **Add scanning group**을 클릭합니다. 또는 페이지 오른쪽 상단의 **Add** 드롭다운 메뉴를 클릭한 다음 **Add Scanning Group**을 선택합니다.
-1. 스캔할 데이터에 대한 쿼리 필터를 입력합니다. 상단에서 **APM Spans**를 클릭하여 필터링된 스팬을 미리 봅니다. **Logs**를 클릭하여 필터링된 로그를 확인합니다.
+1. {{< ui >}}Add scanning group{{< /ui >}}을 클릭합니다. 또는 페이지 오른쪽 상단의 {{< ui >}}Add{{< /ui >}} 드롭다운 메뉴를 클릭한 다음 {{< ui >}}Add Scanning Group{{< /ui >}}을 선택합니다.
+1. 스캔할 데이터에 대한 쿼리 필터를 입력합니다. 상단에서 {{< ui >}}APM Spans{{< /ui >}}를 클릭하여 필터링된 스팬을 미리 봅니다. {{< ui >}}Logs{{< /ui >}}를 클릭하여 필터링된 로그를 확인합니다.
 1. 그룹의 이름과 설명을 입력합니다.
 1. 원하는 제품(예: 로그, APM 스팬, RUM 이벤트, Datadog 이벤트)에 대해 Sensitive Data Scanner를 활성화하려면 옵션 버튼을 클릭합니다.
-1. 필요한 경우 원하는 제품에 대해 10~99%의 샘플링 레이트를 설정합니다. 샘플링이 활성화된 그룹에 스캔 규칙을 추가하는 경우 스캔된 데이터를 난독화하는 액션은 선택할 수 없습니다. 일치하는 데이터를 난독화하려면 그룹의 쿼리 필터와 일치하는 모든 데이터를 스캔하도록 선택해야 합니다.
-1. **Create**를 클릭합니다.
+1. 필요시 원하는 제품에 대해 10~99%의 샘플링 비율을 설정합니다. 샘플링이 활성화된 그룹에 스캔 규칙을 추가하는 경우 스캔된 데이터를 난독화하는 액션은 선택할 수 없습니다. 일치하는 데이터를 난독화하려면 그룹의 쿼리 필터와 일치하는 모든 데이터를 스캔하도록 선택해야 합니다.
+1. {{< ui >}}Create{{< /ui >}}를 클릭합니다.
 
 기본적으로 새로 생성된 스캔 그룹은 비활성화되어 있습니다. 스캔 그룹을 활성화하려면 오른쪽에 있는 해당 토글을 클릭합니다.
 
@@ -88,11 +97,13 @@ Terraform을 사용하는 경우 [Datadog Sensitive Data Scanner 그룹][4] 리�
 Terraform을 사용하는 경우 [Datadog Sensitive Data Scanner 규칙][6] 리소스를 참조하세요.
 
 
+**참고**: Sensitive Data Scanner는 텔레메트리 데이터(로그, APM, RUM 및 이벤트)에 대해 조직당 최대 750개의 스캔 규칙을 지원합니다. 이 제한은 모든 스캔 그룹에 적용됩니다.
+
 스캐닝 규칙을 추가하려면 다음 단계를 따르세요.
 
 1. [Sensitive Data Scanner][5] 설정 페이지로 이동합니다.
 1. 스캔 규칙을 추가하려는 스캔 그룹을 클릭합니다.
-1. **Add Scanning Rule**을 클릭합니다. 또는 페이지 오른쪽 상단의 **Add** 드롭다운 메뉴를 클릭한 다음 **Add Scanning Rule**을 선택합니다.
+1. {{< ui >}}Add Scanning Rule{{< /ui >}}을 클릭합니다. 또는 페이지 오른쪽 상단의 {{< ui >}}Add{{< /ui >}} 드롭다운 메뉴를 클릭한 다음 {{< ui >}}Add Scanning Rule{{< /ui >}}을 선택합니다.
 1. 라이브러리 규칙을 추가할지, 사용자 지정 스캔 규칙을 만들지 선택합니다.
 
 {{% collapse-content title="라이브러리 규칙 추가" level="p" id="add-library-rules" %}}
@@ -100,10 +111,10 @@ Terraform을 사용하는 경우 [Datadog Sensitive Data Scanner 규칙][6] 리�
 Scanning Rule Library에는 이메일 주소, 신용카드 번호, API 키, 인증 토큰 등 일반적인 패턴을 탐지하기 위한 미리 정의된 규칙이 포함되어 있습니다.
 
 1. 이 규칙을 스캔 그룹 내에서 생성하지 않은 경우 스캔 그룹을 선택합니다.
-1. **Priority** 드롭다운 메뉴에서 비즈니스 요구 사항에 맞는 규칙의 우선순위를 선택합니다.
-1. **Add Library Rules** 섹션에서 사용할 라이브러리 규칙을 선택합니다.
+1. {{< ui >}}Priority{{< /ui >}} 드롭다운 메뉴에서 비즈니스 요구 사항에 맞는 규칙의 우선순위를 선택합니다.
+1. {{< ui >}}Add Library Rules{{< /ui >}} 섹션에서 사용할 라이브러리 규칙을 선택합니다.
 {{% sds-scanning-rule %}}
-1. **Add Rules**를 클릭합니다.
+1. {{< ui >}}Add Rules{{< /ui >}}를 클릭합니다.
 
 #### 사용자 지정 키워드 추가 {#add-custom-keywords}
 
@@ -112,14 +123,14 @@ Scanning Rule Library에는 이메일 주소, 신용카드 번호, API 키, 인�
 1. [Sensitive Data Scanner][5] 설정 페이지로 이동합니다.
 1. 편집하려는 규칙이 포함된 스캔 그룹을 클릭합니다.
 1. 규칙 위로 마우스를 가져간 다음 연필 아이콘을 클릭합니다.
-1. **Match Conditions** 섹션에서 **Custom Keywords**를 클릭합니다.
+1. {{< ui >}}Match Conditions{{< /ui >}} 섹션에서 {{< ui >}}Custom Keywords{{< /ui >}}를 클릭합니다.
     - 키워드를 추가하려면 키워드를 입력한 후 더하기 아이콘을 클릭하여 목록에 추가합니다.
     - 키워드를 제거하려면 제거하려는 키워드 옆의 **X**를 클릭합니다.
     - 또한 이러한 키워드가 일치 항목으로부터 지정된 문자 수 이내에 있도록 설정할 수 있습니다. 기본적으로 키워드는 일치한 값의 앞쪽 30자 이내에 있어야 합니다.
     - 구조화된 이벤트의 경우 키워드는 이벤트 경로의 속성 이름과도 비교됩니다. 속성 이름의 `-`, `_`, `.`와 같은 구분자는 단어 경계로 간주되므로 `card` 키워드는 `card_number` 또는 `card-type`이라는 속성 이름과 일치합니다. 속성 이름 일치에는 문자 수 제한이 적용되지 않습니다.
     - **참고**: 하나의 규칙에는 최대 20개의 키워드만 추가할 수 있습니다.
-1. **Type or paste event data to test the rule** 섹션에 이벤트 데이터를 추가하여 규칙을 평가하고, 키워드를 추가하여 일치 조건을 세부 조정합니다.
-1. **Update**를 클릭합니다.
+1. {{< ui >}}Type or paste event data to test the rule{{< /ui >}} 섹션에서 규칙을 평가할 이벤트 데이터를 추가하고 일치 조건을 구체화할 키워드를 추가합니다.
+1. {{< ui >}}Update{{< /ui >}}를 클릭합니다.
 
 #### 억제 추가 {#add-suppressions}
 
@@ -131,9 +142,9 @@ Scanning Rule Library에는 이메일 주소, 신용카드 번호, API 키, 인�
 
 1. 이 규칙을 스캔 그룹 내에서 생성하지 않은 경우 스캔 그룹을 선택합니다.
 1. 규칙의 이름을 입력합니다.
-1. **Priority** 드롭다운 메뉴에서 비즈니스 요구 사항에 맞는 규칙의 우선순위를 선택합니다.
+1. {{< ui >}}Priority{{< /ui >}} 드롭다운 메뉴에서 비즈니스 요구 사항에 맞는 규칙의 우선순위를 선택합니다.
 1. (선택 사항) 규칙에 대한 설명을 입력합니다.
-1. **Match conditions** 섹션의 **Regex pattern** 필드에 이벤트와 비교할 정규식 패턴을 지정합니다. 오탐을 줄이기 위해 가능한 한 구체적인 정규식 패턴을 정의하는 것이 좋습니다. 일반적인 패턴은 거짓 양성을 더 많이 발생시킵니다.<br>
+1. {{< ui >}}Match conditions{{< /ui >}} 섹션의 {{< ui >}}Regex pattern{{< /ui >}} 필드에서 이벤트와 일치시키는 데 사용할 정규식 패턴을 지정합니다. 오탐을 줄이기 위해 가능한 한 구체적인 정규식 패턴을 정의하는 것이 좋습니다. 일반적인 패턴은 거짓 양성을 더 많이 발생시킵니다.<br>
     Sensitive Data Scanner는 Perl Compatible Regular Expressions(PCRE)를 지원하지만 다음 패턴은 지원하지 않습니다.
     - 역참조 및 캡처 하위 표현식(룩어라운드)
     - 임의의 제로폭 어설션
@@ -145,16 +156,16 @@ Scanning Rule Library에는 이메일 주소, 신용카드 번호, API 키, 인�
     - `\K` 일치 시작 재설정 지시문
     - 콜아웃 및 임베드 코드
     - 원자적 그룹화 및 소유형 수량자
-1. **Check surrounding match context for keywords to reduce noise**의 경우 키워드를 추가하여 정규식 조건과 일치할 때 탐지 정확도를 높일 수 있습니다. 예를 들어 16자리 Visa 신용카드 번호를 스캔하는 경우 `visa`, `credit`, `card`와 같은 키워드를 추가할 수 있습니다.
+1. {{< ui >}}Check surrounding match context for keywords to reduce noise{{< /ui >}}에서 정규식 조건과 일치할 때 탐지 정확도를 높이기 위해 키워드를 추가합니다. 예를 들어 16자리 Visa 신용카드 번호를 스캔하는 경우 `visa`, `credit`, `card`와 같은 키워드를 추가할 수 있습니다.
     - 키워드를 추가하려면 키워드를 입력한 후 더하기 아이콘을 클릭하여 목록에 추가합니다.
     - 키워드를 제거하려면 제거하려는 키워드 옆의 **X**를 클릭합니다.
     - 또한 이러한 키워드가 일치 항목으로부터 지정된 문자 수 이내에 있도록 설정할 수 있습니다. 기본적으로 키워드는 일치한 값의 앞쪽 30자 이내에 있어야 합니다.
     - 구조화된 이벤트의 경우 키워드는 이벤트 경로의 속성 이름과도 비교됩니다. 속성 이름의 `-`, `_`, `.`와 같은 구분자는 단어 경계로 간주되므로 `card` 키워드는 `card_number` 또는 `card-type`이라는 속성 이름과 일치합니다. 속성 이름 일치에는 문자 수 제한이 적용되지 않습니다.
       **참고**: 하나의 규칙에는 최대 20개의 키워드만 추가할 수 있습니다.
 {{% sds-suppressions %}}
-1. **Type or paste event data to test the rule** 섹션에 이벤트 데이터를 추가하여 규칙을 평가하고, 키워드를 추가하여 일치 조건을 세부 조정합니다.
+1. {{< ui >}}Type or paste event data to test the rule{{< /ui >}} 섹션에서 규칙을 평가할 이벤트 데이터를 추가하고 일치 조건을 구체화할 키워드를 추가합니다.
 {{% sds-scanning-rule %}}
-1. **Add Rule**을 클릭합니다.
+1. {{< ui >}}Add Rule{{< /ui >}}을 클릭합니다.
 
 {{% /collapse-content %}}
 
@@ -163,13 +174,13 @@ Scanning Rule Library에는 이메일 주소, 신용카드 번호, API 키, 인�
 - 추가하거나 업데이트한 모든 규칙은 해당 규칙이 정의된 이후 Datadog으로 유입되는 데이터에만 적용됩니다.
 - Sensitive Data Scanner는 Datadog Agent에서 직접 정의한 규칙에는 영향을 주지 않습니다.
 - 규칙을 추가한 후에는 스캔을 시작할 수 있도록 스캔 그룹의 토글이 활성화되어 있는지 확인합니다.
-- 샘플링이 활성화된 스캔 그룹에 규칙을 추가하는 경우 **Redact**, **부분 Redact** 또는 **Hash** 액션은 선택할 수 없습니다. 데이터를 완전히 난독화하려면 스캔 그룹 설정에서 샘플링을 비활성화합니다.
+- 샘플링이 활성화된 스캔 그룹에 규칙을 추가하는 경우 **삭제**, **부분 삭제** 또는 **해시** 액션은 선택할 수 없습니다. 데이터를 완전히 난독화하려면 스캔 그룹 설정에서 샘플링을 비활성화합니다.
 
-[Findings][8] 페이지를 사용하여 민감한 데이터를 분류하는 방법에 대한 자세한 내용은 [민감한 데이터 발견 사항 조사][7]를 참조하세요.
+[Findings][8] 페이지를 사용하여 민감한 데이터를 분류하는 방법에 대한 자세한 내용은 [민감한 데이터 발견 결과 조사][7]를 참조하세요.
 
 #### 제외되는 네임스페이스 {#excluded-namespaces}
 
-Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있습니다. 스캔 중인 로그에 예약어가 포함되어 있는 경우 일치하는 단어 이후의 30자는 스캔 대상에서 제외되며 제거되지 않습니다. 예를 들어, 로그에서 `date`라는 단어 뒤에 오는 내용은 주로 이벤트 타임스탬프입니다. 타임스탬프가 실수로 제거되면 로그를 처리하고 추후에 쿼리하는 과정에서 문제가 발생합니다. 따라서 제외되는 네임스페이스는 제품의 기능 작동에 필수적인 중요 정보가 의도치 않게 제거되는 것을 방지합니다.
+Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있습니다. 스캔 중인 로그에 예약어가 포함되어 있는 경우 일치하는 단어 이후의 30자는 스캔 대상에서 제외되며 삭제되지 않습니다. 예를 들어, 로그에서 `date`라는 단어 뒤에 오는 내용은 주로 이벤트 타임스탬프입니다. 타임스탬프가 실수로 삭제되면 로그를 처리하고 추후에 쿼리하는 과정에서 문제가 발생합니다. 따라서 제외되는 네임스페이스는 제품의 기능 작동에 필수적인 중요 정보가 의도치 않게 삭제되는 것을 방지합니다.
 
 제외되는 네임스페이스 목록은 다음과 같습니다.
 
@@ -197,6 +208,9 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 - `syslog.timestamp`
 - `error.fingerprint`
 - `x-datadog-parent-id`
+- `x-datadog-trace-id`
+- `contextMap.dd.span_id`
+- `contextMap.dd.trace_id`
 
 {{% /tab %}}
 {{% tab "스팬" %}}
@@ -215,6 +229,7 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 - `meta_struct._dd.`
 - `meta_struct.api.endpoint.`
 - `meta_struct.appsec.`
+- `meta_struct.ai_guard`
 - `meta_struct.threat_intel.results.`
 - `meta.otel.trace_id`
 - `meta.otel.library.`
@@ -246,6 +261,8 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 - `meta._dd.error_tracking`
 - `meta.error.fingerprint`
 - `meta.issue`
+- `x-datadog-trace-id`
+- `x-datadog-parent-id`
 
 {{% /tab %}}
 {{% tab "RUM" %}}
@@ -272,10 +289,10 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 
 #### 위험이 허용된 데이터를 무시하기 위한 특정 일치 항목 억제 {#suppress-specific-matches-to-ignore-risk-accepted-data}
 
-억제를 사용하여 운영상 안전하다고 판단되는 민감한 데이터 일치 항목(예: 내부 이메일 도메인 또는 사설 IP 범위)을 무시할 수 있습니다.
+억제를 사용하여 운영상 안전하다고 판단되는 민감한 데이터 일치 항목(예: 내부 이메일 도메인 또는 프라이빗 IP 범위)을 무시할 수 있습니다.
 
 **참고**:
-- 억제된 일치 항목에는 Redact, Mask 또는 Hash 작업이 적용되지 않습니다.
+- 억제된 일치 항목은 삭제, 마스킹 또는 해싱되지 않습니다.
 - 억제된 일치 항목은 Findings 페이지, 대시보드, 경고 및 기타 보고 워크플로에서 제외됩니다.
 - 억제는 스캔 그룹 내의 각 규칙별로 정의됩니다.
 
@@ -293,13 +310,13 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 스캔 규칙을 편집하려면 다음을 수행합니다.
 
 1. [Sensitive Data Scanner][5] 설정 페이지로 이동합니다.
-1. 편집하려는 스캔 규칙 위에 마우스를 올리고 **Edit**(연필) 아이콘을 클릭합니다.
+1. 편집하려는 스캔 규칙 위에 마우스를 가져간 다음 {{< ui >}}Edit{{< /ui >}}(연필) 아이콘을 클릭합니다.
 1. 규칙에 원하는 변경 사항을 적용합니다. 편집하는 규칙 유형에 따라 각 설정 섹션에 대한 자세한 내용은 [라이브러리 규칙 추가](#add-library-rules) 또는 [사용자 지정 규칙 추가](#add-custom-rule)를 참조하세요.
-1. **Update**를 클릭합니다.
+1. {{< ui >}}Update{{< /ui >}}를 클릭합니다.
 
 ## 민감한 데이터가 포함된 로그에 대한 액세스 제어 {#control-access-to-logs-with-sensitive-data}
 
-민감한 데이터가 포함된 로그에 대한 액세스 권한을 제어하려면 Sensitive Data Scanner가 추가한 태그를 사용하여 역할 기반 액세스 제어(RBAC) 쿼리를 구성합니다. 데이터의 보존 기간이 만료될 때까지 특정 사용자 또는 팀의 액세스를 제한할 수 있습니다. 자세한 내용은 [로그에 대한 RBAC 설정 방법][9]을 참조하세요.
+민감한 데이터가 포함된 로그에 대한 액세스 권한을 제어하려면 Sensitive Data Scanner가 추가한 태그를 사용하여 역할 기반 액세스 제어(RBAC) 쿼리를 구성합니다. 보존 기간 이후 데이터가 만료될 때까지 특정 사용자 또는 팀에 대한 액세스를 제한할 수 있습니다. 자세한 내용은 [로그에 대한 RBAC 설정 방법][9]을 참조하세요.
 
 ### 마스킹 액션 {#mask-action}
 
@@ -307,30 +324,30 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 
 ## 태그의 민감 데이터 삭제 {#redact-sensitive-data-in-tags}
 
-태그에 포함된 민감한 데이터를 삭제하려면 먼저 태그를 속성으로 [재매핑][10]한 다음 해당 속성에 Redact를 적용해야 합니다. 태그를 재매핑하는 동안 태그가 유지되지 않도록 리매퍼 프로세서에서 `Preserve source attribute`를 선택 해제합니다.
+태그에 포함된 민감한 데이터를 삭제하려면 먼저 태그를 속성으로 [재매핑][10]한 다음 해당 속성을 삭제해야 합니다. 태그를 재매핑하는 동안 태그가 유지되지 않도록 리매퍼 프로세서에서 `Preserve source attribute`를 선택 해제합니다.
 
 태그를 속성으로 재매핑하려면 다음 단계를 수행합니다.
 
 1. [로그 파이프라인][11]으로 이동합니다.
-2. **Add Processor**를 클릭합니다.
-3. 프로세서 유형 드롭다운 메뉴에서 **Remapper**를 선택합니다.
+2. {{< ui >}}Add Processor{{< /ui >}}를 클릭합니다.
+3. 프로세서 유형 드롭다운 메뉴에서 {{< ui >}}Remapper{{< /ui >}}를 선택합니다.
 4. 프로세서 이름을 입력합니다.
-5. **Tag key(s)**를 선택합니다.
+5. {{< ui >}}Tag key(s){{< /ui >}}를 선택합니다.
 6. 태그 키를 입력합니다.
 7. 태그 키를 재매핑할 속성 이름을 입력합니다.
-8. **Preserve source attribute**를 비활성화합니다.
-9. **Create**를 클릭합니다.
+8. {{< ui >}}Preserve source attribute{{< /ui >}}를 비활성화합니다.
+9. {{< ui >}}Create{{< /ui >}}를 클릭합니다.
 
 속성을 삭제하려면 다음 단계를 수행합니다.
 
 1. [스캔 그룹][5]으로 이동합니다.
-2. **Add Scanning Rule**을 클릭합니다.
+2. {{< ui >}}Add Scanning Rule{{< /ui >}}을 클릭합니다.
 3. 사용할 라이브러리 규칙을 선택합니다.
-4. **Scan entire event or portion of it**에서 **Specific Attributes**를 선택합니다.
+4. {{< ui >}}Scan entire event or portion of it{{< /ui >}}에 대해 {{< ui >}}Specific Attributes{{< /ui >}}를 선택합니다.
 5. 앞에서 생성한 속성 이름을 입력하여 해당 속성을 스캔 대상으로 지정합니다. **참고**: 속성 경로에는 `@` 접두사를 사용하지 마세요. 예를 들어 `@function.request.body.password` 대신 `function.request.body.password`를 사용합니다. 
 6. 일치하는 항목이 발견되었을 때 취할 액션을 선택합니다.
-7. 필요에 따라 태그를 추가합니다.
-8. **Add Rules**를 클릭합니다.
+7. 필요시 태그를 추가합니다.
+8. {{< ui >}}Add Rules{{< /ui >}}를 클릭합니다.
 
 ## 로그 리하이드레이션 {#log-rehydration}
 
@@ -347,7 +364,7 @@ Datadog 플랫폼의 기능을 수행하기 위해 예약된 키워드들이 있
 
 리하이드레이션된 로그에서 **불가능한** 작업은 다음과 같습니다.
 
-- UI에서 민감한 데이터 일치 항목을 인라인으로 강조 표시하여 확인할 수 없습니다. 일치 시 액션으로 Mask, Redact, 부분 Redact 또는 Hash를 선택했더라도 일치 항목은 계속 난독화된 상태로 유지됩니다.
+- UI에서 민감한 데이터 일치 항목을 인라인으로 강조 표시하여 확인할 수 없습니다. 일치 시 액션으로 마스킹, 삭제, 부분 삭제 또는 해싱을 선택했더라도 일치 항목은 계속 난독화된 상태로 유지됩니다.
 - 소급 스캔을 실행할 수 없습니다. Sensitive Data Scanner는 리하이드레이션된 로그를 다시 스캔하지 않습니다.
 
 ## Sensitive Data Scanner 비활성화 {#disable-sensitive-data-scanner}

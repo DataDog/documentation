@@ -1,164 +1,174 @@
 ---
+description: Datadog의 UI 탐색, 대시보드, 모니터, 통합 및 핵심 플랫폼 기능을 포함한 주요 기능의 개요
 further_reading:
-- link: https://learn.datadoghq.com/courses/dd-101-dev
+- link: https://learn.datadoghq.com/bundles/frontend-engineer-learning-path
   tag: 학습 센터
-  text: 'Datadog 101: 개발자'
-- link: https://learn.datadoghq.com/courses/dd-101-sre
+  text: 프런트엔드 엔지니어 학습 경로
+- link: https://learn.datadoghq.com/bundles/backend-engineer-learning-path
   tag: 학습 센터
-  text: 'Datadog 101: 사이트 안정성 엔지니어'
+  text: 백엔드 엔지니어 학습 경로
+- link: https://learn.datadoghq.com/bundles/site-reliability-engineer-learning-path
+  tag: 학습 센터
+  text: 사이트 안정성 엔지니어 학습 경로
 - link: https://dtdg.co/fe
   tag: 기반 활성화
   text: 대화형 세션에 참여하여 Datadog의 탄탄한 기반을 구축하세요.
 - link: https://www.datadoghq.com/blog/datadog-quick-nav-menu/
   tag: 블로그
   text: Datadog 빠른 이동 메뉴 소개
-- link: https://www.datadoghq.com/blog/engineering/druids-the-design-system-that-powers-datadog/
-  tag: 블로그
-  text: Datadog을 구동하는 설계 시스템, DRUIDS
-title: Datadog 시작하기
+title: Datadog에서 시작하기
 ---
-
-{{< learning-center-callout header="Try Datadog Foundation in the Learning Center" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/Datadog-foundation">}}
-실제 클라우드 컴퓨팅 용량과 Datadog 평가판 계정 없이 학습해 보세요. 서비스 , 로그, 메트릭, 통합, 대시보드 활용을 가속화할 수 있는 실질적인 교육 과정을 시작해 보세요.
+{{< learning-center-callout header="학습 센터에서 Datadog 핵심 기술 체험" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/bundles/core-skills-learning-path">}}
+  실제 클라우드 컴퓨팅 용량과 Datadog 평가판 계정으로 무료로 학습하세요. 태그 지정, 메트릭, 모니터 및 대시보드에 빠르게 익숙해지려면 이 실습을 시작하세요.
 {{< /learning-center-callout >}}
 
-## 개요
+## 개요 {#overview}
 
 이번 가이드에서는 [Datadog 사이트][1]에서 사용할 수 있는 기능을 대략적으로 소개합니다.
 
-Datadog 사이트 탐색은 브라우저의 너비에 따라 달라집니다. 최대 세 가지 유형의 탐색을 사용할 수 있습니다. 탐색 유형을 변경하려면 브라우저 너비를 조정합니다.
+<div class="alert alert-info">
+  Datadog 사이트 탐색은 브라우저 너비에 따라 달라집니다. 최대 세 가지 유형의 탐색을 사용할 수 있습니다. 내비게이션 유형을 변경하려면 브라우저 너비를 조절해주세요.
+  <br><br>
+  <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd> 키를 눌러 Datadog 전반에서 대시보드 및 모니터와 같은 페이지와 엔터티를 검색할 수 있습니다.
+</div>
 
-**팁**: <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>K</kbd>를 눌러 페이지와 엔터티를 검색할 수 있습니다. Datadog에서 대시보드와 모니터를 검색할 때와 동일한 방법입니다.
+## 인프라 {#infrastructure}
 
-## 통합
+[인프라 목록][2]은 모든 인프라 리소스(호스트, 컨테이너, 프로세스 등)와 관련 메타데이터를 한곳에서 조회할 수 있는 중앙 화면입니다. 
 
-{{< img src="getting_started/application/integrations-2024.png" alt="통합" >}}
+**주요 기능:**
 
-- Datadog [공식 지원 대상][2]인 통합은 {{< translate key="integration_count" >}}개입니다.
-- 커스텀 통합은 [Datadog API][3]로 사용할 수 있습니다.
-- 에이전트는 [오픈 소스][4]입니다.
-- 통합을 설정한 후에는 데이터센터에 있는 데이터든, 온라인 서비스의 데이터든 모든 데이터가 Datadog에서 동일하게 처리됩니다.
+- 인프라 성능을 조사합니다.
+- 태그 및 메트릭을 기반으로 호스트를 정렬, 필터링 및 시각화합니다.
+- 호스트를 검사하여 태그, 성능, 상태 등을 검토합니다.
 
-## 대시보드
+시작하려면 앱에서 [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Hosts{{< /ui >}}][3]로 이동하세요. 자세한 내용은 [인프라 목록 문서][2]를 참조하세요.
 
-[대시보드][12]는 실시간 성능 메트릭이 포함된 그래프를 보여줍니다.
+## 호스트 및 컨테이너 맵 {#host-and-container-maps}
 
-- [스크린보드][13]에 있는 모든 그래프는 동일한 마우스 조작으로 볼 수 있습니다.
-- 세로 줄은 이벤트입니다. 이를 통해 컨텍스트에 메트릭을 할당할 수 있습니다.
-- 그래프를 클릭하고 드래그해 특정 타임프레임을 확대할 수 있습니다.
-- 그래프 위에 커서를 두면 이벤트 스트림이 함께 움직입니다.
-- 영역, 호스트 또는 총 사용량을 표시합니다.
-- Datadog는 그래프의 JSON 편집기를 공개합니다. 이를 통해 [수식][14]과 [함수][15]를 메트릭에 적용할 수 있습니다.
-- 스트림에 표시되는 그래프 스냅샷을 공유합니다.
-- 그래프는 iframe에 삽입할 수 있습니다. 이를 통해 데이터나 기타 정보에 대한 액세스 권한을 부여하지 않고도 제3자에게 실시간 그래프에 대한 액세스 권한을 부여할 수 있습니다.
+{{< img src="getting_started/application/host_map_2025.png" alt="가용 영역별로 그룹화된 호스트 맵 개요" >}}
 
-## 모니터링
+[호스트 및 컨테이너 맵][4]은 모든 호스트와 컨테이너에 대한 시각적 개요를 제공하며, CPU 사용량과 같은 주요 메트릭별로 색상을 구분하여 문제를 파악할 수 있도록 합니다.
 
-[모니터][16]는 메트릭 기준치, 통합 가용성, 네트워크 엔드포인트 등에 따라 경고와 알림을 표시합니다.
+**주요 기능**:
 
-- Datadog에 보고되는 메트릭을 사용할 수 있습니다.
-- 디바이스, 호스트 등을 기준으로 다중 알림을 설정하세요.
-- 경고 메시지에 `@`를 사용해 해당하는 관계자에게 직접 알림을 보냅니다.
-- 다운타임 일정을 설정하면 시스템 작동 중단이나 오프라인 점검 시 등에 알림을 정지시킬 수 있습니다.
+- 시각적 맵을 통해 전체 인프라를 한눈에 조회합니다.
+- 다양한 메트릭으로 색상을 구분하여 성능 문제를 파악하고, 태그와 메타데이터별로 필터링하고 그룹화합니다.
+- 개별 호스트나 컨테이너를 자세히 살펴보고 문제를 해결합니다.
 
-## 이벤트
+시작하려면 앱에서 [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host Map{{< /ui >}}][5]으로 이동하세요. 자세한 내용은 [호스트 및 컨테이너 맵 문서][4]를 참조하세요.
 
-[Event Explorer][1]에는 내 인프라스트럭처와 서비스에서 생성된 가장 최신 이벤트가 표시됩니다.
+## Log Management {#log-management}
 
-이벤트에는 다음이 포함됩니다.
+[Datadog Log Management][6]를 사용하면 애플리케이션과 인프라에서 생성되는 모든 로그를 전송하고 처리할 수 있습니다. [Live Tail][7]을 사용하여 인덱싱 없이 실시간으로 로그를 관찰할 수 있습니다.
 
-- 코드 배포
-- 서비스 점검 변경 사항
-- 구성 변경 사항
-- 모니터링 알림
+**주요 기능**:
 
-Event Explorer에서는 에이전트와 설치 통합에서 수집한 이벤트를 자동으로 수집합니다.
+- 모든 서비스, 애플리케이션 및 플랫폼에서 로그를 자동으로 수집합니다.
+- 실시간으로 로그를 조회하고 검색하며 서비스, 호스트, 오류 유형 등으로 필터링합니다.
+- 보관할 로그와 보관 기간을 선택하여 스토리지 비용을 절감합니다.
 
-Datadog API, 커스텀 에이전트 점검, DogStatsD, 또는 이벤트 이메일 API를 사용하여 커스텀 이벤트를 제출할 수도 있습니다.
+시작하려면 앱에서 [{{< ui >}}Logs{{< /ui >}}][8]로 이동하세요. 자세한 내용은 [Log Management 문서][6]를 참조하세요.
 
-Event Explorer에서 패싯이나 검색 쿼리로 이벤트를 필터링하세요. [이벤트 분석][11]을 사용해 속성별로 이벤트를 그룹화하거나 필터링하여 도식화해 살펴볼 수 있습니다.
+## APM {#apm}
 
-## 인프라스트럭처
+[Datadog Application Performance Monitoring][9](APM 또는 트레이싱)은 로그 및 인프라 모니터링과 함께 애플리케이션 성능에 대한 심층적인 인사이트를 제공합니다.
 
-- 모든 머신은 [인프라스트럭처 목록][7]에 표시됩니다.
-- 각 머신에 적용된 태그를 확인할 수 있습니다. 태그 지정은 어느 머신이 특정 목적을 수행하는지 표시할 때 유용합니다.
-- Datadog는 서버를 카테고리별로 자동 분류합니다. 새 머신에 태그가 지정된 경우, 이전에 해당 태그에 설정된 내용에 따라 머신의 상태를 즉시 확인할 수 있습니다. [태그 지정에 대해 더 자세히 알아보세요][8].
+**주요 기능**:
 
-## 호스트 맵
+- 분산 시스템 전반에서 애플리케이션으로 들어오는 요청을 엔드투엔드로 트레이싱합니다.
+- 요청의 각 단계에서 소요된 시간을 시각화하여 성능 병목 현상을 확인합니다.
+- Service Map으로 서비스 종속성과 데이터 흐름을 시각화합니다.
+- 트레이스를 해당 로그, 메트릭 및 사용자 세션과 연관시켜 풀스택 컨텍스트를 파악합니다.
 
-{{< img src="getting_started/application/host_map_2024.png" alt="호스트 맵 개요" >}}
+시작하려면 앱에서 [{{< ui >}}APM{{< /ui >}}][10]으로 이동하세요. 자세한 내용은 [APM 문서][9]를 참조하세요.
 
-[호스트 맵][9]은 인프라스트럭처 메뉴에서 찾을 수 있으며, 다음과 같은 기능을 지원합니다.
+## RUM 및 Session Replay {#rum-session-replay}
 
-- 빠르게 환경을 시각화
-- 이상치 식별
-- 사용 패턴 탐지
-- 리소스 최적화
+Datadog [Real User Monitoring][11](RUM)을 사용하면 웹 및 모바일 애플리케이션 전반에서 실시간 사용자 활동과 경험을 시각화하고 분석할 수 있습니다. [Session Replay][12]를 사용하여 세션을 캡처하고 조회함으로써 사용자 행동을 더 잘 이해할 수 있습니다.
 
-자세한 내용은 [호스트 맵][9] 가이드를 참고하세요.
+**주요 기능**:
+- Core Web Vitals 및 Mobile Vitals를 사용하여 웹 브라우저와 모바일 플랫폼(iOS, Android, React Native, Flutter 등) 전반의 성능을 모니터링합니다.
+- 자동 그룹화, 크래시 리포팅 및 의심되는 커밋 식별을 통해 오류를 추적하고 문제를 해결합니다.
+- 레이지 클릭(rage clicks) 및 에러 클릭과 같은 사용자 불만 신호를 감지하여 UX 문제를 식별합니다.
+- Feature Flag 성능 및 도입률을 모니터링합니다.
+- 프런트엔드 문제를 백엔드 트레이스, 로그 및 인프라 메트릭과 연관시켜 풀스택 가시성을 확보합니다.
 
-## 서버리스
+시작하려면 앱에서 [{{< ui >}}RUM explorer{{< /ui >}}][13]로 이동하세요. 자세한 내용은 [RUM 문서][11]를 참조하세요.
 
-[서버리스][20]를 사용하면 이벤트 기반 코드를 쓰고 기본 컴퓨팅 리소스를 관리하는 클라우드 공급자에 업로드할 수 있습니다.  Datadog 서버리스에서는 서버리스 애플리케이션을 실행 중인 AWS Lambda 함수의 메트릭, 트레이스, 로그를 한 곳에 모아 볼 수 있고, 오류, 긴 지연 시간, 콜드 스타트와 같은 문제를 일으키는 함수를 필터링할 수 있기 때문에 성능을 최적화할 수 있습니다.
+## Synthetic Monitoring {#synthetic-monitoring}
 
-## APM & 지속적 프로파일러
+Datadog [Synthetic Monitoring][14]을 사용하면 전 세계에서 시뮬레이션된 요청과 작업을 사전에 모니터링하는 API, 브라우저, 모바일 및 Network Path 테스트를 생성하고 실행할 수 있습니다. 이러한 테스트는 애플리케이션과 API를 모니터링하여 사용자에게 영향을 미치기 전에 성능 문제와 가동 중지를 감지합니다.
 
-[Datadog 애플리케이션 성능 모니터링][6] (APM 또는 트레이싱)을 이용하면 로그 및 인프라스트럭처의 모니터링과 함께, 요청량 및 지연 시간 등 주요 메트릭을 모니터링하기 위해 자동으로 생성된 대시보드부터 개별 요청의 상세한 트레이스에 이르기까지 애플리케이션 성능에 대한 심층적인 인사이트를 제공합니다. 애플리케이션에 대해 요청이 진행되면 Datadog는 분산화 시스템 전체에서 트레이스를 확인할 수 있습니다. 따라서 요청 사항과 관련해 어떤 일이 일어나고 있는지 체계적인 데이터를 정확하게 표시할 수 있습니다.
+**주요 기능**:
 
-## 클라우드 네트워크 모니터링
+- 비즈니스에 중요한 API 엔드포인트와 사용자 여정을 테스트합니다.
+- 오류를 감지하고, 회귀를 식별하며, 롤백을 자동화하여 프로덕션 환경에서 문제가 발생하는 것을 방지합니다.
+- 다양한 위치에 있는 사용자의 성능 문제를 찾아 경보를 보냅니다.
 
-{{< img src="getting_started/npm.png" alt="NPM" >}}
+시작하려면 앱에서 [{{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}][15]으로 이동하세요. 자세한 내용은 [Synthetic Monitoring 문서][14]를 참조하세요.
 
-Datadog [Cloud Network Monitoring][17](NPM)을 사용하면 컨테이너부터 호스트, 서비스, 가용성 영역까지 Datadog에서 태그가 지정된 개체 전체의 네트워크 트래픽을 시각화할 수 있습니다. NPM을 이용하면 데이터 센터부터 팀, 개별 컨테이너까지 다양하게 그룹화할 수 있습니다. 또한 태그를 사용하고, 송신자와 수신자별로 트래픽을 필터링합니다. 그 후 필터는 흐름으로 집약되고, 흐름 하나가 소스 하나와 대상 하나의 트래픽을 나타내고, 이 흐름이 맞춤화할 수 있는 네트워크 페이지와 네트워크 맵에 표시됩니다. 각 흐름에 처리량, 대역폭, 재송신 횟수 및 IP, 포트, PID 레벨까지의 송신자/수신자 정보를 비롯한 네트워크 메트릭이 포함됩니다. 그리고 트래픽량이나 TCP 재송신 등의 주요 메트릭을 보고합니다.
+## Integrations {#integrations}
 
-## 신서틱 모니터링
+Datadog의 {{< translate key="integration_count" >}} [integrations][16]을 사용하여 인프라의 모든 메트릭과 로그를 통합하고 전체 관측 가능성 시스템에 대한 인사이트를 얻습니다.
 
-Datadog [신서틱 모니터링][22]을 사용하면 애플리케이션과 모니터링 시스템 계층의 모든 내외부 네트워크 엔드포인트에서 사용자 트랜잭션을 선제적으로 시뮬레이션하는 API 및 브라우저 테스트를 생성하고 실행할 수 있습니다. 오류를 감지하고, 회귀를 식별하고, 롤백을 자동화하여 프로덕션 환경에서 문제가 발생하는 것을 방지할 수 있습니다.
+{{< img src="getting_started/application/integrations-2025.png" alt="Integrations" >}}
 
-## RUM & 세션 재생
+**주요 기능**:
 
-Datadog [Real User Monitoring][18] (RUM)을 사용하면 개별 사용자의 실시간 활동과 경험을 시각화하고 분석할 수 있습니다. [세션 재생][19]은 사용자의 웹 브라우징 세션을 포착하고 확인하여 사용자 행동을 더욱 상세하게 파악하도록 지원합니다. RUM Explorer에서 로드 시간, 프론트엔드 오류, 페이지 종속성을 시각화하여 비즈니스 메트릭과 애플리케이션 메트릭의 상관 관계를 수립하고 하나의 대시보드에서 애플리케이션, 인프라스트럭처, 비즈니스 메트릭을 사용하여 신속하게 문제를 해결할 수 있습니다.
+- 사용 가능한 통합은 클라우드 기술, 인시던트 대응, 데이터 계층, 보안, AI 등을 포괄합니다.
+- 통합을 설정한 후에는 데이터 센터에 있는 데이터든, 온라인 서비스의 데이터든 모든 데이터가 Datadog에서 동일하게 처리됩니다.
+- [개발자 문서][17]를 사용하여 직접 통합을 구축합니다.
 
-## Cloud SIEM
+시작하려면 앱에서 [{{< ui >}}Integrations{{< /ui >}}][18]로 이동하거나 [문서][19]에서 통합 목록을 살펴보세요.
 
-Datadog [Cloud SIEM][21](보안 정보 및 이벤트 관리)는 자동으로 애플리케이션과 인프라스트럭처의 위협 요소를 감지합니다. 예를 들어 타겟팅 공격, 위협 인텔리전스 목록과 일치하며 사용자 시스템과 소통 중인 IP, 또는 불안정한 설정 등을 탐지해냅니다. Datadog는 이러한 위협 요소를 보안 신호로 처리하며, Security Explorer에서 상관 관계를 파악하여 분류합니다.
+## Dashboards {#dashboards}
 
-## 로그 관리
+[대시보드][20]에는 실시간 성능 메트릭이 포함된 그래프가 있어 메트릭, 로그, 트레이스 등 전반에 걸친 데이터를 통합적으로 볼 수 있습니다.
 
-[Datadog 로그 관리][5]를 사용하면 애플리케이션과 인프라스트럭처를 통해 생성된 모든 로그를 전송하고 처리할 수 있습니다. 인덱스를 생성하지 않고 Live Tail을 사용하여 실시간으로 로그를 관찰할 수 있습니다. 애플리케이션과 인프라스트럭처에서 모든 로그를 가져오고, 필터를 적용해 동적으로 인덱스로 정리할 대상을 결정하거나 이를 아카이브에 저장할 수도 있습니다.
+**주요 기능**:
 
+- 기본 제공 대시보드로 시작하거나 특정 질문에 맞게 직접 대시보드를 만듭니다.
+- 드래그 앤 드롭 위젯, 사용자 지정 쿼리, 유연한 레이아웃으로 대시보드를 사용자 지정합니다.
+- 여러 데이터 유형(메트릭, 로그, APM, RUM 포함)을 한곳에 결합하여 실시간으로 데이터를 조회합니다.
+- 팀의 컨텍스트를 위해 댓글이나 이벤트로 그래프에 주석을 추가합니다.
 
-## Datadog 모바일
+시작하려면 앱에서 [{{< ui >}}Dashboard List{{< /ui >}}][21]로 이동하세요. 자세한 내용은 [대시보드 문서][20]를 참조하세요.
 
-[Apple App Store][24]와 [Google Play Store][25]에서 다운로드 가능한 [Datadog 모바일 앱][23]을 사용하면 대기 중인 엔지니어와 비즈니스 사용자에게 주요 데이터를 제공해, 서비스 상태를 추적하고 노트북을 열지 않고도 문제를 빠르게 선별할 수 있습니다. 모바일 기기에서 바로 소속 조직의 대시보드, 모니터, 인시던트, SLO 등에 액세스할 수 있습니다.
+## Monitors {#monitors}
 
-{{< img src="getting_started/application/mobile-app-store-screens.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="iOS 모바일 앱">}}
+[모니터][22]는 메트릭 기준치, 통합 가용성, 네트워크 엔드포인트 등에 따라 경보와 알림을 표시합니다.
 
-## 참고 자료
+- Datadog에 보고되는 모든 메트릭을 사용하여 모니터를 만듭니다.
+- 여러 트리거 조건을 사용하여 복잡한 경보 로직을 구축합니다.
+- 경보 메시지에 `@`을(를) 추가하여 적절한 담당자에게 알림을 전달하고 Slack, 이메일, PagerDuty 등으로 경보를 보냅니다.
+- 다운타임을 예약하여 시스템 작동 중단, 오프라인 점검 등의 상황에서 알림을 억제합니다.
+
+시작하려면 앱에서 [{{< ui >}}Monitors List{{< /ui >}}][23]으로 이동하세요. 자세한 내용은 [모니터 설명서][22]를 참조하세요.
+
+## 추가 자료 {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com
-[2]: http://www.datadoghq.com/integrations
-[3]: /ko/api/
-[4]: https://github.com/DataDog/datadog-agent
-[5]: /ko/logs/
-[6]: /ko/tracing/
-[7]: /ko/infrastructure/
-[8]: /ko/getting_started/tagging/
-[9]: /ko/infrastructure/hostmap/
-[10]: /ko/events/
-[11]: /ko/events/explorer/analytics
-[12]: /ko/dashboards/
-[13]: /ko/dashboards/#screenboards
-[14]: /ko/dashboards/functions/arithmetic/
-[15]: /ko/dashboards/functions/
-[16]: /ko/monitors/
-[17]: /ko/network_monitoring/performance/
-[18]: /ko/real_user_monitoring/
-[19]: /ko/real_user_monitoring/session_replay/browser/
-[20]: /ko/serverless
-[21]: /ko/security/cloud_siem/
-[22]: /ko/synthetics/
-[23]: /ko/mobile/
-[24]: https://apps.apple.com/app/datadog/id1391380318
-[25]: https://play.google.com/store/apps/details?id=com.datadog.app
+[2]: /ko/infrastructure/list/
+[3]: https://app.datadoghq.com/infrastructure
+[4]: /ko/infrastructure/hostmap/
+[5]: https://app.datadoghq.com/infrastructure/map
+[6]: /ko/logs/
+[7]: /ko/logs/explorer/live_tail/
+[8]: https://app.datadoghq.com/logs
+[9]: /ko/tracing/
+[10]: https://app.datadoghq.com/apm/home
+[11]: /ko/real_user_monitoring/
+[12]: /ko/session_replay/
+[13]: https://app.datadoghq.com/rum/sessions
+[14]: /ko/synthetics/
+[15]: https://app.datadoghq.com/synthetics/tests
+[16]: https://www.datadoghq.com/product/platform/integrations/
+[17]: /ko/extend/integrations/
+[18]: https://app.datadoghq.com/integrations
+[19]: /ko/integrations/
+[20]: /ko/dashboards/
+[21]: https://app.datadoghq.com/dashboard/lists
+[22]: /ko/monitors/
+[23]: https://app.datadoghq.com/monitors/manage

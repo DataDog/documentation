@@ -18,7 +18,7 @@ description: Python, Node.js 및 Java용 Agent Observability SDK에 대한 참�
 further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: 블로그
-  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하세요.
+  text: Datadog LLM Observability를 통해 LLM 프롬프트를 추적, 비교 및 최적화하기
 title: Agent Observability SDK 참조
 ---
 ## 개요 {#overview}
@@ -69,7 +69,7 @@ DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-####  명령줄 설정용 환경 변수 {#environment-variables-for-command-line-setup}
+#### 명령줄 설정용 환경 변수 {#environment-variables-for-command-line-setup}
 
 `DD_SITE`
 : 필수 - _string_
@@ -173,6 +173,10 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 `DD_LLMOBS_AGENTLESS_ENABLED` 또는 `dd.llmobs.agentless.enabled`
 : 선택 사항 - _integer 또는 string_ - **기본값**: `false`
 <br />Datadog Agent를 사용하지 않는 경우에만 필요하며, 이 경우 `1` 또는 `true`로 설정해야 합니다.
+
+`DD_LLMOBS_SAMPLE_RATE` 또는 `dd.llmobs.sample.rate`
+: 선택 사항 - _float_ - **기본값**: `1.0`
+<br />Agent Observability가 보존하는 트레이스의 비율입니다. `dd-trace-java` 1.66.0 이상이 필요합니다. [트레이스 샘플링](#trace-sampling)을 참조하세요.
 
 `DD_API_KEY` 또는 `dd.api.key`
 : 선택 사항 - _string_
@@ -310,23 +314,23 @@ const llmobs = tracer.llmobs;
 
 {{% /collapse-content %}}
 
-AWS Lambda의 경우, [AWS Lambda에서 LLM 애플리케이션을 추적하기][17]를 참조하십시오.
+AWS Lambda의 경우 [AWS Lambda에서 LLM 애플리케이션 추적][17]을 참조하세요.
 
 
 SDK를 설치하고 애플리케이션을 실행하면 자동 계측을 통해 Agent Observability에 일부 데이터가 표시되는 것을 확인할 수 있습니다. 아직 지원되지 않는 라이브러리에서 생성된 사용자 지정 프레임워크나 작업을 수집하려면 수동 계측을 사용할 수 있습니다.
 
 ## 트레이스 샘플링 {#trace-sampling}
 
-<div class="alert alert-info">트레이스 샘플링은 Python SDK(<code>ddtrace</code> 4.12.0 이상) 및 Node.js SDK(<code>dd-trace</code> 5.110.0 이상)에서 사용할 수 있습니다. Java SDK는 트레이스 샘플링을 지원하지 않습니다.</div>
+<div class="alert alert-info">트레이스 샘플링은 Python SDK(<code>ddtrace</code> 4.12.0 이상), Node.js SDK(<code>dd-trace</code> 5.110.0 이상), Java SDK(<code>dd-trace-java</code> 1.66.0 이상)에서 사용할 수 있습니다.</div>
 
 트레이스 샘플링은 Agent Observability가 보존하는 트레이스의 비율을 설정합니다. Agent Observability 청구는 전송하는 스팬의 볼륨을 기준으로 하므로, 샘플링 비율을 설정하는 것은 Agent Observability 비용을 제어하는 한 가지 방법입니다. SDK는 루트 스팬에 대해 샘플링 결정을 내리고, [분산 트레이싱](#distributed-tracing)을 통해 다운스트림 서비스에서 생성된 스팬을 포함하여 해당 루트 스팬의 모든 하위 스팬에 이를 적용합니다.
 
-샘플링은 [Agent Observability 메트릭](/llm_observability/investigate/metrics/)(여기에는 [토큰 및 비용 메트릭](/llm_observability/investigate/cost/)과 기타 운영 메트릭이 포함됨)에 영향을 주지 않습니다. 샘플링되지 않은 스팬은 Datadog이 트레이스를 수집한 후 드롭되므로, 해당 메트릭은 지정된 샘플 비율과 관계없이 애플리케이션의 계측된 트래픽 100%를 기준으로 유지됩니다. 추적 샘플링은 수집 후에 적용되는 [자동화 규칙](/llm_observability/configure/automation_rules/) 및 [APM 추적 샘플링](/tracing/trace_pipeline/ingestion_mechanisms/)과 같은 인앱 제어와도 독립적입니다.
+샘플링은 [토큰 및 비용 메트릭](/llm_observability/investigate/cost/)과 기타 운영 메트릭을 포함한 [Agent Observability 메트릭](/llm_observability/investigate/metrics/)에 영향을 주지 않습니다. 샘플링되지 않은 스팬은 Datadog이 트레이스를 수집한 후 드롭되므로, 해당 메트릭은 지정된 샘플 비율과 관계없이 애플리케이션의 계측된 트래픽 100%를 기준으로 유지됩니다. 트레이스 샘플링은 수집 후에 적용되는 [자동화 규칙](/llm_observability/configure/automation_rules/) 및 [APM 트레이스 샘플링](/tracing/trace_pipeline/ingestion_mechanisms/)과 같은 인앱 제어와 별개로 작동합니다.
 
 다음 두 가지 메커니즘 중 하나를 통해 샘플 비율을 구성할 수 있습니다.
 
-- **환경 변수**(`DD_LLMOBS_SAMPLE_RATE`): [명령줄 설정](#command-line-setup) 및 [인코드 설정](#in-code-setup) 모두에 적용됩니다.
-- **인코드 파라미터**(Python의 경우 `sample_rate`, Node.js의 경우 `sampleRate`): [인코드 설정](#in-code-setup)으로 SDK를 활성화할 때 Python에서는 `LLMObs.enable()`에 전달되며, Node.js에서는 `llmobs` 아래에서 전달됩니다. 설정된 경우 `DD_LLMOBS_SAMPLE_RATE`보다 우선합니다.
+- **환경 변수**(`DD_LLMOBS_SAMPLE_RATE`): [명령줄 설정](#command-line-setup) 및 [인코드 설정](#in-code-setup) 모두에 적용됩니다. Java에서는 `dd.llmobs.sample.rate` 시스템 속성이 동일한 값을 설정합니다.
+- **인코드 파라미터**(Python의 경우 `sample_rate`, Node.js의 경우 `sampleRate`): [인코드 설정](#in-code-setup)으로 SDK를 활성화할 때 Python에서는 `LLMObs.enable()`에 전달되며, Node.js에서는 `llmobs` 아래에서 전달됩니다. 설정된 경우 `DD_LLMOBS_SAMPLE_RATE`보다 우선합니다. Java SDK에는 코드 내 해당하는 기능이 없습니다.
 
 샘플 비율은 `0.0`(트레이스 보존 안 함)에서 `1.0`(모든 트레이스 보존) 사이의 부동 소수점 값입니다. 기본값은 `1.0`입니다. 범위를 벗어난 값은 무시됩니다.
 
@@ -368,6 +372,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+다음과 같이 환경 변수로 샘플 비율을 설정하세요.
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+또는 동일한 `dd.llmobs.sample.rate` 시스템 속성을 설정합니다.
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -440,7 +463,7 @@ processMessage = llmobs.wrap({ kind: 'workflow', name: 'differentFunctionName' }
 
 다음 예시는 마지막 인수가 콜백인 두 번째 조건을 보여줍니다.
 
-#### 예시{#example}
+#### 예시 {#example}
 
 {{< code-block lang="javascript" >}}
 const express = require('express')
@@ -1290,7 +1313,7 @@ public class MyJavaClass {
 ## 스팬 강화하기 {#enriching-spans}
 
 <div class="alert alert-info">
-여기에서 <code>metrics</code> 여기서 파라미터는 개별 스팬에 부여된 숫자 값을 의미하며, <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 메트릭</a>을 의미하지 않습니다. 인지되는 특정 키(예: <code>input_tokens</code>, <code>output_tokens</code>및 <code>total_tokens</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.tokens</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.
+여기에서 <code>metrics</code> 파라미터는 개별 스팬의 속성으로 연결되는 숫자 값을 의미하며, <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 메트릭</a>을 의미하는 것은 아닙니다. 인지되는 특정 키(예: <code>input_tokens</code>, <code>output_tokens</code>및 <code>total_tokens</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.tokens</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.
 </div>
 
 {{< tabs >}}
@@ -1307,11 +1330,11 @@ SDK는 입력, 출력 및 메타데이터로 스팬을 강화하기 위해 `LLMO
 
 `input_data`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 딕셔너리 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`) 중 하나. 여기서 `"tool_calls"`는 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`이며, `"tool_results"`는 함수 호출 시 사용할 도구 결과 딕셔너리의 선택적 목록으로 필수 키는 `"result"`, 선택적 키는 `"name"`, `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`는 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로 각각 필수 `"mime_type"`과 `"content"`(인라인으로 전달되는 base64 인코딩 미디어) 또는 `"attachment_key"` 중 정확히 하나를 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`) 중 하나. 여기서 `"tool_calls"`는 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`이며, `"tool_results"`는 함수 호출 시 사용할 도구 결과 딕셔너리의 선택적 목록으로 필수 키는 `"result"`, 선택적 키는 `"name"`, `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`은 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로, 각각 필수 `"mime_type"`와 `"content"`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "..."}`)를 사용해야 합니다.
 
 `output_data`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 딕셔너리 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`) 중 하나. 여기서 `"tool_calls"`는 함수 호출 시 사용할 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`는 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로 각각 필수 `"mime_type"`과 `"content"`(인라인으로 전달되는 base64 인코딩 미디어) 또는 `"attachment_key"` 중 정확히 하나를 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "...", "name": "...", "score": float, "id": "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`) 중 하나. 여기서 `"tool_calls"`는 함수 호출 시 사용할 도구 호출 딕셔너리의 선택적 목록으로 필수 키는 `"name"`, `"arguments"`, 선택적 키는 `"tool_id"`, `"type"`입니다. `"audio_parts"` 및 `"image_parts"`은 멀티모달 스팬을 위한 미디어 딕셔너리의 선택적 목록으로, 각각 필수 `"mime_type"`와 `"content"`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 딕셔너리(또는 딕셔너리 목록, 형식: `{"text": "...", "name": "...", "score": float, "id": "..."}`)를 사용해야 합니다.
 
 `tool_definitions`
 : 선택 사항 - _딕셔너리 목록_
@@ -1435,11 +1458,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-`audio_parts` 또는 `image_parts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다.
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER의 입력 메시지는 'Hey, how are you?'라는 전사본이 포함된 인라인 오디오 플레이어를 보여주고, ASSISTANT의 출력 메시지는 'Click to play audio' 제어 기능과 'Hey! I'm doing great, thanks for asking. How about you?'라는 전사본을 표시합니다." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER 입력 메시지는 'What is in this image?'라는 프롬프트와 함께 검은 강아지 사진이 인라인으로 포함되어 있으며, ASSISTANT 출력 메시지는 이를 나무 표면 위의 검은 래브라도 리트리버 강아지로 설명합니다." style="width:100%;" >}}
+`audio_parts` 또는 `image_parts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다. 렌더링된 예시, 지원되는 형식, 크기 제한, 해당 필드를 자동으로 채우는 통합에 대한 자세한 내용은 [멀티모달 지원](/llm_observability/instrument/multimodal/)을 참조하세요.
 
 {{% /tab %}}
 
@@ -1461,11 +1480,11 @@ SDK는 입력, 출력 및 메타데이터로 스팬에 주석을 달기 위해 `
 
 `inputData`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 객체 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`는 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로 각각 필수 `mimeType`과 `content`(인라인으로 전달되는 base64 인코딩 미디어), `attachmentKey` 중 정확히 하나를 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 딕셔너리 목록(형식: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`은 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로, 각각 필수 `mimeType`와 `content`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 임베딩 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "..."}`)를 사용해야 합니다.
 
 `outputData`
 : 선택 사항 - _JSON 직렬화 가능 유형 또는 객체 목록_
-<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 객체 목록(형식: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`는 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로 각각 필수 `mimeType`과 `content`(인라인으로 전달되는 base64 인코딩 미디어), `attachmentKey` 중 정확히 하나를 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "...", name: "...", score: number, id: "..."}`)를 사용해야 합니다.
+<br />JSON 직렬화 가능 유형(LLM 이외의 스팬용) 또는 객체 목록(형식: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}`, LLM 스팬용)입니다. `audioParts` 및 `imageParts`은 멀티모달 스팬을 위한 미디어 객체의 선택적 목록으로, 각각 필수 `mimeType`와 `content`(인라인으로 전달되는 base64 인코딩 미디어)을 포함합니다. **참고**: 검색 스팬은 예외적으로 문자열 또는 객체(또는 객체 목록, 형식: `{text: "...", name: "...", score: number, id: "..."}`)를 사용해야 합니다.
 
 `metadata`
 : 선택 사항 - _객체_
@@ -1576,13 +1595,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-`audioParts` 또는 `imageParts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다.
+`audioParts` 또는 `imageParts`로 주석이 달린 메시지는 트레이스 보기에서 인라인 오디오 플레이어 및 이미지로 렌더링됩니다. 렌더링된 예시, 지원되는 형식, 크기 제한, 해당 필드를 자동으로 채우는 통합에 대한 자세한 내용은 [멀티모달 지원](/llm_observability/instrument/multimodal/)을 참조하세요.
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER의 입력 메시지는 'Hey, how are you?'라는 전사본이 포함된 인라인 오디오 플레이어를 보여주고, ASSISTANT의 출력 메시지는 'Click to play audio' 제어 기능과 'Hey! I'm doing great, thanks for asking. How about you?'라는 전사본을 표시합니다." style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability 트레이스 보기의 LLM 스팬입니다. USER 입력 메시지는 'What is in this image?'라는 프롬프트와 함께 검은 강아지 사진이 인라인으로 포함되어 있으며, ASSISTANT 출력 메시지는 이를 나무 표면 위의 검은 래브라도 리트리버 강아지로 설명합니다." style="width:100%;" >}}
-
-OpenAI 오디오 채팅 완료의 경우, `audioParts`도 [Datadog의 LLM 통합](/llm_observability/instrument/auto_instrumentation/)을 통해 자동으로 캡처되므로 수동 주석이 필요하지 않습니다. `audioParts`와 달리 `imageParts`는 현재 자동으로 캡처되지 않으므로 수동으로 주석을 달아야 합니다. 향후 릴리스에서 자동 캡처가 지원될 예정입니다.
+OpenAI 오디오 채팅 완료의 경우, `audioParts`도 [Datadog의 LLM 통합](/llm_observability/instrument/auto_instrumentation/)을 통해 자동으로 캡처되므로 수동 주석이 필요하지 않습니다. Node.js SDK는 `imageParts`를 자동으로 캡처하지 않습니다. 위와 같이 주석을 추가합니다.
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1892,7 +1907,7 @@ SDK의 `llmobs.annotationContext()`는 콜백 함수 범위 내에서 시작된 
 
 `llmobs.annotationContext()` 메서드는 첫 번째 인수로 다음 옵션을 허용합니다.
 
-{{% collapse-content title="옵션" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : 선택 사항 - _str_
@@ -2005,7 +2020,7 @@ LLM 호출 전에 프롬프트 메타데이터를 첨부하려면 `llmobs.annota
 
 #### 인수 {#arguments-9}
 
-{{% collapse-content title="옵션" level="h5" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="Options" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : 필수 - object
@@ -2106,7 +2121,7 @@ LLM/임베딩 스팬에 토큰 메트릭(자동 비용 추적용) 또는 비용 
 
 자동 계측을 사용하는 경우, 토큰 및 비용 메트릭은 스팬에 자동으로 표시됩니다. 수동으로 계측하는 경우, 아래 지침을 따릅니다.
 
-<div class="alert alert-info">이 문맥에서 "토큰 메트릭" 및 "비용 메트릭"은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 Agent Observability 메트릭</a>과는 별개입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>및 <code>output_cost</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
+<div class="alert alert-info">이 문맥에서 "토큰 메트릭" 및 "비용 메트릭"은 <code>metrics</code> 파라미터( <code>LLMObs.annotate()</code> 메서드의 파라미터)를 통해 스팬에 첨부하는 숫자형 키-값 쌍을 의미합니다. 이는 <a href="/llm_observability/investigate/metrics/">Datadog 플랫폼 Agent Observability 메트릭</a>과는 별개의 개념입니다. 인지되는 키(예: <code>input_tokens</code>, <code>output_tokens</code>, <code>input_cost</code>및 <code>output_cost</code>)의 경우 Datadog은 이러한 스팬 속성을 사용해 해당 플랫폼 메트릭(예: <code>ml_obs.span.llm.input.cost</code>)을 생성하며, 생성된 메트릭은 대시보드와 모니터에서 사용할 수 있습니다.</div>
 
 ### 사용 사례: 일반 모델 제공업체 사용하기 {#use-case-using-a-common-model-provider}
 Datadog은 OpenAI, Azure OpenAI, Anthropic, Google Gemini 등 일반 모델 제공업체를 지원합니다. 이러한 제공업체를 사용할 때는 LLM 요청에 모델 이름, 모델 제공업체 및 토큰 사용량에만 주석을 달면 됩니다. Datadog은 제공업체 가격을 기반으로 예상 비용을 자동 계산합니다.
@@ -2339,7 +2354,7 @@ llmobs.annotationContext({
 
 Agent Observability SDK는 평가를 Datadog에 내보내고 제출할 수 있는 메서드를 제공합니다.
 
-<div class="alert alert-info">풍부한 결과 메타데이터를 갖춘 재사용 가능한 클래스 기반 평가기(<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>)를 풍부한 결과 메타데이터와 함께 사용하려면 <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">Evaluation Developer Guide</a>를 참조하십시오.</div>
+<div class="alert alert-info">풍부한 결과 메타데이터를 갖춘 재사용 가능한 클래스 기반 평가자(<code>BaseEvaluator</code>, <code>BaseSummaryEvaluator</code>)를 구축하려면, <a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">평가 개발자 가이드</a>를 참조하세요.</div>
 
 평가는 단일 스팬에 연결해야 합니다. 대상 스팬은 다음 두 가지 방법 중 하나로 식별할 수 있습니다.
 - _태그 기반 연결_ - 고유 키-값 태그 쌍을 단일 스팬에 설정하여 평가를 연결합니다. 태그 키-값 쌍이 여러 스팬과 일치하거나 일치하는 스팬이 없는 경우 평가 연결에 실패합니다.
@@ -2402,7 +2417,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% tab "Python" %}}
 `LLMObs.submit_evaluation()`을 사용하여 주어진 스팬과 연결된 사용자 지정 평가를 제출할 수 있습니다.
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> 는 더 이상 사용되지 않으며 ddtrace의 다음 주요 버전(4.0)에서 제거될 예정입니다. 마이그레이션하려면 <code>LLMObs.submit_evaluation_for</code> 호출의 이름을 <code>LLMObs.submit_evaluation</code>.</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> 는 더 이상 사용되지 않으며 ddtrace의 다음 주요 버전(4.0)에서 제거될 예정입니다. 마이그레이션하려면 <code>LLMObs.submit_evaluation_for</code> 호출의 이름을 <code>LLMObs.submit_evaluation</code>변경합니다.</div>
 
 **참고**: 사용자 지정 평가는 사용자가 구현하고 호스팅하는 평가자입니다. Datadog이 내장 평가기를 사용해 자동으로 계산하는 기본 제공 평가와는 다릅니다. 애플리케이션용 기본 제공 평가를 구성하려면 Datadog의 [**Agent Observability** > **Settings** > **Evaluations**][1] 페이지를 사용하세요.
 

@@ -29,7 +29,7 @@ title: AWS PrivateLink를 통한 Datadog 연결
 <div class="alert alert-danger">Datadog PrivateLink는 선택한 Datadog 사이트를 지원하지 않습니다.</div>
 {{% /site-region %}}
 
-{{% site-region region="us,ap1,ap2" %}}
+{{% site-region region="us,ap1,ap2,uk1" %}}
 
 ## 개요 {#overview}
 
@@ -52,6 +52,7 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 
     {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC 서비스 이름" style="width:70%;" >}}
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink 서비스 이름                                                               | Private DNS 이름                                                       |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | 로그(Agent HTTP 수집) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -64,6 +65,17 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 | 트레이스                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+US1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+AP2 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+
+{{% site-region region="uk1" %}}
+UK1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
 
 4. {{< ui >}}Verify{{< /ui >}}를 클릭합니다. _Service name found_가 표시되지 않으면 [Datadog 지원팀][14]에 문의합니다.
 5. Datadog VPC 서비스 엔드포인트와 피어링할 VPC 및 서브넷을 선택합니다.
@@ -132,6 +144,7 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 
 ## PrivateLink 서비스 이름 {#privatelink-service-names}
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink 서비스 이름                                                               | Private DNS 이름                                                       |
 |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | 로그(Agent HTTP 수집) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -144,6 +157,17 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 | 트레이스                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+AP2 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+
+{{% site-region region="us" %}}
+US1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+{{% site-region region="uk1" %}}
+UK1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
 
 **참고**: 교차 리전 PrivateLink는 CloudWatch 메트릭을 생성하지 않습니다. 자세한 내용은 [AWS PrivateLink용 CloudWatch 메트릭][2]을 참조하세요.
 
@@ -161,6 +185,7 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 
 {{< img src="agent/guide/private_link/vpc_service_name.png" alt="VPC 서비스 이름" style="width:90%;" >}}
 
+{{% site-region region="ap1" %}}
 | Datadog                   | PrivateLink 서비스 이름                                                               |
 |---------------------------|----------------------------------------------------------------------------------------|
 | 로그(Agent HTTP 수집) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        |
@@ -173,6 +198,17 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 | 트레이스                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            |
 | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               |
 | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+US1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+AP2 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+
+{{% site-region region="uk1" %}}
+UK1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
 
 4. {{< ui >}}Verify{{< /ui >}}를 클릭합니다. _Service name found_가 표시되지 않으면 [Datadog 지원팀][1]에 문의하세요.
 
@@ -194,12 +230,13 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 
 ### Amazon Route53 {#amazon-route53}
 
-1. AWS PrivateLink 엔드포인트를 생성한 각 서비스에 대해 [Route53 프라이빗 호스팅 영역][3]을 생성합니다. 프라이빗 호스팅 영역을 {{< region-param key="aws_region" code="true" >}}의 VPC에 연결합니다.
+1. AWS PrivateLink 엔드포인트를 생성한 각 서비스에 대해 [Route53 프라이빗 호스팅 영역][3]을 생성합니다. 프라이빗 호스팅 영역을 {{< region-param key="aws_region" code="true" >}}VPC에 연결합니다.
 
 {{< img src="agent/guide/private_link/create-a-route53-private-hosted-zone.png" alt="Route53 프라이빗 호스팅 영역 생성" style="width:80%;" >}}
 
 아래 목록을 사용하여 서비스와 DNS 이름을 Datadog의 각 부분에 매핑하세요.
 
+{{% site-region region="ap1" %}}
   | Datadog                   | PrivateLink 서비스 이름                                                               | Private DNS 이름                                                       |
   |---------------------------|----------------------------------------------------------------------------------------|------------------------------------------------------------------------|
   | 로그(Agent HTTP 수집) | {{< region-param key="aws_private_link_logs_agent_service_name" code="true" >}}        | {{< region-param key="agent_http_endpoint_private_link" code="true" >}} |
@@ -212,6 +249,17 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
   | 트레이스                    | {{< region-param key="aws_private_link_traces_service_name" code="true" >}}            | {{< region-param key="traces_endpoint_private_link" code="true" >}}     |
   | Database Monitoring       | {{< region-param key="aws_private_link_dbm_service_name" code="true" >}}               | {{< region-param key="dbm_endpoint_private_link" code="true" >}}        |
   | Remote Configuration      | {{< region-param key="aws_private_link_remote_config_service_name" code="true" >}}     | {{< region-param key="remote_config_endpoint_private_link" code="true" >}}     |
+{{% /site-region %}}
+{{% site-region region="us" %}}
+US1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+{{% site-region region="ap2" %}}
+AP2 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
+
+{{% site-region region="uk1" %}}
+UK1 DNS 레코드 및 VPC 서비스 엔드포인트의 전체 목록은 [VPC 엔드포인트 서비스 ID](#vpc-endpoint-service-ids)를 참조하세요.
+{{% /site-region %}}
 
   이 정보는 AWS API의 `DescribeVpcEndpointServices`를 조회하거나 다음 명령을 사용하여 확인할 수도 있습니다.
 
@@ -219,7 +267,7 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
   aws ec2 describe-vpc-endpoint-services --service-names <service-name>`
   ```
 
-  예를 들어 {{< region-param key="aws_region" code="true" >}}의 Datadog 메트릭 엔드포인트의 경우:
+  예를 들어 {{< region-param key="aws_region" code="true" >}}Datadog 메트릭 엔드포인트의 경우:
 
 <div class="site-region-container">
   <div class="highlight">
@@ -231,7 +279,7 @@ Datadog은 **{{< region-param key="aws_region" >}}**에서 AWS PrivateLink 엔�
 
 2. 새 Route53 프라이빗 호스팅 영역마다 동일한 이름의 A 레코드를 생성합니다. {{< ui >}}Alias{{< /ui >}} 옵션을 활성화한 후 {{< ui >}}Route traffic to{{< /ui >}}에서 {{< ui >}}Alias to VPC endpoint{{< /ui >}}, **{{< region-param key="aws_region" >}}**를 선택하고 DNS 이름에 연결된 VPC 엔드포인트의 DNS 이름을 입력합니다.**참고**:
       - DNS 이름을 검색하려면 [엔드포인트 서비스 프라이빗 DNS 이름 구성 보기 설명서][4]를 참조하세요.
-      - Agent는 예를 들어 <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> 과 같은 버전 지정 엔드포인트로 텔레메트리를 전송하며, 이는 CNAME 별칭을 통해 <code>metrics.agent.{{< region-param key="dd_site" >}}</code> 으로 확인됩니다. 따라서 <code>metrics.agent.{{< region-param key="dd_site" >}}</code>에 대해서만 프라이빗 호스팅 영역을 설정하면 됩니다.
+      - Agent는 예를 들어 <code>[version]-app.agent.{{< region-param key="dd_site" >}}</code> 과 같은 버전 지정 엔드포인트로 텔레메트리를 전송하며, 이는 CNAME 별칭을 통해 <code>metrics.agent.{{< region-param key="dd_site" >}}</code> 으로 확인됩니다. 따라서 <code>metrics.agent.{{< region-param key="dd_site" >}}</code>VPC에 연결합니다.
 
 {{< img src="agent/guide/private_link/create-an-a-record.png" alt="A 레코드 생성" style="width:90%;" >}}
 
@@ -255,7 +303,7 @@ DNS 이름은 {{< region-param key="aws_region" code="true" >}}의 VPC CIDR 블�
 
 DNS가 공용 IP 주소로 확인되는 경우 Route53 영역이 다른 리전의 VPC와 **연결되지 않았거나** A 레코드가 존재하지 않는 것입니다.
 
-DNS는 올바르게 확인되지만 `port 443` 연결이 실패하는 경우 VPC 피어링 또는 라우팅이 잘못 구성되었거나 {{< region-param key="aws_region" code="true" >}}의 VPC CIDR 블록에 대해 아웃바운드 포트 443이 허용되지 않았을 수 있습니다.
+DNS는 올바르게 확인되지만 `port 443` 연결이 실패하는 경우 VPC 피어링 또는 라우팅이 잘못 구성되었거나 포트 443이 {{< region-param key="aws_region" code="true" >}}에서 VPC의 CIDR 블록으로 아웃바운드되도록 허용되지 않았을 수 있습니다.
 
 프라이빗 호스팅 영역(PHZ)이 연결된 VPC에서는 몇 가지 설정을 활성화해야 합니다. 특히 PHZ와 연결된 VPC에서 `enableDnsHostnames` 및 `enableDnsSupport`를 활성화해야 합니다. 자세한 내용은 [Amazon VPC 설정][6]을 참조하세요.
 
@@ -301,6 +349,209 @@ DNS는 올바르게 확인되지만 `port 443` 연결이 실패하는 경우 VPC
 [16]: /ko/agent/logs/?tab=tailexistingfiles#send-logs-over-https
 [17]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/vpc-endpoint-overview.html
 
+{{% site-region region="us" %}}
+## VPC 엔드포인트 서비스 ID {#vpc-endpoint-service-ids}
+
+US1은 PrivateLink에 2단계 DNS 아키텍처를 사용합니다. 모든 고객 대면 DNS 레코드는 전용 `color.intake.datadoghq.com` VPC 엔드포인트 주소에 매핑됩니다. 특정 앵커 주소에 대해 VPC 엔드포인트를 설정하면 해당 주소에 매핑되는 모든 고객 대면 레코드를 포괄합니다.
+
+다음 표에서 사용 중인 Datadog 기능에 대해 설정할 VPC 엔드포인트를 확인하세요. Wildcard 항목은 나열되지 않은 모든 하위 도메인과 일치합니다.
+
+**참고**: 아래 표의 `---`은 중간 앵커 주소가 없는 직접 VPC 서비스 엔드포인트를 나타냅니다.
+| 이름 | 앵커 | VPC 엔드포인트 서비스 ID |
+|---|---|---|
+| `webhook-intake.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
+| `webhooks-http-intake.logs.datadoghq.com` | `azure.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-02bee2072b5c3c226` |
+| `*.integrations.otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `opamp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `otlp.datadoghq.com` | `brown.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-00192e92115cbcc75` |
+| `mcp.datadoghq.com` | `cornsilk.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-058a75ceea85a9175` |
+| `agenthealth-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ci-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cicodescan-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `citestcov-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `citestcycle-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cloudplatform-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `contimage-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `contlcycle-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `cws-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `debugger-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `error-tracking-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `event-management-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `event-platform-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `feed-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `instrumentation-telemetry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `kubeops-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `llmobs-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ndm-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ndmflow-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `netpath-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `ocimetrics-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `resources-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sbom-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sds-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `sentry-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `snmp-traps-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `softinv-intake.datadoghq.com` | `cyan.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b3292e3efce2a445` |
+| `iam-rum-intake.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `rum-http-intake.logs.datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `rum.browser-intake-datadoghq.com` | `gray.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0a3b2d86676122d8d` |
+| `data-obs-intake.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
+| `trace.agent.datadoghq.com` | `lime.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ee865cd1c0a7ba32` |
+| `network-devices.datadoghq.com` | `olive.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-05e3bfec4501e714d` |
+| `*.datadoghq.com` | `orange.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-0b67fd56f90bd3c41` |
+| `*.api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `*.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `api.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `intake.synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `synthetics.datadoghq.com` | `orchid.intake.datadoghq.com` | `com.amazonaws.vpce.us-east-1.vpce-svc-07895350fd0109264` |
+| `agent-http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-025a56b9187ac1f63` |
+| `http-intake.logs.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0e36256cb6172439d` |
+| `metrics.agent.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-09a8006e245d1e7b8` |
+| `orchestrator.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ad5fb9e71f85fe99` |
+| `process.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ed1f789ac6b0bde1` |
+| `intake.profile.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-022ae36a7b2472029` |
+| `dbm-metrics-intake.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-0ce70d55ec4af8501` |
+| `config.datadoghq.com` | `---` | `com.amazonaws.vpce.us-east-1.vpce-svc-01f21309e507e3b1d` |
+
+{{% /site-region %}}
+
+{{% site-region region="ap2" %}}
+## VPC 엔드포인트 서비스 ID {#vpc-endpoint-service-ids-1}
+
+AP2은 PrivateLink에 2단계 DNS 아키텍처를 사용합니다. 모든 고객 대면 DNS 레코드는 전용 `color.intake.ap2.datadoghq.com` VPC 엔드포인트 주소에 매핑됩니다. 특정 앵커 주소에 대해 VPC 엔드포인트를 설정하면 해당 주소에 매핑되는 모든 고객 대면 레코드를 포괄합니다.
+
+다음 표에서 사용 중인 Datadog 기능에 대해 설정할 VPC 엔드포인트를 확인하세요. 보다 구체적인 DNS 레코드는 와일드카드보다 우선적으로 적용됩니다. 예를 들어, `trace.agent.ap2.datadoghq.com`는 `lime.intake.ap2.datadoghq.com`로 해석되지만, `*.agent.ap2.datadoghq.com`은 `beige.intake.ap2.datadoghq.com`을 가리킵니다.
+
+| 이름 | 앵커 | VPC 엔드포인트 서비스 ID |
+|---|---|---|
+| `gcp-intake.logs.ap2.datadoghq.com` | `aqua.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01b61a61d21fc7273` |
+| `*.agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
+| `agent.ap2.datadoghq.com` | `beige.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06a30d6a016b746ff` |
+| `process.ap2.datadoghq.com` | `bisque.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0c26ca335d93a68b5` |
+| `*.integrations.otlp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `opamp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `otlp.ap2.datadoghq.com` | `brown.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-04c61207a01a73496` |
+| `agenthealth-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `awsmetrics-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ci-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cicodescan-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cireport-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `citestcov-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `citestcycle-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cloudplatform-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `contimage-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `contlcycle-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cspm-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `cws-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `debugger-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `error-tracking-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `event-management-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `instrumentation-telemetry-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `intake.profile.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `kubeops-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `llmobs-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ndm-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ndmflow-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `netpath-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `ocimetrics-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `resources-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sbom-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sds-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `sentry-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `snmp-traps-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `softinv-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `webhook-intake.ap2.datadoghq.com` | `cyan.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0d936da0e6a30d3cd` |
+| `agent-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `aws-kinesis-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `eventbridge-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `lambda-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `obpipeline-intake.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `runtime-security-http-intake.logs.ap2.datadoghq.com` | `gold.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06460db30a7cfdace` |
+| `live.logs.ap2.datadoghq.com` | `indigo.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0545109555aa68e7e` |
+| `data-obs-intake.ap2.datadoghq.com` | `lime.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09` |
+| `trace.agent.ap2.datadoghq.com` | `lime.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-0f3e01f4180b2ae09` |
+| `orchestrator.ap2.datadoghq.com` | `linen.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-031da3ffac78ef902` |
+| `*.ap2.datadoghq.com` | `orange.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01911394f8bac8056` |
+| `*.synthetics.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `api.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `quota.browser-intake-ap2-datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `synthetics.ap2.datadoghq.com` | `orchid.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-06ec78b291ce8020a` |
+| `sourcemap-intake.ap2.datadoghq.com` | `plum.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-028e4348e80fa73f5` |
+| `config.ap2.datadoghq.com` | `violet.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-01f8f80f4cb97bd10` |
+| `dbm-metrics-intake.ap2.datadoghq.com` | `white.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448` |
+| `dbquery-intake.ap2.datadoghq.com` | `white.intake.ap2.datadoghq.com` | `com.amazonaws.vpce.ap-southeast-2.vpce-svc-094469ee7a178f448` |
+{{% /site-region %}}
+
+{{% /site-region %}}
+
+{{% site-region region="uk1" %}}
+## VPC 엔드포인트 서비스 ID {#vpc-endpoint-service-ids-2}
+
+UK1은 PrivateLink에 2단계 DNS 아키텍처를 사용합니다. 모든 고객 대면 DNS 레코드는 전용 `color.intake.uk1.datadoghq.com` VPC 엔드포인트 주소에 매핑됩니다. 특정 앵커 주소에 대해 VPC 엔드포인트를 설정하면 해당 주소에 매핑되는 모든 고객 대면 레코드를 포괄합니다.
+
+다음 표에서 사용 중인 Datadog 기능에 대해 설정할 VPC 엔드포인트를 확인하세요. 보다 구체적인 DNS 레코드는 와일드카드보다 우선적으로 적용됩니다. 예를 들어, `trace.agent.uk1.datadoghq.com`는 `lime.intake.uk1.datadoghq.com`로 해석되지만, `*.agent.uk1.datadoghq.com`은 `beige.intake.uk1.datadoghq.com`을 가리킵니다.
+
+| 이름 | 앵커 | VPC 엔드포인트 서비스 ID |
+|---|---|---|
+| `gcp-intake.logs.uk1.datadoghq.com` | `aqua.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-099b74a86151e7f91` |
+| `*.agent.uk1.datadoghq.com` | `beige.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9` |
+| `agent.uk1.datadoghq.com` | `beige.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-058a9de2dbf6959f9` |
+| `process.uk1.datadoghq.com` | `bisque.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0fe52c96bfb6c5d0e` |
+| `*.integrations.otlp.uk1.datadoghq.com` | `brown.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0d7e1e795a19787c9` |
+| `opamp.uk1.datadoghq.com` | `brown.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0d7e1e795a19787c9` |
+| `otlp.uk1.datadoghq.com` | `brown.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0d7e1e795a19787c9` |
+| `mcp.uk1.datadoghq.com` | `cornsilk.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0d345b92b8a5e8743` |
+| `agenthealth-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `awsmetrics-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `ci-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `cicodescan-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `cireport-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `citestcov-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `citestcycle-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `cloudplatform-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `contimage-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `contlcycle-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `cspm-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `cws-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `debugger-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `error-tracking-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `event-management-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `instrumentation-telemetry-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `intake.profile.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `kubeops-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `llmobs-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `ndm-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `ndmflow-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `netpath-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `ocimetrics-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `resources-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `sbom-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `sds-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `sentry-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `snmp-traps-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `softinv-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `webhook-intake.uk1.datadoghq.com` | `cyan.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-01f4f12969c768c0c` |
+| `agent-http-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `aws-kinesis-http-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `eventbridge-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `http-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `lambda-http-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `obpipeline-intake.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `runtime-security-http-intake.logs.uk1.datadoghq.com` | `gold.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03fb3a3dd752ef336` |
+| `data-obs-intake.uk1.datadoghq.com` | `lime.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-08989912d1ef253f4` |
+| `trace.agent.uk1.datadoghq.com` | `lime.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-08989912d1ef253f4` |
+| `orchestrator.uk1.datadoghq.com` | `linen.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-07f22a32140efaae5` |
+| `*.uk1.datadoghq.com` | `orange.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0682567dcbfd55a95` |
+| `custom-domains.uk1.datadoghq.com` | `orange.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0682567dcbfd55a95` |
+| `*.synthetics.uk1.datadoghq.com` | `orchid.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77` |
+| `api.uk1.datadoghq.com` | `orchid.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77` |
+| `quota.browser-intake-uk1-datadoghq.com` | `orchid.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77` |
+| `synthetics.uk1.datadoghq.com` | `orchid.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-05399db7fb3b28c77` |
+| `sourcemap-intake.uk1.datadoghq.com` | `plum.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-04fbf10021b0308cd` |
+| `config.uk1.datadoghq.com` | `violet.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-0755097b02a34f9e7` |
+| `dbm-metrics-intake.uk1.datadoghq.com` | `white.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029` |
+| `dbquery-intake.uk1.datadoghq.com` | `white.intake.uk1.datadoghq.com` | `com.amazonaws.vpce.eu-west-2.vpce-svc-03e170925a2baa029` |
 {{% /site-region %}}
 
 ## PrivateLink를 통해 데이터가 전송되는지 확인 {#verify-that-data-is-being-sent-using-privatelink}
@@ -332,7 +583,7 @@ l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.
 l4-logs-http-s1-e721f9c2a0e65948.elb.us-east-1.amazonaws.com. 42 IN A 3.233.158.50
 ```
 
-## 추가 자료{#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

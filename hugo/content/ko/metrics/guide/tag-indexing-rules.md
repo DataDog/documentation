@@ -26,9 +26,9 @@ title: 태그 인덱싱 규칙
 
 규칙을 생성하면 Datadog이 일치하는 모든 메트릭에 자동으로 적용합니다.
 
-1. [**Metrics → Settings**][3]로 이동합니다.
-2. **+ Create Rule**을 클릭합니다.
-3. **Configure Tag Indexing Rule**을 선택합니다.
+1. [{{< ui >}}Metrics → Settings{{< /ui >}}][3]로 이동합니다.
+2. {{< ui >}}\+ Create Rule{{< /ui >}}을 클릭합니다.
+3. {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}을 선택합니다.
 
 {{< img src="metrics/guide/tag_indexing_rules/configure_tag_indexing_rule.png" alt="Metrics Settings의 Create Rule 드롭다운 메뉴에서 Configure Tag Indexing Rule 옵션이 강조 표시된 화면" style="width:50%;">}}
 
@@ -48,7 +48,7 @@ title: 태그 인덱싱 규칙
 
 {{< img src="metrics/guide/tag_indexing_rules/define_rule_scope.png" alt="Choose Metrics 단계에서 http.*에 규칙을 적용하고 하위 접두사인 http.client.*를 제외한 예시." style="width:80%;">}}
 
-여러 규칙이 동일한 메트릭에 적용되는 경우 Datadog은 순서대로 규칙을 평가합니다. 선택적으로 **Override** 동작을 사용하여 선택된 메트릭에 대해 이전에 평가된 규칙을 대체할 수 있습니다.
+여러 규칙이 동일한 메트릭에 적용되는 경우 Datadog은 순서대로 규칙을 평가합니다. 필요시 {{< ui >}}Override{{< /ui >}} 동작을 사용하여 선택한 메트릭에 대해 이전에 평가된 규칙을 대체할 수 있습니다.
 
 ### 3단계: 태그 동작 구성 {#step-3-configure-tag-behavior}
 
@@ -57,8 +57,8 @@ title: 태그 인덱싱 규칙
 #### 기존 구성 병합 또는 재정의 {#merge-or-override-existing-configurations}
 
 이 규칙이 기존 태그 구성을 기반으로 동작할지 또는 대체할지를 선택합니다.
-- **Merge**(기본값) — 기존 태그 구성 위에 이 규칙을 적용합니다. 이전 구성이 없는 메트릭은 영향을 받지 않습니다.
-- **Override** — 동일한 접두사에 적용되는 다른 모든 규칙을 무시하고 이 규칙만 적용합니다. 이 동작을 활성화하려면 **Override all other rules that apply to these prefixes** 옵션을 선택합니다.
+- {{< ui >}}Merge{{< /ui >}} (기본값) — 기존 태그 구성에 이 규칙을 추가로 적용합니다. 이전 구성이 없는 메트릭은 영향을 받지 않습니다.
+- {{< ui >}}Override{{< /ui >}} — 동일한 접두사에 적용되는 다른 모든 규칙을 무시하고 이 규칙만 적용합니다. {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}} 옵션을 선택하여 이 동작을 활성화합니다.
 
 **참고**: 더 좁은 범위의 규칙에서 **Override** 동작을 사용하면 더 광범위한 규칙의 제외 태그 효과가 누적되는 것을 방지할 수 있습니다. 예를 들어 규칙 1이 **Merge** 동작을 사용하여 `dd.*`에서 `host`를 제외하고, 규칙 2가 `dd.payments.*`에서 `app_name`을 제외한다고 가정합니다. 규칙 2도 **Merge**를 사용하는 경우 `dd.payments.*` 메트릭에서 `host`와 `app_name`이 모두 제거됩니다. 규칙 2가 **Override**를 사용하는 경우에는 `app_name`만 제거됩니다(해당 접두사에 대해서는 규칙 1의 효과가 무시됨).
 
@@ -69,8 +69,8 @@ title: 태그 인덱싱 규칙
 #### 포함 또는 제외할 태그 선택 {#select-tags-to-include-or-exclude}
 
 태그 필터링을 위해 허용 목록 또는 차단 목록을 사용할지 선택하세요.
-- **Include tags** — 조회 가능한 태그의 허용 목록을 사용합니다.
-- **Exclude tags** — 조회 불가능한 태그를 정의하는 차단 목록을 사용합니다.
+- {{< ui >}}Include tags{{< /ui >}} — 조회 가능한 태그의 허용 목록을 사용합니다.
+- {{< ui >}}Exclude tags{{< /ui >}} — 차단 목록을 사용하여 조회 불가능한 태그를 정의하거나, 태그 사용량을 사용하여 지난 30, 60, 90일 동안 조회되지 않았고 대시보드나 기타 자산에서 사용되지 않는 태그를 자동으로 인덱싱 해제합니다.
 
 포함하거나 제외하려는 태그 키를 추가합니다.
 
@@ -78,26 +78,27 @@ title: 태그 인덱싱 규칙
 
 태그 동작을 구성하면 미리 보기에서 영향을 받는 메트릭 목록(UI 기준 최대 100개)이 표시됩니다.
 
-{{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="규칙 범위와 일치하는 메트릭 목록을 표시하는 Preview affected metrics 패널." style="width:80%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="규칙 범위와 일치하는 메트릭 목록이 표시된 Preview affected metrics 패널." style="width:80%;">}}
 
 ### 제한 사항 {#limitations}
 
-- **Exclude** 규칙은 Datadog이 메트릭에서 해당 태그를 관측한 이후에 적용됩니다.
+- {{< ui >}}Exclude{{< /ui >}} 규칙은 Datadog이 메트릭에서 해당 태그를 관측한 이후에 적용됩니다.
 - Datadog은 규칙을 순차적으로 평가하며, 각 후속 규칙은 이전 구성을 기반으로 하거나 이를 대체합니다.
+- **Tag age**: Tag Usage를 사용하는 규칙의 경우, 새 태그는 규칙의 적용을 받기 전 15일의 유예 기간을 갖습니다.
 
 ## 규칙 수정 {#modify-a-rule}
 
-기존 규칙을 수정하려면 [**Metrics → Settings → Rules**][1]로 이동합니다. 변경 사항을 저장하면 Datadog이 일치하는 모든 메트릭에 자동으로 적용합니다.
+[{{< ui >}}Metrics → Settings → Rules{{< /ui >}}][1]로 이동하여 기존 규칙을 수정합니다. 변경 사항을 저장하면 Datadog이 일치하는 모든 메트릭에 자동으로 적용합니다.
 
 ### 규칙 편집 {#edit-a-rule}
 
-규칙을 선택하여 세부 정보 패널을 연 후 **Edit**를 클릭하여 규칙 범위, 태그 선택 또는 병합/재정의 동작을 변경합니다.
+규칙을 선택하여 세부 정보 패널을 연 후 {{< ui >}}Edit{{< /ui >}}을 클릭하여 규칙 범위, 태그 선택 또는 병합 및 재정의 동작을 변경합니다.
 
 {{< img src="metrics/guide/tag_indexing_rules/edit_rule_configuration.png" alt="규칙 유형, 범위, 작업, 태그 및 옵션이 표시되고 Edit 버튼이 있는 규칙 세부 정보 사이드 패널." style="width:80%;">}}
 
 ### 규칙 순서 변경 {#reorder-rules}
 
-규칙을 드래그하여 평가 순서를 변경합니다. 평가 순서는 여러 규칙이 동일한 메트릭에 적용될 때 상호 작용 방식을 결정합니다.
+규칙을 드래그하여 평가 순서를 변경합니다. 평가 순서는 여러 규칙이 동일한 메트릭에 적용될 때 상호작용 방식을 결정합니다.
 
 ### 규칙 삭제 {#delete-a-rule}
 
@@ -105,7 +106,7 @@ title: 태그 인덱싱 규칙
 
 ### 특정 메트릭에 대한 규칙 재정의 {#override-rules-for-a-specific-metric}
 
-메트릭을 태그 규칙 적용 대상에서 제외하려면 Metrics Summary에서 해당 메트릭의 세부 정보 사이드 패널을 열고 **Configure This Metric Individually**를 선택한 후 모든 태그를 유지하도록 설정합니다. 모든 태그를 유지하도록 설정하면 규칙 자체를 수정하지 않고도 해당 메트릭에 대한 모든 태그 규칙을 우회할 수 있습니다.
+메트릭을 태그 규칙 적용 대상에서 제외하려면 Metrics Summary에서 해당 메트릭의 세부 정보 사이드 패널을 열고 {{< ui >}}Configure This Metric Individually{{< /ui >}}를 선택한 후 모든 태그를 유지하도록 설정합니다. 모든 태그를 유지하도록 설정하면 규칙 자체를 수정하지 않고도 해당 메트릭에 대한 모든 태그 규칙을 우회할 수 있습니다.
 
 규칙을 다시 적용하려면 동일한 패널에서 메트릭의 기본 구성을 복원합니다.
 
@@ -114,9 +115,9 @@ title: 태그 인덱싱 규칙
 여러 규칙이 동일한 메트릭에 적용되면 Datadog은 규칙을 순차적으로 평가합니다. 규칙 순서가 중요한 이유는 다음과 같습니다.
 
 - 평가 순서상 아래에 있는 규칙은 이전 규칙의 결과를 수정합니다.
-- **Override** 동작은 일치하는 메트릭에 대한 이전 구성을 덮어씁니다.
-- **Merge** 동작은 기존 구성을 기반으로 확장합니다.
-- 여러 규칙이 **Override** 동작을 사용하는 경우 마지막으로 적용된 규칙이 최종 구성이 포함 모드인지 제외 모드인지를 결정합니다.
+- {{< ui >}}Override{{< /ui >}} 동작은 일치하는 메트릭에 대한 이전 구성을 덮어씁니다.
+- {{< ui >}}Merge{{< /ui >}} 동작은 기존 구성을 기반으로 확장합니다.
+- 여러 규칙이 {{< ui >}}Override{{< /ui >}} 동작을 사용하는 경우 마지막으로 적용된 규칙이 최종 구성이 포함 모드인지 제외 모드인지를 결정합니다.
 
 어떤 규칙이 우선 적용되는지 변경하려면 [Rules 페이지][1]에서 규칙 순서를 변경합니다. 다음 예제를 통해 서로 다른 순서가 어떤 결과를 만드는지 확인할 수 있습니다.
 
@@ -131,7 +132,7 @@ title: 태그 인덱싱 규칙
 
 {{< img src="metrics/guide/tag_indexing_rules/merge_vs_override.png" alt="모든 메트릭에서 env 태그를 Override 방식으로 제외하는 규칙 1과, infra 메트릭에 대해 Merge 방식으로 env 태그를 포함하는 규칙 2를 보여주는 다이어그램." style="width:100%;">}}
 
-**핵심 내용**: `env` 태그는 `infra.*` 메트릭에 대해서만 다시 추가됩니다.
+**핵심 내용**: `env` 태그는 `infra.*` 메트릭에만 다시 추가됩니다.
 
 ### 예제 2: 규칙 순서 {#example-2-rule-order}
 
@@ -140,7 +141,7 @@ title: 태그 인덱싱 규칙
 초기 태그:  
 `host`, `env`, `service`
 
-이 예제에서 규칙 2는 **Include** 구성을 사용하며, 이는 허용 목록처럼 동작합니다. 목록에 있는 태그만 유지되고 목록에 없는 태그는 제거됩니다.
+이 예제에서 규칙 2는 {{< ui >}}Include{{< /ui >}} 구성을 사용하며, 이는 허용 목록처럼 동작합니다. 목록에 있는 태그만 유지되고 목록에 없는 태그는 제거됩니다.
 
 #### 순서 1: 구체적인 규칙 먼저 {#order-1-specific-rule-first}
 
@@ -156,7 +157,7 @@ title: 태그 인덱싱 규칙
 
 ### 예제 3: 광범위한 규칙에 대한 예외 {#example-3-exception-to-a-broad-rule}
 
-**Override** 동작을 사용하는 광범위한 규칙으로 특정 태그를 전체적으로 제외한 후, **Merge** 동작을 사용하는 대상 지정 규칙으로 특정 메트릭에 대해 해당 태그를 복원할 수 있습니다.
+{{< ui >}}Override{{< /ui >}} 동작을 사용하는 광범위한 규칙으로 특정 태그를 전체적으로 제외한 후, {{< ui >}}Merge{{< /ui >}} 동작을 사용하는 대상 지정 규칙으로 특정 메트릭에 대해 해당 태그를 복원할 수 있습니다.
 
 초기 태그:
 `node`, `env`, `pod`
@@ -167,22 +168,25 @@ title: 태그 인덱싱 규칙
 
 ### 예제 4: 광범위한 규칙에 대한 여러 예외 {#example-4-multiple-exceptions-to-a-broad-rule}
 
-**Override** 동작을 사용하는 광범위한 규칙 위에 **Merge** 동작을 사용하는 여러 규칙을 추가하여, 서로 다른 메트릭 접두사에 대해 서로 다른 태그를 복원할 수 있습니다. 더 구체적인 접두사와 일치하는 메트릭일수록 더 많은 복원 규칙이 누적 적용됩니다.
+{{< ui >}}Override{{< /ui >}} 동작을 사용하는 광범위한 규칙 위에 {{< ui >}}Merge{{< /ui >}} 동작을 사용하는 여러 규칙을 추가하여, 서로 다른 메트릭 접두사에 대해 서로 다른 태그를 복원할 수 있습니다. 더 구체적인 접두사와 일치하는 메트릭일수록 더 많은 복원 규칙이 누적 적용됩니다.
 
 초기 태그:
 `team`, `pod`, `env`
 
-{{< img src="metrics/guide/tag_indexing_rules/multiple_exceptions.png" alt="모든 태그를 제외하는 광범위한 Override 규칙과, 서로 다른 접두사에 대해 서로 다른 태그를 복원하는 두 개의 Merge 규칙을 보여주는 다이어그램." style="width:100%;">}}
+{{< img src="metrics/guide/tag_indexing_rules/multiple_exceptions.png" alt="모든 태그를 제외하는 광범위한 Override 규칙과, 서로 다른 접두사에 대해 서로 다른 태그를 복원하는 2개의 Merge 규칙을 보여주는 다이어그램." style="width:100%;">}}
 
-**핵심 내용**: **Override** 동작을 사용하는 제외 규칙 이후에 적용되는 **Merge** 동작의 여러 포함 규칙은 누적됩니다(두 개의 예외 접두사와 모두 일치하는 메트릭은 두 규칙의 태그 복원 효과를 모두 받습니다).
+**핵심 내용**: {{< ui >}}Override{{< /ui >}} 동작을 사용하는 제외 규칙 이후에 적용되는 {{< ui >}}Merge{{< /ui >}} 동작의 여러 포함 규칙은 누적됩니다(2개의 예외 접두사와 모두 일치하는 메트릭은 2가지 규칙의 태그 복원 효과를 모두 받습니다).
 
 ## Metrics without Limits™ 호환성 {#metrics-without-limits-compatibility}
 
-태그 규칙은 기존의 [Metrics without Limits™][2](MWL) 메트릭별 구성을 자동으로 재정의하지 않습니다. 기존 MWL 구성이 우선 적용되며, 태그 규칙을 생성하거나 수정해도 Datadog은 해당 구성을 유지합니다.
+기존 [Metrics without Limits™][2](MWL) 메트릭별 구성은 태그 인덱싱 규칙보다 우선하며 예외로 작용합니다. 예외가 활성 상태로 유지되는 동안에는 메트릭이 어떠한 태그 인덱싱 규칙의 영향도 받지 않습니다.
 
-특정 메트릭의 MWL 구성이 삭제되면 현재 규칙 순서에 따라 태그 규칙이 자동으로 해당 메트릭에 적용됩니다.
+태그 인덱싱 규칙 페이지에서 이러한 예외를 검토하고 제거할 수 있습니다. Datadog은 각 예외를 다음과 같이 분류합니다.
 
-특정 메트릭을 모든 태그 규칙에서 제외하면서 규칙 자체는 유지하려면, 메트릭 세부 정보 사이드 패널에서 모든 태그 유지 옵션을 사용합니다. 규칙을 다시 적용하려면 동일한 패널에서 메트릭의 기본 구성을 복원합니다.
+- **제거해도 안전함**: 계정의 태그 인덱싱 규칙에 대한 Datadog의 분석을 기반으로 할 때, 예외를 제거하면 커스텀 메트릭 사용량이 감소할 것으로 예상됩니다.
+- **검토 필요**: 예외를 제거하면 커스텀 메트릭 사용량에 영향을 줄 수 있거나, 태그 인덱싱 규칙이 기존 MWL 구성에 포함된 모든 태그를 유지하지 못할 수 있습니다. 해당 태그에 의존하는 대시보드, 모니터 또는 기타 자산이 손상되지 않도록 이러한 예외를 주의 깊게 검토하세요.
+
+예외는 개별 태그 인덱싱 규칙이 아닌 계정 전체에 적용됩니다. 메트릭의 예외를 한 규칙에서 제거하면 계정의 모든 태그 인덱싱 규칙에서 자동으로 제거됩니다. 그러면 해당 메트릭은 현재 순서에 따라 태그 인덱싱 규칙을 기준으로 평가됩니다.
 
 ## 추가 자료 {#further-reading}
 
