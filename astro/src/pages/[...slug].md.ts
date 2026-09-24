@@ -18,8 +18,32 @@ import { COOKIE_NAME } from "@lib/cdocs/cookiePrefs";
 import { renderCdocPlaintext } from "@lib/cdocs/plaintext/renderCdocPlaintext";
 import { makeBundledPartialResolver } from "@lib/cdocs/plaintext/loadPartial";
 import { renderMdocWithTwins } from "@lib/plaintext/twinTransform";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
+import { buildMarkdocStr } from "@lib/plaintext/helpers";
 
 const resolvePartial = makeBundledPartialResolver();
+
+/**
+ * Splice a block in directly below the leading H1. Falls back to prepending if
+ * the text does not start with a heading.
+ *
+ * This is one place the plaintext twin deliberately diverges from the HTML
+ * page. There the banner sits *above* the title, because it is a page-level
+ * alert in the content column. In Markdown the title is the document's first
+ * line, so a note above it would read as preamble detached from the page;
+ * below the H1 is the conventional spot for a lede admonition.
+ */
+function insertAfterTitle(text: string, block: string): string {
+  if (!block) {
+    return text;
+  }
+  const afterHeading = text.indexOf("\n\n");
+  if (!text.startsWith("# ") || afterHeading === -1) {
+    return `${block}${text}`;
+  }
+  const head = text.slice(0, afterHeading + 2);
+  return `${head}${block}${text.slice(afterHeading + 2)}`;
+}
 
 export const GET: APIRoute = async ({ params, url, cookies, site }) => {
   // `[...slug]` yields the path without the `.md` extension, which is exactly an
@@ -40,7 +64,22 @@ export const GET: APIRoute = async ({ params, url, cookies, site }) => {
   // so no disk read — or path-traversal guard — is needed: `getEntry` already
   // scoped the lookup to the collection, and this works in the bundled server.
   const body = entry.body ?? "";
-  const { title, content_filters: contentFilters } = entry.data;
+  const {
+    title,
+    content_filters: contentFilters,
+    site_support_id: siteSupportId,
+  } = entry.data;
+
+  // Prepended to whichever pipeline runs below. This route serves `content/en`
+  // only, so the locale is always `en`.
+  const siteSupportNote = buildMarkdocStr(
+    siteSupportNoteNodes(
+      url.pathname.replace(/\.md$/, ""),
+      "en",
+      siteSupportId,
+    ),
+  ).trim();
+  const notePrefix = siteSupportNote ? `${siteSupportNote}\n\n` : "";
 
   let text: string;
   if (contentFilters) {
@@ -52,16 +91,19 @@ export const GET: APIRoute = async ({ params, url, cookies, site }) => {
       cookieRaw: cookies.get(COOKIE_NAME)?.value,
       now: Date.now(),
     });
-    text = renderCdocPlaintext({
+    // `renderCdocPlaintext` prepends the title itself, so the note is spliced
+    // in after that H1 rather than ahead of it.
+    const rendered = renderCdocPlaintext({
       body,
       variables: valsByTraitId,
       title,
       resolvePartial,
     });
+    text = insertAfterTitle(rendered, notePrefix);
   } else {
     // Non-cdoc: render component plaintext twins and prepend the title as an H1
     // to mirror the HTML page.
-    text = `# ${title}\n\n${renderMdocWithTwins(body, { site })}`;
+    text = `# ${title}\n\n${notePrefix}${renderMdocWithTwins(body, { site })}`;
   }
 
   return new Response(text, {

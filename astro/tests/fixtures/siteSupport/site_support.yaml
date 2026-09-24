@@ -1,0 +1,22 @@
+# Frozen fixture standing in for `shared/site_support.yaml` in unit tests.
+#
+# The keys are invented on purpose. Unit tests assert on resolver behavior, so
+# they must not depend on which real products happen to be unsupported — a
+# renamed or deleted product key would otherwise break tests that have nothing
+# to do with that product.
+#
+# `vitest.unit.config.ts` redirects `@shared/site_support.yaml` here.
+site_support_ids:
+  fake_product:
+    regions: [gov, gov2]
+  fake_scoped:
+    regions: [gov]
+    url_paths:
+      - /fake/scoped/**
+  fake_single_page:
+    regions: [gov2]
+    url_paths:
+      - /fake/single
+  fake_described:
+    regions: [gov]
+    description: a note for writers

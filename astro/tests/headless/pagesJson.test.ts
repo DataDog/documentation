@@ -17,9 +17,20 @@ const SITE = new URL("https://docs.datadoghq.com");
 const ctx = (site?: URL) =>
   ({ site }) as unknown as Parameters<typeof pageIndexGET>[0];
 
-/** Invokes a route with `params`, bypassing Astro's typing of the context. */
-const routeCtx = (params: Record<string, string | undefined>) =>
-  ({ params }) as unknown as Parameters<typeof categoryGET>[0];
+/**
+ * Invokes a route with `params` and a `url`, bypassing Astro's typing of the
+ * context. The `url` matters: the `.md` routes read `url.pathname` to resolve
+ * the site-support banner, so omitting it would not match how the build calls
+ * them.
+ */
+const routeCtx = (
+  params: Record<string, string | undefined>,
+  pathname: string,
+) =>
+  ({
+    params,
+    url: new URL(pathname, SITE),
+  }) as unknown as Parameters<typeof categoryGET>[0];
 
 /**
  * Serves the English plaintext for a page's disk-relative path by dispatching to
@@ -30,9 +41,11 @@ const routeCtx = (params: Record<string, string | undefined>) =>
 async function serveMarkdown(file: string): Promise<string> {
   const path = file.replace(/^api\/latest/, "").replace(/\.md$/, "");
   const lang = undefined; // English lives at the root; `[...lang]` is empty.
+  // The served URL, as the build would request it.
+  const pathname = `/${file}`;
 
   if (path === "") {
-    const res = (await landingGET(routeCtx({ lang }))) as Response;
+    const res = (await landingGET(routeCtx({ lang }, pathname))) as Response;
     return res.text();
   }
 
@@ -42,12 +55,12 @@ async function serveMarkdown(file: string): Promise<string> {
     // A spec category route is more specific than the hand-written rest route,
     // so it wins a slug collision here the same way it does in the build.
     const categoryRes = (await categoryGET(
-      routeCtx({ lang, category: slug }),
+      routeCtx({ lang, category: slug }, pathname),
     )) as Response;
     if (categoryRes.status === 200) return categoryRes.text();
 
     const res = (await handWrittenGET(
-      routeCtx({ lang, page: slug }),
+      routeCtx({ lang, page: slug }, pathname),
     )) as Response;
     if (res.status !== 200) throw new Error(`${file} returned ${res.status}`);
     return res.text();
@@ -55,7 +68,7 @@ async function serveMarkdown(file: string): Promise<string> {
 
   const [category, operation] = segments;
   const res = (await operationGET(
-    routeCtx({ lang, category, operation }),
+    routeCtx({ lang, category, operation }, pathname),
   )) as Response;
   if (res.status !== 200) throw new Error(`${file} returned ${res.status}`);
   return res.text();

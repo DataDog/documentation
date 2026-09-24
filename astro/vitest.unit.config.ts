@@ -6,12 +6,21 @@ import type { Plugin } from "vite";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const fixture = path.resolve(__dirname, "tests/fixtures/api");
+const siteSupportFixture = path.resolve(
+  __dirname,
+  "tests/fixtures/siteSupport",
+);
 
 // Redirect the four spec/example files to the frozen fixture so unit tests are
 // decoupled from the live Hugo spec. The @hugo-site alias is applied by an
 // earlier plugin, so by the time our resolveId fires the ids are already
 // absolute paths — we match on those absolute paths, not on the alias strings.
+//
+// `shared/site_support.yaml` is redirected the same way, and for the same
+// reason: resolver tests assert on matching behavior, so they must not depend
+// on which real products are unsupported. The fixture's keys are invented.
 const docRoot = path.resolve(__dirname, "../hugo");
+const sharedRoot = path.resolve(__dirname, "../shared");
 function buildLiveToFixtureMap(): Record<string, string> {
   const raw: Record<string, string> = {
     [path.join(docRoot, "data/api/v1/full_spec.yaml")]: path.join(
@@ -31,12 +40,17 @@ function buildLiveToFixtureMap(): Record<string, string> {
       "v2/CodeExamples.json",
     ),
   };
+  raw[path.join(sharedRoot, "site_support.yaml")] = path.join(
+    siteSupportFixture,
+    "site_support.yaml",
+  );
   const result: Record<string, string> = {};
   for (const [live, fix] of Object.entries(raw)) {
     result[live] = fix;
-    // Also map the double-slash variant the @hugo-site alias can emit
-    result[live.replace(docRoot + path.sep, docRoot + path.sep + path.sep)] =
-      fix;
+    // Also map the double-slash variant the @hugo-site / @shared aliases can emit
+    for (const root of [docRoot, sharedRoot]) {
+      result[live.replace(root + path.sep, root + path.sep + path.sep)] = fix;
+    }
   }
   return result;
 }

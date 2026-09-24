@@ -12,12 +12,21 @@ import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import type { APIRoute, GetStaticPaths } from "astro";
 import type { ApiOperationView } from "@lib/api/schemas/views";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
+import type { Locale } from "@lib/i18n/locale";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
 import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
 import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
+import { siteSupportNoteNodes } from "@lib/plaintext/siteSupportNote";
 
-function apiOperationBody(operation: ApiOperationView): string {
-  const contents: MarkdocNode[] = [heading(1, operation.summary)];
+function apiOperationBody(
+  operation: ApiOperationView,
+  lang: Locale,
+  pathname: string,
+): string {
+  const contents: MarkdocNode[] = [
+    heading(1, operation.summary),
+    ...siteSupportNoteNodes(pathname, lang),
+  ];
   for (const [i, variant] of operation.variants.entries()) {
     const label = i === 0 ? `${variant.version} (latest)` : variant.version;
     contents.push(heading(2, label));
@@ -44,7 +53,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
-export const GET: APIRoute = async ({ params }) => {
+export const GET: APIRoute = async ({ params, url }) => {
   const lang = parseLangParam(params.lang);
   if (!lang) {
     return new Response(null, { status: 404 });
@@ -61,7 +70,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const body = apiOperationBody(operation);
+  const body = apiOperationBody(operation, lang, url.pathname);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
