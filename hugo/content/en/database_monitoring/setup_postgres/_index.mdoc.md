@@ -1,6 +1,9 @@
 ---
 title: Setting up Postgres
 description: Setting up Database Monitoring on a Postgres database
+aliases:
+  - /database_monitoring/setup_postgres/selfhosted
+  - /database_monitoring/setup_postgres/rds
 content_filters:
   - trait_id: postgres_version
     label: "Version"
@@ -31,7 +34,7 @@ Supported Agent versions
 : 7.36.1+
 
 Performance impact
-: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. <br/><br/>
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. {% br /%}{% br /%}
 Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][selfhosted-2]).
 
 Proxies, load balancers, and connection poolers
@@ -145,7 +148,7 @@ SECURITY DEFINER;
 <!-- Ends 9.6 only -->
 
 {% alert %}
-For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See <a href="https://docs.datadoghq.com/integrations/faq/postgres-custom-metric-collection-explained/">PostgreSQL custom metric collection</a> for more information.
+For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection][selfhosted-6] for more information.
 {% /alert %}
 
 ### Create the explain plan function
@@ -336,7 +339,7 @@ By default, the agent only gathers [`EXPLAIN`][selfhosted-17] plans for a sampli
 To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][selfhosted-18], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
 
 {% alert level="danger" %}
-**Important:** `auto_explain` produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the <a href="/account_management/rbac/permissions/#database-monitoring">`dbm_parameterized_queries_read`</a> permission to control who can see the resulting plans, but the log lines themselves _are_ visible to all users within your Datadog org. Using <a href="/logs/guide/logs-rbac">RBAC for Logs</a> helps ensure these logs are only visible to the right users.
+**Important:** `auto_explain` produces logs lines that may contain sensitive information from your application, similar to the raw values that appear in non-obfuscated SQL. You can use the [`dbm_parameterized_queries_read`][selfhosted-19] permission to control who can see the resulting plans, but the log lines themselves _are_ visible to all users within your Datadog org. Using [RBAC for Logs][selfhosted-20] helps ensure these logs are only visible to the right users.
 {% /alert %}
 
 After you enable logging collection:
@@ -435,3 +438,5 @@ Enable {{< ui >}}Resource Collection{{< /ui >}} in the {{< ui >}}Resource Collec
 [selfhosted-16]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
 [selfhosted-17]: https://www.postgresql.org/docs/current/sql-explain.html
 [selfhosted-18]: https://www.postgresql.org/docs/current/auto-explain.html
+[selfhosted-19]: /account_management/rbac/permissions/#database-monitoring
+[selfhosted-20]: /logs/guide/logs-rbac
