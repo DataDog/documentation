@@ -98,70 +98,9 @@
       </li>
     {{ end }}
   {{ else }}
-    <!-- Docs main nav -->
-    {{ range .Site.Menus.main }}
-      <li class="{{ if .HasChildren }}dropdown{{ end }} {{ if in (.Params.disabled | default slice) site.Params.repo_name }}d-none{{ end }}">
-        <a href="{{ if .HasChildren }}#{{ else }}{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}{{ end }}" class="{{ if .HasChildren }}dropdown-toggle{{ end }} text-uppercase fw-semibold" {{ if .HasChildren }}data-bs-toggle="dropdown" role="button"{{ end }} aria-haspopup="true" aria-expanded="true">
-          <div class="nav-menu-item ms-2">
-            {{ .Name | safeHTML }}
-            {{ if .HasChildren }}
-            <span class="caret">
-                <svg viewBox="0 0 17.78 10.51" width="10px">
-                    <polyline class="dropdown-arrow" points="16.92 1.14 8.92 9.14 0.92 1.14" />
-                </svg>
-            </span>
-            {{ end }}
-          </div>
-        </a>
-      <!-- level 2 -->
-      {{ if .HasChildren }}
-      <ul class="dropdown-menu">
-        <!-- add parent url as a child nav item so it can still be reached -->
-        {{ if and (not (hasPrefix .URL "#")) (gt (len .URL) 0) }}
-          <li>
-            <a class="mb-0 pb-0" href="{{- .URL | absLangURL -}}">
-              <div class="nav-menu-item-children pb-0 mb-0">
-                {{ .Name | safeHTML }}
-              </div>
-            </a>
-          </li>
-        {{ end }}
-        {{ range .Children }}
-        {{/* This is the real top-level nav item (e.g. "Tracing") -- .Site.Menus.main above this
-             is the group heading (e.g. "Application Performance"), which has no .URL. */}}
-        {{ $menuURL := trim (.URL | relLangURL) "/" }}
-        {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
-        <li>
-          {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
-          <a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}">
-            <div class="nav-menu-item-children pb-0 mb-0">
-              {{ .Name | safeHTML }}
-            </div>
-          </a>
-          <!-- level 3 -->
-          {{ if (and .HasChildren $isCurrentTopSection) }}
-          <ul class="sub-nav ms-2 d-none">
-            {{ range .Children }}
-            {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
-            <li><a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}" style="font-size:16px;">{{ .Name | safeHTML }}</a>
-              <!-- level 4 -->
-              {{ if .HasChildren }}
-              <ul class="sub-nav ms-2 d-none">
-                  {{ range .Children }}
-                  {{ $urlWithoutAnchor = (index (split .URL "#") 0) }}
-                    <li><a class="mb-0 pb-0" href="{{- (strings.TrimPrefix "/" .URL) | absLangURL -}}" data-path="{{ trim (print $branchPath ((print $urlWithoutAnchor) | relLangURL)) "/" }}" data-skip="{{ .Params.skip | not | not }}" style="font-size:16px;">{{ .Name | safeHTML }}</a></li>
-                  {{ end }}
-              </ul>
-              {{end}}
-            </li>
-            {{ end }}
-          </ul>
-          {{ end }}
-        </li>
-        {{ end }}
-      </ul>
-      {{ end }}
-    </li>
-    {{ end }}
+    {{/* Docs main nav: populated at runtime by mobile-nav-transform.js's buildMobileDocsNav(),
+         reading the server-rendered, section-scoped desktop sidenav (.sidenav-nav-js-load).
+         See WEB-9804 -- this avoids rendering the same menu tree twice at build time. */}}
+    <li id="mobile-docs-nav-mount"></li>
   {{ end }}
 </ul>

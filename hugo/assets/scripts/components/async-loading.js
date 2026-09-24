@@ -11,6 +11,8 @@ import configDocs from '../config/config-docs';
 import { redirectCodeLang, addCodeTabEventListeners, addCodeBlockVisibilityToggleEventListeners, activateCodeLangNav, toggleMultiCodeLangNav } from './code-languages'; // eslint-disable-line import/no-cycle
 import { loadInstantSearch } from './instantsearch';
 import { getPathElement } from '../datadog-docs'; // eslint-disable-line import/no-cycle
+import { buildMobileDocsNav } from './mobile-nav-transform';
+import { setMobileNav } from './mobile-nav';
 
 const { env } = document.documentElement.dataset;
 const { gaTag } = configDocs[env];
@@ -190,15 +192,15 @@ function loadPage(newUrl) {
                     getPathElement();
                 }
 
-                // nav/mobile-documentation.html renders scoped to the page's section the same way,
-                // so the mobile menu needs the same resync. Matched by id (not the ambiguous
-                // .sidenav-nav-js-load class, which the header nav doesn't currently carry) since
-                // header/header.html renders before sidenav/main-sidenav.html in the DOM.
-                const currentMobileNav = document.getElementById('mobile-nav');
-                const newMobileNav = newDocument.getElementById('mobile-nav');
+                // nav/mobile-documentation.html's "Docs main nav" branch no longer exists
+                // server-side (WEB-9804 Option A) -- regenerate it client-side from the desktop
+                // sidenav we just resynced above, instead of pulling server-rendered mobile
+                // markup from the fetched page (which no longer exists).
+                const mobileDocsNavMount = document.getElementById('mobile-docs-nav-mount');
 
-                if (currentMobileNav && newMobileNav) {
-                    currentMobileNav.innerHTML = newMobileNav.innerHTML;
+                if (mobileDocsNavMount && currentLeftNav) {
+                    mobileDocsNavMount.replaceChildren(buildMobileDocsNav(currentLeftNav));
+                    setMobileNav();
                 }
             } else {
                 window.location.href = newUrl;
