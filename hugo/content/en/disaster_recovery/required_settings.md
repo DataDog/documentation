@@ -28,18 +28,18 @@ Failover takes time because DNS caches must refresh and telemetry sources must r
 
 ## Sender and Agent behavior
 
-Any Datadog Agent using DDR's DNS-based failover should be version 7.21 or above. Version 7.62 or above is required to use the more advanced DDR Agent-based failover features.
+Any Datadog Agent using DDR's DNS-based failover should meet the [DDR prerequisites][4].
 
 | Setting | Required configuration | Description |
 | --- | --- | --- |
-| Agent connection reuse | Set the connection-reset interval to 300 seconds or less for each telemetry type. See [Agent configuration examples][5] for the corresponding settings. | **High impact.** Long-lived connections can keep sending telemetry to the primary region after DNS changes. Configure periodic reconnections so the Agent performs DNS resolution again. |
+| Agent connection reuse | Set a connection-reset interval of 1-300 seconds for each telemetry type. See [Agent configuration examples][5] for the corresponding settings. | **High impact.** Long-lived connections can keep sending telemetry to the primary region after DNS changes. Configure periodic reconnections so the Agent performs DNS resolution again. |
 | Non-Agent telemetry sources | Validate each source independently. Configure periodic reconnections at intervals of 300 seconds or less, where supported. Verify that connection failures trigger immediate DNS resolution instead of repeated attempts against a cached IP. | **High impact.** Non-Agent telemetry sources, such as Lambda extensions, OpenTelemetry Collector, Fluent Bit, and custom API clients, each handle DNS caching and connection reuse differently. Their behavior after a connection failure also affects failover time. |
 
 Resolving DNS again can still return a cached address. Configure [DNS record TTLs][6] and [OS and application DNS caches][7] together with connection-reset intervals.
 
 ### Agent configuration examples
 
-Update the settings for each telemetry type you send in `datadog.yaml`.
+Update the connection-reset interval settings for each telemetry type you send in `datadog.yaml`. Configure an interval of no more than 300 seconds. Do not set the interval to `0`, which disables periodic reconnection.
 
 | Telemetry | Setting |
 | --- | --- |
@@ -80,6 +80,7 @@ apm_config:
 [1]: https://www.rfc-editor.org/rfc/rfc1035
 [2]: https://www.rfc-editor.org/rfc/rfc2181
 [3]: https://www.rfc-editor.org/rfc/rfc2308
+[4]: /disaster_recovery/#prerequisites
 [5]: #agent-configuration-examples
 [6]: #dns-record-configuration
 [7]: #os-and-application-dns-caching
