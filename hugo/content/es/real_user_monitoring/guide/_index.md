@@ -17,7 +17,6 @@ title: Guías de Real User Monitoring y Session Replay
     {{< nextlink href="real_user_monitoring/guide/alerting-with-rum" >}}Crear alertas utilizando datos de RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitorizar tu uso de RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Realizar un seguimiento del uso de RUM con etiquetas (tags) de atribución de uso{{< /nextlink >}}
-    {{< nextlink href="https://docs.datadoghq.com/real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/" >}}Configurar RUM de forma remota utilizando LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Empezando con el Seguimiento de despliegues en RUM{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}Empezando con el Seguimiento de indicadores de funciones{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitorizar sesiones de quiosco utilizando RUM{{< /nextlink >}}

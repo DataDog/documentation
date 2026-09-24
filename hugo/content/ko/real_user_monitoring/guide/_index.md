@@ -16,7 +16,6 @@ title: 실제 사용자 모니터링 및 세션 재생 가이드
     {{< nextlink href="real_user_monitoring/guide/alert-with-conversion-rates" >}}전환율에 대한 알림 생성{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}RUM 사용량 ㅗ모니터링{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tag" >}}사용 어트리뷰션으로 RUM 사용량 추적 태그{{< /nextlink >}}
-    {{< nextlink href="https://docs.datadoghq.com/real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/" >}}LaunchDarkly로 원격 RUM 설정{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}RUM 배포 추적 사용 시작하기{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-feature-flags" >}}기능 플래그 추적 사용 시작하기{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/모니터링하다-kiosk-sessions-using-rum" >}}RUM 모니터를 사용한 키오스크 세션{{< /nextlink >}}
