@@ -23,8 +23,6 @@ further_reading:
 
 As your application evolves, you may need to adjust the data that the RUM SDK collects and its collection frequency. RUM remote configuration lets you update supported Browser, iOS, and Android SDK settings from Datadog without deploying a new version of your application.
 
-For [RUM without Limits][3], keep `sessionSampleRate` set to `100` and use [retention filters][4] in Datadog to control which sessions are retained. Use remote configuration to manage the supported SDK settings described on this page.
-
 {{< img src="/real_user_monitoring/remote_configuration/rum_remote_configuration_menu.png" alt="The SDK configuration page listing available Browser RUM settings for remote configuration." >}}
 
 ## Prerequisites
@@ -246,5 +244,3 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 [1]: /account_management/rbac/permissions/#real-user-monitoring
 [2]: /remote_configuration/
-[3]: /real_user_monitoring/rum_without_limits/
-[4]: /real_user_monitoring/rum_without_limits/retention_filters/
