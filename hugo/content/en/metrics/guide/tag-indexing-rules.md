@@ -225,9 +225,9 @@ Existing Metrics without Limits configurations take precedence over Tag Indexing
 
 | Use case | Recommended control |
 |---|---|
-| Establish the default indexing policy for all custom metrics | Golden Rule |
+| Establish the default indexing policy for all custom metrics | Tag Indexing Rules: Golden Rule |
 | Apply the same tag policy across a namespace or set of prefixes | Tag Indexing Rules |
-| Automatically govern new metrics that match an existing policy | Tag Indexing Rules |
+| Automatically govern new metrics and tag keys that match an existing policy | Tag Indexing Rules |
 | Unindex tags that are not queried and are not used in Datadog assets | Tag Indexing Rules |
 | Remove known high-cardinality tags across multiple metrics | Tag Indexing Rules |
 | Keep only an approved set of tags across multiple metrics | Tag Indexing Rules |
