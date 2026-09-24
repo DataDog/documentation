@@ -537,7 +537,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -2742,6 +2742,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListDatabricksIntegrationAccounts": {
+    "description": "List Databricks integration accounts.",
+    "summary": "List Databricks integration accounts"
+  },
+  "CreateDatabricksIntegrationAccount": {
+    "description": "Create a Databricks integration account.",
+    "summary": "Create a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Databricks integration account."
+  },
+  "DeleteDatabricksIntegrationAccount": {
+    "description": "Delete a Databricks integration account.",
+    "summary": "Delete a Databricks integration account"
+  },
+  "GetDatabricksIntegrationAccount": {
+    "description": "Get a Databricks integration account.",
+    "summary": "Get a Databricks integration account"
+  },
+  "UpdateDatabricksIntegrationAccount": {
+    "description": "Update a Databricks integration account. Only the fields provided are changed.",
+    "summary": "Update a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Databricks integration account."
+  },
   "ListElasticCloudIntegrationAccounts": {
     "description": "List Elastic Cloud integration accounts.",
     "summary": "List Elastic Cloud integration accounts"
@@ -2765,6 +2789,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListSnowflakeIntegrationAccounts": {
+    "description": "List Snowflake integration accounts.",
+    "summary": "List Snowflake integration accounts"
+  },
+  "CreateSnowflakeIntegrationAccount": {
+    "description": "Create a Snowflake integration account.",
+    "summary": "Create a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Snowflake integration account."
+  },
+  "DeleteSnowflakeIntegrationAccount": {
+    "description": "Delete a Snowflake integration account.",
+    "summary": "Delete a Snowflake integration account"
+  },
+  "GetSnowflakeIntegrationAccount": {
+    "description": "Get a Snowflake integration account.",
+    "summary": "Get a Snowflake integration account"
+  },
+  "UpdateSnowflakeIntegrationAccount": {
+    "description": "Update a Snowflake integration account. Only the fields provided are changed.",
+    "summary": "Update a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Snowflake integration account."
   },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
@@ -3632,7 +3680,7 @@
     "request_schema_description": "Request to create a new version of an Agent Observability prompt."
   },
   "GetLLMObsPromptVersion": {
-    "description": "Get the full template of a single, specific version of an Agent Observability prompt.",
+    "description": "Get the full template and configuration of a single, specific version of an Agent Observability prompt.",
     "summary": "Get a specific Agent Observability prompt version"
   },
   "UpdateLLMObsPromptVersion": {
@@ -6310,6 +6358,10 @@
   "GetSingleEntityContext": {
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get a single entity context"
+  },
+  "GetMatchingSignals": {
+    "description": "Returns the list of security signals that match a given event on the given track.",
+    "summary": "Get signals matching an event"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",

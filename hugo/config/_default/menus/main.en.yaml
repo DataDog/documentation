@@ -141,6 +141,11 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1205
       parent: getting_started_integrations
+    - name: Stripe
+      identifier: getting_started_with_stripe
+      url: getting_started/integrations/stripe/
+      weight: 1206
+      parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
@@ -2759,11 +2764,6 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_variables
       weight: 208
-    - name: Integrations
-      url: incident_response/incident_management/setup_and_configuration/integrations
-      parent: incidents_settings
-      identifier: incidents_integrations
-      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -2784,11 +2784,56 @@ menu:
       parent: incidents
       identifier: analytics_and_reporting
       weight: 4
+    - name: Integrations
+      url: incident_response/incident_management/setup_and_configuration/integrations
+      parent: incidents
+      identifier: incidents_integrations
+      weight: 5
+    - name: Slack
+      url: incident_response/incident_management/setup_and_configuration/integrations/slack
+      parent: incidents_integrations
+      identifier: incidents_integrations_slack
+      weight: 501
+    - name: Microsoft Teams
+      url: incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_integrations_microsoft_teams
+      weight: 502
+    - name: Google Chat
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_chat
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_chat
+      weight: 503
+    - name: Jira
+      url: incident_response/incident_management/setup_and_configuration/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 504
+    - name: ServiceNow
+      url: incident_response/incident_management/setup_and_configuration/integrations/servicenow
+      parent: incidents_integrations
+      identifier: incidents_integrations_servicenow
+      weight: 505
+    - name: Status Pages
+      url: incident_response/incident_management/setup_and_configuration/integrations/status_pages
+      parent: incidents_integrations
+      identifier: incidents_integrations_status_pages
+      weight: 506
+    - name: Atlassian Statuspage
+      url: incident_response/incident_management/setup_and_configuration/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_integrations_statuspage
+      weight: 507
+    - name: Zoom
+      url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
+      parent: incidents_integrations
+      identifier: incidents_integrations_zoom
+      weight: 508
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
       identifier: incidents_guides
-      weight: 5
+      weight: 6
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -3417,76 +3462,81 @@ menu:
       parent: containers_kubernetes
       identifier: containers_kubernetes_installation
       weight: 401
+    - name: OpenTelemetry
+      url: containers/kubernetes/opentelemetry/
+      parent: containers_kubernetes
+      identifier: containers_kubernetes_opentelemetry
+      weight: 402
     - name: Migrate to the Datadog Operator
       url: containers/kubernetes/migration
       parent: containers_kubernetes
       identifier: containers_kubernetes_datadog_operator_migration
-      weight: 402
+      weight: 403
     - name: Further Configuration
       url: containers/kubernetes/configuration
       parent: containers_kubernetes
       identifier: containers_kubernetes_configuration
-      weight: 403
+      weight: 404
     - name: Distributions
       url: containers/kubernetes/distributions
       parent: containers_kubernetes
       identifier: containers_kubernetes_distributions
-      weight: 404
+      weight: 405
     - name: APM
       url: containers/kubernetes/apm/
       parent: containers_kubernetes
       identifier: containers_kubernetes_apm
-      weight: 405
+      weight: 406
     - name: App and API Protection
       url: containers/kubernetes/appsec/
       parent: containers_kubernetes
       identifier: containers_kubernetes_appsec
-      weight: 406
+      weight: 407
     - name: Log collection
       url: containers/kubernetes/log/
       parent: containers_kubernetes
       identifier: containers_kubernetes_log
-      weight: 407
+      weight: 408
     - name: Tag extraction
       url: containers/kubernetes/tag/
       parent: containers_kubernetes
       identifier: containers_kubernetes_tag
-      weight: 408
+      weight: 409
     - name: Integrations
       url: containers/kubernetes/integrations/
       parent: containers_kubernetes
       identifier: containers_kubernetes_integrations
-      weight: 409
+      weight: 410
     - name: Prometheus & OpenMetrics
       url: containers/kubernetes/prometheus/
       parent: containers_kubernetes
       identifier: containers_kubernetes_prometheus
-      weight: 410
+      weight: 411
     - name: Control plane monitoring
       url: containers/kubernetes/control_plane/
       parent: containers_kubernetes
       identifier: containers_kubernetes_control_plane
-      weight: 411
+      weight: 412
     - name: Data collected
       url: containers/kubernetes/data_collected/
       parent: containers_kubernetes
       identifier: containers_kubernetes_data_collected
-      weight: 412
+      weight: 413
     - name: kubectl Plugin
       url: containers/kubernetes/kubectl_plugin
       parent: containers_kubernetes
       identifier: containers_kubernetes_kubectlplugin
-      weight: 413
+      weight: 414
     - name: Datadog CSI Driver
       url: containers/kubernetes/csi_driver
       parent: containers_kubernetes
       identifier: csi_driver
-      weight: 414
+      weight: 415
     - name: Data security
       url: data_security/kubernetes
       parent: containers_kubernetes
       identifier: container_kubernetes_data_security
-      weight: 415
+      weight: 416
     - name: Cluster Agent
       url: containers/cluster_agent/
       parent: containers
@@ -4773,21 +4823,26 @@ menu:
       parent: tracing_services
       identifier: tracing_service_remapping_rules
       weight: 908
+    - name: Env Remapping Rules
+      url: tracing/services/env_remapping_rules
+      parent: tracing_services
+      identifier: tracing_env_remapping_rules
+      weight: 909
     - name: Tag Enrichment
       url: tracing/services/tag_enrichment
       parent: tracing_services
       identifier: tracing_tag_enrichment
-      weight: 909
+      weight: 910
     - name: Integration Override Removal
       url: tracing/services/integration_override_removal
       parent: tracing_services
       identifier: tracing_service_override_removal
-      weight: 910
+      weight: 911
     - name: APM Monitors
       url: /monitors/create/types/apm/
       parent: tracing_services
       identifier: tracing_apm_monitors
-      weight: 911
+      weight: 912
     - name: Endpoint Observability
       url: internal_developer_portal/catalog/endpoints/
       identifier: endpoint_observability
@@ -10126,16 +10181,21 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
+    - name: Remote Configuration
+      url: real_user_monitoring/remote_configuration/
+      parent: rum
+      identifier: rum_remote_configuration
+      weight: 15
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 16
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 17
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics

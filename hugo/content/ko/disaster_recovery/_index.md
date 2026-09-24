@@ -2,26 +2,21 @@
 aliases:
 - /ko/agent/guide/datadog-disaster-recovery/
 further_reading:
-- link: agent/remote_config/?tab=configurationyamlfile
-  tag: 설명서
-  text: Remote Configuration
-- link: /getting_started/site/
-  tag: 설명서
-  text: Datadog 사이트 시작하기
 - link: https://www.datadoghq.com/blog/ddr-mitigates-cloud-provider-outages/
   tag: 블로그
   text: Datadog Disaster Recovery는 클라우드 제공업체 중단 문제 완화
 site_support_id: datadog_disaster_recovery
 title: Datadog Disaster Recovery
 ---
-## 개요 {#overview}
+Datadog Disaster Recovery(DDR)는 클라우드 제공업체 리전이나 해당 리전 내 Datadog 서비스에 장애가 발생하더라도 관측 가능성을 유지합니다. DDR을 사용하면 다른 리전에 보조 Datadog 조직을 미리 구성하고 리소스를 복제할 수 있습니다. 장애 조치를 수행하면 보조 사이트에 팀에 필요한 대시보드, 모니터, 사용자가 이미 준비되어 있습니다.
 
-Datadog Disaster Recovery(DDR)는 클라우드 서비스 제공업체 리전이나 클라우드 제공업체 리전 내에서 실행되는 Datadog 서비스에 영향을 미칠 수 있는 이벤트가 발생하는 동안 관측 가능성의 연속성을 제공합니다. DDR을 사용하면 대체 Datadog 사이트에서 실시간 관측 가능성을 복구하여 중요한 관측 가능성 목표를 달성할 수 있습니다.
+DDR은 액티브-패시브 모델을 사용합니다. 보조 사이트는 동기화된 상태를 유지하지만 장애 조치를 결정하기 전까지는 패시브 상태로 유지됩니다. 장애 조치는 자동으로 수행되지 않으며, 전환 시점은 사용자가 직접 선택합니다.
 
-또한 정기적으로 재해 복구 훈련을 실시하여 중단 이벤트 발생 시 복구할 수 있는 능력을 테스트할 뿐만 아니라 비즈니스 및 규제 준수 요구 사항도 충족할 수 있습니다.
+또한 DDR을 사용하면 정기적으로 재해 복구 훈련을 실시하여 중단으로부터 복구하는 능력을 테스트하고 비즈니스 및 규정 준수 요구 사항을 충족할 수 있습니다.
 
 ## 전제 조건 {#prerequisites}
-필요한 Datadog Agent의 최소 버전은 사용하려는 텔레메트리 유형에 따라 다릅니다.
+
+필요한 최소 Datadog Agent 버전은 사용하는 제품에 따라 다릅니다.
 
 |지원되는 텔레메트리 |지원되는 제품          |필요한 Agent 버전 | 
 |--------------------|----------------------------|-----------------------|
@@ -29,12 +24,9 @@ Datadog Disaster Recovery(DDR)는 클라우드 서비스 제공업체 리전이�
 |메트릭             |Infrastructure Monitoring   | v7.54+                |
 |트레이스              |APM                         | v7.68+                |
 
-
-
 <div class="alert alert-info">
 Datadog은 추가 제품에 대한 DDR 지원 요청을 지속적으로 검토하고 있습니다. 위에서 다루지 않은 특정 요구 사항이나 향후 기능에 대해 알아보려면 <a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery 팀</a>에 문의하세요.
 </div>
-<br>
 
 ## 설정 {#setup}
 
@@ -44,19 +36,15 @@ Datadog Disaster Recovery를 활성화하려면 다음 단계를 따르세요. �
 
 {{% collapse-content title="DDR 조직 생성 및 공유" level="h4" %}}
 
-<div class="alert alert-info">필요한 경우 Datadog에서 대신 설정해 드릴 수 있습니다.</div>
+<div class="alert alert-info">원하시는 경우 Datadog에서 대신 설정해 드릴 수 있습니다.</div>
 
 #### DDR 조직 생성 {#create-your-ddr-org}
 
 1. [Datadog 시작하기][16]로 이동합니다. 이 페이지에 액세스하려면 현재 세션에서 로그아웃하거나 시크릿 모드를 사용해야 할 수 있습니다.
-2. 기본 사이트와 다른 Datadog 사이트를 선택합니다(예: `US1`를 사용하는 경우 `EU` 또는 `US5`을 선택).
+2. 기본 사이트와 다른 Datadog 사이트를 선택합니다(예: `US1`을 사용하는 경우 `EU` 또는 `US5`를 선택). 선택할 수 있는 사이트는 [Datadog 사이트 목록][17]을 참조하세요. 모든 Datadog 사이트는 지리적으로 분리되어 있습니다.
 3. 메시지에 따라 계정을 생성합니다.
 
-모든 Datadog 사이트는 지리적으로 분리되어 있습니다. 선택할 수 있는 사이트는 [Datadog 사이트 목록][17]을 참조하세요.
-
-클라우드 제공업체 통합을 사용하여 Datadog으로 텔레메트리를 전송하는 경우에도, DDR 조직에 클라우드 제공업체 계정을 추가해야 합니다. DDR 사이트가 대기 상태(장애 조치 상태가 아닌 경우)일 때는 Datadog에서 클라우드 제공업체를 사용하여 텔레메트리 데이터를 수신하지 않습니다.
-
-#### DDR 조직 정보를 Datadog과 공유합니다. {#share-the-ddr-org-information-with-datadog}
+#### DDR 조직 정보를 Datadog과 공유 {#share-the-ddr-org-information-with-datadog}
 
 새 조직 이름을 [Customer Success Manager][14]에게 이메일로 보내세요. 그러면 Customer Success Manager가 이 새 조직을 DDR 조직으로 설정합니다.
 
@@ -64,31 +52,30 @@ Datadog Disaster Recovery를 활성화하려면 다음 단계를 따르세요. �
 
 {{% collapse-content title="공개 ID를 검색하고 DDR 조직과 기본 조직 연결" level="h4" %}}
 
-보안상의 이유로 Datadog에서는 사용자를 대신하여 조직을 연결할 수 없습니다.
+<div class="alert alert-info">보안상의 이유로 Datadog에서는 사용자를 대신하여 조직을 연결할 수 없습니다.</div>
 
-Datadog 팀이 DDR 조직을 설정한 후, Datadog [공개 API 엔드포인트][1]를 사용하여 기본 조직과 DDR 조직의 공개 ID를 검색하세요.
+Datadog이 DDR 조직을 지정한 후, DDR 조직을 기본 조직에 연결하세요.
 
-DDR 조직을 기본 조직에 연결하려면 다음 단계를 따르세요.
+1. [관리 조직 나열하기][1] 엔드포인트를 사용하여 기본 조직과 DDR 조직의 공개 ID를 검색합니다.
+1. 기본 조직의 애플리케이션 키에 `disaster_recovery_status_write` 범위를 추가합니다.
+1. 다음 명령을 실행하되, 자리 표시자를 적절한 값으로 바꿉니다.
 
-- 기본 조직의 애플리케이션 키에 `disaster_recovery_status_write` 범위를 추가합니다.
-- 다음 명령을 실행하되, 자리 표시자를 적절한 값으로 바꿉니다.
+    ```shell
+    export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
+    export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
+    export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
 
-```shell
-export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
-export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
-export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
+    export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
+    export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
+    export USER_EMAIL=<USER_EMAIL>
+    export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
-export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
-export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
-export USER_EMAIL=<USER_EMAIL>
-export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
+    curl -v -H "Content-Type: application/json" -H \
+    "dd-api-key:${PRIMARY_DD_API_KEY}" -H \
+    "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
+    ```
 
-curl -v -H "Content-Type: application/json" -H \
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
-"dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
-```
-
-조직을 연결하면 장애 조치 조직에만 이 배너가 표시됩니다.
+조직을 연결하면 장애 조치 조직에 다음 배너가 표시됩니다.
 
 {{< img src="agent/guide/ddr/ddr-banner.png" alt="DDR 조직의 DDR 배너" >}}
 
@@ -128,18 +115,17 @@ Datadog은 오픈 소스 [datadog-sync-cli][8] 도구를 사용하여 사용자�
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Remote Configuration 활성화 [**권장]" level="h4" %}}
+{{% collapse-content title="Remote Configuration 활성화(권장)" level="h4" %}}
 
 [Remote Configuration(RC)][11]을 사용하면 인프라에 배포된 Datadog Agent의 동작을 원격으로 구성하고 변경할 수 있습니다.
 
 Remote Configuration은 사용자의 DDR 조직을 포함한 새 조직에서 기본적으로 활성화됩니다. 새로 생성하는 모든 API 키는 Agent와 함께 사용할 수 있도록 RC가 활성화됩니다. 자세한 내용은 [Remote Configuration 설명서][11]를 참조하세요.
 
-Datadog에서는 장애 조치를 보다 효과적으로 제어를 위해 Remote Configuration 사용을 강력히 권장합니다. RC의 대안으로 Agent를 수동으로 구성하거나 Puppet, Ansible 또는 Chef와 같은 구성 관리 도구를 사용할 수도 있습니다.
+Datadog에서는 장애 조치를 보다 효과적으로 제어하기 위해 Remote Configuration 사용을 강력히 권장합니다. RC의 대안으로 Agent를 수동으로 구성하거나 Puppet, Ansible 또는 Chef와 같은 구성 관리 도구를 사용할 수도 있습니다.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="장애 조치 또는 훈련 중 DDR 조직으로 텔레메트리 이중 전송" level="h4" %}}
-
 
 이중 전송을 활성화하려면 Datadog에서는 대규모 환경에서의 관리를 위해 [Fleet Automation][12] 사용을 권장합니다. 또는 `datadog.yaml` 파일을 수정하여 수동으로 구성할 수도 있습니다.
 
@@ -148,7 +134,7 @@ Datadog에서는 장애 조치를 보다 효과적으로 제어를 위해 Remote
 {{< tabs >}}
 {{% tab "Fleet Automation 사용(권장)" %}}
 
-장애 조치 조직의 [Fleet Automation][100] 페이지에 있는 {{< ui >}}Configure Agents{{< /ui >}} 탭에서 장애 조치 정책을 생성하거나 기존 정책을 재사용하여 Agent 플릿에 적용할 수 있습니다. 정책을 활성화하면 곧 Agent가 기본 관측 가능성 사이트와 DDR(장애 조치) 관측 가능성 사이트 모두에 텔레메트리를 이중 전송하기 시작합니다.
+DDR 조직의 [Fleet Automation][100] > {{< ui >}}Configure Agents{{< /ui >}}로 이동하여 장애 조치 정책을 생성하거나 기존 정책을 재사용하고, 이를 Agent 그룹에 적용합니다. 정책을 활성화하면 곧 Agent가 기본 관측 가능성 사이트와 DDR(장애 조치) 관측 가능성 사이트 모두에 텔레메트리를 이중 전송하기 시작합니다.
 
 장애 조치 정책을 생성하려면 {{< ui >}}Create Failover Policy{{< /ui >}}를 클릭합니다.
 
@@ -168,9 +154,9 @@ Datadog에서는 장애 조치를 보다 효과적으로 제어를 위해 Remote
 
 장애 조치 또는 장애 조치 훈련 중에 아래 예시와 같이 Datadog Agent의 `datadog.yaml` 구성 파일을 업데이트하고 Agent를 다시 시작합니다.
 
-- `enabled: true` Agent가 전송할 수 있도록 허용합니다. {{< tooltip text="metadata" tooltip="Agent 및 인프라 호스트에 대한 데이터입니다. 예: `host name`, `host tags`, `Agent version`" >}} DDR Datadog 사이트로 전송하여 DDR 조직에서 Agent 및 인프라 호스트를 조회할 수 있습니다. 이를 통해 장애 조치 조직에서 Agent 및 인프라 호스트를 확인할 수 있습니다.
+- `enabled: true` 는 Agent가 {{< tooltip text="metadata" tooltip="Agent 및 인프라 호스트에 대한 데이터입니다. 예: `host name`, `host tags`, `Agent version`" >}} 를 DDR Datadog 사이트로 전송하여 DDR 조직에서 Agent 및 인프라 호스트를 조회할 수 있도록 합니다. 이를 통해 장애 조치 조직에서 Agent 및 인프라 호스트를 확인할 수 있습니다.
 
-- `failover_metrics`, `failover_logs` 및 `failover_apm`은 기본적으로 `false`입니다. 이를 `true`로 설정하면 Agent가 전송을 시작합니다. {{< tooltip text="telemetry" tooltip="Datadog 플랫폼으로 전송되는 데이터입니다. 예: `logs`, `metrics`, `traces`" >}} DDR 조직으로
+- `failover_metrics`, `failover_logs` 및 `failover_apm`은 기본적으로 `false`입니다. 이를 `true`로 설정하면 Agent가 DDR 조직으로 {{< tooltip text="telemetry" tooltip="Datadog 플랫폼으로 전송되는 데이터입니다. 예: `logs`, `metrics`, `traces`" >}} 전송을 시작합니다.
 
 ```shell
 multi_region_failover:
@@ -178,7 +164,7 @@ multi_region_failover:
   failover_metrics: false
   failover_logs: false
   failover_apm: false
-  site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  site: <DDR_SITE>  # For example, "site: us5.datadoghq.com" for a US5 site
   api_key: <DDR_SITE_API_KEY>
 ```
 
@@ -199,7 +185,7 @@ DNS 기반 장애 조치를 사용하기로 선택하면 Datadog에서 조직에
 
 #### DNS 장애 조치 트리거 {#trigger-a-dns-failover}
 
-DNS 장애 조치를 시작하려면 [Customer Success Manager][14] 또는 [Datadog Support][15]를 통해 Datadog에 문의하세요. Datadog은 DNS 레코드를 업데이트하여 트래픽을 기본 사이트에서 DDR 사이트로 리디렉션합니다. 장애 조치가 시작된 시점부터의 복구 목표 시간(RTO)은 2시간입니다.
+DNS 장애 조치를 시작하려면 [Customer Success Manager][14] 또는 [Datadog Support][15]에 문의하세요. Datadog은 DNS 레코드를 업데이트하여 트래픽을 기본 사이트에서 DDR 사이트로 리디렉션합니다. 장애 조치가 시작된 시점부터의 복구 목표 시간(RTO)은 2시간입니다.
 
 <div class="alert alert-info">DDR 조직에서 고객이 직접 DNS 장애 조치를 트리거할 수 있는 기능이 미리 보기로 제공됩니다. 자세한 내용을 알아보려면 <a href="mailto:success@datadoghq.com">Customer Success Manager</a>에게 문의하세요.</div>
 
@@ -280,7 +266,7 @@ DD_MULTI_REGION_FAILOVER_API_KEY=ADD_NEW_SITE_API_KEY
 
 {{% collapse-content title="Cloud Integrations에서 DDR 장애 조치 활성화 및 테스트" level="h4" id="id-for-cloud" %}}
 
-DDR 조직의 랜딩 페이지에서 Cloud Integrations의 장애 조치를 테스트할 수 있습니다:
+DDR 조직의 랜딩 페이지에서 Cloud Integrations의 장애 조치를 테스트할 수 있습니다.
 
 {{< img src="/agent/guide/ddr/ddr-failover-main-page.png" alt="DDR 조직에서 장애 조치 정책 활성화" style="width:80%;" >}}
 
@@ -298,7 +284,7 @@ DDR 조직의 랜딩 페이지에서 Cloud Integrations의 장애 조치를 테�
 
 [1]: /ko/api/latest/organizations/#list-your-managed-organizations
 [2]: https://app.datadoghq.com/organization-settings/users
-[3]: /ko/account_management/saml/#overview
+[3]: /ko/account_management/saml/
 [4]: /ko/account_management/saml/#just-in-time-jit-provisioning
 [5]: /ko/integrations/amazon-web-services/
 [6]: /ko/integrations/azure/

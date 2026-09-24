@@ -207,6 +207,9 @@ The excluded namespaces are:
 - `syslog.timestamp`
 - `error.fingerprint`
 - `x-datadog-parent-id`
+- `x-datadog-trace-id`
+- `contextMap.dd.span_id`
+- `contextMap.dd.trace_id`
 
 {{% /tab %}}
 {{% tab "Spans" %}}
@@ -225,6 +228,7 @@ The excluded namespaces are:
 - `meta_struct._dd.`
 - `meta_struct.api.endpoint.`
 - `meta_struct.appsec.`
+- `meta_struct.ai_guard`
 - `meta_struct.threat_intel.results.`
 - `meta.otel.trace_id`
 - `meta.otel.library.`
@@ -256,6 +260,8 @@ The excluded namespaces are:
 - `meta._dd.error_tracking`
 - `meta.error.fingerprint`
 - `meta.issue`
+- `x-datadog-trace-id`
+- `x-datadog-parent-id`
 
 {{% /tab %}}
 {{% tab "RUM" %}}

@@ -58,9 +58,9 @@ If everything is configured correctly, a green check mark is displayed in Datado
 [1]: /integrations/github/#github-apps-1
 [2]: https://app.datadoghq.com/integrations/github/configuration
 {{% /tab %}}
-{{% tab "Gitlab" %}}
+{{% tab "GitLab" %}}
 
-Follow instructions in the [Gitlab Source Code integration documentation][1] on how to connect your Gitlab repositories to Datadog.
+Follow instructions in the [GitLab Source Code integration documentation][1] on how to connect your GitLab repositories to Datadog.
 
 See [Datadog Source Code Integration Guide][2] for additional context.
 
@@ -421,7 +421,7 @@ steps:
 
 [1]: https://github.com/marketplace/actions/datadog-code-coverage-upload
 {{% /tab %}}
-{{% tab "Gitlab" %}}
+{{% tab "GitLab" %}}
 <pre>
 <code class="language-yaml" data-lang="yaml">
 test:
@@ -480,7 +480,7 @@ datadog-ci coverage upload --format=cobertura reports/cobertura.xml
 ### Coverage upload outputs "Could not sync git metadata" error
 
 Git metadata upload is only required if you can't integrate your CI provider directly with Datadog.
-If you are using a [source code provider integration][18], such as Datadog GitHub app or Gitlab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
+If you are using a [source code provider integration][18], such as Datadog GitHub app or GitLab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
