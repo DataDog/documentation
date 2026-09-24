@@ -65,7 +65,6 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - [Windows Services][13]
   - [WMI Check][14] (7.80+)
   - [Custom checks][15] prefixed with `custom_`
-  - Logs-only integrations (for example, [journald][16])
 
 ### End User Device
 
