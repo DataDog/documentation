@@ -968,6 +968,434 @@ To see infrastructure metrics from AWS, such as CPU, alongside the database tele
 If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][aurora-13].
 {% /if %}
 
+{% if equals($host, "cloud_sql") %}
+Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
+
+The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
+
+1. [Configure database parameters](#configure-postgres-settings)
+1. [Grant the Agent access to the database](#grant-the-agent-access)
+1. [Install and configure the Agent](#install-and-configure-the-agent)
+1. [Install the Cloud SQL Integration](#install-the-cloud-sql-integration)
+
+## Before you begin
+
+Supported PostgreSQL versions
+: 10, 11, 12, 13, 14, 15, 16, 17, 18
+
+Supported Agent versions
+: 7.36.1+
+
+Performance impact
+: The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than one percent of query execution time on the database and less than one percent of CPU. {% br /%}{% br /%}
+Database Monitoring runs as an integration on top of the base Agent ([see benchmarks][cloudsql-1]).
+
+Proxies, load balancers, and connection poolers
+: The Datadog Agent must connect directly to the host being monitored. For self-hosted databases, use `127.0.0.1` or the socket. The Agent should not connect to the database through a proxy, load balancer, or connection pooler such as `pgbouncer`. If the Agent connects to different hosts while it is running (as in the case of failover, load balancing, and so on), the Agent calculates the difference in statistics between two hosts, producing inaccurate metrics.
+
+Data security considerations
+: See [Sensitive information][cloudsql-2] for information about what data the Agent collects from your databases and how to ensure it is secure.
+
+## Configure Postgres settings
+
+Configure the following [parameters][cloudsql-3] in [Database flags][cloudsql-4] and then **restart the server** for the settings to take effect. For more information about these parameters, see the [Postgres documentation][cloudsql-5].
+
+**Required parameters**
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `track_activity_query_size` | `4096` | Required for collection of larger queries. Increases the size of SQL text in `pg_stat_activity`. If left at the default value then queries longer than `1024` characters will not be collected. |
+
+**Optional parameters**
+
+| Parameter | Value | Description |
+| --- | --- | --- |
+| `pg_stat_statements.track` | `all` | Enables tracking of statements within stored procedures and functions. |
+| `pg_stat_statements.max` | `10000` | Increases the number of normalized queries tracked in `pg_stat_statements`. Recommended for high-volume databases that see many different types of queries from many different clients. |
+| `pg_stat_statements.track_utility` | `off` | Disables utility commands like PREPARE and EXPLAIN. Setting this value to `off` means only queries like SELECT, UPDATE, and DELETE are tracked. |
+| `track_io_timing` | `on` | Enables collection of block read and write times for queries. |
+
+## Grant the Agent access
+
+The Datadog Agent requires read-only access to the database server to collect statistics and queries.
+
+Run the following SQL commands on the **primary** database server (the writer) in the cluster if Postgres is replicated. The Agent can collect telemetry from all databases on the server regardless of which database it connects to. Use the default `postgres` database unless you need the Agent to run [custom queries against data unique to a different database][cloudsql-6].
+
+Connect to your chosen database as a superuser (or another user with sufficient permissions). For example, to connect to the `postgres` database using [psql][cloudsql-7]:
+
+ ```bash
+ psql -h mydb.example.com -d postgres -U postgres
+ ```
+
+Create the `datadog` user:
+
+```SQL
+CREATE USER datadog WITH password '<PASSWORD>';
+```
+
+Create the following schema **in every database**:
+
+```SQL
+CREATE SCHEMA datadog;
+GRANT USAGE ON SCHEMA datadog TO datadog;
+GRANT USAGE ON SCHEMA public TO datadog;
+GRANT pg_monitor TO datadog;
+CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
+```
+
+{% alert %}
+For data collection or custom metrics that require querying additional tables, you may need to grant the `SELECT` permission on those tables to the `datadog` user. Example: `grant SELECT on <TABLE_NAME> to datadog;`. See [PostgreSQL custom metric collection][cloudsql-6] for more information.
+{% /alert %}
+
+### Create the explain plan function
+
+Create the following function **in every database** to enable the Agent to collect explain plans:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.explain_statement(
+   l_query TEXT,
+   OUT explain JSON
+)
+RETURNS SETOF JSON AS
+$$
+DECLARE
+curs REFCURSOR;
+plan JSON;
+
+BEGIN
+   SET TRANSACTION READ ONLY;
+
+   OPEN curs FOR EXECUTE pg_catalog.concat('EXPLAIN (FORMAT JSON) ', l_query);
+   FETCH curs INTO plan;
+   CLOSE curs;
+   RETURN QUERY SELECT plan;
+END;
+$$
+LANGUAGE 'plpgsql'
+RETURNS NULL ON NULL INPUT
+SECURITY DEFINER;
+```
+
+### Create the column statistics function
+
+Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+After the function exists, enable collection in your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][cloudsql-14].
+
+### Securely store your password
+{% partial file="database_monitoring/dbm-secret.mdoc.md" /%}
+
+### Verify database permissions
+
+To verify the permissions are correct, run the following commands to confirm the Agent user is able to connect to the database and read the core tables:
+
+```shell
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_database limit 1;" \
+  && echo -e "\e[0;32mPostgres connection - OK\e[0m" \
+  || echo -e "\e[0;31mCannot connect to Postgres\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_activity limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_activity read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_activity\e[0m"
+psql -h localhost -U datadog postgres -A \
+  -c "select * from pg_stat_statements limit 1;" \
+  && echo -e "\e[0;32mPostgres pg_stat_statements read OK\e[0m" \
+  || echo -e "\e[0;31mCannot read from pg_stat_statements\e[0m"
+```
+
+When it prompts for a password, use the password you entered when you created the `datadog` user.
+
+## Install and configure the Agent
+
+To monitor Cloud SQL hosts, install the Datadog Agent in your infrastructure and configure it to connect to each instance remotely. The Agent does not need to run on the database, it only needs to connect to it. For additional Agent installation methods not mentioned here, see the [Agent installation instructions][cloudsql-8].
+
+<!-- Begin Host -->
+{% if equals($agent_env, "host") %}
+
+To configure Database Monitoring metrics collection for an Agent running on a host, for example when you provision a small GCE instance for the Agent to collect from a Google Cloud SQL database:
+
+1. Edit the `postgres.d/conf.yaml` file to point to your `host` / `port` and set the masters to monitor. See the [sample postgres.d/conf.yaml][cloudsql-15] for all available configuration options. The location of the `postgres.d` directory depends on your operating system. For more information, see [Agent configuration directory][cloudsql-17].
+
+   ```yaml
+   init_config:
+   instances:
+     - dbm: true
+       host: '<INSTANCE_ADDRESS>'
+       port: 5432
+       username: datadog
+       password: 'ENC[datadog_user_database_password]'
+       gcp:
+        project_id: '<PROJECT_ID>'
+        instance_id: '<INSTANCE_ID>'
+
+       ## Optional: Connect to a different database if needed for `custom_queries`
+       # dbname: '<DB_NAME>'
+   ```
+
+2. [Restart the Agent][cloudsql-16].
+{% /if %}
+<!-- End Host -->
+
+
+<!-- Begin Docker -->
+{% if equals($agent_env, "docker") %}
+To configure an integration for an Agent running in a Docker container such as in Google Cloud Run, you have a couple of methods available, all of which are covered in detail in the [Docker Configuration Documentation][cloudsql-18].
+
+The examples below show how to use [Docker Labels][cloudsql-19] and [Autodiscovery Templates][cloudsql-20] to configure the Postgres integration.
+
+**Note**: The Agent must have read permission on the Docker socket for Autodiscovery of labels to work.
+
+### Command line
+
+Run the following command from your [command line][cloudsql-21] to start the Agent. Replace the placeholder values with those for your account and environment.
+
+```bash
+export DD_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+export DD_AGENT_VERSION=<AGENT_VERSION>
+
+docker run -e "DD_API_KEY=${DD_API_KEY}" \
+  -v /var/run/docker.sock:/var/run/docker.sock:ro \
+  -l com.datadoghq.ad.check_names='["postgres"]' \
+  -l com.datadoghq.ad.init_configs='[{}]' \
+  -l com.datadoghq.ad.instances='[{
+    "dbm": true,
+    "host": "<INSTANCE_ADDRESS>",
+    "port": 5432,
+    "username": "datadog",
+    "password": "<UNIQUEPASSWORD>",
+    "gcp": {
+      "project_id": "<PROJECT_ID>",
+      "instance_id": "<INSTANCE_ID>"
+    }
+  }]' \
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
+```
+
+### Dockerfile
+
+Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
+
+```dockerfile
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
+
+LABEL "com.datadoghq.ad.check_names"='["postgres"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"dbm": true, "host": "<INSTANCE_ADDRESS>", "port": 5432,"username": "datadog","password": "ENC[datadog_user_database_password]", "gcp": {"project_id": "<PROJECT_ID>", "instance_id": "<INSTANCE_ID>"}}]'
+```
+
+To avoid exposing the `datadog` user's password in plain text, use the Agent's [secret management package][cloudsql-22] and declare the password using the `ENC[]` syntax. Alternatively, see the [Autodiscovery template variables documentation][cloudsql-23] to provide the password as an environment variable.
+{% /if %}
+<!-- End Docker -->
+
+<!-- Begin Kubernetes -->
+{% if equals($agent_env, "kubernetes") %}
+
+If you're running a Kubernetes cluster, use the [Datadog Cluster Agent][cloudsql-24] to enable Database Monitoring.
+
+**Note**: Make sure [cluster checks][cloudsql-25] are enabled for your Datadog Cluster Agent before proceeding.
+
+Below are step-by-step instructions for configuring the Postgres integration using different Datadog Cluster Agent deployment methods.
+
+### Operator
+
+Using the [Operator instructions in Kubernetes and Integrations][cloudsql-26] as a reference, follow the steps below to set up the Postgres integration:
+
+1. Create or update the `datadog-agent.yaml` file with the following configuration:
+
+    ```yaml
+    apiVersion: datadoghq.com/v2alpha1
+    kind: DatadogAgent
+    metadata:
+      name: datadog
+    spec:
+      global:
+        clusterName: <CLUSTER_NAME>
+        site: <DD_SITE>
+        credentials:
+          apiSecret:
+            secretName: datadog-agent-secret
+            keyName: api-key
+
+      features:
+        clusterChecks:
+          enabled: true
+
+      override:
+        nodeAgent:
+          image:
+            name: agent
+            tag: <AGENT_VERSION>
+
+        clusterAgent:
+          extraConfd:
+            configDataMap:
+              postgres.yaml: |-
+                cluster_check: true
+                init_config:
+                instances:
+                - host: <INSTANCE_ADDRESS>
+                  port: 5432
+                  username: datadog
+                  password: 'ENC[datadog_user_database_password]'
+                  dbm: true
+                  gcp:
+                    project_id: '<PROJECT_ID>'
+                    instance_id: '<INSTANCE_ID>'
+    ```
+
+2. Apply the changes to the Datadog Operator using the following command:
+
+    ```shell
+    kubectl apply -f datadog-agent.yaml
+    ```
+
+### Helm
+
+Using the [Helm instructions in Kubernetes and Integrations][cloudsql-27] as a reference, follow the steps below to set up the Postgres integration:
+
+1. Update your `datadog-values.yaml` file (used in the Cluster Agent installation instructions) with the following configuration:
+
+    ```yaml
+    clusterAgent:
+      confd:
+        postgres.yaml: |-
+          cluster_check: true
+          init_config:
+          instances:
+          - dbm: true
+            host: <INSTANCE_ADDRESS>
+            port: 5432
+            username: datadog
+            password: 'ENC[datadog_user_database_password]'
+            gcp:
+              project_id: '<PROJECT_ID>'
+              instance_id: '<INSTANCE_ID>'
+
+    clusterChecksRunner:
+      enabled: true
+    ```
+
+2. Deploy the Agent with the above configuration file using the following command:
+
+    ```shell
+    helm install datadog-agent -f datadog-values.yaml datadog/datadog
+    ```
+
+{% alert %}
+For Windows, append `--set targetSystem=windows` to the `helm install` command.
+{% /alert %}
+
+### Configure with mounted files
+
+To configure a cluster check with a mounted configuration file, mount the configuration file in the Cluster Agent container on the path: `/conf.d/postgres.yaml`:
+
+```yaml
+cluster_check: true  # Make sure to include this flag
+init_config:
+instances:
+  - dbm: true
+    host: '<INSTANCE_ADDRESS>'
+    port: 5432
+    username: datadog
+    password: 'ENC[datadog_user_database_password]'
+    gcp:
+      project_id: '<PROJECT_ID>'
+      instance_id: '<INSTANCE_ID>'
+```
+
+### Configure with Kubernetes service annotations
+
+Instead of mounting a file, you can declare the instance configuration as a Kubernetes service. To configure this check for an Agent running on Kubernetes, create a service using the following syntax:
+
+#### Autodiscovery annotations v2
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    tags.datadoghq.com/env: '<ENV>'
+    tags.datadoghq.com/service: '<SERVICE>'
+  annotations:
+    ad.datadoghq.com/postgres.checks: |
+      {
+        "postgres": {
+          "instances": [
+            {
+              "dbm": true,
+              "host": "<INSTANCE_ADDRESS>",
+              "port": 5432,
+              "username": "datadog",
+              "password": "ENC[datadog_user_database_password]",
+              "gcp": {
+                "project_id": "<PROJECT_ID>",
+                "instance_id": "<INSTANCE_ID>"
+              }
+            }
+          ]
+        }
+      }
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    targetPort: 5432
+    name: postgres
+```
+
+For more information, see [Autodiscovery Annotations][cloudsql-28].
+
+The Cluster Agent automatically registers this configuration and begin running the Postgres check.
+{% /if %}
+<!-- End Kubernetes -->
+
+See the [Postgres integration spec][cloudsql-13] for additional information on setting `project_id` and `instance_id` fields.
+
+### Verify Agent setup
+
+[Run the Agent's status subcommand][cloudsql-9] and look for `postgres` under the Checks section. Or visit the [Databases][cloudsql-10] page to get started!
+
+## Example Agent Configurations
+{% partial file="database_monitoring/dbm-postgres-agent-config-examples.mdoc.md" /%}
+
+## Install the Cloud SQL integration
+
+To collect more comprehensive database metrics from Google Cloud, install the [Cloud SQL integration][cloudsql-11] (optional).
+
+## Troubleshooting
+
+If you have installed and configured the integrations and Agent as described and it is not working as expected, see [Troubleshooting][cloudsql-12].
+{% /if %}
+
+
 
 
 
@@ -1021,3 +1449,32 @@ If you have installed and configured the integrations and Agent as described and
 [aurora-26]: /containers/kubernetes/integrations/?tab=datadogoperator
 [aurora-27]: /containers/kubernetes/integrations/?tab=helm
 [aurora-28]: /containers/kubernetes/integrations/?tab=annotations#configuration
+
+[cloudsql-1]: /database_monitoring/agent_integration_overhead/?tab=postgres
+[cloudsql-2]: /database_monitoring/data_collected/#sensitive-information
+[cloudsql-3]: https://www.postgresql.org/docs/current/config-setting.html
+[cloudsql-4]: https://cloud.google.com/sql/docs/postgres/flags
+[cloudsql-5]: https://www.postgresql.org/docs/current/pgstatstatements.html
+[cloudsql-6]: /integrations/faq/postgres-custom-metric-collection-explained/
+[cloudsql-7]: https://www.postgresql.org/docs/current/app-psql.html
+[cloudsql-8]: https://app.datadoghq.com/account/settings/agent/latest
+[cloudsql-9]: /agent/configuration/agent-commands/#agent-status-and-information
+[cloudsql-10]: https://app.datadoghq.com/databases
+[cloudsql-11]: /integrations/google_cloudsql
+[cloudsql-12]: /database_monitoring/troubleshooting/?tab=postgres
+[cloudsql-13]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example#L638-L662
+[cloudsql-14]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
+[cloudsql-15]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
+[cloudsql-16]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[cloudsql-17]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-configuration-directory
+[cloudsql-18]: /containers/docker/integrations/?tab=labels#configuration
+[cloudsql-19]: https://docs.docker.com/engine/manage-resources/labels/
+[cloudsql-20]: /getting_started/containers/autodiscovery/
+[cloudsql-21]: /containers/docker/integrations/?tab=labels#using-docker-run-nerdctl-run-or-podman-run
+[cloudsql-22]: /agent/configuration/secrets-management
+[cloudsql-23]: /agent/faq/template_variables/
+[cloudsql-24]: /containers/cluster_agent/setup/
+[cloudsql-25]: /containers/cluster_agent/clusterchecks/
+[cloudsql-26]: /containers/kubernetes/integrations/?tab=datadogoperator
+[cloudsql-27]: /containers/kubernetes/integrations/?tab=helm
+[cloudsql-28]: /containers/kubernetes/integrations/?tab=annotations#configuration
