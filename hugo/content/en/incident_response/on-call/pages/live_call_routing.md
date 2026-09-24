@@ -59,6 +59,14 @@ Responders then have the following options:
 - Press `2` to escalate it.
 - Press `3` to resolve it.
 
+#### Keep the page open after the call ends
+
+By default, the Page created for a direct call route resolves after the caller hangs up. Select **Keep the page open after the call ends** to keep the Page open instead and continue following the On-Call Team's escalation policy and paging responders.
+
+#### Record the conversation
+
+Select **Record conversation** to record the call between the caller and the responder.
+
 #### Escalation logic
 
 For direct call routing, On-Call calls the responders in each step of the escalation policy. If no one answers, On-Call immediately advances to the next step and calls its responders. It does not wait for the delay configured between steps, helping connect the caller to an available responder as quickly as possible.
