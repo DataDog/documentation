@@ -76,6 +76,7 @@ The AI cost summary page provides:
 - **Daily AI Cost**: Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
 - **Top Cost Drivers**: The models, projects, services, and users generating the most spend.
 - **Active AI Cost Anomalies**: Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **Real-time anomaly monitors**: Alert within 15 minutes when estimated AI cost increases unexpectedly. See [real-time AI anomaly monitors][19].
 - **AI Cost Recommendations**: Cost [recommendations][17] and optimization opportunities surfaced across all connected providers. Select a recommendation to open a side panel with more details and options for further action.
 - **AI Cost Dashboards**: Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
 
@@ -166,3 +167,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
 [17]: /cloud_cost_management/recommendations
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
+[19]: /cloud_cost_management/cost_changes/monitors/#real-time-ai-cost-anomalies
