@@ -7,10 +7,6 @@ aliases:
 - /bits_ai/bits_ai_sre/take_action/
 - /bits_ai/bits_investigation/take_action/
 site_support_id: bits_remediation
-further_reading:
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/bits-remediation/" >}}
@@ -91,8 +87,4 @@ Bits can verify whether a remediation action was applied successfully, and wheth
 [5]: /actions/private_actions/
 [6]: /actions/connections/
 [7]: https://app.datadoghq.com/organization-settings/roles
-[8]: https://app.datadoghq.com/bits-ai/settings/remediation-guardrails
-
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
+[8]: https://app.datadoghq.com/bits-ai/settings/remediation-guardrails 

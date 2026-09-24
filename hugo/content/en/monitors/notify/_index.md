@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-notification-rules/"
   tag: "Blog"
   text: "Route your monitor alerts with Datadog monitor notification rules"
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview

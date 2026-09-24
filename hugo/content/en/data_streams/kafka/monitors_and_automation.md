@@ -17,9 +17,6 @@ further_reading:
 - link: "/data_streams/kafka/setup/"
   tag: "Documentation"
   text: "Kafka Console setup"
-- link: "https://www.datadoghq.com/blog/kafka-console/"
-  tag: "Blog"
-  text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
 ---
 
 After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Console Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response.

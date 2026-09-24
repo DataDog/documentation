@@ -14,9 +14,6 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
-- link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
-  tag: "Blog"
-  text: "Manage Cursor costs with Datadog Cloud Cost Management"
 ---
 
 ## Overview

@@ -19,9 +19,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
   tag: "Blog"
   text: "Accelerate investigations with AI in Datadog Incident Response"
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview

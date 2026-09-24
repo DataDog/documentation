@@ -7,9 +7,6 @@ further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/responder_types"
   tag: "Documentation"
   text: "Customize responder types in Incident Settings"
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Overview

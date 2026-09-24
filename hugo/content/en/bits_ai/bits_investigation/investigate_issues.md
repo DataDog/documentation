@@ -9,9 +9,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
   tag: "Blog"
   text: "Meet the new Bits Investigation: Deeper reasoning, twice as fast"
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 ## Start a Bits investigation

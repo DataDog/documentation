@@ -16,9 +16,6 @@ further_reading:
     - link: '/security/code_security/iac_security/'
       tag: 'Documentation'
       text: 'Learn more about IaC Security'
-    - link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
-      tag: "Blog"
-      text: "Enforce custom rules in Datadog IaC Security scanning"
 ---
 
 ## Overview

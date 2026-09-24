@@ -28,9 +28,6 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/velocloud-sdwan-integration"
       tag: "Blog"
       text: "Monitor Arista VeloCloud SD-WAN performance with Datadog"
-    - link: "https://www.datadoghq.com/blog/understanding-netflow-duplication/"
-      tag: "Blog"
-      text: "Understanding NetFlow duplication: Why it happens, and how to deduplicate"
 algolia:
   tags: ['network device monitoring']
 ---

@@ -8,6 +8,9 @@ aliases:
 - /workflows/trigger
 - /service_management/workflows/trigger
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-automation-rules
+  tag: Blog
+  text: Instantly respond to changes in your data with Datadog automation rules
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
@@ -26,12 +29,6 @@ further_reading:
 - link: "/security/cloud_security_management/workflows"
   tag: "Documentation"
   text: "Automate Security Workflows with Workflow Automation"
-- link: https://www.datadoghq.com/blog/datadog-automation-rules
-  tag: Blog
-  text: Instantly respond to changes in your data with Datadog automation rules
-- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-  tag: "Blog"
-  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 ---
 
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.

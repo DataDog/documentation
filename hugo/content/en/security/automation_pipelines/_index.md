@@ -21,9 +21,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
     tag: "Blog"
     text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
-  - link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
-    tag: "Blog"
-    text: "Enforce custom rules in Datadog IaC Security scanning"
 algolia:
   tags: ["automation pipelines", "findings automation", "findings pipelines", "finding automation"]
 ---

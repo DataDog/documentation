@@ -3,18 +3,15 @@ title: Bits Code
 aliases:
 - /bits_ai/bits_ai_dev_agent/
 further_reading:
-  - link: "/account_management/billing/ai_credits/"
-    tag: "Documentation"
-    text: "AI Credits"
   - link: "https://www.datadoghq.com/blog/bits-ai-dev-agent/"
     tag: "Blog"
     text: "Automatically identify issues and generate fixes with Bits Code"
   - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
     tag: "Blog"
     text: "Introducing Bits Code for Code Security"
-  - link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-    tag: "Blog"
-    text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
+  - link: "/account_management/billing/ai_credits/"
+    tag: "Documentation"
+    text: "AI Credits"
 ---
 
 ## Overview

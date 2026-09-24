@@ -14,9 +14,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mitre-attack-enrichment-packs-observability-pipelines/"
   tag: "Blog"
   text: "Automatically enrich security logs with MITRE ATT&CK context before they reach your SIEM"
-- link: "https://www.datadoghq.com/blog/observability-pipelines-microsoft-sentinel-packs/"
-  tag: "Blog"
-  text: "Transform and route  security logs to Microsoft Sentinel tables using Observability Pipelines"
 products:
 - name: Logs
   icon: logs

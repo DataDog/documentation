@@ -4,6 +4,9 @@ aliases:
   - /security/cloud_security_management/setup/iac_scanning/iac_scanning_exclusions/
   - /security/code_security/iac_security/exclusions/
 further_reading:
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: "/security/code_security/iac_security"
     tag: "Documentation"
     text: "IaC Security"
@@ -13,12 +16,6 @@ further_reading:
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
-  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
-    tag: "Blog"
-    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
-  - link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
-    tag: "Blog"
-    text: "Enforce custom rules in Datadog IaC Security scanning"
 ---
 
 Infrastructure as Code (IaC) Security detects IaC misconfigurations. By default, IaC Security scans repositories with [all supported rules][3]. You can customize which rules run and on which paths, as well as their severities and rule types. Configure these settings under the `iac` key in the Code Security configuration, either in Datadog or in a `code-security.datadog.yaml` file.

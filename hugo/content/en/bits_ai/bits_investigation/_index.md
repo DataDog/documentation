@@ -16,9 +16,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
     tag: "Blog"
     text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
-  - link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
-    tag: "Blog"
-    text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 cascade:
     site_support_id: bits_investigation
 ---

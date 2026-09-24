@@ -27,9 +27,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-recommendations/"
     tag: "Blog"
     text: "Eliminate cloud waste across AWS, Azure, and Google Cloud with Cloud Cost Recommendations"
-  - link: "https://www.datadoghq.com/blog/cursor-cloud-cost-management/"
-    tag: "Blog"
-    text: "Manage Cursor costs with Datadog Cloud Cost Management"
 
 
 multifiltersearch:

@@ -15,9 +15,6 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
-- link: "https://www.datadoghq.com/blog/product-analytics-journey-paths/"
-  tag: "Blog"
-  text: "Understand the top paths users take to convert or drop off with Journey Paths"
 algolia:
   tags: ['funnel']
 ---

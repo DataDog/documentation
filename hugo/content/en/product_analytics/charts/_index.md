@@ -5,9 +5,6 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
-- link: "https://www.datadoghq.com/blog/product-analytics-journey-paths/"
-  tag: "Blog"
-  text: "Understand the top paths users take to convert or drop off with Journey Paths"
 ---
 
 ## Overview
