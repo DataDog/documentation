@@ -11,14 +11,17 @@
 
   This menu is config-defined (plain url: strings, no page front matter), so entries have no
   .Page and Hugo's .IsMenuCurrent/.HasMenuCurrent never match -- comparing URLs directly works.
+
+  A top-level entry's whole subtree counts as a match, not just its own URL -- see
+  nav/subtree-matches-current.html for why (menu nesting and content folder structure can
+  diverge, e.g. actions/private_actions/*).
 */ -}}
 {{- $currentPage := . -}}
 {{- $curURL := trim $currentPage.RelPermalink "/" -}}
 {{- $result := "" -}}
 {{- range .Site.Menus.main -}}
     {{- range .Children -}}
-        {{- $menuURL := trim (.URL | relLangURL) "/" -}}
-        {{- if and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) -}}
+        {{- if partial "nav/subtree-matches-current.html" (dict "curURL" $curURL "node" .) -}}
             {{- $result = print $result "|" .Identifier -}}
         {{- end -}}
     {{- end -}}
