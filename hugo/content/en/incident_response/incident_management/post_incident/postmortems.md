@@ -103,4 +103,4 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [3]: /integrations/google_drive/
 [4]: /incident_response/incident_management/setup_and_configuration/templates
 [5]: /actions/workflows/
-[6]: /incident_response/incident_management/setup_and_configuration/variables/#postmortem-templates
+[6]: /incident_response/incident_management/setup_and_configuration/variables/#incident-variables
