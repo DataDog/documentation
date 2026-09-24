@@ -3356,6 +3356,17 @@ menu:
       url: infrastructure/list/
       parent: hosts
       weight: 1
+    - name: Infrastructure Basic
+      identifier: infrastructure_basic
+      url: infrastructure/basic/
+      parent: infrastructure_heading
+      weight: 55000
+      pre: host-map
+    - name: Setup
+      identifier: infrastructure_basic_setup
+      url: infrastructure/basic/setup/
+      parent: infrastructure_basic
+      weight: 1
     - name: Containers
       url: containers/
       identifier: containers
