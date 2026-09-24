@@ -131,7 +131,7 @@ Managed sync replicates user accounts from your primary organization to your sec
 
 Configure your cloud integrations (AWS, Azure, and GCP) in both your primary and secondary organizations. These integrations run in only one organization at a time: normally in your primary organization, and in your secondary organization during failover.
 
-<div class="alert alert-danger">Failing over cloud integrations to your secondary organization stops all cloud integration data collection in your primary organization for as long as the integrations remain failed over. Only fail over cloud integrations as part of a real or test failover.</div>
+<div class="alert alert-danger">Failing over cloud integrations to your secondary organization stops all cloud integration data collection in your primary organization for as long as the integrations remain failed over. Only fail over cloud integrations as part of a real failover.</div>
 
 {{% /collapse-content %}}
 
