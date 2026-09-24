@@ -27,13 +27,13 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 
 | Concept                                | Description                                                                                                                        |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| [RUM Application](#rum-application)     | The application or environment a set of RUM data is grouped under, identified by an Application ID and Client Token.                |
+| [RUM application](#rum-application)     | The application or environment a set of RUM data is grouped under, identified by an Application ID and Client Token.                |
 | [Session](#session)                     | A user journey on your application, made up of the views, actions, resources, errors, and other events generated during that visit. |
 | [View](#view)                           | A web page, mobile screen, or hybrid view a user visits during a session.                                                            |
 | [Action](#action)                       | A discrete user interaction, such as a click, tap, or custom action defined in your code.                                            |
 | [Resource](#resource)                   | A network request made by your application, such as an XHR, fetch, or asset load.                                                    |
 | [Error](#error)                         | A frontend error, unhandled exception, or crash captured during a session.                                                           |
-| [Long Task](#long-task)                 | A task that blocks the main thread long enough to affect the responsiveness of your application.                                     |
+| [Long task](#long-task)                 | A task that blocks the main thread long enough to affect the responsiveness of your application.                                     |
 | [Vitals](#vitals)                       | Performance scores, such as Core Web Vitals or Mobile Vitals, that measure the quality of the user experience.                       |
 | [Frustration signals](#frustration-signals) | A user behavior, such as a rage click or error click, that indicates a poor experience.                                           |
 | [Session Replay](#session-replay)       | A visual, replayable recording of a user's browsing session.                                                                         |
@@ -41,7 +41,7 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 | [Retention filters and quotas](#retention-filters-and-quotas) | Controls that determine which sessions Datadog retains and how many are retained per day.                        |
 | [Context](#context)                     | Custom or global attributes attached to RUM events to add business or user-specific information.                                     |
 
-## RUM Application
+## RUM application
 
 A RUM application represents a single web or mobile application, or one environment of it, in Datadog. Each RUM application has its own **Application ID** and **Client Token**, which you use to [configure the SDK][2] to send data to Datadog. All sessions, views, actions, resources, and errors are grouped under the RUM application that collected them.
 
@@ -71,7 +71,7 @@ A resource is a network request made by your application, such as an XHR, fetch 
 
 An error is a frontend JavaScript error, unhandled promise rejection, mobile crash, or other exception captured during a session. Datadog groups related errors together with [Error Tracking][7] to help you identify and resolve issues faster.
 
-## Long Task
+## Long task
 
 A long task is a task that blocks the browser's main thread for an extended period of time, preventing the application from responding to user input. Long tasks are a common cause of poor [UI latency vitals](#vitals).
 
