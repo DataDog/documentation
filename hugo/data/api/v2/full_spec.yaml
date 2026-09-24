@@ -109276,6 +109276,7 @@ components:
         - character_count
       type: object
     SensitiveDataScannerMeta:
+      additionalProperties: {}
       description: Meta response containing information about the API.
       properties:
         count_limit:
