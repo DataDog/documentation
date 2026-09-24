@@ -1362,8 +1362,6 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 
 ## Metrics Governance
 
-<div class="alert alert-info">The <code>metrics-governance</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
-
 Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
 
 ### `estimate_datadog_metric_cardinality`
