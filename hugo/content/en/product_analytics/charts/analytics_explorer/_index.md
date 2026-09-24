@@ -71,7 +71,7 @@ Not every option applies to every chart type. Rollup interval and display style,
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}Search syntax{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}}Events{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}Visualize{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Groups{{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}Group{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}Export{{< /nextlink >}}
 {{< /whatsnext >}}
 
