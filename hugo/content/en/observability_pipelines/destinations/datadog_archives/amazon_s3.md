@@ -17,7 +17,7 @@ products:
 
 Use the Datadog Archives - Amazon S3 destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format.
 
-**Note**: Use the [Amazon S3][12] destination to send your logs to Amazon S3 in JSON or Parquet format.
+**Note**: If you don't want to rehydrate logs in Datadog or you want to send your logs to Amazon S3 in JSON or Parquet format, use the [Amazon S3][12] destination.
 
 You can also [route logs to Snowflake using the Datadog Archives - Amazon S3 destination](#route-logs-to-snowflake-using-the-datadog-archives---amazon-s3-destination).
 
