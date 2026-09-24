@@ -67,12 +67,12 @@ Agent `v7.59+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -113,12 +113,12 @@ Agent `v7.75+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -159,12 +159,12 @@ Agent `v7.72+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -204,12 +204,12 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key:tag_value"
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
-          ## optional configs:
-          # max_ttl: 30 # max traceroute TTL, default is 30
-          # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-          # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-          # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-          # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+            ## optional configs:
+            # max_ttl: 30 # max traceroute TTL, default is 30
+            # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+            # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+            # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+            # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -267,7 +267,7 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
                        "tag_key2:tag_value2"
                      ],
                      "hostname": "1.1.1.1"
-                   },
+                   }
              ]
            }
          }
@@ -331,31 +331,31 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For additional configuration options, reference the [example config][3], or use the following:
 
     ```yaml
     network_path:
       connections_monitoring:
-        ## @param enabled - bool - required - default:false
+        ## @param enabled - boolean - optional - default: false
         ## Enable network path collection
         #
         enabled: true
       collector:
-        ## @param workers - int - optional - default:4
+        ## @param workers - integer - optional - default: 4
         ## Number of workers that can collect paths in parallel
-        ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
 
-        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # @param pathtest_interval - string - optional - default: "30m"
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
         # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-        # pathtest_interval: 10m
+        # pathtest_interval: "30m"
 
-        # @param pathtest_ttl - integer - optional - default: 35m
-        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # @param pathtest_ttl - string - optional - default: "70m"
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
-        # pathtest_ttl: 35m
+        # pathtest_ttl: "70m"
 
         ## @param filters - list - optional
         ## Include or exclude specific domains or IP ranges from dynamic monitoring.
@@ -392,22 +392,24 @@ Agent `v7.79+` is required.
 
    ```yaml
    network_path:
+     connections_monitoring:
+       enabled: true
      collector:
-       ## @param workers - int - optional - default:4
+       ## @param workers - integer - optional - default: 4
        ## Number of workers that can collect paths in parallel
-       ## Recommendation: leave at default
        #
        # workers: <NUMBER OF WORKERS> # default 4
 
-       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+       # @param pathtest_interval - string - optional - default: "30m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-       # pathtest_interval: 10m
+       # pathtest_interval: "30m"
 
-       # @param pathtest_ttl - integer - optional - default: 35m
-       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+       # @param pathtest_ttl - string - optional - default: "70m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
        # The TTL is reset each time the connection is seen again.
-       # pathtest_ttl: 35m
+       # pathtest_ttl: "70m"
 
        ## @param filters - list - optional
        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
@@ -451,31 +453,31 @@ Agent `v7.73+` is required.
        # workers: <NUMBER OF WORKERS> # default 4
    ```
 
-   For full configuration details, reference the [example config][3], or use the following:
+   For additional configuration options, reference the [example config][3], or use the following:
 
    ```yaml
    network_path:
      connections_monitoring:
-       ## @param enabled - bool - required - default:false
+       ## @param enabled - boolean - optional - default: false
        ## Enable network path collection
        #
        enabled: true
      collector:
-       ## @param workers - int - optional - default:4
+       ## @param workers - integer - optional - default: 4
        ## Number of workers that can collect paths in parallel
-       ## Recommendation: leave at default
        #
        # workers: <NUMBER OF WORKERS> # default 4
 
-       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+       # @param pathtest_interval - string - optional - default: "30m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-       # pathtest_interval: 10m
+       # pathtest_interval: "30m"
 
-       # @param pathtest_ttl - integer - optional - default: 35m
-       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+       # @param pathtest_ttl - string - optional - default: "70m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
        # The TTL is reset each time the connection is seen again.
-       # pathtest_ttl: 35m
+       # pathtest_ttl: "70m"
 
        ## @param filters - list - optional
        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
@@ -512,6 +514,9 @@ For more information, reference the [Datadog Helm Chart documentation][1] and th
 datadog:
   ## Set to true to enable the Traceroute Module of the System Probe
   traceroute:
+    enabled: true
+
+  networkMonitoring:
     enabled: true
 
   networkPath:
