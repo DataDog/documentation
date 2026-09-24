@@ -21,3 +21,9 @@ postgres_hosting_options:
   - id: azure
   - id: supabase
   - id: heroku
+
+agent_install_options:
+  - id: host
+    default: true
+  - id: docker
+  - id: kubernetes

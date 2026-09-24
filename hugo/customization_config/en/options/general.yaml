@@ -605,3 +605,6 @@ options:
 
 - label: Cloud
   id: cloud
+
+- label: Host
+  id: host
