@@ -1,0 +1,33 @@
+{{- /*
+  Returns a flat []map{"url": <trimmed URL>, "identifier": <top-level identifier>} covering
+  every entry in .Site.Menus.main, where "identifier" is always the entry's top-level
+  (group-child) ancestor's own .Identifier -- e.g. every URL under the "Private Actions"
+  branch (itself and all its descendants) is tagged with "action_catalog", since Private
+  Actions is a menu-child of Action Catalog.
+
+  This lets nav/current-top-section.html and nav/left-nav.html each decide "does the
+  current page fall under top-level section X" with a single flat, non-recursive loop,
+  instead of a recursive `partial` call per menu subtree. The flattening walk itself is
+  still recursive (see nav/flatten-subtree-entries.html), but it only runs ONCE per
+  language and is cached build-wide via hugo.Store, since the menu structure never changes
+  during a build. Before this, current-top-section.html (which runs uncached on every
+  page) re-walked the whole ~2,000-entry menu via nested `partial` calls on every one of
+  ~30k pages -- the recursive `partial`-call overhead, not the matching logic itself, was
+  what made that expensive. See WEB-9804 follow-up.
+*/ -}}
+{{- $dot := . -}}
+{{- $store := hugo.Store -}}
+{{- $cacheKey := printf "nav-flattened-main-menu-%s" $dot.Site.Language.Lang -}}
+{{- $cached := $store.Get $cacheKey -}}
+{{- if not $cached -}}
+    {{- $list := slice -}}
+    {{- range $dot.Site.Menus.main -}}
+        {{- range .Children -}}
+            {{- $topID := .Identifier -}}
+            {{- $list = $list | append (partial "nav/flatten-subtree-entries.html" (dict "node" . "identifier" $topID)) -}}
+        {{- end -}}
+    {{- end -}}
+    {{- $store.Set $cacheKey $list -}}
+    {{- $cached = $list -}}
+{{- end -}}
+{{- return $cached -}}

@@ -12,18 +12,24 @@
   This menu is config-defined (plain url: strings, no page front matter), so entries have no
   .Page and Hugo's .IsMenuCurrent/.HasMenuCurrent never match -- comparing URLs directly works.
 
-  A top-level entry's whole subtree counts as a match, not just its own URL -- see
-  nav/subtree-matches-current.html for why (menu nesting and content folder structure can
-  diverge, e.g. actions/private_actions/*).
+  A top-level entry's whole subtree counts as a match, not just its own URL (menu nesting and
+  content folder structure can diverge, e.g. actions/private_actions/*). This runs uncached on
+  every page, so it uses nav/flattened-menu.html's precomputed, build-wide-cached flat list
+  (one non-recursive loop) rather than walking the menu tree per page -- see that file for why.
 */ -}}
 {{- $currentPage := . -}}
 {{- $curURL := trim $currentPage.RelPermalink "/" -}}
-{{- $result := "" -}}
-{{- range .Site.Menus.main -}}
-    {{- range .Children -}}
-        {{- if partial "nav/subtree-matches-current.html" (dict "curURL" $curURL "node" .) -}}
-            {{- $result = print $result "|" .Identifier -}}
+{{- $flatMenu := partial "nav/flattened-menu.html" $currentPage -}}
+{{- $matchedIDs := slice -}}
+{{- range $flatMenu -}}
+    {{- if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) -}}
+        {{- if not (in $matchedIDs .identifier) -}}
+            {{- $matchedIDs = $matchedIDs | append .identifier -}}
         {{- end -}}
     {{- end -}}
+{{- end -}}
+{{- $result := "" -}}
+{{- range $matchedIDs -}}
+    {{- $result = print $result "|" . -}}
 {{- end -}}
 {{- $result -}}
