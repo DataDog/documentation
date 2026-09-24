@@ -19,6 +19,8 @@ interface Props {
   activeCategory?: ApiCategory;
   currentOperationSlug?: string;
   breadcrumbs?: BreadcrumbItem[];
+  /** The page's `site_support_id` frontmatter, if it has one. */
+  siteSupportId?: string;
 }
 
 const {
@@ -28,6 +30,7 @@ const {
   activeCategory,
   currentOperationSlug,
   breadcrumbs,
+  siteSupportId,
 } = Astro.props;
 const currentLang = resolveLocale(Astro.currentLocale);
 const { rest: unprefixedPath } = stripLocalePrefix(Astro.url.pathname);
@@ -69,7 +72,10 @@ const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
           <RegionSelectorIsland />
         </div>
       </div>
-      <SiteSupportBanner pathname={Astro.url.pathname} />
+      <SiteSupportBanner
+        pathname={Astro.url.pathname}
+        siteSupportId={siteSupportId}
+      />
       <div class="prose">
         <slot />
       </div>

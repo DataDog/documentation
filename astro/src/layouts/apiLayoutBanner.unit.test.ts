@@ -12,14 +12,17 @@ import { getUnsupportedRegions } from "@config/siteSupport";
 const BANNER_PATH = "/dd_e2e/components/site-support-banner";
 const NO_BANNER_PATH = "/api/latest/fake-unmatched-path";
 
-async function render(pathname: string): Promise<string> {
+async function render(
+  pathname: string,
+  siteSupportId?: string,
+): Promise<string> {
   const container = await AstroContainer.create();
   container.addServerRenderer({
     renderer: preactRenderer,
     name: "@astrojs/preact",
   });
   return container.renderToString(ApiLayout, {
-    props: { title: "Test page", categories: [] },
+    props: { title: "Test page", categories: [], siteSupportId },
     request: new Request(`https://docs.example.com${pathname}`),
   });
 }
@@ -63,6 +66,23 @@ describe("ApiLayout site-support banner", () => {
     const html = await render(BANNER_PATH);
     const proseIndex = html.indexOf('class="prose"');
     expect(html.indexOf('class="site-support-banner')).toBeLessThan(proseIndex);
+  });
+
+  it("renders the banner from siteSupportId when no url_paths entry matches", async () => {
+    // NO_BANNER_PATH matches no `url_paths` entry, so only the frontmatter
+    // tier can produce the banner here.
+    const siteSupportId = "dd_e2e_unsupported_product";
+    const regions = getUnsupportedRegions(NO_BANNER_PATH, siteSupportId);
+    expect(regions.length, "fixture key resolved no regions").toBeGreaterThan(
+      0,
+    );
+
+    const html = await render(NO_BANNER_PATH, siteSupportId);
+    for (const regionKey of regions) {
+      expect(html, `no banner variant for "${regionKey}"`).toContain(
+        `data-region="${regionKey}"`,
+      );
+    }
   });
 
   it("renders no banner for a supported path", async () => {
