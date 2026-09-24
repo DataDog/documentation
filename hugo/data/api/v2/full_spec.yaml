@@ -32445,6 +32445,7 @@ components:
         connection_id:
           description: Unique identifier of the Private Action Runner connection holding the credentials.
           example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          format: uuid
           type: string
         secret_path:
           description: Path of the credential inside the secret backend configured on the runner.
@@ -32453,6 +32454,7 @@ components:
         user_uuid:
           description: Unique identifier of the user the Private Action Runner connection belongs to.
           example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          format: uuid
           type: string
       required:
         - auth_type
