@@ -110,7 +110,7 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 ## Find agent problems with Insights
 
-[Agent Observability Insights][12] automatically identifies recurring cost and reliability problems from the traces your applications already send. Each Insight includes the root cause, impact, supporting evidence, and a recommended fix. Insights require no additional configuration.
+[Agent Observability Insights][12] automatically analyzes the traces Agent Observability receives from your applications to identify recurring cost and reliability problems. Each insight includes the root cause, impact, supporting evidence, and a recommended fix. Insights require no additional configuration.
 
 ## Use integrations with Agent Observability
 
