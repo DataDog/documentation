@@ -50,7 +50,7 @@ Creating an IDP is a critical part of [Platform Engineering][7] best practices. 
 
 If you're new to IDP, start with the [Getting Started guide][5], which walks through setup and basic usage.
 
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" header="Sign up for early access to our upcoming features!" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/?product=internal-developer-portal-idp" header="Sign up for early access to our upcoming features!" >}}
 {{< /callout >}}
 
 ## Common use cases
