@@ -28,6 +28,34 @@ BYOC (Bring Your Own Cloud) Logs index names follow this format:
 byoc--<CLUSTER_NAME>--<INDEX_NAME>
 ```
 
+## Cross-cluster search
+
+Search multiple BYOC Logs clusters in a single query in the Log Explorer or through the public Logs API. Results from the selected clusters are combined.
+
+### Log Explorer
+
+In the [Log Explorer][1] search bar, use `index:` with a parenthesized list of cluster names prefixed with `byoc--` and separated by `OR`. For example, search the `cluster-1` and `cluster-2` clusters:
+
+```text
+index:(byoc--cluster-1 OR byoc--cluster-2)
+```
+
+Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
+
+### Public API
+
+Use the same query in the `filter.query` field of a request to the Search logs endpoint (`POST /api/v2/logs/events/search`). For example:
+
+```json
+{
+  "filter": {
+    "from": "now-15m",
+    "to": "now",
+    "query": "index:(byoc--cluster-1 OR byoc--cluster-2)"
+  }
+}
+```
+
 ## Search limitations
 
 You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with BYOC Logs.
