@@ -141,6 +141,11 @@ menu:
       url: getting_started/integrations/terraform/
       weight: 1205
       parent: getting_started_integrations
+    - name: Stripe
+      identifier: getting_started_with_stripe
+      url: getting_started/integrations/stripe/
+      weight: 1206
+      parent: getting_started_integrations
     - name: Internal Developer Portal
       identifier: getting_started_internal_developer_portal
       url: getting_started/internal_developer_portal/
@@ -2759,11 +2764,6 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_variables
       weight: 208
-    - name: Integrations
-      url: incident_response/incident_management/setup_and_configuration/integrations
-      parent: incidents_settings
-      identifier: incidents_integrations
-      weight: 209
     - name: Post Incident
       url: incident_response/incident_management/post_incident
       parent: incidents
@@ -2784,11 +2784,56 @@ menu:
       parent: incidents
       identifier: analytics_and_reporting
       weight: 4
+    - name: Integrations
+      url: incident_response/incident_management/setup_and_configuration/integrations
+      parent: incidents
+      identifier: incidents_integrations
+      weight: 5
+    - name: Slack
+      url: incident_response/incident_management/setup_and_configuration/integrations/slack
+      parent: incidents_integrations
+      identifier: incidents_integrations_slack
+      weight: 501
+    - name: Microsoft Teams
+      url: incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams
+      parent: incidents_integrations
+      identifier: incidents_integrations_microsoft_teams
+      weight: 502
+    - name: Google Chat
+      url: incident_response/incident_management/setup_and_configuration/integrations/google_chat
+      parent: incidents_integrations
+      identifier: incidents_integrations_google_chat
+      weight: 503
+    - name: Jira
+      url: incident_response/incident_management/setup_and_configuration/integrations/jira
+      parent: incidents_integrations
+      identifier: incidents_integrations_jira
+      weight: 504
+    - name: ServiceNow
+      url: incident_response/incident_management/setup_and_configuration/integrations/servicenow
+      parent: incidents_integrations
+      identifier: incidents_integrations_servicenow
+      weight: 505
+    - name: Status Pages
+      url: incident_response/incident_management/setup_and_configuration/integrations/status_pages
+      parent: incidents_integrations
+      identifier: incidents_integrations_status_pages
+      weight: 506
+    - name: Atlassian Statuspage
+      url: incident_response/incident_management/setup_and_configuration/integrations/statuspage
+      parent: incidents_integrations
+      identifier: incidents_integrations_statuspage
+      weight: 507
+    - name: Zoom
+      url: incident_response/incident_management/setup_and_configuration/integrations/zoom_integration
+      parent: incidents_integrations
+      identifier: incidents_integrations_zoom
+      weight: 508
     - name: Guides
       url: incident_response/incident_management/guides/
       parent: incidents
       identifier: incidents_guides
-      weight: 5
+      weight: 6
     - name: On-Call
       url: incident_response/on-call/
       pre: on-call
@@ -5694,26 +5739,31 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 401
+    - name: Insights
+      url: llm_observability/investigate/insights
+      parent: llm_obs_monitoring
+      identifier: llm_obs_insights
+      weight: 402
     - name: Cost
       url: llm_observability/investigate/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
-      weight: 402
+      weight: 403
     - name: Metrics
       url: llm_observability/investigate/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 403
+      weight: 404
     - name: Patterns
       url: llm_observability/investigate/patterns/
       parent: llm_obs_monitoring
       identifier: llm_obs_patterns
-      weight: 404
+      weight: 405
     - name: Evaluations
       url: llm_observability/investigate/evaluations/
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations
-      weight: 405
+      weight: 406
     - name: Custom LLM-as-a-Judge
       url: llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
       parent: llm_obs_evaluations
@@ -5753,12 +5803,12 @@ menu:
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
       identifier: llm_obs_annotation_queues
-      weight: 406
+      weight: 407
     - name: Export API
       url: llm_observability/investigate/export_api
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
-      weight: 407
+      weight: 408
     - name: Improve
       url: llm_observability/improve/
       parent: llm_obs
@@ -9138,16 +9188,21 @@ menu:
       parent: synthetics_platform
       identifier: synthetics_platform_apm
       weight: 705
+    - name: Connect RUM
+      url: synthetics/platform/rum/
+      parent: synthetics_platform
+      identifier: synthetics_platform_rum
+      weight: 706
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 706
+      weight: 707
     - name: Scheduled Downtime
       identifier: synthetics_platform_downtime
       url: synthetics/platform/downtime
       parent: synthetics_platform
-      weight: 707
+      weight: 708
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
@@ -10136,16 +10191,21 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
+    - name: Remote Configuration
+      url: real_user_monitoring/remote_configuration/
+      parent: rum
+      identifier: rum_remote_configuration
+      weight: 15
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 16
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 17
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics

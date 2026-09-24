@@ -663,11 +663,11 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 ## Toolsets
 
-The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
-
-<div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
+The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only).
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Use `toolsets=all` to enable all generally available toolsets at once. Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.
+
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
 
 - Retrieve only the core tools (this is the default if `toolsets` is not specified):
@@ -682,10 +682,10 @@ For example, based on your selected [Datadog site][17] ({{< region-param key="dd
 - Retrieve all generally available tools:
   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=all</code></pre>
 
-<div class="alert alert-info">Enabling all toolsets increases the number of tool definitions sent to your AI client, which consumes context window space. <code>toolsets=all</code> works best with clients that support tool filtering, such as Claude Code.</div>
-
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
+
+<div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
 
 ### Omit specific tools
 
