@@ -3650,7 +3650,7 @@
     "summary": "List Agent Observability prompts"
   },
   "CreateLLMObsPrompt": {
-    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.",
+    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create an Agent Observability prompt",
     "request_description": "Create prompt payload.",
     "request_schema_description": "Request to create an Agent Observability prompt."
@@ -3674,7 +3674,7 @@
     "summary": "List versions of an Agent Observability prompt"
   },
   "CreateLLMObsPromptVersion": {
-    "description": "Create a new version of an existing Agent Observability prompt.",
+    "description": "Create a new version of an existing Agent Observability prompt.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create a new Agent Observability prompt version",
     "request_description": "Create prompt version payload.",
     "request_schema_description": "Request to create a new version of an Agent Observability prompt."

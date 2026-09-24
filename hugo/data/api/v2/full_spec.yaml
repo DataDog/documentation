@@ -65399,6 +65399,26 @@ components:
       required:
         - data
       type: object
+    LLMObsPromptAuthoringChatTemplate:
+      description: A chat prompt containing messages, references to specific versions of other prompts, or both.
+      items:
+        $ref: "#/components/schemas/LLMObsPromptAuthoringItem"
+      minItems: 1
+      type: array
+    LLMObsPromptAuthoringItem:
+      description: >-
+        A chat message or a reference to a specific version of another prompt. A chat message must not contain an `include` field; the API rejects items that combine both forms.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptIncludeItem"
+    LLMObsPromptAuthoringMessagesTemplate:
+      description: A chat prompt whose authored items are stored under `messages`.
+      properties:
+        messages:
+          $ref: "#/components/schemas/LLMObsPromptAuthoringChatTemplate"
+      required:
+        - messages
+      type: object
     LLMObsPromptChatMessage:
       description: A single chat message in a prompt template.
       properties:
@@ -65533,6 +65553,46 @@ components:
       required:
         - id
       type: object
+    LLMObsPromptInclude:
+      additionalProperties: false
+      description: >-
+        Includes messages from a specific version of another prompt. Omitting `items` includes every message from that version in its original order. When `items` is present, messages are included in the specified order, including repetitions.
+      properties:
+        items:
+          description: >-
+            Zero-based indexes of messages from the included prompt. For example, `[2, 0, 0]` includes the third message, followed by the first message twice. Omit this field to include all messages in their original order.
+          items:
+            format: int64
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+          minItems: 1
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the included prompt.
+          example: "response-policy"
+          minLength: 1
+          type: string
+        version:
+          description: Positive sequential version number of the included prompt.
+          example: 3
+          format: int64
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - prompt_id
+        - version
+      type: object
+    LLMObsPromptIncludeItem:
+      additionalProperties: false
+      description: Includes all or selected messages from a specific version of another prompt.
+      properties:
+        include:
+          $ref: "#/components/schemas/LLMObsPromptInclude"
+      required:
+        - include
+      type: object
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65642,11 +65702,17 @@ components:
         - data
       type: object
     LLMObsPromptTemplate:
-      description: A text template or a list of chat messages.
+      description: >-
+        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+
+        **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+
+        Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
         - $ref: "#/components/schemas/LLMObsPromptChatTemplate"
+        - $ref: "#/components/schemas/LLMObsPromptAuthoringMessagesTemplate"
     LLMObsPromptTextTemplate:
       description: A text prompt template.
       minLength: 1
@@ -65678,11 +65744,13 @@ components:
       type: object
     LLMObsPromptVersionDataAttributes:
       description: >-
-        Attributes of a specific version of an Agent Observability prompt. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
+        Attributes of a specific version of an Agent Observability prompt. For a composed version, `authoring_template` contains its pinned include-bearing source; ordinary versions omit that attribute. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
       properties:
         author:
           description: UUID of the user who authored this version.
           type: string
+        authoring_template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
         created_at:
@@ -123044,6 +123112,11 @@ components:
           items:
             $ref: "#/components/schemas/RoutingRuleAction"
           type: array
+        id:
+          description: |-
+            Specifies the unique identifier of an existing routing rule to update.
+            If omitted, a new routing rule is created.
+          type: string
         policy_id:
           description: Identifies the policy to be applied when this routing rule matches.
           type: string
@@ -132346,6 +132419,7 @@ components:
             workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
+      x-env-name: DD_BEARER_TOKEN
     apiKeyAuth:
       description: Your Datadog API Key.
       in: header
@@ -132454,6 +132528,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tracers for a specific agent
       tags:
         - Fleet Automation
@@ -132569,6 +132644,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a schedule
       tags:
         - Fleet Automation
@@ -132617,6 +132693,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a schedule
       tags:
         - Fleet Automation
@@ -132731,6 +132808,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a schedule
       tags:
         - Fleet Automation
@@ -132803,6 +132881,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a schedule deployment
       tags:
         - Fleet Automation
@@ -132899,6 +132978,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all fleet tracers
       tags:
         - Fleet Automation
@@ -132965,6 +133045,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List custom evaluator configurations
       tags:
         - Agent Observability
@@ -133010,6 +133091,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a custom evaluator configuration
       tags:
         - Agent Observability
@@ -133085,6 +133167,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a custom evaluator configuration
       tags:
         - Agent Observability
@@ -133199,6 +133282,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a custom evaluator configuration
       tags:
         - Agent Observability
@@ -135431,6 +135515,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List annotations
       tags:
         - Annotations
@@ -135512,6 +135597,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an annotation
       tags:
         - Annotations
@@ -135586,6 +135672,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotations for a page
       tags:
         - Annotations
@@ -135627,6 +135714,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an annotation
       tags:
         - Annotations
@@ -135716,6 +135804,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an annotation
       tags:
         - Annotations
@@ -147435,6 +147524,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a budget
       tags:
         - Cloud Cost Management
@@ -147530,6 +147620,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or replace a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -147593,6 +147684,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Validate budget
       tags:
         - Cloud Cost Management
@@ -147611,6 +147703,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete budget
       tags:
         - Cloud Cost Management
@@ -147705,6 +147798,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get budget
       tags:
         - Cloud Cost Management
@@ -147727,6 +147821,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -147775,6 +147870,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -147812,6 +147908,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List budgets
       tags:
         - Cloud Cost Management
@@ -151815,6 +151912,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get current user
       tags:
         - Users
@@ -151899,6 +151997,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update current user
       tags:
         - Users
@@ -153630,6 +153729,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Creates a data deletion request
       tags:
         - Data Deletion
@@ -153728,6 +153828,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Gets a list of data deletion requests
       tags:
         - Data Deletion
@@ -153793,6 +153894,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Cancels a data deletion request
       tags:
         - Data Deletion
@@ -154789,6 +154891,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all deployment gates
       tags: ["Deployment Gates"]
       x-menu-order: 10
@@ -154859,6 +154962,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 1
@@ -154921,6 +155025,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get rules for a deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 9
@@ -155001,6 +155106,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 5
@@ -155051,6 +155157,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 8
@@ -155119,6 +155226,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 6
@@ -155205,6 +155313,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 7
@@ -155249,6 +155358,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 4
@@ -155310,6 +155420,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 2
@@ -155385,6 +155496,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 3
@@ -155483,6 +155595,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a deployment gate evaluation
       tags: ["Deployment Gates"]
       x-menu-order: 11
@@ -155549,6 +155662,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment gate evaluation result
       tags: ["Deployment Gates"]
       x-menu-order: 12
@@ -155760,6 +155874,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a deployment event
       tags: ["DORA Metrics"]
       x-menu-order: 8
@@ -155804,6 +155919,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a deployment event by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155868,6 +155984,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a list of deployment events
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155920,6 +156037,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155972,6 +156090,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a deployment event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -156082,6 +156201,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an incident event
       tags: ["DORA Metrics"]
       x-menu-order: 7
@@ -156145,6 +156265,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a list of incident events
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -156199,6 +156320,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an incident event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -157147,6 +157269,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       servers:
         - url: https://{subdomain}.{site}
           variables:
@@ -158953,6 +159076,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List available Datadog Agent versions
       tags:
         - Fleet Automation
@@ -159074,6 +159198,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all Datadog Agents
       tags:
         - Fleet Automation
@@ -159140,6 +159265,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get detailed information about an agent
       tags:
         - Fleet Automation
@@ -159246,6 +159372,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all deployments
       tags:
         - Fleet Automation
@@ -159364,6 +159491,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a configuration deployment
       tags:
         - Fleet Automation
@@ -159444,6 +159572,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Upgrade hosts
       tags:
         - Fleet Automation
@@ -159532,6 +159661,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment by ID
       tags:
         - Fleet Automation
@@ -159591,6 +159721,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Cancel a deployment
       tags:
         - Fleet Automation
@@ -159654,6 +159785,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all schedules
       tags:
         - Fleet Automation
@@ -159720,6 +159852,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a schedule by ID
       tags:
         - Fleet Automation
@@ -161791,6 +161924,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tag rules
       tags:
         - Tag Rules
@@ -161891,6 +162025,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a tag rule
       tags:
         - Tag Rules
@@ -161956,6 +162091,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a tag rule
       tags:
         - Tag Rules
@@ -162076,6 +162212,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a tag rule
       tags:
         - Tag Rules
@@ -162176,6 +162313,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a tag rule
       tags:
         - Tag Rules
@@ -162266,6 +162404,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a tag rule compliance score
       tags:
         - Tag Rules
@@ -162329,6 +162468,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get HAMR organization connection
       tags:
         - High Availability MultiRegion
@@ -162405,6 +162545,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update HAMR organization connection
       tags:
         - High Availability MultiRegion
@@ -166536,6 +166677,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List incident attachments
       tags:
         - Incidents
@@ -172197,6 +172339,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tenancy products
       tags:
         - OCI Integration
@@ -172229,6 +172372,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get tenancy configs
       tags:
         - OCI Integration
@@ -172306,6 +172450,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create tenancy config
       tags:
         - OCI Integration
@@ -172330,6 +172475,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete tenancy config
       tags:
         - OCI Integration
@@ -172368,6 +172514,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get tenancy config
       tags:
         - OCI Integration
@@ -172450,6 +172597,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update tenancy config
       tags:
         - OCI Integration
@@ -174086,6 +174234,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Integrations
       tags:
         - Integrations
@@ -175634,6 +175783,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotated interactions by content IDs
       tags:
         - Agent Observability
@@ -175711,6 +175861,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability annotation queues
       tags:
         - Agent Observability
@@ -175827,6 +175978,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -175866,6 +176018,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -175956,6 +176109,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -176018,6 +176172,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotated queue interactions
       tags:
         - Agent Observability
@@ -176111,6 +176266,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an annotated queue interaction
       tags:
         - Agent Observability
@@ -176229,6 +176385,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update annotations
       tags:
         - Agent Observability
@@ -176316,6 +176473,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete annotations
       tags:
         - Agent Observability
@@ -176439,6 +176597,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Add annotation queue interactions
       tags:
         - Agent Observability
@@ -176500,6 +176659,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete annotation queue interactions
       tags:
         - Agent Observability
@@ -176571,6 +176731,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotation queue label schema
       tags:
         - Agent Observability
@@ -176717,6 +176878,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update annotation queue label schema
       tags:
         - Agent Observability
@@ -176805,6 +176967,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Aggregate Agent Observability experimentation
       tags:
         - Agent Observability
@@ -176916,6 +177079,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search Agent Observability experimentation
       tags:
         - Agent Observability
@@ -177010,6 +177174,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Simple search experimentation entities
       tags:
         - Agent Observability
@@ -177136,6 +177301,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiments
       tags:
         - Agent Observability
@@ -177228,6 +177394,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability experiment
       tags:
         - Agent Observability
@@ -177280,6 +177447,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability experiments
       tags:
         - Agent Observability
@@ -177356,6 +177524,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability experiment
       tags:
         - Agent Observability
@@ -177428,6 +177597,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiment spans (v1)
       tags:
         - Agent Observability
@@ -177500,6 +177670,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Push events for an Agent Observability experiment
       tags:
         - Agent Observability
@@ -177553,6 +177724,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List LLM integration accounts
       tags:
         - Agent Observability
@@ -177638,6 +177810,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Run an LLM inference
       tags:
         - Agent Observability
@@ -177696,6 +177869,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List LLM integration models
       tags:
         - Agent Observability
@@ -177770,6 +177944,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability projects
       tags:
         - Agent Observability
@@ -177852,6 +178027,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability project
       tags:
         - Agent Observability
@@ -177904,6 +178080,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability projects
       tags:
         - Agent Observability
@@ -177976,6 +178153,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability project
       tags:
         - Agent Observability
@@ -178035,6 +178213,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability prompts
       tags:
         - Agent Observability
@@ -178047,7 +178226,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new prompt (and its first version) in the Agent Observability prompt registry.
+      description: |-
+        Create a new prompt (and its first version) in the Agent Observability prompt registry.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPrompt
       requestBody:
         content:
@@ -178133,6 +178315,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability prompt
       tags:
         - Agent Observability
@@ -178194,6 +178377,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an Agent Observability prompt
       tags:
         - Agent Observability
@@ -178263,6 +178447,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an Agent Observability prompt
       tags:
         - Agent Observability
@@ -178347,6 +178532,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability prompt
       tags:
         - Agent Observability
@@ -178417,6 +178603,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List versions of an Agent Observability prompt
       tags:
         - Agent Observability
@@ -178429,7 +178616,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new version of an existing Agent Observability prompt.
+      description: |-
+        Create a new version of an existing Agent Observability prompt.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -178437,6 +178627,31 @@ paths:
         content:
           application/json:
             examples:
+              composed_chat:
+                summary: Create a version that includes all or selected messages from other prompts
+                value:
+                  data:
+                    attributes:
+                      template:
+                        messages:
+                          - include:
+                              prompt_id: "assistant-introduction"
+                              version: 2
+                          - include:
+                              items: [2, 0, 0]
+                              prompt_id: "response-examples"
+                              version: 4
+                          - content: "Answer {{question}}."
+                            role: "user"
+                    type: prompt-template-versions
+              composed_text:
+                summary: Create a version that includes text from another prompt
+                value:
+                  data:
+                    attributes:
+                      description: "Reuse the exact response policy."
+                      template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                    type: prompt-template-versions
               default:
                 value:
                   data:
@@ -178460,6 +178675,50 @@ paths:
           content:
             application/json:
               examples:
+                composed_chat:
+                  summary: A composed chat version preserves structured authored includes
+                  value:
+                    data:
+                      attributes:
+                        authoring_template:
+                          messages:
+                            - include:
+                                prompt_id: "assistant-introduction"
+                                version: 2
+                            - include:
+                                items: [2, 0, 0]
+                                prompt_id: "response-examples"
+                                version: 4
+                            - content: "Answer {{question}}."
+                              role: "user"
+                        prompt_id: "support-chat"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Here is one concise example."
+                            role: "assistant"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Answer {{question}}."
+                            role: "user"
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+                composed_text:
+                  summary: A composed text version returns compiled and authored templates
+                  value:
+                    data:
+                      attributes:
+                        authoring_template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                        prompt_id: "support-answer"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template: "Follow the approved response policy.\n\nAnswer {{question}}."
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
                 default:
                   value:
                     data:
@@ -178513,6 +178772,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new Agent Observability prompt version
       tags:
         - Agent Observability
@@ -178592,6 +178852,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a specific Agent Observability prompt version
       tags:
         - Agent Observability
@@ -178682,6 +178943,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability prompt version
       tags:
         - Agent Observability
@@ -178842,6 +179104,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability spans
       tags:
         - Agent Observability
@@ -178942,6 +179205,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search Agent Observability spans
       tags:
         - Agent Observability
@@ -179019,6 +179283,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns clustered points
       tags:
         - Agent Observability
@@ -179083,6 +179348,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns configurations
       tags:
         - Agent Observability
@@ -179168,6 +179434,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a patterns configuration
       tags:
         - Agent Observability
@@ -179236,6 +179503,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a patterns configuration
       tags:
         - Agent Observability
@@ -179287,6 +179555,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a patterns configuration
       tags:
         - Agent Observability
@@ -179354,6 +179623,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns runs
       tags:
         - Agent Observability
@@ -179430,6 +179700,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a patterns run
       tags:
         - Agent Observability
@@ -179504,6 +179775,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get patterns run status
       tags:
         - Agent Observability
@@ -179585,6 +179857,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns topics
       tags:
         - Agent Observability
@@ -179678,6 +179951,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns topics with clustered points
       tags:
         - Agent Observability
@@ -179761,6 +180035,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability datasets
       tags:
         - Agent Observability
@@ -179855,6 +180130,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability dataset
       tags:
         - Agent Observability
@@ -179915,6 +180191,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability datasets
       tags:
         - Agent Observability
@@ -179990,6 +180267,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability dataset
       tags:
         - Agent Observability
@@ -180106,6 +180384,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Batch update Agent Observability dataset records
       tags:
         - Agent Observability
@@ -180203,6 +180482,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Clone an Agent Observability dataset
       tags:
         - Agent Observability
@@ -180284,6 +180564,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -180365,6 +180646,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Lock Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -180429,6 +180711,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Unlock Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -180512,6 +180795,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Export an Agent Observability dataset
       tags:
         - Agent Observability
@@ -180592,6 +180876,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability dataset records
       tags:
         - Agent Observability
@@ -180670,6 +180955,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update Agent Observability dataset records
       tags:
         - Agent Observability
@@ -180765,6 +181051,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Append records to an Agent Observability dataset
       tags:
         - Agent Observability
@@ -180826,6 +181113,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability dataset records
       tags:
         - Agent Observability
@@ -180905,6 +181193,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Restore an Agent Observability dataset version
       tags:
         - Agent Observability
@@ -180989,6 +181278,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability dataset versions
       tags:
         - Agent Observability
@@ -181064,6 +181354,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiment events (v2)
       tags:
         - Agent Observability
@@ -181170,6 +181461,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Upload records to an Agent Observability dataset
       tags:
         - Agent Observability
@@ -181257,6 +181549,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List events for an Agent Observability experiment
       tags:
         - Agent Observability
@@ -207827,6 +208120,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all default inbox rules
       tags:
         - Security Monitoring
@@ -207901,6 +208195,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a default inbox rule
       tags:
         - Security Monitoring
@@ -207972,6 +208267,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Disable a default inbox rule
       tags:
         - Security Monitoring
@@ -208043,6 +208339,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Enable a default inbox rule
       tags:
         - Security Monitoring
@@ -208130,6 +208427,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all due date rules
       tags:
         - Security Monitoring
@@ -208225,6 +208523,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a due date rule
       tags:
         - Security Monitoring
@@ -208289,6 +208588,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder due date rules
       tags:
         - Security Monitoring
@@ -208326,6 +208626,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a due date rule
       tags:
         - Security Monitoring
@@ -208395,6 +208696,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a due date rule
       tags:
         - Security Monitoring
@@ -208505,6 +208807,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a due date rule
       tags:
         - Security Monitoring
@@ -208588,6 +208891,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all inbox rules
       tags:
         - Security Monitoring
@@ -208673,6 +208977,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an inbox rule
       tags:
         - Security Monitoring
@@ -208737,6 +209042,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder inbox rules
       tags:
         - Security Monitoring
@@ -208774,6 +209080,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an inbox rule
       tags:
         - Security Monitoring
@@ -208838,6 +209145,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an inbox rule
       tags:
         - Security Monitoring
@@ -208935,6 +209243,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an inbox rule
       tags:
         - Security Monitoring
@@ -209020,6 +209329,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all mute rules
       tags:
         - Security Monitoring
@@ -209109,6 +209419,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a mute rule
       tags:
         - Security Monitoring
@@ -209173,6 +209484,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder mute rules
       tags:
         - Security Monitoring
@@ -209210,6 +209522,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a mute rule
       tags:
         - Security Monitoring
@@ -209276,6 +209589,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a mute rule
       tags:
         - Security Monitoring
@@ -209372,6 +209686,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a mute rule
       tags:
         - Security Monitoring
@@ -209459,6 +209774,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all severity modifier rules
       tags:
         - Security Monitoring
@@ -209548,6 +209864,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a severity modifier rule
       tags:
         - Security Monitoring
@@ -209612,6 +209929,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder severity modifier rules
       tags:
         - Security Monitoring
@@ -209655,6 +209973,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a severity modifier rule
       tags:
         - Security Monitoring
@@ -209727,6 +210046,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a severity modifier rule
       tags:
         - Security Monitoring
@@ -209825,6 +210145,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a severity modifier rule
       tags:
         - Security Monitoring
@@ -209910,6 +210231,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all ticket creation rules
       tags:
         - Security Monitoring
@@ -209999,6 +210321,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a ticket creation rule
       tags:
         - Security Monitoring
@@ -210063,6 +210386,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder ticket creation rules
       tags:
         - Security Monitoring
@@ -210100,6 +210424,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a ticket creation rule
       tags:
         - Security Monitoring
@@ -210166,6 +210491,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a ticket creation rule
       tags:
         - Security Monitoring
@@ -210266,6 +210592,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a ticket creation rule
       tags:
         - Security Monitoring
@@ -211152,6 +211479,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List assets SBOMs
       tags:
         - "Security Monitoring"
@@ -211241,6 +211569,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get SBOM
       tags:
         - "Security Monitoring"
@@ -211385,6 +211714,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List scanned assets metadata
       tags:
         - "Security Monitoring"
@@ -211653,6 +211983,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of signal-based notification rules
       tags:
         - Security Monitoring
@@ -211735,6 +212066,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new signal-based notification rule
       tags:
         - Security Monitoring
@@ -211767,6 +212099,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a signal-based notification rule
       tags:
         - Security Monitoring
@@ -211830,6 +212163,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get details of a signal-based notification rule
       tags:
         - Security Monitoring
@@ -211922,6 +212256,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a signal-based notification rule
       tags:
         - Security Monitoring
@@ -212034,6 +212369,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Ingest STIX threat intelligence
       tags:
         - Threat Intelligence
@@ -212487,6 +212823,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List vulnerabilities
       tags:
         - "Security Monitoring"
@@ -212598,6 +212935,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of vulnerability notification rules
       tags:
         - Security Monitoring
@@ -212681,6 +213019,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -212713,6 +213052,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -212777,6 +213117,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get details of a vulnerability notification rule
       tags:
         - Security Monitoring
@@ -212870,6 +213211,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -213052,6 +213394,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List vulnerable assets
       tags:
         - "Security Monitoring"
@@ -222317,6 +222660,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of SPDX licenses
       tags:
         - Static Analysis
@@ -226955,6 +227299,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get widgets from an image
       tags:
         - Stegadography
@@ -234483,6 +234828,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Validate API and application keys
       tags:
         - Key Management
@@ -234596,6 +234942,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search widgets
       tags:
         - Widgets
@@ -234701,6 +235048,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a widget
       tags:
         - Widgets
@@ -234757,6 +235105,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a widget
       tags:
         - Widgets
@@ -234830,6 +235179,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a widget
       tags:
         - Widgets
@@ -234945,6 +235295,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a widget
       tags:
         - Widgets
@@ -235577,6 +235928,7 @@ paths:
 security:
   - apiKeyAuth: []
     appKeyAuth: []
+  - AuthZ: []
 servers:
   - url: https://{subdomain}.{site}
     variables:

@@ -26,9 +26,9 @@ further_reading:
   text: "Synthetic Monitoring pricing"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/bits-testing/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-testing/" >}}
 Bits Testing is in Preview. Request access to join the waiting list.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
