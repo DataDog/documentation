@@ -15,27 +15,6 @@ algolia:
   tags: ['custom metrics']
 ---
 
-- [Overview](#overview)
-- [Create a tag rule](#create-a-tag-rule)
-  - [Limitations](#limitations)
-- [Modify a rule](#modify-a-rule)
-  - [Edit a rule](#edit-a-rule)
-  - [Reorder rules](#reorder-rules)
-  - [Delete a rule](#delete-a-rule)
-  - [Override rules for a specific metric](#override-rules-for-a-specific-metric)
-- [Rule precedence](#rule-precedence)
-- [Precedence examples](#precedence-examples)
-  - [Example 1: Merge and Override behavior](#example-1-merge-and-override-behavior)
-  - [Example 2: Rule order](#example-2-rule-order)
-  - [Example 3: Exception to a broad rule](#example-3-exception-to-a-broad-rule)
-  - [Example 4: Multiple exceptions to a broad rule](#example-4-multiple-exceptions-to-a-broad-rule)
-- [Metrics without Limits compatibility](#metrics-without-limits-compatibility)
-- [Best practices](#best-practices)
-  - [Create the Golden Rule first](#create-the-golden-rule-first)
-  - [Choose between Tag Indexing Rules and Metrics without Limits](#choose-between-tag-indexing-rules-and-metrics-without-limits)
-  - [Scope additional rules intentionally](#scope-additional-rules-intentionally)
-- [Further reading](#further-reading)
-
 ## Overview
 
 Tag Indexing Rules are centralized configurations that define how Datadog handles metric tags at ingestion. They allow you to proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and ensuring consistent tagging across your organization.
@@ -99,6 +78,8 @@ Add the tag keys you want to include or exclude.
 After you configure tag behavior, the preview shows a list of affected metrics (up to 100 in the UI).
 
 {{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="The Preview affected metrics panel showing a list of metrics matching the rule scope." style="width:80%;">}}
+
+> By default, every New Rule is appended to the bottom of your current rule set.
 
 ### Limitations
 
@@ -217,26 +198,26 @@ Use Tag Indexing Rules as the default way to govern indexed tags across groups o
 The Golden Rule should be the first Tag Indexing Rule created and should remain first in the rule order. This establishes it as the baseline policy before you add more targeted rules or metric-level exceptions.
 
 The Golden Rule is:
-> Unindex all tag keys that have not been queried in the last 30/60/90 days and are not used in any Datadog assets, such as dashboards, monitors, or notebooks.
->Unindex all tag keys that have not been queried in the last 30/60/90 days and are not used in any Datadog assets, such as dashboards, monitors, or notebooks.
+> Unindex all tag keys that have not been queried in the last 30, 60, or 90 days and are not used in any Datadog assets, such as dashboards, monitors, SLOs, or notebooks.
+
 
 To configure the Golden Rule:
 
 1. Create the rule before creating any other Tag Indexing Rules. If rules already exist, move the Golden Rule to the first position.
 2. Select {{< ui >}}Exclude tags{{< /ui >}} and then {{< ui >}}By tag usage{{< /ui >}}.
-3. Set the query window to 30/60/90 days.
+3. Set the query window to 30, 60, or 90 days.
 4. Require tag keys to be unused in Datadog assets.
 5. Apply the rule to all custom metrics using `*`.
 
-New tag keys receive a 15-day grace period before the rule evaluates their usage. This gives teams time to query a new tag or use it in a Datadog asset before it can be unindexed.
+Newly submitted tag keys receive a 15-day grace period before the rule evaluates their usage. This gives teams time to query a new tag or use it in a Datadog asset before it can be unindexed.
 
-After establishing the Golden Rule, create narrower rules or Metrics without Limits configurations only for requirements that differ from this default.
+After establishing the Golden Rule, create narrower rules for Metrics that differ from this default.
 
 {{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="A Tag Indexing Rule configured as the Golden Rule, excluding unqueried tag keys across all custom metrics." style="width:100%;">}}
 
 ### Choose between Tag Indexing Rules and Metrics without Limits™
 
-Tag Indexing Rules are reusable policies that can apply to a single metric, a namespace, multiple metric-name patterns, or all custom metrics. New custom metrics are automatically evaluated against existing rules as they arrive. Any metric that matches a rule is governed without requiring individual configuration.
+Tag Indexing Rules are dynamic policies that can apply to a single metric, a namespace, multiple prefixes, or all custom metrics. New custom metrics are automatically evaluated against existing rules as they arrive. Any metric that matches a rule is governed without requiring individual configuration.
 
 Metrics without Limits configurations are static and applied one metric at a time. Use them when a specific metric requires a different set of indexed tags.
 
@@ -245,27 +226,23 @@ Existing Metrics without Limits configurations take precedence over Tag Indexing
 | Use case | Recommended control |
 |---|---|
 | Establish the default indexing policy for all custom metrics | Golden Rule |
-| Apply the same tag policy across a namespace or set of metric-name patterns | Tag Indexing Rules |
+| Apply the same tag policy across a namespace or set of prefixes | Tag Indexing Rules |
 | Automatically govern new metrics that match an existing policy | Tag Indexing Rules |
 | Unindex tags that are not queried and are not used in Datadog assets | Tag Indexing Rules |
 | Remove known high-cardinality tags across multiple metrics | Tag Indexing Rules |
 | Keep only an approved set of tags across multiple metrics | Tag Indexing Rules |
 | Configure a different set of indexed tags for one metric | Metrics without Limits™ |
-| Exempt a specific metric from a broader indexing policy | Metrics without Limits™ |
 
 ### Scope additional rules intentionally
 
 After creating the Golden Rule, add narrower rules only where a group of metrics has requirements that differ from the default:
 
 - Use a single metric when the policy applies to one metric but should remain dynamic.
-- Use a namespace or metric-name pattern for metrics owned by the same service, application, or team.
-- Use multiple patterns when the same policy applies to related groups of metrics.
+- Use a namespace or prefix for metrics owned by the same service, application, or team.
+- Use multiple prefixes when the same policy applies to related groups of metrics.
 - Use `*` only when a policy should apply to all custom metrics.
-Use a namespace or metric-name pattern for metrics owned by the same service, application, or team.
-Use multiple patterns when the same policy applies to related groups of metrics.
-Use * only when a policy should apply to all custom metrics.
 
-Keep rule scopes clear and avoid unnecessary overlap. Clear scopes make it easier to understand which policy governs each metric and who owns changes to that policy.
+Define clear rule scopes and avoid unnecessary overlap. This makes it easier to understand which policy governs each metric and who owns changes to it.
 
 As new rules are added, verify that the Golden Rule remains in the first position.
 
