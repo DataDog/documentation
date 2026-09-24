@@ -221,7 +221,7 @@ Tag Indexing Rules are dynamic policies that can apply to a single metric, a nam
 
 Metrics without Limits configurations are static and applied one metric at a time. Use them when a specific metric requires a different set of indexed tags.
 
-Existing Metrics without Limits configurations take precedence over Tag Indexing Rules. While a Metrics without Limits configuration is active, the metric is treated as an exemption and is not governed by Tag Indexing Rules.
+Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. While a Metrics without Limits™ configuration is active, the metric is treated as an exemption and is not governed by Tag Indexing Rules.
 
 | Use case | Recommended control |
 |---|---|
