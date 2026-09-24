@@ -5,7 +5,7 @@ aliases:
   - /llm_observability/experiments_preview
   - /llm_observability/experiments/
 further_reading:
-  - link: /llm_observability/improve/experiments/setup
+  - link: /llm_observability/guide/experiments
     tag: "Documentation"
     text: Set up and use Agent Observability Experiments
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
