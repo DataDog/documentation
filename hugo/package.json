@@ -83,7 +83,7 @@
         "traverse": "0.6.8",
         "typesense": "^3.0.1",
         "typesense-instantsearch-adapter": "^2.9.0",
-        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v2.0.1.tgz",
+        "typesense-sync": "https://s3.amazonaws.com/origin-static-assets/corp-node-packages/master/typesense-sync-v2.0.2.tgz",
         "yaml-lint": "^1.7.0"
     },
     "devDependencies": {
@@ -115,9 +115,6 @@
         "run-sequence": "^2.2.1",
         "sass": "^1.72.0",
         "serialize-javascript": "^2.1.2"
-    },
-    "resolutions": {
-        "typesense@npm:3.0.1/axios": "1.18.0"
     },
     "hugo-bin": {
         "buildTags": "extended,withdeploy"
