@@ -13,7 +13,6 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshoot BYOC Logs"
 ---
-
 ## Overview
 
 This page tracks releases of the **BYOC (Bring Your Own Cloud) Logs binary**, distributed as a Docker image and bundled by the `datadog/cloudprem` Helm chart. New features and fixes ship in the binary; the chart packages them for deployment.
@@ -40,17 +39,39 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 
 ## Releases
 
+### v0.1.34 — 2026-09-23
+
+*Bundled in chart: `0.5.3`.*
+
+#### Changed
+
+- Speeds up indexer decommissioning during rolling updates and scale-downs.
+- Prioritizes monitor queries over other searches, and caches query filters so monitors run faster over shifting time windows.
+- Improved performance up to 10x`field:*` existence queries, and faster term and histogram aggregations.
+- Adds support for numeric histogram group-by queries.
+- Improves Google Cloud Storage reliability with request timeouts, retries, and credential caching.
+- Removes the embedded web UIs.
+
+#### Helm chart changes
+
+- Enables availability zone-aware scheduling by default, and populates the availability zone from pod labels on all Kubernetes versions.
+- Sets `QW_ENABLE_IN_MEMORY_INDEXING=true` and `QW_DISABLE_LOAD_ESTIMATION=true` on indexers by default, and sets `QW_INDEXING_MAX_WRITE_THROUGHPUT` based on `indexer.podSize`. Values in `indexer.extraEnv` or `environment` take precedence.
+- Uses the readiness endpoint for startup probes, removes default readiness probes, and sets liveness probe timeouts to 5 seconds.
+- Increases the compactor termination grace period to 300 seconds.
+
 ### v0.1.33 — 2026-08-18
 
 *Bundled in chart: `0.5.2`.*
 *Validated with Observability Pipelines Worker: `2.20.x`.*
 
 #### Changed
+
 - Adds document clustering to group similar logs together and reduce storage footprint by 10% to 20%. To disable document clustering, set `QW_DISABLE_DOCS_CLUSTERING=true`.
 - Adds support for flat attribute group-by queries.
 - Adds operational metrics for system resource usage, decommissioning, S3 PUT failures, WAL usage, metastore capacity, and split-search outcomes.
 
 #### Helm chart changes
+
 - **Breaking**: Removes the `medium` pod size. `indexer.podSize` and `searcher.podSize` accept `large`, `xlarge`, `2xlarge`, `4xlarge`, `6xlarge`, and `8xlarge`.
 - Adjusts pod-size CPU and memory requests and limits to account for node reservations and add-ons. This rescales caches, ingest queues, and concurrent split searches accordingly.
 - Enables document clustering by default with `config.docs_clustering`.
@@ -64,12 +85,14 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 *Validated with Observability Pipelines Worker: `2.20.0` (`datadog/observability-pipelines-worker` Helm chart `2.20.0`).*
 
 #### Changed
+
 - Adds opt-in PostgreSQL metastore read replica support for search and analytics read paths.
 - Adds an opt-in standalone compactor service to run merge work outside indexer nodes.
 - Reduces S3 DNS lookup churn by caching DNS resolution for S3 clients.
 - Improves control plane stability after actor restarts and metastore overload responses.
 
 #### Helm chart changes
+
 - Adds `metastore_ro` values to deploy a read-only metastore replica pool for scaling metastore reads independently of the writer.
 - Adds `enableStandaloneCompactors` to run compaction on dedicated workers instead of indexer nodes.
 - Disables ingest v1 by default with `QW_DISABLE_INGEST_V1=true`; override it with `environment`.
@@ -81,10 +104,12 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 *Bundled in chart: `0.4.5`.*
 
 #### Changed
+
 - Fixes single-token phrase prefix queries on raw fields so `match_phrase_prefix` searches return all matching prefix terms instead of being capped by `max_expansions`.
 - Up to 3x faster intersection for selective terms queries with time range.
 
 #### Helm chart changes
+
 - Adds `indexer.volumeAttributesClass` and `searcher.volumeAttributesClass` values to provision Kubernetes `VolumeAttributesClass` resources for indexer and searcher persistent volumes. Use these values to tune volume attributes such as IOPS and throughput. This feature is disabled by default, requires Kubernetes 1.31 or later, and requires `driverName` when enabled.
 - Fixes the Kubernetes advertise address by setting `KUBERNETES_POD_IP` from the pod IP instead of the pod name.
 - Disables `serviceAccount.automountServiceAccountToken` by default to reduce token exposure on pods that do not need Kubernetes API access.
@@ -95,10 +120,12 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 *Bundled in chart: `0.4.3`.*
 
 #### Changed
+
 - Reduces search CPU time for nested date histogram queries by up to 20%, with the largest gains on seven-day windows.
 - Adds a dedicated health check listener on port `7284` for CloudPrem component liveness and readiness checks.
 
 #### Helm chart changes
+
 - Adds global `volumes` and `volumeMounts` values that apply to all CloudPrem components and merge with existing per-component `extraVolumes` and `extraVolumeMounts`.
 - Adds global `topologySpreadConstraints` support, merged with per-component constraints, to spread CloudPrem workload pods across topology domains.
 - Updates CloudPrem services and AWS ALB internal ingress health checks to use the dedicated health endpoint.
@@ -108,11 +135,13 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 *Bundled in chart: `0.4.2`.*
 
 #### Changed
+
 - Faster execution for common log analysis queries, including 2x faster range queries, 1.6x faster cardinality aggregations, and up to 6x faster intersections with range queries.
 - Treats `field:*` filters as existence queries, and fixes sorting by percentile aggregations.
 - Reduced memory usage for Google Cloud Storage uploads to improve indexing stability.
 
 #### Helm chart changes
+
 - Enables BYOC service telemetry by default with `datadog.byocTelemetry.enabled`; this exports BYOC service logs and metrics only, not customer-ingested logs, metrics, or traces.
 - Deprecates and ignores `cloudprem.index.retention`, and no longer sets `CP_RETENTION_PERIOD`.
 
@@ -121,8 +150,9 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 *Bundled in chart: `0.4.0`.*
 
 #### Changed
+
 - Up to 4x faster term aggregations with order by sub aggregation and up to 1.5x faster cardinality aggregations.
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{&lt; partial name="whats-next/whats-next.html" &gt;}}
