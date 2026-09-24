@@ -11,7 +11,7 @@ algolia:
   tags: ['saml']
 ---
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">The Datadog for Government site only supports SAML login.</div>
+<div class="alert alert-caution">The Datadog for Government site only supports SAML login.</div>
 {{< /site-region >}}
 
 ## Overview
@@ -106,7 +106,7 @@ Some organizations might not want to invite all of their users to Datadog. If yo
 
 Administrators can set the default role for new JIT users. The default role is {{< ui >}}Standard{{< /ui >}}, but you can choose to add new JIT users as {{< ui >}}Read-Only{{< /ui >}}, {{< ui >}}Administrators{{< /ui >}}, or any custom role.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Important:</strong> If Role Mapping is enabled, it takes priority over the roles set during JIT provisioning. Without the proper Group Attribute statements, users might end up without roles and lose access to Datadog. To prevent users from being locked out after JIT provisioning, make sure to review your mapping definitions and check your assertions before enabling both Mappings and JIT.
 </div>
 

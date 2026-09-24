@@ -361,7 +361,7 @@ To disable SCA, you must use the *same method* you used to enable SCA.
 
 {{< tabs >}}
 {{% tab "Enabled in the UI" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 If you enabled SCA through the <code>DD_APPSEC_SCA_ENABLED</code> environment variable, you cannot disable it using the UI.
 </div>
 
@@ -378,7 +378,7 @@ or
 [2]: https://app.datadoghq.com/security/code-security/inventory/services
 {{% /tab %}}
 {{% tab "Enabled using environment variable" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 If you enabled SCA through the UI, you cannot disable it by removing the <code>DD_APPSEC_SCA_ENABLED</code> environment variable.
 </div>
 

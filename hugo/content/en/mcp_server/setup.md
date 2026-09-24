@@ -41,7 +41,7 @@ Connect Datadog to ChatGPT by installing the [Datadog app][1] from ChatGPT's app
 {{< /site-region >}}
 
 {{< site-region region="us3,us5,eu,ap1,ap2,uk1,gov,gov2" >}}
-<div class="alert alert-danger">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">The Datadog ChatGPT app is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: https://chatgpt.com/apps/datadog--preview/asdk_app_69e8c7f174a08191a28b6da96c8062c4
@@ -74,7 +74,7 @@ If the directory connector is not available to you, you can add Datadog as a [cu
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -125,7 +125,7 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
 {{< site-region region="gov,gov2" >}}
 
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
 
@@ -163,7 +163,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /getting_started/site/
@@ -214,7 +214,7 @@ If the plugin is not available to you, point Copilot at the MCP Server endpoint 
 
 {{< site-region region="gov,gov2" >}}
 
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
 
@@ -240,7 +240,7 @@ Install the [Datadog Plugin][1] from the Cursor Marketplace—the plugin include
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: https://cursor.com/marketplace/datadog
@@ -263,7 +263,7 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -299,7 +299,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /getting_started/site/
@@ -331,7 +331,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [3]: /getting_started/site/
@@ -356,7 +356,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -458,7 +458,7 @@ The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: https://plugins.jetbrains.com/plugin/26104-junie-the-ai-coding-agent-by-jetbrains
@@ -494,7 +494,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [3]: /getting_started/site/
@@ -554,7 +554,7 @@ To enable all generally available toolsets, use `toolsets=all`. This works best 
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [2]: https://github.com/datadog-labs/opencode-plugin
@@ -581,7 +581,7 @@ The Datadog MCP server connection is managed by Copilot (or whichever agent you 
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: /ide_plugins/vscode/
@@ -617,7 +617,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 [1]: https://www.warp.dev/
@@ -653,7 +653,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 
 {{< /site-region >}}
 

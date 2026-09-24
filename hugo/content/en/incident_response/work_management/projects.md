@@ -26,7 +26,7 @@ To create a project:
 
 ## Delete a project
 
-<div class="alert alert-danger">Deleted work items cannot be recovered.</div>
+<div class="alert alert-caution">Deleted work items cannot be recovered.</div>
 
 You can delete a project from a project's Settings page.
 

@@ -63,7 +63,7 @@ Use custom metrics from traces for:
 8. Preview the result to view the real-time impact of your query through the data visualization and matching spans or traces in the live preview.
 9. Click {{< ui >}}Create Metric{{< /ui >}}.
 
-<div class="alert alert-danger"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
+<div class="alert alert-caution"> Span-based metrics are considered <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes like timestamps, user IDs, request IDs, or session IDs to avoid impacting your billing.</div>
 
 
 ## Update existing metrics

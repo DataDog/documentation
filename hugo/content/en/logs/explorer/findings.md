@@ -75,7 +75,7 @@ Each finding keeps the query and absolute time range. In Log Explorer, you can c
 ## Send findings to Bits AI and Notebooks
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Bits AI is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). You can still add findings to a Notebook.
 </div>
 {{% /site-region %}}

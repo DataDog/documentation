@@ -52,7 +52,7 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
 
 ### Deploy the Datadog Agent application
 
-<div class="alert alert-danger">Before deploying the Datadog Agent application, make sure you've installed and configured <a href="https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/install-and-configure-distribution-points">Distribution Points</a> in Configuration Manager</div>
+<div class="alert alert-caution">Before deploying the Datadog Agent application, make sure you've installed and configured <a href="https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/install-and-configure-distribution-points">Distribution Points</a> in Configuration Manager</div>
 
 1. Go to {{< ui >}}Software Library{{< /ui >}} > {{< ui >}}Overview{{< /ui >}} > {{< ui >}}Application Management{{< /ui >}} > {{< ui >}}Applications{{< /ui >}} and select the Datadog Agent application you created earlier.
 1. From the {{< ui >}}Home{{< /ui >}} tab in the {{< ui >}}Deployment{{< /ui >}} group, select {{< ui >}}Deploy{{< /ui >}}.

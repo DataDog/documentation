@@ -53,7 +53,7 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 
 5. Select a path to group by from the dropdown menu next to {{< ui >}}group by{{< /ui >}}. The metric tag name is the original attribute or tag name without the `@`. By default, custom metrics generated from RUM events do not contain tags unless they are explicitly added. You can use an attribute or tag dimension that exists in your RUM events such as `@error.source` or `env` to create metric tags. 
    
-   <div class="alert alert-danger">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
+   <div class="alert alert-caution">RUM-based custom metrics are considered as <a href="/metrics/custom_metrics/">custom metrics</a> and billed accordingly. Avoid grouping by unbounded or extremely high cardinality attributes such as timestamps, user IDs, request IDs, and session IDs.
    </div>
 
 6. For custom metrics created on sessions and views, select {{< ui >}}The active session/view starts matching the query{{< /ui >}} or {{< ui >}}The session/view becomes inactive or is completed{{< /ui >}} to set the matching criteria for sessions and views. For more information, see [Add a RUM-based metric on sessions and views](#add-a-rum-based-metric-on-sessions-and-views).
@@ -70,7 +70,7 @@ Datapoints are not created for metrics with historical data. Datapoints for your
 
 You can opt in for advanced query functionality and use globally accurate percentiles (such as P50, P75, P90, P95, and P99) for distribution metrics.
 
-<div class="alert alert-danger">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.</div>
+<div class="alert alert-caution">Enabling advanced query functionality with percentiles generates more <a href="/metrics/custom_metrics/">custom metrics</a> and is <a href="/account_management/billing/custom_metrics/">billed accordingly</a>.</div>
 
 ### Add a RUM-based metric on sessions and views
 

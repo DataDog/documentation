@@ -12,7 +12,7 @@ further_reading:
 
 When using the Datadog Lambda extension, logs are sent directly to Datadog through the Lambda Telemetry API. This makes CloudWatch Logs redundant for those functions. Disabling CloudWatch log groups for these functions reduces your AWS costs without affecting log delivery to Datadog.
 
-<div class="alert alert-danger">Only disable CloudWatch logs for functions that are <strong>already sending logs through the Datadog Lambda extension</strong>. Verify that logs are appearing in Datadog before you disable CloudWatch Logs. If your function uses the <a href="/serverless/guide/datadog_forwarder_node">Datadog Forwarder</a> instead, migrate to the extension before disabling CloudWatch logs, as the Forwarder relies on CloudWatch to forward logs.</div>
+<div class="alert alert-caution">Only disable CloudWatch logs for functions that are <strong>already sending logs through the Datadog Lambda extension</strong>. Verify that logs are appearing in Datadog before you disable CloudWatch Logs. If your function uses the <a href="/serverless/guide/datadog_forwarder_node">Datadog Forwarder</a> instead, migrate to the extension before disabling CloudWatch logs, as the Forwarder relies on CloudWatch to forward logs.</div>
 
 ## How it works
 
@@ -26,7 +26,7 @@ Because AWS evaluates Deny before Allow in IAM policy evaluation, this blocks Cl
 
 The log group ARN in the deny policy defaults to `/aws/lambda/<FUNCTION_NAME>`. If your function uses a custom log group (through `LoggingConfig`), adjust the log group ARN in the deny policy accordingly. The Datadog CLI handles this automatically.
 
-<div class="alert alert-danger">If you have multiple Lambda functions which share the same log group and execution role, applying the deny policy affects all the functions using the execution role and log group. If you would only like to disable only a subset, consider using one log group per function.</div>
+<div class="alert alert-caution">If you have multiple Lambda functions which share the same log group and execution role, applying the deny policy affects all the functions using the execution role and log group. If you would only like to disable only a subset, consider using one log group per function.</div>
 
 ## Disable CloudWatch logs
 

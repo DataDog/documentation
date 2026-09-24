@@ -493,7 +493,7 @@ span.dropTrace()
 [span dropTrace];
 {{% /tab %}}
 {{< /tabs >}}
-    <div class="alert alert-danger">
+    <div class="alert alert-caution">
         Always call <code>keepTrace()</code> or <code>dropTrace()</code> on a root span before child spans are created, and before any context propagation. Otherwise, the system can't ensure consistency, resulting in partial traces being ingested.
     </div>
 9. (Optional) To distribute traces between your environments, for example from frontend to backend, you can either do it manually or use auto instrumentation. In both cases, you can opt to inject the trace context into all requests or only into the sampled ones. A sampling of 100% is applied by default.

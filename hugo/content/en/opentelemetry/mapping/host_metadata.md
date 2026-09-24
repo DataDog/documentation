@@ -21,7 +21,7 @@ The recommended OpenTelemetry Collector configuration collects host metadata wit
 
 Send system information about hosts in OTLP through the [`Resource` field][1] as part of any signal. Datadog supports this information under any [deployment pattern][9], including gateway deployments.
 
-<div class="alert alert-danger">Direct OTLP ingest without an OpenTelemetry Collector does not populate the Infrastructure List. Use the recommended Collector configuration or the Datadog Exporter to report host metadata.</div>
+<div class="alert alert-caution">Direct OTLP ingest without an OpenTelemetry Collector does not populate the Infrastructure List. Use the recommended Collector configuration or the Datadog Exporter to report host metadata.</div>
 
 Datadog uses [OpenTelemetry semantic conventions][2] to recognize system information about your hosts. Follow the instructions for [setting up for host metrics][3] to send the necessary metrics and resource attributes to Datadog. Alternatively, you can manually send this information in the way that best fits your infrastructure.
 

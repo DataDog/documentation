@@ -138,7 +138,7 @@ The Postgres integration and, if enabled, Database Monitoring, will begin collec
 {{% tab "Option B: Custom Configuration" %}}
 ### Custom Configuration
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Important</strong>: If you tried Option A first and need to remove the <code>DD_ENABLE_HEROKU_POSTGRES</code> and <code>DD_ENABLE_DBM</code> configurations, use the commands below:
 
 ``` shell

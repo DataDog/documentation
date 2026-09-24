@@ -86,12 +86,12 @@ When you do not specify `--enable-appsec`, the AppSec extension loads shortly at
 It may take a few minutes before traces appear in the UI. If traces still do not appear after a few minutes, create a <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> page from the host machine and scroll down to the `ddtrace`. Failed diagnostic checks appear in this section to help identify any issues.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Apache ZTS:</strong>
 If the PHP CLI binary is built as NTS (non thread-safe), while Apache uses a ZTS (Zend thread-safe) version of PHP, you need to manually change the extension load for the ZTS binary. Run <code>/path/to/php-zts --ini</code> to find where Datadog's <code>.ini</code> file is located, then add the <code>-zts</code> suffix from the file name. For example, from <code>extension=ddtrace-20210902.so</code> to <code>extension=ddtrace-20210902-zts.so</code>.
 </div>
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>SELinux:</strong>
 If the httpd SELinux policies are configured on the host, functionality of the SDK may be limited, unless writing and executing temporary files is explicitly allowed in SELinux configuration:
 

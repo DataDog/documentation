@@ -34,7 +34,7 @@ To grant a user the ability to delete logs:
 
 <div class="alert alert-info">A deletion request can be canceled up to 10 days after submission.</div>
 
-<div class="alert alert-danger"><strong>For Logs</strong>: Data deletion is permanent after 10 days. Please review your deletion requests carefully.</div>
+<div class="alert alert-caution"><strong>For Logs</strong>: Data deletion is permanent after 10 days. Please review your deletion requests carefully.</div>
 
 To delete data, perform the following steps:
 

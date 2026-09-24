@@ -44,7 +44,7 @@ After you select the Amazon Security Lake destination in the pipeline UI:
 
 ##### Enable TLS
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
 
 {{% observability_pipelines/tls_settings %}}
 

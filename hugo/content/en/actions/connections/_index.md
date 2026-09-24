@@ -23,7 +23,7 @@ disable_toc: false
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Actions, Workflows, and Apps might use Connections that send customer data to third-party services outside the Datadog for Government region. See <a href="https://trust.datadoghq.com">Trust Center</a> for instructions to obtain the customer responsibility matrix and additional information about the Datadog for Government region.</div>
+<div class="alert alert-caution">Actions, Workflows, and Apps might use Connections that send customer data to third-party services outside the Datadog for Government region. See <a href="https://trust.datadoghq.com">Trust Center</a> for instructions to obtain the customer responsibility matrix and additional information about the Datadog for Government region.</div>
 {{< /site-region >}}
 
 Because actions connect with external software systems, you may need to authenticate your Datadog account to the corresponding integration. An app or workflow can run successfully only if every action that requires authentication can verify the identity of your Datadog account. When granting permissions to Datadog, ensure that you're following security best practice and only granting the permissions necessary for an app or workflow to run.
@@ -202,7 +202,7 @@ To delete a connection group:
 1. Hover over the group you want to delete and click the {{< ui >}}delete (trash can){{< /ui >}} icon.
 1. Click {{< ui >}}Delete{{< /ui >}}.
 
-<div class="alert alert-danger">Deleting a connection group impacts any workflows and apps that are using that group.</div>
+<div class="alert alert-caution">Deleting a connection group impacts any workflows and apps that are using that group.</div>
 
 ## Further reading
 

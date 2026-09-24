@@ -39,7 +39,7 @@ In addition to setting up Cloud Security with or without an Agent, you can also 
 ### Oracle Cloud Infrastructure
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Oracle Cloud Infrastructure (OCI) is not supported for the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 1. Navigate to the [Oracle Cloud Infrastructure configuration page][5] in Datadog.

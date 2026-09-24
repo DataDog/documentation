@@ -21,7 +21,7 @@ This page takes you through the process of building a basic "Hello world!" custo
 
 Before you create a custom Agent check, install the [Datadog Agent][1].
 
-<div class="alert alert-danger">To work with the latest version of the Agent, your custom Agent check must be Python 3 compatible.</div>
+<div class="alert alert-caution">To work with the latest version of the Agent, your custom Agent check must be Python 3 compatible.</div>
 
 ### Configuration
 

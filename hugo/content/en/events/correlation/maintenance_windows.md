@@ -11,7 +11,7 @@ further_reading:
 Datadog Event Management supports maintenance windows to suppress work item notifications during scheduled system maintenance. A work item that matches a maintenance condition and occurs within the maintenance time window will be automatically archived.
 
 ## Create a Maintenance Window
-<div class="alert alert-danger">You must have Work Management Shared Settings Write (cases_shared_settings_write) permissions. For more information, see <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.</div>
+<div class="alert alert-caution">You must have Work Management Shared Settings Write (cases_shared_settings_write) permissions. For more information, see <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.</div>
 
 To create a [Maintenance Window][2]:
 1. Navigate to {{< ui >}}Event Management Settings{{< /ui >}}.

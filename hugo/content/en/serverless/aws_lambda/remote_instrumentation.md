@@ -7,7 +7,7 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< img src="serverless/lambda/svl_lambda_remote.png" alt="AWS Remote Instrumentation page in Datadog, showing a 'Scope functions to instrument using tags' box and functions available for remote instrumentation." style="width:100%;" >}}

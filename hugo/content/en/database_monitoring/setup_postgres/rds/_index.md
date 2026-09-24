@@ -78,7 +78,7 @@ By default, the agent only gathers [`EXPLAIN`][15] plans for a sampling of in-fl
 
 To collect full `EXPLAIN ANALYZE` plans taken from all queries, you need to use [`auto_explain`][16], a first-party extension bundled with PostgreSQL available in all major providers. _Logging collection is a prerequisite to `auto_explain` collection_, so enable it before continuing.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Important:</strong> <code>auto_explain</code> produces log lines that may contain sensitive application data, similar to raw values in non-obfuscated SQL. Use the <a href="/account_management/rbac/permissions/#database-monitoring"><code>dbm_parameterized_queries_read</code></a> permission to control access to the resulting plans. To restrict visibility of the log lines themselves—which are visible to all users in your Datadog organization by default—also configure <a href="/logs/guide/logs-rbac">RBAC for Logs</a>. Datadog recommends using both permissions to protect sensitive information effectively.
 </div>
 

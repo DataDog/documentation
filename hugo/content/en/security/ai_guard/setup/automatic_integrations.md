@@ -9,7 +9,7 @@ further_reading:
   text: SDK
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-caution">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 AI Guard can automatically evaluate LLM calls made through supported AI ecosystem packages, without requiring manual API calls. When your application uses one of the supported packages, the Datadog SDK instruments it to evaluate those calls through AI Guard automatically. No code changes are required.

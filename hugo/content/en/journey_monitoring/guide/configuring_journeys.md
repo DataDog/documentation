@@ -118,7 +118,7 @@ Each variant requires a unique name and at least one intermediate event. For inf
 
 A start event should clearly begin the journey and represent an intentional user action.
 
-<div class="alert alert-danger">Choose an end event that confirms that the journey is complete. Clicking "Pay" or "Submit" doesn't mean the action worked. If a later event confirms success, use that event instead, so failed attempts aren't counted as completed journeys.</div>
+<div class="alert alert-caution">Choose an end event that confirms that the journey is complete. Clicking "Pay" or "Submit" doesn't mean the action worked. If a later event confirms success, use that event instead, so failed attempts aren't counted as completed journeys.</div>
 
 For example:
 

@@ -35,7 +35,7 @@ This page describes the environment variables Datadog supports for OpenTelemetry
 
 The precedence rules on this page describe how *Datadog SDKs* resolve configuration into OpenTelemetry resource attributes (for example, `service.name`, `deployment.environment.name`, `service.version`).
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   To avoid duplicate values appearing in Datadog for the same tag key, don't set both Datadog (<code>DD_*</code>) and OpenTelemetry (<code>OTEL_*</code>) environment variables for the same concept. Choose one convention.
   <br>
   See the relevant <a href="/tracing/trace_collection/library_config/">SDK Configuration page</a> for default values and more information.
@@ -130,7 +130,7 @@ Trace exporter to be used<br>
         3. Value of `service.version` key in `OTEL_RESOURCE_ATTRIBUTES`
     - **Additional Attributes**: May be added through the `DD_TAGS` configuration, or `OTEL_RESOURCE_ATTRIBUTES` if `DD_TAGS` is not set.
 
-  <div class="alert alert-danger">
+  <div class="alert alert-caution">
     Although the SDK resolves these settings internally for emitted telemetry, the Datadog Agent collects tags from all configured sources without overriding. Configuring service/environment/version using multiple inputs (for example, both <code>DD_ENV</code> and <code>OTEL_RESOURCE_ATTRIBUTES</code>) can result in multiple values appearing in Datadog (for example, <code>env:prod</code> and <code>env:dev</code>).
     To avoid duplicates, configure each concept using only one convention.
   </div>

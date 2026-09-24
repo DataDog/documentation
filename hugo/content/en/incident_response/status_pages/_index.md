@@ -308,7 +308,7 @@ For **internal** status pages, the subscription process is the same, but users m
 
 By default, status page subscription emails are sent from a Datadog email address. To send notifications from your own domain, configure a custom SMTP server in Organization Settings.
 
-<div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
+<div class="alert alert-caution">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
 1. On your status page, go to **Settings** > **Subscriptions**.
 2. Under **Email Sender Domain**, click **Organization Settings**.

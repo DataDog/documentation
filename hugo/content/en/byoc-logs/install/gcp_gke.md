@@ -235,7 +235,7 @@ kubectl create secret generic datadog-secret \
 
 Create secret for PostgreSQL connection:
 
-<div class="alert alert-danger">The password must be URL-encoded. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
+<div class="alert alert-caution">The password must be URL-encoded. For example: <code>/</code> → <code>%2F</code>, <code>+</code> → <code>%2B</code>, <code>=</code> → <code>%3D</code>.</div>
 
 ```shell
 # URL-encode the password first

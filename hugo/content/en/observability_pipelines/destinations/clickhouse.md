@@ -29,7 +29,7 @@ Before you configure the ClickHouse destination, you must have:
 
 ## Setup
 
-<div class="alert alert-danger">Only enter the identifiers for the ClickHouse endpoint URL and, if applicable, the username, password, and TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">Only enter the identifiers for the ClickHouse endpoint URL and, if applicable, the username, password, and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 Configure the ClickHouse destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 

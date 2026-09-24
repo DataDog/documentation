@@ -111,7 +111,7 @@ To generate traces compatible with Agent Observability, do one of the following:
 
 After your application starts sending data, the traces automatically appear in the [{{< ui >}}Agent Observability Traces{{< /ui >}} page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
 <li/> OpenInference spans are supported. See the <a href="#using-openinference">OpenInference example</a>.

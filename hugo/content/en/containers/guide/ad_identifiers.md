@@ -187,7 +187,7 @@ cel_selector:
     - container.name == "my-app" && (container.pod.namespace == "production" || container.pod.namespace == "staging")
 ```
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 
 Broad conditions can unintentionally target containers on your host. For example, using a containers `cel_selector` like `!container.image.reference.matches("nginx")` selects **every** container on the host except nginx, including system components and likely unrelated applications. This can lead to additional telemetry collection which can impact billing.
 

@@ -31,7 +31,7 @@ Use Observability Pipelines' Datadog Agent source to receive logs or metrics fro
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values. See <a href="/observability_pipelines/configuration/secrets_management/">Secrets Management</a> for setup instructions.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the Datadog Agent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values. See <a href="/observability_pipelines/configuration/secrets_management/">Secrets Management</a> for setup instructions.</div>
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][6], using the [API][7], or with [Terraform][8]. The instructions in this section are for setting up the source in the UI.
 

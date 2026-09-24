@@ -31,7 +31,7 @@ Under **Issues**, click **Resolve All AWS Permissions Issues**. This launches a 
 
 The policies created are named with a `datadog-aws-integration-iam-permissions-` prefix, followed by a unique hash to avoid colliding with any existing policies you have configured. You can view the CloudFormation template in Datadog's public [cloudformation-template repository][14].
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Clicking <strong>Resolve All AWS Permissions Issues</strong>:<br>
   - Does not fix broken authentication issues with the role (where the role name, external ID, or trust policy configuration does not let Datadog authenticate with your AWS account)<br>
   - Does not fix cases where a Service Control Policy (SCP) is applied that explicitly denies the required permissions<br>

@@ -31,7 +31,7 @@ Datadog automatically populates postmortems with incident data using templates y
 - To generate a postmortem, you need the **Incidents Write** permission.
 - To view a generated postmortem in Datadog Notebooks, you need the **Notebooks Read** permission.
 
-<div class="alert alert-danger">For private incidents, postmortems generated in Datadog Notebooks are accessible to any user with Notebooks read permission, regardless of whether they have access to the private incident. Take this into consideration when generating postmortems for incidents that contain sensitive data.</div>
+<div class="alert alert-caution">For private incidents, postmortems generated in Datadog Notebooks are accessible to any user with Notebooks read permission, regardless of whether they have access to the private incident. Take this into consideration when generating postmortems for incidents that contain sensitive data.</div>
 
 ## Generate a postmortem
 

@@ -21,7 +21,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 - iOS SDK version 3.17.0+
 - Android SDK version 3.14.1+
 
-<div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
+<div class="alert alert-caution">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>
 
 ## How it works
@@ -30,7 +30,7 @@ Each RUM application has a remote configuration ID that the SDK uses to retrieve
 
 When the SDK initializes, it applies cached remote settings. If no cached settings are available, it uses the settings defined in your application. The SDK checks for updates in the background and stores changes for the next initialization. If the check fails, the SDK retains its existing cache or continues to use its local settings. The check does not delay SDK initialization or interrupt RUM event collection.
 
-<div class="alert alert-danger">Published remote settings override the corresponding settings in your application. Settings that you do not enable remotely continue to use their local values. Enable only the settings that you want to manage from Datadog.</div>
+<div class="alert alert-caution">Published remote settings override the corresponding settings in your application. Settings that you do not enable remotely continue to use their local values. Enable only the settings that you want to manage from Datadog.</div>
 
 A remote configuration applies to all users and sessions initialized with its ID. You cannot target individual users or sessions. If you change the ID, the SDK treats it as a new configuration and does not use settings cached under the previous ID.
 
@@ -91,7 +91,7 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 1. Enable the override for a setting that you want to manage remotely. Choose from the settings listed in the [Configurable settings](#configurable-settings) section for your platform.
 
-   <div class="alert alert-danger">Certain settings require corresponding module imports in the iOS and Android SDKs. If your application does not import these modules, remote configuration does not work for Session Replay, distributed tracing, or profiling.</div>
+   <div class="alert alert-caution">Certain settings require corresponding module imports in the iOS and Android SDKs. If your application does not import these modules, remote configuration does not work for Session Replay, distributed tracing, or profiling.</div>
 
 2. Configure the setting by selecting a state, changing its sampling rate, or adding data.
 3. Save your changes.

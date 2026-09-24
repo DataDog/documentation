@@ -9,7 +9,7 @@ further_reading:
   text: Get Started with AI Guard
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-caution">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 Complete the following steps to set up AI Guard:

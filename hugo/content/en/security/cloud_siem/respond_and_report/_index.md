@@ -11,7 +11,7 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Workflow Automation is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

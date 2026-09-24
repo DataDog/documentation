@@ -13,7 +13,7 @@ further_reading:
   text: "Workflow Automation Documentation"
 ---
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Only Incident Management push notifications are supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 Receive mobile push notifications for [on-call alerts](#circumvent-mute-and-Do-Not-Disturb-mode-for-On-Call), [incidents](#incident-notifications), and [workflow automation updates](#workflow-automation-notifications), so you can stay informed in real time from the Datadog mobile app.
 
@@ -81,7 +81,7 @@ For more information, see the [guide on setting up your mobile device for On-Cal
 
 ### Critical push notifications
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">On-Call is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 <div class="alert alert-info">
 Critical push notifications are only available for On-Call. If you are setting up On-Call on the Datadog mobile app for the first time, an onboarding flow takes care of notification settings and permissions.
@@ -158,7 +158,7 @@ By default if you have push notifications enabled and are assigned as a commande
 
 ## Workflow automation notifications
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Workflow automation is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Create [workflow automations][3] that send mobile push notifications.

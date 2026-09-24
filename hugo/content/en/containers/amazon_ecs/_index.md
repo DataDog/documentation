@@ -247,7 +247,7 @@ To collect Live Process information for all your containers and send it to Datad
 
 #### Cloud Network Monitoring
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 This feature is only available for Linux.
 </div>
 
