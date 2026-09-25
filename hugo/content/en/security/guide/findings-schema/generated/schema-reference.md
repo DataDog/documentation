@@ -3,6 +3,7 @@ build:
   render: never
   list: never
 ---
+
 {{% collapse-content title="Core Attributes" level="h3" id="core-attributes" %}}
 
 These attributes are present on all security findings and describe the fundamental nature and status of the finding.
@@ -49,7 +50,7 @@ These attributes are present on all security findings and describe the fundament
     <tr>
       <td><code>finding_type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>, <code>sensitive_data</code>.</td>
+      <td><strong>Path:</strong> <code>@finding_type</code><br>Category of the finding. Valid values: <code>api_security</code>, <code>attack_path</code>, <code>runtime_code_vulnerability</code>, <code>static_code_vulnerability</code>, <code>host_and_container_vulnerability</code>, <code>iac_misconfiguration</code>, <code>identity_risk</code>, <code>library_vulnerability</code>, <code>misconfiguration</code>, <code>secret</code>, <code>workload_activity</code>, <code>sensitive_data</code>, <code>code_quality</code>.</td>
     </tr>
     <tr>
       <td><code>first_seen_at</code></td>
@@ -112,6 +113,11 @@ These attributes are present on all security findings and describe the fundament
       <td><strong>Path:</strong> <code>@status</code><br>Workflow status of the finding. Valid values: <code>open</code>, <code>muted</code>, <code>auto_closed</code>, <code>resolved</code>, <code>in-progress</code>.</td>
     </tr>
     <tr>
+      <td><code>time_to_acknowledge</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@time_to_acknowledge</code><br>Time in seconds between when the finding was first detected and when it was acknowledged through assignment or ticket creation.</td>
+    </tr>
+    <tr>
       <td><code>time_to_resolution</code></td>
       <td>integer</td>
       <td><strong>Path:</strong> <code>@time_to_resolution</code><br>Time in seconds between when the finding was first detected and when it was resolved.</td>
@@ -140,7 +146,7 @@ Additional resources. For example, an AWS EC2 instance can have security groups 
     <tr>
       <td><code>category</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: <code>cloud_resource</code>, <code>k8s</code>, <code>host</code>, <code>service</code>, <code>git</code>, <code>iac_resource</code>.</td>
+      <td><strong>Path:</strong> <code>@additional_resources.category</code><br>Category of the additional resource. Valid values: <code>cloud_resource</code>, <code>k8s</code>, <code>host</code>, <code>service</code>, <code>git</code>, <code>iac_resource</code>, <code>serverless_function</code>.</td>
     </tr>
     <tr>
       <td><code>configuration</code></td>
@@ -574,6 +580,11 @@ Container image where the finding was detected, including registry, repository, 
       <td><strong>Path:</strong> <code>@container_image.image_layer_digests</code><br>Digests of the image layers, in the order they were applied. Each digest is the SHA256 of the compressed layer blob.</td>
     </tr>
     <tr>
+      <td><code>is_running_as_serverless_function</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@container_image.is_running_as_serverless_function</code><br><code>true</code> if the container image is running as a serverless function, <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
       <td><code>name</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@container_image.name</code><br>Full name of the container image.</td>
@@ -885,6 +896,11 @@ Attributes identifying the Infrastructure as Code (IaC) resource related to the 
   </thead>
   <tbody>
     <tr>
+      <td><code>module</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module</code><br>Terraform module attribution for the affected resource.</td>
+    </tr>
+    <tr>
       <td><code>platform</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@iac_resource.platform</code><br>IaC (Infrastructure as Code) platform the vulnerability was found on (for example, <code>terraform</code>, <code>kubernetes</code>).</td>
@@ -893,6 +909,210 @@ Attributes identifying the Infrastructure as Code (IaC) resource related to the 
       <td><code>provider</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@iac_resource.provider</code><br>IaC (Infrastructure as Code) provider where the resource is defined (for example, <code>aws</code>, <code>gcp</code>, <code>azure</code>).</td>
+    </tr>
+  </tbody>
+</table>
+
+### Module
+
+Terraform module attribution for the affected resource.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>code_location</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location</code><br>Location of the affected resource relative to the leaf module root.</td>
+    </tr>
+    <tr>
+      <td><code>dependency_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.dependency_type</code><br>Indicates how the root module reaches the leaf module. Valid values: <code>direct</code>, <code>transitive</code>.</td>
+    </tr>
+    <tr>
+      <td><code>module_path</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path</code><br>Ordered module call chain from the customer repository declaration to the leaf module. Omitted for directly called modules.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.name</code><br>Terraform label of the leaf module.</td>
+    </tr>
+    <tr>
+      <td><code>source</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.source</code><br>Normalized, credential-free source of the leaf module.</td>
+    </tr>
+    <tr>
+      <td><code>source_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.source_type</code><br>Type of source used by the leaf module. Valid values: <code>registry</code>, <code>git</code>, <code>local</code>.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.version</code><br>Resolved registry version or Git reference of the leaf module.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Code Location
+
+Location of the affected resource relative to the leaf module root.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>column_end</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.column_end</code><br>Ending column position.</td>
+    </tr>
+    <tr>
+      <td><code>column_start</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.column_start</code><br>Starting column position.</td>
+    </tr>
+    <tr>
+      <td><code>filename</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.filename</code><br>Relative path to the file.</td>
+    </tr>
+    <tr>
+      <td><code>is_test_file</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
+      <td><code>line_end</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.line_end</code><br>Ending line number.</td>
+    </tr>
+    <tr>
+      <td><code>line_start</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.line_start</code><br>Starting line number.</td>
+    </tr>
+    <tr>
+      <td><code>symbol</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.symbol</code><br>Symbol name at the code location.</td>
+    </tr>
+    <tr>
+      <td><code>url</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.code_location.url</code><br>URL to view the file online (for example, in GitHub), highlighting the code location.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Module Path
+
+Ordered module call chain from the customer repository declaration to the leaf module. Omitted for directly called modules.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>code_location</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location</code><br>Location of the module declaration relative to its caller.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.name</code><br>Terraform label of the module call.</td>
+    </tr>
+    <tr>
+      <td><code>source</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.source</code><br>Normalized, credential-free source of the called module.</td>
+    </tr>
+    <tr>
+      <td><code>source_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.source_type</code><br>Type of source used by the called module. Valid values: <code>registry</code>, <code>git</code>, <code>local</code>.</td>
+    </tr>
+    <tr>
+      <td><code>version</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.version</code><br>Resolved registry version or Git reference of the called module.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Code Location
+
+Location of the module declaration relative to its caller.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>column_end</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.column_end</code><br>Ending column position.</td>
+    </tr>
+    <tr>
+      <td><code>column_start</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.column_start</code><br>Starting column position.</td>
+    </tr>
+    <tr>
+      <td><code>filename</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.filename</code><br>Relative path to the file.</td>
+    </tr>
+    <tr>
+      <td><code>is_test_file</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.is_test_file</code><br><code>true</code> if the code file is a test file; <code>false</code> otherwise.</td>
+    </tr>
+    <tr>
+      <td><code>line_end</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.line_end</code><br>Ending line number.</td>
+    </tr>
+    <tr>
+      <td><code>line_start</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.line_start</code><br>Starting line number.</td>
+    </tr>
+    <tr>
+      <td><code>symbol</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.symbol</code><br>Symbol name at the code location.</td>
+    </tr>
+    <tr>
+      <td><code>url</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path.code_location.url</code><br>URL to view the file online (for example, in GitHub), highlighting the code location.</td>
     </tr>
   </tbody>
 </table>
@@ -971,12 +1191,17 @@ Package manager information. A package manager automates the installation, upgra
     <tr>
       <td><code>dependency_location_text</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@package.dependency_location_text</code><br>Text representation of the dependency location, such as the file path where the vulnerable package is declared.</td>
+      <td><strong>Path:</strong> <code>@package.dependency_location_text</code><br>(deprecated) Text representation of the dependency location, such as the file path where the vulnerable package is declared. Use <code>custom.package.disk_locations</code> for on-disk file paths, or <code>custom.package.declaration</code> for the code location where the package is declared.</td>
     </tr>
     <tr>
       <td><code>dependency_type</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@package.dependency_type</code><br>Whether the package is a direct dependency, transitive dependency, or not supported if the information cannot be retrieved.</td>
+    </tr>
+    <tr>
+      <td><code>disk_locations</code></td>
+      <td>array (object)</td>
+      <td><strong>Path:</strong> <code>@package.disk_locations</code><br>Contains the on-disk locations where this package was found.</td>
     </tr>
     <tr>
       <td><code>has_suid</code></td>
@@ -1014,6 +1239,11 @@ Package manager information. A package manager automates the installation, upgra
       <td><strong>Path:</strong> <code>@package.normalized_name</code><br>Normalized name according to the ecosystem of the package or library where the vulnerability was identified.</td>
     </tr>
     <tr>
+      <td><code>purl</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.purl</code><br>Contains the PURL (Package URL), a standardized format that identifies the package's type, namespace, name, and version.</td>
+    </tr>
+    <tr>
       <td><code>root_parents</code></td>
       <td>array (object)</td>
       <td><strong>Path:</strong> <code>@package.root_parents</code><br>List of dependencies for which the package is a transitive dependency.</td>
@@ -1022,6 +1252,11 @@ Package manager information. A package manager automates the installation, upgra
       <td><code>scope</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@package.scope</code><br>Intended usage scope of the package (<code>production</code> or <code>development</code>).</td>
+    </tr>
+    <tr>
+      <td><code>type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.type</code><br>Indicates the category of the package. Valid values: <code>application</code> (package managed through an application-level package manager, such as npm, PyPI, or Maven) and <code>os</code> (package managed by an OS-level package manager, such as apt, apk, or yum).</td>
     </tr>
     <tr>
       <td><code>version</code></td>
@@ -1226,6 +1461,27 @@ Version declared for the root parent.
       <td><code>url</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@package.declaration.version.url</code><br>URL to view the file online (for example, in GitHub), highlighting the code location.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Disk Locations
+
+Contains the on-disk locations where this package was found.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>filename</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@package.disk_locations.filename</code><br>Path to the file on disk where the package was found.</td>
     </tr>
   </tbody>
 </table>
@@ -1481,6 +1737,11 @@ Information about the finding's remediation.
   </thead>
   <tbody>
     <tr>
+      <td><code>base_image</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image</code><br>Public base image upgrade that may remediate the inherited vulnerability.</td>
+    </tr>
+    <tr>
       <td><code>code_update</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@remediation.code_update</code><br>Code changes to apply to remediate the finding.</td>
@@ -1534,6 +1795,63 @@ Information about the finding's remediation.
       <td><code>root_package</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@remediation.root_package</code><br>Remediation root package information.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Base Image
+
+Public base image upgrade that may remediate the inherited vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>latest_major</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major</code><br>Latest major version of the public base image that may remediate the inherited vulnerability.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Latest Major
+
+Latest major version of the public base image that may remediate the inherited vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>image_url</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>repo_digest</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>tag</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -1645,16 +1963,16 @@ Newer container image version that may remediate the vulnerability.
   </thead>
   <tbody>
     <tr>
-      <td><code>closest_no_vulnerabilities</code></td>
+      <td><code>latest_major</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities</code><br>Closest container image version with no vulnerabilities.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major</code><br>Latest major version of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
 
-### Closest No Vulnerabilities
+### Latest Major
 
-Closest container image version with no vulnerabilities.
+Latest major version of the container image that may remediate the vulnerability.
 
 <table>
   <thead>
@@ -1668,22 +1986,22 @@ Closest container image version with no vulnerabilities.
     <tr>
       <td><code>image_url</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
-    </tr>
-    <tr>
-      <td><code>layer_digests</code></td>
-      <td>array (string)</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.layer_digests</code><br>Layer digests of the currently vulnerable container image that needs to be upgraded.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.image_url</code><br>URL of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.name</code><br>Name of the container image that may remediate the vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>repo_digest</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>tag</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.closest_no_vulnerabilities.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.tag</code><br>Tag of the container image that may remediate the vulnerability.</td>
     </tr>
   </tbody>
 </table>
@@ -1844,7 +2162,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -1978,7 +2296,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2112,7 +2430,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2246,7 +2564,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2380,7 +2698,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2514,7 +2832,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2694,7 +3012,7 @@ Current package version that the finding was detected on, before any remediation
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.base.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2828,7 +3146,7 @@ Closest package version that only contains vulnerabilities for which no fix is a
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_minimum_risk_only_no_fix_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -2962,7 +3280,7 @@ Closest package version with no critical vulnerabilities (based on base score).
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3096,7 +3414,7 @@ Closest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.closest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3230,7 +3548,7 @@ The latest remediation package version with no critical vulnerabilities (based o
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_critical.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3364,7 +3682,7 @@ Latest package version with no vulnerabilities.
     <tr>
       <td><code>is_auto_solvable</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed)</td>
+      <td><strong>Path:</strong> <code>@remediation.root_package.latest_no_vulnerabilities.is_auto_solvable</code><br>Flag to indicate whether the remediation is autosolvable (only recompiling is needed).</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -3990,6 +4308,11 @@ Evidence used to identify the resource as being critical.
       <td><code>related_resource_name</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_name</code><br>Name of a long-lived critical asset, such as a critical service, that justifies why the affected resource is considered critical.</td>
+    </tr>
+    <tr>
+      <td><code>related_resource_type</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@risk_details.is_crown_jewel.evidence.related_resource_type</code><br>Type of the long-lived critical asset that justifies why the affected resource is considered critical.</td>
     </tr>
     <tr>
       <td><code>sensitive_data</code></td>
@@ -4666,6 +4989,11 @@ Information specific to secret findings, such as the secret's validation status.
   </thead>
   <tbody>
     <tr>
+      <td><code>is_git_history_only</code></td>
+      <td>boolean</td>
+      <td><strong>Path:</strong> <code>@secret.is_git_history_only</code><br><code>true</code> if the secret was found only in past commits and is not present at the branch <code>HEAD</code>, <code>false</code> if it is present in the current code.</td>
+    </tr>
+    <tr>
       <td><code>validation_status</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@secret.validation_status</code><br>Result of attempting to validate if the secret is active.</td>
@@ -4881,6 +5209,16 @@ Information specific to vulnerabilities.
   </thead>
   <tbody>
     <tr>
+      <td><code>cisa</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa</code><br>CISA (Cybersecurity and Infrastructure Security Agency) metadata related to this vulnerability.</td>
+    </tr>
+    <tr>
+      <td><code>cisa_bod2604_remediation_timeline</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa_bod2604_remediation_timeline</code><br>(deprecated) Maximum time to remediate this vulnerability under CISA BOD 26-04 (calendar days). One of <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Recomputed as CISA/exposure inputs change. Use <code>custom.vulnerability.cisa.bod2604_remediation_timeline</code> instead.</td>
+    </tr>
+    <tr>
       <td><code>confidence</code></td>
       <td>string</td>
       <td><strong>Path:</strong> <code>@vulnerability.confidence</code><br>The assessed likelihood of the vulnerability being a true positive.</td>
@@ -4906,6 +5244,11 @@ Information specific to vulnerabilities.
       <td><strong>Path:</strong> <code>@vulnerability.hash</code><br>Vulnerability hash used to correlate the same vulnerability across SCA (Software Composition Analysis) runtime and static analysis.</td>
     </tr>
     <tr>
+      <td><code>introduced_at_commit</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit</code><br>Contains details of the Git commit that introduced the vulnerability.</td>
+    </tr>
+    <tr>
       <td><code>is_emerging</code></td>
       <td>boolean</td>
       <td><strong>Path:</strong> <code>@vulnerability.is_emerging</code><br><code>true</code> if the vulnerability is classified as an emerging threat; <code>false</code> otherwise.</td>
@@ -4926,9 +5269,236 @@ Information specific to vulnerabilities.
       <td><strong>Path:</strong> <code>@vulnerability.owasp_top10_years</code><br>The years the vulnerability appeared in the OWASP Top 10 list of critical vulnerabilities.</td>
     </tr>
     <tr>
+      <td><code>removed_at_commit</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit</code><br>Contains details of the Git commit that removed the vulnerability.</td>
+    </tr>
+    <tr>
       <td><code>stack</code></td>
       <td>object</td>
       <td><strong>Path:</strong> <code>@vulnerability.stack</code><br>The technological stack where the vulnerability was found.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Cisa
+
+CISA (Cybersecurity and Infrastructure Security Agency) metadata related to this vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>bod2604_remediation_timeline</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa.bod2604_remediation_timeline</code><br>Maximum time to remediate this vulnerability under CISA BOD 26-04 (calendar days). One of <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Recomputed as CISA/exposure inputs change.</td>
+    </tr>
+    <tr>
+      <td><code>kev_added_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa.kev_added_at</code><br>The date the vulnerability was added to the CISA Known Exploited Vulnerabilities (KEV) catalog, in Unix epoch milliseconds UTC.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Introduced At Commit
+
+Contains details of the Git commit that introduced the vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>author</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.author</code><br>Contains details about the original author of the commit.</td>
+    </tr>
+    <tr>
+      <td><code>committer</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.committer</code><br>Contains details about the person who applied the commit to the repository.</td>
+    </tr>
+    <tr>
+      <td><code>message</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.message</code><br>Contains the Git commit message.</td>
+    </tr>
+    <tr>
+      <td><code>sha</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.sha</code><br>Git commit identifier (SHA).</td>
+    </tr>
+  </tbody>
+</table>
+
+### Author
+
+Contains details about the original author of the commit.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>authored_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.author.authored_at</code><br>Timestamp in milliseconds (UTC) when the original changes were made.</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.author.email</code><br>Email address of the commit author.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.author.name</code><br>Name of the commit author.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Committer
+
+Contains details about the person who applied the commit to the repository.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>committed_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.committer.committed_at</code><br>Timestamp in milliseconds (UTC) when the changes were last significantly modified (for example, during a rebase or amend operation).</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.committer.email</code><br>Email address of the committer.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.introduced_at_commit.committer.name</code><br>Name of the committer.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Removed At Commit
+
+Contains details of the Git commit that removed the vulnerability.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>author</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.author</code><br>Contains details about the original author of the commit.</td>
+    </tr>
+    <tr>
+      <td><code>committer</code></td>
+      <td>object</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.committer</code><br>Contains details about the person who applied the commit to the repository.</td>
+    </tr>
+    <tr>
+      <td><code>message</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.message</code><br>Contains the Git commit message.</td>
+    </tr>
+    <tr>
+      <td><code>sha</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.sha</code><br>Git commit identifier (SHA).</td>
+    </tr>
+  </tbody>
+</table>
+
+### Author
+
+Contains details about the original author of the commit.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>authored_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.author.authored_at</code><br>Timestamp in milliseconds (UTC) when the original changes were made.</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.author.email</code><br>Email address of the commit author.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.author.name</code><br>Name of the commit author.</td>
+    </tr>
+  </tbody>
+</table>
+
+### Committer
+
+Contains details about the person who applied the commit to the repository.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 25%;">Attribute name</th>
+      <th style="width: 15%;">Type</th>
+      <th style="width: 60%;">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>committed_at</code></td>
+      <td>integer</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.committer.committed_at</code><br>Timestamp in milliseconds (UTC) when the changes were last significantly modified (for example, during a rebase or amend operation).</td>
+    </tr>
+    <tr>
+      <td><code>email</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.committer.email</code><br>Email address of the committer.</td>
+    </tr>
+    <tr>
+      <td><code>name</code></td>
+      <td>string</td>
+      <td><strong>Path:</strong> <code>@vulnerability.removed_at_commit.committer.name</code><br>Name of the committer.</td>
     </tr>
   </tbody>
 </table>
