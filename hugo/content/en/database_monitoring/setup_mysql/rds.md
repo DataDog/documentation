@@ -26,7 +26,7 @@ Supported MySQL versions
 : 5.6, 5.7, or 8.0+
 
 Supported MariaDB versions
-: 10.5, 10.6, or 10.11 <br/><br/>
+: 10.5, 10.6, 10.11, or 12 (MariaDB 12 requires Agent 7.84+) <br/><br/>
 Database Monitoring for MariaDB is supported with [known limitations][11].
 
 Supported Agent versions

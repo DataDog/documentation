@@ -25,7 +25,7 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 ## Before you begin
 
 Supported ClickHouse versions
-: 23.x and later (23.x, 24.x, 25.x). Recommended minimum: 23.8 LTS.
+: 23.x and later (23.x, 24.x, 25.x, 26.3). Recommended minimum: 23.8 LTS. ClickHouse 26.3 requires Agent 7.84+.
 
 Supported Agent versions
 : 7.78+
