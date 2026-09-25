@@ -1,10 +1,13 @@
 ---
 title: Events Side Panel
-description: "View detailed information about individual RUM events including context, waterfalls, and performance data in the side panel."
+description: "View detailed information about individual RUM events including context, waterfalls, performance timeseries, and performance data in the side panel."
 further_reading:
 - link: "/real_user_monitoring/explorer/search/"
   tag: "Documentation"
   text: "Search for your events"
+- link: "/real_user_monitoring/application_monitoring/mobile_vitals/#performance-timeseries"
+  tag: "Documentation"
+  text: "Mobile Vitals and performance timeseries"
 ---
 
 ## Overview
@@ -58,15 +61,15 @@ Click on events in the waterfall to access related data:
 - {{< ui >}}Resources{{< /ui >}}: View connected backend traces.
 - {{< ui >}}Long Animation Frames{{< /ui >}}: Access associated profiles for performance analysis.
 
-## Performance Timeseries
+## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance Timeseries is in Preview and is available on the iOS and Android SDKs.
+Performance Timeseries is in Preview.
 {{< /callout >}}
 
-The {{< ui >}}Performance Timeseries{{< /ui >}} section displays a {{< ui >}}Memory & CPU{{< /ui >}} graph of your application's resource usage, captured at regular intervals across the session. It is available on the session, view, and operation side panels.
-
 {{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
+
+For sessions from the iOS and Android SDKs, the {{< ui >}}Performance Timeseries{{< /ui >}} section displays a {{< ui >}}Memory & CPU{{< /ui >}} graph of your application's resource usage, captured every second across the session. It is available on the session, view, and operation side panels.
 
 The graph covers the full session. When you open it from a view or an operation, markers show where that view or operation starts and ends, so you can read its resource usage against everything that ran around it. Periods when the application was in the background are shaded.
 
@@ -110,4 +113,4 @@ Use the other tabs to explore related data:
 [4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#track-additional-performance-timings
 [5]: /real_user_monitoring/rum_without_limits/retention_filters
 [6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[7]: /real_user_monitoring/application_monitoring/mobile_vitals/#timeseries
+[7]: /real_user_monitoring/application_monitoring/mobile_vitals/#performance-timeseries

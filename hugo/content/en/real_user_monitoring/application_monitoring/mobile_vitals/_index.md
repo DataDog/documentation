@@ -1,6 +1,6 @@
 ---
 title: Mobile Vitals
-description: "Monitor key mobile performance metrics including startup times, frame rates, and resource usage across Android, iOS, Flutter, and React Native."
+description: "Monitor key mobile performance metrics including startup times, frame rates, resource usage, and performance timeseries across Android, iOS, Flutter, and React Native."
 aliases:
 - /real_user_monitoring/android/mobile_vitals
 - /real_user_monitoring/ios/mobile_vitals
@@ -19,6 +19,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
   text: Source code for dd-sdk-reactnative
+- link: /real_user_monitoring/explorer/events/#performance-timeseries
+  tag: Documentation
+  text: Explore the performance timeseries panel
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -158,22 +161,60 @@ The following telemetry provide insight into your mobile application's performan
 
 {{< /tabs >}}
 
-## Timeseries
+## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Timeseries is in Preview and is available on the iOS and Android SDKs.
+Performance Timeseries is in Preview.
 {{< /callout >}}
 
-CPU ticks per second and Memory utilization described above are averaged over the lifetime of the view. RUM Timeseries enables you to capture these measurements at regular intervals for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
+Performance Timeseries is available on the iOS and Android SDKs.
+
+Memory utilization described above is averaged over the lifetime of the view. Performance Timeseries enables you to capture memory and CPU usage every second for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
 
 Once collection is enabled, all sessions get timeseries captured.
 
 Two series are collected:
 
-- **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores.
-- **Memory**: what this measures differs by platform. On iOS, it is your application's physical footprint (`phys_footprint`), the value Xcode's memory gauge reports and the one iOS measures against your application's memory limit. On Android, it is your process's resident set size (`VmRSS`), the physical RAM currently mapped by your application, including pages shared with other processes.
+- **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores. This is not the same measurement as the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][6] and [on Android][7].
 
-Timeseries collection is off by default. To turn it on, see the advanced configuration options for [iOS][3] or [Android][4].
+### Enable performance timeseries
+
+Collection is off by default.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+Requires the Android SDK v3.14.0+.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT)
+    .build()
+
+Rum.enable(rumConfig)
+```
+
+`TimeseriesConfiguration.DEFAULT` collects both CPU and memory. To collect only one, pass the types explicitly with `TimeseriesConfiguration(setOf(TimeseriesType.MEMORY))`.
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Requires the iOS SDK v3.17.0+.
+
+```swift
+var rumConfig = RUM.Configuration(applicationID: "<rum_application_id>")
+rumConfig.timeseries = .default
+
+RUM.enable(with: rumConfig)
+```
+
+`.default` collects both CPU and memory. To collect only one, pass the types explicitly with `RUM.Configuration.Timeseries(collectTypes: [.memory])`.
+
+CPU is not collected on watchOS.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further Reading
 
@@ -184,4 +225,6 @@ Timeseries collection is off by default. To turn it on, see the advanced configu
 [3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
 [4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
 [5]: /real_user_monitoring/explorer/events/#performance-timeseries
+[6]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
+[7]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
 
