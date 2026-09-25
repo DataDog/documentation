@@ -201,6 +201,10 @@ func main() {
 
 [1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
+<div class="alert alert-warning">
+The <code>pgx</code> driver caches prepared statements by query text. <code>full</code> propagation mode injects unique trace context into each query, which defeats this cache and forces the database to re-plan every query. Datadog recommends using <code>service</code> mode with the <code>pgx</code> driver.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Java" %}}
