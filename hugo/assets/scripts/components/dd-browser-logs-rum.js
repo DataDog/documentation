@@ -95,6 +95,25 @@ const handleCdocsCustomRumAction = () => {
     }
 };
 
+const handleHomepageEnablementBannerViewSessions = () => {
+    /**
+     * Tracks the view sessions button in Datadog RUM.
+     */
+    const enablementBanner = document.querySelector('.home-enablement-banner');
+    if (enablementBanner) {
+        const viewSessionsButton = enablementBanner.querySelector('a[data-dd-action-name="homepage-enablement-banner-view-sessions"]');
+        if (viewSessionsButton) {
+            viewSessionsButton.addEventListener('click', () => {
+                window.DD_RUM.addAction('enablement_sessions_banner_cta_clicked', {
+                    button_text: viewSessionsButton.textContent,
+                });
+                console.log('viewSessionsButton clicked', viewSessionsButton);
+            });
+        }
+        console.log('no viewSessionsButton', enablementBanner);
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
@@ -107,4 +126,5 @@ document.addEventListener('DOMContentLoaded', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
     }
+    handleHomepageEnablementBannerViewSessions();
 });
