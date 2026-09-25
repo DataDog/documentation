@@ -46972,6 +46972,81 @@ components:
       required:
         - type
       type: object
+    GeneralInvestigationAttributes:
+      description: Attributes for a general investigation, not tied to a specific monitor alert.
+      oneOf:
+        - $ref: "#/components/schemas/GeneralInvestigationAttributesWithoutTimeBounds"
+        - $ref: "#/components/schemas/GeneralInvestigationAttributesWithTimeBounds"
+    GeneralInvestigationAttributesWithTimeBounds:
+      additionalProperties: false
+      description: Attributes for a general investigation with an explicit time window.
+      properties:
+        description:
+          description: A free-form description of what to investigate, up to 4,096 characters.
+          example: "Checkout latency has been elevated for the past hour."
+          maxLength: 4096
+          type: string
+        end_time:
+          description: The end of the investigation window, in Unix milliseconds.
+          example: 1700003600000
+          format: int64
+          type: integer
+        start_time:
+          description: The start of the investigation window, in Unix milliseconds.
+          example: 1700000000000
+          format: int64
+          type: integer
+        tags:
+          description: Tags that scope the investigation.
+          example:
+            - "service:checkout"
+          items:
+            type: string
+          type: array
+      required:
+        - description
+        - start_time
+        - end_time
+      type: object
+    GeneralInvestigationAttributesWithoutTimeBounds:
+      additionalProperties: false
+      description: Attributes for a general investigation without an explicit time window.
+      properties:
+        description:
+          description: A free-form description of what to investigate, up to 4,096 characters.
+          example: "Checkout latency has been elevated for the past hour."
+          maxLength: 4096
+          type: string
+        tags:
+          description: Tags that scope the investigation.
+          example:
+            - "service:checkout"
+          items:
+            type: string
+          type: array
+      required:
+        - description
+      type: object
+    GeneralInvestigationTrigger:
+      additionalProperties: false
+      description: A trigger created from a general investigation request.
+      properties:
+        general_investigation:
+          $ref: "#/components/schemas/GeneralInvestigationAttributes"
+        type:
+          $ref: "#/components/schemas/GeneralInvestigationTriggerType"
+      required:
+        - type
+        - general_investigation
+      type: object
+    GeneralInvestigationTriggerType:
+      description: The type of general investigation trigger.
+      enum:
+        - general_investigation
+      example: general_investigation
+      type: string
+      x-enum-varnames:
+        - GENERAL_INVESTIGATION
     GenerateCostTagDescriptionResponse:
       description: Response wrapping an AI-generated Cloud Cost Management tag key description.
       example:
@@ -73332,6 +73407,18 @@ components:
         - key
         - value
       type: object
+    MonitorAlertTrigger:
+      additionalProperties: false
+      description: A trigger created from a monitor alert.
+      properties:
+        monitor_alert_trigger:
+          $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
+        type:
+          $ref: "#/components/schemas/MonitorAlertTriggerType"
+      required:
+        - type
+        - monitor_alert_trigger
+      type: object
     MonitorAlertTriggerAttributes:
       description: Attributes for a monitor alert trigger.
       properties:
@@ -73354,6 +73441,14 @@ components:
         - event_id
         - event_ts
       type: object
+    MonitorAlertTriggerType:
+      description: The type of monitor alert trigger.
+      enum:
+        - monitor_alert_trigger
+      example: monitor_alert_trigger
+      type: string
+      x-enum-varnames:
+        - MONITOR_ALERT_TRIGGER
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -126191,15 +126286,23 @@ components:
         - $ref: "#/components/schemas/SoftwareCatalogTriggerWrapper"
         - $ref: "#/components/schemas/WorkflowTriggerWrapper"
     TriggerAttributes:
+      anyOf:
+        - $ref: "#/components/schemas/MonitorAlertTrigger"
+        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
       description: The trigger definition for starting an investigation.
+      example:
+        monitor_alert_trigger:
+          event_id: "1234567890123456789"
+          event_ts: 1700000000000
+          monitor_id: 12345678
+        type: monitor_alert_trigger
       properties:
+        general_investigation:
+          $ref: "#/components/schemas/GeneralInvestigationAttributes"
         monitor_alert_trigger:
           $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
         type:
           $ref: "#/components/schemas/TriggerType"
-      required:
-        - type
-        - monitor_alert_trigger
       type: object
     TriggerInvestigationRequest:
       description: Request to trigger a new investigation.
@@ -126305,10 +126408,12 @@ components:
       description: The type of trigger for the investigation.
       enum:
         - monitor_alert_trigger
+        - general_investigation
       example: monitor_alert_trigger
       type: string
       x-enum-varnames:
         - MONITOR_ALERT_TRIGGER
+        - GENERAL_INVESTIGATION
     TriggerWorkflowAutomationAction:
       description: "Triggers a Workflow Automation."
       properties:
@@ -139075,7 +139180,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Trigger a new Bits AI investigation based on a monitor alert.
+        Trigger a Bits AI investigation from a monitor alert or a general investigation.
         The `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.
       operationId: TriggerInvestigation
       requestBody:
@@ -139092,6 +139197,17 @@ paths:
                           event_ts: 1700000000000
                           monitor_id: 12345678
                         type: monitor_alert_trigger
+                    type: trigger_investigation_request
+              general_investigation:
+                value:
+                  data:
+                    attributes:
+                      trigger:
+                        general_investigation:
+                          description: "Checkout latency has been elevated for the past hour."
+                          tags:
+                            - "service:checkout"
+                        type: general_investigation
                     type: trigger_investigation_request
             schema:
               $ref: "#/components/schemas/TriggerInvestigationRequest"
