@@ -41,7 +41,7 @@ If incoming telemetry has no valid [hostname attributes][8], Datadog uses the Ag
 
 ### DDOT Collector exporting directly to Datadog
 
-The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. By default, the DDOT converter adds this processor to DDOT pipelines that send telemetry to Datadog. The processor needs resource attributes that identify the source container so it can look up infrastructure tags. For supported attributes and troubleshooting steps, see [Infrastructure tags are missing from telemetry][10].
+The DDOT Collector's `infraattributes` processor adds infrastructure attributes and tags to OTLP telemetry. By default, the DDOT converter adds this processor to DDOT pipelines that use the Datadog Exporter. The processor needs resource attributes that identify the source container so it can look up infrastructure tags. For supported attributes and troubleshooting steps, see [Infrastructure tags are missing from telemetry][10].
 
 The rest of the configuration depends on whether the DDOT Collector runs on a host.
 
@@ -174,7 +174,6 @@ processors:
 On a cloud provider, add its detector to the start of the `detectors` list:
 
 - Amazon EC2: `[ec2, env, system]`
-- Amazon ECS on EC2: `[ecs, ec2, env, system]`
 - Google Cloud: `[gcp, env, system]`
 - Azure: `[azure, env, system]`
 
@@ -449,7 +448,7 @@ The processors in these examples add the following resource attributes. Datadog 
 |---|---|---|
 | `host.arch` |  | `resource_detection` (`system`) |
 | `host.name` |  | `resource_detection` (`system` or cloud detector) |
-| `host.id` |  | `resource_detection` (`system` or cloud detector) |
+| `host.id` |  | `resource_detection` (cloud detector) |
 | `host.cpu.vendor.id` |  | `resource_detection` (`system`) |
 | `host.cpu.family` |  | `resource_detection` (`system`) |
 | `host.cpu.model.id` |  | `resource_detection` (`system`) |
@@ -481,7 +480,6 @@ The processors in these examples add the following resource attributes. Datadog 
 | `azure.vm.size` |  | `resource_detection` (`azure`) |
 | `azure.vm.scaleset.name` |  | `resource_detection` (`azure`) |
 | `azure.resourcegroup.name` |  | `resource_detection` (`azure`) |
-| `k8s.cluster.uid` |  | `k8s_attributes` |
 | `k8s.namespace.name` | `kube_namespace` | `k8s_attributes` |
 | `k8s.pod.name` | `pod_name` | `k8s_attributes` |
 | `k8s.pod.uid` |  | `k8s_attributes` |
@@ -608,7 +606,7 @@ processors:
       from_attribute: <SOURCE_ATTRIBUTE>
 ```
 
-**Note**: Custom host tags require the opt-in described in [Infrastructure List Host Information][7].
+**Note**: With the Datadog Exporter, custom host tags require the opt-in described in [Infrastructure List Host Information][7].
 
 #### In the Datadog Exporter
 
@@ -636,7 +634,7 @@ processors:
           - set(attributes["datadog.host.aliases"], ["alias1", "alias2", "alias3"])
 ```
 
-**Note**: Host aliases require the opt-in described in [Infrastructure List Host Information][7].
+**Note**: With the Datadog Exporter, host aliases require the opt-in described in [Infrastructure List Host Information][7].
 
 ### Custom container tags
 
