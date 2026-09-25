@@ -32,7 +32,7 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 | [Automatic job retries][31] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log collection][12]. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log storage][12]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
@@ -342,14 +342,6 @@ For failed GitLab pipeline executions, each error under the {{< ui >}}Errors{{< 
 
 {{< img src="ci/ci_gitlab_failure_reason_new.png" alt="GitLab Failure Reason" style="width:100%;">}}
 
-#### CI jobs failure analysis
-
-If job logs collection is enabled, CI Visibility uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
-
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
-
-For a full explanation, see the guide on [using CI jobs failure analysis][28].
-
 #### Errors provided by GitLab
 
 Error messages are supported for GitLab versions 15.2.0 and above.
@@ -391,17 +383,23 @@ The following table describes the message and domain correlated with each error 
 | `reached_max_descendant_pipelines_depth` | user   | Reached max descendant pipelines.                        |
 | `ip_restriction_failure`          | provider     | IP restriction failure.                                    |
 
-### Collect job logs
+### Manage job logs
 
-The following GitLab versions support collecting job logs:
+CI jobs failure analysis uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
+
+For a full explanation, see the guide on [using CI jobs failure analysis][28].
+
+Log Analysis is enabled by default in Datadog, but requires job log forwarding to be configured, as described below.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
+The following GitLab versions support forwarding job logs to Datadog:
 
 * GitLab.com (SaaS)
 * GitLab >= 15.3 (self-hosted) only if you are using [object storage to store job logs][7]
 * GitLab >= 14.8 (self-hosted) by enabling the `datadog_integration_logs_collection` feature flag
 
-Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
-
-To enable collection of job logs:
+To enable job log forwarding from GitLab:
 
 {{< tabs >}}
 {{% tab "GitLab.com" %}}
@@ -432,7 +430,13 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-Logs are billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+#### Store job logs
+
+After completing the steps for your GitLab version, go to [CI/CD Repository settings][35] and enable Log Storage at the Datadog organization level or for the desired repositories.
+
+Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
 For more information about processing job logs collected from the GitLab integration, see the [Processors documentation][17].
 
@@ -473,7 +477,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [9]: /logs/
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /continuous_integration/pipelines/gitlab/#enable-job-log-collection
+[12]: /continuous_integration/pipelines/gitlab/#store-job-logs
 [13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
@@ -496,3 +500,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [32]: /glossary/#running-job
 [33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
 [34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
+[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
