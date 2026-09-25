@@ -16,7 +16,7 @@ further_reading:
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
-With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
+With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, event tree, and raw JSON payload, and view triage and response instructions for the matching rule.
 
 ## Investigate Agent events
 
@@ -37,7 +37,7 @@ The Overview tab includes the following sections:
 - {{< ui >}}Where{{< /ui >}}: The infrastructure context where the event occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
 - {{< ui >}}Agent rule{{< /ui >}}: The Agent rule that matched the event, including the rule name, event name, deployment policies, policy version, and rule expression.
 - {{< ui >}}Investigation graph{{< /ui >}}: A preview of the investigation graph at the bottom of the Overview tab.
-- {{< ui >}}Process tree{{< /ui >}}: The complete process lineage from the system init process to the process that triggered the event.
+- {{< ui >}}Event Tree{{< /ui >}}: The execution lineage, affected infrastructure, and process, file, network, or kernel activity associated with the event.
 
 #### Investigation graph
 
@@ -49,20 +49,23 @@ The graph traces the event from the host through the surrounding infrastructure�
 
 Use the investigation graph to understand how the detected activity fits into the broader runtime context without reviewing every process on the host.
 
-#### Process tree
+#### Event tree
 
-The {{< ui >}}Process tree{{< /ui >}} lists the complete process lineage from the system init process to the process that triggered the event.
+The {{< ui >}}Event Tree{{< /ui >}} displays the complete execution lineage for an Agent event, including intermediate processes. It also shows the process, file, network, or kernel activity that matched the Agent rule.
 
-{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_process_tree.png" alt="Process tree listing the full process chain from systemd to the process that triggered the event" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_tree.png" alt="Event tree showing the affected host, pod, container, process lineage, and file activity for an Agent event" width="100%">}}
 
-For each process in the chain, the process tree displays:
+Each process entry displays:
 
 - {{< ui >}}Path{{< /ui >}}: The executable path and command-line arguments.
 - {{< ui >}}PID{{< /ui >}}: The process ID.
-- {{< ui >}}PPID{{< /ui >}}: The parent process ID.
 - {{< ui >}}User{{< /ui >}}: The user context under which the process ran.
 
-The process tree shows the full ancestry of the event, starting from `systemd` and continuing through intermediate processes—such as `containerd`, `runc`, and workload-specific processes—down to the command that matched the Agent rule. This helps you reconstruct the exact execution path that led to the detection.
+Expand a process entry to view its command, credentials, and executable metadata. Expand an infrastructure entry to view resource-specific information, such as status, tags, security details, or related actions.
+
+Use the {{< ui >}}Show infrastructure entries{{< /ui >}} toggle to show or hide the affected host, pod, and container.
+
+Use attributes such as executable path, arguments, PID, and user to filter for related Agent events. Select {{< ui >}}View in JSON{{< /ui >}} on a process or activity entry to open the corresponding location in the raw event JSON.
 
 ### JSON
 
