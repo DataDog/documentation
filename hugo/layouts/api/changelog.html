@@ -33,12 +33,10 @@
       {{ $bucket = "deprecated" }}
       {{ $label = "Deprecated" }}
       {{ $pillClass = "deprecated" }}
-    {{ else if eq $rawType "removed" }}
-      {{ $label = "Removed" }}
-      {{ $pillClass = "removed" }}
-    {{ else if eq $rawType "breaking" }}
+    {{ else if or (eq $rawType "removed") (eq $rawType "breaking") }}
+      {{ $bucket = "breaking" }}
       {{ $label = "Breaking" }}
-      {{ $pillClass = "removed" }}
+      {{ $pillClass = "breaking" }}
     {{ end }}
 
     {{ $normalizedEntry := dict
@@ -67,16 +65,14 @@
 {{ $typeFilters := slice
   (dict "bucket" "added" "label" "Added")
   (dict "bucket" "modified" "label" "Modified")
-  (dict "bucket" "deprecated" "label" "Deprecated")
-  (dict "bucket" "removed" "label" "Removed")
   (dict "bucket" "breaking" "label" "Breaking")
 }}
 
 <div class="col-12 api-changelog py-3">
   <div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
-    <h1 id="changelog">
+    <h2 id="changelog">
       <a href="#changelog">{{ .Title }}</a>
-    </h1>
+    </h2>
     {{ partial "api/api-copy-btn.html" . }}
   </div>
 
@@ -90,33 +86,12 @@
     </div>
   {{ else }}
     <div class="api-changelog-filterbar">
-      <div class="api-changelog-tabs" role="group" aria-label="Filter by change type">
+      <div class="api-changelog-tabs" role="tablist" aria-label="Filter by change type">
         <button type="button" class="api-changelog-tab is-active" data-changelog-filter="all">All</button>
         {{ range $typeFilters }}
-          {{ if gt (len (where $allEntries "bucket" .bucket)) 0 }}
-            <button type="button" class="api-changelog-tab" data-changelog-filter="{{ .bucket }}">{{ .label }}</button>
-          {{ end }}
+          <button type="button" class="api-changelog-tab" data-changelog-filter="{{ .bucket }}">{{ .label }}</button>
         {{ end }}
       </div>
-      <div class="api-changelog-filter-divider"></div>
-      <div class="api-changelog-filter-group">
-        <label for="api-changelog-tag-filter" class="api-changelog-filter-label">API product</label>
-        <select id="api-changelog-tag-filter" class="api-changelog-select">
-          <option value="all">All products</option>
-          {{ range $tagSections }}
-            <option value="{{ .slug }}">{{ .name }}</option>
-          {{ end }}
-        </select>
-      </div>
-    </div>
-
-    <div class="api-changelog-summary">
-      <span>Showing <strong id="api-changelog-range">1–{{ math.Min (len $allEntries) 20 }}</strong> of
-        <strong id="api-changelog-shown-count">{{ len $allEntries }}</strong>
-        <span id="api-changelog-change-label">{{ if eq (len $allEntries) 1 }}change{{ else }}changes{{ end }}</span> across
-        <strong id="api-changelog-tag-count">{{ len $tagSections }}</strong>
-        <span id="api-changelog-tag-label">API {{ if eq (len $tagSections) 1 }}product{{ else }}products{{ end }}</span></span>
-      <button type="button" id="api-changelog-clear-filters" class="api-changelog-clear d-none">Clear filters</button>
     </div>
 
     <div class="api-changelog-timeline">
@@ -136,10 +111,12 @@
           {{ $currentDate = $entry.date }}
         {{ end }}
 
-              <article class="api-changelog-entry{{ if ge $entryIndex 20 }} d-none{{ end }}" data-bucket="{{ $entry.bucket }}" data-tag="{{ $entry.tag }}">
+              <article class="api-changelog-entry{{ if ge $entryIndex 20 }} d-none{{ end }}" data-bucket="{{ $entry.bucket }}">
                 <span class="api-changelog-pill api-changelog-pill--{{ $entry.pillClass }}">{{ $entry.label }}</span>
                 <div class="api-changelog-entry-body">
-                  <span class="api-changelog-entry-tag">{{ $entry.tagName }}</span>
+                  <div class="api-changelog-entry-meta">
+                    <span class="api-changelog-tag">API product: <strong>{{ $entry.tagName }}</strong></span>
+                  </div>
                   <h3 class="api-changelog-entry-title">
                     {{ if $entry.link }}<a href="{{ $entry.link }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}
                   </h3>
@@ -163,7 +140,7 @@
 
     <div id="api-changelog-empty-state" class="api-changelog-empty d-none">
       <p class="api-changelog-empty-title">No changes match your filters</p>
-      <p class="api-changelog-empty-subtitle">Try removing the change type or API product filter.</p>
+      <p class="api-changelog-empty-subtitle">Try another change type.</p>
       <button type="button" class="api-changelog-clear" data-changelog-reset>Clear filters</button>
     </div>
   {{ end }}

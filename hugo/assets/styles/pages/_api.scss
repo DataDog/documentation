@@ -40,8 +40,6 @@ $ddpurple: #632ca6;
 
 // Single API changelog page. Entries are sourced from data/changelog/<tag>.yml.
 .api-changelog {
-    max-width: 900px;
-
     .api-intro-header {
         margin-bottom: 0.5rem;
     }
@@ -50,120 +48,96 @@ $ddpurple: #632ca6;
 .api-changelog-intro {
     max-width: 720px;
     margin-bottom: 1.5rem;
-    color: $gray-darkish;
-    font-size: 1rem;
+    color: $gray-dark;
+    font-size: 16px;
     line-height: 1.6;
 }
 
 .api-changelog-filterbar {
+    z-index: 5;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 1rem;
-    padding: 0.75rem 1rem;
-    border: 1px solid $gray-border;
-    border-radius: 6px 6px 0 0;
-    background: $gray-lightest;
+    padding: 14px 0;
+    margin-bottom: 8px;
+    background: $white;
+    border-bottom: 1px solid $gray-border;
+
+    @include media-breakpoint-up(lg) {
+        position: sticky;
+        top: 130px;
+    }
 }
 
 .api-changelog-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
+    display: inline-flex;
+    border: 1px solid $gray-border;
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .api-changelog-tab {
-    padding: 0.35rem 0.75rem;
-    border: 1px solid transparent;
-    border-radius: 50rem;
-    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    height: 32px;
+    padding: 0 14px;
+    border: 0;
+    border-right: 1px solid $gray-border;
+    background: $white;
     color: $gray-darkish;
-    font-size: 0.8125rem;
+    font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
+    transition: all 0.12s ease;
 
-    &:hover,
-    &.is-active {
-        background: rgba($ddpurple, 0.1);
-        color: $ddpurple;
+    &:last-child {
+        border-right: 0;
+    }
+
+    &:hover {
+        background: $gray-lightest;
     }
 
     &.is-active {
-        border-color: rgba($ddpurple, 0.25);
+        background: $ddpurple;
+        color: $white;
     }
-}
-
-.api-changelog-filter-divider {
-    width: 1px;
-    align-self: stretch;
-    background: $gray-border;
-}
-
-.api-changelog-filter-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-left: auto;
-}
-
-.api-changelog-filter-label {
-    margin: 0;
-    color: $gray-darkish;
-    font-size: 0.8125rem;
-    font-weight: 600;
-}
-
-.api-changelog-select {
-    min-width: 150px;
-    height: 34px;
-    padding: 0 2rem 0 0.625rem;
-    border: 1px solid $gray-light;
-    border-radius: 4px;
-    background-color: white;
-    color: $gray-dark;
-    font-size: 0.8125rem;
-}
-
-.api-changelog-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    min-height: 44px;
-    padding: 0.625rem 1rem;
-    border: 1px solid $gray-border;
-    border-top: 0;
-    color: $gray-darkish;
-    font-size: 0.8125rem;
 }
 
 .api-changelog-clear {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    color: $brand-primary;
-    font-size: 0.8125rem;
-    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    border: 1px solid $gray-border;
+    border-radius: 4px;
+    background: $white;
+    color: $gray-dark;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .api-changelog-timeline {
-    margin-top: 2rem;
+    position: relative;
+    margin-top: 1rem;
 }
 
 .api-changelog-date-section {
     position: relative;
-    padding: 0 0 2rem 2rem;
-    border-left: 2px solid rgba($ddpurple, 0.18);
+    padding: 0 0 32px 26px;
+    border-left: 2px solid $gray-border;
+    margin-left: 6px;
 
     &::before {
         content: '';
         position: absolute;
-        top: 0.5rem;
+        top: 6px;
         left: -7px;
         width: 12px;
         height: 12px;
-        border: 3px solid white;
         border-radius: 50%;
-        background: $ddpurple;
-        box-shadow: 0 0 0 1px rgba($ddpurple, 0.3);
+        background: $white;
+        border: 3px solid $gray-light;
     }
 
     &:last-child {
@@ -174,12 +148,16 @@ $ddpurple: #632ca6;
 .api-changelog-date-header {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 14px;
 
     h2 {
         margin: 0;
-        font-size: 1.25rem;
+        padding: 0;
+        font-family: monospace;
+        font-size: 22px;
+        font-weight: 700;
+        pointer-events: auto;
+        background-clip: border-box;
 
         a {
             color: $gray-dark;
@@ -188,71 +166,80 @@ $ddpurple: #632ca6;
     }
 }
 
-.api-changelog-entry-tag {
-    display: inline-block;
-    margin-bottom: 0.35rem;
-    padding: 0.15rem 0.55rem;
-    border-radius: 50rem;
-    background: rgba($ddpurple, 0.1);
-    color: $ddpurple;
-    font-size: 0.6875rem;
-    font-weight: 600;
-}
-
 .api-changelog-entries {
-    overflow: hidden;
-    border: 1px solid $gray-border;
-    border-radius: 6px;
-    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .api-changelog-entry {
-    display: grid;
-    grid-template-columns: 90px minmax(0, 1fr);
-    gap: 1rem;
-    padding: 1rem;
-    border-bottom: 1px solid $gray-border;
-
-    &:last-child {
-        border-bottom: 0;
-    }
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    background: $white;
+    border: 1px solid $gray-border;
+    border-radius: 6px;
 }
 
 .api-changelog-pill {
-    align-self: start;
-    justify-self: start;
-    padding: 0.2rem 0.55rem;
-    border-radius: 50rem;
-    font-size: 0.6875rem;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 4px;
+    color: $white;
+    font-size: 13px;
     font-weight: 700;
-    line-height: 1.2;
+    letter-spacing: 0.02em;
     white-space: nowrap;
 
     &--added {
-        background: rgba($brand-success, 0.12);
-        color: $brand-success;
+        background: $brand-success;
     }
 
     &--modified {
-        background: rgba($ddpurple, 0.12);
-        color: $ddpurple;
+        background: $ddpurple;
     }
 
     &--deprecated {
-        background: rgba($brand-warning, 0.14);
-        color: darken($brand-warning, 15%);
+        background: $brand-warning;
+        color: $gray-dark;
     }
 
-    &--removed {
-        background: rgba($brand-danger, 0.12);
-        color: $brand-danger;
+    &--breaking {
+        background: $brand-danger;
+    }
+}
+
+.api-changelog-entry-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.api-changelog-entry-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.api-changelog-tag {
+    color: $gray-darkish;
+
+    strong {
+        color: $gray-dark;
     }
 }
 
 .api-changelog-entry-title {
     margin: 0;
-    font-size: 1rem;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.6;
 
     a {
         color: $gray-dark;
@@ -350,18 +337,9 @@ $ddpurple: #632ca6;
 }
 
 @include media-breakpoint-down(md) {
-    .api-changelog-filter-divider {
-        display: none;
-    }
-
-    .api-changelog-filter-group {
-        width: 100%;
-        margin-left: 0;
-    }
-
     .api-changelog-entry {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
+        flex-direction: column;
+        gap: 8px;
     }
 }
 
