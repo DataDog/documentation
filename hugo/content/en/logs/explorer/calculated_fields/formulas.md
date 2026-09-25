@@ -320,11 +320,11 @@ Checks if an attribute or expression is null.
 
 ### Regex
 
-Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1], such as literals, character classes, and quantifiers. Escaping differs: an extraction pattern is a bare field, while a pattern here is a double-quoted string argument. Unlike extraction, capture groups here do not need a name: `regexp_replace` can reference an unnamed group positionally with `$1` through `$9`. The same [pattern performance][2] guidance applies.
+Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1], such as literals, character classes, and quantifiers.
 
 <h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
 
-Returns `true` when the pattern matches anywhere in the value, and `false` otherwise.
+Returns `true` when the pattern matches anywhere in the value, and `false` otherwise. `pattern` is a double-quoted string, so escape a backslash. For example, write `"\\d"` for `\d`.
 
 {{% collapse-content title="Example" level="h5" expanded=false %}}
 
@@ -361,4 +361,3 @@ Returns `input` with matched text replaced. Use `$1` through `$9` in `replacemen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/calculated_fields/extractions/#regex
-[2]: /logs/explorer/calculated_fields/extractions/#pattern-performance

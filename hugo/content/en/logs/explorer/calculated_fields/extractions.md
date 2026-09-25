@@ -13,22 +13,24 @@ Use Calculated Fields Extractions to extract values from your logs in the Log Ex
 
 ## Overview
 
-Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with AI-powered parsing, or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a [regular expression (regex)](#regex) with named capture groups.
+Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with [Tap to Parse](#tap-to-parse), or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a [regular expression (regex)](#regex) with named capture groups.
+
+Extractions run before formulas. A calculated field formula can reference a field that an extraction produces. The reverse is not possible. You cannot extract from a calculated field.
 
 To create an extraction calculated field, see [Create a calculated field][1].
 
-## Automatic parsing
+## Tap to Parse
 
-Use AI-powered automatic parsing to generate Grok rules from your log data. Datadog analyzes the content of your log message and automatically generates an extraction rule, eliminating the need to manually write Grok patterns.
+Use Tap to Parse to generate an extraction rule from your log data automatically. Datadog analyzes your log message and generates a Grok rule or a regex pattern.
 
-{{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of AI-powered Grok parsing in Datadog Calculated Fields" style="width:100%;" >}}
+{{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of Tap to Parse in Datadog Calculated Fields" style="width:100%;" >}}
 
-There are two ways to access automatic parsing from the log side panel:
+There are two ways to access Tap to Parse from the log side panel:
 
-1. Click the {{< ui >}}AI{{< /ui >}} button <i class="icon-bits-ai"></i> next to the copy button.
-2. Highlight a specific portion of the log message and click the {{< ui >}}AI{{< /ui >}} button <i class="icon-bits-ai"></i> in the popup menu.
+1. Click {{< ui >}}Tap to Parse{{< /ui >}} next to the copy button.
+2. Highlight a specific portion of the log message and click {{< ui >}}Tap to Parse{{< /ui >}} in the popup menu.
 
-When you click the {{< ui >}}AI{{< /ui >}} button, Datadog automatically populates the Calculated Field form:
+When you click {{< ui >}}Tap to Parse{{< /ui >}}, Datadog automatically populates the Calculated Field form:
 
 1. {{< ui >}}Extract from{{< /ui >}}: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
 2. {{< ui >}}Log sample{{< /ui >}}: Automatically populated with your selected log.
@@ -38,7 +40,11 @@ Review and modify the generated rule as needed. You can edit it manually or clic
 
 <div class="alert alert-tip">Use the thumbs up or thumbs down buttons to provide inline feedback and help improve the feature.</div>
 
-## Syntax
+## Pattern Types
+
+Write an extraction pattern as Grok or as a regex.
+
+### Grok
 
 Extraction fields use Grok patterns to identify and capture values from a log attribute. A Grok pattern is composed of one or more tokens in the form:
 ```
@@ -49,8 +55,6 @@ Extraction fields use Grok patterns to identify and capture values from a log at
 
 You can chain multiple patterns together to parse complex log messages.
 
-## Supported matchers and filters at query time
-
 <div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>). For long-term parsing needs, define a log pipeline.</div>
 
 Query-time Grok parsing in the Log Explorer supports a limited subset of matchers and filters. Each matcher or filter is used in a Grok pattern with the format:
@@ -59,7 +63,7 @@ Query-time Grok parsing in the Log Explorer supports a limited subset of matcher
 %{MATCHER:field_name}
 ```
 
-### Matchers
+#### Matchers
 
 | Matcher | Example Grok Pattern |
 | ------- | -------------------- |
@@ -69,7 +73,7 @@ Query-time Grok parsing in the Log Explorer supports a limited subset of matcher
 | `integer`<br>_Integer values_ | `count=%{integer:count}` |
 | `notSpace`<br>_Non-whitespace characters_ | `path=%{notSpace:request_path}` |
 
-### Filters
+#### Filters
 Apply filters to cast extracted values into numeric types. Filters use the same pattern syntax as matches.
 
 | Filter | Example Grok Pattern |
@@ -77,7 +81,7 @@ Apply filters to cast extracted values into numeric types. Filters use the same 
 | `number`<br>_Parses numeric strings as numbers_ | `latency=%{number:lat}` |
 | `integer`<br>_Parses numeric strings as integers_ | `users=%{integer:user_count}` |
 
-### Example
+#### Example
 Use this feature to analyze log fields on-demand without modifying your ingestion pipeline.
 **Log line**:
 
@@ -95,15 +99,11 @@ country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_pat
 - `#request_path = /index.html`
 - `#status = 200 OK`
 
-## Regex
-
-Datadog evaluates the regex pattern when you run a query. This means no data is reindexed, and you can add, edit, or remove a pattern at any time.
-
-Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
+### Regex
 
 Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use an extracted value as a number, reference it in an arithmetic formula.
 
-### Supported syntax
+#### Supported syntax
 
 | Feature | Example | Description |
 |---|---|---|
@@ -128,7 +128,7 @@ A value can contain multiple lines, such as a stack trace. To match a newline wi
 
 Write patterns with a single backslash, as shown. In [formula regex functions][2], a pattern is a quoted string argument and each backslash must be doubled.
 
-### Capture group rules
+#### Capture group rules
 
 A pattern must follow these rules:
 
@@ -139,7 +139,7 @@ A pattern must follow these rules:
 - Each name must be unique. The name becomes the name of the extracted field.
 - Each name must start with a letter, and contain only letters and digits (`[A-Za-z][A-Za-z0-9]*`). Names like `client_ip`, `http.status`, or `client-ip` are not valid capture group names.
 
-### Example
+#### Example
 
 **Log line**:
 
@@ -169,7 +169,7 @@ This pattern follows the capture group rules:
 
 You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
 
-### Invalid patterns
+#### Invalid patterns
 
 Each pattern below breaks one capture group rule.
 
@@ -180,7 +180,7 @@ Each pattern below breaks one capture group rule.
 | `(?<client_ip>\S+)` | The name has an underscore. A name can have only letters and digits. |
 | `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
 
-### Pattern performance
+#### Pattern performance
 
 Datadog matches a pattern fastest when it can tell where a match must start. A pattern that begins with `^` or with literal text gives it that starting point. A pattern that begins with `.*` does not, so it is tried at every position in the value.
 
