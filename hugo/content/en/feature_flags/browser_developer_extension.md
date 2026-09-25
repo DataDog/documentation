@@ -34,7 +34,7 @@ Before you begin, you need:
 
 ## Install the extension
 
-Install the [Datadog Browser SDK developer extension][1] from the Chrome Web Store.
+Install the [Datadog Browser SDK developer extension][1] from the Chrome Web Store. Restart your browser to see the **Browser SDK** tab in DevTools.
 
 ## Add the DatadogDevtools wrapper
 
