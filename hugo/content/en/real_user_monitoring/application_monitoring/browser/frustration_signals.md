@@ -8,7 +8,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/analyze-user-experience-frustration-signals-with-rum/'
   tag: 'Blog'
   text: 'Detect user pain points with Datadog Frustration Signals'
-- link: '/real_user_monitoring/platform/dashboards/usage#frustration-signals'
+- link: '/real_user_monitoring/administer_and_extend_rum/dashboards/usage#frustration-signals'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
 - link: '/real_user_monitoring/explorer'
@@ -37,6 +37,8 @@ Error Clicks
 By enabling frustration signals, Datadog collects all three signal types by default.
 
 ## Requirements
+
+For setup steps, see [Track frustration signals][11].
 
 First, you need the Browser RUM SDK version >= 4.14.0.
 
@@ -159,7 +161,7 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 
 [1]: https://app.datadoghq.com/rum/list
 [2]: /real_user_monitoring/explorer/
-[3]: /real_user_monitoring/platform/dashboards/usage#frustration-signals
+[3]: /real_user_monitoring/administer_and_extend_rum/dashboards/usage#frustration-signals
 [4]: https://app.datadoghq.com/rum/explorer
 [5]: /dashboards/
 [6]: /monitors/
@@ -167,4 +169,5 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [8]: /session_replay/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com
+[11]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 

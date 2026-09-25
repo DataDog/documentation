@@ -1,5 +1,11 @@
 ---
 title: Kotlin Multiplatform Crash Reporting and Error Tracking
+aliases:
+- /real_user_monitoring/application_monitoring/kotlin_multiplatform/error_tracking
+- /real_user_monitoring/error_tracking/kotlin-multiplatform
+- /real_user_monitoring/error_tracking/kotlin_multiplatform
+- /real_user_monitoring/error_tracking/mobile/kotlin-multiplatform
+- /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/error_tracking
 type: multi-code-lang
 code_lang: kotlin-multiplatform
 code_lang_weight: 50
@@ -143,7 +149,7 @@ App hangs are an iOS-specific type of error that happens when the application is
 By default, app hang reporting is **disabled**, but you can enable it and set your own threshold to monitor app hangs that last for more than a specified duration by using the `setAppHangThreshold` (available from iOS source set only) initialization method. For more information, see [iOS Crash Reporting and Error Tracking - Add App Hang Reporting][102].
 
 [101]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[102]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[102]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -446,6 +452,6 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 [6]: /real_user_monitoring/kotlin_multiplatform/data_collected/
 [7]: /account_management/api-app-keys/#client-tokens
 [8]: /getting_started/tagging/using_tags/
-[9]: /real_user_monitoring/error_tracking/mobile/android/#get-deobfuscated-stack-traces
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
+[9]: /error_tracking/frontend/mobile/android/#get-deobfuscated-stack-traces
+[10]: /error_tracking/frontend/mobile/ios/#get-deobfuscated-stack-traces
 [11]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration#track-background-events

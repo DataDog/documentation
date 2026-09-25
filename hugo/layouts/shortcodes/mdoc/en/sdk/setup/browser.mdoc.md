@@ -5,24 +5,15 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your web applications with the Datadog Browser SDK. The Browser SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][2], [Session Replay][3], and [Product Analytics][4].
 
-Select a setup method based on your application stack and workflow:
-
-- **Manual client-side setup**: Add the SDK directly to your frontend code when you need full control over initialization and configuration.
-- **Agentic Onboarding**: Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
-- **Server-side auto-instrumentation (RUM only)**: Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
-
 The Browser SDK supports all modern desktop and mobile browsers.
 
 ## Setup
 
 {% collapse-content title="Option 1: Manual client-side setup" level="h3" %}
 
-{% stepper level="h4" %}
+Add the SDK directly to your frontend code when you need full control over initialization and configuration.
 
-{% step title="Create the application in the UI" %}
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][5] and select the JavaScript (JS) application type.
-2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
-{% /step %}
+{% stepper level="h4" %}
 
 {% step title="Install the Browser SDK" %}
 Choose the installation method for the Browser SDK.
@@ -32,7 +23,7 @@ Choose the installation method for the Browser SDK.
 
 Installing through Node Package Manager (npm) registry is recommended for modern web applications. The Browser SDK is packaged with the rest of your frontend JavaScript code. It has no impact on page load performance. However, the SDK may miss errors, resources, and user actions triggered before the SDK is initialized. Datadog recommends using a matching version with the Browser Logs SDK.
 
-Add [`@datadog/browser-rum`][6] to your `package.json` file, for example if you use npm cli:
+Add [`@datadog/browser-rum`][5] to your `package.json` file, for example if you use npm cli:
 
 ```shell
 npm install --save @datadog/browser-rum
@@ -252,7 +243,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {% step title="Initialize the Browser SDK" %}
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
 
-In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][7].
+In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][6].
 
 {% tabs %}
 {% tab label="NPM" %}
@@ -329,11 +320,11 @@ window.DD_RUM.init({
 
 #### Configure tracking consent (GDPR compliance)
 
-To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets you provide the [tracking consent value at initialization][8].
+To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets you provide the [tracking consent value at initialization][7].
 
 #### Configure Content Security Policy (CSP)
 
-If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][9] for additional setup steps.
+If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][8] for additional setup steps.
 {% /step %}
 
 {% /stepper %}
@@ -342,20 +333,24 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 {% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
-Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+Use an AI-assisted workflow to automatically configure and deploy the SDK with minimal manual steps.
+
+Use the [Agentic Onboarding][9] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
 {% /collapse-content %}
 
 {% collapse-content title="Option 3: Server-side auto-instrumentation (RUM only)" level="h3" %}
 
+Inject the SDK through your web server or proxy when you cannot modify frontend code directly.
+
 {% site-region region="gov,gov2" %}
 {% alert level="danger" %}
-RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation][14] instead.
+RUM Auto-Instrumentation is not available for the selected site ({% region-param key="dd_site_name" /%}). Use [Client-Side instrumentation][10] instead.
 {% /alert %}
 {% /site-region %}
 
 {% alert level="info" %}
-Server-side auto-instrumentation only supports RUM. For Error Tracking, Session Replay, or Product Analytics, use [manual client-side setup][14].
+Server-side auto-instrumentation only supports RUM. For Error Tracking, Session Replay, or Product Analytics, use [manual client-side setup][10].
 {% /alert %}
 
 RUM Auto-Instrumentation allows you to add RUM JS to your web app HTML. It works by injecting the RUM Browser SDK into the HTML responses being served through a web server or proxy. After auto-instrumentation is set up, you can manage configurations from the UI.
@@ -367,7 +362,7 @@ RUM Auto-Instrumentation requires Datadog Agent version 7.34+.
 Select a platform to start collecting RUM data on your application:
 
 {% alert level="info" %}
-To request support for a web server that is not listed here, [fill out this form][13].
+To request support for a web server that is not listed here, [fill out this form][11].
 {% /alert %}
 
 {% card-grid card_width=130 %}
@@ -382,25 +377,14 @@ To request support for a web server that is not listed here, [fill out this form
 
 {% /collapse-content %}
 
-## Start monitoring
-
-Visualize the [data collected][11] in [dashboards][12] or create a search query in the [RUM Explorer][5].
-
-Your application appears as pending on the Applications page until Datadog starts receiving data. If data takes time to appear, see [Troubleshooting Browser SDK Issues][15].
-
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
 [3]: /session_replay/browser/
 [4]: /product_analytics/
-[5]: https://app.datadoghq.com/rum/list
-[6]: https://www.npmjs.com/package/@datadog/browser-rum
-[7]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[8]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-tracking-consent
-[9]: /integrations/content_security_policy_logs/
-[10]: /agentic_onboarding/setup/
-[11]: /real_user_monitoring/application_monitoring/browser/data_collected/
-[12]: /real_user_monitoring/platform/dashboards/
-[13]: /private-beta/rum-sdk-auto-injection/
-[14]: /real_user_monitoring/application_monitoring/browser/setup/client
-[15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
-
+[5]: https://www.npmjs.com/package/@datadog/browser-rum
+[6]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
+[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#user-tracking-consent
+[8]: /integrations/content_security_policy_logs/
+[9]: /agentic_onboarding/setup/
+[10]: /real_user_monitoring/application_monitoring/browser/setup/client
+[11]: /private-beta/rum-sdk-auto-injection/

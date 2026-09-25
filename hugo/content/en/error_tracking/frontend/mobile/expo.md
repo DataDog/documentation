@@ -1,6 +1,9 @@
 ---
 title: Expo Crash Reporting and Error Tracking
 description: Set up error tracking and crash reporting for Expo mobile apps in Datadog"
+aliases:
+- /real_user_monitoring/error_tracking/expo
+- /real_user_monitoring/error_tracking/mobile/expo
 type: multi-code-lang
 code_lang: expo
 code_lang_weight: 30

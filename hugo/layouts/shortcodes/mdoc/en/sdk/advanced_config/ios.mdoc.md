@@ -7,187 +7,7 @@ If you have not set up the RUM iOS SDK yet, follow the [in-app setup instruction
 
 ## Enrich user sessions
 
-iOS RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
-
-### Custom views
-
-In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views such as `viewControllers` when they become visible and interactive. Stop tracking when the view is no longer visible using the following methods in `RUMMonitor.shared()`:
-
-- `.startView(viewController:)`
-- `.stopView(viewController:)`
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your `UIViewController`:
-let rum = RUMMonitor.shared()
-
-override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    rum.startView(viewController: self)
-}
-
-override func viewDidDisappear(_ animated: Bool) {
-  super.viewDidDisappear(animated)
-  rum.stopView(viewController: self)
-}
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-@import DatadogRUM;
-// in your `UIViewController`:
-
-DDRUMMonitor *rum = [DDRUMMonitor shared];
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-
-    [rum startViewWithViewController:self name:nil attributes:nil];
-}
-
-- (void)viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-
-    [rum stopViewWithViewController:self attributes:nil];
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Custom actions
-
-In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
-
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your `UIViewController`:
-
-let rum = RUMMonitor.shared()
-
-@IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
-    rum.addAction(
-        type: .tap,
-        name: sender.currentTitle ?? ""
-    )
-}
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-- (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
-    NSString *name = sender.currentTitle ? sender.currentTitle : @"";
-    [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Custom resources
-
-In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
-
-- `.startResource(resourceKey:request:)`
-- `.stopResource(resourceKey:response:)`
-- `.stopResourceWithError(resourceKey:error:)`
-- `.stopResourceWithError(resourceKey:message:)`
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your network client:
-
-let rum = RUMMonitor.shared()
-
-rum.startResource(
-    resourceKey: "resource-key",
-    request: request
-)
-
-rum.stopResource(
-    resourceKey: "resource-key",
-    response: response
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-// in your network client:
-
-[[DDRUMMonitor shared] startResourceWithResourceKey:@"resource-key"
-                                            request:request
-                                         attributes:@{}];
-
-[[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
-                                          response:response
-                                        attributes:@{}];
-```
-
-{% /tab %}
-{% /tabs %}
-
-**Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Custom errors
-
-To track specific errors, notify `RUMMonitor.shared()` when an error occurs using one of following methods:
-
-- `.addError(message:)`
-- `.addError(error:)`
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-let rum = RUMMonitor.shared()
-rum.addError(message: "error message.")
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-[[DDRUMMonitor shared] addErrorWithMessage:@"error message." stack:nil source:DDRUMErrorSourceCustom attributes:@{}];
-```
-
-{% /tab %}
-{% /tabs %}
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4] and the [Error Attributes documentation][5].
+For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=ios).
 
 ## Track custom global attributes
 
@@ -213,42 +33,7 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use the `Datadog.setUserInfo(id:name:email:)` API.
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogCore
-
-Datadog.setUserInfo(id: "1234", name: "John Doe", email: "john@doe.com")
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-[DDDatadog setUserInfoWithId:@"1234" name:@"John Doe" email:@"john@doe.com" extraInfo:@{}];
-```
-
-{% /tab %}
-{% /tabs %}
+See [Track user IDs][13] for instructions on adding user information to your RUM sessions.
 
 ### Track user accounts
 
@@ -424,7 +209,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : The data scrubbing callback for resources. This can be used to modify or drop resource events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
 
 `sessionSampleRate`
-: The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`.
+: The sampling rate for RUM sessions. The `sessionSampleRate` value must be between `0.0` and `100.0`. A value of `0.0` means no sessions are sent, while `100.0` means that all sessions are sent to Datadog. The default value is `100.0`. For more information, see [Managing sessions][14].
 
 `telemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
@@ -811,7 +596,7 @@ let session = URLSession(
 )
 ```
 
-This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum).
+This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser).
 {% /tab %}
 {% tab label="Objective-C" %}
 
@@ -1107,111 +892,7 @@ id<OTSpan> span = [[DDTracer shared] startSpan:@"operation"];
 
 ## Modify or drop RUM events
 
-To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the RUM iOS SDK:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-let configuration = RUM.Configuration(
-    applicationID: "<rum application id>",
-    viewEventMapper: { RUMViewEvent in
-        return RUMViewEvent
-    }
-    resourceEventMapper: { RUMResourceEvent in
-        return RUMResourceEvent
-    }
-    actionEventMapper: { RUMActionEvent in
-        return RUMActionEvent
-    }
-    errorEventMapper: { RUMErrorEvent in
-        return RUMErrorEvent
-    }
-    longTaskEventMapper: { RUMLongTaskEvent in
-        return RUMLongTaskEvent
-    }
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
-
-[configuration setViewEventMapper:^DDRUMViewEvent * _Nonnull(DDRUMViewEvent * _Nonnull RUMViewEvent) {
-    return RUMViewEvent;
-}];
-
-[configuration setErrorEventMapper:^DDRUMErrorEvent * _Nullable(DDRUMErrorEvent * _Nonnull RUMErrorEvent) {
-    return RUMErrorEvent;
-}];
-
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
-    return RUMResourceEvent;
-}];
-
-[configuration setActionEventMapper:^DDRUMActionEvent * _Nullable(DDRUMActionEvent * _Nonnull RUMActionEvent) {
-    return RUMActionEvent;
-}];
-
-[configuration setLongTaskEventMapper:^DDRUMLongTaskEvent * _Nullable(DDRUMLongTaskEvent * _Nonnull RUMLongTaskEvent) {
-    return RUMLongTaskEvent;
-}];
-```
-
-{% /tab %}
-{% /tabs %}
-
-Each mapper is a Swift closure with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent.
-
-For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted(_:) -> String` function and use it in `resourceEventMapper`:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-let configuration = RUM.Configuration(
-    applicationID: "<rum application id>",
-    resourceEventMapper: { RUMResourceEvent in
-        var RUMResourceEvent = RUMResourceEvent
-        RUMResourceEvent.resource.url = redacted(RUMResourceEvent.resource.url)
-        return RUMResourceEvent
-    }
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
-
-[configuration setResourceEventMapper:^DDRUMResourceEvent * _Nullable(DDRUMResourceEvent * _Nonnull RUMResourceEvent) {
-    return RUMResourceEvent;
-}];
-```
-
-{% /tab %}
-{% /tabs %}
-
-Returning `nil` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `nil` (to drop views, customize your implementation of `UIKitRUMViewsPredicate`; read more in [tracking views automatically](#automatically-track-views)).
-
-Depending on the event's type, only some specific properties can be modified:
-
-| Event Type       | Attribute key                        | Description                                      |
-| ---------------- | ------------------------------------ | ------------------------------------------------ |
-| RUMActionEvent   | `RUMActionEvent.action.target?.name` | Name of the action.                              |
-|                  | `RUMActionEvent.view.url`            | URL of the view linked to this action.           |
-| RUMErrorEvent    | `RUMErrorEvent.error.message`        | Error message.                                   |
-|                  | `RUMErrorEvent.error.stack`          | Stacktrace of the error.                         |
-|                  | `RUMErrorEvent.error.resource?.url`  | URL of the resource the error refers to.         |
-|                  | `RUMErrorEvent.view.url`             | URL of the view linked to this error.            |
-| RUMResourceEvent | `RUMResourceEvent.resource.url`      | URL of the resource.                             |
-|                  | `RUMResourceEvent.view.url`          | URL of the view linked to this resource.         |
-| RUMViewEvent     | `RUMViewEvent.view.name`             | Name of the view.                                |
-|                  | `RUMViewEvent.view.url`              | URL of the view.                                 |
-|                  | `RUMViewEvent.view.referrer`         | URL that linked to the initial view of the page. |
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios).
 
 ## Retrieve the RUM session ID
 
@@ -1225,22 +906,9 @@ RumMonitor.shared().currentSessionID(completion: { sessionId in
 })
 ```
 
-## Set tracking consent (GDPR compliance)
+## Managing sessions
 
-To be compliant with the GDPR regulation, the RUM iOS SDK requires the tracking consent value at initialization.
-
-The `trackingConsent` setting can be one of the following values:
-
-1. `.pending`: The RUM iOS SDK starts collecting and batching the data but does not send it to Datadog. The RUM iOS SDK waits for the new tracking consent value to decide what to do with the batched data.
-2. `.granted`: The RUM iOS SDK starts collecting the data and sends it to Datadog.
-3. `.notGranted`: The RUM iOS SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
-
-To change the tracking consent value after the RUM iOS SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The RUM iOS SDK changes its behavior according to the new value.
-
-For example, if the current tracking consent is `.pending`:
-
-- If you change the value to `.granted`, the RUM iOS SDK sends all current and future data to Datadog;
-- If you change the value to `.notGranted`, the RUM iOS SDK wipes all current data and does not collect future data.
+See [Managing sessions][14] for instructions on session sampling.
 
 ## Add user properties
 
@@ -1254,37 +922,19 @@ Datadog.addUserExtraInfo(["company": "Foo"])
 
 ## Data management
 
-The iOS SDK first stores events locally and only uploads events when the [intake specifications][9] conditions are met.
-
-### Clear all data
-
-You have the option of deleting all unsent data stored by the SDK with the `Datadog.clearAllData()` API.
-
-```swift
-import DatadogCore
-
-Datadog.clearAllData()
-```
-
-### Stop data collection
-
-You can use the `Datadog.stopInstance()` API to stop a named SDK instance (or the default instance if the name is `nil`) from collecting and uploading data further.
-
-```swift
-import DatadogCore
-
-Datadog.stopInstance()
-```
-
-Calling this method disables the SDK and all active features, such as RUM. To resume data collection, you must reinitialize the SDK. You can use this API if you want to change configurations dynamically.
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=ios).
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/ios
-[3]: /real_user_monitoring/application_monitoring/ios/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=ios
 [4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
-[5]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=error#error-attributes
-[6]: /real_user_monitoring/application_monitoring/ios/data_collected/?tab=session#default-attributes
+[5]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=error#error-attributes
+[6]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
-[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[8]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
-[10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
+[10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
+[11]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
+[12]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios
+[13]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
+[14]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios

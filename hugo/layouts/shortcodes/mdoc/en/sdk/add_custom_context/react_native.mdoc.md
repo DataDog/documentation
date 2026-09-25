@@ -1,3 +1,11 @@
+You can attach user information to all RUM events to get more detailed information from your RUM sessions.
+
+### Track user sessions
+
+See [Track user IDs][1] for instructions on adding user information to your RUM sessions.
+
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=react_native
+
 ### Global attributes
 
 You can keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status. These attributes are attached to all future Logs, Spans, and RUM events.
@@ -47,6 +55,3 @@ DdSdkReactNative.removeAttributes([
 ```
 
 This is useful when cleaning up session-specific data, such as when a user logs out or exits a feature flow.
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/react_native

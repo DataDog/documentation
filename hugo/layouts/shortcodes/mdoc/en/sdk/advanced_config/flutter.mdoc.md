@@ -106,7 +106,7 @@ The RUM application ID.
 : Optional  
 **Type**: Double  
 **Default**: `100.0`  
-The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent).
+The sampling rate for RUM sessions. Must be between `0.0` (no RUM events are sent) and `100.0` (all RUM events are sent). For more information, see [Managing sessions][25].
 
 `traceSampleRate`
 : Optional  
@@ -189,6 +189,8 @@ If you are using [Datadog Tracking HTTP Client][10] to automatically track resou
 
 ## Automatically track resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][23].
+
 Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
 
 Add the package to your `pubspec.yaml` and add the following to your initialization file:
@@ -249,96 +251,7 @@ While [Datadog Tracking HTTP Client][10] can track most common network calls in 
 
 ## Enrich user sessions
 
-Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][14] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
-
-### Notify the SDK that your view finished loading
-
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
-Call this method when your view is fully loaded and ready to be displayed to the user:
-
-```dart
-  DatadogSdk.instance.rum?.addViewLoadingTime(override);
-```
-
-Use the `override` option to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-
-**Note**: This API is still experimental and might change in the future.
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using `DdRum.addTiming`. The timing measure is relative to the start of the current RUM view.
-
-For example, you can time how long it takes for your hero image to appear:
-
-```dart
-void _onHeroImageLoaded() {
-    DatadogSdk.instance.rum?.addTiming("hero_image");
-}
-```
-
-After you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
-
-To create visualizations in your dashboards, [create a measure][15] first.
-
-### Track user actions
-
-You can track specific user actions such as taps, clicks, and scrolls using `DdRum.addAction`.
-
-To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DdRum.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DdRum.startAction()` or `DdRum.stopAction()`.
-
-For example:
-
-```dart
-void _downloadResourceTapped(String resourceName) {
-    DatadogSdk.instance.rum?.addAction(
-        RumActionType.tap,
-        resourceName,
-    );
-}
-```
-
-When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
-
-### Track custom resources
-
-In addition to tracking resources automatically using the [Datadog Tracking HTTP Client][16], you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][17]:
-
-- `DdRum.startResource`
-- `DdRum.stopResource`
-- `DdRum.stopResourceWithError`
-- `DdRum.stopResourceWithErrorInfo`
-
-For example:
-
-```dart
-// in your network client:
-
-DatadogSdk.instance.rum?.startResource(
-    "resource-key",
-    RumHttpMethod.get,
-    url,
-);
-
-// Later
-
-DatadogSdk.instance.rum?.stopResource(
-    "resource-key",
-    200,
-    RumResourceType.image
-);
-```
-
-The `String` used for `resourceKey` in both calls must be unique for the resource you are calling in order for the Flutter Datadog SDK to match a resource's start with its completion.
-
-### Track custom errors
-
-To track specific errors, notify `DdRum` when an error occurs with the message, source, exception, and additional attributes.
-
-```dart
-DatadogSdk.instance.rum?.addError("This is an error message.");
-```
+For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=flutter).
 
 ## Track custom global attributes
 
@@ -355,27 +268,7 @@ To set a custom global attribute, use `DdRum.addAttribute`.
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in the RUM UI" style="width:90%" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use `DatadogSdk.setUserInfo`.
-
-For example:
-
-```dart
-DatadogSdk.instance.setUserInfo("1234", "John Doe", "john@doe.com");
-```
+See [Track user IDs][26] for instructions on adding user information to your RUM sessions.
 
 ### Add custom user attributes
 
@@ -445,63 +338,11 @@ Clearing the account empties the `account` attribute on the active session and t
 
 ## Clear all data
 
-Use `clearAllData` to clear all data that has not been sent to Datadog.
-
-```dart
-DatadogSdk.instance.clearAllData();
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=flutter).
 
 ## Modify or drop RUM events
 
-**Note**: This feature is not yet available for Flutter web applications.
-
-To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the Flutter RUM SDK:
-
-```dart
-final config = DatadogConfiguration(
-    // other configuration...
-    rumConfiguration: DatadogRumConfiguration(
-        applicationId: '<YOUR_APPLICATION_ID>',
-        rumViewEventMapper = (event) => event,
-        rumActionEventMapper = (event) => event,
-        rumResourceEventMapper = (event) => event,
-        rumErrorEventMapper = (event) => event,
-        rumLongTaskEventMapper = (event) => event,
-    ),
-);
-```
-
-Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent, or dropping the event entirely.
-
-For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted` function and use it in `rumResourceEventMapper`:
-
-```dart
-    rumResourceEventMapper = (event) {
-        var resourceEvent = resourceEvent
-        resourceEvent.resource.url = redacted(resourceEvent.resource.url)
-        return resourceEvent
-    }
-```
-
-Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `null`.
-
-Depending on the event's type, only some specific properties can be modified:
-
-| Event Type       | Attribute key                     | Description                                 |
-| ---------------- | --------------------------------- | ------------------------------------------- |
-| RumViewEvent     | `viewEvent.view.url`              | URL of the view.                            |
-|                  | `viewEvent.view.referrer`         | Referrer of the view.                       |
-| RumActionEvent   | `actionEvent.action.target?.name` | Name of the action.                         |
-|                  | `actionEvent.view.referrer`       | Referrer of the view linked to this action. |
-|                  | `actionEvent.view.url`            | URL of the view linked to this action.      |
-| RumErrorEvent    | `errorEvent.error.message`        | Error message.                              |
-|                  | `errorEvent.error.stack`          | Stacktrace of the error.                    |
-|                  | `errorEvent.error.resource?.url`  | URL of the resource the error refers to.    |
-|                  | `errorEvent.view.referrer`        | Referrer of the view linked to this action. |
-|                  | `errorEvent.view.url`             | URL of the view linked to this error.       |
-| RumResourceEvent | `resourceEvent.resource.url`      | URL of the resource.                        |
-|                  | `resourceEvent.view.referrer`     | Referrer of the view linked to this action. |
-|                  | `resourceEvent.view.url`          | URL of the view linked to this resource.    |
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=flutter).
 
 ## Retrieve the RUM session ID
 
@@ -571,12 +412,16 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [13]: /serverless/aws_lambda/distributed_tracing/
-[14]: /real_user_monitoring/application_monitoring/flutter/data_collected
+[14]: /real_user_monitoring/setup/data_collected/?platform=flutter
 [15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
-[18]: /real_user_monitoring/application_monitoring/mobile_vitals/?tab=flutter
+[18]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter#mobile-vitals
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
 [22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
+[24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
+[25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
+[26]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter

@@ -6,7 +6,7 @@ aliases:
 - /real_user_monitoring/setup/android
 - /real_user_monitoring/mobile_and_tv_monitoring/android/setup
 further_reading:
-- link: /real_user_monitoring/application_monitoring/android/advanced_configuration
+- link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android
   tag: Documentation
   text: RUM Android Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-android

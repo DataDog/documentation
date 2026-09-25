@@ -18,7 +18,7 @@ content_filters:
   option_group_id: rum_react_native_framework_options
   label: "Setup Method"
 further_reading:
-- link: /real_user_monitoring/application_monitoring/react_native/advanced_configuration
+- link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=react_native
   tag: Documentation
   text: RUM React Native Advanced Configuration
 - link: https://github.com/DataDog/dd-sdk-reactnative

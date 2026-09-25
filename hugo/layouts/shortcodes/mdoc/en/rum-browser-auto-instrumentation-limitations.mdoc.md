@@ -8,4 +8,4 @@ Server-side auto-instrumentation has the following limitations. If your use case
   - **Enable TLS origination** on the web server.
 
 [101]: /real_user_monitoring/application_monitoring/browser/setup/client
-[102]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[102]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser

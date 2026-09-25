@@ -145,7 +145,7 @@ Enables [automatic collection of user frustrations][7]. Only error taps are supp
 : Optional  
 **Type**: Number  
 **Default**: `100`  
-The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events.
+The percentage of sessions to track: `100` for all, `0` for none. Only tracked sessions send RUM events. For more information, see [Managing sessions][28].
 
 `resourceTraceSampleRate`
 : Optional  
@@ -318,6 +318,8 @@ DdLogs.error('Lorem ipsum dolor sit amet…', {});
 
 ### Manually track RUM views
 
+For setup steps covering both automatic and manual view tracking, see [Track navigation][26].
+
 To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
 
 ```javascript
@@ -327,6 +329,8 @@ DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
 ```
 
 ### Manually track RUM actions
+
+For setup steps, see [Track user interactions][27].
 
 You can manually track RUM actions:
 
@@ -352,6 +356,8 @@ DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
 
 ### Manually track RUM resources
 
+For setup steps covering both automatic and manual resource tracking, see [Track network requests][24].
+
 You can manually track RUM resources:
 
 ```javascript
@@ -361,6 +367,8 @@ DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
 ```
 
 ### Notify the SDK that your view finished loading
+
+For setup steps, see [Track UI latency][25].
 
 You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`.
 Call this method when your view is fully loaded and ready to be displayed to the user:
@@ -395,50 +403,7 @@ DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 
 ## Track custom global attributes
 
-You can attach user information to all RUM events to get more detailed information from your RUM sessions.
-
-### Track user sessions
-
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-| `usr.extraInfo` | Object | (Optional) Include custom attributes such as subscription type, any user specific information that enhance user context in RUM sessions. |
-
-To identify user sessions, use the `setUserInfo` API, for example:
-
-```js
-DdSdkReactNative.setUserInfo({
-    id: '1337',
-    name: 'John Smith',
-    email: 'john@example.com',
-    extraInfo: {
-        type: 'premium'
-    }
-});
-```
-
-If you want to add or update user information, you can use the following code to modify the existing user's details.
-
-```js
-DdSdkReactNative.addUserExtraInfo({
-    hasPaid: 'true'
-});
-```
-
-If you want to clear the user information (for example, when the user signs out), you can do so by calling the `clearUserInfo` API:
-
-```js
-DdSdkReactNative.clearUserInfo();
-```
+For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=react_native).
 
 ### Track user accounts
 
@@ -491,56 +456,6 @@ Account information is attached to RUM events, logs, and traces.
 Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session or the view before clearing.
 {% /alert %}
 
-### Global attributes
-
-You can keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status. These attributes are attached to all future Logs, Spans, and RUM events.
-
-**Add multiple global attributes**
-
-Use `addAttributes` to add or update several attributes at once.
-
-```js
-DdSdkReactNative.addAttributes({
-    profile_mode: 'wall',
-    chat_enabled: true,
-    campaign_origin: 'example_ad_network'
-});
-```
-
-**Add a single global attribute**
-
-Use `addAttribute` when you want to add or update a single attribute.
-
-```js
-DdSdkReactNative.addAttribute('profile_mode', 'wall');
-DdSdkReactNative.addAttribute('chat_enabled', true);
-```
-
-If the attribute already exists, its value is overwritten.
-
-**Remove a single global attribute**
-
-Use `removeAttribute` to remove a specific attribute from the global context.
-
-```js
-DdSdkReactNative.removeAttribute('campaign_origin');
-```
-
-After removal, the attribute is no longer attached to future Logs, Spans, or RUM events.
-
-**Remove multiple global attributes**
-
-Use `removeAttributes` to remove several attributes at once.
-
-```js
-DdSdkReactNative.removeAttributes([
-    'profile_mode',
-    'chat_enabled'
-]);
-```
-
-This is useful when cleaning up session-specific data, such as when a user logs out or exits a feature flow.
-
 ## Track view navigation
 
 Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
@@ -572,92 +487,11 @@ If you experience any issues setting up View tracking with `@datadog/mobile-reac
 
 ## Clear all data
 
-Use `clearAllData` to clear all data that has not been sent to Datadog.
-
-```js
-DdSdkReactNative.clearAllData();
-```
+For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=react_native).
 
 ## Modify or drop RUM events
 
-To modify attributes of a RUM event before it is sent to Datadog, or to drop an event entirely, use the Event Mappers API when configuring the RUM React Native SDK:
-
-```javascript
-import {
-    SdkVerbosity,
-    DatadogProvider,
-    DatadogProviderConfiguration,
-    RumConfiguration,
-    LogsConfiguration,
-    TraceConfiguration
-} from '@datadog/mobile-react-native';
-
-const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    {
-        rumConfiguration: {
-            applicationId: '<APPLICATION_ID>',
-            trackInteractions: true, // Track user interactions (such as a tap on buttons).
-            trackResources: true, // Track XHR resources
-            trackErrors: true, // Track errors
-            // RUM Event Mappers
-            errorEventMapper: (event) => event,
-            resourceEventMapper: (event) => event,
-            actionEventMapper: (event) => event
-        },
-
-        // Log Event Mappers
-        logsConfiguration: {
-            logEventMapper: (event) => event
-        },
-
-        traceConfiguration: {}
-    }
-)
-```
-
-Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concrete RUM event type. This allows changing portions of the event before it is sent, or dropping the event entirely.
-
-For example, to redact sensitive information from a RUM error `message`, implement a custom `redacted` function and use it in `errorEventMapper`:
-
-```javascript
-config.rumConfiguration.errorEventMapper = (event) => {
-    event.message = redacted(event.message);
-    return event;
-};
-```
-
-Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog.
-
-Depending on the event type, only some specific properties can be modified:
-
-| Event Type    | Attribute key            | Description                        |
-| ------------- | ------------------------ | ---------------------------------- |
-| LogEvent      | `logEvent.message`       | Message of the log.                |
-|               | `logEvent.context`       | Custom attributes of the log.      |
-| ActionEvent   | `actionEvent.context`    | Custom attributes of the action.   |
-| ErrorEvent    | `errorEvent.message`     | Error message.                     |
-|               | `errorEvent.source`      | Source of the error.               |
-|               | `errorEvent.stacktrace`  | Stacktrace of the error.           |
-|               | `errorEvent.context`     | Custom attributes of the error.    |
-|               | `errorEvent.timestampMs` | Timestamp of the error.            |
-| ResourceEvent | `resourceEvent.context`  | Custom attributes of the resource. |
-
-Events include additional context:
-
-| Event Type    | Context attribute key                            | Description                                                             |
-| ------------- | ------------------------------------------------ | ----------------------------------------------------------------------- |
-| LogEvent      | `logEvent.additionalInformation.userInfo`        | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `logEvent.additionalInformation.attributes`      | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ActionEvent   | `actionEvent.actionContext`                      | [GestureResponderEvent][14] corresponding to the action or `undefined`. |
-|               | `actionEvent.additionalInformation.userInfo`     | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `actionEvent.additionalInformation.attributes`   | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ErrorEvent    | `errorEvent.additionalInformation.userInfo`      | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `errorEvent.additionalInformation.attributes`    | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
-| ResourceEvent | `resourceEvent.resourceContext`                  | [XMLHttpRequest][15] corresponding to the resource or `undefined`.      |
-|               | `resourceEvent.additionalInformation.userInfo`   | Contains the global user info set by `DdSdkReactNative.setUserInfo`.        |
-|               | `resourceEvent.additionalInformation.attributes` | Contains the global attributes set by `DdSdkReactNative.addAttributes`. |
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=react_native).
 
 ## Retrieve the RUM session ID
 
@@ -800,7 +634,7 @@ See [Monitor hybrid React Native applications][19].
 [5]: /getting_started/tagging/#define-tags
 [6]: /getting_started/site/
 [7]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
-[8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
+[8]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=react_native
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
 [10]: https://github.com/wix/react-native-navigation
 [11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
@@ -812,7 +646,12 @@ See [Monitor hybrid React Native applications][19].
 [17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
 [19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
-[20]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
+[20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration
+[24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
+[25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
+[26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native
+[27]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=react_native
+[28]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native

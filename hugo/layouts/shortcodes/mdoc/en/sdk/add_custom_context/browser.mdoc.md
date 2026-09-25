@@ -1,0 +1,68 @@
+<!--
+Pages using this partial must declare these filters:
+
+content_filters:
+  - trait_id: lib_src
+    option_group_id: rum_browser_sdk_source_options
+-->
+
+Along with attributes added with the [Global Context API][1] or the [Feature Flag data collection][2], you can add additional context attributes to the event. For example, tag your RUM resource events when requests are aborted:
+<!-- NPM -->
+   {% if equals($lib_src, "npm") %}
+   ```javascript
+   import { datadogRum } from '@datadog/browser-rum';
+
+   datadogRum.init({
+      ...,
+      beforeSend: (event, context) => {
+         if (event.type === 'resource' && context.isAborted) {
+               event.context.aborted = true
+         }
+         return true
+      },
+      ...
+   });
+   ```
+   {% /if %}
+
+   <!-- CDN async -->
+   {% if equals($lib_src, "cdn_async") %}
+   ```javascript
+   window.DD_RUM.onReady(function() {
+      window.DD_RUM.init({
+         ...,
+         beforeSend: (event, context) => {
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
+               }
+               return true
+         },
+         ...
+      })
+   })
+   ```
+   {% /if %}
+
+   <!-- CDN sync -->
+   {% if equals($lib_src, "cdn_sync") %}
+   ```javascript
+   window.DD_RUM &&
+      window.DD_RUM.init({
+         ...,
+         beforeSend: (event, context) => {
+               if (event.type === 'resource' && context.isAborted) {
+                  event.context.aborted = true
+               }
+               return true
+         },
+         ...
+      });
+   ```   
+   {% /if %}
+
+If a user belongs to multiple teams, add additional key-value pairs in your calls to the Global Context API.
+
+The RUM Browser SDK ignores attributes added outside of `event.context`.
+
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#global-context
+[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#enrich-rum-events-with-feature-flags

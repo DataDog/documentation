@@ -2,6 +2,10 @@
 Expo setup instructions.
 -->
 
+This page describes how to instrument your Expo applications with the Datadog React Native SDK.
+
+The React Native SDK supports [Real User Monitoring (RUM)](/real_user_monitoring/) and [Error Tracking](/error_tracking/frontend/mobile/reactnative/).
+
 {% stepper %}
 
 {% step title="Install the SDK" %}
@@ -20,21 +24,6 @@ To install with Yarn, run:
 ```shell
 yarn add expo-datadog @datadog/mobile-react-native
 ```
-
-{% /step %}
-
-{% step title="Specify application details in the UI" %}
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][8] instead.
-{% /alert %}
-
-For data security, you must use a client token. For more information about setting up a client token, see the [Client Token documentation][10].
 
 {% /step %}
 
@@ -174,11 +163,7 @@ After the plugin is installed and configured, it automatically tracks interactio
 
 ### CodePush integration (optional)
 
-If you're deploying updates with [CodePush][13], see the [CodePush setup documentation][14] for additional configuration steps.
+If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
 
-[7]: https://app.datadoghq.com/rum/application/create
-[8]: https://app.datadoghq.com/error-tracking/settings/setup/client/
-[10]: /account_management/api-app-keys/#client-tokens
-[13]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[14]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
-
+[1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
+[2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush

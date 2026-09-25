@@ -211,7 +211,7 @@ Source errors include code-level information about the error. For more informati
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-loading-time-is-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event

@@ -77,7 +77,7 @@ Source code integration is supported for the following RUM platforms when source
 [3]: /real_user_monitoring/guide/upload-javascript-source-maps/
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
-[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
+[6]: /error_tracking/frontend/mobile/android/
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}

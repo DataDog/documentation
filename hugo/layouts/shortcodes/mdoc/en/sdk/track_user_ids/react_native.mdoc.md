@@ -1,5 +1,3 @@
-### Track user sessions
-
 Adding user information to your RUM sessions makes it possible to:
 * Follow the journey of a given user
 * Know which users are the most impacted by errors
@@ -40,6 +38,3 @@ If you want to clear the user information (for example, when the user signs out)
 ```js
 DdSdkReactNative.clearUserInfo();
 ```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/react_native

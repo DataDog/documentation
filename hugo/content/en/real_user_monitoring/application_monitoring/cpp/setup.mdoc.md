@@ -2,7 +2,7 @@
 title: C / C++ Monitoring Setup
 description: Set up RUM monitoring for C and C++ applications.
 further_reading:
-- link: /real_user_monitoring/application_monitoring/cpp/advanced_configuration
+- link: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp
   tag: Documentation
   text: C / C++ Advanced Configuration
 - link: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
@@ -15,5 +15,7 @@ further_reading:
   tag: Documentation
   text: Explore Datadog RUM
 ---
+
+## Overview
 
 {% partial file="sdk/setup/cpp.mdoc.md" /%}

@@ -35,6 +35,8 @@ If you have not set up the Roku SDK yet, follow the [in-app setup instructions][
 
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
+To report errors manually, see [Track errors and crashes][6].
+
 ## Limitations
 
 The SDK supports stack trace in crash reporting on Roku OS 13+, while on Roku OS <13, the stack trace is empty.
@@ -56,23 +58,12 @@ To test your implementation:
 
 3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
-### Forward errors to Datadog
-
-Whenever you perform an operation that might throw an exception, you can forward the error to Datadog by adding the following code snippet:
-
-```brightscript
-    try
-        doSomethingThatMightThrowAnException()
-    catch error
-        m.global.datadogRumAgent.callfunc("addError", error)
-    end try
-```
-
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
+[6]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=roku
 
 
 ## Further Reading

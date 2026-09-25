@@ -7,206 +7,7 @@ If you have not set up the SDK yet, follow the [in-app setup instructions][1] or
 
 ## Enrich user sessions
 
-Android RUM automatically tracks attributes such as user activity, screens, errors, and network requests. See the [RUM Data Collection documentation][3] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
-
-### Custom views
-
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) when they become visible and interactive in the `onResume()` lifecycle. Stop tracking when the view is no longer visible. Most often, this method should be called in the frontmost `Activity` or `Fragment`:
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-fun onResume() {
-    GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
-}
-
-fun onPause() {
-    GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
-}
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-public void onResume() {
-    GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes);
-}
-
-public void onPause() {
-    GlobalRumMonitor.get().stopView(viewKey, viewAttributes);
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-### Custom actions
-
-In addition to [tracking actions automatically][5], you can also track specific custom user actions (such as taps, clicks, and scrolls) with `RumMonitor#addAction`. For continuous action tracking (for example, tracking a user scrolling a list), use `RumMonitor#startAction` and `RumMonitor#stopAction`.
-
-The action type should be one of the following: "custom", "click", "tap", "scroll", "swipe", "back".
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-fun onUserInteraction() {
-    GlobalRumMonitor.get().addAction(actionType, name, actionAttributes)
-}
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-public void onUserInteraction() {
-    GlobalRumMonitor.get().addAction(actionType, name, actionAttributes);
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-### Capture resource headers
-
-When [tracking resources automatically][6], you can capture HTTP request and response headers on RUM Resources by calling `trackResourceHeaders` on the `DatadogInterceptor.Builder`.
-
-Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-val interceptor = DatadogInterceptor.Builder(tracedHosts)
-    .trackResourceHeaders()
-    .build()
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-DatadogInterceptor interceptor = new DatadogInterceptor.Builder(tracedHosts)
-    .trackResourceHeaders()
-    .build();
-```
-
-{% /tab %}
-{% /tabs %}
-
-With no arguments, `trackResourceHeaders` captures a predefined set of common headers:
-
-| Direction | Headers |
-|-----------|---------|
-| Request | `cache-control`, `content-type` |
-| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
-
-To capture additional headers on top of the defaults, configure a `ResourceHeadersExtractor` and pass it to `trackResourceHeaders`. To skip the defaults, set `includeDefaults = false`.
-
-{% alert level="info" %}
-Sensitive headers, such as tokens and API keys, are filtered out automatically, even if you list them explicitly.
-{% /alert %}
-
-### Custom resource attributes
-
-When [tracking resources automatically][6], provide a custom `RumResourceAttributesProvider` to the `DatadogInterceptor.Builder` to add custom attributes to each tracked network request.
-
-For example, if you want to surface an OkHttp request tag as a custom attribute on the resource, create an implementation as follows:
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-class CustomRumResourceAttributesProvider : RumResourceAttributesProvider {
-    override fun onProvideAttributes(
-        request: Request,
-        response: Response?,
-        throwable: Throwable?
-    ): Map<String, Any?> {
-        return mapOf("request.kind" to request.tag(String::class.java).orEmpty())
-    }
-}
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-public class CustomRumResourceAttributesProvider implements RumResourceAttributesProvider {
-    @NonNull
-    @Override
-    public Map<String, Object> onProvideAttributes(
-            @NonNull Request request,
-            @Nullable Response response,
-            @Nullable Throwable throwable
-    ) {
-        Map<String, Object> result = new HashMap<>();
-        String kind = request.tag(String.class);
-        result.put("request.kind", kind != null ? kind : "");
-        return result;
-    }
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-### Custom resources
-
-In addition to [tracking resources automatically][6], you can also track specific custom resources (such as network requests and third-party provider APIs) with methods (such as `GET` and `POST`) while loading the resource with `RumMonitor#startResource`. Stop tracking with `RumMonitor#stopResource` when it is fully loaded, or `RumMonitor#stopResourceWithError` if an error occurs while loading the resource.
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-fun loadResource() {
-    GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes)
-    try {
-        // do load the resource
-        GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes)
-    } catch (e: Exception) {
-        GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e)
-    }
-}
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-public void loadResource() {
-    GlobalRumMonitor.get().startResource(resourceKey, method, url, resourceAttributes);
-    try {
-        // do load the resource
-        GlobalRumMonitor.get().stopResource(resourceKey, resourceKind, additionalAttributes);
-    } catch (Exception e) {
-        GlobalRumMonitor.get().stopResourceWithError(resourceKey, message, origin, e);
-    }
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-### Custom errors
-
-To track specific errors, notify the monitor when an error occurs with the message, source, exception, and additional attributes. See the [Error Attributes documentation][7].
-
-```kotlin
-GlobalRumMonitor.get().addError(message, source, throwable, attributes)
-```
-
-### Add user properties
-
-You can use the `addUserProperties` API to append extra user properties to previously set properties.
-
-```kotlin
-fun addUserProperties(extraInfo: Map<String, Any?>, sdkCore: SdkCore = getInstance()) {
-    sdkCore.addUserProperties(extraInfo)
-}
-```
+For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android).
 
 ## Event and data management
 
@@ -267,24 +68,7 @@ In addition to the [default RUM attributes][3] captured by the RUM Android SDK a
 
 ### Track user sessions
 
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
-{% img src="real_user_monitoring/browser/advanced_configuration/user-api-1.png" alt="User attributes of a session in the RUM UI" /%}
-
-| Attribute   | Type   | Description                                                                     |
-| ----------- | ------ | ------------------------------------------------------------------------------- |
-| `usr.id`    | String | (Required) Unique user identifier.                                              |
-| `usr.name`  | String | (Optional) User friendly name, displayed by default in the RUM UI.              |
-| `usr.email` | String | (Optional) User email, displayed in the RUM UI if the user name is not present. |
-
-To identify user sessions, use the `setUserInfo` API, for example:
-
-```kotlin
-Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
-```
+See [Track user IDs][18] for instructions on adding user information to your RUM sessions.
 
 ### Track user accounts
 
@@ -404,7 +188,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the preferred frequency for collecting mobile vitals.
 
 `setSessionSampleRate(<sampleRate>)`
-: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
+: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.) For more information, see [Managing sessions][19].
 
 `setSessionListener(RumSessionListener)`
 : Sets a listener to be notified on when a new RUM Session starts.
@@ -703,69 +487,7 @@ RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
 
 ## Modify or drop RUM events
 
-To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Android SDK:
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // ...
-  .setErrorEventMapper(rumErrorEventMapper)
-  .setActionEventMapper(rumActionEventMapper)
-  .setResourceEventMapper(rumResourceEventMapper)
-  .setViewEventMapper(rumViewEventMapper)
-  .setLongTaskEventMapper(rumLongTaskEventMapper)
-  .build()
-```
-
-{% /tab %}
-{% tab label="Java" %}
-
-```java
-RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-  // ...
-  .setErrorEventMapper(rumErrorEventMapper)
-  .setActionEventMapper(rumActionEventMapper)
-  .setResourceEventMapper(rumResourceEventMapper)
-  .setViewEventMapper(rumViewEventMapper)
-  .setLongTaskEventMapper(rumLongTaskEventMapper)
-  .build();
-```
-
-{% /tab %}
-{% /tabs %}
-
-When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
-
-| Event type    | Attribute key        | Description                                      |
-| ------------- | -------------------- | ------------------------------------------------ |
-| ViewEvent     | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ActionEvent   |                      |                                                  |
-|               | `action.target.name` | Target name.                                     |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ErrorEvent    |                      |                                                  |
-|               | `error.message`      | Error message.                                   |
-|               | `error.stack`        | Stacktrace of the error.                         |
-|               | `error.resource.url` | URL of the resource.                             |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| ResourceEvent |                      |                                                  |
-|               | `resource.url`       | URL of the resource.                             |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-| LongTaskEvent |                      |                                                  |
-|               | `view.referrer`      | URL that linked to the initial view of the page. |
-|               | `view.url`           | URL of the view.                                 |
-|               | `view.name`          | Name of the view.                                |
-
-**Note**: If you return null from the `EventMapper<T>` implementation, the event is kept and sent as-is.
+For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=android).
 
 ## Retrieve the RUM session ID
 
@@ -782,14 +504,19 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/android
 [3]: /real_user_monitoring/android/data_collected
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
-[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[6]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[4]: #automatically-track-views
+[5]: #initialization-parameters
+[6]: #automatically-track-network-requests
 [7]: /real_user_monitoring/android/data_collected/#event-specific-attributes
 [8]: /real_user_monitoring/application_monitoring/android/setup/#sending-data-when-device-is-offline
 [9]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
-[11]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#time-to-network-settled
+[11]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
-[13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
+[13]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
+[16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
+[17]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android
+[18]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
+[19]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android

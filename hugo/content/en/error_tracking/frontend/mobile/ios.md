@@ -1,6 +1,10 @@
 ---
 title: iOS Crash Reporting and Error Tracking
 description: Enable comprehensive crash reporting and error tracking for iOS applications to monitor and resolve issues with detailed reports.
+aliases:
+- /real_user_monitoring/ios/crash_reporting/
+- /real_user_monitoring/error_tracking/ios
+- /real_user_monitoring/error_tracking/mobile/ios
 type: multi-code-lang
 code_lang: ios
 code_lang_weight: 20
@@ -798,7 +802,7 @@ To disable watchdog terminations reporting, update the initialization snippet an
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/error-tracking/settings/setup/client
-[3]: /real_user_monitoring/ios/web_view_tracking/
+[3]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios
 [4]: /real_user_monitoring/ios/data_collected/
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens

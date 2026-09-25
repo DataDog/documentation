@@ -2,6 +2,8 @@
 title: Mobile Crash Reporting
 type: multi-code-lang
 description: Set up crash reporting for your mobile applications.
+aliases:
+- /real_user_monitoring/error_tracking/mobile/
 further_reading:
 - link: '/error_tracking/'
   tag: 'Documentation'
@@ -22,5 +24,6 @@ For information about crash reporting and error tracking for your application, c
   {{< image-card href="/error_tracking/frontend/mobile/roku/" src="integrations_logos/roku_large.svg" alt="Roku" >}}
   {{< image-card href="/error_tracking/frontend/mobile/kotlin-multiplatform/" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
   {{< image-card href="/error_tracking/frontend/mobile/unity/" src="/integrations_logos/rum-unity_large.svg" alt="Unity" >}}
+  {{< image-card href="/error_tracking/frontend/mobile/maui/" src="integrations_logos/maui_large.svg" alt=".NET MAUI" >}}
 {{< /card-grid >}}
 
