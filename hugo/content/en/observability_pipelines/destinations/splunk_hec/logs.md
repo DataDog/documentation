@@ -81,7 +81,7 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 
 ## Health metrics
 
-For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
+See [Component metrics][9] and [Destination buffer metrics][10] for more information on metrics emitted by all destinations.
 
 ### Splunk HEC metrics
 
@@ -111,5 +111,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [8]: /observability_pipelines/sources/splunk_hec/
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

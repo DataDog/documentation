@@ -29,10 +29,9 @@ Use the Logstash source to send logs to Observability Pipelines with Filebeat.
 
 ## Health metrics
 
-For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. The Filebeat source uses the Logstash source. To filter or group by Logstash source metrics, use the tag `component_type:logstash`.
+See [Component metrics][3] and [Source buffer metrics][4] for more information on metrics emitted by all sources. The Filebeat source uses the Logstash source. To filter or group by Logstash source metrics, use the tag `component_type:logstash`.
 
 [1]: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

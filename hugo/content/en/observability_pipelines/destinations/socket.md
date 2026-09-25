@@ -60,6 +60,10 @@ After you select the Socket destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Health metrics
+
+See [Component metrics][5] and [Destination buffer metrics][6] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Event batching
@@ -70,3 +74,5 @@ The Socket destination does not batch events.
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /api/latest/observability-pipelines/
 [4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[6]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

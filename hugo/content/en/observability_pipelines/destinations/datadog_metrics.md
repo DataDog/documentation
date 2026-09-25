@@ -53,6 +53,10 @@ To send metrics from Observability Pipelines to Datadog using AWS PrivateLink, s
 
 **Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
 
+## Health metrics
+
+See [Component metrics][8] and [Destination buffer metrics][9] for more information on metrics emitted by all destinations.
+
 ## How the destination works
 
 ### Metrics aggregation
@@ -74,3 +78,5 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [5]: /observability_pipelines/configuration/set_up_pipelines/
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[9]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics

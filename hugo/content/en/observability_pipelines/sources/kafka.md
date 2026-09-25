@@ -106,7 +106,7 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 
 ## Health metrics
 
-For [component metrics][10] and [source buffer metrics][11] emitted by all sources, see the [Pipelines Usage Metrics][12] documentation.
+See [Component metrics][10] and [Source buffer metrics][11] for more information on metrics emitted by all sources.
 
 ### Kafka metrics
 
@@ -151,4 +151,3 @@ For [component metrics][10] and [source buffer metrics][11] emitted by all sourc
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

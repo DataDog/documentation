@@ -65,7 +65,7 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 
 ## Health metrics
 
-For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Splunk HEC destination metrics, use the tag `component_type:splunk_hec_logs`.
+See [Component metrics][7] and [Destination buffer metrics][8] for more information on metrics emitted by all destinations. To filter or group by Splunk HEC destination metrics, use the tag `component_type:splunk_hec_logs`.
 
 ## How the destination works
 
@@ -88,5 +88,4 @@ A batch of events is flushed when one of these parameters is met. See [Destinati
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[8]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/?tab=destinations#buffer-metrics
