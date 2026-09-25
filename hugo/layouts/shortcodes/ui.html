@@ -1,1 +1,13 @@
-<span class="ui">{{- .Inner | markdownify -}}</span>
+{{- /* markdownify treats a leading list, heading, or blockquote marker as the
+       start of a block, which mangles the label. Normalize by stripping any
+       author-supplied escape, then escaping the marker ourselves, so both
+       "+ Add" and "\+ Add" render identically. */ -}}
+{{- $inner := .Inner -}}
+{{- $markers := slice "+" "-" "*" "#" ">" -}}
+{{- if and (hasPrefix $inner "\\") (in $markers (substr $inner 1 1)) -}}
+  {{- $inner = substr $inner 1 -}}
+{{- end -}}
+{{- if in $markers (substr $inner 0 1) -}}
+  {{- $inner = printf "\\%s" $inner -}}
+{{- end -}}
+<span class="ui">{{- $inner | markdownify -}}</span>
