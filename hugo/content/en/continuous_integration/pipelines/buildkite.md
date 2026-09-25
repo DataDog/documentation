@@ -65,6 +65,7 @@ CI jobs failure analysis uses LLM models to compute the analysis for failed CI j
 For a full explanation, see the guide on [using CI jobs failure analysis][22].
 
 Log Analysis is enabled by default in Datadog. To receive Buildkite job logs for analysis, export job logs from the Buildkite Agent as OpenTelemetry logs to the [Datadog OTLP Logs endpoint][25]. To enable the export, follow Buildkite's [OpenTelemetry job log export documentation][24].
+
 To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 #### Store job logs
