@@ -1285,24 +1285,24 @@ Lists the governance [controls][80] for your organization, including each contro
 *Permissions Required: `Governance Console Read`*\
 Retrieves details for a governance [control][80] by detection type, including its configuration, detection parameters, available mitigations, notification settings, and detection counts.
 
-- Show me the configuration of the `unused_api_key` control.
-- Which mitigations are available for the `monitor_without_team_tag` control?
+- Show me the configuration of the `unused_api_keys` control.
+- Which mitigations are available for the `monitors_without_team_tag` control?
 
 ### `list_governance_detections`
 *Toolset: **governance***\
 *Permissions Required: `Governance Console Read`*\
 Lists the detections for a governance control. A detection is a resource that violates the control, such as an unused API key. Supports filtering by state (`active`, `exception`, or `mitigated`) and searching by resource ID or name.
 
-- List the active detections for the `unused_api_key` control.
+- List the active detections for the `unused_api_keys` control.
 - Which monitors are missing a team tag?
-- Show me the detections marked as exceptions for the `unused_api_key` control.
+- Show me the detections marked as exceptions for the `unused_api_keys` control.
 
 ### `get_governance_detection`
 *Toolset: **governance***\
 *Permissions Required: `Governance Console Read`*\
 Retrieves details for a governance detection, including its state, resource details, assignment, mitigation deadline, and notification history.
 
-- Show me the details of detection `abc123` for the `unused_api_key` control.
+- Show me the details of detection `abc123` for the `unused_api_keys` control.
 - When is detection `abc123` scheduled for automatic mitigation?
 
 ### `list_governance_limits`
@@ -1342,7 +1342,7 @@ Retrieves a tag rule by ID, including the tag key it governs, its allowed value 
 Runs a mitigation on up to 25 detections for a control, such as revoking unused API keys. You must specify the mitigation type. Use `get_governance_control` to see the mitigations available for a control. Each mitigation also requires the permissions to change the affected resources. Some mitigations cannot be undone. The tool requires explicit confirmation before it runs the mitigation.
 
 - Revoke the unused API keys from detections `abc123` and `def456`.
-- Mitigate all active detections for the `unused_api_key` control.
+- Mitigate all active detections for the `unused_api_keys` control.
 
 ### `update_governance_detection`
 *Toolset: **governance***\
