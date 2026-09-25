@@ -167,4 +167,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
 [17]: /cloud_cost_management/recommendations
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
-[19]: /cloud_cost_management/cost_changes/monitors/#real-time-ai-cost-anomalies
+[19]: /cloud_cost_management/cost_changes/monitors/#create-a-real-time-ai-anomaly-monitor
