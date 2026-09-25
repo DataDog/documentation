@@ -41,6 +41,14 @@ rulesets:
     title: "Write safe and secure C# code"
     description: |
       Rules focused on finding security issues in your C# code.
+  dart-best-practices:
+    title: "Code quality rules for Dart."
+    description: |
+      Rules to enforce code quality for Dart.
+  dart-security:
+    title: "Security rules for Dart."
+    description: |
+      Rules to enforce security best practices for Dart.
   docker-best-practices:
     title: "Follow best practices with using Docker"
     description: |
@@ -197,6 +205,14 @@ rulesets:
     title: "Security rules for Ruby"
     description: |
       Rules focused on finding security issues in your Ruby code.
+  rust-best-practices:
+    title: "Code quality rules for Rust."
+    description: |
+      Rules to enforce code quality for Rust.
+  rust-security:
+    title: "Security rules for Rust."
+    description: |
+      Rules to enforce security best practices for Rust.
   swift-code-style:
     title: "Rules to enforce Swift code style and best practices."
     description: |
