@@ -14,3 +14,9 @@ cascade:
 {{< /nextlink >}}
 
 {{< /whatsnext >}}
+
+{{< whatsnext desc="Online experiments:" >}}
+    {{< nextlink href="experiments/guide/run_online_experiment_on_llm_application" >}}Run an online experiment on an LLM application
+{{< /nextlink >}}
+
+{{< /whatsnext >}}

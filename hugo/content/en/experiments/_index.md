@@ -43,6 +43,7 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | Quick Links | |
 | :---- | :---- |
 | [Connect a data warehouse][13] | Set up Snowflake, BigQuery, Redshift, or Databricks for warehouse-native experiment analysis |
+| [Run an online experiment on an LLM application][22] | Compare application variants using Agent Observability evaluation scores |
 | [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
@@ -112,4 +113,5 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [19]: /experiments/statistics/global_lift
 [20]: /experiments/diagnostics/
 [21]: /experiments/protocols/
+[22]: /experiments/guide/run_online_experiment_on_llm_application/
 
