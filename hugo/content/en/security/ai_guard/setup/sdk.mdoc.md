@@ -164,6 +164,64 @@ result = client.evaluate(
     ]
 )
 ```
+
+### Example: Apply sensitive data redaction
+
+{% alert level="info" %}
+Sensitive data redaction requires dd-trace-py v4.14.0 or later. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
+{% /alert %}
+
+When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it from the `messages` key:
+
+```py
+from ddtrace.aiguard import Message, new_ai_guard_client
+
+client = new_ai_guard_client()
+
+messages = [
+    Message(role="system", content="You are an AI Assistant"),
+    Message(role="user", content="My SSN is 123-45-6789"),
+]
+
+result = client.evaluate(messages=messages)
+
+# The full conversation, with the sensitive data in the last message replaced
+redacted_messages = result.messages
+```
+
+The `evaluate` method never modifies the messages you pass to it. When a replacement applies, it returns a redacted copy of the conversation; otherwise, it returns the same list object.
+
+To inspect what Sensitive Data Scanner matched, read the `sds` key. Each finding reports the rule that matched, its category, and the location of the match in the messages you sent:
+
+```py
+for finding in result.sds:
+    print(finding["rule_display_name"])  # for example, Social Security Number
+    print(finding["rule_tag"])           # for example, social_security_number
+    print(finding["category"])           # for example, pii
+    print(finding["location"]["path"])   # for example, messages[1].content
+```
+
+Each finding also carries `matched_text`, along with the `start_index` and `end_index_exclusive` offsets of the match inside the value at `location.path`. Because `matched_text` can hold sensitive data, don't log it.
+
+AI Guard doesn't rescan messages from earlier turns, so replace the conversation in your application with its redacted version before you send it to the model and before you build the next turn:
+
+```py
+messages = [
+    Message(role="system", content="You are an AI Assistant"),
+    Message(role="user", content="My SSN is 123-45-6789"),
+]
+
+result = client.evaluate(messages=messages)
+
+# Replace the conversation with its redacted version, so the sensitive data
+# neither reaches the model nor is carried into the next evaluation
+messages = result.messages
+
+answer = call_model(messages)
+messages.append(Message(role="assistant", content=answer))
+```
+
+On the blocking path, a `DENY` or `ABORT` decision raises `AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
 {% /if %}
 
 <!-- Node.js -->
@@ -218,6 +276,65 @@ const result = await tracer.aiguard.evaluate([
   ]
 )
 ```
+
+### Example: Apply sensitive data redaction
+
+{% alert level="info" %}
+Sensitive data redaction requires dd-trace-js v6.13.0 or later. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
+{% /alert %}
+
+When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it from `messages`:
+
+```javascript
+import tracer from 'dd-trace';
+
+const messages = [
+  { role: 'system', content: 'You are an AI Assistant' },
+  { role: 'user', content: 'My SSN is 123-45-6789' }
+]
+
+const result = await tracer.aiguard.evaluate(messages)
+
+// The full conversation, with the sensitive data in the last message replaced
+const redactedMessages = result.messages
+```
+
+The `evaluate` method applies the replacements to a copy of the conversation, so your own message objects are never mutated.
+
+To inspect what Sensitive Data Scanner matched, read `sds`. Each finding reports the rule that matched, its category, and the location of the match in the messages you sent:
+
+```javascript
+for (const finding of result.sds) {
+  console.log(finding.rule_display_name) // for example, Social Security Number
+  console.log(finding.rule_tag)          // for example, social_security_number
+  console.log(finding.category)          // for example, pii
+  console.log(finding.location.path)     // for example, messages[1].content
+}
+```
+
+Each finding also carries `matched_text`, along with the `start_index` and `end_index_exclusive` offsets of the match inside the value at `location.path`. Because `matched_text` can hold sensitive data, don't log it.
+
+AI Guard doesn't rescan messages from earlier turns, so replace the conversation in your application with its redacted version before you send it to the model and before you build the next turn:
+
+```javascript
+import tracer from 'dd-trace';
+
+let messages = [
+  { role: 'system', content: 'You are an AI Assistant' },
+  { role: 'user', content: 'My SSN is 123-45-6789' }
+]
+
+const result = await tracer.aiguard.evaluate(messages)
+
+// Replace the conversation with its redacted version, so the sensitive data
+// neither reaches the model nor is carried into the next evaluation
+messages = result.messages
+
+const answer = await callModel(messages)
+messages.push({ role: 'assistant', content: answer })
+```
+
+On the blocking path, a `DENY` or `ABORT` decision rejects the promise with `AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
 {% /if %}
 
 <!-- Java -->
@@ -305,6 +422,68 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
     )
 );
 ```
+
+### Example: Apply sensitive data redaction
+
+{% alert level="info" %}
+Sensitive data redaction support in dd-trace-java is coming soon. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
+{% /alert %}
+
+When sensitive data scanning and redaction are enabled for your service, the evaluation result carries the full conversation you passed in, with the sensitive data in the last message replaced. Read it with `getMessages()`:
+
+```java
+import datadog.trace.api.aiguard.AIGuard;
+
+final List<AIGuard.Message> messages = Arrays.asList(
+    AIGuard.Message.message("system", "You are an AI Assistant"),
+    AIGuard.Message.message("user", "My SSN is 123-45-6789")
+);
+
+final AIGuard.Evaluation evaluation = AIGuard.evaluate(messages);
+
+// The full conversation, with the sensitive data in the last message replaced
+final List<AIGuard.Message> redactedMessages = evaluation.getMessages();
+```
+
+The `evaluate` method applies the replacements to a copy of the conversation, so neither your list nor your message objects are mutated. When no replacement applies, it returns the same list you passed in.
+
+To inspect what Sensitive Data Scanner matched, use `getSds()`. Each finding reports the rule that matched, its category, and the location of the match in the messages you sent:
+
+```java
+for (final Object entry : evaluation.getSds()) {
+    final Map<String, Object> finding = (Map<String, Object>) entry;
+    final Map<String, Object> location = (Map<String, Object>) finding.get("location");
+
+    System.out.println(finding.get("rule_display_name")); // for example, Social Security Number
+    System.out.println(finding.get("rule_tag"));          // for example, social_security_number
+    System.out.println(finding.get("category"));          // for example, pii
+    System.out.println(location.get("path"));             // for example, messages[1].content
+}
+```
+
+Each finding also carries `matched_text`, along with the `start_index` and `end_index_exclusive` offsets of the match inside the value at `location.path`. Because `matched_text` can hold sensitive data, don't log it.
+
+AI Guard doesn't rescan messages from earlier turns, so replace the conversation in your application with its redacted version before you send it to the model and before you build the next turn:
+
+```java
+import datadog.trace.api.aiguard.AIGuard;
+
+List<AIGuard.Message> messages = new ArrayList<>(Arrays.asList(
+    AIGuard.Message.message("system", "You are an AI Assistant"),
+    AIGuard.Message.message("user", "My SSN is 123-45-6789")
+));
+
+final AIGuard.Evaluation evaluation = AIGuard.evaluate(messages);
+
+// Replace the conversation with its redacted version, so the sensitive data
+// neither reaches the model nor is carried into the next evaluation
+messages = new ArrayList<>(evaluation.getMessages());
+
+final String answer = callModel(messages);
+messages.add(AIGuard.Message.message("assistant", answer));
+```
+
+On the blocking path, a `DENY` or `ABORT` decision throws `AIGuard.AIGuardAbortError`, which carries no messages. In that case, the redacted conversation is reported on the AI Guard span only.
 {% /if %}
 
 <!-- Ruby -->
