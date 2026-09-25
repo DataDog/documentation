@@ -29,7 +29,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Analyzing CI performance**: Get aggregated statistics on pipeline durations, failure rates, and trends over time.
 - **Triaging test failures**: Understand which tests are failing, their ownership, and historical patterns.
 - **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
-- **Measuring DORA metrics**: Query deployment frequency, change lead time, change failure rate, and recovery time by service or team.
+- **Measuring DORA metrics**: Build delivery performance queries over deployments, commits, and pull requests, from deployment frequency and change failure rate to per-stage change lead time breakdowns.
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
 - **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
 - **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
@@ -68,11 +68,14 @@ The `software-delivery` toolset includes the following tools:
 `get_datadog_flaky_tests_management_policies`
 : Retrieve the Flaky Tests Management policies configured for a repository, including auto-quarantine windows, branch rules, failure rate thresholds, disable policies, and retry settings.
 
-`search_dora_deployments`
-: Search DORA deployment events with filters, or fetch full details for a single deployment by ID. For aggregated trends (deployment frequency, change lead time, failure rate), use `aggregate_dora_deployments` instead.
+`search_dora_events`
+: Search DORA events with filters, or fetch full details for a single event by ID. Target either deployments or the pull requests behind them. For aggregated trends (deployment frequency, change lead time, failure rate), use `aggregate_dora_events` instead.
 
-`aggregate_dora_deployments`
-: Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
+`aggregate_dora_events`
+: Aggregate DORA events into scalar values or timeseries using composable queries and formulas, the same model as `get_datadog_metric`. Each query selects a DORA index (`deployment`, `commit`, `pull_request`, or `failure`), a measure, an aggregation, and optional filters and grouping facets. Combine queries in a formula to derive ratios such as change failure rate.
+
+`get_dora_fields`
+: List the measures, facets, aggregations, and cardinality fields that `aggregate_dora_events` accepts for each DORA index. Call this tool first to pick a valid measure, grouping facet, or aggregation.
 
 `retry_datadog_ci_job`
 : Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
@@ -89,6 +92,7 @@ After you are connected, try prompts like:
 - What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
 - Show me coverage metrics for commit `abc123abc123abc123abc123abc123abc123abcd`.
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
+- Where does change lead time go for the `payments` service — coding, review, merge, or deploy?
 - Which test optimization features are enabled for the `auth-service`?
 - Quarantine all active flaky tests in the `checkout-service` repository.
 
