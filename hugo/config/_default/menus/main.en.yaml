@@ -10916,6 +10916,11 @@ menu:
       identifier: disaster_recovery
       parent: administration_heading
       weight: 15000
+    - name: Required Settings for Optimal Recovery Time Objective
+      identifier: disaster_recovery_required_settings
+      url: disaster_recovery/required_settings/
+      parent: disaster_recovery
+      weight: 1
     - name: Data Security
       url: data_security/
       pre: security-lock
