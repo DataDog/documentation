@@ -39,6 +39,7 @@ if (window.DD_RUM) {
             trackLongTasks: true,
             defaultPrivacyLevel: 'mask-user-input',
             allowedTracingUrls: [window.location.origin],
+            traceContextInjection: 'all',
             internalAnalyticsSubdomain: IA_SUBDOMAIN
         });
 
@@ -59,6 +60,7 @@ if (window.DD_LOGS) {
     window.DD_LOGS.init({
         clientToken: Config.ddClientToken,
         forwardErrorsToLogs: true,
+        forwardConsoleLogs: ['error'],
         env,
         service: 'docs',
         version: CI_COMMIT_SHORT_SHA,
