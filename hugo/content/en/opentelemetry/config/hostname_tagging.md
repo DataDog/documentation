@@ -33,6 +33,16 @@ The right configuration depends on how you send telemetry to Datadog. Find each 
 | [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Attach host information in the node-level Collector, and keep those resource attributes through the gateway. |
 | [Existing configurations using the Datadog Exporter](#existing-configurations-using-the-datadog-exporter) | Run a Collector on each host or Kubernetes node, and configure the same processors as the recommended setup. |
 
+If you're not sure which setup you have, check your configuration in this order and use the first match:
+
+1. **DDOT Collector**: The Datadog Agent runs the embedded Collector, for example with `otelcollector.enabled: true` in `datadog.yaml` or `otelCollector` enabled in the Helm chart or Datadog Operator.
+2. **OTLP ingestion by the Datadog Agent**: `datadog.yaml` has an `otlp_config` section, and applications send OTLP to the Agent.
+3. **OpenTelemetry Collector over OTLP**: Your Collector configuration exports with the `otlp_http` exporter to an `otlp.<DD_SITE>` endpoint.
+4. **Datadog Exporter**: Your Collector configuration lists the `datadog` exporter.
+5. **Direct OTLP intake**: Your SDK or platform sends OTLP to a Datadog intake endpoint, without an Agent or Collector.
+
+If telemetry passes through more than one Collector before it reaches Datadog, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
+
 ### OTLP ingestion by the Datadog Agent
 
 Deploy the Datadog Agent on every host that generates OTLP telemetry. Datadog doesn't support sending telemetry from one host to an Agent on another host. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
@@ -113,7 +123,7 @@ If a gateway deployment reports the wrong host, see [Gateway collector not forwa
 
 This applies to existing [OpenTelemetry Collector configurations with the Datadog Exporter][20]. For new Collector configurations, use the [recommended OpenTelemetry Collector setup][21].
 
-Run a Collector on each host or Kubernetes node, and configure host detection the same way as the [recommended setup](#opentelemetry-collector-exporting-to-datadog-over-otlp). The processor examples on this page work with the Datadog Exporter. If your Collector version is earlier than v0.153.0, use the component names `resourcedetection` and `k8sattributes`.
+Run a Collector on each host or Kubernetes node, and configure host detection the same way as the [recommended setup](#opentelemetry-collector-exporting-to-datadog-over-otlp). The [processor examples](#collector-configuration) on this page work with the Datadog Exporter. For a complete Datadog Exporter example on Amazon EKS, see [`k8s-values.yaml`][4].
 
 If your Collector forwards to a gateway, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
 
@@ -449,6 +459,8 @@ processors:
 
 The following table lists resource attributes that these processors can add. The **Datadog tag** column shows the tag that Datadog creates from the attribute, where one exists.
 
+{{% collapse-content title="Resource attributes and Datadog tags" level="p" %}}
+
 | OpenTelemetry attribute | Datadog tag | Processor |
 |---|---|---|
 | `host.arch` |  | `resource_detection` (`system`) |
@@ -505,84 +517,7 @@ The following table lists resource attributes that these processors can add. The
 | `container.image.name` | `image_name` | `k8s_attributes` |
 | `container.image.tag` | `image_tag` | `k8s_attributes` |
 
-### Full example configuration
-
-For complete configuration files for the recommended setup, see the [`opentelemetry-examples` repository][23]. For an existing configuration with the Datadog Exporter on Amazon EKS, see [`k8s-values.yaml`][4].
-
-### Example logging output
-
-The following debug exporter output shows resource attributes that these processors added to a span:
-
-```
-ResourceSpans #0
-Resource SchemaURL: https://opentelemetry.io/schemas/1.6.1
-Resource attributes:
-     -> container.id: Str(0cb82a1bf21466b4189414cf326683d653114c0f61994c73f78d1750b9fcdf06)
-     -> service.name: Str(cartservice)
-     -> service.instance.id: Str(5f35cd94-1b9c-47ff-bf45-50ac4a998a6b)
-     -> service.namespace: Str(opentelemetry-demo)
-     -> k8s.namespace.name: Str(otel-gateway)
-     -> k8s.node.name: Str(ip-192-168-61-208.ec2.internal)
-     -> k8s.pod.name: Str(opentelemetry-demo-cartservice-567765cd64-cbmwz)
-     -> deployment.environment: Str(otel-gateway)
-     -> k8s.pod.ip: Str(192.168.45.90)
-     -> telemetry.sdk.name: Str(opentelemetry)
-     -> telemetry.sdk.language: Str(dotnet)
-     -> telemetry.sdk.version: Str(1.5.1)
-     -> cloud.provider: Str(aws)
-     -> cloud.platform: Str(aws_ec2)
-     -> cloud.region: Str(us-east-1)
-     -> cloud.account.id: Str(XXXXXXXXXX)
-     -> cloud.availability_zone: Str(us-east-1c)
-     -> host.id: Str(i-09e82186d7d8d7c95)
-     -> host.image.id: Str(ami-06f28e19c3ba73ef7)
-     -> host.type: Str(m5.large)
-     -> host.name: Str(ip-192-168-50-0.ec2.internal)
-     -> os.type: Str(linux)
-     -> k8s.deployment.name: Str(opentelemetry-demo-cartservice)
-     -> kube_app_name: Str(opentelemetry-demo-cartservice)
-     -> k8s.replicaset.uid: Str(ddb3d058-6d6d-4423-aca9-0437c3688217)
-     -> k8s.replicaset.name: Str(opentelemetry-demo-cartservice-567765cd64)
-     -> kube_app_instance: Str(opentelemetry-demo)
-     -> kube_app_component: Str(cartservice)
-     -> k8s.pod.start_time: Str(2023-11-13T15:03:46Z)
-     -> k8s.pod.uid: Str(5f35cd94-1b9c-47ff-bf45-50ac4a998a6b)
-     -> k8s.container.name: Str(cartservice)
-     -> container.image.name: Str(XXXXXXXXX.dkr.ecr.us-east-1.amazonaws.com/otel-demo)
-     -> container.image.tag: Str(v4615c8d7-cartservice)
-ScopeSpans #0
-ScopeSpans SchemaURL: 
-InstrumentationScope Microsoft.AspNetCore 
-Span #0
-    Trace ID       : fc6794b53df7e44bab9dced42bdfbf7b
-    Parent ID      : 2d3ba75ad6a6b1a0
-    ID             : f669b0fcd98365b9
-    Name           : oteldemo.CartService/AddItem
-    Kind           : Server
-    Start time     : 2023-11-20 13:37:11.2060978 +0000 UTC
-    End time       : 2023-11-20 13:37:11.2084166 +0000 UTC
-    Status code    : Unset
-    Status message : 
-Attributes:
-     -> net.host.name: Str(opentelemetry-demo-cartservice)
-     -> net.host.port: Int(8080)
-     -> http.method: Str(POST)
-     -> http.scheme: Str(http)
-     -> http.target: Str(/oteldemo.CartService/AddItem)
-     -> http.url: Str(http://opentelemetry-demo-cartservice:8080/oteldemo.CartService/AddItem)
-     -> http.flavor: Str(2.0)
-     -> http.user_agent: Str(grpc-node-js/1.8.14)
-     -> app.user.id: Str(e8521c8c-87a9-11ee-b20a-4eaeb9e6ddbc)
-     -> app.product.id: Str(LS4PSXUNUM)
-     -> app.product.quantity: Int(3)
-     -> http.status_code: Int(200)
-     -> rpc.system: Str(grpc)
-     -> net.peer.ip: Str(::ffff:192.168.36.112)
-     -> net.peer.port: Int(36654)
-     -> rpc.service: Str(oteldemo.CartService)
-     -> rpc.method: Str(AddItem)
-     -> rpc.grpc.status_code: Int(0)
-```
+{{% /collapse-content %}}
 
 ## Custom tagging
 
@@ -685,5 +620,4 @@ processors:
 [20]: /opentelemetry/setup/collector_exporter/datadog_exporter/
 [21]: /opentelemetry/setup/collector_exporter/
 [22]: /opentelemetry/setup/otlp_ingest/
-[23]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector
 [24]: /opentelemetry/setup/collector_exporter/#span-metrics-connector
