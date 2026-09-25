@@ -93953,7 +93953,7 @@ components:
           attributes:
             scope: ccm
             sort:
-              - expression: potential_daily_savings.amount
+              - expression: "@potential_daily_savings"
                 order: DESC
           id: "@resource_table:aws_ec2_instance"
           type: recommendations_filter
@@ -93972,8 +93972,9 @@ components:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
         id:
           description: |-
-            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
-            and returns all recommendations.
+            Filter expression applied to the recommendations when `attributes.filter` is omitted.
+            When supplied, `attributes.filter` overrides this value, including when empty. If the
+            resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -93983,6 +93984,13 @@ components:
     RecommendationsFilterRequestDataAttributes:
       description: Attributes used to filter and sort cost recommendations.
       properties:
+        filter:
+          description: |-
+            Filter expression applied to the recommendations. When supplied, this attribute overrides
+            `data.id`, including when empty. When omitted, `data.id` is used. If the resulting filter
+            is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
+          type: string
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -94018,7 +94026,7 @@ components:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
-          description: Field to sort by (for example, `potential_daily_savings.amount`).
+          description: Field to sort by (for example, `@potential_daily_savings`).
           type: string
         order:
           description: Sort direction, either `ASC` or `DESC`.
@@ -149081,7 +149089,7 @@ paths:
                     attributes:
                       scope: ccm
                       sort:
-                        - expression: potential_daily_savings.amount
+                        - expression: "@potential_daily_savings"
                           order: DESC
                     id: "@resource_table:aws_ec2_instance"
                     type: recommendations_filter
