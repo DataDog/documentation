@@ -764,6 +764,8 @@ Continuous Profiler를 활성화하려면 `DD_PROFILING_ENABLED=true` 환경 변
 
 {{< ui >}}Log stream{{< /ui >}}의 내용을 [Datadog 고객 지원팀][9]과 공유하세요.
 
+App Service Plan에서 자동 크기 조정이 활성화되어 있고 관련 없는 트레이스가 함께 병합되는 경우, Azure 플랫폼 상태 프로브(`User-Agent: HttpScaleManager`)가 오래된 W3C 트레이스 컨텍스트를 전달할 수 있습니다. 앱에 대한 모든 호출자가 Datadog으로 계측된 경우, 영향을 받는 앱에서 `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog`을(를) 설정하여 트레이스 컨텍스트 추출을 Datadog 형식으로 제한하십시오. Datadog으로 계측되지 않은 호출자가 있는 앱의 경우, 이 설정을 사용하면 Datadog이 해당 호출자의 W3C 트레이스 컨텍스트를 무시하게 되어, 해당 요청을 상위 트레이스로 병합하는 대신 연결되지 않은 트레이스로 분리하게 됩니다.
+
 ## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -15,7 +15,7 @@ title: Kubernetes Explorer
 ---
 {{< img src="infrastructure/livecontainers/orch_ex.png" alt="Kubernetes Explorer, affichant les pods Kubernetes." style="width:80%;">}}
 
-[Kubernetes Explorer][1] de Datadog vous permet de surveiller l'état des pods, des déploiements et d'autres ressources Kubernetes. Vous pouvez également afficher les spécifications des ressources pour les pods en échec au sein d'un déploiement, corréler l'activité des nœuds avec les logs associés, suivre l'utilisation des ressources, mettre à l'échelle automatiquement les workloads et corriger les erreurs.
+[Kubernetes Explorer][1] de Datadog vous permet de surveiller l'état des pods, des déploiements et d'autres ressources Kubernetes. Vous pouvez également afficher les spécifications des ressources pour les pods en échec au sein d'un déploiement, corréler l'activité des nœuds avec les logs associés, suivre l'utilisation des ressources, mettre à l'échelle automatiquement les charges de travail et corriger les erreurs.
 
 <div class="alert alert-info">Lors de l'utilisation du Datadog Agent, Kubernetes Explorer nécessite l'Agent 7.27.0+ et le Cluster Agent 1.11.0+. Si vous utilisez Kubernetes 1.25+, le Cluster Agent 7.40.0+ est requis.</div>
 
@@ -79,42 +79,46 @@ Pour une configuration manuelle, consultez [Configurer Kubernetes Explorer avec 
 {{% /tab %}}
 {{% tab "Collector OpenTelemetry" %}}
 
-Vous pouvez alimenter Kubernetes Explorer à l'aide d'un pipeline OpenTelemetry natif au lieu du Datadog Agent. Cette configuration utilise le récepteur [`k8sobjects`][1] pour collecter les données des ressources Kubernetes et les transfère via la fonctionnalité Orchestrator Explorer de [Datadog Exporter][2].
+Vous pouvez alimenter Kubernetes Explorer en envoyant directement des données de ressources Kubernetes à Datadog via OTLP HTTP. Cette configuration utilise le récepteur [`k8sobjects`][1] et l'exportateur OTLP HTTP du collecteur OpenTelemetry.
+
+Les étapes suivantes activent les vues de ressources de Kubernetes Explorer sans collecter les métriques utilisées par les tableaux de bord associés. Cette configuration ne nécessite pas `kube-state-metrics` ni de serveur Prometheus. Pour collecter ces métriques et alimenter Kubernetes Explorer, suivez plutôt [Surveillez Kubernetes avec OpenTelemetry][6].
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-warning">Cette fonctionnalité n'est pas disponible pour {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 #### Prérequis {#prerequisites}
 
-- OpenTelemetry Collector Contrib [v0.154.0][3] ou version ultérieure.
+- OpenTelemetry Collector Contrib [v0.159.0][3] ou version ultérieure.
 - OpenTelemetry Collector [Helm chart][4] v0.156.2 ou version ultérieure.
+- Une [clé d'API Datadog][15] et votre [site Datadog][7].
 
 #### Limitations {#limitations}
 
-Le récepteur open source `k8sobjects` peut imposer une charge importante sur le serveur API Kubernetes d'un cluster.
+Le récepteur open source `k8sobjects` peut imposer une charge importante sur le serveur API Kubernetes d'un cluster. Une [migration basée sur un informer en amont][16] suit les améliorations de sa scalabilité.
 
 Recommandations :
 
 - Utilisez Kubernetes 1.33 ou version ultérieure, qui inclut des [améliorations de liste en continu][5] réduisant l'impact sur le serveur API.
 - Commencez avec des clusters plus petits. Limitez le nombre d'objets par type de ressource à moins de 5 000 comme point de départ, et augmentez progressivement tout en surveillant la santé du cluster.
 
-Les étapes suivantes présentent les composants requis pour Kubernetes Explorer. Pour un exemple de référence complet qui collecte également les métriques d'infrastructure Kubernetes, consultez [Kubernetes Metrics][6].
+#### 1. Créez un secret Datadog {#1-create-a-datadog-secret}
 
-#### 1. Créez un secret de clé d'API Datadog {#1-create-a-datadog-api-key-secret}
-
-Créez un secret Kubernetes pour stocker votre clé d'API Datadog :
+Définissez votre clé d'API Datadog et votre site, puis créez un secret Kubernetes. Ces étapes utilisent l'espace de nommage `default` pour le secret et le collecteur :
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
-kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
+export DD_SITE="{{< region-param key="dd_site" >}}"
+
+kubectl create secret generic datadog-secret \
+  --namespace default \
+  --from-literal="api-key=$DD_API_KEY" \
+  --from-literal="dd-site=$DD_SITE"
 ```
 
 #### 2. Configurez le collecteur de cluster {#2-configure-the-cluster-collector}
 
-Cette configuration déploie l'OTel Collector en tant que déploiement Kubernetes. Créez un fichier `deployment-collector.yaml` avec les blocs de configuration suivants, ou fusionnez-les dans votre fichier de valeurs OpenTelemetry Collector existant.
+Créez `deployment-collector.yaml` avec les valeurs Helm complètes suivantes. Remplacez `<YOUR_CLUSTER_NAME>` par le nom de votre cluster.
 
-##### Image et mode du collecteur {#collector-image-and-mode}
-
-Configurez le collecteur pour qu'il s'exécute en tant que déploiement à réplique unique utilisant la distribution Contrib :
+Cette configuration exécute un collecteur en tant que déploiement. Elle définit explicitement le nom du cluster, de sorte que la détection du fournisseur cloud n'est pas requise.
 
 ```yaml
 mode: deployment
@@ -122,7 +126,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.154.0
+  tag: 0.159.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -131,13 +135,16 @@ extraEnvs:
       secretKeyRef:
         name: datadog-secret
         key: api-key
-```
+  - name: DD_SITE
+    valueFrom:
+      secretKeyRef:
+        name: datadog-secret
+        key: dd-site
+  - name: K8S_NODE_NAME
+    valueFrom:
+      fieldRef:
+        fieldPath: spec.nodeName
 
-##### Collecte d'objets Kubernetes {#kubernetes-objects-collection}
-
-Le `kubernetesObjects` [préréglage][4] provisionne automatiquement le compte de service, les autorisations RBAC et les valeurs par défaut du récepteur `k8sobjects` nécessaires pour remplir Kubernetes Explorer. Remplacez le récepteur `interval` par `3m`, ce qui est requis pour Kubernetes Explorer :
-
-```yaml
 presets:
   kubernetesObjects:
     enabled: true
@@ -147,79 +154,48 @@ config:
   receivers:
     k8sobjects:
       interval: 3m
-```
 
-##### Datadog Exporter {#datadog-exporter}
-
-Activez l'option `orchestrator_explorer` dans le Datadog Exporter. Il s'agit du paramètre qui envoie les données d'objet Kubernetes à Kubernetes Explorer. Remplacez `<YOUR_DATADOG_SITE>` par votre [site Datadog][7] :
-
-```yaml
-config:
-  exporters:
-    datadog:
-      api:
-        site: <YOUR_DATADOG_SITE>
-        key: ${env:DD_API_KEY}
-      orchestrator_explorer:
-        enabled: true
-```
-
-##### Processeurs et pipeline {#processors-and-pipeline}
-
-Ajoutez un processeur [`resourcedetection`][8] pour détecter l'UID et le nom du cluster.
-
-- Le détecteur `k8s_api` est requis pour détecter l'UID du cluster (`k8s.cluster.uid`).
-- La détection du nom du cluster dépend de votre fournisseur cloud. Vérifiez la [documentation du processeur `resourcedetection`][8] pour connaître les fournisseurs pris en charge (EKS, AKS, GCP) et les autorisations requises.
-- Si votre fournisseur n'est pas pris en charge, utilisez un processeur `resource/add-cluster-name` pour définir le nom du cluster manuellement. Remplacez `<YOUR_CLUSTER_NAME>` par le nom de votre cluster.
-
-Connectez ensuite les composants dans un pipeline `logs`.
-
-Les exemples suivants présentent deux approches. Utilisez l'exemple du fournisseur cloud si vous utilisez EKS, AKS ou GCP. Utilisez le recours manuel si votre fournisseur n'est pas pris en charge.
-
-**Détection du fournisseur cloud (exemple EKS) :**
-
-```yaml
   processors:
-    resourcedetection:
-      detectors: [k8s_api, eks]
-      override: false
-      eks:
-        resource_attributes:
-          k8s.cluster.name:
-            enabled: true
-
-  service:
-    pipelines:
-      logs:
-        receivers: [k8sobjects]
-        processors: [resourcedetection]
-        exporters: [datadog]
-```
-
-Remplacez `eks` par le détecteur de votre fournisseur (`aks`, `gcp`). Consultez la [`resourcedetection` documentation du processeur][8] pour la configuration spécifique au fournisseur.
-
-**Recours manuel :**
-
-Si le processeur `resourcedetection` ne prend pas en charge votre fournisseur cloud, définissez le nom du cluster manuellement. Remplacez `<YOUR_CLUSTER_NAME>` par le nom de votre cluster :
-
-```yaml
-  processors:
-    resourcedetection:
+    resource_detection:
       detectors: [k8s_api]
       override: false
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
-          value: <YOUR_CLUSTER_NAME>
+          value: "<YOUR_CLUSTER_NAME>"
           action: upsert
+
+  exporters:
+    otlp_http:
+      endpoint: https://otlp.${env:DD_SITE}
+      logs_endpoint: https://otlp.${env:DD_SITE}/api/v2/otlplogs
+      headers:
+        dd-api-key: ${env:DD_API_KEY}
+      compression: zstd
+      compression_params:
+        level: 3
+      sending_queue:
+        batch:
+          sizer: bytes
+          min_size: 2097152
+          max_size: 4194304
 
   service:
     pipelines:
       logs:
         receivers: [k8sobjects]
-        processors: [resourcedetection, resource/add-cluster-name]
-        exporters: [datadog]
+        processors: [resource_detection, resource/add-cluster-name]
+        exporters: [otlp_http]
 ```
+
+Le préréglage `kubernetesObjects` configure le récepteur, le compte de service et les autorisations RBAC. Conservez l'intervalle de collecte `3m` et le détecteur `k8s_api`. Le détecteur utilise `K8S_NODE_NAME` pour identifier l'UID du cluster. Le pipeline `logs` envoie des objets de ressources Kubernetes via OTLP ; il ne collecte pas les logs d'application.
+
+##### Détection automatique du nom du cluster (facultatif) {#automatic-cluster-name-detection-optional}
+
+Si vous préférez la détection automatique du nom du cluster, effectuez ces modifications dans `deployment-collector.yaml` avant le déploiement :
+
+1. Ajoutez le détecteur de votre fournisseur à `resource_detection.detectors`, en conservant `k8s_api`. Suivez les conseils de configuration et d'autorisations pour [EKS][12], [AKS][13] ou [GKE][14], notamment en activant l'attribut de ressource `k8s.cluster.name`.
+2. Supprimez `resource/add-cluster-name` à la fois de `config.processors` et de la liste `processors` du pipeline `logs`.
 
 #### 3. Déployez avec Helm {#3-deploy-with-helm}
 
@@ -230,6 +206,7 @@ helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm
 helm repo update
 
 helm install deployment-collector open-telemetry/opentelemetry-collector \
+  --namespace default \
   --values ./deployment-collector.yaml
 ```
 
@@ -239,7 +216,9 @@ Ouvrez le [Kubernetes Explorer][9] et filtrez par le nom de votre cluster OpenTe
 
 #### 5. Corrélez les logs, les métriques et les traces avec Kubernetes Explorer (facultatif) {#5-correlate-logs-metrics-and-traces-with-kubernetes-explorer-optional}
 
-Pour naviguer entre les ressources Kubernetes et leurs logs, métriques et traces associés, ajoutez les processeurs [`k8sattributes`][10] et [`resourcedetection`][8] à vos pipelines de collecteur existants. Pour la configuration `resourcedetection`, voir [Processeurs et pipeline](#processors-and-pipeline) ci-dessus.
+Cette étape s'applique aux collecteurs qui reçoivent la télémétrie d'application, et non au collecteur Explorer uniquement mentionné ci-dessus. Pour corréler cette télémétrie avec les ressources Kubernetes, ajoutez les processeurs [`k8sattributes`][10] et [`resourcedetection`][8] aux pipelines de ces collecteurs. Utilisez le même nom de cluster que pour le collecteur Explorer.
+
+Le fragment suivant montre la configuration du processeur. Conservez les récepteurs, exportateurs et processeurs existants dans vos pipelines de télémétrie d'application ; remplacez `...` par les autres processeurs dans chaque pipeline.
 
 ```yaml
 processors:
@@ -283,24 +262,30 @@ service:
       processors: [k8sattributes, resourcedetection, ...]
 ```
 
-Pour un exemple de référence complet, voir la [configuration du collecteur DaemonSet][11].
+Pour un exemple complet de collecteur de télémétrie d'application, consultez la [configuration du collecteur DaemonSet][11].
 
 [1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/receiver/k8sobjectsreceiver
-[2]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/datadogexporter
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
+[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.159.0
 [4]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [5]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
-[6]: /fr/opentelemetry/integrations/kubernetes_metrics/#setup
+[6]: /fr/containers/kubernetes/opentelemetry/#setup
 [7]: /fr/getting_started/site/
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor
 [9]: https://app.datadoghq.com/orchestration/overview
 [10]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
 [11]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
+[12]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#amazon-eks
+[13]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#azure-aks
+[14]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/resourcedetectionprocessor#gcp-metadata
+[15]: /fr/account_management/api-app-keys/#api-keys
+[16]: https://github.com/open-telemetry/opentelemetry-collector-contrib/pull/50392
 
 {{% /tab %}}
 {{% tab "Pile Kube OpenTelemetry" %}}
 
 Vous pouvez remplir Kubernetes Explorer en utilisant le chart Helm `opentelemetry-kube-stack` au lieu du Datadog Agent.
+
+<div class="alert alert-info">La configuration de référence dans cet onglet utilise l'exportateur Datadog. Pour les nouveaux déploiements, utilisez l'onglet <strong>OpenTelemetry Collector</strong> pour envoyer les données de ressources Kubernetes directement à Datadog via OTLP HTTP.</div>
 
 Le chart Helm [`opentelemetry-kube-stack`][1] installe l'opérateur OpenTelemetry et gère les collecteurs en tant que `OpenTelemetryCollector`Custom Resources (CR). Datadog maintient une référence [`values.yaml`][2] qui configure deux collecteurs :
 
@@ -520,13 +505,13 @@ Il est également possible d'utiliser les facettes sur la partie gauche de la pa
 
 {{< img src="infrastructure/livecontainers/crashloopbackoff.mp4" alt="Un exemple de regroupement du statut de pod CrashLoopBackOff" video=true style="width:80%;">}}
 
-### Carte du cluster {#cluster-map}
+### Cluster Map {#cluster-map}
 
-Une carte de cluster vous donne une vue d'ensemble de vos pods et clusters Kubernetes. Vous pouvez voir toutes vos ressources ensemble sur un seul écran avec des groupes et des filtres personnalisés, et choisir les métriques pour remplir la couleur des nœuds.
+Une Cluster Map vous donne une vue d'ensemble de vos pods et clusters Kubernetes. Vous pouvez voir toutes vos ressources ensemble sur un seul écran avec des groupes et des filtres personnalisés, et choisir les métriques pour remplir la couleur des nœuds.
 
 Pour examiner des ressources spécifiques depuis une Cluster Map, cliquez sur un cercle ou un groupe. Les détails s'affichent alors dans un volet distinct.
 
-{{< img src="infrastructure/livecontainers/cluster-map.mp4" alt="Une carte de cluster avec des groupes et des filtres personnalisés" video=true style="width:80%;">}}
+{{< img src="infrastructure/livecontainers/cluster-map.mp4" alt="Une Cluster Map avec des groupes et des filtres personnalisés" video=true style="width:80%;">}}
 
 ### Information panel {#information-panel}
 
@@ -568,7 +553,7 @@ Dans l'onglet Kubernetes Explorer, vous pouvez explorer une sélection de métri
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization.png" alt="Utilisation des ressources du conteneur" style="width:80%;">}}
 
-Toutes les colonnes de cette vue peuvent être triées, ce qui vous permet d'identifier des workloads spécifiques en fonction de leur utilisation des ressources.
+Toutes les colonnes de cette vue peuvent être triées, ce qui vous permet d'identifier des charges de travail spécifiques en fonction de leur utilisation des ressources.
 
 {{< img src="infrastructure/livecontainers/orch_ex_resource_utilization_sorted_column.png" alt="Colonnes triées de l'utilisation des ressources du conteneur" style="width:50%;">}}
 
@@ -591,7 +576,7 @@ Vous pouvez utiliser plusieurs types de termes :
 | **Tags** : Appliqués aux ressources par [l'Agent qui les recueille][7]. Il existe également des tags supplémentaires que Datadog génère pour les ressources Kubernetes. | `datacenter:staging`, `tag#datacenter:staging`<br>_(le `tag#` est facultatif)_ |
 | **Étiquettes** : Extraites des [métadonnées d'une ressource][8]. Elles sont généralement utilisées pour organiser votre cluster et cibler des ressources spécifiques avec des sélecteurs. | `label#chart_version:2.1.0` |
 | **Annotations** : Extraites des [métadonnées d'une ressource][9]. Elles sont généralement utilisées pour prendre en charge des outils qui aident à la gestion du cluster. | `annotation#checksum/configmap:a1bc23d4` |
-| **Métriques** : Ajoutées aux ressources de workloads (pods, déploiements, etc.). Vous pouvez trouver des ressources en fonction de leur utilisation. Pour voir quelles métriques sont prises en charge, consultez [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
+| **Métriques** : Ajoutées aux ressources de charge de travail (pods, déploiements, etc.). Vous pouvez trouver des ressources en fonction de leur utilisation. Pour voir quelles métriques sont prises en charge, consultez [Resource Utilization Filters](#resource-utilization-filters). | `metric#cpu_usage_pct_limits_avg15:>80%` |
 | **Correspondance de chaîne** : Prise en charge par certains d'attributs de ressource spécifiques (voir ci-dessous).<br>_Remarque : cette fonctionnalité ne repose pas sur un format clé-valeur, et vous ne pouvez pas spécifier l'attribut de votre choix._ | `"10.132.6.23"` (IP),<br>`"9cb4b43f-8dc1-4a0e"` (UID),<br>`web-api-3` (Nom) |
 | **Champs** : Extraits des [métadonnées d'une ressource][10] ou des champs indexés des ressources personnalisées. | `field#metadata.creationTimestamp:>=4wk`, `field#metadata.deletionTimestamp:<=1hr`, `field#status.currentReplicas:3`, `field#status.conditions.Active.status:True` |
 
@@ -703,7 +688,7 @@ Les pods possèdent les tags suivants :
 
 #### Workloads {#workloads}
 
-Les ressources de workload (pods, déploiements, StatefulSets, etc.) possèdent les tags suivants, qui indiquent leur statut de prise en charge par la page Resources Utilization :
+Les ressources de charge de travail (pods, déploiements, StatefulSets, etc.) possèdent les tags suivants, qui indiquent leur statut de prise en charge par la page Resources Utilization :
 
 - `resource_utilization` (`supported` ou `unsupported`)
 - `missing_cpu_requests`
@@ -734,7 +719,7 @@ Certaines ressources possèdent des tags spécifiques qui sont extraits en fonct
 
 ### Filtres d'utilisation des ressources {#resource-utilization-filters}
 
-Des métriques d'utilisation de ressources sont appliquées aux ressources de workload suivantes :
+Des métriques d'utilisation de ressources sont appliquées aux ressources de charge de travail suivantes :
 
 - Clusters
 - Nœuds

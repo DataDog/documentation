@@ -14,30 +14,29 @@ further_reading:
 - link: /serverless/
   tag: Documentation
   text: Serverless Monitoring
-title: Environnements serverless
+title: Environnements Serverless
 ---
-## Vue d'ensemble {#overview}
+## Présentation {#overview}
 
 Les SDK Java, Node.js et Python de Feature Flags de Datadog peuvent recevoir la configuration des flags directement depuis le CDN géré par Datadog. Cette source de configuration _agentless_ simplifie l'intégration car elle ne nécessite pas de Datadog Agent pour la configuration des flags. Elle prend également en charge les applications serverless qui ne peuvent pas se connecter à un Datadog Agent.
 
 Une fois la configuration chargée, l'évaluation des flags s'effectue localement dans l'application. Le SDK n'effectue pas de requête réseau pour chaque évaluation.
 
-La distribution de configuration agentless est disponible dans :
+Le tableau suivant présente les fonctionnalités de Feature Flags disponibles dans chaque version du SDK :
 
-| SDK | version minimale |
-|---|---|
-| Java `dd-openfeature` et `dd-java-agent` | 1.65.0 |
-| Node.js `dd-trace` v5 | 5.116.0 |
-| Node.js `dd-trace` v6 | 6.5.0 |
-| Python `ddtrace` | 4.14.0 |
+| SDK | Version minimale | Configuration Agentless et évaluation locale | Événements d'exposition aux expériences | Événements d'évaluation de flag Event Platform Proxy (EVP) | Livraison d'événements |
+|---|---|---|---|---|---|
+| Java `dd-openfeature` et `dd-java-agent` | 1.66.0 | Pris en charge | Pris en charge | Pris en charge | Privilégiez un relais de télémétrie local compatible ; utilisez le repli direct en cas d'indisponibilité |
+| Node.js `dd-trace` | 6.12.0 | Pris en charge | Pris en charge | Non pris en charge | Privilégiez un relais de télémétrie local compatible ; utilisez le repli direct en cas d'indisponibilité |
+| Python `ddtrace` | 4.14.0 | Pris en charge | Pris en charge | Pris en charge | Relais de télémétrie local compatible |
 
 La distribution par CDN pour Java nécessite `dd-openfeature` et `dd-java-agent`. L'environnement d'exécution Java doit prendre en charge le chargement de `dd-java-agent` avec l'option JVM `-javaagent`. Vous pouvez transmettre cette option dans la commande Java ou via `JAVA_TOOL_OPTIONS`.
 
-Les autres SDK côté serveur et les versions antérieures à celles listées nécessitent l'Agent Remote Configuration pour la distribution des flags.
+Les versions listées offrent les capacités présentées dans le tableau. Les autres SDK serveur utilisent Agent Remote Configuration pour la livraison des flags.
 
-<div class="alert alert-warning">Les versions initiales agentless de Node.js chargent la configuration et évaluent les flags localement. Ils n'exportent pas de métriques d'évaluation ni d'événements d'exposition. La livraison agentless pour Java et Python modifie uniquement la source de configuration. Java et Python n'exportent pas ces signaux sans un Datadog Agent pris en charge ou un chemin de télémétrie serverless.</div>
+La livraison Agentless modifie uniquement la source de configuration des flags. Les événements Feature Flags utilisent une connexion distincte vers un relais de télémétrie local compatible ou le chemin direct pris en charge.
 
-## Architecture agentless {#agentless-architecture}
+## Architecture Agentless {#agentless-architecture}
 
 Utilisez la livraison agentless lorsque le runtime serverless peut effectuer des requêtes HTTPS sortantes vers Datadog. Pour Java, le runtime doit également vous permettre de définir l'option JVM `-javaagent` :
 
@@ -53,11 +52,45 @@ Utilisez la livraison agentless lorsque le runtime serverless peut effectuer des
 4. Initialisez ou accédez au fournisseur OpenFeature de Datadog comme décrit dans la configuration [Java][6], [Node.js][3] ou [Python][9]. Cela lance l'interrogation du CDN. Aucune activation de Feature Flags ni aucun paramètre de source n'est requis.
 5. Stockez `DD_API_KEY` dans le gestionnaire de secrets de la plateforme serverless et exposez-le uniquement au processus de l'application.
 
-Le SDK interroge le CDN géré par Datadog toutes les 30 secondes par défaut et utilise ETag pour la configuration inchangée. Il conserve la dernière configuration acceptée lors d'erreurs temporaires. Si aucune configuration n'a été acceptée, les évaluations OpenFeature renvoient la valeur par défaut fournie par l'appelant.
+Le SDK interroge le CDN géré par Datadog toutes les 30 secondes par défaut et utilise des ETags pour la configuration inchangée. Il conserve la dernière configuration acceptée lors d'erreurs temporaires. Si aucune configuration n'a été acceptée, les évaluations OpenFeature renvoient la valeur par défaut fournie par l'appelant.
 
 L'installation et l'initialisation du traceur seules ne lancent pas l'interrogation du CDN. Les requêtes vers le CDN ne contribuent à la facturation des Feature Flags côté serveur qu'une fois que le code de l'application active le fournisseur.
 
-Le mode agentless supprime la dépendance au Datadog Agent pour la _configuration des indicateurs_. Il ne supprime pas les exigences de traceur spécifiques au langage. Il ne configure ni n'active non plus l'APM et la télémétrie serverless. Vous pouvez utiliser la Datadog Lambda Extension, `serverless-init`, un sidecar Agent ou un autre chemin de télémétrie pris en charge indépendamment.
+Le mode Agentless supprime la dépendance au Datadog Agent pour la _configuration des indicateurs_. Il ne supprime pas les exigences de traceur spécifiques au langage. Il ne configure ni n'active non plus APM et la télémétrie serverless. Vous pouvez utiliser la Datadog Lambda Extension, `serverless-init`, un sidecar Agent ou un autre chemin de télémétrie pris en charge indépendamment.
+
+## Envoyer la télémétrie des feature flags{#send-feature-flag-telemetry}
+
+`serverless-init` est un relais de télémétrie local compatible. Ce n'est pas une source de configuration de Feature Flags. Conservez la source `agentless` par défaut pour charger la configuration depuis le CDN.
+
+N'utilisez pas `serverless-init` en remplacement du Datadog Agent lorsque vous sélectionnez `remote_config`. Agent Remote Configuration nécessite un Datadog Agent.
+
+Le repli direct signifie que le SDK envoie des événements EVP authentifiés à Datadog lorsqu'il ne peut pas utiliser un relais local compatible.
+
+Notez le comportement suivant :
+
+- Les événements d'exposition aux expériences sont émis uniquement pour les flags associés à une expérience.
+- Java et Python agrègent les événements d'évaluation de flag EVP et les envoient par défaut.
+- Pour désactiver uniquement le chemin d'événement d'évaluation de flag EVP, définissez `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
+
+La métrique `feature_flag.evaluations` est un signal OpenTelemetry (OTLP) distinct. La connexion `serverless-init` standard sur le port 8126 ne configure pas l'endpoint OTLP pour cette métrique. Pour les environnements sans serveur sans Agent, configurez le chemin de télémétrie sans serveur pour votre plateforme avant d'activer cette métrique. Voir [Configurer les métriques d'évaluation des flags côté serveur][10].
+
+### Configurez serverless-init {#configure-serverless-init}
+
+1. Terminez la configuration de [Serverless Monitoring][11] pour votre plateforme. Ces instructions fournissent les configurations prises en charge dans le conteneur et sidecar, les variables d'environnement requises et les paramètres réseau.
+
+1. Appliquez ces exigences relatives aux Feature Flags :
+   - Utilisez `serverless-init` 1.9.13 ou une version ultérieure. Les versions antérieures ne prennent pas en charge la route EVP requise.
+   - Conservez `DD_API_KEY` et `DD_SITE` dans l'environnement de l'application pour la distribution de la configuration CDN sans agent. Un sidecar en a également besoin pour la sortie de télémétrie.
+   - Ne configurez pas d'endpoint spécifique aux Feature Flags. Le SDK utilise la connexion standard du tracer, telle que configurée par la configuration de la surveillance sans serveur (Serverless Monitoring).
+   - Node.js et Java appellent `GET /info` sur l'URL du tracer pour découvrir le proxy EVP local. Python envoie les événements EVP pris en charge à la même URL sans cette requête de découverte.
+
+### Vérifiez la sortie de télémétrie {#verify-telemetry-egress}
+
+1. Initialisez le fournisseur OpenFeature et confirmez qu'il atteint un état prêt.
+2. Évaluez un flag associé à une expérience, puis confirmez que l'expérience reçoit un événement d'exposition.
+3. Lorsque vous utilisez un relais local, vérifiez les logs de l'application et de `serverless-init` pour détecter les erreurs de connexion au port 8126.
+4. Pour Java et Python, confirmez que `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` n'est pas défini sur `false` lorsque vous avez besoin d'événements d'évaluation de flag EVP.
+5. Si vous utilisez la métrique `feature_flag.evaluations`, validez son chemin OTLP distinct avec [Configurer les métriques d'évaluation des flags côté serveur][10].
 
 ## Remote Configuration prise en charge par l'Agent {#agent-backed-remote-configuration}
 
@@ -70,7 +103,7 @@ DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
 DD_TRACE_AGENT_PORT=8126
 {{< /code-block >}}
 
-Pour Java, utilisez des versions `dd-openfeature` et `dd-java-agent` compatibles. Utilisez la version 1.65.0 ou ultérieure pour les deux composants.
+Pour Java, utilisez des versions `dd-openfeature` et `dd-java-agent` compatibles. Utilisez la version 1.66.0 ou ultérieure pour les deux composants.
 
 Configurez l'Agent avec la Remote Configuration et la clé d'API :
 
@@ -87,8 +120,8 @@ La sélection explicite de `remote_config` active l'abonnement à Feature Flags 
 ## Considérations opérationnelles {#operational-considerations}
 
 - **Démarrages à froid** : L'initialisation bloquante du fournisseur attend la première configuration et peut ajouter une latence de démarrage à froid. Initialisez de manière asynchrone s'il est acceptable de fournir des valeurs par défaut fournies par l'appelant au démarrage.
-- **Connectivité sortante** : La livraison agentless nécessite un accès HTTPS sortant vers le service de configuration des flags géré par Datadog.
-- **Propriété de la clé d'API** : En mode agentless, l'application détient `DD_API_KEY`. En mode `remote_config`, l'Agent détient la clé d'API.
+- **Connectivité sortante** : La livraison Agentless nécessite un accès HTTPS sortant vers le service de configuration des flags géré par Datadog.
+- **Propriété de la clé d'API** : en mode sans agent, l'application possède `DD_API_KEY` pour la configuration. Un sidecar `serverless-init` a également besoin de la clé pour la sortie de télémétrie. En mode `remote_config`, l'Agent détient la clé d'API.
 - **Mises à jour des flags** : La distribution est à cohérence éventuelle. Tenez compte de l'intervalle d'interrogation du SDK et du temps de démarrage de l'application lors du test des modifications.
 - **Comportement connu comme étant le dernier correct** : Une fois qu'une configuration a été acceptée, les pannes réseau temporaires ou les réponses mal formées ne la remplacent pas.
 - **Support d'exécution** : Java nécessite Java 11 ou version ultérieure. Pour Node.js et Python, vérifiez les exigences de compatibilité de l'environnement d'exécution du traceur.
@@ -96,7 +129,7 @@ La sélection explicite de `remote_config` active l'abonnement à Feature Flags 
 
 La distribution agentless gérée par Datadog n'est pas disponible pour Datadog for Government dans ces versions. Utilisez Agent Remote Configuration sur ce site.
 
-Si votre déploiement utilise `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, consultez [Migrate from the legacy provider setting][5].
+Si votre déploiement utilise `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, consultez [Migrer depuis le paramètre de fournisseur hérité][5].
 
 ## Notes sur l'environnement {#environment-notes}
 
@@ -131,9 +164,9 @@ Avant d'activer les Feature Flags en production :
 3. Initialisez le fournisseur OpenFeature et vérifiez qu'il atteint un état prêt.
 4. Modifiez un flag hors production dans Datadog et confirmez que la charge de travail reçoit la valeur mise à jour après l'intervalle d'interrogation.
 5. Confirmez que votre application gère les valeurs par défaut fournies par l'appelant si la configuration n'est pas disponible lors d'un démarrage à froid.
-6. Pour Node.js, ne planifiez pas de workflow d'expérimentation basés sur des métriques d'évaluation ou des données d'exposition. Pour Java et Python, configurez un Datadog Agent pris en charge ou un chemin de télémétrie serverless avant d'utiliser ces signaux.
+6. Pour la télémétrie, configurez un relais pris en charge et vérifiez chaque signal requis. Utilisez la configuration OTLP distincte pour `feature_flag.evaluations`.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,3 +179,5 @@ Avant d'activer les Feature Flags en production :
 [7]: /fr/serverless/google_cloud_run/functions/java/?tab=maven
 [8]: /fr/serverless/google_cloud_run/containers/in_container/java/
 [9]: /fr/feature_flags/server/python/
+[10]: /fr/feature_flags/guide/server_flag_evaluation_metrics/
+[11]: /fr/serverless/

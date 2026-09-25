@@ -13,10 +13,6 @@ further_reading:
   text: Deployment Gates API 참조
 title: JIT(Just-In-Time) Deployment Gates 설정하기
 ---
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates는 미리 보기로 제공되고 있습니다. 이 기능에 관심이 있다면 양식을 작성하여 액세스 권한을 요청하세요.
-{{< /callout >}}
-
 **JIT(Just-In-Time)** Deployment Gates를 사용하면 평가 요청에 규칙이 인라인으로 정의됩니다. Datadog에 게이트를 미리 생성할 필요가 없으므로 JIT가 Rules-as-Code 및 배포별 유연성에 적합합니다.
 
 Datadog UI, API 또는 Terraform에서 관리되는 영구 게이트가 필요한 경우 [사전 구성된 Deployment Gates][5]를 참조하세요.
@@ -301,8 +297,8 @@ spec:
 ```
 
 - 분석 템플릿은 Rollout 리소스(`service`, `env`, `version`)로부터 인수를 받을 수 있습니다. 자세한 내용은 [공식 Argo Rollouts 문서][4]를 참조하세요.
-- `ttlSecondsAfterFinished`는 완료된 작업을 5분 후에 제거합니다.
-- `backoffLimit`은 은 0으로 설정됩니다. 게이트 평가가 실패할 경우 작업이 재시도되어서는 안 되기 때문입니다.
+- `ttlSecondsAfterFinished` 완료된 작업을 5분 후에 제거합니다.
+- `backoffLimit` 은 0으로 설정됩니다. 게이트 평가가 실패할 경우 작업이 재시도되어서는 안 되기 때문입니다.
 
 분석 템플릿을 생성한 후 Argo Rollouts 전략에서 이를 참조하세요.
 

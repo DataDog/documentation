@@ -2,7 +2,7 @@
 aliases:
 - /es/llm_observability/experiments/setup/
 description: Cómo configurar Agent Observability Experiments y comenzar a ejecutar
-  Agent Observability Experiments.
+  experimentos.
 further_reading:
 - link: https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/
   tag: Blog
@@ -10,19 +10,22 @@ further_reading:
     Agent Observability
 title: Configuración y uso
 ---
-Esta página describe cómo configurar y utilizar Agent Observability Experiments con el SDK de Python.
+Esta página describe cómo configurar y utilizar Agent Observability Experiments con el SDK de Python o Node.js.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ## Configurar Agent Observability {#set-up-agent-observability}
 
 Si aún no ha configurado Agent Observability:
 
-1. Instalar el SDK de Python para Agent Observability:
+1. Instale Agent Observability Python SDK:
 
    ```shell
    pip install ddtrace>=4.3.0
    ```
 
-2. Habilitar Agent Observability:
+2. Habilite Agent Observability:
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -39,7 +42,7 @@ Si aún no ha configurado Agent Observability:
 
 ### Correlación de trazas de APM {#apm-trace-correlation}
 
-Para correlacionar sus tramos de experimento con [APM Traces][5], ejecute Agent Observability a través de un Datadog Agent y mantenga `agentless_enabled` configurado en `False` (el valor predeterminado). El Agent reenvía los datos de traza a APM, lo que permite la correlación entre sus tramos de experimento y las trazas de APM.
+Para correlacionar sus tramos de experimento con [APM Traces][5], ejecute Agent Observability a través de un Datadog Agent y mantenga `agentless_enabled` configurado en `False` (el valor predeterminado). El Agent reenvía los datos de traza a APM, lo que permite la correlación entre tramos de experimento y trazas de APM.
 
    ```python
    LLMObs.enable(
@@ -51,10 +54,10 @@ Para correlacionar sus tramos de experimento con [APM Traces][5], ejecute Agent 
    )
    ```
 
-Si está ejecutando sin un Agent (por ejemplo, en un notebook o entorno de CI), puede configurar `agentless_enabled=True`, pero no se generan tramos de APM correspondientes para los tramos de experimento en ejecuciones sin agente.
+Si está ejecutando sin un Agent (por ejemplo, en un notebook o entorno de CI), puede configurar `agentless_enabled=True`, pero no se generan tramos de APM correspondientes para los tramos de experimento de ejecuciones agentless.
 
 ## Crear un proyecto {#create-a-project}
-_Projects_ son la capa organizativa central para los experimentos de LLM. Todos los conjuntos de datos y experimentos residen en un proyecto.
+_Proyectos_ son la capa organizativa central para los experimentos de LLM. Todos los conjuntos de datos y experimentos residen en un proyecto.
 Puede crear un proyecto manualmente en la consola de Datadog, la API o el SDK especificando un nombre de proyecto que aún no exista en `LLMObs.enable`.
 
 ```python
@@ -64,7 +67,7 @@ LLMObs.enable(
 )
 ```
 
-## Crear un conjunto de datos {#create-a-dataset}
+## Cree un conjunto de datos {#create-a-dataset}
 
 Un _conjunto de datos_ es una colección de _entradas_, _salidas esperadas_ y _metadatos_ que representan escenarios en los que desea probar su agente. Cada conjunto de datos está asociado con un _proyecto_.  
 
@@ -94,13 +97,13 @@ dataset = LLMObs.create_dataset_from_csv(
 
 ```
 
-Consulte [Datasets][1] para obtener más información sobre los conjuntos de datos, incluyendo: cómo crear conjuntos de datos manualmente, cómo recuperar y administrar conjuntos de datos, y cómo Datadog retiene las versiones de los conjuntos de datos.
+Consulte [Datasets][1] para obtener más información sobre los conjuntos de datos, incluyendo: cómo crear conjuntos de datos manualmente, cómo recuperar y administrar conjuntos de datos, y cómo Datadog conserva las versiones de los conjuntos de datos.
 
-## Cree un experimento {#create-an-experiment}
-Un _experimento_ le permite probar sistemáticamente su aplicación de LLM ejecutando su agente en un conjunto de escenarios de su conjunto de datos y midiendo el rendimiento frente a los resultados esperados mediante evaluadores. Luego puede comparar cómo funcionan las diferentes configuraciones de la aplicación, una al lado de la otra.
+## Crear un experimento {#create-an-experiment}
+Un _experimento_ le permite probar sistemáticamente su aplicación de LLM ejecutando su agente en un conjunto de escenarios de su conjunto de datos y midiendo el rendimiento frente a las salidas esperadas mediante evaluadores. Luego puede comparar cómo funcionan las diferentes configuraciones de la aplicación, lado a lado.
 
 - **tarea**: Define el flujo de trabajo principal que desea evaluar. Puede variar desde una sola llamada a LLM hasta un flujo más complejo que involucre múltiples llamadas a LLM y pasos de RAG. La tarea se ejecuta secuencialmente en todos los registros del conjunto de datos.
-- **evaluador**: Una función, ejecutada en cada registro, que mide qué tan bien funciona el modelo o agente. Los evaluadores le permiten comparar el resultado con el resultado esperado o con la entrada original.  
+- **evaluador**: Una función, ejecutada en cada registro, que mide qué tan bien funciona el modelo o agente. Los evaluadores le permiten comparar la salida con la salida esperada o con la entrada original.  
 
 - **evaluadores de resumen**: Funciones opcionales ejecutadas contra todos los datos del experimento (entrada, salida, esperado, resultados de los evaluadores). Los evaluadores de resumen le permiten calcular métricas más avanzadas como precisión, exhaustividad y exactitud en todo su conjunto de datos. 
 
@@ -124,8 +127,8 @@ Para crear un experimento:
        # Your LLM or processing logic here
        return "Beijing" if "China" in question else "Unknown"
    ```
-   Una tarea puede aceptar cualquier tipo no nulo como `input_data` (cadena, número, booleano, objeto, arreglo). El resultado que se utilizará en los evaluadores puede ser de cualquier tipo.
-   Este ejemplo genera una cadena, pero se puede generar un diccionario como resultado para almacenar cualquier información intermedia y compararla en los evaluadores.
+   Una tarea puede aceptar cualquier tipo no nulo como `input_data` (cadena, número, booleano, objeto, arreglo). La salida que se utilizará en los evaluadores puede ser de cualquier tipo.
+   Este ejemplo genera una cadena, pero se puede generar un diccionario como salida para almacenar cualquier información intermedia y compararla en los evaluadores.
 
    Opcionalmente, su función de tarea puede aceptar un tercer parámetro `metadata` para recibir los metadatos del registro del conjunto de datos:
    ```python
@@ -135,12 +138,12 @@ Para crear un experimento:
        return "Beijing" if "China" in question else "Unknown"
    ```
 
-   Puede rastrear las diferentes partes de su tarea de experimento (flujo de trabajo, llamadas a herramientas, etc.) utilizando los [mismos decoradores de rastreo][2] que usa en producción.
+   Puede rastrear las diferentes partes de la tarea de su experimento (flujo de trabajo, llamadas a herramientas, etc.) utilizando los [mismos decoradores de rastreo][2] que usa en producción.
    Si utiliza un [marco compatible][3] (OpenAI, Amazon Bedrock, etc.), Agent Observability rastrea y anota automáticamente las llamadas a los marcos y bibliotecas de LLM, lo que le brinda observabilidad inmediata para las llamadas que realiza su aplicación de LLM.
 
 #### Uso de tramos de OpenTelemetry dentro de experimentos
 
-   Si su aplicación utiliza [instrumentación de OpenTelemetry][6], puede crear tramos de OTel dentro de su tarea de experimento. Con `DD_TRACE_OTEL_ENABLED=1`, ddtrace actúa como el TracerProvider de OpenTelemetry, por lo que los tramos de OTel aparecen automáticamente como hijos del tramo del experimento.
+   Si su aplicación utiliza [instrumentación de OpenTelemetry][6], puede crear tramos de OTel dentro de su tarea de experimento. Con `DD_TRACE_OTEL_ENABLED=1`, ddtrace actúa como el TracerProvider de OpenTelemetry, por lo que los tramos de OTel aparecen automáticamente como hijos del tramo de experimento.
 
    ```python
    import json
@@ -184,13 +187,13 @@ Para crear un experimento:
 
    Los evaluadores miden qué tan bien funciona su modelo o agente en cada registro. Puede definir evaluadores utilizando dos enfoques:
 
-   - **Basado en funciones**: Defina una función que reciba `input_data`, `output_data` y `expected_output` como argumentos separados. Ideal para evaluadores únicos con lógica sencilla.
-   - **Basado en clases**: Subclase `BaseEvaluator` para evaluadores reutilizables con configuración personalizada. Los evaluadores basados en clases reciben un objeto `EvaluatorContext` con el contexto completo del tramo.
+   - **Basado en funciones**: defina una función que reciba `input_data`, `output_data` y `expected_output` como argumentos separados. Ideal para evaluadores únicos con lógica sencilla.
+   - **Basado en clases**: Cree una subclase de `BaseEvaluator` para evaluadores reutilizables con configuración personalizada. Los evaluadores basados en clases reciben un objeto `EvaluatorContext` con el contexto completo del tramo.
 
-   Para obtener información detallada sobre la creación de evaluadores, incluida la referencia completa del modelo de datos y las mejores prácticas, consulte la [Guía para desarrolladores de evaluación][4].
+   Para obtener información detallada sobre cómo crear evaluadores, incluida la referencia completa del modelo de datos y las mejores prácticas, consulte la [Guía para desarrolladores de evaluación][4].
 
    Datadog admite los siguientes tipos de retorno de evaluador:
-   - **Boolean**: devuelve true o false
+   - **Booleano**: devuelve true o false
    - **puntuación**: devuelve un valor numérico (float)
    - **categórico**: devuelve una categoría etiquetada (string)
    - **json**: devuelve datos estructurados (dict)
@@ -258,7 +261,7 @@ Para crear un experimento:
 
 ### 4. (Opcional) Defina evaluadores de resumen {#4-optional-define-summary-evaluators}
 
-   Los evaluadores de resumen se ejecutan después de que todos los evaluadores a nivel de registro hayan terminado y reciben los resultados agregados para calcular estadísticas a nivel de conjunto de datos, como promedios o tasas de aprobación. Al igual que los evaluadores a nivel de registro, puede definir evaluadores de resumen como funciones o clases.
+   Los evaluadores de resumen se ejecutan después de que todos los evaluadores a nivel de registro han terminado, y reciben los resultados agregados para calcular estadísticas a nivel de conjunto de datos, como promedios o tasas de aprobación. Al igual que los evaluadores a nivel de registro, puede definir evaluadores de resumen como funciones o clases.
 
    Para el enfoque basado en clases que utiliza `BaseSummaryEvaluator`, consulte la [Guía para desarrolladores de evaluación][4].
 
@@ -270,7 +273,7 @@ Para crear un experimento:
 
    ```
 
-   Las funciones de evaluador de resumen pueden tomar una lista de cualquier tipo no nulo como `inputs` (cadena, número, booleano, objeto, arreglo); `outputs` y `expected_outputs` pueden ser listas de cualquier tipo. `evaluators_results` es un diccionario de listas de resultados de los evaluadores, indexado por el nombre de la función del evaluador. Por ejemplo, en el fragmento de código anterior, el evaluador de resumen `num_exact_matches` utiliza los resultados (una lista de booleanos) del evaluador `exact_match` para proporcionar un conteo del número de coincidencias exactas.
+   Las funciones de evaluador de resumen pueden tomar una lista de cualquier tipo no nulo como `inputs` (cadena, número, booleano, objeto, arreglo); `outputs` y `expected_outputs` pueden ser listas de cualquier tipo. `evaluators_results` es un diccionario de listas de resultados de los evaluadores, organizado por el nombre de la función del evaluador. Por ejemplo, en el fragmento de código anterior, el evaluador de resumen `num_exact_matches` utiliza los resultados (una lista de booleanos) del evaluador `exact_match` para proporcionar un conteo del número de coincidencias exactas.
 
 #### Evaluadores de resumen basados en clases
 
@@ -289,10 +292,10 @@ Para crear un experimento:
            return sum(scores) / len(scores)
    ```
 
-   Datadog admite los siguientes tipos de retorno de Evaluador de resumen:
-   - **Boolean**: devuelve true o false
+   Datadog admite los siguientes tipos de retorno de evaluadores de resumen:
+   - **Booleano**: devuelve true o false
    - **puntuación**: devuelve un valor numérico (float)
-   - **categórico**: devuelve una categoría etiquetada (string)
+   - **categórica**: devuelve una categoría etiquetada (string)
    - **json**: devuelve datos estructurados (dict)
 
 ### 5. Cree y ejecute el experimento. {#5-create-and-run-the-experiment}
@@ -323,12 +326,12 @@ Para crear un experimento:
            print(f"Error: {result['error']['message']}")
    ```
 
-   Para aumentar la velocidad de ejecución del experimento, puede habilitar el procesamiento en paralelo:
+   Para aumentar la velocidad de ejecución del experimento, puede habilitar el procesamiento paralelo:
    ```
    results = experiment.run(jobs=4)
    ```
 
-   Para probar su pipeline en un subconjunto de los datos, utilice:
+   Para probar su canalización en un subconjunto de los datos, utilice:
    ```
    results = experiment.run(sample_size=10)
    ```
@@ -338,12 +341,10 @@ Para crear un experimento:
    results = experiment.run(raise_errors=True)
    ```
 
-### 6. Consulte los resultados de su experimento en Datadog. {#6-review-your-experiment-results-in-datadog}
+### 6. Revise los resultados de su experimento en Datadog. {#6-review-your-experiment-results-in-datadog}
    ```
    print(f"View experiment: {experiment.url}")
    ```
-
-Nota: Las trazas de los experimentos de LLM se conservan durante 90 días.
 
 [1]: /es/llm_observability/improve/datasets
 [2]: /es/llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
@@ -351,6 +352,142 @@ Nota: Las trazas de los experimentos de LLM se conservan durante 90 días.
 [4]: /es/llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: /es/llm_observability/instrument/agent_observability_and_apm/
 [6]: /es/llm_observability/instrument/otel_instrumentation
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+## Configurar Agent Observability {#set-up-agent-observability-1}
+
+Si aún no ha configurado Agent Observability:
+
+1. Instale el SDK de Node.js para Agent Observability:
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. Establezca la clave de API, la clave de aplicación y el sitio de Datadog:
+
+   ```shell
+   export DD_API_KEY="<YOUR_API_KEY>"
+   export DD_APP_KEY="<YOUR_APP_KEY>"
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Initialize the tracer with the ML application and Experiments project names:
+
+   ```javascript
+   const tracer = require('dd-trace').init({
+     llmobs: {
+       mlApp: 'capitals-app',
+       projectName: 'capitals-project'
+     }
+   })
+   ```
+
+   <div class="alert alert-warning">Debe proporcionar ambos <code>DD_API_KEY</code> y <code>DD_APP_KEY</code>.</div>
+
+## Cree un proyecto {#create-a-project-1}
+
+Los proyectos contienen conjuntos de datos y experimentos. El SDK utiliza el nombre del proyecto de Experiments configurado y
+crea el proyecto si no existe.
+
+Establezca `llmobs.projectName` durante la inicialización del tracer. También puede establecer `DD_LLMOBS_PROJECT_NAME`. Si no se establece ninguno de los dos valores,
+el SDK utiliza `default-project`.
+
+## Cree un dataset {#create-a-dataset-1}
+
+Cree un dataset con la `tracer.llmobs.experiments` API:
+
+```javascript
+const { experiments } = tracer.llmobs
+
+const dataset = experiments.createDataset('capitals-of-the-world', {
+  description: 'Questions and expected capital cities',
+  records: [
+    {
+      inputData: { question: 'What is the capital of China?' },
+      expectedOutput: 'Beijing',
+      metadata: { difficulty: 'medium' }
+    },
+    {
+      inputData: { question: 'What is the capital of Japan?' },
+      expectedOutput: 'Tokyo',
+      metadata: { difficulty: 'medium' }
+    }
+  ]
+})
+```
+
+El SDK envía el dataset cuando comienza el experimento. Para usar un dataset existente, llame a
+`await experiments.pullDataset('<DATASET_NAME>')`.
+
+## Cree un experimento {#create-an-experiment-1}
+
+Un experimento ejecuta una tarea para cada registro del dataset y evalúa cada resultado.
+
+### 1. Defina una tarea {#1-define-a-task}
+
+La tarea recibe la entrada del registro. También puede recibir la configuración del experimento y metadatos opcionales del registro.
+
+```javascript
+function task (inputData) {
+  const { question } = inputData
+
+  // Add the LLM or agent call to evaluate.
+  return question.includes('China') ? 'Beijing' : 'Tokyo'
+}
+```
+
+Las llamadas a [integraciones de Node.js compatibles](/llm_observability/instrument/auto_instrumentation?tab=nodejs) dentro de la tarea
+se rastrean como elementos secundarios del tramo del experimento.
+
+### 2. Defina evaluadores {#2-define-evaluators}
+
+Un evaluador recibe la entrada del registro, la salida de la tarea y la salida esperada. Devuelva un booleano, número, cadena o JSON
+para crear la métrica de evaluación correspondiente.
+
+```javascript
+function exactMatch (_inputData, outputData, expectedOutput) {
+  return outputData === expectedOutput
+}
+```
+
+### 3. Cree y ejecute el experimento {#3-create-and-run-the-experiment}
+
+```javascript
+async function runExperiment () {
+  const experiment = experiments.experiment({
+    name: 'capital-cities-test',
+    dataset,
+    task,
+    evaluators: {
+      exact_match: exactMatch
+    },
+    description: 'Testing capital cities knowledge',
+    config: {
+      modelName: 'gpt-4',
+      version: '1.0'
+    }
+  })
+
+  const result = await experiment.run()
+  console.log(`View experiment: ${result.url}`)
+}
+
+runExperiment().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+El resultado contiene cada salida de registro, puntuación del evaluador, error y una URL para el experimento en Datadog.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Nota: Los rastreos de LLM Experiments se conservan durante 90 días.
 
 ## Lecturas adicionales {#further-reading}
 
