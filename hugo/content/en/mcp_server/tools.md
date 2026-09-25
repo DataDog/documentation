@@ -1952,7 +1952,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
@@ -1960,7 +1960,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
@@ -1968,7 +1968,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
@@ -1976,7 +1976,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
