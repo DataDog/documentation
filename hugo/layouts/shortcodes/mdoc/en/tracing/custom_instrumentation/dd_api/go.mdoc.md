@@ -192,6 +192,33 @@ func handler(w http.ResponseWriter, r *http.Request) {
 }
 ```
 
+### Adding span links {% #adding-span-links-go %}
+
+[Span links][18] associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+A `tracer.SpanLink` identifies the span you want to link to by its trace ID and span ID. Attributes are optional. To add span links when you create a span, use `tracer.WithSpanLinks`. To add a span link to a span that is still running, use `AddLink`:
+
+```go
+spanA := tracer.StartSpan("span_a")
+spanA.Finish()
+
+link := tracer.SpanLink{
+    TraceID:     spanA.Context().TraceIDLower(),
+    TraceIDHigh: spanA.Context().TraceIDUpper(),
+    SpanID:      spanA.Context().SpanID(),
+    Attributes:  map[string]string{"link.name": "span_a"},
+}
+
+// Link span_b to span_a when you create it
+spanB := tracer.StartSpan("span_b", tracer.WithSpanLinks([]tracer.SpanLink{link}))
+defer spanB.Finish()
+
+// Or link a running span to span_a
+spanC := tracer.StartSpan("span_c")
+spanC.AddLink(link)
+defer spanC.Finish()
+```
+
 ## Trace client and Agent configuration {% #trace-client-agent-config-go %}
 
 There are additional configurations possible for both the tracing client and Datadog Agent for context propagation with B3 Headers, as well as excluding specific resources from sending traces to Datadog in the event these traces are not wanted in metrics calculated, such as Health Checks.
@@ -220,3 +247,4 @@ Traces can be excluded based on their resource name, to remove synthetic traffic
 [15]: /tracing/trace_collection/custom_instrumentation/go/migration
 [16]: /tracing/setup/go/
 [17]: https://pkg.go.dev/context
+[18]: /tracing/trace_collection/span_links/

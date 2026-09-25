@@ -181,6 +181,23 @@ except TypeError as e:
     root_span.set_exc_info(exc_type, exc_val, exc_tb)
 ```
 
+## Adding span links {% #adding-span-links-python %}
+
+[Span links][16] associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+To add a span link, pass the context of the span you want to link to `link_span()`. Attributes are optional.
+
+```python
+from ddtrace import tracer
+
+with tracer.trace("span_a") as span_a:
+    pass
+
+with tracer.trace("span_b") as span_b:
+    # Link span_b to span_a
+    span_b.link_span(span_a.context, attributes={"link.name": "span_a"})
+```
+
 ## Propagating context with headers extraction and injection {% #propagating-context-python %}
 
 You can configure the propagation of context for distributed traces by injecting and extracting headers. Read [Trace Context Propagation][2] for information.
@@ -274,3 +291,4 @@ See that package's [API definition][9] for the full list of supported API calls.
 [13]: /tracing/glossary/#spans
 [14]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Tracer.trace
 [15]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.Span.finish
+[16]: /tracing/trace_collection/span_links/
