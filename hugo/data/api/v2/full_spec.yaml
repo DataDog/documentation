@@ -1502,6 +1502,14 @@ components:
       required: true
       schema:
         type: string
+    PersonalAccessTokensFilterLeakedParameter:
+      description: When true, only return access tokens that have been detected as leaked. Has no effect when false.
+      in: query
+      name: filter[leaked]
+      required: false
+      schema:
+        example: true
+        type: boolean
     PersonalAccessTokensFilterOwnerIDParameter:
       description: Filter access tokens by the owner's ID. Supports multiple values.
       in: query
@@ -1519,6 +1527,16 @@ components:
       required: false
       schema:
         type: string
+    PersonalAccessTokensIncludeParameter:
+      description: Comma-separated list of relationship objects that should be included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/PersonalAccessTokensIncludeQueryParameterItem"
+        type: array
     PersonalAccessTokensSortParameter:
       description: |-
         Access token attribute used to sort results. Sort order is ascending
@@ -4227,6 +4245,8 @@ components:
     AccessTokenListItemRelationships:
       description: Resources related to the access token entry in the mixed list response.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToAccessTokenOwner"
       type: object
@@ -4240,6 +4260,15 @@ components:
       x-enum-varnames:
         - USERS
         - SERVICE_ACCOUNT
+    AccessTokenResponseIncludedArray:
+      description: Array of objects related to the access tokens.
+      items:
+        $ref: "#/components/schemas/AccessTokenResponseIncludedItem"
+      type: array
+    AccessTokenResponseIncludedItem:
+      description: An object related to an access token.
+      oneOf:
+        - $ref: "#/components/schemas/LeakedKey"
     AccessTokensType:
       description: Resource type returned by the access tokens list endpoint. Includes both personal and service access tokens.
       enum:
@@ -46047,7 +46076,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/PersonalAccessTokenRelationships"
+          $ref: "#/components/schemas/FullPersonalAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/PersonalAccessTokensType"
       type: object
@@ -46090,6 +46119,12 @@ components:
             type: string
           type: array
       type: object
+    FullPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
     FullServiceAccessToken:
       description: Datadog access token, including the token key.
       properties:
@@ -46099,7 +46134,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/ServiceAccessTokenRelationships"
+          $ref: "#/components/schemas/FullServiceAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/ServiceAccessTokensType"
       type: object
@@ -46141,6 +46176,12 @@ components:
             description: Name of scope.
             type: string
           type: array
+      type: object
+    FullServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
     GCPCredentials:
       description: The definition of the `GCPCredentials` object.
@@ -68058,6 +68099,8 @@ components:
           items:
             $ref: "#/components/schemas/AccessTokenListItem"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/PersonalAccessTokenResponseMeta"
       type: object
@@ -68414,6 +68457,8 @@ components:
           items:
             $ref: "#/components/schemas/ServiceAccessToken"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/ServiceAccessTokenResponseMeta"
       type: object
@@ -87356,6 +87401,8 @@ components:
     PersonalAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToUser"
       type: object
@@ -87364,6 +87411,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PersonalAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     PersonalAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -87420,6 +87469,14 @@ components:
       required:
         - data
       type: object
+    PersonalAccessTokensIncludeQueryParameterItem:
+      description: Relationship object that should be included in the response.
+      enum:
+        - leak_information
+      example: "leak_information"
+      type: string
+      x-enum-varnames:
+        - LEAK_INFORMATION
     PersonalAccessTokensSort:
       default: name
       description: Sorting options
@@ -87432,6 +87489,8 @@ components:
         - -expires_at
         - last_used_at
         - -last_used_at
+        - leaked
+        - -leaked
       type: string
       x-enum-varnames:
         - NAME_ASCENDING
@@ -87442,6 +87501,8 @@ components:
         - EXPIRES_AT_DESCENDING
         - LAST_USED_AT_ASCENDING
         - LAST_USED_AT_DESCENDING
+        - LEAKED_ASCENDING
+        - LEAKED_DESCENDING
     PersonalAccessTokensType:
       default: personal_access_tokens
       description: Personal access tokens resource type.
@@ -94507,6 +94568,28 @@ components:
           type: array
       required:
         - data
+      type: object
+    RelationshipToLeakedKey:
+      description: Relationship to the leak the access token was found in. `data` is null when the access token has not been detected as leaked.
+      properties:
+        data:
+          $ref: "#/components/schemas/RelationshipToLeakedKeyData"
+      required:
+        - data
+      type: object
+    RelationshipToLeakedKeyData:
+      description: Relationship to the leak the access token was found in.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the leak.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/LeakedKeyType"
+      required:
+        - id
+        - type
       type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
@@ -109837,6 +109920,8 @@ components:
     ServiceAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
@@ -109845,6 +109930,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     ServiceAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -128732,6 +128819,68 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
+      type: object
+    UpdatedPersonalAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PersonalAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedPersonalAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/PersonalAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
+    UpdatedPersonalAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedPersonalAccessToken"
+      required:
+        - data
+      type: object
+    UpdatedServiceAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ServiceAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedServiceAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/ServiceAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
+      type: object
+    UpdatedServiceAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedServiceAccessToken"
+      required:
+        - data
       type: object
     UpsertAllocationRequest:
       description: Request to create or update a targeting rule (allocation) for a feature flag environment.
@@ -194173,6 +194322,8 @@ paths:
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterOwnerIDParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194320,6 +194471,7 @@ paths:
       operationId: GetPersonalAccessToken
       parameters:
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194403,7 +194555,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000004
                       type: personal_access_tokens
               schema:
-                $ref: "#/components/schemas/PersonalAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedPersonalAccessTokenResponse"
           description: OK
         "400":
           content:
@@ -219456,6 +219608,8 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219616,6 +219770,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ServiceAccountID"
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219699,7 +219854,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000008
                       type: service_access_tokens
               schema:
-                $ref: "#/components/schemas/ServiceAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedServiceAccessTokenResponse"
           description: OK
         "400":
           content:
