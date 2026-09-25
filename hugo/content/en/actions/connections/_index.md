@@ -55,7 +55,7 @@ If the integration you need to set up is not listed above, set up connection cre
 Connections extend your installed integrations to give you control over workflow step authentication. Use connection credentials to authenticate:
 
 - A [generic action][8]
-- As your own [GitHub App](#github-app-connection)
+- Actions as your own [GitHub App](#github-app-connection)
 - Any action for which the integration tile does not offer authentication
 
 For a list of integrations that use the integration tile for authentication, see the [Integration tile credentials](#integration-tile-credentials) section. Connection credentials are only available for use within the Workflow Automation and App Builder products.
