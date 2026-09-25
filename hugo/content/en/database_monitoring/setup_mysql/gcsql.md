@@ -20,7 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, 8.0+
+: 5.6, 5.7, or 8.0+
 
 Supported Agent versions
 : 7.36.1+
