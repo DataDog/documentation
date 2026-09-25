@@ -429,6 +429,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `telemetrySampleRate`
 : The sampling rate for the SDK internal telemetry utilized by Datadog. This rate controls the number of requests reported to the tracing system. This must be a value between `0` and `100`. By default, this is set to `20`.
 
+`timeseries`
+: Determines whether memory and CPU are measured every second for the length of the session and graphed in the session, view, and operation side panels. By default, this is `nil` and nothing is collected. Set it to `.default` to collect both memory and CPU. Requires the iOS SDK v3.17.0+. For more information, see [Performance timeseries][11].
+
 `trackAnonymousUser`
 : When enabled, the SDK generates a unique, non-personal anonymous user ID that is persisted across app launches. This ID is attached to each RUM Session, allowing you to link sessions originating from the same user/device without collecting personal data. By default, this is set to `true`.
 
@@ -1288,3 +1291,4 @@ Calling this method disables the SDK and all active features, such as RUM. To re
 [8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
 [10]: /real_user_monitoring/application_monitoring/ios/data_collected/#resource-attributes
+[11]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/#performance-timeseries

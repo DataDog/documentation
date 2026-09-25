@@ -1,6 +1,6 @@
 ---
 title: Mobile Vitals
-description: "Monitor key mobile performance metrics including startup times, frame rates, and resource usage across Android, iOS, Flutter, and React Native."
+description: "Monitor key mobile performance metrics including startup times, frame rates, resource usage, and performance timeseries across Android, iOS, Flutter, and React Native."
 aliases:
 - /real_user_monitoring/android/mobile_vitals
 - /real_user_monitoring/ios/mobile_vitals
@@ -19,6 +19,9 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-reactnative
   tag: "Source Code"
   text: Source code for dd-sdk-reactnative
+- link: /real_user_monitoring/explorer/events/#performance-timeseries
+  tag: Documentation
+  text: Explore the performance timeseries panel
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
@@ -158,10 +161,70 @@ The following telemetry provide insight into your mobile application's performan
 
 {{< /tabs >}}
 
+## Performance timeseries
+
+{{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
+Performance Timeseries is in Preview.
+{{< /callout >}}
+
+Performance Timeseries is available on the iOS and Android SDKs.
+
+Memory utilization described above is averaged over the lifetime of the view. Performance Timeseries enables you to capture memory and CPU usage every second for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
+
+After collection is enabled, all sessions get timeseries captured.
+
+Two series are collected:
+
+- **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores. This is not the same measurement as the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][6] and [on Android][7].
+
+### Enable performance timeseries
+
+Collection is off by default.
+
+{{< tabs >}}
+{{% tab "Android" %}}
+
+Requires the Android SDK v3.14.0+.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+    .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT)
+    .build()
+
+Rum.enable(rumConfig)
+```
+
+`TimeseriesConfiguration.DEFAULT` collects both CPU and memory. To collect only one, pass the types explicitly with `TimeseriesConfiguration(setOf(TimeseriesType.MEMORY))`.
+
+{{% /tab %}}
+{{% tab "iOS" %}}
+
+Requires the iOS SDK v3.17.0+.
+
+```swift
+var rumConfig = RUM.Configuration(applicationID: "<rum_application_id>")
+rumConfig.timeseries = .default
+
+RUM.enable(with: rumConfig)
+```
+
+`.default` collects both CPU and memory. To collect only one, pass the types explicitly with `RUM.Configuration.Timeseries(collectTypes: [.memory])`.
+
+CPU is not collected on watchOS.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
+[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
+[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
+[5]: /real_user_monitoring/explorer/events/#performance-timeseries
+[6]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
+[7]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
 

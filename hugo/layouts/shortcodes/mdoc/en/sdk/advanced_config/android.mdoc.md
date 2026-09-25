@@ -403,6 +403,9 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Sets the preferred frequency for collecting mobile vitals.
 
+`setTimeseriesConfiguration(TimeseriesConfiguration)`
+: Determines whether memory and CPU are measured every second for the length of the session and graphed in the session, view, and operation side panels. By default, nothing is collected. Pass `TimeseriesConfiguration.DEFAULT` to collect both memory and CPU. Requires the Android SDK v3.14.0+. For more information, see [Performance timeseries][15].
+
 `setSessionSampleRate(<sampleRate>)`
 : Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.)
 
@@ -793,3 +796,4 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/application_monitoring/android/monitoring_app_performance/#interaction-to-next-view
 [14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[15]: /real_user_monitoring/application_monitoring/android/mobile_vitals/#performance-timeseries
