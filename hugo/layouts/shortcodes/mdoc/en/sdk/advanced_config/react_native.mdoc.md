@@ -440,6 +440,57 @@ If you want to clear the user information (for example, when the user signs out)
 DdSdkReactNative.clearUserInfo();
 ```
 
+### Track user accounts
+
+If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
+
+* Analyze performance and errors by account
+* Know which accounts are the most impacted by an issue
+* Prioritize fixes based on account value
+
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
+
+| Attribute      | Type   | Description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| `account.id`   | String | (Required) Unique account identifier.                       |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
+
+To identify accounts, use the `setAccountInfo` API. For example:
+
+```js
+DdSdkReactNative.setAccountInfo({
+    id: 'acct-1234',
+    name: 'Acme Corp',
+    extraInfo: {
+        tier: 'enterprise'
+    }
+});
+```
+
+Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
+
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. If no account is set, the SDK ignores the additional account information and logs a warning.
+
+```js
+DdSdkReactNative.addAccountExtraInfo({
+    seats: 42
+});
+```
+
+To clear the account information (for example, when the user signs out), use `clearAccountInfo`:
+
+```js
+DdSdkReactNative.clearAccountInfo();
+```
+
+Account information is attached to RUM events, logs, and traces.
+
+{% alert level="info" %}
+Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session or the view before clearing.
+{% /alert %}
+
 ### Global attributes
 
 You can keep global attributes to track information about a specific session, such as A/B testing configuration, ad campaign origin, or cart status. These attributes are attached to all future Logs, Spans, and RUM events.
