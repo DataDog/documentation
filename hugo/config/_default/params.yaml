@@ -300,7 +300,6 @@ unsupported_sites:
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
-  actions: [gov,gov2]
   app_builder_override: [gov2] # docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
