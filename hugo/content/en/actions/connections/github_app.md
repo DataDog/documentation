@@ -41,6 +41,7 @@ Gather the following values from GitHub:
 ## Create the connection in Datadog
 
 Once you have set up the GitHub App, create the connection in Datadog:
+Once you have set up the GitHub App, create the connection in Datadog:
 
 1. From the [Action Catalog page][1], click the {{< ui >}}Connections{{< /ui >}} tab.
 1. Click {{< ui >}}New Connection{{< /ui >}}.
@@ -78,4 +79,5 @@ Check the permissions configured for the GitHub App and the repositories availab
 [2]: /actions/workflows/access_and_auth/#restrict-access-on-a-specific-connection
 [3]: /actions/app_builder/access_and_auth/#restrict-access-to-a-specific-connection
 [4]: https://chat.datadoghq.com/
+[5]: https://docs.github.com/apps/creating-github-apps/registering-a-github-app/registering-a-github-app
 [5]: https://docs.github.com/apps/creating-github-apps/registering-a-github-app/registering-a-github-app
