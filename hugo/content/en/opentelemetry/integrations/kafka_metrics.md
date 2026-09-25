@@ -31,6 +31,17 @@ receivers:
       - consumers
 ```
 
+Add `kafkametrics` to the `receivers` list of the metrics pipeline. The Collector starts only the receivers that a pipeline uses. For example, in the recommended Host configuration:
+
+```yaml
+service:
+  pipelines:
+    metrics:
+      receivers: [otlp, host_metrics, kafkametrics]
+      processors: [resource_detection, cumulativetodelta]
+      exporters: [otlp_http]
+```
+
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -55,6 +66,18 @@ receivers:
       - topics
       - consumers
 ```
+
+Add `kafkametrics` to a metrics pipeline in the same configuration. The Collector starts only the receivers that a pipeline uses. To export directly to Datadog, configure the `otlp_http` exporter as shown in the [recommended setup][101]:
+
+```yaml
+service:
+  pipelines:
+    metrics:
+      receivers: [kafkametrics]
+      exporters: [otlp_http]
+```
+
+[101]: /opentelemetry/setup/collector_exporter/#otlp-http-exporter
 
 {{% /tab %}}
 
@@ -112,7 +135,7 @@ apt-get update && \
 apt-get -y install default-jre-headless
 ```
 
-Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][1]. Set each address variable in `host:port` format.
+Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][201]. Set each address variable in `host:port` format.
 
 Each scraper process scrapes a single JMX endpoint. Run one process per broker, producer, and consumer, using that JVM's address. Then run one or more of the following commands:
 
@@ -145,7 +168,7 @@ java \
   -jar /path/to/opentelemetry-jmx-scraper.jar
 ```
 
-[1]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
+[201]: https://github.com/open-telemetry/opentelemetry-java-contrib/releases
 
 {{% /tab %}}
 
@@ -250,4 +273,4 @@ Value: 25
 [4]: /opentelemetry/setup/collector_exporter/
 [5]: /opentelemetry/config/log_collection
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
-[7]: /opentelemetry/mapping/metrics_mapping/#kafka-metrics
+[7]: /opentelemetry/mapping/metrics_mapping/
