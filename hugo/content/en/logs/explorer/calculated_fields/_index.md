@@ -90,7 +90,7 @@ For a complete list of supported syntax, operators, and functions, see [Formulas
 
 ### Extraction
 
-Extraction uses Grok parsing rules to capture values from raw log messages or attributes. You can use AI-powered automatic parsing to generate Grok rules or manually define your own Grok patterns. Use Grok rules to:
+Extraction captures values from raw log messages or attributes, using a Grok pattern or a regex. You can use Tap to Parse to generate either automatically, or manually define your own Grok pattern or regex. Use extraction to:
 - Capture values from raw log messages.
 - Retroactively extract attributes from already indexed logs without editing pipelines.
 - Test against sample logs.
