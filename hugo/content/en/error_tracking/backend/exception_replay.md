@@ -142,6 +142,7 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 - Logs with `source:dd_debugger` missing due to [Log Index][6] retention settings or [Exclusion Filters][7] in preceding indexes
 - Exception Replay is not available in the FedRAMP region
 - Java: On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+- .NET: Starting in tracer version 3.55.0, the tracer disables Exception Replay at startup when MD5 is unavailable, for example on .NET Framework with the Windows FIPS cryptography policy or on a FIPS OpenSSL provider that does not include MD5. Remote Configuration and `DD_EXCEPTION_REPLAY_ENABLED` do not re-enable it. The tracer logs `Exception Replay has been disabled because MD5 hashing is unavailable.`
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.
