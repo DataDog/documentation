@@ -68,11 +68,21 @@ Log Analysis is enabled by default in Datadog. To receive Buildkite job logs for
 
 #### Store job logs
 
-The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][19].
+Export job logs from the Buildkite Agent as OpenTelemetry logs to the [Datadog OTLP Logs endpoint][25]. To enable the export, follow Buildkite's [OpenTelemetry job log export documentation][24].
 
 To enable Log Storage, go to [CI/CD Repository settings][23], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
+
+{{% collapse-content title="Datadog Buildkite integration (legacy)" level="h4" expanded=false id="legacy-buildkite-integration-job-log-collection" %}}
+
+The Datadog Buildkite integration is a legacy method for collecting job logs. If you cannot use OpenTelemetry, contact your Datadog representative.
+
+For installation and configuration instructions, see the [Buildkite integration documentation][19].
+
+<div class="alert alert-warning">This integration retrieves job logs through the Buildkite API. Collecting logs can consume a significant portion of your Buildkite API rate limit.</div>
+
+{{% /collapse-content %}}
 
 ## Advanced configuration
 
@@ -178,3 +188,5 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [21]: /logs/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[24]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
+[25]: /opentelemetry/setup/otlp_ingest/logs/

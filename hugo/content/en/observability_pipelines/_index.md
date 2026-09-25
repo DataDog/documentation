@@ -75,6 +75,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/tines-observability-pipelines-security-automation/"
   tag: "Blog"
   text: "Respond to security threats faster with Tines and Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-microsoft-sentinel-packs/"
+  tag: "Blog"
+  text: "Transform and route security logs to Microsoft Sentinel tables using Observability Pipelines"
 
 ---
 ## Overview

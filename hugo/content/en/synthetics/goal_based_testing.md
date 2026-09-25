@@ -17,9 +17,9 @@ further_reading:
   text: "Synthetic Monitoring pricing"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/bits-testing/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/bits-testing/" >}}
 Goal-Based Testing is in Preview. Request access to join the waiting list.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
@@ -31,27 +31,28 @@ Unlike a browser test, a Goal-Based test doesn't follow a fixed, recorded set of
 
 You can create a Goal-Based test in two ways:
 
-- Let [Bits Testing][1] generate one automatically as part of a journey's test suite.
+- Generate one automatically with [Bits Testing][1] as part of a journey's test suite.
 - Create one manually by clicking {{< ui >}}New Test{{< /ui >}} and selecting Goal-Based test.
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_type_selection.png" alt="The New Synthetics Test dialog with Goal-Based Test selected" style="width:50%;" >}}
+{{< img src="synthetics/goal_based_testing/goal_based_test.png" alt="The New Synthetics Test dialog with Goal-Based Test selected" style="width:60%;" >}}
 
-When creating a Goal-Based test manually, provide:
+### Manual test creation
 
-- A **starting URL** for the application under test.
-- A **goal**, written as a prompt in plain language (for example, "Ask the support chatbot for a product recommendation").
-- A **location** to run the test from. See [supported locations](#supported-locations).
-- Optionally, an [Agent Profile][2] to reuse variables such as login credentials.
+To create a Goal-Based test manually:
 
-{{< img src="synthetics/goal_based_testing/goal_based_test_creation.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:60%;" >}}
+- Enter a **starting URL** for the application under test.
+- Write a **goal** as a prompt in plain language (for example, "Ask the support chatbot for a product recommendation").
+- Select a **location** to run the test from. See [supported locations](#supported-locations).
+- Optionally, select an [Agent Profile][2] to reuse variables such as login credentials.
+- Click {{< ui >}}Run Now{{< /ui >}}.
+
+{{< img src="synthetics/goal_based_testing/new_goal_based_test.png" alt="The New Goal-Based Test panel with starting URL and goal fields" style="width:80%;" >}}
 
 ### Supported locations
 
 Goal-Based tests run only from the Datadog managed locations listed in [Run Bits Testing][4].
 
-For pricing, see [Bits Testing billing][3].
-
-## How Goal-Based Testing evaluates a run
+## Evaluate a test run
 
 After you start a Goal-Based test, the agent explores your application from the starting URL, branching across the different paths a user might take toward the goal.
 
@@ -70,14 +71,19 @@ After the first run completes, click the {{< ui >}}Edit test{{< /ui >}} icon to:
 - Edit the test name.
 - Add tags.
 - Change the selected Agent Profile.
+- Click {{< ui >}}Save Test{{< /ui >}}.
 
 {{< img src="synthetics/goal_based_testing/goal_based_test_schedule.png" alt="The Scheduling step of the Goal-Based test creation wizard, with recurrence interval options" style="width:80%;" >}}
+
+## Billing
+
+For pricing, see [Bits Testing billing][3].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/bits_testing/
-[2]: /synthetics/bits_testing/#agent-profiles
+[2]: /synthetics/bits_testing/#agent-profiles-optional
 [3]: /synthetics/bits_testing/#billing
 [4]: /synthetics/bits_testing/#run-bits-testing

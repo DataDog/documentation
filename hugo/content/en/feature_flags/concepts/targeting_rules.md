@@ -68,7 +68,7 @@ For each targeting rule, configure the following:
 After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules. You can also use the [evaluation tester][2] to simulate how the rule evaluates for a given targeting key and attributes, without affecting production data.
 
 <div class="alert alert-info">
-SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
+SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant. If the flag is disabled, the SDK returns the default value supplied by your application. For detailed evaluation behavior, see <a href="/feature_flags/concepts/evaluation_results/">Flag Evaluation Results</a>.
 </div>
 
 ## Filters and evaluation context
