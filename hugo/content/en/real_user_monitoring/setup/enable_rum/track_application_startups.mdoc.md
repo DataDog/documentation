@@ -20,12 +20,14 @@ RUM measures how fast your mobile app becomes usable after launch. Time to initi
 
 {% if equals($platform, "android") %}
 {% partial file="sdk/track_app_startups/android.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/peer_benchmarks.mdoc.md" /%}
 {% /if %}
 
 <!-- iOS -->
 
 {% if equals($platform, "ios") %}
 {% partial file="sdk/track_app_startups/ios.mdoc.md" /%}
+{% partial file="sdk/track_app_startups/peer_benchmarks.mdoc.md" /%}
 {% /if %}
 
 <!-- Flutter -->
