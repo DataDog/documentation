@@ -50,7 +50,7 @@ For how enrollment sets a runner's ownership, see [Enrollment and ownership][1].
 
 ## Execution Policies
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Execution Policies is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Execution Policies are not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 **Execution Policies** are an authorization model for runners in the Datadog Agent. Each policy manages access across one or more sets of runners at once. Instead of a separate connection per integration per runner, you use **Agent tags** to define the target Agents. You then attach an allow or deny rule to them.
