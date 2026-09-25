@@ -112,7 +112,7 @@ CI jobs failure analysis is available for the following CI providers:
 * [GitHub Actions][1]
 * [GitLab][2]
 
-**Note:** CI jobs failure analysis requires job logs. To set up job logs for your CI provider, select your CI provider on [Pipeline Visibility][6] and follow the instructions in the **Manage job logs** section.
+**Note:** CI jobs failure analysis requires job logs. To set up job logs for your CI provider, see the **Manage job logs** section on the [Pipeline Visibility setup page][6] for your provider.
 
 <div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="https://forms.gle/vSrqS5QwitgHf9wG6" target="_blank">this form</a>.</div>
 
