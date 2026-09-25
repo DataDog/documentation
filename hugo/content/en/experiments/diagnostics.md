@@ -58,17 +58,18 @@ For warehouse-native experiments, common causes include:
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then rerun experiment analysis.
 
-## Missing assignments
+## Missing exposures
 
-If Datadog has no assignment data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified **Experiment ID** and **Variant ID** values.
+If Datadog has no exposure data for an experiment, results cannot be computed. A newly launched experiment with no recorded exposures can show a warning before the next analysis update instead of immediately showing a failed diagnostic. If exposures have occurred since the displayed analysis update, the warning resolves on the next update. Missing exposures can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified **Experiment ID** and **Variant ID** values.
 
-For experiments backed by Datadog Feature Flags that use warehouse metrics, Datadog can record assignments before it has synchronized those exposures to the `g_exposures` table in your warehouse. Warehouse metric results remain unavailable until synchronization completes.
+For experiments backed by Datadog Feature Flags that use warehouse metrics, Datadog can record exposures before it has synchronized them to the `g_exposures` table in your warehouse. Warehouse metric results remain unavailable until synchronization completes.
 
 ### How to resolve
 
 - For experiments backed by Datadog Feature Flags, confirm that the flag is enabled in the correct environment and that the application is evaluating the flag for the expected subjects. Check the flag's {{< ui >}}Real-time metric overview{{< /ui >}} for exposure events.
 - For warehouse-native experiments, verify that the Exposure SQL Model returns rows with the expected **Subject Key**, **Timestamp**, **Experiment ID**, and **Variant ID** values.
-- If the experiment was just launched, wait for the next analysis run or click {{< ui >}}Run an update now{{< /ui >}}.
+- For experiments backed by Datadog Feature Flags that use warehouse metrics, confirm that exposures have synchronized to `g_exposures`.
+- If the experiment is newly launched, wait for the next analysis run or click {{< ui >}}Run an update now{{< /ui >}}.
 
 ## Mixed assignments
 
