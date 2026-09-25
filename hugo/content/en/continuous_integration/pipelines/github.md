@@ -159,4 +159,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [26]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
 [27]: /continuous_integration/pipelines/automatic_retries/
 [28]: /glossary/#running-job
-[29]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[29]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
