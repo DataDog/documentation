@@ -1,5 +1,7 @@
 ---
 title: CI Visibility Troubleshooting
+aliases:
+  - /continuous_integration/troubleshooting/
 further_reading:
   - link: "/continuous_integration/tests"
     tag: "Documentation"
