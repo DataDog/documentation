@@ -4,6 +4,7 @@ aliases:
   - /security/cloud_security_management/setup/csm_enterprise/cloud_accounts
   - /security/cloud_security_management/setup/csm_pro/cloud_accounts
   - /security/cloud_security_management/setup/cloud_accounts
+  - /security/cloud_security_management/setup/cloud_integrations
 ---
 
 Use the following instructions to enable Misconfigurations and Identity Risks (CIEM) on AWS, Azure, GCP, and OCI.

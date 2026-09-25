@@ -7,7 +7,7 @@ further_reading:
 - link: "/infrastructure/containers/container_images/#enable-sbom-collection"
   tag: "Documentation"
   text: "Enable SBOM collection in Cloud Security Vulnerabilities"
-- link: "/security/cloud_security_management/setup/csm_enterprise/?tab=aws#hosts"
+- link: "/security/cloud_security_management/setup/agent"
   tag: "Documentation"
   text: "Setting up host vulnerabilities"
 - link: "/infrastructure/containers/container_images"
@@ -19,7 +19,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-container-image-view/"
   tag: "Blog"
   text: "Enhance your troubleshooting workflow with Container Images in Datadog Container Monitoring"
-- link: "/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities"
+- link: "/security/cloud_security_management/setup/ci_cd/vulnerability_scanning/#link-dockerfile-to-vulnerabilities"
   tag: "Documentation"
   text: "Link a Dockerfile to vulnerabilities detected in production"
 ---
@@ -147,7 +147,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [7]: https://app.datadoghq.com/container-images
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /security/code_security/iast/
-[11]: /security/cloud_security_management/setup/agentless_scanning/
+[11]: /security/cloud_security_management/setup/agentless/vulnerabilities/
 [12]: /security/cloud_security_management/setup/agent
 [13]: /security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /security/cloud_security_management/troubleshooting/vulnerabilities/
@@ -155,10 +155,10 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
 [20]: /security/automation_pipelines/
-[21]: /security/cloud_security_management/setup/ci_cd
-[22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[21]: /security/cloud_security_management/setup/ci_cd/vulnerability_scanning
+[22]: /security/cloud_security_management/setup/ci_cd/vulnerability_scanning/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
-[24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
+[24]: /security/cloud_security_management/setup/agentless/#container-image-registries
 
 ## Further reading
 

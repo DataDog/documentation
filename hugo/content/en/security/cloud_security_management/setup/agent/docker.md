@@ -91,7 +91,7 @@ To verify the setup, filter vulnerability findings by [runtime signals][6].
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /security/threats
-[3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
+[3]: /security/cloud_security_management/setup/choose_deployment_method
 [4]: /security/workload_protection/
 [5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
 [6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals

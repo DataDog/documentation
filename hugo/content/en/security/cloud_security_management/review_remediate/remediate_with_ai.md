@@ -2,7 +2,7 @@
 title: Remediate with AI
 description: Turn a Cloud Security misconfiguration finding into a code fix with Bits Code, Cursor, or the coding agent you already use.
 further_reading:
-- link: "/security/cloud_security_management/code_locations/"
+- link: "/security/cloud_security_management/setup/ci_cd/iac_mapping/"
   tag: "Documentation"
   text: "Code Locations"
 - link: "/bits_ai/bits_code/"
@@ -66,6 +66,6 @@ Bits Code usage is billed through [AI Credits][7].
 [3]: /bits_ai/bits_code/#sessions
 [4]: /bits_ai/bits_code/automations/
 [5]: /bits_ai/bits_code/setup/
-[6]: /security/cloud_security_management/code_locations/
+[6]: /security/cloud_security_management/setup/ci_cd/iac_mapping/
 [7]: /account_management/billing/ai_credits/
 [8]: /account_management/rbac/permissions/#bits-ai

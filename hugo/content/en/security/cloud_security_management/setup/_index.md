@@ -15,9 +15,9 @@ aliases:
   - /security/cloud_security_management/setup/csm_cloud_workload_security
   - /security/cloud_security_management/setup/csm_pro
 further_reading:
-    - link: "/security/cloud_security_management/setup/supported_deployment_types"
+    - link: "/security/cloud_security_management/setup/choose_deployment_method"
       tag: "Documentation"
-      text: "Supported Deployment Types"
+      text: "Choose a Deployment Method"
     - link: "/security/guide/aws_fargate_config_guide"
       tag: "Documentation"
       text: "AWS Fargate Configuration Guide for Datadog Security"
@@ -30,28 +30,42 @@ further_reading:
 
 To get started with Cloud Security, review the following:
 
-- [Enable Agentless Scanning](#enable-agentless-scanning)
-- [Deploy the Agent for additional coverage](#deploy-the-agent-for-additional-coverage)
-- [Enable additional features](#enable-additional-features)
-  - [Container Image Scanning in CI/CD](#container-image-scanning-in-cicd)
-  - [AWS CloudTrail Logs](#aws-cloudtrail-logs)
-  - [Deploy using cloud integrations](#deploy-using-cloud-integrations)
+- [Choose a deployment method](#choose-a-deployment-method)
+- [Agentless setup](#agentless-setup)
+- [Agent setup](#agent-setup)
+- [CI/CD setup](#cicd-setup)
 - [Disable Cloud Security](#disable-cloud-security)
 - [Further reading](#further-reading)
 
-## Enable Agentless Scanning
+## Choose a deployment method
+
+Cloud Security supports agentless, Agent-based, and CI/CD deployments. Each deployment type supports a different set of features. To see which features are available for each deployment type, see [Choose a Deployment Method][10].
+
+## Agentless setup
+
+Agentless setup lets you use Cloud Security without installing anything on individual resources. For an overview of all agentless setup options, see [Agentless Setup][1].
+
+### Agentless Scanning
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-The simplest way to get started with Cloud Security is by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
+Datadog recommends getting started with Cloud Security by [enabling Agentless Scanning][1]. Agentless Scanning provides the broadest coverage across your AWS, Azure, and GCP cloud infrastructure: it scans all hosts, running containers, and other supported workloads without requiring you to install anything on individual resources.
 
 To learn more about Agentless Scanning, see [Cloud Security Agentless Scanning][2].
 
-## Deploy the Agent for deeper context
+### Cloud accounts and resource scanning
 
-Agentless Scanning covers your entire cloud infrastructure, but deploying the Datadog Agent on critical hosts adds deeper security context such as runtime vulnerability prioritization, real-time updates, and host benchmarks. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Setting up Cloud Security on the Agent][3].
+Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, GCP, and OCI resources. For more information, see [Misconfigurations: Cloud Accounts and Resource Scanning][7].
+
+### AWS CloudTrail logs
+
+Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and used permissions. For more information, see [Identity Risks: AWS CloudTrail Logs][4].
+
+## Agent setup
+
+Agentless Scanning covers your entire cloud infrastructure, but deploying the Datadog Agent on critical hosts adds deeper security context such as runtime vulnerability prioritization, real-time updates, and host benchmarks. The following table outlines the improvements offered by Agent-based deployments. For more information, see [Agent Setup][3].
 
 <table>
   <thead>
@@ -106,19 +120,15 @@ Agentless Scanning covers your entire cloud infrastructure, but deploying the Da
   </tr>
 </table>
 
-## Enable additional features
+## CI/CD setup
 
-### Container Image Scanning in CI/CD
+### Vulnerability scanning
 
 Scan container images for vulnerabilities during your CI/CD pipelines, before deploying images to production. The Datadog Security CLI runs directly in your CI jobs, giving you control over when and how scans are executed. For more information, see [Container Image Scanning in CI/CD][9].
 
-### AWS CloudTrail Logs
+### IaC mapping
 
-Maximize the benefits of [Cloud Security Identity Risks][6] with AWS CloudTrail Logs. Gain deeper insights into cloud resource usage, identifying users and roles with significant gaps between provisioned and utilized permissions. For more information, check out [Setting up AWS CloudTrail Logs for Cloud Security][4].
-
-### Deploy using cloud integrations
-
-Monitor your compliance security coverage and secure your cloud infrastructure against IAM-based attacks by enabling resource scanning for AWS, Azure, GCP, and OCI resources. For more information, see [Deploying Cloud Security using Cloud Integrations][7].
+Connect Cloud Security misconfiguration findings to the infrastructure as code (IaC) that defines the affected resource so you can remediate at the source. For more information, see [IaC Mapping][11].
 
 ## Disable Cloud Security
 
@@ -130,11 +140,13 @@ For information on disabling Cloud Security, see the following:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_security_management/setup/agentless_scanning/enable
-[2]: /security/cloud_security_management/agentless_scanning
+[1]: /security/cloud_security_management/setup/agentless
+[2]: /security/cloud_security_management/setup/agentless/vulnerabilities
 [3]: /security/cloud_security_management/setup/agent
-[4]: /security/cloud_security_management/setup/cloudtrail_logs
+[4]: /security/cloud_security_management/setup/agentless/identity_risks
 [6]: /security/cloud_security_management/identity_risks
-[7]: /security/cloud_security_management/setup/cloud_accounts
+[7]: /security/cloud_security_management/setup/agentless/misconfigurations
 [8]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
-[9]: /security/cloud_security_management/setup/ci_cd
+[9]: /security/cloud_security_management/setup/ci_cd/vulnerability_scanning
+[10]: /security/cloud_security_management/setup/choose_deployment_method
+[11]: /security/cloud_security_management/setup/ci_cd/iac_mapping

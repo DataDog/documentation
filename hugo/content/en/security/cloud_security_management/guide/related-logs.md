@@ -69,7 +69,7 @@ source:azure.* @properties.eventCategory:Administrative @resourceId:(/SUBSCRIPTI
 
 
 
-[1]: /security/cloud_security_management/setup/cloudtrail_logs/
+[1]: /security/cloud_security_management/setup/agentless/identity_risks/
 [2]: https://app.datadoghq.com/security/compliance
 [3]: /logs/log_configuration/flex_logs/
 [4]: https://forms.gle/AqZg9jqBusDf62h87

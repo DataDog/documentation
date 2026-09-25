@@ -111,7 +111,7 @@ To automatically detect container image vulnerabilities, enable [Software Bill o
 
 <div class="alert alert-warning">
 <strong>Windows environments</strong>: The Cloud Security Vulnerabilities feature is not available for containers running on Windows environments.<br/><br/>
-<strong>Amazon ECS with AWS Fargate</strong>: The Cloud Security Vulnerabilities feature is available for ECS Fargate through <a href="/security/cloud_security_management/setup/agentless_scanning/compatibility">Agentless scanning</a>.<br/><br/>
+<strong>Amazon ECS with AWS Fargate</strong>: The Cloud Security Vulnerabilities feature is available for ECS Fargate through <a href="/security/cloud_security_management/setup/agentless#compatibility">Agentless scanning</a>.<br/><br/>
 <strong>Google Kubernetes Engine (GKE)</strong>: To enable SBOM collection in GKE, you must <a href="https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable">disable GKE's image streaming feature</a>.</div>
 
 

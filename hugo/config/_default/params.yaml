@@ -331,6 +331,7 @@ unsupported_sites:
   case_management: [gov2]
   ci_visibility: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
+  cloud_storage: [gov,gov2]
   cloudprem: [gov,gov2]
   code_coverage: [gov,gov2]
   code_security: [gov,gov2]

@@ -133,7 +133,7 @@ Datadog detects running images with either the Datadog Agent or Agentless Scanni
 [10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization
 [11]: https://app.datadoghq.com/security/csm/vm
 [12]: /containers/
-[13]: /security/cloud_security_management/setup/agentless_scanning/
+[13]: /security/cloud_security_management/setup/agentless/vulnerabilities/
 [14]: /security/cloud_security_management/vulnerabilities/
 [15]: https://www.cisa.gov/news-events/directives/bod-26-04-prioritizing-security-updates-based-risk
 [16]: https://www.datadoghq.com/blog/cisa-bod-26-04-vulnerability-prioritization/

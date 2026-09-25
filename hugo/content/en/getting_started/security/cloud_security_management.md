@@ -98,4 +98,4 @@ For information on disabling Cloud Security, see the following:
 [31]: https://app.datadoghq.com/security/configuration/reports
 [32]: /security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [33]: /security/workload_protection/troubleshooting/threats/#disable-csm-threats
-[34]: /security/cloud_security_management/setup/cloud_integrations
+[34]: /security/cloud_security_management/setup/agentless/misconfigurations

@@ -1,10 +1,10 @@
 ---
 title: Troubleshooting Agentless Scanning
 further_reading:
-- link: "/security/cloud_security_management/setup/agentless_scanning"
+- link: "/security/cloud_security_management/setup/agentless/vulnerabilities"
   tag: "Documentation"
   text: "Setting up Agentless Scanning"
-- link: "/security/cloud_security_management/setup/agentless_scanning/deployment_methods"
+- link: "/security/cloud_security_management/setup/agentless#deployment-methods"
   tag: "Documentation"
   text: "Deploying Agentless Scanning"
 ---
@@ -79,7 +79,7 @@ Agentless Scanning is not available in GovCloud because it requires [Remote Conf
 [2]: https://app.datadoghq.com/security/csm/vm
 [3]: /remote_configuration
 [4]: https://app.datadoghq.com/security/configuration/csm/setup
-[5]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods#enterprise-networking-considerations
+[5]: /security/cloud_security_management/setup/agentless#enterprise-networking-considerations
 [6]: /security/cloud_security_management/vulnerabilities
-[7]: /security/cloud_security_management/setup/agentless_scanning/deployment_methods
+[7]: /security/cloud_security_management/setup/agentless#deployment-methods
 [8]: https://github.com/DataDog/terraform-module-datadog-agentless-scanner/tree/main/examples/custom_vpc

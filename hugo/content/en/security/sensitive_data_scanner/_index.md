@@ -201,7 +201,7 @@ When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summar
 [5]: /observability_pipelines/
 [6]: /observability_pipelines/processors/sensitive_data_scanner
 [7]: /observability_pipelines/configuration/set_up_pipelines/
-[8]: /security/cloud_security_management/setup/agentless_scanning
+[8]: /security/cloud_security_management/setup/agentless/vulnerabilities
 [9]: /remote_configuration
 [10]: /security/sensitive_data_scanner/scanning_rules/library_rules/
 [11]: /security/cloud_security_management
