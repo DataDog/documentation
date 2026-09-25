@@ -188,6 +188,35 @@ app.get('/make-sandwich', (req, res) => {
 
 To learn more, read [API details for `tracer.wrap()`][10].
 
+## Adding span links {% #adding-span-links-nodejs %}
+
+[Span links][11] associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
+
+To add span links when you create a span, pass them in the `links` option. Each link takes the context of the span you want to link to, and optional attributes.
+
+```javascript
+const spanA = tracer.startSpan('span_a')
+spanA.finish()
+
+tracer.trace('span_b', {
+  // Link span_b to span_a
+  links: [{ context: spanA.context(), attributes: { 'link.name': 'span_a' } }]
+}, () => {
+  // ...
+})
+```
+
+To add a span link to an existing span, use `addLink()`:
+
+```javascript
+const spanC = tracer.startSpan('span_c')
+// Link span_c to span_a
+spanC.addLink({ context: spanA.context() })
+spanC.finish()
+```
+
+Links added after a span is created don't affect its sampling decision. When possible, add span links when you create the span.
+
 ## Request filtering {% #request-filtering-nodejs %}
 
 You may not want some requests of an application to be instrumented. A common case would be health checks or other synthetic traffic. These can be ignored by using the `blocklist` or `allowlist` option on the `http` plugin.
@@ -268,3 +297,4 @@ See that package's [API definition][6] for the full list of supported API calls.
 [8]: https://datadoghq.dev/dd-trace-js/modules/plugins.html
 [9]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#trace
 [10]: https://datadoghq.dev/dd-trace-js/interfaces/Tracer.html#wrap
+[11]: /tracing/trace_collection/span_links/
