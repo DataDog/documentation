@@ -63,15 +63,20 @@ helm upgrade -i datadog-agent datadog/datadog -f values.yaml
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Add annotations to your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
+This option requires Datadog Operator version 1.31.0 or later.
+
+Configure the injector in the `spec.features.appsec.injector` section of your `DatadogAgent` resource. Sidecar mode is the default, so enabling the injector is enough:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
-  annotations:
-    agent.datadoghq.com/appsec.injector.enabled: "true"
+spec:
+  features:
+    appsec:
+      injector:
+        enabled: true
 ```
 
 Apply with:
