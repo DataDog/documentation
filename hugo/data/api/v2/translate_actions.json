@@ -2260,6 +2260,26 @@
     "request_description": "",
     "request_schema_description": "Request payload for creating or updating a HAMR organization connection."
   },
+  "ListTerraformBackendSyncConfigs": {
+    "description": "List Terraform backend sync configurations, optionally filtered by AWS account ID.",
+    "summary": "List Terraform backend sync configurations"
+  },
+  "CreateTerraformBackendSyncConfig": {
+    "description": "Create a Terraform backend sync configuration for an AWS account, region, and set of S3 buckets.",
+    "summary": "Create a Terraform backend sync configuration",
+    "request_description": "",
+    "request_schema_description": "Request to create a Terraform backend sync configuration."
+  },
+  "DeleteTerraformBackendSyncConfig": {
+    "description": "Delete a Terraform backend sync configuration and its synchronized state files.",
+    "summary": "Delete a Terraform backend sync configuration"
+  },
+  "UpdateTerraformBackendSyncConfig": {
+    "description": "Replace the complete set of buckets in a Terraform backend sync configuration. The account and region cannot be changed. The resource ID in the request body must match the path ID; a mismatch returns 409 Conflict.",
+    "summary": "Update a Terraform backend sync configuration",
+    "request_description": "",
+    "request_schema_description": "Request to update a Terraform backend sync configuration."
+  },
   "ListIdentityProviders": {
     "description": "Get all identity providers available for the current organization.",
     "summary": "List identity providers"
@@ -2601,7 +2621,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
+    "description": "Create a page from an incident using the Cases service.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."

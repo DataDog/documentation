@@ -22771,6 +22771,58 @@ menu:
           - ListTeams
         unstable: []
         order: 20
+    - name: Terraform State Files
+      url: /api/latest/terraform-state-files/
+      identifier: terraform-state-files
+      generated: true
+    - name: Update a Terraform backend sync configuration
+      url: /api/latest/terraform-state-files/update-a-terraform-backend-sync-configuration/
+      identifier: terraform-state-files-update-a-terraform-backend-sync-configuration
+      parent: terraform-state-files
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTerraformBackendSyncConfig
+        unstable: []
+        order: 3
+    - name: Delete a Terraform backend sync configuration
+      url: /api/latest/terraform-state-files/delete-a-terraform-backend-sync-configuration/
+      identifier: terraform-state-files-delete-a-terraform-backend-sync-configuration
+      parent: terraform-state-files
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTerraformBackendSyncConfig
+        unstable: []
+        order: 4
+    - name: Create a Terraform backend sync configuration
+      url: /api/latest/terraform-state-files/create-a-terraform-backend-sync-configuration/
+      identifier: terraform-state-files-create-a-terraform-backend-sync-configuration
+      parent: terraform-state-files
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTerraformBackendSyncConfig
+        unstable: []
+        order: 2
+    - name: List Terraform backend sync configurations
+      url: /api/latest/terraform-state-files/list-terraform-backend-sync-configurations/
+      identifier: terraform-state-files-list-terraform-backend-sync-configurations
+      parent: terraform-state-files
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTerraformBackendSyncConfigs
+        unstable: []
+        order: 1
     - name: Test Optimization
       url: /api/latest/test-optimization/
       identifier: test-optimization
