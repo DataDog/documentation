@@ -33,7 +33,7 @@ Missing log bytes indicate that file rotation outpaced the Agent's reads during 
 
 1. Search the Agent log for [rotation warnings](#confirm-missing-bytes-from-rotation). Record the affected file paths, timestamps, and number of unread bytes.
 2. If you use Agent 7.82.0 or later, run the [status command][1] and inspect [Logs Agent Backpressure](#interpret-logs-agent-backpressure). Compare the retained history with the warning timestamps.
-3. If several rows in the **Logs Agent Backpressure** table are saturated, investigate them in this order: `destination_reliable_N`, `worker`, `strategy`, and `processor`. Use [Choose a tuning action](#choose-a-tuning-action) to select the next step for the first saturated component in that list.
+3. If several rows in the **Logs Agent Backpressure** table are saturated, investigate them in this order: `destination_reliable_N`, `worker`, `strategy`, and `processor`. Use the [Choose a tuning action](#choose-a-tuning-action) section to select the next step for the first saturated component in that list.
 4. Apply one relevant change, then [verify the result](#verify-the-result) under representative log volume before addressing another component.
 5. If the Agent remains unable to process the required volume, [reduce log volume](#reduce-log-volume).
 
