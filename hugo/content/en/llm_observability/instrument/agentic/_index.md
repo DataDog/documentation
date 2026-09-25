@@ -10,7 +10,10 @@ aliases:
 
 1. Only add Datadog Agent Observability and Datadog tracer-related code. Unless for the purposes of manual instrumentation, do not modify unrelated code.
 2. If being run in a monorepo or project with multiple services or instrumentation targets, confirm with the user which service or sub-project should be instrumented with Agent Observability.
-3. Install the latest Datadog SDKs. If it is already installed, check with the user if it is ok to update the dependency.
+3. Check whether the installed Datadog SDK supports the instrumentation required for the application. If it does, use that version. If instrumentation requires an SDK update, explain why and ask before updating the dependency. Defer updates required only for optional Prompt Management until the user chooses that integration.
+4. Preserve the application's existing provider, model, prompt content, behavior, package manager, and secret-management workflow.
+
+First, complete instrumentation, including Prompt Tracking, and any requested context sharing. Then offer optional hosted Prompt Management. Prompt Management is not required for instrumentation, context sharing, or check recommendations.
 
 ## Pre-requisites
 
@@ -65,10 +68,18 @@ Follow the instructions for the detected language:
 
 | Language | Instructions |
 |----------|-------------|
-| Python | [Python Application Agentic Instrumentation](/llm_observability/instrument/agentic/python.md) |
-| Node.js | [Node.js Application Agentic Instrumentation](/llm_observability/instrument/agentic/nodejs.md) |
-| Java | [Java Application Agentic Instrumentation](/llm_observability/instrument/agentic/java.md) |
-| OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrument/otel_instrumentation.md) |
+| Python | [Python Application Agentic Instrumentation][1] |
+| Node.js | [Node.js Application Agentic Instrumentation][2] |
+| Java | [Java Application Agentic Instrumentation][3] |
+| OpenTelemetry | [OpenTelemetry Instrumentation][4] |
+
+## Instrument prompts
+
+Prompt Tracking is part of the default Agent Observability instrumentation. For each selected LLM call, identify where the application builds the prompt. Keep the prompt template separate from the variable values used to populate it.
+
+For local prompts, follow the [Prompt Tracking instructions][5] to record the prompt template and variable values with the LLM span. Keep the existing code that builds the prompt. Do not replace it with code that retrieves prompts from Datadog Prompt Management.
+
+If the application already retrieves prompts from Datadog Prompt Management, keep that integration. Automatic tracking applies when the formatted prompt is passed unchanged to a supported, automatically instrumented provider. If the application copies or modifies the formatted prompt before sending it to the provider, add explicit annotations as described in [Track prompt usage][6]. Do not add manual annotations when automatic tracking already captures the prompt metadata.
 
 {{< agent-only >}}
 ## Share agent context for check recommendations
@@ -158,20 +169,9 @@ Follow these security requirements:
 - If the upload fails, continue instrumentation and tell the user that Datadog did not receive the optional context. Do not retry with broader data.
 
 {{< /agent-only >}}
-## Instrument prompts and offer Prompt Management
-
-Prompt Tracking is part of the default Agent Observability instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
-
-1. If the user's request already specifies a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide](/llm_observability/instrument/agentic/prompt_management.md). Do not ask whether to use Prompt Management again.
-2. Otherwise, identify the application's prompts and the dynamic variables used to format them. Preserve the existing provider, model, prompt content, and application behavior.
-3. For a supported Python application, tell the user which prompts you identified and ask whether they want to manage those prompts with Datadog. If they agree, follow the [Prompt Management agentic integration guide](/llm_observability/instrument/agentic/prompt_management.md) to promote the selected local prompts and replace their local construction with managed-prompt retrieval.
-4. If the user declines Prompt Management, or the application language is unsupported, instrument the selected prompts with structured prompt metadata by following the [Prompt Tracking instructions](/llm_observability/instrument/prompt_tracking). Do not add runtime prompt retrieval.
-
-When Prompt Management replaces a local prompt, use the managed prompt's automatic tracking rather than attaching duplicate structured prompt metadata.
-
 ## Viewing traces
 
-Let the user know that they can hit their application and see data in Datadog.
+Report the instrumentation changes, any remaining setup requirements, and whether the context upload succeeded when that step was requested. Let the user know how to run their application and view its data in Datadog. Do not claim that traces or recommendations are available without verification.
 
 **Mandatory**: provide a permalink where the user can view the data associated with this application. This will take the form of
 
@@ -180,8 +180,20 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 Fill in the provided values:
-1. `dd_site` - if the value was provided for [Datadog site](#datadog-site), use that value. Otherwise, use `datadoghq.com`.
-2. `application_name` - use either the provided or inferred value from the [Agent Observability application name](#llm-observability-application-name) section.
+1. `dd_site` - if the value was provided for [Datadog site][7], use that value. Otherwise, use `datadoghq.com`.
+2. `application_name` - use either the provided or inferred value from the [Agent Observability application name][8] section.
+
+## Optional prompt management
+
+After completing instrumentation and any requested context sharing, report the results. Then address optional hosted Prompt Management for Python applications:
+
+- If the user already supplied a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide][9]. Do not ask whether to enable Prompt Management again.
+- Otherwise, identify the application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to create managed versions of the selected prompts and update the application to retrieve them.
+- If the user declines or does not answer, keep the instrumented local prompts unchanged.
+
+Follow the guide's [Track prompt usage section][6] to determine whether automatic tracking or explicit annotations are required. Avoid duplicate prompt metadata.
+
+If Prompt Management requires an SDK update, explain why and ask before updating the dependency. This optional update must not delay core instrumentation or context sharing.
 
 ## Language-specific instructions
 
@@ -191,3 +203,13 @@ Fill in the provided values:
     {{< nextlink href="/llm_observability/instrument/agentic/java" >}}Java Application Agentic Instrumentation{{< /nextlink >}}
     {{< nextlink href="/llm_observability/instrument/agentic/prompt_management" >}}Prompt Management Agentic Integration{{< /nextlink >}}
 {{< /whatsnext >}}
+
+[1]: /llm_observability/instrument/agentic/python.md
+[2]: /llm_observability/instrument/agentic/nodejs.md
+[3]: /llm_observability/instrument/agentic/java.md
+[4]: /llm_observability/instrument/otel_instrumentation.md
+[5]: /llm_observability/instrument/prompt_tracking.md
+[6]: /llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
+[7]: #datadog-site
+[8]: #agent-observability-application-name
+[9]: /llm_observability/instrument/agentic/prompt_management.md
