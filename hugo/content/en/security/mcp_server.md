@@ -33,6 +33,8 @@ The [Datadog MCP Server][1] lets AI agents query your security data through the 
 
 <div class="alert alert-info">This page covers the <code>security</code> toolset of the remote Datadog MCP Server. For the Code Security MCP Server, which runs locally and scans source code during development, see <a href="/security/code_security/dev_tool_int/mcp_server/">Code Security MCP Server</a>.</div>
 
+Query Code Security findings (SAST, secrets, library vulnerabilities, and IaC misconfigurations) with this same `security` toolset. See [Query findings already in Datadog][6].
+
 ### Use cases
 
 You can use the `security` toolset to:
@@ -250,3 +252,4 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 [3]: /getting_started/site/
 [4]: /mcp_server/setup/
 [5]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[6]: /security/code_security/dev_tool_int/mcp_server/#query-findings-already-in-datadog
