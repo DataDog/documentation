@@ -44,6 +44,8 @@ if (window.DD_RUM) {
 
         window.DD_RUM.startSessionReplayRecording();
 
+        window.DD_RUM.setGlobalContextProperty('stack', 'hugo');
+
         if (branch) {
             window.DD_RUM.setGlobalContextProperty('branch', branch);
         }
@@ -69,6 +71,7 @@ if (window.DD_LOGS) {
     window.DD_LOGS.setGlobalContextProperty('host', window.location.host);
     window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer);
     window.DD_LOGS.setGlobalContextProperty('lang', lang);
+    window.DD_LOGS.setGlobalContextProperty('stack', 'hugo');
 
     if (branch) {
         window.DD_LOGS.setGlobalContextProperty('branch', branch);
