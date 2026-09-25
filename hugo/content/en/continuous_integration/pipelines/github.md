@@ -107,7 +107,7 @@ To enable Log Storage, go to [CI/CD Repository settings][29], and enable Log Sto
 
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
 
-Job logs are collected in [Log Management][15] and are automatically correlated with the GitHub Actions workflow in CI Visibility. Log files larger than one GiB are truncated.
+Job logs are collected in [Log Management][15] and, once stored, are automatically correlated with the GitHub Actions workflow in CI Visibility. Log files larger than one GiB are truncated.
 
 ### Correlate infrastructure metrics to jobs
 
