@@ -389,6 +389,10 @@ CI jobs failure analysis uses LLM models to analyze failed CI jobs based on rele
 
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
 
+Log Analysis is enabled by default in Datadog, but requires job log forwarding to be configured, as described below.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
 The following GitLab versions support forwarding job logs to Datadog:
 
 * GitLab.com (SaaS)
@@ -426,13 +430,9 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-CI jobs failure analysis is enabled by default, but requires job log forwarding to be configured as described above.
-
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
-
 #### Store job logs
 
-After completing the steps for your GitLab version, go to [CI/CD Repository settings][35], and enable Log Storage at the Datadog organization level or for the desired repositories.
+After completing the steps for your GitLab version, go to [CI/CD Repository settings][35] and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
 

@@ -146,6 +146,7 @@ Example for enabling the hooks in specified projects:
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
+[14]: https://app.datadoghq.com/integrations/azure
 [16]: /integrations/azure_devops/
 
 {{% /tab %}}
@@ -164,7 +165,7 @@ CI jobs failure analysis uses LLM models to compute the analysis for failed CI j
 
 For a full explanation, see the guide on [using CI jobs failure analysis][21].
 
-Log Analysis is enabled by default in Datadog. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+Log Analysis is enabled by default in Datadog. To receive Azure Pipelines job logs for analysis, set up the Datadog Azure DevOps integration by following the steps in the [Azure integration tile][14]. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
 
@@ -191,6 +192,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [9]: https://learn.microsoft.com/en-us/azure/devops/pipelines/process/approvals?view=azure-devops&tabs=check-pass#approvals
 [10]: /glossary/#custom-tag
 [11]: /glossary/#custom-measure
+[14]: https://app.datadoghq.com/integrations/azure
 [15]: /glossary/#custom-span
 [17]: /continuous_integration/search/#search-for-pipelines
 [18]: /logs/guide/best-practices-for-log-management/
