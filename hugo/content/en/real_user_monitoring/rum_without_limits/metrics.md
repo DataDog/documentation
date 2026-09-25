@@ -35,6 +35,8 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.error.anr` | Count of ANRs (an Android freeze) | Default, Is Crash, View Name | Mobile only |
 | `rum.measure.error.hang` | Count of hangs (an iOS freeze) | Default | Mobile only |
 | `rum.measure.error.hang.duration` | Duration of hangs (an iOS freeze) | Default, View Name | Mobile only |
+| `rum.measure.resource` | Count of resources | Default, Status Code, URL Path Group, Resource Type, GraphQL Operation Name, GraphQL Operation Type, GraphQL Has Errors | Mobile & Browser |
+| `rum.measure.resource.duration` | Duration of resources | Default, Status Code, URL Path Group, Resource Type, GraphQL Operation Name, GraphQL Operation Type, GraphQL Has Errors | Mobile & Browser |
 | `rum.measure.session` | Count of sessions | Default | Mobile & Browser |
 | `rum.measure.session.action` | Count of actions | Default | Mobile & Browser |
 | `rum.measure.session.crash_free` | Count of crash-free sessions | Default | Mobile only |
