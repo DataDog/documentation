@@ -5,8 +5,6 @@ aliases:
 - /real_user_monitoring/guide/remote-config-launchdarkly/
 - /real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 - /real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/
-- /es/real_user_monitoring/guide/remote-config-launchdarkly/
-- /es/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 - /fr/real_user_monitoring/guide/remote-config-launchdarkly/
 - /fr/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 - /ja/real_user_monitoring/guide/remote-config-launchdarkly/
