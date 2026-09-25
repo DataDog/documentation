@@ -5874,11 +5874,16 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
+    - name: Prompt Experimentation
+      url: llm_observability/configure/prompt_experimentation
+      parent: llm_obs_configure
+      identifier: llm_obs_prompt_experimentation
+      weight: 602
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
-      weight: 602
+      weight: 603
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -10252,6 +10257,31 @@ menu:
       parent: pa_charts
       identifier: pa_analytics_explorer
       weight: 106
+    - name: Search Syntax
+      url: product_analytics/charts/analytics_explorer/search_syntax
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_search_syntax
+      weight: 1061
+    - name: Group
+      url: product_analytics/charts/analytics_explorer/group
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_group
+      weight: 1062
+    - name: Visualize
+      url: product_analytics/charts/analytics_explorer/visualize
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_visualize
+      weight: 1063
+    - name: Events
+      url: product_analytics/charts/analytics_explorer/events
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_events
+      weight: 1064
+    - name: Export
+      url: product_analytics/charts/analytics_explorer/export
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_export
+      weight: 1065
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
