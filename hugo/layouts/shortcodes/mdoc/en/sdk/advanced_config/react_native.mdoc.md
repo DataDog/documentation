@@ -405,6 +405,57 @@ DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 
 For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=react_native).
 
+### Track user accounts
+
+If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
+
+* Analyze performance and errors by account
+* Know which accounts are the most impacted by an issue
+* Prioritize fixes based on account value
+
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
+
+| Attribute      | Type   | Description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| `account.id`   | String | (Required) Unique account identifier.                       |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
+
+To identify accounts, use the `setAccountInfo` API. For example:
+
+```js
+DdSdkReactNative.setAccountInfo({
+    id: 'acct-1234',
+    name: 'Acme Corp',
+    extraInfo: {
+        tier: 'enterprise'
+    }
+});
+```
+
+Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
+
+To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. If no account is set, the SDK ignores the additional account information and logs a warning.
+
+```js
+DdSdkReactNative.addAccountExtraInfo({
+    seats: 42
+});
+```
+
+To clear the account information (for example, when the user signs out), use `clearAccountInfo`:
+
+```js
+DdSdkReactNative.clearAccountInfo();
+```
+
+Account information is attached to RUM events, logs, and traces.
+
+{% alert level="info" %}
+Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session or the view before clearing.
+{% /alert %}
+
 ## Track view navigation
 
 Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.

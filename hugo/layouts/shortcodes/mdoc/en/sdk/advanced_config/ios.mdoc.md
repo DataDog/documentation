@@ -35,6 +35,78 @@ For better performance in bulk operations (modifying multiple attributes at once
 
 See [Track user IDs][13] for instructions on adding user information to your RUM sessions.
 
+### Track user accounts
+
+If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
+
+* Analyze performance and errors by account
+* Know which accounts are the most impacted by an issue
+* Prioritize fixes based on account value
+
+Add account information in addition to user information. It does not replace user information.
+
+The SDK reports these attributes:
+
+| Attribute      | Type   | Description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| `account.id`   | String | (Required) Unique account identifier.                       |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
+
+To identify accounts, use the `Datadog.setAccountInfo(id:name:extraInfo:)` API.
+
+For example:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.setAccountInfo(id: "acct-1234", name: "Acme Corp", extraInfo: ["tier": "enterprise"])
+```
+
+To append attributes to the account you already set, use `Datadog.addAccountExtraInfo(_:)`. Call `Datadog.setAccountInfo(id:name:extraInfo:)` first. Adding extra info before an account exists has no effect.
+
+```swift
+Datadog.addAccountExtraInfo(["seats": 42])
+```
+
+To clear the account (for example, when the user signs out), use `Datadog.clearAccountInfo()`.
+
+```swift
+Datadog.clearAccountInfo()
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+[DDDatadog setAccountInfoWithAccountId:@"acct-1234" name:@"Acme Corp" extraInfo:@{@"tier": @"enterprise"}];
+```
+
+To append attributes to the account you already set, use `addAccountExtraInfo:`. Call `setAccountInfoWithAccountId:name:extraInfo:` first. Adding extra info before an account exists has no effect.
+
+```objective-c
+[DDDatadog addAccountExtraInfo:@{@"seats": @42}];
+```
+
+To clear the account (for example, when the user signs out), use `clearAccountInfo`.
+
+```objective-c
+[DDDatadog clearAccountInfo];
+```
+
+{% /tab %}
+{% /tabs %}
+
+Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
+
+Account information is attached to RUM events, logs, traces, and crash reports.
+
+{% alert level="info" %}
+Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `RUMMonitor.stopSession()` or the view with `stopView(viewController:attributes:)` before clearing.
+{% /alert %}
+
 ## Track background events
 
 {% alert level="info" %}

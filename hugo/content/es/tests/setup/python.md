@@ -3,89 +3,90 @@ aliases:
 - /es/continuous_integration/setup_tests/python
 - /es/continuous_integration/tests/python
 - /es/continuous_integration/tests/setup/python
-code_lang: Python
+code_lang: python
 code_lang_weight: 30
 further_reading:
 - link: /continuous_integration/tests/containers/
   tag: Documentación
-  text: Reenvío de variables entorno para tests en contenedores
+  text: Reenvío de variables de entorno para pruebas en Containers
 - link: /continuous_integration/tests
   tag: Documentación
-  text: Exploración de los resultados de tests y del rendimiento
+  text: Explorar resultados de pruebas y rendimiento
 - link: /tests/troubleshooting/
   tag: Documentación
-  text: Solucionar problemas de Test Optimization (optimización de tests)
-title: Tests Python
-type: lenguaje de código múltiple
+  text: Solución de problemas de Test Optimization
+title: Pruebas de Python
+type: multi-code-lang
 ---
+## Compatibilidad {#compatibility}
 
-## Compatibilidad
+Idiomas admitidos:
 
-Lenguajes compatibles:
-
-| Lenguaje | Versión |
+| Idioma | Versión |
 |---|---|
 | Python 2 | >= 2.7 |
 | Python 3 | >= 3.6 |
 
-Marcos de test compatibles:
+Marcos de prueba compatibles:
 
-| Marco de test | Versión |
+| Framework de prueba | Versión |
 |---|---|
 | `pytest` | >= 3.0.0 |
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
-## Configuración del método de informe
+<div class="alert alert-info">Si utiliza Bazel para ejecutar pruebas de Python, utilice las <a href="/tests/setup/bazel/python/">reglas de Datadog para Bazel en pruebas de Python</a>.</div>
 
-Para informar resultados de tests a Datadog, debes configurar la librería Datadog Python:
+## Configuración del método de reporte {#configuring-reporting-method}
+
+Para reportar los resultados de las pruebas a Datadog, necesita configurar la biblioteca de Python de Datadog:
 
 {{< tabs >}}
-{{% tab "CI Provider with Auto-Instrumentation Support" %}}
+{{% tab "Proveedor de CI con soporte para instrumentación automática" %}}
 {{% ci-autoinstrumentation %}}
 {{% /tab %}}
 
-{{% tab "Other Cloud CI Provider" %}}
+{{% tab "Otro proveedor de CI en la nube" %}}
 {{% ci-agentless %}}
 {{% /tab %}}
 
-{{% tab "On-Premises CI Provider" %}}
+{{% tab "Proveedor de CI local" %}}
 {{% ci-agent %}}
 {{% /tab %}}
 {{< /tabs >}}
 
-## Instalación del rastreador de Python
+## Instalación del rastreador de Python {#installing-the-python-tracer}
 
-Instala el rastreador de Python ejecutando:
+Instale el rastreador de Python ejecutando:
 
 {{< code-block lang="shell" >}}
 pip install -U ddtrace
 {{< /code-block >}}
 
-Para obtener más información, consulta la [documentación de instalación del rastreador de Python][1].
+Para obtener más información, consulte la [documentación de instalación del rastreador de Python][1].
 
-## Instrumentación de tus tests
+## Instrumentación de sus pruebas {#instrumenting-your-tests}
 
 {{< tabs >}}
 {{% tab "pytest" %}}
 
-Para activar la instrumentación de tests `pytest`, añade la opción `--ddtrace` al ejecutar `pytest`.
+Para habilitar la instrumentación de pruebas de `pytest`, agregue la opción `--ddtrace` al ejecutar `pytest`.
 
 {{< code-block lang="shell" >}}
 pytest --ddtrace
 {{< /code-block >}}
 
-Si también quieres activar el resto de las integraciones de APM para obtener más información en tu gráfico de llamas, añade la opción `--ddtrace-patch-all`:
+Si también desea habilitar el resto de las integraciones de APM para obtener más información en su flamegraph, agregue la opción `--ddtrace-patch-all`:
 
 {{< code-block lang="shell" >}}
 pytest --ddtrace --ddtrace-patch-all
 {{< /code-block >}}
 
-Para ver configuraciones adicionales, consulta [Configuración][3].
+Para obtener información de configuración adicional, consulte [Configuración][3].
 
-### Añadir etiquetas (tags) personalizadas a tests
+### Agregar etiquetas personalizadas a las pruebas {#adding-custom-tags-to-tests}
 
-Para añadir etiquetas personalizadas a tus tests, declara `ddspan` como un argumento en tu test:
+Para agregar etiquetas personalizadas a sus pruebas, declare `ddspan` como un argumento en su prueba:
 
 ```python
 from ddtrace import tracer
@@ -98,11 +99,11 @@ def test_simple_case(ddspan):
     # ...
 ```
 
-Para crear filtros o campos `group by` para estas etiquetas, debes primero crear facetas. Para obtener más información sobre cómo añadir etiquetas, consulta la sección [Añadir etiquetas][1] en la documentación de instrumentación de Python.
+Para crear filtros o `group by` campos para estas etiquetas, primero debe crear facetas. Para obtener más información sobre cómo agregar etiquetas, consulte la sección [Adding Tags][1] de la documentación de instrumentación personalizada de Python.
 
-### Añadir medidas personalizadas a tests
+### Agregar medidas personalizadas a las pruebas {#adding-custom-measures-to-tests}
 
-Al igual que con las etiquetas, para añadir medidas a tus tests, utiliza el tramo (span) activo actual:
+Al igual que con las etiquetas, para agregar medidas personalizadas a sus pruebas, utilice el span activo actual:
 
 ```python
 from ddtrace import tracer
@@ -114,7 +115,7 @@ def test_simple_case(ddspan):
     # test continues normally
     # ...
 ```
-Conoce más sobre las medidas personalizadas en la [guía para añadir medidas personalizadas][2].
+Lea más sobre las métricas personalizadas en la [Guía para agregar métricas personalizadas][2].
 
 [1]: /es/tracing/trace_collection/custom_instrumentation/python?tab=locally#adding-tags
 [2]: /es/tests/guides/add_custom_measures/?tab=python
@@ -123,7 +124,7 @@ Conoce más sobre las medidas personalizadas en la [guía para añadir medidas p
 
 {{% tab "pytest-benchmark" %}}
 
-Para instrumentar tus tests de referencia con `pytest-benchmark`, ejecuta tus tests de referencia con la opción `--ddtrace` cuando se ejecuta `pytest` y Datadog detecta métricas desde `pytest-benchmark` automáticamente:
+Para instrumentar sus pruebas de benchmark con `pytest-benchmark`, ejecute sus pruebas de benchmark con la opción `--ddtrace` al ejecutar `pytest`, y Datadog detecta las métricas de `pytest-benchmark` automáticamente:
 
 ```python
 def square_value(value):
@@ -135,20 +136,20 @@ def test_square_value(benchmark):
     assert result == 25
 ```
 
-Para ver configuraciones adicionales, consulta [Configuración][1].
+Para configuraciones adicionales, consulte [Configuración][1].
 
 [1]: #configuration-settings
 {{% /tab %}}
 
 {{% tab "unittest" %}}
 
-Para activar la instrumentación de tests de `unittest`, ejecuta tus tests al anexar `ddtrace-run` al comienzo de tu comando `unittest`.
+Para habilitar la instrumentación de pruebas de `unittest`, ejecute sus pruebas añadiendo `ddtrace-run` al principio de su comando `unittest`.
 
 {{< code-block lang="shell" >}}
 ddtrace-run python -m unittest
 {{< /code-block >}}
 
-Alternativamente, si quieres activar la instrumentación de `unittest` de forma manual, utiliz `patch()` para activar la integración:
+Alternativamente, si desea habilitar la instrumentación `unittest` manualmente, use `patch()` para habilitar la integración:
 
 {{< code-block lang="python" >}}
 from ddtrace import patch
@@ -160,124 +161,124 @@ def test_will_pass(self):
 assert True
 {{< /code-block >}}
 
-Para ver configuraciones adicionales, consulta [Configuración][1].
+Para configuraciones adicionales, consulte [Configuración][1].
 
 [1]: #configuration-settings
 {{% /tab %}}
 
-{{% tab "Manual instrumentation (beta)" %}}
+{{% tab "Instrumentación manual (beta)" %}}
 
-### API de test manual
+### API de pruebas manuales {#manual-testing-api}
 
-<div class="alert alert-danger"><strong>Nota</strong>: La API de test manual de Test Optimization está en fase <strong>beta</strong> y puede sufrir modificaciones.</div>
+<div class="alert alert-warning">La API de pruebas manuales de Test Optimization está en <strong>beta</strong> y está sujeta a cambios.</div>
 
-A partir de la versión `2.13.0`, el [rastreador Python de Datadog][1] proporciona la API de Test Optimization (`ddtrace.ext.test_visibility`) para enviar resultados de optimización de tests según sea necesario.
+A partir de la versión `2.13.0`, el [Datadog Python SDK][1] proporciona la API de Test Optimization (`ddtrace.ext.test_visibility`) para enviar resultados de optimización de pruebas según sea necesario.
 
-#### Ejecución de la API
+#### Ejecución de la API {#api-execution}
 
-La API utiliza clases para proporcionar métodos con espacios de nombres para enviar eventos de optimización de tests.
+La API utiliza clases para proporcionar métodos con espacios de nombres para enviar eventos de Test Optimization.
 
-La ejecución de tests tiene dos fases:
-- Descubrimiento: informar a la API sobre los elementos que puede esperar
-- Ejecución: enviar los resultados (mediante llamadas de inicio y fin)
+La ejecución de pruebas tiene dos fases:
+- Descubrimiento: informar a la API qué elementos esperar
+- Ejecución: enviar resultados (usando llamadas de inicio y finalización)
 
-Las distintas fases de descubrimiento y ejecución permiten que haya un intervalo entre que el proceso del ejecutor de tests recopila los tests y éstos comienzan.
+Las fases distintas de descubrimiento y ejecución permiten un intervalo entre el proceso del ejecutor de pruebas que recopila las pruebas y el inicio de las mismas.
 
-Los usuarios de la API deben proporcionar identificadores coherentes (descritos a continuación) que se utilizan como referencias para los elementos de Test Optimization dentro del almacenamiento de estados de la API.
+Los usuarios de la API deben proporcionar identificadores consistentes (descritos a continuación) que se utilizan como referencias para los elementos de Test Optimization dentro del almacenamiento de estado de la API.
 
-##### Activar `test_visibility`
+##### Habilitar `test_visibility` {#enable-test-visibility}
 
-Debes llamar a la función `ddtrace.ext.test_visibility.api.enable_test_visibility()` antes de utilizar la API de Test Optimization.
+Debe llamar a la función `ddtrace.ext.test_visibility.api.enable_test_visibility()` antes de usar la API de Test Optimization.
 
-Llama a la función `ddtrace.ext.test_visibility.api.disable_test_visibility()` antes de que el proceso termine para asegurarte de que los datos se vacíen correctamente.
+Llame a la función `ddtrace.ext.test_visibility.api.disable_test_visibility()` antes del cierre del proceso para asegurar el vaciado adecuado de los datos.
 
-#### Modelo de dominio
+#### Modelo de dominio {#domain-model}
 
-La API se basa en cuatro conceptos: sesión de tests, módulo de test, conjuntos de tests y tests.
+La API se basa en cuatro conceptos: sesión de prueba, módulo de prueba, conjunto de pruebas y prueba.
 
-Los módulos, paquetes y tests conforman una jerarquía en la API de optimización de tests de Python, representada por la relación de superioridad del identificador de elemento.
+Los módulos, conjuntos de pruebas y pruebas forman una jerarquía en la API de Test Optimization de Python, representada por la relación de padre del identificador del elemento.
 
-##### Sesión de tests
+##### Sesión de prueba {#test-session}
 
-Una sesión de test representa la ejecución del test de un proyecto, que suele corresponder a la ejecución de un comando de test. Sólo se puede detectar, iniciar y finalizar una sesión en la ejecución del programa de Test Optimization.
+Una sesión de prueba representa la ejecución de pruebas de un proyecto, que normalmente corresponde a la ejecución de un comando de prueba. Solo se puede descubrir, iniciar y finalizar una sesión en la ejecución del programa Test Optimization.
 
-Llama a `ddtrace.ext.test_visibility.api.TestSession.discover()` para detectar la sesión, pasando el comando del test, un nombre de marco de trabajo determinado y la versión.
+Llame a `ddtrace.ext.test_visibility.api.TestSession.discover()` para descubrir la sesión, pasando el comando de prueba, un nombre de framework determinado y la versión.
 
-Llama a `ddtrace.ext.test_visibility.api.TestSession.start()` para iniciar la sesión.
+Llame a `ddtrace.ext.test_visibility.api.TestSession.start()` para iniciar la sesión.
 
-Una vez finalizados los tests, llama a `ddtrace.ext.test_visibility.api.TestSession.finish()`.
-
-
-##### Módulo de test
-
-Un módulo de test representa una unidad de trabajo más pequeña dentro de la ejecución de tests de un proyecto (un directorio, por ejemplo).
-
-Llama a `ddtrace.ext.test_visibility.api.TestModuleId()` y proporciona el nombre del módulo como parámetro para crear un `TestModuleId`.
-
-Llama a `ddtrace.ext.test_visibility.api.TestModule.discover()` y pasa el objeto `TestModuleId` como argumento para detectar el módulo.
-
-Llama a `ddtrace.ext.test_visibility.api.TestModule.start()` y pasa el objeto `TestModuleId` como argumento para iniciar el módulo.
-
-Después de que se hayan completado todos los elementos secundarios dentro del módulo, llama a `ddtrace.ext.test_visibility.api.TestModule.finish()` y pasa el objeto `TestModuleId` como argumento.
+Cuando las pruebas hayan finalizado, llame a `ddtrace.ext.test_visibility.api.TestSession.finish()` .
 
 
-##### Conjunto de tests
+##### Módulo de prueba {#test-module}
 
-Un paquete de tests representa un subconjunto de tests dentro de los módulos de un proyecto (archivo`.py`, por ejemplo).
+Un módulo de prueba representa una unidad de trabajo más pequeña dentro de las pruebas de un proyecto (un directorio, por ejemplo).
 
-Llama a `ddtrace.ext.test_visibility.api.TestSuiteId()` y proporciona el `TestModuleId` del módulo principal y el nombre del paquete como argumentos para crear un `TestSuiteId`.
+Llame a `ddtrace.ext.test_visibility.api.TestModuleId()`, proporcionando el nombre del módulo como parámetro, para crear un `TestModuleId`.
 
-Llama a `ddtrace.ext.test_visibility.api.TestSuite.discover()` y pasa el objeto `TestSuiteId` como argumento para detectar el paquete.
+Llame a `ddtrace.ext.test_visibility.api.TestModule.discover()`, pasando el objeto `TestModuleId` como argumento, para descubrir el módulo.
 
-Llama a `ddtrace.ext.test_visibility.api.TestSuite.start()` y pasa el objeto `TestSuiteId` como argumento para iniciar el paquete.
+Llame a `ddtrace.ext.test_visibility.api.TestModule.start()`, pasando el objeto `TestModuleId` como argumento, para iniciar el módulo.
 
-Después de que se hayan completado todos los elementos secundarios dentro del paquete, llama a `ddtrace.ext.test_visibility.api.TestSuite.finish()` y pasa el objeto `TestSuiteId` como argumento.
+Después de que todos los elementos secundarios dentro del módulo hayan finalizado, llame a `ddtrace.ext.test_visibility.api.TestModule.finish()`, pasando el objeto `TestModuleId` como argumento.
 
-##### Test
 
-Un test representa un único caso de test que se ejecuta como parte de un paquete de tests.
+##### Conjunto de Pruebas {#test-suite}
 
-Llama a `ddtrace.ext.test_visibility.api.TestId()` y proporciona el `TestSuiteId` del paquete principal y el nombre del test como argumentos para crear un `TestId`. El método `TestId()` acepta una cadena analizable JSON como argumento opcional `parameters`. El argumento `parameters` puede utilizarse para distinguir tests parametrizados que tienen el mismo nombre, pero diferentes valores de parámetros.
+Un conjunto de pruebas representa un subconjunto de pruebas dentro de los módulos de un proyecto (un archivo `.py`, por ejemplo).
 
-Llama a `ddtrace.ext.test_visibility.api.Test.discover()` y pasa el objeto `TestId` como argumento para detectar el test. El método de clase `Test.discover()` acepta una cadena como parámetro opcional `resource` , que por defecto es el `name` del `TestId`.
+Llame a `ddtrace.ext.test_visibility.api.TestSuiteId()`, proporcionando el `TestModuleId` del módulo principal y el nombre del conjunto de pruebas como argumentos, para crear un `TestSuiteId`.
 
-Llama a `ddtrace.ext.test_visibility.api.Test.start()` y pasa el objeto `TestId` como argumento para iniciar el test.
+Llame a `ddtrace.ext.test_visibility.api.TestSuite.discover()`, pasando el objeto `TestSuiteId` como argumento, para descubrir el conjunto de pruebas.
 
-Llama a `ddtrace.ext.test_visibility.api.Test.mark_pass()` y pasa el objeto `TestId` como argumento para indicar que el test fue exitoso.
-Llama a `ddtrace.ext.test_visibility.api.Test.mark_fail()` y pasa el objeto `TestId` como argumento para indicar que el test falló. `mark_fail()` acepta un objeto opcional `TestExcInfo` como parámetro `exc_info`.
-Llama a `ddtrace.ext.test_visibility.api.Test.mark_skip()` y pasa el objeto `TestId` como argumento para indicar que el test fue omitido. `mark_skip()` acepta una cadena opcional como parámetro `skip_reason`.
+Llame a `ddtrace.ext.test_visibility.api.TestSuite.start()`, pasando el objeto `TestSuiteId` como argumento, para iniciar el conjunto de pruebas.
 
-###### Información de excepción
+Después de que todos los elementos secundarios dentro del conjunto de pruebas hayan finalizado, llame a `ddtrace.ext.test_visibility.api.TestSuite.finish()`, pasando el objeto `TestSuiteId` como argumento.
 
-El método de clase `ddtrace.ext.test_visibility.api.Test.mark_fail()` contiene información sobre las excepciones encontradas durante el fallo de un test.
+##### Prueba {#test}
 
-El método `ddtrace.ext.test_visibility.api.TestExcInfo()` toma tres parámetros de posición:
-- `exc_type`: tipo de excepción encontrada
-- `exc_value`: objeto `BaseException` de la excepción
-- `exc_traceback`: objeto `Traceback` de la excepción
+Una prueba representa una sola incidencia de prueba que se ejecuta como parte de un conjunto de pruebas.
 
-###### Información sobre el propietario del código
+Llame a `ddtrace.ext.test_visibility.api.TestId()`, proporcionando la `TestSuiteId` de la suite principal y el nombre de la prueba como argumentos, para crear una `TestId`. El método `TestId()` acepta una cadena analizable en formato JSON como el argumento opcional `parameters`. El argumento `parameters` se puede utilizar para distinguir pruebas parametrizadas que tienen el mismo nombre, pero diferentes valores de parámetros.
 
-El método de clase `ddtrace.ext.test_visibility.api.Test.discover()` acepta una lista opcional de cadenas como parámetro `codeowners`.
+Llame a `ddtrace.ext.test_visibility.api.Test.discover()`, pasando el objeto `TestId` como argumento, para descubrir la prueba. El método de clase `Test.discover()` acepta una cadena como el parámetro opcional `resource`, que tiene como valor predeterminado el `name` del `TestId`.
 
-###### Información del archivo fuente del test
+Llame a `ddtrace.ext.test_visibility.api.Test.start()`, pasando el objeto `TestId` como argumento, para iniciar la prueba.
 
-El método de clase `ddtrace.ext.test_visibility.api.Test.discover()` acepta un objeto opcional `TestSourceFileInfo` como parámetro `source_file_info`. Un objeto `TestSourceFileInfo` representa la ruta y, opcionalmente, las líneas de inicio y fin de un test determinado.
+Llame a `ddtrace.ext.test_visibility.api.Test.mark_pass()`, pasando el objeto `TestId` como argumento, para marcar que la prueba ha pasado exitosamente.
+Llame a `ddtrace.ext.test_visibility.api.Test.mark_fail()`, pasando el objeto `TestId` como argumento, para marcar que la prueba ha fallado. `mark_fail()` acepta un objeto `TestExcInfo` opcional como el parámetro `exc_info`.
+Llame a `ddtrace.ext.test_visibility.api.Test.mark_skip()`, pasando el objeto `TestId` como argumento, para marcar que la prueba fue omitida. `mark_skip()` acepta una cadena opcional como el parámetro `skip_reason`.
 
-El método `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` acepta tres parámetros de posición:
-- `path`: objeto `pathlib.Path` (hecho relativo a la raíz del repositorio por la API `Test Optimization` )
-- `start_line`: entero opcional que representa la línea de inicio del test en el archivo
-- `end_line`: entero opcional que representa la línea de fin del test en el archivo
+###### Información de la excepción {#exception-information}
 
-###### Definición de parámetros tras la detección de un test
+El método de clase `ddtrace.ext.test_visibility.api.Test.mark_fail()` contiene información sobre las excepciones encontradas durante el fallo de una prueba.
 
-El método de clase `ddtrace.ext.test_visibility.api.Test.set_parameters()` acepta un objeto `TestId` como argumento y una cadena analizable JSON para definir los `parameters` del test.
+El método `ddtrace.ext.test_visibility.api.TestExcInfo()` toma tres parámetros posicionales:
+- `exc_type`: el tipo de excepción encontrada
+- `exc_value`: el objeto `BaseException` para la excepción
+- `exc_traceback`: el objeto `Traceback` para la excepción
 
-**Nota:** Esta acción sobrescribe los parámetros asociados al test, pero no modifica el campo `parameters` del objeto `TestId`.
+###### Información del propietario del código {#codeowner-information}
 
-La definición de parámetros tras la detección de un test requiere que el objeto `TestId` sea único, incluso sin haber configurado el campo `parameters`.
+El método de clase `ddtrace.ext.test_visibility.api.Test.discover()` acepta una lista de cadenas opcional como el parámetro `codeowners`.
 
-#### Ejemplo de código
+###### Información del archivo fuente de la prueba {#test-source-file-information}
+
+El método de clase `ddtrace.ext.test_visibility.api.Test.discover()` acepta un objeto `TestSourceFileInfo` opcional como el parámetro `source_file_info`. Un objeto `TestSourceFileInfo` representa la ruta y, opcionalmente, las líneas de inicio y fin de una prueba determinada.
+
+El método `ddtrace.ext.test_visibility.api.TestSourceFileInfo()` acepta tres parámetros posicionales:
+- `path`: un objeto `pathlib.Path` (hecho relativo a la raíz del repositorio por la API `Test Optimization`)
+- `start_line`: un número entero opcional que representa la línea de inicio de la prueba en el archivo
+- `end_line`: un número entero opcional que representa la línea de fin de la prueba en el archivo
+
+###### Configuración de parámetros después del descubrimiento de pruebas {#setting-parameters-after-test-discovery}
+
+El método de clase `ddtrace.ext.test_visibility.api.Test.set_parameters()` acepta un objeto `TestId` como argumento, y una cadena analizable en JSON, para establecer el `parameters` para la prueba.
+
+**Nota:** esto sobrescribe los parámetros asociados con la prueba, pero no modifica el campo `TestId` del objeto `parameters`.
+
+Configurar parámetros después de que se haya descubierto una prueba requiere que el objeto `TestId` sea único incluso sin que el campo `parameters` esté definido.
+
+#### Ejemplo de código {#code-example}
 
 ```python
 from ddtrace.ext.test_visibility import api
@@ -368,7 +369,7 @@ if __name__ == "__main__":
     api.TestSession.finish()
 ```
 
-Para ver configuraciones adicionales, consulta los [parámetros de configuración][2].
+Para configuraciones adicionales, consulte [Configuración][2].
 
 [1]: https://github.com/DataDog/dd-trace-py
 [2]: #configuration-settings
@@ -376,47 +377,54 @@ Para ver configuraciones adicionales, consulta los [parámetros de configuració
 
 {{< /tabs >}}
 
-## Ajustes de configuración
+## Configuración de ajustes {#configuration-settings}
 
-La siguiente es una lista de los parámetros de configuración más importantes que puedes utilizar con el rastreador, ya sea mediante código o mediante variables de entorno:
+Para configurar el SDK, establezca las siguientes variables de entorno antes de iniciar el proceso de prueba. Para ejecutores de pruebas en paralelo, establézcalas en el proceso principal para que cada trabajador las herede.
 
-`DD_TEST_SESSION_NAME`
-: Identifica un grupo de tests, como `integration-tests`, `unit-tests` o `smoke-tests`.<br/>
-**Variable de entorno**: `DD_TEST_SESSION_NAME`<br/>
-**Por defecto**: (nombre del trabajo CI + comando de test)<br/>
-**Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
-
-`DD_SERVICE`
-: Nombre del servicio o de la librería en proceso de test.<br/>
-**Variable de entorno**: `DD_SERVICE`<br/>
-**Por defecto**: `pytest`<br/>
+`DD_SERVICE` (Opcional)
+: Nombre del servicio o biblioteca bajo prueba.<br/>
+**Predeterminado**: El nombre del repositorio. Si no está disponible, `test` para pytest o `unittest` para unittest.<br/>
 **Ejemplo**: `my-python-app`
 
-`DD_ENV`
-: Nombre del entorno en el que se ejecutan los tests.<br/>
-**Variable de entorno **: `DD_ENV`<br/>
-**Por defecto**: `none`<br/>
+`DD_ENV` (Opcional)
+: Nombre del entorno donde se ejecutan las pruebas.<br/>
+**Predeterminado**: `none`<br/>
 **Ejemplos**: `local`, `ci`
 
-Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulta [Etiquetado unificado de servicios][2].
+`DD_CIVISIBILITY_AGENTLESS_ENABLED=true` (Requerido para el modo Agentless)
+: Habilita el modo Agentless para enviar los resultados de las pruebas directamente a Datadog.<br/>
+**Predeterminado**: `false`
 
-La siguiente variable de entorno puede utilizarse para configurar el localización del Datadog Agent:
+`DD_API_KEY` (Requerido para el modo Agentless)
+: La clave de Datadog API utilizada para autenticar la carga de resultados de prueba. Esta variable no habilita el modo Agentless.<br/>
+**Predeterminado**: `(empty)`
 
-`DD_TRACE_AGENT_URL`
-: La URL del Datadog Agent URL para recopilar trazas (traces) con el formato `http://hostname:port`.<br/>
-**Por defecto**: `http://localhost:8126`
+`DD_SITE` (Opcional para el modo Agentless)
+: El [sitio de Datadog][4] al cual cargar los resultados de las pruebas. Establezca esta configuración cuando utilice un sitio distinto a US1.<br/>
+**Predeterminado**: `datadoghq.com`
 
-También puedes utilizar todas las demás opciones de [configuración del Datadog Tracer][3].
+`DD_TRACE_AGENT_URL` (Solo cuando se utiliza el Datadog Agent)
+: URL del Datadog Agent para la recopilación de trazas, en el formato `http://hostname:port`.<br/>
+**Predeterminado**: `http://localhost:8126`
 
-## Recopilación de metadatos Git
+`DD_TEST_SESSION_NAME` (Opcional)
+: Identifica un grupo de pruebas, como `unit-tests`, `integration-tests` o `smoke-tests`.<br/>
+**Predeterminado**: El nombre del trabajo de CI y el comando de prueba, o el comando de prueba si el nombre del trabajo de CI no está disponible.<br/>
+**Ejemplo**: `unit-tests`, `integration-tests`, `smoke-tests`
+
+Para obtener más información sobre las etiquetas reservadas `service` y `env`, consulte [Unified Service Tagging][2].
+
+También se pueden usar todas las demás opciones de [Datadog Tracer configuration][3].
+
+## Recopilación de metadatos de Git {#collecting-git-metadata}
 
 {{% ci-git-metadata %}}
 
-## Prácticas recomendadas
+## Mejores prácticas {#best-practices}
 
-### Nombre de la sesión de test `DD_TEST_SESSION_NAME`
+### Nombre de la sesión de prueba `DD_TEST_SESSION_NAME` {#test-session-name-dd-test-session-name}
 
-Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y del grupo de tests relacionado. Algunos ejemplos de valores de esta etiqueta serían:
+Use `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de prueba y el grupo de pruebas relacionado. Ejemplos de valores para esta etiqueta serían:
 
 - `unit-tests`
 - `integration-tests`
@@ -425,44 +433,41 @@ Utiliza `DD_TEST_SESSION_NAME` para definir el nombre de la sesión de test y de
 - `ui-tests`
 - `backend-tests`
 
-Si no se especifica `DD_TEST_SESSION_NAME`, el valor por defecto utilizado es una combinación de:
+Si no se especifica `DD_TEST_SESSION_NAME`, el valor predeterminado es el nombre del trabajo de CI y el comando de prueba. Si el nombre del trabajo de CI no está disponible, se utiliza el comando de prueba.
 
-- Nombre del trabajo CI
-- Comando utilizado para ejecutar los tests (como `pytest --ddtrace`)
+El nombre de la sesión de prueba debe ser único dentro de un repositorio para ayudarle a distinguir diferentes grupos de pruebas.
 
-El nombre de la sesión de test debe ser único dentro de un repositorio para ayudar a distinguir diferentes grupos de tests.
+#### Cuándo usar `DD_TEST_SESSION_NAME` {#when-to-use-dd-test-session-name}
 
-#### Cuándo utilizar `DD_TEST_SESSION_NAME`
-
-Hay un conjunto de parámetros que Datadog comprueba para establecer la correspondencia entre las sesiones de test. El comando de test utilizado para ejecutar los tests es uno de ellos. Si el comando de test contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
+Existe un conjunto de parámetros que Datadog verifica para establecer la correspondencia entre las sesiones de prueba. El comando de prueba utilizado para ejecutar las pruebas es uno de ellos. Si el comando de prueba contiene una cadena que cambia en cada ejecución, como una carpeta temporal, Datadog considera que las sesiones no están relacionadas entre sí. Por ejemplo:
 
 - `pytest --temp-dir=/var/folders/t1/rs2htfh55mz9px2j4prmpg_c0000gq/T`
 
-Datadog recomienda utilizar `DD_TEST_SESSION_NAME` si tus comandos de test varían entre ejecuciones.
+Datadog recomienda usar `DD_TEST_SESSION_NAME` si sus comandos de prueba varían entre ejecuciones.
 
-## Limitaciones conocidas
+## Limitaciones conocidas {#known-limitations}
 
 {{< tabs >}}
 
 {{% tab "pytest" %}}
 
-Los complementos para `pytest` que alteran la ejecución de los tests pueden provocar comportamientos inesperados.
+Los complementos para `pytest` que alteran la ejecución de la prueba pueden causar un comportamiento inesperado.
 
-### Paralelización
+### Paralelización {#parallelization}
 
-Los complementos que introducen una paralelización en `pytest` (como [`pytest-xdist`][1] o [`pytest-forked`][2]) crean un evento de sesión para cada instancia paralelizada.
+Los complementos que introducen la paralelización en `pytest` (como [`pytest-xdist`][1] o [`pytest-forked`][2]) crean un evento de sesión para cada instancia paralelizada.
 
-Existen varios problemas cuando estos complementos se utilizan junto con `ddtrace`. Por ejemplo, una sesión, un módulo o un paquete pueden pasar aunque fallen los tests individuales. Del mismo modo, todos los tests pueden pasar, pero el paquete, la sesión o el módulo pueden fallar. Esto ocurre porque estos complementos crean subprocesos de Worker y los tramos creados en el proceso principal pueden no reflejar los resultados de los procesos secundarios. Por esta razón, **no se admite el uso de `ddtrace` junto con `pytest-xdist` y `pytest-forked` por el momento.**
+Existen varios problemas cuando estos complementos se utilizan junto con `ddtrace`, aunque se han resuelto para `pytest-xdist` en versiones recientes de `dd-trace-py` (3.12.6 y posteriores). Por ejemplo, una sesión, un módulo o una suite pueden aprobarse incluso cuando las pruebas individuales fallan. Asimismo, todas las pruebas pueden aprobarse y la suite/sesión/módulo fallar. Esto sucede porque estos complementos crean subprocesos de trabajo, y los spans creados en el proceso principal pueden no reflejar los resultados de los procesos secundarios. Por esta razón, **el uso de `ddtrace` junto con `pytest-forked` no es compatible por el momento, mientras que `pytest-xdist` solo tiene soporte para `ddtrace>=3.12.6`.**
 
-Cada Worker informa de los resultados de los tests a Datadog de forma independiente, por lo que los tests del mismo módulo que se ejecutan en diferentes procesos generan eventos de módulos o paquete separados.
+Cada trabajador informa los resultados de las pruebas a Datadog de forma independiente, por lo que las pruebas del mismo módulo que se ejecutan en diferentes procesos generan eventos de módulo o suite separados.
 
-El recuento global de eventos de tests (y su corrección) no se ve afectado. Los eventos de sesión individual, módulo o paquete pueden tener resultados incompatibles con otros eventos en la misma ejecución `pytest`.
+El recuento total de eventos de prueba (y su exactitud) no se ve afectado. Los eventos individuales de sesión, módulo o suite pueden tener resultados inconsistentes con otros eventos en la misma ejecución de `pytest` (con `pytest-forked`).
 
-### Solicitudes de tests
+### Orden de las pruebas {#test-ordering}
 
-Los complementos que cambian el orden de ejecución de los tests (como [`pytest-randomly`][3]) pueden crear varios eventos de módulo o conjunto. La duración y los resultados de los eventos de módulo o conjunto también pueden ser incoherentes con los resultados informados por `pytest`.
+Los complementos que cambian el orden de ejecución de la prueba (como [`pytest-randomly`][3]) pueden crear múltiples eventos de módulo o suite. La duración y los resultados de los eventos de módulo o suite también pueden ser inconsistentes con los resultados informados por `pytest`.
 
-El número total de eventos de test (y su corrección) no se ven afectados.
+El recuento total de eventos de prueba (y su exactitud) permanece sin cambios.
 
 
 [1]: https://pypi.org/project/pytest-xdist/
@@ -473,19 +478,20 @@ El número total de eventos de test (y su corrección) no se ven afectados.
 
 {{% tab "unittest" %}}
 
-En algunos casos, si la ejecución de tu test `unittest` se realiza de forma paralela, esto puede romper la instrumentación y afectar a la optimización del test.
+En algunos casos, si la ejecución de la prueba `unittest` se realiza de manera paralela, esto puede interrumpir la instrumentación y afectar la optimización de las pruebas.
 
-Datadog recomienda utilizar un máximo de un único proceso a la vez para no afectar a la optimización de los tests.
+Datadog recomienda que utilice hasta un proceso a la vez para evitar afectar la optimización de las pruebas.
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/tracing/trace_collection/dd_libraries/python/
 [2]: /es/getting_started/tagging/unified_service_tagging
 [3]: /es/tracing/trace_collection/library_config/python/?tab=containers#configuration
+[4]: /es/getting_started/site/
