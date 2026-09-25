@@ -164,11 +164,9 @@ The following telemetry provide insight into your mobile application's performan
 Timeseries is in Preview and is available on the iOS and Android SDKs.
 {{< /callout >}}
 
-CPU ticks per second and Memory utilization described above are averaged over the lifetime of the view. RUM Timeseries enables you to capture these measurements at regular intervals for the length of the session, and see the outcome on an interactive graph in the session, view, and operation side panels.
+CPU ticks per second and Memory utilization described above are averaged over the lifetime of the view. RUM Timeseries enables you to capture these measurements at regular intervals for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
 
 Once collection is enabled, all sessions get timeseries captured.
-
-{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
 
 Two series are collected:
 
@@ -185,4 +183,5 @@ Timeseries collection is off by default. To turn it on, see the advanced configu
 [2]: https://developer.apple.com/documentation/metrickit
 [3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
 [4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
+[5]: /real_user_monitoring/explorer/events/#performance-timeseries
 
