@@ -12,11 +12,24 @@ further_reading:
 - link: "actions/connections"
   tag: "Documentation"
   text: "Connections"
+further_reading_fed:
+- link: "actions/private_actions/"
+  tag: "Documentation"
+  text: "Private Actions Overview"
+- link: "actions/connections"
+  tag: "Documentation"
+  text: "Connections"
 ---
 
 ## Overview
 
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 The standalone private action runner is a dedicated container you can install and manage independently of the Datadog Agent with Docker or Helm. It is supported and in maintenance mode: it continues to receive security and stability updates, and no new features are planned. For new deployments, and to use Execution Policies, run the runner in the Datadog Agent instead. See [Set up a private action runner in the Datadog Agent][1].
+{{% /site-region %}}
+
+{{% site-region region="gov,gov2" %}}
+The standalone private action runner is a dedicated container you install and manage with Docker or Helm. On Datadog government sites, standalone is the supported deployment for private actions.
+{{% /site-region %}}
 
 Setting up the runner takes three steps:
 
@@ -216,7 +229,13 @@ services:
 
 ## Connect the runner
 
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 A standalone runner is always owned and uses the Connections authorization model. A connection stores the credentials for a service and pairs them with the runner. To create a connection and pair it with your runner, see [Connections][2]. For how permissions on the runner itself work, see [Manage access to owned runners][4].
+{{% /site-region %}}
+
+{{% site-region region="gov,gov2" %}}
+A standalone runner is always owned and uses the Connections authorization model. A connection stores the credentials for a service and pairs them with the runner. To create a connection and pair it with your runner, see [Connections][2]. Use [role-based access control (RBAC)](/account_management/rbac/) to control access to the runner. By default, only the runner's creator has Editor access. The creator can grant access to additional users, service accounts, roles, or teams.
+{{% /site-region %}}
 
 ## Manage the runner
 
@@ -318,7 +337,9 @@ helm upgrade <RELEASE_NAME> datadog/private-action-runner -f ./values.yaml
 
 ## Further reading
 
-{{< partial name="whats-next/whats-next.html" >}}
+{{< partial name="whats-next/whats-next.html" region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+
+{{< partial name="whats-next/whats-next.html" param="further_reading_fed" region="gov,gov2" >}}
 
 [1]: /actions/private_actions/set_up_agent_based/
 [2]: /actions/connections/

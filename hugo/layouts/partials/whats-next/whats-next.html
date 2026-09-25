@@ -1,8 +1,13 @@
 {{- $dot := . -}}
+{{- $param := .Params.param | default "further_reading" -}}
+{{- $region := .Params.region -}}
+{{- if $region -}}
+<div class="d-none site-region-container" data-region="{{ $region }}">
+{{- end -}}
 <div class="whatsnext">
   <p>{{- i18n "additional_sentence" -}}:</p>
   <div class="list-group">
-    {{- range $dot.Page.Params.further_reading -}}
+    {{- range (index $dot.Page.Params $param) -}}
       {{- if eq (substr .link 0 4) "http" -}}
           {{- $.Scratch.Set "link" .link -}}
       {{- else -}}
@@ -35,3 +40,6 @@
     {{- end -}}
     </div>
 </div>
+{{- if $region -}}
+</div>
+{{- end -}}
