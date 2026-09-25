@@ -40,7 +40,7 @@ The following configuration applies to all platforms.
 
 **Resource attributes**: Set platform-specific attributes with `OTEL_RESOURCE_ATTRIBUTES`. See each cloud provider tab below for required and optional attributes.
 
-Use the platform attributes on this page for workload identification instead of relying on `host.name`. For hostname recommendations for direct OTLP intake, see [Hostname and Tagging][6].
+Identify workloads with the platform attributes on this page, not with `host.name`. For hostname recommendations for direct OTLP intake, see [Hostname and Tagging][6].
 
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"

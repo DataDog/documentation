@@ -43,7 +43,7 @@ When you enable the gateway:
 2.  A Kubernetes Service (`<RELEASE_NAME>-datadog-otel-agent-gateway`) exposes the gateway pods and provides load balancing.
 3.  The existing **DaemonSet Collector pods** are configured by default to send their telemetry data to the gateway service instead of directly to Datadog.
 
-In a gateway deployment, host information must be attached before telemetry reaches the gateway. For the recommended hostname configuration, see [Hostname and Tagging][12].
+In a gateway deployment, attach host information before telemetry reaches the gateway. For the recommended hostname configuration, see [Hostname and Tagging][12].
 
 ## Requirements
 
