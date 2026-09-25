@@ -93,6 +93,8 @@ The JMX Scraper runs as a standalone Java application and sends metrics to the C
 
 The [recommended Collector setup][4] receives OTLP over gRPC on port 4317 and includes the OTLP receiver in its metrics pipeline, so you don't need to change the receiver configuration.
 
+The JMX Scraper sends counters with cumulative temporality. Keep the `cumulativetodelta` processor in the recommended metrics pipeline, which converts them to the delta temporality that the [Datadog OTLP metrics intake][8] requires.
+
 ### Configure Kafka brokers
 
 1. Add the following JVM options to each Kafka broker to start an unsecured JMX endpoint suitable for evaluation:
@@ -280,3 +282,4 @@ Value: 25
 [5]: /opentelemetry/config/log_collection
 [6]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/attributesprocessor/README.md#includeexclude-filtering
 [7]: /opentelemetry/mapping/metrics_mapping/
+[8]: /opentelemetry/setup/otlp_ingest/metrics/#ensure-only-delta-metrics-are-sent
