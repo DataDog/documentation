@@ -3,75 +3,78 @@ further_reading:
 - link: /opentelemetry/schema_semantics/metrics_mapping/
   tag: Documentación
   text: Asignación de métricas de OpenTelemetry
-title: Integraciones
+title: Integrations
 ---
+Esta página cubre las integraciones de OpenTelemetry (OTel) compatibles con Datadog. Estas integraciones le permiten recopilar y hacer un seguimiento de sus datos de observabilidad utilizando OpenTelemetry en Datadog.
 
-Esta página cubre integraciones OpenTelemetry (OTel) compatibles con Datadog. Estas integraciones le permiten recopilar y monitorizar tus datos de observabilidad utilizando OpenTelemetry en Datadog.
+## Descripción general {#overview}
 
-## Información general
+Las integraciones de OpenTelemetry (OTel) son componentes que permiten la recopilación de datos de observabilidad (métricas, trazas y registros) de diversas fuentes utilizando el estándar OpenTelemetry. Estas integraciones están diseñadas para funcionar con el Colector de OpenTelemetry, el cual recibe, procesa y exporta datos de telemetría a backends de observabilidad como Datadog.
 
-Las integraciones OpenTelemetry (OTel) son componentes que permiten la recopilación de datos de observabilidad (métricas, trazas (traces) y logs) de diversas fuentes utilizando el estándar OpenTelemetry. Estas integraciones están diseñadas para funcionar con OpenTelemetry Collector, que recibe, procesa y exporta datos de telemetría a backends de observabilidad como Datadog.
+Para obtener una lista completa de todas las integraciones de OpenTelemetry, consulte el [Registro de OpenTelemetry][1]. Este registro proporciona información sobre receptores, exportadores y otros componentes en el ecosistema de OpenTelemetry.
 
-Para obtener una lista completa de todas las integraciones OpenTelemetry, consulta el [registro de OpenTelemetry][1]. Este registro proporciona información sobre receptores, exportadores y otros componentes del ecosistema OpenTelemetry.
+## Precios de métricas {#metric-pricing}
 
-## Precios de métricas
-
-Datadog recopila métricas de los receptores compatibles de OpenTelemetry sin coste adicional. Estas métricas sin coste son:
+Datadog recopila métricas de los receptores de OpenTelemetry compatibles sin costo adicional. Estas métricas sin costo son:
 - Definidas en el archivo `metadata.yaml` para cada receptor.
-- Enumeradas en la tabla [Metrics Mappings][14].
+- Listadas en la tabla de [Asignaciones de métricas][14].
 
-Por ejemplo, el archivo [`dockerstatsreceiver`][15] `metadata.yaml` enumera las métricas que puedes recopilar sin coste adicional.
+Por ejemplo, el archivo `metadata.yaml` de [`dockerstatsreceiver`][15] lista las métricas que puede recopilar sin costo adicional.
 
-<div class="alert alert-danger">Asegúrate de configurar los receptores de acuerdo con la documentación de receptores de OpenTelemetry. Los receptores configurados incorrectamente pueden hacer que las métricas se clasifiquen como personalizadas, lo que conlleva cargos adicionales.</div>
+<div class="alert alert-danger">Asegúrese de configurar los receptores de acuerdo con la documentación del receptor de OpenTelemetry. Los receptores configurados incorrectamente pueden causar que las métricas se clasifiquen como personalizadas, lo que resulta en cargos adicionales.</div>
 
-## Integraciones OpenTelemetry (OTel) compatibles con Datadog
+## Integraciones de OpenTelemetry compatibles con Datadog {#datadog-supported-opentelemetry-integrations}
 
-Datadog admite las siguientes integraciones OpenTelemetry:
+Datadog admite las siguientes integraciones de OpenTelemetry:
 
-### APM (Application Performance Monitoring)
+### APM (Application Performance Monitoring) {#apm-application-performance-monitoring}
 
-Monitoriza y optimiza el rendimiento de tu aplicación:
+Haga un seguimiento y optimice el rendimiento de su aplicación:
 
-- [Métricas de traza][2]: genera estadísticas de APM como aciertos, errores y duración.
-- [Métricas de tiempo de ejecución][3]: recopila métricas de tiempo de ejecución para aplicaciones Java, .NET y Go.
+- [Métricas de traza][2] - Genere estadísticas de APM como aciertos, errores y duración
+- [Métricas de tiempo de ejecución][3] - Recopile métricas de tiempo de ejecución para aplicaciones Java, .NET y Go
 
-### Collector
+### Colector {#collector}
 
-Monitoriza el estado y el rendimiento de tu OpenTelemetry Collector:
+Supervise el estado y el rendimiento de su Colector de OpenTelemetry:
 
-- [Métricas de estado del recolector][4]: controla el rendimiento del recolector de OpenTelemetry 
+- [Métricas de estado del Colector][4] - Realice un seguimiento del rendimiento de su Colector de OpenTelemetry
+- [Extensión de Datadog][17] - Vea la configuración del Colector y la información de compilación en Datadog Infrastructure Monitoring
 
-### Contenedores y hosts
+### Contenedores y servidores {#containers-and-hosts}
 
-Obtén información sobre tus sistemas de entornos y hosts en contenedores:
+Obtenga información sobre sus entornos en contenedores y sistemas de servidores:
 
-- [Métricas de Docker][5]: monitoriza el rendimiento de los contenedores de Docker
-- [Métricas del host][6]: seguimiento de las métricas del sistema, como el uso de CPU, disco y memoria.
-- [Métricas de Podman][16]: monitoriza el rendimiento de los contenedores de Podman
+- [Métricas de Docker][5] - Haga un seguimiento del rendimiento de los contenedores Docker
+- [Métricas de servidor][6] - Haga un seguimiento de las métricas del sistema, como el uso de CPU, disco y memoria
+- [Métricas de Kubernetes][18] - Recopile métricas de infraestructura de Kubernetes y envíe datos de recursos a Kubernetes Explorer
+- [Métricas de Podman][16] - Haga un seguimiento del rendimiento de los contenedores Podman
 
-### Servidores web y proxies
+### Servidores web y proxies {#web-servers-and-proxies}
 
-Monitoriza servidores web y tecnologías proxy:
+Supervise servidores web y tecnologías de proxy:
 
-- [Métricas del servidor web de Apache][7]: recopilación de métricas del servidor HTTP de Apache 
-- [Métricas de NGINX][8]: monitorizar el rendimiento del servidor web de NGINX
-- [Métricas de IIS][9]: seguimiento de métricas de Internet Information Services (IIS)
-- [Métricas de HAProxy Metrics][10]: monitoriza el rendimiento del equilibrador de carga de HAProxy
+- [Métricas de servidor web Apache][7] - Haga un seguimiento de las métricas de Apache HTTP Server
+- [Métricas de NGINX][8] - Haga un seguimiento del rendimiento del servidor web NGINX
+- [Métricas de IIS][9] - Realice un seguimiento de las métricas de Internet Information Services (IIS)
+- [Métricas de HAProxy][10] - Haga un seguimiento del rendimiento del balanceador de carga HAProxy
 
-### Bases de datos y mensajería
+### Bases de datos y mensajería {#databases-and-messaging}
 
-Monitorización de base de datos y sistemas de mensajería:
+Supervise sistemas de bases de datos y mensajería:
 
-- [Métricas de MySQL][11]: seguimiento del rendimiento de la base de datos de MySQL 
-- [Métricas de Kafka][12]: monitoriza la plataforma de mensajería de Apache Kafka
+- [Métricas de MySQL][11] - Haga un seguimiento del rendimiento de la base de datos MySQL
+- [Métricas de PostgreSQL][19] - Haga un seguimiento del rendimiento de la base de datos PostgreSQL
+- [Métricas de SQL Server][20] - Haga un seguimiento del rendimiento de la base de datos SQL Server
+- [Métricas de Kafka][12] - Haga un seguimiento de la plataforma de mensajería Apache Kafka
 
-### Big data y procesamiento
+### Big data y procesamiento {#big-data-and-processing}
 
-Monitoriza marcos de procesamiento de big data:
+Haga un seguimiento de los marcos de procesamiento de big data:
 
-- [Métricas de Apache Spark][13]: seguimiento de las métricas de rendimiento de Apache Spark
+- [Métricas de Apache Spark][13] - Haga un seguimiento de las métricas de rendimiento de Apache Spark
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -91,3 +94,7 @@ Monitoriza marcos de procesamiento de big data:
 [14]: /es/opentelemetry/mapping/metrics_mapping/#metrics-mappings
 [15]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/metadata.yaml
 [16]: /es/opentelemetry/integrations/podman_metrics/
+[17]: /es/opentelemetry/integrations/datadog_extension/
+[18]: /es/opentelemetry/integrations/kubernetes_metrics/
+[19]: /es/opentelemetry/integrations/postgres_metrics/
+[20]: /es/opentelemetry/integrations/sqlserver_metrics/

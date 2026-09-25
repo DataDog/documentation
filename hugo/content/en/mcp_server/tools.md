@@ -24,7 +24,9 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. Use `toolsets=all` to enable all generally available toolsets (best for clients that support tool filtering to reduce context window usage).
+
+For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -337,6 +339,14 @@ Searches for Watchdog anomaly detection stories for a service within a time rang
 Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
+
+### `apm_get_service_health`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
+
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
 
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
@@ -1350,6 +1360,91 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Metrics Governance
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
+
 ## Live Debugger
 
 Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
@@ -1857,7 +1952,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
@@ -1865,7 +1960,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
@@ -1873,7 +1968,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
@@ -1881,7 +1976,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".

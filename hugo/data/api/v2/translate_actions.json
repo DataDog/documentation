@@ -537,7 +537,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "description": "Trigger a new Bits AI investigation based on a monitor alert.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -2601,7 +2601,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.",
+    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."
@@ -2741,6 +2741,30 @@
     "summary": "Update an incident timestamp override",
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
+  },
+  "ListDatabricksIntegrationAccounts": {
+    "description": "List Databricks integration accounts.",
+    "summary": "List Databricks integration accounts"
+  },
+  "CreateDatabricksIntegrationAccount": {
+    "description": "Create a Databricks integration account.",
+    "summary": "Create a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Databricks integration account."
+  },
+  "DeleteDatabricksIntegrationAccount": {
+    "description": "Delete a Databricks integration account.",
+    "summary": "Delete a Databricks integration account"
+  },
+  "GetDatabricksIntegrationAccount": {
+    "description": "Get a Databricks integration account.",
+    "summary": "Get a Databricks integration account"
+  },
+  "UpdateDatabricksIntegrationAccount": {
+    "description": "Update a Databricks integration account. Only the fields provided are changed.",
+    "summary": "Update a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Databricks integration account."
   },
   "ListElasticCloudIntegrationAccounts": {
     "description": "List Elastic Cloud integration accounts.",
@@ -3626,7 +3650,7 @@
     "summary": "List Agent Observability prompts"
   },
   "CreateLLMObsPrompt": {
-    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.",
+    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create an Agent Observability prompt",
     "request_description": "Create prompt payload.",
     "request_schema_description": "Request to create an Agent Observability prompt."
@@ -3650,13 +3674,13 @@
     "summary": "List versions of an Agent Observability prompt"
   },
   "CreateLLMObsPromptVersion": {
-    "description": "Create a new version of an existing Agent Observability prompt.",
+    "description": "Create a new version of an existing Agent Observability prompt.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create a new Agent Observability prompt version",
     "request_description": "Create prompt version payload.",
     "request_schema_description": "Request to create a new version of an Agent Observability prompt."
   },
   "GetLLMObsPromptVersion": {
-    "description": "Get the full template of a single, specific version of an Agent Observability prompt.",
+    "description": "Get the full template and configuration of a single, specific version of an Agent Observability prompt.",
     "summary": "Get a specific Agent Observability prompt version"
   },
   "UpdateLLMObsPromptVersion": {

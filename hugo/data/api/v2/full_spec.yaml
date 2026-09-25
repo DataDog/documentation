@@ -7232,6 +7232,9 @@ components:
           description: The identifier of the user or system that created the rule. Server-assigned by the rulesets endpoints; ignored by this operation.
           readOnly: true
           type: string
+        creation_message:
+          description: The message associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          type: string
         cve:
           description: The CVE identifier associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           type: string
@@ -7289,6 +7292,11 @@ components:
         should_use_ai_fix:
           description: Whether an AI-generated fix should be offered. Forwarded from the rulesets endpoints; ignored by this operation.
           type: boolean
+        tags:
+          description: Tags associated with the custom rule revision. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          items:
+            type: string
+          type: array
         tests:
           description: The test cases associated with the rule. Forwarded from the rulesets endpoints; ignored by this operation.
           items:
@@ -7302,6 +7310,10 @@ components:
           description: The rule type indicating the detection mechanism (for example, `TREE_SITTER_QUERY`).
           example: TREE_SITTER_QUERY
           type: string
+        version_id:
+          description: The custom rule revision version. Forwarded from the custom rulesets endpoints; ignored by this operation.
+          format: int64
+          type: integer
       required:
         - id
         - category
@@ -29696,13 +29708,14 @@ components:
         - PERFORMANCE
     CustomRuleRevisionAttributesSeverity:
       description: Rule severity
-      enum: [ERROR, WARNING, NOTICE]
+      enum: [ERROR, WARNING, NOTICE, NONE]
       example: ERROR
       type: string
       x-enum-varnames:
         - ERROR
         - WARNING
         - NOTICE
+        - NONE
     CustomRuleRevisionDataType:
       description: Resource type
       enum: [custom_rule_revision]
@@ -32049,6 +32062,620 @@ components:
           $ref: "#/components/schemas/StartStepNames"
       required:
         - databaseMonitoringTrigger
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Cost data collected from your Databricks system tables. [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) must be enabled for your organization while this dataflow is on; any request that leaves it enabled without that is rejected with a `422` response.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowResponse:
+      description: >-
+        Cost data collected from your Databricks system tables. Requires [Cloud Cost Management](https://docs.datadoghq.com/cloud_cost_management/) to be set up for your organization.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Cloud Cost Management dataflow. Only the fields provided are changed.
+      properties:
+        ccm_collect_all_workspaces:
+          description: >-
+            Whether cost data is collected for every workspace in the Databricks account rather than this workspace only. This takes effect across the Databricks account: if any one workspace enables it, Datadog collects cost data for all of them regardless of their individual settings, and every covered workspace incurs Cloud Cost Management charges. Defaults to `true`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksCloudCostMetricsIntegrationDataflowSettingsResponse:
+      description: Settings of the Cloud Cost Management dataflow.
+      properties:
+        ccm_collect_all_workspaces:
+          description: >-
+            Whether cost data is collected for every workspace in the Databricks account rather than this workspace only. This takes effect across the Databricks account: if any one workspace enables it, Datadog collects cost data for all of them regardless of their individual settings, and every covered workspace incurs Cloud Cost Management charges.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityJobsMonitoringIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Data Jobs Monitoring, which collects performance, reliability, and cost data for your Databricks jobs.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `true`; set to `false` to stop collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityJobsMonitoringIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksDataObservabilityJobsMonitoringIntegrationDataflowResponse:
+      description: >-
+        Data Jobs Monitoring, which collects performance, reliability, and cost data for your Databricks jobs.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityJobsMonitoringIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksDataObservabilityJobsMonitoringIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Data Jobs Monitoring dataflow. Only the fields provided are changed.
+      properties:
+        dd_api_key_id:
+          description: >-
+            ID of the Datadog API key the global init script uses to submit data. Setting or changing it requires `dd_api_key_secret` in the same request.
+          example: fe383f4e-09fc-46bf-8e10-4efdd453a646
+          type: string
+        dd_api_key_secret:
+          description: Secret value of the Datadog API key identified by `dd_api_key_id`.
+          example: your-datadog-api-key
+          type: string
+          writeOnly: true
+        djm_global_init_script_enabled:
+          description: >-
+            Whether Datadog installs and manages the Agent on your Databricks clusters through a global init script. Installation can take up to 15 minutes and requires Databricks Workspace Admin permissions. The script does not apply to clusters in Standard access mode. Leave this `false` to install the Agent yourself. Defaults to `false`.
+          example: true
+          type: boolean
+        script_gpum_enabled:
+          description: >-
+            Whether GPU metrics are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`. Defaults to `false`.
+          example: true
+          type: boolean
+        script_logs_enabled:
+          description: >-
+            Whether driver and worker logs are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`. Defaults to `false`.
+          example: true
+          type: boolean
+        serverless_jobs_enabled:
+          description: >-
+            Whether health and cost data is collected for jobs running on Serverless or SQL Warehouse compute. This compute has no clusters for the global init script to target, so collection reads the Databricks system tables and requires `system_tables_sql_warehouse_id`. Defaults to `true`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityJobsMonitoringIntegrationDataflowSettingsResponse:
+      description: Settings of the Data Jobs Monitoring dataflow.
+      properties:
+        dd_api_key_id:
+          description: ID of the Datadog API key the global init script uses to submit data.
+          example: fe383f4e-09fc-46bf-8e10-4efdd453a646
+          type: string
+        djm_global_init_script_enabled:
+          description: >-
+            Whether Datadog installs and manages the Agent on your Databricks clusters through a global init script. The script does not apply to clusters in Standard access mode. When `false`, the Agent is installed manually.
+          example: true
+          type: boolean
+        script_gpum_enabled:
+          description: >-
+            Whether GPU metrics are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+        script_logs_enabled:
+          description: >-
+            Whether driver and worker logs are collected from your Databricks clusters. The Agent installed by the global init script performs the collection, so this requires the dataflow to be enabled with `djm_global_init_script_enabled` set to `true`.
+          example: true
+          type: boolean
+        serverless_jobs_enabled:
+          description: >-
+            Whether health and cost data is collected for jobs running on Serverless or SQL Warehouse compute. This compute has no clusters for the global init script to target, so collection reads the Databricks system tables and requires `system_tables_sql_warehouse_id`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityQualityMonitoringIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Databricks catalogs so you can explore how data flows and detect, resolve, and prevent quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest"
+      type: object
+    DatabricksDataObservabilityQualityMonitoringIntegrationDataflowResponse:
+      description: >-
+        Data Observability, which collects lineage and data quality information from your Databricks catalogs so you can explore how data flows and detect, resolve, and prevent quality issues.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
+        settings:
+          $ref: "#/components/schemas/DatabricksDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse"
+      type: object
+    DatabricksDataObservabilityQualityMonitoringIntegrationDataflowSettingsRequest:
+      additionalProperties: false
+      description: Settings of the Data Observability dataflow. Only the fields provided are changed.
+      properties:
+        do_crawlers_cron:
+          description: >-
+            Cron expression setting how often Datadog connects to your Databricks warehouse to collect metadata. Currently, only hourly (`0 * * * *`) and daily (`0 0 * * *`) are supported. Defaults to hourly (`0 * * * *`).
+          example: "0 * * * *"
+          type: string
+        sync_system_catalog:
+          description: >-
+            Whether metadata from the Databricks `system` catalog is included in Data Observability alongside your data catalogs. Defaults to `false`.
+          example: true
+          type: boolean
+      type: object
+    DatabricksDataObservabilityQualityMonitoringIntegrationDataflowSettingsResponse:
+      description: Settings of the Data Observability dataflow.
+      properties:
+        do_crawlers_cron:
+          description: >-
+            Cron expression setting how often Datadog connects to your Databricks warehouse to collect metadata. Currently, only hourly (`0 * * * *`) and daily (`0 0 * * *`) are supported.
+          example: "0 * * * *"
+          type: string
+        sync_system_catalog:
+          description: >-
+            Whether metadata from the Databricks `system` catalog is included in Data Observability alongside your data catalogs.
+          example: true
+          type: boolean
+      type: object
+    DatabricksIntegrationAccountAuthenticationRequest:
+      description: >-
+        Authentication for creating the Databricks integration account. Exactly one method is set. Choosing `private_action_runner` leaves the `databricks-model-serving-metrics` dataflow unable to collect data. `bearer_token` is not available on creation: Databricks accepts it only on accounts that already use it, so it can only appear on read and update.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthRequest"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthRequest"
+    DatabricksIntegrationAccountAuthenticationResponse:
+      description: >-
+        Authentication configured on the Databricks integration account. A `bearer_token` method indicates an account still on token authentication, which Databricks accepts only on accounts that already use it.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthResponse"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthResponse"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountBearerTokenAuthResponse"
+    DatabricksIntegrationAccountAuthenticationUpdate:
+      description: >-
+        Authentication for updating the Databricks integration account. Exactly one method is set. Choosing `private_action_runner` leaves the `databricks-model-serving-metrics` dataflow unable to collect data. `bearer_token` is deprecated on Databricks: it is accepted only on accounts that already use it and never on creation, so it cannot move an account onto token authentication. Migrate those accounts to `databricks_oauth` or `private_action_runner`.
+      oneOf:
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthUpdate"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthUpdate"
+        - $ref: "#/components/schemas/DatabricksIntegrationAccountBearerTokenAuthUpdate"
+    DatabricksIntegrationAccountBearerTokenAuthResponse:
+      description: The bearer token authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountBearerTokenAuthType"
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountBearerTokenAuthType:
+      default: bearer_token
+      description: The authentication method type.
+      enum:
+        - bearer_token
+      example: bearer_token
+      type: string
+      x-enum-varnames:
+        - BEARER_TOKEN
+    DatabricksIntegrationAccountBearerTokenAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Bearer token authentication. The credential is a single opaque secret, a Databricks personal access token, with no accompanying non-secret identifier. The method is deprecated: Databricks accepts it only on accounts that already use it, and never on creation. Only the fields provided are changed; omit `token` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountBearerTokenAuthType"
+        token:
+          description: Secret token used to authenticate with Databricks.
+          example: your-token
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountCreateAttributes:
+      description: Writable attributes used to create a Databricks integration account.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationRequest"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsRequest"
+      required:
+        - name
+        - authentication
+        - settings
+      type: object
+    DatabricksIntegrationAccountCreateData:
+      description: Data envelope for creating a Databricks integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountCreateAttributes"
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    DatabricksIntegrationAccountCreateRequest:
+      description: Request payload to create a Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountCreateData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountOAuthAuthRequest:
+      additionalProperties: false
+      description: >-
+        Databricks OAuth machine-to-machine authentication using a service principal.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+        client_secret:
+          description: >-
+            Secret of the Databricks service principal. Generate it under User management > Service principals > Credentials & secrets in Databricks.
+          example: your-client-secret
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+        - client_id
+        - client_secret
+      type: object
+    DatabricksIntegrationAccountOAuthAuthResponse:
+      description: The Databricks OAuth authentication method and service principal configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+      required:
+        - auth_type
+        - client_id
+      type: object
+    DatabricksIntegrationAccountOAuthAuthType:
+      default: databricks_oauth
+      description: The authentication method type.
+      enum:
+        - databricks_oauth
+      example: databricks_oauth
+      type: string
+      x-enum-varnames:
+        - DATABRICKS_OAUTH
+    DatabricksIntegrationAccountOAuthAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Databricks OAuth machine-to-machine authentication using a service principal. Only the fields provided are changed; omit `client_secret` to keep the stored one.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountOAuthAuthType"
+        azure_tenant_id:
+          description: >-
+            Microsoft Entra ID tenant of the service principal, for Azure Databricks workspaces. Omit it to keep the stored tenant, send `null` or an empty string to remove it, or send a value to replace it.
+          example: 4d3bac44-0230-4732-9e70-cc00736f0a97
+          nullable: true
+          type: string
+        client_id:
+          description: Client ID of the Databricks service principal.
+          example: 5c10654a-b3a3-4840-b37f-f477590c70a0
+          type: string
+        client_secret:
+          description: >-
+            Secret of the Databricks service principal. Generate it under User management > Service principals > Credentials & secrets in Databricks.
+          example: your-client-secret
+          type: string
+          writeOnly: true
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountPrivateActionRunnerAuthRequest:
+      additionalProperties: false
+      description: >-
+        Private Action Runner authentication. The runner holds the Databricks credentials, so this method carries no secrets.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthType"
+        connection_id:
+          description: Unique identifier of the Private Action Runner connection holding the credentials.
+          example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          format: uuid
+          type: string
+        secret_path:
+          description: >-
+            Path of the credential inside the secret backend configured on the runner.
+          example: /vault/databricks/prod
+          type: string
+        user_uuid:
+          description: Unique identifier of the user the Private Action Runner connection belongs to.
+          example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          format: uuid
+          type: string
+      required:
+        - auth_type
+        - connection_id
+        - user_uuid
+      type: object
+    DatabricksIntegrationAccountPrivateActionRunnerAuthResponse:
+      description: The Private Action Runner authentication method configured on the account.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthType"
+        connection_id:
+          description: Unique identifier of the Private Action Runner connection holding the credentials.
+          example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          format: uuid
+          type: string
+        secret_path:
+          description: Path of the credential inside the secret backend configured on the runner.
+          example: /vault/databricks/prod
+          type: string
+        user_uuid:
+          description: Unique identifier of the user the Private Action Runner connection belongs to.
+          example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          format: uuid
+          type: string
+      required:
+        - auth_type
+        - connection_id
+        - user_uuid
+      type: object
+    DatabricksIntegrationAccountPrivateActionRunnerAuthType:
+      default: private_action_runner
+      description: The authentication method type.
+      enum:
+        - private_action_runner
+      example: private_action_runner
+      type: string
+      x-enum-varnames:
+        - PRIVATE_ACTION_RUNNER
+    DatabricksIntegrationAccountPrivateActionRunnerAuthUpdate:
+      additionalProperties: false
+      description: >-
+        Private Action Runner authentication. The runner holds the Databricks credentials, so this method carries no secrets. Only the fields provided are changed.
+      properties:
+        auth_type:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountPrivateActionRunnerAuthType"
+        connection_id:
+          description: Unique identifier of the Private Action Runner connection holding the credentials.
+          example: 08356fb7-3ae3-4ea2-913e-b4cb1b7e7ec2
+          format: uuid
+          type: string
+        secret_path:
+          description: >-
+            Path of the credential inside the secret backend configured on the runner. Omit it to keep the stored path, send `null` or an empty string to remove it, or send a value to replace it.
+          example: /vault/databricks/prod
+          nullable: true
+          type: string
+        user_uuid:
+          description: Unique identifier of the user the Private Action Runner connection belongs to.
+          example: ac470ea4-aa08-11f0-994d-da9212322ca2
+          format: uuid
+          type: string
+      required:
+        - auth_type
+      type: object
+    DatabricksIntegrationAccountResponse:
+      description: Response payload for a single Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountResponseData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountResponseAttributes:
+      description: Attributes of a Databricks integration account returned in responses.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationResponse"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsResponse"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsResponse"
+      required:
+        - name
+        - settings
+      type: object
+    DatabricksIntegrationAccountResponseData:
+      description: Data envelope of a Databricks integration account, including server-assigned identity.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountResponseAttributes"
+        id:
+          description: Server-generated unique identifier of the Databricks integration account.
+          example: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+          readOnly: true
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - attributes
+        - type
+      type: object
+    DatabricksIntegrationAccountSettingsRequest:
+      additionalProperties: false
+      description: Settings for creating the Databricks integration account.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: >-
+            ID of the SQL warehouse used to query the Databricks system tables. Find it at the end of the HTTP Path under Warehouses > Connection Details in the Databricks console. Required when the cloud cost metrics or the Data Observability dataflow is enabled, or when `serverless_jobs_enabled` is on; since serverless jobs are on unless explicitly disabled, omitting this field otherwise causes the request to be rejected with a `422` response.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      required:
+        - workspace_url
+      type: object
+    DatabricksIntegrationAccountSettingsResponse:
+      description: Settings configured on the Databricks integration account.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: ID of the SQL warehouse used to query the Databricks system tables.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      required:
+        - workspace_url
+      type: object
+    DatabricksIntegrationAccountSettingsUpdate:
+      additionalProperties: false
+      description: Settings for updating the Databricks integration account. Only the fields provided are changed.
+      properties:
+        system_tables_sql_warehouse_id:
+          description: >-
+            ID of the SQL warehouse used to query the Databricks system tables. Find it at the end of the HTTP Path under Warehouses > Connection Details in the Databricks console. Required once the cloud cost metrics or the Data Observability dataflow is enabled, or while `serverless_jobs_enabled` is on; an update that leaves the account without one is rejected with a `422` response.
+          example: aba7c023d4172910
+          type: string
+        workspace_url:
+          description: URL of the Databricks workspace.
+          example: "https://dbc-1234abcd.cloud.databricks.com"
+          type: string
+      type: object
+    DatabricksIntegrationAccountUpdateAttributes:
+      description: >-
+        Writable attributes used to update a Databricks integration account. Every field is optional; only the fields provided are changed. When `dataflows` is provided, only the dataflow ids included in the request are modified; dataflows omitted from the map keep their current configuration, as do the settings of an included dataflow that provides only `enabled`.
+      properties:
+        authentication:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountAuthenticationUpdate"
+        dataflows:
+          $ref: "#/components/schemas/DatabricksIntegrationDataflowsRequest"
+        name:
+          description: Human-readable name of the Databricks integration account.
+          example: My Databricks Workspace
+          type: string
+        settings:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountSettingsUpdate"
+      type: object
+    DatabricksIntegrationAccountUpdateData:
+      description: Data envelope for updating a Databricks integration account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateAttributes"
+        id:
+          description: Unique identifier of the Databricks integration account to update.
+          example: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+          type: string
+        type:
+          $ref: "#/components/schemas/IntegrationAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DatabricksIntegrationAccountUpdateRequest:
+      description: Request payload to update a Databricks integration account.
+      properties:
+        data:
+          $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateData"
+      required:
+        - data
+      type: object
+    DatabricksIntegrationAccountsResponse:
+      description: Response payload for a list of Databricks integration accounts.
+      properties:
+        data:
+          description: List of Databricks integration accounts.
+          items:
+            $ref: "#/components/schemas/DatabricksIntegrationAccountResponseData"
+          type: array
+      required:
+        - data
+      type: object
+    DatabricksIntegrationDataflowsRequest:
+      additionalProperties: false
+      description: >-
+        Data Datadog collects from Databricks, keyed by dataflow id. Each dataflow turns on a distinct kind of collection: set `enabled` to start or stop it, and use `settings` to configure what it collects. Defaults listed on each dataflow apply when the account is created; on update, omitted fields keep their current values. Some dataflows have prerequisites, noted on each; unless one is documented as rejecting the request, it is not verified, so a dataflow enabled without it is stored but collects no data.
+      properties:
+        databricks-cloud-cost-metrics:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowRequest"
+        databricks-data-observability-jobs-monitoring:
+          $ref: "#/components/schemas/DatabricksDataObservabilityJobsMonitoringIntegrationDataflowRequest"
+        databricks-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/DatabricksDataObservabilityQualityMonitoringIntegrationDataflowRequest"
+        databricks-model-serving-metrics:
+          $ref: "#/components/schemas/DatabricksModelServingMetricsIntegrationDataflowRequest"
+      type: object
+    DatabricksIntegrationDataflowsResponse:
+      description: Data Datadog collects from Databricks, keyed by dataflow id.
+      properties:
+        databricks-cloud-cost-metrics:
+          $ref: "#/components/schemas/DatabricksCloudCostMetricsIntegrationDataflowResponse"
+        databricks-data-observability-jobs-monitoring:
+          $ref: "#/components/schemas/DatabricksDataObservabilityJobsMonitoringIntegrationDataflowResponse"
+        databricks-data-observability-quality-monitoring:
+          $ref: "#/components/schemas/DatabricksDataObservabilityQualityMonitoringIntegrationDataflowResponse"
+        databricks-model-serving-metrics:
+          $ref: "#/components/schemas/DatabricksModelServingMetricsIntegrationDataflowResponse"
+      type: object
+    DatabricksModelServingMetricsIntegrationDataflowRequest:
+      additionalProperties: false
+      description: >-
+        Health and usage metrics for your Databricks model serving endpoints. Not supported on accounts that authenticate with `private_action_runner`; on those accounts this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data. Defaults to `false`; set to `true` to start collection.
+          example: true
+          type: boolean
+      type: object
+    DatabricksModelServingMetricsIntegrationDataflowResponse:
+      description: >-
+        Health and usage metrics for your Databricks model serving endpoints. Not supported on accounts that authenticate with `private_action_runner`; on those accounts this dataflow collects no data.
+      properties:
+        enabled:
+          description: Whether Datadog collects this data.
+          example: true
+          type: boolean
       type: object
     DatadogAPIKey:
       description: The definition of the `DatadogAPIKey` object.
@@ -35077,10 +35704,10 @@ components:
       type: object
     DeploymentGatesEvaluationResultResponseAttributesGateStatus:
       description: |-
-        The overall status of the gate evaluation.
+        The recorded result of a gate or rule evaluation.
         - `in_progress`: The evaluation is still running.
-        - `pass`: All rules passed successfully and the deployment is allowed to proceed.
-        - `fail`: One or more rules did not pass; the deployment should not proceed.
+        - `pass`: All rules passed successfully.
+        - `fail`: One or more rules did not pass.
       enum:
         - in_progress
         - pass
@@ -45305,6 +45932,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
@@ -45691,6 +46321,13 @@ components:
           description: When enabled, Datadog collects metrics where location is explicitly stated as "global" or where location information cannot be deduced from GCP labels.
           example: true
           type: boolean
+        is_org_folder_resource_collection_enabled:
+          default: false
+          description: |-
+            When enabled, Datadog scans for organization and folder-level resources
+            under the organization the service account belongs to.
+          example: false
+          type: boolean
         is_per_project_quota_enabled:
           default: false
           description: |-
@@ -45730,7 +46367,7 @@ components:
           type: array
         resource_collection_enabled:
           description: |-
-            When enabled, Datadog scans for all resources in your GCP environment.
+            When enabled, Datadog scans for all project-level resources in your GCP environment.
           type: boolean
       type: object
     GCPSTSServiceAccountCreateRequest:
@@ -59997,8 +60634,10 @@ components:
       type: object
     LLMObsCreatePromptDataAttributes:
       description: >-
-        Attributes for creating an Agent Observability prompt and its first version. `prompt_id` and `template` are required; all other attributes are optional.
+        Attributes for creating an Agent Observability prompt and its first version. `prompt_id` and `template` are required; all other attributes are optional. If `config` is omitted, the first version stores an empty object. Configuration authoring must be enabled for your organization to supply `config`. Otherwise, supplying it, including an empty object, returns HTTP 403.
       properties:
+        config:
+          $ref: "#/components/schemas/LLMObsPromptConfig"
         description:
           description: Optional description of the prompt.
           type: string
@@ -60040,6 +60679,105 @@ components:
       required:
         - data
       type: object
+    LLMObsCreatePromptResponse:
+      description: Response returned after creating an Agent Observability prompt.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsCreatePromptResponseData"
+      required:
+        - data
+      type: object
+    LLMObsCreatePromptResponseData:
+      description: Data object returned after creating an Agent Observability prompt.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsCreatePromptResponseDataAttributes"
+        id:
+          description: Unique identifier of the prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsCreatePromptResponseDataAttributes:
+      description: >-
+        Attributes returned after creating an Agent Observability prompt and its first version. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
+      properties:
+        author:
+          description: UUID of the user who authored the prompt.
+          type: string
+        config:
+          $ref: "#/components/schemas/LLMObsPromptConfig"
+        created_at:
+          description: Timestamp when the prompt was created.
+          format: date-time
+          type: string
+        created_from:
+          description: >-
+            Source that created the prompt, such as `ui-registry`, `sdk-registry`, or `sdk-instrumentation`.
+          example: "sdk-registry"
+          type: string
+        datasets:
+          description: Datasets observed in runs associated with this prompt.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptDataset"
+          type: array
+        description:
+          description: Description of the prompt.
+          type: string
+        extracted_from:
+          description: Source prompt from which this prompt was extracted, when applicable.
+          type: string
+        in_registry:
+          description: Whether the prompt is a registry entry (as opposed to a code-discovered prompt).
+          example: true
+          type: boolean
+        last_seen_at:
+          description: Timestamp of the most recent observed run of this prompt.
+          format: date-time
+          type: string
+        last_version_created_at:
+          description: Timestamp when the most recent version of the prompt was created.
+          format: date-time
+          type: string
+        ml_app:
+          description: The ML application this prompt is associated with.
+          type: string
+        ml_apps:
+          description: ML applications observed running this prompt.
+          items:
+            type: string
+          type: array
+        num_versions:
+          description: Number of versions of the prompt.
+          example: 1
+          format: int64
+          type: integer
+        prompt_id:
+          description: Customer-provided identifier of the prompt.
+          example: "customer-support-assistant"
+          type: string
+        source:
+          $ref: "#/components/schemas/LLMObsPromptResponseSource"
+        tags:
+          description: Tags observed on runs of this prompt.
+          items:
+            type: string
+          type: array
+        title:
+          description: Title of the prompt.
+          type: string
+      required:
+        - prompt_id
+        - source
+        - num_versions
+        - in_registry
+        - created_from
+      type: object
     LLMObsCreatePromptVersionData:
       description: Data object for creating an Agent Observability prompt version.
       properties:
@@ -60053,8 +60791,10 @@ components:
       type: object
     LLMObsCreatePromptVersionDataAttributes:
       description: >-
-        Attributes for creating a new version of an Agent Observability prompt. `template` is required; all other attributes are optional.
+        Attributes for creating a new version of an Agent Observability prompt. `template` is required; all other attributes are optional. If `config` is omitted, the latest version's configuration is carried forward. An explicit empty object clears it. Configuration authoring must be enabled for your organization to supply `config`. Otherwise, supplying it, including an empty object, returns HTTP 403. Omitting `config` still carries forward the latest configuration.
       properties:
+        config:
+          $ref: "#/components/schemas/LLMObsPromptConfig"
         description:
           description: Optional description of this version.
           type: string
@@ -64661,6 +65401,26 @@ components:
       required:
         - data
       type: object
+    LLMObsPromptAuthoringChatTemplate:
+      description: A chat prompt containing messages, references to specific versions of other prompts, or both.
+      items:
+        $ref: "#/components/schemas/LLMObsPromptAuthoringItem"
+      minItems: 1
+      type: array
+    LLMObsPromptAuthoringItem:
+      description: >-
+        A chat message or a reference to a specific version of another prompt. A chat message must not contain an `include` field; the API rejects items that combine both forms.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptIncludeItem"
+    LLMObsPromptAuthoringMessagesTemplate:
+      description: A chat prompt whose authored items are stored under `messages`.
+      properties:
+        messages:
+          $ref: "#/components/schemas/LLMObsPromptAuthoringChatTemplate"
+      required:
+        - messages
+      type: object
     LLMObsPromptChatMessage:
       description: A single chat message in a prompt template.
       properties:
@@ -64683,6 +65443,16 @@ components:
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptConfig:
+      additionalProperties: {}
+      description: >-
+        Versioned prompt configuration is in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager. Customer-owned configuration delivered with a prompt version. Datadog stores and returns the object without interpolating it, validating provider-specific keys, or applying it to model calls. Do not include secrets.
+      example:
+        model: provider-model
+        response_format:
+          type: json_object
+        temperature: 0.2
+      type: object
     LLMObsPromptData:
       description: Data object for an Agent Observability prompt.
       properties:
@@ -64700,7 +65470,8 @@ components:
         - attributes
       type: object
     LLMObsPromptDataAttributes:
-      description: Attributes of an Agent Observability prompt registry entry.
+      description: >-
+        Attributes of an Agent Observability prompt registry entry. Prompt list and metadata-update responses omit complete template and configuration data.
       properties:
         author:
           description: UUID of the user who authored the prompt.
@@ -64784,6 +65555,46 @@ components:
       required:
         - id
       type: object
+    LLMObsPromptInclude:
+      additionalProperties: false
+      description: >-
+        Includes messages from a specific version of another prompt. Omitting `items` includes every message from that version in its original order. When `items` is present, messages are included in the specified order, including repetitions.
+      properties:
+        items:
+          description: >-
+            Zero-based indexes of messages from the included prompt. For example, `[2, 0, 0]` includes the third message, followed by the first message twice. Omit this field to include all messages in their original order.
+          items:
+            format: int64
+            maximum: 2147483647
+            minimum: 0
+            type: integer
+          minItems: 1
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the included prompt.
+          example: "response-policy"
+          minLength: 1
+          type: string
+        version:
+          description: Positive sequential version number of the included prompt.
+          example: 3
+          format: int64
+          maximum: 2147483647
+          minimum: 1
+          type: integer
+      required:
+        - prompt_id
+        - version
+      type: object
+    LLMObsPromptIncludeItem:
+      additionalProperties: false
+      description: Includes all or selected messages from a specific version of another prompt.
+      properties:
+        include:
+          $ref: "#/components/schemas/LLMObsPromptInclude"
+      required:
+        - include
+      type: object
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -64835,7 +65646,7 @@ components:
       type: object
     LLMObsPromptSDKDataAttributes:
       description: >-
-        Attributes of a flattened prompt version returned for SDK consumption. Exactly one of `template` and `chat_template` is returned.
+        Attributes of a flattened prompt version returned for SDK consumption. Exactly one of `template` and `chat_template` is returned. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
       properties:
         chat_template:
           description: >-
@@ -64843,6 +65654,8 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsPromptChatMessage"
           type: array
+        config:
+          $ref: "#/components/schemas/LLMObsPromptConfig"
         labels:
           deprecated: true
           description: Labels attached to the selected version.
@@ -64876,6 +65689,9 @@ components:
                 role: "system"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
+            config:
+              model: provider-model
+              temperature: 0.2
             prompt_id: "customer-support-assistant"
             prompt_version_uuid: "d83ab666-61cc-5545-a83b-2424bb85467b"
             version: "2"
@@ -64888,11 +65704,17 @@ components:
         - data
       type: object
     LLMObsPromptTemplate:
-      description: A text template or a list of chat messages.
+      description: >-
+        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+
+        **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
+
+        Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
         - $ref: "#/components/schemas/LLMObsPromptChatTemplate"
+        - $ref: "#/components/schemas/LLMObsPromptAuthoringMessagesTemplate"
     LLMObsPromptTextTemplate:
       description: A text prompt template.
       minLength: 1
@@ -64923,11 +65745,16 @@ components:
         - attributes
       type: object
     LLMObsPromptVersionDataAttributes:
-      description: Attributes of a specific version of an Agent Observability prompt.
+      description: >-
+        Attributes of a specific version of an Agent Observability prompt. For a composed version, `authoring_template` contains its pinned include-bearing source; ordinary versions omit that attribute. Empty `config` is omitted when configuration authoring is disabled for the organization. Non-empty saved configuration is always returned.
       properties:
         author:
           description: UUID of the user who authored this version.
           type: string
+        authoring_template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
+        config:
+          $ref: "#/components/schemas/LLMObsPromptConfig"
         created_at:
           description: Timestamp stored on this prompt version.
           format: date-time
@@ -65090,6 +65917,7 @@ components:
         data:
           attributes:
             author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+            config: {}
             created_at: "2025-02-01T14:30:00Z"
             description: "Give concise answers and cite relevant help-center articles."
             prompt_id: "customer-support-assistant"
@@ -65806,6 +66634,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
       example: PYTHON
       type: string
       x-enum-varnames:
@@ -65820,6 +66660,18 @@ components:
         - PHP
         - KOTLIN
         - SWIFT
+        - DART
+        - DOCKERFILE
+        - ELIXIR
+        - JSON
+        - RUST
+        - TERRAFORM
+        - STARLARK
+        - BASH
+        - MARKDOWN
+        - APEX
+        - R
+        - SQL
     LatestVersionMatchPolicy:
       description: The policy for matching the latest form version during an upsert operation.
       enum:
@@ -85337,6 +86189,9 @@ components:
           description: Name of the API key.
           example: "API Key for submitting metrics"
           type: string
+        private_action_runner_enroll_enabled:
+          description: Whether the API key can enroll a Private Action Runner.
+          type: boolean
         remote_config_read_enabled:
           description: The remote config read enabled status.
           type: boolean
@@ -108491,6 +109346,7 @@ components:
         - character_count
       type: object
     SensitiveDataScannerMeta:
+      additionalProperties: {}
       description: Meta response containing information about the API.
       properties:
         count_limit:
@@ -120325,15 +121181,6 @@ components:
             Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
           example: false
           type: boolean
-        queried_tags_window_seconds:
-          description: Window in seconds for evaluating queried tags.
-          example: 3600
-          format: int64
-          type: integer
-        related_asset_tags:
-          description: When true, tags from related assets are included.
-          example: false
-          type: boolean
       type: object
     TagIndexingRuleExemptionAttributes:
       description: Attributes of a tag indexing rule exemption.
@@ -122267,6 +123114,11 @@ components:
           items:
             $ref: "#/components/schemas/RoutingRuleAction"
           type: array
+        id:
+          description: |-
+            Specifies the unique identifier of an existing routing rule to update.
+            If omitted, a new routing rule is created.
+          type: string
         policy_id:
           description: Identifies the policy to be applied when this routing rule matches.
           type: string
@@ -131569,6 +132421,7 @@ components:
             workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
+      x-env-name: DD_BEARER_TOKEN
     apiKeyAuth:
       description: Your Datadog API Key.
       in: header
@@ -131677,6 +132530,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tracers for a specific agent
       tags:
         - Fleet Automation
@@ -131792,6 +132646,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a schedule
       tags:
         - Fleet Automation
@@ -131840,6 +132695,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a schedule
       tags:
         - Fleet Automation
@@ -131954,6 +132810,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a schedule
       tags:
         - Fleet Automation
@@ -132026,6 +132883,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a schedule deployment
       tags:
         - Fleet Automation
@@ -132122,6 +132980,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all fleet tracers
       tags:
         - Fleet Automation
@@ -132188,6 +133047,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List custom evaluator configurations
       tags:
         - Agent Observability
@@ -132233,6 +133093,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a custom evaluator configuration
       tags:
         - Agent Observability
@@ -132308,6 +133169,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a custom evaluator configuration
       tags:
         - Agent Observability
@@ -132422,6 +133284,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a custom evaluator configuration
       tags:
         - Agent Observability
@@ -134654,6 +135517,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List annotations
       tags:
         - Annotations
@@ -134735,6 +135599,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an annotation
       tags:
         - Annotations
@@ -134809,6 +135674,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotations for a page
       tags:
         - Annotations
@@ -134850,6 +135716,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an annotation
       tags:
         - Annotations
@@ -134939,6 +135806,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an annotation
       tags:
         - Annotations
@@ -138206,7 +139074,9 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Trigger a new Bits AI investigation based on a monitor alert.
+      description: |-
+        Trigger a new Bits AI investigation based on a monitor alert.
+        The `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.
       operationId: TriggerInvestigation
       requestBody:
         content:
@@ -138255,15 +139125,17 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - bits_investigations_write
+            - monitors_read
       summary: Trigger a Bits AI investigation
       tags:
         - Bits AI
       x-codegen-request-body-name: body
       x-menu-order: 1
       "x-permission":
-        operator: OR
+        operator: AND
         permissions:
           - bits_investigations_write
+          - monitors_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -146654,6 +147526,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a budget
       tags:
         - Cloud Cost Management
@@ -146749,6 +147622,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or replace a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -146812,6 +147686,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Validate budget
       tags:
         - Cloud Cost Management
@@ -146830,6 +147705,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete budget
       tags:
         - Cloud Cost Management
@@ -146924,6 +147800,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get budget
       tags:
         - Cloud Cost Management
@@ -146946,6 +147823,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -146994,6 +147872,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a budget's custom forecast
       tags:
         - Cloud Cost Management
@@ -147031,6 +147910,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List budgets
       tags:
         - Cloud Cost Management
@@ -151034,6 +151914,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get current user
       tags:
         - Users
@@ -151118,6 +151999,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update current user
       tags:
         - Users
@@ -152849,6 +153731,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Creates a data deletion request
       tags:
         - Data Deletion
@@ -152947,6 +153830,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Gets a list of data deletion requests
       tags:
         - Data Deletion
@@ -153012,6 +153896,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Cancels a data deletion request
       tags:
         - Data Deletion
@@ -154008,6 +154893,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all deployment gates
       tags: ["Deployment Gates"]
       x-menu-order: 10
@@ -154078,6 +154964,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 1
@@ -154140,6 +155027,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get rules for a deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 9
@@ -154220,6 +155108,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 5
@@ -154270,6 +155159,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 8
@@ -154338,6 +155228,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 6
@@ -154424,6 +155315,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update deployment rule
       tags: ["Deployment Gates"]
       x-menu-order: 7
@@ -154468,6 +155360,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 4
@@ -154529,6 +155422,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 2
@@ -154604,6 +155498,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update deployment gate
       tags: ["Deployment Gates"]
       x-menu-order: 3
@@ -154702,6 +155597,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a deployment gate evaluation
       tags: ["Deployment Gates"]
       x-menu-order: 11
@@ -154768,6 +155664,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment gate evaluation result
       tags: ["Deployment Gates"]
       x-menu-order: 12
@@ -154979,6 +155876,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a deployment event
       tags: ["DORA Metrics"]
       x-menu-order: 8
@@ -155023,6 +155921,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a deployment event by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155087,6 +155986,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a list of deployment events
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155139,6 +156039,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155191,6 +156092,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a deployment event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155301,6 +156203,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an incident event
       tags: ["DORA Metrics"]
       x-menu-order: 7
@@ -155364,6 +156267,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a list of incident events
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -155418,6 +156322,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an incident event
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
@@ -156366,6 +157271,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       servers:
         - url: https://{subdomain}.{site}
           variables:
@@ -158172,6 +159078,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List available Datadog Agent versions
       tags:
         - Fleet Automation
@@ -158293,6 +159200,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all Datadog Agents
       tags:
         - Fleet Automation
@@ -158359,6 +159267,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get detailed information about an agent
       tags:
         - Fleet Automation
@@ -158465,6 +159374,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all deployments
       tags:
         - Fleet Automation
@@ -158583,6 +159493,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a configuration deployment
       tags:
         - Fleet Automation
@@ -158663,6 +159574,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Upgrade hosts
       tags:
         - Fleet Automation
@@ -158751,6 +159663,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a deployment by ID
       tags:
         - Fleet Automation
@@ -158810,6 +159723,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Cancel a deployment
       tags:
         - Fleet Automation
@@ -158873,6 +159787,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List all schedules
       tags:
         - Fleet Automation
@@ -158939,6 +159854,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a schedule by ID
       tags:
         - Fleet Automation
@@ -161010,6 +161926,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tag rules
       tags:
         - Tag Rules
@@ -161110,6 +162027,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a tag rule
       tags:
         - Tag Rules
@@ -161175,6 +162093,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a tag rule
       tags:
         - Tag Rules
@@ -161295,6 +162214,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a tag rule
       tags:
         - Tag Rules
@@ -161395,6 +162315,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a tag rule
       tags:
         - Tag Rules
@@ -161485,6 +162406,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a tag rule compliance score
       tags:
         - Tag Rules
@@ -161548,6 +162470,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get HAMR organization connection
       tags:
         - High Availability MultiRegion
@@ -161624,6 +162547,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update HAMR organization connection
       tags:
         - High Availability MultiRegion
@@ -165755,6 +166679,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List incident attachments
       tags:
         - Incidents
@@ -166013,7 +166938,12 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/{incident_id}/cases/page:
     post:
-      description: Create a page from an incident using the Cases service.
+      deprecated: true
+      description: |-
+        Create a page from an incident using the Cases service.
+
+        **Deprecated**: This endpoint is deprecated. Use
+        [Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.
       operationId: CreatePageFromIncident
       parameters:
         - $ref: "#/components/parameters/IncidentIDPathParameter"
@@ -167591,6 +168521,309 @@ paths:
         operator: OR
         permissions:
           - incident_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/databricks/accounts:
+    get:
+      description: List Databricks integration accounts.
+      operationId: ListDatabricksIntegrationAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          authentication:
+                            auth_type: databricks_oauth
+                            client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                          dataflows:
+                            databricks-cloud-cost-metrics:
+                              enabled: true
+                              settings:
+                                ccm_collect_all_workspaces: true
+                            databricks-data-observability-jobs-monitoring:
+                              enabled: true
+                              settings:
+                                dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                                djm_global_init_script_enabled: true
+                                script_gpum_enabled: false
+                                script_logs_enabled: true
+                                serverless_jobs_enabled: true
+                            databricks-data-observability-quality-monitoring:
+                              enabled: true
+                              settings:
+                                do_crawlers_cron: "0 * * * *"
+                                sync_system_catalog: true
+                            databricks-model-serving-metrics:
+                              enabled: false
+                          name: My Databricks Workspace
+                          settings:
+                            system_tables_sql_warehouse_id: aba7c023d4172910
+                            workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                        id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                        type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List Databricks integration accounts
+      tags:
+        - Databricks Integration
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a Databricks integration account.
+      operationId: CreateDatabricksIntegrationAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabricksIntegrationAccountCreateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks_oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-observability-jobs-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                              serverless_jobs_enabled: true
+                          databricks-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Create a Databricks integration account
+      tags:
+        - Databricks Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration-interfaces/databricks/accounts/{account_id}:
+    delete:
+      description: Delete a Databricks integration account.
+      operationId: DeleteDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Delete a Databricks integration account
+      tags:
+        - Databricks Integration
+      x-menu-order: 5
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get a Databricks integration account.
+      operationId: GetDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks_oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-observability-jobs-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                              serverless_jobs_enabled: true
+                          databricks-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get a Databricks integration account
+      tags:
+        - Databricks Integration
+      x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - integrations_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update a Databricks integration account. Only the fields provided are changed.
+      operationId: UpdateDatabricksIntegrationAccount
+      parameters:
+        - $ref: "#/components/parameters/IntegrationAccountIdParameter"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DatabricksIntegrationAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        authentication:
+                          auth_type: databricks_oauth
+                          client_id: 5c10654a-b3a3-4840-b37f-f477590c70a0
+                        dataflows:
+                          databricks-cloud-cost-metrics:
+                            enabled: true
+                            settings:
+                              ccm_collect_all_workspaces: true
+                          databricks-data-observability-jobs-monitoring:
+                            enabled: true
+                            settings:
+                              dd_api_key_id: fe383f4e-09fc-46bf-8e10-4efdd453a646
+                              djm_global_init_script_enabled: true
+                              script_gpum_enabled: false
+                              script_logs_enabled: true
+                              serverless_jobs_enabled: true
+                          databricks-data-observability-quality-monitoring:
+                            enabled: true
+                            settings:
+                              do_crawlers_cron: "0 * * * *"
+                              sync_system_catalog: true
+                          databricks-model-serving-metrics:
+                            enabled: false
+                        name: My Databricks Workspace
+                        settings:
+                          system_tables_sql_warehouse_id: aba7c023d4172910
+                          workspace_url: "https://dbc-1234abcd.cloud.databricks.com"
+                      id: a9a69c2e-4f8d-4e42-9c1a-2a7a2d3b7c6f
+                      type: integration-account
+              schema:
+                $ref: "#/components/schemas/DatabricksIntegrationAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "422":
+          $ref: "#/components/responses/UnprocessableEntityResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update a Databricks integration account
+      tags:
+        - Databricks Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 4
+      "x-permission":
+        operator: OR
+        permissions:
+          - manage_integrations
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -171108,6 +172341,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List tenancy products
       tags:
         - OCI Integration
@@ -171140,6 +172374,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get tenancy configs
       tags:
         - OCI Integration
@@ -171217,6 +172452,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create tenancy config
       tags:
         - OCI Integration
@@ -171241,6 +172477,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete tenancy config
       tags:
         - OCI Integration
@@ -171279,6 +172516,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get tenancy config
       tags:
         - OCI Integration
@@ -171361,6 +172599,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update tenancy config
       tags:
         - OCI Integration
@@ -172997,6 +174236,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Integrations
       tags:
         - Integrations
@@ -174545,6 +175785,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotated interactions by content IDs
       tags:
         - Agent Observability
@@ -174622,6 +175863,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability annotation queues
       tags:
         - Agent Observability
@@ -174738,6 +175980,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -174777,6 +176020,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -174867,6 +176111,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability annotation queue
       tags:
         - Agent Observability
@@ -174929,6 +176174,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotated queue interactions
       tags:
         - Agent Observability
@@ -175022,6 +176268,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an annotated queue interaction
       tags:
         - Agent Observability
@@ -175140,6 +176387,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update annotations
       tags:
         - Agent Observability
@@ -175227,6 +176475,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete annotations
       tags:
         - Agent Observability
@@ -175350,6 +176599,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Add annotation queue interactions
       tags:
         - Agent Observability
@@ -175411,6 +176661,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete annotation queue interactions
       tags:
         - Agent Observability
@@ -175482,6 +176733,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get annotation queue label schema
       tags:
         - Agent Observability
@@ -175628,6 +176880,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update annotation queue label schema
       tags:
         - Agent Observability
@@ -175716,6 +176969,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Aggregate Agent Observability experimentation
       tags:
         - Agent Observability
@@ -175827,6 +177081,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search Agent Observability experimentation
       tags:
         - Agent Observability
@@ -175921,6 +177176,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Simple search experimentation entities
       tags:
         - Agent Observability
@@ -176047,6 +177303,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiments
       tags:
         - Agent Observability
@@ -176139,6 +177396,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability experiment
       tags:
         - Agent Observability
@@ -176191,6 +177449,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability experiments
       tags:
         - Agent Observability
@@ -176267,6 +177526,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability experiment
       tags:
         - Agent Observability
@@ -176339,6 +177599,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiment spans (v1)
       tags:
         - Agent Observability
@@ -176411,6 +177672,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Push events for an Agent Observability experiment
       tags:
         - Agent Observability
@@ -176464,6 +177726,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List LLM integration accounts
       tags:
         - Agent Observability
@@ -176549,6 +177812,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Run an LLM inference
       tags:
         - Agent Observability
@@ -176607,6 +177871,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List LLM integration models
       tags:
         - Agent Observability
@@ -176681,6 +177946,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability projects
       tags:
         - Agent Observability
@@ -176763,6 +178029,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability project
       tags:
         - Agent Observability
@@ -176815,6 +178082,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability projects
       tags:
         - Agent Observability
@@ -176887,6 +178155,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability project
       tags:
         - Agent Observability
@@ -176946,6 +178215,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability prompts
       tags:
         - Agent Observability
@@ -176958,7 +178228,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new prompt (and its first version) in the Agent Observability prompt registry.
+      description: |-
+        Create a new prompt (and its first version) in the Agent Observability prompt registry.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPrompt
       requestBody:
         content:
@@ -176968,6 +178241,11 @@ paths:
                 value:
                   data:
                     attributes:
+                      config:
+                        model: provider-model
+                        response_format:
+                          type: json_object
+                        temperature: 0.2
                       description: "Answers customer questions using the company knowledge base."
                       prompt_id: "customer-support-assistant"
                       template:
@@ -176991,6 +178269,11 @@ paths:
                     data:
                       attributes:
                         author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        config:
+                          model: provider-model
+                          response_format:
+                            type: json_object
+                          temperature: 0.2
                         created_at: "2025-01-15T10:00:00Z"
                         created_from: "sdk-registry"
                         description: "Answers customer questions using the company knowledge base."
@@ -177003,7 +178286,7 @@ paths:
                       id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
                       type: prompt-templates
               schema:
-                $ref: "#/components/schemas/LLMObsPromptResponse"
+                $ref: "#/components/schemas/LLMObsCreatePromptResponse"
           description: OK
         "400":
           content:
@@ -177034,6 +178317,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability prompt
       tags:
         - Agent Observability
@@ -177095,6 +178379,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an Agent Observability prompt
       tags:
         - Agent Observability
@@ -177130,6 +178415,9 @@ paths:
                             role: "system"
                           - content: "Help {{customer_name}} with this question: {{question}}"
                             role: "user"
+                        config:
+                          model: provider-model
+                          temperature: 0.2
                         prompt_id: "customer-support-assistant"
                         prompt_version_uuid: "d83ab666-61cc-5545-a83b-2424bb85467b"
                         version: "2"
@@ -177161,6 +178449,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an Agent Observability prompt
       tags:
         - Agent Observability
@@ -177245,6 +178534,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability prompt
       tags:
         - Agent Observability
@@ -177315,6 +178605,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List versions of an Agent Observability prompt
       tags:
         - Agent Observability
@@ -177327,7 +178618,10 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new version of an existing Agent Observability prompt.
+      description: |-
+        Create a new version of an existing Agent Observability prompt.
+
+        > **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
       operationId: CreateLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -177335,10 +178629,38 @@ paths:
         content:
           application/json:
             examples:
+              composed_chat:
+                summary: Create a version that includes all or selected messages from other prompts
+                value:
+                  data:
+                    attributes:
+                      template:
+                        messages:
+                          - include:
+                              prompt_id: "assistant-introduction"
+                              version: 2
+                          - include:
+                              items: [2, 0, 0]
+                              prompt_id: "response-examples"
+                              version: 4
+                          - content: "Answer {{question}}."
+                            role: "user"
+                    type: prompt-template-versions
+              composed_text:
+                summary: Create a version that includes text from another prompt
+                value:
+                  data:
+                    attributes:
+                      description: "Reuse the exact response policy."
+                      template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                    type: prompt-template-versions
               default:
                 value:
                   data:
                     attributes:
+                      config:
+                        model: provider-model
+                        temperature: 0.4
                       description: "Give concise answers and cite relevant help-center articles."
                       template:
                         - content: "You are a helpful customer support assistant for {{company_name}}."
@@ -177355,11 +178677,58 @@ paths:
           content:
             application/json:
               examples:
+                composed_chat:
+                  summary: A composed chat version preserves structured authored includes
+                  value:
+                    data:
+                      attributes:
+                        authoring_template:
+                          messages:
+                            - include:
+                                prompt_id: "assistant-introduction"
+                                version: 2
+                            - include:
+                                items: [2, 0, 0]
+                                prompt_id: "response-examples"
+                                version: 4
+                            - content: "Answer {{question}}."
+                              role: "user"
+                        prompt_id: "support-chat"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Here is one concise example."
+                            role: "assistant"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "You are a helpful assistant."
+                            role: "system"
+                          - content: "Answer {{question}}."
+                            role: "user"
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+                composed_text:
+                  summary: A composed text version returns compiled and authored templates
+                  value:
+                    data:
+                      attributes:
+                        authoring_template: "{{>response-policy version=3}}\n\nAnswer {{question}}."
+                        prompt_id: "support-answer"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template: "Follow the approved response policy.\n\nAnswer {{question}}."
+                        version: 2
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
                 default:
                   value:
                     data:
                       attributes:
                         author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        config:
+                          model: provider-model
+                          temperature: 0.4
                         created_at: "2025-02-01T14:30:00Z"
                         description: "Give concise answers and cite relevant help-center articles."
                         prompt_id: "customer-support-assistant"
@@ -177405,6 +178774,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new Agent Observability prompt version
       tags:
         - Agent Observability
@@ -177422,7 +178792,8 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/prompts/{prompt_id}/versions/{version}:
     get:
-      description: Get the full template of a single, specific version of an Agent Observability prompt.
+      description: >-
+        Get the full template and configuration of a single, specific version of an Agent Observability prompt.
       operationId: GetLLMObsPromptVersion
       parameters:
         - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
@@ -177437,6 +178808,7 @@ paths:
                     data:
                       attributes:
                         author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        config: {}
                         created_at: "2025-02-01T14:30:00Z"
                         description: "Give concise answers and cite relevant help-center articles."
                         prompt_id: "customer-support-assistant"
@@ -177482,6 +178854,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a specific Agent Observability prompt version
       tags:
         - Agent Observability
@@ -177524,6 +178897,9 @@ paths:
                     data:
                       attributes:
                         author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        config:
+                          model: provider-model
+                          temperature: 0.4
                         created_at: "2025-02-01T14:30:00Z"
                         description: "Give concise answers and cite relevant help-center articles."
                         prompt_id: "customer-support-assistant"
@@ -177569,6 +178945,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability prompt version
       tags:
         - Agent Observability
@@ -177729,6 +179106,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability spans
       tags:
         - Agent Observability
@@ -177829,6 +179207,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search Agent Observability spans
       tags:
         - Agent Observability
@@ -177906,6 +179285,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns clustered points
       tags:
         - Agent Observability
@@ -177970,6 +179350,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns configurations
       tags:
         - Agent Observability
@@ -178055,6 +179436,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create or update a patterns configuration
       tags:
         - Agent Observability
@@ -178123,6 +179505,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a patterns configuration
       tags:
         - Agent Observability
@@ -178174,6 +179557,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a patterns configuration
       tags:
         - Agent Observability
@@ -178241,6 +179625,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns runs
       tags:
         - Agent Observability
@@ -178317,6 +179702,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Trigger a patterns run
       tags:
         - Agent Observability
@@ -178391,6 +179777,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get patterns run status
       tags:
         - Agent Observability
@@ -178472,6 +179859,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns topics
       tags:
         - Agent Observability
@@ -178565,6 +179953,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List patterns topics with clustered points
       tags:
         - Agent Observability
@@ -178648,6 +180037,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability datasets
       tags:
         - Agent Observability
@@ -178742,6 +180132,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an Agent Observability dataset
       tags:
         - Agent Observability
@@ -178802,6 +180193,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability datasets
       tags:
         - Agent Observability
@@ -178877,6 +180269,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an Agent Observability dataset
       tags:
         - Agent Observability
@@ -178993,6 +180386,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Batch update Agent Observability dataset records
       tags:
         - Agent Observability
@@ -179090,6 +180484,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Clone an Agent Observability dataset
       tags:
         - Agent Observability
@@ -179171,6 +180566,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -179252,6 +180648,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Lock Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -179316,6 +180713,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Unlock Agent Observability dataset draft state
       tags:
         - Agent Observability
@@ -179399,6 +180797,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Export an Agent Observability dataset
       tags:
         - Agent Observability
@@ -179479,6 +180878,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability dataset records
       tags:
         - Agent Observability
@@ -179557,6 +180957,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update Agent Observability dataset records
       tags:
         - Agent Observability
@@ -179652,6 +181053,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Append records to an Agent Observability dataset
       tags:
         - Agent Observability
@@ -179713,6 +181115,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete Agent Observability dataset records
       tags:
         - Agent Observability
@@ -179792,6 +181195,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Restore an Agent Observability dataset version
       tags:
         - Agent Observability
@@ -179876,6 +181280,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability dataset versions
       tags:
         - Agent Observability
@@ -179951,6 +181356,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List Agent Observability experiment events (v2)
       tags:
         - Agent Observability
@@ -180057,6 +181463,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Upload records to an Agent Observability dataset
       tags:
         - Agent Observability
@@ -180144,6 +181551,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List events for an Agent Observability experiment
       tags:
         - Agent Observability
@@ -206714,6 +208122,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all default inbox rules
       tags:
         - Security Monitoring
@@ -206788,6 +208197,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a default inbox rule
       tags:
         - Security Monitoring
@@ -206859,6 +208269,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Disable a default inbox rule
       tags:
         - Security Monitoring
@@ -206930,6 +208341,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Enable a default inbox rule
       tags:
         - Security Monitoring
@@ -207017,6 +208429,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all due date rules
       tags:
         - Security Monitoring
@@ -207112,6 +208525,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a due date rule
       tags:
         - Security Monitoring
@@ -207176,6 +208590,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder due date rules
       tags:
         - Security Monitoring
@@ -207213,6 +208628,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a due date rule
       tags:
         - Security Monitoring
@@ -207282,6 +208698,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a due date rule
       tags:
         - Security Monitoring
@@ -207392,6 +208809,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a due date rule
       tags:
         - Security Monitoring
@@ -207475,6 +208893,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all inbox rules
       tags:
         - Security Monitoring
@@ -207560,6 +208979,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create an inbox rule
       tags:
         - Security Monitoring
@@ -207624,6 +209044,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder inbox rules
       tags:
         - Security Monitoring
@@ -207661,6 +209082,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete an inbox rule
       tags:
         - Security Monitoring
@@ -207725,6 +209147,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get an inbox rule
       tags:
         - Security Monitoring
@@ -207822,6 +209245,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update an inbox rule
       tags:
         - Security Monitoring
@@ -207907,6 +209331,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all mute rules
       tags:
         - Security Monitoring
@@ -207996,6 +209421,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a mute rule
       tags:
         - Security Monitoring
@@ -208060,6 +209486,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder mute rules
       tags:
         - Security Monitoring
@@ -208097,6 +209524,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a mute rule
       tags:
         - Security Monitoring
@@ -208163,6 +209591,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a mute rule
       tags:
         - Security Monitoring
@@ -208259,6 +209688,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a mute rule
       tags:
         - Security Monitoring
@@ -208346,6 +209776,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all severity modifier rules
       tags:
         - Security Monitoring
@@ -208435,6 +209866,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a severity modifier rule
       tags:
         - Security Monitoring
@@ -208499,6 +209931,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder severity modifier rules
       tags:
         - Security Monitoring
@@ -208542,6 +209975,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a severity modifier rule
       tags:
         - Security Monitoring
@@ -208614,6 +210048,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a severity modifier rule
       tags:
         - Security Monitoring
@@ -208712,6 +210147,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a severity modifier rule
       tags:
         - Security Monitoring
@@ -208797,6 +210233,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get all ticket creation rules
       tags:
         - Security Monitoring
@@ -208886,6 +210323,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a ticket creation rule
       tags:
         - Security Monitoring
@@ -208950,6 +210388,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Reorder ticket creation rules
       tags:
         - Security Monitoring
@@ -208987,6 +210426,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a ticket creation rule
       tags:
         - Security Monitoring
@@ -209053,6 +210493,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a ticket creation rule
       tags:
         - Security Monitoring
@@ -209153,6 +210594,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a ticket creation rule
       tags:
         - Security Monitoring
@@ -210039,6 +211481,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List assets SBOMs
       tags:
         - "Security Monitoring"
@@ -210128,6 +211571,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get SBOM
       tags:
         - "Security Monitoring"
@@ -210272,6 +211716,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List scanned assets metadata
       tags:
         - "Security Monitoring"
@@ -210540,6 +211985,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of signal-based notification rules
       tags:
         - Security Monitoring
@@ -210622,6 +212068,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new signal-based notification rule
       tags:
         - Security Monitoring
@@ -210654,6 +212101,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a signal-based notification rule
       tags:
         - Security Monitoring
@@ -210717,6 +212165,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get details of a signal-based notification rule
       tags:
         - Security Monitoring
@@ -210809,6 +212258,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a signal-based notification rule
       tags:
         - Security Monitoring
@@ -210921,6 +212371,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Ingest STIX threat intelligence
       tags:
         - Threat Intelligence
@@ -211374,6 +212825,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List vulnerabilities
       tags:
         - "Security Monitoring"
@@ -211485,6 +212937,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of vulnerability notification rules
       tags:
         - Security Monitoring
@@ -211568,6 +213021,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a new vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -211600,6 +213054,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -211664,6 +213119,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get details of a vulnerability notification rule
       tags:
         - Security Monitoring
@@ -211757,6 +213213,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Patch a vulnerability-based notification rule
       tags:
         - Security Monitoring
@@ -211939,6 +213396,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: List vulnerable assets
       tags:
         - "Security Monitoring"
@@ -221204,6 +222662,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get the list of SPDX licenses
       tags:
         - Static Analysis
@@ -225842,6 +227301,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get widgets from an image
       tags:
         - Stegadography
@@ -233370,6 +234830,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Validate API and application keys
       tags:
         - Key Management
@@ -233483,6 +234944,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Search widgets
       tags:
         - Widgets
@@ -233588,6 +235050,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Create a widget
       tags:
         - Widgets
@@ -233644,6 +235107,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Delete a widget
       tags:
         - Widgets
@@ -233717,6 +235181,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Get a widget
       tags:
         - Widgets
@@ -233832,6 +235297,7 @@ paths:
       security:
         - apiKeyAuth: []
           appKeyAuth: []
+        - AuthZ: []
       summary: Update a widget
       tags:
         - Widgets
@@ -234464,6 +235930,7 @@ paths:
 security:
   - apiKeyAuth: []
     appKeyAuth: []
+  - AuthZ: []
 servers:
   - url: https://{subdomain}.{site}
     variables:
@@ -234710,6 +236177,15 @@ tags:
     name: Data Deletion
   - description: Manage and run data observability monitors.
     name: Data Observability
+  - description: |-
+      Manage your Datadog Databricks integration accounts and account resources directly
+      through the Datadog API. See the
+      [Databricks integration page](https://docs.datadoghq.com/integrations/databricks/) for
+      more information.
+    externalDocs:
+      description: Databricks integration.
+      url: https://docs.datadoghq.com/integrations/databricks/
+    name: Databricks Integration
   - description: |-
       Data Access Controls in Datadog is a feature that allows administrators and access managers to regulate
       access to sensitive data. By defining Restricted Datasets, you can ensure that only specific teams or roles can
