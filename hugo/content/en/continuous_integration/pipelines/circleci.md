@@ -114,8 +114,6 @@ Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for 
 
 #### Store job logs
 
-The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration documentation][11].
-
 To enable Log Storage, go to [CI/CD Repository settings][22], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
