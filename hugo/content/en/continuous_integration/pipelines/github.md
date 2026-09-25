@@ -103,13 +103,11 @@ You can also add job failure analysis to a PR comment. See the guide on [using P
 
 #### Store job logs
 
-The GitHub Actions CI Visibility integration also allows you to automatically forward workflow job logs to [Log Management][15].
-
 To enable Log Storage, go to [CI/CD Repository settings][29], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
-Immediately after enabling Log Storage, workflow job logs are forwarded to Datadog Log Management. Log files larger than 1 GiB are truncated.
-
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+
+Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
 ### Correlate infrastructure metrics to jobs
 
