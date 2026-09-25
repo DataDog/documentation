@@ -7189,7 +7189,7 @@ menu:
       weight: 403
     - name: Azure Storage
       identifier: observability_pipelines_azure_storage
-      url: observability_pipelines/destinations/azure_storage/
+      url: observability_pipelines/destinations/datadog_archives/azure_storage/
       parent: observability_pipelines_destinations
       weight: 404
     - name: ClickHouse
@@ -7209,7 +7209,7 @@ menu:
       weight: 407
     - name: Datadog Archives
       identifier: observability_pipelines_destinations_datadog_archives
-      url: observability_pipelines/destinations/datadog_archives/
+      url: observability_pipelines/destinations/datadog_archives/amazon_s3/
       parent: observability_pipelines_destinations
       weight: 409
     - name: Datadog BYOC Logs
@@ -7234,7 +7234,7 @@ menu:
       weight: 413
     - name: Google Cloud Storage
       identifier: observability_pipelines_google_cloud_storage
-      url: /observability_pipelines/destinations/google_cloud_storage/
+      url: /observability_pipelines/destinations/datadog_archives/google_cloud_storage/
       parent: observability_pipelines_destinations
       weight: 414
     - name: Google Pub/Sub
