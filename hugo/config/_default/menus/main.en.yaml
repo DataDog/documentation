@@ -9533,7 +9533,7 @@ menu:
       weight: 204
     - name: Remote Configuration
       url: real_user_monitoring/remote_configuration/
-      parent: rum
+      parent: rum_setup
       identifier: rum_remote_configuration
       weight: 205
     - name: Additional Plugins

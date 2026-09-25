@@ -1,5 +1,5 @@
 
-## Core web vitals
+## Core web vitals {% #event-timings-and-core-web-vitals %}
 
 {% alert level="danger" %}
 Datadog's Core Web Vitals telemetry is available from the [@datadog/browser-rum](https://github.com/DataDog/browser-sdk) package v2.2.0+.

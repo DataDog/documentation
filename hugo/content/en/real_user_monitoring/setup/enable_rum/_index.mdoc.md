@@ -130,7 +130,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {% /tab %}
 {% /tabs %}
 
-**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-resources) to manually track those network calls.
+**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios#manual-resource-collection) to manually track those network calls.
 {% /if %}
 
 <!-- Flutter -->
@@ -181,7 +181,7 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views) to enable automatic tracking of all your views.
+See [Automatically track views](/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views) to enable automatic tracking of all your views.
 {% /if %}
 
 <!-- C / C++ -->

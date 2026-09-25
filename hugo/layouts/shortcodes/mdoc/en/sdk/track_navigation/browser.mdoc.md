@@ -26,4 +26,4 @@ If you use React, Angular, Vue, or another frontend framework, Datadog recommend
 
 For version-specific behavior, CDN setup examples, and framework router integration details (including a React Router example), see [Advanced Configuration][1].
 
-[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#manually-track-pageviews
+[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#override-default-rum-view-names

@@ -1,6 +1,8 @@
 ---
 title: Administer and Extend RUM
 description: "Manage RUM dashboards, monitors, permissions, and correlations with other telemetry."
+aliases:
+  - /real_user_monitoring/platform/
 further_reading:
 - link: '/real_user_monitoring/explorer/'
   tag: 'Documentation'
