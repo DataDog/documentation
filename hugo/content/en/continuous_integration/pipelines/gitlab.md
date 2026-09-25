@@ -432,7 +432,7 @@ You can also add job failure analysis to a PR comment. See the guide on [using P
 
 #### Store job logs
 
-After completing the steps for your GitLab version, go to [CI/CD Repository settings][35], and enable Log Storage at the Datadog organization level or for the desired repositories.
+After completing the steps for your GitLab version, go to [CI/CD Repository settings][35] and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
 
