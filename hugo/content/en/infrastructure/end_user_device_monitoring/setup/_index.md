@@ -44,7 +44,7 @@ Once devices start populating, start exploring End User Devices by:
 1. **Mapping devices to end users with a Reference Table.** On the Settings page, click Edit to upload a mapping between device identifiers, such as hostname, and user attributes such as name, email, and team.
 2. **Asking Bits about device health and trends.** Open [Bits Chat][16] and ask questions about the fleet in natural language. For example, ask which devices are using the most CPU, which laptops have low battery capacity, or which users lost connectivity.
 3. **Querying device data with the Datadog MCP Server.** Connect an AI client, such as Cursor or Claude, to the [Datadog MCP Server][17] to retrieve device metrics, logs, and related telemetry through that client. See [Set up the Datadog MCP Server][18] to get started.
-4. **Review battery health.** Create a dashboard with [battery metrics][20] such as maximum capacity, cycle count, and charge status to identify laptops to replace.
+4. **Reviewing battery health.** Create a dashboard with [battery metrics][20] such as maximum capacity, cycle count, and charge status to identify laptops to replace.
 5. **Track latency to destinations.** Set up [Network Path][7] on monitored devices to measure latency from a device to a destination, such as a SaaS application, and find the hop where delay is introduced. Read [Trace network paths from user devices to SaaS applications][19] for examples.
 
 
