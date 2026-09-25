@@ -1,0 +1,33 @@
+entries:
+  - change_type: modified
+    date: '2026-09-16'
+    link: https://github.com/DataDog/documentation/pull/40000
+    operations:
+      - SearchCostRecommendations
+    title: 'Fix cost recommendations JSON API request schema'
+  - change_type: modified
+    date: '2026-09-14'
+    link: https://github.com/DataDog/documentation/pull/39936
+    operations:
+      - GetCostTagKey
+      - ListCostTagKeys
+      - ListCostTags
+      - GetCostTagDescriptionByKey
+      - ListCostTagDescriptions
+      - UpsertCostTagDescriptionByKey
+      - DeleteCostTagDescriptionByKey
+      - GenerateCostTagDescriptionByKey
+    title: 'Use JSONAPI error schema for cost tag endpoints'
+  - change_type: modified
+    date: '2026-09-14'
+    link: https://github.com/DataDog/documentation/pull/39917
+    operations:
+      - GetBudget
+      - UpsertBudget
+    title: 'Document GetBudget response metadata'
+  - change_type: modified
+    date: '2026-09-14'
+    link: https://github.com/DataDog/documentation/pull/39920
+    operations:
+      - GetBudget
+    title: 'Fix GetBudget costs_unit.id type to integer'

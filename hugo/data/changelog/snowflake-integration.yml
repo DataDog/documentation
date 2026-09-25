@@ -1,0 +1,11 @@
+entries:
+  - change_type: added
+    date: '2026-09-10'
+    link: https://github.com/DataDog/documentation/pull/39835
+    operations:
+      - ListSnowflakeIntegrationAccounts
+      - CreateSnowflakeIntegrationAccount
+      - GetSnowflakeIntegrationAccount
+      - UpdateSnowflakeIntegrationAccount
+      - DeleteSnowflakeIntegrationAccount
+    title: 'Add Integration Accounts v2 API for Snowflake'

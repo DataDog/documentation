@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-09-16'
+    link: https://github.com/DataDog/documentation/pull/39998
+    operations:
+      - CreateDowntime
+      - UpdateDowntime
+      - GetDowntime
+      - ListDowntimes
+    title: 'Document run_as attribute and with_run_as param for downtime v2 API'

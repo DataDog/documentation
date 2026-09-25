@@ -1,0 +1,11 @@
+entries:
+  - change_type: modified
+    date: '2026-09-15'
+    link: https://github.com/DataDog/documentation/pull/39949
+    operations:
+      - ListTwilioIntegrationAccounts
+      - CreateTwilioIntegrationAccount
+      - GetTwilioIntegrationAccount
+      - UpdateTwilioIntegrationAccount
+      - DeleteTwilioIntegrationAccount
+    title: 'Normalize Twilio and Elastic Cloud integration account specs'

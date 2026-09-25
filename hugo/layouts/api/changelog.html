@@ -1,0 +1,149 @@
+{{ define "api-main" }}
+
+{{/* Changelog files are grouped by API tag in data/changelog. This page is the
+     single place where those entries are presented. Entry dates describe when
+     a change was made; they are not API versions. */}}
+{{ $tagSections := slice }}
+{{ $allEntries := slice }}
+{{ $apiMenu := index .Sites.Default.Menus "api" }}
+
+{{ range $tagSlug, $tagData := .Site.Data.changelog }}
+  {{ $tagName := $tagSlug | humanize | title }}
+  {{ range $apiMenu }}
+    {{ if eq .Identifier $tagSlug }}
+      {{ $tagName = .Name }}
+    {{ end }}
+  {{ end }}
+
+  {{ $tagEntries := slice }}
+  {{ range $entry := ($tagData.entries | default slice) }}
+    {{ $rawType := lower ($entry.change_type | default "changed") }}
+    {{ $bucket := $rawType }}
+    {{ $label := $rawType | humanize }}
+    {{ $pillClass := "modified" }}
+
+    {{ if or (eq $rawType "added") (eq $rawType "addition") }}
+      {{ $bucket = "added" }}
+      {{ $label = "Added" }}
+      {{ $pillClass = "added" }}
+    {{ else if or (eq $rawType "modified") (eq $rawType "changed") }}
+      {{ $bucket = "modified" }}
+      {{ $label = "Modified" }}
+    {{ else if or (eq $rawType "deprecated") (eq $rawType "deprecation") }}
+      {{ $bucket = "deprecated" }}
+      {{ $label = "Deprecated" }}
+      {{ $pillClass = "deprecated" }}
+    {{ else if or (eq $rawType "removed") (eq $rawType "breaking") }}
+      {{ $bucket = "breaking" }}
+      {{ $label = "Breaking" }}
+      {{ $pillClass = "breaking" }}
+    {{ end }}
+
+    {{ $normalizedEntry := dict
+      "bucket" $bucket
+      "date" ($entry.date | default "")
+      "label" $label
+      "link" ($entry.link | default "")
+      "operations" ($entry.operations | default slice)
+      "pillClass" $pillClass
+      "tag" $tagSlug
+      "tagName" $tagName
+      "title" ($entry.title | default "API change")
+    }}
+    {{ $tagEntries = $tagEntries | append $normalizedEntry }}
+    {{ $allEntries = $allEntries | append $normalizedEntry }}
+  {{ end }}
+
+  {{ if gt (len $tagEntries) 0 }}
+    {{ $tagEntries = sort $tagEntries "date" "desc" }}
+    {{ $tagSections = $tagSections | append (dict "name" $tagName "slug" $tagSlug "entries" $tagEntries) }}
+  {{ end }}
+{{ end }}
+
+{{ $tagSections = sort $tagSections "name" }}
+{{ $allEntries = sort $allEntries "date" "desc" }}
+{{ $typeFilters := slice
+  (dict "bucket" "added" "label" "Added")
+  (dict "bucket" "modified" "label" "Modified")
+  (dict "bucket" "breaking" "label" "Breaking")
+}}
+
+<div class="col-12 api-changelog py-3">
+  <div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
+    <h2 id="changelog">
+      <a href="#changelog">{{ .Title }}</a>
+    </h2>
+    {{ partial "api/api-copy-btn.html" . }}
+  </div>
+
+  <p class="api-changelog-intro">
+    Review recent changes to Datadog API operations, ordered newest first. Entries are maintained by API product and collected here in one changelog.
+  </p>
+
+  {{ if not $tagSections }}
+    <div class="alert alert-info">
+      No API changes have been published yet.
+    </div>
+  {{ else }}
+    <div class="api-changelog-filterbar">
+      <div class="api-changelog-tabs" role="tablist" aria-label="Filter by change type">
+        <button type="button" class="api-changelog-tab is-active" data-changelog-filter="all">All</button>
+        {{ range $typeFilters }}
+          <button type="button" class="api-changelog-tab" data-changelog-filter="{{ .bucket }}">{{ .label }}</button>
+        {{ end }}
+      </div>
+    </div>
+
+    <div class="api-changelog-timeline">
+      {{ $currentDate := "" }}
+      {{ $lastEntryIndex := sub (len $allEntries) 1 }}
+      {{ range $entryIndex, $entry := $allEntries }}
+        {{ if ne $entry.date $currentDate }}
+          {{ if ne $currentDate "" }}
+              </div>
+            </section>
+          {{ end }}
+          <section id="changes-{{ $entry.date }}" class="api-changelog-date-section{{ if ge $entryIndex 20 }} d-none{{ end }}" data-date="{{ $entry.date }}">
+            <div class="api-changelog-date-header">
+              <h2><a href="#changes-{{ $entry.date }}"><time datetime="{{ $entry.date }}">{{ $entry.date }}</time></a></h2>
+            </div>
+            <div class="api-changelog-entries">
+          {{ $currentDate = $entry.date }}
+        {{ end }}
+
+              <article class="api-changelog-entry{{ if ge $entryIndex 20 }} d-none{{ end }}" data-bucket="{{ $entry.bucket }}">
+                <span class="api-changelog-pill api-changelog-pill--{{ $entry.pillClass }}">{{ $entry.label }}</span>
+                <div class="api-changelog-entry-body">
+                  <div class="api-changelog-entry-meta">
+                    <span class="api-changelog-tag">API product: <strong>{{ $entry.tagName }}</strong></span>
+                  </div>
+                  <h3 class="api-changelog-entry-title">
+                    {{ if $entry.link }}<a href="{{ $entry.link }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}
+                  </h3>
+                  {{ with $entry.operations }}
+                    <div class="api-changelog-operations">
+                      <span>Operations:</span>
+                      {{ range . }}<code>{{ . }}</code>{{ end }}
+                    </div>
+                  {{ end }}
+                </div>
+              </article>
+
+        {{ if eq $entryIndex $lastEntryIndex }}
+            </div>
+          </section>
+        {{ end }}
+      {{ end }}
+    </div>
+
+    <nav id="api-changelog-pagination" class="api-changelog-pagination" aria-label="Changelog pages"></nav>
+
+    <div id="api-changelog-empty-state" class="api-changelog-empty d-none">
+      <p class="api-changelog-empty-title">No changes match your filters</p>
+      <p class="api-changelog-empty-subtitle">Try another change type.</p>
+      <button type="button" class="api-changelog-clear" data-changelog-reset>Clear filters</button>
+    </div>
+  {{ end }}
+</div>
+
+{{ end }}

@@ -171,6 +171,101 @@ if (dataVersionToggles.length) {
     });
 }
 
+// API changelog filters (/api/changelog/)
+const changelogRoot = document.querySelector('.api-changelog');
+
+if (changelogRoot) {
+    const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
+    const dateSections = changelogRoot.querySelectorAll('.api-changelog-date-section');
+    const entries = [...changelogRoot.querySelectorAll('.api-changelog-entry')];
+    const timeline = changelogRoot.querySelector('.api-changelog-timeline');
+    const pagination = document.getElementById('api-changelog-pagination');
+    const clearButtons = changelogRoot.querySelectorAll('[data-changelog-reset]');
+    const emptyState = document.getElementById('api-changelog-empty-state');
+
+    let activeBucket = 'all';
+    let currentPage = 1;
+    const entriesPerPage = 20;
+
+    function renderChangelogPagination(totalPages) {
+        if (!pagination) return;
+
+        pagination.classList.toggle('d-none', totalPages <= 1);
+        if (totalPages <= 1) {
+            pagination.innerHTML = '';
+            return;
+        }
+
+        const pageButtons = Array.from({ length: totalPages }, (_, index) => {
+            const page = index + 1;
+            const isActive = page === currentPage;
+            return `<li class="api-changelog-pagination-item${isActive ? ' is-active' : ''}">
+                <button type="button" data-changelog-page="${page}"${isActive ? ' disabled aria-current="page"' : ''}>${page}</button>
+            </li>`;
+        }).join('');
+
+        pagination.innerHTML = `<ul class="api-changelog-pagination-list">
+            <li class="api-changelog-pagination-item">
+                <button type="button" data-changelog-page="${currentPage - 1}"${currentPage === 1 ? ' disabled' : ''}>Prev</button>
+            </li>
+            ${pageButtons}
+            <li class="api-changelog-pagination-item">
+                <button type="button" data-changelog-page="${currentPage + 1}"${currentPage === totalPages ? ' disabled' : ''}>Next</button>
+            </li>
+        </ul>`;
+
+        pagination.querySelectorAll('[data-changelog-page]:not([disabled])').forEach((button) => {
+            button.addEventListener('click', () => {
+                currentPage = Number(button.dataset.changelogPage);
+                applyChangelogFilters();
+                if (timeline) timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    }
+
+    function applyChangelogFilters() {
+        const matchingEntries = entries.filter(
+            (entry) => activeBucket === 'all' || entry.dataset.bucket === activeBucket
+        );
+        const totalPages = Math.max(1, Math.ceil(matchingEntries.length / entriesPerPage));
+        currentPage = Math.min(currentPage, totalPages);
+        const pageStart = (currentPage - 1) * entriesPerPage;
+        const pageEnd = Math.min(pageStart + entriesPerPage, matchingEntries.length);
+        const visibleEntries = new Set(matchingEntries.slice(pageStart, pageEnd));
+
+        entries.forEach((entry) => entry.classList.toggle('d-none', !visibleEntries.has(entry)));
+
+        dateSections.forEach((section) => {
+            const hasVisibleEntry = [...section.querySelectorAll('.api-changelog-entry')]
+                .some((entry) => visibleEntries.has(entry));
+            section.classList.toggle('d-none', !hasVisibleEntry);
+        });
+
+        if (emptyState) emptyState.classList.toggle('d-none', matchingEntries.length !== 0);
+        renderChangelogPagination(totalPages);
+    }
+
+    filterTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            activeBucket = tab.dataset.changelogFilter;
+            currentPage = 1;
+            filterTabs.forEach((item) => item.classList.toggle('is-active', item === tab));
+            applyChangelogFilters();
+        });
+    });
+
+    clearButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            activeBucket = 'all';
+            currentPage = 1;
+            filterTabs.forEach((tab) => tab.classList.toggle('is-active', tab.dataset.changelogFilter === 'all'));
+            applyChangelogFilters();
+        });
+    });
+
+    applyChangelogFilters();
+}
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();
