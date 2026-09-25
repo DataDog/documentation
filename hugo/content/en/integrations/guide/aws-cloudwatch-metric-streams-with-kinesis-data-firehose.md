@@ -208,6 +208,12 @@ If delivery does not recover, contact [Datadog Support][15] and provide:
 
 **Note**: Restarting delivery affects new records only and does not backfill records that failed during the outage. Records written to the S3 backup are not automatically ingested into Datadog.
 
+### Delivery stream contains data from other sources
+
+The delivery stream connected to Datadog must receive data only from your CloudWatch Metric Stream. If another source, such as a CloudWatch log group subscription filter, writes to the delivery stream, Datadog can't decode the mixed payload.
+
+To fix this, use a dedicated delivery stream for your CloudWatch Metric Stream and remove any log group subscription filters that target it.
+
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
 
