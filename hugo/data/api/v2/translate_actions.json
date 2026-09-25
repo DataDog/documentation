@@ -537,7 +537,7 @@
     "summary": "List Bits AI investigations"
   },
   "TriggerInvestigation": {
-    "description": "Trigger a new Bits AI investigation based on a monitor alert.",
+    "description": "Trigger a Bits AI investigation from a monitor alert or a general investigation.\nThe `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.",
     "summary": "Trigger a Bits AI investigation",
     "request_description": "Trigger investigation request body.",
     "request_schema_description": "Request to trigger a new investigation."
@@ -2601,7 +2601,7 @@
     "request_schema_description": "Request to update an attachment."
   },
   "CreatePageFromIncident": {
-    "description": "Create a page from an incident using the Cases service.",
+    "description": "Create a page from an incident using the Cases service.\n\n**Deprecated**: This endpoint is deprecated. Use\n[Create an on-call page from an incident](#create-an-on-call-page-from-an-incident) instead.",
     "summary": "Create a page from an incident",
     "request_description": "Page creation payload.",
     "request_schema_description": "Request payload for creating a page from an incident."
@@ -2742,6 +2742,30 @@
     "request_description": "Timestamp override patch payload.",
     "request_schema_description": "Request payload for patching a timestamp override."
   },
+  "ListDatabricksIntegrationAccounts": {
+    "description": "List Databricks integration accounts.",
+    "summary": "List Databricks integration accounts"
+  },
+  "CreateDatabricksIntegrationAccount": {
+    "description": "Create a Databricks integration account.",
+    "summary": "Create a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Databricks integration account."
+  },
+  "DeleteDatabricksIntegrationAccount": {
+    "description": "Delete a Databricks integration account.",
+    "summary": "Delete a Databricks integration account"
+  },
+  "GetDatabricksIntegrationAccount": {
+    "description": "Get a Databricks integration account.",
+    "summary": "Get a Databricks integration account"
+  },
+  "UpdateDatabricksIntegrationAccount": {
+    "description": "Update a Databricks integration account. Only the fields provided are changed.",
+    "summary": "Update a Databricks integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Databricks integration account."
+  },
   "ListElasticCloudIntegrationAccounts": {
     "description": "List Elastic Cloud integration accounts.",
     "summary": "List Elastic Cloud integration accounts"
@@ -2765,6 +2789,30 @@
     "summary": "Update an Elastic Cloud integration account",
     "request_description": "",
     "request_schema_description": "Request payload to update an Elastic Cloud integration account."
+  },
+  "ListSnowflakeIntegrationAccounts": {
+    "description": "List Snowflake integration accounts.",
+    "summary": "List Snowflake integration accounts"
+  },
+  "CreateSnowflakeIntegrationAccount": {
+    "description": "Create a Snowflake integration account.",
+    "summary": "Create a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Snowflake integration account."
+  },
+  "DeleteSnowflakeIntegrationAccount": {
+    "description": "Delete a Snowflake integration account.",
+    "summary": "Delete a Snowflake integration account"
+  },
+  "GetSnowflakeIntegrationAccount": {
+    "description": "Get a Snowflake integration account.",
+    "summary": "Get a Snowflake integration account"
+  },
+  "UpdateSnowflakeIntegrationAccount": {
+    "description": "Update a Snowflake integration account. Only the fields provided are changed.",
+    "summary": "Update a Snowflake integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Snowflake integration account."
   },
   "ListTwilioIntegrationAccounts": {
     "description": "List Twilio integration accounts.",
@@ -3602,7 +3650,7 @@
     "summary": "List Agent Observability prompts"
   },
   "CreateLLMObsPrompt": {
-    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.",
+    "description": "Create a new prompt (and its first version) in the Agent Observability prompt registry.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create an Agent Observability prompt",
     "request_description": "Create prompt payload.",
     "request_schema_description": "Request to create an Agent Observability prompt."
@@ -3626,13 +3674,13 @@
     "summary": "List versions of an Agent Observability prompt"
   },
   "CreateLLMObsPromptVersion": {
-    "description": "Create a new version of an existing Agent Observability prompt.",
+    "description": "Create a new version of an existing Agent Observability prompt.\n\n> **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.",
     "summary": "Create a new Agent Observability prompt version",
     "request_description": "Create prompt version payload.",
     "request_schema_description": "Request to create a new version of an Agent Observability prompt."
   },
   "GetLLMObsPromptVersion": {
-    "description": "Get the full template of a single, specific version of an Agent Observability prompt.",
+    "description": "Get the full template and configuration of a single, specific version of an Agent Observability prompt.",
     "summary": "Get a specific Agent Observability prompt version"
   },
   "UpdateLLMObsPromptVersion": {
@@ -4498,7 +4546,7 @@
     "summary": "List your managed organizations"
   },
   "DisableCustomerOrg": {
-    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.",
+    "description": "Disable the Datadog organization associated with the authenticated user or API key.\nThe request body uses JSON:API format. If `org_uuid` is supplied, it must match\nthe authenticated org or the request is rejected. Successful calls disable the org\nand return the resulting state from the downstream service. Requires the\n`org_management` permission.\n\n**Limitations**:\n\n- **Organization age**: Only organizations created within the last 10 days can be disabled\n  through this endpoint. This restriction is a safeguard against accidentally disabling\n  long-running organizations. Attempting to disable an older organization returns a `403 Forbidden`.\n- **Feature flag**: The feature flag `org_disable_self_service_enabled` must be enabled for the\n  target organization or one of its ancestor organizations. Contact\n  [Datadog support](https://docs.datadoghq.com/help/) to enable this for your organization.\n  Requests for organizations without this flag return a `403 Forbidden`.\n- **Already-disabled organizations**: If the target organization is already disabled, the request\n  returns a `409 Conflict`.",
     "summary": "Disable the authenticated customer organization",
     "request_description": "",
     "request_schema_description": "Request payload for disabling the authenticated customer organization."
@@ -6310,6 +6358,10 @@
   "GetSingleEntityContext": {
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get a single entity context"
+  },
+  "GetMatchingSignals": {
+    "description": "Returns the list of security signals that match a given event on the given track.",
+    "summary": "Get signals matching an event"
   },
   "ListSecurityMonitoringRules": {
     "description": "List rules.",

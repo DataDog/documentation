@@ -288,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  ai_credits: [gov, gov2]
   opentelemetry_collector_otlp_export: [gov, gov2]
   remediate_with_ai: [gov, gov2]
   cloudcraft_apm_overlay: [gov, gov2]
@@ -299,7 +300,6 @@ unsupported_sites:
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
   byoc-logs: [gov, gov2]
-  actions: [gov,gov2]
   app_builder_override: [gov2] # docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)
   adaptive_sampling: [gov,gov2]
   advanced_analysis: [gov,gov2]
@@ -423,6 +423,7 @@ unsupported_sites:
   software_delivery_mcp_tools: [gov,gov2]
   status_pages: [gov,gov2]
   storage_management: [gov,gov2]
+  stripe_projects: [us3,us5,eu,gov,gov2,ap1,ap2,uk1]
   supported_deployment_types: [gov,gov2]
   synthetics_email_validation: [gov,gov2]
   synthetics_safari: [gov,gov2]

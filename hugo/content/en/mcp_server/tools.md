@@ -24,7 +24,9 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. Use `toolsets=all` to enable all generally available toolsets (best for clients that support tool filtering to reduce context window usage).
+
+For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -338,6 +340,14 @@ Retrieves detailed information about a specific Watchdog story by its ID.
 
 - Get the details of Watchdog story `abc123`.
 
+### `apm_get_service_health`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
+
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
+
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -440,23 +450,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -464,16 +476,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -482,9 +494,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -498,22 +510,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -1243,6 +1255,128 @@ Copies an existing form, including its latest definition, into a new form with a
 
 - Clone my incident review form to create a template for next quarter.
 
+## Governance
+
+Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+
+<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
+
+The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
+
+### `list_governance_insights`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` or `Metrics Read` or `Events Read` or `Audit Trail Read`*\
+Retrieves governance health insights for your organization, such as the number of unused API keys or the percentage of monitors with team tags. Supports filtering by product and includes computed values and trends by default.
+
+- What are the governance insights for my organization?
+- Show me the governance insights for Monitors.
+- How many unused API keys do we have?
+
+### `list_governance_controls`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the governance [controls][80] for your organization, including each control's detection type, severity, category, detection counts, and mitigation options.
+
+- List all governance controls.
+- Which governance controls have the most active detections?
+
+### `get_governance_control`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance [control][80] by detection type, including its configuration, detection parameters, available mitigations, notification settings, and detection counts.
+
+- Show me the configuration of the `unused_api_keys` control.
+- Which mitigations are available for the `monitors_without_team_tag` control?
+
+### `list_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the detections for a governance control. A detection is a resource that violates the control, such as an unused API key. Supports filtering by state (`active`, `exception`, or `mitigated`) and searching by resource ID or name.
+
+- List the active detections for the `unused_api_keys` control.
+- Which monitors are missing a team tag?
+- Show me the detections marked as exceptions for the `unused_api_keys` control.
+
+### `get_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance detection, including its state, resource details, assignment, mitigation deadline, and notification history.
+
+- Show me the details of detection `abc123` for the `unused_api_keys` control.
+- When is detection `abc123` scheduled for automatic mitigation?
+
+### `list_governance_limits`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists your organization's rate limits and resource limits, with current usage compared to each limit. Use this tool to find resources that are close to or over their limits.
+
+- Which of my rate limits are close to being exceeded?
+- Show me my organization's resource limits and current usage.
+
+### `list_governance_best_practices`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists recommended governance best practices, each with a description, expected impact, priority, and a link to the relevant page in Datadog. Supports filtering by category (`access_governance`, `security`, `compliance`, or `operational_hygiene`) and keyword search.
+
+- What governance best practices should my organization follow?
+- List the security best practices for my organization.
+
+### `list_tag_rules`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Lists your organization's tag rules. A tag rule flags telemetry that is missing a required tag or has a tag value that does not match an allowed pattern. Rules apply to logs, spans, metrics, RUM events, or feed events. Supports filtering by source and including disabled or deleted rules.
+
+- List all tag rules for logs.
+- Show me the disabled tag rules.
+
+### `get_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Retrieves a tag rule by ID, including the tag key it governs, its allowed value patterns, its scope, and whether it is enabled.
+
+- Show me the details of tag rule `abc123`.
+
+### `mitigate_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Runs a mitigation on up to 25 detections for a control, such as revoking unused API keys. You must specify the mitigation type. Use `get_governance_control` to see the mitigations available for a control. Each mitigation also requires the permissions to change the affected resources. Some mitigations cannot be undone. The tool requires explicit confirmation before it runs the mitigation.
+
+- Revoke the unused API keys from detections `abc123` and `def456`.
+- Mitigate all active detections for the `unused_api_keys` control.
+
+### `update_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Updates a governance detection. Use this tool to mark a detection as an exception, reactivate it, assign it to a user or team, or change its automatic mitigation deadline. The tool requires explicit confirmation before it applies changes.
+
+- Mark detection `abc123` as an exception.
+- Assign detection `abc123` to the Platform team.
+- Delay automatic mitigation of detection `abc123` until the end of the month.
+
+### `create_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+
+- Create a tag rule that requires the `team` tag on all logs.
+- Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
+
+### `update_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+
+- Enable tag rule `abc123`.
+- Add `qa` to the allowed values for tag rule `abc123`.
+
+### `delete_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. To delete the rule permanently, ask for a hard delete. The tool requires explicit confirmation before it deletes the rule.
+
+- Delete tag rule `abc123`.
+- Permanently delete tag rule `abc123`.
+
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
@@ -1347,6 +1481,91 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Get the manifest for pod `my-app` in cluster `prod`, namespace `default`.
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
+
+## Metrics Governance
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
 
 ## Live Debugger
 
@@ -1855,7 +2074,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
@@ -1863,7 +2082,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
@@ -1871,7 +2090,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
@@ -1879,7 +2098,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
@@ -2740,6 +2959,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
+[79]: /account_management/governance_console/
+[80]: /account_management/governance_console/controls/
 
 ## Further reading
 
