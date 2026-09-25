@@ -110,11 +110,11 @@ CI jobs failure analysis uses LLM models to compute the analysis for failed CI j
 
 For a full explanation, see the guide on [using CI jobs failure analysis][20].
 
-Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, add your API token in the [CircleCI integration tile][11]. To manage Log Analysis settings, go to [CI/CD Repository settings][22], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Log Analysis settings, go to [CI/CD Repository settings][22], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 #### Store job logs
 
-The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration tile][11].
+The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration documentation][11].
 
 To enable Log Storage, go to [CI/CD Repository settings][22], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
