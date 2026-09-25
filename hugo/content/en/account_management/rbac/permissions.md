@@ -80,7 +80,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles" \
 }'
 ```
 
-The following permissions were previously implicitly assigned to every role but not exposed for configuration through the UI or API. Now, you can enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make these permissions removable and exclude them by default when `default_permissions_opt_out: true` is set:
+The following permissions have long been implicitly assigned to every role but were not previously exposed for configuration through the UI or API. Now, you can enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make these permissions removable and exclude them by default when `default_permissions_opt_out: true` is set:
 
 | Permission | Identifier |
 |---|---|
