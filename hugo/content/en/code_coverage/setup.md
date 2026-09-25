@@ -75,6 +75,18 @@ using [Azure DevOps Source Code integration][2].
 [1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [2]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 {{% /tab %}}
+{{% tab "Bitbucket" %}}
+
+<div class="alert alert-info">
+The integration supports only Bitbucket Cloud repositories and requires a Bitbucket Cloud Premium workspace. Bitbucket Server and Data Center are <strong>not</strong> supported.
+</div>
+
+Install Datadog's [Bitbucket Source Code integration][1] to connect to your Bitbucket repositories. Use the [integration tile][2] or install the integration during onboarding for other Datadog products.
+
+[1]: /integrations/bitbucket-source-code/
+[2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 See [Data Collected][1] for details on what data is collected from your source code provider.
