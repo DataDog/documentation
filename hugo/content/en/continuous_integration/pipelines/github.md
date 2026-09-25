@@ -97,7 +97,7 @@ CI jobs failure analysis uses LLM models to analyze failed CI jobs based on rele
 
 For a full explanation, see the guide on [using CI jobs failure analysis][23].
 
-This feature is enabled by default. To manage Log Analysis settings, go to [CI/CD Repository settings][29], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+Log Analysis is enabled by default in Datadog. To manage Log Analysis settings, go to [CI/CD Repository settings][29], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
 
