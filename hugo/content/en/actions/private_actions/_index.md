@@ -50,7 +50,7 @@ Datadog offers two authorization models. The model a runner uses is set when the
 
 **Execution Policies** apply to runners in the Datadog Agent and are built for managing access at scale. Instead of creating a separate connection for each integration on each runner, you use Agent tags to target one or more sets of runners. Execution Policies also give you fine-grained control: you can allow or deny specific actions or sets of actions, and apply integration-specific scopes, such as the target Kubernetes namespaces for a Kubernetes action.
 
-**Connections** are available for both the runner in the Agent and the standalone runner. They can be attached to at most a single runner. A connection can store credentials for a service. On US1-FED and US2-FED, Connections are the supported authorization model for Private Actions.
+**Connections** are available for both the runner in the Agent and the standalone runner. They can be attached to at most a single runner. A Connection can store credentials for a service. On US1-FED and US2-FED, Connections are the supported authorization model for Private Actions.
 
 To compare the two models and decide which one applies to your runner, see [Authorize private actions][4].
 

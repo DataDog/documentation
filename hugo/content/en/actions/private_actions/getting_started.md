@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Datadog recommends running the private action runner in the Datadog Agent so you can manage runners across a fleet and authorize them with Execution Policies.
+Datadog recommends deploying the private action runner in the Datadog Agent so you can manage runners across a fleet and authorize them with Execution Policies.
 
 <div class="alert alert-danger">On US1-FED and US2-FED sites, the <a href="/actions/private_actions/set_up_standalone">standalone runner</a> is the supported private action runner and <a href="/actions/connections/">Connections</a> are the supported authorization model.</div>
 
