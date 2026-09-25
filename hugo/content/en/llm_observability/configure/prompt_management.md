@@ -290,7 +290,18 @@ const response = await client.chat.completions.create({
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Use this example inside an application function that returns an error, with the request's `ctx`. Import `encoding/json`, `github.com/DataDog/dd-trace-go/v2/llmobs`, and `github.com/openai/openai-go/v3`:
+Add these imports:
+
+```go
+import (
+    "encoding/json"
+
+    "github.com/DataDog/dd-trace-go/v2/llmobs"
+    "github.com/openai/openai-go/v3"
+)
+```
+
+Inside an application function that returns an error, use the request's `ctx`:
 
 ```go
 defaultMessages := []llmobs.ChatTemplateItem{
@@ -485,7 +496,19 @@ The context associates metadata with LLM spans created inside the callback; it d
 
 [Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
 
-Use the application's `client` and request `ctx` inside a function that returns an error. This example uses `fmt`, `github.com/DataDog/dd-trace-go/v2/llmobs`, `github.com/openai/openai-go/v3`, and `github.com/openai/openai-go/v3/responses`:
+Add these imports:
+
+```go
+import (
+    "fmt"
+
+    "github.com/DataDog/dd-trace-go/v2/llmobs"
+    "github.com/openai/openai-go/v3"
+    "github.com/openai/openai-go/v3/responses"
+)
+```
+
+Inside an application function that returns an error, use the application's `client` and request `ctx`:
 
 ```go
 prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
