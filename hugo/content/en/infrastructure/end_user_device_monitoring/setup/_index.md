@@ -41,7 +41,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 
 ## Getting started
 Once devices start populating, start exploring End User Devices by:
-1. **Mapping devices to end users with a Reference Table.** In the settings page, upload a mapping between device identifier, such as hostname, to user attributes such as name, email, and team.
+1. **Mapping devices to end users with a Reference Table.** On the Settings page, click Edit to upload a mapping between device identifiers, such as hostname, and user attributes such as name, email, and team.
 2. **Asking Bits about device health and trends.** Open [Bits Chat][16] and ask questions about the fleet in natural language. For example, ask which devices are using the most CPU, which laptops have low battery capacity, or which users lost connectivity.
 3. **Query device data with the Datadog MCP Server.** Connect an AI client, such as Cursor or Claude, to the [Datadog MCP Server][17] to retrieve device metrics, logs, and related telemetry from that client. Follow [Set up the Datadog MCP Server][18].
 4. **Review battery health.** Create a dashboard with [battery metrics][20] such as maximum capacity, cycle count, and charge status to identify laptops to replace.
