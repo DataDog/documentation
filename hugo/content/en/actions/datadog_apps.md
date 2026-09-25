@@ -237,6 +237,42 @@ The following App Builder features are not available for locally-built apps:
 To change an app's UI or logic, update the code in your local project and re-upload.
 </div>
 
+## Deep links
+
+When an app is [embedded][3], its URL state mirrors into the host page's URL. This includes routes, tabs, hash values, and query parameters. Copying and sharing that host URL opens the app to the same in-app state. Deep links work for embeds in dashboards, notebooks, the Internal Developer Portal, and side panels.
+
+Newly created apps support deep links automatically. For existing apps, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
+
+```shell
+npm install @datadog/apps-frontend@latest
+```
+
+```tsx
+import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
+
+function App() {
+  return (
+    <DatadogAppProvider>
+      {/* your app */}
+    </DatadogAppProvider>
+  );
+}
+```
+
+No other code changes are required. Any `history.pushState`, `history.replaceState`, or hash navigation in the app mirrors into the host page's URL automatically.
+
+To turn off deep links, pass the `datadog.deep-links` module to `disabledModules`:
+
+```tsx
+<DatadogAppProvider disabledModules={['datadog.deep-links']}>
+  {/* your app */}
+</DatadogAppProvider>
+```
+
+<div class="alert alert-info">
+Deep links capture only state held in the app's URL. State held in component state or local storage is not captured.
+</div>
+
 ## Set up CI/CD with GitHub Actions
 
 To automatically upload your app on every push to the `main` branch, use the [`DataDog/apps-github-action`][11] GitHub Action. This action builds your app and uploads it to Datadog.
@@ -341,3 +377,4 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [22]: https://github.com/vercel-labs/skills
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend
+[25]: https://www.npmjs.com/package/@datadog/apps-frontend
