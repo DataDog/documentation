@@ -595,7 +595,7 @@ See [Monitor hybrid React Native applications][19].
 [17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
 [19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
-[20]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
+[20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration

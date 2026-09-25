@@ -48,4 +48,4 @@ The [RUM Debug Symbols page][1] displays the values of these tags. If you find a
 
 
 [1]: https://app.datadoghq.com/source-code/setup/rum
-[2]: /real_user_monitoring/error_tracking/mobile/android/?tab=us#upload-your-mapping-file
+[2]: /error_tracking/frontend/mobile/android/?tab=us#upload-your-mapping-file

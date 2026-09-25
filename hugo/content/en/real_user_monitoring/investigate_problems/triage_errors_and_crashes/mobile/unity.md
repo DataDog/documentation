@@ -13,4 +13,4 @@ further_reading:
   text: Learn about Error Tracking
 ---
 
-{{< include-markdown "real_user_monitoring/application_monitoring/unity/error_tracking" >}}
+{{< include-markdown "error_tracking/frontend/mobile/unity" >}}

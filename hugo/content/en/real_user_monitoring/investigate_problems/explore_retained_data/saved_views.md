@@ -24,7 +24,7 @@ You can also use saved views to share common queries and configurations with you
 
 ## Saved views
 
-To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left above the {{< ui >}}Sessions & Replays{{< /ui >}} tab in the [RUM Explorer][1].
+To access your saved views, expand {{< ui >}} Views{{< /ui >}} to the left above the {{< ui >}}Sessions & Replays{{< /ui >}} tab in the [RUM Explorer][1].
 
 All saved views except for the [default view](#default-views) are shared across the organization, including:
 

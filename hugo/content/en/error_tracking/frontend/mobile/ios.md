@@ -1,6 +1,10 @@
 ---
 title: iOS Crash Reporting and Error Tracking
 description: Enable comprehensive crash reporting and error tracking for iOS applications to monitor and resolve issues with detailed reports.
+aliases:
+- /real_user_monitoring/ios/crash_reporting/
+- /real_user_monitoring/error_tracking/ios
+- /real_user_monitoring/error_tracking/mobile/ios
 type: multi-code-lang
 code_lang: ios
 code_lang_weight: 20

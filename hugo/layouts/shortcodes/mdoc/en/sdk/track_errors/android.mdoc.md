@@ -23,4 +23,4 @@ NdkCrashReports.enable()
 
 Upload your ProGuard/R8 mapping files and NDK symbol files so Datadog can deobfuscate your crash reports. See [Android Crash Reporting and Error Tracking][1] for the full setup, including the Gradle plugin and upload tasks.
 
-[1]: /real_user_monitoring/application_monitoring/android/error_tracking/
+[1]: /error_tracking/frontend/mobile/android/#upload-your-mapping-file

@@ -1,6 +1,11 @@
 ---
 title: Android Crash Reporting and Error Tracking
 description: Set up Error Tracking for your Android applications to monitor crashes, exceptions, and application errors.
+aliases:
+- /real_user_monitoring/application_monitoring/android/error_tracking
+- /real_user_monitoring/error_tracking/android
+- /real_user_monitoring/error_tracking/mobile/android
+- /real_user_monitoring/mobile_and_tv_monitoring/android/error_tracking
 type: multi-code-lang
 code_lang: android
 code_lang_weight: 10

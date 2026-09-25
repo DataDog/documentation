@@ -257,7 +257,7 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [7]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
 [8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
-[10]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[10]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
 [12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
 [13]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform

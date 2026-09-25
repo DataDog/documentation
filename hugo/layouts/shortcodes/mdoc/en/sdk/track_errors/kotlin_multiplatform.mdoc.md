@@ -25,4 +25,4 @@ Upload your Android mapping files and iOS `.dSYM` files so Datadog can deobfusca
 
 [1]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android#automated-error-reporting
 [2]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=ios#automated-error-reporting
-[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/error_tracking/
+[3]: /error_tracking/frontend/mobile/kotlin-multiplatform/

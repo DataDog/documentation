@@ -29,7 +29,7 @@ To get started with RUM for Kotlin Multiplatform, create an application and conf
 
 {{< whatsnext desc="This section includes the following topics:">}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup">}}<u>Setup</u>: Learn how to set up the Kotlin Multiplatform SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/error_tracking">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
+  {{< nextlink href="/error_tracking/frontend/mobile/kotlin-multiplatform">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Kotlin Multiplatform application.{{< /nextlink >}}

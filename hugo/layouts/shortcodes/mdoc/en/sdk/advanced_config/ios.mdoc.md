@@ -859,7 +859,7 @@ For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable
 [5]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=error#error-attributes
 [6]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
-[8]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
+[8]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
 [9]: /real_user_monitoring/application_monitoring/ios/setup
 [10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
 [11]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
