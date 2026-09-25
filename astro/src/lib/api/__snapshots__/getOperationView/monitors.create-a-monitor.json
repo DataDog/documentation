@@ -5206,19 +5206,8 @@
           "entries": [
             {
               "description": "Create a monitor returns \"OK\" response",
-              "code": "\"\"\"\nCreate a monitor returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.monitors_api import MonitorsApi\nfrom datadog_api_client.v1.model.monitor import Monitor\nfrom datadog_api_client.v1.model.monitor_type import MonitorType\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = environ[\"ROLE_DATA_ID\"]\n\nbody = Monitor(\n    name=\"Example-Monitor\",\n    type=MonitorType.LOG_ALERT,\n    query='logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2',\n    message=\"some message Notify: @hipchat-channel\",\n    tags=[\n        \"test:examplemonitor\",\n        \"env:ci\",\n    ],\n    priority=3,\n    restricted_roles=[\n        ROLE_DATA_ID,\n    ],\n)\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = MonitorsApi(api_client)\n    response = api_instance.create_monitor(body=body)\n\n    print(response)\n",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nCreate a monitor returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.monitors_api import MonitorsApi\nfrom datadog_api_client.v1.model.monitor import Monitor\nfrom datadog_api_client.v1.model.monitor_type import MonitorType\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = environ[\"ROLE_DATA_ID\"]\n\nbody = Monitor(\n    name=\"Example-Monitor\",\n    type=MonitorType.LOG_ALERT,\n    query='logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2',\n    message=\"some message Notify: @hipchat-channel\",\n    tags=[\n        \"test:examplemonitor\",\n        \"env:ci\",\n    ],\n    priority=3,\n    restricted_roles=[\n        ROLE_DATA_ID,\n    ],\n)\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = MonitorsApi(api_client)\n    response = api_instance.create_monitor(body=body)\n\n    print(response)\n",
               "syntax": "python"
-            }
-          ]
-        },
-        {
-          "language": "ruby",
-          "label": "Ruby",
-          "entries": [
-            {
-              "description": "Create a monitor returns \"OK\" response",
-              "code": "# Create a monitor returns \"OK\" response\n\nrequire \"datadog_api_client\"\napi_instance = DatadogAPIClient::V1::MonitorsAPI.new\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = ENV[\"ROLE_DATA_ID\"]\n\nbody = DatadogAPIClient::V1::Monitor.new({\n  name: \"Example-Monitor\",\n  type: DatadogAPIClient::V1::MonitorType::LOG_ALERT,\n  query: 'logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2',\n  message: \"some message Notify: @hipchat-channel\",\n  tags: [\n    \"test:examplemonitor\",\n    \"env:ci\",\n  ],\n  priority: 3,\n  restricted_roles: [\n    ROLE_DATA_ID,\n  ],\n})\np api_instance.create_monitor(body)\n",
-              "syntax": "ruby"
             }
           ]
         },
@@ -5228,41 +5217,8 @@
           "entries": [
             {
               "description": "Create a monitor returns \"OK\" response",
-              "code": "// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
-            }
-          ]
-        },
-        {
-          "language": "java",
-          "label": "Java",
-          "entries": [
-            {
-              "description": "Create a monitor returns \"OK\" response",
-              "code": "// Create a monitor returns \"OK\" response\n\nimport com.datadog.api.client.ApiClient;\nimport com.datadog.api.client.ApiException;\nimport com.datadog.api.client.v1.api.MonitorsApi;\nimport com.datadog.api.client.v1.model.Monitor;\nimport com.datadog.api.client.v1.model.MonitorType;\nimport java.util.Arrays;\nimport java.util.Collections;\n\npublic class Example {\n  public static void main(String[] args) {\n    ApiClient defaultClient = ApiClient.getDefaultApiClient();\n    MonitorsApi apiInstance = new MonitorsApi(defaultClient);\n\n    // there is a valid \"role\" in the system\n    String ROLE_DATA_ID = System.getenv(\"ROLE_DATA_ID\");\n\n    Monitor body =\n        new Monitor()\n            .name(\"Example-Monitor\")\n            .type(MonitorType.LOG_ALERT)\n            .query(\n                \"\"\"\nlogs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2\n\"\"\")\n            .message(\"some message Notify: @hipchat-channel\")\n            .tags(Arrays.asList(\"test:examplemonitor\", \"env:ci\"))\n            .priority(3L)\n            .restrictedRoles(Collections.singletonList(ROLE_DATA_ID));\n\n    try {\n      Monitor result = apiInstance.createMonitor(body);\n      System.out.println(result);\n    } catch (ApiException e) {\n      System.err.println(\"Exception when calling MonitorsApi#createMonitor\");\n      System.err.println(\"Status code: \" + e.getCode());\n      System.err.println(\"Reason: \" + e.getResponseBody());\n      System.err.println(\"Response headers: \" + e.getResponseHeaders());\n      e.printStackTrace();\n    }\n  }\n}\n",
-              "syntax": "java"
-            }
-          ]
-        },
-        {
-          "language": "typescript",
-          "label": "TypeScript",
-          "entries": [
-            {
-              "description": "Create a monitor returns \"OK\" response",
-              "code": "/**\n * Create a monitor returns \"OK\" response\n */\n\nimport { client, v1 } from \"@datadog/datadog-api-client\";\n\nconst configuration = client.createConfiguration();\nconst apiInstance = new v1.MonitorsApi(configuration);\n\n// there is a valid \"role\" in the system\nconst ROLE_DATA_ID = process.env.ROLE_DATA_ID as string;\n\nconst params: v1.MonitorsApiCreateMonitorRequest = {\n  body: {\n    name: \"Example-Monitor\",\n    type: \"log alert\",\n    query: `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n    message: \"some message Notify: @hipchat-channel\",\n    tags: [\"test:examplemonitor\", \"env:ci\"],\n    priority: 3,\n    restrictedRoles: [ROLE_DATA_ID],\n  },\n};\n\napiInstance\n  .createMonitor(params)\n  .then((data: v1.Monitor) => {\n    console.log(\n      \"API called successfully. Returned data: \" + JSON.stringify(data)\n    );\n  })\n  .catch((error: any) => console.error(error));\n",
-              "syntax": "typescript"
-            }
-          ]
-        },
-        {
-          "language": "rust",
-          "label": "Rust",
-          "entries": [
-            {
-              "description": "Create a monitor returns \"OK\" response",
-              "code": "// Create a monitor returns \"OK\" response\nuse datadog_api_client::datadog;\nuse datadog_api_client::datadogV1::api_monitors::MonitorsAPI;\nuse datadog_api_client::datadogV1::model::Monitor;\nuse datadog_api_client::datadogV1::model::MonitorType;\n\n#[tokio::main]\nasync fn main() {\n    // there is a valid \"role\" in the system\n    let role_data_id = std::env::var(\"ROLE_DATA_ID\").unwrap();\n    let body =\n        Monitor::new(\n            r#\"logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2\"#.to_string(),\n            MonitorType::LOG_ALERT,\n        )\n            .message(\"some message Notify: @hipchat-channel\".to_string())\n            .name(\"Example-Monitor\".to_string())\n            .priority(Some(3))\n            .restricted_roles(Some(vec![role_data_id.clone()]))\n            .tags(vec![\"test:examplemonitor\".to_string(), \"env:ci\".to_string()]);\n    let configuration = datadog::Configuration::new();\n    let api = MonitorsAPI::with_config(configuration);\n    let resp = api.create_monitor(body).await;\n    if let Ok(value) = resp {\n        println!(\"{:#?}\", value);\n    } else {\n        println!(\"{:#?}\", resp.unwrap_err());\n    }\n}\n",
-              "syntax": "rust"
             }
           ]
         }

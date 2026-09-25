@@ -76,6 +76,11 @@ Nothing under `astro/` may contain:
 `dist/client` and knows nothing about where that output is uploaded. Build-output
 verification belongs here; anything that talks to a cloud provider does not.
 
+One exception: `scripts/lib/websitesSourcesData.ts` reads the `websites-sources`
+data tarball to get the SDK versions `yarn fetch:examples` clones at. Keep that
+read confined to this one file — nothing else under `astro/` should import `tar`
+or know the tarball's URL. Everything above still applies.
+
 ## Commands
 
 - `yarn dev` — Start dev server on port 4321
@@ -115,6 +120,10 @@ Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocke
 These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test -u`. Treat the fixture as the source of truth, not a derived artifact.
 
 The unit Vitest config redirects live spec imports to these fixtures via a plugin in [vitest.unit.config.ts](./vitest.unit.config.ts); the integration config deliberately does not, so it validates against the real upstream data.
+
+[tests/fixtures/api/examples/](./tests/fixtures/api/examples/) is redirected differently — by overriding the `@api-examples` alias rather than by that plugin, because the consumer is an `import.meta.glob` in [codeExampleLoader.ts](./src/lib/api/codeExampleLoader.ts) and a glob resolves its alias before any `resolveId` hook sees a file path. These 24 files are **test inputs only**: `yarn dev` and `yarn build` read the real staged tree in `api-code-examples/`, never the fixture. Each file carries a one-line provenance banner as its first line so a surprising snapshot diff names its own source.
+
+Their language coverage is uneven on purpose. `aws-integration/ListAWSAccounts` carries all six languages in both `v1` and `v2`, which is what pins the `LANGUAGES` table in `codeExampleLoader.ts`; every other operation carries only `.pybeta` and `.go`, enough for a multi-tab render. Add languages to an operation only if a test needs them there.
 
 ## Components
 

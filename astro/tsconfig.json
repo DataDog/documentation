@@ -1,11 +1,28 @@
 {
   "extends": "astro/tsconfigs/strict",
+  // The staged TypeScript SDK examples are standalone programs, not part of
+  // this project — they import packages that aren't dependencies here, and are
+  // only ever read as raw text. Typechecking them fails.
+  //
+  // `dist` is repeated because an `exclude` here replaces the inherited one
+  // rather than adding to it.
+  "exclude": [
+    "${configDir}/dist",
+    "${configDir}/api-code-examples",
+    "${configDir}/tests/fixtures/api/examples"
+  ],
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
+    // Scripts under scripts/ run directly on Node 24's type-stripping, which
+    // erases types but cannot transform syntax that emits code (enum,
+    // namespace, constructor parameter properties). This turns that runtime
+    // constraint into a typecheck failure.
+    "erasableSyntaxOnly": true,
     "plugins": [{ "name": "@astrojs/ts-plugin" }],
     "paths": {
       "@hugo-site/*": ["../hugo/*"],
+      "@api-examples/*": ["./api-code-examples/*"],
       "@shared/*": ["../shared/*"],
       "@websites-modules/*": ["../../../../../../dd/websites-modules/*"],
       "@layouts/*": ["./src/layouts/*"],
