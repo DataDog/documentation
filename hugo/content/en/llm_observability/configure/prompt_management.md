@@ -290,27 +290,48 @@ const response = await client.chat.completions.create({
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Import `context` and `github.com/DataDog/dd-trace-go/v2/llmobs`. Retrieve and format a prompt in an application function, passing the request's context:
+Use this example inside an application function that returns an error, with the request's `ctx`. Import `encoding/json`, `github.com/DataDog/dd-trace-go/v2/llmobs`, and `github.com/openai/openai-go/v3`:
 
 ```go
-func supportPrompt(ctx context.Context, question string) (llmobs.FormattedPrompt, error) {
-    prompt, err := llmobs.GetPrompt(ctx, "customer-support-greeting",
-        llmobs.WithPromptFallback(llmobs.PromptFallback{
-            Template: llmobs.PromptTemplate{
-                Messages: []llmobs.ChatTemplateItem{
-                    {Message: &llmobs.ChatMessage{Role: "system", Content: "You are a support agent for {{company}}."}},
-                    {Message: &llmobs.ChatMessage{Role: "user", Content: "{{question}}"}},
-                },
-            },
-        }),
-    )
-    if err != nil {
-        return llmobs.FormattedPrompt{}, err
-    }
-    return prompt.Format(map[string]any{
-        "company":  "Acme",
-        "question": question,
-    })
+defaultMessages := []llmobs.ChatTemplateItem{
+    {Message: &llmobs.ChatMessage{Role: "system", Content: "You are a support agent for {{company}}."}},
+    {Message: &llmobs.ChatMessage{Role: "user", Content: "{{question}}"}},
+}
+variables := map[string]any{
+    "company":  "Acme",
+    "question": "How do I reset my password?",
+}
+
+prompt, err := llmobs.GetPrompt(ctx, "customer-support-greeting",
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Messages: defaultMessages},
+    }),
+)
+if err != nil {
+    return err
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+    return err
+}
+
+// Convert the formatted messages to the OpenAI client's message type.
+data, err := json.Marshal(rendered.Messages)
+if err != nil {
+    return err
+}
+var messages []openai.ChatCompletionMessageParamUnion
+if err := json.Unmarshal(data, &messages); err != nil {
+    return err
+}
+
+client := openai.NewClient()
+response, err := client.Chat.Completions.New(ctx, openai.ChatCompletionNewParams{
+    Model:    "gpt-4o",
+    Messages: messages,
+})
+if err != nil {
+    return err
 }
 ```
 
@@ -464,48 +485,45 @@ The context associates metadata with LLM spans created inside the callback; it d
 
 [Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
 
-This example uses `context`, `fmt`, `github.com/DataDog/dd-trace-go/v2/llmobs`, `github.com/openai/openai-go/v3`, and `github.com/openai/openai-go/v3/responses`. Pass the application's OpenAI client and request context:
+Use the application's `client` and request `ctx` inside a function that returns an error. This example uses `fmt`, `github.com/DataDog/dd-trace-go/v2/llmobs`, `github.com/openai/openai-go/v3`, and `github.com/openai/openai-go/v3/responses`:
 
 ```go
-func supportResponse(ctx context.Context, client openai.Client, audience, question string) (output string, err error) {
-    prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
-        llmobs.WithPromptFallback(llmobs.PromptFallback{
-            Template: llmobs.PromptTemplate{
-                Text: "You are a helpful support agent writing for a {{audience}} audience.",
-            },
-        }),
-    )
-    if err != nil {
-        return "", err
-    }
-    variables := map[string]any{"audience": audience}
-    systemPrompt, err := prompt.Format(variables)
-    if err != nil {
-        return "", err
-    }
-    combinedPrompt := fmt.Sprintf("%s\n\nUser question: %s", systemPrompt.Text, question)
-
-    span, llmCtx := llmobs.StartLLMSpan(ctx, "customer-support",
-        llmobs.WithModelName("gpt-4o"),
-        llmobs.WithModelProvider("openai"),
-    )
-    defer func() { span.Finish(llmobs.WithError(err)) }()
-    span.Annotate(llmobs.WithAnnotatedPrompt(prompt.Annotation(variables)))
-
-    response, err := client.Responses.New(llmCtx, responses.ResponseNewParams{
-        Model: "gpt-4o",
-        Input: responses.ResponseNewParamsInputUnion{OfString: openai.String(combinedPrompt)},
-    })
-    if err != nil {
-        return "", err
-    }
-    output = response.OutputText()
-    span.AnnotateLLMIO(
-        []llmobs.LLMMessage{{Role: "user", Content: combinedPrompt}},
-        []llmobs.LLMMessage{{Role: "assistant", Content: output}},
-    )
-    return output, nil
+prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{
+            Text: "You are a helpful support agent writing for a {{audience}} audience.",
+        },
+    }),
+)
+if err != nil {
+    return err
 }
+variables := map[string]any{"audience": audience}
+systemPrompt, err := prompt.Format(variables)
+if err != nil {
+    return err
+}
+combinedPrompt := fmt.Sprintf("%s\n\nUser question: %s", systemPrompt.Text, question)
+
+span, llmCtx := llmobs.StartLLMSpan(ctx, "customer-support",
+    llmobs.WithModelName("gpt-4o"),
+    llmobs.WithModelProvider("openai"),
+)
+span.Annotate(llmobs.WithAnnotatedPrompt(prompt.Annotation(variables)))
+
+response, err := client.Responses.New(llmCtx, responses.ResponseNewParams{
+    Model: "gpt-4o",
+    Input: responses.ResponseNewParamsInputUnion{OfString: openai.String(combinedPrompt)},
+})
+if err != nil {
+    span.Finish(llmobs.WithError(err))
+    return err
+}
+span.AnnotateLLMIO(
+    []llmobs.LLMMessage{{Role: "user", Content: combinedPrompt}},
+    []llmobs.LLMMessage{{Role: "assistant", Content: response.OutputText()}},
+)
+span.Finish()
 ```
 
 {{% /tab %}}
