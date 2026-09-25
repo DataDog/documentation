@@ -12,7 +12,6 @@ further_reading:
 
 This guide describes how to set up and use Agent Observability experiments with the Python or Node.js SDK. For complete runnable Node.js examples, see the [Node.js experiments examples](https://github.com/DataDog/llm-observability/tree/main/experiments/nodejs).
 
-
 ## Prerequisites
 
 To run experiments, you need a Datadog API key and application key.
