@@ -289,6 +289,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  ai_credits: [gov, gov2]
   opentelemetry_collector_otlp_export: [gov, gov2]
   remediate_with_ai: [gov, gov2]
   cloudcraft_apm_overlay: [gov, gov2]

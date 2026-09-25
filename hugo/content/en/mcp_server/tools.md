@@ -1255,6 +1255,128 @@ Copies an existing form, including its latest definition, into a new form with a
 
 - Clone my incident review form to create a template for next quarter.
 
+## Governance
+
+Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+
+<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
+
+The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
+
+### `list_governance_insights`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` or `Metrics Read` or `Events Read` or `Audit Trail Read`*\
+Retrieves governance health insights for your organization, such as the number of unused API keys or the percentage of monitors with team tags. Supports filtering by product and includes computed values and trends by default.
+
+- What are the governance insights for my organization?
+- Show me the governance insights for Monitors.
+- How many unused API keys do we have?
+
+### `list_governance_controls`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the governance [controls][80] for your organization, including each control's detection type, severity, category, detection counts, and mitigation options.
+
+- List all governance controls.
+- Which governance controls have the most active detections?
+
+### `get_governance_control`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance [control][80] by detection type, including its configuration, detection parameters, available mitigations, notification settings, and detection counts.
+
+- Show me the configuration of the `unused_api_keys` control.
+- Which mitigations are available for the `monitors_without_team_tag` control?
+
+### `list_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the detections for a governance control. A detection is a resource that violates the control, such as an unused API key. Supports filtering by state (`active`, `exception`, or `mitigated`) and searching by resource ID or name.
+
+- List the active detections for the `unused_api_keys` control.
+- Which monitors are missing a team tag?
+- Show me the detections marked as exceptions for the `unused_api_keys` control.
+
+### `get_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance detection, including its state, resource details, assignment, mitigation deadline, and notification history.
+
+- Show me the details of detection `abc123` for the `unused_api_keys` control.
+- When is detection `abc123` scheduled for automatic mitigation?
+
+### `list_governance_limits`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists your organization's rate limits and resource limits, with current usage compared to each limit. Use this tool to find resources that are close to or over their limits.
+
+- Which of my rate limits are close to being exceeded?
+- Show me my organization's resource limits and current usage.
+
+### `list_governance_best_practices`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists recommended governance best practices, each with a description, expected impact, priority, and a link to the relevant page in Datadog. Supports filtering by category (`access_governance`, `security`, `compliance`, or `operational_hygiene`) and keyword search.
+
+- What governance best practices should my organization follow?
+- List the security best practices for my organization.
+
+### `list_tag_rules`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Lists your organization's tag rules. A tag rule flags telemetry that is missing a required tag or has a tag value that does not match an allowed pattern. Rules apply to logs, spans, metrics, RUM events, or feed events. Supports filtering by source and including disabled or deleted rules.
+
+- List all tag rules for logs.
+- Show me the disabled tag rules.
+
+### `get_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Retrieves a tag rule by ID, including the tag key it governs, its allowed value patterns, its scope, and whether it is enabled.
+
+- Show me the details of tag rule `abc123`.
+
+### `mitigate_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Runs a mitigation on up to 25 detections for a control, such as revoking unused API keys. You must specify the mitigation type. Use `get_governance_control` to see the mitigations available for a control. Each mitigation also requires the permissions to change the affected resources. Some mitigations cannot be undone. The tool requires explicit confirmation before it runs the mitigation.
+
+- Revoke the unused API keys from detections `abc123` and `def456`.
+- Mitigate all active detections for the `unused_api_keys` control.
+
+### `update_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Updates a governance detection. Use this tool to mark a detection as an exception, reactivate it, assign it to a user or team, or change its automatic mitigation deadline. The tool requires explicit confirmation before it applies changes.
+
+- Mark detection `abc123` as an exception.
+- Assign detection `abc123` to the Platform team.
+- Delay automatic mitigation of detection `abc123` until the end of the month.
+
+### `create_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+
+- Create a tag rule that requires the `team` tag on all logs.
+- Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
+
+### `update_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+
+- Enable tag rule `abc123`.
+- Add `qa` to the allowed values for tag rule `abc123`.
+
+### `delete_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. To delete the rule permanently, ask for a hard delete. The tool requires explicit confirmation before it deletes the rule.
+
+- Delete tag rule `abc123`.
+- Permanently delete tag rule `abc123`.
+
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
@@ -2837,6 +2959,8 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
+[79]: /account_management/governance_console/
+[80]: /account_management/governance_console/controls/
 
 ## Further reading
 
