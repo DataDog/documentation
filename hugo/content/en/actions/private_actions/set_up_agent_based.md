@@ -8,16 +8,16 @@ aliases:
 - actions/private_actions/use_private_actions/
 - actions/private_actions/update_private_action_runner/
 further_reading:
-- link: "actions/private_actions/"
+- link: "/actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions"
-- link: "actions/private_actions/enroll_runner"
+- link: "/actions/private_actions/enroll_runner"
   tag: "Documentation"
   text: "Enrollment and ownership"
-- link: "actions/private_actions/execution_policies"
+- link: "/actions/private_actions/execution_policies"
   tag: "Documentation"
   text: "Execution Policies"
-- link: "actions/private_actions/set_up_standalone"
+- link: "/actions/private_actions/set_up_standalone"
   tag: "Documentation"
   text: "Set up a standalone private action runner"
 ---

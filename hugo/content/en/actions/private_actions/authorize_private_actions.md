@@ -3,19 +3,19 @@ title: Authorize Private Actions
 description: "Learn how Datadog authorizes private actions using Execution Policies and Connections."
 disable_toc: false
 further_reading:
-- link: "actions/private_actions/"
+- link: "/actions/private_actions/"
   tag: "Documentation"
   text: "Private Actions Overview"
-- link: "actions/private_actions/enroll_runner/"
+- link: "/actions/private_actions/enroll_runner/"
   tag: "Documentation"
   text: "Enrollment and ownership"
-- link: "actions/private_actions/set_up_agent_based/"
+- link: "/actions/private_actions/set_up_agent_based/"
   tag: "Documentation"
   text: "Set up a private action runner"
-- link: "actions/private_actions/execution_policies/"
+- link: "/actions/private_actions/execution_policies/"
   tag: "Documentation"
   text: "Execution Policies"
-- link: "actions/connections/"
+- link: "/actions/connections/"
   tag: "Documentation"
   text: "Connections"
 ---
@@ -30,7 +30,7 @@ This page explains how that authorization decision is made. It covers the models
 
 A runner is authorized using one of the following models, depending on your Datadog site: [**Execution Policies**](#execution-policies) or [**Connections**](#connections).
 
-<div class="alert alert-danger">On US1-FED and US2-FED, <a href="/actions/connections/">Connections</a> is the supported authorization model.</div>
+<div class="alert alert-danger">On US1-FED and US2-FED, <a href="/actions/connections/">Connections</a> are the supported authorization model.</div>
 
 The model is determined by the runner's ownership, set once when the runner is enrolled. A given runner uses exactly one of these models for its entire lifetime; you cannot mix the two on the same runner. Because ownership is set per runner, a single Agent-based fleet can include both ownerless and owned runners, each authorized by its own model.
 

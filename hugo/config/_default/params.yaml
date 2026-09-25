@@ -327,6 +327,7 @@ unsupported_sites:
   dashboard_anomaly_detection: [gov,gov2]
   bits_remediation: [gov,gov2]
   byoti: [gov, gov2]
+  case_management: [gov2]
   ci_visibility: [gov,gov2]
   cloudcraft_monitors_overlay: [gov,gov2]
   cloudprem: [gov,gov2]
