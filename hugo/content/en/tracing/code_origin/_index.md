@@ -72,7 +72,13 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 | 4.49.0+ | Fastify |
 | 5.54.0+ | Express |
 
-**Note:** NestJS is not supported, even though the underlying framework is either Express or Fastify.
+<div class="alert alert-info">
+  NestJS is not supported, even if the underlying framework is either Express or Fastify.
+</div>
+
+<div class="alert alert-info">
+  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
+</div>
 
 {{% /tab %}}
 
@@ -115,10 +121,6 @@ To enable through the SDK, run your service with the following environment varia
 ```shell
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
-
-<div class="alert alert-info">
-  For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
-</div>
 
 ## Using Code Origin
 
