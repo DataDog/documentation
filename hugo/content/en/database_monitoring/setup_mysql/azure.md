@@ -20,7 +20,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.7, 8.0+, or 9 (MySQL 9 requires Agent 7.84+)
+: 5.7, 8.0+
 
 Supported Azure MySQL deployment types
 : MySQL on Azure VMs, Single Server, Flexible Server (Query Activity and Wait Event collection are not supported for Flexible Server)
