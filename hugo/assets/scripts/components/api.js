@@ -176,21 +176,14 @@ const changelogRoot = document.querySelector('.api-changelog');
 
 if (changelogRoot) {
     const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
-    const tagSelect = document.getElementById('api-changelog-tag-filter');
     const dateSections = changelogRoot.querySelectorAll('.api-changelog-date-section');
     const entries = [...changelogRoot.querySelectorAll('.api-changelog-entry')];
     const timeline = changelogRoot.querySelector('.api-changelog-timeline');
     const pagination = document.getElementById('api-changelog-pagination');
-    const rangeEl = document.getElementById('api-changelog-range');
-    const shownCountEl = document.getElementById('api-changelog-shown-count');
-    const changeLabelEl = document.getElementById('api-changelog-change-label');
-    const tagCountEl = document.getElementById('api-changelog-tag-count');
-    const tagLabelEl = document.getElementById('api-changelog-tag-label');
-    const clearButtons = changelogRoot.querySelectorAll('#api-changelog-clear-filters, [data-changelog-reset]');
+    const clearButtons = changelogRoot.querySelectorAll('[data-changelog-reset]');
     const emptyState = document.getElementById('api-changelog-empty-state');
 
     let activeBucket = 'all';
-    let activeTag = 'all';
     let currentPage = 1;
     const entriesPerPage = 20;
 
@@ -231,19 +224,15 @@ if (changelogRoot) {
     }
 
     function applyChangelogFilters() {
-        const matchingEntries = entries.filter((entry) => {
-            const tagMatches = activeTag === 'all' || entry.dataset.tag === activeTag;
-            const typeMatches = activeBucket === 'all' || entry.dataset.bucket === activeBucket;
-            return tagMatches && typeMatches;
-        });
+        const matchingEntries = entries.filter(
+            (entry) => activeBucket === 'all' || entry.dataset.bucket === activeBucket
+        );
         const totalPages = Math.max(1, Math.ceil(matchingEntries.length / entriesPerPage));
         currentPage = Math.min(currentPage, totalPages);
         const pageStart = (currentPage - 1) * entriesPerPage;
         const pageEnd = Math.min(pageStart + entriesPerPage, matchingEntries.length);
         const visibleEntries = new Set(matchingEntries.slice(pageStart, pageEnd));
-        const shownTags = new Set();
 
-        matchingEntries.forEach((entry) => shownTags.add(entry.dataset.tag));
         entries.forEach((entry) => entry.classList.toggle('d-none', !visibleEntries.has(entry)));
 
         dateSections.forEach((section) => {
@@ -252,22 +241,8 @@ if (changelogRoot) {
             section.classList.toggle('d-none', !hasVisibleEntry);
         });
 
-        if (rangeEl) {
-            rangeEl.textContent = matchingEntries.length === 0
-                ? '0'
-                : pageStart + 1 === pageEnd ? `${pageEnd}` : `${pageStart + 1}–${pageEnd}`;
-        }
-        if (shownCountEl) shownCountEl.textContent = matchingEntries.length;
-        if (changeLabelEl) changeLabelEl.textContent = matchingEntries.length === 1 ? 'change' : 'changes';
-        if (tagCountEl) tagCountEl.textContent = shownTags.size;
-        if (tagLabelEl) tagLabelEl.textContent = shownTags.size === 1 ? 'API product' : 'API products';
         if (emptyState) emptyState.classList.toggle('d-none', matchingEntries.length !== 0);
         renderChangelogPagination(totalPages);
-
-        const isFiltered = activeBucket !== 'all' || activeTag !== 'all';
-        clearButtons.forEach((button) => {
-            if (button.id === 'api-changelog-clear-filters') button.classList.toggle('d-none', !isFiltered);
-        });
     }
 
     filterTabs.forEach((tab) => {
@@ -279,21 +254,11 @@ if (changelogRoot) {
         });
     });
 
-    if (tagSelect) {
-        tagSelect.addEventListener('change', () => {
-            activeTag = tagSelect.value;
-            currentPage = 1;
-            applyChangelogFilters();
-        });
-    }
-
     clearButtons.forEach((button) => {
         button.addEventListener('click', () => {
             activeBucket = 'all';
-            activeTag = 'all';
             currentPage = 1;
             filterTabs.forEach((tab) => tab.classList.toggle('is-active', tab.dataset.changelogFilter === 'all'));
-            if (tagSelect) tagSelect.value = 'all';
             applyChangelogFilters();
         });
     });
