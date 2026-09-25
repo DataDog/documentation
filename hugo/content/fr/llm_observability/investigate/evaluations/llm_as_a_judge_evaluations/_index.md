@@ -105,7 +105,7 @@ Span Input: {{span_input}}
    Vous pouvez également utiliser le panneau sur la droite ({{< ui >}}Filtered Spans{{< /ui >}} dans le périmètre du span, {{< ui >}}Filtered Traces{{< /ui >}} dans le périmètre de la trace, {{< ui >}}Filtered Sessions{{< /ui >}} dans le périmètre de la session) pour ajouter des données de span en tant que variable :
    1. Choisissez un compte et une application afin que les spans, les traces ou les sessions s'affichent sur la droite.
    2. Sélectionnez l'un des spans sur la droite pour afficher son JSON.
-   3. Sélectionnez {{< ui >}}+{{< /ui >}} pour ajouter le JSON à votre invite utilisateur.
+   3. Sélectionnez {{< ui >}}\+{{< /ui >}} pour ajouter le JSON à votre invite utilisateur.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="Le contenu du menu de la vue JSON dans le volet droit de configuration de l'évaluation personnalisée, affichant l'option Add variable to message." style="width:40%;" >}}
 

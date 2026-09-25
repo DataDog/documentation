@@ -5,29 +5,31 @@ further_reading:
   text: Postgres の設定
 - link: /database_monitoring/setup_postgres/rds
   tag: ドキュメント
-  text: Amazon RDS マネージド Postgres のデータベースモニタリングの設定
-title: Postgres RDS 向け Database Monitoring クイック インストール
+  text: Amazon RDS マネージド Postgres の Database Monitoring のセットアップ
+- link: https://www.datadoghq.com/architecture/dbm-quick-install-aws-rds-postgres/
+  tag: Architecture Center
+  text: Datadog DBM Quick Install for AWS RDS
+title: Database Monitoring Quick Install for Postgres RDS
 ---
+Database Monitoring Quick Install for Postgres RDS を使用すると、RDS Postgres インスタンスを監視するための Agent を迅速にセットアップできます。いくつかのオプションを指定すると、Datadog により、監視用にインスタンスを構成する CloudFormation テンプレートを生成されます。また Amazon ECS を使用して、推奨される DBM 構成で RDS インスタンスに Agent がデプロイされます。
 
-Postgres RDS 向け Database Monitoring クイック インストールを使用すると、RDS Postgres インスタンスを監視するための Agent を迅速にセットアップできます。いくつかのオプションを指定すると、Datadog によりインスタンスを監視対象として構成する CloudFormation テンプレートが生成され、Amazon ECS を使用して、推奨される DBM 構成で Agent が RDS インスタンスにデプロイされます。
+## 前提条件 {#prerequisites}
 
-## 前提条件
+- インスタンスの VPC からの着信接続とインターネットへの発信接続を許可するように、インスタンスでセキュリティグループを構成する必要があります。
+- RDS インスタンスの管理者アクセスのユーザー名とパスワードは、AWS Secrets Manager 内の AWS Secret に保存されている必要があります。Datadog はセットアップおよび運用中にこのシークレットを使用して資格情報にアクセスするため、シークレットの Amazon Resource Name (ARN) を必ず控えておいてください。
 
-- インスタンスの VPC からの着信接続とインターネットへの発信接続を許可するには、インスタンスにセキュリティ グループを設定する必要があります。
-- RDS インスタンスの管理者アクセス用のユーザー名とパスワードは、AWS Secrets Manager 内の AWS Secret に保存する必要があります。このシークレットの Amazon Resource Name (ARN) は、必ずメモしておいてください。Datadog は、セットアップ時および運用時にこの ARN を使用して認証情報にアクセスします。
+<div class="alert alert-info">Datadog は管理者資格情報を保存しません。これらは Agent への接続のために一時的に使用されるだけであり、プロセス完了後はデータは保持されません。</div>
 
-<div class="alert alert-info">Datadog は管理者の認証情報を保存しません。この情報は Agent の接続のために一時的に使用されるだけで、処理の完了後にデータが保持されることはありません。</div>
+## インストール {#installation}
 
-## インストール
+1. [[Database Monitoring Setup] (Database Monitoring セットアップ)][1] ページに移動します。
+1. [{{< ui >}}Unmonitored Hosts{{< /ui >}}] (監視対象外ホスト) タブで、Agent をインストールする RDS インスタンスの [{{< ui >}}Add Agent{{< /ui >}}] (エージェントを追加) をクリックします。
+1. アカウントとリージョンの ECS クラスターがインストールされていない場合は、[{{< ui >}}Create Cluster{{< /ui >}}] (クラスターを追加) をクリックします。
+1. [{{< ui >}}Security Group{{< /ui >}}] (セキュリティグループ) ドロップダウンリストからセキュリティグループを選択します。
+1. [{{< ui >}}Select API Key{{< /ui >}}] (API キーを選択) をクリックしてリストから API キーを選択し、[{{< ui >}}Use API Key{{< /ui >}}] (API キーを使用する) をクリックします。
+1. [{{< ui >}}Launch CloudFormation Stack in AWS Console{{< /ui >}}] (AWS コンソールで CloudFormation スタックを起動する) をクリックします。新しいページが開き、AWS CloudFormation 画面が表示されます。提供される CloudFormation テンプレートを使用してスタックを作成します。このテンプレートには、RDS インスタンスを監視するために Agent をデプロイする上で必要な構成が含まれています。
 
-1. [Database Monitoring Setup][1] ページに移動します。
-1. **Unmonitored Hosts** タブで、Agent をインストールする RDS インスタンスの **Add Agent** をクリックします。
-1. ご利用のアカウントおよびリージョンに ECS クラスターが作成されていない場合は、**Create Cluster** をクリックします。
-1. **Security Group** ドロップダウン リストからセキュリティ グループを選択します。
-1. **Select API Key** をクリックし、リストから API キーを選択して、**Use API Key** をクリックします。
-1. **Launch CloudFormation Stack in AWS Console** (AWS コンソールで CloudFormation スタックを起動する) をクリックします。新しいページが開き、AWS CloudFormation の画面が表示されます。提供されている CloudFormation テンプレートを使用してスタックを作成します。テンプレートには、RDS インスタンスを監視するための Agent をデプロイするのに必要な構成が含まれています。
-
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
