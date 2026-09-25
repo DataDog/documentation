@@ -110,11 +110,11 @@ CI jobs failure analysis uses LLM models to compute the analysis for failed CI j
 
 For a full explanation, see the guide on [using CI jobs failure analysis][20].
 
-Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Log Analysis settings, go to [CI/CD Repository settings][22], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Log Analysis settings, go to [CI/CD Repository settings][21], and configure Log Analysis at the Datadog organization level or for the desired repositories.
 
 #### Store job logs
 
-To enable Log Storage, go to [CI/CD Repository settings][22], and enable Log Storage at the Datadog organization level or for the desired repositories.
+To enable Log Storage, go to [CI/CD Repository settings][21], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
 
@@ -148,4 +148,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [18]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [19]: /glossary/#pipeline-execution-time
 [20]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
-[22]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[21]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

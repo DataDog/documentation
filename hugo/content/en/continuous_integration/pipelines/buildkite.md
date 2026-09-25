@@ -69,7 +69,7 @@ To manage Log Analysis settings, go to [CI/CD Repository settings][23], and conf
 
 #### Store job logs
 
-To enable Log Storage, go to [CI/CD Repository settings][23], and enable Log Storage at the Datadog organization level or for the desired repositories.
+After you export job logs from the Buildkite Agent as described above, go to [CI/CD Repository settings][23] and enable Log Storage at the Datadog organization level or for the desired repositories.
 
 Log Storage is billed separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
 

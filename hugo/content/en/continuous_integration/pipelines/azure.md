@@ -146,7 +146,6 @@ Example for enabling the hooks in specified projects:
 [8]: https://marketplace.visualstudio.com/items?itemName=Datadog.ci-visibility
 [12]: https://raw.githubusercontent.com/DataDog/ci-visibility-azure-pipelines/main/service_hooks.py
 [13]: https://learn.microsoft.com/en-us/azure/devops/organizations/accounts/use-personal-access-tokens-to-authenticate?view=azure-devops&tabs=Windows#create-a-pat
-[14]: https://app.datadoghq.com/integrations/azure
 [16]: /integrations/azure_devops/
 
 {{% /tab %}}
