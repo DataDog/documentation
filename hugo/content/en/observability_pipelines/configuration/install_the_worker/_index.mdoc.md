@@ -170,6 +170,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     -f values.yaml \
     --set datadog.apiKey=<DATADOG_API_KEY> \
     --set datadog.pipelineId=<PIPELINE_ID> \
+    --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
     Replace the placeholders with the following values:
@@ -177,6 +178,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<SERVICE_PORT>` and `<TARGET_PORT>`: The Kubernetes Service port and the Worker pod port used to reach the Worker. Set these when using Secrets Management, because the Helm chart's `service.ports` field is empty by default and the Worker's listening port is defined in your secrets manager rather than in this command.
 
 {% /if %}
 
@@ -358,6 +360,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
+    - **Note**: Also set `service.ports[0].port` and `service.ports[0].targetPort` in this file. The Helm chart's `service.ports` field is empty by default, so the Kubernetes Service doesn't expose the Worker unless you set these values.
 7. Run the command provided in the UI to install the Worker.
 8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
@@ -749,6 +752,7 @@ To upgrade the Worker, update the Worker image version in your CloudFormation st
     ```
     --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
+    **Note**: If you use Secrets Management, the Helm chart's `service.ports` field is empty by default. Your secrets manager defines the Worker's port instead of this command. Set `service.ports[0].port` and `service.ports[0].targetPort` in your `values.yaml` file or with the `--set` flag above, or the Kubernetes Service doesn't expose the Worker.
 - If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See also [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
 - If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
