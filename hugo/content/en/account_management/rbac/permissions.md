@@ -48,16 +48,18 @@ Restricted permissions support core parts of the Datadog experience and are auto
 
 The following permissions can be removed directly in the UI. To exclude them when using the [Create Role][4] and [Update a Role][5] APIs, set `default_permissions_opt_out: true` in the request body:
 
-- Dashboards Read (`dashboards_read`)
-- Monitors Read (`monitors_read`)
-- APM Read (`apm_read`)
-- Incidents Read (`incident_read`)
-- RUM Apps Read (`rum_apps_read`)
-- Notebooks Read (`notebooks_read`)
-- SLOs Read (`slos_read`)
-- CI Visibility Read (`ci_visibility_read`)
-- CD Visibility Read (`cd_visibility_read`)
-- Vulnerability Management Read (`appsec_vm_read`)
+| Permission | Identifier |
+|---|---|
+| Dashboards Read | `dashboards_read` |
+| Monitors Read | `monitors_read` |
+| APM Read | `apm_read` |
+| Incidents Read | `incident_read` |
+| RUM Apps Read | `rum_apps_read` |
+| Notebooks Read | `notebooks_read` |
+| SLOs Read | `slos_read` |
+| CI Visibility Read | `ci_visibility_read` |
+| CD Visibility Read | `cd_visibility_read` |
+| Vulnerability Management Read | `appsec_vm_read` |
 
 Example request to create a role without restricted permissions:
 
@@ -80,15 +82,17 @@ curl -X POST "https://api.datadoghq.com/api/v2/roles" \
 
 The following permissions are more restrictive and are not configurable through the UI or API by default. Enable [Minimal Access Roles (Preview)](#minimal-access-roles-preview) to make these permissions removable and exclude them by default when `default_permissions_opt_out: true` is set:
 
-- Built-In Features (`built_in_features`)
-- Metrics Read (`metrics_read`)
-- Timeseries Query (`timeseries_query`)
-- Events Read (`events_read`)
-- Hosts Read (`hosts_read`)
-- User Self Profile Read (`user_self_profile_read`)
-- User Self Profile Write (`user_self_profile_write`)
-- Static Analysis Settings Read (`static_analysis_settings_read`)
-- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
+| Permission | Identifier |
+|---|---|
+| Built-In Features | `built_in_features` |
+| Metrics Read | `metrics_read` |
+| Timeseries Query | `timeseries_query` |
+| Events Read | `events_read` |
+| Hosts Read | `hosts_read` |
+| User Self Profile Read | `user_self_profile_read` |
+| User Self Profile Write | `user_self_profile_write` |
+| Static Analysis Settings Read | `static_analysis_settings_read` |
+| Application Security Management Vulnerability Management Library Read | `appsec_vm_library_read` |
 
 ## Roles
 
@@ -130,15 +134,17 @@ By default, every role includes a foundational set of [restricted permissions](#
 
 Once enabled, the following permissions become removable, allowing you to create restricted roles for specialized workflows:
 
-- Built-In Features (`built_in_features`)
-- Metrics Read (`metrics_read`)
-- Timeseries Query (`timeseries_query`)
-- Events Read (`events_read`)
-- Hosts Read (`hosts_read`)
-- User Self Profile Read (`user_self_profile_read`)
-- User Self Profile Write (`user_self_profile_write`)
-- Static Analysis Settings Read (`static_analysis_settings_read`)
-- Application Security Management Vulnerability Management Library Read (`appsec_vm_library_read`)
+| Permission | Identifier |
+|---|---|
+| Built-In Features | `built_in_features` |
+| Metrics Read | `metrics_read` |
+| Timeseries Query | `timeseries_query` |
+| Events Read | `events_read` |
+| Hosts Read | `hosts_read` |
+| User Self Profile Read | `user_self_profile_read` |
+| User Self Profile Write | `user_self_profile_write` |
+| Static Analysis Settings Read | `static_analysis_settings_read` |
+| Application Security Management Vulnerability Management Library Read | `appsec_vm_library_read` |
 
 If you use `default_permissions_opt_out` in [Terraform role resources][6] or direct API calls, update your automation to account for these additional permissions before enabling Minimal Access Roles.
 
