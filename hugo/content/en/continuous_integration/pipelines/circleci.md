@@ -114,7 +114,7 @@ Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for 
 
 #### Store job logs
 
-The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration documentation][11].
+The Datadog CircleCI integration collects logs from your finished CircleCI jobs and forwards them to Datadog. To install and configure this integration, see the [CircleCI integration tile][11].
 
 To enable Log Storage, go to [CI/CD Repository settings][22], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
@@ -150,4 +150,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [18]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [19]: /glossary/#pipeline-execution-time
 [20]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
-[22]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[22]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

@@ -387,13 +387,7 @@ The following table describes the message and domain correlated with each error 
 
 CI jobs failure analysis uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
-
 For a full explanation, see the guide on [using CI jobs failure analysis][28].
-
-This feature is enabled by default, but requires job log forwarding to be configured in GitLab. See [Store job logs][12].
-
-#### Store job logs
 
 The following GitLab versions support forwarding job logs to Datadog:
 
@@ -433,6 +427,12 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 [1]: https://docs.gitlab.com/ee/administration/feature_flags.html
 {{% /tab %}}
 {{< /tabs >}}
+
+CI jobs failure analysis is enabled by default, but requires job log forwarding to be configured as described above.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
+
+#### Store job logs
 
 After completing the steps for your GitLab version, go to [CI/CD Repository settings][35], and enable Log Storage at the Datadog organization level or for the desired repositories.
 
@@ -500,4 +500,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [32]: /glossary/#running-job
 [33]: https://docs.gitlab.com/ee/ci/yaml/#trigger
 [34]: https://docs.gitlab.com/ee/ci/yaml/#workflowname
-[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[35]: https://app.datadoghq.com/ci/settings/ci-cd/repositories

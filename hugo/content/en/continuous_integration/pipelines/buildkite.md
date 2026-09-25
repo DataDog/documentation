@@ -187,6 +187,6 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [20]: /continuous_integration/pipelines/buildkite/#store-job-logs
 [21]: /logs/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
-[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [24]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
 [25]: /opentelemetry/setup/otlp_ingest/logs/

@@ -162,11 +162,11 @@ You can set custom tags for all pipeline and job spans from your Azure projects 
 
 CI jobs failure analysis uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from Azure Pipelines.
 
-You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
-
 For a full explanation, see the guide on [using CI jobs failure analysis][21].
 
 This feature is enabled by default. To manage Log Analysis settings, go to [CI/CD Repository settings][23], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+
+You can also add job failure analysis to a PR comment. See the guide on [using PR comments][22].
 
 #### Store job logs
 
@@ -198,4 +198,4 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [20]: /glossary/#pipeline-execution-time
 [21]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [22]: /continuous_integration/guides/use_ci_jobs_failure_analysis/#using-pr-comments
-[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=repository
+[23]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
