@@ -13556,10 +13556,11 @@ components:
       description: The request body for deleting multiple rows from a reference table.
       properties:
         data:
-          description: List of row resources to delete from the reference table.
+          description: >-
+            List of row resources to delete from the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/TableRowResourceIdentifier"
-          maxItems: 200
+          maxItems: 45589
           type: array
       required:
         - data
@@ -13673,10 +13674,11 @@ components:
       description: The request body for creating or updating multiple rows into a reference table.
       properties:
         data:
-          description: List of row resources to create or update in the reference table.
+          description: >-
+            List of row resources to create or update in the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/BatchUpsertRowsRequestData"
-          maxItems: 200
+          maxItems: 20971
           type: array
       required:
         - data
@@ -26748,7 +26750,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -27005,10 +27008,12 @@ components:
         - type
       type: object
     CreateUploadRequestDataAttributes:
-      description: Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
+      description: >-
+        Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
+          description: >-
+            The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
           example:
             - "field_1"
             - "field_2"
@@ -27049,7 +27054,8 @@ components:
       x-enum-varnames:
         - UPLOAD
     CreateUploadResponse:
-      description: Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
+      description: >-
+        Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
       properties:
         data:
           $ref: "#/components/schemas/CreateUploadResponseData"
@@ -68143,8 +68149,8 @@ components:
             id: 102.130.113.9
             type: row
         links:
-          first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-          self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+          self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
         meta:
           page:
             next_continuation_token: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
@@ -68167,15 +68173,15 @@ components:
       properties:
         first:
           description: Link to the first page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
           type: string
         next:
           description: Link to the next page of results. Only present when more rows are available.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
         self:
           description: Link to the current page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
       required:
         - self
@@ -68191,7 +68197,8 @@ components:
       description: Contains the continuation token for navigating to the next page of rows.
       properties:
         next_continuation_token:
-          description: Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
+          description: >-
+            Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
           example: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
           type: string
       type: object
@@ -87033,7 +87040,8 @@ components:
         - $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile"
     PatchTableRequestDataAttributesFileMetadataCloudStorage:
       additionalProperties: false
-      description: Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
+      description: >-
+        Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
       properties:
         access_details:
           $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails"
@@ -87132,7 +87140,8 @@ components:
       x-oneOf-parent:
         - GcpDetail
     PatchTableRequestDataAttributesSchema:
-      description: Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
+      description: >-
+        Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
           description: The schema fields. Maximum of 200 columns.
@@ -87142,7 +87151,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
           example:
             - "field_1"
           items:
@@ -87154,7 +87164,8 @@ components:
         - primary_keys
       type: object
     PatchTableRequestDataAttributesSchemaFieldsItems:
-      description: A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
+      description: >-
+        A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
       properties:
         name:
           description: The field name.
@@ -94050,7 +94061,8 @@ components:
           type: string
       type: object
     ReferenceTableCreateSourceType:
-      description: The source type for creating reference table data. Only these source types can be created through this API.
+      description: >-
+        The source type for creating reference table data. Only these source types can be created through this API.
       enum:
         - LOCAL_FILE
         - S3
@@ -94075,7 +94087,8 @@ components:
         - INT32
     ReferenceTableSortType:
       default: "-updated_at"
-      description: Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
+      description: >-
+        Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
       enum:
         - updated_at
         - table_name
@@ -94092,7 +94105,8 @@ components:
         - MINUS_TABLE_NAME
         - MINUS_STATUS
     ReferenceTableSourceType:
-      description: The source type for reference table data. Includes all possible source types that can appear in responses.
+      description: >-
+        The source type for reference table data. Includes all possible source types that can appear in responses.
       enum:
         - LOCAL_FILE
         - S3
@@ -120786,7 +120800,8 @@ components:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails"
           description: Cloud storage access configuration. Only present for cloud storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the last operation (sync for cloud storage, upload for local file).
+          description: >-
+            The error message returned from the last operation (sync for cloud storage, upload for local file).
           type: string
         error_row_count:
           description: The number of rows that failed to process.
@@ -120794,14 +120809,17 @@ components:
           type: integer
         error_type:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType"
-          description: The type of error that occurred during file processing. Only applicable for cloud storage sources.
+          description: >-
+            The type of error that occurred during file processing. Only applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
+          description: >-
+            Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
           type: boolean
       title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
-      description: The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
+      description: >-
+        The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
       enum:
         - TABLE_SCHEMA_ERROR
         - FILE_FORMAT_ERROR
@@ -120910,7 +120928,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -197198,7 +197217,8 @@ paths:
           - timeseries_query
   /api/v2/reference-tables/queries/batch-rows:
     post:
-      description: Batch query reference table rows by their primary key values.  Returns only found rows in the included array.
+      description: >-
+        Batch query reference table rows by their primary key values. Returns only found rows in the included array.
       operationId: BatchRowsQuery
       requestBody:
         content:
@@ -197245,7 +197265,8 @@ paths:
                       type: reference-tables-batch-rows-query
               schema:
                 $ref: "#/components/schemas/BatchRowsQueryResponse"
-          description: Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
+          description: >-
+            Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "403":
@@ -197294,7 +197315,8 @@ paths:
             format: int64
             minimum: 0
             type: integer
-        - description: Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
+        - description: >-
+            Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
           example: "-updated_at"
           in: query
           name: sort
@@ -197800,7 +197822,8 @@ paths:
       x-menu-order: 8
   /api/v2/reference-tables/tables/{id}/rows/list:
     get:
-      description: List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
+      description: >-
+        List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
       operationId: ListReferenceTableRows
       parameters:
         - description: Unique identifier of the reference table to list rows from.
@@ -197821,7 +197844,8 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
+        - description: >-
+            Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
           example: "eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ=="
           in: query
           name: page[continuation_token]
@@ -197844,9 +197868,9 @@ paths:
                         id: 102.130.113.9
                         type: row
                     links:
-                      first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-                      next: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjY5NzA0ODkwNDE4ODA3MTAzOTgsInBrIjoiMTAyLjEzMC4xMjcuMTE3In0%3D&page%5Blimit%5D=100"
-                      self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+                      first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+                      next: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<NEXT_CONTINUATION_TOKEN>"
+                      self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
               schema:
                 $ref: "#/components/schemas/ListRowsResponse"
           description: OK
