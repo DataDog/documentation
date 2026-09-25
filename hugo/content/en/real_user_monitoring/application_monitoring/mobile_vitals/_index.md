@@ -171,7 +171,7 @@ Performance Timeseries is available on the iOS and Android SDKs.
 
 Memory utilization described above is averaged over the lifetime of the view. Performance Timeseries enables you to capture memory and CPU usage every second for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
 
-Once collection is enabled, all sessions get timeseries captured.
+After collection is enabled, all sessions get timeseries captured.
 
 Two series are collected:
 
