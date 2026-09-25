@@ -1,6 +1,9 @@
 ---
 description: Configure los ajustes del SDK de RUM de forma remota para aplicaciones
   de navegador, iOS y Android.
+aliases:
+- /es/real_user_monitoring/guide/remote-config-launchdarkly/
+- /es/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentación
