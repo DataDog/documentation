@@ -17,8 +17,12 @@ The two collect different data and most setups run both. The Kafka metrics recei
 
 ## Kafka metrics receiver
 
+Set `KAFKA_BROKER_ADDRESS` to a broker address in `host:port` format. To list more than one broker, separate the addresses with commas.
+
 {{< tabs >}}
 {{% tab "Host" %}}
+
+Add the receiver to the Collector configuration:
 
 ```yaml
 receivers:
@@ -87,7 +91,7 @@ service:
 
 The JMX Scraper runs as a standalone Java application and sends metrics to the Collector's OTLP receiver.
 
-Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP receiver in its metrics pipeline. For configuration details, see [Set Up the OpenTelemetry Collector][4].
+The [recommended Collector setup][4] receives OTLP over gRPC on port 4317 and includes the OTLP receiver in its metrics pipeline, so you don't need to change the receiver configuration.
 
 ### Configure Kafka brokers
 
@@ -111,15 +115,17 @@ Configure your Collector to receive OTLP metrics over gRPC and enable the OTLP r
 
 2. Set `java.rmi.server.hostname` to the hostname or IP address that the scraper uses to connect. The broker includes this value in an RMI stub, and the scraper opens a second connection to it.
 
-   - Use a loopback address only when the scraper runs on the broker's own host or Pod. Several Kafka distributions and container images, including Confluent Platform, default to loopback.
+   - Use a loopback address only when the scraper runs on the broker's own host or pod. Several Kafka distributions and container images, including Confluent Platform, default to loopback.
    - Do not use `0.0.0.0`. It is a bind address and the scraper cannot connect to it.
-   - In Kubernetes, use the broker Pod IP or a DNS name.
+   - In Kubernetes, use the broker pod IP or a DNS name.
 
    In Kafka container images, `KAFKA_JMX_HOSTNAME` sets `java.rmi.server.hostname`. Set it to the same address.
 
    An unreachable address can allow the initial connection to succeed, but the scrape then fails with `Failed to retrieve RMIServer stub` or `Connection refused to host: <UNREACHABLE_ADDRESS>`.
 
 3. Set `jmxremote.rmi.port` to the same port as `jmxremote.port`. Without a fixed RMI port, the second connection uses a random port that a firewall or port mapping might block.
+
+To scrape producers and consumers, add the same JVM options to those applications.
 
 ### Run the JMX Scraper
 
@@ -137,7 +143,7 @@ apt-get -y install default-jre-headless
 
 Download the JMX Scraper JAR from the [OpenTelemetry Java Contrib releases][201]. Set each address variable in `host:port` format.
 
-Each scraper process scrapes a single JMX endpoint. Run one process per broker, producer, and consumer, using that JVM's address. Then run one or more of the following commands:
+Each scraper process scrapes a single JMX endpoint. Run one process for each broker, producer, and consumer, with that JVM's address:
 
 ```shell
 # Kafka broker
@@ -211,7 +217,7 @@ Run a single instance per JMX endpoint. Multiple replicas scraping the same endp
 
 ## Log collection
 
-See [Log Collection][5] for instructions on how to collect logs using the OpenTelemetry Collector.
+To collect logs with the OpenTelemetry Collector, see [Log Collection][5].
 
 To include Kafka logs in the out-of-the-box Kafka Dashboard, use an attributes processor to add the `source:kafka` tag:
 
@@ -246,7 +252,7 @@ To add this attribute only to Kafka logs, use [include/exclude filtering][6] in 
 
 {{< mapping-table resource="kafka-consumer.csv">}}
 
-**Note:** Datadog replaces hyphens (`-`) with underscores (`_`) in metric names. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
+**Note**: Datadog replaces hyphens (`-`) with underscores (`_`) in metric names. For example, `kafka.producer.request-rate` becomes `kafka.producer.request_rate`.
 
 For the complete mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][7].
 
