@@ -1,5 +1,5 @@
 ---
-title: Dynamic Instrumentation Expression Language
+title: Expression Language for Live Debugger and Dynamic Instrumentation
 private: false
 aliases:
     - /dynamic_instrumentation/expression-language
@@ -8,7 +8,9 @@ aliases:
 
 ## Overview
 
-The Dynamic Instrumentation Expression Language helps you formulate metric instrumentation expressions, span tag values, and instrumentation conditions. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
+[Live Debugger](/tracing/live_debugger/) and [Dynamic Instrumentation](/dynamic_instrumentation/) use this expression language to read values from running code and define conditions, metrics, and span tags. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
+
+Expression support depends on the runtime version and instrumentation location.
 
 Examples:
 - `someVar.someField`
@@ -24,6 +26,7 @@ Generally, the Expression Language supports:
 
 It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
+* Arithmetic such as `i + 1`.
 * Other native programming language syntax beyond what is described on this page.
 
 Try [autocomplete and search (in Preview)](/dynamic_instrumentation/symdb/) for an improved user experience using the Expression Language.
@@ -34,16 +37,17 @@ Expressions can be used to produce metrics and as conditions to emit filtered da
 
 For example, you can create a histogram from the length of a string using `len(data)` as the metric expression. Metric expressions must evaluate to a number.
 
-In span tag values, expressions are delimited from the static parts of the template with brackets, for example: `User name is {user.name}`. Tag value expressions can evaluate to any value.
+In Live Debugger log messages and Dynamic Instrumentation span tag values, enclose expressions in braces, for example: `User name is {user.name}`. These expressions can evaluate to any value.
 
 Instrumentation conditions must evaluate to a Boolean, for example:
  - `startsWith(user.name, "abc")`
  - `len(str) > 20`
  - `a == b`
+ - `user.isActive == true`
 
 ## Contextual variables
 
-The Expression Language provides contextual variables for different instrumentation scenarios: method instrumentation variables (`@return`, `@duration`, `@exception`) are available only when instrumenting entire methods, while collection and dictionary variables (`@it`, `@key`, `@value`) are only available within predicate expressions for filtering and transforming collections.
+The available contextual variables depend on the instrumentation location. `@return` and `@duration` are available at method exit. `@it` is used inside collection predicates.
 
 | Keyword     | Description                                                                |
 |-------------|----------------------------------------------------------------------------|
@@ -51,8 +55,6 @@ The Expression Language provides contextual variables for different instrumentat
 | `@duration` | Provides access to the method call execution duration, as a floating-point value in milliseconds. |
 | `@exception`| Provides access to the exception thrown within the method (only available if an uncaught exception exists). |
 | `@it`       | Provides access to the current element during collection iteration. Used in predicates for list operations. |
-| `@key`      | Provides access to the current key during dictionary iteration. Used in predicates for dictionary operations. |
-| `@value`    | Provides access to the current value during dictionary iteration. Used in predicates for dictionary operations. |
 
 ## General operations
 
@@ -71,7 +73,7 @@ The following examples assume a variable named `myString` with value `Hello, wor
 
 ## Collection operations
 
-When working with collections (lists, maps, and so on), you can use contextual variables in predicates to access elements during iteration. See the [Contextual variables](#contextual-variables) section for details.
+Use `@it` in predicates over sequential collections. See the [Contextual variables](#contextual-variables) section for details.
 
 The following examples assume a variable named `mySequence` with value `[1,2,3,4]` and `myMap` with value `{"a": 1, "b": 2, "c": 3}`:
 
@@ -80,13 +82,15 @@ The following examples assume a variable named `mySequence` with value `[1,2,3,4
 | `len(value_src)` | Gets the collection size. | {{< expression-language-evaluator expression="len(mySequence)" >}} {{< expression-language-evaluator expression="len(myMap)" >}}  |
 | `isEmpty(value_src)` | Checks whether the collection is empty. Equivalent to `len(value_src) == 0`. | {{< expression-language-evaluator expression="isEmpty(mySequence)" >}} {{< expression-language-evaluator expression="isEmpty(myMap)" >}} |
 | `[ i ]`, `[ key ]` | For sequential containers returns the `i`-th item in the collection (where `i` must be an integer). For dictionaries, returns the value that corresponds to the `key` (where `key` must match the key type of the dictionary). If the item does not exist, the expression yields an error or returns null, depending on the language. | {{< expression-language-evaluator expression="mySequence[3]" >}} {{< expression-language-evaluator expression="myMap[\"b\"]" >}} |
-| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference for sequential containers, and with `@key`, `@value` for dictionaries. | {{< expression-language-evaluator expression="any(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="any(myMap, {@value > 2})" >}} |
-| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(mySequence, {@it > 2})" >}} {{< expression-language-evaluator expression="all(myMap, {@key == \"b\"})" >}} |
-| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(mySequence, {@it > 1})" >}} {{< expression-language-evaluator expression="filter(myMap, {@value > 1})" >}} |
+| `any(value_src, {predicate})` | Checks if there is at least one element in the collection that satisfies the given predicate. The current element is accessed with the `@it` reference for sequential containers. | {{< expression-language-evaluator expression="any(mySequence, {@it > 2})" >}} |
+| `all(value_src, {predicate})` | Checks whether every element in a collection satisfies the specified predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="all(mySequence, {@it > 2})" >}} |
+| `filter(value_src, {predicate})` | Filters the elements of the collection using the predicate. The current element is accessed with the `@it` reference. | {{< expression-language-evaluator expression="filter(mySequence, {@it > 1})" >}} |
 
 ## Try your own conditions
 
 This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether data is captured when instrumenting a method.
+
+Expression support and missing-value behavior can differ in your application.
 
 Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see whether data is captured based on your condition.
 
@@ -94,7 +98,7 @@ Available variables in this example:
 
 - `loops`: The route parameter hardcoded to `5`
 - `myString`: A string `"Hello, world!"`
-- `mySequence`: An array of integers `[1, 2, 3]`
+- `mySequence`: An array of integers `[1, 2, 3, 4]`
 - `myMap`: A dictionary `{"a": 1, "b": 2, "c": 3}`
 - `i`: The current loop iteration index
 

@@ -1,6 +1,6 @@
 ---
 title: Live Debugger
-description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
+description: Inspect running applications in real time using non-breaking logpoints that collect logs and variable snapshots without pausing execution or requiring a redeployment.
 content_filters:
   - trait_id: prog_lang
     option_group_id: live_debugger_language_options
@@ -23,8 +23,8 @@ further_reading:
     text: "Dynamic Instrumentation"
   - link: "/dynamic_instrumentation/expression-language/"
     tag: "Documentation"
-    text: "Dynamic Instrumentation Expression Language"
-  - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
+    text: "Expression Language"
+  - link: "/tracing/live_debugger/sensitive-data-scrubbing/"
     tag: "Documentation"
     text: "Sensitive Data Scrubbing"
   - link: "/dynamic_instrumentation/symdb/"
@@ -53,12 +53,18 @@ Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that colle
 
 Live Debugger provides:
 
+- **Dynamic logpoints** (non-breaking breakpoints) placed at any supported code location you choose in your application or third-party libraries.
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
 - **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
-- **Dynamic logpoint placement** anywhere in your codebase, including in third-party libraries.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
 - **Conditional data capture** based on user-defined expressions, so information is collected only when specific conditions are met.
 - **Built-in sensitive data scrubbing** to help prevent exposure of personal data, secrets, and credentials.
+
+## Live Debugger vs. Dynamic Instrumentation
+
+Live Debugger and [Dynamic Instrumentation][38] are built on the same instrumentation technology. They share some overlapping configuration settings and conventions, such as the same [expression language][15] for log message templates and conditions. Both collect data from a code location you choose in a running service, with no code changes, redeploys, or restarts.
+
+They differ in what they capture and how long it lasts. Use Live Debugger to investigate a problem: logpoints capture log events and variable snapshots, and expire when the debug session ends. Use Dynamic Instrumentation to add APM custom instrumentation without modifying source code: dynamic spans, span tags, and metrics stay active until you disable them.
 
 ## Requirements
 
@@ -262,7 +268,7 @@ export DD_SERVICE=<YOUR_SERVICE>
 export DD_ENV=<YOUR_ENV>
 export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-ddtrace-run python -m myapp.py
+ddtrace-run python -m myapp
 ```
 
 {% /if %}
@@ -325,6 +331,10 @@ After you enable Live Debugger, you can check and update the enablement status o
 - {% ui %}Enabled{% /ui %}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {% ui %}Disabled{% /ui %}: Logpoints cannot be created or reactivated on the given service and environment.
 
+### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
+
+Use Live Debugger with your own coding assistant through the `live-debugger` toolset (Preview). See the [Datadog MCP Server documentation][39] for setup and access requirements.
+
 ### Create a logs index {% #create-a-logs-index %}
 
 Live Debugger generates logs that are sent to Datadog and appear alongside your application logs. A dedicated logs index helps ensure these logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11].
@@ -372,32 +382,11 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
-After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. **Note**: If the selected code is not executed or the logpoint condition(s) are not met, then no log events are generated.
+After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. If no useful data appears, see [Troubleshooting](#troubleshooting).
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the {% ui %}Capture Variables{% /ui %} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
-
-#### Mode-based redaction
-
-Live Debugger has two redaction modes:
-
-- {% ui %}Strict Mode{% /ui %}: Redacts all values except numbers and Booleans. [Bits Live Debugger][23] is not available for service and environment combinations set to {% ui %}Strict Mode{% /ui %}.
-- {% ui %}Targeted Mode{% /ui %}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
-
-These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
-
-#### Identifier-based redaction
-
-Variable values associated with common sensitive identifiers (for example, `password`, `accessToken`, and similar terms) are scrubbed before captured data leaves the host. Additional language-specific redaction rules are built into each SDK.
-
-You can extend redaction behavior through:
-
-- Custom identifier-based redaction
-- Class/type-based redaction rules
-- Sensitive Data Scanner rules
-
-See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][17] documentation for configuration details.
+Configure redaction for captured logs and variables using the [sensitive data scrubbing guide][1].
 
 ### Using Bits Live Debugger {% #bits-live-debugger %}
 
@@ -413,12 +402,21 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 
 The following constraints apply to Live Debugger usage and configuration:
 
-- **Configuration scope**: Live Debugger and Dynamic Instrumentation are enabled or disabled together for the same service and environment.
 - **Rate limits**:
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
 
-[1]: /dynamic_instrumentation/sensitive-data-scrubbing/
+## Troubleshooting
+
+If a logpoint produces no useful data, check that:
+
+- The selected service and environment are receiving traffic that executes the instrumented code.
+- The source file and location match the deployed version.
+- The condition matches that traffic, and the log events have no `debugger.snapshot.evaluationErrors`.
+- The [logs index](#create-a-logs-index) retains `source:dd_debugger` events.
+- The values you need are not redacted or outside the capture limits.
+
+[1]: /tracing/live_debugger/sensitive-data-scrubbing/
 [2]: /agent/
 [4]: /tracing/guide/remote_config
 [11]: /logs/log_configuration/indexes/#exclusion-filters
@@ -426,11 +424,10 @@ The following constraints apply to Live Debugger usage and configuration:
 [13]: https://app.datadoghq.com/debugging/
 [14]: https://app.datadoghq.com/apm/traces
 [15]: /dynamic_instrumentation/expression-language/
-[17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
 [23]: /tracing/live_debugger/bits-live-debugger/
-[24]: #mode-based-redaction
+[24]: /tracing/live_debugger/sensitive-data-scrubbing/#mode-based-redaction
 [26]: https://app.datadoghq.com/debugging/settings
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/
@@ -443,3 +440,5 @@ The following constraints apply to Live Debugger usage and configuration:
 [35]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 [36]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [37]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
+[38]: /dynamic_instrumentation/
+[39]: /mcp_server/
