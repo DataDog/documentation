@@ -19,10 +19,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+: 5.6, 5.7, 8.0+, or 9 (MySQL 9 requires Agent 7.84+)
 
 Supported MariaDB versions
-: 10.5, 10.6, 10.11, or 11.1 <br/><br/>
+: 10.5, 10.6, 10.11, 11.1, 12, or 13 (MariaDB 12 and 13 require Agent 7.84+) <br/><br/>
 Database Monitoring for MariaDB is supported with [known limitations][13].
 
 Supported Agent versions
