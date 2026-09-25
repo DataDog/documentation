@@ -67,3 +67,5 @@ You cannot query BYOC Logs indexes alongside other Datadog log indexes. Addition
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/logs/#search-logs
+
+[1]: /api/latest/logs/#search-logs
