@@ -1,5 +1,6 @@
 ---
 title: Datadog Security
+public_title: Datadog Security | Datadog Docs
 aliases:
   - /compliance_monitoring
   - /cloud_siem
