@@ -710,43 +710,43 @@ Provide tool names as a comma-separated list. When both parameters are present, 
 
 These toolsets are generally available. See [Datadog MCP Server Tools][49] for a complete reference of available tools organized by toolset, with example prompts.
 
-- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
-- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
-- `assistant`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations
-- `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
+- `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks.
+- `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs.
+- `assistant`: Tools for interacting with [Bits Chat][73], including sending messages, retrieving conversation history, and listing conversations.
+- `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
 - `code-exec`: Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][76] for more information.
-- `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
-- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
-- `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
-- `dbm`: Tools for interacting with [Database Monitoring][33]
-- `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
-- `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
-- `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments
-- `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters
-- `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments
-- `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38]
-- `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset
-- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration
-- `product-analytics`: Tools for interacting with [Product Analytics][41] queries
-- `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data
-- `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage
-- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics
-- `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40]
-- `sheets`: Tools for creating, reading, updating, and deleting [Datadog spreadsheets][75]
-- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31])
-- `synthetics`: Tools for interacting with Datadog [Synthetic tests][29]
+- `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings.
+- `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation.
+- `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
+- `dbm`: Tools for interacting with [Database Monitoring][33].
+- `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources.
+- `error-tracking`: Tools for interacting with Datadog [Error Tracking][32].
+- `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
+- `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
+- `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
+- `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].
+- `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
+- `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
+- `product-analytics`: Tools for interacting with [Product Analytics][41] queries.
+- `profiling`: Tools for discovering, exploring, and analyzing [Continuous Profiler][58] data.
+- `reference-tables`: Tools for managing [Reference Tables][48], including listing tables, reading rows, appending rows, and creating tables from cloud storage.
+- `rum`: Tools for [Real User Monitoring][57], including resolving applications, summarizing performance, surfacing aggregated insights, monitoring and managing operations, exploring metrics, managing retention filters, and managing custom RUM metrics.
+- `security`: Tools for code security scanning and searching [security signals][39] and [security findings][40].
+- `sheets`: Tools for creating, reading, updating, and deleting [Datadog spreadsheets][75].
+- `software-delivery`: Tools for interacting with Software Delivery ([CI Visibility][30] and [Test Optimization][31]).
+- `synthetics`: Tools for interacting with Datadog [Synthetic tests][29].
 - `widgets`: Tools for [dashboard][46] and [notebook][54] widget visualization, validation, and type conversion.
-- `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use
+- `workflows`: Tools for [Workflow Automation][43], including listing, inspecting, executing, and configuring workflows for agent use.
 
 ### Preview toolsets
 
 These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
-- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation.
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
-- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules
-- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting
-- `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment
-- `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
+- `governance`: Tools for [Governance Console][78], including governance insights, controls, detections, mitigations, limits, best practices, and tag rules.
+- `investigator`: Tools for triggering, searching, and steering [Bits Investigation][74] investigations for monitor alerts, incidents, and general troubleshooting.
+- `live-debugger`: Tools for debugging running applications with [Live Debugger][77] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+- `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent.
 
 ## Supported clients
 
