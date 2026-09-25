@@ -1,28 +1,28 @@
 ---
-description: 評価リクエストでルールをインラインで送信して Deployment Gates を評価します。Datadog に事前にゲートを作成しておく必要はありません。
+description: 評価リクエストでルールをインラインで送信してデプロイメントゲートを評価します。Datadog に事前にゲートを作成しておく必要はありません。
 further_reading:
 - link: /deployment_gates/setup/preconfigured
   tag: ドキュメント
-  text: 事前構成済み Deployment Gates をセットアップする
+  text: 事前構成されたデプロイメントゲートをセットアップする
 - link: /deployment_gates/explore
   tag: ドキュメント
-  text: Deployment Gates エクスプローラーについて学ぶ
+  text: デプロイメントゲートエクスプローラーについて
 - link: /api/latest/deployment-gates
   tag: API リファレンス
-  text: Deployment Gates API リファレンス
-title: Just-In-Time (JIT) Deployment Gates をセットアップする
+  text: デプロイメントゲート API リファレンス
+title: Just-In-Time (JIT) デプロイメントゲートをセットアップする
 ---
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates はプレビュー版です。この機能にご興味がある場合は、フォームに記入してアクセスをリクエストしてください。
+デプロイメントゲートはプレビュー版です。この機能に関心がある場合は、フォームに記入してアクセスをリクエストしてください。
 {{< /callout >}}
 
-**Just-In-Time (JIT)** Deployment Gates では、ルールは評価リクエスト内にインラインで定義されます。Datadog に事前にゲートを作成しておく必要がないため、ルールアズコードやデプロイごとの柔軟性に適しています。
+**Just-In-Time (JIT)**デプロイメントゲートでは、ルールは評価リクエスト内にインラインで定義されます。Datadog に事前にゲートを作成しておく必要がないため、JIT はルールアズコードやデプロイごとの柔軟性に適しています。
 
-Datadog UI、API、または Terraform で管理される永続的なゲートが必要な場合は、[事前構成済み Deployment Gates][5] をご覧ください。
+Datadog UI、API、または Terraform で管理する永続的なゲートが必要ですか？[事前構成されたデプロイメントゲート][5] を参照してください。
 
 ## 構成 {#configuration}
 
-`configuration` の例:
+例 `configuration`:
 
 ```json
 {
@@ -42,37 +42,39 @@ Datadog UI、API、または Terraform で管理される永続的なゲート�
 }
 ```
 
-トップレベルフィールド:
+最上位のフィールド:
 
-- `rules` (必須): 1つ以上のルールエントリ。ゲートに合格するには、すべてのルールに合格する必要があります。
-- `dry_run`(オプション): `true` の場合、API では常に `pass` が返されますが、UI には実際の評価結果が記録されます。オンボーディングに役立ちます。[初回オンボーディングの推奨事項](#recommendation-for-first-time-onboarding)を参照してください。
+- `rules` (必須): 1 つ以上のルールエントリー。ゲートが合格するには、すべてのルールに合格する必要があります。
+- `dry_run`(オプション): `true` の場合、実際の評価結果は UI に記録されますが、ゲートは常に API 経由で `pass` を返します。オンボーディングに役立ちます。[初めてオンボーディングを行う際の推奨事項](#recommendation-for-first-time-onboarding)を参照してください。
 
-各ルールには以下のフィールドがあります。
+各ルールには以下のフィールドがあります:
 
-- `type` (必須): ルールのタイプ。`monitor` または `faulty_deployment_detection`。各タイプが何を評価するかについては、[ルールタイプ](#rule-types)を参照してください。
-- `name`(必須): [[Deployment Gates Evaluations] (Deployment Gates の評価)][6] ページに表示される、人間が判読可能なラベル。
+- `type` (必須): ルールタイプ (`monitor` または `faulty_deployment_detection`)。各ルールの評価内容については、[ルールタイプ](#rule-types)を参照してください。
+- `name`(必須): [Deployment Gates Evaluations][6] (デプロイメントゲート評価) ページに表示される、人間が判読可能なラベル。
 - `options`(必須): ルール固有の設定。[ルールタイプ](#rule-types)を参照してください。
 - `dry_run`(オプション): ルールごとのドライランのオーバーライド。ゲートレベルの `dry_run` をオーバーライドします。
 
 ## ルールタイプ {#rule-types}
 
-完全なスキーマおよび利用可能なすべてのオプションについては、[Deployment Gates API リファレンス][4]を参照してください。
+完全なスキーマおよび利用可能なすべてのオプションについては、[デプロイメントゲート API リファレンス][4]を参照してください。
 
 {{< tabs >}}
 {{% tab "モニター" %}}
-モニタールールは、設定可能な期間にわたって一連のモニターの状態を評価します。評価期間中に以下のいずれかの状態になると失敗します。
+モニタールールは、構成可能な期間にわたって一連のモニターの状態を評価します。`query` または `monitor_ids` のいずれかでモニターを選択します。この 2 つのオプションは相互に排他的です。評価期間中に以下のいずれかが発生した場合、ルールは失敗する可能性があります。
 
-- クエリに一致するモニターがない。
-- 50 個を超えるモニターがクエリに一致する。
-- 一致するいずれかのモニターが `ALERT` または `NO_DATA` の状態である。
+- 構成された選択条件に一致するモニターグループがありません。
+- 明示的なモニター ID が存在しないか、組織で利用できません。
+- 構成された選択条件に 300 を超えるモニターが一致しています。
+- 一致するモニターグループがいずれも `ALERT` または `NO_DATA` 状態です。
 
 **オプション**:
 
-- `query`: [モニターの検索構文][1]に基づくモニター検索クエリ。モニタータグでフィルタリングします。
+- `query`: [検索モニター構文][1] に基づくモニター検索クエリ。モニタータグでフィルタリングします。
   - モニターの静的タグ: `service:transaction-backend`
   - モニターのクエリ内のタグ: `scope:"service:transaction-backend"`
-  - [モニターグループ][2]内のタグ: `group:"service:transaction-backend"`
-- `duration`: 一致するモニターが評価される期間 (秒単位)。デフォルトは 0 です (モニターは即座に評価されます)。最大値は 7200 秒 (2 時間) です。
+  - [モニターのグループ化][2]内のタグ: `group:"service:transaction-backend"`
+- `monitor_ids`: 特定のモニターのリスト。各項目には、10 進数のモニター `id` と正確なグループ名からなる `groups` 配列が含まれています。空の `groups` 配列は、そのモニターのすべてのグループを評価します。
+- `duration`: 選択したモニターが評価される期間 (秒単位)。デフォルトは 0 です (モニターは即座に評価されます)。最大値は 7200 秒 (2 時間) です。
 
 インラインルールの例:
 
@@ -87,26 +89,41 @@ Datadog UI、API、または Terraform で管理される永続的なゲート�
 }
 ```
 
+```json
+{
+  "type": "monitor",
+  "name": "Specific monitors",
+  "options": {
+    "monitor_ids": [
+      {"id": "12345678", "groups": []},
+      {"id": "87654321", "groups": ["service:api"]}
+    ],
+    "duration": 300
+  }
+}
+```
+
 **注**:
-- `group` フィルターは、一致するグループのみを評価します。
-- ミュートされたモニターは評価から自動的に除外されます (クエリには常に `muted:false` が含まれます)。
+- `group` クエリフィルターと `monitor_ids[].groups` は、一致するグループのみを評価します。
+- 存在しないか、組織で利用できない明示的なモニター ID は、ルールが失敗する原因となります。モニターが存在するもののミュートされているか、選択されたグループにデータがないために除外される場合、ルールは一致するグループがない動作を適用します。
+- ミュートされたモニターは、両方の選択モードから自動的に除外されます。
 
 [1]: /ja/monitors/manage/search/
 [2]: /ja/monitors/manage/#triggered-monitors
 {{% /tab %}}
-{{% tab "APM デプロイメント不良検出" %}}
-このルールタイプは、Watchdog の [APM デプロイメント不良検出][1]分析を使用して、デプロイされたバージョンを同じサービスの以前のバージョンと比較します。この分析では以下を検出します。
+{{% tab "APM Faulty Deployment Detection" %}}
+このルールタイプは、Watchdog の [APM Faulty Deployment Detection][1] 解析を使用して、デプロイバージョンと同一サービスの以前のバージョンを比較します。この解析によって以下が検出されます。
 
-- 新しいタイプのエラー。
-- 以前のバージョンと比較したエラー率の著しい増加。
+- 新しいエラーのタイプ。
+- 以前のバージョンと比較したエラー率の大幅な増加。
 
-この分析は、APM で計測されたすべてのサービスに対して自動的に実行されるため、事前の設定は不要です。
+解析はすべての APM インスツルメンテーションサービスに対して自動的に実行され、事前の設定は不要です。
 
 **オプション**:
 
-- `duration`: 分析を実行する期間 (秒単位)。分析の信頼性を最適化するため、この値はデプロイ開始後少なくとも 900 秒 (15 分) に設定してください。最大値は 7200 秒 (2 時間) です。
-- `allowed_resources`(オプション): 分析に含める [APM リソース][2]。指定した場合、リストされたリソースのみが分析されます。`excluded_resources` とは相互に排他的です。
-- `excluded_resources`(オプション): 無視する [APM リソース][2] (低ボリュームや低優先度のエンドポイントなど)。`allowed_resources` とは相互に排他的です。
+- `duration`: 解析が実行される時間 (秒単位)。最適な解析の信頼性を確保するため、この値はデプロイ開始後少なくとも 900 秒 (15 分) でなければなりません。最大値は 7200 秒 (2 時間) です。
+- `allowed_resources`(オプション): 解析に含める [APM リソース][2]。指定された場合、リストにあるリソースのみが解析されます。`excluded_resources` とは相互に排他的です。
+- `excluded_resources`(オプション): 無視する [APM リソース][2] (例: 低ボリュームまたは優先度の低いエンドポイント)。`allowed_resources` とは相互に排他的です。
 
 インラインルールの例:
 
@@ -122,8 +139,8 @@ Datadog UI、API、または Terraform で管理される永続的なゲート�
 ```
 
 **注**:
-- このルールは、[追加のプライマリタグ][3]値ごとに評価されるほか、集計分析でも評価されます。単一のプライマリタグのみを考慮するには、リクエスト属性でそれを `primary_tag` として指定します。
-- 新しいエラーとエラー率の増加はリソースレベルで検出されます。
+- このルールは各 [追加のプライマリタグ][3] の値と集計解析の両方について評価されます。単一のプライマリタグのみを考慮するには、リクエスト属性で `primary_tag` として指定します。
+- リソースレベルで新しいエラーやエラー率の増加が検出されます。
 - このルールタイプは、`database` または `inferred service` としてマークされたサービスをサポートしていません。
 
 [1]: /ja/watchdog/faulty_deployment_detection/
@@ -134,11 +151,11 @@ Datadog UI、API、または Terraform で管理される永続的なゲート�
 
 ## パイプラインからゲートを評価する {#evaluate-a-gate-from-your-pipeline}
 
-デプロイメントパイプラインからいくつかの方法でゲート評価をリクエストできます。`datadog-ci` CLI、Argo Rollouts インテグレーション、および GitHub Action は、キャメルケースのキー (`dryRun`) を使った JSON 設定ファイルでインラインルールを受け付けます。直接 API 呼び出しと汎用スクリプトでは、API スキーマに合わせたスネークケースのキー (`dry_run`) を使用して、同じ設定をリクエストペイロードで送信します。
+デプロイメントパイプラインからゲート評価をリクエストするには、いくつかの方法があります。`datadog-ci` CLI、Argo Rollouts インテグレーション、および GitHub Action は、キャメルケースキー (`dryRun`) を使用する JSON 構成ファイルを介してインラインルールを受け入れます。直接 API 呼び出しと汎用スクリプトは、API スキーマと一致するスネークケースキー (`dry_run`) を使用して、リクエストペイロードで同じ更新を送信します。
 
 {{< tabs >}}
 {{% tab "datadog-ci CLI" %}}
-[datadog-ci][1] `deployment gate` コマンドは、単一のコマンドで評価を実行します。`--config` フラグを使用して JSON 設定ファイルを渡します。
+[datadog-ci][1] `deployment gate`コマンドは、単一のコマンドで評価を実行します。`--config`フラグを使用して JSON 構成定ファイルを渡します。
 
 ```bash
 datadog-ci deployment gate --service transaction-backend --env production --version 1.2.3 --config ./gate-config.json
@@ -172,20 +189,20 @@ datadog-ci deployment gate --service transaction-backend --env production --vers
 
 コマンド:
 
-- ゲート評価を開始するためのリクエストを送信し、評価が完了するまでブロックします。
-- 評価を待機する時間のタイムアウトを構成できます。
-- エラーに対する組み込みの自動再試行機能を備えています。
-- 予期しない Datadog エラー時の動作をカスタマイズするための `--fail-on-error` を受け入れます。
+- ゲート評価を開始するリクエストを送信し、評価が完了するまでブロックします。
+- 評価の待機時間を構成できるタイムアウトを提供します。
+- エラーに対する組み込みの自動再試行機能があります。
+- 予期しない Datadog エラー時の動作をカスタマイズするための `--fail-on-error` を受け付けます。
 
-`deployment gate` コマンドは、datadog-ci バージョン v3.17.0 以降で使用できます。`--config` フラグには、バージョン v5.19.0 以降が必要です。
+`deployment gate` コマンドは、datadog-ci バージョン v3.17.0 以上で使用可能です。`--config` フラグにはバージョン v5.19.0 以上が必要です。
 
 **必要な環境変数**:
 
 - `DD_API_KEY`: [API キー][2]。
 - `DD_APP_KEY`: [アプリケーションキー][3]。
-- `DD_BETA_COMMANDS_ENABLED=1`: `deployment gate` コマンドはプレビューコマンドです。
+- `DD_BETA_COMMANDS_ENABLED=1`: `deployment gate` コマンドはプレビュー版コマンドです。
 
-完全な構成オプションと使用例については、[`deployment gate` コマンドのドキュメント][4]を参照してください。
+完全な構成オプションと使用例については、[`deployment gate` コマンドのドキュメント][4] を参照してください。
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -194,15 +211,15 @@ datadog-ci deployment gate --service transaction-backend --env production --vers
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
-[AnalysisTemplate][1] または [ClusterAnalysisTemplate][1] を作成して、Argo Rollouts Kubernetes リソースから Deployment Gates を呼び出します。このテンプレートは、[datadog-ci deployment gate コマンド][7]を実行して Deployment Gates API とやり取りします。
+[AnalysisTemplate][1] または [ClusterAnalysisTemplate][1] を作成して、Argo Rollouts Kubernetes Resource からデプロイメントゲートを呼び出します。このテンプレートは、[datadog-ci デプロイメントゲートコマンド][7] を実行して、Deployment Gates API とのやり取りを行います。
 
-以下のテンプレートを参考にしてください。
+以下のテンプレートを開始点として使用します。
 
-- `<YOUR_DD_SITE>` を [Datadog サイト名][2]に置き換えます (例:{{< region-param key="dd_site" code="true" >}})。
-- [API キー][5]と[アプリケーションキー][6]を環境変数として定義します。この例では、`datadog` という名前の [Kubernetes Secret][3] を使用し、`api-key` と `app-key` という 2 つのデータ値を含めています。`valueFrom` の代わりに `value` を使用して、値をプレーンテキストで渡すこともできます。
-- `--config` フラグをサポートする datadog-ci イメージバージョン (バージョン v5.19.0 以降) を使用してください。
+- `<YOUR_DD_SITE>`を [Datadog サイト名][2] (例:{{< region-param key="dd_site" code="true" >}}) に置き換えます。
+- [API キー][5] と [アプリケーションキー][6] を環境変数として定義します。この例では、`datadog` と呼ばれる [Kubernetes Secret][3] と、`api-key` および `app-key` の 2 つのデータ値を使用しています。`value` の代わりに `valueFrom` を使用して、値をプレーンテキストで渡すこともできます。
+- `--config` フラグをサポートする datadog-ci イメージバージョン (バージョン v5.19.0 以上) を使用します。
 
-ゲート設定を ConfigMap に保存し、それをジョブにマウントして、`--config` を CLI に渡します。
+ゲート設定を ConfigMap に保存し、それをジョブにマウントしてから、`--config` を CLI に渡します。
 
 ```yaml
 apiVersion: v1
@@ -282,11 +299,11 @@ spec:
                       name: gate-config
 ```
 
-- 分析テンプレートは、Rollout リソースから引数を受け取ることができます (`service`、`env`、`version`)。詳細については、[Argo Rollouts の公式ドキュメント][4]を参照してください。
-- `ttlSecondsAfterFinished`は、完了したジョブを 5 分後に削除します。
-- `backoffLimit`が 0 に設定されているのは、ゲート評価が失敗した場合にジョブを再試行すべきではないためです。
+- 分析テンプレートは、Rollout リソースから引数 (`service`、`env`、`version`) を受け取ることができます。詳細については、[Argo Rollouts の公式ドキュメント][4] を参照してください。
+- `ttlSecondsAfterFinished`は、5 分後に完了したジョブを削除します。
+- `backoffLimit`は、ゲートの評価が失敗した場合にジョブを再試行されないよう 0 に設定されています。
 
-分析テンプレートを作成した後、それを Argo Rollouts 戦略から参照します。
+分析テンプレートを作成した後、Argo Rollouts 戦略からそれを参照します。
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1
@@ -332,7 +349,7 @@ spec:
 
 {{% /tab %}}
 {{% tab "GitHub Actions" %}}
-[Datadog Deployment Gate GitHub Action][4] は、ワークフローの一部として評価を実行します。ゲート設定ファイルをリポジトリにコミットし、そのパスを `config` 入力で渡します。`config` 入力には、バージョン v2.1.0 以上が必要です。
+[Datadog Deployment Gate GitHub Action][4] は、ワークフローの一部として評価を実行します。ゲート構成ファイルをリポジトリにコミットし、そのパスを `config` 入力で渡します。`config` 入力にはバージョン v2.1.0 以上が必要です。
 
 ```yaml
 name: Deploy with Datadog Deployment Gate
@@ -396,17 +413,17 @@ jobs:
 
 アクション:
 
-- ゲート評価を開始するためのリクエストを送信し、評価が完了するまでブロックします。
-- 評価を待機する時間のタイムアウトを構成できます。
-- エラーに対する組み込みの自動再試行機能を備えています。
-- 予期しない Datadog エラー時の動作をカスタマイズするための `fail-on-error` を受け入れます。
+- ゲート評価を開始するリクエストを送信し、評価が完了するまでブロックします。
+- 評価の待機時間を構成できるタイムアウトを提供します。
+- エラーに対する組み込みの自動再試行機能があります。
+- 予期しない Datadog エラー時の動作をカスタマイズするための `fail-on-error` を受け付けます。
 
 **必要な環境変数**:
 
 - `DD_API_KEY`: [API キー][2]。
 - `DD_APP_KEY`: [アプリケーションキー][3]。
 
-完全な構成オプションと使用例については、[`DataDog/deployment-gate-github-action` リポジトリ][4]を参照してください。
+完全な構成オプションと使用例については、[`DataDog/deployment-gate-github-action` リポジトリ][4] を参照してください。
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -416,9 +433,9 @@ jobs:
 {{% /tab %}}
 {{% tab "汎用スクリプト" %}}
 
-このスクリプトを開始点として使用してください。このスクリプトは、インライン JIT ルールを使用してゲートを評価します。
+このスクリプトを開始点として使用します。このスクリプトは、インライン JIT ルールを使用してゲートを評価します。
 
-以下を置き換えてください。
+以下を置き換えます。
 
 - `<YOUR_DD_SITE>`: [Datadog サイト名][1] (例:{{< region-param key="dd_site" code="true" >}})
 - `<YOUR_API_KEY>`: [API キー][2]
@@ -562,20 +579,20 @@ done
 
 スクリプト:
 
-- 3 つの入力を受け取ります (`service`、`environment`、`version`)。1 つ以上の APM デプロイメント不良検出ルールが評価される場合は `version` が必要です。
+- 次の 3 つの入力を受け付けます。`service`、`environment`、`version`。1 つ以上の APM Faulty Deployment Detection ルールが評価される場合は、`version` が必要です。
 - 評価を開始するためのリクエストを送信し、`evaluation_id` を記録します。HTTP レスポンスコードを処理します。
-  - 5xx: サーバーエラー。遅延を伴い再試行します。
-  - 4xx: クライアントエラー。評価は失敗します。
+  - 5xx: サーバーエラー、遅れて再試行します。
+  - 4xx: クライアントエラー、評価が失敗します。
   - 2xx: 評価が開始されました。
-- 評価が完了するまで、`evaluation_id` を使用して評価ステータスエンドポイントをポーリングします。
-  - 5xx: サーバーエラー。遅延を伴い再試行します。
-  - 404: 評価がまだ開始されていません。遅延を伴い再試行します。
-  - 4xx (404 を除く): クライアントエラー。評価は失敗します。
-  - 2xx: `gate_status` をチェックし、完了していない場合は遅延を伴い再試行します。
-- 評価が完了するか、最大ポーリング時間 (デフォルトで 10800 秒 = 3 時間) に達するまで、15 秒ごとにポーリングします。
-- 初期リクエストですべての再試行が使い果たされた場合 (5xx レスポンス)、API 障害に対する耐性を持たせるため、この結果を成功として扱います。
+- 評価が完了するまで、`evaluation_id`を使用して評価ステータスエンドポイントをポーリングします。
+  - 5xx: サーバーエラー、遅れて再試行します。
+  - 404: 評価がまだ開始されていません。遅れて再試行します。
+  - 4xx (404 を除く): クライアントエラー、評価が失敗します。
+  - 2xx: `gate_status` をチェックし、完了していない場合は遅れて再試行します。
+- 評価が完了するか、最大ポーリング時間 (デフォルトで 10800 秒 = 3 時間) に達するまで 15 秒ごとにポーリングします。
+- 初期リクエスト (5xx レスポンス) のすべての再試行が使い果たされた場合、API 障害に対する回復力を確保するため、スクリプトはこれを成功として扱います。
 
-ご自身のユースケースに合わせてスクリプトを調整してください。`curl` (リクエストの実行用) と `jq` (返された JSON の処理用) を使用します。これらのコマンドが利用できない場合は、スクリプトの冒頭で (たとえば `apk add --no-cache curl jq` を使用して) インストールしてください。
+ユースケースに合わせてスクリプトを調整してください。これは `curl` (リクエストを実行) と `jq` (返された JSON を処理) を使用します。これらのコマンドが利用できない場合は、スクリプトの冒頭で (例: `apk add --no-cache curl jq` を使用) インストールしてください。
 
 [1]: /ja/getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -584,18 +601,18 @@ done
 {{% /tab %}}
 {{% tab "直接 API 呼び出し" %}}
 
-Deployment Gates の評価は非同期です。評価をトリガーするとバックグラウンドで開始され、進捗状況を追跡するために使用できる評価 ID が返されます。
+デプロイメントゲートの評価は非同期です。評価をトリガーするとバックグラウンドで開始され、API は進捗状況を追跡するために使用できる評価 ID を返します。
 
-- まず、Deployment Gates の評価をリクエストします。これによりプロセスが開始され、評価 ID が返されます。
-- 次に、評価 ID を使用して評価ステータスエンドポイントを定期的にポーリングし、評価が完了した時点で結果を取得します。10 〜 20 秒ごとのポーリングを推奨します。
+- まず、デプロイメントゲート評価をリクエストします。これによってプロセスが開始され、評価 ID が返されます。
+- 次に、評価ステータスエンドポイントを評価 ID で定期的にポーリングし、評価が完了した時点で結果を取得します。10 ～ 20 秒ごとのポーリングが推奨されます。
 
-以下を置き換えてください。
+以下を置き換えます。
 
 - `<YOUR_DD_SITE>`: [Datadog サイト名][1] (例:{{< region-param key="dd_site" code="true" >}})
 - `<YOUR_API_KEY>`: [API キー][2]
 - `<YOUR_APP_KEY>`: [アプリケーションキー][3]
 
-インラインルール (API 境界では snake_case) を含む `configuration` を渡します。
+`configuration` とインラインルール (API 境界では snake_case) を渡します。
 
 ```bash
 curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
@@ -651,9 +668,9 @@ EOF
 }
 ```
 
-`data.attributes.evaluation_id` フィールドには、このゲート評価の一意の識別子が含まれます。
+フィールド `data.attributes.evaluation_id` には、このゲート評価の一意の識別子が含まれます。
 
-その評価 ID を使用してステータスエンドポイントをポーリングし、ゲート評価のステータスを取得します。
+評価 ID を使用してステータスエンドポイントをポーリングし、ゲート評価のステータスを取得します。
 
 ```bash
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
@@ -661,9 +678,9 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<eva
 -H "DD-APPLICATION-KEY: <YOUR_APP_KEY>"
 ```
 
-**注**: 評価をリクエストした直後にこのエンドポイントを呼び出すと、評価がまだ開始されていないために 404 HTTP レスポンスが返される場合があります。数秒後に再試行してください。
+**注**: 評価をリクエストした直後にこのエンドポイントを呼び出すと、評価がまだ開始されていないため、404 HTTP レスポンスが返される場合があります。数秒後に再試行してください。
 
-200 HTTP レスポンスが返される場合、以下の形式になります。
+200 HTTP レスポンスが返される場合、その形式は以下の通りです。
 
 ```json
 {
@@ -689,13 +706,13 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<eva
 }
 ```
 
-`data.attributes.gate_status` フィールドには、以下のいずれかの値を持つ評価結果が含まれます。
+`data.attributes.gate_status` フィールドには評価結果が含まれ、値は以下のいずれかです。
 
-- `in_progress`: Deployment Gates の評価は進行中です。ポーリングを続けてください。
-- `pass`: Deployment Gates の評価は合格しました。
-- `fail`: Deployment Gates の評価は不合格でした。
+- `in_progress`: デプロイメントゲート評価は進行中です。ポーリングを続けてください。
+- `pass`: デプロイメントゲート評価が成功しました。
+- `fail`: デプロイメントゲート評価が失敗しました。
 
-**注**: `data.attributes.dry_run` フィールドが `true` の場合、`data.attributes.gate_status` フィールドは常に `pass` になります。
+**注**: `data.attributes.dry_run` フィールドが `true` の場合、`data.attributes.gate_status` フィールドは常に `pass` となります。
 
 [1]: /ja/getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -704,14 +721,14 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<eva
 {{% /tab %}}
 {{< /tabs >}}
 
-## 初回オンボーディングの推奨事項 {#recommendation-for-first-time-onboarding}
+## 初めてオンボーディングを行う際の推奨事項 {#recommendation-for-first-time-onboarding}
 
-Deployment Gates を Continuous Delivery ワークフローに統合する際に評価フェーズを設けることで、この製品が期待どおりに動作していることを、デプロイメントに影響を与える前に確認できます。ドライランモードと [[{{< ui >}}Deployment Gates Evaluations{{< /ui >}}]][6] ページを使用してください。
+Continuous Delivery ワークフローにデプロイメントゲートを統合する際、評価フェーズを設けることで、デプロイメントに影響を与える前に製品が期待通りに動作していることを確認できます。ドライランモードと [[{{< ui >}}Deployment Gates Evaluations{{< /ui >}}] (デプロイメントゲート評価)][6] ページを使用してください。
 
-1. `configuration` で `dry_run: true` を (または CLI 設定ファイルで `dryRun: true` を) 設定します。一部のルールのみをドライランとしてマークするには、ルールごとに `dry_run` を設定します。ドライラン評価では、API では常に `pass` が返されますが、UI には実際の評価結果が記録されます。
-2. ゲート評価をデプロイメントプロセスに追加します。ドライランが有効な間は、デプロイメントはゲート結果の影響を受けません。
-3. 一定期間 (1 〜 2 週間など) 経過後、[{{< ui >}}Deployment Gates Evaluations{{< /ui >}}] ページでゲートとルールの実行をチェックします。UI には実際のステータスが表示されるため、ゲートがいつ失敗したかや、その理由を確認できます。
-4. ゲートの動作が期待どおりであることを確認したら、`dry_run` を `false` に切り替えます。その後、API が実際のステータスを返すようになり、ゲート結果に基づくデプロイメントの昇格やロールバックが開始されます。
+1. `configuration` で `dry_run: true` を設定します (または CLI 構成ファイルで `dryRun: true` を設定します)。一部のルールのみをドライランとしてマークするには、ルールごとに `dry_run` を設定します。ドライラン評価は常に API 経由で `pass` を返します。
+2. デプロイメントプロセスにゲート評価を追加します。ドライランが有効な間、デプロイメントはゲート結果の影響を受けません。
+3. 一定期間 (例: 1 〜 2 週間) 経過後、{{< ui >}}Deployment Gates Evaluations{{< /ui >}} ページでゲートとルールの実行をチェックしてください。UI には実際のステータスが表示されるため、ゲートが失敗したタイミングとその理由を確認できます。
+4. ゲートの動作が期待通りであることを確認したら、`dry_run` を `false` に切り替えます。その後、API は実際のステータスを返すようになり、ゲートの結果に基づいてデプロイメントの昇格やロールバックが開始されます。
 
 ## 参考資料 {#further-reading}
 

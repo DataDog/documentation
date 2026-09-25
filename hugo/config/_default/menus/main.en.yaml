@@ -565,26 +565,31 @@ menu:
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
       weight: 802
+    - name: Supported datadog.yaml Fields
+      identifier: supported_datadog_yaml_fields
+      url: agent/fleet_automation/supported_datadog_yaml_fields
+      parent: agent_fleet_automation
+      weight: 803
     - name: Configure Agent Integrations
       identifier: configure_integrations
       url: agent/fleet_automation/configure_integrations
       parent: agent_fleet_automation
-      weight: 803
+      weight: 804
     - name: Configure Custom Logs
       identifier: configure_logs
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 805
+      weight: 806
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -5869,11 +5874,16 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
+    - name: Prompt Experimentation
+      url: llm_observability/configure/prompt_experimentation
+      parent: llm_obs_configure
+      identifier: llm_obs_prompt_experimentation
+      weight: 602
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
-      weight: 602
+      weight: 603
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
