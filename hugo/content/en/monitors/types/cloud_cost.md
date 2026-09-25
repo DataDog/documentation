@@ -169,7 +169,7 @@ Real-time AI anomaly monitors detect unexpected increases in AI cost and alert w
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Analyze{{< /ui >}} > {{< ui >}}Cost Monitors{{< /ui >}}][4] and click {{< ui >}}\+ New Cost Monitor{{< /ui >}}.
 2. Select {{< ui >}}Anomalies{{< /ui >}}.
 3. Set {{< ui >}}Alert on{{< /ui >}} to {{< ui >}}real time{{< /ui >}} and the cost type to {{< ui >}}AI cost{{< /ui >}}. The monitor alerts on anomalies detected within the last 15 minutes.
-4. Optionally, use {{< ui >}}Filter cost to{{< /ui >}} to scope the cost, and {{< ui >}}Detect anomalies on{{< /ui >}} to group by up to 2 tags. `ml_app` and `model_provider` are listed under {{< ui >}}Preferred Tags{{< /ui >}}.
+4. Optionally, use {{< ui >}}Filter cost to{{< /ui >}} to scope the cost, and {{< ui >}}Detect anomalies on{{< /ui >}} to group by up to two tags. `ml_app` and `model_provider` are listed under {{< ui >}}Preferred Tags{{< /ui >}}.
 5. Set a threshold for the estimated total cost over the next 24 hours. Enter at least 500 in your organization's currency. The monitor alerts when Datadog detects an anomaly and the estimated total cost exceeds this threshold.
 6. [Configure notifications][6].
 
