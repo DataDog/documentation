@@ -1,57 +1,59 @@
 ---
 description: Découvrez comment utiliser des assertions JavaScript personnalisées dans
-  vos tests Browser Synthetic.
+  vos tests de navigateur Synthetic.
 further_reading:
-- link: /synthetics/browser_tests/actions/
+- link: /synthetics/browser_tests/test_steps/
   tag: Documentation
-  text: En savoir plus sur les étapes des tests Browser
+  text: En savoir plus sur les étapes des tests de navigateur
 - link: /synthetics/browser_tests/advanced_options/
   tag: Documentation
   text: Apprendre à configurer les options avancées des étapes de test
-- link: /synthetics/guide/popup/#deplacer-les-fenetres-contextuelles
+- link: /synthetics/guide/popup/#moving-popups
   tag: Documentation
   text: Découvrir comment gérer les fenêtres contextuelles dont l'affichage n'est
     pas prévu
-
-title: Utiliser des assertions JavaScript personnalisées dans des tests Browser
+- link: https://www.datadoghq.com/blog/ambassador-browser-tests/
+  tag: Blog
+  text: Comment j'ai aidé mon client à mettre à l'échelle ses tests de navigateur
+    avec Datadog
+title: Utiliser des assertions JavaScript personnalisées dans les tests de navigateur
 ---
+## Présentation {#overview}
 
-## Présentation
-
-Ce guide décrit la démarche à suivre pour tester une interface utilisateur (IU) à l'aide de code JavaScript personnalisé dans un [test Browser][1]. Les assertions JavaScript prennent en charge le code synchrone et asynchrone.
+Ce guide décrit comment vous pouvez tester une interface utilisateur (UI) en utilisant du JavaScript personnalisé dans un [test de navigateur][1]. Les assertions JavaScript prennent en charge le code synchrone et asynchrone.
 
 Pour créer une assertion à l'aide de code JavaScript personnalisé, procédez comme suit :
 
-1. Cliquez sur **Assertion** et sélectionnez **Test your UI with custom JavaScript**.
+1. Cliquez sur {{< ui >}}Assertion{{< /ui >}} et sélectionnez {{< ui >}}Test custom JavaScript assertion{{< /ui >}}.
 2. Rédigez le corps de votre assertion.
-3. Si vous le souhaitez, sélectionnez un élément cible dans votre IU.
-4. Cliquez sur **Apply**.
+3. Optionnellement, sélectionnez un élément cible dans l'interface utilisateur. 
+4. Cliquez sur {{< ui >}}Apply{{< /ui >}}.
 
-Pour en savoir plus sur les assertions, consultez la section [Étapes des tests Browser][2].
+Pour en savoir plus sur les assertions, consultez la section [Étapes des tests de navigateur][2].
 
-## Vérifier qu'un élément n'est pas sur la page
+## Vérifiez qu'un élément n'est pas sur la page {#assert-that-an-element-is-not-on-the-page}
 
-Pour vérifier qu'un élément avec un ID spécifique n'est *pas* sur la page, utilisez `return !document.getElementById("<ID_ÉLÉMENT>");`.
+Pour vérifier qu'un élément avec un ID spécifique n'est *pas* sur la page, utilisez `return !document.getElementById("<ELEMENT_ID>");`.
 
-Pour vérifier que des éléments ne sont *pas* sur la page et renvoyer le nombre d'éléments dans l'erreur de la console, ajoutez ce qui suit au corps de l'assertion :
+Pour vérifier que des éléments ne sont *pas* sur la page et renvoyer le nombre d'éléments dans l'erreur de console, ajoutez ce qui suit dans le corps de l'assertion :
 
 {{< code-block lang="javascript" >}}
-var element = document.querySelectorAll("<SÉLECTEURS>");
+var element = document.querySelectorAll("<SELECTORS>");
 if ( element.length > 0 ){
-    console.error(element.length+"  "+"éléments existent");
+    console.error(element.length+"  "+"elements exist");
 } 
 return element.length === 0;
 {{< /code-block >}}
 
-Vos résultats de tests Browser contiennent des logs `console.error`.
+Vos résultats de test de navigateur incluent les logs `console.error`, avec un maximum de 4 logs autorisés par fonction JavaScript. Pensez à combiner les logs pour une clarté et une efficacité accrues.
 
-{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="Logs d'erreur de la console s'affichant dans l'onglet Errors & Warnings du volet latéral de l'étape d'un test" style="width:80%;" >}}
+{{< img src="synthetics/guide/custom-javascript-assertion/step_results.png" alt="Logs d'erreurs de console apparaissant dans l'onglet Errors & Warnings du panneau latéral de l'étape de test" style="width:80%;" >}}
 
-## Vérifier qu'un bouton radio est coché
+## Vérifiez qu'un bouton radio est coché {#assert-that-a-radio-button-is-checked}
 
-Pour vérifier qu'un bouton radio est coché, utilisez `return document.querySelector("<SÉLECTEURS>").checked = true;` dans le corps de l'assertion.
+Pour vérifier qu'un bouton radio est coché, utilisez `return document.querySelector("<SELECTORS>").checked === true;` dans le corps de l'assertion.
 
-## Définir la valeur d'un élément de stockage local spécifique
+## Définissez la valeur d'un élément de stockage local spécifié {#set-the-value-of-a-specified-local-storage-item}
 
 Pour définir la valeur d'un élément de stockage local spécifique, ajoutez ce qui suit au corps de l'assertion :
 
@@ -67,35 +69,42 @@ localStorage.setItem("mytime", Date.now());
 return true
 {{< /code-block >}}
 
-## Vérifier que du texte figure dans un PDF affiché
+`localStorage` est accessible dans d'autres assertions JavaScript si vous devez comparer des valeurs spécifiques :
 
-Vous pouvez utiliser une bibliothèque externe pour tester le contenu d'un PDF affiché.
+{{< code-block lang="javascript" >}}
+localStorage.getItem("mytime");
+return true
+{{< /code-block >}}
+
+## Vérifiez le texte contenu dans un PDF rendu {#assert-on-text-contained-in-a-rendered-pdf}
+
+Vous pouvez utiliser une bibliothèque externe pour tester le contenu d'un PDF affiché. 
 
 Pour charger des bibliothèques externes, utilisez le paramètre promise dans le corps de l'assertion :
 
 {{< code-block lang="javascript" filename="Custom JavaScript" collapsible="true" >}}
 const script = document.createElement('script');
 script.type = 'text/javascript';
-// Charger une bibliothèque externe
+//load external library
 script.src = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js";
 const promise = new Promise((r) => script.onload = r)
 document.head.appendChild(script)
 
 await promise
 
-var loadingTask = pdfjsLib.getDocument("<URL_PDF>");
+var loadingTask = pdfjsLib.getDocument("<PDF_URL>");
 return await loadingTask.promise.then(function(pdf) {
     return pdf.getPage(1).then(function(page) {
         return page.getTextContent().then(function(content) {
-            return content.items[0].str.includes("<CHAÎNE_CONTENU>")
+            return content.items[0].str.includes("<CONTENT_STRING>")
         })
     })
 });
 {{< /code-block >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/synthetics/browser_tests/
-[2]: /fr/synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[2]: /fr/synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion

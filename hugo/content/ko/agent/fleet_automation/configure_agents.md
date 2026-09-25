@@ -10,7 +10,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 title: Agent 구성
 ---
-[Fleet Automation][3]을 사용하여 규모에 맞게 Datadog Agent 구성을 롤아웃하고 관리하세요. UI에서 가이드가 있는 워크플로를 통해, 또는 사용자 지정 YAML 파일을 사용해 구성 변경 사항을 적용합니다.
+[Fleet Automation][3]을 사용하여 규모에 맞게 Datadog Agent 구성을 롤아웃하고 관리하세요. UI에서 가이드가 있는 워크플로를 통해, 또는 사용자 지정 YAML 파일을 사용해 구성 변경 사항을 적용합니다. Fleet Automation으로 관리할 수 있는 Agent 설정은 [지원되는 datadog.yaml 구성 필드][11]를 참조하십시오.
 
 ## 전제 조건 {#prerequisites}
 
@@ -62,7 +62,7 @@ Fleet Automation을 통한 Datadog Agent 태그 관리는 미리 보기로 제�
 
 Fleet Automation은 프로그래밍 방식으로 구성 업데이트를 적용할 수 있는 API를 제공합니다. 필터 쿼리를 사용해 모든 호스트 그룹에 변경 사항을 배포하세요. 전체 구성 파일을 제공할 수도 있고, 대상이 지정된 패치를 제공할 수도 있습니다. 온디맨드 방식으로 구성을 푸시하거나, 기존 자동화 워크플로에 통합하세요. 자세한 정보는 [Fleet Automation API][4]를 참조하세요.
 
-**참고**: API는 모든 Agent 구성 필드를 지원하지는 않습니다. Agent 연결 또는 시크릿(`site`, `api_key` 및 기타 인증 파라미터)과 관련된 설정은 API를 통해 관리할 수 없습니다.
+**참고**: API는 모든 Agent 구성 필드를 지원하지는 않습니다. Agent 연결 또는 시크릿(`site`, `api_key` 및 기타 인증 파라미터)과 관련된 설정은 API를 통해 관리할 수 없습니다. 관리할 수 있는 필드는 [지원되는 datadog.yaml 구성 필드][11]를 참조하십시오.
 
 ## 구성 우선 순위{#configuration-precedence}
 
@@ -101,3 +101,4 @@ Agent가 프록시를 사용하게 구성하는 방법에 관한 지침은 [Agen
 [8]: /ko/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /ko/agent/guide/setup_remote_config
 [10]: /ko/agent/fleet_automation/upgrade_agents/
+[11]: /ko/agent/fleet_automation/supported_datadog_yaml_fields/

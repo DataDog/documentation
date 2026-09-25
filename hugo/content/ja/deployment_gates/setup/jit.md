@@ -12,15 +12,11 @@ further_reading:
   text: デプロイメントゲート API リファレンス
 title: Just-In-Time (JIT) デプロイメントゲートをセットアップする
 ---
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-デプロイメントゲートはプレビュー版です。この機能に関心がある場合は、フォームに記入してアクセスをリクエストしてください。
-{{< /callout >}}
-
 **Just-In-Time (JIT)**デプロイメントゲートでは、ルールは評価リクエスト内にインラインで定義されます。Datadog に事前にゲートを作成しておく必要がないため、JIT はルールアズコードやデプロイごとの柔軟性に適しています。
 
 Datadog UI、API、または Terraform で管理する永続的なゲートが必要ですか？[事前構成されたデプロイメントゲート][5] を参照してください。
 
-## 構成 {#configuration}
+## 構成{#configuration}
 
 例 `configuration`:
 
@@ -56,7 +52,7 @@ Datadog UI、API、または Terraform で管理する永続的なゲートが�
 
 ## ルールタイプ {#rule-types}
 
-完全なスキーマおよび利用可能なすべてのオプションについては、[デプロイメントゲート API リファレンス][4]を参照してください。
+完全なスキーマおよび利用可能なすべてのオプションについては、[デプロイメントゲート API リファレンス][4] を参照してください。
 
 {{< tabs >}}
 {{% tab "モニター" %}}
@@ -72,7 +68,7 @@ Datadog UI、API、または Terraform で管理する永続的なゲートが�
 - `query`: [検索モニター構文][1] に基づくモニター検索クエリ。モニタータグでフィルタリングします。
   - モニターの静的タグ: `service:transaction-backend`
   - モニターのクエリ内のタグ: `scope:"service:transaction-backend"`
-  - [モニターのグループ化][2]内のタグ: `group:"service:transaction-backend"`
+  - [モニターのグループ化][2] 内のタグ: `group:"service:transaction-backend"`
 - `monitor_ids`: 特定のモニターのリスト。各項目には、10 進数のモニター `id` と正確なグループ名からなる `groups` 配列が含まれています。空の `groups` 配列は、そのモニターのすべてのグループを評価します。
 - `duration`: 選択したモニターが評価される期間 (秒単位)。デフォルトは 0 です (モニターは即座に評価されます)。最大値は 7200 秒 (2 時間) です。
 
@@ -215,7 +211,7 @@ datadog-ci deployment gate --service transaction-backend --env production --vers
 
 以下のテンプレートを開始点として使用します。
 
-- `<YOUR_DD_SITE>`を [Datadog サイト名][2] (例:{{< region-param key="dd_site" code="true" >}}) に置き換えます。
+- `<YOUR_DD_SITE>`を [Datadog サイト名][2] (例:{{< region-param key="dd_site" code="true" >}}).
 - [API キー][5] と [アプリケーションキー][6] を環境変数として定義します。この例では、`datadog` と呼ばれる [Kubernetes Secret][3] と、`api-key` および `app-key` の 2 つのデータ値を使用しています。`value` の代わりに `valueFrom` を使用して、値をプレーンテキストで渡すこともできます。
 - `--config` フラグをサポートする datadog-ci イメージバージョン (バージョン v5.19.0 以上) を使用します。
 
@@ -604,7 +600,7 @@ done
 デプロイメントゲートの評価は非同期です。評価をトリガーするとバックグラウンドで開始され、API は進捗状況を追跡するために使用できる評価 ID を返します。
 
 - まず、デプロイメントゲート評価をリクエストします。これによってプロセスが開始され、評価 ID が返されます。
-- 次に、評価ステータスエンドポイントを評価 ID で定期的にポーリングし、評価が完了した時点で結果を取得します。10 ～ 20 秒ごとのポーリングが推奨されます。
+- 次に、評価ステータスエンドポイントを評価 ID で定期的にポーリングし、評価が完了した時点で結果を取得します。10〜20 秒ごとのポーリングが推奨されます。
 
 以下を置き換えます。
 

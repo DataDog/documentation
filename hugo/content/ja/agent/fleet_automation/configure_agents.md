@@ -10,7 +10,7 @@ further_reading:
 site_support_id: fleet-automation-standard-features
 title: エージェントの構成
 ---
-[Fleet Automation][3] を使用して、Datadog Agent の構成を大規模に展開、管理します。UI のガイド付きワークフロー、またはカスタム YAML ファイルを使用して、構成変更を適用します。
+[Fleet Automation][3] を使用して、Datadog Agent の構成を大規模に展開、管理します。UI のガイド付きワークフロー、またはカスタム YAML ファイルを使用して、構成変更を適用します。Fleet Automationで管理できるAgent設定については、「[Supported datadog.yaml Configuration Fields][11]」を参照してください。
 
 ## 前提条件 {#prerequisites}
 
@@ -62,7 +62,7 @@ Fleet Automation による Datadog Agent タグの管理はプレビュー版で
 
 Fleet Automation は、構成の更新をプログラムで適用するための API を提供します。フィルタークエリを使用して任意のホストグループに変更をデプロイし、完全な構成ファイルまたは対象を絞ったパッチを指定します。オンデマンドで構成をプッシュするか、既存の自動化ワークフローに統合します。詳細については、[Fleet Automation API][4] を参照してください。
 
-**注**: API はすべての Agent 構成フィールドをサポートしているわけではありません。Agent の接続やシークレットに関連する設定 (`site`、`api_key`、およびその他の認証パラメーター) は、API を通じて管理できません。
+**注**: API はすべての Agent 構成フィールドをサポートしているわけではありません。Agent の接続やシークレットに関連する設定 (`site`、`api_key`、およびその他の認証パラメーター) は、API を通じて管理できません。管理可能なフィールドについては、「[Supported datadog.yaml Configuration Fields][11]」を参照してください。
 
 ## 構成の優先順位{#configuration-precedence}
 
@@ -101,3 +101,4 @@ Agent がプロキシを使用するように構成する手順については�
 [8]: /ja/agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity/
 [9]: /ja/agent/guide/setup_remote_config
 [10]: /ja/agent/fleet_automation/upgrade_agents/
+[11]: /ja/agent/fleet_automation/supported_datadog_yaml_fields/

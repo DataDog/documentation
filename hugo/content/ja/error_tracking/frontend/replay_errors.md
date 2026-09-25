@@ -1,36 +1,35 @@
 ---
-description: リプレイ スニペットの収集方法について学び、重要な問題を確実に把握できるようにします。
+description: リプレイのスニペットを収集して、重要な問題を確実に表示する方法について説明します。
 further_reading:
 - link: /error_tracking/suspect_commits
   tag: ドキュメント
-  text: Error Tracking が疑わしいコミットをどのように特定するかについて学びます。
+  text: Error Trackingがどのように疑わしいコミットを特定できるかについて説明します。
 - link: /error_tracking
   tag: ドキュメント
   text: エラートラッキングについて
 is_beta: true
 private: false
-title: Error Tracking Replay Snippets
+title: Error Trackingリプレイのスニペット
 ---
+{{< callout url="https://www.datadoghq.com/product-preview/error-tracking-replay-snippets/" btn_hidden="false"  >}}
+Error Trackingリプレイのスニペットはプレビュー版です。
+{{< /callout >}}
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/error-tracking-replay-snippets/" btn_hidden="false"  >}}
-Error Tracking Replay Snippets はプレビュー版です。
-{{< /beta-callout >}}
+## 概要{#overview}
 
-## 概要
+フロントエンドエンジニアにとって、デバッグプロセスにおいて不可欠であり、かつ時間がかかることが多い作業が、バグの再現です。しかし、アプリケーションでエラーが発生する前にユーザーがどのような操作を行ったかを明確に把握できなければ、それを行うのは困難な場合があります。
 
-フロントエンド エンジニアにとって、デバッグ プロセスにおける不可欠で、しかも時間のかかる作業の 1 つがバグの再現です。しかし、アプリケーションがエラーをスローする前にユーザーが行った操作を明確に把握できなければ、バグの再現は難しくなります。
+Error Trackingリプレイのスニペットを使用すると、エラー発生前後の15秒間のユーザーのジャーニーをピクセル単位で完全に再現して表示できるため、バグを再現し、時間を節約し、推測を排除できます。
 
-Error Tracking Replay Snippets では、エラー発生の前後 15 秒間におけるユーザー ジャーニーをピクセル パーフェクトに再現して表示できるため、バグを再現し、時間を節約し、推測を排除できます。
+## セットアップ {#setup}
 
-## セットアップ
-
-1. まだ Datadog Frontend Error Tracking をセットアップしていない場合は、 [アプリ内セットアップ手順][1] に従うか、[ブラウザ][2] 用および [モバイル][3] 用のセットアップ ドキュメントを参照してください。
-2. SDK の初期化時に、アプリケーションのリプレイ サンプリング レートを設定します。 
+1. Datadog Frontend Error Trackingをまだ設定していない場合は、[アプリ内のセットアップ手順][1]に従うか、[ブラウザ][2]および[モバイル][3]のセットアップドキュメントを参照してください。
+2. SDKの初期化中に、アプリケーションのリプレイサンプリングレートを構成します。
 
    {{< tabs >}}
    {{% tab "ブラウザ" %}}
 
-   `sessionReplaySampleRate` を 1 から 100 の範囲で設定します。 
+   `sessionReplaySampleRate`を1から100の間で設定します。
 
    ```javascript
    import { datadogRum } from '@datadog/browser-rum';
@@ -48,33 +47,33 @@ Error Tracking Replay Snippets では、エラー発生の前後 15 秒間にお
 
    {{% /tab %}}
    {{% tab "iOS" %}}
-   [こちらの手順][4] に従って、iOS 用にモバイル アプリケーションのエラー リプレイをセットアップし、構成します。
+   [こちらのステップ][4]に従って、このプラットフォームのモバイルアプリケーションのエラーリプレイをセットアップおよび構成してください。
 
-   [4]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=ios
+   [4]: /session_replay/setup_and_configuration/?platform=ios
    {{% /tab %}}
    {{% tab "Android" %}}
-   [こちらの手順][5] に従って、Android 用にモバイル アプリケーションのエラー リプレイをセットアップし、構成します。
+   [こちらのステップ][5]に従って、このプラットフォームのモバイルアプリケーションのエラーリプレイをセットアップおよび構成してください。
 
-   [5]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=android
+   [5]: /session_replay/setup_and_configuration/?platform=android
    {{% /tab %}}
    {{% tab "Kotlin Multiplatform" %}}
-   [こちらの手順][6] に従って、Kotlin Multiplatform 用にモバイル アプリケーションのエラー リプレイをセットアップし、構成します。
+   [こちらのステップ][6]に従って、このプラットフォームのモバイルアプリケーションのエラーリプレイをセットアップおよび構成してください。
 
-   [6]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=kotlinmultiplatform
+   [6]: /session_replay/setup_and_configuration/?platform=kotlin_multiplatform
    {{% /tab %}}
    {{% tab "React Native" %}}
-   [こちらの手順][7] に従って、React Native 用にモバイル アプリケーションのエラー リプレイをセットアップし、構成します。
+   [こちらのステップ][7]に従って、このプラットフォームのモバイルアプリケーションのエラーリプレイをセットアップおよび構成してください。
 
-   [7]: /real_user_monitoring/session_replay/mobile/setup_and_configuration/?tab=reactnative
+   [7]: /session_replay/setup_and_configuration/?platform=react_native
    {{% /tab %}}
    {{</tabs>}}
 
-## エラーをリプレイする
-エラーメッセージやスタック トレースなど、エラーに関する重要な情報を確認したら、問題のサマリーから、エラーが発生した最新のセッションのライブ再現へすぐに遷移できます。スタック トレースの下までスクロールし、リプレイのプレビューをクリックすると、エラーが発生する前のユーザーの操作を確認できます。
+## エラーのリプレイ{#replay-errors}
+エラーメッセージやスタックトレースなどのエラーに関する主要な情報を確認した後、問題の概要から、そのエラーが発生した最新のセッションのライブ再現に直接移行できます。スタックトレースの下までスクロールし、リプレイのプレビューをクリックすると、エラー発生前のユーザーの操作を確認できます。
 
-{{< img src="error_tracking/error-replay-2.png" alt="Error Tracking Replay Snippet" style="width:90%" >}}
+{{< img src="error_tracking/error-replay-2.png" alt="Error Trackingリプレイのスニペット" style="width:90%" >}}
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
