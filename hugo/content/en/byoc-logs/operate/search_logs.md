@@ -28,13 +28,13 @@ BYOC (Bring Your Own Cloud) Logs index names follow this format:
 byoc--<CLUSTER_NAME>--<INDEX_NAME>
 ```
 
-## Cross-cluster search
+## Search across BYOC Logs clusters
 
-Search multiple BYOC Logs clusters in a single query in the Log Explorer or through the public Logs API. Results from the selected clusters are combined.
+Use Log Explorer or the public Logs API to search across multiple BYOC Logs clusters with a single query. Results from the selected clusters are combined.
 
-### Log Explorer
+### Use Log Explorer
 
-In the [Log Explorer][1] search bar, use `index:` with a parenthesized list of cluster names prefixed with `byoc--` and separated by `OR`. For example, search the `cluster-1` and `cluster-2` clusters:
+In the [Log Explorer][1] search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
 
 ```text
 index:(byoc--cluster-1 OR byoc--cluster-2)
@@ -42,9 +42,9 @@ index:(byoc--cluster-1 OR byoc--cluster-2)
 
 Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
 
-### Public API
+### Use the Logs API
 
-Use the same query in the `filter.query` field of a request to the Search logs endpoint (`POST /api/v2/logs/events/search`). For example:
+Send a request to the [Search logs endpoint][1] (`POST /api/v2/logs/events/search`). Set `filter.query` to a query that specifies multiple BYOC Logs clusters. For example:
 
 ```json
 {
@@ -65,3 +65,5 @@ You cannot query BYOC Logs indexes alongside other Datadog log indexes. Addition
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/logs/#search-logs
