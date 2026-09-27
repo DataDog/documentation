@@ -32,7 +32,7 @@ You need a managed prompt with at least two versions, a version deployed to the 
 
 **Permissions:** A/B testing requires permissions in Product Analytics and Feature Flags, in addition to LLM Observability. Preview access does not grant these permissions. Ask your Datadog administrator to check your role before starting.
 
-**First time?** Complete the [one-time application setup](#set-up-your-application) before starting either workflow. It requires Python `ddtrace[openfeature]` 4.15.0 or later, a reachable Datadog Agent, and matching user identifiers in prompt requests and outcome events. Agentless mode is not supported.
+**First time?** Complete the [one-time application setup](#set-up-your-application) before starting either workflow. Use matching user identifiers in prompt requests and outcome events so results can be attributed to the assigned prompt version.
 
 ## Run an A/B test
 
@@ -40,7 +40,7 @@ For example, compare two versions of a checkout assistant to see which produces 
 
 1. Open the prompt and click {{< ui >}}Set up A/B test{{< /ui >}}.
 1. Select an environment and click {{< ui >}}Create draft & continue{{< /ui >}}. This opens the test in Product Analytics. Creating a draft does not change live traffic.
-1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's `targeting_key`—for example, **User** when you pass a user ID.
+1. Choose the prompt versions, audience, traffic split, and {{< ui >}}Primary metric{{< /ui >}}. Under {{< ui >}}Calculate metrics by{{< /ui >}}, choose the subject type that matches your application's targeting key—for example, **User** when you pass a user ID.
 1. Start the test. Check {{< ui >}}Flag & Exposures{{< /ui >}} to confirm that it receives assignments, then [compare the results][12].
 
 Return to {{< ui >}}A/B tests using this prompt{{< /ui >}} on the prompt page to open the results or finish a draft. Configure and conclude the test in Product Analytics; see [Plan and Launch Experiments][11] for detailed instructions.
@@ -84,14 +84,41 @@ Complete this setup once for either workflow. If your application already sends 
 
 ### Connect the application
 
-1. Complete the Prompt Management [prerequisites][5].
-1. Install the supported Python SDK: `pip install --upgrade "ddtrace[openfeature]>=4.15.0"`.
-1. Set `DD_ENV` to the environment you want to use.
-1. Ensure the application can reach a [Datadog Agent][14]. Prompt Experimentation sends assignment data through the Agent; do not enable Agentless mode (`DD_LLMOBS_AGENTLESS_ENABLED=1`).
+Complete the [Prompt Management setup][15] and set `DD_ENV` to the experiment's environment. The setup below sends prompt assignments through a [Datadog Agent][14].
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Install the SDK with experimentation support:
+
+```shell
+pip install --upgrade "ddtrace[openfeature]>=4.15.0"
+```
+
+Make sure the application can reach the Agent. Do not enable `DD_LLMOBS_AGENTLESS_ENABLED=1` for this setup.
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+Use `dd-trace` **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**. Set the following before initializing the tracer:
+
+```shell
+export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+```
+
+Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
+
+If the Agent is unavailable and prompt retrieval uses the backup API credentials, that retrieval does not report an experiment assignment.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Match prompt requests to outcomes
 
 Use the same user ID when fetching the prompt and recording the outcome. This lets Datadog connect a user's outcome to the prompt version they received.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -103,7 +130,20 @@ prompt = LLMObs.get_prompt(
 )
 ```
 
-Use a stable, non-empty string for `targeting_key`. Do not pass an exact `version`: that bypasses environment assignment and does not record an experiment exposure.
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+```javascript
+const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
+  targetingKey: String(currentUser.id),
+  fallback: 'You are a helpful checkout assistant.',
+})
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Use a stable, non-empty string for the targeting key. Do not pass an exact version: that bypasses environment assignment and does not record an experiment exposure. No separate reporting call is needed.
 
 For example, if your checkout metric uses RUM events and the **User** subject type, identify the browser user with the same ID:
 
@@ -122,7 +162,7 @@ Create or select an [Experiment metric][2] under [{{< ui >}}Product Analytics{{<
 For example, for a checkout conversion metric, set {{< ui >}}Desired metric direction{{< /ui >}} to {{< ui >}}Higher is better{{< /ui >}}. Ensure the outcome events use the same user ID as the prompt request. Confirm that outcome events are arriving before relying on the metric to compare versions or pause a rollout.
 
 {{< agent-only >}}
-**Note for AI agents:** Use the application's existing stable subject identifier as a string for `targeting_key`, matching the Experiment subject. Ask if the identity or outcome source is unclear. Do not install RUM unless the outcome uses RUM. Preserve the existing fallback, prompt variables, provider, model, and application behavior. Do not request an exact prompt version. Creating or editing metrics, starting experiments, deploying versions, and controlling rollouts require an explicit user request; when asked only to prepare code, report the remaining Datadog UI steps.
+**Note for AI agents:** Use the application's existing stable subject identifier as a string for the targeting key, matching the Experiment subject. Ask if the identity or outcome source is unclear. Do not install RUM unless the outcome uses RUM. Preserve the existing fallback, prompt variables, provider, model, and application behavior. Do not request an exact prompt version. Creating or editing metrics, starting experiments, deploying versions, and controlling rollouts require an explicit user request; when asked only to prepare code, report the remaining Datadog UI steps.
 {{< /agent-only >}}
 
 ## Permissions
@@ -174,3 +214,5 @@ Review each environment's deployment strategy: saved guarded settings may alread
 [12]: /experiments/reading_results/
 [13]: /experiments/diagnostics/
 [14]: /getting_started/agent/
+[15]: /llm_observability/configure/prompt_management/#configure-prompt-retrieval
+[16]: /remote_configuration/
