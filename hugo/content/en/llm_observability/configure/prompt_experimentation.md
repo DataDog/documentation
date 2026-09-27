@@ -144,7 +144,7 @@ from ddtrace.llmobs import LLMObs
 
 prompt = LLMObs.get_prompt(
     "checkout-assistant",
-    targeting_key=str(current_user.id),
+    targeting_key=current_user.id,
     fallback="You are a helpful checkout assistant.",
 )
 ```
@@ -154,7 +154,7 @@ prompt = LLMObs.get_prompt(
 
 ```javascript
 const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
-  targetingKey: String(currentUser.id),
+  targetingKey: currentUser.id,
   fallback: 'You are a helpful checkout assistant.',
 })
 ```
@@ -179,13 +179,13 @@ if err != nil {
 {{% /tab %}}
 {{< /tabs >}}
 
-Use a stable, non-empty string for the targeting key. Do not pass an exact version: that bypasses environment assignment and does not record an experiment exposure. No separate reporting call is needed.
+Use a stable, non-empty string that matches the user ID recorded with your outcomes. Do not pass an exact version: that bypasses environment assignment and does not record an experiment exposure. No separate reporting call is needed.
 
 For example, if your checkout metric uses RUM events and the **User** subject type, identify the browser user with the same ID:
 
 ```javascript
 datadogRum.setUser({
-  id: String(currentUser.id),
+  id: currentUser.id,
 })
 ```
 
