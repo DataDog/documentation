@@ -69,6 +69,9 @@ Install or upgrade the SDK to a supported version listed in [Prerequisites](#pre
 pip install --upgrade ddtrace
 ```
 
+For installation and application setup, see the [Python SDK guide][18].
+
+[18]: /tracing/trace_collection/dd_libraries/python/#getting-started
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -78,6 +81,9 @@ npm install dd-trace
 
 For applications using the 5.x release line, install `dd-trace@^5.128.0` instead.
 
+For installation and application setup, see the [Node.js SDK guide][19].
+
+[19]: /tracing/trace_collection/dd_libraries/nodejs/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 

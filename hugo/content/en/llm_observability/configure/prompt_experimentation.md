@@ -97,10 +97,13 @@ pip install --upgrade "ddtrace[openfeature]>=4.15.0"
 
 Make sure the application can reach the Agent. Do not enable `DD_LLMOBS_AGENTLESS_ENABLED=1` for this setup.
 
+For application setup, see the [Python SDK guide][17].
+
+[17]: /tracing/trace_collection/dd_libraries/python/#getting-started
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Use `dd-trace` **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**. Set the following before initializing the tracer:
+Use `dd-trace` **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**. Set the following before [initializing the tracer][18]:
 
 ```shell
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -109,6 +112,7 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
 [16]: /remote_configuration/
+[18]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
 {{% /tab %}}
 {{< /tabs >}}
 
