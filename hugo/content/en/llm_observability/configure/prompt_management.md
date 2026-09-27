@@ -191,26 +191,7 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-Start the tracer during application startup:
-
-```go
-package main
-
-import (
-    "log"
-
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-)
-
-func main() {
-    if err := tracer.Start(); err != nil {
-        log.Fatal(err)
-    }
-    defer tracer.Stop()
-
-    // Start the application.
-}
-```
+Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
 
 **Agent setup:** Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` and add the following import. Neither key is needed when retrieval succeeds through the Agent. Keep `DD_API_KEY` if you also retrieve exact or latest versions.
 
@@ -218,6 +199,7 @@ func main() {
 import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
 ```
 
+[17]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -298,7 +280,7 @@ const response = await client.chat.completions.create({
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Add these imports:
+Use the request's `ctx` inside an application function that returns an error:
 
 ```go
 import (
@@ -307,11 +289,7 @@ import (
     "github.com/DataDog/dd-trace-go/v2/llmobs"
     "github.com/openai/openai-go/v3"
 )
-```
 
-Inside an application function that returns an error, use the request's `ctx`:
-
-```go
 defaultMessages := []llmobs.ChatTemplateItem{
     {Message: &llmobs.ChatMessage{Role: "system", Content: "You are a support agent for {{company}}."}},
     {Message: &llmobs.ChatMessage{Role: "user", Content: "{{question}}"}},
@@ -479,7 +457,7 @@ The context associates metadata with LLM spans created inside the callback; it d
 
 [Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
 
-Add these imports:
+Use the application's `client` and request `ctx` inside an application function that returns an error:
 
 ```go
 import (
@@ -489,11 +467,7 @@ import (
     "github.com/openai/openai-go/v3"
     "github.com/openai/openai-go/v3/responses"
 )
-```
 
-Inside an application function that returns an error, use the application's `client` and request `ctx`:
-
-```go
 prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
     llmobs.WithPromptFallback(llmobs.PromptFallback{
         Template: llmobs.PromptTemplate{
