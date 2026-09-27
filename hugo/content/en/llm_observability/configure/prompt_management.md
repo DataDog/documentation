@@ -38,16 +38,23 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 - An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve deployed prompts directly from Datadog. It is not needed when retrieval succeeds through the Agent.
 - To manage prompts through the API or SDK, provide both keys. The application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions for writes.
 
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
 - `dd-trace` version **5.128.0 or later in the 5.x release line**, or **6.17.0 or later**.
+- Node.js **18 or later** for `dd-trace` 5.x, or **22 or later** for 6.x.
 - Your [Datadog site][2] and a [Datadog API key][3].
 - An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve deployed prompts directly from Datadog. It is not needed when retrieval succeeds through the Agent.
 - To manage prompts through the API or SDK, provide both keys. The application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions for writes.
 
 **Agent setup:** When retrieving an environment's deployed prompt through the Agent, neither key is required in the application. Follow [Configure prompt retrieval](#configure-prompt-retrieval). Retrieving an exact or latest version still requires `DD_API_KEY`.
 
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
 {{% /tab %}}
 {{% tab "Go" %}}
 
@@ -64,10 +71,10 @@ The Go Prompt Management SDK supports retrieval and formatting. To create or man
 
 ## Install the SDK
 
+Install or upgrade the SDK to a supported version listed in [Prerequisites](#prerequisites).
+
 {{< tabs >}}
 {{% tab "Python" %}}
-
-Install or upgrade the latest `ddtrace` package in the Python environment used by your application:
 
 ```shell
 pip install --upgrade ddtrace
@@ -76,10 +83,8 @@ pip install --upgrade ddtrace
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-Install or upgrade `dd-trace` in the application:
-
 ```shell
-npm install dd-trace@^6.17.0
+npm install dd-trace
 ```
 
 For applications using the 5.x release line, install `dd-trace@^5.128.0` instead.
@@ -168,7 +173,7 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-Initialize `dd-trace` before importing the model client or other instrumented modules:
+Initialize the SDK once, before importing the model client or other instrumented modules. Prompt retrieval does not require LLM Observability to be enabled:
 
 ```javascript
 const tracer = require('dd-trace').init()
@@ -440,6 +445,10 @@ Pass the same variables to `to_annotation_dict()` that you pass to `format()` so
 
 `annotation_context()` associates metadata with an LLM span created inside the context; it does not create the span. For providers that are not automatically instrumented, first [manually instrument the LLM call][7] to create an LLM span. An explicit `annotation_context()` takes precedence over automatic prompt tracking. See [Prompt Tracking][1] for more information.
 
+[5]: /llm_observability/instrument/sdk/?tab=python
+[6]: /llm_observability/instrument/auto_instrumentation/?tab=python
+[7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
+[1]: /llm_observability/instrument/prompt_tracking
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
@@ -464,6 +473,8 @@ const response = await tracer.llmobs.annotationContext(
 
 The context associates metadata with LLM spans created inside the callback; it does not create a span. For model clients without automatic instrumentation, [create an LLM span manually][13].
 
+[13]: /llm_observability/instrument/sdk/?tab=nodejs
+[14]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
 {{% /tab %}}
 {{% tab "Go" %}}
 
