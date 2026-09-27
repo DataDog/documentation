@@ -275,7 +275,9 @@ const response = await client.chat.completions.create({
 })
 ```
 
-`format()` returns a string for a text prompt and a message array for a chat prompt. Use `await` for `getPrompt()`, but not for `format()`. If retrieval fails and no cached prompt or fallback is available, `getPrompt()` rejects. Handle the rejection in the application's error-handling workflow.
+`prompt.format()` returns a string for a text prompt and an array of messages for a chat prompt. Pass the formatted value to the corresponding text or messages parameter of your LLM provider call.
+
+If retrieval fails and no cached prompt or fallback is available, `getPrompt()` rejects with an error.
 
 {{% /tab %}}
 {{% tab "Go" %}}

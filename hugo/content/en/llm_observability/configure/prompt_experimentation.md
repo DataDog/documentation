@@ -108,8 +108,6 @@ export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
-If the Agent is unavailable and prompt retrieval uses the backup API credentials, that retrieval does not report an experiment assignment.
-
 [16]: /remote_configuration/
 {{% /tab %}}
 {{% tab "Go" %}}
