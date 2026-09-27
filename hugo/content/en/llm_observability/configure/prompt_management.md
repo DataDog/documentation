@@ -82,6 +82,9 @@ To create, update, or delete prompts through the API or SDK, provide an API key 
 
 The Go Prompt Management SDK supports retrieval and formatting. To create or manage prompts, use the UI or API.
 
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -114,16 +117,14 @@ For installation and application setup, see the [Node.js SDK guide][19].
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Install or upgrade the Go SDK:
-
 ```shell
-go get github.com/DataDog/dd-trace-go/v2@v2.12.0
+go get github.com/DataDog/dd-trace-go/v2@latest
 ```
 
 Also install the package that enables A/B test reporting. Include it even if you are not running experiments yet, so the application is ready when you create one:
 
 ```shell
-go get github.com/DataDog/dd-trace-go/v2/openfeature@v2.12.0
+go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
 ```
 
 {{% /tab %}}
@@ -568,6 +569,7 @@ span.AnnotateLLMIO(
 span.Finish()
 ```
 
+[15]: /llm_observability/instrument/sdk/?tab=go
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -705,6 +707,7 @@ Use `await` with these methods.
 
 Use the UI or the [Prompt Management API][8] to create, update, list, or delete prompts. The Go SDK exposes `llmobs.GetPrompt()` for runtime retrieval, not management operations.
 
+[8]: /api/latest/agent-observability/
 {{% /tab %}}
 {{< /tabs >}}
 
