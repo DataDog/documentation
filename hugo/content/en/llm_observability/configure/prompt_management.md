@@ -147,14 +147,11 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-Initialize the SDK once, before importing the model client or other instrumented modules. Prompt retrieval does not require LLM Observability to be enabled:
-
-```javascript
-const tracer = require('dd-trace').init()
-```
+Follow the [Node.js SDK initialization guide][16] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
 
 **Agent setup:** Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`. Neither key is needed when retrieval succeeds through the Agent. Keep `DD_API_KEY` if you also retrieve exact or latest versions.
 
+[16]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -205,6 +202,7 @@ If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueEr
 After initializing the tracer, use this example inside an async application function:
 
 ```javascript
+const tracer = require('dd-trace')
 const OpenAI = require('openai')
 
 const defaultMessages = [
