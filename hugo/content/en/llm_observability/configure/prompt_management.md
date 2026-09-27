@@ -227,32 +227,13 @@ export DD_SERVICE="<SERVICE_NAME>"
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 ```
 
-Include the A/B testing package in the imports and start the tracer during application startup:
-
-```go
-package main
-
-import (
-    "log"
-
-    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
-    _ "github.com/DataDog/dd-trace-go/v2/openfeature"
-)
-
-func main() {
-    if err := tracer.Start(); err != nil {
-        log.Fatal(err)
-    }
-    defer tracer.Stop()
-
-    // Start the application and call llmobs.GetPrompt in its request handlers.
-}
-```
+Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
 
 Keep the `_ "github.com/DataDog/dd-trace-go/v2/openfeature"` import: together with the setting above, it enables reporting which prompt version each user is assigned in an A/B test. No additional initialization is needed for Prompt Management or A/B test reporting.
 
 Optionally, set `DD_SITE`, `DD_API_KEY`, and `DD_APP_KEY` so the application can retrieve a deployed prompt directly from Datadog if it is unavailable through the Agent. The same credentials let you retrieve deployed prompts without an Agent. Use a [fallback](#retrieve-format-and-use-a-prompt) to keep the application working if retrieval fails.
 
+[17]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -335,7 +316,7 @@ If retrieval fails and no cached prompt or fallback is available, `getPrompt()` 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Add these imports:
+Use the request's `ctx` inside an application function that returns an error:
 
 ```go
 import (
@@ -344,11 +325,7 @@ import (
     "github.com/DataDog/dd-trace-go/v2/llmobs"
     "github.com/openai/openai-go/v3"
 )
-```
 
-Inside an application function that returns an error, use the request's `ctx`:
-
-```go
 defaultMessages := []llmobs.ChatTemplateItem{
     {Message: &llmobs.ChatMessage{Role: "system", Content: "You are a support agent for {{company}}."}},
     {Message: &llmobs.ChatMessage{Role: "user", Content: "{{question}}"}},
@@ -516,7 +493,7 @@ The context associates metadata with LLM spans created inside the callback; it d
 
 [Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
 
-Add these imports:
+Use the application's `client` and request `ctx` inside an application function that returns an error:
 
 ```go
 import (
@@ -526,11 +503,7 @@ import (
     "github.com/openai/openai-go/v3"
     "github.com/openai/openai-go/v3/responses"
 )
-```
 
-Inside an application function that returns an error, use the application's `client` and request `ctx`:
-
-```go
 prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
     llmobs.WithPromptFallback(llmobs.PromptFallback{
         Template: llmobs.PromptTemplate{
