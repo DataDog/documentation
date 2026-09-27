@@ -66,6 +66,9 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 
 The Go Prompt Management SDK supports retrieval and formatting. To create or manage prompts, use the UI or API.
 
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -92,16 +95,14 @@ For applications using the 5.x release line, install `dd-trace@^5.128.0` instead
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Install or upgrade the Go SDK:
-
 ```shell
-go get github.com/DataDog/dd-trace-go/v2@v2.12.0
+go get github.com/DataDog/dd-trace-go/v2@latest
 ```
 
 For Agent-backed retrieval, also install:
 
 ```shell
-go get github.com/DataDog/dd-trace-go/v2/openfeature@v2.12.0
+go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
 ```
 
 {{% /tab %}}
@@ -533,6 +534,7 @@ span.AnnotateLLMIO(
 span.Finish()
 ```
 
+[15]: /llm_observability/instrument/sdk/?tab=go
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -667,6 +669,7 @@ Use `await` with these methods.
 
 Use the UI or the [Prompt Management API][8] to create, update, list, or delete prompts. The Go SDK exposes `llmobs.GetPrompt()` for runtime retrieval, not management operations.
 
+[8]: /api/latest/agent-observability/
 {{% /tab %}}
 {{< /tabs >}}
 
