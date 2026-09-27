@@ -111,6 +111,25 @@ Make sure the application can reach the Agent and [Remote Configuration][16] is 
 If the Agent is unavailable and prompt retrieval uses the backup API credentials, that retrieval does not report an experiment assignment.
 
 {{% /tab %}}
+{{% tab "Go" %}}
+
+Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before starting the tracer:
+
+```shell
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+Add the import that enables experiment reporting:
+
+```go
+import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
+```
+
+Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
+
+If the Agent is unavailable and prompt retrieval uses the backup API credentials, that retrieval does not report an experiment assignment.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Match prompt requests to outcomes
@@ -138,6 +157,23 @@ const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
   targetingKey: String(currentUser.id),
   fallback: 'You are a helpful checkout assistant.',
 })
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Use the request's `ctx` and the user's ID as a string:
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "checkout-assistant",
+    llmobs.WithPromptTargetingKey(userID),
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Text: "You are a helpful checkout assistant."},
+    }),
+)
+if err != nil {
+    return err
+}
 ```
 
 {{% /tab %}}
