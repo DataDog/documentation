@@ -116,7 +116,7 @@ Make sure the application can reach the Agent and [Remote Configuration][16] is 
 {{% /tab %}}
 {{% tab "Go" %}}
 
-Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before starting the tracer:
+Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before [starting the tracer][19]:
 
 ```shell
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
@@ -130,9 +130,8 @@ import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
 
 Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
 
-If the Agent is unavailable and prompt retrieval uses the backup API credentials, that retrieval does not report an experiment assignment.
-
 [16]: /remote_configuration/
+[19]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 

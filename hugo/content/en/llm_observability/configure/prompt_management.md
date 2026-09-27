@@ -111,6 +111,9 @@ For Agent-backed retrieval, also install:
 go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
 ```
 
+For installation and application setup, see the [Go SDK guide][20].
+
+[20]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
