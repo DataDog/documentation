@@ -56,6 +56,20 @@ Use [Prompt Tracking][1] to see which managed prompt was used in each LLM call. 
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /account_management/api-app-keys/#application-keys
 {{% /tab %}}
+{{% tab "Go" %}}
+
+- `dd-trace-go/v2` version **2.12.0 or later**.
+- Your [Datadog site][2] and a [Datadog API key][3].
+- An [application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to retrieve deployed prompts directly from Datadog. It is not needed when retrieval succeeds through the Agent.
+
+**Agent setup:** When retrieving an environment's deployed prompt through the Agent, neither key is required in the application. Follow [Configure prompt retrieval](#configure-prompt-retrieval). Retrieving an exact or latest version still requires `DD_API_KEY`.
+
+The Go Prompt Management SDK supports retrieval and formatting. To create or manage prompts, use the UI or API.
+
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Install the SDK
@@ -84,6 +98,22 @@ For applications using the 5.x release line, install `dd-trace@^5.128.0` instead
 For installation and application setup, see the [Node.js SDK guide][19].
 
 [19]: /tracing/trace_collection/dd_libraries/nodejs/#getting-started
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```shell
+go get github.com/DataDog/dd-trace-go/v2@latest
+```
+
+For Agent-backed retrieval, also install:
+
+```shell
+go get github.com/DataDog/dd-trace-go/v2/openfeature@latest
+```
+
+For installation and application setup, see the [Go SDK guide][20].
+
+[20]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -158,6 +188,27 @@ Follow the [Node.js SDK initialization guide][16] if the SDK is not already init
 **Agent setup:** Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`. Neither key is needed when retrieval succeeds through the Agent. Keep `DD_API_KEY` if you also retrieve exact or latest versions.
 
 [16]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Set the following environment variables before starting the tracer:
+
+{{< code-block lang="shell" >}}
+export DD_SITE="<DATADOG_SITE>"
+export DD_API_KEY="<DATADOG_API_KEY>"
+export DD_APP_KEY="<DATADOG_APP_KEY>"
+export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
+{{< /code-block >}}
+
+Follow the [Go SDK setup guide][17] if the SDK is not already initialized. No additional initialization is required for Prompt Management.
+
+**Agent setup:** Set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` and add the following import. Neither key is needed when retrieval succeeds through the Agent. Keep `DD_API_KEY` if you also retrieve exact or latest versions.
+
+```go
+import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
+```
+
+[17]: /tracing/trace_collection/dd_libraries/go/#getting-started
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -238,6 +289,65 @@ const response = await client.chat.completions.create({
 If retrieval fails and no cached prompt or fallback is available, `getPrompt()` rejects with an error.
 
 {{% /tab %}}
+{{% tab "Go" %}}
+
+Use the request's `ctx` inside an application function that returns an error:
+
+```go
+import (
+    "encoding/json"
+
+    "github.com/DataDog/dd-trace-go/v2/llmobs"
+    "github.com/openai/openai-go/v3"
+)
+
+defaultMessages := []llmobs.ChatTemplateItem{
+    {Message: &llmobs.ChatMessage{Role: "system", Content: "You are a support agent for {{company}}."}},
+    {Message: &llmobs.ChatMessage{Role: "user", Content: "{{question}}"}},
+}
+variables := map[string]any{
+    "company":  "Acme",
+    "question": "How do I reset my password?",
+}
+
+prompt, err := llmobs.GetPrompt(ctx, "customer-support-greeting",
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Messages: defaultMessages},
+    }),
+)
+if err != nil {
+    return err
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+    return err
+}
+
+// Convert the formatted messages to the OpenAI client's message type.
+data, err := json.Marshal(rendered.Messages)
+if err != nil {
+    return err
+}
+var messages []openai.ChatCompletionMessageParamUnion
+if err := json.Unmarshal(data, &messages); err != nil {
+    return err
+}
+
+client := openai.NewClient()
+response, err := client.Chat.Completions.New(ctx, openai.ChatCompletionNewParams{
+    Model:    "gpt-4o",
+    Messages: messages,
+})
+if err != nil {
+    return err
+}
+```
+
+`Format()` returns a `FormattedPrompt` and an error. For chat prompts, `rendered.Messages` contains typed `FormattedMessage` values. Convert them to the model client's message type, preserving the text and any tool calls or results. For text prompts, pass `rendered.Text` to the model client. A text fallback uses `llmobs.PromptTemplate{Text: "You are a helpful assistant."}`.
+
+If retrieval fails and no cached prompt or fallback is available, `GetPrompt()` returns an error. Handle it before formatting or calling the model.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
@@ -270,6 +380,21 @@ const prompt = await tracer.llmobs.prompts.getPrompt('customer-support-greeting'
   version: 2,
   fallback: 'You are a helpful support agent.',
 })
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "customer-support-greeting",
+    llmobs.WithPromptVersion(2),
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Text: "You are a helpful support agent."},
+    }),
+)
+if err != nil {
+    return err
+}
 ```
 
 {{% /tab %}}
@@ -338,6 +463,61 @@ The context associates metadata with LLM spans created inside the callback; it d
 
 [13]: /llm_observability/instrument/sdk/?tab=nodejs
 [14]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
+{{% /tab %}}
+{{% tab "Go" %}}
+
+[Enable Agent Observability][15]. Formatting a managed prompt does not automatically track it in Go. Create an LLM span around the model call and annotate it with the managed prompt.
+
+Use the application's `client` and request `ctx` inside an application function that returns an error:
+
+```go
+import (
+    "fmt"
+
+    "github.com/DataDog/dd-trace-go/v2/llmobs"
+    "github.com/openai/openai-go/v3"
+    "github.com/openai/openai-go/v3/responses"
+)
+
+prompt, err := llmobs.GetPrompt(ctx, "customer-support-system-prompt",
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{
+            Text: "You are a helpful support agent writing for a {{audience}} audience.",
+        },
+    }),
+)
+if err != nil {
+    return err
+}
+variables := map[string]any{"audience": audience}
+systemPrompt, err := prompt.Format(variables)
+if err != nil {
+    return err
+}
+combinedPrompt := fmt.Sprintf("%s\n\nUser question: %s", systemPrompt.Text, question)
+
+span, llmCtx := llmobs.StartLLMSpan(ctx, "customer-support",
+    llmobs.WithModelName("gpt-4o"),
+    llmobs.WithModelProvider("openai"),
+)
+span.Annotate(llmobs.WithAnnotatedPrompt(prompt.Annotation(variables)))
+
+response, err := client.Responses.New(llmCtx, responses.ResponseNewParams{
+    Model: "gpt-4o",
+    Input: responses.ResponseNewParamsInputUnion{OfString: openai.String(combinedPrompt)},
+})
+if err != nil {
+    span.Finish(llmobs.WithError(err))
+    return err
+}
+span.AnnotateLLMIO(
+    []llmobs.LLMMessage{{Role: "user", Content: combinedPrompt}},
+    []llmobs.LLMMessage{{Role: "assistant", Content: response.OutputText()}},
+)
+span.Finish()
+```
+
+[15]: /llm_observability/instrument/sdk/?tab=go
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -467,6 +647,12 @@ const createdVersion = await prompts.createPromptVersion(
 
 Use `await` with these methods.
 
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Use the UI or the [Prompt Management API][8] to create, update, list, or delete prompts. The Go SDK exposes `llmobs.GetPrompt()` for runtime retrieval, not management operations.
+
+[8]: /api/latest/agent-observability/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -614,6 +800,22 @@ const prompt = await tracer.llmobs.prompts.getPrompt('my-prompt', {
 ```
 
 {{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+// DD_ENV=production
+prompt, err := llmobs.GetPrompt(ctx, "my-prompt",
+    llmobs.WithPromptTargetingAttributes(map[string]any{"tag": "unstable"}),
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Text: "You are a helpful assistant."},
+    }),
+)
+if err != nil {
+    return err
+}
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 To configure this:
@@ -653,3 +855,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [11]: /remote_configuration/
 [13]: /llm_observability/instrument/sdk/?tab=nodejs
 [14]: /llm_observability/instrument/auto_instrumentation/?tab=nodejs
+[15]: /llm_observability/instrument/sdk/?tab=go

@@ -114,6 +114,25 @@ Make sure the application can reach the Agent and [Remote Configuration][16] is 
 [16]: /remote_configuration/
 [18]: /tracing/trace_collection/dd_libraries/nodejs/#import-and-initialize-the-tracer
 {{% /tab %}}
+{{% tab "Go" %}}
+
+Use `dd-trace-go/v2` **2.12.0 or later**, including the `openfeature` package. Set the following before [starting the tracer][19]:
+
+```shell
+export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+```
+
+Add the import that enables experiment reporting:
+
+```go
+import _ "github.com/DataDog/dd-trace-go/v2/openfeature"
+```
+
+Make sure the application can reach the Agent and [Remote Configuration][16] is enabled. No additional SDK initialization is needed.
+
+[16]: /remote_configuration/
+[19]: /tracing/trace_collection/dd_libraries/go/#getting-started
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Match prompt requests to outcomes
@@ -141,6 +160,23 @@ const prompt = await tracer.llmobs.prompts.getPrompt('checkout-assistant', {
   targetingKey: currentUser.id,
   fallback: 'You are a helpful checkout assistant.',
 })
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+Use the request's `ctx` and the user's ID as a string:
+
+```go
+prompt, err := llmobs.GetPrompt(ctx, "checkout-assistant",
+    llmobs.WithPromptTargetingKey(userID),
+    llmobs.WithPromptFallback(llmobs.PromptFallback{
+        Template: llmobs.PromptTemplate{Text: "You are a helpful checkout assistant."},
+    }),
+)
+if err != nil {
+    return err
+}
 ```
 
 {{% /tab %}}

@@ -15,7 +15,7 @@ Use an existing Datadog managed prompt or promote an application's local prompt,
 
 ## Guidelines
 
-1. This guide supports Python and Node.js applications. For other languages, do not add runtime retrieval using these instructions. Return to the main [Agentic Instrumentation guide](/llm_observability/instrument/agentic) and instrument the selected prompts with structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in another language.
+1. This guide supports Python and Node.js applications. For Go, use the [Go workflow](#go-applications) below. For other languages, do not add runtime retrieval using these instructions. Return to the main [Agentic Instrumentation guide](/llm_observability/instrument/agentic) and instrument the selected prompts with structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in another language.
 2. Inspect the application before modifying it. Identify its package manager, configuration and secret-management workflow, startup command, existing Datadog instrumentation, LLM provider, prompt construction, and provider call site.
 3. For an existing managed prompt, use the prompt ID, environment, and variable names supplied in the user's prompt without asking the user to confirm them. For a promotion, derive a descriptive prompt ID from the selected prompt's purpose and ask the user to confirm it before creating the prompt.
 4. If multiple prompt or provider call sites are plausible, ask the user which one to modify and wait for an answer before editing.
@@ -27,6 +27,8 @@ Use an existing Datadog managed prompt or promote an application's local prompt,
 10. Never create, update, or deploy a managed prompt from application startup or a request path. Promotion is a one-time setup operation performed by the coding agent after the user opts in.
 
 ## Install the Prompt Management SDK
+
+For Go applications, follow the dedicated workflow below instead of the Python and Node.js examples.
 
 Use the application's existing package manager and dependency-management conventions. Make installation repeatable from a clean environment.
 
@@ -225,6 +227,18 @@ const response = await tracer.llmobs.annotationContext(
 {{< /tabs >}}
 
 Annotation contexts do not create an LLM span. Use a supported automatically instrumented provider or preserve the application's existing manual LLM span instrumentation.
+
+## Go applications
+
+Apply the shared consent, secret-handling, fallback, and verification rules in this guide. Use `dd-trace-go/v2` **2.12.0 or later**.
+
+The Go SDK is read-only. If the user wants to promote a local prompt, explain that they must create it through the UI or API first and provide its prompt ID. Do not call nonexistent SDK creation methods or create a custom HTTP client.
+
+1. Follow the Go tab in [Configure prompt retrieval](/llm_observability/configure/prompt_management/#configure-prompt-retrieval). Reuse the application's tracer initialization and request context. Do not require application-side credentials for successful Agent-backed retrieval; exact/latest retrieval needs an API key, and direct environment retrieval needs both keys.
+2. At the existing prompt-construction boundary, call `llmobs.GetPrompt(ctx, promptID, llmobs.WithPromptFallback(...))`, preserving the application's text or chat prompt as the fallback. Handle the error before using the prompt.
+3. Call `prompt.Format(variables)` and handle its error. Follow the Go example in [Retrieve, format, and use a prompt](/llm_observability/configure/prompt_management/#retrieve-format-and-use-a-prompt) to pass the formatted output to the existing model client without changing its behavior.
+4. Follow the Go example in [Track prompt usage](/llm_observability/configure/prompt_management/#track-prompt-usage). Formatting does not automatically track the prompt. Annotate the LLM span with `llmobs.WithAnnotatedPrompt(prompt.Annotation(variables))`, using the same variables as formatting. Preserve existing manual instrumentation rather than creating duplicate spans.
+5. Verify the integration as described below. Do not claim live verification without running the approved application flow.
 
 ## Verify the integration
 
