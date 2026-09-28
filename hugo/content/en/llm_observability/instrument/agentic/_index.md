@@ -180,8 +180,8 @@ https://app.{dd_site}/llm/applications?query=@ml_app:{application_name}
 ```
 
 Fill in the provided values:
-1. `dd_site` - if the value was provided for [Datadog site][7], use that value. Otherwise, use `datadoghq.com`.
-2. `application_name` - use either the provided or inferred value from the [Agent Observability application name][8] section.
+1. `dd_site`: If the value was provided for [Datadog site](#datadog-site), use that value. Otherwise, use `datadoghq.com`.
+2. `application_name`: Use either the provided or inferred value from the [Agent Observability application name](#agent-observability-application-name) section.
 
 ## Optional prompt management
 
@@ -210,6 +210,4 @@ If Prompt Management requires an SDK update, explain why and ask before updating
 [4]: /llm_observability/instrument/otel_instrumentation.md
 [5]: /llm_observability/instrument/prompt_tracking.md
 [6]: /llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
-[7]: #datadog-site
-[8]: #agent-observability-application-name
 [9]: /llm_observability/instrument/agentic/prompt_management.md

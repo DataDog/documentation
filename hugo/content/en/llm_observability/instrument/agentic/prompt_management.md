@@ -8,7 +8,7 @@ aliases:
 
 Use an existing Datadog managed prompt or promote an application's local prompt, preserve the application's existing behavior as a fallback, and track use of the managed prompt in Agent Observability.
 
-Prompt Management is optional. When following the main [Agentic Instrumentation guide](/llm_observability/instrument/agentic.md), complete instrumentation and the requested context upload before starting this integration. Prompt Management is not required for context sharing or check recommendations.
+Prompt Management is optional. When following the main [Agentic Instrumentation guide][1], complete instrumentation and the requested context upload before starting this integration. Prompt Management is not required for context sharing or check recommendations.
 
 ## Select the workflow
 
@@ -160,3 +160,5 @@ with LLMObs.annotation_context(
 4. If the user authorizes the run, use the application's normal execution workflow and exercise the modified provider call. If the user declines, give the user the exact command or action needed to do so.
 5. In the final response, state whether the application was run. After a promotion, include the direct prompt-page link constructed from the UUID returned by `LLMObs.create_prompt()`. Otherwise, include a direct prompt-page link when its UUID and application host are known. Ask the user to trigger the modified LLM flow if necessary, return to that prompt page in Datadog, and allow a short delay for prompt usage to appear.
 6. Report any authentication, authorization, retrieval, or tracking failure accurately. Do not claim that Datadog-side tracking was verified unless the user confirms it.
+
+[1]: /llm_observability/instrument/agentic.md
