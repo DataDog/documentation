@@ -52,7 +52,7 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 ## Analyze with Bits AI
 
-Click {{< ui >}}Analyze with Bits AI{{< /ui >}} on the path view to open [Bits AI][5] with the current path loaded. Bits AI analyzes latency, packet loss, and jitter along the path and returns an AI-generated breakdown of where issues occur.
+Click {{< ui >}}Analyze with Bits AI{{< /ui >}} on the path view to open [Bits AI][5] with the current path loaded. Bits AI analyzes latency, packet loss, and jitter along the path, so it can return an AI-generated breakdown of where issues occur.
 
 You can also query Network Path test runs, including hop-by-hop data, from an AI agent with the [`get_network_path_test_runs`][6] tool in the Datadog MCP Server.
 
