@@ -1,5 +1,6 @@
 ---
 title: Send logs to BYOC Logs with the Datadog Agent
+private: true
 aliases:
 - /cloudprem/ingest_logs/datadog_agent/
 - /cloudprem/ingest/agent/

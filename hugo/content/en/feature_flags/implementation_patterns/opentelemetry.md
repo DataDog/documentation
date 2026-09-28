@@ -95,7 +95,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer flagProvider.Shutdown()
+    if ddProvider, ok := flagProvider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     if err := openfeature.SetProviderAndWait(flagProvider); err != nil {
         log.Fatalf("Failed to set provider: %v", err)
@@ -328,7 +330,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer flagProvider.Shutdown()
+    if ddProvider, ok := flagProvider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     if err := openfeature.SetProviderAndWait(flagProvider); err != nil {
         log.Fatalf("Failed to set provider: %v", err)

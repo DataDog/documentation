@@ -206,9 +206,43 @@ To resolve this, add Datadog's webhook IPs to your network allowlist by visiting
 ### Configure Cloud Cost in Datadog
 Navigate to [Setup & Configuration][3] and follow the steps.
 
+### Migrate exports from an EA to an MCA
+
+Azure does not automatically migrate cost export definitions from an Enterprise Agreement (EA) to a Microsoft Customer Agreement (MCA). For more information, see Microsoft's [MCA onboarding documentation][15].
+
+The following process preserves historical EA data for Datadog configurations that use a billing account, subscription, or resource group scope.
+
+1. Record the following settings for both the actual and the amortized EA exports:
+   * Export name, including capitalization
+   * Storage account
+   * Storage container
+   * Storage directory and export prefix
+   * Dataset version, format, and compression type
+1. After the final EA-period exports run, disable the scheduled EA exports, but keep their definitions. Do not allow the EA and MCA scheduled exports to write to the same destination at the same time.
+1. Leave the Azure Cloud Cost Management configuration in Datadog enabled and unchanged. For a billing account scope, Datadog retains the EA ID.
+1. After the MCA becomes active, recreate the actual and amortized exports at the corresponding MCA scope using Terraform or the Azure portal. Use the export names, storage account, container, directory, and prefix recorded from the EA exports.
+   * For Terraform, follow the [Terraform setup flow][19] through the Azure resource HCL steps. Do not apply new Datadog HCL or replace the existing Cloud Cost Management configuration.
+   * For the Azure portal, follow the [manual cost export instructions][17].
+
+Datadog continues to read the historical EA files from the existing destination and adds MCA data to the same cost history.
+
+<div class="alert alert-warning">
+<strong>Do not backfill EA dates from an MCA scope</strong>
+<p>An MCA export does not include costs from the previous EA. Running a one-time MCA export for an EA date range can write a newer empty manifest to the shared destination. Datadog reads the latest export for each month, so the empty manifest can zero out EA data that was previously ingested.</p>
+</div>
+
+To backfill data after an EA-to-MCA migration, use the agreement that covered the requested dates:
+
+* For dates before the MCA effective date, run the one-time actual and amortized exports from the previous EA scope.
+* For dates on or after the MCA effective date, run the one-time actual and amortized exports from the MCA scope.
+
+If the previous EA scope is unavailable, contact Microsoft Support to request the historical exports. If you changed an export name or destination, or deleted and recreated the Datadog configuration, contact [Datadog Support][16]. Do not create additional one-time or scheduled exports until Datadog Support reviews the configuration.
+
 ### Getting historical data
 
 Azure exports cost data starting from the month you created the export. Datadog automatically ingests up to 15 months of available historical cost data from these exports. You can manually backfill up to 12 months of Azure cost data using the Azure Cost Exports UI.
+
+**Note**: If you migrated from an EA to an MCA, follow the [migration instructions][18] before running a historical export.
 
 1. Complete the instructions in the **Setup** and **Configure Cloud Cost in Datadog** sections above.
 1. Wait up to 24 hours for cost data to appear in Datadog to ensure the integration is working end-to-end before beginning the backfill process. **Note:** If you have already completed setup, and cost data is appearing in Datadog, you can proceed directly to the backfill steps below.
@@ -327,3 +361,8 @@ For example, to view cost and utilization for each Azure VM, you can make a tabl
 [12]: /cloud_cost_management/tags
 [13]: /api/latest/cloud-cost-management/#create-cloud-cost-management-azure-configs
 [14]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/azure_uc_config
+[15]: https://learn.microsoft.com/en-us/azure/cost-management-billing/microsoft-customer-agreement/onboard-microsoft-customer-agreement
+[16]: /help/
+[17]: ?tab=manual#generate-cost-exports
+[18]: #migrate-exports-from-an-ea-to-an-mca
+[19]: ?tab=terraform

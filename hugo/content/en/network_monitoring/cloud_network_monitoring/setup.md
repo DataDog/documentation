@@ -258,7 +258,7 @@ To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to 
 
 You may require one of the following additional steps depending on your environment:
 
-{{< collapse-content title="Google GKE Autopilot" level="h4" >}}
+{{< collapse-content title="Google GKE Autopilot" level="h3" >}}
 
 If your cluster is running Google's GKE Autopilot, add the following to your values file:
 
@@ -270,7 +270,7 @@ providers:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Google Container-Optimized OS (COS)" level="h4" >}}
+{{< collapse-content title="Google Container-Optimized OS (COS)" level="h3" >}}
 
 If your cluster is running Google Container-Optimized OS (COS), add the following to your values file:
 
@@ -283,7 +283,7 @@ providers:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Bottlerocket Linux" level="h4" >}}
+{{< collapse-content title="Bottlerocket Linux" level="h3" >}}
 
 If your cluster is using the Bottlerocket Linux distribution for its nodes, add the following to your values file:
 

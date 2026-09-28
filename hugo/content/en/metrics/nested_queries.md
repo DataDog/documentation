@@ -63,7 +63,7 @@ Multilayer time aggregation can be used with the following functions:
 
 Any functions not listed above cannot be combined with multilayer time aggregation. 
 
-{{% collapse-content title="Time aggregation example query" level="h5" %}}
+{{% collapse-content title="Time aggregation example query" level="h4" %}}
 This query first calculates the average CPU utilization for each EC2 instance grouped by `env` and `team`, rolled up into 5-minute intervals. Then multilayer time aggregation is applied to calculate the 95th percentile in time of this nested query over 30m intervals. 
 
 
@@ -110,7 +110,7 @@ All space aggregators with the exception of percentile space aggregators have on
 - The tag(s) to group by
 
 
-{{% collapse-content title="Space aggregation example queries" level="h5" %}}
+{{% collapse-content title="Space aggregation example queries" level="h4" %}}
 This initial query, `avg:aws.ec2.cpuutilization{*} by {env,host}.rollup(avg, 300)` calculates the sum of average CPU utilization, grouped by `env` and `host` every 5 minutes. Then multilayer space aggregation is applied to calculate maximum value of the average CPU utilization by `env`.
 
 
@@ -128,7 +128,7 @@ You can use multilayer aggregation (time and space) to query percentiles and sta
 
 **Note**: The percentile or standard deviation aggregators in Nested queries are calculated using the results of an existing, aggregated count, rate, or gauge metrics. For globally accurate percentiles that are computed on unaggregated, raw values of a metric, use [distribution metrics][9] instead. 
 
- {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h5" %}}
+ {{% collapse-content title="Percentiles in Multilayer Time Aggregation example query " level="h3" %}}
 
 We can use percentiles in multilayer time aggregation to summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query every 30 minutes. 
 
@@ -139,7 +139,7 @@ We can use percentiles in multilayer time aggregation to summarize the results o
  {{% /collapse-content %}} 
  
 
-{{% collapse-content title="Percentiles in Multilayer Space Aggregation example query" level="h5" %}}
+{{% collapse-content title="Percentiles in Multilayer Space Aggregation example query" level="h3" %}}
 
 We can use percentiles in multilayer space aggregation to summarize the results of our nested query (avg CPU utilization by `env` and `team` every 5 minutes) by calculating the p95th value of this nested query for every unique `env` value. 
 
@@ -153,7 +153,7 @@ In the UI or JSON tab, it would look as follows:
 
 
 
-{{% collapse-content title="Standard deviation example query" level="h5" %}}
+{{% collapse-content title="Standard deviation example query" level="h3" %}}
 
 Standard deviation helps measure the variability or dispersion of a dataset. The following query uses standard deviation with multilayer time aggregation to calculate the standard deviation of our nested query (sum of API request counts, averaged over 4 hour) over longer twelve-hour periods:
 
@@ -171,7 +171,7 @@ Every metric query contains an initial layer of time aggregation (rollup) which 
 
  {{< img src="/metrics/nested_queries/higher-res-query-example.png" alt="example of higher resolution queries over historical timeframes in the UI" style="width:100%;" >}}
 
-{{% collapse-content title="Higher resolution example query" level="h5" %}}
+{{% collapse-content title="Higher resolution example query" level="h3" %}}
 
 Historically, when querying a metric over the past month, you would see data at 4-hour granularity by default. You can use nested queries to access higher granularity data over this historical timeframe. Here's an example query graphed over the past month where the query batch count is initially rolled up in 5 minute intervals. Then multilayer time aggregation is applied to calculate the standard deviation in time of this nested query over 4 hour intervals for a more human-readable graph.
 
@@ -206,7 +206,7 @@ When nesting queries, only the lookback mode version of the `moving_rollup` func
 - `arbitrary percentile pxx` (`p78, p99, p99.99, etc.`)
 - `stddev`
 
-{{% collapse-content title="Max Moving rollup with Lookback Mode Enabled" level="h5" %}}
+{{% collapse-content title="Max Moving rollup with Lookback Mode Enabled" level="h3" %}}
 When nesting these `moving_rollups`, the rollup intervals provided must get larger as shown in the UI or JSON tab:
 
 {{< img src="/metrics/nested_queries/moving_rollup1_ui.png" alt="example of moving rollup in the UI" style="width:100%;" >}}
@@ -217,7 +217,7 @@ When nesting these `moving_rollups`, the rollup intervals provided must get larg
 {{% /collapse-content %}} 
 
 
-{{% collapse-content title="Standard Deviation Moving Rollup with Lookback Mode Enabled" level="h5" %}}
+{{% collapse-content title="Standard Deviation Moving Rollup with Lookback Mode Enabled" level="h3" %}}
 You can also use percentiles and standard deviation with the new moving rollup function, which supports lookback, and allows nesting of moving rollups with lookback enabled.
 
 In the UI or JSON tab, it would look as follows:
@@ -238,7 +238,7 @@ Remap functions allow you to refine and transform query results based on specifi
 - `is_between` (`<QUERY>, <LOWER THRESHOLD>, <UPPER THRESHOLD>`)
 
 
-{{% collapse-content title="is_greater() example query" level="h5" %}}
+{{% collapse-content title="is_greater() example query" level="h3" %}}
 `is_greater()` returns 1.0 for each point where the query is greater than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
@@ -248,7 +248,7 @@ In the UI or JSON tab, it would look as follows:
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="is_less() example query" level="h5" %}}
+{{% collapse-content title="is_less() example query" level="h3" %}}
 `is_less()` returns 1.0 for each point where the query is less than a constant of 30 and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:
@@ -259,7 +259,7 @@ In the UI or JSON tab, it would look as follows:
 
 {{% /collapse-content %}} 
 
-{{% collapse-content title="is_between() example query" level="h5" %}}
+{{% collapse-content title="is_between() example query" level="h3" %}}
 `is_between()` returns 1.0 for each point where the query is between 10 and 30 (exclusive), and 0.0 elsewhere.
 
 In the UI or JSON tab, it would look as follows:

@@ -1,6 +1,8 @@
 ---
 title: Apps
 description: Build and deploy custom Apps locally using a code-based development workflow with React, backend functions, and a CLI.
+aliases:
+- /internal_developer_portal/plugins/
 further_reading:
 - link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
   tag: "Blog"
@@ -336,6 +338,6 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [19]: https://nodejs.org
 [20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
 [21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
-[22]: https://github.com/antfu/skills-cli
+[22]: https://github.com/vercel-labs/skills
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend

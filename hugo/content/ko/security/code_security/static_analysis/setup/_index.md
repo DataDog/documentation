@@ -22,7 +22,7 @@ title: Static Code Analysis(SAST) 설정
 {{% /site-region %}}
 
 ## 개요 {#overview}
-앱 내에서 Datadog SAST를 설정하려면 [**보안** > **Code Security**][1]로 이동합니다.
+Datadog SAST를 앱 내에서 설정하려면 [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}][1]로 이동하십시오.
 
 ## Static Code Analysis 스캔을 실행할 위치 선택 {#select-where-to-run-static-code-analysis-scans}
 ### Datadog 호스팅 스캐닝을 사용하여 스캔 {#scan-with-datadog-hosted-scanning}
@@ -31,8 +31,9 @@ Datadog Static Code Analysis(SAST) 스캔을 Datadog 인프라에서 직접 실�
 - [GitHub][18]([Git Large File Storage][17]를 사용하는 리포지토리 제외)
 - [GitLab.com 및 GitLab Self-Managed][20]
 - [Azure DevOps][19]
+- [Bitbucket Cloud][21]
 
-시작하려면 [**Code Security** 페이지][1]로 이동합니다.
+시작하려면 [{{< ui >}}Code Security{{< /ui >}} 페이지][1]로 이동하십시오.
 
 ### CI 파이프라인에서 스캔 {#scan-in-ci-pipelines}
 Datadog Static Code Analysis는 CI 파이프라인에서 [`datadog-ci` CLI][8]를 사용하여 실행됩니다.
@@ -47,7 +48,7 @@ Datadog Static Code Analysis는 CI 파이프라인에서 [`datadog-ci` CLI][8]�
 {{< /whatsnext >}}
 
 ## 소스 코드 관리 공급자 선택 {#select-your-source-code-management-provider}
-Datadog Static Code Analysis는 모든 소스 코드 관리 공급자를 지원하며, GitHub, GitLab, Azure DevOps를 기본적으로 지원합니다.
+Datadog Static Code Analysis는 모든 소스 관리 공급자를 지원하며, GitHub, GitLab, Azure DevOps, Bitbucket Cloud Premium을 기본적으로 지원합니다.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
@@ -86,10 +87,17 @@ Azure DevOps 리포지토리를 Datadog에 연결하는 방법은 [Azure 소스 
 [5]: /ko/getting_started/site/
 
 {{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+Bitbucket Cloud 워크스페이스를 Datadog에 연결하려면 [Bitbucket 소스 설정 지침][1]을 참조하십시오.
+
+[1]: /ko/integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
 {{% tab "기타" %}}
 
 다른 소스 코드 관리 공급자를 이용 중인 경우, Static Code Analysis가 `datadog-ci` CLI 도구를 사용하여 CI 파이프라인에서 실행되고 [그 결과를 Datadog에 업로드](#upload-third-party-static-analysis-results-to-datadog)하도록 구성하세요.
-기본 브랜치에서 리포지토리의 분석을 실행해야**만** 결과가 **Code Security** 페이지에 표시되기 시작합니다.
+결과가 {{< ui >}}Code Security{{< /ui >}} 페이지에 표시되기 시작하려면 기본 브랜치에서 리포지토리의 분석을 **실행해야** 합니다.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -131,7 +139,7 @@ datadog-static-analyzer -i /path/to/directory -g -o sarif.json -f sarif –-diff
 
 SARIF 보고서를 업로드하는 방법:
 
-1. [`DD_API_KEY` 및 `DD_APP_KEY` 변수가 정의되어 있어야 합니다][4].
+1. [`DD_API_KEY` 및 `DD_APP_KEY` 변수가 정의되어 있는지 확인합니다][4].
 2. 선택 사항으로 [`DD_SITE` 변수][7]를 설정합니다(이것은 기본적으로 `datadoghq.com`으로 설정됨).
 3. `datadog-ci` 유틸리티 설치:
 
@@ -140,7 +148,7 @@ SARIF 보고서를 업로드하는 방법:
    ```
 
 4. 코드에 타사 정적 분석 도구를 실행하고 그 결과를 SARIF 형식으로 출력합니다.
-5. 결과를 Datadog에 업로드:
+5. 결과를 Datadog에 업로드합니다.
 
    ```bash
    datadog-ci sarif upload $OUTPUT_LOCATION
@@ -251,7 +259,7 @@ Datadog은 SARIF 파일을 수집할 때 아래의 매핑 규칙을 사용하여
 
 ## 데이터 보존 {#data-retention}
 
-Datadog은 발견 사항을 당사 [데이터 보존 기간](https://docs.datadoghq.com/ko/data_security/data_retention_periods/)에 따라 저장합니다. Datadog은 고객 소스 코드를 저장 또는 보존하지 않습니다.
+Datadog은 당사 [ 데이터 보존 기간 ](https://docs.datadoghq.com/ko/data_security/data_retention_periods/)에 따라 발견 사항을 저장합니다. Datadog은 고객 소스 코드를 저장 또는 보존하지 않습니다.
 
 ## <!-- 추가 자료
 
@@ -275,10 +283,11 @@ Datadog은 발견 사항을 당사 [데이터 보존 기간](https://docs.datado
 [18]: /ko/security/code_security/static_analysis/setup/?tab=github#select-your-source-code-management-provider
 [19]: /ko/security/code_security/static_analysis/setup/?tab=azuredevops#select-your-source-code-management-provider
 [20]: /ko/security/code_security/static_analysis/setup/?tab=gitlab#select-your-source-code-management-provider
-[22]: https://docs.datadoghq.com/ko/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[21]: /ko/security/code_security/static_analysis/setup/?tab=bitbucketcloud#select-your-source-code-management-provider
+[22]: https://docs.datadoghq.com/ko/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [24]: https://docs.datadoghq.com/ko/account_management/teams/
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [27]: /ko/security/code_security/static_analysis/configuration/
-[101]: https://docs.datadoghq.com/ko/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/ko/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/ko/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/ko/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/ko/data_security/data_retention_periods/

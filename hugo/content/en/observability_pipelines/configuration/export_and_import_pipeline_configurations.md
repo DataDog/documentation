@@ -1,5 +1,6 @@
 ---
 title: Export and Import a Pipeline Configuration
+description: Learn how to export a draft or deployed pipeline's configuration to JSON or Terraform, and import a JSON configuration into the Observability Pipelines UI.
 aliases:
   - /observability_pipelines/configuration/export_pipeline_configuration/
 disable_toc: false

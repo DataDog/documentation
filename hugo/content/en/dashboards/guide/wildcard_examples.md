@@ -28,7 +28,7 @@ The Wildcard widget enables the creation of customized geomaps with advanced dat
 
 {{< img src="/dashboards/guide/wildcard_examples/geomap_with_data_transform_config.png" alt="Configuration code for the geomap with data transform example" style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -119,7 +119,7 @@ You can enhance your visualizations by joining Wildcard data queries with [Refer
 
 {{< img src="/dashboards/guide/wildcard_examples/bar-chart-with-reference-table-config.png" alt="Configuration code for the bar chart with reference table example." style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite configuration" level="h3" expanded=false %}}
 ```javascript
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -198,7 +198,7 @@ This example demonstrates how to create a multi-metric pie chart with interactiv
 
 {{< img src="dashboards/guide/wildcard_examples/multi_metric_pie_chart_config.png" alt="Configuration for multi-metric pie chart" style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```javascript
 {
  "description": "A simple pie chart with multiple scalar queries",
@@ -268,7 +268,7 @@ This example demonstrates how to create a multi-layer histogram that compares er
 
 {{< img src="dashboards/guide/wildcard_examples/multi_layer_histogram_config.png" alt="Configuration for multi-layer histogram visualization" style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```javascript
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -402,7 +402,7 @@ Create a customized scatterplot that uses text marks instead of points, with aut
 
 {{< img src="dashboards/guide/wildcard_examples/text_color_scatterplot_config.png" alt="Configuration for the scatterplot wildcard widget" style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```javascript
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -460,7 +460,7 @@ This example demonstrates how to create a categorical heatmap that displays data
 {{< img src="dashboards/guide/wildcard_examples/categorical_heatmap_config.png" alt="Configuration panel for the categorical heatmap showing time and category settings" style="width:100%;" >}}
 
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```javascript
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -522,7 +522,7 @@ This example demonstrates how to create a lollipop chart to clearly rank items a
 
 {{< img src="dashboards/guide/wildcard_examples/lollipop_config.png" alt="Configuration panel for creating a lollipop chart showing settings for data sources, sorting, and visual styling" style="width:100%;" >}}
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -597,7 +597,7 @@ This example demonstrates how to create a status widget that displays Firefox us
 {{< img src="dashboards/guide/wildcard_examples/custom_status_text_config.png" alt="Configuration for the custom status text widget" style="width:100%;" >}}
 
 
-{{% collapse-content title="Vega-Lite Configuration" level="h4" expanded=false %}}
+{{% collapse-content title="Vega-Lite Configuration" level="h3" expanded=false %}}
 ```
 {
  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",

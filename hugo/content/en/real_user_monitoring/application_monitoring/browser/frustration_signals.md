@@ -42,7 +42,7 @@ First, you need the Browser RUM SDK version >= 4.14.0.
 
 To start collecting frustration signals, add the following to your SDK configuration:
 
-{{% collapse-content title="Latest version" level="h4" expanded=true %}}
+{{% collapse-content title="Latest version" level="h3" expanded=true %}}
 
 ```javascript
 window.DD_RUM.init({
@@ -52,7 +52,7 @@ window.DD_RUM.init({
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Before v5.0.0" level="h4" expanded=false %}}
+{{% collapse-content title="Before v5.0.0" level="h3" expanded=false %}}
 
 ```javascript
 window.DD_RUM.init({
@@ -164,7 +164,7 @@ To provide feedback or submit a feature request, contact <a href="/help/">Datado
 [5]: /dashboards/
 [6]: /monitors/
 [7]: https://app.datadoghq.com/rum/replay/sessions/
-[8]: /session_replay/browser/
+[8]: /session_replay/
 [9]: /monitors/types/real_user_monitoring/
 [10]: mailto:success@datadoghq.com
 

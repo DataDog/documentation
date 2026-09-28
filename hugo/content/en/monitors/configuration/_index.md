@@ -220,10 +220,10 @@ The selected behavior is applied when a monitor's query does not return any data
 | {{< ui >}}Show NO DATA and notify{{< /ui >}} | Monitor status is set to `NO DATA` and a notification is sent out.        |
 | {{< ui >}}Show OK{{< /ui >}}                 | Monitor is resolved and status is set to `OK`.                            |
 
-The {{< ui >}}Evaluate as zero{{< /ui >}} and {{< ui >}}Show last known status{{< /ui >}} options are displayed based on the query type:
+Using default_zero() in a query locks the missing-data behavior to that query type's default and disables the other options:
 
-- {{< ui >}}Evaluate as zero{{< /ui >}}: This option is available for monitors using `Count` queries without the `default_zero()` function.
-- {{< ui >}}Show last known status{{< /ui >}}: This option is available for monitors using any other query type than `Count`, for example `Gauge`, `Rate`, and `Distribution`, as well as for `Count` queries with `default_zero()`.
+- For queries with `default_zero()`, missing data is always evaluated as zero, and the other missing-data behaviors are unavailable.
+- For queries without `default_zero()`, `Count` queries default to {{< ui >}}Evaluate as zero{{< /ui >}}, while other query types default to {{< ui >}}Show last known status{{< /ui >}}. All missing-data behaviors remain available.
 
 #### Auto resolve
 
@@ -241,6 +241,8 @@ Group retention controls how long a monitor group is kept in the monitor's statu
 
 By default, a group keeps the status for 24 hours before it is dropped. Host monitors and service checks that notify on missing data keep the status for 48 hours.
 
+For monitors with many groups, dynamic group retention is enabled by default. Datadog automatically shortens the retention period for groups that stop reporting data. The more frequently groups appear and disappear, the shorter the retention period becomes, helping keep the monitor fast and efficient. This behavior affects only groups that have stopped reporting data; groups that are actively reporting are never removed.
+
 For the multi alert monitor types that support custom retention, you can set a value between 1 hour and 72 hours. Select {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Group Retention Time Option" style="width:70%;">}}
@@ -253,8 +255,6 @@ Some use cases to define a custom group retention time include:
 - When you would like to keep the group in the status for as long as you usually take for troubleshooting
 
 **Note**: The custom group retention time option requires a multi alert monitor that supports the [`On missing data`][4] option. These monitor types are APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs, and RUM monitors.
-
-<div class="alert alert-info"><strong>Preview: Dynamic group retention</strong><p>Dynamic group retention is in Preview and applies to newly created monitors. For monitors with a large number of groups, Datadog automatically shortens how long a group is kept after it stops reporting data. The more frequently groups appear and disappear, the shorter this period becomes, keeping the monitor fast and efficient. This only affects groups that have gone silent; groups actively reporting data are never removed.</p></div>
 
 #### New group delay
 

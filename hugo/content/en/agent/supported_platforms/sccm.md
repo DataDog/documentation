@@ -61,7 +61,7 @@ Microsoft SCCM (Systems Center Configuration Manager) is a configuration managem
 
 SCCM packages allow you to deploy configuration files to your Datadog Agents, overwriting their default settings. An Agent configuration consists of a `datadog.yaml` configuration file and optional `conf.yaml` files for each integration. You must create a package for each configuration file you want to deploy.
 
-1. Collect your `datadog.yaml` and `conf.yaml` files in a local SCCM machine folder.
+1. Collect your `datadog.yaml` and `conf.yaml` files in a local SCCM machine folder. See the [example Agent configuration file for Windows][4] for all available configuration options.
 1. Create an SCCM Package and select {{< ui >}}Standard program{{< /ui >}}.
 1. Select the location that contains the configuration file that you want to deploy to your Agents.
 1. Select a [Device collection][5] to deploy the changes to.
@@ -83,5 +83,6 @@ Restart the Agent service to observe your configuration changes:
 [1]: https://learn.microsoft.com/en-us/mem/configmgr/core/servers/deploy/configure/manage-content-and-content-infrastructure
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [3]: /agent/basic_agent_usage/windows/?tab=commandline#configuration
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 [5]: https://learn.microsoft.com/en-us/mem/configmgr/core/clients/manage/collections/create-collections#bkmk_create
 [6]: /agent/basic_agent_usage/windows/#agent-commands

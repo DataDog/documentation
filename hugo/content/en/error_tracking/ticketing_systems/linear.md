@@ -83,7 +83,7 @@ When multiple Error Tracking issues are linked to the same Linear issue, their s
 
 Assuming that your mapping is defined as follows:
 
-| Case Management status group | Linear issue state |
+| Work Management status group | Linear issue state |
 |------------------------------|--------------------|
 | `Open`                       | `Todo`             |
 | `In Progress`                | `In Progress`      |
@@ -107,18 +107,14 @@ If you experience unexpected behaviors using ticketing systems with Error Tracki
 If you experience syncing issues between your Linear issues and the corresponding Error Tracking issues (such as the Error Tracking issue state not being updated when you close the Linear issue), verify that the following steps are all properly configured:
 
 1. In the issue panel, make sure that the Error Tracking issue is correctly linked to the Linear issue.
-2. Verify that Case Management is correctly configured to sync with Linear.
+2. Verify that Work Management is correctly configured to sync with Linear.
 
-   Datadog automatically creates a Case Management case to link Error Tracking issues and Linear issues. To check the configuration:
-   - From the issue panel, open the linked Case Management case to find its project.
-   - In Case Management settings, verify that the Linear integration is enabled for this project.
+   Datadog automatically creates a Work Management work item to link Error Tracking issues and Linear issues. To check the configuration:
+   - From the issue panel, open the linked Work Management work item to find its project.
+   - In Work Management settings, verify that the Linear integration is enabled for this project.
    - Verify that the correct Linear workspace and team are configured.
 
-   {{< img src="error_tracking/enable-linear-for-case-management-project.png" alt="Enable Linear for your Case Management project" style="width:100%;" >}}
-
-3. In Case Management settings, make sure that sync between Case Management and Linear is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Linear.
-
-   {{< img src="error_tracking/sync-data-between-case-management-and-linear.png" alt="Sync data between Case Management and Linear" style="width:100%;" >}}
+3. In Work Management settings, make sure that sync between Work Management and Linear is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Linear.
 
 4. In your Linear settings, check that a webhook is configured to automatically sync updates between Datadog and Linear. If the webhook is missing, [add a Linear webhook][6].
 

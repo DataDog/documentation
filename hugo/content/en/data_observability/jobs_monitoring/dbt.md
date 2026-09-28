@@ -27,7 +27,7 @@ Follow the steps below to connect dbt Cloud to Datadog.
 Create a service token in dbt Cloud so Datadog can access your account's metadata.
 
 1. In dbt Cloud, go to {{< ui >}}User Profile{{< /ui >}} > {{< ui >}}API Tokens{{< /ui >}} > {{< ui >}}Service Tokens{{< /ui >}}.
-2. Click on {{< ui >}}+ Create Service Token{{< /ui >}}.
+2. Click on {{< ui >}}\+ Create Service Token{{< /ui >}}.
 3. Provide a name for the token.
 4. Set the token permissions:
    - If you create the webhook in dbt Cloud yourself, use the {{< ui >}}Stakeholder/Read-Only{{< /ui >}} permission set scoped to the relevant dbt Cloud projects.
@@ -130,6 +130,8 @@ Follow the steps below to connect dbt Core to Datadog.
    ```shell
    export OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER=<PR_NUMBER>
    ```
+
+   If your CI job runs inside a container that does not inherit the runner's git context (for example, a GitHub Actions workflow that launches a container), the repository URL, commit SHA, and pull request number are not detected automatically, so you must pass all three explicitly. See [Running your dbt Core CI job in a container](/data_observability/cicd/#running-your-dbt-core-ci-job-in-a-container).
 
 ## Update the dbt invocation
 

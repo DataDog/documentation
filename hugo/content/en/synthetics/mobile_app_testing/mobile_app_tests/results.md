@@ -37,7 +37,7 @@ On the {{< ui >}}Test Results{{< /ui >}} tab, you can examine the latest failed 
 
 {{< img src="mobile_app_testing/mobile_app_test_runs.png" alt="The Test Runs tab on a mobile app Test Details page showing a filterable table of test runs with status, date, run type, steps, duration, location, device, app version, and test version columns" style="width:100%;">}}
 
-{{% collapse-content title="Test run columns" level="h4" %}}
+{{% collapse-content title="Test run columns" level="h3" %}}
 
 The following describes each column in the {{< ui >}}Test Results{{< /ui >}} table:
 
@@ -112,7 +112,7 @@ The {{< ui >}}Properties{{< /ui >}} tab contains the configuration details, owne
 
 {{< img src="mobile_app_testing/mobile_app_properties.png" alt="The Properties tab on a mobile app Test Details page showing Ownership, Execution, and Monitor sections, with left navigation for Continuous Testing, Parent Tests, and other configuration" style="width:100%;">}}
 
-{{% collapse-content title="Properties tab sections" level="h4" %}}
+{{% collapse-content title="Properties tab sections" level="h3" %}}
 
 The following describes each section available on the {{< ui >}}Properties{{< /ui >}} tab:
 

@@ -4,7 +4,7 @@
 */}}
 <nav id="TableOfContents">
     <ul>
-    {{ $headers_html := (findRE `<h([2-3]).*?>.*<\/h[2-3]>` .Content) }}
+    {{ $headers_html := (findRE `<h([2-3])[^>]*?id="[^"]*"[^>]*?>.*?<\/h[2-3]>` .Content) }}
     {{ $prev_h_level := 3 }}
     {{ $level_nested := 0 }}
     {{ range $i, $header := $headers_html }}

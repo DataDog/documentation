@@ -4,7 +4,7 @@ is_beta: true
 private: true
 description: Use telemetry rules to govern tags, indexing, and other characteristics of your metrics, logs, and spans.
 further_reading:
-- link: '/api/latest/tag-policies/'
+- link: '/api/latest/tag-rules/'
   tag: 'Documentation'
   text: 'Tag Visibility and Enforcement Rules API'
 - link: '/account_management/governance_console/'
@@ -21,9 +21,9 @@ further_reading:
   text: 'Agent Filtering for Custom Metrics'
 ---
 
-{{< beta-callout url="#" btn_hidden="true" header="false" >}}
+{{< callout url="#" btn_hidden="true" header="false" >}}
 Telemetry rules are in Preview. If you see an issue or want to propose a new feature, use the Give Feedback button in the product UI.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 

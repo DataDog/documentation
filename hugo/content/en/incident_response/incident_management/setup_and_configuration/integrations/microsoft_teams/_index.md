@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/microsoft-teams"
   tag: "Documentation"
   text: "Microsoft Teams Integration"
+- link: "https://www.datadoghq.com/blog/datadog-incident-response-ai-features/"
+  tag: "Blog"
+  text: "Accelerate investigations with AI in Datadog Incident Response"
 ---
 
 ## Overview
@@ -57,6 +60,14 @@ Use an incident updates channel to provide your stakeholders with organization-w
 Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident states, severities, and incident commanders.
 
 To customize this behavior, deactivate this setting and [define a notification rule][4] instead.
+
+## Microsoft Teams notification targets
+
+[Notification rules][4] target a Microsoft Teams channel with a `@teams-<channel>` handle, which notifies the specific channel named in the handle. Use this to notify a standing channel, such as the global incident updates channel.
+
+Incident Management does not provide a handle that resolves to an incident's automatically created channel. Slack notification rules can use `@incident-slack-channel` to notify the incident's Slack channel, but Microsoft Teams has no equivalent handle. As a result, a notification rule that includes `@-mentions` delivers them to the channel named in the `@teams-` handle, not to the per-incident channel.
+
+To keep responders informed in an incident's own channel, use the Datadog tab and `@Datadog` commands within that channel. You can also post updates to the incident timeline, which syncs to the channel when [channel message syncing](#channel-message-syncing) is enabled.
 
 ## Microsoft Teams meetings
 

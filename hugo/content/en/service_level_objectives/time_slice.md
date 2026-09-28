@@ -34,7 +34,7 @@ You can create a Time Slice SLO through the following ways:
 {{< img src="service_level_objectives/time_slice/time-slice-creation.png" alt="Configuration options to create a Time Slice SLO" style="width:90%;" >}}
 
 1. Navigate to [{{< ui >}}SLOs{{< /ui >}}][1].
-2. Click {{< ui >}}+ New SLO{{< /ui >}} to open up the Create SLO page.
+2. Click {{< ui >}}\+ New SLO{{< /ui >}} to open up the Create SLO page.
 3. Select {{< ui >}}By Time Slices{{< /ui >}} to define your SLO measurement. 
 4. Define your uptime condition by choosing a metric query, comparator and threshold. For example, to define uptime as whenever p95 latency is less than 1s. Alternatively, you can [import the uptime from a monitor](#import-from-a-monitor).
 5. Configure your SLO to use 1 or 5 minute time slices to calculate uptime.

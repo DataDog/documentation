@@ -52,7 +52,7 @@ During initialization, you can choose one of the following ways to authorize CoT
 - {{< ui >}}API Key + App Key{{< /ui >}}: Prompts you to set your [Datadog API key][1] and [application key][2] in `~/.ddcoterm/config.yaml`.
 - {{< ui >}}API Key Only{{< /ui >}}: Prompts you to set your Datadog API key in `~/.ddcoterm/config.yaml`.
 
-<div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot <a href="/coterm/usage/#require-approval-for-commands">require approvals with Case Management</a>.</div>
+<div class="alert alert-info">If you select the <strong>API Key Only</strong> option, you cannot <a href="/coterm/usage/#require-approval-for-commands">require approvals with Work Management</a>.</div>
 
 ## Configure your CoTerm settings
 
@@ -79,7 +79,7 @@ The `~/.ddcoterm/config.yaml` file contains your CoTerm configurations:
   : If you are not using OAuth, your [Datadog API key][1]. If you have enabled OAuth, CoTerm defaults to using OAuth and ignores `api_key`.
 
   `app_key`
-  : If you are not using OAuth, your [Datadog application key][2]. <br/>**Note**: To [require approvals with Case Management][5], you must use OAuth _or_ specify both your API key and application key in this file.
+  : If you are not using OAuth, your [Datadog application key][2]. <br/>**Note**: To [require approvals with Work Management][5], you must use OAuth _or_ specify both your API key and application key in this file.
 
 ## Next steps
 

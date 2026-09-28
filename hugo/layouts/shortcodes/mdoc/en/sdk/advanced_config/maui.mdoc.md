@@ -143,9 +143,16 @@ DdSdk.AddUserExtraInfo(new Dictionary<string, object> { { "subscription", "annua
 DdSdk.ClearUserInfo();
 ```
 
-### Track account sessions
+### Track user accounts
 
 For B2B applications, `DdSdk.SetAccountInfo` attaches an account identity to every event. Use it together with — not instead of — user info.
+
+The SDK reports these attributes:
+
+| Attribute      | Type   | Description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| `account.id`   | String | (Required) Unique account identifier.                       |
+| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
 
 ```csharp
 DdSdk.SetAccountInfo("acct-456", "Acme Corp",
@@ -155,6 +162,8 @@ DdSdk.AddAccountExtraInfo(new Dictionary<string, object> { { "region", "us-east"
 
 DdSdk.ClearAccountInfo();
 ```
+
+Keys passed in the extra info dictionary are added to the `account` attribute, so `tier` is reported as `account.tier`. Call `SetAccountInfo` before `AddAccountExtraInfo`. Adding extra info before an account exists has no effect.
 
 ### Track global attributes
 

@@ -2,20 +2,35 @@
 
 Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
 
-> [!IMPORTANT]
-> **Repo reorg**
->
-> On August 6, 2026, the `documentation` repo was reorganized into a monorepo to support a Hugo-to-Astro migration. The resulting conflicts in open PRs were automatically resolved where possible. If you had a PR open at this time, it may have been impacted. See [REPO_REORG.md](REPO_REORG.md) for details.
-
 ## Contribute to the docs
 
 Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request (PR) in this repo for the Documentation team to review. The Documentation team is added as a PR reviewer automatically.
 
 Most pages on the documentation site feature an **Edit** button that sends you to the source file in this repo. You can make an edit straight from the GitHub website!
 
-![The edit button on a docs page](static/images/edit_link.png)
+![The edit button on a docs page](hugo/static/images/edit_link.png)
 
 For more information on contributing, see the [contribution guidelines][18].
+
+### PR Etiquette
+
+_A human_ reads and reviews every docs contribution that is marked Ready for Review. To make the process of reviewing and merging your PR smooth and quick:
+- Your PR should address one (1) problem, maybe two, not many. It can touch many files in addressing that one problem.
+- If the PR is getting very large, reach out to the docs team to ask how we want it structured (one PR or broken apart) or whether we want to handle the fix ourselves.
+- Respond in a timely fashion to questions and feedback.
+- The PR description should be written by you, the human, not AI. The description should be concise and focused on the problem solved with the change, and the context for the decision to open the PR, not an itemization of the changes made (we can easily see those on the Changes tab).
+
+**Good PR descriptions:**
+- I noticed this was wrong/missing
+- I'm updating all links to X page, or all of Y terminology
+- I'm improving the clarity of this description
+- I'm updating docs to reflect code changes or new defaults
+- Support gets repeated requests for this information
+
+**Bad PR descriptions:**
+- Detailed lists of changes made
+- Detailed background of who the customer is, how they found the problem, how badly they need the fix -- we believe you and don't need convincing
+- Unfiltered Claude output describing the PR from Claude's perspective
 
 >[!NOTE]
 >**AI and content quality**
@@ -35,21 +50,19 @@ Follow these steps if you are NOT a Datadog employee:
 ### Datadog Staff
 Follow these steps if you are a Datadog employee:
 
-- Always branch off of master; never commit directly to master.
+- Always branch off of master; don't fork, and don't commit directly to master.
 - You MUST name your branch `<name>/<description>`. If you do not include the forward slash (`/`), the GitLab pipeline won't run, you won't get a branch preview, and your pull request will not pass in CI. Getting a branch preview makes it easier for us to check for any issues with your PR, such as broken links. Using a [Slack username][21] also ensures you get build notifications in Slack.
 - Consult our [contributing guidelines][8].
-- When you're ready to commit, create a new pull request to master from your branch.
+- When you're ready to commit, create a pull request to master from your branch.
 - Use GitHub's [draft pull request][15] feature and appropriate labels such as "Do Not Merge" or "Work in Progress" until your PR is ready to be merged and live on production.
 - If you've named your branch correctly, a GitHub bot posts a link to the docs preview website for your PR. After the preview build completes, you can use the link to preview your changes.
 - Running the build locally is optional. If you followed the branch naming conventions above, your pull request should generate a preview. For information on local builds, see the [Build setup guide][20].
 
 ### A note about markdown
 
-This site uses [Goldmark][9] for markdown, which is compliant with [CommonMark 0.29][10].
+This site uses [Goldmark][9] for markdown, which is compliant with [CommonMark 0.29][10]. If you include ANY Markdown in a file (99.9% of cases), give it a `.md` extension.
 
-If you include ANY Markdown in a file, give it a `.md` extension.
-
-Make sure all files are lowercase. Macs are case-insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
+Make sure all file names are lowercase. Macs are case-insensitive when creating links to images and pages, but our build server is not, so tests may work locally, but the site will fail in production.
 
 ## Releasing
 

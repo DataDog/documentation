@@ -46,8 +46,8 @@ The following conditional variables are available:
 | `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
-| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `WARNING` or `OK`             |
-| `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`<br> **Note**: For `ALERT` to `WARNING` transitions, `{{#is_alert_recovery}}` recipients receive notifications without message bodies. Use `{{#is_alert_to_warning}}` to include messages  |
+| `{{^is_alert_recovery}}`   | The monitor does not recover from an `ALERT` to `OK`               |
 | `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
 | `{{#is_no_data_recovery}}` | The monitor recovers from `NO DATA`                                |
@@ -265,8 +265,7 @@ Attributes
 
 Configure multi alert variables in [multi alert monitors][1] based on the dimension selected in the multi alert group box. Enrich notifications by dynamically including the value associated with the group-by dimension in each alert.
 
-**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically. This means that any alerts or configurations set on the monitored endpoint could be applied to each group resulting from the aggregation.
-
+**Note**: When you use the `group_by` field in aggregation, additional tags and alerts from the monitor may be inherited automatically, so any alerts or configurations set on the monitored endpoint could apply to each group resulting from the aggregation. [Reserved tag keys][21] are exceptions. They're available in every alert regardless of the selected group-by dimension.
 {{< tabs >}}
 {{% tab "Group by tag" %}}
 
@@ -767,3 +766,4 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [18]: /monitors/types/ci/?tab=pipelines
 [19]: /monitors/types/database_monitoring/
 [20]: /synthetics/notifications/template_variables/
+[21]: /getting_started/tagging/

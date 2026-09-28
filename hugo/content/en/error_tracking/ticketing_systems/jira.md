@@ -87,7 +87,7 @@ When multiple Error Tracking issues are linked to the same Jira ticket, there is
 
 Assuming that your mapping is defined as follows:
 
-| Case Management status group | Jira Ticket status |
+| Work Management status group | Jira Ticket status |
 |------------------------------|--------------------|
 | `Open`                       | `To Do`            |
 | `In Progress`                | `In Progress`      |
@@ -158,13 +158,9 @@ If you experience unexpected behaviors using ticketing systems with Error Tracki
 If you experience syncing issues between your Jira tickets and the corresponding Error Tracking issues (such as the issue state not being updated when you close the Jira ticket), verify that the following steps are all properly configured:
 
 1. In the issue panel, make sure that the issue is correctly linked to the Jira ticket.
-2. A Case Management case was automatically created by Datadog to act as a linking point for the Error Tracking issue and the Jira ticket. You can access this case from the issue panel, to find the  Case Management project in which it was created. In Case Management settings, make sure that the Jira integration is enabled for this project, and the correct Jira account and board are configured.
+2. A Work Management work item was automatically created by Datadog to act as a linking point for the Error Tracking issue and the Jira ticket. You can access this work item from the issue panel, to find the Work Management project in which it was created. In Work Management settings, make sure that the Jira integration is enabled for this project, and the correct Jira account and board are configured.
 
-{{< img src="error_tracking/enable-jira-for-case-management-project.png" alt="Enable Jira for your Case Management project" style="width:100%;" >}}
-
-3. In Case Management settings, make sure that sync between Case Management and Jira is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Jira.
-
-{{< img src="error_tracking/sync-data-between-case-management-and-jira.png" alt="Sync data between Case Management and Jira" style="width:100%;" >}}
+3. In Work Management settings, make sure that sync between Work Management and Jira is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Jira.
 
 4. A webhook must be configured to automatically sync updates between Datadog and Jira. In your Jira settings, check for this webhook. If the webhook is missing, follow [these steps][6] to add it and fix the sync between Datadog and Jira.
 
@@ -172,9 +168,9 @@ If you experience syncing issues between your Jira tickets and the corresponding
 
 When a Jira ticket is created from an Error Tracking issue, the ticket's {{< ui >}}Reporter{{< /ui >}} field is set to the Datadog user who configured the Jira integration, not to the user who triggered the ticket creation. This is a known limitation of the Jira integration for Datadog and applies to every ticket created from Error Tracking. To change the Reporter on a specific ticket, update it directly in Jira after creation.
 
-### A new Case Management project is created for each Jira ticket
+### A new Work Management project is created for each Jira ticket
 
-Datadog Case Management maps each Jira issue type to a different Case Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Case Management project is automatically created to link the Error Tracking issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several Case Management projects, one per issue type.
+Datadog Work Management maps each Jira issue type to a different Work Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Work Management project is automatically created to link the Error Tracking issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several Work Management projects, one per issue type.
 
 ## Further reading
 

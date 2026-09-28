@@ -345,8 +345,8 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
 1. You can:
     - Update existing processors in the current group or another group, select the group in the {{< ui >}}Processor Group{{< /ui >}} dropdown menu.
     - Click {{< ui >}}Add Processor{{< /ui>}} to add a processor.
-    - Click {{< ui >}}+ Group{{< /ui>}} to add a processor group.
-    - Click {{< ui >}}+ Pack{{< /ui >}} to add a [Pack][12].
+    - Click {{< ui >}}\+ Group{{< /ui>}} to add a processor group.
+    - Click {{< ui >}}\+ Pack{{< /ui >}} to add a [Pack][12].
     - **Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 1. Choose a simulation scenario:
     - **Run a simulation up to a specific processor group**

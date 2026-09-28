@@ -4,12 +4,15 @@ code_lang: kubernetes_gateway
 type: multi-code-lang
 code_lang_weight: 2
 further_reading:
-- link: https://www.datadoghq.com/blog/ddot-gateway
-  tag: Blog
-  text: Centralize and govern your OpenTelemetry pipeline with the DDOT gateway
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
+- link: "https://www.datadoghq.com/blog/ddot-gateway"
+  tag: "Blog"
+  text: "Centralize and govern your OpenTelemetry pipeline with the DDOT gateway"
+- link: "https://www.datadoghq.com/blog/otel-gateway-topology-view/"
+  tag: "Blog"
+  text: "Troubleshoot OTel gateways with Datadog Fleet Automation"
 - link: "https://opentelemetry.io/docs/collector/deployment/gateway/"
   tag: "OpenTelemetry"
   text: "Collector Deployment: Gateway"
@@ -39,6 +42,8 @@ When you enable the gateway:
 1.  A Kubernetes Deployment (`<RELEASE_NAME>-datadog-otel-agent-gateway-deployment`) manages the standalone **gateway Collector pods**.
 2.  A Kubernetes Service (`<RELEASE_NAME>-datadog-otel-agent-gateway`) exposes the gateway pods and provides load balancing.
 3.  The existing **DaemonSet Collector pods** are configured by default to send their telemetry data to the gateway service instead of directly to Datadog.
+
+In a gateway deployment, attach host information before telemetry reaches the gateway. For the recommended hostname configuration, see [Hostname and Tagging][12].
 
 ## Requirements
 
@@ -1371,3 +1376,4 @@ To view your gateway pods:
 [9]: http://github.com/kubernetes-sigs/metrics-server
 [10]: /containers/guide/cluster_agent_autoscaling_metrics/?tab=helm
 [11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/extension/datadogextension
+[12]: /opentelemetry/config/hostname_tagging/#collector-exporting-through-a-gateway

@@ -1,10 +1,9 @@
 ---
-title: Zoom Integration
+title: Integrate Zoom with Datadog Incident Management
 description: Connect Zoom to Datadog to help your team collaborate
 aliases:
 - /service_management/incident_management/zoom_integration/
 - /incident_response/incident_management/zoom_integration
-private: true
 ---
 
 ## Overview

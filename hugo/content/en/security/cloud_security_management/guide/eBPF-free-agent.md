@@ -7,9 +7,6 @@ This guide describes how to set up the Workload Protection eBPF-less solution fo
 
 This guide also describes some advantages of the ptrace solution.
 
-<div class="alert alert-info">Threat Detection for Linux Without eBPF Support is in Preview. Reach out to your Datadog representative to sign up.</div>
-
-
 ## Summary of Agent options
 
 Workload Protection includes two Agent options for threat detection and response:
@@ -17,7 +14,7 @@ Workload Protection includes two Agent options for threat detection and response
 - eBPF solution
 - eBPF-less solution with ptrace: This version is only available where eBPF is not (Linux kernel versions 3.4 to 4.14).
 
-{{% collapse-content title="eBPF solution" level="h4" %}}
+{{% collapse-content title="eBPF solution" level="h3" %}}
 
 Datadog has built all its security products around [eBPF (extended Berkeley Packet Filter)][1]. Some of the benfits of eBPF are:
 
@@ -29,7 +26,7 @@ The Datadog eBPF Agent code is [fully open source][2].
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="eBPF-less solution with ptrace" level="h4" %}}
+{{% collapse-content title="eBPF-less solution with ptrace" level="h3" %}}
 Some environments use instances with old kernels that do not have eBPF at all. The ptrace solution is provided for these environments.
 
 The following features are not available in the eBPF-less Agent:

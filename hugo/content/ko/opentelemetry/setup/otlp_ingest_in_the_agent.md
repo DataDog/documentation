@@ -316,7 +316,7 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-Datadog Agent에는 이 외에도 다양한 환경 변수와 설정이 지원됩니다. 전체 구성 목록은 [구성 템플릿][6]을 참조하세요.
+Datadog Agent에는 이 외에도 다양한 환경 변수와 설정이 지원됩니다. 개요는 [Agent 구성 파일][6]을 참조하십시오.
 
 ## OpenTelemetry 트레이스, 메트릭 및 로그를 Datadog Agent로 보내기 {#sending-opentelemetry-traces-metrics-and-logs-to-datadog-agent}
 
@@ -377,8 +377,9 @@ env:
  - name: OTEL_EXPORTER_OTLP_ENDPOINT
    value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
 ```
-**참고**: 사용자 지정 메트릭에 대한 컨테이너 태그를 강화하려면 OTLP 메트릭이 생성되는 애플리케이션 코드에서 적절한 리소스 속성을 설정해야 합니다. 예를 들어, `container.id` 리소스 속성을 포드의 UID로 설정합니다.
+**참고**: 사용자 지정 메트릭에 대한 컨테이너 태그를 강화하려면 OTLP 메트릭이 생성되는 애플리케이션 코드에서 적절한 리소스 속성을 설정해야 합니다. 예를 들어, 컨테이너 [리소스 감지기][1]를 사용하여 `container.id`리소스 속성을 설정하십시오.
 
+[1]: https://opentelemetry.io/docs/concepts/resources/#resource-detectors
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -393,5 +394,5 @@ env:
 [3]: https://opentelemetry.io/docs/concepts/instrumenting/
 [4]: https://github.com/DataDog/datadog-agent/blob/main/CHANGELOG.rst
 [5]: https://github.com/open-telemetry/opentelemetry-collector/blob/main/receiver/otlpreceiver/config.md
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[6]: /ko/agent/configuration/agent-configuration-files/
 [10]: /ko/opentelemetry/runtime_metrics/

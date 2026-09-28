@@ -3,52 +3,55 @@ aliases:
 - /es/agent/autodiscovery/basic_autodiscovery
 - /es/getting_started/agent/autodiscovery
 - /es/agent/autodiscovery
-description: Monitoriza automáticamente servicios en contenedores con Datadog Agent
-  Autodiscovery. Configure plantillas para detectar dinámicamente y monitorizar servicios
-  a través de los contenedores.
+description: Haga un seguimiento automáticamente de los servicios en contenedores
+  con Autodiscovery del Datadog Agent. Configure plantillas para detectar y hacer
+  un seguimiento dinámico de los servicios en contenedores.
 further_reading:
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Crea y carga una plantilla de integración de Autodiscovery
+  text: Cree y cargue una plantilla de integración de Autodiscovery
+- link: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+  tag: Documentación
+  text: Configure Autodiscovery con DatadogInstrumentation CRD
 - link: /agent/guide/ad_identifiers/
   tag: Documentación
-  text: Usa la plantilla de integración correspondiente a cada contenedor
+  text: Haga coincidir un contenedor con la plantilla de integración correspondiente
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Determina qué contenedor debe incluirse en el Autodiscovery del Agent
+  text: Administre qué contenedor incluir en el Autodiscovery del Agent
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asigna y recopila las etiquetas (tags) de tu aplicación dinámicamente
+  text: Asigne y recopile etiquetas dinámicamente desde su aplicación
 - link: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
   tag: preguntas frecuentes
-  text: Configuración de la integración de ECS y Fargate
+  text: Configuración de integración para ECS Fargate
 - link: /agent/configuration/secrets-management/
   tag: Documentación
   text: Gestión de secretos
-title: Autodiscovery básico del Agent
+title: Autodiscovery básico del Datadog Agent
 ---
+## Descripción general {#overview}
 
-## Información general
+Cuando hace un seguimiento de una infraestructura en contenedores, un desafío que surge es que los contenedores pueden cambiar de servidor a servidor. La naturaleza dinámica de los sistemas en contenedores hace que sean difíciles de hacer un seguimiento manualmente.
 
-Una de las dificultades que surgen cuando se monitoriza una infraestructura contenedorizada es que los contenedores pueden pasar de un host a otro. Así pues, la naturaleza dinámica de los sistemas contenedorizados dificulta la monitorización manual.
+Para resolver este problema, puede usar la función Autodiscovery de Datadog para identificar automáticamente los servicios que se ejecutan en un contenedor específico y recopilar datos de esos servicios. Cada vez que se inicia un contenedor, el Datadog Agent identifica qué servicios se están ejecutando en este nuevo contenedor, busca la configuración de seguimiento correspondiente y comienza a recopilar métricas.
 
-Para solucionar este problema, puedes usar la función Autodiscovery de Datadog, que permite identificar automáticamente los servicios que se ejecutan en un contenedor en concreto y reunir datos procedentes de estos. Cada vez que se inicia un contenedor, el Datadog Agent identifica los servicios que se ejecutan en este nuevo contenedor, busca la configuración de monitorización correspondiente y pone en marcha la recopilación de métricas.
+Autodiscovery le permite definir plantillas de configuración para las verificaciones del Datadog Agent y especificar a qué contenedores debe aplicarse cada verificación.
 
-Autodiscovery te permite definir plantillas de configuración para llevar a cabo checks de Agent, así como indicar en qué contenedor debería aplicarse cada check.
+El Datadog Agent observa eventos como la creación, destrucción, inicio y detención de contenedores. Luego, el Datadog Agent habilita, deshabilita y regenera configuraciones de verificación estática ante tales eventos. A medida que el Datadog Agent inspecciona cada contenedor en ejecución, verifica si el contenedor coincide con alguno de los [identificadores de contenedor de Autodiscovery][1] de cualquier plantilla cargada. Para cada coincidencia, el Datadog Agent genera una configuración de verificación estática sustituyendo las [Variables de Plantilla][2] con los valores específicos del contenedor coincidente. Luego, habilita la verificación usando la configuración estática.
 
-El Agent detecta eventos como la creación, destrucción, inicio y detención de contenedores. Acto seguido, activa, desactiva y regenera la configuración estática de checks en dichos eventos. El Agent, al inspeccionar todos los contenedores en ejecución, comprueba si estos coinciden con alguno de los [identificadores de contenedor de Autodiscovery][1] presentes en las plantillas cargadas. Por cada coincidencia, el Agent genera una configuración estática de checks sustituyendo las [variables de plantilla][2] por los valores concretos del contenedor correspondiente. Una vez hecho esto, activa el check mediante la configuración estática.
+## Cómo funciona {#how-it-works}
 
-## Cómo funciona
+{{< img src="agent/autodiscovery/ad_1.png" alt="Descripción general de Autodiscovery" style="width:80%;">}}
 
-{{< img src="agent/autodiscovery/ad_1.png" alt="Información general de Autodiscovery" style="width:80%;">}}
+En la figura anterior, hay un nodo servidor con tres pods, incluyendo un pod de Redis y un pod del Datadog Agent. El Kubelet, que programa los contenedores, se ejecuta como un binario en este nodo y expone los puntos de conexión `/metrics` y `/pods`. Cada 10 segundos, el Datadog Agent consulta `/pods` y encuentra la especificación de Redis. También puede ver información sobre el pod de Redis en sí.
 
-En la imagen de arriba, hay un nodo de host con tres pods, uno de los cuales es de Redis y otro, de Agent. El kubelet, que es el que programa los contenedores, se ejecuta como un binario en este nodo y expone los endpoints `/metrics` y `/pods`. Cada 10 segundos, el Agent consulta `/pods` y obtiene las especificaciones de Redis. Además, puede ver la información del pod de Redis.
-
-En este ejemplo, las especificaciones de Redis incluyen las siguientes anotaciones:
+La especificación de Redis en este ejemplo incluye las siguientes anotaciones:
 
 {{< tabs >}}
 
-{{% tab "Anotaciones de Autodiscovery v2 (Agent 7.36+)" %}}
+{{% tab "Anotaciones de AD v2 (Datadog Agent 7.36+)" %}}
+
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -71,14 +74,17 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-En el ejemplo de arriba, las marcas `tags.datadoghq.com` determinan que `env`, `service` e incluso `version` son etiquetas en todos los logs y métricas emitidos del pod de Redis. Estas marcas estándar forman parte del [etiquetado de servicios unificado][1]. Datadog recomienda usar el etiquetado de servicios unificado para configurar etiquetas y variables de entorno.
+En el ejemplo anterior, las etiquetas `tags.datadoghq.com` establecen `env`, `service` e incluso `version` como etiquetas para todos los registros y métricas emitidos para el contenedor `redis` del pod. Estas etiquetas estándar son parte de [Unified Service Tagging][1]. Como mejor práctica, Datadog recomienda usar Unified Service Tagging al configurar etiquetas y variables de entorno.
 
-`redisdb` es el nombre del check que debe ejecutarse. `init_config` contiene algunos parámetros de configuración, como el intervalo mínimo de recopilación, y es opcional. Cada elemento de `instances` representa la configuración que debe llevarse a cabo en una instancia de un check. **Nota**: En este ejemplo, `%%host%%` es una variable de plantilla que puede completarse dinámicamente con la IP de tu contenedor.
+La clave de anotación de configuración de la verificación sigue el formato `ad.datadoghq.com/<container-name>.checks`.
+
+`redisdb` es el nombre de la verificación que se ejecutará. `init_config` contiene algunos parámetros de configuración, como el intervalo mínimo de recolección, y es opcional. Cada elemento en `instances` representa la configuración para ejecutar una instancia de una verificación. **Nota**: En este ejemplo, `%%host%%` es una variable de plantilla que se completa dinámicamente con la IP de su contenedor.
 
 [1]: /es/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 
-{{% tab "Anotaciones de Autodiscovery v1" %}}
+{{% tab "Anotaciones de AD v1" %}}
+
 ```yaml
 labels:
   tags.datadoghq.com/redis.env: "prod"
@@ -98,31 +104,34 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-En el ejemplo de arriba, las marcas `tags.datadoghq.com` determinan que `env`, `service` e incluso `version` son etiquetas en todos los logs y métricas emitidos del pod de Redis. Estas marcas estándar forman parte del [etiquetado de servicios unificado][1]. Datadog recomienda usar el etiquetado de servicios unificado para configurar etiquetas y variables de entorno.
+En el ejemplo anterior, las etiquetas `tags.datadoghq.com` establecen `env`, `service` e incluso `version` como etiquetas para todos los registros y métricas emitidos para el contenedor `redis` del pod. Estas etiquetas estándar son parte de [Unified Service Tagging][1]. Como mejor práctica, Datadog recomienda usar Unified Service Tagging al configurar etiquetas y variables de entorno.
 
-`check_names` presenta los nombres de los checks que deben ejecutarse. `init_configs` contiene algunos parámetros de configuración, como el intervalo mínimo de recopilación. Cada elemento de `instances` representa la configuración que debe llevarse a cabo en una instancia de un check. **Nota**: En este ejemplo, `%%host%%` es una variable de plantilla que puede completarse dinámicamente con la IP de tu contenedor.
+Las claves de anotación de configuración de la verificación siguen el formato `ad.datadoghq.com/<container-name>.check_names`, `ad.datadoghq.com/<container-name>.init_configs` y `ad.datadoghq.com/<container-name>.instances`.
+
+`check_names` incluye los nombres de la verificación que se ejecutará, y `init_configs` contiene algunos parámetros de configuración, como el intervalo mínimo de recolección. Cada elemento en `instances` representa la configuración para ejecutar una instancia de una verificación. **Nota**: En este ejemplo, `%%host%%` es una variable de plantilla que se completa dinámicamente con la IP de su contenedor.
 
 [1]: /es/getting_started/tagging/unified_service_tagging
 {{% /tab %}}
 
 {{< /tabs >}}
 
-A partir de este punto, el Agent genera una configuración estática de checks.
+A partir de esto, el Datadog Agent genera una configuración de verificación estática.
 
-## Configuración
+## Configuración {#setup}
 
-Para configurar Autodiscovery en tu infraestructura, tienes que efectuar los dos siguientes pasos:
+Configurar Autodiscovery para su infraestructura requiere los siguientes dos pasos:
 
-1. [Activa Autodiscovery](#enable-autodiscovery) en tu Datadog Agent.
-2. Crea [plantillas de configuración específicas para integraciones](#integration-templates) en cada servicio que desees monitorizar. **Nota**: Datadog ofrece plantillas de configuración automática para [algunos servicios contenedorizados habituales][3], como Apache y Redis.
+1. [Habilite Autodiscovery](#enable-autodiscovery) para su Datadog Agent.
+2. Cree [plantillas de configuración específicas de la integración](#integration-templates) para cada servicio al que desee hacer un seguimiento. **Nota**: Datadog proporciona plantillas de autoconfiguración para [algunos servicios en contenedores comunes][3], incluidos Apache y Redis.
 
-### Activar Autodiscovery
+### Habilitar Autodiscovery {#enable-autodiscovery}
 
-El Agent no solo detecta automáticamente los sockets accesibles y los endpoins de la API (como Docker, containerd y la API de Kubernetes), sino que también activa Autodiscovery por ti.
+El Datadog Agent no solo detecta automáticamente los sockets y puntos de conexión de API accesibles (como Docker, contenedor y la API de Kubernetes), sino que también activa Autodiscovery para usted.
 
-Si Autodiscovery no funciona, ejecuta `agent status` para verificar las funciones detectadas.
+Si Autodiscovery no funciona, verifique las funciones detectadas ejecutando `agent status`.
 
-En caso de que la detección automática falle o quieras desactivar las funciones detectadas automáticamente, usa estos parámetros de configuración en `datadog.yaml` para incluir/excluir funciones:
+En caso de que la detección automática haya fallado o desee desactivar las funciones detectadas automáticamente, utilice estos parámetros de configuración en `datadog.yaml` para incluir/excluir funciones:
+
 ```yaml
 autoconfig_exclude_features:
 - docker
@@ -130,19 +139,21 @@ autoconfig_include_features:
 - containerd
 ```
 
-La lista completa de funciones detectadas automáticamente está disponible en la plantilla `datadog.yaml`.
+La lista de funciones detectadas automáticamente está disponible en la plantilla `datadog.yaml`.
 
-### Plantillas de integración
+### Plantillas de integración {#integration-templates}
 
-Una vez que se active Autodiscovery, el Datadog Agent intentará usarlo automáticamente en varios [servicios][3], como Apache y Redis, en función de los archivos de configuración predeterminados de Autodiscovery.
+Una vez que el Autodiscovery está habilitado, el Datadog Agent intenta automáticamente el Autodiscovery para varios [servicios][3], incluidos Apache y Redis, basándose en los archivos de configuración predeterminados de Autodiscovery.
 
-Una plantilla de integración puede definirse de varias formas, a saber: con anotaciones de pod de Kubernetes, con marcas textuales de Docker, con un archivo de configuración integrado en el Agent, con un ConfigMap y con almacenes de valores clave. Para más información, consulta la documentación sobre las [plantillas de integración de Autodiscovery][4].
+Puede definir una plantilla de integración de varias formas: como anotaciones de pod de Kubernetes, etiquetas de Docker, un archivo de configuración montado dentro del Datadog Agent, un ConfigMap y almacenes de clave-valor. Consulte la documentación de [Plantillas de integración de Autodiscovery][4] para obtener más detalles.
 
-### Notas
+En Kubernetes, también puede configurar verificaciones para una carga de trabajo específica a través del recurso personalizado `DatadogInstrumentation`, en lugar de usar anotaciones de pod. Consulte [Configurar Autodiscovery con DatadogInstrumentation CRD][5].
 
-Si utilizas Autodiscovery y se despliega una aplicación en un nodo nuevo, es posible que experimentes algún retraso al ver las métricas en Datadog. Cuando cambias a un nodo nuevo, el Datadog Agent tarda un poco en recopilar metadatos de tu aplicación.
+### Notas {#notes}
 
-## Referencias adicionales
+Si está utilizando Autodiscovery y una aplicación se implementa en un nodo nuevo, es posible que experimente algo de retraso para ver las métricas aparecer en Datadog. Cuando cambia a un nodo nuevo, el Datadog Agent tarda un tiempo en recopilar metadatos de su aplicación.
+
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -150,3 +161,4 @@ Si utilizas Autodiscovery y se despliega una aplicación en un nodo nuevo, es po
 [2]: /es/agent/faq/template_variables/
 [3]: /es/agent/faq/auto_conf/
 [4]: /es/agent/kubernetes/integrations/
+[5]: /es/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/

@@ -1,5 +1,6 @@
 ---
 title: Strategies for Reducing Log Volume
+description: Learn strategies, such as sampling and filtering logs, for reducing log volume with Observability Pipelines processors.
 disable_toc: false
 further_reading:
 - link: "/observability_pipelines/set_up_pipelines"
