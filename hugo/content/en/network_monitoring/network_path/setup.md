@@ -183,7 +183,7 @@ Agent `v7.59+` is required.
 
 <div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, reference the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a> and the documentation <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration">for Kubernetes and Integrations.</a></div>
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
+To enable Network Path on Linux Kubernetes nodes using Helm, add the following to your `values.yaml` file.
 
   ```yaml
   datadog:
@@ -502,7 +502,7 @@ Agent `v7.73+` is required.
 
 Agent `v7.73+` and Helm chart `v3.124.0+` are required. Configuring filters additionally requires Agent `v7.83.2+` and Helm chart `v3.249.0+`.
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
+To enable Network Path on Linux Kubernetes nodes using Helm, add the following to your `values.yaml` file.
 For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
