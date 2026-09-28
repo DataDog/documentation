@@ -16,7 +16,7 @@ Agentic Onboarding is a set of AI-driven tools that automate Datadog instrumenta
 
 - [AI Setup CLI](#ai-setup-cli): Set up Datadog from a terminal, without a coding assistant.
 - [MCP server](#mcp-server): Set up Datadog through a coding assistant (such as Claude Code or Cursor), which handles framework detection and configuration from your IDE.
-- [Agent skills](#agent-skills): Set up Datadog through a coding agent from a plain-language goal.
+- [Agent skills](#agent-skills): Add Datadog instructions to your coding agent so it can set up Datadog from a plain-language goal and handle other Datadog tasks.
 
 Use these tools together or choose the option that fits your workflow.
 
@@ -259,7 +259,7 @@ After the agent completes, commit the changes to your repository and set any new
 
 ## Agent skills
 
-Agent skills are instructions that teach an AI coding agent how to complete Datadog tasks. Use them to have your coding agent set up Datadog from a plain-language goal, such as "monitor this app." Skills work with coding agents that support skills, such as Claude Code, Codex, Cursor, and Gemini CLI.
+Agent skills are instructions that teach an AI coding agent how to complete Datadog tasks. Use them to set up Datadog from a plain-language goal, such as "monitor this app," or for tasks such as searching logs and creating monitors.
 
 Start with the `dd-orchestrator` skill. It recommends Datadog products for your project, shows you a setup plan, and carries out the plan after you approve it.
 
@@ -267,7 +267,7 @@ Start with the `dd-orchestrator` skill. It recommends Datadog products for your 
 
 ### Prerequisites
 
-- A coding agent that supports skills
+- A coding agent that supports skills, such as Claude Code, Codex, Cursor, or Gemini CLI
 - Node.js 22.20 or later, to install skills with `npx`
 - Python 3, for the `dd-orchestrator` skill
 
@@ -298,20 +298,17 @@ To confirm the installation, run `npx skills list` and check that `dd-orchestrat
 1. Sign in to Datadog or create an account when prompted. If `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` are already set, the orchestrator offers to use them.
 1. Review the plan. It lists the products to set up, the steps to run, any choices you need to make, and any products it can't set up for you. Approve the plan to start setup.
 1. When setup finishes, read the summary. It lists what changed, any steps left for you to do, and links to confirm that data reaches Datadog.
-
-Review the changes before you commit them. If the orchestrator saves API keys to a `.env` file, it also adds `.env` to your `.gitignore` file.
+1. Review the changes and commit them to your repository. If the orchestrator saved API keys to a `.env` file, it also added `.env` to your `.gitignore` file.
 
 To sign in without a browser, such as on a remote machine, set `DD_API_KEY`, `DD_APP_KEY`, and `DD_SITE` before you start, and ask for a non-interactive setup in your prompt. The orchestrator still asks you to approve the plan.
 
 Some product pages include a ready-to-use prompt or install command, such as [RUM Browser Monitoring][42] and [Single Step APM Instrumentation][43].
 
+Then see the [Next steps](#next-steps) section to confirm data is flowing.
+
 ### Available skills
 
-You can also install any of these skills on its own and name it in your prompt:
-
-```shell
-npx skills add datadog-labs/agent-skills --skill <SKILL_NAME> --full-depth
-```
+The orchestrator uses other skills as needed. You can also use a skill on its own for a specific task.
 
 | Skill | Use it to |
 |-------|-----------|
@@ -320,7 +317,7 @@ npx skills add datadog-labs/agent-skills --skill <SKILL_NAME> --full-depth
 | `dd-product-recommender` | Choose Datadog products for an application or goal. |
 | `dd-apm` | Set up APM on Kubernetes or Linux, and investigate service performance. |
 | `dd-instrument-rum` | Add or repair Browser RUM in React, Next.js, Angular, Vue, Nuxt, Svelte, or plain JavaScript apps. |
-| `dd-browser-sdk` | Configure the Browser SDK and upgrade SDK versions. |
+| `dd-browser-sdk` | Configure Browser SDK features such as Logs and Session Replay, and upgrade SDK versions. |
 | `dd-aws-integration` | Connect AWS with Terraform. |
 | `dd-azure-integration` | Connect Azure with Terraform. |
 | `dd-gcp-integration` | Connect Google Cloud with Terraform. |
@@ -329,7 +326,7 @@ npx skills add datadog-labs/agent-skills --skill <SKILL_NAME> --full-depth
 | `dd-monitors` | Create monitors and manage alerts. |
 | `dd-audit` | Investigate account activity, configuration changes, and usage increases. |
 | `datadog-app` | Build and publish Datadog Apps. |
-| `k9-ownership-byod-setup` | Define ownership preferences for cloud resources. |
+| `k9-ownership-byod-setup` | Set ownership preferences for Cloud Security resources. |
 | `dd-pup` | Authenticate and use the Pup CLI. |
 | `dd-docs` | Find Datadog documentation. |
 
@@ -337,6 +334,12 @@ Other skills cover [Agent Observability][34] (experiments, evaluations, and trac
 
 ```shell
 npx skills add datadog-labs/agent-skills --list --full-depth
+```
+
+To install a skill, run the following command with its name, then name the skill in your prompt:
+
+```shell
+npx skills add datadog-labs/agent-skills --skill <SKILL_NAME> --full-depth
 ```
 
 To read the source for a skill or contribute, see the [agent skills repository][20].
@@ -352,7 +355,7 @@ npx skills update
 To remove a skill, run:
 
 ```shell
-npx skills remove dd-orchestrator
+npx skills remove <SKILL_NAME>
 ```
 
 ## Next steps
@@ -362,6 +365,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 - [Error Tracking][6]
 - [App and API Protection][11]
 - [RUM > Applications][7]
+- [APM > Services][12]
 - [Infrastructure > Hosts][8]
 - [Serverless > Functions][9]
 - [Logs > Live Tail][10]
@@ -377,6 +381,7 @@ Confirm data is flowing in the Datadog UI for the product you set up:
 [9]: https://app.datadoghq.com/functions
 [10]: https://app.datadoghq.com/logs/livetail
 [11]: https://app.datadoghq.com/security/appsec
+[12]: https://app.datadoghq.com/apm/services
 [16]: /getting_started/site/
 [17]: https://claude.com/product/claude-code
 [18]: https://cursor.com/
