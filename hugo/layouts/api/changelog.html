@@ -43,7 +43,6 @@
       "bucket" $bucket
       "date" ($entry.date | default "")
       "label" $label
-      "link" ($entry.link | default "")
       "operations" ($entry.operations | default slice)
       "pillClass" $pillClass
       "tag" $tagSlug
@@ -117,9 +116,7 @@
                   <div class="api-changelog-entry-meta">
                     <span class="api-changelog-tag">API product: <strong>{{ $entry.tagName }}</strong></span>
                   </div>
-                  <h3 class="api-changelog-entry-title">
-                    {{ if $entry.link }}<a href="{{ $entry.link }}">{{ $entry.title }}</a>{{ else }}{{ $entry.title }}{{ end }}
-                  </h3>
+                  <h3 class="api-changelog-entry-title">{{ $entry.title }}</h3>
                   {{ with $entry.operations }}
                     <div class="api-changelog-operations">
                       <span>Operations:</span>
