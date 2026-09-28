@@ -249,25 +249,25 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
                "min_collection_interval": 300
              },
              "instances": [
-                   {
-                     "protocol": "TCP",
-                     "port": 443,
-                     "source_service": "<CONTAINER_NAME>",
-                     "tags": [
-                       "tag_key:tag_value",
-                       "tag_key2:tag_value2"
-                     ],
-                     "hostname": "api.datadoghq.eu"
-                   },
-                   {
-                     "protocol": "UDP",
-                     "source_service": "<CONTAINER_NAME>",
-                     "tags": [
-                       "tag_key:tag_value",
-                       "tag_key2:tag_value2"
-                     ],
-                     "hostname": "1.1.1.1"
-                   }
+               {
+                 "protocol": "TCP",
+                 "port": 443,
+                 "source_service": "<CONTAINER_NAME>",
+                 "tags": [
+                   "tag_key:tag_value",
+                   "tag_key2:tag_value2"
+                 ],
+                 "hostname": "api.datadoghq.eu"
+               },
+               {
+                 "protocol": "UDP",
+                 "source_service": "<CONTAINER_NAME>",
+                 "tags": [
+                   "tag_key:tag_value",
+                   "tag_key2:tag_value2"
+                 ],
+                 "hostname": "1.1.1.1"
+               }
              ]
            }
          }
