@@ -16,11 +16,21 @@ further_reading:
   text: "Send an Agent Flare"
 ---
 
-After detecting rotation, the Datadog Agent continues reading the rotated log file for `logs_config.close_timeout`, which defaults to 60 seconds. If the Agent has not reached the end of the file when this timeout expires, it closes the file and reports the unread portion as missing log bytes.
+## Overview
 
-Missing log bytes indicate that file rotation outpaced the Agent's reads during the close window. Backpressure in the logs pipeline can slow those reads, but rotation frequency and the volume written to an individual file also affect whether the Agent finishes before the timeout.
+The Datadog Agent collects application logs and sends them to Datadog. For applications that write logs to files, the Agent reads those files as new entries are added. Applications often rotate their log files, replacing the active file with a new one when it reaches a size or age limit.
+
+If the Agent stops reading a rotated file before reaching the end, the remaining data is not sent to Datadog. The Agent reports this as **missing log bytes**. You may notice gaps in [Log Explorer][11] or see a warning in the [Agent log file][10]:
+
+```text
+WARN | After rotation close timeout (60s), there were 148213 bytes remaining unread for file "/var/log/app/app.log". These unread logs are now lost. Consider increasing DD_LOGS_CONFIG_CLOSE_TIMEOUT
+```
+
+The Agent continues reading a rotated file for `logs_config.close_timeout` (60 seconds by default) after detecting rotation. If unread data remains when this timeout expires, the Agent closes the file and writes the warning above.
 
 ## Possible causes
+
+Backpressure occurs when a stage in the Agent's logs pipeline cannot keep up, slowing earlier stages and file reads. Frequent rotation or high log volume can also prevent the Agent from finishing within the timeout.
 
 - The Agent cannot deliver payloads to the Datadog intake because of network, proxy, authentication, or intake errors.
 - Network or intake latency slows successful log submissions.
@@ -31,21 +41,11 @@ Missing log bytes indicate that file rotation outpaced the Agent's reads during 
 
 ## Diagnose missing log bytes
 
-1. Search the Agent log for [rotation warnings](#confirm-missing-bytes-from-rotation). Record the affected file paths, timestamps, and number of unread bytes.
-2. If you use Agent 7.82.0 or later, run the [status command][1] and inspect [Logs Agent Backpressure](#interpret-logs-agent-backpressure). Compare the retained history with the warning timestamps.
+1. Search the [Agent log file][10] for the rotation warning. Record the affected file paths, timestamps, and number of unread bytes.
+2. If you use Agent 7.82.0 or later, run the [status command][1] and read the [Interpret Logs Agent Backpressure](#interpret-logs-agent-backpressure) section. Compare the retained history with the warning timestamps.
 3. If several rows in the **Logs Agent Backpressure** table are saturated, investigate them in this order: `destination_reliable_N`, `worker`, `strategy`, and `processor`. Use the [Choose a tuning action](#choose-a-tuning-action) section to select the next step for the first saturated component in that list.
-4. Apply one relevant change, then [verify the result](#verify-the-result) under representative log volume before addressing another component.
-5. If the Agent remains unable to process the required volume, [reduce log volume](#reduce-log-volume).
-
-### Confirm missing bytes from rotation
-
-The Agent writes a warning when the rotation close timeout expires and the rotated file still contains unread data:
-
-```text
-WARN | After rotation close timeout (60s), there were 148213 bytes remaining unread for file "/var/log/app/app.log". These unread logs are now lost. Consider increasing DD_LOGS_CONFIG_CLOSE_TIMEOUT
-```
-
-The warning confirms file-rotation loss. To investigate the cause, compare its timestamp with the **Logs Agent Backpressure** history.
+4. Apply one relevant change, then follow the [Verify the result](#verify-the-result) section under representative log volume before addressing another component.
+5. If the Agent remains unable to process the required volume, follow the [Reduce log volume](#reduce-log-volume) section.
 
 ### Interpret Logs Agent Backpressure
 
@@ -69,7 +69,7 @@ Logs Agent Backpressure
   destination_reliable_0 q0s0     93%       82/93%        71/93%         93%       93%       93%        3m20s            12:09:42
 ```
 
-Because `destination_reliable_0` is saturated, follow [Resolve delivery errors](#resolve-delivery-errors) before changing processor or batching settings.
+Because `destination_reliable_0` is saturated, follow the [Resolve delivery errors](#resolve-delivery-errors) section before changing processor or batching settings.
 
 #### Overall state
 
@@ -85,7 +85,7 @@ Saturation means that a component spent at least 90% of its sampled time working
 
 | Column | Meaning |
 | --- | --- |
-| `Component` | The logs pipeline stage. See [Choose a tuning action](#choose-a-tuning-action). |
+| `Component` | The logs pipeline stage. See the [Choose a tuning action](#choose-a-tuning-action) section. |
 | `Instance` | The pipeline or destination instance. |
 | `Current` | Utilization smoothed over approximately 15 seconds. |
 | `5m avg/max` and `30m avg/max` | Average and peak utilization during the stated window. |
@@ -115,7 +115,7 @@ DD_LOGS_CONFIG_CLOSE_TIMEOUT=180
 {{% /tab %}}
 {{< /tabs >}}
 
-After changing the timeout, [search for new rotation warnings](#confirm-missing-bytes-from-rotation) during representative log volume. If warnings continue, increase the timeout again or [select an action for the saturated component](#choose-a-tuning-action). Longer timeouts keep rotated files open and can increase file descriptor and disk usage.
+After changing the timeout, search the [Agent log file][10] for new rotation warnings during representative log volume. If warnings continue, increase the timeout again or use the [Choose a tuning action](#choose-a-tuning-action) section to select an action for the saturated component. Longer timeouts keep rotated files open and can increase file descriptor and disk usage.
 
 If the Agent does not tail all matching files, check `logs_config.open_files_limit` instead. For configuration details, see [Increase the Number of Log Files Tailed by the Agent][3].
 
@@ -123,7 +123,7 @@ If the Agent does not tail all matching files, check `logs_config.open_files_lim
 
 ### Choose a tuning action
 
-| Component | Interpretation | Start with |
+| Component | Interpretation | Start with this section |
 | --- | --- | --- |
 | `destination_reliable_N` | Log submissions are delayed or retried. | [Resolve delivery errors](#resolve-delivery-errors) |
 | `worker` | Payloads are waiting to be sent. | [Resolve delivery errors](#resolve-delivery-errors) |
@@ -206,7 +206,7 @@ Test each change under representative log volume:
 2. Confirm that the targeted component spends less time at or above 90% utilization. The overall state remains `WARNING` for up to 30 minutes after saturation clears.
 3. Search the [Agent log file][10] for new `remaining unread` warnings.
 
-If a change does not reduce saturation or the frequency of new rotation warnings, revert it and select the next action from [Choose a tuning action](#choose-a-tuning-action). If saturation moves to a different component, use the action listed for that component.
+If a change does not reduce saturation or the frequency of new rotation warnings, revert it. Then select the next action from the [Choose a tuning action](#choose-a-tuning-action) section. If saturation moves to a different component, use the action listed for that component.
 
 ## Contact Datadog Support
 
