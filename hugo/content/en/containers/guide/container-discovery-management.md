@@ -566,7 +566,7 @@ sbom:
 [1]: /security/cloud_security_management/vulnerabilities
 {{% /tab %}}
 {{% tab "Containerized Agent" %}}
-In environments where you are not using Helm or the config file, the following environment variables can be configured or passed to the Agent container at startup.
+In environments where you are not using Helm or the configuration file, the following environment variables can be configured or passed to the Agent container at startup.
 
 | Feature                               | Include container                              | Exclude container                              |
 |---------------------------------------|------------------------------------------------|------------------------------------------------|
