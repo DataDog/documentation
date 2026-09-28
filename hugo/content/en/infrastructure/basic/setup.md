@@ -18,7 +18,9 @@ Set the Agent's infrastructure mode to `basic` on each host you want to monitor 
 
 ### New hosts
 
-For a new Linux installation, set `DD_INFRASTRUCTURE_MODE="basic"` when running the Agent installation script. Replace `<API_KEY>` with your [Datadog API key][3] and `<DD_SITE>` with **{{< region-param key="dd_site" >}}**:
+For a new installation, set `DD_INFRASTRUCTURE_MODE="basic"` when running the Agent installation script. Replace `<API_KEY>` with your [Datadog API key][3] and `<DD_SITE>` with **{{< region-param key="dd_site" >}}**:
+
+**Linux**:
 
 ```shell
 DD_API_KEY="<API_KEY>" \
@@ -27,9 +29,16 @@ DD_INFRASTRUCTURE_MODE="basic" \
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-Setting the mode during installation configures the host to use Basic mode from its first connection to Datadog.
+**Windows**:
 
-<!-- TODO: add Windows -->
+```powershell
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTURE_MODE="basic"'
+if ($p.ExitCode -ne 0) {
+  Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
+}
+```
+
+Setting the mode during installation configures the host to use Basic mode from its first connection to Datadog.
 
 ### Existing hosts
 
