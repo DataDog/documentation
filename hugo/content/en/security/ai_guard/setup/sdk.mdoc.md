@@ -165,7 +165,7 @@ result = client.evaluate(
 )
 ```
 
-### Example: Apply sensitive data redaction
+### Example: Apply sensitive data redaction {% #example-apply-sensitive-data-redaction-python %}
 
 {% alert level="info" %}
 Sensitive data redaction requires dd-trace-py v4.14.0 or later. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
@@ -277,7 +277,7 @@ const result = await tracer.aiguard.evaluate([
 )
 ```
 
-### Example: Apply sensitive data redaction
+### Example: Apply sensitive data redaction {% #example-apply-sensitive-data-redaction-node-js %}
 
 {% alert level="info" %}
 Sensitive data redaction requires dd-trace-js v6.13.0 or later. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
@@ -423,7 +423,7 @@ final AIGuard.Evaluation evaluation = AIGuard.evaluate(
 );
 ```
 
-### Example: Apply sensitive data redaction
+### Example: Apply sensitive data redaction {% #example-apply-sensitive-data-redaction-java %}
 
 {% alert level="info" %}
 Sensitive data redaction support in dd-trace-java is coming soon. See [Sensitive Data Redaction](/security/ai_guard/setup/sensitive_data_redaction/) for the Datadog configuration this example requires.
