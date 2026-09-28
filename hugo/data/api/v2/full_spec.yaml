@@ -153703,6 +153703,13 @@ paths:
         Submit a DDSQL statement and return either a `running` state with an opaque `query_id`
         for the client to poll, or a `completed` state with the column-major result set inlined
         when the query finishes quickly enough to be served synchronously.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        A query that does not read a data source, such as `SELECT 1`, requires no additional
+        data-source permissions. Queries that read data sources also require the user or
+        service account that owns the application key to have the corresponding data access
+        permissions through their roles. The `timeseries_query` permission does not grant
+        access to the underlying data sources.
       operationId: ExecuteDdsqlTabularQuery
       requestBody:
         content:
@@ -153805,10 +153812,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Execute a tabular DDSQL query
       tags:
         - DDSQL
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/ddsql/query/tabular/fetch:
     post:
       description: |-
@@ -153816,6 +153832,11 @@ paths:
         by a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that
         returned `state: running`) and the server returns either a `running` state to poll again
         or a `completed` state with the column-major result set inlined.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        Fetch results as the same user and organization that submitted the query.
+        The user or service account that owns the application key must have the data access
+        permissions required by the queried data sources through their roles.
       operationId: FetchDdsqlTabularQuery
       requestBody:
         content:
@@ -153914,10 +153935,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Fetch the result of a DDSQL query
       tags:
         - DDSQL
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/deletion/data/{product}:
     post:
       description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.

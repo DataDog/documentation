@@ -1665,13 +1665,13 @@
     "request_schema_description": "Edit request for a dataset."
   },
   "ExecuteDdsqlTabularQuery": {
-    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.",
+    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.\n\nFor a scoped application key, include `timeseries_query` in its scopes.\nA query that does not read a data source, such as `SELECT 1`, requires no additional\ndata-source permissions. Queries that read data sources also require the user or\nservice account that owns the application key to have the corresponding data access\npermissions through their roles. The `timeseries_query` permission does not grant\naccess to the underlying data sources.",
     "summary": "Execute a tabular DDSQL query",
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query execution request."
   },
   "FetchDdsqlTabularQuery": {
-    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.",
+    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.\n\nFor a scoped application key, include `timeseries_query` in its scopes.\nFetch results as the same user and organization that submitted the query.\nThe user or service account that owns the application key must have the data access\npermissions required by the queried data sources through their roles.",
     "summary": "Fetch the result of a DDSQL query",
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
