@@ -54,11 +54,22 @@ After Bits Code has generated a code diff, you can comment on specific lines dir
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/commenting_on_code.png" alt="A question is drafted for specific lines of code" style="width:100%;" >}}
 
-Bits Code does not automatically open a pull or merge request from a code channel—click {{< ui >}}Create PR{{< /ui >}} when you're ready. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
-
 The work in every code channel is also reflected in a [Bits Code session][2] in Datadog. To view it, at the bottom-right corner of the code channel, click {{< ui >}}</> Code session{{< /ui >}}.
 
 Learn more about how to work in a code channel in the [Slack documentation][6].
+
+### Repository access for automatic pushes
+
+When automatic pushes are enabled, Bits Code can push changes and create or update pull or merge requests. This includes CI fixes and responses to PR comments.
+
+The channel creator and everyone who has contributed to the session must have a source control account linked to Datadog with:
+
+- Write access to every repository with a PR in the session, and any repository receiving changes.
+- Read access to all other repositories attached to the session.
+
+Members who only view the channel do not count as contributors. Slack channel access does not grant repository access.
+
+If anyone lacks this access, or Bits cannot verify it, Bits does not push automatically. A user with the required access can click {{< ui >}}Create PR{{< /ui >}} or {{< ui >}}Update PR{{< /ui >}}. These buttons check only that user's permissions across the session's repositories. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
 
 ## Limitations
 
