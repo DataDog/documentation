@@ -132,8 +132,12 @@ Follow [Plan and Launch Experiments][3] to create an experiment and configure it
 
 <div class="alert alert-info">
   <strong>Use an AI coding agent</strong>: Connect your agent to the Datadog MCP Server with the <code>experiments</code> toolset enabled. The agent can create the draft experiment and link the feature flag. Configure and review the traffic split in the Datadog UI before starting the experiment. For setup instructions and supported operations, see <a href="/experiments/mcp_tools/">Experiments MCP Tools</a>.<br><br>
-  <strong>Example prompt</strong>: <code>Create a Datadog experiment named &lt;EXPERIMENT_NAME&gt; with the hypothesis &lt;HYPOTHESIS&gt;. Use &lt;EVALUATION_NAME&gt; as the primary metric, link the &lt;FLAG_NAME&gt; feature flag, and return the experiment URL. Do not start the experiment.</code>
+  <strong>Example prompt</strong>: <code>Create a Datadog experiment named &lt;EXPERIMENT_NAME&gt; with the hypothesis &lt;HYPOTHESIS&gt;. Use &lt;EVALUATION_NAME&gt; as the primary metric, link the &lt;FLAG_NAME&gt; feature flag, and include the full clickable experiment URL in your final response. Do not start the experiment.</code>
 </div>
+
+{{< agent-only >}}
+**Instruction for AI agents**: After creating the draft experiment, include the full experiment URL returned by Datadog in your final response. The human running the agent needs this link to open the experiment, review its configuration, and configure the traffic split in the Datadog UI.
+{{< /agent-only >}}
 
 Starting the experiment adds the experiment targeting rule to the selected flag and begins recording exposures. For details about how feature flag assignments become experiment exposures, see [Feature Flags and Experiments][9].
 
