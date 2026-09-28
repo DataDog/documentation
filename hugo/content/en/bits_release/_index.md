@@ -56,12 +56,6 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
 
-### What it does not do
-
-- It does not run in CI or touch your test suites. Validation happens after merge, in parallel with your existing pipeline.
-- It does not replace A/B testing. Bits Release compares production before and after your change, not two concurrent cohorts.
-- It does not take over long-term monitoring. Temporary monitors it creates are a means of watching during a validation, not coverage your team inherits.
-
 ## Verdicts
 
 | Verdict | Meaning |
@@ -70,7 +64,7 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 | **Warning** | A potential problem. Bits Release found a signal worth your attention but could not confirm it. |
 | **Failed** | A clear problem. Production behavior contradicted the expected impact. |
 | **Not enough data** | The expected change could not be proven either way. For example, the affected code path saw too little traffic during the soak window. Use this signal to decide what to verify by hand. |
-| **Inconclusive** | Validation did not complete. The most common cause is that the commit was never detected as deployed. |
+| **Inconclusive** | Bits Release could not reach a verdict. Either the signals it collected contradicted each other, so no conclusion was supported, or validation did not complete, most commonly because the commit was never detected as deployed. |
 
 **A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. Where relevant, it links to [Bits Code][1] to investigate and generate a fix.
 
@@ -92,7 +86,6 @@ Bits Release needs to connect a merged pull request to a running service.
 | ----------- | ------------ |
 | [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
 | An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
-| Frequent deploys | A service that ships daily produces verdicts within hours. A service that ships every few weeks holds its plans pending until the next release. |
 
 Complex deployment setups are hard to assess in advance. Datadog's recommendation is to enable Bits Release on a few repositories and review what deploy detection resolves, rather than trying to qualify the setup up front.
 
@@ -134,11 +127,9 @@ During private preview:
 - Validation runs against production only. Staging and pre-production environments are not supported.
 - Validation covers backend services and web frontends. Mobile applications, SDKs, and libraries are not supported.
 - Only repositories explicitly onboarded by Datadog are analyzed.
-- **One service per pull request.** Bits Release selects a single service to watch, so a change to a shared library is validated against one of its consumers rather than all of them.
 - Each pull request is validated on its own. Related pull requests are not grouped into one validation.
 - Changes gated behind a feature flag are validated on deployment, not on flag activation, so a change that is still switched off reports little or no signal.
 - Progressive rollouts are compared before-and-after across the whole service, not scoped to the slice running the new version.
-- Evidence presentation is incomplete for some result types.
 
 ## Send feedback
 
