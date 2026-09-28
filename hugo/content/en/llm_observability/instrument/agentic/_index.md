@@ -187,7 +187,7 @@ Fill in the provided values:
 
 After completing instrumentation and any requested context sharing, report the results. Then address optional hosted Prompt Management for Python applications:
 
-- If the user already supplied a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide][9]. Do not ask whether to enable Prompt Management again.
+- If the user already supplied a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide][7]. Do not ask whether to enable Prompt Management again.
 - Otherwise, identify the application's local prompts and ask whether the user wants to manage them in Datadog. If they agree, follow the guide to create managed versions of the selected prompts and update the application to retrieve them.
 - If the user declines or does not answer, keep the instrumented local prompts unchanged.
 
@@ -210,4 +210,4 @@ If Prompt Management requires an SDK update, explain why and ask before updating
 [4]: /llm_observability/instrument/otel_instrumentation.md
 [5]: /llm_observability/instrument/prompt_tracking.md
 [6]: /llm_observability/instrument/agentic/prompt_management.md#track-prompt-usage
-[9]: /llm_observability/instrument/agentic/prompt_management.md
+[7]: /llm_observability/instrument/agentic/prompt_management.md
