@@ -547,44 +547,44 @@
     "summary": "Get a Bits AI investigation"
   },
   "SearchCases": {
-    "description": "Search cases.",
-    "summary": "Search cases"
+    "description": "Search work items.",
+    "summary": "Search work items"
   },
   "CreateCase": {
-    "description": "Create a Case",
-    "summary": "Create a case",
-    "request_description": "Case payload",
-    "request_schema_description": "Case create request"
+    "description": "Create a work item",
+    "summary": "Create a work item",
+    "request_description": "Work item payload",
+    "request_schema_description": "Work item create request"
   },
   "AggregateCases": {
-    "description": "Performs an aggregation query over cases, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.",
-    "summary": "Aggregate cases",
-    "request_description": "Case aggregate request payload.",
-    "request_schema_description": "Request payload for aggregating case counts with grouping. Use this to get faceted breakdowns of cases (for example, count of cases grouped by priority and status)."
+    "description": "Performs an aggregation query over work items, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.",
+    "summary": "Aggregate work items",
+    "request_description": "Work item aggregate request payload.",
+    "request_schema_description": "Request payload for aggregating work item counts with grouping. Use this to get faceted breakdowns of work items (for example, count of work items grouped by priority and status)."
   },
   "BulkUpdateCases": {
-    "description": "Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.",
-    "summary": "Bulk update cases",
-    "request_description": "Case bulk update request payload.",
-    "request_schema_description": "Request payload for applying a single action (such as changing priority, status, or assignment) to multiple cases at once."
+    "description": "Applies a single action (such as changing priority, status, assignment, or archiving) to multiple work items at once. The list of work item IDs and the action type with its payload are specified in the request body.",
+    "summary": "Bulk update work items",
+    "request_description": "Work item bulk update request payload.",
+    "request_schema_description": "Request payload for applying a single action (such as changing priority, status, or assignment) to multiple work items at once."
   },
   "CountCases": {
-    "description": "Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.",
-    "summary": "Count cases"
+    "description": "Returns work item counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.",
+    "summary": "Count work items"
   },
   "ListCaseLinks": {
-    "description": "Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.",
-    "summary": "List case links"
+    "description": "Returns all links associated with a work item. Links define relationships (for example, BLOCKS) between work items. Requires entity_type and entity_id query parameters.",
+    "summary": "List work item links"
   },
   "CreateCaseLink": {
-    "description": "Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.",
-    "summary": "Create a case link",
-    "request_description": "Case link create request.",
+    "description": "Creates a directional link between two work items (for example, work item A blocks work item B). The parent and child work items and their relationship type must be specified.",
+    "summary": "Create a work item link",
+    "request_description": "Work item link create request.",
     "request_schema_description": "Request payload for creating a link between two entities."
   },
   "DeleteCaseLink": {
-    "description": "Deletes an existing link between cases by link ID.",
-    "summary": "Delete a case link"
+    "description": "Deletes an existing link between work items by link ID.",
+    "summary": "Delete a work item link"
   },
   "GetProjects": {
     "description": "Get all projects.",
@@ -597,7 +597,7 @@
     "request_schema_description": "Project create request."
   },
   "ListUserCaseProjectFavorites": {
-    "description": "Returns the list of case projects that the current authenticated user has marked as favorites.",
+    "description": "Returns the list of work item projects that the current authenticated user has marked as favorites.",
     "summary": "List project favorites"
   },
   "DeleteProject": {
@@ -615,11 +615,11 @@
     "request_schema_description": "Project update request."
   },
   "UnfavoriteCaseProject": {
-    "description": "Removes a case project from the current user's favorites list.",
+    "description": "Removes a work item project from the current user's favorites list.",
     "summary": "Unfavorite a project"
   },
   "FavoriteCaseProject": {
-    "description": "Marks a case project as a favorite for the current authenticated user.",
+    "description": "Marks a work item project as a favorite for the current authenticated user.",
     "summary": "Favorite a project"
   },
   "GetProjectNotificationRules": {
@@ -643,11 +643,11 @@
     "request_schema_description": "Notification rule update request"
   },
   "ListCaseAutomationRules": {
-    "description": "Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by case events like creation, status transitions, or attribute changes.",
+    "description": "Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by work item events like creation, status transitions, or attribute changes.",
     "summary": "List automation rules"
   },
   "CreateCaseAutomationRule": {
-    "description": "Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.",
+    "description": "Creates an automation rule for a project. The rule defines a trigger event (for example, work item created, status transitioned) and an action to execute.",
     "summary": "Create an automation rule",
     "request_description": "Automation rule payload.",
     "request_schema_description": "Request payload for creating an automation rule."
@@ -667,44 +667,44 @@
     "request_schema_description": "Request payload for updating an automation rule."
   },
   "DisableCaseAutomationRule": {
-    "description": "Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.",
+    "description": "Disables an automation rule so it no longer triggers on work item events. The rule configuration is preserved.",
     "summary": "Disable an automation rule"
   },
   "EnableCaseAutomationRule": {
-    "description": "Enables a previously disabled automation rule so it triggers on matching case events.",
+    "description": "Enables a previously disabled automation rule so it triggers on matching work item events.",
     "summary": "Enable an automation rule"
   },
   "GetAllCaseTypes": {
-    "description": "Get all case types",
-    "summary": "Get all case types"
+    "description": "Get all work item types",
+    "summary": "Get all work item types"
   },
   "CreateCaseType": {
-    "description": "Create a Case Type",
-    "summary": "Create a case type",
-    "request_description": "Case type payload",
-    "request_schema_description": "Request payload for creating a case type."
+    "description": "Create a work item Type",
+    "summary": "Create a work item type",
+    "request_description": "Work item type payload",
+    "request_schema_description": "Request payload for creating a work item type."
   },
   "GetAllCustomAttributes": {
     "description": "Get all custom attributes",
     "summary": "Get all custom attributes"
   },
   "DeleteCaseType": {
-    "description": "Delete a case type",
-    "summary": "Delete a case type"
+    "description": "Delete a work item type",
+    "summary": "Delete a work item type"
   },
   "UpdateCaseType": {
-    "description": "Updates the name, emoji, or description of an existing case type.",
-    "summary": "Update a case type",
-    "request_description": "Case type payload.",
-    "request_schema_description": "Request payload for updating a case type."
+    "description": "Updates the name, emoji, or description of an existing work item type.",
+    "summary": "Update a work item type",
+    "request_description": "Work item type payload.",
+    "request_schema_description": "Request payload for updating a work item type."
   },
   "GetAllCustomAttributeConfigsByCaseType": {
-    "description": "Get all custom attribute config of case type",
-    "summary": "Get all custom attributes config of case type"
+    "description": "Get all custom attribute config of work item type",
+    "summary": "Get all custom attributes config of work item type"
   },
   "CreateCustomAttributeConfig": {
-    "description": "Create custom attribute config for a case type",
-    "summary": "Create custom attribute config for a case type",
+    "description": "Create custom attribute config for a work item type",
+    "summary": "Create custom attribute config for a work item type",
     "request_description": "Custom attribute config payload",
     "request_schema_description": "Request payload for creating a custom attribute configuration."
   },
@@ -713,198 +713,198 @@
     "summary": "Delete custom attributes config"
   },
   "UpdateCustomAttributeConfig": {
-    "description": "Updates the display name, description, type, or options of an existing custom attribute configuration for a case type.",
+    "description": "Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.",
     "summary": "Update custom attribute config",
     "request_description": "Custom attribute config payload.",
     "request_schema_description": "Request payload for updating a custom attribute configuration."
   },
   "ListCaseViews": {
-    "description": "Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.",
-    "summary": "List case views"
+    "description": "Returns all saved work item views for a given project. Views are saved search queries that allow quick access to filtered lists of work items.",
+    "summary": "List work item views"
   },
   "CreateCaseView": {
-    "description": "Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
-    "summary": "Create a case view",
-    "request_description": "Case view payload.",
-    "request_schema_description": "Request payload for creating a case view."
+    "description": "Creates a new saved work item view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.",
+    "summary": "Create a work item view",
+    "request_description": "Work item view payload.",
+    "request_schema_description": "Request payload for creating a work item view."
   },
   "DeleteCaseView": {
-    "description": "Permanently deletes a saved case view.",
-    "summary": "Delete a case view"
+    "description": "Permanently deletes a saved work item view.",
+    "summary": "Delete a work item view"
   },
   "GetCaseView": {
-    "description": "Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.",
-    "summary": "Get a case view"
+    "description": "Returns a single saved work item view identified by its UUID, including its query, associated project, and timestamps.",
+    "summary": "Get a work item view"
   },
   "UpdateCaseView": {
-    "description": "Updates the name, query, or notification rule of an existing case view.",
-    "summary": "Update a case view",
-    "request_description": "Case view payload.",
-    "request_schema_description": "Request payload for updating a case view."
+    "description": "Updates the name, query, or notification rule of an existing work item view.",
+    "summary": "Update a work item view",
+    "request_description": "Work item view payload.",
+    "request_schema_description": "Request payload for updating a work item view."
   },
   "GetCase": {
-    "description": "Get the details of case by `case_id`",
-    "summary": "Get the details of a case"
+    "description": "Get the details of work item by `case_id`",
+    "summary": "Get the details of a work item"
   },
   "ArchiveCase": {
-    "description": "Archive case",
-    "summary": "Archive case",
-    "request_description": "Archive case payload",
-    "request_schema_description": "Case empty request"
+    "description": "Archive work item",
+    "summary": "Archive work item",
+    "request_description": "Archive work item payload",
+    "request_schema_description": "Work item empty request"
   },
   "AssignCase": {
-    "description": "Assign case to a user",
-    "summary": "Assign case",
-    "request_description": "Assign case payload",
-    "request_schema_description": "Case assign request"
+    "description": "Assign work item to a user",
+    "summary": "Assign work item",
+    "request_description": "Assign work item payload",
+    "request_schema_description": "Work item assign request"
   },
   "UpdateAttributes": {
-    "description": "Update case attributes",
-    "summary": "Update case attributes",
-    "request_description": "Case attributes update payload",
-    "request_schema_description": "Case update attributes request"
+    "description": "Update work item attributes",
+    "summary": "Update work item attributes",
+    "request_description": "Work item attributes update payload",
+    "request_schema_description": "Work item update attributes request"
   },
   "CommentCase": {
-    "description": "Comment case",
-    "summary": "Comment case",
-    "request_description": "Case comment payload",
-    "request_schema_description": "Case comment request"
+    "description": "Comment work item",
+    "summary": "Comment work item",
+    "request_description": "Work item comment payload",
+    "request_schema_description": "Work item comment request"
   },
   "DeleteCaseComment": {
-    "description": "Delete case comment",
-    "summary": "Delete case comment"
+    "description": "Delete work item comment",
+    "summary": "Delete work item comment"
   },
   "UpdateCaseComment": {
-    "description": "Updates the text content of an existing comment on a case timeline. The comment is identified by its cell ID.",
-    "summary": "Update case comment",
-    "request_description": "Case update comment payload.",
-    "request_schema_description": "Request payload for updating a comment on a case timeline."
+    "description": "Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.",
+    "summary": "Update work item comment",
+    "request_description": "Work item update comment payload.",
+    "request_schema_description": "Request payload for updating a comment on a work item timeline."
   },
   "DeleteCaseCustomAttribute": {
-    "description": "Delete custom attribute from case",
-    "summary": "Delete custom attribute from case"
+    "description": "Delete custom attribute from work item",
+    "summary": "Delete custom attribute from work item"
   },
   "UpdateCaseCustomAttribute": {
-    "description": "Update case custom attribute",
-    "summary": "Update case custom attribute",
-    "request_description": "Update case custom attribute payload",
-    "request_schema_description": "Case update custom attribute request"
+    "description": "Update work item custom attribute",
+    "summary": "Update work item custom attribute",
+    "request_description": "Update work item custom attribute payload",
+    "request_schema_description": "Work item update custom attribute request"
   },
   "UpdateCaseDescription": {
-    "description": "Update case description",
-    "summary": "Update case description",
-    "request_description": "Case description update payload",
-    "request_schema_description": "Case update description request"
+    "description": "Update work item description",
+    "summary": "Update work item description",
+    "request_description": "Work item description update payload",
+    "request_schema_description": "Work item update description request"
   },
   "UpdateCaseDueDate": {
-    "description": "Sets or updates the due date for a case. The due date is a calendar date (without a time component) indicating when the case should be resolved.",
-    "summary": "Update case due date",
-    "request_description": "Case due date update payload.",
-    "request_schema_description": "Request payload for updating a case's due date."
+    "description": "Sets or updates the due date for a work item. The due date is a calendar date (without a time component) indicating when the work item should be resolved.",
+    "summary": "Update work item due date",
+    "request_description": "Work item due date update payload.",
+    "request_schema_description": "Request payload for updating a work item's due date."
   },
   "RemoveCaseInsights": {
-    "description": "Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.",
-    "summary": "Remove insights from a case",
-    "request_description": "Case insights request.",
-    "request_schema_description": "Request payload for adding or removing case insights."
+    "description": "Removes one or more previously added insights from a work item by specifying their type and resource identifier in the request body.",
+    "summary": "Remove insights from a work item",
+    "request_description": "Work item insights request.",
+    "request_schema_description": "Request payload for adding or removing work item insights."
   },
   "AddCaseInsights": {
-    "description": "Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.",
-    "summary": "Add insights to a case",
-    "request_description": "Case insights request.",
-    "request_schema_description": "Request payload for adding or removing case insights."
+    "description": "Adds one or more insights to a work item. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.",
+    "summary": "Add insights to a work item",
+    "request_description": "Work item insights request.",
+    "request_schema_description": "Request payload for adding or removing work item insights."
   },
   "UpdatePriority": {
-    "description": "Update case priority",
-    "summary": "Update case priority",
-    "request_description": "Case priority update payload",
-    "request_schema_description": "Case update priority request"
+    "description": "Update work item priority",
+    "summary": "Update work item priority",
+    "request_description": "Work item priority update payload",
+    "request_schema_description": "Work item update priority request"
   },
   "LinkIncident": {
-    "description": "Link an incident to a case",
-    "summary": "Link incident to case",
+    "description": "Link an incident to a work item",
+    "summary": "Link incident to work item",
     "request_description": "Incident link request",
     "request_schema_description": "Relationship to incident request"
   },
   "UnlinkJiraIssue": {
-    "description": "Remove the link between a Jira issue and a case",
-    "summary": "Remove Jira issue link from case"
+    "description": "Remove the link between a Jira issue and a work item",
+    "summary": "Remove Jira issue link from work item"
   },
   "LinkJiraIssueToCase": {
-    "description": "Link an existing Jira issue to a case",
-    "summary": "Link existing Jira issue to case",
+    "description": "Link an existing Jira issue to a work item",
+    "summary": "Link existing Jira issue to work item",
     "request_description": "Jira issue link request",
     "request_schema_description": "Jira issue link request"
   },
   "CreateCaseJiraIssue": {
-    "description": "Create a new Jira issue and link it to a case",
-    "summary": "Create Jira issue for case",
+    "description": "Create a new Jira issue and link it to a work item",
+    "summary": "Create Jira issue for work item",
     "request_description": "Jira issue creation request",
     "request_schema_description": "Jira issue creation request"
   },
   "CreateCaseNotebook": {
-    "description": "Create a new investigation notebook and link it to a case",
-    "summary": "Create investigation notebook for case",
+    "description": "Create a new investigation notebook and link it to a work item",
+    "summary": "Create investigation notebook for work item",
     "request_description": "Notebook creation request",
     "request_schema_description": "Notebook creation request"
   },
   "MoveCaseToProject": {
-    "description": "Update the project associated with a case",
-    "summary": "Update case project",
+    "description": "Update the project associated with a work item",
+    "summary": "Update work item project",
     "request_description": "Project update request",
     "request_schema_description": "Relationship to project."
   },
   "CreateCaseServiceNowTicket": {
-    "description": "Create a new ServiceNow incident ticket and link it to a case",
-    "summary": "Create ServiceNow ticket for case",
+    "description": "Create a new ServiceNow incident ticket and link it to a work item",
+    "summary": "Create ServiceNow ticket for work item",
     "request_description": "ServiceNow ticket creation request",
     "request_schema_description": "ServiceNow ticket creation request"
   },
   "UpdateCaseResolvedReason": {
-    "description": "Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.",
-    "summary": "Update case resolved reason",
-    "request_description": "Case resolved reason update payload.",
-    "request_schema_description": "Request payload for updating the resolution reason on a closed security case."
+    "description": "Sets the resolved reason for a security work item (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type work items.",
+    "summary": "Update work item resolved reason",
+    "request_description": "Work item resolved reason update payload.",
+    "request_schema_description": "Request payload for updating the resolution reason on a closed security work item."
   },
   "UpdateStatus": {
-    "description": "Update case status",
-    "summary": "Update case status",
-    "request_description": "Case status update payload",
-    "request_schema_description": "Case update status request"
+    "description": "Update work item status",
+    "summary": "Update work item status",
+    "request_description": "Work item status update payload",
+    "request_schema_description": "Work item update status request"
   },
   "ListCaseTimeline": {
-    "description": "Returns the timeline of events for a case, including comments, status changes, and other activity. Supports pagination and sort order.",
-    "summary": "Get case timeline"
+    "description": "Returns the timeline of events for a work item, including comments, status changes, and other activity. Supports pagination and sort order.",
+    "summary": "Get work item timeline"
   },
   "UpdateCaseTitle": {
-    "description": "Update case title",
-    "summary": "Update case title",
-    "request_description": "Case title update payload",
-    "request_schema_description": "Case update title request"
+    "description": "Update work item title",
+    "summary": "Update work item title",
+    "request_description": "Work item title update payload",
+    "request_schema_description": "Work item update title request"
   },
   "UnarchiveCase": {
-    "description": "Unarchive case",
-    "summary": "Unarchive case",
-    "request_description": "Unarchive case payload",
-    "request_schema_description": "Case empty request"
+    "description": "Unarchive work item",
+    "summary": "Unarchive work item",
+    "request_description": "Unarchive work item payload",
+    "request_schema_description": "Work item empty request"
   },
   "UnassignCase": {
-    "description": "Unassign case",
-    "summary": "Unassign case",
-    "request_description": "Unassign case payload",
-    "request_schema_description": "Case empty request"
+    "description": "Unassign work item",
+    "summary": "Unassign work item",
+    "request_description": "Unassign work item payload",
+    "request_schema_description": "Work item empty request"
   },
   "ListCaseWatchers": {
-    "description": "Returns the list of users who are watching a case. Watchers receive notifications about updates to the case.",
-    "summary": "List case watchers"
+    "description": "Returns the list of users who are watching a work item. Watchers receive notifications about updates to the work item.",
+    "summary": "List work item watchers"
   },
   "UnwatchCase": {
-    "description": "Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.",
-    "summary": "Unwatch a case"
+    "description": "Removes a user from the watchers list of a work item. The user no longer receives notifications about updates to the work item.",
+    "summary": "Unwatch a work item"
   },
   "WatchCase": {
-    "description": "Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.",
-    "summary": "Watch a case"
+    "description": "Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.",
+    "summary": "Watch a work item"
   },
   "ListCatalogEntity": {
     "description": "Get a list of entities from Software Catalog.",
@@ -4020,11 +4020,11 @@
     "request_schema_description": "The request for a logs list."
   },
   "ListMaintenanceWindows": {
-    "description": "Returns all configured maintenance windows for event management cases. Maintenance windows define time periods during which case notifications and automation rules are suppressed for cases matching a given query.",
+    "description": "Returns all configured maintenance windows for event management work items. Maintenance windows define time periods during which work item notifications and automation rules are suppressed for work items matching a given query.",
     "summary": "List maintenance windows"
   },
   "CreateMaintenanceWindow": {
-    "description": "Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).",
+    "description": "Creates a maintenance window for event management work items with a name, work item filter query, and time range (start and end).",
     "summary": "Create a maintenance window",
     "request_description": "Maintenance window payload.",
     "request_schema_description": "Request payload for creating a maintenance window."

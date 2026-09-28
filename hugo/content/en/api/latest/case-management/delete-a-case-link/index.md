@@ -1,3 +1,3 @@
 ---
-title: Delete a case link
+title: Delete a work item link
 ---

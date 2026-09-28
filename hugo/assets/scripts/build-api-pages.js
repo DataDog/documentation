@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const lodash = require('lodash');
 const yaml = require('js-yaml');
+const { applyWorkManagementCopy } = require('./work-management-copy');
 const fs = require('fs');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
@@ -64,7 +65,7 @@ const updateMenu = (specData, specs, languages) => {
     // now add back in all the auto generated menu items from specs
     apiYaml.tags.forEach((tag) => {
 
-      const tagSlug = getTagSlug(tag.name);
+      const tagSlug = getTagSlug(tag['x-docs-original-name'] || tag.name);
       const existingMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === tagSlug);
       if(existingMenuItemIndex > -1) {
         // already exists
@@ -72,7 +73,7 @@ const updateMenu = (specData, specs, languages) => {
       } else {
         // doesn't exist lets add it
         newMenuArray.push({
-          name: existingNames[tagSlug] || tag.name,
+          name: language === 'en' && tag['x-docs-original-name'] ? tag.name : (existingNames[tagSlug] || tag.name),
           url: `/api/latest/${tagSlug}/`,
           identifier: tagSlug,
           generated: true
@@ -88,7 +89,7 @@ const updateMenu = (specData, specs, languages) => {
         .reduce((obj, item) => ([...obj, ...item]), [])
         .forEach((action) => {
 
-          const actionSlug = getTagSlug(action.summary);
+          const actionSlug = getTagSlug(action['x-docs-original-summary'] || action.summary);
           const itemIdentifier = `${tagSlug}-${actionSlug}`;
           const existingSubMenuItemIndex = newMenuArray.findIndex((i) => i.identifier === itemIdentifier);
           if(existingSubMenuItemIndex > -1) {
@@ -107,7 +108,7 @@ const updateMenu = (specData, specs, languages) => {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
             const item = {
-              name: existingNames[itemIdentifier] || action.summary,
+              name: language === 'en' && action['x-docs-original-summary'] ? action.summary : (existingNames[itemIdentifier] || action.summary),
               url: `/api/latest/${tagSlug}/${actionSlug}/`,
               identifier: itemIdentifier,
               parent: tagSlug,
@@ -151,7 +152,7 @@ const createPages = (apiYaml, deref, apiVersion) => {
 
   apiYaml.tags.forEach((tag) => {
     // make directory
-    const newDirName = getTagSlug(tag.name);
+    const newDirName = getTagSlug(tag['x-docs-original-name'] || tag.name);
     fs.mkdirSync(`./content/en/api/${apiVersion}/${newDirName}`, {recursive: true});
 
     // make version frontmatter
@@ -202,9 +203,9 @@ const buildEndpointsMap = (specData, specs) => {
   specData.forEach((apiYaml, index) => {
     const apiVersion = specs[index].split('/')[3];
     apiYaml.tags.forEach((tag) => {
-      const tagSlug = getTagSlug(tag.name);
+      const tagSlug = getTagSlug(tag['x-docs-original-name'] || tag.name);
       getActionsForTag(apiYaml.paths, tag.name).forEach((action) => {
-        const endpointSlug = getTagSlug(action.summary);
+        const endpointSlug = getTagSlug(action['x-docs-original-summary'] || action.summary);
         const mapKey = `${tagSlug}/${endpointSlug}`;
         if (endpoints.has(mapKey)) {
           const entry = endpoints.get(mapKey);
@@ -247,7 +248,7 @@ const createResources = (apiYaml, deref, apiVersion) => {
 
   apiYaml.tags.forEach((tag) => {
     const jsonData = {};
-    const newDirName = getTagSlug(tag.name);
+    const newDirName = getTagSlug(tag['x-docs-original-name'] || tag.name);
     const pageDir = `./content/en/api/${apiVersion}/${newDirName}/`;
 
     // just get this sections data
@@ -1121,7 +1122,7 @@ const schemaTable = (tableType, data, skipAnyKeys = false) => {
  */
 const createTranslations = (apiYaml, deref, apiVersion) => {
   const tags = apiYaml.tags.map((tag) => {
-    const name = getTagSlug(tag.name);
+    const name = getTagSlug(tag['x-docs-original-name'] || tag.name);
     return {[name]: {"name": tag.name, "description": tag.description}};
   }).reduce((obj, item) => ({...obj, ...item}) ,{});
 
@@ -1178,7 +1179,7 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 const processSpecs = (specs) => {
   specs
     .forEach((spec) => {
-      const fileData = yaml.safeLoad(fs.readFileSync(spec, 'utf8'));
+      const fileData = applyWorkManagementCopy(yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
       $RefParser.dereference(fileData, { resolve: { external: false } })
         .then((deref) => {
           const version = spec.split('/')[3];
@@ -1228,7 +1229,7 @@ const processSpecs = (specs) => {
     });
 
   // update menu with all specs
-  const specData = specs.map((spec) => yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
+  const specData = specs.map((spec) => applyWorkManagementCopy(yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
   updateMenu(specData, specs, supportedLangs);
   createEndpointPages(specData, specs);
 };

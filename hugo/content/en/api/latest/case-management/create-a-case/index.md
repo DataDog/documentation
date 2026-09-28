@@ -1,3 +1,3 @@
 ---
-title: Create a case
+title: Create a work item
 ---
