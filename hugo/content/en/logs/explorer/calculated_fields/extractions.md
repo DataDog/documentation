@@ -13,9 +13,7 @@ Use Calculated Fields Extractions to extract values from your logs in the Log Ex
 
 ## Overview
 
-Calculated Fields Extractions lets you apply Grok parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with [Tap to Parse](#tap-to-parse), or manually define your own Grok patterns to match your specific needs. You can also write an extraction pattern as a [regular expression (regex)](#regex) with named capture groups.
-
-Extractions run before formulas. A calculated field formula can reference a field that an extraction produces. The reverse is not possible. You cannot extract from a calculated field.
+Calculated Fields Extractions lets you apply parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with [Tap to Parse](#tap-to-parse), or manually define your own Grok patterns to match your specific needs. You can write an extraction pattern either as a [Grok expression](#grok) or as a [regular expression (regex)](#regex) with named capture groups.
 
 To create an extraction calculated field, see [Create a calculated field][1].
 
