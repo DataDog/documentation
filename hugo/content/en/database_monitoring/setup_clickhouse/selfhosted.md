@@ -55,6 +55,9 @@ Database Monitoring collects the following data from ClickHouse:
 **Parts and merges**
 : Storage health data, including active parts, detached parts, background merges, pending mutations, and replication queue depth, collected from `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings`. This helps identify storage and replication issues, such as stalled merges or a growing replication backlog.
 
+**Async inserts**
+: Asynchronous insert activity, available with Agent 7.83 or later and disabled by default. Pending buffer snapshots from `system.asynchronous_inserts` show how much data is waiting to be flushed and when each buffer is scheduled to flush. Flush records from `system.asynchronous_insert_log` show each flush, whether it succeeded, and how many bytes and rows it wrote. This helps identify failing flushes and buffers that are growing faster than they flush.
+
 ## Setup
 
 ### Step 1: Grant Datadog Agent access
@@ -105,6 +108,24 @@ GRANT SELECT ON <database>.* TO datadog;
 ```
 
 If this grant isn't provided, the Agent can't run `EXPLAIN` for queries against those tables. Query metrics, samples, and completions continue to work, but explain plans aren't collected for the affected queries, and Datadog displays a collection error for those queries.
+
+#### Optional: Grant access for async insert monitoring
+
+If you enable async insert monitoring (Agent 7.83 or later), grant access to the async insert system tables:
+
+```sql
+GRANT SELECT ON system.asynchronous_inserts TO datadog;
+GRANT SELECT ON system.asynchronous_insert_log TO datadog;
+```
+
+`system.asynchronous_inserts` is required for pending buffer snapshots (`collect_pending_async_inserts`). `system.asynchronous_insert_log` is required for flush records (`collect_async_inserts`). To enable both, add the following to your instance configuration:
+
+```yaml
+    collect_pending_async_inserts:
+      enabled: true
+    collect_async_inserts:
+      enabled: true
+```
 
 ### Step 2: Configure the Agent
 
@@ -254,5 +275,25 @@ Collects records of individual completed queries from `system.query_log`.
 | `query_completions.enabled` | Boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
 | `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
 | `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
+
+### Pending async inserts
+
+Collects snapshots of pending asynchronous insert buffers from `system.asynchronous_inserts`. Requires Agent 7.83 or later.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `collect_pending_async_inserts.enabled` | Boolean | `false` | Enable pending async insert buffer collection. Requires `dbm: true`. |
+| `collect_pending_async_inserts.collection_interval` | number | `10` | Collection interval in seconds. |
+| `collect_pending_async_inserts.max_samples_per_collection` | integer | `1000` | Maximum number of buffers collected per run. |
+
+### Async insert flushes
+
+Collects records of individual asynchronous insert flushes from `system.asynchronous_insert_log`. Requires Agent 7.83 or later.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `collect_async_inserts.enabled` | Boolean | `false` | Enable async insert flush collection. Requires `dbm: true`. |
+| `collect_async_inserts.collection_interval` | number | `60` | Collection interval in seconds. |
+| `collect_async_inserts.max_samples_per_collection` | integer | `1000` | Maximum number of flush records collected per run. |
 
 {{< partial name="whats-next/whats-next.html" >}}
