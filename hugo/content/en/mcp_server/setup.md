@@ -935,9 +935,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 4. Fully restart your AI client to apply the configuration and load the MCP Server.
 {{% /collapse-content %}}
 
-
-
-
 ## Test access to the MCP Server
 
 1. Install the [MCP inspector][2], a developer tool for testing and debugging MCP servers.
