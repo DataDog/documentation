@@ -1280,7 +1280,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][82], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1387,7 +1387,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][82] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -3085,9 +3085,9 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
 [79]: /watchdog/
-[79]: /account_management/governance_console/
 [80]: /account_management/governance_console/controls/
 [81]: /network_monitoring/network_path/
+[82]: /account_management/governance_console/
 
 ## Further reading
 
