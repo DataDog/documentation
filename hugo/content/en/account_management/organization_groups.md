@@ -11,6 +11,9 @@ further_reading:
 - link: "/account_management/rbac/"
   tag: "Documentation"
   text: "Role Based Access Control (RBAC)"
+- link: "/account_management/organization_groups/shared_roles/"
+  tag: "Documentation"
+  text: "Shared Roles"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/organization-groups/" header="Organization Groups is in Preview">}}
@@ -27,6 +30,7 @@ Organization Groups lets administrators manage multiple Datadog organizations as
 
 - **View and manage organizations in a group.** See all member organizations from the group and navigate between them.
 - **Push policies from group to member organizations.** Define policies in the owner organization and apply them to member organizations.
+- **Share custom roles across member organizations.** Define a custom role once in the owner organization and provision it into every member organization. See [Shared Roles][1].
 
 {{< img src="account_management/org-groups-policies.png" alt="Organization Settings in Datadog showing the Organization Groups policies section." style="width:100%;" >}}
 
@@ -38,10 +42,10 @@ Every organization in an organization group falls into at least one of the follo
 
 | Type | Description |
 | ---------- | ----------------- |
-| **Owner** | Creates and manages the organization group. Sets policies and enforcement tiers for all member organizations. |
+| **Owner** | Creates and manages the organization group. Sets policies, enforcement tiers, and shared roles for all member organizations. |
 | **Member** | Governed by the group. An organization belongs to exactly one organization group at a time. An owner organization can also be a member of its own organization group. |
 
-Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members and policies.
+Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles.
 
 ### Organization group policies
 
@@ -57,6 +61,14 @@ Each organization group policy has an enforcement tier that controls how much la
 | **Override allowed** | The group sets a baseline value. Member organizations can change the setting in their own organization settings. |
 
 {{< img src="account_management/org-groups-create-policy.png" alt="Organization Settings in Datadog showing the Organization Groups policy creation." style="width:100%;" >}}
+
+### Shared roles
+
+Shared roles bring the same group-level control to custom roles. Administrators in the owner organization define a custom role once, and Datadog provisions it as a role in every member organization. Member organizations assign users and teams to the role, but cannot edit or delete it.
+
+Shared roles are always **Group managed**. Unlike organization group policies, they have no **Override allowed** tier. To control whether member organizations can also create their own custom roles, use the group's role exclusivity setting.
+
+For details, see [Shared Roles][1].
 
 ## Apply Organization Groups
 
@@ -74,6 +86,13 @@ Contact your account team to discuss early access to Organization Groups.
 
 Organization Groups supports only single-region groups. Organizations in different regions must be managed in separate organization groups within their region.
 
+Organization groups are owned by the parent organization at the root of your organization hierarchy. A group is visible and managed only from its owner organization.
+
+For limitations that apply to shared roles, see [Shared Roles limitations][2].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /account_management/organization_groups/shared_roles/
+[2]: /account_management/organization_groups/shared_roles/#limitations
