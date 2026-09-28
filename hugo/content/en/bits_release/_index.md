@@ -32,12 +32,12 @@ Bits Release does not modify your code, and it does not create permanent instrum
 
 1. **Trigger**: A pull request merges to the default branch of an onboarded repository.
 2. **Impact analysis**: Bits Release reads the diff and queries production data for the affected service to determine the change type, the risk level, and the code paths involved.
-3. **Validation plan**: It produces a plan describing the expected impact of the change—each item stating either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
+3. **Validation plan**: It produces a plan describing the expected impact of the change. Each item states either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
 4. **Deploy detection**: The plan stays pending until Bits Release confirms your commit is running in production. It selects the service to watch and, on each deployment, checks whether your commit is an ancestor of what the service is running.
 5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, comparing post-deploy behavior to the pre-deploy baseline it captured.
 6. **Verdict**: It weighs the evidence from every source into a single verdict, delivered as a pull request comment, a Slack notification, and a full report in Datadog.
 
-Validation runs against your production environment. Bits Release does not comment on every pull request—it reports when it reaches a meaningful conclusion or finds a real problem.
+Validation runs against your production environment. Bits Release does not comment on every pull request. It reports when it reaches a meaningful conclusion or finds a real problem.
 
 ## What Bits Release looks at
 
@@ -48,11 +48,11 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 | **APM traces and spans** | Error rates, latency, and throughput on the endpoints and services the change touches. Also supplies the commit SHA used for deploy detection. |
 | **Logs** | Error messages, exceptions, and log-based evidence for behavior the change was meant to alter or preserve. |
 | **Metrics and monitors** | Baseline-versus-post-deploy comparison. Bits Release can create a temporary monitor when a check needs to watch for a rare regression over days rather than minutes, and removes it afterward. |
-| **RUM** | Frontend validation—errors, views, and user actions on the pages affected by the change. |
+| **RUM** | Frontend validation: errors, views, and user actions on the pages affected by the change. |
 | **Synthetic tests** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
 | **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
 | **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
-| **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes—useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
+| **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes. This is useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
 
@@ -69,8 +69,8 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 | **Passed** | The change shipped and production behavior matched the expected impact, with no unexpected side effects on the service being watched. |
 | **Warning** | A potential problem. Bits Release found a signal worth your attention but could not confirm it. |
 | **Failed** | A clear problem. Production behavior contradicted the expected impact. |
-| **Not enough data** | The expected change could not be proven either way—for example, the affected code path saw too little traffic during the soak window. Use this signal to decide what to verify by hand. |
-| **Could not validate** | Validation did not complete. The most common cause is that the commit was never detected as deployed. |
+| **Not enough data** | The expected change could not be proven either way. For example, the affected code path saw too little traffic during the soak window. Use this signal to decide what to verify by hand. |
+| **Inconclusive** | Validation did not complete. The most common cause is that the commit was never detected as deployed. |
 
 **A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. Where relevant, it links to [Bits Code][1] to investigate and generate a fix.
 
@@ -82,7 +82,7 @@ Bits Release needs to connect a merged pull request to a running service.
 
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
-| [Source Code Integration][2] with read access to the repositories in scope | Reads the diff for the merged pull request. Write access to pull requests is strongly recommended—without it, Bits Release loses the pull request comment as a notification surface. |
+| [Source Code Integration][2] with read access to the repositories in scope | Reads the diff for the merged pull request. Write access to pull requests is strongly recommended. Without it, Bits Release loses the pull request comment as a notification surface. |
 | [APM][3] or [RUM][4] reporting a version tag on the services in scope | Detects deployments. Either the version tag contains the commit SHA, or the commit is attached to traces as `git.commit.sha`. Without this link, the validation closes without a verdict. |
 | A code-to-service mapping | Resolves which service a code change belongs to, from service metadata or from [service mapping][9]. |
 
@@ -91,7 +91,7 @@ Bits Release needs to connect a merged pull request to a running service.
 | Requirement | What it adds |
 | ----------- | ------------ |
 | [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
-| An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test—without one, it has no reliable way to reach and authenticate against your application. |
+| An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
 | Frequent deploys | A service that ships daily produces verdicts within hours. A service that ships every few weeks holds its plans pending until the next release. |
 
 Complex deployment setups are hard to assess in advance. Datadog's recommendation is to enable Bits Release on a few repositories and review what deploy detection resolves, rather than trying to qualify the setup up front.
@@ -100,7 +100,7 @@ Complex deployment setups are hard to assess in advance. Datadog's recommendatio
 
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
-- **Bits Release in Datadog**: Go to [**Software Delivery > Bits Release**][7] for the full report—the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker.
+- **Bits Release in Datadog**: Go to [**Software Delivery > Bits Release**][7] for the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker.
 
 ## Trigger a validation manually
 
