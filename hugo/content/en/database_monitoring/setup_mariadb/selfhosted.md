@@ -23,7 +23,7 @@ Supported MariaDB versions
 Database Monitoring for MariaDB is supported with [known limitations][13].
 
 Supported Agent versions
-: 7.36.1+
+: 7.61.0+
 
 Performance impact
 : The default Agent configuration for Database Monitoring is conservative, but you can adjust settings such as the collection interval and query sampling rate to better suit your needs. For most workloads, the Agent represents less than 1% of query execution time on the database and less than 1% of CPU. <br/><br/>
