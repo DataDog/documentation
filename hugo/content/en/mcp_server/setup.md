@@ -820,7 +820,11 @@ To combine `subdomain` with [toolsets](#toolsets) or other query parameters, sep
 
 #### Revoke OAuth access
 
-Authorizing an MCP client creates a consent grant scoped to your user, that client, and the organization you selected during the OAuth flow. Revoking it invalidates the client's credentials, and the client must complete the OAuth flow again to reconnect. To revoke your own access for a client:
+When you authorize an MCP client, Datadog creates a consent grant scoped to your user, that client, and the organization you selected during the OAuth flow. Revoking the grant invalidates the client's credentials, and the client must complete the OAuth flow again to reconnect. 
+
+**Note**: A client that already holds a valid access token can keep making requests until that token expires. Revoking prevents it from obtaining a new one.
+
+To revoke your own access for a client:
 
 1. In Datadog, navigate to [**Personal Settings > Authorized Apps**][79].
 2. Find the MCP client you want to disconnect.
