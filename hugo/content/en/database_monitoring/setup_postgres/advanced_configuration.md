@@ -81,5 +81,5 @@ instances:
 
 For column statistics to populate, the underlying tables must have had `ANALYZE` (or autoanalyze) run against them at least once — `pg_stats` is empty for tables with no collected statistics.
 
-[1]: /database_monitoring/setup_postgres/selfhosted/#create-the-column-statistics-function
+[1]: /database_monitoring/setup_postgres/#create-the-column-statistics-function?host=self_hosted
 [2]: /database_monitoring/schema_explorer/#tuning-schema-collection

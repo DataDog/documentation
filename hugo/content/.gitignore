@@ -126,3 +126,4 @@
 /*/tracing/trace_collection/dynamic_instrumentation/_index.md
 /*/tracing/live_debugger/_index.md
 /*/session_replay/_index.md
+/*/database_monitoring/setup_postgres/_index.md
