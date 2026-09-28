@@ -20,7 +20,7 @@ Ingress is a critical component of your BYOC (Bring Your Own Cloud) Logs deploym
 
 <div class="alert alert-danger">Only the BYOC Logs gRPC API endpoints (paths starting with <code>/cloudprem</code>) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
 
-The public ingress is essential for enabling Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
+The public ingress is essential for enabling the Datadog control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
 - Creates an internet-facing AWS Application Load Balancer (ALB) that accepts traffic from Datadog services
 - Implements TLS encryption with termination at the load balancer level
 - Uses HTTP/2 (gRPC) for communication between the ALB and BYOC Logs cluster

@@ -19,7 +19,7 @@ The diagram illustrates the BYOC Logs hybrid architecture, highlighting how data
 
 *   **Ingestion**: Logs are collected from Datadog Agents and other sources using standard protocols.
 *   **Your Infrastructure**: The BYOC Logs platform runs entirely inside your infrastructure. It processes and stores logs in your own object storage (Amazon S3, Google Cloud Storage, or Azure Blob Storage).
-*   **Datadog SaaS**: The Datadog platform is BYOC Logs' Control Plane. It hosts the Datadog UI and communicates with BYOC Logs through a secure connection to send log queries and receive results.
+*   **Datadog SaaS**: The Datadog platform acts as the Datadog control plane for BYOC Logs. It hosts the Datadog UI and communicates with BYOC Logs through a secure connection to send log queries and receive results. The Datadog control plane is separate from the control plane component that runs inside your BYOC Logs cluster.
 
 {{< whatsnext desc="Explore BYOC Logs' architecture and capabilities:">}}
   {{< nextlink href="/byoc-logs/introduction/architecture/" >}}Architecture - Understand how BYOC Logs components work together{{< /nextlink >}}

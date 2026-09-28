@@ -104,7 +104,7 @@ An Azure AD application must be granted read/write access to the Blob Storage co
 
 #### Public NGINX Ingress Controller
 
-The public ingress is essential for enabling Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
+The public ingress is essential for enabling the Datadog control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
 - Creates an internet-facing Azure Load Balancer that accepts traffic from Datadog services
 - Implements TLS encryption with termination at the ingress controller level
 - Uses HTTP/2 (gRPC) for communication between Datadog and BYOC Logs clusters
