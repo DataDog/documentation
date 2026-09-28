@@ -66,7 +66,7 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 | **Not enough data** | The expected change could not be proven either way. For example, the affected code path saw too little traffic during the soak window. Use this signal to decide what to verify by hand. |
 | **Inconclusive** | Bits Release could not reach a verdict. Either the signals it collected contradicted each other, so no conclusion was supported, or validation did not complete, most commonly because the commit was never detected as deployed. |
 
-**A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. Where relevant, it links to [Bits Code][1] to investigate and generate a fix.
+**A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
 
 ## Prerequisites
 
