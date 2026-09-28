@@ -52,6 +52,8 @@ To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
    - Configure the required HTTP headers.
 1. (Optional) [Set the `dd-otel-metric-config` HTTP header](#optional-configure-the-metric-translator) to configure the metric translator behavior.
 
+<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively. Datadog keeps the original bucket structure, so percentiles match the OpenTelemetry data model. Histograms appear with their correct metric type (Explicit Histogram or Exponential Histogram) in the Metrics Summary and Metrics Explorer. Existing distribution queries work without changes.</div>
+
 ### Configure the exporter
 
 To send OTLP data to the Datadog OTLP metrics intake endpoint, use the OTLP HTTP exporter. For metrics, the exporter supports both HTTP Protobuf and HTTP JSON. HTTP Protobuf is recommended for better performance.
@@ -186,6 +188,7 @@ If set to `true`, adds the name and version of the instrumentation scope that cr
 
 `histograms.mode`
 : **Type**: String <br>
+**Deprecated**: Ignored as of September 1, 2026. Datadog stores histograms natively regardless of this setting. <br>
 Mode for exporting histograms. Valid values are:
   - `distributions`: sends histograms as Datadog distributions (recommended).
   - `counters`: sends histograms as Datadog counts, one metric per bucket.
@@ -193,10 +196,12 @@ Mode for exporting histograms. Valid values are:
 
 `histograms.send_aggregation_metrics`
 : **Type**: Boolean <br>
+**Deprecated**: Ignored as of September 1, 2026. Datadog stores histograms natively regardless of this setting. <br>
 If set to `true`, writes additional `.sum`, `.count`, `.min`, and `.max` metrics for histograms.
 
 `summaries.mode`
 : **Type**: String <br>
+**Deprecated**: Ignored as of September 1, 2026. <br>
 Mode for exporting OTLP summaries. Valid values are:
   - `noquantiles`: sends no `.quantile` metrics. `.sum` and `.count` metrics are still sent.
   - `gauges`: sends `.quantile` metrics as gauges tagged by the quantile.
@@ -206,14 +211,7 @@ For example:
 ```json
 {
   "resource_attributes_as_tags": true,
-  "instrumentation_scope_metadata_as_tags": true,
-  "histograms": {
-    "mode": "distributions",
-    "send_aggregation_metrics": true
-  },
-  "summaries": {
-    "mode": "gauges"
-  }
+  "instrumentation_scope_metadata_as_tags": true
 }
 ```
 
