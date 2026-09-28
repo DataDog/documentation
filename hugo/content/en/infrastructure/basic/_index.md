@@ -31,7 +31,7 @@ Infrastructure Basic includes the following:
 - A limited set of [infrastructure integrations][1]
 - SaaS integrations, such as ServiceNow and PagerDuty, to connect alerts from Basic hosts to existing notification and incident management workflows
 - [Host Map][4] to visualize your hosts
-- todo: hypervisor metrics
+- Monitoring through [supported virtualization integrations][6], including VMware vSphere, Proxmox, and Nutanix
 
 <!-- This list will also be in pricing; consider linking to there instead when it's live -->
 
@@ -46,7 +46,7 @@ Infrastructure Basic does not support the following:
 
 **OpenTelemetry:** Hosts monitored with OpenTelemetry must also have the Datadog Agent installed and configured in Basic mode to use Infrastructure Basic. OpenTelemetry-only hosts are not supported.
 
-**Operating system compatibility:** Agent-based monitoring requires an operating system that supports the minimum Agent version for Infrastructure Basic. See [Agent supported platforms][5] for compatibility details. Hosts that cannot run the required Agent version may still be monitored [through a supported virtualization integration][6], such as VMware vSphere.
+**Operating system compatibility:** Agent-based monitoring requires an operating system that supports the minimum Agent version for Infrastructure Basic. See [Agent supported platforms][5] for compatibility details. Hosts that cannot run the required Agent version may still be monitored through a [supported virtualization integration][6], such as VMware vSphere.
 
 ## Set up Infrastructure Basic
 

@@ -143,8 +143,6 @@ To report hosts through a virtualization integration as Infrastructure Basic, co
 
 The examples below show the fields to add or update in an existing integration configuration. Retain the authentication settings and other required options from the integration's setup instructions. After updating the configuration, [restart the Agent][24] running the integration.
 
-<!-- TODO: Confirm the required infrastructure tier for the host running each integration. The technical wiki specifies a Pro/Pro+/Enterprise collection host for vSphere but does not clearly cover Proxmox or Nutanix. Do not instruct users to put the collection Agent itself in Basic mode. -->
-
 ### vSphere
 
 On the host running the vSphere integration, use Agent version 7.74.0 or later. Follow the [vSphere integration setup instructions][25], then set `infrastructure_mode` to `basic` in the relevant instance:
@@ -160,7 +158,7 @@ The vSphere integration can report ESXi hosts and VMs without an Agent installed
 
 ### Proxmox
 
-Follow the [Proxmox integration setup instructions][26], then set `infrastructure_mode` to `basic` in the relevant instance:
+On the host running the vSphere integration, use Agent version 7.82.0 or later. Follow the [Proxmox integration setup instructions][26], then set `infrastructure_mode` to `basic` in the relevant instance:
 
 ```yaml
 instances:
@@ -168,8 +166,6 @@ instances:
     infrastructure_mode: basic
     # Retain the other required settings for this instance.
 ```
-
-<!-- TODO: Confirm the minimum Agent version for Proxmox. The technical wiki's Proxmox section lists 7.82.0 but mistakenly refers to Nutanix throughout the prose. The Proxmox integration's public sample configuration confirms the instance-level infrastructure_mode option. Also confirm mode precedence when an Agent runs on a monitored Proxmox host or VM. -->
 
 ### Nutanix
 
@@ -181,8 +177,6 @@ instances:
     infrastructure_mode: basic
     # Retain the other required settings for this instance.
 ```
-
-<!-- TODO: Confirm mode precedence when an Agent also runs on a monitored Nutanix host or VM. -->
 
 ## Verify infrastructure mode
 
