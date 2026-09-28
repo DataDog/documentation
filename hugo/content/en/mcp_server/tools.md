@@ -309,7 +309,7 @@ Runs a read-only SQL query against a trace's spans to answer a specific question
 - Which service accounted for the most self-time in trace `abc123`?
 - Get the attributes for span `xyz789` along with the root span's attributes.
 - How many database calls happened in this trace, and which one took the longest?
-- Which of these sibling spans was slowest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
