@@ -33,7 +33,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 1. **Trigger**: A pull request merges to the default branch of an onboarded repository.
 2. **Impact analysis**: Bits Release reads the diff and queries production data for the affected service to determine the change type, the risk level, and the code paths involved.
 3. **Validation plan**: It produces a plan describing the expected impact of the change. Each item states either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
-4. **Deploy detection**: The plan stays pending until Bits Release confirms your commit is running in production. It selects the service to watch and, on each deployment, checks whether your commit is an ancestor of what the service is running.
+4. **Deploy detection**: The plan stays pending until Bits Release confirms your pull request is running in production.
 5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, comparing post-deploy behavior to the pre-deploy baseline it captured.
 6. **Verdict**: It weighs the evidence from every source into a single verdict, delivered as a pull request comment, a Slack notification, and a full report in Datadog.
 
