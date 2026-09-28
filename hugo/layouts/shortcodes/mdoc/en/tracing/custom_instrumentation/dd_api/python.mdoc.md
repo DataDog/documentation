@@ -185,7 +185,7 @@ except TypeError as e:
 
 [Span links][16] associate one or more spans together that don't have a typical parent-child relationship. They may associate spans within the same trace or spans across different traces.
 
-To add a span link, pass the context of the span you want to link to `link_span()`. Attributes are optional.
+To add a span link, call `link_span()` with the context of the span you want to link to. Attributes are optional.
 
 ```python
 from ddtrace import tracer

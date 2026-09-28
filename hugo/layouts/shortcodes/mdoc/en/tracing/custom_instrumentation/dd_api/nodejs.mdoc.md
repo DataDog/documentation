@@ -215,7 +215,7 @@ spanC.addLink({ context: spanA.context() })
 spanC.finish()
 ```
 
-Links added after a span is created don't affect its sampling decision. When possible, add span links when you create the span.
+Links added after a span is created don't affect the span's sampling decision. When possible, add span links when you create the span.
 
 ## Request filtering {% #request-filtering-nodejs %}
 
