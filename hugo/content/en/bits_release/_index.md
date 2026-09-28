@@ -87,27 +87,11 @@ Bits Release needs to connect a merged pull request to a running service.
 | [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
 | An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
 
-Complex deployment setups are hard to assess in advance. Datadog's recommendation is to enable Bits Release on a few repositories and review what deploy detection resolves, rather than trying to qualify the setup up front.
-
 ## Where results appear
 
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
 - **Bits Release in Datadog**: Go to [**Software Delivery > Bits Release**][7] for the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker.
-
-## Trigger a validation manually
-
-To validate a pull request that merged before your repository was onboarded, or to re-run a validation, comment on the merged pull request:
-
-```text
-@Datadog/release-agent:run
-```
-
-To override the service or environment that Bits Release resolved, pass them inline:
-
-```text
-@Datadog/release-agent:run service=my-service env=production
-```
 
 ## Permissions
 
