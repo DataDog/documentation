@@ -45,16 +45,41 @@ To generate a postmortem:
 1. Select a postmortem template.
 1. Click **Generate Postmortem**. Datadog creates the postmortem in the destination configured in the template and links it to the incident.
 
-After generating a postmortem:
+### Generate a postmortem with Workflow Automation
 
-- **Datadog Notebooks**: The postmortem embeds directly in the **Post-Incident** tab.
-- **Confluence or Google Drive**: A link appears in the **Post-Incident** tab. Click the link to open the document in the configured destination.
+You can also generate a postmortem from a [workflow][5] using the **Generate postmortem** action. The action takes an incident and a postmortem template, and attaches the resulting postmortem to that incident. Use this path to create postmortems as part of an automated post-incident process, such as after an incident is resolved.
+
+<div class="alert alert-warning">The AI-generated variables available to postmortem templates, such as <code>{{incident.ai_summary}}</code>, populate only for postmortems generated from the <strong>Post-Incident</strong> tab. A postmortem generated through the <strong>Generate postmortem</strong> workflow action renders these variables empty. To include AI-generated content, generate the postmortem from the <strong>Post-Incident</strong> tab.</div>
+
+For the full list of variables available to postmortem templates, see [Templates][4] and [Incident variables][6].
 
 ## View and edit a postmortem
 
-Postmortems generated as Datadog Notebooks embed directly in the **Post-Incident** tab. You can read and edit the postmortem without leaving the incident view. Changes made in the embedded view are reflected in the underlying notebook.
+View and edit your postmortem based on its destination:
 
-Multiple users can edit an embedded postmortem at the same time. Cursor markers show where each user is working. You can also add inline comments from within the embedded view.
+- **Datadog Notebooks**: Embedded in the **Post-Incident** tab. Read and edit without leaving Datadog. Multiple users can edit simultaneously with cursor markers. Add inline comments. Changes are reflected in the underlying notebook.
+- **Confluence**: Edit in Confluence (click the link in the **Post-Incident** tab to open your Confluence workspace).
+- **Google Drive**: Edit in Google Docs (click the link in the **Post-Incident** tab to open Google Docs).
+
+## Convert timestamps to date chips
+
+Postmortems often record times as plain text, such as `Jul 23, 4:30 pm UTC`. You can convert this text into [date chips][7], which display the time in each reader's own time zone.
+
+Times in a postmortem are often recorded in different time zones by different responders. Conversion makes them uniform. As long as each time states its time zone, you do not need to standardize times by hand while drafting.
+
+This option is available on notebooks with the **Postmortem** notebook type.
+
+To convert timestamps in a postmortem:
+
+1. Open the postmortem notebook.
+1. Click the kebab menu in the upper right and select **Convert timestamps**.
+1. Review the detected timestamps. Each entry shows the original text and the resolved time. If a timestamp has no explicit offset, Datadog interprets it in the time zone of the person performing the conversion. If it has no year, Datadog infers one.
+1. Clear the checkbox for any timestamp you want to leave as plain text.
+1. Click **Convert**.
+
+{{< img src="/incident_response/incident_management/post_incident/postmortems/convert_timestamps.png" alt="The Convert timestamps dialog listing detected timestamps with checkboxes, each showing the time it resolves to." style="width:80%;" >}}
+
+**Note**: Datadog doesn't convert datetime text that's part of a link, such as a link to an event in the incident timeline. A date chip cannot also be a link.
 
 ## Postmortem status and owner
 
@@ -97,3 +122,6 @@ To remove a postmortem from an incident, open the **Post-Incident** tab, find th
 [2]: /integrations/confluence/
 [3]: /integrations/google_drive/
 [4]: /incident_response/incident_management/setup_and_configuration/templates
+[5]: /actions/workflows/
+[6]: /incident_response/incident_management/setup_and_configuration/variables/#incident-variables
+[7]: /notebooks/#smart-chips

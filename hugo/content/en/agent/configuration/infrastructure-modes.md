@@ -17,7 +17,7 @@ private: true
 
 Infrastructure modes determine which infrastructure monitoring capabilities the Datadog Agent enables on a host. Use these modes to match the Agent's behavior to the host's role: full infrastructure monitoring, basic system resource metrics, no infrastructure monitoring, or End User Device monitoring.
 
-Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For product capabilities and access requirements, see [Infrastructure Basic][28] or [End User Device Monitoring][29].
+Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For product capabilities and access requirements, see [Infrastructure Basic][32] or [End User Device Monitoring][33].
 
 ## Available modes
 
@@ -43,28 +43,32 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 ### Basic
 
-For product capabilities, limitations, and access requirements, see [Infrastructure Basic][28].
+For product capabilities, limitations, and access requirements, see [Infrastructure Basic][32].
 
 `basic`
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Recommended for**: VMs and physical servers that only need system resource metrics<br>
 : The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
-  - [System Check][1]
-  - [Disk][2]
+  - [Cisco ACI][25] (7.78+)
+  - [Cisco SD-WAN][26] (7.78+)
   - [Directory][3] (7.80+)
+  - [Disk][2]
   - [Network][4]
   - [NTP][5]
   - [Processes][6]
+  - [SNMP][28] (7.78+)
+  - [System Check][1]
   - [Systemd][7]
+  - [Versa][27] (7.78+)
   - [Windows Certificate Store][8] (7.80+)
   - [Windows Crash Detection][9]
+  - [Windows Event Log][17]
   - [Windows Kernel Memory][10]
   - [Windows Performance Counters][11] (7.80+)
   - [Windows Registry][12] (7.80+)
   - [Windows Services][13]
   - [WMI Check][14] (7.80+)
   - [Custom checks][15] prefixed with `custom_`
-  - Logs-only integrations (for example, [journald][16] or [Windows Event Log][17])
 
 To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Configure Basic mode for virtualization integrations](#configure-basic-mode-for-virtualization-integrations).
 
@@ -82,7 +86,7 @@ To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Config
   - Windows Crash Detection
   - Network Path Monitoring
 
-: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][30].
+: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][34].
 
 ### None
 
@@ -143,7 +147,7 @@ The examples below show the fields to add or update in an existing integration c
 
 ### vSphere
 
-On the host running the vSphere integration, use Agent version 7.74.0 or later. Follow the [vSphere integration setup instructions][25], then set `infrastructure_mode` to `basic` in the relevant instance:
+On the host running the vSphere integration, use Agent version 7.74.0 or later. Follow the [vSphere integration setup instructions][29], then set `infrastructure_mode` to `basic` in the relevant instance:
 
 ```yaml
 instances:
@@ -156,7 +160,7 @@ The vSphere integration can report ESXi hosts and VMs without an Agent installed
 
 ### Proxmox
 
-On the host running the Proxmox integration, use Agent version 7.82.0 or later. Follow the [Proxmox integration setup instructions][26], then set `infrastructure_mode` to `basic` in the relevant instance:
+On the host running the Proxmox integration, use Agent version 7.82.0 or later. Follow the [Proxmox integration setup instructions][30], then set `infrastructure_mode` to `basic` in the relevant instance:
 
 ```yaml
 instances:
@@ -167,7 +171,7 @@ instances:
 
 ### Nutanix
 
-On the host running the Nutanix integration, use Agent version 7.83.0 or later. Follow the [Nutanix integration setup instructions][27], then set `infrastructure_mode` to `basic` in the relevant instance:
+On the host running the Nutanix integration, use Agent version 7.83.0 or later. Follow the [Nutanix integration setup instructions][31], then set `infrastructure_mode` to `basic` in the relevant instance:
 
 ```yaml
 instances:
@@ -215,9 +219,13 @@ To verify the infrastructure mode set on your hosts:
 [22]: https://app.datadoghq.com/fleet
 [23]: /agent/configuration/agent-configuration-files/
 [24]: /agent/configuration/agent-commands/#restart-the-agent
-[25]: /integrations/vsphere/#setup
-[26]: /integrations/proxmox/#setup
-[27]: /integrations/nutanix/#setup
-[28]: /infrastructure/basic/
-[29]: /infrastructure/end_user_device_monitoring/
-[30]: /infrastructure/end_user_device_monitoring/setup/
+[25]: /integrations/cisco-aci/
+[26]: /integrations/cisco-sdwan/
+[27]: /integrations/versa/
+[28]: /integrations/snmp/
+[29]: /integrations/vsphere/#setup
+[30]: /integrations/proxmox/#setup
+[31]: /integrations/nutanix/#setup
+[32]: /infrastructure/basic/
+[33]: /infrastructure/end_user_device_monitoring/
+[34]: /infrastructure/end_user_device_monitoring/setup/

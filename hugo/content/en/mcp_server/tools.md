@@ -952,6 +952,29 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+### `ddsql_search_saved_queries`
+*Toolset: **ddsql***\
+Searches saved DDSQL queries by name or description and returns their SQL text and metadata, sorted by most recently modified. Supports optional text filtering and pagination. Multiple filter words are ANDed together.
+
+- Find saved DDSQL queries about Kubernetes.
+- List the organization's most recently updated saved queries.
+- Search saved queries for CPU usage.
+
+### `ddsql_read_saved_query`
+*Toolset: **ddsql***\
+Gets a saved DDSQL query by its query ID, including its name, SQL text, columns, description, and author metadata.
+
+- Show the SQL for this saved query.
+- Get the details of the saved query with this ID.
+
+### `ddsql_upsert_saved_query`
+*Toolset: **ddsql***\
+Creates or updates a saved DDSQL query. To create a query, provide a name and SQL text and omit the query ID. To update a query, provide its query ID and a new name, SQL text, or both. If the name or SQL text is omitted from an update, its existing value is preserved.
+
+- Save this query as "CPU usage by host".
+- Rename this saved query to "Production hosts".
+- Update the SQL in this saved query to include only production hosts.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -1255,6 +1278,128 @@ Copies an existing form, including its latest definition, into a new form with a
 
 - Clone my incident review form to create a template for next quarter.
 
+## Governance
+
+Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+
+<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
+
+The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
+
+### `list_governance_insights`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` or `Metrics Read` or `Events Read` or `Audit Trail Read`*\
+Retrieves governance health insights for your organization, such as the number of unused API keys or the percentage of monitors with team tags. Supports filtering by product and includes computed values and trends by default.
+
+- What are the governance insights for my organization?
+- Show me the governance insights for Monitors.
+- How many unused API keys do we have?
+
+### `list_governance_controls`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the governance [controls][80] for your organization, including each control's detection type, severity, category, detection counts, and mitigation options.
+
+- List all governance controls.
+- Which governance controls have the most active detections?
+
+### `get_governance_control`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance [control][80] by detection type, including its configuration, detection parameters, available mitigations, notification settings, and detection counts.
+
+- Show me the configuration of the `unused_api_keys` control.
+- Which mitigations are available for the `monitors_without_team_tag` control?
+
+### `list_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the detections for a governance control. A detection is a resource that violates the control, such as an unused API key. Supports filtering by state (`active`, `exception`, or `mitigated`) and searching by resource ID or name.
+
+- List the active detections for the `unused_api_keys` control.
+- Which monitors are missing a team tag?
+- Show me the detections marked as exceptions for the `unused_api_keys` control.
+
+### `get_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance detection, including its state, resource details, assignment, mitigation deadline, and notification history.
+
+- Show me the details of detection `abc123` for the `unused_api_keys` control.
+- When is detection `abc123` scheduled for automatic mitigation?
+
+### `list_governance_limits`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists your organization's rate limits and resource limits, with current usage compared to each limit. Use this tool to find resources that are close to or over their limits.
+
+- Which of my rate limits are close to being exceeded?
+- Show me my organization's resource limits and current usage.
+
+### `list_governance_best_practices`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists recommended governance best practices, each with a description, expected impact, priority, and a link to the relevant page in Datadog. Supports filtering by category (`access_governance`, `security`, `compliance`, or `operational_hygiene`) and keyword search.
+
+- What governance best practices should my organization follow?
+- List the security best practices for my organization.
+
+### `list_tag_rules`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Lists your organization's tag rules. A tag rule flags telemetry that is missing a required tag or has a tag value that does not match an allowed pattern. Rules apply to logs, spans, metrics, RUM events, or feed events. Supports filtering by source and including disabled or deleted rules.
+
+- List all tag rules for logs.
+- Show me the disabled tag rules.
+
+### `get_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Retrieves a tag rule by ID, including the tag key it governs, its allowed value patterns, its scope, and whether it is enabled.
+
+- Show me the details of tag rule `abc123`.
+
+### `mitigate_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Runs a mitigation on up to 25 detections for a control, such as revoking unused API keys. You must specify the mitigation type. Use `get_governance_control` to see the mitigations available for a control. Each mitigation also requires the permissions to change the affected resources. Some mitigations cannot be undone. The tool requires explicit confirmation before it runs the mitigation.
+
+- Revoke the unused API keys from detections `abc123` and `def456`.
+- Mitigate all active detections for the `unused_api_keys` control.
+
+### `update_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Updates a governance detection. Use this tool to mark a detection as an exception, reactivate it, assign it to a user or team, or change its automatic mitigation deadline. The tool requires explicit confirmation before it applies changes.
+
+- Mark detection `abc123` as an exception.
+- Assign detection `abc123` to the Platform team.
+- Delay automatic mitigation of detection `abc123` until the end of the month.
+
+### `create_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+
+- Create a tag rule that requires the `team` tag on all logs.
+- Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
+
+### `update_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+
+- Enable tag rule `abc123`.
+- Add `qa` to the allowed values for tag rule `abc123`.
+
+### `delete_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. To delete the rule permanently, ask for a hard delete. The tool requires explicit confirmation before it deletes the rule.
+
+- Delete tag rule `abc123`.
+- Permanently delete tag rule `abc123`.
+
 ## Investigations
 
 Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
@@ -1361,8 +1506,6 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Get the container images from the manifest of pod `my-app`.
 
 ## Metrics Governance
-
-<div class="alert alert-info">The <code>metrics-governance</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
 
 Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
 
@@ -1954,7 +2097,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
@@ -1962,7 +2105,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
@@ -1970,7 +2113,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
@@ -1978,7 +2121,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
@@ -2591,6 +2734,74 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
 
+## Watchdog
+
+Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
+
+### `search_watchdog_stories`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog stories for anomalies and root cause analyses across APM, infrastructure, and logs. Returns story summaries and keys to use with `get_watchdog_story`.
+
+- Show Watchdog stories for the checkout service in the last 24 hours.
+- Find Watchdog stories about increased error rates in production.
+
+### `get_watchdog_story`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read` and `Built-in Features`*\
+Retrieves a Watchdog story by its key, including insight details, the timeline, and available root cause analysis. Use a story key returned by `search_watchdog_stories`.
+
+- Get the details of the Watchdog story returned by that search.
+- Show the timeline and root cause analysis for this Watchdog story.
+
+### `search_watchdog_insights`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog insights for a product context and time range, including anomalies, outliers, recommendations, and correlations. Supports contexts such as APM, logs, RUM, Kubernetes, and Database Monitoring.
+
+- Find Watchdog insights for the checkout service in production over the last hour.
+- Show Watchdog insights for logs from the payments service in the last 24 hours.
+
+### `get_influential_tags`
+*Toolset: **watchdog***\
+*Permissions Required: `Metrics`*\
+Identifies tag dimensions associated with a spike, drop, or other change in a metric. Provide a metric query and a time range. Include the anomaly start time when known, to compare behavior before and after the change.
+
+- Explain what's causing the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago.
+- Find the hosts or regions contributing to this metric change over the last hour.
+
+### `get_external_provider_status`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Retrieves external provider outages, including their status and impacted regions. Filter by provider, affected service, or time range, and optionally include resolved outages and impacted services.
+
+- Check for external provider outages affecting the checkout service.
+- Show AWS outages from the last 24 hours, including resolved outages.
+
+### `find_new_jumps`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Detects sudden changes in an APM timeseries for latency, error rate, or throughput. Provide a signal query and analysis window. Latency and error-rate analysis also require a request-count query.
+
+- Find sudden latency changes for the checkout service over the last four hours.
+- Check for sudden drops in throughput for the payments service over the last six hours.
+
+### `update_jump_state`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Reanalyzes an ongoing jump returned by `find_new_jumps` over a new time window to determine whether it is ongoing, resolved, expired, or invalidated. Reuse the returned jump state and original signal queries. This tool computes an updated result without modifying stored data.
+
+- Recheck the ongoing latency jump from the previous analysis using the latest data.
+- Check whether the throughput drop returned by `find_new_jumps` has resolved.
+
+### `forecast_timeseries`
+*Toolset: **watchdog***\
+*Permissions Required: No specific permissions required.*\
+Forecasts future values from supplied historical timestamps and values, with optional confidence bounds. Provide at least 64 historical points per series. To forecast a Datadog metric, retrieve its history with a metrics query tool first.
+
+- Forecast the next 24 hourly values from these historical timestamps and values.
+- Use this timeseries to forecast the next 12 values with 95% confidence bounds.
+
 ## Widgets
 
 Tools for [dashboard][46] and [notebook][57] widget visualization, validation, and type conversion.
@@ -2839,6 +3050,9 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
+[79]: /watchdog/
+[79]: /account_management/governance_console/
+[80]: /account_management/governance_console/controls/
 
 ## Further reading
 
