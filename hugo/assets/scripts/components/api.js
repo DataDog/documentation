@@ -183,9 +183,27 @@ if (changelogRoot) {
     const clearButtons = changelogRoot.querySelectorAll('[data-changelog-reset]');
     const emptyState = document.getElementById('api-changelog-empty-state');
 
-    let activeBucket = 'all';
-    let currentPage = 1;
     const entriesPerPage = 20;
+    let activeBucket = 'all';
+
+    function getPageFromURL() {
+        const pageParam = new URL(window.location.href).searchParams.get('page');
+        return pageParam && /^\d+$/.test(pageParam) && Number(pageParam) > 0 ? Number(pageParam) : 1;
+    }
+
+    function updatePageURL(page, historyMethod = 'pushState') {
+        const url = new URL(window.location.href);
+
+        if (page === 1) {
+            url.searchParams.delete('page');
+        } else {
+            url.searchParams.set('page', page);
+        }
+
+        window.history[historyMethod]({}, '', url);
+    }
+
+    let currentPage = getPageFromURL();
 
     function renderChangelogPagination(totalPages) {
         if (!pagination) return;
@@ -200,23 +218,30 @@ if (changelogRoot) {
             const page = index + 1;
             const isActive = page === currentPage;
             return `<li class="api-changelog-pagination-item${isActive ? ' is-active' : ''}">
-                <button type="button" data-changelog-page="${page}"${isActive ? ' disabled aria-current="page"' : ''}>${page}</button>
+                <button type="button" data-changelog-page="${page}"${
+                isActive ? ' disabled aria-current="page"' : ''
+            }>${page}</button>
             </li>`;
         }).join('');
 
         pagination.innerHTML = `<ul class="api-changelog-pagination-list">
             <li class="api-changelog-pagination-item">
-                <button type="button" data-changelog-page="${currentPage - 1}"${currentPage === 1 ? ' disabled' : ''}>Prev</button>
+                <button type="button" data-changelog-page="${currentPage - 1}"${
+            currentPage === 1 ? ' disabled' : ''
+        }>Prev</button>
             </li>
             ${pageButtons}
             <li class="api-changelog-pagination-item">
-                <button type="button" data-changelog-page="${currentPage + 1}"${currentPage === totalPages ? ' disabled' : ''}>Next</button>
+                <button type="button" data-changelog-page="${currentPage + 1}"${
+            currentPage === totalPages ? ' disabled' : ''
+        }>Next</button>
             </li>
         </ul>`;
 
         pagination.querySelectorAll('[data-changelog-page]:not([disabled])').forEach((button) => {
             button.addEventListener('click', () => {
                 currentPage = Number(button.dataset.changelogPage);
+                updatePageURL(currentPage);
                 applyChangelogFilters();
                 if (timeline) timeline.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
@@ -228,7 +253,9 @@ if (changelogRoot) {
             (entry) => activeBucket === 'all' || entry.dataset.bucket === activeBucket
         );
         const totalPages = Math.max(1, Math.ceil(matchingEntries.length / entriesPerPage));
+        const requestedPage = currentPage;
         currentPage = Math.min(currentPage, totalPages);
+        if (currentPage !== requestedPage) updatePageURL(currentPage, 'replaceState');
         const pageStart = (currentPage - 1) * entriesPerPage;
         const pageEnd = Math.min(pageStart + entriesPerPage, matchingEntries.length);
         const visibleEntries = new Set(matchingEntries.slice(pageStart, pageEnd));
@@ -236,8 +263,9 @@ if (changelogRoot) {
         entries.forEach((entry) => entry.classList.toggle('d-none', !visibleEntries.has(entry)));
 
         dateSections.forEach((section) => {
-            const hasVisibleEntry = [...section.querySelectorAll('.api-changelog-entry')]
-                .some((entry) => visibleEntries.has(entry));
+            const hasVisibleEntry = [...section.querySelectorAll('.api-changelog-entry')].some((entry) =>
+                visibleEntries.has(entry)
+            );
             section.classList.toggle('d-none', !hasVisibleEntry);
         });
 
@@ -249,6 +277,7 @@ if (changelogRoot) {
         tab.addEventListener('click', () => {
             activeBucket = tab.dataset.changelogFilter;
             currentPage = 1;
+            updatePageURL(currentPage, 'replaceState');
             filterTabs.forEach((item) => item.classList.toggle('is-active', item === tab));
             applyChangelogFilters();
         });
@@ -258,9 +287,15 @@ if (changelogRoot) {
         button.addEventListener('click', () => {
             activeBucket = 'all';
             currentPage = 1;
+            updatePageURL(currentPage, 'replaceState');
             filterTabs.forEach((tab) => tab.classList.toggle('is-active', tab.dataset.changelogFilter === 'all'));
             applyChangelogFilters();
         });
+    });
+
+    window.addEventListener('popstate', () => {
+        currentPage = getPageFromURL();
+        applyChangelogFilters();
     });
 
     applyChangelogFilters();
