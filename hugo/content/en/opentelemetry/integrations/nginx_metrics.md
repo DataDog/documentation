@@ -18,7 +18,7 @@ For more information, see the OpenTelemetry project documentation for the [NGINX
 
 This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
-The NGINX receiver reads the status page from the [`ngx_http_stub_status_module`][6] module. Before you start, enable the module and expose a status page.
+The NGINX receiver reads the status page from the [`ngx_http_stub_status_module`][6] module. Before you start, enable the module and expose a status page. Limit access to the status page, for example to localhost.
 
 Add the following lines to your Collector configuration, and set `endpoint` to the address of your status page:
 

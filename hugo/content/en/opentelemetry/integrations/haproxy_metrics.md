@@ -18,12 +18,31 @@ For more information, see the OpenTelemetry project documentation for the [HAPro
 
 This example uses component identifiers from OpenTelemetry Collector Contrib v0.154.0. For other versions or distributions, use the identifiers that distribution supports.
 
-Add the following lines to your Collector configuration. The receiver has no default endpoint, so set `endpoint` to the URL of your HAProxy stats page or the path to its stats socket, such as `file:///var/run/haproxy.ipc`:
+Add the following lines to your Collector configuration. The receiver has no default endpoint, so set `endpoint` to the URL of your HAProxy stats page or the path to its stats socket, such as `/var/run/haproxy.sock`. Limit access to the stats page or socket, for example to localhost, because it shows details about your servers.
+
+The `metrics` section turns on metrics that the receiver doesn't collect by default. The HAProxy dashboard uses them.
 
 ```yaml
 receivers:
   haproxy:
     endpoint: http://127.0.0.1:8080/stats
+    metrics:
+      haproxy.connections.total:
+        enabled: true
+      haproxy.sessions.total:
+        enabled: true
+      haproxy.failed_checks:
+        enabled: true
+      haproxy.clients.canceled:
+        enabled: true
+      haproxy.compression.bypass:
+        enabled: true
+      haproxy.compression.count:
+        enabled: true
+      haproxy.compression.input:
+        enabled: true
+      haproxy.compression.output:
+        enabled: true
 ```
 
 Add `haproxy` to the `receivers` list of the metrics pipeline in your configuration. Keep the processors already in that pipeline. The Datadog OTLP metrics intake accepts only delta metrics, and this receiver produces cumulative sums, so the pipeline needs `cumulativetodelta`. The [recommended Collector setup][5] includes it.
