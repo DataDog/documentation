@@ -15,6 +15,9 @@ further_reading:
 Manual integrations require additional configuration to enable AI Guard protection. Follow the instructions for each framework to set up AI Guard evaluations.
 
 ## Supported frameworks and libraries
+
+<div class="alert alert-tip">Manual integration is supported for Amazon Strands and LiteLLM Proxy. For any other framework, or for custom LLM or tool call code, use the [SDK][2] to call `evaluate()` in your code.</div>
+
 ### Python
 
 | Framework                         | Supported Versions | SDK Version |
