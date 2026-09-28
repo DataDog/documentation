@@ -33,16 +33,6 @@ The right configuration depends on how you send telemetry to Datadog. Find each 
 | [Collector exporting through a gateway](#collector-exporting-through-a-gateway) | Attach host information in the node-level Collector, and keep those resource attributes through the gateway. |
 | [Existing configurations using the Datadog Exporter](#existing-configurations-using-the-datadog-exporter) | Run a Collector on each host or Kubernetes node, and configure the same processors as the recommended setup. |
 
-If you're not sure which setup you have, check your configuration in this order and use the first match:
-
-1. **DDOT Collector**: The Datadog Agent runs the embedded Collector, for example with `otelcollector.enabled: true` in `datadog.yaml` or `otelCollector` enabled in the Helm chart or Datadog Operator.
-2. **OTLP ingestion by the Datadog Agent**: `datadog.yaml` has an `otlp_config` section, and applications send OTLP to the Agent.
-3. **OpenTelemetry Collector over OTLP**: Your Collector configuration exports with the `otlp_http` exporter to an `otlp.<DD_SITE>` endpoint.
-4. **Datadog Exporter**: Your Collector configuration lists the `datadog` exporter.
-5. **Direct OTLP intake**: Your SDK or platform sends OTLP to a Datadog intake endpoint, without an Agent or Collector.
-
-If telemetry passes through more than one Collector before it reaches Datadog, also follow the [gateway recommendations](#collector-exporting-through-a-gateway).
-
 ### OTLP ingestion by the Datadog Agent
 
 Deploy the Datadog Agent on every host that generates OTLP telemetry. Datadog doesn't support sending telemetry from one host to an Agent on another host. For setup instructions, see [OTLP Ingestion by the Datadog Agent][11].
@@ -66,6 +56,8 @@ processors:
   infraattributes:
     allow_hostname_override: true
 ```
+
+Add `infraattributes` to each pipeline's `processors` list if it isn't there already. DDOT automatically adds its own copy to pipelines that don't list the processor, and that copy uses the default settings.
 
 #### Fargate sidecar deployments
 
