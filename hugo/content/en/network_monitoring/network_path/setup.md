@@ -498,13 +498,13 @@ Agent `v7.73+` is required.
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.73+` is required. Configuring filters with Helm requires Agent `v7.83.2+` and Helm chart `v3.249.0+`.
+Agent `v7.73+` and Helm chart `v3.124.0+` are required. Configuring filters additionally requires Agent `v7.83.2+` and Helm chart `v3.249.0+`.
 
 To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
-# Network Path filters require Agent 7.83.2 or a later stable release.
+# Network Path filters require Agent v7.83.2+.
 # agents:
 #   image:
 #     tag: "<AGENT_VERSION>"
