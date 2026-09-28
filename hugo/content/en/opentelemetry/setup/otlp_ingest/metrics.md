@@ -52,7 +52,7 @@ To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
    - Configure the required HTTP headers.
 1. (Optional) [Set the `dd-otel-metric-config` HTTP header](#optional-configure-the-metric-translator) to configure the metric translator behavior.
 
-<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively, with their original bucket structure. Percentiles match the OpenTelemetry data model, and histograms show their correct metric type (Explicit Histogram or Exponential Histogram) in Datadog. Distribution queries on your histogram metrics work without changes. For details, see <a href="/metrics/open_telemetry/otlp_metric_types/?tab=histogram#mapping">OTLP Metrics Types</a>.</div>
+<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively, with their original bucket structure. Percentiles match the OpenTelemetry data model, and histograms show their correct metric type (Explicit Histogram or Exponential Histogram) in Metrics Summary and Metrics Explorer. Distribution queries on your histogram metrics work without changes. For details, see <a href="/metrics/open_telemetry/otlp_metric_types/?tab=histogram#mapping">OTLP Metrics Types</a>.</div>
 
 ### Configure the exporter
 
