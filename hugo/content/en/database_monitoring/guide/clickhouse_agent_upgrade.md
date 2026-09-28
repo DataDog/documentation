@@ -58,7 +58,7 @@ After the Agent restarts, open the ClickHouse instance in [Database Monitoring][
 
 If the `clickhouse_node` tag is missing:
 
-- Run the [Agent status command][3] and check the ClickHouse check for permission errors.
+- Run the [Agent status command][3] and review the ClickHouse check for permission errors.
 - Confirm that the grants above are applied to the user the Agent connects as, on every node.
 - Confirm that your cluster defines a `{cluster}` macro or a `<remote_servers>` entry that includes the node the Agent connects to. If neither is configured, the Agent cannot identify the cluster, and the `clickhouse_cluster` tag is not reported.
 
