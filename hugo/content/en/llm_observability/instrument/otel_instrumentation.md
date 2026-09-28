@@ -996,16 +996,19 @@ Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic 
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
-## Disabling Agent Observability conversion
+<!-- Agent Observability is a product name. -->
+<!-- vale Datadog.headings = NO -->
+## Enabling Agent Observability conversion
+<!-- vale Datadog.headings = YES -->
 
-If you'd only like your generative AI spans to remain in APM and not appear in Agent Observability, you can disable the automatic conversion by setting the `dd_llmobs_enabled` attribute to `false`. Setting this attribute on any span in a trace prevents the entire trace from being converted to Agent Observability.
+To enable Agent Observability conversion, set the `dd_llmobs_enabled` attribute to `true`. Setting this attribute on any span in a trace enables conversion of the trace's generative AI spans. An explicit `false` on any span prevents conversion of the entire trace.
 
 ### Using environment variables
 
-Add the `dd_llmobs_enabled=false` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
+Add the `dd_llmobs_enabled=true` attribute to your `OTEL_RESOURCE_ATTRIBUTES` environment variable:
 
 ```
-OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=false
+OTEL_RESOURCE_ATTRIBUTES=dd_llmobs_enabled=true
 ```
 
 ### Using code
@@ -1018,8 +1021,8 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable Agent Observability conversion for this entire trace
-    span.set_attribute("dd_llmobs_enabled", False)
+    # Enable Agent Observability conversion for this entire trace
+    span.set_attribute("dd_llmobs_enabled", True)
 ```
 
 [1]: https://github.com/open-telemetry/semantic-conventions-genai
