@@ -89,7 +89,19 @@ GRANT SELECT ON system.replication_queue TO datadog;
 GRANT SELECT ON system.merge_tree_settings TO datadog;
 ```
 
-The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The `system.macros`, `system.clusters`, `system.settings`, `system.table_engines`, and `system.one` grants are required to identify the cluster, hosting type, and nodes of each instance. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+
+Grant `REMOTE` permissions to allow the Agent to list the nodes in your cluster:
+
+```sql
+GRANT REMOTE ON *.* TO datadog;
+```
+
+The `REMOTE` privilege is required because the Agent uses ClickHouse's `clusterAllReplicas()` table function to list the nodes of the cluster the instance belongs to, and, when `single_endpoint_mode` is enabled, to collect data from every node. This privilege enables cross-node query execution. It does **not** grant access to any additional databases or tables beyond what was explicitly granted above. The `ON *.*` syntax is a ClickHouse requirement for this privilege type and does not expand the scope of data access.
+
+<div class="alert alert-info">
+<code>clusterAllReplicas()</code> connects to the other nodes using the <code>user</code> and <code>password</code> set for each replica in your <code>remote_servers</code> configuration, or the <code>default</code> user if none is set. Make sure these credentials can log in to every node in the cluster.
+</div>
 
 <div class="alert alert-info">
 The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do <strong>not</strong> grant the Agent access to your application data.
