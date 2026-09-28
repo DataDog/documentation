@@ -61,21 +61,23 @@ Para ver el esquema completo y todas las opciones disponibles, consulte la [Depl
 
 {{< tabs >}}
 {{% tab "Seguimiento" %}}
-La regla de seguimiento evalúa el estado de un conjunto de seguimientos durante un período de tiempo configurable. Falla si en cualquier momento durante el período de evaluación:
+La regla de seguimiento evalúa el estado de un conjunto de seguimientos durante un período de tiempo configurable. Seleccione seguimientos con `query` o `monitor_ids`; las dos opciones son mutuamente excluyentes. La regla puede fallar si en cualquier momento durante el período de evaluación:
 
-- Ningún seguimiento coincide con la consulta.
-- Más de 50 seguimientos coinciden con la consulta.
-- Cualquier seguimiento coincidente está en estado `ALERT` o `NO_DATA`.
+- Ningún grupo de seguimientos coincide con la selección configurada.
+- Un ID de seguimiento explícito no existe o no está disponible para su organización.
+- Más de 300 seguimientos coinciden con la selección configurada.
+- Cualquier grupo de seguimientos coincidente está en estado `ALERT` o `NO_DATA`.
 
 **Opciones**:
 
-- `query`: La consulta de búsqueda de seguimientos, basada en la [sintaxis de búsqueda de seguimientos][1]. Filtrar por etiquetas de seguimiento:
+- `query`: Una consulta de búsqueda de seguimientos basada en la [Search Monitor syntax][1]. Filtrar por etiquetas de seguimiento:
   - Etiquetas estáticas de seguimiento: `service:transaction-backend`
   - Etiquetas dentro de la consulta de seguimiento: `scope:"service:transaction-backend"`
   - Etiquetas dentro de una [agrupación de seguimientos][2]: `group:"service:transaction-backend"`
-- `duration`: El período de tiempo (en segundos) durante el cual se evalúan los seguimientos coincidentes. El valor predeterminado es 0 (los seguimientos se evalúan al instante). El máximo es 7200 segundos (2 horas).
+- `monitor_ids`: Una lista de seguimientos específicos. Cada elemento contiene un seguimiento decimal `id` y un arreglo `groups` de nombres de grupo exactos. Un arreglo `groups` vacío evalúa todos los grupos para ese seguimiento.
+- `duration`: El período de tiempo (en segundos) durante el cual se evalúan los seguimientos seleccionados. El valor predeterminado es 0 (los seguimientos se evalúan al instante). El máximo es 7200 segundos (2 horas).
 
-Ejemplo de regla en línea:
+Ejemplos de reglas en línea:
 
 ```json
 {
@@ -88,9 +90,24 @@ Ejemplo de regla en línea:
 }
 ```
 
+```json
+{
+  "type": "monitor",
+  "name": "Specific monitors",
+  "options": {
+    "monitor_ids": [
+      {"id": "12345678", "groups": []},
+      {"id": "87654321", "groups": ["service:api"]}
+    ],
+    "duration": 300
+  }
+}
+```
+
 **Notas**:
-- `group` los filtros evalúan solo los grupos coincidentes.
-- Los seguimientos silenciados se excluyen automáticamente de la evaluación (la consulta siempre incluye `muted:false`).
+- `group` las consultas de filtro y `monitor_ids[].groups` evalúan solo los grupos coincidentes.
+- Un ID de seguimiento explícito que no existe o no está disponible para su organización hace que la regla falle. Si el seguimiento existe pero está excluido porque está silenciado o sus grupos seleccionados no tienen datos, la regla aplica el comportamiento de no coincidencia de grupos.
+- Los seguimientos silenciados se excluyen automáticamente de ambos modos de selección.
 
 [1]: /es/monitors/manage/search/
 [2]: /es/monitors/manage/#triggered-monitors
@@ -107,7 +124,7 @@ El análisis se realiza automáticamente para todos los servicios instrumentados
 
 - `duration`: El período de tiempo (en segundos) durante el cual se ejecuta el análisis. Para una confianza de análisis óptima, este valor debe ser de al menos 900 segundos (15 minutos) después de que comience una implementación. El máximo es 7200 segundos (2 horas).
 - `allowed_resources` (opcional): [Recursos de APM][2] a incluir en el análisis. Cuando se especifica, solo se analizan los recursos enumerados. Mutuamente excluyente con `excluded_resources`.
-- `excluded_resources` (opcional): [Recursos de APM][2] a ignorar (como endpoints de bajo volumen o baja prioridad). Mutuamente excluyente con `allowed_resources`.
+- `excluded_resources` (opcional): [Recursos de APM][2] a ignorar (como puntos de conexión de bajo volumen o baja prioridad). Mutuamente excluyente con `allowed_resources`.
 
 Ejemplo de regla en línea:
 
@@ -135,7 +152,7 @@ Ejemplo de regla en línea:
 
 ## Evalúe un Deployment Gate desde su canalización {#evaluate-a-gate-from-your-pipeline}
 
-Puede solicitar una evaluación de Deployment Gate desde su deployment pipeline de varias maneras. La CLI de `datadog-ci`, la integración de Argo Rollouts y la acción de GitHub aceptan reglas en línea a través de un archivo de configuración JSON usando claves en camel case (`dryRun`). Las llamadas directas a la API y el script genérico envían la misma configuración en el payload de la solicitud usando claves en snake case (`dry_run`), que coinciden con el esquema de la API.
+Puede solicitar una evaluación de Deployment Gate desde su deployment pipeline de varias maneras. La CLI de `datadog-ci`, la integración de Argo Rollouts y la acción de GitHub aceptan reglas en línea a través de un archivo de configuración JSON usando claves en camel case (`dryRun`). Las llamadas directas a la API y el script genérico envían la misma configuración en la carga útil de la solicitud usando claves en snake case (`dry_run`), que coinciden con el esquema de la API.
 
 {{< tabs >}}
 {{% tab "CLI de datadog-ci" %}}
@@ -285,7 +302,7 @@ spec:
 
 - La plantilla de análisis puede recibir argumentos del recurso Rollout (`service`, `env`, `version`). Para obtener más información, consulte la [documentación oficial de Argo Rollouts][4].
 - `ttlSecondsAfterFinished` elimina los trabajos finalizados después de 5 minutos.
-- `backoffLimit` se establece en 0 porque el trabajo no debe reintentarse si la evaluación de Deployment Gate falla.
+- `backoffLimit` se establece en 0 porque el trabajo no debe volver a intentarse si la evaluación de Deployment Gate falla.
 
 Después de crear la plantilla de análisis, haga referencia a ella desde la estrategia de Argo Rollouts:
 
@@ -572,7 +589,7 @@ El script:
   - 5xx: error del servidor, reintenta con retraso.
   - 404: evaluación aún no iniciada, reintenta con retraso.
   - 4xx (excepto 404): error del cliente, la evaluación falla.
-  - 2xx: verificación `gate_status` y reintente con retraso si no se ha completado.
+  - 2xx: verificación `gate_status` y vuelva a intentar con retraso si no se ha completado.
 - Consulta cada 15 segundos hasta que la evaluación se complete o se alcance el tiempo máximo de consulta (10800 segundos = 3 horas por defecto).
 - Si se agotan todos los reintentos para la solicitud inicial (respuestas 5xx), el script trata esto como un éxito para ser resiliente ante fallas de la API.
 

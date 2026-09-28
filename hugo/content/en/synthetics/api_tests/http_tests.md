@@ -145,6 +145,8 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
+This script runs before Datadog sends the HTTP request. To read or assert on the response body, use [Define assertions > JavaScript](#define-assertions) instead.
+
    {{% /tab %}}
 
    {{< /tabs >}}
@@ -191,6 +193,8 @@ If a test contains an assertion on the response body and the timeout limit is re
 Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
 
 When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+
+JavaScript assertions run after Datadog receives the HTTP response. To set variables before the request is sent, such as headers or signatures, use {{< ui >}}Variable From Script{{< /ui >}} under [Advanced Options > Javascript](#advanced-options).
 
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 

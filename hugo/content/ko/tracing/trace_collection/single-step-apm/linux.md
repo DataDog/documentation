@@ -53,15 +53,15 @@ Datadog Agent를 설치하지 않은 경우, 한 번에 Datadog Agent를 설치�
 
 To get a command pre-filled with your API key and site, go to the [Install the Datadog Agent on Linux][15] page and turn on {{< ui >}}Application Performance Monitoring{{< /ui >}} under {{< ui >}}Core Observability{{< /ui >}}.
 
-{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux에 Datadog Agent 설치를 위한 인앱 지침의 'Agent 커버리지 사용자 지정' 섹션" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/enable_apm.png" alt="Linux에 Datadog Agent 설치를 위한 인앱 지침의 'Agent 적용 범위 사용자 지정' 섹션" style="width:100%;" >}}
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-드롭다운에서 SDK 버전을 선택하려면 {{< ui >}}Customize Library Versions{{< /ui >}}를 클릭합니다.
+드롭다운에서 SDK 버전을 선택하려면 {{< ui >}}Customize Library Versions{{< /ui >}}를 클릭하세요.
 
 {{< img src="tracing/trace_collection/customize_library_versions.png" alt="Linux에 Datadog Agent 설치를 위한 지침의 '라이브러리 버전 사용자 지정' 드롭다운" style="width:100%;" >}}
 {{< /site-region >}}
 
-그런 다음 생성된 명령을 복사하여 실행합니다.
+그런 다음 생성된 명령을 복사하여 실행하세요.
 
 ### 기존 Agent 설치 {#existing-agent-installation}
 
@@ -86,7 +86,7 @@ Datadog Agent를 이미 설치한 경우, 호스트에서 [새 Agent 설치](#ne
 1. **Next**를 클릭합니다.
 1.  구성을 검토하고 {{< ui >}}Deploy Configuration{{< /ui >}}을 클릭합니다.
 
-##  설치 확인 {#verify-the-installation}
+##  설치 검증 {#verify-the-installation}
 
 1. Agent가 실행 중인지 확인합니다.
 
@@ -116,13 +116,13 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 다음 설정 방법 중 한 가지를 사용하세요.
 
-- **[`application_monitoring.yaml`에서 구성][18]**:
+- **[`application_monitoring.yaml`에서 구성][18]**
 
-  애플리케이션 명령줄을 수정하지 않고 호스트의 모든 서비스 전반의 제품 및 기능을 구성합니다.
+  애플리케이션 명령줄을 수정하지 않고 호스트의 모든 서비스 전반의 제품 및 기능을 구성하세요.
 
-- **[환경 변수 설정][17]**:
+- **[환경 변수 설정][17]**
 
-  애플리케이션 구성에서 직접 환경 변수를 설정하여 제품을 활성화합니다. 
+  애플리케이션 구성에서 직접 환경 변수를 설정하여 제품을 활성화하세요. 
 
 ## 고급 옵션{#advanced-options}
 
@@ -130,12 +130,12 @@ SSI가 애플리케이션에 Datadog SDK를 로드하고 분산 트레이싱을 
 
 Agent 설치 명령을 실행할 때는 SDK 버전이 고정됩니다.
 
-SDK 버전 업데이트:
+SDK 버전을 업데이트하려면 다음 단계를 따르세요.
 
-1. Agent 설치 명령을 다시 실행합니다. 이 명령을 통해 Agent가 최신 버전으로 업데이트되는 경우도 있습니다.
+1. Agent 설치 명령을 다시 실행합니다. 이 명령은 Agent도 최신 버전으로 업데이트합니다.
 1. 애플리케이션을 재시작하세요.
 
-### 계측 규칙 정의하기 {#define-instrumentation-rules}
+### 계측 규칙 정의 {#define-instrumentation-rules}
 
 {{< site-region region="gov" >}}
 <div class="alert alert-warning">선택한 <a href="/getting_started/site">Datadog 사이트</a>에서는 계측 규칙이 지원되지 않습니다({{< region-param key="dd_site_name" >}}).</div>
@@ -143,23 +143,25 @@ SDK 버전 업데이트:
 
 계측 규칙(Agent v7.73 이상에서 사용 가능)을 정의하면 Linux 호스트에서 SSI에 의해 자동으로 계측되는 프로세스를 제어할 수 있습니다.
 
-계측 규칙 구성하기:
+**참고**: Bits AI를 사용하여 자연어로 계측 규칙을 생성할 수 있습니다. 계측할 프로세스를 설명하면 Bits AI가 해당 규칙을 생성합니다.
+
+계측 규칙을 구성하려면 다음 단계를 따르세요.
 
 1. Datadog에서 {{< ui >}}APM{{< /ui >}} > {{< ui >}}Service Setup{{< /ui >}} > [{{< ui >}}Manage Instrumentation Rules{{< /ui >}}][20]로 이동합니다.
 1. {{< ui >}}Add or Edit Rules{{< /ui >}}를 클릭합니다.
-1. 계측 규칙 정의:
+1. 계측 규칙을 정의합니다.
    1. {{< ui >}}Add New Rule{{< /ui >}}를 클릭한 다음 {{< ui >}}Allow Rule{{< /ui >}} 또는 {{< ui >}}Block Rule{{< /ui >}}을 선택하여 일치 프로세스를 계측할지 여부를 지정합니다.
    1. 규칙 이름을 지정합니다.
    1. 하나 이상의 조건을 추가합니다. 자세한 내용은 [규칙 조건 정의](#define-rule-conditions)를 참조하세요.
 
    {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="규칙 정의를 위한 구성 옵션을 제시하는 계측 규칙 UI" style="width:100%;" >}}
 
-1. (선택 사항) 규칙을 드래그 앤 드롭하여 순서를 변경합니다.
+1. (필요시) 규칙을 드래그 앤 드롭하여 순서를 변경합니다.
 
    **참고**: 규칙은 순서대로 평가됩니다. 프로세스와 규칙이 일치하면 후속 규칙은 무시됩니다.
 
 1. 어떤 규칙과도 일치하지 않는 프로세스에 대해 기본 동작(허용 또는 차단)을 설정합니다.
-1. {{< ui >}}Next{{< /ui >}}를 클릭하면 규칙을 미리 볼 수 있습니다.
+1. {{< ui >}}Next{{< /ui >}}를 클릭하여 규칙을 미리 봅니다.
 1. {{< ui >}}Deploy Rules{{< /ui >}}를 클릭합니다.
 
 Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배포되고 50초 이내에 SSI가 활성화된 호스트에 적용됩니다. 또는 {{< ui >}}Export{{< /ui >}}를 클릭하여 구성 파일을 내보내고 호스트에 수동으로 적용합니다.
@@ -179,7 +181,7 @@ Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배�
 | 실행 파일 전체 경로 | 실행 파일의 전체 경로입니다. | `/usr/bin/python3.11` |
 | 인수 | 프로세스를 시작할 때 사용되는 명령줄 인수입니다. | `--env=production` |
 | 작업 디렉터리 | 프로세스의 작업 디렉터리입니다. | `/app` |
-| 언어 | 프로세스에 대해 감지된 프로그래밍 언어입니다. | `python` |
+| 언어 | 프로세스에 대해 탐지된 프로그래밍 언어입니다. | `python` |
 | 진입점 파일 | 애플리케이션을 시작할 때 사용되는 특정 파일입니다. | `app.py`, `server.js` |
 
 #### 사용 사례 {#example-use-cases}
@@ -196,9 +198,9 @@ Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배�
 
 {{< collapse-content title="예시 2: 특정 프로세스만 계측" level="h5" >}}
 
-기본적으로 모든 계측을 차단합니다. 특정 프로세스를 APM 대상에 포함하도록 허용 규칙을 추가합니다. 이 접근 방식은 정밀한 제어가 가능하며 점진적인 롤아웃에 적합합니다.
+기본적으로 모든 계측을 차단합니다. 특정 프로세스를 APM 대상에 포함하도록 허용 규칙을 추가하세요. 이 접근 방식은 정밀한 제어가 가능하며 점진적인 롤아웃에 적합합니다.
 
-예를 들어, 결제 서비스와 고객 포털만 계측하려면 {{< ui >}}Working Directory{{< /ui >}}을 사용하여 허용 규칙을 생성한 다음, 기본 동작을 {{< ui >}}Block Instrumentation{{< /ui >}}으로 설정합니다.
+예를 들어, 결제 서비스와 고객 포털만 계측하려면 {{< ui >}}Working Directory{{< /ui >}}을 사용하여 허용 규칙을 생성한 다음, 기본 동작을 {{< ui >}}Block Instrumentation{{< /ui >}}으로 설정하세요.
 
 {{< img src="tracing/trace_collection/instrumentation-rules-linux-example-2.png" alt="특정 작업 디렉터리의 서비스에 대한 두 가지 계측 허용 규칙(기본값으로 계측 차단 설정)" style="width:100%;" >}}
 
@@ -206,10 +208,10 @@ Remote Configuration이 활성화된 경우, 규칙이 모든 호스트에 배�
 
 ## Agent에서 Single Step APM 계측 제거 {#remove-single-step-apm-instrumentation-from-your-agent}
 
-인프라의 모든 서비스에 대해 추적 생성 중지하기
+인프라의 모든 서비스에서 트레이스 생성을 중지하려면 다음 단계를 따르세요.
 
-1. 
-   ```shell을 실행합니다.
+1. 다음을 실행합니다.
+   ```shell
    dd-host-install --uninstall
    ```
 2. 호스트 또는 VM에서 서비스를 재시작합니다.

@@ -64,6 +64,8 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - Agent Observability traces, Experiments, Datasets, and Annotation Queues
 - APM traces
 - Cloud costs
+- Custom metrics
+    - **Note:** Standard metrics are not supported
 - Error Tracking issues
 - Logs
 - RUM sessions
@@ -72,13 +74,12 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 - Workload Protection Agent Events
 
 The following are available as a Preview upon request:
-- Custom metrics
-    - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
 - Database Monitoring
 - Hosts
 - Processes
 - Containers
-- Security findings (Cloud Security findings only)
+- Security findings (Cloud Security, Workload Protection, and App and API Protection findings only)
+- Serverless
 
 ## Advanced configuration
 
