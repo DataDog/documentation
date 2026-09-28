@@ -12,7 +12,7 @@ further_reading:
   text: 모니터 알림 설정
 - link: /monitors/downtimes/
   tag: 설명서
-  text: 모니터 음소거를 위한 다운타임 예약
+  text: 모니터 음소거를 위한 가동 중지 예약
 - link: /monitors/status/
   tag: 설명서
   text: 모니터 상태 확인
@@ -85,7 +85,7 @@ Datadog에서 Data Observability 모니터를 생성하려면 [{{< ui >}}Data Ob
 | 예시 | 설명 |
 |---|---|
 | `owner:data-platform-team` | `owner:data-platform-team`으로 태그된 자산과 일치하는 항목을 찾습니다. |
-| `platform:snowflake` | `platform:snowflake`으로 태그된 자산과 일치하는 항목을 찾습니다. |
+| `platform:snowflake` | `platform:snowflake`로 태그된 자산과 일치하는 항목을 찾습니다. |
 | `environment:production` | `environment:production`으로 태그된 자산과 일치하는 항목을 찾습니다. |
 
 태그 필터는 이름 필터와 동일한 `*` 와일드카드 및 따옴표를 지원합니다(예: `owner:data-*` 또는 `platform:"Snowflake Prod"`).
@@ -221,6 +221,7 @@ SQL 쿼리에 `GROUP BY` 절이 포함된 경우, {{< ui >}}Group by{{< /ui >}} 
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | 모니터가 경보를 보내기 전까지 연속으로 실패한 평가 횟수입니다. 이 설정을 조정하여 일시적인 급증을 억제합니다. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | 모델이 데이터의 상한을 얼마나 엄격하게 추적할지 제한합니다. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | 모델이 데이터의 하한을 얼마나 엄격하게 추적할지 제한합니다. |
+| {{< ui >}}Sensitivity{{< /ui >}} | 예상 경계의 너비를 제어합니다. 슬라이더를 {{< ui >}}Fewer alerts{{< /ui >}} 쪽으로 이동하면 경계가 더 넓어지고, {{< ui >}}More alerts{{< /ui >}} 쪽으로 이동하면 경계가 더 좁아집니다. 설정된 최소 경계 크기가 여전히 적용됩니다. |
 
 ### 모니터 일정 {#monitor-schedule}
 
@@ -276,7 +277,7 @@ Observed value {{observed}} is within the expected range.
 
 ## 소스-대상 모니터 {#source-to-target-monitors}
 
-<div class="alert alert-info">소스-대상 모니터는 미리 보기로 제공됩니다. 액세스를 요청하려면 Datadog 담당자나 <a href="/help/"> 지원팀</a>에 문의하세요.</div>
+<div class="alert alert-info">소스-대상 모니터는 미리 보기로 제공됩니다. 액세스를 요청하려면 Datadog 담당자나 <a href="/help/">지원팀</a>에 문의하세요.</div>
 
 소스-대상 모니터는 두 데이터 자산에서 동일한 메트릭을 비교하고, 두 값이 서로 달라지면 경보를 보냅니다. 다른 Data Observability 모니터는 단일 자산의 신선도나 완전성을 추적합니다. 소스-대상 모니터는 소스에서 전송된 데이터와 대상에 도착한 복사본이 일치하는지 추적합니다.
 

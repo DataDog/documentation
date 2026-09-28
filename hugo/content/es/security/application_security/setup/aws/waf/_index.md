@@ -5,7 +5,7 @@ further_reading:
   text: Cómo funciona App and API Protection
 - link: /security/application_security/waf-integration/
   tag: Documentación
-  text: Más información sobre las integraciones de WAF
+  text: Más información sobre las Integrations de WAF
 - link: /security/application_security/troubleshooting
   tag: Documentación
   text: Solución de problemas de protección de aplicaciones y API
@@ -17,12 +17,6 @@ further_reading:
   text: Hacer un seguimiento de la actividad de AWS WAF con Datadog
 title: Habilitación de App and API Protection para AWS WAF
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection se encuentra en versión preliminar en el sitio de Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
 App and API Protection se integra con AWS Web Application Firewall (WAF) mediante:
 
 1. La conversión de registros en trazas para obtener visibilidad de las solicitudes monitoreadas y bloqueadas

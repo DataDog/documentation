@@ -21,7 +21,9 @@ further_reading:
   tag: "Blog"
   text: "Best practices for end-to-end custom metrics governance"
 ---
-{{< callout url="https://www.datadoghq.com/product-preview/agent-side-filtering-for-custom/" >}} Agent-Side Filtering for Custom Metrics is in Preview. If you're interested in this feature, complete this form. {{< /callout >}}
+{{< callout url="#" header="false" btn_hidden="true" >}}
+Agent-side filtering for custom metrics is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -398,4 +400,3 @@ This initial preview release includes the following limitations:
 [7]: https://app.datadoghq.com/metric/settings/policies                                            
 [8]: /api/latest/#getting-started
 [9]: /getting_started/site/
-

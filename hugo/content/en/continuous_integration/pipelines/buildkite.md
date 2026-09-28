@@ -59,9 +59,19 @@ To set up the Datadog integration for [Buildkite][1]:
 
 ### Collect job logs
 
-The Datadog Buildkite integration collects logs from your finished Buildkite jobs and forwards them to Datadog. To install and configure this integration, see the [Buildkite integration documentation][19].
+Export job logs from the Buildkite Agent as OpenTelemetry logs to the [Datadog OTLP Logs endpoint][23]. To enable the export, follow Buildkite's [OpenTelemetry job log export documentation][22].
 
 Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
+
+{{% collapse-content title="Datadog Buildkite integration (legacy)" level="h4" expanded=false id="legacy-buildkite-integration-job-log-collection" %}}
+
+The Datadog Buildkite integration is a legacy method for collecting job logs. If you cannot use OpenTelemetry, contact your Datadog representative.
+
+For installation and configuration instructions, see the [Buildkite integration documentation][19].
+
+<div class="alert alert-warning">This integration retrieves job logs through the Buildkite API. Collecting logs can consume a significant portion of your Buildkite API rate limit.</div>
+
+{{% /collapse-content %}}
 
 ## Advanced configuration
 
@@ -165,3 +175,5 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [19]: /integrations/buildkite/
 [20]: /continuous_integration/pipelines/buildkite/#collect-job-logs
 [21]: /logs/
+[22]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
+[23]: /opentelemetry/setup/otlp_ingest/logs/
