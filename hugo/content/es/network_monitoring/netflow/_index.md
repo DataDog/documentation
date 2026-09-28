@@ -2,6 +2,9 @@
 aliases:
 - /es/network_monitoring/devices/netflow/
 further_reading:
+- link: https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/
+  tag: Centro de arquitectura
+  text: Arquitectura de referencia para la observabilidad de red híbrida multinube
 - link: /network_monitoring/devices/profiles
   tag: Documentación
   text: Uso de perfiles con Network Device Monitoring
@@ -10,10 +13,14 @@ further_reading:
   text: Configuración de pruebas dinámicas para NetFlow
 - link: https://www.datadoghq.com/blog/monitor-netflow-with-datadog/
   tag: Blog
-  text: Monitoree los datos de tráfico de NetFlow con Datadog
+  text: Haga un seguimiento de los datos de tráfico de NetFlow con Datadog
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: Blog
-  text: Monitoree y diagnostique problemas de rendimiento de la red con capturas SNMP
+  text: Haga un seguimiento y un diagnóstico de problemas de rendimiento de la red
+    con capturas SNMP
+- link: https://www.datadoghq.com/blog/understanding-netflow-duplication/
+  tag: Blog
+  text: 'Comprensión de la duplicación de NetFlow: por qué sucede y cómo deduplicarla'
 title: NetFlow Monitoring
 ---
 ## Descripción general {#overview}
@@ -93,7 +100,7 @@ Datadog enriquece los puertos en NetFlow con datos de IANA (Internet Assigned Nu
 
 También puede agregar sus propios enriquecimientos personalizados para asignar puertos y protocolos a aplicaciones específicas (por ejemplo, si un servicio personalizado se ejecuta en un puerto específico). Esto facilita que los ingenieros de red y sus equipos interpreten y consulten los datos de NetFlow con nombres legibles por humanos.
 
-Desde la pestaña {{< ui >}}Configuration{{< /ui >}} en NetFlow, haga clic en {{< ui >}}+ Add Enrichment{{< /ui >}} para cargar el archivo CSV que contiene sus enriquecimientos personalizados.
+Desde la pestaña {{< ui >}}Configuration{{< /ui >}} en NetFlow, haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para cargar el archivo CSV que contiene sus enriquecimientos personalizados.
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="El modal de Nueva asignación de enriquecimiento en la pestaña de configuración de NetFlow" width="100%" >}}
 
@@ -101,7 +108,7 @@ Desde la pestaña {{< ui >}}Configuration{{< /ui >}} en NetFlow, haga clic en {{
 
 También puede agregar sus propios enriquecimientos personalizados para asignar IP y CIDR a etiquetas personalizadas (por ejemplo, para categorizar servicios que se ejecutan en direcciones IP específicas). Esto facilita que los ingenieros de red y sus equipos interpreten y consulten los datos de NetFlow con nombres legibles por humanos.
 
-Desde la [{{< ui >}}Enrichment{{< /ui >}} página de configuración][10], haga clic en {{< ui >}}+ Add Enrichment{{< /ui >}} para agregar asignaciones manualmente o cargar un archivo CSV para agregar asignaciones de forma masiva.
+Desde la [{{< ui >}}Enrichment{{< /ui >}} página de configuración][10], haga clic en {{< ui >}}\+ Add Enrichment{{< /ui >}} para agregar asignaciones manualmente o cargar un archivo CSV para agregar asignaciones de forma masiva.
 
 ### Enriquecimiento de IP privada de DNS inverso {#reverse-dns-private-ip-enrichment}
 
@@ -109,7 +116,7 @@ Habilite el enriquecimiento de IP privada de DNS inverso para realizar búsqueda
 
 De forma predeterminada, el enriquecimiento de IP de DNS inverso en su [`datadog.yaml` archivo][7] está deshabilitado. Para habilitarlo, consulte la sección [Configuración](#configuration) de esta página.
 
-Busque DNS en el menú {{< ui >}}+ Filter{{< /ui >}} para localizar flujos asociados con el enriquecimiento de IP de DNS inverso:
+Busque DNS en el menú {{< ui >}}\+ Filter{{< /ui >}} para localizar flujos asociados con el enriquecimiento de IP de DNS inverso:
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="Menú de filtro mejorado para mostrar las facetas de destino y fuente de DNS inverso" width="100%" >}}
 
@@ -117,7 +124,7 @@ Busque DNS en el menú {{< ui >}}+ Filter{{< /ui >}} para localizar flujos asoci
 
 ## Detalles de IP {#ip-details}
 
-En la vista **Conversaciones**, puede ver la dirección IP pública de la IP de destino. Pase el cursor sobre la IP para mostrar metadatos enriquecidos sobre la IP y un enlace a {{< ui >}}View Related Network Connections{{< /ui >}} donde puede inspeccionar la conectividad con más detalle.
+En la vista **Conversaciones**, puede visualizar la dirección IP pública de la IP de destino. Pase el cursor sobre la IP para mostrar metadatos enriquecidos sobre la IP y un enlace a {{< ui >}}View Related Network Connections{{< /ui >}} donde puede inspeccionar la conectividad con más detalle.
 
 {{< img src="network_device_monitoring/netflow/NetFlow_IP_pill.png" alt="Pase el cursor sobre una dirección IP para mostrar los detalles de la IP y visualizar conexiones de red relacionadas." width="100%" >}}
 

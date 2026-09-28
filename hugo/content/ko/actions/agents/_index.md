@@ -19,6 +19,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/bits-agent-builder/
   tag: 블로그
   text: 'Bits Agent Builder 소개: 경보 대응 및 해결을 위한 에이전틱 워크플로 구축'
+- link: https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/
+  tag: 블로그
+  text: Bits Chat 또는 AI 에이전트에서 Datadog 워크플로우를 빌드하고 실행하십시오.
 title: Bits Agent Builder
 ---
 ## 개요 {#overview}
