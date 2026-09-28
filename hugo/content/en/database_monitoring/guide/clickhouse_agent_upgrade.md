@@ -51,11 +51,18 @@ The Agent looks up the cluster once when it starts, and keeps using that result 
 
 ## Verify the upgrade
 
-After the Agent restarts, open the ClickHouse instance in [Database Monitoring][2] and confirm that query data is tagged with `clickhouse_node`. If the tag is missing:
+After the Agent restarts, open the ClickHouse instance in [Database Monitoring][2] and confirm that:
+
+- Query data is tagged with `clickhouse_node`.
+- The `hosting_type` tag is `clickhouse-cloud` for a ClickHouse Cloud service, or `self-hosted` for any other deployment.
+
+If the `clickhouse_node` tag is missing:
 
 - Run the [Agent status command][3] and check the ClickHouse check for permission errors.
 - Confirm that the grants above are applied to the user the Agent connects as, on every node.
 - Confirm that your cluster defines a `{cluster}` macro or a `<remote_servers>` entry that includes the node the Agent connects to. If neither is configured, the Agent cannot identify the cluster, and the `clickhouse_cluster` tag is not reported.
+
+If the `hosting_type` tag is `unknown`, the Agent could not read `system.settings` or `system.table_engines`. Confirm that the `GRANT SELECT` statements for both tables are applied, then [restart the Agent][1].
 
 ## Further Reading
 
