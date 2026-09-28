@@ -50,6 +50,12 @@ Drag the latency reachability health bar to observe a snapshot of the end-to-end
 
 {{< img src="network_performance_monitoring/network_path/latency_health_bar_3.mp4" alt="Video of the network path, selecting the latency health bar and dragging to a time period." video="true" >}}
 
+## Analyze with Bits AI
+
+Click {{< ui >}}Analyze with Bits AI{{< /ui >}} on the path view to open [Bits AI][5] with the current path loaded. Bits AI analyzes latency, packet loss, and jitter along the path and returns an AI-generated breakdown of where issues occur.
+
+You can also query Network Path test runs, including hop-by-hop data, from an AI agent with the [`get_network_path_test_runs`][6] tool in the Datadog MCP Server.
+
 ## Visual comparison
 
 Use the visual comparison view to compare two path visualizations side-by-side and identify what changed before and after an incident.
@@ -78,6 +84,10 @@ The {{< ui >}}Analysis{{< /ui >}} tab provides a side-by-side, hop-by-hop breakd
 
 {{< img src="network_performance_monitoring/network_path/network_path_analysis_comparison.png" alt="Analysis tab of the Visual Comparison view showing a side-by-side Hop RTT Latency table for paths A and B" style="width:100%;" >}}
 
+### Compare paths with Bits AI
+
+From the comparison view, click the Bits AI button to open [Bits AI][5] with both paths loaded. Bits AI returns an AI-generated comparison of the two paths.
+
 ## Graphs
 
 The lower section of the path view page provides additional insights about each path through a series of graphs.  
@@ -104,3 +114,5 @@ The hop-to-hop latency graph provides a detailed view of the latency for each ho
 [2]: /network_monitoring/network_path/list_view
 [3]: /network_monitoring/network_path/as_view/
 [4]: /network_monitoring/devices
+[5]: /bits_ai/
+[6]: /mcp_server/tools/#get_network_path_test_runs

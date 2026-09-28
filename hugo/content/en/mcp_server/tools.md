@@ -1654,7 +1654,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][81].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1689,6 +1689,21 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+Searches and retrieves [Network Path][81] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+Checks the health of an Autonomous System (AS) using [Network Path][81] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
 
 ## Onboarding
 
@@ -3053,6 +3068,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [79]: /watchdog/
 [79]: /account_management/governance_console/
 [80]: /account_management/governance_console/controls/
+[81]: /network_monitoring/network_path/
 
 ## Further reading
 
