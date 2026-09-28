@@ -182,7 +182,7 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 ### `aggregate_spans`
 *Toolset: **core***\
 *Permissions Required: `APM Read`*\
-Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (P50 to P99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
+Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (p50 to p99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
 
 - What is the p95 duration by resource for the checkout service over the last hour?
 - Show me request counts for the payments service in 5-minute buckets over the last day.
