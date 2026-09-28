@@ -1983,7 +1983,7 @@ Creates a new reference table. Supports two modes: `LOCAL_FILE` creates an empty
 
 <div class="alert alert-info">The <code>remote-actions</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/datadog-agent-mcp/">Sign up for access.</a></div>
 
-Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR) using a [restricted shell interpreter][63]. All commands run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
+Tools for running read-only diagnostics on hosts instrumented with the Datadog Agent. Commands reach the host through the Private Action Runner (PAR). Shell commands use a [restricted shell interpreter][63] and run as safe Go builtins with no write access, no external binary execution, and no network egress. The allowed command list is controlled per Agent version from the Datadog backend.
 
 ### `datadog_remote_action_restricted_shell_run_command`
 *Toolset: **remote-actions***\
@@ -1993,6 +1993,13 @@ Runs a read-only shell command on a specified host. Supported commands include: 
 - Show me the last 100 lines of the Datadog Agent log on host `prod-web-01`.
 - Find all ERROR entries in `/var/log/app/` on host `db-replica-3` from the last hour.
 - Get the contents of `/etc/datadog-agent/datadog.yaml` on host `prod-worker-07`.
+
+### `run_network_path`
+*Toolset: **remote-actions***\
+Triggers a live [Network Path][81] traceroute from a host running the Datadog Agent, through the Private Action Runner.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Trace the network path from `db-replica-3` to `10.0.4.12`.
 
 ## RUM
 
