@@ -9,7 +9,6 @@ further_reading:
   tag: "Blog"
   text: "Monitor ClickHouse query performance with Datadog Database Monitoring"
 - link: "/database_monitoring/guide/clickhouse_agent_upgrade"
-  tag: "Documentation"
   text: "Upgrading the ClickHouse integration from Agent versions earlier than 7.84"
 ---
 
