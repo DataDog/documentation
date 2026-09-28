@@ -11,7 +11,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/database-monitoring-for-clickhouse/"
   tag: "Blog"
   text: "Monitor ClickHouse query performance with Datadog Database Monitoring"
-- link: "/database_monitoring/guide/clickhouse_agent_upgrade"
 ---
 
 <div class="alert alert-info">
