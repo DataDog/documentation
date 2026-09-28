@@ -44,7 +44,7 @@ Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
 
 ### Use the Logs API
 
-Send a request to the [Search logs endpoint][1] (`POST /api/v2/logs/events/search`). Set `filter.query` to a query that specifies multiple BYOC Logs clusters. For example:
+Send a request to the [Search logs endpoint][2] (`POST /api/v2/logs/events/search`). Set `filter.query` to a query that specifies multiple BYOC Logs clusters. For example:
 
 ```json
 {
