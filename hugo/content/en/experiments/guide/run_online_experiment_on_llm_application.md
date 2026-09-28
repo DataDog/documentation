@@ -8,9 +8,6 @@ further_reading:
 - link: "/llm_observability/investigate/evaluations/"
   tag: "Documentation"
   text: "Agent Observability Evaluations"
-- link: "/llm_observability/improve/experiments/"
-  tag: "Documentation"
-  text: "Agent Observability Experiments"
 - link: "/experiments/reading_results/"
   tag: "Documentation"
   text: "Reading Experiment Results"
@@ -20,7 +17,7 @@ further_reading:
 
 Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each experiment subject to a variant, and an Agent Observability evaluation score measures the outcome.
 
-This workflow uses **Datadog Experiments** to run a live A/B test. It is separate from [Agent Observability Experiments][11], which run offline evaluations against datasets.
+<div class="alert alert-info"><strong>Alpha</strong>: Online experiments for Agent Observability are available only to Alpha participants. Contact your Datadog representative to request access. Datadog must enable the feature for your organization before you can follow this guide.</div>
 
 This guide covers the LLM-specific configuration for the following workflow:
 
@@ -72,7 +69,7 @@ You use this same value as the `subject_identifier` when you report the evaluati
 
 ## Step 3: Report an evaluation score
 
-Online experiments support Agent Observability evaluations with a `score` metric type. Boolean, categorical, and JSON evaluations are not supported as experiment metrics.
+<div class="alert alert-warning"><strong>Supported evaluation type</strong>: Online experiments for Agent Observability support only evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types cannot be used as experiment metrics.</div>
 
 Choose one of the following methods.
 
@@ -170,4 +167,3 @@ If the experiment reports missing metric data, confirm that:
 [8]: /llm_observability/investigate/evaluations/managed_evaluations/
 [9]: /feature_flags/concepts/experiments/
 [10]: /experiments/reading_results/
-[11]: /llm_observability/improve/experiments/
