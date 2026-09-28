@@ -45,17 +45,6 @@ GRANT SELECT ON system.one TO datadog;
 GRANT REMOTE ON *.* TO datadog;
 ```
 
-### What each permission is used for
-
-| Permission | Used for |
-|---|---|
-| `system.macros` | Finding the cluster name from the `{cluster}` macro. |
-| `system.clusters` | Finding the cluster name when no `{cluster}` macro is defined. |
-| `system.settings`, `system.table_engines` | Detecting whether the instance runs on ClickHouse Cloud or is self-hosted. |
-| `system.one` and `REMOTE` | Listing the nodes in the cluster and reading query data from each of them. |
-
-The `REMOTE` privilege lets the Agent run queries across the nodes of a cluster. It does not grant access to any databases or tables beyond the ones granted above. The `ON *.*` syntax is a ClickHouse requirement for this privilege type. Some ClickHouse versions call this privilege `READ ON REMOTE` in their error messages.
-
 ## Restart the Agent
 
 The Agent looks up the cluster once when it starts, and keeps using that result until it restarts. If you applied the grants before upgrading, the upgrade restarts the Agent and no further action is needed. If you applied them after upgrading, [restart the Agent][1].
