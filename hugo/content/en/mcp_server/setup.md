@@ -818,6 +818,26 @@ To combine `subdomain` with [toolsets](#toolsets) or other query parameters, sep
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
+#### Revoke OAuth access
+
+Authorizing an MCP client creates a consent grant scoped to your user, that
+client, and the organization you selected during the OAuth flow. Revoking it
+invalidates the client's credentials, and the client must complete the OAuth
+flow again to reconnect. To revoke your own access for a client:
+
+1. Go to [Personal Settings > Authorized Apps](https://app.datadoghq.com/personal-settings/apps).
+2. Find the MCP client you want to disconnect.
+3. Revoke the authorization.
+
+Repeat for each client, and in each organization you authorized from.
+
+**Note**: A client that already holds a valid access token can keep making
+requests until that token expires. Revoking prevents it from obtaining a new one.
+
+Revoking an authorization has no effect on Personal Access Tokens, Service
+Access Tokens, or API and application keys. Delete or rotate those in their own
+management pages.
+
 ### Personal or Service Access Token
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
@@ -914,6 +934,9 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 4. Fully restart your AI client to apply the configuration and load the MCP Server.
 {{% /collapse-content %}}
+
+
+
 
 ## Test access to the MCP Server
 
