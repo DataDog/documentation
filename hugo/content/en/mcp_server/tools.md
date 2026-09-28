@@ -369,7 +369,7 @@ Lists remote sampling rules that set a fixed sample rate for spans matching a se
 ### `create_apm_sampling_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
-Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. Confirm the change before applying.
+Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
 
 - Sample 10% of `GET /health` spans for the checkout service in prod.
 - Keep all traces for the `POST /payments` resource on the payments service in staging.
@@ -377,7 +377,7 @@ Creates a remote [sampling rule][82] that sets a sample rate for a service, envi
 ### `update_apm_sampling_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
-Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. Confirm the change before applying.
+Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
 
 - Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
 - Lower the sample rate for the checkout service's health check endpoint to 1%.
@@ -385,7 +385,7 @@ Changes the sample rate of an existing remote sampling rule, identified by its s
 ### `delete_apm_sampling_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
-Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. Confirm the deletion before applying. This operation is idempotent.
+Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
 - Remove the sampling rule for `GET /health` on the checkout service in prod.
 
@@ -400,7 +400,7 @@ Lists the organization's service remapping rules in evaluation order, or retriev
 ### `create_apm_service_remapping_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
-Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. Confirm the filter, rule type, and new name before applying.
+Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
 
 - Rename the inferred database service `postgres` to `orders-db` for spans from the orders service.
 - Create a remapping rule that renames `web-store-v2` to `web-store`.
@@ -408,22 +408,22 @@ Creates a [service remapping rule][81] that renames services or inferred entitie
 ### `update_apm_service_remapping_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
-Updates an existing service remapping rule's name, filter, or new name in place. The rule type cannot be changed. Confirm the change before applying.
+Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
 
 - Update the `orders-db` remapping rule to also match spans from the fulfillment service.
-- Change the new name on the `web-store` remapping rule to `storefront`.
+- Update the `web-store` remapping rule to rename matching services to `storefront`.
 
 ### `reorder_apm_service_remapping_rules`
 *Toolset: **apm***\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
-Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. Confirm the new order before applying.
+Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
 
 - Move the `orders-db` remapping rule ahead of the generic database rule.
 
 ### `delete_apm_service_remapping_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
-Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. Confirm the deletion before applying. This operation is idempotent.
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
 
 - Delete the `web-store` service remapping rule.
 
