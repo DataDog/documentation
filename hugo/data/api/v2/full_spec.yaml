@@ -1502,6 +1502,14 @@ components:
       required: true
       schema:
         type: string
+    PersonalAccessTokensFilterLeakedParameter:
+      description: When true, only return access tokens that have been detected as leaked. Has no effect when false.
+      in: query
+      name: filter[leaked]
+      required: false
+      schema:
+        example: true
+        type: boolean
     PersonalAccessTokensFilterOwnerIDParameter:
       description: Filter access tokens by the owner's ID. Supports multiple values.
       in: query
@@ -1519,6 +1527,16 @@ components:
       required: false
       schema:
         type: string
+    PersonalAccessTokensIncludeParameter:
+      description: Comma-separated list of relationship objects that should be included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/PersonalAccessTokensIncludeQueryParameterItem"
+        type: array
     PersonalAccessTokensSortParameter:
       description: |-
         Access token attribute used to sort results. Sort order is ascending
@@ -4227,6 +4245,8 @@ components:
     AccessTokenListItemRelationships:
       description: Resources related to the access token entry in the mixed list response.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToAccessTokenOwner"
       type: object
@@ -4240,6 +4260,15 @@ components:
       x-enum-varnames:
         - USERS
         - SERVICE_ACCOUNT
+    AccessTokenResponseIncludedArray:
+      description: Array of objects related to the access tokens.
+      items:
+        $ref: "#/components/schemas/AccessTokenResponseIncludedItem"
+      type: array
+    AccessTokenResponseIncludedItem:
+      description: An object related to an access token.
+      oneOf:
+        - $ref: "#/components/schemas/LeakedKey"
     AccessTokensType:
       description: Resource type returned by the access tokens list endpoint. Includes both personal and service access tokens.
       enum:
@@ -13556,10 +13585,11 @@ components:
       description: The request body for deleting multiple rows from a reference table.
       properties:
         data:
-          description: List of row resources to delete from the reference table.
+          description: >-
+            List of row resources to delete from the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/TableRowResourceIdentifier"
-          maxItems: 200
+          maxItems: 45589
           type: array
       required:
         - data
@@ -13673,10 +13703,11 @@ components:
       description: The request body for creating or updating multiple rows into a reference table.
       properties:
         data:
-          description: List of row resources to create or update in the reference table.
+          description: >-
+            List of row resources to create or update in the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/BatchUpsertRowsRequestData"
-          maxItems: 200
+          maxItems: 20971
           type: array
       required:
         - data
@@ -26748,7 +26779,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -27005,10 +27037,12 @@ components:
         - type
       type: object
     CreateUploadRequestDataAttributes:
-      description: Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
+      description: >-
+        Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
+          description: >-
+            The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
           example:
             - "field_1"
             - "field_2"
@@ -27049,7 +27083,8 @@ components:
       x-enum-varnames:
         - UPLOAD
     CreateUploadResponse:
-      description: Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
+      description: >-
+        Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
       properties:
         data:
           $ref: "#/components/schemas/CreateUploadResponseData"
@@ -46047,7 +46082,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/PersonalAccessTokenRelationships"
+          $ref: "#/components/schemas/FullPersonalAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/PersonalAccessTokensType"
       type: object
@@ -46090,6 +46125,12 @@ components:
             type: string
           type: array
       type: object
+    FullPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
     FullServiceAccessToken:
       description: Datadog access token, including the token key.
       properties:
@@ -46099,7 +46140,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/ServiceAccessTokenRelationships"
+          $ref: "#/components/schemas/FullServiceAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/ServiceAccessTokensType"
       type: object
@@ -46141,6 +46182,12 @@ components:
             description: Name of scope.
             type: string
           type: array
+      type: object
+    FullServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
     GCPCredentials:
       description: The definition of the `GCPCredentials` object.
@@ -68133,6 +68180,8 @@ components:
           items:
             $ref: "#/components/schemas/AccessTokenListItem"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/PersonalAccessTokenResponseMeta"
       type: object
@@ -68220,8 +68269,8 @@ components:
             id: 102.130.113.9
             type: row
         links:
-          first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-          self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+          self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
         meta:
           page:
             next_continuation_token: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
@@ -68244,15 +68293,15 @@ components:
       properties:
         first:
           description: Link to the first page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
           type: string
         next:
           description: Link to the next page of results. Only present when more rows are available.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
         self:
           description: Link to the current page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
       required:
         - self
@@ -68268,7 +68317,8 @@ components:
       description: Contains the continuation token for navigating to the next page of rows.
       properties:
         next_continuation_token:
-          description: Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
+          description: >-
+            Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
           example: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
           type: string
       type: object
@@ -68489,6 +68539,8 @@ components:
           items:
             $ref: "#/components/schemas/ServiceAccessToken"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/ServiceAccessTokenResponseMeta"
       type: object
@@ -87130,7 +87182,8 @@ components:
         - $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile"
     PatchTableRequestDataAttributesFileMetadataCloudStorage:
       additionalProperties: false
-      description: Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
+      description: >-
+        Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
       properties:
         access_details:
           $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails"
@@ -87229,7 +87282,8 @@ components:
       x-oneOf-parent:
         - GcpDetail
     PatchTableRequestDataAttributesSchema:
-      description: Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
+      description: >-
+        Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
           description: The schema fields. Maximum of 200 columns.
@@ -87239,7 +87293,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
           example:
             - "field_1"
           items:
@@ -87251,7 +87306,8 @@ components:
         - primary_keys
       type: object
     PatchTableRequestDataAttributesSchemaFieldsItems:
-      description: A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
+      description: >-
+        A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
       properties:
         name:
           description: The field name.
@@ -87451,6 +87507,8 @@ components:
     PersonalAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToUser"
       type: object
@@ -87459,6 +87517,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PersonalAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     PersonalAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -87515,6 +87575,14 @@ components:
       required:
         - data
       type: object
+    PersonalAccessTokensIncludeQueryParameterItem:
+      description: Relationship object that should be included in the response.
+      enum:
+        - leak_information
+      example: "leak_information"
+      type: string
+      x-enum-varnames:
+        - LEAK_INFORMATION
     PersonalAccessTokensSort:
       default: name
       description: Sorting options
@@ -87527,6 +87595,8 @@ components:
         - -expires_at
         - last_used_at
         - -last_used_at
+        - leaked
+        - -leaked
       type: string
       x-enum-varnames:
         - NAME_ASCENDING
@@ -87537,6 +87607,8 @@ components:
         - EXPIRES_AT_DESCENDING
         - LAST_USED_AT_ASCENDING
         - LAST_USED_AT_DESCENDING
+        - LEAKED_ASCENDING
+        - LEAKED_DESCENDING
     PersonalAccessTokensType:
       default: personal_access_tokens
       description: Personal access tokens resource type.
@@ -94147,7 +94219,8 @@ components:
           type: string
       type: object
     ReferenceTableCreateSourceType:
-      description: The source type for creating reference table data. Only these source types can be created through this API.
+      description: >-
+        The source type for creating reference table data. Only these source types can be created through this API.
       enum:
         - LOCAL_FILE
         - S3
@@ -94172,7 +94245,8 @@ components:
         - INT32
     ReferenceTableSortType:
       default: "-updated_at"
-      description: Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
+      description: >-
+        Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
       enum:
         - updated_at
         - table_name
@@ -94189,7 +94263,8 @@ components:
         - MINUS_TABLE_NAME
         - MINUS_STATUS
     ReferenceTableSourceType:
-      description: The source type for reference table data. Includes all possible source types that can appear in responses.
+      description: >-
+        The source type for reference table data. Includes all possible source types that can appear in responses.
       enum:
         - LOCAL_FILE
         - S3
@@ -94602,6 +94677,28 @@ components:
           type: array
       required:
         - data
+      type: object
+    RelationshipToLeakedKey:
+      description: Relationship to the leak the access token was found in. `data` is null when the access token has not been detected as leaked.
+      properties:
+        data:
+          $ref: "#/components/schemas/RelationshipToLeakedKeyData"
+      required:
+        - data
+      type: object
+    RelationshipToLeakedKeyData:
+      description: Relationship to the leak the access token was found in.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the leak.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/LeakedKeyType"
+      required:
+        - id
+        - type
       type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
@@ -109932,6 +110029,8 @@ components:
     ServiceAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
@@ -109940,6 +110039,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     ServiceAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -120883,7 +120984,8 @@ components:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails"
           description: Cloud storage access configuration. Only present for cloud storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the last operation (sync for cloud storage, upload for local file).
+          description: >-
+            The error message returned from the last operation (sync for cloud storage, upload for local file).
           type: string
         error_row_count:
           description: The number of rows that failed to process.
@@ -120891,14 +120993,17 @@ components:
           type: integer
         error_type:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType"
-          description: The type of error that occurred during file processing. Only applicable for cloud storage sources.
+          description: >-
+            The type of error that occurred during file processing. Only applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
+          description: >-
+            Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
           type: boolean
       title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
-      description: The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
+      description: >-
+        The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
       enum:
         - TABLE_SCHEMA_ERROR
         - FILE_FORMAT_ERROR
@@ -121007,7 +121112,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -128837,6 +128943,68 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
+      type: object
+    UpdatedPersonalAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PersonalAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedPersonalAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/PersonalAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
+    UpdatedPersonalAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedPersonalAccessToken"
+      required:
+        - data
+      type: object
+    UpdatedServiceAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ServiceAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedServiceAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/ServiceAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
+      type: object
+    UpdatedServiceAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedServiceAccessToken"
+      required:
+        - data
       type: object
     UpsertAllocationRequest:
       description: Request to create or update a targeting rule (allocation) for a feature flag environment.
@@ -153554,6 +153722,13 @@ paths:
         Submit a DDSQL statement and return either a `running` state with an opaque `query_id`
         for the client to poll, or a `completed` state with the column-major result set inlined
         when the query finishes quickly enough to be served synchronously.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        A query that does not read a data source, such as `SELECT 1`, requires no additional
+        data-source permissions. Queries that read data sources also require the user or
+        service account that owns the application key to have the corresponding data access
+        permissions through their roles. The `timeseries_query` permission does not grant
+        access to the underlying data sources.
       operationId: ExecuteDdsqlTabularQuery
       requestBody:
         content:
@@ -153656,10 +153831,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Execute a tabular DDSQL query
       tags:
         - DDSQL
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/ddsql/query/tabular/fetch:
     post:
       description: |-
@@ -153667,6 +153851,11 @@ paths:
         by a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that
         returned `state: running`) and the server returns either a `running` state to poll again
         or a `completed` state with the column-major result set inlined.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        Fetch results as the same user and organization that submitted the query.
+        The user or service account that owns the application key must have the data access
+        permissions required by the queried data sources through their roles.
       operationId: FetchDdsqlTabularQuery
       requestBody:
         content:
@@ -153765,10 +153954,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Fetch the result of a DDSQL query
       tags:
         - DDSQL
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/deletion/data/{product}:
     post:
       description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.
@@ -191709,6 +191907,18 @@ paths:
         the authenticated org or the request is rejected. Successful calls disable the org
         and return the resulting state from the downstream service. Requires the
         `org_management` permission.
+
+        **Limitations**:
+
+        - **Organization age**: Only organizations created within the last 10 days can be disabled
+          through this endpoint. This restriction is a safeguard against accidentally disabling
+          long-running organizations. Attempting to disable an older organization returns a `403 Forbidden`.
+        - **Feature flag**: The feature flag `org_disable_self_service_enabled` must be enabled for the
+          target organization or one of its ancestor organizations. Contact
+          [Datadog support](https://docs.datadoghq.com/help/) to enable this for your organization.
+          Requests for organizations without this flag return a `403 Forbidden`.
+        - **Already-disabled organizations**: If the target organization is already disabled, the request
+          returns a `409 Conflict`.
       operationId: DisableCustomerOrg
       requestBody:
         content:
@@ -191757,6 +191967,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -194289,6 +194505,8 @@ paths:
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterOwnerIDParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194436,6 +194654,7 @@ paths:
       operationId: GetPersonalAccessToken
       parameters:
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194519,7 +194738,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000004
                       type: personal_access_tokens
               schema:
-                $ref: "#/components/schemas/PersonalAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedPersonalAccessTokenResponse"
           description: OK
         "400":
           content:
@@ -197316,7 +197535,8 @@ paths:
           - timeseries_query
   /api/v2/reference-tables/queries/batch-rows:
     post:
-      description: Batch query reference table rows by their primary key values.  Returns only found rows in the included array.
+      description: >-
+        Batch query reference table rows by their primary key values. Returns only found rows in the included array.
       operationId: BatchRowsQuery
       requestBody:
         content:
@@ -197363,7 +197583,8 @@ paths:
                       type: reference-tables-batch-rows-query
               schema:
                 $ref: "#/components/schemas/BatchRowsQueryResponse"
-          description: Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
+          description: >-
+            Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "403":
@@ -197412,7 +197633,8 @@ paths:
             format: int64
             minimum: 0
             type: integer
-        - description: Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
+        - description: >-
+            Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
           example: "-updated_at"
           in: query
           name: sort
@@ -197918,7 +198140,8 @@ paths:
       x-menu-order: 8
   /api/v2/reference-tables/tables/{id}/rows/list:
     get:
-      description: List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
+      description: >-
+        List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
       operationId: ListReferenceTableRows
       parameters:
         - description: Unique identifier of the reference table to list rows from.
@@ -197939,7 +198162,8 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
+        - description: >-
+            Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
           example: "eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ=="
           in: query
           name: page[continuation_token]
@@ -197962,9 +198186,9 @@ paths:
                         id: 102.130.113.9
                         type: row
                     links:
-                      first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-                      next: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjY5NzA0ODkwNDE4ODA3MTAzOTgsInBrIjoiMTAyLjEzMC4xMjcuMTE3In0%3D&page%5Blimit%5D=100"
-                      self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+                      first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+                      next: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<NEXT_CONTINUATION_TOKEN>"
+                      self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
               schema:
                 $ref: "#/components/schemas/ListRowsResponse"
           description: OK
@@ -219572,6 +219796,8 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219732,6 +219958,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ServiceAccountID"
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219815,7 +220042,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000008
                       type: service_access_tokens
               schema:
-                $ref: "#/components/schemas/ServiceAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedServiceAccessTokenResponse"
           description: OK
         "400":
           content:
