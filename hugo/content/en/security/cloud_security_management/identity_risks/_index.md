@@ -30,6 +30,8 @@ Cloud Security Identity Risks is a Cloud Infrastructure Entitlement Management (
 
 <div class="alert alert-info">Cloud Security Identity Risks is available for AWS, Azure, and GCP.</div>
 
+Identity Risks uses [cloud integrations](/security/cloud_security_management/setup/cloud_integrations/) to collect cloud identity and permission data. It does not use Agentless Scanning or the Unified Datadog Agent. See [Cloud Security Coverage and Collection Methods](/security/cloud_security_management/setup/supported_deployment_types/) to compare collection methods.
+
 ## Review identity risks
 
 Cloud Security Identity Risk detections include users, roles, groups, policies, EC2 instances, and Lambda functions. Review your organization's active identity risks on the [Identity Risks Findings page][1].

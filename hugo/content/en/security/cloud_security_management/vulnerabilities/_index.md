@@ -28,13 +28,15 @@ further_reading:
 
 Cloud Security Vulnerabilities helps you improve your security posture and achieve compliance, by continuously scanning container images, hosts, host images, and serverless functions for vulnerabilities, from CI/CD pipelines to live production. Leveraging runtime observability, it helps you prioritize and remediate exploitable vulnerabilities in your daily workflows, all in a single view, and without any dependencies on other Datadog products.
 
+Container images can be scanned in three distinct contexts: images used by running containers, images stored in supported registries, and images scanned in CI/CD before deployment. These contexts have different coverage and prerequisites. See [Cloud Security Coverage and Collection Methods][25] before choosing a deployment method.
+
 With Cloud Security Vulnerabilities, you can manage your cloud security management strategy, all in one place:
 
 - Create a vulnerability management program, from CI/CD pipelines to production resources
 - Pass compliance audits (such as SOC2, PCI, HIPAA, CIS, and FedRamp)
 - Remediate emerging vulnerabilities (0-day CVEs)
 
-**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10].
+**Note**: For vulnerability management in application libraries, see [Software Composition Analysis][5]. For application code, see [Code Security][10]. Vulnerability detection does not detect runtime threats; for that outcome, see [Workload Protection][26].
 
 ## Key capabilities
 
@@ -42,8 +44,8 @@ With Cloud Security Vulnerabilities, you can manage your cloud security manageme
 <div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-Deploy using Agentless or unified Datadog Agent
-: Quickly scan your entire infrastructure for vulnerabilities, either using Agentless, or by using the unified Datadog Agent you already have deployed.
+Collect vulnerability data with Agentless or the Unified Datadog Agent
+: Use Agentless Scanning for supported AWS, Azure, and GCP assets without installing an Agent on each resource. Use the Unified Datadog Agent for host and runtime context and real-time updates. You can use both together.
 
 Inventory cloud resources, in real-time
 : Inventory container images, hosts, serverless functions, and all packages deployed in your infrastructure, in real time, and export your SBOM (software bill of materials).
@@ -87,7 +89,7 @@ Use these tables to decide which solution to start with:
 | Container image               | OS packages and app packages, mapped to image                                                                                                                | OS packages                    |
 | Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
 | Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not applicable                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not supported                 |
 | Container registries          | Amazon ECR and Google Artifact Registry (running + at-rest); Azure Container Registry, Docker Hub, GitHub Container Registry, Microsoft Container Registry, and Kubernetes registry (authenticated pull only). See [Container image registries][24] for details | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
@@ -159,6 +161,8 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 [24]: /security/cloud_security_management/setup/agentless_scanning/compatibility/#container-image-registries
+[25]: /security/cloud_security_management/setup/supported_deployment_types/
+[26]: /security/workload_protection/
 
 ## Further reading
 

@@ -6,9 +6,11 @@ aliases:
 
 ## Availability
 
-Agentless Scanning is supported on AWS, Azure, and GCP.
+This page is the technical compatibility reference for **Agentless Scanning vulnerability coverage**. It does not describe cloud-integration coverage for Misconfigurations or Identity Risks, and it does not describe all Cloud Security capabilities. For an outcome-first coverage overview, see [Cloud Security Coverage and Collection Methods](/security/cloud_security_management/setup/supported_deployment_types/).
 
-The following table provides a summary of Agentless Scanning technologies in relation to their corresponding components for each supported cloud provider:
+Agentless Scanning is supported on AWS, Azure, and GCP. It is not supported on OCI.
+
+The following table provides a technical summary of the assets that Agentless Scanning can scan for vulnerabilities for each supported cloud provider.
 
 | Component                                       | AWS                                                                                                                           | Azure                                                                                                                                                                             | GCP                                                                                                                                                                                                                       |
 |-------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
