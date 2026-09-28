@@ -45,8 +45,6 @@ GRANT SELECT ON system.one TO datadog;
 GRANT REMOTE ON *.* TO datadog;
 ```
 
-<div class="alert alert-info">To list the nodes, the Agent connects to the other nodes in the cluster using the <code>user</code> and <code>password</code> set for each replica in your <code>remote_servers</code> configuration, or the <code>default</code> user if none is set. Make sure these credentials can log in to every node. If you use <code>single_endpoint_mode</code>, the monitoring user and its grants must also exist on every node.</div>
-
 ### What each permission is used for
 
 | Permission | Used for |
