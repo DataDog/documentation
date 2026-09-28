@@ -423,7 +423,7 @@ Sets the evaluation order of all service remapping rules. The first matching rul
 ### `delete_apm_service_remapping_rule`
 *Toolset: **apm***\
 *Permissions Required: `APM Read` and `APM Service Remapping Write`*\
-Permanently deletes a service remapping rule by ID. Matching spans revert to their original name going forward, and data already indexed is unaffected. Confirm the deletion before applying. This operation is idempotent.
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the `web-store` service remapping rule.
 
