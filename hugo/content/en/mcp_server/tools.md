@@ -1692,6 +1692,7 @@ Retrieves all network interfaces for a specific device.
 
 ### `get_network_path_test_runs`
 *Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
 Searches and retrieves [Network Path][81] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
 
 - Show me the latest Network Path test runs to `api.example.com`.
@@ -1700,6 +1701,7 @@ Searches and retrieves [Network Path][81] test runs with hop-by-hop traceroute d
 
 ### `get_autonomous_system_status`
 *Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
 Checks the health of an Autonomous System (AS) using [Network Path][81] data, comparing latency, packet loss, and visibility against a 7-day baseline.
 
 - Is AS 15169 experiencing elevated latency compared to last week?
