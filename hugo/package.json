@@ -119,5 +119,13 @@
     "hugo-bin": {
         "buildTags": "extended,withdeploy"
     },
-    "packageManager": "yarn@4.10.3"
+    "packageManager": "yarn@4.10.3",
+    "resolutions": {
+        "protobufjs@npm:7.3.0": "npm:^7.6.6",
+        "fast-xml-parser@npm:4.2.5": "npm:^4.5.7",
+        "simple-git@npm:3.16.0": "npm:^3.36.0",
+        "form-data@npm:4.0.0": "npm:^4.0.6",
+        "form-data@npm:~2.3.2": "npm:^2.5.6",
+        "minimatch@npm:~3.0.2": "npm:^3.1.5"
+    }
 }
