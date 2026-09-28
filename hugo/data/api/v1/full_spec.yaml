@@ -29398,6 +29398,7 @@ components:
             workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
+      x-env-name: DD_BEARER_TOKEN
     apiKeyAuth:
       description: Your Datadog API Key.
       in: header
@@ -46319,6 +46320,7 @@ paths:
 security:
   - apiKeyAuth: []
     appKeyAuth: []
+  - AuthZ: []
 servers:
   - url: https://{subdomain}.{site}
     variables:
