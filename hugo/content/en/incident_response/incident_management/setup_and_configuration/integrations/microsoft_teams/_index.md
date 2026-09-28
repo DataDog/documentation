@@ -120,6 +120,21 @@ Meeting summaries are generated for Microsoft Teams meetings attached to an inci
 
 When the meeting ends, a final post-meeting summary is posted to the same locations.
 
+#### Re-inviting the transcriber
+
+If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
+
+1. Open the incident in Datadog.
+2. In the incident header, open the menu for the linked Microsoft Teams meeting.
+3. Click **Add Transcriber** (the robot icon) beside the meeting.
+4. Admit the Datadog Transcriber from the meeting lobby so transcription can begin.
+
+The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
+
+Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. AI features and meeting summarization must be enabled. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
+
+A re-invite prompt can appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. The prompt covers timeouts while waiting for admission or participants, everyone leaving the meeting, and removal of the transcriber. Select **Yes** to re-invite it or **No** to dismiss the prompt. Connect your chat account to Datadog before using this action.
+
 ## Using the Datadog tab in Microsoft Teams
 
 In an incident channel (a channel created specifically for an incident) the Datadog tab displays that specific incident's information and allows you to manage it. In non-incident channels, you can only declare new incidents.
@@ -153,3 +168,4 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
 [6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[7]: /account_management/billing/incident_response/#allocate-seats
