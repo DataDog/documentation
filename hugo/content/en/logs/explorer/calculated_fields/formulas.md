@@ -324,8 +324,6 @@ Regex functions match or transform a value using a regular expression (regex). P
 
 <h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
 
-Returns `true` when the pattern matches anywhere in the value, and `false` otherwise. `pattern` is a double-quoted string, so escape a backslash. For example, write `"\\d"` for `\d`.
-
 {{% collapse-content title="Example" level="h5" expanded=false %}}
 
 | Example  | Formula | Result |
@@ -337,7 +335,7 @@ Returns `true` when the pattern matches anywhere in the value, and `false` other
 
 <h4>regexp_replace(<i>str</i> input, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
 
-Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group. Formula arguments are double-quoted string literals, so you need to escape backslashes. For example, write `"\\d"` rather than `"\d"` for shorthand classes in `pattern`. To insert a literal `$` in `replacement`, escape its special meaning with `\$`, then escape that backslash for the string literal: `"\\$"`.
+Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group. 
 
 | Argument | Meaning |
 |---|---|
@@ -352,6 +350,8 @@ Returns `input` with matched text replaced. Use `$1` through `$9` in `replacemen
 | Example  | Formula | Result |
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
+
+<div class="alert alert-tip">Formula arguments are double-quoted string literals, so a literal backslash must be written as two backslashes. For example, to match to the digit shorthand class, write "\\d" in the pattern. The same rule applies to the replacement string. To cancel $'s meaning as a group reference and insert a literal dollar sign, write "\\$".</div>
 
 {{% /collapse-content %}}
 
