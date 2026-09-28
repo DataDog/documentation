@@ -4938,7 +4938,7 @@
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
   "BatchRowsQuery": {
-    "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
+    "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
     "summary": "Batch rows query",
     "request_description": "",
     "request_schema_description": "Request object for querying multiple rows from a reference table by their identifiers."
