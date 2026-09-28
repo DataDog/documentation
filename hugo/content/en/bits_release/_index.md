@@ -37,7 +37,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, comparing post-deploy behavior to the pre-deploy baseline it captured.
 6. **Verdict**: It weighs the evidence from every source into a single verdict, delivered as a pull request comment, a Slack notification, and a full report in Datadog.
 
-Validation runs against your production environment. Bits Release does not comment on every pull request. It reports when it reaches a meaningful conclusion or finds a real problem.
+Validation runs against your production environment.
 
 ## What Bits Release looks at
 
