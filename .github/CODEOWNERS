@@ -1,21 +1,10 @@
 *                         @DataDog/documentation
 
 
-# Corpweb
-hugo/assets/                           @DataDog/corpweb
-hugo/data/                             @DataDog/corpweb
-hugo/layouts/                          @DataDog/corpweb
-hugo/config/                           @DataDog/corpweb
-hugo/package.json                      @DataDog/corpweb
-hugo/go.mod                            @DataDog/corpweb
-hugo/go.sum                            @DataDog/corpweb
-hugo/archetypes/                       @DataDog/corpweb
-
 # Websites Platform
 astro/                                                       @DataDog/WebOps-Platform
 shared/                                                      @DataDog/WebOps-Platform
 hugo/babel.config.js                                         @DataDog/WebOps-Platform
-hugo/data/reference/                                         @DataDog/WebOps-Platform
 datadog-ci.preview.json                                 @DataDog/WebOps-Platform
 docker-compose-docs.yml                                 @DataDog/WebOps-Platform
 .general.preview.synthetics.json                        @DataDog/WebOps-Platform
@@ -59,9 +48,20 @@ hugo/local/bin/py/integration-finder.py                            @DataDog/docu
 hugo/local/bin/py/missing_metrics.py                               @DataDog/documentation
 hugo/local/bin/py/preview_links.py                                 @DataDog/documentation
 hugo/local/bin/py/preview-links-template.mako                      @DataDog/documentation
+hugo/data/reference/                                               @DataDog/documentation
 hugo/local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 hugo/local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 hugo/local/**/*                                                    @DataDog/WebOps-Platform
+
+# Formerly CorpWeb
+hugo/assets/                           @DataDog/documentation
+hugo/data/                             @DataDog/documentation
+hugo/layouts/                          @DataDog/documentation
+hugo/config/                           @DataDog/documentation
+hugo/package.json                      @DataDog/documentation
+hugo/go.mod                            @DataDog/documentation
+hugo/go.sum                            @DataDog/documentation
+hugo/archetypes/                       @DataDog/documentation
 
 # markdown shortcodes
 hugo/layouts/shortcodes/**/*.md                                    @DataDog/documentation 
