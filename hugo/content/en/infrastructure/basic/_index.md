@@ -48,17 +48,16 @@ Infrastructure Basic does not support the following:
 
 **Operating system compatibility:** Agent-based monitoring requires an operating system that supports the minimum Agent version for Infrastructure Basic. See [Agent supported platforms][5] for compatibility details. Hosts that cannot run the required Agent version may still be monitored [through a supported virtualization integration][6], such as VMware vSphere.
 
-Custom metrics and custom events are supported and billed separately.
+## Set up Infrastructure Basic
 
-<!-- ^ confirmed, but may not need to mention -->
+Before configuring your hosts, contact your Datadog account team to add Infrastructure Basic to your contract. Configuring Basic mode alone does not enroll you in the product.
 
-## Setting up Infrastructure Basic
-
-To configure the Agent in Basic mode, see [Configure Agent infrastructure mode][2]. To configure vSphere, Proxmox, or Nutanix, see [Configure virtualization integrations][6].
+- **Hosts monitored by the Agent:** Follow [Configure Agent infrastructure mode][2] and select `basic` as the mode.
+- **Hosts monitored through vSphere, Proxmox, or Nutanix:** Follow [Configure Basic mode for virtualization integrations][6] to set the mode on the integration instance.
 
 [1]: /agent/configuration/infrastructure-modes/#basic
 [2]: /agent/configuration/infrastructure-modes/#configure-agent-infrastructure-mode
 [3]: /integrations/process/
 [4]: /infrastructure/hostmap/
 [5]: /agent/supported_platforms/
-[6]: /agent/configuration/infrastructure-modes/#configure-virtualization-integrations
+[6]: /agent/configuration/infrastructure-modes/#configure-basic-mode-for-virtualization-integrations

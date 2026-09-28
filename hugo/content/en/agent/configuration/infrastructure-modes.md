@@ -1,5 +1,5 @@
 ---
-title: Infrastructure Modes
+title: Configure Agent Infrastructure Modes
 description: "Change Agent behavior to control how much infrastructure monitoring the Datadog Agent performs on a host."
 further_reading:
 - link: "/agent/configuration/agent-configuration-files/"
@@ -16,6 +16,8 @@ private: true
 ## Overview
 
 Infrastructure modes determine which infrastructure monitoring capabilities the Datadog Agent enables on a host. Use these modes to match the Agent's behavior to the host's role: full infrastructure monitoring, basic system resource metrics, no infrastructure monitoring, or End User Device monitoring.
+
+Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For product capabilities and access requirements, see [Infrastructure Basic][28] or [End User Device Monitoring][29].
 
 ## Available modes
 
@@ -41,6 +43,8 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 
 ### Basic
 
+For product capabilities, limitations, and access requirements, see [Infrastructure Basic][28].
+
 `basic`
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Recommended for**: VMs and physical servers that only need system resource metrics<br>
@@ -62,11 +66,11 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - [Custom checks][15] prefixed with `custom_`
   - Logs-only integrations (for example, [journald][16] or [Windows Event Log][17])
 
-To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Configure virtualization integrations](#configure-virtualization-integrations).
+To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Configure Basic mode for virtualization integrations](#configure-basic-mode-for-virtualization-integrations).
 
 ### End User Device
 
-<div class="alert alert-info">End User Device mode is in Preview. For configuration steps and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
+<div class="alert alert-info">End User Device mode is in Preview. For product capabilities and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
 
 `end_user_device`
 : **Minimum Agent version**: 7.76.2<br>
@@ -78,7 +82,7 @@ To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Config
   - Windows Crash Detection
   - Network Path Monitoring
 
-: For full descriptions, see [Key capabilities][18].
+: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][30].
 
 ### None
 
@@ -131,7 +135,9 @@ infrastructure_mode: <MODE>
 
 2. [Restart the Datadog Agent][24].
 
-## Configure virtualization integrations
+<a id="configure-virtualization-integrations"></a>
+
+## Configure Basic mode for virtualization integrations
 
 To report hosts through a virtualization integration as Infrastructure Basic, configure `infrastructure_mode: basic` in the integration instance. This is a separate setting from the host Agent's top-level `infrastructure_mode` setting in `datadog.yaml`.
 
@@ -220,3 +226,6 @@ To verify the infrastructure mode set on your hosts:
 [25]: /integrations/vsphere/#setup
 [26]: /integrations/proxmox/#setup
 [27]: /integrations/nutanix/#setup
+[28]: /infrastructure/basic/
+[29]: /infrastructure/end_user_device_monitoring/
+[30]: /infrastructure/end_user_device_monitoring/setup/
