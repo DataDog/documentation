@@ -12,9 +12,9 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
+{{< callout url="#" btn_hidden="true" >}}
 Continuous tracing with GPU Monitoring is in Early Access Preview.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 
