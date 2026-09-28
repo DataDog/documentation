@@ -42,9 +42,9 @@ To disable NLQ for your organization, you must have [org_management permissions]
 
 ## Sessions
 
-Metrics Explorer automatically keeps a history of your recent investigations, making it easier to explore different questions without rebuilding previous work.
+Metrics Explorer automatically keeps a history of your recent investigations, making it easier to explore and share different questions without rebuilding previous work.
 
-Use the Sessions panel to:
+Use Sessions to:
 
 - **Start a separate investigation:** Click {{< ui >}}New Session{{< /ui >}} to explore another question without losing your current work.
 - **Return to previous work:** Select or search for a recent session to continue an investigation.
