@@ -380,7 +380,7 @@ Creates a remote [sampling rule][82] that sets a sample rate for a service, envi
 Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. Confirm the change before applying.
 
 - Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
-- Lower the sampling rule for the checkout service's health check endpoint to 1%.
+- Lower the sample rate for the checkout service's health check endpoint to 1%.
 
 ### `delete_apm_sampling_rule`
 *Toolset: **apm***\
