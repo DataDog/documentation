@@ -52,7 +52,7 @@ To export OTLP metrics data to the Datadog OTLP metrics intake endpoint:
    - Configure the required HTTP headers.
 1. (Optional) [Set the `dd-otel-metric-config` HTTP header](#optional-configure-the-metric-translator) to configure the metric translator behavior.
 
-<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively. Datadog keeps the original bucket structure, so percentiles match the OpenTelemetry data model. Histograms appear with their correct metric type (Explicit Histogram or Exponential Histogram) in the Metrics Summary and Metrics Explorer. Existing distribution queries work without changes.</div>
+<div class="alert alert-info">As of September 1, 2026, the OTLP metrics intake endpoint stores explicit bucket and exponential histograms natively, with their original bucket structure. Percentiles match the OpenTelemetry data model, and histograms show their correct metric type (Explicit Histogram or Exponential Histogram) in Datadog. Distribution queries on your histogram metrics work without changes. For details, see <a href="/metrics/open_telemetry/otlp_metric_types/?tab=histogram#mapping">OTLP Metrics Types</a>.</div>
 
 ### Configure the exporter
 
@@ -190,13 +190,13 @@ If set to `true`, adds the name and version of the instrumentation scope that cr
 : **Type**: String <br>
 **Deprecated**: Ignored as of September 1, 2026. Datadog stores histograms natively regardless of this setting. <br>
 Mode for exporting histograms. Valid values are:
-  - `distributions`: sends histograms as Datadog distributions (recommended).
+  - `distributions`: sends histograms as Datadog distributions.
   - `counters`: sends histograms as Datadog counts, one metric per bucket.
   - `nobuckets`: sends no bucket histogram metrics.
 
 `histograms.send_aggregation_metrics`
 : **Type**: Boolean <br>
-**Deprecated**: Ignored as of September 1, 2026. Datadog stores histograms natively regardless of this setting. <br>
+**Deprecated**: Ignored as of September 1, 2026. Datadog doesn't write separate `.sum`, `.count`, `.min`, and `.max` metrics. Query the histogram metric with the matching aggregation instead, such as `count:<METRIC_NAME>{*}.as_count()`. <br>
 If set to `true`, writes additional `.sum`, `.count`, `.min`, and `.max` metrics for histograms.
 
 `summaries.mode`
