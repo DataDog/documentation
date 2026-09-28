@@ -1707,6 +1707,15 @@ Checks the health of an Autonomous System (AS) using [Network Path][81] data, co
 - Is AS 15169 experiencing elevated latency compared to last week?
 - Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
 
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][81] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues right now?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
 ### `run_network_path`
 *Toolset: **networks***\
 *Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\

@@ -24,7 +24,7 @@ BGP routing issues and provider-specific problems are difficult to diagnose beca
 
 To get started, go to the Network Path Explorer and click [{{< ui >}}Autonomous Systems (AS){{< /ui >}}][1].
 
-You can also check the health of an Autonomous System from an AI agent with the [`get_autonomous_system_status`][3] tool in the Datadog MCP Server. The tool compares the AS's latency, packet loss, and visibility against a 7-day baseline.
+You can also check Autonomous System health from an AI agent with the [`list_autonomous_system_statuses`][4] and [`get_autonomous_system_status`][3] tools in the Datadog MCP Server. The tools compare each AS's latency, packet loss, and visibility against a 7-day baseline.
 
 ## Dashboard
 
@@ -108,4 +108,5 @@ Avg RTT
 [1]: https://app.datadoghq.com/network-path/autonomous-systems
 [2]: /network_monitoring/network_path/path_view/
 [3]: /mcp_server/tools/#get_autonomous_system_status
+[4]: /mcp_server/tools/#list_autonomous_system_statuses
 
