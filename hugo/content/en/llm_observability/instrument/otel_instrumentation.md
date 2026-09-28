@@ -413,60 +413,50 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 ### Using Cloudflare Agents
 
-[Cloudflare Agents][60] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][61]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
+[Cloudflare Agents][15] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][16]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
 
-**1. Enable tracing in your Worker configuration** (`wrangler.jsonc`), pointing at a named destination:
+1. Enable tracing in your Worker configuration (`wrangler.jsonc`), pointing at a named destination:
+   ```jsonc
+   {
+     "observability": {
+       "traces": {
+         "enabled": true,
+         "destinations": ["datadog-agent-observability"]
+       }
+     }
+   }
+   ```
+2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
+   | Field | Value |
+   |-------|-------|
+   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
+   | Header | `dd-api-key`: `<YOUR_API_KEY>` |
+   | Header | `dd-otlp-source`: `llmobs` |
+   
+   The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
+3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
+   ```typescript
+   import { Agent } from "agents";
+   import * as ai from "ai";
+   import { wrapAISDK } from "agents/observability/ai";
+   import { createWorkersAI } from "workers-ai-provider";
 
-```jsonc
-{
-  "observability": {
-    "traces": {
-      "enabled": true,
-      "destinations": ["datadog-agent-observability"]
-    }
-  }
-}
-```
+   // storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
+   // and tool call payloads. They are off by default.
+   const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
 
-**2. Create the destination in the Cloudflare dashboard** under **Workers & Pages > Observability > Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
-
-| Field | Value |
-|-------|-------|
-| Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
-| Header | `dd-api-key`: `<YOUR_API_KEY>` |
-| Header | `dd-otlp-source`: `llmobs` |
-
-The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
-
-**3. Instrument model calls.** Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][62] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
-
-```typescript
-import { Agent } from "agents";
-import * as ai from "ai";
-import { wrapAISDK } from "agents/observability/ai";
-import { createWorkersAI } from "workers-ai-provider";
-
-// storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
-// and tool call payloads. They are off by default.
-const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
-
-export class MyAgent extends Agent<Env> {
-  async onRequest(request: Request): Promise<Response> {
-    const workersai = createWorkersAI({ binding: this.env.AI });
-    const { text } = await generateText({
-      model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
-      prompt: "What is distributed tracing?",
-    });
-    return Response.json({ text });
-  }
-}
-```
-
-After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
-
-[60]: https://developers.cloudflare.com/agents/
-[61]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
-[62]: https://sdk.vercel.ai/
+   export class MyAgent extends Agent<Env> {
+     async onRequest(request: Request): Promise<Response> {
+       const workersai = createWorkersAI({ binding: this.env.AI });
+       const { text } = await generateText({
+         model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+         prompt: "What is distributed tracing?",
+       });
+       return Response.json({ text });
+     }
+   }
+   ```
+   After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
 
 ## Attribute mapping reference
 
@@ -1046,3 +1036,6 @@ with tracer.start_as_current_span("my-span") as span:
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
 [13]: https://langfuse.com/integrations/native/opentelemetry
 [14]: /llm_observability/instrument/agent_observability_and_apm/
+[15]: https://developers.cloudflare.com/agents/
+[16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
+[17]: https://sdk.vercel.ai/
