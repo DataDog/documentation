@@ -27,10 +27,10 @@ Use Tap to Parse to generate an extraction rule from your log data automatically
 
 There are two ways to access Tap to Parse from the log side panel:
 
-1. Click {{< ui >}}Tap to Parse{{< /ui >}} next to the copy button.
-2. Highlight a specific portion of the log message and click {{< ui >}}Tap to Parse{{< /ui >}} in the popup menu.
+1. Click {{< ui >}}Tap{{< /ui >}} next to the copy button.
+2. Highlight a specific portion of the log message and click {{< ui >}}Tap{{< /ui >}} in the popup menu.
 
-When you click {{< ui >}}Tap to Parse{{< /ui >}}, Datadog automatically populates the Calculated Field form:
+When you click {{< ui >}}Tap{{< /ui >}}, Datadog automatically populates the Calculated Field form:
 
 1. {{< ui >}}Extract from{{< /ui >}}: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
 2. {{< ui >}}Log sample{{< /ui >}}: Automatically populated with your selected log.
