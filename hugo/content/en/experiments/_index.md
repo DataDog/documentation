@@ -41,6 +41,7 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | :---- | :---- |
 | [Connect a data warehouse][13] | Set up Snowflake, BigQuery, Redshift, or Databricks for warehouse-native experiment analysis |
 | [Run an online experiment on an LLM application][22] | Compare application variants using Agent Observability evaluation scores |
+| [Create a metric from Agent Observability data][23] | Measure LLM application cost, token usage, or custom evaluation scores |
 | [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
@@ -80,6 +81,12 @@ For client-side experiments, build metrics from events collected by the [Real Us
 
 This path works when randomization runs through [Datadog Feature Flags][1] and you want to measure user behavior, funnel conversion, or application performance without querying a warehouse. Product Analytics and RUM metrics are available in near real time as experiments launch.
 
+### Agent Observability
+
+For live experiments on LLM applications, [create metrics from Agent Observability data][23]. Use completed Agent Observability traces to measure estimated cost or token usage, or use a custom score evaluation to measure application quality.
+
+Agent Observability metrics for online experiments are in Alpha and require explicit enablement. Contact your Datadog representative to request access.
+
 ## Statistics
 
 Datadog applies statistical analysis to compare variants and estimate lift. When you set up an experiment, choose an [analysis method][11]—sequential frequentist, fixed-sample frequentist, or Bayesian—and optionally run a [sample size calculation][8] to estimate how long the experiment needs to run. After results are in, use [Global Lift][19] to understand how a targeted experiment lift translates to impact on your company-wide metric total, and [Cumulative Impact][12] to aggregate noise-adjusted effects across many experiments on the same metric.
@@ -111,4 +118,5 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [20]: /experiments/diagnostics/
 [21]: /experiments/protocols/
 [22]: /experiments/guide/run_online_experiment_on_llm_application/
+[23]: /experiments/defining_metrics/?tab=agentobservability
 

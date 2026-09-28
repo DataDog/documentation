@@ -125,7 +125,7 @@ with LLMObs.workflow(name="my_workflow") as span:
 
 Follow [Plan and Launch Experiments][3] to create an experiment and configure it with the following values:
 
-- Select the Agent Observability evaluation score from Step 3 as the primary metric.
+- Select the Agent Observability evaluation score from Step 3 as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
 - Add the feature flag from Step 1.
 - Configure how traffic is split between the control and treatment variants.
 - Start the experiment.
@@ -171,3 +171,4 @@ If the experiment reports missing metric data, confirm that:
 [8]: /llm_observability/investigate/evaluations/managed_evaluations/
 [9]: /feature_flags/concepts/experiments/
 [10]: /experiments/reading_results/
+[11]: /experiments/defining_metrics/?tab=agentobservability#create-a-metric-from-agent-observability-data
