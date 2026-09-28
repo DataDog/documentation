@@ -827,10 +827,10 @@ When you authorize an MCP client, Datadog creates a consent grant scoped to your
 To revoke your own access for a client:
 
 1. In Datadog, navigate to [**Personal Settings > Authorized Apps**][79].
-2. Find the MCP client you want to disconnect.
-3. Revoke the authorization.
+2. Find the MCP client you want to disconnect and hover over it to show a removal icon.
+3. Click the removal icon and from the modal, revoke the authorization.
 
-Repeat for each client, and in each organization you authorized from.
+Repeat for each client and each organization you authorized from.
 
 
 Revoking an authorization has no effect on Personal Access Tokens, Service Access Tokens, or API and application keys. Delete or rotate those in their own management pages.
