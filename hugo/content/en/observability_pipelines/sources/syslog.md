@@ -50,7 +50,7 @@ The Observability Pipelines Worker makes a best effort to parse the following sy
 - [RFC 3164][12]
 - Other common variations, such as the NGINX syslog style
 
-If the Worker can't parse a log, it raises an error.
+If the Worker can't parse a log, an error is logged.
 
 ### Parse unsupported syslog formats
 
