@@ -283,8 +283,8 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://mariadb.com/kb/en/performance-schema-overview/
-[4]: https://mariadb.com/kb/en/performance-schema-instance-tables/
-[5]: https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/migrating-to-mariadb/migrating-to-mariadb-from-sql-server/mariadb-authorization-and-permissions-for-sql-server-users#permissions
+[4]: https://mariadb.com/docs/server/reference/system-tables/performance-schema/performance-schema-system-variables
+[5]: https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/create-user
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: /agent/configuration/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example

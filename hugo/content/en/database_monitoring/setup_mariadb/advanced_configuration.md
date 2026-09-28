@@ -64,4 +64,4 @@ instances:
 
 **Note**: If you run multiple instances of the MariaDB integration check against the same database, use the same `collection_interval` value for all of them. Mixed collection intervals for the same metric can cause metric anomalies.
 
-[1]: https://mariadb.com/kb/en/performance-schema-performance_schema_digests_size/
+[1]: https://mariadb.com/docs/server/reference/system-tables/performance-schema/performance-schema-system-variables#performance_schema_digests_size

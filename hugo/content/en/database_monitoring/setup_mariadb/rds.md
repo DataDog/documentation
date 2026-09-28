@@ -5,9 +5,9 @@ further_reading:
 - link: "/integrations/mysql/"
   tag: "Documentation"
   text: "Basic MySQL Integration"
-- link: "/database_monitoring/guide/rds_autodiscovery"
-  tag: "Documenation"
-  text: "Autodiscovery for RDS"
+- link: "/integrations/amazon_rds/"
+  tag: "Documentation"
+  text: "Amazon RDS Integration"
 ---
 
 Database Monitoring provides deep visibility into your MariaDB databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
@@ -443,7 +443,7 @@ If you have installed and configured the integrations and Agent as described and
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithParamGroups.html
-[4]: https://mariadb.com/docs/server/server-management/install-and-upgrade-mariadb/migrating-to-mariadb/migrating-to-mariadb-from-sql-server/mariadb-authorization-and-permissions-for-sql-server-users#permissions
+[4]: https://mariadb.com/docs/server/reference/sql-statements/account-management-sql-statements/create-user
 [5]: https://app.datadoghq.com/account/settings/agent/latest
 [6]: /agent/configuration/agent-commands/#agent-status-and-information
 [7]: https://app.datadoghq.com/databases
