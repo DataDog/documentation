@@ -2,7 +2,7 @@
 
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
 const yaml = require('js-yaml');
-const { applyWorkManagementCopy } = require('./work-management-copy');
+const { applyApiDisplayNames } = require('./api-display-names');
 const fs = require('fs');
 const safeJsonStringify = require('safe-json-stringify');
 const lodash = require('lodash');
@@ -44,7 +44,7 @@ const processSpec = async (specPath) => {
   try {
     console.log(`Processing spec: ${specPath}`);
 
-    const fileData = applyWorkManagementCopy(yaml.safeLoad(fs.readFileSync(specPath, 'utf8')));
+    const fileData = applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(specPath, 'utf8')));
     const deref = await $RefParser.dereference(fileData, { resolve: { external: false } });
 
     // VALIDATION: Ensure we actually have an object with servers

@@ -1,3 +1,3 @@
 ---
-title: Bulk update work items
+title: Bulk update cases
 ---

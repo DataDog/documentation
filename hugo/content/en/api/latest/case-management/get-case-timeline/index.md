@@ -1,3 +1,3 @@
 ---
-title: Get work item timeline
+title: Get case timeline
 ---

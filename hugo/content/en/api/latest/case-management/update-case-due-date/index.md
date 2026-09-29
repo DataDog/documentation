@@ -1,3 +1,3 @@
 ---
-title: Update work item due date
+title: Update case due date
 ---

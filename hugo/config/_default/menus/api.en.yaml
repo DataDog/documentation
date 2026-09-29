@@ -10242,7 +10242,7 @@ menu:
           - ListCSMThreatsAgentRules
         unstable: []
         order: 1
-    - name: Work Management
+    - name: Case Management
       url: /api/latest/case-management/
       identifier: case-management
       generated: true
@@ -10294,7 +10294,7 @@ menu:
           - ListMaintenanceWindows
         unstable: []
         order: 38
-    - name: Watch a work item
+    - name: Watch a case
       url: /api/latest/case-management/watch-a-case/
       identifier: case-management-watch-a-case
       parent: case-management
@@ -10306,7 +10306,7 @@ menu:
           - WatchCase
         unstable: []
         order: 65
-    - name: Unwatch a work item
+    - name: Unwatch a case
       url: /api/latest/case-management/unwatch-a-case/
       identifier: case-management-unwatch-a-case
       parent: case-management
@@ -10318,7 +10318,7 @@ menu:
           - UnwatchCase
         unstable: []
         order: 66
-    - name: List work item watchers
+    - name: List case watchers
       url: /api/latest/case-management/list-case-watchers/
       identifier: case-management-list-case-watchers
       parent: case-management
@@ -10330,7 +10330,7 @@ menu:
           - ListCaseWatchers
         unstable: []
         order: 64
-    - name: Unassign work item
+    - name: Unassign case
       url: /api/latest/case-management/unassign-case/
       identifier: case-management-unassign-case
       parent: case-management
@@ -10342,7 +10342,7 @@ menu:
           - UnassignCase
         unstable: []
         order: 16
-    - name: Unarchive work item
+    - name: Unarchive case
       url: /api/latest/case-management/unarchive-case/
       identifier: case-management-unarchive-case
       parent: case-management
@@ -10354,7 +10354,7 @@ menu:
           - UnarchiveCase
         unstable: []
         order: 18
-    - name: Update work item title
+    - name: Update case title
       url: /api/latest/case-management/update-case-title/
       identifier: case-management-update-case-title
       parent: case-management
@@ -10366,7 +10366,7 @@ menu:
           - UpdateCaseTitle
         unstable: []
         order: 11
-    - name: Get work item timeline
+    - name: Get case timeline
       url: /api/latest/case-management/get-case-timeline/
       identifier: case-management-get-case-timeline
       parent: case-management
@@ -10378,7 +10378,7 @@ menu:
           - ListCaseTimeline
         unstable: []
         order: 58
-    - name: Update work item status
+    - name: Update case status
       url: /api/latest/case-management/update-case-status/
       identifier: case-management-update-case-status
       parent: case-management
@@ -10390,7 +10390,7 @@ menu:
           - UpdateStatus
         unstable: []
         order: 13
-    - name: Update work item resolved reason
+    - name: Update case resolved reason
       url: /api/latest/case-management/update-case-resolved-reason/
       identifier: case-management-update-case-resolved-reason
       parent: case-management
@@ -10402,7 +10402,7 @@ menu:
           - UpdateCaseResolvedReason
         unstable: []
         order: 26
-    - name: Create ServiceNow ticket for work item
+    - name: Create ServiceNow ticket for case
       url: /api/latest/case-management/create-servicenow-ticket-for-case/
       identifier: case-management-create-servicenow-ticket-for-case
       parent: case-management
@@ -10414,7 +10414,7 @@ menu:
           - CreateCaseServiceNowTicket
         unstable: []
         order: 56
-    - name: Update work item project
+    - name: Update case project
       url: /api/latest/case-management/update-case-project/
       identifier: case-management-update-case-project
       parent: case-management
@@ -10426,7 +10426,7 @@ menu:
           - MoveCaseToProject
         unstable: []
         order: 51
-    - name: Create investigation notebook for work item
+    - name: Create investigation notebook for case
       url: /api/latest/case-management/create-investigation-notebook-for-case/
       identifier: case-management-create-investigation-notebook-for-case
       parent: case-management
@@ -10438,7 +10438,7 @@ menu:
           - CreateCaseNotebook
         unstable: []
         order: 57
-    - name: Create Jira issue for work item
+    - name: Create Jira issue for case
       url: /api/latest/case-management/create-jira-issue-for-case/
       identifier: case-management-create-jira-issue-for-case
       parent: case-management
@@ -10450,7 +10450,7 @@ menu:
           - CreateCaseJiraIssue
         unstable: []
         order: 53
-    - name: Link existing Jira issue to work item
+    - name: Link existing Jira issue to case
       url: /api/latest/case-management/link-existing-jira-issue-to-case/
       identifier: case-management-link-existing-jira-issue-to-case
       parent: case-management
@@ -10462,7 +10462,7 @@ menu:
           - LinkJiraIssueToCase
         unstable: []
         order: 54
-    - name: Remove Jira issue link from work item
+    - name: Remove Jira issue link from case
       url: /api/latest/case-management/remove-jira-issue-link-from-case/
       identifier: case-management-remove-jira-issue-link-from-case
       parent: case-management
@@ -10474,7 +10474,7 @@ menu:
           - UnlinkJiraIssue
         unstable: []
         order: 55
-    - name: Link incident to work item
+    - name: Link incident to case
       url: /api/latest/case-management/link-incident-to-case/
       identifier: case-management-link-incident-to-case
       parent: case-management
@@ -10486,7 +10486,7 @@ menu:
           - LinkIncident
         unstable: []
         order: 52
-    - name: Update work item priority
+    - name: Update case priority
       url: /api/latest/case-management/update-case-priority/
       identifier: case-management-update-case-priority
       parent: case-management
@@ -10498,7 +10498,7 @@ menu:
           - UpdatePriority
         unstable: []
         order: 14
-    - name: Add insights to a work item
+    - name: Add insights to a case
       url: /api/latest/case-management/add-insights-to-a-case/
       identifier: case-management-add-insights-to-a-case
       parent: case-management
@@ -10510,7 +10510,7 @@ menu:
           - AddCaseInsights
         unstable: []
         order: 33
-    - name: Remove insights from a work item
+    - name: Remove insights from a case
       url: /api/latest/case-management/remove-insights-from-a-case/
       identifier: case-management-remove-insights-from-a-case
       parent: case-management
@@ -10522,7 +10522,7 @@ menu:
           - RemoveCaseInsights
         unstable: []
         order: 34
-    - name: Update work item due date
+    - name: Update case due date
       url: /api/latest/case-management/update-case-due-date/
       identifier: case-management-update-case-due-date
       parent: case-management
@@ -10534,7 +10534,7 @@ menu:
           - UpdateCaseDueDate
         unstable: []
         order: 25
-    - name: Update work item description
+    - name: Update case description
       url: /api/latest/case-management/update-case-description/
       identifier: case-management-update-case-description
       parent: case-management
@@ -10546,7 +10546,7 @@ menu:
           - UpdateCaseDescription
         unstable: []
         order: 12
-    - name: Update work item custom attribute
+    - name: Update case custom attribute
       url: /api/latest/case-management/update-case-custom-attribute/
       identifier: case-management-update-case-custom-attribute
       parent: case-management
@@ -10558,7 +10558,7 @@ menu:
           - UpdateCaseCustomAttribute
         unstable: []
         order: 23
-    - name: Delete custom attribute from work item
+    - name: Delete custom attribute from case
       url: /api/latest/case-management/delete-custom-attribute-from-case/
       identifier: case-management-delete-custom-attribute-from-case
       parent: case-management
@@ -10570,7 +10570,7 @@ menu:
           - DeleteCaseCustomAttribute
         unstable: []
         order: 24
-    - name: Update work item comment
+    - name: Update case comment
       url: /api/latest/case-management/update-case-comment/
       identifier: case-management-update-case-comment
       parent: case-management
@@ -10582,7 +10582,7 @@ menu:
           - UpdateCaseComment
         unstable: []
         order: 21
-    - name: Delete work item comment
+    - name: Delete case comment
       url: /api/latest/case-management/delete-case-comment/
       identifier: case-management-delete-case-comment
       parent: case-management
@@ -10594,7 +10594,7 @@ menu:
           - DeleteCaseComment
         unstable: []
         order: 22
-    - name: Comment work item
+    - name: Comment case
       url: /api/latest/case-management/comment-case/
       identifier: case-management-comment-case
       parent: case-management
@@ -10606,7 +10606,7 @@ menu:
           - CommentCase
         unstable: []
         order: 20
-    - name: Update work item attributes
+    - name: Update case attributes
       url: /api/latest/case-management/update-case-attributes/
       identifier: case-management-update-case-attributes
       parent: case-management
@@ -10618,7 +10618,7 @@ menu:
           - UpdateAttributes
         unstable: []
         order: 19
-    - name: Assign work item
+    - name: Assign case
       url: /api/latest/case-management/assign-case/
       identifier: case-management-assign-case
       parent: case-management
@@ -10630,7 +10630,7 @@ menu:
           - AssignCase
         unstable: []
         order: 15
-    - name: Archive work item
+    - name: Archive case
       url: /api/latest/case-management/archive-case/
       identifier: case-management-archive-case
       parent: case-management
@@ -10642,7 +10642,7 @@ menu:
           - ArchiveCase
         unstable: []
         order: 17
-    - name: Get the details of a work item
+    - name: Get the details of a case
       url: /api/latest/case-management/get-the-details-of-a-case/
       identifier: case-management-get-the-details-of-a-case
       parent: case-management
@@ -10654,7 +10654,7 @@ menu:
           - GetCase
         unstable: []
         order: 10
-    - name: Update a work item view
+    - name: Update a case view
       url: /api/latest/case-management/update-a-case-view/
       identifier: case-management-update-a-case-view
       parent: case-management
@@ -10666,7 +10666,7 @@ menu:
           - UpdateCaseView
         unstable: []
         order: 62
-    - name: Get a work item view
+    - name: Get a case view
       url: /api/latest/case-management/get-a-case-view/
       identifier: case-management-get-a-case-view
       parent: case-management
@@ -10678,7 +10678,7 @@ menu:
           - GetCaseView
         unstable: []
         order: 61
-    - name: Delete a work item view
+    - name: Delete a case view
       url: /api/latest/case-management/delete-a-case-view/
       identifier: case-management-delete-a-case-view
       parent: case-management
@@ -10690,7 +10690,7 @@ menu:
           - DeleteCaseView
         unstable: []
         order: 63
-    - name: Create a work item view
+    - name: Create a case view
       url: /api/latest/case-management/create-a-case-view/
       identifier: case-management-create-a-case-view
       parent: case-management
@@ -10702,7 +10702,7 @@ menu:
           - CreateCaseView
         unstable: []
         order: 60
-    - name: List work item views
+    - name: List case views
       url: /api/latest/case-management/list-case-views/
       identifier: case-management-list-case-views
       parent: case-management
@@ -10942,7 +10942,7 @@ menu:
           - GetProjects
         unstable: []
         order: 47
-    - name: Delete a work item link
+    - name: Delete a case link
       url: /api/latest/case-management/delete-a-case-link/
       identifier: case-management-delete-a-case-link
       parent: case-management
@@ -10954,7 +10954,7 @@ menu:
           - DeleteCaseLink
         unstable: []
         order: 37
-    - name: Create a work item link
+    - name: Create a case link
       url: /api/latest/case-management/create-a-case-link/
       identifier: case-management-create-a-case-link
       parent: case-management
@@ -10966,7 +10966,7 @@ menu:
           - CreateCaseLink
         unstable: []
         order: 36
-    - name: List work item links
+    - name: List case links
       url: /api/latest/case-management/list-case-links/
       identifier: case-management-list-case-links
       parent: case-management
@@ -10978,7 +10978,7 @@ menu:
           - ListCaseLinks
         unstable: []
         order: 35
-    - name: Count work items
+    - name: Count cases
       url: /api/latest/case-management/count-cases/
       identifier: case-management-count-cases
       parent: case-management
@@ -10990,7 +10990,7 @@ menu:
           - CountCases
         unstable: []
         order: 28
-    - name: Bulk update work items
+    - name: Bulk update cases
       url: /api/latest/case-management/bulk-update-cases/
       identifier: case-management-bulk-update-cases
       parent: case-management
@@ -11002,7 +11002,7 @@ menu:
           - BulkUpdateCases
         unstable: []
         order: 29
-    - name: Aggregate work items
+    - name: Aggregate cases
       url: /api/latest/case-management/aggregate-cases/
       identifier: case-management-aggregate-cases
       parent: case-management
@@ -11014,7 +11014,7 @@ menu:
           - AggregateCases
         unstable: []
         order: 27
-    - name: Create a work item
+    - name: Create a case
       url: /api/latest/case-management/create-a-case/
       identifier: case-management-create-a-case
       parent: case-management
@@ -11026,7 +11026,7 @@ menu:
           - CreateCase
         unstable: []
         order: 8
-    - name: Search work items
+    - name: Search cases
       url: /api/latest/case-management/search-cases/
       identifier: case-management-search-cases
       parent: case-management
@@ -11038,7 +11038,7 @@ menu:
           - SearchCases
         unstable: []
         order: 9
-    - name: Work Management Attribute
+    - name: Case Management Attribute
       url: /api/latest/case-management-attribute/
       identifier: case-management-attribute
       generated: true
@@ -11066,7 +11066,7 @@ menu:
           - DeleteCustomAttributeConfig
         unstable: []
         order: 4
-    - name: Create custom attribute config for a work item type
+    - name: Create custom attribute config for a case type
       url: /api/latest/case-management-attribute/create-custom-attribute-config-for-a-case-type/
       identifier: case-management-attribute-create-custom-attribute-config-for-a-case-type
       parent: case-management-attribute
@@ -11078,7 +11078,7 @@ menu:
           - CreateCustomAttributeConfig
         unstable: []
         order: 3
-    - name: Get all custom attributes config of work item type
+    - name: Get all custom attributes config of case type
       url: /api/latest/case-management-attribute/get-all-custom-attributes-config-of-case-type/
       identifier: case-management-attribute-get-all-custom-attributes-config-of-case-type
       parent: case-management-attribute
@@ -11102,11 +11102,11 @@ menu:
           - GetAllCustomAttributes
         unstable: []
         order: 1
-    - name: Work Management Type
+    - name: Case Management Type
       url: /api/latest/case-management-type/
       identifier: case-management-type
       generated: true
-    - name: Update a work item type
+    - name: Update a case type
       url: /api/latest/case-management-type/update-a-case-type/
       identifier: case-management-type-update-a-case-type
       parent: case-management-type
@@ -11118,7 +11118,7 @@ menu:
           - UpdateCaseType
         unstable: []
         order: 4
-    - name: Delete a work item type
+    - name: Delete a case type
       url: /api/latest/case-management-type/delete-a-case-type/
       identifier: case-management-type-delete-a-case-type
       parent: case-management-type
@@ -11130,7 +11130,7 @@ menu:
           - DeleteCaseType
         unstable: []
         order: 3
-    - name: Create a work item type
+    - name: Create a case type
       url: /api/latest/case-management-type/create-a-case-type/
       identifier: case-management-type-create-a-case-type
       parent: case-management-type
@@ -11142,7 +11142,7 @@ menu:
           - CreateCaseType
         unstable: []
         order: 2
-    - name: Get all work item types
+    - name: Get all case types
       url: /api/latest/case-management-type/get-all-case-types/
       identifier: case-management-type-get-all-case-types
       parent: case-management-type

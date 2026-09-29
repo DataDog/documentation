@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 const lodash = require('lodash');
 const yaml = require('js-yaml');
-const { applyWorkManagementCopy } = require('./work-management-copy');
+const { applyApiDisplayNames } = require('./api-display-names');
 const fs = require('fs');
 const slugify = require('slugify');
 const $RefParser = require('@apidevtools/json-schema-ref-parser');
@@ -114,6 +114,7 @@ const updateMenu = (specData, specs, languages) => {
               parent: tagSlug,
               generated: true,
               params: {
+                ...(action['x-docs-original-summary'] ? { originalsummary: action['x-docs-original-summary'] } : {}),
                 "versions": [apiVersion],
                 "operationids": [`${action.operationId}`],
                 "unstable": action.hasOwnProperty("x-unstable") ? [apiVersion] : [],
@@ -1179,7 +1180,7 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
 const processSpecs = (specs) => {
   specs
     .forEach((spec) => {
-      const fileData = applyWorkManagementCopy(yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
+      const fileData = applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
       $RefParser.dereference(fileData, { resolve: { external: false } })
         .then((deref) => {
           const version = spec.split('/')[3];
@@ -1229,7 +1230,7 @@ const processSpecs = (specs) => {
     });
 
   // update menu with all specs
-  const specData = specs.map((spec) => applyWorkManagementCopy(yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
+  const specData = specs.map((spec) => applyApiDisplayNames(yaml.safeLoad(fs.readFileSync(spec, 'utf8'))));
   updateMenu(specData, specs, supportedLangs);
   createEndpointPages(specData, specs);
 };

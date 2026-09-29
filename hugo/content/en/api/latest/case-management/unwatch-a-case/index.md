@@ -1,3 +1,3 @@
 ---
-title: Unwatch a work item
+title: Unwatch a case
 ---

@@ -1,3 +1,3 @@
 ---
-title: Delete work item comment
+title: Delete case comment
 ---

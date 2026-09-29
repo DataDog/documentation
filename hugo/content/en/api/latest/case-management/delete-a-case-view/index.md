@@ -1,3 +1,3 @@
 ---
-title: Delete a work item view
+title: Delete a case view
 ---

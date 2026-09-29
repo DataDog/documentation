@@ -1,3 +1,3 @@
 ---
-title: Link incident to work item
+title: Link incident to case
 ---

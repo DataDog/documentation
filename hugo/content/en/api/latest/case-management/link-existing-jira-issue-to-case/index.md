@@ -1,3 +1,3 @@
 ---
-title: Link existing Jira issue to work item
+title: Link existing Jira issue to case
 ---

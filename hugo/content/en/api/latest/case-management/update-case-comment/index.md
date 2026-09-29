@@ -1,3 +1,3 @@
 ---
-title: Update work item comment
+title: Update case comment
 ---

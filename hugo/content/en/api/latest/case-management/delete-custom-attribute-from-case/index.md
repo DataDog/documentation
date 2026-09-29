@@ -1,3 +1,3 @@
 ---
-title: Delete custom attribute from work item
+title: Delete custom attribute from case
 ---

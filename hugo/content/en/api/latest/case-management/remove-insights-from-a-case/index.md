@@ -1,3 +1,3 @@
 ---
-title: Remove insights from a work item
+title: Remove insights from a case
 ---

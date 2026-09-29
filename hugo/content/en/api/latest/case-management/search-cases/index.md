@@ -1,3 +1,3 @@
 ---
-title: Search work items
+title: Search cases
 ---

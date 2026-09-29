@@ -1,4 +1,4 @@
 ---
-title: Work Management Type
+title: Case Management Type
 headless: true
 ---

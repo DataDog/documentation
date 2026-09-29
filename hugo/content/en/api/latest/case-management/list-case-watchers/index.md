@@ -1,3 +1,3 @@
 ---
-title: List work item watchers
+title: List case watchers
 ---

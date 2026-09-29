@@ -1,3 +1,3 @@
 ---
-title: Aggregate work items
+title: Aggregate cases
 ---

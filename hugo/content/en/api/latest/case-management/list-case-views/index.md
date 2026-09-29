@@ -1,3 +1,3 @@
 ---
-title: List work item views
+title: List case views
 ---

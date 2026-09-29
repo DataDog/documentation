@@ -1,3 +1,3 @@
 ---
-title: Update work item status
+title: Update case status
 ---

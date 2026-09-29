@@ -1,3 +1,3 @@
 ---
-title: Work Management
+title: Case Management
 ---

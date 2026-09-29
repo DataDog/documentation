@@ -1,3 +1,3 @@
 ---
-title: Delete a work item type
+title: Delete a case type
 ---

@@ -1,3 +1,3 @@
 ---
-title: Create a work item link
+title: Create a case link
 ---

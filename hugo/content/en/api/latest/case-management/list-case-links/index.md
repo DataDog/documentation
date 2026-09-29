@@ -1,3 +1,3 @@
 ---
-title: List work item links
+title: List case links
 ---

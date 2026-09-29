@@ -1,3 +1,3 @@
 ---
-title: Get the details of a work item
+title: Get the details of a case
 ---

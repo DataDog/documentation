@@ -1,3 +1,3 @@
 ---
-title: Watch a work item
+title: Watch a case
 ---

@@ -1,4 +1,4 @@
 ---
-title: Work Management Attribute
+title: Case Management Attribute
 headless: true
 ---
