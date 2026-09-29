@@ -2,9 +2,6 @@
 title: APM
 description: Instrument your code to improve performance
 further_reading:
-  - link: "https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/"
-    tag: "Architecture Center"
-    text: "Observability in Event-Driven Architectures"
   - link: "https://learn.datadoghq.com/courses/getting-started-apm"
     tag: "Learning Center"
     text: "Getting Started with APM Metrics and Traces"
@@ -29,9 +26,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/dbm-supabase/"
     tag: "Blog"
     text: "Monitor and optimize Supabase query performance with Datadog Database Monitoring"
+  - link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+    tag: "Blog"
+    text: "Teaching a 9B model to investigate production alerts"
   - link: "https://app.datadoghq.com/release-notes?category=APM"
     tag: "Release Notes"
     text: "Check out the latest Datadog APM releases! (App login required)"
+  - link: "https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/"
+    tag: "Architecture Center"
+    text: "Observability in Event-Driven Architectures"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology

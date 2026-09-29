@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-shopify-salesforce/"
+  tag: "Blog"
+  text: "Extend Datadog RUM and Product Analytics to Shopify and Salesforce"
 ---
 
 {{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}

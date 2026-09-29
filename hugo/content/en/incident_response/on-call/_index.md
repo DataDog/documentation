@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
   tag: "Blog"
   text: "Unify remediation and communication with Datadog Incident Response"
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 cascade:
     algolia:
         rank: 70

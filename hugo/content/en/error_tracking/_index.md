@@ -19,6 +19,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/a-practical-guide-to-react-error-monitoring/"
   tag: "Blog"
   text: "A practical guide to React error monitoring"
+- link: "https://www.datadoghq.com/blog/datadog-code-execution/"
+  tag: "Blog"
+  text: "Cut AI agent cost and improve accuracy with Code Execution in the Datadog MCP Server"
 ---
 
 ## Overview

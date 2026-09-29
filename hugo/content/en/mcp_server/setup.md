@@ -22,6 +22,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-ai-agent-integrations/"
   tag: "Blog"
   text: "Bring live Datadog telemetry into your AI agents with native integrations"
+- link: "https://www.datadoghq.com/blog/datadog-code-execution/"
+  tag: "Blog"
+  text: "Cut AI agent cost and improve accuracy with Code Execution in the Datadog MCP Server"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
