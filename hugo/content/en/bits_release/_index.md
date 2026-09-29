@@ -53,7 +53,7 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 | **RUM** | Frontend validation: errors, views, and user actions on the pages affected by the change. |
 | **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
 | **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
-| **[Bits Testing][10]** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
+| **[Bits Testing][9]** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
 | **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes. This is useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
@@ -90,7 +90,7 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 | ----------- | ---------------- |
 | [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
 | A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][3] or [RUM][4] telemetry. |
-| The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][8] to set this up. |
+| The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][7] to set this up. |
 
 ### Recommended
 
@@ -103,15 +103,15 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
-- **Bits Release in Datadog**: The [Bits Release page][7] holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it through this link or the link in your pull request comment. It is not in the Datadog side navigation yet.
+- **Bits Release in Datadog**: The Bits Release page holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it from the link in your pull request comment. It is not in the Datadog side navigation yet.
 
 ## Billing
 
-Bits Release is free during the private preview. It does not consume [AI Credits][9], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
+Bits Release is free during the private preview. It does not consume [AI Credits][8], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
 
 ## Send feedback
 
-Verdict quality depends on feedback, and the preview is the moment when it has the most effect. On any plan in [Bits Release][7], mark whether the verdict was correct and add a short reason. Cases where Bits Release reported nothing and a real problem existed are the most valuable to report. For onboarding help or questions during the preview, contact your Datadog representative.
+Verdict quality depends on feedback, and the preview is the moment when it has the most effect. On any plan in Bits Release, mark whether the verdict was correct and add a short reason. Cases where Bits Release reported nothing and a real problem existed are the most valuable to report. For onboarding help or questions during the preview, contact your Datadog representative.
 
 ## Further reading
 
@@ -123,7 +123,6 @@ Verdict quality depends on feedback, and the preview is the moment when it has t
 [4]: /real_user_monitoring/
 [5]: /integrations/slack/
 [6]: /synthetics/
-[7]: https://app.datadoghq.com/ci/bits-release
-[8]: /source_code/service-mapping/
-[9]: /account_management/billing/ai_credits/
-[10]: /synthetics/bits_testing/
+[7]: /source_code/service-mapping/
+[8]: /account_management/billing/ai_credits/
+[9]: /synthetics/bits_testing/
