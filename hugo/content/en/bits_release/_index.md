@@ -32,7 +32,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 
 ## How it works
 
-1. **Trigger**: A pull request merges to the default branch of an onboarded repository.
+1. **Trigger**: A pull request merges to the default branch of a repository in scope.
 2. **Impact analysis**: Bits Release reads the diff and queries production data for the affected service to determine the change type, the risk level, and the code paths involved.
 3. **Validation plan**: It produces a plan describing the expected impact of the change. Each item states either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
 4. **Deploy detection**: The plan stays pending until Bits Release confirms your pull request is running in production.
@@ -53,7 +53,7 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 | **RUM** | Frontend validation: errors, views, and user actions on the pages affected by the change. |
 | **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
 | **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
-| **Synthetic tests** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
+| **[Bits Testing][10]** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
 | **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes. This is useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
@@ -62,8 +62,7 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 
 | Verdict | Meaning |
 | ------- | ------- |
-| **Passed** | The change shipped and production behavior matched the expected impact, with no unexpected side effects on the service being watched. |
-| **Warning** | A potential problem. Bits Release found a signal worth your attention but could not confirm it. |
+| **Passed** | The change shipped and production behavior matched the expected impact, with no unexpected side effects on the service affected by the pull request. |
 | **Failed** | A clear problem. Production behavior contradicted the expected impact. |
 | **Not enough data** | The expected change could not be proven either way. For example, the affected code path saw too little traffic during the soak window. |
 | **Inconclusive** | Bits Release could not reach a verdict. Either the signals it collected contradicted each other, so no conclusion was supported, or validation did not complete, most commonly because the commit was never detected as deployed. |
@@ -127,3 +126,4 @@ Verdict quality depends on feedback, and the preview is the moment when it has t
 [7]: https://app.datadoghq.com/ci/bits-release
 [8]: /source_code/service-mapping/
 [9]: /account_management/billing/ai_credits/
+[10]: /synthetics/bits_testing/
