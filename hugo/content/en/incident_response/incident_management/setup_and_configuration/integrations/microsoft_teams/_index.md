@@ -104,6 +104,8 @@ Enable AI-generated meeting summaries to automatically summarize incident Micros
 
 <div class="alert alert-info">When meeting summaries are enabled, meeting audio is recorded and transcribed by a Datadog <a href="https://www.datadoghq.com/legal/subprocessors/">subprocessor</a>. After a 7 day retention period, all data is automatically deleted.</div>
 
+AI features must be enabled for your organization before the Datadog Transcriber can join meetings.
+
 To enable meeting summaries for incident Microsoft Teams meetings:
 
 1. Navigate to [**Settings > Integrations**][2] and select **Microsoft Teams**.
@@ -131,7 +133,7 @@ If the Datadog Transcriber leaves a meeting, re-invite it to the same linked mee
 
 The robot icon shows whether the transcriber is joining or already in the meeting. If you cannot add the transcriber, hover over the icon to see the reason.
 
-Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. AI features and meeting summarization must be enabled. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
+Re-inviting requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7]. Re-inviting does not override conditions that prevent summarization, including the default exclusion for private incidents.
 
 A re-invite prompt can appear in the incident's Slack or Microsoft Teams meeting-card thread after the transcriber leaves. The prompt covers timeouts while waiting for admission or participants, everyone leaving the meeting, and removal of the transcriber. Select **Yes** to re-invite it or **No** to dismiss the prompt. Connect your chat account to Datadog before using this action.
 
