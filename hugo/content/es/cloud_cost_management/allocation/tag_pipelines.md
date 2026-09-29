@@ -38,11 +38,11 @@ Puede administrar los conjuntos de reglas de Tag Pipelines mediante la [API][7],
 
 Para crear un conjunto de reglas, navegue a [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Tag Pipelines{{< /ui >}}][1].
 
-<div class="alert alert-danger"> Puede crear hasta 100 reglas. Las tablas de referencia basadas en API no son compatibles. </div>
+<div class="alert alert-info"> Puede crear hasta 100 reglas. </div>
 
-Antes de crear reglas individuales, cree un conjunto de reglas (una carpeta para sus reglas) haciendo clic en {{< ui >}}+ New Ruleset{{< /ui >}}.
+Antes de crear reglas individuales, cree un conjunto de reglas (una carpeta para sus reglas) haciendo clic en {{< ui >}}\+ New Ruleset{{< /ui >}}.
 
-Dentro de cada conjunto de reglas, haga clic en {{< ui >}}+ Add New Rule{{< /ui >}} y seleccione un tipo de regla: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} o {{< ui >}}Map multiple tags{{< /ui >}}. Estas reglas se ejecutan en un orden secuencial y determinista de arriba a abajo.
+Dentro de cada conjunto de reglas, haga clic en {{< ui >}}\+ Add New Rule{{< /ui >}} y seleccione un tipo de regla: {{< ui >}}Add tag{{< /ui >}}, {{< ui >}}Alias tag keys{{< /ui >}} o {{< ui >}}Map multiple tags{{< /ui >}}. Estas reglas se ejecutan en un orden secuencial y determinista de arriba a abajo.
 
 {{< img src="cloud_cost/pipelines-create-ruleset-1.png" alt="Una lista de reglas de etiquetas en la página de Tag Pipelines que muestra varias categorías como equipo, cuenta, servicio, departamento, unidad de negocio y más" style="width:60%;" >}}
 
@@ -99,6 +99,17 @@ En la sección {{< ui >}}Additional options{{< /ui >}}, tiene las siguientes opc
   - {{< ui >}}Append the column{{< /ui >}} - Agrega los nuevos valores a las columnas existentes sin eliminar los valores originales.
   - {{< ui >}}Replace the column{{< /ui >}} - Reemplaza los valores de columna existentes con los nuevos valores. <div class="alert alert-warning">Reemplazar columnas puede sobrescribir datos existentes. Use esta opción con precaución.</div>
 - {{< ui >}}Apply case-insensitive matching for primary key values{{< /ui >}} - Habilita la coincidencia sin distinción entre mayúsculas y minúsculas entre el valor de la clave principal de la tabla de referencia y el valor de la etiqueta en los datos de costos donde la clave de etiqueta coincide con la clave principal. Por ejemplo, si el par de valores de clave principal de la interfaz de usuario es `foo:Bar` y la etiqueta de los datos de costos es `foo:bar`, entonces ambos pueden coincidir.
+
+#### Tablas de referencia basadas en API {#api-based-reference-tables}
+
+También puede usar tablas de referencia basadas en API en Tag Pipelines. Es posible que algunas tablas antiguas necesiten una actualización de datos para sincronizarse con Cloud Cost Management antes de que pueda usarlas en una regla.
+
+##### Solución de problemas de errores de sincronización {#troubleshooting-synchronization-errors}
+
+Si recibe un error que indica que una tabla de referencia no se ha sincronizado con Cloud Cost Management al guardar una regla:
+
+1. **Espere a la propagación:** Si creó o actualizó la tabla recientemente, espere unos minutos a que los cambios se propaguen y luego guarde la regla de nuevo.
+2. **Active la sincronización:** Si el error persiste, vuelva a cargar el archivo de datos de la tabla o actualice una fila para activar la sincronización con Cloud Cost Management.
 
 ## Reserved tags {#reserved-tags}
 

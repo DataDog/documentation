@@ -105,10 +105,6 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
-## Edit an SLO
-
-To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
-
 ## Permissions
 
 ### Role based access
@@ -137,6 +133,10 @@ To maintain your edit access to the SLO, the system requires you to include at l
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][12] or the [guide on how to set up RBAC for Monitors][13].
 
+## Editing an SLO
+
+To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
+
 ## Searching SLOs
 
 The [Service Level Objectives manage page][2] lets you run an advanced search of all SLOs so you can find, view, edit, clone or delete SLOs from the search results.
@@ -150,6 +150,18 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 * `tags` - datacenter, env, service, team, etc.
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
+
+## Recovering deleted SLOs
+
+<div class="alert alert-warning">Auto-generated SLOs for <a href="/synthetics/test_suites/#service-level-objectives">Synthetic test suites</a> cannot be restored.</div>
+
+Deleted SLOs are retained for 30 days before being permanently deleted. To restore a recently deleted SLO:
+
+1. On the [SLO manage page][2], click the **Settings** gear icon in the top right corner.
+1. Select the SLO(s) you want to restore.
+1. Click {{< ui >}}Restore{{< /ui >}}.
+
+**Note**: Deleted SLO status corrections cannot be restored. This recovery process applies only to deleted SLOs.
 
 ## Viewing SLOs
 
@@ -271,10 +283,6 @@ You can also use the {{< ui >}}Audit History{{< /ui >}} tab in the SLO details t
 With [Event Monitors][28], you can set up notifications to track SLO audit events. For example, if you wish to be notified when a specific SLO's configuration is modified, set an Event Monitor to track the text `[SLO Modified]` over the tags `audit,slo_id:<SLO ID>`.
 
 ## SLO widgets
-
-{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
-{{< /learning-center-callout >}}
 
 After creating your SLO, you can visualize the data through Dashboards and widgets.
   - Use the SLO widget to visualize the status of a single SLO

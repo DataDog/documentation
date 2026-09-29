@@ -23,6 +23,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/"
   tag: "Blog"
   text: "Answer any cost question faster with the Cloud Cost skill in Bits Chat"
+- link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
+  tag: "Blog"
+  text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai
@@ -163,6 +166,10 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 
 {{< img src="bits_ai/getting_started/example-slack-query.png" alt="Output of an example service-dependency query in Slack" style="width:60%;">}}
 
+#### Code channels with Bits Code
+
+Ask Bits Chat to make a code change, and it creates a dedicated [code channel][13] for the task. In the code channel, [Bits Code][14] works on the change alongside you and your team.
+
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -178,3 +185,5 @@ After setup is complete, you can send queries to `@Datadog` in natural language 
 [10]: https://app.datadoghq.com/ask/usage
 [11]: https://app.datadoghq.com/ask
 [12]: https://app.datadoghq.com/ask/settings
+[13]: /bits_ai/bits_code/slack_code_channels/
+[14]: /bits_ai/bits_code/

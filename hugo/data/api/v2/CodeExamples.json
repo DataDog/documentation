@@ -913,6 +913,11 @@
     },
     {
       "group": "gcp_integration",
+      "suffix": "_2882283621",
+      "description": "Create a new entry for your service account with org folder resource collection enabled returns \"OK\" response"
+    },
+    {
+      "group": "gcp_integration",
       "suffix": "_130557025",
       "description": "Create a new entry for your service account with resource collection enabled returns \"OK\" response"
     },
@@ -937,6 +942,11 @@
       "group": "gcp_integration",
       "suffix": "_3205636354",
       "description": "Update STS Service Account returns \"OK\" response with enable resource collection turned on"
+    },
+    {
+      "group": "gcp_integration",
+      "suffix": "_4285997499",
+      "description": "Update STS Service Account returns \"OK\" response with org folder resource collection enabled"
     }
   ],
   "CreateOrganizationHandle": [
@@ -1166,8 +1176,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_1695361854",
+      "description": "Send deflate logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_3804768803",
+      "description": "Send gzip logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
     },
     {
       "group": "logs",
@@ -1584,6 +1604,11 @@
     }
   ],
   "CreateMonitorConfigPolicy": [
+    {
+      "group": "monitors",
+      "suffix": "_1934105875",
+      "description": "Create a downtime duration monitor configuration policy returns \"OK\" response"
+    },
     {
       "group": "monitors",
       "suffix": "",

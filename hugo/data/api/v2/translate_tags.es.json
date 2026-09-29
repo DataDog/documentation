@@ -155,6 +155,10 @@
     "name": "DDSQL",
     "description": "Ejecute consultas DDSQL en el catálogo de datos de Datadog y obtenga sus resultados.\nLas consultas se envían de forma asíncrona: la solicitud inicial puede devolver un estado `running` con\nun `query_id`, y los clientes consultan el punto de conexión de obtención hasta que la respuesta cambia a\n`completed` con un conjunto de resultados en formato de columna principal."
   },
+  "dem": {
+    "name": "DEM",
+    "description": "Administre los recorridos de Digital Experience Monitoring."
+  },
   "dora-metrics": {
     "name": "DORA Metrics",
     "description": "Busque, envíe o elimine eventos para DORA Metrics a fin de medir y mejorar el rendimiento de su entrega de software. Consulte la [página de DORA Metrics](https://docs.datadoghq.com/dora_metrics/) para obtener más información.\n\n**Nota**: DORA Metrics no están disponibles en el sitio US1-FED."
@@ -257,7 +261,7 @@
   },
   "ip-allowlist": {
     "name": "Lista de permitidos de IP",
-    "description": "La API de lista de permitidos de IP se utiliza para administrar las direcciones IP que\npueden acceder a la API y a la web UI de Datadog. No bloquea\nel acceso a intake APIs o a los dashboards públicos.\n\nEsta es una función exclusiva para empresas. Solicite acceso mediante\nel contacto con el soporte de Datadog, o consulte la [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) para obtener más información."
+    "description": "La API de lista de permitidos de IP se utiliza para administrar las direcciones IP que\npueden acceder a la web UI y Datadog API. No bloquea\nel acceso a intake APIs o a los dashboards públicos.\n\nEsta es una función exclusiva para empresas. Solicite acceso mediante\nel contacto con el soporte de Datadog, o consulte la [IP Allowlist page](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/) para obtener más información."
   },
   "identity-providers": {
     "name": "Proveedores de identidad",
@@ -558,6 +562,10 @@
   "threat-intelligence": {
     "name": "Inteligencia de amenazas",
     "description": "Ingeste y gestione datos de inteligencia de amenazas para el enriquecimiento e investigación de seguridad."
+  },
+  "timeseries-anomaly-investigations": {
+    "name": "Investigaciones de anomalías en series temporales",
+    "description": "Investigue las anomalías en las métricas de series temporales y devuelva hallazgos deterministas."
   },
   "twilio-integration-accounts": {
     "name": "Cuentas de integración de Twilio",

@@ -2,26 +2,21 @@
 aliases:
 - /ja/agent/guide/datadog-disaster-recovery/
 further_reading:
-- link: agent/remote_config/?tab=configurationyamlfile
-  tag: ドキュメント
-  text: Remote Configuration
-- link: /getting_started/site/
-  tag: ドキュメント
-  text: Datadog サイトの概要
 - link: https://www.datadoghq.com/blog/ddr-mitigates-cloud-provider-outages/
   tag: ブログ
   text: Datadog Disaster Recovery でクラウドプロバイダーの障害の影響を軽減
 site_support_id: datadog_disaster_recovery
 title: Datadog Disaster Recovery
 ---
-## 概要 {#overview}
+Datadog Disaster Recovery (DDR) は、クラウドプロバイダーのリージョンやその中の Datadog サービスが停止した場合でも、オブザーバビリティを維持します。DDR を使用すると、別のリージョンにセカンダリ Datadog オーガニゼーションを事前に構成し、そこにリソースを複製できます。フェイルオーバーを実行すると、セカンダリサイトにはチームが必要とするダッシュボード、モニター、ユーザーがすでに用意されています。
 
-Datadog Disaster Recovery (DDR) では、クラウドサービスプロバイダーのリージョンや、クラウドプロバイダーのリージョン内で実行されている Datadog サービスに影響する可能性があるイベントの発生時に、監視可能性を維持できます。DDR を使用すると、機能する代替 Datadog サイトでリアルタイムの監視可能性を復旧できるため、重要な監視可能性の可用性目標を達成できます。
+DDR はアクティブ・パッシブモデルを使用します。セカンダリサイトは同期された状態を維持しますが、フェイルオーバーを実行するまではパッシブ状態です。フェイルオーバーは自動的には行われません。切り替えのタイミングはユーザーが選択します。
 
-DDR では、定期的に災害復旧訓練を実施して、障害イベントからの復旧能力をテストすることに加えて、ビジネスのニーズや規制コンプライアンスのニーズに対応することができます。
+また、DDR を使用すると、定期的にディザスタリカバリ訓練を実行して、障害からの復旧能力をテストし、ビジネスおよび規制コンプライアンスのニーズを満たすことができます。
 
-## 前提条件{#prerequisites}
-必要な Datadog Agent の最小バージョンは、使用するテレメトリの種類によって異なります。
+## 前提条件 {#prerequisites}
+
+必要な Datadog Agent の最小バージョンは、使用する製品によって異なります。
 
 |サポートされているテレメトリ |対応製品          |必要な Agent バージョン | 
 |--------------------|----------------------------|-----------------------|
@@ -29,12 +24,9 @@ DDR では、定期的に災害復旧訓練を実施して、障害イベント�
 |メトリクス             |Infrastructure Monitoring   | v7.54+                |
 |トレース              |APM                         | v7.68+                |
 
-
-
 <div class="alert alert-info">
 Datadog は、他の製品で DDR に対応するため、お客様からのリクエストを引き続き評価しています。上記でカバーされていない特定のニーズや今後の機能については、<a href="mailto:disaster-recovery@datadoghq.com">Disaster Recovery チーム</a>にお問い合わせください。
 </div>
-<br>
 
 ## セットアップ {#setup}
 
@@ -44,17 +36,13 @@ Datadog Disaster Recovery を有効にするには、以下の手順に従いま
 
 {{% collapse-content title="DDR オーガニゼーションの作成と共有" level="h4" %}}
 
-<div class="alert alert-info">必要に応じて Datadog が代わりにセットアップを行うことも可能です。</div>
+<div class="alert alert-info">ご希望の場合は、Datadog が代わりにセットアップを行うことも可能です。</div>
 
 #### DDR オーガニゼーションの作成 {#create-your-ddr-org}
 
-1. [[Get Started with Datadog]][16] (Datadog を始める) に移動します。場合によっては、このページにアクセスするには、現在のセッションからログアウトするか、シークレットモードを使用する必要があります。
-2. プライマリとは異なる Datadog サイトを選択します (例: `US1` を使用している場合は `EU` または `US5` を選択します)。
+1. [[Get Started with Datadog]][16] (Datadog を始める) に移動します。このページにアクセスするには、現在のセッションからログアウトするか、シークレットモードを使用する必要がある場合があります。
+2. プライマリとは異なる Datadog サイトを選択します (例: `US1` を使用している場合は `EU` または `US5` を選択します)。オプションについては、[Datadog site list][17] を参照してください。すべての Datadog サイトは地理的に分離されています。
 3. プロンプトに従ってアカウントを作成します。
-
-すべての Datadog サイトは地理的に分離されています。オプションについては、[Datadog サイトのリスト][17] を参照してください。
-
-クラウドプロバイダーインテグレーションを使用して Datadog にテレメトリを送信している場合には、DDR オーガニゼーションにクラウドプロバイダーアカウントを追加する必要があります。DDR サイトがパッシブである (フェイルオーバー状態ではない) 間、Datadog はテレメトリデータの受信にクラウドプロバイダーを使用しません。
 
 #### Datadog との DDR オーガニゼーション情報の共有 {#share-the-ddr-org-information-with-datadog}
 
@@ -64,31 +52,30 @@ Datadog Disaster Recovery を有効にするには、以下の手順に従いま
 
 {{% collapse-content title="パブリック ID を取得し、DDR オーガニゼーションとプライマリオーガニゼーションをリンクします" level="h4" %}}
 
-セキュリティ上の理由から、Datadog がお客様に代わってオーガニゼーションをリンクすることはできません。
+<div class="alert alert-info">セキュリティ上の理由から、Datadog がお客様に代わってオーガニゼーションをリンクすることはできません。</div>
 
-Datadog チームが DDR オーガニゼーションを設定した後で、Datadog の [パブリック API エンドポイント][1] を使用して、プライマリオーガニゼーションと DDR オーガニゼーションのパブリック ID を取得してください。
+Datadog が DDR オーガニゼーションを指定した後、DDR オーガニゼーションをプライマリオーガニゼーションにリンクします。
 
-DDR オーガニゼーションをプライマリオーガニゼーションにリンクするには、次のようにします。
+1. [List your managed organizations][1] エンドポイントを使用して、プライマリオーガニゼーションと DDR オーガニゼーションのパブリック ID を取得します。
+1. プライマリオーガニゼーションのアプリケーションキーに `disaster_recovery_status_write` スコープを追加します。
+1. プレースホルダーを適切な値に置き換えて、以下のコマンドを実行します。
 
-- プライマリオーガニゼーションのアプリケーションキーに `disaster_recovery_status_write` スコープを追加します。
-- プレースホルダーを適切な値に置き換えて、以下のコマンドを実行します。
+    ```shell
+    export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
+    export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
+    export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
 
-```shell
-export PRIMARY_DD_API_KEY=<PRIMARY_ORG_API_KEY>
-export PRIMARY_DD_APP_KEY=<PRIMARY_ORG_APP_KEY>
-export PRIMARY_DD_API_URL=<PRIMARY_ORG_API_SITE>
+    export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
+    export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
+    export USER_EMAIL=<USER_EMAIL>
+    export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
 
-export DDR_ORG_ID=<DDR_ORG_PUBLIC_ID>
-export PRIMARY_ORG_ID=<PRIMARY_ORG_PUBLIC_ID>
-export USER_EMAIL=<USER_EMAIL>
-export CONNECTION='{"data":{"id":"'${PRIMARY_ORG_ID}'","type":"hamr_org_connections","attributes":{"TargetOrgUuid":"'${DDR_ORG_ID}'","HamrStatus":1,"ModifiedBy":"'${USER_EMAIL}'", "IsPrimary":true}}}'
+    curl -v -H "Content-Type: application/json" -H \
+    "dd-api-key:${PRIMARY_DD_API_KEY}" -H \
+    "dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
+    ```
 
-curl -v -H "Content-Type: application/json" -H \
-"dd-api-key:${PRIMARY_DD_API_KEY}" -H \
-"dd-application-key:${PRIMARY_DD_APP_KEY}" --data "${CONNECTION}" --request POST ${PRIMARY_DD_API_URL}/api/v2/hamr
-```
-
-オーガニゼーションをリンクした後では、フェイルオーバーオーガニゼーションでのみこのバナーが表示されます。
+オーガニゼーションをリンクすると、フェイルオーバーオーガニゼーションに次のバナーが表示されます。
 
 {{< img src="agent/guide/ddr/ddr-banner.png" alt="DDR オーガニゼーションの DDR バナー" >}}
 
@@ -100,7 +87,7 @@ curl -v -H "Content-Type: application/json" -H \
 
 障害発生時にすべてのユーザーが DDR オーガニゼーションにログインできるようにするため、**Datadog はシングルサインオン (SSO) を使用することを推奨しています**。
 
-DDR オーガニゼーションの [[Organization Settings] (オーガニゼーション設定])[2] に移動し、ユーザーの [SAML][3] または {{< ui >}}Google Login{{< /ui >}} を構成します。
+DDR オーガニゼーションの [Organization Settings][2] に移動し、ユーザーの [SAML][3] または {{< ui >}}Google Login{{< /ui >}} を構成します。
 
 マネージド同期により、プライマリオーガニゼーションから DDR オーガニゼーションにユーザーアカウントが複製されます。Datadog では [SAML を使用したジャストインタイムプロビジョニング][4] を構成することを推奨しています。これにより、ユーザーはフェイルオーバー中にパスワードをリセットすることなく DDR オーガニゼーションにアクセスできます。
 
@@ -128,7 +115,7 @@ Datadog はオープンソースの [datadog-sync-cli][8] ツールを使用し�
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Remote Configuration の有効化 [**推奨]" level="h4" %}}
+{{% collapse-content title="Remote Configuration の有効化（推奨）" level="h4" %}}
 
 [Remote Configuration (RC)][11] では、インフラストラクチャーにデプロイされた Datadog Agent の構成とその動作の変更をリモートで行うことができます。
 
@@ -140,7 +127,6 @@ Datadog では、より優れたフェイルオーバー制御のために Remot
 
 {{% collapse-content title="フェイルオーバーまたは訓練中の DDR オーガニゼーションへのテレメトリのデュアルシッピング" level="h4" %}}
 
-
 デュアルシッピングを有効にするには、大規模な管理のために [Fleet Automation][12] を使用することが推奨されます。または、`datadog.yaml` ファイルを編集して手動で構成することもできます。
 
 パフォーマンスと目標復旧時間 (RTO) を測定するフェイルオーバーテストのための専用時間枠をスケジュールするには、Datadog カスタマーサクセスマネージャーまでご連絡ください。
@@ -148,13 +134,13 @@ Datadog では、より優れたフェイルオーバー制御のために Remot
 {{< tabs >}}
 {{% tab "Fleet Automation の使用 (推奨)" %}}
 
-フェイルオーバーオーガニゼーションの [[Fleet Automation]][100] ページにある [{{< ui >}}Configure Agents{{< /ui >}}] (エージェントの構成) タブで、フェイルオーバーポリシーを作成または既存のポリシーを再利用して、Agent のフリートに適用できます。ポリシーが有効になるとすぐに、Agent はプライマリと DDR (フェイルオーバー) の両方の監視可能性サイトへのテレメトリのデュアルシッピングを開始します。
+DDR オーガニゼーションの [Fleet Automation][100] > {{< ui >}}Configure Agents{{< /ui >}} に移動してフェイルオーバーポリシーを作成するか、既存のポリシーを再利用し、それを Agent のフリートに適用します。ポリシーが有効になるとすぐに、Agent はプライマリと DDR (フェイルオーバー) の両方の監視可能性サイトへのテレメトリのデュアルシッピングを開始します。
 
-フェイルオーバーポリシーを作成するには、[{{< ui >}}Create Failover Policy{{< /ui >}}] (フェイルオーバーポリシーを作成) をクリックします。
+フェイルオーバーポリシーを作成するには、{{< ui >}}Create Failover Policy{{< /ui >}} をクリックします。
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy.png" alt="DDR ポリシーの管理" style="width:80%;" >}}
 
-次に、プロンプトに従ってフェイルオーバーする必要があるホストとテレメトリ (メトリクス、ログ、トレース) のスコープを設定します。
+次に、プロンプトに従ってフェイルオーバーする必要があるホストとテレメトリ（メトリクス、ログ、トレース）のスコープを設定します。
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-scope.png" alt="フェイルオーバーする必要があるホストとテレメトリのスコープ設定" style="width:80%;" >}}
 
@@ -178,7 +164,7 @@ multi_region_failover:
   failover_metrics: false
   failover_logs: false
   failover_apm: false
-  site: <DDR_SITE>  # For example "site: us5.datadoghq.com" for a US5 site
+  site: <DDR_SITE>  # For example, "site: us5.datadoghq.com" for a US5 site
   api_key: <DDR_SITE_API_KEY>
 ```
 
@@ -195,11 +181,11 @@ DNS ベースのフェイルオーバーは、Agent ベースのフェイルオ�
 
 #### カスタム DNS エンドポイントの受信{#receive-your-custom-dns-endpoint}
 
-DNS ベースのフェイルオーバーを使用することを選択した場合、Datadog はオーガニゼーションのカスタムインテイク URL (例: `<your-org>.intake.datadoghq.com`) をプロビジョニングします。すべてのデータソース (Agent、ログシッパー、カスタムインスツルメンテーション) が、デフォルトの Datadog インテイク URL ではなくこのエンドポイントにテレメトリを送信するように構成します。これは一度限りの構成変更です。
+DNS ベースのフェイルオーバーを使用することを選択した場合、Datadog はオーガニゼーションのカスタムインテイク URL (例: `<your-org>.intake.datadoghq.com`) をプロビジョニングします。すべてのデータソース（Agent、ログシッパー、カスタムインスツルメンテーションなど）が、デフォルトの Datadog インテイク URL ではなくこのエンドポイントにテレメトリを送信するように構成します。これは一度限りの構成変更です。
 
 #### DNS フェイルオーバーのトリガー {#trigger-a-dns-failover}
 
-DNS フェイルオーバーを開始するには、[カスタマーサクセスマネージャー][14] または [Datadog サポート][15] を通じて Datadog にご連絡ください。Datadog はトラフィックをプライマリサイトから DDR サイトにリダイレクトするため、DNS レコードを更新します。フェイルオーバー開始時点からの目標復旧時間 (RTO) は 2 時間です。
+DNS フェイルオーバーを開始するには、[Customer Success Manager][14] または [Datadog Support][15] にご連絡ください。Datadog はトラフィックをプライマリサイトから DDR サイトにリダイレクトするため、DNS レコードを更新します。目標復旧時間 (RTO) は、フェイルオーバー開始時点から 2 時間です。
 
 <div class="alert alert-info">お客様が制御できる DDR オーガニゼーションから直接 DNS フェイルオーバーをトリガーする手法は、プレビュー版です。詳細については、<a href="mailto:success@datadoghq.com">カスタマーサクセスマネージャー</a>にお問い合わせください。</div>
 
@@ -209,7 +195,7 @@ DNS フェイルオーバーを開始するには、[カスタマーサクセス
 
 {{% collapse-content title="Agent ベースの環境での DDR フェイルオーバーの有効化とテスト" level="h4" %}}
 
-Agent のフェイルオーバーをトリガーするには、DDR オーガニゼーションの [Fleet Automation][13] にあるポリシーの 1 つをクリックし、[{{< ui >}}Enable{{< /ui >}}] (有効化) をクリックします。フェイルオーバーが発生すると、各ホストのステータスが更新されます。
+Agent のフェイルオーバーをトリガーするには、DDR オーガニゼーションの [Fleet Automation][13] にあるポリシーの 1 つをクリックし、{{< ui >}}Enable{{< /ui >}} をクリックします。フェイルオーバーが発生すると、各ホストのステータスが更新されます。
 
 {{< img src="/agent/guide/ddr/ddr-fa-policy-enable3.png" alt="DDR オーガニゼーションでのフェイルオーバーポリシーの有効化" style="width:80%;" >}}
 
@@ -298,7 +284,7 @@ DDR オーガニゼーションのランディングページから、クラウ�
 
 [1]: /ja/api/latest/organizations/#list-your-managed-organizations
 [2]: https://app.datadoghq.com/organization-settings/users
-[3]: /ja/account_management/saml/#overview
+[3]: /ja/account_management/saml/
 [4]: /ja/account_management/saml/#just-in-time-jit-provisioning
 [5]: /ja/integrations/amazon-web-services/
 [6]: /ja/integrations/azure/

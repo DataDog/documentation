@@ -1,6 +1,9 @@
 ---
 description: CloudFormation を使用して、Amazon Web Services アカウントを Datadog と統合します。IAM ロールを設定し、サービスインテグレーションを有効にし、ログ転送を構成します。
 further_reading:
+- link: https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/
+  tag: Architecture Center
+  text: 100以上のAWSアカウントをDatadogに統合するためのガイド
 - link: https://www.datadoghq.com/blog/aws-monitoring/
   tag: ブログ
   text: AWS を監視するための重要なメトリクス
@@ -28,17 +31,20 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/
   tag: ブログ
   text: Datadog で Graviton3 搭載の EC2 インスタンスを監視する
+- link: https://learn.datadoghq.com/courses/getting-started-with-the-datadog-aws-integration
+  tag: 学習センター
+  text: Datadog AWSインテグレーションの開始方法
 title: AWS の概要
 ---
 ## 概要 {#overview}
 
 このガイドでは、Datadog の CloudFormation テンプレートを使用して、Amazon Web Services (AWS) アカウントを Datadog と統合する手順を説明します。セットアップが完了したら、個々の AWS サービスインテグレーションを有効にし、より深い可視性を得るために EC2 インスタンスに Datadog Agent をインストールして、ログ転送を構成できます。
 
-## 前提条件 {#prerequisites}
+## 前提条件{#prerequisites}
 
 始める前に、[AWS][7] アカウントがあることを確認してください。CloudFormation テンプレートで IAM ロールと関連するポリシーを作成し、Datadog の AWS アカウントがデータの収集やプッシュのために AWS アカウントに API コールを行えるようにします。AWS ユーザーは、テンプレートを実行するために以下の IAM 権限を持っている必要があります。
 
-{{% collapse-content title="必要な IAM 権限" level="h4" expanded=false id="iam-permissions" %}}
+{{% collapse-content title="必要な IAM 権限" level="h3" expanded=false id="iam-permissions" %}}
 - cloudformation:CreateStack
 - cloudformation:CreateUploadBucket
 - cloudformation:DeleteStack
@@ -137,6 +143,23 @@ Datadog は、インテグレーションが有効化される前の履歴メト
 利用可能なサブインテグレーションの完全なリストについては、[インテグレーションページ][13]を参照してください。これらのインテグレーションの多くは、Datadog が AWS アカウントからのデータを認識したときにデフォルトでインストールされます。
 
 [AWS インテグレーションページ][8]の {{< ui >}}Metric Collection{{< /ui >}} タブを使用して、Datadog インテグレーションがメトリクスを収集するサービスを構成します。
+
+### メトリクス名でメトリクスをフィルタリングします {#filter-metrics-by-metric-name}
+
+[AWS integration page][8]の{{< ui >}}Metric Collection{{< /ui >}}タブを使用して、名前空間ごとにCloudWatchメトリクスをフィルタリングしてください。CloudWatchメトリクス収集テーブルの名前空間を展開し、**含める**または**除外**フィルターを選択してください。
+
+- **含める**: その名前空間に対して構成されたパターンに一致するDatadogメトリクス名のみを収集します。
+- **除外**: その名前空間に対して構成されたパターンに一致するものを除き、すべてのDatadogメトリクス名を収集します。
+
+各名前空間で一度に使用できるフィルターモードは1つだけです。フィルターパターンは、小文字、数字、`.`、`_`、および`*`をサポートしています。例えば、`aws.ec2.network_*`はEC2ネットワークメトリクスに一致します。変更を保存する前に、各パターンに一致するメトリクスの数がテーブルでプレビュー表示されます。
+
+メトリクス名フィルターは名前空間ごとに適用され、名前空間のメトリクス収集が有効になった後に評価されます。
+
+<div class="alert alert-info">
+メトリクス名フィルターでは削除できません <code>aws.ec2.cpuutilization</code> または <code>aws.lambda.invocations</code>。Datadogは、これらの必須メトリクスを常に収集します。
+</div>
+
+メトリクス名フィルターをプログラムで管理するには、[Configure AWS metric name filters with the API][61]を参照してください。
 
 ### リージョンを追加する {#add-regions}
 
@@ -293,3 +316,4 @@ Datadog で AWS Lambda 関数を監視するには、[Serverless][42] を参照�
 [58]: /ja/integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /ja/integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[61]: /ja/integrations/guide/aws-metric-name-filters/

@@ -212,7 +212,7 @@ Dans le menu déroulant {{< ui >}}If data is missing to evaluate{{< /ui >}}, sé
 ### Configuration du modèle {#model-configuration}
 
 {{< callout url="#" btn_hidden="true" header="Preview" >}}
-Les paramètres de configuration du modèle suivants sont en Preview. Contactez votre représentant Datadog pour les activer pour votre organisation.
+Les paramètres de configuration du modèle suivants sont en avant-première. Contactez votre représentant Datadog pour les activer pour votre organisation.
 {{< /callout >}}
 
 Pour les monitors utilisant la méthode de détection {{< ui >}}Anomalies{{< /ui >}}, développez {{< ui >}}Model configuration{{< /ui >}} pour affiner le comportement du modèle :
@@ -222,6 +222,7 @@ Pour les monitors utilisant la méthode de détection {{< ui >}}Anomalies{{< /ui
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | Le nombre d'évaluations ayant échoué consécutivement avant que le monitor n'envoie une alerte. Configurez ce paramètre pour supprimer les pics isolés. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Limite la précision avec laquelle le modèle suit vos données sur la borne supérieure. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Limite la précision avec laquelle le modèle suit vos données sur la borne inférieure. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Contrôle la largeur des limites attendues. Déplacez le curseur vers {{< ui >}}Fewer alerts{{< /ui >}} pour des limites plus larges, ou vers {{< ui >}}More alerts{{< /ui >}} pour des limites plus étroites. Les tailles minimales des limites configurées s'appliquent toujours. |
 
 ### Planning du monitor {#monitor-schedule}
 
