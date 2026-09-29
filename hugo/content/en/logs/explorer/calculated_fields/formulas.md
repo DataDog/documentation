@@ -335,7 +335,7 @@ Regex functions match or transform a value using a regular expression (regex). P
 
 <h4>regexp_replace(<i>str</i> input, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
 
-Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group. 
+Returns `input` with matched text replaced. Use `$1` through `$9` in `replacement` to insert a capture group's match, or `${name}` for a named group.
 
 | Argument | Meaning |
 |---|---|
@@ -351,7 +351,7 @@ Returns `input` with matched text replaced. Use `$1` through `$9` in `replacemen
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
 
-<div class="alert alert-tip">Formula arguments are double-quoted string literals, so a literal backslash must be written as two backslashes. For example, to match to the digit shorthand class, write "\\d" in the pattern. The same rule applies to the replacement string. To cancel $'s meaning as a group reference and insert a literal dollar sign, write "\\$".</div>
+<div class="alert alert-tip">Formula arguments are double-quoted string literals, so a literal backslash must be written as two backslashes. For example, to match the digit shorthand class, write <code>"\\d"</code> in the pattern. The same rule applies to the replacement string: to insert a literal dollar sign rather than a group reference, write <code>"\\$"</code>.</div>
 
 {{% /collapse-content %}}
 

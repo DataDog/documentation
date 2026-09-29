@@ -19,7 +19,7 @@ To create an extraction calculated field, see [Create a calculated field][1].
 
 ## Tap to Parse
 
-Use Tap to Parse to generate an extraction rule from your log data automatically. Datadog analyzes your log message and generates a Grok rule or a regex pattern.
+Calculated Fields Extractions lets you apply parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with [Tap to Parse](#tap-to-parse), or manually define your own Grok or regex patterns to match your specific needs. You can write an extraction pattern either as a [Grok expression](#grok) or as a [regular expression (regex)](#regex) with named capture groups.
 
 {{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of Tap to Parse in Datadog Calculated Fields" style="width:100%;" >}}
 
@@ -38,7 +38,7 @@ Review and modify the generated rule as needed. You can edit it manually or clic
 
 <div class="alert alert-tip">Use the thumbs up or thumbs down buttons to provide inline feedback and help improve the feature.</div>
 
-## Pattern Types
+## Pattern types
 
 Write an extraction pattern as Grok or as a regex.
 
