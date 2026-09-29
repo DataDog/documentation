@@ -17,17 +17,45 @@ further_reading:
 AI Impact is available to all Datadog customers in Preview.
 {{< /callout >}}
 
-[AI Impact][1] classifies each pull request as AI-assisted or non-AI based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit. Sources include co-author signatures, configured integrations, pull request labels, and data you send yourself.
+[AI Impact][1] classifies each pull request as AI-assisted or non-AI based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit. 
 
-Configure your AI coding tools at [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}AI Impact{{< /ui >}}][2]. Datadog points you to the recommended source that gives you the most accurate classification for each tool.
+Configure your AI coding tools and sources at [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}AI Impact{{< /ui >}}][2]. Datadog points you to the recommended source for the most accurate classification for each tool.
 
 ## Prerequisites
 
-AI Impact requires setting up [DORA Metrics][3] with deployment, commit, and pull request data.
+- AI Impact requires setting up [DORA Metrics][3] with deployment, commit, and pull request data.
 
-No AI-specific configuration is required to see initial data. Datadog detects some AI activity from co-author patterns as soon as DORA Metrics is collecting pull requests.
+- No AI-specific configuration is required to see initial data. For more complete measurement, configure your AI coding tools and sources as described below.
 
-## Detect coding assistants
+## How AI detection works
+
+Datadog classifies AI activity from the following types of AI tools:
+
+| AI tools | How detection works |
+|---|---|
+| [Coding assistants](#set-up-coding-assistants) | Detected by co-author patterns, configured integrations, pull request labels, or other data that indicate contributions from an AI tool. AI attribution can be either [direct or inferred](#ai-attribution-modes-for-coding-assistants), depending on the tool's source. |
+| [Review agents](#set-up-review-agents) | Detected using mapping rules for pull request comments and GitHub reactions. A review agent is attributed to a pull request when a rule matches a review author to a named agent. |
+| [Autonomous agents](#set-up-autonomous-agents) | Detected using mapping rules for author logins, author emails, or commit trailers. An autonomous agent is attributed to a pull request when it creates the first commit in the PR. |
+
+### AI attribution modes for coding assistants
+
+AI Impact classifies each pull request as AI-assisted or non-AI, and every metric is built on that classification. A PR is AI-assisted when at least one of its commits is AI-assisted.
+
+Two attribution modes are available, depending on the signal your tools provide: **direct attribution** and **inferred from user activity**.
+
+| | Direct attribution | Inferred from user activity |
+|---|---|---|
+| A commit is AI-assisted when | The tool reports AI contribution to that specific commit, for example, Cursor integration reporting AI-generated lines | The commit author created lines of code with the AI tool on the day the commit was created |
+| Evidence is tied to | The commit | The author and the calendar day |
+| What the metrics tell you | How AI-assisted code performs compared to code written without AI, and how users of one tool compare to users of another | How developers working with AI perform against those working without it, and how users of one tool compare to users of another |
+
+Direct attribution is more precise, because the signal is attached to the change itself. Inferred attribution covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
+
+By default, Datadog selects the most precise attribution mode that all [integrated tools](#supported-ai-coding-assistants-and-sources) have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
+
+To select which attribution mode your metrics use in the [AI Impact dashboard][1], set the {{< ui >}}Default AI attribution UI filter{{< /ui >}} in AI Impact settings. The setting affects only how data is displayed in the AI Impact UI, not what Datadog ingests. Both modes continue to collect data regardless of which mode you select.
+
+## Set up coding assistants
 
 [{{< ui >}}AI Impact Settings{{< /ui >}}][2] show which coding assistants and sources Datadog detects. Some coding assistants are detected automatically, when they add themselves as a co-author to the commits they generate.
 
@@ -100,25 +128,11 @@ Some coding assistants add themselves as a co-author to the commits they generat
 Co-author detection can undercount AI activity, as not all coding assistants add themselves as co-authors, and a rebase or squash can strip the co-author signature. To measure a coding assistant more fully, configure another source for it.
 {{% /collapse-content %}}
 
-
-### How AI detection works
-
-#### Set the AI attribution mode for the UI
-
-The {{< ui >}}Default AI attribution UI filter{{< /ui >}} setting controls which attribution mode your metrics use in the [AI Impact dashboard][1]: direct attribution or inferred from user activity. The setting applies to your entire organization and affects only how data is displayed in the AI Impact UI, not what Datadog ingests. Both modes continue to collect data regardless of which mode you select.
-
-To keep metrics comparable, Datadog recommends the mode that matches the level of detail that _all_ your sources report:
-- Select {{< ui >}}Direct attribution{{< /ui >}} when _every_ coding assistant you track provides direct attribution. 
-- Select {{< ui >}}Inference from user activity{{< /ui >}} if direct attribution is not available with some of the assistants you track.
-
-For more details on each mode and the trade-offs between them, see the [AI attribution][9] section.
-
-
-## Detect review agents
+## Set up review agents
 
 Review agents are detected from pull request comments and GitHub reactions. Define mapping rules to match review comment authors to named agents.
 
-## Detect autonomous agents
+## Set up autonomous agents
 
 Autonomous agents open pull requests on their own rather than assisting a developer in an editor. Datadog detects most autonomous agents automatically from known agent patterns. You can also define mapping rules to identify agents that Datadog does not automatically detect.
 
