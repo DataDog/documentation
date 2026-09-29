@@ -331,13 +331,13 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For additional configuration options, reference the [example config][3], or use the following:
+    For additional configuration options, see the [example config][3], or use the following:
 
     ```yaml
     network_path:
       connections_monitoring:
         ## @param enabled - boolean - optional - default: false
-        ## Enable network path collection
+        ## Enable network path collection for CNM connections. Required for dynamic tests.
         #
         enabled: true
       collector:
@@ -393,6 +393,7 @@ Agent `v7.79+` is required.
    ```yaml
    network_path:
      connections_monitoring:
+       ## Enable network path collection for CNM connections. Required for dynamic tests.
        enabled: true
      collector:
        ## @param workers - integer - optional - default: 4
@@ -453,13 +454,13 @@ Agent `v7.73+` is required.
        # workers: <NUMBER OF WORKERS> # default 4
    ```
 
-   For additional configuration options, reference the [example config][3], or use the following:
+   For additional configuration options, see the [example config][3], or use the following:
 
    ```yaml
    network_path:
      connections_monitoring:
        ## @param enabled - boolean - optional - default: false
-       ## Enable network path collection
+       ## Enable network path collection for CNM connections. Required for dynamic tests.
        #
        enabled: true
      collector:
@@ -516,6 +517,7 @@ datadog:
   traceroute:
     enabled: true
 
+  ## Enable Cloud Network Monitoring, which is required for dynamic tests.
   networkMonitoring:
     enabled: true
 
