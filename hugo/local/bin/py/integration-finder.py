@@ -21,7 +21,7 @@ integrations_repos = {
     'integrations-extras':        {'branch': 'master', 'github': True},
     'integrations-internal-core': {'branch': 'main',   'github': True, 'org': 'ddoghq'},
     'marketplace':                {'branch': 'master', 'github': True},
-    'publishing-platform':        {'branch': 'main',   'github': False},
+    'publishing-platform':        {'branch': 'main',   'github': False, 'org': 'ddoghq'},
 }
 
 # Check if the repos are present locally. If not, clone them. If so, update them
