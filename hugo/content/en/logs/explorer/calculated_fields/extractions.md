@@ -55,7 +55,7 @@ Extraction fields use Grok patterns to identify and capture values from a log at
 
 You can chain multiple patterns together to parse complex log messages.
 
-<div class="alert alert-warning">Grok parsing features available at <em>query-time</em> (in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a>) support a limited subset of matchers (<strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong>) and filters (<strong>number</strong> and <strong>integer</strong>). For long-term parsing needs, define a log pipeline.</div>
+<div class="alert alert-warning">Query-time Grok parsing in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a> supports a limited set of features. It supports the <strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong> matchers, and the <strong>number</strong> and <strong>integer</strong> filters. For long-term parsing needs, define a log pipeline.</div>
 
 Query-time Grok parsing in the Log Explorer supports a limited subset of matchers and filters. Each matcher or filter is used in a Grok pattern with the format:
 
@@ -115,7 +115,7 @@ Extracted values are always strings. Unlike a Grok rule such as `%{integer:statu
 | Alternation | `error\|timeout` | Either alternative |
 | Groups | `(error\|timeout)`, `(?:error\|timeout)` | Groups part of a pattern. `(?:…)` groups without capturing |
 | Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
-| Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition: zero or more, one or more, optional, or a bounded range. Matches as much as possible |
+| Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition. `*` matches zero or more, `+` matches at least one, `?` makes the item optional, and `{m,n}` sets a range. Matches as much as possible |
 | Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
 | Anchors | `^ERROR`, `timeout$` | By default, the start or the end of the whole value |
 | Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
