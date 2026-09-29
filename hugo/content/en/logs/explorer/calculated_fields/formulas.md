@@ -320,9 +320,13 @@ Checks if an attribute or expression is null.
 
 ### Regex
 
-Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1], such as literals, character classes, and quantifiers.
+Regex functions match or transform a value using a regular expression (regex). Patterns support the same regex constructs as [regex extraction][1], such as literals, character classes, and quantifiers. The same [pattern performance][2] guidance applies. Unlike extraction, capture groups in formula patterns do not need a name.
+
+<div class="alert alert-tip">Formula arguments are double-quoted string literals, so a literal backslash must be written as two backslashes. For example, to match the digit shorthand class, write <code>"\\d"</code> in the pattern. The same rule applies to the replacement string: to insert a literal dollar sign rather than a group reference, write <code>"\\$"</code>.</div>
 
 <h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
+
+Returns `true` when the pattern matches anywhere in the value, and `false` otherwise.
 
 {{% collapse-content title="Example" level="h5" expanded=false %}}
 
@@ -351,8 +355,6 @@ Returns `input` with matched text replaced. Use `$1` through `$9` in `replacemen
 |----------|-------------|---------|
 | A log event has the following attribute:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
 
-<div class="alert alert-tip">Formula arguments are double-quoted string literals, so a literal backslash must be written as two backslashes. For example, to match the digit shorthand class, write <code>"\\d"</code> in the pattern. The same rule applies to the replacement string: to insert a literal dollar sign rather than a group reference, write <code>"\\$"</code>.</div>
-
 {{% /collapse-content %}}
 
 
@@ -361,3 +363,4 @@ Returns `input` with matched text replaced. Use `$1` through `$9` in `replacemen
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/calculated_fields/extractions/#regex
+[2]: /logs/explorer/calculated_fields/extractions/#pattern-performance
