@@ -30,17 +30,31 @@ byoc--<CLUSTER_NAME>--<INDEX_NAME>
 
 ## Search across BYOC Logs clusters
 
-Use Log Explorer or the public Logs API to search across multiple BYOC Logs clusters with a single query. Results from the selected clusters are combined.
+Use Log Explorer, dashboards, log monitors, or the public Logs API to search across multiple BYOC Logs clusters with a single query. Results from the selected clusters are combined.
 
 ### Use Log Explorer
 
-In the [Log Explorer][1] search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
+In [Log Explorer][1], select the BYOC clusters to search from the left facet panel under {{< ui >}}BYOC INDEXES{{< /ui >}}, or specify them in the search bar.
+
+In the search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
 
 ```text
 index:(byoc--cluster-1 OR byoc--cluster-2)
 ```
 
 Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
+
+Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters. Open a log to view its details.
+
+To search a specific index within a cluster, use its qualified name. For example, search the `application` index in `cluster-1`:
+
+```text
+index:byoc--cluster-1--application
+```
+
+### Use dashboards and log monitors
+
+Use cross-cluster queries in dashboards to visualize logs across multiple BYOC Logs clusters, such as tracking a service's errors across regions. Use them in log monitors to alert on conditions spanning multiple clusters.
 
 ### Use the Logs API
 
