@@ -41,7 +41,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 
 Validation runs against your production environment.
 
-## What Bits Release looks at
+### What Bits Release looks at
 
 Bits Release does not require a dedicated data source. It reads the Datadog products you already have enabled and adapts to what is available for each service. In practice, **logs and APM traces carry most validations**, with the other sources adding coverage depending on the change.
 
@@ -70,6 +70,19 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 
 **A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
 
+## Preview scope and fit
+
+Bits Release works by comparing a service's production behavior before and after your change reaches production. Teams whose delivery model matches that comparison get the clearest verdicts during the preview. You are a strong fit if most of the following describe your services:
+
+- **You deploy straight to production.** Your changes go live for all traffic at once, rather than through a canary or a progressive rollout. A rollout that reaches a fraction of traffic dilutes the before-and-after comparison, because the service is serving both versions at the same time.
+- **Few of your changes are gated behind feature flags.** Bits Release validates a change when it deploys, not when a flag turns it on, so code that ships switched off produces little signal.
+- **Your services are backend services or web frontends.** Mobile applications, SDKs, and libraries are not supported.
+- **You want validation after deploy, not a gate before merge.** Bits Release reports on what production did with your change. It does not block a merge or a release.
+
+A setup that differs on one of these points still works, with weaker verdicts on the changes it affects. If your delivery model differs on most of them, the preview is likely to produce more inconclusive results than useful ones.
+
+Two further constraints apply during the preview, whatever your setup: validation runs against production only, so staging and pre-production environments are not supported, and each pull request is validated on its own, so related pull requests are not grouped into one validation. Only repositories that Datadog has onboarded for you are analyzed.
+
 ## Prerequisites
 
 Bits Release needs to connect a merged pull request to a running service.
@@ -89,13 +102,7 @@ Bits Release needs to connect a merged pull request to a running service.
 | [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
 | An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
 
-## Where results appear
-
-- **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
-- **Slack**: The pull request author is notified when a verdict is ready.
-- **Bits Release in Datadog**: The [Bits Release page][7] holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it through this link or the link in your pull request comment. It is not in the Datadog side navigation yet.
-
-## Permissions
+### Permissions
 
 Access to Bits Release is controlled by two permissions:
 
@@ -106,31 +113,15 @@ Access to Bits Release is controlled by two permissions:
 
 Both are granted to the Datadog Standard and Datadog Studio Admin roles by default. If your organization uses custom roles, a Datadog Admin adds the permissions to those roles in [**Organization Settings > Roles**][8].
 
+## Where results appear
+
+- **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
+- **Slack**: The pull request author is notified when a verdict is ready.
+- **Bits Release in Datadog**: The [Bits Release page][7] holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it through this link or the link in your pull request comment. It is not in the Datadog side navigation yet.
+
 ## Billing
 
 Bits Release is free during the private preview. It does not consume [AI Credits][10], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
-
-## Ideal candidate setup for the preview
-
-Bits Release works by comparing a service's production behavior before and after your change reaches production. Teams whose delivery model matches that comparison get the clearest verdicts during the preview. You are a strong fit if most of the following describe your services:
-
-- **You deploy straight to production.** Your changes go live for all traffic at once, rather than through a canary or a progressive rollout. A rollout that reaches a fraction of traffic dilutes the before-and-after comparison, because the service is serving both versions at the same time.
-- **Few of your changes are gated behind feature flags.** Bits Release validates a change when it deploys, not when a flag turns it on, so code that ships switched off produces little signal.
-- **Your services are backend services or web frontends.** These are the surfaces Bits Release validates today.
-- **You want validation after deploy, not a gate before merge.** Bits Release reports on what production did with your change. It does not block a merge or a release.
-
-A setup that differs on one of these points still works, with weaker verdicts on the changes it affects. If your delivery model differs on most of them, the preview is likely to produce more inconclusive results than useful ones.
-
-## Limitations
-
-During private preview:
-
-- Validation runs against production only. Staging and pre-production environments are not supported.
-- Validation covers backend services and web frontends. Mobile applications, SDKs, and libraries are not supported.
-- Only repositories explicitly onboarded by Datadog are analyzed.
-- Each pull request is validated on its own. Related pull requests are not grouped into one validation.
-- Changes gated behind a feature flag are validated on deployment, not on flag activation, so a change that is still switched off reports little or no signal.
-- Progressive rollouts are compared before-and-after across the whole service, not scoped to the slice running the new version.
 
 ## Send feedback
 
