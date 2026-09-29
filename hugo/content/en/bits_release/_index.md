@@ -18,7 +18,9 @@ further_reading:
     text: "Link your services to source code with service mapping"
 ---
 
-<div class="alert alert-info">Bits Release is in private preview and available to selected design partners only. Contact your Datadog representative to request access.</div>
+{{< callout url="#" btn_hidden="true" header="false" >}}
+  Bits Release is in private preview and available to selected design partners only. Contact your Datadog representative to request access.
+{{< /callout >}}
 
 ## Overview
 
@@ -91,7 +93,7 @@ Bits Release needs to connect a merged pull request to a running service.
 
 - **Pull request comments**: Bits Release posts the validation plan after analysis, then a separate comment with the verdict after evaluation completes, so the verdict generates a fresh notification for the author.
 - **Slack**: The pull request author is notified when a verdict is ready.
-- **Bits Release in Datadog**: Go to [**Software Delivery > Bits Release**][7] for the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker.
+- **Bits Release in Datadog**: The [Bits Release page][7] holds the full report: the list of validations, the lifecycle timeline for each plan, the verdict and its reasoning, expected impacts with the evidence behind each one, and metric charts annotated with the deploy marker. During the preview, reach it through this link or the link in your pull request comment. It is not in the Datadog side navigation yet.
 
 ## Permissions
 
@@ -103,6 +105,21 @@ Access to Bits Release is controlled by two permissions:
 | `release_agent_feedback_write` | Submit feedback on a verdict. |
 
 Both are granted to the Datadog Standard and Datadog Studio Admin roles by default. If your organization uses custom roles, a Datadog Admin adds the permissions to those roles in [**Organization Settings > Roles**][8].
+
+## Billing
+
+Bits Release is free during the private preview. It does not consume [AI Credits][10], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
+
+## Ideal candidate setup for the preview
+
+Bits Release works by comparing a service's production behavior before and after your change reaches production. Teams whose delivery model matches that comparison get the clearest verdicts during the preview. You are a strong fit if most of the following describe your services:
+
+- **You deploy straight to production.** Your changes go live for all traffic at once, rather than through a canary or a progressive rollout. A rollout that reaches a fraction of traffic dilutes the before-and-after comparison, because the service is serving both versions at the same time.
+- **Few of your changes are gated behind feature flags.** Bits Release validates a change when it deploys, not when a flag turns it on, so code that ships switched off produces little signal.
+- **Your services are backend services or web frontends.** These are the surfaces Bits Release validates today.
+- **You want validation after deploy, not a gate before merge.** Bits Release reports on what production did with your change. It does not block a merge or a release.
+
+A setup that differs on one of these points still works, with weaker verdicts on the changes it affects. If your delivery model differs on most of them, the preview is likely to produce more inconclusive results than useful ones.
 
 ## Limitations
 
@@ -132,3 +149,4 @@ Verdict quality depends on feedback, and the preview is the moment when it has t
 [7]: https://app.datadoghq.com/ci/bits-release
 [8]: https://app.datadoghq.com/organization-settings/roles
 [9]: /source_code/service-mapping/
+[10]: /account_management/billing/ai_credits/
