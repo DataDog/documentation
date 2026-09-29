@@ -99,7 +99,6 @@ To create the metric:
 
 Select the {{< ui >}}Agent Spans{{< /ui >}} tab, then select one of the following:
 
-- {{< ui >}}All agent span events{{< /ui >}}: Build a metric from completed Agent Observability traces. This option defaults to {{< ui >}}Count of events{{< /ui >}}.
 - {{< ui >}}Total estimated cost{{< /ui >}}: Measure the average estimated cost across completed Agent Observability traces.
 - {{< ui >}}Total tokens{{< /ui >}}: Measure the average total token usage across completed Agent Observability traces.
 
