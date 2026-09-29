@@ -83,22 +83,22 @@ A setup that differs on one of these points still works, with weaker verdicts on
 
 ## Prerequisites
 
-Bits Release needs to connect a merged pull request to a running service.
+Everything Bits Release does depends on one link: knowing which running service your merged code became, and when it got there. The requirements below establish that link.
 
 ### Required
 
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
-| [Source Code Integration][2] with read access to the repositories in scope | Reads the diff for the merged pull request. Write access to pull requests is strongly recommended. Without it, Bits Release loses the pull request comment as a notification surface. |
-| [APM][3] or [RUM][4] reporting a version tag on the services in scope | Detects deployments. Either the version tag contains the commit SHA, or the commit is attached to traces as `git.commit.sha`. Without this link, the validation closes without a verdict. |
-| A code-to-service mapping | Resolves which service a code change belongs to, from service metadata or from [service mapping][8]. |
+| [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
+| [Code-to-service mapping][8] for the services in scope | Tells Bits Release which service a repository's code runs as. A pull request is a change to a repository, while telemetry belongs to a service, and the two are not the same thing: one repository can produce several services, and a monorepo produces many. Without this mapping, Bits Release cannot tell which service's behavior to examine. |
+| A version identifying the deployed code | Tells Bits Release when your change reaches production, which is when validation starts. Your services report a version with their [APM][3] or [RUM][4] telemetry, and that version has to be traceable back to the commit it was built from. |
 
 ### Recommended
 
 | Requirement | What it adds |
 | ----------- | ------------ |
-| [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
-| An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
+| [Slack integration][5] | Notifies the pull request author directly when a verdict is ready, instead of relying on them seeing the pull request comment. |
+| An existing [synthetic test][6] on the same domain | Lets Bits Release validate a change by actively calling your application rather than waiting for organic traffic. It reuses the entry point and sign-in method your existing test already establishes. |
 
 ## Where results appear
 
