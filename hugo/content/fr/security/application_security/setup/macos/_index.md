@@ -9,25 +9,19 @@ further_reading:
   text: Suivi de l'activité des utilisateurs
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentation
-  text: Règles App and API Protection prêtes à l'emploi
+  text: Règles de protection des applications et des API prêtes à l'emploi
 - link: /security/application_security/troubleshooting
   tag: Documentation
-  text: Dépannage d'App and API Protection
+  text: Dépannage de la protection des applications et des API
 - link: /security/application_security/how-it-works/
   tag: Documentation
-  text: Fonctionnement d'App and API Protection dans Datadog
+  text: Le fonctionnement de App and API Protection dans Datadog
 title: Configurer App and API Protection sur macOS
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection est en préversion sur le site Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
-Apprenez à configurer App and API Protection (AAP) sur vos services macOS en sélectionnant le langage de programmation du service.
+Découvrez comment configurer App and API Protection (AAP) sur vos services macOS en sélectionnant le langage de programmation du service.
 
 <div class="alert alert-info">
-  <p class="fs-bold m-0">Votre environnement est-il manquant ?</p>
+  <p class="fs-bold m-0">Votre environnement est-il manquant ?</p>
   <span>Envoyez-nous une demande pour votre environnement manquant <a href="https://forms.gle/nMGq2Hhe7Z4sCKdy6">ici</a>.</span>
 </div>
 

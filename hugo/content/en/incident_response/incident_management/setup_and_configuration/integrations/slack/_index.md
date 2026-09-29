@@ -126,6 +126,8 @@ Under the hood, this feature is a built-in, hidden [incident notification rule][
 
 You can view the full list of available Slack commands at any time by typing `/datadog` (or `/dd`) in Slack to open the command modal to browse and execute any Datadog actions, or `/dd help` to view those options as a list instead. To open the action tray for common incident management actions, type `/dd shortcuts`.
 
+Across the following commands, you can use `inc` as shorthand for `incident`.
+
 ### Global commands (run anywhere)
 
 | Command | Description |
@@ -147,8 +149,6 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
 | `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
-| `/datadog task` | Create an incident task. |
-| `/datadog task list` | List existing incident tasks. |
 | `/datadog followup` | Create a follow-up for the incident. |
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 | `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
@@ -164,8 +164,6 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
 | `/datadog incident responders` | Manage the incident's response team (add responders and assign response roles). |
-| `/datadog task` | Create an incident task. |
-| `/datadog task list` | List existing incident tasks. |
 | `/datadog followup` | Create a follow-up for the incident. |
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 {{< /site-region >}}

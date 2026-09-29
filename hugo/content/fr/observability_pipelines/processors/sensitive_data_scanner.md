@@ -12,6 +12,9 @@ further_reading:
   tag: Blog
   text: Acheminer les données OTel des applications IA vers ClickHouse et Datadog
     à l'aide d'Observability Pipelines
+- link: https://www.datadoghq.com/architecture/observability-pipelines-sensitive-data-scanner-optimization/
+  tag: Architecture Center
+  text: Optimisation du Sensitive Data Scanner pour les Observability Pipelines
 products:
 - icon: logs
   name: Logs
