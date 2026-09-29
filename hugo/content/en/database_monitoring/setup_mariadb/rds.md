@@ -211,6 +211,7 @@ For information on configuring IAM authentication on your RDS instance, see [Con
 [2]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
 [3]: /database_monitoring/guide/managed_authentication/?tab=mysql#configure-iam-authentication
 [4]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[5]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RDS_Fea_Regions_DB-eng.Feature.IamDatabaseAuthentication.html
 {{% /tab %}}
 {{% tab "Docker" %}}
 
