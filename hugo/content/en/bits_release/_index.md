@@ -82,15 +82,14 @@ A setup that differs on one of these points still works, with weaker verdicts on
 
 ## Prerequisites
 
-Everything Bits Release does depends on one link: knowing which running service your merged code became, and when it got there. The requirements below establish that link.
+Bits Release needs to read the code you merged, and to recognize the moment that code is live in production.
 
 ### Required
 
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
 | [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
-| [Code-to-service mapping][8] for the services in scope | Tells Bits Release which service a repository's code runs as. A pull request is a change to a repository, while telemetry belongs to a service, and the two are not the same thing: one repository can produce several services, and a monorepo produces many. Without this mapping, Bits Release cannot tell which service's behavior to examine. |
-| A version identifying the deployed code | Tells Bits Release when your change reaches production, which is when validation starts. Your services report a version with their [APM][3] or [RUM][4] telemetry, and that version has to be traceable back to the commit it was built from. |
+| Services tagged with the deployed commit SHA | Tells Bits Release that your change reached production, which is when validation starts. Each deployment needs to report the commit it was built from, either as a `git.commit.sha` tag on the service's [APM][3] or [RUM][4] telemetry, or as the SHA carried inside the service's `version` tag. See [service mapping][8] to set this up. |
 
 ### Recommended
 
