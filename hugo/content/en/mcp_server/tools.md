@@ -2613,14 +2613,15 @@ Creates a draft IaC custom rule. Rules are always created unpublished; publish t
 ### `update_datadog_security_iac_custom_rule`
 *Toolset: **security***\
 *Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
-Creates a new revision of a draft IaC custom rule. Omitted fields keep their current values. Published rules can't be updated.
+Creates a new revision of an IaC custom rule, draft or published. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
 
-- Change the severity of draft rule "custom-terraform-aws-open-bucket" to high.
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
 
 ### `publish_datadog_security_iac_custom_rule`
 *Toolset: **security***\
 *Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
-Publishes a draft IaC custom rule so it becomes active for scans. This can't be undone with the update tool.
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
 
 - Publish IaC custom rule "custom-terraform-aws-open-bucket".
 
