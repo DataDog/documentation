@@ -20,7 +20,7 @@ Ingress is a critical component of your BYOC (Bring Your Own Cloud) Logs deploym
 
 <div class="alert alert-danger">Only the BYOC Logs gRPC API endpoints (paths starting with <code>/cloudprem</code>) perform mutual TLS authentication. Exposing any other endpoints through the public ingress introduces a security risk, as those endpoints would be accessible over the internet without authentication. Always restrict non-gRPC endpoints to the internal ingress. </div>
 
-The public ingress is essential for enabling the Datadog control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
+The public ingress is essential for enabling Datadog to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API through the following mechanisms:
 - Creates an internet-facing AWS Application Load Balancer (ALB) that accepts traffic from Datadog services
 - Implements TLS encryption with termination at the load balancer level
 - Uses HTTP/2 (gRPC) for communication between the ALB and BYOC Logs cluster
@@ -34,7 +34,7 @@ This setup ensures that only authenticated Datadog services can access the BYOC 
 
 ### IP Allowlisting
 
-The Datadog control plane and query services connect to BYOC Logs clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog [IP Ranges API][1], specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
+Datadog connects to BYOC Logs clusters using a set of fixed IP ranges, which can be retrieved for each Datadog site from the Datadog [IP Ranges API][1], specifically under the "webhooks" section. For example, to fetch the IP ranges for the datadoghq.eu site, you can run:
 ```
 curl -X GET "https://ip-ranges.datadoghq.eu/" \
       -H "Accept: application/json" |
