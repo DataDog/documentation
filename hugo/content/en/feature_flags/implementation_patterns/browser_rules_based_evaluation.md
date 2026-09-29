@@ -49,7 +49,7 @@ Feature Flags billing counts [Monthly Flag Configuration Requests (MFCR)][7], no
 
 Before fetching rules, enable client rules delivery for your organization. This setting is disabled by default.
 
-1. Open [**Feature Flags > Settings > Flag Delivery**][8].
+1. Open **Feature Flags** > **Settings** > [**Flag Delivery**][8].
 2. Enable **Allow local rule evaluation in client SDKs**.
 3. Click **Save**.
 
