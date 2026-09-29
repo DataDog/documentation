@@ -135,7 +135,7 @@ If fetching or parsing fails, the provider continues using the previous configur
 
 Instead of fetching rules in the browser, your application can deliver a serialized rules configuration. Create this string by calling `configurationToString(configuration)` on a rules configuration that you already fetched. Import this helper from `@datadog/openfeature-browser/rules-based`.
 
-Deliver the resulting string to the browser through your application, for example in a server-rendered bootstrap payload. Replace `<SERIALIZED_RULES_CONFIGURATION>` below with that string, and use this code instead of the `loadRulesConfiguration()` call in the initialization example:
+Deliver the resulting string to the browser through your application, for example, in a server-rendered bootstrap payload. Replace `<SERIALIZED_RULES_CONFIGURATION>` below with that string, and use this code instead of the `loadRulesConfiguration()` call in the initialization example:
 
 {{< code-block lang="javascript" >}}
 import { configurationFromString } from '@datadog/openfeature-browser/rules-based';
