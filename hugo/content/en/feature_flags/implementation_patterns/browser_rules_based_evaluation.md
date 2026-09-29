@@ -158,8 +158,8 @@ The provider performs evaluations without tracking by default. Add only the inte
 
 | Factory | Behavior |
 | --- | --- |
-| `createDatadogExposureLoggingHook(options)` | Deduplicates and batches eligible exposure events. |
-| `createDatadogEvaluationLoggingHook(options)` | Aggregates and sends flag evaluation telemetry. |
+| `createDatadogExposureLoggingHook(trackingOptions)` | Deduplicates and batches eligible exposure events. |
+| `createDatadogEvaluationLoggingHook(trackingOptions)` | Aggregates and sends flag evaluation telemetry. |
 | `createDatadogRumTrackingHook()` | Adds flag evaluations to an existing global `DD_RUM` instance. It does not initialize RUM or populate the evaluation context. |
 
 Use `composeDatadogTrackingHooks()` to initialize and shut down the selected integrations together. Register its hooks on the client from the initialization example before evaluations that need tracking:
