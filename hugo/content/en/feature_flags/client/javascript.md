@@ -279,7 +279,7 @@ await OpenFeature.setProviderAndWait(provider, context);
 
 Context matching includes any RUM user attributes added by the provider. Supply assignments computed for that effective context. Subsequent context changes still attempt to fetch assignments; initial data does not become a rules-based configuration.
 
-This option does **not** skip the initialization request. To initialize entirely from supplied configuration, use [application-managed configuration][4].
+This option does **not** skip the initialization request. To initialize entirely from supplied configuration, use [application-managed configuration](#advanced-application-managed-configuration).
 
 ### Set a timeout and retries for flag configuration requests
 
