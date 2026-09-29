@@ -19,7 +19,7 @@ def normalize(s):
 integrations_repos = {
     'integrations-core':          {'branch': 'master', 'github': True},
     'integrations-extras':        {'branch': 'master', 'github': True},
-    'integrations-internal-core': {'branch': 'main',   'github': True},
+    'integrations-internal-core': {'branch': 'main',   'github': True, 'org': 'ddoghq'},
     'marketplace':                {'branch': 'master', 'github': True},
     'publishing-platform':        {'branch': 'main',   'github': False},
 }
@@ -28,11 +28,20 @@ integrations_repos = {
 def update_repos(integrations_repos):
     for repo, cfg in integrations_repos.items():
         branch = cfg['branch']
+        org = cfg.get('org', 'DataDog')
         local_repo_path = os.path.join('..', '..', repo)
         if isdir(local_repo_path):
             try:
                 print(f'Updating {repo}')
                 local_repo = git.Repo(local_repo_path)
+                # Move the canonical upstream while preserving forks and custom remotes.
+                if org != 'DataDog':
+                    origin = local_repo.remotes.origin
+                    for prefix in ('git@github.com:', 'https://github.com/', 'ssh://git@github.com/'):
+                        for suffix in ('', '.git'):
+                            old_url = f'{prefix}DataDog/{repo}{suffix}'
+                            if origin.url == old_url:
+                                origin.set_url(f'{prefix}{org}/{repo}{suffix}', old_url=old_url)
                 # Check if working tree is clean
                 # If there are uncommitted changes, stash them before pulling updates
                 if local_repo.is_dirty():
@@ -49,7 +58,7 @@ def update_repos(integrations_repos):
                         'stash, or reset any changes and try again.\n')
         else:
             print(f'{repo} not found. Cloning to {local_repo_path}')
-            git.Repo.clone_from(url=f'git@github.com:DataDog/{repo}.git', to_path=local_repo_path)
+            git.Repo.clone_from(url=f'git@github.com:{org}/{repo}.git', to_path=local_repo_path)
 
 # Find the given integration in the integrations repos
 def find_integration(integrations_repos, integration_name):
@@ -58,6 +67,7 @@ def find_integration(integrations_repos, integration_name):
     for repo, cfg in integrations_repos.items():
         branch = cfg['branch']
         is_github = cfg['github']
+        org = cfg.get('org', 'DataDog')
         location = os.path.join('..', '..', repo)
         if not os.path.isdir(location):
             continue
@@ -77,7 +87,7 @@ def find_integration(integrations_repos, integration_name):
                 continue
             readme_path = os.path.join(location, dir_name, 'README.md')
             if is_github:
-                url = f'https://github.com/DataDog/{repo}/blob/{branch}/{dir_name}/README.md'
+                url = f'https://github.com/{org}/{repo}/blob/{branch}/{dir_name}/README.md'
                 found.append(f'{readme_path}\n- {url}')
             else:
                 found.append(f'{readme_path}\n- {integration_name} is published through the publishing platform')
