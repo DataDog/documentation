@@ -24,7 +24,7 @@ You can select a specific index to narrow your search, or select all indexes in 
 
 BYOC (Bring Your Own Cloud) Logs index names follow this format:
 
-```
+```text
 byoc--<CLUSTER_NAME>--<INDEX_NAME>
 ```
 
@@ -34,7 +34,7 @@ Use Log Explorer, dashboards, log monitors, or the public Logs API to search acr
 
 ### Use Log Explorer
 
-In [Log Explorer][1], select the BYOC clusters to search from the left facet panel under {{< ui >}}BYOC INDEXES{{< /ui >}}, or specify them in the search bar.
+In [Log Explorer][1], select BYOC clusters or indexes from the {{< ui >}}BYOC INDEXES{{< /ui >}} facet panel, or specify them in the search bar.
 
 In the search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
 
@@ -44,7 +44,7 @@ index:(byoc--cluster-1 OR byoc--cluster-2)
 
 Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
 
-Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters. Open a log to view its details.
+Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters.
 
 To search a specific index within a cluster, use its qualified name. For example, search the `application` index in `cluster-1`:
 
@@ -54,7 +54,10 @@ index:byoc--cluster-1--application
 
 ### Use dashboards and log monitors
 
-Use cross-cluster queries in dashboards to visualize logs across multiple BYOC Logs clusters, such as tracking a service's errors across regions. Use them in log monitors to alert on conditions spanning multiple clusters.
+Enter a cross-cluster query, such as `index:(byoc--cluster-1 OR byoc--cluster-2)`, in the log search query of a [dashboard widget][3] or [log monitor][4].
+
+- In dashboards, visualize logs across multiple BYOC Logs clusters, such as tracking a service's errors across regions.
+- In log monitors, alert on conditions that span multiple BYOC Logs clusters.
 
 ### Use the Logs API
 
@@ -74,10 +77,11 @@ Send a request to the [Search logs endpoint][2] (`POST /api/v2/logs/events/searc
 
 You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs is not supported with BYOC Logs.
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/logs
 [2]: /api/latest/logs/#search-logs
+[3]: /dashboards/widgets/
+[4]: /monitors/types/log/
