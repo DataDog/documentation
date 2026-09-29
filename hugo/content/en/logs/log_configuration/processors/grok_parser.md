@@ -34,8 +34,8 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
 1. Click {{< ui >}}Add Grok Parser{{< /ui >}} to open a new parser configuration.
 1. {{< ui >}}Log Samples{{< /ui >}}: Log samples are automatically pulled into the Log Samples section. You can also add more log samples (up to 10 total, 5000 characters each).
    **Note**: The sample logs are pulled from the five highest-volume log patterns matching your pipeline filter.
-1. {{< ui >}}Log Samples{{< /ui >}}: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
-1. {{< ui >}}Define parsing rules{{< /ui >}}: Click {{< ui >}}Tap to Parse{{< /ui >}} to generate rules that match your samples. Tap to Parse does not consume [AI Credits][4].
+1. {{< ui >}}Define parsing rules{{< /ui >}}: Click {{< ui >}}Tap to Parse{{< /ui >}} to generate rules that match your samples.
+   <div class="alert alert-info">Tap to Parse does not consume <a href="/account_management/billing/ai_credits/">AI Credits</a>.</div>
    {{< site-region region="gov,gov2" >}}
    <div class="alert alert-info">Tap to Parse is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
    {{< /site-region >}}
@@ -118,4 +118,3 @@ Use the [Datadog Log Pipeline API endpoint][3] with the following Grok parser JS
 [1]: /logs/log_configuration/parsing/?tab=matchers
 [2]: https://app.datadoghq.com/logs/pipelines
 [3]: /api/v1/logs-pipelines/
-[4]: /account_management/billing/ai_credits/
