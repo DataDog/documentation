@@ -48,7 +48,7 @@ As Bits Code works, the code channel shows:
 
 - A diff view of proposed code changes
 - Datadog graph widgets, when relevant to the task
-- A {{< ui >}}Create PR{{< /ui >}} button to open a pull or merge request from the changes, when you're ready
+- A {{< ui >}}Create PR{{< /ui >}} button to open a pull request from the changes, when you're ready (if [auto-push is not enabled](#how-auto-push-works-in-code-channels))
 
 After Bits Code has generated a code diff, you can comment on specific lines directly in the code channel.
 
@@ -58,18 +58,18 @@ The work in every code channel is also reflected in a [Bits Code session][2] in 
 
 Learn more about how to work in a code channel in the [Slack documentation][6].
 
-### Repository access for automatic pushes
+### How auto-push works in code channels
 
-When automatic pushes are enabled, Bits Code can push changes and create or update pull or merge requests. This includes CI fixes and responses to PR comments.
+When the [auto-push setting][7] is enabled, Bits Code can push changes and create or update pull requests at its discretion—that is, without you (or another human) clicking a button. When Bits Code creates or updates a pull request in this auto-push fashion, Bits itself is the author of the commits and pull request.
 
-The channel creator and everyone who has contributed to the session must have a source control account linked to Datadog with:
+For auto-push to take effect in a code channel, the channel creator and every user who has sent a message in the channel must have a source control account linked to Datadog with:
 
-- Write access to every repository with a PR in the session, and any repository receiving changes.
-- Read access to all other repositories attached to the session.
+- Write access to every repository with a pull request in the channel, and any repository receiving changes
+- Read access to all other repositories attached to the channel
 
-Members who only view the channel do not count as contributors. Slack channel access does not grant repository access.
+(These permissions are not verified for users who have joined the channel but not sent a message.)
 
-If anyone lacks this access, or Bits cannot verify it, Bits does not push automatically. A user with the required access can click {{< ui >}}Create PR{{< /ui >}} or {{< ui >}}Update PR{{< /ui >}}. These buttons check only that user's permissions across the session's repositories. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
+If any user who has sent a message in the code channel lacks the required repository permissions, or Bits cannot verify them, Bits does not push changes automatically. When this happens, a user with the required permissions can still click {{< ui >}}Create PR{{< /ui >}} or {{< ui >}}Update PR{{< /ui >}}. These buttons check only that single user's permissions across the code channel's attached repositories. In this scenario, the user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
 
 ## Limitations
 
@@ -85,3 +85,4 @@ The overall [Bits Code limitations][5] also apply to code channels.
 [4]: /bits_ai/bits_code/setup/
 [5]: /bits_ai/bits_code/#limitations
 [6]: https://slack.com/help/articles/54310833022355-Build-with-AI-as-a-team-using-Slack-Code
+[7]: /bits_ai/bits_code/setup/#enable-auto-push
