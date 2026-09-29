@@ -125,6 +125,7 @@ After you configure either source:
 1. (Optional) Under {{< ui >}}Additional settings{{< /ui >}}, mark the metric as certified, adjust its experiment settings, or configure its units.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
+[1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [14]: /llm_observability/instrument/
 [15]: /llm_observability/investigate/cost/
 [16]: /llm_observability/investigate/evaluations/
