@@ -291,8 +291,6 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 ## Version prompt configuration
 
-<div class="alert alert-info"><strong>Preview:</strong> Versioned prompt configuration is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
-
 Store settings alongside your prompt so you can update and roll back both as one version. Use configuration for:
 
 - **Model settings**, such as `model` and `temperature`.
