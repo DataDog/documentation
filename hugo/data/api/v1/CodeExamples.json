@@ -738,8 +738,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_2329487120",
+      "description": "Send deflate logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_1920474053",
       "description": "Send gzip logs returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_348923381",
+      "description": "Send gzip logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
     },
     {
       "group": "logs",

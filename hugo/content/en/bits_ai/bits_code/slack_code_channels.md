@@ -26,7 +26,7 @@ Learn more about code channels in the [Slack documentation][6].
 
 ## Create a code channel
 
-After [setting up Bits Code][4], create a code channel by mentioning `@Datadog` in Slack and describing a code change you'd like to make. If Bits Chat determines the request requires code changes, it hands the task off to Bits Code, which creates a code channel. Bits posts a link to the new code channel in the location where it was originally prompted.
+After [setting up Bits Code and enabling code channels][4], create a code channel by mentioning `@Datadog` in Slack and describing a code change you'd like to make. If Bits Chat determines the request requires code changes, it hands the task off to Bits Code, which creates a code channel. Bits posts a link to the new code channel in the location where it was originally prompted.
 
 {{< img src="bits_ai/dev_agent/slack_code_channels/code_channel_creation.png" alt="A Slack message mentioning @Datadog, followed by a card showing the resulting code channel that was created" style="width:100%;" >}}
 

@@ -175,6 +175,10 @@ Puede proporcionar los siguientes parámetros como variables de entorno (por eje
 : opcional - _entero o cadena_ - **predeterminado**: `false`
 <br />Solo es necesario si no está utilizando el Datadog Agent, en cuyo caso debe establecerse en `1` o `true`.
 
+`DD_LLMOBS_SAMPLE_RATE` o `dd.llmobs.sample.rate`
+: opcional - _flotante_ - **predeterminado**: `1.0`
+<br />La fracción de trazas retenidas por Agent Observability. Requiere `dd-trace-java` 1.66.0 o posterior. Consulte [Muestreo de trazas](#trace-sampling).
+
 `DD_API_KEY` o `dd.api.key`
 : opcional - _cadena_
 <br />Su clave de API de Datadog. Solo es necesario si no está utilizando el Datadog Agent.
@@ -318,7 +322,7 @@ Después de instalar el SDK y ejecutar su aplicación, debería esperar ver algu
 
 ## Muestreo de trazas {#trace-sampling}
 
-<div class="alert alert-info">El muestreo de trazas está disponible en el SDK de Python (<code>ddtrace</code> 4.12.0 o posterior) y en el SDK de Node.js (<code>dd-trace</code> 5.110.0 o posterior). El SDK de Java no admite el muestreo de trazas.</div>
+<div class="alert alert-info">El muestreo de trazas está disponible en el SDK de Python (<code>ddtrace</code> 4.12.0 o posterior), el SDK de Node.js (<code>dd-trace</code> 5.110.0 o posterior), y el SDK de Java (<code>dd-trace-java</code> 1.66.0 o posterior).</div>
 
 El muestreo de trazas establece la fracción de trazas que retiene Agent Observability. Debido a que la facturación de Agent Observability se basa en el volumen de tramos que envía, establecer una tasa de muestreo es una forma de controlar sus costos de Agent Observability. El SDK toma la decisión de muestreo en el tramo raíz y la aplica a todos los tramos secundarios de ese tramo raíz, incluidos los tramos creados en servicios downstream a través de [trazado distribuido](#distributed-tracing).
 
@@ -326,8 +330,8 @@ El muestreo no afecta sus [métricas de Agent Observability](/llm_observability/
 
 Configure la tasa de muestreo a través de cualquiera de estos dos mecanismos:
 
-- **Variable de entorno** (`DD_LLMOBS_SAMPLE_RATE`): se aplica tanto a la [configuración de línea de comandos](#command-line-setup) como a la [configuración en el código](#in-code-setup).
-- **Parámetro en el código** (`sample_rate` en Python, `sampleRate` en Node.js): se pasa a `LLMObs.enable()` en Python, o bajo `llmobs` en Node.js, cuando habilita el SDK con [configuración en el código](#in-code-setup). Cuando se establece, tiene prioridad sobre `DD_LLMOBS_SAMPLE_RATE`.
+- **Variable de entorno** (`DD_LLMOBS_SAMPLE_RATE`): se aplica tanto a la [configuración de línea de comandos](#command-line-setup) como a la [configuración en el código](#in-code-setup). En Java, la propiedad del sistema `dd.llmobs.sample.rate` establece el mismo valor.
+- **Parámetro en el código** (`sample_rate` en Python, `sampleRate` en Node.js): se pasa a `LLMObs.enable()` en Python, o bajo `llmobs` en Node.js, cuando habilita el SDK con [configuración en el código](#in-code-setup). Cuando se establece, tiene prioridad sobre `DD_LLMOBS_SAMPLE_RATE`. El SDK de Java no tiene un equivalente en el código fuente.
 
 La tasa de muestreo es un número de punto flotante entre `0.0` (no retener trazas) y `1.0` (retener todas las trazas). El valor predeterminado es `1.0`. Los valores fuera de rango se ignoran.
 
@@ -369,6 +373,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+Establezca la tasa de muestreo con la variable de entorno:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+O establezca la propiedad `dd.llmobs.sample.rate` del sistema equivalente:
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -417,7 +440,7 @@ Para rastrear un tramo, utilice `llmobs.wrap(options, function)` como envoltorio
 
 Los tipos de tramo son obligatorios y se especifican en el objeto `options` que se pasa a las funciones de rastreo `llmobs` (`trace`, `wrap` y `decorate`). Consulte la [documentación de Tipos de tramo][1] para obtener una lista de los tipos de tramo admitidos.
 
-**Nota:** Los spans con un tipo de span no válido no se envían a Agent Observability.
+**Nota:** Los tramos con un tipo de tramo no válido no se envían a Agent Observability.
 
 ### Captura automática de argumentos/salida/nombre de función {#automatic-function-argumentoutputname-capturing}
 
@@ -1308,11 +1331,11 @@ El método `LLMObs.annotate()` acepta los siguientes argumentos:
 
 `input_data`
 : opcional - _tipo serializable en JSON o lista de diccionarios_
-<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`, donde `"tool_calls"` son una lista opcional de diccionarios de llamadas a herramientas con las claves requeridas: `"name"`, `"arguments"`, y claves opcionales: `"tool_id"`, `"type"`, y `"tool_results"` son una lista opcional de diccionarios de resultados de herramientas con la clave requerida: `"result"`, y claves opcionales: `"name"`, `"tool_id"`, `"type"` para escenarios de llamada a funciones. `"audio_parts"` y `"image_parts"` son listas opcionales de diccionarios de medios para tramos multimodales, cada una con un `"mime_type"` requerido y exactamente uno de `"content"` (medios codificados en base64, incluidos en línea) o `"attachment_key"`. **Nota**: Los tramos de incrustación son un caso especial y requieren una cadena o un diccionario (o una lista de diccionarios) con este formato: `{"text": "..."}`.
+<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{"content": \"...\", \"role\": \"...\", \"tool_calls\": ..., \"tool_results\": ..., \"audio_parts\": ..., \"image_parts\": ...}`, donde `"tool_calls"` son una lista opcional de diccionarios de llamadas a herramientas con las claves requeridas: `"name"`, `"arguments"`, y claves opcionales: `"tool_id"`, `"type"`, y `"tool_results"` son una lista opcional de diccionarios de resultados de herramientas con la clave requerida: `"result"`, y claves opcionales: `"name"`, `"tool_id"`, `"type"` para escenarios de llamada a funciones. `"audio_parts"` y `"image_parts"` son listas opcionales de diccionarios de medios para tramos multimodales, cada uno con un `"mime_type"` requerido y `"content"` (medios codificados en base64, incluidos directamente). **Nota**: Los tramos de incrustación son un caso especial y requieren una cadena o un diccionario (o una lista de diccionarios) con este formato: `{"text": "..."}`.
 
 `output_data`
 : opcional - _tipo serializable en JSON o lista de diccionarios_
-<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, donde `"tool_calls"` son una lista opcional de diccionarios de llamadas a herramientas con las claves requeridas: `"name"`, `"arguments"`, y claves opcionales: `"tool_id"`, `"type"` para escenarios de llamada a funciones. `"audio_parts"` y `"image_parts"` son listas opcionales de diccionarios de medios para tramos multimodales, cada una con un `"mime_type"` requerido y exactamente uno de `"content"` (medios codificados en base64, incluidos en línea) o `"attachment_key"`. **Nota**: Los tramos de recuperación son un caso especial y requieren una cadena o un diccionario (o una lista de diccionarios) con este formato: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, donde `"tool_calls"` son una lista opcional de diccionarios de llamadas a herramientas con las claves requeridas: `"name"`, `"arguments"`, y claves opcionales: `"tool_id"`, `"type"` para escenarios de llamada a funciones. `"audio_parts"` y `"image_parts"` son listas opcionales de diccionarios de medios para tramos multimodales, cada uno con un `"mime_type"` requerido y `"content"` (medios codificados en base64, incluidos directamente). **Nota**: Los tramos de recuperación son un caso especial y requieren una cadena o un diccionario (o una lista de diccionarios) con este formato: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : opcional - _lista de diccionarios_
@@ -1436,11 +1459,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-Los mensajes anotados con `audio_parts` o `image_parts` se muestran como reproductores de audio e imágenes integrados en la vista de traza:
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Un tramo de LLM en la vista de traza de Agent Observability. El mensaje de entrada del USUARIO muestra un reproductor de audio en línea con la transcripción 'Hey, how are you?', y el mensaje de salida del ASISTENTE muestra un control de 'Click to play audio' con la transcripción 'Hey! Me va muy bien, gracias por preguntar. ¿Y usted?" style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Un tramo de LLM en la vista de traza de Agent Observability. El mensaje de entrada del USUARIO muestra el prompt 'What is in this image?' con una foto en línea de un cachorro negro, y el mensaje de salida del ASISTENTE lo describe como un cachorro de Labrador Retriever negro sobre una superficie de madera." style="width:100%;" >}}
+Los mensajes anotados con `audio_parts` o `image_parts` se muestran como reproductores de audio e imágenes integrados en la visualización de la traza. Para ver ejemplos renderizados, formatos admitidos, límites de tamaño e integraciones que completan estos campos automáticamente, consulte [Soporte multimodal](/llm_observability/instrument/multimodal/).
 
 {{% /tab %}}
 
@@ -1462,11 +1481,11 @@ El objeto `annotationOptions` puede contener lo siguiente:
 
 `inputData`
 : opcional - _tipo serializable en JSON o lista de objetos_
-<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` (para tramos de LLM). `audioParts` y `imageParts` son listas opcionales de objetos multimedia para tramos multimodales, cada una con un `mimeType` requerido y exactamente uno de `content` (medios codificados en base64, incluidos en línea) o `attachmentKey`. **Nota**: Los tramos de incrustación son un caso especial y requieren una cadena o un objeto (o una lista de objetos) con este formato: `{text: "..."}`.
+<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de diccionarios con este formato: `{role: \"...\", content: \"...\", audioParts: [...], imageParts: [...]}` (para tramos de LLM). `audioParts` y `imageParts` son listas opcionales de objetos multimedia para tramos multimodales, cada uno con un `mimeType` requerido y `content` (medios codificados en base64, incluidos directamente). **Nota**: Los tramos de incrustación son un caso especial y requieren una cadena o un objeto (o una lista de objetos) con este formato: `{text: "..."}`.
 
 `outputData`
 : opcional - _tipo serializable en JSON o lista de objetos_
-<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de objetos con este formato: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (para tramos de LLM). `audioParts` y `imageParts` son listas opcionales de objetos multimedia para tramos multimodales, cada una con un `mimeType` requerido y exactamente uno de `content` (medios codificados en base64, incluidos en línea) o `attachmentKey`. **Nota**: Los tramos de recuperación son un caso especial y requieren una cadena o un objeto (o una lista de objetos) con este formato: `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Ya sea un tipo serializable en JSON (para tramos que no son de LLM) o una lista de objetos con este formato: `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` (para tramos de LLM). `audioParts` y `imageParts` son listas opcionales de objetos multimedia para tramos multimodales, cada uno con un `mimeType` requerido y `content` (medios codificados en base64, incluidos directamente). **Nota**: Los tramos de recuperación son un caso especial y requieren una cadena o un objeto (o una lista de objetos) con este formato: `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : opcional - _objeto_
@@ -1577,13 +1596,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-Los mensajes anotados con `audioParts` o `imageParts` se muestran como reproductores de audio e imágenes integrados en la vista de traza:
+Los mensajes anotados con `audioParts` o `imageParts` se muestran como reproductores de audio e imágenes integrados en la visualización de la traza. Para ver ejemplos renderizados, formatos admitidos, límites de tamaño e integraciones que completan estos campos automáticamente, consulte [Soporte multimodal](/llm_observability/instrument/multimodal/).
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Un tramo de LLM en la vista de traza de Agent Observability. El mensaje de entrada del USUARIO muestra un reproductor de audio en línea con la transcripción 'Hey, how are you?', y el mensaje de salida del ASISTENTE muestra un control de 'Click to play audio' con la transcripción 'Hey! Me va muy bien, gracias por preguntar. ¿Y usted?" style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Un tramo de LLM en la vista de traza de Agent Observability. El mensaje de entrada del USUARIO muestra el prompt 'What is in this image?' con una foto en línea de un cachorro negro, y el mensaje de salida del ASISTENTE lo describe como un cachorro de Labrador Retriever negro sobre una superficie de madera." style="width:100%;" >}}
-
-Para las finalizaciones de chat de audio de OpenAI, `audioParts` también se capturan automáticamente mediante [las integraciones de LLM de Datadog](/llm_observability/instrument/auto_instrumentation/); no se requiere anotación manual. A diferencia de `audioParts`, `imageParts` no se capturan automáticamente en este momento y deben anotarse manualmente; la captura automática está planificada para una versión futura.
+Para las finalizaciones de chat de audio de OpenAI, `audioParts` también se capturan automáticamente mediante [las integraciones de LLM de Datadog](/llm_observability/instrument/auto_instrumentation/), sin necesidad de anotación manual. El SDK de Node.js no captura `imageParts` automáticamente. Anótelos como se muestra arriba.
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -2102,7 +2117,7 @@ LLMObs.enable(
 {{% /tab %}}
 {{< /tabs >}}
 
-## Cost monitoring {#cost-monitoring}
+## Monitor de costos {#cost-monitoring}
 Adjunte métricas de tokens (para el seguimiento automático de costos) o métricas de costos (para el seguimiento manual de costos) a sus tramos de LLM/embedding. Las métricas de tokens permiten a Datadog calcular los costos utilizando los precios del proveedor, mientras que las métricas de costos le permiten suministrar sus propios precios cuando utiliza modelos personalizados o no compatibles. Para obtener más detalles, vea [Costs][14].
 
 Si utiliza la instrumentación automática, las métricas de tokens y de costos aparecen en sus tramos automáticamente. Si está realizando la instrumentación manualmente, siga la guía a continuación.
@@ -2649,7 +2664,7 @@ El método `LLMObs.submit_feedback()` acepta los siguientes argumentos:
 <br />El tipo de retroalimentación. Debe ser `categorical`, `score`, `boolean`, `json` o `text`.
 
 `value`
-: obligatorio - _string, numeric type, boolean, or dict_
+: obligatorio - _string, tipo numérico, boolean o dict_
 <br />El valor de la retroalimentación. Debe ser un string (`metric_type==categorical` o `metric_type==text`), un integer o float (`metric_type==score`), un boolean (`metric_type==boolean`) o un dict (`metric_type==json`).
 
 `submitter`
@@ -2751,7 +2766,7 @@ El método `llmobs.submitFeedback()` acepta un objeto de opciones con las siguie
 <br />El tipo de retroalimentación. Debe ser uno de `categorical`, `score`, `boolean`, `json` o `text`.
 
 `value`
-: obligatorio - _string, number, boolean, or object_
+: obligatorio - _string, número, boolean, o object_
 <br />El valor de la retroalimentación. Debe ser una cadena (para los tipos de métrica `categorical` y `text`), un número (para `score`), un booleano (para `boolean`) o un objeto JSON (para `json`).
 
 `submitter`

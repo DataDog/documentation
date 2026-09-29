@@ -16,6 +16,8 @@ title: Tags Processor
 
 Datadog Agent에서 수신되는 로그의 경우, 이 프로세서를 사용하여 Datadog 태그(`ddtags`) 배열에서 특정 태그를 제외하거나 포함하세요. 제외되거나 포함되지 않은 태그는 삭제되며, 이로 인해 아웃바운드 로그의 볼륨이 줄어들 수 있습니다.
 
+**참고**: 이 프로세서는 `ddtags` 배열에 이미 존재하는 태그만 유지하거나 삭제합니다. 로그에 새로운 태그나 속성을 추가하지 않습니다. 로그에 새로운 속성을 추가하려면 [Edit Fields][3] 프로세서를 사용하십시오.
+
 ## 설정 {#setup}
 
 프로세서를 설정하려면 다음 단계를 따르세요.
@@ -28,3 +30,4 @@ Datadog Agent에서 수신되는 로그의 경우, 이 프로세서를 사용하
 
 [1]: /ko/getting_started/tagging/#define-tags
 [2]: /ko/observability_pipelines/search_syntax/logs/
+[3]: /ko/observability_pipelines/processors/edit_fields/

@@ -1,39 +1,51 @@
 ---
 algolia:
   tags:
-  - análisis estático
-  - análisis estático de datadog
-  - calidad del código
+  - static analysis
+  - datadog static analysis
+  - code quality
   - SAST
 aliases:
 - /es/code_analysis/static_analysis
-description: Obtén información acerca de Static Code Analysis de Datadog para analizar
-  el código en busca de problemas de calidad y vulnerabilidades de seguridad antes
-  de que tu código llegue a producción.
+description: Conozca Datadog Static Code Analysis para escanear el código en busca
+  de problemas de calidad y vulnerabilidades de seguridad antes de que su código llegue
+  a producción.
+further_reading:
+- link: https://www.datadoghq.com/blog/secure-your-github-ecosystem/
+  tag: Blog
+  text: 'Seguridad en CI/CD: Cómo proteger su ecosistema de GitHub'
+- link: https://www.datadoghq.com/blog/bitsai-dev-agent-code-security
+  tag: Blog
+  text: Presentamos Bits Code para Code Security
+- link: https://www.datadoghq.com/blog/code-security-secret-scanning
+  tag: Blog
+  text: Detecte y bloquee credenciales expuestas con Datadog Secret Scanning
+- link: https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/
+  tag: Blog
+  text: Uso de LLMs para filtrar falsos positivos del análisis estático de código
 is_beta: false
-title: Static Code Analysis (SAST)
+title: Análisis estático de código (SAST)
 ---
-
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    Code Security no está disponible para el sitio {{< region-param key="dd_site_name" >}}.
+    Code Security no está disponible para el {{< region-param key="dd_site_name" >}} sitio.
 </div>
 {{% /site-region %}}
 
 
-## Información general
+## Descripción general {#overview}
 
-Static Code Analysis es la capacidad de Prueba Estática de Seguridad de Aplicaciones (SAST) de Datadog. SAST es una técnica de prueba de software de caja blanca que analiza el código de preproducción de un programa sin necesidad de ejecutarlo.
+El Análisis estático de código es la capacidad de Static Application Security Testing (SAST) de Datadog. SAST es una técnica de prueba de software de caja transparente que analiza el código de preproducción de un programa sin necesidad de ejecutarlo.
 
-Static Code Analysis te ayuda a identificar las vulnerabilidades de seguridad y los problemas de mantenimiento en una fase temprana del ciclo de vida de desarrollo del software (SDLC) para garantizar que sólo el código más seguro y de mayor calidad llegue a la producción. Proporciona a las organizaciones las siguientes ventajas:
+El Análisis estático de código le ayuda a identificar vulnerabilidades de seguridad y problemas de mantenibilidad al principio del ciclo de vida de desarrollo de software (SDLC) para garantizar que solo el código más seguro y de mayor calidad llegue a producción. Proporciona a las organizaciones los siguientes beneficios:
 
-* Las aplicaciones son menos vulnerables a las brechas de seguridad con el paso del tiempo, debido a que las nuevas vulnerabilidades se detectan a través de las exploraciones SAST antes de que el código llegue a la producción.
-* Elimina las conjeturas a la hora de adherirte a los estándares de código de una organización, lo que permite a tu equipo de desarrollo enviar código conforme sin impactos significativos en la velocidad de desarrollo.
-* Incorpora desarrolladores más rápidamente, ya que Static Code Analysis permite a una organización mantener una base de código más legible a lo largo del tiempo.
+* Las aplicaciones son menos vulnerables a las brechas de seguridad con el tiempo, debido a que las nuevas vulnerabilidades se detectan mediante análisis SAST antes de que el código llegue a producción.
+* Elimina las conjeturas al cumplir con los estándares de código de una organización, lo que permite a su equipo de desarrollo enviar código compatible sin impactos significativos en la velocidad de desarrollo.
+* Incorpore a los desarrolladores más rápido porque el Análisis de código estático permite a una organización mantener una base de código más legible con el tiempo.
 
-## Configurar Static Code Analysis
+## Configure el Análisis de código estático {#set-up-static-code-analysis}
 
-Static Code Analysis permite buscar vulnerabilidades de seguridad y malas prácticas de codificación en los siguientes lenguajes y tecnologías:
+El Análisis de código estático permite escanear vulnerabilidades de seguridad y malas prácticas de programación en los siguientes lenguajes y tecnologías:
 
 {{< card-grid card_width="130px" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
@@ -41,7 +53,7 @@ Static Code Analysis permite buscar vulnerabilidades de seguridad y malas práct
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=TypeScript" src="integrations_logos/typescript_large.svg" alt="typescript" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Java" src="integrations_logos/java_avatar.svg" alt="java" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=CSharp" src="integrations_logos/dotnet_avatar.svg" alt="c sharp" >}}
-  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Go" src="integrations_logos/golang-avatar.png" alt="Go" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Ruby" src="integrations_logos/ruby_avatar.svg" alt="ruby" image_width="60" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=PHP" src="integrations_logos/php_opcache.png" alt="php" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Docker" src="integrations_logos/docker_avatar.svg" alt="docker" >}}
@@ -50,152 +62,113 @@ Static Code Analysis permite buscar vulnerabilidades de seguridad y malas práct
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" >}}
-  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
+  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="Otro" >}}
 {{< /card-grid >}}
 
-<!-- </br>  -->
-Las exploraciones pueden ejecutarse a través de tus pipelines de Continuous Integration Continuous Delivery o directamente en Datadog con exploraciones alojadas.  
-Para empezar, ve a la [page (página) de configuración de **Code Security**][12] o consulta la [Documentación de configuración][9].
+Los análisis pueden ejecutarse a través de sus canalizaciones de CI/CD o directamente en Datadog con análisis alojado.  
+Para comenzar, vaya a la [{{< ui >}}Code Security{{< /ui >}} página de configuración][12] o consulte la [Documentación de configuración][9].
 
-## Integración en el ciclo de vida del desarrollo
+## Integre en el ciclo de vida de desarrollo {#integrate-into-the-development-lifecycle}
 
-### Gestión del código source (fuente)
-{{< whatsnext desc="Durante las revisiones de código, Datadog puede marcar automáticamente infracciones de Static Code Analysis en solicitudes de incorporación de cambios añadiendo comentarios de revisión en línea en las líneas de código pertinentes. Cuando corresponda, Datadog también brinda correcciones sugeridas que se pueden aplicar directamente en la solicitud de incorporación de cambios." >}}
-    {{< nextlink href="static_analysis/github_pull_requests" >}}Solicitudes de incorporación de cambios{{< /nextlink >}}
+### Gestión de código fuente {#source-code-management}
+{{< whatsnext desc="Durante las revisiones de código, Datadog puede marcar automáticamente las infracciones de Análisis de código estático en las solicitudes de extracción añadiendo comentarios de revisión en línea en la(s) línea(s) de código correspondiente(s). Esto es compatible con repositorios de GitHub, GitLab y Azure DevOps (alojados en la nube). Cuando corresponde, Datadog también proporciona correcciones sugeridas que pueden aplicarse directamente en la solicitud de extracción." >}}
+    {{< nextlink href="static_analysis/github_pull_requests" >}}Solicitudes de extracción{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### IDE
-{{< whatsnext desc="Puedes identificar vulnerabilidades del código en tiempo real mientras editas un archivo en tu Entorno de desarrollo integrado (IDE). Consulta la documentación de integración específica para obtener más información:">}}
-    {{< nextlink href="developers/ide_plugins/idea/" >}}Complemento de Datadog para IDE de JetBrains{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Extensión de Datadog para Visual Studio Code{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Extensión de Datadog para Visual Studio{{< /nextlink >}}
+### IDEs {#ides}
+{{< whatsnext desc="Puede identificar vulnerabilidades de código en tiempo real mientras edita un archivo en su Entorno de desarrollo integrado (IDE). Consulte la documentación específica de la integración para obtener más información:">}}
+    {{< nextlink href="ide_plugins/idea/code_security/" >}}Complemento de Datadog para IDEs de JetBrains{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/code_security/" >}}Extensión de Datadog para Visual Studio Code y Cursor{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Buscar y filtrar resultados
-Después de configurar Static Code Analysis, se ejecuta una exploración en cada confirmación de un repositorio explorado. Las infracciones se resumen por repositorio en la [page (página) **Code Security Repositories** (Repositorios de Code Security)][1]. Haz clic en un repositorio para analizar los resultados de **Code Vulnerabilities** (Vulnerabilidades del Código) y **Code Quality** (Calidad del código) desde Static Code Analysis.
+## Busque y filtre resultados {#search-and-filter-results}
+Después de configurar el Análisis de código estático, se ejecuta un análisis en cada confirmación (commit) en un repositorio analizado. Las infracciones se resumen por repositorio en la [{{< ui >}}Code Security Repositories{{< /ui >}} página][1]. Haga clic en un repositorio para analizar los resultados de {{< ui >}}Code Vulnerabilities{{< /ui >}} y {{< ui >}}Code Quality{{< /ui >}} del Análisis de código estático.
 
-* La pestaña **Code Vulnerabilities** (Vulnerabilidades del código) contiene las violaciones encontradas por las reglas de Datadog en la [categoría Seguridad][2].
-* La pestaña **Code Quality** (Calidad del código) contiene las infracciones encontradas por las reglas de Datadog en las categorías [Prácticas recomendadas, Estilo de código, Tendencia a errores o Rendimiento][3].
+* La pestaña {{< ui >}}Code Vulnerabilities{{< /ui >}} contiene las infracciones encontradas por las reglas de Datadog en la [categoría de Security][2].
+* La pestaña {{< ui >}}Code Quality{{< /ui >}} contiene las infracciones encontradas por las reglas de Datadog en las [categorías de Mejores prácticas, Estilo de código, Propensión a errores o Rendimiento][3].
 
-Para filtrar tus resultados, utiliza las facetas situadas a la izquierda de la lista o realiza una búsqueda. Los resultados pueden [filtrarse por facetas de servicio o equipo][13].
+Para filtrar sus resultados, utilice las facetas a la izquierda de la lista o realice una búsqueda. Los resultados se pueden [filtrar por facetas de servicio o equipo][13].
 
-Cada fila representa una infracción. Cada infracción está asociada a la confirmación y rama específicas seleccionadas en los filtros de la parte superior de la page (página) (en forma predeterminada, los resultados se muestran para la última confirmación en la rama predeterminada del repositorio que estás viendo).
+Cada fila representa una infracción. Cada infracción está asociada con el commit y la rama específicos que se seleccionan en los filtros en la parte superior de la página (de forma predeterminada, los resultados se muestran para el commit más reciente en la rama predeterminada del repositorio que está viendo).
 
-Haz clic en una infracción para abrir un panel lateral que contiene información sobre el alcance de la infracción y dónde se originó.
+Haga clic en una infracción para abrir un panel lateral que contiene información sobre el contexto de la infracción y dónde se originó.
 
-<!-- {{< img src="code_security/static_analysis/static-analysis-violation.png" alt="Panel lateral de una infracción de análisis estático" style="width:80%;">}}  -->
+<!-- {{< img src="code_security/static_analysis/static-analysis-violation.png" alt="Panel lateral para una infracción de análisis estático" style="width:80%;">}}  -->
 
 El contenido de la infracción se muestra en pestañas:
 
-- **Detalles**: Una descripción de la infracción y las líneas de código que la causaron. Para ver el fragmento de código infractor, configura la integración del código source (fuente) correspondiente para tu proveedor (GitHub[4], GitLab[5]).
-- **Solución**: Una o más correcciones de código que pueden resolver la infracción, con opciones de corrección.
-- **Evento**: Metadatos JSON relativos a la infracción.
+- {{< ui >}}Details{{< /ui >}}: Una descripción de la infracción y las líneas de código que la causaron. Para ver el fragmento de código infractor, configure la integración de código fuente relevante para su proveedor ([GitHub][4], [GitLab][5], Azure[6]).
+- {{< ui >}}Remediation{{< /ui >}}: Una o más correcciones de código que pueden resolver la infracción, con opciones de remediación.
+- {{< ui >}}Event{{< /ui >}}: Metadatos JSON sobre la infracción.
 
-### Filtrar los falsos positivos
-Para un subconjunto de vulnerabilidades de pruebas de seguridad de aplicaciones estáticas (SAST), Bits AI puede revisar el contexto del resultado y evaluar si es más probable que sea un verdadero o falso positivo, junto con una breve explicación del razonamiento. Selecciona el conmutador "Filtrar falsos positivos" en el [Explorer de vulnerabilidades de las pruebas de seguridad de aplicaciones estáticas (SAST)](https://app.datadoghq.com/security/code-security/sast) para reducir rápidamente tu lista inicial para el triaje. 
+### Filtre falsos positivos {#filter-out-false-positives}
+Para un subconjunto de vulnerabilidades de SAST, Bits AI puede revisar el contexto y evaluar si es más probable que sea un positivo verdadero o falso, junto con una breve explicación del razonamiento. 
 
-Para cada resultado, puedes proporcionar a Bits AI comentarios sobre su evaluación.
+Para obtener más información, consulte [Análisis de código estático mejorado con IA][17].
 
-{{% collapse-content title="Advertencias admitidas" level="h4" expanded=true id="id-for-anchoring" %}}
-El filtrado de falsos positivos es compatible con los siguientes CWE:
-- [CWE-89: Inserción de SQL](https://cwe.mitre.org/data/definitions/89.html)
-- [CWE-78: Inserción de comandos del sistema operativo](https://cwe.mitre.org/data/definitions/78.html)
-- [CWE-90: Inserción de LDAP](https://cwe.mitre.org/data/definitions/90.html)
-- [CWE-22: Cruce de ruta](https://cwe.mitre.org/data/definitions/22.html)
-- [CWE-501: Infracción de límites de confianza](https://cwe.mitre.org/data/definitions/501.html)
-- [CWE-79: Scripting entre sitios](https://cwe.mitre.org/data/definitions/79.html)
-- [CWE-614: Cookie insegura](https://cwe.mitre.org/data/definitions/614.html)
-- [CWE-327: Algoritmo criptográfico defectuoso o de riesgo](https://cwe.mitre.org/data/definitions/327.html)
-- [CWE-643: Inserción de XPath](https://cwe.mitre.org/data/definitions/643.html)
-- [CWE-94: Inserción de código](https://cwe.mitre.org/data/definitions/94.html)
-- [CWE-284: Control de acceso inadecuado](https://cwe.mitre.org/data/definitions/284.html)
-- [CWE-502: Deserialización de datos no fiables](https://cwe.mitre.org/data/definitions/502.html)
-{{% /collapse-content %}}
+## Personalice su configuración {#customize-your-configuration}
+Para personalizar qué reglas de Análisis de código estático están configuradas en sus repositorios o en toda su organización, consulte la [documentación de configuración][8].
 
-## Personalizar tu configuración
-Para personalizar qué reglas de Static Code Analysis se configuran en tus repositorios o en toda tu organización, consulta la [documentación de configuración][8].
+## Vincule los hallazgos a los servicios y equipos de Datadog {#link-findings-to-datadog-services-and-teams}
+Para vincular hallazgos a servicios y equipos de Datadog, consulte la [documentación de configuración][13].
 
-## Vincular resultados a servicios y equipos de Datadog
+## Aplique correcciones sugeridas {#apply-suggested-fixes}
+<!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Pestaña de correcciones de una violación de análisis estático" style="width:80%;">}} -->
 
-### Vincular resultados a servicios
-Datadog asocia los resultados del análisis del código y de la biblioteca con los servicios pertinentes mediante los siguientes mecanismos:
+En el Análisis de código estático de Datadog, existen dos tipos de correcciones sugeridas:
 
-1. [Identificación de la localización del código asociado a un servicio mediante el Catálogo de software](#identifying-the-code-location-in-the-software-catalog)
-2. [Detección de patrones de uso de archivos en productos adicionales de Datadog.](#detecting-file-usage-patterns)
-3. [Búsqueda del nombre del servicio en la ruta del archivo o el repositorio](#detecting-service-name-in-paths-and-repository-names)
+1. **Corrección sugerida determinista:** Para violaciones simples como problemas de linting, el analizador de reglas proporciona automáticamente correcciones con plantilla.
+2. **Corrección sugerida por IA:** Para violaciones complejas, las correcciones generalmente no están disponibles de antemano. En su lugar, puede utilizar correcciones sugeridas por IA, que emplean GPT-4 de OpenAI para generar una corrección sugerida. Puede elegir entre correcciones {{< ui >}}Text{{< /ui >}} y {{< ui >}}Unified Diff{{< /ui >}}, que generan instrucciones en texto plano o un cambio de código para resolver la violación, respectivamente.
 
-Si un método tiene éxito, no se realizan más intentos de asignación. A continuación se detalla cada método de asignación.
-
-#### Identificación de la localización del código en el Catálogo de software
-
-La [versión del esquema `v3`][12] y posteriores del Catálogo de software te permiten añadir la asignación del código de localización de tu servicio. La sección `codeLocations` especifica la localización del repositorio que contiene el código y sus rutas asociadas.
-
-El atributo `paths` es una lista de globs que deben coincidir con las rutas del repositorio.
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-name: my-service
-datadog:
-codeLocations:
-- repositoryURL: https://github.com/myorganization/myrepo.git
-paths:
-- path/to/service/code/**
-{{< /code-block >}}
-
-### Vincular resultados a equipos
-Datadog asocia los resultados de la exploración con el equipo asociado a un servicio. Por ejemplo, si el archivo `domains/ecommerce/apps/myservice/foo.py`
-está asociado a `myservice`, entonces el equipo `myservice` se asociará a cualquier infracción
-detectada en este archivo.
-
-Si no se encuentra ningún servicio o equipo, Datadog utiliza el archivo `CODEOWNERS` de tu repositorio. El archivo `CODEOWNERS` determina a qué equipo pertenece un archivo en tu proveedor Git.
-
-**Nota**: Debe [asignar con precisión][15] tu equipo de proveedores de Git a tus [equipos de Datadog][14] para que esta función funcione correctamente.
-
-## Aplicar las correcciones sugeridas
-<!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Pestaña Correcciones de una infracción de análisis estático" style="width:80%;">}} -->
-
-En Datadog Static Code Analysis, hay dos tipos de correcciones sugeridas:
-
-1. **Corrección determinista sugerida:** Para infracciones simples, como problemas de linting, el analizador de reglas proporciona automáticamente plantillas de corrección.
-2. **Corrección sugerida por la IA.** En el caso de infracciones complejas, las correcciones no suelen estar disponibles de antemano. En su lugar, puedes utilizar las correcciones sugeridas por la IA, que utilizan la GPT-4 de OpenAI para generar una corrección sugerida. Puedes elegir entre correcciones de "Texto" y "Diferencia unificada", que generan instrucciones de texto sin formato o un cambio de código para resolver la infracción, respectivamente.
-
-<!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Indicador visual de una corrección sugerida de análisis estático por defecto" style="width:60%;">}}
+<!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="Indicador visual de una corrección sugerida de análisis estático predeterminada" style="width:60%;">}}
 
 {{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="Indicador visual de una corrección sugerida de análisis estático por IA" style="width:60%;">}} -->
 
-### Solucionar una vulnerabilidad o un problema de calidad directamente desde Datadog
+### Corrija una vulnerabilidad o un problema de calidad directamente desde Datadog {#fix-a-vulnerability-or-quality-issue-directly-from-datadog}
 
-<!-- {{< img src="ci/sast_one_click_light.png" alt="Ejemplo de corrección en un clic de Code Security" style="width:90%;" >}} -->
+<!-- {{< img src="ci/sast_one_click_light.png" alt="Ejemplo de corrección con un solo clic para Code Security" style="width:90%;" >}} -->
 
-Si GitHub es tu gestor de código source (fuente), puede enviar un cambio de código para solucionar un problema de pruebas de seguridad de aplicaciones estáticas (SAST) directamente desde Datadog de dos maneras.
+Si GitHub es su administrador de código fuente, puede enviar un cambio de código para corregir un problema de SAST directamente desde Datadog de dos maneras.
 
-#### Abrir una solicitud pull
-Si el permiso **Solicitudes de extracción** de tu aplicación GitHub está configurado como **Lectura y escritura**, se habilita la corrección en un clic para todos los hallazgos de Static Code Analysis con una corrección sugerida disponible.
+#### Abra una solicitud de extracción {#open-a-pull-request}
+Si el permiso {{< ui >}}Pull Requests{{< /ui >}} de su aplicación de GitHub está configurado en {{< ui >}}Read & Write{{< /ui >}}, la corrección con un solo clic está habilitada para todos los hallazgos de Análisis de código estático con una corrección sugerida disponible.
 
-Sigue estos pasos para corregir una vulnerabilidad y abrir una solicitud de extracción:
-1. Visualiza un resultado SAST específico en Code Security.
-2. Haz clic en ***Fix Violation** (Solucionar infracción) en el panel lateral del resultado.
-3. Selecciona **Abrir una solicitud pull**.
-4. Introduce el título de la solicitud y el mensaje de confirmación.
-5. Haz clic en **Create PR** (Crear solicitud pull).
+Siga estos pasos para corregir una vulnerabilidad y abrir una solicitud de extracción:
+1. Visualice un resultado de SAST específico en Code Security.
+2. Haga clic en {{< ui >}}Fix Violation{{< /ui >}} en el panel lateral del resultado.
+3. Seleccione {{< ui >}}Open a Pull Request{{< /ui >}}.
+4. Ingrese un título de solicitud de extracción y un mensaje de confirmación.
+5. Haga clic en {{< ui >}}Create PR{{< /ui >}}.
 
-#### Confirmar directamente en la rama actual
-También puedes corregir una vulnerabilidad confirmándola directamente en la rama en la que se encontró el resultado.
+#### Confirmar directamente en la rama actual {#commit-directly-to-the-current-branch}
+También puede corregir una vulnerabilidad confirmando directamente en la rama en la que se encontró el resultado.
 
 Para confirmar una corrección sugerida:
 
-1. Visualiza un resultado SAST específico en Code Security.
-2. Haz clic en ***Fix Violation** (Solucionar infracción) en el panel lateral del resultado.
-3. Haz clic en **Commit to current branch** (Confirmar en la rama actual).
+1. Visualice un resultado de SAST específico en Code Security.
+2. Haga clic en {{< ui >}}Fix Violation{{< /ui >}} en el panel lateral del resultado.
+3. Haga clic en {{< ui >}}Commit to current branch{{< /ui >}}.
 
-## Notificar falsos positivos
-Si crees que una infracción específica es un falso positivo, puedes marcarla como falso positivo con un motivo de marcado, lo que envía un informe directamente a Datadog. Los envíos se revisan periódicamente para mejorar la calidad del conjunto de normas a lo largo del tiempo.
+### Corregir con Cursor {#fix-with-cursor}
+Puede delegar la corrección de un hallazgo de SAST a un agente de codificación de IA como Cursor.
 
-<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Botón para informar una infracción de Static Code Analysis como un falso positivo" style="width:60%;">}} -->
+1. Visualice un resultado de SAST específico en Code Security.
+2. En la sección {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} del panel lateral, haga clic en {{< ui >}}Remediate with AI{{< /ui >}}.
+3. Seleccione la pestaña {{< ui >}}Coding agent{{< /ui >}}.
+4. En {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, haga clic en {{< ui >}}Open{{< /ui >}} junto a {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog abre Cursor con un aviso de corrección personalizado para el hallazgo. Revise los cambios sugeridos antes de confirmarlos.
 
-<!-- ## Referencias adicionales
+Para usar un agente de codificación de IA diferente, haga clic en {{< ui >}}Copy{{< /ui >}} junto a {{< ui >}}Copy fix prompt{{< /ui >}} y pegue el aviso en el agente de su elección.
+
+Para manejar el enlace profundo de Cursor, instale la [extensión de Datadog para VS Code y Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/static_analysis/fix-with-cursor.png" alt="El cuadro de diálogo Remediate with AI con la pestaña Coding agent seleccionada, que muestra las opciones Fix with Cursor y Copy fix prompt" style="width:100%;" >}}
+
+## Informe falsos positivos {#report-false-positives}
+Si cree que una infracción específica es un falso positivo, puede marcarla como tal incluyendo un motivo, lo cual envía un informe directamente a Datadog. Las presentaciones se revisan periódicamente para mejorar la calidad del conjunto de reglas con el tiempo.
+
+<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Botón para reportar una infracción de análisis de código estático como falso positivo" style="width:60%;">}} -->
+
+## <!-- Lecturas adicionales
 
 {{< partial name="whats-next/whats-next.html" >}} -->
 
@@ -211,6 +184,8 @@ Si crees que una infracción específica es un falso positivo, puedes marcarla c
 [10]: /es/security/code_security/dev_tool_int/github_pull_requests/
 [11]: /es/getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
-[13]: https://docs.datadoghq.com/es/security/code_security/static_analysis/#link-results-to-datadog-services-and-teams
+[13]: /es/security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
 [14]: /es/account_management/teams/
 [15]: /es/integrations/github/#connect-github-teams-to-datadog-teams
+[16]: /es/integrations/azure-devops-source-code/
+[17]: /es/security/code_security/static_analysis/ai_enhanced_sast/
