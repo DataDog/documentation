@@ -89,7 +89,8 @@ Bits Release needs to read the code you merged, and to recognize the moment that
 | Requirement | Why it is needed |
 | ----------- | ---------------- |
 | [Source Code Integration][2] on the repositories in scope | Lets Bits Release read the code change it is validating. Grant write access to pull requests as well, so it can post plans and verdicts back on the pull request. |
-| Services tagged with the deployed commit SHA | Tells Bits Release that your change reached production, which is when validation starts. Each deployment needs to report the commit it was built from, either as a `git.commit.sha` tag on the service's [APM][3] or [RUM][4] telemetry, or as the SHA carried inside the service's `version` tag. See [service mapping][8] to set this up. |
+| A `version` tag on the services in scope | Identifies each deployment, so Bits Release can tell when a new one happens. Services report it with their [APM][3] or [RUM][4] telemetry. |
+| The deployed commit SHA on every deployment | Links a deployment back to the code you merged, which is what starts validation. Report it either as a `git.commit.sha` tag on the service's telemetry, or as the SHA carried inside the `version` tag. See [service mapping][8] to set this up. |
 
 ### Recommended
 
