@@ -164,7 +164,8 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% if equals($secrets_source, "secrets_management") %}
 
 3. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
-4. Run the following command to install the Worker:
+4. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+5. Run the following command to install the Worker:
     ```shell
     helm upgrade --install opw \
     -f values.yaml \
@@ -183,7 +184,8 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-3. Run the following command to install the Worker:
+3. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+4. Run the following command to install the Worker:
 
     ```shell
     helm upgrade --install opw \
@@ -192,7 +194,6 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set datadog.pipelineId=<PIPELINE_ID> \
     --set <SOURCE_ENV_VARIABLES> \
     --set <DESTINATION_ENV_VARIABLES> \
-    --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
     Replace the placeholders with the following values:
@@ -358,8 +359,9 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
-7. Run the command provided in the UI to install the Worker.
-8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+7. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+8. Run the command provided in the UI to install the Worker.
+9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -368,8 +370,9 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
-6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
+6. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+7. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
+8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 {% /if %}
@@ -745,10 +748,7 @@ To upgrade the Worker, update the Worker image version in your CloudFormation st
 {% if equals($platform, "kubernetes") %}
 
 **Notes**:
-- By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on (`<TARGET_PORT>`). If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values in the command:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
-    ```
+- The Helm chart's `service.ports` field is empty by default. Set `service.ports` so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
 - If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See also [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
 - If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -766,6 +766,41 @@ When you install the Observability Pipelines Worker on Kubernetes, the Helm char
   This allows direct Pod-to-Pod communication and stable network identities for peer discovery or direct Pod addressing.
 - A ClusterIP service that provides a single virtual IP and DNS name for the Worker.
   This enables load balancing across Worker Pods for internal cluster traffic.
+
+### Expose the Worker's ports
+
+The Helm chart's `service.ports` field is empty by default. If you don't set it, the Kubernetes Service doesn't expose any ports and your sources can't reach the Worker.
+
+Datadog recommends setting `service.ports` in your `values.yaml` file so the configuration persists when you upgrade or redeploy the Worker. For example:
+
+```yaml
+service:
+  enabled: true
+  type: "ClusterIP"
+  ports:
+    - name: <PORT_NAME>
+      protocol: TCP
+      port: <SERVICE_PORT>
+      targetPort: <TARGET_PORT>
+```
+
+Replace the placeholders with the following values:
+
+- `<PORT_NAME>`: A name for the port, such as `datadog-agent`.
+- `<SERVICE_PORT>`: The port the Kubernetes Service exposes to clients, such as `8088`.
+- `<TARGET_PORT>`: The port the Worker listens on, such as `8282`. This port must match the port in your source's address. For example, the Datadog Agent address or HTTP Server address.
+    - If you use environment variables, the address is the value of your source's address environment variable.
+    - If you use Secrets Management, the address is stored in your secrets manager.
+
+`<SERVICE_PORT>` and `<TARGET_PORT>` can be the same port. Set them to different values if you want to map the Worker's pod port to a different incoming port on the Kubernetes Service.
+
+Alternatively, set the ports in the `helm upgrade --install` command with the `--set` flag. For example:
+
+```shell
+--set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
+```
+
+**Note**: If you set ports with `--set`, you must include the flag each time you run `helm upgrade`.
 
 ### Persistence and pod scheduling
 

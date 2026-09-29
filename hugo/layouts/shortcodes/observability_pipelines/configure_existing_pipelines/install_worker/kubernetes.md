@@ -4,6 +4,7 @@
     ```shell
     helm repo update
     ```
+1. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports][4002].
 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
     helm upgrade --install opw \
@@ -12,14 +13,10 @@
     --set datadog.pipelineId=<PIPELINE_ID> \
     --set <SOURCE_ENV_VARIABLES> \
     --set <DESTINATION_ENV_VARIABLES> \
-    --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
-    ```
-    **Note**: By default, the Kubernetes Service maps incoming port `<SERVICE_PORT>` to the port the Worker is listening on `(<TARGET_PORT>)`. If you want to map the Worker's pod port to a different incoming port of the Kubernetes Service, use the following `service.ports[0].port` and `service.ports[0].targetPort` values:
-    ```
-    --set service.ports[0].protocol=TCP,service.ports[0].port=8088,service.ports[0].targetPort=8282
     ```
 1. Click **Navigate Back** to go back to the Observability Pipelines edit pipeline page.
 1. Click **Deploy Changes**.
 
 [4001]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
+[4002]: /observability_pipelines/configuration/install_the_worker/?platform=kubernetes#expose-the-workers-ports
