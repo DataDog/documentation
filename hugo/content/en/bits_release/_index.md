@@ -51,9 +51,9 @@ Bits Release does not require a dedicated data source. It reads the Datadog prod
 | **Logs** | Error messages, exceptions, and log-based evidence for behavior the change was meant to alter or preserve. |
 | **Metrics and monitors** | Baseline-versus-post-deploy comparison. Bits Release can create a temporary monitor when a check needs to watch for a rare regression over days rather than minutes, and removes it afterward. |
 | **RUM** | Frontend validation: errors, views, and user actions on the pages affected by the change. |
-| **Synthetic tests** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
 | **Events and change tracking** | Deployment events, which establish when the change went live and where the soak window starts. |
 | **Change stories, dashboards, and incidents** | Context about what else changed around the same time, to help separate the effect of your change from unrelated activity. |
+| **Synthetic tests** | Active validation by calling the modified endpoint or exercising the modified flow, rather than waiting for organic traffic. |
 | **Live Debugger** | *Coming soon.* Temporary production instrumentation that reports when a specific code path actually executes. This is useful for code behind a condition or a feature flag, where telemetry alone cannot tell you whether the new path ran. |
 
 A source Bits Release cannot read is a source it cannot validate against. A backend change on a service with APM and logs gets stronger evidence than a frontend change on an application without RUM.
