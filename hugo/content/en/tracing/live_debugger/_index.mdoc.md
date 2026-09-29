@@ -62,9 +62,11 @@ Live Debugger provides:
 
 ## Live Debugger vs. Dynamic Instrumentation
 
-Live Debugger and [Dynamic Instrumentation][38] are built on the same instrumentation technology. They share some overlapping configuration settings and conventions, such as the same [expression language][15] for log message templates and conditions. Both collect data from a code location you choose in a running service, with no code changes, redeploys, or restarts.
+Live Debugger and [Dynamic Instrumentation][38] use the same instrumentation technology. They share an [expression language][15] and some configuration settings. Both collect data from running services without requiring code changes, redeployments, or restarts.
 
-They differ in what they capture and how long it lasts. Use Live Debugger to investigate a problem: logpoints capture log events and variable snapshots, and expire when the debug session ends. Use Dynamic Instrumentation to add APM custom instrumentation without modifying source code: dynamic spans, span tags, and metrics stay active until you disable them.
+The products differ in the data they capture and how long the instrumentation remains active:
+- Use Live Debugger to investigate a problem. Its logpoints capture log events and variable snapshots, and expire when the Debug Session ends.
+- Use Dynamic Instrumentation to add custom APM instrumentation. Dynamic spans, span tags, and metrics remain active until you disable them.
 
 ## Requirements
 
@@ -408,7 +410,7 @@ The following constraints apply to Live Debugger usage and configuration:
 
 ## Troubleshooting
 
-If a logpoint produces no useful data, check that:
+If expected logs or variable values are missing from a logpoint, check that:
 
 - The selected service and environment are receiving traffic that executes the instrumented code.
 - The source file and location match the deployed version.

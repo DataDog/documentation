@@ -18,7 +18,7 @@ further_reading:
 
 [Live Debugger][5] captures logs and variable snapshots that can contain sensitive application data, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option.
 
-Choose the values you collect deliberately and understand where redaction occurs:
+The following redaction mechanisms help protect captured data:
 
 - **Identifier and type rules** redact matching values in your infrastructure, before upload.
 - **Live Debugger redaction modes** control which captured values are visible. See [mode-based redaction][7].
