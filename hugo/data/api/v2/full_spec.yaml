@@ -230638,7 +230638,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - teams_read
-      summary: Get all teams
+      summary: Get all teams with a test
       tags:
         - Teams
       x-menu-order: 20

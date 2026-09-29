@@ -22759,9 +22759,9 @@ menu:
           - CreateTeam
         unstable: []
         order: 21
-    - name: Get all teams
-      url: /api/latest/teams/get-all-teams/
-      identifier: teams-get-all-teams
+    - name: Get all teams with a test
+      url: /api/latest/teams/get-all-teams-with-a-test/
+      identifier: teams-get-all-teams-with-a-test
       parent: teams
       generated: true
       params:
