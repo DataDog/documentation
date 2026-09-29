@@ -67,6 +67,26 @@ hugo/layouts/shortcodes/**/*.md           @DataDog/documentation
 hugo/data/reference/                      @DataDog/WebOps-Platform @DataDog/documentation
 hugo/layouts/shortcodes/**/*.html         @DataDog/WebOps-Platform @DataDog/documentation
 
+# Docs-owned templates
+hugo/layouts/partials/nav/left-nav.html             @DataDog/documentation
+hugo/assets/scripts/config/regions.config.js        @DataDog/WebOps-Platform @DataDog/documentation
+hugo/layouts/partials/site_support_banner/          @DataDog/WebOps-Platform @DataDog/documentation
+hugo/layouts/shortcodes/mdoc/                       @DataDog/documentation
+hugo/layouts/partials/apm/                          @DataDog/documentation
+hugo/layouts/partials/logs/                         @DataDog/documentation
+hugo/layouts/partials/actions/                      @DataDog/documentation
+hugo/layouts/partials/trace_collection/             @DataDog/documentation
+hugo/layouts/partials/app_and_api_protection/       @DataDog/documentation
+hugo/layouts/partials/security-platform/            @DataDog/documentation
+hugo/layouts/partials/code_security/                @DataDog/documentation
+hugo/layouts/partials/code_analysis/                @DataDog/documentation
+hugo/layouts/partials/continuous_testing/           @DataDog/documentation
+hugo/layouts/partials/continuous_delivery/          @DataDog/documentation
+hugo/layouts/partials/dynamic_instrumentation/      @DataDog/documentation
+hugo/layouts/partials/reference_tables/             @DataDog/documentation
+hugo/layouts/partials/rbac-permissions-table.html   @DataDog/documentation
+hugo/layouts/partials/graphingfunctions.md          @DataDog/documentation
+
 # Serverless
 
 /hugo/content/en/serverless/                                 @DataDog/serverless @DataDog/documentation
