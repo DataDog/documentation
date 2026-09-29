@@ -1,6 +1,7 @@
 ---
 title: Kubernetes Cluster Autoscaling
 description: Automatically scale your clusters with Kubernetes Cluster Autoscaling.
+site_support_id: containers_autoscaling_cluster
 ---
 
 <div class="alert alert-warning">During the Limited Availability period, Datadog recommends <strong>non-production use only</strong> of Datadog Kubernetes Cluster Autoscaling. Email <a href="mailto:kubernetes-beta@datadoghq.com">kubernetes-beta@datadoghq.com</a> for more information and support.</div>
