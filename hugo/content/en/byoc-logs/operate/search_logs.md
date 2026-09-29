@@ -58,9 +58,8 @@ Send a request to the [Search logs endpoint][2] (`POST /api/v2/logs/events/searc
 
 ## Search limitations
 
-You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs are not supported with BYOC Logs.
+You cannot query BYOC Logs indexes alongside other Datadog log indexes. Additionally, Flex Logs is not supported with BYOC Logs.
 
-[1]: https://app.datadoghq.com/logs
 
 ## Further reading
 
