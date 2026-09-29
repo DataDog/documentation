@@ -359,7 +359,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
-7. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+7. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
 8. Run the command provided in the UI to install the Worker.
 9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
@@ -370,7 +370,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
-6. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+6. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
 7. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
 8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
