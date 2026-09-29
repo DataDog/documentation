@@ -221,7 +221,7 @@ In the Prompt Editor:
 
 1. Add one or more messages and assign each a role: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}}, or {{< ui >}}Assistant{{< /ui >}}.
 2. Use `{{variable_name}}` syntax in any message to add dynamic content.
-3. Optional: If you have access to the [message placeholders Preview](#insert-messages-at-runtime), select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name, and position the placeholder between messages. The editor shows the compatible SDK requirement before you save.
+3. Optional: If you have access to the message placeholders Preview, click {{< ui >}}Add Message Placeholder{{< /ui >}}. See the [Insert messages at runtime](#insert-messages-at-runtime) section.
 4. Optional: Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
 5. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
 
@@ -292,19 +292,19 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 
 <div class="alert alert-info"><strong>Preview:</strong> Message placeholders are available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
 
-Message placeholders insert conversation history or tool interactions into a saved prompt at runtime. A text variable replaces text inside a message; a message placeholder inserts a list of complete messages.
+Message placeholders insert conversation history or tool interactions into a saved prompt at runtime. A text variable, such as `{{question}}`, replaces text inside a message. A message placeholder inserts a list of complete messages.
 
-The prompt version stores the placeholder's name and position, not the runtime list. This lets you version the conversation structure without hardcoding it in your application.
+The prompt version stores the placeholder's name and position, not the messages you pass at runtime. To move the history within the prompt, publish a new prompt version. You do not need to change application code.
 
 **Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
 
 ### Define the placeholder
 
-In the Prompt Editor, select {{< ui >}}Add Message Placeholder{{< /ui >}}, enter a name such as `history`, and use the arrows to position it between messages. Use a different name from any text variable in the same prompt.
+In the Prompt Editor, click {{< ui >}}Add Message Placeholder{{< /ui >}} and enter a name, such as `history`. Use the up and down arrow buttons to move the placeholder between messages. Use a different name from any text variable in the prompt. The editor shows the compatible SDK requirement before you save.
 
 {{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="Prompt Editor with a history message placeholder between system instructions and a user message containing the question variable." >}}
 
-Alternatively, create the prompt with the Python SDK. This setup operation places the conversation history between the system instructions and the new question:
+To create the same prompt with the Python SDK, add an item with `"type": "placeholder"` where the history belongs:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -320,11 +320,11 @@ LLMObs.create_prompt(
 )
 ```
 
-For setup requirements and environment IDs, see [Use the Python SDK](#use-the-python-sdk). The name `history` identifies the value the application supplies; it is not a message role.
+The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see the [Use the Python SDK](#use-the-python-sdk) section.
 
 ### Supply runtime values
 
-Retrieve the prompt and pass the history alongside its text variables. The SDK inserts the history in order, at the placeholder's position.
+Retrieve the prompt, then pass the history list with the text variables. The SDK inserts the history messages in order at the placeholder's position.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -366,7 +366,7 @@ messages := rendered.Messages
 ```
 {{% /tab %}}
 
-{{% tab "JavaScript" %}}
+{{% tab "Node.js" %}}
 ```javascript
 const prompt = await tracer.llmobs.getPrompt('support-assistant')
 
@@ -394,13 +394,13 @@ The result contains four messages, with no placeholder item:
 ]
 ```
 
-Pass the formatted messages to your model provider. The SDK does not replace text variables inside the inserted history.
+Pass the formatted messages to your model provider. If an inserted message contains `{{variable}}` syntax, the SDK leaves it as literal text.
 
 Use the same [prompt tracking](#track-prompt-usage) workflow as for other managed prompts. Prompt metadata preserves the placeholder definition rather than its runtime values; expanded messages follow the existing input-capture and privacy settings.
 
 ### Include tool interactions
 
-The same placeholder can include a tool call and its response. Use your model provider's message format, and match the response's tool-call ID to the call. For example, with an OpenAI-compatible format:
+A placeholder can also insert tool calls and tool responses. Use your model provider's message format. For example, in the OpenAI Chat Completions format, set each tool response's `tool_call_id` to the `id` of its tool call:
 
 ```python
 variables["history"] = [
@@ -419,13 +419,12 @@ messages = prompt.format(**variables)
 
 The SDK inserts these messages unchanged. Your application executes the tool and supplies its response.
 
-### Supported values
+### Message placeholder requirements and limits
 
-- Supply a list for every placeholder. An empty list (`[]`) inserts no messages.
-- Messages can contain text, assistant tool calls, or tool responses. Use the message format and roles expected by your model provider, including matching tool-call IDs. The SDK does not execute tools or validate provider-specific arguments.
-- Repeated placeholders reuse the same value. Different placeholder names can receive different lists.
-- Use different names for text variables and message placeholders.
-- Nested placeholders and image, audio, or other multimodal content blocks are not supported.
+- Pass a list for every placeholder. An empty list (`[]`) inserts no messages.
+- Inserted messages can contain text, assistant tool calls, or tool responses. The SDK does not execute tools or validate provider-specific fields.
+- If a prompt uses the same placeholder name more than once, each occurrence inserts the same list. Different placeholder names can receive different lists.
+- Nested placeholders and multimodal content, such as images or audio, are not supported.
 
 ## Advanced usage
 
@@ -474,6 +473,3 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [7]: /llm_observability/instrument/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
-
-[10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go/
-[11]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
