@@ -18,6 +18,6 @@ For setup instructions, select your hosting type:
 {{< card-grid card_width="170px" >}}
   {{< image-card href="/database_monitoring/setup_mariadb/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_mariadb/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
-{{< /card-grid >}}```
+{{< /card-grid >}}
 
 <br>
