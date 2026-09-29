@@ -241,6 +241,40 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 : *Permissions required: `Application Security Management Protect Read`*
 
+### Infrastructure as Code custom rules
+
+`get_datadog_security_iac_custom_rules`
+: Retrieves one Infrastructure as Code (IaC) custom rule by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+: *Permissions required: `Vulnerability Management Read`*
+
+`get_datadog_security_iac_custom_rules_schema`
+: Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this before generating, validating, or creating a rule.
+: *Permissions required: `Vulnerability Management Read`*
+
+`generate_datadog_security_iac_custom_rule`
+: Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+: *Permissions required: `Vulnerability Management Write`*
+
+`validate_datadog_security_iac_custom_rule`
+: Compile-checks Rego for an IaC custom rule. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+: *Permissions required: `Vulnerability Management Write`*
+
+`create_datadog_security_iac_custom_rule`
+: Creates a draft IaC custom rule. Rules are always created unpublished; publish them separately to activate them for scans.
+: *Permissions required: `Vulnerability Management Write`*
+
+`update_datadog_security_iac_custom_rule`
+: Creates a new revision of a draft IaC custom rule. Omitted fields keep their current values. Published rules can't be updated.
+: *Permissions required: `Vulnerability Management Read` and `Vulnerability Management Write`*
+
+`publish_datadog_security_iac_custom_rule`
+: Publishes a draft IaC custom rule so it becomes active for scans. This can't be undone with the update tool.
+: *Permissions required: `Vulnerability Management Read` and `Vulnerability Management Write`*
+
+`delete_datadog_security_iac_custom_rule`
+: Permanently deletes an IaC custom rule by ID. This can't be undone.
+: *Permissions required: `Vulnerability Management Write`*
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
