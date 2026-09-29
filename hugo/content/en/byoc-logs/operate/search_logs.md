@@ -15,17 +15,25 @@ aliases:
   - /cloudprem/operate/search_logs/
 ---
 
-## Explore BYOC Logs in the Logs Explorer
+## Explore BYOC Logs in Log Explorer
+
+BYOC (Bring Your Own Cloud) Logs index names follow this format:
+
+```text
+byoc--<CLUSTER_NAME>--<INDEX_NAME>
+```
+
+To search your BYOC Logs indexes:
 
 1. Go to the [Datadog Log Explorer][1].
 2. On the left facet panel, under {{< ui >}}BYOC INDEXES{{< /ui >}}, select one or more indexes to search.
 
 You can select a specific index to narrow your search, or select all indexes in a cluster to search across them.
 
-BYOC (Bring Your Own Cloud) Logs index names follow this format:
+You can also search a specific index from the search bar by using its qualified name. For example, to search the `application` index in `cluster-1`:
 
 ```text
-byoc--<CLUSTER_NAME>--<INDEX_NAME>
+index:byoc--cluster-1--application
 ```
 
 ## Search across BYOC Logs clusters
@@ -34,9 +42,7 @@ Use Log Explorer, dashboards, log monitors, or the public Logs API to search acr
 
 ### Use Log Explorer
 
-In [Log Explorer][1], select BYOC clusters or indexes from the {{< ui >}}BYOC INDEXES{{< /ui >}} facet panel, or specify them in the search bar.
-
-In the search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
+In the [Log Explorer][1] search bar, prefix each cluster name with `byoc--`. Group the names in parentheses after `index:`, separated by `OR`. For example:
 
 ```text
 index:(byoc--cluster-1 OR byoc--cluster-2)
@@ -45,12 +51,6 @@ index:(byoc--cluster-1 OR byoc--cluster-2)
 Replace `cluster-1` and `cluster-2` with your BYOC Logs cluster names.
 
 Matching logs from the selected clusters appear in a single list. Changes to search filters and the time range apply to all selected clusters.
-
-To search a specific index within a cluster, use its qualified name. For example, search the `application` index in `cluster-1`:
-
-```text
-index:byoc--cluster-1--application
-```
 
 ### Use dashboards and log monitors
 
