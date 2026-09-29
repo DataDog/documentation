@@ -21620,7 +21620,7 @@ components:
           example: "resource-id-123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21759,7 +21759,7 @@ components:
           example: false
           type: boolean
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21809,7 +21809,7 @@ components:
           example: "resource_id_abc123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -103757,7 +103757,7 @@ components:
         severity:
           $ref: "#/components/schemas/SecurityEntityRiskScoreAttributesSeverity"
         signalsDetected:
-          description: Number of security signals detected for this entity.
+          description: Number of risk-contributing security signals detected for this entity.
           example: 15
           format: int64
           type: integer
