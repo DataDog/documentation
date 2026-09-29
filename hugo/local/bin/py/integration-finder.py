@@ -51,11 +51,18 @@ def update_repos(integrations_repos):
                 # Pull the latest changes from the remote repository
                 print(f'\tPulling latest changes from {repo} on branch {branch}')
                 local_repo.remotes.origin.pull(branch)
-            except:
-                print(f'\n\x1b[33mWARNING\x1b[0m:Failed to update {repo}' +
-                        '\nContinuing without updating the repo. ' +
-                        f'To resolve, check {repo} for a dirty feature branch and commit, ' +
-                        'stash, or reset any changes and try again.\n')
+            except Exception as e:
+                # Git reports local-changes conflicts in its error output, so match on that
+                # to tell a dirty tree apart from other failures such as network or access errors.
+                error_text = str(getattr(e, 'stderr', '') or e)
+                dirty_markers = ('would be overwritten', 'commit your changes or stash')
+                print(f'\n\x1b[33mWARNING\x1b[0m: Failed to update {repo}' +
+                        '\nContinuing without updating the repo.')
+                if any(marker in error_text for marker in dirty_markers):
+                    print(f'To resolve, check {repo} for a dirty feature branch and commit, ' +
+                            'stash, or reset any changes and try again.\n')
+                else:
+                    print(f'Error: {error_text.strip()}\n')
         else:
             print(f'{repo} not found. Cloning to {local_repo_path}')
             git.Repo.clone_from(url=f'git@github.com:{org}/{repo}.git', to_path=local_repo_path)
