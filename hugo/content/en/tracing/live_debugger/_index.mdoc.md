@@ -53,7 +53,7 @@ Live Debugger uses logpoints: auto-expiring, non-breaking breakpoints that colle
 
 Live Debugger provides:
 
-- **Dynamic logpoints** (non-breaking breakpoints) placed at any supported code location you choose in your application or third-party libraries.
+- **Dynamic logpoints** (non-breaking breakpoints) placed at supported code locations in your application or third-party libraries.
 - **Real-time inspection** of variable values, method arguments, and execution context in running code.
 - **Safe, non-invasive data capture** that collects debugging information without pausing applications or requiring redeploys.
 - **Auto-expiring logpoints** that deactivate automatically after a configurable duration.
