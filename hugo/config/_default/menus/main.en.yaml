@@ -5346,10 +5346,10 @@ menu:
       identifier: dbm_new_initiatives
       weight: 21
     - name: Database Monitoring Workbench
-      url: database_monitoring/new_initiatives/database_monitoring_workbench/
-      parent: dbm_new_initiatives
-      identifier: dbm_new_initiatives_workbench
-      weight: 1
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 22
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
