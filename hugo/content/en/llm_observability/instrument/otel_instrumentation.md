@@ -996,12 +996,9 @@ Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic 
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
 
-<!-- Agent Observability is a product name. -->
-<!-- vale Datadog.headings = NO -->
-## Enabling Agent Observability conversion
-<!-- vale Datadog.headings = YES -->
+## Enabling LLM Observability conversion
 
-To enable Agent Observability conversion, set the `dd_llmobs_enabled` attribute to `true`. Setting this attribute on any span in a trace enables conversion of the trace's generative AI spans. An explicit `false` on any span prevents conversion of the entire trace.
+To enable LLM Observability conversion, set the `dd_llmobs_enabled` attribute to `true`. Setting this attribute on any span in a trace enables conversion of the trace's generative AI spans. An explicit `false` on any span prevents conversion of the entire trace.
 
 ### Using environment variables
 
@@ -1021,7 +1018,7 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Enable Agent Observability conversion for this entire trace
+    # Enable LLM Observability conversion for this entire trace
     span.set_attribute("dd_llmobs_enabled", True)
 ```
 
