@@ -734,7 +734,9 @@ describe("type column: enum and format", () => {
 
   it("reports enum for an enumerated field, not its base type", () => {
     // Hugo's typeColumn: `else if (value.enum) typeVal = 'enum'`.
-    expect(typeOf({ type: "string", enum: ["contains", "isNot"] })).toBe("enum");
+    expect(typeOf({ type: "string", enum: ["contains", "isNot"] })).toBe(
+      "enum",
+    );
     expect(typeOf({ type: "integer", enum: [1, 2] })).toBe("enum");
   });
 
@@ -751,7 +753,9 @@ describe("type column: enum and format", () => {
   });
 
   it("reports enum ahead of format when both are present", () => {
-    expect(typeOf({ type: "string", format: "uuid", enum: ["x"] })).toBe("enum");
+    expect(typeOf({ type: "string", format: "uuid", enum: ["x"] })).toBe(
+      "enum",
+    );
   });
 
   it("reports the format alone, not `type (format)`", () => {
@@ -776,7 +780,11 @@ describe("type column: enum and format", () => {
         in: "path",
         schema: { type: "integer", format: "int64" },
       },
-      { name: "start", in: "query", schema: { type: "string", format: "date-time" } },
+      {
+        name: "start",
+        in: "query",
+        schema: { type: "string", format: "date-time" },
+      },
       { name: "name", in: "query", schema: { type: "string" } },
     ];
     expect(paramsToFields({}, params).map((f) => f.type)).toEqual([
@@ -912,10 +920,7 @@ describe("union option types", () => {
       type: "object",
       properties: {
         thing: {
-          oneOf: [
-            { type: "string", enum: ["a", "b"] },
-            { type: "integer" },
-          ],
+          oneOf: [{ type: "string", enum: ["a", "b"] }, { type: "integer" }],
         },
       },
     };
@@ -937,10 +942,7 @@ describe("union option types", () => {
       type: "object",
       properties: {
         thing: {
-          oneOf: [
-            { $ref: "#/components/schemas/Nested" },
-            { type: "string" },
-          ],
+          oneOf: [{ $ref: "#/components/schemas/Nested" }, { type: "string" }],
         },
       },
     };
@@ -1040,8 +1042,6 @@ describe("stripReadOnlyFields", () => {
   });
 
   it("returns an empty array when everything is read-only", () => {
-    expect(
-      stripReadOnlyFields([field("a", { readOnly: true })]),
-    ).toEqual([]);
+    expect(stripReadOnlyFields([field("a", { readOnly: true })])).toEqual([]);
   });
 });
