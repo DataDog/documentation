@@ -76,12 +76,10 @@ Bits Release works by comparing a service's production behavior before and after
 
 - **You deploy straight to production.** Your changes go live for all traffic at once, rather than through a canary or a progressive rollout. A rollout that reaches a fraction of traffic dilutes the before-and-after comparison, because the service is serving both versions at the same time.
 - **Few of your changes are gated behind feature flags.** Bits Release validates a change when it deploys, not when a flag turns it on, so code that ships switched off produces little signal.
-- **Your services are backend services or web frontends.** Mobile applications, SDKs, and libraries are not supported.
+- **Your services are backend services or web frontends.** Mobile applications, SDKs, and libraries are not yet supported.
 - **You want validation after deploy, not a gate before merge.** Bits Release reports on what production did with your change. It does not block a merge or a release.
 
 A setup that differs on one of these points still works, with weaker verdicts on the changes it affects. If your delivery model differs on most of them, the preview is likely to produce more inconclusive results than useful ones.
-
-Two further constraints apply during the preview, whatever your setup: validation runs against production only, so staging and pre-production environments are not supported, and each pull request is validated on its own, so related pull requests are not grouped into one validation. Only repositories that Datadog has onboarded for you are analyzed.
 
 ## Prerequisites
 
@@ -93,7 +91,7 @@ Bits Release needs to connect a merged pull request to a running service.
 | ----------- | ---------------- |
 | [Source Code Integration][2] with read access to the repositories in scope | Reads the diff for the merged pull request. Write access to pull requests is strongly recommended. Without it, Bits Release loses the pull request comment as a notification surface. |
 | [APM][3] or [RUM][4] reporting a version tag on the services in scope | Detects deployments. Either the version tag contains the commit SHA, or the commit is attached to traces as `git.commit.sha`. Without this link, the validation closes without a verdict. |
-| A code-to-service mapping | Resolves which service a code change belongs to, from service metadata or from [service mapping][9]. |
+| A code-to-service mapping | Resolves which service a code change belongs to, from service metadata or from [service mapping][8]. |
 
 ### Recommended
 
@@ -101,17 +99,6 @@ Bits Release needs to connect a merged pull request to a running service.
 | ----------- | ------------ |
 | [Slack integration][5] | Push notification to the pull request author when a verdict is ready. |
 | An existing [synthetic test][6] on the same domain | Lets Bits Release create synthetic validation for the change. It reuses the URL and authentication method from your existing test. Without one, it has no reliable way to reach and authenticate against your application. |
-
-### Permissions
-
-Access to Bits Release is controlled by two permissions:
-
-| Permission | Grants |
-| ---------- | ------ |
-| `release_agent_read` | View validation plans, expected impacts, verdicts, and evidence. |
-| `release_agent_feedback_write` | Submit feedback on a verdict. |
-
-Both are granted to the Datadog Standard and Datadog Studio Admin roles by default. If your organization uses custom roles, a Datadog Admin adds the permissions to those roles in [**Organization Settings > Roles**][8].
 
 ## Where results appear
 
@@ -121,7 +108,7 @@ Both are granted to the Datadog Standard and Datadog Studio Admin roles by defau
 
 ## Billing
 
-Bits Release is free during the private preview. It does not consume [AI Credits][10], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
+Bits Release is free during the private preview. It does not consume [AI Credits][9], and the temporary monitors and synthetic tests it creates while validating a change are not billed as Synthetic Monitoring or monitor usage.
 
 ## Send feedback
 
@@ -138,6 +125,5 @@ Verdict quality depends on feedback, and the preview is the moment when it has t
 [5]: /integrations/slack/
 [6]: /synthetics/
 [7]: https://app.datadoghq.com/ci/bits-release
-[8]: https://app.datadoghq.com/organization-settings/roles
-[9]: /source_code/service-mapping/
-[10]: /account_management/billing/ai_credits/
+[8]: /source_code/service-mapping/
+[9]: /account_management/billing/ai_credits/
