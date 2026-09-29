@@ -33,6 +33,7 @@ Your application owns configuration availability, freshness, and the tracking li
 
 - Install `@datadog/openfeature-browser` 2.0.0 or later, `@openfeature/web-sdk`, and `@openfeature/core`, following the [JavaScript installation instructions][2]. The examples use npm package imports.
 - To fetch rules from Datadog, provide a [client token][3], environment name, and Datadog site.
+- Enabling client rules delivery for your organization requires **Feature Flag Environment Config Write** permission. This permission is not needed to use the SDK if the setting is already enabled. See [Permissions and Access Control][9].
 - Distribute only browser-appropriate flags to the **Client** [distribution channel][4].
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
@@ -52,8 +53,6 @@ Before fetching rules, enable client rules delivery for your organization. This 
 1. Open **Feature Flags** > **Settings** > [**Flag Delivery**][8].
 2. Enable **Allow local rule evaluation in client SDKs**.
 3. Click **Save**.
-
-Changing this setting requires **Feature Flag Environment Config Write** permission. See [Permissions and Access Control][9].
 
 This setting is separate from the per-flag [**Client** distribution channel][4]. The standard precomputed `DatadogProvider` setup does not require it.
 
