@@ -738,8 +738,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_2329487120",
+      "description": "Send deflate logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_1920474053",
       "description": "Send gzip logs returns \"Response from server (always 200 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_348923381",
+      "description": "Send gzip logs with explicit compression returns \"Response from server (always 200 empty JSON).\" response"
     },
     {
       "group": "logs",
@@ -876,6 +886,16 @@
     },
     {
       "group": "monitors",
+      "suffix": "_1553931399",
+      "description": "Create a Data Quality monitor with a model configuration returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2986418353",
+      "description": "Create a Data Quality monitor with a source to target configuration returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_1532893480",
       "description": "Create a Data Quality monitor with sensitivity returns \"OK\" response"
     },
@@ -938,6 +958,11 @@
       "group": "monitors",
       "suffix": "_440013737",
       "description": "Create an Error Tracking monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1348801712",
+      "description": "Create an LLM Observability monitor returns \"OK\" response"
     }
   ],
   "UpdateMonitor": [

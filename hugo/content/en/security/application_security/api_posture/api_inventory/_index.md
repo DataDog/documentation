@@ -7,13 +7,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/primary-risks-to-api-security/"
   tag: "Blog"
   text: "Mitigate the primary API security risks"
+- link: "https://www.datadoghq.com/blog/improve-api-authentication-detection-with-datadog/"
+  tag: "Blog"
+  text: "Improve API authentication detection with Datadog"
 ---
-
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
 
 [API Inventory][1] is a continuously updated catalog of the API endpoints and services API Posture discovers across your environment. It shows security context for each endpoint, such as authentication status, public exposure, sensitive data flows, and associated findings.
 

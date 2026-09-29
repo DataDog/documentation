@@ -39,7 +39,7 @@ logs_config:
     force_use_http: true
 {{< /code-block >}}
 
-See the [sample config_template.yaml file][6] for all available configuration options.
+For all available configuration options, see the [example Agent configuration files][6] for your operating system.
 
 <div class="alert alert-info">Starting with Agent v6.19+/v7.19+, HTTPS transport is the default transport used. For more details, see <a href="/agent/logs/log_transport/">Agent transport</a>.</div>
 
@@ -257,7 +257,7 @@ For both file and journald tailer types, if an `end` or `beginning` position is 
 [3]: /containers/kubernetes/log/
 [4]: /containers/docker/log/
 [5]: /agent/configuration/agent-configuration-files/
-[6]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
+[6]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 [7]: /agent/logs/log_transport/
 [8]: /agent/configuration/agent-commands/#restart-the-agent
 [9]: /agent/configuration/agent-commands/#agent-status-and-information

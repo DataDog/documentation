@@ -10,6 +10,9 @@ further_reading:
 - link: "/tracing/trace_pipeline/ingestion_controls"
   tag: "Documentation"
   text: "Ingestion Control Page"
+- link: "https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/"
+  tag: "Architecture Center"
+  text: "Optimizing Distributed Tracing: Best practices for remaining within budget and capturing critical traces"
 ---
 
 

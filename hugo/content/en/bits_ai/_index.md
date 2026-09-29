@@ -6,9 +6,12 @@ is_beta: true
 aliases:
     - /bits_ai/query_examples/
 further_reading:
-    - link: "https://www.datadoghq.com/product/ai/bits-ai-agents/"
-      tag: "Product page"
-      text: "Bits AI Agents"
+    - link: "/account_management/billing/ai_credits/"
+      tag: "Documentation"
+      text: "AI Credits"
+    - link: "/mcp_server/"
+      tag: "Documentation"
+      text: "Get observability insights from AI agents with the Datadog MCP Server"
     - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
       tag: "Blog"
       text: "Introducing Bits Investigation, your AI on-call teammate"
@@ -24,12 +27,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/how-to-use-ai-more-effectively/"
       tag: "Blog"
       text: "How to use AI tools more effectively: Tips from Datadog Engineers"
-    - link: "/account_management/billing/ai_credits/"
-      tag: "Documentation"
-      text: "AI Credits"
-    - link: "/mcp_server/"
-      tag: "Documentation"
-      text: "Get observability insights from AI agents with the Datadog MCP Server"
+    - link: "https://www.datadoghq.com/product/ai/bits-ai-agents/"
+      tag: "Product page"
+      text: "Bits AI Agents"
 ---
 
 Bits AI is your agentic teammate in Datadog, built to automate development, security, and operational workflows. You can chat and collaborate with Bits in real time, or delegate full tasks—like alert investigations, code fixes, or security triage—and let it take care of the details.
@@ -45,6 +45,7 @@ Learn about Bits AI pricing on [AI Credits][1].
    {{< nextlink href="bits_ai/bits_chat" >}}Explore your observability data with Bits Chat{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_data_analysis" >}}Explore your business data in natural language with Bits Data Analysis{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_detection" >}}Autonomously monitor for impactful service degradations with Bits Detection{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_remediation" >}}Take action on root causes with Bits Remediation{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

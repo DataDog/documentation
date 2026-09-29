@@ -4,7 +4,8 @@
 		1. Select the buffer type you want to set (**Memory** or **Disk**).
 		1. Enter the buffer size and select the unit.
 			1. Maximum memory buffer size is 128 GB.
-			1. Maximum disk buffer size is 500 GB.
+			1. Maximum disk buffer size is 5 TB.
+				- **Note**: For Worker versions 2.20.x and older, the maximum disk buffer size is 500 GB.
 		1. In the **Behavior on full buffer** dropdown menu, select whether you want to **block** events or **drop new events** when the buffer is full.
 
 [100]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#destination-buffers

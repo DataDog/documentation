@@ -2,11 +2,14 @@
 aliases:
 - /ko/account_management/org_settings/sensitive_data_detection
 - /ko/sensitive_data_scanner/
+description: Sensitive Data Scanner를 사용하여 Datadog 로그, APM 스팬, RUM 이벤트, Agent Observability
+  트레이스, 이벤트 및 Amazon S3 버킷 전반에 걸쳐 PII, 자격 증명, 신용카드 번호와 같은 민감한 데이터를 검색, 분류하고 선택적으로
+  비식별화할 수 있습니다.
 disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/setup/telemetry_data
   tag: 설명서
-  text: 원격 측정 데이터를 위한 Sensitive Data Scanner 설정
+  text: 텔레메트리 데이터를 위한 Sensitive Data Scanner 설정
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: 설명서
   text: 클라우드 스토리지를 위한 Sensitive Data Scanner 설정
@@ -18,7 +21,7 @@ further_reading:
   text: 데이터 관련 위험 감소
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: 블로그
-  text: 민감 데이터 스캐너를 사용하여 규모에 따라 민감한 데이터 문제를 식별, 분류 및 해결하세요.
+  text: Sensitive Data Scanner를 사용하여 규모에 따라 민감한 데이터 문제를 식별, 분류 및 해결하세요.
 - link: https://www.datadoghq.com/blog/sensitive-data-scanner/
   tag: 블로그
   text: Datadog의 Sensitive Data Scanner로 최신 데이터 규정 준수 전략 구축
@@ -55,29 +58,44 @@ title: Sensitive Data Scanner
 - APM 스팬
 - 코드 리포지토리
 - Event Management의 이벤트
-- LLM Observability 트레이스
+- Agent Observability 트레이스
 - RUM 이벤트
 - 애플리케이션 로그와 같은 텔레메트리 데이터
 
 엔지니어링 팀이 작업 부하를 클라우드로 이동할 때 민감한 데이터가 클라우드 스토리지 리소스로 의도치 않게 이동할 수 있습니다. Datadog의 Sensitive Data Scanner는 민감한 데이터 유출을 방지하고 비준수 위험을 제한하는 데 도움을 줄 수 있으며, 민감한 데이터를 발견하고 분류하며 필요 시에 수정할 수 있습니다.
 
-**참고**: Datadog의 도구 및 정책은 PCI v4.0을 준수합니다. 자세한 내용은 [PCI DSS 준수][1]를 참조하세요.
+**참고**: Datadog의 도구 및 정책은 PCI v4.0을 준수합니다. 자세한 내용은 [PCI DSS Compliance][1]를 참조하세요.
 
-## 텔레메트리 데이터 스캔 {#scan-telemetry-data}
+## 지원되는 데이터 소스 {#supported-data-sources}
+
+Sensitive Data Scanner는 텔레메트리 데이터(로그, APM 스팬, RUM 이벤트 및 이벤트), Agent Observability 트레이스, 클라우드 스토리지 및 코드 리포지토리를 스캔합니다.
+
+일치하는 민감한 데이터에 적용할 수 있는 작업은 데이터 소스에 따라 다릅니다. 다음 표는 각 텔레메트리 소스 및 Agent Observability에 대해 지원되는 난독화 작업을 보여줍니다.
+
+| 작업           | 로그 | APM | RUM | 이벤트 | Agent Observability |
+|------------------|------|-----|-----|--------|---------------------|
+| 비식별화(Redact)           | 예  | 예 | 예 | 예    | 예                 |
+| 부분 비식별화(Partially redact) | 예  | 예 | 예 | 예    | 예                 |
+| 해시(Hash)             | 예  | 예 | 예 | 예    | 예                 |
+| 마스킹(Mask)             | 예  | 예 | 예 | 아니요     | 아니요                  |
+
+<div class="alert alert-info">클라우드 스토리지 및 코드 리포지토리(Secret Scanning)의 경우, Sensitive Data Scanner는 민감한 데이터를 감지할 수 있지만 비식별화 작업을 적용할 수는 없습니다.</div>
+
+### 텔레메트리 데이터 {#telemetry-data}
 
 {{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="다섯 가지의 서로 다른 민감한 발견이 감지되었으며, 그 중 두 가지는 중요도가 높고, 하나는 중간 우선 순위이며, 두 가지는 정보입니다." style="width:100%;" >}}
 
 Sensitive Data Scanner는 [클라우드](#in-the-cloud)에서 또는 [내 환경](#in-your-environment)에서 데이터를 스캔할 수 있습니다.
 
-### 클라우드에서 {#in-the-cloud}
+#### 클라우드에서  {#in-the-cloud}
 
 클라우드에서 Sensitive Data Scanner를 사용하면 로그와 이벤트를 Datadog 백엔드에 제출하므로 데이터가 비식별화되기 전에 환경을 떠납니다. 로그와 이벤트는 처리 중에 Datadog 백엔드에서 스캔되고 비식별화되므로 민감한 데이터는 이벤트가 인덱싱되고 Datadog UI에 표시되기 전에 비식별화됩니다.
 
 스캔하여 삭제할 수 있는 데이터는 다음과 같습니다.
 
 - **로그**: 로그 메시지 및 특성 값을 포함한 모든 구조화된 로그 콘텐츠 및 구조화되지 않은 로그 콘텐츠
-- **APM**: 스팬 특성 값만
-- **RUM**: 이벤트 특성 값만
+- **APM**: 스팬 특성 값에 한함
+- **RUM**: 이벤트 특성 값 전용
 - **이벤트**: 이벤트 특성 값만
 
 필요 시, 각 제품에 대해 샘플링 비율을 10%에서 99% 사이로 설정할 수 있습니다. 이는 민감한 정보를 스캔하는 데이터 양을 줄여 처음 시작할 때 비용을 관리하는 데 도움이 됩니다.
@@ -87,7 +105,7 @@ Sensitive Data Scanner는 [클라우드](#in-the-cloud)에서 또는 [내 환경
 - **비식별화**: 선택한 단일 토큰으로 일치하는 전체 데이터를 교체합니다. 예를 들어 `[sensitive_data]`.
 - **부분 비식별화**: 모든 일치하는 값의 특정 부분을 교체합니다.
 - **해시**: 일치하는 전체 데이터를 비가역적인 고유 식별자로 교체합니다.
-- **마스킹**(로그에만 사용 가능): 모든 일치하는 값을 마스킹합니다. `Data Scanner Unmask`권한이 있는 사용자는 이 데이터를 Datadog에서 마스킹 해제하고 조회할 수 있습니다. 자세한 내용은 [마스킹 액션][16]을 참조하세요.
+- **마스킹(Mask)** (로그, APM 스팬 및 RUM 이벤트에 사용 가능): 일치하는 모든 값을 난독화합니다. `Data Scanner Unmask`권한이 있는 사용자는 Datadog에서 이 데이터를 난독화 해제(마스킹 해제)하고 조회할 수 있습니다. 자세한 내용은 [마스킹 액션][16]을 참조하세요.
 
 **참고**: 샘플링된 데이터를 스캔할 때, 스캔하는 데이터를 마스킹하는 액션을 선택할 수 없습니다.
 
@@ -97,40 +115,36 @@ Sensitive Data Scanner를 사용하려면 스캔 그룹을 설정하여 스캔�
 
 세부 사항은 [텔레메트리 데이터에 대한 Sensitive Data Scanner 설정][4]을 참조하세요.
 
-### 내 환경 {#in-your-environment}
+#### 내 환경 {#in-your-environment}
 
 [Observability Pipelines][5]를 사용하여 환경 내에서 로그를 수집하고 처리한 다음, 데이터를 다운스트림 통합으로 라우팅합니다. Observability Pipelines에서 파이프라인을 설정할 때, 로그가 환경을 떠나기 전에 민감한 데이터를 비식별화하도록 [Sensitive Data Scanner 프로세서][6]를 추가하세요. 이메일 주소, 신용 카드 번호, API 키, 인증 토큰, IP 주소 등과 같은 미리 정의된 스캔 규칙을 규칙 라이브러리에서 추가할 수 있습니다. 정규식 패턴을 사용하여 나만의 규칙을 만들 수도 있습니다.
 
-자세한 내용은 [파이프라인 설정][7]을 참조하세요.
+자세한 내용은 [Pipelines 설정][7]을 참조하세요.
 
-## LLM Observability 데이터를 스캔 {#scan-llm-observability-data}
+### Agent Observability {#agent-observability}
 
-Sensitive Data Scanner는 [Datadog LLM Observability][20] 트레이스를 스캔할 수 있으며, 여기에는 LLM 애플리케이션의 입력 및 출력이 포함됩니다. 프롬프트, 완성 및 LLM 워크플로 메타데이터에서 PII, API 키 또는 독점 정보를 노출하는 것을 방지하는 데 도움이 됩니다.
+Sensitive Data Scanner는 [Agent Observability][20] 트레이스를 스캔할 수 있으며, 여기에는 LLM 애플리케이션의 입력 및 출력이 포함됩니다. 프롬프트, 완성 및 LLM 워크플로 메타데이터에서 PII, API 키 또는 독점 정보를 노출하는 것을 방지하는 데 도움이 됩니다.
 
-LLM Observability 스캔은 텔레메트리 데이터 스캔과 다른 관리형 구성 모델을 사용하며, LLM Observability 스캔에는 다음이 포함됩니다.
+Agent Observability 스캔은 텔레메트리 데이터 스캔과 다른 관리형 구성 모델을 사용하며, Agent Observability 스캔에는 다음이 포함됩니다.
 
-- **하나의 관리형 스캔 그룹**: [LLM Observability 설정 페이지][18]에 처음 접근할 때 귀하의 조직을 위해 기본 스캔 그룹이 자동으로 생성됩니다. 추가 스캔 그룹을 생성하거나 관리형 그룹을 삭제할 수 없습니다.
+- **하나의 관리형 스캐닝 그룹**: [Agent Observability 설정 페이지][18]에 처음 접근할 때 귀하의 조직을 위해 기본 스캐닝 그룹이 자동으로 생성됩니다. 추가 스캔 그룹을 생성하거나 관리형 그룹을 삭제할 수 없습니다.
 - **사용자 정의 가능한 규칙**: 기존 규칙을 수정하거나 필요 없는 규칙을 비활성화하거나 추가 민감한 데이터 패턴을 감지하기 위해 사용자 정의 스캔 규칙을 추가할 수 있습니다.
 
-각 스캔 규칙에 대해, 일치하는 민감한 데이터에 다음 중 하나의 작업을 적용할 수 있습니다.
+각 스캔 규칙에 대해, 일치하는 민감한 데이터에 다음 중 하나의 액션을 적용할 수 있습니다.
 
 - **비식별화**: 선택한 단일 토큰으로 일치하는 전체 데이터를 교체합니다. 예를 들어 `[sensitive_data]`.
 - **부분 비식별화**: 모든 일치하는 값의 특정 부분을 교체합니다.
 - **해시**: 일치하는 전체 데이터를 비가역적인 고유 식별자로 교체합니다.
 
-LLM Observability 데이터 스캔을 구성하려면 Sensitive Data Scanner 설정에서 [LLM Observability 설정 페이지][18]로 이동하세요. LLM Observability에 대한 자세한 정보는 [LLM Observability 설명서][20]를 참조하세요.
+Agent Observability 데이터 스캐닝을 구성하려면 Sensitive Data Scanner 설정의 [Agent Observability 설정 페이지][18]로 이동하십시오. Agent Observability에 대한 자세한 정보는 [Agent Observability 설명서][20]를 참조하십시오.
 
-## 클라우드 스토리지 스캔 {#scan-cloud-storage}
-
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Amazon S3 버킷 및 RDS 인스턴스에 대한 스캔 지원은 미리 보기 상태입니다. 등록하려면 <strong>Request Access</strong>를 클릭하세요.
-{{< /callout >}}
+### 클라우드 스토리지 {#cloud-storage}
 
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="세 가지 Amazon S3 발견이 있는 Findings 페이지의 데이터 저장소 섹션" style="width:100%;" >}}
 
 Sensitive Data Scanner를 활성화하면 Amazon S3 버킷에서 민감한 데이터를 분류하고 구분할 수 있습니다. **참고**: Sensitive Data Scanner는 클라우드 스토리지 리소스에서 민감한 데이터를 비식별화하지 않습니다.
 
-Sensitive Data Scanner는 클라우드 환경에 [에이전트 없는 스캐너][8]를 배포하여 민감한 데이터를 스캔합니다. 이 스캐닝 인스턴스는 [Remote Configuration][9]을 통해 모든 S3 버킷의 목록을 검색하고, 시간이 지남에 따라 CSV 및 JSON과 같은 텍스트 파일을 스캔하도록 설정된 지침을 가지고 있습니다.
+Sensitive Data Scanner는 클라우드 환경에 [Agentless 스캐너][8]를 배포하여 민감한 데이터를 스캔합니다. 이 스캐닝 인스턴스는 [Remote Configuration][9]을 통해 모든 S3 버킷의 목록을 검색하고, 시간이 지남에 따라 CSV 및 JSON과 같은 텍스트 파일을 스캔하도록 설정된 지침을 가지고 있습니다.
 
 Sensitive Data Scanner는 [전체 규칙 라이브러리][10]를 활용하여 일치 항목을 찾습니다. 일치 항목이 발견되면, 일치 항목의 위치가 스캐닝 인스턴스에 의해 Datadog으로 전송됩니다. **참고**: 데이터 저장소와 그 파일은 귀하의 환경에서만 읽히며, 스캔된 민감한 데이터는 Datadog으로 다시 전송되지 않습니다.
 
@@ -138,7 +152,7 @@ Sensitive Data Scanner는 [전체 규칙 라이브러리][10]를 활용하여 �
 
 설정 세부 사항은 [클라우드 스토리지에 대한 Sensitive Data Scanner 설정][12]을 참조하세요.
 
-## 코드 리포지토리 스캔 {#scan-code-repositories}
+### 코드 리포지토리 {#code-repositories}
 
 Datadog [Secret Scanning][21]은 코드 리포지토리를 스캔하여 소스 코드에서 노출된 암호를 감지합니다. Secret Scanning은 Sensitive Data Scanner에 의해 구동되며, SDS 라이브러리의 [암호 및 자격 증명 카테고리][19]의 모든 규칙을 사용하여 일치 항목을 찾습니다.
 
@@ -146,9 +160,11 @@ Datadog [Secret Scanning][21]은 코드 리포지토리를 스캔하여 소스 �
 
 설정 세부정보는 [Secret Scanning 설명서][21]를 참조하세요.
 
-## 민감한 데이터 발견 사항 조사 {#investigate-sensitive-data-findings}
+## 주요 기능 {#key-capabilities}
 
-{{< img src="sensitive_data_scanner/findings_20251014.png" alt="우선순위별로 분류된 민감한 데이터 발견의 개요를 보여주는 Findings page" style="width:100%;" >}}
+### 민감한 데이터 발견 사항 조사 {#investigate-sensitive-data-findings}
+
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="규칙별로 그룹화된 Sensitive Data Scanner 발견 사항 탐색기이며, US Passport Scanner 규칙이 확장되어 중요 발견 사항, 일치 항목 수 및 주간 트렌드 차트를 보여줍니다." style="width:100%;" >}}
 
 [Findings page][13]를 사용하여 스캐닝 규칙에 의해 식별된 민감한 데이터 발견의 세부정보를 확인하세요. 이 세부정보에는 다음이 포함됩니다.
 
@@ -160,13 +176,13 @@ Datadog [Secret Scanning][21]은 코드 리포지토리를 스캔하여 소스 �
 
 민감한 데이터에 대한 분류 작업에 관한 자세한 내용은 [민감한 데이터 발견 사항 조사][14]를 참조하세요.
 
-## 민감한 데이터 트렌드 검토 {#review-sensitive-data-trends}
+### 민감한 데이터 트렌드 검토 {#review-sensitive-data-trends}
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview 대시보드" style="width:80%;">}}
 
-Sensitive Data Scanner가 활성화되면, 민감한 데이터 발견을 요약한 [기본 제공 대시보드][15]가 계정에 자동으로 설치됩니다. 이 대시보드에 액세스하려면 **Dashboards** > **Dashboards List**로 이동하여 'Sensitive Data Scanner Overview'를 검색하세요.
+Sensitive Data Scanner가 활성화되면, 민감한 데이터 발견을 요약한 [기본 제공 대시보드][15]가 계정에 자동으로 설치됩니다. 이 대시보드에 액세스하려면 {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}}로 이동하여 'Sensitive Data Scanner Overview'를 검색하십시오.
 
-## 추가 자료 {#further-reading}
+## 참고 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

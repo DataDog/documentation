@@ -67,12 +67,12 @@ Agent `v7.59+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -113,12 +113,12 @@ Agent `v7.75+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -159,12 +159,12 @@ Agent `v7.72+` is required.
          - "tag_key:tag_value"
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
-     ## optional configs:
-     # max_ttl: 30 # max traceroute TTL, default is 30
-     # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-     # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
-     # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-     # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+       ## optional configs:
+       # max_ttl: 30 # max traceroute TTL, default is 30
+       # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+       # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
+       # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+       # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
      # more endpoints
      - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -183,7 +183,7 @@ Agent `v7.59+` is required.
 
 <div class="alert alert-info">Helm chart v3.109.1+ is required. For more information, reference the <a href="https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md">Datadog Helm Chart documentation</a> and the documentation <a href="https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration">for Kubernetes and Integrations.</a></div>
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
+To enable Network Path on Linux Kubernetes nodes using Helm, add the following to your `values.yaml` file.
 
   ```yaml
   datadog:
@@ -204,12 +204,12 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key:tag_value"
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
-          ## optional configs:
-          # max_ttl: 30 # max traceroute TTL, default is 30
-          # timeout: 1000 # timeout in milliseconds per hop, default is 1s
-          # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
-          # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
-          # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
+            ## optional configs:
+            # max_ttl: 30 # max traceroute TTL, default is 30
+            # timeout: 1000 # timeout in milliseconds per hop, default is 1s
+            # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
+            # traceroute_queries: 3 # number of traceroutes to send per check run, default is 3
+            # e2e_queries: 50 # number of end-to-end probes to send per check run, default is 50
 
           # more endpoints
           - hostname: 1.1.1.1 # endpoint hostname or IP
@@ -249,25 +249,25 @@ Datadog Autodiscovery allows you to enable Network Path on a per-service basis t
                "min_collection_interval": 300
              },
              "instances": [
-                   {
-                     "protocol": "TCP",
-                     "port": 443,
-                     "source_service": "<CONTAINER_NAME>",
-                     "tags": [
-                       "tag_key:tag_value",
-                       "tag_key2:tag_value2"
-                     ],
-                     "hostname": "api.datadoghq.eu"
-                   },
-                   {
-                     "protocol": "UDP",
-                     "source_service": "<CONTAINER_NAME>",
-                     "tags": [
-                       "tag_key:tag_value",
-                       "tag_key2:tag_value2"
-                     ],
-                     "hostname": "1.1.1.1"
-                   },
+               {
+                 "protocol": "TCP",
+                 "port": 443,
+                 "source_service": "<CONTAINER_NAME>",
+                 "tags": [
+                   "tag_key:tag_value",
+                   "tag_key2:tag_value2"
+                 ],
+                 "hostname": "api.datadoghq.eu"
+               },
+               {
+                 "protocol": "UDP",
+                 "source_service": "<CONTAINER_NAME>",
+                 "tags": [
+                   "tag_key:tag_value",
+                   "tag_key2:tag_value2"
+                 ],
+                 "hostname": "1.1.1.1"
+               }
              ]
            }
          }
@@ -331,31 +331,31 @@ Agent `v7.73+` is required.
         # workers: <NUMBER OF WORKERS> # default 4
     ```
 
-    For full configuration details, reference the [example config][3], or use the following:
+    For additional configuration options, see the [example config][3], or use the following:
 
     ```yaml
     network_path:
       connections_monitoring:
-        ## @param enabled - bool - required - default:false
-        ## Enable network path collection
+        ## @param enabled - boolean - optional - default: false
+        ## Enable network path collection for CNM connections. Required for dynamic tests.
         #
         enabled: true
       collector:
-        ## @param workers - int - optional - default:4
+        ## @param workers - integer - optional - default: 4
         ## Number of workers that can collect paths in parallel
-        ## Recommendation: leave at default
         #
         # workers: <NUMBER OF WORKERS> # default 4
 
-        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+        # @param pathtest_interval - string - optional - default: "30m"
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
         # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-        # pathtest_interval: 10m
+        # pathtest_interval: "30m"
 
-        # @param pathtest_ttl - integer - optional - default: 35m
-        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+        # @param pathtest_ttl - string - optional - default: "70m"
+        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
-        # pathtest_ttl: 35m
+        # pathtest_ttl: "70m"
 
         ## @param filters - list - optional
         ## Include or exclude specific domains or IP ranges from dynamic monitoring.
@@ -374,7 +374,61 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
+
+{{% /tab %}}
+{{% tab "macOS" %}}
+
+Agent `v7.79+` is required.
+
+1. Enable the `system-probe` traceroute module in `/opt/datadog-agent/etc/system-probe.yaml` by adding the following:
+
+   ```yaml
+   traceroute:
+     enabled: true
+   ```
+
+2. Add additional configuration details in the `/opt/datadog-agent/etc/datadog.yaml` file or reference the [example configuration file][3]:
+
+   ```yaml
+   network_path:
+     connections_monitoring:
+       ## Enable network path collection for CNM connections. Required for dynamic tests.
+       enabled: true
+     collector:
+       ## @param workers - integer - optional - default: 4
+       ## Number of workers that can collect paths in parallel
+       #
+       # workers: <NUMBER OF WORKERS> # default 4
+
+       # @param pathtest_interval - string - optional - default: "30m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
+       # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+       # pathtest_interval: "30m"
+
+       # @param pathtest_ttl - string - optional - default: "70m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
+       # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+       # The TTL is reset each time the connection is seen again.
+       # pathtest_ttl: "70m"
+
+       ## @param filters - list - optional
+       ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+       ## Filters are applied sequentially, with later filters taking precedence.
+       ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+       #
+       # filters:
+       #   - match_domain: '*.example.com'
+       #     type: exclude
+       #   - match_ip: 10.0.0.0/8
+       #     type: exclude
+       #   - match_domain: 'api.datadoghq.com'
+       #     type: include
+   ```
+
+3. Restart the Agent after making these configuration changes to start seeing network paths.
+
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_darwin.yaml.example
 
 {{% /tab %}}
 {{% tab "Windows" %}}
@@ -400,31 +454,31 @@ Agent `v7.73+` is required.
        # workers: <NUMBER OF WORKERS> # default 4
    ```
 
-   For full configuration details, reference the [example config][3], or use the following:
+   For additional configuration options, see the [example config][3], or use the following:
 
    ```yaml
    network_path:
      connections_monitoring:
-       ## @param enabled - bool - required - default:false
-       ## Enable network path collection
+       ## @param enabled - boolean - optional - default: false
+       ## Enable network path collection for CNM connections. Required for dynamic tests.
        #
        enabled: true
      collector:
-       ## @param workers - int - optional - default:4
+       ## @param workers - integer - optional - default: 4
        ## Number of workers that can collect paths in parallel
-       ## Recommendation: leave at default
        #
        # workers: <NUMBER OF WORKERS> # default 4
 
-       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
+       # @param pathtest_interval - string - optional - default: "30m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-       # pathtest_interval: 10m
+       # pathtest_interval: "30m"
 
-       # @param pathtest_ttl - integer - optional - default: 35m
-       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
+       # @param pathtest_ttl - string - optional - default: "70m"
+       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
        # The TTL is reset each time the connection is seen again.
-       # pathtest_ttl: 35m
+       # pathtest_ttl: "70m"
 
        ## @param filters - list - optional
        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
@@ -442,61 +496,70 @@ Agent `v7.73+` is required.
 
 3. Restart the Agent after making these configuration changes to start seeing network paths.
 
-[3]: https://github.com/DataDog/datadog-agent/blob/2c8d60b901f81768f44a798444af43ae8d338843/pkg/config/config_template.yaml#L1731
+[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.73+` is required.
+Agent `v7.73+` and Helm chart `v3.124.0+` are required. Configuring filters additionally requires Agent `v7.83.2+` and Helm chart `v3.249.0+`.
 
-To enable Network Path with Kubernetes using Helm, add the following to your `values.yaml` file.
-**Note:** Helm chart v3.124.0+ is required. For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
+To enable Network Path on Linux Kubernetes nodes using Helm, add the following to your `values.yaml` file.
+For more information, reference the [Datadog Helm Chart documentation][1] and the documentation for [Kubernetes and Integrations][2].
 
 ```yaml
+# Network Path filters require Agent v7.83.2+.
+# agents:
+#   image:
+#     tag: "<AGENT_VERSION>"
+
 datadog:
-  networkPath:
-    connectionsMonitoring:
-      enabled: true
   ## Set to true to enable the Traceroute Module of the System Probe
   traceroute:
     enabled: true
 
-  ## @param collector - custom object - optional
-  ## Configuration related to Network Path Collector.
-  #
-  collector:
-    ## @param workers - integer - optional - default: 4
-    ## @env DD_WORKERS - integer - optional - default: 4
-    ## The `workers` refers to the number of concurrent workers available for network path execution.
-    #
-    # workers: 4
-    
-    ## @param pathtest_interval - integer - optional - default: 35m
-    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 30m
-    ## The `pathtest_interval` refers to the traceroute run interval for monitored connections.
-    #
-    # pathtest_interval: 30m
+  ## Enable Cloud Network Monitoring, which is required for dynamic tests.
+  networkMonitoring:
+    enabled: true
 
-    ## @param pathtest_ttl - integer - optional - default: 35m
-    ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-    ## The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-    ## The TTL is reset each time the connection is seen again.
-    #
-    # pathtest_ttl: 35m
+  networkPath:
+    connectionsMonitoring:
+      enabled: true
 
-    ## @param filters - list - optional
-    ## Include or exclude specific domains or IP ranges from dynamic monitoring.
-    ## Filters are applied sequentially, with later filters taking precedence.
-    ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+    ## @param collector - custom object - optional
+    ## Configuration related to Network Path Collector.
     #
-    # filters:
-    #   - match_domain: '*.example.com'
-    #     type: exclude
-    #   - match_ip: 10.0.0.0/8
-    #     type: exclude
-    #   - match_domain: 'api.datadoghq.com'
-    #     type: include
+    # collector:
+      ## @param workers - integer - optional - default: 4
+      ## @env DD_NETWORK_PATH_COLLECTOR_WORKERS - integer - optional - default: 4
+      ## The `workers` refers to the number of concurrent workers available for network path execution.
+      #
+      # workers: 4
 
+      ## @param pathtestInterval - string - optional - default: 30m
+      ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: 30m
+      ## The `pathtestInterval` refers to the traceroute run interval for monitored connections.
+      #
+      # pathtestInterval: 30m
+
+      ## @param pathtestTTL - string - optional - default: 70m
+      ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: 70m
+      ## The `pathtestTTL` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
+      ## The TTL is reset each time the connection is seen again.
+      #
+      # pathtestTTL: 70m
+
+      ## @param filters - list - optional
+      ## Include or exclude specific domains or IP ranges from dynamic monitoring.
+      ## Filters are applied sequentially, with later filters taking precedence.
+      ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
+      #
+      # filters:
+      #   - match_domain: '*.example.com'
+      #     type: exclude
+      #   - match_ip: 10.0.0.0/8
+      #     type: exclude
+      #   - match_domain: 'api.datadoghq.com'
+      #     type: include
 ```
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md
 [2]: https://docs.datadoghq.com/containers/kubernetes/integrations/?tab=helm#configuration
@@ -581,6 +644,8 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 
 The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
 
+For Helm configuration, add the same filter list to `datadog.networkPath.collector.filters` in `values.yaml`.
+
 To include or exclude specific domains or IP ranges from dynamic tests, add the following to your `/etc/datadog-agent/datadog.yaml` file:
 
 ```yaml
@@ -592,7 +657,7 @@ network_path:
         type: exclude
 
       # exclude domain using `*` wildcard
-      - match_domain: '*.datadoghq.com'      # this translates to regex '.*\.datadoghq\.com
+      - match_domain: '*.datadoghq.com'
         type: exclude
       - match_domain: '*.zoom.us'
         match_domain_strategy: wildcard      # use simple wildcard matching (wildcard matching is the default)
@@ -614,7 +679,7 @@ network_path:
         type: include
 ```
 
-**Note**: 
+**Note**:
 Filters are applied sequentially, with later filters taking precedence over earlier ones.
 
 For example, all domains matching `*.datadoghq.com` are ignored, except `api.datadoghq.com`.

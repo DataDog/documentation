@@ -15,12 +15,6 @@ further_reading:
     text: "AAP threat intelligence"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Overview
 
 AAP security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
@@ -160,7 +154,7 @@ To see all of the saved views, click {{< ui >}}Views{{< /ui >}} next to the {{< 
 [2]: https://app.datadoghq.com/security/appsec/signals?query=%40workflow.rule.type%3A%22Application%20Security%22&column=time&order=desc&viz=stream&start=1694726477747&end=1695331277747&paused=false
 [4]: /incident_response/incident_management/
 [5]: /actions/workflows/
-[6]: /incident_response/case_management/
+[6]: /incident_response/work_management/
 [7]: https://app.datadoghq.com/security/appsec?
 [8]: /security/notifications/rules/
 [9]: /account_management/rbac/permissions/#cloud-security-platform

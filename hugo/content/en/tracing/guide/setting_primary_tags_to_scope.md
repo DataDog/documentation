@@ -177,7 +177,7 @@ Primary tags appear at the top of APM pages. Use these selectors to filter the d
 [3]: /getting_started/tagging/unified_service_tagging
 [4]: /getting_started/tagging/assigning_tags/#traces
 [5]: /tracing/metrics/metrics_namespace/
-[6]: https://app.datadoghq.com/apm/settings
+[6]: https://app.datadoghq.com/apm/settings/default-settings
 [7]: https://app.datadoghq.com/services
 [8]: /getting_started/tagging/assigning_tags
 [9]: /tracing/troubleshooting/#data-volume-guidelines

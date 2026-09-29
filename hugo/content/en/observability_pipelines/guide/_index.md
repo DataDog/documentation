@@ -1,5 +1,6 @@
 ---
 title: Observability Pipelines Guides
+description: Find guides on reducing log volume, environment variables, upgrading the Worker, and working with Observability Pipelines processors.
 disable_toc: false
 ---
 
@@ -7,6 +8,7 @@ disable_toc: false
     {{< nextlink href="observability_pipelines/guide/strategies_for_reducing_log_volume" >}}Strategies for reducing log volume{{< /nextlink >}}
     {{< nextlink href="observability_pipelines/guide/environment_variables" >}}Environment variables for sources, processors, and destinations{{< /nextlink >}}
     {{< nextlink href="/byoc-logs/guides/send_otel_logs_observability_pipelines" >}}Send OpenTelemetry logs to BYOC Logs with Observability Pipelines{{< /nextlink >}}
+    {{< nextlink href="observability_pipelines/guide/manage_pipelines_with_terraform_and_api" >}}Manage Observability Pipelines with the API or Terraform{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Worker Upgrade Guides" >}}

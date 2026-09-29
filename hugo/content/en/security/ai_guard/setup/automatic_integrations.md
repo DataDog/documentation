@@ -30,6 +30,7 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 |----------------------------------|--------------------|-------------|
 | [AI SDK](#nodejs)                | v6                 | >= 5.95.0   |
 | [OpenAI](#nodejs)                | >= 4.87.0          | >= 5.105.0  |
+| [Anthropic](#nodejs)             | >= 0.14.0          | >= 6.11.0   |
 
 {{% /tab %}}
 {{% tab "Ruby" %}}

@@ -1,13 +1,12 @@
 ---
 aliases:
 - /fr/getting_started/tracing/distributed-tracing
-description: Configurez la surveillance des performances des applications (APM) pour
-  identifier les goulets d'étranglement, résoudre les problèmes et envoyer des traces
-  à Datadog.
+description: Configurez l'Application Performance Monitoring (APM) pour identifier
+  les goulots d'étranglement, résoudre les problèmes et envoyer des traces à Datadog.
 further_reading:
 - link: /tracing/
   tag: Documentation
-  text: En savoir plus sur les fonctionnalités de lʼAPM
+  text: En savoir plus sur les fonctionnalités d'APM
 - link: /tracing/metrics/runtime_metrics/
   tag: Documentation
   text: Activer les métriques runtime
@@ -22,30 +21,37 @@ further_reading:
   text: Participer à une session interactive pour maîtriser la solution APM
 title: Débuter avec le tracing APM
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La solution Application Performance Monitoring (APM) de Datadog vous permet dʼanalyser vos applications en détail, et ainsi d'identifier les goulets d'étranglement, de résoudre les problèmes et d'optimiser vos services.
+Datadog Application Performance Monitoring (APM) vous permet d'analyser vos applications en détail, et ainsi d'identifier les goulets d'étranglement, de résoudre les problèmes et d'optimiser vos services.
 
-Ce guide explique comment bien débuter avec lʼAPM et envoyer votre première trace à Datadog :
+Ce guide explique comment bien débuter avec APM et envoyer votre première trace à Datadog :
 
 1. Configurez Datadog APM pour envoyer des traces à Datadog.
 1. Exécutez votre application pour générer des données.
 1. Explorez les données collectées dans Datadog.
 
-## Conditions préalables {#prerequisites}
+{{< skill-callout
+    title="Configurez APM avec un agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
+
+## Prérequis {#prerequisites}
 
 Pour compléter ce guide, vous avez besoin des éléments suivants :
 
-1. [Créez un compte Datadog][1] si vous ne l'avez pas déjà fait.
-1. Trouvez ou créez une [clé API Datadog][2].
-1. Démarrez un hôte ou une VM Linux.
+1. [Créez un compte Datadog][1] si ce n'est pas déjà fait.
+1. Recherchez ou créez une [clé d'API Datadog][2].
+1. Démarrez un host Linux ou une VM.
 
 ## Créez une application {#create-an-application}
 
 Pour créer une application à observer dans Datadog :
 
-1. Sur votre hôte ou VM Linux, créez une nouvelle application Python nommée `hello.py`. Par exemple, `nano hello.py`.
-1. Ajoutez le code suivant à `hello.py` :
+1. Sur votre host Linux ou votre VM, créez une nouvelle application Python nommée `hello.py`. Par exemple, `nano hello.py`.
+1. Ajoutez le code suivant à `hello.py` :
 
     {{< code-block lang="python" filename="hello.py" collapsible="true" disable_copy="false" >}}
   from flask import Flask
@@ -70,10 +76,10 @@ Pour créer une application à observer dans Datadog :
 
 ## Configurez Datadog APM {#set-up-datadog-apm}
 
-Pour configurer la solution APM de Datadog sans avoir à modifier le code de votre application ni le processus de déploiement, utilisez lʼinstrumentation APM en une étape. Vous pouvez aussi configurer la solution APM à l'aide des bibliothèques de [traçage de Datadog][8].
+Pour configurer Datadog APM sans avoir à modifier le code de votre application ni le processus de déploiement, utilisez l'instrumentation APM en une étape. Vous pouvez aussi configurer la solution APM à l'aide des bibliothèques de [traçage de Datadog][8].
 
 
-1. Exécutez la commande d'installation :
+1. Exécutez la commande d'installation :
 
    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -81,41 +87,41 @@ Pour configurer la solution APM de Datadog sans avoir à modifier le code de vot
  
     Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
 
-1. Redémarrez les services sur votre hôte ou VM.
-1. Vérifiez que l'Agent fonctionne :
+1. Redémarrez les services sur votre host ou votre VM.
+1. Vérifiez que l'Agent est en cours d'exécution :
 
     ```shell
    sudo datadog-agent status
    ```
 
-Cette approche permet dʼinstaller automatiquement lʼAgent Datadog, dʼactiver lʼAPM Datadog et [dʼinstrumenter][5] votre application au moment de l'exécution.
+Cette approche permet d'installer automatiquement le Datadog Agent, d'activer Datadog APM et [d'instrumenter][5] votre application au moment de l'exécution.
 
 ## Exécutez l'application {#run-the-application}
 
-Lorsque vous configurez lʼAPM Datadog avec lʼinstrumentation en une étape, Datadog instrumente automatiquement votre application au moment de l'exécution.
+Lorsque vous configurez Datadog APM avec l'instrumentation en une étape, Datadog instrumente automatiquement votre application au moment de l'exécution.
 
-Pour exécuter `hello.py` :
+Pour exécuter `hello.py` :
 
-1. Créez un environnement virtuel Python dans le répertoire courant :
+1. Créez un environnement virtuel Python dans le répertoire actuel :
 
    ```shell
    python3 -m venv ./venv
    ```
 
-1. Activez l'environnement virtuel `venv` :
+1. Activez l'`venv` environnement virtuel :
 
    ```shell
    source ./venv/bin/activate
    ```
 
-1. Installez `pip` et `flask` :
+1. Installez `pip` et `flask` :
 
    ```shell
    sudo apt-get install python3-pip
    pip install flask
    ```
 
-1. Définissez le nom du service et exécutez `hello.py` :
+1. Définissez le nom du service et exécutez `hello.py` :
 
    ```shell
    export DD_SERVICE=hello
@@ -126,7 +132,7 @@ Pour exécuter `hello.py` :
 
 Testez l'application pour envoyer des traces à Datadog :
 
-1. Dans une nouvelle invite de commande, exécutez ce qui suit :
+1. Dans une nouvelle invite de commande, exécutez ce qui suit :
 
    ```shell
    curl http://0.0.0.0:5050/
@@ -140,34 +146,34 @@ Chaque fois que vous exécutez la commande `curl`, une nouvelle trace est envoy�
 
 ## Explorez les traces dans Datadog {#explore-traces-in-datadog}
 
-1. Dans Datadog, allez à [**APM** > **Services**][3]. Vous devriez voir un service Python nommé `hello` :
+1. Dans Datadog, accédez à [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3]. Vous devriez voir un service Python nommé `hello` :
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Le catalogue de logiciels montre le nouveau service Python." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="Le Catalog affiche le nouveau service Python." style="width:100%;" >}}
 
-1. Sélectionnez le service pour voir ses métriques de performance, telles que la latence, le débit et les taux d'erreur.
-1. Allez à [**APM** > **Traces**][4]. Vous devriez voir une trace pour le service `hello` :
+1. Sélectionnez le service pour afficher ses métriques de performance, telles que la latence, le débit et les taux d'erreur.
+1. Accédez à [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4]. Vous devriez voir une trace pour le service `hello` :
 
-   {{< img src="/getting_started/apm/trace-explorer.png" alt="L'explorateur de traces montre la trace pour le service hello." style="width:100%;" >}}
+   {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace Explorer affiche la trace pour le service hello." style="width:100%;" >}}
 
-1. Sélectionnez une trace pour voir ses détails, y compris le graphique de flamme, qui aide à identifier les goulets d'étranglement de performance.
+1. Sélectionnez une trace pour voir ses détails, y compris le graphique en flamme, qui aide à identifier les goulots d'étranglement de performance.
 
-## Configuration avancée de l'APM {#advanced-apm-setup}
+## Configuration APM avancée {#advanced-apm-setup}
 
-Jusqu'à présent, vous avez laissé Datadog instrumenter automatiquement l'application `hello.py` en utilisant Single Step Instrumentation. Cette approche est recommandée si vous souhaitez capturer des traces essentielles à travers des bibliothèques et des langages courants sans toucher au code ou installer manuellement des bibliothèques.
+Jusqu'à présent, vous avez laissé Datadog instrumenter automatiquement l'application `hello.py` à l'aide de l'instrumentation en une seule étape. Cette approche est recommandée si vous souhaitez capturer des traces essentielles à travers les bibliothèques et langages courants sans toucher au code ni installer manuellement des bibliothèques.
 
 Toutefois, si vous avez besoin de recueillir des traces à partir d'un code personnalisé ou si vous souhaitez un contrôle plus précis, vous pouvez ajouter [l'instrumentation personnalisée][6].
 
-Pour illustrer cela, vous allez importer le SDK Python de Datadog dans `hello.py` et créer un span personnalisé ainsi qu'une balise de span personnalisée.
+Pour illustrer cela, vous allez importer le SDK Python de Datadog dans `hello.py` et créer un span personnalisé ainsi qu'un tag de span.
 
 Pour ajouter des instrumentations personnalisées :
 
-1. Installez le SDK Datadog :
+1. Installez le SDK Datadog :
 
    ```shell
    pip install ddtrace
    ```
 
-1. Ajoutez les lignes surlignées au code dans `hello.py` pour créer une balise de span personnalisée `get_quote` et une balise de span personnalisée `quote` :
+1. Ajoutez les lignes en surbrillance au code dans `hello.py` pour créer un tag de span personnalisé `get_quote` et un tag de span personnalisé `quote` :
 
    {{< highlight python "hl_lines=3 15 17" >}}
     from flask import Flask
@@ -193,35 +199,35 @@ Pour ajouter des instrumentations personnalisées :
         app.run(host='0.0.0.0', port=5050)
    {{< /highlight >}}
 
-1. Exécutez `hello.py` dans l'environnement virtuel mentionné précédemment :
+1. Exécutez `hello.py` dans l'environnement virtuel créé précédemment :
    ```shell
    ddtrace-run python hello.py
    ```
-1. Exécutez quelques commandes `curl` dans une invite de commande séparée :
+1. Exécutez quelques commandes `curl` dans une invite de commande séparée :
    ```shell
    curl http://0.0.0.0:5050/
    ```
-1. Dans Datadog, allez à [**APM** > **Traces**][4].
-1. Sélectionnez la trace **hello**.
-1. Trouvez le nouveau span personnalisé `get_quote` dans le graphique de flamme et survolez-le :
+1. Dans Datadog, accédez à [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4].
+1. Sélectionnez la trace `hello`.
+1. Trouvez le nouveau span personnalisé `get_quote` dans le graphique en flamme et survolez-le :
 
-   {{< img src="/getting_started/apm/custom-instrumentation.png" alt="Le span personnalisé get_quote s'affiche dans le graphique de flamme. Au survol, la balise de span quote est affichée. " style="width:100%;" >}}
+   {{< img src="/getting_started/apm/custom-instrumentation.png" alt="Le span personnalisé get_quote s'affiche dans le graphique en flamme. Au survol, le tag de span de citation est affiché. " style="width:100%;" >}}
 
-1. Remarquez que la balise de span personnalisée `quote` s'affiche dans l'onglet **Info**.
+1. Remarquez que le tag de span personnalisé `quote` s'affiche sur l'onglet {{< ui >}}Info{{< /ui >}}.
 
-## Quelle est la prochaine étape ? {#whats-next}
+## Quelle est la prochaine étape ? {#whats-next}
 
-Après avoir configuré le traçage et que votre application envoie des données à Datadog, explorez des fonctionnalités APM supplémentaires :
+Une fois le tracing configuré et votre application envoyant des données à Datadog, explorez les fonctionnalités APM supplémentaires :
 
-### Catalogue de logiciels {#software-catalog}
+### Catalog {#catalog}
 
-[Catalogue de logiciels][9] fournit une vue consolidée de vos services, combinant des métadonnées de propriété, des informations de performance, une analyse de sécurité et une allocation des coûts en un seul endroit. Configurez [les métadonnées de service][10] à l'aide de balises, d'annotations ou d'un fichier `service.datadog.yaml` pour enrichir vos services avec des informations de propriété, des runbooks et des liens de documentation.
+[Catalog][9] fournit une vue consolidée de vos services, combinant métadonnées de propriété, aperçus de performance, analyse de sécurité et répartition des coûts en un seul endroit. Configurez les [métadonnées de service][10] à l'aide de tags, d'annotations ou d'un fichier `service.datadog.yaml` pour enrichir vos services avec des informations de propriété, des runbooks et des liens de documentation.
 
-### Ingestion et conservation des traces {#trace-ingestion-and-retention}
+### Ingestion et rétention des traces {#trace-ingestion-and-retention}
 
-Contrôlez les coûts et gérez le volume de données en configurant [les contrôles d'ingestion][11] et [les filtres de conservation][12]. Les contrôles d'ingestion vous permettent de personnaliser les taux d'échantillonnage au niveau de l'Agent Datadog ou du SDK, tandis que les filtres de conservation déterminent quels spans sont indexés pour la recherche et l'analyse.
+Contrôlez les coûts et gérez le volume de données en configurant des [contrôles d'ingestion][11] et des [filtres de rétention][12]. Les contrôles d'ingestion vous permettent de personnaliser les taux d'échantillonnage au niveau du Datadog Agent ou du SDK, tandis que les filtres de rétention déterminent quels spans sont indexés pour la recherche et l'analyse.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -233,7 +239,7 @@ Contrôlez les coûts et gérez le volume de données en configurant [les contr�
 [6]: /fr/tracing/trace_collection/custom_instrumentation/
 [7]: /fr/getting_started/site/
 [8]: /fr/tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /fr/internal_developer_portal/software_catalog/
-[10]: /fr/internal_developer_portal/software_catalog/entity_model/
+[9]: /fr/internal_developer_portal/catalog/
+[10]: /fr/internal_developer_portal/catalog/entity_model/
 [11]: /fr/tracing/trace_pipeline/ingestion_controls/
 [12]: /fr/tracing/trace_pipeline/trace_retention/

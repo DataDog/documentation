@@ -112,7 +112,7 @@ Windows에 Agent를 설치할 때 다음 각 구성 옵션을 명령줄에 속�
 주요 Agent 구성 파일은 다음 위치에 있습니다.
 `C:\ProgramData\Datadog\datadog.yaml`. 이 파일은 API 키, 선택한 Datadog 사이트, 프록시 파라미터, 호스트 태그 및 로그 레벨과 같은 호스트 전체 설정에 사용됩니다.
 
-같은 디렉터리에 `datadog.yaml.example` 파일도 있으며, 이는 모든 사용 가능한 구성 옵션에 대한 완전 주석형 참조 파일로, 참조 및 특정 설정 복사에 유용합니다.
+같은 디렉터리에 `datadog.yaml.example` 파일도 있으며, 이는 모든 사용 가능한 구성 옵션에 대한 완전 주석형 참조 파일로, 참조 및 특정 설정 복사에 유용합니다. 또는 GitHub에 있는 [Windows용 Agent 구성 파일 예시][19]를 참조하십시오.
 
 
 통합용 구성 파일은 다음 위치에 있습니다.
@@ -289,5 +289,6 @@ process_config:
 [16]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [17]: /ko/agent/faq/windows-agent-ddagent-user/
 [18]: https://docs.datadoghq.com/ko/agent/troubleshooting/
+[19]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys

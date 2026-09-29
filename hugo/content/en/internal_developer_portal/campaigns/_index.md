@@ -30,7 +30,7 @@ If your service is part of a campaign, related rules and deadlines appear in the
 
 Create and manage campaigns from the [**Campaigns** tab in Scorecards][2]. 
 
-**Note:** Creating a campaign requires the Service Catalog Write and Case Management Write permissions. 
+**Note:** Creating a campaign requires the Service Catalog Write and Work Management Write permissions. 
 
 {{< img src="/tracing/software_catalog/campaign-creation.png" alt="Campaign creation page with fields filled out" style="width:90%;" >}}
 

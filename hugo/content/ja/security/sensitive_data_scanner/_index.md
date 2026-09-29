@@ -2,171 +2,186 @@
 aliases:
 - /ja/account_management/org_settings/sensitive_data_detection
 - /ja/sensitive_data_scanner/
+description: Sensitive Data Scannerを使用すると、Datadogのログ、APMスパン、RUMイベント、Agent Observabilityトレース、イベント、およびAmazon
+  S3バケット全体で、PII、認証情報、クレジットカード番号などの機密データを検出、分類し、必要に応じてマスクできます。
 disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/setup/telemetry_data
   tag: ドキュメント
-  text: テレメトリーデータ用に Sensitive Data Scanner をセットアップする
+  text: テレメトリデータ用のSensitive Data Scannerをセットアップする
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: ドキュメント
-  text: クラウドストレージ用に Sensitive Data Scanner をセットアップする
+  text: クラウドストレージ用のSensitive Data Scannerをセットアップする
 - link: coterm
   tag: ドキュメント
-  text: 'CoTerm: ローカルおよびリモートシステム上のターミナルセッションと機密アクティビティを監視する'
+  text: CoTerm：ローカルおよびリモートシステムでのターミナルセッションと機密アクティビティを監視する
 - link: /data_security/
   tag: ドキュメント
   text: データ関連リスクの低減
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: ブログ
-  text: Sensitive Data Scanner で、機密データの問題を大規模に発見し、トリアージし、修復する
+  text: Sensitive Data Scannerを使用して、機密データの問題を大規模に検出、トリアージし、修正できます。
 - link: https://www.datadoghq.com/blog/sensitive-data-scanner/
   tag: ブログ
-  text: Datadog の Sensitive Data Scanner で最新のデータコンプライアンス戦略を構築する
+  text: DatadogのSensitive Data Scannerで最新のデータコンプライアンス戦略を構築する
 - link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
   tag: ブログ
   text: 機密データ管理のベストプラクティス
 - link: https://www.datadoghq.com/blog/data-security/
   tag: ブログ
-  text: Data Security でクラウドデータストア内の機密データを発見
+  text: Data Securityを使用してクラウドデータストア内の機密データを検出する
 - link: https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/
   tag: ブログ
-  text: HIPAA 要件の対象となる企業が Datadog で機密データを管理する方法
+  text: HIPAA要件の対象となる企業がDatadogで機密データを管理する方法
 - link: https://www.datadoghq.com/blog/sds-dlp-for-financial-service-companies/
   tag: ブログ
-  text: 金融サービス企業が Datadog を使って機密データを検出、分類、および管理する方法
+  text: 金融サービス企業がDatadogで機密データを検出、分類、管理する方法
 - link: https://www.datadoghq.com/blog/sds-for-insurance-companies/
   tag: ブログ
-  text: 保険会社が Datadog を使って機密データのリスクを検出、分類、および対処する方法
+  text: 保険会社がDatadogで機密データのリスクを検出、分類し、対処する方法
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: ブログ
-  text: Datadog LLM Observability を使用して Strands Agents のワークフローを可視化する
+  text: Datadog LLM ObservabilityでStrands Agentsのワークフローを可視化する
 - link: https://www.datadoghq.com/blog/observability-pipelines-mssp
   tag: ブログ
-  text: Datadog Observability Pipelines で MSSP のログ収集と集計を簡素化する
+  text: Datadog Observability PipelinesでMSSPのログ収集と集約を簡素化する
 - link: https://www.datadoghq.com/blog/datadog-cloud-security-compliance
   tag: ブログ
-  text: Datadog Cloud Security でグローバルなフレームワーク全体にコンプライアンスを拡張
+  text: Datadog Cloud Securityでグローバルなフレームワーク全体にわたってコンプライアンスを拡張する
 title: Sensitive Data Scanner
 ---
 ## 概要 {#overview}
 
-クレジットカード番号、API キー、IP アドレス、個人を特定できる情報 (PII) などの機密データは、意図せず漏洩してしまうことが多く、組織にセキュリティおよびコンプライアンス上のリスクをもたらす可能性があります。機密データは次のものに含まれていることがあります。
+クレジットカード番号、APIキー、IPアドレス、個人識別情報（PII）などの機密データは、意図せず漏洩することが多く、組織がセキュリティやコンプライアンスのリスクにさらされる可能性があります。機密データは以下に含まれている可能性があります。
  
-- APM スパン
+- APMスパン
 - コードリポジトリ
-- Event Management からのイベント
-- LLM Observability トレース
-- RUM イベント
-- アプリケーションログなどのテレメトリーデータ
+- イベント管理からのイベント
+- Agent Observabilityトレース
+- RUMイベント
+- テレメトリデータ（アプリケーションログなど）
 
-また、エンジニアリングチームがワークロードをクラウドへ移行する際に、機密データを意図せずクラウドストレージへ移動してしまうこともあります。Datadog の Sensitive Data Scanner を使用すれば、機密データを検出・分類し、必要に応じてマスキングすることで、機密データの漏洩やコンプライアンス違反のリスクを抑えることができます。
+エンジニアリングチームがワークロードをクラウドに移行する際、機密データが意図せずクラウドストレージリソースに移動してしまう可能性があります。DatadogのSensitive Data Scannerは、機密データの検出、分類、およびオプションでのマスクを行うことで、機密データの漏洩を防ぎ、コンプライアンス違反のリスクを制限するのに役立ちます。
 
-**注**: Datadog のツールとポリシーは PCI v4.0 に準拠しています。詳細については、[PCI DSS 準拠][1]を参照してください。
+**注**: DatadogのツールとポリシーはPCI v4.0に準拠しています。詳細については、[PCI DSSコンプライアンス][1]を参照してください。
 
-## テレメトリーデータをスキャンする {#scan-telemetry-data}
+## サポートされているデータソース {#supported-data-sources}
 
-{{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="5 件の異なる機密情報が検出され、2 件がクリティカル優先度、1 件がミディアム優先度、2 件が情報レベル" style="width:100%;" >}}
+Sensitive Data Scannerは、テレメトリデータ（ログ、APMスパン、RUMイベント、イベント）、Agent Observabilityトレース、クラウドストレージ、コードリポジトリをスキャンします。
 
-Sensitive Data Scanner は、[クラウド上](#in-the-cloud)または[環境内](#in-your-environment)でデータをスキャンできます。
+一致した機密データに適用できるアクションは、データソースによって異なります。次の表は、各テレメトリソースおよびAgent Observabilityでサポートされているマスクアクションを示しています。
 
-### クラウド上 {#in-the-cloud}
+| アクション           | ログ | APM | RUM | イベント | Agent Observability |
+|------------------|------|-----|-----|--------|---------------------|
+| マスク           | はい  | はい | はい | はい    | はい                 |
+| 部分マスク | はい  | はい | はい | はい    | はい                 |
+| ハッシュ化             | はい  | はい | はい | はい    | はい                 |
+| マスク             | はい  | はい | はい | いいえ     | いいえ                  |
 
-クラウド上で Sensitive Data Scanner を使用する場合、ログやイベントを Datadog バックエンドに送信するため、マスキングが行われる前にデータは環境外へ出ます。ログやイベントは処理中に Datadog バックエンドでスキャンおよびマスキングされるため、機密データはイベントがインデックスされ、Datadog UI に表示される前にマスキングされます。
+<div class="alert alert-info">クラウドストレージおよびコードリポジトリ（シークレットスキャン）の場合、Sensitive Data Scannerは機密データを検出できますが、マスクアクションを適用することはできません。</div>
 
-スキャンおよびマスキングの対象となるデータは次のとおりです。
+### テレメトリーデータ {#telemetry-data}
 
-- **ログ**: ログメッセージや属性値など、構造化・非構造化を含むすべてのログ内容
-- **APM**: スパンの属性値のみ
-- **RUM**: イベントの属性値のみ
-- **イベント**: イベントの属性値のみ
+{{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="5つの異なる機密情報が検出されました。そのうち2つは優先度が高く、1つは中程度、2つは情報レベルです。" style="width:100%;" >}}
 
-オプションで、各製品のサンプリングレートを 10% から 99% の間で設定できます。これにより、機密情報のスキャン対象となるデータ量が減少し、開始時のコスト管理に役立ちます。
+Sensitive Data Scannerは、[クラウド内](#in-the-cloud)または[お客様の環境内](#in-your-environment)のデータをスキャンできます。
 
-[スキャンルール][17]ごとに、一致した機密データに次のいずれかのアクションを適用できます。
+#### クラウド内  {#in-the-cloud}
 
-- **Redact**: 一致したデータ全体を `[sensitive_data]` などの選択した単一のトークンで置き換えます。
-- **Partially redact**: 一致するすべての値の特定の部分を置き換えます。
-- **Hash**: 一致したデータ全体を非可逆の一意の識別子で置き換えます。
-- **Mask** (ログにのみ利用可能): 一致するすべての値を難読化します。`Data Scanner Unmask` の権限を持つユーザーは、このデータを Datadog で難読化解除（マスク解除）して表示できます。詳細については、[マスクアクション][16]を参照してください。
+クラウド上のSensitive Data Scannerを使用する場合、ログとイベントをDatadogバックエンドに送信するため、データはマスクされる前に環境外へ送信されます。ログとイベントは処理中にDatadogバックエンドでスキャンおよびマスクされるため、機密データはイベントがインデックス化されDatadog UIに表示される前にマスクされます。
 
-**注**: サンプリングデータをスキャンするときは、スキャンするデータを難読化するアクションは選択できません。
+スキャンおよびマスク可能なデータは以下の通りです。
 
-Sensitive Data Scanner を使用するためには、まずスキャングループを設定してスキャン対象のデータを定義し、次にスキャンルールを設定してデータ内でマッチングさせる機密情報を決定します。スキャンルールについて、次のことが可能です。
-- Datadog の [Scanning Rule Library][2] にあるあらかじめ定義されたスキャンルールを追加する(メールアドレス、クレジットカード番号、API キー、認可トークン、ネットワーク・デバイス情報など、一般的なパターンを検出)。
-- [独自の正規表現パターン (regex) を使って独自ルールを作成][3]する。
+- **ログ**: ログメッセージや属性値を含む、すべての構造化および非構造化ログコンテンツ
+- **APM**: スパン属性値のみ
+- **RUM**: イベント属性値のみ
+- **イベント**: イベント属性値のみ
 
-設定手順の詳細は、[テレメトリーデータ用に Sensitive Data Scanner をセットアップする][4]を参照してください。
+オプションで、各製品のサンプリングレートを10%から99%の間で設定できます。これは、機密情報のスキャン対象となるデータ量を削減することで、利用開始時のコスト管理に役立ちます。
 
-### 環境内で {#in-your-environment}
+各[スキャンルール][17]について、一致した機密データに対して以下のいずれかのアクションを適用できます。
 
-[Observability Pipelines][5] を使用して、環境内でログを収集および処理し、そのデータを下流のインテグレーションにルーティングします。Observability Pipelines でパイプラインを設定するときに、[Sensitive Data Scanner プロセッサ][6]を追加することで、ログが環境外へ出る前に機密データをマスキングします。メールアドレス、クレジットカード番号、API キー、認可トークン、IP アドレスなどのあらかじめ定義されたスキャンルールをルールライブラリから利用できるほか、正規表現パターンを用いて独自にルールを作成することも可能です。
+- **マスク**: 一致したデータ全体を、`[sensitive_data]`のように選択した単一のトークンに置き換えます。
+- **部分マスク**: 一致するすべての値の特定の箇所を置き換えます。
+- **ハッシュ化**: 一致したデータ全体を、不可逆な一意の識別子に置き換えます。
+- **マスク** (ログ、APMスパン、RUMイベントで利用可能): 一致するすべての値をマスクします。`Data Scanner Unmask`権限を持つユーザーは、Datadogでこのデータをマスク解除して表示できます。詳細については、[マスクアクション][16]を参照してください。
 
-詳細は[パイプラインのセットアップ][7]を参照してください。
+**注**：サンプリングされたデータをスキャンする場合、スキャン対象のデータをマスクするアクションを選択することはできません。
 
-## LLM Observability データをスキャンする {#scan-llm-observability-data}
+Sensitive Data Scannerを使用するには、スキャン対象のデータを定義するスキャングループを設定し、データ内で一致させる機密情報を決定するスキャンルールを設定します。スキャンルールについては、以下のことができます。
+- Datadogの[スキャンルールライブラリ][2]から定義済みのスキャンルールを追加します。これらのルールは、メールアドレス、クレジットカード番号、APIキー、認証トークン、ネットワークおよびデバイス情報などの一般的なパターンを検出します。
+- [正規表現パターンを使用して独自のルールを作成します][3]。
 
-Sensitive Data Scanner は、LLM アプリケーションの入力と出力を含む [Datadog LLM Observability][20] のトレースをスキャンできます。これにより、プロンプト、完了、および LLM ワークフローメタデータにおいて、PII、API キー、機密情報などの機密データが露出するのを防ぐことができます。
+設定の詳細については、[テレメトリデータ用のSensitive Data Scannerの設定][4]を参照してください。
 
-LLM Observability スキャンは、テレメトリーデータスキャンとは別の管理された構成モデルを使用します。LLM Observability スキャンには次のものがあります。
+#### 環境内 {#in-your-environment}
 
-- **1 つの管理されたスキャングループ**: 最初に [LLM Observability の設定ページ][18]にアクセスすると、組織のデフォルトのスキャングループが自動的に作成されます。追加のスキャングループを作成したり、管理されたグループを削除したりすることはできません。
-- **カスタマイズ可能なルール**: 既存のルールを変更したり、不要なルールを無効にしたり、追加の機密データパターンを検出するためのカスタムスキャンルールを追加したりできます。
+[Observability Pipelines][5]を使用して環境内のログを収集および処理し、そのデータをダウンストリームのインテグレーションにルーティングします。Observability Pipelinesでパイプラインを設定する際、[Sensitive Data Scannerプロセッサ][6]を追加することで、ログが組織外に送信される前に機密データをマスキングできます。メールアドレス、クレジットカード番号、APIキー、認証トークン、IPアドレスなど、ルールライブラリから定義済みのスキャンルールを追加できます。正規表現パターンを使用して独自のルールを作成することもできます。
 
-スキャンルールごとに、一致した機密データに次のいずれかのアクションを適用できます。
+詳細については、[パイプラインの設定][7]を参照してください。
 
-- **Redact**: 一致したデータ全体を `[sensitive_data]` などの選択した単一のトークンで置き換えます。
-- **Partially redact**: 一致するすべての値の特定の部分を置き換えます。
-- **Hash**: 一致したデータ全体を非可逆の一意の識別子で置き換えます。
+### Agent Observability {#agent-observability}
 
-LLM Observability データのスキャンを構成するには、Sensitive Data Scanner の設定で [LLM Observability の設定ページ][18]に移動します。LLM Observability の詳細については、[LLM Observability のドキュメント][20]を参照してください。
+Sensitive Data Scannerは、LLMアプリケーションの入出力を含む[Agent Observability][20]トレースをスキャンできます。これにより、プロンプト、補完、LLMワークフローのメタデータにおいて、PII、APIキー、独自の機密情報などが公開されるのを防ぐことができます。
 
-## クラウドストレージをスキャンする {#scan-cloud-storage}
+Agent Observabilityのスキャンでは、テレメトリデータスキャンとは異なる管理構成モデルが使用されます。Agent Observabilityのスキャンには以下が含まれます。
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Amazon S3 バケットおよび RDS インスタンスのスキャンのサポートはプレビュー版です。登録するには、<strong>Request Access</strong> をクリックしてください。
-{{< /callout >}}
+- **1つの管理スキャングループ**：[Agent Observability設定ページ][18]に初めてアクセスすると、組織のデフォルトのスキャングループが自動的に作成されます。追加のスキャングループを作成したり、管理グループを削除したりすることはできません。
+- **カスタマイズ可能なルール**：既存のルールを変更したり、不要なルールを無効にしたり、カスタムスキャンルールを追加して追加の機密データパターンを検出したりできます。
 
-{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="検出結果ページのデータストアのセクションに 3 件の Amazon S3 が表示" style="width:100%;" >}}
+各スキャンルールについて、一致した機密データに対して以下のいずれかのアクションを適用できます。
 
-Sensitive Data Scanner が有効になっている場合、Amazon S3 バケットにある機密データをカタログ化して分類できます。**注**: Sensitive Data Scanner は、クラウドストレージリソース内の機密データをマスキングしません。
+- **マスク**: 一致したデータ全体を、選択した単一のトークン（例：`[sensitive_data]`）に置き換えます。
+- **Partially redact**: すべての一致する値の特定の部分を置き換えます。
+- **Hash**: 一致したデータ全体を、不可逆な一意の識別子に置き換えます。
 
-Sensitive Data Scanner は、[エージェントレススキャナー][8]をクラウド環境にデプロイして機密データをスキャンします。これらのスキャニングインスタンスは、[Remote Configuration][9] を通じてすべての S3 バケットのリストを取得し、CSV や JSON などのテキストファイルを時間をかけてスキャンするように設定されています。
+Agent Observabilityデータのスキャンを設定するには、Sensitive Data Scanner設定の[Agent Observability 設定ページ][18]にアクセスします。Agent Observabilityの詳細については、[Agent Observability ドキュメント][20]を参照してください。
 
-Sensitive Data Scanner は、[全ルールライブラリ][10]を活用してマッチを検出します。マッチが見つかると、その場所情報がスキャニングインスタンスによって Datadog に送信されます。**注**: データストアとそのファイルはお客様の環境内でのみ読み取られ、スキャンされた機密データ自体が Datadog に送信されることはありません。
+### クラウドストレージ {#cloud-storage}
 
-さらに Sensitive Data Scanner は、[Cloud Security][11] が検出した該当データストアのセキュリティ問題も表示します。問題をクリックすると、Cloud Security でトリアージと修正を続行できます。
+{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="Findingsページのデータストアセクション（Amazon S3の検出結果3件）" style="width:100%;" >}}
 
-設定手順の詳細は、[クラウドストレージ用に Sensitive Data Scanner をセットアップする][12]を参照してください。
+Sensitive Data Scannerが有効になっている場合、Amazon S3バケット内の機密データをカタログ化および分類できます。**注**: Sensitive Data Scannerは、クラウドストレージリソース内の機密データをマスクしません。
 
-## コードリポジトリをスキャンする {#scan-code-repositories}
+Sensitive Data Scannerは、クラウド環境に[Agentless scanners][8]をデプロイすることで機密データをスキャンします。これらのスキャンインスタンスは、[Remote Configuration][9]を通じてすべてのS3バケットのリストを取得し、CSVやJSONなどのテキストファイルを時間をかけてスキャンするように指示が設定されています。
 
-Datadog の [Secret Scanning][21] は、コードリポジトリをスキャンしてソースコード内の漏洩したシークレットを検出します。Secret Scanning は Sensitive Data Scanner によって動作し、SDS ライブラリの[シークレットと資格情報カテゴリ][19]のすべてのルールを使用してマッチを検出します。
+Sensitive Data Scannerは、[entire rules library][10]を活用して一致を見つけます。一致が見つかると、その場所がスキャンインスタンスによってDatadogに送信されます。**注**: データストアとそのファイルは環境内でのみ読み取られます。スキャンされた機密データがDatadogに送信されることはありません。
 
-テレメトリデータのスキャンとは異なり、Secret Scanning は CI/CD パイプライン内で動作するほか、Datadog 内でホスト型スキャン (GitHub、Azure DevOps、GitLab をサポート) を用いて直接動作します。コード内でシークレットが検出されると、結果が Code Security インターフェイスに表示されます。
+Sensitive Data Scannerは、機密データの一致を表示するだけでなく、機密データストアに影響を与える[Cloud Security][11]が検出したセキュリティ問題も表示します。問題をクリックすると、Cloud Security内でトリアージと修復を継続できます。
 
-セットアップの詳細については、[Secret Scanning のドキュメント][21]を参照してください。
+設定の詳細については、[Set up Sensitive Data Scanner for Cloud Storage][12]を参照してください。
 
-## 機密データの検出結果を調査する {#investigate-sensitive-data-findings}
+### コードリポジトリ {#code-repositories}
 
-{{< img src="sensitive_data_scanner/findings_20251014.png" alt="検出結果ページの概要に検出された機密データの優先度別の内訳を表示" style="width:100%;" >}}
+Datadog [Secret Scanning][21]は、コードリポジトリをスキャンして、ソースコード内で公開されているシークレットを検出します。Secret Scanningは、Sensitive Data Scannerによって動作し、SDSライブラリの[Secrets and credentials category][19]のすべてのルールを使用して一致を検出します。
 
-[検出結果ページ][13]を使用して、スキャンルールによって特定された機密データの検出の詳細を確認できます。これらの詳細には次のものが含まれます。
+Secret Scanningは、テレメトリデータスキャンとは異なり、CI/CDパイプライン内またはホスト型スキャン（GitHub、Azure DevOps、GitLabがサポート）を用いてDatadog内で直接動作します。コード内でシークレットが検出されると、検出結果がCode Securityインターフェースに表示されます。
 
-- マッチを検出した具体的なスキャンルール (必要に応じてルールを修正する手がかりとなる)
-- 検出が確認されたスキャングループ (リークの影響範囲を特定するのに役立つ)
-- 検出に関連するイベントの数 (規模や重大度を把握するのに役立つ)
-- 検出に関連するイベントのグラフ (検出がいつ始まり、どのように進行したかを把握するのに役立つ)
-- 検出に対して作成された関連ケース
+設定の詳細については、[Secret Scanning documentation][21]を参照してください。
 
-検出結果ページを使用して機密データをトリアージする方法の詳細については、[機密データの検出結果を調査する][14]を参照してください。
+## 主な機能 {#key-capabilities}
 
-## 機密データの傾向を確認する {#review-sensitive-data-trends}
+### 機密データの検出結果を調査する {#investigate-sensitive-data-findings}
 
-{{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner の概要ダッシュボード" style="width:80%;">}}
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="ルールごとにグループ化されたSensitive Data Scannerの検出結果エクスプローラーで、US Passport Scannerルールが展開され、重大な検出結果、一致数、週次トレンドチャートが表示されています。" style="width:100%;" >}}
 
-Sensitive Data Scanner を有効にすると、機密データの発見事項をまとめたすぐに使える[ダッシュボード][15]がアカウントに自動的にインストールされます。このダッシュボードにアクセスするには、**Dashboards** > **Dashboards List** に移動し、"Sensitive Data Scanner Overview" を検索します。
+「Findings」ページ[13]を使用して、スキャンルールによって特定された機密データの検出結果の詳細を確認できます。これらの詳細には以下が含まれます。
 
-## 参考資料 {#further-reading}
+- 一致を検出した特定のスキャンルール。これにより、必要に応じてどのルールを変更すべきかを判断できます。
+- 検出が発生したスキャングループ。これにより、漏洩の被害範囲を判断できます。
+- 検出に関連付けられたイベント数。これにより、範囲と深刻度を評価するのに役立ちます。
+- 検出に関連付けられたイベントのグラフ。これにより、検出がいつ開始され、どのように進行したかを特定するのに役立ちます。
+- 検出に対して作成された関連ケース。
+
+「Findings」ページを使用して機密データのトリアージを行う方法の詳細については、[Investigate Sensitive Data Findings][14]を参照してください。
+
+### 機密データの傾向を確認します。{#review-sensitive-data-trends}
+
+{{<img src="sensitive_data_scanner/sdslight.png" alt="「Sensitive Data Scanner」概要ダッシュボード" style="width:80%;">}}
+
+「Sensitive Data Scanner」を有効にすると、機密データの検出結果をまとめた「標準ダッシュボード」[15]がアカウントに自動的にインストールされます。このダッシュボードにアクセスするには、{{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}}に移動し、「Sensitive Data Scanner Overview」を検索してください。
+
+## さらに読む{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

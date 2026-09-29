@@ -1,5 +1,6 @@
 ---
 title: Send Azure Event Hubs Logs to Observability Pipelines
+description: Learn how to send Azure Event Hubs logs to Observability Pipelines using the Kafka source.
 disable_toc: false
 ---
 

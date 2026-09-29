@@ -1,5 +1,6 @@
 ---
 title: Pipelines Usage Metrics
+description: Find the metrics available from Observability Pipelines for building dashboards, notebooks, and monitors.
 disable_toc: false
 aliases:
   - /observability_pipelines/monitoring/metrics/

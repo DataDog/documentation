@@ -12,27 +12,30 @@ aliases:
 - /ko/logs/processing/parsing
 description: Grok 프로세서를 사용하여 로그 구문 분석
 further_reading:
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: 학습 센터
-  text: 로그 파이프라인 빌드 및 수정 방법 알아보기
 - link: /logs/log_configuration/processors
   tag: 설명서
   text: 로그 처리 방법 알아보기
-- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
-  tag: 비디오
-  text: 'Datadog 모범 사례와 사용 팁: Grok 구문 분석을 사용해 로그에서 필드 추출'
+- link: /logs/logging_without_limits/
+  tag: 설명서
+  text: Datadog로 인덱싱된 로그 볼륨 제어
 - link: /logs/faq/how-to-investigate-a-log-parsing-issue/
   tag: FAQ
   text: 로그 구문 분석 문제를 조사하는 방법
 - link: /logs/guide/log-parsing-best-practice/
   tag: FAQ
   text: 로그 구문 분석 - 모범 사례
-- link: /logs/logging_without_limits/
-  tag: 설명서
-  text: Datadog로 인덱싱된 로그 볼륨 제어
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: 학습 센터
+  text: 로그 파이프라인 빌드 및 수정 방법 알아보기
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: 학습 센터
   text: 로그 파이프라인 디버깅
+- link: https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/
+  tag: 블로그
+  text: Apache 웹 서버 로그에서 HTTP/2 남용을 탐지하는 방법
+- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
+  tag: 비디오
+  text: 'Datadog 모범 사례와 사용 팁: Grok 구문 분석을 사용해 로그에서 필드 추출'
 title: 구문 분석
 ---
 {{< learning-center-callout header="학습 센터에서 Grok 구문 분석해보기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
@@ -248,11 +251,11 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 ## 고급 설정 {#advanced-settings}
 
-Grok 프로세서 맨 밑에 있는 **고급 설정** 섹션을 사용하여 기본 `message` 속성 대신 특정 속성을 구문 분석하거나, 여러 구문 분석 규칙에서 공통 패턴을 재사용하는 도우미 규칙을 정의합니다.
+Grok 프로세서 하단의 {{< ui >}}Advanced Settings{{< /ui >}} 섹션을 사용하여 기본 `message` 속성 대신 특정 속성을 구문 분석하거나, 여러 구문 분석 규칙에서 공통 패턴을 재사용하는 도우미 규칙을 정의합니다.
 
 ### 특정 텍스트 속성 구문 분석 {#parsing-a-specific-text-attribute}
 
-**추출 대상** 필드를 사용하여 주어진 텍스트 속성에 기본`message` 속성 대신 Grok 프로세서에 적용합니다.
+{{< ui >}}Extract from{{< /ui >}} 필드를 사용하여 기본 `message` 속성 대신 주어진 텍스트 속성에 Grok 프로세서를 적용합니다.
 
 예를 들어 키-값으로 구문 분석해야 하는 `command.line` 속성을 포함하는 로그를 생각해 보세요. `command.line`에서 추출하여 내용을 구문 분석하고 명령 데이터로부터 구조화된 속성을 생성합니다.
 
@@ -260,7 +263,7 @@ Grok 프로세서 맨 밑에 있는 **고급 설정** 섹션을 사용하여 기
 
 ### 공통 패턴을 재사용하기 위해 도우미 규칙 사용 {#using-helper-rules-to-reuse-common-patterns}
 
-**도우미 규칙** 필드를 사용하여 구문 분석 규칙의 토큰을 정의하세요. 도우미 규칙을 사용하면 구문 분석 규칙 전체에서 공통 Grok 패턴을 재사용할 수 있습니다. 이것은 같은 토큰을 사용하는 같은 Grok 파서에 규칙이 여러 개 있을 때 유용합니다.
+{{< ui >}}Helper Rules{{< /ui >}} 필드를 사용하여 구문 분석 규칙의 토큰을 정의합니다. 도우미 규칙을 사용하면 구문 분석 규칙 전체에서 공통 Grok 패턴을 재사용할 수 있습니다. 이것은 같은 토큰을 사용하는 같은 Grok 파서에 규칙이 여러 개 있을 때 유용합니다.
 
 구조화되지 않은 전형적인 로그 예시:
 
@@ -306,7 +309,7 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * `quotingStr`: 따옴표를 정의하여 기본 따옴표 감지 `<>`, `""`, `''`를 대체합니다.
 * `delimiter`: 서로 다른 키 값 쌍 사이의 구분 기호를 정의합니다(예를 들어 `|`가 `key1=value1|key2=value2`의 구분 기호임). 기본값은 ` `(일반 공백), `,` 및 `;`입니다.
 
-**keyvalue**와 같은 필터를 사용하여 문자열을 keyvalue 또는 logfmt 형식의 속성으로 더 간편하게 매핑합니다.
+`keyvalue`과 같은 필터를 사용하여 keyvalue 또는 logfmt 형식의 문자열을 속성으로 더 쉽게 매핑합니다:
 
 **로그:**
 
@@ -540,7 +543,12 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
   "app": "program",
   "logger": {
     "thread_id": 123
-  }
+  },
+  "server": "server.1",
+  "method": "GET",
+  "status_code": 200,
+  "url": "https://app.datadoghq.com/logs/pipelines",
+  "duration": 123456
 }
 ```
 
@@ -690,7 +698,7 @@ rule %{data::xml}
 
 ### CSV 구문 분석 {#parsing-csv}
 
-**CSV** 필터를 사용하면 주어진 문자(기본적으로 `,`)로 구분된 문자열을 속성으로 더 쉽게 매핑할 수 있습니다.
+`csv` 필터를 사용하면 주어진 문자(기본적으로 `,`)로 구분된 문자열을 속성으로 더 쉽게 매핑할 수 있습니다.
 
 CSV 필터는 `csv(headers[, separator[, quotingcharacter]])`로 정의되며, 자세한 설명은 다음과 같습니다.
 

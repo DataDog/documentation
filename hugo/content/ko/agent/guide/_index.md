@@ -12,7 +12,7 @@ title: Agent 가이드
 {{< header-list header="구성 가이드" >}}
     {{< nextlink href="agent/guide/setup_remote_config" >}}Fleet Automation용 Remote Configuration 설정{{< /nextlink >}}
     {{< nextlink href="agent/guide/environment-variables" >}}Agent 환경 변수{{< /nextlink >}}
-    {{< nextlink href="agent/guide/datadog-disaster-recovery" >}}Datadog 재해 복구{{< /nextlink >}}
+    {{< nextlink href="agent/guide/rshell" >}}Agent 제한 셸 (rshell){{< /nextlink >}}
     {{< nextlink href="agent/guide/installing-the-agent-on-a-server-with-limited-internet-connectivity" >}}인터넷 연결이 제한된 서버에 Agent 설치{{< /nextlink >}}
     {{< nextlink href="agent/guide/ansible_standalone_role/" >}}독립 실행형 Datadog 역할을 사용한 Ansible 설정{{< /nextlink >}}
     {{< nextlink href="agent/guide/agent-retry/" >}}Agent 재시도 및 버퍼링 로직 {{< /nextlink >}}

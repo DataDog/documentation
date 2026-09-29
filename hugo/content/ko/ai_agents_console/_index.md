@@ -14,6 +14,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/claude-code-monitoring
   tag: 블로그
   text: Datadog Agent Console을 사용하여 조직 내 Claude Code 도입 현황 모니터링
+- link: https://www.datadoghq.com/blog/datadog-agent-console/
+  tag: 블로그
+  text: Datadog Agent Console로 Agent 도입 현황을 모니터링하십시오.
 title: Agent Console
 ---
 {{< callout url="#" btn_hidden="true" header="미리 보기">}}
@@ -105,7 +108,7 @@ Agent Console로 데이터 전송을 시작하려면 [Agent Console 설정][8]�
 [2]: https://docs.claude.com/en/docs/claude-code/overview
 [3]: https://www.cursor.com/
 [4]: /ko/integrations/github-copilot/
-[5]: /ko/bits_ai/bits_ai_sre/
-[6]: /ko/bits_ai/bits_ai_dev_agent/
+[5]: /ko/bits_ai/bits_investigation/
+[6]: /ko/bits_ai/bits_code/
 [7]: /ko/actions/agents/
 [8]: /ko/ai_agents_console/setup/

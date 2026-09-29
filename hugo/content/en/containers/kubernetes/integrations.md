@@ -52,7 +52,7 @@ Some commonly-used integrations come with default configuration for Autodiscover
 
 Otherwise:
 
-1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, or a Helm chart) that suits your use case.
+1. Choose a configuration method (Kubernetes pod annotations, a local file, a ConfigMap, a key-value store, a Datadog Operator manifest, a Helm chart, or the `DatadogInstrumentation` custom resource) that suits your use case.
 2. Reference the template format for your chosen method. Each format contains placeholders, such as `<CONTAINER_NAME>`.
 3. [Supply values](#placeholder-values) for these placeholders.
 
@@ -107,6 +107,38 @@ spec:
 
 If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
 
+{{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+You can configure Autodiscovery checks and log collection for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove Autodiscovery configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <CR_NAME>
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerName: <CONTAINER_NAME>
+        initConfig:
+          <INIT_CONFIG>
+        instances:
+          - <INSTANCES_CONFIG>
+    logs:
+      - containerName: <CONTAINER_NAME>
+        <LOGS_CONFIG>
+```
+
+For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 {{% /tab %}}
 {{% tab "Local file" %}}
 
@@ -412,7 +444,7 @@ For more information about tag cardinality, see [Per-check tag configuration][27
 
 The Datadog Agent automatically recognizes and supplies basic configuration for some common technologies. For a complete list, see [Autodiscovery auto-configuration][20].
 
-Configurations set with Kubernetes annotations take precedence over auto-configuration, but auto-configuration takes precedence over configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
+Configurations set with Kubernetes annotations take precedence over `DatadogInstrumentation` resources and auto-configuration. `DatadogInstrumentation` resources take precedence over static configuration, including auto-configuration and configurations set with Datadog Operator or Helm. To use Datadog Operator or Helm to configure an integration in the [Autodiscovery auto-configuration][20] list, you must [disable auto-configuration][22].
 
 ## Integrations security
 

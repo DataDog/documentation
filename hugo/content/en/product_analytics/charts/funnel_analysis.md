@@ -1,22 +1,17 @@
 ---
-title: Funnel Analysis
+title: Funnel
 disable_toc: false
 aliases:
 - /real_user_monitoring/funnel_analysis
 - /real_user_monitoring/product_analytics/funnel_analysis
 - /product_analytics/journeys/funnel_analysis/
 further_reading:
-- link: "/product_analytics/analytics_explorer/"
-  tag: "Documentation"
-  text: "Analytics Explorer"
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Learning Center
   text: Getting Started with Product Analytics
 algolia:
   tags: ['funnel']
 ---
-
-## Overview
 
 Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end journey paths. Specifically, you can:
 
@@ -27,17 +22,13 @@ Funnel analysis helps you track conversion rates across key workflows to identif
 - Filter on individual events at different steps in your funnel
 - Combine multiple events within a given step, as end users might have different ways to achieve the same outcome through different flows
 
+## Create a funnel chart
 
-## Build a funnel
+1. In {{< ui >}}Product Analytics{{< /ui >}}, select {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}.
 
-To start building a funnel, navigate to [{{< ui >}}Product Analytics{{< /ui >}}][1], then select [{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}][2].
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_overview.png" alt="The funnel option highlighted in the Create New dialog in Product Analytics" style="width:100%;" >}}
-
-Select the user steps that start the funnel, and use {{< ui >}}Add step{{< /ui >}} to add additional steps. Drag and drop steps to reorder them in the funnel.
+1. Select the user steps that start the funnel, and use {{< ui >}}Add step{{< /ui >}} to add additional steps. Drag and drop steps to reorder them in the funnel.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_add_step_video.mp4" alt="Using the Add step button to add a step to an existing funnel, and using drag and drop to move the new step to the correct place in the funnel." video=true >}}
-
 
 ### Add filters
 
@@ -93,13 +84,13 @@ For any conversion analysis view, you can choose to view conversions by count or
 ## Conversion computing metrics
 
 ### How Datadog computes conversion metrics
-Consider a funnel with events `A → B → C` and event steps `A, A, A, B, C, C`. 
+Consider a funnel with events `A → B → C` and event steps **A**, A, A, **B**, **C**, C.
 
-In this case, Datadog counts one conversion. This is because the conversion calculation matches only the first occurrence of event **A** and the first occurrence of event **C** in the sequence. 
+In this case, Datadog counts one conversion. Each **A** starts an independent attempt. Because all three attempts complete on the same **C** event, Datadog counts only the earliest attempt.
 
-To further illustrate, if the user performs the event sequence `A, A, A, B, C, C, A, B, C`, Datadog counts two conversions. The first conversion completes with the sequence `A, A, A, B, C, C`, and the second conversion completes with the following sequence of `A, B, C`.
+To further illustrate, if the user performs the event sequence **A**, A, A, **B**, **C**, C, **A**, **B**, **C**, Datadog counts two conversions. The first conversion completes with the sequence **A**, A, A, **B**, **C**, and the second conversion completes with the following sequence of **A**, **B**, **C**.
 
-<div class="alert alert-info"> Any action or view that happens between two steps in a funnel does not impact the step-by-step or overall conversion rate. As long as step A and C happen in the right order in a given session at least once, it counts as a single converted session.</div>
+<div class="alert alert-info"> Any action or view that does not match a funnel step does not impact the step-by-step or overall conversion rate. If all funnel steps occur in the right order within the conversion window, Datadog counts the session as a single converted session.</div>
 
 Datadog calculates the average time between steps by averaging the total duration between the first and last step of each conversion over the total number of steps.
 
@@ -114,64 +105,36 @@ When computing your conversions, select how conversions are counted by choosing 
 
 - {{< ui >}}Total{{< /ui >}}: Counts a conversion each time the same session ID, user, or account completes the defined funnel. Using the same example (`A, B, C, A, B, C`), this method counts **two conversions**. The {{< ui >}}Total{{< /ui >}} setting counts complete flows, not the number of times an intermediate step is repeated.
 
-
 ## Change the visualization
-After you've defined the step events and conversion measurement, you can switch to a different visualization to better understand user conversions for your app.
 
+By default, a funnel displays as steps. Change the visualization to see the same conversion data in a different format.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Changing the visualization from Steps to Timeseries using a dropdown." video=true >}}
+- Timeseries: Plot the conversion metric over time.
 
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="A funnel's conversion data displayed as a timeseries." style="width:90%;" >}}
 
-### Timeseries
-Viewing the funnel as a timeseries can be helpful in understanding conversion trends. You can select the time period for graphing the conversion, and can view conversions as an absolute count or a rate.
+- Query value: Display the conversion metric as a single number.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="The timeseries visualization, configured to show daily unique converted users over the past week." style="width:80%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="The query value visualization, configured to show the total number of unique converted sessions over the past week." style="width:80%;" >}}
 
-### Query value
+- Top list: Rank the conversion metric by a breakdown, such as country or browser.
 
-The query value visualization displays the current value of a metric.
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="A funnel's conversion data broken down by country, displayed as a top list." style="width:90%;" >}}
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="The query value visualization, configured to show the total number of unique conversted sessions over the past week." style="width:80%;" >}}
+- Bar chart: Compare the conversion metric across a breakdown's values, displayed as columns.
 
-### Top list
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="A funnel's conversion data broken down by country, displayed as a bar chart." style="width:90%;" >}}
 
-The top list visualization identifies the top values from a facet based on a chosen measure.
+Top list and bar chart require a breakdown. Add one under [Compare](#compare-data) if the funnel doesn't already have one.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="The top list visualization, configured to show the top four conversion sources by continent." style="width:80%;" >}}
+## View conversion drivers
 
-## View conversion drivers and journey paths
+To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis.
 
-To gain more context about user conversions and dropoffs, click on a funnel step to access conversion analysis and journey paths.
+View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
 
-<div class="alert alert-info">Conversion analysis is in Preview.</div>
-
-- **Conversion analysis**: View conversion drivers, user journeys, available user replays for conversions and dropoffs, and user details.
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
-
-- **Journey paths**: View conversion and dropoff user paths for the selected step sequence, including branching paths to other steps outside of the funnel.
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnel_journey_paths.png" alt="A journey path showing the top five dropoff paths following step 1 in the funnel." style="width:100%;" >}}
-
-## Share a funnel
-
-Funnels can be shared with your teams on [dashboards][3] to analyze conversion alongside other telemetry metrics, or in a [Notebook][4] to be used for reporting.
-
-You can share the entire visualization or individual widgets.
-
-- Share the entire visualization to Notebooks and dashboards:
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels_share_export.png" alt="The expanded visualization Share option, showing the additional option to Export to PNG " style="width:100%;" >}}
-
-- Share individual widgets from a dashboard:
-
-  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_dashboard.png" alt="Share a widget by clicking the export icon in the upper-right of the widget" style="width:100%;" >}}
+{{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="The side panel view after clicking a funnel step, showing conversion drivers, available replays, and converted users." style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/
-[2]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[3]: /product_analytics/dashboards/
-[4]: /notebooks/

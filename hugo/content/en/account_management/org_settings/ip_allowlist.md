@@ -4,7 +4,7 @@ description: Control network access to Datadog by restricting API and UI access 
 ---
 
 {{< callout url="/help/" header="Get Started with IP Allowlist" >}}
-The IP allowlist feature is available for customers on an enterprise plan only. Request access by contacting support.
+The IP allowlist feature is available for customers on a Pro+ or Enterprise plan. To request access, contact support.
 {{< /callout >}}
 
 ## Overview
@@ -14,6 +14,8 @@ The IP allowlist feature is available for customers on an enterprise plan only. 
 The IP allowlist controls which networks can be used to access your data in Datadog. By limiting allowed networks, you can protect your resources from data exfiltration and insider threats.
 
 When the IP allowlist is enabled, only IP addresses or CIDR ranges in the allowlist can access the Datadog API and UI. 
+
+The IP allowlist is an organization-wide setting. It applies uniformly to all traffic listed under [Blocked and allowed resources](#blocked-and-allowed-resources) and cannot be scoped to a specific token, API key, user, or endpoint.
 
 ### Blocked and allowed resources
 
@@ -30,6 +32,8 @@ The IP allowlist feature does not block access to the following:
 - The [validate API key][2] endpoint, which the Agent uses before submitting data
 - [Agent flare submission][3]
 - [Public dashboards][4]
+- Actions Datadog Support takes on your behalf within your organization
+- Datadog-managed routes that deliver product configuration through Datadog's CDN
 
 Applications and integrations that submit telemetry from the Agent (metrics, traces, and logs), and those that use an API key provided by the user, are not impacted by the IP allowlist. Datadog recommends utilizing the [Audit Trail][5] to monitor for IP addresses from third party applications and integrations.
 
@@ -38,6 +42,8 @@ To allow mobile app clients to connect to Datadog when the IP allowlist feature 
 ### Functionality
 
 Only users with the {{< ui >}}Org Management{{< /ui >}} permission can configure the IP allowlist.
+
+The IP allowlist doesn't inherit between parent and child organizations. Each organization must have its own IP allowlist configured separately.
 
 With the IP allowlist API or UI, you can:
 - Check the status of the IP allowlist. Whether the IP allowlist is on or off determines whether your organization is restricting requests by IP address allowlist membership.
@@ -56,7 +62,7 @@ When you enable or modify the IP allowlist, the system enforces constraints to m
 
 ## Managing the IP allowlist in the UI
 
-**Note:** The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on.
+**Note**: The IP allowlist page only appears in the UI if your Datadog organization has the feature turned on. To request access, [contact support](/help/).
 
 To find the [IP allowlist UI][6]:
 

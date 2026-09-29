@@ -87,41 +87,6 @@ multifiltersearch:
       scope: Backend services
       recommendation_description: A backend application times out while calling a downstream dependency because the dependency responds too slowly, causing request failures that impact end users and increase the risk of cascading failures upstream.
       recommendation_prerequisite: APM + RUM
-    - category: Performance
-      recommendation_type: Missing Cache
-      scope: Backend services
-      recommendation_description: A service performs expensive, repeated work on the request path that could be served from a short-lived cache, reducing tail latency and downstream load.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Tail Latency
-      scope: Backend services
-      recommendation_description: A service exhibits extreme tail latency driven by slow downstream spans on the critical path, often from unbounded dependency latency or sequential calls that could run concurrently.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Excessive Serialization
-      scope: Backend services
-      recommendation_description: A service spends a significant share of request time on CPU-bound serialization or parsing work, adding avoidable latency and CPU overhead.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Unbounded Payload
-      scope: Backend services
-      recommendation_description: A service accepts request parameters without size or range bounds, allowing oversized inputs to drive expensive downstream work, tail latency, and timeouts.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Performance
-      recommendation_type: Resource Contention
-      scope: Backend services
-      recommendation_description: Request handling is serialized behind a synchronization primitive or long-running critical section, causing tail latency under concurrency.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Reliability
-      recommendation_type: Connection Pool Exhaustion
-      scope: Backend services
-      recommendation_description: A service repeatedly exhausts its connection pool to a downstream dependency, queueing requests and causing latency spikes or failures under load.
-      recommendation_prerequisite: APM + AI Recs (Preview)
-    - category: Reliability
-      recommendation_type: Error Misclassification
-      scope: Backend services
-      recommendation_description: A service surfaces expected outcomes as errors in APM, inflating endpoint error rates and obscuring real reliability regressions.
-      recommendation_prerequisite: APM + AI Recs (Preview)
 ---
 
 APM Recommendations help you improve your applications' performance and reliability by surfacing optimization opportunities from your collected telemetry. These recommendations are designed to:
@@ -163,11 +128,21 @@ To review recommendations that need your attention:
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 5. (Optional) To use [Bits Code][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
-6. (Optional) To track the fix in Jira or Case Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
+6. (Optional) To track the fix in Jira or Work Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Work Item{{< /ui >}}.
 
 After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 
 **Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}Error Tracking{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the Error Tracking {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
+
+## Viewing recommendations on a dashboard
+
+Add a List widget with APM Recommendations as its data source to review recommendations alongside your team's performance metrics.
+
+{{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="A List widget configured with APM Recommendations as the data source, showing recommendations by priority, service, summary, issue, and status" style="width:100%;" >}}
+
+1. On any dashboard, create a widget and select {{< ui >}}List{{< /ui >}} as the visualization.
+2. Select {{< ui >}}APM Recommendations{{< /ui >}} as the data source.
+3. Filter by environment, service, team, recommendation type, and status.
 
 ## Supported recommendations
 

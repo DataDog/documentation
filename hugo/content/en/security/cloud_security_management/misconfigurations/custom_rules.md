@@ -60,12 +60,10 @@ To create a rule from scratch:
 
 The text you enter in {{< ui >}}Say what's happening{{< /ui >}} is displayed in the finding side panel. When you write it as Markdown using the following section headers, each section is shown in a dedicated area of the finding:
 
-| Header        | Where it appears in the finding                |
-|---------------|------------------------------------------------|
-| `Description` | **What Happened**                              |
-| `Rationale`   | **What Happened** (shown with the description) |
-| `Remediation` | **Remediation** section                        |
-| `References`  | Shown separately                               |
+| Header        | Where it appears in the finding |
+|---------------|---------------------------------|
+| `Description` | **What Happened**               |
+| `Remediation` | **Remediation** section         |
 
 For example:
 
@@ -80,6 +78,7 @@ Describe how to remediate it.
 Keep the following in mind:
 
 - All sections are optional and can appear in any order. A typical message uses only `## Description` and `## Remediation`.
+- You can also include a `## Rationale` section. Its content appears within **What Happened**, after the description.
 - Use level-2 (`##`) headers for each section. Deeper headers (for example, `###`) are treated as sub-points within a section, not as new sections.
 - Header matching is case-insensitive, but the section names must match exactly (for example, `Remediation`, not `Fix`).
 - Give each section content. A header immediately followed by another header may not render as expected.

@@ -105,7 +105,7 @@ See [Widgets][6] for more information and examples of setting up these graphs.
 
 Move graphs around so they create a flow for the work you do or conversations you have around the dashboard. Drag and drop widgets to place them. On screenboards, use Free Text widgets to organize sections under headings. On timeboards, add a Group widget that can contain multiple widgets, and can collapse out of the way when you're viewing the dashboard.
 
-For dashboards that grow large, use tabs to organize widgets into named sections. Click {{< ui >}}+{{< /ui >}} in the tab bar (or {{< ui >}}Add New Tab{{< /ui >}} under the dropdown next to {{< ui >}}Add Widgets{{< /ui >}}) to add a tab, then move widgets between tabs from each widget's share menu (⋮). Using tabs keeps a single dashboard focused and easy to navigate without requiring viewers to scroll through unrelated content. For more information, see [Tabs][20].
+For dashboards that grow large, use tabs to organize widgets into named sections. Click {{< ui >}}\+{{< /ui >}} in the tab bar (or {{< ui >}}Add New Tab{{< /ui >}} under the dropdown next to {{< ui >}}Add Widgets{{< /ui >}}) to add a tab, then move widgets between tabs from each widget's share menu (⋮). Using tabs keeps a single dashboard focused and easy to navigate without requiring viewers to scroll through unrelated content. For more information, see [Tabs][20].
 
 There are two ways to create links from a dashboard to any target URL:
 

@@ -11,6 +11,9 @@ further_reading:
 - link: "/feature_flags/guide/server_flag_evaluation_metrics/"
   tag: "Guide"
   text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/guide/apm_trace_enrichment/"
+  tag: "Guide"
+  text: "Set Up APM Trace Enrichment for Feature Flags"
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
@@ -91,7 +94,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer provider.Shutdown()
+    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     // Register the provider and wait for initialization (default 30s timeout)
     if err := openfeature.SetProviderAndWait(provider); err != nil {
@@ -141,7 +146,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer provider.Shutdown()
+    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     // Register the provider without waiting
     openfeature.SetProvider(provider)

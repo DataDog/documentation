@@ -12,31 +12,36 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, Auto multi-line Detection is disabled by default.</div>
+<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">(Legacy) Automatic Multi-line Detection and Aggregation</a>. For Agent versions older than <strong>7.82.0</strong>, auto multi-line detection is disabled by default.</div>
 
 ## Overview
 
 Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically.
-For example, the Agent receives the following lines separately:
+
+For example, an application writes the following five lines. Without auto multi-line detection, the Agent sends each line as its own log, splitting the exception away from the message that introduced it:
+
+```text
+2024-08-13 17:15:17 ERROR Request handler failed              -> log 1
+Exception in thread "main" java.lang.NullPointerException     -> log 2
+    at com.example.MyClass.doSomething(MyClass.java:42)       -> log 3
+    at com.example.MyClass.main(MyClass.java:20)              -> log 4
+2024-08-13 17:15:18 INFO Request handler stopped              -> log 5
 ```
-2024-08-13 17:15:17 INFO Starting request handler
-Exception in thread "main" java.lang.NullPointerException
-    at com.example.MyClass.doSomething(MyClass.java:42)
-    at com.example.MyClass.main(MyClass.java:20)
-2024-08-13 17:15:18 INFO Request handler stopped
-```
-With Auto multi-line detection enabled, the stack trace is aggregated into a single log:
-```
-2024-08-13 17:15:17 INFO Starting request handler
-Exception in thread "main" java.lang.NullPointerException
-    at com.example.MyClass.doSomething(MyClass.java:42)
-    at com.example.MyClass.main(MyClass.java:20)
-2024-08-13 17:15:18 INFO Request handler stopped
+
+With auto multi-line detection enabled, by default, only lines that begin with a datetime start a new log. The exception and its stack trace are aggregated into the log that precedes them, so the same five lines are sent as two logs:
+
+```text
+2024-08-13 17:15:17 ERROR Request handler failed           --+
+Exception in thread "main" java.lang.NullPointerException    |
+    at com.example.MyClass.doSomething(MyClass.java:42)      |-> log 1
+    at com.example.MyClass.main(MyClass.java:20)           --+
+
+2024-08-13 17:15:18 INFO Request handler stopped              -> log 2
 ```
 
 ## Getting started
 
-Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
+Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}

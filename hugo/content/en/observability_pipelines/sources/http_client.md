@@ -1,5 +1,6 @@
 ---
 title: HTTP/S Client Source
+description: Learn how to pull logs from an upstream HTTP/S server using the Observability Pipelines Worker.
 disable_toc: false
 products:
 - name: Logs

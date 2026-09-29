@@ -14,4 +14,4 @@ Para las instalaciones de Kubernetes, puedes utilizar el registro DNS interno de
 
 Después de reiniciar el Agent, tus datos de observabilidad deberían ir al worker, ser procesados por el pipeline y entregados a Datadog.
 
-[1031]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[1031]: /agent/configuration/agent-configuration-files/

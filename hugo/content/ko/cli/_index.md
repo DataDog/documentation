@@ -81,7 +81,7 @@ Pup은 대부분의 주요 Datadog 제품 영역을 지원합니다. 공식 제�
 | 모니터링 및 경보 | 모니터링, 대시보드, SLO, Synthetics, 가동 중지, 워크플로 |
 | 보안 및 규정 준수 | 보안 규칙, 시그널, 탐지 결과, 감사 로그, CSM 위협 |
 | 인프라 및 클라우드 | 호스트, 태그, 컨테이너, 네트워크, AWS/GCP/Azure 통합 |
-| 인시던트 및 운영 | 인시던트, 온콜, 케이스 관리, 오류 추적, 서비스 카탈로그 |
+| 인시던트 및 운영 | 인시던트, 온콜, 작업 관리, 오류 추적, 서비스 카탈로그 |
 | CI/CD 및 개발 | CI Visibility, Test Optimization, DORA Metrics, Deployment Gates |
 | 조직 및 액세스 | 사용자, API 키, 애플리케이션 키, 조직 |
 | 플랫폼 및 구성 | 사용량 측정, 비용 관리, Feature Flag, Observability Pipelines |
@@ -127,7 +127,7 @@ Pup는 OAuth2 및 API 키 인증 방법을 지원합니다. OAuth2가 권장되�
 | `DD_AUTO_APPROVE` | 파괴적인 작업을 자동 승인(`true`/`false`) |
 | `DD_TOKEN_STORAGE` | 토큰 스토리지 백엔드(`keychain` 또는 `file`, 기본값: 자동 탐지) |
 
-## 참고 자료 {#further-reading}
+## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

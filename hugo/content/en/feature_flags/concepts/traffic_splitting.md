@@ -5,11 +5,14 @@ further_reading:
 - link: "/feature_flags/concepts/targeting_rules"
   tag: "Documentation"
   text: "Targeting Rules and Filters"
+- link: "/feature_flags/concepts/evaluation_context"
+  tag: "Documentation"
+  text: "Evaluation Context"
 ---
 
 ## Overview
 
-When you define a targeting rule, you can serve a variant to a percentage of subjects that match your targeting filter. Datadog uses **deterministic randomization** based on the `targetingKey` in your evaluation context so the same subject consistently receives the same variant for a given flag.
+When you define a targeting rule, you can serve a variant to a percentage of subjects that match your targeting filter. Datadog uses **deterministic randomization** based on the `targetingKey` in your [evaluation context][1] so the same subject consistently receives the same variant for a given flag.
 
 ## Percentage rollouts
 
@@ -29,45 +32,10 @@ Randomization is **deterministic**: a subject with the same `targetingKey` alway
 
 For multi-variant rules, the SDK applies the same bucketing logic to distribute subjects across variants according to the percentages defined on the rule.
 
-### Example evaluation context
-
-{{< programming-lang-wrapper langs="javascript,python,go" >}}
-
-{{< programming-lang lang="javascript" >}}
-
-```javascript
-await OpenFeature.setContext({
-  targetingKey: 'user-123',
-  user_id: 'user-123',
-});
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="python" >}}
-
-```python
-eval_ctx = EvaluationContext(
-    targeting_key="user-123",
-    attributes={"user_id": "user-123"},
-)
-```
-
-{{< /programming-lang >}}
-
-{{< programming-lang lang="go" >}}
-
-```go
-evalCtx := openfeature.NewEvaluationContext(
-    "user-123",
-    map[string]interface{}{"user_id": "user-123"},
-)
-```
-
-{{< /programming-lang >}}
-
-{{< /programming-lang-wrapper >}}
+See [Evaluation Context][1] for how to set the `targetingKey` in your SDK.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/concepts/evaluation_context/

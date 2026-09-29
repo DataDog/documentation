@@ -1,8 +1,8 @@
 {{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
 {{ $runner_flavors := slice
-    (dict "key" "standalone" "title" "Standalone private action runners")
     (dict "key" "agent" "title" "Datadog Agent private action runners")
     (dict "key" "cluster_agent" "title" "Datadog Cluster Agent private action runners")
+    (dict "key" "standalone" "title" "Standalone private action runners")
 }}
 {{ $runner_flavor_keys := slice "standalone" "agent" "cluster_agent" }}
 {{ $allowlists_by_runner := dict "standalone" (dict) "agent" (dict) "cluster_agent" (dict) }}

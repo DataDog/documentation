@@ -36,10 +36,10 @@ Datadog の [Logging without Limits][1]\* では、ストレージやクエリ�
 新しいログベースのメトリクスを生成するには:
 
 1. [Generate Metrics][5] ページに移動します。
-1. **Generate Metrics** タブを選択します。
-1. **+New Metric** をクリックします。
+1. {{< ui >}}Generate Metrics{{< /ui >}} タブを選択します。
+1. {{< ui >}}+New Metric{{< /ui >}} をクリックします。
 
-Export メニューで "Generate new metric" を選択し、Analytics の検索からメトリクスを作成することも可能です。
+Analytics の検索からメトリクスを作成するには、{{< ui >}}Export{{< /ui >}} メニューから {{< ui >}}Generate new metric{{< /ui >}} オプションを選択することもできます。
 
 {{< img src="logs/processing/logs_to_metrics/metrics_from_analytics2.jpg" alt="ログからメトリクスを生成する" style="width:80%;">}}
 
@@ -47,13 +47,15 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 
 {{< img src="logs/processing/logs_to_metrics/create_custom_metrics2.png" alt="ログからメトリクスを作成する" style="width:80%;">}}
 
-1. **ログストリームをフィルタリングするためのクエリを入力**: クエリ構文は[ログエクスプローラー検索][6]と同じです。過去 20 分以内のタイムスタンプで取り込まれたログのみが集計対象となります。インデックスはクエリから除外する必要があります。
-2. **追跡するフィールドを選択**:　`*` を選択し、クエリに一致するすべてのログのカウントを生成するか、ログ属性 (例、`@network.bytes_written`) を入力して数値を集計し、集計メトリクスの対応する `count`、`min`、`max`、`sum`、`avg` を作成します。ログ属性ファセットが[メジャー][7]の場合、メトリクスの値はログ属性の値となります。
-3. **ディメンションを `group by`** に追加: デフォルトでは、ログから生成されたメトリクスには、明示的に追加しない限りタグはありません。ログに存在する任意の属性またはタグのディメンション (例えば、`@network.bytes_written`、`env`) を使用して、メトリクスの[タグ][8]を作成できます。メトリクスタグの名前は、@ を除いた元の属性またはタグの名前と同一です。
-4. **パーセンタイル集計を追加**: ディストリビューションメトリクスの場合は、オプションでパーセンタイル（p50、p75、p90、p95、p99）で集計できます。パーセンタイルのメトリクスはカスタムメトリクスとしても扱われ、[適宜請求に追加][9]されます。
-5. **メトリクスに命名**: ログベースのメトリクス名は、[カスタムメトリクスの命名規則][10]に従う必要があります。
+1. {{< ui >}}Input a query to filter the log stream{{< /ui >}}: [Log Explorer の検索構文][6]を使用してクエリを記述します。Datadog は、インデックス化されたログに対してではなく、取り込み時にログストリームに対してストリームフィルタークエリを評価します。このフィルターは、[全文検索][12] (`*:search_term`) を含む、Log Explorer のすべての検索機能をサポートしているわけではありません。Log Explorer で結果を返すクエリであっても、ここではどのログにも一致しない場合があります。集計では、過去 20 分以内のタイムスタンプで取り込まれたログのみが対象になります。クエリからインデックスを除外します。
 
-**注**: ログベースのメトリクスのデータポイントは、10 秒間隔で生成されます。ログベースのメトリクス用の[ダッシュボードグラフ][11]を作成するとき、`count unique`パラメーターは10秒間隔内の値に基づきます。
+   メトリクスを保存した後、[Metrics Explorer][13] でデータポイントが生成されていることを確認してから使用してください。クエリが Log Explorer でログに一致してもメトリクスが空のままの場合は、その用語を引用符で囲んだフレーズとして書き直してください (例: `message:"Database operation failed."`)。
+2. {{< ui >}}Select the field you would like to track{{< /ui >}}: `*` を選択してクエリに一致するすべてのログのカウントを生成するか、ログ属性 (例: `@network.bytes_written`) を入力して数値を集計し、対応する `count`、`min`、`max`、`sum`、`avg` の集計メトリクスを作成します。ログ属性ファセットが[メジャー][7]の場合、メトリクスの値はログ属性の値となります。
+3. {{< ui >}}Add dimensions to `group by`{{< /ui >}}: デフォルトでは、ログから生成されたメトリクスには、明示的に追加しない限りタグはありません。ログに存在する任意の属性またはタグのディメンション (たとえば、`@network.bytes_written`、`env`) を使用して、メトリクスの[タグ][8]を作成できます。メトリクスタグの名前は、`@` を除いた元の属性またはタグの名前と同一です。
+4. {{< ui >}}Add percentile aggregations{{< /ui >}}: ディストリビューションメトリクスの場合は、オプションで p50、p75、p90、p95、p99 のパーセンタイルを生成できます。パーセンタイルのメトリクスはカスタムメトリクスとしても扱われ、[適宜請求に追加][9]されます。
+5. {{< ui >}}Name your metric{{< /ui >}}: ログベースのメトリクス名は、[カスタムメトリクスの命名規則][10]に従う必要があります。
+
+**注**: Datadog は、ログベースのメトリクスのデータポイントを 10 秒間隔で生成します。ログベースのメトリクス用の[ダッシュボードグラフ][11]を作成するとき、`count unique` パラメーターは 10 秒間隔内の値を使用します。
 
 {{< img src="logs/processing/logs_to_metrics/count_unique.png" alt="ユニーククエリパラメーターが強調表示された時系列グラフの設定ページ" style="width:80%;">}}
 
@@ -65,7 +67,7 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 
 - Stream filter query: メトリクスに集約される一致するログの組み合わせを変更します
 - Aggregation groups: タグを更新するか、生成されたメトリクスのカーディナリティを管理します
-- パーセンタイル選択: **Calculate percentiles** ボックスへのチェックにより、パーセンタイルメトリクスを削除または生成します
+- パーセンタイル選択: {{< ui >}}Calculate percentiles{{< /ui >}} ボックスへのチェックにより、パーセンタイルメトリクスを削除または生成します
 
 メトリクスタイプまたは名前を変更するには、新しいメトリクスを作成する必要があります。
 
@@ -109,3 +111,5 @@ Export メニューで "Generate new metric" を選択し、Analytics の検索�
 [9]: /ja/account_management/billing/custom_metrics/?tab=countrategauge
 [10]: /ja/metrics/custom_metrics/#naming-custom-metrics
 [11]: /ja/dashboards/querying/
+[12]: /ja/logs/explorer/search_syntax/#full-text-search
+[13]: /ja/metrics/explorer/

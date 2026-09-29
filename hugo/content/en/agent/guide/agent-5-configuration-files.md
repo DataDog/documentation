@@ -17,7 +17,7 @@ This page covers Agent 5 configuration files. Datadog recommends installing or u
 | Windows Server 2008, Vista and newer | `%ProgramData%\Datadog\datadog.conf`                                       |
 | Windows Server 2003, XP or older     | `\\Documents and Settings\All Users\Application Data\Datadog\datadog.conf` |
 
-See the [sample `config_template.yaml` file][3] for all available configuration options.
+See the [sample `datadog.conf.example` file][3] for all available configuration options.
 
 ## Agent configuration directory
 

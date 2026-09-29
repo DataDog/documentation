@@ -52,7 +52,7 @@ Ensure your Datadog organization is [connected][3] to a GitHub organization. You
 
 After an admin enables team provisioning from GitHub, a notification appears on the Team detail page. The notification asks users {{< ui >}}Log in to GitHub{{< /ui >}} to connect their accounts from Datadog to GitHub through OAuth.
 
-{{< img src="account_management/teams/github/connect-to-github.png" alt="'Not Connected to GitHub' box with button to 'Log in to GitHub'" style="width:60%;">}}
+{{< img src="account_management/teams/github/connect-to-github-v2.png" alt="'Not Connected to GitHub' box with button to 'Log in to GitHub'" style="width:60%;">}}
 
 Each user must manually link their GitHub account to Datadog to establish the connection between Datadog and GitHub. This behavior is required by GitHub's OAuth and user privacy policies.
 
