@@ -107,7 +107,7 @@ The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their co
 
 <div class="alert alert-info">Agent Observability estimated cost values use nanodollars. For details about cost calculations and supported models, see <a href="/llm_observability/investigate/cost/">Track Costs</a>.</div>
 
-<!-- TODO: Add a screenshot of the Agent Spans tab showing All agent span events, Total estimated cost, and Total tokens. -->
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_agent_spans.png" alt="The Create Metric event picker with Agent Spans selected, showing All agent span events, Total estimated cost, and Total tokens, with Total estimated cost selected and its description displayed." style="width:90%;" >}}
 
 #### Evaluations
 
@@ -119,7 +119,7 @@ Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 
 The picker lists score evaluations received by Agent Observability during the selected time range. If an evaluation does not appear, confirm that your application has submitted at least one score value for it.
 
-<!-- TODO: Add a screenshot of the Evaluations tab showing custom score evaluations. -->
+{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing custom score evaluations, with the relevance evaluation selected and its score type displayed." style="width:90%;" >}}
 
 After you configure either source:
 
