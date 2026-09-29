@@ -52,8 +52,8 @@ Bits can perform the following Live Debugger actions during a debugging session:
 |--------|-------------|
 | Discover services | Find and validate services available for debugging in a given environment. |
 | Create logpoints | Add logpoints to a running service at a specific code location. |
-| List session logpoints | Show the logpoints active in a debug session. |
-| Disable logpoints | Disable all logpoints in a debug session. |
+| List session logpoints | Show the logpoints active in a Debug Session. |
+| Disable logpoints | Disable all logpoints in a Debug Session. |
 | Retrieve snapshot data | Fetch captured variable values and execution context from an active logpoint. |
 
 Logpoints created by Bits follow the same rules as manually created logpoints. They are read-only, non-blocking, and expire automatically after the configured time limit (10 minutes to 2 days; default: 60 minutes). Bits cannot modify application state or alter control flow.
