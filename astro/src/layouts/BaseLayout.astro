@@ -10,6 +10,8 @@ import {
 } from "@lib/componentUtils/bannerData";
 import { DevBadge } from "@components/DevBadge/DevBadge";
 import Telemetry from "@components/Telemetry/Telemetry.astro";
+import GoogleTagManager from "@components/GoogleTagManager/GoogleTagManager.astro";
+import GoogleTagManagerFallback from "@components/GoogleTagManager/GoogleTagManagerFallback.astro";
 import AskAi from "@components/AskAi/AskAi.astro";
 import { resolveSiteEnv } from "@lib/site/siteEnv";
 import { getAllowedRegions, DEFAULT_REGION_KEY } from "@config/regions";
@@ -197,8 +199,10 @@ const activeRegionSelectors = allowedRegions
         it here costs nothing against first paint. */
     }
     <Telemetry />
+    <GoogleTagManager />
   </head>
   <body class:list={[{ announcement: hasBanner }]}>
+    <GoogleTagManagerFallback />
     <AnnouncementBanner override={announcementBanner} />
     <Header />
     <div class="base-layout__body">

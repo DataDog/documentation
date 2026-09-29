@@ -16,10 +16,14 @@ import { describe, it, expect } from "vitest";
 import { API_VERSIONS, getOpenApiDocument } from "@lib/api/specParser";
 
 /** Walk every schema object in a spec, guarding against shared/cyclic nodes. */
-function eachSchema(root: unknown, visit: (node: Record<string, unknown>) => void) {
+function eachSchema(
+  root: unknown,
+  visit: (node: Record<string, unknown>) => void,
+) {
   const seen = new Set<unknown>();
   const walk = (node: unknown, depth: number) => {
-    if (!node || typeof node !== "object" || depth > 14 || seen.has(node)) return;
+    if (!node || typeof node !== "object" || depth > 14 || seen.has(node))
+      return;
     seen.add(node);
     if (!Array.isArray(node)) visit(node as Record<string, unknown>);
     for (const value of Object.values(node)) walk(value, depth + 1);
@@ -32,14 +36,20 @@ describe("type column invariants across the full spec", () => {
     const byFormat = new Map<string, Set<string>>();
 
     for (const version of API_VERSIONS) {
-      const spec = getOpenApiDocument(version) as unknown as Record<string, unknown>;
-      eachSchema((spec.components as Record<string, unknown>)?.schemas, (node) => {
-        if (typeof node.format !== "string") return;
-        const base = typeof node.type === "string" ? node.type : "(no type)";
-        const types = byFormat.get(node.format) ?? new Set<string>();
-        types.add(base);
-        byFormat.set(node.format, types);
-      });
+      const spec = getOpenApiDocument(version) as unknown as Record<
+        string,
+        unknown
+      >;
+      eachSchema(
+        (spec.components as Record<string, unknown>)?.schemas,
+        (node) => {
+          if (typeof node.format !== "string") return;
+          const base = typeof node.type === "string" ? node.type : "(no type)";
+          const types = byFormat.get(node.format) ?? new Set<string>();
+          types.add(base);
+          byFormat.set(node.format, types);
+        },
+      );
     }
 
     // Sanity check that the walk found the formats we know are in the spec,
@@ -64,12 +74,21 @@ describe("type column invariants across the full spec", () => {
     const orphans: string[] = [];
 
     for (const version of API_VERSIONS) {
-      const spec = getOpenApiDocument(version) as unknown as Record<string, unknown>;
-      eachSchema((spec.components as Record<string, unknown>)?.schemas, (node) => {
-        if (typeof node.format === "string" && typeof node.type !== "string") {
-          orphans.push(`${version}: format "${node.format}" with no type`);
-        }
-      });
+      const spec = getOpenApiDocument(version) as unknown as Record<
+        string,
+        unknown
+      >;
+      eachSchema(
+        (spec.components as Record<string, unknown>)?.schemas,
+        (node) => {
+          if (
+            typeof node.format === "string" &&
+            typeof node.type !== "string"
+          ) {
+            orphans.push(`${version}: format "${node.format}" with no type`);
+          }
+        },
+      );
     }
 
     // A format with no type would render as the format alone with nothing to

@@ -1,0 +1,24 @@
+---
+// The <noscript> fallback GTM recommends immediately after <body> opens.
+// Hugo's install never included this half of the snippet; this is the first
+// implementation of it. Separate from GoogleTagManager.astro because that one
+// renders in <head> and this one must render at the top of <body>.
+import { resolveSiteEnv } from "@lib/site/siteEnv";
+import { getGtmContainerId } from "@config/gtm";
+
+const containerId = getGtmContainerId(resolveSiteEnv());
+---
+
+{
+  containerId && (
+    <noscript>
+      <iframe
+        src={`https://www.googletagmanager.com/ns.html?id=${containerId}`}
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"
+        title="Google Tag Manager"
+      />
+    </noscript>
+  )
+}
