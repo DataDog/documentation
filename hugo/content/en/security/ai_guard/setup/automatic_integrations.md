@@ -16,7 +16,7 @@ AI Guard can automatically evaluate LLM calls made through supported AI ecosyste
 
 ## Supported frameworks and libraries
 
-<div class="alert alert-tip">Automatic integration is supported only for these frameworks. For Amazon Strands and LiteLLM Proxy, see [Manual Integrations](/security/ai_guard/setup/manual_integrations/). For any other framework, or for custom LLM or tool call code, use the [SDK][2] to call `evaluate()` in your code.</div>
+<div class="alert alert-tip">Automatic integration is supported only for these frameworks. For Amazon Strands and LiteLLM Proxy, see <a href="/security/ai_guard/setup/manual_integrations/">Manual Integrations</a>. For any other framework, or for custom LLM or tool call code, use the <a href="/security/ai_guard/setup/sdk/">SDK</a> to call <code>evaluate()</code> in your code.</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
