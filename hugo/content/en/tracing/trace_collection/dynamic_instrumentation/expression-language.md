@@ -8,7 +8,7 @@ aliases:
 
 ## Overview
 
-[Live Debugger](/tracing/live_debugger/) and [Dynamic Instrumentation](/dynamic_instrumentation/) use this expression language to read values from running code and define conditions, metrics, and span tags. It borrows syntax elements from common programming languages, but also has its own unique rules. The language lets you access local variables, method parameters, and nested fields within objects, and it supports the use of comparison and logical operators.
+[Live Debugger][1] and [Dynamic Instrumentation][2] use this expression language to read values from running code and define conditions, metrics, and span tags. The expression language supports access to local variables, method parameters, and nested object fields, along with comparison and logical operators. It borrows syntax from common programming languages but has its own rules.
 
 Expression support depends on the runtime version and instrumentation location.
 
@@ -103,3 +103,6 @@ Available variables in this example:
 - `i`: The current loop iteration index
 
 {{< expression-language-simulator >}}
+
+[1]: /tracing/live_debugger/
+[2]: /dynamic_instrumentation/

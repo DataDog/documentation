@@ -60,13 +60,9 @@ Class-based redaction:
 
 [Sensitive Data Scanner][3] identifies and redacts sensitive information based on specific regular expressions.
 
-### Initial setup
+### Configure Sensitive Data Scanner rules
 
-To create a [Sensitive Data Scanner][4] rule for Live Debugger, set it to filter on `source:dd_debugger`.
-
-### Customizing Sensitive Data Scanner
-
-You can disable or customize rules through the [Sensitive Data Scanner][4].
+Create, customize, or disable rules on the [Sensitive Data Scanner page][4]. When creating a rule, set its filter to `source:dd_debugger` to apply it to Live Debugger logs. For configuration instructions, see the [Sensitive Data Scanner documentation][3].
 
 **Note**: Datadog Sensitive Data Scanner performs its redaction _after_ the information is uploaded to Datadog.
 

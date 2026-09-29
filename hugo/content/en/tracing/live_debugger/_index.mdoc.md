@@ -65,7 +65,7 @@ Live Debugger provides:
 Live Debugger and [Dynamic Instrumentation][38] use the same instrumentation technology. They share an [expression language][15] and some configuration settings. Both collect data from running services without requiring code changes, redeployments, or restarts.
 
 The products differ in the data they capture and how long the instrumentation remains active:
-- Use Live Debugger to investigate a problem. Its logpoints capture log events and variable snapshots, and expire when the Debug Session ends.
+- Use Live Debugger to investigate a problem. Its logpoints capture log events and variable snapshots, and expire when the debug session ends.
 - Use Dynamic Instrumentation to add custom APM instrumentation. Dynamic spans, span tags, and metrics remain active until you disable them.
 
 ## Requirements
@@ -160,7 +160,7 @@ The products differ in the data they capture and how long the instrumentation re
 The following permissions are required to use Live Debugger:
 
 - **Live Debugger Read** (`live_debugger_read`): Required to access the Live Debugger page.
-- **Live Debugger Write** (`live_debugger_write`): Required to create or modify Debug Sessions and logpoints.
+- **Live Debugger Write** (`live_debugger_write`): Required to create or modify debug sessions and logpoints.
 - **Live Debugger Redaction Write** (`live_debugger_redaction_write`): Required to change the [redaction mode][24] for captured data.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
@@ -229,7 +229,7 @@ You can enable Live Debugger in-app or with environment variables.
 Enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
+- Start a debug session. Live Debugger is enabled automatically on the selected service and environment.
 
 #### Enable with environment variables {% #enable-with-environment-variables %}
 
@@ -329,13 +329,9 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 After you enable Live Debugger, you can check and update the enablement status of each service and environment on the [Live Debugger Settings page][26]. Each service and environment can be in one of three modes:
 
-- {% ui %}Automatic{% /ui %}: Live Debugger has not been set to {% ui %}Enabled{% /ui %} or {% ui %}Disabled{% /ui %} yet on this service and environment. This setting changes to {% ui %}Enabled{% /ui %} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {% ui %}Enabled{% /ui %} in advance.
+- {% ui %}Automatic{% /ui %}: Live Debugger has not been set to {% ui %}Enabled{% /ui %} or {% ui %}Disabled{% /ui %} yet on this service and environment. This setting changes to {% ui %}Enabled{% /ui %} automatically the first time a debug session is started. For a faster first-time debugging experience, switch the setting to {% ui %}Enabled{% /ui %} in advance.
 - {% ui %}Enabled{% /ui %}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {% ui %}Disabled{% /ui %}: Logpoints cannot be created or reactivated on the given service and environment.
-
-### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
-
-Use Live Debugger with your own coding assistant through the `live-debugger` toolset (Preview). See the [Datadog MCP Server documentation][39] for setup and access requirements.
 
 ### Create a logs index {% #create-a-logs-index %}
 
@@ -351,24 +347,24 @@ To create the index:
 
 Set up [Source Code Integration][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
-**Note**: Source Code Integration is optional when starting a Debug Session manually, but it is required when using [Bits Live Debugger][23].
+**Note**: Source Code Integration is optional when starting a debug session manually, but it is required when using [Bits Live Debugger][23].
 
 ## Using Live Debugger
 
-### Creating and using a Debug Session
+### Creating and using a debug session
 
-A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
+A debug session lets you inspect running code using auto-expiring logpoints. To create and use a debug session:
 
-1. Start a Debug Session from one of the following locations:
+1. Start a debug session from one of the following locations:
    - (Preview) On the [Live Debugger page][13], submit a question or investigation prompt to [Bits Live Debugger][29].
    - On the [Live Debugger page][13], click {% ui %}Create Debug Session{% /ui %} or {% ui %}New Session{% /ui %}.
    - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {% ui %}Start Debug Session{% /ui %}.
 2. Select a code location to add the first logpoint and begin capturing log events.
 3. Add, remove, or modify logpoints as needed during the session.
-4. Log events captured by the logpoints appear in the Debug Session view as they are ingested and indexed. You can also view, query, and analyze these logs in Logs Explorer and other Datadog tools that reference log data.
-5. View active and inactive Debug Sessions created by users in your organization in the Live Debugger Sessions list. A Debug Session's log events are visible only during the retention period defined for [the logs index](#create-a-logs-index).
+4. Log events captured by the logpoints appear in the debug session view as they are ingested and indexed. You can also view, query, and analyze these logs in Logs Explorer and other Datadog tools that reference log data.
+5. View active and inactive debug sessions created by users in your organization in the Live Debugger Sessions list. A debug session's log events are visible only during the retention period defined for [the logs index](#create-a-logs-index).
 
-Debug Sessions expire automatically. You can also manually disable or re-enable a session, as well as individual logpoints, at any time.
+Debug sessions expire automatically. You can also manually disable or re-enable a session, as well as individual logpoints, at any time.
 
 ### Creating logpoints
 
@@ -382,7 +378,7 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 6. (Optional) Define a condition for when the logs should be emitted.
 7. Click {% ui %}Apply changes{% /ui %} to save modifications to existing logpoint definitions.
 
-Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
+Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or debug session should be created in this case).
 
 After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. If expected logs or variable values are missing, see [Troubleshooting](#troubleshooting).
 
@@ -399,6 +395,14 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 **Note**: [Bits Live Debugger][23] requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
+
+### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
+
+{% callout url="/mcp_server/" btn_hidden=true %}
+The Live Debugger toolset for the Datadog Model Context Protocol (MCP) server is in Preview. See the [Datadog MCP Server documentation][39] for setup and access requirements.
+{% /callout %}
+
+Use the `live-debugger` toolset to investigate running services with your own coding assistant.
 
 ## Limitations
 
