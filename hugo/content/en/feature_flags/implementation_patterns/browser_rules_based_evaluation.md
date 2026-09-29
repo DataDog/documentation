@@ -39,7 +39,7 @@ Your application owns configuration availability, freshness, and the tracking li
 
 <div class="alert alert-warning">Configuration delivered to a browser is inspectable, including any targeting rules and values it contains. Keep sensitive configuration and authorization decisions on the server. Client-side feature flags are not an access-control mechanism.</div>
 
-## Getting started: load rules once, evaluate across changing contexts
+## Getting started
 
 For browser applications that change evaluation context repeatedly during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider`. Load the rules once, then reuse the provider and configuration for subsequent evaluations and context changes.
 

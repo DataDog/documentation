@@ -367,4 +367,4 @@ The Web SDK flag shape requires `variants`, `defaultVariant`, and `disabled`. Om
 [3]: /feature_flags/browser_developer_extension/
 [4]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
 [5]: /feature_flags/concepts/monthly_flag_configuration_requests/
-[6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started-load-rules-once-evaluate-across-changing-contexts
+[6]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
