@@ -186,7 +186,7 @@ instances:
 
 If you want to authenticate with IAM, specify the `region` and `instance_endpoint` parameters, and set `managed_authentication.enabled` to `true`.
 
-**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field. IAM database authentication requires Agent 7.67.0 or later, and AWS doesn't support IAM database authentication on all RDS MariaDB versions. See the [IAM database authentication feature matrix][14] to confirm support for your RDS MariaDB version and region.
+**Note**: Only enable `managed_authentication` if you want to use IAM authentication. IAM authentication takes precedence over the `password` field. IAM database authentication requires Agent 7.67.0 or later, and AWS doesn't support IAM database authentication on all RDS MariaDB versions. See the [IAM database authentication feature matrix][5] to confirm support for your RDS MariaDB version and region.
 
 ```yaml
 init_config:
