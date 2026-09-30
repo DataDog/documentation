@@ -39,13 +39,14 @@ npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --ful
 - [`Kubectl` CLI][2] for installing the Datadog Agent.
 - Confirmed environment compatibility per the [Single Step Instrumentation compatibility guide][36].
 
+
 ## Enable APM on your applications
 
 <div class="alert alert-info">Single Step Instrumentation does not instrument applications in the namespace where the Datadog Agent is installed. Install the Agent in a separate namespace where you do not run your applications.</div>
 
-Enabling Single Step Instrumentation across your cluster automatically sends traces from applications written in supported languages in eligible namespaces.
+Enabling Single Step Instrumentation across your cluster automatically sends traces from all applications written in supported languages.
 
-**Note:** To instrument individual workloads with DDI, or select specific namespaces or pods with Agent targeting rules, see [Target specific workloads](#target-specific-workloads).
+**Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
 Use the following commands to enable SSI, replacing:
 
@@ -222,9 +223,7 @@ With this configuration, Datadog automatically sets the `service` tag using the 
 
 ### Configure USTs explicitly with ddTraceConfigs
 
-For DDI-managed workloads, set `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` under `spec.config.apm.ddTraceConfigs`. See [Configure SDK versions and settings](?tab=datadoginstrumentationcrdrecommended#configure-sdk-versions-and-settings) for a pod-label example.
-
-For Agent-configured targets, use `ddTraceConfigs` in the target block to map labels to service configurations:
+In most cases, automatic configuration is sufficient. However, if you need granular control over settings for specific workloads, use `ddTraceConfigs` to explicitly map labels to service configurations:
 
 ```yaml
 datadog:
