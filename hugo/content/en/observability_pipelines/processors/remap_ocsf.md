@@ -39,7 +39,7 @@ These are the library mappings available:
 | Log Source             | Log Type                                      | OCSF Category                 | Supported OCSF versions|
 |------------------------|-----------------------------------------------|-------------------------------| -----------------------|
 | AWS CloudTrail         | Type: Management<br>EventName: ChangePassword | Account Change (3001)         | 1.3.0<br>1.1.0         |
-| AWS Config             | Compliance change notification                | Compliance Finding (2003)     | 1.3.0                  |
+| AWS Config Rules       | Compliance change notification                | Compliance Finding (2003)     | 1.3.0                  |
 | AWS GuardDuty          | All finding types                             | Detection Finding (2004)      | 1.3.0                  |
 | AWS WAF                | WebACL                                        | HTTP Activity (4002)          | 1.3.0                  |
 | GitHub                 | Create User                                   | Account Change (3001)         | 1.1.0                  |
