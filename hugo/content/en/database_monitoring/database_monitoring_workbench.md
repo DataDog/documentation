@@ -86,7 +86,7 @@ curl -X POST "{{< region-param key="dd_api" >}}/api/unstable/databases/workbench
   }'
 ```
 
-[TODO: confirm the headers and any required permission or scope.]
+[TODO: confirm the application key needs the Database Monitoring Read permission, or list the required scope.]
 
 | Parameter | Description |
 | --------- | ----------- |
