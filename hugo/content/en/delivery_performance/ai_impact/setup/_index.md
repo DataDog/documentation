@@ -128,7 +128,14 @@ Co-author detection can undercount AI activity, as not all coding assistants add
 
 ## Set up review agents
 
-Review agents are detected from pull request comments and GitHub reactions. Define mapping rules to match review comment authors to named agents.
+Review agents review pull requests rather than writing the code in them. Datadog detects review agents from pull request comments and GitHub reactions, and attributes a review agent to a pull request when a mapping rule matches a review author to a named agent.
+
+To track a review agent with a mapping rule:
+
+1. Open the {{< ui >}}Review agents{{< /ui >}} tab in AI Impact settings.
+1. Click {{< ui >}}Add Review Agent{{< /ui >}}.
+1. Enter an {{< ui >}}Agent name{{< /ui >}} to identify the review agent in the UI.
+1. Define one or more rules that match the agent's author login associated with review comments or reactions on PRs.
 
 ## Set up autonomous agents
 
