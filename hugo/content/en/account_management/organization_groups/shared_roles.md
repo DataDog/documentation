@@ -21,7 +21,7 @@ further_reading:
 
 With shared roles, administrators in the owner organization of an [organization group][1] define a custom role once. Datadog provisions it into every member organization in the group. Use shared roles to keep role definitions consistent across organizations, instead of maintaining the same role in each one.
 
-In each member organization, a shared role behaves like a [Datadog managed role][2], except that the organization group manages it instead of Datadog. Member organization administrators assign the role to users and teams, but cannot edit or delete it. Changes made at the group level propagate to every member organization, and organizations that join the group later receive the group's shared roles.
+In each member organization, a shared role behaves like a [Datadog managed role][2], except that the organization group manages it instead of Datadog. Member organization administrators assign the role to users and teams but cannot edit or delete it. Changes made at the group level propagate to every member organization, and organizations that join the group later receive the group's shared roles.
 
 To also stop member organizations from creating their own custom roles, set the group's [role exclusivity](#role-exclusivity) to {{< ui >}}Strict{{< /ui >}}.
 

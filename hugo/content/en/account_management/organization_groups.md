@@ -64,7 +64,7 @@ Each organization group policy has an enforcement tier that controls how much la
 
 ### Shared roles
 
-Shared roles bring the same group-level control to custom roles. Member organizations assign a shared role to users and teams, but cannot edit or delete it. Shared roles are always **Group managed**: unlike organization group policies, they have no **Override allowed** tier. For details, including how to stop member organizations from creating their own custom roles, see [Shared Roles][1].
+Shared roles bring the same group-level control to custom roles. Member organizations assign a shared role to users and teams but cannot edit or delete it. Shared roles are always **Group managed**: unlike organization group policies, they have no **Override allowed** tier. For details, including how to stop member organizations from creating their own custom roles, see [Shared Roles][1].
 
 ## Apply Organization Groups
 
