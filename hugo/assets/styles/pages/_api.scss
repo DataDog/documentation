@@ -133,9 +133,9 @@ $ddpurple: #632ca6;
         position: absolute;
         z-index: 0;
         top: 0;
-        bottom: 0;
         left: 109px;
         width: 2px;
+        height: 13px;
         background: $gray-border;
     }
 
@@ -152,9 +152,9 @@ $ddpurple: #632ca6;
         border: 3px solid $gray-light;
     }
 
-    &.is-last-visible::after {
-        bottom: auto;
-        height: 13px;
+    &:has(~ .api-changelog-date-section:not(.d-none))::after {
+        bottom: 0;
+        height: auto;
     }
 }
 
