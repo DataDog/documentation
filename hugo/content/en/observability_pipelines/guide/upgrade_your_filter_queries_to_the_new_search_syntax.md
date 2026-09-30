@@ -32,8 +32,6 @@ If you created your pipeline in the UI:
 1. Navigate to [Observability Pipelines][2]. Select the pipeline and update the filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
 1. Deploy your pipeline.
 
-<div class="alert alert-warning">Update your queries after upgrading the Worker. Until you update them, queries that use the legacy syntax might not match logs as expected.</div>
-
 ### Created the pipeline using the API or Terraform
 
 If your pipeline was created using the public API or Terraform:
