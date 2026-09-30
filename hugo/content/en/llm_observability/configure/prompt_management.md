@@ -21,7 +21,7 @@ further_reading:
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-Runtime retrieval is supported through the Python, Go, and JavaScript tracing SDKs. Prompt retrieval and Prompt Tracking are separate: an application can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and Prompt Tracking are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
 Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans.
 
