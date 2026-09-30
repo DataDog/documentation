@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-Worker versions 2.11 and newer use an updated search syntax. This document covers the following:
+Worker versions 2.11 and newer use an updated search syntax. If your pipeline uses Worker version 2.10.x or older and you upgrade to 2.11 or newer, you must convert the search queries in that pipeline to the new syntax. This document covers the following:
 
-- [How to upgrade existing queries to the new syntax](#how-to-upgrade-to-the-new-search-syntax)
+- [How to upgrade existing queries to the new syntax](#how-to-upgrade-queries-to-the-new-search-syntax)
 - [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax)
 
 ## How to upgrade queries to the new search syntax
@@ -28,11 +28,11 @@ See the steps based on whether you:
 
 If you created your pipeline in the UI:
 
-1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
-1. Navigate to the [Pipeline page][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
-1. On the pipeline editor page, by default {{< ui >}}Legacy Search Syntax{{< /ui >}} is enabled because your pipeline is running the search syntax of Worker 2.10 or older.
-{{< img src="observability_pipelines/guide/legacy_search_syntax_toggle.png" alt="The pipelines editor showing the legacy search toggle enabled" style="width:85%;" >}}
-1. After you've updated all queries in that pipeline, toggle the switch to {{< ui >}}New Search Syntax{{< /ui >}} and deploy your pipeline.
+1. [Upgrade to Observability Pipelines Worker][1] version 2.11 or newer. After you upgrade, the pipeline automatically uses the new search syntax.
+1. Navigate to [Observability Pipelines][2]. Select the pipeline and update the filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
+1. Deploy your pipeline.
+
+<div class="alert alert-warning">Update your queries after upgrading the Worker. Until you update them, queries that use the legacy syntax might not match logs as expected.</div>
 
 ### Created the pipeline using the API or Terraform
 
@@ -82,7 +82,7 @@ The following examples show matched logs, along with the legacy syntax and new s
 
 `{"user": "name"}`
 : **Legacy syntax**: `@user:(name OR Name OR nAme)`
-: **New syntax**: `user:(name OR Name or nAme)`
+: **New syntax**: `user:(name OR Name OR nAme)`
 : **Difference**: With the new syntax, [attribute search][4] is case sensitive and the `@` symbol is not required for attribute search.
 
 `{"tags": ["env:prod"] }`<br>`{"ddtags": ["env:prod"] }`
