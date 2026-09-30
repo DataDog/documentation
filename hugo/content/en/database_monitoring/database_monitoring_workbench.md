@@ -71,12 +71,12 @@ After the agent creates an instance, it can read your schema, run statements, re
 
 ### Connecting with the API
 
-Use the Workbench API to create a Workbench instance from a script or CI job. [TODO: if the endpoint is in preview or unstable, say so here.]
+Use the Workbench API to create a Workbench instance from a script or CI job.
 
 To create an instance, send a `POST` request that names the monitored database:
 
-{{< code-block lang="shell" >}}
-curl -X POST "https://api.datadoghq.com/api/unstable/databases/workbench/session" \
+```shell
+curl -X POST "{{< region-param key="dd_api" >}}/api/unstable/databases/workbench/session" \
   -H "DD-API-KEY: <DATADOG_API_KEY>" \
   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
   -H "Content-Type: application/json" \
@@ -84,38 +84,46 @@ curl -X POST "https://api.datadoghq.com/api/unstable/databases/workbench/session
     "database_instance": "orders-db-primary",
     "database_name": "shop"
   }'
-{{< /code-block >}}
+```
 
-[TODO: confirm the headers, the site host, and any required permission or scope.]
+[TODO: confirm the headers and any required permission or scope.]
 
 | Parameter | Description |
 | --------- | ----------- |
-| `database_instance` | [TODO: what this identifies and where to find it] |
-| `database_name` | [TODO: what this identifies and where to find it] |
+| `database_instance` | The name of the instance in Database Monitoring. |
+| `database_name` | The name of the logical database inside the `database_instance`. |
+| `populate` | Set to `false` to create the instance without generated data. To load your own data, see [Connecting with a SQL client](#connecting-with-a-sql-client). |
 
-The response includes a Postgres connection string and [TODO: name the expiry or TTL field and its unit]:
+The request returns `202 Accepted` with the instance ID, its status, and a Postgres connection string:
 
 {{< code-block lang="json" >}}
-[TODO: paste the real response body]
+{
+  "id": "workbench-123",
+  "status": "pending",
+  "connection": {
+    "dsn": "postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require"
+  }
+}
 {{< /code-block >}}
 
-[TODO: say whether the request waits until the instance is ready. If it does not, describe how to check readiness.]
+Creating an instance is asynchronous. To check readiness, send `GET /api/unstable/databases/workbench/session/{id}` until `status` is `ready`. The response also includes `expires_at`.
 
-[TODO: describe how to delete an instance, or remove this line if the API has no delete endpoint.]
+Instances expire after `ttl_seconds` seconds, 1,800 (30 minutes) by default. You cannot set the TTL in the request.
 
-<div class="alert alert-danger">The connection string is a live database credential. Treat it as a secret: do not commit it, log it, or paste it into a shared channel. [TODO: add "Delete the instance when you finish" if a delete endpoint exists.]</div>
+To delete an instance, send `DELETE /api/unstable/databases/workbench/session/{id}`. A successful request returns `204`.
+
+<div class="alert alert-danger">The connection string is a live database credential. Treat it as a secret: do not commit it, log it, or paste it into a shared channel. Delete the instance when finished. Expiry or deletion closes connections and discards all data.</div>
 
 ### Connecting with a SQL client
 
-Use the connection string from the MCP server or the API with any Postgres client, such as `psql`, a GUI, or your ORM's test harness. [TODO: confirm the MCP create tool also returns the connection string.]
-
+Use the connection string from the MCP server or the API with any Postgres client, such as `psql`, a GUI, or your ORM's test harness.
 {{< code-block lang="shell" >}}
 psql "postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require"
 {{< /code-block >}}
 
-The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use the Workbench](#how-to-use-the-workbench). [TODO: say what happens to the connection when the instance expires or is deleted.]
+The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use the Workbench](#how-to-use-the-workbench). When the instance expires or you delete it, open connections close and in-flight queries can fail.
 
-By default, Workbench populates the instance with synthetic data. To use your own data instead, load it with [TODO: the supported method, for example `COPY` or `INSERT` statements].
+By default, Workbench populates the instance with synthetic data. To use your own data instead, create the instance with `"populate": false` in the API request. Then load your data with `INSERT`, `COPY FROM STDIN`, or the `psql` `\copy` command, and run `ANALYZE` afterward. Instance resources and the TTL limit how much data you can load.
 
 ## How to use the Workbench
 
@@ -176,13 +184,16 @@ The migration does not take the same time as in production, but it produces the 
 
 ### Catch plan regressions in CI
 
-Use the API to add a plan check to your pipeline. [TODO: confirm this flow and link to the API section.] For each pull request that touches SQL or schema:
+Use the [API](#connecting-with-the-api) to add a plan check to your pipeline. For each pull request that touches SQL or schema:
 
 1. Create an instance.
-2. Apply the change.
-3. Run `EXPLAIN` on your top queries.
-4. Fail the build if a plan breaks one of your invariants.
-5. Delete the instance. [TODO: requires a delete endpoint.]
+2. Poll until the status is `ready`.
+3. Prepare the data.
+4. If you compare plans before and after the change, capture baseline plans with `EXPLAIN`.
+5. Apply the change.
+6. Run `EXPLAIN` on your top queries.
+7. Fail the build if a plan breaks one of your invariants.
+8. Delete the instance, even if an earlier step fails.
 
 Examples of invariants:
 
@@ -209,7 +220,7 @@ Workbench answers questions about schema, query plans, and relative cost. It doe
 - **Generated data is approximate.** By default, Workbench generates rows from collected statistics, so table sizes are close to production. Skew, column correlation, and value distributions can differ, which can change plans that depend on them. Populating Workbench with your own data avoids this.
 - **Some indexes and foreign keys may be missing.** Workbench may skip an index or foreign key, or drop an expression that calls an unavailable function.
 - **Views, functions, triggers, roles, and grants are not reconstructed.** Changes that depend on them do not reproduce accurately.
-- **Instances are temporary.** Instances expire after a short TTL, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
+- **Instances are temporary.** Instances expire after 30 minutes by default, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
 
 Use Workbench to check structure, query plans, and order-of-magnitude effects. It does not cover the rest.
 
