@@ -13,7 +13,7 @@ further_reading:
       text: 'Access for Enterprises'
 ---
 
-{{< callout url="#" btn_hidden="true" header="Request Access is in Preview." >}}
+{{< callout url="#" btn_hidden="true" header="false" >}}
 Request Access is in Preview.
 {{< /callout >}}
 
