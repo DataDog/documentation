@@ -41,6 +41,11 @@ cascade:
     path: /security/workload_protection/windows_expressions
   aliases:
     - /security/threats/windows_expressions
+- _target:
+    path: /security/workload_protection/workload_protection_agent_config
+  aliases:
+    - /security/workload_protection/setup/advanced_configuration
+    - /security/workload_protection/setup/agent_variables
 
 ---
 

@@ -16,10 +16,6 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy Gateway is in Preview" >}}
-App and API Protection for Envoy Gateway is in Preview. Use the following instructions to try the preview.
-{{< /callout >}}
-
 You can enable Datadog [App and API Protection][12] for traffic managed by [Envoy Gateway][1] to inspect and protect traffic at the edge of your infrastructure.
 
 ## Prerequisites

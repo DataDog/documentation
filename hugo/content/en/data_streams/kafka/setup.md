@@ -1,6 +1,10 @@
 ---
 title: Kafka Console Setup
 description: Set up Kafka Console, including prerequisites, Agent configuration, and the additional steps required to inspect Kafka messages.
+further_reading:
+- link: "https://www.datadoghq.com/blog/kafka-console/"
+  tag: "Blog"
+  text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
 ---
 
 This page covers the prerequisites and setup steps for Kafka Console.
@@ -64,7 +68,7 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 #### 1. Create a role
 
 1. Navigate to the [{{< ui >}}Roles{{< /ui >}} page][8] in Datadog.
-2. Click {{< ui >}}+ New Role{{< /ui >}} in the top-right corner.
+2. Click {{< ui >}}\+ New Role{{< /ui >}} in the top-right corner.
    <div class="alert alert-info">
    If you see "Read Only" instead of the "+ New Role button", you don't have permission to create roles. Contact your Datadog administrator for assistance.
    </div>
@@ -88,6 +92,10 @@ You can verify your current permissions on your [{{< ui >}}Profile{{< /ui >}} pa
 7. Look for a {{< ui >}}User updated{{< /ui >}} confirmation message to verify the change was successful.
 
 {{% /collapse-content %}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/data-streams/kafka/setup
 [3]: /remote_configuration/
