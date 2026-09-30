@@ -1,164 +1,163 @@
 ---
-description: Consulta y analiza los costes de la nube en tiempo real con filtros y
+description: Consulte y analice los costos de la nube en tiempo real con filtros y
   visualizaciones flexibles.
 further_reading:
 - link: /cloud_cost_management/reporting/
   tag: Documentación
-  text: Crear y guardar informes de costes
+  text: Cree y guarde informes de costos
 - link: /cloud_cost_management/tags/multisource_querying
   tag: Documentación
-  text: Consulta de costes entre varios proveedores
+  text: Consulte los costos en múltiples proveedores
 - link: /monitors/types/cloud_cost/
   tag: Documentación
-  text: Crear monitores de costes
+  text: Cree monitores de costos
 - link: /cloud_cost_management/
   tag: Documentación
-  text: Más información sobre Cloud Cost Management
+  text: Obtenga información sobre Cloud Cost Management
 title: Cost Explorer
 ---
+## Descripción general {#overview}
 
-## Información general
+El [Cloud Cost Explorer][1] proporciona una interfaz interactiva basada en consultas para analizar su gasto en la nube en [AWS][2], [Azure][3], [Google Cloud][4], [Oracle][5], [proveedores SaaS][6] y [costos de Datadog][7]. A diferencia de los informes guardados, el explorador le permite realizar análisis ad-hoc con consultas, filtros y visualizaciones flexibles para investigar tendencias de costos, identificar anomalías y responder preguntas específicas sobre su gasto en la nube.
 
-[Cloud Cost Explorer][1] proporciona una interfaz interactiva basada en consultas para analizar tu gasto en la nube en [AWS][2], [Azure][3], [Google Cloud][4], [Oracle][5], [proveedores de SaaS][6] y [costes de Datadog][7]. A diferencia de los informes guardados, Explorer te permite realizar análisis ad hoc con consultas, filtros y visualizaciones flexibles para investigar tendencias de costes, identificar anomalías y responder a preguntas específicas sobre tu gasto en la nube.
+Use el Cost Explorer para:
+- Cree consultas personalizadas en múltiples proveedores usando etiquetas, servicios y filtros
+- Investigue los cambios de costos a lo largo del tiempo con agrupaciones y desgloses flexibles
+- Descargue datos, cree widgets de Dashboard o configure monitores de costos
 
-Utiliza el Cost Explorer para:
-- Crear consultas personalizadas en varios proveedores utilizando etiquetas, servicios y filtros.
-- Investigar las variaciones de los costes a lo largo del tiempo con agrupaciones y desgloses flexibles.
-- Descargar datos, crear widgets de dashboards o configurar monitores de costes.
+## Consulte sus datos de costos {#query-your-cost-data}
 
-## Consultar datos de tus costes
+1. Navegue a [**Cloud Cost > Analyze > Explorer**][1] en Datadog.
+2. Cree una consulta de búsqueda usando el editor de consultas o los filtros desplegables:
+   - Use el menú desplegable {{< ui >}}Provider{{< /ui >}} para seleccionar uno o más proveedores de nube
+   - Haga clic en {{< ui >}}\+ Filter{{< /ui >}} para agregar filtros para servicios, etiquetas, regiones, equipos y otros atributos
+   - Escriba directamente en la barra de búsqueda para consultas más avanzadas
 
-1. Ve a [**Cloud Cost > Analyze > Explorer**][1] (Coste en la nube > Analizar > Explorer) en Datadog.
-2. Construye una consulta de búsqueda utilizando el editor de consultas o los filtros desplegables:
-   - Utiliza el menú desplegable **Provider** (Proveedor) para seleccionar uno o varios proveedores de nube
-   - Haz clic en **+ Filter** (+ Filtro) para añadir filtros por servicios, etiquetas, regiones, equipos y otros atributos.
-   - Escribe directamente en la barra de búsqueda para consultas más avanzadas
+   {{< img src="cloud_cost/reporting/reporting-overview-1.png" alt="El generador de consultas de Cloud Cost Explorer que muestra la selección de proveedor, filtros de tipo de costo, búsqueda de etiquetas, filtros de servicio y opciones de agrupación." style="width:100%;" >}}
 
-   {{< img src="cloud_cost/reporting/reporting-overview-1.png" alt="El compilador de consultas de Cloud Cost Explorer que muestra la selección del proveedor, los filtros de tipo de coste, la búsqueda de etiquetas, los filtros de servicio y las opciones de agrupamiento" style="width:100%;" >}}
-
-3. Agrupa tus datos de costes haciendo clic en **Group by** (Agrupar por) y seleccionando dimensiones como:
+3. Agrupe sus datos de costos haciendo clic en {{< ui >}}Group by{{< /ui >}} y seleccionando dimensiones como:
    - Nombre del proveedor
    - Nombre del servicio
    - Etiquetas de recursos (como `team`, `env`, `project`)
    - Región
    - ID de cuenta
 
-4. Selecciona un intervalo de tiempo mediante el selector de tiempo para analizar los costes en distintos periodos (hora, día, semana, mes o intervalo personalizado).
+4. Seleccione un rango de tiempo usando el selector de tiempo para analizar los costos durante diferentes períodos (hora, día, semana, mes o rango personalizado).
 
-**Nota**: Cuando se consultan los costes de varios proveedores, las etiquetas a nivel de recurso no están disponibles. Para acceder a etiquetas específicas de recursos, filtra a un único proveedor en tu consulta.
+**Nota**: Al consultar costos entre múltiples proveedores, las etiquetas a nivel de recurso no están disponibles. Para acceder a etiquetas específicas de recursos, filtre por un solo proveedor en su consulta.
 
-## Panel lateral de resumen de cambios de costes 
+## Panel lateral de Resumen de cambios en los costos {#cost-change-summary-side-panel}
 
-Haz clic en cualquier fila de la tabla en la parte inferior del Explorer para abrir el **panel Resumen de cambios de costes** para ese proveedor, servicio o recurso específico. El panel destaca qué y quién puede estar provocando cambios en los costes del periodo actual en comparación con el periodo anterior.
+Haga clic en cualquier fila de la tabla en la parte inferior del Explorador para abrir el {{< ui >}}Cost Change Summary panel{{< /ui >}} para ese proveedor, servicio o recurso específico. El panel destaca qué y quién podría estar impulsando los cambios en los costos para el período actual en comparación con el período anterior.
 
 El panel contiene cuatro secciones generales:
-- Resumen de cambios en los costes
+- Resumen de cambios en los costos
 - Equipos asociados
-- Cambiar detalles
-- Seguir investigando
+- Detalles del cambio
+- Investigue más a fondo
 
-{{< img src="cloud_cost/reporting/cost-change-sidepanel.png" alt="El panel Resumen de los cambios en los costes destaca qué o quién impulsa los cambios en los costes para el periodo actual frente al periodo anterior." style="width:100%;" >}}
+{{< img src="cloud_cost/reporting/cost-change-sidepanel.png" alt="El panel de Resumen de cambios en los costos destaca qué y quién podría estar impulsando los cambios en los costos para el período actual en comparación con el período anterior." style="width:100%;" >}}
 
-En la parte superior, puedes ver el **coste total** del periodo actual y el cambio de coste en dólares y porcentajes con respecto al periodo anterior (**qué ha pasado**). 
+En la parte superior, puede ver el **costo total** para el período actual y el cambio de costo en dólares y porcentaje en comparación con el período anterior (**qué sucedió**). 
 
-### Investigar el cambio
+### Investigue el cambio {#investigate-the-change}
 
-Utiliza las secciones **Cambiar detalles** y **Seguir investigando** para:
+Utilice las secciones {{< ui >}}Change Details{{< /ui >}} y {{< ui >}}Investigate Further{{< /ui >}} para:
 
-- **Identificar al instante las anomalías en los costes**: las desviaciones inesperadas en los costes, calculadas con respecto a los datos históricos, se resaltan automáticamente en rojo, lo que te permite centrar tu investigación en las tendencias críticas.  
+- **Identifique anomalías de costos al instante**: Las desviaciones inesperadas en los costos, calculadas con base en datos históricos, se resaltan automáticamente en rojo, lo que le permite centrar su investigación en tendencias críticas.  
+     
+- **Analice los impulsores del cambio**: determine fácilmente la causa de un cambio en el costo, ya sea que se deba a un cambio en el **uso** (la cantidad de recursos) o a un cambio en el **precio unitario** (el costo por recurso). Por ejemplo, en la captura de pantalla a continuación, el cambio en el gasto es impulsado por un cambio en el precio unitario en lugar del uso; la cantidad de recursos se mantiene estable mientras que el costo por recurso sube y baja, lo que provoca el cambio general en el costo.
 
-- **Análisis de los factores de cambio**: determina fácilmente la causa de un cambio en los costes, es decir, si se debe a un cambio en el **uso** (el recuento de recursos) o a un cambio en el **precio unitario** (el coste por recurso). Por ejemplo, en la siguiente captura de pantalla, el cambio en los gastos se debe a un cambio en el precio unitario más que en el uso: el recuento de recursos se mantiene estable mientras que el coste por recurso aumenta y disminuye, lo que provoca el cambio en el coste global.
+{{< img src="cloud_cost/reporting/cloud-cost-spend-summary.png" alt="El cambio en el gasto es impulsado por un cambio en el precio unitario en lugar del uso; la cantidad de recursos se mantiene estable mientras que el costo por recurso sube y baja, lo que provoca el cambio general en el costo" style="width:100%;" >}}
 
-{{< img src="cloud_cost/reporting/cloud-cost-spend-summary.png" alt="El cambio en el gasto es impulsado por un cambio en el precio de unidad en lugar del uso, el recuento de recursos se mantiene estático mientras el costo por recurso aumenta y disminuye, generando que el cambio general del costo cambie" style="width:100%;" >}}
+### Colabore y haga un seguimiento {#collaborate-and-monitor}
 
-### Colaborar y monitorizar
-
-- **Contactar con el equipo responsable**:
-  - Revisa la sección **Equipo(s) asociado(s)** para identificar qué equipos poseen los recursos que impulsan el cambio de coste (deducido de etiquetas como `team:shopist`). Ponte en contacto con los equipos mencionados (por ejemplo, Shopist, Platform, Cloud-Networks) para conocer el contexto completo del cambio.
-  - Haz clic en **Send Notebook** (Enviar notebook) para compartir el contexto completo de la investigación de costes directamente con el equipo, permitiéndoles capturar hallazgos, añadir anotaciones y seguir el subproceso de la investigación.
+- **Comuníquese con el equipo responsable**:
+  - Revise la sección {{< ui >}}Associated Team(s){{< /ui >}} para identificar qué equipos poseen los recursos que impulsan el cambio en el costo (inferido a partir de etiquetas como `team:shopist`). Haga un seguimiento con los equipos enumerados (por ejemplo, Shopist, Platform, Cloud-Networks) para obtener el contexto completo del cambio.
+  - Haga clic en {{< ui >}}Send Notebook{{< /ui >}} para compartir el contexto completo de la investigación de costos directamente con el equipo, permitiéndoles capturar hallazgos, agregar anotaciones y realizar un seguimiento del hilo de la investigación.
 
 - **Filtrar por etiquetas**:
-  - Utiliza **Etiquetas asociadas** para ver todas las etiquetas que contribuyen a la partida de gastos.
-  - Haz clic en cualquier valor de la etiqueta (como `account:demo` o una `aws_account` específica) para ajustar tu búsqueda y filtrar todo el Explorer para mostrar solo los recursos con esa etiqueta.
+  - Use {{< ui >}}Associated Tags{{< /ui >}} para ver todas las etiquetas que contribuyen a la partida de costo.
+  - Haga clic en cualquier valor de etiqueta (como `account:demo` o una `aws_account` específica) para refinar su búsqueda y filtrar todo el Explorador para mostrar solo los recursos con esa etiqueta.
 
-- **Crear un monitor**:
-  - Configura un monitor de Cloud Cost para recibir una alerta la próxima vez que se produzca un cambio similar. Más información sobre [Monitores de Cloud Cost][8].
+- **Cree un Cloud Cost Monitor**:
+  - Configure un Cloud Cost Monitor para recibir alertas la próxima vez que ocurra un cambio similar. Obtenga más información sobre [Cloud Cost Monitors][8].
 
-## Ajustar los resultados
+## Refinar sus resultados {#refine-your-results}
 
-Haz clic en **Refine Results** (Ajustar resultados) para acceder a opciones de filtrado avanzadas que te ayudarán a centrarte en patrones de costes específicos.
+Haga clic en {{< ui >}}Refine Results{{< /ui >}} para acceder a opciones de filtrado avanzadas que le ayudan a enfocarse en patrones de costos específicos.
 
-   {{< img src="cloud_cost/reporting/refine-results.png" alt="El panel Ajustar resultados muestra opciones de filtrado incluido Solo cargos de uso, Solo días completos, Costo total, Cambio de dólar y Cambio de porcentaje" style="width:100%;" >}}
+   {{< img src="cloud_cost/reporting/refine-results.png" alt="El panel Refinar resultados muestra opciones de filtrado que incluyen Solo cargos por uso, Solo días completos, Costo total, Cambio en dólares y Cambio porcentual" style="width:100%;" >}}
 
-**Sólo días completos**
-: excluye los dos últimos días de datos de costes, que pueden estar incompletos. Utiliza esta opción para un análisis histórico preciso.
+{{< ui >}}Complete Days Only{{< /ui >}}
+: Excluya los últimos dos días de datos de costos, que pueden estar incompletos. Utilice esta opción para un análisis histórico preciso.
 
-**Coste total**
-: filtra los datos para ver los costes dentro de un rango específico de dólares (por ejemplo, mostrar solo los recursos que cuestan más de 1000 dólares).
+{{< ui >}}Total Cost{{< /ui >}}
+: Filtre los datos para visualizar los costos dentro de un rango de dólares específico (por ejemplo, mostrar solo los recursos que cuestan más de $1,000).
 
-**Cambio de dólares**
-: muestra solo los cambios de coste dentro de un rango de cambio en dólares especificado (por ejemplo, mostrar los servicios con un aumento de más de 500 dólares).
+{{< ui >}}Dollar Change{{< /ui >}}
+: Muestre solo los cambios de costos dentro de un rango de cambio de dólares especificado (por ejemplo, mostrar servicios con un aumento de $500+).
 
-**Cambio de porcentaje**
-: muestra solo los cambios de coste dentro de un rango porcentual especificado (por ejemplo, mostrar los recursos con un incremento de coste superior al 20 %).
+{{< ui >}}Percent Change{{< /ui >}}
+: Muestre solo los cambios de costos dentro de un rango de porcentaje especificado (por ejemplo, mostrar recursos con un aumento de costos del 20%+).
 
-## Cambiar las vistas de datos
+## Cambie las vistas de datos {#change-data-views}
 
-El Cost Explorer muestra los datos de costes como un gráfico de series temporales con una tabla desglosada. Puedes cambiar la forma en que el gráfico muestra los datos seleccionando una de las siguientes vistas:
+El Explorador de costos muestra sus datos de costos como un gráfico de series temporales con un desglose en tabla. Puede cambiar la forma en que el gráfico muestra los datos seleccionando entre las siguientes vistas:
 
-- **Costes ($)**: ver los costes totales en dólares a lo largo del tiempo
-- **Tendencias de cambio (%)**: visualiza los cambios en los costes como aumentos o disminuciones porcentuales
-- **Tendencias de cambio ($)**: ver las variaciones de costes en dólares
+- {{< ui >}}Costs ($){{< /ui >}}: Visualizar los costos totales en dólares a lo largo del tiempo
+- {{< ui >}}Change trends (%){{< /ui >}}: Visualizar los cambios de costos como aumentos o disminuciones porcentuales
+- {{< ui >}}Change trends ($){{< /ui >}}: Visualizar los cambios de costos en montos en dólares
 
-{{< img src="cloud_cost/reporting/change-view.png" alt="Menú desplegable que muestra tres opciones de vista: Costes en $, Tendencias de cambio en % y Tendencias de cambio en $" style="width:100%;" >}}
+{{< img src="cloud_cost/reporting/change-view.png" alt="Menú desplegable que muestra tres opciones de vista: Costos en $, Tendencias de cambio en % y Tendencias de cambio en $" style="width:100%;" >}}
 
-Cambia entre estas vistas para identificar si estás realizando un seguimiento de los costes absolutos o investigando las variaciones de los costes.
+Cambie entre estas vistas para identificar si está realizando un seguimiento de los costos absolutos o investigando las variaciones de costos.
 
-### Opciones de visualización de la tabla
+### Opciones de visualización de tabla{#table-display-options}
 
-Debajo del gráfico, la tabla muestra los costes desglosados por la agrupación seleccionada (como proveedor, nombre del servicio o etiquetas). Puedes personalizar la forma en que se muestran estos datos.
+Debajo del gráfico, la tabla muestra los costos desglosados por la agrupación seleccionada (como proveedor, nombre del servicio o etiquetas). Puede personalizar cómo se muestran estos datos.
 
-{{< img src="cloud_cost/reporting/table-display-options.png" alt="Opciones de visualización de tablas que muestra los modos de vista Resumen y Desglose, conmutadores de visibilidad de columnas y filtro Solo cambios principales" style="width:100%;" >}}
+{{< img src="cloud_cost/reporting/table-display-options.png" alt="Opciones de visualización de tabla que muestran los modos de vista Resumen y Desglose, selectores de visibilidad de columnas y el filtro Solo cambios principales" style="width:100%;" >}}
 
-**Modos de visualización**
-- **Resumen**: ver los costes agregados en todos los periodos de tiempo para obtener una visión general.
-- **Desglose**: ver los costes desglosados por periodo (diario, semanal o mensual, en función del intervalo de tiempo seleccionado).
+**Modos de vista**
+- {{< ui >}}Summary{{< /ui >}}: Visualizar los costos agregados en todos los períodos de tiempo para obtener una descripción general de alto nivel
+- {{< ui >}}Breakdown{{< /ui >}}: Vea los costos desglosados por período de tiempo (diario, semanal o mensual, según el rango de tiempo seleccionado)
 
 **Filtros**
-- **Solo los cambios más importantes**: activa esta casilla para filtrar la tabla y mostrar solo los recursos o servicios con los mayores aumentos o disminuciones de costes
+- {{< ui >}}Top changes only{{< /ui >}}: Marque esta casilla para filtrar la tabla y mostrar solo los recursos o servicios con los mayores aumentos o disminuciones de costos
 
-**Visibilidad de las columnas**
+**Visibilidad de columnas**
 
-Muestra u oculta columnas en la tabla para centrarte en las métricas que importan:
-- **Total**: costes totales agregados para cada recurso o servicio
-- **Tendencias de los cambios en dólares**: evolución de los costes en dólares a lo largo del tiempo
-- **Tendencias de los cambios**: evolución porcentual de los costes a lo largo del tiempo
+Muestre u oculte columnas en la tabla para enfocarse en las métricas que importan:
+- {{< ui >}}Total{{< /ui >}}: Costos totales agregados para cada recurso o servicio
+- {{< ui >}}Dollar change trends{{< /ui >}}: Cambios en los costos en montos en dólares a lo largo del tiempo
+- {{< ui >}}Change trends{{< /ui >}}: Cambios en los costos basados en porcentajes a lo largo del tiempo
 
-## Exportar y compartir
+## Exportar y compartir {#export-and-share}
 
-Tras analizar los costes en el Explorer, puedes:
+Después de analizar los costos en el explorador, puede:
 
-### Exportar a csv
-Descargar tus datos de costes para analizarlos fuera de línea, elaborar informes o compartirlos con las partes interesadas. Haz clic en el botón **Export** (Exportar) y selecciona **Download as CSV** (Descargar como CSV).
+### Exportar a csv {#export-to-csv}
+Descargue sus datos de costos para análisis sin conexión, informes o para compartirlos con las partes interesadas. Haga clic en el botón {{< ui >}}Export{{< /ui >}} y seleccione {{< ui >}}Download as CSV{{< /ui >}}.
 
-### Crear un widget de dashboard
-Guarda tu consulta actual como un widget de dashboard para monitorizar costes junto con otras métricas:
-1. Haz clic en **Export** y selecciona **Export to Dashboard** (Exportar a dashboard).
-2. Elige un dashboard existente o crea uno.
-3. Personaliza el título y la configuración del widget.
+### Cree un widget de Dashboard {#create-a-dashboard-widget}
+Guarde su consulta actual como un widget de Dashboard para hacer un seguimiento de los costos junto con otras métricas:
+1. Haga clic en {{< ui >}}Export{{< /ui >}} y seleccione {{< ui >}}Export to Dashboard{{< /ui >}}.
+2. Elija un dashboard existente o cree uno.
+3. Personalice el título y la configuración del widget.
 
-### Crear un monitor de costes
-Configura alertas basadas en tu consulta actual para recibir notificaciones cuando los costes superen los umbrales o cambien inesperadamente:
-1. Haz clic en **Export** (Exportar) y selecciona **Create Monitor** (Crear monitor).
-2. Configura las condiciones de alerta (por ejemplo, cuando los costes superen los 10 000 dólares o aumenten un 20 %).
-3. Establece canales de notificación (correo electrónico, Slack, PagerDuty).
+### Cree un monitor de costos {#create-a-cost-monitor}
+Configure alertas basadas en su consulta actual para recibir notificaciones cuando los costos excedan los umbrales o cambien inesperadamente:
+1. Haga clic en {{< ui >}}Export{{< /ui >}} y seleccione {{< ui >}}Create Monitor{{< /ui >}}.
+2. Configure las condiciones de alerta (por ejemplo, cuando los costos superen los $10,000 o aumenten un 20%).
+3. Establezca los canales de notificación (correo electrónico, Slack, PagerDuty).
 
-Más información sobre [Monitores de Cloud Cost][8].
+Obtenga más información sobre [Cloud Cost Monitors][8].
 
-### Compartir tu consulta
-Copia la URL desde tu navegador para compartir tu consulta de costes actual con los miembros de tu equipo. La URL incluye todos los filtros, agrupaciones y ajustes de intervalo de tiempo.
+### Comparta su consulta {#share-your-query}
+Copie la URL de su navegador para compartir su consulta de costos actual con los miembros del equipo. La URL incluye todos los filtros, agrupaciones y configuraciones de rango de tiempo.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

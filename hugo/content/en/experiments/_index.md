@@ -26,6 +26,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/chatgpt-datadog-experiments/"
   tag: "Blog"
   text: "Analyze your experiments in ChatGPT with the Datadog Experiments plugin"
+- link: "https://www.datadoghq.com/blog/how-we-built-datadog-experiments/"
+  tag: "Blog"
+  text: "How we built Datadog Experiments"
 ---
 
 ## Overview

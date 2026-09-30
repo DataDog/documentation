@@ -80,9 +80,9 @@ To delete a notification rule, click the vertical three-dot menu on the notifica
 
 ## Dynamic routing
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/dynamic-routing-for-security-notifications/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/dynamic-routing-for-security-notifications/" >}}
 Dynamic routing for notification rules is in Preview and is only available for non-aggregated finding notifications.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 Dynamic routing automatically delivers finding notifications to the team responsible for remediation, based on the `team` tag attached to the finding. This removes the need to manually configure recipients for each rule and helps avoid catch-all notification channels.
 
