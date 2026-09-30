@@ -241,7 +241,7 @@ To change an app's UI or logic, update the code in your local project and re-upl
 
 When an app is [embedded][3], its URL state mirrors into the host page's URL. This includes routes, tabs, hash values, and query parameters. Copying and sharing that host URL opens the app to the same in-app state.
 
-Newly created apps support deep links automatically. If deep links is not working on your app, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
+Deep links is automatically supported with the `DatadogAppProvider` wrapper. If deep links don't work in your app, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
 
 ```shell
 npm install @datadog/apps-frontend@latest
@@ -270,7 +270,7 @@ To turn off deep links, pass the `datadog.deep-links` module to `disabledModules
 ```
 
 <div class="alert alert-info">
-Deep links capture only state held in the app's URL. State held in component state or local storage is not captured.
+Deep links capture only state stored in the app's URL. They do not capture React component state or data in local storage.
 </div>
 
 ## Set up CI/CD with GitHub Actions
