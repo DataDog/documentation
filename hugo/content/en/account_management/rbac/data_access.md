@@ -78,7 +78,7 @@ The following are available as a Preview upon request:
 - Hosts
 - Processes
 - Containers
-- Security findings (Cloud Security findings only)
+- Security findings (Cloud Security, Code Security, Workload Protection, and App and API Protection findings)
 - Serverless
 
 ## Advanced configuration

@@ -46,7 +46,7 @@ jobs:
         id: sts-scripts
         uses: DataDog/dd-octo-sts-action@96a25462dbcb10ebf0bfd6e2ccc917d2ab235b9a # v1.0.4
         with:
-          scope: DataDog/websites-images
+          scope: ddoghq/websites-images
           policy: documentation.blog-linker
 
       # Write access to this repo, so the branch and PR are created by an
@@ -70,7 +70,7 @@ jobs:
           set -euo pipefail
           tmp=$(mktemp -d)
           git clone --depth 1 --filter=blob:none --sparse \
-            "https://x-access-token:${GH_TOKEN}@github.com/DataDog/websites-images.git" "$tmp"
+            "https://x-access-token:${GH_TOKEN}@github.com/ddoghq/websites-images.git" "$tmp"
           git -C "$tmp" sparse-checkout set services/webops-site-build/bin/docs-ci
           cp "$tmp/services/webops-site-build/bin/docs-ci/blog_linker.py" ./blog_linker.py
           rm -rf "$tmp"
