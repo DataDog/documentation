@@ -788,9 +788,20 @@ Replace the placeholders with the following values:
 
 - `<PORT_NAME>`: A name for the port, such as `datadog-agent`.
 - `<SERVICE_PORT>`: The port the Kubernetes Service exposes to clients, such as `8088`.
-- `<TARGET_PORT>`: The port the Worker listens on, such as `8282`. This port must match the port in your source's address. For example, the Datadog Agent address or HTTP Server address.
-    - If you use environment variables, the address is the value of your source's address environment variable.
-    - If you use Secrets Management, the address is stored in your secrets manager.
+
+<!-- UI, API, Terraform - Kubernetes - Secrets Management -->
+{% if equals($secrets_source, "secrets_management") %}
+
+- `<TARGET_PORT>`: The port the Worker listens on, such as `8282`. This port must match the port in the source's address stored in your secrets manager. For example, the Datadog Agent address or HTTP Server address. The address is stored in your secrets manager.
+
+{% /if %}
+
+<!-- UI, API, Terraform - Kubernetes - Environment variables -->
+{% if equals($secrets_source, "environment_variables") %}
+
+- `<TARGET_PORT>`: The port the Worker listens on, such as `8282`. This port must match the port in the environment variable with the source's address. For example, the Datadog Agent address or HTTP Server address.
+
+{% /if %}
 
 `<SERVICE_PORT>` and `<TARGET_PORT>` can be the same port. Set them to different values if you want to map the Worker's pod port to a different incoming port on the Kubernetes Service.
 
