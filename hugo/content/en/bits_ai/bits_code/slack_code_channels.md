@@ -48,7 +48,7 @@ As Bits Code works, the code channel shows:
 
 - A diff view of proposed code changes
 - Datadog graph widgets, when relevant to the task
-- A {{< ui >}}Create PR{{< /ui >}} button to open a pull request from the changes, when you're ready (if [auto-push is not enabled](#how-auto-push-works-in-code-channels))
+- A {{< ui >}}Create PR{{< /ui >}} button to open a pull request from the changes
 
 After Bits Code has generated a code diff, you can comment on specific lines directly in the code channel.
 
@@ -60,16 +60,16 @@ Learn more about how to work in a code channel in the [Slack documentation][6].
 
 ### How auto-push works in code channels
 
-When the [auto-push setting][7] is enabled, Bits Code can push changes and create or update pull requests at its discretion—that is, without you (or another human) clicking a button. When Bits Code creates or updates a pull request in this auto-push fashion, Bits itself is the author of the commits and pull request.
+When the [auto-push setting][7] is set to {{< ui >}}Always allow auto-push{{< /ui >}}, Bits Code can push changes agentically—that is, without a human clicking a button. When pushing agentically, Bits uses the code channel creator's source code identity to author the commits and pull request.
 
-For auto-push to take effect in a code channel, the channel creator and every user who has sent a message in the channel must have a source control account linked to Datadog with:
+Bits Code can only push code agentically from a code channel when the channel creator and every user who has sent a message in the channel has a source control account linked to Datadog with:
 
 - Write access to every repository with a pull request in the channel, and any repository receiving changes
 - Read access to all other repositories attached to the channel
 
 (These permissions are not verified for users who have joined the channel but not sent a message.)
 
-If any user who has sent a message in the code channel lacks the required repository permissions, or Bits cannot verify them, Bits does not push changes automatically. When this happens, a user with the required permissions can still click {{< ui >}}Create PR{{< /ui >}} or {{< ui >}}Update PR{{< /ui >}}. These buttons check only that single user's permissions across the code channel's attached repositories. In this scenario, the user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
+If any user who has sent a message in the code channel lacks the required repository permissions, or Bits cannot verify them, Bits does not agentically push changes. In this scenario, a user with the required permissions can still click {{< ui >}}Create PR{{< /ui >}} or {{< ui >}}Update PR{{< /ui >}}. These buttons check only that single user's permissions across the code channel's attached repositories. The user who clicks {{< ui >}}Create PR{{< /ui >}} is the author of the resulting pull or merge request.
 
 ## Limitations
 
