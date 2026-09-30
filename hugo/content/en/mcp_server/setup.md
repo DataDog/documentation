@@ -788,7 +788,7 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Select any other resource-level permissions you need for the role.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
+Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27]. When write capabilities are disabled for the organization, write tools are hidden for all users, regardless of role permissions. See [Write tools are missing](#write-tools-are-missing).
 
 ### Restrict network access
 
@@ -946,6 +946,19 @@ Local authentication is recommended for Cline and when remote authentication is 
    {{< /site-region >}}
 4. Click {{< ui >}}Connect{{< /ui >}}, then go to {{< ui >}}Tools{{< /ui >}} > {{< ui >}}List Tools{{< /ui >}}.
 5. Check if the [available tools][12] appear.
+
+## Troubleshooting
+
+### Write tools are missing
+
+If your AI client lists Datadog MCP Server tools that read data but not tools that create or modify resources (such as `create_datadog_monitor`), check the following:
+
+- **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of role permissions. An organization administrator can re-enable write capabilities from [Organization Settings][27].
+- **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
+- **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
+- **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
+
+After you change any of these settings, refresh the tool list in your AI client. Reconnecting the client is a typical way to do this, but some AI clients provide other ways to refresh the tool list.
 
 ## Further reading
 
