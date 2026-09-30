@@ -14,7 +14,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false" >}}
-Request Access is in Preview.
+Request Access is in Preview and is rolling out gradually. It may not be available in your organization yet.
 {{< /callout >}}
 
 ## Overview
