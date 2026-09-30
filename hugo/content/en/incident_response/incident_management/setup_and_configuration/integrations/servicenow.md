@@ -109,7 +109,7 @@ The following fields are synced between Datadog Incident Management and ServiceN
 [1]: https://app.datadoghq.com/integrations/servicenow
 [2]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [3]: https://store.servicenow.com/store/app/e0e963a21b246a50a85b16db234bcb67
-[4]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
+[4]: /resources/xml/Datadog-Snow_Update_Set_v2.8.0.xml
 [5]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [6]: https://app.datadoghq.com/incidents/settings#Integrations
 [7]: /integrations/guide/servicenow-itom-itsm-setup/#tranform-maps
