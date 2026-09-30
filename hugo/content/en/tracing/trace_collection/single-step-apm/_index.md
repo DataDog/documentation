@@ -68,6 +68,8 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
   {{< image-card href="windows/" src="integrations_logos/windows.png" alt="windows" >}}
 {{< /card-grid >}}
 
+On Kubernetes, use the [`DatadogInstrumentation` custom resource][19] to enable SSI and configure SDKs for individual workloads. The Operator setup requires Agent and Cluster Agent v7.85+ and Datadog Operator v1.31+.
+
 ## Troubleshooting
 
 If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][15].
@@ -94,3 +96,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [16]: /tracing/trace_collection/custom_instrumentation/
 [17]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [18]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
+[19]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=datadoginstrumentationcrdrecommended#enable-apm-with-datadoginstrumentation
