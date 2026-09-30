@@ -1,6 +1,6 @@
 ---
 title: Database Monitoring Workbench
-description: Create a disposable PostgreSQL database shaped like a monitored production database, and test query, index, and schema changes against it before they ship.
+description: Develop and test changes against an ephemeral, production-like Postgres database built from the schema and statistics that Database Monitoring collects.
 further_reading:
 - link: "/database_monitoring/"
   tag: "Documentation"
@@ -22,38 +22,27 @@ Database Monitoring Workbench is in preview. Use this form to request access.
 
 ## Overview
 
-Teams ship more SQL and schema change than ever, and an increasing share of it is written by coding agents rather than typed by hand. Migrations, new queries, index additions, and index removals all carry the same question: what does this do to the database?
+Database Monitoring Workbench is an ephemeral, production-like Postgres database that you can use to develop and test changes. It is built from the schema and statistics that Database Monitoring collects, so it matches your production tables, indexes, row counts, and major version. Datadog never copies or transmits the data in your tables. Workbench is automatically populated with synthetic data generated from the column and table statistics that Database Monitoring collects. If you prefer, you can manually populate it with your own data.
 
-That question usually goes unanswered until it is expensive to answer. You can run `EXPLAIN` against a local development database, but a hundred rows and a million rows produce different plans. The local plan uses the index, the production plan falls back to a sequential scan, and nobody finds out until the p99 moves. In practice, most changes get their first real test in production.
+This page explains how to:
 
-Database Monitoring Workbench gives you a database with the *shape* of production. It has the same tables, indexes, row counts, and cardinalities the planner reasons about, but none of production's data. You do not need to stand up an environment yourself.
-
-This page covers:
-
-- What Workbench is, and how to reach it from a coding agent or from `psql`
-- The changes you can check before you merge them: queries, index drops, and migrations
-- Where Workbench fits into upgrades, CI, and incident investigation
-- What Workbench is deliberately not suited for
+- Connect to a Workbench instance with MCP, the API, or a SQL client
+- Compare query plans and test index and migration changes
+- Catch plan regressions in CI
+- Experiment with data model changes
 
 ## Requirements
 
-- A PostgreSQL database monitored by [Database Monitoring][5].
+- A Postgres database monitored by [Database Monitoring][5].
 - [Schema collection][1] enabled for the specific logical database, not only the instance.
-- The `dbm_read` permission.
+- The **Database Monitoring Read** permission. See [Role-based access control][6] for how to manage permissions.
 - Workbench enabled for your organization. To request access, use the preview form at the top of this page.
 
-## What is Workbench
-
-An ephemeral PostgreSQL instance on Datadog infrastructure, materialized from the two above. It reproduces the source database's major version, schema, indexes, and foreign keys. It holds synthetic rows or no rows at all, never customer row values.
-
-Two things go into it:
-
-1. **Your schema**: tables, columns, types, indexes, and foreign keys, from Database Monitoring [schema collection][1].
-2. **Your statistics**: row counts and cardinalities, so the planner decides as it would in production, not as it would against an empty table.
+## Connect to Workbench
 
 ### Connecting with the MCP server
 
-The most direct path is the [Datadog MCP server][2], which exposes Workbench as three tools. The agent you are already pairing with can reach them without you leaving the editor.
+Use the [Datadog MCP server][2] to create and manage Workbench instances from a coding agent. To add it to your agent, see [Set up the Datadog MCP server][7]. The MCP server exposes Workbench as three tools:
 
 <table style="width: 100%;">
   <thead>
@@ -78,66 +67,89 @@ The most direct path is the [Datadog MCP server][2], which exposes Workbench as 
   </tbody>
 </table>
 
-That is the whole surface, and it is deliberately small: the agent gets a real database and then works in it the way you would. It reads the schema, writes a statement, reads the plan, adds an index, and reads the plan again. The difference is not the tooling. It is that the schema, the indexes, and the row counts are the real ones.
-
-A skill, `datadog/dbm-workbench`, ships alongside the tools. It teaches the agent what a tool description cannot: which source databases are usable and which results are trustworthy given synthetic rows. It also teaches that the connection string is a live credential to handle as a secret. An agent that reads a directional cost estimate as a benchmark result confidently tells you the wrong thing.
+After the agent creates an instance, it can read your schema, run statements, read query plans, add an index, and read the plan again. It works against your real schema, indexes, and row counts.
 
 ### Connecting with the API
 
-The same sandbox is available over HTTP. Creating a session returns a standard PostgreSQL DSN and a TTL:
+Use the Workbench API to create a Workbench instance from a script or CI job. [TODO: if the endpoint is in preview or unstable, say so here.]
+
+To create an instance, send a `POST` request that names the monitored database:
+
+{{< code-block lang="shell" >}}
+curl -X POST "https://api.datadoghq.com/api/unstable/databases/workbench/session" \
+  -H "DD-API-KEY: <DATADOG_API_KEY>" \
+  -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "database_instance": "orders-db-primary",
+    "database_name": "shop"
+  }'
+{{< /code-block >}}
+
+[TODO: confirm the headers, the site host, and any required permission or scope.]
+
+| Parameter | Description |
+| --------- | ----------- |
+| `database_instance` | [TODO: what this identifies and where to find it] |
+| `database_name` | [TODO: what this identifies and where to find it] |
+
+The response includes a Postgres connection string and [TODO: name the expiry or TTL field and its unit]:
 
 {{< code-block lang="json" >}}
-POST /api/unstable/databases/workbench/session
-{
-  "database_instance": "orders-db-primary",
-  "database_name": "shop"
-}
+[TODO: paste the real response body]
 {{< /code-block >}}
 
-{{< code-block lang="text" >}}
-postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require
-{{< /code-block >}}
+[TODO: say whether the request waits until the instance is ready. If it does not, describe how to check readiness.]
 
-<div class="alert alert-danger">The connection string is a live database credential. Treat it as a secret: do not commit it, log it, or paste it into a shared channel.</div>
+[TODO: describe how to delete an instance, or remove this line if the API has no delete endpoint.]
+
+<div class="alert alert-danger">The connection string is a live database credential. Treat it as a secret: do not commit it, log it, or paste it into a shared channel. [TODO: add "Delete the instance when you finish" if a delete endpoint exists.]</div>
 
 ### Connecting with a SQL client
 
-Use the connection string from the API with any PostgreSQL client, such as `psql`, a GUI, or your ORM's test harness:
+Use the connection string from the MCP server or the API with any Postgres client, such as `psql`, a GUI, or your ORM's test harness. [TODO: confirm the MCP create tool also returns the connection string.]
 
 {{< code-block lang="shell" >}}
 psql "postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require"
 {{< /code-block >}}
 
-The instance is writable, so you can create an index, re-run `EXPLAIN`, and watch the plan change.
+The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use the Workbench](#how-to-use-the-workbench). [TODO: say what happens to the connection when the instance expires or is deleted.]
 
-There is no setup, database dump, staging environment to keep synchronized, or data-access request. The schema comes from telemetry you already send, and the rows are synthetic.
+By default, Workbench populates the instance with synthetic data. To use your own data instead, load it with [TODO: the supported method, for example `COPY` or `INSERT` statements].
 
 ## How to use the Workbench
 
+Create an instance with the [MCP server](#connecting-with-the-mcp-server) or the [API](#connecting-with-the-api), and connect to it with a [SQL client](#connecting-with-a-sql-client). Then use it for the tasks in this section.
+
 ### Compare query plans before and after a change
 
-The most common way to learn that a query is bad is to merge it.
+Check a query's plan when you write it, before you open a pull request. You can also use these steps to test a rewrite after you find a slow query in Database Monitoring. Create the instance for the database the query ran on.
 
-Database Monitoring already catches a class of these in code review. It analyzes query changes in a pull request and comments when a new query looks likely to scan a large table. That is still a feedback loop measured in review cycles: you write the query, push, wait, read the comment, rewrite, and push again.
-
-Workbench moves that loop to the moment you write the query. Create a sandbox shaped like the database the query runs against, `EXPLAIN` it there, and read the plan against real cardinalities:
+Run `EXPLAIN` against the instance and read the plan against production-like row counts and cardinalities:
 
 {{< code-block lang="sql" >}}
 EXPLAIN (ANALYZE, BUFFERS)
 SELECT * FROM orders
-WHERE customer_id = $1 AND created_at > $2
+WHERE customer_id = 42 AND created_at > '2026-01-01'
 ORDER BY created_at DESC;
 {{< /code-block >}}
 
-If that returns `Sort -> Seq Scan on orders`, you know before the commit, before the review, and before production. Add the composite index in the sandbox, re-plan, confirm the plan flips to an index scan, and ship the index alongside the query.
+If the plan shows `Sort -> Seq Scan on orders`, the query scans the whole table. Add the composite index in the instance, re-plan, and confirm the plan changes to an index scan:
+
+{{< code-block lang="sql" >}}
+CREATE INDEX idx_orders_customer_created ON orders (customer_id, created_at DESC);
+{{< /code-block >}}
+
+Then ship the index with the query. For a slow query, compare the plans before and after your rewrite, and bring the result to the pull request. You can test rewrites without touching production or requesting access to its data.
 
 ### Check which queries depend on an index
 
-Unused indexes are one of the most common items on a database cleanup list and one of the least commonly acted on. The reason is asymmetry: keeping an unnecessary index costs write throughput and storage, but dropping an index that something quietly depends on causes an incident. Faced with that trade-off, most teams keep the index.
+Dropping an unused index saves write throughput and storage, but dropping one that a query depends on can cause an incident. Test the drop in an instance first. Dropping an index there does not affect production.
 
-The question is answerable, but only empirically: drop the index, re-plan the queries that matter, and see which plans regress. Production is the one place you cannot try that. A Workbench sandbox has zero blast radius and your cardinalities.
-
-Pull your top queries from [query metrics][3], capture their plans in the sandbox, drop the index, and plan them again:
+1. Get your top queries from [query metrics][3].
+2. Run `EXPLAIN` on each query and save the plan.
+3. Drop the index in the instance.
+4. Run `EXPLAIN` on each query again and compare the plans.
 
 {{< code-block lang="sql" >}}
 EXPLAIN SELECT id, total FROM orders WHERE status = 'pending' ORDER BY created_at;
@@ -149,57 +161,55 @@ EXPLAIN SELECT id, total FROM orders WHERE status = 'pending' ORDER BY created_a
 --  Seq Scan on orders  (cost=0.00..14200.00 rows=312 width=20)
 {{< /code-block >}}
 
-Run that over your top queries to get a decision you can bring to a review. The result is not "the index looks unused in the last 30 days." It is "these three queries fall back to a sequential scan on `orders`, and here are their plans."
-
-The same loop answers the mirror-image question. Add a candidate index instead of dropping one, and re-plan. Confirm that the query you meant to help flipped to an index scan and that nothing else changed shape.
+A query whose plan falls back to a sequential scan depends on the index. Bring those plans to your review instead of relying on "the index looks unused in the last 30 days." To test a new index instead, create it in the instance and re-plan your queries.
 
 ### Test a migration before you deploy it
 
-Migrations fail in ways a local test database cannot reproduce, because the failures are about scale and distribution rather than syntax:
+Migration problems often depend on table size and concurrent traffic, so a local test database can miss them. For example:
 
-- An `ALTER TABLE ... SET NOT NULL` that passes locally because the development table has no nulls, and fails in production because ten million rows do.
-- A `UNIQUE` or `CHECK` constraint that conflicts with real value distributions.
 - A `CREATE INDEX` that should have been `CREATE INDEX CONCURRENTLY`, and holds a write lock for the length of the build.
 - An `ALTER` that takes a stronger lock than expected on a table that is never idle.
 
-Run the migration against a Workbench instance and these surface in a sandbox rather than in an incident. The `SET NOT NULL` fails there, on synthetic rows, and you add the default before anyone else sees the branch. Inspect `pg_locks` while the DDL runs to see what it actually takes. Afterward, re-plan your important queries to see what the new schema did to them.
+To test a migration, run it against the instance with your migration tool, using the instance's connection string. While the DDL runs, query `pg_locks` to see which locks it takes. Afterward, re-plan your important queries to see how the new schema affects them.
 
-The migration does not run in the same wall-clock time it takes in production, and it should not be read that way. The structural outcome is the same one production produces.
-
-### Test a major version upgrade before you deploy it
-
-PostgreSQL major version upgrades are often planned on faith: read the release notes, look for planner changes that sound relevant, upgrade a replica, and hope.
-
-Workbench supports PostgreSQL 12 through 18, and the sandbox major version follows the source instance. That makes the comparison mechanical. Materialize the same schema on your current major and on your target major, run your top queries against both, and diff the plans. The queries whose plan shape changes are your upgrade risk list.
+The migration does not take the same time as in production, but it produces the same structural outcome.
 
 ### Catch plan regressions in CI
 
-Because a Workbench instance is API-created and disposable, it fits into a pipeline. For each pull request that touches SQL or schema, create a sandbox, apply the change, and plan your top queries against it. Then assert the invariants that matter to you:
+Use the API to add a plan check to your pipeline. [TODO: confirm this flow and link to the API section.] For each pull request that touches SQL or schema:
+
+1. Create an instance.
+2. Apply the change.
+3. Run `EXPLAIN` on your top queries.
+4. Fail the build if a plan breaks one of your invariants.
+5. Delete the instance. [TODO: requires a delete endpoint.]
+
+Examples of invariants:
 
 - No new sequential scan on a large table.
 - No plan-shape change on a query in your critical path.
 - No index dropped that something still uses.
 
-### Test a fix for a slow query
+[TODO: add a short CI example, such as a shell script that calls the API, applies the change, and runs `EXPLAIN`.]
 
-After you find a slow query in Database Monitoring, the hard part is trying a rewrite, because you need somewhere to try it. Production is off-limits, staging has a fraction of the data, and a realistic local copy means a data-access request.
+### Experiment with data model changes
 
-One call gives you a sandbox shaped like the instance the query came from. Iterate on rewrites there, compare plans, and bring the result to the pull request.
+Changing a data model is one of the riskiest operations you can run on a database. Splitting a table, changing a column type, or adding a foreign key can break queries, block reads and writes, or fail against production data. Most of these changes are hard to undo.
 
-### Learn your data model in a sandbox
+A Workbench instance gives you your real schema to experiment on. Try the change, run your joins and queries against it, follow the foreign keys, and see which tables are large and which are lookup tables. If something breaks, delete the instance and create another one.
 
-New engineers spend their first weeks reconstructing the data model from code. A Workbench instance gives them the real thing. They can run joins, follow foreign keys, see which tables are enormous and which are lookup tables, break things, and create another one. No privacy review is required, because there is no customer data in it.
+With the default synthetic data, no privacy review is required, because Workbench contains none of your customer data.
 
 ## Limitations
 
 Workbench answers questions about schema, query plans, and relative cost. It does not reproduce production hardware, data, or every schema object.
 
-- **Only PostgreSQL is supported.** Workbench supports PostgreSQL 12 through 18. Other database engines are not supported.
-- **Timings may vary.** Sandboxes are small and not sized like your production hardware. Compare plan shape, row estimates, index usage, and before-and-after results, not absolute timings such as "this query takes 40ms." To benchmark a rewrite or index, use [Bits Database Optimization][4].
-- **Data is synthetic and approximate.** Workbench generates rows from collected statistics, so table sizes are close to production. Skew, column correlation, and value distributions can differ, which can change plans that depend on them.
+- **Only Postgres is supported.** Workbench supports Postgres 12 through 18. Other database engines are not supported.
+- **Timings may vary.** Instances are small and not sized like your production hardware. Compare plan shape, row estimates, index usage, and before-and-after results, not absolute timings such as "this query takes 40ms." To benchmark a rewrite or index, use [Bits Database Optimization][4].
+- **Generated data is approximate.** By default, Workbench generates rows from collected statistics, so table sizes are close to production. Skew, column correlation, and value distributions can differ, which can change plans that depend on them. Populating Workbench with your own data avoids this.
 - **Some indexes and foreign keys may be missing.** Workbench may skip an index or foreign key, or drop an expression that calls an unavailable function.
 - **Views, functions, triggers, roles, and grants are not reconstructed.** Changes that depend on them do not reproduce accurately.
-- **Instances are temporary.** Sandboxes expire after a short TTL, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
+- **Instances are temporary.** Instances expire after a short TTL, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
 
 Use Workbench to check structure, query plans, and order-of-magnitude effects. It does not cover the rest.
 
@@ -212,3 +222,5 @@ Use Workbench to check structure, query plans, and order-of-magnitude effects. I
 [3]: /database_monitoring/query_metrics/
 [4]: /database_monitoring/bits_database_optimization/
 [5]: /database_monitoring/
+[6]: /account_management/rbac/permissions/
+[7]: /mcp_server/setup/
