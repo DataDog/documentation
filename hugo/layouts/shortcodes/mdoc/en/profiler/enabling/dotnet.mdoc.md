@@ -442,7 +442,7 @@ Starting with IIS 10, you can set environment variables for each IIS application
 
 ## Set up the profiler with an AI coding assistant
 
-Use the following prompt with a local AI coding agent (such as Cursor, GitHub Copilot, or Cody) to set up the .NET profiler for your service. Copy and paste this prompt into your AI agent to get started.
+Use the following prompt with a local AI coding agent to set up the .NET profiler for your service. Copy and paste this prompt into your AI agent to get started.
 
 ```text
 You are helping me set up Datadog Continuous Profiler for my .NET service.
