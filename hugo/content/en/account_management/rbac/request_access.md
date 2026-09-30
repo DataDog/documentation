@@ -19,7 +19,7 @@ Request Access is in Preview.
 
 ## Overview
 
-Getting access to a feature in Datadog could knowing who to ask, filing a ticket, and waiting for a response. For organizations managing many roles and users, this slows users down and creates manual work for administrators.
+Getting access to a feature in Datadog could mean knowing who to ask, filing a ticket, and waiting for a response. For organizations managing many roles and users, this slows users down and creates manual work for administrators.
 
 Request Access lets a user ask for the permission they need directly from the page where they were blocked, with a justification for the request. Administrators can review and approve these requests from a central queue, or configure specific roles to grant themselves automatically. Every request, decision, and justification appears in [Audit Trail][2], so access changes stay traceable without a support ticket.
 
