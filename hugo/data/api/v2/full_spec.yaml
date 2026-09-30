@@ -21620,7 +21620,7 @@ components:
           example: "resource-id-123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21759,7 +21759,7 @@ components:
           example: false
           type: boolean
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21809,7 +21809,7 @@ components:
           example: "resource_id_abc123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -38015,6 +38015,13 @@ components:
       required:
         - revisions
       type: object
+    EntityContextEntityType:
+      default: siem_entity_identity
+      description: The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+      enum: [siem_entity_identity]
+      example: siem_entity_identity
+      type: string
+      x-enum-varnames: [SIEM_ENTITY_IDENTITY]
     EntityContextPage:
       description: Pagination metadata for the entity context response.
       properties:
@@ -38084,6 +38091,15 @@ components:
         email: user@example.com
         principal_id: user@example.com
       type: object
+    EntityContextRevisionsMode:
+      default: latest
+      description: |-
+        Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+        and `all` returns every revision in the requested time range.
+      enum: [latest, all]
+      example: latest
+      type: string
+      x-enum-varnames: [LATEST, ALL]
     EntityData:
       description: Entity data.
       properties:
@@ -94074,6 +94090,17 @@ components:
       x-enum-varnames:
         - ANY
         - ALL
+    RecentlyUpdatedEntitiesResponse:
+      description: Response from the recently updated entities endpoint, containing the entities with the most recent updates in the requested time range, ordered from most to least recently updated.
+      properties:
+        data:
+          description: The list of entities with the most recent updates, ordered from most to least recently updated.
+          items:
+            $ref: "#/components/schemas/EntityContextEntity"
+          type: array
+      required:
+        - data
+      type: object
     RecommendationAttributes:
       description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
       properties:
@@ -216454,6 +216481,15 @@ paths:
           schema:
             type: string
         - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
           in: query
@@ -216546,6 +216582,114 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/entity_context/recently_updated:
+    get:
+      description: |-
+        Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked
+        by the time of their most recent revision in the requested time range, and the top `limit` entities are
+        returned in that order. This endpoint is not paginated.
+      operationId: GetEntityContextRecentlyUpdated
+      parameters:
+        - description: A free-text query (for example, an email address or principal ID) used to filter the entities returned.
+          example: user@example.com
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
+            The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
+            Defaults to `now-7d`.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: now-7d
+            example: now-7d
+            type: string
+        - description: |-
+            The end of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now`).
+            Defaults to `now`. Entities are ranked by their most recent revision within `[from, to]`.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: now
+            example: now
+            type: string
+        - description: The number of entities to return. Must be between 1 and 100.
+          example: 50
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: |-
+            Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+            and `all` returns every revision in the requested time range.
+          example: latest
+          in: query
+          name: revisions
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextRevisionsMode"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          revisions:
+                            - attributes:
+                                accounts:
+                                  - linked-account-123
+                                display_name: Test User
+                                email: user@example.com
+                                principal_id: user@example.com
+                              first_seen_at: "2026-04-01T00:00:00Z"
+                              last_seen_at: "2026-05-01T00:00:00Z"
+                        id: user@example.com
+                        type: siem_entity_identity
+              schema:
+                $ref: "#/components/schemas/RecentlyUpdatedEntitiesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - siem_entities_read
+      summary: Get recently updated entity context
+      tags: ["Security Monitoring"]
+      x-menu-order: 175
+      x-permission:
+        operator: OR
+        permissions:
+          - siem_entities_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/entity_context/{id}:
     get:
       description: |-
@@ -216562,6 +216706,15 @@ paths:
           schema:
             example: user@example.com
             type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
         - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.

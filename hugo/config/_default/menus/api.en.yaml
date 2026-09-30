@@ -3536,6 +3536,19 @@ menu:
         unstable:
           - v2
         order: 132
+    - name: Get recently updated entity context
+      url: /api/latest/security-monitoring/get-recently-updated-entity-context/
+      identifier: security-monitoring-get-recently-updated-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityContextRecentlyUpdated
+        unstable:
+          - v2
+        order: 175
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
