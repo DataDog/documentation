@@ -10935,6 +10935,11 @@ menu:
       url: account_management/organization_groups/
       parent: account_management_multi_org_accounts
       weight: 1
+    - name: Shared Roles
+      identifier: account_management_organization_groups_shared_roles
+      url: account_management/organization_groups/shared_roles/
+      parent: account_management_organization_groups
+      weight: 101
     - name: Guides
       identifier: account_management_guides
       url: account_management/guide/
