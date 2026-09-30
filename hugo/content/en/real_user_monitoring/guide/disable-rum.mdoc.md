@@ -233,6 +233,69 @@ Set the session sample rate to `0` to stop sending data without removing the SDK
 {% /if %}
 <!-- end Unity -->
 
+<!-- C++ -->
+{% if equals($platform, "cpp") %}
+1. Set the session sample rate to `0` in your RUM configuration and deploy the change. This takes effect after the next app launch.
+
+   {% tabs %}
+
+   {% tab label="C++" %}
+   ```cpp
+   datadog::RumConfig rum_config("<rum_application_id>");
+   rum_config.SetSessionSampleRate(0.0f);
+   ```
+   {% /tab %}
+
+   {% tab label="C" %}
+   ```c
+   dd_rum_config_t rum_config;
+   dd_rum_config_init(&rum_config, "<rum_application_id>");
+   dd_rum_config_set_session_sample_rate(&rum_config, 0.0f);
+   ```
+   {% /tab %}
+
+   {% /tabs %}
+
+2. To stop collection immediately without waiting for a relaunch, set the tracking consent to `NotGranted`. The SDK deletes all pending data and does not collect any further data.
+
+   {% tabs %}
+
+   {% tab label="C++" %}
+   ```cpp
+   core->SetTrackingConsent(datadog::TrackingConsent::NotGranted);
+   ```
+   {% /tab %}
+
+   {% tab label="C" %}
+   ```c
+   dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_NOT_GRANTED);
+   ```
+   {% /tab %}
+
+   {% /tabs %}
+{% /if %}
+<!-- end C++ -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+1. Set `SessionSampleRate` to `0` in your RUM configuration and deploy the change. This takes effect after the next app launch.
+
+   ```csharp
+   .UseDatadogRum(new DdRumConfiguration
+   {
+       ApplicationId = "<APPLICATION_ID>",
+       SessionSampleRate = 0.0,
+   })
+   ```
+
+2. To stop collection immediately without waiting for a relaunch, call `DdSdk.SetTrackingConsent()`. The SDK wipes all batched data and does not collect any future data.
+
+   ```csharp
+   DdSdk.SetTrackingConsent(TrackingConsent.NotGranted);
+   ```
+{% /if %}
+<!-- end .NET MAUI -->
+
 ### Remove the SDK from your application
 
 <!-- Browser -->
@@ -340,6 +403,40 @@ Set the session sample rate to `0` to stop sending data without removing the SDK
 3. Deploy the change. After removal, there may be residual cached data on the device. This data is not sent to Datadog and is eventually cleared by the operating system.
 {% /if %}
 <!-- end Unity -->
+
+<!-- C++ -->
+{% if equals($platform, "cpp") %}
+1. Remove the SDK from your build configuration based on your installation method:
+
+   {% tabs %}
+
+   {% tab label="CMake (FetchContent)" %}
+   In your `CMakeLists.txt`, remove the `FetchContent_Declare(Datadog ...)` and `FetchContent_MakeAvailable(Datadog)` calls, and the `datadog_enable()` call for your application target.
+   {% /tab %}
+
+   {% tab label="CMake (find_package)" %}
+   In your `CMakeLists.txt`, remove the `find_package(Datadog REQUIRED)` call, the SDK directory from `CMAKE_PREFIX_PATH`, and the `datadog_enable()` call for your application target. Then delete the extracted SDK directory (for example, `external/datadog-sdk/`).
+   {% /tab %}
+
+   {% tab label="Other build systems" %}
+   Remove the SDK include path, library path, and `-lddsdkcpp` linker flag from your build configuration. Then delete the SDK headers and libraries from your project.
+   {% /tab %}
+
+   {% /tabs %}
+
+2. Remove the `datadog.hpp` or `datadog.h` includes and all SDK initialization code, including `Core` and RUM setup and any C API cleanup calls.
+3. Rebuild and deploy your application.
+4. Optionally, delete the `.datadog/` subdirectory from your application storage path. The SDK stores transient files in this directory, and they are not sent to Datadog after the SDK is removed.
+{% /if %}
+<!-- end C++ -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+1. Remove the `Datadog.Maui` `PackageReference` from your MAUI project's `.csproj` file.
+2. Remove any remaining Datadog initialization code (such as `UseDatadog`, `UseDatadogRum`, `DdSdk.Initialize`, and `DdRum.Enable` calls) and `using Datadog.Maui` statements from your code. If you use file-based configuration, remove the Datadog settings from your JSON configuration file.
+3. Deploy the change. After removal, there may be residual cached data on the device. This data is not sent to Datadog and is eventually cleared by the operating system.
+{% /if %}
+<!-- end .NET MAUI -->
 
 ## Delete the RUM application from Datadog
 
