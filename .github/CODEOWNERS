@@ -30,9 +30,7 @@ repository.datadog.yml                                  @Datadog/WebOps-Platform
 service.datadog.yaml                                    @DataDog/WebOps-Platform @DataDog/documentation
 
 # Scoped Docs/WebOps
-.github/                                                      @DataDog/WebOps-Platform
-/hugo/data/api/                                                    @DataDog/documentation
-/hugo/config/_default/menus/                                       @DataDog/documentation
+# Ordering is significant: last match wins.
 .github/ISSUE_TEMPLATE                                        @DataDog/documentation
 .github/PULL_REQUEST_TEMPLATE.md                              @DataDog/documentation
 README.md                                                     @DataDog/documentation
@@ -49,23 +47,46 @@ hugo/local/bin/py/integration-finder.py                            @DataDog/docu
 hugo/local/bin/py/missing_metrics.py                               @DataDog/documentation
 hugo/local/bin/py/preview_links.py                                 @DataDog/documentation
 hugo/local/bin/py/preview-links-template.mako                      @DataDog/documentation
-hugo/data/reference/                                               @DataDog/documentation
 hugo/local/bin/py/build/configurations/pull_config_preview.yaml    @DataDog/WebOps-Platform @DataDog/documentation
 hugo/local/bin/py/build/configurations/pull_config.yaml            @DataDog/WebOps-Platform @DataDog/documentation
 
-
 # Formerly CorpWeb
-hugo/assets/                           @DataDog/documentation
-hugo/data/                             @DataDog/documentation
-hugo/layouts/                          @DataDog/documentation
-hugo/config/                           @DataDog/documentation
-hugo/package.json                      @DataDog/documentation
-hugo/go.mod                            @DataDog/documentation
-hugo/go.sum                            @DataDog/documentation
-hugo/archetypes/                       @DataDog/documentation
+hugo/assets/                              @DataDog/WebOps-Platform
+hugo/layouts/                             @DataDog/WebOps-Platform
+hugo/config/                              @DataDog/WebOps-Platform
+hugo/package.json                         @DataDog/WebOps-Platform
+hugo/go.mod                               @DataDog/WebOps-Platform
+hugo/go.sum                               @DataDog/WebOps-Platform
 
-# markdown shortcodes
-hugo/layouts/shortcodes/**/*.md                                    @DataDog/documentation 
+hugo/archetypes/                          @DataDog/documentation
+hugo/data/                                @DataDog/documentation
+hugo/config/_default/menus/               @DataDog/documentation
+hugo/config/_default/params.yaml          @DataDog/documentation
+hugo/config/_default/params.*.yaml        @DataDog/documentation
+hugo/layouts/shortcodes/**/*.md           @DataDog/documentation
+
+hugo/data/reference/                      @DataDog/WebOps-Platform @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/shortcodes/**/*.html         @DataDog/WebOps-Platform @DataDog/documentation @DataDog/docs-dev
+
+# Docs-owned templates
+hugo/layouts/partials/nav/left-nav.html             @DataDog/documentation
+hugo/assets/scripts/config/regions.config.js        @DataDog/WebOps-Platform @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/site_support_banner/          @DataDog/WebOps-Platform @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/shortcodes/mdoc/                       @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/apm/                          @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/logs/                         @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/actions/                      @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/trace_collection/             @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/app_and_api_protection/       @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/security-platform/            @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/code_security/                @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/code_analysis/                @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/continuous_testing/           @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/continuous_delivery/          @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/dynamic_instrumentation/      @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/reference_tables/             @DataDog/documentation @DataDog/docs-dev
+hugo/layouts/partials/rbac-permissions-table.html   @DataDog/documentation
+hugo/layouts/partials/graphingfunctions.md          @DataDog/documentation
 
 # Serverless
 

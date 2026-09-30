@@ -38015,6 +38015,13 @@ components:
       required:
         - revisions
       type: object
+    EntityContextEntityType:
+      default: siem_entity_identity
+      description: The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+      enum: [siem_entity_identity]
+      example: siem_entity_identity
+      type: string
+      x-enum-varnames: [SIEM_ENTITY_IDENTITY]
     EntityContextPage:
       description: Pagination metadata for the entity context response.
       properties:
@@ -38084,6 +38091,15 @@ components:
         email: user@example.com
         principal_id: user@example.com
       type: object
+    EntityContextRevisionsMode:
+      default: latest
+      description: |-
+        Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+        and `all` returns every revision in the requested time range.
+      enum: [latest, all]
+      example: latest
+      type: string
+      x-enum-varnames: [LATEST, ALL]
     EntityData:
       description: Entity data.
       properties:
@@ -65559,12 +65575,20 @@ components:
         - content
       type: object
     LLMObsPromptChatTemplate:
-      description: A chat prompt template.
+      description: >-
+        A chat prompt template containing messages and optional named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       items:
-        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptChatTemplateItem:
+      description: A chat message or a named message placeholder in a prompt template.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptMessagePlaceholder"
     LLMObsPromptConfig:
       additionalProperties: {}
       description: >-
@@ -65717,6 +65741,33 @@ components:
       required:
         - include
       type: object
+    LLMObsPromptMessagePlaceholder:
+      additionalProperties: false
+      description: >-
+        A named placeholder that inserts a list of messages when a compatible SDK formats the prompt.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
+      properties:
+        name:
+          description: Name used to supply the message list when formatting the prompt.
+          example: "history"
+          minLength: 1
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptMessagePlaceholderType"
+      required:
+        - type
+        - name
+      type: object
+    LLMObsPromptMessagePlaceholderType:
+      description: Type of chat-template item.
+      enum:
+        - placeholder
+      example: "placeholder"
+      type: string
+      x-enum-varnames:
+        - PLACEHOLDER
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65772,9 +65823,11 @@ components:
       properties:
         chat_template:
           description: >-
-            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+            Chat template for this prompt version, as a list of messages and named message placeholders. Omitted for text templates.
+
+            **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
           items:
-            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+            $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
           type: array
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
@@ -65809,6 +65862,8 @@ components:
             chat_template:
               - content: "You are a helpful customer support assistant for {{company_name}}."
                 role: "system"
+              - name: "history"
+                type: "placeholder"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
             config:
@@ -65827,11 +65882,13 @@ components:
       type: object
     LLMObsPromptTemplate:
       description: >-
-        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+        A text template, a list of chat messages and named message placeholders, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
 
         **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
 
         Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
@@ -94074,6 +94131,17 @@ components:
       x-enum-varnames:
         - ANY
         - ALL
+    RecentlyUpdatedEntitiesResponse:
+      description: Response from the recently updated entities endpoint, containing the entities with the most recent updates in the requested time range, ordered from most to least recently updated.
+      properties:
+        data:
+          description: The list of entities with the most recent updates, ordered from most to least recently updated.
+          items:
+            $ref: "#/components/schemas/EntityContextEntity"
+          type: array
+      required:
+        - data
+      type: object
     RecommendationAttributes:
       description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
       properties:
@@ -96839,6 +96907,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -96970,6 +97044,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -200931,18 +201011,9 @@ paths:
       description: |-
         Create a new role for your organization.
 
-        The following read permissions are automatically added to every new role, even if they are not included in the request:
-
-        - Dashboards Read
-        - Notebooks Read
-        - Monitors Read
-        - APM Read
-        - Vulnerability Management Read
-        - RUM Apps Read
-        - Incidents Read
-        - SLOs Read
-        - CI Visibility Read
-        - CD Visibility Read
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: CreateRole
       requestBody:
         content:
@@ -201111,6 +201182,10 @@ paths:
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
+
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
@@ -216454,6 +216529,15 @@ paths:
           schema:
             type: string
         - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
           in: query
@@ -216546,6 +216630,114 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/entity_context/recently_updated:
+    get:
+      description: |-
+        Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked
+        by the time of their most recent revision in the requested time range, and the top `limit` entities are
+        returned in that order. This endpoint is not paginated.
+      operationId: GetEntityContextRecentlyUpdated
+      parameters:
+        - description: A free-text query (for example, an email address or principal ID) used to filter the entities returned.
+          example: user@example.com
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
+            The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
+            Defaults to `now-7d`.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: now-7d
+            example: now-7d
+            type: string
+        - description: |-
+            The end of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now`).
+            Defaults to `now`. Entities are ranked by their most recent revision within `[from, to]`.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: now
+            example: now
+            type: string
+        - description: The number of entities to return. Must be between 1 and 100.
+          example: 50
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: |-
+            Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+            and `all` returns every revision in the requested time range.
+          example: latest
+          in: query
+          name: revisions
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextRevisionsMode"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          revisions:
+                            - attributes:
+                                accounts:
+                                  - linked-account-123
+                                display_name: Test User
+                                email: user@example.com
+                                principal_id: user@example.com
+                              first_seen_at: "2026-04-01T00:00:00Z"
+                              last_seen_at: "2026-05-01T00:00:00Z"
+                        id: user@example.com
+                        type: siem_entity_identity
+              schema:
+                $ref: "#/components/schemas/RecentlyUpdatedEntitiesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - siem_entities_read
+      summary: Get recently updated entity context
+      tags: ["Security Monitoring"]
+      x-menu-order: 175
+      x-permission:
+        operator: OR
+        permissions:
+          - siem_entities_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/entity_context/{id}:
     get:
       description: |-
@@ -216562,6 +216754,15 @@ paths:
           schema:
             example: user@example.com
             type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
         - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.

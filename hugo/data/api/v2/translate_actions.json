@@ -5210,7 +5210,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
+    "description": "Create a new role for your organization.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
@@ -5228,7 +5228,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -6354,6 +6354,10 @@
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
+  },
+  "GetEntityContextRecentlyUpdated": {
+    "description": "Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked\nby the time of their most recent revision in the requested time range, and the top `limit` entities are\nreturned in that order. This endpoint is not paginated.",
+    "summary": "Get recently updated entity context"
   },
   "GetSingleEntityContext": {
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
