@@ -556,6 +556,8 @@ The following example adds a shared response policy to a support assistant promp
 3. After the included prompt, add a {{< ui >}}User{{< /ui >}} message containing `{{question}}`. If the editor added empty messages, remove them.
 4. Click {{< ui >}}Save{{< /ui >}}, enter `support-assistant-composed` as the prompt ID, and click {{< ui >}}Create prompt{{< /ui >}}.
 
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
+
 Your prompt now contains:
 
 ```text
@@ -564,8 +566,6 @@ User: {{question}}
 ```
 
 Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual. The retrieved prompt already contains the included messages, so you don't need to fetch `response-policy` separately.
-
-{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
 
 By default, an include adds every message from the included prompt, in order. To include only some messages, reorder them, or repeat one, click {{< ui >}}Included Prompt{{< /ui >}} in the Prompt Editor and select {{< ui >}}Customize messages{{< /ui >}}. Customizing doesn't change the included prompt.
 
