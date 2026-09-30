@@ -45,7 +45,7 @@ Every organization in an organization group falls into at least one of the follo
 | **Owner** | Creates and manages the organization group. Sets policies, enforcement tiers, and shared roles for all member organizations. |
 | **Member** | Governed by the group. An organization belongs to exactly one organization group at a time. An owner organization can also be a member of its own organization group. |
 
-Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles.
+Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles. Managing an organization group requires the **Org Group Write** permission, and viewing one requires **Org Group Read**. See [Datadog Role Permissions][2].
 
 ### Organization group policies
 
@@ -64,11 +64,7 @@ Each organization group policy has an enforcement tier that controls how much la
 
 ### Shared roles
 
-Shared roles bring the same group-level control to custom roles. Administrators in the owner organization define a custom role once, and Datadog provisions it as a role in every member organization. Member organizations assign users and teams to the role, but cannot edit or delete it.
-
-Shared roles are always **Group managed**. Unlike organization group policies, they have no **Override allowed** tier. To control whether member organizations can also create their own custom roles, use the group's role exclusivity setting.
-
-For details, see [Shared Roles][1].
+Shared roles bring the same group-level control to custom roles. Member organizations assign a shared role to users and teams, but cannot edit or delete it. Shared roles are always **Group managed**: unlike organization group policies, they have no **Override allowed** tier. For details, including how to stop member organizations from creating their own custom roles, see [Shared Roles][1].
 
 ## Apply Organization Groups
 
@@ -88,11 +84,9 @@ Organization Groups supports only single-region groups. Organizations in differe
 
 Organization groups are owned by the parent organization at the root of your organization hierarchy. A group is visible and managed only from its owner organization.
 
-For limitations that apply to shared roles, see [Shared Roles limitations][2].
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/organization_groups/shared_roles/
-[2]: /account_management/organization_groups/shared_roles/#limitations
+[2]: /account_management/rbac/permissions/
