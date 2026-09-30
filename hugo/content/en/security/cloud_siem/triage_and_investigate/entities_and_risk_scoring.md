@@ -18,6 +18,8 @@ further_reading:
 
 [Cloud SIEM's Entity Risks][4] consolidates multiple data sources, such as SIEM threats and Cloud Security insights, into a profile representing a single security entity, such as an IAM user.
 
+<div class="alert alert-info">Entity Risks was previously known as Risk Insights.</div>
+
 With Entity Risks, you can:
 
 - Explore entities, filtering them by attributes such as entity provider, entity type, entity name, [risk score severity](#risk-scoring), risk score, and configuration risks.
