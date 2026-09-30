@@ -20057,9 +20057,6 @@ components:
           items:
             $ref: "#/components/schemas/SyntheticsTestRestrictionPolicyBinding"
           type: array
-        bits_ai_auto_investigate:
-          description: Whether Bits AI automatically investigates alerts from the test monitor.
-          type: boolean
         ci:
           $ref: "#/components/schemas/SyntheticsTestCiOptions"
         defaultStepTimeout:
@@ -20839,9 +20836,6 @@ components:
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request in an API test.
-          type: boolean
-        bits_ai_auto_investigate:
-          description: Whether Bits AI automatically investigates alerts from the test monitor.
           type: boolean
         blockedRequestPatterns:
           description: Array of URL patterns to block.
