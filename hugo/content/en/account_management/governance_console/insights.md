@@ -12,9 +12,9 @@ further_reading:
 
 ## Overview
 
-View Governance Console Insights to monitor adoption, configuration hygiene, and optimization opportunities across your Datadog organization.
+Governance Console insights are metrics about how your organization uses and configures Datadog. Use insights to monitor adoption, configuration hygiene, and optimization opportunities across your organization.
 
-The Governance Console [Summary][1] and [Products][2] pages display insights: metrics about how your organization uses and configures Datadog. Each insight shows a current value, a trend sparkline, and a deep link to the underlying Datadog page.
+Insights appear on the Governance Console [Summary][1] and [Products][2] pages. Each insight shows a current value, a trend sparkline, and a deep link to the underlying Datadog page.
 
 ### Required permissions
 
@@ -33,11 +33,11 @@ Each insight is displayed as a card. A card shows:
 
 ## Trend direction
 
-Insights are interpreted relative to their goal. Some insights are better when increasing (such as **Active Dashboards** or **Users using Logs**). Others are better when decreasing (such as **Unqueried Metrics** or **Monitors with Broken @-handles**). The sparkline shows the direction of recent change. The goal direction is encoded in the insight itself.
+Insights are interpreted relative to their goal. Some insights are better when increasing (such as {{< ui >}}Active Dashboards{{< /ui >}} or {{< ui >}}Users using Logs{{< /ui >}}). Others are better when decreasing (such as {{< ui >}}Unqueried Metrics{{< /ui >}} or {{< ui >}}Monitors with Broken @-handles{{< /ui >}}). The sparkline shows the direction of recent change. The goal direction is encoded in the insight itself.
 
 ## Insights and controls
 
-Insights surface a metric. [Controls][3] automate detection and remediation for the conditions that those metrics help identify. For example, the **Unqueried Metrics** insight reports the count of custom metrics not used by any monitor, dashboard, SLO, or notebook. Enable the **Unqueried Metrics** control to detect these metrics and automatically drop unused tags with Metrics without Limits™.
+Insights surface a metric. [Controls][3] automate detection and remediation for the conditions that those metrics help identify. For example, the {{< ui >}}Unqueried Metrics{{< /ui >}} insight reports the count of custom metrics not used by any monitor, dashboard, SLO, or notebook. Enable the {{< ui >}}Unqueried Metrics{{< /ui >}} control to detect these metrics and automatically drop unused tags with Metrics without Limits™.
 
 ## Available insights
 
@@ -175,4 +175,4 @@ Insights are grouped by product area.
 
 [1]: https://app.datadoghq.com/governance/summary
 [2]: https://app.datadoghq.com/governance/products
-[3]: https://app.datadoghq.com/governance/controls
+[3]: /account_management/governance_console/controls/
