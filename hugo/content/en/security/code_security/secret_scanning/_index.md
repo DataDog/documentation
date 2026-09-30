@@ -33,6 +33,8 @@ Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and incl
 
 Secret Scanning integrates directly with your repositories to continuously detect leaked secrets before they become a threat. Built on Datadog's static analyzer, it scans every commit across all branches of each configured repository. Findings are surfaced with repository, branch, and file path context so your team can identify, prioritize, and remediate exposed secrets at the source.
 
+Each scan analyzes the full contents of every file in scope at the scanned commit, not only the lines or files that the commit changed. Diff-aware scanning, which is available for [Static Code Analysis][18], is not supported for Secret Scanning.
+
 ## Key capabilities
 
 ### Review exposed secrets in pull requests
@@ -102,3 +104,4 @@ To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details pan
 [15]: https://app.datadoghq.com/security/code-security/secrets
 [16]: /security/ticketing_integrations#bidirectional-ticket-syncing-with-jira
 [17]: /security/code_security/secret_scanning/secret_validation/
+[18]: /security/code_security/static_analysis/setup/#diff-aware-scanning

@@ -68,8 +68,6 @@ datadog-ci sarif upload /tmp/report.sarif
   This example uses the x86_64 Linux version of Datadog's static analyzer for Secret Scanning. If you're using a different OS or architecture, you should select it from the table above and update the <code>DATADOG_STATIC_ANALYZER_URL</code> value. You can view all releases on the <a href="https://github.com/DataDog/datadog-static-analyzer/releases">GitHub Releases</a> page.
 </div>
 
-**Note:** When a diff-aware scan cannot be completed, the entire directory is scanned.
-
 
 [1]: /account_management/api-app-keys/#api-keys
 [2]: /account_management/api-app-keys/#application-keys
