@@ -241,7 +241,7 @@ To change an app's UI or logic, update the code in your local project and re-upl
 
 When an app is [embedded][3], its URL state mirrors into the host page's URL. This includes routes, tabs, hash values, and query parameters. Copying and sharing that host URL opens the app to the same in-app state. Deep links work for embeds in dashboards, notebooks, the Internal Developer Portal, and side panels.
 
-Newly created apps support deep links automatically. For existing apps, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
+Newly created apps support deep links automatically. If deep links is not working on your app, install [`@datadog/apps-frontend`][25] and wrap the app in `DatadogAppProvider` in `main.tsx`:
 
 ```shell
 npm install @datadog/apps-frontend@latest
