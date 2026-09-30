@@ -10575,11 +10575,6 @@ menu:
       url: account_management/governance_console/controls
       parent: account_management_governance_console
       weight: 1001
-    - name: Controls
-      identifier: account_management_governance_console_controls
-      url: account_management/governance_console/controls
-      parent: account_management_governance_console
-      weight: 1001
     - name: Insights
       identifier: account_management_governance_console_insights
       url: account_management/governance_console/insights
