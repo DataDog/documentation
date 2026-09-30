@@ -38,7 +38,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 ## Getting started
 
-Datadog detects some AI activity automatically once [DORA Metrics][1] is set up with deployment, commit, and pull request data. To measure your coding tools more fully, see [Set Up AI Impact][2] to configure tools and sources for AI Impact.
+Datadog detects some AI activity automatically after [DORA Metrics][1] is set up with deployment, commit, and pull request data. To measure your coding tools more fully, see [Set Up AI Impact][2] to configure tools and sources for AI Impact.
 
 ## Impact metrics
 
@@ -60,4 +60,3 @@ Datadog detects some AI activity automatically once [DORA Metrics][1] is set up 
 
 [1]: /delivery_performance/dora_metrics/setup/
 [2]: /delivery_performance/ai_impact/setup/
-[3]: /delivery_performance/ai_impact/setup/#set-the-ai-attribution-mode-for-the-ui

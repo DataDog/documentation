@@ -57,9 +57,7 @@ To select which attribution mode your metrics use in the [AI Impact dashboard][1
 
 ## Set up coding assistants
 
-[{{< ui >}}AI Impact Settings{{< /ui >}}][2] show which coding assistants and sources Datadog detects. Some coding assistants are detected automatically, when they add themselves as a co-author to the commits they generate.
-
-Co-author detection can undercount AI activity, as not all coding assistants add themselves as co-authors, and a rebase or squash can strip the co-author signature. To measure an AI coding tool more fully, configure a source for it.
+[{{< ui >}}AI Impact Settings{{< /ui >}}][2] show which coding assistants and sources Datadog detects. Some coding assistants are detected automatically, when they add themselves as a [co-author](#co-author-signatures) to the commits they generate. To measure an AI coding tool more fully, configure a source for it.
 
 ### Supported AI coding assistants and sources
 
@@ -96,7 +94,7 @@ When configuring a coding assistant in {{< ui >}}AI Impact Settings{{< /ui >}}, 
 {{% collapse-content title="OpenTelemetry" level="h4" id="opentelemetry" %}}
 Use OpenTelemetry to report AI usage data from certain coding assistant deployments, such as Claude Code's Teams plan. Additional configuration is required for Claude Code running through an external gateway such as Amazon Bedrock or Google Vertex AI.
 
-1. Configure Claude Code to send OpenTelemetry data to Datadog, following either [Option 2: OpenTelemetry (OTLP)][10] or [Option 3: Forward data through the Datadog Agent][11].
+1. Configure Claude Code to send OpenTelemetry data to Datadog, following either [Option 2: OpenTelemetry (OTLP)][9] or [Option 3: Forward data through the Datadog Agent][10].
 1. Amazon Bedrock or Google Vertex AI: Set a per-user resource attribute in your Claude Code settings file, for example `~/.claude/settings.json`:
 
    ```json
@@ -119,7 +117,7 @@ Each rule applies to the whole pull request, so it also marks commits written wi
 {{% /collapse-content %}} 
 
 {{% collapse-content title="Datadog public API" level="h4" id="datadog-public-api" %}}
-Use the [Datadog public API][13] to send your own AI usage data to Datadog when your organization routes AI coding tools through an internal gateway. The API is also an option for tracking a coding assistant that has no Datadog integration. Datadog infers AI assistance from the user activity you report.
+Use the [Datadog public API][11] to send your own AI usage data to Datadog when your organization routes AI coding tools through an internal gateway. The API is also an option for tracking a coding assistant that has no Datadog integration. Datadog infers AI assistance from the user activity you report.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Co-author signatures" level="h4" id="co-author-signatures" %}}
@@ -161,8 +159,7 @@ Enable automatic bot detection (for GitHub) and define custom mapping rules in [
 [6]: /integrations/openai-codex/
 [7]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
 [8]: /integrations/github-copilot/
-[9]: /delivery_performance/ai_impact/#ai-attribution
-[10]: /ai_agents_console/setup/#option-2-opentelemetry-otlp
-[11]: /ai_agents_console/setup/#option-3-forward-data-through-the-datadog-agent
+[9]: /ai_agents_console/setup/#option-2-opentelemetry-otlp
+[10]: /ai_agents_console/setup/#option-3-forward-data-through-the-datadog-agent
+[11]: /api/latest/
 [12]: https://app.datadoghq.com/ci/settings/dora
-[13]: /api/latest/
