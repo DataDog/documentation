@@ -16,7 +16,7 @@ If the user is instrumenting an application with one of the following frameworks
 
 ## Instrumentation
 
-1. Install the latest `ddtrace` package.
+1. Install the latest `dd-trace` package.
 
 Check the package manager the repo or project already uses and use that to install the dependencies. Verify via lockfiles.
 
@@ -46,7 +46,7 @@ Although this value can be set in a `Dockerfile`, bootstrap script, etc., as lon
 
 3. Initialize the Agent Observability package
 
-Initialize the Agent Observability SDK via `ddtrace.auto`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
+Initialize the Agent Observability SDK with `dd-trace/init`. This **needs** to be done as the first import in the application's entrypoint, aside from any environment variable or configuration-loading imports.
 
 **Note**: do not add in extraneous comments.
 
