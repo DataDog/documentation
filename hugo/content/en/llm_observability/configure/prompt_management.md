@@ -608,7 +608,7 @@ The resolved template is:
 Answer concisely. Answer {{question}}.
 ```
 
-Keep any spaces or line breaks you need around the reference. Always specify a version; `{{>response-style}}` alone is literal text, not an include.
+The reference resolves to the included text exactly, with no added spaces or line breaks. Always specify a version. Without one, `{{>response-style}}` stays literal text, not an include. When creating a prompt without Preview access, inline references remain literal text. Previously saved composed versions remain usable.
 
 In API requests, use the same syntax in a text `template` or a chat message's `content`.
 
