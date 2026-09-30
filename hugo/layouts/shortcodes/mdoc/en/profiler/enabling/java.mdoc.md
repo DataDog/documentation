@@ -213,7 +213,7 @@ First, scan my project to auto-detect as much as possible. Look for:
 - pom.xml, build.gradle, or build.gradle.kts to determine Java version and
   dependencies (check if dd-java-agent or dd-trace-java is already present).
 - Dockerfile, docker-compose.yml, or Kubernetes manifests for startup commands,
-  base image (JDK distribution), and existing Datadog Agent configuration.
+  base image (JDK distribution and OS), and existing Datadog Agent config.
 - Application startup scripts or entrypoints (look for java -jar, mvn exec,
   gradle bootRun, or similar commands).
 - Existing environment variables or config files referencing DD_SERVICE,
@@ -221,23 +221,50 @@ First, scan my project to auto-detect as much as possible. Look for:
 - GraalVM native-image configuration (native-image.properties, pom.xml
   native-maven-plugin, or Gradle native-image plugin).
 
-Present a summary of what you detected, then ask ONLY about what you could
-not determine:
+Determine which of the three setup paths applies:
+
+1. JVM on Linux — full profile type support:
+   CPU, Wallclock, Allocations, Live Heap, Exceptions, I/O.
+   Minimum JDK versions: OpenJDK 8u352+, 11.0.17+, 17.0.5+, 21+.
+   OpenJ9: 8u372+, 11.0.18+, 17.0.6+.
+
+2. JVM on Windows — reduced profile type support:
+   CPU, Allocations, I/O, Exceptions (no Wallclock or Live Heap).
+   Minimum JDK versions: OpenJDK 8u282+, 11.0.17+, 17.0.5+, 21.0.3+.
+   Oracle JDK: 11.0.17+ (JDK 8 limited to CPU only, may require
+   commercial license for JFR).
+
+3. GraalVM Native Image (Linux, Windows, or macOS) — Preview:
+   CPU and Allocations only (no Wallclock or Live Heap).
+   Minimum: GraalVM 17+.
+   Uses a different setup flow from the JVM paths.
+
+Present a summary of what you detected (OS, JDK, runtime path), then ask
+ONLY about what you could not determine:
 - DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
 - Datadog Agent deployment method (if no Agent config found in the project).
 - Anything ambiguous from the project files.
 
-Generate the setup steps tailored to what you found:
+Generate the setup steps for the detected path:
+
+For JVM (Linux or Windows):
 - Download dd-java-agent.jar if not already present.
 - Add the -javaagent flag BEFORE -jar in the startup command.
 - Set DD_PROFILING_ENABLED=true.
 - Set DD_SERVICE, DD_ENV, and DD_VERSION.
 - Show the complete modified startup command or Dockerfile.
-- If GraalVM native-image is detected, also set
-  DD_PROFILING_DIRECTALLOCATION_ENABLED=true and follow the native-image
-  tracer setup.
+- Note which profile types are available for the detected OS.
 
-Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=java
+For GraalVM Native Image:
+- Follow the GraalVM native-image tracer setup to build with Datadog
+  Java Profiler instrumentation.
+- Set DD_PROFILING_ENABLED=true and DD_PROFILING_DIRECTALLOCATION_ENABLED=true.
+- Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- Note that only CPU and Allocations profiling are available.
+
+Reference:
+- JVM: https://docs.datadoghq.com/profiler/enabling/?code-lang=java&runtime=jvm
+- GraalVM: https://docs.datadoghq.com/profiler/enabling/?code-lang=java&runtime=graalvm_native_image
 ```
 
 [1]: /tracing/trace_collection/
