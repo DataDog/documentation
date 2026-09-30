@@ -86,7 +86,7 @@ Sections let you group components together within a form. For example, you might
 You can also configure conditional logic at the section level, showing or hiding an entire section based on a respondent's answer to a previous question, in addition to setting conditions on individual components. See [Conditional fields](#conditional-fields).
 
 To add a section:
-1. In the form, click {{< ui >}}+ Add{{< /ui >}}.
+1. In the form, click {{< ui >}}\+ Add{{< /ui >}}.
 1. Click {{< ui >}}Section{{< /ui >}}.
 1. Drag existing components into the section, or add new components directly within it.
 1. To set conditions on the section, click the section, then click {{< ui >}}Conditions{{< /ui >}} and define the rule.

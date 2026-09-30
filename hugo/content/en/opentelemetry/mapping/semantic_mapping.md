@@ -164,7 +164,7 @@ OpenTelemetry makes use of [semantic conventions][1] that specify names for diff
 
 {{< multifilter-search >}}
 
-<sup>*</sup>Replaces the deprecated `deployment.environment` convention. Requires Datadog Agent 7.58.0+ and Datadog Exporter v0.110.0+.
+<sup>*</sup>Replaces the deprecated `deployment.environment` convention. Requires Datadog Agent 7.58.0+, Datadog Exporter v0.110.0+, or Datadog OTLP intake.
 
 ## Span type mapping
 

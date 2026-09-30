@@ -356,6 +356,9 @@ Agent Observability MCP 도구는 다음을 위한 AI 지원 워크플로를 활
 `list_llmobs_evals_by_ml_app`
 :  특정 ML 애플리케이션에 대해 구성된 모든 LLM 판정 평가자를 나열합니다.
 
+`list_llmobs_feedback_labels`
+: 특정 ML 애플리케이션에 대해 최종 사용자가 제출한 모든 피드백 레이블을 나열하십시오.
+
 `get_llmobs_evaluator`
 :  이름으로 LLM 판정 평가자 구성을 검색하며, 대상(ml_app, 샘플링, 필터), LLM 공급자 및 평가자 프롬프트 템플릿을 포함합니다.
 
