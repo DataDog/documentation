@@ -121,6 +121,49 @@ To add detailed C function call information to CPU profiles, you may opt to use 
 This library is considered experimental. It can cause (infrequent) deadlocks in programs that use C++ exceptions, or that use libraries such as `tcmalloc`, which also collect call stacks.
 {% /alert %}
 
+## Set up the profiler with an AI coding assistant
+
+Use the following prompt with a local AI coding agent (such as Cursor, GitHub Copilot, or Cody) to set up the Go profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my Go service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- go.mod to determine the Go version and whether dd-trace-go (v1 or v2)
+  is already a dependency.
+- The main package (main.go or cmd/ directory) to find the application
+  entrypoint.
+- Existing imports of gopkg.in/DataDog/dd-trace-go.v1 or
+  github.com/DataDog/dd-trace-go/v2 to detect current APM or profiler usage.
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for startup
+  commands and existing Datadog Agent configuration.
+- Existing environment variables or config files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
+- Use of cgo (import "C" statements) that would benefit from cgosymbolizer.
+- Orchestrion configuration (orchestrion.tool.go or go generate directives)
+  for automatic instrumentation.
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Which extra profile types to enable beyond CPU and Heap
+  (BlockProfile, MutexProfile, GoroutineProfile).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- Add the dd-trace-go/v2/profiler dependency (or v1 if already in use).
+- Add profiler.Start() with WithService, WithEnv, WithVersion, and the
+  requested WithProfileTypes in the main function.
+- Add defer profiler.Stop() after the Start call.
+- If cgo is detected, suggest the cgosymbolizer package.
+- If Orchestrion is detected, use the DD_PROFILING_ENABLED=true
+  environment variable approach instead of code changes.
+- Show the complete modified main() function or Dockerfile.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=go
+```
+
 [1]: /tracing/trace_collection/
 [2]: /profiler/enabling/supported_versions/
 [3]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
