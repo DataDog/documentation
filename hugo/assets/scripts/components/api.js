@@ -259,6 +259,7 @@ if (changelogRoot) {
         const pageStart = (currentPage - 1) * entriesPerPage;
         const pageEnd = Math.min(pageStart + entriesPerPage, matchingEntries.length);
         const visibleEntries = new Set(matchingEntries.slice(pageStart, pageEnd));
+        const visibleSections = [];
 
         entries.forEach((entry) => entry.classList.toggle('d-none', !visibleEntries.has(entry)));
 
@@ -267,7 +268,11 @@ if (changelogRoot) {
                 visibleEntries.has(entry)
             );
             section.classList.toggle('d-none', !hasVisibleEntry);
+            section.classList.remove('is-last-visible');
+            if (hasVisibleEntry) visibleSections.push(section);
         });
+
+        if (visibleSections.length) visibleSections[visibleSections.length - 1].classList.add('is-last-visible');
 
         if (emptyState) emptyState.classList.toggle('d-none', matchingEntries.length !== 0);
         renderChangelogPagination(totalPages);
