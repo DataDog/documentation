@@ -568,10 +568,9 @@ See [Supported versions][16] for a list of operating system versions and platfor
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
-[8]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#initialization-parameters
 [9]: https://github.com/DataDog/dd-sdk-ios
-[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-resources
-[11]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-actions
+[11]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#custom-actions
 [12]: /real_user_monitoring/explorer/
 [13]: /error_tracking/frontend/mobile/ios
 [14]: https://app.datadoghq.com/rum/application/
