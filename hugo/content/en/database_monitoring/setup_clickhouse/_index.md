@@ -5,6 +5,9 @@ disable_sidebar: true
 aliases:
   - /database_monitoring/guide/clickhouse/
 further_reading:
+- link: "/database_monitoring/guide/clickhouse_agent_upgrade"
+  tag: "Documentation"
+  text: "Upgrading the ClickHouse integration from Agent versions earlier than 7.84" 
 - link: "https://www.datadoghq.com/blog/database-monitoring-for-clickhouse/"
   tag: "Blog"
   text: "Monitor ClickHouse query performance with Datadog Database Monitoring"

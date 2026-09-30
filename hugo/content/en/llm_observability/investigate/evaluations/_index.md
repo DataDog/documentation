@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-Agent Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
+Agent Observability offers several ways to support evaluations. They can be configured by navigating to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Evaluations{{< /ui >}}][8].
 
 ### Custom LLM-as-a-judge evaluations
 

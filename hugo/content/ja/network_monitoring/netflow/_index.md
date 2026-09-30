@@ -2,6 +2,9 @@
 aliases:
 - /ja/network_monitoring/devices/netflow/
 further_reading:
+- link: https://www.datadoghq.com/architecture/hybrid-cloud-network-observability/
+  tag: Architecture Center
+  text: ハイブリッドマルチクラウドネットワーク可観測性リファレンスアーキテクチャ
 - link: /network_monitoring/devices/profiles
   tag: ドキュメント
   text: ネットワークデバイスモニタリングのプロファイルの使用
@@ -14,6 +17,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/diagnose-network-performance-with-snmp-trap-monitoring/
   tag: ブログ
   text: SNMP トラップによるネットワークパフォーマンスの問題の監視と診断
+- link: https://www.datadoghq.com/blog/understanding-netflow-duplication/
+  tag: ブログ
+  text: NetFlow の重複について理解する：なぜ発生するのか、そしてどのように重複を排除するか
 title: NetFlow Monitoring
 ---
 ## 概要 {#overview}
@@ -93,7 +99,7 @@ Datadog は、NetFlow のポートに対して IANA (Internet Assigned Numbers A
 
 また、特定のポートで実行されているカスタムサービスがある場合など、ポートやプロトコルを特定のアプリケーションにマッピングする独自のカスタム拡張を追加することも可能です。これにより、ネットワークエンジニアやそのチームが、人間が読みやすい名前で NetFlow データを解釈し、クエリを実行しやすくなります。
 
-NetFlow の {{< ui >}}Configuration{{< /ui >}} タブで {{< ui >}}+ Add Enrichment{{< /ui >}} をクリックし、カスタム拡張を含む CSV ファイルをアップロードします。
+NetFlow の {{< ui >}}Configuration{{< /ui >}} タブで {{< ui >}}\+ Add Enrichment{{< /ui >}} をクリックし、カスタムエンリッチメントを含む CSV ファイルをアップロードします。
 
 {{< img src="network_device_monitoring/netflow/new_enrichment_2.png" alt="NetFlow 構成タブの新しいエンリッチメントマッピングモーダル" width="100%" >}}
 
@@ -101,7 +107,7 @@ NetFlow の {{< ui >}}Configuration{{< /ui >}} タブで {{< ui >}}+ Add Enrichm
 
 IP と CIDR をカスタムタグにマッピングするために、独自のカスタムエンリッチメントを追加することもできます (たとえば、特定の IP アドレスで実行されているサービスを分類するため)。これにより、ネットワークエンジニアやそのチームが、人間が読みやすい名前で NetFlow データを解釈し、クエリを実行しやすくなります。
 
-[{{< ui >}}Enrichment{{< /ui >}} 設定ページ][10] で {{< ui >}}+ Add Enrichment{{< /ui >}} をクリックしてマッピングを手動で追加するか、CSV ファイルをアップロードしてマッピングを一括追加します。
+[{{< ui >}}Enrichment{{< /ui >}} 設定ページ][10] で {{< ui >}}\+ Add Enrichment{{< /ui >}} をクリックしてマッピングを手動で追加するか、CSV ファイルをアップロードしてマッピングを一括追加します。
 
 ### リバース DNS プライベート IP の拡張 {#reverse-dns-private-ip-enrichment}
 
@@ -109,7 +115,7 @@ IP と CIDR をカスタムタグにマッピングするために、独自の�
 
 デフォルトでは、[`datadog.yaml` ファイル][7] のリバース DNS IP の拡張は無効になっています。有効にするには、このページの[構成](#configuration)セクションを参照してください。
 
-リバース DNS IP の拡張に関連するフローを見つけるには、{{< ui >}}+ Filter{{< /ui >}} メニューで DNS を検索してください。
+{{< ui >}}\+ Filter{{< /ui >}} メニューで DNS を検索して、リバース DNS IP のエンリッチメントに関連するフローを見つけてください。
 
 {{< img src="network_device_monitoring/netflow/dns_ip_enrichmen_2.png" alt="フィルターメニューが拡張され、リバース DNS の宛先と送信元のファセットが表示されます。" width="100%" >}}
 

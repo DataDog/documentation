@@ -32,7 +32,7 @@ Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}}
 
 Automations are different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
-Automations are also different from [Notifications][8], which send a recurring Slack summary of matching recommendations but don't take any action.
+Automations are also different from [Notifications][8], which send a recurring Slack or Microsoft Teams summary of matching recommendations but don't take any action.
 
 **Note**: Automations use Datadog Workflows and incur additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 

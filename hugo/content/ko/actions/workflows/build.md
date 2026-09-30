@@ -45,20 +45,21 @@ title: 워크플로 빌드
 
 ## AI로 워크플로 생성/편집 {#create-a-workflow-with-ai}
 
-어디에서 시작해야 할지 잘 모르겠다면, 워크플로를 자동으로 생성하거나 AI로 기존 워크플로를 반복해서 개선할 수 있습니다.
+[Bits Chat][15]에서 AI 도움을 받아 프롬프트로 워크플로를 생성하거나 기존 워크플로를 업데이트합니다. Bits Chat은 워크플로를 생성하거나 업데이트하기 전에 후속 질문을 할 수 있습니다.
 
-워크플로 생성하기:
-1. [Workflow Automation][1] 페이지에서 {{< ui >}}New Workflow{{< /ui >}}를 클릭합니다.
-1. {{< ui >}}Create a workflow with AI{{< /ui >}}를 클릭합니다.
-1. 워크플로에 대한 상세 프롬프트를 입력합니다. 사용하려는 통합 및 작업을 지정합니다.
-1. 위쪽 화살표({{< ui >}}↑{{< /ui >}})를 클릭하여 워크플로를 생성합니다.
+워크플로를 생성하려면:
+1. [Workflow Automation][1] 페이지에서 {{< ui >}}New workflow{{< /ui >}}를 클릭합니다.
+1. 아래에 {{< ui >}}Build a workflow with AI{{< /ui >}}자세한 프롬프트를 입력하거나 제안된 프롬프트를 선택합니다.
+1. 프롬프트를 제출하려면 위쪽 화살표 ({{< ui >}}↑{{< /ui >}})를 클릭합니다.
+1. 후속 질문에 답변한 후, 요청이 표시되면 워크플로를 확인합니다. Bits는 워크플로를 생성하고 워크플로 편집기에서 엽니다.
 
-기존 워크플로를 반복해서 개선하기
-1. 기존 워크플로에서 {{< ui >}}Edit with AI{{< /ui >}}를 클릭합니다.
-1. 워크플로에 추가하려는 동작의 상세 프롬프트를 입력합니다. 사용하려는 통합 및 작업을 포함합니다.
-1. 위쪽 화살표({{< ui >}}↑{{< /ui >}})를 클릭하여 해당 기능을 워크플로에 추가합니다.
+Bits Chat을 사용하여 Datadog의 어디에서나 워크플로를 생성할 수 있습니다. 상단 오른쪽 탐색 모음에서 {{< ui >}}Ask Bits{{< /ui >}}를 클릭하거나 <kbd>Cmd</kbd> 또는 <kbd>Ctrl</kbd> + <kbd>I</kbd>를 눌러 Bits Chat을 열고, Bits에게 워크플로를 생성해 달라고 요청합니다.
 
-<div class="alert alert-info">Workflow Automation AI는 제품 관련 질문에 답변하지 않습니다. 질문이나 피드백이 있으시면 <a href="https://chat.datadoghq.com/">Datadog 커뮤니티 슬랙</a>의 <strong>#workflows</strong> 채널 참여를 고려하세요.</div>
+기존 워크플로를 업데이트하려면:
+1. 워크플로를 열고 왼쪽 도구 모음에서 AI 아이콘 <i class="icon-bits-ai"></i>을 클릭합니다. Bits Chat이 워크플로를 컨텍스트로 첨부하여 열립니다.
+1. 원하는 변경 사항을 설명하는 자세한 프롬프트를 입력합니다.
+1. 프롬프트를 제출하려면 위쪽 화살표 ({{< ui >}}↑{{< /ui >}})를 클릭합니다.
+1. 후속 질문에 답변한 후, 요청이 표시되면 변경 사항을 확인합니다. Bits는 편집기에서 워크플로를 업데이트합니다.
 
 ## 사용자 지정 워크플로 생성 {#create-a-custom-workflow}
 
@@ -212,3 +213,4 @@ API를 사용하여 작업을 수행하려면 [Workflow Automation API 설명서
 [12]: /ko/actions/workflows/variables/
 [13]: /ko/api/latest/workflow-automation/
 [14]: /ko/actions/workflows/variables/#context-variables
+[15]: /ko/bits_ai/bits_chat/

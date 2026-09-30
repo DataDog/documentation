@@ -65,7 +65,7 @@ Starting from the operation report is more convenient because Datadog uses the s
 ### Navigate from the SLO page
 
 1. In the left navigation, select **Monitoring > SLOs**.
-2. Click {{< ui >}}+ New SLO{{< /ui >}}, then select {{< ui >}}By Count{{< /ui >}}.
+2. Click {{< ui >}}\+ New SLO{{< /ui >}}, then select {{< ui >}}By Count{{< /ui >}}.
 
 After you open the SLO creation workflow, [configure the SLO query](#configure-the-slo-query) for an availability or latency SLO.
 

@@ -74,6 +74,12 @@ Each finding keeps the query and absolute time range. In Log Explorer, you can c
 
 ## Send findings to Bits AI and Notebooks
 
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-danger">
+Bits AI is not available in the <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). You can still add findings to a Notebook.
+</div>
+{{% /site-region %}}
+
 Select one or more findings to act on them together:
 
 - To ask [Bits Chat][2] about them, type your question in the selection bar and click {{< ui >}}Ask Bits{{< /ui >}}. You can also click {{< ui >}}Ask Bits{{< /ui >}} in the menu at the bottom of the Findings panel after selecting the findings. Bits Chat opens with the selected findings attached as context.
