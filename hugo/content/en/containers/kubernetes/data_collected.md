@@ -41,7 +41,7 @@ This page lists data collected by the Datadog Agent when deployed on a Kubernete
 
 For more information, see the documentation for the [Kubelet][1] integration.
 
-**Note**: On Kubernetes v1.37 and later, the kubelet's embedded cAdvisor no longer exports the `container_cpu_load_average_10s` series. Because of this, the `kubernetes.cpu.load.10s.avg` metric is not collected on these versions.
+**Note**: On Kubernetes v1.37 and later, the Agent does not collect the `kubernetes.cpu.load.10s.avg` metric. The kubelet's embedded cAdvisor on these versions does not export the underlying `container_cpu_load_average_10s` metric.
 
 {{< get-metrics-from-git "kubelet" >}}
 
