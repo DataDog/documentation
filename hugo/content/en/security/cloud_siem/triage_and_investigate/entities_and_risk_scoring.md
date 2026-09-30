@@ -24,7 +24,8 @@ With Entity Risks, you can:
 
 - Explore entities, filtering them by attributes such as entity provider, entity type, entity name, [risk score severity](#risk-scoring), risk score, and configuration risks.
 - View all data relevant to an entity, such as signals, misconfigurations, and identity risks.
-- Configure notifications so you can address risky entities as they emerge.
+- Group risk by user identity to see one row per person, with their total risk across every account they act through.
+- Configure notifications so you can address risky entities, or risky people, as they emerge.
 - Triage relevant items in bulk.
 - Take mitigation steps such as creating a global suppression or creating a case for an entity.
 
@@ -34,7 +35,7 @@ With Entity Risks, you can:
   - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
   - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
 - Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
-- (Optional) To group risk by user identity and to configure user identity notifications, configure an Entity Pack for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][9] page. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
+- Datadog recommends configuring an Entity Pack for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][9] page. When user identities sync, Entity Risks resolves each person's accounts into a single user identity and rolls up their risk, and user identity notifications become available. Without an Entity Pack, entities are only ever scored and alerted on individually. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
