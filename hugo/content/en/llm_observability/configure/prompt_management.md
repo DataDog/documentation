@@ -544,10 +544,13 @@ Include **text** within a message or **chat messages** as a group. Each referenc
 
 ### Include a prompt
 
+#### In the UI
+
+This example uses the Datadog UI to add a shared response policy to a support assistant.
+
 1. Save a prompt named `response-policy` with one System message: `Answer concisely. If you do not know the answer, say so.`
 2. In another prompt's editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
 3. Add a User message containing `{{question}}` after the include. Remove any unused empty messages.
-4. Enter a sample question, select a model, and click {{< ui >}}Run{{< /ui >}}. Save the prompt when you are satisfied.
 
 Your prompt now contains:
 
@@ -560,7 +563,30 @@ The included policy supplies the instructions; the `question` variable supplies 
 
 {{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
 
-For a source with several messages, all messages are included by default. Select {{< ui >}}Customize messages{{< /ui >}} to choose, reorder, or repeat messages without changing the source.
+All source messages are included by default. To edit an existing include, click {{< ui >}}Included Prompt{{< /ui >}} in the prompt editor, then select {{< ui >}}Customize messages{{< /ui >}} in the dialog to choose, reorder, or repeat messages without changing the source.
+
+#### With the API
+
+Use an `include` object in `template.messages` to reference an existing chat prompt. After saving `response-policy` version 1 as above, create the same support assistant by sending this JSON body to `POST /api/v2/llm-obs/v1/prompts`:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+For authentication and message-selection options, see [Create an Agent Observability prompt][11].
 
 ### Reuse text within a message
 
@@ -580,14 +606,13 @@ Answer concisely. Answer {{question}}.
 
 Keep any spaces or line breaks you need around the reference. Always specify a version; `{{>response-style}}` alone is literal text, not an include.
 
+In API requests, use the same syntax in a text `template` or a chat message's `content`.
+
 ### Review and update includes
 
 On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the references you authored. {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded messages, before runtime variables are filled in.
 
 When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find prompts that reference it. Open a consuming prompt, replace the include with the new source version, then test, save, and deploy the updated prompt. Existing versions keep their original content, even if the source is later deleted.
-
-For API authoring, see the [Agent Observability API reference][8] for include syntax, message selection, and request examples.
-
 
 ## Advanced usage
 
@@ -637,3 +662,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
+[11]: /api/latest/agent-observability/create-an-agent-observability-prompt/
