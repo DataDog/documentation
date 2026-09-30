@@ -551,9 +551,10 @@ Each include points to one exact version. Publishing a new version of the includ
 
 The following example adds a shared response policy to a support assistant prompt.
 
-1. Save a prompt named `response-policy` with one System message: `Answer concisely. If you do not know the answer, say so.`
-2. In another prompt's editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
-3. Add a User message containing `{{question}}` after the include. Remove any unused empty messages.
+1. Save a prompt with the ID `response-policy` and one {{< ui >}}System{{< /ui >}} message: `Answer concisely. If you do not know the answer, say so.`
+2. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}New Prompt{{< /ui >}}. In the Prompt Editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
+3. After the included prompt, add a {{< ui >}}User{{< /ui >}} message containing `{{question}}`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}, enter `support-assistant-composed` as the prompt ID, and click {{< ui >}}Create prompt{{< /ui >}}.
 
 Your prompt now contains:
 
