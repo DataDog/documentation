@@ -69,6 +69,10 @@ For example, the URL **https:{{< region-param key=dd_full_site >}}/event/event?i
 
 **Note**: If you have a custom Datadog subdomain, manually edit the links from the Datadog documentation with your subdomain name. For example, a link redirecting to **https:{{< region-param key=dd_full_site >}}/account/settings** becomes **https://<custom_sub-domain_name>.{{< region-param key=dd_site >}}/account/settings**.
 
+### Disable
+
+To disable a child organization, contact [Datadog support][1]. Disabling a parent organization also disables all of its active child organizations. For who can approve the request and what happens after an organization is disabled, see [Disabling your organization's account][15].
+
 ## Set up SAML
 
 SAML setup is _not_ inherited by child-organizations from the parent-organization. SAML must be configured for each child-organization individually.
@@ -174,3 +178,4 @@ Usage Attribution is an advanced feature included in the Enterprise plan. For al
 [12]: /account_management/plan_and_usage/usage_details/
 [13]: /account_management/billing/usage_attribution/
 [14]: https://app.datadoghq.com/billing/usage-attribution
+[15]: /account_management/#disabling-your-organizations-account

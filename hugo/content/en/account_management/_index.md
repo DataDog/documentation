@@ -140,7 +140,42 @@ If you have installed the [GitHub integration][9] to create events in Datadog, l
 
 ## Disabling your organization's account
 
-To disable your Datadog organization account, contact [Datadog support][10].
+To disable your Datadog organization account, contact [Datadog support][10]. The request must come from an administrator of the organization. If you are not an administrator, include an administrator on the request to approve it.
+
+Before you submit the request:
+
+- Stop or uninstall the Datadog Agent on your hosts. Data that is still being sent can continue to be ingested and billed until the organization is disabled.
+- Mute your monitors. Disabling an organization does not mute monitor notifications while the request is processed.
+- If your organization is on the US3 site and was created through Azure, [delete the Datadog resource][17] from your Azure account.
+
+### Organizations with child organizations
+
+Disabling a parent organization also disables all of its active [child organizations][7]. To keep a child organization enabled, contact your Datadog account representative to restructure your organizations before you submit the request.
+
+An administrator of a parent organization can request to disable a child organization. If the child organization belongs to a different company, an administrator of the child organization must also approve the request. For example, this applies to child organizations that a managed service provider manages for its customers.
+
+### What happens when an organization is disabled
+
+When your organization is disabled:
+
+<!-- TODO(DOCS-15292): Confirm API key timing with AAA-Identity. Support KB says keys are revoked on disable; OMT-475 mentions a grace period. -->
+- Your API keys are revoked.
+- Datadog stops ingesting new data from your organization.
+- All users are removed from the organization and can no longer log in.
+
+An administrator of the disabled organization, or of its parent organization, can contact [Datadog support][10] to re-enable it. About 30 days after an organization is disabled, Datadog permanently removes its account data, including users, SAML configuration, and integrations with their credentials. After that, the organization can no longer be re-enabled.
+
+Disabling an organization does not delete the telemetry data it sent to Datadog.
+<!-- TODO(DOCS-15292): Confirm with AAA-Identity whether telemetry in a disabled org ages out on normal retention if no deletion request is made; add a sentence if so. -->
+
+### Deleting your organization's data
+
+To request that Datadog delete your organization's data, contact [Datadog support][10] after your organization is disabled. After the deletion process starts, you have 72 hours to withdraw the request. After that, the deletion can't be canceled. Deletion can take up to 90 days to complete, as described in the [Data Processing Addendum][18].
+
+### Trial organizations
+
+<!-- TODO(DOCS-15292): Confirm what customers see and keep when a trial expires (paywalled state) before adding detail here. -->
+When a trial ends, the organization is not automatically disabled or deleted. To disable a trial organization or delete its data, follow the same process as for any other organization.
 
 [1]: https://gravatar.com
 [2]: https://support.google.com/accounts/answer/19870?hl=en
@@ -158,3 +193,5 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [14]: https://app.datadoghq.com/personal-settings/apps
 [15]: /account_management/organization_topology/
 [16]: /getting_started/access_for_enterprises/
+[17]: https://learn.microsoft.com/en-us/azure/partner-solutions/datadog/manage#delete-a-datadog-resource
+[18]: https://www.datadoghq.com/legal/data-processing-addendum/
