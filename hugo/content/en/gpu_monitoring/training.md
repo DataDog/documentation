@@ -53,7 +53,7 @@ spec:
         company.name/group-id: training_group_id
 ```
 
-To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics and `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
+To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics.
 
 After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and spans are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
