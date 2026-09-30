@@ -59,6 +59,14 @@ spec:
                 value: "always"
               - name: DD_TRACE_HOOK_MODULES
                 value: "gpu"
+              - name: DD_TRAINING_RUN_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/run-id']
+              - name: DD_TRAINING_GROUP_ID
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.annotations['company.name/group-id']
 ```
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete.
@@ -106,24 +114,6 @@ spec:
       pods:
         company.name/run-id: training_run_id
         company.name/group-id: training_group_id
-```
-
-For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block from [Step 1](#1-configure-gpu-tracing), reading the same annotations:
-
-```yaml
-ddTraceConfigs:
-  - name: DD_INJECT_NATIVE
-    value: "always"
-  - name: DD_TRACE_HOOK_MODULES
-    value: "gpu"
-  - name: DD_TRAINING_RUN_ID
-    valueFrom:
-      fieldRef:
-        fieldPath: metadata.annotations['company.name/run-id']
-  - name: DD_TRAINING_GROUP_ID
-    valueFrom:
-      fieldRef:
-        fieldPath: metadata.annotations['company.name/group-id']
 ```
 
 To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics and `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
