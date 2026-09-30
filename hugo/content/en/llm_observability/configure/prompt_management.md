@@ -126,7 +126,7 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
-To reuse an exact version of another managed prompt, request access to the [prompt composition Preview](#reuse-prompts-with-composition).
+Without prompt composition, combine prompts in application code or manage the final provider-facing prompt as a single prompt. To include one managed prompt in another, see [Reuse prompts with composition](#reuse-prompts-with-composition). Prompt composition is in Preview.
 
 ### Select a version
 
@@ -538,15 +538,18 @@ Pass these values to your model client along with the messages returned by `prom
 
 <div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
 
-Reuse shared instructions across prompts without copying them. For example, a support assistant and a billing assistant can include the same response policy.
+Prompt composition lets one prompt include another, so you can reuse shared instructions without copying them. For example, a support assistant and a billing assistant can include the same response policy. You can include another prompt in two ways:
 
-Include **text** within a message or **chat messages** as a group. Each reference uses an exact version, so updating the source does not change prompts that already include it.
+- **Chat messages**: Include some or all messages from a chat prompt.
+- **Text**: Insert a text prompt's content inside a message.
 
-### Include a prompt
+Each include points to one exact version. Publishing a new version of the included prompt doesn't change prompts that already include it.
+
+### Include chat messages
 
 #### In the UI
 
-This example uses the Datadog UI to add a shared response policy to a support assistant.
+The following example adds a shared response policy to a support assistant prompt.
 
 1. Save a prompt named `response-policy` with one System message: `Answer concisely. If you do not know the answer, say so.`
 2. In another prompt's editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
@@ -559,15 +562,15 @@ System: Answer concisely. If you do not know the answer, say so.
 User: {{question}}
 ```
 
-The included policy supplies the instructions; the `question` variable supplies a value at runtime. Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual—there is no need to fetch the policy separately.
+Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual. The retrieved prompt already contains the included messages, so you don't need to fetch `response-policy` separately.
 
 {{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
 
-All source messages are included by default. To edit an existing include, click {{< ui >}}Included Prompt{{< /ui >}} in the prompt editor, then select {{< ui >}}Customize messages{{< /ui >}} in the dialog to choose, reorder, or repeat messages without changing the source.
+By default, an include adds every message from the included prompt, in order. To include only some messages, reorder them, or repeat one, click {{< ui >}}Included Prompt{{< /ui >}} in the Prompt Editor and select {{< ui >}}Customize messages{{< /ui >}}. Customizing doesn't change the included prompt.
 
 #### With the API
 
-Use an `include` object in `template.messages` to reference an existing chat prompt. After saving `response-policy` version 1 as above, create the same support assistant by sending this JSON body to `POST /api/v2/llm-obs/v1/prompts`:
+Use an `include` object in `template.messages` to reference a specific version of a chat prompt. This example assumes a chat prompt `response-policy` with a version 1. To create a prompt that includes it, send this JSON body to `POST /api/v2/llm-obs/v1/prompts`:
 
 ```json
 {
@@ -588,9 +591,9 @@ Use an `include` object in `template.messages` to reference an existing chat pro
 
 For authentication and message-selection options, see [Create an Agent Observability prompt][11].
 
-### Reuse text within a message
+### Include text in a message
 
-To reuse a phrase rather than complete messages, select a **text prompt** through {{< ui >}}Include Prompt{{< /ui >}} and click {{< ui >}}Insert text{{< /ui >}}. This inserts a reference into the last editable message.
+To reuse a phrase instead of complete messages, click {{< ui >}}Include Prompt{{< /ui >}}, select a text prompt and version, and click {{< ui >}}Insert text{{< /ui >}}. The reference is added to the end of the last editable message. Move it where you need it.
 
 For example, if `response-style` version 1 contains `Answer concisely.`, write:
 
