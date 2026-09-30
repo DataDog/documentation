@@ -41,8 +41,9 @@ hugo/local/bin/py/vale                                             @DataDog/docu
 .github/workflows/gif_check.yml                               @DataDog/documentation
 .github/workflows/preview_link.yml                            @DataDog/documentation
 .github/workflows/vale_linter.yml                             @DataDog/documentation
+hugo/local/**/*                                                    @DataDog/WebOps-Platform
 hugo/local/bin/py/check_cache_values.py                            @DataDog/documentation
-hugo/local/bin/py/integration-finder.py                            @DataDog/documentation
+hugo/local/bin/py/integration-finder.py                            @DataDog/documentation   @DataDog/docs-dev
 hugo/local/bin/py/missing_metrics.py                               @DataDog/documentation
 hugo/local/bin/py/preview_links.py                                 @DataDog/documentation
 hugo/local/bin/py/preview-links-template.mako                      @DataDog/documentation
