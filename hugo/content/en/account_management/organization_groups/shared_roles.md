@@ -29,7 +29,7 @@ To also stop member organizations from creating their own custom roles, set the 
 
 In a member organization, shared roles appear on the {{< ui >}}Roles{{< /ui >}} page with the type {{< ui >}}Group Managed{{< /ui >}}. Other roles show the type {{< ui >}}Custom{{< /ui >}} or {{< ui >}}Datadog Managed{{< /ui >}}.
 
-<!-- Screenshot needed (org-groups-shared-roles-member-org.png): Member organization > Organization Settings > Roles. Show the Type column with Group Managed, Custom, and Datadog Managed roles, and the disabled Edit and Delete actions on a Group Managed row. -->
+{{< img src="account_management/org-groups-shared-roles-member-org.png" alt="The Roles page in a member organization, with Datadog Managed, Group Managed, and Custom roles in the Type column." style="width:100%;" >}}
 
 Shared roles are always {{< ui >}}Group Managed{{< /ui >}}. Unlike [organization group policies][3], they have no {{< ui >}}Override Allowed{{< /ui >}} tier, so a member organization cannot change a shared role's permissions for itself. To give one member organization a variation of a shared role, create a separate shared role. If role exclusivity is {{< ui >}}Flexible{{< /ui >}}, the member organization can also clone the shared role into a custom role and edit the clone.
 
@@ -44,7 +44,7 @@ Role exclusivity controls whether member organizations can create their own cust
 | {{< ui >}}Flexible{{< /ui >}} | Member organizations can create, clone, and edit their own custom roles, and use shared roles. |
 | {{< ui >}}Strict{{< /ui >}} | Member organizations can use only shared roles and Datadog managed roles. Creating, cloning, and editing custom roles is blocked. |
 
-<!-- Screenshot needed (org-groups-shared-roles-exclusivity.png): Owner organization > Organization Groups > a group > Roles tab, Role Exclusivity section with Strict selected. -->
+{{< img src="account_management/org-groups-shared-roles-exclusivity.png" alt="The Roles tab of an organization group, with Strict selected in the Role Exclusivity section." style="width:100%;" >}}
 
 When role exclusivity is {{< ui >}}Strict{{< /ui >}}:
 
@@ -53,7 +53,7 @@ When role exclusivity is {{< ui >}}Strict{{< /ui >}}:
 - **The restrictions also apply to the API and Terraform.** Terraform applies that create or modify custom roles in member organizations fail.
 - **The owner organization is included** if it is a member of its own group.
 
-<!-- Screenshot needed (org-groups-shared-roles-strict-member.png): Member organization in a group set to Strict > Organization Settings > Roles. Show the disabled New Role button and a frozen custom role with Edit and Clone disabled and Delete available, with the tooltip visible. -->
+{{< img src="account_management/org-groups-shared-roles-strict-member.png" alt="The Roles page in a member organization of a Strict group, with the New Role button disabled and a Group Managed tooltip." style="width:100%;" >}}
 
 Switching a group back to {{< ui >}}Flexible{{< /ui >}} lets member organizations create and edit custom roles again, including frozen ones.
 
@@ -63,7 +63,7 @@ Switching a group back to {{< ui >}}Flexible{{< /ui >}} lets member organization
 
 Manage shared roles from the {{< ui >}}Roles{{< /ui >}} tab of an organization group in the owner organization.
 
-<!-- Screenshot needed (org-groups-shared-roles-tab.png): Owner organization > Organization Settings > Organization Groups > a group > Roles tab. Show the Shared Roles list with at least two roles, the Group Managed tier, the Add Role button, and the Edit, Clone, and Disable row actions. -->
+{{< img src="account_management/org-groups-shared-roles-tab.png" alt="The Shared Roles list on an organization group's Roles tab, with a Group Managed role and the Add Role button." style="width:100%;" >}}
 
 ### Create a shared role
 
