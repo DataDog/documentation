@@ -93,7 +93,7 @@ To use pod labels instead of annotations, use `metadata.labels['<LABEL_KEY>']` a
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete.
 
-### 3. Label the training workload
+### 3. Label the GPU workload
 
 Add the label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod template:
 
