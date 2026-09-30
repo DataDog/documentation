@@ -788,7 +788,7 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Select any other resource-level permissions you need for the role.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27]. When write capabilities are disabled for the organization, write tools are hidden for all users, regardless of role permissions. See [Write tools are missing](#write-tools-are-missing).
+<div class="alert alert-info">MCP Server tools also require global, organization-wide {{< ui >}}MCP Access{{< /ui >}} and {{< ui >}}MCP Write Access{{< /ui >}} capabilities, which are managed by organization administrators in <a href="https://app.datadoghq.com/organization-settings/preferences">Organization Settings</a>. When {{< ui >}}MCP Write Access{{< /ui >}} is disabled for the organization, write tools are hidden for all users, regardless of individual user role permissions. See <a href="#write-tools-are-missing">Troubleshooting</a> for more details.</div>
 
 ### Restrict network access
 
@@ -951,9 +951,9 @@ Local authentication is recommended for Cline and when remote authentication is 
 
 ### Write tools are missing
 
-If your AI client lists Datadog MCP Server tools that read data but not tools that create or modify resources (such as `create_datadog_monitor`), check the following:
+If your AI client does not list Datadog MCP Server tools that create or modify resources (such as `create_datadog_monitor`), check the following:
 
-- **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of role permissions. An organization administrator can re-enable write capabilities from [Organization Settings][27].
+- **Organization write access**: When MCP write capabilities are disabled for your organization, the MCP Server hides write tools from the tool list for all users, regardless of individual user role permissions. An organization administrator can enable {{< ui >}}MCP Write Access{{< /ui >}} from [Organization Settings][27].
 - **Role permissions**: Confirm that your role includes the `mcp_write` permission and the permission for the underlying resource, such as [Monitors Write][24] for creating monitors. See [Required permissions](#required-permissions).
 - **Toolsets**: Confirm that you enabled the [toolset](#toolsets) that contains the tool. If you don't specify toolsets, only `core` tools are available. For example, `create_datadog_monitor` is in the `alerting` toolset. Preview toolsets are not included in `toolsets=all`, so request them by name.
 - **Omitted tools**: Confirm that the tool is not listed in the [`omit_tools`](#omit-specific-tools) query parameter.
