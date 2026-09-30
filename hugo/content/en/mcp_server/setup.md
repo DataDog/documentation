@@ -772,6 +772,10 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 
 ## Required permissions
 
+The Datadog MCP Server requires both [user role permissions](#user-role-permissions) and [organization-wide access](#organization-wide-access). See the following sections for details.
+
+### User role permissions
+
 MCP Server tools require the following [Datadog user role permissions][22]:
 
 | Permission | Required for |
@@ -788,7 +792,11 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Select any other resource-level permissions you need for the role.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-<div class="alert alert-info">MCP Server tools also require global, organization-wide {{< ui >}}MCP Access{{< /ui >}} and {{< ui >}}MCP Write Access{{< /ui >}} capabilities, which are managed by organization administrators in <a href="https://app.datadoghq.com/organization-settings/preferences">Organization Settings</a>. When {{< ui >}}MCP Write Access{{< /ui >}} is disabled for the organization, write tools are hidden for all users, regardless of individual user role permissions. See <a href="#write-tools-are-missing">Troubleshooting</a> for more details.</div>
+### Organization-wide access
+
+MCP Server tools also require global, organization-wide {{< ui >}}MCP Access{{< /ui >}} and {{< ui >}}MCP Write Access{{< /ui >}} capabilities, which are managed by organization administrators in [Organization Settings][27].
+
+When {{< ui >}}MCP Write Access{{< /ui >}} is disabled for an organization, write tools are hidden for all users, regardless of individual user role permissions. See [Troubleshooting](#write-tools-are-missing) for more information.
 
 ### Restrict network access
 
