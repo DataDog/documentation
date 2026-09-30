@@ -33,15 +33,15 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
 
 1. Expand a pipeline and click {{< ui >}}Add...{{< /ui >}} > {{< ui >}}Grok Parser{{< /ui >}}.
 1. {{< ui >}}Name the processor{{< /ui >}}: Enter a name for the Grok parser.
-1. {{< ui >}}Define parsing rules{{< /ui >}} > {{< ui >}}Log samples{{< /ui >}}: Review the log samples, or add your own (up to 10 total, 5000 characters each).
+1. {{< ui >}}Define parsing rules{{< /ui >}} > {{< ui >}}Log samples{{< /ui >}}: Review the log samples, or click {{< ui >}}Add a new sample{{< /ui >}} to add your own (up to 10 total, 5000 characters each).
    **Note**: Datadog pulls the sample logs from the five highest-volume log patterns matching your pipeline filter.
-1. {{< ui >}}Define parsing rules{{< /ui >}} > {{< ui >}}Parsing rules{{< /ui >}}: Click {{< ui >}}Tap to Parse{{< /ui >}} to generate rules that match your samples. You can also write your own rules. For Grok syntax, see [Parsing][1].
+1. {{< ui >}}Define parsing rules{{< /ui >}} > {{< ui >}}Parsing rules{{< /ui >}}: After you add a log sample, click {{< ui >}}Tap to Parse{{< /ui >}} to generate rules that match your samples. You can also write your own rules. For Grok syntax, see [Parsing][1].
    <div class="alert alert-info">Tap to Parse does not consume <a href="/account_management/billing/ai_credits/">AI Credits</a>.</div>
    {{< site-region region="gov,gov2" >}}
    <div class="alert alert-info">Tap to Parse is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
    {{< /site-region >}}
 1. (Optional) {{< ui >}}Advanced Settings{{< /ui >}}: Parse a specific attribute instead of the default `message` attribute, or define helper rules. See [Advanced settings][4].
-1. Test your rules: Select a sample to evaluate it against your parsing rules and display the result in the {{< ui >}}Preview parsing{{< /ui >}} panel. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. Select a sample to evaluate it against your parsing rules and display the result in the {{< ui >}}Preview parsing{{< /ui >}} panel. All samples show a status: {{< ui >}}Match{{< /ui >}}, {{< ui >}}Match{{< /ui >}} with a warning when a rule matches but extracts no fields, or {{< ui >}}No Match{{< /ui >}}.
 1. Click {{< ui >}}Create{{< /ui >}}.
 
 
