@@ -21,15 +21,15 @@ Request Access is in Preview and is rolling out gradually. It may not be availab
 
 Getting access to a feature in Datadog could mean knowing who to ask, filing a ticket, and waiting for a response. For organizations managing many roles and users, this slows users down and creates manual work for administrators.
 
-Request Access lets a user ask for the permission they need directly from the page where they were blocked, with a justification for the request. Administrators can review and approve these requests from a central queue, or configure specific roles to grant themselves automatically. Every request, decision, and justification appears in [Audit Trail][2], so access changes stay traceable without a support ticket.
+Request Access lets a user ask for the permission they need directly from the page where they were blocked, with a justification for the request. Administrators can review and approve these requests from a central queue, or configure specific roles to be granted automatically. Every request, decision, and justification appears in [Audit Trail][2], so access changes stay traceable without a support ticket.
 
-## To enable or disable in-product Request Access
+## Enable or disable Request Access
 
 **Note**: You must have the `user_access_manage` permission.
 
 To enable manual or auto-approval requests for your organization, navigate to [Organization Settings][1] and select {{< ui >}}Access Controls{{< /ui >}}, then create the corresponding configuration. See [Configuring access requests as an administrator](#configuring-access-requests-as-an-administrator) for setup details.
 
-To disable manual or auto-approval requests, delete all corresponding configurations. This is especially relevant if you manage access through a separate internal access elevation process.
+To disable manual or auto-approval requests, delete all corresponding configurations. Disabling is especially relevant if you manage access through a separate internal access elevation process.
 
 ## Requesting access as an end user
 
@@ -41,11 +41,11 @@ When you navigate to a page that requires a permission you don't have, Datadog s
 2. Enter a justification for the request.
 3. Submit the request.
 
-If a relevant auto-approval is configured, you'll be notified and granted access within a minute. Other requests are forwarded to specific admins for manual approval.
+If a matching auto-approval configuration exists, Datadog grants access within a minute and notifies you. Otherwise, Datadog sends the request to your organization's approvers for manual review.
 
 ### From the Roles page
 
-You can also request a role directly, without first hitting a permission-denied page.
+You can also request a role directly, without first reaching a permission-denied page.
 
 1. Navigate to [Organization Settings][1] and select {{< ui >}}Roles{{< /ui >}}.
 2. Find the role you want and open its details panel.
@@ -60,7 +60,7 @@ Navigate to [Organization Settings][1] and select {{< ui >}}Access Controls{{< /
 
 ### Manual approval
 
-Manual approval escalates a request to a list of reviewers, who can approve or deny it. Your organization supports one manual approval configuration, and enabling it turns on manual requests for every role in the organization.
+Manual approval escalates a request to a list of approvers, who can approve or deny it. Your organization supports one manual approval configuration, and enabling it turns on manual requests for every role in the organization.
 
 1. Navigate to [Organization Settings][1] and select {{< ui >}}Access Controls{{< /ui >}}.
 2. Create a manual approval configuration.
@@ -68,7 +68,7 @@ Manual approval escalates a request to a list of reviewers, who can approve or d
 
 If you don't designate approvers, every user with `user_access_manage` can still approve or deny requests, but none of them receive email notifications.
 
-Approvers review pending requests from the {{< ui >}}Pending Requests{{< /ui >}} tab on the Access Controls page, where each request shows the requester, the role, and their justification. Datadog emails the requester after an approver takes action.
+Approvers review pending requests from the {{< ui >}}Pending Requests{{< /ui >}} tab on the Access Controls page, where each request shows the requester, the role, and the requester's justification. Datadog emails the requester after an approver takes action.
 
 ### Auto-approval for roles and permissions
 
@@ -83,7 +83,7 @@ Auto-approval lets eligible users unblock themselves immediately, without a manu
 
 An auto-approval configuration can grant a role for a limited time instead of permanently. Set the assignment duration when you create the configuration: 1 hour, 1 day, 1 week, 30 days, or permanent.
 
-If a temporary role assignment expires, Datadog revokes it within 5 minutes. You can view a user's active and expiring role assignments from their profile page, or from [Organization Settings][1] under {{< ui >}}Users{{< /ui >}}.
+When a temporary role assignment expires, Datadog revokes it within 5 minutes. You can view a user's active and expiring role assignments from their profile page, or from [Organization Settings][1] under {{< ui >}}Users{{< /ui >}}.
 
 ### Auto-approval for assets
 
@@ -95,22 +95,20 @@ Asset auto-approval extends the same self-service model to individual resources.
 - Notebooks
 - Reference Tables
 - Synthetic tests
-- Synthetics global variables
-- Synthetics private locations
+- Synthetic global variables
+- Synthetic private locations
 
-**Note**: Like role and permission auto-approval, asset auto-approval configurations can be scoped to specific users, teams, or roles.
-
-Enabling a resource type applies the configuration to every resource of that type. Configure requester scoping separately for each access level. For example, you can allow all users to request viewer access to dashboards while limiting editor access requests to a specific team.
+Enabling a resource type applies the configuration to every resource of that type. Like role and permission auto-approval, asset auto-approval configurations can be scoped to specific users, teams, or roles. Configure requester scoping separately for each access level. For example, you can allow all users to request viewer access to dashboards while limiting editor access requests to a specific team.
 
 To request access to an individual asset, go to the asset and click {{< ui >}}Request Access{{< /ui >}}. If you already have viewer access and want to request a higher permission level, open the existing sharing settings for the asset instead.
 
-## Audit trail
+## Audit Trail
 
 Datadog logs every access request in [Audit Trail][2], including the requester, the role or resource requested, the justification, and the outcome. Use Audit Trail to review access history without relying on ticket or chat history.
 
 ## How role selection works
 
-When a user requests access due to a missing permission, Datadog matches to the role that satisfies the required permission with the fewest total permissions. If several roles tie on permission count, Datadog picks the first one alphabetically. This selection method limits over-provisioning without requiring an administrator to map every role to every possible access scenario in advance.
+When a user requests access because of a missing permission, Datadog selects the role that satisfies the required permission with the fewest total permissions. If several roles tie on permission count, Datadog picks the first one alphabetically. This selection method limits over-provisioning without requiring an administrator to map every role to every possible access scenario in advance.
 
 ## Limitations
 
