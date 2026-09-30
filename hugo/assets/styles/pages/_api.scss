@@ -124,15 +124,27 @@ $ddpurple: #632ca6;
 
 .api-changelog-date-section {
     position: relative;
-    padding: 0 0 32px 26px;
-    border-left: 2px solid $gray-border;
-    margin-left: 6px;
+    display: grid;
+    grid-template-columns: 96px 28px minmax(0, 1fr);
+    padding-bottom: 32px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        left: 109px;
+        width: 2px;
+        background: $gray-border;
+    }
 
     &::before {
         content: '';
         position: absolute;
-        top: 6px;
-        left: -7px;
+        z-index: 1;
+        top: 7px;
+        left: 104px;
         width: 12px;
         height: 12px;
         border-radius: 50%;
@@ -140,33 +152,36 @@ $ddpurple: #632ca6;
         border: 3px solid $gray-light;
     }
 
-    &:last-child {
-        border-left-color: transparent;
+    &.is-last-visible::after {
+        bottom: auto;
+        height: 13px;
     }
 }
 
 .api-changelog-date-header {
+    grid-column: 1;
+    grid-row: 1;
     display: flex;
     align-items: center;
-    margin-bottom: 14px;
+    justify-content: flex-end;
+    height: 26px;
 
     h2 {
         margin: 0;
         padding: 0;
         font-family: monospace;
-        font-size: 22px;
+        font-size: 14px;
         font-weight: 700;
+        line-height: 1;
         pointer-events: auto;
         background-clip: border-box;
-
-        a {
-            color: $gray-dark;
-            text-decoration: none;
-        }
+        color: $gray-dark;
     }
 }
 
 .api-changelog-entries {
+    grid-column: 3;
+    grid-row: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -337,6 +352,22 @@ $ddpurple: #632ca6;
 }
 
 @include media-breakpoint-down(md) {
+    .api-changelog-date-section {
+        grid-template-columns: 82px 24px minmax(0, 1fr);
+
+        &::after {
+            left: 93px;
+        }
+
+        &::before {
+            left: 88px;
+        }
+    }
+
+    .api-changelog-date-header h2 {
+        font-size: 12px;
+    }
+
     .api-changelog-entry {
         flex-direction: column;
         gap: 8px;

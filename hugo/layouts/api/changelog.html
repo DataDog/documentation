@@ -104,7 +104,7 @@
           {{ end }}
           <section id="changes-{{ $entry.date }}" class="api-changelog-date-section{{ if ge $entryIndex 20 }} d-none{{ end }}" data-date="{{ $entry.date }}">
             <div class="api-changelog-date-header">
-              <h2><a href="#changes-{{ $entry.date }}"><time datetime="{{ $entry.date }}">{{ $entry.date }}</time></a></h2>
+              <h2><time datetime="{{ $entry.date }}">{{ $entry.date }}</time></h2>
             </div>
             <div class="api-changelog-entries">
           {{ $currentDate = $entry.date }}
