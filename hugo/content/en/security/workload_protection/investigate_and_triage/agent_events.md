@@ -51,7 +51,7 @@ Use the investigation graph to understand how the detected activity fits into th
 
 #### Event tree
 
-The {{< ui >}}Event Tree{{< /ui >}} displays the complete execution lineage for an Agent event, including intermediate processes. It also shows the process, file, network, or kernel activity that matched the Agent rule.
+The {{< ui >}}Event Tree{{< /ui >}} traces execution from the system init process through intermediate processes to the matching process, file, network, or kernel activity. Use it to reconstruct the execution path that led to the event and identify the affected infrastructure.
 
 {{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_tree.png" alt="Event tree showing the affected host, pod, container, process lineage, and file activity for an Agent event" width="100%">}}
 
