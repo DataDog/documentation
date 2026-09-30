@@ -211,6 +211,14 @@ agent diagnose show-metadata agent-telemetry
 | **Autodiscovery**                          |                                                                                                                        |
 | autodiscovery.discovery_queue_depth         | Number of services currently in the Agent's integration discovery queue                                                |
 | autodiscovery.discovery_results             | Count of the Agent's integration discovery attempts, tagged by result (success or failure)                             |
+| **Process Manager**                         |                                                                                                                        |
+| runtime.procmgr_daemon_reachable            | Whether the Agent can reach the `dd-procmgrd` process manager daemon                                                   |
+| runtime.procmgr_daemon_ready                | Whether `dd-procmgrd` reports that it is ready to supervise processes                                                  |
+| runtime.procmgr_process_running             | Whether a process supervised by `dd-procmgrd` is running, per process                                                  |
+| runtime.procmgr_process_state               | The state `dd-procmgrd` reports for a supervised process, tagged by process and state                                  |
+| runtime.agent_service_installed             | Whether an Agent service is installed on the host, per service                                                         |
+| runtime.agent_service_procmgr_configured    | Whether an Agent service has a `processes.d` configuration file for `dd-procmgrd`, per service                         |
+| runtime.agent_service_management_mode       | Which supervisor manages an Agent service, tagged by service and mode (none, procmgr, systemd, windows_service)        |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | **APM**                                     |                                                                                                                        |

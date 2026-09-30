@@ -98,7 +98,9 @@ Install `@datadog/openfeature-browser`, `@openfeature/web-sdk`, and `@openfeatur
 yarn add @datadog/openfeature-browser @openfeature/web-sdk @openfeature/core
 {{< /code-block >}}
 
-Then, add the following to your project to initialize the SDK:
+Use `DatadogProvider` for most browser applications, as shown below. It fetches updated assignments when the evaluation context changes, adding to [Monthly Flag Configuration Requests (MFCR)][2]. For repeated context changes during a session, use `fetchRulesConfiguration()` with `DatadogCoreProvider` to [load rules once and evaluate across changing contexts][1]. The initial rules fetch and later refreshes count toward MFCR; local context changes do not.
+
+Add the following to your project to initialize the SDK:
 
 {{< site-region region="gov,gov2" >}}<div class="alert alert-caution">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
@@ -126,6 +128,9 @@ await OpenFeature.setProviderAndWait(provider);
 {{< /code-block >}}
 
 <div class="alert alert-info">The browser SDK emits three independent telemetry streams, all enabled by default. <code>enableExposureLogging</code> sends per-evaluation exposure events to the exposures intake. <code>enableFlagEvaluationTracking</code> sends aggregated evaluation telemetry to the flag-evaluation intake. <code>enableRumFeatureFlagTracking</code> attaches flag evaluations to RUM events and is the setting that can affect RUM usage. Disable only the stream you do not need.</div>
+
+[1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/#getting-started
+[2]: /feature_flags/concepts/monthly_flag_configuration_requests/
 
 {{% /tab %}}
 {{% tab "Node.js server" %}}
