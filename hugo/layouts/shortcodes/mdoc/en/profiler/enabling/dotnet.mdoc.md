@@ -66,6 +66,82 @@ Unlike APM, Continuous Profiler is not activated by default when the APM package
 
 ## Installation
 
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the .NET profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my .NET service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- .csproj, .fsproj, or .vbproj files to determine the target framework
+  (.NET Framework vs .NET Core / .NET 5+) and version.
+- NuGet references (PackageReference in project files or packages.config)
+  to check if Datadog.Trace or Datadog.Trace.Bundle is already installed.
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
+  image (Linux vs Windows, Alpine vs Debian), startup command, and existing
+  Datadog Agent configuration.
+- launchSettings.json, web.config, or appsettings.json for hosting model
+  (IIS, Kestrel, self-hosted) and existing environment variables.
+- Existing environment variables or .env files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, CORECLR_ENABLE_PROFILING, COR_ENABLE_PROFILING,
+  or DD_PROFILING_ENABLED.
+- Azure App Service configuration (azure-pipelines.yml, ARM templates,
+  or app settings).
+- Windows Service registration (sc.exe commands, installer projects).
+
+Determine which installation AND enablement path applies. There are six
+possible combinations:
+
+Installation paths:
+a. Linux with Single Step APM Instrumentation — nothing extra to install.
+b. Linux — install the .NET Tracer package (dpkg, rpm, or tar.gz).
+c. Windows — install using the .NET Monitoring MSI installer.
+d. NuGet — add Datadog.Trace.Bundle NuGet package (does not support IIS).
+e. Azure App Service — install the Datadog APM extension (Web Apps only).
+
+Enablement paths (each requires different environment variables):
+1. Linux with Single Step APM — only DD_PROFILING_ENABLED=1 is needed.
+2. Linux standalone — set CORECLR_ENABLE_PROFILING=1, CORECLR_PROFILER,
+   CORECLR_PROFILER_PATH, DD_DOTNET_TRACER_HOME, LD_PRELOAD, and
+   DD_PROFILING_ENABLED=1.
+3. IIS — set environment variables in the Windows Registry under
+   HKLM\System\CurrentControlSet\Services\WAS and W3SVC.
+   Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
+   Restart IIS with net stop /y was && net start w3svc (not iisreset).
+4. Windows Services — set environment variables in the service's
+   Registry key (HKLM\System\CurrentControlSet\Services\<ServiceName>).
+   Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
+5. Windows standalone apps — set environment variables in a batch file
+   or shell. Use CORECLR_* or COR_* based on runtime.
+6. NuGet — set CORECLR_ENABLE_PROFILING, CORECLR_PROFILER,
+   CORECLR_PROFILER_PATH (OS/arch-specific path under the app directory),
+   LD_PRELOAD (Linux only), and DD_DOTNET_TRACER_HOME.
+
+Present a summary of what you detected (framework, OS, hosting model,
+installation path, enablement path), then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Which extra profile types to enable beyond CPU and wall time
+  (Exceptions, Allocations, Lock Contention, Live Heap, GC).
+- Anything ambiguous from the project files.
+
+Generate the setup steps for the detected path:
+- Show the complete environment variable block, Registry configuration,
+  PowerShell script, batch file, or modified Dockerfile as appropriate.
+- Set DD_PROFILING_ENABLED=1, DD_SERVICE, DD_ENV, and DD_VERSION.
+- Enable any requested extra profile types
+  (DD_PROFILING_EXCEPTION_ENABLED, DD_PROFILING_ALLOCATION_ENABLED,
+  DD_PROFILING_LOCK_ENABLED, DD_PROFILING_HEAP_ENABLED).
+- Warn that containers require more than one CPU core.
+- Note: starting with v2.14.0, CORECLR_PROFILER / COR_PROFILER do not
+  need to be set if the SDK was installed using the MSI.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=dot_net
+```
+
+
 Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][7]. The profiler ships together with the SDK (beginning with v2.8.0), so if you are already using [APM to collect traces][1] for your application, you can skip installing the library and go directly to [Enabling the Profiler](#enabling-the-profiler).
 
 Otherwise, install the profiler using the following steps, depending on your operating system.
@@ -439,81 +515,6 @@ You can configure the profiler using the following environment variables. Most o
 For IIS applications, you must set environment variables in the Registry (under `HKLM\System\CurrentControlSet\Services\WAS` and `HKLM\System\CurrentControlSet\Services\W3SVC` nodes) as shown in the Windows Service tab, above. The environment variables are applied for *all* IIS applications.
 Starting with IIS 10, you can set environment variables for each IIS application in the [`C:\Windows\System32\inetsrv\config\applicationhost.config` file][17]. Read the [Microsoft documentation][18] for more details.
 {% /alert %}
-
-## Set up the profiler with an AI coding assistant
-
-Use the following prompt with a local AI coding agent to set up the .NET profiler for your service. Copy and paste this prompt into your AI agent to get started.
-
-```text
-You are helping me set up Datadog Continuous Profiler for my .NET service.
-
-First, scan my project to auto-detect as much as possible. Look for:
-- .csproj, .fsproj, or .vbproj files to determine the target framework
-  (.NET Framework vs .NET Core / .NET 5+) and version.
-- NuGet references (PackageReference in project files or packages.config)
-  to check if Datadog.Trace or Datadog.Trace.Bundle is already installed.
-- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
-  image (Linux vs Windows, Alpine vs Debian), startup command, and existing
-  Datadog Agent configuration.
-- launchSettings.json, web.config, or appsettings.json for hosting model
-  (IIS, Kestrel, self-hosted) and existing environment variables.
-- Existing environment variables or .env files referencing DD_SERVICE,
-  DD_ENV, DD_VERSION, CORECLR_ENABLE_PROFILING, COR_ENABLE_PROFILING,
-  or DD_PROFILING_ENABLED.
-- Azure App Service configuration (azure-pipelines.yml, ARM templates,
-  or app settings).
-- Windows Service registration (sc.exe commands, installer projects).
-
-Determine which installation AND enablement path applies. There are six
-possible combinations:
-
-Installation paths:
-a. Linux with Single Step APM Instrumentation — nothing extra to install.
-b. Linux — install the .NET Tracer package (dpkg, rpm, or tar.gz).
-c. Windows — install using the .NET Monitoring MSI installer.
-d. NuGet — add Datadog.Trace.Bundle NuGet package (does not support IIS).
-e. Azure App Service — install the Datadog APM extension (Web Apps only).
-
-Enablement paths (each requires different environment variables):
-1. Linux with Single Step APM — only DD_PROFILING_ENABLED=1 is needed.
-2. Linux standalone — set CORECLR_ENABLE_PROFILING=1, CORECLR_PROFILER,
-   CORECLR_PROFILER_PATH, DD_DOTNET_TRACER_HOME, LD_PRELOAD, and
-   DD_PROFILING_ENABLED=1.
-3. IIS — set environment variables in the Windows Registry under
-   HKLM\System\CurrentControlSet\Services\WAS and W3SVC.
-   Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
-   Restart IIS with net stop /y was && net start w3svc (not iisreset).
-4. Windows Services — set environment variables in the service's
-   Registry key (HKLM\System\CurrentControlSet\Services\<ServiceName>).
-   Use CORECLR_* for .NET Core/.NET 5+ or COR_* for .NET Framework.
-5. Windows standalone apps — set environment variables in a batch file
-   or shell. Use CORECLR_* or COR_* based on runtime.
-6. NuGet — set CORECLR_ENABLE_PROFILING, CORECLR_PROFILER,
-   CORECLR_PROFILER_PATH (OS/arch-specific path under the app directory),
-   LD_PRELOAD (Linux only), and DD_DOTNET_TRACER_HOME.
-
-Present a summary of what you detected (framework, OS, hosting model,
-installation path, enablement path), then ask ONLY about what you could
-not determine:
-- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Which extra profile types to enable beyond CPU and wall time
-  (Exceptions, Allocations, Lock Contention, Live Heap, GC).
-- Anything ambiguous from the project files.
-
-Generate the setup steps for the detected path:
-- Show the complete environment variable block, Registry configuration,
-  PowerShell script, batch file, or modified Dockerfile as appropriate.
-- Set DD_PROFILING_ENABLED=1, DD_SERVICE, DD_ENV, and DD_VERSION.
-- Enable any requested extra profile types
-  (DD_PROFILING_EXCEPTION_ENABLED, DD_PROFILING_ALLOCATION_ENABLED,
-  DD_PROFILING_LOCK_ENABLED, DD_PROFILING_HEAP_ENABLED).
-- Warn that containers require more than one CPU core.
-- Note: starting with v2.14.0, CORECLR_PROFILER / COR_PROFILER do not
-  need to be set if the SDK was installed using the MSI.
-
-Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=dot_net
-```
 
 [1]: /tracing/trace_collection/
 [2]: /profiler/enabling/supported_versions/

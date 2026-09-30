@@ -21,6 +21,48 @@ Continuous Profiler is not supported on serverless platforms, such as AWS Lambda
 
 ## Installation
 
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the Ruby profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my Ruby service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- Gemfile and Gemfile.lock to determine the Ruby version and whether the
+  datadog gem (or older ddtrace gem) is already a dependency.
+- .ruby-version or .tool-versions for the Ruby version.
+- config.ru, Procfile, bin/rails, puma.rb, unicorn.rb, or passenger config
+  to determine how the application starts.
+- Existing Datadog.configure blocks in config/initializers/ or application
+  entrypoints to detect current APM or profiler usage.
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
+  image (check if Alpine/musl), startup command, and existing Datadog
+  Agent configuration.
+- Existing environment variables or .env files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Whether allocation or heap profiling is needed beyond CPU and wall time.
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- Add the datadog gem (~> 2.30) to the Gemfile if not already present.
+- Enable profiling using environment variables (DD_PROFILING_ENABLED=true)
+  or a Datadog.configure block, matching the project's existing pattern.
+- For Rails apps, create config/initializers/datadog.rb if using in-code config.
+- Wrap the start command with bundle exec ddprofrb exec. If Phusion Passenger
+  is detected, use require 'datadog/profiling/preload' instead.
+- Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- Show the complete modified startup command or Dockerfile.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=ruby
+```
+
+
 To begin profiling applications:
 
 1. Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3].
@@ -120,47 +162,6 @@ Alternatively, you can set profiler parameters in code with these functions, ins
 | `c.service`                                           | String  | The [service][11] name, for example, `web-backend`.                                                                                     |
 | `c.version`                                           | String  | The [version][11] of your service.                                                                                                      |
 | `c.tags`                                              | Hash    | Tags to apply to an uploaded profile.                                                                                                   |
-
-## Set up the profiler with an AI coding assistant
-
-Use the following prompt with a local AI coding agent to set up the Ruby profiler for your service. Copy and paste this prompt into your AI agent to get started.
-
-```text
-You are helping me set up Datadog Continuous Profiler for my Ruby service.
-
-First, scan my project to auto-detect as much as possible. Look for:
-- Gemfile and Gemfile.lock to determine the Ruby version and whether the
-  datadog gem (or older ddtrace gem) is already a dependency.
-- .ruby-version or .tool-versions for the Ruby version.
-- config.ru, Procfile, bin/rails, puma.rb, unicorn.rb, or passenger config
-  to determine how the application starts.
-- Existing Datadog.configure blocks in config/initializers/ or application
-  entrypoints to detect current APM or profiler usage.
-- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
-  image (check if Alpine/musl), startup command, and existing Datadog
-  Agent configuration.
-- Existing environment variables or .env files referencing DD_SERVICE,
-  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
-
-Present a summary of what you detected, then ask ONLY about what you could
-not determine:
-- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Whether allocation or heap profiling is needed beyond CPU and wall time.
-- Anything ambiguous from the project files.
-
-Generate the setup steps tailored to what you found:
-- Add the datadog gem (~> 2.30) to the Gemfile if not already present.
-- Enable profiling using environment variables (DD_PROFILING_ENABLED=true)
-  or a Datadog.configure block, matching the project's existing pattern.
-- For Rails apps, create config/initializers/datadog.rb if using in-code config.
-- Wrap the start command with bundle exec ddprofrb exec. If Phusion Passenger
-  is detected, use require 'datadog/profiling/preload' instead.
-- Set DD_SERVICE, DD_ENV, and DD_VERSION.
-- Show the complete modified startup command or Dockerfile.
-
-Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=ruby
-```
 
 [1]: /tracing/trace_collection/
 [2]: /profiler/enabling/supported_versions/
