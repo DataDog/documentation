@@ -96866,6 +96866,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -96997,6 +97003,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
