@@ -35,7 +35,7 @@ With Entity Risks, you can:
   - **Sources that provide identity and resource entities** (such as users, service identities, assumed roles, compute instances, and storage containers): AWS, Azure, GCP, GitHub, Microsoft 365, and Okta.
   - **Sources that provide user entities identified by email address**: 1Password, Cisco Duo, Cloudflare, CrowdStrike, Google Workspace, JumpCloud, LastPass, Salesforce, Slack, and Zscaler Internet Access (ZIA).
 - Many supported sources use an [out-of-the-box OCSF pipeline][8] that requires no additional configuration. If a supported source is not producing entities, confirm that its out-of-the-box OCSF pipeline is active. Pipelines that predate OCSF support, and customized pipelines, may not include the required OCSF processing.
-- Datadog recommends configuring an Entity Pack for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][9] page. When user identities sync, Entity Risks resolves each person's accounts into a single user identity and rolls up their risk, and user identity notifications become available. Without an Entity Pack, entities are only ever scored and alerted on individually. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
+- Datadog recommends configuring an Entity Pack for your identity provider (Okta, Google Workspace, or Microsoft Entra ID) on the [Content Packs][9] page. When user identities sync, Entity Risks resolves each person's accounts into a single user identity and rolls up their risk. User identity notifications also become available. Without an Entity Pack, entities are only ever scored and alerted on individually. See [Risk grouped by user identity](#risk-grouped-by-user-identity).
 - (Optional) To view associated Cloud Security insights in the entity panel, [Cloud Security must be configured][2].
 
 
@@ -51,7 +51,7 @@ On the [Entity Risks][4] page, you can view all entities that have a non-zero ri
 
 In a federated environment, one person typically acts through many separate entities, such as several email aliases, an IAM user, assumed roles, and a code repository account. Viewed individually, none of these entities shows that person's total risk.
 
-When you configure an Entity Pack for your identity provider on the [Content Packs][9] page, Cloud SIEM syncs user identities from that provider and resolves the entities that belong to each one. Entities that resolve to one person are grouped under a single user identity row, named for that person, whose risk score is the sum of the risk scores of the entities beneath it. Grouping is applied automatically whenever an identity provider is connected.
+When you configure an Entity Pack on the [Content Packs][9] page, Cloud SIEM syncs user identities from your identity provider. It then resolves the entities that belong to each one. Entities that resolve to one person are grouped under a single user identity row, named for that person. That row's risk score is the sum of the risk scores of the entities beneath it. Grouping is applied automatically whenever an identity provider is connected.
 
 To investigate a user identity:
 
@@ -86,14 +86,14 @@ The {{< ui >}}Next steps{{< /ui >}} section of the entity side panel includes th
 
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
 
-1. Navigate to the {{< ui >}}Create a new Entity Risks notification{{< /ui >}} page. There are two ways to do this:
+1. Navigate to the {{< ui >}}Create a new Entity Risk notification{{< /ui >}} page. There are two ways to do this:
    - In Datadog, go to the [Entity Risks][4] page, then click {{< ui >}}Create Notification Rule{{< /ui >}}.
    - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Entity Risks{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
 1. Under {{< ui >}}Group risk by{{< /ui >}}, choose what the rule measures:
-   - {{< ui >}}Individual entity{{< /ui >}}: The rule evaluates each entity's own risk score. This is the default.
-   - {{< ui >}}User identity{{< /ui >}}: The rule evaluates a user identity's rolled-up risk score, which is the sum of the scores of all entities resolved to that person. This option is available after you configure an Entity Pack and user identities are syncing. See [Notify on rolled-up user identity risk](#notify-on-rolled-up-user-identity-risk).
+   - {{< ui >}}Individual entity{{< /ui >}}: The rule evaluates each entity's own risk score. This is the default. Individual entity scores typically range from 0 to 500.
+   - {{< ui >}}User identity{{< /ui >}}: The rule evaluates a user identity's rolled-up risk score, which sums the scores of every entity resolved to that person. Rolled-up scores are unbounded, so they need higher thresholds than individual entity rules. This option is available after you configure an Entity Pack and user identities are syncing. See [Notify on rolled-up user identity risk](#notify-on-rolled-up-user-identity-risk).
 
-   <div class="alert alert-warning">You cannot change a rule's grouping after you create the rule. Create a new rule instead.</div>
+   <div class="alert alert-warning">You cannot change a rule's grouping after you create the rule. To use a different grouping, create another rule.</div>
 1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays the entities that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
 1. Under {{< ui >}}Set notification conditions{{< /ui >}}, set the trigger condition based on entity severity or risk score value:
@@ -156,6 +156,6 @@ The severity threshold of an entity is calculated by adding up the score impact 
 [2]: https://docs.datadoghq.com/security/cloud_security_management/setup
 [3]: https://app.datadoghq.com/security
 [4]: https://app.datadoghq.com/security/siem/entity-risks
-[7]: https://app.datadoghq.com/security/configuration/siem/risk-insights
+[7]: https://app.datadoghq.com/security/configuration/siem/entity-risks
 [8]: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/#supported-out-of-the-box-ocsf-pipelines
 [9]: /security/cloud_siem/ingest_and_enrich/content_packs
