@@ -107,10 +107,8 @@ const handleHomepageEnablementBannerViewSessions = () => {
                 window.DD_RUM.addAction('enablement_sessions_banner_cta_clicked', {
                     button_text: viewSessionsButton.textContent,
                 });
-                console.log('viewSessionsButton clicked', viewSessionsButton);
             });
         }
-        console.log('no viewSessionsButton', enablementBanner);
     }
 };
 
