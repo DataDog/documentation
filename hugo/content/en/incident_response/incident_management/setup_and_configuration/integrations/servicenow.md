@@ -29,7 +29,7 @@ The ServiceNow integration with Datadog Incident Management provides you with th
 To use automatic incident creation and bidirectional sync with ServiceNow:
 
 1. Install the [ServiceNow integration][1] through the ServiceNow Integration tile and ensure you have the [ServiceNow tile configured][2] with your ServiceNow instance in Datadog.
-2. Install the [ITOM/ITSM Integration for Datadog][3](Recommended) from the ServiceNow store, or download the latest Update Set ([Datadog-Snow_Update_Set_v2.7.9.xml][4]) and upload it to your ServiceNow instance manually.
+2. Install the [ITOM/ITSM Integration for Datadog][3](Recommended) from the ServiceNow store, or download the latest Update Set ([Datadog-Snow_Update_Set_v2.8.0.xml][4]) and upload it to your ServiceNow instance manually.
 3. Create a [service account application key][5] in Datadog for secure authentication. **Note**: Datadog recommends creating a service account key instead of using a personal one, which risks breaking the ServiceNow sync if the user's account is deactivated or if their permissions change.
 
 ## Setup
