@@ -91,13 +91,48 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 
 **No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
 
-### 4. Explore your training runs
+### 4. Connect training runs to GPU hardware
 
-Run the training workload, then open the Training page in [GPU Monitoring][2] to view the status of your training runs and investigate any flagged issues.
+Your Kubernetes workloads may have labels or annotations that identify a training run or a group of runs. You can add those identifiers to GPU metrics and spans. This ties training run data directly to the GPU hardware it ran on.
+
+The following examples use the `company.name/run-id` and `company.name/group-id` pod annotations. Replace them with the annotations your workloads use.
+
+For metrics, use [tag extraction][2] to map the annotations to tags. Merge the following configuration into the existing `DatadogAgent` resource:
+
+```yaml
+spec:
+  global:
+    kubernetesResourcesAnnotationsAsTags:
+      pods:
+        company.name/run-id: training_run_id
+        company.name/group-id: training_group_id
+```
+
+For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block from [Step 1](#1-configure-gpu-tracing), reading the same annotations:
+
+```yaml
+ddTraceConfigs:
+  - name: DD_INJECT_NATIVE
+    value: "always"
+  - name: DD_TRACE_HOOK_MODULES
+    value: "gpu"
+  - name: DD_TRAINING_RUN_ID
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.annotations['company.name/run-id']
+  - name: DD_TRAINING_GROUP_ID
+    valueFrom:
+      fieldRef:
+        fieldPath: metadata.annotations['company.name/group-id']
+```
+
+To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics and `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
+
+After you apply the configuration, GPU metrics are tagged with `training_run_id` and `training_group_id`, and spans are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /gpu_monitoring/setup
-[2]: https://app.datadoghq.com/gpu-monitoring
+[2]: /containers/kubernetes/tag/?tab=datadogoperator#tag-extraction
