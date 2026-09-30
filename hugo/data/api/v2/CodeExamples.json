@@ -1176,8 +1176,18 @@
     },
     {
       "group": "logs",
+      "suffix": "_1695361854",
+      "description": "Send deflate logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
       "suffix": "_3496222707",
       "description": "Send gzip logs returns \"Request accepted for processing (always 202 empty JSON).\" response"
+    },
+    {
+      "group": "logs",
+      "suffix": "_3804768803",
+      "description": "Send gzip logs with explicit compression returns \"Request accepted for processing (always 202 empty JSON).\" response"
     },
     {
       "group": "logs",

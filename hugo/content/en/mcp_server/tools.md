@@ -179,6 +179,15 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Find slow database queries in the last 30 minutes.
 - Get spans for failed API requests to our payment service.
 
+### `aggregate_spans`
+*Toolset: **core***\
+*Permissions Required: `APM Read`*\
+Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (p50 to p99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
+
+- What is the p95 duration by resource for the checkout service over the last hour?
+- Show me request counts for the payments service in 5-minute buckets over the last day.
+- Count errors grouped by endpoint and status code for `service:web-store`.
+
 ### `analyze_datadog_logs`
 *Toolset: **core***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
@@ -288,27 +297,19 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
+Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
-
-### `apm_search_spans`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for spans using APM query syntax, with support for pagination and tag filtering.
-
-- Show me spans with errors from the checkout service in the last hour.
-- Find slow database queries taking more than 2 seconds.
-- Search for spans with `service:payments` and `status:error`.
 
 ### `apm_query_trace`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Queries a trace's span data to filter, aggregate, or rank spans, such as finding the highest self-time spans or tracing an error to its origin service.
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
 
-- Find the top 5 spans by self-time in trace `abc123`.
-- Show all error messages and their originating services in trace `abc123`.
-- Which database calls in this trace took longer than 500ms?
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
@@ -324,21 +325,6 @@ Discovers available tag keys on spans within a time range.
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
-
-### `apm_search_watchdog_stories`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
-
-- Show me Watchdog anomalies for the checkout service in the last 24 hours.
-- Are there any latency anomalies detected for my API service?
-
-### `apm_get_watchdog_story`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves detailed information about a specific Watchdog story by its ID.
-
-- Get the details of Watchdog story `abc123`.
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -357,22 +343,6 @@ Analyzes latency bottlenecks across traces in an anomaly period using self-time 
 - What is consuming the most self-time in the payments service during this latency spike?
 - Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
 
-### `get_change_stories`
-*Toolset: **apm***\
-Retrieves change stories from the Change Tracking API for APM services. Use this to identify what changed (deployments, feature flags, configuration updates, and infrastructure events) during a time range and correlate changes with performance issues or incidents.
-
-- Show me recent deployments and changes for the payments service.
-- What infrastructure changes happened around the time of this latency spike?
-- Find feature flag and configuration changes for the checkout service in the last hour.
-
-### `semantic_search_change_stories`
-*Toolset: **apm***\
-Searches change stories using natural language and AI-powered semantic search. Use this to find feature flag or deployment changes related to a behavior, a user-reported issue, or a part of the product you are investigating.
-
-- What changed recently that could affect dashboard loading for trial users?
-- Which flags might impact authentication in the billing settings page?
-- Find changes related to missing telemetry data in the last week.
-
 ### `apm_search_recommendations`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -387,6 +357,75 @@ Searches for APM recommendations from Datadog.
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `create_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
+
+- Sample 10% of `GET /health` spans for the checkout service in prod.
+- Keep all traces for the `POST /payments` resource on the payments service in staging.
+
+### `update_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
+
+- Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
+- Lower the sample rate for the checkout service's health check endpoint to 1%.
+
+### `delete_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Remove the sampling rule for `GET /health` on the checkout service in prod.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
+
+### `create_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
+
+- Rename the inferred database service `postgres` to `orders-db` for spans from the orders service.
+- Create a remapping rule that renames `web-store-v2` to `web-store`.
+
+### `update_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
+
+- Update the `orders-db` remapping rule to also match spans from the fulfillment service.
+- Update the `web-store` remapping rule to rename matching services to `storefront`.
+
+### `reorder_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
+
+- Move the `orders-db` remapping rule ahead of the generic database rule.
+
+### `delete_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Delete the `web-store` service remapping rule.
 
 ## Assistant
 
@@ -1280,7 +1319,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][82], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1387,7 +1426,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][82] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -1654,7 +1693,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][81].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1693,7 +1732,7 @@ Retrieves all network interfaces for a specific device.
 ### `get_network_path_test_runs`
 *Toolset: **networks***\
 *Permissions Required: `Network Path Data Read` and `Built-in Features`*\
-Searches and retrieves [Network Path][81] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
 
 - Show me the latest Network Path test runs to `api.example.com`.
 - Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
@@ -1702,7 +1741,7 @@ Searches and retrieves [Network Path][81] test runs with hop-by-hop traceroute d
 ### `get_autonomous_system_status`
 *Toolset: **networks***\
 *Permissions Required: `Network Path Data Read` and `Built-in Features`*\
-Checks the health of an Autonomous System (AS) using [Network Path][81] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
 
 - Is AS 15169 experiencing elevated latency compared to last week?
 - Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
@@ -1710,7 +1749,7 @@ Checks the health of an Autonomous System (AS) using [Network Path][81] data, co
 ### `list_autonomous_system_statuses`
 *Toolset: **networks***\
 *Permissions Required: `Network Path Data Read` and `Built-in Features`*\
-Lists degraded Autonomous Systems (ASes) using [Network Path][81] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
 
 - Are there any Autonomous System issues in the last hour?
 - Which ASes are degraded in the last 4 hours?
@@ -1719,7 +1758,7 @@ Lists degraded Autonomous Systems (ASes) using [Network Path][81] data, without 
 ### `run_network_path`
 *Toolset: **networks***\
 *Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
-Runs a live [Network Path][81] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
 
 - Run a traceroute from host `prod-web-01` to `api.example.com`.
 - Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
@@ -3086,8 +3125,10 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [78]: /tracing/live_debugger/
 [79]: /watchdog/
 [80]: /account_management/governance_console/controls/
-[81]: /network_monitoring/network_path/
-[82]: /account_management/governance_console/
+[81]: /tracing/services/service_remapping_rules/
+[82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
 
 ## Further reading
 
