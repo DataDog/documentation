@@ -89,6 +89,7 @@ spec:
                   fieldRef:
                     fieldPath: metadata.annotations['company.name/group-id']
 ```
+To use pod labels instead of annotations, use `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete.
 
