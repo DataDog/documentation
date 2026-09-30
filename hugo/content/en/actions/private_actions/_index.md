@@ -32,7 +32,7 @@ Private actions rely on two layers:
 - [**Private action runner**](#private-action-runner) executes the actions. It runs in your network, receives action tasks from Datadog, runs each task against the target service, and returns the result to Datadog.
 - [**The authorization layer**](#authorization-models) is managed in Datadog. It defines which users and products can run which actions on which runners, and grants or denies each action before it reaches a runner. The actions a runner is allowed to run are also restricted on the Agent side, by the actions allowlist in the Agent configuration (`datadog.yaml`).
 
-<div class="alert alert-danger">On US1-FED and US2-FED sites, the <a href="/actions/private_actions/set_up_standalone">standalone runner</a> is the supported private action runner and <a href="/actions/connections/">Connections</a> are the supported authorization model.</div>
+<div class="alert alert-caution">On US1-FED and US2-FED sites, the <a href="/actions/private_actions/set_up_standalone">standalone runner</a> is the supported private action runner and <a href="/actions/connections/">Connections</a> are the supported authorization model.</div>
 
 ## Private action runner
 
