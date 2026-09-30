@@ -45,7 +45,7 @@ Every organization in an organization group falls into at least one of the follo
 | **Owner** | Creates and manages the organization group. Sets policies, enforcement tiers, and shared roles for all member organizations. |
 | **Member** | Governed by the group. An organization belongs to exactly one organization group at a time. An owner organization can also be a member of its own organization group. |
 
-Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles. Managing an organization group requires the **Org Group Write** permission, and viewing one requires **Org Group Read**. See [Datadog Role Permissions][2].
+Administrators in the owner organization have access to the **Organization Groups** page in **Organization Settings**, where they can manage group members, policies, and shared roles. To view and manage organization groups, users in the owner organization need both the **Org Group Read** and **Org Group Write** permissions. No additional permissions are needed in member organizations. See [Datadog Role Permissions][2].
 
 ### Organization group policies
 
