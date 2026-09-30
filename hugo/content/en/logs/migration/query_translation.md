@@ -133,7 +133,7 @@ Open a batch to see every resource it contains and the state of its translation:
 | In progress | The resource is being translated. |
 | Translated | A Datadog equivalent is ready to review and publish. |
 | Published | The resource exists in Datadog. The batch links to it. |
-| Error | The resource could not be translated. |
+| Skipped | The resource could not be translated. |
 
 Click a resource to see its original SPL, the translated query, and the explanation of the translation. Review the translation before publishing, because a translated query is not guaranteed to return the same results as the Splunk original. Publishing creates the monitor or dashboard in your Datadog organization.
 
@@ -141,7 +141,7 @@ A dashboard carries a status for each of its widgets, and publishes as a single 
 
 {{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget" style="width:100%;" >}}
 
-Resources in an error state cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a resource, fix it at the source and import it again:
+Skipped resources cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a resource, fix it at the source and import it again:
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
 2. Delete the original batch if you want to reuse its name.
