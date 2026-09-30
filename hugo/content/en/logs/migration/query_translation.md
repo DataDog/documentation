@@ -27,6 +27,10 @@ The Migration App translates Splunk Processing Language (SPL) into Datadog log s
 
 The Migration App parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
+## Permissions
+
+Publishing a translated resource requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Role Based Access Control][11].
+
 ## Translate a single query
 
 Use Single Translation as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
@@ -46,13 +50,13 @@ The page returns:
 
 ## Migrate assets in batch
 
-The Batch Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named batch. It translates each asset in the batch, and you review and publish the results to Datadog. The following resource types are supported:
+The Batch Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named batch. It translates the queries in each asset to Datadog syntax and builds the matching Datadog monitor or dashboard. You review each result, then publish it to create the asset in Datadog. The following resource types are supported:
 
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
 | Alert (saved search) | [Monitor][6] | Translates to a log monitor when possible. Otherwise, it translates to an analysis monitor with a DDSQL query. |
 | Dashboard | [Dashboard][7] | Both Studio (JSON) and Classic (XML) dashboards are supported. Each panel is translated independently. |
-| Search macro | None | Macros expand the SPL in your alerts and dashboards before translation. They are not published as Datadog assets. |
+| Search macro | None | Before translation, the tool replaces each macro reference in your alerts and dashboards with the macro's SPL definition. Macros are not published as Datadog assets. |
 
 ### Export your assets from Splunk
 
@@ -141,7 +145,7 @@ A dashboard shows a status for each of its widgets, and publishes as a single da
 
 {{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget." style="width:100%;" >}}
 
-Skipped resources cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a resource, fix it at the source and import it again:
+Monitors and dashboards with the Skipped status cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a skipped resource, or a dashboard widget that returned an error, fix it at the source and import it again:
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
 2. Delete the original batch if you want to reuse its name.
@@ -152,7 +156,7 @@ Skipped resources cannot be published, and a translation cannot be edited in Dat
 Translation converts SPL to Datadog log search syntax but does not guarantee identical results. These gaps account for most of the differences:
 
 Logs have a different shape in each platform
-: Pipelines, processors, and log-shipping agents differ between the two platforms. As a result, the attributes available on a log differ. The translator preserves attribute names as written, except when mapping [standard attributes][8]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. Add the missing [processors][9] to your Datadog pipelines.
+: Pipelines, processors, and log-shipping agents differ between the two platforms. As a result, the attributes available on a log differ. The translator preserves attribute names as written, except when mapping [standard attributes][8]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. Add [processors][9] to your Datadog pipelines that extract or remap the attribute, such as a Grok parser that parses it from the message or a remapper that renames an existing attribute.
 
 Indexes do not match
 : Splunk index names rarely map one-to-one to Datadog [log indexes][10]. An index filter that does not resolve results in a query error. The translator strips index terms that have no Datadog equivalent and flags them as a warning. Review the warning and scope the query with tags or attributes instead.
@@ -162,10 +166,6 @@ There is not enough sample data
 
 The SPL command is not supported
 : Query Translation supports a wide range of SPL commands. When a command does not have a Datadog equivalent, the translator returns as much of the query as it can and flags the unsupported command.
-
-## Permissions
-
-Publishing a translated resource requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Role Based Access Control][11].
 
 ## Further reading
 

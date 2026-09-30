@@ -21,11 +21,9 @@ Moving to Datadog Log Management has two parts: sending your logs to Datadog, an
 
 Configure the [Datadog Agent][1] to collect logs from files, containers, and network sources. [Integrations][2] that support log collection include their own log configurations.
 
-Set up [log collection][3] first. The rest of a migration depends on your logs being in Datadog, and on your [pipelines][4] producing the attributes your existing searches rely on.
-
 ## Translate your queries and assets
 
-After your logs are in Datadog, use [Query Translation][5] to convert Splunk Processing Language (SPL) into Datadog query syntax. Query Translation can translate a single query at a time or translate queries from Splunk alerts and dashboards in batches, then use the translated queries to create Datadog monitors and dashboards.
+After your logs are in Datadog, use [Query Translation][3] to convert Splunk Processing Language (SPL) into Datadog query syntax. Query Translation can translate a single query at a time or translate queries from Splunk alerts and dashboards in batches, then use the translated queries to create Datadog monitors and dashboards.
 
 ## Further reading
 
@@ -33,6 +31,4 @@ After your logs are in Datadog, use [Query Translation][5] to convert Splunk Pro
 
 [1]: /agent/logs/
 [2]: /integrations/
-[3]: /logs/log_collection/
-[4]: /logs/log_configuration/pipelines/
-[5]: /logs/migration/query_translation/
+[3]: /logs/migration/query_translation/
