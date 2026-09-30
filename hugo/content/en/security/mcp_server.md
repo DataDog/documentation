@@ -48,6 +48,7 @@ You can use the `security` toolset to:
 - **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and create, update, or delete custom WAF rules to protect a specific service or endpoint.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 - **Investigate indicators of compromise (IoCs)**: Search and retrieve IP addresses, domains, URLs, and file hashes matched against threat intelligence feeds. Review individual indicators and update their triage state.
+- **Author IaC custom rules**: Generate, validate, and publish Rego-based Infrastructure as Code custom rules from a natural-language description.
 
 ## Quickstart
 
@@ -244,11 +245,11 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 ### Infrastructure as Code custom rules
 
 `get_datadog_security_iac_custom_rules`
-: Retrieves one Infrastructure as Code (IaC) custom rule by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+: Retrieves one Infrastructure as Code (IaC) [custom rule][6] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
 : *Permissions required: `Vulnerability Management Read`*
 
 `get_datadog_security_iac_custom_rules_schema`
-: Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this before generating, validating, or creating a rule.
+: Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
 : *Permissions required: `Vulnerability Management Read`*
 
 `generate_datadog_security_iac_custom_rule`
@@ -256,15 +257,15 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Vulnerability Management Write`*
 
 `validate_datadog_security_iac_custom_rule`
-: Compile-checks Rego for an IaC custom rule. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+: Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
 : *Permissions required: `Vulnerability Management Write`*
 
 `create_datadog_security_iac_custom_rule`
-: Creates a draft IaC custom rule. Rules are always created unpublished; publish them separately to activate them for scans.
+: Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
 : *Permissions required: `Vulnerability Management Write`*
 
 `update_datadog_security_iac_custom_rule`
-: Creates a new revision of an IaC custom rule, draft or published. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+: Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
 : *Permissions required: `Vulnerability Management Read` and `Vulnerability Management Write`*
 
 `publish_datadog_security_iac_custom_rule`
@@ -272,7 +273,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Vulnerability Management Read` and `Vulnerability Management Write`*
 
 `delete_datadog_security_iac_custom_rule`
-: Permanently deletes an IaC custom rule by ID. This can't be undone.
+: Permanently deletes an IaC custom rule by ID. This action cannot be undone.
 : *Permissions required: `Vulnerability Management Write`*
 
 ## Further reading
@@ -284,3 +285,4 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 [3]: /getting_started/site/
 [4]: /mcp_server/setup/
 [5]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[6]: /security/code_security/iac_security/custom_rules/
