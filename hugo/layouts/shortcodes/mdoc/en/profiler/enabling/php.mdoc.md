@@ -93,6 +93,44 @@ To begin profiling applications:
 
 6. After a couple of minutes, your profiles appear on the [Datadog APM > Profiler page][8]. If they do not, see the [Troubleshooting][9] guide.
 
+## Set up the profiler with an AI coding assistant
+
+Use the following prompt with a local AI coding agent (such as Cursor, GitHub Copilot, or Cody) to set up the PHP profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my PHP service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- composer.json and composer.lock to determine the PHP version requirement
+  and whether datadog/dd-trace is already a dependency.
+- Dockerfile or docker-compose.yml for the base image (check if Alpine/musl
+  or Debian/glibc), PHP version, ZTS vs NTS, web server configuration
+  (Apache, PHP-FPM, FrankenPHP), and existing Datadog setup.
+- php.ini files or .ini snippets for existing Datadog extension configuration
+  (datadog.service, datadog.env, datadog.version, datadog.profiling.enabled).
+- Web server config files (apache2.conf, nginx.conf, php-fpm.conf,
+  Caddyfile) to determine how PHP is served.
+- Kubernetes manifests for existing Datadog Agent configuration.
+- Existing environment variables or .env files referencing DD_SERVICE,
+  DD_ENV, or DD_VERSION.
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- Download and run the datadog-setup.php installer with --enable-profiling.
+- Configure service, env, and version with php datadog-setup.php config set.
+- If Alpine Linux is detected, add apk add libgcc first.
+- Restart the web server (Apache, PHP-FPM, FrankenPHP) after INI changes.
+- Verify the extension is loaded (check for 'datadog-profiling' in php -v).
+- Show the complete installation commands or Dockerfile.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=php
+```
+
 [1]: /profiler/enabling/supported_versions/
 [2]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
 [3]: /profiler/connect_traces_and_profiles/#identify-code-hotspots-in-slow-traces

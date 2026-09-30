@@ -202,6 +202,44 @@ For profile type configuration options, see the [Configuration reference][9] in 
 
 
 
+## Set up the profiler with an AI coding assistant
+
+Use the following prompt with a local AI coding agent (such as Cursor, GitHub Copilot, or Cody) to set up the Java profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my Java service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- pom.xml, build.gradle, or build.gradle.kts to determine Java version and
+  dependencies (check if dd-java-agent or dd-trace-java is already present).
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for startup commands,
+  base image (JDK distribution), and existing Datadog Agent configuration.
+- Application startup scripts or entrypoints (look for java -jar, mvn exec,
+  gradle bootRun, or similar commands).
+- Existing environment variables or config files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, or DD_PROFILING_ENABLED.
+- GraalVM native-image configuration (native-image.properties, pom.xml
+  native-maven-plugin, or Gradle native-image plugin).
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- Download dd-java-agent.jar if not already present.
+- Add the -javaagent flag BEFORE -jar in the startup command.
+- Set DD_PROFILING_ENABLED=true.
+- Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- Show the complete modified startup command or Dockerfile.
+- If GraalVM native-image is detected, also set
+  DD_PROFILING_DIRECTALLOCATION_ENABLED=true and follow the native-image
+  tracer setup.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=java
+```
+
 [1]: /tracing/trace_collection/
 [2]: /profiler/enabling/supported_versions/
 [3]: https://app.datadoghq.com/account/settings/agent/latest?platform=overview
