@@ -3,7 +3,7 @@ title: Obsolescencia del conjunto de cifrado TLS
 ---
 ## Descripción general {#overview}
 
-TLS es un protocolo de seguridad que protege el tráfico web al proporcionar confidencialidad e integridad de los datos en tránsito entre clientes y servidores. Durante una sesión TLS, ambas partes acuerdan un conjunto de cifrado que dicta qué algoritmos criptográficos se utilizarán.
+TLS es un protocolo de seguridad que protege el tráfico web al proporcionar confidencialidad e integridad de los datos en tránsito entre clientes y servidores. Durante una sesión TLS, ambas partes acuerdan un conjunto de cifrado que dicta qué algoritmos criptográficos utilizar.
 
 Datadog utiliza un motor criptográfico moderno que requiere configuraciones específicas de conjuntos de cifrado.
 
@@ -11,9 +11,9 @@ Datadog utiliza un motor criptográfico moderno que requiere configuraciones esp
 
 Los sistemas de Datadog requieren TLS 1.2 o superior. Los clientes compatibles pueden negociar conjuntos de cifrado, pero las configuraciones específicas del lado del cliente pueden alterar este comportamiento.
 
-El Datadog Agent está configurado para utilizar conjuntos de cifrado modernos y es compatible con los requisitos de Datadog. Si experimenta problemas de conexión, generalmente se originan en integraciones personalizadas, scripts o clientes HTTP más antiguos, como ciertas versiones de Windows PowerShell o Ruby.
+El Datadog Agent está configurado para utilizar conjuntos de cifrado modernos y es compatible con los requisitos de Datadog. Si experimenta problemas de conexión, estos suelen originarse en integraciones personalizadas, scripts o clientes HTTP más antiguos, como ciertas versiones de Windows PowerShell o Ruby.
 
-Para probar la compatibilidad de los conjuntos de cifrado de su cliente, conéctese a [tls-config-test.datadoghq.com][3], que está configurado con los conjuntos de cifrado aceptados por Datadog. Alternativamente, utilice el [How's My SSL? API][1] para verificar los conjuntos de cifrado que admite su cliente. Para obtener ayuda con la resolución de problemas de conexión, comuníquese con el [soporte de Datadog][2].
+Para probar la compatibilidad del conjunto de cifrado de su cliente, conéctese a [tls-config-test.datadoghq.com][3], el cual está configurado con los conjuntos de cifrado aceptados por Datadog. Alternativamente, utilice [How's My SSL?] API][1] para verificar los conjuntos de cifrado que admite su cliente. Para obtener ayuda con la resolución de problemas de conexión, comuníquese con [soporte de Datadog][2].
 
 ## Conjuntos de cifrado aceptados {#accepted-cipher-suites}
 
@@ -21,19 +21,24 @@ Para probar la compatibilidad de los conjuntos de cifrado de su cliente, conéct
 
 A partir del 1 de septiembre de 2026, Datadog solo acepta los siguientes conjuntos de cifrado:
 
+### TLS 1.2 {#tls-12}
+
 | Código         | Nombre IANA                                         |
 |--------------|---------------------------------------------------|
-| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`        |
-| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`          |
-| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`        |
-| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`          |
-| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256` |
-| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`   |
-| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`          |
-| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`          |
-| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`                        |
-| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`                        |
-| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`                  |
+| `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`         |
+| `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`           |
+| `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`         |
+| `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`           |
+| `0xCC,0xA9`  | `TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256`   |
+| `0xCC,0xA8`  | `TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256`     |
+
+### TLS 1.3 {#tls-13}
+
+| Código         | Nombre IANA                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
+| `0x13,0x03`  | `TLS_CHACHA20_POLY1305_SHA256`   |
 
 {{< /site-region >}}
 
@@ -41,12 +46,21 @@ A partir del 1 de septiembre de 2026, Datadog solo acepta los siguientes conjunt
 
 Datadog acepta los siguientes conjuntos de cifrado para {{< region-param key="dd_site_name" >}}:
 
+### TLS 1.2 {#tls-12-1}
+
 | Código         | Nombre IANA                                  |
 |--------------|--------------------------------------------|
 | `0xC0,0x2F`  | `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256`    |
 | `0xC0,0x30`  | `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`    |
 | `0xC0,0x2B`  | `TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256`  |
 | `0xC0,0x2C`  | `TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384`  |
+
+### TLS 1.3 {#tls-13-1}
+
+| Código         | Nombre IANA                        |
+|--------------|----------------------------------|
+| `0x13,0x01`  | `TLS_AES_128_GCM_SHA256`         |
+| `0x13,0x02`  | `TLS_AES_256_GCM_SHA384`         |
 
 {{< /site-region >}}
 
@@ -62,6 +76,8 @@ A partir del **1 de septiembre de 2026**, Datadog no admite los siguientes conju
 
 | Código         | Nombre IANA                                  | Nombre OpenSSL             |
 |--------------|--------------------------------------------|--------------------------|
+| `0xC0,0x09`  | `TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA`     | `ECDHE-ECDSA-AES128-SHA` |
+| `0xC0,0x0A`  | `TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA`     | `ECDHE-ECDSA-AES256-SHA` |
 | `0xC0,0x14`  | `TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA`       | `ECDHE-RSA-AES256-SHA`   |
 | `0xC0,0x13`  | `TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA`       | `ECDHE-RSA-AES128-SHA`   |
 | `0x00,0x9D`  | `TLS_RSA_WITH_AES_256_GCM_SHA384`          | `AES256-GCM-SHA384`      |

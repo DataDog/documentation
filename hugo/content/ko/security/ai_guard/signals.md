@@ -75,17 +75,17 @@ AI Guard 탐지 규칙을 생성하려면 다음 단계를 따르세요.
          <td><code>true</code> 또는 <code>false</code></td>
        </tr>
        <tr>
-         <td><code>@ai_guard.tools</code></td>
+         <td><code>@ai_guard.tool_name</code></td>
          <td>평가에 포함된 특정 도구 이름으로 필터링</td>
          <td><code>get_user_profile</code>, <code>user_recent_transactions</code>등</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.categories</code></td>
+         <td><code>@ai_guard.sds.category</code></td>
          <td>Sensitive Data Scanner가 탐지한 민감한 데이터 범주로 필터링</td>
          <td><code>credentials</code>, <code>email_address</code>등</td>
        </tr>
        <tr>
-         <td><code>@ai_guard.sds.rule_tags</code></td>
+         <td><code>@ai_guard.sds.rule_tag</code></td>
          <td>특정 민감한 데이터 규칙 태그로 필터링</td>
          <td><code>aws_access_key_id</code>, <code>aws_secret_access_key</code>, <code>claude_api_key</code>, <code>email_address</code>등</td>
        </tr>

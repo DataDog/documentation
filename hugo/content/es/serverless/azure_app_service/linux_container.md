@@ -5,19 +5,19 @@ aliases:
 further_reading:
 - link: /integrations/azure_app_services/
   tag: Documentación
-  text: Servicio de Aplicaciones de Azure
+  text: Azure App Service
 - link: /integrations/azure_app_service_environment/
   tag: Documentación
-  text: Entorno de Servicio de Aplicaciones de Azure
-title: Instrumentar Servicio de Aplicaciones de Azure - Contenedores de Linux
+  text: Azure App Service Environment
+title: Instrumentar Azure App Service - Linux Containers
 ---
 ## Descripción general {#overview}
 
-Esta página describe cómo instrumentar su aplicación de Servicio de Aplicaciones de Azure en contenedores de Linux con el Agente de Datadog.
+Esta página describe cómo instrumentar su aplicación de Azure App Service para Linux en contenedor con el Datadog Agent.
 
-Este documento asume que su aplicación está configurada para sidecars de acuerdo con el tutorial de Azure [Configurar un contenedor sidecar para contenedor personalizado en Azure App Service][1].
+Este documento asume que su aplicación está configurada para sidecars de acuerdo con el tutorial de Azure [Configurar un contenedor sidecar para un contenedor personalizado en Azure App Service][1].
 
-Si prefiere no usar el enfoque de sidecar (no recomendado), puede seguir las instrucciones para [Instrumentar Servicio de Aplicaciones de Azure - Contenedor de Linux con `serverless-init`][2].
+Si prefiere no utilizar el enfoque de sidecar (No recomendado), puede seguir las instrucciones para [Instrumentar Azure App Service - Contenedor de Linux con `serverless-init`][2].
 
 ## Configuración {#setup}
 
@@ -29,18 +29,18 @@ Si aún no lo ha hecho, instale la [integración de Datadog-Azure][3] para recop
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
-#### Trazado {#tracing}
-Instrumente su aplicación principal con la biblioteca `dd-trace-js`. Consulte [Trazado de aplicaciones Node.js][101] para obtener instrucciones.
+#### Traza {#tracing}
+Instrumente su aplicación principal con la biblioteca `dd-trace-js`. Consulte [Traza de aplicaciones Node.js][101] para obtener instrucciones.
 
 #### Métricas {#metrics}
-Las métricas personalizadas también se recopilan a través del trazador. Consulte los [ejemplos de código][102].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][102].
 
 #### Registros {#logs}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puedes crear un subdirectorio, como `/home/LogFiles/myapp`, si deseas tener más control sobre lo que se envía a Datadog. Sin embargo, si no sigues todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en tu aplicación, consulta [Colección de Registros de Node.js][103]. Para configurar la correlación de registros de trazas, consulta [Correlacionando Registros y Trazas de Node.js][104].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de Node.js][103]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de Node.js][104].
 
 [101]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
 [102]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs#code-examples
@@ -48,18 +48,18 @@ Para configurar el registro en tu aplicación, consulta [Colección de Registros
 [104]: /es/tracing/other_telemetry/connect_logs_and_traces/nodejs
 {{% /tab %}}
 {{% tab "Python" %}}
-#### Trazado {#tracing-1}
-Instrumente su aplicación principal con la biblioteca `dd-trace-py`. Consulta [Trazando aplicaciones de Python][201] para obtener instrucciones.
+#### Traza {#tracing-1}
+Instrumente su aplicación principal con la biblioteca `dd-trace-py`. Consulte [Traza de aplicaciones Python][201] para obtener instrucciones.
 
 #### Métricas {#metrics-1}
-Las métricas personalizadas también se recopilan a través del trazador. Consulta los [ejemplos de código][202].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][202].
 
 #### Registros {#logs-1}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puedes crear un subdirectorio, como `/home/LogFiles/myapp`, si deseas tener más control sobre lo que se envía a Datadog. Sin embargo, si no sigues todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en tu aplicación, consulta [Colección de Registros de Node.js][203]. Para configurar la correlación de registros de trazas, consulta [Correlacionando Registros y Trazas de Node.js][204].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de Node.js][203]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de Node.js][204].
 
 [201]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [202]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python#code-examples
@@ -67,18 +67,18 @@ Para configurar el registro en tu aplicación, consulta [Colección de Registros
 [204]: /es/tracing/other_telemetry/connect_logs_and_traces/python
 {{% /tab %}}
 {{% tab "Java" %}}
-#### Trazado {#tracing-2}
-Instrumente su aplicación principal con la biblioteca `dd-trace-java`. Consulta [Trazando aplicaciones de Java][301] para obtener instrucciones.
+#### Traza {#tracing-2}
+Instrumente su aplicación principal con la biblioteca `dd-trace-java`. Consulte [Traza de aplicaciones Java][301] para obtener instrucciones.
 
 #### Métricas {#metrics-2}
-Las métricas personalizadas también se recopilan a través del trazador. Consulta los [ejemplos de código][302].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][302].
 
 #### Registros {#logs-2}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puedes crear un subdirectorio, como `/home/LogFiles/myapp`, si deseas tener más control sobre lo que se envía a Datadog. Sin embargo, si no sigues todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en tu aplicación, consulta [Colección de Registros de Node.js][303]. Para configurar la correlación de registros de trazas, consulte [Correlacionando Registros y Trazas de Node.js][304].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de Node.js][303]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de Node.js][304].
 
 [301]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#getting-started
 [302]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java#code-examples
@@ -86,10 +86,10 @@ Para configurar el registro en tu aplicación, consulta [Colección de Registros
 [304]: /es/tracing/other_telemetry/connect_logs_and_traces/java
 {{% /tab %}}
 {{% tab ".NET" %}}
-#### Trazado {#tracing-3}
+#### Traza {#tracing-3}
 Instrumente su aplicación principal con la biblioteca `dd-trace-dotnet`.
 
-1. Agregue las siguientes líneas al Dockerfile de su aplicación principal. Esto instala y configura el rastreador de Datadog dentro de su contenedor de aplicación.
+1. Agregue las siguientes líneas al Dockerfile de su aplicación principal. Esto instala y configura el SDK de Datadog dentro del contenedor de su aplicación.
    {{< code-block lang="dockerfile" >}}
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
@@ -98,54 +98,54 @@ Instrumente su aplicación principal con la biblioteca `dd-trace-dotnet`.
    RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
    {{< /code-block >}}
 
-2. Construya la imagen y súbala a su registro de contenedores preferido.
+2. Construya la imagen y envíela a su registro de contenedores preferido.
 
 **Ejemplo completo de Dockerfile**
 
 {{< highlight dockerfile "hl_lines=22-27" >}}
-# Stage 1: Build the application {#stage-1-build-the-application}
+# Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy the project file and restore dependencies {#copy-the-project-file-and-restore-dependencies}
+# Copy the project file and restore dependencies
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy the remaining source code {#copy-the-remaining-source-code}
+# Copy the remaining source code
 COPY . .
 
-# Build the application {#build-the-application}
+# Build the application
 RUN dotnet publish -c Release -o out
 
-# Stage 2: Create a runtime image {#stage-2-create-a-runtime-image}
+# Stage 2: Create a runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copy the build output from stage 1 {#copy-the-build-output-from-stage-1}
+# Copy the build output from stage 1
 COPY --from=build /app/out ./
 
-# Datadog specific {#datadog-specific}
+# Datadog specific
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
 ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
 RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
 
-# Set the entry point for the application {#set-the-entry-point-for-the-application}
+# Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
 {{< /highlight >}}
 
-Para más información, consulte [Trazando Aplicaciones .NET][401].
+Para obtener más información, consulte [Traza de aplicaciones .NET][401].
 
 #### Métricas {#metrics-3}
-Las métricas personalizadas también se recopilan a través del trazador. Consulte los [ejemplos de código][402].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][402].
 
 #### Registros {#logs-3}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no supervisa todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en su aplicación, consulte [Colección de Registros en C#][403]. Para configurar la correlación de registros de trazas, consulte [Correlacionando Registros y Trazas de .NET][404].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de C#][403]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de .NET][404].
 
 [401]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
 [402]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=dotnet#code-examples
@@ -154,18 +154,18 @@ Para configurar el registro en su aplicación, consulte [Colección de Registros
 
 {{% /tab %}}
 {{% tab "Go" %}}
-#### Trazado {#tracing-4}
-Instrumente su aplicación principal con la biblioteca `dd-trace-go`. Consulte [Trazando aplicaciones Go][501] para obtener instrucciones.
+#### Traza {#tracing-4}
+Instrumente su aplicación principal con la biblioteca `dd-trace-go`. Consulte [Traza de aplicaciones Go][501] para obtener instrucciones.
 
 #### Métricas {#metrics-4}
-Las métricas personalizadas también se recopilan a través del trazador. Consulte los [ejemplos de código][502].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][502].
 
 #### Registros {#logs-4}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puedes crear un subdirectorio, como `/home/LogFiles/myapp`, si deseas tener más control sobre lo que se envía a Datadog. Sin embargo, si no sigues todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en su aplicación, consulte [Colección de Registros en Node.js][503]. Para configurar la correlación de registros de trazas, consulte [Correlacionando registros y trazas de Node.js][504].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de Node.js][503]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de Node.js][504].
 
 [501]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [502]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
@@ -173,18 +173,18 @@ Para configurar el registro en su aplicación, consulte [Colección de Registros
 [504]: /es/tracing/other_telemetry/connect_logs_and_traces/go
 {{% /tab %}}
 {{% tab "PHP" %}}
-#### Trazado {#tracing-5}
-Instrumente su aplicación principal con la biblioteca `dd-trace-php`. Consulte [Trazando aplicaciones PHP][601] para obtener instrucciones.
+#### Traza {#tracing-5}
+Instrumente su aplicación principal con la biblioteca `dd-trace-php`. Consulte [Traza de aplicaciones PHP][601] para obtener instrucciones.
 
 #### Métricas {#metrics-5}
-Las métricas personalizadas también se recopilan a través del trazador. Consulte los [ejemplos de código][602].
+Las métricas personalizadas también se recopilan a través del SDK. Consulte los [ejemplos de código][602].
 
 #### Registros {#logs-5}
-El sidecar de Datadog utiliza el seguimiento de archivos para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio se conserva entre reinicios.
+El sidecar de Datadog utiliza el seguimiento de las últimas líneas para recopilar registros. Datadog recomienda escribir los registros de la aplicación en `/home/LogFiles/` porque este directorio persiste tras los reinicios.
 
-También puedes crear un subdirectorio, como `/home/LogFiles/myapp`, si deseas tener más control sobre lo que se envía a Datadog. Sin embargo, si no sigues todos los archivos de registro en `/home/LogFiles`, entonces los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilan.
+También puede crear un subdirectorio, como `/home/LogFiles/myapp`, si desea tener más control sobre lo que se envía a Datadog. Sin embargo, si no realiza el seguimiento de todos los archivos de registro en `/home/LogFiles`, los registros de la aplicación de Azure App Service relacionados con inicios y errores no se recopilarán.
 
-Para configurar el registro en su aplicación, consulte [Colección de registros de Node.js][603]. Para configurar la correlación de registros de trazas, consulte [Correlacionando registros y trazas de Node.js][604].
+Para configurar el registro en su aplicación, consulte [Recopilación de registros de Node.js][603]. Para configurar la correlación de registros y trazas, consulte [Correlación de registros y trazas de Node.js][604].
 
 [601]: /es/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/#getting-started
 [602]: /es/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
@@ -195,20 +195,20 @@ Para configurar el registro en su aplicación, consulte [Colección de registros
 
 ### Instrumentación {#instrumentation}
 
-La instrumentación se realiza utilizando un contenedor sidecar. Este contenedor sidecar recopila trazas, métricas y registros de su contenedor de aplicación principal y los envía a Datadog.
+La instrumentación se realiza mediante un contenedor sidecar. Este contenedor sidecar recopila trazas, métricas mejoradas, métricas personalizadas y registros de su contenedor de aplicación principal y los envía a Datadog. Las [métricas mejoradas][5] se distinguen con el espacio de nombres `azure.app_services.enhanced.*`.
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 #### Localmente {#locally}
 
-Instale el [Datadog CLI][601]
+Instale la [CLI de Datadog][601]
 
 ```shell
 npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
 ```
 
-Instale el [Azure CLI][602] y autentíquese con `az login`.
+Instale la [CLI de Azure][602] y autentíquese con `az login`.
 
 Luego, ejecute el siguiente comando para configurar el contenedor sidecar:
 
@@ -218,15 +218,17 @@ export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
 
-Establezca su sitio de Datadog en {{< region-param key="dd_site" code="true" >}}. Por defecto es `datadoghq.com`.
+Establezca su sitio de Datadog en {{< region-param key="dd_site" code="true" >}}. Se establece de forma predeterminada en `datadoghq.com`.
 
-**Nota:** Para aplicaciones .NET, agregue la bandera `--dotnet` para incluir las variables de entorno adicionales requeridas por el rastreador de .NET, y adicionalmente la bandera `--musl` si su contenedor está utilizando dotnet en una imagen musl libc (como Alpine Linux).
+**Nota:** Para aplicaciones .NET, agregue el indicador `--dotnet` para incluir las variables de entorno adicionales requeridas por el trazador de .NET y, además, el indicador `--musl` si su contenedor utiliza dotnet en una imagen musl libc (como Alpine Linux).
 
-Se pueden usar banderas adicionales, como `--service` y `--env`, para establecer las etiquetas de servicio y entorno. Para obtener una lista completa de opciones, ejecute `datadog-ci aas instrument --help`.
+Se pueden usar flags adicionales, como `--service` y `--env`, para establecer las etiquetas de servicio y entorno. Para obtener una lista completa de opciones, ejecute `datadog-ci aas instrument --help`.
+
+`datadog-ci aas instrument` solo necesita ejecutarse una vez para configurar la instrumentación. No necesita volver a ejecutarlo en cada implementación de código, solo vuelva a ejecutarlo para cambiar su configuración de Datadog.
 
 #### Azure Cloud Shell {#azure-cloud-shell}
 
-Para usar la CLI de Datadog en [Azure Cloud Shell][603], abre el shell de la nube y utiliza `npx` para ejecutar la CLI directamente. Configura tu clave API y el sitio en las variables de entorno `DD_API_KEY` y `DD_SITE`, y luego ejecuta la CLI:
+Para usar la CLI de Datadog en [Azure Cloud Shell][603], abra Cloud Shell y use `npx` para ejecutar la CLI directamente. Establezca su clave de API y su sitio en las variables de entorno `DD_API_KEY` y `DD_SITE`, y luego ejecute la CLI:
 
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
@@ -240,13 +242,13 @@ npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-n
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-danger">Debido a que el recurso de Azure Web App para Contenedores no admite directamente sitecontainers, debes esperar una desviación en tu configuración.</div>
+<div class="alert alert-danger">Debido a que el recurso Azure Web App for Containers no admite directamente sitecontainers, debe esperar desviaciones en su configuración.</div>
 
-El [módulo de Terraform de Datadog para Linux Web Apps][1] envuelve el recurso [azurerm_linux_web_app][2] y configura automáticamente tu Web App para la Monitoreo Serverless de Datadog al agregar las variables de entorno requeridas y el sidecar serverless-init.
+El [módulo de Terraform de Datadog para aplicaciones web de Linux][1] envuelve el recurso [azurerm_linux_web_app][2] y configura automáticamente su aplicación web para Datadog Serverless Monitoring agregando las variables de entorno requeridas y el sidecar serverless-init.
 
-Si aún no tienes Terraform configurado, [instala Terraform][3], crea un nuevo directorio y haz un archivo llamado `main.tf`.
+Si aún no tiene configurado Terraform, [instale Terraform][3], cree un nuevo directorio y cree un archivo llamado `main.tf`.
 
-Luego, agrega lo siguiente a tu configuración de Terraform, actualizándolo según sea necesario según tus necesidades:
+Luego, agregue lo siguiente a su configuración de Terraform, actualizándolo según sea necesario según sus necesidades:
 
 ```tf
 variable "datadog_api_key" {
@@ -294,9 +296,9 @@ module "my_web_app" {
 }
 ```
 
-Finalmente, ejecuta `terraform apply` y sigue cualquier indicación.
+Finalmente, ejecute `terraform apply` y siga las instrucciones.
 
-El [módulo de Datadog Linux Web App][1] solo despliega el recurso de Web App, por lo que necesitas construir y subir tu contenedor por separado.
+El [módulo de Datadog para aplicaciones web de Linux][1] solo implementa el recurso de aplicación web, por lo que debe compilar y enviar su contenedor por separado.
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
@@ -305,7 +307,7 @@ El [módulo de Datadog Linux Web App][1] solo despliega el recurso de Web App, p
 {{% /tab %}}
 {{% tab "Bicep" %}}
 
-Para usar el sidecar con Web Apps para Contenedores, debes usar `SITECONTAINERS` linuxFxVersion con `kind` configurado en `app,linux,container`. Actualiza tu Web App existente para incluir los ajustes de aplicación necesarios de Datadog y el sidecar, de la siguiente manera:
+Para usar el sidecar con Web Apps for Containers, debe usar la `SITECONTAINERS` linuxFxVersion con `kind` establecido en `app,linux,container`. Actualice su aplicación web existente para incluir la configuración de la aplicación Datadog necesaria y el sidecar, de la siguiente manera:
 
 ```bicep
 resource webApp 'Microsoft.Web/sites@2025-03-01' = {
@@ -365,19 +367,19 @@ resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
 }
 ```
 
-Redespliega tu plantilla actualizada:
+Vuelva a implementar su plantilla actualizada:
 
 ```bash
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-Consulta la pestaña [Manual](?tab=manual#instrumentation) para descripciones de todas las variables de entorno.
+Consulte la pestaña [{{< ui >}}Manual{{< /ui >}}](?tab=manual#instrumentation) para ver las descripciones de todas las variables de entorno.
 
 
 {{% /tab %}}
 {{% tab "Plantilla ARM" %}}
 
-Actualiza tu Web App existente para incluir los ajustes de aplicación necesarios de Datadog y el sidecar, de la siguiente manera:
+Actualice su aplicación web existente para incluir la configuración de la aplicación Datadog necesaria y el sidecar, de la siguiente manera:
 
 ```jsonc
 {
@@ -460,44 +462,46 @@ Actualiza tu Web App existente para incluir los ajustes de aplicación necesario
 }
 ```
 
-Redespliega tu plantilla actualizada:
+Vuelva a implementar su plantilla actualizada:
 
 ```shell
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-Consulta la pestaña [Manual](?tab=manual#instrumentation) para descripciones de todas las variables de entorno.
+Consulte la pestaña [{{< ui >}}Manual{{< /ui >}}](?tab=manual#instrumentation) para ver las descripciones de todas las variables de entorno.
 
 {{% /tab %}}
 {{% tab "Manual" %}}
 
 #### Contenedor sidecar {#sidecar-container}
 
-1. En el Portal de Azure, ve a **Centro de Despliegue** y selecciona **Agregar**.
-2. En el formulario **Editar contenedor**, proporciona lo siguiente:
-   - **Fuente de imagen**: Docker Hub u otros registros
-   - **Tipo de imagen**: Público
-   - **URL del servidor de registro**: `index.docker.io`
-   - **Imagen y etiqueta**: `datadog/serverless-init:latest`
-   - **Puerto**: 8126
-3. Seleccionar **Aplicar**.
+1. En Azure Portal, vaya a {{< ui >}}Deployment Center{{< /ui >}} y seleccione {{< ui >}}Add{{< /ui >}}.
+2. En el formulario {{< ui >}}Edit container{{< /ui >}}, proporcione lo siguiente:
+   - {{< ui >}}Image source{{< /ui >}}: Docker Hub u otros registros
+   - {{< ui >}}Image type{{< /ui >}}: Público
+   - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+   - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+   - {{< ui >}}Port{{< /ui >}}: 8126
+   - En {{< ui >}}Environment variables{{< /ui >}}, habilite la opción {{< ui >}}Allow access to all app settings{{< /ui >}}.
 
-#### Configuraciones de la aplicación {#application-settings}
+     {{< img src="serverless/azure_app_service/app_settings.png" alt="En Azure, una sección de Variables de entorno. Una opción 'Permitir acceso a todas las configuraciones de la aplicación' está habilitada con una casilla de verificación." >}}
 
-En tus **Configuraciones de la app** en Azure, establece las siguientes variables de entorno en tu contenedor principal y en el contenedor sidecar. Alternativamente, establece estas variables en tu contenedor principal y habilita la opción **Permitir acceso a todas las configuraciones de la app**.
+3. Seleccione {{< ui >}}Apply{{< /ui >}}.
 
-{{< img src="serverless/azure_app_service/app_settings.png" alt="En Azure, una sección de Variables de Entorno. Una opción 'Permitir acceso a todas las configuraciones de la app' está habilitada con una casilla de verificación." >}}
+#### Configuración de la aplicación {#application-settings}
 
-- `DD_API_KEY`: Tu [clave API de Datadog][701]
-- `DD_SERVICE`: Cómo deseas etiquetar tu servicio. Por ejemplo, `sidecar-azure`
-- `DD_ENV`: Cómo deseas etiquetar tu entorno. Por ejemplo, `prod`
-- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`. Establecer esta variable de entorno permite que el `/home/` montaje persista y se comparta con el sidecar.
-- `DD_SERVERLESS_LOG_PATH`: Donde escribes tus registros. Por ejemplo, `/home/LogFiles/*.log` o `/home/LogFiles/myapp/*.log`
-- `DD_AAS_INSTANCE_LOGGING_ENABLED`: Cuando `true`, la recolección de registros se configura automáticamente para una ruta de archivo adicional: `/home/LogFiles/*$COMPUTERNAME*.log`
-- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: Un descriptor de archivo opcional utilizado para un seguimiento de archivos más preciso. Recomendado para escenarios con rotación frecuente de registros. Por ejemplo, configurar `_default_docker` hace que el rastreador de registros ignore los archivos rotados y se enfoque solo en el archivo de registro activo de Azure.
+En su {{< ui >}}App settings{{< /ui >}} en Azure, establezca las siguientes variables de entorno en su contenedor principal.
+
+- `DD_API_KEY`: Su [clave de API de Datadog][701]
+- `DD_SERVICE`: Cómo desea etiquetar su servicio. Por ejemplo, `sidecar-azure`
+- `DD_ENV`: Cómo desea etiquetar su entorno. Por ejemplo, `prod`
+- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`. Configurar esta variable de entorno permite que el montaje `/home/` persista y se comparta con el sidecar.
+- `DD_SERVERLESS_LOG_PATH`: Donde escribe sus registros. Por ejemplo, `/home/LogFiles/*.log` o `/home/LogFiles/myapp/*.log`
+- `DD_AAS_INSTANCE_LOGGING_ENABLED`: Cuando `true`, la recopilación de registros se configura automáticamente para una ruta de archivo adicional: `/home/LogFiles/*$COMPUTERNAME*.log`
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: Un descriptor de archivo opcional utilizado para un seguimiento de archivos más preciso. Recomendado para escenarios con rotación frecuente de registros. Por ejemplo, establecer `_default_docker` configura el seguidor de registros para ignorar los archivos rotados y centrarse solo en el archivo de registro activo de Azure.
 
 
-   <div class="alert alert-info">Si su aplicación tiene múltiples instancias, asegúrese de que el nombre del archivo de registro de su aplicación incluya la variable <code>$COMPUTERNAME</code>. Esto asegura que el seguimiento de registros no genere registros duplicados de múltiples instancias que leen el mismo archivo.</div>
+   <div class="alert alert-info">Si su aplicación tiene varias instancias, asegúrese de que el nombre del archivo de registro de su aplicación incluya la <code>$COMPUTERNAME</code> variable. Esto garantiza que el seguimiento de registros no cree registros duplicados de varias instancias que leen el mismo archivo.</div>
 
 <details open>
 <summary>
@@ -520,16 +524,315 @@ Si está configurando la supervisión para una aplicación .NET, configure las s
 
 {{% svl-tracing-env %}}
 
-## Perfilado {#profiling}
+### Ranuras de implementación {#deployment-slots}
+
+<div class="alert alert-info">La instrumentación de ranuras de implementación está en versión preliminar. Durante la versión preliminar, la telemetría de las ranuras aparece bajo la aplicación web principal. Para distinguir entre la telemetría de la ranura y la de producción, configure <a href="/getting_started/tagging/unified_service_tagging/">unified service tagging</a> con valores distintos para cada ranura.</div>
+
+{{% collapse-content title="Instrumentar una ranura de implementación" level="h4" %}}
+
+Para instrumentar una [ranura de implementación][901] en lugar de la aplicación web principal, utilice uno de los siguientes métodos.
+
+[901]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
+
+{{< tabs >}}
+{{% tab "Datadog CLI" %}}
+
+Usando la [CLI de Datadog][1] (v5.9.0+), añada la flag `--slot`. Utilice `--service`, `--env` y `--version` para establecer valores de unified service tagging distintos para la ranura.
+
+Para encontrar los nombres de sus ranuras de implementación, ejecute:
+
+```shell
+az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <web-app>
+```
+
+```shell
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
+  --slot <slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
+```
+
+Alternativamente, proporcione el ID de recurso completo de la ranura con la flag `--resource-id`:
+
+```shell
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
+```
+
+**Nota**: Cuando pasa `--env`, la CLI marca automáticamente `DD_ENV` como una configuración persistente, por lo que su etiqueta `env` persiste a través de los intercambios de ranuras.
+
+[1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+Utilice el [módulo de ranura de aplicación web de Datadog para Linux][1]:
+
+```tf
+module "my_web_app_slot" {
+  source  = "DataDog/web-app-datadog/azurerm//modules/linux-slot"
+  version = "~> 1.0"
+
+  name                = "staging"             // Replace with your slot name
+  app_service_id      = module.my_web_app.id  // Reference to your main web app
+  resource_group_name = "my-resource-group"   // Replace with your resource group name
+
+  datadog_api_key = var.datadog_api_key
+  datadog_service = "my-service" // Replace with your service name
+  datadog_env     = "staging"    // Set a distinct value for each slot
+  datadog_version = "0.0.0"      // Replace with your application version
+
+  site_config = {
+    application_stack = {
+      docker_registry_url = "https://index.docker.io" // Replace with your registry URL
+      docker_image_name   = "my-app:latest"           // Replace with your image name
+    }
+  }
+  app_settings = {
+    DD_TRACE_ENABLED = "true" // Example setting
+  }
+}
+```
+
+Ejecute `terraform apply` y siga las instrucciones.
+
+**Nota**: Cuando `datadog_env` se establece en su módulo de aplicación web principal, el módulo marca `DD_ENV` como una configuración persistente, por lo que su etiqueta `env` persiste durante los intercambios de ranuras.
+
+[1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux-slot
+
+{{% /tab %}}
+{{% tab "Bicep" %}}
+
+Actualice su plantilla para apuntar a una ranura de implementación en lugar de a la aplicación web principal:
+
+```bicep
+param webAppName string
+param slotName string
+
+@description('Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it.')
+param existingStickyAppSettingNames array = []
+
+resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
+  name: webAppName
+}
+
+resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
+  parent: webApp
+  name: slotName
+  kind: 'app,linux,container'
+  // ...
+  properties: {
+    // ...
+    siteConfig: {
+      // ...
+      linuxFxVersion: 'SITECONTAINERS'
+      appSettings: concat(datadogAppSettings, [
+        //... Your existing app settings
+      ])
+    }
+  }
+}
+
+// Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+// full slotConfigNames list — existingStickyAppSettingNames must include any settings already
+// marked sticky or they will be de-stickied.
+resource stickySettings 'Microsoft.Web/sites/config@2025-03-01' = {
+  parent: webApp
+  name: 'slotConfigNames'
+  properties: {
+    appSettingNames: union(existingStickyAppSettingNames, ['DD_ENV'])
+  }
+  dependsOn: [slot]
+}
+
+resource mainContainer 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
+  parent: slot
+  name: 'main'
+  properties: {
+    isMain: true
+    image: 'index.docker.io/your/image:tag' // Replace with your Application Image
+    targetPort: '8080'                      // Replace with your Application's Port
+  }
+}
+
+@secure()
+param datadogApiKey string
+
+var datadogAppSettings = [
+  { name: 'DD_API_KEY', value: datadogApiKey }
+  { name: 'DD_SITE', value: 'datadoghq.com' }  // Replace with your Datadog site
+  { name: 'DD_SERVICE', value: 'my-service' }  // Replace with your service name
+  { name: 'DD_ENV', value: 'staging' }          // Set a distinct value for each slot
+  { name: 'DD_VERSION', value: '0.0.0' }       // Replace with your application version
+  { name: 'WEBSITES_ENABLE_APP_SERVICE_STORAGE', value: 'true' }
+  // Uncomment for .NET applications
+  // { name: 'DD_DOTNET_TRACER_HOME', value: '/datadog/tracer' }
+  // { name: 'CORECLR_ENABLE_PROFILING', value: '1' }
+  // { name: 'CORECLR_PROFILER', value: '{846F5F1C-F9AE-4B07-969E-05C26BC060D8}' }
+  // { name: 'CORECLR_PROFILER_PATH', value: '/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so' }
+  { name: 'DD_LOGS_INJECTION', value: 'true' }
+  { name: 'DD_TRACE_ENABLED', value: 'true' }
+  // Add any additional options here
+]
+
+resource sidecar 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
+  parent: slot
+  name: 'datadog-sidecar'
+  properties: {
+    image: 'index.docker.io/datadog/serverless-init:latest'
+    isMain: false
+    targetPort: '8126'
+    environmentVariables: [for v in datadogAppSettings: { name: v.name, value: v.name }]
+  }
+}
+```
+
+Vuelva a implementar su plantilla actualizada:
+
+```bash
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Nota**: La configuración de la aplicación de Azure se intercambia entre ranuras de forma predeterminada. El recurso `slotConfigNames` anterior marca `DD_ENV` como persistente, por lo que su etiqueta `env` persiste durante los intercambios de ranuras.
+
+El recurso `slotConfigNames` realiza un reemplazo completo de la lista de configuraciones persistentes. Pase cualquier configuración ya marcada como persistente en `existingStickyAppSettingNames`, o `[]` para una aplicación nueva. Cualquier nombre omitido deja de ser persistente.
+
+{{% /tab %}}
+{{% tab "Plantilla ARM" %}}
+
+Actualice su plantilla para apuntar a una ranura de implementación en lugar de a la aplicación web principal:
+
+```jsonc
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "webAppName": {
+      "type": "string"
+    },
+    "slotName": {
+      "type": "string"
+    },
+    // ...
+    "datadogApiKey": {
+      "type": "securestring"
+    },
+    "existingStickyAppSettingNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": { "description": "Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
+    }
+  },
+  "variables": {
+    "datadogAppSettings": [
+      { "name": "DD_API_KEY", "value": "[parameters('datadogApiKey')]" },
+      { "name": "DD_SITE", "value": "datadoghq.com" }, // Replace with your Datadog site
+      { "name": "DD_SERVICE", "value": "my-service" }, // Replace with your service name
+      { "name": "DD_ENV", "value": "staging" },        // Set a distinct value for each slot
+      { "name": "DD_VERSION", "value": "0.0.0" },      // Replace with your application version
+      { "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE", "value": "true" },
+      // Uncomment for .NET applications
+      // { "name": "DD_DOTNET_TRACER_HOME", "value": "/datadog/tracer" }
+      // { "name": "CORECLR_ENABLE_PROFILING", "value": "1" }
+      // { "name": "CORECLR_PROFILER", "value": "{846F5F1C-F9AE-4B07-969E-05C26BC060D8}" }
+      // { "name": "CORECLR_PROFILER_PATH", "value": "/datadog/tracer/Datadog.Trace.ClrProfiler.Native.so" }
+      { "name": "DD_LOGS_INJECTION", "value": "true" },
+      { "name": "DD_TRACE_ENABLED", "value": "true" }
+      // Add any additional options here
+    ],
+    "yourAppSettings": [
+      // Add your app settings here
+    ]
+  },
+  "resources": {
+    "slot": {
+      "type": "Microsoft.Web/sites/slots",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'))]",
+      "kind": "app,linux,container",
+      // ...
+      "properties": {
+        // ...
+        "siteConfig": {
+          // ...
+          "linuxFxVersion": "SITECONTAINERS",
+          "appSettings": "[concat(variables('datadogAppSettings'), variables('yourAppSettings'))]"
+        }
+      }
+    },
+    "mainContainer": {
+      "type": "Microsoft.Web/sites/slots/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/main')]",
+      "properties": {
+        "isMain": true,
+        "image": "index.docker.io/your/image:tag", // Replace with your Application Image
+        "targetPort": "8080"                       // Replace with your Application's Port
+      }
+    },
+    "sidecar": {
+      "type": "Microsoft.Web/sites/slots/sitecontainers",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/', parameters('slotName'), '/datadog-sidecar')]",
+      "properties": {
+        "image": "index.docker.io/datadog/serverless-init:latest",
+        "isMain": false,
+        "targetPort": "8126",
+        "copy": [{
+          "name": "environmentVariables", "count": "[length(variables('datadogAppSettings'))]",
+          "input": {
+            "name": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]",
+            "value": "[variables('datadogAppSettings')[copyIndex('environmentVariables')].name]"
+          }
+        }]
+      }
+    },
+    // Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+    // full slotConfigNames list — existingStickyAppSettingNames must include any settings
+    // already marked sticky or they will be de-stickied.
+    "stickySettings": {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/slotConfigNames')]",
+      "properties": {
+        "appSettingNames": "[union(parameters('existingStickyAppSettingNames'), createArray('DD_ENV'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('webAppName'), parameters('slotName'))]"
+      ]
+    }
+  }
+}
+```
+
+Vuelva a implementar su plantilla actualizada:
+
+```shell
+az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
+```
+
+**Nota**: La configuración de la aplicación de Azure se intercambia entre ranuras de forma predeterminada. El recurso `slotConfigNames` anterior marca `DD_ENV` como persistente, por lo que su etiqueta `env` persiste durante los intercambios de ranuras.
+
+El recurso `slotConfigNames` realiza un reemplazo completo de la lista de configuraciones persistentes. Pase cualquier configuración ya marcada como persistente en `existingStickyAppSettingNames`, o `[]` para una aplicación nueva. Cualquier nombre omitido deja de ser persistente.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+{{% /collapse-content %}}
+
+## Solución de problemas {#troubleshooting}
+
+Si el escalado automático está habilitado en el plan de App Service y ve trazas no relacionadas combinadas, es posible que los sondeos de estado de la plataforma de Azure (`User-Agent: HttpScaleManager`) contengan un contexto de traza W3C obsoleto. Si todos los emisores de llamadas a la aplicación están instrumentados con Datadog, establezca `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` en la aplicación afectada para restringir la extracción del contexto de traza al formato de Datadog. Para aplicaciones con llamadores que no están instrumentados por Datadog, esta configuración hace que Datadog ignore su contexto de traza W3C, dividiendo esas solicitudes en trazas desconectadas en lugar de fusionarlas en la traza principal.
+
+## Profiling {#profiling}
 
 <div class="alert alert-info">
-El Perfilador Continuo de Datadog está disponible en vista previa para Python y Node.js en Linux Azure App Service.
+El Continuous Profiler de Datadog está disponible en versión preliminar para Python y Node.js en Linux Azure App Service.
 </div>
 
-Para habilitar el [Perfilador Continuo][4], establezca la variable de entorno `DD_PROFILING_ENABLED=true` en el contenedor de su aplicación.
+Para habilitar el [Continuous Profiler][4], establezca la variable de entorno `DD_PROFILING_ENABLED=true` en el contenedor de su aplicación.
 
 ## Aplicación de ejemplo {#example-application}
-El siguiente ejemplo contiene una sola aplicación con seguimiento, métricas y registros configurados.
+El siguiente ejemplo contiene una sola aplicación con trazas, métricas y registros configurados.
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
@@ -765,3 +1068,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [2]: /es/serverless/guide/azure_app_service_linux_containers_serverless_init
 [3]: https://app.datadoghq.com/integrations/azure
 [4]: /es/profiler/
+[5]: /es/integrations/azure-app-services/#metrics

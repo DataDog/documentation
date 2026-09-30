@@ -80,7 +80,7 @@ Aggregate and filter your traffic data by any tags on the network analytics page
 
 Include listed tags are `service`, `availability zone`, `env`, `environment`, `pod`, `host`, `ip`, and `port`, among others. If you want to aggregate or filter traffic by a tag that is not already in the menu, add it as a custom Facet:
 
-1. Select the {{< ui >}}+ Add{{< /ui >}} button on the top right of the facet panels.
+1. Select the {{< ui >}}\+ Add{{< /ui >}} button on the top right of the facet panels.
 2. Enter the relevant tag you want to create a custom facet upon.
 3. Click {{< ui >}}Add{{< /ui >}}.
 
@@ -166,7 +166,7 @@ Click the three dots menu in the analytics table to pivot to [network path][11] 
 
 Organize and share views of traffic data. Saved Views make debugging faster and empower collaboration. For instance, you can create a view, save it for the future for common queries, and copy its link to share network data with your teammates.
 
-- To save a view: click the {{< ui >}}+ Save{{< /ui >}} button and name the view to record your current query, table configuration, and graph metric selections.
+- To save a view: click the {{< ui >}}\+ Save{{< /ui >}} button and name the view to record your current query, table configuration, and graph metric selections.
 - To load a view: click {{< ui >}}Views{{< /ui >}} at the top left to see your Saved Views and select a view from the list.
 - To rename a view: hover over a view in the Saved Views list and click the gear icon to {{< ui >}}Edit name{{< /ui >}}.
 - To share a view: hover over a view in the Saved Views list and click the link icon to {{< ui >}}Copy permalink{{< /ui >}}.

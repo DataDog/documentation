@@ -4,6 +4,9 @@ description: 'Best practices for managing and monitoring your logs efficiently i
 aliases:
     - /logs/guide/logs-monitors-on-volumes/
 further_reading:
+    - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+      tag: "Architecture Center"
+      text: "A guide to Log Management Indexing Strategies with Datadog"
     - link: "/logs/log_configuration/processors"
       tag: "Documentation"
       text: "Learn how to process your logs"

@@ -45,22 +45,26 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
 **Recommended for**: VMs and physical servers that only need system resource metrics<br>
 : The Agent collects system resource metrics (CPU, memory, disk, network) and limited process and service data. Only the following integrations run:
-  - [System Check][1]
-  - [Disk][2]
+  - [Cisco ACI][25] (7.78+)
+  - [Cisco SD-WAN][26] (7.78+)
   - [Directory][3] (7.80+)
+  - [Disk][2]
   - [Network][4]
   - [NTP][5]
   - [Processes][6]
+  - [SNMP][28] (7.78+)
+  - [System Check][1]
   - [Systemd][7]
+  - [Versa][27] (7.78+)
   - [Windows Certificate Store][8] (7.80+)
   - [Windows Crash Detection][9]
+  - [Windows Event Log][17]
   - [Windows Kernel Memory][10]
   - [Windows Performance Counters][11] (7.80+)
   - [Windows Registry][12] (7.80+)
   - [Windows Services][13]
   - [WMI Check][14] (7.80+)
   - [Custom checks][15] prefixed with `custom_`
-  - Logs-only integrations (for example, [journald][16] or [Windows Event Log][17])
 
 ### End User Device
 
@@ -166,3 +170,7 @@ To verify the infrastructure mode set on your hosts:
 [22]: https://app.datadoghq.com/fleet
 [23]: /agent/configuration/agent-configuration-files/
 [24]: /agent/configuration/agent-commands/#restart-the-agent
+[25]: /integrations/cisco-aci/
+[26]: /integrations/cisco-sdwan/
+[27]: /integrations/versa/
+[28]: /integrations/snmp/

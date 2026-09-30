@@ -4,58 +4,61 @@ aliases:
 - /es/tracing/service_catalog/integrations
 - /es/service_catalog/integrations
 - /es/software_catalog/integrations
+description: Conecte Internal Developer Portal con herramientas de terceros, incluyendo
+  PagerDuty, Opsgenie, GitHub, Jira y plataformas de CI/CD para enriquecer los metadatos
+  del Catálogo y automatizar acciones.
 further_reading:
-- link: /tracing/software_catalog/service_definition_api/
+- link: /internal_developer_portal/catalog/entity_model/
   tag: Documentación
-  text: Más información sobre la API de definición de servicios
+  text: Obtenga información sobre la API de definición de servicio
 - link: /integrations/opsgenie/
   tag: Documentación
-  text: Más información sobre la integración de OpsGenie
+  text: Obtenga información sobre la integración con Opsgenie
 - link: /integrations/pagerduty/
   tag: Documentación
-  text: Más información sobre la integración en PagerDuty
-title: Integraciones
+  text: Obtenga información sobre la integración con PagerDuty
+title: Integrations
 ---
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
-Las integraciones de PagerDuty y de OpsGenie del portal interno de desarrolladores no son compatibles con el sitio {{< region-param key=dd_datacenter code="true" >}}.
+Las integraciones de PagerDuty y Opsgenie para Internal Developer Portal no son compatibles en el {{< region-param key=dd_datacenter code="true" >}} sitio.
 </div>
 {{% /site-region %}}
+  
+## Descripción general {#overview}
 
-## Información general
+Cuando configura una cuenta de servicio para una [integración de Datadog][1], puede incorporar metadatos de sus integraciones en las definiciones de entidad del [Catálogo][16]. Desde allí, puede usar el [Action Catalog][31] para consultar sistemas externos o activar acciones—como crear incidentes o actualizar tickets—sin salir de Datadog.
 
-Cuando configuras una cuenta de servicio de una [integración de Datadog][1], puedes incorporar metadatos de tus integraciones en definiciones de entidades del [Software Catalog][16]. Desde ahí, puedes utilizar el [Action Catalog][31] para consultar sistemas externos o activar acciones -como crear incidentes o actualizar tickets- sin salir de Datadog.
-
-{{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" d_target="#signupModal" btn_hidden="false" header="Solicitar una integración nueva" >}}
+{{< callout url="https://forms.gle/PzXWxrnGaQPiVf9M8" header="Solicite una nueva integración" >}}
 {{< /callout >}}
 
-## Colaboración, gestión de incident (incidente) y tickets
+## Colaboración, gestión de incidentes y gestión de tickets {#collaboration-incident-management-and-ticketing}
 
 | Integración  | Descripción    | Ejemplos de acciones (Action Catalog) |
 |--------------|----------------|----------------------------------|
-| [PagerDuty][2] | Añade metadatos de PagerDuty a un servicio de manera que el Software Catalog muestre y enlace con información como quién está de guardia y si hay incidentes activos de PagerDuty para el servicio. | `Get current on-call`, `Trigger incident (incidente)` <br> [Consultar todas las acciones disponibles.][32] |
-| [OpsGenie][3] | Añade metadatos de OpsGenie a un servicio de manera que el Software Catalog muestre y enlace a información como quién está de guardia para el servicio. | `Acknowledge alert`, `Get current on call` <br> [Consultar todas las acciones disponibles.][33] |
-| [StatusPage][4] | Crea, actualiza y recupera detalles sobre incidentes y componentes. | `Create an incident (incidente)`, `Update component status` <br> [Consultar todas las acciones disponibles.][34] |
-| [Freshservice][5] | Crea, actualiza y consulte tickets de Freshservice. | `List tickets`, `Update ticket` <br> [Consultar todas las acciones disponibles.][35] |
-| [Slack][6] | Envía alertas o actualizaciones de incident (incidente) a los canales de Slack y realiza la gestión de canales. | `Invite users to channel`, `Set channel topic` <br> [Consultar todas las acciones disponibles.][36] |
-| [Microsoft Teams][7] | Envía mensajes o avisos a los canales de Teams para colaborar en incident (incidente). | `Make a decision`, `Send a message` <br> [Consultar todas las acciones disponibles.][37] |
-| [Jira][8] | Crea y actualiza versiones directamente desde Datadog. | `Create issue`, `Add comment` <br> [Consultar todas las acciones disponibles.][38] |
-| [Asana][9] | Crea y actualiza tareas de Asana, asigna usuarios y aplica etiquetas (tags). | `Add tag to task`, `Update task completed status` <br> [Consultar todas las acciones disponibles.][39] |
-| [LaunchDarkly][10] | Realiza un rastreo de los cambios en las marcas de funciones, permite que los desarrolladores realicen cambios sin salir de la plataforma e impulsa la automatización en función de los cambios. | `Add expire user target date`, `Toggle feature flag` <br> [Consultar todas las acciones disponibles.][40] |
+| [PagerDuty][2] | Agregue metadatos de PagerDuty a un servicio para que el Catálogo muestre y enlace información como quién está de guardia y si hay incidentes activos de PagerDuty para el servicio. | `Get current on-call`, `Trigger incident` <br> [Ver todas las acciones disponibles.][32] |
+| [Opsgenie][3] | Agregue metadatos de Opsgenie a un servicio para que el Catálogo muestre y enlace información como quién está de guardia para el servicio. | `Acknowledge alert`, `Get current on call` <br> [Ver todas las acciones disponibles.][33] |
+| [StatusPage][4] | Cree, actualice y recupere detalles sobre incidentes y componentes. | `Create an incident`, `Update component status` <br> [Ver todas las acciones disponibles.][34] |
+| [Freshservice][5] | Cree, actualice y consulte tickets de Freshservice. | `List tickets`, `Update ticket` <br> [Ver todas las acciones disponibles.][35] |
+| [Slack][6] | Envíe alertas de incidentes o actualizaciones a canales de Slack y realice la gestión de canales. | `Invite users to channel`, `Set channel topic` <br> [Ver todas las acciones disponibles.][36] |
+| [Microsoft Teams][7] | Envíe mensajes o avisos a canales de Teams para la colaboración en incidentes. | `Make a decision`, `Send a message` <br> [Ver todas las acciones disponibles.][37] |
+| [Jira][8] | Cree y actualice incidencias directamente desde Datadog. | `Create issue`, `Add comment` <br> [Ver todas las acciones disponibles.][38] |
+| [Asana][9] | Cree y actualice tareas de Asana, asigne usuarios y aplique etiquetas. | `Add tag to task`, `Update task completed status` <br> [Ver todas las acciones disponibles.][39] |
+| [LaunchDarkly][10] | Realice un seguimiento de los cambios en los indicadores de funciones, permita que los desarrolladores realicen cambios sin salir de la plataforma e impulse la automatización en función de los cambios | `Add expire user target date`, `Toggle feature flag` <br> [Ver todas las acciones disponibles.][40] |
 
-### Ejemplos de configuración
+### Ejemplos de configuración {#setup-examples}
 
-{{% collapse-content title="PagerDuty" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="PagerDuty" level="h4" expanded=false id="pagerduty-setup" %}}
 
-Puedes conectar cualquier servicio de tu [Directorio de servicios de PagerDuty][63]. Puedes asignar un servicio de PagerDuty a cada servicio de Software Catalog.
+Puede conectar cualquier servicio en su [Directorio de servicios de PagerDuty][63]. Puede asignar un servicio de PagerDuty a cada servicio en el Catálogo.
 
-1. Si todavía no lo hiciste, configura la [integración de PagerDuty con Datadog][2].
-1. Obtén tu [Clave de acceso de la API de PagerDuty][61].
-1. Pega la clave en la page (página) [configuración de la integración de PagerDuty][52].
+1. Si aún no lo ha hecho, configure la [integración de Datadog con PagerDuty][2].
+1. Obtenga su [clave de API de PagerDuty][61].
+1. Pegue la clave en la página de [PagerDuty Integration Setup][52].
 
-   {{< img src="tracing/software_catalog/pagerduty-token.png" alt="Forma de configuración de la integración de PagerDuty con el campo de la clave de la API resaltada." style="width:100%;" >}}
+   {{< img src="tracing/software_catalog/pagerduty-token.png" alt="Formulario de configuración de la integración de PagerDuty con el campo de clave de API resaltado." style="width:100%;" >}}
 
-1. Añade información de PagerDuty a la [definición de entidad][82]:
+1. Agregue información de PagerDuty a la [definición de entidad][82]:
    ```
    ...
    integrations:
@@ -65,18 +68,18 @@ Puedes conectar cualquier servicio de tu [Directorio de servicios de PagerDuty][
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="OpsGenie" level="h4" expanded=false id="id-for-anchoring" %}}
+{{% collapse-content title="Opsgenie" level="h4" expanded=false id="opsgenie-setup" %}}
 
-Para añadir metadatos de OpsGenie a una definición de entidad: 
+Para agregar metadatos de Opsgenie a una definición de entidad: 
 
-1. Si aún no lo has hecho, configura la [integración de OpsGenie de Datadog][3].
-1. Obtén tu [Clave de acceso a la API de OpsGenie][62] y asegúrate de que tenga permisos de **acceso a la configuración** y **lectura**.
-3. En la parte inferior del [ícono de integración][55], añade una cuenta, pega tu clave de acceso a la API de OpsGenie y selecciona la región de tu cuenta de OpsGenie.
+1. Si aún no lo ha hecho, configure la [integración de Datadog con Opsgenie][3].
+1. Obtenga su [clave de API de Opsgenie][62] y asegúrese de que tenga **acceso a la configuración** y **lectura** permisos.
+3. En la parte inferior del [mosaico de integración][55], agregue una cuenta, pegue su clave de API de Opsgenie y seleccione la región de su cuenta de Opsgenie.
 
-   {{< img src="tracing/software_catalog/create_account1.png" alt="El proceso Create New Account (Crear nueva cuenta) en el ícono de integración de OpsGenie" style="width:80%;" >}}
-   {{< img src="tracing/software_catalog/create_account2.png" alt="El proceso Create New Account (Crear nueva cuenta) en el ícono de integración de OpsGenie" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account1.png" alt="El flujo de trabajo Crear nueva cuenta en el mosaico de integración de Opsgenie" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account2.png" alt="El flujo de trabajo Crear nueva cuenta en el mosaico de integración de Opsgenie" style="width:80%;" >}}
 
-4. Actualiza la [definición de entidad][82] con metadatos de OpsGenie. Por ejemplo:
+4. Actualice la [definición de entidad][82] con metadatos de Opsgenie. Por ejemplo:
 
    ```yaml
    "integrations": {
@@ -87,47 +90,47 @@ Para añadir metadatos de OpsGenie a una definición de entidad:
    }
    ```
 
-Una vez completados estos pasos, aparecerá un cuadro de información **On Call** en la pestaña **Ownership** para los servicios en Software Catalog.
+Una vez que haya completado estos pasos, aparecerá un cuadro de información **On Call** en la **Ownership** para los servicios en el Catálogo.
 
-{{< img src="tracing/software_catalog/oncall_information.png" alt="Cuadro de información On Call (De guardia) en el que se muestra información de OpsGenie en Software Catalog" style="width:85%;" >}}
+{{< img src="tracing/software_catalog/oncall_information.png" alt="Cuadro de información On Call que muestra información de Opsgenie en el Catálogo." style="width:85%;" >}}
 
 {{% /collapse-content %}}
 
 
-## Gestión de códigos source (fuente)
+## Gestión de código fuente {#source-code-management}
 
-| Integración  | Descripción    | Ejemplo de acciones (Action Catalog) |
+| Integración  | Descripción    | Ejemplos de acciones (Action Catalog) |
 |--------------|----------------|----------------------------------|
-| [GitHub][11] | Crea incidencias o PR, gestiona archivos de repositorio y automatiza el acceso del equipo. | `Add labels to pull request`, `Get team membership` <br> [Consultar todas las acciones disponibles.][41] |
-| [GitLab][12] | Gestionar incidencias, solicitudes de fusión, ramas y confirmaciones. | `Approve merge request`, `Cherry pick commit` <br> [Consultar todas las acciones disponibles.][42] |
-| Otros (Bitbucket, Repositorios de Azure) | Interactúa con plataformas no admitidas de forma nativa en Software Catalog o Action Catalog de Datadog. | N/A; utiliza acciones y solicitues HTTP para llamar a las API de la plataforma |
+| [GitHub][11] | Cree problemas o PR, administre archivos de repositorio y automatice el acceso del equipo. | `Add labels to pull request`, `Get team membership` <br> [Ver todas las acciones disponibles.][41] |
+| [GitLab][12] | Administre problemas, solicitudes de fusión, ramas y confirmaciones. | `Approve merge request`, `Cherry pick commit` <br> [Ver todas las acciones disponibles.][42] |
+| Otros (Bitbucket, Azure Repos) | Interactúe con plataformas que no son compatibles de forma nativa en el Catálogo de Datadog o el Action Catalog. | N/A; utilice acciones y solicitudes HTTP para llamar a las API de la plataforma |
 
-También puedes utilizar GitHub para gestionar las definiciones de entidad y configurar la integración de GitHub para extraer automáticamente las definiciones en Software Catalog. Más información sobre [la creación de definiciones de entidad y su importación desde GitHub][83].
+También puede usar GitHub para administrar definiciones de entidades y configurar la integración de GitHub para extraer definiciones automáticamente al Catálogo. Obtenga más información sobre [cómo crear definiciones de entidades e importarlas desde GitHub][83].
 
-## CI/CD
+## CI/CD {#cicd}
 
-| Integración  | Descripción    | Ejemplo de acciones (Action Catalog) |
+| Integración  | Descripción    | Ejemplos de acciones (Action Catalog) |
 |--------------|----------------|----------------------------------|
-| [Acciones en GitHub][11] | Visualiza, inicia y coordina workflows de CI/CD en GitHub. | `Get latest workflow (UI) / proceso (generic) run`, `Trigger github actions workflow (UI) / proceso (generic) run` <br> [Consultar todas las acciones disponibles.][47] |
-| [Pipelines de GitLab][12] | Gestiona pipelines de project (proyecto) de GitLab , cancela o reintenta trabajos y consulta los resultados de pipeline. | `Get latest pipeline`, `Retry jobs in a pipeline` <br> [Consultar todas las acciones disponibles.][48] |
-| [Jenkins] [13] |  Activa y gestiona trabajos de Jenkins. | `Submit Jenkins job (generic)`, `Get Jenkins job (generic) status` <br> [Consultar todas las acciones disponibles.][43] |
-| [CircleCI][14] | Interactúa con tus pipelines de CI. | `Approve workflow (UI) / proceso (generic) job (generic)`, `Get job (generic) details` <br> [Consultar todas las acciones disponibles.][44] |
-| [Azure DevOps Pipelines (ADO)][15] | Active pipelines y obtén datos de ejecución, ideal para iniciar despliegues o procesos de control de calidad en función de la actividad de monitor (noun). | `Get pipeline`, `Run pipeline` <br> [Consultar todas las acciones disponibles.][45] |
+| [GitHub Actions][11] | Vea, inicie y coordine flujos de trabajo de CI/CD en GitHub. | `Get latest workflow run`, `Trigger github actions workflow run` <br> [Ver todas las acciones disponibles.][47] |
+| [GitLab Pipelines][12] | Administre canalizaciones de proyectos de GitLab, cancele o reintente trabajos y consulte los resultados de las canalizaciones. | `Get latest pipeline`, `Retry jobs in a pipeline` <br> [Ver todas las acciones disponibles.][48] |
+| [Jenkins][13] |  Active y administre trabajos de Jenkins. | `Submit Jenkins job`, `Get Jenkins job status` <br> [Ver todas las acciones disponibles.][43] |
+| [CircleCI][14] | Interactúe con sus canalizaciones de CI. | `Approve workflow job`, `Get job details` <br> [Ver todas las acciones disponibles.][44] |
+| [Azure DevOps Pipelines (ADO)][15] | Active canalizaciones y obtenga datos de ejecución; ideal para iniciar implementaciones o flujos de trabajo de control de calidad basados en la actividad de seguimiento. | `Get pipeline`, `Run pipeline` <br> [Ver todas las acciones disponibles.][45] |
 
-## CMDB y portales internos para desarrolladores
+## CMDB e Internal Developer Portals {#cmdbs-and-internal-developer-portals}
 
 
-Puedes importar entidades desde ServiceNow y Backstage a Software Catalog de Datadog. Consulta la siguiente documentación para obtener más información:
+Puede importar entidades desde ServiceNow y Backstage al Catálogo de Datadog. Consulte la siguiente documentación para obtener más detalles:
 
 - [Importar entradas desde ServiceNow][84]
 - [Importar entradas desde Backstage][85]
 
 
-## Recursos en la nube
+## Recursos en la nube {#cloud-resources}
 
-Las integraciones la infraestructura de Datadog y [Resource Catalog][54] proporciona un completo inventario de integraciones en AWS, Azure y GCP. También puedes aprovechar las más de 1000 acciones de Datadog en el [Action Catalog][31] para crear visualizaciones, acciones y automatizaciones personalizadas.
+Las integraciones de infraestructura de Datadog y el [Resource Catalog][54] proporcionan un inventario completo de integraciones en AWS, Azure y GCP. También puede aprovechar las más de 1000 acciones de Datadog en el [Action Catalog][31] para crear visualizaciones, acciones y automatizaciones personalizadas.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,7 +149,7 @@ Las integraciones la infraestructura de Datadog y [Resource Catalog][54] proporc
 [13]: /es/integrations/jenkins
 [14]: /es/integrations/circleci
 [15]: /es/integrations/azure_devops/
-[16]: /es/internal_developer_portal/software_catalog/
+[16]: /es/internal_developer_portal/catalog/
 [31]: /es/actions/actions_catalog/
 [32]: /es/actions/actions_catalog/?search=pagerduty
 [33]: /es/actions/actions_catalog/?search=opsgenie
@@ -172,7 +175,7 @@ Las integraciones la infraestructura de Datadog y [Resource Catalog][54] proporc
 [61]: https://support.pagerduty.com/docs/api-access-keys
 [62]: https://support.atlassian.com/opsgenie/docs/api-key-management/
 [63]: https://support.pagerduty.com/docs/service-directory
-[82]: /es/internal_developer_portal/software_catalog/entity_model
-[83]: /es/internal_developer_portal/software_catalog/set_up/create_entities#github-integration
-[84]: /es/internal_developer_portal/software_catalog/set_up/import_entities#import-from-servicenow
-[85]: /es/internal_developer_portal/software_catalog/set_up/import_entities#import-from-backstage
+[82]: /es/internal_developer_portal/catalog/entity_model
+[83]: /es/internal_developer_portal/catalog/set_up/create_entities#github-integration
+[84]: /es/internal_developer_portal/catalog/set_up/import_entities#import-from-servicenow
+[85]: /es/internal_developer_portal/catalog/set_up/import_entities#entities-from-backstage

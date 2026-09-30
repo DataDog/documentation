@@ -46,11 +46,12 @@ Las funciones disponibles se clasifican de la siguiente manera:
 - [Aritmética](#arithmetic)
 - [Cadena](#string)
 - [Lógico](#logical)
+- [Regex](#regex)
 
 
 ### Aritmética {#arithmetic}
 
-<h4>abs(<i>num</i> value)</h4>
+<h4>abs(<i>num</i> valor)</h4>
 
 Devuelve el valor absoluto de un número.
 
@@ -63,7 +64,7 @@ Devuelve el valor absoluto de un número.
 {{% /collapse-content %}}
 
 
-<h4>ceil(<i>num</i> value)</h4>
+<h4>ceil(<i>num</i> valor)</h4>
 
 Redondea el número hacia arriba al entero más cercano.
 
@@ -273,7 +274,7 @@ Combina múltiples valores en una sola cadena con un delimitador entre ellos.
 {{% /collapse-content %}}
 
 
-<h4>upper(<i>str</i> cadena)</h4>
+<h4>upper(<i>str</i> string)</h4>
 
 Convierte una cadena a mayúsculas.
 
@@ -314,7 +315,49 @@ Comprueba si un atributo o expresión es nulo.
 
 {{% /collapse-content %}}
 
+---
+
+### Regex {#regex}
+
+Las funciones de Regex coinciden o transforman un valor usando una expresión regular (regex). Los patrones admiten las mismas construcciones de regex que la [extracción de regex][1], como literales, clases de caracteres y cuantificadores. El escape es diferente: un patrón de extracción es un campo simple, mientras que un patrón aquí es un argumento de cadena entre comillas dobles. A diferencia de la extracción, los grupos de captura aquí no necesitan un nombre: `regexp_replace` puede hacer referencia a un grupo sin nombre posicionalmente con `$1` a `$9`. Se aplica la misma guía de [rendimiento de patrones][2].
+
+<h4>regexp_like(<i>str</i> valor, <i>str</i> patrón)</h4>
+
+Devuelve `true` cuando el patrón coincide en cualquier parte del valor, y `false` en caso contrario.
+
+{{% collapse-content title="Ejemplo" level="h5" expanded=false %}}
+
+| Ejemplo  | Fórmula | Resultado |
+|----------|-------------|---------|
+| Un evento de registro tiene el siguiente atributo:<br>`message` = "conexión timeout after 30s" | `#is_timeout = regexp_like(message, "timeout\|deadline exceeded")` | `#is_timeout` = "true" |
+
+{{% /collapse-content %}}
+
+
+<h4>regexp_replace(<i>str</i> entrada, <i>str</i> patrón, <i>str</i> reemplazo, [<i>int</i> inicio, <i>int</i> N])</h4>
+
+Devuelve `input` con el texto coincidente reemplazado. Use `$1` a `$9` en `replacement` para insertar la coincidencia de un grupo de captura, o `${name}` para un grupo con nombre. Los argumentos de la fórmula son literales de cadena entre comillas dobles, por lo que debe escapar las barras invertidas. Por ejemplo, escriba `"\\d"` en lugar de `"\d"` para clases abreviadas en `pattern`. Para insertar un `$` literal en `replacement`, escape su significado especial con `\$`, luego escape esa barra invertida para el literal de cadena: `"\\$"`.
+
+| Argumento | Significado |
+|---|---|
+| `input` | El texto que se va a transformar |
+| `pattern` | El patrón de expresión regular que se va a buscar |
+| `replacement` | El patrón de transformación de expresión regular, que a menudo utiliza grupos de captura |
+| `start` | Opcional. El índice de caracteres basado en cero desde el cual comenzar la búsqueda. Se establece de forma predeterminada en `0` |
+| `N` | Opcional. El número máximo de coincidencias que se reemplazarán. El valor predeterminado es `1`. `0` reemplaza cada coincidencia |
+
+{{% collapse-content title="Ejemplo" level="h5" expanded=false %}}
+
+| Ejemplo  | Fórmula | Resultado |
+|----------|-------------|---------|
+| Un evento de registro tiene el siguiente atributo:<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
+
+{{% /collapse-content %}}
+
 
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /es/logs/explorer/calculated_fields/extractions/#regex
+[2]: /es/logs/explorer/calculated_fields/extractions/#pattern-performance

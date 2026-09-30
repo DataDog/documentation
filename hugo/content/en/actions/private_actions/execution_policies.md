@@ -17,6 +17,9 @@ further_reading:
   text: "Connections"
 ---
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Execution Policies are not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Overview
 
 Execution Policies let you control who, where, and what actions your team can run. Each Execution Policy is a single allow or deny rule for a set of actions, together with the Agents it applies to. You select those Agents by Agent tags. Execution Policies give you two main advantages when you authorize private actions:

@@ -4,9 +4,11 @@ title: 전환 양식
 ---
 ## 개요 {#overview}
 
-인시던트로 인해 상태 변경이 진행될 때마다 전환 양식을 사용하여 인시던트 필드를 작성할 것을 대응자에게 안내할 수 있습니다. 이 양식은 인시던트 대응 프로세스의 적절한 시점에 인시던트에 대한 정보가 수집되도록 하는 데 도움이 됩니다.
+인시던트로 인해 상태 변경이 진행될 때마다 전환 양식을 사용하여 인시던트 필드를 작성할 것을 대응자에게 안내할 수 있습니다. 이 양식은 인시던트 대응 프로세스의 적절한 시점에 인시던트에 대한 정보가 수집되도록 하는 데 도움이 됩니다. 예를 들어, 인시던트가 해결되기 전에 응답자가 팀과 포스트모템 담당자를 선택하도록 요구하는 양식을 만들 수 있습니다. 이 양식은 응답자가 Datadog, Slack 또는 Microsoft Teams에서 인시던트를 해결할 때 표시됩니다.
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="인시던트를 Resolved로 이동할 때 사용자에게 필수 Teams 및 Postmortem Owner 필드를 작성할 것을 요청하는 상태 변경 양식" style="width:70%;" >}}
+
+<div class="alert alert-info">전환 양식의 필수 필드는 사람이 수행한 상태 변경에만 적용됩니다. API 또는 <a href="/incident_response/incident_management/setup_and_configuration/automations">인시던트 자동화</a>를 통해 트리거되는 것과 같은 자동화된 상태 변경은 차단되지 않습니다.</div>
 
 ## 전제 조건 {#prerequisites}
 

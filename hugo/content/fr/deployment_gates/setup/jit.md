@@ -1,6 +1,6 @@
 ---
 description: Évaluez les portes de déploiement en envoyant des règles inline dans
-  la demande d’évaluation — aucune porte n’a besoin d’exister dans Datadog au préalable.
+  la demande d'évaluation, aucune porte n'a besoin d'exister dans Datadog au préalable.
 further_reading:
 - link: /deployment_gates/setup/preconfigured
   tag: Documentation
@@ -61,21 +61,23 @@ Pour le schéma complet et toutes les options disponibles, consultez la [référ
 
 {{< tabs >}}
 {{% tab "Monitor" %}}
-La règle Monitor évalue l'état d'un ensemble de monitors sur une période configurable. Elle échoue si, à tout moment pendant la période d'évaluation :
+La règle Monitor évalue l'état d'un ensemble de monitors sur une période configurable. Sélectionnez des monitors avec `query` ou `monitor_ids` ; les deux options sont mutuellement exclusives. La règle peut échouer si, à tout moment pendant la période d'évaluation :
 
-- Aucun moniteur ne correspond à la requête.
-- Plus de 50 moniteurs correspondent à la requête.
-- Tout monitor correspondant est dans l'état `ALERT` ou `NO_DATA`.
+- Aucun groupe de monitors ne correspond à la sélection configurée.
+- Un ID de monitor explicite n'existe pas ou n'est pas disponible pour votre organisation.
+- Plus de 300 monitors correspondent à la sélection configurée.
+- Tout groupe de monitors correspondant est dans l'état `ALERT` ou `NO_DATA`.
 
 **Options** :
 
-- `query` : La requête de recherche de monitor, basée sur la [syntaxe de recherche de monitor][1]. Filtrer sur les tags de monitor :
+- `query` : Une requête de recherche de monitor basée sur la [syntaxe de recherche de monitor][1]. Filtrer sur les tags de monitor :
   - Tags statiques de monitor : `service:transaction-backend`
   - Tags dans la requête du monitor : `scope:"service:transaction-backend"`
   - Tags dans un [regroupement de monitors][2] : `group:"service:transaction-backend"`
-- `duration` : La période de temps (en secondes) pendant laquelle les moniteurs correspondants sont évalués. La valeur par défaut est 0 (les moniteurs sont évalués instantanément). Le maximum est de 7200 secondes (2 heures).
+- `monitor_ids` : Une liste de monitors spécifiques. Chaque élément contient un `id` de monitor décimal et un tableau `groups` de noms de groupes exacts. Un tableau `groups` vide évalue tous les groupes pour ce monitor.
+- `duration` : La période de temps (en secondes) pendant laquelle les monitors sélectionnés sont évalués. La valeur par défaut est 0 (les monitors sont évalués instantanément). Le maximum est de 7200 secondes (2 heures).
 
-Exemple de règle en ligne :
+Exemples de règles en ligne :
 
 ```json
 {
@@ -88,9 +90,24 @@ Exemple de règle en ligne :
 }
 ```
 
+```json
+{
+  "type": "monitor",
+  "name": "Specific monitors",
+  "options": {
+    "monitor_ids": [
+      {"id": "12345678", "groups": []},
+      {"id": "87654321", "groups": ["service:api"]}
+    ],
+    "duration": 300
+  }
+}
+```
+
 **Remarques** :
-- `group`Les filtres évaluent uniquement les groupes correspondants.
-- Les moniteurs mis en sourdine sont automatiquement exclus de l'évaluation (la requête inclut toujours `muted:false`).
+- `group` les filtres de requête et `monitor_ids[].groups` évaluent uniquement les groupes correspondants.
+- Un ID de monitor explicite qui n'existe pas ou qui n'est pas disponible pour votre organisation entraîne l'échec de la règle. Si le monitor existe mais est exclu car mis en sourdine ou si ses groupes sélectionnés ne contiennent aucune donnée, la règle applique le comportement en l'absence de groupes correspondants.
+- Les monitors mis en sourdine sont automatiquement exclus des deux modes de sélection.
 
 [1]: /fr/monitors/manage/search/
 [2]: /fr/monitors/manage/#triggered-monitors
@@ -369,7 +386,7 @@ jobs:
           # Your deployment commands here
 ```
 
-Exemple `.github/gate-config.json` :
+Exemple `.github/gate-config.json` :
 
 ```json
 {
@@ -568,11 +585,11 @@ Le script :
   - 5xx : erreur serveur, réessaie avec un délai.
   - 4xx : erreur client, l'évaluation échoue.
   - 2xx : évaluation lancée.
-- Interroge l'endpoint du statut de l'évaluation avec le `evaluation_id` jusqu'à ce que l'évaluation soit terminée :
+- Interroge l'endpoint du statut de l'évaluation avec le `evaluation_id` jusqu'à ce que l'évaluation soit terminée :
   - 5xx : erreur serveur, réessaie avec un délai.
   - 404 : évaluation pas encore lancée, réessaie avec un délai.
   - 4xx (sauf 404) : erreur client, l'évaluation échoue.
-  - 2xx : vérifiez `gate_status` et réessayez avec un délai si ce n'est pas terminé.
+  - 2xx : vérifiez `gate_status` et réessayez avec un délai si ce n'est pas terminé.
 - Interroge toutes les 15 secondes jusqu'à ce que l'évaluation soit terminée ou que le temps d'interrogation maximal (10800 secondes = 3 heures par défaut) soit atteint.
 - Si toutes les tentatives sont épuisées pour la requête initiale (réponses 5xx), le script traite cela comme un succès pour être résilient aux défaillances de l'API.
 
@@ -638,7 +655,7 @@ curl -X POST "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation" \
 EOF
 ```
 
-Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état HTTP 202 est renvoyé :
+Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état HTTP 202 est renvoyé :
 
 ```json
 {
@@ -654,7 +671,7 @@ Si l'évaluation Deployment Gate a été lancée avec succès, un code d'état H
 
 Le champ `data.attributes.evaluation_id` contient l'identifiant unique de cette évaluation Deployment Gate.
 
-Récupérez le statut d'une évaluation Deployment Gate en interrogeant l'endpoint de statut avec l'identifiant d'évaluation :
+Récupérez le statut d'une évaluation Deployment Gate en interrogeant l'endpoint de statut avec l'identifiant d'évaluation :
 
 ```bash
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
@@ -710,11 +727,11 @@ Le champ `data.attributes.gate_status` contient le résultat de l'évaluation, a
 Lors de l'intégration des portes de déploiement dans votre workflow Continuous Delivery, une phase d'évaluation aide à confirmer que le produit fonctionne comme prévu avant qu'il n'impacte les déploiements. Utilisez le mode dry-run et la page [{{< ui >}}Deployment Gates Evaluations{{< /ui >}}][6] :
 
 1. Définissez `dry_run: true` sur le `configuration` (ou `dryRun: true` dans le fichier de configuration CLI). Pour marquer uniquement certaines règles en mode dry-run, définissez `dry_run` par règle. Une évaluation en mode dry-run renvoie toujours `pass` via l'API, mais le résultat réel est enregistré dans l'interface utilisateur.
-2. Ajoutez l'évaluation Deployment Gate à votre processus de déploiement. Les déploiements ne sont pas impactés par le résultat de la Deployment Gate tant que le mode dry-run est activé.
-3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand la Deployment Gate aurait échoué et pour quelle raison.
-4. Lorsque vous êtes certain que le comportement de la Deployment Gate est conforme à vos attentes, passez `dry_run` à `false`. Ensuite, l'API commence à renvoyer le statut réel et les déploiements commencent à être promus ou annulés en fonction du résultat de la Deployment Gate.
+2. Ajoutez l'évaluation Deployment Gate à votre processus de déploiement. Les déploiements ne sont pas impactés par le résultat de Deployment Gate tant que le mode dry-run est activé.
+3. Après une certaine période (par exemple, 1 à 2 semaines), vérifiez les exécutions de Deployment Gate et des règles sur la page {{< ui >}}Deployment Gates Evaluations{{< /ui >}}. L'interface utilisateur affiche le statut réel, vous permettant ainsi de voir quand Deployment Gate aurait échoué et pour quelle raison.
+4. Lorsque vous êtes certain que le comportement de Deployment Gate est conforme à vos attentes, passez `dry_run` à `false`. Ensuite, l'API commence à renvoyer le statut réel et les déploiements commencent à être promus ou annulés en fonction du résultat de Deployment Gate.
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

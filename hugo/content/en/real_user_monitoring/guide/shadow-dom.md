@@ -3,7 +3,7 @@ title: Enrich Your Session Replays With Shadow DOM Components
 
 description: Guide about Shadow DOM compatibility with Session Replay.
 further_reading:
-- link: '/session_replay/browser/'
+- link: '/session_replay/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
 ---

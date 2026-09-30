@@ -16,16 +16,16 @@ further_reading:
   text: Règles de IaC Security
 title: Configurez IaC Security
 ---
-Utilisez les instructions suivantes pour activer Infrastructure as Code (IaC) Security pour Code Security. IaC Security prend en charge plusieurs configurations IaC stockées dans des dépôts GitHub, GitLab ou Azure DevOps.
+Utilisez les instructions suivantes pour activer Infrastructure as Code (IaC) Security pour Code Security. IaC Security prend en charge plusieurs configurations IaC stockées dans des dépôts GitHub, GitLab, Azure DevOps ou Bitbucket Cloud Premium.
 
 {{< tabs >}}
 {{% tab "GitHub" %}}
 
-### Installer l'intégration GitHub {#install-the-github-integration}
+### Installez l'intégration GitHub {#install-the-github-integration}
 
-Pour connecter vos dépôts GitHub et activer les PR comments, consultez les instructions de configuration dans [Pull Request Comments][1].
+Pour connecter vos dépôts GitHub et activer les commentaires de PR, consultez les instructions de configuration dans [Commentaires de pull request][1].
 
-### Activer IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories}
+### Activez IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories}
 
 Après avoir configuré l'intégration GitHub, activez IaC Security pour vos dépôts.
 
@@ -47,9 +47,9 @@ Après avoir configuré l'intégration GitHub, activez IaC Security pour vos dé
 
 ### Installez l'intégration GitLab {#install-the-gitlab-integration}
 
-Pour connecter vos dépôts GitLab et activer les PR comments, consultez les instructions de configuration dans [GitLab Source Code][1].
+Pour connecter vos dépôts GitLab et activer les commentaires de PR, consultez les instructions de configuration dans [GitLab Source Code][1].
 
-### Activer IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories-1}
+### Activez IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories-1}
 
 Après avoir configuré l'intégration GitLab, activez IaC Security pour vos dépôts.
 
@@ -71,9 +71,9 @@ Après avoir configuré l'intégration GitLab, activez IaC Security pour vos dé
 
 ### Installez l'intégration Azure DevOps {#install-the-azure-devops-integration}
 
-Pour connecter vos dépôts Azure DevOps et activer les commentaires sur les PR, consultez les instructions de configuration dans [Azure DevOps Source Code][1].
+Pour connecter vos dépôts Azure DevOps et activer les commentaires de PR, consultez les instructions de configuration dans [Azure DevOps Source Code][1].
 
-### Activer IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories-2}
+### Activez IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories-2}
 
 Après avoir configuré l'intégration Azure DevOps, activez IaC Security pour vos dépôts.
 
@@ -88,6 +88,30 @@ Après avoir configuré l'intégration Azure DevOps, activez IaC Security pour v
     - Pour l'activer pour un seul dépôt, basculez l'interrupteur {{< ui >}}IaC{{< /ui >}} sur ON pour ce dépôt.
 
 [1]: /fr/integrations/azure-devops-source-code/#source-code-functionality
+[2]: https://app.datadoghq.com/security/configuration/code-security/setup
+
+{{% /tab %}}
+{{% tab "Bitbucket Cloud" %}}
+
+### Installez l'intégration Bitbucket {#install-the-bitbucket-integration}
+
+Pour connecter votre espace de travail Bitbucket Cloud et activer les commentaires de PR, consultez les instructions de configuration dans [Bitbucket Source Code][1].
+
+### Activez IaC Security pour vos dépôts {#enable-iac-security-for-your-repositories-3}
+
+Après avoir configuré l'intégration Bitbucket, activez IaC Security pour vos dépôts.
+
+1. Sur la [Code Security Setup page][2], développez la section {{< ui >}}Activate scanning for your repositories{{< /ui >}}
+1. Sous {{< ui >}}Select your source code management provider{{< /ui >}}, sélectionnez {{< ui >}}Bitbucket{{< /ui >}}.
+1. Sous {{< ui >}}Select where your scans should run{{< /ui >}}, sélectionnez {{< ui >}}Datadog{{< /ui >}}.
+1. Sous {{< ui >}}Connect your Bitbucket repositories{{< /ui >}}, effectuez l'une des opérations suivantes :
+    - Pour connecter un nouvel espace de travail Bitbucket Cloud, cliquez sur {{< ui >}}Connect Bitbucket Account{{< /ui >}}.
+    - Pour activer IaC Security pour un espace de travail existant, cliquez sur {{< ui >}}Select repositories{{< /ui >}}, ou sur {{< ui >}}Edit{{< /ui >}} si Code Security est déjà activé.
+1. Pour activer IaC Security, effectuez l'une des opérations suivantes :
+    - Pour l'activer pour tous les dépôts, basculez {{< ui >}}Enable Infrastructure as Code Scanning (IaC){{< /ui >}} sur la position ON.
+    - Pour l'activer pour un seul dépôt, basculez l'interrupteur {{< ui >}}IaC{{< /ui >}} sur ON pour ce dépôt.
+
+[1]: /fr/integrations/bitbucket-source-code/#setup
 [2]: https://app.datadoghq.com/security/configuration/code-security/setup
 
 {{% /tab %}}
@@ -188,7 +212,7 @@ Pour garantir une ingestion et un affichage corrects dans Datadog IaC Scanning p
     - `region.endColumn` : Numéro de colonne de fin.
 <div class="alert alert-info">Les suppressions ignorent silencieusement les violations. Si <code>results[ ].suppressions</code> Si elle existe, la violation est complètement ignorée.</div>
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

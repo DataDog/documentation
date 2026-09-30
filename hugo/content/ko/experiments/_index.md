@@ -19,6 +19,12 @@ further_reading:
 - link: https://www.datadoghq.com/blog/experiments
   tag: 블로그
   text: Datadog Experiments로 모든 제품 변경의 비즈니스 영향을 측정하세요
+- link: https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/
+  tag: 블로그
+  text: 제품 출시를 Datadog과 함께 조정하십시오.
+- link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
+  tag: 블로그
+  text: Datadog Experiments 플러그인을 사용하여 ChatGPT에서 실험을 분석하십시오.
 title: 실험
 ---
 ## 개요 {#overview}

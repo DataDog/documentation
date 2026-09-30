@@ -29,18 +29,18 @@ cascade:
 description: Datadog Workload Protection을 사용하여 호스트, 컨테이너 및 서버리스 워크로드 전반에서 런타임 위협을
   탐지하고 대응하세요.
 further_reading:
-- link: https://www.datadoghq.com/blog/workload-protection-investigation/
-  tag: 블로그
-  text: Datadog Workload Protection으로 파편화된 런타임 신호를 일관된 공격 스토리로 전환하기
-- link: https://www.datadoghq.com/blog/workload-protection-findings
-  tag: 블로그
-  text: Workload Protection Findings를 사용하여 런타임 태세 문제를 식별하고 해결하기
 - link: https://learn.datadoghq.com/courses/workload-protection-detect-compromises
   tag: 학습 센터
   text: Workload Protection으로 호스트 및 컨테이너 침해 탐지하기
 - link: https://learn.datadoghq.com/courses/workload-protection-enable-manage
   tag: 학습 센터
   text: Workload Protection 활성화 및 관리하기
+- link: https://www.datadoghq.com/blog/workload-protection-investigation/
+  tag: 블로그
+  text: Datadog Workload Protection으로 파편화된 런타임 신호를 일관된 공격 스토리로 전환하기
+- link: https://www.datadoghq.com/blog/workload-protection-findings
+  tag: 블로그
+  text: Workload Protection Findings를 사용하여 런타임 태세 문제를 식별하고 해결하기
 title: Workload Protection
 ---
 Datadog Workload Protection은 환경 전반의 파일, 네트워크 및 프로세스 활동을 지속적으로 모니터링하여 인프라에 대한 실시간 가시성과 방어 기능을 제공합니다. 또한 위협이 발생하는 즉시 이를 탐지하여 보안 신호와 파인딩을 생성합니다. 이를 사용하여 악의적인 동작이 워크로드에 영향을 미치기 전에 식별, 조사 및 중지하세요.
@@ -149,3 +149,7 @@ Agent 대신 Datadog에서 대응할 수도 있습니다. 신호에서 [워크�
 [14]: /ko/security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [15]: /ko/actions/workflows/
 [16]: /ko/security/workload_protection/investigate_and_triage/security_signals/actions
+
+## 추가 자료 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

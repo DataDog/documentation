@@ -64,8 +64,12 @@ After you select an attribute in a targeting rule, the operators offered are fil
 | **Number** | is, is one of, is not one of, less than, less than or equal to, greater than, greater than or equal to, is null |
 | **Semver** | is, is one of, is not one of, is null, semver equals, semver not equals, semver less than, semver less than or equal to, semver greater than, semver greater than or equal to |
 
+Semver comparisons support [Semantic Versioning 2.0.0][1] values. Although the specification requires three numeric components (for example, `1.2.3`), Datadog also accepts values with one or more numeric components. Missing components compare as zero (`18`, `18.0`, and `18.0.0` are equivalent), while additional nonzero components affect ordering (`18.0.0.1` is greater than `18.0.0`). Standard prerelease precedence applies, and build metadata does not affect comparisons.
+
 If you change a condition's attribute to one with an incompatible data type, Datadog resets the operator and value to defaults for the new type. Attributes that haven't been saved to the catalog yet (only observed in evaluation data) don't restrict the available operators.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://semver.org/spec/v2.0.0.html

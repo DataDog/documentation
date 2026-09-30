@@ -31,9 +31,13 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-service-management/
   tag: Blog
   text: Assurez une haute disponibilité des services avec Datadog Service Management
+- link: https://www.datadoghq.com/blog/work-management/
+  tag: Blog
+  text: Centralisez le travail humain et celui effectué par des agents avec Datadog
+    Work Management
 title: Work Management
 ---
-<div class="alert alert-info">Work Management était précédemment connu sous le nom de Case Management. Les points de terminaison de l'API et les autorisations utilisent toujours <code>case</code> terminology.</div>
+<div class="alert alert-info">Work Management était précédemment connu sous le nom de Case Management. Les endpoints de l'API et les autorisations utilisent toujours <code>case</code> la terminologie.</div>
 
 ## Vue d'ensemble {#overview}
 
@@ -50,6 +54,6 @@ Lors de l'investigation, enrichissez l'élément de travail avec des graphiques,
     {{< nextlink href="/incident_response/work_management/approvals" >}}Approbations d'éléments de travail{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
