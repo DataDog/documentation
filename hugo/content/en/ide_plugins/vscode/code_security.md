@@ -1,0 +1,131 @@
+---
+title: Code Security
+type: documentation
+aliases:
+    - '/developers/ide_plugins/vscode/code_security/'
+further_reading:
+    - link: '/security/code_security/'
+      tag: 'Documentation'
+      text: 'Learn more about Code Security'
+    - link: '/security/code_security/static_analysis/static_analysis_rules/'
+      tag: 'Documentation'
+      text: 'Static Analysis Rules'
+    - link: '/security/code_security/secret_scanning/'
+      tag: 'Documentation'
+      text: 'Learn more about Secret Scanning'
+    - link: '/security/code_security/iac_security/'
+      tag: 'Documentation'
+      text: 'Learn more about IaC Security'
+---
+
+## Overview
+
+The Datadog extension for VS Code and Cursor helps you detect and fix security issues before you commit your changes. [Static Code Analysis](#static-code-analysis) catches vulnerabilities, bugs, and maintainability issues. [Secret Scanning](#secret-scanning) finds exposed credentials such as API keys, tokens, and passwords. [Infrastructure as Code (IaC) Scanning](#infrastructure-as-code-iac-scanning) detects cloud misconfigurations before you deploy them.
+
+## Static Code Analysis
+
+The extension runs [Static Code Analysis][1] rules on the source files in your workspace. It flags security vulnerabilities, bugs, and maintainability issues before you commit your changes.
+
+Static Code Analysis supports many programming languages. For a complete list, see [Static Code Analysis Rules][2]. Issues are shown in the source code editor, and you can apply suggested fixes directly.
+
+{{< img src="/ide_plugins/vscode/static_analysis.mp4" alt="Preview of Static Analysis" style="width:100%" video=true >}}
+
+### Get started with Static Code Analysis
+
+When you open a source file, the extension looks for [`code-security.datadog.yaml`][3] at your repository root and prompts you to create one if it does not exist.
+
+{{< img src="/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
+
+After you create the configuration file, the analyzer runs automatically in the background when you open a file. To enable Static Code Analysis for a specific language, run the `Datadog: Configure Static Analysis Languages` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`).
+
+To analyze an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Code Security > Analyze Folder** or **Analyze Workspace**.
+
+### Rule editor
+
+Write and test [custom Static Code Analysis rules][4] without leaving your IDE. Use the rule editor to design detection logic for internal standards, security patterns, or maintainability checks specific to your codebase.
+
+To open the rule editor, run the `Datadog: New DDSA Rule` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`), or right-click a YAML file in the file explorer and select **Datadog Code Security > Open in DDSA Rule Editor**.
+
+{{< img src="/ide_plugins/vscode/static-analysis-rule-editor.png" alt="SAST rule editor in the Datadog extension for VS Code" style="width:100%;" >}}
+
+The rule editor provides the following panels.
+
+- A **Tree-sitter query editor** for pattern matching against the abstract syntax tree.
+- A **JavaScript rule panel** for expressing detection logic and reporting violations.
+- **Compliant and non-compliant test files** that run against the rule as you edit, with expected and actual match counts shown in real time.
+- An **AST tree view** showing how the parser represents your test code.
+
+Import an existing rule from disk, or export a finished rule and upload it to Datadog.
+
+## Secret Scanning
+
+The extension runs [Secret Scanning][5] on the source files in your workspace. It flags exposed credentials such as API keys, tokens, and passwords before you commit your changes. File contents are scanned locally, and findings are shown in the editor as you type.
+
+{{< img src="/ide_plugins/vscode/secret_scanning.mp4" alt="Preview of Secret Scanning" style="width:100%" video=true >}}
+
+### Get started with Secret Scanning
+
+Secret Scanning is enabled by default and runs in the background whenever you open a source file. To scan an entire folder or workspace, right-click a folder in the file explorer and select **Datadog Code Security > Analyze Folder** or **Analyze Workspace**.
+
+{{< img src="/ide_plugins/vscode/secret-scanning-batch-analysis.png" alt="Batch analysis report with a Secret Scanning section listing findings per file" style="width:100%;" >}}
+
+No local configuration is required; the scan rules are fetched from Datadog. All text files are scanned, and binary files are skipped.
+
+<div class="alert alert-info">Secret Scanning requires you to be signed in to Datadog, because detection rules are fetched from your Datadog organization.</div>
+
+### Review findings
+
+Detected secrets are shown in three places:
+
+- **Inline in the editor**: Each finding appears as an underline on the detected secret, with severity derived from the rule's priority.
+- **Problems panel**: All findings are listed with the source `Datadog`.
+- **File Insights view**: Findings are grouped alongside other Code Security issues.
+
+{{< img src="/ide_plugins/vscode/secret-scanning-findings.png" alt="A detected secret shown inline in the editor with a hover diagnostic, alongside the Problems panel and the File Insights view" style="width:100%;" >}}
+
+### Suppress a finding
+
+To suppress an individual detection, use the code action for the flagged secret to insert a `no-dd-secrets` comment on the line above. The comment suppresses all secret findings on the following line.
+
+### Turn Secret Scanning on or off
+
+To toggle Secret Scanning, run the `Datadog: Turn on Secret Scanning` or `Datadog: Turn off Secret Scanning` command from the command palette (`Shift` + `Cmd/Ctrl` + `P`), or change the `datadog.codeSecurity.setup.secretScanning.enabled` setting.
+
+## Infrastructure as Code (IaC) Scanning
+
+The extension runs [Infrastructure as Code (IaC) Security][6] rules on supported IaC files in your workspace. It detects cloud misconfigurations, such as missing encryption or overly permissive access. Files are scanned locally as you edit, and findings are displayed in real time.
+
+### Get started with IaC Scanning
+
+IaC Scanning is enabled by default and runs automatically in the background whenever you open or edit a supported IaC file. No separate scanner setup is required. The extension honors IaC configuration and exclusions in `code-security.datadog.yaml`. For configuration options, see [Configure IaC Security][7]. For available rules, see [IaC Security Rules][8].
+
+### Review findings
+
+IaC misconfigurations are shown in three places:
+
+- **Inline in the editor**: Each finding is highlighted on the affected line. Hover over it to view the severity, description, and rule.
+- **Problems panel**: All findings are listed with the source `Datadog`.
+- **File Insights view**: Findings are grouped under **Infrastructure as Code** alongside other Code Security issues.
+
+{{< img src="/ide_plugins/vscode/iac_real_time_analysis.mp4" alt="Several IaC findings highlighted inline in Dockerfile and Terraform files, with a hover diagnostic, a quick fix action to suppress a finding with a comment, and the corresponding findings in the File Insights view and Problems panel" style="width:100%" video=true >}}
+
+### Suppress a finding
+
+To suppress the IaC findings on a line, use the `Datadog: Ignore IaC violations on this line` code action. The extension inserts a `dd-iac-scan ignore-line` comment above the affected line using the appropriate comment syntax for the file.
+
+### Turn IaC Scanning on or off
+
+To toggle IaC Scanning, change the `datadog.iacScanning.setup.enabled` setting.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /security/code_security/static_analysis/
+[2]: /security/code_security/static_analysis/static_analysis_rules/
+[3]: /security/code_security/static_analysis/configuration/
+[4]: /security/code_security/static_analysis/custom_rules/
+[5]: /security/code_security/secret_scanning/
+[6]: /security/code_security/iac_security/
+[7]: /security/code_security/iac_security/configuration/
+[8]: /security/code_security/iac_security/iac_rules/

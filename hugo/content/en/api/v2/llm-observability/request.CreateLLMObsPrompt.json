@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "prompt_id": "Example-LLM-Observability",
+      "title": "Customer Support Assistant",
+      "template": [
+        {
+          "content": "You are a helpful customer support assistant for {{company_name}}.",
+          "role": "system"
+        },
+        {
+          "content": "Help {{customer_name}} with this question: {{question}}",
+          "role": "user"
+        }
+      ]
+    },
+    "type": "prompt-templates"
+  }
+}

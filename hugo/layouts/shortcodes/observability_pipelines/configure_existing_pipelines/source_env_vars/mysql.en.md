@@ -1,0 +1,3 @@
+- URI connection string:
+    - The URI that contains the necessary parameters, such as the database engine, host, port, and credentials, to connect to a database.
+    - The default environment variable is `DD_OP_SOURCE_MYSQL_CONNECTION_STRING`.

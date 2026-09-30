@@ -1,9 +1,0 @@
-{
-  "data": {
-    "id": "api-spec-test",
-    "type": "gcp_scan_options",
-    "attributes": {
-      "vuln_containers_os": false
-    }
-  }
-}

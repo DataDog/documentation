@@ -1,0 +1,33 @@
+---
+- data:
+    - org_name: ansible-collections
+
+      repos:
+      - repo_name: datadog
+        contents:
+
+        - action: pull-and-push-file
+          branch: main
+          globs:
+          - README.md
+          options:
+            dest_path: '/agent/supported_platforms/'
+            file_name: 'ansible.md'
+            front_matters:
+              title: Ansible
+              dependencies: ["https://github.com/ansible-collections/Datadog/blob/main/README.md"]
+              aliases:
+              - /agent/basic_agent_usage/ansible/
+
+    - org_name: aws
+
+      repos:
+      - repo_name: aws-sdk-go
+
+        contents:
+
+        - action: npm-integrations
+          branch: main
+          globs:
+          # https://github.com/aws/aws-sdk-go/blob/main/aws/endpoints/defaults.go
+          - aws/endpoints/defaults.go

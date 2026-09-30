@@ -2,7 +2,7 @@ name: Post preview link
 on:
   pull_request:
     paths:
-    - 'content/en/**.md'
+    - 'hugo/content/en/**.md'
 
 permissions:
   contents: read
@@ -64,7 +64,7 @@ jobs:
         ADDED_FILES: ${{ steps.changed_files.outputs.added_files }}
       id: comment_body
       run: |
-        python local/bin/py/preview_links.py --deleted="${DELETED_FILES}" \
+        python hugo/local/bin/py/preview_links.py --deleted="${DELETED_FILES}" \
         --renamed="${RENAMED_FILES}" \
         --modified="${MODIFIED_FILES}" \
         --added="${ADDED_FILES}"

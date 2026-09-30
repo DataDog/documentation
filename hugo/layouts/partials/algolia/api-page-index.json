@@ -1,0 +1,61 @@
+{{- /* Outputs all API endpoint data associated to the given page as JSON. */ -}}
+{{ $hugo_context := .context }}
+{{ $page := .page }}
+{{ $title := .title }}
+{{ $lang := .lang }}
+{{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
+{{ $endpoint_data := .endpoint_data }}
+{{ $endpoint_path := .endpoint_path }}
+{{ $method := .method }}
+{{ $translate_actions := .translate_actions }}
+
+{{/* Hugo page-level variables */}}
+{{ $type := $page.Type }}
+{{ $rank := $page.Params.algolia.rank }}
+{{ $permalink := $page.Permalink }}
+{{ $relpermalink := $page.RelPermalink }}
+
+{{/* Use localized text for search content, but the English OpenAPI summary for stable URLs. */}}
+{{ $operationId := $endpoint_data.operationId }}
+{{ $localized_action := index ($translate_actions | default dict) $operationId | default dict }}
+{{ $canonical_summary := $endpoint_data.summary }}
+{{ $section_header := $localized_action.summary | default $canonical_summary }}
+{{ $section_content := $localized_action.description | default $endpoint_data.description }}
+
+{{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
+{{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
+
+{{ $endpoint_slug := $canonical_summary | anchorize }}
+{{ $full_url := print $permalink $endpoint_slug "/" }}
+{{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
+
+{{/* When the same operation exists in both versions, each record links to its version tab. */}}
+{{ $other_version := cond (eq $api_version "v1") "v2" "v1" }}
+{{ $other_endpoint := partial "api/load-specs.html" (dict "version" $other_version "lookup" $operationId) }}
+{{ if and $other_endpoint (eq ($other_endpoint.action.summary | anchorize) ($canonical_summary | anchorize)) }}
+    {{ $tab_anchor := (print $canonical_summary "-" $api_version) | anchorize }}
+    {{ $full_url = print $full_url "#" $tab_anchor }}
+    {{ $relpermalink = print $relpermalink "#" $tab_anchor }}
+{{ end }}
+
+{{/* Add the resulting object to the index */}}
+{{ $object_id := print $full_url "_" $operationId }}
+{{
+    $hugo_context.Scratch.Add "algoliaindex" (
+        dict "objectID" (md5 $object_id)
+        "id" (md5 $object_id)
+        "title" $title
+        "section_header" $section_header
+        "content" $section_content
+        "type" $type
+        "relpermalink" $relpermalink
+        "distinct_base_url" $page.RelPermalink
+        "full_url" $full_url
+        "language" $lang
+        "category" "API"
+        "subcategory" $title
+        "rank" $rank
+        "order" -1
+        "tags" (slice)
+    )
+}}

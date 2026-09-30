@@ -1,0 +1,36 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayMapCategory",
+  "processors": [
+    {
+      "type": "array-map-processor",
+      "is_enabled": true,
+      "name": "categorize items",
+      "source": "items",
+      "target": "out",
+      "processors": [
+        {
+          "type": "category-processor",
+          "target": "$targetElem.level",
+          "categories": [
+            {
+              "filter": {
+                "query": "@$sourceElem.status:error"
+              },
+              "name": "error"
+            },
+            {
+              "filter": {
+                "query": "*"
+              },
+              "name": "info"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "tags": []
+}

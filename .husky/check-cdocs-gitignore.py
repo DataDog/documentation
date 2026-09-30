@@ -10,7 +10,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-GITIGNORE_PATH = Path("content/.gitignore")
+GITIGNORE_PATH = Path("hugo/content/.gitignore")
 
 
 def get_gitignore_patterns():
@@ -26,7 +26,7 @@ def get_gitignore_patterns():
         if stripped.endswith(".md"):
             # Paths in the gitignore are relative to content/, e.g. /en/foo/bar.md
             # Convert to repo-relative patterns: content/en/foo/bar.md
-            repo_pattern = "content" + stripped
+            repo_pattern = "hugo/content" + stripped
             patterns.append(repo_pattern)
     return patterns
 

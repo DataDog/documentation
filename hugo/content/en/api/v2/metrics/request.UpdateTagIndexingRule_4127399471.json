@@ -1,0 +1,29 @@
+{
+  "data": {
+    "attributes": {
+      "exclude_tags_mode": true,
+      "ignored_metric_name_matches": [],
+      "metric_name_matches": [
+        "dd.test.*"
+      ],
+      "name": "my-indexing-rule",
+      "options": {
+        "data": {
+          "dynamic_tags": {
+            "exclude_not_queried_window_seconds": 7200,
+            "exclude_not_used_in_assets": true
+          },
+          "manage_preexisting_metrics": true,
+          "override_previous_rules": false
+        },
+        "version": 1
+      },
+      "rule_order": 2,
+      "tags": [
+        "env",
+        "service"
+      ]
+    },
+    "type": "tag_indexing_rules"
+  }
+}

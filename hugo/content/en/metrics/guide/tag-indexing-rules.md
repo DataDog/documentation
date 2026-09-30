@@ -1,0 +1,254 @@
+---
+title: Tag Indexing Rules
+description: "Use tag rules to configure metrics proactively, after ingestion, so you can mitigate high cardinality and enforce consistent tag management across your organization."
+further_reading:
+- link: "/account_management/billing/custom_metrics/?tab=countrate"
+  tag: "Documentation"
+  text: "Custom Metrics Billing"
+- link: "/metrics/guide/custom_metrics_governance/"
+  tag: "Guide"
+  text: "Best Practice for Custom Metric Governance"
+- link: "https://www.datadoghq.com/blog/metrics-without-limits/"
+  tag: "Blog"
+  text: "Dynamically control your custom metrics volume with Metrics without Limits™"
+algolia:
+  tags: ['custom metrics']
+---
+
+## Overview
+
+Tag Indexing Rules are centralized configurations that define how Datadog handles metric tags at ingestion. They allow you to proactively control which tags are retained or excluded, helping reduce high cardinality by removing unnecessary tags and ensuring consistent tagging across your organization.
+
+Tag Indexing Rules operate on groups of metrics identified by name or prefix. They apply to both existing and newly ingested metrics that match the defined patterns, reducing the need for reactive cleanup or code changes while enabling more predictable cost management.
+
+## Create a tag rule
+
+After you create a rule, Datadog automatically applies it to all matching metrics.
+
+1. Navigate to [{{< ui >}}Metrics → Settings{{< /ui >}}][3].
+2. Click {{< ui >}}\+ Create Rule{{< /ui >}}.
+3. Select {{< ui >}}Configure Tag Indexing Rule{{< /ui >}}.
+
+{{< img src="metrics/guide/tag_indexing_rules/configure_tag_indexing_rule.png" alt="The Create Rule dropdown menu in Metrics Settings, showing the Configure Tag Indexing Rule option highlighted." style="width:50%;">}}
+
+### Step 1: Set rule details
+
+Enter a rule name. Use a descriptive name that clearly identifies the purpose of the rule.
+
+### Step 2: Define rule scope
+
+Choose which metrics the rule applies to. Define the rule scope with one or more of the following options:
+
+Metric names or prefixes
+: Apply the rule to specific metric names or namespaces (for example, `http.*`, `db.query.*`)
+
+Prefix exceptions
+: Exclude specific prefixes from the rule scope (for example, apply to `http.*` but exclude `http.client.*`)
+
+{{< img src="metrics/guide/tag_indexing_rules/define_rule_scope.png" alt="The Choose Metrics step showing a rule scoped to http.* with http.client.* excluded as a sub-prefix." style="width:80%;">}}
+
+If multiple rules apply to the same metrics, Datadog evaluates them in order. Optionally, use {{< ui >}}Override{{< /ui >}} behavior to replace previously evaluated rules for the selected metrics.
+
+### Step 3: Configure tag behavior
+
+Define how the rule handles tags for metrics in scope.
+
+#### Merge or override existing configurations
+
+Choose whether this rule builds on or replaces existing tag configurations.
+- {{< ui >}}Merge{{< /ui >}} (default)—applies this rule on top of existing tag configurations. Metrics with no prior configuration are unaffected.
+- {{< ui >}}Override{{< /ui >}}—ignores all other rules that apply to the same prefixes and enforces this rule exclusively. Select the {{< ui >}}Override all other rules that apply to these prefixes{{< /ui >}} option to enable this behavior.
+
+**Note**: Use **Override** behavior on a narrower rule to prevent a broader rule's excluded tags from stacking. For example, suppose Rule 1 uses **Merge** behavior to exclude `host` from `dd.*`, and Rule 2 excludes `app_name` from `dd.payments.*`. If Rule 2 also uses **Merge**, both `host` and `app_name` are dropped from `dd.payments.*` metrics. If Rule 2 uses **Override**, only `app_name` is dropped (Rule 1's effect is overridden for that prefix).
+
+#### Apply to new metrics only
+
+Applies this rule only to metrics submitted after the rule is created. Existing metrics that match the rule remain unchanged.
+
+#### Select tags to include or exclude
+
+Choose whether to use an allowlist or a blocklist for tag filtering.
+- {{< ui >}}Include tags{{< /ui >}}—use an allowlist of tags that remain queryable.
+- {{< ui >}}Exclude tags{{< /ui >}}—use a blocklist to define non-queryable tags, or use tag usage to automatically unindex tags that have not been queried in the last 30, 60, or 90 days and are not used in any dashboards or other assets.
+
+Add the tag keys you want to include or exclude.
+
+{{< img src="metrics/guide/tag_indexing_rules/configure_tag_behavior.png" alt="The Choose Tags step showing the Include tags option selected with tag keys entered." style="width:80%;">}}
+
+After you configure tag behavior, the preview shows a list of affected metrics (up to 100 in the UI).
+
+{{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="The Preview affected metrics panel showing a list of metrics matching the rule scope." style="width:80%;">}}
+
+> By default, every New Rule is appended to the bottom of your current rule set.
+
+### Limitations
+
+- {{< ui >}}Exclude{{< /ui >}} rules take effect after Datadog observes a tag on a metric.
+- Datadog evaluates rules sequentially, and each subsequent rule either builds on or replaces earlier configurations.
+- **Tag age**: For rules using Tag Usage, new tags receive a 15-day grace period before they become governed by the rule.
+
+## Modify a rule
+
+Navigate to [{{< ui >}}Metrics → Settings → Rules{{< /ui >}}][1] to modify existing rules. After you make changes, Datadog automatically applies them to all matching metrics.
+
+### Edit a rule
+
+Select a rule to open its details panel, then click {{< ui >}}Edit{{< /ui >}} to change the rule's scope, tag selection, or merge and override behavior.
+
+{{< img src="metrics/guide/tag_indexing_rules/edit_rule_configuration.png" alt="The rule details side panel showing the rule type, scope, action, tags, and options, with an Edit button." style="width:80%;">}}
+
+### Reorder rules
+
+Drag rules to change the evaluation order. The evaluation order determines how rules interact when multiple rules apply to the same metrics.
+
+### Delete a rule
+
+Remove rules that are no longer needed. When you delete a rule, Datadog recomputes the tag configuration for affected metrics based on the remaining rules.
+
+### Override rules for a specific metric
+
+To exempt a metric from tag rules, open the metric's details side panel in Metrics Summary, select {{< ui >}}Configure This Metric Individually{{< /ui >}}, and set the metric to retain all tags. Retaining all tags bypasses all tag rules for that metric without modifying the rules themselves.
+
+To reapply rules, restore the metric's default configuration from the same panel.
+
+## Rule precedence
+
+When multiple rules apply to the same metrics, Datadog evaluates them sequentially. Rule order matters because:
+
+- Rules lower in the evaluation order modify the results of earlier rules
+- {{< ui >}}Override{{< /ui >}} behavior overwrites previous configurations for matching metrics
+- {{< ui >}}Merge{{< /ui >}} behavior builds on existing configurations
+- When multiple rules use {{< ui >}}Override{{< /ui >}} behavior, the last applied rule determines whether the final configuration is in include or exclude mode
+
+Reorder rules on the [Rules page][1] to change which rule takes precedence. See the following examples to understand how different orders produce different results.
+
+## Precedence examples
+
+### Example 1: Merge and Override behavior
+
+Tag rules can either override an existing configuration or merge with it. The choice determines whether a rule resets the tag configuration or builds on top of what already exists.
+
+Starting tags:  
+`host`, `env`, `service`, `team`
+
+{{< img src="metrics/guide/tag_indexing_rules/merge_vs_override.png" alt="Diagram showing two rules applied to metrics: Rule 1 excludes env from all metrics using Override, and Rule 2 includes env for infra metrics using Merge." style="width:100%;">}}
+
+**Key insight**: The `env` tag is re-added only to the `infra.*` metrics.
+
+### Example 2: Rule order
+
+When multiple rules apply to the same metrics, Datadog evaluates them in order. Rules that run later can refine or override the effects of earlier rules.
+
+Starting tags:  
+`host`, `env`, `service`
+
+In this example, Rule 2 uses an {{< ui >}}Include{{< /ui >}} configuration, which acts as an allowlist. Only the listed tags are retained; any tag not listed is dropped.
+
+#### Order 1: Specific rule first
+
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_1.png" alt="Diagram showing the specific rule evaluated first: Rule 1 excludes host from infra.server metrics, then Rule 2 includes host for all infra metrics, restoring the tag." style="width:100%;">}}
+
+**Key insight**: Rule 1 removes the `host` tag, then Rule 2 re-adds `host`.
+
+#### Order 2: General rule first
+
+{{< img src="metrics/guide/tag_indexing_rules/rule_order_2.png" alt="Diagram showing the general rule evaluated first: Rule 1 includes host for all infra metrics, then Rule 2 excludes host from infra.server metrics, removing the tag." style="width:100%;">}}
+
+**Key insight**: The `host` tag is removed last, and stays removed.
+
+### Example 3: Exception to a broad rule
+
+Use a broad rule with {{< ui >}}Override{{< /ui >}} behavior to exclude a tag globally, then use a targeted rule with {{< ui >}}Merge{{< /ui >}} behavior to restore the tag for specific metrics.
+
+Starting tags:
+`node`, `env`, `pod`
+
+{{< img src="metrics/guide/tag_indexing_rules/broad_exclude_narrow_exception.png" alt="Diagram showing a broad Override rule excluding pod from all kube metrics, then a narrow Merge rule including pod for kube.node metrics, preserving all original tags." style="width:100%;">}}
+
+**Key insight**: When a broad exclude and a narrow include cancel each other out for a metric, no tag restrictions are applied and all original tags are preserved.
+
+### Example 4: Multiple exceptions to a broad rule
+
+Layer multiple rules with {{< ui >}}Merge{{< /ui >}} behavior on top of a broad rule with {{< ui >}}Override{{< /ui >}} behavior to restore different tags for different metric prefixes. Metrics matching more specific prefixes accumulate more restorations.
+
+Starting tags:
+`team`, `pod`, `env`
+
+{{< img src="metrics/guide/tag_indexing_rules/multiple_exceptions.png" alt="Diagram showing a broad Override rule excluding all tags, then two Merge rules restoring different tags for different prefixes, with metrics matching both prefixes getting both sets of tags restored." style="width:100%;">}}
+
+**Key insight**: Multiple inclusion rules with {{< ui >}}Merge{{< /ui >}} behavior, applied after an exclusion rule with {{< ui >}}Override{{< /ui >}} behavior, are additive (a metric matching two exception prefixes gets both sets of tags restored).
+
+## Metrics without Limits™ compatibility
+
+Existing [Metrics without Limits™][2] (MWL) per-metric configurations take precedence over tag indexing rules and act as exemptions. While an exemption remains active, the metric is not affected by any tag indexing rules.
+
+You can review and remove these exemptions from the Tag Indexing Rules page. Datadog classifies each exemption as:
+
+- **Safe to remove**: Based on Datadog's analysis across your account's tag indexing rules, removing the exemption is expected to reduce your custom metrics usage.
+- **Needs review**: Removing the exemption may affect your custom metrics usage, or your tag indexing rules may not preserve all tags included in the existing MWL configuration. Review these exemptions carefully to avoid breaking dashboards, monitors, or other assets that depend on those tags.
+
+Exemptions apply across the account, not to individual tag indexing rules. Removing a metric's exemption from one rule automatically removes it from every tag indexing rule in your account. The metric is then evaluated against your tag indexing rules based on their current order.
+
+## Best practices
+
+Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Use Metrics without Limits™ when an individual metric requires a deliberate exception to the broader policy.
+
+### Create the Golden Rule first
+
+The Golden Rule should be the first Tag Indexing Rule created and should remain first in the rule order. This establishes it as the baseline policy before you add more targeted rules or metric-level exceptions.
+
+The Golden Rule is:
+> Unindex all tag keys that have not been queried in the last 30, 60, or 90 days and are not used in any Datadog assets, such as dashboards, monitors, SLOs, or notebooks.
+
+
+To configure the Golden Rule:
+
+1. Create the rule before creating any other Tag Indexing Rules. If rules already exist, move the Golden Rule to the first position.
+2. Select {{< ui >}}Exclude tags{{< /ui >}} and then {{< ui >}}By tag usage{{< /ui >}}.
+3. Set the query window to 30, 60, or 90 days.
+4. Require tag keys to be unused in Datadog assets.
+5. Apply the rule to all custom metrics using `*`.
+
+Newly submitted tag keys receive a 15-day grace period before the rule evaluates their usage. This gives teams time to query a new tag or use it in a Datadog asset before it can be unindexed.
+
+After establishing the Golden Rule, create narrower rules for Metrics that differ from this default.
+
+{{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="A Tag Indexing Rule configured as the Golden Rule, excluding unqueried tag keys across all custom metrics." style="width:100%;">}}
+
+### Choose between Tag Indexing Rules and Metrics without Limits™
+
+Tag Indexing Rules are dynamic policies that can apply to a single metric, a namespace, multiple prefixes, or all custom metrics. New custom metrics are automatically evaluated against existing rules as they arrive. Any metric that matches a rule is governed without requiring individual configuration.
+
+Metrics without Limits configurations are static and applied one metric at a time. Use them when a specific metric requires a different set of indexed tags.
+
+Existing Metrics without Limits™ configurations take precedence over Tag Indexing Rules. While a Metrics without Limits™ configuration is active, the metric is treated as an exemption and is not governed by Tag Indexing Rules.
+
+| Use case | Recommended control |
+|---|---|
+| Establish the default indexing policy for all custom metrics | Tag Indexing Rules: Golden Rule |
+| Apply the same tag policy across a namespace or set of prefixes | Tag Indexing Rules |
+| Automatically govern new metrics and tag keys that match an existing policy | Tag Indexing Rules |
+| Unindex tags that are not queried and are not used in Datadog assets | Tag Indexing Rules |
+| Remove known high-cardinality tags across multiple metrics | Tag Indexing Rules |
+| Keep only an approved set of tags across multiple metrics | Tag Indexing Rules |
+| Configure a different set of indexed tags for one metric | Metrics without Limits™ |
+
+### Scope additional rules intentionally
+
+After creating the Golden Rule, add narrower rules only where a group of metrics has requirements that differ from the default:
+
+- Use a namespace or prefix for metrics owned by the same service, application, or team.
+- Use multiple prefixes when the same policy applies to related groups of metrics.
+- Use `*` only when a policy should apply to all custom metrics.
+
+Define clear rule scopes and avoid unnecessary overlap. This makes it easier to understand which policy governs each metric and who owns changes to it.
+
+As new rules are added, verify that the Golden Rule remains in the first position.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/metric/settings/policies
+[2]: /metrics/metrics-without-limits/
+[3]: https://app.datadoghq.com/metric/settings

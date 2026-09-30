@@ -1,0 +1,319 @@
+{
+  "integration_count": {
+    "other": "1,000"
+  },
+  "beta_sentence": {
+    "other": "ベータ - サポートまたは問題の報告については、お問い合わせください"
+  },
+  "additional_sentence": {
+    "other": "役立つドキュメント、リンク、記事"
+  },
+  "apiaccount_sentence1": {
+    "other": "以下の"
+  },
+  "apiaccount_sentence2": {
+    "other": "の API キーや APP キーを、お客様のアカウントのものに置き換えてください。"
+  },
+  "install_agent_sentence": {
+    "other": "Agent をインストールして構成し、データを収集する"
+  },
+  "integrations_sentence": {
+    "other": "すべてのシステム、アプリケーション、サービスからデータを収集"
+  },
+  "graphing_sentence": {
+    "other": "データを可視化して<br>インサイトを得る"
+  },
+  "alerting_sentence": {
+    "other": "モニターと通知を<br>作成および管理する"
+  },
+  "apm_sentence": {
+    "other": "コードをインスツルメントして<br>パフォーマンスを向上させる"
+  },
+  "developer_tools_sentence": {
+    "other": "カスタムメトリクスを収集し<br>&amp; 新しいインテグレーションを作成"
+  },
+  "help_sentence": {
+    "other": "知識豊富で親しみやすいソリューションエンジニアがサポートします。"
+  },
+  "email_support_sentence": {
+    "other": "<a href=\"http://help.datadoghq.com\" target=\"_blank\" rel=\"noopener\">Datadog サポート Web サイト</a>にアクセスして、サポートチームにお問い合わせください。(すべてのサイト)<br><br> サポート Web サイトへのログイン方法の詳細については、<a href=\"https://docs.datadoghq.com/account_management/faq/access-your-support-ticket\" target=\"_blank\">「サポートチケットへのアクセス」</a>を参照してください。"
+  },
+  "live_chat_support_sentence": {
+    "other": "Datadog サポートチームと、月曜日から金曜日の 10:00 から 19:00 (東部標準時間) まで、アプリ内チャットでチャットできます。ベストプラクティスについては、<a href=\"https://docs.datadoghq.com/getting_started/support/#reaching-out-on-chat\" target=\"_blank\" rel=\"noopener\">「チャットでのお問い合わせ」</a>を参照してください。"
+  },
+  "event_stream_support_sentence": {
+    "other": "<a href=\"http://chat.datadoghq.com/\" target=\"_blank\" rel=\"noopener\">Slack Community プログラム</a>は、Datadog ユーザーが Datadog ユーザーのために構築したネットワークで、互いに質問への回答を見つけたり、製品のヒントやコツを共有したりすることができます。"
+  },
+  "foundation_enablement_sentence": {
+    "other": "<a href=\"https://dtdg.co/fe_sessions\" target=\"_blank\" rel=\"noopener\">お申し込み</a>いただくと、Datadog のさまざまな機能や製品について、専門家が指導する基礎知識習得のためのライブセッションに参加できます。"
+  },
+  "learning_center_sentence": {
+    "other": "セルフガイド形式の <a href=\"https://dtdg.co/47QnE99\" target=\"_blank\" rel=\"noopener\">ハンズオンコース</a>で、Datadog の主要なコンセプトを学び、実践できます。"
+  },
+  "learning_resources": {
+    "other": "学習リソース"
+  },
+  "learning_sentence": {
+    "other": "無料の学習リソースを通じて、Datadog プラットフォームに関する知識を深めることができます。"
+  },
+  "webinars_sentence": {
+    "other": "さまざまな製品トピックに関する、今後開催される <a href=\"https://dtdg.co/3PeuldT\" target=\"_blank\" rel=\"noopener\">Datadog ウェビナー</a>に参加したり、録画されたウェビナーを視聴したりできます。"
+  },
+  "agent_started_sentence": {
+    "other": "Agent の使用を開始するには、プラットフォームを選択してください。"
+  },
+  "choose_a_platform": {
+    "other": "プラットフォームを選択"
+  },
+  "get_started_datadog": {
+    "other": "Datadog を始める"
+  },
+  "all": {
+    "other": "すべて"
+  },
+  "free_trial": {
+    "other": "無料トライアル"
+  },
+  "agent_check": {
+    "other": "Agent チェック"
+  },
+  "statsd_check": {
+    "other": "StatsD チェック"
+  },
+  "crawler": {
+    "other": "クローラー"
+  },
+  "library_check": {
+    "other": "ライブラリ"
+  },
+  "terms": {
+    "other": "用語"
+  },
+  "privacy": {
+    "other": "プライバシー"
+  },
+  "cookies": {
+    "other": "Cookies"
+  },
+  "toc": {
+    "other": "目次"
+  },
+  "get_started_free_short": {
+    "other": "無料トライアル"
+  },
+  "documentation_search": {
+    "other": "ドキュメント検索"
+  },
+  "guides": {
+    "one": "Guide",
+    "other": "ガイド"
+  },
+  "tags": {
+    "one": "Tag",
+    "other": "タグ"
+  },
+  "language": {
+    "one": "Language",
+    "other": "言語"
+  },
+  "library": {
+    "one": "Library",
+    "other": "ライブラリ"
+  },
+  "official": {
+    "other": "公式"
+  },
+  "api": {
+    "other": "API"
+  },
+  "docs": {
+    "other": "ドキュメント"
+  },
+  "home": {
+    "other": "ホーム"
+  },
+  "datadog_docs": {
+    "other": "Datadog ドキュメント"
+  },
+  "datadog_api": {
+    "other": "Datadog API"
+  },
+  "dogstatsd": {
+    "other": "DogStatsD"
+  },
+  "author": {
+    "other": "作成者"
+  },
+  "notes": {
+    "other": "メモ"
+  },
+  "agent": {
+    "other": "Agent"
+  },
+  "integrations": {
+    "one": "integration",
+    "other": "インテグレーション"
+  },
+  "graphing": {
+    "other": "グラフ"
+  },
+  "alerting": {
+    "other": "アラート"
+  },
+  "apm_tracing": {
+    "other": "APM (トレース)"
+  },
+  "developer_tools": {
+    "other": "開発ツール"
+  },
+  "contact_us": {
+    "other": "お問い合わせ"
+  },
+  "status_page": {
+    "other": "ステータスページ"
+  },
+  "ops_twitter": {
+    "other": "Ops Twitter"
+  },
+  "platform": {
+    "other": "Datadog サポート<br>プラットフォーム"
+  },
+  "live_chat": {
+    "other": "サポートチームとの<br>ライブチャット"
+  },
+  "event_stream_messaging": {
+    "other": "Slack で<br>お問い合わせ"
+  },
+  "learning_center": {
+    "other": "Datadog<br>ラーニングセンター"
+  },
+  "foundation_enablement": {
+    "other": "ライブ<br>イネーブルメントセッションに参加"
+  },
+  "webinars": {
+    "other": "Datadog<br>ウェビナー"
+  },
+  "questions": {
+    "other": "ご質問はありますか"
+  },
+  "type": {
+    "other": "タイプ"
+  },
+  "feel_free_contribute": {
+    "other": "ぜひご協力ください"
+  },
+  "mistake_in_docs": {
+    "other": "ドキュメントの誤り"
+  },
+  "groups_return_to_": {
+    "other": "戻る"
+  },
+  "table_of_contents_heading": {
+    "other": "このページについて"
+  },
+  "edit": {
+    "other": "編集"
+  },
+  "overview": {
+    "other": "概要"
+  },
+  "arguments": {
+    "other": "引数"
+  },
+  "path_parameters": {
+    "other": "パスパラメーター"
+  },
+  "query_strings": {
+    "other": "クエリ文字列"
+  },
+  "header_parameters": {
+    "other": "ヘッダーパラメーター"
+  },
+  "request": {
+    "other": "リクエスト"
+  },
+  "model": {
+    "other": "モデル"
+  },
+  "example": {
+    "other": "例"
+  },
+  "copy": {
+    "other": "コピー"
+  },
+  "copy_page": {
+    "other": "ページをコピー"
+  },
+  "copied": {
+    "other": "コピーしました"
+  },
+  "response": {
+    "other": "応答"
+  },
+  "code_example": {
+    "other": "コード例"
+  },
+  "name": {
+    "other": "名前"
+  },
+  "description": {
+    "other": "説明"
+  },
+  "field": {
+    "other": "フィールド"
+  },
+  "footer_blurb_heading": {
+    "other": "お困りですか"
+  },
+  "footer_blurb_desc": {
+    "other": "知識豊富で親しみやすいソリューションエンジニアがサポートします。"
+  },
+  "integration_version": {
+    "other": "インテグレーションのバージョン"
+  },
+  "beta_check": {
+    "other": "ベータ"
+  },
+  "learn_more": {
+    "other": "詳細はこちら"
+  },
+  "personalized_demo": {
+    "other": "パーソナライズされたデモをリクエスト"
+  },
+  "configuration_management": {
+    "other": "構成管理"
+  },
+  "cloud_and_container": {
+    "other": "クラウドとコンテナ"
+  },
+  "source": {
+    "other": "ソース"
+  },
+  "legacy": {
+    "other": "レガシー"
+  },
+  "try_this_rule": {
+    "other": "このルールを試す"
+  },
+  "available_for": {
+    "other": "利用可能な対象"
+  },
+  "join_now": {
+    "other": "今すぐ参加"
+  },
+  "datadog_partner_network": {
+    "other": "Datadog パートナーネットワークのドキュメント"
+  },
+  "alert_note": {
+    "other": "注"
+  },
+  "alert_warning": {
+    "other": "警告"
+  },
+  "alert_caution": {
+    "other": "注意"
+  },
+  "alert_tip": {
+    "other": "ヒント"
+  }
+}

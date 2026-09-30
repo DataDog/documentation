@@ -1,0 +1,26 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayMapNoPreserve",
+  "processors": [
+    {
+      "type": "array-map-processor",
+      "is_enabled": true,
+      "name": "map and remove source",
+      "source": "items",
+      "target": "out",
+      "preserve_source": false,
+      "processors": [
+        {
+          "type": "attribute-remapper",
+          "sources": [
+            "$sourceElem.id"
+          ],
+          "target": "$targetElem.uid"
+        }
+      ]
+    }
+  ],
+  "tags": []
+}

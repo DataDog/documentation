@@ -1,0 +1,154 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Durable BYOC Logs ingestion architecture with disk buffers</title>
+  <desc id="description">BYOC Logs combines Observability Pipelines with the BYOC Engine. At 50 terabytes per day, a one-hour BYOC Engine outage creates a 2.08 terabyte backlog. Log sources send data to 25 Observability Pipelines Workers, each with a 100 gigabyte persistent disk buffer. After a Worker stops accepting new logs, it drains to BYOC Engine indexers at up to 120 megabytes per second. Each indexer uses a persistent write-ahead log before uploading index files to object storage. Scale-down grace periods allow both buffers and write-ahead logs to drain before pods exit.</desc>
+
+  <defs>
+    <linearGradient id="datadogGradient" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5008B"/>
+      <stop offset="1" stop-color="#8A00FF"/>
+    </linearGradient>
+    <marker id="arrowBlack" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0L10 5L0 10Z" fill="#111111"/>
+    </marker>
+    <symbol id="pod" viewBox="0 0 72 72">
+      <path d="M20 5h32l16 27-16 28H20L4 32Z" fill="#2E6FE8"/>
+      <path d="M25 25l11-6 11 6v14l-11 7-11-7Z" fill="#FFFFFF"/>
+      <path d="M25 25l11 7 11-7M36 32v14" fill="none" stroke="#2E6FE8" stroke-width="2"/>
+    </symbol>
+    <symbol id="disk" viewBox="0 0 110 70">
+      <ellipse cx="55" cy="15" rx="48" ry="13" fill="#E8D8F8" stroke="#7B3FB1" stroke-width="2"/>
+      <path d="M7 15v35c0 8 21 14 48 14s48-6 48-14V15" fill="#F6EFFC" stroke="#7B3FB1" stroke-width="2"/>
+      <ellipse cx="55" cy="50" rx="48" ry="14" fill="#E8D8F8" stroke="#7B3FB1" stroke-width="2"/>
+    </symbol>
+    <symbol id="wal" viewBox="0 0 84 62">
+      <ellipse cx="42" cy="13" rx="35" ry="10" fill="#D8EFFA" stroke="#2E6FE8" stroke-width="2"/>
+      <path d="M7 13v31c0 7 16 12 35 12s35-5 35-12V13" fill="#EFF9FD" stroke="#2E6FE8" stroke-width="2"/>
+      <ellipse cx="42" cy="44" rx="35" ry="12" fill="#D8EFFA" stroke="#2E6FE8" stroke-width="2"/>
+    </symbol>
+  </defs>
+
+  <rect width="1600" height="900" fill="#F3F3F3"/>
+  <rect x="32" y="28" width="1536" height="842" rx="28" fill="#FFFFFF" stroke="#111111" stroke-width="3" stroke-dasharray="15 12"/>
+
+  <text x="58" y="72" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700">USER ENVIRONMENT</text>
+  <text x="58" y="111" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700">DURABLE BYOC LOGS INGESTION</text>
+  <text x="430" y="111" fill="#4D4D4D" font-family="Arial, Helvetica, sans-serif" font-size="15">Persistent queues protect log data during downstream incidents and scale-down events.</text>
+
+  <!-- Log sources -->
+  <rect x="66" y="172" width="208" height="364" rx="18" fill="url(#datadogGradient)"/>
+  <text x="170" y="229" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">LOG SOURCES</text>
+  <path d="M105 262h130" stroke="#FFFFFF" stroke-opacity="0.5" stroke-width="2"/>
+  <rect x="101" y="292" width="38" height="47" rx="5" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="120" cy="306" r="5" fill="#FFFFFF"/>
+  <path d="M110 323h20M110 331h14" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <text x="153" y="311" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">DATADOG</text>
+  <text x="153" y="334" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700">AGENTS</text>
+  <circle cx="120" cy="405" r="21" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="120" cy="405" r="6" fill="#FFFFFF"/>
+  <path d="M120 376v15M120 419v15M91 405h15M134 405h15" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <text x="153" y="397" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">APPS AND</text>
+  <text x="153" y="419" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">OTLP</text>
+  <text x="153" y="441" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">COLLECTORS</text>
+
+  <rect x="66" y="566" width="208" height="143" rx="14" fill="#FFDDEB" stroke="#F50068" stroke-width="2.5"/>
+  <text x="170" y="598" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700">WORST-CASE BACKLOG</text>
+  <text x="170" y="630" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="16">50 TB/day × 1 hour</text>
+  <path d="M91 647h158" stroke="#F50068" stroke-width="2"/>
+  <text x="170" y="682" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">2.08 TB TOTAL</text>
+
+  <!-- Kubernetes -->
+  <rect x="320" y="142" width="1010" height="564" rx="19" fill="#D9F4FF" stroke="#0875FF" stroke-width="3"/>
+  <text x="347" y="181" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">KUBERNETES</text>
+
+  <!-- Source to OP -->
+  <path d="M274 355h76" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="312" y="338" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="14">LOGS</text>
+
+  <!-- Observability Pipelines -->
+  <rect x="350" y="204" width="555" height="463" rx="10" fill="#FFFFFF" stroke="#BEBEBE" stroke-width="2"/>
+  <text x="375" y="244" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">OBSERVABILITY PIPELINES</text>
+  <text x="375" y="270" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">WORKER STATEFULSET</text>
+  <rect x="747" y="225" width="132" height="31" rx="4" fill="#FFFFFF" stroke="#0875FF" stroke-width="2"/>
+  <text x="813" y="246" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">25 WORKERS</text>
+
+  <text x="453" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">WORKER 0</text>
+  <text x="627" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">WORKER 1</text>
+  <text x="801" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">WORKER N</text>
+  <use href="#pod" x="417" y="318" width="72" height="72"/>
+  <use href="#pod" x="591" y="318" width="72" height="72"/>
+  <use href="#pod" x="765" y="318" width="72" height="72"/>
+  <path d="M489 354h102M663 354h102" fill="none" stroke="#2E6FE8" stroke-width="2" stroke-dasharray="5 6"/>
+
+  <use href="#disk" x="398" y="401" width="110" height="70"/>
+  <use href="#disk" x="572" y="401" width="110" height="70"/>
+  <use href="#disk" x="746" y="401" width="110" height="70"/>
+  <text x="453" y="431" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">DISK BUFFER</text>
+  <text x="453" y="448" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">100 GB</text>
+  <text x="627" y="431" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">DISK BUFFER</text>
+  <text x="627" y="448" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">100 GB</text>
+  <text x="801" y="431" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">DISK BUFFER</text>
+  <text x="801" y="448" text-anchor="middle" fill="#5A267D" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">100 GB</text>
+
+  <rect x="375" y="492" width="505" height="53" rx="8" fill="#FFDDEB" stroke="#F50068" stroke-width="2"/>
+  <text x="397" y="516" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">ONE-HOUR OUTAGE</text>
+  <text x="397" y="536" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13">2.08 TB buffered across 25 Workers</text>
+  <rect x="375" y="563" width="505" height="76" rx="8" fill="#DDF8E8" stroke="#00C875" stroke-width="2"/>
+  <text x="397" y="588" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">SCALE DOWN</text>
+  <text x="397" y="609" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13">Stop intake → drain disk buffer → exit</text>
+  <text x="397" y="629" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">Kubernetes and Worker shutdown limits: 3,600 seconds</text>
+
+  <!-- OP to BYOC Engine -->
+  <path d="M905 355h59" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="934" y="313" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="700">HTTPS / mTLS</text>
+  <text x="934" y="331" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="10">120 MB/s</text>
+  <text x="934" y="347" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="9">PER WORKER</text>
+  <path d="M964 421c-22 22-38 22-59 0" fill="none" stroke="#111111" stroke-width="2.5" stroke-dasharray="7 6" marker-end="url(#arrowBlack)"/>
+  <text x="934" y="459" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="9">429 / OUTAGE</text>
+
+  <!-- BYOC Engine -->
+  <rect x="964" y="204" width="335" height="463" rx="10" fill="#FFFFFF" stroke="#BEBEBE" stroke-width="2"/>
+  <text x="988" y="244" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">BYOC ENGINE</text>
+  <text x="988" y="270" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="700">CLOUDPREM INDEXERS</text>
+  <rect x="1163" y="225" width="112" height="31" rx="4" fill="#FFFFFF" stroke="#0875FF" stroke-width="2"/>
+  <text x="1219" y="246" text-anchor="middle" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="700">INDEXER POOL</text>
+
+  <text x="1023" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">INDEXER 0</text>
+  <text x="1132" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">INDEXER 1</text>
+  <text x="1241" y="305" text-anchor="middle" fill="#2E6FE8" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">INDEXER N</text>
+  <use href="#pod" x="987" y="318" width="72" height="72"/>
+  <use href="#pod" x="1096" y="318" width="72" height="72"/>
+  <use href="#pod" x="1205" y="318" width="72" height="72"/>
+  <use href="#wal" x="981" y="405" width="84" height="62"/>
+  <use href="#wal" x="1090" y="405" width="84" height="62"/>
+  <use href="#wal" x="1199" y="405" width="84" height="62"/>
+  <text x="1023" y="434" text-anchor="middle" fill="#1B5CB0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">WAL PVC</text>
+  <text x="1132" y="434" text-anchor="middle" fill="#1B5CB0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">WAL PVC</text>
+  <text x="1241" y="434" text-anchor="middle" fill="#1B5CB0" font-family="Arial, Helvetica, sans-serif" font-size="11" font-weight="700">WAL PVC</text>
+
+  <rect x="988" y="492" width="287" height="53" rx="8" fill="#DDF3FF" stroke="#0875FF" stroke-width="2"/>
+  <text x="1008" y="516" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">PERSISTENT WAL</text>
+  <text x="1008" y="536" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">Absorbs pending indexing work</text>
+  <rect x="988" y="563" width="287" height="76" rx="8" fill="#DDF8E8" stroke="#00C875" stroke-width="2"/>
+  <text x="1008" y="588" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">SCALE DOWN</text>
+  <text x="1008" y="609" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">Drain WAL → exit</text>
+  <text x="1008" y="629" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">Termination grace: at least 300 seconds</text>
+
+  <!-- Durable destination and scale-down rule -->
+  <path d="M1132 667v73" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="1150" y="712" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">SPLITS</text>
+
+  <rect x="964" y="749" width="335" height="86" rx="12" fill="#FFDDEB" stroke="#F50068" stroke-width="2.5"/>
+  <text x="990" y="778" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700">OBJECT STORAGE</text>
+  <g fill="#FF5B00">
+    <rect x="990" y="794" width="7" height="24"/><rect x="1002" y="794" width="7" height="24"/><rect x="1014" y="794" width="7" height="24"/>
+    <rect x="1026" y="794" width="7" height="24"/><rect x="1038" y="794" width="7" height="24"/><rect x="1050" y="794" width="7" height="24"/>
+    <rect x="1062" y="794" width="7" height="24"/><rect x="1074" y="794" width="7" height="24"/><rect x="1086" y="794" width="7" height="24"/>
+  </g>
+  <text x="1120" y="812" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700">DURABLE INDEX FILES</text>
+
+  <rect x="320" y="749" width="585" height="86" rx="12" fill="#FFFFFF" stroke="#111111" stroke-width="2"/>
+  <circle cx="351" cy="792" r="12" fill="#F5008B"/>
+  <text x="379" y="779" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="700">SCALE-DOWN INVARIANT</text>
+  <text x="379" y="802" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13">A pod exits only after its local durable queue is empty,</text>
+  <text x="379" y="823" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13">or after its configured termination grace period expires.</text>
+</svg>

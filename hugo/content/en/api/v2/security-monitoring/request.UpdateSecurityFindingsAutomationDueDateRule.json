@@ -1,0 +1,24 @@
+{
+  "data": {
+    "attributes": {
+      "action": {
+        "due_days_per_severity": [
+          {
+            "due_in_days": 14,
+            "severity": "critical"
+          }
+        ],
+        "due_from": "first_seen"
+      },
+      "enabled": false,
+      "name": "Example-Security-Monitoring",
+      "rule": {
+        "finding_types": [
+          "misconfiguration"
+        ],
+        "query": "env:staging"
+      }
+    },
+    "type": "due_date_rules"
+  }
+}

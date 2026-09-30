@@ -1,0 +1,3 @@
+---
+title: Print a report
+---

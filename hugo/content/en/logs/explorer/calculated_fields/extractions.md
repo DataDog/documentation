@@ -1,0 +1,194 @@
+---
+title: Extractions
+description: "Extract values from your logs at query time using Grok or regex patterns in the Log Explorer."
+further_reading:
+- link: "/logs/explorer/calculated_fields/"
+  tag: "Documentation"
+  text: "Learn more about Calculated Fields"
+---
+
+{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSffBg9ph2zl-jTGzvgBUcXSifOjvPdRh8vJjzTMIclSB2ZLIw/viewform" btn_hidden="false" header="Calculated Fields Extractions is in Preview">}}
+Use Calculated Fields Extractions to extract values from your logs in the Log Explorer at query time using Grok or regex patterns.
+{{< /callout >}}
+
+## Overview
+
+Calculated Fields Extractions lets you apply parsing rules at query time in the Log Explorer. This lets you extract values from raw log messages or attributes without modifying pipelines or re-ingesting data. You can generate extraction rules automatically with [Tap to Parse](#tap-to-parse), or manually define your own Grok or regex patterns to match your specific needs. You can write an extraction pattern either as a [Grok expression](#grok) or as a [regular expression (regex)](#regex) with named capture groups.
+
+Extractions run before formulas, so a calculated field formula can reference a field that an extraction produces. The reverse is not possible: you cannot extract from a calculated field.
+
+To create an extraction calculated field, see [Create a calculated field][1].
+
+## Tap to Parse
+
+Use Tap to Parse to generate an extraction rule from your log data automatically. Datadog analyzes your log message and generates a Grok rule or a regex pattern.
+
+{{< img src="/logs/explorer/calculated_fields/extractions/calculated_fields_parse_ai.png" alt="Example of Tap to Parse in Datadog Calculated Fields" style="width:100%;" >}}
+
+There are two ways to access Tap to Parse from the log side panel:
+
+1. Click {{< ui >}}Tap{{< /ui >}} next to the copy button.
+2. Highlight a specific portion of the log message and click {{< ui >}}Tap{{< /ui >}} in the popup menu.
+
+When you click {{< ui >}}Tap{{< /ui >}}, Datadog automatically populates the Calculated Field form:
+
+1. {{< ui >}}Extract from{{< /ui >}}: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
+2. {{< ui >}}Log sample{{< /ui >}}: Automatically populated with your selected log.
+3. {{< ui >}}Parsing rule{{< /ui >}}: Automatically generated from the log sample.
+
+Review and modify the generated rule as needed. You can edit it manually or click {{< ui >}}Generate a new rule{{< /ui >}} for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
+
+<div class="alert alert-tip">Use the thumbs up or thumbs down buttons to provide inline feedback and help improve the feature.</div>
+
+## Pattern types
+
+Write an extraction pattern as Grok or as a regex.
+
+### Grok
+
+Extraction fields use Grok patterns to identify and capture values from a log attribute. A Grok pattern is composed of one or more tokens in the form:
+```
+%{PATTERN_NAME:field_name}
+```
+- `PATTERN_NAME`: A Grok matcher.
+- `field_name`: The name of the extracted calculated field.
+
+You can chain multiple patterns together to parse complex log messages.
+
+<div class="alert alert-warning">Query-time Grok parsing in the <a href="/logs/explorer/calculated_fields/">Log Explorer</a> supports a limited set of features. It supports the <strong>data</strong>, <strong>integer</strong>, <strong>notSpace</strong>, <strong>number</strong>, and <strong>word</strong> matchers, and the <strong>number</strong> and <strong>integer</strong> filters. For long-term parsing needs, define a log pipeline.</div>
+
+Query-time Grok parsing in the Log Explorer supports a limited subset of matchers and filters. Each matcher or filter is used in a Grok pattern with the format:
+
+```
+%{MATCHER:field_name}
+```
+
+#### Matchers
+
+| Matcher | Example Grok Pattern |
+| ------- | -------------------- |
+| `data`<br>_Any sequence of characters (non-greedy)_ | `status=%{data:status}` |
+| `word`<br>_Alphanumeric characters_ | `country=%{word:country}` |
+| `number`<br>_Floating-point numbers_ | `value=%{number:float_val}` |
+| `integer`<br>_Integer values_ | `count=%{integer:count}` |
+| `notSpace`<br>_Non-whitespace characters_ | `path=%{notSpace:request_path}` |
+
+#### Filters
+Apply filters to cast extracted values into numeric types. Filters use the same pattern syntax as matches.
+
+| Filter | Example Grok Pattern |
+| ------ | -------------------- |
+| `number`<br>_Parses numeric strings as numbers_ | `latency=%{number:lat}` |
+| `integer`<br>_Parses numeric strings as integers_ | `users=%{integer:user_count}` |
+
+#### Example
+
+**Log line**:
+
+```
+country=Brazil duration=123ms path=/index.html status=200 OK
+```
+
+**Extraction grok rule**:
+```
+country=%{word:country} duration=%{integer:duration} path=%{notSpace:request_path} status=%{data:status}
+```
+**Resulting calculated fields**:
+- `#country = Brazil`
+- `#duration = 123`
+- `#request_path = /index.html`
+- `#status = 200 OK`
+
+### Regex
+
+Extracted values are always strings. Unlike a Grok rule such as `%{integer:status}`, regex extraction does not convert types. To use an extracted value as a number, reference it in an arithmetic formula.
+
+#### Supported syntax
+
+| Feature | Example | Description |
+|---|---|---|
+| Literal text | `error` | The literal characters |
+| Any character | `.` | Any character except a newline |
+| Character classes | `[a-z0-9]`, `[^abc]` | Any one character in the set, or any one character not in the set |
+| Shorthand classes | `\d`, `\w`, `\s`, `\D`, `\W`, `\S` | A digit, word character, or whitespace character, and their negations |
+| Unicode property classes | `\p{L}+` | Characters by Unicode property, such as any letter |
+| Alternation | `error\|timeout` | Either alternative |
+| Groups | `(error\|timeout)`, `(?:error\|timeout)` | Groups part of a pattern. `(?:…)` groups without capturing |
+| Named capture groups | `(?<status>\d+)` | Captures the match under a name. Required for extraction |
+| Quantifiers | `a*`, `a+`, `a?`, `a{2,4}` | Repetition. `*` matches zero or more, `+` matches at least one, `?` makes the item optional, and `{m,n}` sets a range. Matches as much as possible |
+| Lazy quantifiers | `.*?end` | The same repetition, but matching as little as possible |
+| Anchors | `^ERROR`, `timeout$` | By default, the start or the end of the whole value |
+| Word boundaries | `\berror\b` | A position between a word and a non-word character, so `error` matches but `errors` does not |
+| Character escapes | `\n`, `\r`, `\t` | Newline, carriage return, tab |
+| Metacharacter escapes | `\.`, `\*`, `\(` | The character itself, rather than its special meaning |
+
+Only the constructs listed here are supported. A pattern that uses any other construct might still run, but its behavior is not guaranteed.
+
+A value can contain multiple lines, such as a stack trace. To match a newline with `.`, add `(?s)` to the start of the pattern. To match `^` and `$` at the start and end of each line, add `(?m)` to the start of the pattern.
+
+Write patterns with a single backslash, as shown. In [formula regex functions][2], a pattern is a quoted string argument and each backslash must be doubled.
+
+#### Capture group rules
+
+A pattern must follow these rules:
+
+- It must contain at least one capture group.
+- Every capture group must be named.
+  - Use `(?<name>…)`, not `(…)`.
+  - Use `(?:…)` to group without creating a field.
+- Each name must be unique. The name becomes the name of the extracted field.
+- Each name must start with a letter, and contain only letters and digits (`[A-Za-z][A-Za-z0-9]*`). Names like `client_ip`, `http.status`, or `client-ip` are not valid capture group names.
+
+#### Example
+
+**Log line**:
+
+```plaintext
+10.0.0.14 GET /api/v1/orders 503
+```
+
+**Regex pattern**:
+
+```plaintext
+(?<ip>\S+) (?<method>\S+) /api/(?:v\d+)/(?<resource>\S+) (?<status>\d+)
+```
+
+This pattern follows the capture group rules:
+
+- Four groups have a name: `ip`, `method`, `resource`, and `status`.
+- Each name is unique.
+- Each name uses only letters and digits.
+- The group `(?:v\d+)` has no name. It groups the version segment, but does not create a field.
+
+**Resulting calculated fields**:
+
+- `#ip = 10.0.0.14`
+- `#method = GET`
+- `#resource = orders`
+- `#status = 503`
+
+You can filter, group, and sort by the extracted fields. Logs where the pattern does not match have no value for them.
+
+#### Invalid patterns
+
+Each pattern below breaks one capture group rule.
+
+| Pattern | Problem |
+|---|---|
+| `(?:\S+) (?:\S+) (?:\S+) (?:\S+)` | No named group. A pattern needs at least one. |
+| `(?<ip>\S+) (?<ip>\S+)` | The name `ip` is used twice. Each name must be unique. |
+| `(?<client_ip>\S+)` | The name has an underscore. A name can have only letters and digits. |
+| `(?<1status>\d+)` | The name starts with a digit. A name must start with a letter. |
+
+#### Pattern performance
+
+Datadog matches a pattern fastest when it can tell where a match must start. A pattern that begins with `^` or with literal text gives it that starting point. A pattern that begins with `.*` does not, so it is tried at every position in the value.
+
+On a short value the difference is negligible. On a large value, such as a stack trace, an unanchored pattern can slow the query. It can also fail the query with an error rather than returning no match. Anchor the pattern with `^` where the value has a predictable start, and avoid wrapping a literal in `.*` on both sides.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /logs/explorer/calculated_fields/#create-a-calculated-field
+[2]: /logs/explorer/calculated_fields/formulas/#regex
