@@ -100,7 +100,11 @@ When you disable a shared role, Datadog does not delete it from member organizat
 
 ## Move users to a shared role
 
-Datadog does not move users from existing roles to shared roles. Assign a shared role in each member organization the same way as any other role. See [Edit a user's roles][5], or [SAML Group Mapping][6] if you assign roles through your identity provider.
+Datadog does not move users from existing roles to shared roles. Assign a shared role in each member organization the same way as any other role:
+
+- [Edit a user's roles][5] in Datadog.
+- Provision roles from your identity provider with [SCIM][6].
+- Map identity provider attributes to roles with [SAML group mapping][7].
 
 ## Resolve a role name conflict
 
@@ -120,4 +124,5 @@ You cannot convert an existing custom role into a shared role. Datadog also does
 [3]: /account_management/organization_groups/#organization-group-policies
 [4]: /account_management/rbac/permissions/
 [5]: /account_management/users/#edit-a-users-roles
-[6]: /account_management/saml/mapping/
+[6]: /account_management/scim/#role-provisioning-behavior
+[7]: /account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
