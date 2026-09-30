@@ -24,16 +24,16 @@ The `governance_console_read` permission controls access to insights. Users with
 
 Each insight is displayed as a card. A card shows:
 
-- **Value** - The current measurement for the insight, in the unit shown on the card.  
-- **Time range** - Either a point-in-time count or an activity window, such as the past 7 days. The time range is fixed per insight.  
-- **Trend** - A sparkline of recent intervals.  
-- **Deep link** - Selecting the card opens the underlying Datadog page filtered to the resources behind the value.
+- **Value**: The current measurement for the insight, in the unit shown on the card.
+- **Time range**: Either a point-in-time count or an activity window, such as the past 7 days. The time range is fixed per insight.
+- **Trend**: A sparkline of recent intervals.
+- **Deep link**: Selecting the card opens the underlying Datadog page filtered to the resources behind the value.
 
 *\[Screenshot placeholder: insight card showing metric value, trend sparkline, and link to underlying Datadog page\]*
 
 ## Trend direction
 
-Insights are interpreted relative to their goal. Some insights are better when increasing (such as **Active Dashboards** or **Users using Logs**), and some are better when decreasing (such as **Unqueried Metrics** or **Monitors with Broken @-handles**). The sparkline shows the direction of recent change; the goal direction is encoded in the insight itself.
+Insights are interpreted relative to their goal. Some insights are better when increasing (such as **Active Dashboards** or **Users using Logs**). Others are better when decreasing (such as **Unqueried Metrics** or **Monitors with Broken @-handles**). The sparkline shows the direction of recent change. The goal direction is encoded in the insight itself.
 
 ## Insights and controls
 
@@ -41,7 +41,7 @@ Insights surface a metric. [Controls][3] automate detection and remediation for 
 
 ## Available insights
 
-Insights are organized by Datadog product.
+Insights are grouped by product area.
 
 ### Access Controls
 
@@ -81,9 +81,9 @@ Insights are organized by Datadog product.
 | Insight | Description |
 | :---- | :---- |
 | Containers | Containers detected across your infrastructure, based on data collected from the Datadog Agent running on containerized environments such as Kubernetes, ECS, or Docker. |
-| Hosts | Hosts reporting to Datadog, including physical machines, virtual machines, cloud instances, and on-prem servers that have a Datadog Agent installed or are otherwise sending host-level telemetry. |
-| Hosts with Agent | Hosts that have the Datadog Agent installed and actively reporting telemetry, such as metrics, logs, traces, or events. |
-| Hosts without Agent | Hosts sending data to Datadog without the Datadog Agent installed, typically detected through cloud integrations such as AWS, GCP, or Azure. |
+| Hosts | Hosts reporting to Datadog, including physical machines, virtual machines, cloud instances, and on-premises servers that have a Datadog Agent installed or are otherwise sending host-level telemetry data. |
+| Hosts with Agent | Hosts that have the Datadog Agent installed and actively reporting telemetry data, such as metrics, logs, traces, or events. |
+| Hosts without Agent | Hosts sending data to Datadog without the Datadog Agent installed, typically detected through cloud integrations such as AWS, Google Cloud, or Azure. |
 | Percentage of Hosts with Agent | Percentage of all detected hosts that have the Datadog Agent installed. |
 | Percentage of Hosts with "team" Tag | Percentage of all detected hosts with a `team` tag. |
 | Percentage of Hosts without "env" Tag | Percentage of all detected hosts that are missing an `env` tag. |
@@ -132,8 +132,8 @@ Insights are organized by Datadog product.
 | Monitors Created | New monitors created in your Datadog organization. |
 | Monitors Missing Evaluation Delay | Monitors that do not have an evaluation delay configured, which can produce noisy alerts on out-of-order or late-arriving data. |
 | Monitors Missing Recipients | Monitors that do not have any notification recipients configured. |
-| Monitors with Broken @-handles | Monitors containing `@`\-mentions that no longer resolve, because the referenced user, team, or integration no longer exists. |
-| Muted Monitors | Monitors that are currently muted. |
+| Monitors with Broken @-handles | Monitors containing `@`-mentions that no longer resolve, because the referenced user, team, or integration no longer exists. |
+| Muted Monitors | Monitors in a muted state. |
 | Noisy Monitors | Monitors that generate an unusually high volume of alerts, often due to overly sensitive thresholds, data fluctuations, or misconfigurations. |
 | Recurring Downtimes | Downtimes scheduled to automatically repeat on a regular cadence. |
 | Triggered Monitors | Monitors that have entered a triggered (alert or warning) state within the measurement period. |
@@ -164,7 +164,7 @@ Insights are organized by Datadog product.
 
 | Insight | Description |
 | :---- | :---- |
-| Active Users | Users who have logged into or interacted with Datadog. |
+| Active Users | Users who have logged in to or interacted with Datadog. |
 | Teams | Teams created in Datadog for organizing users, assigning ownership, and managing resources such as dashboards, monitors, and services. |
 | Time Spent | Amount of time users collectively spent interacting with Datadog each week. |
 | Users Created | New user accounts added to your Datadog organization. |
