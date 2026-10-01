@@ -1,4 +1,4 @@
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 
 test.describe("Tabs component", () => {
   // Narrow viewport forces the many-tabs instance to overflow into pills layout;
@@ -63,4 +63,62 @@ test.describe("Tabs component", () => {
     ).toHaveAttribute("aria-selected", "true");
     await expect(defaultTabs).toHaveScreenshot("tabs-active.png");
   });
+});
+
+test.describe("Tabs component — synced tabs", () => {
+  const MOCK = "/dd_e2e/components/tabs";
+
+  // The two groups on the mock page with a Linux tab.
+  const osGroups = (page: Page) =>
+    page
+      .locator(".tabs")
+      .filter({ has: page.locator('[role="tab"][data-sync-key="linux"]') });
+
+  const osTab = (page: Page, groupIndex: number, key: string) =>
+    osGroups(page)
+      .nth(groupIndex)
+      .locator(`[role="tab"][data-sync-key="${key}"]`);
+
+  const waitForOsGroups = async (page: Page) => {
+    await expect(osGroups(page)).toHaveCount(2);
+    await expect(
+      osGroups(page).locator('[role="tablist"][data-hydrated="true"]'),
+    ).toHaveCount(2);
+  };
+
+  test("a click in one group switches the other and stores the key", async ({
+    page,
+    context,
+  }) => {
+    await page.goto(MOCK);
+    await waitForOsGroups(page);
+
+    await osTab(page, 0, "windows").click();
+
+    await expect(osTab(page, 1, "windows")).toHaveAttribute(
+      "aria-selected",
+      "true",
+    );
+    await expect(page).toHaveURL(/[?&]tab=windows/);
+    const tabCookie = (await context.cookies()).find(
+      (cookie) => cookie.name === "tab",
+    );
+    expect(tabCookie?.value).toBe("windows");
+  });
+
+  for (const param of ["tab", "tabs"]) {
+    test(`?${param}= selects the tab in every group`, async ({ page }) => {
+      await page.goto(`${MOCK}?${param}=macos`);
+      await waitForOsGroups(page);
+
+      await expect(osTab(page, 0, "macos")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+      await expect(osTab(page, 1, "macos")).toHaveAttribute(
+        "aria-selected",
+        "true",
+      );
+    });
+  }
 });

@@ -139,15 +139,7 @@ macOS instructions for the second group.
 {% /tabs %}
 
 {% alert level="info" %}
-**Synced tabs (not in Astro yet)**: On Hugo content pages, when you select a tab, all groups on the page with the same label change to that tab.
-{% /alert %}
-
-{% alert level="info" %}
-**URL persistence (not in Astro yet)**: On Hugo content pages, the selected tab goes into the `?tab=` query parameter. When the page loads, it opens that tab. If the URL also has an anchor, the page opens the tab and then scrolls to the anchor. In the Hugo API docs, the selected code example language goes into the `?code-lang=` query parameter and a `code-lang` cookie, and stays the same across pages.
-{% /alert %}
-
-{% alert level="info" %}
-**Fallback to curl (not in Astro yet)**: In the Hugo API docs, all code examples on the page change to the language that you select. If an operation has no example in that language, its code example shows curl.
+**Scroll to an anchor in a tab (not in Astro yet)**: On Hugo content pages, when the URL has both `?tab=` and an anchor, the page opens the tab and then scrolls to the anchor.
 {% /alert %}
 
 ## Content found in API docs tabs
