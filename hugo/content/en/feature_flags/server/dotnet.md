@@ -23,7 +23,9 @@ further_reading:
 
 This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog .NET tracer (`dd-trace-dotnet`) to receive flag updates from the managed CDN or Agent Remote Configuration.
 
-This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+Starting in tracer version 3.54.0, new setups load flag configuration from the Datadog-managed CDN by default. This guide explains how to install the SDK, create an OpenFeature client, and evaluate feature flags in your application.
+
+<div class="alert alert-warning">In version 3.54.0, agentless mode changes only flag configuration. Experiment exposure events still require a compatible local Agent or telemetry relay; direct Event Platform Proxy (EVP) fallback is not supported. Evaluation metrics require a separately configured OpenTelemetry export path. Without a telemetry path, only configuration delivery and local flag evaluation work.</div>
 
 ## Prerequisites
 
@@ -32,17 +34,15 @@ For agentless configuration delivery, install the Datadog .NET tracer version **
 Set these environment variables in the application process before startup:
 
 {{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_ENABLED=true
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 DD_API_KEY=<YOUR_API_KEY>
-DD_SITE=<YOUR_DATADOG_SITE>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Use a Datadog [API key][5] and the site that hosts your organization, such as `datadoghq.com`. Initialize the Datadog OpenFeature provider in your application to start polling. Evaluations use locally cached configuration and do not make network requests.
+Use a Datadog [API key][5] and the site that hosts your organization, such as `datadoghq.com`. No Feature Flags enablement or source setting is required for a new setup. Initialize the Datadog OpenFeature provider in your application to start polling; installing or initializing the tracer alone does not start CDN polling. Evaluations use locally cached configuration and do not make network requests.
 
-In version 3.54.0, agentless configuration delivery does **not** include direct Event Platform Proxy (EVP) fallback. Experiment exposure events still require a compatible local Agent or telemetry relay. Flag evaluation metrics use a separately configured OpenTelemetry pipeline; enabling CDN delivery does not configure metrics export. See [Set Up Server-Side Flag Evaluation Metrics][6] and [Feature Flag Graphs][7].
+Flag evaluation metrics use a separately configured OpenTelemetry pipeline; enabling CDN delivery does not configure metrics export. See [Set Up Server-Side Flag Evaluation Metrics][6] and [Feature Flag Graphs][7].
 
 ### Use Agent Remote Configuration
 
@@ -51,13 +51,12 @@ For Agent-based delivery, use Datadog Agent 7.55 or later with [Remote Configura
 With tracer 3.54.0 or later, select the source explicitly:
 
 {{< code-block lang="bash" >}}
-DD_FEATURE_FLAGS_ENABLED=true
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Earlier tracer versions use `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`. In 3.54.0, this deprecated setting preserves Remote Configuration when neither the new enablement setting nor an explicit source is supplied. To migrate, replace the legacy setting with the agentless settings above. `DD_FEATURE_FLAGS_ENABLED=false` disables Feature Flags regardless of the selected source.
+Earlier tracer versions use `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`. In 3.54.0, this deprecated setting preserves Remote Configuration when neither the new enablement setting nor an explicit source is supplied. To migrate, remove the legacy setting, configure the application credentials above, and set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` if you already select a source explicitly. `DD_FEATURE_FLAGS_ENABLED=false` disables Feature Flags regardless of the selected source.
 
 See [Configuration Sources][9] for polling, request timeout, custom endpoint, and migration settings. The default agentless polling interval is 30 seconds, the request timeout is 5 seconds, and provider initialization waits up to 30 seconds for the first configuration.
 
@@ -369,7 +368,7 @@ To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` 
 
 - Verify that tracer 3.54.0 or later is loaded and the OpenFeature provider is initialized.
 - Check `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process.
-- Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false` and `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`.
+- Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false`. Leave `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` unset for a new setup, or explicitly set it to `agentless`. Remove the legacy `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting when migrating.
 - Allow outbound HTTPS to `ufc-server.ff-cdn.<DD_SITE>`.
 - Enable `DD_TRACE_DEBUG=true` and check tracer logs for authentication, timeout, or malformed configuration errors.
 
