@@ -2,6 +2,7 @@
 import { TabsNav } from "./TabsNav";
 import styles from "./Tabs.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { TabSync } from "./tabSync";
 
 const cl = classListFactory(styles);
 
@@ -17,9 +18,11 @@ interface Props {
    * If omitted, all tabs are interactive.
    */
   disabled?: boolean[];
+  /** Sync this group with others of the same name. See `tabSync.ts`. */
+  sync?: TabSync;
 }
 
-const { id, labels, panelIds, variant, disabled } = Astro.props;
+const { id, labels, panelIds, variant, disabled, sync } = Astro.props;
 
 const rootClass = variant === "pills" ? cl("tabs", "tabs--pills") : cl("tabs");
 ---
@@ -34,6 +37,7 @@ const rootClass = variant === "pills" ? cl("tabs", "tabs--pills") : cl("tabs");
     }}
     variant={variant}
     disabled={disabled}
+    sync={sync}
   />
   <slot />
 </div>
