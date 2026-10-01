@@ -109,8 +109,8 @@ export function indexForKey(keys: readonly string[], key: string): number {
 }
 
 /** A site-wide session cookie, matching Hugo's `js-cookie` calls. */
-export function serializeSyncCookie(group: string, key: string): string {
-  return `${group}=${encodeURIComponent(key)}; path=/; SameSite=Lax`;
+export function serializeSyncCookie(group: string, value: string): string {
+  return `${group}=${encodeURIComponent(value)}; path=/; SameSite=Lax`;
 }
 
 /** `href` with `?<group>=<key>` set; other params and the hash are kept. */
@@ -123,8 +123,12 @@ export function buildSyncUrl(href: string, group: string, key: string): string {
   return url.toString();
 }
 
-export function writeSyncCookie(group: string, key: string): void {
-  document.cookie = serializeSyncCookie(group, key);
+/**
+ * Store a value in the `<group>` cookie. Callers pass a tab's key after a
+ * click, or a URL value as it arrived, so Hugo can still read it.
+ */
+export function writeSyncCookie(group: string, value: string): void {
+  document.cookie = serializeSyncCookie(group, value);
 }
 
 export function writeSyncQueryParam(group: string, key: string): void {
