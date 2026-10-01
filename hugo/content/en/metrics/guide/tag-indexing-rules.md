@@ -192,7 +192,7 @@ Exemptions apply across the account, not to individual tag indexing rules. Remov
 
 ## Best practices
 
-Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Each account is expected to use approximately 10–20 rules to govern its metrics. Create rules for groups of metrics with shared tag requirements, rather than a separate rule for each metric or exemption.
+Use Tag Indexing Rules as the default way to govern indexed tags across groups of custom metrics. Most accounts need approximately 10-20 rules to govern their metrics. Create rules for groups of metrics with shared tag requirements, rather than a separate rule for each metric or exemption.
 
 For metrics that your Tag Indexing Rules cannot govern appropriately, use [Metrics without Limits™][2] to configure them individually, or keep their existing exemptions.
 
