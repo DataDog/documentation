@@ -119,7 +119,7 @@ Una ventana de tiempo acumulativa tiene un punto de inicio fijo y se expande con
 
 {{< img src="/monitors/create/cumulative_window_example_more_options.png" alt="Captura de pantalla de cómo se configura una ventana acumulativa en la interfaz de Datadog. El usuario ha buscado aws.sqs.number_of_messages_received. Las opciones están configuradas para evaluar la SUMA de la consulta durante el MES ACTUAL." style="width:100%;">}}
 
-Una ventana de tiempo acumulativa se restablece después de alcanzar su lapso de tiempo máximo. Por ejemplo, una ventana de tiempo acumulativa que observa el {{< ui >}}Current month{{< /ui >}} se restablece el primer día de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de {{< ui >}}Current hour{{< /ui >}}, que comienza en el minuto 30, se restablece cada hora. Por ejemplo, a las 6:30am, 7:30am, 8:30am.
+Una ventana de tiempo acumulativa se restablece después de alcanzar su tramo de tiempo máximo. Por ejemplo, una ventana de tiempo acumulativa que observa el {{< ui >}}Current month{{< /ui >}} se restablece el primer día de cada mes a la medianoche UTC. Alternativamente, una ventana de tiempo acumulativa de {{< ui >}}Current hour{{< /ui >}}, que comienza en el minuto 30, se restablece cada hora. Por ejemplo, a las 6:30am, 7:30am, 8:30am.
 
 ### Frecuencia de evaluación {#evaluation-frequency}
 
@@ -240,6 +240,8 @@ La retención de grupo controla cuánto tiempo se mantiene un grupo de seguimien
 
 De forma predeterminada, un grupo mantiene el estado durante 24 horas antes de ser eliminado. Los seguimientos de servidor y las comprobaciones de servicio que notifican sobre la falta de datos mantienen el estado durante 48 horas.
 
+Para los seguimientos con muchos grupos, la retención dinámica de grupos está habilitada de forma predeterminada. Datadog acorta automáticamente el período de retención para los grupos que dejan de reportar datos. Cuanto más frecuentemente aparecen y desaparecen los grupos, más corto se vuelve el período de retención, ayudando a mantener el seguimiento rápido y eficiente. Este comportamiento afecta solo a los grupos que han dejado de reportar datos; los grupos que están reportando activamente nunca se eliminan.
+
 Para los tipos de seguimiento de alertas múltiples que admiten retención personalizada, puede establecer un valor entre 1 hora y 72 horas. Seleccione {{< ui >}}Remove the non-reporting group after N (length of time){{< /ui >}}.
 
 {{< img src="/monitors/create/group_retention_time.png" alt="Opción de tiempo de retención de grupo" style="width:70%;">}}
@@ -253,8 +255,6 @@ Algunos casos de uso para definir un tiempo de retención de grupo personalizado
 
 **Nota**: La opción de tiempo de retención de grupo personalizado requiere un seguimiento de alertas múltiples que admita la opción [`On missing data`][4]. Estos tipos de seguimiento son APM Trace Analytics, Audit Logs, CI Pipelines, Error Tracking, Events, Logs y seguimientos RUM.
 
-<div class="alert alert-info"><strong>Vista previa: Retención de grupo dinámica</strong><p>La retención de grupo dinámica está en vista previa y se aplica a los seguimientos creados recientemente. Para seguimientos con una gran cantidad de grupos, Datadog acorta automáticamente el tiempo que se mantiene un grupo después de que deja de reportar datos. Cuanto más frecuentemente aparecen y desaparecen los grupos, más corto se vuelve este período, manteniendo el seguimiento rápido y eficiente. Esto solo afecta a los grupos que han quedado en silencio; los grupos que reportan datos activamente nunca se eliminan.</p></div>
-
 #### Retraso de grupo nuevo {#new-group-delay}
 
 Retrase el inicio de la evaluación por `N` segundos para grupos nuevos.
@@ -267,8 +267,8 @@ La opción está disponible con el modo de alerta múltiple.
 
 #### Retraso en la evaluación {#evaluation-delay}
 
-<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para las métricas de la nube, las cuales son rellenadas por los proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe valores completos. Consulte la <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/">
-\">Página de Cloud Metric Delay</a> para tiempos de retardo estimados.</div>
+<div class="alert alert-info"> Datadog recomienda un retraso de 15 minutos para las métricas de la nube, las cuales son rellenadas por los proveedores de servicios. Además, al usar una fórmula de división, un retraso de 60 segundos es útil para asegurar que su seguimiento evalúe valores completos. Consulte la página <a href="https://docs.datadoghq.com/integrations/guide/cloud-metric-delay/
+">Cloud Metric Delay</a> para ver los tiempos de retardo estimados.</div>
 
 Retrase la evaluación por `N` segundos.
 

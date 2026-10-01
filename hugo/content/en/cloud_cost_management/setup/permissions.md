@@ -30,6 +30,8 @@ CCM also supports [Data Access Control](#data-access-control) to further restric
 | `ccm_forecast_write` | Grants access to edit custom forecast values on Cloud Cost Management budgets. Requires the read permission to access pages. |
 | `generate_ccm_report_schedules` | Grants access to view all report schedules and manage only the ones the user has created. |
 | `manage_ccm_report_schedules` | Grants access to view, create, and fully manage all report schedules across the organization. |
+| `ccm_report_write` | Grants access to create, update, and delete Cloud Cost Management reports. Requires cloud_cost_management_read to access pages. |
+
 
 ## Permission requirements by page
 

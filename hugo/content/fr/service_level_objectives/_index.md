@@ -83,7 +83,7 @@ Utilisez la [page de gestion des Service Level Objectives][2] de Datadog pour cr
 1. Sur la [page de gestion des SLO][2], sélectionnez {{< ui >}}New SLO +{{< /ui >}}.
 2. Sélectionnez le type de SLO. Vous pouvez créer un SLO avec l'un des types suivants : [Basé sur une métrique][3], [Basé sur un monitor][4] ou [Tranches temporelles][5].
 3. Définissez une cible et une fenêtre temporelle glissante (7, 30 ou 90 derniers jours) pour le SLO. Datadog vous recommande de rendre la cible plus stricte que vos SLA stipulés. Cette fenêtre temporelle est affichée sur les listes de SLO. Par défaut, la fenêtre temporelle la plus courte est sélectionnée.
-4. Enfin, donnez un titre au SLO, décrivez-le plus en détail ou ajoutez des liens dans la description, ajoutez des étiquettes et enregistrez-le.
+4. Enfin, donnez un titre au SLO, décrivez-le plus en détail ou ajoutez des liens dans la description, ajoutez des tags et enregistrez-le.
 
 Une fois le SLO configuré, sélectionnez-le dans la [vue de liste Service Level Objectives][2] pour ouvrir le panneau latéral des détails. Le panneau latéral affiche le pourcentage de statut global et le budget d'erreur restant pour chacune des cibles du SLO, ainsi que des barres de statut (SLO basés sur des monitors) ou des graphiques à barres (SLO basés sur des métriques) de l'historique du SLI. Si vous avez créé un SLO groupé basé sur un monitor en utilisant un [monitor multi-alertes][6] ou un SLO groupé basé sur une métrique en utilisant la clause [`sum by`][7], le pourcentage de statut et le budget d'erreur restant pour chaque groupe individuel sont affichés en plus du pourcentage de statut global et du budget d'erreur restant.
 
@@ -104,10 +104,6 @@ Définir une cible de 100 % signifie avoir un budget d'erreur de 0 %, puisque 
 [Monitor-based SLOs][8]: Up to two decimal places are allowed for 7-day and 30-day targets, up to three decimal places are allowed for 90-day targets.
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
-
-## Modifier un SLO {#edit-an-slo}
-
-Pour modifier un SLO, passez le curseur sur la rangée du SLO dans la liste et cliquez sur l'icône en forme de crayon qui s'affiche à droite de la rangée. Vous pouvez également cliquer sur la rangée pour ouvrir le volet latéral détaillé et sélectionner le bouton de modification à partir de l'icône en forme d'engrenage en haut à droite du volet.
 
 ## Autorisations {#permissions}
 
@@ -137,6 +133,10 @@ Pour conserver votre accès en modification au SLO, le système exige que vous i
 
 **Remarque** : Les utilisateurs peuvent créer des SLO sur n'importe quel monitor même s'ils n'ont pas les autorisations d'écriture sur ce monitor. De même, les utilisateurs peuvent créer des alertes SLO même s'ils n'ont pas les autorisations d'écriture sur les SLO. Pour plus d'informations sur les autorisations RBAC pour les monitors, consultez la [documentation RBAC][12] ou le [guide sur la configuration du RBAC pour les monitors][13].
 
+## Modification d'un SLO {#editing-an-slo}
+
+Pour modifier un SLO, passez le curseur sur la rangée du SLO dans la liste et cliquez sur l'icône en forme de crayon qui s'affiche à droite de la rangée. Vous pouvez également cliquer sur la rangée pour ouvrir le volet latéral détaillé et sélectionner le bouton de modification à partir de l'icône en forme d'engrenage en haut à droite du volet.
+
 ## Recherche de SLO {#searching-slos}
 
 La [page de gestion des Service Level Objectives][2] vous permet d'effectuer une recherche avancée sur tous les SLO afin de trouver, consulter, modifier, cloner ou supprimer des SLO à partir des résultats de recherche.
@@ -150,6 +150,18 @@ La recherche avancée vous permet d'interroger les SLO en combinant différents 
 * `tags` - centre de données, environnement, service, équipe, etc.
 
 Pour effectuer une recherche, utilisez les cases à cocher des facettes sur la gauche et la barre de recherche en haut. Lorsque vous cochez les cases, la barre de recherche se met à jour avec la requête équivalente. De même, lorsque vous modifiez la requête de la barre de recherche (ou que vous en rédigez une à partir de zéro), les cases à cocher se mettent à jour pour refléter le changement. Les résultats de la requête se mettent à jour en temps réel à mesure que vous modifiez la requête ; il n'y a pas de bouton « Rechercher » sur lequel cliquer.
+
+## Récupération de SLO supprimés {#recovering-deleted-slos}
+
+<div class="alert alert-warning">Les SLO générés automatiquement pour les <a href="/synthetics/test_suites/#service-level-objectives">collections de tests Synthetic</a> ne peuvent pas être restaurés.</div>
+
+Les SLO supprimés sont conservés pendant 30 jours avant d'être définitivement supprimés. Pour restaurer un SLO récemment supprimé :
+
+1. Sur la [page de gestion des SLO][2], cliquez sur l'icône d'engrenage **Settings** dans le coin supérieur droit.
+1. Sélectionnez le ou les SLO que vous souhaitez restaurer.
+1. Cliquez sur {{< ui >}}Restore{{< /ui >}}.
+
+**Remarque** : Les corrections de statut des SLO supprimés ne peuvent pas être restaurées. Ce processus de récupération s'applique uniquement aux SLO supprimés.
 
 ## Visualisation des SLO {#viewing-slos}
 
@@ -271,10 +283,6 @@ Vous pouvez également utiliser l'onglet {{< ui >}}Audit History{{< /ui >}} dans
 Avec les [monitors d'événement][28], vous pouvez configurer des notifications pour suivre les événements d'audit SLO. Par exemple, si vous souhaitez être averti lorsque la configuration d'un SLO spécifique est modifiée, configurez un monitor d'événement pour suivre le texte `[SLO Modified]` sur les tags `audit,slo_id:<SLO ID>`.
 
 ## Widgets SLO {#slo-widgets}
-
-{{< learning-center-callout header="Essayez de créer des Business-Critical Insights à l'aide de dashboards et de SLO dans le Learning Center" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Apprenez gratuitement sur une capacité de calcul cloud réelle et un compte d'essai Datadog. Inscrivez-vous dès aujourd'hui pour en savoir plus sur la création de dashboards pour suivre les SLO.
-{{< /learning-center-callout >}}
 
 Une fois votre SLO créé, vous pouvez visualiser les données grâce aux dashboards et widgets.
   - Utilisez le widget SLO pour visualiser le statut d'un seul SLO
