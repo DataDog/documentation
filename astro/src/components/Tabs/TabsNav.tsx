@@ -151,8 +151,12 @@ export function TabsNav({
 
   // Every synced group listens on `document`, so a click in any group of the
   // same name reaches it, even across separately bundled islands. A group
-  // that lacks the clicked key stays where it is.
-  const followClickInGroup = (event: MouseEvent, { group, keys }: TabSync) => {
+  // that lacks the clicked key stays where it is, unless it sets
+  // `fallbackToFirstTab`.
+  const followClickInGroup = (
+    event: MouseEvent,
+    { group, keys, fallbackToFirstTab }: TabSync,
+  ) => {
     if (!(event.target instanceof Element)) return;
     const button = event.target.closest<HTMLElement>("[data-sync-group]");
     if (button?.dataset.syncGroup !== group) return;
@@ -161,6 +165,7 @@ export function TabsNav({
     if (ref.current?.contains(button)) return;
     const index = keys.indexOf(button.dataset.syncKey ?? "");
     if (index >= 0) setActiveTab(index);
+    else if (fallbackToFirstTab) setActiveTab(0);
   };
 
   // A hash that names an element inside one of our panels (a heading in a

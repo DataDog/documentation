@@ -296,6 +296,28 @@ describe("TabsNav sync", () => {
     expect(activeIndexOf(lacksGo)).toBe(1);
   });
 
+  it("with fallbackToFirstTab, a click sends a group that lacks the key to its first tab", async () => {
+    const user = userEvent.setup();
+    const sync = (keys: string[]): TabSync => ({
+      group: "code-lang",
+      keys,
+      fallbackToFirstTab: true,
+    });
+    const { root: clicked } = mountNav("s19", ["Curl", "Python", "Go"], {
+      sync: sync(["curl", "python", "go"]),
+    });
+    const { root: lacksGo } = mountNav("s20", ["Curl", "Python"], {
+      sync: sync(["curl", "python"]),
+    });
+
+    await user.click(buttonsOf(lacksGo)[1]);
+    await waitFor(() => expect(activeIndexOf(clicked)).toBe(1));
+
+    await user.click(buttonsOf(clicked)[2]);
+
+    await waitFor(() => expect(activeIndexOf(lacksGo)).toBe(0));
+  });
+
   it("a click stores the key in the cookie and the URL, keeping hash and state", async () => {
     const user = userEvent.setup();
     const routerState = { index: 3 };

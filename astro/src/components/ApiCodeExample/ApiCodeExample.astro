@@ -48,7 +48,11 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
         variant="pills"
         labels={labels}
         panelIds={panelIds}
-        sync={{ group: "code-lang", keys: examples.map((ex) => ex.language) }}
+        sync={{
+          group: "code-lang",
+          keys: examples.map((ex) => ex.language),
+          fallbackToFirstTab: true,
+        }}
       >
         {examples.map((ex, tabIdx) => (
           <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
