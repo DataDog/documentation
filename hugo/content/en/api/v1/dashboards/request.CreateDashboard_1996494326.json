@@ -1,0 +1,30 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with case_stream list_stream widget",
+  "widgets": [
+    {
+      "definition": {
+        "type": "list_stream",
+        "requests": [
+          {
+            "columns": [
+              {
+                "width": "auto",
+                "field": "created_at"
+              }
+            ],
+            "query": {
+              "data_source": "case_stream",
+              "query_string": "*",
+              "sort": {
+                "column": "created_at",
+                "order": "desc"
+              }
+            },
+            "response_format": "event_list"
+          }
+        ]
+      }
+    }
+  ]
+}
