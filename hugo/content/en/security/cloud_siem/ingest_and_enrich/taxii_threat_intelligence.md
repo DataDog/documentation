@@ -95,8 +95,8 @@ Use the toggle in the {{< ui >}}Poll{{< /ui >}} column for the collection. Disab
 For servers that use basic authentication, open the server and click {{< ui >}}Replace Credentials{{< /ui >}}, enter the complete new username and password, and click {{< ui >}}Save{{< /ui >}}. The new credentials apply from the next poll. If they are invalid, the server's collections show {{< ui >}}Error{{< /ui >}}.
 
 ## Delete a collection or server
-<!-- TODO: confirm exact label for the per-collection delete action -->
-- {{< ui >}}Delete collection{{< /ui >}} stops polling, removes the collection's indicators, and stops enrichment. The server's other collections are not affected.
+
+- {{< ui >}}Delete Collection{{< /ui >}} stops polling, removes the collection's indicators, and stops enrichment. The server's other collections are not affected.
 - {{< ui >}}Delete TAXII Server{{< /ui >}} deletes all of the server's collections and their indicators, then the server and its credentials.
 
 To stop enrichment but keep the indicators, [disable polling](#disable-or-enable-polling) instead.
