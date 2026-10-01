@@ -28,6 +28,8 @@ After you select the Splunk HEC destination in the pipeline UI:
 	- If you use the default {{< ui >}}Custom{{< /ui >}} token strategy, enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}}).
+	- If you select {{< ui >}}JSON{{< /ui >}}, optionally click {{< ui >}}Add Field{{< /ui >}} to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
+	- **Note**: {{< ui >}}Index Fields{{< /ui >}} are not supported for the {{< ui >}}Raws{{< /ui >}} [endpoint target](#endpoint-target).
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -52,10 +54,6 @@ Select whether the timestamp should be auto-extracted. If set to `true`, Splunk 
 #### Sourcetype override
 
 Set the `sourcetype` to override Splunk's default value, which is `httpevent` for HEC data. See [template syntax][3] if you want to route logs to different source types based on specific fields in your logs.
-
-#### Indexed fields
-
-If you select {{< ui >}}JSON{{< /ui >}} encoding and {{< ui >}}Event{{< /ui >}} as the endpoint target, click {{< ui >}}Add Field{{< /ui >}} to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
 
 #### Buffering
 
