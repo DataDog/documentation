@@ -164,28 +164,28 @@ The following telemetry provide insight into your mobile application's performan
 ## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance Timeseries is in Preview.
+Performance timeseries is in Preview.
 {{< /callout >}}
 
-Performance Timeseries is available on the iOS and Android SDKs.
+Performance timeseries is available on the iOS and Android SDKs.
 
-Memory utilization described above is averaged over the lifetime of the view. Performance Timeseries enables you to capture memory and CPU usage every second for the length of the session, and see the outcome on an interactive graph in the session, view, and operation [side panels][5].
+Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels][3].
 
 After collection is enabled, all sessions get timeseries captured.
 
 Two series are collected:
 
-- **CPU usage**: the CPU consumed by your application, as a percentage of the device's total capacity across all cores. This is not the same measurement as the CPU ticks per second reported for a view.
-- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][6] and [on Android][7].
+- **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
+- **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
 
 ### Enable performance timeseries
 
-Collection is off by default.
+Collection for performance timeseries is off by default. Enable it for each platform:
 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-Requires the Android SDK v3.14.0+.
+Requires the Android SDK v3.14.0+. See the [Android SDK initialization parameters][1].
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -197,10 +197,12 @@ Rum.enable(rumConfig)
 
 `TimeseriesConfiguration.DEFAULT` collects both CPU and memory. To collect only one, pass the types explicitly with `TimeseriesConfiguration(setOf(TimeseriesType.MEMORY))`.
 
+[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
+
 {{% /tab %}}
 {{% tab "iOS" %}}
 
-Requires the iOS SDK v3.17.0+.
+Requires the iOS SDK v3.17.0+. See the [iOS SDK RUM configuration][1].
 
 ```swift
 var rumConfig = RUM.Configuration(applicationID: "<rum_application_id>")
@@ -213,6 +215,8 @@ RUM.enable(with: rumConfig)
 
 CPU is not collected on watchOS.
 
+[1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
+
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -222,9 +226,7 @@ CPU is not collected on watchOS.
 
 [1]: https://developer.android.com/topic/performance/vitals
 [2]: https://developer.apple.com/documentation/metrickit
-[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[5]: /real_user_monitoring/explorer/events/#performance-timeseries
-[6]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
-[7]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
+[3]: /real_user_monitoring/explorer/events/#performance-timeseries
+[4]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
+[5]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
 
