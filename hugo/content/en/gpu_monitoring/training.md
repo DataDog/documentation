@@ -27,7 +27,7 @@ With the Training page, you get:
 - **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
 - **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
 
-{{< img src="gpu_monitoring/training-page-2.png" alt="Training page in GPU Monitoring, showing insights across training runs, a bar graph of training run records over time, and a list of training runs with their namespace, outcome, start time, duration, and number of GPUs." style="width:100%;" >}}
+{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring showing training run insights, a bar graph of runs over time, and a list of training runs." style="width:100%;" >}}
 
 ## Setup
 
@@ -35,7 +35,7 @@ With the Training page, you get:
 
 To begin monitoring your training workloads, you must first meet the following criteria:
 - You are running the Datadog Cluster Agent version 7.80 or later with [GPU Monitoring enabled][1].
-- Minimum required CUDA and CUPTI version: 13.
+- You are running CUDA and CUPTI version 13 or later.
 
 ### 1. Connect training runs to GPU hardware
 
