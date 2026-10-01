@@ -11056,6 +11056,242 @@ components:
       type: string
       x-enum-varnames:
         - ARBITRARY_RULE_STATUS
+    ArchiveSearchCreateRehydration:
+      description: |-
+        Rehydration settings. Include this object to index the matched logs into a retained historical view.
+        Omit it to run an Archive Search that only scans the archive.
+      properties:
+        max_rehydrated_events:
+          description: |-
+            Maximum number of events to rehydrate. The organization's reindexing limit is configured
+            in millions, so this value is at least 1,000,000.
+          example: 1000000
+          format: int64
+          minimum: 1000000
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchCreateRequest:
+      description: Request to create an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchCreateRequestAttributes:
+      description: Attributes accepted when creating an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive to search. Use the Logs Archives API to list the archives of the organization.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        from:
+          description: Start of the time range to search, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchCreateRehydration"
+        to:
+          description: End of the time range to search, as an ISO 8601 timestamp. Must be after `from`.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+      type: object
+    ArchiveSearchCreateRequestData:
+      description: Archive Search object to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydration:
+      description: |-
+        Rehydration settings of the Archive Search. Absent when the search only scans the archive
+        without indexing the results.
+      properties:
+        max_rehydrated_events:
+          description: Maximum number of events to rehydrate.
+          example: 1000000
+          format: int64
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchRehydrationTier:
+      description: Storage tier the matched logs are rehydrated into.
+      enum:
+        - standard
+        - flex
+      example: standard
+      type: string
+      x-enum-varnames:
+        - STANDARD
+        - FLEX
+    ArchiveSearchResponse:
+      description: Response containing a single Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchResponseData"
+      required:
+        - data
+      type: object
+    ArchiveSearchResponseAttributes:
+      description: Attributes of an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive being searched.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        bytes_scanned:
+          description: Number of bytes read from the archive at the end of the search.
+          example: 402764439
+          format: int64
+          type: integer
+        completed_at:
+          description: |-
+            Time the Archive Search finished, as an ISO 8601 timestamp.
+            Absent while the search is still running.
+          example: "2026-01-02T12:30:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: Time the Archive Search was created, as an ISO 8601 timestamp.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        events_scanned:
+          description: Number of events read from the archive at the end of the search.
+          example: 1500
+          format: int64
+          type: integer
+        expected_duration:
+          description: Estimated time left before the Archive Search completes, in seconds.
+          example: 120
+          format: int64
+          type: integer
+        from:
+          description: Start of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydration"
+        status:
+          $ref: "#/components/schemas/ArchiveSearchStatus"
+        to:
+          description: End of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+        - status
+        - created_at
+        - events_scanned
+        - bytes_scanned
+      type: object
+    ArchiveSearchResponseData:
+      description: Archive Search object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchResponseAttributes"
+        id:
+          description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          type: string
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ArchiveSearchStatus:
+      description: Current state of an Archive Search.
+      enum:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+    ArchiveSearchType:
+      default: archive_search
+      description: Archive Search resource type.
+      enum:
+        - archive_search
+      example: archive_search
+      type: string
+      x-enum-varnames:
+        - ARCHIVE_SEARCH
     Argument:
       description: A named argument for a custom static analysis rule.
       properties:
@@ -31869,6 +32105,10 @@ components:
         query:
           description: Query for creating a data deletion request.
           example: "service:xyz host:abc"
+          type: string
+        source:
+          description: The source of the deletion request.
+          example: "standard"
           type: string
         starting_at:
           description: Starting time of the process to delete the requested data.
@@ -93577,7 +93817,7 @@ components:
           example: Checkout completed
           type: string
         feature_ids:
-          description: The list of feature IDs associated with the RUM operation.
+          description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
           type: array
@@ -93635,7 +93875,7 @@ components:
           example: Checkout completed
           type: string
         feature_ids:
-          description: The list of feature IDs associated with the RUM operation.
+          description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
           type: array
@@ -93688,7 +93928,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkCreateRequest:
-      description: The request body for creating a RUM operation strong link.
+      description: The request body for creating a RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkCreateRequestData"
@@ -93696,19 +93936,19 @@ components:
         - data
       type: object
     RUMOperationStrongLinkCreateRequestAttributes:
-      description: Attributes for creating a RUM operation strong link.
+      description: Attributes for creating a RUM operation link.
       properties:
         application_id:
           description: The RUM application ID used when creating a stub operation from `operation_name`.
           format: uuid
           type: string
         description:
-          description: A description of the strong link.
+          description: A description of the link.
           nullable: true
           type: string
         feature_id:
-          description: The unique identifier of the feature to link.
-          example: "feature-123"
+          description: The unique identifier of the journey to link.
+          example: "journey-123"
           type: string
         operation_id:
           description: |-
@@ -93724,7 +93964,7 @@ components:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkStatus"
         tags:
-          description: A list of tags associated with the strong link.
+          description: A list of tags associated with the link.
           items:
             type: string
           type: array
@@ -93732,7 +93972,7 @@ components:
         - feature_id
       type: object
     RUMOperationStrongLinkCreateRequestData:
-      description: The data object for creating a RUM operation strong link.
+      description: The data object for creating a RUM operation link.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkCreateRequestAttributes"
@@ -93743,7 +93983,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkResponse:
-      description: The response for a single RUM operation strong link.
+      description: The response for a single RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkResponseData"
@@ -93751,20 +93991,20 @@ components:
         - data
       type: object
     RUMOperationStrongLinkResponseAttributes:
-      description: Attributes of a RUM operation strong link response.
+      description: Attributes of a RUM operation link response.
       properties:
         created_at:
-          description: The timestamp when the strong link was created.
+          description: The timestamp when the link was created.
           format: date-time
           readOnly: true
           type: string
         description:
-          description: A description of the strong link.
+          description: A description of the link.
           nullable: true
           type: string
         feature_id:
-          description: The unique identifier of the linked feature.
-          example: "feature-123"
+          description: The unique identifier of the linked journey.
+          example: "journey-123"
           readOnly: true
           type: string
         operation_id:
@@ -93775,12 +94015,12 @@ components:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkStatus"
         tags:
-          description: A list of tags associated with the strong link.
+          description: A list of tags associated with the link.
           items:
             type: string
           type: array
         updated_at:
-          description: The timestamp when the strong link was last updated.
+          description: The timestamp when the link was last updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -93791,13 +94031,13 @@ components:
         - status
       type: object
     RUMOperationStrongLinkResponseData:
-      description: The data object in a RUM operation strong link response.
+      description: The data object in a RUM operation link response.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkResponseAttributes"
         id:
-          description: The unique identifier of the strong link, formatted as `<operation_id>:<feature_id>`.
-          example: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+          description: The unique identifier of the link, formatted as `<operation_id>:<feature_id>`.
+          example: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
           readOnly: true
           type: string
         type:
@@ -93808,7 +94048,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkStatus:
-      description: The status of a RUM operation strong link.
+      description: The status of a RUM operation link.
       enum:
         - DRAFT
         - CONFIRMED
@@ -93820,7 +94060,7 @@ components:
         - CONFIRMED
         - REJECTED
     RUMOperationStrongLinkType:
-      description: The JSON:API type for RUM operation strong link resources.
+      description: The JSON:API type for RUM operation link resources.
       enum:
         - strong_links
       example: strong_links
@@ -93828,7 +94068,7 @@ components:
       x-enum-varnames:
         - STRONG_LINKS
     RUMOperationStrongLinkUpdateRequest:
-      description: The request body for updating a RUM operation strong link.
+      description: The request body for updating a RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateRequestData"
@@ -93836,7 +94076,7 @@ components:
         - data
       type: object
     RUMOperationStrongLinkUpdateRequestAttributes:
-      description: Attributes for updating a RUM operation strong link.
+      description: Attributes for updating a RUM operation link.
       properties:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateStatus"
@@ -93844,7 +94084,7 @@ components:
         - status
       type: object
     RUMOperationStrongLinkUpdateRequestData:
-      description: The data object for updating a RUM operation strong link.
+      description: The data object for updating a RUM operation link.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateRequestAttributes"
@@ -93855,7 +94095,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkUpdateStatus:
-      description: The status of a RUM operation strong link. Can only be set to `CONFIRMED` or `REJECTED`.
+      description: The status of a RUM operation link. Can only be set to `CONFIRMED` or `REJECTED`.
       enum:
         - CONFIRMED
         - REJECTED
@@ -93865,7 +94105,7 @@ components:
         - CONFIRMED
         - REJECTED
     RUMOperationStrongLinksListResponse:
-      description: The response for a list of RUM operation strong links.
+      description: The response for a list of RUM operation links.
       properties:
         data:
           items:
@@ -93877,7 +94117,7 @@ components:
         - data
       type: object
     RUMOperationStrongLinksListResponseMeta:
-      description: Metadata for a list of RUM operation strong links.
+      description: Metadata for a list of RUM operation links.
       properties:
         limit:
           description: The pagination limit.
@@ -93888,7 +94128,7 @@ components:
           format: int64
           type: integer
         total:
-          description: The total number of strong links matching the request.
+          description: The total number of links matching the request.
           format: int64
           type: integer
       type: object
@@ -94422,7 +94662,7 @@ components:
           attributes:
             scope: ccm
             sort:
-              - expression: potential_daily_savings.amount
+              - expression: "@potential_daily_savings"
                 order: DESC
           id: "@resource_table:aws_ec2_instance"
           type: recommendations_filter
@@ -94441,8 +94681,9 @@ components:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
         id:
           description: |-
-            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
-            and returns all recommendations.
+            Filter expression applied to the recommendations when `attributes.filter` is omitted.
+            When supplied, `attributes.filter` overrides this value, including when empty. If the
+            resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -94452,6 +94693,13 @@ components:
     RecommendationsFilterRequestDataAttributes:
       description: Attributes used to filter and sort cost recommendations.
       properties:
+        filter:
+          description: |-
+            Filter expression applied to the recommendations. When supplied, this attribute overrides
+            `data.id`, including when empty. When omitted, `data.id` is used. If the resulting filter
+            is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
+          type: string
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -94487,7 +94735,7 @@ components:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
-          description: Field to sort by (for example, `potential_daily_savings.amount`).
+          description: Field to sort by (for example, `@potential_daily_savings`).
           type: string
         order:
           description: Sort direction, either `ASC` or `DESC`.
@@ -149749,7 +149997,7 @@ paths:
                     attributes:
                       scope: ccm
                       sort:
-                        - expression: potential_daily_savings.amount
+                        - expression: "@potential_daily_savings"
                           order: DESC
                     id: "@resource_table:aws_ec2_instance"
                     type: recommendations_filter
@@ -154393,6 +154641,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: pending
                         to_time: 1704063600000
@@ -154498,6 +154747,7 @@ paths:
                           org_id: 123
                           product: logs
                           query: "service:xyz host:abc"
+                          source: standard
                           starting_at: "2024-01-01T02:00:00.000000Z"
                           status: pending
                           to_time: 1704063600000
@@ -154558,6 +154808,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: canceled
                         to_time: 1704063600000
@@ -182606,6 +182857,158 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+  /api/v2/logs/archive_searches:
+    post:
+      description: |-
+        Start a search over the logs stored in an archive.
+
+        Without a `rehydration` object, the search only scans the archive and reports how much data
+        matched. With one, the matched logs are also indexed into a retained historical view, which
+        requires the `logs_write_historical_view` permission.
+      operationId: CreateArchiveSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 0
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 0
+                        expected_duration: 120
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}:
+    get:
+      description: Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.
+      operationId: GetArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        completed_at: "2026-01-02T12:30:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 1000000
+                          retention_days: 15
+                          tier: standard
+                        status: COMPLETED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/logs/config/archive-order:
     get:
       description: |-
@@ -204060,7 +204463,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -204134,7 +204537,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -204179,7 +204582,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/operations/search:
     get:
-      description: Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.
+      description: |-
+        Search RUM operations for your organization. Supports filtering by query, creator, team,
+        journey, and application.
       operationId: ListRUMOperations
       parameters:
         - description: A search query to filter operations by name.
@@ -204222,7 +204627,7 @@ paths:
           schema:
             example: "frontend,checkout"
             type: string
-        - description: Filter operations by feature ID. Accepts a comma-separated list of feature IDs.
+        - description: Filter operations by journey ID. Accepts a comma-separated list of journey IDs.
           in: query
           name: feature_id
           required: false
@@ -204256,7 +204661,7 @@ paths:
                           description: "Tracks users completing the checkout flow."
                           display_name: Checkout completed
                           feature_ids:
-                            - "feature-123"
+                            - "journey-123"
                           journey_rum:
                             rum_steps:
                               - nodes:
@@ -204306,18 +204711,18 @@ paths:
   /api/v2/rum/operations/strong_links:
     get:
       description: |-
-        List strong links between RUM operations and features. A strong link confirms that a feature
-        belongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;
+        List links between RUM operations and journeys. A link confirms that a journey
+        belongs to an operation. Provide `operation_id`, `feature_id` (journey ID), or both to filter results;
         at least one is required.
       operationId: ListRUMOperationStrongLinks
       parameters:
-        - description: Filter strong links by RUM operation ID.
+        - description: Filter links by RUM operation ID.
           in: query
           name: operation_id
           required: false
           schema:
             type: string
-        - description: Filter strong links by feature ID.
+        - description: Filter links by journey (feature) ID.
           in: query
           name: feature_id
           required: false
@@ -204352,14 +204757,14 @@ paths:
                     data:
                       - attributes:
                           created_at: "2024-01-15T10:30:00Z"
-                          description: "Confirmed link between checkout_completed and feature-123."
-                          feature_id: "feature-123"
+                          description: "Confirmed link between checkout_completed and journey-123."
+                          feature_id: "journey-123"
                           operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                           status: CONFIRMED
                           tags:
                             - "team:checkout"
                           updated_at:
-                        id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                        id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                         type: strong_links
                     meta:
                       limit: 50
@@ -204376,13 +204781,13 @@ paths:
           description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List RUM operation strong links
+      summary: List RUM operation links
       tags:
         - RUM Operations
       x-menu-order: 7
     post:
       description: |-
-        Create a strong link between a RUM operation and a feature, confirming that the feature
+        Create a link between a RUM operation and a journey, confirming that the journey
         belongs to the operation. The operation can be identified by `operation_id` or `operation_name`;
         if `operation_name` does not match an existing operation, a stub operation is created.
       operationId: CreateRUMOperationStrongLink
@@ -204402,14 +204807,14 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
-                        description: "Confirmed link between checkout_completed and feature-123."
-                        feature_id: "feature-123"
+                        description: "Confirmed link between checkout_completed and journey-123."
+                        feature_id: "journey-123"
                         operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                         status: CONFIRMED
                         tags:
                           - "team:checkout"
                         updated_at:
-                      id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                      id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                       type: strong_links
               schema:
                 $ref: "#/components/schemas/RUMOperationStrongLinkResponse"
@@ -204431,10 +204836,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict. A strong link between this operation and feature already exists.
+          description: Conflict. A link between this operation and journey already exists.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a RUM operation strong link
+      summary: Create a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 8
@@ -204443,7 +204848,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
-      description: Delete the strong link between a RUM operation and a feature.
+      description: Delete the link between a RUM operation and a journey.
       operationId: DeleteRUMOperationStrongLink
       parameters:
         - description: The unique identifier of the RUM operation.
@@ -204452,7 +204857,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The unique identifier of the feature.
+        - description: The unique identifier of the journey.
           in: path
           name: feature_id
           required: true
@@ -204469,7 +204874,7 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a RUM operation strong link
+      summary: Delete a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 9
@@ -204477,7 +204882,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
-      description: Update the status of a strong link between a RUM operation and a feature.
+      description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
       parameters:
         - description: The unique identifier of the RUM operation.
@@ -204486,7 +204891,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The unique identifier of the feature.
+        - description: The unique identifier of the journey.
           in: path
           name: feature_id
           required: true
@@ -204508,14 +204913,14 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
-                        description: "Confirmed link between checkout_completed and feature-123."
-                        feature_id: "feature-123"
+                        description: "Confirmed link between checkout_completed and journey-123."
+                        feature_id: "journey-123"
                         operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                         status: CONFIRMED
                         tags:
                           - "team:checkout"
                         updated_at: "2024-01-16T09:00:00Z"
-                      id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                      id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                       type: strong_links
               schema:
                 $ref: "#/components/schemas/RUMOperationStrongLinkResponse"
@@ -204534,7 +204939,7 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a RUM operation strong link
+      summary: Update a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 10
@@ -204600,7 +205005,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -204675,7 +205080,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -237178,6 +237583,13 @@ tags:
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
   - description: |-
+      Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate
+      the matches into a retained historical view.
+
+      See the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)
+      page for the searches currently running in Datadog.
+    name: Logs Archive Searches
+  - description: |-
       Archives forward all the logs ingested to a cloud storage system.
 
       See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
@@ -237354,8 +237766,8 @@ tags:
     name: RUM Insights
   - description: |-
       Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business
-      transactions detected from RUM events through a configurable journey, and their strong links
-      to features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
+      transactions detected from RUM events through a configurable journey, and their links
+      to journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
       for more information.
     name: RUM Operations
   - description: |-
