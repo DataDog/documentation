@@ -206,6 +206,82 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
    | `DD_SERVICE` | How you want to tag your service for [Unified Service Tagging][7].  |
    | `DD_VERSION` | How you want to tag your version for [Unified Service Tagging][7]. |
 
+## Durable Functions
+
+To enable Durable Functions instrumentation, add the following settings to your `host.json` file:
+
+{{< programming-lang-wrapper langs="nodejs,python,java,dotnet" >}}
+{{< programming-lang lang="nodejs" >}}
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="python" >}}
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="java" >}}
+```json
+{
+  "version": "2.0",
+  "telemetryMode": "OpenTelemetry",
+  "extensionBundle": {
+    "id": "Microsoft.Azure.Functions.ExtensionBundle",
+    "version": "[4.0.0, 5.0.0)"
+  },
+  "logging": {
+    "logLevel": {
+      "default": "Information",
+      "Host.Triggers.DurableTask": "Information",
+      "DurableTask.AzureStorage": "Warning"
+    }
+  },
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< programming-lang lang="dotnet" >}}
+```json
+{
+  "extensions": {
+    "durableTask": {
+      "tracing": {
+        "distributedTracingEnabled": true,
+        "version": "V2"
+      }
+    }
+  }
+}
+```
+{{< /programming-lang >}}
+{{< /programming-lang-wrapper >}}
+
 ## What's next?
 
 - You can view your Azure Functions traces in [{{< ui >}}Trace Explorer{{< /ui >}}][3]. Search for the service name you set in the `DD_SERVICE` environment variable to see your traces.
