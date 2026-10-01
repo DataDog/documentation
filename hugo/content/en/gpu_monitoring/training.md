@@ -14,8 +14,8 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/" btn_hidden="true" >}}
-Optimizing training workloads with GPU Monitoring is in Early Access Preview. [Request access to the Preview](https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/).
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/" >}}
+Optimizing training workloads with GPU Monitoring is in Early Access Preview. Complete the form to request access.
 {{< /callout >}}
 
 ## Overview
