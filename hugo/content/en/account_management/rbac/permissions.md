@@ -132,7 +132,7 @@ Minimal Access Roles give your organization more granular control over what user
 
 By default, every role includes a foundational set of [restricted permissions](#restricted-permissions) that cannot be removed because they support core functionality across Datadog. Enabling Minimal Access Roles makes these permissions removable from custom roles across your organization. Users with only a Minimal Access Role may experience limited functionality or unexpected errors on certain Datadog pages.
 
-<div class="alert alert-danger">If you use <code>default_permissions_opt_out</code> in <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role">Terraform role resources</a> or API-based automation, explicitly add any required permissions to your role configuration before enabling Minimal Access Roles. Permissions that are not explicitly assigned may be removed, resulting in unintended loss of access.</div>
+<div class="alert alert-danger">If you use <code>default_permissions_opt_out</code> in <a href="https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/role">Terraform role resources</a> or API-based automation, explicitly add any required permissions to your role configuration before enabling Minimal Access Roles. Restricted permissions that are not explicitly assigned may be removed, resulting in unintended loss of access.</div>
 
 Once enabled, the following permissions become removable, allowing you to create restricted roles for specialized workflows:
 
