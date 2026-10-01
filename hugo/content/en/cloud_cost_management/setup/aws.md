@@ -47,7 +47,7 @@ These settings ensure complete cost accuracy by allowing periodic cost calculati
 
 {{% tab "CloudFormation" %}}
 
-{{< img src="cloud_cost/setup/aws_cloudformation_setup.png" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_cloudformation_setup_2.png" alt="Cloud Cost Management setup form in CloudFormation mode" style="width:100%" >}}
 
 ### Select the resources to create
 
@@ -65,9 +65,9 @@ If using an existing Cost and Usage Report 2.0 and bucket, select your report fr
 
 Otherwise, enter the following details for your Cost and Usage Report:
 
-* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
-  * {{< ui >}}Capacity reservation data{{< /ui >}}: Include this column in your Cost and Usage Report to gain visibility into reserved instances and Savings Plans.
-  * {{< ui >}}IAM principal data{{< /ui >}}: Include this column in your Cost and Usage Report to attribute costs by user and role for Amazon Bedrock.
+* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0). Optionally include additional columns:
+  * {{< ui >}}Capacity reservation data{{< /ui >}}: Gain visibility into reserved instances and Savings Plans.
+  * {{< ui >}}IAM principal data{{< /ui >}}: Attribute costs by user and role for Amazon Bedrock.
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
@@ -85,7 +85,7 @@ Otherwise, enter the following details for your Cost and Usage Report:
 
 {{% tab "Terraform" %}}
 
-{{< img src="cloud_cost/setup/aws_terraform_setup.png" alt="CCM setup page with the Terraform option selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
+{{< img src="cloud_cost/setup/aws_terraform_setup_2.png" alt="CCM setup page with the Terraform option selected, showing Step 1 expanded to configure Cost and Usage Report settings including bucket name, region, and export details" style="width:100%" >}}
 
 ### Select the resources to create
 
@@ -105,9 +105,9 @@ If using an existing Cost and Usage Report 2.0 and bucket, select your report fr
 
 Otherwise, enter the following details for your Cost and Usage Report:
 
-* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
-  * {{< ui >}}Capacity reservation data{{< /ui >}}: Include this column in your Cost and Usage Report to gain visibility into reserved instances and Savings Plans.
-  * {{< ui >}}IAM principal data{{< /ui >}}: Include this column in your Cost and Usage Report to attribute costs by user and role for Amazon Bedrock.
+* {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0). Optionally include additional columns:
+  * {{< ui >}}Capacity reservation data{{< /ui >}}: Gain visibility into reserved instances and Savings Plans.
+  * {{< ui >}}IAM principal data{{< /ui >}}: Attribute costs by user and role for Amazon Bedrock.
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
