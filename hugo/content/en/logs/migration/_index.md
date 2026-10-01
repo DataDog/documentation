@@ -1,6 +1,6 @@
 ---
 title: Migration
-description: "Send your existing log sources to Datadog, and translate the searches, alerts, and dashboards you built on another platform."
+description: "Send your existing log sources to Datadog, and translate the searches, alerts, and dashboards you built in Splunk."
 further_reading:
 - link: "/logs/log_collection/"
   tag: "Documentation"
@@ -23,7 +23,7 @@ Configure the [Datadog Agent][1] to collect logs from files, containers, and net
 
 ## Translate your queries and assets
 
-After your logs are in Datadog, use [Query Translation][3] to convert Splunk Processing Language (SPL) into Datadog [log search syntax][4]. Query Translation can translate a single query at a time or translate queries from Splunk alerts and dashboards in batches, then use the translated queries to create Datadog monitors and dashboards.
+After your logs are in Datadog, use [Query Translation][3] to convert Splunk Processing Language (SPL) into Datadog [log search syntax][4]. Translate a single query at a time, or translate the queries in Splunk alerts and dashboards in batches and use them to create Datadog monitors and dashboards. Query Translation supports only Splunk as a source platform.
 
 ## Further reading
 

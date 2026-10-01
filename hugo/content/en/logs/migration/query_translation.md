@@ -18,14 +18,14 @@ further_reading:
 
 ## Overview
 
-The Migration App translates Splunk Processing Language (SPL) into Datadog [log search syntax][3] and converts Splunk assets into their Datadog equivalents. It provides two tools:
+Query Translation, part of the Migration App, translates Splunk Processing Language (SPL) into Datadog [log search syntax][3] and converts Splunk assets into their Datadog equivalents. It provides two tools:
 
 | Tool | Use case |
 |------|-----------|
 | [Single Translation][1] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
 | [Batch Migration][2] | Import batches of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
 
-The Migration App parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
+Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Permissions
 
