@@ -73,7 +73,7 @@ For sessions from the iOS and Android SDKs, the {{< ui >}}Performance Timeseries
 
 The graph covers the full session. When you open it from a view or an operation, markers show where that view or operation starts and ends, so you can read its resource usage against everything that ran around it. Periods when the application was in the background are shaded.
 
-For what each series measures and how to enable collection, see [Mobile Vitals][7].
+For what each series measures, see [Mobile Vitals][7].
 
 ## Additional tabs
 

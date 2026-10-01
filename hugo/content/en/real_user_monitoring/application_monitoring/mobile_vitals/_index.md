@@ -171,7 +171,7 @@ Performance timeseries is available on the iOS and Android SDKs.
 
 Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels][3].
 
-After collection is enabled, all sessions get timeseries captured.
+After collection is enabled, timeseries are captured for all sessions.
 
 Two series are collected:
 
@@ -180,45 +180,7 @@ Two series are collected:
 
 ### Enable performance timeseries
 
-Collection for performance timeseries is off by default. Enable it for each platform:
-
-{{< tabs >}}
-{{% tab "Android" %}}
-
-Requires the Android SDK v3.14.0+. See the [Android SDK initialization parameters][1].
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-    .setTimeseriesConfiguration(TimeseriesConfiguration.DEFAULT)
-    .build()
-
-Rum.enable(rumConfig)
-```
-
-`TimeseriesConfiguration.DEFAULT` collects both CPU and memory. To collect only one, pass the types explicitly with `TimeseriesConfiguration(setOf(TimeseriesType.MEMORY))`.
-
-[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-
-{{% /tab %}}
-{{% tab "iOS" %}}
-
-Requires the iOS SDK v3.17.0+. See the [iOS SDK RUM configuration][1].
-
-```swift
-var rumConfig = RUM.Configuration(applicationID: "<rum_application_id>")
-rumConfig.timeseries = .default
-
-RUM.enable(with: rumConfig)
-```
-
-`.default` collects both CPU and memory. To collect only one, pass the types explicitly with `RUM.Configuration.Timeseries(collectTypes: [.memory])`.
-
-CPU is not collected on watchOS.
-
-[1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
-
-{{% /tab %}}
-{{< /tabs >}}
+Collection is off by default. During the Preview, Datadog provides setup instructions to participating customers. To get access, [join the Preview][6].
 
 ## Further Reading
 
@@ -229,4 +191,5 @@ CPU is not collected on watchOS.
 [3]: /real_user_monitoring/explorer/events/#performance-timeseries
 [4]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
 [5]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
+[6]: https://www.datadoghq.com/product-preview/rum-timeseries/
 
