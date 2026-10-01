@@ -14,6 +14,9 @@ further_reading:
 - link: "/security/cloud_siem/guide/ingest-stix-threat-intelligence/"
   tag: "Documentation"
   text: "Ingest STIX Threat Intelligence"
+- link: "/security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence/"
+  tag: "Documentation"
+  text: "Ingest TAXII Threat Intelligence"
 - link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
   tag: "Blog"
   text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
@@ -25,7 +28,7 @@ Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This art
 
 Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
 
-<div class="alert alert-info">You can also push indicators programmatically as STIX 2.1 bundles instead of uploading CSVs. See <a href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/">Ingest STIX Threat Intelligence</a>.</div>
+<div class="alert alert-info">You can also push indicators programmatically as STIX 2.1 bundles instead of uploading CSVs. See <a href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/">Ingest STIX Threat Intelligence</a>. To have Datadog poll a TAXII 2.1 server for you instead, see <a href="/security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence/">Ingest TAXII Threat Intelligence</a>.</div>
 
 ### How bring your own threat intelligence works
 
