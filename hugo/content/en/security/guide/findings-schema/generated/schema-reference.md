@@ -582,7 +582,7 @@ Container image where the finding was detected, including registry, repository, 
     <tr>
       <td><code>is_running_as_serverless_function</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@container_image.is_running_as_serverless_function</code><br><code>true</code> if the container image is running as a serverless function, <code>false</code> otherwise.</td>
+      <td><strong>Path:</strong> <code>@container_image.is_running_as_serverless_function</code><br><code>true</code> if the container image is running as a serverless function; <code>false</code> otherwise.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -898,7 +898,7 @@ Attributes identifying the Infrastructure as Code (IaC) resource related to the 
     <tr>
       <td><code>module</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module</code><br>Terraform module attribution for the affected resource.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module</code><br>Terraform module that declares the affected resource.</td>
     </tr>
     <tr>
       <td><code>platform</code></td>
@@ -915,7 +915,7 @@ Attributes identifying the Infrastructure as Code (IaC) resource related to the 
 
 ### Module
 
-Terraform module attribution for the affected resource.
+Terraform module that declares the affected resource.
 
 <table>
   <thead>
@@ -939,7 +939,7 @@ Terraform module attribution for the affected resource.
     <tr>
       <td><code>module_path</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.module_path</code><br>Ordered module call chain from the customer repository declaration to the leaf module. Omitted for directly called modules.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.module_path</code><br>Ordered module call chain from the declaration in your repository to the leaf module. Omitted for directly called modules.</td>
     </tr>
     <tr>
       <td><code>name</code></td>
@@ -949,7 +949,7 @@ Terraform module attribution for the affected resource.
     <tr>
       <td><code>source</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@iac_resource.module.source</code><br>Normalized, credential-free source of the leaf module.</td>
+      <td><strong>Path:</strong> <code>@iac_resource.module.source</code><br>Normalized source address of the leaf module, with credentials removed.</td>
     </tr>
     <tr>
       <td><code>source_type</code></td>
@@ -1022,7 +1022,7 @@ Location of the affected resource relative to the leaf module root.
 
 ### Module Path
 
-Ordered module call chain from the customer repository declaration to the leaf module. Omitted for directly called modules.
+Ordered module call chain from the declaration in your repository to the leaf module. Omitted for directly called modules.
 
 <table>
   <thead>
@@ -1201,7 +1201,7 @@ Package manager information. A package manager automates the installation, upgra
     <tr>
       <td><code>disk_locations</code></td>
       <td>array (object)</td>
-      <td><strong>Path:</strong> <code>@package.disk_locations</code><br>Contains the on-disk locations where this package was found.</td>
+      <td><strong>Path:</strong> <code>@package.disk_locations</code><br>On-disk locations where the package was found.</td>
     </tr>
     <tr>
       <td><code>has_suid</code></td>
@@ -1241,7 +1241,7 @@ Package manager information. A package manager automates the installation, upgra
     <tr>
       <td><code>purl</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@package.purl</code><br>Contains the PURL (Package URL), a standardized format that identifies the package's type, namespace, name, and version.</td>
+      <td><strong>Path:</strong> <code>@package.purl</code><br>Package URL (PURL), a standardized format that identifies the package's type, namespace, name, and version.</td>
     </tr>
     <tr>
       <td><code>root_parents</code></td>
@@ -1256,7 +1256,7 @@ Package manager information. A package manager automates the installation, upgra
     <tr>
       <td><code>type</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@package.type</code><br>Indicates the category of the package. Valid values: <code>application</code> (package managed through an application-level package manager, such as npm, PyPI, or Maven) and <code>os</code> (package managed by an OS-level package manager, such as apt, apk, or yum).</td>
+      <td><strong>Path:</strong> <code>@package.type</code><br>Indicates the category of the package. Valid values: <code>application</code> (package managed by an application-level package manager, such as npm, PyPI, or Maven) and <code>os</code> (package managed by an OS-level package manager, such as apt, apk, or yum).</td>
     </tr>
     <tr>
       <td><code>version</code></td>
@@ -1846,7 +1846,7 @@ Latest major version of the public base image that may remediate the inherited v
     <tr>
       <td><code>repo_digest</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.base_image.latest_major.repo_digest</code><br>Manifest digest (<code>sha256:...</code>) of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>tag</code></td>
@@ -1996,7 +1996,7 @@ Latest major version of the container image that may remediate the vulnerability
     <tr>
       <td><code>repo_digest</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.repo_digest</code><br>Manifest digest (sha256:...) of the container image that may remediate the vulnerability.</td>
+      <td><strong>Path:</strong> <code>@remediation.container_image.latest_major.repo_digest</code><br>Manifest digest (<code>sha256:...</code>) of the container image that may remediate the vulnerability.</td>
     </tr>
     <tr>
       <td><code>tag</code></td>
@@ -4991,7 +4991,7 @@ Information specific to secret findings, such as the secret's validation status.
     <tr>
       <td><code>is_git_history_only</code></td>
       <td>boolean</td>
-      <td><strong>Path:</strong> <code>@secret.is_git_history_only</code><br><code>true</code> if the secret was found only in past commits and is not present at the branch <code>HEAD</code>, <code>false</code> if it is present in the current code.</td>
+      <td><strong>Path:</strong> <code>@secret.is_git_history_only</code><br><code>true</code> if the secret appears only in past commits and not at the branch <code>HEAD</code>; <code>false</code> if the secret is present at <code>HEAD</code>.</td>
     </tr>
     <tr>
       <td><code>validation_status</code></td>
@@ -5211,12 +5211,12 @@ Information specific to vulnerabilities.
     <tr>
       <td><code>cisa</code></td>
       <td>object</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cisa</code><br>CISA (Cybersecurity and Infrastructure Security Agency) metadata related to this vulnerability.</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa</code><br>Cybersecurity and Infrastructure Security Agency (CISA) metadata for the vulnerability.</td>
     </tr>
     <tr>
       <td><code>cisa_bod2604_remediation_timeline</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cisa_bod2604_remediation_timeline</code><br>(deprecated) Maximum time to remediate this vulnerability under CISA BOD 26-04 (calendar days). One of <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Recomputed as CISA/exposure inputs change. Use <code>custom.vulnerability.cisa.bod2604_remediation_timeline</code> instead.</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa_bod2604_remediation_timeline</code><br>(deprecated) Maximum time, in calendar days, to remediate the vulnerability under CISA Binding Operational Directive (BOD) 26-04. Valid values: <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Datadog recomputes this value when CISA or exposure inputs change. Use <code>@vulnerability.cisa.bod2604_remediation_timeline</code> instead.</td>
     </tr>
     <tr>
       <td><code>confidence</code></td>
@@ -5281,9 +5281,9 @@ Information specific to vulnerabilities.
   </tbody>
 </table>
 
-### Cisa
+### CISA
 
-CISA (Cybersecurity and Infrastructure Security Agency) metadata related to this vulnerability.
+Cybersecurity and Infrastructure Security Agency (CISA) metadata related to this vulnerability.
 
 <table>
   <thead>
@@ -5297,12 +5297,12 @@ CISA (Cybersecurity and Infrastructure Security Agency) metadata related to this
     <tr>
       <td><code>bod2604_remediation_timeline</code></td>
       <td>string</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cisa.bod2604_remediation_timeline</code><br>Maximum time to remediate this vulnerability under CISA BOD 26-04 (calendar days). One of <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Recomputed as CISA/exposure inputs change.</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa.bod2604_remediation_timeline</code><br>Maximum time, in calendar days, to remediate the vulnerability under CISA Binding Operational Directive (BOD) 26-04. Valid values: <code>three_days_and_forensic_triage</code>, <code>three_days</code>, <code>fourteen_days</code>, <code>sixty_days</code>, <code>fix_on_system_upgrade</code>. Datadog recomputes this value when CISA or exposure inputs change.</td>
     </tr>
     <tr>
       <td><code>kev_added_at</code></td>
       <td>integer</td>
-      <td><strong>Path:</strong> <code>@vulnerability.cisa.kev_added_at</code><br>The date the vulnerability was added to the CISA Known Exploited Vulnerabilities (KEV) catalog, in Unix epoch milliseconds UTC.</td>
+      <td><strong>Path:</strong> <code>@vulnerability.cisa.kev_added_at</code><br>Timestamp in milliseconds (UTC) when the vulnerability was added to the CISA Known Exploited Vulnerabilities (KEV) catalog.</td>
     </tr>
   </tbody>
 </table>
