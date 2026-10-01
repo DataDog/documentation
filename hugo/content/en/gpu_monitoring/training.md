@@ -1,7 +1,6 @@
 ---
 title: Optimize Training Workloads with GPU Monitoring
 is_beta: true
-private: true
 description: Troubleshoot stalled or failed training runs and maximize the throughput of your training workloads.
 further_reading:
 - link: "/gpu_monitoring/setup"
@@ -15,9 +14,9 @@ further_reading:
   text: "Learn more about what GPU Monitoring offers"
 ---
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Optimizing training workloads with GPU Monitoring is in Preview.
-{{< /beta-callout >}}
+{{< callout url="https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/" btn_hidden="true" >}}
+Optimizing training workloads with GPU Monitoring is in Early Access Preview. [Request access to the Preview](https://www.datadoghq.com/product-preview/gpu-monitoring-training-obs/).
+{{< /callout >}}
 
 ## Overview
 
@@ -28,7 +27,7 @@ With the Training Optimization page, you get:
 1. **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
 2. **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
 
-{{< img src="gpu_monitoring/training-page.png" alt="Training page in GPU Monitoring, showing insights across training runs, a bar graph of training run records over time, and a list of training runs with their namespace, outcome, start time, duration, and number of GPUs." style="width:100%;" >}}
+{{< img src="gpu_monitoring/training-page-2.png" alt="Training page in GPU Monitoring, showing insights across training runs, a bar graph of training run records over time, and a list of training runs with their namespace, outcome, start time, duration, and number of GPUs." style="width:100%;" >}}
 
 ## Setup
 
