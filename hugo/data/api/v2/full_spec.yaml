@@ -31870,6 +31870,10 @@ components:
           description: Query for creating a data deletion request.
           example: "service:xyz host:abc"
           type: string
+        source:
+          description: The source of the deletion request.
+          example: "standard"
+          type: string
         starting_at:
           description: Starting time of the process to delete the requested data.
           example: "2024-01-01T02:00:00.000000Z"
@@ -154393,6 +154397,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: pending
                         to_time: 1704063600000
@@ -154498,6 +154503,7 @@ paths:
                           org_id: 123
                           product: logs
                           query: "service:xyz host:abc"
+                          source: standard
                           starting_at: "2024-01-01T02:00:00.000000Z"
                           status: pending
                           to_time: 1704063600000
@@ -154558,6 +154564,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: canceled
                         to_time: 1704063600000
