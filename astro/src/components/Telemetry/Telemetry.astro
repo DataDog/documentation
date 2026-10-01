@@ -108,4 +108,10 @@
   }
 
   datadogLogs.logger.setHandler(credentials.loggingHandler);
+
+  if (new URLSearchParams(window.location.search).has("dderrtest")) {
+    setTimeout(() => {
+      throw new Error("WEB-10112 sourcemap verification");
+    });
+  }
 </script>
