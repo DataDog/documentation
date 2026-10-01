@@ -18,14 +18,14 @@ further_reading:
 
 ## Overview
 
-Query Translation, part of the Migration App, translates Splunk Processing Language (SPL) into Datadog [log search syntax][3] and converts Splunk assets into their Datadog equivalents. It provides two tools:
+Query Translation, part of the Migration App, translates Splunk Processing Language (SPL) into Datadog [log search syntax][1] and converts Splunk assets into their Datadog equivalents. It provides two tools:
 
 | Tool | Use case |
 |------|-----------|
-| [Single Translation][1] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
-| [Batch Migration][2] | Import batches of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
+| [Single Translation][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
+| [Batch Migration][3] | Import batches of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
 
-Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][3] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
+Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
 ## Permissions
 
@@ -35,7 +35,7 @@ Publishing a translated resource requires the permission for the asset being cre
 
 Use Single Translation as a sandbox for SPL. It is designed for exploring translation behavior rather than for migrating an inventory of assets.
 
-1. Go to [Logs > Single Translation][1].
+1. Go to [Logs > Single Translation][2].
 2. Paste an SPL query into the query box, or select one of the provided examples.
 3. Click {{< ui >}}Translate{{< /ui >}}.
 
@@ -117,7 +117,7 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 
 ### Import your assets into Datadog
 
-1. Go to [Logs > Batch Migration][2] and click {{< ui >}}Start Batch Migration{{< /ui >}}.
+1. Go to [Logs > Batch Migration][3] and click {{< ui >}}Start Batch Migration{{< /ui >}}.
 2. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
 3. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
 4. In {{< ui >}}Name your import{{< /ui >}}, give the batch a name that identifies it later.
@@ -171,9 +171,9 @@ The SPL command is not supported
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/logs/query-translator
-[2]: https://app.datadoghq.com/logs/batch-migration
-[3]: /logs/explorer/search_syntax/
+[1]: /logs/explorer/search_syntax/
+[2]: https://app.datadoghq.com/logs/query-translator
+[3]: https://app.datadoghq.com/logs/batch-migration
 [4]: /ddsql_editor/
 [5]: /account_management/rbac/permissions/
 [6]: /logs/explorer/
