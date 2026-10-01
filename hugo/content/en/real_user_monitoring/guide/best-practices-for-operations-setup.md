@@ -74,7 +74,7 @@ Prioritize the operation that represents the final step of a journey because its
 
 Use the following tools to investigate unexpected operation outcomes or verify that an operation is instrumented correctly:
 
-- Launch an [Operation AI Investigation][5] from the operation details page to analyze errors, timeouts, abandonment, and latency issues.
+- Start a [Bits Investigation][5] from an investigation card on the operation details page to analyze errors, abandonment, timeouts, crashes, and slowness.
 - Review example sessions on the operation details page for the outcome you want to investigate.
 - Query operation events in the [RUM Explorer][6] to inspect their attributes and surrounding session context.
 
@@ -86,6 +86,6 @@ Use the following tools to investigate unexpected operation outcomes or verify t
 [2]: /real_user_monitoring/operations_monitoring/?tab=browser#monitor-your-availability-on-datadog
 [3]: /real_user_monitoring/operations_monitoring/?tab=browser#start-an-operation
 [4]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
-[5]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
+[5]: /real_user_monitoring/bits_ai/optimize_performance/#operations-monitoring
 [6]: /real_user_monitoring/explorer/
 [7]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/

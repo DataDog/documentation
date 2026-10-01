@@ -19,6 +19,7 @@ You can launch a Bits investigation from several entry points:
   - [**Manual**](#manual-monitor-alerts): Start from an individual monitor alert
   - [**Automatic**](#enable-automatic-investigations): Configure monitors to automatically launch a Bits investigation whenever they enter an alert state
 - [Synthetic test details page](#from-the-synthetic-test-details-page)
+- [Real User Monitoring](#real-user-monitoring)
 - [General prompt](#general-prompt)
 
 ### Monitor alerts {#manual-monitor-alerts}
@@ -55,6 +56,14 @@ The investigation opens in a new page, and you can also view it from the test de
 #### From a Synthetic monitor
 
 Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
+
+### Real User Monitoring
+
+You can launch a Bits investigation from several places in Real User Monitoring (RUM):
+
+- Recommendation cards on the RUM {{< ui >}}Optimization{{< /ui >}} page and in Operations Monitoring. For details, see [Optimize Performance with Bits AI][19].
+- The {{< ui >}}Anomaly · Investigate{{< /ui >}} button on a RUM vital chart. For details, see [Investigate Regressions and Alerts with Bits AI][20].
+- RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations).
 
 ### General prompt
 
@@ -168,6 +177,8 @@ The {{< ui >}}Reports{{< /ui >}} tab enables you to track the number of investig
 [16]: https://app.datadoghq.com/bits-ai/investigations/new
 [17]: /source_code/#tag-your-apm-telemetry-with-git-information
 [18]: https://app.datadoghq.com/synthetics/tests
+[19]: /real_user_monitoring/bits_ai/optimize_performance/
+[20]: /real_user_monitoring/bits_ai/investigate_regressions/
 
 ## Further reading
 
