@@ -11,9 +11,45 @@ further_reading:
   text: "Troubleshooting the Code Security MCP Server"
 ---
 
-The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Each tool wraps one or more Datadog security binaries and accepts file paths or directories to scan.
+The [Datadog Code Security MCP Server][1] exposes the following tools for AI coding assistants and CLI usage. Scan tools wrap one or more Datadog security binaries and accept file paths or directories to scan. `datadog_library_vulnerability_scan` queries Datadog by package URL and does not scan a local tree.
 
-<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning. To query findings already stored in Datadog, see <a href="/security/code_security/dev_tool_int/mcp_server/#query-findings-already-in-datadog">Query findings already in Datadog</a>.</div>
+
+## `datadog_code_security_scan`
+
+Run SAST, secrets detection, SCA, and IaC scanning in parallel.
+
+`min_sast_severity` applies only to the SAST portion of the scan. It defaults to `LOW`. In-source suppressed findings are excluded. When some scanners are not installed, the tool returns results from the scanners that succeeded and an error for each scanner that failed.
+
+### Parameters
+
+| Parameter            | Type            | Required | Description                                                                                          |
+| -------------------- | --------------- | :------: | ---------------------------------------------------------------------------------------------------- |
+| `file_paths`         | `array[string]` |   Yes    | File paths or directories to scan                                                                    |
+| `working_dir`        | `string`        |    No    | Base directory for resolving relative paths (defaults to the current directory)                      |
+| `min_sast_severity`  | `string`        |    No    | Minimum SAST severity to return: `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`. Default: `LOW`. SAST only. |
+
+### Required binaries
+
+`datadog-static-analyzer`, `datadog-sbom-generator`, `datadog-security-cli`, `datadog-iac-scanner`
+
+## `datadog_sast_scan`
+
+Run Static Application Security Testing (SAST) to detect security vulnerabilities in first-party code.
+
+`min_sast_severity` defaults to `LOW`. In-source suppressed findings are excluded.
+
+### Parameters
+
+| Parameter            | Type            | Required | Description                                                                                          |
+| -------------------- | --------------- | :------: | ---------------------------------------------------------------------------------------------------- |
+| `file_paths`         | `array[string]` |   Yes    | File paths or directories to scan                                                                    |
+| `working_dir`        | `string`        |    No    | Base directory for resolving relative paths                                                          |
+| `min_sast_severity`  | `string`        |    No    | Minimum SAST severity to return: `LOW`, `MEDIUM`, `HIGH`, or `CRITICAL`. Default: `LOW`.             |
+
+### Required binary
+
+`datadog-static-analyzer`
 
 ## `datadog_secrets_scan`
 
@@ -108,9 +144,35 @@ JSON containing a summary (total components, breakdown by language/package manag
 | Ruby       | Bundler                                   |
 | Rust       | Cargo                                     |
 
-<div class="alert alert-info">If the repository uses a package manager not listed above, or if the tool returns 0 components, the AI assistant can perform manual SBOM generation by reading lock files (<code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, <code>pom.xml</code>, <code>Gemfile.lock</code>, <code>Cargo.lock</code>, <code>composer.lock</code>, etc.) and extracting dependencies directly.</div>
+<div class="alert alert-info">If the repository uses a package manager not listed above, or if the tool returns zero components, the AI assistant can generate an SBOM by reading lock files (<code>package.json</code>, <code>requirements.txt</code>, <code>go.mod</code>, <code>pom.xml</code>, <code>Gemfile.lock</code>, <code>Cargo.lock</code>, <code>composer.lock</code>, and similar files) and extracting dependencies directly.</div>
 
-## Further Reading
+## `datadog_library_vulnerability_scan`
+
+Look up known vulnerabilities for specific libraries by package URL (PURL). This tool calls the Datadog API and does not scan a local codebase. Use [`datadog_sca_scan`](#datadog_sca_scan) when you want to scan a project tree.
+
+Requires `DD_API_KEY` and `DD_APP_KEY`.
+
+### Parameters
+
+| Parameter     | Type            | Required | Description                                                                 |
+| ------------- | --------------- | :------: | --------------------------------------------------------------------------- |
+| `libraries`   | `array[object]` |   Yes    | Libraries to scan. Each object uses the fields in the table below.         |
+| `working_dir` | `string`        |    No    | Working directory for git context detection (defaults to the current directory) |
+
+Each entry in `libraries`:
+
+| Field             | Type      | Required | Description                                                      |
+| ----------------- | --------- | :------: | ---------------------------------------------------------------- |
+| `purl`            | `string`  |   Yes    | Package URL, for example `pkg:maven/com.cronutils/cron-utils@9.1.2` |
+| `is_direct`       | `boolean` |    No    | Whether this is a direct dependency                              |
+| `is_dev`          | `boolean` |    No    | Whether this is a development-only dependency                    |
+| `package_manager` | `string`  |    No    | Package manager, for example `MAVEN`, `NPM`, or `GOLANG`         |
+
+### Output
+
+Vulnerabilities with CVE ID, GHSA ID, severity, CVSS score, affected library, remediation, fix versions, and exploit availability.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
