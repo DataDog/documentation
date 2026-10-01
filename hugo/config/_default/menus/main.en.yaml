@@ -10620,6 +10620,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_data_access
       weight: 403
+    - name: Request Access
+      url: account_management/rbac/request_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_request_access
+      weight: 404
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml

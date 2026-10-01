@@ -37239,7 +37239,7 @@ components:
         - data
       type: object
     DueDateRuleDataCreate:
-      description: The data object for a due date rule create or update request.
+      description: The data object for a due date rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/DueDateRuleAttributesCreate"
@@ -37256,6 +37256,23 @@ components:
           $ref: "#/components/schemas/DueDateRuleAttributesResponse"
         id:
           description: The ID of the due date rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DueDateRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DueDateRuleDataUpdate:
+      description: The data object for a due date rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DueDateRuleAttributesCreate"
+        id:
+          description: The ID of the due date rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -37286,7 +37303,15 @@ components:
         - id
       type: object
     DueDateRuleReorderRequest:
-      description: The body of the due date rule reorder request.
+      description: The body of a due date rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DueDateRuleReorderData"
+      required:
+        - data
+      type: object
+    DueDateRuleReorderResponse:
+      description: The response of a due date rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/DueDateRuleReorderData"
@@ -37313,7 +37338,7 @@ components:
       description: The body of a due date rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/DueDateRuleDataCreate"
+          $ref: "#/components/schemas/DueDateRuleDataUpdate"
       required:
         - data
       type: object
@@ -38015,6 +38040,13 @@ components:
       required:
         - revisions
       type: object
+    EntityContextEntityType:
+      default: siem_entity_identity
+      description: The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+      enum: [siem_entity_identity]
+      example: siem_entity_identity
+      type: string
+      x-enum-varnames: [SIEM_ENTITY_IDENTITY]
     EntityContextPage:
       description: Pagination metadata for the entity context response.
       properties:
@@ -38084,6 +38116,15 @@ components:
         email: user@example.com
         principal_id: user@example.com
       type: object
+    EntityContextRevisionsMode:
+      default: latest
+      description: |-
+        Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+        and `all` returns every revision in the requested time range.
+      enum: [latest, all]
+      example: latest
+      type: string
+      x-enum-varnames: [LATEST, ALL]
     EntityData:
       description: Entity data.
       properties:
@@ -65559,12 +65600,20 @@ components:
         - content
       type: object
     LLMObsPromptChatTemplate:
-      description: A chat prompt template.
+      description: >-
+        A chat prompt template containing messages and optional named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       items:
-        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptChatTemplateItem:
+      description: A chat message or a named message placeholder in a prompt template.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptMessagePlaceholder"
     LLMObsPromptConfig:
       additionalProperties: {}
       description: >-
@@ -65717,6 +65766,33 @@ components:
       required:
         - include
       type: object
+    LLMObsPromptMessagePlaceholder:
+      additionalProperties: false
+      description: >-
+        A named placeholder that inserts a list of messages when a compatible SDK formats the prompt.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
+      properties:
+        name:
+          description: Name used to supply the message list when formatting the prompt.
+          example: "history"
+          minLength: 1
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptMessagePlaceholderType"
+      required:
+        - type
+        - name
+      type: object
+    LLMObsPromptMessagePlaceholderType:
+      description: Type of chat-template item.
+      enum:
+        - placeholder
+      example: "placeholder"
+      type: string
+      x-enum-varnames:
+        - PLACEHOLDER
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65772,9 +65848,11 @@ components:
       properties:
         chat_template:
           description: >-
-            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+            Chat template for this prompt version, as a list of messages and named message placeholders. Omitted for text templates.
+
+            **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
           items:
-            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+            $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
           type: array
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
@@ -65809,6 +65887,8 @@ components:
             chat_template:
               - content: "You are a helpful customer support assistant for {{company_name}}."
                 role: "system"
+              - name: "history"
+                type: "placeholder"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
             config:
@@ -65827,11 +65907,13 @@ components:
       type: object
     LLMObsPromptTemplate:
       description: >-
-        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+        A text template, a list of chat messages and named message placeholders, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
 
         **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
 
         Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
@@ -74629,7 +74711,7 @@ components:
         - data
       type: object
     MuteRuleDataCreate:
-      description: The data object for a mute rule create or update request.
+      description: The data object for a mute rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/MuteRuleAttributesCreate"
@@ -74646,6 +74728,23 @@ components:
           $ref: "#/components/schemas/MuteRuleAttributesResponse"
         id:
           description: The ID of the mute rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/MuteRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MuteRuleDataUpdate:
+      description: The data object for a mute rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MuteRuleAttributesCreate"
+        id:
+          description: The ID of the mute rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -74676,7 +74775,15 @@ components:
         - id
       type: object
     MuteRuleReorderRequest:
-      description: The body of the mute rule reorder request.
+      description: The body of a mute rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/MuteRuleReorderData"
+      required:
+        - data
+      type: object
+    MuteRuleReorderResponse:
+      description: The response of a mute rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/MuteRuleReorderData"
@@ -74703,7 +74810,7 @@ components:
       description: The body of a mute rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/MuteRuleDataCreate"
+          $ref: "#/components/schemas/MuteRuleDataUpdate"
       required:
         - data
       type: object
@@ -77319,6 +77426,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessor"
@@ -79464,6 +79572,187 @@ components:
         - name
         - value
       type: object
+    ObservabilityPipelineMetricEnrichmentTableFile:
+      description: Defines a static enrichment table loaded from a CSV file for metric enrichment.
+      properties:
+        encoding:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileEncoding"
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileKey"
+        path:
+          description: Path to the CSV file.
+          example: /etc/enrichment/lookup.csv
+          type: string
+      required:
+        - encoding
+        - key
+        - path
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileKey:
+      description: Defines how to map a metric lookup value to a CSV column during enrichment table lookups.
+      properties:
+        column:
+          description: The CSV column name or index to match against the lookup value.
+          example: service
+          type: string
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - column
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a static CSV file.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        file:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFile"
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - file
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableLookupSource:
+      description: |-
+        Specifies the source of the key value used for metric enrichment table lookups.
+        The lookup key can be either the metric name or a metric tag.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookup"
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookup:
+      description: Uses the metric name as the lookup key for enrichment table matching.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType:
+      default: metric_name
+      description: The lookup source type. The value should always be `metric_name`.
+      enum: [metric_name]
+      example: metric_name
+      type: string
+      x-enum-varnames:
+        - METRIC_NAME
+    ObservabilityPipelineMetricEnrichmentTableProcessor:
+      description: |-
+        The `enrichment_table` processor enriches metrics with tags from a static CSV file or a Datadog reference table.
+        It looks up a row using the metric name or a metric tag value. It then adds each column of the matching row as a
+        metric tag, overwriting any existing tag with the same key. Exactly one of `file` or `reference_table` must be
+        configured.
+
+        **Supported pipeline types:** metrics
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor"
+      x-pipeline-types: [metrics]
+    ObservabilityPipelineMetricEnrichmentTableReferenceKey:
+      description: Defines the metric lookup value used as the reference-table row ID.
+      properties:
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich metrics.
+      properties:
+        app_key_key:
+          description: |-
+            The name of the environment variable or secret that holds the Datadog application key used to access the
+            reference table.
+          example: DD_APP_KEY
+          type: string
+        columns:
+          description: |-
+            A list of column names to include from the reference table. If not provided, all columns are included.
+          items:
+            description: The name of a column to include from the reference table.
+            type: string
+          maxItems: 50
+          type: array
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceKey"
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+        - key
+        - table_id
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a Datadog reference table.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        reference_table:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTable"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - reference_table
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookup:
+      description: Uses a metric tag as the lookup key for enrichment table matching.
+      properties:
+        name:
+          description: The Datadog tag key used as the lookup key.
+          example: service
+          maxLength: 200
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookupType"
+      required:
+        - type
+        - name
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookupType:
+      default: tag
+      description: The lookup source type. The value should always be `tag`.
+      enum: [tag]
+      example: tag
+      type: string
+      x-enum-varnames:
+        - TAG
     ObservabilityPipelineMetricTagsProcessor:
       description: |-
         The `metric_tags` processor filters metrics based on their tags using Datadog tag key patterns.
@@ -94074,6 +94363,17 @@ components:
       x-enum-varnames:
         - ANY
         - ALL
+    RecentlyUpdatedEntitiesResponse:
+      description: Response from the recently updated entities endpoint, containing the entities with the most recent updates in the requested time range, ordered from most to least recently updated.
+      properties:
+        data:
+          description: The list of entities with the most recent updates, ordered from most to least recently updated.
+          items:
+            $ref: "#/components/schemas/EntityContextEntity"
+          type: array
+      required:
+        - data
+      type: object
     RecommendationAttributes:
       description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
       properties:
@@ -96839,6 +97139,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -96970,6 +97276,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -111985,7 +112297,7 @@ components:
         - data
       type: object
     SeverityModifierRuleDataCreate:
-      description: The data object for a severity modifier rule create or update request.
+      description: The data object for a severity modifier rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
@@ -112002,6 +112314,23 @@ components:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesResponse"
         id:
           description: The ID of the severity modifier rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SeverityModifierRuleDataUpdate:
+      description: The data object for a severity modifier rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
+        id:
+          description: The ID of the severity modifier rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -112115,7 +112444,7 @@ components:
       description: The body of a severity modifier rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/SeverityModifierRuleDataCreate"
+          $ref: "#/components/schemas/SeverityModifierRuleDataUpdate"
       required:
         - data
       type: object
@@ -121147,15 +121476,43 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLE
     TableRowResourceArray:
-      description: List of rows from a reference table query.
+      description: List of rows from a reference table query, along with metadata about rows that were requested but not found.
       properties:
         data:
           description: The rows.
           items:
             $ref: "#/components/schemas/TableRowResourceData"
           type: array
+        meta:
+          $ref: "#/components/schemas/TableRowResourceArrayMeta"
       required:
         - data
+      type: object
+    TableRowResourceArrayMeta:
+      description: Metadata about the rows requested, including which ones were not found.
+      properties:
+        found_count:
+          description: Number of requested rows that were found and returned in `data`.
+          example: 1
+          format: int64
+          type: integer
+        not_found:
+          description: Row IDs from the request that do not exist in the reference table. Empty when every requested row was found.
+          example:
+            - row_id_2
+          items:
+            description: Row identifier, corresponding to the primary key value.
+            type: string
+          type: array
+        requested_count:
+          description: Number of row IDs supplied in the `row_id` query parameter.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - requested_count
+        - found_count
+        - not_found
       type: object
     TableRowResourceData:
       additionalProperties: false
@@ -125194,7 +125551,7 @@ components:
         - data
       type: object
     TicketCreationRuleDataCreate:
-      description: The data object for a ticket creation rule create or update request.
+      description: The data object for a ticket creation rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
@@ -125211,6 +125568,23 @@ components:
           $ref: "#/components/schemas/TicketCreationRuleAttributesResponse"
         id:
           description: The ID of the ticket creation rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TicketCreationRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TicketCreationRuleDataUpdate:
+      description: The data object for a ticket creation rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
+        id:
+          description: The ID of the ticket creation rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -125241,7 +125615,15 @@ components:
         - id
       type: object
     TicketCreationRuleReorderRequest:
-      description: The body of the ticket creation rule reorder request.
+      description: The body of a ticket creation rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/TicketCreationRuleReorderData"
+      required:
+        - data
+      type: object
+    TicketCreationRuleReorderResponse:
+      description: The response of a ticket creation rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/TicketCreationRuleReorderData"
@@ -125268,7 +125650,7 @@ components:
       description: The body of a ticket creation rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/TicketCreationRuleDataCreate"
+          $ref: "#/components/schemas/TicketCreationRuleDataUpdate"
       required:
         - data
       type: object
@@ -198049,6 +198431,11 @@ paths:
                             name: Example Row
                         id: row_id_1
                         type: row
+                    meta:
+                      found_count: 1
+                      not_found:
+                        - row_id_2
+                      requested_count: 2
               schema:
                 $ref: "#/components/schemas/TableRowResourceArray"
           description: Some or all requested rows were found.
@@ -200931,18 +201318,9 @@ paths:
       description: |-
         Create a new role for your organization.
 
-        The following read permissions are automatically added to every new role, even if they are not included in the request:
-
-        - Dashboards Read
-        - Notebooks Read
-        - Monitors Read
-        - APM Read
-        - Vulnerability Management Read
-        - RUM Apps Read
-        - Incidents Read
-        - SLOs Read
-        - CI Visibility Read
-        - CD Visibility Read
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: CreateRole
       requestBody:
         content:
@@ -201111,6 +201489,10 @@ paths:
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
+
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
@@ -208909,7 +209291,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: due_date_rules
               schema:
-                $ref: "#/components/schemas/DueDateRuleReorderRequest"
+                $ref: "#/components/schemas/DueDateRuleReorderResponse"
           description: Successfully reordered the due date rules
         "400":
           content:
@@ -209085,6 +209467,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: due_date_rules
             schema:
               $ref: "#/components/schemas/DueDateRuleUpdateRequest"
@@ -209805,7 +210188,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: mute_rules
               schema:
-                $ref: "#/components/schemas/MuteRuleReorderRequest"
+                $ref: "#/components/schemas/MuteRuleReorderResponse"
           description: Successfully reordered the mute rules
         "400":
           content:
@@ -209971,6 +210354,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: mute_rules
             schema:
               $ref: "#/components/schemas/MuteRuleUpdateRequest"
@@ -210429,6 +210813,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: severity_modifier_rules
             schema:
               $ref: "#/components/schemas/SeverityModifierRuleUpdateRequest"
@@ -210707,7 +211092,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: ticket_creation_rules
               schema:
-                $ref: "#/components/schemas/TicketCreationRuleReorderRequest"
+                $ref: "#/components/schemas/TicketCreationRuleReorderResponse"
           description: Successfully reordered the ticket creation rules
         "400":
           content:
@@ -210875,6 +211260,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: ticket_creation_rules
             schema:
               $ref: "#/components/schemas/TicketCreationRuleUpdateRequest"
@@ -216454,6 +216840,15 @@ paths:
           schema:
             type: string
         - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
           in: query
@@ -216546,6 +216941,114 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/entity_context/recently_updated:
+    get:
+      description: |-
+        Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked
+        by the time of their most recent revision in the requested time range, and the top `limit` entities are
+        returned in that order. This endpoint is not paginated.
+      operationId: GetEntityContextRecentlyUpdated
+      parameters:
+        - description: A free-text query (for example, an email address or principal ID) used to filter the entities returned.
+          example: user@example.com
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
+            The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
+            Defaults to `now-7d`.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: now-7d
+            example: now-7d
+            type: string
+        - description: |-
+            The end of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now`).
+            Defaults to `now`. Entities are ranked by their most recent revision within `[from, to]`.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: now
+            example: now
+            type: string
+        - description: The number of entities to return. Must be between 1 and 100.
+          example: 50
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: |-
+            Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+            and `all` returns every revision in the requested time range.
+          example: latest
+          in: query
+          name: revisions
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextRevisionsMode"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          revisions:
+                            - attributes:
+                                accounts:
+                                  - linked-account-123
+                                display_name: Test User
+                                email: user@example.com
+                                principal_id: user@example.com
+                              first_seen_at: "2026-04-01T00:00:00Z"
+                              last_seen_at: "2026-05-01T00:00:00Z"
+                        id: user@example.com
+                        type: siem_entity_identity
+              schema:
+                $ref: "#/components/schemas/RecentlyUpdatedEntitiesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - siem_entities_read
+      summary: Get recently updated entity context
+      tags: ["Security Monitoring"]
+      x-menu-order: 175
+      x-permission:
+        operator: OR
+        permissions:
+          - siem_entities_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/entity_context/{id}:
     get:
       description: |-
@@ -216562,6 +217065,15 @@ paths:
           schema:
             example: user@example.com
             type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
         - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
