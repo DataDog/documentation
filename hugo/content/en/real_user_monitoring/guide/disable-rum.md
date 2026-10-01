@@ -14,6 +14,16 @@ further_reading:
 
 You can disable RUM for an application from its settings in Datadog. Disabling RUM stops billing for the application's RUM data and does not require a code change.
 
+RUM has two parts that you manage separately: the SDK in your application, which sends data, and the RUM application in Datadog, which receives it. Changing one part does not change the other.
+
+| Action | Data from the SDK | Billing | Application, dashboards, and monitors |
+|---|---|---|---|
+| [Disable RUM](#disable-rum-for-an-application) | Ingested, but not indexed | Stops (for organizations using [RUM without Limits][2]) | Kept |
+| [Remove the SDK](#remove-the-sdk-from-your-application) | No new data is sent | Stops, because no new data is sent | Kept, and the application shows no data |
+| [Delete the application](#delete-the-application) | Rejected at intake | Stops | Permanently removed |
+
+To remove RUM completely, [remove the SDK](#remove-the-sdk-from-your-application) from your application and then [delete the application](#delete-the-application) in Datadog.
+
 ## Disable RUM for an application
 
 1. Go to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}RUM Applications{{< /ui >}}][1] and select your application.
