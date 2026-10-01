@@ -29,7 +29,7 @@ Query Translation supports only Splunk as a source platform. It parses and conve
 
 ## Permissions
 
-Publishing a translated resource requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Role Based Access Control][5].
+Publishing a translated resource requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Datadog Role Permissions][5].
 
 ## Translate a single query
 
@@ -43,7 +43,7 @@ Use Single Translation as a sandbox for SPL. It is designed for exploring transl
 
 The page returns:
 
-- The translated Datadog query, in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart, in log search syntax or DDSQL.
+- **Translated query**: the Datadog query, in log search syntax or DDSQL, shown in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart.
 - {{< ui >}}Translation preview{{< /ui >}}: the data matching the translated query, over a time range you specify. Click {{< ui >}}View in Log Explorer{{< /ui >}} to continue in the [Log Explorer][6].
 - {{< ui >}}Translated SPL{{< /ui >}}: your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
 - {{< ui >}}How did we translate?{{< /ui >}}: an explanation of which SPL command maps to which part of the Datadog query.
@@ -55,7 +55,7 @@ The Batch Migration tool migrates many Splunk assets at once. You upload your Sp
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
 | Alert (saved search) | [Monitor][7] | Translates to a log monitor when possible. Otherwise, it translates to an analysis monitor with a DDSQL query. |
-| Dashboard | [Dashboard][8] | Both Studio (JSON) and Classic (XML) dashboards are supported. Each panel is translated independently. |
+| Dashboard | [Dashboard][8] | Both Studio (JSON) and Classic (XML) dashboards are supported. Each panel is translated into a separate widget. |
 | Search macro | None | Before translation, the tool replaces each macro reference in your alerts and dashboards with the macro's SPL definition. Macros are not published as Datadog assets. |
 
 ### Export your assets from Splunk
@@ -139,9 +139,9 @@ Open a batch to see every resource it contains and the state of its translation:
 | Published | The resource exists in Datadog. The batch links to it. |
 | Skipped | The resource could not be translated. |
 
-Click a resource to see its original SPL, the translated query, and the explanation of the translation. Review the translation before publishing the associated Datadog monitor or dashboard because a translated query is not guaranteed to return the same results as the Splunk original.
+Click a resource to see its original SPL, the translated query, and the explanation of the translation. A translated query is not guaranteed to return the same results as the Splunk original. Review each translation before you publish the monitor or dashboard.
 
-A dashboard shows a status for each of its widgets, and publishes as a single dashboard. Open it to see which widgets were translated and which returned an error.
+A dashboard shows a status for each of its widgets and publishes as a single dashboard. Open it to see which widgets were translated and which returned an error.
 
 {{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget." style="width:100%;" >}}
 
