@@ -28,7 +28,7 @@ After you select the Splunk HEC destination in the pipeline UI:
 	- If you use the default {{< ui >}}Custom{{< /ui >}} token strategy, enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}}).
-	- If you select {{< ui >}}JSON{{< /ui >}}, optionally click {{< ui >}}Add Field{{< /ui >}} to add keys of fields you want extracted as [indexed fields][4]. This indexes the specified fields when the Splunk HTTP Event Collector ingests the logs.
+	- If you select {{< ui >}}JSON{{< /ui >}}, optionally click {{< ui >}}Add Field{{< /ui >}} to specify fields to extract as [indexed fields][4]. Splunk HTTP Event Collector indexes the specified fields when it ingests the logs.
 	- **Note**: The {{< ui >}}Raw{{< /ui >}} [endpoint target](#endpoint-target) does not support {{< ui >}}Index Fields{{< /ui >}}.
 
 {{% observability_pipelines/secrets_env_var_note %}}
