@@ -40,7 +40,7 @@ To enable automatic investigations on a RUM monitor:
 2. Toggle **Investigate with Bits** to **Enabled**.
 3. Save the monitor.
 
-{{< img src="real_user_monitoring/bits_ai/monitor-investigate-with-bits.png" alt="The Investigate with Bits toggle enabled in the monitor editor, above the notification options." style="width:100%;" >}}
+{{< img src="real_user_monitoring/bits_ai/monitor-auto-investigate.png" alt="The Investigate with Bits setting in the monitor editor, toggled to Enabled to automatically investigate monitor alerts." style="width:100%;" >}}
 
 You can also start an investigation manually from an individual RUM monitor alert. For all the available entry points and the conditions that trigger automatic investigations, see [Investigate issues][3].
 
