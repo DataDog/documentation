@@ -8,19 +8,11 @@ aliases:
 - /ja/product_analytics/journeys/funnel_analysis/
 disable_toc: false
 further_reading:
-- link: /product_analytics/analytics_explorer/
-  tag: ドキュメント
-  text: Analytics Explorer
-- link: /product_analytics/charts/journey_paths/
-  tag: ドキュメント
-  text: ジャーニーパス分析
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: ラーニングセンター
   text: Product Analytics の利用を開始する
 title: ファネル
 ---
-## 概要 {#overview}
-
 ファネル分析は、エンドツーエンドのジャーニーパスにおける主要なワークフロー全体のコンバージョン率を追跡し、ボトルネックを特定して対処するのに役立ちます。具体的には、以下のことが可能です。
 
 - Web サイトのパフォーマンス低下により、ある時点で顧客が離れてしまったかどうかを確認する
@@ -30,17 +22,13 @@ title: ファネル
 - ファネルの各ステップで個々のイベントをフィルタリングする
 - エンドユーザーが異なるフローを通じて同じ結果を達成する場合があるため、特定のステップ内で複数のイベントを組み合わせる
 
+## ファネルチャートを作成する {#create-a-funnel-chart}
 
-## ファネルを構築する {#build-a-funnel}
+1. {{< ui >}}Product Analytics{{< /ui >}} で、{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}} を選択します。
 
-ファネルを構築するには、[{{< ui >}}Product Analytics{{< /ui >}}][1] に移動し、[{{< ui >}}Create New{{< /ui >}} &gt; {{< ui >}}Funnel{{< /ui >}}][2] を選択します。
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_overview.png" alt="Product Analytics の [Create New] ダイアログで強調表示されているファネルオプション" style="width:100%;" >}}
-
-ファネルを開始するユーザーステップを選択し、{{< ui >}}Add step{{< /ui >}} を使用して追加のステップを追加します。ファネル内でステップの順序を変更するには、ステップをドラッグ＆ドロップします。
+1. ファネルを開始するユーザーステップを選択し、{{< ui >}}Add step{{< /ui >}} を使用してステップを追加します。ファネル内でステップの順序を変更するには、ステップをドラッグ＆ドロップします。
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_add_step_video.mp4" alt="[Add step] ボタンを使用して既存のファネルにステップを追加し、ドラッグ＆ドロップで新しいステップをファネル内の正しい位置に移動します。" video=true >}}
-
 
 ### フィルターを追加する{#add-filters}
 
@@ -117,60 +105,36 @@ Datadog は、各コンバージョンの最初と最後のステップ間の合
 
 - {{< ui >}}Total{{< /ui >}}: 同じセッション ID、ユーザー、またはアカウントが定義されたファネルを完了するたびに、コンバージョンをカウントします。同じ例 (`A, B, C, A, B, C`) を使用すると、この方法では **2 回のコンバージョン** としてカウントされます。{{< ui >}}Total{{< /ui >}} 設定は、中間ステップが繰り返された回数ではなく、完了したフローをカウントします。
 
-
 ## 可視化方法を変更する {#change-the-visualization}
-ステップイベントとコンバージョン測定を定義した後、別の可視化方法に切り替えて、アプリのユーザーコンバージョンをより深く理解できます。
 
+デフォルトでは、ファネルはステップとして表示されます。可視化を変更して、同じコンバージョンデータを別の形式で表示します。
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="ドロップダウンを使用して、可視化を「ステップ」から「時系列」に変更します。" video=true >}}
+- 時系列: コンバージョン指標を時間の経過に沿ってプロットします。
 
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="ファネルのコンバージョンデータが時系列として表示されます。" style="width:90%;" >}}
 
-### 時系列 {#timeseries}
-ファネルを時系列で表示すると、コンバージョンの傾向を理解するのに役立ちます。コンバージョンをグラフ化する期間を選択でき、コンバージョンを絶対数または割合として表示できます。
+- クエリ値: コンバージョン指標を単一の数値として表示します。
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="過去 1 週間の日次ユニークコンバージョンユーザーを表示するように構成された時系列の可視化。" style="width:80%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="過去 1 週間のユニークコンバージョンセッションの合計数を表示するように構成されたクエリ値の可視化。" style="width:80%;" >}}
 
-### クエリ値 {#query-value}
+- トップリスト: 国やブラウザなどの内訳別にコンバージョン指標をランク付けします。
 
-クエリ値の可視化では、メトリクスの現在の値が表示されます。
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="国別に内訳を表示したファネルのコンバージョンデータ (トップリスト形式で表示)。" style="width:90%;" >}}
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="過去 1 週間のユニークコンバージョンセッションの合計数を表示するように構成されたクエリ値の可視化。" style="width:80%;" >}}
+- 棒グラフ: 内訳の値全体でコンバージョン指標を比較し、列として表示します。
 
-### トップリスト {#top-list}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="国別に内訳を表示したファネルのコンバージョンデータ (棒グラフ形式)。" style="width:90%;" >}}
 
-トップリストの可視化では、選択したメジャーに基づいてファセットの上位値を特定します。
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="大陸別のコンバージョンソースの上位 4 つを表示するように構成されたトップリストの可視化。" style="width:80%;" >}}
+トップリストと棒グラフには内訳が必要です。ファネルにまだ内訳がない場合は、[比較](#compare-data) の下に追加します。
 
 ## コンバージョンドライバーを表示する {#view-conversion-drivers}
 
 ユーザーのコンバージョンや離脱についてより詳しく把握するには、ファネルのステップをクリックしてコンバージョン分析にアクセスします。
 
-<div class="alert alert-info">コンバージョン分析はプレビュー版です。</div>
-
 コンバージョンドライバー、ユーザージャーニー、コンバージョンや離脱に利用可能なユーザーリプレイ、ユーザー詳細を表示します。
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="ファネルのステップをクリックした後のサイドパネルビュー。コンバージョンドライバー、利用可能なリプレイ、コンバージョンしたユーザーが表示されます。" style="width:100%;" >}}
 
-## ファネルを共有する {#share-a-funnel}
-
-ファネルは [ダッシュボード][3] でチームと共有して、他のテレメトリメトリクスと合わせてコンバージョンを分析したり、[ノートブック][4] でレポートに使用したりできます。
-
-可視化全体または個々のウィジェットを共有できます。
-
-- 可視化全体を Notebooks やダッシュボードに共有します。
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels_share_export.png" alt="展開された可視化の共有オプション。PNG にエクスポートする追加オプションが表示されています。 " style="width:100%;" >}}
-
-- ダッシュボードから個々のウィジェットを共有します。
-
-  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_dashboard.png" alt="ウィジェットの右上にあるエクスポートアイコンをクリックして、ウィジェットを共有します。" style="width:100%;" >}}
-
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/
-[2]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[3]: /ja/product_analytics/dashboards/
-[4]: /ja/notebooks/

@@ -3,9 +3,13 @@ aliases:
 - /ja/bits_ai/bits_ai_sre/help_bits_learn/
 - /ja/bits_ai/bits_investigation/help_bits_learn/
 - /ja/bits_ai/bits_ai_sre/knowledge_sources/
+further_reading:
+- link: /bits_ai/bits_investigation/improve_accuracy/
+  tag: ドキュメント
+  text: Bits Investigation の精度を向上させる
 title: ナレッジソース
 ---
-Bits Investigation は、3 つの異なるナレッジソースを組み合わせることで、時間の経過とともに改善されます。
+Bits Investigationは、以下の知識ソースを組み合わせることで時間とともに向上します。
 - [**Runbooks:**](#runbooks) ステップごとのトラブルシューティングガイダンス
 - [**bits.md:**](#bitsmd) 環境に関するコンテキスト
 - [**Feedback and memories:**](#feedback-and-memories) 過去の調査から得られた知見
@@ -114,6 +118,10 @@ Rule:
 すべての肯定的なフィードバック、および Bits チャットで提供された詳細情報を含む否定的なフィードバックは、**メモリ**として記録されます。Bits は、パフォーマンス向上のため、今後の調査で使用するメモリを動的に選択します。過去の修正を類似のコンテキストに適用し、効果的なクエリを再利用し、調査ステップの優先順位付けの方法を洗練させます。これにより時間の経過とともに、Bits は環境に適応し、調査を重ねるごとに精度と効率が向上します。
 
 メモリの表示や削除を含む管理を行うには、[モニター管理][1]ページの [{{< ui >}}Memories{{< /ui >}}] 列に移動してください。
+
+## 参考資料 {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md

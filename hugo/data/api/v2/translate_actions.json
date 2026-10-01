@@ -5210,7 +5210,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
+    "description": "Create a new role for your organization.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
@@ -5228,7 +5228,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -5472,28 +5472,28 @@
     "summary": "Get a RUM operation by name"
   },
   "ListRUMOperations": {
-    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.",
+    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team,\njourney, and application.",
     "summary": "Search RUM operations"
   },
   "ListRUMOperationStrongLinks": {
-    "description": "List strong links between RUM operations and features. A strong link confirms that a feature\nbelongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;\nat least one is required.",
-    "summary": "List RUM operation strong links"
+    "description": "List links between RUM operations and journeys. A link confirms that a journey\nbelongs to an operation. Provide `operation_id`, `feature_id` (journey ID), or both to filter results;\nat least one is required.",
+    "summary": "List RUM operation links"
   },
   "CreateRUMOperationStrongLink": {
-    "description": "Create a strong link between a RUM operation and a feature, confirming that the feature\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
-    "summary": "Create a RUM operation strong link",
+    "description": "Create a link between a RUM operation and a journey, confirming that the journey\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
+    "summary": "Create a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for creating a RUM operation strong link."
+    "request_schema_description": "The request body for creating a RUM operation link."
   },
   "DeleteRUMOperationStrongLink": {
-    "description": "Delete the strong link between a RUM operation and a feature.",
-    "summary": "Delete a RUM operation strong link"
+    "description": "Delete the link between a RUM operation and a journey.",
+    "summary": "Delete a RUM operation link"
   },
   "UpdateRUMOperationStrongLink": {
-    "description": "Update the status of a strong link between a RUM operation and a feature.",
-    "summary": "Update a RUM operation strong link",
+    "description": "Update the status of a link between a RUM operation and a journey.",
+    "summary": "Update a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for updating a RUM operation strong link."
+    "request_schema_description": "The request body for updating a RUM operation link."
   },
   "DeleteRUMOperation": {
     "description": "Delete a RUM operation.",
@@ -5827,7 +5827,7 @@
     "description": "Reorder the list of due date rules for the current organization.",
     "summary": "Reorder due date rules",
     "request_description": "",
-    "request_schema_description": "The body of the due date rule reorder request."
+    "request_schema_description": "The body of a due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
     "description": "Delete a due date rule by ID.",
@@ -5887,7 +5887,7 @@
     "description": "Reorder the list of mute rules for the current organization.",
     "summary": "Reorder mute rules",
     "request_description": "",
-    "request_schema_description": "The body of the mute rule reorder request."
+    "request_schema_description": "The body of a mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
     "description": "Delete a mute rule by ID.",
@@ -5947,7 +5947,7 @@
     "description": "Reorder the list of ticket creation rules for the current organization.",
     "summary": "Reorder ticket creation rules",
     "request_description": "",
-    "request_schema_description": "The body of the ticket creation rule reorder request."
+    "request_schema_description": "The body of a ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
     "description": "Delete a ticket creation rule by ID.",
