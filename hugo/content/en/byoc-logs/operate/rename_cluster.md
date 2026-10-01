@@ -40,7 +40,7 @@ Use this procedure when temporary ingestion and search failures are acceptable.
 
 ## Rename gracefully
 
-Use `config.additional_acceptable_cluster_ids` to allow nodes with the old and new cluster IDs to communicate during the rename. Complete each rollout before starting the next one.
+Use `config.extra_cluster_ids` to allow nodes with the old and new cluster IDs to communicate during the rename. Complete each rollout before starting the next one.
 
 After each change to the Helm values, upgrade the release with the following command:
 
@@ -55,7 +55,7 @@ helm upgrade <RELEASE_NAME> datadog/cloudprem \
    ```yaml
    config:
      cluster_id: <OLD_CLUSTER_ID>
-     additional_acceptable_cluster_ids:
+     extra_cluster_ids:
        - <NEW_CLUSTER_ID>
    ```
 
@@ -65,12 +65,12 @@ helm upgrade <RELEASE_NAME> datadog/cloudprem \
    ```yaml
    config:
      cluster_id: <NEW_CLUSTER_ID>
-     additional_acceptable_cluster_ids:
+     extra_cluster_ids:
        - <OLD_CLUSTER_ID>
    ```
 
 4. Upgrade the Helm release and wait for the rollout to finish.
-5. Remove `additional_acceptable_cluster_ids`:
+5. Remove `extra_cluster_ids`:
 
    ```yaml
    config:
