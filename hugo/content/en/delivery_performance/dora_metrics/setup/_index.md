@@ -286,11 +286,9 @@ If the [Bitbucket Cloud Source Code integration][1] is not already installed, in
 
 When you create the workspace access token during [setup][3], grant at least the following scopes:
 
-| Scope | Access | Used for |
-| ----- | ------ | -------- |
-| {{< ui >}}Repositories{{< /ui >}} | {{< ui >}}Read{{< /ui >}} | Reading the commits deployed between a deployment and the previous one. |
-| {{< ui >}}Pull requests{{< /ui >}} | {{< ui >}}Read{{< /ui >}} | Associating commits with the pull request they were merged in. |
-| {{< ui >}}Webhooks{{< /ui >}} | {{< ui >}}Read and write{{< /ui >}} | Receiving commit and pull request events. |
+- {{< ui >}}Repositories{{< /ui >}}: {{< ui >}}Read{{< /ui >}}, {{< ui >}}Write{{< /ui >}}
+- {{< ui >}}Pull requests{{< /ui >}}: {{< ui >}}Read{{< /ui >}}, {{< ui >}}Write{{< /ui >}}
+- {{< ui >}}Webhooks{{< /ui >}}: {{< ui >}}Read and write{{< /ui >}}
 
 [1]: /integrations/bitbucket-source-code/
 [2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
