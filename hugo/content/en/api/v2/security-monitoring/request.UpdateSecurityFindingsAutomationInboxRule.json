@@ -2,13 +2,7 @@
   "data": {
     "attributes": {
       "action": {
-        "due_days_per_severity": [
-          {
-            "due_in_days": 14,
-            "severity": "critical"
-          }
-        ],
-        "due_from": "first_seen"
+        "description": "Needs triage"
       },
       "enabled": false,
       "name": "Example-Security-Monitoring",
@@ -20,6 +14,6 @@
       }
     },
     "id": "00000000-0000-0000-0000-000000000000",
-    "type": "due_date_rules"
+    "type": "inbox_rules"
   }
 }
