@@ -22,7 +22,12 @@ afterEach(() => {
 const mountNav = (
   groupId: string,
   labels: string[],
-  options: { disabled?: boolean[]; sync?: TabSync } = {},
+  options: {
+    disabled?: boolean[];
+    sync?: TabSync;
+    /** IDs of elements to place inside panels, keyed by panel index. */
+    anchorsByPanel?: Record<number, string>;
+  } = {},
 ) => {
   const root = document.createElement("div");
   root.id = groupId;
@@ -38,6 +43,12 @@ const mountNav = (
       i === 0 ? "tabs__panel tabs__panel--active" : "tabs__panel";
     panel.hidden = i !== 0;
     panel.textContent = `Panel ${i}`;
+    const anchorId = options.anchorsByPanel?.[i];
+    if (anchorId) {
+      const anchor = document.createElement("h4");
+      anchor.id = anchorId;
+      panel.appendChild(anchor);
+    }
     root.appendChild(panel);
   });
 
@@ -349,5 +360,55 @@ describe("TabsNav sync", () => {
     await user.click(buttonsOf(clicked)[1]);
 
     expect(removedPanel.hidden).toBe(true);
+  });
+});
+
+describe("TabsNav anchors inside panels", () => {
+  const buttonsOf = (root: HTMLElement) =>
+    root.querySelectorAll<HTMLButtonElement>('[data-tab-index][role="tab"]');
+  const activeIndexOf = (root: HTMLElement) =>
+    [...buttonsOf(root)].findIndex((button) =>
+      button.classList.contains("tabs__button--active"),
+    );
+
+  it("opens the panel that contains the URL hash target on mount", async () => {
+    window.history.replaceState(null, "", "/#heading-in-c");
+    const { root } = mountNav("a1", ["A", "B", "C"], {
+      anchorsByPanel: { 2: "heading-in-c" },
+    });
+
+    await waitFor(() => expect(activeIndexOf(root)).toBe(2));
+  });
+
+  it("lets the hash target's panel win over ?tab= and the cookie", async () => {
+    document.cookie = "tab=a; path=/";
+    window.history.replaceState(null, "", "/?tab=a#heading-in-b");
+    const { root } = mountNav("a2", ["A", "B"], {
+      sync: { group: "tab", keys: ["a", "b"] },
+      anchorsByPanel: { 1: "heading-in-b" },
+    });
+
+    await waitFor(() => expect(activeIndexOf(root)).toBe(1));
+  });
+
+  it("opens the panel that contains the new hash target on hashchange", async () => {
+    const { root } = mountNav("a3", ["A", "B"], {
+      anchorsByPanel: { 1: "heading-in-b" },
+    });
+
+    window.history.replaceState(null, "", "/#heading-in-b");
+    window.dispatchEvent(new Event("hashchange"));
+
+    await waitFor(() => expect(activeIndexOf(root)).toBe(1));
+  });
+
+  it("ignores a hash target outside its panels", async () => {
+    const outside = document.createElement("h2");
+    outside.id = "outside";
+    document.body.appendChild(outside);
+    window.history.replaceState(null, "", "/#outside");
+    const { root } = mountNav("a4", ["A", "B"]);
+
+    expect(activeIndexOf(root)).toBe(0);
   });
 });

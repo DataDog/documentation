@@ -122,3 +122,51 @@ test.describe("Tabs component — synced tabs", () => {
     });
   }
 });
+
+test.describe("Tabs component — scrolling", () => {
+  const MOCK = "/dd_e2e/components/tabs";
+
+  const groupWith = (page: Page, key: string) =>
+    page
+      .locator(".tabs")
+      .filter({ has: page.locator(`[role="tab"][data-sync-key="${key}"]`) });
+
+  test("a click keeps the button in place when a synced group above changes height", async ({
+    page,
+  }) => {
+    await page.goto(MOCK);
+    const osGroups = groupWith(page, "linux");
+    await expect(
+      osGroups.locator('[role="tablist"][data-hydrated="true"]'),
+    ).toHaveCount(2);
+    // The first group's Windows panel is taller, so selecting Windows in the
+    // second group grows the first group, which sits above the button.
+    await osGroups.nth(0).evaluate((group) => group.scrollIntoView());
+    const button = osGroups
+      .nth(1)
+      .locator('[role="tab"][data-sync-key="windows"]');
+    const topBefore = (await button.boundingBox())!.y;
+
+    await button.click();
+    await expect(
+      osGroups.nth(0).locator('[role="tab"][data-sync-key="windows"]'),
+    ).toHaveAttribute("aria-selected", "true");
+    await page.evaluate(() => new Promise(requestAnimationFrame));
+
+    const topAfter = (await button.boundingBox())!.y;
+    expect(Math.abs(topAfter - topBefore)).toBeLessThanOrEqual(1);
+  });
+
+  for (const suffix of ["#heading-in-a-tab", "?tab=short#heading-in-a-tab"]) {
+    test(`${suffix} opens the tab that holds the heading and shows it`, async ({
+      page,
+    }) => {
+      await page.goto(`${MOCK}${suffix}`);
+
+      await expect(
+        groupWith(page, "tall").locator('[role="tab"][data-sync-key="tall"]'),
+      ).toHaveAttribute("aria-selected", "true");
+      await expect(page.locator("#heading-in-a-tab")).toBeInViewport();
+    });
+  }
+});

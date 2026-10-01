@@ -75,9 +75,11 @@ export function TabsNav({
       const hash = window.location.hash.slice(1);
       if (!hash) return false;
       const idx = panelIdsRef.current.indexOf(hash);
-      if (idx < 0) return false;
-      setActiveTab(idx);
-      return true;
+      if (idx >= 0) {
+        setActiveTab(idx);
+        return true;
+      }
+      return activatePanelHoldingAnchor(hash);
     };
     const activatedFromHash = activateFromHash();
     window.addEventListener("hashchange", activateFromHash);
@@ -156,8 +158,37 @@ export function TabsNav({
     if (index >= 0) setActiveTab(index);
   };
 
-  const selectTab = (index: number) => {
+  // A hash that names an element inside one of our panels (a heading in a
+  // tab) opens that panel. The browser could not scroll to the element while
+  // its panel was hidden, so scroll to it once the panel is visible.
+  const activatePanelHoldingAnchor = (anchorId: string): boolean => {
+    const anchor = document.getElementById(anchorId);
+    if (!anchor) return false;
+    const idx = tabPanelsRef.current.findIndex((panel) =>
+      panel.contains(anchor),
+    );
+    if (idx < 0) return false;
+    setActiveTab(idx);
+    requestAnimationFrame(() => anchor.scrollIntoView());
+    return true;
+  };
+
+  // Changing tabs changes panel heights, here and in every synced group, so
+  // anything below them moves. Keep the clicked button under the pointer by
+  // scrolling the window by however far it moved. Measure in the next frame:
+  // other synced groups switch in their own `document` listeners, which run
+  // after this click handler, and the frame still comes before the paint.
+  const keepButtonInPlace = (button: HTMLElement, topBefore: number) => {
+    requestAnimationFrame(() => {
+      const moved = button.getBoundingClientRect().top - topBefore;
+      if (moved !== 0) window.scrollBy({ top: moved, behavior: "instant" });
+    });
+  };
+
+  const selectTab = (index: number, button: HTMLElement) => {
+    const topBefore = button.getBoundingClientRect().top;
     setActiveTab(index);
+    keepButtonInPlace(button, topBefore);
     const key = sync?.keys[index];
     // A label made only of symbols has an empty key; there is nothing to store.
     if (!sync || !key) return;
@@ -184,8 +215,8 @@ export function TabsNav({
             data-tab-index={i}
             data-sync-group={sync?.group}
             data-sync-key={sync?.keys[i]}
-            onClick={() => {
-              if (!isDisabled) selectTab(i);
+            onClick={(event) => {
+              if (!isDisabled) selectTab(i, event.currentTarget);
             }}
           >
             {label}

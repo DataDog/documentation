@@ -101,12 +101,12 @@ Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
 Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+#### Heading in a tab
+
+A heading inside the Tall panel. Link to it with `#heading-in-a-tab` to open this tab.
 {% /tab %}
 {% /tabs %}
-
-{% alert level="info" %}
-**Scroll anchoring (not in Astro yet)**: On Hugo content pages, the page scrolls to keep the selected tab button in the same position on the screen when the panel height changes. The API docs tabs in Hugo do not do this.
-{% /alert %}
 
 ### Synced tabs
 
@@ -117,7 +117,11 @@ These two groups have the same labels. Select a tab in one group.
 Linux instructions for the first group.
 {% /tab %}
 {% tab label="Windows" %}
-Windows instructions for the first group.
+Windows instructions for the first group. This panel is taller than the others, so selecting Windows in the second group moves the second group down.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 {% /tab %}
 {% tab label="macOS" %}
 macOS instructions for the first group.
@@ -137,10 +141,6 @@ Windows instructions for the second group.
 macOS instructions for the second group.
 {% /tab %}
 {% /tabs %}
-
-{% alert level="info" %}
-**Scroll to an anchor in a tab (not in Astro yet)**: On Hugo content pages, when the URL has both `?tab=` and an anchor, the page opens the tab and then scrolls to the anchor.
-{% /alert %}
 
 ## Content found in API docs tabs
 
