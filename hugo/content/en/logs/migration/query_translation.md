@@ -29,7 +29,7 @@ Query Translation supports only Splunk as a source platform. It parses and conve
 
 ## Permissions
 
-Publishing a translated resource requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Datadog Role Permissions][5].
+Batch Migration requires the `logs_read_config` permission. Publishing a translated resource also requires the permission for the asset being created: `monitors_write` for monitors, and `dashboards_write` for dashboards. See [Datadog Role Permissions][5].
 
 ## Translate a single query
 
