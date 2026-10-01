@@ -1735,6 +1735,16 @@
   "ValidatePipeline": [
     {
       "group": "observability_pipelines",
+      "suffix": "_1795564228",
+      "description": "Validate a metrics pipeline with enrichment table processor file lookup returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_4239139905",
+      "description": "Validate a metrics pipeline with enrichment table processor reference table returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_884022323",
       "description": "Validate a metrics pipeline with opentelemetry source returns \"OK\" response"
     },
