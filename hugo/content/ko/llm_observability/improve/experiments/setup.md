@@ -1,26 +1,29 @@
 ---
 aliases:
 - /ko/llm_observability/experiments/setup/
-description: Agent Observability 실험을 설정하고 실험을 시작하는 방법입니다.
+description: Agent Observability 실험을 설정하고 실험을 시작하는 방법.
 further_reading:
 - link: https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/
   tag: 블로그
   text: Datadog Agent Observability를 사용하여 코딩 에이전트에서 AI 앱을 디버깅하고 평가하기
 title: 설정 및 사용
 ---
-이 페이지에서는 Python SDK를 사용하여 Agent Observability 실험을 설정하고 사용하는 방법을 설명합니다.
+이 페이지에서는 Python 또는 Node.js SDK를 사용하여 Agent Observability 실험을 설정하고 사용하는 방법을 설명합니다.
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ## Agent Observability 설정 {#set-up-agent-observability}
 
 Agent Observability를 아직 설정하지 않은 경우 다음을 수행합니다.
 
-1. Agent Observability Python SDK 설치:
+1. Agent Observability Python SDK를 설치합니다.
 
    ```shell
    pip install ddtrace>=4.3.0
    ```
 
-2. Agent Observability 활성화:
+2. Agent Observability를 활성화합니다.
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -33,7 +36,7 @@ Agent Observability를 아직 설정하지 않은 경우 다음을 수행합니�
    )
    ```
 
-   <div class="alert alert-warning">다음 두 가지를 모두 제공해야 합니다. <code>api_key</code> 및 <code>app_key</code>.</div>
+   <div class="alert alert-warning"> <code>api_key</code> 및 <code>app_key</code>값을 모두 제공해야 합니다.</div>
 
 ### APM 트레이스 연계 {#apm-trace-correlation}
 
@@ -67,8 +70,8 @@ LLMObs.enable(
 _데이터 세트_는 Agent를 테스트하기 위한 시나리오를 구성하는 _입력_, _예상 출력_ 및 _메타데이터_의 모음입니다. 각 데이터 세트는 _프로젝트_와 연결됩니다.  
 
 - **input**(필수): Agent가 작업에서 액세스할 수 있는 모든 정보를 나타냅니다.
-- **expected output**(선택 사항): _정답_이라고도 하며, Agent가 출력해야 하는 이상적인 답변을 나타냅니다. _expected output_을 사용하여 앱의 실제 출력과 평가하려는 중간 결과를 저장할 수 있습니다. 
-- **metadata**(선택 사항): 레코드를 분류하고 추가 분석에 사용할 수 있는 유용한 정보가 포함됩니다. 예시: 주제, 태그, 설명, 메모
+- **expected output**(필요시): _정답_이라고도 하며, Agent가 출력해야 하는 이상적인 답변을 나타냅니다. _expected output_을 사용하여 앱의 실제 출력과 평가하려는 중간 결과를 저장할 수 있습니다. 
+- **metadata**(필요시): 레코드를 분류하고 추가 분석에 사용할 수 있는 유용한 정보가 포함됩니다. 예시: 주제, 태그, 설명, 메모
 
 CSV 파일로 데이터세트를 생성하려면 `LLMObs.create_dataset_from_csv()`를 사용하세요.
 
@@ -125,7 +128,7 @@ _실험_을 사용하면 데이터 세트의 시나리오를 대상으로 Agent�
    작업은 `input_data`로 null이 아닌 모든 데이터 유형(문자열, 숫자, 부울, 객체, 배열)을 사용할 수 있습니다. 평가자에서 사용하는 출력은 데이터 유형에 제한이 없습니다.
    이 예시에서는 문자열을 생성하지만, 중간 처리 정보를 저장하고 평가자에서 비교할 수 있도록 출력으로 dict을 생성할 수도 있습니다.
 
-   선택적으로 작업 함수에 데이터 세트 레코드의 메타데이터를 수신하기 위한 세 번째 `metadata` 매개변수를 추가할 수 있습니다.
+   필요시, 작업 함수에 데이터 세트 레코드의 메타데이터를 수신하기 위한 세 번째 `metadata` 파라미터를 추가할 수 있습니다.
    ```python
    def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None, metadata: Optional[Dict[str, Any]] = None) -> str:
        difficulty = metadata.get("difficulty", "unknown") if metadata else "unknown"
@@ -188,7 +191,7 @@ _실험_을 사용하면 데이터 세트의 시나리오를 대상으로 Agent�
    전체 데이터 모델 참조 및 모범 사례를 포함하여 평가자 구축에 대한 자세한 내용은 [평가 개발자 가이드][4]를 참조하세요.
 
    Datadog은 다음과 같은 평가자 반환 유형을 지원합니다.
-   - **부울**: true 또는 false를 반환합니다.
+   - **불리언**: true 또는 false를 반환합니다.
    - **점수**: 숫자 값(float)을 반환합니다.
    - **범주형**: 레이블이 지정된 범주(string)를 반환합니다.
    - **json**: 구조화된 데이터(dict)를 반환합니다.
@@ -254,7 +257,7 @@ _실험_을 사용하면 데이터 세트의 시나리오를 대상으로 Agent�
            )
    ```
 
-### 4. (선택 사항) 요약 평가자를 정의합니다. {#4-optional-define-summary-evaluators}
+### 4. (필요시) 요약 평가자를 정의합니다. {#4-optional-define-summary-evaluators}
 
    요약 평가자는 모든 레코드 수준 평가자가 완료된 후 실행되며, 집계된 결과를 받아 평균 또는 통과율과 같은 데이터 세트 수준의 통계를 계산합니다. 레코드 수준 평가자와 마찬가지로 요약 평가자는 함수 또는 클래스로 정의할 수 있습니다.
 
@@ -288,7 +291,7 @@ _실험_을 사용하면 데이터 세트의 시나리오를 대상으로 Agent�
    ```
 
    Datadog은 다음과 같은 요약 평가자 반환 유형을 지원합니다.
-   - **부울**: true 또는 false를 반환합니다.
+   - **불리언**: true 또는 false를 반환합니다.
    - **점수**: 숫자 값(float)을 반환합니다.
    - **범주형**: 레이블이 지정된 범주(string)를 반환합니다.
    - **json**: 구조화된 데이터(dict)를 반환합니다.
@@ -341,14 +344,148 @@ _실험_을 사용하면 데이터 세트의 시나리오를 대상으로 Agent�
    print(f"View experiment: {experiment.url}")
    ```
 
-참고: LLM 실험 트레이스는 90일 동안 보관됩니다.
-
 [1]: /ko/llm_observability/improve/datasets
 [2]: /ko/llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /ko/llm_observability/instrument/auto_instrumentation?tab=python
 [4]: /ko/llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: /ko/llm_observability/instrument/agent_observability_and_apm/
 [6]: /ko/llm_observability/instrument/otel_instrumentation
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+## Agent Observability 설정 {#set-up-agent-observability-1}
+
+Agent Observability를 아직 설정하지 않은 경우 다음을 수행합니다.
+
+1. Agent Observability Node.js SDK를 설치합니다.
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. API 키, 애플리케이션 키 및 Datadog 사이트를 설정합니다.
+
+   ```shell
+   export DD_API_KEY="<YOUR_API_KEY>"
+   export DD_APP_KEY="<YOUR_APP_KEY>"
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Initialize the tracer with the ML application and Experiments project names:
+
+   ```javascript
+   const tracer = require('dd-trace').init({
+     llmobs: {
+       mlApp: 'capitals-app',
+       projectName: 'capitals-project'
+     }
+   })
+   ```
+
+   <div class="alert alert-warning">두 항목을 모두 제공해야 합니다. <code>DD_API_KEY</code> 및 <code>DD_APP_KEY</code>값을 모두 제공해야 합니다.</div>
+
+## 프로젝트 생성 {#create-a-project-1}
+
+프로젝트에는 데이터 세트와 실험이 포함됩니다. SDK는 구성된 실험 프로젝트 이름을 사용하며
+프로젝트가 존재하지 않으면 생성합니다.
+
+트레이서 초기화 중에 `llmobs.projectName`을 설정합니다. `DD_LLMOBS_PROJECT_NAME`도 설정할 수 있습니다. 두 값 모두 설정되지 않은 경우,
+SDK는 `default-project`를 사용합니다.
+
+## 데이터 세트 생성 {#create-a-dataset-1}
+
+`tracer.llmobs.experiments` API를 사용하여 데이터 세트를 생성합니다.
+
+```javascript
+const { experiments } = tracer.llmobs
+
+const dataset = experiments.createDataset('capitals-of-the-world', {
+  description: 'Questions and expected capital cities',
+  records: [
+    {
+      inputData: { question: 'What is the capital of China?' },
+      expectedOutput: 'Beijing',
+      metadata: { difficulty: 'medium' }
+    },
+    {
+      inputData: { question: 'What is the capital of Japan?' },
+      expectedOutput: 'Tokyo',
+      metadata: { difficulty: 'medium' }
+    }
+  ]
+})
+```
+
+실험이 시작되면 SDK가 데이터 세트를 푸시합니다. 기존 데이터 세트를 사용하려면 다음을 호출하세요.
+`await experiments.pullDataset('<DATASET_NAME>')`.
+
+## 실험 생성 {#create-an-experiment-1}
+
+실험은 각 데이터 세트 레코드에 대해 태스크를 실행하고 각 결과를 평가합니다.
+
+### 1. 태스크 정의 {#1-define-a-task}
+
+태스크는 레코드 입력을 수신합니다. 또한 실험 구성 및 선택 사항인 레코드 메타데이터를 수신할 수 있습니다.
+
+```javascript
+function task (inputData) {
+  const { question } = inputData
+
+  // Add the LLM or agent call to evaluate.
+  return question.includes('China') ? 'Beijing' : 'Tokyo'
+}
+```
+
+태스크 내에서 [지원되는 Node.js 통합](/llm_observability/instrument/auto_instrumentation?tab=nodejs)을 호출하면
+실험 스팬의 하위 스팬으로 트레이싱됩니다.
+
+### 2. 평가자 정의 {#2-define-evaluators}
+
+평가자는 레코드 입력, 태스크 출력 및 예상 출력을 수신합니다. 불리언, 숫자, 문자열 또는 JSON을 반환하여
+해당 평가 메트릭을 생성합니다.
+
+```javascript
+function exactMatch (_inputData, outputData, expectedOutput) {
+  return outputData === expectedOutput
+}
+```
+
+### 3. 실험 생성 및 실행 {#3-create-and-run-the-experiment}
+
+```javascript
+async function runExperiment () {
+  const experiment = experiments.experiment({
+    name: 'capital-cities-test',
+    dataset,
+    task,
+    evaluators: {
+      exact_match: exactMatch
+    },
+    description: 'Testing capital cities knowledge',
+    config: {
+      modelName: 'gpt-4',
+      version: '1.0'
+    }
+  })
+
+  const result = await experiment.run()
+  console.log(`View experiment: ${result.url}`)
+}
+
+runExperiment().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+결과에는 각 레코드 출력, 평가자 점수, 오류 및 Datadog의 실험 URL이 포함됩니다.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+참고: LLM 실험 트레이스는 90일 동안 보관됩니다.
 
 ## 추가 자료 {#further-reading}
 
