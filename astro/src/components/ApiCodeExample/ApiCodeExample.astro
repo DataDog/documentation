@@ -43,7 +43,13 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
         {translate("code_example")}
       </h3>
 
-      <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
+      <Tabs
+        id={groupId}
+        variant="pills"
+        labels={labels}
+        panelIds={panelIds}
+        sync={{ group: "code-lang", keys: examples.map((ex) => ex.language) }}
+      >
         {examples.map((ex, tabIdx) => (
           <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
             {ex.entries.length === 1 ? (
