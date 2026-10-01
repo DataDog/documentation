@@ -3857,6 +3857,16 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "CreateArchiveSearch": {
+    "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
+    "summary": "Create an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to create an Archive Search."
+  },
+  "GetArchiveSearch": {
+    "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
+    "summary": "Get an Archive Search"
+  },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
     "summary": "Get archive order"

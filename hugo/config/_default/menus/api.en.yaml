@@ -16161,6 +16161,36 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Logs Archive Searches
+      url: /api/latest/logs-archive-searches/
+      identifier: logs-archive-searches
+      generated: true
+    - name: Get an Archive Search
+      url: /api/latest/logs-archive-searches/get-an-archive-search/
+      identifier: logs-archive-searches-get-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetArchiveSearch
+        unstable:
+          - v2
+        order: 2
+    - name: Create an Archive Search
+      url: /api/latest/logs-archive-searches/create-an-archive-search/
+      identifier: logs-archive-searches-create-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateArchiveSearch
+        unstable:
+          - v2
+        order: 1
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives

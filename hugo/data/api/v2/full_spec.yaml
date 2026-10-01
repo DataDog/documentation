@@ -11056,6 +11056,242 @@ components:
       type: string
       x-enum-varnames:
         - ARBITRARY_RULE_STATUS
+    ArchiveSearchCreateRehydration:
+      description: |-
+        Rehydration settings. Include this object to index the matched logs into a retained historical view.
+        Omit it to run an Archive Search that only scans the archive.
+      properties:
+        max_rehydrated_events:
+          description: |-
+            Maximum number of events to rehydrate. The organization's reindexing limit is configured
+            in millions, so this value is at least 1,000,000.
+          example: 1000000
+          format: int64
+          minimum: 1000000
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchCreateRequest:
+      description: Request to create an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchCreateRequestAttributes:
+      description: Attributes accepted when creating an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive to search. Use the Logs Archives API to list the archives of the organization.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        from:
+          description: Start of the time range to search, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchCreateRehydration"
+        to:
+          description: End of the time range to search, as an ISO 8601 timestamp. Must be after `from`.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+      type: object
+    ArchiveSearchCreateRequestData:
+      description: Archive Search object to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydration:
+      description: |-
+        Rehydration settings of the Archive Search. Absent when the search only scans the archive
+        without indexing the results.
+      properties:
+        max_rehydrated_events:
+          description: Maximum number of events to rehydrate.
+          example: 1000000
+          format: int64
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchRehydrationTier:
+      description: Storage tier the matched logs are rehydrated into.
+      enum:
+        - standard
+        - flex
+      example: standard
+      type: string
+      x-enum-varnames:
+        - STANDARD
+        - FLEX
+    ArchiveSearchResponse:
+      description: Response containing a single Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchResponseData"
+      required:
+        - data
+      type: object
+    ArchiveSearchResponseAttributes:
+      description: Attributes of an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive being searched.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        bytes_scanned:
+          description: Number of bytes read from the archive at the end of the search.
+          example: 402764439
+          format: int64
+          type: integer
+        completed_at:
+          description: |-
+            Time the Archive Search finished, as an ISO 8601 timestamp.
+            Absent while the search is still running.
+          example: "2026-01-02T12:30:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: Time the Archive Search was created, as an ISO 8601 timestamp.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        events_scanned:
+          description: Number of events read from the archive at the end of the search.
+          example: 1500
+          format: int64
+          type: integer
+        expected_duration:
+          description: Estimated time left before the Archive Search completes, in seconds.
+          example: 120
+          format: int64
+          type: integer
+        from:
+          description: Start of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydration"
+        status:
+          $ref: "#/components/schemas/ArchiveSearchStatus"
+        to:
+          description: End of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+        - status
+        - created_at
+        - events_scanned
+        - bytes_scanned
+      type: object
+    ArchiveSearchResponseData:
+      description: Archive Search object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchResponseAttributes"
+        id:
+          description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          type: string
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ArchiveSearchStatus:
+      description: Current state of an Archive Search.
+      enum:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+    ArchiveSearchType:
+      default: archive_search
+      description: Archive Search resource type.
+      enum:
+        - archive_search
+      example: archive_search
+      type: string
+      x-enum-varnames:
+        - ARCHIVE_SEARCH
     Argument:
       description: A named argument for a custom static analysis rule.
       properties:
@@ -182613,6 +182849,158 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+  /api/v2/logs/archive_searches:
+    post:
+      description: |-
+        Start a search over the logs stored in an archive.
+
+        Without a `rehydration` object, the search only scans the archive and reports how much data
+        matched. With one, the matched logs are also indexed into a retained historical view, which
+        requires the `logs_write_historical_view` permission.
+      operationId: CreateArchiveSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 0
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 0
+                        expected_duration: 120
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}:
+    get:
+      description: Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.
+      operationId: GetArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        completed_at: "2026-01-02T12:30:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 1000000
+                          retention_days: 15
+                          tier: standard
+                        status: COMPLETED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/logs/config/archive-order:
     get:
       description: |-
@@ -237186,6 +237574,13 @@ tags:
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
+  - description: |-
+      Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate
+      the matches into a retained historical view.
+
+      See the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)
+      page for the searches currently running in Datadog.
+    name: Logs Archive Searches
   - description: |-
       Archives forward all the logs ingested to a cloud storage system.
 
