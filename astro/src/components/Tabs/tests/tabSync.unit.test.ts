@@ -48,13 +48,13 @@ describe("resolveSyncKey", () => {
         search: "?code-lang=go",
         cookieString: "code-lang=python",
       }),
-    ).toEqual({ key: "go", source: "query" });
+    ).toEqual({ key: "go", value: "go", source: "query" });
   });
 
   it("reads Hugo's legacy ?tabs= for the content tab group", () => {
     expect(
       resolveSyncKey({ group: "tab", search: "?tabs=macOS", cookieString: "" }),
-    ).toEqual({ key: "macos", source: "query" });
+    ).toEqual({ key: "macos", value: "macOS", source: "query" });
   });
 
   it("ignores ?tabs= for other groups", () => {
@@ -70,7 +70,7 @@ describe("resolveSyncKey", () => {
   it("falls back to the cookie", () => {
     expect(
       resolveSyncKey({ group: "tab", search: "", cookieString: "tab=linux" }),
-    ).toEqual({ key: "linux", source: "cookie" });
+    ).toEqual({ key: "linux", value: "linux", source: "cookie" });
   });
 
   it("normalizes Hugo's hyphenated keys", () => {
@@ -80,7 +80,7 @@ describe("resolveSyncKey", () => {
         search: "?tab=alpine--musl",
         cookieString: "",
       }),
-    ).toEqual({ key: "alpinemusl", source: "query" });
+    ).toEqual({ key: "alpinemusl", value: "alpine--musl", source: "query" });
   });
 
   it("skips a query value that normalizes to nothing", () => {
@@ -90,7 +90,7 @@ describe("resolveSyncKey", () => {
         search: "?tab=---",
         cookieString: "tab=linux",
       }),
-    ).toEqual({ key: "linux", source: "cookie" });
+    ).toEqual({ key: "linux", value: "linux", source: "cookie" });
   });
 
   it("returns undefined with no query and no cookie", () => {

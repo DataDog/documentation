@@ -27,7 +27,10 @@ export interface TabSync {
 }
 
 export interface ResolvedSyncKey {
+  /** The normalized key to match against a group's keys. */
   key: string;
+  /** The value exactly as it arrived, for writing back to the shared cookie. */
+  value: string;
   source: "query" | "cookie";
 }
 
@@ -81,11 +84,13 @@ export function resolveSyncKey({
   }
   for (const value of queryValues) {
     const key = syncKeyFromLabel(value ?? "");
-    if (key) return { key, source: "query" };
+    if (key) return { key, value: value!, source: "query" };
   }
 
-  const cookieKey = syncKeyFromLabel(readSyncCookie(group, cookieString) ?? "");
-  if (cookieKey) return { key: cookieKey, source: "cookie" };
+  const cookieValue = readSyncCookie(group, cookieString) ?? "";
+  const cookieKey = syncKeyFromLabel(cookieValue);
+  if (cookieKey)
+    return { key: cookieKey, value: cookieValue, source: "cookie" };
 
   return undefined;
 }

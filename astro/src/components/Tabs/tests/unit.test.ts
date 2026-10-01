@@ -4,7 +4,7 @@ import { render, cleanup, waitFor } from "@testing-library/preact";
 import userEvent from "@testing-library/user-event";
 import { h } from "preact";
 import { TabsNav } from "../TabsNav";
-import { readSyncCookie, type TabSync } from "../tabSync";
+import { readSyncCookie, syncKeyFromLabel, type TabSync } from "../tabSync";
 
 afterEach(() => {
   cleanup();
@@ -299,6 +299,40 @@ describe("TabsNav sync", () => {
     expect(window.location.search).toBe("?site=eu&code-lang=python");
     expect(window.location.hash).toBe("#op-v1");
     expect(window.history.state).toEqual(routerState);
+  });
+
+  it("a click activates the clicked tab when two labels share a key", async () => {
+    const user = userEvent.setup();
+    const labels = ["C", "C++"];
+    const { root } = mountNav("s16", labels, {
+      sync: { group: "tab", keys: labels.map(syncKeyFromLabel) },
+    });
+
+    await user.click(buttonsOf(root)[1]);
+
+    await waitFor(() => expect(activeIndexOf(root)).toBe(1));
+  });
+
+  it("a click on a tab with an empty key stores nothing", async () => {
+    const user = userEvent.setup();
+    const labels = ["+", "-"];
+    const { root } = mountNav("s17", labels, {
+      sync: { group: "tab", keys: labels.map(syncKeyFromLabel) },
+    });
+
+    await user.click(buttonsOf(root)[1]);
+
+    expect(window.location.search).toBe("");
+    expect(readSyncCookie("tab", document.cookie)).toBeUndefined();
+  });
+
+  it("stores a query value in the cookie as Hugo wrote it", () => {
+    window.history.replaceState(null, "", "/?code-lang=python-legacy");
+    mountNav("s18", ["Curl", "Python"], {
+      sync: codeLang(["curl", "python"]),
+    });
+
+    expect(readSyncCookie("code-lang", document.cookie)).toBe("python-legacy");
   });
 
   it("an unmounted group stops following clicks", async () => {

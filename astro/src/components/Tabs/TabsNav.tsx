@@ -136,8 +136,10 @@ export function TabsNav({
     });
     if (!resolved) return;
     setActiveTab(indexForKey(keys, resolved.key));
-    // Match Hugo: a key that arrives in the URL is remembered for later pages.
-    if (resolved.source === "query") writeSyncCookie(group, resolved.key);
+    // Match Hugo: a value that arrives in the URL is remembered for later
+    // pages. Write it as it arrived, so Hugo can still read values that
+    // Astro has no tab for (`python-legacy`).
+    if (resolved.source === "query") writeSyncCookie(group, resolved.value);
   };
 
   // Every synced group listens on `document`, so a click in any group of the
@@ -147,15 +149,20 @@ export function TabsNav({
     if (!(event.target instanceof Element)) return;
     const button = event.target.closest<HTMLElement>("[data-sync-group]");
     if (button?.dataset.syncGroup !== group) return;
+    // The button's own handler already selected the tab. Matching by key here
+    // would pick the first of two labels that share a key (`C`, `C++`).
+    if (ref.current?.contains(button)) return;
     const index = keys.indexOf(button.dataset.syncKey ?? "");
     if (index >= 0) setActiveTab(index);
   };
 
   const selectTab = (index: number) => {
     setActiveTab(index);
-    if (!sync) return;
-    writeSyncCookie(sync.group, sync.keys[index]);
-    writeSyncQueryParam(sync.group, sync.keys[index]);
+    const key = sync?.keys[index];
+    // A label made only of symbols has an empty key; there is nothing to store.
+    if (!sync || !key) return;
+    writeSyncCookie(sync.group, key);
+    writeSyncQueryParam(sync.group, key);
   };
 
   return (
