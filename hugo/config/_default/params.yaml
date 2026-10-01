@@ -394,7 +394,7 @@ unsupported_sites:
   nebius-cloud: [gov,gov2]
   network_config_management: [gov,gov2]
   observability_pipelines: [gov,gov2]
-  on-call: [gov,gov2]
+  on-call: [gov2]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]
