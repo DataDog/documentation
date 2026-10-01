@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Migration App translates Splunk Processing Language (SPL) into Datadog log search syntax and converts Splunk assets into their Datadog equivalents. It provides two tools:
+The Migration App translates Splunk Processing Language (SPL) into Datadog [log search syntax][3] and converts Splunk assets into their Datadog equivalents. It provides two tools:
 
 | Tool | Use case |
 |------|-----------|
