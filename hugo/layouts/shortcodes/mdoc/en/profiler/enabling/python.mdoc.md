@@ -14,49 +14,6 @@ For a summary of the minimum and recommended runtime and tracer versions across 
 - Continuous Profiler support is in Preview for some serverless platforms, such as [AWS Lambda][6].
 
 ## Installation
-
-### AI-assisted installation
-
-Use the following prompt with a local AI coding agent to set up the Python profiler for your service. Copy and paste this prompt into your AI agent to get started.
-
-```text
-You are helping me set up Datadog Continuous Profiler for my Python service.
-
-First, scan my project to auto-detect as much as possible. Look for:
-- requirements.txt, pyproject.toml, setup.py, setup.cfg, or Pipfile to
-  determine the Python version and whether ddtrace is already installed.
-- Dockerfile or docker-compose.yml for the base image (check if it is
-  Alpine/musl or a slim image that may lack build tools), startup command,
-  and existing Datadog configuration.
-- Procfile, gunicorn.conf.py, uvicorn config, or manage.py to determine
-  how the application starts.
-- Existing environment variables or .env files referencing DD_SERVICE,
-  DD_ENV, DD_VERSION, DD_PROFILING_ENABLED, or ddtrace-run.
-- Existing ddtrace usage in code (imports of ddtrace, calls to
-  ddtrace.profiling.Profiler, or ddtrace-run in startup scripts).
-
-Present a summary of what you detected, then ask ONLY about what you could
-not determine:
-- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Whether to enable via environment variables or in code (if no existing
-  pattern was detected).
-- Anything ambiguous from the project files.
-
-Generate the setup steps tailored to what you found:
-- Install ddtrace with pip if not already present.
-- If the base image is Alpine or musl-based, add build prerequisites
-  (gcc, musl-dev, linux-headers).
-- Enable the profiler using ddtrace-run with DD_PROFILING_ENABLED=true
-  or the ddtrace.profiling.Profiler API, matching the project's existing
-  pattern.
-- Set DD_SERVICE, DD_ENV, and DD_VERSION.
-- Show the complete modified startup command or Dockerfile.
-
-Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=python
-```
-
-
 To begin profiling applications:
 
 1. Make sure Datadog Agent v6+ is installed and running. Datadog recommends using [Datadog Agent v7+][3].
@@ -104,6 +61,47 @@ To begin profiling applications:
 
 When your process forks using `os.fork`, the profiler is automatically restarted
 in the child process on supported Python versions. No manual restart is required.
+
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the Python profiler for your service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler for my Python service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- requirements.txt, pyproject.toml, setup.py, setup.cfg, or Pipfile to
+  determine the Python version and whether ddtrace is already installed.
+- Dockerfile or docker-compose.yml for the base image (check if it is
+  Alpine/musl or a slim image that may lack build tools), startup command,
+  and existing Datadog configuration.
+- Procfile, gunicorn.conf.py, uvicorn config, or manage.py to determine
+  how the application starts.
+- Existing environment variables or .env files referencing DD_SERVICE,
+  DD_ENV, DD_VERSION, DD_PROFILING_ENABLED, or ddtrace-run.
+- Existing ddtrace usage in code (imports of ddtrace, calls to
+  ddtrace.profiling.Profiler, or ddtrace-run in startup scripts).
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Whether to enable via environment variables or in code (if no existing
+  pattern was detected).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+- Install ddtrace with pip if not already present.
+- If the base image is Alpine or musl-based, add build prerequisites
+  (gcc, musl-dev, linux-headers).
+- Enable the profiler using ddtrace-run with DD_PROFILING_ENABLED=true
+  or the ddtrace.profiling.Profiler API, matching the project's existing
+  pattern.
+- Set DD_SERVICE, DD_ENV, and DD_VERSION.
+- Show the complete modified startup command or Dockerfile.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=python
+```
 
 ## Configuration
 

@@ -30,60 +30,6 @@ Debugging information
 : Symbols should be available. The profiler cannot provide human-readable function names if the symbol table is stripped.
 
 ## Installation
-
-### AI-assisted installation
-
-Use the following prompt with a local AI coding agent to set up the native profiler (ddprof) for your C, C++, or Rust service. Copy and paste this prompt into your AI agent to get started.
-
-```text
-You are helping me set up Datadog Continuous Profiler (ddprof) for my native
-(C, C++, or Rust) service.
-
-First, scan my project to auto-detect as much as possible. Look for:
-- CMakeLists.txt, Makefile, meson.build, or Cargo.toml to determine the
-  language (C, C++, or Rust) and build system.
-- Compiler flags or build configuration for debug symbols (-g, debuginfo,
-  split-debuginfo) to determine if symbols will be available in production.
-- Existing linker flags or dependencies referencing libdd_profiling or ddprof.
-- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
-  image (check architecture: amd64 or arm64, glibc or musl), startup
-  command, and existing Datadog Agent configuration.
-- systemd service files or init scripts for how the application is launched.
-- Existing environment variables or .env files referencing DD_SERVICE,
-  DD_ENV, or DD_VERSION.
-
-Present a summary of what you detected, then ask ONLY about what you could
-not determine:
-- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
-- Datadog Agent deployment method (if no Agent config found in the project).
-- Whether to use ddprof as a standalone wrapper or linked library
-  (if no existing ddprof usage was detected).
-- Anything ambiguous from the project files.
-
-Generate the setup steps tailored to what you found:
-
-For standalone mode:
-- Download the latest ddprof release for the detected architecture.
-- Wrap the application command: ./ddprof myapp --arg1 --arg2
-- Set DD_ENV, DD_SERVICE, and DD_VERSION as environment variables
-  or as --environment, --service, --service_version flags.
-- If using exec to launch the app, wrap it as: exec ./ddprof myapp --arg1
-
-For library mode:
-- Download ddprof with library support (v0.8.0+).
-- Include dd_profiling.h and call ddprof_start_profiling() early in main().
-- Link against libdd_profiling and set LD_LIBRARY_PATH or install the .so
-  to a system library search path.
-- Show a complete compilation command.
-
-If debug symbols appear to be stripped, warn that function names in profiles
-will not be human-readable and recommend keeping symbols.
-Remind me that perf_event_paranoid must be 2 or less.
-
-Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=c
-```
-
-
 The profiler can be used either as a standalone executable or as a library. Skip to [library installation instructions](#library) if you want to use it as a library.
 
 ### Standalone
@@ -226,6 +172,58 @@ Use the `LD_LIBRARY_PATH` environment variable to add additional search paths to
 
 ```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/tmp/ddprof/lib
+```
+
+### AI-assisted installation
+
+Use the following prompt with a local AI coding agent to set up the native profiler (ddprof) for your C, C++, or Rust service. Copy and paste this prompt into your AI agent to get started.
+
+```text
+You are helping me set up Datadog Continuous Profiler (ddprof) for my native
+(C, C++, or Rust) service.
+
+First, scan my project to auto-detect as much as possible. Look for:
+- CMakeLists.txt, Makefile, meson.build, or Cargo.toml to determine the
+  language (C, C++, or Rust) and build system.
+- Compiler flags or build configuration for debug symbols (-g, debuginfo,
+  split-debuginfo) to determine if symbols will be available in production.
+- Existing linker flags or dependencies referencing libdd_profiling or ddprof.
+- Dockerfile, docker-compose.yml, or Kubernetes manifests for the base
+  image (check architecture: amd64 or arm64, glibc or musl), startup
+  command, and existing Datadog Agent configuration.
+- systemd service files or init scripts for how the application is launched.
+- Existing environment variables or .env files referencing DD_SERVICE,
+  DD_ENV, or DD_VERSION.
+
+Present a summary of what you detected, then ask ONLY about what you could
+not determine:
+- DD_SERVICE, DD_ENV, and DD_VERSION values (if not already set).
+- Datadog Agent deployment method (if no Agent config found in the project).
+- Whether to use ddprof as a standalone wrapper or linked library
+  (if no existing ddprof usage was detected).
+- Anything ambiguous from the project files.
+
+Generate the setup steps tailored to what you found:
+
+For standalone mode:
+- Download the latest ddprof release for the detected architecture.
+- Wrap the application command: ./ddprof myapp --arg1 --arg2
+- Set DD_ENV, DD_SERVICE, and DD_VERSION as environment variables
+  or as --environment, --service, --service_version flags.
+- If using exec to launch the app, wrap it as: exec ./ddprof myapp --arg1
+
+For library mode:
+- Download ddprof with library support (v0.8.0+).
+- Include dd_profiling.h and call ddprof_start_profiling() early in main().
+- Link against libdd_profiling and set LD_LIBRARY_PATH or install the .so
+  to a system library search path.
+- Show a complete compilation command.
+
+If debug symbols appear to be stripped, warn that function names in profiles
+will not be human-readable and recommend keeping symbols.
+Remind me that perf_event_paranoid must be 2 or less.
+
+Reference: https://docs.datadoghq.com/profiler/enabling/?code-lang=c
 ```
 
 ## Configuration
