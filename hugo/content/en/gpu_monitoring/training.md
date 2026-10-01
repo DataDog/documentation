@@ -24,8 +24,8 @@ Training workloads can fail often and cost hundreds of thousands of dollars. Deb
 
 With the Training Optimization page, you get:
 
-1. **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
-2. **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
+- **Agentic root-cause analysis for stalled or failed training workloads**: Pinpoint why training workloads are failing or slowing down, whether the issue resides in unhealthy hardware, communication, memory bandwidth, or scheduling.
+- **Training run performance optimization**: Identify the highest-impact opportunities to increase throughput in successful training runs.
 
 {{< img src="gpu_monitoring/training-page-2.png" alt="Training page in GPU Monitoring, showing insights across training runs, a bar graph of training run records over time, and a list of training runs with their namespace, outcome, start time, duration, and number of GPUs." style="width:100%;" >}}
 
