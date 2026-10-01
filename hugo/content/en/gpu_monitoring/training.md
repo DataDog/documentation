@@ -111,6 +111,8 @@ Apply the resource and wait for the rollout to complete.
 
 ### 4. Verify setup
 
+Run the following commands against a newly created GPU pod to confirm the setup:
+
 ```shell
 # Confirm setup containers completed
 kubectl get pod <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> \
