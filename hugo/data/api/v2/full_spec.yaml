@@ -77376,6 +77376,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessor"
@@ -79521,6 +79522,187 @@ components:
         - name
         - value
       type: object
+    ObservabilityPipelineMetricEnrichmentTableFile:
+      description: Defines a static enrichment table loaded from a CSV file for metric enrichment.
+      properties:
+        encoding:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileEncoding"
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileKey"
+        path:
+          description: Path to the CSV file.
+          example: /etc/enrichment/lookup.csv
+          type: string
+      required:
+        - encoding
+        - key
+        - path
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileKey:
+      description: Defines how to map a metric lookup value to a CSV column during enrichment table lookups.
+      properties:
+        column:
+          description: The CSV column name or index to match against the lookup value.
+          example: service
+          type: string
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - column
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a static CSV file.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        file:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFile"
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - file
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableLookupSource:
+      description: |-
+        Specifies the source of the key value used for metric enrichment table lookups.
+        The lookup key can be either the metric name or a metric tag.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookup"
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookup:
+      description: Uses the metric name as the lookup key for enrichment table matching.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType:
+      default: metric_name
+      description: The lookup source type. The value should always be `metric_name`.
+      enum: [metric_name]
+      example: metric_name
+      type: string
+      x-enum-varnames:
+        - METRIC_NAME
+    ObservabilityPipelineMetricEnrichmentTableProcessor:
+      description: |-
+        The `enrichment_table` processor enriches metrics with tags from a static CSV file or a Datadog reference table.
+        It looks up a row using the metric name or a metric tag value. It then adds each column of the matching row as a
+        metric tag, overwriting any existing tag with the same key. Exactly one of `file` or `reference_table` must be
+        configured.
+
+        **Supported pipeline types:** metrics
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor"
+      x-pipeline-types: [metrics]
+    ObservabilityPipelineMetricEnrichmentTableReferenceKey:
+      description: Defines the metric lookup value used as the reference-table row ID.
+      properties:
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich metrics.
+      properties:
+        app_key_key:
+          description: |-
+            The name of the environment variable or secret that holds the Datadog application key used to access the
+            reference table.
+          example: DD_APP_KEY
+          type: string
+        columns:
+          description: |-
+            A list of column names to include from the reference table. If not provided, all columns are included.
+          items:
+            description: The name of a column to include from the reference table.
+            type: string
+          maxItems: 50
+          type: array
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceKey"
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+        - key
+        - table_id
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a Datadog reference table.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        reference_table:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTable"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - reference_table
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookup:
+      description: Uses a metric tag as the lookup key for enrichment table matching.
+      properties:
+        name:
+          description: The Datadog tag key used as the lookup key.
+          example: service
+          maxLength: 200
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookupType"
+      required:
+        - type
+        - name
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookupType:
+      default: tag
+      description: The lookup source type. The value should always be `tag`.
+      enum: [tag]
+      example: tag
+      type: string
+      x-enum-varnames:
+        - TAG
     ObservabilityPipelineMetricTagsProcessor:
       description: |-
         The `metric_tags` processor filters metrics based on their tags using Datadog tag key patterns.
