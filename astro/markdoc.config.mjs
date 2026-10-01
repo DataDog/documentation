@@ -115,7 +115,7 @@ export default defineMarkdocConfig({
             id: groupId,
             labels,
             panelIds,
-            // Sync by label with Hugo's `?tab=` rule; authors set nothing.
+            // Sync by label with Hugo's `?tab=` rule;
             sync: { group: "tab", keys: labels.map(syncKeyFromLabel) },
           },
           panels,
