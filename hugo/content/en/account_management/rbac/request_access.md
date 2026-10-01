@@ -54,6 +54,12 @@ You can also request a role directly, without first reaching a permission-denied
 
 Direct role requests follow the same approval and auto-approval rules as requests made from a permission-denied page.
 
+### For an asset
+
+You can also request access to assets like Monitors and Dashboards if your admin has configured auto-approval rules.
+
+To request access to an individual asset, go to the asset and click {{< ui >}}Request Access{{< /ui >}}. If you already have viewer access and want to request a higher permission level, open the existing sharing settings for the asset instead.
+
 ## Configuring access requests as an administrator
 
 Navigate to [Organization Settings][1] and select {{< ui >}}Access Controls{{< /ui >}} to configure and manage all access request settings. You need the `user_access_manage` permission to access this page.
@@ -99,8 +105,6 @@ Asset auto-approval extends the same self-service model to individual resources.
 - Synthetic private locations
 
 Enabling a resource type applies the configuration to every resource of that type. Like role and permission auto-approval, asset auto-approval configurations can be scoped to specific users, teams, or roles. Configure requester scoping separately for each access level. For example, you can allow all users to request viewer access to dashboards while limiting editor access requests to a specific team.
-
-To request access to an individual asset, go to the asset and click {{< ui >}}Request Access{{< /ui >}}. If you already have viewer access and want to request a higher permission level, open the existing sharing settings for the asset instead.
 
 ## Audit Trail
 
