@@ -777,8 +777,6 @@ With the `Parallel` setting, a rescheduled Worker pod can show a transient volum
 
 See [Multi-attach error when using persistence on Kubernetes][27] for more information.
 
-See [Kubernetes persistent volumes][28] for storage prerequisites and what happens to buffered data when a pod or node is replaced.
-
 ### LoadBalancer service
 
 If you set `service.type: LoadBalancer` in the Helm chart, Kubernetes provisions a load balancer in supported environments and exposes the Worker Service with an external IP/DNS name. For example, Amazon EKS with the [AWS Load Balancer Controller][19] installed. Use this `LoadBalancer` service when traffic originates outside the cluster.
@@ -1116,4 +1114,3 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
 [26]: /observability_pipelines/configuration/network_traffic/
 [27]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#multi-attach-error-when-using-persistence-on-kubernetes
-[28]: /observability_pipelines/scaling_and_performance/buffering_and_backpressure/#kubernetes-persistent-volumes
