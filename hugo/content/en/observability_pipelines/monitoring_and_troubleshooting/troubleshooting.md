@@ -28,9 +28,16 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
  **Note**: See [Enable liveness and readiness probe][15] for instructions on how to expose the `/health` endpoint. After the endpoint is exposed, configure load balancers to use the `/health` API endpoint to check that the Worker is up and running.
 
-### Use `top` to find the component ID
+### Find the component ID
 
-You need the source's or processor's component ID to `tap` into it. Use the `top` command to find the ID of the component you want to `tap` into:
+You need the source's or processor's component ID to `tap` into it. To copy the component ID in the UI:
+
+1. Navigate to [Observability Pipelines][2].
+1. Select your pipeline.
+1. Click the cog next to the source's or processor's name, then select {{< ui >}}View details{{< /ui >}}.
+1. Click the copy icon next to the component's name at the top of the side panel.
+
+Alternatively, if you are on the same host as the Worker, use the `top` command to find the component ID:
 
 ```
 observability-pipelines-worker top

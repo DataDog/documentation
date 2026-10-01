@@ -50,6 +50,7 @@ All metrics are tagged with the following:
 
 **Notes**:
 - Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` tag whose value starts with an underscore (`_`). To exclude these metrics from your queries, use `!component_id:_*`.
+- To find a component's ID, see [View the status of your pipeline components][7].
 - Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
 ## Estimated usage metric
@@ -435,3 +436,4 @@ These metrics provide information about the adaptive concurrency controller, whi
 [4]: /getting_started/tagging/
 [5]: https://app.datadoghq.com/metric/summary
 [6]: https://docs.datadoghq.com/account_management/billing/usage_metrics/
+[7]: /observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/#view-the-status-of-your-pipeline-components
