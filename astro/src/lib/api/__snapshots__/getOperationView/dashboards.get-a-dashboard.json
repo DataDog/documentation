@@ -3952,17 +3952,6 @@
           ]
         },
         {
-          "language": "python",
-          "label": "Python",
-          "entries": [
-            {
-              "description": "",
-              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nGet a dashboard returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.dashboards_api import DashboardsApi\n\n# there is a valid \"dashboard\" in the system\nDASHBOARD_ID = environ[\"DASHBOARD_ID\"]\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = DashboardsApi(api_client)\n    response = api_instance.get_dashboard(\n        dashboard_id=DASHBOARD_ID,\n    )\n\n    print(response)\n",
-              "syntax": "python"
-            }
-          ]
-        },
-        {
           "language": "go",
           "label": "Go",
           "entries": [
@@ -3970,6 +3959,17 @@
               "description": "",
               "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Get a dashboard returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"dashboard\" in the system\n\tDashboardID := os.Getenv(\"DASHBOARD_ID\")\n\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewDashboardsApi(apiClient)\n\tresp, r, err := api.GetDashboard(ctx, DashboardID)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `DashboardsApi.GetDashboard`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `DashboardsApi.GetDashboard`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nGet a dashboard returns \"OK\" response\n\"\"\"\n\nfrom os import environ\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.dashboards_api import DashboardsApi\n\n# there is a valid \"dashboard\" in the system\nDASHBOARD_ID = environ[\"DASHBOARD_ID\"]\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = DashboardsApi(api_client)\n    response = api_instance.get_dashboard(\n        dashboard_id=DASHBOARD_ID,\n    )\n\n    print(response)\n",
+              "syntax": "python"
             }
           ]
         }

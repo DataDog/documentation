@@ -4972,7 +4972,7 @@
                     data-tab-index="1"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Python</button
+                    Go</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -4980,7 +4980,7 @@
                     data-tab-index="2"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Go
+                    Python
                   </button>
                 </div>
                 <!--astro:end--></astro-island
@@ -5581,91 +5581,10 @@
               </div>
               <div id="api-code-example-X51-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X59" class="code-block _code-block_961fb8" data-language="python">
+                  <div id="code-block-X59" class="code-block _code-block_961fb8" data-language="go">
                     <div id="code-block-X59-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
                         uid="X32"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: #ffffff; color: #000000"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"><span style="color:#C41A16">Create an incident returns "CREATED" response</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> os </span><span style="color:#633820">import</span><span style="color:#000000"> environ</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.api.incidents_api </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentsApi</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_attributes </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateAttributes</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_data </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateData</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_relationships </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateRelationships</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_request </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateRequest</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_field_attributes_single_value </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentFieldAttributesSingleValue</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_field_attributes_single_value_type </span><span style="color:#633820">import</span><span style="color:#000000"> (</span></span>
-<span class="line"><span style="color:#000000">    IncidentFieldAttributesSingleValueType,</span></span>
-<span class="line"><span style="color:#000000">)</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_type </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentType</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.nullable_relationship_to_user </span><span style="color:#633820">import</span><span style="color:#000000"> NullableRelationshipToUser</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.nullable_relationship_to_user_data </span><span style="color:#633820">import</span><span style="color:#000000"> NullableRelationshipToUserData</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.users_type </span><span style="color:#633820">import</span><span style="color:#000000"> UsersType</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#177500"># there is a valid "user" in the system</span></span>
-<span class="line"><span style="color:#000000">USER_DATA_ID = environ[</span><span style="color:#C41A16">"USER_DATA_ID"</span><span style="color:#000000">]</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#000000">body = IncidentCreateRequest(</span></span>
-<span class="line"><span style="color:#000000">    data=IncidentCreateData(</span></span>
-<span class="line"><span style="color:#000000">        type=IncidentType.INCIDENTS,</span></span>
-<span class="line"><span style="color:#000000">        attributes=IncidentCreateAttributes(</span></span>
-<span class="line"><span style="color:#000000">            title=</span><span style="color:#C41A16">"Example-Incident"</span><span style="color:#000000">,</span></span>
-<span class="line"><span style="color:#000000">            customer_impacted=</span><span style="color:#A90D91">False</span><span style="color:#000000">,</span></span>
-<span class="line"><span style="color:#000000">            fields=</span><span style="color:#A90D91">dict</span><span style="color:#000000">(</span></span>
-<span class="line"><span style="color:#000000">                state=IncidentFieldAttributesSingleValue(</span></span>
-<span class="line"><span style="color:#000000">                    type=IncidentFieldAttributesSingleValueType.DROPDOWN,</span></span>
-<span class="line"><span style="color:#000000">                    value=</span><span style="color:#C41A16">"resolved"</span><span style="color:#000000">,</span></span>
-<span class="line"><span style="color:#000000">                ),</span></span>
-<span class="line"><span style="color:#000000">            ),</span></span>
-<span class="line"><span style="color:#000000">        ),</span></span>
-<span class="line"><span style="color:#000000">        relationships=IncidentCreateRelationships(</span></span>
-<span class="line"><span style="color:#000000">            commander_user=NullableRelationshipToUser(</span></span>
-<span class="line"><span style="color:#000000">                data=NullableRelationshipToUserData(</span></span>
-<span class="line"><span style="color:#000000">                    type=UsersType.USERS,</span></span>
-<span class="line"><span style="color:#000000">                    id=USER_DATA_ID,</span></span>
-<span class="line"><span style="color:#000000">                ),</span></span>
-<span class="line"><span style="color:#000000">            ),</span></span>
-<span class="line"><span style="color:#000000">        ),</span></span>
-<span class="line"><span style="color:#000000">    ),</span></span>
-<span class="line"><span style="color:#000000">)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
-<span class="line"><span style="color:#000000">configuration.unstable_operations[</span><span style="color:#C41A16">"create_incident"</span><span style="color:#000000">] = </span><span style="color:#A90D91">True</span></span>
-<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
-<span class="line"><span style="color:#000000">    api_instance = IncidentsApi(api_client)</span></span>
-<span class="line"><span style="color:#000000">    response = api_instance.create_incident(body=body)</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
-<span class="line"></span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="api-code-example-X51-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X60" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X60-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X33"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -5738,6 +5657,87 @@
 <span class="line"><span style="color:#000000">	responseContent, _ := json.MarshalIndent(resp, </span><span style="color:#C41A16">""</span><span style="color:#000000">, </span><span style="color:#C41A16">"  "</span><span style="color:#000000">)</span></span>
 <span class="line"><span style="color:#000000">	fmt.Fprintf(os.Stdout, </span><span style="color:#C41A16">"Response from `IncidentsApi.CreateIncident`:\n%s\n"</span><span style="color:#000000">, responseContent)</span></span>
 <span class="line"><span style="color:#000000">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X51-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X60" class="code-block _code-block_961fb8" data-language="python">
+                    <div id="code-block-X60-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X33"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
+<span class="line"><span style="color:#C41A16">Create an incident returns "CREATED" response</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> os </span><span style="color:#633820">import</span><span style="color:#000000"> environ</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.api.incidents_api </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentsApi</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_attributes </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateAttributes</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_data </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateData</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_relationships </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateRelationships</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_create_request </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentCreateRequest</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_field_attributes_single_value </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentFieldAttributesSingleValue</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_field_attributes_single_value_type </span><span style="color:#633820">import</span><span style="color:#000000"> (</span></span>
+<span class="line"><span style="color:#000000">    IncidentFieldAttributesSingleValueType,</span></span>
+<span class="line"><span style="color:#000000">)</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.incident_type </span><span style="color:#633820">import</span><span style="color:#000000"> IncidentType</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.nullable_relationship_to_user </span><span style="color:#633820">import</span><span style="color:#000000"> NullableRelationshipToUser</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.nullable_relationship_to_user_data </span><span style="color:#633820">import</span><span style="color:#000000"> NullableRelationshipToUserData</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.model.users_type </span><span style="color:#633820">import</span><span style="color:#000000"> UsersType</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#177500"># there is a valid "user" in the system</span></span>
+<span class="line"><span style="color:#000000">USER_DATA_ID = environ[</span><span style="color:#C41A16">"USER_DATA_ID"</span><span style="color:#000000">]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000">body = IncidentCreateRequest(</span></span>
+<span class="line"><span style="color:#000000">    data=IncidentCreateData(</span></span>
+<span class="line"><span style="color:#000000">        type=IncidentType.INCIDENTS,</span></span>
+<span class="line"><span style="color:#000000">        attributes=IncidentCreateAttributes(</span></span>
+<span class="line"><span style="color:#000000">            title=</span><span style="color:#C41A16">"Example-Incident"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            customer_impacted=</span><span style="color:#A90D91">False</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">            fields=</span><span style="color:#A90D91">dict</span><span style="color:#000000">(</span></span>
+<span class="line"><span style="color:#000000">                state=IncidentFieldAttributesSingleValue(</span></span>
+<span class="line"><span style="color:#000000">                    type=IncidentFieldAttributesSingleValueType.DROPDOWN,</span></span>
+<span class="line"><span style="color:#000000">                    value=</span><span style="color:#C41A16">"resolved"</span><span style="color:#000000">,</span></span>
+<span class="line"><span style="color:#000000">                ),</span></span>
+<span class="line"><span style="color:#000000">            ),</span></span>
+<span class="line"><span style="color:#000000">        ),</span></span>
+<span class="line"><span style="color:#000000">        relationships=IncidentCreateRelationships(</span></span>
+<span class="line"><span style="color:#000000">            commander_user=NullableRelationshipToUser(</span></span>
+<span class="line"><span style="color:#000000">                data=NullableRelationshipToUserData(</span></span>
+<span class="line"><span style="color:#000000">                    type=UsersType.USERS,</span></span>
+<span class="line"><span style="color:#000000">                    id=USER_DATA_ID,</span></span>
+<span class="line"><span style="color:#000000">                ),</span></span>
+<span class="line"><span style="color:#000000">            ),</span></span>
+<span class="line"><span style="color:#000000">        ),</span></span>
+<span class="line"><span style="color:#000000">    ),</span></span>
+<span class="line"><span style="color:#000000">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
+<span class="line"><span style="color:#000000">configuration.unstable_operations[</span><span style="color:#C41A16">"create_incident"</span><span style="color:#000000">] = </span><span style="color:#A90D91">True</span></span>
+<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
+<span class="line"><span style="color:#000000">    api_instance = IncidentsApi(api_client)</span></span>
+<span class="line"><span style="color:#000000">    response = api_instance.create_incident(body=body)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>

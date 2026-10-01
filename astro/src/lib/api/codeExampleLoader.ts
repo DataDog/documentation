@@ -44,6 +44,37 @@ for (const [key, code] of Object.entries(sdkExampleFiles)) {
   filesByLocation.set(`${version}/${categorySlug}/${filename}`, code);
 }
 
+/**
+ * Throws when a production build has nothing staged to render.
+ *
+ * The glob above is the only source of example code, and an empty match is
+ * indistinguishable from a corpus where no operation has examples: every API
+ * page renders its Curl tab and nothing else, and the build succeeds. That is
+ * silent enough to reach production. `yarn fetch:examples` is chained into
+ * every build script (`deps` in `package.json`), so zero files here means the
+ * staging step was skipped or failed rather than that the corpus is empty.
+ *
+ * Only a production build fails. `yarn dev` stages with `--best-effort`, which
+ * downgrades an unreachable network to a warning so the dev server still
+ * starts; failing here would make the site undevelopable offline.
+ */
+export function assertStagedExamplesPresent(
+  fileCount: number,
+  isProductionBuild: boolean,
+): void {
+  if (fileCount > 0 || !isProductionBuild) {
+    return;
+  }
+  throw new Error(
+    "No API code examples were found, so every endpoint page would render " +
+      "Curl as its only tab. Run `yarn fetch:examples` to stage them — " +
+      "`yarn build` already does this via `yarn deps`, so this usually means " +
+      "that step failed or `api-code-examples/` was removed after it ran.",
+  );
+}
+
+assertStagedExamplesPresent(filesByLocation.size, import.meta.env.PROD);
+
 /** Shape of each entry in CodeExamples.json, keyed by operationId */
 const CodeExampleMetaSchema = z
   .object({
@@ -70,27 +101,37 @@ const CODE_EXAMPLES: Record<"v1" | "v2", Record<string, CodeExampleMeta[]>> = {
 };
 
 /**
- * Language configuration. `exts` is tried in order; the first match wins, so
- * the modern beta extension (e.g. `.pybeta`) takes precedence over the legacy
- * one (`.py`) when both happen to exist for an operation.
+ * Language configuration, one entry per extension.
+ *
+ * `.py`/`.pybeta` and `.rb`/`.rbbeta` are four languages, not two — the legacy
+ * pair predates the generated SDK clients and gets its own tab, exactly as in
+ * Hugo's `code_languages` map (`hugo/config/_default/params.yaml`). Folding
+ * each pair into one language with a preferred extension would hide the legacy
+ * file on every operation that has both, which is almost all of them.
+ *
+ * Order is the tab order. It mirrors Hugo's — alphabetical, with every legacy
+ * language pushed to the end (`layouts/partials/code-lang-tabs.html`) — after
+ * `viewsBuilder` prepends the Curl tab.
  */
 const LANGUAGES: ReadonlyArray<{
   id: string;
   label: string;
-  exts: readonly string[];
+  ext: string;
   syntax: string;
 }> = [
-  { id: "python", label: "Python", exts: [".pybeta", ".py"], syntax: "python" },
-  { id: "ruby", label: "Ruby", exts: [".rbbeta", ".rb"], syntax: "ruby" },
-  { id: "go", label: "Go", exts: [".go"], syntax: "go" },
-  { id: "java", label: "Java", exts: [".java"], syntax: "java" },
+  { id: "go", label: "Go", ext: ".go", syntax: "go" },
+  { id: "java", label: "Java", ext: ".java", syntax: "java" },
+  { id: "python", label: "Python", ext: ".pybeta", syntax: "python" },
+  { id: "ruby", label: "Ruby", ext: ".rbbeta", syntax: "ruby" },
+  { id: "rust", label: "Rust", ext: ".rs", syntax: "rust" },
+  { id: "typescript", label: "TypeScript", ext: ".ts", syntax: "typescript" },
   {
-    id: "typescript",
-    label: "TypeScript",
-    exts: [".ts"],
-    syntax: "typescript",
+    id: "python-legacy",
+    label: "Python [legacy]",
+    ext: ".py",
+    syntax: "python",
   },
-  { id: "rust", label: "Rust", exts: [".rs"], syntax: "rust" },
+  { id: "ruby-legacy", label: "Ruby [legacy]", ext: ".rb", syntax: "ruby" },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -129,7 +170,7 @@ export function getCodeExamplesForOperation(
         meta.suffix,
         version,
         categorySlug,
-        lang.exts,
+        lang.ext,
       );
       if (code !== null) {
         entries.push({
@@ -172,14 +213,8 @@ function findExampleCode(
   suffix: string,
   version: "v1" | "v2",
   categorySlug: string,
-  exts: readonly string[],
+  ext: string,
 ): string | null {
-  for (const ext of exts) {
-    const filename = buildExampleFilename(operationId, suffix, ext);
-    const code = filesByLocation.get(`${version}/${categorySlug}/${filename}`);
-    if (code !== undefined) {
-      return code;
-    }
-  }
-  return null;
+  const filename = buildExampleFilename(operationId, suffix, ext);
+  return filesByLocation.get(`${version}/${categorySlug}/${filename}`) ?? null;
 }

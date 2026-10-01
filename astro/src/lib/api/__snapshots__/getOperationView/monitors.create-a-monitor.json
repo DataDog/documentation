@@ -5201,6 +5201,17 @@
           ]
         },
         {
+          "language": "go",
+          "label": "Go",
+          "entries": [
+            {
+              "description": "Create a monitor returns \"OK\" response",
+              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n",
+              "syntax": "go"
+            }
+          ]
+        },
+        {
           "language": "python",
           "label": "Python",
           "entries": [
@@ -5212,13 +5223,35 @@
           ]
         },
         {
-          "language": "go",
-          "label": "Go",
+          "language": "ruby",
+          "label": "Ruby",
           "entries": [
             {
               "description": "Create a monitor returns \"OK\" response",
-              "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Create a monitor returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\t// there is a valid \"role\" in the system\n\tRoleDataID := os.Getenv(\"ROLE_DATA_ID\")\n\n\tbody := datadogV1.Monitor{\n\t\tName:    datadog.PtrString(\"Example-Monitor\"),\n\t\tType:    datadogV1.MONITORTYPE_LOG_ALERT,\n\t\tQuery:   `logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2`,\n\t\tMessage: datadog.PtrString(\"some message Notify: @hipchat-channel\"),\n\t\tTags: []string{\n\t\t\t\"test:examplemonitor\",\n\t\t\t\"env:ci\",\n\t\t},\n\t\tPriority: *datadog.NewNullableInt64(datadog.PtrInt64(3)),\n\t\tRestrictedRoles: *datadog.NewNullableList(&[]string{\n\t\t\tRoleDataID,\n\t\t}),\n\t}\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewMonitorsApi(apiClient)\n\tresp, r, err := api.CreateMonitor(ctx, body)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `MonitorsApi.CreateMonitor`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `MonitorsApi.CreateMonitor`:\\n%s\\n\", responseContent)\n}\n",
-              "syntax": "go"
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n# Create a monitor returns \"OK\" response\n\nrequire \"datadog_api_client\"\nDatadogAPIClient.configure do |config|\n  config.access_token = ENV[\"DD_BEARER_TOKEN\"]\nend\napi_instance = DatadogAPIClient::V1::MonitorsAPI.new\n\n# there is a valid \"role\" in the system\nROLE_DATA_ID = ENV[\"ROLE_DATA_ID\"]\n\nbody = DatadogAPIClient::V1::Monitor.new({\n  name: \"Example-Monitor\",\n  type: DatadogAPIClient::V1::MonitorType::LOG_ALERT,\n  query: 'logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2',\n  message: \"some message Notify: @hipchat-channel\",\n  tags: [\n    \"test:examplemonitor\",\n    \"env:ci\",\n  ],\n  priority: 3,\n  restricted_roles: [\n    ROLE_DATA_ID,\n  ],\n})\np api_instance.create_monitor(body)\n",
+              "syntax": "ruby"
+            }
+          ]
+        },
+        {
+          "language": "python-legacy",
+          "label": "Python [legacy]",
+          "entries": [
+            {
+              "description": "Create a monitor returns \"OK\" response",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\nfrom datadog import initialize, api\n\noptions = {\n    'api_key': '<DATADOG_API_KEY>',\n    'app_key': '<DATADOG_APPLICATION_KEY>'\n}\n\ninitialize(**options)\n\n# Create a new monitor\nmonitor_options = {\n    \"notify_no_data\": True,\n    \"no_data_timeframe\": 20\n}\ntags = [\"app:webserver\", \"frontend\"]\napi.Monitor.create(\n    type=\"query alert\",\n    query=\"avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100\",\n    name=\"Bytes received on host0\",\n    message=\"We may need to add web hosts if this is consistently high.\",\n    tags=tags,\n    options=monitor_options\n)\n",
+              "syntax": "python"
+            }
+          ]
+        },
+        {
+          "language": "ruby-legacy",
+          "label": "Ruby [legacy]",
+          "entries": [
+            {
+              "description": "Create a monitor returns \"OK\" response",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\nrequire 'dogapi'\n\napi_key = '<DATADOG_API_KEY>'\napp_key = '<DATADOG_APPLICATION_KEY>'\n\ndog = Dogapi::Client.new(api_key, app_key)\n\n# Create a new monitor\noptions = {\n  'notify_no_data' => true,\n  'no_data_timeframe' => 20\n}\ntags = ['app:webserver', 'frontend']\ndog.monitor(\n  'query alert',\n  'avg(last_5m):sum:system.net.bytes_rcvd{host:host0} > 100',\n  name: 'Bytes received on host0',\n  message: 'We may need to add web hosts if this is consistently high.',\n  tags: tags,\n  options: options\n)\n",
+              "syntax": "ruby"
             }
           ]
         }
