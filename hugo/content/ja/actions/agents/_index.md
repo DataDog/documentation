@@ -19,6 +19,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/bits-agent-builder/
   tag: ブログ
   text: 'Bits Agent Builder の紹介: アラート対応と修復のためのエージェントワークフローを構築する'
+- link: https://www.datadoghq.com/blog/build-datadog-workflows-ai-agents/
+  tag: ブログ
+  text: Bits ChatやAIエージェントからDatadogワークフローを構築し、実行してください。
 title: Bits Agent Builder
 ---
 ## 概要 {#overview}

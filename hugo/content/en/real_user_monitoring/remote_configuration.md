@@ -1,6 +1,16 @@
 ---
 title: RUM Remote Configuration
 description: Configure RUM SDK settings remotely for Browser, iOS, and Android applications.
+aliases:
+- /real_user_monitoring/guide/remote-config-launchdarkly/
+- /real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /real_user_monitoring/guide/remotely-configure-rum-using-feature-flags/
+- /fr/real_user_monitoring/guide/remote-config-launchdarkly/
+- /fr/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /ja/real_user_monitoring/guide/remote-config-launchdarkly/
+- /ja/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
+- /ko/real_user_monitoring/guide/remote-config-launchdarkly/
+- /ko/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly/
 further_reading:
 - link: '/real_user_monitoring/'
   tag: Documentation
@@ -19,7 +29,7 @@ As your application evolves, you may need to adjust the data that the RUM SDK co
 
 - Browser SDK version 7.13.0+
 - iOS SDK version 3.17.0+
-- Android SDK version 3.14.0+
+- Android SDK version 3.14.1+
 
 <div class="alert alert-danger">If your network or proxy uses an allowlist, add <code>*.browser-intake-&lt;DC_REGION&gt;-datadoghq.com</code> for your application. This entry covers both RUM data intake and the SDK's remote configuration requests, which use the <code>sdk-configuration.</code> subdomain. For Browser applications, also add this domain to your Content Security Policy.
 <br><br> If this domain is blocked, the SDK can't retrieve remote settings and continues using its local configuration instead, without any visible error.</div>

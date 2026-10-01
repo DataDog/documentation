@@ -56,6 +56,8 @@ Use Watchdog Insights to:
 - Correlate anomalies with specific root causes
 - Investigate performance degradation before it impacts users
 
+You can also investigate latency, packet loss, and TCP connection health from an AI agent, such as Claude Code or Cursor, with the [`analyze_cloud_network_monitoring`][7] tool in the Datadog MCP Server.
+
 ## TLS certificates
 
 Expired or expiring TLS certificates can block secure connections between services, resulting in dropped traffic. The {{< ui >}}TLS Certificates{{< /ui >}} section lists:
@@ -123,3 +125,4 @@ Use the filters at the top of the page to narrow the scope of displayed issues. 
 [4]: /incident_response/incident_management/declare/
 [5]: /watchdog/insights
 [6]: /integrations/amazon-web-services/#resource-collection
+[7]: /mcp_server/tools/#analyze_cloud_network_monitoring

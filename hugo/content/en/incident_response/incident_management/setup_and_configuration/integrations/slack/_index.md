@@ -95,6 +95,16 @@ In an incident Slack channel, you can run Slack commands to modify the incident'
 
 For a full list of Slack commands, see [Slack commands](#slack-commands).
 
+### Re-inviting a meeting transcriber
+
+If the Datadog Transcriber leaves a linked Zoom, Google Meet, or Microsoft Teams meeting, a re-invite prompt can appear in the meeting-card thread. This can happen after a waiting-room timeout, when nobody joins, after everyone leaves, or when someone removes the transcriber.
+
+Select **Yes** to re-invite the transcriber or **No** to dismiss the prompt. If required, admit the transcriber from the meeting lobby or waiting room.
+
+This action requires a connected Datadog account and permission to edit the incident. For organizations with seat-based billing, it also requires an [Incident Management or Incident Response seat][8]. Meeting summarization settings and exclusion conditions still apply.
+
+You can also re-invite the transcriber from the incident header in Datadog. For instructions, see the meeting summaries documentation for [Zoom][9], [Google Meet][10], or [Microsoft Teams][11].
+
 ### Other incident channel configuration options
 
 Access all configuration options for Slack in Incident Management through the [**Incidents** > **Settings** > **Integrations**][3] page.
@@ -203,3 +213,7 @@ The following buttons are available in the action tray. Incident types are initi
 [5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
 [7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /account_management/billing/incident_response/#allocate-seats
+[9]: /integrations/zoom-incident-management/#meeting-summaries
+[10]: /integrations/google-meet-incident-management/#meeting-summaries
+[11]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries

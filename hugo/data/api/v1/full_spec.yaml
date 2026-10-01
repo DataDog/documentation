@@ -6250,6 +6250,7 @@ components:
         - security_runtime_stream
         - security_signals_stream
         - incidents_stream
+        - case_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6270,6 +6271,7 @@ components:
         - SECURITY_RUNTIME_STREAM
         - SECURITY_SIGNALS_STREAM
         - INCIDENTS_STREAM
+        - CASE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -20057,6 +20059,9 @@ components:
           items:
             $ref: "#/components/schemas/SyntheticsTestRestrictionPolicyBinding"
           type: array
+        bits_ai_auto_investigate:
+          description: Whether Bits AI automatically investigates alerts from the test monitor.
+          type: boolean
         ci:
           $ref: "#/components/schemas/SyntheticsTestCiOptions"
         defaultStepTimeout:
@@ -20836,6 +20841,9 @@ components:
           type: boolean
         allow_insecure:
           description: Allows loading insecure content for an HTTP request in an API test.
+          type: boolean
+        bits_ai_auto_investigate:
+          description: Whether Bits AI automatically investigates alerts from the test monitor.
           type: boolean
         blockedRequestPatterns:
           description: Array of URL patterns to block.
@@ -29398,6 +29406,7 @@ components:
             workflows_write: Create, edit, and delete workflows.
           tokenUrl: /oauth2/v1/token
       type: oauth2
+      x-env-name: DD_BEARER_TOKEN
     apiKeyAuth:
       description: Your Datadog API Key.
       in: header
@@ -46319,6 +46328,7 @@ paths:
 security:
   - apiKeyAuth: []
     appKeyAuth: []
+  - AuthZ: []
 servers:
   - url: https://{subdomain}.{site}
     variables:
