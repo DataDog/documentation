@@ -35,7 +35,7 @@ You can also save individual logs to a notebook by selecting {{< ui >}}Save to n
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
-## CSV formatting
+## Formatting of exported logs
 
 To keep exported files safe to open in spreadsheet applications, Datadog sanitizes every cell when exporting logs to CSV. As a result, values in a CSV export may differ from the original log content:
 
