@@ -100,17 +100,6 @@
           ]
         },
         {
-          "language": "python",
-          "label": "Python",
-          "entries": [
-            {
-              "description": "",
-              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nGet hourly usage for Lambda returns \"OK\" response\n\"\"\"\n\nfrom datetime import datetime\nfrom dateutil.relativedelta import relativedelta\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.usage_metering_api import UsageMeteringApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = UsageMeteringApi(api_client)\n    response = api_instance.get_usage_lambda(\n        start_hr=(datetime.now() + relativedelta(days=-5)),\n        end_hr=(datetime.now() + relativedelta(days=-3)),\n    )\n\n    print(response)\n",
-              "syntax": "python"
-            }
-          ]
-        },
-        {
           "language": "go",
           "label": "Go",
           "entries": [
@@ -118,6 +107,17 @@
               "description": "",
               "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Get hourly usage for Lambda returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\t\"time\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewUsageMeteringApi(apiClient)\n\tresp, r, err := api.GetUsageLambda(ctx, time.Now().AddDate(0, 0, -5), *datadogV1.NewGetUsageLambdaOptionalParameters().WithEndHr(time.Now().AddDate(0, 0, -3)))\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `UsageMeteringApi.GetUsageLambda`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `UsageMeteringApi.GetUsageLambda`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nGet hourly usage for Lambda returns \"OK\" response\n\"\"\"\n\nfrom datetime import datetime\nfrom dateutil.relativedelta import relativedelta\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.usage_metering_api import UsageMeteringApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = UsageMeteringApi(api_client)\n    response = api_instance.get_usage_lambda(\n        start_hr=(datetime.now() + relativedelta(days=-5)),\n        end_hr=(datetime.now() + relativedelta(days=-3)),\n    )\n\n    print(response)\n",
+              "syntax": "python"
             }
           ]
         }
