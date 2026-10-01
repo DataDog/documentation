@@ -101,7 +101,7 @@ Captures alerts from [Datadog Watchdog][5].
 If you need to customize your view, click **Clone as dashboard** at the top right hand side. This creates a dashboard prefilled with content from the **My Workspace** page.
 
 Here are some example customizations you can make with the cloned dashboard:
-- Create [Embedded Apps][2] using Datadog's [Action Catalog][11] to display additional third-party data (for example, display PagerDuty on call information).
+- Create [embedded apps][2] using Datadog's [Action Catalog][11] to display additional third-party data (for example, display PagerDuty on call information).
 - Update the overall layout and design of your view by resizing, rearranging, and adding/removing [widgets][12].
 - Use a [Note][13] widget to add an announcement and updates section with relevant information for your organization.
 
