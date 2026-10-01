@@ -97,7 +97,7 @@ Apply the configuration and wait for the `DatadogAgent` rollout to complete.
 
 ### 3. Label the GPU workload
 
-Add the label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod template:
+Add the `admission.datadoghq.com/gpu.enabled: "true"` label to the controller's pod template. The workload must be outside the Agent namespace. For Jobs, use `spec.template.metadata.labels`. For KubeRay, label the head and worker pod templates:
 
 ```yaml
 spec:
