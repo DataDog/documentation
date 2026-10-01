@@ -10,7 +10,7 @@ further_reading:
   tag: "Documentation"
   text: "Continuous Tracing with GPU Monitoring"
 - link: "/gpu_monitoring"
-  tag: "What is GPU Monitoring?"
+  tag: "Documentation"
   text: "Learn more about what GPU Monitoring offers"
 ---
 
