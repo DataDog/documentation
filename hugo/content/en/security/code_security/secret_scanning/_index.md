@@ -52,7 +52,7 @@ History-only findings are labeled {{< ui >}}Detected in Git History{{< /ui >}} i
 
 The finding details panel shows where the secret is in the repository history:
 
-- {{< ui >}}Introduced in{{< /ui >}}: The commit that added the secret, with its author, committer, and date.
+- {{< ui >}}Introduced in{{< /ui >}}: The commit that added the secret, and the author of that commit.
 - {{< ui >}}Removed in{{< /ui >}}: The commit that removed the secret. If the secret is still present on an unmerged branch or tag, this shows {{< ui >}}Not removed{{< /ui >}}.
 
 <div class="alert alert-info">Git history is scanned once, when a repository is first scanned with hosted scanning. A secret that is still present on an unmerged branch or tag, but not on the default branch, is reported as a history-only finding. Scans that run in your CI pipelines analyze the scanned commit only.</div>
