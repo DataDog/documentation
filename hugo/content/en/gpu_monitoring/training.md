@@ -20,7 +20,7 @@ Optimizing training workloads with GPU Monitoring is in Early Access Preview. Co
 
 ## Overview
 
-Training workloads can fail often and cost hundreds of thousands of dollars. Debugging large, distributed training workloads can be time-consuming for your MLOps, platform, and ML engineering teams. The Training Optimization page in GPU Monitoring helps you troubleshoot stalled and failed workloads and maximize the overall throughput of your training runs. It provides full-stack visibility and insights across your AI stack, tying your training runs to the corresponding hardware health and network interconnectivity layers.
+Training workloads often fail, and each failure wastes expensive GPU time. Debugging large, distributed training workloads can be time-consuming for your MLOps, platform, and ML engineering teams. The Training Optimization page in GPU Monitoring helps you troubleshoot stalled and failed workloads and maximize the overall throughput of your training runs. This page ties each training run to the health of the GPU hardware and network interconnect it ran on.
 
 With the Training Optimization page, you get:
 
