@@ -37239,7 +37239,7 @@ components:
         - data
       type: object
     DueDateRuleDataCreate:
-      description: The data object for a due date rule create or update request.
+      description: The data object for a due date rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/DueDateRuleAttributesCreate"
@@ -37256,6 +37256,23 @@ components:
           $ref: "#/components/schemas/DueDateRuleAttributesResponse"
         id:
           description: The ID of the due date rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DueDateRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DueDateRuleDataUpdate:
+      description: The data object for a due date rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DueDateRuleAttributesCreate"
+        id:
+          description: The ID of the due date rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -37286,7 +37303,15 @@ components:
         - id
       type: object
     DueDateRuleReorderRequest:
-      description: The body of the due date rule reorder request.
+      description: The body of a due date rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DueDateRuleReorderData"
+      required:
+        - data
+      type: object
+    DueDateRuleReorderResponse:
+      description: The response of a due date rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/DueDateRuleReorderData"
@@ -37313,7 +37338,7 @@ components:
       description: The body of a due date rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/DueDateRuleDataCreate"
+          $ref: "#/components/schemas/DueDateRuleDataUpdate"
       required:
         - data
       type: object
@@ -74686,7 +74711,7 @@ components:
         - data
       type: object
     MuteRuleDataCreate:
-      description: The data object for a mute rule create or update request.
+      description: The data object for a mute rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/MuteRuleAttributesCreate"
@@ -74703,6 +74728,23 @@ components:
           $ref: "#/components/schemas/MuteRuleAttributesResponse"
         id:
           description: The ID of the mute rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/MuteRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MuteRuleDataUpdate:
+      description: The data object for a mute rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MuteRuleAttributesCreate"
+        id:
+          description: The ID of the mute rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -74733,7 +74775,15 @@ components:
         - id
       type: object
     MuteRuleReorderRequest:
-      description: The body of the mute rule reorder request.
+      description: The body of a mute rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/MuteRuleReorderData"
+      required:
+        - data
+      type: object
+    MuteRuleReorderResponse:
+      description: The response of a mute rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/MuteRuleReorderData"
@@ -74760,7 +74810,7 @@ components:
       description: The body of a mute rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/MuteRuleDataCreate"
+          $ref: "#/components/schemas/MuteRuleDataUpdate"
       required:
         - data
       type: object
@@ -112247,7 +112297,7 @@ components:
         - data
       type: object
     SeverityModifierRuleDataCreate:
-      description: The data object for a severity modifier rule create or update request.
+      description: The data object for a severity modifier rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
@@ -112264,6 +112314,23 @@ components:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesResponse"
         id:
           description: The ID of the severity modifier rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SeverityModifierRuleDataUpdate:
+      description: The data object for a severity modifier rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
+        id:
+          description: The ID of the severity modifier rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -112377,7 +112444,7 @@ components:
       description: The body of a severity modifier rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/SeverityModifierRuleDataCreate"
+          $ref: "#/components/schemas/SeverityModifierRuleDataUpdate"
       required:
         - data
       type: object
@@ -125484,7 +125551,7 @@ components:
         - data
       type: object
     TicketCreationRuleDataCreate:
-      description: The data object for a ticket creation rule create or update request.
+      description: The data object for a ticket creation rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
@@ -125501,6 +125568,23 @@ components:
           $ref: "#/components/schemas/TicketCreationRuleAttributesResponse"
         id:
           description: The ID of the ticket creation rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TicketCreationRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TicketCreationRuleDataUpdate:
+      description: The data object for a ticket creation rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
+        id:
+          description: The ID of the ticket creation rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -125531,7 +125615,15 @@ components:
         - id
       type: object
     TicketCreationRuleReorderRequest:
-      description: The body of the ticket creation rule reorder request.
+      description: The body of a ticket creation rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/TicketCreationRuleReorderData"
+      required:
+        - data
+      type: object
+    TicketCreationRuleReorderResponse:
+      description: The response of a ticket creation rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/TicketCreationRuleReorderData"
@@ -125558,7 +125650,7 @@ components:
       description: The body of a ticket creation rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/TicketCreationRuleDataCreate"
+          $ref: "#/components/schemas/TicketCreationRuleDataUpdate"
       required:
         - data
       type: object
@@ -209199,7 +209291,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: due_date_rules
               schema:
-                $ref: "#/components/schemas/DueDateRuleReorderRequest"
+                $ref: "#/components/schemas/DueDateRuleReorderResponse"
           description: Successfully reordered the due date rules
         "400":
           content:
@@ -209375,6 +209467,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: due_date_rules
             schema:
               $ref: "#/components/schemas/DueDateRuleUpdateRequest"
@@ -210095,7 +210188,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: mute_rules
               schema:
-                $ref: "#/components/schemas/MuteRuleReorderRequest"
+                $ref: "#/components/schemas/MuteRuleReorderResponse"
           description: Successfully reordered the mute rules
         "400":
           content:
@@ -210261,6 +210354,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: mute_rules
             schema:
               $ref: "#/components/schemas/MuteRuleUpdateRequest"
@@ -210719,6 +210813,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: severity_modifier_rules
             schema:
               $ref: "#/components/schemas/SeverityModifierRuleUpdateRequest"
@@ -210997,7 +211092,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: ticket_creation_rules
               schema:
-                $ref: "#/components/schemas/TicketCreationRuleReorderRequest"
+                $ref: "#/components/schemas/TicketCreationRuleReorderResponse"
           description: Successfully reordered the ticket creation rules
         "400":
           content:
@@ -211165,6 +211260,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: ticket_creation_rules
             schema:
               $ref: "#/components/schemas/TicketCreationRuleUpdateRequest"

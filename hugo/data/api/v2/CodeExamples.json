@@ -2336,6 +2336,13 @@
       "description": "Create a ticket creation rule returns \"Successfully created the ticket creation rule\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create an inbox rule returns \"Successfully created the inbox rule\" response"
+    }
+  ],
   "CreateCases": [
     {
       "group": "security_monitoring",
@@ -2431,6 +2438,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Reorder due date rules returns \"Successfully reordered the due date rules\" response"
+    }
+  ],
+  "ReorderSecurityFindingsAutomationInboxRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder inbox rules returns \"Successfully reordered the inbox rules\" response"
     }
   ],
   "ReorderSecurityFindingsAutomationMuteRules": [
@@ -2553,6 +2567,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a ticket creation rule returns \"Successfully updated the ticket creation rule\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationInboxRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update an inbox rule returns \"Successfully updated the inbox rule\" response"
     }
   ],
   "UpdateResourceEvaluationFilters": [

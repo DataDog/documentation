@@ -2,11 +2,9 @@
   "data": {
     "attributes": {
       "action": {
-        "max_tickets_per_day": 5,
-        "project_id": "11111111-1111-1111-1111-111111111111",
-        "target": "jira"
+        "description": "Needs triage"
       },
-      "enabled": false,
+      "enabled": true,
       "name": "Example-Security-Monitoring",
       "rule": {
         "finding_types": [
@@ -15,7 +13,6 @@
         "query": "env:staging"
       }
     },
-    "id": "00000000-0000-0000-0000-000000000000",
-    "type": "ticket_creation_rules"
+    "type": "inbox_rules"
   }
 }
