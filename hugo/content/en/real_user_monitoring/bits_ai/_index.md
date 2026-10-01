@@ -23,18 +23,18 @@ Because RUM uses Bits Investigation, every investigation you start from RUM is s
 
 You can use Bits AI in RUM in three ways:
 
-| Use case | Entry points | Bits capability |
+| Use case | Description | Bits capability |
 |---|---|---|
-| [Optimize performance][6] | Recommendation cards on the {{< ui >}}Optimization{{< /ui >}} page and in [Operations Monitoring][7] | Bits Investigation |
-| [Investigate regressions and alerts][8] | {{< ui >}}Anomaly · Investigate{{< /ui >}} on vital charts, and automatic investigations on RUM monitors | Bits Investigation |
-| [Ask questions and get tasks done][9] | {{< ui >}}Ask Bits{{< /ui >}} on a view, {{< ui >}}Analyze with Bits AI{{< /ui >}} on charts, and Bits Chat on any RUM page | Bits Chat |
+| [Optimize performance][6] | Get recommendations on potential issues affecting your application's performance, and start an investigation on any of them. | Bits Investigation |
+| [Investigate regressions and alerts][7] | Investigate anomalies on your performance metrics, or enable automatic investigations on alerting monitors. | Bits Investigation |
+| [Ask questions and get tasks done][8] | Ask questions on any RUM page, such as "Why is this view slow?" or "Which pages have the worst INP?", and let Bits take action on your behalf. | Bits Chat |
 
 ## Prerequisites
 
 - Bits AI must be enabled for your organization.
-- To start a Bits Investigation, you need the {{< ui >}}Bits Investigations Write{{< /ui >}} permission. For more information, see [Configure Bits Investigation][10].
-- To get code-level findings, set up the [Source Code Integration][11] with GitHub.
-- To let Bits attribute frontend issues to backend services, [correlate RUM with APM traces][12].
+- To start a Bits Investigation, you need the **Bits Investigations Write** permission. For more information, see [Configure Bits Investigation][9].
+- To get code-level findings, set up the [Source Code Integration][10] with GitHub.
+- To let Bits attribute frontend issues to backend services, [correlate RUM with APM traces][11].
 
 ## Further reading
 
@@ -46,9 +46,8 @@ You can use Bits AI in RUM in three ways:
 [4]: https://app.datadoghq.com/bits-ai/investigations
 [5]: /bits_ai/bits_code/
 [6]: /real_user_monitoring/bits_ai/optimize_performance/
-[7]: /real_user_monitoring/operations_monitoring/
-[8]: /real_user_monitoring/bits_ai/investigate_regressions/
-[9]: /real_user_monitoring/bits_ai/bits_chat/
-[10]: /bits_ai/bits_investigation/configure/
-[11]: /source_code/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/apm/
+[7]: /real_user_monitoring/bits_ai/investigate_regressions/
+[8]: /real_user_monitoring/bits_ai/bits_chat/
+[9]: /bits_ai/bits_investigation/configure/
+[10]: /source_code/
+[11]: /real_user_monitoring/correlate_with_other_telemetry/apm/

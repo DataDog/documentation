@@ -22,11 +22,11 @@ When a performance metric suddenly degrades, you can get to the root cause in tw
 
 ## Investigate an anomaly on a vital chart
 
-RUM runs anomaly detection on the Core Web Vitals charts of the RUM summary page for browser applications. When a vital degrades unexpectedly, RUM highlights the anomalous window in pink and displays an {{< ui >}}Anomaly · Investigate{{< /ui >}} button below the chart.
+RUM runs anomaly detection on the Core Web Vitals charts of the RUM summary page for browser applications. When a vital degrades unexpectedly, RUM highlights the anomalous window in pink and displays an **Anomaly · Investigate** button below the chart.
 
-{{< img src="real_user_monitoring/bits_ai/anomaly-investigate.png" alt="A Cumulative Layout Shift chart with an anomalous window highlighted in pink and an Anomaly · Investigate button below the chart." style="width:50%;" >}}
+{{< img src="real_user_monitoring/bits_ai/anomaly-investigate.png" alt="A First Contentful Paint chart with an anomalous window highlighted in pink and an Anomaly · Investigate button below the chart." style="width:50%;" >}}
 
-To start an investigation, click {{< ui >}}Anomaly · Investigate{{< /ui >}}. A Bits Investigation opens in a new tab with the vital, the current query and view, the chart timeframe, and the start and end of the anomaly. Bits compares the anomalous window with the surrounding periods to explain what changed, and which releases, pages, or user segments were affected.
+To start an investigation, click **Anomaly · Investigate**. A Bits Investigation opens in a new tab with the vital, the current query and view, the chart timeframe, and the start and end of the anomaly. Bits compares the anomalous window with the surrounding periods to explain what changed, and which releases, pages, or user segments were affected.
 
 **Note**: Only degradations are highlighted, such as an increase in Largest Contentful Paint or Cumulative Layout Shift. Improvements are not flagged as anomalies.
 
@@ -37,7 +37,7 @@ Bits Investigation supports [RUM monitors][1]. When you enable automatic investi
 To enable automatic investigations on a RUM monitor:
 
 1. Create or edit a [RUM monitor][2].
-2. Toggle {{< ui >}}Investigate with Bits{{< /ui >}} to {{< ui >}}Enabled{{< /ui >}}.
+2. Toggle **Investigate with Bits** to **Enabled**.
 3. Save the monitor.
 
 {{< img src="real_user_monitoring/bits_ai/monitor-investigate-with-bits.png" alt="The Investigate with Bits toggle enabled in the monitor editor, above the notification options." style="width:100%;" >}}

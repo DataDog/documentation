@@ -27,7 +27,7 @@ You can start investigations from two places:
 
 ## Optimization page
 
-The [{{< ui >}}Optimization{{< /ui >}} page][2] shows how each page of your application performs on a given vital. For each page and vital, RUM displays recommendation cards ranked by impact. Each card describes a likely cause of poor performance, such as a render-blocking script, a long task on the main thread, or a slow resource delaying Largest Contentful Paint.
+The [**Optimization** page][2] shows how each page of your application performs on a given vital. For each page and vital, RUM displays recommendation cards ranked by impact. Each card describes a likely cause of poor performance, such as a render-blocking script, a long task on the main thread, or a slow resource delaying Largest Contentful Paint.
 
 You can start a Bits Investigation from recommendation cards for the following vitals:
 
@@ -38,30 +38,32 @@ You can start a Bits Investigation from recommendation cards for the following v
 
 ### Start an investigation
 
-1. Go to the [{{< ui >}}Optimization{{< /ui >}} page][2] and select an application.
+1. Go to the [**Optimization** page][2] and select an application.
 2. Select a page and a supported vital.
-3. On a recommendation card, click {{< ui >}}Investigate{{< /ui >}}.
+3. On a recommendation card, click **Investigate**.
 
 The Bits Investigation opens in a new tab, scoped to the page, vital, and time window of the card.
 
-<!-- TODO: screenshot of the Optimization page with recommendation cards and the Investigate button -->
+{{< img src="real_user_monitoring/bits_ai/optimization-recommendation-cards.png" alt="The Optimization page for the Largest Contentful Paint of a page, showing recommendation cards ranked by impact, each with an Investigate button." style="width:100%;" >}}
 
 ### What Bits investigates
 
 Bits compares slow page loads with fast ones and reconstructs what happened in the time leading up to the vital: which resources loaded, which scripts ran, and which long tasks blocked the main thread. When the page's requests are [correlated with APM traces][3], Bits follows slow requests into your backend services. When the [Source Code Integration][4] is set up, Bits links the issue to the files and functions responsible.
 
+{{< img src="real_user_monitoring/bits_ai/optimization-bits-investigation.png" alt="A Bits Investigation started from an Optimization recommendation card, concluding that late discovery of the hero image degraded the homepage Largest Contentful Paint, with its impact, a timeline, and suggested next steps." style="width:100%;" >}}
+
 ## Operations Monitoring
 
-[Operations Monitoring][5] tracks the success rate and latency of the user journeys in your application, such as signing up, searching, or checking out. When you open an operation, RUM displays investigation cards ranked by severity. Each card covers one type of problem.
+[Operations Monitoring][5] tracks the success rate and latency of the user journeys in your application, such as signing up, searching, or checking out. When you open an operation, RUM displays recommendation cards ranked by severity. Each card covers one type of problem.
 
 ### Start an investigation
 
 1. Go to [Operations Monitoring][5] and select an operation.
-2. On an investigation card, click {{< ui >}}Investigate{{< /ui >}}. From the operations table, click {{< ui >}}Investigate with Bits{{< /ui >}}.
+2. On a recommendation card, click **Investigate**. From the operations table, click **Investigate with Bits**.
 
 The Bits Investigation opens in a new tab, scoped to the operation, the type of problem, and the time window of the card.
 
-<!-- TODO: screenshot of an operation page with investigation cards ranked by severity -->
+{{< img src="real_user_monitoring/bits_ai/operations-recommendation-cards.png" alt="The page of an operation in Operations Monitoring, showing recommendation cards for errors and timeouts ranked by severity, each with an Investigate button." style="width:100%;" >}}
 
 ### What Bits investigates
 
@@ -74,6 +76,8 @@ Bits adapts its analysis to the type of problem on the card:
 | Crashes | Stack traces from the affected sessions, and whether the crash is concentrated in a specific application version, device, or operating system. |
 | Slowness | A comparison of slow and fast runs to determine whether time is spent in the backend, the frontend, or resource loading, followed down to the backend trace or long task responsible. |
 | Timeouts | Whether the timeouts come from an instrumentation gap, such as an operation definition that no longer matches a renamed route or regrouped path, before reporting a performance problem. |
+
+{{< img src="real_user_monitoring/bits_ai/operations-bits-investigation.png" alt="A Bits Investigation started from an Operations Monitoring recommendation card, concluding that an exhausted third-party payment API rate limit broke checkout, with its impact, a timeline, and suggested next steps." style="width:100%;" >}}
 
 ## After the investigation
 

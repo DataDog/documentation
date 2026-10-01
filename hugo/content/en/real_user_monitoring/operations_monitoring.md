@@ -391,7 +391,7 @@ Those metrics are included in the price of RUM Measure and available to all RUM 
 
 ## Investigate root causes with Bits AI
 
-When you open an operation, RUM displays investigation cards ranked by severity, one for each type of problem affecting the operation: errors, abandonment, timeouts, crashes, or slowness. Click {{< ui >}}Investigate{{< /ui >}} on a card to start a Bits Investigation that analyzes the problem down to the code. For more information, see [Optimize Performance with Bits AI][8].
+When you open an operation, RUM displays recommendation cards ranked by severity, one for each type of problem affecting the operation: errors, abandonment, timeouts, crashes, or slowness. Click **Investigate** on a card to start a Bits Investigation that analyzes the problem down to the code. For more information, see [Optimize Performance with Bits AI][8].
 
 ## Configure retention filters
 

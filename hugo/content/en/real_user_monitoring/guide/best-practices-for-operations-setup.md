@@ -74,7 +74,7 @@ Prioritize the operation that represents the final step of a journey because its
 
 Use the following tools to investigate unexpected operation outcomes or verify that an operation is instrumented correctly:
 
-- Start a [Bits Investigation][5] from an investigation card on the operation details page to analyze errors, abandonment, timeouts, crashes, and slowness.
+- Start a [Bits Investigation][5] from a recommendation card on the operation details page to analyze errors, abandonment, timeouts, crashes, and slowness.
 - Review example sessions on the operation details page for the outcome you want to investigate.
 - Query operation events in the [RUM Explorer][6] to inspect their attributes and surrounding session context.
 

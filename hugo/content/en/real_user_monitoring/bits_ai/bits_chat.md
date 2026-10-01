@@ -26,7 +26,7 @@ further_reading:
 ## Find out why a view is slow
 
 1. Open a view in the [RUM Explorer][2] or in [Session Replay][3].
-2. In the performance section of the view side panel, click {{< ui >}}Ask Bits{{< /ui >}}.
+2. In the performance section of the view side panel, click **Ask Bits**.
 
 Bits Chat opens and investigates that specific page load. It reconstructs the view's load timeline from its [resources][4], [long tasks][5], [errors][6], and [user actions][7], and examines four sources of root causes:
 
@@ -39,11 +39,13 @@ Bits Chat opens and investigates that specific page load. It reconstructs the vi
 
 Bits returns ranked findings with links to the underlying events. You can then ask follow-up questions, such as "Is this happening to other users on this page?" or "Which backend endpoint is the slowest here?"
 
-<!-- TODO: screenshot of the view side panel with Ask Bits open, showing ranked findings -->
+{{< img src="real_user_monitoring/bits_ai/ask-bits-view.png" alt="The view side panel with Bits Chat open after clicking Ask Bits, showing ranked findings for a slow page load." style="width:100%;" >}}
 
 ## Analyze a chart
 
-On the RUM summary page, click {{< ui >}}Analyze with Bits AI{{< /ui >}} on a vital chart or on the error rate chart. Bits Chat summarizes how the metric is trending and what is driving it.
+On the RUM summary page, click **Analyze with Bits AI** on a vital chart or on the error rate chart. Bits Chat summarizes how the metric is trending and what is driving it.
+
+{{< img src="real_user_monitoring/bits_ai/analyze-with-bits-chart.png" alt="A RUM loading time chart open in inspect mode, with Bits Chat summarizing how the metric trended over the past month." style="width:100%;" >}}
 
 ## Ask questions and complete tasks
 
