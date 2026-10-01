@@ -95,7 +95,7 @@ pod_name:<NEW_GPU_POD> kube_namespace:<GPU_WORKLOAD_NAMESPACE>
 
 ## Connect training runs to GPU hardware
 
-Your Kubernetes workloads may have labels or annotations that identify a training run or a group of runs. You can add those identifiers to GPU metrics and spans. This ties training run data directly to the GPU hardware it ran on.
+If your Kubernetes workloads use labels or annotations to identify a training run or a group of runs, you can add those identifiers as tags on GPU metrics and spans. These tags tie training run data directly to the GPU hardware it ran on.
 
 The following examples use the `company.name/run-id` and `company.name/group-id` pod annotations. Replace them with the annotations your workloads use.
 
@@ -110,7 +110,7 @@ spec:
         company.name/group-id: training_group_id
 ```
 
-For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block from [Step 1](#1-configure-gpu-tracing), reading the same annotations:
+For traces, add `DD_TRAINING_RUN_ID` and `DD_TRAINING_GROUP_ID` to the `ddTraceConfigs` block in [Step 1: Configure GPU tracing](#1-configure-gpu-tracing). Set each variable from the same annotations:
 
 ```yaml
 ddTraceConfigs:
@@ -128,7 +128,7 @@ ddTraceConfigs:
         fieldPath: metadata.annotations['company.name/group-id']
 ```
 
-To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics and `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
+To use pod labels instead of annotations, set `kubernetesResourcesLabelsAsTags` for metrics, and set `fieldPath` to `metadata.labels['<LABEL_KEY>']` for traces.
 
 After you apply the configuration, GPU metrics are tagged with `training_run_id` and `training_group_id`, and spans are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
