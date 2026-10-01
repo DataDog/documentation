@@ -50,25 +50,11 @@ Each organization can have up to 20 collections with polling enabled. TAXII coll
 
 ## Add a TAXII server
 
-1. In Datadog, go to {{< ui >}}Integrations{{< /ui >}} and open the {{< ui >}}STIX/TAXII{{< /ui >}} tile.
-1. On the {{< ui >}}Configure{{< /ui >}} tab, click {{< ui >}}New{{< /ui >}}.
-1. Enter a {{< ui >}}Name{{< /ui >}} for the server.
-1. Enter the {{< ui >}}TAXII API root URL{{< /ui >}}, for example `https://taxii.example.com/api/taxii2/`. The URL must use HTTPS.
-1. Under {{< ui >}}Authentication{{< /ui >}}, select {{< ui >}}None{{< /ui >}} or {{< ui >}}Basic authentication{{< /ui >}}. For basic authentication, enter the {{< ui >}}Username or API token{{< /ui >}} and the {{< ui >}}Password{{< /ui >}} from your provider. If your provider issues an API token, enter it in {{< ui >}}Username or API token{{< /ui >}}.
-1. Click {{< ui >}}Save{{< /ui >}}.
-
-You cannot change a server's name, API root URL, or authentication method after you save it. Datadog does not display stored credentials. The server shows {{< ui >}}Pending{{< /ui >}} until the first poll of one of its collections.
-
-Client certificates (mTLS), bearer tokens, and OAuth are not supported.
+<!-- TODO: confirm UI with FE -->
 
 ## Add a collection
 
-1. Open the TAXII server and click {{< ui >}}Add collection{{< /ui >}}.
-1. Enter the {{< ui >}}Collection UUID{{< /ui >}} and a {{< ui >}}Display name{{< /ui >}}.
-1. Leave {{< ui >}}Enable scheduled polling{{< /ui >}} selected to start ingesting immediately.
-1. Select a {{< ui >}}Polling interval{{< /ui >}}: 30 minutes, 1 hour (default), 6 hours, or 24 hours.
-1. Set the {{< ui >}}Initial lookback (days){{< /ui >}}. The default is 30 days. The lookback is based on when objects were added to the collection, and you cannot change it later.
-1. Click {{< ui >}}Save{{< /ui >}}.
+<!-- TODO: confirm UI with FE -->
 
 ## Collection status
 
@@ -86,14 +72,14 @@ A server is {{< ui >}}Healthy{{< /ui >}} when at least one of its collections is
 
 ## Disable or enable polling
 
-Use the toggle in the {{< ui >}}Poll{{< /ui >}} column. Disabling stops polling and removes the collection's indicators from Cloud SIEM enrichment, but keeps the indicators and the polling position. Enabling resumes from where polling stopped and restores enrichment. Enabled collections count toward the limit of 20.
+<!-- TODO: confirm UI with FE --> 
 
 ## Replace credentials
 
-For servers that use basic authentication, open the server, click {{< ui >}}Replace credentials{{< /ui >}}, enter the complete new username and password, and click {{< ui >}}Save{{< /ui >}}. The new credentials apply from the next poll. If they are invalid, the server's collections show {{< ui >}}Error{{< /ui >}}.
+<!-- TODO: confirm UI with FE --> 
 
 ## Delete a collection or server
-
+<!-- TODO: confirm UI with FE -->
 - {{< ui >}}Delete collection{{< /ui >}} stops polling, removes the collection's indicators, and stops enrichment. The server's other collections are not affected.
 - {{< ui >}}Delete TAXII server{{< /ui >}} deletes all of the server's collections and their indicators, then the server and its credentials.
 
