@@ -11253,6 +11253,110 @@ menu:
       url: /api/latest/cloud-authentication/
       identifier: cloud-authentication
       generated: true
+    - name: Get a GitHub cloud authentication persona mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-persona-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 6
+    - name: Delete a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 8
+    - name: Create a GitHub cloud auth persona mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-persona-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-persona-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthPersonaMapping
+        unstable:
+          - v2
+        order: 7
+    - name: List GitHub cloud authentication persona mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-persona-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-persona-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthPersonaMappings
+        unstable:
+          - v2
+        order: 5
+    - name: Get a GitHub cloud authentication intake mapping
+      url: /api/latest/cloud-authentication/get-a-github-cloud-authentication-intake-mapping/
+      identifier: cloud-authentication-get-a-github-cloud-authentication-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/delete-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-delete-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 12
+    - name: Create a GitHub cloud auth intake mapping
+      url: /api/latest/cloud-authentication/create-a-github-cloud-auth-intake-mapping/
+      identifier: cloud-authentication-create-a-github-cloud-auth-intake-mapping
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateGitHubCloudAuthIntakeMapping
+        unstable:
+          - v2
+        order: 11
+    - name: List GitHub cloud authentication intake mappings
+      url: /api/latest/cloud-authentication/list-github-cloud-authentication-intake-mappings/
+      identifier: cloud-authentication-list-github-cloud-authentication-intake-mappings
+      parent: cloud-authentication
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGitHubCloudAuthIntakeMappings
+        unstable:
+          - v2
+        order: 9
     - name: Get an AWS cloud authentication persona mapping
       url: /api/latest/cloud-authentication/get-an-aws-cloud-authentication-persona-mapping/
       identifier: cloud-authentication-get-an-aws-cloud-authentication-persona-mapping
