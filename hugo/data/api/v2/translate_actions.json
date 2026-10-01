@@ -5827,7 +5827,7 @@
     "description": "Reorder the list of due date rules for the current organization.",
     "summary": "Reorder due date rules",
     "request_description": "",
-    "request_schema_description": "The body of the due date rule reorder request."
+    "request_schema_description": "The body of a due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
     "description": "Delete a due date rule by ID.",
@@ -5887,7 +5887,7 @@
     "description": "Reorder the list of mute rules for the current organization.",
     "summary": "Reorder mute rules",
     "request_description": "",
-    "request_schema_description": "The body of the mute rule reorder request."
+    "request_schema_description": "The body of a mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
     "description": "Delete a mute rule by ID.",
@@ -5947,7 +5947,7 @@
     "description": "Reorder the list of ticket creation rules for the current organization.",
     "summary": "Reorder ticket creation rules",
     "request_description": "",
-    "request_schema_description": "The body of the ticket creation rule reorder request."
+    "request_schema_description": "The body of a ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
     "description": "Delete a ticket creation rule by ID.",
