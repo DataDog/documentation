@@ -65575,12 +65575,20 @@ components:
         - content
       type: object
     LLMObsPromptChatTemplate:
-      description: A chat prompt template.
+      description: >-
+        A chat prompt template containing messages and optional named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       items:
-        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptChatTemplateItem:
+      description: A chat message or a named message placeholder in a prompt template.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptMessagePlaceholder"
     LLMObsPromptConfig:
       additionalProperties: {}
       description: >-
@@ -65733,6 +65741,33 @@ components:
       required:
         - include
       type: object
+    LLMObsPromptMessagePlaceholder:
+      additionalProperties: false
+      description: >-
+        A named placeholder that inserts a list of messages when a compatible SDK formats the prompt.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
+      properties:
+        name:
+          description: Name used to supply the message list when formatting the prompt.
+          example: "history"
+          minLength: 1
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptMessagePlaceholderType"
+      required:
+        - type
+        - name
+      type: object
+    LLMObsPromptMessagePlaceholderType:
+      description: Type of chat-template item.
+      enum:
+        - placeholder
+      example: "placeholder"
+      type: string
+      x-enum-varnames:
+        - PLACEHOLDER
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65788,9 +65823,11 @@ components:
       properties:
         chat_template:
           description: >-
-            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+            Chat template for this prompt version, as a list of messages and named message placeholders. Omitted for text templates.
+
+            **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
           items:
-            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+            $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
           type: array
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
@@ -65825,6 +65862,8 @@ components:
             chat_template:
               - content: "You are a helpful customer support assistant for {{company_name}}."
                 role: "system"
+              - name: "history"
+                type: "placeholder"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
             config:
@@ -65843,11 +65882,13 @@ components:
       type: object
     LLMObsPromptTemplate:
       description: >-
-        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+        A text template, a list of chat messages and named message placeholders, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
 
         **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
 
         Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
@@ -96866,6 +96907,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -96997,6 +97044,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -200958,18 +201011,9 @@ paths:
       description: |-
         Create a new role for your organization.
 
-        The following read permissions are automatically added to every new role, even if they are not included in the request:
-
-        - Dashboards Read
-        - Notebooks Read
-        - Monitors Read
-        - APM Read
-        - Vulnerability Management Read
-        - RUM Apps Read
-        - Incidents Read
-        - SLOs Read
-        - CI Visibility Read
-        - CD Visibility Read
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: CreateRole
       requestBody:
         content:
@@ -201138,6 +201182,10 @@ paths:
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
+
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
