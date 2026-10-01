@@ -31,8 +31,6 @@ Datadog Secret Scanning is powered by [Sensitive Data Scanner (SDS)][3] and incl
 
 ## How it works
 
-
-
 Secret Scanning integrates directly with your repositories to continuously detect leaked secrets in your code. Built on Datadog's static analyzer, it scans every commit across all branches of each configured repository. Findings are surfaced with repository, branch, and file path context so your team can identify, prioritize, and remediate exposed secrets at the source.
 
 Each scan analyzes the full contents of every file in scope at the scanned commit, not only the lines or files that the commit changed. When Datadog scans a repository for the first time with hosted scanning, it also scans the full Git history of the repository. See [Detect secrets in Git history](#detect-secrets-in-git-history).
