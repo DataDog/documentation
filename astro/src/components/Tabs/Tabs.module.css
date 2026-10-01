@@ -71,8 +71,6 @@
   border-bottom-color: var(--color-bg);
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
-  margin-bottom: calc(-1 * var(--border-width));
-  padding-bottom: calc(var(--space-sm) + var(--border-width));
   z-index: 3;
   box-shadow: var(--shadow-brand);
   transition: none;

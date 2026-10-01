@@ -27,6 +27,21 @@ test.describe("Tabs component", () => {
     await expect(panel).toContainText("Go");
   });
 
+  test("default tabs nav does not overflow vertically", async ({ page }) => {
+    const defaultNav = page
+      .locator(".tabs:not(.tabs--pills)")
+      .first()
+      .locator('[role="tablist"][data-hydrated="true"]');
+    await expect(defaultNav).toBeVisible();
+    // A vertical overflow of even 1px makes the browser draw a scrollbar,
+    // because `overflow-x: auto` also turns `overflow-y` into `auto`.
+    const { scrollHeight, clientHeight } = await defaultNav.evaluate((nav) => ({
+      scrollHeight: nav.scrollHeight,
+      clientHeight: nav.clientHeight,
+    }));
+    expect(scrollHeight).toBeLessThanOrEqual(clientHeight);
+  });
+
   test("default tabs variant matches screenshot", async ({ page }) => {
     const defaultTabs = page.locator(".tabs:not(.tabs--pills)").first();
     await expect(defaultTabs).toHaveScreenshot("tabs-default.png");
