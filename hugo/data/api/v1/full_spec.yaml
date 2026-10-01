@@ -6250,6 +6250,7 @@ components:
         - security_runtime_stream
         - security_signals_stream
         - incidents_stream
+        - case_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6270,6 +6271,7 @@ components:
         - SECURITY_RUNTIME_STREAM
         - SECURITY_SIGNALS_STREAM
         - INCIDENTS_STREAM
+        - CASE_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
