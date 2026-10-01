@@ -27,8 +27,6 @@ After you select the Splunk HEC destination in the pipeline UI:
 	- Only select {{< ui >}}From Source{{< /ui >}} if you are using a [Splunk HEC source][8] and have enabled {{< ui >}}Store HEC token{{< /ui >}} on the source. Otherwise, an error occurs and you cannot proceed to install the Worker. This option forwards the token received by Observability Pipelines onto the Splunk HEC destination.
 	- If you use the default {{< ui >}}Custom{{< /ui >}} token strategy, enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
-1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
-1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -37,6 +35,12 @@ After you select the Splunk HEC destination in the pipeline UI:
 #### Splunk index
 
 Enter the name of the Splunk index you want your data in. This has to be an allowed index for your HEC. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
+
+#### Endpoint target
+
+In the {{< ui >}}Endpoint Target{{< /ui >}} dropdown menu, select the Splunk HEC endpoint to send events to:
+- {{< ui >}}Event{{< /ui >}} (default): Sends events to Splunk's `/event` HEC endpoint, which supports auto-extracted timestamps and indexed fields.
+- {{< ui >}}Raw{{< /ui >}}: Sends events to Splunk's `/raw` HEC endpoint.
 
 #### Auto-extract timestamp
 
