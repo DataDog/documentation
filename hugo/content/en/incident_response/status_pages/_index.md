@@ -312,7 +312,7 @@ Two settings control email subscriptions:
 
 To enable email subscriptions:
 
-1. From your status page, click **Settings** > **Subscriptions**.
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Enable **Notify subscribers**.
 3. (Optional) Enable **Show subscribe option to visitors** to let visitors sign up from the published page. **Notify subscribers** must be enabled first.
 4. (Optional) Under **Email Header Image**, upload an image to display at the top of notification emails.
@@ -323,7 +323,7 @@ If **Show subscribe option to visitors** is disabled, visitors can't subscribe, 
 
 Admins can add subscribers one at a time or import a list. You can add or import subscribers even if your status page isn't published yet or **Notify subscribers** is disabled, so you can set up your subscriber list before launch.
 
-1. From your status page, click **Settings** > **Subscriptions**.
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Under **Email Subscribers**, choose one of the following:
    - Click **Add Subscriber** and enter an email address.
    - Click **Import Subscribers** and upload a `.txt` file with one email address per line. You can import up to 1,000 subscribers at a time.
@@ -341,10 +341,10 @@ By default, status page subscription emails are sent from a Datadog email addres
 
 <div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
-1. On your status page, go to **Settings** > **Subscriptions**.
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Under **Email Sender Domain**, click **Organization Settings**.
 3. In Organization Settings, [add and validate an SMTP server][3].
-4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+4. Return to your status page **Settings**, select **Email** under **Subscriptions**, and select your SMTP server as the email sender domain.
 
 <div class="alert alert-info">
 If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
@@ -356,7 +356,7 @@ Visitors can subscribe to status page updates in Slack through the **Datadog Sta
 
 ### Enable Slack subscriptions
 
-1. From your status page, click **Settings**.
+1. From your status page, click **Settings**, then select **Slack** under **Subscriptions**.
 2. Enable **Slack subscriptions**.
 3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
 
@@ -389,8 +389,7 @@ Status page owners can review subscribers in the status page settings, which lis
 
 To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
-1. From your status page, click **Settings**.
-1. Select **Custom Domain**.
+1. From your status page, click **Settings**, then select **Custom Domain** under **General**.
 1. Follow the instructions to enter your domain and add DNS records.
 1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.
 
