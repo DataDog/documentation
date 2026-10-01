@@ -66,6 +66,8 @@ If using an existing Cost and Usage Report 2.0 and bucket, select your report fr
 Otherwise, enter the following details for your Cost and Usage Report:
 
 * {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
+  * {{< ui >}}Capacity reservation data{{< /ui >}}: Include this column in your Cost and Usage Report to gain visibility into reserved instances and Savings Plans.
+  * {{< ui >}}IAM principal data{{< /ui >}}: Include this column in your Cost and Usage Report to attribute costs by user and role for Amazon Bedrock.
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
@@ -104,6 +106,8 @@ If using an existing Cost and Usage Report 2.0 and bucket, select your report fr
 Otherwise, enter the following details for your Cost and Usage Report:
 
 * {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
+  * {{< ui >}}Capacity reservation data{{< /ui >}}: Include this column in your Cost and Usage Report to gain visibility into reserved instances and Savings Plans.
+  * {{< ui >}}IAM principal data{{< /ui >}}: Include this column in your Cost and Usage Report to attribute costs by user and role for Amazon Bedrock.
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
 * {{< ui >}}Export Path Prefix{{< /ui >}}: The S3 path prefix where report files are stored.
