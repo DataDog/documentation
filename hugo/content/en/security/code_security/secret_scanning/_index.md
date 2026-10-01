@@ -35,7 +35,11 @@ Secret Scanning integrates directly with your repositories to continuously detec
 
 Each scan analyzes the full contents of every file in scope at the scanned commit, not only the lines or files that the commit changed. Diff-aware scanning, which is available for [Static Code Analysis][18], is not supported for Secret Scanning.
 
-When Datadog scans a repository for the first time with hosted scanning, it also scans the full Git history of the repository. See [Detect secrets in Git history](#detect-secrets-in-git-history).
+Secret Scanning integrates directly with your repositories to continuously detect leaked secrets in your code. Built on Datadog's static analyzer, it scans every commit across all branches of each configured repository. Findings are surfaced with repository, branch, and file path context so your team can identify, prioritize, and remediate exposed secrets at the source.
+
+Each scan analyzes the full contents of every file in scope at the scanned commit, not only the lines or files that the commit changed. When Datadog scans a repository for the first time with hosted scanning, it also scans the full Git history of the repository. See [Detect secrets in Git history](#detect-secrets-in-git-history).
+
+Diff-aware scanning, which is available for [Static Code Analysis][18], is not supported for Secret Scanning.
 
 ## Key capabilities
 
@@ -55,7 +59,7 @@ The finding details panel shows where the secret is in the repository history:
 - {{< ui >}}Introduced in{{< /ui >}}: The commit that added the secret, and the author of that commit.
 - {{< ui >}}Removed in{{< /ui >}}: The commit that removed the secret. If the secret is still present on an unmerged branch or tag, this shows {{< ui >}}Not removed{{< /ui >}}.
 
-<div class="alert alert-info">Git history is scanned once, when a repository is first scanned with hosted scanning. A secret that is still present on an unmerged branch or tag, but not on the default branch, is reported as a history-only finding. Scans that run in your CI pipelines analyze the scanned commit only.</div>
+<div class="alert alert-info">Git history is scanned once, when a repository is first scanned with hosted scanning. A secret that is still present on an unmerged branch or tag, but not on the default branch, is reported as a history-only finding. CI scans analyze only the scanned commit.</div>
 
 <div class="alert alert-warning">History-only findings are not closed automatically by later scans, and rewriting Git history does not close them. Rotate or revoke the exposed credential, then <a href="#mute-findings">mute the finding</a>.</div>
 

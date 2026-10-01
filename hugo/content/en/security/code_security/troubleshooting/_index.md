@@ -324,7 +324,7 @@ If you're running a Flask application, ensure that you are calling the `ddtrace_
 
 ### A Git history finding is still open after I removed the secret
 
-History-only findings are not closed by later scans, because those scans analyze only the latest commit. Rewriting Git history does not close them either. Rotate or revoke the credential with its provider, then [mute the finding][31].
+After the initial Git history scan, scans analyze only the latest commit and do not close history-only findings. Rewriting Git history does not close these findings either. Rotate or revoke the exposed credential with its provider, then [mute the finding][31].
 
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
