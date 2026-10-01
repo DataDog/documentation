@@ -93,6 +93,11 @@ export function TabsNav({
 
     // Use pills if tabs won't fit (skipped if variant is explicitly set)
     const checkOverflow = () => {
+      // Measure in the tabs layout, not the current one: pill buttons are
+      // narrower, so measuring with pills applied reports a fit, switches to
+      // tabs, and the next resize switches back. This all runs before the
+      // browser paints, so the reader never sees the layout used to measure.
+      removeStyle(tabsEl.classList, "tabs--pills");
       addStyle(thisElement.classList, "tabs__nav--measuring");
       const overflows = thisElement.scrollWidth > thisElement.clientWidth;
       removeStyle(thisElement.classList, "tabs__nav--measuring");

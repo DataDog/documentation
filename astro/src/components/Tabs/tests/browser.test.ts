@@ -170,3 +170,28 @@ test.describe("Tabs component — scrolling", () => {
     });
   }
 });
+
+test.describe("Tabs component — overflow on resize", () => {
+  test("the many-tabs group never scrolls sideways after repeated resizes", async ({
+    page,
+  }) => {
+    // A browser zoom also fires `resize`. Each resize used to flip the group
+    // between pills and tabs, because it was measured in pills styling.
+    await page.setViewportSize({ width: 2000, height: 900 });
+    await page.goto("/dd_e2e/components/tabs");
+    const manyTabs = page
+      .locator(".tabs")
+      .filter({ has: page.locator('[role="tab"][data-sync-key="scala"]') });
+    const nav = manyTabs.locator('[role="tablist"][data-hydrated="true"]');
+    await expect(nav).toBeVisible();
+
+    for (const width of [1700, 1600, 1500, 1440]) {
+      await page.setViewportSize({ width, height: 900 });
+      await expect
+        .poll(() =>
+          nav.evaluate((element) => element.scrollWidth <= element.clientWidth),
+        )
+        .toBe(true);
+    }
+  });
+});
