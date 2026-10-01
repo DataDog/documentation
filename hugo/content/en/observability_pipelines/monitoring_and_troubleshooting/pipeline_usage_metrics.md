@@ -50,7 +50,6 @@ All metrics are tagged with the following:
 
 **Notes**:
 - Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` tag whose value starts with an underscore (`_`). To exclude these metrics from your queries, use `!component_id:_*`.
-- To find a component's ID, see [Find the component ID][7].
 - Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
 ## Estimated usage metric
@@ -143,7 +142,7 @@ Worker reloads
 
 These metrics are available for sources, processors, and destinations.
 
-- Use the `component_id` tag to filter or group by individual components.
+- Use the `component_id` tag to filter or group by individual components. See [Find the component ID][7] for instructions.
 - Use the `component_type` tag to filter or group by the type of source, processor, or destination, such as `quota` for the Quota processor.
 - Use the `component_kind` tag to filter or group by `source`, `transform` (processor) or `sink` (destination).
 
