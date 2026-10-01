@@ -295,14 +295,10 @@ These metrics are not collected otherwise, and they are never collected when Age
 | dogstatsd.udp_packets                       | Count of DogStatsD UDP packets, tagged by status (ok or error)                                                         |
 | dogstatsd.uds_packets                       | Count of DogStatsD UDS packets, tagged by transport and status (ok or error)                                           |
 | dogstatsd.uds_origin_detection_error        | Count of DogStatsD UDS origin detection errors, tagged by transport                                                    |
-| **Checks**                                  |                                                                                                                        |
+| **Inputs**                                  |                                                                                                                        |
 | checks.warnings                             | Count of warnings raised by checks, per check                                                                          |
 | checks.metrics_samples                      | Count of metric samples submitted by checks, per check                                                                 |
-| **Tagging**                                 |                                                                                                                        |
-| workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta, tagged by kind and source                                                   |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors, tagged by collector                                                                |
-| tagger.stored_entities                      | Number of entities stored in the Tagger, tagged by source and entity type                                              |
-| tagger.client_stream_errors                 | Number of errors received by Agent processes while streaming tags from the core Agent                                  |
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
