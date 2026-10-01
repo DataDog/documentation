@@ -195,3 +195,40 @@ test.describe("Tabs component — overflow on resize", () => {
     }
   });
 });
+
+test.describe("Tabs component — click styling", () => {
+  test("a clicked tab shows the active colors at once, with no fade", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/tabs");
+    const group = page.locator(".tabs:not(.tabs--pills)").first();
+    await expect(
+      group.locator('[role="tablist"][data-hydrated="true"]'),
+    ).toBeVisible();
+    const button = group.locator('[role="tab"]').nth(2);
+    const brandColor = await page.evaluate(() =>
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--color-brand")
+        .trim(),
+    );
+
+    // A click hovers and presses in one motion, like a fast real click.
+    await button.click();
+
+    const colorNextFrame = await button.evaluate(
+      (element) =>
+        new Promise<string>((resolve) =>
+          requestAnimationFrame(() => resolve(getComputedStyle(element).color)),
+        ),
+    );
+    const expected = await page.evaluate((hex) => {
+      const probe = document.createElement("span");
+      probe.style.color = hex;
+      document.body.appendChild(probe);
+      const rgb = getComputedStyle(probe).color;
+      probe.remove();
+      return rgb;
+    }, brandColor);
+    expect(colorNextFrame).toBe(expected);
+  });
+});

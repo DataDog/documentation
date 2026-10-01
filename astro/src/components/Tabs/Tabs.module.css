@@ -92,9 +92,13 @@
   border-radius: var(--border-width-highlight) var(--border-width-highlight) 0 0;
 }
 
+/* Same specificity as `.tabs__button:hover` and later in the file, so this
+   wins while the pointer is over the button. Without it, the hover fade also
+   fades in the active colors, passing through a gray-blue on a fast click. */
 .tabs__button--active:hover {
   color: var(--color-brand);
   background: var(--color-bg);
+  transition: none;
 }
 
 /* ── Panel (bordered content area) ──
