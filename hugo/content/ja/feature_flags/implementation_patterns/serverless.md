@@ -3,10 +3,10 @@ description: Datadog Agent の有無にかかわらず、サーバーレス環�
 further_reading:
 - link: /feature_flags/server/
   tag: ドキュメント
-  text: サーバーサイド Feature Flags
+  text: サーバーサイドの Feature Flags
 - link: /feature_flags/concepts/configuration_sources/
-  tag: 概念
-  text: サーバー SDK 設定ソース
+  tag: コンセプト
+  text: サーバー SDK 構成ソース
 - link: /remote_configuration/
   tag: ドキュメント
   text: Remote Configuration
@@ -15,33 +15,32 @@ further_reading:
   text: Serverless Monitoring
 title: サーバーレス環境
 ---
-## 概要{#overview}
+## 概要 {#overview}
 
-Datadog Feature Flags の Java、Node.js、および Python SDK は、Datadog が管理する CDN から直接フラグ構成を受信できます。この _Agentless_ 構成ソースは、フラグ構成に Datadog Agent を必要としないため、オンボーディングを簡素化します。また、Datadog Agent に接続できないサーバーレスアプリケーションもサポートします。
+Datadog Feature Flags Java、Node.js、および Python SDK は、Datadog 管理の CDN から直接フラグ構成を受信できます。この_エージェントレス_構成ソースはフラグ構成に Datadog Agent を必要としないため、オンボーディングが簡素化されます。また、Datadog Agent に接続できないサーバーレスアプリケーションにも対応しています。
 
-構成が読み込まれた後、フラグの評価はアプリケーション内でローカルに行われます。SDK は、評価のたびにネットワークリクエストを行いません。
+構成が読み込まれた後、フラグ評価はアプリケーション内でローカルに行われます。SDK は、評価ごとにネットワークリクエストを行いません。
 
-Agentless 構成配信は、以下で利用できます。
+次のテーブルは、各 SDK バージョンで利用可能な Feature Flags 機能を示しています。
 
-| SDK | 最小バージョン |
-|---|---|
-| Java `dd-openfeature` および `dd-java-agent` | 1.65.0 |
-| Node.js `dd-trace` v5 | 5.116.0 |
-| Node.js `dd-trace` v6 | 6.5.0 |
-| Python `ddtrace` | 4.14.0 |
+| SDK | 最小バージョン | Agentless 構成とローカル評価 | 実験エクスポージャーイベント | Event Platform Proxy (EVP) フラグ評価イベント | イベント配信 |
+|---|---|---|---|---|---|
+| Java `dd-openfeature` および `dd-java-agent` | 1.66.0 | サポート対象 | サポート対象 | サポート対象 | 互換性のあるローカルテレメトリリレーを優先し、利用できない場合は直接フォールバックを使用する |
+| Node.js `dd-trace` | 6.12.0 | サポート対象 | サポート対象 | サポート対象外 | 互換性のあるローカルテレメトリリレーを優先し、利用できない場合は直接フォールバックを使用する |
+| Python `ddtrace` | 4.14.0 | サポート対象 | サポート対象 | サポート対象 | 互換性のあるローカルテレメトリリレー |
 
-Java CDN 配信には `dd-openfeature` と `dd-java-agent` が必要です。Java ランタイムは、`dd-java-agent` を `-javaagent` JVM オプションで読み込める必要があります。このオプションは、Java コマンドまたは `JAVA_TOOL_OPTIONS` を通じて渡すことができます。
+Java CDN 配信には `dd-openfeature` および `dd-java-agent` が必要です。Java ランタイムは、`-javaagent` JVM オプションを使用して `dd-java-agent` を読み込むことをサポートする必要があります。このオプションは、Java コマンドで、または `JAVA_TOOL_OPTIONS` を通じて渡すことができます。
 
-その他のサーバー SDK および記載されているバージョンより前のバージョンでは、フラグ配信に Agent Remote Configuration が必要です。
+記載されているバージョンは、テーブルに表示されている機能を提供します。その他のサーバー SDK は、フラグ配信に Agent Remote Configuration を使用します。
 
-<div class="alert alert-warning">初期の Node.js Agentless リリースでは、構成を読み込み、ローカルでフラグを評価します。これらは評価メトリクスや露出イベントをエクスポートしません。Java および Python の Agentless 配信では、構成ソースのみが変更されます。Java および Python は、サポート対象の Datadog Agent または Serverless テレメトリパスがない場合、これらのシグナルをエクスポートしません。</div>
+Agentless 配信では、フラグ構成ソースのみが変更されます。Feature Flags イベントは、互換性のあるローカルテレメトリリレーまたはサポートされている直接パスへの個別コネクションを使用します。
 
-## Agentless アーキテクチャ {#agentless-architecture}
+## エージェントレスアーキテクチャ {#agentless-architecture}
 
-サーバーレスランタイムが Datadog へのアウトバウンド HTTPS リクエストを行える場合は、Agentless 配信を使用します。Java の場合、ランタイムで `-javaagent` JVM オプションも設定できるようにする必要があります。
+サーバーレスランタイムが Datadog へのアウトバウンド HTTPS リクエストを行える場合は、エージェントレス配信を使用してください。Java の場合、ランタイムで `-javaagent` JVM オプションも設定できるようにする必要があります。
 
-1. [サポート対象の SDK バージョン](#overview)を使用します。
-2. Java の場合は、`-javaagent` または `JAVA_TOOL_OPTIONS` を使用して `dd-java-agent` を読み込みます。例については、[Cloud Run Functions][7] または [Cloud Run コンテナ][8]の Java セットアップを参照してください。
+1. [サポートされている SDK バージョン](#overview)を使用します。
+2. Java の場合、`dd-java-agent` を `-javaagent` または `JAVA_TOOL_OPTIONS` で読み込みます。例については、[Cloud Run Functions][7] または [Cloud Run コンテナ][8] の Java セットアップを参照してください。
 3. サーバーレスアプリケーションで API キー、Datadog サイト、および環境を構成します。
 
    {{< code-block lang="bash" >}}
@@ -49,18 +48,52 @@ Java CDN 配信には `dd-openfeature` と `dd-java-agent` が必要です。Jav
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. [Java][6]、[Node.js][3]、または [Python][9] のセットアップで説明されているように、Datadog OpenFeature プロバイダーを初期化またはアクセスします。これにより、CDN ポーリングが開始されます。Feature Flags の有効化やソース設定は不要です。
+4. [Java][6]、[Node.js][3]、または [Python][9] のセットアップで説明されているように、Datadog OpenFeature プロバイダーの初期化またはアクセスを行います。これにより、CDN ポーリングが開始されます。Feature Flags の有効化やソース設定は必要ありません。
 5. `DD_API_KEY` をサーバーレスプラットフォームのシークレットマネージャーに保存し、アプリケーションプロセスにのみ公開します。
 
-SDK はデフォルトで 30 秒ごとに Datadog が管理する CDN をポーリングし、変更されていない構成には ETag を使用します。一時的なエラーが発生した場合でも、最後に受け入れた構成が保持されます。構成が受け入れられていない場合、OpenFeature の評価は呼び出し元が指定したデフォルト値を返します。
+SDK はデフォルトで 30 秒ごとに Datadog 管理の CDN をポーリングし、変更されていない構成には ETag を使用します。一時的なエラーが発生した場合でも、最後に受け取った構成を保持します。構成が受け取られていない場合、OpenFeature 評価は呼び出し元が提供したデフォルト値を返します。
 
-トレーサーのインストールと初期化だけでは、CDN のポーリングは開始されません。CDN へのリクエストは、アプリケーションコードがプロバイダーをアクティブ化した後にのみ、サーバー Feature Flags の課金対象となります。
+トレーサーのインストールと初期化だけでは、CDN ポーリングは開始されません。CDN へのリクエストは、アプリケーションコードがプロバイダーを有効化した後にのみ、サーバーの Feature Flags の請求対象となります。
 
-Agentless モードでは、_フラグ構成_に対する Datadog Agent の依存関係がなくなります。言語固有のトレーサー要件は削除されません。また、APM や serverless テレメトリの構成や有効化も行われません。Datadog Lambda Extension、`serverless-init`、Agent sidecar、またはその他のサポートされているテレメトリパスを個別に利用できます。
+Agentless モードでは、_フラグ構成_のための Datadog Agent の依存関係がなくなります。言語固有のトレーサー要件がなくなるわけではありません。また、APM やサーバーレステレメトリの構成や有効化も行われません。Datadog Lambda Extension、`serverless-init`、Agent サイドカー、またはその他の対応テレメトリパスを個別に利用できます。
+
+## Feature Flags のテレメトリを送信する {#send-feature-flag-telemetry}
+
+`serverless-init` は、互換性のあるローカルテレメトリリレーの 1 つです。これは Feature Flags の構成ソースではありません。CDN から構成を読み込むには、デフォルトの `agentless` ソースを維持してください。
+
+`remote_config` を選択する際、Datadog Agent の代わりとして `serverless-init` を使用しないでください。Agent Remote Configuration には Datadog Agent が必要です。
+
+ダイレクトフォールバックとは、互換性のあるローカルテレメトリリレーを使用できない場合に SDK が認証済み EVP イベントを Datadog に送信することです。
+
+以下の動作に注意してください。
+
+- 実験エクスポージャーイベントは、実験に関連付けられたフラグに対してのみ発生します。
+- Java および Python は、EVP フラグ評価イベントを集約し、デフォルトで送信します。
+- EVP フラグ評価イベントパスのみを無効にするには、`DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false` を設定してください。
+
+`feature_flag.evaluations` メトリクスは、個別の OpenTelemetry (OTLP) シグナルです。ポート 8126 での標準的な `serverless-init` コネクションでは、このメトリクスの OTLP エンドポイントは構成されません。Agent を使用しないサーバーレス環境の場合は、このメトリクスを有効にする前にプラットフォームのサーバーレステレメトリパスを構成します。[サーバーサイドのフラグ評価メトリクスをセットアップする][10]を参照してください。
+
+### serverless-init を構成する {#configure-serverless-init}
+
+1. プラットフォームの [Serverless Monitoring][11] セットアップを完了します。これらの手順には、サポート対象コンテナ内およびサイドカーの構成、必要な環境変数、およびネットワーク設定が記載されています。
+
+1. 以下の Feature Flags 要件を適用します。
+   - `serverless-init` 1.9.13 以降を使用します。以前のバージョンは、必要な EVP ルートに対応していません。
+   - エージェントレス CDN 構成配信のアプリケーション環境で `DD_API_KEY` と `DD_SITE` を保持します。サイドカーでもテレメトリの送信にそれらが必要です。
+   - Feature Flags 専用のエンドポイントを構成しないでください。SDK は、Serverless Monitoring セットアップによって構成された標準のトレーサーコネクションを使用します。
+   - Node.js および Java は、ローカル EVP プロキシを検出するためにトレーサー URL で `GET /info` を呼び出します。Python は、この検出リクエストなしでサポート対象 EVP イベントを同じ URL に送信します。
+
+### テレメトリの送信を検証する {#verify-telemetry-egress}
+
+1. OpenFeature プロバイダーを初期化し、準備が完了していることを確認します。
+2. 実験に関連付けられたフラグを評価し、実験がエクスポージャーイベントを受信することを確認します。
+3. ローカルテレメトリリレーを使用する場合は、アプリケーションおよび `serverless-init` のログでポート 8126 へのコネクションエラーをチェックします。
+4. Java および Python の場合、EVP フラグ評価イベントが必要なときは `DD_FLAGGING_EVALUATION_COUNTS_ENABLED` が `false` に設定されていないことを確認してください。
+5. `feature_flag.evaluations` メトリクスを使用する場合は、[サーバーサイドのフラグ評価メトリクスをセットアップする][10]を参照して、その個別の OTLP パスを検証してください。
 
 ## Agent-backed Remote Configuration {#agent-backed-remote-configuration}
 
-既存の Agent Remote Configuration パスを明示的に使用するには、`DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` を設定します。
+既存の Agent Remote Configuration パスを明示的に使用するために `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` を設定します。
 
 {{< code-block lang="bash" >}}
 # Serverless application
@@ -69,9 +102,9 @@ DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
 DD_TRACE_AGENT_PORT=8126
 {{< /code-block >}}
 
-Java の場合は、互換性のある `dd-openfeature` および `dd-java-agent` のバージョンを使用してください。両方のコンポーネントでバージョン 1.65.0 以降を使用してください。
+Java の場合は、互換性のある `dd-openfeature` および `dd-java-agent` バージョンを使用してください。両方のコンポーネントでバージョン 1.66.0 以降を使用してください。
 
-Remote Configuration と API キーを使用して Agent を構成します。
+Remote Configuration と API キーで Agent を構成します。
 
 {{< code-block lang="bash" >}}
 DD_REMOTE_CONFIGURATION_ENABLED=true
@@ -79,60 +112,60 @@ DD_API_KEY=<DATADOG_API_KEY>
 DD_SITE=<DATADOG_SITE>
 {{< /code-block >}}
 
-サーバーレスワークロードはプライベートネットワーク上で Agent に到達できる必要があり、Agent は HTTPS 経由で Datadog に到達できる必要があります。Agent のトレース取り込みを公開しないでください。
+サーバーレスワークロードはプライベートネットワーク上で Agent にリーチできる必要があり、Agent は HTTPS 経由で Datadog にリーチできる必要があります。Agent のトレース取り込みを公開しないでください。
 
-`remote_config` を明示的に選択すると、アプリケーションコードがプロバイダーを初期化しない場合でも、Feature Flags Remote Configuration サブスクリプションが有効になります。これらのリクエストは、サーバー Feature Flags の課金対象となります。
+`remote_config` を明示的に選択すると、アプリケーションコードがプロバイダーを初期化していない場合でも、Feature Flags Remote Configuration サブスクリプションが有効になります。これらのリクエストは、サーバー Feature Flags の請求対象となります。
 
-## 運用上の考慮事項 {#operational-considerations}
+## 運用上の検討事項 {#operational-considerations}
 
-- **コールドスタート**: プロバイダーの初期化をブロックすると最初の構成を待機するため、コールドスタートのレイテンシーが増加する可能性があります。起動時に呼び出し元が提供したデフォルト値を提供しても問題ない場合は、非同期で初期化してください。
-- **アウトバウンド接続**: Agentless 配信には、Datadog が管理するフラグ設定サービスへのアウトバウンド HTTPS アクセスが必要です。
-- **API キーの所有権**: Agentless モードでは、アプリケーションが `DD_API_KEY` を所有します。`remote_config` モードでは、Agent が API キーを所有します。
-- **フラグの更新**: 配信は結果整合性があります。変更をテストする際は、SDK のポーリング間隔とアプリケーションの起動時間を考慮してください。
-- **最後に確認された正常な動作**: 設定が受け入れられた後、一時的なネットワーク障害や不正な形式の応答が発生しても、その設定が置き換えられることはありません。
-- **ランタイムサポート**: Java には Java 11 以降が必要です。Node.js および Python については、トレーサーのランタイム互換性要件を確認してください。
-- **キルスイッチ**: `DD_FEATURE_FLAGS_ENABLED` のデフォルトは `true` です。プロバイダーと両方の構成配信パスを無効にするには、`false` に設定してください。その場合、評価は呼び出し元が提供したデフォルト値を返します。
+- **コールドスタート**: プロバイダーの初期化をブロックすると、最初の構成を待機するため、コールドスタートのレイテンシーが増加する可能性があります。起動時に呼び出し元が提供したデフォルト値を使用しても問題ない場合は、非同期で初期化してください。
+- **アウトバウンド接続**: Agentless 配信には、Datadog 管理のフラグ構成サービスへのアウトバウンド HTTPS アクセスが必要です。
+- **API キーの所有権**: エージェントレスモードでは、アプリケーションが構成用の `DD_API_KEY` を所有します。`serverless-init` サイドカーでもテレメトリの送信にキーが必要です。`remote_config` モードでは、Agent が API キーを所有します。
+- **フラグの更新**: 配信は最終的に安定します。変更をテストする際は、SDK のポーリング間隔とアプリケーションの起動時間を考慮してください。
+- **Last-known-good 動作**: 構成が受け入れられた後、一時的なネットワーク障害や不正な形式の応答によって構成が置き換えられることはありません。
+- **ランタイムサポート**: Java には Java 11 以降が必要です。Node.js および Python については、トレーサーのランタイム互換性要件をチェックしてください。
+- **キルスイッチ**: `DD_FEATURE_FLAGS_ENABLED` のデフォルトは `true` です。`false` に設定すると、プロバイダーと両方の構成配信パスが無効になります。その場合、評価は呼び出し元が提供したデフォルト値を返します。
 
-Datadog が管理する Agentless 配信は、これらのバージョンの Datadog for Government では利用できません。そのサイトでは Agent Remote Configuration を使用してください。
+これらのバージョンの Datadog for Government では、Datadog 管理エージェントレス配信は利用できません。そのサイトでは Agent Remote Configuration を使用してください。
 
-デプロイメントで `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` を使用している場合は、[レガシープロバイダー設定からの移行][5]を参照してください。
+デプロイメントで `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` を使用している場合は、[従来のプロバイダー設定から移行する][5]を参照してください。
 
-## 環境に関する注記{#environment-notes}
+## 環境に関するメモ {#environment-notes}
 
 ### AWS Lambda {#aws-lambda}
 
-Java、Node.js、および Python の Lambda 関数は、最小 SDK バージョンを満たし、HTTPS 経由で Datadog に接続できる場合、Agentless 構成配信を使用できます。Java 関数は、直接または `JAVA_TOOL_OPTIONS` を介して、`dd-java-agent` と `-javaagent` を読み込む必要があります。Java トレーシングレイヤーでこのセットアップを提供できます。フラグ構成に Datadog Lambda Extension は必要ありません。
+Java、Node.js、および Python の Lambda 関数は、最小 SDK バージョンを実行しており、HTTPS 経由で Datadog にリーチできる場合、エージェントレス構成配信を使用できます。Java 関数は、直接または `JAVA_TOOL_OPTIONS` を介して `dd-java-agent` を `-javaagent` で読み込む必要があります。Java トレーシングレイヤーがこのセットアップを提供できます。Datadog Lambda Extension は、フラグ構成には不要です。
 
 ### Google Cloud サーバーレス環境 {#google-cloud-serverless-environments}
 
-Java ワークロードでは、ランタイムが `dd-java-agent` を読み込める場合、Java 11 以降で Agentless 構成配信を使用できます。[Cloud Run Functions][7] および [Cloud Run コンテナ][8]の Java セットアップでは、`JAVA_TOOL_OPTIONS` を使用して `-javaagent` を設定します。Node.js および Python ワークロードには、サポートされているトレーサーランタイムが必要です。すべてのランタイムで、アウトバウンド HTTPS アクセスが必要です。
+Java ワークロードは、ランタイムが `dd-java-agent` を読み込める場合、Java 11 以降でエージェントレス構成配信を使用できます。[Cloud Run Functions][7] および [Cloud Run コンテナ][8]の Java セットアップでは、`JAVA_TOOL_OPTIONS` を使用して `-javaagent` を設定します。Node.js および Python のワークロードには、サポート対象のトレーサーランタイムが必要です。すべてのランタイムにアウトバウンド HTTPS アクセスが必要です。
 
 ### Azure Functions {#azure-functions}
 
-Java 関数アプリでは、ランタイムが `dd-java-agent` を読み込める場合、Java 11 以降で Agentless 構成配信を使用できます。Node.js および Python 関数アプリには、サポートされているトレーサーランタイムが必要です。すべてのランタイムで、アウトバウンド HTTPS アクセスが必要です。外部 Datadog Agent が必要なのは、`remote_config` が選択されている場合のみです。
+Java 関数アプリは、ランタイムが `dd-java-agent` を読み込める場合、Java 11 以降でエージェントレス構成配信を使用できます。Node.js および Python の関数アプリには、サポート対象のトレーサーランタイムが必要です。すべてのランタイムにアウトバウンド HTTPS アクセスが必要です。外部の Datadog Agent は、`remote_config` が選択されている場合にのみ必要です。
 
 ### エッジランタイム {#edge-runtimes}
 
-一部のエッジランタイムは、Feature Flags プロバイダーが必要とする Datadog Node.js tracer API をサポートしていません。Agentless 構成配信を利用する前に、ターゲットプラットフォームのトレーサー互換性を確認してください。
+一部のエッジランタイムは、Feature Flags プロバイダーが必要とする Datadog Node.js トレーサー API に対応していません。エージェントレス構成配信を利用する前に、ターゲットプラットフォームのトレーサー互換性を確認してください。
 
 ## パブリック API とローカル評価 {#public-api-and-local-evaluation}
 
-パブリック [Feature Flags API][4] は、フラグと環境を管理するためのものです。これは、サーバーサイドアプリケーション向けの、リクエストごとのフラグ評価 API ではありません。
+パブリック [Feature Flags API][4]は、フラグと環境を管理するためのものです。これは、サーバーサイドアプリケーション向けのリクエストごとのフラグ評価 API ではありません。
 
-フラグを評価するために、サーバーレスの呼び出しごとに Datadog API へクエリを実行しないでください。フラグ構成を定期的に読み込み、ローカルで評価するサーバー SDK を使用してください。
+フラグを評価するためにサーバーレスの呼び出しごとに Datadog API へのクエリを実行しないでください。定期的にフラグ設定を読み込んでローカルで評価を行うサーバー SDK を使用してください。
 
-## セットアップの検証 {#validate-your-setup}
+## セットアップを検証する {#validate-your-setup}
 
-本番環境で Feature Flags を有効にする前に、以下を確認してください。
+本番環境で Feature Flags を有効にする前に、以下を行います。
 
-1. アプリケーションが[サポートされている最小 SDK バージョン](#overview)を使用していることを確認してください。Java の場合は、JVM が `dd-java-agent` を読み込むことを確認してください。
-2. Agentless 配信の場合は、アプリケーションに `DD_API_KEY`、`DD_SITE`、および `DD_ENV` があることを確認してください。Agent Remote Configuration の場合は、Agent の API キーと Remote Configuration が有効になっていることを確認してください。
-3. OpenFeature プロバイダーを初期化し、準備完了状態に達することを確認してください。
-4. Datadog で非本番環境のフラグを変更し、ポーリング間隔の経過後にワークロードが更新された値を受け取ることを確認してください。
-5. コールドスタート時に構成が利用できない場合、アプリケーションが呼び出し元から提供されたデフォルト値を処理することを確認してください。
-6. Node.js の場合、評価メトリクスやエクスポージャーデータに基づいた実験ワークフローを計画しないでください。Java および Python の場合は、これらのシグナルを使用する前に、サポートされている Datadog Agent またはサーバーレステレメトリパスを構成してください。
+1. アプリケーションが[最小サポート対象 SDK バージョン](#overview)を使用していることを確認します。Java の場合は、JVM が `dd-java-agent` を読み込むことを確認します。
+2. エージェントレス配信の場合は、アプリケーションに `DD_API_KEY`、`DD_SITE`、および `DD_ENV` があることを確認します。Agent Remote Configuration の場合は、Agent に API キーと Remote Configuration が有効になっていることを確認します。
+3. OpenFeature プロバイダーを初期化し、準備が完了していることを確認します。
+4. Datadog で非本番環境のフラグを変更し、ポーリング間隔の経過後にワークロードが更新された値を受け取ることを確認します。
+5. コールドスタート時に構成が利用できない場合、アプリケーションが呼び出し元から提供されたデフォルト値を処理することを確認します。
+6. テレメトリについては、サポート対象リレーを構成し、各必須シグナルを検証します。`feature_flag.evaluations` には個別の OTLPセットアップを使用してください。
 
-## 関連資料{#further-reading}
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -145,3 +178,5 @@ Java 関数アプリでは、ランタイムが `dd-java-agent` を読み込め�
 [7]: /ja/serverless/google_cloud_run/functions/java/?tab=maven
 [8]: /ja/serverless/google_cloud_run/containers/in_container/java/
 [9]: /ja/feature_flags/server/python/
+[10]: /ja/feature_flags/guide/server_flag_evaluation_metrics/
+[11]: /ja/serverless/

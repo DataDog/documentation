@@ -75,7 +75,7 @@ To run the workflow:
 
 1. Navigate to the [**Monitors** page][2] in Datadog.
 1. Find the monitor you'd like to use to trigger the workflow and edit it, or create a new monitor.
-1. In the {{< ui >}}Configure notifications & automations{{< /ui >}} section, click {{< ui >}}+ Add Workflow{{< /ui >}}.
+1. In the {{< ui >}}Configure notifications & automations{{< /ui >}} section, click {{< ui >}}\+ Add Workflow{{< /ui >}}.
 1. Use the workflow mention name to search for your workflow and select it from the dropdown. Only workflows with monitor triggers appear in the list.<br>A mention for the monitor appears in the notification message field, in the format `@workflow-name` if it takes no input parameters or `@workflow-name(param="")` if it takes input parameters.
 1. If the workflow takes input parameters:
     1. Click {{< ui >}}Configure Inputs{{< /ui >}} next to the monitor name and ID.

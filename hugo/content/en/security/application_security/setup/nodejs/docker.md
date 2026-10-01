@@ -15,12 +15,6 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 {{% aap/aap_and_api_protection_nodejs_setup_options platform="docker" %}}
 
 {{% aap/aap_and_api_protection_nodejs_overview %}}

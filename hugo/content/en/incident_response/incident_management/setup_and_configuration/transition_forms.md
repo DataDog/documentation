@@ -9,6 +9,8 @@ Any time an incident progresses through status changes, you can guide responders
 
 {{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Status Change form prompting the user to fill out the required Teams and Postmortem Owner fields when moving an incident to Resolved" style="width:70%;" >}}
 
+<div class="alert alert-info">Required fields on transition forms apply only to status changes made by a human. Automated status changes, such as those triggered through the API or <a href="/incident_response/incident_management/setup_and_configuration/automations">incident automations</a>, are not blocked.</div>
+
 ## Prerequisites
 
 To set up transition forms, you must have the `Incident Settings Write` permission. For more information, see [Datadog Role Permissions][1].

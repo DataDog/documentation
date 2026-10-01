@@ -1,17 +1,19 @@
 ---
-description: Invitez les intervenants en cas d'incident à remplir des champs spécifiques
+description: Incitez les intervenants en cas d'incident à remplir des champs spécifiques
   lors des changements de statut.
 title: Formulaires de transition
 ---
 ## Présentation {#overview}
 
-Chaque fois qu'un incident progresse via des changements de statut, vous pouvez guider les intervenants pour qu'ils remplissent des champs sur l'incident à l'aide de formulaires de transition. Ces formulaires aident à garantir que les informations sur l'incident sont collectées au bon moment dans le processus de réponse aux incidents.
+Chaque fois qu'un incident change de statut, vous pouvez guider les intervenants pour qu'ils remplissent les champs de l'incident à l'aide de formulaires de transition. Ces formulaires permettent de s'assurer que les informations sur l'incident sont collectées au bon moment dans le processus de réponse aux incidents. Par exemple, vous pouvez créer un formulaire qui oblige les intervenants à sélectionner une équipe et un responsable de post-mortem avant qu'un incident ne soit résolu. Ce formulaire est présenté aux intervenants lorsqu'ils résolvent l'incident dans Datadog, Slack ou Microsoft Teams.
 
-{{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Formulaire de changement de statut invitant l'utilisateur à remplir les champs obligatoires Teams et Postmortem Owner lors du passage d'un incident à Résolu." style="width:70%;" >}}
+{{< img src="/incident_response/incident_management/setup_and_configuration/status_transition_form.png" alt="Formulaire de changement de statut invitant l'utilisateur à remplir les champs obligatoires Teams et Postmortem Owner lors du passage d'un incident à Resolved" style="width:70%;" >}}
+
+<div class="alert alert-info">Les champs obligatoires des formulaires de transition ne s'appliquent qu'aux changements de statut effectués par un humain. Les changements de statut automatisés, tels que ceux déclenchés via l'API ou <a href="/incident_response/incident_management/setup_and_configuration/automations">incident automations</a>, ne sont pas bloqués.</div>
 
 ## Prérequis {#prerequisites}
 
-Pour configurer des formulaires de transition, vous devez disposer de l'autorisation `Incident Settings Write`. Pour plus d'informations, consultez [Datadog Role Permissions][1].
+Pour configurer des formulaires de transition, vous devez disposer de `Incident Settings Write`l'autorisation. Pour plus d'informations, consultez [Autorisations des rôles Datadog][1].
 
 ## Configurer un formulaire de transition {#configure-a-transition-form}
 

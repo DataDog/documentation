@@ -4,51 +4,76 @@ aliases:
 - /fr/tracing/trace_ingestion/
 - /fr/tracing/trace_retention_and_ingestion/
 description: Découvrir comment contrôler l'ingestion des spans
+further_reading:
+- link: https://learn.datadoghq.com/courses/apm-rate-limit-retention
+  tag: Centre d'apprentissage
+  text: 'Limitation du débit et rétention APM :'
+- link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
+  tag: Architecture Center
+  text: 'Maîtriser le traçage distribué : défis liés au volume de données et approche
+    de Datadog pour un échantillonnage efficace'
+- link: https://www.datadoghq.com/architecture/optimizing-distributed-tracing-best-practices-for-remaining-within-budget-and-capturing-critical-traces/
+  tag: Architecture Center
+  text: 'Optimiser le traçage distribué : bonnes pratiques pour respecter le budget
+    et capturer les traces critiques'
 title: Pipeline de traces
 ---
-
 {{< img src="tracing/apm_lifecycle/trace_pipeline.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Pipeline de traces" >}}
 
-Recueillez des traces à partir de vos applications instrumentées pour bénéficier d'une visibilité de bout en bout sur vos applications. Interrogez et visualisez des traces distribuées à partir du [Trace Explorer][1], analysez comment les requêtes transitent par vos microservices et enquêtez sur les erreurs et les problèmes de performance.
+Collectez les traces de vos applications instrumentées pour obtenir une visibilité de bout en bout sur vos applications. Interrogez et visualisez les traces distribuées depuis le [Trace Explorer][1], comprenez comment les requêtes circulent à travers vos microservices et enquêtez facilement sur les erreurs et les problèmes de performance.
 
-Avec APM, l'**ingestion** et la **rétention** des traces sont totalement personnalisables.
+Avec l'APM, l'**ingestion** et la **rétention** des traces sont entièrement personnalisables.
 
-## Mécanismes d'ingestion
+## Mécanismes d'ingestion : {#ingestion-mechanisms}
 
-Configurez le tracing pour profiter d'une visibilité de bout en bout sur vos applications avec une [configuration sur mesure de l'ingestion][2]. Assurez-vous de capturer les traces complètes, y compris l'ensemble des traces d'erreur ou de haute latence, afin de ne jamais passer à côté d'un problème de performance tel qu'une panne de l'application ou un service qui ne répond plus.
+Configurez le traçage pour obtenir une visibilité de bout en bout sur vos applications grâce à une [configuration d'ingestion][2] précise. Assurez-vous de capturer des traces complètes, y compris toutes les traces d'erreur et de latence élevée, pour ne jamais manquer de problèmes de performance tels qu'une panne d'application ou un service qui ne répond pas.
 
-{{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="Configuration des services" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/service_setup.png" style="width:80%;" alt="Configuration du service" >}}
 
 
-## Contrôles d'ingestion
+## Contrôles d'ingestion : {#ingestion-controls}
 
 La [page Ingestion Control][3] présente des volumes d'ingestion et des paramètres de configuration pour vos différents services.
 
-{{< img src="tracing/trace_indexing_and_ingestion/ingestion_control_page.png" style="width:100%;" alt="Aperçu de la page Ingestion Control" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/ingestion_controls_page.png" style="width:100%;" alt="Vue d'ensemble de la page Ingestion Control" >}}
 
-## Générer des métriques à partir de spans
+## Pipelines de traitement : {#processing-pipelines}
 
-Vous pouvez générer des métriques à partir de spans ingérées et utilisez ces métriques custom dans vos requêtes et comparaisons. Pour en savoir plus, consultez la section [Générer des métriques à partir de spans][4].
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Les pipelines de traitement ne sont pas pris en charge dans {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
 
-{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="Graphique d'une métrique basée sur des spans" >}}
+Transformez, normalisez et enrichissez les attributs de span après l'ingestion avec les [Pipelines de traitement][7]. Standardisez la dénomination des attributs entre les services, consolidez les clés incohérentes et extrayez des données structurées à partir des valeurs de span, sans modifier le code de l'application.
 
-## Rétention des traces
+{{< img src="tracing/processing_pipelines/manage_pipelines.png" style="width:100%;" alt="Pipelines de traitement" >}}
 
-Une fois les spans ingérées par Datadog, certaines d'entre elles sont conservées pendant 15 jours en fonction des [filtres de rétention][5] qui ont été définis sur votre compte. Le filtre de rétention intelligent Datadog indexe une proportion de vos traces pour vous aider à surveiller l'intégrité de vos applications. Vous pouvez également définir vos propres filtres de rétention personnalisés afin d'indexer les données des traces que vous voulez conserver, de façon à atteindre plus facilement les objectifs de votre organisation.
+## Génération de métriques à partir de spans : {#generating-metrics-from-spans}
 
-{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filter_page.png" style="width:100%;" alt="Page Retention Filters" >}}
+Vous pouvez générer des métriques à partir de spans ingérés et utiliser ces métriques personnalisées pour des requêtes et des comparaisons. En savoir plus dans [Generating Metrics from Spans][4].
 
-## Métriques d'utilisation des traces
+{{< img src="tracing/span_to_metrics/metrics_from_spans_1.png" style="width:100%;" alt="Graphique d'une métrique basée sur les spans" >}}
+
+## Rétention des traces : {#trace-retention}
+
+Une fois les spans ingérés, les [Retention Filters][5] déterminent quels spans individuels sont indexés et stockés pendant 15 jours. Le filtre de rétention intelligent Datadog indexe automatiquement une sélection représentative de spans pour vous aider à surveiller la santé de vos applications. Vous pouvez également définir des Filtres de rétention personnalisés pour indexer des spans supplémentaires qui sont importants pour les objectifs de votre organisation.
+
+{{< img src="tracing/trace_indexing_and_ingestion/retention_filters/retention_filters.png" style="width:100%;" alt="Page Filtres de rétention" >}}
+
+## Métriques d'utilisation des traces : {#trace-usage-metrics}
 
 Consultez la section [Métriques d'utilisation][6] pour découvrir comment suivre et surveiller votre volume de données ingérées et indexées et apprendre à utiliser les dashboards APM Estimated Usage et Ingestion Reasons.
 
-{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="Dashboard APM Estimated Usage" >}}
+{{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_apm_usage.png" style="width:100%;" alt="APM Estimated Usage Dashboard" >}}
 
 
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/tracing/trace_explorer
-[2]: /fr/tracing/trace_ingestion/mechanisms
-[3]: /fr/tracing/trace_ingestion/ingestion_controls
+[2]: /fr/tracing/trace_pipeline/ingestion_mechanisms/
+[3]: /fr/tracing/trace_pipeline/ingestion_controls
 [4]: /fr/tracing/trace_pipeline/generate_metrics
-[5]: /fr/tracing/trace_retention
-[6]: /fr/tracing/trace_retention/usage_metrics
+[5]: /fr/tracing/trace_pipeline/trace_retention
+[6]: /fr/tracing/trace_pipeline/metrics
+[7]: /fr/tracing/trace_pipeline/processing_pipelines

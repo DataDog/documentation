@@ -4,43 +4,43 @@ aliases:
 - /ja/serverless/azure_app_services/azure_app_services_container
 further_reading:
 - link: /integrations/azure_app_services/
-  tag: Documentation
+  tag: ドキュメント
   text: Azure App Service
 - link: /integrations/azure_app_service_environment/
-  tag: Documentation
-  text: Azure App Service Environment
-title: Azure App Service のインスツルメンテーション - Linux コンテナ
+  tag: ドキュメント
+  text: Azure App Service 環境
+title: Azure App Service - Linux コンテナをインスツルメントする
 ---
 ## 概要 {#overview}
 
 このページでは、Datadog Agent を使用して、コンテナ化された Linux Azure App Service アプリケーションをインスツルメンテーションする方法について説明します。
 
-このドキュメントは、Azure のチュートリアル [Azure App Service でカスタム コンテナーのサイドカー コンテナーを構成する][1]に従って、アプリケーションがサイドカー用にセットアップされていることを前提としています。
+この文書では、Azure の [Azure App Service のカスタムコンテナのサイドカーコンテナを構成する][1]チュートリアルに従ってアプリケーションがサイドカー用に設定されていることを前提としています。
 
-サイドカー方式を使用しない場合 (非推奨)、代わりに [`serverless-init` による Azure App Service のインスツルメンテーション - Linux コンテナ][2]の手順に従うことができます。
+サイドカーアプローチを使用しない場合 (非推奨) は、代わりに [`serverless-init` を使って Azure App Service - Linux コンテナをインスツルメントする][2]手順に従ってください。
 
 ## セットアップ {#setup}
 
 ### Azure インテグレーション {#azure-integration}
 
-[Datadog-Azure インテグレーション][3]をまだインストールしていない場合はインストールし、メトリクスとログを収集します。
+まだ [Datadog-Azure インテグレーション][3] をインストールしていない場合は、メトリクスとログを収集するためにインストールしてください。
 
 ### アプリケーション {#application}
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
-#### トレース {#tracing}
-`dd-trace-js` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。手順については、[Node.js アプリケーションのトレース][101]を参照してください。
+#### トレーシング {#tracing}
+メインアプリケーションを `dd-trace-js` ライブラリでインスツルメントします。手順については、[Node.js アプリケーションのトレーシング][101]を参照してください。
 
 #### メトリクス {#metrics}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][102]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][102]を参照してください。
 
 #### ログ {#logs}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[Node.js ログ収集][103]を参照してください。トレースとログの相関をセットアップするには、[Node.js のログとトレースの相関][104]を参照してください。
+アプリケーションでログを設定するには、[Node.js のログの収集][103]を参照してください。トレースログの相関を設定するには、[Node.js ログとトレースの相関][104]を参照してください。
 
 [101]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#getting-started
 [102]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=nodejs#code-examples
@@ -48,18 +48,18 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 [104]: /ja/tracing/other_telemetry/connect_logs_and_traces/nodejs
 {{% /tab %}}
 {{% tab "Python" %}}
-#### トレース {#tracing-1}
-`dd-trace-py` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。手順については、[Python アプリケーションのトレース][201]を参照してください。
+#### トレーシング {#tracing-1}
+メインアプリケーションを `dd-trace-py` ライブラリでインスツルメントします。手順については、[Python アプリケーションのトレーシング][201]を参照してください。
 
 #### メトリクス {#metrics-1}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][202]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][202]を参照してください。
 
 #### ログ {#logs-1}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[Node.js ログ収集][203]を参照してください。トレースとログの相関をセットアップするには、[Node.js のログとトレースの相関][204]を参照してください。
+アプリケーションでログを設定するには、[Node.js のログの収集][203]を参照してください。トレースログの相関を設定するには、[Node.js ログとトレースの相関][204]を参照してください。
 
 [201]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/python
 [202]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=python#code-examples
@@ -67,18 +67,18 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 [204]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
 {{% /tab %}}
 {{% tab "Java" %}}
-#### トレース {#tracing-2}
-`dd-trace-java` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。手順については、[Java アプリケーションのトレース][301]を参照してください。
+#### トレーシング {#tracing-2}
+メインアプリケーションを `dd-trace-java` ライブラリでインスツルメントします。手順については、[Java アプリケーションのトレーシング][301]を参照してください。
 
 #### メトリクス {#metrics-2}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][302]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][302]を参照してください。
 
 #### ログ {#logs-2}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[Node.js ログ収集][303]を参照してください。トレースとログの相関をセットアップするには、[Node.js のログとトレースの相関][304]を参照してください。
+アプリケーションでログを設定するには、[Node.js のログの収集][303]を参照してください。トレースログの相関を設定するには、[Node.js ログとトレースの相関][304]を参照してください。
 
 [301]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#getting-started
 [302]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=java#code-examples
@@ -86,10 +86,10 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 [304]: /ja/tracing/other_telemetry/connect_logs_and_traces/java
 {{% /tab %}}
 {{% tab ".NET" %}}
-#### トレース {#tracing-3}
-`dd-trace-dotnet` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。
+#### トレーシング {#tracing-3}
+メインアプリケーションを `dd-trace-dotnet` ライブラリでインスツルメントします。
 
-1.メインアプリケーションの Dockerfile に次の行を追加します。これにより、アプリケーションコンテナ内に Datadog トレーサーがインストールされて構成されます。
+1. メインアプリケーションの Dockerfile に以下の行を追加してください。これにより、アプリケーションコンテナ内に Datadog SDK がインストールされ、構成されます。
    {{< code-block lang="dockerfile" >}}
    RUN mkdir -p /datadog/tracer
    RUN mkdir -p /home/LogFiles/dotnet
@@ -100,52 +100,52 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 
 2. イメージをビルドし、任意のコンテナレジストリにプッシュします。
 
-**Dockerfile の完全な例**
+**Dockerfile の完全なサンプル**
 
 {{< highlight dockerfile "hl_lines=22-27" >}}
-# Stage 1: Build the application HEADANCHOR:stage-1-build-the-application:ENDANCHOR
+# Stage 1: Build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
-# Copy the project file and restore dependencies HEADANCHOR:copy-the-project-file-and-restore-dependencies:ENDANCHOR
+# Copy the project file and restore dependencies
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy the remaining source code HEADANCHOR:copy-the-remaining-source-code:ENDANCHOR
+# Copy the remaining source code
 COPY . .
 
-# Build the application HEADANCHOR:build-the-application:ENDANCHOR
+# Build the application
 RUN dotnet publish -c Release -o out
 
-# Stage 2: Create a runtime image HEADANCHOR:stage-2-create-a-runtime-image:ENDANCHOR
+# Stage 2: Create a runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
 
-# Copy the build output from stage 1 HEADANCHOR:copy-the-build-output-from-stage-1:ENDANCHOR
+# Copy the build output from stage 1
 COPY --from=build /app/out ./
 
-# Datadog specific HEADANCHOR:datadog-specific:ENDANCHOR
+# Datadog specific
 RUN mkdir -p /datadog/tracer
 RUN mkdir -p /home/LogFiles/dotnet
 
 ADD https://github.com/DataDog/dd-trace-dotnet/releases/download/v3.30.0/datadog-dotnet-apm-3.30.0.tar.gz /datadog/tracer
 RUN cd /datadog/tracer && tar -zxf datadog-dotnet-apm-3.30.0.tar.gz
 
-# Set the entry point for the application HEADANCHOR:set-the-entry-point-for-the-application:ENDANCHOR
+# Set the entry point for the application
 ENTRYPOINT ["dotnet", "<your dotnet app>.dll"]
 {{< /highlight >}}
 
-詳細については、[.NET アプリケーションのトレース][401]を参照してください。
+詳細については、[.NET アプリケーションのトレーシング][401]を参照してください。
 
 #### メトリクス {#metrics-3}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][402]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][402]を参照してください。
 
 #### ログ {#logs-3}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[C# ログ収集][403]を参照してください。トレースとログの相関をセットアップするには、[.NET のログとトレースの相関][404]を参照してください。
+アプリケーションでのログ設定については、[C# のログの収集][403]を参照してください。トレースログの相関を設定するには、[.NET のログとトレースの相関][404]を参照してください。
 
 [401]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
 [402]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=dotnet#code-examples
@@ -154,18 +154,18 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 
 {{% /tab %}}
 {{% tab "Go" %}}
-#### トレース {#tracing-4}
-`dd-trace-go` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。手順については、[Go アプリケーションのトレース][501]を参照してください。
+#### トレーシング {#tracing-4}
+メインアプリケーションを `dd-trace-go` ライブラリでインスツルメントします。手順については、[Go アプリケーションのトレーシング][501]を参照してください。
 
 #### メトリクス {#metrics-4}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][502]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][502]を参照してください。
 
 #### ログ {#logs-4}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[Node.js ログ収集][503]を参照してください。トレースとログの相関をセットアップするには、[Node.js のログとトレースの相関][504]を参照してください。
+アプリケーションでログを設定するには、[Node.js のログの収集][503]を参照してください。トレースログの相関を設定するには、[Node.js ログとトレースの相関][504]を参照してください。
 
 [501]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [502]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=go#code-examples
@@ -173,18 +173,18 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 [504]: /ja/tracing/other_telemetry/connect_logs_and_traces/go
 {{% /tab %}}
 {{% tab "PHP" %}}
-#### トレース {#tracing-5}
-`dd-trace-php` ライブラリを使用してメインアプリケーションをインスツルメンテーションします。手順については、[PHP アプリケーションのトレース][601]を参照してください。
+#### トレーシング {#tracing-5}
+メインアプリケーションを `dd-trace-php` ライブラリでインスツルメントします。手順については、[PHP アプリケーションのトレーシング][601]を参照してください。
 
 #### メトリクス {#metrics-5}
-カスタムメトリクスもトレーサーを通じて収集されます。[コード例][602]を参照してください。
+カスタムメトリクスも SDK を通じて収集されます。[コード例][602]を参照してください。
 
 #### ログ {#logs-5}
-Datadog サイドカーは、ファイルテーリングを使用してログを収集します。Datadog ではアプリケーションログを `/home/LogFiles/` に書き込むことをお勧めします。このディレクトリは再起動後も保持されるからです。
+Datadog サイドカーはファイルテールを使用してログを収集します。Datadog は、アプリケーションログを `/home/LogFiles/` に書き込むことを推奨しています。このディレクトリは再起動後も保持されるためです。
 
-Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` などのサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテールしない場合、起動やエラーに関連する Azure App Service アプリケーションログは収集されません。
+Datadog に送信する内容をより細かく制御したい場合は、`/home/LogFiles/myapp` のようなサブディレクトリを作成することもできます。ただし、`/home/LogFiles` 内のすべてのログファイルをテーリングしない場合、Azure App Service の起動やエラーに関連するアプリケーションログは収集されません。
 
-アプリケーションでログ収集をセットアップするには、[Node.js ログ収集][603]を参照してください。トレースとログの相関をセットアップするには、[Node.js のログとトレースの相関][604]を参照してください。
+アプリケーションでログを設定するには、[Node.js のログの収集][603]を参照してください。トレースログの相関を設定するには、[Node.js ログとトレースの相関][604]を参照してください。
 
 [601]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/php/#getting-started
 [602]: /ja/metrics/custom_metrics/dogstatsd_metrics_submission/?code-lang=php#code-examples
@@ -195,14 +195,14 @@ Datadog に送信する内容をより細かく制御したい場合は、`/home
 
 ### インスツルメンテーション {#instrumentation}
 
-インスツルメンテーションは、サイドカーコンテナを使用して行われます。このサイドカーコンテナは、メインアプリケーションコンテナからトレース、メトリクス、ログを収集し、Datadog に送信します。
+インスツルメンテーションはサイドカーコンテナを使用して行います。このサイドカーコンテナは、メインアプリケーションコンテナからトレース、拡張メトリクス、カスタムメトリクス、ログを収集し、Datadog に送信します。[拡張メトリクス][5]は `azure.app_services.enhanced.*` 名前空間によって区別されます。
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
 #### ローカル {#locally}
 
-[Datadog CLI][601] をインストールします
+[Datadog CLI][601] をインストールします。
 
 ```shell
 npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
@@ -210,7 +210,7 @@ npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-aas
 
 [Azure CLI][602] をインストールし、`az login` で認証します。
 
-次に、以下のコマンドを実行してサイドカーコンテナをセットアップします。
+次に、サイドカーコンテナを設定するために、下記のコマンドを実行します。
 
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
@@ -218,15 +218,17 @@ export DD_SITE=<DATADOG_SITE>
 datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name>
 ```
 
-Datadog サイトを {{< region-param key="dd_site" code="true" >}}に設定します。デフォルトは `datadoghq.com` です。
+Datadog サイトを設定します。 {{< region-param key="dd_site" code="true" >}}です。デフォルトは `datadoghq.com` です。
 
-**注:** .NET アプリケーションの場合は、`--dotnet` フラグを追加して .NET トレーサーに必要な追加の環境変数を含めます。また、コンテナが musl libc イメージ (Alpine Linux など) で dotnet を使用している場合は、さらに `--musl` フラグを追加します。
+**注:** .NET アプリケーションの場合、`--dotnet` フラグを追加して .NET トレーサーに必要な追加の環境変数を含め、コンテナが musl libc イメージ (Alpine Linux など) で dotnet を使用している場合は、さらに `--musl` フラグも追加してください。
 
-`--service` や `--env` などの追加フラグを使用して、サービスおよび環境のタグを設定できます。オプションの完全なリストについては、`datadog-ci aas instrument --help` を実行してください。
+`--service` や `--env` などの他のフラグも使用して、サービスや環境のタグを設定することができます。すべてのオプションのリストを表示するには、`datadog-ci aas instrument --help` を実行してください。
+
+`datadog-ci aas instrument`は、インスツルメンテーションを設定するために一度だけ実行する必要があります。コードをデプロイするたびに再実行する必要はありません。Datadog の構成を変更する場合にのみ再実行してください。
 
 #### Azure Cloud Shell {#azure-cloud-shell}
 
-[Azure Cloud Shell][603] で Datadog CLI を使用するには、Cloud Shell を開き、`npx` を使用して CLI を直接実行します。`DD_API_KEY` および `DD_SITE` 環境変数に API キーとサイトを設定し、CLI を実行します。
+[Azure Cloud Shell][603] で Datadog CLI を使用するには、Cloud Shell を開き、`npx` を使用して CLI を直接実行します。`DD_API_KEY` と `DD_SITE` の環境変数に API キーとサイトを設定してから、CLI を実行します。
 
 ```shell
 export DD_API_KEY=<DATADOG_API_KEY>
@@ -240,13 +242,13 @@ npx @datadog/datadog-ci aas instrument -s <subscription-id> -g <resource-group-n
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-<div class="alert alert-danger">Azure Web App for Containers リソースは sitecontainers を直接サポートしていないため、構成にドリフトが発生することを想定しておく必要があります。</div>
+<div class="alert alert-danger">Azure Web App for Containers リソースはサイトコンテナを直接サポートしていないため、構成にずれが生じることを予想してください。</div>
 
-[Datadog Terraform module for Linux Web Apps][1] は [azurerm_linux_web_app][2] リソースをラップし、必要な環境変数と serverless-init サイドカーを追加することで、Datadog Serverless Monitoring 用に Web App を自動的に構成します。
+[Datadog Terraform module for Linux Web Apps][1] は、必要な環境変数と serverlessinit サイドカーを追加することで、[azurerm_linux_web_app][2] リソースをラップし、Datadog Serverless Monitoring 用に Web App を自動的に設定します。
 
-Terraform をまだセットアップしていない場合は、[Terraform をインストール][3]し、新しいディレクトリを作成して、`main.tf` という名前のファイルを作成します。
+まだ Terraform を設定していない場合は、[Terraform をインストール][3] し、新しいディレクトリを作成し、`main.tf` というファイルを作成してください。
 
-次に、次のものを Terraform 構成に追加し、必要に応じて更新します。
+次に、必要に応じて変更しながら、Terraform 構成に下記を追加します。
 
 ```tf
 variable "datadog_api_key" {
@@ -294,9 +296,9 @@ module "my_web_app" {
 }
 ```
 
-最後に、`terraform apply` を実行し、プロンプトに従います。
+最後に `terraform apply` を実行し、プロンプトに従って操作します。
 
-[Datadog Linux Web App モジュール][1]は Web App リソースのみをデプロイするため、コンテナのビルドとプッシュは別途行う必要があります。
+[Datadog Linux Web App モジュール][1]は、Web App リソースのみをデプロイするため、コンテナを別途ビルドしてプッシュする必要があります。
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux
 [2]: https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/linux_web_app
@@ -305,7 +307,7 @@ module "my_web_app" {
 {{% /tab %}}
 {{% tab "Bicep" %}}
 
-Web Apps for Containers でサイドカーを使用するには、`kind` を `app,linux,container` に設定した `SITECONTAINERS` linuxFxVersion を使用する必要があります。既存の Web App を更新して、次のように必要な Datadog アプリ設定とサイドカーを含めます。
+Web Apps for Containers でサイドカーを使用するには、`SITECONTAINERS` linuxFxVersion を使用し、`kind` を `app,linux,container` に設定する必要があります。既存の Web App を更新して、下記のように、必要な Datadog アプリ設定とサイドカーを含めてください。
 
 ```bicep
 resource webApp 'Microsoft.Web/sites@2025-03-01' = {
@@ -371,13 +373,13 @@ resource sidecar 'Microsoft.Web/sites/sitecontainers@2025-03-01' = {
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-すべての環境変数の説明については、[手動タブ](?tab=manual#instrumentation)を参照してください。
+すべての環境変数の説明については、[{{< ui >}}Manual{{< /ui >}} タブ](?tab=manual#instrumentation)を参照してください。
 
 
 {{% /tab %}}
 {{% tab "ARM テンプレート" %}}
 
-既存の Web App を更新して、次のように必要な Datadog アプリ設定とサイドカーを含めます。
+既存の Web App を更新して、下記のように、必要な Datadog アプリ設定とサイドカーを含めてください。
 
 ```jsonc
 {
@@ -466,47 +468,49 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
-すべての環境変数の説明については、[手動タブ](?tab=manual#instrumentation)を参照してください。
+すべての環境変数の説明については、[{{< ui >}}Manual{{< /ui >}} タブ](?tab=manual#instrumentation)を参照してください。
 
 {{% /tab %}}
 {{% tab "手動" %}}
 
 #### サイドカーコンテナ {#sidecar-container}
 
-1. Azure Portal で **[Deployment Center]** (デプロイ センター) に移動し、**[Add]** (追加) を選択します。
-2.**[Edit container]** (コンテナーの編集) フォームで、次のように入力します。
-   - **[Image source]** (イメージ ソース): Docker Hub またはその他のレジストリ
-   - **[Image type]** (イメージの種類): [Public] (パブリック)
-   - **[Registry server URL]** (レジストリ サーバーの URL): `index.docker.io`
-   - **[Image and tag]** (イメージとタグ): `datadog/serverless-init:latest`
-   - **[Port]** (ポート): 8126
-3. [**Apply**] (適用) を選択します。
+1. Azure Portal で {{< ui >}}Deployment Center{{< /ui >}} に移動し、{{< ui >}}Add{{< /ui >}} を選択します。
+2. {{< ui >}}Edit container{{< /ui >}} フォームで、以下を指定します。
+   - {{< ui >}}Image source{{< /ui >}}: Docker Hub またはその他のレジストリ
+   - {{< ui >}}Image type{{< /ui >}} (イメージタイプ): Public (公開)
+   - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+   - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+   - {{< ui >}}Port{{< /ui >}}: 8126
+   - [{{< ui >}}Environment variables{{< /ui >}}] (環境変数) で [{{< ui >}}Allow access to all app settings{{< /ui >}}] (すべてのアプリの設定へのアクセスを許可する) オプションを有効にします。
+
+     {{< img src="serverless/azure_app_service/app_settings.png" alt="Azure の環境変数セクション。[Allow access to all app settings] (すべてのアプリ設定へのアクセスを許可する) オプションがチェックボックスで有効になっています。" >}}
+
+3. {{< ui >}}Apply{{< /ui >}} を選択します。
 
 #### アプリケーション設定 {#application-settings}
 
-Azure の [**App settings**] (アプリ設定) で、メインコンテナとサイドカーコンテナの両方に次の環境変数を設定します。または、メインコンテナにこれらの変数を設定し、[**Allow access to all app settings**] (すべてのアプリ設定へのアクセスを許可する) オプションを有効にします。
-
-{{< img src="serverless/azure_app_service/app_settings.png" alt="Azure の [Environment Variables] (環境変数) セクション。[Allow access to all app settings] オプションがチェックボックスで有効になっている。" >}}
+Azure の {{< ui >}}App settings{{< /ui >}} で、メインコンテナに以下の環境変数を設定します。
 
 - `DD_API_KEY`: [Datadog API キー][701]
-- `DD_SERVICE`: サービスに付けるタグ。例: `sidecar-azure`
-- `DD_ENV`: 環境に付けるタグ。例: `prod`
-- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`。この環境変数を設定することで、`/home/` マウントを永続化し、サイドカーと共有できるようになります。
-- `DD_SERVERLESS_LOG_PATH`: ログの書き込み先。例: `/home/LogFiles/*.log` または `/home/LogFiles/myapp/*.log`
-- `DD_AAS_INSTANCE_LOGGING_ENABLED`: `true` の場合、ログ収集は追加のファイルパス `/home/LogFiles/*$COMPUTERNAME*.log` に対して自動的に構成されます。
-- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: より正確なファイルテーリングに使用されるオプションのファイル記述子。ログローテーションが頻繁に発生するシナリオで推奨されます。たとえば、`_default_docker` を設定すると、ログテーラーはローテーションされたファイルを無視し、Azure のアクティブなログファイルのみに注目するように構成されます。
+- `DD_SERVICE`: サービスをどのようにタグ付けするか。例: `sidecar-azure`
+- `DD_ENV`: 環境をどのようにタグ付けするか。例: `prod`
+- `WEBSITES_ENABLE_APP_SERVICE_STORAGE`: `true`。この環境変数を設定すると、`/home/` マウントが永続化され、サイドカーと共有されます。
+- `DD_SERVERLESS_LOG_PATH`: ログの書き込み先。たとえば、`/home/LogFiles/*.log` や `/home/LogFiles/myapp/*.log` などです。
+- `DD_AAS_INSTANCE_LOGGING_ENABLED`: `true` の場合、追加のファイルパス `/home/LogFiles/*$COMPUTERNAME*.log` に対してログ収集が自動的に構成されます。
+- `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: より正確なファイルテーリングに使用されるオプションのファイル記述子。頻繁なログローテーションがあるシナリオに推奨されます。たとえば、`_default_docker` を設定すると、ローテーションされたファイルを無視し、Azure のアクティブなログファイルのみを対象とするようにログテーラーが構成されます。
 
 
-   <div class="alert alert-info">アプリケーションに複数のインスタンスがある場合は、アプリケーションのログファイル名に <code>$COMPUTERNAME</code> 変数が含まれていることを確認してください。これにより、ログテーリングは、複数のインスタンスが同じファイルを読み取ることで生じる重複したログを作成しないようになります。</div>
+   <div class="alert alert-info">アプリケーションに複数のインスタンスがある場合、アプリケーションのログファイル名に <code>$COMPUTERNAME</code> 変数が含まれていることを確認してください。これにより、ログテーリングが同じファイルを読み取る複数のインスタンスから重複したログが作成されないようになります。</div>
 
 <details open>
 <summary>
-<h4>.NET アプリケーションの場合: 追加の必須環境変数</h4>
+<h4>.NET アプリケーション: 追加の必須環境変数</h4>
 </summary>
 
-.NET アプリケーションのモニタリングをセットアップする場合は、次の**必須**環境変数を構成してください。
+.NET アプリケーションのモニタリングを設定する場合、次の **必須** 環境変数を設定してください。
 
-|変数名 | 値 |
+| 変数名 | 値 |
 | ------------- | ----- |
 | `DD_DOTNET_TRACER_HOME` | `/datadog/tracer` |
 | `CORECLR_ENABLE_PROFILING` | `1` |
@@ -520,37 +524,48 @@ Azure の [**App settings**] (アプリ設定) で、メインコンテナとサ
 
 {{% svl-tracing-env %}}
 
-### デプロイスロット {#deployment-slots}
+### デプロイメントスロット {#deployment-slots}
 
-<div class="alert alert-info">デプロイスロットのインスツルメンテーションはプレビュー版です。プレビュー期間中、スロットからのテレメトリーはメインの Web アプリの下に表示されます。スロットと本番環境のテレメトリーを区別するには、各スロットに個別の値を指定して <a href="/getting_started/tagging/unified_service_tagging/">unified service tagging</a> を構成してください。</div>
+<div class="alert alert-info">デプロイメントスロットのインスツルメンテーションはプレビュー版です。プレビュー中は、スロットからのテレメトリはメインの Web アプリの下に表示されます。スロットと本番環境のテレメトリを区別するには、各スロットに異なる値を設定して <a href="/getting_started/tagging/unified_service_tagging/">unified service tagging</a> を構成してください。</div>
 
-{{% collapse-content title="デプロイスロットのインスツルメンテーション" level="h4" %}}
+{{% collapse-content title="デプロイメントスロットのインスツルメント" level="h4" %}}
 
-メインの Web アプリではなく [デプロイスロット][901]をインスツルメンテーションするには、次のいずれかの方法を使用します。
+メインの Web アプリではなく[デプロイメントスロット][901]をインスツルメントするには、以下のいずれかの方法を使用します。
 
 [901]: https://learn.microsoft.com/en-us/azure/app-service/deploy-staging-slots
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-[Datadog CLI][1] (v5.9.0 以降) を使用して、`--slot` フラグを追加します。`--env` を使用して、スロットに個別の環境タグを設定します。
+[Datadog CLI][1] (v5.9.0+) を使用して `--slot` フラグを追加します。`--service`、`--env`、および `--version` を使用して、スロットに個別の unified service tagging 値を設定します。
+
+デプロイメントスロットの名前を確認するには、以下を実行します。
 
 ```shell
-datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <web-app>
+```
+
+```shell
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
+  --slot <slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
 
 または、`--resource-id` フラグを使用して完全なスロットリソース ID を指定します。
 
 ```shell
-datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
+
+**注**: `--env` を渡すと、CLI は自動的に `DD_ENV` をスティッキー設定としてマークするため、`env` タグはスロットのスワップ後も保持されます。
 
 [1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-[Datadog Linux Web App Slot モジュール][1]を使用します。
+[Datadog Linux Web App Slot モジュール][1] を使用します。
 
 ```tf
 module "my_web_app_slot" {
@@ -578,18 +593,23 @@ module "my_web_app_slot" {
 }
 ```
 
-`terraform apply` を実行し、プロンプトに従います。
+`terraform apply` を実行し、プロンプトに従って操作します。
+
+**注**: メインの Web アプリモジュールで `datadog_env` が設定されている場合、そのモジュールは `DD_ENV` をスティッキー設定としてマークするため、`env` タグはスロットのスワップ後も保持されます。
 
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux-slot
 
 {{% /tab %}}
 {{% tab "Bicep" %}}
 
-メインの Web アプリではなくデプロイスロットをターゲットにするようにテンプレートを更新します。
+メインの Web アプリではなく、デプロイメントスロットをターゲットにするようにテンプレートを更新します。
 
 ```bicep
 param webAppName string
 param slotName string
+
+@description('Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it.')
+param existingStickyAppSettingNames array = []
 
 resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: webAppName
@@ -610,6 +630,18 @@ resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
       ])
     }
   }
+}
+
+// Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+// full slotConfigNames list — existingStickyAppSettingNames must include any settings already
+// marked sticky or they will be de-stickied.
+resource stickySettings 'Microsoft.Web/sites/config@2025-03-01' = {
+  parent: webApp
+  name: 'slotConfigNames'
+  properties: {
+    appSettingNames: union(existingStickyAppSettingNames, ['DD_ENV'])
+  }
+  dependsOn: [slot]
 }
 
 resource mainContainer 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
@@ -660,10 +692,14 @@ resource sidecar 'Microsoft.Web/sites/slots/sitecontainers@2025-03-01' = {
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
+**注**: デフォルトでは、Azure アプリ設定はスロット間でスワップされます。上記の `slotConfigNames` リソースは `DD_ENV` をスティッキーとしてマークするため、`env` タグはスロットのスワップ後も保持されます。
+
+`slotConfigNames` リソースは、スティッキー設定リストを完全に置き換えます。`existingStickyAppSettingNames` ですでにスティッキーとしてマークされている設定、または新しいアプリの場合は `[]` を渡します。省略された名前はスティッキー設定が解除されます。
+
 {{% /tab %}}
 {{% tab "ARM テンプレート" %}}
 
-メインの Web アプリではなくデプロイスロットをターゲットにするようにテンプレートを更新します。
+メインの Web アプリではなく、デプロイメントスロットをターゲットにするようにテンプレートを更新します。
 
 ```jsonc
 {
@@ -679,6 +715,11 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
     // ...
     "datadogApiKey": {
       "type": "securestring"
+    },
+    "existingStickyAppSettingNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": { "description": "Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
     }
   },
   "variables": {
@@ -744,6 +785,20 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
           }
         }]
       }
+    },
+    // Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+    // full slotConfigNames list — existingStickyAppSettingNames must include any settings
+    // already marked sticky or they will be de-stickied.
+    "stickySettings": {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/slotConfigNames')]",
+      "properties": {
+        "appSettingNames": "[union(parameters('existingStickyAppSettingNames'), createArray('DD_ENV'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('webAppName'), parameters('slotName'))]"
+      ]
     }
   }
 }
@@ -755,21 +810,29 @@ az deployment group create --resource-group <RESOURCE GROUP> --template-file <TE
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
+**注**: デフォルトでは、Azure アプリ設定はスロット間でスワップされます。上記の `slotConfigNames` リソースは `DD_ENV` をスティッキーとしてマークするため、`env` タグはスロットのスワップ後も保持されます。
+
+`slotConfigNames` リソースは、スティッキー設定リストを完全に置き換えます。`existingStickyAppSettingNames` ですでにスティッキーとしてマークされている設定、または新しいアプリの場合は `[]` を渡します。省略された名前はスティッキー設定が解除されます。
+
 {{% /tab %}}
 {{< /tabs >}}
 
 {{% /collapse-content %}}
 
+## トラブルシューティング{#troubleshooting}
+
+App Service プランで自動スケーリングが有効になっており、関連のないトレースがマージされている場合、Azure プラットフォームのヘルスプローブ (`User-Agent: HttpScaleManager`) が古い W3C トレースコンテキストを保持している可能性があります。アプリへのすべての呼び出し元が Datadog でインスツルメントされている場合は、影響を受けるアプリで `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` を設定し、トレースコンテキストの抽出を Datadog の形式に制限してください。Datadog でインスツルメントされていない呼び出し元を持つアプリの場合、この設定を行うと、Datadog はそれらの W3C トレースコンテキストを無視します。その結果、それらのリクエストは親トレースにマージされず、切断されたトレースになります。
+
 ## プロファイリング {#profiling}
 
 <div class="alert alert-info">
-Datadog の Continuous Profiler は、Linux Azure App Service 上の Python および Node.js でプレビュー版として利用可能です。
+Datadog の Continuous Profiler は、Linux Azure App Service の Python および Node.js 用プレビューで利用可能です。
 </div>
 
-[Continuous Profiler][4] を有効にするには、アプリケーションコンテナで環境変数 `DD_PROFILING_ENABLED=true` を設定します。
+[Continuous Profiler][4] を有効にするには、アプリケーションコンテナで環境変数 `DD_PROFILING_ENABLED=true` を設定してください。
 
-## アプリケーションの例 {#example-application}
-次の例には、トレース、メトリクス、ログがセットアップされた単一のアプリが含まれています。
+## サンプルアプリケーション {#example-application}
+次のサンプルには、トレース、メトリクス、ログがセットアップされた 1 つのアプリが含まれています。
 
 {{< tabs >}}
 {{% tab "Node.js" %}}
@@ -1005,3 +1068,4 @@ $statsd->increment('page.views', 1, array('environment'=>'dev'));
 [2]: /ja/serverless/guide/azure_app_service_linux_containers_serverless_init
 [3]: https://app.datadoghq.com/integrations/azure
 [4]: /ja/profiler/
+[5]: /ja/integrations/azure-app-services/#metrics
