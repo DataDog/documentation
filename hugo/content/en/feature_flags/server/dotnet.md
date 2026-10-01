@@ -21,37 +21,45 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog .NET tracer (`dd-trace-dotnet`).
+This page describes how to instrument your .NET application with the Datadog Feature Flags SDK. The .NET SDK integrates with [OpenFeature][1], an open standard for feature flag management, and uses the Datadog .NET tracer (`dd-trace-dotnet`) to receive flag updates from the managed CDN or Agent Remote Configuration.
 
 This guide explains how to install and enable the SDK, create an OpenFeature client, and evaluate feature flags in your application.
 
 ## Prerequisites
 
-Before setting up the .NET Feature Flags SDK, ensure you have:
+For agentless configuration delivery, install the Datadog .NET tracer version **3.54.0 or later** and `Datadog.FeatureFlags.OpenFeature` version **2.3.1 or later**. The tracer must be loaded with [automatic instrumentation][8]; installing the OpenFeature provider alone is not sufficient. A separate Datadog Agent is not required to fetch flag configuration.
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration][2] enabled
-- **Datadog [API key][5]** configured on the Agent
-- **Datadog .NET SDK** (`dd-trace-dotnet`):
-  - Version 3.36.0 or later for .NET 6+
-  - Version 3.38.0 or later for .NET Framework 4.6.2+
-
-Set the following environment variables:
+Set these environment variables in the application process before startup:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
+DD_FEATURE_FLAGS_ENABLED=true
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE=<YOUR_DATADOG_SITE>
 DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+Use a Datadog [API key][5] and the site that hosts your organization, such as `datadoghq.com`. Initialize the Datadog OpenFeature provider in your application to start polling. Evaluations use locally cached configuration and do not make network requests.
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
+In version 3.54.0, agentless configuration delivery does **not** include direct Event Platform Proxy (EVP) fallback. Experiment exposure events still require a compatible local Agent or telemetry relay. Flag evaluation metrics use a separately configured OpenTelemetry pipeline; enabling CDN delivery does not configure metrics export. See [Set Up Server-Side Flag Evaluation Metrics][6] and [Feature Flag Graphs][7].
+
+### Use Agent Remote Configuration
+
+For Agent-based delivery, use Datadog Agent 7.55 or later with [Remote Configuration][2] enabled and an API key configured on the Agent. The minimum tracer versions are 3.36.0 for .NET 6+ and 3.38.0 for .NET Framework 4.6.2+.
+
+With tracer 3.54.0 or later, select the source explicitly:
+
+{{< code-block lang="bash" >}}
+DD_FEATURE_FLAGS_ENABLED=true
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+Earlier tracer versions use `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`. In 3.54.0, this deprecated setting preserves Remote Configuration when neither the new enablement setting nor an explicit source is supplied. To migrate, replace the legacy setting with the agentless settings above. `DD_FEATURE_FLAGS_ENABLED=false` disables Feature Flags regardless of the selected source.
+
+See [Configuration Sources][9] for polling, request timeout, custom endpoint, and migration settings. The default agentless polling interval is 30 seconds, the request timeout is 5 seconds, and provider initialization waits up to 30 seconds for the first configuration.
 
 ## Installation
 
@@ -89,7 +97,7 @@ Or add them to your `.csproj` file:
 
 ## Initialize the SDK
 
-Register the Datadog OpenFeature provider with the OpenFeature API. The provider connects to the Datadog .NET tracer's Remote Configuration system to receive flag configurations.
+Register the Datadog OpenFeature provider with the OpenFeature API. The provider activates the selected configuration source in the Datadog .NET tracer.
 
 ### Blocking initialization
 
@@ -251,7 +259,7 @@ Flag details help you debug evaluation behavior and understand why a user receiv
 
 ## Waiting for provider initialization
 
-By default, the provider initializes asynchronously and flag evaluations return default values until the first Remote Configuration payload is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
+By default, the provider initializes asynchronously and flag evaluations return default values until the first flag configuration is received. If your application requires flags to be ready before handling requests, you can wait for the provider to initialize using event handlers:
 
 {{< code-block lang="csharp" >}}
 using OpenFeature;
@@ -357,22 +365,15 @@ To avoid coupling tests to SDK internals, prefer swapping in `InMemoryProvider` 
 
 ## Troubleshooting
 
-### Provider not enabled
+### Agentless configuration not working
 
-If you receive warnings about the provider not being enabled, ensure `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set in your environment or application configuration:
+- Verify that tracer 3.54.0 or later is loaded and the OpenFeature provider is initialized.
+- Check `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process.
+- Confirm `DD_FEATURE_FLAGS_ENABLED` is not `false` and `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`.
+- Allow outbound HTTPS to `ufc-server.ff-cdn.<DD_SITE>`.
+- Enable `DD_TRACE_DEBUG=true` and check tracer logs for authentication, timeout, or malformed configuration errors.
 
-{{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-{{< /code-block >}}
-
-For containerized applications, add this to your Docker or Kubernetes configuration:
-
-{{< code-block lang="yaml" filename="docker-compose.yml" >}}
-environment:
-  - DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-  - DD_SERVICE=my-service
-  - DD_ENV=production
-{{< /code-block >}}
+Before the first valid configuration, evaluations return caller defaults. After successful initialization, transient delivery failures retain the last valid configuration.
 
 ### Remote Configuration not working
 
@@ -401,6 +402,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [5]: /account_management/api-app-keys/#api-keys
 [6]: /feature_flags/guide/server_flag_evaluation_metrics/
 [7]: /feature_flags/concepts/flag_graphs/
+[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[9]: /feature_flags/concepts/configuration_sources/
 
 ## Further reading
 
