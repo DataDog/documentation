@@ -1,1 +1,1 @@
-Session sampling controls aren't available for this SDK yet.
+Session sampling is not supported for this SDK.
