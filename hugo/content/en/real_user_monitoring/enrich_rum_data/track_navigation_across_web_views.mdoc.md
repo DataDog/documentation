@@ -113,3 +113,7 @@ Select your SDK for platform-specific instructions on tracking navigation across
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_navigation_across_web_views/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Frontend-to-Backend Traces](/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/).

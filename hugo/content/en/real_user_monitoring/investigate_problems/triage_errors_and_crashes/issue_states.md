@@ -6,3 +6,7 @@ aliases:
 ---
 
 {{< include-markdown "error_tracking/issue_states" >}}
+
+## Next step
+
+Continue to [Error Grouping](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/error_grouping/).

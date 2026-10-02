@@ -16,3 +16,7 @@ content_filters:
 ## Setup
 
 {% partial file="error_tracking/grouping/setup/rum.mdoc.md" /%}
+
+## Next step
+
+Continue to [Error Tracking Monitors](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/monitors/).

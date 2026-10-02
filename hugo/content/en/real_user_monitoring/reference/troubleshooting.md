@@ -29,3 +29,7 @@ aliases:
 ---
 
 {{< include-markdown "client_sdks/troubleshooting" >}}
+
+## Next step
+
+Continue to [Real User Monitoring & Session Replay Guides](/real_user_monitoring/guide/).

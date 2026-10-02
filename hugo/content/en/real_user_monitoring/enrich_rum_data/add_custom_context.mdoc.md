@@ -91,3 +91,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/add_custom_context/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Users and Accounts](/real_user_monitoring/enrich_rum_data/track_user_ids/).

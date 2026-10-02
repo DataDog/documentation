@@ -90,6 +90,10 @@ To search for a specific attribute, [add it as a facet](#facets) and enter `@` i
 
 For example, if your facet name is **url** and you want to filter on the **url** value `www.datadoghq.com`, enter `@url:www.datadoghq.com`.
 
+## Next step
+
+Continue to [Search Syntax](/real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

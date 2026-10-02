@@ -34,11 +34,13 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 | [Resource](#resource)                   | A network request made by your application, such as an XHR, fetch, or asset load.                                                    |
 | [Error](#error)                         | A frontend error, unhandled exception, or crash captured during a session.                                                           |
 | [Long task](#long-task)                 | A task that blocks the main thread for longer than a threshold, affecting the responsiveness of your application.                     |
-| [Vitals](#vitals)                       | Performance scores, such as Core Web Vitals or Mobile Vitals, that measure the quality of the user experience.                       |
+| [Vitals](#vitals)                       | Performance scores, such as Core Web Vitals or Mobile Vitals, reported as attributes on view events. Also the name of a legacy custom timer event. |
+| [Operation](#operation)                 | A critical technical step in your application, such as a login or a checkout payment, tracked from start to success or failure.     |
 | [Frustration signals](#frustration-signals) | A user behavior, such as a rage click or error click, that indicates a poor experience.                                           |
 | [Session Replay](#session-replay)       | A visual, replayable recording of a user's session in your web or mobile application.                                                |
-| [Sampling](#sampling)                   | The rate at which sessions or replays are collected and sent to Datadog.                                                             |
-| [Retention filters and quotas](#retention-filters-and-quotas) | Controls that determine which sessions Datadog retains and how many are retained per day.                        |
+| [Sampling](#sampling)                   | Client-side sample rates that control the volume of data the SDK sends to Datadog.                                                   |
+| [Retention filters and quotas](#retention-filters-and-quotas) | Server-side controls that determine which ingested sessions Datadog retains and how many are retained per day.  |
+| [Technical limitations](#technical-limitations) | Limits that apply to RUM sessions, events, and uploaded files.                                                              |
 | [Context](#context)                     | Custom or global attributes attached to RUM events to add business or user-specific information.                                     |
 
 ## RUM application
@@ -49,9 +51,7 @@ A RUM application represents a single web or mobile application, or one environm
 
 A session groups the activity of a single user on your web or mobile application. A session includes all related navigation events (views), user actions, network requests (resources), crashes and errors, and other events and signals that collectively produce a faithful representation of the user experience.
 
-A session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
-
-For more information, see [Session Definition][3].
+A session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically. For other limits that apply to sessions, see [Technical limitations](#technical-limitations).
 
 ## View
 
@@ -77,7 +77,15 @@ A long task is a task that blocks the main thread for longer than a threshold (5
 
 ## Vitals
 
-Vitals are standardized performance scores that measure the quality of the user experience. For web applications, this includes [Core Web Vitals][8] such as Largest Contentful Paint and Cumulative Layout Shift. For mobile applications, this includes [Mobile Vitals][9] such as hitch rate and hang rate.
+Vitals are standardized performance scores that measure the quality of the user experience. For web applications, this includes [Core Web Vitals][8] such as Largest Contentful Paint and Cumulative Layout Shift. For mobile applications, this includes [Mobile Vitals][9] such as hitch rate and hang rate. RUM reports these scores as attributes on view events, not as separate events.
+
+RUM also has a legacy **vital** event type, which records custom timers that you start and stop in your code. To measure the duration and outcome of a technical step in your application, use [operations](#operation) instead.
+
+## Operation
+
+An operation represents a critical technical step in your application that users expect to complete reliably, such as logging in, adding a payment method, or submitting a search. You instrument the start and the success or failure of each operation in your code. Operations are bound to a RUM session but can span multiple views, and Datadog computes availability and latency metrics for them.
+
+To learn more, see [Track Critical Operations][3].
 
 ## Frustration signals
 
@@ -91,11 +99,16 @@ To learn more, see [Session Replay][10].
 
 ## Sampling
 
-Sampling controls what percentage of sessions and session replays are collected and sent to Datadog. Sampling is configured in the SDK and helps you manage data volume while still computing accurate metrics over your overall traffic.
+RUM provides two complementary ways to control data volume:
+
+- **Head-based, client-side sample rates** are configured in the SDK and decide, when a session starts, how much data is sent to Datadog. Separate sample rates apply to different dimensions, such as sessions, Session Replay recordings, backend traces, and profiles. To learn more, see [Manage Sessions][15].
+- **Tail-based, server-side controls** apply after Datadog ingests the data, and let you selectively retain the sessions that matter most. See [Retention filters and quotas](#retention-filters-and-quotas).
+
+Datadog recommends sending 100% of sessions and using retention filters to control which sessions are retained. Metrics computed from ingested sessions remain accurate regardless of how many sessions are retained.
 
 ## Retention filters and quotas
 
-Retention filters and quotas are part of [RUM without Limits][11], and determine which sessions Datadog retains for further investigation. Retention filters use tag-based rules to keep the sessions that matter most to your business, while retention quotas cap the number of sessions retained per application per day.
+Retention filters and quotas are part of [RUM without Limits][11], and determine which sessions Datadog retains for further investigation. Retention filters use deterministic rules, based on event attributes and tags, to keep the sessions that matter most to your business, while retention quotas cap the number of sessions retained per application per day.
 
 To learn more, see [Retain and Recover Valuable Sessions][12].
 
@@ -105,13 +118,34 @@ Context is custom or global information attached to RUM events, such as a user's
 
 To learn more, see [Enrich RUM Data][13].
 
+## Technical limitations
+
+| Property                                   | Limitation               |
+| ------------------------------------------ | ------------------------ |
+| Maximum duration of a session              | 4 hours                  |
+| Timeout of a session                       | 15 minutes of inactivity |
+| Maximum number of events per session       | 10 million               |
+| Maximum number of attributes per event     | 1,000                    |
+| Maximum attribute depth per event          | 20                       |
+| Maximum event size                         | 1 MB                     |
+| Maximum intake payload size                | 5 MB                     |
+| Maximum source maps and mapping files size | 500 MB per file          |
+| Maximum dSYM files size                    | 2 GB per file            |
+| Maximum delay at ingestion                 | 24 hours                 |
+
+If an event exceeds any of these limits, the Datadog intake rejects it.
+
+## Next step
+
+Continue to [Set Up RUM](/real_user_monitoring/setup/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /glossary/
 [2]: /real_user_monitoring/setup/
-[3]: /real_user_monitoring/#session-definition
+[3]: /real_user_monitoring/track_critical_operations/
 [4]: /real_user_monitoring/setup/enable_rum/track_navigation/
 [5]: /real_user_monitoring/setup/enable_rum/track_user_interactions/
 [6]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
@@ -123,3 +157,4 @@ To learn more, see [Enrich RUM Data][13].
 [12]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [13]: /real_user_monitoring/enrich_rum_data/
 [14]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
+[15]: /real_user_monitoring/setup/enable_rum/manage_sessions/

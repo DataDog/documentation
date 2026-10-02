@@ -41,3 +41,7 @@ aliases:
 ---
 
 {{< include-markdown "client_sdks/setup" >}}
+
+## Next step
+
+Continue to [Enable the Datadog RUM Module](/real_user_monitoring/setup/enable_rum/).

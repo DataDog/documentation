@@ -75,3 +75,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/manage_data_collection/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Errors and Crashes](/real_user_monitoring/setup/enable_rum/track_errors/).

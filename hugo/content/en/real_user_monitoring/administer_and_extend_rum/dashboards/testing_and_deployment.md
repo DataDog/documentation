@@ -71,6 +71,10 @@ This dashboard shows:
 
 For more information about the data displayed, see the documentation for each platform: [iOS RUM][5], [Android RUM][6], [React Native RUM][7], and [Flutter RUM][8].
 
+## Next step
+
+Continue to [Usage Dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/usage/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -86,6 +86,10 @@ After an investigation completes, you can act on findings without leaving the pa
 - {{< ui >}}View trace{{< /ui >}} on a correlated endpoint: Opens the matching trace in APM.
 - {{< ui >}}View Sample Session{{< /ui >}} on an error group: Opens the session in the RUM Explorer.
 
+## Next step
+
+Continue to [Operations Monitoring](/real_user_monitoring/track_critical_operations/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

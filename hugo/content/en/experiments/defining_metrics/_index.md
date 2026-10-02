@@ -55,7 +55,7 @@ To create a metric for your experiment:
 {{< img src="/product_analytics/experiment/exp_create_new_metric.png" alt="The Create Metric page with the Metric name set to 'Example metric', the 'click on ADD TO CART' event selected, the aggregation method dropdown set to Count of events, the Additional settings section, a bar chart preview on the right, and the Save button highlighted." style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
-[3]: /real_user_monitoring/#get-started
+[3]: /real_user_monitoring/setup/#get-started
 [4]: /real_user_monitoring/setup/install/?platform=android
 [5]: /real_user_monitoring/setup/install/?platform=ios
 [6]: /real_user_monitoring/setup/install/?platform=browser

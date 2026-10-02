@@ -38,6 +38,10 @@ You must have edit access to restore general access to a restricted application.
 1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
+## Next step
+
+Continue to [Correlate RUM with Other Telemetry](/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

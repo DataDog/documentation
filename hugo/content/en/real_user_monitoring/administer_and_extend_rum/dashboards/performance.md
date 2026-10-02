@@ -65,6 +65,10 @@ The RUM resources dashboard helps you identify which resources have the heaviest
 
 For more information about the data displayed, see [RUM Browser Data Collected][1].
 
+## Next step
+
+Continue to [Testing and Deployment Dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/testing_and_deployment/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

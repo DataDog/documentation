@@ -154,5 +154,5 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [13]: /real_user_monitoring/setup/install/?platform=browser
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols
-[16]: /real_user_monitoring/#technical-limitations
+[16]: /real_user_monitoring/rum_terms_and_concepts/#technical-limitations
 [17]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/

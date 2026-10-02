@@ -144,6 +144,10 @@ For all visualizations, select a section of the graph or click on the graph to e
 
 For the remaining visualization options, click on the graph and click {{< ui >}}View events{{< /ui >}} to see a list of events that correspond to your selection. 
 
+## Next step
+
+Continue to [Events Side Panel](/real_user_monitoring/investigate_problems/explore_retained_data/events/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

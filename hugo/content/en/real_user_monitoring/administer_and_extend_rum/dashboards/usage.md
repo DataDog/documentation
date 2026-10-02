@@ -79,6 +79,10 @@ The RUM Frustration Signals dashboard gives you insight into where your users ar
 
 For more information about the data displayed, see [RUM Browser Data Collected][1].
 
+## Next step
+
+Continue to [Error Dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/errors/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

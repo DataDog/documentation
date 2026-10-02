@@ -26,6 +26,10 @@ After Datadog retains your RUM sessions, explore them in the RUM Explorer, triag
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Explore Retained Data](/real_user_monitoring/investigate_problems/explore_retained_data/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

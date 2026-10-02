@@ -48,6 +48,10 @@ To access the Logs setup pages, follow the links below based on your platform:
   {{< image-card href="/logs/log_collection/maui" src="integrations_logos/maui_large.svg" alt=".NET MAUI" >}}
 {{< /card-grid >}}
 
+## Next step
+
+Continue to [Correlate RUM and Synthetic Tests](/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/synthetics/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

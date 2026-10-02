@@ -29,6 +29,10 @@ RUM without Limits lets you control which sessions are retained out of your full
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Configure Retention Filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

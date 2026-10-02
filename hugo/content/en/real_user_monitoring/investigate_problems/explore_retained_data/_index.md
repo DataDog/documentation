@@ -77,6 +77,10 @@ Use autocomplete suggestions to view facets and recent queries.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Search RUM Events](/real_user_monitoring/investigate_problems/explore_retained_data/search/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

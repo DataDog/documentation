@@ -124,3 +124,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/additional_plugins/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Data Collected](/real_user_monitoring/setup/data_collected/).

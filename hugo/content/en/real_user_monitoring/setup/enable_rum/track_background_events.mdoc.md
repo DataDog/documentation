@@ -79,3 +79,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_background_events/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Advanced Configuration](/real_user_monitoring/setup/enable_rum/advanced_configuration/).

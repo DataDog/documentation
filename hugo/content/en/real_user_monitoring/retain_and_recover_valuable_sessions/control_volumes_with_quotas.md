@@ -56,6 +56,10 @@ The retention filters page shows a breakdown of retained user sessions, includin
 
 Retention quotas can also be managed through [APIs][1].
 
+## Next step
+
+Continue to [Recover Sessions from Managed Archives](/real_user_monitoring/retain_and_recover_valuable_sessions/recover_sessions_from_managed_archives/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

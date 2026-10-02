@@ -65,3 +65,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_user_ids/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Modify or Drop RUM Events Client-Side](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/).

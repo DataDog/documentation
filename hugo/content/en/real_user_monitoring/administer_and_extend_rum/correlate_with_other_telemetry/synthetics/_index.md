@@ -13,3 +13,7 @@ further_reading:
 ---
 
 {{< include-markdown "synthetics/guide/explore-rum-through-synthetics" >}}
+
+## Next step
+
+Continue to [Reference](/real_user_monitoring/reference/).

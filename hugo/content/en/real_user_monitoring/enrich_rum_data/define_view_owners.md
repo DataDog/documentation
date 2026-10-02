@@ -52,6 +52,10 @@ After you associate a view with a team, Datadog automatically attributes new eve
 
 <div class="alert alert-info">You can also configure ownership of views with the <a href="https://docs.datadoghq.com/api/latest/rum-teams-ownership/">Datadog API</a>.</div>
 
+## Next step
+
+Continue to [Enable GeoIP Enrichment](/real_user_monitoring/enrich_rum_data/enable_geoip_enrichment/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -46,6 +46,10 @@ RUM SDKs automatically track attributes such as user activity, views, errors, an
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -152,3 +152,7 @@ Select your SDK for platform-specific data collection details.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/data_collected/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Enrich RUM Data](/real_user_monitoring/enrich_rum_data/).

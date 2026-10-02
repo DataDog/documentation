@@ -26,6 +26,10 @@ This page lists external reference resources for Real User Monitoring.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [SDK Performance Impact](/real_user_monitoring/reference/sdk_performance_impact/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

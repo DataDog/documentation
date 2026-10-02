@@ -75,6 +75,10 @@ After an investigation completes, you can act on findings without leaving the pa
 - {{< ui >}}Fix with Bits{{< /ui >}}: Opens the Bits AI dev assistant with the investigation context pre-filled to generate a code fix from your IDE.
 - {{< ui >}}Save to a Notebook{{< /ui >}}: Exports the full timeline and findings to a [Notebook][5] to share with your team.
 
+## Next step
+
+Continue to [Operation AI Investigation](/real_user_monitoring/investigate_problems/troubleshoot_with_ai/operation_ai_investigation/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

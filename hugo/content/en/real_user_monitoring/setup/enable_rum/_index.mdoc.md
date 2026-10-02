@@ -253,3 +253,7 @@ After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring
 {% /if %}
 
 Then, [configure retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control which sessions RUM without Limits retains.
+
+## Next step
+
+Continue to [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/).

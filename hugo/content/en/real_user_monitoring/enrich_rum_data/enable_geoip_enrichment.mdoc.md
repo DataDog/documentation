@@ -86,3 +86,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/geoip/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Measure Health with Metrics](/real_user_monitoring/measure_health_with_metrics/).

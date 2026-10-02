@@ -57,6 +57,10 @@ In the default view entry in the {{< ui >}}Views{{< /ui >}} panel, you can:
 - Update your default view with the current parameters
 - Reset your default view back to the default setting for a fresh restart
 
+## Next step
+
+Continue to [Export RUM Events and Graphs](/real_user_monitoring/investigate_problems/explore_retained_data/export/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

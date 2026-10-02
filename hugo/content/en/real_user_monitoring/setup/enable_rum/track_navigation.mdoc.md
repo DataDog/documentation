@@ -69,3 +69,7 @@ RUM organizes each session into views, which represent distinct screens or state
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_navigation/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/).

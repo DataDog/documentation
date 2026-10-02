@@ -88,6 +88,10 @@ Use the other tabs to explore related data:
 {{< ui >}}Attributes{{< /ui >}}
 : View collected context attributes. Add custom attributes with the [Global Context API][2].
 
+## Next step
+
+Continue to [Saved Views](/real_user_monitoring/investigate_problems/explore_retained_data/saved_views/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

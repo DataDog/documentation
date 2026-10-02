@@ -25,6 +25,10 @@ RUM computes metrics over 100% of your ingested traffic, even when you retain on
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Out-of-the-Box Metrics](/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

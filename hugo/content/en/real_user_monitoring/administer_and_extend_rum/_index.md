@@ -32,6 +32,10 @@ After you start collecting data for your RUM applications, use these capabilitie
     {{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Use RUM Dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

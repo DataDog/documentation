@@ -38,6 +38,10 @@ Click the {{< ui >}}More{{< /ui >}} button on the right hand corner and select a
 
 Options available for some visualization types are not supported in others. For example, you cannot download a distribution graph into a CSV file.
 
+## Next step
+
+Continue to [Watchdog Insights for RUM](/real_user_monitoring/investigate_problems/explore_retained_data/watchdog_insights/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

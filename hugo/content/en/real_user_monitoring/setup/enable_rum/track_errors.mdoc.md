@@ -103,3 +103,7 @@ RUM automatically captures crashes, unhandled exceptions, and other errors. You 
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_errors/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/).

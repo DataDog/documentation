@@ -69,6 +69,10 @@ You can search for a numerical attribute within a specific range. For example, r
 
 [Saved Views][1] contain your search query, columns, sort order, time range, and facets.
 
+## Next step
+
+Continue to [Group RUM Events](/real_user_monitoring/investigate_problems/explore_retained_data/group/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

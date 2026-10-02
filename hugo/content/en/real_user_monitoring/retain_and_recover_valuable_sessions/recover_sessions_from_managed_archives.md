@@ -101,6 +101,10 @@ After recovering a session, find it in the RUM Explorer by querying on:
 
 Recovered sessions that were initially retained by a retention filter have `@session.was_retained:true`.
 
+## Next step
+
+Continue to [Investigate Problems](/real_user_monitoring/investigate_problems/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

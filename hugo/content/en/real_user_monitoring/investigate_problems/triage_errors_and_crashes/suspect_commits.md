@@ -7,3 +7,7 @@ disable_toc: false
 ---
 
 {{< include-markdown "error_tracking/suspect_commits" >}}
+
+## Next step
+
+Continue to [Error Tracking Troubleshooting](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/troubleshooting/).

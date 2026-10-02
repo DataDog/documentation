@@ -37,3 +37,7 @@ Understand how the Datadog SDK affects your application's performance, and use t
 SDK performance impact benchmarks are not available for the selected SDK.
 {% /alert %}
 {% /if %}
+
+## Next step
+
+Continue to [Troubleshooting](/real_user_monitoring/reference/troubleshooting/).

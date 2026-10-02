@@ -63,3 +63,7 @@ Select your SDK for platform-specific instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/manage_sessions/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/).

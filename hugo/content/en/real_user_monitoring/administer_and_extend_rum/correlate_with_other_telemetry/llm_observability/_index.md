@@ -104,6 +104,10 @@ After configuration is complete, you can navigate between correlated data:
 - **From RUM to LLM**: In a RUM session, click the {{< ui >}}LLM Traces{{< /ui >}} button in the side panel header to view associated AI interactions.
 - **From LLM to RUM**: In an LLM trace, click the {{< ui >}}RUM Session{{< /ui >}} link to view the corresponding user session replay.
 
+## Next step
+
+Continue to [Correlate RUM and Frontend Logs](/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/logs/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

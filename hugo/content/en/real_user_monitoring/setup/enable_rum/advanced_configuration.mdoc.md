@@ -118,3 +118,7 @@ The following configuration options go beyond initial setup. Select your SDK for
 {% if equals($platform, "unity") %}
 {% partial file="sdk/advanced_config/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [RUM Remote Configuration](/real_user_monitoring/remote_configuration/).

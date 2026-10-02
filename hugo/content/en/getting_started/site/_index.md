@@ -80,5 +80,5 @@ The Datadog for Government site (US2-FED) is In Process for IL5 Authorization. U
 
 [1]: https://www.datadoghq.com/security/
 [2]: /agent/configuration/dual-shipping/
-[3]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[3]: /real_user_monitoring/setup/#supported-endpoints-for-sdk-domains
 [4]: mailto:fedramp@datadoghq.com

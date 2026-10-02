@@ -71,6 +71,10 @@ After an investigation completes, you can act on findings without leaving the pa
 
 - {{< ui >}}Save to a Notebook{{< /ui >}}: Exports the full timeline and findings to a [Notebook][1] to share with your team.
 
+## Next step
+
+Continue to [Multi-View AI Investigation](/real_user_monitoring/investigate_problems/troubleshoot_with_ai/multi_view_ai_investigation/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

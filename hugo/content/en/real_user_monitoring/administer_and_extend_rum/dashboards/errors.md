@@ -38,6 +38,10 @@ The RUM mobile app crashes and errors dashboard provides insights about your mob
 
 For more information about the data displayed, see the documentation for each platform: [iOS RUM][3], [Android RUM][4], [React Native RUM][5], and [Flutter RUM][6].
 
+## Next step
+
+Continue to [Configure Permissions](/real_user_monitoring/administer_and_extend_rum/configure_permissions/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

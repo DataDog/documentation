@@ -6,3 +6,7 @@ aliases:
 ---
 
 {{< include-markdown "monitors/types/error_tracking" >}}
+
+## Next step
+
+Continue to [Suspect Commits](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/suspect_commits/).

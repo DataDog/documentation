@@ -69,6 +69,10 @@ In the {{< ui >}}full side panel{{< /ui >}}, you can see a timeseries graph abou
 
 You can begin your investigation for the root cause of a performance issue in this timeseries graph.
 
+## Next step
+
+Continue to [Error Tracking for Web and Mobile Applications](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

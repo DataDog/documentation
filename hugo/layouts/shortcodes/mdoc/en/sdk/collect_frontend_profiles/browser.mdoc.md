@@ -156,5 +156,5 @@ The **Optimization page** surfaces profiling data in several contexts:
 [2]: /real_user_monitoring/setup/install/?platform=browser
 [3]: /real_user_monitoring/guide/proxy-rum-data
 [4]: /integrations/content_security_policy_logs
-[5]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[5]: /real_user_monitoring/setup/#supported-endpoints-for-sdk-domains
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API

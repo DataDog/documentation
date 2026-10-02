@@ -86,3 +86,7 @@ Frustration signals help you identify points of user friction, such as rage clic
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_frustration_signals/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/).

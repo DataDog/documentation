@@ -105,6 +105,10 @@ You can use RUM-based custom metrics for the following actions:
 - Trigger an alert when a metric is predicted to cross a threshold in the future in a [forecast monitor][14]
 - Create [metric-based SLOs][15] to track user-centric performance objectives for your teams and organizations 
 
+## Next step
+
+Continue to [Retain and Recover Valuable Sessions](/real_user_monitoring/retain_and_recover_valuable_sessions/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

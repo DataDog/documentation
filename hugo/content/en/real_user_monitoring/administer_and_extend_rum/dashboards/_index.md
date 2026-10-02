@@ -47,6 +47,10 @@ To clone your RUM dashboards, click the {{< ui >}}Settings{{< /ui >}} icon and s
 
 You can also modify the template variables and create a [saved view][6].
 
+## Next step
+
+Continue to [Performance Dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/performance/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -69,3 +69,7 @@ RUM Actions represent the interactions your users have with your application, su
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_user_interactions/unity.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Frustration Signals](/real_user_monitoring/setup/enable_rum/track_frustration_signals/).

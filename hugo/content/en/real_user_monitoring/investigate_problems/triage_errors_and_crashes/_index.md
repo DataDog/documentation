@@ -52,6 +52,10 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=maui" >}}.NET MAUI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Next step
+
+Continue to [Error Tracking Explorer](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

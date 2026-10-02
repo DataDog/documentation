@@ -209,6 +209,10 @@ Connecting RUM and traces may significantly increase the APM-ingested volumes. U
 
 Configuring cross-product retention filters may also increase the APM-indexed volumes. Use the retention rate of the cross-product retention filters to control the share of the backend traces to index.
 
+## Next step
+
+Continue to [Collect Frontend Profiles](/real_user_monitoring/enrich_rum_data/collect_frontend_profiles/).
+
 [1]: /tracing
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /tracing/trace_collection/dd_libraries/python/

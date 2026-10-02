@@ -415,7 +415,7 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 [13]: /real_user_monitoring/guide/proxy-rum-data
 [14]: /integrations/content_security_policy_logs
-[15]: /real_user_monitoring/#supported-endpoints-for-sdk-domains
+[15]: /real_user_monitoring/setup/#supported-endpoints-for-sdk-domains
 [16]: /real_user_monitoring/setup/data_collected/?platform=android#error-attributes
 [17]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android
 [18]: /real_user_monitoring/setup/data_collected/?platform=ios#error-attributes

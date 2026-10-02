@@ -37,6 +37,10 @@ Individual events with multiple values for a single facet belong to that number 
 
 The {{< ui >}}Group into fields{{< /ui >}} aggregation supports one dimension for the [Top list][1] visualization and up to three dimensions for the [timeseries][2], [list][3] and [table][4] visualizations. When there are multiple dimensions, the top values are determined based on the first dimension, then the second dimension within the top values of the first dimension, then the third dimension within the top values of the second dimension, and so on.
 
+## Next step
+
+Continue to [Visualize](/real_user_monitoring/investigate_problems/explore_retained_data/visualize/).
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -71,3 +71,7 @@ Select your SDK for platform-specific setup instructions.
 {% if equals($platform, "unity") %}
 {% partial file="sdk/track_app_startups/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track UI Latency](/real_user_monitoring/setup/enable_rum/track_ui_latency/).

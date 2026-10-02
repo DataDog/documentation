@@ -84,3 +84,7 @@ Select your SDK for platform-specific instructions on modifying or dropping RUM 
 {% if equals($platform, "unity") %}
 {% partial file="sdk/modify_or_drop_rum_events/unavailable.mdoc.md" /%}
 {% /if %}
+
+## Next step
+
+Continue to [Track Navigation Across Web Views](/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/).

@@ -39,6 +39,10 @@ Run an agentic investigation on a single operation in [Operations Monitoring][3]
 
 For more information, see [Operation AI Investigation][4].
 
+## Next step
+
+Continue to [Single-View AI Investigation](/real_user_monitoring/investigate_problems/troubleshoot_with_ai/single_view_ai_investigation/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

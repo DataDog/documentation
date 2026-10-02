@@ -142,3 +142,4 @@
 /*/dd_e2e/cdocs/components/skill_callout.md
 /*/real_user_monitoring/setup/enable_rum/track_background_events.md
 /*/real_user_monitoring/enrich_rum_data/enable_geoip_enrichment.md
+/*/real_user_monitoring/enrich_rum_data/track_feature_flags.md

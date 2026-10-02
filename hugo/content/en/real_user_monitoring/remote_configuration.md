@@ -236,6 +236,10 @@ Remote configuration does not override any SDK settings by default. To manage a 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Next step
+
+Continue to [Additional Plugins and Integrations](/real_user_monitoring/setup/additional_plugins/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

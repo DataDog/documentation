@@ -10,3 +10,7 @@ further_reading:
 ---
 
 {{< include-markdown "error_tracking/explorer" >}}
+
+## Next step
+
+Continue to [Issue States in Error Tracking](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/issue_states/).

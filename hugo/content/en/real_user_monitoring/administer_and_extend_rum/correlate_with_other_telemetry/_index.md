@@ -34,6 +34,10 @@ Follow the data from Synthetic tests directly through to the root causes by inve
 
 To connect frontend RUM events with backend traces, see [Track Frontend-to-Backend Traces][2].
 
+## Next step
+
+Continue to [Correlate Agent Observability with RUM](/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/llm_observability/).
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
