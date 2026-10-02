@@ -138,9 +138,9 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "DatadogUploadAndRehydrateLogArchives",
+      "Sid": "DatadogRehydrateLogArchives",
       "Effect": "Allow",
-      "Action": ["s3:PutObject", "s3:GetObject"],
+      "Action": "s3:GetObject",
       "Resource": [
         "arn:aws:s3:::<MY_BUCKET_NAME_1_/_MY_OPTIONAL_BUCKET_PATH_1>/*",
         "arn:aws:s3:::<MY_BUCKET_NAME_2_/_MY_OPTIONAL_BUCKET_PATH_2>/*"
@@ -159,15 +159,18 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
 }
 ```
 
+If you attached the archive policy from [Set permissions][4] to this role, the role already has these permissions.
+
 #### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
 [1]: https://app.datadoghq.com/account/settings#integrations/amazon-web-services
 [2]: /integrations/amazon_web_services/?tab=allpermissions#installation
 [3]: https://app.datadoghq.com/logs/pipelines/archives
+[4]: /logs/log_configuration/archives/?tab=awss3#set-permissions
 {{% /tab %}}
 
 {{% tab "Azure Storage" %}}
