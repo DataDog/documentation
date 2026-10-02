@@ -214,6 +214,7 @@ agent diagnose show-metadata agent-telemetry
 | **Process Manager**                         |                                                                                                                        |
 | runtime.procmgr_daemon_reachable            | Whether the Agent can reach the `dd-procmgrd` process manager daemon                                                   |
 | runtime.procmgr_daemon_ready                | Whether `dd-procmgrd` reports that it is ready to supervise processes                                                  |
+| runtime.procmgr_daemon_service_state        | OS unit or Windows service state of `dd-procmgrd` (not gRPC readiness), tagged by state                                 |
 | runtime.procmgr_process_running             | Whether a process supervised by `dd-procmgrd` is running, per process                                                  |
 | runtime.procmgr_process_state               | The state `dd-procmgrd` reports for a supervised process, tagged by process and state                                  |
 | runtime.agent_service_installed             | Whether an Agent service is installed on the host, per service                                                         |
