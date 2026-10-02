@@ -131,7 +131,7 @@ Datadog requires the permission to read from your archives to rehydrate content 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
 
-To rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
+To rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. If you attached the policy from [Set archive permissions][4] to that Role, it already has the permissions it needs, and you can skip the following statement. Otherwise, add the following permission statement to the Role's IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
 ```json
 {
@@ -158,8 +158,6 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
   ]
 }
 ```
-
-If you attached the policy from [Set archive permissions][4] to this role, the role already has these permissions.
 
 #### Adding role delegation to S3 archives
 
