@@ -94,6 +94,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _float_ - **default**: `1.0`
 <br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
 
+`DD_LLMOBS_SAMPLING_RULES`
+: optional - _JSON array_
+<br />Requires `ddtrace` 4.16.0 or later. A list of rules setting the sample rate for traces matching a set of tags. A matching rule takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Tag-based sampling rules](#tag-based-sampling-rules).
+
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
@@ -354,6 +358,8 @@ LLMObs.enable(
   sample_rate=0.5,
 )
 {{< /code-block >}}
+
+To vary the sample rate by tag instead of applying one rate to every trace, see [Tag-based sampling rules](#tag-based-sampling-rules).
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -396,6 +402,48 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+### Tag-based sampling rules
+
+<div class="alert alert-info">Tag-based sampling rules are available in the Python SDK (<code>ddtrace</code> 4.16.0 or later).</div>
+
+`DD_LLMOBS_SAMPLE_RATE` applies a single rate to every trace. To retain different fractions of traffic for different parts of your application, set `DD_LLMOBS_SAMPLING_RULES` to a JSON array of rules that select traces by tag. For example, to keep 50% of production traces and 10% of staging traces:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLING_RULES='[{"tags": {"env": "prod"}, "sample_rate": 0.5}, {"tags": {"env": "staging"}, "sample_rate": 0.1}]' \
+ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Each rule is a JSON object with the following fields:
+
+`sample_rate`
+: required - _float_
+<br />The fraction of matching traces to retain, between `0.0` and `1.0`.
+
+`tags`
+: optional - _object_
+<br />A mapping of tag name to a pattern matched against that tag's value. A rule with no `tags` matches every trace, which makes it useful as a final catch-all.
+
+Rules behave as follows:
+
+- Rules are evaluated in the order you declare them, and the first rule that matches wins. Its `sample_rate` replaces `DD_LLMOBS_SAMPLE_RATE` for that trace. If no rule matches, `DD_LLMOBS_SAMPLE_RATE` applies.
+- Every tag declared in a rule must match for the rule to match.
+- Tag values are matched case-insensitively as glob patterns, where `*` matches any number of characters and `?` matches exactly one. For example, `{"tags": {"ml_app": "chat-*"}}` matches `chat-prod` and `chat-staging`.
+- Rules can match on tags Datadog sets on the root span, including `ml_app`, `env`, `service`, `version`, and `session_id`, as well as any tags you set yourself with [`LLMObs.annotate()`](#adding-tags) or `DD_TAGS`.
+- As with `DD_LLMOBS_SAMPLE_RATE`, the decision is made once per trace on the root span and applies to all of its child spans, including spans in downstream services.
+
+Sampling rules can only be configured through the environment variable; `LLMObs.enable()` has no equivalent parameter.
+
+#### When the decision is made
+
+A trace's sampling decision has to exist before any span leaves your process, but tags are added to the root span over the course of its lifetime. The SDK therefore delays the decision as long as it safely can, then freezes it. The decision is resolved at whichever of these happens first:
+
+- The root span finishes.
+- The trace is propagated to a downstream service.
+- Work is handed off to another thread or to asyncio.
+- The trace is partially flushed, because it exceeded `DD_TRACE_PARTIAL_FLUSH_MIN_SPANS` (default `300`) spans.
+
+Once frozen, the decision never changes: a tag set on the root span after that point does not affect sampling. To make sure a tag is considered, set it before any of the events above occur — for example, pass it when you start the root span rather than when you finish it.
 
 ## Manual instrumentation
 
