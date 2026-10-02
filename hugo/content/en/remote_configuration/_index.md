@@ -144,6 +144,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Workload Protection     | [Workload Protection][3]                                                                                       |
 | Observability Pipelines | Ensure that you've [enabled Remote Configuration on the API key][32] you're using for Observability Pipelines. |
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
+| Data Observability      | [PostgreSQL](/data_observability/quality_monitoring/transactional_databases/postgres/#enable-remote-configuration) |
 | Private Action Runner   | [Private Actions Overview](/actions/private_actions/)                                                          |
 | Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
 
