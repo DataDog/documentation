@@ -52,7 +52,7 @@ On the RUM summary page, click **Analyze with Bits AI** on a vital chart or on t
 You can ask Bits Chat about your frontend in plain language from any RUM page, and have it act on RUM for you. For example:
 
 - "Which pages in this application have the worst INP right now, and which interactions cause it?"
-- "Find sessions with 5xx errors on the checkout page in the last hour, grouped by error type." On the RUM Explorer, Bits applies the query for you.
+- "Find sessions with 5xx errors on the checkout page in the last hour, grouped by error type." (On the RUM Explorer, Bits applies the query for you.)
 - "Which functions are slowing down my LCP?" from the RUM Profiling page.
 - "Create a retention filter that keeps 25% of sessions with errors."
 - "Create an operation that tracks checkout from the cart page to the order confirmation page."

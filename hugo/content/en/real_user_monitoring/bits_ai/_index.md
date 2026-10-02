@@ -19,7 +19,7 @@ further_reading:
 
 Real User Monitoring (RUM) is integrated with [Bits AI][1]. You can start [Bits Investigations][2] from RUM, and use [Bits Chat][3] on any RUM page. RUM provides Bits with frontend-specific context, such as Core Web Vitals, view load timelines, operation health, and session-level signals. Bits correlates that context with the rest of your telemetry, including APM traces, logs, profiles, and source code, to identify root causes.
 
-Because RUM uses Bits Investigation, every investigation you start from RUM is saved in the [Bits Investigations list][4], can be shared with your team, takes your past feedback into account, and can be sent to [Bits Code][5] to generate a fix.
+Because these investigations run on Bits Investigation, every investigation you start from RUM is saved in the [Bits Investigations list][4], can be shared with your team, takes your past feedback into account, and can be sent to [Bits Code][5] to generate a fix.
 
 You can use Bits AI in RUM in three ways:
 

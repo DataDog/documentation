@@ -26,7 +26,7 @@ RUM runs anomaly detection on the Core Web Vitals charts of the RUM summary page
 
 {{< img src="real_user_monitoring/bits_ai/anomaly-investigate.png" alt="A First Contentful Paint chart with an anomalous window highlighted in pink and an Anomaly · Investigate button below the chart." style="width:50%;" >}}
 
-To start an investigation, click **Anomaly · Investigate**. A Bits Investigation opens in a new tab with the vital, the current query and view, the chart timeframe, and the start and end of the anomaly. Bits compares the anomalous window with the surrounding periods to explain what changed, and which releases, pages, or user segments were affected.
+To start an investigation, click **Anomaly · Investigate**. A Bits Investigation opens in a new tab with the vital, the active query and view, the chart timeframe, and the start and end of the anomaly. Bits compares the anomalous window with the surrounding periods to explain what changed, and which releases, pages, or user segments were affected.
 
 **Note**: Only degradations are highlighted, such as an increase in Largest Contentful Paint or Cumulative Layout Shift. Improvements are not flagged as anomalies.
 
