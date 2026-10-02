@@ -65,10 +65,10 @@ title: 分析
 
 6. ハッチングされたセグメントは、まだ進行中の間隔を示しています。
 
-## 詳細 {#learn-more}
+## 次のステップ {#next-steps}
 {{< whatsnext desc="分析イベントの検索、グループ化、可視化の方法、および個々のイベントのエクスポートや調査方法について学びます。" >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}検索構文{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} イベント {{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}}イベント{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}視覚化{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}グループ{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}エクスポート{{< /nextlink >}}

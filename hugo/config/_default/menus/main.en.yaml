@@ -2744,10 +2744,10 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_transition_forms
       weight: 203
-    - name: Responder Types
-      url: incident_response/incident_management/setup_and_configuration/responder_types
+    - name: Responder Roles
+      url: incident_response/incident_management/setup_and_configuration/responder_roles
       parent: incidents_settings
-      identifier: incidents_settings_responder_types
+      identifier: incidents_settings_responder_roles
       weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations

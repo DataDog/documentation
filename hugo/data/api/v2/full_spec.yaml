@@ -4781,111 +4781,6 @@ components:
       required:
         - agentTrigger
       type: object
-    AggregatedHighFrozenFrameRate:
-      description: Aggregated high frozen frame rate detection at view level.
-      properties:
-        avg_frozen_frame_rate:
-          description: Average frozen frame rate as a fraction of total frames.
-          example: 0.15
-          format: double
-          type: number
-        avg_segment_duration:
-          description: Average segment duration in nanoseconds.
-          example: 3000000000
-          format: int64
-          type: integer
-        avg_total_frozen_duration:
-          description: Average total frozen duration in nanoseconds.
-          example: 500000000
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$mno345
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 14.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 5
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_frozen_frame_rate
-        - avg_total_frozen_duration
-        - avg_segment_duration
-        - impact_score
-      type: object
-    AggregatedHighScriptEval:
-      description: Aggregated high script evaluation detection grouped by source.
-      properties:
-        avg_duration:
-          description: Average script evaluation duration in nanoseconds.
-          example: 300000000
-          format: int64
-          type: integer
-        avg_forced_style_layout:
-          description: Average forced style/layout duration in nanoseconds.
-          example: 0
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$7766a8c2180aa153f5526ba8868999f8
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and duration severity.
-          example: 30.0
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-        invoker_type:
-          description: Type of invoker that triggered the script evaluation.
-          example: user-callback
-          type: string
-        source_category:
-          description: Category of the script source.
-          example: third-party
-          nullable: true
-          type: string
-        source_function_name:
-          description: Name of the function that triggered the high script evaluation.
-          example: handleClick
-          type: string
-        source_url:
-          description: URL of the script that triggered the high script evaluation.
-          example: https://cdn.example.com/app.js
-          nullable: true
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - source_url
-        - source_function_name
-        - source_category
-        - invoker_type
-        - view_occurrences
-        - instance_count
-        - avg_duration
-        - avg_forced_style_layout
-        - impact_score
-      type: object
     AggregatedLongTasksByInvokerType:
       description: Aggregated long task statistics for a single invoker type.
       properties:
@@ -5085,71 +4980,6 @@ components:
         - type
         - attributes
       type: object
-    AggregatedLowCacheHitRate:
-      description: Aggregated low cache hit rate detection at view level.
-      properties:
-        avg_cache_hit_rate:
-          description: Average cache hit rate across affected views.
-          example: 0.15
-          format: double
-          type: number
-        avg_resource_download_size_bytes:
-          description: Average total download size of uncached resources in bytes.
-          example: 1048576
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$abc123
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 20.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 5
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_cache_hit_rate
-        - avg_resource_download_size_bytes
-        - impact_score
-      type: object
-    AggregatedMobileScrollFriction:
-      description: Aggregated mobile scroll friction detection at view level.
-      properties:
-        avg_scroll_frozen_frame_count:
-          description: Average number of frozen frames during scroll interactions.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$ghi789
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 12.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 6
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_scroll_frozen_frame_count
-        - impact_score
-      type: object
     AggregatedResource:
       description: Aggregated performance statistics for a single network resource across sampled view instances.
       properties:
@@ -5347,310 +5177,6 @@ components:
         - avg_ssl_ms
         - avg_first_byte_ms
         - avg_download_ms
-      type: object
-    AggregatedSignalsProblemsRequest:
-      description: Request body for the aggregated signals and problems endpoint.
-      properties:
-        data:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestData"
-      required:
-        - data
-      type: object
-    AggregatedSignalsProblemsRequestAttributes:
-      description: Attributes for an aggregated signals and problems query.
-      properties:
-        application_id:
-          description: The RUM application ID to analyze.
-          example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-          type: string
-        criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
-        detection_types:
-          description: List of detection types to include in the response. When omitted, all types are returned.
-          example:
-            - high_script_evaluations
-            - uncompressed_resources
-          items:
-            type: string
-          type: array
-        filter:
-          description: RUM query string to filter events (for example, @session.type:user @geo.country:US).
-          example: "@session.type:user"
-          type: string
-        from:
-          description: Start of the time range as a Unix timestamp in seconds.
-          example: 1762437564
-          format: int64
-          type: integer
-        sample_size:
-          description: Number of view instances to sample, between 1 and 50.
-          example: 30
-          format: int32
-          maximum: 50
-          minimum: 1
-          type: integer
-        to:
-          description: End of the time range as a Unix timestamp in seconds.
-          example: 1762523964
-          format: int64
-          type: integer
-        view_name:
-          description: The RUM view name to analyze (for example, /account/login).
-          example: /account/login(/:type)
-          type: string
-      required:
-        - application_id
-        - view_name
-        - from
-        - to
-        - sample_size
-      type: object
-    AggregatedSignalsProblemsRequestData:
-      description: Data envelope for an aggregated signals and problems request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestAttributes"
-        type:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestType"
-      required:
-        - type
-        - attributes
-      type: object
-    AggregatedSignalsProblemsRequestType:
-      description: The JSON:API type for aggregated signals and problems requests.
-      enum:
-        - aggregated_signals_problems
-      example: aggregated_signals_problems
-      type: string
-      x-enum-varnames:
-        - AGGREGATED_SIGNALS_PROBLEMS
-    AggregatedSignalsProblemsResponse:
-      description: Response body for the aggregated signals and problems endpoint.
-      properties:
-        data:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsResponseData"
-      required:
-        - data
-      type: object
-    AggregatedSignalsProblemsResponseAttributes:
-      description: Attributes of an aggregated signals and problems response.
-      properties:
-        application_id:
-          description: The RUM application ID that was analyzed.
-          example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-          type: string
-        criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
-        from:
-          description: Start of the analyzed time range as a Unix timestamp in seconds.
-          example: 1710000000
-          format: int64
-          type: integer
-        problem_detections:
-          $ref: "#/components/schemas/SignalsProblemsDetections"
-        sample_metadata:
-          $ref: "#/components/schemas/SignalsProblemsSampleMetadata"
-        to:
-          description: End of the analyzed time range as a Unix timestamp in seconds.
-          example: 1710003600
-          format: int64
-          type: integer
-        view_name:
-          description: The RUM view name that was analyzed.
-          example: /checkout
-          type: string
-      required:
-        - view_name
-        - application_id
-        - from
-        - to
-        - sample_metadata
-        - problem_detections
-      type: object
-    AggregatedSignalsProblemsResponseData:
-      description: Data envelope for an aggregated signals and problems response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsResponseAttributes"
-        id:
-          description: Hash-based unique identifier for this aggregation.
-          example: 2f0b3455
-          type: string
-        type:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    AggregatedSlowFCPHighBytes:
-      description: Aggregated slow first contentful paint with high byte count detection.
-      properties:
-        avg_bytes_before_fcp_bytes:
-          description: Average total bytes loaded before first contentful paint.
-          example: 2097152
-          format: int64
-          type: integer
-        avg_first_contentful_paint_ms:
-          description: Average first contentful paint time in milliseconds.
-          example: 3500
-          format: int64
-          type: integer
-        avg_resource_count_before_fcp:
-          description: Average number of resources loaded before first contentful paint.
-          example: 25
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$def456
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 18.0
-          format: double
-          type: number
-        platform:
-          description: Platform identifier for the affected views.
-          example: browser
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 4
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_first_contentful_paint_ms
-        - avg_bytes_before_fcp_bytes
-        - avg_resource_count_before_fcp
-        - platform
-        - impact_score
-      type: object
-    AggregatedSlowInteractionLongTask:
-      description: Aggregated slow interaction with long task detection grouped by action and selector.
-      properties:
-        action_type:
-          description: Type of user interaction that triggered the slow response.
-          example: click
-          type: string
-        avg_blocking_duration:
-          description: Average long task blocking duration in nanoseconds.
-          example: 250000000
-          format: int64
-          type: integer
-        avg_duration:
-          description: Average total interaction duration in nanoseconds.
-          example: 320000000
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$jkl012
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and blocking severity.
-          example: 22.0
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 9
-          format: int32
-          maximum: 2147483647
-          type: integer
-        selector:
-          description: CSS selector of the element that was interacted with.
-          example: "#submit-button"
-          nullable: true
-          type: string
-        selector_normalized:
-          description: Normalized CSS selector with dynamic parts replaced.
-          example: button[data-action]
-          nullable: true
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 7
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - action_type
-        - selector
-        - selector_normalized
-        - view_occurrences
-        - instance_count
-        - avg_blocking_duration
-        - avg_duration
-        - impact_score
-      type: object
-    AggregatedUncompressedResource:
-      description: Aggregated uncompressed resource detection grouped by URL path.
-      properties:
-        avg_body_size:
-          description: Average uncompressed body size in bytes.
-          example: 524288
-          format: int64
-          type: integer
-        avg_duration:
-          description: Average resource loading duration in nanoseconds.
-          example: 0
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$65e268e25cab3a1f6230405ccf011a68
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and resource size.
-          example: 16.67
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 1
-          format: int32
-          maximum: 2147483647
-          type: integer
-        provider_type:
-          description: CDN or hosting provider type for the resource.
-          example: cloudfront
-          nullable: true
-          type: string
-        render_blocking:
-          description: Whether the resource is render-blocking.
-          example: blocking
-          nullable: true
-          type: string
-        resource_type:
-          description: Type of the resource (JS, CSS, image, fetch, and so on).
-          example: image
-          type: string
-        url_path_group:
-          description: Normalized URL path pattern for the uncompressed resource.
-          example: /cdn/hero.jpg
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 1
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - url_path_group
-        - resource_type
-        - render_blocking
-        - provider_type
-        - view_occurrences
-        - instance_count
-        - avg_body_size
-        - avg_duration
-        - impact_score
       type: object
     AggregatedWaterfallPerformanceCriteria:
       description: Performance criteria to filter view instances by a metric threshold.
@@ -11056,6 +10582,242 @@ components:
       type: string
       x-enum-varnames:
         - ARBITRARY_RULE_STATUS
+    ArchiveSearchCreateRehydration:
+      description: |-
+        Rehydration settings. Include this object to index the matched logs into a retained historical view.
+        Omit it to run an Archive Search that only scans the archive.
+      properties:
+        max_rehydrated_events:
+          description: |-
+            Maximum number of events to rehydrate. The organization's reindexing limit is configured
+            in millions, so this value is at least 1,000,000.
+          example: 1000000
+          format: int64
+          minimum: 1000000
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchCreateRequest:
+      description: Request to create an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchCreateRequestAttributes:
+      description: Attributes accepted when creating an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive to search. Use the Logs Archives API to list the archives of the organization.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        from:
+          description: Start of the time range to search, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchCreateRehydration"
+        to:
+          description: End of the time range to search, as an ISO 8601 timestamp. Must be after `from`.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+      type: object
+    ArchiveSearchCreateRequestData:
+      description: Archive Search object to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydration:
+      description: |-
+        Rehydration settings of the Archive Search. Absent when the search only scans the archive
+        without indexing the results.
+      properties:
+        max_rehydrated_events:
+          description: Maximum number of events to rehydrate.
+          example: 1000000
+          format: int64
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchRehydrationTier:
+      description: Storage tier the matched logs are rehydrated into.
+      enum:
+        - standard
+        - flex
+      example: standard
+      type: string
+      x-enum-varnames:
+        - STANDARD
+        - FLEX
+    ArchiveSearchResponse:
+      description: Response containing a single Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchResponseData"
+      required:
+        - data
+      type: object
+    ArchiveSearchResponseAttributes:
+      description: Attributes of an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive being searched.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        bytes_scanned:
+          description: Number of bytes read from the archive at the end of the search.
+          example: 402764439
+          format: int64
+          type: integer
+        completed_at:
+          description: |-
+            Time the Archive Search finished, as an ISO 8601 timestamp.
+            Absent while the search is still running.
+          example: "2026-01-02T12:30:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: Time the Archive Search was created, as an ISO 8601 timestamp.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        events_scanned:
+          description: Number of events read from the archive at the end of the search.
+          example: 1500
+          format: int64
+          type: integer
+        expected_duration:
+          description: Estimated time left before the Archive Search completes, in seconds.
+          example: 120
+          format: int64
+          type: integer
+        from:
+          description: Start of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydration"
+        status:
+          $ref: "#/components/schemas/ArchiveSearchStatus"
+        to:
+          description: End of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+        - status
+        - created_at
+        - events_scanned
+        - bytes_scanned
+      type: object
+    ArchiveSearchResponseData:
+      description: Archive Search object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchResponseAttributes"
+        id:
+          description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          type: string
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ArchiveSearchStatus:
+      description: Current state of an Archive Search.
+      enum:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+    ArchiveSearchType:
+      default: archive_search
+      description: Archive Search resource type.
+      enum:
+        - archive_search
+      example: archive_search
+      type: string
+      x-enum-varnames:
+        - ARCHIVE_SEARCH
     Argument:
       description: A named argument for a custom static analysis rule.
       properties:
@@ -94419,6 +94181,49 @@ components:
       type: string
       x-enum-varnames:
         - RECOMMENDATION
+    RecommendationV2RequestAttributes:
+      description: |-
+        Attributes for requesting SPA recommendations by forwarding a Spark job's raw arguments
+        instead of a precomputed shard.
+      properties:
+        arguments:
+          description: |-
+            Raw, unfiltered Spark job arguments as submitted (for example, `--org_id=2`).
+            SPA determines which arguments are relevant for the given service.
+          example:
+            - ""
+          items:
+            type: string
+          type: array
+      required: [arguments]
+      type: object
+    RecommendationV2RequestBody:
+      description: |-
+        Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments
+        instead of a precomputed shard.
+      properties:
+        data:
+          $ref: "#/components/schemas/RecommendationV2RequestData"
+      required: [data]
+      type: object
+    RecommendationV2RequestData:
+      description: JSON:API resource object for the SPA v2 recommendation request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/RecommendationV2RequestAttributes"
+        type:
+          $ref: "#/components/schemas/RecommendationV2RequestType"
+      required: [type, attributes]
+      type: object
+    RecommendationV2RequestType:
+      default: recommendation_v2_request
+      description: JSON:API resource type for the SPA v2 recommendation request.
+      enum:
+        - recommendation_v2_request
+      example: recommendation_v2_request
+      type: string
+      x-enum-varnames:
+        - RECOMMENDATION_V2_REQUEST
     RecommendationsFilterRequest:
       description: JSON:API request body for filtering cost recommendations.
       example:
@@ -94426,7 +94231,7 @@ components:
           attributes:
             scope: ccm
             sort:
-              - expression: potential_daily_savings.amount
+              - expression: "@potential_daily_savings"
                 order: DESC
           id: "@resource_table:aws_ec2_instance"
           type: recommendations_filter
@@ -94445,8 +94250,9 @@ components:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
         id:
           description: |-
-            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
-            and returns all recommendations.
+            Filter expression applied to the recommendations when `attributes.filter` is omitted.
+            When supplied, `attributes.filter` overrides this value, including when empty. If the
+            resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -94456,6 +94262,13 @@ components:
     RecommendationsFilterRequestDataAttributes:
       description: Attributes used to filter and sort cost recommendations.
       properties:
+        filter:
+          description: |-
+            Filter expression applied to the recommendations. When supplied, this attribute overrides
+            `data.id`, including when empty. When omitted, `data.id` is used. If the resulting filter
+            is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
+          type: string
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -94491,7 +94304,7 @@ components:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
-          description: Field to sort by (for example, `potential_daily_savings.amount`).
+          description: Field to sort by (for example, `@potential_daily_savings`).
           type: string
         order:
           description: Sort direction, either `ASC` or `DESC`.
@@ -101559,7 +101372,7 @@ components:
           type: string
       type: object
     ScaRequestDataAttributesDependenciesItems:
-      description: A dependency found in the repository, including its identity, location, and reachability metadata.
+      description: A dependency found in the repository, including its identity, location, and `reachability metadata`.
       properties:
         exclusions:
           description: A list of patterns or identifiers that should be excluded from analysis for this dependency.
@@ -107900,6 +107713,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         createdAt:
           description: When the rule was created, timestamp in milliseconds.
           format: int64
@@ -108735,6 +108553,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         complianceSignalOptions:
           $ref: "#/components/schemas/CloudConfigurationRuleComplianceSignalOptions"
         createdAt:
@@ -112998,85 +112821,6 @@ components:
       example:
         display_name: Test User
         principal_id: user@example.com
-      type: object
-    SignalsProblemsDetections:
-      description: Grouped detection results by detection type.
-      properties:
-        high_frozen_frame_rates:
-          description: Detected high frozen frame rate issues.
-          items:
-            $ref: "#/components/schemas/AggregatedHighFrozenFrameRate"
-          type: array
-        high_script_evaluations:
-          description: Detected high script evaluation issues.
-          items:
-            $ref: "#/components/schemas/AggregatedHighScriptEval"
-          type: array
-        low_cache_hit_rates:
-          description: Detected low cache hit rate issues.
-          items:
-            $ref: "#/components/schemas/AggregatedLowCacheHitRate"
-          type: array
-        mobile_scroll_frictions:
-          description: Detected mobile scroll friction issues.
-          items:
-            $ref: "#/components/schemas/AggregatedMobileScrollFriction"
-          type: array
-        slow_fcp_high_bytes:
-          description: Detected slow first contentful paint with high byte count issues.
-          items:
-            $ref: "#/components/schemas/AggregatedSlowFCPHighBytes"
-          type: array
-        slow_interaction_long_tasks:
-          description: Detected slow interaction with long task issues.
-          items:
-            $ref: "#/components/schemas/AggregatedSlowInteractionLongTask"
-          type: array
-        uncompressed_resources:
-          description: Detected uncompressed resource issues.
-          items:
-            $ref: "#/components/schemas/AggregatedUncompressedResource"
-          type: array
-      type: object
-    SignalsProblemsSampleMetadata:
-      description: Metadata about the sampling quality for a signals and problems query.
-      properties:
-        failed:
-          description: Number of view instances that failed to process.
-          example: 2
-          format: int32
-          maximum: 2147483647
-          type: integer
-        requested:
-          description: Number of view instances requested for sampling.
-          example: 30
-          format: int32
-          maximum: 2147483647
-          type: integer
-        sampled_view_ids:
-          description: List of RUM view IDs that were sampled.
-          example:
-            - 6fbf69b6-9455-436a-b894-a6bf64126d40
-          items:
-            type: string
-          type: array
-        succeeded:
-          description: Number of view instances successfully processed.
-          example: 28
-          format: int32
-          maximum: 2147483647
-          type: integer
-        success_rate:
-          description: Ratio of successfully processed views to requested views.
-          example: 0.93
-          format: double
-          type: number
-      required:
-        - requested
-        - succeeded
-        - failed
-        - success_rate
-        - sampled_view_ids
       type: object
     SimpleMonitorUserTemplate:
       description: A simplified version of a monitor user template.
@@ -123048,6 +122792,8 @@ components:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesMsTeams"
         pagerduty:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesPagerduty"
+        servicenow:
+          $ref: "#/components/schemas/TeamNotificationRuleAttributesServiceNow"
         slack:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesSlack"
       type: object
@@ -123057,6 +122803,10 @@ components:
         enabled:
           description: Flag indicating email notification
           type: boolean
+        recipient_email:
+          description: >-
+            Email address to notify. When omitted and email notifications are enabled, notifications are sent to all team members.
+          type: string
       type: object
     TeamNotificationRuleAttributesMsTeams:
       description: MS Teams notification settings for the team
@@ -123071,6 +122821,15 @@ components:
         service_name:
           description: Service name for PagerDuty
           type: string
+      type: object
+    TeamNotificationRuleAttributesServiceNow:
+      description: ServiceNow notification settings for the team.
+      properties:
+        templates:
+          description: ServiceNow template handle names to use for notifications.
+          items:
+            type: string
+          type: array
       type: object
     TeamNotificationRuleAttributesSlack:
       description: Slack notification settings for the team
@@ -149753,7 +149512,7 @@ paths:
                     attributes:
                       scope: ccm
                       sort:
-                        - expression: potential_daily_savings.amount
+                        - expression: "@potential_daily_savings"
                           order: DESC
                     id: "@resource_table:aws_ec2_instance"
                     type: recommendations_filter
@@ -182613,6 +182372,158 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+  /api/v2/logs/archive_searches:
+    post:
+      description: |-
+        Start a search over the logs stored in an archive.
+
+        Without a `rehydration` object, the search only scans the archive and reports how much data
+        matched. With one, the matched logs are also indexed into a retained historical view, which
+        requires the `logs_write_historical_view` permission.
+      operationId: CreateArchiveSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 0
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 0
+                        expected_duration: 120
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}:
+    get:
+      description: Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.
+      operationId: GetArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        completed_at: "2026-01-02T12:30:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 1000000
+                          retention_days: 15
+                          tier: standard
+                        status: COMPLETED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/logs/config/archive-order:
     get:
       description: |-
@@ -204828,89 +204739,6 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/rum/query/insight/aggregated_signals_problems:
-    post:
-      description: |-
-        Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.
-      operationId: QueryAggregatedSignalsProblems
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      application_id: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-                      from: 1762437564
-                      sample_size: 30
-                      to: 1762523964
-                      view_name: /account/login(/:type)
-                    type: aggregated_signals_problems
-            schema:
-              $ref: "#/components/schemas/AggregatedSignalsProblemsRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        application_id: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-                        from: 1710000000
-                        problem_detections:
-                          high_script_evaluations:
-                            - avg_duration: 300000000
-                              avg_forced_style_layout: 0
-                              fingerprint: v1$7766a8c2180aa153f5526ba8868999f8
-                              impact_score: 30.0
-                              instance_count: 3
-                              invoker_type: user-callback
-                              source_category:
-                              source_function_name: handleClick
-                              source_url: https://cdn.example.com/app.js
-                              view_occurrences: 3
-                        sample_metadata:
-                          failed: 2
-                          requested: 30
-                          sampled_view_ids:
-                            - 6fbf69b6-9455-436a-b894-a6bf64126d40
-                          succeeded: 28
-                          success_rate: 0.93
-                        to: 1710003600
-                        view_name: /checkout
-                      id: 2f0b3455
-                      type: aggregated_signals_problems
-              schema:
-                $ref: "#/components/schemas/AggregatedSignalsProblemsResponse"
-          description: Successful response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Query aggregated signals and problems
-      tags: ["RUM Insights"]
-      x-menu-order: 3
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/query/insight/aggregated_waterfall:
     post:
       description: |-
@@ -222727,6 +222555,69 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/spa/recommendations-v2/{service}:
+    post:
+      description: |-
+        This endpoint is experimental and restricted to Datadog internal use only.
+        Retrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides
+        a service name and the job's raw arguments. SPA determines which arguments are relevant
+        for the service and returns structured recommendations for driver and executor resources.
+      operationId: GetSPARecommendationsV2
+      parameters:
+        - description: The service name for a Spark job
+          in: path
+          name: service
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RecommendationV2RequestBody"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              example:
+                data:
+                  attributes:
+                    driver:
+                      estimation:
+                        cpu: {max: 1500, p75: 1000, p95: 1200}
+                        ephemeral_storage: 896
+                        heap: 6144
+                        memory: 7168
+                        overhead: 1024
+                    executor:
+                      estimation:
+                        cpu: {max: 2000, p75: 1200, p95: 1500}
+                        ephemeral_storage: 512
+                        heap: 3072
+                        memory: 4096
+                        overhead: 1024
+                  id: "dedupeactivecontexts:adp_dedupeactivecontexts_org2"
+                  type: recommendation
+              schema:
+                $ref: "#/components/schemas/RecommendationDocument"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - AuthZ: []
+      summary: Get SPA recommendations v2
+      tags:
+        - Spa
+      x-menu-order: 3
+      x-unstable: |-
+        **Note**: This endpoint is in preview and may change in the future. It is not yet recommended for production use.
   /api/v2/spa/recommendations/{service}:
     get:
       description: This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.
@@ -232686,6 +232577,10 @@ paths:
                       - attributes:
                           email:
                             enabled: true
+                            recipient_email: alerts@example.com
+                          servicenow:
+                            templates:
+                              - incident-template
                           slack:
                             channel: test-channel
                             workspace: Datadog
@@ -237186,6 +237081,13 @@ tags:
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
+  - description: |-
+      Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate
+      the matches into a retained historical view.
+
+      See the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)
+      page for the searches currently running in Datadog.
+    name: Logs Archive Searches
   - description: |-
       Archives forward all the logs ingested to a cloud storage system.
 

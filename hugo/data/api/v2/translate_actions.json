@@ -3857,6 +3857,16 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "CreateArchiveSearch": {
+    "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
+    "summary": "Create an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to create an Archive Search."
+  },
+  "GetArchiveSearch": {
+    "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
+    "summary": "Get an Archive Search"
+  },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
     "summary": "Get archive order"
@@ -5515,12 +5525,6 @@
     "request_description": "",
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
   },
-  "QueryAggregatedSignalsProblems": {
-    "description": "Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.",
-    "summary": "Query aggregated signals and problems",
-    "request_description": "",
-    "request_schema_description": "Request body for the aggregated signals and problems endpoint."
-  },
   "QueryAggregatedWaterfall": {
     "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
     "summary": "Query aggregated waterfall",
@@ -6768,6 +6772,12 @@
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
+  },
+  "GetSPARecommendationsV2": {
+    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA recommendations v2",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a precomputed shard."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",
