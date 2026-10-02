@@ -159,11 +159,11 @@ To rehydrate log events from your archives, Datadog uses the IAM Role in your AW
 }
 ```
 
-If you attached the archive policy from [Set permissions][4] to this role, the role already has these permissions.
+If you attached the policy from [Set archive permissions][4] to this role, the role already has these permissions.
 
 #### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog supports rehydrating only from archives that have been configured to use role delegation to grant access. After you modify your Datadog IAM role to include the preceding IAM policy, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
