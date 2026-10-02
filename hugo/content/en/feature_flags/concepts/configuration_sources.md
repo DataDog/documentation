@@ -60,7 +60,7 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], or [.NET](/feature_flags/server/dotnet/) setup instructions.
+Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4], [Node.js][2], [Python][5], or [.NET][7] setup instructions.
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
@@ -173,3 +173,4 @@ Server Feature Flags billing is based on configuration requests made through Rem
 [4]: /feature_flags/server/java/
 [5]: /feature_flags/server/python/
 [6]: /feature_flags/implementation_patterns/serverless/#send-feature-flag-telemetry
+[7]: /feature_flags/server/dotnet/
