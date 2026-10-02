@@ -1069,6 +1069,42 @@
     "description": "Get a specific AWS cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates an AWS IAM principal with a Datadog user.",
     "summary": "Get an AWS cloud authentication persona mapping"
   },
+  "ListGitHubCloudAuthIntakeMappings": {
+    "description": "List all GitHub cloud authentication intake mappings. This endpoint retrieves all configured intake mappings that entitle matching GitHub Actions OIDC principals to request Datadog API keys.",
+    "summary": "List GitHub cloud authentication intake mappings"
+  },
+  "CreateGitHubCloudAuthIntakeMapping": {
+    "description": "Create a GitHub cloud authentication intake mapping. This endpoint entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Create a GitHub cloud auth intake mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication intake mapping."
+  },
+  "DeleteGitHubCloudAuthIntakeMapping": {
+    "description": "Delete a GitHub cloud authentication intake mapping by ID. This removes a GitHub Actions OIDC principal's entitlement to request Datadog API keys.",
+    "summary": "Delete a GitHub cloud auth intake mapping"
+  },
+  "GetGitHubCloudAuthIntakeMapping": {
+    "description": "Get a specific GitHub cloud authentication intake mapping by ID. This endpoint retrieves a single configured intake mapping that entitles a matching GitHub Actions OIDC principal to request Datadog API keys.",
+    "summary": "Get a GitHub cloud authentication intake mapping"
+  },
+  "ListGitHubCloudAuthPersonaMappings": {
+    "description": "List all GitHub cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate GitHub Actions OpenID Connect (OIDC) principals with Datadog users. Mapped principals can request impersonation tokens.",
+    "summary": "List GitHub cloud authentication persona mappings"
+  },
+  "CreateGitHubCloudAuthPersonaMapping": {
+    "description": "Create a GitHub cloud authentication persona mapping. This endpoint associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Create a GitHub cloud auth persona mapping",
+    "request_description": "",
+    "request_schema_description": "Request used to create a GitHub cloud authentication persona mapping."
+  },
+  "DeleteGitHubCloudAuthPersonaMapping": {
+    "description": "Delete a GitHub cloud authentication persona mapping by ID. This removes the association between a GitHub Actions OIDC principal and a Datadog user.",
+    "summary": "Delete a GitHub cloud auth persona mapping"
+  },
+  "GetGitHubCloudAuthPersonaMapping": {
+    "description": "Get a specific GitHub cloud authentication persona mapping by ID. This endpoint retrieves a single configured persona mapping that associates a GitHub Actions OIDC principal with a Datadog user. The mapped principal can request an impersonation token.",
+    "summary": "Get a GitHub cloud authentication persona mapping"
+  },
   "CreateCustomFramework": {
     "description": "Create a custom framework.",
     "summary": "Create a custom framework",
