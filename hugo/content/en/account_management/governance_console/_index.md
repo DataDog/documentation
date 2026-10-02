@@ -45,6 +45,10 @@ The [Summary page][1] displays an overview of your organization's usage of Datad
 
 The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select {{< ui >}}View Details{{< /ui >}} to see more information about your organization's usage of a particular product, including limits and quotas.
 
+### Insights
+
+The Summary and Products pages display insights: metrics about how your organization uses and configures Datadog, such as inactive API keys or monitors missing recipients. See [Governance Console Insights][5] for the full list of available insights.
+
 ### Controls
 
 Datadog Governance Controls help you automatically implement policies in your Datadog organization by identifying configuration drift and notifying the accountable users. Each control helps establish and maintain your compliance with best practices.
@@ -60,3 +64,4 @@ The [Controls page][3] displays a list of controls, for which you can configure 
 [2]: https://app.datadoghq.com/governance/products
 [3]: https://app.datadoghq.com/governance/controls
 [4]: /account_management/governance_console/controls
+[5]: /account_management/governance_console/insights
