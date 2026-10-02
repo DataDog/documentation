@@ -156512,7 +156512,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ: []
-      summary: Patch a deployment event
+      summary: Mark a deployment as failed by ID
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
       x-menu-order: 9
