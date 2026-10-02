@@ -201,7 +201,41 @@ Examples of invariants:
 - No plan-shape change on a query in your critical path.
 - No index dropped that something still uses.
 
-[TODO: add a short CI example, such as a shell script that calls the API, applies the change, and runs `EXPLAIN`.]
+The following script runs this flow in a CI job. It requires `curl`, `jq`, and `psql`, and these environment variables:
+
+- `DD_API_KEY` and `DD_APP_KEY`: your Datadog API key and application key.
+- `DD_SITE`: your Datadog site, such as `datadoghq.com` or `us3.datadoghq.com`. Defaults to `datadoghq.com`.
+- `DB_INSTANCE` and `DB_NAME`: the `database_instance` and `database_name` to create the instance from.
+
+```shell
+#!/usr/bin/env bash
+set -euo pipefail
+API="https://api.${DD_SITE:-datadoghq.com}/api/unstable/databases/workbench/session"
+AUTH=(-H "DD-API-KEY: ${DD_API_KEY}" -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" -H "Content-Type: application/json")
+
+# Create (returns 202 with id + connection.dsn)
+resp=$(curl -sf -X POST "$API" "${AUTH[@]}" \
+  -d "{\"database_instance\":\"${DB_INSTANCE}\",\"database_name\":\"${DB_NAME}\"}")
+id=$(jq -r .id <<<"$resp")
+dsn=$(jq -r .connection.dsn <<<"$resp")
+trap 'curl -sf -X DELETE "$API/$id" "${AUTH[@]}" >/dev/null || true' EXIT  # always delete
+
+# Wait for ready
+for _ in $(seq 60); do
+  status=$(curl -sf "$API/$id" "${AUTH[@]}" | jq -r .status)
+  [ "$status" = ready ] && break; sleep 5
+done
+[ "$status" = ready ] || { echo "Workbench not ready: $status"; exit 1; }
+
+# Apply the change, then EXPLAIN top queries
+psql "$dsn" -v ON_ERROR_STOP=1 -f migrations/change.sql
+psql "$dsn" -v ON_ERROR_STOP=1 -f ci/explain_top_queries.sql > plans.txt
+
+# Fail on a broken invariant (example)
+if grep -q "Seq Scan on orders" plans.txt; then echo "Plan regression"; exit 1; fi
+```
+
+In this example, `migrations/change.sql` contains your change, and `ci/explain_top_queries.sql` contains an `EXPLAIN` statement for each of your top queries. The last check fails the job if a plan includes a sequential scan on `orders`. Replace it with your own invariants.
 
 ### Experiment with data model changes
 
