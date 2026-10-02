@@ -1,6 +1,8 @@
 ---
 title: Watchdog Insights for RUM
 description: 'Learn how to investigate issues in your RUM applications with Watchdog Insights.'
+aliases:
+  - /real_user_monitoring/explorer/watchdog_insights/
 further_reading:
 - link: "https://www.datadoghq.com/blog/core-web-vitals-monitoring-datadog-rum-synthetics/#what-are-the-core-web-vitals"
   tag: "Blog"

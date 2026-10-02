@@ -1,6 +1,8 @@
 ---
 title: Error Tracking for Web and Mobile Applications
 description: Learn how to search and manage errors collected from your web and mobile applications.
+aliases:
+- /real_user_monitoring/error_tracking/
 further_reading:
 - link: "https://www.datadoghq.com/blog/error-tracking/"
   tag: "Blog"
@@ -37,18 +39,20 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
 ## Setup
 
 {{< whatsnext desc="To get started with Datadog Error Tracking for RUM, see the corresponding documentation:" >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/browser" >}}Browser{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/android" >}}Android{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=browser" >}}Browser{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=android" >}}Android{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=ios" >}}iOS{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=flutter" >}}Flutter{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=react_native" >}}React Native{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/expo" >}}Expo{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/reactnative" >}}React Native{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/flutter" >}}Flutter{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/roku" >}}Roku{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/kotlin-multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/maui" >}}.NET MAUI{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=cpp" >}}C++{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=roku" >}}Roku{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=unity" >}}Unity{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=maui" >}}.NET MAUI{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

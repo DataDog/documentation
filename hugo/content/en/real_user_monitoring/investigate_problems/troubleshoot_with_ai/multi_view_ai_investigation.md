@@ -1,6 +1,8 @@
 ---
 title: Multi-View AI Investigation
 description: "Run an agentic investigation across views to find root causes for a slow performance vital."
+aliases:
+  - /real_user_monitoring/ai_investigations/multi_view_ai_investigation/
 further_reading:
   - link: "/real_user_monitoring/investigate_problems/troubleshoot_with_ai/"
     tag: "Documentation"
@@ -48,7 +50,7 @@ Multi-View AI Investigation is available for Browser RUM applications only.
 The agent groups its findings into four diagnostic types:
 
 | Source                  | What is examined                                                                                                               |
-|-------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|
 | Resource bottleneck     | Slow resources (HTML, scripts, images) impacting the vital across views.                                                       |
 | Vital element           | DOM elements that contribute most to the Largest Contentful Paint (LCP) or Interaction to Next Paint (INP) score for the view. |
 | Top JavaScript files    | Large JavaScript bundles or packages that dominate execution time.                                                             |
@@ -80,5 +82,5 @@ After an investigation completes, you can act on findings without leaving the pa
 [1]: /real_user_monitoring/investigate_problems/troubleshoot_with_ai/single_view_ai_investigation/
 [2]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/
 [3]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[4]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/
+[4]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/
 [5]: /notebooks/

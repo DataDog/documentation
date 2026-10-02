@@ -40,6 +40,6 @@ There are three ways to instrument your browser-based web applications with the 
 
 {% partial file="sdk/setup/browser.mdoc.md" /%}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/client
+[1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: /real_user_monitoring/application_monitoring/agentic_onboarding/?tab=realusermonitoring
 [3]: /real_user_monitoring/application_monitoring/browser/setup/server

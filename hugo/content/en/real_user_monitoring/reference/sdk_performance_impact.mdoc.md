@@ -5,6 +5,11 @@ content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
     label: "SDK"
+aliases:
+  - /real_user_monitoring/application_monitoring/android/sdk_performance_impact/
+  - /real_user_monitoring/mobile_and_tv_monitoring/android/sdk_performance_impact
+  - /real_user_monitoring/application_monitoring/ios/sdk_performance_impact/
+  - /real_user_monitoring/mobile_and_tv_monitoring/ios/sdk_performance_impact
 ---
 
 ## Overview

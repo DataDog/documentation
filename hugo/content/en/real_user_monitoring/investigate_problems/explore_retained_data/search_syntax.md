@@ -1,6 +1,8 @@
 ---
 title: Search Syntax
 description: "Learn RUM Explorer search syntax including terms, operators, and Boolean logic to create complex queries for event filtering."
+aliases:
+  - /real_user_monitoring/explorer/search_syntax/
 further_reading:
 - link: "/getting_started/search/"
   tag: "Documentation"

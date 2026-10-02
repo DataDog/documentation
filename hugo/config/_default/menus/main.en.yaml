@@ -9776,6 +9776,11 @@ menu:
       parent: rum_investigate_problems_troubleshoot_with_ai
       identifier: rum_investigate_problems_troubleshoot_with_ai_multi_view
       weight: 102
+    - name: Operation AI Investigation
+      url: real_user_monitoring/investigate_problems/troubleshoot_with_ai/operation_ai_investigation/
+      parent: rum_investigate_problems_troubleshoot_with_ai
+      identifier: rum_investigate_problems_troubleshoot_with_ai_operation
+      weight: 103
     - name: Track Critical Operations
       url: real_user_monitoring/track_critical_operations/
       parent: rum

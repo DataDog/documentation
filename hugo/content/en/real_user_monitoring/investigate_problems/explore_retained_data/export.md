@@ -1,6 +1,8 @@
 ---
 title: Export RUM Events and Graphs
 description: "Export RUM queries, visualizations, and events to dashboards, monitors, notebooks, or access them programmatically with API endpoints."
+aliases:
+  - /real_user_monitoring/explorer/export/
 further_reading:
 - link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"

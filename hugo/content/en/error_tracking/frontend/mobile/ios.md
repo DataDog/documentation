@@ -3,8 +3,6 @@ title: iOS Crash Reporting and Error Tracking
 description: Enable comprehensive crash reporting and error tracking for iOS applications to monitor and resolve issues with detailed reports.
 aliases:
 - /real_user_monitoring/ios/crash_reporting/
-- /real_user_monitoring/error_tracking/ios
-- /real_user_monitoring/error_tracking/mobile/ios
 type: multi-code-lang
 code_lang: ios
 code_lang_weight: 20
@@ -548,6 +546,150 @@ RUM.enable(
 
 {{% /collapse-content %}}
 
+#### Compute the hang rate of your application
+
+[Xcode Organizer][16] and [MetricKit][17] both provide a hang rate metric defined as "the number of seconds per hour that the app is unresponsive, while only counting periods of unresponsiveness of more than 250 ms."
+
+To compute a similar hang rate on Datadog, make sure:
+
+1. That app hang reporting is enabled.
+2. That the app hang threshold is equal or below 250 ms.
+3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are available in your facets (this should be the case by default. If it's not, you can manually [create facets][18]).
+
+If all these prerequisites are met, then create a new [Timeseries widget][19] on a Dashboard or a Notebook, and paste the following snippet in the {{< ui >}}JSON{{< /ui >}} tab of your widget, under the {{< ui >}}Graph your data{{< /ui >}} section:
+
+{{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
+
+{{% collapse-content title="JSON snippet of the hang rate widget" level="h5" %}}
+
+```json
+{
+    "title": "Hang Rate",
+    "type": "timeseries",
+    "requests": [
+        {
+            "formulas": [
+                {
+                    "number_format": {
+                        "unit": {
+                            "type": "custom_unit_label",
+                            "label": "seconds/hour"
+                        }
+                    },
+                    "formula": "(query2 * 3600000000000) / query1"
+                }
+            ],
+            "queries": [
+                {
+                    "name": "query2",
+                    "data_source": "rum",
+                    "search": {
+                        "query": "@type:error @error.category:\"App Hang\" @freeze.duration:>=250000000 @session.type:user"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "group_by": [
+                        {
+                            "facet": "@application.name",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@freeze.duration"
+                            },
+                            "should_exclude_missing": true
+                        },
+                        {
+                            "facet": "version",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@freeze.duration"
+                            },
+                            "should_exclude_missing": true
+                        }
+                    ],
+                    "compute": {
+                        "aggregation": "sum",
+                        "metric": "@freeze.duration",
+                        "interval": 3600000
+                    },
+                    "storage": "hot"
+                },
+                {
+                    "name": "query1",
+                    "data_source": "rum",
+                    "search": {
+                        "query": "@type:session @session.type:user"
+                    },
+                    "indexes": [
+                        "*"
+                    ],
+                    "group_by": [
+                        {
+                            "facet": "@application.name",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@session.time_spent"
+                            },
+                            "should_exclude_missing": true
+                        },
+                        {
+                            "facet": "version",
+                            "limit": 10,
+                            "sort": {
+                                "aggregation": "sum",
+                                "order": "desc",
+                                "metric": "@session.time_spent"
+                            },
+                            "should_exclude_missing": true
+                        }
+                    ],
+                    "compute": {
+                        "aggregation": "sum",
+                        "metric": "@session.time_spent",
+                        "interval": 3600000
+                    },
+                    "storage": "hot"
+                }
+            ],
+            "response_format": "timeseries",
+            "style": {
+                "palette": "dog_classic",
+                "order_by": "values",
+                "line_type": "solid",
+                "line_width": "normal"
+            },
+            "display_type": "line"
+        }
+    ],
+    "yaxis": {
+        "include_zero": true,
+        "scale": "sqrt"
+    },
+    "markers": [
+        {
+            "value": "y > 12000000000",
+            "display_type": "error dashed"
+        },
+        {
+            "value": "6000000000 < y < 12000000000",
+            "display_type": "warning dashed"
+        },
+        {
+            "value": "0 < y < 6000000000",
+            "display_type": "ok dashed"
+        }
+    ]
+}
+```
+
+{{% /collapse-content %}}
+
 {{% collapse-content title="Disable app hang monitoring" level="h4" expanded=false id="set-tracking-consent" %}}
 
 To disable app hang monitoring, update the initialization snippet and set the `appHangThreshold` parameter to `nil`.
@@ -682,6 +824,17 @@ For more information, see [dSYMs commands][2].
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="List uploaded .dSYM files" level="h4" expanded=false id="list-uploaded-dsym-files" %}}
+
+See the [RUM Debug Symbols][20] page to view all uploaded symbols.
+
+{{% /collapse-content %}}
+
+## Limitations
+
+- `.dSYM` files are limited in size to **2 GB** each.
+- Symbols are not supported for simulators. Symbols are only available for crashes on physical iOS, iPadOS, tvOS, watchOS, and visionOS devices.
+
 ## Test your implementation
 
 To verify your iOS Crash Reporting and Error Tracking configuration, issue a crash in your application and confirm that the error appears in Datadog.
@@ -814,3 +967,8 @@ To disable watchdog terminations reporting, update the initialization snippet an
 [13]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
 [14]: https://github.com/DataDog/dd-sdk-ios
 [15]: /real_user_monitoring/mobile_and_tv_monitoring/supported_versions/ios/
+[16]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
+[17]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
+[18]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#facets
+[19]: /dashboards/widgets/timeseries
+[20]: https://app.datadoghq.com/source-code/setup/rum

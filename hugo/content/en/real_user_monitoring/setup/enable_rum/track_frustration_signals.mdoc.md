@@ -17,6 +17,10 @@ further_reading:
 - link: '/session_replay/'
   tag: 'Documentation'
   text: 'Learn about Session Replay'
+aliases:
+  - /real_user_monitoring/application_monitoring/browser/frustration_signals/
+  - /real_user_monitoring/frustration_signals
+  - /real_user_monitoring/browser/frustration_signals/
 ---
 
 ## Overview

@@ -1,6 +1,9 @@
 ---
 title: Explore Retained Data
 description: "Explore and analyze RUM data to investigate performance issues, navigate user sessions, and troubleshoot application errors."
+aliases:
+  - /real_user_monitoring/explorer/
+  - /real_user_monitoring/rum_explorer
 further_reading:
 - link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"

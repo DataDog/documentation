@@ -2,6 +2,8 @@
 title: Mobile Crash Reporting
 type: multi-code-lang
 description: Set up crash reporting for your mobile applications.
+aliases:
+- /real_user_monitoring/error_tracking/mobile/
 further_reading:
 - link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'

@@ -1,13 +1,15 @@
 ---
 title: Recover Sessions from Managed Archives
 description: Store all ingested RUM sessions and recover specific sessions for full investigation when needed.
+aliases:
+  - /real_user_monitoring/managed_archive/
 further_reading:
-- link: '/real_user_monitoring/explorer/'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: Documentation
-  text: RUM Explorer
-- link: '/real_user_monitoring/rum_without_limits/'
+  text: Explore Retained Data
+- link: '/real_user_monitoring/retain_and_recover_valuable_sessions/'
   tag: Documentation
-  text: RUM without Limits
+  text: Retain and Recover Valuable Sessions
 - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
   tag: Documentation
   text: Configure retention filters
@@ -70,7 +72,7 @@ Access to Managed Archive and Recovery is controlled through role-based access c
 
 ## Setup
 
-<div class="alert alert-info">To use this feature, your organization must use <a href="/real_user_monitoring/rum_without_limits/">RUM without Limits</a>.</div>
+<div class="alert alert-info">To use this feature, your organization must use <a href="/real_user_monitoring/retain_and_recover_valuable_sessions/">RUM without Limits</a>.</div>
 
 To enable session storage for an application:
 
@@ -89,7 +91,7 @@ Configuration is done at the application level, which means you can apply differ
 
 In the {{< ui >}}Managed Archive{{< /ui >}} UI, click {{< ui >}}Recover{{< /ui >}} on the row of the session you want to recover.
 
-Recovered sessions are available for 30 days with all their events and attributes. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter
+Recovered sessions are available for 30 days with all their events and attributes. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter.
 
 After recovering a session, find it in the RUM Explorer by querying on:
 
@@ -103,5 +105,5 @@ Recovered sessions that were initially retained by a retention filter have `@ses
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/rum_without_limits/
-[2]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/
+[2]: /real_user_monitoring/investigate_problems/explore_retained_data/

@@ -1,16 +1,18 @@
 ---
 title: Out-of-the-Box Metrics
 description: Understand the out-of-the-box performance metrics that are available with RUM without Limits.
+aliases:
+  - /real_user_monitoring/rum_without_limits/metrics/
 further_reading:
-  - link: '/real_user_monitoring/rum_without_limits/'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/'
     tag: Documentation
-    text: RUM without Limits
-  - link: '/real_user_monitoring/rum_without_limits/retention_filters'
+    text: Retain and Recover Valuable Sessions
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
     tag: Documentation
-    text: Retention Filters
-  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+    text: Configure retention filters
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/'
     tag: Documentation
-    text: Control Costs with Retention Quotas
+    text: Control volumes with quotas
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices

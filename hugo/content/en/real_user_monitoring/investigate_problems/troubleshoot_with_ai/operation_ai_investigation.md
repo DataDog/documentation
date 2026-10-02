@@ -1,14 +1,16 @@
 ---
 title: Operation AI Investigation
 description: "Run an agentic investigation on a single operation to find root causes for failures or latency regressions."
+aliases:
+  - /real_user_monitoring/ai_investigations/operation_ai_investigation/
 further_reading:
-  - link: "/real_user_monitoring/ai_investigations/"
+  - link: "/real_user_monitoring/investigate_problems/troubleshoot_with_ai/"
     tag: "Documentation"
     text: "AI Investigations"
-  - link: "/real_user_monitoring/operations_monitoring/"
+  - link: "/real_user_monitoring/track_critical_operations/"
     tag: "Documentation"
     text: "Operations Monitoring"
-  - link: "/real_user_monitoring/ai_investigations/single_view_ai_investigation/"
+  - link: "/real_user_monitoring/investigate_problems/troubleshoot_with_ai/single_view_ai_investigation/"
     tag: "Documentation"
     text: "Single-View AI Investigation"
 ---
@@ -88,5 +90,5 @@ After an investigation completes, you can act on findings without leaving the pa
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/operations_monitoring/
-[2]: /real_user_monitoring/rum_without_limits/
+[1]: /real_user_monitoring/track_critical_operations/
+[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/

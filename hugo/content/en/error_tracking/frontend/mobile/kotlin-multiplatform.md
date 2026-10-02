@@ -2,9 +2,6 @@
 title: Kotlin Multiplatform Crash Reporting and Error Tracking
 aliases:
 - /real_user_monitoring/application_monitoring/kotlin_multiplatform/error_tracking
-- /real_user_monitoring/error_tracking/kotlin-multiplatform
-- /real_user_monitoring/error_tracking/kotlin_multiplatform
-- /real_user_monitoring/error_tracking/mobile/kotlin-multiplatform
 - /real_user_monitoring/mobile_and_tv_monitoring/kotlin-multiplatform/error_tracking
 type: multi-code-lang
 code_lang: kotlin-multiplatform

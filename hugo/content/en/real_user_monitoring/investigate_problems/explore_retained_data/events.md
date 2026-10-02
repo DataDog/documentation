@@ -1,6 +1,8 @@
 ---
 title: Events Side Panel
 description: "View detailed information about individual RUM events including context, waterfalls, and performance data in the side panel."
+aliases:
+  - /real_user_monitoring/explorer/events/
 further_reading:
 - link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"

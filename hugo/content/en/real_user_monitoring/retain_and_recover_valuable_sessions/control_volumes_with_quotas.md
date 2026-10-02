@@ -1,10 +1,12 @@
 ---
 title: Control Volumes with Quotas
 description: Learn how to cap the number of retained RUM sessions per day with retention quotas.
+aliases:
+  - /real_user_monitoring/rum_without_limits/retention_quotas/
 further_reading:
-  - link: '/real_user_monitoring/rum_without_limits/'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/'
     tag: Documentation
-    text: RUM without Limits
+    text: Retain and Recover Valuable Sessions
   - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
     tag: Documentation
     text: Configure retention filters
@@ -50,6 +52,12 @@ The retention filters page shows a breakdown of retained user sessions, includin
 
 {{< img src="real_user_monitoring/rum_without_limits/retention-quotas-usage.png" alt="A daily breakdown chart showing user sessions retained by custom filters, sessions retained by permanent filters, and sessions blocked once the quota was reached." style="width:100%" >}}
 
+## API
+
+Retention quotas can also be managed through [APIs][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /api/latest/rum-retention-quotas/

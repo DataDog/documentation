@@ -1,6 +1,8 @@
 ---
 title: Saved Views
 description: "Save RUM Explorer configurations including queries, facets, visualizations, and time ranges for quick access and team sharing."
+aliases:
+  - /real_user_monitoring/explorer/saved_views/
 further_reading:
 - link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"
@@ -24,7 +26,7 @@ You can also use saved views to share common queries and configurations with you
 
 ## Saved views
 
-To access your saved views, expand {{< ui >}} Views{{< /ui >}} to the left above the {{< ui >}}Sessions & Replays{{< /ui >}} tab in the [RUM Explorer][1].
+To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left above the {{< ui >}}Sessions & Replays{{< /ui >}} tab in the [RUM Explorer][1].
 
 All saved views except for the [default view](#default-views) are shared across the organization, including:
 

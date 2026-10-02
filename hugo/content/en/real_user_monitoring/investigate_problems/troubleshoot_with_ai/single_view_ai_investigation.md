@@ -1,14 +1,16 @@
 ---
 title: Single-View AI Investigation
 description: "Run an agentic investigation on a single RUM view to surface root causes of poor user experience."
+aliases:
+  - /real_user_monitoring/ai_investigations/single_view_ai_investigation/
 further_reading:
   - link: "/real_user_monitoring/investigate_problems/troubleshoot_with_ai/"
     tag: "Documentation"
     text: "AI Investigations overview"
-  - link: "/real_user_monitoring/explorer/"
+  - link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
     tag: "Documentation"
     text: "RUM Explorer"
-  - link: "/real_user_monitoring/explorer/events/"
+  - link: "/real_user_monitoring/investigate_problems/explore_retained_data/events/"
     tag: "Documentation"
     text: "View event side panel"
 ---
@@ -76,8 +78,8 @@ After an investigation completes, you can act on findings without leaving the pa
 [1]: /notebooks/
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
 [3]: /real_user_monitoring/setup/data_collected/?platform=browser#long-task-timing-attributes
-[4]: /real_user_monitoring/error_tracking/
+[4]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/
-[6]: /real_user_monitoring/explorer/search/
+[6]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [7]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[8]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling/
+[8]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/

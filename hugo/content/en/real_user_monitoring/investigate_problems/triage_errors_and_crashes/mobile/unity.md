@@ -1,6 +1,9 @@
 ---
 title: Unity Crash Reporting and Error Tracking
 description: Learn how to track Unity errors with Error Tracking.
+aliases:
+- /real_user_monitoring/error_tracking/unity
+- /real_user_monitoring/error_tracking/mobile/unity/
 type: multi-code-lang
 code_lang: unity
 code_lang_weight: 80
