@@ -298,7 +298,6 @@ These metrics are not collected otherwise, and they are never collected when Age
 | **Inputs**                                  |                                                                                                                        |
 | checks.warnings                             | Count of warnings raised by checks, per check                                                                          |
 | checks.metrics_samples                      | Count of metric samples submitted by checks, per check                                                                 |
-| workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors, tagged by collector                                                                |
 
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
