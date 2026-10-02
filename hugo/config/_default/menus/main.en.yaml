@@ -10186,25 +10186,25 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: AI Investigations
-      url: real_user_monitoring/ai_investigations/
+    - name: Bits AI in RUM
+      url: real_user_monitoring/bits_ai/
       parent: rum
-      identifier: rum_ai_investigations
+      identifier: rum_bits_ai
       weight: 9
-    - name: Single-View AI Investigation
-      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_single_view
+    - name: Optimize Performance
+      url: real_user_monitoring/bits_ai/optimize_performance/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_optimize_performance
       weight: 901
-    - name: Multi-View AI Investigation
-      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_multi_view
+    - name: Investigate Regressions
+      url: real_user_monitoring/bits_ai/investigate_regressions/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Operation AI Investigation
-      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_operation
+    - name: Bits Chat
+      url: real_user_monitoring/bits_ai/bits_chat/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_bits_chat
       weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
