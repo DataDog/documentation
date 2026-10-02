@@ -11,10 +11,6 @@ further_reading:
 ---
 
 ## Overview
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">Human Name Scanner detects personal names in logs using machine learning. The feature is in Preview for the {{< region-param key="dd_site_name" >}} site. Fill out the <a href="https://www.datadoghq.com/product-preview/human-name-pii-detection-in-logs-using-machine-learning/">form</a> to request access.</a></div>
-{{< /site-region >}}
-
 The Scanning Rule Library is a collection of predefined rules for detecting common patterns such as email addresses, credit card numbers, API keys, authorization tokens, and more. The recommended keywords are used by default when library rules are created.
 
 These rules can also be viewed in Datadog:
