@@ -110,9 +110,9 @@ DdRum.stopSession()
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=cdnsync#clear-user-session-property
+[1]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#clear-user-information
 [2]: /real_user_monitoring/ios/advanced_configuration/?tab=swift
-[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#track-user-sessions
-[4]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#track-user-sessions
+[3]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android#set-user-information
+[4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter#set-user-information
 [5]: /real_user_monitoring/reactnative/#user-information
 [6]: /real_user_monitoring/application_monitoring/browser/

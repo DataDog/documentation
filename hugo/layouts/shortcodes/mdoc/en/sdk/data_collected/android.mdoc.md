@@ -277,16 +277,16 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 **Note:** If your application supports [Direct Boot mode][13], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
-[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#custom-actions
-[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android&tab=kotlin#automatically-track-views
-[3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android&tab=kotlin#custom-views
+[1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android#manually-track-actions-and-send-custom-events
+[2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views
 [4]: /real_user_monitoring/setup/install/?platform=android
-[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views
-[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#enrich-user-sessions
-[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#track-custom-global-attributes
+[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
+[6]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android
+[7]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android#add-global-attributes
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: /data_security/real_user_monitoring/#geolocation
-[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#track-user-sessions
+[10]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
 [11]: /data_security/real_user_monitoring/#ip-address
 [12]: https://source.android.com/security/app-sandbox
 [13]: https://developer.android.com/training/articles/direct-boot

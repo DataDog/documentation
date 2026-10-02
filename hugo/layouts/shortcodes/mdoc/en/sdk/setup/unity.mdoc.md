@@ -5,7 +5,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your Unity applications with the Datadog Unity SDK.
 
-The Unity SDK supports [Real User Monitoring (RUM)][1] and [Error Tracking][2].
+The Unity SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][2], and [Product Analytics][11].
 
 {% alert level="info" %}
 Datadog supports Unity Monitoring for iOS and Android for Unity LTS 2022+.
@@ -77,16 +77,10 @@ The following parameters are available:
 | {% ui %}Track Non-Fatal App Hangs{% /ui %} | No | (iOS Only) Whether to track non-fatal app hangs. App hangs are detected when the app is unresponsive for a certain amount of time. The supplied "Threshold" is the amount of time in seconds that the app must be unresponsive before it is considered a non-fatal app hang. |
 | {% ui %}First Party Hosts{% /ui %} | No | To enable distributed tracing, you must specify which hosts are considered "first party" and have trace information injected. |
 
-#### Sample RUM sessions
-
-You can control the data your application sends to Datadog RUM during instrumentation of the RUM Unity SDK. Specify the {% ui %}Session Sample Rate{% /ui %} as a percentage between 0 and 100 in the {% ui %}Project Settings{% /ui %} window in Unity.
+You can adjust the {% ui %}Session Sample Rate{% /ui %}, but Datadog recommends using [retention filters][12] to control retained volume.
 {% /step %}
 
-{% /stepper %}
-
-## Using Datadog
-
-### Setting tracking consent
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
 To be compliant with data protection and privacy policies, the Datadog Unity SDK requires setting a tracking consent value.
 
@@ -103,7 +97,17 @@ and needs to be set to `TrackingConsent.Granted` before Datadog sends any inform
 DatadogSdk.Instance.SetTrackingConsent(TrackingConsent.Granted);
 ```
 
-### Logging
+{% /step %}
+
+{% step title="Enable RUM to start sending data" %}
+
+Select {% ui %}Enable RUM{% /ui %} in the Datadog section of your {% ui %}Project Settings{% /ui %} and set your {% ui %}RUM Application ID{% /ui %}. See [Enable the Datadog RUM Module][13] for the next steps.
+
+{% /step %}
+
+{% /stepper %}
+
+## Logging
 
 You can intercept and send logs from Unity's default debug logger by enabling the option and threshold in your projects settings.
 
@@ -143,36 +147,6 @@ logger.Debug("Hello with attributes", new()
 });
 ```
 
-### Real User Monitoring (RUM)
-
-#### Manual Scene (View) Tracking
-
-To manually track new Scenes (`Views` in Datadog), use the `StartView` and `StopView` methods:
-
-```csharp
-public void Start()
-{
-    DatadogSdk.Instance.Rum.StartView("My View", new()
-    {
-        { "view_attribute": "active" }
-    });
-}
-```
-
-Starting a new view automatically ends the previous view.
-
-#### Automatic Scene Tracking
-
-You can also set {% ui %}Enable Automatic Scene Tracking{% /ui %} in your {% ui %}Project Settings{% /ui %} to enable automatically tracking active scenes. This uses Unity's `SceneManager.activeSceneChanged` event to automatically start new scenes.
-
-#### Web Requests / Resource Tracking
-
-Datadog offers `DatadogTrackedWebRequest`, which is a `UnityWebRequest` wrapper intended to be a drop-in replacement for `UnityWebRequest`. `DatadogTrackedWebRequest` enables [Datadog Distributed Tracing][10].
-
-To enable Datadog Distributed Tracing, you must set the {% ui %}First Party Hosts{% /ui %} in your project settings to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the {% ui %}Tracing Sampling Rate{% /ui %}.
-
-{% ui %}First Party Hosts{% /ui %} does not allow wildcards, but matches any subdomains for a given domain. For example, api.example.com matches staging.api.example.com and prod.api.example.com, but not news.example.com.
-
 ## Sending data when device is offline
 
 RUM helps ensure availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches.
@@ -190,4 +164,6 @@ This means that even if users open your application while offline, no data is lo
 [7]: https://docs.unity3d.com/Manual/gradle-templates.html
 [8]: https://docs.unity3d.com/2022.3/Documentation/Manual/webgl-templates.html
 [9]: https://github.com/DataDog/dd-sdk-unity/tree/develop/samples/Datadog%20Sample/Assets/WebGLTemplates
-[10]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser
+[11]: /product_analytics/
+[12]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[13]: /real_user_monitoring/setup/enable_rum/?platform=unity

@@ -1,1 +1,1 @@
-Build plugins aren't available for this SDK yet.
+Additional plugins and integrations aren't available for this SDK.

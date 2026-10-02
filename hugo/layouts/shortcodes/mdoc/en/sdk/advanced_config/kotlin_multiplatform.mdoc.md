@@ -3,90 +3,7 @@ This partial contains advanced configuration instructions for the Kotlin Multipl
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-If you have not set up the SDK yet, follow the [in-app setup instructions][1] or see the [Kotlin Multiplatform RUM setup documentation][2].
-
-## Enrich user sessions
-
-For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=kotlin_multiplatform).
-
-## Event and data management
-
-For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=kotlin_multiplatform).
-
-## Track custom global attributes
-
-In addition to the [default RUM attributes][3] captured by the RUM Kotlin Multiplatform SDK automatically, you can choose to add additional contextual information, such as custom attributes, to your RUM events to enrich your observability within Datadog. Custom attributes allow you to filter and group information about observed user behavior (such as cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
-
-### Track user sessions
-
-See [Track user IDs][15] for instructions on adding user information to your RUM sessions.
-
-### Track user accounts
-
-If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
-
-* Analyze performance and errors by account
-* Know which accounts are the most impacted by an issue
-* Prioritize fixes based on account value
-
-Add account information in addition to user information. It does not replace user information.
-
-The SDK reports these attributes:
-
-| Attribute      | Type   | Description                                                 |
-| -------------- | ------ | ----------------------------------------------------------- |
-| `account.id`   | String | (Required) Unique account identifier.                       |
-| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
-
-To identify accounts, use the `setAccountInfo` API. For example:
-
-```kotlin
-Datadog.setAccountInfo("acct-1234", "Acme Corp", mapOf("tier" to "enterprise"))
-```
-
-Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
-
-To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists has no effect.
-
-```kotlin
-Datadog.addAccountExtraInfo(mapOf("seats" to 42))
-```
-
-To clear the account (for example, when the user signs out), use `clearAccountInfo`.
-
-```kotlin
-Datadog.clearAccountInfo()
-```
-
-Account information is attached to RUM events and logs.
-
-{% alert level="info" %}
-Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `GlobalRumMonitor.get().stopSession()` or the view with `GlobalRumMonitor.get().stopView()` before clearing.
-{% /alert %}
-
-### Track attributes
-
-```kotlin
-// Adds an attribute to all future RUM events
-GlobalRumMonitor.get().addAttribute(key, value)
-
-// Removes an attribute to all future RUM events
-GlobalRumMonitor.get().removeAttribute(key)
-```
-
-## Track background events
-
-You can track events such as crashes and network requests when your application is in the background (for example, no active view is available).
-
-Add the following snippet during RUM configuration:
-
-```kotlin
-.trackBackgroundEvents(true)
-```
-
-{% alert level="info" %}
-Tracking background events may lead to additional sessions, which can impact billing. For questions, [contact Datadog support][a1].
-{% /alert %}
+If you have not set up the SDK yet, see the [Kotlin Multiplatform setup instructions][1].
 
 ## Initialization parameters
 
@@ -112,13 +29,13 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 ### Common configuration methods
 
 `trackLongTasks(durationThreshold)`
-: Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog. See [Automatically track long tasks](#automatically-track-long-tasks) for more information.
+: Enables tracking tasks taking longer than `durationThreshold` on the main thread as long tasks in Datadog. See [Automatically track long tasks][2] for more information.
 
 `setVitalsUpdateFrequency([FREQUENT|AVERAGE|RARE|NEVER])`
 : Sets the preferred frequency for collecting mobile vitals.
 
 `setSessionSampleRate(<sampleRate>)`
-: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.) For more information, see [Managing sessions][16].
+: Sets the RUM sessions sample rate. (A value of 0 means no RUM events are sent. A value of 100 means all sessions are kept.) For more information, see [Manage Sessions][3].
 
 `setSessionListener(RumSessionListener)`
 : Sets a listener to be notified on when a new RUM Session starts.
@@ -142,7 +59,7 @@ You can use the following methods in `RumConfiguration.Builder` when creating th
 : Sets the EventMapper for the RUM LongTaskEvent. You can use this interface implementation to modify the LongTaskEvent attributes before serialization.
 
 `trackBackgroundEvents`
-: Enable/disable tracking RUM events when no activity is happening in the foreground. By default, background events are not tracked. Enabling this feature might increase the number of sessions tracked, and therefore your billing.
+: Enable/disable tracking RUM events when no activity is happening in the foreground. By default, background events are not tracked. Enabling this feature might increase the number of sessions tracked, and therefore your billing. See [Track Background Events][4].
 
 `trackFrustrations`
 : Enable/disable tracking of frustration signals.
@@ -155,156 +72,31 @@ These methods can be accessed only from Android source set.
 : Enables tracking non-fatal ANRs. This is enabled by default on Android API 29 and below, and disabled by default on Android API 30 and above.
 
 `trackUserInteractions(Array<ViewAttributesProvider>)`
-: Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted.
+: Enables tracking user interactions (such as tap, scroll, or swipe). The parameter also allows you to add custom attributes to the RUM Action events based on the widget with which the user interacted. See [Track User Interactions][7].
 
 `useViewTrackingStrategy(strategy)`
-: Defines the strategy used to track views. See [Automatically track views](#automatically-track-views) for more information.
+: Defines the strategy used to track views. See [Automatically track views][5] for more information.
 
 ### iOS configuration methods
 
 `trackUiKitViews(UIKitRUMViewsPredicate)`
-: Enable automatic tracking of `UIViewController`s as RUM views. See [Automatically track views](#automatically-track-views) for more information.
+: Enable automatic tracking of `UIViewController`s as RUM views. See [Automatically track views][5] for more information.
 
 `trackUiKitActions(UIKitRUMActionsPredicate)`
-: Enable automatic tracking of `UITouch` events as RUM actions. The predicate implementation should return RUM action parameters if the given interaction should be accepted, or `null` to ignore it. By default, all touches are accepted.
+: Enable automatic tracking of `UITouch` events as RUM actions. The predicate implementation should return RUM action parameters if the given interaction should be accepted, or `null` to ignore it. By default, all touches are accepted. See [Track User Interactions][7].
 
 `setAppHangThreshold(Long)`
-: Enables app hangs monitoring with the given threshold (in milliseconds). See [Add app hang reporting][10] for more information.
+: Enables app hangs monitoring with the given threshold (in milliseconds). See [Add app hang reporting][6] for more information.
 
-### Automatically track views
+## Enrich RUM data
 
-#### Android
+To add custom attributes, user information, account information, feature flags, and more to your RUM events, see [Enrich RUM Data][8].
 
-To automatically track your views (such as activities and fragments), provide a tracking strategy at initialization. Depending on your application's architecture, you can choose one of the following strategies:
-
-`ActivityViewTrackingStrategy`
-: Every activity in your application is considered a distinct view.
-
-`FragmentViewTrackingStrategy`
-: Every fragment in your application is considered a distinct view.
-
-`MixedViewTrackingStrategy`
-: Every activity or fragment in your application is considered a distinct view.
-
-`NavigationViewTrackingStrategy`
-: Recommended for Android Jetpack Navigation library users. Each Navigation destination is considered a distinct view.
-
-For instance, to set each fragment as a distinct view, use the following configuration in your [setup][1]:
-
-```kotlin
-// in common source set
-val rumConfig = RumConfiguration.Builder(applicationId)
-  .apply {
-    platformSpecificSetup(this)
-  }
-  .build()
-
-internal expect fun platformSpecificSetup(
-    rumConfigurationBuilder: RumConfiguration.Builder
-)
-
-// in Android source set
-internal actual fun platformSpecificSetup(
-    rumConfigurationBuilder: RumConfiguration.Builder
-) {
-    rumConfigurationBuilder.useViewTrackingStrategy(
-        FragmentViewTrackingStrategy(...)
-    )
-}
-```
-
-For `ActivityViewTrackingStrategy`, `FragmentViewTrackingStrategy`, or `MixedViewTrackingStrategy`, you can filter which `Fragment` or `Activity` is tracked as a RUM View by providing a `ComponentPredicate` implementation in the constructor:
-
-```kotlin
-val strategy = ActivityViewTrackingStrategy(
-    trackExtras = true,
-    componentPredicate = object : ComponentPredicate<Activity> {
-        override fun accept(component: Activity): Boolean {
-            return true
-        }
-
-        override fun getViewName(component: Activity): String? = null
-    }
-)
-```
-
-**Note**: By default, the library is using `ActivityViewTrackingStrategy`. If you decide not to provide a view tracking strategy, you must manually send the views by calling the `startView` and `stopView` methods yourself.
-
-#### iOS
-
-To automatically track views (`UIViewController`s), use the `trackUiKitViews` method when enabling RUM. By default, views are named with the view controller's class name. To customize it, provide your own implementation of the `uiKitViewsPredicate` that conforms to `UIKitRUMViewsPredicate` interface.
-
-Inside the `createView(viewController: UIViewController)` implementation, your app should decide if a given `UIViewController` instance should start the RUM view (return value) or not (return `null`). The returned `RUMView` value must specify the `name` and may provide additional `attributes` for the created RUM view.
-
-For instance, you can configure the predicate to use explicit type check for each view controller in your app:
-
-```kotlin
-class YourCustomPredicate: UIKitRUMViewsPredicate {
-
-    override fun createView(viewController: UIViewController): RUMView? {
-        return when (viewController) {
-          is HomeViewController -> RUMView("Home")
-          is DetailsViewController -> RUMView("Details")
-          else -> null
-        }
-    }
-}
-```
-
-You can even come up with a more dynamic solution depending on your app's architecture.
-
-**Note**: By default, UIKit view tracking is not enabled.
-
-### Automatically track long tasks
-
-Long running operations performed on the main thread can impact the visual performance and reactivity of your application. To track these operations, define the duration threshold above which a task is considered too long.
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(durationThreshold)
-  .build()
-```
-
-For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-  // …
-  .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
-  .build()
-```
-
-## Modify or drop RUM events
-
-For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=kotlin_multiplatform).
-
-## Retrieve the RUM session ID
-
-Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
-
-You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
-
-```kotlin
-GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
-  currentSessionId = sessionId
-}
-```
-
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/kotlin_multiplatform
-[3]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
-[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
-[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
-[6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
-[7]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
-[8]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures
-[9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
-[10]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
-[11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform
-[12]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
-[13]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform
-[14]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=kotlin_multiplatform
-[15]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=kotlin_multiplatform
-[16]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform
-[a1]: https://docs.datadoghq.com/help/
+[1]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform
+[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform#automatically-track-long-tasks
+[3]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform
+[4]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=kotlin_multiplatform
+[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform#automatically-track-views
+[6]: /error_tracking/frontend/mobile/ios/#step-5---add-app-hang-reporting
+[7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=kotlin_multiplatform#automatically-track-user-interactions
+[8]: /real_user_monitoring/enrich_rum_data/

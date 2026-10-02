@@ -12,7 +12,9 @@ further_reading:
 
 ## Overview
 
-The SDK stores events locally and only uploads them when intake conditions are met. Use the following APIs to clear unsent data or stop data collection entirely. Select your SDK for platform-specific instructions.
+The SDK stores events locally and only uploads them when intake conditions are met. Use the following APIs to stop data collection, clear unsent data, and control which internal data the SDK exposes. To ask for user consent before collecting data, configure tracking consent when you [install the SDK](/real_user_monitoring/setup/install/).
+
+Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 
@@ -65,7 +67,7 @@ The SDK stores events locally and only uploads them when intake conditions are m
 <!-- Roku -->
 
 {% if equals($platform, "roku") %}
-{% partial file="sdk/manage_data_collection/unavailable.mdoc.md" /%}
+{% partial file="sdk/manage_data_collection/roku.mdoc.md" /%}
 {% /if %}
 
 <!-- Unity -->

@@ -451,4 +451,4 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 [8]: /getting_started/tagging/using_tags/
 [9]: /error_tracking/frontend/mobile/android/#get-deobfuscated-stack-traces
 [10]: /error_tracking/frontend/mobile/ios/#get-deobfuscated-stack-traces
-[11]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration#track-background-events
+[11]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=kotlin_multiplatform

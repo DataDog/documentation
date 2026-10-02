@@ -2,7 +2,6 @@
 title: Apple Platform App Launch Monitoring
 description: "Measure application launch performance on Apple platforms, including the time to initial display and time to full display."
 aliases:
-- /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
 - /real_user_monitoring/mobile_and_tv_monitoring/ios/application_launch_monitoring/
 further_reading:

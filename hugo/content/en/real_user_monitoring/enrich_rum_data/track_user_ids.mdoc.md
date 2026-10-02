@@ -1,5 +1,5 @@
 ---
-title: Track User IDs
+title: Track Users and Accounts
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -8,7 +8,13 @@ content_filters:
 
 ## Overview
 
-Add user information to your RUM sessions to follow the activity of a given user, know which users are the most impacted by errors, and monitor performance for your most important users. Select your SDK for platform-specific instructions.
+Add user and account information to your RUM sessions to:
+
+- Follow the activity of a given user
+- Know which users and accounts are the most impacted by errors
+- Monitor performance for your most important users and accounts
+
+Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}

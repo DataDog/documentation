@@ -25,4 +25,4 @@ For symbol upload and other advanced Error Tracking details, see [.NET MAUI Cras
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=maui
-[3]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/maui/
+[3]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=maui

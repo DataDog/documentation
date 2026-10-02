@@ -94,7 +94,7 @@ To modify the **head-based** sampling rate for mobile SDKs, redeploy your applic
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions
 [2]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [3]: /real_user_monitoring/guide/sampling-browser-plans/#overview
-[4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
+[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
 [5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
 [6]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
 [7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform

@@ -5,14 +5,14 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 This page describes how to instrument your applications with the Datadog Kotlin Multiplatform SDK.
 
-The Kotlin Multiplatform SDK supports [Real User Monitoring (RUM)][1] and [Error Tracking][2], and works with Android 5.0+ (API level 21) and iOS v12+.
+The Kotlin Multiplatform SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][2], [Session Replay][3], and [Product Analytics][4], and works with Android 5.0+ (API level 21) and iOS v12+.
 
 ## Setup
 
 {% stepper level="h4" %}
 
-{% step title="Declare the Kotlin Multiplatform SDK as a dependency" %}
-Declare [`dd-sdk-kotlin-multiplatform-rum`][3] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
+{% step title="Add the dependencies" %}
+Declare [`dd-sdk-kotlin-multiplatform-rum`][5] as a common source set dependency in your Kotlin Multiplatform module's `build.gradle.kts` file.
 
 ```kotlin
 kotlin {
@@ -27,9 +27,9 @@ kotlin {
   }
 }
 ```
-{% /step %}
 
-{% step title="Add native dependencies for iOS" %}
+Then, add the native dependencies for iOS.
+
 {% alert level="info" %}
 Kotlin 2.0.20 or higher is required if crash tracking is enabled on iOS. Otherwise, due to the compatibility with `PLCrashReporter`, the application may hang if crash tracking is enabled.
 {% /alert %}
@@ -40,9 +40,9 @@ Add the following Datadog iOS SDK dependencies, which are needed for the linking
 * `DatadogRUM`
 * `DatadogCrashReporting`
 
-**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][4]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogRUM`.
+**Note**: Versions of these dependencies should be aligned with the version used by the Datadog Kotlin Multiplatform SDK itself. You can find the complete mapping of iOS SDK versions for each Kotlin Multiplatform SDK release in the [version compatibility guide][7]. If you are using Kotlin Multiplatform SDK version 1.3.0 or below, add `DatadogObjc` dependency instead of `DatadogCore` and `DatadogRUM`.
 
-#### Adding native iOS dependencies using the CocoaPods plugin
+##### Add native iOS dependencies using the CocoaPods plugin
 
 If you are using Kotlin Multiplatform library as a CocoaPods dependency for your iOS application, you can add dependencies as following:
 
@@ -71,22 +71,20 @@ cocoapods {
 }
 ```
 
-#### Adding native iOS dependencies using Xcode
+##### Add native iOS dependencies using Xcode
 
 If you are integrating Kotlin Multiplatform library as a framework with an `embedAndSignAppleFrameworkForXcode` Gradle task as a part of your Xcode build, you can add the necessary dependencies directly in Xcode as following:
 
 1. Click on your project in Xcode and go to the {% ui %}Package Dependencies{% /ui %} tab.
 2. Add the iOS SDK package dependency by adding `https://github.com/DataDog/dd-sdk-ios.git` as a package URL.
-3. Select the version from the table above.
+3. Select the version that matches your Kotlin Multiplatform SDK version in the [version compatibility guide][7].
 4. Click on the necessary application target and open the {% ui %}General{% /ui %} tab.
 5. Scroll down to the {% ui %}Frameworks, Libraries, and Embedded Content{% /ui %} section and add the dependencies mentioned above.
 {% /step %}
 
-{% step title="Initialize Datadog SDK" %}
+{% step title="Initialize the SDK" %}
 
-In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][5].
-
-See [`trackingConsent`](#set-tracking-consent-gdpr-compliance) to add GDPR compliance for your EU users, and [other configuration options][6] to initialize the library.
+In the initialization snippet, set an environment name. For Android, set a variant name if it exists. For more information, see [Using Tags][6]. See [other configuration options][8] to initialize the library.
 
 ```kotlin
 // in common source set
@@ -108,25 +106,7 @@ fun initializeDatadog(context: Any? = null) {
 ```
 {% /step %}
 
-{% step title="Sample RUM sessions" %}
-
-To control the data your application sends to Datadog RUM, you can specify a sample rate for RUM sessions while [initializing the RUM feature][7]. The rate is a percentage between 0 and 100. By default, `sessionSamplingRate` is set to 100 (keep all sessions).
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-        // Here 75% of the RUM sessions are sent to Datadog
-        .setSessionSampleRate(75.0f)
-        .build()
-Rum.enable(rumConfig)
-```
-{% /step %}
-
-{% step title="Enable RUM to start sending data" %}
-
-See [Enable the DD RUM module](/real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform) for instructions on how to enable RUM to start sending data.
-{% /step %}
-
-{% step title="Set tracking consent (GDPR compliance)" %}
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
 To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:
@@ -143,67 +123,27 @@ To update the tracking consent after the SDK is initialized, call `Datadog.setTr
 - `TrackingConsent.NOT_GRANTED`: The SDK wipes all batched data and does not collect any future data.
 {% /step %}
 
-{% step title="Initialize the RUM Ktor plugin to track network events made with Ktor" %}
+{% step title="Enable RUM to start sending data" %}
 
-1. In your `build.gradle.kts` file, add the Gradle dependency to `dd-sdk-kotlin-multiplatform-ktor` for Ktor 2.x, or `dd-sdk-kotlin-multiplatform-ktor3` for Ktor 3.x:
-
-```kotlin
-kotlin {
-    // ...
-    sourceSets {
-        // ...
-        commonMain.dependencies {
-            // Use this line if you are using Ktor 2.x
-            implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor:x.x.x")
-            // Use this line if you are using Ktor 3.x
-            // implementation("com.datadoghq:dd-sdk-kotlin-multiplatform-ktor3:x.x.x")
-        }
-    }
-}
-```
-
-2. To track your Ktor requests as resources, add the provided [Datadog Ktor plugin][9]:
-
-```kotlin
-val ktorClient = HttpClient {
-    install(
-        datadogKtorPlugin(
-            tracedHosts = mapOf(
-                "example.com" to setOf(TracingHeaderType.DATADOG),
-                "example.eu" to setOf(TracingHeaderType.DATADOG)
-            ),
-            traceSampleRate = 100f
-        )
-    )
-}
-```
-
-This records each request processed by the `HttpClient` as a resource in RUM, with all the relevant information automatically filled (URL, method, status code, and error). Only the network requests that started when a view is active are tracked. To track requests when your application is in the background, [create a view manually][10] or enable [background view tracking](#track-background-events).
+To start sending RUM data, see [Enable the Datadog RUM module][9].
 {% /step %}
 
 {% /stepper %}
 
-## Track errors
-
-[Kotlin Multiplatform Crash Reporting and Error Tracking][11] displays any issues in your application and the latest available errors. You can view error details and attributes including JSON in the [RUM Explorer][12].
-
 ## Sending data when device is offline
 
-RUM ensures availability of data when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
+RUM keeps data available when your user device is offline. In case of low-network areas, or when the device battery is too low, all the RUM events are first stored on the local device in batches. 
 
-Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough to ensure the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+Each batch follows the intake specification. They are sent as soon as the network is available, and the battery is high enough that the Datadog SDK does not impact the end user's experience. If the network is not available while your application is in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
  
-This means that even if users open your application while offline, no data is lost. To ensure the SDK does not use too much disk space, the data on the disk is automatically discarded if it gets too old.
+This means that even if users open your application while offline, no data is lost. To keep the SDK from using too much disk space, the data on the disk is automatically discarded if it gets too old.
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/mobile/kotlin-multiplatform/
-[3]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
-[4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
-[5]: /getting_started/tagging/using_tags/
-[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
-[7]: https://app.datadoghq.com/rum/application/create
-[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
-[9]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
-[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#custom-views
-[11]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/kotlin-multiplatform/
-[12]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[3]: /session_replay/mobile/
+[4]: /product_analytics/
+[5]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
+[6]: /getting_started/tagging/using_tags/
+[7]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/blob/develop/NATIVE_SDK_VERSIONS.md
+[8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
+[9]: /real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform

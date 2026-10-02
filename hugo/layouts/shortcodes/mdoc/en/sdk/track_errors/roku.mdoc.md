@@ -16,4 +16,11 @@ end try
 
 On Roku OS 13+, you can access the file path, line number, and a code snippet for each stack trace frame. See [Roku Crash Reporting and Error Tracking][1] for limitations on earlier OS versions.
 
-[1]: /real_user_monitoring/application_monitoring/roku/error_tracking/
+For the attributes collected, see [Data Collected][2].
+
+## Upload debug symbols to get deobfuscated stack traces
+
+The Roku SDK doesn't require a symbol upload. On Roku OS 13 and later, crash reports and errors include the file path, line number, and a code snippet for each stack trace frame. On earlier Roku OS versions, the stack trace is empty. For more information, see [Roku Crash Reporting and Error Tracking][1].
+
+[1]: /error_tracking/frontend/mobile/roku/
+[2]: /real_user_monitoring/setup/data_collected/?platform=roku#error-attributes

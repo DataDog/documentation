@@ -201,4 +201,4 @@ Symbols take up to 5 minutes to process. Check [{{< ui >}}Error Tracking{{< /ui 
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/setup/install/?platform=maui
 [4]: https://app.datadoghq.com/source-code/setup/symbols
-[5]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#modify-or-drop-rum-events
+[5]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=maui#modify-rum-events

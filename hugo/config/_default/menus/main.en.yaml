@@ -9556,11 +9556,16 @@ menu:
       parent: rum_setup_enable
       identifier: rum_setup_enable_track_frustration_signals
       weight: 109
+    - name: Track Background Events
+      url: real_user_monitoring/setup/enable_rum/track_background_events/
+      parent: rum_setup_enable
+      identifier: rum_setup_enable_track_background_events
+      weight: 110
     - name: Advanced Configuration
       url: real_user_monitoring/setup/enable_rum/advanced_configuration/
       parent: rum_setup_enable
       identifier: rum_setup_enable_advanced_configuration
-      weight: 110
+      weight: 111
     - name: Collect Session Replays
       url: session_replay/
       parent: rum_setup
@@ -9571,7 +9576,7 @@ menu:
       parent: rum_setup
       identifier: rum_remote_configuration
       weight: 205
-    - name: Additional Plugins
+    - name: Additional Plugins and Integrations
       url: real_user_monitoring/setup/additional_plugins/
       parent: rum_setup
       identifier: rum_setup_additional_plugins
@@ -9591,7 +9596,7 @@ menu:
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_add_custom_context
       weight: 401
-    - name: Track User IDs
+    - name: Track Users and Accounts
       url: real_user_monitoring/enrich_rum_data/track_user_ids
       parent: rum_setup_enrich_rum_data
       identifier: rum_setup_enrich_rum_track_user_ids
@@ -9731,16 +9736,6 @@ menu:
       parent: rum_investigate_problems_triage_errors_and_crashes
       identifier: rum_investigate_problems_triage_errors_and_crashes_states
       weight: 102
-    - name: Track Browser Errors
-      url: real_user_monitoring/investigate_problems/triage_errors_and_crashes/browser/
-      parent: rum_investigate_problems_triage_errors_and_crashes
-      identifier: rum_investigate_problems_triage_errors_and_crashes_browser
-      weight: 103
-    - name: Track Mobile Errors
-      url: real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/
-      parent: rum_investigate_problems_triage_errors_and_crashes
-      identifier: rum_investigate_problems_triage_errors_and_crashes_mobile
-      weight: 104
     - name: Error Grouping
       url: real_user_monitoring/investigate_problems/triage_errors_and_crashes/error_grouping
       parent: rum_investigate_problems_triage_errors_and_crashes
@@ -9856,11 +9851,6 @@ menu:
       parent: rum_reference
       identifier: rum_reference_external_resources
       weight: 1001
-    - name: Integrated Libraries
-      url: real_user_monitoring/reference/integrated_libraries/
-      parent: rum_reference
-      identifier: rum_reference_integrated_libraries
-      weight: 1002
     - name: SDK Performance Impact
       url: real_user_monitoring/reference/sdk_performance_impact/
       parent: rum_reference

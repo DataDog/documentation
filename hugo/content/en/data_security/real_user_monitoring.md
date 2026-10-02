@@ -141,12 +141,12 @@ See [privacy options specific to Session Replay][19]. Masking in Session Replay 
 [5]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [6]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [7]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
-[8]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[9]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[10]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
-[11]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[8]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios#modify-rum-events
+[9]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=android#modify-rum-events
+[10]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=flutter#modify-rum-events
+[11]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=react_native#modify-rum-events
 [12]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[13]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
 [16]: /session_replay/privacy_options?platform=browser#override-an-html-element

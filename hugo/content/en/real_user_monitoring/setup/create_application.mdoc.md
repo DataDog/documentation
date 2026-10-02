@@ -1,105 +1,35 @@
 ---
 title: Create a RUM Application
-content_filters:
-  - trait_id: platform
-    option_group_id: client_sdk_platform_options
-    label: "SDK"
+description: "Create a RUM application in Datadog to generate the application ID and client token that the Datadog SDK needs."
+further_reading:
+- link: '/real_user_monitoring/setup/install/'
+  tag: 'Documentation'
+  text: 'Install the Datadog SDK'
+- link: '/account_management/api-app-keys/#client-tokens'
+  tag: 'Documentation'
+  text: 'Client tokens'
 ---
 
 ## Overview
 
-Create a RUM application in Datadog to generate the application ID and client token that the Datadog SDK uses to associate collected data with your application. Select your SDK, then follow the steps below.
+Create a RUM application in Datadog to generate the application ID and client token that the Datadog SDK uses to associate collected data with your application.
 
-<!-- Browser -->
-{% if equals($platform, "browser") %}
-{% partial file="sdk/create_app/browser.mdoc.md" /%}
-{% /if %}
+## Create the application
 
-<!-- Android -->
-{% if equals($platform, "android") %}
-{% partial file="sdk/create_app/android.mdoc.md" /%}
-{% /if %}
+1. In Datadog, navigate to [{% ui %}Digital Experience{% /ui %} > {% ui %}Add an Application{% /ui %}](https://app.datadoghq.com/rum/application/create).
+2. Select the application type that matches your platform, for example JavaScript (JS), Android, iOS, Flutter, React Native, Kotlin Multiplatform, C++, .NET MAUI, Roku, or Unity.
+3. Enter an application name, then click {% ui %}Create Application{% /ui %}. Datadog generates an application ID and a client token for your application.
+4. Copy the application ID and client token. You need them to initialize the SDK.
 
-<!-- iOS -->
-{% if equals($platform, "ios") %}
-{% partial file="sdk/create_app/ios.mdoc.md" /%}
-{% /if %}
+Depending on the application type, you can also configure these settings when you create the application:
 
-<!-- Flutter -->
-{% if equals($platform, "flutter") %}
-{% partial file="sdk/create_app/flutter.mdoc.md" /%}
-{% /if %}
+- **Web view instrumentation** (Android and iOS): Click the {% ui %}Instrument your webviews{% /ui %} toggle. For more information, see [Track Navigation Across Web Views](/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/).
+- **User data collection**: To disable automatic collection of client IP or geolocation data, turn off those settings. For more information, see [Enable GeoIP Enrichment](/real_user_monitoring/enrich_rum_data/enable_geoip_enrichment/).
 
-<!-- React Native -->
-{% if equals($platform, "react_native") %}
-{% tabs %}
-{% tab label="React Native" %}
+## Use a client token
 
-{% partial file="sdk/create_app/react-native.mdoc.md" /%}
+For data security, you must use a client token to configure the Datadog SDK. If you use only [Datadog API keys](/account_management/api-app-keys/#api-keys), they are exposed client-side in your application's code. For more information about setting up a client token, see the [Client Token documentation](/account_management/api-app-keys/#client-tokens).
 
-{% /tab %}
-{% tab label="Expo" %}
+## Next step
 
-{% partial file="sdk/create_app/react-native-expo.mdoc.md" /%}
-
-{% /tab %}
-{% /tabs %}
-{% /if %}
-
-<!-- Kotlin Multiplatform -->
-{% if equals($platform, "kotlin_multiplatform") %}
-{% partial file="sdk/create_app/kotlin-multiplatform.mdoc.md" /%}
-{% /if %}
-
-<!-- C / C++ -->
-{% if equals($platform, "cpp") %}
-{% partial file="sdk/create_app/cpp.mdoc.md" /%}
-{% /if %}
-
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-{% partial file="sdk/create_app/maui.mdoc.md" /%}
-{% /if %}
-
-<!-- Roku -->
-{% if equals($platform, "roku") %}
-{% partial file="sdk/create_app/roku.mdoc.md" /%}
-{% /if %}
-
-<!-- Unity -->
-{% if equals($platform, "unity") %}
-{% partial file="sdk/create_app/unity.mdoc.md" /%}
-{% /if %}
-
-## Next steps
-
-{% if equals($platform, "browser") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=browser) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "android") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=android) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "ios") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=ios) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "flutter") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=flutter) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "react_native") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=react_native) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "kotlin_multiplatform") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=kotlin_multiplatform) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "cpp") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=cpp) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "maui") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=maui) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "roku") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=roku) to start collecting RUM data.
-{% /if %}
-{% if equals($platform, "unity") %}
-[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=unity) to start collecting RUM data.
-{% /if %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/) in your application.

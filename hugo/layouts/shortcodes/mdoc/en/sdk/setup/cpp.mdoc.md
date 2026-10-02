@@ -3,7 +3,9 @@ This partial contains setup instructions for the C++ SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-This page describes how to instrument your C++ applications with the Datadog C++ SDK for [Real User Monitoring (RUM)][1].
+This page describes how to instrument your C++ applications with the Datadog C++ SDK.
+
+The C++ SDK supports [Real User Monitoring (RUM)][1], [Error Tracking][6], and [Product Analytics][7].
 
 ## Prerequisites
 
@@ -17,7 +19,7 @@ Before you begin, you need:
 
 {% stepper level="h3" %}
 
-{% step title="Add the C++ SDK as a dependency" %}
+{% step title="Add the dependencies" %}
 
 Add the SDK's public headers to your project's include paths, and add the SDK as a linker dependency.
 
@@ -277,7 +279,13 @@ dd_core_config_set_site(&config, DD_SITE_US2_FED);
 
 The SDK requires an application storage path, which must be an existing directory that's exclusively used by your application. The SDK creates a `.datadog/` subdirectory within that directory and stores all transient files within it.
 
-#### Set tracking consent (GDPR compliance)
+#### Other options
+
+For information on other SDK configuration options, see [Advanced Configuration][5].
+
+{% /step %}
+
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
 For GDPR compliance, the SDK requires a tracking consent value at initialization. Your application can set this value to any of:
 
@@ -300,136 +308,20 @@ dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_PENDING);
 {% /tab %}
 {% /tabs %}
 
-#### Other options
-
-For information on other SDK configuration options, see [Advanced Configuration][4].
-
 {% /step %}
 
-{% step title="Register RUM and start the SDK" %}
+{% step title="Enable RUM to start sending data" %}
 
-After the Core is configured, register the RUM feature and call `Start()`.
-
-{% tabs %}
-{% tab label="C++" %}
-```cpp
-// Configure and register RUM
-datadog::RumConfig rum_config("<rum_application_id>");
-auto rum = datadog::Rum::Register(core, rum_config);
-
-// Start the core to begin collecting and uploading data
-core->Start();
-```
-{% /tab %}
-{% tab label="C" %}
-```c
-/* Configure and register RUM */
-dd_rum_config_t rum_config;
-dd_rum_config_init(&rum_config, "<rum_application_id>");
-dd_rum_t* rum = dd_rum_init(core, &rum_config);
-
-/* Start the core to begin collecting and uploading data */
-dd_core_start(core);
-```
-
-**Note**: The C API requires explicit cleanup:
-
-```c
-/* Free all resources when finished */
-dd_rum_destroy(rum);
-dd_core_destroy(core);
-```
-{% /tab %}
-{% /tabs %}
-
-#### Configure RUM session sample rate
-
-To control the percentage of RUM sessions sent to Datadog, you can set a session sample rate between 0.0 and 100.0. The default is 100.0, which keeps all sessions.
-
-{% tabs %}
-{% tab label="C++" %}
-```cpp
-// In this example, only 75% of sessions will be sent to Datadog
-rum_config.SetSessionSampleRate(75.0f);
-```
-{% /tab %}
-{% tab label="C" %}
-```c
-/** In this example, only 75% of sessions will be sent to Datadog */
-dd_rum_config_set_session_sample_rate(&rum_config, 75.0f);
-```
-{% /tab %}
-{% /tabs %}
-
-Datadog recommends setting the sample rate to 100%, ensuring that all RUM sessions are ingested for full visibility and accurate metrics. To control which sessions are indexed and retained, configure retention filters. For more information, see [RUM Without Limits][5].
-
-{% /step %}
-
-{% step title="Instrument view transitions" %}
-
-Call `StartView` whenever your application transitions to a new screen, scene, or meaningful state:
-
-{% tabs %}
-{% tab label="C++" %}
-```cpp
-// Record that the user is now on the startup screen
-rum->StartView("startup_screen", "Startup Screen");
-```
-{% /tab %}
-{% tab label="C" %}
-```c
-/* Record that the user is now on the startup screen */
-dd_rum_start_view(rum, "startup_screen", "Startup Screen", NULL);
-```
-{% /tab %}
-{% /tabs %}
-
-For more information on RUM instrumentation, see [Instrument your application][4].
+After the core is configured, register the RUM feature and start the core. See [Enable the Datadog RUM Module][4] for instructions.
 
 {% /step %}
 
 {% /stepper %}
 
-## Verify your setup
-
-After instrumenting your application, verify that the SDK is correctly sending data to Datadog.
-
-### Check diagnostic output
-
-By default, the SDK logs diagnostic warnings and errors to `stderr`. You can increase the verbosity of this output in your `CoreConfig`:
-
-{% tabs %}
-{% tab label="C++" %}
-```cpp
-config.SetDiagnosticThreshold(datadog::DiagnosticLevel::Debug);
-```
-{% /tab %}
-{% tab label="C" %}
-```c
-dd_core_config_set_diagnostic_threshold(&config, DD_DIAGNOSTIC_LEVEL_DEBUG);
-```
-{% /tab %}
-{% /tabs %}
-
-After the SDK is correctly configured and tracking consent is granted, you should see periodic console output. Output like this indicates that the SDK is uploading data:
-
-```
-[DATADOG DEBUG] Initiating HTTP request
-[DATADOG DEBUG] Batch upload OK; will delete and continue this upload cycle
-[DATADOG STATUS] Upload cycle finished with all uploads successful
-[DATADOG DEBUG] Scheduled next upload cycle for feature
-```
-
-**Note:** Revert the diagnostic threshold change before building for Release. For more information on diagnostic logging, see [Advanced Configuration][6].
-
-### View your data in Datadog
-
-After running your app, navigate to the [RUM Explorer][7] to see sessions from your application. You should see session data within a few minutes.
-
 [1]: /real_user_monitoring/
 [2]: https://github.com/DataDog/dd-sdk-cpp/releases
 [3]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
-[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#instrument-your-application
-[5]: /real_user_monitoring/retain_and_recover_valuable_sessions/
-[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#diagnostic-logging
-[7]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[4]: /real_user_monitoring/setup/enable_rum/?platform=cpp
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp
+[6]: /error_tracking/
+[7]: /product_analytics/

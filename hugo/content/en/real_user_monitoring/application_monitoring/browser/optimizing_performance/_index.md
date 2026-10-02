@@ -104,8 +104,8 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#core-web-vitals
-[2]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[1]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
+[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-loading-time-is-calculated
 [3]: /real_user_monitoring/setup/install/?platform=browser
 [4]: /session_replay/
 [5]: https://app.datadoghq.com/rum/vitals
@@ -116,4 +116,4 @@ For deeper root cause analysis, use browser profiling alongside RUM to identify 
 [11]: https://web.dev/articles/inp/
 [12]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/
 [13]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[14]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#diagnose-core-web-vitals-with-subparts
+[14]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#diagnose-core-web-vitals-with-subparts

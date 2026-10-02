@@ -155,6 +155,6 @@ To collect the resource status code, add the `Access-Control-Allow-Origin` HTTP 
 [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/crossorigin
 [8]: /real_user_monitoring/setup/data_collected/?platform=browser#graphql-attributes
-[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#modify-the-content-of-a-rum-event
+[9]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=browser#modify-rum-events
 [10]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html#trackresourceheaders
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=browser

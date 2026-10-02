@@ -1,4 +1,28 @@
-View loading time, Time to Network Settled, Interaction to Next View, and custom timings aren't available for the .NET MAUI SDK yet.
+Time to Network Settled and Interaction to Next View aren't available for the .NET MAUI SDK.
+
+## Set the view loading time
+
+The SDK can record how long a view took to become interactive. Call `AddViewLoadingTime` from the page code that knows when the view is fully ready:
+
+```csharp
+// Record the view's loading time once
+DdRum.AddViewLoadingTime(overwrite: false);
+```
+
+Pass `overwrite: true` to replace a previously recorded value for the same view.
+
+## Add your own performance timing
+
+In addition to RUM's default attributes, you can measure where your application is spending its time with the `AddTiming` API. The timing measure is relative to the start of the current RUM view. For example, you can time how long it takes for your hero image to appear:
+
+```csharp
+void OnHeroImageLoaded()
+{
+    DdRum.AddTiming("hero_image");
+}
+```
+
+After the timing is sent, it is accessible as `@view.custom_timings.<timing_name>`, for example, `@view.custom_timings.hero_image`. You must [create a measure](/real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures) before graphing it in RUM analytics or in dashboards.
 
 ## Mobile vitals
 

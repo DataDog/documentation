@@ -1,4 +1,6 @@
-**Note**: This feature is not yet available for Flutter web applications.
+**Note**: This feature is not available for Flutter web applications.
+
+## Modify RUM events
 
 To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the Flutter RUM SDK:
 
@@ -27,7 +29,11 @@ For example, to redact sensitive information in a RUM Resource's `url`, implemen
     },
 ```
 
-Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `null`.
+## Drop RUM events
+
+Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. View events can't be dropped: the value returned from the view event mapper must not be `null`.
+
+## Modifiable attributes
 
 Depending on the event's type, only some specific properties can be modified:
 

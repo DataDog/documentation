@@ -16,10 +16,6 @@ This section contains reference documentation for Real User Monitoring, includin
     <h3>External Resources</h3>
     Find links to the Datadog SDK API reference, RUM API reference, and RUM Terraform reference.
     {{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/reference/integrated_libraries/" >}}
-    <h3>Integrated Libraries</h3>
-    Learn about the Datadog RUM SDK's integrations with third-party libraries.
-    {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/reference/sdk_performance_impact/" >}}
     <h3>SDK Performance Impact</h3>
     Learn about how the SDK impacts performance of your application.

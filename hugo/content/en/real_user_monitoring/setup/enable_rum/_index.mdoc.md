@@ -1,5 +1,5 @@
 ---
-title: Enable the DD RUM Module
+title: Enable the Datadog RUM Module
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -48,13 +48,10 @@ Rum.enable(rumConfig);
 {% /tab %}
 {% /tabs %}
 
-See [`ViewTrackingStrategy`](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views) to enable automatic tracking of all your views (activities, fragments, and more).
 {% /if %}
 
 <!-- iOS -->
 {% if equals($platform, "ios") %}
-#### Enable RUM
-
 Configure and start RUM. Do this once, as early as possible, specifically in your `AppDelegate`:
 
 {% tabs %}
@@ -93,44 +90,6 @@ configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate al
 
 {% /tab %}
 {% /tabs %}
-
-#### Enable `URLSessionInstrumentation`
-
-To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-URLSessionInstrumentation.enable(
-    with: .init(
-        delegateClass: <YourSessionDelegate>.self
-    )
-)
-
-let session = URLSession(
-    configuration: .default,
-    delegate: <YourSessionDelegate>(),
-    delegateQueue: nil
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
-[DDURLSessionInstrumentation enableWithConfiguration:config];
-
-NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[<YourSessionDelegate> alloc] init]
-                                                 delegateQueue:nil];
-```
-
-{% /tab %}
-{% /tabs %}
-
-**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API](/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios#manual-resource-collection) to manually track those network calls.
 {% /if %}
 
 <!-- Flutter -->
@@ -181,56 +140,55 @@ internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.B
 }
 ```
 
-See [Automatically track views](/real_user_monitoring/application_monitoring/kotlin_multiplatform/advanced_configuration/#automatically-track-views) to enable automatic tracking of all your views.
 {% /if %}
 
 <!-- C / C++ -->
 {% if equals($platform, "cpp") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+{% partial file="sdk/enable_rum/cpp.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->
 {% if equals($platform, "maui") %}
-By default, the SDK automatically tracks views, actions, and resources:
-
-- **Views**: MAUI page navigations through `Application.PageAppearing` (one app-level event covering Shell route changes, `Navigation.PushAsync`, and modals).
-- **Actions**: User interactions with buttons, switches, checkboxes, pickers, and gesture recognizers.
-- **Resources**: HTTP requests through `DiagnosticListener` (all `HttpClient` requests, including third-party libraries).
-
-To customize or disable automatic tracking, see [Advanced Configuration](/real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui).
-
-When RUM is enabled, C# error tracking starts automatically. Unhandled exceptions (`AppDomain.UnhandledException`) and unobserved task exceptions (`TaskScheduler.UnobservedTaskException`) are captured and reported as RUM errors. You can also manually report errors with `DdRum.AddError`.
-
-Call `DdRum.Enable` (or use the `UseDatadogRum` builder extension) after the SDK is initialized:
-
-```csharp
-DdRum.Enable(new DdRumConfiguration { ApplicationId = "<APPLICATION_ID>" });
-```
+{% partial file="sdk/enable_rum/maui.mdoc.md" /%}
 {% /if %}
 
 <!-- Roku -->
 {% if equals($platform, "roku") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+{% partial file="sdk/enable_rum/roku.mdoc.md" /%}
 {% /if %}
 
 <!-- Unity -->
 {% if equals($platform, "unity") %}
-RUM is enabled automatically when you initialize the SDK. No further action is needed.
+{% partial file="sdk/enable_rum/unity.mdoc.md" /%}
 {% /if %}
+
+## Configure what RUM collects
+
+After you enable RUM, use the following pages to configure what the SDK collects:
+
+- [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/): Configure the session sample rate and retrieve session IDs.
+- [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/): Stop data collection and clear data stored on the device.
+- [Track Errors and Crashes](/real_user_monitoring/setup/enable_rum/track_errors/): Collect errors and crashes, and upload debug symbols to get readable stack traces.
+- [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/): Track network requests as RUM resources.
+- [Track Application Startups](/real_user_monitoring/setup/enable_rum/track_application_startups/): Measure how long your application takes to start.
+- [Track UI Latency](/real_user_monitoring/setup/enable_rum/track_ui_latency/): Measure rendering performance, Core Web Vitals, and mobile vitals.
+- [Track Navigation](/real_user_monitoring/setup/enable_rum/track_navigation/): Track views automatically or manually.
+- [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/): Track user interactions automatically and send custom actions.
+- [Track Frustration Signals](/real_user_monitoring/setup/enable_rum/track_frustration_signals/): Surface rage clicks, dead clicks, and error taps.
+- [Track Background Events](/real_user_monitoring/setup/enable_rum/track_background_events/): Track events that occur while your application runs in the background.
+- [Advanced Configuration](/real_user_monitoring/setup/enable_rum/advanced_configuration/): Review initialization parameters and other advanced options.
 
 ## Start monitoring
 
-As a next step, [configure retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control which sessions RUM without Limits retains.
-
 {% if equals($platform, "browser") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "android") %}
-Visualize the [data collected](/real_user_monitoring/setup/data_collected/?platform=android) in [dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/) or create a search query in the [RUM Explorer](https://app.datadoghq.com/rum/list).
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+Visualize the [data collected](/real_user_monitoring/setup/data_collected/?platform=android) in [dashboards](/real_user_monitoring/administer_and_extend_rum/dashboards/) or create a search query in the [RUM Explorer](https://app.datadoghq.com/rum/list).
 {% /if %}
 {% if equals($platform, "ios") %}
 After completing setup, verify that the iOS SDK is correctly sending data to Datadog.
@@ -259,37 +217,39 @@ After running your app, navigate to the [RUM Explorer](/real_user_monitoring/inv
 To view crash reports and iOS errors, navigate to [Error Tracking](/error_tracking/). For more details on crash analysis with symbolicated stack traces, see [iOS Crash Reporting and Error Tracking](/error_tracking/frontend/mobile/ios).
 {% /if %}
 {% if equals($platform, "kotlin_multiplatform") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "maui") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "flutter") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "react_native") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "cpp") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "roku") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
 {% if equals($platform, "unity") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
-
 Your application appears as pending on the Applications page until Datadog starts receiving data.
+
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 {% /if %}
+
+Then, [configure retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control which sessions RUM without Limits retains.

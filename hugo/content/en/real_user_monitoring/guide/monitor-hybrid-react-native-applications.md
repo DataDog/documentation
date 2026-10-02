@@ -77,15 +77,15 @@ If you have enabled tracing with your backend, first-party hosts for your native
 
 If you use OkHttp, you can use Datadog's interceptor to [automatically track network requests][1]. Alternatively, you can [manually track resources][2].
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/ios/advanced_configuration/?tab=objectivec#automatically-track-network-requests
-[2]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-network-requests
+[1]: https://docs.datadoghq.com/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios#automatically-track-network-requests
+[2]: https://docs.datadoghq.com/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android#automatically-track-network-requests
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 You can track network requests by monitoring your `URLSession`. Learn more about how to [automatically track network requests][3].
 
-[3]: https://docs.datadoghq.com/real_user_monitoring/android/advanced_configuration/?tab=kotlin#custom-resources
+[3]: https://docs.datadoghq.com/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android#manually-track-network-requests
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -317,5 +317,5 @@ RUM.Configuration(
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/react_native/setup/
-[2]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#custom-views
-[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
+[2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#manually-track-views
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views

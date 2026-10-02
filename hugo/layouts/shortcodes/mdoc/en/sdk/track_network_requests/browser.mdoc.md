@@ -21,5 +21,7 @@ datadogRum.init({
 
 For details on resource attributes, network headers, and cross-origin timing, see [Monitoring Resource Performance][2].
 
+For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=browser#resource-attributes).
+
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [2]: /real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/

@@ -165,7 +165,7 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [4]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 [5]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes
-[6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
+[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160
 [8]: /real_user_monitoring/guide/send-rum-custom-actions
 [9]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=browser

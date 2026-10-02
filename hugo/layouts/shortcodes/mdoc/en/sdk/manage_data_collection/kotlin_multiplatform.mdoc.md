@@ -1,3 +1,5 @@
+To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=kotlin_multiplatform#configure-tracking-consent-gdpr-compliance).
+
 The Kotlin Multiplatform SDK first stores events. It only uploads these events when the [intake specification](/real_user_monitoring/setup/install/?platform=kotlin_multiplatform) conditions are met.
 
 ### Clear all data

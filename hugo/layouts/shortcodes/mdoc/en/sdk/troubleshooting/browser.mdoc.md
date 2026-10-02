@@ -144,12 +144,12 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 [3]: /real_user_monitoring/setup/install/?platform=browser
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser&tab=npm#override-default-rum-view-names
+[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser#manually-track-views
 [7]: /real_user_monitoring/setup/data_collected/?platform=browser&tab=session
 [8]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [9]: /real_user_monitoring/guide/sampling-browser-plans/
-[10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser&tab=npm#global-context
-[11]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser&tab=npm#user-session
+[10]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
+[11]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
 [12]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
 [13]: /real_user_monitoring/setup/install/?platform=browser
 [14]: https://app.datadoghq.com/source-code/setup/rum

@@ -1,5 +1,5 @@
 ---
-title: Install the DD SDK
+title: Install the Datadog SDK
 description: Add the Datadog SDK to your web, mobile, or TV application and initialize it to start collecting RUM data.
 aliases:
   - /real_user_monitoring/application_monitoring/android/setup/
@@ -36,6 +36,8 @@ aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/unity/setup
   - /real_user_monitoring/application_monitoring/browser/setup/client/
   - /real_user_monitoring/browser/setup/client
+  - /real_user_monitoring/kotlin-multiplatform
+  - /real_user_monitoring/kotlin_multiplatform
 ---
 
 {{< include-markdown "client_sdks/setup" >}}

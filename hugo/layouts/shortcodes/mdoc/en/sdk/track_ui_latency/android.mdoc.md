@@ -86,6 +86,51 @@ public void onHeroImageLoaded() {
 {% /tab %}
 {% /tabs %}
 
+## Automatically track long tasks
+
+Long running operations performed on the main thread can impact the visual performance and reactivity of your application. To track these operations, define the duration threshold above which a task is considered too long.
+
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+  // …
+  .trackLongTasks(durationThreshold)
+  .build()
+```
+
+For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
+
+```kotlin
+val rumConfig = RumConfiguration.Builder(applicationId)
+  // …
+  .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+  .build()
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+  // …
+  .trackLongTasks(durationThreshold)
+  .build();
+```
+
+For example, to replace the default `100 ms` duration, set a custom threshold in your configuration.
+
+```java
+RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
+  // …
+  .trackLongTasks(250L) // track tasks longer than 250ms as long tasks
+  .build();
+```
+
+{% /tab %}
+{% /tabs %}
+
 ## Understanding performance timings
 
 All view timings are measured relative to the view's start. The exact moment a view starts depends on the type of instrumentation used for tracking views. For more details, see [Views instrumentation versus app life cycle](/real_user_monitoring/setup/data_collected/?platform=android#views-instrumentation-versus-app-lifecycle).
@@ -109,6 +154,6 @@ The following telemetry provides insight into your application's performance, in
 | Slow renders | With slow rendering, you can monitor which views are taking longer than 16ms or 60Hz to render, using the same refresh rate attributes above. |
 | Frozen frames | Frames that take longer than 700ms to render appear as stuck and unresponsive in your application. These are classified as [frozen frames](https://developer.android.com/topic/performance/vitals/frozen). RUM tracks `long task` events with the duration for any task taking longer than 100ms to complete, letting you monitor which views appear frozen to your end users. |
 | Application not responding | When the UI thread of an application is blocked for more than 5 seconds, an `Application Not Responding` ([ANR](https://developer.android.com/topic/performance/vitals/anr)) error triggers. RUM tracks ANR occurrences and captures the entire stack trace that blocks the main thread when it encounters an ANR. |
-| Crash-free sessions by version | An [application crash](https://developer.android.com/topic/performance/vitals/crash) is reported due to an unexpected exit in the application, typically caused by an unhandled exception or signal. RUM tracks complete crash reports and presents trends over time with [Error Tracking](/real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/android/). |
+| Crash-free sessions by version | An [application crash](https://developer.android.com/topic/performance/vitals/crash) is reported due to an unexpected exit in the application, typically caused by an unhandled exception or signal. RUM tracks complete crash reports and presents trends over time with [Error Tracking](/real_user_monitoring/setup/enable_rum/track_errors/?platform=android). |
 | CPU ticks per second | High CPU usage impacts the [battery life](https://developer.android.com/topic/performance/power) on your users' devices. RUM tracks CPU ticks per second for each view and the CPU utilization over the course of a session. The recommended range is <40 for good and <60 for moderate. |
 | Memory utilization | High memory usage can lead to [OutOfMemoryError](https://developer.android.com/reference/java/lang/OutOfMemoryError), which causes the application to crash. RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. |

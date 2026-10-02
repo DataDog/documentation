@@ -936,13 +936,13 @@ val inputStream = context.getRawResAsRumResource(id)
 [8]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android
 [9]: /real_user_monitoring/setup/data_collected/?platform=android
 [10]: /getting_started/tagging/using_tags/
-[11]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
-[12]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
+[11]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
+[12]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
 [13]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/android/
 [14]: https://square.github.io/okhttp/features/interceptors/
-[15]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#custom-views
+[15]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views
 [16]: https://square.github.io/okhttp/features/interceptors/#network-interceptors
-[17]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-network-requests
+[17]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android#automatically-track-network-requests
 [18]: https://developer.android.com/topic/performance/vitals/anr
 [19]: https://developer.android.com/reference/android/app/ApplicationExitInfo
 [20]: https://developer.android.com/tools/releases/platforms#11

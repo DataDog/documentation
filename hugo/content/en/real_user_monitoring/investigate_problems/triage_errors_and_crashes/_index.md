@@ -44,7 +44,7 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=ios" >}}iOS{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=flutter" >}}Flutter{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=react_native" >}}React Native{{< /nextlink >}}
-    {{< nextlink href="real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/expo" >}}Expo{{< /nextlink >}}
+    {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_errors/?platform=react_native" >}}Expo{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=kotlin_multiplatform" >}}Kotlin Multiplatform{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=cpp" >}}C++{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/setup/enable_rum/track_errors/?platform=roku" >}}Roku{{< /nextlink >}}

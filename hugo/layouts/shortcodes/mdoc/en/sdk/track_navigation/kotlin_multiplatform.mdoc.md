@@ -1,15 +1,3 @@
-## Custom views
-
-In addition to [tracking views automatically][4], you can also track specific distinct views (such as activities and fragments) manually. Stop tracking when the view is no longer visible.
-
-```kotlin
-// to start view
-GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
-
-// to stop view
-GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
-```
-
 ## Automatically track views
 
 ### Android
@@ -28,7 +16,7 @@ To automatically track your views (such as activities and fragments), provide a 
 `NavigationViewTrackingStrategy`
 : Recommended for Android Jetpack Navigation library users. Each Navigation destination is considered a distinct view.
 
-For instance, to set each fragment as a distinct view, use the following configuration in your [setup][1]:
+For instance, to set each fragment as a distinct view, use the following configuration when you [enable RUM][1]:
 
 ```kotlin
 // in common source set
@@ -94,5 +82,19 @@ You can even come up with a more dynamic solution depending on your app's archit
 
 **Note**: By default, UIKit view tracking is not enabled.
 
-[1]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
+## Manually track views
+
+In addition to [tracking views automatically](#automatically-track-views), you can also track specific distinct views (such as activities and fragments) manually. Stop tracking when the view is no longer visible.
+
+```kotlin
+// to start view
+GlobalRumMonitor.get().startView(viewKey, viewName, viewAttributes)
+
+// to stop view
+GlobalRumMonitor.get().stopView(viewKey, viewAttributes)
+```
+
+For the attributes collected, see [Data Collected][2].
+
+[1]: /real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform
+[2]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform

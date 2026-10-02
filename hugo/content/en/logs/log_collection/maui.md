@@ -135,5 +135,5 @@ Before data is uploaded to Datadog, it is stored in cleartext in your applicatio
 [1]: https://github.com/DataDog/dd-sdk-maui
 [2]: /real_user_monitoring/setup/install/?platform=maui
 [3]: /logs/explorer
-[4]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#track-user-sessions
-[5]: /real_user_monitoring/application_monitoring/maui/advanced_configuration/#proxy-configuration
+[4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=maui#set-user-information
+[5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=maui#proxy-configuration

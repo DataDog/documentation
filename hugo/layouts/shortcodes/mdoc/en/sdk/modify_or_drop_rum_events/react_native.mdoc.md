@@ -1,3 +1,5 @@
+## Modify RUM events
+
 To modify attributes of a RUM event before it is sent to Datadog, or to drop an event entirely, use the Event Mappers API when configuring the RUM React Native SDK:
 
 ```javascript
@@ -46,7 +48,11 @@ config.rumConfiguration.errorEventMapper = (event) => {
 };
 ```
 
-Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog.
+## Drop RUM events
+
+Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. Event mappers aren't available for view events, so view events can't be dropped.
+
+## Modifiable attributes
 
 Depending on the event type, only some specific properties can be modified:
 

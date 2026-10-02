@@ -66,3 +66,7 @@ while(true)
     end if
 end while
 ```
+
+For the attributes collected, see [Data Collected][1].
+
+[1]: /real_user_monitoring/setup/data_collected/?platform=roku#resource-attributes

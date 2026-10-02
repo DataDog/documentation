@@ -93,7 +93,7 @@ Use the other tabs to explore related data:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/explorer
-[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[2]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
 [3]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#track-additional-performance-timings
 [5]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/

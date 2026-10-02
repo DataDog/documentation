@@ -637,7 +637,7 @@ If your existing codebase is using Timber, you can forward all those logs to Dat
 [2]: https://github.com/DataDog/dd-sdk-android/blob/develop/CHANGELOG.md
 [3]: /account_management/api-app-keys/#client-tokens
 [4]: /account_management/api-app-keys/#api-keys
-[5]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/android/#upload-your-mapping-file
+[5]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android#upload-debug-symbols-to-get-deobfuscated-stack-traces
 [6]: /logs/processing/attributes_naming_convention/
 [7]: /getting_started/tagging/
 [8]: https://source.android.com/security/app-sandbox

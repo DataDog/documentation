@@ -185,174 +185,7 @@ void _backgroundWork(SendPort port) async {
 
 `attachToBackgroundIsolate` must be called **after** Datadog is initialized in your main isolate, otherwise the call silently fails and tracking is not available.
 
-If you are using [Datadog Tracking HTTP Client][10] to automatically track resources, `attachToBackgroundIsolate` automatically starts tracking resources from the calling isolate. However, using `Client` from the `http` package or `Dio` requires you to re-initialize HTTP tracking for those packages from the background isolate.
-
-## Automatically track resources
-
-For setup steps covering both automatic and manual resource tracking, see [Track network requests][23].
-
-Use the [Datadog Tracking HTTP Client][10] package to enable automatic tracking of resources and HTTP calls from your views.
-
-Add the package to your `pubspec.yaml` and add the following to your initialization file:
-
-```dart
-final configuration = DatadogConfiguration(
-  // configuration
-  firstPartyHosts: ['example.com'],
-)..enableHttpTracking()
-```
-
-**Note**: The Datadog Tracking HTTP Client modifies [`HttpOverrides.global`][11]. If you are using your own custom `HttpOverrides`, you may need to inherit from [`DatadogHttpOverrides`][12]. In this case, you do not need to call `enableHttpTracking`. Versions of `datadog_tracking_http_client` >= 1.3 check the value of `HttpOverrides.current` and use this for client creation, so you only need to make sure to initialize `HttpOverrides.global` prior to initializing Datadog.
-
-To enable Datadog [distributed tracing][13], you must set the `DatadogConfiguration.firstPartyHosts` property in your configuration object to a domain that supports distributed tracing. You can also modify the sampling rate for distributed tracing by setting the `traceSampleRate` on your `DatadogRumConfiguration`.
-
-- `firstPartyHosts` does not allow wildcards, but matches any subdomains for a given domain. For example, `api.example.com` matches `staging.api.example.com` and `prod.api.example.com`, not `news.example.com`.
-
-- `DatadogRumConfiguration.traceSampleRate` sets a default sampling rate of 20%. If you want all resources requests to generate a full distributed trace, set this value to `100.0`.
-
-### Capture resource headers
-
-When [tracking resources automatically][10], you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `DatadogRumConfiguration`. This option applies to all Datadog HTTP tracking clients (Tracking HTTP Client, `DatadogClient`, Dio Interceptor, and GQL Link), but does not apply to the gRPC Interceptor. This option is disabled by default.
-
-Captured headers appear on the RUM Resource event under `resource.request.headers` and `resource.response.headers`. You can query them in the RUM Explorer.
-
-```dart
-DatadogRumConfiguration(
-  applicationId: '<rum-application-id>',
-  trackResourceHeaders: ResourceHeadersExtractor(),
-)
-```
-
-With no arguments, `ResourceHeadersExtractor` captures a predefined set of safe headers:
-
-| Direction | Headers |
-|-----------|---------|
-| Request | `cache-control`, `content-type` |
-| Response | `age`, `cache-control`, `content-encoding`, `content-length`, `content-type`, `etag`, `expires`, `server-timing`, `vary`, `x-cache` |
-
-To capture additional headers in addition to the defaults, pass them through `captureHeaders`. To skip the defaults, set `includeDefaults: false`.
-
-```dart
-DatadogRumConfiguration(
-  applicationId: '<rum-application-id>',
-  trackResourceHeaders: ResourceHeadersExtractor(
-    captureHeaders: ['x-request-id', 'x-custom-header'],
-  ),
-)
-```
-
-{% alert level="info" %}
-Sensitive headers, such as tokens and API keys, are filtered out automatically, even if you list them explicitly.
-{% /alert %}
-
-### Track resources from other packages
-
-While [Datadog Tracking HTTP Client][10] can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL and Dio. For more information about these libraries, see [Integrated Libraries][22].
-
-## Enrich user sessions
-
-For setup steps that enrich RUM events with custom views, actions, resources, and errors, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=flutter).
-
-## Track custom global attributes
-
-In addition to the [default RUM attributes][14] captured by the Datadog Flutter SDK automatically, you can choose to add additional contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
-
-Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
-
-### Set a custom global attribute
-
-To set a custom global attribute, use `DdRum.addAttribute`.
-
-* To add or update an attribute, use `DdRum.addAttribute`.
-* To remove the key, use `DdRum.removeAttribute`.
-
-### Track user sessions
-
-See [Track user IDs][26] for instructions on adding user information to your RUM sessions.
-
-### Add custom user attributes
-
-You can add custom attributes to your user session. This additional information is automatically applied to logs, traces, and RUM events.
-
-To remove an existing attribute, set it to `null`.
-
-For example:
-
-```dart
-DatadogSdk.instance.addUserExtraInfo({
- 'attribute_1': 'foo',
- 'attribute_2': null,
-});
-```
-
-### Track user accounts
-
-If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
-
-* Analyze performance and errors by account
-* Know which accounts are the most impacted by an issue
-* Prioritize fixes based on account value
-
-Add account information in addition to user information. It does not replace user information.
-
-The SDK reports these attributes:
-
-| Attribute      | Type   | Description                                                 |
-| -------------- | ------ | ----------------------------------------------------------- |
-| `account.id`   | String | (Required) Unique account identifier.                       |
-| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
-
-To identify accounts, use `DatadogSdk.setAccountInfo`.
-
-For example:
-
-```dart
-DatadogSdk.instance.setAccountInfo(
-  id: 'acct-1234',
-  name: 'Acme Corp',
-  extraInfo: {'tier': 'enterprise'},
-);
-```
-
-Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
-
-To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. Adding extra info before an account exists has no effect. To remove an existing attribute, set it to `null`.
-
-```dart
-DatadogSdk.instance.addAccountExtraInfo({
-  'seats': 42,
-});
-```
-
-To clear the account (for example, when the user signs out), use `clearAccountInfo`.
-
-```dart
-DatadogSdk.instance.clearAccountInfo();
-```
-
-Account information is attached to RUM events, logs, and traces.
-
-{% alert level="info" %}
-Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session with `DatadogRum.stopSession` or the view with `DatadogRum.stopView` before clearing.
-{% /alert %}
-
-## Clear all data
-
-For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=flutter).
-
-## Modify or drop RUM events
-
-For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=flutter).
-
-## Retrieve the RUM session ID
-
-Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
-
-You can access the RUM session ID at runtime without waiting for the `sessionStarted` event:
-
-```dart
-final sessionId = await DatadogSdk.instance.rum?.getCurrentSessionId()
-```
+If you are using [Datadog Tracking HTTP Client][10] to [automatically track resources][23], `attachToBackgroundIsolate` automatically starts tracking resources from the calling isolate. However, using `Client` from the `http` package or `Dio` requires you to re-initialize HTTP tracking for those packages from the background isolate.
 
 ## Flutter-specific performance metrics
 
@@ -399,6 +232,10 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 }
 ```
 
+## Enrich RUM data
+
+To add global attributes, track users and accounts, or modify and drop events, see [Enrich RUM Data][27].
+
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/setup/install/?platform=flutter
 [3]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
@@ -409,19 +246,10 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
 [9]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 [10]: https://pub.dev/packages/datadog_tracking_http_client
-[11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
-[12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
-[13]: /serverless/aws_lambda/distributed_tracing/
-[14]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[15]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=measures#setup-facets-and-measures
-[16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
-[17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [18]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter#mobile-vitals
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
-[22]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
-[24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
 [25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
-[26]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=flutter
+[27]: /real_user_monitoring/enrich_rum_data/

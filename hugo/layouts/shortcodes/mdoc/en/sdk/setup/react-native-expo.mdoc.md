@@ -2,13 +2,9 @@
 Expo setup instructions.
 -->
 
-This page describes how to instrument your Expo applications with the Datadog React Native SDK.
-
-The React Native SDK supports [Real User Monitoring (RUM)](/real_user_monitoring/) and [Error Tracking](/error_tracking/frontend/mobile/reactnative/).
-
 {% stepper %}
 
-{% step title="Install the SDK" %}
+{% step title="Add the dependencies" %}
 The RUM React Native SDK supports Expo and Expo Go. To use it, install `expo-datadog` and `@datadog/mobile-react-native`.
 
 `expo-datadog` supports Expo starting from SDK 45 and the plugin's versions follow Expo versions. For example, if you use Expo SDK 45, use `expo-datadog` version `45.x.x`. Datadog recommends using **Expo SDK 45** as a minimum version; previous versions may require manual steps.
@@ -27,7 +23,7 @@ yarn add expo-datadog @datadog/mobile-react-native
 
 {% /step %}
 
-{% step title="Initialize the library with application context" %}
+{% step title="Initialize the SDK" %}
 
 Add the following code snippet to your initialization file:
 
@@ -61,8 +57,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -99,71 +95,47 @@ export default function App() {
 // Once the Datadog React Native SDK for RUM is initialized, you need to setup view tracking to be able to see data in a dashboard
 ```
 
-#### Sample session rates
+You can adjust the session sample rate with the `sessionSampleRate` parameter, but Datadog recommends using [retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control retained volume. For details, see [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native).
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions. To set this rate, use the `config.sessionSamplingRate` parameter and specify a percentage between 0 and 100.
+{% /step %}
 
-### Upload source maps on EAS builds
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
-To enable crash reporting and error symbolication, add `expo-datadog` to your plugins in the `app.json` file:
+To be compliant with the GDPR regulation, the React Native SDK requires the tracking consent value at initialization.
 
-```json
-{
-    "expo": {
-        "plugins": ["expo-datadog"]
-    }
-}
-```
+The `trackingConsent` setting can be one of the following values:
 
-This plugin takes care of uploading the dSYMs, source maps and Proguard mapping files on every EAS build.
+1. `.PENDING`: The React Native SDK starts collecting and batching the data but does not send it to Datadog. The React Native SDK waits for the new tracking consent value to decide what to do with the batched data.
+2. `.GRANTED`: The React Native SDK starts collecting the data and sends it to Datadog.
+3. `.NOTGRANTED`: The React Native SDK does not collect any data. No logs, traces, or RUM events are sent to Datadog.
 
-Add `@datadog/datadog-ci` as a development dependency. This package contains scripts to upload the source maps. You can install it with npm:
+To change the tracking consent value after the React Native SDK is initialized, use the `Datadog.set(trackingConsent:)` API call. The React Native SDK changes its behavior according to the new value.
 
-```shell
-npm install @datadog/datadog-ci --save-dev
-```
+For example, if the current tracking consent is `.PENDING`:
 
-or with Yarn:
+- If you change the value to `.GRANTED`, the React Native SDK sends all current and future data to Datadog;
+- If you change the value to `.NOTGRANTED`, the React Native SDK wipes all current data and does not collect future data.
 
-```shell
-yarn add -D @datadog/datadog-ci
-```
+{% /step %}
 
-Run `eas secret:create` to set `DATADOG_API_KEY` to your Datadog API key, and `DATADOG_SITE` to the host of your Datadog site (for example, `datadoghq.com`).
+{% step title="Enable RUM to start sending data" %}
+
+RUM is enabled when you pass a `rumConfiguration` to the SDK configuration. To configure what RUM collects, such as views, user interactions, and network requests, continue to [Enable the Datadog RUM Module](/real_user_monitoring/setup/enable_rum/?platform=react_native).
 
 {% /step %}
 {% /stepper %}
 
-### User interactions tracking
-
-Datadog recommends setting up interaction tracking by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
-
-To install with npm, run:
-
-```shell
-npm install @datadog/mobile-react-native-babel-plugin
-```
-
-To install with Yarn, run:
-
-```shell
-yarn add @datadog/mobile-react-native-babel-plugin
-```
-
-Add the plugin to your Babel configuration file (`babel.config.js`, `.babelrc`, or similar):
-
-```javascript
-module.exports = {
-  presets: ["babel-preset-expo"],
-  plugins: ['@datadog/mobile-react-native-babel-plugin']
-};
-```
-
-After the plugin is installed and configured, it automatically tracks interactions on standard React Native components. No additional code changes are required for basic usage.
-
-### CodePush integration (optional)
+## CodePush integration (optional)
 
 If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
+
+## Sending data when device is offline
+
+The React Native SDK helps make data available when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough so the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
+
+This means that even if users open your application while offline, no data is lost.
+
+**Note**: The data on the disk is automatically deleted if it gets too old so the React Native SDK does not use too much disk space.
 
 [1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
 [2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush

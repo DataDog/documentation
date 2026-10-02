@@ -20,7 +20,17 @@ further_reading:
   text: "Datadog standard attributes"
 ---
 
-Select your SDK for platform-specific instructions on adding custom context to your RUM events.
+## Overview
+
+Add custom attributes to your RUM events to filter, group, and analyze them by information that's specific to your application, such as a plan type, an experiment group, or a build flavor.
+
+- **Global attributes** are added to every event the SDK collects after you set them.
+- **View attributes** are added to the current view and the events that belong to it, where the SDK supports it.
+- **Event-level attributes** are passed when you send a specific event. They're covered on each tracking page: [Track Navigation](/real_user_monitoring/setup/enable_rum/track_navigation/), [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/), [Track Errors and Crashes](/real_user_monitoring/setup/enable_rum/track_errors/), and [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/).
+
+To add user and account information, see [Track Users and Accounts](/real_user_monitoring/enrich_rum_data/track_user_ids/).
+
+Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 

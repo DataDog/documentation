@@ -1,4 +1,8 @@
-## Custom actions
+## Automatically track user interactions
+
+The C++ SDK doesn't track user interactions automatically. Track actions manually as described in the following section.
+
+## Manually track actions and send custom events
 
 Actions record user interactions in the context of the current view. The SDK supports two kinds:
 
@@ -35,3 +39,7 @@ dd_rum_stop_action(rum, DD_RUM_ACTION_TYPE_SCROLL, NULL, NULL);
 
 {% /tab %}
 {% /tabs %}
+
+For the attributes collected, see [Data Collected][1].
+
+[1]: /real_user_monitoring/setup/data_collected/?platform=cpp#action

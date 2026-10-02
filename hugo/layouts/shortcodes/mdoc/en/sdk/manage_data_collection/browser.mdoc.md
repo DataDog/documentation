@@ -1,68 +1,68 @@
-### Manage data collection with tracking consent
+To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=browser#configure-tracking-consent-gdpr-compliance).
 
-To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information, see [Data Security](/data_security/real_user_monitoring/#browser-rum-use-of-cookies).
+## Access the internal context
 
-The `trackingConsent` initialization parameter can be one of the following values:
+After the RUM Browser SDK is initialized, you can access the internal context of the SDK. This provides core identifiers and metadata that the SDK uses internally, such as session IDs and application details.
 
-1. `"granted"` (default): The RUM Browser SDK starts collecting data and sends it to Datadog.
-2. `"not-granted"`: The RUM Browser SDK does not collect any data.
+You can explore the following attributes:
 
-To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
+| Attribute      | Description                                                       |
+| -------------- | ----------------------------------------------------------------- |
+| application_id | ID of the application.                                            |
+| session_id     | ID of the session.                                                |
+| user_action    | Object containing action ID (or undefined if no action is found). |
+| view           | Object containing details about the current view event.           |
 
-- When changed from `"granted"` to `"not-granted"`, the RUM session is stopped, and data is no longer sent to Datadog.
-- When changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
+For more information, see [RUM Browser Data Collected][1].
 
-This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
+For example:
 
-When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+```json
+{
+  application_id : "xxx",
+  session_id : "xxx",
+  user_action: { id: "xxx" },
+  view : {
+    id : "xxx",
+    referrer : "",
+    url: "http://localhost:8080/",
+    name: "homepage"
+  }
+}
+```
+
+You can optionally use the `startTime` parameter to get the context of a specific time. If the parameter is omitted, the current context is returned.
+
+```typescript
+getInternalContext (startTime?: 'number' | undefined)
+```
 
 {% tabs %}
 {% tab label="NPM" %}
 
 ```javascript
-import { datadogRum } from '@datadog/browser-rum';
+import { datadogRum } from '@datadog/browser-rum'
 
-datadogRum.init({
-    ...,
-    trackingConsent: 'not-granted'
-});
-
-acceptCookieBannerButton.addEventListener('click', function() {
-    datadogRum.setTrackingConsent('granted');
-});
+datadogRum.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
 ```
 
 {% /tab %}
 {% tab label="CDN async" %}
 
 ```javascript
-window.DD_RUM.onReady(function() {
-    window.DD_RUM.init({
-        ...,
-        trackingConsent: 'not-granted'
-    });
-});
-
-acceptCookieBannerButton.addEventListener('click', () => {
-    window.DD_RUM.onReady(function() {
-        window.DD_RUM.setTrackingConsent('granted');
-    });
-});
+window.DD_RUM.onReady(function () {
+  window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
+})
 ```
 
 {% /tab %}
 {% tab label="CDN sync" %}
 
 ```javascript
-window.DD_RUM && window.DD_RUM.init({
-  ...,
-  trackingConsent: 'not-granted'
-});
-
-acceptCookieBannerButton.addEventListener('click', () => {
-    window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
-});
+window.DD_RUM && window.DD_RUM.getInternalContext() // { session_id: "xxxx", application_id: "xxxx" ... }
 ```
 
 {% /tab %}
 {% /tabs %}
+
+[1]: /real_user_monitoring/setup/data_collected/?platform=browser

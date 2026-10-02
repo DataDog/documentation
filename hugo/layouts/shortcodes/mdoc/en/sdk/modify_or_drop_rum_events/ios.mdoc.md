@@ -1,3 +1,5 @@
+## Modify RUM events
+
 To modify attributes of a RUM event before it is sent to Datadog or to drop an event entirely, use the Event Mappers API when configuring the RUM iOS SDK:
 
 {% tabs %}
@@ -8,16 +10,16 @@ let configuration = RUM.Configuration(
     applicationID: "<rum application id>",
     viewEventMapper: { RUMViewEvent in
         return RUMViewEvent
-    }
+    },
     resourceEventMapper: { RUMResourceEvent in
         return RUMResourceEvent
-    }
+    },
     actionEventMapper: { RUMActionEvent in
         return RUMActionEvent
-    }
+    },
     errorEventMapper: { RUMErrorEvent in
         return RUMErrorEvent
-    }
+    },
     longTaskEventMapper: { RUMLongTaskEvent in
         return RUMLongTaskEvent
     }
@@ -86,7 +88,13 @@ DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicat
 {% /tab %}
 {% /tabs %}
 
-Returning `nil` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `nil` (to drop views, customize your implementation of `UIKitRUMViewsPredicate`; read more in [tracking views automatically](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios)).
+## Drop RUM events
+
+Returning `nil` from the error, resource, action, or long task mapper drops the event entirely; the event is not sent to Datadog.
+
+View events can't be dropped: the value returned from the view event mapper must not be `nil`. To drop views, customize your implementation of `UIKitRUMViewsPredicate`. For more information, see [tracking views automatically](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#automatically-track-views).
+
+## Modifiable attributes
 
 Depending on the event's type, only some specific properties can be modified:
 

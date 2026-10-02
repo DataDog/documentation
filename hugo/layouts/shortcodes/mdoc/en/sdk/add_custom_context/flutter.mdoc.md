@@ -1,98 +1,39 @@
-Flutter RUM automatically tracks attributes such as user activity, views (using the `DatadogNavigationObserver`), errors, native crashes, and network requests (using the Datadog Tracking HTTP Client). See the [RUM Data Collection documentation][1] to learn about the RUM events and default attributes. You can further enrich user session information and gain finer control over the attributes collected by tracking custom events.
+In addition to the [default RUM attributes][1] captured by the Datadog Flutter SDK automatically, you can add contextual information (such as custom attributes) to your RUM events to enrich your observability within Datadog.
 
-### Notify the SDK that your view finished loading
+Custom attributes allow you to filter and group information about observed user behavior (such as the cart value, merchant tier, or ad campaign) with code-level information (such as backend services, session timeline, error logs, and network health).
 
-For setup steps, see [Track UI latency][2].
+{% alert level="info" %}
+Custom attributes are intended for small, targeted pieces of information such as IDs, flags, or short labels. Avoid attaching large objects such as full HTTP response payloads, which can significantly increase event size and impact performance.
+{% /alert %}
 
-iOS RUM tracks the time it takes for your view to load. To notify the SDK that your view has finished loading, call the `addViewLoadingTime` method on `DatadogRum`.
-Call this method when your view is fully loaded and ready to be displayed to the user:
+## Add global attributes
 
-```dart
-  DatadogSdk.instance.rum?.addViewLoadingTime(override);
-```
+Global attributes are attached to all RUM events sent after you set them.
 
-Use the `override` option to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-
-**Note**: This API is still experimental and might change in the future.
-
-### Add your own performance timing
-
-In addition to RUM's default attributes, you can measure where your application is spending its time by using `DdRum.addTiming`. The timing measure is relative to the start of the current RUM view.
-
-For example, you can time how long it takes for your hero image to appear:
+* To add or update an attribute, use `addAttribute`.
+* To remove an attribute, use `removeAttribute`.
 
 ```dart
-void _onHeroImageLoaded() {
-    DatadogSdk.instance.rum?.addTiming("hero_image");
-}
+// Add or update a global attribute
+DatadogSdk.instance.rum?.addAttribute('cart_value', 42.5);
+
+// Remove a global attribute
+DatadogSdk.instance.rum?.removeAttribute('cart_value');
 ```
 
-After you set the timing, it is accessible as `@view.custom_timings.<timing_name>`. For example, `@view.custom_timings.hero_image`.
+**Note**: Avoid spaces or special characters in attribute key names. For example, use `"account_tier"` instead of `"Account Tier"`. Keys with spaces or special characters cannot be used as facets in the Datadog UI.
 
-To create visualizations in your dashboards, [create a measure][3] first.
+## Add attributes to individual events
 
-### Track user actions
+To add attributes to a single view, action, error, or resource, pass them when you track that event. For details, see:
 
-You can track specific user actions such as taps, clicks, and scrolls using `DdRum.addAction`.
-
-To manually register instantaneous RUM actions such as `RumActionType.tap`, use `DdRum.addAction()`. For continuous RUM actions such as `RumActionType.scroll`, use `DdRum.startAction()` or `DdRum.stopAction()`.
-
-For example:
-
-```dart
-void _downloadResourceTapped(String resourceName) {
-    DatadogSdk.instance.rum?.addAction(
-        RumActionType.tap,
-        resourceName,
-    );
-}
-```
-
-When using `DdRum.startAction` and `DdRum.stopAction`, the `type` action must be the same for the Datadog Flutter SDK to match an action's start with its completion.
-
-### Track custom resources
-
-In addition to tracking resources automatically using the [Datadog Tracking HTTP Client][4], you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][5]:
-
-- `DdRum.startResource`
-- `DdRum.stopResource`
-- `DdRum.stopResourceWithError`
-- `DdRum.stopResourceWithErrorInfo`
-
-For example:
-
-```dart
-// in your network client:
-
-DatadogSdk.instance.rum?.startResource(
-    "resource-key",
-    RumHttpMethod.get,
-    url,
-);
-
-// Later
-
-DatadogSdk.instance.rum?.stopResource(
-    "resource-key",
-    200,
-    RumResourceType.image
-);
-```
-
-The `String` used for `resourceKey` in both calls must be unique for the resource you are calling in order for the Flutter Datadog SDK to match a resource's start with its completion.
-
-### Track custom errors
-
-To track specific errors, notify `DdRum` when an error occurs with the message, source, exception, and additional attributes.
-
-```dart
-DatadogSdk.instance.rum?.addError("This is an error message.");
-```
+- [Track Navigation][2]
+- [Track User Interactions][3]
+- [Track Errors][4]
+- [Track Network Requests][5]
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
-[3]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=measures#setup-facets-and-measures
-[4]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
-[5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
+[2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=flutter
+[3]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=flutter
+[4]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=flutter
+[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter

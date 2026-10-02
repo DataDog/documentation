@@ -1,6 +1,10 @@
+## Automated resource collection
+
+The C++ SDK doesn't instrument an HTTP client automatically. Track resources manually as described in the following section.
+
 ## Manual resource collection
 
-The C++ and C SDKs don't instrument an HTTP client automatically. Track resources by starting and stopping them around the network operation. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
+Track resources by starting and stopping them around the network operation. Each resource is identified by a `key` string that must be unique among all concurrently active resources; this is how `StopResource` and `StopResourceWithError` identify which request has completed.
 
 {% tabs %}
 {% tab label="C++" %}
@@ -40,3 +44,7 @@ dd_rum_stop_resource_with_error(rum, "req-profile", "Connection timeout",
 {% /tabs %}
 
 Use `StopResourceWithError` instead of `StopResource` when the request fails due to a network error or when processing the response produces an error.
+
+For the attributes collected, see [Data Collected][1].
+
+[1]: /real_user_monitoring/setup/data_collected/?platform=cpp#resource

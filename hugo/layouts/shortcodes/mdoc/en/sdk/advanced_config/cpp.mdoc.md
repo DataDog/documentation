@@ -5,48 +5,7 @@ It can be included directly in language-specific pages or wrapped in conditional
 
 If you haven't set up the C++ SDK yet, follow the [in-app setup instructions][1] or see the [RUM C++ setup documentation][2].
 
-## Instrument your application
-
-The C++ SDK is a low-level library that is not coupled to a UI framework. As such, it does not automatically instrument your application. User interactions and changes in application state must be manually recorded by calling the appropriate RUM API.
-
-### Track views
-
-For setup steps, see [Track Navigation](/real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp).
-
-### Track actions
-
-For setup steps, see [Track User Interactions](/real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=cpp).
-
-### Track resources
-
-For setup steps, see [Track Network Requests](/real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp).
-
-### Track errors
-
-Custom errors can be reported in the context of the current view with `AddError`. The `source` field classifies where the error originates: use `Source` for bugs in application code, `Network` for connectivity issues, and `Custom` as a general-purpose catch-all. The `type` and `stack_trace` parameters are optional.
-
-{% tabs %}
-{% tab label="C++" %}
-
-```cpp
-rum->AddError(datadog::RumErrorSource::Source,
-              "Failed to deserialize save data",
-              "SerializationError");
-```
-
-{% /tab %}
-{% tab label="C" %}
-
-```c
-dd_rum_add_error(rum, DD_RUM_ERROR_SOURCE_SOURCE,
-                 "Failed to deserialize save data",
-                 "SerializationError", NULL, NULL);
-```
-
-{% /tab %}
-{% /tabs %}
-
-### Track operations
+## Track operations
 
 Operations let you measure multi-step workflows (such as login, checkout, or file upload) that may span multiple views. The SDK emits events when an operation starts and ends; Datadog aggregates these into duration and success-rate metrics.
 
@@ -84,48 +43,6 @@ if (login_succeeded) {
 {% /tabs %}
 
 For full details, see [Operations Monitoring][3].
-
-## Managing data collection
-
-See [Manage Data Collection][8] for instructions on tracking consent.
-
-## Custom attributes
-
-For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=cpp).
-
-## Track user and account information
-
-### User information
-
-See [Track user IDs][9] for instructions on adding user information to your RUM sessions.
-
-### Account information
-
-A parallel API is available for associating an account (such as an organization, workspace, or tenant) with the current session.
-
-| Attribute | Type | Description |
-| --- | --- | --- |
-| `account.id` | String | (Required) Unique account identifier. |
-| `account.name` | String | (Optional) Account name, displayed in the Datadog UI. |
-
-{% tabs %}
-{% tab label="C++" %}
-
-```cpp
-core->SetAccountInfo("org-456", "Acme Corp");
-```
-
-{% /tab %}
-{% tab label="C" %}
-
-```c
-dd_core_set_account_info(core, "org-456", "Acme Corp", NULL);
-```
-
-{% /tab %}
-{% /tabs %}
-
-Use `AddAccountExtraInfo` to merge additional properties, and `ClearAccountInfo` to remove all account information.
 
 ## Diagnostic logging
 
@@ -281,38 +198,12 @@ dd_core_config_set_batch_processing_level(&config, DD_BATCH_PROCESSING_LEVEL_HIG
 {% /tab %}
 {% /tabs %}
 
-## Stop the current session
+## Enrich RUM data
 
-For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=cpp).
-
-## Stop the SDK
-
-### C++
-
-In C++, `Core` and `Rum` are managed as `std::shared_ptr` references. The SDK stops automatically when the last reference to the core is released, so no explicit cleanup is required in typical usage.
-
-To stop the SDK before it goes out of scope, call `Stop()` explicitly:
-
-```cpp
-core->Stop();
-```
-
-### C
-
-The C API requires explicit resource management. Call the matching destroy function for every object created through the C API. Call `dd_core_stop` to halt all background activity, then free each feature, then free the core:
-
-```c
-dd_core_stop(core);
-dd_rum_destroy(rum);
-dd_core_destroy(core);
-```
+To add custom context, user information, and more to your RUM events, see [Enrich RUM Data][5].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/setup/install/?platform=cpp
 [3]: /real_user_monitoring/track_critical_operations/
 [4]: /getting_started/site/
-[5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp
-[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp
-[7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=cpp
-[8]: /real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=cpp
-[9]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=cpp
+[5]: /real_user_monitoring/enrich_rum_data/

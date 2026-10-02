@@ -1,3 +1,5 @@
+To configure tracking consent, see [Configure tracking consent](/real_user_monitoring/setup/install/?platform=android#configure-tracking-consent-gdpr-compliance).
+
 The Android SDK first stores events and only uploads events when the [intake specifications](/real_user_monitoring/setup/install/?platform=android) conditions are met.
 
 ### Clear all data

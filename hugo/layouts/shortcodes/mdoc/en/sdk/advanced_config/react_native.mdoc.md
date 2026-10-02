@@ -303,7 +303,7 @@ Sets a target custom server for Traces.
 
 ## Manual instrumentation
 
-If automatic instrumentation doesn't suit your needs, you can manually create RUM Events and Logs:
+If automatic instrumentation doesn't suit your needs, you can manually send logs and spans. To manually track views, actions, errors, and resources, see the [Track Navigation][26], [Track User Interactions][27], [Track Errors][29], and [Track Network Requests][24] pages.
 
 ### Send logs
 
@@ -316,81 +316,6 @@ DdLogs.warn('Lorem ipsum dolor sit amet…', {});
 DdLogs.error('Lorem ipsum dolor sit amet…', {});
 ```
 
-### Manually track RUM views
-
-For setup steps covering both automatic and manual view tracking, see [Track navigation][26].
-
-To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
-
-```javascript
-DdRum.startView('<view-key>', 'View Name', {}, Date.now());
-//…
-DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
-```
-
-### Manually track RUM actions
-
-For setup steps, see [Track user interactions][27].
-
-You can manually track RUM actions:
-
-```javascript
-DdRum.addAction(RumActionType.TAP, 'action name', {}, Date.now());
-```
-
-To track a continuous action:
-
-```javascript
-DdRum.startAction(RumActionType.TAP, 'action name', {}, Date.now());
-//...
-DdRum.stopAction({}, Date.now());
-```
-
-### Manually track RUM errors
-
-You can manually track RUM errors:
-
-```javascript
-DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
-```
-
-### Manually track RUM resources
-
-For setup steps covering both automatic and manual resource tracking, see [Track network requests][24].
-
-You can manually track RUM resources:
-
-```javascript
-DdRum.startResource('<res-key>', 'GET', 'http://www.example.com/api/v1/test', {}, Date.now());
-//...
-DdRum.stopResource('<res-key>', 200, 'xhr', (size = 1337), {}, Date.now());
-```
-
-### Notify the SDK that your view finished loading
-
-For setup steps, see [Track UI latency][25].
-
-You can notify the SDK that your view has finished loading by calling the `addViewLoadingTime` method on `DdRum`.
-Call this method when your view is fully loaded and ready to be displayed to the user:
-
-```javascript
-DdRum.addViewLoadingTime(true);
-```
-
-Use the `overwrite` parameter to replace the previously calculated loading time for the current view.
-
-After the loading time is sent, it is accessible as `@view.loading_time` and is visible in the RUM UI.
-
-**Note**: This API is experimental.
-
-### Add custom timings
-
-You can add custom timings:
-
-```javascript
-DdRum.addTiming('<timing-name>');
-```
-
 ### Manually send spans
 
 You can send spans manually:
@@ -400,117 +325,6 @@ const spanId = await DdTrace.startSpan('foo', { custom: 42 }, Date.now());
 //...
 DdTrace.finishSpan(spanId, { custom: 21 }, Date.now());
 ```
-
-## Track custom global attributes
-
-For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/add_custom_context/?platform=react_native).
-
-### Track user accounts
-
-If your application is used by organizations, workspaces, or tenants, add account information to your RUM sessions to:
-
-* Analyze performance and errors by account
-* Know which accounts are the most impacted by an issue
-* Prioritize fixes based on account value
-
-Add account information in addition to user information. It does not replace user information.
-
-The SDK reports these attributes:
-
-| Attribute      | Type   | Description                                                 |
-| -------------- | ------ | ----------------------------------------------------------- |
-| `account.id`   | String | (Required) Unique account identifier.                       |
-| `account.name` | String | (Optional) Friendly name for the account, displayed in the RUM UI.  |
-
-To identify accounts, use the `setAccountInfo` API. For example:
-
-```js
-DdSdkReactNative.setAccountInfo({
-    id: 'acct-1234',
-    name: 'Acme Corp',
-    extraInfo: {
-        tier: 'enterprise'
-    }
-});
-```
-
-Keys passed in `extraInfo` are added to the `account` attribute, so `tier` is reported as `account.tier`.
-
-To append attributes to the account you already set, use `addAccountExtraInfo`. Call `setAccountInfo` first. If no account is set, the SDK ignores the additional account information and logs a warning.
-
-```js
-DdSdkReactNative.addAccountExtraInfo({
-    seats: 42
-});
-```
-
-To clear the account information (for example, when the user signs out), use `clearAccountInfo`:
-
-```js
-DdSdkReactNative.clearAccountInfo();
-```
-
-Account information is attached to RUM events, logs, and traces.
-
-{% alert level="info" %}
-Clearing the account empties the `account` attribute on the active session and the active view. To retain the account on data already collected, stop the session or the view before clearing.
-{% /alert %}
-
-## Track view navigation
-
-Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
-
-You can manually start and stop a view using the following `startView()` and `stopView` methods.
-
-```js
-import {
-    DdRum
-} from '@datadog/mobile-react-native';
-
-// Start a view with a unique view identifier, a custom view name, and an object to attach additional attributes to the view
-DdRum.startView(
-    '<view-key>', // <view-key> has to be unique, for example it can be ViewName-unique-id
-    'View Name',
-    { 'custom.foo': 'something' },
-    Date.now()
-);
-// Stops a previously started view with the same unique view identifier, and an object to attach additional attributes to the view
-DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
-```
-
-Use one of Datadog's integrations to automatically track views for the following libraries:
-
--   If you use the [`react-native-navigation`][10] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][11].
--   If you use the [`react-navigation`][12] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][11].
-
-If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][13] as a reference.
-
-## Clear all data
-
-For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=react_native).
-
-## Modify or drop RUM events
-
-For setup steps, see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=react_native).
-
-## Retrieve the RUM session ID
-
-Retrieving the RUM session ID can be helpful for troubleshooting. For example, you can attach the session ID to support requests, emails, or bug reports so that your support team can later find the user session in Datadog.
-
-You can access the RUM session ID at runtime with:
-
-```javascript
-import { DdRum } from '@datadog/mobile-react-native';
-
-const rumSessionId = await DdRum.getCurrentSessionId();
-```
-
-## Resource timings
-
-Resource tracking provides the following timings:
-
--   `First Byte`: The time between the scheduled request and the first byte of the response. This includes time for the request preparation on the native level, network latency, and the time it took the server to prepare the response.
--   `Download`: The time it took to receive a response.
 
 ## Initializing asynchronously
 
@@ -623,9 +437,9 @@ const configuration = {
 };
 ```
 
-## Hybrid app monitoring
+## Enrich RUM data
 
-See [Monitor hybrid React Native applications][19].
+To add global attributes, track users and accounts, or modify and drop events, see [Enrich RUM Data][30].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/application_monitoring/react_native
@@ -636,22 +450,16 @@ See [Monitor hybrid React Native applications][19].
 [7]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 [8]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=react_native
 [9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
-[10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/reference/integrated_libraries/?platform=react_native
-[12]: https://github.com/react-navigation/react-navigation
-[13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
 [16]: https://reactnative.dev/docs/global-requestIdleCallback
 [17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
 [18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
 [20]: /error_tracking/frontend/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
 [21]: #rum-configuration
 [22]: #logs-configuration
 [23]: #trace-configuration
 [24]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=react_native
-[25]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native
 [26]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=react_native
 [27]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=react_native
 [28]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native
+[29]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=react_native
+[30]: /real_user_monitoring/enrich_rum_data/

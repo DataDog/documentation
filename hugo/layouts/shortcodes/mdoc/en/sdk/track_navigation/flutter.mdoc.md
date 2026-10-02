@@ -63,8 +63,23 @@ var observer = DatadogNavigationObserver(
 );
 ```
 
+## Manually track views
+
+If automatic view tracking doesn't fit your app (for example, if it doesn't use named routes or a supported router), start and stop views manually with `startView` and `stopView`. Use the same `key` in both calls so the SDK can match a view's start with its end:
+
+```dart
+// When the view appears
+DatadogSdk.instance.rum?.startView('<view-key>', 'View Name', {'custom.foo': 'something'});
+
+// When the view disappears
+DatadogSdk.instance.rum?.stopView('<view-key>');
+```
+
+For the attributes collected for views, see [Data Collected][6].
+
 [1]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [2]: https://pub.dev/packages?q=go_router
 [3]: https://pub.dev/packages/auto_route
 [4]: https://pub.dev/packages/beamer
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
+[6]: /real_user_monitoring/setup/data_collected/?platform=flutter

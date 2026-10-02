@@ -1,6 +1,10 @@
-## Custom views
+## Automatically track views
 
-The C++ SDK does not automatically instrument your application, so views must be tracked manually. A RUM session is organized into views, where each view represents a distinct user-facing screen, scene, or state in your application. All actions, resources, and errors are associated with the current view.
+The C++ SDK doesn't track views automatically. Track views manually as described in the following section.
+
+## Manually track views
+
+A RUM session is organized into views, where each view represents a distinct user-facing screen, scene, or state in your application. All actions, resources, and errors are associated with the current view.
 
 Each view has a string `key` that uniquely identifies it within your application. An optional `name` provides a human-readable label in the Datadog UI; if omitted, `name` defaults to the value of `key`. Only one view is active at a time: `StartView` implicitly stops the previous view.
 
@@ -35,6 +39,6 @@ dd_rum_stop_view(rum, "gameplay_level1", NULL);
 {% /tab %}
 {% /tabs %}
 
-For more advanced configuration options, see [Advanced Configuration][1].
+For the attributes collected, see [Data Collected][1].
 
-[1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#track-views
+[1]: /real_user_monitoring/setup/data_collected/?platform=cpp#view

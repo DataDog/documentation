@@ -15,7 +15,7 @@ Add the SDK directly to your frontend code when you need full control over initi
 
 {% stepper level="h4" %}
 
-{% step title="Install the Browser SDK" %}
+{% step title="Add the dependencies" %}
 Choose the installation method for the Browser SDK.
 
 {% tabs %}
@@ -240,7 +240,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 {% /tabs %}
 {% /step %}
 
-{% step title="Initialize the Browser SDK" %}
+{% step title="Initialize the SDK" %}
 The SDK should be initialized as early as possible in the app lifecycle. This ensures all measurements are captured correctly.
 
 In the initialization snippet, set an environment name, service name, and client token. See the full list of [initialization parameters][6].
@@ -260,6 +260,9 @@ datadogRum.init({
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
+   remoteConfiguration: {
+     id: '<REMOTE_CONFIGURATION_ID>',
+   },
 });
 
 ```
@@ -291,6 +294,9 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
+      remoteConfiguration: {
+        id: '<REMOTE_CONFIGURATION_ID>',
+      },
     });
   })
 </script>
@@ -310,7 +316,9 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-
+      remoteConfiguration: {
+        id: '<REMOTE_CONFIGURATION_ID>',
+      },
     });
 </script>
 ```
@@ -318,13 +326,86 @@ window.DD_RUM.init({
 {% /tab %}
 {% /tabs %}
 
-#### Configure tracking consent (GDPR compliance)
+The `remoteConfiguration.id` parameter is optional. It lets you manage the SDK configuration from Datadog without redeploying your application. For details, see [Remote Configuration][12].
 
-To be compliant with GDPR, CCPA, and similar regulations, the Browser SDK lets you provide the [tracking consent value at initialization][7].
+You can adjust the session sample rate with the `sessionSampleRate` parameter, but Datadog recommends using [retention filters][13] to control retained volume. For details, see [Manage Sessions][14].
 
 #### Configure Content Security Policy (CSP)
 
 If you're using the Datadog Content Security Policy (CSP) integration on your site, see [the CSP documentation][8] for additional setup steps.
+{% /step %}
+
+{% step title="Configure tracking consent (GDPR compliance)" %}
+To be compliant with GDPR, CCPA, and similar regulations, the RUM Browser SDK lets you provide the tracking consent value at initialization. For more information, see [Data Security][7].
+
+The `trackingConsent` initialization parameter can be one of the following values:
+
+1. `"granted"` (default): The RUM Browser SDK starts collecting data and sends it to Datadog.
+2. `"not-granted"`: The RUM Browser SDK does not collect any data.
+
+To change the tracking consent value after the RUM Browser SDK is initialized, use the `setTrackingConsent()` API call. The RUM Browser SDK changes its behavior according to the new value:
+
+- When changed from `"granted"` to `"not-granted"`, the RUM session is stopped, and data is no longer sent to Datadog.
+- When changed from `"not-granted"` to `"granted"`, a new RUM session is created if no previous session is active, and data collection resumes.
+
+This state is not synchronized between tabs nor persisted between navigation. It is your responsibility to provide the user decision during RUM Browser SDK initialization or by using `setTrackingConsent()`.
+
+When `setTrackingConsent()` is used before `init()`, the provided value takes precedence over the initialization parameter.
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+    ...,
+    trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', function() {
+    datadogRum.setTrackingConsent('granted');
+});
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...,
+        trackingConsent: 'not-granted'
+    });
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM.onReady(function() {
+        window.DD_RUM.setTrackingConsent('granted');
+    });
+});
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.init({
+  ...,
+  trackingConsent: 'not-granted'
+});
+
+acceptCookieBannerButton.addEventListener('click', () => {
+    window.DD_RUM && window.DD_RUM.setTrackingConsent('granted');
+});
+```
+
+{% /tab %}
+{% /tabs %}
+{% /step %}
+
+{% step title="Enable RUM to start sending data" %}
+After you initialize the SDK, RUM starts collecting data. To choose what RUM tracks in your application, continue to [Enable the Datadog RUM Module][15].
 {% /step %}
 
 {% /stepper %}
@@ -383,8 +464,12 @@ To request support for a web server that is not listed here, [fill out this form
 [4]: /product_analytics/
 [5]: https://www.npmjs.com/package/@datadog/browser-rum
 [6]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.RumInitConfiguration.html
-[7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#user-tracking-consent
+[7]: /data_security/real_user_monitoring/#browser-rum-use-of-cookies
 [8]: /integrations/content_security_policy_logs/
 [9]: /agentic_onboarding/setup/
 [10]: /real_user_monitoring/setup/install/?platform=browser
 [11]: /private-beta/rum-sdk-auto-injection/
+[12]: /real_user_monitoring/remote_configuration/
+[13]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[14]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser
+[15]: /real_user_monitoring/setup/enable_rum/?platform=browser

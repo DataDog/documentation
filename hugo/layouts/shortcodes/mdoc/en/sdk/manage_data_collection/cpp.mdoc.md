@@ -1,3 +1,5 @@
+To configure tracking consent, see [Configure tracking consent][1].
+
 ### Stop the current session
 
 Call `StopSession` to explicitly end the current RUM session. The next call to `StartView()`, `StartAction()`, or `AddAction()` automatically starts a new session. If the new session is triggered by an action, the last active view from the previous session is restarted in the new session.
@@ -46,27 +48,4 @@ dd_core_destroy(core);
 {% /tab %}
 {% /tabs %}
 
-### Manage data collection with tracking consent
-
-To update the SDK's tracking consent after initialization, call `SetTrackingConsent` on the core at any time. The SDK adjusts its behavior immediately:
-
-- `Granted`: The SDK sends all pending and future data to Datadog.
-- `Pending`: The SDK continues collecting data and storing it locally, but does not send it to Datadog.
-- `NotGranted`: The SDK deletes all pending data and stops collecting new data.
-
-{% tabs %}
-{% tab label="C++" %}
-
-```cpp
-core->SetTrackingConsent(datadog::TrackingConsent::Granted);
-```
-
-{% /tab %}
-{% tab label="C" %}
-
-```c
-dd_core_set_tracking_consent(core, DD_TRACKING_CONSENT_GRANTED);
-```
-
-{% /tab %}
-{% /tabs %}
+[1]: /real_user_monitoring/setup/install/?platform=cpp#configure-tracking-consent-gdpr-compliance

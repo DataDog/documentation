@@ -1,4 +1,6 @@
-To modify some attributes in your RUM events, or to drop some of the events entirely before batching, provide an implementation of `EventMapper<T>` when initializing the RUM Kotlin Multiplatform SDK:
+## Modify RUM events
+
+To modify attributes in your RUM events before they are batched, provide an implementation of `EventMapper<T>` for each event type when initializing the RUM Kotlin Multiplatform SDK:
 
 ```kotlin
 val rumConfig = RumConfiguration.Builder(applicationId)
@@ -11,7 +13,17 @@ val rumConfig = RumConfiguration.Builder(applicationId)
   .build()
 ```
 
-When implementing the `EventMapper<T>` interface, only some attributes are modifiable for each event type:
+Each mapper receives the event and returns it with your changes applied. For the attributes you can change, see [Modifiable attributes](#modifiable-attributes).
+
+## Drop RUM events
+
+To drop an event entirely, handle it in the matching `EventMapper<T>` implementation.
+
+**Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.
+
+## Modifiable attributes
+
+When implementing the `EventMapper<T>` interface, only the following attributes are modifiable for each event type:
 
 | Event type    | Attribute key        | Description                                      |
 | ------------- | --------------------- | ------------------------------------------------ |
@@ -35,5 +47,3 @@ When implementing the `EventMapper<T>` interface, only some attributes are modif
 | LongTaskEvent | `view.referrer`      | URL that linked to the initial view of the page. |
 |               | `view.url`           | URL of the view.                                 |
 |               | `view.name`          | Name of the view.                                |
-
-**Note**: If you return null from the `EventMapper<T>` implementation, the event is dropped.

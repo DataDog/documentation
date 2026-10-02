@@ -8,7 +8,7 @@
 
 **Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
 
-### Identify user session
+## Set user information
 
 `datadogRum.setUser(<USER_CONFIG_OBJECT>)`
 
@@ -56,7 +56,7 @@ window.DD_RUM && window.DD_RUM.setUser({
 {% /tab %}
 {% /tabs %}
 
-### Access user session
+### Access user information
 
 `datadogRum.getUser()`
 
@@ -86,7 +86,9 @@ window.DD_RUM && window.DD_RUM.getUser()
 {% /tab %}
 {% /tabs %}
 
-### Add/Override user session property
+## Add user properties
+
+Add or override a user property:
 
 `datadogRum.setUserProperty('<USER_KEY>', <USER_VALUE>)`
 
@@ -116,7 +118,7 @@ window.DD_RUM && window.DD_RUM.setUserProperty('name', 'John Doe')
 {% /tab %}
 {% /tabs %}
 
-### Remove user session property
+### Remove a user property
 
 `datadogRum.removeUserProperty('<USER_KEY>')`
 
@@ -146,7 +148,7 @@ window.DD_RUM && window.DD_RUM.removeUserProperty('name')
 {% /tab %}
 {% /tabs %}
 
-### Clear user session property
+## Clear user information
 
 `datadogRum.clearUser()`
 
@@ -176,7 +178,180 @@ window.DD_RUM && window.DD_RUM.clearUser()
 {% /tab %}
 {% /tabs %}
 
-### Track unauthenticated users
+## Set account information
+
+To group users into accounts (for example, the company or organization a user belongs to), use the account APIs.
+
+The following attributes are available:
+
+| Attribute      | Type   | Required | Description                                                |
+|----------------|--------|----------|--------------------------------------------------------------|
+| `account.id`   | String | Yes      | Unique account identifier.                                 |
+| `account.name` | String | No       | Account friendly name, displayed by default in the RUM UI. |
+
+### Identify the account
+
+`datadogRum.setAccount(<ACCOUNT_CONFIG_OBJECT>)`
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+datadogRum.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccount({
+        id: '1234',
+        name: 'My Company Name',
+        ...
+    })
+})
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccount({
+    id: '1234',
+    name: 'My Company Name',
+    ...
+})
+```
+
+{% /tab %}
+{% /tabs %}
+
+### Access account information
+
+`datadogRum.getAccount()`
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+datadogRum.getAccount()
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.getAccount()
+})
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.getAccount()
+```
+
+{% /tab %}
+{% /tabs %}
+
+### Add or override an account property
+
+`datadogRum.setAccountProperty('<ACCOUNT_KEY>', <ACCOUNT_VALUE>)`
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+datadogRum.setAccountProperty('name', 'My Company Name')
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.setAccountProperty('name', 'My Company Name')
+})
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.setAccountProperty('name', 'My Company Name')
+```
+
+{% /tab %}
+{% /tabs %}
+
+### Remove an account property
+
+`datadogRum.removeAccountProperty('<ACCOUNT_KEY>')`
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+datadogRum.removeAccountProperty('name')
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.removeAccountProperty('name')
+})
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.removeAccountProperty('name')
+```
+
+{% /tab %}
+{% /tabs %}
+
+## Clear account information
+
+`datadogRum.clearAccount()`
+
+{% tabs %}
+{% tab label="NPM" %}
+
+```javascript
+datadogRum.clearAccount()
+```
+
+{% /tab %}
+{% tab label="CDN async" %}
+
+```javascript
+window.DD_RUM.onReady(function() {
+    window.DD_RUM.clearAccount()
+})
+```
+
+{% /tab %}
+{% tab label="CDN sync" %}
+
+```javascript
+window.DD_RUM && window.DD_RUM.clearAccount()
+```
+
+{% /tab %}
+{% /tabs %}
+
+## Track unauthenticated users
 
 For unauthenticated visitors or users who have not yet logged in, the RUM SDK automatically tracks activity using `usr.anonymous_id`. This lets you analyze user behavior without requiring authentication.
 

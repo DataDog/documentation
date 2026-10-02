@@ -178,5 +178,5 @@ The following attributes are specific to each event type.
 
 [1]: /product_analytics/guide/action_management/
 [2]: https://app.datadoghq.com/rum/list
-[3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#user-session
-[4]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#track-unauthenticated-users
+[3]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
+[4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#track-unauthenticated-users

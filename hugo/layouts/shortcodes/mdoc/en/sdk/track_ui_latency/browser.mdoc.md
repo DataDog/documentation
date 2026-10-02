@@ -47,7 +47,7 @@ If a Core Web Vital is missing from a view in the [RUM Explorer](/real_user_moni
 | INP missing on a view | The user did not interact with the page during this view; the browser does not support INP; or the view ended before any interaction. |
 | LCP or FCP missing on a view | The page was opened in a background tab or hidden window; the entry took longer than 10 minutes to fire; or this is a SPA route-change view (LCP and FCP are reported on the initial view only). |
 | CLS missing on a view | The browser does not support the `layout-shift` PerformanceObserver entry type or lacks `WeakRef`. |
-| Any vital below the expected threshold | Verify the loaded `@datadog/browser-rum` version meets the requirements for [Core web vitals](#core-web-vitals). |
+| Any vital below the expected threshold | Verify the loaded `@datadog/browser-rum` version meets the requirements for [Core web vitals](#event-timings-and-core-web-vitals). |
 
 To check that the SDK is collecting vitals:
 
