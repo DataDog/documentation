@@ -240,6 +240,103 @@ Edits an existing Datadog notebook.
 - Add a section to notebook abc-123-def with the latest log analysis results.
 - Update the incident response notebook with today's findings.
 
+## Agent builder
+
+Tools for [Bits Agent Builder][86], including creating and configuring custom AI agents, managing their Datadog-managed MCP servers, and running agents and inspecting their conversations.
+
+<div class="alert alert-info">The <code>agent-builder</code> toolset requires access to be enabled for your organization. Request it explicitly with <code>toolsets=agent-builder</code>.</div>
+
+Include the `workflows` toolset (`toolsets=agent-builder,workflows`) to discover action tools or configure workflows that invoke an agent. Agents do not schedule or trigger themselves. Use a workflow to run an agent on a schedule, in response to a monitor, or as part of a sequence of steps. Connect or disconnect OAuth MCP integrations through the Datadog UI.
+
+### `list_datadog_bits_agents`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the custom AI agents in your organization, including each agent's ID, name, description, and model. Use `get_datadog_bits_agent` for the complete configuration.
+
+- List the Bits agents in this organization.
+- Find the agent that investigates checkout service errors.
+
+### `get_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Workflows Read`*\
+Retrieves an agent by ID, including its system prompt, action tools, MCP servers, and the workflows that invoke it. Use `get_datadog_workflow` to inspect a workflow's complete specification.
+
+- Show the system prompt and tools configured for the checkout investigation agent.
+- Which workflows invoke this agent?
+
+### `list_datadog_bits_agent_models`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` or `Bits Agent Builder Write`*\
+Lists supported model identifiers, the default model, and whether each model supports loading tool definitions on demand. Use these identifiers when creating or updating an agent. Omitting `ai_model` uses the default model on creation and preserves the current model on update.
+
+- Which models are available for a Bits agent?
+- Show the default model and models that support tool search.
+
+### `create_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Creates a persistent custom AI agent from a name and system prompt. Optionally, provide a description, model, action tools, and a `code-sandbox` MCP server. The `datadog` MCP server is attached automatically with full tool access. Resolve action identifiers and input schemas with `search_datadog_workflow_actions` and `get_datadog_workflow_action` before adding action tools.
+
+- Create an agent that investigates checkout service errors using logs, metrics, and traces.
+- Create an agent that summarizes service health and can send its findings to a Slack channel.
+
+### `update_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Write`*\
+Updates an agent's name, description, system prompt, model, or action tools. Omitted fields remain unchanged. Providing `action_tools` replaces the complete list; an empty array clears it. Set `dry_run: true` to preview changes. Use the MCP server tools below to change an agent's MCP configuration.
+
+- Update the checkout investigation agent's instructions to include deployment events.
+- Preview changing this agent to the default model returned by `list_datadog_bits_agent_models`.
+
+### `list_datadog_bits_agent_mcp_tools`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists the tools exposed by the `datadog` or `code-sandbox` MCP server for a specific agent. Returns the full catalog available to your organization, regardless of the agent's `allowed_tools` restrictions. Use the returned names when restricting tools. For capabilities absent from the catalog, search the Workflow Automation action catalog.
+
+- List the Datadog MCP tools available for this agent.
+- Check which MCP tools are available before restricting the agent's access.
+
+### `add_datadog_managed_mcp_server_to_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Adds or reconfigures the `datadog` or `code-sandbox` MCP server on an agent, preserving its OAuth MCP integrations. If the named server already exists, its configuration is replaced. An empty `allowed_tools` list permits all tools. For `code-sandbox`, provide `repo_urls` for repositories connected through the Source Code integration. Set `dry_run: true` to preview changes.
+
+- Restrict this agent's Datadog MCP server to selected tools from `list_datadog_bits_agent_mcp_tools`.
+- Add a code sandbox for the connected repository `github.com/example/checkout`.
+
+### `remove_datadog_managed_mcp_server_from_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read` and `Bits Agent Builder Write`*\
+Removes the `datadog` or `code-sandbox` MCP server from an agent, preserving its OAuth MCP integrations. If the server is not configured, the agent remains unchanged. Set `dry_run: true` to preview changes.
+
+- Remove the code sandbox from the checkout investigation agent.
+- Preview removing this agent's Datadog MCP server.
+
+### `run_datadog_bits_agent`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Run`*\
+Starts an agent with a user prompt and returns a `conversation_id` immediately while the agent runs in the background. Each call starts a separate conversation; this tool cannot add messages to an existing conversation. Poll `get_datadog_bits_agent_conversation_events` to retrieve the response.
+
+- Run the checkout investigation agent to investigate the error spike from the past hour.
+- Ask the service health agent to summarize the payments service's current status.
+
+### `list_datadog_bits_agent_conversations`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Lists an agent's past conversations, including IDs and titles. Use the returned IDs with `get_datadog_bits_agent_conversation_events` to inspect their history.
+
+- List past conversations for the checkout investigation agent.
+- Find the conversation from the last service health investigation.
+
+### `get_datadog_bits_agent_conversation_events`
+*Toolset: **agent-builder***\
+*Permissions Required: `Bits Agent Builder Read`*\
+Retrieves a conversation's event history using its `agent_id` and `conversation_id`, including prompts, agent messages, tool calls, tool results, and errors. Filter with `event_types`, or omit it to return all events. After starting a run, poll until a `final_response` event indicates success or an `application_error` event indicates failure.
+
+- Retrieve the response from the latest agent run.
+- Show the tool calls and results from this investigation.
+- Check whether this conversation has a final response or an application error.
+
 ## Alerting
 
 Tools for validating monitors, searching monitor groups, and retrieving monitor templates.
@@ -3189,6 +3286,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [83]: /network_monitoring/network_path/
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
+[86]: /actions/agents/
 
 ## Further reading
 
