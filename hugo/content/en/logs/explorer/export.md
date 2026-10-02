@@ -35,18 +35,18 @@ You can also save individual logs to a notebook by selecting {{< ui >}}Save to n
 
 To retrieve a log list longer than the maximum 1000 logs limit returned by the Logs API, use [the pagination feature][7].
 
-## Formatting of exported logs
+## CSV export formatting
 
-To keep exported files safe to open in spreadsheet applications, Datadog sanitizes every cell when exporting logs to CSV. As a result, values in a CSV export may differ from the original log content:
+To make exported logs compatible with spreadsheet applications, Datadog sanitizes CSV exports. Exported values and column names can therefore differ from the original logs. Datadog makes the following changes:
 
-- **Line breaks are removed**: Newline characters (`\n`, `\r\n`, `\r`) are deleted without adding a space, so multi-line values (such as stack traces) appear on a single line. For example, `foo\nbar` becomes `foobar`.
-- **Repeated spaces are collapsed**: Consecutive spaces are replaced with a single space.
-- **Formula characters are escaped**: Values starting with `=`, `+`, `-`, `@`, a tab, or a carriage return are prefixed with a single quote (`'`) to prevent CSV formula injection.
-- **Duplicate column names are renamed**: Repeated headers get a numeric suffix, for example `message(1)`.
+- **Removes line breaks** (`\n`, `\r\n`, `\r`) without inserting spaces. For example, `foo\nbar` becomes `foobar`.
+- **Replaces consecutive spaces** with a single space.
+- **Prefixes formula characters** starting with `=`, `+`, `-`, `@`, a tab, or a carriage return with a single quote (`'`) to prevent spreadsheet applications from interpreting them as formulas.
+- **Adds numeric suffixes to duplicate column names**, such as `message(1)`.
 
-Values are also wrapped in double quotes, with any `"` inside a value escaped as `""`, following standard CSV rules.
+Datadog also encloses values in double quotes and escapes double quotes within values as `""`, following standard CSV rules.
 
-To retrieve logs exactly as ingested, use the [Log Search API][5] or [Log Archives][9] instead.
+To retrieve logs without these CSV formatting changes, use the [Log Search API][5] or [Log Archives][9].
 
 ## Further Reading
 
