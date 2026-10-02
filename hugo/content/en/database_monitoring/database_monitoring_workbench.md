@@ -86,7 +86,7 @@ curl -X POST "{{< region-param key="dd_api" >}}/api/unstable/databases/workbench
   }'
 ```
 
-[TODO: confirm the application key needs the Database Monitoring Read permission, or list the required scope.]
+The application key must belong to a user or service account with the **Database Monitoring Read** permission. If Workbench is not enabled for your organization, the API returns `403`.
 
 | Parameter | Description |
 | --------- | ----------- |
