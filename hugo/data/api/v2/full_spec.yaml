@@ -173438,6 +173438,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/incident-templates:
     get:
+      deprecated: true
       description: Get all Salesforce incident templates configured for your organization.
       operationId: GetIncidentTemplates
       responses:
@@ -173473,6 +173474,7 @@ paths:
         permissions:
           - integrations_read
     post:
+      deprecated: true
       description: |-
         Create a new Salesforce incident template for your organization. Template
         names must be unique within an organization.
@@ -173537,6 +173539,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/incident-templates/{incident_template_id}:
     delete:
+      deprecated: true
       description: Delete a single Salesforce incident template from your organization.
       operationId: DeleteIncidentTemplate
       parameters:
@@ -173559,6 +173562,7 @@ paths:
         permissions:
           - manage_integrations
     patch:
+      deprecated: true
       description: Update a single Salesforce incident template in your organization.
       operationId: UpdateIncidentTemplate
       parameters:
@@ -173619,6 +173623,7 @@ paths:
           - manage_integrations
   /api/v2/integration/salesforce-incidents/organizations:
     get:
+      deprecated: true
       description: |-
         Get all Salesforce organizations connected to your Datadog organization
         through the Salesforce integration. Salesforce organizations are connected
@@ -173660,6 +173665,7 @@ paths:
           - integrations_read
   /api/v2/integration/salesforce-incidents/organizations/{salesforce_org_id}:
     delete:
+      deprecated: true
       description: |-
         Disconnect a Salesforce organization from your Datadog organization.
         This also deletes any incident templates referencing the organization.
