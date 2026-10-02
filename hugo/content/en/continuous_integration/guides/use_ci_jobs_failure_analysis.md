@@ -106,11 +106,13 @@ Click on a domain tab to see the correspondent subdomains:
 
 CI jobs failure analysis is available for the following CI providers:
 
+* [Azure Pipelines][8]
+* [Buildkite][12]
+* [CircleCI][13]
 * [GitHub Actions][1]
 * [GitLab][2]
-* [Azure Pipeline][8]
 
-**Note:** You must enable CI job logs collection, and the logs need to be indexed. To set up CI job logs collection, select your CI provider on [Pipeline Visibility][6] and follow the instructions to collect job logs.
+**Note:** CI jobs failure analysis requires job logs. To set up job logs for your CI provider, see the **Manage job logs** section on the [Pipeline Visibility setup page][6] for your provider.
 
 <div class="alert alert-info">If you are interested in CI jobs failure analysis but your CI provider is not supported yet, fill out <a href="https://forms.gle/vSrqS5QwitgHf9wG6" target="_blank">this form</a>.</div>
 
@@ -174,3 +176,5 @@ Enable PR Comments from [**CI/CD Optimization** > **Settings** > **Repositories*
 [9]:/logs/log_configuration/indexes#exclusion-filters
 [10]:/continuous_integration/pipelines/automatic_retries/
 [11]:https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[12]:/continuous_integration/pipelines/buildkite/
+[13]:/continuous_integration/pipelines/circleci/

@@ -97,8 +97,8 @@ A failed job is not retried when:
 [1]: /continuous_integration/pipelines/github/
 [2]: /continuous_integration/pipelines/gitlab/
 [3]: /integrations/guide/source-code-integration/
-[4]: /continuous_integration/pipelines/github/#collect-job-logs
-[5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
+[4]: /continuous_integration/pipelines/github/#store-job-logs
+[5]: /continuous_integration/pipelines/gitlab/#store-job-logs
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
 [7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [8]: /continuous_integration/pipelines/github/#configure-a-github-app
