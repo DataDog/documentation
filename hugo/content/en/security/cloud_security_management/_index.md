@@ -70,7 +70,7 @@ Datadog Cloud Security delivers deep visibility, continuous configuration audits
 Security and DevOps teams can act on the shared context of observability and security data to quickly prioritize and remediate issues.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Agentless Scanning is not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
@@ -125,7 +125,7 @@ To get more detail, use [Findings][7] to review and remediate your organization'
   {{< img src="security/csm/security_graph.png" alt="Security Graph displaying an example EC2 instance" width="100%">}}
 - Use the [Resource Catalog][12] to view specific misconfigurations and threats that have been reported on the hosts and resources in your environments. For more information, see the [Resource Catalog][13] documentation.
   {{< site-region region="gov,gov2" >}}
-  <div class="alert alert-danger">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+  <div class="alert alert-caution">Resource Catalog is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
   {{< /site-region >}}
   {{< img src="infrastructure/resource_catalog/resource_catalog_infra_3.png" alt="Resource Catalog map view displaying host and cloud resources grouped by category and misconfigurations." style="width:100%;" >}}
 - Use the [Cloudcraft Security Map][21] to visualize your resources and any misconfigurations, vulnerabilities, identity risks, or sensitive data associated with them. For more information on these overlays, see the [Cloudcraft overlay][22] documentation.

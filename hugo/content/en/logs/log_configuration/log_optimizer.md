@@ -24,7 +24,7 @@ Datadog continuously reviews your **indexed** logs to find patterns that generat
 
 The Log Optimizer then suggests actions (such as excluding debug-level messages, sampling routine logs, or converting static messages to metrics) so you can reduce noise without losing visibility into important events.
 
-<div class="alert alert-danger">The Log Optimizer does not account for existing exclusion filters or logs-to-metrics conversions. Review your settings before applying new actions to avoid duplicates.</div>
+<div class="alert alert-caution">The Log Optimizer does not account for existing exclusion filters or logs-to-metrics conversions. Review your settings before applying new actions to avoid duplicates.</div>
 
 ### What Datadog analyzes
 

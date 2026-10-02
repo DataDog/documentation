@@ -49,7 +49,7 @@ Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Connect
@@ -91,7 +91,7 @@ After adding the configuration, run `codex mcp login datadog` to complete the OA
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -160,7 +160,7 @@ The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datado
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 For security, scope the API key and application key to a [service account][7] with only the required permissions.
@@ -185,7 +185,7 @@ The skills require the `llmobs` MCP toolset to be connected. If you have not alr
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Restart Claude Code after running both commands for the skills to appear.

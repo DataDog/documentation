@@ -29,7 +29,7 @@ The Datadog Extension allows you to view OpenTelemetry Collector configuration a
 
 ## Setup
 
-<div class="alert alert-danger">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually configure the Datadog Extension. It is automatically enabled in all DDOT Collector versions.</div>
+<div class="alert alert-caution">If you use the <a href="/opentelemetry/setup/ddot_collector/">DDOT Collector</a>, do <strong>not</strong> manually configure the Datadog Extension. It is automatically enabled in all DDOT Collector versions.</div>
 
 ### 1. Add the Datadog Extension to your Collector configuration
 
@@ -253,7 +253,7 @@ The DaemonSet forwards to `monitoring/otelcol-gateway-l2`, the Layer-2 gateway f
 | `timeout` | Timeout for HTTP requests. | `30s` |
 | `tls.insecure_skip_verify` | Skip TLS certificate verification. | `false` |
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <strong>Hostname matching</strong>: If you specify a custom <code>hostname</code> in the Datadog Extension, it must match the host name in exported telemetry. The extension does not infer a hostname from application telemetry in your pipelines; it obtains its hostname from system or cloud-provider APIs or from manual configuration. If you use the Datadog Exporter, its <code>hostname</code> value must also match. Otherwise, Datadog might not correlate telemetry to the correct host, and duplicate hosts can appear.
 </div>
 

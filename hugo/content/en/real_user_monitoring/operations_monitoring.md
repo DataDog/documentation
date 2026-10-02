@@ -354,7 +354,7 @@ Each operation must have a condition for ending in a failure:
 - **Error** failures can end as a resource, error, or custom action.
 - **Abandon** failures can be toggled on in case the user navigates away from the starting view before the operation finishes.
 
-<div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog through the UI or API.</div>
+<div class="alert alert-caution">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog through the UI or API.</div>
 
 ## Create operations with the Datadog MCP
 

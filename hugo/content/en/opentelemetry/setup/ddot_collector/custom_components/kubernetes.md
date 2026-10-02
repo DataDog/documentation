@@ -133,7 +133,7 @@ agents:
    {{< /code-block >}}
    Replace `<YOUR-REPO>` with your repository name, and set `tag` to the Agent version your custom image is built from.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 The Datadog Helm chart reads <code>agents.image.tag</code> as an Agent version and uses it to enable or disable version-dependent behavior. A tag that is not a valid Agent version, such as <code>byoc-0.0.2</code>, causes the chart to fail or to misconfigure the Agent. Setting <code>doNotCheckTag: true</code> only skips the chart's minimum-version check; it does not exempt the tag from being parsed as a version.
 </div>
 

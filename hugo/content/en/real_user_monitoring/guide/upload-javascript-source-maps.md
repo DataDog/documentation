@@ -30,7 +30,7 @@ If your front-end JavaScript source code is minified, upload your source maps to
 
 Configure your JavaScript bundler such that when minifying your source code, it generates source maps that directly include the related source code in the `sourcesContent` attribute.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Ensure that the size of each source map augmented with the size of the related minified file does not exceed the limit of <b>500 MB</b>.
 </div>
 
@@ -176,7 +176,7 @@ See the following example:
         javascript.464388.js.map
 ```
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 If the sum of the file size for <code>javascript.364758.min.js</code> and <code>javascript.364758.js.map</code> exceeds the <b>500 MB</b> limit, reduce it by configuring your bundler to split the source code into multiple smaller chunks. For more information, see <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
 </div>
 

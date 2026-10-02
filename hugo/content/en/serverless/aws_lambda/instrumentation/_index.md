@@ -28,7 +28,7 @@ Instrument your AWS Lambda applications with a Datadog Lambda Extension to colle
 ## Quick start
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 To get started, [sign up for a Datadog account][1] if you don’t already have one. Then, follow the [in-app installation flow in Fleet Automation][8] for AWS Lambda to instrument your Lambda functions. This quick-start configuration enables your functions to send real-time metrics, logs, and traces to Datadog.
@@ -40,7 +40,7 @@ The quick start process configures your Lambda functions on the fly. To instrume
 ## Set up with agentic onboarding
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:

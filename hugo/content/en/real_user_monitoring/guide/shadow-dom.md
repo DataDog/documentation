@@ -8,7 +8,7 @@ further_reading:
   text: 'Learn about Session Replay'
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Datadog only supports open Shadow DOM.
 </div>
 

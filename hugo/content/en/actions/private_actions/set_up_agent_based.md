@@ -22,7 +22,7 @@ further_reading:
   text: "Set up a standalone private action runner"
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Datadog Agent runner is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">The Datadog Agent runner is not supported for your <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ## Overview

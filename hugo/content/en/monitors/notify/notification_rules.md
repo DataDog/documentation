@@ -21,7 +21,7 @@ Monitor notification rules are predefined sets of conditions that automate the p
 
 ## Setup
 
-<div class="alert alert-danger">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
+<div class="alert alert-caution">You must have the <a href="/account_management/rbac/permissions/#monitors"><code>monitor_config_policy_write</code> permission</a> to create a rule.</div>
 
 To create a Monitor Notification Rule in Datadog, do the following:
 
@@ -86,7 +86,7 @@ Notifications can be sent to email or any integration channel. There is a limit 
 
 #### Dynamic routing
 
-<div class="alert alert-danger">Dynamic routing is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.</div>
+<div class="alert alert-caution">Dynamic routing is in Preview. To request access, contact your Datadog account team or reach out to <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.</div>
 
 Dynamic routing automatically routes monitor alerts to the right team based on your existing [Teams][4] and [Catalog][5] configurations. Instead of maintaining static recipient lists, dynamic routing uses the `service` or `team` tag on the alerting monitor to determine where to send notifications.
 

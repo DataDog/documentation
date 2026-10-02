@@ -16,7 +16,7 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   AAP for Gateway API is experimental. Please follow the instructions below to try it out.
 </div>
 

@@ -30,7 +30,7 @@ Follow these steps to enable Data Observability: Jobs Monitoring for Databricks.
 
 {{% tab "Use a Service Principal for OAuth" %}}
 
-<div class="alert alert-danger">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
+<div class="alert alert-caution">New workspace integrations must authenticate using OAuth. Workspaces already integrated with a Personal Access Token continue to function and can switch to OAuth at any time. After a workspace starts using OAuth, it cannot revert to a Personal Access Token.</div>
 
 #### Create and configure the service principal in Databricks
 
@@ -115,7 +115,7 @@ See [Private Link Connectivity (Preview)][15] for full setup instructions.
 
 {{% tab "Use a Personal Access Token (Legacy)" %}}
 
-<div class="alert alert-danger">This option is only available for workspace integrations created before July 7, 2025. New workspace integrations must authenticate using OAuth.</div>
+<div class="alert alert-caution">This option is only available for workspace integrations created before July 7, 2025. New workspace integrations must authenticate using OAuth.</div>
 
 1. In your Databricks workspace, click on your profile in the top right corner and go to {{< ui >}}Settings{{< /ui >}}. Select {{< ui >}}Developer{{< /ui >}} in the left side bar. Next to {{< ui >}}Access tokens{{< /ui >}}, click {{< ui >}}Manage{{< /ui >}}.
 1. Click {{< ui >}}Generate new token{{< /ui >}}, enter "Datadog Integration" in the {{< ui >}}Comment{{< /ui >}} field, set the {{< ui >}}Lifetime (days){{< /ui >}} value to the maximum allowed (730 days), and create a reminder to update the token before it expires. Then click {{< ui >}}Generate{{< /ui >}}. Take note of your token.
@@ -171,7 +171,7 @@ The Datadog Agent must be installed on Databricks clusters to monitor Databricks
 
 Datadog can install and manage a global init script in the Databricks workspace. The Datadog Agent is installed on all clusters in the workspace, when they start.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 <ul>
 <li>This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, Datadog recommends to <a href="?tab=manuallyconfigureaclusterpolicy#install-the-datadog-agent">Manually configure a cluster policy</a> across multiple clusters or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.</li>
 <li>This install option, in which Datadog installs and manages your Datadog global init script, requires a Databricks Access Token with <strong>Workspace Admin</strong> permissions. A token with CAN VIEW access does not allow Datadog to manage the global init script of your Databricks account.</li>
@@ -292,7 +292,7 @@ This approach is recommended for clusters in **Standard** access mode.
 
 {{% tab "Manually install a global init script" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 This setup does not work on Databricks clusters in <strong>Standard</strong> access mode, because global init scripts cannot be installed on those clusters. If you are using clusters with the <strong>Standard</strong> access mode, Datadog recommends to <a href="?tab=manuallyconfigureaclusterpolicy#install-the-datadog-agent">Manually configure a cluster policy</a> or <a href="?tab=manuallyinstallonaspecificcluster#install-the-datadog-agent">Manually install on a specific cluster</a>.
 </div>
 

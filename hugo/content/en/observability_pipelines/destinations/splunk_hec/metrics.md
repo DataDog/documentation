@@ -13,7 +13,7 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 Configure the Splunk HEC destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 

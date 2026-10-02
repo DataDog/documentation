@@ -25,7 +25,7 @@ Datadog Work Management allows customization to align with your team's unique wo
 
 ## Custom work types
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   You must have Case Shared Settings Write (<code>cases_shared_settings_write</code>) permissions. For more information, see
   <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#case_management">Datadog Role Permissions</a>.
 </div>

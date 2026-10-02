@@ -239,7 +239,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 {{% tab "Astronomer" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 For Astronomer customers using Astro, <a href=https://www.astronomer.io/docs/learn/airflow-openlineage#lineage-on-astro>Astro offers lineage features that rely on the Airflow OpenLineage provider</a>. Data Observability: Jobs Monitoring depends on the same OpenLineage provider and uses the <a href=https://openlineage.io/docs/client/python#composite>Composite</a> transport to add additional transport.
 </div>
 
@@ -308,7 +308,7 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 {{% /tab %}}
 {{% tab "Google Cloud Composer" %}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Data Observability: Jobs Monitoring for Airflow is not yet compatible with <a href=https://cloud.google.com/composer/docs/composer-2/lineage-integration>Dataplex</a> data lineage. Setting up OpenLineage for Data Observability: Jobs Monitoring overrides your existing Dataplex transport configuration.
 </div>
 

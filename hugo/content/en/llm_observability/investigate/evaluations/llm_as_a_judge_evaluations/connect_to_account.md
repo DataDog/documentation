@@ -17,7 +17,7 @@ Configure the LLM provider you would like to use for bring-your-own-key (BYOK) e
 {{< tabs >}}
 {{% tab "OpenAI" %}}
 
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your OpenAI account to Agent Observability with your OpenAI API key.
 
@@ -38,7 +38,7 @@ Agent Observability does not support [data residency][2] for OpenAI.
 {{% /tab %}}
 {{% tab "Azure OpenAI" %}}
 
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Azure OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Azure OpenAI account to Agent Observability with your OpenAI API key. Datadog strongly recommends using the `GPT-4o mini` model for evaluations. The selected model version must support [structured output][8], and the Chat Completions API must be available. See a [full list of compatible models][9].
 
@@ -56,7 +56,7 @@ Connect your Azure OpenAI account to Agent Observability with your OpenAI API ke
 {{% /tab %}}
 {{% tab "Anthropic" %}}
 
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Anthropic account to Agent Observability with your Anthropic API key.
 
@@ -71,7 +71,7 @@ Connect your Anthropic account to Agent Observability with your Anthropic API ke
 {{% /tab %}}
 {{% tab "Amazon Bedrock" %}}
 
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect your Amazon Bedrock account to Agent Observability with your AWS Account.
 
@@ -92,7 +92,7 @@ Connect your Amazon Bedrock account to Agent Observability with your AWS Account
 
 {{% tab "GCP Vertex AI" %}}
 
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Connect Vertex AI to Agent Observability with your Google Cloud Platform account.
 
@@ -113,7 +113,7 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 {{% /tab %}}
 
 {{% tab "AI Gateway" %}}
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+<div class="alert alert-caution">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
 Your AI Gateway must be compatible with the [OpenAI API specification][2].
 

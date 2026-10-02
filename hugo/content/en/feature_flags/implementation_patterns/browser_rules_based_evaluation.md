@@ -36,7 +36,7 @@ Your application owns configuration availability, freshness, and the tracking li
 - Enabling client rules delivery for your organization requires **Feature Flag Environment Config Write** permission. This permission is not needed to use the SDK if the setting is already enabled. See [Permissions and Access Control][9].
 - Distribute only browser-appropriate flags to the **Client** [distribution channel][4].
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">Browser Feature Flags are not supported for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
 <div class="alert alert-warning">Configuration delivered to a browser is inspectable, including any targeting rules and values it contains. Keep sensitive configuration and authorization decisions on the server. Client-side feature flags are not an access-control mechanism.</div>
 

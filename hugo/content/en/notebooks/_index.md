@@ -192,7 +192,7 @@ Notebooks support template variables. Dynamically scope visualizations by adding
 
 A template variable whose tag key is `team` renders as the team filter, with hierarchy-aware selection and a combined list of Datadog Teams and `team` tag values. For more information, see [Team filter][9].
 
-<div class="alert alert-danger">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
+<div class="alert alert-caution">Some Analysis features have limited or no support for template variables. For more information, see <a href="/notebooks/guide/template_variables_analysis_notebooks">Template Variable Support in Analysis Notebooks</a>.</div>
 
 ### Time controls
 

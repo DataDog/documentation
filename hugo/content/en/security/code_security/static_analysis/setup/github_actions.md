@@ -42,7 +42,7 @@ You **must** set your Datadog API and application keys as [secrets in your GitHu
 
 Make sure to replace `dd_site` with the [Datadog site you are using][3].
 
-<div id="unsupported-trigger" class="alert alert-danger">
+<div id="unsupported-trigger" class="alert alert-caution">
 Running a Datadog Static Code Analysis job as an action only supports the <code>push</code> event trigger. Other event triggers (<code>pull_request</code>, etc.) are not supported.
 </div>
 

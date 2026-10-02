@@ -383,7 +383,7 @@ options = {
 initialize(**options)
 ```
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   By default, Python DogStatsD client instances (including the <code>statsd</code> global instance) cannot be shared across processes but are thread-safe. Because of this, the parent process and each child process must create their own instances of the client or the buffering must be explicitly disabled by setting <code>disable_buffering</code> to <code>True</code>. See the documentation on <a href="https://datadogpy.readthedocs.io/en/latest/#datadog-dogstatsd">datadog.dogstatsd</a> for more details.
 </div>
 

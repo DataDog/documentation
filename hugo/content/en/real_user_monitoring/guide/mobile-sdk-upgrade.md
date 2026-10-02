@@ -54,7 +54,7 @@ Please read [the MIGRATION.md guide][1] in the official React Native repository 
 {{< tabs >}}
 {{% tab "Android" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Datadog follows Google's <a href="https://developer.android.com/jetpack/androidx/versions#version-table">AndroidX library version policy</a> for the <code>AndroidX</code> libraries so the minimum Android API level supported by SDK v3 is <code>23</code>.
 </div>
 
@@ -280,7 +280,7 @@ Refer to the official `Open Telemetry` [documentation](https://opentelemetry.io/
 
 #### Migrating tracing from `Open Tracing` to `DatadogTracing` (transition period)
 
-<div class="alert alert-danger">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. Datadog recommends using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
+<div class="alert alert-caution">This option has been added for compatibility and to simplify the transition from Open Tracing to Open Telemetry, but it may not be available in future major releases. Datadog recommends using Open Telemetry as the standard for tracing tasks. However, if it is not possible to enable desugaring in your project for some reason, you can use this method.</div>
 Replace the `Open Tracing` configuration:
 ```kotlin
 GlobalTracer.registerIfAbsent(
@@ -582,7 +582,7 @@ Reference to the `com.datadoghq:dd-sdk-android` artifact should be removed from 
 
 **Note**: The Maven coordinates of all the other artifacts stay the same.
 
-<div class="alert alert-danger">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
+<div class="alert alert-caution">v2 does not support Android API 19 (KitKat). The minimum SDK supported is now API 21 (Lollipop). Kotlin 1.7 is required. The SDK itself is compiled with Kotlin 1.8, so a compiler of Kotlin 1.6 and below cannot read SDK classes metadata.</div>
 
 Should you encounter an error such as the following:
 

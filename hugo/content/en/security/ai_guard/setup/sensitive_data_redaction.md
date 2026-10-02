@@ -12,7 +12,7 @@ further_reading:
   text: Sensitive Data Scanning Rules
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov" >}}<div class="alert alert-caution">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 AI Guard uses Sensitive Data Scanner to identify sensitive data, such as personally identifiable information (PII), credentials, and secrets, in messages evaluated by AI Guard. Matching data can be hashed, replaced with custom text, or partially redacted before it is sent to the model. To replace each match with a label or `****`, use the **Redact** action and enter the value as the replacement text.

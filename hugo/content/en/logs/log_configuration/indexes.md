@@ -62,7 +62,7 @@ To delete an index from your organization, use the {{< ui >}}Delete{{< /ui >}} i
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 You cannot recreate an index with the same name as the deleted one. 
 </div>
 

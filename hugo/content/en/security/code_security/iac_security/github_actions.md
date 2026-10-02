@@ -17,7 +17,7 @@ further_reading:
 ---
 
 {{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">IaC Security with GitHub Actions is not supported for the {{< region-param key=dd_site code="true" >}} site.</div>
+<div class="alert alert-caution">IaC Security with GitHub Actions is not supported for the {{< region-param key=dd_site code="true" >}} site.</div>
 {{% /site-region %}}
 
 The [`datadog-iac-scanner-github-action`][2] runs the [Datadog IaC Scanner][7] in your GitHub Action workflows on every push. It detects misconfigurations in Infrastructure as Code files, then uploads the results to [IaC Security][1].
