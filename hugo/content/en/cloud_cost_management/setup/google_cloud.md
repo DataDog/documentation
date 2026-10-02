@@ -70,16 +70,14 @@ The following permissions allow Datadog to access and transfer the billing expor
 ### (Optional) Enable committed use discounts metadata export
 
 <div class="alert alert-info">
-The <a href="https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export">CUD metadata export</a> provides additional information about your <a href="https://docs.cloud.google.com/docs/cuds-spend-based">spend-based committed use discounts</a>, including their start and end dates, committed amounts, and other properties. Without this export, CUD information in Cloud Cost Management is limited. The export includes CUDs purchased in projects linked to the billing account, including expired ones.
+The <a href="https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export">CUD metadata export</a> provides additional information about your <a href="https://cloud.google.com/docs/cuds-spend-based">spend-based committed use discounts</a>. You must enable this export to see start and end dates, committed amounts, and other properties in the <a href="/cloud_cost_management/planning/commitment_programs/#commitments-inventory">Commitments Inventory</a>. The export includes CUDs purchased in projects linked to the billing account, including expired ones.
 </div>
 
 1. Navigate to [Billing Export][1] under Google Cloud console _Billing_.
-2. Enable the [Committed Use Discounts Export][20]. Select a project and enter a new linked dataset name. Google Cloud creates the linked dataset.
+2. Enable the [Committed Use Discounts Export][2]. Select a project and enter a new linked dataset name. Google Cloud creates the linked dataset.
 3. Select the Location Type and the region or multi-region that matches your detailed usage cost export dataset. You cannot change the location after creating the dataset.
 4. Click {{< ui >}}Save{{< /ui >}}.
-5. Record the {{< ui >}}Billing Account ID{{< /ui >}}, export {{< ui >}}Project ID{{< /ui >}}, {{< ui >}}Linked Dataset Name{{< /ui >}}. Those information will be used to [configure Cloud Cost](#configure-cloud-cost).
-
-**Note:** Use the same location as the detailed usage cost export dataset. The location can't be changed after the dataset is created.
+5. Record the {{< ui >}}Billing Account ID{{< /ui >}}, export {{< ui >}}Project ID{{< /ui >}}, and {{< ui >}}Linked Dataset Name{{< /ui >}}. This information is used to [configure Cloud Cost](#configure-cloud-cost).
 
 {{< img src="cloud_cost/commitments/cud_metadata_export.png" alt="Google Cloud CUD export configuration with project, linked dataset, location type, and multi-region fields highlighted." >}}
 
@@ -286,4 +284,3 @@ The following out-of-the-box tags are available:
 [17]: /cloud_cost_management/tags
 [18]: /api/latest/cloud-cost-management/#create-google-cloud-usage-cost-config
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/gcp_uc_config
-[20]: https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-setup
