@@ -72,7 +72,7 @@ Datadog Log Management는 다음과 같은 솔루션을 제공합니다.
 
 컴퓨팅은 Flex Logs에 대한 쿼리를 실행하기 위한 쿼리 용량입니다. Flex Logs 계층에서 로그를 쿼리할 때 사용됩니다. 수집 시 또는 Standard Indexing 로그만 검색할 때는 사용되지 않습니다. 사용 가능한 컴퓨팅 계층은 다음과 같습니다.
 
-<div class="alert alert-danger">US3, US5, AP1, AP2, US1-FED 및 US2-FED에서 사용할 수 있는 컴퓨팅 크기는 Starter, XS 및 S입니다.</div>
+<div class="alert alert-danger">US3, US5, AP1, AP2, US1-FED 및 US2-FED에서 사용할 수 있는 컴퓨팅 크기는 Starter, XS, XS+ 및&nbsp;S입니다.</div>
 
 - Starter
 - Extra small(XS)

@@ -1502,6 +1502,14 @@ components:
       required: true
       schema:
         type: string
+    PersonalAccessTokensFilterLeakedParameter:
+      description: When true, only return access tokens that have been detected as leaked. Has no effect when false.
+      in: query
+      name: filter[leaked]
+      required: false
+      schema:
+        example: true
+        type: boolean
     PersonalAccessTokensFilterOwnerIDParameter:
       description: Filter access tokens by the owner's ID. Supports multiple values.
       in: query
@@ -1519,6 +1527,16 @@ components:
       required: false
       schema:
         type: string
+    PersonalAccessTokensIncludeParameter:
+      description: Comma-separated list of relationship objects that should be included in the response.
+      explode: false
+      in: query
+      name: include
+      required: false
+      schema:
+        items:
+          $ref: "#/components/schemas/PersonalAccessTokensIncludeQueryParameterItem"
+        type: array
     PersonalAccessTokensSortParameter:
       description: |-
         Access token attribute used to sort results. Sort order is ascending
@@ -4227,6 +4245,8 @@ components:
     AccessTokenListItemRelationships:
       description: Resources related to the access token entry in the mixed list response.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToAccessTokenOwner"
       type: object
@@ -4240,6 +4260,15 @@ components:
       x-enum-varnames:
         - USERS
         - SERVICE_ACCOUNT
+    AccessTokenResponseIncludedArray:
+      description: Array of objects related to the access tokens.
+      items:
+        $ref: "#/components/schemas/AccessTokenResponseIncludedItem"
+      type: array
+    AccessTokenResponseIncludedItem:
+      description: An object related to an access token.
+      oneOf:
+        - $ref: "#/components/schemas/LeakedKey"
     AccessTokensType:
       description: Resource type returned by the access tokens list endpoint. Includes both personal and service access tokens.
       enum:
@@ -4752,111 +4781,6 @@ components:
       required:
         - agentTrigger
       type: object
-    AggregatedHighFrozenFrameRate:
-      description: Aggregated high frozen frame rate detection at view level.
-      properties:
-        avg_frozen_frame_rate:
-          description: Average frozen frame rate as a fraction of total frames.
-          example: 0.15
-          format: double
-          type: number
-        avg_segment_duration:
-          description: Average segment duration in nanoseconds.
-          example: 3000000000
-          format: int64
-          type: integer
-        avg_total_frozen_duration:
-          description: Average total frozen duration in nanoseconds.
-          example: 500000000
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$mno345
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 14.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 5
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_frozen_frame_rate
-        - avg_total_frozen_duration
-        - avg_segment_duration
-        - impact_score
-      type: object
-    AggregatedHighScriptEval:
-      description: Aggregated high script evaluation detection grouped by source.
-      properties:
-        avg_duration:
-          description: Average script evaluation duration in nanoseconds.
-          example: 300000000
-          format: int64
-          type: integer
-        avg_forced_style_layout:
-          description: Average forced style/layout duration in nanoseconds.
-          example: 0
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$7766a8c2180aa153f5526ba8868999f8
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and duration severity.
-          example: 30.0
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-        invoker_type:
-          description: Type of invoker that triggered the script evaluation.
-          example: user-callback
-          type: string
-        source_category:
-          description: Category of the script source.
-          example: third-party
-          nullable: true
-          type: string
-        source_function_name:
-          description: Name of the function that triggered the high script evaluation.
-          example: handleClick
-          type: string
-        source_url:
-          description: URL of the script that triggered the high script evaluation.
-          example: https://cdn.example.com/app.js
-          nullable: true
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - source_url
-        - source_function_name
-        - source_category
-        - invoker_type
-        - view_occurrences
-        - instance_count
-        - avg_duration
-        - avg_forced_style_layout
-        - impact_score
-      type: object
     AggregatedLongTasksByInvokerType:
       description: Aggregated long task statistics for a single invoker type.
       properties:
@@ -5056,71 +4980,6 @@ components:
         - type
         - attributes
       type: object
-    AggregatedLowCacheHitRate:
-      description: Aggregated low cache hit rate detection at view level.
-      properties:
-        avg_cache_hit_rate:
-          description: Average cache hit rate across affected views.
-          example: 0.15
-          format: double
-          type: number
-        avg_resource_download_size_bytes:
-          description: Average total download size of uncached resources in bytes.
-          example: 1048576
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$abc123
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 20.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 5
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_cache_hit_rate
-        - avg_resource_download_size_bytes
-        - impact_score
-      type: object
-    AggregatedMobileScrollFriction:
-      description: Aggregated mobile scroll friction detection at view level.
-      properties:
-        avg_scroll_frozen_frame_count:
-          description: Average number of frozen frames during scroll interactions.
-          example: 3
-          format: int32
-          maximum: 2147483647
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$ghi789
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 12.0
-          format: double
-          type: number
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 6
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_scroll_frozen_frame_count
-        - impact_score
-      type: object
     AggregatedResource:
       description: Aggregated performance statistics for a single network resource across sampled view instances.
       properties:
@@ -5318,310 +5177,6 @@ components:
         - avg_ssl_ms
         - avg_first_byte_ms
         - avg_download_ms
-      type: object
-    AggregatedSignalsProblemsRequest:
-      description: Request body for the aggregated signals and problems endpoint.
-      properties:
-        data:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestData"
-      required:
-        - data
-      type: object
-    AggregatedSignalsProblemsRequestAttributes:
-      description: Attributes for an aggregated signals and problems query.
-      properties:
-        application_id:
-          description: The RUM application ID to analyze.
-          example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-          type: string
-        criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
-        detection_types:
-          description: List of detection types to include in the response. When omitted, all types are returned.
-          example:
-            - high_script_evaluations
-            - uncompressed_resources
-          items:
-            type: string
-          type: array
-        filter:
-          description: RUM query string to filter events (for example, @session.type:user @geo.country:US).
-          example: "@session.type:user"
-          type: string
-        from:
-          description: Start of the time range as a Unix timestamp in seconds.
-          example: 1762437564
-          format: int64
-          type: integer
-        sample_size:
-          description: Number of view instances to sample, between 1 and 50.
-          example: 30
-          format: int32
-          maximum: 50
-          minimum: 1
-          type: integer
-        to:
-          description: End of the time range as a Unix timestamp in seconds.
-          example: 1762523964
-          format: int64
-          type: integer
-        view_name:
-          description: The RUM view name to analyze (for example, /account/login).
-          example: /account/login(/:type)
-          type: string
-      required:
-        - application_id
-        - view_name
-        - from
-        - to
-        - sample_size
-      type: object
-    AggregatedSignalsProblemsRequestData:
-      description: Data envelope for an aggregated signals and problems request.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestAttributes"
-        type:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestType"
-      required:
-        - type
-        - attributes
-      type: object
-    AggregatedSignalsProblemsRequestType:
-      description: The JSON:API type for aggregated signals and problems requests.
-      enum:
-        - aggregated_signals_problems
-      example: aggregated_signals_problems
-      type: string
-      x-enum-varnames:
-        - AGGREGATED_SIGNALS_PROBLEMS
-    AggregatedSignalsProblemsResponse:
-      description: Response body for the aggregated signals and problems endpoint.
-      properties:
-        data:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsResponseData"
-      required:
-        - data
-      type: object
-    AggregatedSignalsProblemsResponseAttributes:
-      description: Attributes of an aggregated signals and problems response.
-      properties:
-        application_id:
-          description: The RUM application ID that was analyzed.
-          example: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-          type: string
-        criteria:
-          $ref: "#/components/schemas/AggregatedWaterfallPerformanceCriteria"
-        from:
-          description: Start of the analyzed time range as a Unix timestamp in seconds.
-          example: 1710000000
-          format: int64
-          type: integer
-        problem_detections:
-          $ref: "#/components/schemas/SignalsProblemsDetections"
-        sample_metadata:
-          $ref: "#/components/schemas/SignalsProblemsSampleMetadata"
-        to:
-          description: End of the analyzed time range as a Unix timestamp in seconds.
-          example: 1710003600
-          format: int64
-          type: integer
-        view_name:
-          description: The RUM view name that was analyzed.
-          example: /checkout
-          type: string
-      required:
-        - view_name
-        - application_id
-        - from
-        - to
-        - sample_metadata
-        - problem_detections
-      type: object
-    AggregatedSignalsProblemsResponseData:
-      description: Data envelope for an aggregated signals and problems response.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsResponseAttributes"
-        id:
-          description: Hash-based unique identifier for this aggregation.
-          example: 2f0b3455
-          type: string
-        type:
-          $ref: "#/components/schemas/AggregatedSignalsProblemsRequestType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    AggregatedSlowFCPHighBytes:
-      description: Aggregated slow first contentful paint with high byte count detection.
-      properties:
-        avg_bytes_before_fcp_bytes:
-          description: Average total bytes loaded before first contentful paint.
-          example: 2097152
-          format: int64
-          type: integer
-        avg_first_contentful_paint_ms:
-          description: Average first contentful paint time in milliseconds.
-          example: 3500
-          format: int64
-          type: integer
-        avg_resource_count_before_fcp:
-          description: Average number of resources loaded before first contentful paint.
-          example: 25
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$def456
-          type: string
-        impact_score:
-          description: Impact score for this detection.
-          example: 18.0
-          format: double
-          type: number
-        platform:
-          description: Platform identifier for the affected views.
-          example: browser
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 4
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - view_occurrences
-        - avg_first_contentful_paint_ms
-        - avg_bytes_before_fcp_bytes
-        - avg_resource_count_before_fcp
-        - platform
-        - impact_score
-      type: object
-    AggregatedSlowInteractionLongTask:
-      description: Aggregated slow interaction with long task detection grouped by action and selector.
-      properties:
-        action_type:
-          description: Type of user interaction that triggered the slow response.
-          example: click
-          type: string
-        avg_blocking_duration:
-          description: Average long task blocking duration in nanoseconds.
-          example: 250000000
-          format: int64
-          type: integer
-        avg_duration:
-          description: Average total interaction duration in nanoseconds.
-          example: 320000000
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$jkl012
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and blocking severity.
-          example: 22.0
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 9
-          format: int32
-          maximum: 2147483647
-          type: integer
-        selector:
-          description: CSS selector of the element that was interacted with.
-          example: "#submit-button"
-          nullable: true
-          type: string
-        selector_normalized:
-          description: Normalized CSS selector with dynamic parts replaced.
-          example: button[data-action]
-          nullable: true
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 7
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - action_type
-        - selector
-        - selector_normalized
-        - view_occurrences
-        - instance_count
-        - avg_blocking_duration
-        - avg_duration
-        - impact_score
-      type: object
-    AggregatedUncompressedResource:
-      description: Aggregated uncompressed resource detection grouped by URL path.
-      properties:
-        avg_body_size:
-          description: Average uncompressed body size in bytes.
-          example: 524288
-          format: int64
-          type: integer
-        avg_duration:
-          description: Average resource loading duration in nanoseconds.
-          example: 0
-          format: int64
-          type: integer
-        fingerprint:
-          description: Unique fingerprint identifying this detection group.
-          example: v1$65e268e25cab3a1f6230405ccf011a68
-          type: string
-        impact_score:
-          description: Impact score combining view frequency and resource size.
-          example: 16.67
-          format: double
-          type: number
-        instance_count:
-          description: Total number of detection instances across sampled views.
-          example: 1
-          format: int32
-          maximum: 2147483647
-          type: integer
-        provider_type:
-          description: CDN or hosting provider type for the resource.
-          example: cloudfront
-          nullable: true
-          type: string
-        render_blocking:
-          description: Whether the resource is render-blocking.
-          example: blocking
-          nullable: true
-          type: string
-        resource_type:
-          description: Type of the resource (JS, CSS, image, fetch, and so on).
-          example: image
-          type: string
-        url_path_group:
-          description: Normalized URL path pattern for the uncompressed resource.
-          example: /cdn/hero.jpg
-          type: string
-        view_occurrences:
-          description: Number of sampled views where this detection occurred.
-          example: 1
-          format: int32
-          maximum: 2147483647
-          type: integer
-      required:
-        - fingerprint
-        - url_path_group
-        - resource_type
-        - render_blocking
-        - provider_type
-        - view_occurrences
-        - instance_count
-        - avg_body_size
-        - avg_duration
-        - impact_score
       type: object
     AggregatedWaterfallPerformanceCriteria:
       description: Performance criteria to filter view instances by a metric threshold.
@@ -11027,6 +10582,242 @@ components:
       type: string
       x-enum-varnames:
         - ARBITRARY_RULE_STATUS
+    ArchiveSearchCreateRehydration:
+      description: |-
+        Rehydration settings. Include this object to index the matched logs into a retained historical view.
+        Omit it to run an Archive Search that only scans the archive.
+      properties:
+        max_rehydrated_events:
+          description: |-
+            Maximum number of events to rehydrate. The organization's reindexing limit is configured
+            in millions, so this value is at least 1,000,000.
+          example: 1000000
+          format: int64
+          minimum: 1000000
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchCreateRequest:
+      description: Request to create an Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestData"
+      required:
+        - data
+      type: object
+    ArchiveSearchCreateRequestAttributes:
+      description: Attributes accepted when creating an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive to search. Use the Logs Archives API to list the archives of the organization.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        from:
+          description: Start of the time range to search, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchCreateRehydration"
+        to:
+          description: End of the time range to search, as an ISO 8601 timestamp. Must be after `from`.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+      type: object
+    ArchiveSearchCreateRequestData:
+      description: Archive Search object to create.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchCreateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - type
+        - attributes
+      type: object
+    ArchiveSearchRehydration:
+      description: |-
+        Rehydration settings of the Archive Search. Absent when the search only scans the archive
+        without indexing the results.
+      properties:
+        max_rehydrated_events:
+          description: Maximum number of events to rehydrate.
+          example: 1000000
+          format: int64
+          type: integer
+        retention_days:
+          description: Number of days the rehydrated logs are retained for.
+          example: 15
+          format: int64
+          type: integer
+        tier:
+          $ref: "#/components/schemas/ArchiveSearchRehydrationTier"
+      required:
+        - retention_days
+        - tier
+        - max_rehydrated_events
+      type: object
+    ArchiveSearchRehydrationTier:
+      description: Storage tier the matched logs are rehydrated into.
+      enum:
+        - standard
+        - flex
+      example: standard
+      type: string
+      x-enum-varnames:
+        - STANDARD
+        - FLEX
+    ArchiveSearchResponse:
+      description: Response containing a single Archive Search.
+      properties:
+        data:
+          $ref: "#/components/schemas/ArchiveSearchResponseData"
+      required:
+        - data
+      type: object
+    ArchiveSearchResponseAttributes:
+      description: Attributes of an Archive Search.
+      properties:
+        archive_id:
+          description: ID of the archive being searched.
+          example: mhmyYmyLTOaFYKvhNadu1w
+          type: string
+        bytes_scanned:
+          description: Number of bytes read from the archive at the end of the search.
+          example: 402764439
+          format: int64
+          type: integer
+        completed_at:
+          description: |-
+            Time the Archive Search finished, as an ISO 8601 timestamp.
+            Absent while the search is still running.
+          example: "2026-01-02T12:30:00Z"
+          format: date-time
+          type: string
+        created_at:
+          description: Time the Archive Search was created, as an ISO 8601 timestamp.
+          example: "2026-01-02T12:00:00Z"
+          format: date-time
+          type: string
+        description:
+          description: Free-text description of the Archive Search.
+          example: Investigating the checkout latency spike.
+          type: string
+        events_scanned:
+          description: Number of events read from the archive at the end of the search.
+          example: 1500
+          format: int64
+          type: integer
+        expected_duration:
+          description: Estimated time left before the Archive Search completes, in seconds.
+          example: 120
+          format: int64
+          type: integer
+        from:
+          description: Start of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-01T00:00:00Z"
+          format: date-time
+          type: string
+        name:
+          description: Name of the Archive Search.
+          example: checkout-latency-investigation
+          type: string
+        query:
+          description: Log search query used to filter the archived logs.
+          example: service:checkout status:error
+          type: string
+        rehydration:
+          $ref: "#/components/schemas/ArchiveSearchRehydration"
+        status:
+          $ref: "#/components/schemas/ArchiveSearchStatus"
+        to:
+          description: End of the searched time range, as an ISO 8601 timestamp.
+          example: "2026-01-02T00:00:00Z"
+          format: date-time
+          type: string
+      required:
+        - archive_id
+        - name
+        - query
+        - from
+        - to
+        - status
+        - created_at
+        - events_scanned
+        - bytes_scanned
+      type: object
+    ArchiveSearchResponseData:
+      description: Archive Search object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ArchiveSearchResponseAttributes"
+        id:
+          description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          type: string
+        type:
+          $ref: "#/components/schemas/ArchiveSearchType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ArchiveSearchStatus:
+      description: Current state of an Archive Search.
+      enum:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+      example: RUNNING
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+        - FAILED
+        - CANCELLED
+        - QUOTA_REACHED
+        - EXPIRED
+    ArchiveSearchType:
+      default: archive_search
+      description: Archive Search resource type.
+      enum:
+        - archive_search
+      example: archive_search
+      type: string
+      x-enum-varnames:
+        - ARCHIVE_SEARCH
     Argument:
       description: A named argument for a custom static analysis rule.
       properties:
@@ -13556,10 +13347,11 @@ components:
       description: The request body for deleting multiple rows from a reference table.
       properties:
         data:
-          description: List of row resources to delete from the reference table.
+          description: >-
+            List of row resources to delete from the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/TableRowResourceIdentifier"
-          maxItems: 200
+          maxItems: 45589
           type: array
       required:
         - data
@@ -13673,10 +13465,11 @@ components:
       description: The request body for creating or updating multiple rows into a reference table.
       properties:
         data:
-          description: List of row resources to create or update in the reference table.
+          description: >-
+            List of row resources to create or update in the reference table. The request payload can be up to 1 MiB.
           items:
             $ref: "#/components/schemas/BatchUpsertRowsRequestData"
-          maxItems: 200
+          maxItems: 20971
           type: array
       required:
         - data
@@ -21589,7 +21382,7 @@ components:
           example: "resource-id-123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21728,7 +21521,7 @@ components:
           example: false
           type: boolean
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -21778,7 +21571,7 @@ components:
           example: "resource_id_abc123"
           type: string
         resource_type:
-          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, or `schema_registry`.
+          description: The resource type of the Resource. Can be `kafka`, `connector`, `ksql`, `schema_registry`, or `flink`.
           example: kafka
           type: string
         tags:
@@ -26748,7 +26541,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -27005,10 +26799,12 @@ components:
         - type
       type: object
     CreateUploadRequestDataAttributes:
-      description: Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
+      description: >-
+        Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
+          description: >-
+            The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
           example:
             - "field_1"
             - "field_2"
@@ -27049,7 +26845,8 @@ components:
       x-enum-varnames:
         - UPLOAD
     CreateUploadResponse:
-      description: Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
+      description: >-
+        Information about the upload created containing the upload ID and pre-signed URLs to PUT chunks of the CSV file to.
       properties:
         data:
           $ref: "#/components/schemas/CreateUploadResponseData"
@@ -31834,6 +31631,10 @@ components:
         query:
           description: Query for creating a data deletion request.
           example: "service:xyz host:abc"
+          type: string
+        source:
+          description: The source of the deletion request.
+          example: "standard"
           type: string
         starting_at:
           description: Starting time of the process to delete the requested data.
@@ -37204,7 +37005,7 @@ components:
         - data
       type: object
     DueDateRuleDataCreate:
-      description: The data object for a due date rule create or update request.
+      description: The data object for a due date rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/DueDateRuleAttributesCreate"
@@ -37221,6 +37022,23 @@ components:
           $ref: "#/components/schemas/DueDateRuleAttributesResponse"
         id:
           description: The ID of the due date rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/DueDateRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DueDateRuleDataUpdate:
+      description: The data object for a due date rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DueDateRuleAttributesCreate"
+        id:
+          description: The ID of the due date rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -37251,7 +37069,15 @@ components:
         - id
       type: object
     DueDateRuleReorderRequest:
-      description: The body of the due date rule reorder request.
+      description: The body of a due date rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DueDateRuleReorderData"
+      required:
+        - data
+      type: object
+    DueDateRuleReorderResponse:
+      description: The response of a due date rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/DueDateRuleReorderData"
@@ -37278,7 +37104,7 @@ components:
       description: The body of a due date rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/DueDateRuleDataCreate"
+          $ref: "#/components/schemas/DueDateRuleDataUpdate"
       required:
         - data
       type: object
@@ -37980,6 +37806,13 @@ components:
       required:
         - revisions
       type: object
+    EntityContextEntityType:
+      default: siem_entity_identity
+      description: The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+      enum: [siem_entity_identity]
+      example: siem_entity_identity
+      type: string
+      x-enum-varnames: [SIEM_ENTITY_IDENTITY]
     EntityContextPage:
       description: Pagination metadata for the entity context response.
       properties:
@@ -38049,6 +37882,15 @@ components:
         email: user@example.com
         principal_id: user@example.com
       type: object
+    EntityContextRevisionsMode:
+      default: latest
+      description: |-
+        Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+        and `all` returns every revision in the requested time range.
+      enum: [latest, all]
+      example: latest
+      type: string
+      x-enum-varnames: [LATEST, ALL]
     EntityData:
       description: Entity data.
       properties:
@@ -46047,7 +45889,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/PersonalAccessTokenRelationships"
+          $ref: "#/components/schemas/FullPersonalAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/PersonalAccessTokensType"
       type: object
@@ -46090,6 +45932,12 @@ components:
             type: string
           type: array
       type: object
+    FullPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
     FullServiceAccessToken:
       description: Datadog access token, including the token key.
       properties:
@@ -46099,7 +45947,7 @@ components:
           description: ID of the access token.
           type: string
         relationships:
-          $ref: "#/components/schemas/ServiceAccessTokenRelationships"
+          $ref: "#/components/schemas/FullServiceAccessTokenRelationships"
         type:
           $ref: "#/components/schemas/ServiceAccessTokensType"
       type: object
@@ -46141,6 +45989,12 @@ components:
             description: Name of scope.
             type: string
           type: array
+      type: object
+    FullServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
     GCPCredentials:
       description: The definition of the `GCPCredentials` object.
@@ -46972,6 +46826,81 @@ components:
       required:
         - type
       type: object
+    GeneralInvestigationAttributes:
+      description: Attributes for a general investigation, not tied to a specific monitor alert.
+      oneOf:
+        - $ref: "#/components/schemas/GeneralInvestigationAttributesWithoutTimeBounds"
+        - $ref: "#/components/schemas/GeneralInvestigationAttributesWithTimeBounds"
+    GeneralInvestigationAttributesWithTimeBounds:
+      additionalProperties: false
+      description: Attributes for a general investigation with an explicit time window.
+      properties:
+        description:
+          description: A free-form description of what to investigate, up to 4,096 characters.
+          example: "Checkout latency has been elevated for the past hour."
+          maxLength: 4096
+          type: string
+        end_time:
+          description: The end of the investigation window, in Unix milliseconds.
+          example: 1700003600000
+          format: int64
+          type: integer
+        start_time:
+          description: The start of the investigation window, in Unix milliseconds.
+          example: 1700000000000
+          format: int64
+          type: integer
+        tags:
+          description: Tags that scope the investigation.
+          example:
+            - "service:checkout"
+          items:
+            type: string
+          type: array
+      required:
+        - description
+        - start_time
+        - end_time
+      type: object
+    GeneralInvestigationAttributesWithoutTimeBounds:
+      additionalProperties: false
+      description: Attributes for a general investigation without an explicit time window.
+      properties:
+        description:
+          description: A free-form description of what to investigate, up to 4,096 characters.
+          example: "Checkout latency has been elevated for the past hour."
+          maxLength: 4096
+          type: string
+        tags:
+          description: Tags that scope the investigation.
+          example:
+            - "service:checkout"
+          items:
+            type: string
+          type: array
+      required:
+        - description
+      type: object
+    GeneralInvestigationTrigger:
+      additionalProperties: false
+      description: A trigger created from a general investigation request.
+      properties:
+        general_investigation:
+          $ref: "#/components/schemas/GeneralInvestigationAttributes"
+        type:
+          $ref: "#/components/schemas/GeneralInvestigationTriggerType"
+      required:
+        - type
+        - general_investigation
+      type: object
+    GeneralInvestigationTriggerType:
+      description: The type of general investigation trigger.
+      enum:
+        - general_investigation
+      example: general_investigation
+      type: string
+      x-enum-varnames:
+        - GENERAL_INVESTIGATION
     GenerateCostTagDescriptionResponse:
       description: Response wrapping an AI-generated Cloud Cost Management tag key description.
       example:
@@ -65437,12 +65366,20 @@ components:
         - content
       type: object
     LLMObsPromptChatTemplate:
-      description: A chat prompt template.
+      description: >-
+        A chat prompt template containing messages and optional named message placeholders.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       items:
-        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
       minItems: 1
       type: array
       x-generate-alias-as-model: true
+    LLMObsPromptChatTemplateItem:
+      description: A chat message or a named message placeholder in a prompt template.
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptChatMessage"
+        - $ref: "#/components/schemas/LLMObsPromptMessagePlaceholder"
     LLMObsPromptConfig:
       additionalProperties: {}
       description: >-
@@ -65595,6 +65532,33 @@ components:
       required:
         - include
       type: object
+    LLMObsPromptMessagePlaceholder:
+      additionalProperties: false
+      description: >-
+        A named placeholder that inserts a list of messages when a compatible SDK formats the prompt.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
+      properties:
+        name:
+          description: Name used to supply the message list when formatting the prompt.
+          example: "history"
+          minLength: 1
+          pattern: "^[A-Za-z0-9_]+$"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptMessagePlaceholderType"
+      required:
+        - type
+        - name
+      type: object
+    LLMObsPromptMessagePlaceholderType:
+      description: Type of chat-template item.
+      enum:
+        - placeholder
+      example: "placeholder"
+      type: string
+      x-enum-varnames:
+        - PLACEHOLDER
     LLMObsPromptResponse:
       description: Response containing a single Agent Observability prompt.
       example:
@@ -65650,9 +65614,11 @@ components:
       properties:
         chat_template:
           description: >-
-            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+            Chat template for this prompt version, as a list of messages and named message placeholders. Omitted for text templates.
+
+            **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
           items:
-            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+            $ref: "#/components/schemas/LLMObsPromptChatTemplateItem"
           type: array
         config:
           $ref: "#/components/schemas/LLMObsPromptConfig"
@@ -65687,6 +65653,8 @@ components:
             chat_template:
               - content: "You are a helpful customer support assistant for {{company_name}}."
                 role: "system"
+              - name: "history"
+                type: "placeholder"
               - content: "Help {{customer_name}} with this question: {{question}}"
                 role: "user"
             config:
@@ -65705,11 +65673,13 @@ components:
       type: object
     LLMObsPromptTemplate:
       description: >-
-        A text template, a list of chat messages, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
+        A text template, a list of chat messages and named message placeholders, or an authored chat object. Text can include an exact prompt version with `{{>prompt-id version=N}}`; other text, including `{{>...}}` sequences without a version, remains literal. Use an authored chat object when including prompts as chat messages.
 
         **Preview**: Prompt composition is available in Preview. To request access, contact [Datadog Support](https://docs.datadoghq.com/help/) or your Customer Success Manager.
 
         Without access, inline references remain literal text and structured includes are unsupported. Previously compiled prompt versions remain available for execution.
+
+        **Preview:** Message placeholders are available in Preview. To request access, contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager.
       example: "You are a helpful assistant for {{audience}}."
       oneOf:
         - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
@@ -68058,6 +68028,8 @@ components:
           items:
             $ref: "#/components/schemas/AccessTokenListItem"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/PersonalAccessTokenResponseMeta"
       type: object
@@ -68145,8 +68117,8 @@ components:
             id: 102.130.113.9
             type: row
         links:
-          first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-          self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+          self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
         meta:
           page:
             next_continuation_token: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
@@ -68169,15 +68141,15 @@ components:
       properties:
         first:
           description: Link to the first page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
           type: string
         next:
           description: Link to the next page of results. Only present when more rows are available.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
         self:
           description: Link to the current page of results.
-          example: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+          example: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
           type: string
       required:
         - self
@@ -68193,7 +68165,8 @@ components:
       description: Contains the continuation token for navigating to the next page of rows.
       properties:
         next_continuation_token:
-          description: Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
+          description: >-
+            Opaque token to pass as the `page[continuation_token]` query parameter to fetch the next page of results. Only present when more rows are available.
           example: eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ==
           type: string
       type: object
@@ -68414,6 +68387,8 @@ components:
           items:
             $ref: "#/components/schemas/ServiceAccessToken"
           type: array
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
         meta:
           $ref: "#/components/schemas/ServiceAccessTokenResponseMeta"
       type: object
@@ -73332,6 +73307,18 @@ components:
         - key
         - value
       type: object
+    MonitorAlertTrigger:
+      additionalProperties: false
+      description: A trigger created from a monitor alert.
+      properties:
+        monitor_alert_trigger:
+          $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
+        type:
+          $ref: "#/components/schemas/MonitorAlertTriggerType"
+      required:
+        - type
+        - monitor_alert_trigger
+      type: object
     MonitorAlertTriggerAttributes:
       description: Attributes for a monitor alert trigger.
       properties:
@@ -73354,6 +73341,14 @@ components:
         - event_id
         - event_ts
       type: object
+    MonitorAlertTriggerType:
+      description: The type of monitor alert trigger.
+      enum:
+        - monitor_alert_trigger
+      example: monitor_alert_trigger
+      type: string
+      x-enum-varnames:
+        - MONITOR_ALERT_TRIGGER
     MonitorConfigPolicyAttributeCreateRequest:
       description: Policy and policy type for a monitor configuration policy.
       properties:
@@ -74482,7 +74477,7 @@ components:
         - data
       type: object
     MuteRuleDataCreate:
-      description: The data object for a mute rule create or update request.
+      description: The data object for a mute rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/MuteRuleAttributesCreate"
@@ -74499,6 +74494,23 @@ components:
           $ref: "#/components/schemas/MuteRuleAttributesResponse"
         id:
           description: The ID of the mute rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/MuteRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    MuteRuleDataUpdate:
+      description: The data object for a mute rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MuteRuleAttributesCreate"
+        id:
+          description: The ID of the mute rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -74529,7 +74541,15 @@ components:
         - id
       type: object
     MuteRuleReorderRequest:
-      description: The body of the mute rule reorder request.
+      description: The body of a mute rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/MuteRuleReorderData"
+      required:
+        - data
+      type: object
+    MuteRuleReorderResponse:
+      description: The response of a mute rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/MuteRuleReorderData"
@@ -74556,7 +74576,7 @@ components:
       description: The body of a mute rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/MuteRuleDataCreate"
+          $ref: "#/components/schemas/MuteRuleDataUpdate"
       required:
         - data
       type: object
@@ -77172,6 +77192,7 @@ components:
         - $ref: "#/components/schemas/ObservabilityPipelineThrottleProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAddMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineAggregateProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineRenameMetricTagsProcessor"
         - $ref: "#/components/schemas/ObservabilityPipelineTagCardinalityLimitProcessor"
@@ -79317,6 +79338,187 @@ components:
         - name
         - value
       type: object
+    ObservabilityPipelineMetricEnrichmentTableFile:
+      description: Defines a static enrichment table loaded from a CSV file for metric enrichment.
+      properties:
+        encoding:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableFileEncoding"
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileKey"
+        path:
+          description: Path to the CSV file.
+          example: /etc/enrichment/lookup.csv
+          type: string
+      required:
+        - encoding
+        - key
+        - path
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileKey:
+      description: Defines how to map a metric lookup value to a CSV column during enrichment table lookups.
+      properties:
+        column:
+          description: The CSV column name or index to match against the lookup value.
+          example: service
+          type: string
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - column
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableFileProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a static CSV file.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        file:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFile"
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - file
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableLookupSource:
+      description: |-
+        Specifies the source of the key value used for metric enrichment table lookups.
+        The lookup key can be either the metric name or a metric tag.
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookup"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookup"
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookup:
+      description: Uses the metric name as the lookup key for enrichment table matching.
+      properties:
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType"
+      required:
+        - type
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableMetricNameLookupType:
+      default: metric_name
+      description: The lookup source type. The value should always be `metric_name`.
+      enum: [metric_name]
+      example: metric_name
+      type: string
+      x-enum-varnames:
+        - METRIC_NAME
+    ObservabilityPipelineMetricEnrichmentTableProcessor:
+      description: |-
+        The `enrichment_table` processor enriches metrics with tags from a static CSV file or a Datadog reference table.
+        It looks up a row using the metric name or a metric tag value. It then adds each column of the matching row as a
+        metric tag, overwriting any existing tag with the same key. Exactly one of `file` or `reference_table` must be
+        configured.
+
+        **Supported pipeline types:** metrics
+      oneOf:
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableFileProcessor"
+        - $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor"
+      x-pipeline-types: [metrics]
+    ObservabilityPipelineMetricEnrichmentTableReferenceKey:
+      description: Defines the metric lookup value used as the reference-table row ID.
+      properties:
+        source:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableLookupSource"
+      required:
+        - source
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTable:
+      description: Uses a Datadog reference table to enrich metrics.
+      properties:
+        app_key_key:
+          description: |-
+            The name of the environment variable or secret that holds the Datadog application key used to access the
+            reference table.
+          example: DD_APP_KEY
+          type: string
+        columns:
+          description: |-
+            A list of column names to include from the reference table. If not provided, all columns are included.
+          items:
+            description: The name of a column to include from the reference table.
+            type: string
+          maxItems: 50
+          type: array
+        key:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceKey"
+        table_id:
+          description: The unique identifier of the reference table.
+          example: 550e8400-e29b-41d4-a716-446655440000
+          type: string
+      required:
+        - key
+        - table_id
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableReferenceTableProcessor:
+      description: An `enrichment_table` processor that enriches metrics using a Datadog reference table.
+      properties:
+        display_name:
+          $ref: "#/components/schemas/ObservabilityPipelineComponentDisplayName"
+        enabled:
+          description: Indicates whether the processor is enabled.
+          example: true
+          type: boolean
+        id:
+          description: |-
+            The unique identifier for this component. Used in other parts of the pipeline to reference this component
+            (for example, as the `input` to downstream components).
+          example: enrichment-table-processor
+          type: string
+        include:
+          description: A Datadog search query used to determine which metrics this processor targets.
+          example: "*"
+          type: string
+        reference_table:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableReferenceTable"
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineEnrichmentTableProcessorType"
+      required:
+        - id
+        - type
+        - include
+        - reference_table
+        - enabled
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookup:
+      description: Uses a metric tag as the lookup key for enrichment table matching.
+      properties:
+        name:
+          description: The Datadog tag key used as the lookup key.
+          example: service
+          maxLength: 200
+          type: string
+        type:
+          $ref: "#/components/schemas/ObservabilityPipelineMetricEnrichmentTableTagLookupType"
+      required:
+        - type
+        - name
+      type: object
+    ObservabilityPipelineMetricEnrichmentTableTagLookupType:
+      default: tag
+      description: The lookup source type. The value should always be `tag`.
+      enum: [tag]
+      example: tag
+      type: string
+      x-enum-varnames:
+        - TAG
     ObservabilityPipelineMetricTagsProcessor:
       description: |-
         The `metric_tags` processor filters metrics based on their tags using Datadog tag key patterns.
@@ -87035,7 +87237,8 @@ components:
         - $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataLocalFile"
     PatchTableRequestDataAttributesFileMetadataCloudStorage:
       additionalProperties: false
-      description: Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
+      description: >-
+        Cloud storage file metadata for patch requests. Allows partial updates of access_details and sync_enabled.
       properties:
         access_details:
           $ref: "#/components/schemas/PatchTableRequestDataAttributesFileMetadataOneOfAccessDetails"
@@ -87134,7 +87337,8 @@ components:
       x-oneOf-parent:
         - GcpDetail
     PatchTableRequestDataAttributesSchema:
-      description: Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
+      description: >-
+        Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
           description: The schema fields. Maximum of 200 columns.
@@ -87144,7 +87348,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
           example:
             - "field_1"
           items:
@@ -87156,7 +87361,8 @@ components:
         - primary_keys
       type: object
     PatchTableRequestDataAttributesSchemaFieldsItems:
-      description: A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
+      description: >-
+        A single field (column) in the reference table schema to be updated. Schema fields cannot be deleted or renamed.
       properties:
         name:
           description: The field name.
@@ -87356,6 +87562,8 @@ components:
     PersonalAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToUser"
       type: object
@@ -87364,6 +87572,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PersonalAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     PersonalAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -87420,6 +87630,14 @@ components:
       required:
         - data
       type: object
+    PersonalAccessTokensIncludeQueryParameterItem:
+      description: Relationship object that should be included in the response.
+      enum:
+        - leak_information
+      example: "leak_information"
+      type: string
+      x-enum-varnames:
+        - LEAK_INFORMATION
     PersonalAccessTokensSort:
       default: name
       description: Sorting options
@@ -87432,6 +87650,8 @@ components:
         - -expires_at
         - last_used_at
         - -last_used_at
+        - leaked
+        - -leaked
       type: string
       x-enum-varnames:
         - NAME_ASCENDING
@@ -87442,6 +87662,8 @@ components:
         - EXPIRES_AT_DESCENDING
         - LAST_USED_AT_ASCENDING
         - LAST_USED_AT_DESCENDING
+        - LEAKED_ASCENDING
+        - LEAKED_DESCENDING
     PersonalAccessTokensType:
       default: personal_access_tokens
       description: Personal access tokens resource type.
@@ -93121,7 +93343,7 @@ components:
           example: Checkout completed
           type: string
         feature_ids:
-          description: The list of feature IDs associated with the RUM operation.
+          description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
           type: array
@@ -93179,7 +93401,7 @@ components:
           example: Checkout completed
           type: string
         feature_ids:
-          description: The list of feature IDs associated with the RUM operation.
+          description: The list of journey IDs associated with the RUM operation.
           items:
             type: string
           type: array
@@ -93232,7 +93454,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkCreateRequest:
-      description: The request body for creating a RUM operation strong link.
+      description: The request body for creating a RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkCreateRequestData"
@@ -93240,19 +93462,19 @@ components:
         - data
       type: object
     RUMOperationStrongLinkCreateRequestAttributes:
-      description: Attributes for creating a RUM operation strong link.
+      description: Attributes for creating a RUM operation link.
       properties:
         application_id:
           description: The RUM application ID used when creating a stub operation from `operation_name`.
           format: uuid
           type: string
         description:
-          description: A description of the strong link.
+          description: A description of the link.
           nullable: true
           type: string
         feature_id:
-          description: The unique identifier of the feature to link.
-          example: "feature-123"
+          description: The unique identifier of the journey to link.
+          example: "journey-123"
           type: string
         operation_id:
           description: |-
@@ -93268,7 +93490,7 @@ components:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkStatus"
         tags:
-          description: A list of tags associated with the strong link.
+          description: A list of tags associated with the link.
           items:
             type: string
           type: array
@@ -93276,7 +93498,7 @@ components:
         - feature_id
       type: object
     RUMOperationStrongLinkCreateRequestData:
-      description: The data object for creating a RUM operation strong link.
+      description: The data object for creating a RUM operation link.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkCreateRequestAttributes"
@@ -93287,7 +93509,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkResponse:
-      description: The response for a single RUM operation strong link.
+      description: The response for a single RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkResponseData"
@@ -93295,20 +93517,20 @@ components:
         - data
       type: object
     RUMOperationStrongLinkResponseAttributes:
-      description: Attributes of a RUM operation strong link response.
+      description: Attributes of a RUM operation link response.
       properties:
         created_at:
-          description: The timestamp when the strong link was created.
+          description: The timestamp when the link was created.
           format: date-time
           readOnly: true
           type: string
         description:
-          description: A description of the strong link.
+          description: A description of the link.
           nullable: true
           type: string
         feature_id:
-          description: The unique identifier of the linked feature.
-          example: "feature-123"
+          description: The unique identifier of the linked journey.
+          example: "journey-123"
           readOnly: true
           type: string
         operation_id:
@@ -93319,12 +93541,12 @@ components:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkStatus"
         tags:
-          description: A list of tags associated with the strong link.
+          description: A list of tags associated with the link.
           items:
             type: string
           type: array
         updated_at:
-          description: The timestamp when the strong link was last updated.
+          description: The timestamp when the link was last updated.
           format: date-time
           nullable: true
           readOnly: true
@@ -93335,13 +93557,13 @@ components:
         - status
       type: object
     RUMOperationStrongLinkResponseData:
-      description: The data object in a RUM operation strong link response.
+      description: The data object in a RUM operation link response.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkResponseAttributes"
         id:
-          description: The unique identifier of the strong link, formatted as `<operation_id>:<feature_id>`.
-          example: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+          description: The unique identifier of the link, formatted as `<operation_id>:<feature_id>`.
+          example: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
           readOnly: true
           type: string
         type:
@@ -93352,7 +93574,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkStatus:
-      description: The status of a RUM operation strong link.
+      description: The status of a RUM operation link.
       enum:
         - DRAFT
         - CONFIRMED
@@ -93364,7 +93586,7 @@ components:
         - CONFIRMED
         - REJECTED
     RUMOperationStrongLinkType:
-      description: The JSON:API type for RUM operation strong link resources.
+      description: The JSON:API type for RUM operation link resources.
       enum:
         - strong_links
       example: strong_links
@@ -93372,7 +93594,7 @@ components:
       x-enum-varnames:
         - STRONG_LINKS
     RUMOperationStrongLinkUpdateRequest:
-      description: The request body for updating a RUM operation strong link.
+      description: The request body for updating a RUM operation link.
       properties:
         data:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateRequestData"
@@ -93380,7 +93602,7 @@ components:
         - data
       type: object
     RUMOperationStrongLinkUpdateRequestAttributes:
-      description: Attributes for updating a RUM operation strong link.
+      description: Attributes for updating a RUM operation link.
       properties:
         status:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateStatus"
@@ -93388,7 +93610,7 @@ components:
         - status
       type: object
     RUMOperationStrongLinkUpdateRequestData:
-      description: The data object for updating a RUM operation strong link.
+      description: The data object for updating a RUM operation link.
       properties:
         attributes:
           $ref: "#/components/schemas/RUMOperationStrongLinkUpdateRequestAttributes"
@@ -93399,7 +93621,7 @@ components:
         - attributes
       type: object
     RUMOperationStrongLinkUpdateStatus:
-      description: The status of a RUM operation strong link. Can only be set to `CONFIRMED` or `REJECTED`.
+      description: The status of a RUM operation link. Can only be set to `CONFIRMED` or `REJECTED`.
       enum:
         - CONFIRMED
         - REJECTED
@@ -93409,7 +93631,7 @@ components:
         - CONFIRMED
         - REJECTED
     RUMOperationStrongLinksListResponse:
-      description: The response for a list of RUM operation strong links.
+      description: The response for a list of RUM operation links.
       properties:
         data:
           items:
@@ -93421,7 +93643,7 @@ components:
         - data
       type: object
     RUMOperationStrongLinksListResponseMeta:
-      description: Metadata for a list of RUM operation strong links.
+      description: Metadata for a list of RUM operation links.
       properties:
         limit:
           description: The pagination limit.
@@ -93432,7 +93654,7 @@ components:
           format: int64
           type: integer
         total:
-          description: The total number of strong links matching the request.
+          description: The total number of links matching the request.
           format: int64
           type: integer
       type: object
@@ -93907,6 +94129,17 @@ components:
       x-enum-varnames:
         - ANY
         - ALL
+    RecentlyUpdatedEntitiesResponse:
+      description: Response from the recently updated entities endpoint, containing the entities with the most recent updates in the requested time range, ordered from most to least recently updated.
+      properties:
+        data:
+          description: The list of entities with the most recent updates, ordered from most to least recently updated.
+          items:
+            $ref: "#/components/schemas/EntityContextEntity"
+          type: array
+      required:
+        - data
+      type: object
     RecommendationAttributes:
       description: Attributes of the SPA Recommendation resource. Contains recommendations for both driver and executor components.
       properties:
@@ -93955,7 +94188,7 @@ components:
           attributes:
             scope: ccm
             sort:
-              - expression: potential_daily_savings.amount
+              - expression: "@potential_daily_savings"
                 order: DESC
           id: "@resource_table:aws_ec2_instance"
           type: recommendations_filter
@@ -93974,8 +94207,9 @@ components:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataAttributes"
         id:
           description: |-
-            Filter expression applied to the recommendations. The server treats an omitted ID as `*`
-            and returns all recommendations.
+            Filter expression applied to the recommendations when `attributes.filter` is omitted.
+            When supplied, `attributes.filter` overrides this value, including when empty. If the
+            resulting filter is empty, it defaults to `*`. Scope, view, and pagination still apply.
           type: string
         type:
           $ref: "#/components/schemas/RecommendationsFilterRequestDataType"
@@ -93985,6 +94219,13 @@ components:
     RecommendationsFilterRequestDataAttributes:
       description: Attributes used to filter and sort cost recommendations.
       properties:
+        filter:
+          description: |-
+            Filter expression applied to the recommendations. When supplied, this attribute overrides
+            `data.id`, including when empty. When omitted, `data.id` is used. If the resulting filter
+            is empty, it defaults to `*`. Scope, view, and pagination still apply.
+          example: "@resource_table:aws_ec2_instance"
+          type: string
         scope:
           $ref: "#/components/schemas/RecommendationsFilterRequestScope"
         sort:
@@ -94020,7 +94261,7 @@ components:
       description: A single sort clause applied to the cost recommendations result set.
       properties:
         expression:
-          description: Field to sort by (for example, `potential_daily_savings.amount`).
+          description: Field to sort by (for example, `@potential_daily_savings`).
           type: string
         order:
           description: Sort direction, either `ASC` or `DESC`.
@@ -94052,7 +94293,8 @@ components:
           type: string
       type: object
     ReferenceTableCreateSourceType:
-      description: The source type for creating reference table data. Only these source types can be created through this API.
+      description: >-
+        The source type for creating reference table data. Only these source types can be created through this API.
       enum:
         - LOCAL_FILE
         - S3
@@ -94077,7 +94319,8 @@ components:
         - INT32
     ReferenceTableSortType:
       default: "-updated_at"
-      description: Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
+      description: >-
+        Sort field and direction for reference tables. Use field name for ascending, prefix with "-" for descending.
       enum:
         - updated_at
         - table_name
@@ -94094,7 +94337,8 @@ components:
         - MINUS_TABLE_NAME
         - MINUS_STATUS
     ReferenceTableSourceType:
-      description: The source type for reference table data. Includes all possible source types that can appear in responses.
+      description: >-
+        The source type for reference table data. Includes all possible source types that can appear in responses.
       enum:
         - LOCAL_FILE
         - S3
@@ -94507,6 +94751,28 @@ components:
           type: array
       required:
         - data
+      type: object
+    RelationshipToLeakedKey:
+      description: Relationship to the leak the access token was found in. `data` is null when the access token has not been detected as leaked.
+      properties:
+        data:
+          $ref: "#/components/schemas/RelationshipToLeakedKeyData"
+      required:
+        - data
+      type: object
+    RelationshipToLeakedKeyData:
+      description: Relationship to the leak the access token was found in.
+      nullable: true
+      properties:
+        id:
+          description: A unique identifier that represents the leak.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/LeakedKeyType"
+      required:
+        - id
+        - type
       type: object
     RelationshipToOrganization:
       description: Relationship to an organization.
@@ -96647,6 +96913,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -96778,6 +97050,12 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_permissions_opt_out:
+          description: |-
+            Whether to exclude restricted default permissions from this role.
+            Restricted default permissions are automatically assigned to every role by default. Set this field to `true` to exclude them.
+            Some of these permissions can only be excluded after Minimal Access Roles is enabled for the organization.
+          type: boolean
         modified_at:
           description: Time of last role modification.
           format: date-time
@@ -103565,7 +103843,7 @@ components:
         severity:
           $ref: "#/components/schemas/SecurityEntityRiskScoreAttributesSeverity"
         signalsDetected:
-          description: Number of security signals detected for this entity.
+          description: Number of risk-contributing security signals detected for this entity.
           example: 15
           format: int64
           type: integer
@@ -109837,6 +110115,8 @@ components:
     ServiceAccessTokenRelationships:
       description: Resources related to the access token.
       properties:
+        leak_information:
+          $ref: "#/components/schemas/RelationshipToLeakedKey"
         owned_by:
           $ref: "#/components/schemas/RelationshipToServiceAccount"
       type: object
@@ -109845,6 +110125,8 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/ServiceAccessToken"
+        included:
+          $ref: "#/components/schemas/AccessTokenResponseIncludedArray"
       type: object
     ServiceAccessTokenResponseMeta:
       description: Additional information related to the access token response.
@@ -111789,7 +112071,7 @@ components:
         - data
       type: object
     SeverityModifierRuleDataCreate:
-      description: The data object for a severity modifier rule create or update request.
+      description: The data object for a severity modifier rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
@@ -111806,6 +112088,23 @@ components:
           $ref: "#/components/schemas/SeverityModifierRuleAttributesResponse"
         id:
           description: The ID of the severity modifier rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/SeverityModifierRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    SeverityModifierRuleDataUpdate:
+      description: The data object for a severity modifier rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SeverityModifierRuleAttributesCreate"
+        id:
+          description: The ID of the severity modifier rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -111919,7 +112218,7 @@ components:
       description: The body of a severity modifier rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/SeverityModifierRuleDataCreate"
+          $ref: "#/components/schemas/SeverityModifierRuleDataUpdate"
       required:
         - data
       type: object
@@ -112469,85 +112768,6 @@ components:
       example:
         display_name: Test User
         principal_id: user@example.com
-      type: object
-    SignalsProblemsDetections:
-      description: Grouped detection results by detection type.
-      properties:
-        high_frozen_frame_rates:
-          description: Detected high frozen frame rate issues.
-          items:
-            $ref: "#/components/schemas/AggregatedHighFrozenFrameRate"
-          type: array
-        high_script_evaluations:
-          description: Detected high script evaluation issues.
-          items:
-            $ref: "#/components/schemas/AggregatedHighScriptEval"
-          type: array
-        low_cache_hit_rates:
-          description: Detected low cache hit rate issues.
-          items:
-            $ref: "#/components/schemas/AggregatedLowCacheHitRate"
-          type: array
-        mobile_scroll_frictions:
-          description: Detected mobile scroll friction issues.
-          items:
-            $ref: "#/components/schemas/AggregatedMobileScrollFriction"
-          type: array
-        slow_fcp_high_bytes:
-          description: Detected slow first contentful paint with high byte count issues.
-          items:
-            $ref: "#/components/schemas/AggregatedSlowFCPHighBytes"
-          type: array
-        slow_interaction_long_tasks:
-          description: Detected slow interaction with long task issues.
-          items:
-            $ref: "#/components/schemas/AggregatedSlowInteractionLongTask"
-          type: array
-        uncompressed_resources:
-          description: Detected uncompressed resource issues.
-          items:
-            $ref: "#/components/schemas/AggregatedUncompressedResource"
-          type: array
-      type: object
-    SignalsProblemsSampleMetadata:
-      description: Metadata about the sampling quality for a signals and problems query.
-      properties:
-        failed:
-          description: Number of view instances that failed to process.
-          example: 2
-          format: int32
-          maximum: 2147483647
-          type: integer
-        requested:
-          description: Number of view instances requested for sampling.
-          example: 30
-          format: int32
-          maximum: 2147483647
-          type: integer
-        sampled_view_ids:
-          description: List of RUM view IDs that were sampled.
-          example:
-            - 6fbf69b6-9455-436a-b894-a6bf64126d40
-          items:
-            type: string
-          type: array
-        succeeded:
-          description: Number of view instances successfully processed.
-          example: 28
-          format: int32
-          maximum: 2147483647
-          type: integer
-        success_rate:
-          description: Ratio of successfully processed views to requested views.
-          example: 0.93
-          format: double
-          type: number
-      required:
-        - requested
-        - succeeded
-        - failed
-        - success_rate
-        - sampled_view_ids
       type: object
     SimpleMonitorUserTemplate:
       description: A simplified version of a monitor user template.
@@ -120788,7 +121008,8 @@ components:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataOneOfAccessDetails"
           description: Cloud storage access configuration. Only present for cloud storage sources (S3, GCS, Azure).
         error_message:
-          description: The error message returned from the last operation (sync for cloud storage, upload for local file).
+          description: >-
+            The error message returned from the last operation (sync for cloud storage, upload for local file).
           type: string
         error_row_count:
           description: The number of rows that failed to process.
@@ -120796,14 +121017,17 @@ components:
           type: integer
         error_type:
           $ref: "#/components/schemas/TableResultV2DataAttributesFileMetadataCloudStorageErrorType"
-          description: The type of error that occurred during file processing. Only applicable for cloud storage sources.
+          description: >-
+            The type of error that occurred during file processing. Only applicable for cloud storage sources.
         sync_enabled:
-          description: Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
+          description: >-
+            Whether this table is synced automatically from cloud storage. Only applicable for cloud storage sources.
           type: boolean
       title: FileMetadataV2
       type: object
     TableResultV2DataAttributesFileMetadataCloudStorageErrorType:
-      description: The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
+      description: >-
+        The type of error that occurred during file processing. This field provides high-level error categories for easier troubleshooting and is only present when there are errors.
       enum:
         - TABLE_SCHEMA_ERROR
         - FILE_FORMAT_ERROR
@@ -120912,7 +121136,8 @@ components:
           minItems: 1
           type: array
         primary_keys:
-          description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
+          description: >-
+            List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
           example:
             - "field_1"
           items:
@@ -120946,15 +121171,43 @@ components:
       x-enum-varnames:
         - REFERENCE_TABLE
     TableRowResourceArray:
-      description: List of rows from a reference table query.
+      description: List of rows from a reference table query, along with metadata about rows that were requested but not found.
       properties:
         data:
           description: The rows.
           items:
             $ref: "#/components/schemas/TableRowResourceData"
           type: array
+        meta:
+          $ref: "#/components/schemas/TableRowResourceArrayMeta"
       required:
         - data
+      type: object
+    TableRowResourceArrayMeta:
+      description: Metadata about the rows requested, including which ones were not found.
+      properties:
+        found_count:
+          description: Number of requested rows that were found and returned in `data`.
+          example: 1
+          format: int64
+          type: integer
+        not_found:
+          description: Row IDs from the request that do not exist in the reference table. Empty when every requested row was found.
+          example:
+            - row_id_2
+          items:
+            description: Row identifier, corresponding to the primary key value.
+            type: string
+          type: array
+        requested_count:
+          description: Number of row IDs supplied in the `row_id` query parameter.
+          example: 2
+          format: int64
+          type: integer
+      required:
+        - requested_count
+        - found_count
+        - not_found
       type: object
     TableRowResourceData:
       additionalProperties: false
@@ -122486,6 +122739,8 @@ components:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesMsTeams"
         pagerduty:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesPagerduty"
+        servicenow:
+          $ref: "#/components/schemas/TeamNotificationRuleAttributesServiceNow"
         slack:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesSlack"
       type: object
@@ -122495,6 +122750,10 @@ components:
         enabled:
           description: Flag indicating email notification
           type: boolean
+        recipient_email:
+          description: >-
+            Email address to notify. When omitted and email notifications are enabled, notifications are sent to all team members.
+          type: string
       type: object
     TeamNotificationRuleAttributesMsTeams:
       description: MS Teams notification settings for the team
@@ -122509,6 +122768,15 @@ components:
         service_name:
           description: Service name for PagerDuty
           type: string
+      type: object
+    TeamNotificationRuleAttributesServiceNow:
+      description: ServiceNow notification settings for the team.
+      properties:
+        templates:
+          description: ServiceNow template handle names to use for notifications.
+          items:
+            type: string
+          type: array
       type: object
     TeamNotificationRuleAttributesSlack:
       description: Slack notification settings for the team
@@ -124993,7 +125261,7 @@ components:
         - data
       type: object
     TicketCreationRuleDataCreate:
-      description: The data object for a ticket creation rule create or update request.
+      description: The data object for a ticket creation rule create request.
       properties:
         attributes:
           $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
@@ -125010,6 +125278,23 @@ components:
           $ref: "#/components/schemas/TicketCreationRuleAttributesResponse"
         id:
           description: The ID of the ticket creation rule.
+          example: "00000000-0000-0000-0000-000000000000"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/TicketCreationRuleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    TicketCreationRuleDataUpdate:
+      description: The data object for a ticket creation rule update request. The `id` must match the `rule_id` path parameter.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/TicketCreationRuleAttributesCreate"
+        id:
+          description: The ID of the ticket creation rule to update.
           example: "00000000-0000-0000-0000-000000000000"
           format: uuid
           type: string
@@ -125040,7 +125325,15 @@ components:
         - id
       type: object
     TicketCreationRuleReorderRequest:
-      description: The body of the ticket creation rule reorder request.
+      description: The body of a ticket creation rule reorder request.
+      properties:
+        data:
+          $ref: "#/components/schemas/TicketCreationRuleReorderData"
+      required:
+        - data
+      type: object
+    TicketCreationRuleReorderResponse:
+      description: The response of a ticket creation rule reorder request.
       properties:
         data:
           $ref: "#/components/schemas/TicketCreationRuleReorderData"
@@ -125067,7 +125360,7 @@ components:
       description: The body of a ticket creation rule update request.
       properties:
         data:
-          $ref: "#/components/schemas/TicketCreationRuleDataCreate"
+          $ref: "#/components/schemas/TicketCreationRuleDataUpdate"
       required:
         - data
       type: object
@@ -126191,15 +126484,23 @@ components:
         - $ref: "#/components/schemas/SoftwareCatalogTriggerWrapper"
         - $ref: "#/components/schemas/WorkflowTriggerWrapper"
     TriggerAttributes:
+      anyOf:
+        - $ref: "#/components/schemas/MonitorAlertTrigger"
+        - $ref: "#/components/schemas/GeneralInvestigationTrigger"
       description: The trigger definition for starting an investigation.
+      example:
+        monitor_alert_trigger:
+          event_id: "1234567890123456789"
+          event_ts: 1700000000000
+          monitor_id: 12345678
+        type: monitor_alert_trigger
       properties:
+        general_investigation:
+          $ref: "#/components/schemas/GeneralInvestigationAttributes"
         monitor_alert_trigger:
           $ref: "#/components/schemas/MonitorAlertTriggerAttributes"
         type:
           $ref: "#/components/schemas/TriggerType"
-      required:
-        - type
-        - monitor_alert_trigger
       type: object
     TriggerInvestigationRequest:
       description: Request to trigger a new investigation.
@@ -126305,10 +126606,12 @@ components:
       description: The type of trigger for the investigation.
       enum:
         - monitor_alert_trigger
+        - general_investigation
       example: monitor_alert_trigger
       type: string
       x-enum-varnames:
         - MONITOR_ALERT_TRIGGER
+        - GENERAL_INVESTIGATION
     TriggerWorkflowAutomationAction:
       description: "Triggers a Workflow Automation."
       properties:
@@ -128732,6 +129035,68 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/WorkflowDataUpdate"
+      type: object
+    UpdatedPersonalAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PersonalAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedPersonalAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/PersonalAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedPersonalAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
+    UpdatedPersonalAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedPersonalAccessToken"
+      required:
+        - data
+      type: object
+    UpdatedServiceAccessToken:
+      description: Datadog access token returned by the update endpoint.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ServiceAccessTokenAttributes"
+        id:
+          description: ID of the access token.
+          example: "00000000-0000-1234-0000-000000000000"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/UpdatedServiceAccessTokenRelationships"
+        type:
+          $ref: "#/components/schemas/ServiceAccessTokensType"
+      required:
+        - id
+        - type
+      type: object
+    UpdatedServiceAccessTokenRelationships:
+      description: Resources related to the access token.
+      properties:
+        owned_by:
+          $ref: "#/components/schemas/RelationshipToServiceAccount"
+      type: object
+    UpdatedServiceAccessTokenResponse:
+      description: Response for updating an access token.
+      properties:
+        data:
+          $ref: "#/components/schemas/UpdatedServiceAccessToken"
+      required:
+        - data
       type: object
     UpsertAllocationRequest:
       description: Request to create or update a targeting rule (allocation) for a feature flag environment.
@@ -139075,7 +139440,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Trigger a new Bits AI investigation based on a monitor alert.
+        Trigger a Bits AI investigation from a monitor alert or a general investigation.
         The `monitors_read` permission is required when the trigger type is `monitor_alert_trigger`.
       operationId: TriggerInvestigation
       requestBody:
@@ -139092,6 +139457,17 @@ paths:
                           event_ts: 1700000000000
                           monitor_id: 12345678
                         type: monitor_alert_trigger
+                    type: trigger_investigation_request
+              general_investigation:
+                value:
+                  data:
+                    attributes:
+                      trigger:
+                        general_investigation:
+                          description: "Checkout latency has been elevated for the past hour."
+                          tags:
+                            - "service:checkout"
+                        type: general_investigation
                     type: trigger_investigation_request
             schema:
               $ref: "#/components/schemas/TriggerInvestigationRequest"
@@ -149083,7 +149459,7 @@ paths:
                     attributes:
                       scope: ccm
                       sort:
-                        - expression: potential_daily_savings.amount
+                        - expression: "@potential_daily_savings"
                           order: DESC
                     id: "@resource_table:aws_ec2_instance"
                     type: recommendations_filter
@@ -153438,6 +153814,13 @@ paths:
         Submit a DDSQL statement and return either a `running` state with an opaque `query_id`
         for the client to poll, or a `completed` state with the column-major result set inlined
         when the query finishes quickly enough to be served synchronously.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        A query that does not read a data source, such as `SELECT 1`, requires no additional
+        data-source permissions. Queries that read data sources also require the user or
+        service account that owns the application key to have the corresponding data access
+        permissions through their roles. The `timeseries_query` permission does not grant
+        access to the underlying data sources.
       operationId: ExecuteDdsqlTabularQuery
       requestBody:
         content:
@@ -153540,10 +153923,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Execute a tabular DDSQL query
       tags:
         - DDSQL
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/ddsql/query/tabular/fetch:
     post:
       description: |-
@@ -153551,6 +153943,11 @@ paths:
         by a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that
         returned `state: running`) and the server returns either a `running` state to poll again
         or a `completed` state with the column-major result set inlined.
+
+        For a scoped application key, include `timeseries_query` in its scopes.
+        Fetch results as the same user and organization that submitted the query.
+        The user or service account that owns the application key must have the data access
+        permissions required by the queried data sources through their roles.
       operationId: FetchDdsqlTabularQuery
       requestBody:
         content:
@@ -153649,10 +154046,19 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Internal Server Error
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - timeseries_query
       summary: Fetch the result of a DDSQL query
       tags:
         - DDSQL
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - timeseries_query
   /api/v2/deletion/data/{product}:
     post:
       description: Creates a data deletion request by providing a query and a timeframe targeting the proper data.
@@ -153697,6 +154103,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: pending
                         to_time: 1704063600000
@@ -153802,6 +154209,7 @@ paths:
                           org_id: 123
                           product: logs
                           query: "service:xyz host:abc"
+                          source: standard
                           starting_at: "2024-01-01T02:00:00.000000Z"
                           status: pending
                           to_time: 1704063600000
@@ -153862,6 +154270,7 @@ paths:
                         org_id: 123
                         product: logs
                         query: "service:xyz host:abc"
+                        source: standard
                         starting_at: "2024-01-01T02:00:00.000000Z"
                         status: canceled
                         to_time: 1704063600000
@@ -181910,6 +182319,158 @@ paths:
         operator: OR
         permissions:
           - logs_read_data
+  /api/v2/logs/archive_searches:
+    post:
+      description: |-
+        Start a search over the logs stored in an archive.
+
+        Without a `rehydration` object, the search only scans the archive and reports how much data
+        matched. With one, the matched logs are also indexed into a retained historical view, which
+        requires the `logs_write_historical_view` permission.
+      operationId: CreateArchiveSearch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ArchiveSearchCreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 0
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 0
+                        expected_duration: 120
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        status: RUNNING
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Create an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_write_historical_view
+          - logs_write_archive_search
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/logs/archive_searches/{archive_search_id}:
+    get:
+      description: Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.
+      operationId: GetArchiveSearch
+      parameters:
+        - description: Unique identifier of the Archive Search.
+          example: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+          in: path
+          name: archive_search_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        archive_id: mhmyYmyLTOaFYKvhNadu1w
+                        bytes_scanned: 402764439
+                        completed_at: "2026-01-02T12:30:00Z"
+                        created_at: "2026-01-02T12:00:00Z"
+                        description: Investigating the checkout latency spike.
+                        events_scanned: 1500
+                        from: "2026-01-01T00:00:00Z"
+                        name: checkout-latency-investigation
+                        query: service:checkout status:error
+                        rehydration:
+                          max_rehydrated_events: 1000000
+                          retention_days: 15
+                          tier: standard
+                        status: COMPLETED
+                        to: "2026-01-02T00:00:00Z"
+                      id: nv2eu4srgyzdkulggjzg2zkmmzifa2rum5iq
+                      type: archive_search
+              schema:
+                $ref: "#/components/schemas/ArchiveSearchResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get an Archive Search
+      tags:
+        - Logs Archive Searches
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - logs_read_data
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/logs/config/archive-order:
     get:
       description: |-
@@ -191593,6 +192154,18 @@ paths:
         the authenticated org or the request is rejected. Successful calls disable the org
         and return the resulting state from the downstream service. Requires the
         `org_management` permission.
+
+        **Limitations**:
+
+        - **Organization age**: Only organizations created within the last 10 days can be disabled
+          through this endpoint. This restriction is a safeguard against accidentally disabling
+          long-running organizations. Attempting to disable an older organization returns a `403 Forbidden`.
+        - **Feature flag**: The feature flag `org_disable_self_service_enabled` must be enabled for the
+          target organization or one of its ancestor organizations. Contact
+          [Datadog support](https://docs.datadoghq.com/help/) to enable this for your organization.
+          Requests for organizations without this flag return a `403 Forbidden`.
+        - **Already-disabled organizations**: If the target organization is already disabled, the request
+          returns a `409 Conflict`.
       operationId: DisableCustomerOrg
       requestBody:
         content:
@@ -191641,6 +192214,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -194173,6 +194752,8 @@ paths:
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterOwnerIDParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194320,6 +194901,7 @@ paths:
       operationId: GetPersonalAccessToken
       parameters:
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -194403,7 +194985,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000004
                       type: personal_access_tokens
               schema:
-                $ref: "#/components/schemas/PersonalAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedPersonalAccessTokenResponse"
           description: OK
         "400":
           content:
@@ -197200,7 +197782,8 @@ paths:
           - timeseries_query
   /api/v2/reference-tables/queries/batch-rows:
     post:
-      description: Batch query reference table rows by their primary key values.  Returns only found rows in the included array.
+      description: >-
+        Batch query reference table rows by their primary key values. Returns only found rows in the included array.
       operationId: BatchRowsQuery
       requestBody:
         content:
@@ -197247,7 +197830,8 @@ paths:
                       type: reference-tables-batch-rows-query
               schema:
                 $ref: "#/components/schemas/BatchRowsQueryResponse"
-          description: Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
+          description: >-
+            Successfully retrieved rows. Some or all requested rows were found. Response includes found rows in the included section.
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "403":
@@ -197296,7 +197880,8 @@ paths:
             format: int64
             minimum: 0
             type: integer
-        - description: Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
+        - description: >-
+            Sort field and direction for the list of reference tables. Use field name for ascending, prefix with "-" for descending.
           example: "-updated_at"
           in: query
           name: sort
@@ -197711,6 +198296,11 @@ paths:
                             name: Example Row
                         id: row_id_1
                         type: row
+                    meta:
+                      found_count: 1
+                      not_found:
+                        - row_id_2
+                      requested_count: 2
               schema:
                 $ref: "#/components/schemas/TableRowResourceArray"
           description: Some or all requested rows were found.
@@ -197802,7 +198392,8 @@ paths:
       x-menu-order: 8
   /api/v2/reference-tables/tables/{id}/rows/list:
     get:
-      description: List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
+      description: >-
+        List all rows in a reference table using cursor-based pagination. Pass the `page[continuation_token]` from the previous response to fetch the next page on the same consistent snapshot. Returns 400 for tables with more than 10,000,000 rows.
       operationId: ListReferenceTableRows
       parameters:
         - description: Unique identifier of the reference table to list rows from.
@@ -197823,7 +198414,8 @@ paths:
             maximum: 1000
             minimum: 1
             type: integer
-        - description: Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
+        - description: >-
+            Opaque cursor from the previous response's next link. Pass this to retrieve the next page on the same consistent snapshot.
           example: "eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ=="
           in: query
           name: page[continuation_token]
@@ -197846,9 +198438,9 @@ paths:
                         id: 102.130.113.9
                         type: row
                     links:
-                      first: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Blimit%5D=100"
-                      next: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjY5NzA0ODkwNDE4ODA3MTAzOTgsInBrIjoiMTAyLjEzMC4xMjcuMTE3In0%3D&page%5Blimit%5D=100"
-                      self: "/api/v2/reference-tables/tables/00000000-0000-0000-0000-000000000000/rows/list?page%5Bcontinuation_token%5D=eyJzaWQiOjEyMzQ1LCJwayI6ImV4YW1wbGVfcGsifQ%3D%3D&page%5Blimit%5D=100"
+                      first: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[limit]=100"
+                      next: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<NEXT_CONTINUATION_TOKEN>"
+                      self: "/api/v2/reference-tables/tables/<TABLE_ID>/rows/list?page[continuation_token]=<CONTINUATION_TOKEN>"
               schema:
                 $ref: "#/components/schemas/ListRowsResponse"
           description: OK
@@ -200591,18 +201183,9 @@ paths:
       description: |-
         Create a new role for your organization.
 
-        The following read permissions are automatically added to every new role, even if they are not included in the request:
-
-        - Dashboards Read
-        - Notebooks Read
-        - Monitors Read
-        - APM Read
-        - Vulnerability Management Read
-        - RUM Apps Read
-        - Incidents Read
-        - SLOs Read
-        - CI Visibility Read
-        - CD Visibility Read
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: CreateRole
       requestBody:
         content:
@@ -200771,6 +201354,10 @@ paths:
     patch:
       description: |-
         Edit a role. Can only be used with application keys belonging to administrators.
+
+        [Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),
+        such as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from
+        the request. To exclude them, set `default_permissions_opt_out` to `true`.
       operationId: UpdateRole
       parameters:
         - $ref: "#/components/parameters/RoleID"
@@ -203338,7 +203925,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -203412,7 +203999,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -203457,7 +204044,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/operations/search:
     get:
-      description: Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.
+      description: |-
+        Search RUM operations for your organization. Supports filtering by query, creator, team,
+        journey, and application.
       operationId: ListRUMOperations
       parameters:
         - description: A search query to filter operations by name.
@@ -203500,7 +204089,7 @@ paths:
           schema:
             example: "frontend,checkout"
             type: string
-        - description: Filter operations by feature ID. Accepts a comma-separated list of feature IDs.
+        - description: Filter operations by journey ID. Accepts a comma-separated list of journey IDs.
           in: query
           name: feature_id
           required: false
@@ -203534,7 +204123,7 @@ paths:
                           description: "Tracks users completing the checkout flow."
                           display_name: Checkout completed
                           feature_ids:
-                            - "feature-123"
+                            - "journey-123"
                           journey_rum:
                             rum_steps:
                               - nodes:
@@ -203584,18 +204173,18 @@ paths:
   /api/v2/rum/operations/strong_links:
     get:
       description: |-
-        List strong links between RUM operations and features. A strong link confirms that a feature
-        belongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;
+        List links between RUM operations and journeys. A link confirms that a journey
+        belongs to an operation. Provide `operation_id`, `feature_id` (journey ID), or both to filter results;
         at least one is required.
       operationId: ListRUMOperationStrongLinks
       parameters:
-        - description: Filter strong links by RUM operation ID.
+        - description: Filter links by RUM operation ID.
           in: query
           name: operation_id
           required: false
           schema:
             type: string
-        - description: Filter strong links by feature ID.
+        - description: Filter links by journey (feature) ID.
           in: query
           name: feature_id
           required: false
@@ -203630,14 +204219,14 @@ paths:
                     data:
                       - attributes:
                           created_at: "2024-01-15T10:30:00Z"
-                          description: "Confirmed link between checkout_completed and feature-123."
-                          feature_id: "feature-123"
+                          description: "Confirmed link between checkout_completed and journey-123."
+                          feature_id: "journey-123"
                           operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                           status: CONFIRMED
                           tags:
                             - "team:checkout"
                           updated_at:
-                        id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                        id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                         type: strong_links
                     meta:
                       limit: 50
@@ -203654,13 +204243,13 @@ paths:
           description: Bad Request
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List RUM operation strong links
+      summary: List RUM operation links
       tags:
         - RUM Operations
       x-menu-order: 7
     post:
       description: |-
-        Create a strong link between a RUM operation and a feature, confirming that the feature
+        Create a link between a RUM operation and a journey, confirming that the journey
         belongs to the operation. The operation can be identified by `operation_id` or `operation_name`;
         if `operation_name` does not match an existing operation, a stub operation is created.
       operationId: CreateRUMOperationStrongLink
@@ -203680,14 +204269,14 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
-                        description: "Confirmed link between checkout_completed and feature-123."
-                        feature_id: "feature-123"
+                        description: "Confirmed link between checkout_completed and journey-123."
+                        feature_id: "journey-123"
                         operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                         status: CONFIRMED
                         tags:
                           - "team:checkout"
                         updated_at:
-                      id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                      id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                       type: strong_links
               schema:
                 $ref: "#/components/schemas/RUMOperationStrongLinkResponse"
@@ -203709,10 +204298,10 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict. A strong link between this operation and feature already exists.
+          description: Conflict. A link between this operation and journey already exists.
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create a RUM operation strong link
+      summary: Create a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 8
@@ -203721,7 +204310,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/operations/strong_links/{rum_operation_id}/{feature_id}:
     delete:
-      description: Delete the strong link between a RUM operation and a feature.
+      description: Delete the link between a RUM operation and a journey.
       operationId: DeleteRUMOperationStrongLink
       parameters:
         - description: The unique identifier of the RUM operation.
@@ -203730,7 +204319,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The unique identifier of the feature.
+        - description: The unique identifier of the journey.
           in: path
           name: feature_id
           required: true
@@ -203747,7 +204336,7 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a RUM operation strong link
+      summary: Delete a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 9
@@ -203755,7 +204344,7 @@ paths:
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
-      description: Update the status of a strong link between a RUM operation and a feature.
+      description: Update the status of a link between a RUM operation and a journey.
       operationId: UpdateRUMOperationStrongLink
       parameters:
         - description: The unique identifier of the RUM operation.
@@ -203764,7 +204353,7 @@ paths:
           required: true
           schema:
             type: string
-        - description: The unique identifier of the feature.
+        - description: The unique identifier of the journey.
           in: path
           name: feature_id
           required: true
@@ -203786,14 +204375,14 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
-                        description: "Confirmed link between checkout_completed and feature-123."
-                        feature_id: "feature-123"
+                        description: "Confirmed link between checkout_completed and journey-123."
+                        feature_id: "journey-123"
                         operation_id: "abc12345-1234-5678-abcd-ef1234567890"
                         status: CONFIRMED
                         tags:
                           - "team:checkout"
                         updated_at: "2024-01-16T09:00:00Z"
-                      id: "abc12345-1234-5678-abcd-ef1234567890:feature-123"
+                      id: "abc12345-1234-5678-abcd-ef1234567890:journey-123"
                       type: strong_links
               schema:
                 $ref: "#/components/schemas/RUMOperationStrongLinkResponse"
@@ -203812,7 +204401,7 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a RUM operation strong link
+      summary: Update a RUM operation link
       tags:
         - RUM Operations
       x-menu-order: 10
@@ -203878,7 +204467,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -203953,7 +204542,7 @@ paths:
                         description: "Tracks users completing the checkout flow."
                         display_name: Checkout completed
                         feature_ids:
-                          - "feature-123"
+                          - "journey-123"
                         journey_rum:
                           rum_steps:
                             - nodes:
@@ -204090,89 +204679,6 @@ paths:
       summary: Query aggregated long tasks
       tags: ["RUM Insights"]
       x-menu-order: 2
-      x-permission:
-        operator: OR
-        permissions:
-          - rum_apps_read
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-  /api/v2/rum/query/insight/aggregated_signals_problems:
-    post:
-      description: |-
-        Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.
-      operationId: QueryAggregatedSignalsProblems
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      application_id: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-                      from: 1762437564
-                      sample_size: 30
-                      to: 1762523964
-                      view_name: /account/login(/:type)
-                    type: aggregated_signals_problems
-            schema:
-              $ref: "#/components/schemas/AggregatedSignalsProblemsRequest"
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        application_id: ccbc53b1-74f2-496b-bdd7-9a8fa7b7376b
-                        from: 1710000000
-                        problem_detections:
-                          high_script_evaluations:
-                            - avg_duration: 300000000
-                              avg_forced_style_layout: 0
-                              fingerprint: v1$7766a8c2180aa153f5526ba8868999f8
-                              impact_score: 30.0
-                              instance_count: 3
-                              invoker_type: user-callback
-                              source_category:
-                              source_function_name: handleClick
-                              source_url: https://cdn.example.com/app.js
-                              view_occurrences: 3
-                        sample_metadata:
-                          failed: 2
-                          requested: 30
-                          sampled_view_ids:
-                            - 6fbf69b6-9455-436a-b894-a6bf64126d40
-                          succeeded: 28
-                          success_rate: 0.93
-                        to: 1710003600
-                        view_name: /checkout
-                      id: 2f0b3455
-                      type: aggregated_signals_problems
-              schema:
-                $ref: "#/components/schemas/AggregatedSignalsProblemsResponse"
-          description: Successful response
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Unauthorized
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Query aggregated signals and problems
-      tags: ["RUM Insights"]
-      x-menu-order: 3
       x-permission:
         operator: OR
         permissions:
@@ -208569,7 +209075,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: due_date_rules
               schema:
-                $ref: "#/components/schemas/DueDateRuleReorderRequest"
+                $ref: "#/components/schemas/DueDateRuleReorderResponse"
           description: Successfully reordered the due date rules
         "400":
           content:
@@ -208745,6 +209251,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: due_date_rules
             schema:
               $ref: "#/components/schemas/DueDateRuleUpdateRequest"
@@ -209465,7 +209972,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: mute_rules
               schema:
-                $ref: "#/components/schemas/MuteRuleReorderRequest"
+                $ref: "#/components/schemas/MuteRuleReorderResponse"
           description: Successfully reordered the mute rules
         "400":
           content:
@@ -209631,6 +210138,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: mute_rules
             schema:
               $ref: "#/components/schemas/MuteRuleUpdateRequest"
@@ -210089,6 +210597,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:dev"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: severity_modifier_rules
             schema:
               $ref: "#/components/schemas/SeverityModifierRuleUpdateRequest"
@@ -210367,7 +210876,7 @@ paths:
                       - id: "11111111-1111-1111-1111-111111111111"
                         type: ticket_creation_rules
               schema:
-                $ref: "#/components/schemas/TicketCreationRuleReorderRequest"
+                $ref: "#/components/schemas/TicketCreationRuleReorderResponse"
           description: Successfully reordered the ticket creation rules
         "400":
           content:
@@ -210535,6 +211044,7 @@ paths:
                         finding_types:
                           - misconfiguration
                         query: "env:prod"
+                    id: "00000000-0000-0000-0000-000000000000"
                     type: ticket_creation_rules
             schema:
               $ref: "#/components/schemas/TicketCreationRuleUpdateRequest"
@@ -216114,6 +216624,15 @@ paths:
           schema:
             type: string
         - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
           in: query
@@ -216206,6 +216725,114 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in Preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/security_monitoring/entity_context/recently_updated:
+    get:
+      description: |-
+        Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked
+        by the time of their most recent revision in the requested time range, and the top `limit` entities are
+        returned in that order. This endpoint is not paginated.
+      operationId: GetEntityContextRecentlyUpdated
+      parameters:
+        - description: A free-text query (for example, an email address or principal ID) used to filter the entities returned.
+          example: user@example.com
+          in: query
+          name: query
+          required: false
+          schema:
+            type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
+        - description: |-
+            The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
+            Defaults to `now-7d`.
+          in: query
+          name: from
+          required: false
+          schema:
+            default: now-7d
+            example: now-7d
+            type: string
+        - description: |-
+            The end of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now`).
+            Defaults to `now`. Entities are ranked by their most recent revision within `[from, to]`.
+          in: query
+          name: to
+          required: false
+          schema:
+            default: now
+            example: now
+            type: string
+        - description: The number of entities to return. Must be between 1 and 100.
+          example: 50
+          in: query
+          name: limit
+          required: false
+          schema:
+            default: 50
+            format: int64
+            maximum: 100
+            minimum: 1
+            type: integer
+        - description: |-
+            Which revisions to return for each entity: `latest` returns only the latest revision of each entity as of `to`,
+            and `all` returns every revision in the requested time range.
+          example: latest
+          in: query
+          name: revisions
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextRevisionsMode"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          revisions:
+                            - attributes:
+                                accounts:
+                                  - linked-account-123
+                                display_name: Test User
+                                email: user@example.com
+                                principal_id: user@example.com
+                              first_seen_at: "2026-04-01T00:00:00Z"
+                              last_seen_at: "2026-05-01T00:00:00Z"
+                        id: user@example.com
+                        type: siem_entity_identity
+              schema:
+                $ref: "#/components/schemas/RecentlyUpdatedEntitiesResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - siem_entities_read
+      summary: Get recently updated entity context
+      tags: ["Security Monitoring"]
+      x-menu-order: 175
+      x-permission:
+        operator: OR
+        permissions:
+          - siem_entities_read
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security_monitoring/entity_context/{id}:
     get:
       description: |-
@@ -216222,6 +216849,15 @@ paths:
           schema:
             example: user@example.com
             type: string
+        - description: |-
+            The type of entity to retrieve. Only `siem_entity_identity` is currently supported.
+            Defaults to `siem_entity_identity`.
+          example: siem_entity_identity
+          in: query
+          name: entity_type
+          required: false
+          schema:
+            $ref: "#/components/schemas/EntityContextEntityType"
         - description: |-
             The start of the time range to query, as an RFC3339 timestamp or a relative time (for example, `now-7d`).
             Defaults to `now-7d`. Ignored when `as_of` is set.
@@ -219456,6 +220092,8 @@ paths:
         - $ref: "#/components/parameters/PageNumber"
         - $ref: "#/components/parameters/PersonalAccessTokensSortParameter"
         - $ref: "#/components/parameters/PersonalAccessTokensFilterParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensFilterLeakedParameter"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219616,6 +220254,7 @@ paths:
       parameters:
         - $ref: "#/components/parameters/ServiceAccountID"
         - $ref: "#/components/parameters/AccessTokenID"
+        - $ref: "#/components/parameters/PersonalAccessTokensIncludeParameter"
       responses:
         "200":
           content:
@@ -219699,7 +220338,7 @@ paths:
                       id: 00000000-0000-0000-0000-000000000008
                       type: service_access_tokens
               schema:
-                $ref: "#/components/schemas/ServiceAccessTokenResponse"
+                $ref: "#/components/schemas/UpdatedServiceAccessTokenResponse"
           description: OK
         "400":
           content:
@@ -231822,6 +232461,10 @@ paths:
                       - attributes:
                           email:
                             enabled: true
+                            recipient_email: alerts@example.com
+                          servicenow:
+                            templates:
+                              - incident-template
                           slack:
                             channel: test-channel
                             workspace: Datadog
@@ -236323,6 +236966,13 @@ tags:
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.
     name: Logs
   - description: |-
+      Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate
+      the matches into a retained historical view.
+
+      See the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)
+      page for the searches currently running in Datadog.
+    name: Logs Archive Searches
+  - description: |-
       Archives forward all the logs ingested to a cloud storage system.
 
       See the [Archives Page](https://app.datadoghq.com/logs/pipelines/archives)
@@ -236499,8 +237149,8 @@ tags:
     name: RUM Insights
   - description: |-
       Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business
-      transactions detected from RUM events through a configurable journey, and their strong links
-      to features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
+      transactions detected from RUM events through a configurable journey, and their links
+      to journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)
       for more information.
     name: RUM Operations
   - description: |-
