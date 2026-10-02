@@ -8,6 +8,9 @@ further_reading:
 - link: "/getting_started/synthetics/browser_test"
   tag: "Documentation"
   text: "Getting started with Browser Tests"
+- link: "/real_user_monitoring/application_monitoring/browser/optimizing_performance/lighthouse_audits/"
+  tag: "Documentation"
+  text: "Run Lighthouse audits and send scores to RUM"
 - link: "/synthetics/guide/synthetic-test-monitors"
   tag: "Documentation"
   text: "Learn about Synthetic test monitors"
@@ -260,7 +263,7 @@ You can switch tabs in a browser test recording to perform an action on your app
 {{< img src="synthetics/browser_tests/browser_check_record_test.png" alt="Browser test record test" width="90%" >}}
 
 1. Optionally, select {{< ui >}}Open in a pop-up{{< /ui >}} at the upper right of the page to open your test recording in a separate pop-up window. This is useful if your application does not support being opened in an iframe or if you want to avoid sizing issues at recording. You can also open the pop-up in {{< ui >}}Incognito mode{{< /ui >}} to start recording your test from a fresh browser free from already logged-in sessions, cookies from your existing browser, and more.
-2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][13].
+2. Optionally, enable Datadog to automatically collect RUM data when running step recordings from your browser test. For more information, see [Explore RUM & Session Replay][13]. With RUM data collection enabled, you can also turn on **Run Lighthouse Audit** to run a Google Lighthouse audit on the recorded page and send its Performance, Accessibility, Best Practices, SEO, and Agentic Browsing scores to the matching RUM view. For more information, see [Lighthouse audits in RUM][20].
 3. Click {{< ui >}}Start Recording{{< /ui >}} to begin recording your browser test.
 4. As you click on your application going through the user journey you want to monitor, your actions are automatically recorded and used to create [steps][14] within your browser test scenario on the left.
 5. In addition to the automatically recorded steps, you can also use the [steps][14] available in the upper left corner to enrich your scenario:
@@ -389,3 +392,4 @@ Use [granular access control][17] to limit who has access to your test based on 
 [17]: /account_management/rbac/granular_access
 [18]: https://support.microsoft.com/en-us/edge/add-turn-off-or-remove-extensions-in-microsoft-edge
 [19]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/
+[20]: /real_user_monitoring/application_monitoring/browser/optimizing_performance/lighthouse_audits/

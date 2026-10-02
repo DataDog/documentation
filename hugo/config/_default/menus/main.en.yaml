@@ -9536,6 +9536,11 @@ menu:
       parent: rum_browser
       identifier: rum_optimizing_performance
       weight: 106
+    - name: Lighthouse Audits
+      url: real_user_monitoring/application_monitoring/browser/optimizing_performance/lighthouse_audits/
+      parent: rum_optimizing_performance
+      identifier: rum_lighthouse_audits
+      weight: 1
     - name: Monitoring Resource Performance
       url: real_user_monitoring/application_monitoring/browser/monitoring_resource_performance/
       parent: rum_browser
