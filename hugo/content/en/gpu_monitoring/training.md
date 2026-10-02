@@ -90,7 +90,7 @@ spec:
                     fieldPath: metadata.annotations['company.name/group-id']
 ```
 
-To use pod labels instead of annotations, use `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
+To use pod labels instead of annotations, set `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
 
 Apply the configuration and wait for the `DatadogAgent` rollout to complete. With this configuration, traces from the workloads you label in [Step 3](#3-label-the-gpu-workload) are tagged with `training.run_id` and `training.group_id`.
 
