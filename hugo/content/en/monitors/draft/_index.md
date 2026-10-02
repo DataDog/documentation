@@ -35,7 +35,7 @@ To create and store monitors in a draft state:
 
 When your monitor is ready:
 
-1. Open the draft from [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `status:draft`.  
+1. Open the draft from [{{< ui >}}Monitors List{{< /ui >}}][3] by using the draft status facet or filter by `draft_status:draft`.  
 2. Review the configuration.  
 3. Click {{< ui >}}Publish Monitor{{< /ui >}}.  
 4. This publishes your monitor and begins alerting based on your conditions.
