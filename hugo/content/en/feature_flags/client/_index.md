@@ -21,6 +21,8 @@ Set up Datadog Feature Flags for your applications. Follow the platform-specific
 
 Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open-source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
+If Datadog is temporarily unable to serve fresh flag configuration, the Datadog CDN returns the most recent cached flag assignments instead of an error, so SDK initialization and evaluation context updates continue to succeed. Flag changes you saved recently might not appear until configuration delivery refreshes successfully. A configuration request can still fail when no cached assignments are available for it.
+
 {{< card-grid card_width="200px">}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
