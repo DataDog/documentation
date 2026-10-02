@@ -1,6 +1,5 @@
 ---
 title: Optimize Training Workloads with GPU Monitoring
-is_beta: false
 description: Troubleshoot stalled or failed training runs and maximize the throughput of your training workloads.
 further_reading:
 - link: "/gpu_monitoring/setup"
