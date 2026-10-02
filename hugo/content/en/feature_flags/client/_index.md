@@ -34,6 +34,8 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
   {{< image-card href="/feature_flags/client/unity/" src="integrations_logos/rum-unity_large.svg" alt="Unity" >}}
 {{< /card-grid >}}
 
+Compatible SDK versions support [flag key obfuscation][2] for precomputed assignments without additional provider configuration. The concept page explains compatibility and which information remains visible in client applications.
+
 ## Telemetry options by platform
 
 The web, mobile, and Unity providers expose similar telemetry controls with platform-specific option names. Each exposed option defaults to `true`, so the listed behaviors are on by default; set the option to `false` to opt out.
@@ -130,3 +132,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/implementation_patterns/browser_rules_based_evaluation/
+[2]: /feature_flags/concepts/flag_key_obfuscation/
