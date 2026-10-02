@@ -164,7 +164,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 {% if equals($secrets_source, "secrets_management") %}
 
 3. See [Secrets Management][18] on how to configure your `values.yaml` file for your secrets manager.
-4. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+4. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-worker-s-ports).
 5. Run the following command to install the Worker:
     ```shell
     helm upgrade --install opw \
@@ -184,7 +184,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- API/TF - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-3. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+3. Set `service.ports` in your `values.yaml` file so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-worker-s-ports).
 4. Run the following command to install the Worker:
 
     ```shell
@@ -359,7 +359,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
-7. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+7. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-worker-s-ports).
 8. Run the command provided in the UI to install the Worker.
 9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
@@ -370,7 +370,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
-6. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+6. Set `service.ports` in your `values.yaml` file. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports](#expose-the-worker-s-ports).
 7. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
 8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
@@ -748,7 +748,7 @@ To upgrade the Worker, update the Worker image version in your CloudFormation st
 {% if equals($platform, "kubernetes") %}
 
 **Notes**:
-- The Helm chart's `service.ports` field is empty by default. Set `service.ports` so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-workers-ports).
+- The Helm chart's `service.ports` field is empty by default. Set `service.ports` so the Kubernetes Service exposes the Worker. See [Expose the Worker's ports](#expose-the-worker-s-ports).
 - If you enable [disk buffering][16] for destinations, you must enable Kubernetes [persistent volumes][17] in the Observability Pipelines Helm chart. See also [Persistence and pod scheduling](#persistence-and-pod-scheduling) for more information.
 - If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -865,7 +865,7 @@ In the Helm chart:
 
 ## Upgrade the Worker
 
-To upgrade the Worker, you can either [upgrade with a pinned image tag](#upgrade-with-a-pinned-image-tag) or [upgrade with the chart's default image tag](#upgrade-with-the-charts-default-image-tag).
+To upgrade the Worker, you can either [upgrade with a pinned image tag](#upgrade-with-a-pinned-image-tag) or [upgrade with the chart's default image tag](#upgrade-with-the-chart-s-default-image-tag).
 
 After you update the `values.yaml` file with the new Worker version, new Worker pods are created with the updated image. Old pods are terminated only after the replacements are `Ready`. The update is a rolling update by default, so one pod is upgraded at a time. To change the default values, see the `updateStrategy` options in the `values.yaml` file:
 
