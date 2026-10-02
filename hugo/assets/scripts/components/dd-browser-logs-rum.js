@@ -40,7 +40,7 @@ if (window.DD_RUM) {
             defaultPrivacyLevel: 'mask-user-input',
             allowedTracingUrls: [window.location.origin],
             traceContextInjection: 'all',
-            internalAnalyticsSubdomain: IA_SUBDOMAIN
+            proxy: IA_SUBDOMAIN
         });
 
         window.DD_RUM.startSessionReplayRecording();
@@ -64,7 +64,7 @@ if (window.DD_LOGS) {
         env,
         service: 'docs',
         version: CI_COMMIT_SHORT_SHA,
-        internalAnalyticsSubdomain: IA_SUBDOMAIN
+        proxy: IA_SUBDOMAIN
     });
 
     // global context
