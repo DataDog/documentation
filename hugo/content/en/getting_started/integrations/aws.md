@@ -39,7 +39,7 @@ further_reading:
 
 ## Overview
 
-This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations, instrument EC2 instances, Lambda functions, and EKS clusters for deeper visibility, and configure log forwarding.
+This guide walks you through integrating an Amazon Web Services (AWS) account with Datadog using Datadog's CloudFormation template. After completing setup, you can enable individual AWS service integrations and configure log forwarding. You can also instrument EC2 instances, Lambda functions, and EKS clusters for deeper visibility.
 
 ## Prerequisites
 
@@ -216,7 +216,7 @@ Use the [Amazon ECS on AWS Fargate for AWS Batch documentation][58] to run the A
 
 #### EKS
 
-For eligible EKS clusters, you can manage instrumentation automatically through the [AWS integration][62]. To install the Agent manually, see the [EKS guidance in Kubernetes Distributions][29] and the [Kubernetes installation documentation][30].
+For eligible EKS clusters, you can [install and manage the Agent automatically through the AWS integration][62]. To install the Agent manually, see the [EKS guidance in Kubernetes Distributions][29] and the [Kubernetes installation documentation][30].
 
 #### EKS with Fargate
 
