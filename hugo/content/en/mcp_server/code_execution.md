@@ -14,6 +14,9 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
+- link: "https://www.datadoghq.com/blog/datadog-code-execution/"
+  tag: "Blog"
+  text: "Cut AI agent cost and improve accuracy with Code Execution in the Datadog MCP Server"
 ---
 
 ## Overview

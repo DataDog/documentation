@@ -26,6 +26,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/bits-chat-slack-incident-response/"
   tag: "Blog"
   text: "From alert to resolution: Manage incidents with Bits Chat in Slack"
+- link: "https://www.datadoghq.com/blog/custom-iac-security-rules/"
+  tag: "Blog"
+  text: "Enforce custom rules in Datadog IaC Security scanning"
+- link: "https://www.datadoghq.com/blog/agent-feedback-classification-skill/"
+  tag: "Blog"
+  text: "When users don’t click thumbs up: Inferring agent feedback from Datadog telemetry"
+- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+  tag: "Blog"
+  text: "Teaching a 9B model to investigate production alerts"
 aliases:
 - /bits_ai/getting_started/
 - /bits_ai/chat_with_bits_ai

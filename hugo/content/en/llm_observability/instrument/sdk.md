@@ -20,6 +20,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/llm-prompt-tracking
     tag: Blog
     text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+  - link: "https://www.datadoghq.com/blog/jev-evals-agent-observability/"
+    tag: "Blog"
+    text: "Using TypeSafe’s Jev for evals in Datadog Agent Observability"
 
 ---
 

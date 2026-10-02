@@ -1,6 +1,10 @@
 ---
 title: Charts
 description: Product Analytics charts help you understand the path your users follow as they discover your product, service, or brand.
+further_reading:
+- link: "https://www.datadoghq.com/blog/product-analytics-journey-paths/"
+  tag: "Blog"
+  text: "Understand the top paths users take to convert or drop off with Journey Paths"
 ---
 
 Use Product Analytics charts to visualize users' journeys from end-to-end to discover the different ways users navigate your application. You can extract data to identify friction points in the user journey, measure the success of UI changes, and inform design decisions. 
@@ -44,4 +48,6 @@ For example, you can determine if there was there a performance issue that cause
 [4]: /product_analytics/charts/retention_analysis
 [5]: /product_analytics/charts/journey_paths
 
+## Further reading
 
+{{< partial name="whats-next/whats-next.html" >}}

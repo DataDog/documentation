@@ -16,6 +16,9 @@ further_reading:
     - link: 'logs/explorer/saved_views/'
       tag: 'Documentation'
       text: 'Automatically configure your Log Explorer'
+    - link: "https://learn.datadoghq.com/courses/log-explorer"
+      tag: "Learning Center"
+      text: "Getting Started with Log Explorer"
     - link: 'https://www.datadoghq.com/blog/datadog-clipboard/'
       tag: Blog
       text: 'Add a Log Explorer url to your clipboard'
@@ -25,9 +28,9 @@ further_reading:
     - link: https://www.datadoghq.com/blog/ai-powered-log-parsing
       tag: Blog
       text: Accelerate investigations with AI-powered log parsing
-    - link: "https://learn.datadoghq.com/courses/log-explorer"
-      tag: "Learning Center"
-      text: "Getting Started with Log Explorer"
+    - link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+      tag: "Blog"
+      text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 
 ---
 

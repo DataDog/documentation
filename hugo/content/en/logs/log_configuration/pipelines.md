@@ -4,9 +4,6 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
-- link: "https://learn.datadoghq.com/courses/log-pipelines"
-  tag: "Learning Center"
-  text: "Build and Manage Log Pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
@@ -19,6 +16,9 @@ further_reading:
 - link: "/logs/troubleshooting/"
   tag: "Documentation"
   text: "Logs troubleshooting"
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
 - link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
   tag: "Learning Center"
   text: "Debugging Log Pipelines"
@@ -40,6 +40,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
   tag: Blog
   text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
+- link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+  tag: "Blog"
+  text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 ---
 
 ## Overview

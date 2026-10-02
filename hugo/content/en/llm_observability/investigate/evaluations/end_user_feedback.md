@@ -17,6 +17,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/debug-and-evaluate-your-ai-app-from-your-coding-agent/"
       tag: "Blog"
       text: "Debug and evaluate your AI app from your coding agent with Datadog Agent Observability"
+    - link: "https://www.datadoghq.com/blog/agent-feedback-classification-skill/"
+      tag: "Blog"
+      text: "When users don’t click thumbs up: Inferring agent feedback from Datadog telemetry"
 ---
 
 ## Overview

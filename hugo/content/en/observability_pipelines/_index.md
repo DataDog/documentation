@@ -78,6 +78,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/observability-pipelines-microsoft-sentinel-packs/"
   tag: "Blog"
   text: "Transform and route security logs to Microsoft Sentinel tables using Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/tap-to-parse-logs/"
+  tag: "Blog"
+  text: "Find answers in your logs faster with Datadog’s Tap to Parse"
 
 ---
 ## Overview
