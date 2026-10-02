@@ -139,7 +139,7 @@ Notifications are configured from the workflow editor, in either of the followin
 Changes made from the workflow title popover are saved immediately. Changes made from the {{< ui >}}Edit permissions{{< /ui >}} modal are applied when you click {{< ui >}}Save{{< /ui >}}.
 
 To add a notification:
-1. Open the {{< ui >}}Notifications{{< /ui >}} section using one of the options above.
+1. Open the {{< ui >}}Notifications{{< /ui >}} section using one of the methods described above.
 1. To add a notification if the workflow succeeds:
    1. Click the plus ({{< ui >}}\+{{< /ui >}}) icon next to {{< ui >}}On success{{< /ui >}}, or click {{< ui >}}Add success notification{{< /ui >}} if no success notifications are configured yet.
    1. Select the integration that you want to use for notifications.
