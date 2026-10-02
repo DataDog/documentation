@@ -27,6 +27,7 @@
         {
           "statusCode": "200",
           "description": "OK",
+          "schemaDescription": "Represent validation endpoint responses.",
           "schema": [
             {
               "name": "valid",
@@ -47,6 +48,7 @@
         {
           "statusCode": "403",
           "description": "Authentication error",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -67,6 +69,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",

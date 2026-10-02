@@ -82,4 +82,10 @@ describe("ApiRequestBodyTabs (astro)", () => {
     const htmlSingle = await renderComponent({ schema, examples });
     expect(htmlSingle).not.toMatch(/<strong[^>]*>Example<\/strong>/);
   });
+
+  it("labels the schema table's first column Field, as Hugo does", async () => {
+    const html = await renderComponent({ schema, examples });
+
+    expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
+  });
 });

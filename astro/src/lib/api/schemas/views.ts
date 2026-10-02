@@ -43,6 +43,7 @@ export const ResponseDataSchema = z
   .object({
     statusCode: z.string(),
     description: z.string(),
+    schemaDescription: z.string().optional(),
     schema: z.array(SchemaFieldSchema).optional(),
     examples: z.array(ExampleSchema).optional(),
   })

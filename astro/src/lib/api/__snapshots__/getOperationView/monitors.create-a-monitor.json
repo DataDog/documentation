@@ -2490,6 +2490,7 @@
         {
           "statusCode": "200",
           "description": "OK",
+          "schemaDescription": "Object describing a monitor.",
           "schema": [
             {
               "name": "assets",
@@ -5107,6 +5108,7 @@
         {
           "statusCode": "400",
           "description": "Bad Request",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -5127,6 +5129,7 @@
         {
           "statusCode": "403",
           "description": "Forbidden",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -5147,6 +5150,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",

@@ -48,6 +48,7 @@ const nestedFields: SchemaField[] = [
 async function renderTable(props: {
   fields: SchemaField[];
   showExpandAll?: boolean;
+  nameColumnLabel?: "name" | "field";
 }) {
   const container = await AstroContainer.create();
   container.addServerRenderer({
@@ -321,5 +322,47 @@ describe("ApiSchemaTable — modifiers and content", () => {
     });
     expect(html).toContain("&lt;not-a-tag&gt;");
     expect(html).toContain("&lt;int&gt;");
+  });
+});
+
+describe("ApiSchemaTable name column header", () => {
+  it("labels the first column Name by default", async () => {
+    const html = await renderTable({ fields: flatFields });
+    expect(html).toMatch(/schema-table__columns-name[^>]*>Name</);
+  });
+
+  it("labels the first column Field when nameColumnLabel is field", async () => {
+    const html = await renderTable({
+      fields: flatFields,
+      nameColumnLabel: "field",
+    });
+    expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
+  });
+});
+
+describe("ApiSchemaTable multi-paragraph descriptions", () => {
+  const multiParagraphField: SchemaField = {
+    name: "is_read_only",
+    type: "boolean",
+    required: false,
+    deprecated: false,
+    readOnly: false,
+    description: "First paragraph.\n\nSecond paragraph.",
+  };
+
+  it("keeps each Markdown paragraph as its own <p>", async () => {
+    const html = await renderTable({ fields: [multiParagraphField] });
+    expect(html).toMatch(
+      /<p>First paragraph\.<\/p>\s*<p>Second paragraph\.<\/p>/,
+    );
+  });
+
+  it("puts the DEPRECATED label inside the first paragraph", async () => {
+    const html = await renderTable({
+      fields: [{ ...multiParagraphField, deprecated: true }],
+    });
+    expect(html).toMatch(
+      /<p><strong class="[^"]*schema-table__deprecated-label[^"]*">DEPRECATED<\/strong> First paragraph\.<\/p>/,
+    );
   });
 });

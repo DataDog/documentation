@@ -29,7 +29,11 @@ const groupId = generateElementId("request-body-tabs");
 const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
 ---
 
-{hasSchema && !hasExamples && <ApiSchemaTable fields={schema} />}
+{
+  hasSchema && !hasExamples && (
+    <ApiSchemaTable fields={schema} nameColumnLabel="field" />
+  )
+}
 
 {
   !hasSchema && hasExamples && (
@@ -50,7 +54,7 @@ const panelIds = [`${groupId}-panel-0`, `${groupId}-panel-1`];
       panelIds={panelIds}
     >
       <TabPanel id={panelIds[0]} isActive>
-        <ApiSchemaTable fields={schema} />
+        <ApiSchemaTable fields={schema} nameColumnLabel="field" />
       </TabPanel>
       <TabPanel id={panelIds[1]}>
         <div class={cl("request-body-tabs__examples")}>

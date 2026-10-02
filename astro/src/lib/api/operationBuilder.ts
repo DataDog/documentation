@@ -161,6 +161,20 @@ export function extractRequestBody(
 }
 
 /**
+ * The description of a (possibly `$ref`'d) schema. Hugo shows it above the
+ * response's Model table.
+ */
+function resolveSchemaDescription(
+  spec: OpenAPIV3.Document,
+  schema: OpenAPIV3.SchemaObject | OpenAPIV3.ReferenceObject,
+): string | undefined {
+  const resolved: OpenAPIV3.SchemaObject | undefined = isReference(schema)
+    ? resolveRef(spec, schema.$ref)
+    : schema;
+  return resolved?.description || undefined;
+}
+
+/**
  * Extract response data for all status codes defined on the operation.
  */
 export function extractResponses(
@@ -180,9 +194,11 @@ export function extractResponses(
     const description: string = resolved?.description ?? "";
 
     let schema: SchemaField[] | undefined;
+    let schemaDescription: string | undefined;
     const jsonContent = resolved?.content?.["application/json"];
     if (jsonContent?.schema) {
       schema = topLevelSchemaToFields(spec, jsonContent.schema);
+      schemaDescription = resolveSchemaDescription(spec, jsonContent.schema);
     }
 
     let examples: Array<{ name: string; value: string }> | undefined;
@@ -222,7 +238,13 @@ export function extractResponses(
       }
     }
 
-    result.push({ statusCode, description, schema, examples });
+    result.push({
+      statusCode,
+      description,
+      ...(schemaDescription ? { schemaDescription } : {}),
+      schema,
+      examples,
+    });
   }
 
   result.sort((a, b) => a.statusCode.localeCompare(b.statusCode));

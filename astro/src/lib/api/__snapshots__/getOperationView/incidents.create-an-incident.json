@@ -257,6 +257,7 @@
         {
           "statusCode": "201",
           "description": "CREATED",
+          "schemaDescription": "Response with an incident.",
           "schema": [
             {
               "name": "data",
@@ -1223,6 +1224,7 @@
         {
           "statusCode": "400",
           "description": "Bad Request",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -1243,6 +1245,7 @@
         {
           "statusCode": "401",
           "description": "Unauthorized",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -1263,6 +1266,7 @@
         {
           "statusCode": "403",
           "description": "Forbidden",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -1283,6 +1287,7 @@
         {
           "statusCode": "404",
           "description": "Not Found",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -1303,6 +1308,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
