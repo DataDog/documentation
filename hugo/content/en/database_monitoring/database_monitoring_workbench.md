@@ -16,7 +16,7 @@ further_reading:
   text: "Datadog MCP Server"
 ---
 
-{{< callout url="https://dd-corpsite.datadoghq.com/forms/share/3a07f186242c2042dce971849535bc95fa0d81b9b6346aafc53f3eda9af80af7" btn_hidden="false" header="Join the Preview!" >}}
+{{< callout url="https://app.datadoghq.com/forms/share/45a8d961134a872c7118d345cff413cfd3d88bc1f1558f76bb5067a85ae43118" btn_hidden="false" header="Join the Preview!" >}}
 Database Monitoring Workbench is in preview. Use this form to request access.
 {{< /callout >}}
 
