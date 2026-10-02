@@ -27,18 +27,17 @@ Bits Security Analyst investigations are autonomous. If a detection rule is enab
 
 In the [Cloud SIEM Signals Explorer][5], you can click the {{< ui >}}Bits Security Analyst{{< /ui >}} tab to only show signals that Bits AI investigated. In the Severity column, a Bits AI status displays as Investigating, until marking the signal as either Benign or Suspicious.
 
-{{< img src="bits_ai/bits_security_analyst_signals_explorer.png" alt="The Cloud SIEM signals explorer, on the Bits Security Analyst tab" style="width:100%;" >}}
+{{< img src="bits_ai/bits_security_analyst_signals_explorer_01.png" alt="The Cloud SIEM signals explorer, on the Bits Security Analyst tab" style="width:100%;" >}}
 
-When you click a row with a Bits AI investigation, the Bits AI Investigation side panel opens:
-
-{{< img src="bits_ai/bits_security_analyst_example.png" alt="Bits Security Analyst example detection, titled 'Okta phishing detection with FastPass origin check'." style="width:100%;" >}}
+When you click a row with a Bits AI investigation, the Bits AI Investigation side panel opens.
 
 In the side panel, you can see Bits AI's investigative findings, including:
-- Overall conclusion
-- Key evidence used to come to that conclusion
+- Overall conclusion, and key evidence used to come to that conclusion
+  {{< img src="bits_ai/bits_security_analyst_example_conclusion.png" alt="Bits Security Analyst example detection, titled 'AWS IAM AdministratorAccess policy was applied to a user', which is assessed as benign." style="width:100%;" >}}
 - Suggested next steps to remediate the issue or suppress detection rules with specific attributes
-- Investigative steps showing Bits AI's data queries, including embedded results and links to full queries
-- Analysis on each investigative step
+  {{< img src="bits_ai/bits_security_analyst_example_tuning_suggestions.png" alt="The Suggested Next Steps section of the side panel, which includes two rule tuning recommendations to reduce noise associated with the detection" style="width:100%;" >}}
+- Investigative steps showing Bits AI's data queries, including embedded results and links to full queries, and analysis on each investigative step
+  {{< img src="bits_ai/bits_security_analyst_example_investigative_steps.png" alt="The Investigative Steps section of the side panel, which includes six steps to Bits AI used in its investigation" style="width:100%;" >}}
 
 You can also take additional steps directly from the side panel:
 - Create a work item with pre-populated Bits AI investigation results
@@ -52,7 +51,7 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 
 ### Supported sources
 
-Bits AI can run investigations on the following Security log sources:\*
+Bits AI can run investigations on the following Security log sources:
 - Amazon GuardDuty, where supported [finding types][6] cover:
   - Anomalous and compromised IAM credentials
   - EC2 and resource credential exfiltration and misuse
@@ -85,7 +84,7 @@ Bits AI can run investigations on the following Security log sources:\*
 - Windows
 - Email phishing
 
-\*In rare cases, an out-of-the-box rule for a supported source is ineligible for Bits investigations because the investigation requires additional non-SIEM telemetry. To view these rules, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > {{< ui >}}Analyst Configuration{{< /ui >}}, then turn on {{< ui >}}Show currently ineligible rules{{< /ui >}}.
+<div class="alert alert-info">In rare cases, an out-of-the-box rule for a supported source is ineligible for Bits investigations because the investigation requires additional non-SIEM telemetry. To view these rules, go to <strong>Security</strong> > <strong>Settings</strong> > <strong>Bits Security Analyst</strong> > <strong>Analyst Configuration</strong>, then turn on <strong>Show currently ineligible rules</strong>.</div>
 
 ## Set up Bits Security Analyst
 
