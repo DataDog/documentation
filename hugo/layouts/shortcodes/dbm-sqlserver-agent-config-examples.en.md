@@ -1,24 +1,14 @@
 ### Connecting with DSN using the ODBC driver on Linux
-1. Locate the `odbc.ini` and `odbcinst.ini` files. By default, these are placed in the `/etc` directory when installing ODBC.
-2. Copy the `odbc.ini` and `odbcinst.ini` files into the `/opt/datadog-agent/embedded/etc` folder.
+1. Locate the `odbc.ini` file. By default, it is placed in the `/etc` directory when installing ODBC.
+2. Copy `odbc.ini` into `embedded/etc` inside the Agent install directory: `/opt/datadog-agent` for package installs, or `/opt/datadog-packages/datadog-agent/stable` for Fleet Automation installs. If you use a driver other than the bundled ODBC Driver 18 for SQL Server, add its section to the `odbcinst.ini` in the same directory.
 3. Configure your DSN settings as follows:
 
-    `odbcinst.ini` must provide at least one section header and ODBC driver location.
-
-    Example:
-    ```text
-    [ODBC Driver 18 for SQL Server]
-    Description=Microsoft ODBC Driver 18 for SQL Server
-    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
-    UsageCount=1
-    ```
-
-    `odbc.ini` must provide a section header and a `Driver` path that matches `odbcinst.ini`.
+    `odbc.ini` must provide a section header and a `Driver` that names a section in `odbcinst.ini`.
 
     Example:
     ```text
     [datadog]
-    Driver=/opt/microsoft/msodbcsql18/lib64/libmsodbcsql-18.3.so.2.1
+    Driver=ODBC Driver 18 for SQL Server
     ```
 
 4. Update the `/etc/datadog-agent/conf.d/sqlserver.d/conf.yaml` file with your DSN information.
