@@ -117,7 +117,7 @@ Anytime you're building a feature that depends on some external resource that is
 
 Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocked-dependencies/`. They are intentionally small, frozen snapshots of real upstream data, kept stable so unit tests don't churn every time the live source changes. For example, [tests/fixtures/api/](./tests/fixtures/api/) is a trimmed copy of the live Hugo API spec.
 
-These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test -u`. Treat the fixture as the source of truth, not a derived artifact.
+These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test:headless -u`. Treat the fixture as the source of truth, not a derived artifact.
 
 The unit Vitest config redirects live spec imports to these fixtures via a plugin in [vitest.unit.config.ts](./vitest.unit.config.ts); the integration config deliberately does not, so it validates against the real upstream data.
 
