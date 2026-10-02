@@ -5,6 +5,9 @@ aliases:
   - /real_user_monitoring/browser/monitoring_performance_vitals/
   - /real_user_monitoring/browser/optimizing_performance/
 further_reading:
+  - link: "/real_user_monitoring/application_monitoring/browser/optimizing_performance/lighthouse_audits/"
+    tag: "Documentation"
+    text: "Run Lighthouse audits in browser Synthetic tests"
   - link: "https://learn.datadoghq.com/courses/rum-optimize-frontend-performance"
     tag: "Learning Center"
     text: "Interactive Lab: Optimize Frontend Performance with Datadog RUM Browser Monitoring"
