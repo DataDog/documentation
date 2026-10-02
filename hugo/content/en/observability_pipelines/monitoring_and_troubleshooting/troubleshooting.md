@@ -30,7 +30,7 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
 ### Find the component ID
 
-You need the source's, processor's, or destination's component ID to `tap` into it or to view [component metrics][30] with the `component_id` tag.
+You need the source's, processor's, or destination's component ID to [`tap`](#use-tap-to-see-your-data) into it or to view [component metrics][30] with the `component_id` tag.
 
 {{< tabs >}}
 {{% tab "Command line" %}}
