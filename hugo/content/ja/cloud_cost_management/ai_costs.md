@@ -25,11 +25,29 @@ further_reading:
 - link: /cloud_cost_management/planning/forecasting
   tag: ドキュメント
   text: 予測
+- link: https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/
+  tag: ブログ
+  text: Datadog Cloud Cost Management を使用して、プロバイダー全体で AI コストを帰属させます
+- link: https://www.datadoghq.com/blog/making-agentic-token-costs-visible-in-production/
+  tag: ブログ
+  text: 本番環境における agent のトークンコストを可視化します。
+- link: https://www.datadoghq.com/blog/cloud-cost-skill-bits-chat/
+  tag: ブログ
+  text: Bits Chat の Cloud Cost スキルを使用してコストに関するあらゆる質問により迅速に回答
+- link: https://www.datadoghq.com/blog/how-datadog-saves-money-by-optimizing-ai-usage/
+  tag: ブログ
+  text: Datadog が AI の利用を最適化することで毎月 100 万ドル以上を節約する方法
+- link: https://www.datadoghq.com/blog/federal-agencies-ai-spend-cloud-cost-management/
+  tag: ブログ
+  text: 1 ドル AI 時代の先へ：連邦機関が FY27 の更新に向けたエビデンスを構築する方法
+- link: https://www.datadoghq.com/blog/cursor-cloud-cost-management/
+  tag: ブログ
+  text: Datadog Cloud Cost Management で Cursor のコストを管理する
 title: AI コスト
 ---
 ## 概要 {#overview}
 
-Cloud Cost Management における AI コストは、FinOps およびエンジニアリングチームに、Amazon Bedrock、Anthropic、Google Gemini、OpenAI、Vertex AI、GitHub Copilot、Cursor など複数のプロバイダーに渡る AI 支出を分析するための統一された方法を提供します。既存のクラウドインフラストラクチャーコストとともに総 AI 費用を表示し、正規化されたタグで分析し、コストの異常を追跡し、特定のユーザーや API キーに使用状況を帰属させます。
+Cloud Cost Management における AI コストは、FinOps およびエンジニアリングチームに、Amazon Bedrock、Anthropic、Google Gemini、OpenAI、Vertex AI、GitHub Copilot、Cursor など複数のプロバイダーに渡る AI 支出を分析するための統一された方法を提供します。既存のクラウドインフラストラクチャーコストとともに総 AI 費用を表示し、正規化されたタグで分析し、コストの異常を追跡し、最適化の機会を特定し、特定のユーザーや API キーに使用状況を帰属させます。
 
 ## 前提条件 {#prerequisites}
 
@@ -38,7 +56,9 @@ AI コストを使用するには、[Cloud Cost Management][1] のために、�
 | AI プロバイダー | セットアップ方法 |
 |---|---|
 | Amazon Bedrock | [AWS インテグレーション][2] |
+| Amazon SageMaker | [AWS integration][2] |
 | Anthropic | [SaaS インテグレーション][3] |
+| Azure Foundry   | [Azure インテグレーション][18] |
 | Google Gemini | [Google Cloud インテグレーション][4] |
 | OpenAI     | [SaaS インテグレーション][5] |
 | Vertex AI | [Google Cloud インテグレーション][4] |
@@ -57,6 +77,7 @@ AI コストサマリーページには以下が含まれます。
 - **日次 AI コスト**: 選択した期間における選択されたプロバイダーの日次コストの傾向。[**フィルター**] ドロップダウンを使用して、グラフに表示されるプロバイダーを定義します。
 - **上位のコストドライバー**: 最も多くの支出を生み出しているモデル、プロジェクト、サービス、ユーザー。
 - **アクティブな AI コストの異常**: 接続されているすべてのプロバイダーにおいて、積極的に検出されたコストの[異常][7]。異常を選択すると、サイドパネルが開き、詳細およびさらなるアクションのためのオプションが表示されます。
+- **AI コストの推奨事項**: すべての接続済みプロバイダー全体で表面化したコストの[推奨事項][17]と最適化の機会。推奨事項を選択すると、サイドパネルが開き、詳細およびさらなるアクションのためのオプションが表示されます。
 - **AI コストダッシュボード**: サポートされている各プロバイダー向けの、すぐに使えるダッシュボードテンプレート。コストデータと使用状況シグナル (トークン消費、モデル分布、ユーザー分析など) が組み合わされています。
 
 ## 正規化された AI タグ{#normalized-ai-tags}
@@ -76,7 +97,8 @@ AI コストサマリーページには以下が含まれます。
 
 ## AI 費用をソースに帰属させる {#attribute-ai-spend-to-sources}
 
-[すぐに使える (OOTB) 配分ルール][12]は、Datadog の監視可能性データを使用して、AI コストを、それを生成したユーザー、API キー、およびその他のソースに帰属させます。OOTB 配分ルールは設定が必要でなく、Anthropic および OpenAI で利用可能です。
+[すぐに使える (OOTB) 配分ルール][12]は、Datadog の監視可能性データを使用して、AI コストを、それを生成したユーザー、API キー、およびその他のソースに帰属させます。OOTB 配分ルールは設定が必要でなく、Anthropic および OpenAI で利用可能です。Cursor では、ユーザー レベルの割り当てもサポートされています。
+
 
 次のタグは OOTB 配分ルールを通じて利用可能です。
 
@@ -143,3 +165,5 @@ AI コストサマリーページには以下が含まれます。
 [14]: /ja/cloud_cost_management/reporting
 [15]: /ja/cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
 [16]: /ja/cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
+[17]: /ja/cloud_cost_management/recommendations
+[18]: /ja/cloud_cost_management/setup/azure/?tab=terraform

@@ -818,6 +818,23 @@ To combine `subdomain` with [toolsets](#toolsets) or other query parameters, sep
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 {{< /site-region >}}
 
+#### Revoke OAuth access
+
+When you authorize an MCP client, Datadog creates a consent grant scoped to your user, that client, and the organization you selected during the OAuth flow. Revoking the grant invalidates the client's credentials, and the client must complete the OAuth flow again to reconnect. 
+
+**Note**: A client that already holds a valid access token can keep making requests until that token expires. Revoking prevents it from obtaining a new one.
+
+To revoke your own access for a client:
+
+1. In Datadog, navigate to [**Personal Settings > Authorized Apps**][79].
+2. Find the MCP client you want to disconnect and hover over it to show a removal icon.
+3. Click the removal icon and from the modal, revoke the authorization.
+
+Repeat for each client and each organization you authorized from.
+
+
+Revoking an authorization has no effect on Personal Access Tokens, Service Access Tokens, or API and application keys. Delete or rotate those in their own management pages.
+
 ### Personal or Service Access Token
 
 For header-based authentication, a Datadog [Personal Access Token (PAT)][66] or [Service Access Token (SAT)][67] is the preferred option. Pass the token as a bearer token in the `Authorization` header. No API key is required.
@@ -871,7 +888,7 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Adding OAuth clients
 
-You can allow-list your redirect URLs in [{{< ui >}}Organization Preferences{{< /ui >}}][27] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
+To allow-list a redirect URL, open [{{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}][80] in Organization Settings, enter the URL, and select {{< ui >}}Add URL{{< /ui >}}.
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 
@@ -960,7 +977,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [24]: /account_management/rbac/permissions/#monitors
 [25]: /account_management/rbac/permissions/
 [26]: https://app.datadoghq.com/organization-settings/roles
-[27]: https://app.datadoghq.com/organization-settings/preferences
+[27]: https://app.datadoghq.com/organization-settings/mcp
 [28]: https://www.warp.dev/
 [29]: /synthetics/
 [30]: /continuous_integration/
@@ -1011,3 +1028,5 @@ Local authentication is recommended for Cline and when remote authentication is 
 [76]: /mcp_server/code_execution/ 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
+[79]: ]https://app.datadoghq.com/personal-settings/apps
+[80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls

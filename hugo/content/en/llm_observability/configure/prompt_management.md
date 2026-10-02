@@ -2,7 +2,7 @@
 title: Prompt Management
 aliases:
 - /llm_observability/monitoring/prompt_management/
-description: Create, version, and retrieve managed prompts in Python applications with Prompt Management.
+description: Create, version, and retrieve managed prompts in Python, Go, and JavaScript applications with Prompt Management.
 
 further_reading:
   - link: "/llm_observability/instrument/prompt_tracking"
@@ -126,7 +126,7 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
-Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
+Without prompt composition, combine prompts in application code or manage the final provider-facing prompt as a single prompt. To include one managed prompt in another, see [Reuse prompts with composition](#reuse-prompts-with-composition). Prompt composition is in Preview.
 
 ### Select a version
 
@@ -223,8 +223,9 @@ In the Prompt Editor:
 
 1. Add one or more messages and assign each a role: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}}, or {{< ui >}}Assistant{{< /ui >}}.
 2. Use `{{variable_name}}` syntax in any message to add dynamic content.
-3. Optional: Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
-4. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
+3. Optional: If you have access to the message placeholders Preview, click {{< ui >}}Add Message Placeholder{{< /ui >}}. See the [Insert messages at runtime](#insert-messages-at-runtime) section.
+4. Optional: Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
+5. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
 
 Structure the prompt so the user query and context are injected as variables:
 
@@ -289,9 +290,145 @@ Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect manag
 
 Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [Agent Observability API reference][8] for endpoint schemas, request media types, and examples.
 
-## Version prompt configuration
+## Insert messages at runtime
 
-<div class="alert alert-info"><strong>Preview:</strong> Versioned prompt configuration is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+<div class="alert alert-info"><strong>Preview:</strong> Message placeholders are available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Message placeholders insert conversation history or tool interactions into a saved prompt at runtime. A text variable, such as `{{question}}`, replaces text inside a message. A message placeholder inserts a list of complete messages.
+
+The prompt version stores the placeholder's name and position, not the messages you pass at runtime. To move the history within the prompt, publish a new prompt version. You do not need to change application code.
+
+**Preview SDK access:** Contact [Datadog Support](https://www.datadoghq.com/support/) or your Customer Success Manager for the SDK version to use for your language.
+
+### Define the placeholder
+
+In the Prompt Editor, click {{< ui >}}Add Message Placeholder{{< /ui >}} and enter a name, such as `history`. Use the up and down arrow buttons to move the placeholder between messages. Use a different name from any text variable in the prompt. The editor shows the compatible SDK requirement before you save.
+
+{{< img src="llm_observability/monitoring/message-placeholder-editor.png" alt="Prompt Editor with a history message placeholder between system instructions and a user message containing the question variable." >}}
+
+To create the same prompt with the Python SDK, add an item with `"type": "placeholder"` where the history belongs:
+
+```python
+from ddtrace.llmobs import LLMObs
+
+LLMObs.create_prompt(
+    "support-assistant",
+    [
+        {"role": "system", "content": "You are a concise assistant for {{plan}} customers."},
+        {"type": "placeholder", "name": "history"},
+        {"role": "user", "content": "{{question}}"},
+    ],
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+The placeholder name, `history`, is the key your application uses to pass messages at runtime. It is not a message role. For setup requirements and environment IDs, see the [Use the Python SDK](#use-the-python-sdk) section.
+
+### Supply runtime values
+
+Retrieve the prompt, then pass the history list with the text variables. The SDK inserts the history messages in order at the placeholder's position.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+prompt = LLMObs.get_prompt("support-assistant")
+
+variables = {
+    "plan": "enterprise",
+    "question": "Can I export the report?",
+    "history": [
+        {"role": "user", "content": "Where are reports located?"},
+        {"role": "assistant", "content": "Under Analytics."},
+    ],
+}
+messages = prompt.format(**variables)
+```
+{{% /tab %}}
+
+{{% tab "Go" %}}
+```go
+prompt, err := llmobs.GetPrompt(ctx, "support-assistant")
+if err != nil {
+	return err
+}
+
+variables := map[string]any{
+	"plan":     "enterprise",
+	"question": "Can I export the report?",
+	"history": []map[string]any{
+		{"role": "user", "content": "Where are reports located?"},
+		{"role": "assistant", "content": "Under Analytics."},
+	},
+}
+rendered, err := prompt.Format(variables)
+if err != nil {
+	return err
+}
+messages := rendered.Messages
+```
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+```javascript
+const prompt = await tracer.llmobs.getPrompt('support-assistant')
+
+const variables = {
+  plan: 'enterprise',
+  question: 'Can I export the report?',
+  history: [
+    { role: 'user', content: 'Where are reports located?' },
+    { role: 'assistant', content: 'Under Analytics.' }
+  ]
+}
+const messages = prompt.format(variables)
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+The result contains four messages, with no placeholder item:
+
+```json
+[
+  {"role": "system", "content": "You are a concise assistant for enterprise customers."},
+  {"role": "user", "content": "Where are reports located?"},
+  {"role": "assistant", "content": "Under Analytics."},
+  {"role": "user", "content": "Can I export the report?"}
+]
+```
+
+Pass the formatted messages to your model provider. If an inserted message contains `{{variable}}` syntax, the SDK leaves it as literal text.
+
+Use the same [prompt tracking](#track-prompt-usage) workflow as for other managed prompts. Prompt metadata preserves the placeholder definition rather than its runtime values; expanded messages follow the existing input-capture and privacy settings.
+
+### Include tool interactions
+
+A placeholder can also insert tool calls and tool responses. Use your model provider's message format. For example, in the OpenAI Chat Completions format, set each tool response's `tool_call_id` to the `id` of its tool call:
+
+```python
+variables["history"] = [
+    {
+        "role": "assistant",
+        "tool_calls": [{
+            "id": "call_1",
+            "type": "function",
+            "function": {"name": "get_plan", "arguments": "{}"},
+        }],
+    },
+    {"role": "tool", "tool_call_id": "call_1", "content": "enterprise"},
+]
+messages = prompt.format(**variables)
+```
+
+The SDK inserts these messages unchanged. Your application executes the tool and supplies its response.
+
+### Message placeholder requirements and limits
+
+- Pass a list for every placeholder. An empty list (`[]`) inserts no messages.
+- Inserted messages can contain text, assistant tool calls, or tool responses. The SDK does not execute tools or validate provider-specific fields.
+- If a prompt uses the same placeholder name more than once, each occurrence inserts the same list. Different placeholder names can receive different lists.
+- Nested placeholders and multimodal content, such as images or audio, are not supported.
+
+## Version prompt configuration
 
 Store settings alongside your prompt so you can update and roll back both as one version. Use configuration for:
 
@@ -397,6 +534,90 @@ Pass these values to your model client along with the messages returned by `prom
 
 **API authoring:** You can also create prompts and versions with the [Prompt Management API][8]. Omitting `config` creates an empty configuration for a new prompt or inherits the latest configuration for a new version. Send `{}` to clear it.
 
+## Reuse prompts with composition
+
+<div class="alert alert-info"><strong>Preview:</strong> Prompt composition is available in Preview. To request access, contact <a href="https://www.datadoghq.com/support/">Datadog Support</a> or your Customer Success Manager.</div>
+
+Prompt composition lets one prompt include another, so you can reuse shared instructions without copying them. For example, a support assistant and a billing assistant can include the same response policy. You can include another prompt in two ways:
+
+- **Chat messages**: Include some or all messages from a chat prompt.
+- **Text**: Insert a text prompt's content inside a message.
+
+Each include points to one exact version. Publishing a new version of the included prompt doesn't change prompts that already include it.
+
+### Include chat messages
+
+#### In the UI
+
+The following example adds a shared response policy to a support assistant prompt.
+
+1. Save a prompt with the ID `response-policy` and one {{< ui >}}System{{< /ui >}} message: `Answer concisely. If you do not know the answer, say so.`
+2. On the {{< ui >}}Prompts{{< /ui >}} page, click {{< ui >}}New Prompt{{< /ui >}}. In the Prompt Editor, click {{< ui >}}Include Prompt{{< /ui >}}, select `response-policy` version 1, and click {{< ui >}}Add prompt{{< /ui >}}.
+3. After the included prompt, add a {{< ui >}}User{{< /ui >}} message containing `{{question}}`. If the editor added empty messages, remove them.
+4. Click {{< ui >}}Save{{< /ui >}}, enter `support-assistant-composed` as the prompt ID, and click {{< ui >}}Create prompt{{< /ui >}}.
+
+{{< img src="llm_observability/monitoring/prompt-composition-example.png" alt="The Playground showing response-policy version 1 included as a System message, followed by a User message containing the question variable." style="width:100%;" >}}
+
+Your prompt now contains:
+
+```text
+System: Answer concisely. If you do not know the answer, say so.
+User: {{question}}
+```
+
+Your application [retrieves and formats the prompt](#retrieve-format-and-use-a-prompt) as usual. The retrieved prompt already contains the included messages, so you don't need to fetch `response-policy` separately.
+
+By default, an include adds every message from the included prompt, in order. To include only some messages, reorder them, or repeat one, click {{< ui >}}Included Prompt{{< /ui >}} in the Prompt Editor and select {{< ui >}}Customize messages{{< /ui >}}. Customizing doesn't change the included prompt.
+
+#### With the API
+
+Use an `include` object in `template.messages` to reference a specific version of a chat prompt. This example assumes a chat prompt `response-policy` with a version 1. To create a prompt that includes it, send this JSON body to `POST /api/v2/llm-obs/v1/prompts`:
+
+```json
+{
+  "data": {
+    "type": "prompt-templates",
+    "attributes": {
+      "prompt_id": "support-assistant-composed",
+      "template": {
+        "messages": [
+          { "include": { "prompt_id": "response-policy", "version": 1 } },
+          { "role": "user", "content": "{{question}}" }
+        ]
+      }
+    }
+  }
+}
+```
+
+For authentication and message-selection options, see [Create an Agent Observability prompt][11].
+
+### Include text in a message
+
+To reuse a phrase instead of complete messages, click {{< ui >}}Include Prompt{{< /ui >}}, select a text prompt and version, and click {{< ui >}}Insert text{{< /ui >}}. The reference is added to the end of the last editable message. Move it where you need it.
+
+For example, if `response-style` version 1 contains `Answer concisely.`, write:
+
+```text
+{{>response-style version=1}} Answer {{question}}.
+```
+
+The resolved template is:
+
+```text
+Answer concisely. Answer {{question}}.
+```
+
+The reference resolves to the included text exactly, with no added spaces or line breaks. Always specify a version. Without one, `{{>response-style}}` stays literal text, not an include. When creating a prompt without Preview access, inline references remain literal text. Previously saved composed versions remain usable.
+
+In API requests, use the same syntax in a text `template` or a chat message's `content`.
+
+### Review and update includes
+
+On a saved version, {{< ui >}}Prompt Template{{< /ui >}} shows the references you authored. {{< ui >}}Resolved Prompt{{< /ui >}} shows the expanded messages, before runtime variables are filled in.
+
+When a shared policy changes, use its {{< ui >}}Used By{{< /ui >}} tab to find prompts that reference it. Open a consuming prompt, replace the include with the new source version, then test, save, and deploy the updated prompt. Existing versions keep their original content, even if the source is later deleted.
+
 ## Advanced usage
 
 ### Serve multiple versions from one environment
@@ -445,3 +666,4 @@ To retrieve an exact version regardless of any targeting rule, pass `version` as
 [8]: /api/latest/agent-observability/
 [9]: /api/latest/feature-flags/list-environments/
 [10]: /llm_observability/configure/prompt_experimentation/
+[11]: /api/latest/agent-observability/create-an-agent-observability-prompt/

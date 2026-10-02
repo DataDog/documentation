@@ -231,6 +231,10 @@
     "name": "Execution Policy",
     "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
   },
+  "experiments": {
+    "name": "Experiments",
+    "description": "Create and manage experiments, metrics, subject types, SQL models, and protocols."
+  },
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."
@@ -290,6 +294,10 @@
   "logs": {
     "name": "Logs",
     "description": "Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information."
+  },
+  "logs-archive-searches": {
+    "name": "Logs Archive Searches",
+    "description": "Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate\nthe matches into a retained historical view.\n\nSee the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)\npage for the searches currently running in Datadog."
   },
   "logs-archives": {
     "name": "Logs Archives",
@@ -405,7 +413,7 @@
   },
   "rum-operations": {
     "name": "RUM Operations",
-    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their strong links\nto features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
+    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their links\nto journeys. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",

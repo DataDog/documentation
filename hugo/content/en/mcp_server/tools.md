@@ -179,6 +179,15 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Find slow database queries in the last 30 minutes.
 - Get spans for failed API requests to our payment service.
 
+### `aggregate_spans`
+*Toolset: **core***\
+*Permissions Required: `APM Read`*\
+Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (p50 to p99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
+
+- What is the p95 duration by resource for the checkout service over the last hour?
+- Show me request counts for the payments service in 5-minute buckets over the last day.
+- Count errors grouped by endpoint and status code for `service:web-store`.
+
 ### `analyze_datadog_logs`
 *Toolset: **core***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
@@ -288,27 +297,19 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
+Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
-
-### `apm_search_spans`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for spans using APM query syntax, with support for pagination and tag filtering.
-
-- Show me spans with errors from the checkout service in the last hour.
-- Find slow database queries taking more than 2 seconds.
-- Search for spans with `service:payments` and `status:error`.
 
 ### `apm_query_trace`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Queries a trace's span data to filter, aggregate, or rank spans, such as finding the highest self-time spans or tracing an error to its origin service.
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
 
-- Find the top 5 spans by self-time in trace `abc123`.
-- Show all error messages and their originating services in trace `abc123`.
-- Which database calls in this trace took longer than 500ms?
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
@@ -324,21 +325,6 @@ Discovers available tag keys on spans within a time range.
 Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
-
-### `apm_search_watchdog_stories`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
-
-- Show me Watchdog anomalies for the checkout service in the last 24 hours.
-- Are there any latency anomalies detected for my API service?
-
-### `apm_get_watchdog_story`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves detailed information about a specific Watchdog story by its ID.
-
-- Get the details of Watchdog story `abc123`.
 
 ### `apm_get_service_health`
 *Toolset: **apm***\
@@ -357,22 +343,6 @@ Analyzes latency bottlenecks across traces in an anomaly period using self-time 
 - What is consuming the most self-time in the payments service during this latency spike?
 - Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
 
-### `get_change_stories`
-*Toolset: **apm***\
-Retrieves change stories from the Change Tracking API for APM services. Use this to identify what changed (deployments, feature flags, configuration updates, and infrastructure events) during a time range and correlate changes with performance issues or incidents.
-
-- Show me recent deployments and changes for the payments service.
-- What infrastructure changes happened around the time of this latency spike?
-- Find feature flag and configuration changes for the checkout service in the last hour.
-
-### `semantic_search_change_stories`
-*Toolset: **apm***\
-Searches change stories using natural language and AI-powered semantic search. Use this to find feature flag or deployment changes related to a behavior, a user-reported issue, or a part of the product you are investigating.
-
-- What changed recently that could affect dashboard loading for trial users?
-- Which flags might impact authentication in the billing settings page?
-- Find changes related to missing telemetry data in the last week.
-
 ### `apm_search_recommendations`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
@@ -387,6 +357,75 @@ Searches for APM recommendations from Datadog.
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `create_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
+
+- Sample 10% of `GET /health` spans for the checkout service in prod.
+- Keep all traces for the `POST /payments` resource on the payments service in staging.
+
+### `update_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
+
+- Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
+- Lower the sample rate for the checkout service's health check endpoint to 1%.
+
+### `delete_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Remove the sampling rule for `GET /health` on the checkout service in prod.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
+
+### `create_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
+
+- Rename the inferred database service `postgres` to `orders-db` for spans from the orders service.
+- Create a remapping rule that renames `web-store-v2` to `web-store`.
+
+### `update_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
+
+- Update the `orders-db` remapping rule to also match spans from the fulfillment service.
+- Update the `web-store` remapping rule to rename matching services to `storefront`.
+
+### `reorder_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
+
+- Move the `orders-db` remapping rule ahead of the generic database rule.
+
+### `delete_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Delete the `web-store` service remapping rule.
 
 ## Assistant
 
@@ -952,6 +991,29 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+### `ddsql_search_saved_queries`
+*Toolset: **ddsql***\
+Searches saved DDSQL queries by name or description and returns their SQL text and metadata, sorted by most recently modified. Supports optional text filtering and pagination. Multiple filter words are ANDed together.
+
+- Find saved DDSQL queries about Kubernetes.
+- List the organization's most recently updated saved queries.
+- Search saved queries for CPU usage.
+
+### `ddsql_read_saved_query`
+*Toolset: **ddsql***\
+Gets a saved DDSQL query by its query ID, including its name, SQL text, columns, description, and author metadata.
+
+- Show the SQL for this saved query.
+- Get the details of the saved query with this ID.
+
+### `ddsql_upsert_saved_query`
+*Toolset: **ddsql***\
+Creates or updates a saved DDSQL query. To create a query, provide a name and SQL text and omit the query ID. To update a query, provide its query ID and a new name, SQL text, or both. If the name or SQL text is omitted from an update, its existing value is preserved.
+
+- Save this query as "CPU usage by host".
+- Rename this saved query to "Production hosts".
+- Update the SQL in this saved query to include only production hosts.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -1257,7 +1319,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1364,7 +1426,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -1631,7 +1693,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1666,6 +1728,40 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
+
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues in the last hour?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
+### `run_network_path`
+*Toolset: **networks***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
 ## Onboarding
 
@@ -2106,7 +2202,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2477,6 +2573,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
 
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
+
 ## Session Replay
 
 Tools for searching [Session Replay][69] recordings and summarizing session activity.
@@ -2710,6 +2865,74 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+## Watchdog
+
+Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
+
+### `search_watchdog_stories`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog stories for anomalies and root cause analyses across APM, infrastructure, and logs. Returns story summaries and keys to use with `get_watchdog_story`.
+
+- Show Watchdog stories for the checkout service in the last 24 hours.
+- Find Watchdog stories about increased error rates in production.
+
+### `get_watchdog_story`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read` and `Built-in Features`*\
+Retrieves a Watchdog story by its key, including insight details, the timeline, and available root cause analysis. Use a story key returned by `search_watchdog_stories`.
+
+- Get the details of the Watchdog story returned by that search.
+- Show the timeline and root cause analysis for this Watchdog story.
+
+### `search_watchdog_insights`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog insights for a product context and time range, including anomalies, outliers, recommendations, and correlations. Supports contexts such as APM, logs, RUM, Kubernetes, and Database Monitoring.
+
+- Find Watchdog insights for the checkout service in production over the last hour.
+- Show Watchdog insights for logs from the payments service in the last 24 hours.
+
+### `get_influential_tags`
+*Toolset: **watchdog***\
+*Permissions Required: `Metrics`*\
+Identifies tag dimensions associated with a spike, drop, or other change in a metric. Provide a metric query and a time range. Include the anomaly start time when known, to compare behavior before and after the change.
+
+- Explain what's causing the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago.
+- Find the hosts or regions contributing to this metric change over the last hour.
+
+### `get_external_provider_status`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Retrieves external provider outages, including their status and impacted regions. Filter by provider, affected service, or time range, and optionally include resolved outages and impacted services.
+
+- Check for external provider outages affecting the checkout service.
+- Show AWS outages from the last 24 hours, including resolved outages.
+
+### `find_new_jumps`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Detects sudden changes in an APM timeseries for latency, error rate, or throughput. Provide a signal query and analysis window. Latency and error-rate analysis also require a request-count query.
+
+- Find sudden latency changes for the checkout service over the last four hours.
+- Check for sudden drops in throughput for the payments service over the last six hours.
+
+### `update_jump_state`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Reanalyzes an ongoing jump returned by `find_new_jumps` over a new time window to determine whether it is ongoing, resolved, expired, or invalidated. Reuse the returned jump state and original signal queries. This tool computes an updated result without modifying stored data.
+
+- Recheck the ongoing latency jump from the previous analysis using the latest data.
+- Check whether the throughput drop returned by `find_new_jumps` has resolved.
+
+### `forecast_timeseries`
+*Toolset: **watchdog***\
+*Permissions Required: No specific permissions required.*\
+Forecasts future values from supplied historical timestamps and values, with optional confidence bounds. Provide at least 64 historical points per series. To forecast a Datadog metric, retrieve its history with a metrics query tool first.
+
+- Forecast the next 24 hourly values from these historical timestamps and values.
+- Use this timeseries to forecast the next 12 values with 95% confidence bounds.
 
 ## Widgets
 
@@ -2959,8 +3182,13 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [76]: /bits_ai/bits_investigation/
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
-[79]: /account_management/governance_console/
+[79]: /watchdog/
 [80]: /account_management/governance_console/controls/
+[81]: /tracing/services/service_remapping_rules/
+[82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
 
 ## Further reading
 

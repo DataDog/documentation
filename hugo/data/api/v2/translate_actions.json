@@ -1665,13 +1665,13 @@
     "request_schema_description": "Edit request for a dataset."
   },
   "ExecuteDdsqlTabularQuery": {
-    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.",
+    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.\n\nFor a scoped application key, include `timeseries_query` in its scopes.\nA query that does not read a data source, such as `SELECT 1`, requires no additional\ndata-source permissions. Queries that read data sources also require the user or\nservice account that owns the application key to have the corresponding data access\npermissions through their roles. The `timeseries_query` permission does not grant\naccess to the underlying data sources.",
     "summary": "Execute a tabular DDSQL query",
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query execution request."
   },
   "FetchDdsqlTabularQuery": {
-    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.",
+    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.\n\nFor a scoped application key, include `timeseries_query` in its scopes.\nFetch results as the same user and organization that submitted the query.\nThe user or service account that owns the application key must have the data access\npermissions required by the queried data sources through their roles.",
     "summary": "Fetch the result of a DDSQL query",
     "request_description": "",
     "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
@@ -1953,6 +1953,234 @@
   "GetEvent": {
     "description": "Get the details of an event by `event_id`.",
     "summary": "Get an event"
+  },
+  "ListExperiments": {
+    "description": "List experiments. Returns a paginated list of experiments and their structured metadata for the organization. Supports filtering and pagination. Use Get experiment for variants, decision metrics, traffic exposure, and assignment configuration.",
+    "summary": "List experiments"
+  },
+  "CreateExperiment": {
+    "description": "Create a draft experiment. `name` is required. `structured_metadata` identifies each metadata field by `field_key`; use `freetext_value` for free-text fields and `enum_values` for enum fields. When this attribute is present, the request must include a value for every required metadata field. When `protocol_id` is present, the published protocol supplies the subject type, decision metrics, analysis-plan defaults, and configuration and enforcement baselines. The request may also include hypothesis, tags, teams, related links, and assignment or event date overrides that satisfy the protocol's duration rules; omit subject_type_id, decision_metrics, variants, warehouse_exposure_configuration, datadog_flag_configuration, traffic_exposure, split_by_properties, and structured_metadata. The protocol association cannot be changed after creation. Without `protocol_id`, a complete Warehouse or Datadog configuration saves the experiment and its configuration in one transaction. For Datadog flag configuration, send `name`, `subject_type_id`, `decision_metrics`, `variants`, `traffic_exposure`, `assignments_start_date`, `assignments_end_date`, `events_start_date`, and `events_end_date`. The four date fields can be null. Inside `datadog_flag_configuration`, send `feature_flag_id`, `environment_id`, `targeting_rules`, and `entry_point`. Use `targeting_rules: []` and `entry_point: null` when unused. This creates one saved draft allocation that does not serve traffic. Omit all configuration fields to create an experiment without an allocation. This endpoint is not idempotent.",
+    "summary": "Create experiment",
+    "request_description": "",
+    "request_schema_description": "Request to create an experiment draft."
+  },
+  "ListExposureSQLModels": {
+    "description": "List exposure SQL models. Returns a paginated list of the SQL models that experiment exposures are read from for the organization. Models maintained by Datadog are not included: they cannot be modified and cannot be used as an experiment's assignment source.",
+    "summary": "List exposure SQL models"
+  },
+  "CreateExposureSQLModel": {
+    "description": "Create an exposure SQL model. Requires at least one subject type. The warehouse connection is resolved from the organization, which has exactly one.",
+    "summary": "Create exposure SQL model",
+    "request_description": "",
+    "request_schema_description": "Request to create a SQL model for experiment assignment data."
+  },
+  "GetExposureSQLModel": {
+    "description": "Get an exposure SQL model. Returns a single model by its ID for the organization, including its subject types and properties.",
+    "summary": "Get exposure SQL model"
+  },
+  "UpdateExposureSQLModel": {
+    "description": "Replace an exposure SQL model. This is a full replacement and is destructive: any subject type or property not present in the body is deleted, and properties are matched on name, column_name and column_type together, so changing one of those replaces the property rather than editing it. Send the complete set you want to keep. Anything removed is listed under meta.removed_subject_type_ids and meta.removed_property_names in the response. The warehouse connection is not settable and is left as stored.",
+    "summary": "Update exposure SQL model",
+    "request_description": "",
+    "request_schema_description": "Request to create a SQL model for experiment assignment data."
+  },
+  "ArchiveExposureSQLModel": {
+    "description": "Archive an exposure SQL model. Archived models are hidden from the default list and are no longer refreshed for new feature flags. Experiments already reading from the model keep working. Archiving is how a model that is in use by an experiment, and therefore cannot be deleted, is retired.",
+    "summary": "Archive exposure SQL model"
+  },
+  "UnarchiveExposureSQLModel": {
+    "description": "Unarchive an exposure SQL model. Restores an archived model to the default list.",
+    "summary": "Unarchive exposure SQL model"
+  },
+  "ListMetricCollections": {
+    "description": "List metric collections for the organization. Collections are reusable ordered metric sets; attaching one to an experiment creates an independent snapshot.",
+    "summary": "List metric collections"
+  },
+  "CreateMetricCollection": {
+    "description": "Create metric collection.",
+    "summary": "Create metric collection",
+    "request_description": "",
+    "request_schema_description": "Request to create a reusable collection of metrics."
+  },
+  "DeleteMetricCollection": {
+    "description": "Delete metric collection.",
+    "summary": "Delete metric collection"
+  },
+  "GetMetricCollection": {
+    "description": "Get metric collection.",
+    "summary": "Get metric collection"
+  },
+  "UpdateMetricCollection": {
+    "description": "Update metric collection.",
+    "summary": "Update metric collection",
+    "request_description": "",
+    "request_schema_description": "Request to update the metric collection."
+  },
+  "ListMetricSQLModels": {
+    "description": "List metric SQL models. Returns a paginated list of the SQL models that metrics are defined on for the organization.",
+    "summary": "List metric SQL models"
+  },
+  "CreateMetricSQLModel": {
+    "description": "Create a metric SQL model. Requires at least one subject type, whose subject_type_id must already exist for the organization (list them with GET /api/v2/experiments/subject-types). The model is created against the organization's warehouse connection, which is resolved server-side. Only customer-defined measures belong in measures. The response provides unique_subject_count_measure_id for each subject type and event_count_measure_id for use in metric aggregations. column_type is required for every measure and property. Certification is read-only and cannot be changed through this endpoint.",
+    "summary": "Create metric SQL model",
+    "request_description": "",
+    "request_schema_description": "Request to create a SQL model that supplies metric data."
+  },
+  "GetMetricSQLModel": {
+    "description": "Get a metric SQL model. Returns a single model by its ID for the organization, including its subject types, measures and properties.",
+    "summary": "Get metric SQL model"
+  },
+  "UpdateMetricSQLModel": {
+    "description": "Replace a metric SQL model. This is a destructive full replace: subject types, customer-defined measures, and properties absent from the body are deleted, so send the complete set. Properties are matched by name; changing a property's column, type, or description preserves its ID. column_type is required for every measure and property. Removing a measure or property that an active metric references returns 409 Conflict. Server-generated IDs returned by GET are read-only and can be left in a replayed body. The response reports removals in meta.deleted_subject_types, meta.deleted_measures, and meta.deleted_properties. Certification is read-only. Certified models cannot be replaced through this endpoint.",
+    "summary": "Update metric SQL model",
+    "request_description": "",
+    "request_schema_description": "Request to create a SQL model that supplies metric data."
+  },
+  "ListMetrics": {
+    "description": "List metrics. Returns a paginated list of the experiment metrics defined for the organization.",
+    "summary": "List metrics"
+  },
+  "CreateMetric": {
+    "description": "Create a metric. The metric's type is derived from the aggregation shape: a numerator alone is SIMPLE, a numerator with a denominator is RATIO, and a percentile aggregation is PERCENTILE. Warehouse aggregations reference measures by UUID. Property filters use property_id or measure_id UUIDs returned by the same metric SQL model; every reference must belong to the aggregation's data source. The is_certified attribute is rejected. Certification cannot be changed through this endpoint.",
+    "summary": "Create metric",
+    "request_description": "",
+    "request_schema_description": "Request to create an experiment metric."
+  },
+  "DeleteMetric": {
+    "description": "Delete a metric. Certified metrics are read-only through this endpoint. The record is soft-deleted and stops appearing in reads. A metric still referenced by an experiment cannot be deleted; detach it from those experiments first.",
+    "summary": "Delete metric"
+  },
+  "GetMetric": {
+    "description": "Get a metric. Returns a single experiment metric by its ID for the organization.",
+    "summary": "Get metric"
+  },
+  "UpdateMetric": {
+    "description": "Update a metric. Certified metrics are read-only through this endpoint. This is a partial update: every attribute is optional and an omitted attribute keeps its stored value, so a body carrying only the fields being changed is enough. `guardrail_cutoff_threshold` is nullable -- send null to clear it, omit it to leave it alone. Omitting the aggregation leaves the metric's definition untouched; supplying one replaces it wholesale, and the metric's type is re-derived from the shape supplied. Property filters use property_id or measure_id UUIDs from the aggregation's data source. Attributes that are computed rather than stored (short_id, metric_type, certified_at, experiment_count, created_at, updated_at) are rejected rather than ignored, so a body copied from GET must have them removed. The is_certified attribute is rejected. Certification cannot be changed through this endpoint.",
+    "summary": "Update metric",
+    "request_description": "",
+    "request_schema_description": "Request to update the metric."
+  },
+  "ListExperimentProtocols": {
+    "description": "List draft, published, and archived experiment protocols. Omit filter[status] to return all statuses. Only published protocols can be used to create experiments.",
+    "summary": "List experiment protocols"
+  },
+  "GetExperimentProtocol": {
+    "description": "Get a draft, published, or archived experiment protocol by ID.",
+    "summary": "Get experiment protocol"
+  },
+  "RefreshExperimentResultsForOrg": {
+    "description": "Trigger a results refresh across the organization's active experiments. Returns the count of experiments whose refresh was triggered (meta.experiments_updated) plus a per-experiment breakdown of what happened to each (meta.results).",
+    "summary": "Refresh experiment results for org"
+  },
+  "ListSubjectTypes": {
+    "description": "List subject types. Returns a paginated list of the subject types defined for the organization.",
+    "summary": "List subject types"
+  },
+  "CreateSubjectType": {
+    "description": "Create a subject type for the organization.",
+    "summary": "Create subject type",
+    "request_description": "",
+    "request_schema_description": "Request to create a subject type for experiment assignments."
+  },
+  "DeleteSubjectType": {
+    "description": "Delete a subject type. The record is soft-deleted and stops appearing in reads. The call is idempotent: deleting the same subject type again also returns 204. The organization's default subject type cannot be deleted; make another one the default first. A subject type that experiments, exposure SQL models, metric SQL models or protocols still reference cannot be deleted either; the refusal names the blockers.",
+    "summary": "Delete subject type"
+  },
+  "GetSubjectType": {
+    "description": "Get a subject type. Returns a single subject type by its ID for the organization.",
+    "summary": "Get subject type"
+  },
+  "PatchSubjectType": {
+    "description": "Update mutable fields on a subject type. Only the fields present in the body are changed. Any subject type can be updated, including the organization's default one, but the is_default flag itself is read-only here: which subject type is the default cannot be changed through this endpoint.",
+    "summary": "Patch subject type",
+    "request_description": "",
+    "request_schema_description": "Request to update the subject type."
+  },
+  "SetDefaultSubjectType": {
+    "description": "Make this subject type the organization's default. Experiment creation uses the default when the request names no subject type. Promoting one subject type demotes the previous default in the same transaction, so the organization always has exactly one. The call is idempotent: promoting the current default succeeds and changes nothing. There is no matching demote, because an organization cannot have no default; promote a different subject type instead.",
+    "summary": "Set default subject type"
+  },
+  "DeleteExperiment": {
+    "description": "Delete an experiment and its linked feature flag allocations in one database transaction. After deletion, the experiment is no longer returned by the API. If the transaction fails, neither the experiment nor its allocations are deleted. Deleting an experiment cannot be undone.",
+    "summary": "Delete experiment"
+  },
+  "GetExperiment": {
+    "description": "Get a complete experiment by ID. The response includes structured metadata, related links, and, when a complete setup exists, decision metrics, variants, `warehouse_exposure_configuration`, `datadog_flag_configuration`, STATIC or STEPS traffic exposure, and assignment and event dates. STEPS describes the configured plan rather than wall-clock history; Datadog step durations exclude pauses. The list endpoint omits these setup details.",
+    "summary": "Get experiment"
+  },
+  "PatchExperiment": {
+    "description": "Update mutable experiment fields. State and protocol restrictions apply.\n\n**PATCH behavior**\n\n- Omitted fields stay unchanged, including fields inside `datadog_flag_configuration`.\n- Supplied `tags`, `teams`, `related_links`, `decision_metrics`, and `variants` replace their stored lists.\n- Validation can return several field errors before saving any changes. The response is HTTP 400 if any error\n  concerns invalid input. It is HTTP 409 if all errors concern state or protocol conflicts.\n\n**Result refreshes**\n\nThis endpoint does not start a pipeline run. `meta.needs_pipeline_refresh` states whether the edit requires a\nrun. When true, POST to `meta.refresh_endpoint` after finishing your edits. Its `full_refresh` query parameter\nselects the run type.\n\nKeep refresh requirements across edits. A later false value does not clear an earlier requirement. Any\n`full_refresh=true` requirement takes priority.\n\nAfter start, STATIC and STEPS exposure changes for warehouse experiments without a Datadog flag attempt to\nrecalculate stored results. Changes to decision metrics or the control variant also attempt recalculation when\nresults exist. If stored data is insufficient or recalculation fails, the edit stays saved and\n`meta.needs_pipeline_refresh` is true.\n\n**Exposure rules**\n\n- Draft experiments can replace the full STATIC or STEPS plan through `traffic_exposure`.\n- Warehouse steps start at `assignments_start_date` and can have different durations.\n- Running warehouse experiments can replace step fractions, durations, and exposure mode. Retained variant\n  weights cannot change through this API. You can send unchanged values again.\n- After a warehouse experiment ends, configuration replacement supports only STATIC fraction changes.\n- New Datadog plans have at most five steps. The first fraction must be positive. All steps except the last\n  have equal durations. Durations exclude pauses.\n- The last step has a null duration. Its fraction stays in effect until assignment ends.\n- After start, use the experiment UI to change traffic exposure for experiments linked to a Datadog flag.\n\n**Metadata**\n\n`structured_metadata` updates fields by `field_key`. Use `freetext_value: \"\"` or `enum_values: []` to clear an\noptional field. Omitted fields stay unchanged. A null or empty `structured_metadata` attribute makes no\nchange.\n\n**Flag changes**\n\nBefore start, a Datadog update creates or edits the saved draft allocation. To add or replace a flag, send\n`variants` and `traffic_exposure`. Inside `datadog_flag_configuration`, send `feature_flag_id`,\n`environment_id`, `targeting_rules`, and `entry_point`. Use `targeting_rules: []` and `entry_point: null` when\nunused.\n\nTo replace a flag, also set `reset_on_feature_flag_change: true` inside that object. The server deletes the\nold draft and creates a new one in the same transaction. The response includes a\n`datadog_flag_configuration_reset` warning in `meta.warnings`.\n\nSet `datadog_flag_configuration: null` to delete the draft allocation. This also clears the experiment's flag\nassociation, variants, assignment sources, and entry point. The experiment remains.\n\nFlag replacement and removal require a draft experiment without warehouse exposure. These actions do not\nconvert hybrid experiments.",
+    "summary": "Patch experiment",
+    "request_description": "",
+    "request_schema_description": "Request to update the experiment."
+  },
+  "GetExperimentAnalysisPlan": {
+    "description": "Get the effective public statistical analysis settings for an experiment. has_custom_analysis_settings compares only settings the caller can edit; protocol-required differences from company defaults do not make the plan custom.",
+    "summary": "Get experiment analysis plan"
+  },
+  "UpdateExperimentAnalysisPlanAttributes": {
+    "description": "Update selected statistical analysis settings. Omitted attributes remain unchanged and nullable attributes can be cleared with null. Protocol-locked settings cannot be changed.",
+    "summary": "Update experiment analysis plan attributes",
+    "request_description": "",
+    "request_schema_description": "Request to update the analysis settings for an experiment."
+  },
+  "CancelExperiment": {
+    "description": "Cancel an experiment, ending it without a winning variant. The experiment moves to CANCELLED status, the\nsupplied reason is recorded in its conclusion as the decision reason, and the experiment is unlinked from the\nfeature flag allocations that exposed it, which stops its exposure. An experiment that has already completed\nits rollout, had its code removed, or been canceled cannot be canceled again. Canceling is not reversible: an\nexperiment cannot be returned to a running state afterward. It is also not idempotent: canceling an\nalready-canceled experiment returns 409, so a retry after a timeout cannot be distinguished from a\ncancellation made by someone else.",
+    "summary": "Cancel experiment",
+    "request_description": "",
+    "request_schema_description": "Request to cancel an experiment and record a reason."
+  },
+  "ConcludeExperiment": {
+    "description": "Conclude an experiment on a winning variant. The experiment moves to DECISION_MADE status, the outcome is recorded in its conclusion, and for a flag-backed experiment the winning variant is rolled out to 100% of the linked feature flag allocation. `decision_variant_key` must match a variant in the experiment. Only an experiment that is currently running or ready for a decision can be concluded. Concluding is not reversible and is not idempotent: concluding an already-concluded experiment returns 409.",
+    "summary": "Conclude experiment",
+    "request_description": "",
+    "request_schema_description": "Request to conclude an experiment with a winning variant."
+  },
+  "GetExperimentDiagnostics": {
+    "description": "Get the diagnostics produced by an experiment's latest analysis run. Each diagnostic includes its category, and the response includes an overall diagnostic or pipeline lifecycle status.",
+    "summary": "Get experiment diagnostics"
+  },
+  "ListExperimentMetricGroups": {
+    "description": "List every decision and non-decision metric group attached to an experiment. Metric references are returned in their stored order. An incomplete draft can have no decision group and returns only the groups that exist.",
+    "summary": "List experiment metric groups"
+  },
+  "CreateExperimentMetricGroup": {
+    "description": "Create a non-decision metric group. The optional metrics array is ordered. Decision groups remain managed through decision_metrics on the experiment resource. This operation does not synchronously recompute results.",
+    "summary": "Create experiment metric group",
+    "request_description": "",
+    "request_schema_description": "Request to create a metric group on an experiment."
+  },
+  "CreateExperimentMetricGroupFromCollection": {
+    "description": "Copy a metric collection into a new non-decision metric group. The group is a request-time snapshot: later changes to the collection do not affect the experiment. Metric order is preserved. The operation is not idempotent, and incompatible or empty collections are rejected without creating a group.",
+    "summary": "Create experiment metric group from collection"
+  },
+  "DeleteExperimentMetricGroup": {
+    "description": "Delete a non-decision metric group and its memberships. Decision groups remain managed through the experiment resource. This operation does not start a pipeline. Read experiment results after deletion to check stale metadata, then explicitly refresh results when required.",
+    "summary": "Delete experiment metric group"
+  },
+  "UpdateExperimentMetricGroup": {
+    "description": "Update a non-decision metric group. Omitted attributes are unchanged; a supplied metrics array is the complete ordered replacement. Decision groups remain managed through the experiment resource. This operation does not synchronously recompute results.",
+    "summary": "Update experiment metric group",
+    "request_description": "",
+    "request_schema_description": "Request to update the experiment metric group."
+  },
+  "GetExperimentResults": {
+    "description": "Get an experiment's computed results: per-variant statistical analysis for the latest successful run. A historical run cannot be selected. Unavailable analysis statistics, including `p_value` and `confidence_interval`, are omitted. The `numerator`, `denominator`, and `variant_metric_value` fields can be null when their values are unavailable. Do not treat an omitted or null value as zero.",
+    "summary": "Get experiment results"
+  },
+  "RefreshExperimentResults": {
+    "description": "Request a results refresh for one experiment. HTTP 202 confirms acceptance, not completed results. The response identifies the experiment and does not include a job ID. Read experiment results to check freshness. A request while a refresh is queued or running returns 409. After completion, another request can start another refresh.",
+    "summary": "Refresh experiment results"
+  },
+  "StartExperiment": {
+    "description": "Start an experiment. The experiment is started exactly as it is configured; this endpoint accepts no attributes, and a request body carrying any is rejected rather than ignored. Set the run window, duration, or variants with PATCH /api/v2/experiments/{experiment_id} before starting. An unconfigured draft returns HTTP 409. Configure either warehouse_exposure_configuration or datadog_flag_configuration, plus the required experiment fields, before starting. Start validation errors can include meta.configuration_pointer to identify a field on the experiment to correct. For a flag-backed experiment this enables the linked feature flag's environment, clears any stored variant override on it, and starts the allocation's rollout. The request is idempotent: an experiment that is already running or ready for a decision still returns 204, so a retry after a timeout is safe. One exception: an experiment scheduled to start is accepted only when it is backed by your own feature flag; a Datadog-flag experiment in that state returns 409 because its stored state and flag allocation disagree. Cancel and conclude are not idempotent and return 409 when repeated.",
+    "summary": "Start experiment",
+    "request_description": "",
+    "request_schema_description": "Request to start the experiment."
+  },
+  "GetExperimentTrafficSummary": {
+    "description": "Get an experiment's traffic summary: per-variant exposure counts and a sample-ratio-mismatch flag (is_traffic_imbalanced). SRM statistics live on the diagnostics endpoint.",
+    "summary": "Get experiment traffic summary"
   },
   "ListFeatureFlags": {
     "description": "Returns a list of feature flags for the organization.\nSupports filtering by key and archived status.",
@@ -3857,6 +4085,16 @@
     "request_description": "",
     "request_schema_description": "The object sent with the request to retrieve a list of logs from your organization."
   },
+  "CreateArchiveSearch": {
+    "description": "Start a search over the logs stored in an archive.\n\nWithout a `rehydration` object, the search only scans the archive and reports how much data\nmatched. With one, the matched logs are also indexed into a retained historical view, which\nrequires the `logs_write_historical_view` permission.",
+    "summary": "Create an Archive Search",
+    "request_description": "",
+    "request_schema_description": "Request to create an Archive Search."
+  },
+  "GetArchiveSearch": {
+    "description": "Get a single Archive Search, including its status and the amount of archive data scanned when the search finishes.",
+    "summary": "Get an Archive Search"
+  },
   "GetLogsArchiveOrder": {
     "description": "Get the current order of your archives.\nThis endpoint takes no JSON arguments.",
     "summary": "Get archive order"
@@ -4938,7 +5176,7 @@
     "request_schema_description": "A request wrapper around a single timeseries query to be executed."
   },
   "BatchRowsQuery": {
-    "description": "Batch query reference table rows by their primary key values.  Returns only found rows in the included array.",
+    "description": "Batch query reference table rows by their primary key values. Returns only found rows in the included array.",
     "summary": "Batch rows query",
     "request_description": "",
     "request_schema_description": "Request object for querying multiple rows from a reference table by their identifiers."
@@ -5210,7 +5448,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
+    "description": "Create a new role for your organization.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, are added to every new role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."
@@ -5228,7 +5466,7 @@
     "summary": "Get a role"
   },
   "UpdateRole": {
-    "description": "Edit a role. Can only be used with application keys belonging to administrators.",
+    "description": "Edit a role. Can only be used with application keys belonging to administrators.\n\n[Restricted permissions](https://docs.datadoghq.com/account_management/rbac/permissions/#restricted-permissions),\nsuch as Dashboards Read and Monitors Read, remain on the role by default, even if they are omitted from\nthe request. To exclude them, set `default_permissions_opt_out` to `true`.",
     "summary": "Update a role",
     "request_description": "",
     "request_schema_description": "Update a role."
@@ -5472,28 +5710,28 @@
     "summary": "Get a RUM operation by name"
   },
   "ListRUMOperations": {
-    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.",
+    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team,\njourney, and application.",
     "summary": "Search RUM operations"
   },
   "ListRUMOperationStrongLinks": {
-    "description": "List strong links between RUM operations and features. A strong link confirms that a feature\nbelongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;\nat least one is required.",
-    "summary": "List RUM operation strong links"
+    "description": "List links between RUM operations and journeys. A link confirms that a journey\nbelongs to an operation. Provide `operation_id`, `feature_id` (journey ID), or both to filter results;\nat least one is required.",
+    "summary": "List RUM operation links"
   },
   "CreateRUMOperationStrongLink": {
-    "description": "Create a strong link between a RUM operation and a feature, confirming that the feature\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
-    "summary": "Create a RUM operation strong link",
+    "description": "Create a link between a RUM operation and a journey, confirming that the journey\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
+    "summary": "Create a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for creating a RUM operation strong link."
+    "request_schema_description": "The request body for creating a RUM operation link."
   },
   "DeleteRUMOperationStrongLink": {
-    "description": "Delete the strong link between a RUM operation and a feature.",
-    "summary": "Delete a RUM operation strong link"
+    "description": "Delete the link between a RUM operation and a journey.",
+    "summary": "Delete a RUM operation link"
   },
   "UpdateRUMOperationStrongLink": {
-    "description": "Update the status of a strong link between a RUM operation and a feature.",
-    "summary": "Update a RUM operation strong link",
+    "description": "Update the status of a link between a RUM operation and a journey.",
+    "summary": "Update a RUM operation link",
     "request_description": "",
-    "request_schema_description": "The request body for updating a RUM operation strong link."
+    "request_schema_description": "The request body for updating a RUM operation link."
   },
   "DeleteRUMOperation": {
     "description": "Delete a RUM operation.",
@@ -5514,12 +5752,6 @@
     "summary": "Query aggregated long tasks",
     "request_description": "",
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
-  },
-  "QueryAggregatedSignalsProblems": {
-    "description": "Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.",
-    "summary": "Query aggregated signals and problems",
-    "request_description": "",
-    "request_schema_description": "Request body for the aggregated signals and problems endpoint."
   },
   "QueryAggregatedWaterfall": {
     "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
@@ -5827,7 +6059,7 @@
     "description": "Reorder the list of due date rules for the current organization.",
     "summary": "Reorder due date rules",
     "request_description": "",
-    "request_schema_description": "The body of the due date rule reorder request."
+    "request_schema_description": "The body of a due date rule reorder request."
   },
   "DeleteSecurityFindingsAutomationDueDateRule": {
     "description": "Delete a due date rule by ID.",
@@ -5887,7 +6119,7 @@
     "description": "Reorder the list of mute rules for the current organization.",
     "summary": "Reorder mute rules",
     "request_description": "",
-    "request_schema_description": "The body of the mute rule reorder request."
+    "request_schema_description": "The body of a mute rule reorder request."
   },
   "DeleteSecurityFindingsAutomationMuteRule": {
     "description": "Delete a mute rule by ID.",
@@ -5947,7 +6179,7 @@
     "description": "Reorder the list of ticket creation rules for the current organization.",
     "summary": "Reorder ticket creation rules",
     "request_description": "",
-    "request_schema_description": "The body of the ticket creation rule reorder request."
+    "request_schema_description": "The body of a ticket creation rule reorder request."
   },
   "DeleteSecurityFindingsAutomationTicketCreationRule": {
     "description": "Delete a ticket creation rule by ID.",
@@ -6354,6 +6586,10 @@
   "GetEntityContext": {
     "description": "Search the Cloud SIEM entity context store for entities that match a query, and return the historical\nrevisions of each entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of each entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
     "summary": "Get entity context"
+  },
+  "GetEntityContextRecentlyUpdated": {
+    "description": "Get the entities with the most recent updates in the Cloud SIEM entity context store. Entities are ranked\nby the time of their most recent revision in the requested time range, and the top `limit` entities are\nreturned in that order. This endpoint is not paginated.",
+    "summary": "Get recently updated entity context"
   },
   "GetSingleEntityContext": {
     "description": "Get a single entity from the Cloud SIEM entity context store by its identifier, returning the historical\nrevisions of the entity in the requested time range. The endpoint can either return revisions across an\ninterval (`from` / `to`) or the snapshot of the entity at a single point in time (`as_of`); the two modes\nare mutually exclusive.",
@@ -6764,6 +7000,12 @@
     "summary": "Get service repository information",
     "request_description": "",
     "request_schema_description": "Request body for retrieving service repository information."
+  },
+  "GetSPARecommendationsV2": {
+    "description": "This endpoint is experimental and restricted to Datadog internal use only.\nRetrieve resource recommendations for a Spark job. The caller (Spark Gateway) provides\na service name and the job's raw arguments. SPA determines which arguments are relevant\nfor the service and returns structured recommendations for driver and executor resources.",
+    "summary": "Get SPA recommendations v2",
+    "request_description": "",
+    "request_schema_description": "Request body for retrieving SPA recommendations by forwarding a Spark job's raw arguments\ninstead of a precomputed shard."
   },
   "GetSPARecommendations": {
     "description": "This endpoint is currently experimental and restricted to Datadog internal use only. Retrieve resource recommendations for a Spark job. The caller (Spark Gateway or DJM UI) provides a service name and SPA returns structured recommendations for driver and executor resources. The version with a shard should be preferred, where possible, as it gives more accurate results.",

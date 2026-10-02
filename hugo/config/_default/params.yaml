@@ -341,7 +341,7 @@ unsupported_sites:
   containers_kubernetes_appsec: [gov,gov2]
   continuous_delivery: [gov,gov2]
   continuous_integration: [gov,gov2]
-  correlation: [gov,gov2] #Event management correlation
+  correlation: [gov,gov2] #Event management correlation and triage inbox
   coterm: [gov,gov2]
   cross_app_access: [gov,gov2]
   csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
@@ -394,7 +394,7 @@ unsupported_sites:
   nebius-cloud: [gov,gov2]
   network_config_management: [gov,gov2]
   observability_pipelines: [gov,gov2]
-  on-call: [gov,gov2]
+  on-call: [gov2]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
   ovhcloud: [gov,gov2]

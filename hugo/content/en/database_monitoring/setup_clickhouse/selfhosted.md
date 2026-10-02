@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/guide/database_identifier/"
   tag: "Documentation"
   text: "Specifying a Database Identifier"
+- link: "/database_monitoring/guide/clickhouse_agent_upgrade"
+  tag: "Documentation"
+  text: "Upgrading your agent to 7.84+"
 ---
 
 <div class="alert alert-info">
@@ -25,7 +28,7 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 ## Before you begin
 
 Supported ClickHouse versions
-: 23.x and later (23.x, 24.x, 25.x). Recommended minimum: 23.8 LTS.
+: 23.x and later (23.x, 24.x, 25.x, 26.3). Recommended minimum: 23.8 LTS. ClickHouse 26.3 requires Agent 7.84+.
 
 Supported Agent versions
 : 7.78+
@@ -52,6 +55,9 @@ Database Monitoring collects the following data from ClickHouse:
 **Parts and merges**
 : Storage health data, including active parts, detached parts, background merges, pending mutations, and replication queue depth, collected from `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings`. This helps identify storage and replication issues, such as stalled merges or a growing replication backlog.
 
+**Async inserts**
+: Asynchronous insert activity, available with Agent 7.83 or later and disabled by default. Pending buffer snapshots from `system.asynchronous_inserts` show how much data is waiting to be flushed and when each buffer is scheduled to flush. Flush records from `system.asynchronous_insert_log` show each flush, whether it succeeded, and how many bytes and rows it wrote. This helps identify failing flushes and buffers that are growing faster than they flush.
+
 ## Setup
 
 ### Step 1: Grant Datadog Agent access
@@ -68,19 +74,26 @@ Grant the required permissions on system tables:
 GRANT SELECT ON system.metrics TO datadog;
 GRANT SELECT ON system.events TO datadog;
 GRANT SELECT ON system.asynchronous_metrics TO datadog;
+GRANT SELECT ON system.errors TO datadog;
 GRANT SELECT ON system.parts TO datadog;
+GRANT SELECT ON system.replicas TO datadog;
+GRANT SELECT ON system.dictionaries TO datadog;
+GRANT SELECT ON system.macros TO datadog;
+GRANT SELECT ON system.clusters TO datadog;
+GRANT SELECT ON system.settings TO datadog;
+GRANT SELECT ON system.table_engines TO datadog;
+GRANT SELECT ON system.one TO datadog;
+GRANT SELECT ON system.query_log TO datadog;
+GRANT SELECT ON system.processes TO datadog;
 GRANT SELECT ON system.detached_parts TO datadog;
 GRANT SELECT ON system.merges TO datadog;
 GRANT SELECT ON system.mutations TO datadog;
 GRANT SELECT ON system.replication_queue TO datadog;
 GRANT SELECT ON system.merge_tree_settings TO datadog;
-GRANT SELECT ON system.replicas TO datadog;
-GRANT SELECT ON system.dictionaries TO datadog;
-GRANT SELECT ON system.processes TO datadog;
-GRANT SELECT ON system.query_log TO datadog;
+GRANT REMOTE ON *.* TO datadog;
 ```
 
-The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The remaining grants enable collection of core ClickHouse infrastructure metrics.
+The `system.processes` and `system.query_log` grants are required for DBM query collection. The `system.parts`, `system.detached_parts`, `system.merges`, `system.mutations`, `system.replication_queue`, and `system.merge_tree_settings` grants are required for parts and merges (storage health) collection. The `system.macros`, `system.clusters`, `system.settings`, `system.table_engines`, and `system.one` grants are required to identify the cluster, hosting type, and nodes of each instance. The remaining grants enable collection of core ClickHouse infrastructure metrics.
 
 <div class="alert alert-info">
 The grants above are sufficient for query metrics, query samples, query completions, and parts and merges collection. They do <strong>not</strong> grant the Agent access to your application data.
@@ -95,6 +108,24 @@ GRANT SELECT ON <database>.* TO datadog;
 ```
 
 If this grant isn't provided, the Agent can't run `EXPLAIN` for queries against those tables. Query metrics, samples, and completions continue to work, but explain plans aren't collected for the affected queries, and Datadog displays a collection error for those queries.
+
+#### Optional: Grant access for async insert monitoring
+
+If you enable async insert monitoring (Agent 7.83 or later), grant access to the async insert system tables:
+
+```sql
+GRANT SELECT ON system.asynchronous_inserts TO datadog;
+GRANT SELECT ON system.asynchronous_insert_log TO datadog;
+```
+
+`system.asynchronous_inserts` is required for pending buffer snapshots (`collect_pending_async_inserts`). `system.asynchronous_insert_log` is required for flush records (`collect_async_inserts`). To enable both, add the following to your instance configuration:
+
+```yaml
+    collect_pending_async_inserts:
+      enabled: true
+    collect_async_inserts:
+      enabled: true
+```
 
 ### Step 2: Configure the Agent
 
@@ -244,5 +275,25 @@ Collects records of individual completed queries from `system.query_log`.
 | `query_completions.enabled` | Boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
 | `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
 | `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
+
+### Pending async inserts
+
+Collects snapshots of pending asynchronous insert buffers from `system.asynchronous_inserts`. Requires Agent 7.83 or later.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `collect_pending_async_inserts.enabled` | Boolean | `false` | Enable pending async insert buffer collection. Requires `dbm: true`. |
+| `collect_pending_async_inserts.collection_interval` | number | `10` | Collection interval in seconds. |
+| `collect_pending_async_inserts.max_samples_per_collection` | integer | `1000` | Maximum number of buffers collected per run. |
+
+### Async insert flushes
+
+Collects records of individual asynchronous insert flushes from `system.asynchronous_insert_log`. Requires Agent 7.83 or later.
+
+| Field | Type | Default | Description |
+|-------|------|---------|-------------|
+| `collect_async_inserts.enabled` | Boolean | `false` | Enable async insert flush collection. Requires `dbm: true`. |
+| `collect_async_inserts.collection_interval` | number | `60` | Collection interval in seconds. |
+| `collect_async_inserts.max_samples_per_collection` | integer | `1000` | Maximum number of flush records collected per run. |
 
 {{< partial name="whats-next/whats-next.html" >}}

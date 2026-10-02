@@ -17,6 +17,9 @@ further_reading:
   text: Conexiones
 title: Políticas de ejecución
 ---
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Las políticas de ejecución no están soportadas para su <a href="/getting_started/site">sitio de Datadog</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 ## Descripción general {#overview}
 
 Las Políticas de ejecución le permiten controlar quién, dónde y qué acciones puede ejecutar su equipo. Cada Política de ejecución es una regla única de permitir o denegar para un conjunto de acciones, junto con los Agents a los que se aplica. Usted selecciona esos Agents mediante etiquetas de Agent. Las Políticas de ejecución le brindan dos ventajas principales al autorizar Private Actions:
@@ -65,11 +68,11 @@ Una política de ejecución sin destinos es válida, pero no tiene efecto. Nunca
 
 {{% collapse-content title="Acceso" level="h3" id="access" %}}
 
-Las políticas de ejecución tienen configuraciones de **Acceso** que controlan quién puede verlas y administrarlas, y a quién se aplica una política. El acceso funciona junto con el permiso [`ExecutionGroupWrite` ](#permissions). El permiso decide quién puede administrar las políticas de ejecución en absoluto, mientras que el acceso decide qué políticas específicas puede ver, editar o por cuáles puede ser regido cada usuario.
+Las políticas de ejecución tienen configuraciones de **Acceso** que controlan quién puede visualizarlas y administrarlas, y a quién se aplica una política. El acceso funciona junto con el permiso [`ExecutionGroupWrite` ](#permissions). El permiso decide quién puede administrar las políticas de ejecución en absoluto, mientras que el acceso decide qué políticas específicas puede visualizar, editar o por cuáles puede ser regido cada usuario.
 
 Las políticas de ejecución no almacenan credenciales. El acceso controla únicamente la segmentación y la autorización.
 
-| Nivel de acceso | Puede ver | Puede editar | La política se les aplica |
+| Nivel de acceso | Puede visualizar | Puede editar | La política se les aplica |
 |---|:---:|:---:|:---:|
 | **Visualizador** | Sí | No | No |
 | **Resolutor** | Sí | No | Sí |
@@ -100,7 +103,7 @@ Cuando configure un paso de acción privada en un flujo de trabajo, puede apunta
 2. Seleccione cómo identificar al Agent:
     - **Hostname**: para un ejecutor de acciones privado en un host específico del Datadog Agent.
     - **Orch Cluster ID**: para un ejecutor de acciones privado en un Kubernetes Cluster Agent.
-3. Ingrese el Hostname o el Orch Cluster ID del Agent de destino.
+3. Ingrese el Hostname o el clúster de orquestación de ID del Agent de destino.
 
 Esto crea una conexión virtual para el paso, identificada solo por el Agent de destino; no conlleva credenciales. Cuando se ejecuta el flujo de trabajo, la acción se ejecuta solo si una política de ejecución la autoriza para ese destino y el usuario que la solicita.
 

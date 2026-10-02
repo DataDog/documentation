@@ -2,64 +2,63 @@
 further_reading:
 - link: /real_user_monitoring/
   tag: Documentación
-  text: Obtén información sobre RUM y la reproducción de sesiones
-title: Facturación de RUM y la reproducción de sesiones
+  text: Aprenda sobre RUM y Session Replay
+title: Facturación de RUM y Session Replay
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta página contiene preguntas y respuestas frecuentes sobre temas de facturación para RUM y Session Replay.
 
-Esta página contiene preguntas y respuestas comunes sobre temas de facturación de RUM y Session Replay.
+## ¿Cómo se define una sesión? {#how-is-a-session-defined}
 
-## ¿Cómo se define una sesión?
+Una sesión es el recorrido de un usuario en su aplicación web o móvil. Una sesión generalmente incluye múltiples vistas de página con su telemetría asociada.
 
-Una sesión es el recorrido de un usuario por tu aplicación web o móvil. Una sesión suele incluir varias vistas de páginas con su telemetría asociada.
+## ¿Cuándo expira una sesión? {#when-does-a-session-expire}
 
-## ¿Cuándo caduca una sesión?
+Una sesión expira después de 15 minutos de inactividad y su duración está limitada a 4 horas. Después de 4 horas, se crea automáticamente una nueva sesión.
 
-Una sesión expira luego de 15 minutos de inactividad y su duración está limitada a 4 horas. Una vez transcurridas las 4 horas, se crea una nueva sesión automáticamente.
+## ¿Cuánto duran las grabaciones de Session Replay? {#how-long-are-session-replay-recordings}
 
-## ¿Cuánto duran las grabaciones de Session Replay?
+Las grabaciones de Session Replay pueden variar según la duración de la sesión. Por ejemplo, si observa Session Replays breves de 5 a 8 segundos, significa que el usuario finalizó su sesión después de 5 a 8 segundos.
 
-Las grabaciones de Session Replay pueden variar en función de la duración de la sesión. Por ejemplo, si observas repeticiones de sesión cortas, de 5 a 8 segundos, significa que el usuario finalizó la sesión después de 5 a 8 segundos.
+## ¿Qué datos recopila Datadog RUM y Session Replay? {#what-data-does-datadog-rum-session-replay-collect}
 
-## ¿Qué datos recopilan Datadog RUM y Session Replay?
+Datadog recopila todas las páginas visitadas por sus usuarios finales junto con la telemetría relevante, como la carga de recursos (XHR, imágenes, archivos CSS y scripts JS), errores de frontend, informes de fallos y tareas largas. Todo esto se incluye en la sesión de usuario. Para Session Replay, Datadog crea un iframe basado en instantáneas del DOM. Datadog cobra por cada mil (1,000) sesiones ingeridas en el servicio de Datadog Real User Monitoring (RUM).
 
-Datadog recopila todas las páginas visitadas por tus usuarios finales, junto con la telemetría que te interesa, como la carga de recursos (XHR, imágenes, archivos CSS y scripts JS), errores de frontend, informes de fallos y tareas largas. Todo ello se incluye en la sesión del usuario. Para Session Replay, Datadog crea un iframe basado en snapshots del DOM. Datadog cobra por cada mil (1000) sesiones ingeridas en el servicio Real User Monitoring (RUM) de Datadog.
+## ¿Datadog maneja aplicaciones de una sola página? {#does-datadog-handle-single-page-applications}
 
-## ¿Puede Datadog gestionar aplicaciones de una sola página?
+Sí, sin ninguna configuración de su parte. Datadog RUM rastrea automáticamente los cambios de página.
 
-Sí, sin que tengas que configurar nada. Datadog RUM rastrea automáticamente los cambios de página.
+## ¿Cómo se visualizan las solicitudes de punto de conexión de extremo a extremo? {#how-do-you-view-endpoint-requests-end-to-end}
 
-## ¿Cómo se ven las solicitudes a endpoints extremo a extremo?
+Con la integración de APM lista para usar, puede vincular cualquier solicitud XHR o Fetch a su traza de backend correspondiente.
 
-Con la integración APM predefinida puede vincular cualquier solicitud XHR o Fetch a tu traza (trace) de backend correspondiente.
+## ¿Cómo se visualizan los logs del recopilador del navegador en RUM? {#how-do-you-view-logs-from-the-browser-collector-in-rum}
 
-## ¿Cómo se ven los logs desde el collector del navegador en RUM?
+Los logs del navegador se vinculan automáticamente a la sesión de RUM correspondiente, lo que le permite hacer un seguimiento de cuándo ocurren durante el recorrido del usuario final.
 
-Los logs del navegador se vinculan automáticamente a la sesión RUM correspondiente, lo que te permite monitorizar cuándo se producen durante el recorrido del usuario final.
+## ¿Datadog utiliza cookies? {#does-datadog-use-cookies}
 
-## ¿Datadog utiliza cookies?
+Sí Datadog utiliza cookies para unir los diversos pasos de sus usuarios en una sesión. Este proceso no utiliza cookies entre dominios y no rastrea las acciones de sus usuarios fuera de sus aplicaciones.
 
-Sí. Datadog utiliza cookies para agrupar los distintos pasos de tus usuarios en una sesión. Este proceso no utiliza cookies entre dominios y no rastrea las acciones de tus usuarios fuera de tus aplicaciones.
+## Mi página de Uso muestra sesiones de RUM facturadas bajo el plan Browser RUM & Session Replay, pero no he configurado la captura de grabaciones de sesión para mi aplicación. {#my-usage-page-shows-rum-sessions-billed-under-the-browser-rum-session-replay-plan-but-i-have-not-configured-capturing-session-recordings-for-my-application}
 
-## Mi página de uso muestra sesiones RUM facturadas con el plan Browser RUM y Session Replay, pero no he configurado la captura de grabaciones de sesión para mi aplicación.
+El plan **Browser RUM & Session Replay** desbloquea las grabaciones de sesión (Session Replay).
 
-El plan **Browser RUM y Session Replay** desbloquea grabaciones de sesiones (repeticiones).
+- Si está recopilando replays, se le facturarán las sesiones bajo el plan Replay.
 
-- Si estás recopilando repeticiones, se te facturarán las sesiones con el plan Replay.
+- Si desea deshabilitar la captura de grabaciones de sesión, consulte la [documentación de Session Replay][1].
 
-- Si quieres desactivar la grabación de sesiones, consulta la [Documentación sobre la reproducción de sesiones][1].
+## ¿Cómo afectan los webviews en las aplicaciones móviles a las grabaciones de sesión y a la facturación? {#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing}
 
-## ¿Cómo afectan a las grabaciones de sesiones y a la facturación las vistas web en aplicaciones móviles?
+Cuando una aplicación móvil contiene webviews y usted ha instrumentado tanto sus aplicaciones web como móviles con los SDK de Datadog, se crea un puente. Todos los eventos registrados por el Browser SDK en la aplicación web que se cargan a través del webview se reenvían al Mobile SDK. Estos eventos están vinculados a la sesión que comenzó en la aplicación móvil.
 
-Cuando una aplicación móvil contiene vistas web y has instrumentado tanto tu aplicación web como tu aplicación móvil con SDK de Datadog, se crea un puente. Todos los eventos registrados por el SDK del navegador en la aplicación web y que se cargan a través de la vista web se reenvían al SDK móvil. Estos eventos están vinculados a la sesión que se inició en la aplicación móvil.
+En otras palabras, solo la sesión móvil de RUM es visible en Datadog y, por lo tanto, es la única que se factura.
 
-En otras palabras, sólo la sesión RUM móvil es visible en Datadog y, por lo tanto, es la única facturable.
+{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="Si usted ha instrumentado tanto sus aplicaciones web como móviles con Datadog SDKs, solo se le facturará por la sesión móvil." >}}
 
-{{< img src="account_management/billing/rum/rum-webviews-impact-on-billing-2.png" alt="Si has instrumentado tanto tu aplicación web como tu aplicación móvil con SDK de Datadog, sólo se te facturará por la sesión móvil." >}}
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/real_user_monitoring/session_replay/browser#disable-session-replay
+[1]: /es/session_replay/
