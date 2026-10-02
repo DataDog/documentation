@@ -25,6 +25,7 @@ Here is the list of supported runtimes, operating systems (OS) and hosting plans
 
 The recommended installation method depends on your Azure Function’s configuration:
 - For .NET Windows Azure Functions running on Dedicated/App Service or Premium plans: use the [Datadog .NET APM Extension][9].
+- For Azure Function Apps running on Container Apps: use [Datadog Serverless-Init][12].
 - For all other configurations (including different runtimes, operating systems, or hosting plans): Follow the instructions below to install the Serverless Compatibility Layer.
 
 ## Setup
@@ -250,3 +251,4 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 [9]: /serverless/azure_functions/dotnet_extension/
 [10]: /profiler/
 [11]: /integrations/azure-functions/#metrics
+[12]: /serverless/azure_container_apps
