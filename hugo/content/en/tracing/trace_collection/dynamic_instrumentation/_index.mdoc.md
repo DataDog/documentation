@@ -55,7 +55,7 @@ To use autocomplete and search, opt in to the [preview][17].
 
 ## Live Debugger vs. Dynamic Instrumentation
 
-Live Debugger[23] and Dynamic Instrumentation use the same instrumentation technology. They share an [expression language][15] and some configuration settings. Both collect data from running services without requiring code changes, redeployments, or restarts.
+[Live Debugger[23] and Dynamic Instrumentation use the same instrumentation technology. They share an [expression language][15] and some configuration settings. Both collect data from running services without requiring code changes, redeployments, or restarts.
 
 The products differ in the data they capture and how long the instrumentation remains active:
 - Use Live Debugger to investigate a problem. Its logpoints capture log events and variable snapshots, and expire when the Debug Session ends.
