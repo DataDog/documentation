@@ -85,7 +85,7 @@ A server is {{< ui >}}Healthy{{< /ui >}} when at least one of its collections is
 
 ## Disable or enable polling
 
-Use the toggle in the {{< ui >}}Poll{{< /ui >}} column for the collection. Disabling stops polling and removes the collection's indicators from Cloud SIEM enrichment, but keeps the indicators and the polling position. Enabling resumes from where polling stopped and restores enrichment. Enabled collections count toward the limit of 20.
+Use the toggle in the {{< ui >}}Poll{{< /ui >}} column for the collection. Disabling stops polling and removes the collection's indicators from Cloud SIEM enrichment, without deleting them. Enabling resumes polling and restores enrichment. Enabled collections count toward the limit of 20.
 
 ## Replace credentials
 
