@@ -89,7 +89,7 @@ Read [Adding Entries][9] for more information.
 
 ### Adding metadata to APIs
 
-Add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration, GitLab Source Code integration, or Terraform.
+Add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration, GitLab integration, or Terraform.
 
 Read [Adding Metadata to APIs][10] for more information.
 

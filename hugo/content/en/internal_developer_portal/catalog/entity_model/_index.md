@@ -42,7 +42,7 @@ further_reading:
     text: "Learn about the GitHub Integration"
   - link: "/integrations/gitlab-source-code/"
     tag: "Documentation"
-    text: "Learn about the GitLab Source Code integration"
+    text: "Learn about the GitLab integration"
   - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
     tag: "Blog"
     text: "Import Backstage YAML files into Datadog"

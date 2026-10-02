@@ -14,7 +14,7 @@ further_reading:
   text: "Learn about the GitHub integration"
 - link: "/integrations/gitlab-source-code/"  
   tag: "Documentation"  
-  text: "Learn about the GitLab Source Code integration"
+  text: "Learn about the GitLab integration"
 - link: "/integrations/jira/#configure-a-jira-webhook"  
   tag: "Documentation"  
   text: "Learn about the Jira integration"
@@ -39,7 +39,7 @@ With this view, you can:
 The Homepage aggregates data from your Datadog integrations. Configure the following before using the Homepage:
 
 - **GitHub**: Required for the **GitHub** tab in **Your PRs**. An administrator configures the [GitHub integration][1] and webhook, and each user signs in with their GitHub account.
-- **GitLab Source Code**: Required for the **GitLab** tab in **Your PRs**. An administrator configures the [GitLab Source Code integration][2] and webhook, and each user signs in with their GitLab account.
+- **GitLab**: Required for the **GitLab** tab in **Your PRs**. An administrator configures the [GitLab integration][2] and webhook, and each user signs in with their GitLab account.
 - **Jira**: Required for the **Jira** tab in **Your Tickets**. An administrator [configures the Jira webhook][3].
 - **Linear**: Required for the **Linear** tab in **Your Tickets**. An administrator [configures the Linear webhook][4].
 
@@ -89,7 +89,7 @@ If multiple GitHub organizations are connected in Datadog, you need the Integrat
 
 The **GitLab** tab surfaces the merge requests that need your attention, grouped by review state. For each one, it shows review and approval status, pipeline status and merge blockers, and resolved and unresolved discussion counts. 
 
-After you sign in with your GitLab account, the tab loads your merge requests, grouped by status. If your organization has not configured the GitLab Source Code integration, this tab displays an empty state with a prompt to enable it from the [GitLab Source Code integration tile][2].
+After you sign in with your GitLab account, the tab loads your merge requests, grouped by status. If your organization has not configured the GitLab integration, this tab displays an empty state with a prompt to enable it from the [GitLab integration tile][2].
 
 If you have multiple GitLab instances connected within Datadog, use the **Instance** selector to choose which instance to view. 
 

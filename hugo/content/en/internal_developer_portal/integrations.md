@@ -103,7 +103,7 @@ Once you've completed these steps, an **On Call** information box appears in the
 | [GitLab][12] | Manage issues, merge requests, branches, and commits. | `Approve merge request`, `Cherry pick commit` <br> [See all available actions.][42] |
 | Other (Bitbucket, Azure Repos) | Interact with platforms not natively supported in Datadog Catalog or Action Catalog. | N/A; use HTTP actions and reqeusts to call platform APIs |
 
-You can also use GitHub or GitLab to manage entity definitions and configure the GitHub integration or GitLab Source Code integration to automatically pull definitions into Catalog. Learn more about [creating entity definitions and importing them from GitHub or GitLab][83].
+You can also use GitHub or GitLab to manage entity definitions and configure the GitHub integration or GitLab integration to automatically pull definitions into Catalog. Learn more about [creating entity definitions and importing them from GitHub or GitLab][83].
 
 ## CI/CD
 

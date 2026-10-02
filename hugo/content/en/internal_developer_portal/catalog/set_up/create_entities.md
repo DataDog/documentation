@@ -25,7 +25,7 @@ further_reading:
     text: "Learn about the GitHub Integration"
   - link: "/integrations/gitlab-source-code/"
     tag: "Documentation"
-    text: "Learn about the GitLab Source Code integration"
+    text: "Learn about the GitLab integration"
   - link: "/api/latest/service-definition/"
     tag: "API"
     text: "Learn about the Service Definition API"
@@ -107,11 +107,11 @@ Import the definition in one of the following ways:
    **Note**: Creating and managing services in the Catalog through automated pipelines requires [Datadog Provider][5] v3.16.0 or later.
 
 1. **Datadog APIs**: Import your definition using the [Service Definition API][7] (for schema v2.x) or the [Catalog API][8] (for schema v3+), which are both open-sourced GitHub Action solutions.
-1. **GitHub or GitLab**: Configure the [GitHub integration][9] or the [GitLab Source Code integration][14] to manage and import your definitions.
+1. **GitHub or GitLab**: Configure the [GitHub integration][9] or the [GitLab integration][14] to manage and import your definitions.
 
 #### GitHub and GitLab integrations
 
-Configure the [GitHub integration][9] or the [GitLab Source Code integration][14] to import entity definitions from your repositories. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
+Configure the [GitHub integration][9] or the [GitLab integration][14] to import entity definitions from your repositories. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
 
 After you update the YAML files for your repositories, your changes propagate to the Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
 
@@ -129,7 +129,7 @@ When the GitHub integration is set up for your definitions, an **Edit in GitHub*
 
 ##### GitLab integration
 
-To connect your GitLab repositories, follow the setup instructions for the [GitLab Source Code integration][14], available in the [GitLab Source Code integration tile][15]. Store your `service.datadog.yaml` or `entity.datadog.yaml` files in a repository that Datadog has permission to read.
+To connect your GitLab repositories, follow the setup instructions for the [GitLab integration][14], available in the [GitLab integration tile][15]. Store your `service.datadog.yaml` or `entity.datadog.yaml` files in a repository that Datadog has permission to read.
 
 ##### Integration validation
 

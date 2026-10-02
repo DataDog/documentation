@@ -61,7 +61,7 @@ You can import services from other Datadog telemetry containing the `DD_SERVICE`
 
 {{< img src="tracing/software_catalog/import_entries.png" alt="Import Entries tab in the Catalog setup and configuration section" style="width:90%;" >}}
 
-After importing, entries appear in the **Explore** tab. Entries may expire unless you add metadata, such as the owner or contacts, by [using the API][12], the [GitHub integration][13], or the [GitLab Source Code integration][14].
+After importing, entries appear in the **Explore** tab. Entries may expire unless you add metadata, such as the owner or contacts, by [using the API][12], the [GitHub integration][13], or the [GitLab integration][14].
 
 To remove imported services from the default **Explore** view, click **Clear Previously Imported Services** on the [**Import Entries** tab][11]. This removes all services that do not have metadata or do not have APM, Universal Service Monitoring (USM), or Real User Monitoring (RUM) telemetry.
 
