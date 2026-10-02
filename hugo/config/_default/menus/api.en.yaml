@@ -18719,19 +18719,6 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: Query aggregated signals and problems
-      url: /api/latest/rum-insights/query-aggregated-signals-and-problems/
-      identifier: rum-insights-query-aggregated-signals-and-problems
-      parent: rum-insights
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - QueryAggregatedSignalsProblems
-        unstable:
-          - v2
-        order: 3
     - name: Query aggregated long tasks
       url: /api/latest/rum-insights/query-aggregated-long-tasks/
       identifier: rum-insights-query-aggregated-long-tasks
