@@ -139,6 +139,8 @@ Size
 
 For Fetch and XHR resources, click on a resource row to view its request and response headers and body. Payload details are only available when {{< ui >}}Capture HTTP payloads{{< /ui >}} is enabled in the test's [advanced options][28].
 
+Captured HTTP payloads are part of the test result. Any captured values that were not redacted are visible to users who can view the test result. Captured payloads follow the [Synthetic Monitoring test result retention period][29].
+
 ### Backend traces
 
 Click the {{< ui >}}Traces{{< /ui >}} pill to access the {{< ui >}}Traces{{< /ui >}} tab and explore APM traces associated with the browser test. While the UI is similar to the [Trace View][7] in the Trace Explorer, one browser test step can make multiple requests to different URLs or endpoints. This results in several associated traces, depending on your tracing setup and on the URLs you allowed in for browser tests in the [Synthetic Monitoring Settings page][8]. 
@@ -279,3 +281,4 @@ Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >
 [26]: /synthetics/test_suites/
 [27]: /synthetics/platform/downtime/
 [28]: /synthetics/browser_tests/#advanced-options
+[29]: /data_security/data_retention_periods/#data-retention-periods
