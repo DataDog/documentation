@@ -101329,7 +101329,7 @@ components:
           type: string
       type: object
     ScaRequestDataAttributesDependenciesItems:
-      description: A dependency found in the repository, including its identity, location, and reachability metadata.
+      description: A dependency found in the repository, including its identity, location, and `reachability metadata`.
       properties:
         exclusions:
           description: A list of patterns or identifiers that should be excluded from analysis for this dependency.
