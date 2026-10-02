@@ -148,7 +148,7 @@ In the {{< ui >}}Notifications{{< /ui >}} section, use the {{< ui >}}Recipients{
 
 Configure how Datadog calculates statistical significance for your experiment. For guidance on choosing a method, see [Analysis Methods][11].
 
-If your organization has configured default settings, a {{< ui >}}COMPANY DEFAULT{{< /ui >}} badge appears and Datadog pre-populates the settings.
+Datadog copies your organization's default statistical analysis settings when you create an experiment. If your organization has configured default settings, a {{< ui >}}COMPANY DEFAULT{{< /ui >}} badge appears. Later changes to your organization's defaults apply to newly created experiments and do not change existing experiments.
 
 To modify the statistical analysis plan:
 
@@ -159,7 +159,7 @@ To modify the statistical analysis plan:
 1. To disable [CUPED][12], toggle off {{< ui >}}CUPED calculation{{< /ui >}}. CUPED is enabled by default and uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity.
 1. To control the family-wise error rate, toggle on {{< ui >}}Multiple testing correction{{< /ui >}}. This setting adjusts for multiple metric and treatment-variant comparisons, producing more conservative results. For details, see [Multiple Testing Correction][13].
    - This setting is not available when you use the {{< ui >}}Bayesian{{< /ui >}} method.
-1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
+1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the statistical analysis defaults copied when the experiment was created, including any company defaults in effect at that time.
 
 ##### Add split-by exploration dimensions
 
