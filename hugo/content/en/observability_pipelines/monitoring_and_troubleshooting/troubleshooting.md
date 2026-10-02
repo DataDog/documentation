@@ -30,20 +30,35 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
 ### Find the component ID
 
-You need the source's or processor's component ID to `tap` into it. To copy the component ID in the UI:
+You need the source's or processor's component ID to `tap` into it or to view component metrics with the `component_id` tag.
 
-1. Navigate to [Observability Pipelines][2].
-1. Select your pipeline.
-1. Click the cog next to the source's or processor's name, then select {{< ui >}}View details{{< /ui >}}.
-1. Click the copy icon next to the component's name at the top of the side panel.
+{{< tabs >}}
+{{% tab "Command line" %}}
 
-Alternatively, if you are on the same host as the Worker, use the `top` command to find the component ID:
+Use the `top` command to find the component ID:
 
 ```
 observability-pipelines-worker top
 ```
 
-See [Worker Commands][13] for a list of commands and options.
+See [Worker CLI Commands][1] for a list of commands and options.
+
+[1]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
+
+{{% /tab %}}
+{{% tab "UI" %}}
+
+To find and copy the component ID in the UI:
+
+1. Navigate to [Observability Pipelines][1].
+1. Select your pipeline.
+1. Click the cog next to the source's or processor's name, then select {{< ui >}}View details{{< /ui >}}.
+1. Click the copy icon next to the component's name at the top of the side panel.
+
+[1]: https://app.datadoghq.com/observability-pipelines
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Use `tap` to see your data
 
@@ -229,7 +244,7 @@ If your log timestamps are in string format and your Databricks table has a time
 [10]: /observability_pipelines/configuration/install_the_worker/#index-your-worker-logs
 [11]: /observability_pipelines/install_the_worker#uninstall-the-worker
 [12]: https://app.datadoghq.com/logs
-[13]: /observability_pipelines/configuration/install_the_worker/worker_commands/
+[13]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
 [14]: https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/security_guide/sec-port_forwarding#sec-Adding_a_Port_to_Redirect
 [15]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes
 [16]: /observability_pipelines/sources/#tls-certificates
