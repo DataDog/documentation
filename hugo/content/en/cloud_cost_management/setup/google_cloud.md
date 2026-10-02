@@ -70,7 +70,7 @@ The following permissions allow Datadog to access and transfer the billing expor
 ### (Optional) Enable committed use discounts metadata export
 
 <div class="alert alert-info">
-The <a href="https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export">CUD metadata</a> includes the <a href="https://docs.cloud.google.com/docs/cuds-spend-based">spend-based committed use discounts</a> (CUDs) purchased in projects linked to the billing account, including expired ones.
+The <a href="https://docs.cloud.google.com/billing/docs/how-to/export-data-bigquery-tables/cud-export">CUD metadata export</a> provides additional information about your <a href="https://docs.cloud.google.com/docs/cuds-spend-based">spend-based committed use discounts</a>, including their start and end dates, committed amounts, and other properties. Without this export, CUD information in Cloud Cost Management is limited. The export includes CUDs purchased in projects linked to the billing account, including expired ones.
 </div>
 
 1. Navigate to [Billing Export][1] under Google Cloud console _Billing_.
