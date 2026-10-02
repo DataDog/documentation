@@ -122,7 +122,7 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
   'env | grep -E "^(DD_INJECT_NATIVE|DD_TRACE_HOOK_MODULES|DD_SERVICE|DD_ENV)="'
 ```
 
-**No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
+**No setup containers?** Confirm the label is on the pod template, the pod was created after you applied the configuration, and the workload runs outside the Agent namespace. Then check the Cluster Agent logs.
 
 After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and traces are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
