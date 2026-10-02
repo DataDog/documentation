@@ -119,6 +119,15 @@ After you've created and customized your report, you can save and share it from 
 - **Export report views to Dashboards** to track costs alongside other widgets. [Learn more about monitoring cost on dashboards][14].
 - **Search saved reports** to find what you need (available from main reports page only).
 
+## Permissions
+
+| Action | Required Permission |
+|---------|---------------|
+| View Reports | Cloud Cost Management read |
+| Create, Edit, Delete Reports | Cloud Cost Report Write |
+
+For the full list of CCM permissions, see the [Permissions documentation][16].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -138,3 +147,4 @@ After you've created and customized your report, you can save and share it from 
 [13]: /cloud_cost_management/reporting/explorer
 [14]: /cloud_cost_management/reporting/dashboards
 [15]: /cloud_cost_management/planning/forecasting#view-forecasts-in-reports
+[16]: /cloud_cost_management/setup/permissions
