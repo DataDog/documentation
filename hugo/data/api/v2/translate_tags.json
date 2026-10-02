@@ -231,6 +231,10 @@
     "name": "Execution Policy",
     "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
   },
+  "experiments": {
+    "name": "Experiments",
+    "description": "Create and manage experiments, metrics, subject types, SQL models, and protocols."
+  },
   "fastly-integration": {
     "name": "Fastly Integration",
     "description": "Manage your Datadog Fastly integration accounts and services directly through the Datadog API. See the [Fastly integration page](https://docs.datadoghq.com/integrations/fastly/) for more information."

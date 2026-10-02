@@ -792,6 +792,90 @@
       "description": "Update an execution policy returns \"OK\" response"
     }
   ],
+  "CancelExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Cancel experiment returns \"The experiment was canceled and unlinked from its feature flag allocations.\" response"
+    }
+  ],
+  "CreateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment metric group returns \"Created\" response"
+    }
+  ],
+  "CreateExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create experiment returns \"Created\" response"
+    }
+  ],
+  "CreateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric collection returns \"Created\" response"
+    }
+  ],
+  "CreateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create metric returns \"Created\" response"
+    }
+  ],
+  "CreateSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Create subject type returns \"Created\" response"
+    }
+  ],
+  "PatchExperiment": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch experiment returns \"OK\" response"
+    }
+  ],
+  "PatchSubjectType": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Patch subject type returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentAnalysisPlanAttributes": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment analysis plan attributes returns \"OK\" response"
+    }
+  ],
+  "UpdateExperimentMetricGroup": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update experiment metric group returns \"OK\" response"
+    }
+  ],
+  "UpdateMetricCollection": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric collection returns \"OK\" response"
+    }
+  ],
+  "UpdateMetric": [
+    {
+      "group": "experiments",
+      "suffix": "",
+      "description": "Update metric returns \"OK\" response"
+    }
+  ],
   "CreateFastlyAccount": [
     {
       "group": "fastly_integration",
