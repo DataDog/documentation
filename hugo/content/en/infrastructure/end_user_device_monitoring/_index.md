@@ -68,6 +68,10 @@ With network path tracing, you can:
 [6]: /agent/fleet_automation/
 [7]: /logs/
 
+## Set up End User Device Monitoring
+
+After receiving confirmation of Preview access, follow [Set up End User Device Monitoring](/infrastructure/end_user_device_monitoring/setup/) for supported platforms and device-specific installation instructions.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

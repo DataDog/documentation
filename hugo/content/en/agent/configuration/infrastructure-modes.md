@@ -1,5 +1,5 @@
 ---
-title: Infrastructure Modes
+title: Configure Agent Infrastructure Modes
 description: "Change Agent behavior to control how much infrastructure monitoring the Datadog Agent performs on a host."
 further_reading:
 - link: "/agent/configuration/agent-configuration-files/"
@@ -16,6 +16,8 @@ private: true
 ## Overview
 
 Infrastructure modes determine which infrastructure monitoring capabilities the Datadog Agent enables on a host. Use these modes to match the Agent's behavior to the host's role: full infrastructure monitoring, basic system resource metrics, no infrastructure monitoring, or End User Device monitoring.
+
+Selecting an infrastructure mode controls Agent behavior; it does not enroll your organization in a product or change your subscription. For product capabilities and access requirements, see [Infrastructure Basic][32] or [End User Device Monitoring][33].
 
 ## Available modes
 
@@ -40,6 +42,8 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : The Agent collects system resource metrics and process data, runs all infrastructure integrations, and supports Container Monitoring and Live Processes. If you have not set an `infrastructure_mode` value, the Agent runs in `full` mode.
 
 ### Basic
+
+For product capabilities, limitations, and access requirements, see [Infrastructure Basic][32].
 
 `basic`
 : **Minimum Agent version**: 7.73.0 (Linux, macOS), 7.76.2 (Windows)<br>
@@ -66,9 +70,11 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - [WMI Check][14] (7.80+)
   - [Custom checks][15] prefixed with `custom_`
 
+To monitor hosts through vSphere, Proxmox, or Nutanix in Basic mode, see [Configure Basic mode for virtualization integrations](#configure-basic-mode-for-virtualization-integrations).
+
 ### End User Device
 
-<div class="alert alert-info">End User Device mode is in Preview. For configuration steps and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
+<div class="alert alert-info">End User Device mode is in Preview. For product capabilities and to request access, see <a href="/infrastructure/end_user_device_monitoring/">End User Device Monitoring</a>.</div>
 
 `end_user_device`
 : **Minimum Agent version**: 7.76.2<br>
@@ -80,7 +86,7 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
   - Windows Crash Detection
   - Network Path Monitoring
 
-: For full descriptions, see [Key capabilities][18].
+: For full descriptions, see [Key capabilities][18]. For device-specific requirements and installation instructions, see [Set up End User Device Monitoring][34].
 
 ### None
 
@@ -91,6 +97,8 @@ The Agent supports four infrastructure modes. A checkmark ({{< X >}}) indicates 
 : Hosts in `none` mode appear in [Fleet Automation][22] under the {{< ui >}}View Agents{{< /ui >}} tab because the Agent continues to send metadata to Datadog. However, these hosts do not appear in infrastructure dashboards or queries that rely on infrastructure metrics.
 
 ## Configure Agent infrastructure mode
+
+Set the Agent's infrastructure mode on each host you want to monitor.
 
 ### New hosts
 
@@ -110,7 +118,7 @@ bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.s
 {{% tab "Windows" %}}
 In the following command, replace `<API_KEY>` with your organization's [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys), `<DD_SITE>` with **{{< region-param key="dd_site" >}}**, and `<MODE>` with `full`, `basic`, `end_user_device`, or `none`:
 ```powershell
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTRURE_MODE="<MODE>"'
+$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<API_KEY>" SITE="<DD_SITE>" DD_INFRASTRUCTURE_MODE="<MODE>"'
 if ($p.ExitCode -ne 0) {
   Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red
 }
@@ -131,11 +139,52 @@ infrastructure_mode: <MODE>
 
 2. [Restart the Datadog Agent][24].
 
+## Configure Basic mode for virtualization integrations
+
+To report hosts through a virtualization integration as Infrastructure Basic, configure `infrastructure_mode: basic` in the integration instance. This is a separate setting from the host Agent's top-level `infrastructure_mode` setting in `datadog.yaml`.
+
+The examples below show the fields to add or update in an existing integration configuration. Retain the authentication settings and other required options from the integration's setup instructions. After updating the configuration, [restart the Agent][24] running the integration.
+
+### vSphere
+
+On the host running the vSphere integration, use Agent version 7.74.0 or later. Follow the [vSphere integration setup instructions][29], then set `infrastructure_mode` to `basic` in the relevant instance:
+
+```yaml
+instances:
+  - host: <VCENTER_HOSTNAME>
+    infrastructure_mode: basic
+    # Retain the other required settings for this instance.
+```
+
+The vSphere integration can report ESXi hosts and VMs without an Agent installed on each monitored host. If a monitored host also runs the Datadog Agent, configure that Agent to use Basic mode as well. If the integration and the Agent report different modes for the same host, the Agent's mode takes precedence.
+
+### Proxmox
+
+On the host running the Proxmox integration, use Agent version 7.82.0 or later. Follow the [Proxmox integration setup instructions][30], then set `infrastructure_mode` to `basic` in the relevant instance:
+
+```yaml
+instances:
+  - proxmox_server: <PROXMOX_API_ENDPOINT>
+    infrastructure_mode: basic
+    # Retain the other required settings for this instance.
+```
+
+### Nutanix
+
+On the host running the Nutanix integration, use Agent version 7.83.0 or later. Follow the [Nutanix integration setup instructions][31], then set `infrastructure_mode` to `basic` in the relevant instance:
+
+```yaml
+instances:
+  - pc_ip: <PRISM_CENTRAL_HOSTNAME>
+    infrastructure_mode: basic
+    # Retain the other required settings for this instance.
+```
+
 ## Verify infrastructure mode
 
 To verify the infrastructure mode set on your hosts:
 
-1. Navigate to [Fleet Automation][22] and click the {{< ui >}}View Agents{{< /ui >}} tab.
+1. Navigate to [Fleet Automation][22] and select the {{< ui >}}View Agents{{< /ui >}} tab.
 1. Select {{< ui >}}Infrastructure Mode{{< /ui >}} from the {{< ui >}}Group by{{< /ui >}} dropdown.
 1. Click a mode group to expand it and see the hosts it contains.
 1. Optionally, use the search bar to filter to a specific hostname (for example, `hostname:worker1`).
@@ -174,3 +223,9 @@ To verify the infrastructure mode set on your hosts:
 [26]: /integrations/cisco-sdwan/
 [27]: /integrations/versa/
 [28]: /integrations/snmp/
+[29]: /integrations/vsphere/#setup
+[30]: /integrations/proxmox/#setup
+[31]: /integrations/nutanix/#setup
+[32]: /infrastructure/basic/
+[33]: /infrastructure/end_user_device_monitoring/
+[34]: /infrastructure/end_user_device_monitoring/setup/
