@@ -82,7 +82,7 @@ To create, update, or publish Status Pages, you must have the appropriate RBAC p
    | **Status Page Type**    | Choose who can access the page: <br>- **Public** - Anyone with the link can view <br>- **Internal** - Only authenticated users within your Datadog organization can view |
    | **Page name**     | Displayed as the page header (if no logo is uploaded). <br>*Example: Acme Cloud Platform* |
    | **Domain Prefix** | Used as your status page subdomain prefix. For more information on custom domains, see the [Set a custom domain](#set-a-custom-domain) section.<br>*Example: shopist → shopist.statuspage.datadoghq.com* <br>- Must be **globally unique** <br>- Lowercase, alphanumeric, and hyphenated <br>- May affect links if changed later |
-   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). When subscriptions are enabled, visitors can sign up from the published page to get notified about new notices and updates. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
+   | **Subscriptions** *(optional)* | Let users receive notifications about status page updates by [email](#email-subscriptions) or [Slack](#slack-subscriptions). For email, you can let visitors subscribe from the published page or [add subscribers](#add-or-import-subscribers) yourself. Email and Slack subscriptions can be turned on or off independently for each status page. **Note**: [Email subscriptions](#email-subscriptions) are double opt-in; the email address must be confirmed. |
    | **Company logo, Favicon, Email Header Image, or Slack App Icon** *(optional)* | Upload images to personalize your status page and notifications. The Slack app icon appears as the sender avatar in Slack notifications, alongside your page name. |
 1. (Optional) [Add components](#add-components) to show the status of individual services.
 1. Click **Save Settings**.
@@ -155,7 +155,7 @@ From a status page, click **Publish Notice** and select **Degradation**, then pr
 | **Message** | Additional details for your users <br>*Example: We are aware of the issue and are actively working on a fix.* |
 | **Components impacted** | One or more components affected by the degradation |
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
-| **Notify subscribers** | Toggle to send updates to subscribed users |
+| **Notify subscribers** | Toggle to send updates to subscribed users. Email also requires the page-level [**Notify subscribers**](#enable-email-subscriptions) setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_degradation_1.png" alt="Example publish notice modal for degradations" style="width:60%;" >}}
 
@@ -211,7 +211,7 @@ From the status page, click **Schedule Maintenance**, or click **Publish Notice*
 | **Maintenance window** | Scheduled start and end time for the maintenance |
 | **Messages** | Messages that are automatically published as the maintenance progresses |
 | **Components impacted** | Components affected during the maintenance window |
-| **Notify subscribers** | Toggle to send advance notification to subscribers |
+| **Notify subscribers** | Toggle to send advance notification to subscribers. Email also requires the page-level [**Notify subscribers**](#enable-email-subscriptions) setting. |
 
 {{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Example publish notice modal for maintenance windows" style="width:60%;" >}}
 
@@ -303,6 +303,35 @@ For **internal** status pages, the subscription process is the same, but users m
 
 {{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Screenshot of the Status Page subscription modal with fields filled out" style="width:70%;" >}}
 
+### Enable email subscriptions
+
+Two settings control email subscriptions:
+
+- **Notify subscribers**: Sends email for notices published with **Notify subscribers** enabled. When disabled, notices still go to other subscription types, such as Slack.
+- **Show subscribe option to visitors**: Adds a **Subscribe** option to the published page.
+
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
+2. Enable **Notify subscribers**.
+3. (Optional) Enable **Show subscribe option to visitors**. This option requires **Notify subscribers**.
+4. (Optional) Under **Email Header Image**, upload an image to display at the top of notification emails.
+
+Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a private audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
+
+### Add or import subscribers
+
+You can add or import subscribers before you publish your page or enable **Notify subscribers**.
+
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
+2. Under **Email Subscribers**, do one of the following:
+   - To add one subscriber, click **Add Subscriber** and enter an email address.
+   - To import a list, click **Import Subscribers** and upload a `.txt` file with one email address per line. You can import up to 1,000 subscribers at a time.
+
+New subscribers must confirm their email address before they receive notifications:
+
+- **Published page**: Datadog sends the confirmation email immediately.
+- **Unpublished page**: Subscribers are saved as **pending**. Datadog sends the confirmation email when you [publish the page](#publish-your-status-page).
+
+Unpublishing a page doesn't affect existing subscribers.
 
 ## Configure a custom email sender domain
 
@@ -310,10 +339,14 @@ By default, status page subscription emails are sent from a Datadog email addres
 
 <div class="alert alert-danger">The <code>org_management</code> permission is required to add SMTP servers in Organization Settings. The <code>status_pages_settings_write</code> permission is required to select the email sender domain on a status page.</div>
 
-1. On your status page, go to **Settings** > **Subscriptions**.
+1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Under **Email Sender Domain**, click **Organization Settings**.
 3. In Organization Settings, [add and validate an SMTP server][3].
-4. Return to **Settings** > **Subscriptions** and select your SMTP server as the email sender domain.
+4. Return to your status page **Settings**, select **Email** under **Subscriptions**, and select your SMTP server as the email sender domain.
+
+<div class="alert alert-info">
+If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
+</div>
 
 ## Slack subscriptions
 
@@ -321,7 +354,7 @@ Visitors can subscribe to status page updates in Slack through the **Datadog Sta
 
 ### Enable Slack subscriptions
 
-1. From your status page, click **Settings**.
+1. From your status page, click **Settings**, then select **Slack** under **Subscriptions**.
 2. Enable **Slack subscriptions**.
 3. (Optional) Under **Slack App Icon**, upload an image to use as the sender avatar on Slack notifications.
 
@@ -350,16 +383,11 @@ Subscribers can change the components they follow or unsubscribe at any time fro
 
 Status page owners can review subscribers in the status page settings, which lists the subscribed Slack workspaces and channels. Removing a workspace unsubscribes all of its channels from the page.
 
-<div class="alert alert-info">
-If the selected SMTP server fails, notifications are sent to subscribers through <strong>Datadog Default</strong> (<code>no-reply@dtdg.co</code>).
-</div>
-
 ## Set a custom domain
 
 To match your branding, you have the option to map your status page URL to a custom domain like `status.acme.com`. This is separate from [configuring a custom email sender domain](#configure-a-custom-email-sender-domain), which controls the from address on subscription emails.
 
-1. From your status page, click **Settings**.
-1. Select **Custom Domain**.
+1. From your status page, click **Settings**, then select **Custom Domain** under **General**.
 1. Follow the instructions to enter your domain and add DNS records.
 1. Datadog automatically detects the DNS configuration and provisions an SSL certificate.
 
