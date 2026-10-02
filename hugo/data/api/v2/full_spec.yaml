@@ -199569,7 +199569,7 @@ paths:
         description: "The definition of the new Agent policy"
         required: true
       responses:
-        "200":
+        "201":
           content:
             "application/json":
               examples:
@@ -199584,7 +199584,7 @@ paths:
                       type: policy
               schema:
                 $ref: "#/components/schemas/CloudWorkloadSecurityAgentPolicyResponse"
-          description: OK
+          description: Created
         "400":
           $ref: "#/components/responses/BadRequestResponse"
         "403":
