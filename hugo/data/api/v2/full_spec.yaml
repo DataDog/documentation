@@ -107670,6 +107670,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         createdAt:
           description: When the rule was created, timestamp in milliseconds.
           format: int64
@@ -108505,6 +108510,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         complianceSignalOptions:
           $ref: "#/components/schemas/CloudConfigurationRuleComplianceSignalOptions"
         createdAt:
@@ -122739,6 +122749,8 @@ components:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesMsTeams"
         pagerduty:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesPagerduty"
+        servicenow:
+          $ref: "#/components/schemas/TeamNotificationRuleAttributesServiceNow"
         slack:
           $ref: "#/components/schemas/TeamNotificationRuleAttributesSlack"
       type: object
@@ -122748,6 +122760,10 @@ components:
         enabled:
           description: Flag indicating email notification
           type: boolean
+        recipient_email:
+          description: >-
+            Email address to notify. When omitted and email notifications are enabled, notifications are sent to all team members.
+          type: string
       type: object
     TeamNotificationRuleAttributesMsTeams:
       description: MS Teams notification settings for the team
@@ -122762,6 +122778,15 @@ components:
         service_name:
           description: Service name for PagerDuty
           type: string
+      type: object
+    TeamNotificationRuleAttributesServiceNow:
+      description: ServiceNow notification settings for the team.
+      properties:
+        templates:
+          description: ServiceNow template handle names to use for notifications.
+          items:
+            type: string
+          type: array
       type: object
     TeamNotificationRuleAttributesSlack:
       description: Slack notification settings for the team
@@ -232446,6 +232471,10 @@ paths:
                       - attributes:
                           email:
                             enabled: true
+                            recipient_email: alerts@example.com
+                          servicenow:
+                            templates:
+                              - incident-template
                           slack:
                             channel: test-channel
                             workspace: Datadog

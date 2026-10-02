@@ -23,6 +23,22 @@
 
 {{ $currentPage := . }}
 {{ $curURL := trim $currentPage.RelPermalink "/" }}
+
+{{/* Precompute, once per render of this partial (which is itself partialCached per unique
+     current-top-section combination -- see nav/current-top-section.html), the set of
+     top-level identifiers whose subtree matches the current page. Built from
+     nav/flattened-menu.html's build-wide-cached flat list via one non-recursive loop,
+     instead of a recursive `partial` call per top-level entry -- see that file for why. */}}
+{{ $flatMenu := partial "nav/flattened-menu.html" $currentPage }}
+{{ $currentTopSectionIDs := slice }}
+{{ range $flatMenu }}
+    {{ if or (eq $curURL .url) (strings.HasPrefix $curURL (printf "%s/" .url)) }}
+        {{ if not (in $currentTopSectionIDs .identifier) }}
+            {{ $currentTopSectionIDs = $currentTopSectionIDs | append .identifier }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
 {{ range $menu }}
     {{ if .HasChildren }}
         {{/*  HEADER  */}}
@@ -33,10 +49,10 @@
                 {{/* Levels 3-4 render only for the current page's top-level section, to avoid shipping every
                      section's full sub-nav on every page. This menu is config-defined (plain url: strings, no
                      page front matter), so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent never match
-                     -- comparing URLs directly is what works. Keep in sync with nav/current-top-section.html,
-                     which computes the same matches for this partial's cache key. */}}
-                {{ $menuURL := trim (.URL | relLangURL) "/" }}
-                {{ $isCurrentTopSection := and (ne $menuURL "") (or (eq $curURL $menuURL) (strings.HasPrefix $curURL (printf "%s/" $menuURL))) }}
+                     -- comparing URLs directly is what works. The match covers this entry's whole subtree, not
+                     just its own URL -- see nav/flattened-menu.html for why. Keep in sync with
+                     nav/current-top-section.html, which computes the same matches for this partial's cache key. */}}
+                {{ $isCurrentTopSection := in $currentTopSectionIDs .Identifier }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $isCurrentTopSection }}active{{ end }}">
                     {{ $url_without_anchor = (index (split .URL "#") 0) }}
