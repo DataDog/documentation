@@ -888,7 +888,7 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Adding OAuth clients
 
-You can allow-list your redirect URLs in [{{< ui >}}Organization Preferences{{< /ui >}}][27] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
+You can allow-list your redirect URLs in [{{< ui >}}MCP Server{{< /ui >}}][80] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 
@@ -977,7 +977,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [24]: /account_management/rbac/permissions/#monitors
 [25]: /account_management/rbac/permissions/
 [26]: https://app.datadoghq.com/organization-settings/roles
-[27]: https://app.datadoghq.com/organization-settings/preferences
+[27]: https://app.datadoghq.com/organization-settings/mcp
 [28]: https://www.warp.dev/
 [29]: /synthetics/
 [30]: /continuous_integration/
@@ -1029,3 +1029,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
 [79]: ]https://app.datadoghq.com/personal-settings/apps
+[80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
