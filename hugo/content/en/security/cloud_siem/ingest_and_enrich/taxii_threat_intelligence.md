@@ -45,7 +45,7 @@ Datadog skips other indicator types. Patterns, expiration (`valid_until`), and r
 - The Integrations Manage permission to add, change, or delete TAXII servers and collections. The Integrations Read permission is enough to view them.
 - From your provider: the server's API root URL, credentials if the server requires them, and the ID (a UUID) of each collection you want to ingest.
 
-Each organization can have up to 20 collections with polling enabled. TAXII collections do not count toward the [limit of 10 threat intelligence reference tables][5] that Cloud SIEM enriches with.
+Each organization can have up to 20 TAXII collections with polling enabled.
 
 ## Add a TAXII server
 
@@ -53,10 +53,10 @@ Each organization can have up to 20 collections with polling enabled. TAXII coll
 1. Click {{< ui >}}Configure{{< /ui >}}, then click {{< ui >}}New{{< /ui >}}.
 1. Enter a {{< ui >}}Name{{< /ui >}} for the server, for example `Production threat intelligence`.
 1. Enter the {{< ui >}}TAXII API root URL{{< /ui >}}, for example `https://taxii.example.com/api/taxii2/`. The URL must use HTTPS.
-1. Under {{< ui >}}Authentication{{< /ui >}}, select {{< ui >}}Basic authentication{{< /ui >}} or {{< ui >}}None{{< /ui >}}. For basic authentication, enter the {{< ui >}}Username or API token{{< /ui >}} and {{< ui >}}Password{{< /ui >}} from your provider. If your provider issues an API token, enter it in {{< ui >}}Username or API token{{< /ui >}}.
+1. Under {{< ui >}}Authentication{{< /ui >}}, select {{< ui >}}Basic authentication{{< /ui >}} or {{< ui >}}None{{< /ui >}}. For basic authentication, enter the {{< ui >}}Username or API token{{< /ui >}} (use the API token here if your provider issues one) and {{< ui >}}Password{{< /ui >}} from your provider.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
-Datadog validates the API root URL and credentials when the first enabled collection is polled, not when you save the server. You cannot change a server's name, API root URL, or authentication method after you save it, and Datadog does not display stored credentials.
+Datadog validates the API root URL and credentials when the first enabled collection is polled, not when you save the server. After you save a server, you cannot change its name, API root URL, or authentication method, and stored credentials are not displayed.
 
 Client certificates (mTLS), bearer tokens, and OAuth are not supported.
 
