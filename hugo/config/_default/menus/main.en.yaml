@@ -8136,7 +8136,7 @@ menu:
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_investigate_security_signals
       weight: 301
-    - name: Risk Insights
+    - name: Entity Risks
       url: security/cloud_siem/triage_and_investigate/entities_and_risk_scoring
       parent: cloud_siem_triage_and_investigate
       identifier: cloud_siem_entities_and_risk_scoring
