@@ -17,6 +17,8 @@ const completeEndpointJson = JSON.stringify({
   version: "v1",
   deprecated: false,
   unstable: false,
+  permissions: ["dashboards_read"],
+  oauthScopes: ["dashboards_read"],
   regionUrls: {
     us: "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
     eu: "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",

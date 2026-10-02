@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+// @ts-ignore — Preact renderer is registered for SSR of nested ApiSchemaTable islands.
+import preactRenderer from "@astrojs/preact/server.js";
 import ApiEndpoint from "../ApiEndpoint.astro";
 import { getAllowedRegions } from "@config/regions";
 
@@ -63,5 +65,105 @@ describe("ApiEndpoint region rendering", () => {
         `data-region="${region.key}"`,
       );
     }
+  });
+});
+
+describe("ApiEndpoint permissions and OAuth scopes", () => {
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  it("states a single permission as a sentence, as Hugo does", async () => {
+    const html = await renderEndpoint({ permissions: ["dashboards_read"] });
+
+    expect(html).toMatch(
+      /This endpoint requires the <code>dashboards_read<\/code> permission\./,
+    );
+    expect(html).not.toContain("Permissions:");
+  });
+
+  it("says any of the listed permissions when the match is any", async () => {
+    const html = await renderEndpoint({
+      permissions: ["apps_run", "apps_write"],
+      permissionsMatch: "any",
+    });
+
+    expect(html).toMatch(
+      /This endpoint requires any of the following permissions:/,
+    );
+    expect(html).toMatch(
+      /<li><code>apps_run<\/code><\/li>\s*<li><code>apps_write<\/code><\/li>/,
+    );
+  });
+
+  it("says all of the listed permissions when the match is all", async () => {
+    const html = await renderEndpoint({
+      permissions: ["apps_write", "workflows_run"],
+      permissionsMatch: "all",
+    });
+
+    expect(html).toMatch(
+      /This endpoint requires all of the following permissions:/,
+    );
+  });
+
+  it("links the word scope to the API section's entry on the scopes page", async () => {
+    const html = await renderEndpoint({
+      oauthScopes: ["dashboards_read"],
+      oauthScopesAnchor: "dashboards",
+    });
+
+    expect(html).toMatch(
+      /authorization <a href="\/api\/latest\/scopes\/#dashboards">scope<\/a> to access this endpoint\./,
+    );
+  });
+});
+
+describe("ApiEndpoint argument tables", () => {
+  const field = (name: string) => ({
+    name,
+    type: "string",
+    required: true,
+    deprecated: false,
+    readOnly: false,
+    description: `The ${name}.`,
+  });
+
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  it("titles each argument table by parameter location, as Hugo does", async () => {
+    const html = await renderEndpoint({
+      pathParams: [field("app_id")],
+      queryParams: [field("version")],
+      headerParams: [field("x_header")],
+    });
+
+    expect(html).toMatch(
+      /<h4[^>]*>Path Parameters<\/h4>[\s\S]*data-field-name="app_id"[\s\S]*<h4[^>]*>Query Strings<\/h4>[\s\S]*data-field-name="version"[\s\S]*<h4[^>]*>Header Parameters<\/h4>[\s\S]*data-field-name="x_header"/,
+    );
+  });
+
+  it("omits the title for a parameter location with no parameters", async () => {
+    const html = await renderEndpoint({ pathParams: [field("app_id")] });
+
+    expect(html).toContain("Path Parameters");
+    expect(html).not.toContain("Query Strings");
+    expect(html).not.toContain("Header Parameters");
   });
 });

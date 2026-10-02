@@ -45,19 +45,30 @@ function innerNodes(r: ResponseData): MarkdocNode[] {
   }
 
   if (hasSchema && hasExamples) {
-    const table = apiSchemaTableNode(r.schema!);
     return [
       tag("tabs", {}, [
-        tag("tab", { label: "Model" }, table ? [table] : NO_CONTENT),
+        tag("tab", { label: "Model" }, modelNodes(r)),
         tag("tab", { label: "Example" }, exampleNodes(r.examples!)),
       ]),
     ];
   }
 
   if (hasSchema) {
-    const table = apiSchemaTableNode(r.schema!);
-    return table ? [table] : NO_CONTENT;
+    return modelNodes(r);
   }
 
   return exampleNodes(r.examples!);
+}
+
+// The schema description (when present) followed by the schema table.
+function modelNodes(r: ResponseData): MarkdocNode[] {
+  const nodes: MarkdocNode[] = [];
+  if (r.schemaDescription) {
+    nodes.push(...nodesFromMd(r.schemaDescription));
+  }
+  const table = apiSchemaTableNode(r.schema!);
+  if (table) {
+    nodes.push(table);
+  }
+  return nodes.length > 0 ? nodes : NO_CONTENT;
 }

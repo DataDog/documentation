@@ -1,6 +1,6 @@
 ---
 import type { SchemaField } from "@lib/api/schemas/schemaField";
-import { renderMarkdownInline } from "@lib/api/markdownRenderer";
+import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
 import styles from "./ApiSchemaTable.module.css";
@@ -10,6 +10,11 @@ const cl = classListFactory(styles);
 
 const ENUM_INLINE_LIMIT = 10;
 const INDENT_PX = 20;
+// How far a toggle pushes its row's name to the right: the 16px button minus
+// its -6px margin (see `.schema-table__toggle`), plus the cell's
+// `var(--space-xs)` gap. Each level adds this so a child's name lands
+// INDENT_PX past its parent's name, not past the parent's chevron.
+const TOGGLE_OFFSET_PX = 10;
 
 interface Props {
   field: SchemaField;
@@ -22,13 +27,24 @@ const hasChildren =
   (field.children !== undefined && field.children.length > 0) ||
   (field.unionOptions !== undefined && field.unionOptions.length > 0);
 
-const indent = depth * INDENT_PX;
 const cellNameStyle =
-  indent > 0 ? `padding-left: calc(var(--space-md) + ${indent}px)` : undefined;
+  depth > 0
+    ? `padding-left: calc(var(--space-md) + ${depth} * (${INDENT_PX + TOGGLE_OFFSET_PX}px + var(--space-xs)))`
+    : undefined;
 
 const enumValues = field.enumValues ?? [];
 const enumVisible = enumValues.slice(0, ENUM_INLINE_LIMIT);
 const enumRest = enumValues.slice(ENUM_INLINE_LIMIT);
+
+// Block-level, so multi-paragraph spec descriptions keep their breaks. The
+// DEPRECATED label goes inside the first paragraph, as Hugo does.
+const deprecatedLabelHtml = `<strong class="${cl("schema-table__deprecated-label")}">DEPRECATED</strong>`;
+const descriptionHtml = renderMarkdown(field.description ?? "");
+const descriptionWithLabelHtml = !field.deprecated
+  ? descriptionHtml
+  : descriptionHtml.startsWith("<p>")
+    ? descriptionHtml.replace("<p>", `<p>${deprecatedLabelHtml} `)
+    : `<p>${deprecatedLabelHtml}</p>${descriptionHtml}`;
 
 // `oneOf`/`anyOf` are carried as bare semantic tags on the field so other
 // consumers can branch on them; the type column shows them bracketed, as
@@ -102,12 +118,10 @@ const optionFields: SchemaField[] =
     <span class={cl("schema-table__type")}>{displayType}</span>
   </div>
   <div class={cl("schema-table__cell-description")}>
-    {
-      field.deprecated && (
-        <strong class={cl("schema-table__deprecated-label")}>DEPRECATED</strong>
-      )
-    }
-    <span set:html={renderMarkdownInline(field.description ?? "")} />
+    <div
+      class={cl("schema-table__description")}
+      set:html={descriptionWithLabelHtml}
+    />
     {
       field.defaultValue !== undefined && (
         <span class={cl("schema-table__default")}>
