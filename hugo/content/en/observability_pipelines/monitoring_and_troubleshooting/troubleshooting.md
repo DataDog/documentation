@@ -30,7 +30,7 @@ If you can access your Observability Pipelines Workers locally, use the `tap` co
 
 ### Find the component ID
 
-You need the source's or processor's component ID to `tap` into it or to view component metrics with the `component_id` tag.
+You need the source's, processor's, or destination's component ID to `tap` into it or to view [component metrics][30] with the `component_id` tag.
 
 {{< tabs >}}
 {{% tab "Command line" %}}
@@ -48,11 +48,13 @@ See [Worker CLI Commands][1] for a list of commands and options.
 {{% /tab %}}
 {{% tab "UI" %}}
 
-To find and copy the component ID in the UI:
+To copy the component ID in the UI:
 
 1. Navigate to [Observability Pipelines][1].
 1. Select your pipeline.
-1. Click the cog next to the source's or processor's name, then select {{< ui >}}View details{{< /ui >}}.
+1. Open the component's side panel:
+    - For a source or destination, click the component.
+    - For a processor, hover over the component and click the graph icon.
 1. Click the copy icon next to the component's name at the top of the side panel.
 
 [1]: https://app.datadoghq.com/observability-pipelines
@@ -261,3 +263,4 @@ If your log timestamps are in string format and your Databricks table has a time
 [27]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
 [29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
+[30]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=sources#component-metrics
