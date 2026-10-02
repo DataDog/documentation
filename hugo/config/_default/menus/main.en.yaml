@@ -5420,6 +5420,11 @@ menu:
       parent: dbm
       identifier: dbm_guides
       weight: 24
+    - name: Database Monitoring Workbench
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 25
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
