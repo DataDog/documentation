@@ -33,10 +33,9 @@ Follow the instructions in [Instrument AWS Lambda applications][2] to set up the
 
 ## Health metrics
 
-For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. Since you use the HTTP Server source to send logs from Lambda Extension to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
+See [Component metrics][3] and [Source buffer metrics][4] for more information on metrics emitted by all sources. Since you use the HTTP Server source to send logs from Lambda Extension to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/extension/
 [2]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
-[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
