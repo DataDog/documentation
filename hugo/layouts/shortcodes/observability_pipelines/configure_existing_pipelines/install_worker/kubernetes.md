@@ -18,4 +18,3 @@
 1. Click **Deploy Changes**.
 
 [4001]: /resources/yaml/observability_pipelines/v2/setup/values.yaml
-[4002]: /observability_pipelines/configuration/install_the_worker/?platform=kubernetes#expose-the-workers-ports
