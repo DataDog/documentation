@@ -14,7 +14,7 @@ import {
 import { buildCurlCommand } from "./curlBuilder";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
-import type { CurlParam } from "./schemas/curl";
+import type { CurlParam, CurlSecurityScheme } from "./schemas/curl";
 import type { ResponseData, RequestBodyData } from "./schemas/views";
 import type { SplitParams } from "./schemas/params";
 
@@ -259,6 +259,8 @@ export function buildCurlByRegion(
       queryParams: toCurlParams(splitParams.query),
       requestBodyJson,
       security: operation.security,
+      globalSecurity: spec.security,
+      securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
     });
   }
   return result;
@@ -376,4 +378,18 @@ function toCurlParams(params: OpenAPIV3.ParameterObject[]): CurlParam[] {
       required: p.required === true,
     };
   });
+}
+
+/** Drop `$ref` entries; returns undefined so the curl builder uses its defaults. */
+function toCurlSecuritySchemes(
+  securitySchemes: OpenAPIV3.ComponentsObject["securitySchemes"],
+): Record<string, CurlSecurityScheme> | undefined {
+  if (!securitySchemes) return undefined;
+  const curlSecuritySchemesByName: Record<string, CurlSecurityScheme> = {};
+  for (const [name, securityScheme] of Object.entries(securitySchemes)) {
+    if (!isReference(securityScheme)) {
+      curlSecuritySchemesByName[name] = securityScheme as CurlSecurityScheme;
+    }
+  }
+  return curlSecuritySchemesByName;
 }
