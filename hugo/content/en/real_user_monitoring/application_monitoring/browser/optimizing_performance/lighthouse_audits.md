@@ -1,6 +1,6 @@
 ---
 title: Lighthouse Audits
-description: "Run Google Lighthouse audits in browser Synthetic tests and view the Performance, Accessibility, Best Practices, SEO, and Agentic scores on your RUM views."
+description: "Run Google Lighthouse audits in browser Synthetic tests and view the Performance, Accessibility, Best Practices, SEO, and Agentic scores in RUM."
 further_reading:
   - link: "/synthetics/browser_tests/"
     tag: "Documentation"
@@ -27,7 +27,7 @@ Each audit reports five category scores from 0 to 100:
 - **SEO**
 - **Agentic**: reflects how well AI agents can understand, navigate, and interact with the page.
 
-Because the audit runs inside a browser test, it reuses the test's session. This allows Lighthouse to score authenticated pages behind a login, measuring the same pages your users see.
+Because the audit runs inside a browser test, it reuses the test's session, so Lighthouse can score authenticated pages behind a login and cover the same pages users see.
 
 ## Prerequisites
 
@@ -41,9 +41,8 @@ There are two ways to create a browser test that collects Lighthouse data.
 
 ### From a RUM application
 
-1. On the [Optimization page][5] of your RUM application, open the **Lighthouse** panel and select **Create a Synthetics test**.
-2. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application.
-3. Finish configuring and save the test.
+1. On the [Optimization page][5] of your RUM application, open the **Lighthouse** panel and select **Create a Synthetics test**. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application.
+2. Finish configuring and save the test.
 
 ### From Synthetic Monitoring
 
@@ -52,14 +51,23 @@ There are two ways to create a browser test that collects Lighthouse data.
 3. Enable **Run Lighthouse audit**. (This option is available only when RUM data collection is enabled.)
 4. Record the steps that reach the page you want to audit, then save the test.
 
+<!-- TODO screenshot: the "Run Lighthouse audit" checkbox in the browser test recorder (inside the Collect RUM data option). Save the image to hugo/static/images/real_user_monitoring/browser/optimizing_performance/lighthouse-recorder-toggle.png, then uncomment the line below:
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-recorder-toggle.png" alt="The Run Lighthouse audit checkbox in the browser test recorder." style="width:80%;" >}}
+-->
+
 ## View Lighthouse results
 
-After the test runs, Lighthouse results appear in two places in RUM, both under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][5]:
+After the test runs, Lighthouse results appear in two places in RUM, both under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][6]:
 
 - On the **Optimization page**, the **Lighthouse** panel shows the latest audit for the selected view: the five category score gauges, the lab metrics Lighthouse measured, the failed audits, and a trend of scores over time. From the panel, you can open the full Lighthouse report, download the raw report as JSON, or open the Synthetic test result.
 - In the browser performance side panel of a RUM view, the **Lighthouse** tab shows a *Lighthouse scores by view* table, with a percentile selector to compare scores across views.
 
-Lighthouse data is collected on **scheduled** executions and on **on-demand** runs of a **saved** test. Previewing an unsaved test from the recorder, and runs triggered from CI, do not collect Lighthouse data.
+<!-- TODO screenshot: the Lighthouse panel on the RUM Optimization page (category score gauges, lab metrics, failed audits). Save the image to hugo/static/images/real_user_monitoring/browser/optimizing_performance/lighthouse-panel.png, then uncomment the line below:
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-panel.png" alt="The Lighthouse panel on the RUM Optimization page showing category score gauges, lab metrics, and failed audits." style="width:100%;" >}}
+-->
+<!-- TODO screenshot: the Lighthouse scores by view table in the RUM view browser performance side panel. Save the image to hugo/static/images/real_user_monitoring/browser/optimizing_performance/lighthouse-scores-by-view.png, then uncomment the line below:
+{{< img src="real_user_monitoring/browser/optimizing_performance/lighthouse-scores-by-view.png" alt="The Lighthouse scores by view table in the RUM view browser performance side panel." style="width:100%;" >}}
+-->
 
 ## Metrics and attributes
 
@@ -80,7 +88,7 @@ These metrics are tagged with `application.id` and `view.name`.
 - Lighthouse audits run only on **desktop Chrome**.
 - Audits run on tests executed from **managed (Datadog) locations**. They are not available on Private Locations.
 - Audits run on **scheduled** and **on-demand** executions of a **saved** test. Unsaved recorder previews, CI-triggered runs, and fast tests are not audited.
-- Each audit has a time budget. A page that is still loading when the budget elapses is scored with the data Lighthouse gathered up to that point.
+- Each audit runs within a time budget. A page that stays too slow for the whole budget times out and produces no scores; otherwise, Lighthouse scores the page even if it has not fully finished loading.
 
 ## Further Reading
 
@@ -90,4 +98,5 @@ These metrics are tagged with `application.id` and `view.name`.
 [2]: https://developer.chrome.com/docs/lighthouse/overview/
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /synthetics/guide/explore-rum-through-synthetics/
-[5]: https://app.datadoghq.com/rum/optimization
+[5]: https://app.datadoghq.com/rum/vitals
+[6]: https://app.datadoghq.com/rum/performance-monitoring
