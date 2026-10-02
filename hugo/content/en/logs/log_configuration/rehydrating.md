@@ -44,7 +44,7 @@ You must have an external archive configured to rehydrate data from it. To archi
 Datadog requires permission to read from your archives to rehydrate content. Archives must be configured with appropriate authentication:
 
 - **S3**: Must use role delegation (IAM roles)
-- **Azure Storage**: Must use Azure AD with Storage Blob Data Contributor role
+- **Azure Storage**: Must use Microsoft Entra ID with Storage Blob Data Contributor role
 - **Google Cloud Storage**: Must use service account with Storage Object Viewer role
 
 Only archives with proper authentication are available for rehydrating. For detailed setup instructions, see [Cloud-specific permissions](#cloud-specific-permissions).
@@ -175,7 +175,7 @@ Datadog supports rehydrating only from archives that use role delegation to gran
 
 {{% tab "Azure Storage" %}}
 
-Datadog uses an Azure AD group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
+Datadog uses a Microsoft Entra ID group with the Storage Blob Data Contributor role scoped to your archives' storage account to rehydrate log events. You can grant this role to your Datadog service account from your storage account's Access Control (IAM) page by [assigning the Storage Blob Data Contributor role to your Datadog integration app][1].
 
 {{< img src="logs/archives/logs_azure_archive_permissions.png" alt="Rehydration from Azure Storage requires the Storage Blob Data Contributor role" style="width:75%;">}}
 
