@@ -34,6 +34,17 @@ Agent Console supports the following coding agents:
 | [GitHub Copilot][4] | GitHub's AI-powered code completion tool |
 
 
+## Permissions
+
+Access to Agent Console is controlled by two dedicated [permissions][9]:
+
+- **Agent Console Read**: view Agent Console.
+- **Agent Console Write**: create, edit, and delete Agent Console configurations.
+
+Roles that already have Agent Observability read or write access receive the matching Agent Console permission, so existing access is preserved. Administrators can then remove an Agent Console permission from a role without changing that role's Agent Observability access.
+
+<div class="alert alert-warning">If you manage custom roles with Terraform, add the <strong>Agent Console Read</strong> and <strong>Agent Console Write</strong> permissions to your role configuration before you apply it. Otherwise, Terraform revokes the access you were granted.</div>
+
 ## Coding agents
 
 The {{< ui >}}Coding Agents{{< /ui >}} tab gives you a top-level view of coding agent activity across your organization. By default, the view aggregates all coding agents and can be filtered to a single agent.
@@ -112,3 +123,4 @@ To start sending data to Agent Console, see [Set Up Agent Console][8].
 [6]: /bits_ai/bits_code/
 [7]: /actions/agents/
 [8]: /ai_agents_console/setup/
+[9]: /account_management/rbac/permissions/
