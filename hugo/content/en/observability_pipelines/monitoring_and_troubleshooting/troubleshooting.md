@@ -96,6 +96,18 @@ If the Worker is not starting, Worker logs are not sent to Datadog and are not v
     ```
     An example of `<pod-name>` is `opw-observability-pipelines-worker-0`.
 
+### Worker shows an Undeployed status
+
+The {{< ui >}}Latest Deployment & Setup{{< /ui >}} tab shows a Worker as {{< ui >}}Undeployed{{< /ui >}} when the Worker reports an `errored` status. This can happen even if the Worker is running and sending logs to Datadog. To find the error, [view the Worker's logs](#view-observability-pipelines-worker-stats-and-logs) and filter with the following query:
+
+```
+source:op_worker @op_worker.status:errored @op_worker.pipeline_id:<PIPELINE_ID>
+```
+
+The Worker logs pipeline configuration errors only when it starts up. If you don't see any errors, restart or redeploy the Worker to generate the logs again.
+
+A common cause is an `unknown field` error, which means the pipeline uses a setting that your Worker version doesn't support. For example, configuring the Datadog Agent source address identifier requires Worker version 2.14.0 or later. To resolve this error, [upgrade the Worker][30] to a version that supports the setting.
+
 ### Multi-attach error when using persistence on Kubernetes
 
 If you enabled [disk buffering][24] for destinations and see a Worker pod stuck in `Pending` with a volume multi-attach error after Kubernetes reschedules it to a new node, this is expected. The error occurs because the persistent volume from the previous node hasn't finished detaching. The pod recovers on its own.
@@ -239,3 +251,4 @@ If your log timestamps are in string format and your Databricks table has a time
 [27]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [28]: /observability_pipelines/processors/sensitive_data_scanner/?tab=libraryrules#best-practices-to-optimize-performance
 [29]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
+[30]: /observability_pipelines/guide/upgrade_worker/
