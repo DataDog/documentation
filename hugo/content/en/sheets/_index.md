@@ -81,7 +81,7 @@ After you have your pivot table, you can click {{< ui >}}Show Graphs{{< /ui >}} 
 
 A sheet is a flexible, blank-canvas spreadsheet with a full formula engine. Use it to build financial models, operational trackers, planning templates, or any freeform calculation that doesn't fit a query-based workflow.
 
-To add a sheet, click the {{< ui >}}\+{{< /ui >}} tab at the bottom of your spreadsheet and select {{< ui >}}Add Sheet{{< /ui >}}.
+To add a sheet, click the {{< ui >}}+{{< /ui >}} tab at the bottom of your spreadsheet and select {{< ui >}}Add Sheet{{< /ui >}}.
 
 {{< img src="/sheets/flexible_spreadsheet.png" alt="A flexible sheet showing a 2025 cloud spend by provider model, with SUMIFS and VLOOKUP formulas referencing Cloud cost and Currency conversion table tabs" style="width:90%;" >}}
 
