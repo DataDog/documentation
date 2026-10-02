@@ -2202,7 +2202,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2572,6 +2572,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is AAP blocking enabled for the organization?
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
+
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
 
 ## Session Replay
 
@@ -3129,6 +3188,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [82]: /tracing/guide/resource_based_sampling/
 [83]: /network_monitoring/network_path/
 [84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
 
 ## Further reading
 
