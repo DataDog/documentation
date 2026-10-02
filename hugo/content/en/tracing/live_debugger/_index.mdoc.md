@@ -398,9 +398,9 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 
 ### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
 
-{% callout url="/mcp_server/" btn_hidden=true %}
+{% alert %}
 The Live Debugger toolset for the Datadog Model Context Protocol (MCP) server is in Preview. See the [Datadog MCP Server documentation][39] for setup and access requirements.
-{% /callout %}
+{% /alert %}
 
 Use the `live-debugger` toolset to investigate running services with your own coding assistant.
 
