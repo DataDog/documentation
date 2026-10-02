@@ -243,6 +243,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "CreateAIImpactUserActivity": {
+    "description": "Send daily AI coding tool activity for one or more users. Each entry records whether a\nuser was active on a given day, along with the AI tools and models they used. An entry\nis stored once per tool, and sending the same user, day, and tool again overwrites the\nprevious value.",
+    "summary": "Send AI tool user activity",
+    "request_description": "",
+    "request_schema_description": "Request to send daily AI tool activity for one or more users."
+  },
   "ListAnnotations": {
     "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
     "summary": "List annotations"
