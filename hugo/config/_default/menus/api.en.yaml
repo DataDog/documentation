@@ -636,6 +636,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Validate dashboard widgets
+      url: /api/latest/dashboards/validate-dashboard-widgets/
+      identifier: dashboards-validate-dashboard-widgets
+      parent: dashboards
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ValidateDashboardWidgets
+        unstable:
+          - v2
+        order: 3
     - name: Update a dashboard
       url: /api/latest/dashboards/update-a-dashboard/
       identifier: dashboards-update-a-dashboard
