@@ -219,6 +219,7 @@ agent diagnose show-metadata agent-telemetry
 | runtime.agent_service_installed             | Whether an Agent service is installed on the host, per service                                                         |
 | runtime.agent_service_procmgr_configured    | Whether an Agent service has a `processes.d` configuration file for `dd-procmgrd`, per service                         |
 | runtime.agent_service_management_mode       | Which supervisor manages an Agent service, tagged by service and mode (none, procmgr, systemd, windows_service)        |
+| runtime.agent_service_running               | Whether an Agent service process is up under a supervisor, tagged by service and supervisor (procmgr, systemd, windows_service) |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | **APM**                                     |                                                                                                                        |
