@@ -21200,6 +21200,19 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Get SPA recommendations v2
+      url: /api/latest/spa/get-spa-recommendations-v2/
+      identifier: spa-get-spa-recommendations-v2
+      parent: spa
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSPARecommendationsV2
+        unstable:
+          - v2
+        order: 3
     - name: Spans
       url: /api/latest/spans/
       identifier: spans
