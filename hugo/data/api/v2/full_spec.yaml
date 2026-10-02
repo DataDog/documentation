@@ -15799,6 +15799,131 @@ components:
           example: "One or several indexes are missing or invalid, results hold data from the other indexes"
           type: string
       type: object
+    CILogAttributeValue:
+      description: A flat additional log attribute. Objects and arrays are not accepted.
+      oneOf:
+        - nullable: true
+          type: string
+        - format: double
+          type: number
+        - type: boolean
+    CILogContentEncoding:
+      description: HTTP header used to compress the JSON request body.
+      enum:
+        - identity
+        - gzip
+      type: string
+      x-enum-varnames:
+        - IDENTITY
+        - GZIP
+    CILogErrors:
+      description: Authentication and authorization errors returned by the CI logs intake API.
+      properties:
+        errors:
+          description: Error messages.
+          example:
+            - Forbidden
+            - API key is missing or invalid
+          items:
+            type: string
+          type: array
+      type: object
+    CILogIntakeError:
+      description: A request error returned by the CI logs intake API.
+      properties:
+        detail:
+          description: Error details.
+          example: Malformed payload
+          type: string
+        status:
+          description: HTTP status code.
+          example: "400"
+          type: string
+        title:
+          description: Error title.
+          example: Bad Request
+          type: string
+      type: object
+    CILogIntakeErrors:
+      description: Request errors returned by the CI logs intake API.
+      properties:
+        errors:
+          description: Request errors.
+          items:
+            $ref: "#/components/schemas/CILogIntakeError"
+          type: array
+      type: object
+    CILogItem:
+      additionalProperties:
+        $ref: "#/components/schemas/CILogAttributeValue"
+      description: A CI job log line.
+      maxProperties: 137
+      properties:
+        ddtags:
+          description: Comma-separated tags in `key:value` format. A log can have up to 256 tags, including repeated keys.
+          example: runner:linux,architecture:amd64
+          type: string
+        job_id:
+          description: The job event's `resource.id`, sent through the CI Visibility pipeline API.
+          example: job-456
+          minLength: 1
+          type: string
+        line_number:
+          description: The line number in the job log. Use 0 or 1 for the first line.
+          example: 812
+          format: int64
+          maximum: 9223372036854775807
+          minimum: 0
+          type: integer
+        message:
+          description: The non-empty log line message.
+          example: Running go test ./...
+          minLength: 1
+          type: string
+        pipeline_unique_id:
+          description: |-
+            The `resource.unique_id` of the pipeline event, which must also match the job event's
+            `resource.pipeline_unique_id`.
+          example: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+          minLength: 1
+          type: string
+        provider_name:
+          description: |-
+            The provider name sent with the pipeline event. It defaults to `custom` when omitted and must be non-empty
+            when provided.
+          example: example-provider
+          minLength: 1
+          type: string
+        section_name:
+          description: |-
+            The provider-defined section containing this log line, used to display collapsible groups of lines in the CI
+            job log view.
+          example: tests
+          type: string
+        status:
+          description: |-
+            The status of this log line. Any string is accepted. Datadog maps non-empty values to a standard log status.
+            See [status mapping](https://docs.datadoghq.com/logs/log_configuration/processors/log_status_remapper/).
+          example: warn
+          type: string
+        timestamp:
+          description: |-
+            The log line time in RFC 3339 format with an explicit timezone. If omitted, the intake time is used. It can
+            be at most 18 hours in the past or 12 hours in the future.
+          format: date-time
+          type: string
+      required:
+        - message
+        - pipeline_unique_id
+        - job_id
+      type: object
+    CILogRequest:
+      description: |-
+        A batch of up to 1,000 CI job log lines. Use a one-item array to send one log line.
+      items:
+        $ref: "#/components/schemas/CILogItem"
+      maxItems: 1000
+      type: array
     CSMAgentsMetadata:
       description: Metadata related to the paginated response.
       properties:
@@ -145254,6 +145379,160 @@ paths:
         permissions:
           - ci_visibility_read
           - test_optimization_read
+  /api/v2/cilogs:
+    post:
+      description: |-
+        Send log lines for a CI job over HTTP. See the [CI Visibility Pipelines
+        API](https://docs.datadoghq.com/api/latest/ci-visibility-pipelines/send-pipeline-event/) for submitting the
+        associated pipeline and job events.
+
+        A request can contain one log object or an array of up to 1,000 log objects. The maximum uncompressed request
+        body size is 5.1 MiB.
+
+        You can stream log lines while a CI job runs or send them after it finishes. After you submit the completed job
+        event, 20 seconds without a new log line marks the job's logs as complete. Lines sent after that may not appear.
+
+        Each log can have up to 128 additional attributes and 256 tags. Additional attributes are top-level fields with
+        string, number, boolean, or null values. Nested objects and arrays are rejected. Additional attributes and
+        `ddtags` apply to all log lines in the job. If an additional attribute has different values on different lines,
+        the first value received is used. Tags supplied on different lines are combined. A job can contain up to
+        2,000,000 log records or 1 GiB of message bytes in total.
+
+        To reduce request size, send gzip-compressed JSON with the `Content-Encoding: gzip` header. Retry requests after
+        a 408, 429, 500, or 503 response.
+      operationId: SubmitCILog
+      parameters:
+        - description: HTTP header used to compress the JSON request body.
+          in: header
+          name: Content-Encoding
+          required: false
+          schema:
+            $ref: "#/components/schemas/CILogContentEncoding"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Single CI job log line
+                value:
+                  - ddtags: runner:linux,architecture:amd64
+                    job_id: job-456
+                    line_number: 812
+                    message: Running go test ./...
+                    pipeline_unique_id: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+                    provider_name: example-provider
+                    section_name: tests
+                    status: warn
+                    stream: stdout
+              multiple-logs:
+                summary: Multiple CI job log lines
+                value:
+                  - job_id: job-456
+                    line_number: 1
+                    message: Running go test ./...
+                    pipeline_unique_id: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+                  - job_id: job-456
+                    line_number: 2
+                    message: Tests passed
+                    pipeline_unique_id: 3eacb6f3-ff04-4e10-8a9c-46e6d054024a
+            schema:
+              $ref: "#/components/schemas/CILogRequest"
+        description: CI job log line or batch in JSON format.
+        required: true
+      responses:
+        "202":
+          content:
+            application/json:
+              examples:
+                default:
+                  value: {}
+              schema:
+                type: object
+          description: Request accepted for processing
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogIntakeErrors"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogErrors"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogErrors"
+          description: Forbidden
+        "408":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogIntakeErrors"
+          description: Request Timeout
+        "413":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogIntakeErrors"
+          description: Payload Too Large
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CILogIntakeErrors"
+          description: Too Many Requests
+      security:
+        - apiKeyAuth: []
+      servers:
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: The regional site for CI Visibility customers.
+              enum:
+                - datadoghq.com
+                - us3.datadoghq.com
+                - us5.datadoghq.com
+                - ap1.datadoghq.com
+                - ap2.datadoghq.com
+                - uk1.datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - US1
+                - US3
+                - US5
+                - AP1
+                - AP2
+                - UK1
+                - EU1
+            subdomain:
+              default: http-intake.logs
+              description: The subdomain where the API is deployed.
+        - url: "{protocol}://{name}"
+          variables:
+            name:
+              default: http-intake.logs.datadoghq.com
+              description: Full site DNS name.
+            protocol:
+              default: https
+              description: The protocol for accessing the API.
+        - url: https://{subdomain}.{site}
+          variables:
+            site:
+              default: datadoghq.com
+              description: Any Datadog deployment.
+            subdomain:
+              default: http-intake.logs
+              description: The subdomain where the API is deployed.
+      summary: Send CI job logs
+      tags:
+        - CI Visibility Logs
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/cloud_auth/aws/persona_mapping:
     get:
       description: List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.
@@ -236676,6 +236955,8 @@ tags:
       [CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)
       for more information.
     name: CI Visibility GitHub Accounts
+  - description: Send CI job logs over HTTP for CI Visibility.
+    name: CI Visibility Logs
   - description: |-
       Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information.
     name: CI Visibility Pipelines
