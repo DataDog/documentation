@@ -54,7 +54,7 @@ Each organization can have up to 20 collections with polling enabled. TAXII coll
 1. Click {{< ui >}}Configure{{< /ui >}}, then click {{< ui >}}New{{< /ui >}}.
 1. Enter a {{< ui >}}Name{{< /ui >}} for the server, for example `Production threat intelligence`.
 1. Enter the {{< ui >}}TAXII API root URL{{< /ui >}}, for example `https://taxii.example.com/api/taxii2/`. The URL must use HTTPS.
-1. Under {{< ui >}}Authentication{{< /ui >}}, select {{< ui >}}Basic authentication{{< /ui >}} or {{< ui >}}None{{< /ui >}}. For basic authentication, enter the {{< ui >}}Username or API token{{< /ui >}} and {{< ui >}}Password{{< /ui >}} from your provider. If your provider issues an API token, enter it in {{< ui >}}Username or API token{{< /ui >}}.
+1. Under {{< ui >}}Authentication{{< /ui >}}, select {{< ui >}}Basic authentication{{< /ui >}} or {{< ui >}}None{{< /ui >}}. For basic authentication, enter the {{< ui >}}Username or API token{{< /ui >}} (use the API token here if your provider issues one) and {{< ui >}}Password{{< /ui >}} from your provider.
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 Datadog validates the API root URL and credentials when the first enabled collection is polled, not when you save the server. After you save a server, you cannot change its name, API root URL, or authentication method, and stored credentials are not displayed.
