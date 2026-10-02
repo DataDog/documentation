@@ -189,9 +189,13 @@ function CategoryDetail({ category: cat, open }: CategoryDetailProps) {
           >
             {sub.sections.map((section, idx) => (
               <div key={`${sub.identifier}-${idx}`}>
-                <p class={cl("product-menu__subcategory-header")}>
-                  {section.label}
-                </p>
+                {section.label ? (
+                  <p class={cl("product-menu__subcategory-header")}>
+                    {section.label}
+                  </p>
+                ) : (
+                  <span class={cl("product-menu__subcategory-spacer")} />
+                )}
                 <ul class={cl("product-menu__list")}>
                   {section.products.map((p) => (
                     <li key={p.identifier}>

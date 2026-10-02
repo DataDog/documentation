@@ -631,6 +631,16 @@
   margin: 0;
 }
 
+/*
+ * Stands in for a heading on a continuation column, so its product list stays
+ * aligned with the headed columns beside it. The 21px block padding is half of
+ * the header's rendered height (18px line-height + 2 * 12px padding).
+ */
+.product-menu__subcategory-spacer {
+  display: block;
+  padding-block: 21px;
+}
+
 .product-menu__subcategory {
   width: 33%;
 }

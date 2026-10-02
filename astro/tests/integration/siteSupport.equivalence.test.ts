@@ -165,5 +165,12 @@ describe("no key name silently covers an API page", () => {
       .map(([id]) => id);
 
     expect(collidesButHasNoPaths).toEqual([]);
-  }, 30_000); // Builds the category view from the full live API spec.
+    // Builds the category view from the full live API spec, which parses every
+    // path and operation. That cost is inherent — the slugs are derived from
+    // the spec, so there is no lighter source to read them from — and the old
+    // 30s budget intermittently lost to contention when this file ran
+    // alongside the rest of the suite, failing as a timeout rather than on the
+    // assertion. The headroom here is for scheduling, not for slow work: a
+    // genuine hang still fails, just later.
+  }, 120_000);
 });

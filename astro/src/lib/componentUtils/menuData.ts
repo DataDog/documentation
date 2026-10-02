@@ -49,15 +49,35 @@ const MenuItemSchema = z.object({
 
 type MenuItem = z.infer<typeof MenuItemSchema>;
 
-const ProductSectionSchema = z.object({
-  lang_key: z.string(),
-  products: z.array(z.string()),
+/**
+ * A product's appearance in the category tree. Upstream changed these from bare
+ * identifier strings to objects in websites-modules v1.4.319.
+ *
+ * `secondary` products stay in the header mega menu but are omitted from the
+ * footer's product column — see `layouts/partials/footer.html` upstream.
+ */
+const ProductRefSchema = z.object({
+  identifier: z.string(),
+  secondary: z.boolean().optional(),
 });
 
+type ProductRef = z.infer<typeof ProductRefSchema>;
+
+const ProductSectionSchema = z.object({
+  lang_key: z.string(),
+  products: z.array(ProductRefSchema),
+});
+
+/**
+ * `lang_key` is absent on "continuation" subcategories (identifier `…-cont`),
+ * which carry the overflow of the previous column. Upstream renders those with
+ * no heading and a spacer in its place, so the product lists stay aligned
+ * across columns — see `layouts/partials/nav/main-nav.html`.
+ */
 const ProductSubcategorySchema = z.object({
   identifier: z.string(),
-  lang_key: z.string(),
-  products: z.array(z.string()).optional(),
+  lang_key: z.string().optional(),
+  products: z.array(ProductRefSchema).optional(),
   sections: z.array(ProductSectionSchema).optional(),
 });
 
@@ -99,13 +119,17 @@ export type SimpleLink = { label: string; href: string };
 export type IdentifiedLink = SimpleLink & { identifier: string };
 
 export type MegaSection = {
-  label: string;
+  /**
+   * Absent on a continuation column, which renders a spacer instead of a
+   * heading to keep the product lists aligned.
+   */
+  label?: string;
   products: { identifier: string; label: string; url: string }[];
 };
 
 export type MegaSubcategory = {
   identifier: string;
-  label: string;
+  label?: string;
   /** True for the "related_products" variant that renders with a left border. */
   related: boolean;
   sections: MegaSection[];
@@ -202,12 +226,12 @@ function childLinks(
 }
 
 function resolveProductList(
-  ids: string[],
+  refs: ProductRef[],
   translate: Translate,
 ): { identifier: string; label: string; url: string }[] {
   const out: { identifier: string; label: string; url: string }[] = [];
-  for (const id of ids) {
-    const p = productById.get(id);
+  for (const ref of refs) {
+    const p = productById.get(ref.identifier);
     if (p) {
       out.push({
         identifier: p.identifier,
@@ -217,6 +241,16 @@ function resolveProductList(
     }
   }
   return out;
+}
+
+/** Every product reference under a subcategory, whether or not it uses sections. */
+function subcategoryProductRefs(sub: {
+  products?: ProductRef[];
+  sections?: { products: ProductRef[] }[];
+}): ProductRef[] {
+  return (
+    sub.products ?? (sub.sections ?? []).flatMap((section) => section.products)
+  );
 }
 
 function buildMegaCategories(translate: Translate): MegaCategory[] {
@@ -233,7 +267,9 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
             : sub.products
               ? [
                   {
-                    label: translate(sub.lang_key),
+                    // A continuation column has no `lang_key`; leaving the
+                    // label undefined makes the renderer emit a spacer.
+                    label: sub.lang_key ? translate(sub.lang_key) : undefined,
                     products: resolveProductList(sub.products, translate),
                   },
                 ]
@@ -241,7 +277,7 @@ function buildMegaCategories(translate: Translate): MegaCategory[] {
 
           return {
             identifier: sub.identifier,
-            label: translate(sub.lang_key),
+            label: sub.lang_key ? translate(sub.lang_key) : undefined,
             related: sub.identifier.includes("related"),
             sections,
           };
@@ -338,9 +374,10 @@ export function getHeaderData(lang: Locale): HeaderData {
 }
 
 /**
- * Flat, deduped list of all products that appear in the desktop mega menu.
- * The footer's product column consumes this — Hugo's `$datadir.menu_data.products`
- * equivalent, ordered by first appearance in the category tree.
+ * Flat, deduped list of the products that appear in the desktop mega menu,
+ * excluding those flagged `secondary`. The footer's product column consumes
+ * this — Hugo's `$datadir.menu_data.products` equivalent, ordered by first
+ * appearance in the category tree.
  */
 export function getFooterProductLinks(lang: Locale): SimpleLink[] {
   const translate = useTranslations(lang);
@@ -348,14 +385,14 @@ export function getFooterProductLinks(lang: Locale): SimpleLink[] {
   const out: SimpleLink[] = [];
   for (const cat of productCategories) {
     for (const sub of cat.children ?? []) {
-      const ids =
-        sub.products ?? (sub.sections ?? []).flatMap((s) => s.products);
-      for (const id of ids) {
-        if (seen.has(id)) {
+      for (const ref of subcategoryProductRefs(sub)) {
+        // `secondary` products stay in the main nav but are omitted here,
+        // matching upstream `layouts/partials/footer.html`.
+        if (ref.secondary || seen.has(ref.identifier)) {
           continue;
         }
-        seen.add(id);
-        const p = productById.get(id);
+        seen.add(ref.identifier);
+        const p = productById.get(ref.identifier);
         if (p) {
           out.push({ label: translate(p.lang_key), href: resolveUrl(p.url) });
         }

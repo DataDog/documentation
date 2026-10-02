@@ -185,3 +185,56 @@ describe("ProductMegaMenu — interactivity (category switching)", () => {
     ).toBe(false);
   });
 });
+
+describe("continuation columns", () => {
+  // A subcategory with no `lang_key` upstream arrives here as a section with no
+  // label. It renders a spacer in place of the heading so its product list stays
+  // aligned with the headed columns beside it.
+  const withContinuation: MegaCategory[] = [
+    {
+      ...categories[0],
+      subcategories: [
+        categories[0].subcategories[0],
+        {
+          identifier: "obs-sub-cont",
+          related: false,
+          sections: [
+            {
+              products: [
+                { identifier: "profiler", label: "Profiler", url: "/profiler" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ];
+
+  it("renders a spacer instead of a header when a section has no label", async () => {
+    renderMenu({ categories: withContinuation });
+    await userEvent.hover(getTrigger());
+
+    const sub = document.querySelector(".product-menu__subcategory-spacer");
+    expect(sub).not.toBeNull();
+  });
+
+  it("still renders the continuation column's products", async () => {
+    renderMenu({ categories: withContinuation });
+    await userEvent.hover(getTrigger());
+
+    const links = [...document.querySelectorAll(".product-menu__list a")].map(
+      (a) => a.textContent,
+    );
+    expect(links).toContain("Profiler");
+  });
+
+  it("keeps the header for a labelled section", async () => {
+    renderMenu({ categories: withContinuation });
+    await userEvent.hover(getTrigger());
+
+    const headers = [
+      ...document.querySelectorAll(".product-menu__subcategory-header"),
+    ].map((p) => p.textContent);
+    expect(headers).toEqual(["Core"]);
+  });
+});
