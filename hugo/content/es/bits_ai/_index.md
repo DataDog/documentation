@@ -46,7 +46,7 @@ Conozca los precios de Bits AI en [AI Credits][1].
    {{< nextlink href="bits_ai/bits_security_analyst" >}}Clasifique señales de amenazas de seguridad con Bits Security Analyst{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_chat" >}}Explore sus datos de observabilidad con Bits Chat{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_data_analysis" >}}Explore sus datos de negocio en lenguaje natural con Bits Data Analysis{{< /nextlink >}}
-   {{< nextlink href="bits_ai/bits_detection" >}}Realice un seguimiento autónomo de las degradaciones de servicio impactantes con Bits Detection{{< /nextlink >}}
+   {{< nextlink href="bits_ai/bits_detection" >}}Realice un seguimiento de forma autónoma de las degradaciones de servicio impactantes con Bits Detection{{< /nextlink >}}
    {{< nextlink href="bits_ai/bits_remediation" >}}Tome medidas sobre las causas raíz con Bits Remediation{{< /nextlink >}}
 {{< /whatsnext >}}
 
