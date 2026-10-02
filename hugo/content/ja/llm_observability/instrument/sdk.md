@@ -26,7 +26,7 @@ Agent Observability SDK は、LLM アプリケーションの可観測性とイ�
 
 ## セットアップ {#setup}
 
-### 要件{#requirements}
+### 要件 {#requirements}
 
 - [Datadog API キー][1]。
 
@@ -173,6 +173,10 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 : オプション - _整数または文字列_ - **デフォルト**: `false`
 <br />Datadog Agent を使用していない場合にのみ必要です。その場合は、`1` または `true` に設定する必要があります。
 
+`DD_LLMOBS_SAMPLE_RATE`または `dd.llmobs.sample.rate`
+: オプション - _浮動小数点数_ - **デフォルト**: `1.0`
+<br />Agent Observability によって保持されるトレースの割合。`dd-trace-java` 1.66.0 以降が必要です。[トレースサンプリング](#trace-sampling)を参照してください。
+
 `DD_API_KEY`または `dd.api.key`
 : オプション - _文字列_
 <br />Datadog API キー。Datadog Agent を使用していない場合にのみ必要です。
@@ -316,7 +320,7 @@ SDK をインストールしてアプリケーションを実行すると、自�
 
 ## トレースのサンプリング {#trace-sampling}
 
-<div class="alert alert-info">トレースのサンプリングは、Python SDK (<code>ddtrace</code> 4.12.0 以降) および Node.js SDK (<code>dd-trace</code> 5.110.0 以降) で利用可能です。Java SDK はトレースのサンプリングをサポートしていません。</div>
+<div class="alert alert-info">トレースのサンプリングは、Python SDK (<code>ddtrace</code> 4.12.0 以降)、Node.js SDK（<code>dd-trace</code> 5.110.0 以降)、Java SDK（<code>dd-trace-java</code> 1.66.0 以降)。</div>
 
 トレースのサンプリングは、Agent Observability が保持するトレースの割合を設定します。Agent Observability の課金は送信するスパンの量に基づいているため、サンプルレートの設定は Agent Observability のコストを制御する 1 つの方法です。SDK はルートスパンでサンプリングの決定を行い、[分散型トレーシング](#distributed-tracing)を通じてダウンストリームサービスで作成されたスパンを含む、そのルートスパンのすべての子スパンに適用します。
 
@@ -324,8 +328,8 @@ SDK をインストールしてアプリケーションを実行すると、自�
 
 サンプルレートは、以下のいずれかの方法で設定できます。
 
-- **環境変数** (`DD_LLMOBS_SAMPLE_RATE`): は、[コマンドラインのセットアップ](#command-line-setup) と [コード内でのセットアップ](#in-code-setup) の両方に適用されます。
-- **コード内パラメーター** (`sample_rate` in Python, `sampleRate` in Node.js): は、Python では `LLMObs.enable()` に、Node.js では `llmobs` の下で渡され、[コード内でのセットアップ](#in-code-setup)で SDK を有効化する際に使用されます。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。
+- **環境変数** (`DD_LLMOBS_SAMPLE_RATE`): は、[コマンドラインのセットアップ](#command-line-setup) と [コード内でのセットアップ](#in-code-setup) の両方に適用されます。Java では、`dd.llmobs.sample.rate` システムプロパティで同じ値を設定します。
+- **コード内パラメーター** (`sample_rate` in Python, `sampleRate` in Node.js): は、Python では `LLMObs.enable()` に、Node.js では `llmobs` の下で渡され、[コード内でのセットアップ](#in-code-setup)で SDK を有効化する際に使用されます。この設定は、`DD_LLMOBS_SAMPLE_RATE` よりも優先されます。Java SDK にはコード内の同等の機能はありません。
 
 サンプルレートは、`0.0` (トレースを一切保持しない) から `1.0` (すべてのトレースを保持する) までの浮動小数点数です。デフォルトは `1.0` です。範囲外の値は無視されます。
 
@@ -367,6 +371,25 @@ const tracer = require('dd-trace').init({
 });
 
 const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+環境変数でサンプルレートを設定してください:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 \
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-jar path/to/your/app.jar
+{{< /code-block >}}
+
+または、同等の `dd.llmobs.sample.rate` システムプロパティを設定してください:
+
+{{< code-block lang="shell" >}}
+java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
+-Ddd.service=my-app -Ddd.llmobs.enabled=true -Ddd.llmobs.ml.app=<YOUR_ML_APP_NAME> \
+-Ddd.llmobs.sample.rate=0.5 -jar path/to/your/app.jar
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
@@ -510,7 +533,7 @@ app.use(myAgentMiddleware)
 
 <div class="alert alert-info">LLM プロバイダーや、<a href="/llm_observability/instrument/auto_instrumentation/">Datadog の LLM インテグレーション</a>によってサポートされているフレームワークを使用している場合、これらの操作をトレースするために LLM スパンを手動で開始する必要はありません。</div>
 
-<div class="alert alert-info">LLM スパンを手動でインスツルメントする場合は、スパンにアノテーションを付けて、トークン数 ( <code>input_tokens</code>、<code>output_tokens</code>、および <code>total_tokens</code>) を自分で記録する必要があります。詳細については、<a href="#enriching-spans">スパンの強化</a>を参照してください。</div>
+<div class="alert alert-info">LLM スパンを手動でインスツルメントする場合は、スパンにアノテーションを付けて、トークン数 ( <code>input_tokens</code>,<code>output_tokens</code>、および <code>total_tokens</code>) を自分で記録する必要があります。詳細については、<a href="#enriching-spans">スパンの強化</a>を参照してください。</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1289,7 +1312,7 @@ public class MyJavaClass {
 ## スパンの強化 {#enriching-spans}
 
 <div class="alert alert-info">
-ここでの <code>metrics</code> パラメーターは、個々のスパンに属性として付加された数値を指します。<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームメトリクス</a>ではありません。認識された特定のキー ( <code>input_tokens</code>、<code>output_tokens</code>、および <code>total_tokens</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.tokens</code>など) をダッシュボードやモニターで使用するために生成します。
+このページの <code>metrics</code> パラメーターは、個々のスパンに属性として付加された数値を指します。<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームメトリクス</a>ではありません。認識された特定のキー ( <code>input_tokens</code>,<code>output_tokens</code>、および <code>total_tokens</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.tokens</code>など) をダッシュボードやモニターで使用するために生成します。
 </div>
 
 {{< tabs >}}
@@ -1306,11 +1329,11 @@ SDK には、入力、出力、およびメタデータでスパンを強化す�
 
 `input_data`
 : オプション - _JSON のシリアライズ可能な型、または辞書のリスト_
-<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または次の形式の辞書のリスト : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` とオプションのキー `"tool_id"`、`"type"` を持つ呼び出し辞書のオプションのリストであり、`"tool_results"` は、必須キー `"result"` と、関数呼び出しシナリオ用のオプションのキー `"name"`、`"tool_id"`、`"type"` を持つツール結果辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と、`"content"` (インラインで埋め込まれた base64 エンコードメディア) または `"attachment_key"` のいずれか一方が必要です。**注**: 埋め込みスパンは特別なケースであり、`{"text": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
+<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または次の形式の辞書のリスト : `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` とオプションのキー `"tool_id"`、`"type"` を持つ呼び出し辞書のオプションのリストであり、`"tool_results"` は、必須キー `"result"` と、関数呼び出しシナリオ用のオプションのキー `"name"`、`"tool_id"`、`"type"` を持つツール結果辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と `"content"` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{"text": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
 
 `output_data`
 : オプション - _JSON のシリアライズ可能な型、または辞書のリスト_
-<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}` という形式の辞書のリスト。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` と、関数呼び出しシナリオ用のオプションのキー `"tool_id"`、`"type"` を持つツール呼び出し辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と、`"content"` (インラインで埋め込まれた base64 エンコードメディア) または `"attachment_key"` のいずれか一方が必要です。**注**: 取得スパンは特別なケースであり、`{"text": "...", "name": "...", "score": float, "id": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
+<br />JSON のシリアライズ可能な型 (非 LLM スパン用) または `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}` という形式の辞書のリスト。ここで `"tool_calls"` は、必須キー `"name"`、`"arguments"` と、関数呼び出しシナリオ用のオプションのキー `"tool_id"`、`"type"` を持つツール呼び出し辞書のオプションのリストです。`"audio_parts"` および `"image_parts"` は、マルチモーダルスパン用のメディア辞書のオプションのリストであり、それぞれに必須の `"mime_type"` と `"content"` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 取得スパンは特別なケースであり、`{"text": "...", "name": "...", "score": float, "id": "..."}` という形式の文字列または辞書 (または辞書のリスト) が必要です。
 
 `tool_definitions`
 : オプション - _辞書のリスト_
@@ -1434,11 +1457,7 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
-メッセージに `audio_parts` または `image_parts` の注釈が付いている場合、トレースビューではインラインオーディオプレーヤーおよび画像としてレンダリングされます。
-
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、トランスクリプト「Hey, how are you?」付きのインラインオーディオプレーヤーが表示され、ASSISTANT からの出力メッセージには、「Click to play audio」というコントロールとトランスクリプト「Hey!」が表示されます。とても元気です。聞いてくれてありがとうございます。あなたはどうですか?" style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、「What is in this image?」というプロンプトが表示されます。黒い子犬のインライン写真が表示され、ASSISTANT からの出力メッセージでは、木製の表面にいる黒いラブラドール・レトリバーの子犬として説明されています。" style="width:100%;" >}}
+メッセージに `audio_parts` または `image_parts` の注釈が付いている場合、トレースを表示する画面では、インラインオーディオプレーヤーおよび画像がレンダリングされます。レンダリングされた例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に設定するインテグレーションについては、[マルチモーダルサポート](/llm_observability/instrument/multimodal/) を参照してください。
 
 {{% /tab %}}
 
@@ -1460,11 +1479,11 @@ SDK には、入力、出力、メタデータを使用してスパンにアノ�
 
 `inputData`
 : オプション - _JSON のシリアライズ可能な型、またはオブジェクトのリスト_
-<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と、`content` (インラインで埋め込まれた base64 エンコードメディア) または `attachmentKey` のいずれか一方が必要です。**注**: 埋め込みスパンは特別なケースであり、`{text: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
+<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または : `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と `content` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 埋め込みスパンは特別なケースであり、`{text: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
 
 `outputData`
 オプション - _JSON のシリアライズ可能な型、またはオブジェクトのリスト_
-<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と、`content` (インラインで埋め込まれた base64 エンコードメディア) または `attachmentKey` のいずれか一方が必要です。**注**: 取得スパンは特別なケースであり、`{text: "...", name: "...", score: number, id: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
+<br />(非 LLM スパン用の) JSON のシリアライズ可能な型、または `{role: "...", content: "...", audioParts: [...], imageParts: [...]}` という形式の辞書のリスト (LLM スパン用)。`audioParts` および `imageParts` は、マルチモーダルスパン用のメディアオブジェクトのオプションのリストであり、それぞれに必須の `mimeType` と `content` (インラインで埋め込まれた base64 エンコードメディア) が必要です。**注**: 取得スパンは特別なケースであり、`{text: "...", name: "...", score: number, id: "..."}` という形式の文字列またはオブジェクト (またはオブジェクトのリスト) が必要です。
 
 `metadata`
 : オプション - _オブジェクト_
@@ -1575,13 +1594,9 @@ describeImage = llmobs.wrap({ kind: 'llm', modelName: 'gpt-4o', modelProvider: '
 
 {{< /code-block >}}
 
-メッセージに `audioParts` または `imageParts` の注釈が付いている場合、トレースビューではインラインオーディオプレーヤーおよび画像としてレンダリングされます。
+メッセージに `audioParts` または `imageParts` の注釈が付いている場合、トレースを表示する画面では、インラインオーディオプレーヤーおよび画像がレンダリングされます。レンダリングされた例、サポートされている形式、サイズ制限、およびこれらのフィールドを自動的に設定するインテグレーションについては、[マルチモーダルサポート](/llm_observability/instrument/multimodal/) を参照してください。
 
-{{< img src="llm_observability/instrumentation/audio_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、トランスクリプト「Hey, how are you?」付きのインラインオーディオプレーヤーが表示され、ASSISTANT からの出力メッセージには、「Click to play audio」というコントロールとトランスクリプト「Hey!」が表示されます。とても元気です。聞いてくれてありがとうございます。あなたはどうですか?" style="width:100%;" >}}
-
-{{< img src="llm_observability/instrumentation/image_example.png" alt="Agent Observability のトレースビューにある LLM スパン。USER からの入力メッセージには、「What is in this image?」というプロンプトが表示されます。黒い子犬のインライン写真が表示され、ASSISTANT からの出力メッセージでは、木製の表面にいる黒いラブラドール・レトリバーの子犬として説明されています。" style="width:100%;" >}}
-
-OpenAI の音声チャット補完では、`audioParts` も [Datadog の LLM インテグレーション](/llm_observability/instrument/auto_instrumentation/) によって自動的にキャプチャされるため、手動で注釈を付ける必要はありません。`audioParts` とは異なり、`imageParts` は現在、自動的にキャプチャされないため、手動で注釈を付ける必要があります。自動キャプチャは今後のリリースで予定されています。
+OpenAI の音声チャット補完では、`audioParts` も [Datadog の LLM インテグレーション](/llm_observability/instrument/auto_instrumentation/) によって自動的にキャプチャされるため、手動で注釈を付ける必要はありません。Node.js SDK は `imageParts` を自動的にキャプチャしません。上記のように注釈を付けてください。
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1891,7 +1906,7 @@ SDK の `llmobs.annotationContext()` は、コールバック関数のスコー�
 
 `llmobs.annotationContext()` メソッドは、最初の引数で次のオプションを受け付けます。
 
-{{% collapse-content title="オプション" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="Options (オプション)" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : オプション - _str_
@@ -2004,7 +2019,7 @@ LLM 呼び出しの前にプロンプトメタデータをアタッチするに�
 
 #### 引数 {#arguments-9}
 
-{{% collapse-content title="オプション" level="h5" expanded=false id="prompt-tracking-arguments" %}}
+{{% collapse-content title="Options (オプション)" level="h5" expanded=false id="prompt-tracking-arguments" %}}
 
 `prompt`
 : 必須 - オブジェクト
@@ -2105,7 +2120,7 @@ LLMObs.enable(
 
 自動インスツルメンテーションを使用している場合、トークンとコストメトリクスは自動的にスパンに表示されます。手動でインスツルメントする場合は、次のガイダンスに従ってください。
 
-<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームの Agent Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>、<code>output_tokens</code>、<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
+<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/investigate/metrics/">Datadog プラットフォームの Agent Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>,<code>output_tokens</code>,<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
 
 ### ユースケース: 一般的なモデルプロバイダーの使用 {#use-case-using-a-common-model-provider}
 Datadog では、OpenAI、Azure OpenAI、Anthropic、Google Gemini などの一般的なモデルプロバイダーがサポートされています。これらのプロバイダーを使用する場合、LLM リクエストにモデル名、モデルプロバイダー、およびトークン使用量によりアノテーション付けするだけで済みます。Datadog では、プロバイダーの価格に基づいて推定コストが自動的に計算されます。
@@ -2338,7 +2353,7 @@ llmobs.annotationContext({
 
 Agent Observability SDK には、評価を Datadog にエクスポートおよび送信するためのメソッドが用意されています。
 
-<div class="alert alert-info">豊富な結果メタデータを使用して、再利用可能なクラスベースの評価機能 (<code>BaseEvaluator</code>、<code>BaseSummaryEvaluator</code>) を構築する方法については、<a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">評価開発者ガイド</a>を参照してください。</div>
+<div class="alert alert-info">豊富な結果メタデータを使用して、再利用可能なクラスベースの評価機能 (<code>BaseEvaluator</code>,<code>BaseSummaryEvaluator</code>) を構築する方法については、<a href="/llm_observability/investigate/evaluations/evaluation_developer_guide/">評価開発者ガイド</a>を参照してください。</div>
 
 評価は単一のスパンに結合する必要があります。ターゲットスパンは、次の 2 つの方法のいずれかを使用して特定できます。
 - _タグベースの結合_ - 単一のスパンに設定された一意のキーと値のタグペアを使用して、評価を結合します。タグのキーと値ペアが複数のスパンに一致する場合、またはどのスパンにも一致しない場合、評価の結合は失敗します。
@@ -2401,7 +2416,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 {{% tab "Python" %}}
 `LLMObs.submit_evaluation()` は、指定されたスパンに関連付けられたカスタム評価を送信するために使用できます。
 
-<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> は非推奨であり、次のメジャーバージョンの ddtrace (4.0) で削除されます。移行するには、 <code>LLMObs.submit_evaluation_for</code> 呼び出しの名前を <code>LLMObs.submit_evaluation</code>に変更します。</div>
+<div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> は非推奨であり、次のメジャーバージョンの ddtrace (4.0) で削除されます。移行するには、 <code>LLMObs.submit_evaluation_for</code> 呼び出しの名前を <code>LLMObs.submit_evaluation</code>.</div>
 
 **注**: カスタム評価は、自分で実装し、ホストする評価機能です。これらは、組み込みの評価機能を使用して Datadog により自動的に計算される、既成の評価機能とは異なります。ご使用のアプリケーション用にすぐに使用できる評価を構成するには、Datadog の [**Agent Observability** > **Settings** > **Evaluations**][1] ページを使用してください。
 

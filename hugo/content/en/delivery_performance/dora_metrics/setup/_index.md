@@ -276,6 +276,26 @@ To set up the integration:
 
 {{% /tab %}}
 
+{{% tab "Bitbucket" %}}
+
+<div class="alert alert-warning">
+Only Bitbucket Cloud Premium is supported. Bitbucket Data Center and Bitbucket Server are <strong>not</strong> supported.
+</div>
+
+If the [Bitbucket Cloud Source Code integration][1] is not already installed, install it on the [Bitbucket Cloud Source Code integration tile][2].
+
+When you create the workspace access token during [setup][3], grant at least the following scopes:
+
+- {{< ui >}}Repositories{{< /ui >}}: {{< ui >}}Read{{< /ui >}}, {{< ui >}}Write{{< /ui >}}
+- {{< ui >}}Pull requests{{< /ui >}}: {{< ui >}}Read{{< /ui >}}, {{< ui >}}Write{{< /ui >}}
+- {{< ui >}}Webhooks{{< /ui >}}: {{< ui >}}Read and write{{< /ui >}}
+
+[1]: /integrations/bitbucket-source-code/
+[2]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+[3]: /integrations/bitbucket-source-code/#setup
+
+{{% /tab %}}
+
 {{% tab "Other Git Providers" %}}
 
 You can upload your Git repository metadata with the [`datadog-ci git-metadata upload`][1] command.

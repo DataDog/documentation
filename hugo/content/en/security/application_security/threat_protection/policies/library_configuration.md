@@ -24,12 +24,6 @@ further_reading:
   text: "How App and API Protection Works in Datadog"
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 ## Configuring a client IP header
 
 AAP automatically attempts to resolve `http.client_ip` from several well-known headers, such as `X-Forwarded-For`. If you use a custom header for this field, or want to bypass the resolution algorithm, set the `DD_TRACE_CLIENT_IP_HEADER` environment variable. If this variable is set, the library only checks the specified header for the client IP.

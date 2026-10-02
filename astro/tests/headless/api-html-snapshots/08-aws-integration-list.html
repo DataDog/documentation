@@ -2434,7 +2434,7 @@
                     data-sync-key="python"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Python</button
+                    Go</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -2444,7 +2444,7 @@
                     data-sync-key="ruby"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Ruby</button
+                    Java</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -2454,7 +2454,7 @@
                     data-sync-key="go"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Go</button
+                    Python</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -2464,7 +2464,7 @@
                     data-sync-key="java"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Java</button
+                    Ruby</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -2474,7 +2474,7 @@
                     data-sync-key="typescript"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    TypeScript</button
+                    Rust</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -2484,7 +2484,7 @@
                     data-sync-key="rust"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Rust
+                    TypeScript
                   </button>
                 </div>
                 <!--astro:end--></astro-island
@@ -2721,82 +2721,10 @@
               </div>
               <div id="api-code-example-X64-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X72" class="code-block _code-block_961fb8" data-language="python">
+                  <div id="code-block-X72" class="code-block _code-block_961fb8" data-language="go">
                     <div id="code-block-X72-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
                         uid="X24"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: #ffffff; color: #000000"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"><span style="color:#C41A16">List all AWS integrations returns "AWS Accounts List object" response</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.api.aws_integration_api </span><span style="color:#633820">import</span><span style="color:#000000"> AWSIntegrationApi</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
-<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
-<span class="line"><span style="color:#000000">    api_instance = AWSIntegrationApi(api_client)</span></span>
-<span class="line"><span style="color:#000000">    response = api_instance.list_aws_accounts()</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
-<span class="line"></span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="api-code-example-X64-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X73" class="code-block _code-block_961fb8" data-language="ruby">
-                    <div id="code-block-X73-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X25"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: #ffffff; color: #000000"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:#177500"># NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#177500"># List all AWS integrations returns "AWS Accounts List object" response</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A90D91">require</span><span style="color:#C41A16"> "datadog_api_client"</span></span>
-<span class="line"><span style="color:#000000">api_instance = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V2</span><span style="color:#000000">::</span><span style="color:#A90D91">AWSIntegrationAPI</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span></span>
-<span class="line"><span style="color:#A90D91">p</span><span style="color:#000000"> api_instance.list_aws_accounts()</span></span>
-<span class="line"></span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="api-code-example-X64-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X74" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X74-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X26"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -2847,12 +2775,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X64-panel-4" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X64-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X75" class="code-block _code-block_961fb8" data-language="java">
-                    <div id="code-block-X75-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X73" class="code-block _code-block_961fb8" data-language="java">
+                    <div id="code-block-X73-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X27"
+                        uid="X25"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -2898,12 +2826,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X64-panel-5" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X64-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X76" class="code-block _code-block_961fb8" data-language="typescript">
-                    <div id="code-block-X76-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X74" class="code-block _code-block_961fb8" data-language="python">
+                    <div id="code-block-X74-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X28"
+                        uid="X26"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -2918,36 +2846,64 @@
                           class="shiki datadog-chroma"
                           style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#177500">/**</span></span>
-<span class="line"><span style="color:#177500"> * List all AWS integrations returns "AWS Accounts List object" response</span></span>
-<span class="line"><span style="color:#177500"> */</span></span>
+                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
+<span class="line"><span style="color:#C41A16">List all AWS integrations returns "AWS Accounts List object" response</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> { client, v2 } </span><span style="color:#A90D91">from</span><span style="color:#C41A16"> "@datadog/datadog-api-client"</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v2.api.aws_integration_api </span><span style="color:#633820">import</span><span style="color:#000000"> AWSIntegrationApi</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> configuration = client.createConfiguration();</span></span>
-<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> apiInstance = new v2.AWSIntegrationApi(configuration);</span></span>
+<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
+<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
+<span class="line"><span style="color:#000000">    api_instance = AWSIntegrationApi(api_client)</span></span>
+<span class="line"><span style="color:#000000">    response = api_instance.list_aws_accounts()</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000">apiInstance</span></span>
-<span class="line"><span style="color:#000000">  .listAWSAccounts()</span></span>
-<span class="line"><span style="color:#000000">  .then((data: </span><span style="color:#3F6E75">v2</span><span style="color:#000000">.</span><span style="color:#3F6E75">AWSAccountsResponse</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> {</span></span>
-<span class="line"><span style="color:#000000">    console.log(</span></span>
-<span class="line"><span style="color:#C41A16">      "API called successfully. Returned data: "</span><span style="color:#000000"> + JSON.stringify(data)</span></span>
-<span class="line"><span style="color:#000000">    );</span></span>
-<span class="line"><span style="color:#000000">  })</span></span>
-<span class="line"><span style="color:#000000">  .catch((error: </span><span style="color:#A90D91">any</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> console.error(error));</span></span>
+<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X64-panel-6" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X64-panel-4" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X77" class="code-block _code-block_961fb8" data-language="rust">
-                    <div id="code-block-X77-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X75" class="code-block _code-block_961fb8" data-language="ruby">
+                    <div id="code-block-X75-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X29"
+                        uid="X27"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500"># NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#177500"># List all AWS integrations returns "AWS Accounts List object" response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91">require</span><span style="color:#C41A16"> "datadog_api_client"</span></span>
+<span class="line"><span style="color:#000000">api_instance = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V2</span><span style="color:#000000">::</span><span style="color:#A90D91">AWSIntegrationAPI</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span></span>
+<span class="line"><span style="color:#A90D91">p</span><span style="color:#000000"> api_instance.list_aws_accounts()</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X64-panel-5" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X76" class="code-block _code-block_961fb8" data-language="rust">
+                    <div id="code-block-X76-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X28"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -2981,6 +2937,50 @@
 <span class="line"><span style="color:#000000">        println!(</span><span style="color:#C41A16">"</span><span style="color:#000000">{</span><span style="color:#C41A16">:#?</span><span style="color:#000000">}</span><span style="color:#C41A16">"</span><span style="color:#000000">, resp.unwrap_err());</span></span>
 <span class="line"><span style="color:#000000">    }</span></span>
 <span class="line"><span style="color:#000000">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X64-panel-6" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X77" class="code-block _code-block_961fb8" data-language="typescript">
+                    <div id="code-block-X77-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X29"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#177500">/**</span></span>
+<span class="line"><span style="color:#177500"> * List all AWS integrations returns "AWS Accounts List object" response</span></span>
+<span class="line"><span style="color:#177500"> */</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> { client, v2 } </span><span style="color:#A90D91">from</span><span style="color:#C41A16"> "@datadog/datadog-api-client"</span><span style="color:#000000">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> configuration = client.createConfiguration();</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> apiInstance = new v2.AWSIntegrationApi(configuration);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000">apiInstance</span></span>
+<span class="line"><span style="color:#000000">  .listAWSAccounts()</span></span>
+<span class="line"><span style="color:#000000">  .then((data: </span><span style="color:#3F6E75">v2</span><span style="color:#000000">.</span><span style="color:#3F6E75">AWSAccountsResponse</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#000000">    console.log(</span></span>
+<span class="line"><span style="color:#C41A16">      "API called successfully. Returned data: "</span><span style="color:#000000"> + JSON.stringify(data)</span></span>
+<span class="line"><span style="color:#000000">    );</span></span>
+<span class="line"><span style="color:#000000">  })</span></span>
+<span class="line"><span style="color:#000000">  .catch((error: </span><span style="color:#A90D91">any</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> console.error(error));</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
@@ -3986,7 +3986,7 @@
                     data-sync-key="python"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Python</button
+                    Go</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -3996,7 +3996,7 @@
                     data-sync-key="ruby"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Ruby</button
+                    Java</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -4006,7 +4006,7 @@
                     data-sync-key="go"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Go</button
+                    Python</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -4016,7 +4016,7 @@
                     data-sync-key="java"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Java</button
+                    Ruby</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -4026,7 +4026,7 @@
                     data-sync-key="typescript"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    TypeScript</button
+                    Rust</button
                   ><button
                     role="tab"
                     aria-selected="false"
@@ -4036,7 +4036,7 @@
                     data-sync-key="rust"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
-                    Rust
+                    TypeScript
                   </button>
                 </div>
                 <!--astro:end--></astro-island
@@ -4273,82 +4273,10 @@
               </div>
               <div id="api-code-example-X88-panel-1" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X96" class="code-block _code-block_961fb8" data-language="python">
+                  <div id="code-block-X96" class="code-block _code-block_961fb8" data-language="go">
                     <div id="code-block-X96-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
                         uid="X49"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: #ffffff; color: #000000"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"><span style="color:#C41A16">List all AWS integrations returns "OK" response</span></span>
-<span class="line"><span style="color:#C41A16">"""</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
-<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v1.api.aws_integration_api </span><span style="color:#633820">import</span><span style="color:#000000"> AWSIntegrationApi</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
-<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
-<span class="line"><span style="color:#000000">    api_instance = AWSIntegrationApi(api_client)</span></span>
-<span class="line"><span style="color:#000000">    response = api_instance.list_aws_accounts()</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
-<span class="line"></span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="api-code-example-X88-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X97" class="code-block _code-block_961fb8" data-language="ruby">
-                    <div id="code-block-X97-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X50"
-                        ssr
-                        client="idle"
-                        before-hydration-url="astro:scripts/before-hydration.js"
-                        opts='{"name":"CopyButton","value":true}'
-                        await-children
-                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
-                          <span>Copy</span></button
-                        ><!--astro:end--></astro-island
-                      >
-                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
-                        <pre
-                          class="shiki datadog-chroma"
-                          style="background-color: #ffffff; color: #000000"
-                          tabindex="0"
-                        ><code><span class="line"><span style="color:#177500"># NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#177500"># List all AWS integrations returns "OK" response</span></span>
-<span class="line"></span>
-<span class="line"><span style="color:#A90D91">require</span><span style="color:#C41A16"> "datadog_api_client"</span></span>
-<span class="line"><span style="color:#000000">api_instance = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V1</span><span style="color:#000000">::</span><span style="color:#A90D91">AWSIntegrationAPI</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span></span>
-<span class="line"><span style="color:#A90D91">p</span><span style="color:#000000"> api_instance.list_aws_accounts()</span></span>
-<span class="line"></span></code></pre>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div id="api-code-example-X88-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
-                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X98" class="code-block _code-block_961fb8" data-language="go">
-                    <div id="code-block-X98-content" class="code-block__content _code-block__content_961fb8">
-                      <astro-island
-                        uid="X51"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -4399,12 +4327,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X88-panel-4" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X88-panel-2" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X99" class="code-block _code-block_961fb8" data-language="java">
-                    <div id="code-block-X99-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X97" class="code-block _code-block_961fb8" data-language="java">
+                    <div id="code-block-X97-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X52"
+                        uid="X50"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -4450,12 +4378,12 @@
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X88-panel-5" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X88-panel-3" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X100" class="code-block _code-block_961fb8" data-language="typescript">
-                    <div id="code-block-X100-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X98" class="code-block _code-block_961fb8" data-language="python">
+                    <div id="code-block-X98-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X53"
+                        uid="X51"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -4470,36 +4398,64 @@
                           class="shiki datadog-chroma"
                           style="background-color: #ffffff; color: #000000"
                           tabindex="0"
-                        ><code><span class="line"><span style="color:#177500">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
-<span class="line"><span style="color:#177500">/**</span></span>
-<span class="line"><span style="color:#177500"> * List all AWS integrations returns "OK" response</span></span>
-<span class="line"><span style="color:#177500"> */</span></span>
+                        ><code><span class="line"><span style="color:#177500"># </span><span style="color:#A90D91">NOTE</span><span style="color:#177500">: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
+<span class="line"><span style="color:#C41A16">List all AWS integrations returns "OK" response</span></span>
+<span class="line"><span style="color:#C41A16">"""</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> { client, v1 } </span><span style="color:#A90D91">from</span><span style="color:#C41A16"> "@datadog/datadog-api-client"</span><span style="color:#000000">;</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client </span><span style="color:#633820">import</span><span style="color:#000000"> ApiClient, Configuration</span></span>
+<span class="line"><span style="color:#633820">from</span><span style="color:#000000"> datadog_api_client.v1.api.aws_integration_api </span><span style="color:#633820">import</span><span style="color:#000000"> AWSIntegrationApi</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> configuration = client.createConfiguration();</span></span>
-<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> apiInstance = new v1.AWSIntegrationApi(configuration);</span></span>
+<span class="line"><span style="color:#000000">configuration = Configuration()</span></span>
+<span class="line"><span style="color:#A90D91">with</span><span style="color:#000000"> ApiClient(configuration) </span><span style="color:#A90D91">as</span><span style="color:#000000"> api_client:</span></span>
+<span class="line"><span style="color:#000000">    api_instance = AWSIntegrationApi(api_client)</span></span>
+<span class="line"><span style="color:#000000">    response = api_instance.list_aws_accounts()</span></span>
 <span class="line"></span>
-<span class="line"><span style="color:#000000">apiInstance</span></span>
-<span class="line"><span style="color:#000000">  .listAWSAccounts()</span></span>
-<span class="line"><span style="color:#000000">  .then((data: </span><span style="color:#3F6E75">v1</span><span style="color:#000000">.</span><span style="color:#3F6E75">AWSAccountListResponse</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> {</span></span>
-<span class="line"><span style="color:#000000">    console.log(</span></span>
-<span class="line"><span style="color:#C41A16">      "API called successfully. Returned data: "</span><span style="color:#000000"> + JSON.stringify(data)</span></span>
-<span class="line"><span style="color:#000000">    );</span></span>
-<span class="line"><span style="color:#000000">  })</span></span>
-<span class="line"><span style="color:#000000">  .catch((error: </span><span style="color:#A90D91">any</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> console.error(error));</span></span>
+<span class="line"><span style="color:#A90D91">    print</span><span style="color:#000000">(response)</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div id="api-code-example-X88-panel-6" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+              <div id="api-code-example-X88-panel-4" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
                 <div class="api-code-example__code-block _api-code-example__code-block_c15178">
-                  <div id="code-block-X101" class="code-block _code-block_961fb8" data-language="rust">
-                    <div id="code-block-X101-content" class="code-block__content _code-block__content_961fb8">
+                  <div id="code-block-X99" class="code-block _code-block_961fb8" data-language="ruby">
+                    <div id="code-block-X99-content" class="code-block__content _code-block__content_961fb8">
                       <astro-island
-                        uid="X54"
+                        uid="X52"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500"># NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#177500"># List all AWS integrations returns "OK" response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91">require</span><span style="color:#C41A16"> "datadog_api_client"</span></span>
+<span class="line"><span style="color:#000000">api_instance = </span><span style="color:#A90D91">DatadogAPIClient</span><span style="color:#000000">::</span><span style="color:#A90D91">V1</span><span style="color:#000000">::</span><span style="color:#A90D91">AWSIntegrationAPI</span><span style="color:#000000">.</span><span style="color:#A90D91">new</span></span>
+<span class="line"><span style="color:#A90D91">p</span><span style="color:#000000"> api_instance.list_aws_accounts()</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X88-panel-5" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X100" class="code-block _code-block_961fb8" data-language="rust">
+                    <div id="code-block-X100-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X53"
                         ssr
                         client="idle"
                         before-hydration-url="astro:scripts/before-hydration.js"
@@ -4533,6 +4489,50 @@
 <span class="line"><span style="color:#000000">        println!(</span><span style="color:#C41A16">"</span><span style="color:#000000">{</span><span style="color:#C41A16">:#?</span><span style="color:#000000">}</span><span style="color:#C41A16">"</span><span style="color:#000000">, resp.unwrap_err());</span></span>
 <span class="line"><span style="color:#000000">    }</span></span>
 <span class="line"><span style="color:#000000">}</span></span>
+<span class="line"></span></code></pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div id="api-code-example-X88-panel-6" role="tabpanel" class="tabs__panel _tabs__panel_d3f7cd" hidden>
+                <div class="api-code-example__code-block _api-code-example__code-block_c15178">
+                  <div id="code-block-X101" class="code-block _code-block_961fb8" data-language="typescript">
+                    <div id="code-block-X101-content" class="code-block__content _code-block__content_961fb8">
+                      <astro-island
+                        uid="X54"
+                        ssr
+                        client="idle"
+                        before-hydration-url="astro:scripts/before-hydration.js"
+                        opts='{"name":"CopyButton","value":true}'
+                        await-children
+                        ><button aria-label="Copy code" class="code-block__copy _code-block__copy_961fb8">
+                          <span>Copy</span></button
+                        ><!--astro:end--></astro-island
+                      >
+                      <div class="code-block__highlighted _code-block__highlighted_961fb8">
+                        <pre
+                          class="shiki datadog-chroma"
+                          style="background-color: #ffffff; color: #000000"
+                          tabindex="0"
+                        ><code><span class="line"><span style="color:#177500">// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.</span></span>
+<span class="line"><span style="color:#177500">/**</span></span>
+<span class="line"><span style="color:#177500"> * List all AWS integrations returns "OK" response</span></span>
+<span class="line"><span style="color:#177500"> */</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#633820">import</span><span style="color:#000000"> { client, v1 } </span><span style="color:#A90D91">from</span><span style="color:#C41A16"> "@datadog/datadog-api-client"</span><span style="color:#000000">;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> configuration = client.createConfiguration();</span></span>
+<span class="line"><span style="color:#A90D91">const</span><span style="color:#000000"> apiInstance = new v1.AWSIntegrationApi(configuration);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#000000">apiInstance</span></span>
+<span class="line"><span style="color:#000000">  .listAWSAccounts()</span></span>
+<span class="line"><span style="color:#000000">  .then((data: </span><span style="color:#3F6E75">v1</span><span style="color:#000000">.</span><span style="color:#3F6E75">AWSAccountListResponse</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> {</span></span>
+<span class="line"><span style="color:#000000">    console.log(</span></span>
+<span class="line"><span style="color:#C41A16">      "API called successfully. Returned data: "</span><span style="color:#000000"> + JSON.stringify(data)</span></span>
+<span class="line"><span style="color:#000000">    );</span></span>
+<span class="line"><span style="color:#000000">  })</span></span>
+<span class="line"><span style="color:#000000">  .catch((error: </span><span style="color:#A90D91">any</span><span style="color:#000000">) </span><span style="color:#A90D91">=></span><span style="color:#000000"> console.error(error));</span></span>
 <span class="line"></span></code></pre>
                       </div>
                     </div>

@@ -17,7 +17,6 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/create-charts-with-rum-custom-metrics" >}}Create charts with RUM custom metrics{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/monitor-your-rum-usage" >}}Monitor your RUM usage{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/track-rum-usage-with-attribution-tags" >}}Track RUM usage with usage attribution tags{{< /nextlink >}}
-    {{< nextlink href="/real_user_monitoring/guide/remotely-configure-rum-using-launchdarkly" >}}Remotely configure RUM using LaunchDarkly{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/getting-started-rum-deployment-tracking" >}}Getting started with RUM Deployment Tracking{{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/guide/monitor-kiosk-sessions-using-rum" >}}Monitor kiosk sessions using RUM{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/best-practices-for-rum-sampling" >}}Best practices for RUM sampling{{< /nextlink >}}
@@ -35,6 +34,7 @@ cascade:
     {{< nextlink href="real_user_monitoring/guide/send-custom-user-actions" >}}Send custom user actions{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/identify-bots-in-the-ui" >}}Identify bots in the RUM Explorer{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/upload-javascript-source-maps" >}}Upload JavaScript source maps{{< /nextlink >}}
+    {{< nextlink href="real_user_monitoring/guide/upload-webassembly-symbols" >}}Upload WebAssembly symbols{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/sampling-browser-plans" >}}Control session volume using sampling configuration for Browser RUM and Browser RUM & Session Replay{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/enrich-and-control-rum-data" >}}Enrich and control your browser RUM data{{< /nextlink >}}
     {{< nextlink href="real_user_monitoring/guide/browser-sdk-upgrade" >}}Upgrade the RUM Browser SDK{{< /nextlink >}}

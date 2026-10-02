@@ -5,6 +5,9 @@ further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
     text: 'Data Observability Overview'
+  - link: 'https://www.datadoghq.com/architecture/monitoring-insurance-data-lakes-on-aws-using-datadog/'
+    tag: 'Architecture Center'
+    text: 'Monitoring Insurance Data Lakes on AWS using Datadog'
 ---
 ## Overview
 

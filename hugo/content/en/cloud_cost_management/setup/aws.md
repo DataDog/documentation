@@ -275,6 +275,8 @@ The **Set up with AI Agent** flow creates or imports a Cost and Usage Report and
 
 {{< /tabs >}}
 
+<div class="alert alert-warning">Deleting a Legacy CUR account and configuring a new CUR 2.0 account can result in duplicate charges. Enable CUR 2.0 only when you configure a new AWS account.</div>
+
 #### Permissions for AWS Cost Optimization Hub recommendations
 
 Cloud Cost Management generates some [recommendations][30] from data sourced from [AWS Cost Optimization Hub][31]. For Datadog to receive these recommendations, the Datadog AWS integration IAM role must include the following permissions:

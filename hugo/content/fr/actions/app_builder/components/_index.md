@@ -102,7 +102,7 @@ Les composants de valeur d'appel possèdent les propriétés suivantes.
 **Valeur**: chaîne ou expression
 
 Valeur
-: La valeur mise en évidence par le callout.<br>
+: La valeur mise en évidence par l'appel.<br>
 **Valeur**: chaîne ou expression
 
 Unité
@@ -968,7 +968,7 @@ Les composants Tabs ont les propriétés suivantes.
 
 #### Tabs {#tabs}
 
-Une liste de vues d'onglets. Utilisez le ({{< ui >}}+{{< /ui >}}) pour ajouter des vues supplémentaires.
+Une liste de vues d'onglets. Utilisez le ({{< ui >}}\+{{< /ui >}}) pour ajouter des vues supplémentaires.
 
 
 #### Style {#style-1}
@@ -1222,7 +1222,7 @@ Affiche les paires de propriétés et de valeurs au format JSON.
 
 #### Relations {#relationships-1}
 
-Affiche les dépendances de données entre les données de table et les composants de l'application.
+Affiche les dépendances de données entre les données de tableau et les composants de l'application.
 
 #### Exemple {#example-12}
 

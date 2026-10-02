@@ -121,17 +121,6 @@
           ]
         },
         {
-          "language": "python",
-          "label": "Python",
-          "entries": [
-            {
-              "description": "",
-              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nValidate API key returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.authentication_api import AuthenticationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AuthenticationApi(api_client)\n    response = api_instance.validate()\n\n    print(response)\n",
-              "syntax": "python"
-            }
-          ]
-        },
-        {
           "language": "go",
           "label": "Go",
           "entries": [
@@ -139,6 +128,17 @@
               "description": "",
               "code": "// NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n// Validate API key returns \"OK\" response\n\npackage main\n\nimport (\n\t\"context\"\n\t\"encoding/json\"\n\t\"fmt\"\n\t\"os\"\n\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadog\"\n\t\"github.com/DataDog/datadog-api-client-go/v2/api/datadogV1\"\n)\n\nfunc main() {\n\tctx := datadog.NewDefaultContext(context.Background())\n\tconfiguration := datadog.NewConfiguration()\n\tapiClient := datadog.NewAPIClient(configuration)\n\tapi := datadogV1.NewAuthenticationApi(apiClient)\n\tresp, r, err := api.Validate(ctx)\n\n\tif err != nil {\n\t\tfmt.Fprintf(os.Stderr, \"Error when calling `AuthenticationApi.Validate`: %v\\n\", err)\n\t\tfmt.Fprintf(os.Stderr, \"Full HTTP response: %v\\n\", r)\n\t}\n\n\tresponseContent, _ := json.MarshalIndent(resp, \"\", \"  \")\n\tfmt.Fprintf(os.Stdout, \"Response from `AuthenticationApi.Validate`:\\n%s\\n\", responseContent)\n}\n",
               "syntax": "go"
+            }
+          ]
+        },
+        {
+          "language": "python",
+          "label": "Python",
+          "entries": [
+            {
+              "description": "",
+              "code": "# NOTE: Frozen test fixture from tests/fixtures/api/examples/, not live SDK output.\n\"\"\"\nValidate API key returns \"OK\" response\n\"\"\"\n\nfrom datadog_api_client import ApiClient, Configuration\nfrom datadog_api_client.v1.api.authentication_api import AuthenticationApi\n\nconfiguration = Configuration()\nwith ApiClient(configuration) as api_client:\n    api_instance = AuthenticationApi(api_client)\n    response = api_instance.validate()\n\n    print(response)\n",
+              "syntax": "python"
             }
           ]
         }

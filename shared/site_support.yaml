@@ -19,8 +19,6 @@ site_support_ids:
     regions: [gov, gov2]
   byoc-logs:
     regions: [gov, gov2]
-  actions:
-    regions: [gov, gov2]
   app_builder_override:
     regions: [gov2]
     description: "docs (content/en/actions/app_builder cascade) and API (content/en/api/_index.md cascade)"
@@ -222,12 +220,10 @@ site_support_ids:
   observability_pipelines:
     regions: [gov, gov2]
   on-call:
-    regions: [gov, gov2]
+    regions: [gov2]
     url_paths:
       - /api/latest/on-call
       - /api/latest/on-call/**
-  oracle-cloud-infrastructure:
-    regions: [gov, gov2]
   oracle-fusion:
     regions: [gov, gov2]
   oracle_fusion_integration_setup:
@@ -275,8 +271,6 @@ site_support_ids:
     regions: [gov, gov2]
   service_override_removal:
     regions: [gov, gov2]
-  service_remapping_rules:
-    regions: [gov2]
   setup_remote_config:
     regions: [gov, gov2]
   snmp_profile_manager:
@@ -312,3 +306,9 @@ site_support_ids:
     regions: [gov, gov2]
   work_management_ai_site_support:
     regions: [gov, gov2]
+  ai_credits:
+    regions: [gov, gov2]
+  opentelemetry_collector_otlp_export:
+    regions: [gov, gov2]
+  stripe_projects:
+    regions: [us3, us5, eu, gov, gov2, ap1, ap2, uk1]

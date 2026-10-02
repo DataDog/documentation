@@ -2,6 +2,12 @@
 aliases:
 - /ko/opentelemetry/agent/
 further_reading:
+- link: https://learn.datadoghq.com/courses/using-ddot
+  tag: 학습 센터
+  text: Datadog OpenTelemetry Collector 배포판 사용하기
+- link: https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/
+  tag: 블로그
+  text: OpenTelemetry 및 Datadog을 사용하여 Boomi 통합 흐름을 계측하고 모니터링합니다.
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: 블로그
   text: Datadog LLM Observability는 OpenTelemetry GenAI 시맨틱 규칙을 기본적으로 지원합니다.
@@ -11,15 +17,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-distribution-otel-collector/
   tag: 블로그
   text: DDOT Collector를 사용하여 OpenTelemetry와 Datadog 통합
-- link: https://learn.datadoghq.com/courses/using-ddot
-  tag: 학습 센터
-  text: Datadog OpenTelemetry Collector 배포판 사용하기
+- link: https://www.datadoghq.com/architecture/monitoring-kubernetes-with-datadog-distribution/
+  tag: 아키텍처 센터
+  text: Datadog Distribution of the OpenTelemetry (DDOT) Collector를 사용한 Kubernetes
+    모니터링
 title: Datadog OpenTelemetry Collector 배포판
 ---
-{{< callout btn_hidden="true" >}}
-DDOT Collector for Kubernetes는 현재 <strong>정식 출시</strong> 상태입니다. 아래의 <a href="#get-started">지침</a>을 따라 시작할 수 있습니다.
-<br><br>
-Linux 기반의 베어 메탈 호스트와 가상 머신에 DDOT Collector를 배포하는 것은 현재 <strong>미리보기 상태</strong>입니다. 시작하려면 <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux 설명서</a>를 따르세요.
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
+DDOT Collector에 대한 Remote Configuration은 <strong>현재 미리 보기 상태입니다</strong>. 액세스를 요청하려면 이 양식을 사용하세요.
 {{< /callout >}}
 
 ## 개요 {#overview}
@@ -64,17 +69,21 @@ DDOT Collector는 다음 기능을 제공합니다.
 다음 표는 각 DDOT 릴리스에 포함된 OpenTelemetry Collector 버전을 보여줍니다.
 
 | DDOT 버전 | 베타 버전 | 안정 버전 |
-|---|---|---|
-| 7.78.0 | v0.147.0 | v1.53.0 |
-| 7.77.0 | v0.145.0 | v1.51.1-0.20260205185216-81bc641f26c0 |
-| 7.76.0 | v0.144.0 | v1.50.0 |
-| 7.75.0 | v0.142.0 | v1.48.0 |
-| 7.74.0 | v0.140.0 | v1.46.0 |
-| 7.73.0 | v0.138.0 | v1.44.0 |
-| 7.72.0 | v0.136.0 | v1.42.0 |
-| 7.71.0 | v0.133.0 | v1.39.0 |
-| 7.70.0 | v0.131.0 | v1.37.0 |
-| 7.69.0 | v0.129.0 | v1.35.0 |
+|--------------|--------------|----------------|
+| 7.82.x       | v0.155.0     | v1.61.0        |
+| 7.81.x       | v0.154.0     | v1.60.0        |
+| 7.80.x       | v0.152.0     | v1.58.0        |
+| 7.79.x       | v0.150.0     | v1.56.0        |
+| 7.78.x       | v0.147.0     | v1.53.0        |
+| 7.77.x       | v0.145.0     | v1.51.0        |
+| 7.76.x       | v0.144.0     | v1.50.0        |
+| 7.75.x       | v0.142.0     | v1.48.0        |
+| 7.74.x       | v0.140.0     | v1.46.0        |
+| 7.73.x       | v0.138.0     | v1.44.0        |
+| 7.72.x       | v0.136.0     | v1.42.0        |
+| 7.71.x       | v0.133.0     | v1.39.0        |
+| 7.70.x       | v0.131.0     | v1.37.0        |
+| 7.69.x       | v0.129.0     | v1.35.0        |
 
 ### 지원 수준 {#support-levels}
 
@@ -86,11 +95,15 @@ Datadog, 커뮤니티 및 사용자 정의 구성 요소 지원에 대한 자세
 
 {{% collapse-content title="리시버" level="p" %}}
 
+- [dockerstatsreceiver][58] (버전 7.56.0부터 사용 가능)
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [jaegerreceiver][19]
+- [k8sobjectsreceiver][59] (버전 7.56.0부터 사용 가능)
+- [kubeletstatsreceiver][60] (버전 7.56.0부터 사용 가능)
 - [otlpreceiver][20]
+- [podmanreceiver][61] (버전 7.56.0부터 사용 가능)
 - [prometheusreceiver][21]
 - [receivercreator][22]
 - [zipkinreceiver][23]
@@ -138,9 +151,11 @@ Datadog, 커뮤니티 및 사용자 정의 구성 요소 지원에 대한 자세
 
 {{% collapse-content title="확장" level="p" %}}
 
+- [datadogextension][62] (버전 7.72.0부터 사용 가능)
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
+- [storage/filestorage][63] (버전 7.56.0부터 사용 가능)
 - [zpagesextension][49]
 
 {{% /collapse-content %}}
@@ -241,3 +256,9 @@ Datadog 초보자이든 OpenTelemetry 경험이 있든 관계없이, 다음 가�
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
 [57]: /ko/opentelemetry/compatibility/#support-levels
+[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/README.md
+[59]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sobjectsreceiver/README.md
+[60]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kubeletstatsreceiver/README.md
+[61]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/podmanreceiver/README.md
+[62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
+[63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md
