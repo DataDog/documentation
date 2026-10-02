@@ -26,7 +26,7 @@ title: Cloud Security Vulnerabilities
 ---
 ## Présentation {#overview}
 
-Cloud Security Vulnerabilities vous aide à améliorer votre posture de sécurité et à atteindre la conformité, en analysant en continu les images de conteneurs, les hosts, les images de hosts et les fonctions serverless à la recherche de vulnérabilités, des pipelines CI/CD à la production en direct. En tirant parti de l'observabilité au moment de l'exécution, il vous aide à hiérarchiser et à remédier aux vulnérabilités exploitables dans vos flux de travail quotidiens, le tout dans une vue unique, et sans aucune dépendance vis-à-vis d'autres produits Datadog.
+Cloud Security Vulnerabilities vous aide à améliorer votre posture de sécurité et à atteindre la conformité, en analysant en continu les images de conteneurs, les hosts, les images de hosts et les fonctions serverless à la recherche de vulnérabilités, des pipelines CI/CD à la production en direct. En tirant parti de l'observabilité au moment de l'exécution, il vous aide à hiérarchiser et à remédier aux vulnérabilités exploitables dans vos workflows quotidiens, le tout dans une vue unique, et sans aucune dépendance vis-à-vis d'autres produits Datadog.
 
 Avec Cloud Security Vulnerabilities, vous pouvez gérer votre stratégie de gestion de la sécurité cloud, le tout au même endroit :
 
@@ -39,14 +39,14 @@ Avec Cloud Security Vulnerabilities, vous pouvez gérer votre stratégie de gest
 ## Fonctionnalités clés {#key-capabilities}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">L'analyse sans agent n'est pas disponible sur le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-danger">L'analyse Agentless n'est pas disponible sur le site sélectionné ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Déployez en utilisant Agentless ou le Unified Datadog Agent
 : Analysez rapidement l'ensemble de votre infrastructure à la recherche de vulnérabilités, soit en utilisant Agentless, soit en utilisant le Unified Datadog Agent déjà déployé.
 
 Inventorier les ressources cloud en temps réel
-: Inventoriez les images de conteneurs, les hosts, les fonctions serverless et tous les packages déployés dans votre infrastructure, en temps réel, et exportez votre SBOM (software bill of materials).
+: Inventoriez les images de conteneurs, les hosts, les fonctions serverless et tous les packages déployés dans votre infrastructure, en temps réel, et exportez votre SBOM (nomenclature logicielle).
 
 Détecter les vulnérabilités en continu
 : Analysez les mises à jour récentes et les CVE nouvellement publiées, sur l'ensemble des images de conteneurs en cours d'exécution provenant de hosts et de registres, de hosts, d'images de hosts et de fonctions serverless, et identifiez les couches d'images de conteneurs vulnérables.
@@ -99,17 +99,17 @@ Concentrez-vous d'abord sur les vulnérabilités exploitables, en utilisant le D
 
 Pour les vulnérabilités disposant de correctifs, {{< ui >}}Findings{{< /ui >}}la page fournit des étapes de remédiation guidées pour aider les équipes Dev et Ops à résoudre les problèmes plus rapidement et plus efficacement. Vous pouvez également trier, mettre en sourdine, commenter et assigner des vulnérabilités pour gérer leur cycle de vie.
 
-<div class="alert alert-info">Pour réutiliser vos paramètres d'explorateur sur la page des résultats de vulnérabilités, ajoutez l'URL complète de la page à vos favoris. Votre requête de recherche et vos sélections de facettes sont conservées dans l'URL.</div>
+<div class="alert alert-info">Pour réutiliser vos paramètres d'Explorer sur la page des résultats de vulnérabilités, ajoutez l'URL complète de la page à vos favoris. Votre requête de recherche et vos sélections de facettes sont conservées dans l'URL.</div>
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="La page des résultats de Cloud Security Vulnerabilities affichant une vulnérabilité et les actions qu'un utilisateur peut entreprendre pour y remédier" width="100%">}}
 
-Dans [{{< ui >}}Container Images{{< /ui >}}][7], vous pouvez retracer les vulnérabilités trouvées dans une image jusqu'à des couches spécifiques, afin de pouvoir identifier et corriger vos risques de sécurité plus rapidement.
+Dans [{{< ui >}}Container Images{{< /ui >}}][7], vous pouvez tracer les vulnérabilités trouvées dans une image jusqu'à des couches spécifiques, afin de pouvoir identifier et corriger vos risques de sécurité plus rapidement.
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="Une liste des vulnérabilités associées à chaque couche d'une image" width="100%">}}
 
-Pour les images de conteneur non aplaties à étape unique construites à partir d'une image de base publique, Datadog identifie automatiquement l'image de base et distingue les vulnérabilités héritées de celle-ci des packages ajoutés par votre image. Lorsque l'attribution est disponible, Datadog affiche le nom et le condensé de l'image de base, indiquant quand la correction nécessite la mise à jour de cette image de base plutôt que la modification du code de l'application. [Voir les images de conteneur dans Datadog][23].
+Pour les images de conteneur non aplaties à phase unique construites à partir d'une image de base publique, Datadog identifie automatiquement l'image de base et distingue les vulnérabilités héritées de celle-ci des packages ajoutés par votre image. Lorsque l'attribution est disponible, Datadog affiche le nom et le condensé de l'image de base, indiquant quand la correction nécessite la mise à jour de cette image de base plutôt que la modification du code de l'application. [Voir les images de conteneur dans Datadog][23].
 
-## Retracez les vulnérabilités de production jusqu'au code source {#trace-production-vulnerabilities-to-source-code}
+## Tracez les vulnérabilités de production jusqu'au code source {#trace-production-vulnerabilities-to-source-code}
 
 Lorsque Datadog détecte une CVE sur une image de conteneur en cours d'exécution, il peut lier la CVE directement au Dockerfile et au commit qui ont introduit le paquet vulnérable. Cela comble l'écart entre une alerte de production et la modification de code qui l'a causée, donnant aux développeurs le contexte dont ils ont besoin pour corriger à la source plutôt que de rechercher des versions de packages dans les registres.
 
@@ -118,7 +118,7 @@ Pour activer ce mappage du code au cloud, ajoutez des annotations d'image OCI à
 Pour configurer la liaison à la source, consultez [Link Dockerfile to vulnerabilities][22] dans le guide d'analyse des images de conteneur CI/CD.
 
 ## Automatisation et intégration Jira {#automation-and-jira-integration}
-Intégrez Cloud Security Vulnerabilities à votre workflow quotidien en configurant [{{< ui >}}security notification rules{{< /ui >}}][17] et [automation pipelines (in Preview)][20] :
+Intégrez Cloud Security Vulnerabilities à votre workflow quotidien en configurant [{{< ui >}}security notification rules{{< /ui >}}][17] et [automation pipelines][20] :
 - Soyez alerté lors de la détection d'une vulnérabilité exploitable pour votre périmètre
 - Créez automatiquement des tickets Jira
 - Configurez des SLA pour remédier aux vulnérabilités
@@ -151,11 +151,10 @@ Le [{{< ui >}}Infrastructure Packages Catalog{{< /ui >}}][19] fournit un inventa
 [12]: /fr/security/cloud_security_management/setup/agent
 [13]: /fr/security/cloud_security_management/vulnerabilities/hosts_containers_compatibility
 [14]: /fr/security/cloud_security_management/troubleshooting/vulnerabilities/
-[16]: https://www.datadoghq.com/product-preview/ecr-vulnerability-scanning/
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: https://app.datadoghq.com/dash/integration/csm_vulnerabilities?fromUser=true&refresh_mode=sliding&from_ts=1733323465252&to_ts=1733928265252&live=true
 [19]: https://app.datadoghq.com/security/catalog/libraries
-[20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
+[20]: /fr/security/automation_pipelines/
 [21]: /fr/security/cloud_security_management/setup/ci_cd
 [22]: /fr/security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
 [23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score

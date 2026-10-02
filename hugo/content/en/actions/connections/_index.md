@@ -169,7 +169,7 @@ To create a connection group:
 
 1. Navigate to the [connections list][3].
 1. On the left, click {{< ui >}}Groups{{< /ui >}}.
-1. Click {{< ui >}}+ New Group{{< /ui >}}, then select an integration.
+1. Click {{< ui >}}\+ New Group{{< /ui >}}, then select an integration.
 1. Enter a group name, then enter a set of up to three {{< ui >}}Identifier Tags{{< /ui >}} that the connections you want to include in your group all have.
 1. Under {{< ui >}}Confirm Group{{< /ui >}}, use the checkboxes to select the specific members of your group.
 1. Click {{< ui >}}Next, Confirm Access{{< /ui >}}, then choose your desired access level for the group.

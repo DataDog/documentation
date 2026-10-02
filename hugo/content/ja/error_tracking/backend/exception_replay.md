@@ -2,154 +2,154 @@
 aliases:
 - /ja/tracing/error_tracking/executional_context
 - /ja/tracing/error_tracking/execution_replay/
-description: Error Tracking の Exception Replay について学びます。
+description: Error Tracking の Exception Replay について学習します。
 further_reading:
 - link: https://www.datadoghq.com/blog/exception-replay-datadog/
   tag: ブログ
-  text: Datadog Exception Replay で本番環境のデバッグを簡素化
+  text: Datadog Exception Replay で本番デバッグを簡素化
 - link: /tracing/live_debugger
   tag: ドキュメント
-  text: Datadog Live Debugger について学ぶ
+  text: Datadog Live Debugger について学習します。
 - link: /error_tracking/monitors
   tag: ドキュメント
-  text: Error Tracking モニターについて学ぶ
+  text: Error Tracking Monitors について学習します。
 - link: /tracing/error_tracking
   tag: ドキュメント
-  text: APM バックエンドサービスの Error Tracking について学ぶ
+  text: APM バックエンドサービスの Error Tracking について学習します。
 is_beta: true
-title: Error Tracking の Exception Replay
+title: Error Tracking における Exception Replay
 ---
 <div class="alert alert-info">
-Exception Replay は、Python、Java、.NET、PHP で一般提供されており、デフォルトで有効になっています
-<a href="#requirements--setup">(サポートされている場合)</a>。
+Exception Replay は、Python、Java、.NET、PHP で一般提供されており、サポートされている場合はデフォルトで有効になっています。
+(<a href="#requirements--setup">サポートされている場合</a>)。
 </div>
 
 ## 概要 {#overview}
 
-Exception Replay は、例外発生時の実行コンテキストとローカル変数の値をキャプチャして、問題を迅速に診断、
-再現、解決できるようにします。スタックトレースや変数スナップショットなどの例外発生時の状況を記録し、
-このデータを問題のその他の詳細とともに Error Tracking に直接表示します。
+Exception Replay は、例外が発生したときに実行コンテキストとローカル変数の値をキャプチャし、問題の診断、
+問題の再現と解決を迅速化します。スタックトレースや変数のスナップショットを含む周囲の状態を記録し、
+そのデータを Error Tracking 内の他の問題詳細と並べて直接表示します。
 
-{{< img src="tracing/error_tracking/error_tracking_executional_context-3.png" alt="Error Tracking エクスプローラーの Exception Replay" style="width:90%" >}}
+{{< img src="tracing/error_tracking/error_tracking_executional_context-3.png" alt="Error Tracking Explorer Exception Replay" style="width:90%" >}}
 
-Exception Replay は本番環境用に作成されています。スナップショットはレート制限されており、機密データは自動的に
-[削除されます](#sensitive-data-redaction)。有効にすると、アプリケーションで例外を待機し、
-スタックトレースとローカル変数のスナップショットをキャプチャしてから、Datadog に転送します。
+Exception Replay は本番環境での使用を想定して設計されています。スナップショットはレート制限されており、機密データは自動的に
+[マスク](#sensitive-data-redaction)されます。有効にすると、アプリケーション内の例外を待機し、スナップショットをキャプチャします。
+スタックトレースとローカル変数を Datadog に転送する前にキャプチャします。
 
 <div class="alert alert-info">
-<b>どの製品で使用できるか:</b>
-Exception Replay は <b>APM ベースの例外</b>でのみ使用可能で、ログや RUM からのエラーはサポートしていません。
+<b>サポートされている製品は何ですか</b>
+Exception Replay は <b>APM ベースの例外</b>でのみ利用可能で、Logs や RUM からのエラーはサポートしていません。
 </div>
 
 ## 要件とセットアップ {#requirements-setup}
 
-Exception Replay は Python、Java、.NET、PHP をサポートしており、APM ベースの例外のみをキャプチャします。Exception Replay には、
-[Datadog Agent][12] と [APMインスツルメンテーション済みアプリケーション][1]が必要です。環境全体、
+Exception Replay は Python、Java、.NET、PHP をサポートし、APM ベースの例外のみをキャプチャします。これには
+[Datadog Agent][12] と [APM-instrumented application][1] が必要です。環境全体、
 アプリ内の個別のサービス、または環境変数を使用した特定のサービスに対して有効にできます。
 
-有効化の方法は、トレーサーのバージョンと [Remote Configuration][2] が利用可能かどうかによって異なります。詳細は、以下の表を
-参照してください。
+有効化の方法は、トレーサーのバージョンと [Remote Configuration][2] が利用可能かどうかによって異なります。詳細については、
+以下の表を参照してください。
 
 | | 環境別<br>(一括) | サービス別<br>(アプリ内) | サービス別<br>(環境変数) |
 |---|---|---|---|
 | **有効化方法** | デフォルトで有効 | 設定ページ | 環境変数 |
-| **Agent バージョン** | v7.49.0 以上 | v7.49.0 以上 | v7.49.0 以上 |
-| **最小トレーサーバージョン** | [Python][8] 3.15.0 以上<br>[Java][9] 1.54.0 以上<br>[.NET][10] 3.29.0 以上<br>[PHP][11] 1.19.0 以上| [Python][8] 3.10.0 以上<br>[Java][9] 1.48.0 以上<br>[.NET][10] 3.29.0 以上<br>[PHP][11] 1.19.0 以上| [Python][8] 1.16.0 以上<br>[Java][9] 1.47.0 以上<br>[.NET][10] 2.53.0 以上<br>[PHP][11] 1.12.1 以上|
+| **Agent バージョン** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
+| **最小トレーサーバージョン** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration が必要か** | はい | はい | いいえ |
 
-アプリ内で Exception Replay を有効にするには、Error Tracking の Exception Replay の [{{< ui >}}Settings{{< /ui >}}](設定) ページに移動し、
-目的の環境またはサービスを選択して、[{{< ui >}}Enabled{{< /ui >}}](有効) に切り替えます。
+Exception Replay をアプリ内で有効にするには、Error Tracking の Exception Replay {{< ui >}}Settings{{< /ui >}} ページに移動し、
+目的の環境またはサービスを選択して、{{< ui >}}Enabled{{< /ui >}} に切り替えます。
 
-{{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="設定ページからの Exception Replay の有効化" style="width:90%" >}}
+{{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="設定ページから Exception Replay を有効にする" style="width:90%" >}}
 
-アプリ内での有効化が利用できない場合は、次のように環境変数を設定してください。
+アプリ内での有効化が利用できない場合は、環境変数を設定します。
 
 ```bash
 DD_EXCEPTION_REPLAY_ENABLED=true
 ```
 
-これはアプリ内構成を上書きするためにも使用することができます。両方とも設定されている場合は、この設定が優先されます。
+これはアプリ内の構成を上書きするためにも使用でき、両方が設定されている場合はこちらが優先されます。
 
-### Exception Replay スナップショット用のログインデックスを作成する {#create-a-logs-index-for-exception-replay-snapshots}
+### Exception Replay スナップショット用のログインデックスを作成 {#create-a-logs-index-for-exception-replay-snapshots}
 
-Exception Replay スナップショット専用のログインデックスを作成し、目的の保持期間とサンプリングなしで構成します。
+Exception Replay スナップショット専用のログインデックスを作成し、目的の保持期間を設定して、サンプリングを無効にします。
 
-- `source:dd_debugger` に一致するようにフィルターを設定します。
-- このインデックスが、このタグに一致するほかのインデックスよりも優先されるようにします (最初に一致したものが優先されます)。
+- フィルターを `source:dd_debugger` に設定します。
+- このインデックスが、このタグに一致する他のインデックスよりも優先されるようにします (最初に一致したものが優先されます)。
 
 <div class="alert alert-info">
-<b>ログインデックスを作成する理由:</b>
-Exception Replay スナップショットは、元の APM スパンへのリンクが付加されたログとして出力されるためです。
+<b>ログインデックスを作成する理由</b>
+Exception Replay スナップショットは、元の APM スパンへのリンクが付加されたログとして出力されます。
 </div>
 
 ### ソースコードをリンクする {#link-your-source-code}
 
-Datadog ソースコードインテグレーションを有効にすると、Error Tracking スタックトレース内で直接コードプレビューを確認できます
-。Exception Replay スナップショットがキャプチャされたら、コードプレビュー内の変数名にカーソルを合わせて、
+Datadog Source Code Integration を有効にすると、Error Tracking の
+スタックトレース内で直接コードプレビューを確認できます。Exception Replay スナップショットがキャプチャされると、コードプレビュー内の変数名にカーソルを合わせて、
 キャプチャされた値を確認できます。
 
-{{< img src="tracing/error_tracking/error_tracking_exception_replay_sci.mp4" video="true" alt="ソースコードインテグレーションを使用した Exception Replay" style="width:90%" >}}
+{{< img src="tracing/error_tracking/error_tracking_exception_replay_sci.mp4" video="true" alt="ソースコード統合を使用した Exception Replay" style="width:90%" >}}
 
-## 機密データの削除 {#sensitive-data-redaction}
+## 機密データのリダクション {#sensitive-data-redaction}
 
-Exception Replay は、スナップショットが利用可能になる前に、機密データが確実に保護されるように、
-モードまたは識別子に基づく自動削除を実施します。
+Exception Replay は、自動的なモードベースおよび識別子ベースのリダクションを適用し、スナップショットが利用可能になる前に機密データが保護されるようにします。
+スナップショットが利用可能になります。
 
-### モードに基づく削除 {#mode-based-redaction}
+### モードベースのリダクション {#mode-based-redaction}
 
-Exception Replay には、次の 2 つの編集モードがあります。
+Exception Replay には 2 つのリダクションモードがあります。
 
-- {{< ui >}}Strict Mode{{< /ui >}}: 数値とブール値を除くすべての値を削除します。
-- {{< ui >}}Targeted Mode{{< /ui >}}: クレジットカード番号、API キー、IP、その他の PII などの、既知の機密パターンを削除します。また、高エントロピーのシークレットスキャナーを実行します。これは、スナップショット内で `[REDACTED:HIGH_ENTROPY]` として表示される、シークレットである可能性が高い項目を自動で削除します。
+- {{< ui >}}Strict Mode{{< /ui >}}: 数値とブール値を除くすべての値をリダクションします。
+- {{< ui >}}Targeted Mode{{< /ui >}}: クレジットカード番号、API キー、IP アドレス、その他の個人情報 (PII) など、既知の機密パターンをリダクションします。また、高エントロピーのシークレットスキャナーを実行し、シークレットの可能性が高いものを自動的にリダクションします。これらはスナップショット内で `[REDACTED:HIGH_ENTROPY]` として表示されます。
 
-これらの削除モードは無効にすることはできず、切り替えのみが可能です。対象のモードは、
-`staging` や `preprod` のような一般的なプリプロダクション環境で自動的に適用されます。
+これらのリダクションモードは無効にすることはできず、切り替えることのみ可能です。
+また、Targeted Mode は、`staging` や `preprod` のような一般的な本番前環境で自動的に適用されます。
 
-### 識別子に基づく編集 {#identifier-based-redaction}
+### 識別子ベースのリダクション {#identifier-based-redaction}
 
-[一般的な機密識別子][3] (例: `password`、`accessToken`、および類似の用語) に関連付けられた変数値は、
-スナップショットがホストから送信される前にスクラブされます。言語固有の追加の削除ルールが各トレーサーに組み込まれています
-(たとえば、Python トレーサーは、デフォルトの機密識別子のリストを保持しています)。
+[一般的なセンシティブ識別子][3] に関連付けられた変数値 (例: `password`、`accessToken`、および類似の用語) は、
+スナップショットがホストから離れる前にスクラブされます。言語固有の追加のリダクションルールが各トレーサーに組み込まれています。
+(例: Python トレーサーはデフォルトのセンシティブ識別子のリストを保持しています)。
 
-削除動作は、以下を使用して拡張できます。
+リダクション動作は以下を通じて拡張できます。
 
-- カスタム識別子に基づく削除
-- クラス/型に基づく削除ルール
-- Sensitive Data Scanner のルール
+- カスタム識別子ベースのリダクション
+- クラス/タイプベースのリダクションルール
+- Sensitive Data Scanner ルール
 
-設定の詳細については、[Dynamic Instrumentation の機密データスクラブ手順][4]および [Sensitive Data Scanner][5] のドキュメントを
-参照してください。
+[Dynamic Instrumentation センシティブデータスクラビングの手順][4] および [Sensitive Data Scanner][5] のドキュメントを参照してください。
+構成の詳細については、以下を確認してください。
 
 <div class="alert alert-info">
-<b>DI の手順を参照する理由:</b>
-Exception Replay は <a href="/tracing/dynamic_instrumentation/">DI (Dynamic Instrumentation)</a> を基に作成されているため、
-その機密データのスクラブ設定方法をこの場合も参照できます。
+<b>DI の指示が必要な理由</b>
+Exception Replay は <a href="/tracing/dynamic_instrumentation/">Dynamic Instrumentation (DI)</a> に基づいて構築されているため、
+そのセンシティブデータスクラビングの構成オプションもここで適用されます。
 </div>
 
-## トラブルシューティング {#troubleshooting}
+## トラブルシューティング{#troubleshooting}
 
-### 変数値が見つからない {#missing-variable-values}
+### 変数値が欠落している {#missing-variable-values}
 
-Exception Replay のスナップショットは、**インスタンスごと、例外タイプごとに、1 時間あたり 1 つのスナップショット**にレート制限されています。一部のランタイムでは、
-特定の例外が **2 回発生した**後にのみスナップショットがキャプチャされます。
+Exception Replay のスナップショットには、**インスタンスごと、例外タイプごとに 1 時間あたり 1 回**というレート制限が適用されます。一部の
+ランタイムでは、特定の例外について、**2 回目の発生**後にのみスナップショットがキャプチャされます。
 
 ### スナップショットが表示されないその他の理由 {#additional-reasons-a-snapshot-may-not-appear}
 
 - Exception Replay が有効になっていない
 - スナップショットが選択した時間枠外で発生した
-- サードパーティパッケージが除外されている (これらを含めるには `DD_THIRD_PARTY_DETECTION_EXCLUDES` を使用してください)
-- [ログインデックス][6]の保持設定または先行するインデックスの[除外フィルター][7]が原因で、`source:dd_debugger` がログに含まれていない
-- Exception Replay は FedRAMP リージョンでは使用できない
-- Java: JDK 18 以下では、`-parameters` フラグを指定してコンパイルされたクラスはサポートされない場合があります。Spring 6 以上、Spring Boot 3 以上、および Scala では、このフラグがデフォルトで使用されます。
+- サードパーティパッケージの除外 (これらを含めるには `DD_THIRD_PARTY_DETECTION_EXCLUDES` を使用)
+- [Log Index][6] の保持設定または先行するインデックスの [Exclusion Filters][7] により `source:dd_debugger` が欠落しているログ
+- Exception Replay は FedRAMP リージョンでは利用できません
+- Java: JDK 18 以下では、`-parameters` フラグでコンパイルされたクラスはサポートされない場合があります。Spring 6+、Spring Boot 3+、および Scala は、このフラグをデフォルトで使用します。
 
-Error Tracking エクスプローラーでクエリ `@error.debug_info_captured:true` を使用して、Exception Replay スナップショットのあるエラーを
-検出してください。
+Error Tracking Explorer でクエリ `@error.debug_info_captured:true` を使用して、Exception Replay のスナップショットを含むエラーを検索します
+。
 
-### GovCloud (Java) での BatchUploader の WARN メッセージ{#batchuploader-warn-messages-on-govcloud-java}
+### GovCloud 上の BatchUploader の WARN メッセージ (Java) {#batchuploader-warn-messages-on-govcloud-java}
 
-GovCloud サイト (`app.ddog-gov.com`) では、Java トレーサーが `com.datadog.debugger.uploader.BatchUploader` から HTTP 403 および `This traffic is not permitted on your account` に類似したテキストを含む定期的な WARN メッセージをログに記録する場合があります。これは、Exception Replay、Dynamic Instrumentation、および Code Origin for Spans がサポートされていないサイトでデバッガー関連のアップロードが試行された場合に予期される動作です。コア APM 機能 (トレース、メトリクス、プロファイリング、ログインジェクション) には影響しません。
+GovCloud サイト (`app.ddog-gov.com`) では、Java トレーサーが `com.datadog.debugger.uploader.BatchUploader` から HTTP 403 および `This traffic is not permitted on your account` に類似したテキストを含む WARN メッセージを定期的にログに出力する場合があります。これは、Exception Replay、Dynamic Instrumentation、および Code Origin for Spans がサポートされていないサイトで、デバッガー関連のアップロードが試行された場合の想定された動作です。APM のコア機能 (トレース、メトリクス、プロファイリング、ログインジェクション) には影響ありません。
 
-このようなログメッセージを停止するには、Java アプリケーション Pod で以下の環境変数を設定し、ワークロードを再起動してください。
+これらのログメッセージを停止するには、Java アプリケーション Pod で以下の環境変数を設定し、ワークロードを再起動します。
 
 ```bash
 DD_EXCEPTION_REPLAY_ENABLED=false
@@ -157,7 +157,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=false
 DD_CODE_ORIGIN_FOR_SPANS_ENABLED=false
 ```
 
-または、次の JVM システムプロパティを使用してください。
+または、JVM システムプロパティを使用します。
 
 ```bash
 -Ddd.exception.replay.enabled=false
@@ -165,7 +165,7 @@ DD_CODE_ORIGIN_FOR_SPANS_ENABLED=false
 -Ddd.code.origin.for.spans.enabled=false
 ```
 
-修正を確認するには、トレーサーの起動 JSON (`DATADOG TRACER CONFIGURATION`) をチェックし、`debugger_exception_enabled`、`debugger_enabled`、および `debugger_span_origin_enabled`がすべて `false` であることを確認してください。WARN メッセージはおよそ 5 分に 1 回の頻度にレート制限されています。そのため、再起動後にメッセージが停止したことを確認する際は、少なくともその程度の時間を空けてからにしてください。
+修正を確認するには、トレーサーの起動 JSON (`DATADOG TRACER CONFIGURATION`) を確認し、`debugger_exception_enabled`、`debugger_enabled`、および `debugger_span_origin_enabled` がすべて `false` であることを確認します。WARN メッセージはレート制限により約 5 分に 1 回のみ出力されるため、再起動後、メッセージが停止したことを確認するまで少なくともその程度の時間待ちます。
 
 ## 参考資料 {#further-reading}
 

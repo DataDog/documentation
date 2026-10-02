@@ -819,6 +819,10 @@ The `slotConfigNames` resource does a full replace of the sticky-settings list. 
 
 {{% /collapse-content %}}
 
+## Troubleshooting
+
+If Automatic Scaling is enabled on the App Service Plan and you see unrelated traces merged together, Azure platform health probes (`User-Agent: HttpScaleManager`) might carry stale W3C trace context. If all callers to the app are Datadog-instrumented, set `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` on the affected app to restrict trace context extraction to Datadog's format. For apps with callers that aren't Datadog-instrumented, this setting causes Datadog to ignore their W3C trace context, breaking those requests into disconnected traces instead of merging them into the parent trace.
+
 ## Profiling
 
 <div class="alert alert-info">

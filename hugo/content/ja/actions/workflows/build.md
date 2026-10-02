@@ -45,20 +45,21 @@ title: ワークフローの構築
 
 ## AI でワークフローを作成または編集する {#create-a-workflow-with-ai}
 
-何から始めたらよいかわからない場合は、AI でワークフローを自動生成するか、既存のワークフローを反復することができます。
+[Bits Chat][15] で AI アシスタンスを使用して、プロンプトからワークフローを作成したり、既存のワークフローを更新したりできます。Bits Chat は、ワークフローを作成または更新する前にフォローアップの質問をする場合があります。
 
-ワークフローを生成するには、以下の手順に従います。
-1. [Workflow Automation][1] ページから、{{< ui >}}New Workflow{{< /ui >}} をクリックします。
-1. {{< ui >}}Create a workflow with AI{{< /ui >}} をクリックします。
-1. ワークフローの詳細なプロンプトを入力します。使用したいインテグレーションとアクションを指定します。
-1. 上向き矢印 ({{< ui >}}↑{{< /ui >}}) をクリックすると、ワークフローが作成されます。
+ワークフローを作成するには
+1. [Workflow Automation][1] ページから、{{< ui >}}New workflow{{< /ui >}} をクリックします。
+1. {{< ui >}}Build a workflow with AI{{< /ui >}} に、詳細なプロンプトを入力するか、推奨されるプロンプトを選択します。
+1. 上矢印 ({{< ui >}}↑{{< /ui >}}) をクリックして、プロンプトを送信します。
+1. フォローアップの質問に回答し、プロンプトが表示されたらワークフローを確定します。Bits がワークフローを作成し、ワークフローエディターで開きます。
 
-既存のワークフローを反復するには、以下の手順に従います。
-1. 既存のワークフローから、{{< ui >}}Edit with AI{{< /ui >}} をクリックします。
-1. ワークフローに追加したい動作の詳細なプロンプトを入力します。使用したいインテグレーションとアクションを含めます。
-1. 上向き矢印 ({{< ui >}}↑{{< /ui >}}) をクリックすると、機能がワークフローに追加されます。
+Bits Chat を使用して、Datadog 内のどこからでもワークフローを作成できます。右上のナビゲーションバーにある {{< ui >}}Ask Bits{{< /ui >}} をクリックするか、<kbd>Cmd</kbd> または <kbd>Ctrl</kbd> + <kbd>I</kbd> を押して Bits Chat を開き、Bits にワークフローの作成を依頼します。
 
-<div class="alert alert-info">Workflow Automation AI は、製品に関する質問には回答しません。質問やフィードバックがある場合は、<a href="https://chat.datadoghq.com/">Datadog Community Slack</a> の <strong>#workflows</strong> チャンネルに参加することをご検討ください</div>
+既存のワークフローを更新するには:
+1. ワークフローを開き、左側のツールバーにある AI アイコン <i class="icon-bits-ai"></i> をクリックします。ワークフローがコンテキストとして添付された状態で Bits Chat が開きます。
+1. ご希望の変更内容を記述した詳細なプロンプトを入力します。
+1. 上矢印 ({{< ui >}}↑{{< /ui >}}) をクリックして、プロンプトを送信します。
+1. フォローアップの質問に回答し、プロンプトが表示されたらワークフローの変更を確定します。Bits がエディター内でワークフローを更新します。
 
 ## カスタムワークフローの作成 {#create-a-custom-workflow}
 
@@ -89,7 +90,7 @@ title: ワークフローの構築
 
 ワークフロービルダーキャンバスのキーボードショートカットとマウスショートカットを表示するには、`?` (shift+`/`) を入力するか、{{< ui >}}Keyboard{{< /ui >}}{{< img src="actions/workflows/build/keyboard-icon.png" inline="true" style="width:40px;">}} ボタンをクリックします。ショートカットの一覧が表示されます。
 
-{{< ui >}}Zoom out{{< /ui >}}{{< img src="actions/workflows/build/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}、{{< ui >}}Zoom in{{< /ui >}}{{< img src="actions/workflows/build/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}、および {{< ui >}}Reset viewport{{< /ui >}}{{< img src="actions/workflows/build/reset-viewport-icon.png" inline="true" style="width:34px;">}} ボタンは、ビューポートの表示方法を制御します。
+{{< ui >}}Zoom out{{< /ui >}}{{< img src="actions/workflows/build/zoom-out-mag-icon.png" inline="true" style="width:30px;">}}, {{< ui >}}Zoom in{{< /ui >}}{{< img src="actions/workflows/build/zoom-in-mag-icon.png" inline="true" style="width:30px;">}}、および {{< ui >}}Reset viewport{{< /ui >}}{{< img src="actions/workflows/build/reset-viewport-icon.png" inline="true" style="width:34px;">}} ボタンは、ビューポートの表示方法を制御します。
 
 {{< ui >}}Auto layout{{< /ui >}}{{< img src="actions/workflows/build/auto-layout-icon.png" inline="true" style="width:80px;">}} ボタンを使用すると、ワークフローステップを整列および配置できます。
 
@@ -117,7 +118,7 @@ title: ワークフローの構築
 
 ドラフトを破棄するには、エディターの右上隅にある {{< ui >}}cog icon{{< /ui >}} をクリックし、{{< ui >}}Discard draft{{< /ui >}} を選択します。
 
-**注記**:
+**注**:
 - 公開済みワークフローのドラフトを実行しても、コストは発生しません。
 - ワークフローのプロパティ (名前、タグ、または通知) を更新すると、ドラフトフローはバイパスされて、公開済みバージョンに即座に適用されます。
 
@@ -212,3 +213,4 @@ API を使用してタスクを実行するには、[Workflow Automation API ド
 [12]: /ja/actions/workflows/variables/
 [13]: /ja/api/latest/workflow-automation/
 [14]: /ja/actions/workflows/variables/#context-variables
+[15]: /ja/bits_ai/bits_chat/

@@ -1,210 +1,590 @@
 {
   "api-management": {
     "name": "API 관리",
-    "description": "Datadog API를 통해 API 엔드포인트를 구성해 보세요."
+    "description": "Datadog API를 통해 API 엔드포인트를 구성하세요."
+  },
+  "apm": {
+    "name": "APM",
+    "description": "컨텍스트의 모든 텔레메트리를 사용해 클라우드 규모 애플리케이션을 관측, 문제 해결 및 개선"
   },
   "apm-retention-filters": {
-    "name": "APM 보존 기간 필터",
-    "description": "조직의 [APM 보유 필터](https://app.datadoghq.com/apm/traces/retention-filters)의 구성을 관리하세요. 이 엔드포인트와 상호 작용하려면 관리자 권한과 API 및 애플리케이션 키가 있어야 합니다. 자세한 정보는 Trace Retention 페이지에서 [보유 필터][retention filters](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)를 참고하세요."
+    "name": "APM 보존 필터",
+    "description": "조직의 [APM 보존 필터](https://app.datadoghq.com/apm/traces/retention-filters) 구성을 관리합니다. 이 엔드포인트와 상호 작용을 주고받으려면 관리자 권한이 있는 API 및 애플리케이션 키가 필요합니다. 자세한 정보는 트레이스 보존 페이지의 [보존 필터](https://docs.datadoghq.com/tracing/trace_pipeline/trace_retention/#retention-filters)를 참조하세요."
+  },
+  "apm-trace": {
+    "name": "APM 트레이스",
+    "description": "트레이스 ID를 사용해 전체 또는 정제된 APM을 검색합니다."
+  },
+  "aws-integration": {
+    "name": "AWS 통합",
+    "description": "Datadog API를 통해 직접 Datadog AWS 통합을 구성합니다.\n자세한 정보는 [AWS 통합 페이지](https://docs.datadoghq.com/integrations/amazon_web_services)를 참조하세요."
+  },
+  "aws-logs-integration": {
+    "name": "AWS Logs 통합",
+    "description": "Datadog API를 통해 직접 Datadog-AWS-Logs 통합을 구성합니다.\n자세한 정보는 [AWS 통합 페이지](https://docs.datadoghq.com/integrations/amazon_web_services/#log-collection)를 참조하세요."
+  },
+  "action-connection": {
+    "name": "Action Connection",
+    "description": "Action connection은 설치된 통합을 확장하며 Datadog의 Workflow Automation 및 App Builder 제품을 사용하여 서드파티 시스템\n(예: AWS, GitLab 및 Statuspage)에서 작업을 수행할 수 있게 해줍니다.\n\nDatadog의 통합은 Slack, Microsoft Teams, PagerDuty, Opsgenie,\nJIRA, GitHub 및 Statuspage에 대한 인증을 자동으로 제공합니다. Workflow Automation 및 App Builder에서 이러한 도구에 액세스하기 위해\n추가 연결을 설정할 필요가 없습니다.\n\nDatadog은 연결 편집 및 결정에 대해 세분화된 액세스 제어를 제공합니다."
+  },
+  "actions-datastores": {
+    "name": "Actions Datastores",
+    "description": "Actions Datastore API를 활용하여 조직에서 소유한 데이터 저장소의\n항목을 생성, 수정 및 삭제합니다."
+  },
+  "agent-observability": {
+    "name": "Agent Observability",
+    "description": "Agent Observability의 스팬, 데이터, 프로젝트, 데이터 세트, 데이터 세트 레코드, 실험, 프롬프트 및 주석을 관리합니다."
+  },
+  "agentless-scanning": {
+    "name": "Agentless Scanning",
+    "description": "Datadog Agentless Scanning은 호스트, 실행 중인 컨테이너 및\n서버리스 함수의 위험과 취약성에 대한 가시성을 제공합니다. 이 모든 것이\n모든 호스트에, 또는 에이전트를 설치할 수 없는 곳에 에이전트를 설치하지 않아도 제공됩니다.\nAgentless는 스토리지를 대상으로 Sensitive Data Scanning 기능도 제공합니다.\n자세한 정보는 https://www.datadoghq.com/blog/agentless-scanning/을 참조하세요."
+  },
+  "annotations": {
+    "name": "Annotations",
+    "description": "대시보드와 노트북에 주석을 추가하여 배포, 인시던트 또는 기타 중요한 시점의 이벤트를 표시합니다."
+  },
+  "app-builder": {
+    "name": "App Builder",
+    "description": "Datadog App Builder는 대규모로 해결 속도를 높이도록 구축된 모니터링 스택에 안전한 맞춤형 애플리케이션을 신속하게 개발해 통합하도록 지원하는 로코드 솔루션입니다. 이러한 API 엔드포인트를 사용해 앱을 만들고, 읽고, 업데이트, 삭제 및 게시할 수 있습니다."
+  },
+  "application-security": {
+    "name": "Application Security",
+    "description": "[Datadog Application Security](https://docs.datadoghq.com/security/application_security/)는 코드 수준\n취약성을 악용하려는 애플리케이션 수준의 공격으로부터 보호를 제공합니다.\n여기에는 Server-Side-Request-Forgery(SSRF), SQL 인젝션, Log4Shell 및\nReflected Cross-Site-Scripting(XSS)과 같은 공격이 포함됩니다. 서버, Docker, Kubernetes, Amazon ECS 및\nAWS Fargate(지원되는 언어의 경우)에서 직접 호스팅되는 애플리케이션을\n모니터링하고 보호할 수 있습니다."
   },
   "audit": {
-    "name": "감사",
-    "description": "HTTP를 통해 감사 로그를 검색해 보세요."
+    "name": "Audit",
+    "description": "HTTP로 Audit Logs 이벤트를 검색하세요."
   },
   "authn-mappings": {
     "name": "AuthN Mappings",
-    "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)는\nID 공급자에서 받은 속성을 이용해 사용자 그룹을 Datadog의 역할로 매핑할 때 사용됩니다. \nAuthN Mappings을 관리할 때 이 엔드포인트를 사용하세요."
+    "description": "[AuthN Mappings API](https://docs.datadoghq.com/account_management/authn_mapping/?tab=example)는\nIdentity Provider에서 전송된 속성을 사용하여 사용자 그룹을 Datadog의 역할에\n자동으로 매핑하는 데 사용됩니다. 이러한 엔드포인트를 사용해 AuthN Mappings를 관리하세요."
+  },
+  "bits-ai": {
+    "name": "Bits AI",
+    "description": "Bits AI 엔드포인트를 사용하여 AI 기반 조사를 검색하세요."
+  },
+  "ci-visibility-github-accounts": {
+    "name": "CI Visibility GitHub Accounts",
+    "description": "GitHub 계정 및 리포지토리의 CI Visibility 옵트인 상태를 관리하세요. 자세한 정보는\n[CI Visibility GitHub Actions 설정 페이지](https://docs.datadoghq.com/continuous_integration/pipelines/github/)를\n참조하세요."
   },
   "ci-visibility-pipelines": {
-    "name": "CI 가시성 파이프라인",
-    "description": "CI 가시성 파이프라인 이벤트를 검색하거나 집계하고 HTTP를 통해 Datadog 사이트로 전송하세요. 더 자세한 내용은 [Datadog 페이지의 CI 파이프라인 가시성](https://docs.datadoghq.com/continuous_integration/pipelines/)을 참고하세요."
+    "name": "CI Visibility Pipelines",
+    "description": "HTTP를 통해 CI Visibility 파이프라인 이벤트를 검색하거나 집계해 Datadog 사이트로 보냅니다. 자세한 정보는 [Datadog의 CI Pipeline Visibility 페이지](https://docs.datadoghq.com/continuous_integration/pipelines/)를 참조하세요."
   },
   "ci-visibility-tests": {
-    "name": "CI 가시성 테스트",
-    "description": "HTTP를 통해 CI 가시성 테스트 이벤트를 검색하거나 집계할 수 있습니다. 자세한 내용은 [Datadog 페이지의 가시성 테스트](https://docs.datadoghq.com/tests/)를 참고하세요."
+    "name": "CI Visibility Tests",
+    "description": "HTTP를 통해 CI Visibility 테스트 이벤트를 검색하거나 집계합니다. 자세한 정보는 [Datadog의 Test Visibility 페이지](https://docs.datadoghq.com/tests/)를 참조하세요."
+  },
+  "csm-agents": {
+    "name": "CSM Agents",
+    "description": "Datadog Cloud Security Management(CSM)는 클라우드 인프라 전체에서\n실시간 위협 탐지 및 지속적인 구성 감사를 제공하며, 이 모든 작업을 통합된 보기에서\n수행하여 원활한 협업과 신속한 해결을 지원합니다.\n자세한 정보는 https://docs.datadoghq.com/security/cloud_security_management를 참조하세요."
+  },
+  "csm-coverage-analysis": {
+    "name": "CSM Coverage Analysis",
+    "description": "Datadog Cloud Security Management(CSM)는 클라우드 인프라 전체에서\n실시간 위협 탐지 및 지속적인 구성 감사를 제공하며, 이 모든 작업을 통합된 보기에서\n수행하여 원활한 협업과 신속한 해결을 지원합니다.\n자세한 정보는 https://docs.datadoghq.com/security/cloud_security_management를 참조하세요."
+  },
+  "csm-ownership": {
+    "name": "CSM Ownership",
+    "description": "Datadog Cloud Security Management(CSM) Ownership은 플랫폼 전반에서\n소유권 신호를 결합하여 클라우드 리소스의 가능성이 가장 높은 소유자를 추론합니다.\n또한 추론 결과를 검토하고, 그 근거를 확인하며, 추론된 소유자를 유지, 재정의 또는\n수정할 수 있도록 피드백을 제출할 수 있습니다.\n자세한 정보는 [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)를 참조하세요."
+  },
+  "csm-settings": {
+    "name": "CSM Settings",
+    "description": "Datadog Cloud Security Management(CSM) Settings API를 사용하면 CSM에서 모니터링하는\n클라우드 호스트를 나열하고 필터링할 수 있으며, 에이전트리스 및 에이전트 기반 검색을 모두 지원합니다.\n자세한 정보는 [Cloud Security Management](https://docs.datadoghq.com/security/cloud_security_management)를 참조하세요."
   },
   "csm-threats": {
     "name": "CSM Threats",
-    "description": "CSM Threats(Cloud Security Management Threats)는 인프라스트럭처에 있는 실시간 위협을 탐지하기 위해 환경 전체의 파일, 네트워크, 프로세스 활동을 모니터링합니다. CSM Threats를 설정하는 방법에 관한 자세한 내용은 [Cloud Security Management Threats](https://docs.datadoghq.com/security/threats/)을 참고하세요."
+    "description": "Workload Protection은 환경 전체에서 파일, 네트워크, 프로세스 활동을 모니터링하여 인프라를 노리는 실시간 위협을 탐지합니다. Workload Protection 설정에 대한 자세한 정보는 [Workload Protection](https://docs.datadoghq.com/security/workload_protection/)을 참조하세요.\n\n**참고**: 이러한 엔드포인트는 US1-FED 사이트 사용 여부에 따라 구분됩니다. 사용 중인 사이트의 리소스를 참조하세요."
   },
   "case-management": {
-    "name": "사례 관리",
-    "description": "사례 관리에서 사례와 프로젝트를 보고 관리하세요. 자세한 정보는 [Case Management 페이지](https://docs.datadoghq.com/service_management/case_management/)를 참고하세요."
+    "name": "Case Management",
+    "description": "**참고**: Work Management는 Case Management의 UI 이름입니다. 이러한 API 엔드포인트 및 권한에서는 `case` 용어를 사용합니다.\n\nWork Management에서 작업 항목 및 프로젝트를 확인하고 관리합니다. 자세한 정보는 [Work Management](https://docs.datadoghq.com/incident_response/work_management/)를 참조하세요."
+  },
+  "case-management-attribute": {
+    "name": "Case Management Attribute",
+    "description": "Case Management 내에서 사용자 지정 속성을 조회하고 구성합니다. 자세한 정보는 [Case Management 페이지](https://docs.datadoghq.com/service_management/case_management/)를 참조하세요."
+  },
+  "case-management-type": {
+    "name": "Case Management Type",
+    "description": "Case Management 내에서 사례 유형을 조회하고 구성합니다. 자세한 정보는 [Case Management 페이지](https://docs.datadoghq.com/service_management/case_management/)를 참조하세요."
+  },
+  "change-management": {
+    "name": "Change Management",
+    "description": "Change Management에서 변경 요청을 확인하고 관리합니다. 자세한 정보는 [Case Management 페이지](https://docs.datadoghq.com/service_management/case_management/)를 참조하세요."
+  },
+  "cloud-authentication": {
+    "name": "Cloud Authentication",
+    "description": "Datadog API를 통해 페르소나 및 수집 인증을 위한 AWS 클라우드 인증 매핑을 구성합니다."
   },
   "cloud-cost-management": {
-    "name": "클라우드 비용 관리",
-    "description": "클라우드 비용 관리 API를 사용하면 AWS와 Azure의 클라우드 비용 관리 계정을 설정, 편집, 삭제할 수 있습니다. 자세한 정보는 [클라우드 비용 관리 페이지](https://docs.datadoghq.com/cloud_cost_management/)를 참고하세요."
+    "name": "Cloud Cost Management",
+    "description": "Cloud Cost Management API를 사용하면 AWS, Azure, Google Cloud의 Cloud Cost Management 계정을 설정, 편집, 삭제할 수 있습니다. [메트릭 엔드포인트](https://docs.datadoghq.com/api/latest/metrics/#query-timeseries-data-across-multiple-products)와 `cloud_cost` 데이터 소스를 사용하면 비용 데이터를 쿼리할 수 있습니다. 자세한 정보는 [Cloud Cost Management 설명서](https://docs.datadoghq.com/cloud_cost_management/)를 참조하세요."
+  },
+  "cloud-network-monitoring": {
+    "name": "Cloud Network Monitoring",
+    "description": "Cloud Network Monitoring API를 사용하면 집계된 연결과 DNS 트래픽 및 그 속성을 가져올 수 있습니다. 자세한 정보는 [Cloud Network Monitoring 페이지](https://docs.datadoghq.com/network_monitoring/cloud_network_monitoring/) 및 [DNS Monitoring 페이지](https://docs.datadoghq.com/network_monitoring/dns/)를 참조하세요."
   },
   "cloudflare-integration": {
-    "name": "Cloudflare 통합",
-    "description": "Datadog API를 통해 바로 Datadog Cloudflare 통합을 관리하세요. 자세한 정보는 [Cloudflare 통합 페이지](https://docs.datadoghq.com/integrations/cloudflare/)를 참고하세요."
+    "name": "Cloudflare Integration",
+    "description": "Datadog API를 통해 직접 Datadog Cloudflare 통합을 관리합니다. 자세한 정보는 [Cloudflare 통합 페이지](https://docs.datadoghq.com/integrations/cloudflare/)를 참조하세요."
+  },
+  "code-coverage": {
+    "name": "Code Coverage",
+    "description": "Code Coverage에서 코드 커버리지 데이터를 가져오고 분석합니다. 자세한 정보는 [Code Coverage 페이지](https://docs.datadoghq.com/code_coverage/)를 참조하세요."
+  },
+  "compliance": {
+    "name": "Compliance",
+    "description": "Datadog Cloud Security Misconfigurations는 클라우드 리소스 전반의 규정 준수\n규칙 및 발견 사항을 통합된 보기로 제공하여 HIPAA, SOC 2, ISO 27001과 같은\n업계 프레임워크 및 사용자 지정 프레임워크를 기준으로 보안 태세를 평가할 수 있도록\n지원합니다. 자세한 정보는 https://docs.datadoghq.com/security/cloud_security_management/misconfigurations/#maintain-compliance-with-industry-frameworks-and-benchmarks를 참조하세요."
   },
   "confluent-cloud": {
     "name": "Confluent Cloud",
-    "description": "Datadog API를 통해 바로 Datadog Confluent Cloud 통합 계정과 계정 리소스를 관리하세요. 자세한 정보는 [Confluent Cloud 페이지](https://docs.datadoghq.com/integrations/confluent_cloud/)를 참고하세요."
+    "description": "Datadog API를 통해 직접 Datadog Confluent Cloud 통합 계정과 계정 리소스를 관리합니다. 자세한 정보는 [Confluent Cloud 페이지](https://docs.datadoghq.com/integrations/confluent_cloud/)를 참조하세요."
   },
   "container-images": {
-    "name": "컨테이너 이미지",
-    "description": "컨테이너 이미지 API를 사용하면 조직의 컨테이너 이미지 데이터를 쿼리할 수 있습니다. 자세한 정보는 [컨테이너 이미지 페이지](https://docs.datadoghq.com/infrastructure/containers/container_images/)를 참고하세요."
+    "name": "Container Images",
+    "description": "Container Images API를 사용하면 조직의 컨테이너 이미지 데이터를 쿼리할 수 있습니다. 자세한 정보는 [Container Images View 페이지](https://docs.datadoghq.com/infrastructure/containers/container_images/)를 참조하세요."
   },
   "containers": {
-    "name": "컨테이너",
-    "description": "컨테이너 API를 사용하면 조직의 컨테이너 데이터를 쿼리할 수 있습니다. 자세한 정보는 [Container Monitoring page](https://docs.datadoghq.com/containers/)를 참고하세요."
+    "name": "Containers",
+    "description": "Containers API를 사용하면 조직의 컨테이너 데이터를 쿼리할 수 있습니다. 자세한 정보는 [Container Monitoring 페이지](https://docs.datadoghq.com/containers/)를 참조하세요."
+  },
+  "customer-org": {
+    "name": "Customer Org",
+    "description": "고객 Datadog 조직의 프로그래밍 방식 관리입니다. 이 API를 사용해\n인증된 조직 비활성화와 같은 셀프 서비스 조직 수명 주기 작업을 수행하세요."
+  },
+  "ddsql": {
+    "name": "DDSQL",
+    "description": "Datadog 데이터 카탈로그에 대해 DDSQL 쿼리를 실행하고 결과를 폴링합니다.\n쿼리는 비동기 방식으로 전달됩니다. 초기 요청에서 `query_id`와 함께\n`running` 상태가 반환될 수 있으며, 클라이언트는 응답 상태가 열 중심 결과 집합을 포함하는\n`completed` 상태로 전환될 때까지 가져오기 엔드포인트를 폴링합니다."
   },
   "dora-metrics": {
     "name": "DORA Metrics",
-    "description": "DORA Metrics 이벤트를 전송해 소프트웨어 배달을 측정하고 개선하세요. 자세한 정보는 [DORA Metrics 페이지](https://docs.datadoghq.com/dora_metrics/)를 참고하세요."
+    "description": "DORA Metrics 이벤트를 검색, 전송 또는 삭제하여 소프트웨어 제공 성능을 측정하고 개선합니다. 자세한 정보는 [DORA Metrics 페이지](https://docs.datadoghq.com/dora_metrics/)를 참조하세요.\n\n**참고**: DORA Metrics는 US1-FED 사이트에서 사용할 수 없습니다."
   },
   "dashboard-lists": {
-    "name": "대시보드 목록",
-    "description": "API를 사용해 대시보드 목록과 상호 작용하여 \n대시보드 전체를 구성 및 검색하고 팀과 조직에 공유할 수 \n있습니다. "
+    "name": "Dashboard Lists",
+    "description": "API를 통해 대시보드 목록과 상호작용하여 모든\n대시보드를 팀 및 조직과 함께 체계적으로 구성하고, 검색하고, 공유할 수\n있습니다."
+  },
+  "dashboard-secure-embed": {
+    "name": "Dashboard Secure Embed",
+    "description": "임베드된 Datadog 대시보드를 안전하게 관리합니다. 보안 임베드는 인증에 HMAC-SHA256으로\n서명된 세션을 사용하므로 서버 측 인증 제어를 통해 자체 애플리케이션에 대시보드를\n임베드할 수 있습니다. 보안 임베드는 공개 대시보드(퍼블릭 URL) 또는 초대 대시보드\n(이메일 기반 액세스)와 달리 프로그래밍 방식의 액세스 제어를 제공합니다.\n\n**요구 사항:**\n- **Organization Settings** > **Public Sharing** > **Shared Dashboards**에서 **Embed* 공유가 활성화되어 있어야 합니다.\n- 이러한 엔드포인트와 상호작용하려면 [API 키 및 애플리케이션 키](https://docs.datadoghq.com/account_management/api-app-keys/)가 필요합니다."
+  },
+  "dashboard-sharing": {
+    "name": "Dashboard Sharing",
+    "description": "대시보드 공유 구성을 관리합니다."
+  },
+  "dashboards": {
+    "name": "Dashboards",
+    "description": "조회 수, 마지막 편집 시간, 위젯 수 및 품질 점수를 비롯한\n조직의 대시보드 사용 통계를 확인합니다. 자세한 정보는\n[Dashboards 설명서](https://docs.datadoghq.com/dashboards/)를\n참조하세요."
+  },
+  "data-deletion": {
+    "name": "Data Deletion",
+    "description": "Data Deletion API를 사용하면 허용된 제품의 데이터를 대상으로 지정하고 삭제할 수 있습니다. 이 기능은 Logs에 대해 활성화되어 있으며 `logs_delete_data` 권한에 따라 사용할 수 있습니다."
+  },
+  "data-observability": {
+    "name": "Data Observability",
+    "description": "데이터 관측 가능성 모니터를 관리하고 실행합니다."
+  },
+  "datasets": {
+    "name": "Datasets",
+    "description": "Datadog의 데이터 액세스 제어는 시스템 관리자와 액세스 관리자가 민감한 데이터에 대한 액세스 권한을\n규제하게 해주는 기능입니다. Restricted Datasets를 정의하면 특정 팀 또는 역할만 특정 유형의 텔레메트리\n(예: 로그, 트레이스, 메트릭, RUM 데이터)를 확인할 수 있습니다."
+  },
+  "deployment-gates": {
+    "name": "Deployment Gates",
+    "description": "이 API를 사용해 배포 게이트를 관리하면 배포로 인한 인시던트 발생 확률 및 그로 인한 영향을 줄일 수 있습니다. 자세한 정보는 [Deployment Gates 설명서](https://docs.datadoghq.com/deployment_gates/)를 참조하세요."
+  },
+  "domain-allowlist": {
+    "name": "Domain Allowlist",
+    "description": "Datadog API를 통해 직접 Datadog 이메일 도메인 허용 목록을 구성합니다.\n이메일 도메인 허용 목록은 특정 Datadog 이메일을 보낼 수 있는 도메인을 제어합니다.\n자세한 정보는 [도메인 허용 목록 문서 페이지](https://docs.datadoghq.com/account_management/org_settings/domain_allowlist)를 참조하세요."
   },
   "downtimes": {
-    "name": "다운타임",
-    "description": "**참고**: Downtime V2가 현재 베타 서비스 중입니다. 베타 버전에 액세스하고 싶으면 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요.\n\n[다운타임](https://docs.datadoghq.com/monitors/notify/downtimes)을 이용하면 \n알림에서 제외할 범위를 전역으로 확장할 수 있기 때문에 알림을 모니터링할 때 제어할 수 있는 \n범위가 더 넓어집니다. 다운타임 설정에서 시작과 종료 시간을 정할 수 있어 Datadog 태그로 \n지정된 특정 알림을 예방할 수 있습니다."
+    "name": "Downtimes",
+    "description": "**참고**: Downtime V2는 현재 비공개 베타 상태입니다. 액세스 권한을 요청하려면 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요.\n\n[가동 중지 예약](https://docs.datadoghq.com/monitors/notify/downtimes)을 사용하면\n특정 범위를 알림에서 전역적으로 제외할 수 있으므로 모니터 알림을 더욱 세밀하게\n제어할 수 있습니다 시작 및 종료 시간을 예약할 수 있는 가동 중지 설정을 사용하면\n지정된 Datadog 태그와 관련된 모든 경보가 발생하지 않습니다."
+  },
+  "elastic-cloud-integration-accounts": {
+    "name": "Elastic Cloud Integration Accounts",
+    "description": "Datadog API를 통해 직접 Datadog Elastic Cloud 통합 계정을 관리합니다.\n계정을 생성, 업데이트 및 삭제하고, 인증 및 설정을 구성하며, 클러스터 메트릭,\n인덱스 통계, 샤드 통계, 보류 중인 작업 및 스냅샷 수명 주기 관리 통계와 같은\n데이터 흐름을 활성화하거나 비활성화할 수 있습니다. 자세한 정보는\n[Elastic Cloud 통합 페이지](https://docs.datadoghq.com/integrations/elastic-cloud/)를\n참조하세요."
+  },
+  "entity-integration-configs": {
+    "name": "Entity Integration Configs",
+    "description": "Internal Developer Portal(IDP)의 통합별 구성을 관리합니다. 이러한 구성은 외부 리소스(예: GitHub 리포지토리, Jira 프로젝트 또는 PagerDuty 서비스) 중 어떤 리소스를 Software Catalog에 엔터티로 동기화할지 제어합니다."
+  },
+  "entity-risk-scores": {
+    "name": "Entity Risk Scores",
+    "description": "조직 내 엔터티의 보안 위험 점수를 검색합니다."
+  },
+  "error-tracking": {
+    "name": "Error Tracking",
+    "description": "Error Tracking 내부의 문제를 조회하고 관리합니다. 자세한 정보는 [Error Tracking 페이지](https://docs.datadoghq.com/error_tracking/)를 참조하세요."
   },
   "events": {
-    "name": "이벤트",
-    "description": "이벤트 관리 API를 이용하면 프로그램을 통해 이벤트를 Event Explorer에 게시하고 가져올 수 있습니다. 자세한 정보는 [이벤트 관리 페이지](https://docs.datadoghq.com/service_management/events/)를 참고하세요."
+    "name": "Events",
+    "description": "Event Management API를 사용하면 이벤트를 프로그램 방식으로 Events Explorer에 게시하고, Events Explorer에서 이벤트를 가져올 수 있습니다. 자세한 정보는 [Event Management 페이지](https://docs.datadoghq.com/service_management/events/)를 참조하세요.\n\n**2025년 3월 1일부터 Datadog 모니터 이벤트 `aggregation_key` 업데이트:** Datadog 모니터 이벤트의 `aggregation_key`는 각 Monitor ID에 대해 고유합니다. 3월 1일부터 이 키에는 Monitor Group도 포함되므로 *Monitor ID 및 Monitor Group*별로 고유하게 됩니다. 대시보드 쿼리 또는 Event API에서 모니터링 이벤트 `aggregation_key`를 사용하는 경우, `@monitor.id`를 사용하는 방식으로 마이그레이션해야 합니다. 궁금한 점이 있으시면 [지원팀](https://www.datadoghq.com/support/)에 문의하세요."
+  },
+  "execution-policy": {
+    "name": "Execution Policy",
+    "description": "Execution Policy는 Datadog Action Platform에서 인프라를 대상으로 실행할 수 있는 작업과\n실행 위치를 제어합니다. 각 정책은 효과(허용 또는 거부)를\n작업 패턴과 페어링하며, 해당 결정의 범위를 특정 Kubernetes\n네임스페이스, 스크립트 또는 원격 셸 경로로 지정할 수 있습니다."
   },
   "fastly-integration": {
-    "name": "Fastly 통합",
-    "description": "Datadog API를 통해 바로 Datadog Fastly 통합 계정과 서비스를 관리하세요. 자세한 정보는 [Fastly 통합 페이지](https://docs.datadoghq.com/integrations/fastly/)를 참고하세요."
+    "name": "Fastly Integration",
+    "description": "Datadog API를 통해 직접 Datadog Fastly 통합 계정과 서비스를 관리합니다. 자세한 정보는 [Fastly 통합 페이지](https://docs.datadoghq.com/integrations/fastly/)를 참조하세요."
+  },
+  "feature-flags": {
+    "name": "Feature Flags",
+    "description": "기능 플래그와 환경을 관리합니다."
+  },
+  "fleet-automation": {
+    "name": "Fleet Automation",
+    "description": "호스트 플릿 전체에서 자동 배포를 관리합니다.\n\nFleet Automation은 두 가지 유형의 배포를 제공합니다.\n\nConfiguration Deployments(`/configure`):\n- 대상 호스트에 구성 파일 변경 사항 적용\n- 특정 구성 필드를 업데이트하기 위한 merge-patch 작업 지원\n- 구성 파일을 제거하기 위한 삭제 작업 지원\n- Datadog Agent 설정, 통합 구성 등을 업데이트하는 데 유용\n\nPackage Upgrade Deployments(`/upgrade`):\n- Datadog Agent를 특정 버전으로 업그레이드합니다."
+  },
+  "forms": {
+    "name": "Forms",
+    "description": "Datadog Forms API를 사용하면 App Builder 플랫폼에서 양식을 생성하고 관리할 수 있습니다.\n양식 설정을 구성하고, 버전을 관리하고, 양식을 게시할 수 있습니다."
   },
   "gcp-integration": {
-    "name": "GCP 통합",
-    "description": "Datadog API를 통해 Datadog-Google Cloud Platform(GCP) 통합을 구성하세요. \n자세한 내용은 [Datadog-Google Cloud Platform 통합](https://docs.datadoghq.com/integrations/google_cloud_platform)을 참고하세요."
+    "name": "GCP Integration",
+    "description": "Datadog API를 통해 직접 Datadog-Google Cloud Platform(GCP)\n통합을 구성합니다. [Datadog-Google Cloud Platform 통합](https://docs.datadoghq.com/integrations/google_cloud_platform)에 대해 자세히 알아보세요."
+  },
+  "google-chat-integration": {
+    "name": "Google Chat Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Google Chat 통합](https://docs.datadoghq.com/integrations/google-hangouts-chat/)을\n구성합니다."
+  },
+  "governance-console": {
+    "name": "Governance Console",
+    "description": "Governance Console은 시간이 지남에 따라 Datadog 조직에서 누적되는 문제를 찾아내고, 이를 해결할\n때까지 추적합니다. 여기에는 아무도 사용하지 않는 API 키, 더 이상 액세스 권한이 필요하지 않은 사용자\n또는 한 번도 쿼리되지 않는 사용자 지정 메트릭과 같은 문제가 포함됩니다.\n\n이러한 엔드포인트를 사용하면 다음 작업을 수행할 수 있습니다.\n\n- 인사이트 읽기: 조직이 Datadog을 어떻게 사용하는지 측정하며, 각각 배경 쿼리를 함께 제공합니다.\n- 제어 구성: 한 가지 종류의 문제를 어떻게 찾아낼지, 그에 어떻게 대처할지 결정하는 규칙입니다.\n- 탐지 조치: 제어 기능이 찾아낸 문제를 할당, 유예, 예외로 인정하거나 해결합니다.\n- 설정 관리: 조직 전체의 구성 및 알림 대상입니다.\n\n자세한 정보는 [Governance Console 페이지](https://docs.datadoghq.com/account_management/governance_console/)를\n참조하세요."
+  },
+  "high-availability-multiregion": {
+    "name": "High Availability MultiRegion",
+    "description": "Datadog 조직 간 HAMR(High Availability Multi-Region) 연결을 구성합니다.\nHAMR은 다양한 데이터 센터의 기본 조직 및 보조 조직 사이에서 데이터를 동기화된 상태로 유지해\n장애 복구 기능을 제공합니다."
   },
   "ip-allowlist": {
-    "name": "IP 허용 목록",
-    "description": "IP 허용 목록 API는 Datadog API와 웹 UI애 액세스 가능한 IP 주소를 \n관리할 때 사용됩니다. 이 API에서 수신 API나 공용 대시보드 액세스를 차단하지 않습니다.\n\n이 기능은 엔터프라이즈 사용자에게만 제공됩니다. Datadog 지원팀에 문의해 액세스를 요청하거나 [IP 허용 목록 페이지](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/)에서 자세한 정보를 참고하세요."
+    "name": "IP Allowlist",
+    "description": "IP Allowlist API는 Datadog API 및 웹 UI에 액세스할 수 있는\nIP 주소를 관리하는 데 사용됩니다. 이 기능은 Intake API 또는\n공개 대시보드에 대한 액세스 권한을 차단하지는 않습니다.\n\n이것은 엔터프라이즈 전용 기능입니다. 액세스 권한을 요청하려면\nDatadog 지원팀에 문의하고, 자세한 정보는 [IP Allowlist 페이지](https://docs.datadoghq.com/account_management/org_settings/ip_allowlist/)를 참조하세요."
   },
-  "incident-services": {
-    "name": "인시던트 서비스",
-    "description": "인시던트와 관련된 서비스를 생성, 업데이트, 삭제, 가져오기할 수 있습니다. 자세한 정보는 [인시던트 관리 페이지](https://docs.datadoghq.com/service_management/incident_management/)를 참고하세요."
-  },
-  "incident-teams": {
-    "name": "인시던트 팀",
-    "description": "인시던트 팀 엔드포인트는 더 이상 사용되지 않습니다. 인시던트와 관련된 팀을 생성, 업데이트, 삭제, 가져오기하려면 [팀 API 엔드포인트]](https://docs.datadoghq.com/api/latest/teams/)를 참고하세요."
+  "identity-providers": {
+    "name": "Identity Providers",
+    "description": "ID 공급자 및 사용자 인증 방법 재정의를 관리합니다."
   },
   "incidents": {
-    "name": "인시던트",
-    "description": "인시던트 응답과 관련 첨부물, 메타데이터, 할 일을 관리하세요. 자세한 내용은 [인시던트 관리 페이지](https://docs.datadoghq.com/service_management/incident_management/)를 참고하세요."
+    "name": "Incidents",
+    "description": "인시던트 응답과 그에 연결된 첨부 파일, 메타데이터 및 할 일을 관리합니다. 자세한 정보는 [Incident Management 페이지](https://docs.datadoghq.com/service_management/incident_management/)를 참조하세요."
+  },
+  "integrations": {
+    "name": "Integrations",
+    "description": "Integrations API는 사용 가능한 통합을 나열하고\n통합의 설치 상태에 대한 정보를 가져오는 데 사용됩니다."
+  },
+  "jira-integration": {
+    "name": "Jira Integration",
+    "description": "Jira 통합을 관리합니다. Atlassian Jira는 팀이 효율적으로 업무를 조율하고 작업을 처리할 수 있도록 지원하는 프로젝트 관리 및 문제 추적 도구입니다."
   },
   "key-management": {
-    "name": "키 관리 ",
-    "description": "Datadog API와 애플리케이션 키를 관리하세요. 다음 엔드포인트와 상호 작용하려면 필요한 권한이 있는 사용자에게 API 키와 애플리케이션 키가 필요합니다. API와 애플리케이션 키 전체 목록은 [Datadog API 페이지](https://app.datadoghq.com/account/settings#api)에서 확인할 수 있습니다."
+    "name": "Key Management",
+    "description": "Datadog API와 애플리케이션 키를 관리합니다. 이러한 엔드포인트와 상호 작용하려면\n필수 권한이 있는 사용자의 API 키와 애플리케이션 키가 필요합니다.\n\n키를 조회하고 관리하는 방법은 다음 페이지를 참조하세요.\n\n- [API 키](https://app.datadoghq.com/organization-settings/api-keys)\n- [애플리케이션 키](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "logs": {
-    "name": "로그",
-    "description": "로그를 검색하고 HTTP를 통해 Datadog 플랫폼으로 전송하세요. 자세한 정보는 [로그 관리 페이지](https://docs.datadoghq.com/logs/)를 참고하세요."
+    "name": "Logs",
+    "description": "HTTP를 통해 로그를 검색하고 Datadog 플랫폼으로 보냅니다. 자세한 정보는 [Log Management 페이지](https://docs.datadoghq.com/logs/)를 참조하세요."
   },
   "logs-archives": {
-    "name": "로그 아카이브",
-    "description": "아카이브에서는 수집한 모든 로그를 클라우드 스토리지 시스템으로 전송합니다.\n\nDatadog에서 현재 구성된 아카이브 목록을 보려면 \n[아카이브 페이지](https://app.datadoghq.com/logs/pipelines/archives)를 참고하세요."
+    "name": "Logs Archives",
+    "description": "아카이브는 수집된 모든 로그를 클라우드 스토리지 시스템으로 전달합니다.\n\n현재 Datadog에 구성된 아카이브 목록은 [Archives 페이지](https://app.datadoghq.com/logs/pipelines/archives)를\n참조하세요."
   },
   "logs-custom-destinations": {
-    "name": "로그 커스텀 대상",
-    "description": "커스텀 대상 기능을 이용하면 수집한 모든 로그를 외부 대상으로 전송합니다.\n\n**참고**: 정부(US1-FED) 사이트의 경우 로그 전송 기능을 사용할 수 없습니다. 자세한 정보는 계정 관리자에게 문의하세요.\n\n현재 웹 UI에 구성된 커스텀 대상 목록을 보려면 [커스텀 대상 페이지](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)를 참고하세요."
+    "name": "Logs Custom Destinations",
+    "description": "사용자 지정 대상은 수집된 모든 로그를 외부 대상으로 전달합니다.\n\n**참고**: Government(US1-FED) 사이트에서는 로그 전달을 사용할 수 없습니다. 자세한 정보는 계정 담당자에게 문의하세요.\n\n웹 UI에서 현재 구성된 사용자 지정 대상 목록은 [Custom Destinations 페이지](https://app.datadoghq.com/logs/pipelines/log-forwarding/custom-destinations)를\n참조하세요."
   },
   "logs-metrics": {
-    "name": "로그 메트릭",
-    "description": "조직 내 [로그 기반 메트릭](https://app.datadoghq.com/logs/pipelines/generate-metrics)의 구성을 관리하세요."
+    "name": "Logs Metrics",
+    "description": "조직의 [로그 기반 메트릭](https://app.datadoghq.com/logs/pipelines/generate-metrics) 구성을 관리합니다."
   },
   "logs-restriction-queries": {
-    "name": "로그 제한 쿼리",
-    "description": "**참고: 이 엔드포인트는 공용 베타 서비스 중입니다. 피드백이 있을 경우 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요.**\n\n제한 쿼리는 `logs_read_data` 권한으로 읽기 액세스를 부여하는 로그를 제한하는 로그 쿼리입니다. \n제한 쿼리가 있는 역할을 사용하는 사용자가 로그를 쿼리하면 \n제한 쿼리 조건과 일치하는 결과만 반환됩니다. \n로그 탐색기, Live Tail, 리하이드레이션, 또는 대시보드 위젯과 같은 \n로그 관련 기능에서 로그 이벤트를 쿼리해도 마찬가지입니다.\n\n현재 제한 쿼리에서는 로그 이벤트의 다음 구성 요소만 사용 지원합니다.\n\n- 예약된 속성\n- 로그 메시지\n- 태그\n\n로그 데이터의 읽기 액세스를 제한하려면 로그 이벤트에 팀 태그를 추가해 소속 팀을 표시한 후 제한 쿼리 범위의 값을 관련 팀 태그의 값으로 지정하세요. 로그 이벤트에 태그를 지정하는 다양한 방법이 있고, 키(예: 팀)는 동일하지만 값이 다른 태그 여러 개를 로그 이벤트에 지정할 수 있습니다. 따라서 여러 역할에서 제한 쿼리로 팀 값의 범위를 다르게 지정하더라도 동일한 로그 이벤트를 볼 수 있습니다.\n\n이 엔드포인트와 상호 작용하려면 API 및 애플리케이션 키가 있는 관리자 권한이 있어야 합니다.\n\n제한 쿼리를 추가하는 방법에 관한 자세한 내용은 [로그용 RBAC 설정](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)을 참고하세요."
+    "name": "Logs Restriction Queries",
+    "description": "**참고: 이 엔드포인트는 공개 베타 상태입니다. 피드백이 있으면 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요.**\n\n제한 쿼리는 `logs_read_data` 권한으로 읽기 액세스가 허용되는 로그를 제한하는 로그 쿼리입니다.\n제한 쿼리가 있는 역할을 맡은 사용자의 경우, 어떤 로그 쿼리를 실행하든 본인의 Restriction Queries 중 하나와도 일치하는\n로그 이벤트만 반환합니다. 이것은 사용자가 각종 로그 관련 기능(예: 로그 탐색기, Live Tail, 리하이드레이션 등) 또는\n대시보드 위젯의 로그 이벤트를 쿼리해도 마찬가지입니다.\n\n제한 쿼리는 현재 로그 이벤트 중 다음 구성 요소만 사용하도록 지원하고 있습니다.\n\n- 예약된 속성\n- 로그 메시지\n- 태그\n\n로그 데이터에 대한 읽기 액세스를 제한하려면, 로그 이벤트에 팀 태그를 추가해 어느 팀이 해당 이벤트를 소유하는지 표시하고, 제한 쿼리의 범위를 팀 태그의 관련 값으로 지정합니다. 태그를 로그 이벤트에 적용하는 방법은 여러 가지이고, 로그 이벤트 하나에 키는 동일하고(예: team) 값은 다른 태그 여러 개가 포함될 수 있습니다. 다시 말해, 제한 쿼리가 서로 다른 팀 값으로 범위가 지정된 역할에 같은 로그 이벤트가 표시될 수 있다는 뜻입니다.\n\n제한 쿼리를 추가하는 방법에 관한 자세한 정보는 [로그에 RBAC 설정하는 방법](https://docs.datadoghq.com/logs/guide/logs-rbac/?tab=api#restrict-access-to-logs)을 참조하세요."
   },
   "metrics": {
     "name": "메트릭",
-    "description": "메트릭 엔드포인트를 사용하면 다음을 할 수 있습니다.\n\n- 메트릭 데이터를 게시해 Datadog 대시보드에 그래프화\n- 원하는 시간대(시계열 및 스칼라)를 지정해 메트릭 쿼리\n- 메트릭 태그 구성 수정\n- 메트릭 태그 및 볼륨 보기\n\n**참고**: 그래프에는 특정 수의 포인트만 포함될 수 \n있습니다. 메트릭 보기의 시간대가 늘어나면 특정 포인트 수 이하로 \n유지하기 위해 포인트간 집계가 발생합니다.\n\n`Manage Tags for Metrics` 권한이 있는 사용자만 `manage_tags` API 메서드를 \n게시, 패치, 삭제할 수 있습니다.\n\n자세한 정보는 [메트릭 페이지](https://docs.datadoghq.com/metrics/)를 참고하세요."
+    "description": "메트릭 엔드포인트를 통해 다음을 수행할 수 있습니다.\n\n- 메트릭 데이터를 게시해 Datadog의 대시보드에 그래프로 표시할 수 있게 함\n- 특정 기간의 메트릭 쿼리(시계열 및 스칼라)\n- 태그 구성을 메트릭에 맞춰 수정\n- 메트릭의 태그 및 볼륨 조회\n\n**참고**: 그래프에는 정해진 개수의 포인트만 포함할 수 있고,\n메트릭을 조회하는 시간 프레임이 길어지면\n여러 포인트의 집계를 수행해 정해진 개수 미만으로 유지됩니다.\n\nPost, Patch, Delete `manage_tags` API 메서드는\n`Manage Tags for Metrics` 권한이 있는 사용자만 수행할 수 있습니다.\n\n자세한 정보는 [메트릭 페이지](https://docs.datadoghq.com/metrics/)를 참조하세요."
+  },
+  "microsoft-teams-integration": {
+    "name": "Microsoft Teams Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Microsoft Teams 통합](https://docs.datadoghq.com/integrations/microsoft_teams/)을\n구성합니다. 참고: 이러한 엔드포인트는 레거시 커넥터 핸들을 지원하지 않습니다."
+  },
+  "model-lab-api": {
+    "name": "Model Lab API",
+    "description": "ML 실험 추적을 위한 Model Lab 프로젝트, 실행, 아티팩트 및 패싯을 관리합니다."
   },
   "monitors": {
-    "name": "모니터링",
-    "description": "[모니터](https://docs.datadoghq.com/monitors)를 이용하면 필요한 메트릭을 확인하거나 점검할 수 있고 정의한 \n임계값을 초과했을 때 팀에 알림을 보낼 수 있습니다.\n\n자세한 정보는 [모니터 생성](https://docs.datadoghq.com/monitors/create/types/) 및 [태그 정책](https://docs.datadoghq.com/monitors/settings/)을 참고하세요."
+    "name": "Monitors",
+    "description": "[Monitors](https://docs.datadoghq.com/monitors)를 사용하면 관심 있는 메트릭 또는 검사를 모니터링하고\n정의된 임계값이 초과되면 팀원들에게 알림을 보낼 수 있습니다.\n\n자세한 정보는 [모니터 생성](https://docs.datadoghq.com/monitors/create/types/) 및\n[태그 정책](https://docs.datadoghq.com/monitors/settings/)을 참조하세요."
   },
   "network-device-monitoring": {
-    "name": "네트워크 장치 모니터링",
-    "description": "네트워크 디바이스 모니터링 API를 사용하면 디바이스 및 인터페이스 정보를 속성과 함께 가져올 수 있습니다. 자세한 정보는 [네트워크 디바이스 모니터링 페이지](https://docs.datadoghq.com/network_monitoring/)를 참고하세요."
+    "name": "Network Device Monitoring",
+    "description": "Network Device Monitoring API를 사용하면 장치와 인터페이스 및 그 속성을 가져올 수 있습니다. 자세한 정보는 [Network Device Monitoring 페이지](https://docs.datadoghq.com/network_monitoring/)를 참조하세요."
+  },
+  "network-health-insights": {
+    "name": "Network Health Insights",
+    "description": "연결 문제가 발생하는 서비스에 대해 실행 가능한 인사이트를 제공하여 네트워크 상태를 분석합니다.\n인사이트는 DNS 장애 데이터(시간 초과, NXDOMAIN, SERVFAIL, 일반적인 장애),\nTLS 인증서 상태(만료됨, 곧 만료됨) 및 보안 그룹 거부 데이터를 기반으로 도출됩니다."
+  },
+  "oauth2-client-public": {
+    "name": "OAuth2 Client Public",
+    "description": "Datadog용 OAuth2 클라이언트를 구성합니다.\nRFC 7591 동적 클라이언트 등록 및 OAuth2 클라이언트 범위 제한 관리를 지원합니다."
+  },
+  "oci-integration": {
+    "name": "OOCI Integration",
+    "description": "자동 생성되는 태그 OCI Integration"
+  },
+  "observability-pipelines": {
+    "name": "Observability Pipelines",
+    "description": "Observability Pipelines를 사용하면 자체 인프라 내에서 로그를 수집해 처리하고, 그런 다음 로그를 다운스트림 통합으로 라우팅할 수 있습니다."
   },
   "okta-integration": {
-    "name": "Okta 통합",
-    "description": "Datadog API를 통해 바로 [Datadog-Okta 통합](https://docs.datadoghq.com/integrations/okta/)을 구성하세요."
+    "name": "Okta Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Okta 통합](https://docs.datadoghq.com/integrations/okta/)을 구성합니다."
+  },
+  "on-call": {
+    "name": "On-Call",
+    "description": "Datadog API를 통해 직접 [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)을\n구성합니다."
+  },
+  "on-call-paging": {
+    "name": "On-Call Paging",
+    "description": "Datadog API를 통해 직접 [Datadog On-Call](https://docs.datadoghq.com/service_management/on-call/)\n페이지를 트리거하고 관리합니다."
   },
   "opsgenie-integration": {
-    "name": "Opsgenie 통합",
-    "description": "Datadog API를 통해 바로 [Datadog Opsgenie 통합]((https://docs.datadoghq.com/integrations/opsgenie/)을 \n구성하세요."
+    "name": "Opsgenie Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Opsgenie 통합](https://docs.datadoghq.com/integrations/opsgenie/)을\n구성합니다."
+  },
+  "org-authorized-clients": {
+    "name": "Org Authorized Clients",
+    "description": "조직 수준에서 OAuth2 클라이언트 인증을 관리합니다."
+  },
+  "org-connections": {
+    "name": "Org Connections",
+    "description": "조직 간 연결을 관리합니다. Org Connections를 사용하면 다양한 Datadog 조직 간 데이터를 통제된 방식으로 공유할 수 있습니다. 자세한 정보는 [조직 간 가시성](https://docs.datadoghq.com/account_management/org_settings/cross_org_visibility/) 페이지를 참조하세요."
+  },
+  "org-groups": {
+    "name": "Org Groups",
+    "description": "조직 그룹, 멤버십, 정책, 정책 재정의 및 정책 구성을 관리합니다."
   },
   "organizations": {
     "name": "Organizations",
-    "description": "조직을 생성, 편집, 관리하세요. 자세한 내용은 [여러 조직 계정](https://docs.datadoghq.com/account_management/multi_organization)을 참고하세요."
+    "description": "조직을 만들고 편집하고 관리합니다. 자세한 내용은 [다중 조직 계정](https://docs.datadoghq.com/account_management/multi_organization)을 참조하세요."
   },
   "powerpack": {
     "name": "Powerpack",
-    "description": "Powerpack 엔드포인트를 사용하면 다음을 할 수 있습니다.\n\n- Powerpack 얻기\n- Powerpack 생성\n- Powerpack 삭제\n- Powerpack 전체 목록 얻기\n\n해당 Powerpack에서 Powerpack 생성 권한이 있는 사용자만\n API 패치 및 삭제 방법을 \n사용할 수 있습니다.\n\n자세한 정보는 [Powerpack으로 그래프 전문가되기](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/)를 참고하세요."
+    "description": "Powerpack 엔드포인트를 사용하면 다음 작업을 수행할 수 있습니다.\n\n- Powerpack 가져오기\n- Powerpack 생성\n- Powerpack 삭제\n- 모든 Powerpack 목록 가져오기\n\nPatch 및 Delete API 메서드는 해당 Powerpack에 대한\npowerpack 만들기 권한이 있는 사용자만 수행할 수 있습니다.\n\n자세한 정보는 [Powerpack으로 그래프 전문성 확장](https://docs.datadoghq.com/dashboards/guide/powerpacks-best-practices/)을 참조하세요."
   },
   "processes": {
-    "name": "프로세스",
-    "description": "프로세스 API를 사용하면 조직의 프로세스 데이터를 쿼리할 수 있습니다. 자세한 정보는 [라이브 프로세스 페이지](https://docs.datadoghq.com/infrastructure/process/)를 참고하세요."
+    "name": "Processes",
+    "description": "프로세스 API를 사용하면 조직의 프로세스 데이터를 쿼리할 수 있습니다. 자세한 정보는 [Live Processes 페이지](https://docs.datadoghq.com/infrastructure/process/)를 참조하세요."
+  },
+  "product-analytics": {
+    "name": "Product Analytics",
+    "description": "서버 측 이벤트를 Product Analytics로 보냅니다. 서버 측 이벤트 수집을 사용하면 모든 서버 측 소스에서 커스텀 이벤트를 수집하고\n15개월 동안 이벤트를 보존할 수 있습니다. 서버 측 이벤트는 클라이언트 측 외부에서 발생하는\n퍼널 이탈의 원인(예: 결제 처리 오류)을 파악하는 데 유용합니다.\n\n**참고**: 서버 측 이벤트를 전송하면 청구액에 영향을 미칩니다. [가격 페이지](https://www.datadoghq.com/pricing/?product=product-analytics#products)를 확인하고\n자세한 정보는 고객 성공 관리자에게 문의하세요."
+  },
+  "product-catalog": {
+    "name": "Product Catalog",
+    "description": "일반적으로 제공되는 Datadog SKU를 조회하고, 특정 날짜에 해당 SKU에 적용되는\n공개 목록 가격, 할당량 및 단계별 가격을 확인합니다."
   },
   "rum": {
     "name": "RUM",
-    "description": "RUM(실시간 사용자 모니터링) 애플리케이션을 관리하고 HTTP를 통해 RUM 이벤트를 검색하거나 집계하세요. 자세한 정보는 [RUM & 세션 리플레이 페이지](https://docs.datadoghq.com/real_user_monitoring/)를 참고하세요."
+    "description": "Real User Monitoring(RUM) 애플리케이션을 관리하고, HTTP로 RUM 이벤트를 검색하거나 집계합니다. 자세한 정보는 [RUM & Session Replay 페이지](https://docs.datadoghq.com/real_user_monitoring/)를 참조하세요."
+  },
+  "rum-config": {
+    "name": "RUM Config",
+    "description": "조직의 [Real User Monitoring(RUM)](https://docs.datadoghq.com/real_user_monitoring/)\n구성을 관리합니다."
+  },
+  "rum-insights": {
+    "name": "RUM Insights",
+    "description": "HTTP를 통한 Real User Monitoring(RUM) 애플리케이션의 성능에 대한 인사이트를 확인합니다. 자세한 정보는 [RUM & Session Replay 페이지](https://docs.datadoghq.com/real_user_monitoring/)를 참조하세요."
+  },
+  "rum-operations": {
+    "name": "RUM Operations",
+    "description": "[RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), 즉 구성 가능한\n사용자 여정을 통해 RUM 이벤트에서 감지된 비즈니스 트랜잭션 및 해당 트랜잭션과 기능 간의\n긴밀한 연결을 관리합니다. 자세한 정보는 [RUM & Session Replay 페이지](https://docs.datadoghq.com/real_user_monitoring/)를\n참조하세요."
+  },
+  "rum-remote-config": {
+    "name": "RUM Remote Config",
+    "description": "Remote Configuration을 통해 RUM 애플리케이션에 제공되는 [RUM SDK 구성](https://docs.datadoghq.com/real_user_monitoring/)을 관리합니다."
+  },
+  "rum-retention-quotas": {
+    "name": "RUM Retention Quotas",
+    "description": "조직의 RUM 애플리케이션에 대한 RUM 보존 할당량 구성을 관리합니다."
+  },
+  "reference-tables": {
+    "name": "Reference Tables",
+    "description": "조직의 참조표를 조회하고 관리합니다."
+  },
+  "report-schedules": {
+    "name": "Report Schedules",
+    "description": "예약된 보고서를 생성하고 관리합니다. 예약된 보고서는 대시보드 또는 통합 대시보드를\n반복적으로 렌더링하고 이메일, Slack 또는 Microsoft Teams를 통해 지정된 수신자에게\n전달합니다."
+  },
+  "reporting-and-sharing": {
+    "name": "Reporting And Sharing",
+    "description": "Reporting and Sharing 엔드포인트를 사용하면 그래프 위젯 및 기타 공유 가능한 리소스의 스냅샷을 생성할 수 있습니다."
   },
   "restriction-policies": {
-    "name": "제한 정책",
-    "description": "제한 정책에서 리소스의 액세서 제어 규칙을 정의하여 관계 집합(예: 편집자 및 뷰어)을 \n허용된 보안 주체 집합(예: 역할, 팀, 사용자)에 매핑합니다.\n제한 정책으로 리소스에 작업을 할 수 있는 인증 담당자를 결정합니다."
+    "name": "Restriction Policies",
+    "description": "제한 정책은 리소스의 액세스 제어 규칙을 정의하고, 관계(예: 편집자, 뷰어) 집합을\n허용된 주체(예: 역할, 팀 또는 사용자) 집합에 매핑합니다.\n제한 정책에 따라 리소스에서 누가 어떤 작업을 수행할 권한이 있는지 결정됩니다."
   },
   "roles": {
-    "name": "역할",
-    "description": "역할 API는 Datadog 역할을 생성 및 관리하고, 부여한\n[전역 권한](https://docs.datadoghq.com/account_management/rbac/)과\n권한을 받은 사용자를 확인하는 데 사용됩니다.\n\n이 API를 사용하지 않고 Datadog 애플리케이션에서 특정 계정 에셋과 관련된 \n권한을 역할에 부여할 수 있습니다. 예를 들어 Datadog의 \n[파이프라인 페이지](https://app.datadoghq.com/logs/pipelines)에서 역할에 \n특정 로그 인덱스에 대한 읽기 액세스를 부여할 수 있습니다."
+    "name": "Roles",
+    "description": "Roles API는 Datadog 역할, 해당 역할이 부여하는\n[전역 권한](https://docs.datadoghq.com/account_management/rbac/) 및 해당 역할에 속한\n사용자를 생성하고 관리하는 데 사용됩니다.\n\n특정 계정 자산과 관련된 권한은 이 API를 사용하지 않고\nDatadog 애플리케이션에서 역할에 부여할 수 있습니다. 예를 들어, 특정 로그 인덱스에 대한\n읽기 액세스 권한을 역할에 부여하는 작업은 Datadog의\n[Pipelines 페이지](https://app.datadoghq.com/logs/pipelines)에서 수행할 수 있습니다.\n\nDatadog UI를 통해 역할을 일괄적으로 관리할 수도 있으며, 이를 통해\n여러 역할에 하나의 권한을 동시에 할당할 수 있습니다."
+  },
+  "rum-audience-management": {
+    "name": "Rum Audience Management",
+    "description": "자동 생성된 태그 Rum Audience Management"
+  },
+  "rum-metrics": {
+    "name": "Rum Metrics",
+    "description": "조직의 [RUM 기반 메트릭](https://app.datadoghq.com/rum/generate-metrics) 구성을 관리합니다."
+  },
+  "rum-replay-heatmaps": {
+    "name": "Rum Replay Heatmaps",
+    "description": "RUM 리플레이 세션의 히트맵 스냅샷을 관리합니다. 특정 보기에서 사용자 상호 작용을 시각화하기 위한 스냅샷을 생성, 업데이트, 삭제하고 가져옵니다."
+  },
+  "rum-replay-playlists": {
+    "name": "RUM Replay Playlists",
+    "description": "RUM 리플레이 세션의 플레이리스트를 생성하고 관리합니다. 분석 및 협업을 위해 리플레이 세션 컬렉션을 구성, 분류하고 공유합니다."
+  },
+  "rum-replay-sessions": {
+    "name": "RUM Replay Sessions",
+    "description": "RUM 리플레이 세션의 세그먼트를 가져옵니다. 이벤트 플랫폼 또는 블롭(blob) 스토리지에 저장된 Session Replay 데이터에 액세스합니다."
+  },
+  "rum-replay-viewership": {
+    "name": "RUM Replay Viewership",
+    "description": "RUM 리플레이 세션의 시청 기록을 추적하고 관리합니다. 누가 리플레이 세션을 시청하는지 모니터링하고, 감사 및 분석 용도로 시청 기록을 유지 관리합니다."
+  },
+  "rum-retention-filters": {
+    "name": "Rum Retention Filters",
+    "description": "조직 RUM의 [애플리케이션 관리](https://app.datadoghq.com/rum/list)를 통해 보존 필터를 관리합니다."
+  },
+  "rum-teams-ownership": {
+    "name": "RUM Teams Ownership",
+    "description": "RUM 보기와 해당 보기를 소유한 팀 간의 팀 소유권 매핑을 관리합니다.\n<https://docs.datadoghq.com/real_user_monitoring/ownership_of_views/>를 참조하세요."
+  },
+  "scim": {
+    "name": "SCIM",
+    "description": "SCIM API를 사용해 Datadog 사용자와 팀을 프로비저닝합니다.\n\n참고: 현재 Datadog 팀에 대한 SCIM 프로비저닝은 일부 조직에서만 사용할 수 있습니다. Datadog 지원팀에 문의하여 액세스를 요청하거나 [SCIM 페이지](https://docs.datadoghq.com/account_management/scim/)에서 자세한 정보를 참조하세요."
+  },
+  "salesforce-integration": {
+    "name": "Salesforce Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Salesforce 통합](https://docs.datadoghq.com/integrations/salesforce/)을\n구성합니다."
+  },
+  "scorecards": {
+    "name": "Scorecards",
+    "description": "스코어카드 규칙과 결과를 만들고 업데이트하는 API입니다. 자세한 정보는 [Scorecards](https://docs.datadoghq.com/service_catalog/scorecards)를 참조하세요."
+  },
+  "seats": {
+    "name": "Seats",
+    "description": "Seats API를 사용하면 조직의 좌석을 조회, 할당 및 할당 취소할 수 있습니다."
   },
   "security-monitoring": {
-    "name": "보안 모니터링",
-    "description": "보안 규칙, 신호, 필터 등을 생성하고 관리하세요. 자세한 정보는 [Datadog 보안 페이지](https://docs.datadoghq.com/security/)를 참고하세요."
+    "name": "Security Monitoring",
+    "description": "보안 규칙, 신호, 필터 등을 만들고 관리합니다. 자세한 정보는 [Datadog Security 페이지](https://docs.datadoghq.com/security/)를 참조하세요."
   },
   "sensitive-data-scanner": {
     "name": "Sensitive Data Scanner",
-    "description": "민감한 데이터 스캐너 그룹 및 규칙을 생성, 업데이트, 삭제, 가져오기할 수 있습니다. 자세한 정보는 [민감한 데이터 스캐너 페이지](https://docs.datadoghq.com/sensitive_data_scanner/)를 참고하세요."
+    "description": "민감한 데이터 스캐너 그룹과 규칙을 생성, 업데이트, 삭제 및 검색합니다. 자세한 정보는 [Sensitive Data Scanner 페이지](https://docs.datadoghq.com/sensitive_data_scanner/)를 참조하세요."
   },
   "service-accounts": {
-    "name": "서비스 계정",
-    "description": "서비스 계정을 생성, 편집, 비활성화할 수 있습니다. 자세한 정보는 [서비스 계정 페이지](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)를 참고하세요."
+    "name": "Service Accounts",
+    "description": "서비스 계정을 생성, 편집하고 비활성화합니다. 자세한 정보는 [서비스 계정 페이지](https://docs.datadoghq.com/account_management/org_settings/service_accounts/)를 참조하세요."
   },
   "service-definition": {
-    "name": "서비스 정의",
-    "description": "서비스 대상을 생성, 업데이트, 가져오기할 수 있는 API"
+    "name": "Service Definition",
+    "description": "서비스 정의를 만들고 업데이트하고 검색하고 삭제하는 API입니다.\n참고: Service Catalog [v3.0 스키마](https://docs.datadoghq.com/service_catalog/service_definitions/v3-0/)에는 [Software Catalog](https://docs.datadoghq.com/api/latest/software-catalog/)에 새 API 엔드포인트가 문서화되어 있습니다. v2.2 이전 버전의 경우 다음 Service Definition 엔드포인트를 사용하세요."
   },
   "service-level-objectives": {
-    "name": "서비스 수준 목표(S\bLO)",
-    "description": "[서비스 수준 목표(SLO, Service Level Objectives)](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)는 사이트 안정성 엔지니어링 툴킷의 핵심 구성요소이며 애플리케이션 성능에 구체적인 목표를 정의할 수 있는 프레임워크를 제공합니다. 이를 통해 각 팀에서 일관된 고객 경험을 제공하고 기능 개발과 플랫폼 안정성의 균형을 유지하며 내부 및 외부 사용자와의 커뮤니케이션을 개선할 수 있도록 도와줍니다."
+    "name": "Service Level Objectives",
+    "description": "[Service Level Objectives](https://docs.datadoghq.com/monitors/service_level_objectives/#configuration)\n(SLO)는 사이트 안정성 엔지니어링 도구 키트의 핵심 요소입니다.\nSLO는 애플리케이션 성능에 관한 명확한 목표를 정하는 프레임워크로,\n궁극적으로 일관성 있는 고객 경험을 제공하고\n기능 개발과 플랫폼 안정성의 균형을 잡으며\n사내외 사용자와 커뮤니케이션을 개선하는 데 도움이 됩니다."
   },
-  "service-scorecards": {
-    "name": "서비스 성과 기록표",
-    "description": "성과 기록표 규칙과 결과를 생성 및 업데이트할 수 있는 API입니다. 자세한 정보는 [서비스 성과 기록표](https://docs.datadoghq.com/service_catalog/scorecards)를 참고하세요.\n\n이 기능은 현재 베타 서비스 중입니다. 피드백이 있으면 [Datadog 지원팀](https://docs.datadoghq.com/help/)에 문의하세요."
+  "servicenow-integration": {
+    "name": "ServiceNow Integration",
+    "description": "ServiceNow 통합을 관리합니다. ServiceNow는 조직이 엔터프라이즈 작업의 디지털 워크플로를 관리하는 데 도움이 되는 클라우드 기반 플랫폼입니다."
+  },
+  "slack-integration": {
+    "name": "Slack Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Slack 통합](https://docs.datadoghq.com/integrations/slack/)을\n구성합니다."
+  },
+  "software-catalog": {
+    "name": "Software Catalog",
+    "description": "Software Catalog 엔터티를 생성, 업데이트, 검색 및 삭제하는 API입니다."
+  },
+  "spa": {
+    "name": "Spa",
+    "description": "SPA(Spark Pod Autosizing) API입니다. Spark 작업 구성을 최적화하는 데 도움이 되는 리소스 권장 사항 및 비용 인사이트를 제공합니다."
   },
   "spans": {
-    "name": "스팬",
-    "description": "Datadog 플랫폼에서 HTTP를 통해 스팬을 검색하고 집계할 수 있습니다."
+    "name": "Spans",
+    "description": "HTTP로 Datadog 플랫폼에서 스팬을 검색하고 집계합니다."
   },
   "spans-metrics": {
-    "name": "Google",
-    "description": "조직의 [스팬 기반 메트릭](https://app.datadoghq.com/apm/traces/generate-metrics)의 구성을 관리하세요. 자세한 정보는 [스팬에서 메트릭 생성](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)을 참고하세요."
+    "name": "Spans Metrics",
+    "description": "조직의 [스팬 기반 메트릭](https://app.datadoghq.com/apm/traces/generate-metrics) 구성을 관리합니다. 자세한 정보는 [스팬에서 메트릭 생성](https://docs.datadoghq.com/tracing/trace_pipeline/generate_metrics/)을 참조하세요."
+  },
+  "static-analysis": {
+    "name": "Static Analysis",
+    "description": "정적 분석용 API"
+  },
+  "status-pages": {
+    "name": "Status Pages",
+    "description": "상태 페이지를 관리하고 Datadog의 API를 통해 서비스 중단을 이해관계자에게 전달합니다. 자세한 정보는 [상태 페이지 설명서](https://docs.datadoghq.com/incident_response/status_pages/)를 참조하세요."
+  },
+  "statuspage-integration": {
+    "name": "Statuspage Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Statuspage 통합](https://docs.datadoghq.com/integrations/statuspage/)을\n구성합니다."
+  },
+  "stegadography": {
+    "name": "Stegadography",
+    "description": "대시보드 스크린샷에 삽입된 워터마크를 추출하여 캐시된 위젯 상태를 가져옵니다."
+  },
+  "storage-management": {
+    "name": "Storage Management",
+    "description": "S3 버킷, GCS 버킷 및 Azure 컨테이너에 대해 스토리지 관리를 활성화합니다. 각 구성에서는 모니터링되는 스토리지의 인벤토리 보고서를 저장하는 대상을 등록합니다."
   },
   "synthetics": {
-    "name": "신서틱",
-    "description": "Datadog Synthetics에서는 시뮬레이션된 사용자 요청과 브라우저 렌더링을 사용해 애플리케이션이 원활하게 \n작동하도록 돕고, 오류가 발생한 부분을 파악하며, 애플리케이션 성능을 추적합니다. \nDatadog Synthetics 테스트에는 [API 테스트](https://docs.datadoghq.com/synthetics/api_tests/)와\n[브라우저 테스트](https://docs.datadoghq.com/synthetics/browser_tests) 두 종류가 있습니다. Datadog API를 사용해 프로그램밍 방식으로 두 테스트 유형 모두 관리할 수 있습니다.\n\nSynthetics에 관한 자세한 정보는 [Synthetics 개요](https://docs.datadoghq.com/synthetics/)를 참고하세요."
+    "name": "Synthetics",
+    "description": "Synthetic 테스트는 시뮬레이션된 요청과 작업을 사용하므로 시스템 및 애플리케이션의 가용성과 성능을 모니터링할 수 있습니다. Datadog은 다음과 같은 유형의 Synthetic 테스트를 지원합니다.\n- [API 테스트](https://docs.datadoghq.com/synthetics/api_tests/)\n- [브라우저 테스트](https://docs.datadoghq.com/synthetics/browser_tests)\n- [Network Path 테스트](https://docs.datadoghq.com/synthetics/network_path_tests/)\n- [모바일 애플리케이션 테스트](https://docs.datadoghq.com/synthetics/mobile_app_testing)\nDatadog API를 사용하여 테스트 및 테스트 제품군을 프로그래밍 방식으로 생성, 관리 및 구성할 수 있습니다.\n자세한 정보는 [Synthetic Monitoring 설명서](https://docs.datadoghq.com/synthetics/)를 참조하세요."
+  },
+  "tag-rules": {
+    "name": "Tag Rules",
+    "description": "태그 규칙은 특정 텔레메트리 소스를 대상으로\n특정 태그 키에 허용되는 태그 값을 결정하는 규칙을 정의합니다(예: 로그, 스팬 또는 메트릭). 규칙은\n`blocking`(규칙과 일치하지 않는 데이터가 거부됨) 또는 `surfacing`(일치하는 데이터가\n강조 표시되지만 차단되지는 않음)으로 설정할 수 있습니다. 각 규칙은 최근 텔레메트리가 해당 규칙을 얼마나 준수하는지를 기반으로\n산출된 규정 준수 `score`를 보고합니다."
   },
   "teams": {
     "name": "Teams",
-    "description": "Datadog 내에서 팀을 보고 관리하세요. 자세한 정보는 [팀 페이지](https://docs.datadoghq.com/account_management/teams/)를 참고하세요."
+    "description": "Datadog 내에서 팀을 조회하고 관리합니다. 자세한 정보는 [Teams 페이지](https://docs.datadoghq.com/account_management/teams/)를 참조하세요."
+  },
+  "test-optimization": {
+    "name": "Test Optimization",
+    "description": "Test Optimization을 통해 비정상적 테스트를 검색하고 관리합니다. 자세한 정보는 [Test Optimization 페이지](https://docs.datadoghq.com/tests/)를 참조하세요."
+  },
+  "threat-intelligence": {
+    "name": "Threat Intelligence",
+    "description": "보안 강화 및 조사를 위해 위협 인텔리전스 데이터를 수집하고 관리합니다."
+  },
+  "twilio-integration-accounts": {
+    "name": "Twilio Integration Accounts",
+    "description": "Datadog API를 통해 직접 Datadog Twilio 통합 계정을 관리합니다.\n계정을 생성, 업데이트 및 삭제하고, 인증 및 설정을 구성하며, 클러스터 메트릭,\n메시지 로그, 이벤트 로그, 경보, 통화 요약 및 Cloud Cost Management 메트릭과 같은\n데이터 흐름을 활성화하거나 비활성화합니다. 자세한 정보는\n[Twilio 통합 페이지](https://docs.datadoghq.com/integrations/twilio/)를\n참조하세요."
   },
   "usage-metering": {
-    "name": "사용량 측정",
-    "description": "사용량 측정 API를 사용하면 Datadog 패싯 전체에서 시간별,\n 일별, 월별 사용량을 확인할 수 있습니다.\n프로 및 엔터프라이즈 고객은 이 API를 이용할 수 있습니다.\n\n**참고**: 사용량 데이터는 발생한 후 적용되는 데 최대 72 시간이 걸릴 수 있습니다.\n데이터는 15개월 동안 보유됩니다.\n\n여러 조직에서 24시간 동안의 시간별 사용량 데이터를 가져올 수 있고 \n단일 요청으로 조직 하나의 시간별 사용량 데이터 2개월 분을 가져올 수 있습니다.\n자세한 내용은 [사용량 상세 설명서](https://docs.datadoghq.com/account_management/billing/usage_details/)를 참고하세요."
+    "name": "Usage Metering",
+    "description": "Usage Metering API를 사용하면 Datadog의 여러 측면에 걸쳐\n시간별, 일별 및 월별 사용량을 확인할 수 있습니다.\n이 API는 모든 Pro 및 Enterprise 고객이 사용할 수 있습니다.\n\n**참고**: 사용량 데이터는 발생 시점으로부터 최대 72시간 지연됩니다.\n보존 기간은 15개월입니다.\n\n요청 한 번으로 여러 조직에 대해 최대 24시간의 시간별 사용량 데이터,\n단일 조직에 대해서는 최대 2개월의 시간별 사용량 데이터를 가져올 수 있습니다.\n자세한 정보는 [사용량 세부 정보 설명서](https://docs.datadoghq.com/account_management/billing/usage_details/)를 참조하세요."
+  },
+  "user-authorized-clients": {
+    "name": "User Authorized Clients",
+    "description": "사용자 수준에서 OAuth2 클라이언트 인증을 관리합니다."
   },
   "users": {
-    "name": "사용자",
-    "description": "사용자 생성, 편집 비활성화하기"
+    "name": "Users",
+    "description": "사용자를 생성, 편집 및 비활성화합니다."
+  },
+  "webhooks-integration": {
+    "name": "Webhooks Integration",
+    "description": "Datadog API를 통해 직접 [Datadog Webhooks 통합](https://docs.datadoghq.com/integrations/webhooks/)을\n구성합니다."
+  },
+  "widgets": {
+    "name": "Widgets",
+    "description": "저장된 위젯을 생성, 조회, 업데이트 및 삭제합니다. 위젯은\n대시보드 또는 노트북과 별개로 저장되는 재사용 가능한 시각화 구성 요소이며,\n경험 유형별로 파티션되고 UUID로 식별됩니다."
+  },
+  "workflow-automation": {
+    "name": "Workflow Automation",
+    "description": "Datadog Workflow Automation을 사용하면 Datadog을 나머지 기술 스택과 연결해 전체 프로세스를 자동화할 수 있습니다. 워크플로를 빌드하여 경보를 자동 수정하고, 인시던트 및 보안 프로세스를 간소화하고, 수작업 부담을 줄이세요. Workflow Automation은 AWS, JIRA, ServiceNow, GitHub 및 OpenAI를 비롯한 1,000개 이상의 OOTB 액션을 지원합니다. 자세한 정보는 [여기](https://docs.datadoghq.com/service_management/workflows/)의 Datadog Workflow Automation 문서를 참조하세요."
   }
 }

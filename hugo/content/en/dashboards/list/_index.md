@@ -55,7 +55,7 @@ To edit the teams associated with one or more dashboards, take the following ste
 
 Dashboard lists groups dashboards so you and your team can switch between dashboards within the same context. You can add dashboards to [preset lists](#preset-lists) or to a custom list.
 
-1. To create a dashboard list, click {{< ui >}}+ New List{{< /ui >}} in the upper right.
+1. To create a dashboard list, click {{< ui >}}\+ New List{{< /ui >}} in the upper right.
 1. Click the pencil icon to change a list's title. The list's title is automatically set with the user's first name. For example, `John's list`.
 1. Add dashboards to a list. In the [{{< ui >}}All Dashboards{{< /ui >}}](#view-all-dashboards) table, check the checkboxes next to the Dashboard title. Then click the {{< ui >}}Add to{{< /ui >}} dropdown in the upper right corner of the Dashboard list and select the list.
 

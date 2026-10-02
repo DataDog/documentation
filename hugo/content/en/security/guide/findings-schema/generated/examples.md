@@ -3,6 +3,7 @@ build:
   render: never
   list: never
 ---
+
 {{< tabs >}}
 {{% tab "API Security" %}}
 
@@ -297,6 +298,114 @@ build:
   "tags": [
     "origin:agentless-scanner",
     "source:vulnerability_management"
+  ]
+}
+```
+
+{{% /tab %}}
+{{% tab "Code Quality" %}}
+
+```json
+{
+  "base_severity": "low",
+  "description": "A complex nested conditional makes this function difficult to read and maintain.",
+  "detection_changed_at": 1738575599859,
+  "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
+  "finding_type": "code_quality",
+  "first_seen_at": 1738575592659,
+  "git": {
+    "branch": "main",
+    "default_branch": "main",
+    "is_default_branch": true,
+    "repository_id": "123456789",
+    "repository_url": "https://github.com/example-org/my-app/",
+    "sha": "abcdef1234567890abcdef1234567890abcdef12"
+  },
+  "is_in_security_inbox": false,
+  "last_seen_at": 1738624280889,
+  "metadata": {
+    "schema_version": "2"
+  },
+  "origin": [
+    "static-analysis"
+  ],
+  "resource_id": "github.com/example-org/my-app/src/services/payment.ts:42",
+  "resource_name": "payment.ts",
+  "resource_type": "source_code_file",
+  "rule": {
+    "id": "code-quality-001-complex-conditional",
+    "name": "Avoid overly complex conditional logic",
+    "type": "code_quality",
+    "version": 1
+  },
+  "severity": "low",
+  "status": "open",
+  "title": "Simplify complex conditional logic",
+  "workflow": {
+    "auto_closed_at": 1738575600859,
+    "automations": {
+      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "rule_name": "mute misconfigs with free text query",
+      "rule_type": "mute"
+    },
+    "due_date": {
+      "due_at": 1738575599859,
+      "is_overdue": false,
+      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    "integrations": {
+      "cases": {
+        "assignee": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        },
+        "created_at": 1738575599859,
+        "created_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        },
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "jira_issue": {
+          "key": "PROJ-12345",
+          "status": "To Do",
+          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+        },
+        "key": "CASE-42",
+        "status": "open",
+        "updated_at": 1738575599859,
+        "updated_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        }
+      }
+    },
+    "mute": {
+      "description": "Free text",
+      "expire_at": 1738575599859,
+      "is_muted": false,
+      "is_muted_by_rule": false,
+      "muted_at": 1738575599859,
+      "muted_by": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
+      },
+      "reason": "Resource deleted"
+    },
+    "triage": {
+      "assignee": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice",
+        "updated_at": 1738575600859,
+        "updated_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        }
+      }
+    }
+  },
+  "tags": [
+    "origin:static-analysis",
+    "source:code_security"
   ]
 }
 ```

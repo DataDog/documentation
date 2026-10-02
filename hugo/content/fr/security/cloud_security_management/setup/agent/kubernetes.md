@@ -14,7 +14,7 @@ Utilisez les instructions suivantes pour activer Misconfigurations et Vulnerabil
 
 ## Prérequis {#prerequisites}
 
-- Dernière version du Datadog Agent. Pour obtenir des instructions d'installation, consultez [Getting Started with the Agent][5] ou installez l'Agent depuis le [Datadog UI][6].
+- Dernière version du Datadog Agent. Pour obtenir des instructions d'installation, consultez [Débuter avec l'Agent][5] ou installez l'Agent depuis l'[interface utilisateur de Datadog][6].
 
 **Remarque** : SBOM collection n'est pas compatible avec l'image streaming feature dans Google Kubernetes Engine (GKE). Pour la désactiver, consultez la section [Disable Image streaming][7] de la documentation GKE.
 
@@ -56,7 +56,7 @@ Utilisez les instructions suivantes pour activer Misconfigurations et Vulnerabil
             # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
             analyzers: ["os", "languages"]
 
-          # Enables runtime package prioritization (Preview, Agent 7.79+)
+          # Enables runtime package prioritization (Agent 7.79+)
           # See Runtime Package Prioritization section below.
           enrichment:
             usage:
@@ -97,7 +97,7 @@ Utilisez les instructions suivantes pour activer Misconfigurations et Vulnerabil
           # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
           analyzers: ["os", "languages"]
 
-        # Enables runtime package prioritization (Preview, Agent 7.79+)
+        # Enables runtime package prioritization (Agent 7.79+)
         # See Runtime Package Prioritization section below.
         enrichment:
           usage:
@@ -159,19 +159,19 @@ Utilisez les instructions suivantes pour activer Misconfigurations et Vulnerabil
                     type: Unconfined
     ```
 
-3. Redémarrez le Datadog Agent.
+3. Redémarrez l'Agent.
 
 {{% /tab %}}
 
 {{< /tabs >}}
 
-**Remarque** : `enrichment.usage.enabled: true` nécessite le Datadog Agent **7.79.0 ou une version ultérieure**. Consultez la section [Runtime Package Prioritization](#runtime-package-prioritization-preview) pour connaître les prérequis.
+**Remarque** : `enrichment.usage.enabled: true` nécessite le Datadog Agent **7.79.0 ou une version ultérieure**. Consultez la section [Runtime Package Prioritization](#runtime-package-prioritization) pour connaître les exigences.
 
 **Remarque** : L'analyseur `languages` nécessite le Datadog Agent **7.70 ou une version ultérieure**. Lorsqu'il est activé, il détecte les vulnérabilités dans les bibliothèques d'applications gérées par les gestionnaires de paquets ci-dessous, en plus des paquets du système d'exploitation. Lorsque le champ `analyzers` est omis, Datadog analyse uniquement les paquets du système d'exploitation pour les images de conteneur.
 
 ### Gestionnaires de paquets de bibliothèques d'applications pris en charge {#supported-application-library-package-managers}
 
-L<small>'</small>analyzer `languages` couvre les écosystèmes de paquets suivants :
+L'analyseur `languages` couvre les écosystèmes de paquets suivants :
 
 | Écosystème | Gestionnaire de paquets/format |
 |-----------|------------------------|
@@ -189,7 +189,7 @@ L<small>'</small>analyzer `languages` couvre les écosystèmes de paquets suivan
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Prioritization (Preview) {#runtime-package-prioritization-preview}
+## Runtime Package Prioritization {#runtime-package-prioritization}
 
 Runtime package prioritization identifie quels packages dans une image de conteneur sont utilisés à l'exécution, afin que vous puissiez prioriser les vulnérabilités du code qui s'exécute par rapport aux vulnérabilités des packages installés mais jamais exécutés.
 
@@ -197,17 +197,17 @@ Lorsqu'il est activé, le Datadog Agent utilise eBPF pour observer l'accès aux 
 
 | Signal | Ce qu'il vous indique |
 |--------|-------------------|
-| Le paquet est en cours d'exécution | Les fichiers du paquet ont été observés comme étant accédés par un processus en cours d'exécution. |
-| Accédé par le processus root | Le paquet a été accédé par un processus s'exécutant en tant que root (UID 0). |
+| Package is running | Les fichiers du paquet ont été observés comme étant accédés par un processus en cours d'exécution. |
+| Accessed by root process | Le paquet a été accédé par un processus s'exécutant en tant que root (UID 0). |
 | SUID binary present | Le paquet contient un binaire avec le bit SUID défini, ce qui peut permettre une élévation de privilèges. |
 
-*Package is running* alimente la dimension **Reachability** du [Runtime Prioritization Engine][9]. Pour interroger ces signaux directement, consultez [Filter findings by runtime signals][10].
+*Package is running* alimente la dimension **Reachability** du [Runtime Prioritization Engine][9]. Pour interroger ces signaux directement, consultez [Filtrer les résultats par signaux d'exécution][10].
 
 **Prérequis** :
 - Datadog Agent **7.79.0 ou version ultérieure**. Sur Kubernetes, utilisez **7.81.0 ou version ultérieure** pour une couverture de signal la plus complète.
 - Linux uniquement (dépendance eBPF). Consultez [Workload Protection setup][11] pour les distributions et les versions de noyau prises en charge.
 
-Runtime signals s'appliquent aux gestionnaires de paquets du système d'exploitation (`apt`, `yum` ou `apk`) dans les résultats de vulnérabilité des images de conteneur.
+Les signaux d'exécution s'appliquent aux gestionnaires de paquets du système d'exploitation (`apt`, `yum` ou `apk`) dans les résultats de vulnérabilité des images de conteneur.
 
 {{< tabs >}}
 
@@ -222,7 +222,7 @@ spec:
       enabled: true
       containerImage:
         enabled: true
-      # Enables runtime package prioritization (Preview, Agent 7.79+)
+      # Enables runtime package prioritization (Agent 7.79+)
       enrichment:
         usage:
           enabled: true
@@ -241,7 +241,7 @@ datadog:
   sbom:
     containerImage:
       enabled: true
-    # Enables runtime package prioritization (Preview, Agent 7.79+)
+    # Enables runtime package prioritization (Agent 7.79+)
     enrichment:
       usage:
         enabled: true
@@ -274,7 +274,7 @@ Redémarrez l'Agent.
 
 {{< /tabs >}}
 
-Pour vérifier la configuration, filtrez les résultats de vulnérabilité par [runtime signals][10].
+Pour vérifier la configuration, filtrez les résultats de vulnérabilité par [signaux d'exécution][10].
 
 [1]: /fr/security/cloud_security_management/misconfigurations/
 [2]: /fr/security/threats

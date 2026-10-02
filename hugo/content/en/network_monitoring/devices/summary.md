@@ -45,6 +45,8 @@ The {{< ui >}}Network health{{< /ui >}} section summarizes your overall network 
 
 A Bits AI summary explains the current state of your network. It highlights affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click {{< ui >}}Chat with Bits Assistant{{< /ui >}} to ask follow-up questions.
 
+You can also query device and interface data from an AI agent, such as Claude Code or Cursor, with the `search_ndm_devices`, `get_ndm_device`, and `search_ndm_interfaces` tools in the [Datadog MCP Server][12].
+
 Below the summary, a status panel shows the total device count broken down by status, the number of active monitor alerts and warnings, and the number of active issues. Click {{< ui >}}View Health{{< /ui >}} to open the [Device Health][5] view.
 
 ### Interface health
@@ -125,3 +127,4 @@ Click [{{< ui >}}View all changes{{< /ui >}}][11] to open the full Changes view.
 [9]: https://app.datadoghq.com/devices/summary/device-cpu
 [10]: https://app.datadoghq.com/devices/summary/device-memory
 [11]: https://app.datadoghq.com/devices/summary/changes
+[12]: /mcp_server/tools/#networks

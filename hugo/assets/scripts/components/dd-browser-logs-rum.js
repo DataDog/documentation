@@ -45,6 +45,8 @@ if (window.DD_RUM) {
 
         window.DD_RUM.startSessionReplayRecording();
 
+        window.DD_RUM.setGlobalContextProperty('stack', 'hugo');
+
         if (branch) {
             window.DD_RUM.setGlobalContextProperty('branch', branch);
         }
@@ -71,6 +73,7 @@ if (window.DD_LOGS) {
     window.DD_LOGS.setGlobalContextProperty('host', window.location.host);
     window.DD_LOGS.setGlobalContextProperty('referrer', document.referrer);
     window.DD_LOGS.setGlobalContextProperty('lang', lang);
+    window.DD_LOGS.setGlobalContextProperty('stack', 'hugo');
 
     if (branch) {
         window.DD_LOGS.setGlobalContextProperty('branch', branch);
@@ -97,6 +100,23 @@ const handleCdocsCustomRumAction = () => {
     }
 };
 
+const handleHomepageEnablementBannerViewSessions = () => {
+    /**
+     * Tracks the view sessions button in Datadog RUM.
+     */
+    const enablementBanner = document.querySelector('.home-enablement-banner');
+    if (enablementBanner) {
+        const viewSessionsButton = enablementBanner.querySelector('a[data-dd-action-name="homepage-enablement-banner-view-sessions"]');
+        if (viewSessionsButton) {
+            viewSessionsButton.addEventListener('click', () => {
+                window.DD_RUM.addAction('enablement_sessions_banner_cta_clicked', {
+                    button_text: viewSessionsButton.textContent,
+                });
+            });
+        }
+    }
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.clientFiltersManager) {
         handleCdocsCustomRumAction();
@@ -109,4 +129,5 @@ document.addEventListener('DOMContentLoaded', () => {
             window.DD_RUM.addAction('cdocs_page_rerendered', {});
         });
     }
+    handleHomepageEnablementBannerViewSessions();
 });

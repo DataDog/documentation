@@ -47,26 +47,27 @@ Vous pouvez créer des workflows ou modifier des workflows existants depuis la p
 
 ## Créer ou modifier un workflow avec l'IA {#create-a-workflow-with-ai}
 
-Si vous ne savez pas par où commencer, vous pouvez générer automatiquement un workflow ou itérer sur un workflow existant avec l'IA.
+Utilisez l'assistance IA dans [Bits Chat][15] pour créer un workflow à partir d'un prompt ou mettre à jour un workflow existant. Bits Chat peut poser des questions de suivi avant de créer ou de mettre à jour le workflow.
 
-Pour générer un workflow :
-1. Depuis la page [Workflow Automation][1], cliquez sur {{< ui >}}New Workflow{{< /ui >}}.
-1. Cliquez sur {{< ui >}}Create a workflow with AI{{< /ui >}}.
-1. Saisissez une invite détaillée pour votre workflow. Spécifiez les intégrations et les actions que vous souhaitez utiliser.
-1. Cliquez sur la flèche vers le haut ({{< ui >}}↑{{< /ui >}}) pour créer votre workflow.
+Pour créer un workflow :
+1. Depuis la page [Workflow Automation][1], cliquez sur {{< ui >}}New workflow{{< /ui >}}.
+1. Sous {{< ui >}}Build a workflow with AI{{< /ui >}}, saisissez un prompt détaillé ou sélectionnez un prompt suggéré.
+1. Cliquez sur la flèche vers le haut ({{< ui >}}↑{{< /ui >}}) pour soumettre le prompt.
+1. Répondez à toutes les questions de suivi, puis confirmez le workflow lorsque cela vous est demandé. Bits crée le workflow et l'ouvre dans l'éditeur de workflow.
 
-Pour itérer sur un workflow existant :
-1. Depuis un workflow existant, cliquez sur {{< ui >}}Edit with AI{{< /ui >}}.
-1. Saisissez une invite détaillée pour le comportement que vous souhaitez ajouter à votre workflow. Incluez les intégrations et les actions que vous souhaitez utiliser.
-1. Cliquez sur la flèche vers le haut ({{< ui >}}↑{{< /ui >}}) pour ajouter la fonctionnalité à votre workflow.
+Vous pouvez également créer un workflow depuis n'importe où dans Datadog avec Bits Chat. Ouvrez Bits Chat en cliquant sur {{< ui >}}Ask Bits{{< /ui >}} dans la barre de navigation en haut à droite ou en appuyant sur <kbd>Cmd</kbd> ou <kbd>Ctrl</kbd> + <kbd>I</kbd>, puis demandez à Bits de créer un workflow.
 
-<div class="alert alert-info">L'IA de Workflow Automation ne répond pas aux questions sur le produit. Si vous avez des questions ou des commentaires, pensez à rejoindre le canal <strong>#workflows</strong> sur le <a href="https://chat.datadoghq.com/">Slack de la communauté Datadog</a></div>
+Pour mettre à jour un workflow existant :
+1. Ouvrez le workflow et cliquez sur l'icône IA <i class="icon-bits-ai"></i> dans la barre d'outils à gauche. Bits Chat s'ouvre avec le workflow attaché comme contexte.
+1. Saisissez un prompt détaillé décrivant les modifications que vous souhaitez.
+1. Cliquez sur la flèche vers le haut ({{< ui >}}↑{{< /ui >}}) pour soumettre le prompt.
+1. Répondez à toutes les questions de suivi, puis confirmez les modifications lorsque cela vous est demandé. Bits met à jour le workflow dans l'éditeur.
 
 ## Créer un workflow personnalisé {#create-a-custom-workflow}
 
 Pour créer un workflow, cliquez sur {{< ui >}}New workflow{{< /ui >}} sur la page [Workflow Automation][1].
 
-Pour configurer votre workflow :
+Pour configurer votre workflow :
 1. Dans le panneau de configuration du workflow, saisissez un {{< ui >}}Name{{< /ui >}} pour votre workflow.
 1. Optionnellement, sélectionnez ou saisissez les tags que vous souhaitez appliquer au workflow. Pour plus d'informations sur les tags Datadog, consultez [Débuter avec les tags][7].
 1. Optionnellement, sélectionnez les [services][8] associés à ajouter au workflow.
@@ -214,3 +215,4 @@ Pour effectuer des tâches à l'aide de l'API, consultez la [documentation de l'
 [12]: /fr/actions/workflows/variables/
 [13]: /fr/api/latest/workflow-automation/
 [14]: /fr/actions/workflows/variables/#context-variables
+[15]: /fr/bits_ai/bits_chat/
