@@ -23,7 +23,7 @@ See GitHub for [full schema definitions][7].
 
 ## Create a custom entity type
 
-You can create custom entity types in Datadog or through the Catalog API. After creating the type, you can add entities of that type in Datadog or programmatically through the [Catalog APIs][2], [GitHub integration][4], or [Terraform module][3]. 
+You can create custom entity types in Datadog or through the Catalog API. After creating the type, you can add entities of that type in Datadog or programmatically through the [Catalog APIs][2], [GitHub integration][4], [GitLab Source Code integration][9], or [Terraform module][3].
 
 ### In Datadog
 
@@ -95,3 +95,4 @@ metadata:
 [6]: /internal_developer_portal/catalog/entity_model/native_entities
 [7]: https://github.com/DataDog/schema/tree/main/service-catalog/v3
 [8]: https://app.datadoghq.com/software/settings/get-started
+[9]: /integrations/gitlab-source-code/

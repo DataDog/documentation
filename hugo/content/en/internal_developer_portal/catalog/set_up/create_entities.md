@@ -1,6 +1,6 @@
 ---
 title: Create Entities
-description: Add entity definitions to Catalog through the Datadog UI or by automating imports with GitHub, Terraform, or the Datadog API.
+description: Add entity definitions to Catalog through the Datadog UI or by automating imports with GitHub, GitLab, Terraform, or the Datadog API.
 disable_toc: false
 aliases:
   - /software_catalog/set_up/new_to_datadog ## aliases for New to Datadog page
@@ -23,6 +23,9 @@ further_reading:
   - link: "/integrations/github"
     tag: "Documentation"
     text: "Learn about the GitHub Integration"
+  - link: "/integrations/gitlab-source-code/"
+    tag: "Documentation"
+    text: "Learn about the GitLab Source Code integration"
   - link: "/api/latest/service-definition/"
     tag: "API"
     text: "Learn about the Service Definition API"
@@ -35,7 +38,7 @@ further_reading:
 
 To add [entity definitions][13] to Catalog, you can:
 - manually create definitions through the Datadog UI.
-- manage definitions in code and automate import through GitHub, Terraform, or the Datadog API.
+- manage definitions in code and automate import through GitHub, GitLab, Terraform, or the Datadog API.
 
 ## Through the Datadog UI
 
@@ -58,7 +61,7 @@ To create an entity definition:
 
 ## Through automation
 
-To automate import through GitHub, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API:
+To automate import through GitHub, GitLab, Terraform, the Datadog Software Metadata Provider, or the Datadog Service Definition API:
 
 ### Create the entity definition
 
@@ -104,11 +107,17 @@ Import the definition in one of the following ways:
    **Note**: Creating and managing services in the Catalog through automated pipelines requires [Datadog Provider][5] v3.16.0 or later.
 
 1. **Datadog APIs**: Import your definition using the [Service Definition API][7] (for schema v2.x) or the [Catalog API][8] (for schema v3+), which are both open-sourced GitHub Action solutions.
-1. **GitHub**: Configure the [Datadog GitHub integration](#github-integration) to manage and import your definitions.
+1. **GitHub or GitLab**: Configure the [GitHub integration][9] or the [GitLab Source Code integration][14] to manage and import your definitions.
 
-#### GitHub integration
+#### GitHub and GitLab integrations
 
-Configure the [GitHub integration][9] to directly link from where you view the service's definition in the Catalog to where it's stored and editable in GitHub. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
+Configure the [GitHub integration][9] or the [GitLab Source Code integration][14] to import entity definitions from your repositories. Datadog scans for the `service.datadog.yaml` and `entity.datadog.yaml` files throughout each repository with read permissions.
+
+After you update the YAML files for your repositories, your changes propagate to the Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+
+To prevent accidental overwriting, create and modify your definition files with either a source code integration (GitHub or GitLab) or the [Definition API endpoints][11]. Updating the same service using both a source code integration and the API may result in unintended overwriting.
+
+##### GitHub integration
 
 To install the GitHub integration:
 1. Navigate to the [integration tile][10].
@@ -118,9 +127,9 @@ When the GitHub integration is set up for your definitions, an **Edit in GitHub*
 
 {{< img src="tracing/software_catalog/svc_cat_contextual_link.png" alt="An Edit in GitHub button appears in the Definition tab of a service in the Catalog" style="width:90%;" >}}
 
-After you update the YAML files for your repositories, your changes propagate to the Catalog. You can register multiple services in one YAML file by creating multiple YAML documents. Separate each document with three dashes (`---`).
+##### GitLab integration
 
-To prevent accidental overwriting, create and modify your definition files with either the GitHub integration or the [Definition API endpoints][11]. Updating the same service using both the GitHub and the API may result in unintended overwriting.  
+To connect your GitLab repositories, follow the setup instructions for the [GitLab Source Code integration][14], available in the [GitLab Source Code integration tile][15]. Store your `service.datadog.yaml` or `entity.datadog.yaml` files in a repository that Datadog has permission to read.
 
 ##### Integration validation
 
@@ -143,3 +152,5 @@ To validate your service definitions ingested by Datadog's GitHub integration, y
 [11]: /api/latest/software-catalog/#create-or-update-entities
 [12]: https://app.datadoghq.com/event/explorer
 [13]: /internal_developer_portal/catalog/entity_model
+[14]: /integrations/gitlab-source-code/
+[15]: https://app.datadoghq.com/integrations/gitlab-source-code/

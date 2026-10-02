@@ -40,6 +40,9 @@ further_reading:
   - link: "/integrations/github"
     tag: "Documentation"
     text: "Learn about the GitHub Integration"
+  - link: "/integrations/gitlab-source-code/"
+    tag: "Documentation"
+    text: "Learn about the GitLab Source Code integration"
   - link: "https://www.datadoghq.com/blog/service-catalog-backstage-yaml/"
     tag: "Blog"
     text: "Import Backstage YAML files into Datadog"
@@ -56,6 +59,8 @@ algolia:
 ## Overview
 
 Catalog uses definition schemas to store and display relevant metadata about your entities. The schemas have built-in validation rules to ensure that only valid values are accepted. You can view warnings in the **Definition** tab on the Catalog side panel for any selected services.
+
+Use the `links` field to add source code links to GitHub or GitLab repositories.
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="A flow chart showing how components of Catalog connect with each other and with your cloud environment " style="width:100%;" >}}
 
@@ -312,7 +317,7 @@ Components (`kind:service`, `kind:datastore`, `kind:queue`, `kind:ui`) inherit a
 - The clause `inheritFrom:<entity_kind>:<name>` is absent in the YAML file.
 
 ### Migrating to v3.0
-v3.0 supports the same methods of creating metadata as previous versions, including Github, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
+v3.0 supports the same methods of creating metadata as previous versions, including GitHub, GitLab, API, Terraform, Backstage, ServiceNow, and the UI. However, there are new [API endpoints][5] and a new [Terraform resource][6] for v3.0.
 
 To migrate existing service YAML files from v1, v2, v2.1, or v2.2 to v3, see [Migrate Your Service Definitions to v3][7].
 

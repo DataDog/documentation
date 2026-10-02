@@ -121,7 +121,7 @@ The **Services & Entities** section displays your team's key services and entiti
 
 In addition to the built-in sections, the **Apps** section lets you add custom apps to the Homepage, so you can bring together the data and actions you find most useful, whether they come from Datadog, an internal tool, or a third-party service. Datadog provides two ways to build these apps: 
 
-- **App Builder**: A low-code, drag-and-drop builder for internal tools. Apps combine prebuilt UI components, Datadog data sources (such as metrics, logs, and monitors), and out-of-the-box actions for services such as GitHub and AWS. For more information, see [App Builder][7].
+- **App Builder**: A low-code, drag-and-drop builder for internal tools. Apps combine prebuilt UI components, Datadog data sources (such as metrics, logs, and monitors), and out-of-the-box actions for services such as GitHub, GitLab, and AWS. For more information, see [App Builder][7].
 - **Datadog Apps**: A code-based path for apps you build locally with React and TypeScript (or JavaScript), using a CLI and your standard development workflow. Choose Datadog Apps when you need team collaboration with source control and CI/CD, AI-assisted local development, integration with services beyond the Action Catalog, or full control over the app's UI and logic. For more information, see [Datadog Apps][8].
 
 To make a custom app available here, first publish it and define its permissions so that your team can view and use it.
