@@ -18,9 +18,9 @@ further_reading:
   text: "Debug live production code without redeploying with Datadog Live Debugger"
 ---
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}
+{{< callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}
 Bits Live Debugger is in Preview. Request access to join the waiting list.
-{{< /beta-callout >}}
+{{< /callout >}}
 
 ## Overview
 

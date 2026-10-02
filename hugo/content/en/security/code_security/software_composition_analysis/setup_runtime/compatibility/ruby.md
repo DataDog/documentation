@@ -30,7 +30,7 @@ The following code security capabilities are supported in the Ruby library, for 
 **Supported Ruby interpreters**
 The Datadog Ruby library supports the latest gem for the following Ruby interpreters:
 
-- [MRI][2] versions 2.1 to 3.1
+- [MRI][2] versions 2.5 and later
 
 These are supported on the following architectures:
 - Linux (GNU) x86-64, aarch64

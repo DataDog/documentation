@@ -82,7 +82,7 @@ If you recently enabled a new AWS service integration but are not seeing metrics
 
 ### What is the difference between API polling and CloudWatch Metric Streams?
 
-| | API polling (default) | CloudWatch Metric Streams |
+| &nbsp; | API polling (default) | CloudWatch Metric Streams |
 |---|---|---|
 | **Typical latency** | ~10 minutes | 2-3 minutes |
 | **Setup** | Included with the AWS integration | Requires separate setup with [Amazon Data Firehose][6] |

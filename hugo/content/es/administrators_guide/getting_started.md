@@ -1,116 +1,114 @@
 ---
-description: Aprende estrategias para empezar a utilizar tu nueva instalación de Datadog.
+description: Aprenda estrategias para comenzar con su nueva instalación de Datadog.
 further_reading:
 - link: /getting_started/support/
   tag: Documentación
-  text: Empezando con el soporte técnico de Datadog
-title: Empezando
+  text: Introducción al soporte de Datadog
+title: Introducción
 ---
+## Descripción general {#overview}
 
-## Información general
+Esta guía de Introducción ofrece estrategias para implementar Datadog de manera efectiva en su organización. Explore recursos de asistencia, cursos del Learning Center para profundizar sus conocimientos, e instrucciones para configurar un entorno de prueba.
 
-Esta guía Empezando te ofrece estrategias para implementar eficazmente Datadog en tu organización. Explora los recursos de ayuda, los cursos del Centro de aprendizaje para ampliar tus conocimientos y las instrucciones para configurar un entorno de prueba.
+## Obtener ayuda {#getting-help}
 
-## Obtener ayuda
+### Recursos de autoservicio {#self-service-resources}
 
-### Recursos de autoservicio
+A medida que avance en esta guía, puede consultar los siguientes recursos de autoservicio:
 
-A medida que avances en esta guía, puedes consultar los siguientes recursos de autoservicio:
+* [Cursos de capacitación](#learn-datadog-basics) de Datadog.
+* La [documentación][16] de Datadog, especialmente las páginas de [Introducción][17], para familiarizarse más con la plataforma.  
+* La [Datadog UI][18], que proporciona ayuda en contexto, información sobre campos de configuración específicos, notas de la versión y otros recursos; haga clic en el <kbd>?</kbd> icono en toda la aplicación o en la parte inferior de la navegación del producto.
 
-* Cursos de [formación de Datadog](#learn-datadog-basics).
-* La [documentación][16] de Datadog, especialmente las páginas [Empezando][17], para familiarizarte aún más con la plataforma.  
-* La [interfaz de usuario de Datadog][18], que proporciona ayuda en contexto, información sobre campos específicos de configuración, notas de versión y otros recursos, haz clic en el icono <kbd>?</kbd> en toda la aplicación, o en la parte inferior de navegación del producto.
+{{< img src="/administrators_guide/help_center.png" alt="Captura de pantalla del centro de ayuda en el Datadog UI" style="width:90%;">}} 
 
-{{< img src="/administrators_guide/help_center.png" alt="Captura de pantalla del centro de ayuda en la interfaz de usuario de Datadog" style="width:90%;">}} 
+### Enviar un ticket de soporte {#file-a-support-ticket}
 
-### Presentar un tique de soporte
+Para obtener soporte cuando se encuentre un problema:
 
-Para obtener ayuda cuando te encuentres con un problema:
+* [**Soporte de Datadog**][20]: Disponible para ayudar con problemas difíciles, guiar su instalación, traducir problemas a condiciones locales, identificar errores y agregar al registro las solicitudes de funciones.
+* [**Datadog Agent flare**][21]: Esta herramienta de CLI crea automáticamente un nuevo ticket de soporte y envía un archivo comprimido con archivos de registro relevantes redactados, configuraciones de nivel de depuración y configuraciones locales al soporte de Datadog, sin necesidad de iniciar sesión. Para obtener información sobre cómo usar y enviar el flare al soporte de Datadog, consulte [envío de un flare][21].  
+* [**Fleet Automation**][5]: Permite la generación remota de flare desde la interfaz de usuario de la plataforma.
 
-* [**Soporte de Datadog**][20]: disponible para ayudarte con problemas difíciles, guiar tu instalación, traducir problemas a condiciones locales, identificar errores y loguear solicitudes de características.
-* [**Flare del Datadog Agent**][21]: esta herramienta de CLI crea automáticamente un nuevo tique de soporte y envía un archivo comprimido con los archivos de log pertinentes redactados, los ajustes del nivel de depuración y las configuraciones locales al soporte de Datadog, sin necesidad de iniciar sesión. Para obtener información sobre cómo utilizar y enviar el flare al soporte de Datadog, consulta [envío de un flare][21].  
-* [Automatización de flotas**][5]: permite la generación remota de flares desde la interfaz de usuario de la plataforma.
+## Aprenda los conceptos básicos de Datadog {#learn-datadog-basics}
 
-## Aprender los conceptos básicos de Datadog
+Familiarícese con las partes de Datadog que son más importantes para su incidencia de uso. Comience inscribiéndose en nuestros cursos gratuitos del [Learning Center][1]. Incorpore los siguientes cursos a sus flujos de trabajo de incorporación:
 
-Ponte al día con las partes de Datadog que son más importantes para tu caso de uso. Empieza por inscribirte en nuestros cursos gratuitos del [Centro de formación][1]. Incluye los siguientes cursos a tus flujos de trabajo de incorporación:
-
-**Empezando**:
+**Introducción**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Fundación de Datadog{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Fundamentos de Datadog{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Prácticas recomendadas de etiquetado{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Gestión de Software Catalog{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Administración del catálogo{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Administradores**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/agent-on-host" >}}El Agent en un host{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent" >}}Monitorización de un clúster de Kubernetes{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/dd-api-automation-iac" >}}API de Datadog: Automatización e infraestructura como código{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/agent-on-host" >}}El Agent en un servidor{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/monitoring-k8s-cluster-agent" >}}Monitoreo de un clúster de Kubernetes{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/dd-api-automation-iac" >}}Datadog API: automatización e infraestructura como código{{< /nextlink >}}
 {{< /whatsnext >}} 
 
 **Interfaz de usuario**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Introducción a dashboards{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}Detección de widgets de gráficos{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}Introducción a los dashboards{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}Descubrimiento de widgets de gráficos{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/dashboards-slos" >}}Uso de dashboards y SLOs{{< /nextlink >}}
 {{< /whatsnext >}}
 
-**Ingenieros de fiabilidad del sitio**:
+**Ingenieros de confiabilidad del sitio**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Datadog 101: ingeniero de fiabilidad del sitio{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}Monitores y alertas de APM{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/core-web-vitals-lab" >}}Uso de Datadog RUM para rastrear Core Web Vitals{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-sre" >}}Datadog 101: ingeniero de confiabilidad del sitio{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/apm-monitors-and-alerting" >}}Monitors and Alerting de APM{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/core-web-vitals-lab" >}}Uso de Datadog RUM para realizar un seguimiento de las métricas web principales{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Desarrolladores**:
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/apm-java-host" >}}Configuración de APM para aplicaciones de Java{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-dev" >}}Datadog 101: desarrollador{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/tracking-errors-rum-javascript" >}}Seguimiento de errores con RUM para aplicaciones web de javascript{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/apm-java-host" >}}Configure APM para aplicaciones Java{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/dd-101-dev" >}}Datadog 101: Desarrollador{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/tracking-errors-rum-javascript" >}}Seguimiento de errores con RUM para aplicaciones web JavaScript{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Crear un entorno de test
+## Cree un entorno de prueba {#create-a-test-environment}
 
-Después de completar algunos cursos, aplica lo que has aprendido a tus condiciones locales. Instala y experimenta con Datadog en un sandbox de bajo riesgo, para familiarizarte con el entorno. Crea un entorno sencillo y accesible para desarrollar tu configuración de monitorización antes de una instalación más amplia.
+Después de completar algunos cursos, aplique lo que ha aprendido a sus condiciones locales. Instale y experimente con Datadog en un entorno aislado de bajo riesgo para familiarizarse con el entorno. Cree un entorno sencillo y accesible para desarrollar su configuración de monitoreo antes de una instalación más amplia. 
 
-### Configuración de tu entorno de test
+### Configuración de su entorno de prueba {#configuring-your-test-environment}
 
-#### En la aplicación
+#### In-App {#in-app}
 
-La [interfaz de usuario de Datadog][18] es el mejor lugar para empezar a crear tus entornos de test. La plataforma ofrece asistencia de configuración, analizadores automáticos de datos en tiempo real, sugerencias contextuales y muchas otras herramientas. La interfaz de usuario de Datadog proporciona recursos útiles para completar algunas de estas tareas.
+La [Datadog UI][18] es el mejor lugar para comenzar a construir su entorno de prueba. La plataforma proporciona asistencia de configuración, analizadores automáticos de datos en vivo, sugerencias contextuales y muchas otras herramientas. La [Datadog UI][18] proporciona recursos útiles para completar algunas de estas tareas. 
 
 Algunos ejemplos son:
 
-* Crea un [test de Synthetic Monitoring][14] para empezar a probar las transacciones empresariales críticas en tus aplicaciones.
-* Crea unos [Objetivos de nivel de servicio (SLOs)][15] para definir los objetivos de rendimiento de la aplicación.
-* Revisa la página de [Configuración del servicio de APM][9] y sigue las instrucciones paso a paso para comenzar a instrumentar tus servicios.
-* Configura y prueba [Log Pipelines][8] para averiguar cómo te gustaría ingerir diferentes conjuntos de logs procedentes de infraestructura y aplicaciones.
-* Revisa la página [Plantillas de monitor][10] para empezar a añadir algunas alertas en tu entorno de test.
+* Cree una [prueba de Synthetic Monitoring][14] para comenzar a probar transacciones comerciales críticas en sus aplicaciones.
+* Cree algunos [Service Level Objectives][15] (SLOs) para definir objetivos para el rendimiento de la aplicación.
+* Revise la página de [configuración del servicio APM][9] y siga las instrucciones paso a paso para comenzar a instrumentar sus servicios.
+* Configure y pruebe las [pipelines de registros][8] para determinar cómo desea ingerir diferentes conjuntos de registros provenientes de la infraestructura y las aplicaciones.
+* Revise la página de [Monitor Templates][10] para comenzar a agregar alertas en su entorno de prueba.
 
-#### Plantillas de configuración del Agent host
+#### Plantillas de configuración del Agent en servidor {#host-agent-config-templates}
 
-El [Datadog Agent][2] es de código abierto y está publicado en GitHub. El repositorio de GitHub del Agent es un recurso útil para consultar plantillas y especificaciones de configuración que te ayudarán a crear tu entorno. 
+El [Datadog Agent][2] es de código abierto y se publica en GitHub. El repositorio de GitHub del Datadog Agent es un recurso útil para ver plantillas de configuración y especificaciones que le ayudarán a construir su entorno. 
 
-He aquí algunos ejemplos:
+Aquí tiene algunos ejemplos:
 
-* [Plantilla de configuración del Agent][3]   
-* [Especificaciones de configuración de la integración][4]   
-* [Automatización de flotas][5]
+* [Agent Config Examples][3]
+* [Integration Config Specs][4]   
+* [Fleet Automation][5]
 
-## Próximos pasos
+## Próximos pasos {#next-steps}
 
-Para crear con éxito una nueva instalación de Datadog, revisa la página del [plan][11]. Aprenderás a crear un ejercicio de alcance, a configurar el [etiquetado de recursos][12], a conocer las prácticas recomendadas de productos, a añadir más productos y a optimizar la recopilación de datos para asegurar una instalación sin problemas.
+Para crear correctamente una nueva instalación de Datadog, revise la página de [plan][11]. Aprenderá a crear un ejercicio de alcance, configurar el [resource tagging][12], conocer las mejores prácticas del producto, agregar más productos y optimizar su recopilación de datos para garantizar una instalación sin problemas.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-
 [1]: https://learn.datadoghq.com/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[3]: https://github.com/DataDog/datadog-agent/tree/main/pkg/config/example
 [4]: https://github.com/DataDog/integrations-core
 [5]: https://app.datadoghq.com/fleet
 [6]: /es/getting_started/tagging/unified_service_tagging/
