@@ -163,7 +163,7 @@ If you attached the policy from [Set archive permissions][4] to this role, the r
 
 #### Adding role delegation to S3 archives
 
-Datadog supports rehydrating only from archives that have been configured to use role delegation to grant access. After you modify your Datadog IAM role to include the preceding IAM policy, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog supports rehydrating only from archives that use role delegation to grant access. After you modify your Datadog IAM role to include the preceding IAM policy, make sure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
