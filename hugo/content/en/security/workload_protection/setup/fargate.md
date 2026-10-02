@@ -274,7 +274,31 @@ spec:
      shareProcessNamespace: true
 ```
 
+### Inject the instrumentation with the Datadog admission controller
+
+As an alternative to the manual manifest above, you can let the [Datadog admission controller][7] inject the `cws-instrumentation` init container for you. This works when you deploy Datadog with the [Datadog Operator][8] or [Helm][9] and use the admission controller to inject the Agent sidecar.
+
+On AWS Fargate, set the CWS instrumentation `mode` to `init_container`. The default `remote_copy` mode has the Cluster Agent copy the instrumentation binary into each target pod through the Kubernetes pod `exec` API (the same mechanism as `kubectl cp`), which is not available for pods running on Fargate.
+
+Add the following to your admission controller configuration (under `spec.features` with the Datadog Operator, or under `clusterAgent` with Helm):
+
+```yaml
+admissionController:
+  enabled: true
+  cwsInstrumentation:
+    enabled: true
+    mode: init_container
+  agentSidecarInjection:
+    enabled: true
+    provider: fargate
+```
+
+With this configuration, the admission controller injects both the Agent sidecar and the `cws-instrumentation` init container into pods labeled `agent.datadoghq.com/sidecar: fargate`. The sidecar automatically sets `DD_EKS_FARGATE=true` and enables `shareProcessNamespace` on the pod, so you do not need to add these to each pod manifest manually. You still need to enable Workload Protection on the Agent with `DD_RUNTIME_SECURITY_CONFIG_ENABLED=true` and `DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true`. For more details on Agent sidecar injection, see the [EKS Fargate integration setup][6].
+
 [6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
+[7]: /containers/cluster_agent/admission_controller/
+[8]: /containers/datadog_operator/
+[9]: /containers/kubernetes/installation/?tab=helm
 
 {{% /tab %}}
 {{< /tabs >}}
