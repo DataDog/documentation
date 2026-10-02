@@ -1051,6 +1051,12 @@
     "request_description": "",
     "request_schema_description": "The request for a tests search."
   },
+  "SubmitCILog": {
+    "description": "Send log lines for a CI job over HTTP. See the [CI Visibility Pipelines\nAPI](https://docs.datadoghq.com/api/latest/ci-visibility-pipelines/send-pipeline-event/) for submitting the\nassociated pipeline and job events.\n\nA request can contain one log object or an array of up to 1,000 log objects. The maximum uncompressed request\nbody size is 5.1 MiB.\n\nYou can stream log lines while a CI job runs or send them after it finishes. After you submit the completed job\nevent, 20 seconds without a new log line marks the job's logs as complete. Lines sent after that may not appear.\n\nEach log can have up to 128 additional attributes and 256 tags. Additional attributes are top-level fields with\nstring, number, boolean, or null values. Nested objects and arrays are rejected. Additional attributes and\n`ddtags` apply to all log lines in the job. If an additional attribute has different values on different lines,\nthe first value received is used. Tags supplied on different lines are combined. A job can contain up to\n2,000,000 log records or 1 GiB of message bytes in total.\n\nTo reduce request size, send gzip-compressed JSON with the `Content-Encoding: gzip` header. Retry requests after\na 408, 429, 500, or 503 response.",
+    "summary": "Send CI job logs",
+    "request_description": "CI job log line or batch in JSON format.",
+    "request_schema_description": "A batch of up to 1,000 CI job log lines. Use a one-item array to send one log line."
+  },
   "ListAWSCloudAuthPersonaMappings": {
     "description": "List all AWS cloud authentication persona mappings. This endpoint retrieves all configured persona mappings that associate AWS IAM principals with Datadog users.",
     "summary": "List AWS cloud authentication persona mappings"
