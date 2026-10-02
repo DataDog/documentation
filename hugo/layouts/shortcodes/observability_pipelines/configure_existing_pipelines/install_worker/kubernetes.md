@@ -4,7 +4,6 @@
     ```shell
     helm repo update
     ```
-1. Set `service.ports` in your `values.yaml` file. The command provided in the UI doesn't set the Worker's ports. If you don't set `service.ports`, the Kubernetes Service doesn't expose the Worker. See [Expose the Worker's ports][4002].
 1. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
     ```shell
     helm upgrade --install opw \
