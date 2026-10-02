@@ -275,6 +275,30 @@ agent diagnose show-metadata agent-telemetry
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 
+### Troubleshooting metrics
+
+Starting with Agent v7.85.0, Datadog Support can temporarily enable the collection of the following additional metrics on a host to investigate an issue such as missing data.
+These metrics are not collected otherwise, and they are never collected when Agent telemetry or Remote Configuration is disabled.
+
+| Metrics ([source][2])                       | Description                                                                                                            |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| **Data delivery**                           |                                                                                                                        |
+| transactions.errors                         | Count of transaction errors, tagged by domain, endpoint, and error type (DNS, connection, TLS, write, or HTTP failure)  |
+| transactions.dropped                        | Count of transactions dropped by the Agent, tagged by domain and endpoint                                              |
+| transactions.retry_queue_size               | Number of transactions waiting to be retried, tagged by domain                                                         |
+| transactions.connection_events              | Count of successful DNS lookups and new connections to Datadog, tagged by event type                                   |
+| **Aggregation**                             |                                                                                                                        |
+| aggregator.flush                            | Count of series, sketches, events, and service checks flushed by the Agent aggregator, tagged by data type and status  |
+| aggregator.processed                        | Count of samples received by the Agent aggregator, tagged by data type                                                 |
+| **DogStatsD**                               |                                                                                                                        |
+| dogstatsd.processed                         | Count of metrics, events, and service checks processed by DogStatsD, tagged by message type and status (ok or error)   |
+| dogstatsd.udp_packets                       | Count of DogStatsD UDP packets, tagged by status (ok or error)                                                         |
+| dogstatsd.uds_packets                       | Count of DogStatsD UDS packets, tagged by transport and status (ok or error)                                           |
+| dogstatsd.uds_origin_detection_error        | Count of DogStatsD UDS origin detection errors, tagged by transport                                                    |
+| **Inputs**                                  |                                                                                                                        |
+| checks.warnings                             | Count of warnings raised by checks, per check                                                                          |
+| checks.metrics_samples                      | Count of metric samples submitted by checks, per check                                                                 |
+
 
 [1]: https://github.com/DataDog/datadog-agent/blob/4dc6ed6eb069bdea7e93f2d267ac5086a98c968c/comp/core/agenttelemetry/impl/sender.go#L218-L221
 [2]: https://github.com/search?q=repo%3ADataDog%2Fdatadog-agent+content%3A%2Fvar+defaultProfiles%2F+path%3Acomp%2Fcore%2Fagenttelemetry%2Fimpl%2Fconfig.go+content%3A%2Fprofiles%3A%2F+content%3A%2F-+name%3A+checks%2F+content%3A%2Fmetric%3A%2F+content%3A%2Fexclude%3A%2F&type=code
