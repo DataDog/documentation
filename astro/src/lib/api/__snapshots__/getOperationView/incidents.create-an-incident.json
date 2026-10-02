@@ -20,6 +20,7 @@
       "oauthScopes": [
         "incident_write"
       ],
+      "oauthScopesAnchor": "incidents",
       "regionUrls": {
         "us": "https://api.datadoghq.com/api/v2/incidents",
         "us3": "https://api.us3.datadoghq.com/api/v2/incidents",

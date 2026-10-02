@@ -13,6 +13,7 @@ import { renderMarkdownInline } from "@lib/api/markdownRenderer";
 import styles from "./ApiEndpoint.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { useTranslations } from "@lib/i18n/i18n";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 
 const allRegions = getDefaultRegions();
 const cl = classListFactory(styles);
@@ -30,7 +31,9 @@ interface EndpointData {
   unstableMessage?: string;
   newerVersionUrl?: string;
   permissions?: string[];
+  permissionsMatch?: "any" | "all";
   oauthScopes?: string[];
+  oauthScopesAnchor?: string;
   regionUrls?: Record<string, string>;
   pathParams?: SchemaField[];
   queryParams?: SchemaField[];
@@ -58,6 +61,13 @@ try {
 } catch {
   // invalid JSON
 }
+
+const oauthScopesHref =
+  ep?.oauthScopesAnchor &&
+  localizedHref(
+    resolveLocale(Astro.currentLocale),
+    `/api/latest/scopes/#${ep.oauthScopesAnchor}`,
+  );
 
 const hasParams =
   ep &&
@@ -123,23 +133,50 @@ const hasParams =
       </div>
 
       {/* Description — rendered as slot content from the parent page */}
-      {ep.description && <h3>{translate("overview")}</h3>}
+      {ep.description && (
+        <h3 class={cl("api-endpoint__overview-heading")}>
+          {translate("overview")}
+        </h3>
+      )}
       <slot />
 
       {/* Permissions */}
-      {ep.permissions && ep.permissions.length > 0 && (
+      {ep.permissions && ep.permissions.length === 1 && (
         <div class={cl("api-endpoint__permissions")}>
-          <strong>Permissions: </strong>
-          <code>{ep.permissions.join(", ")}</code>
+          <p>
+            This endpoint requires the <code>{ep.permissions[0]}</code>{" "}
+            permission.
+          </p>
+        </div>
+      )}
+      {ep.permissions && ep.permissions.length > 1 && (
+        <div class={cl("api-endpoint__permissions")}>
+          <p>
+            This endpoint requires {ep.permissionsMatch ?? "all"} of the
+            following permissions:
+          </p>
+          <ul>
+            {ep.permissions.map((permission) => (
+              <li>
+                <code>{permission}</code>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
       {/* OAuth scopes */}
       {ep.oauthScopes && ep.oauthScopes.length > 0 && (
-        <div class={cl("api-endpoint__permissions")}>
+        <div class={cl("api-endpoint__oauth-scopes")}>
           <p>
             OAuth apps require the <code>{ep.oauthScopes.join(", ")}</code>{" "}
-            authorization scope to access this endpoint.
+            authorization{" "}
+            {ep.oauthScopesAnchor ? (
+              <a href={oauthScopesHref}>scope</a>
+            ) : (
+              "scope"
+            )}{" "}
+            to access this endpoint.
           </p>
         </div>
       )}

@@ -26,12 +26,16 @@
 }
 
 .api-endpoint__permissions {
-  font-size: var(--font-size-sm);
   margin-bottom: var(--space-md);
-  color: var(--color-text-muted);
 }
 
 .api-endpoint__permissions code {
+  background: var(--color-highlight-bg);
+  padding: 0 0.25em;
+  border-radius: 2px;
+}
+
+.api-endpoint__oauth-scopes code {
   background: var(--color-highlight-bg);
   padding: 0 0.25em;
   border-radius: 2px;
@@ -43,4 +47,15 @@
 
 .api-endpoint__section h3 {
   margin: 0 0 var(--space-sm);
+}
+
+.api-endpoint__overview-heading {
+  margin-bottom: var(--space-sm);
+}
+
+/* The description is slot content, usually a <p> with a default top margin.
+   Without this, that margin collapses with the heading's and widens the gap,
+   unlike Hugo, where paragraphs have no top margin. */
+.api-endpoint__overview-heading + * {
+  margin-top: 0;
 }

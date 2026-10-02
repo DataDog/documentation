@@ -19,6 +19,7 @@
       "oauthScopes": [
         "dashboards_read"
       ],
+      "oauthScopesAnchor": "dashboard-lists",
       "regionUrls": {
         "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual",
         "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual",

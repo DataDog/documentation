@@ -126,9 +126,23 @@ describe("apiEndpointNodes", () => {
       permissions: ["things_read"],
       oauthScopes: ["things:read"],
     });
-    expect(out).toContain("Permissions:");
-    expect(out).toContain("things_read");
+    expect(out).toContain(
+      "This endpoint requires the `things_read` permission.",
+    );
     expect(out).toContain("OAuth apps");
     expect(out).toContain("things:read");
+  });
+
+  it("lists multiple permissions with their any/all match", () => {
+    const out = render({
+      ...baseEndpoint,
+      permissions: ["apps_write", "workflows_run"],
+      permissionsMatch: "all",
+    });
+    expect(out).toContain(
+      "This endpoint requires all of the following permissions:",
+    );
+    expect(out).toContain("- `apps_write`");
+    expect(out).toContain("- `workflows_run`");
   });
 });

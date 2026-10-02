@@ -73,6 +73,19 @@ export function extractPermissions(
 }
 
 /**
+ * Whether a caller needs `any` or `all` of an operation's permissions. Only
+ * meaningful with more than one permission. Hugo treats every operator other
+ * than `OR` as `all`.
+ */
+export function extractPermissionsMatch(
+  operation: OperationWithExtensions,
+): "any" | "all" | undefined {
+  const permissions = extractPermissions(operation);
+  if (!permissions || permissions.length < 2) return undefined;
+  return operation["x-permission"]?.operator === "OR" ? "any" : "all";
+}
+
+/**
  * Extract OAuth scopes from the `security` block's AuthZ requirement.
  */
 export function extractOauthScopes(

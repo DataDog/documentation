@@ -65,3 +65,59 @@ describe("ApiEndpoint region rendering", () => {
     }
   });
 });
+
+describe("ApiEndpoint permissions and OAuth scopes", () => {
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  it("states a single permission as a sentence, as Hugo does", async () => {
+    const html = await renderEndpoint({ permissions: ["dashboards_read"] });
+
+    expect(html).toMatch(
+      /This endpoint requires the <code>dashboards_read<\/code> permission\./,
+    );
+    expect(html).not.toContain("Permissions:");
+  });
+
+  it("says any of the listed permissions when the match is any", async () => {
+    const html = await renderEndpoint({
+      permissions: ["apps_run", "apps_write"],
+      permissionsMatch: "any",
+    });
+
+    expect(html).toMatch(
+      /This endpoint requires any of the following permissions:/,
+    );
+    expect(html).toMatch(
+      /<li><code>apps_run<\/code><\/li>\s*<li><code>apps_write<\/code><\/li>/,
+    );
+  });
+
+  it("says all of the listed permissions when the match is all", async () => {
+    const html = await renderEndpoint({
+      permissions: ["apps_write", "workflows_run"],
+      permissionsMatch: "all",
+    });
+
+    expect(html).toMatch(
+      /This endpoint requires all of the following permissions:/,
+    );
+  });
+
+  it("links the word scope to the API section's entry on the scopes page", async () => {
+    const html = await renderEndpoint({
+      oauthScopes: ["dashboards_read"],
+      oauthScopesAnchor: "dashboards",
+    });
+
+    expect(html).toMatch(
+      /authorization <a href="\/api\/latest\/scopes\/#dashboards">scope<\/a> to access this endpoint\./,
+    );
+  });
+});

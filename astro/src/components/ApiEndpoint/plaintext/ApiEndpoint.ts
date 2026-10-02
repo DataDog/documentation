@@ -71,7 +71,19 @@ function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.permissions || ep.permissions.length === 0) {
     return NO_CONTENT;
   }
-  return nodesFromMd(`**Permissions:** \`${ep.permissions.join("`, `")}\``);
+  if (ep.permissions.length === 1) {
+    return nodesFromMd(
+      `This endpoint requires the \`${ep.permissions[0]}\` permission.`,
+    );
+  }
+  const list = ep.permissions.map((permission) => `- \`${permission}\``);
+  return nodesFromMd(
+    [
+      `This endpoint requires ${ep.permissionsMatch ?? "all"} of the following permissions:`,
+      "",
+      ...list,
+    ].join("\n"),
+  );
 }
 
 function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {

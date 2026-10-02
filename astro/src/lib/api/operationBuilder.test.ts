@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import type { OpenAPIV3 } from "openapi-types";
-import { extractResponses } from "./operationBuilder";
+import { extractPermissionsMatch, extractResponses } from "./operationBuilder";
 
 const spec = {
   openapi: "3.0.0",
@@ -43,5 +43,34 @@ describe("extractResponses schema description", () => {
     const [response] = responsesFor("#/components/schemas/Undescribed");
 
     expect(response).not.toHaveProperty("schemaDescription");
+  });
+});
+
+describe("extractPermissionsMatch", () => {
+  const withPermissions = (operator: string, permissions: string[]) => ({
+    responses: {},
+    "x-permission": { operator, permissions },
+  });
+
+  it("returns any for OR with more than one permission", () => {
+    expect(
+      extractPermissionsMatch(withPermissions("OR", ["a_read", "b_read"])),
+    ).toBe("any");
+  });
+
+  it("returns all for AND with more than one permission", () => {
+    expect(
+      extractPermissionsMatch(withPermissions("AND", ["a_read", "b_read"])),
+    ).toBe("all");
+  });
+
+  it("returns undefined for a single permission, where any/all is moot", () => {
+    expect(
+      extractPermissionsMatch(withPermissions("AND", ["a_read"])),
+    ).toBeUndefined();
+  });
+
+  it("returns undefined when there are no permissions", () => {
+    expect(extractPermissionsMatch({ responses: {} })).toBeUndefined();
   });
 });
