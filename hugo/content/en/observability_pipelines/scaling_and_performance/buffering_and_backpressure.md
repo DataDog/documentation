@@ -67,6 +67,8 @@ This table compares the differences between the memory and disk buffer.
 | Data loss due to an unexpected restart or crash          | All buffered data is lost | All buffered data is retained        |
 | Data loss on graceful shutdown                           | All buffered data is lost | None, all data in the pipeline is flushed to disk before exit  |
 
+**Note**: On Kubernetes, disk buffer data persists through a Worker restart or crash only if the persistent volume persists. See [Kubernetes persistent volumes](#kubernetes-persistent-volumes) for more information.
+
 ### Using buffers with multiple destinations
 
 After your events are sent through your processors, the events go through a fanout to all of your pipeline's destinations. If backpressure propagates to the fanout from any destination, **all** destinations are blocked. No additional events are sent by any destination until the blocked destination resumes sending events successfully.
@@ -75,7 +77,29 @@ The `drop_newest` on-full behavior drops incoming events when a destination's bu
 
 ### Kubernetes persistent volumes
 
-If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines helm chart. With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes, then sent downstream.
+The Worker runs as a Kubernetes [StatefulSet][2]. If you enable disk buffering for destinations, you must enable Kubernetes [persistent volumes][1] in the Observability Pipelines [Helm chart][3] (`persistence.enabled: true`). With disk buffering enabled, events are first sent to the buffer and written to the persistent volumes, then sent downstream.
+
+#### Prerequisites
+
+The Helm chart does not provision storage for you. Before you enable persistence, your cluster must have:
+
+- A [StorageClass][4] that can provision persistent volumes. Some managed Kubernetes services do not include a default StorageClass. For example, Amazon EKS 1.30 and later do not set a default StorageClass. See [Amazon EKS storage][5] for more information.
+- A [CSI driver][6] installed for your storage backend.
+
+To use a specific StorageClass, set `persistence.storageClassName` in the Helm chart's `values.yaml` file.
+
+#### Buffered data when a pod or node is replaced
+
+Whether buffered events persist when a Worker pod is rescheduled or a node is recycled depends on your StorageClass:
+
+- **Network-backed storage** (for example, Amazon EBS, Google Compute Engine Persistent Disk, or Azure Disk): The persistent volume generally persists when a node is removed. When Kubernetes reschedules the Worker pod, the volume reattaches to the new pod and the buffered events are retained.
+- **Node-local storage** (for example, local volumes): The persistent volume is tied to the node. If the node is removed, the buffered events on that volume are lost.
+
+#### PersistentVolumeClaim retention
+
+By default, Kubernetes retains a StatefulSet's PersistentVolumeClaims when its pods scale down or the StatefulSet is deleted. To change this behavior, set `persistence.retentionPolicy` in the Helm chart. For example, `whenScaled: Delete` deletes a replica's persistent volume, and any events buffered on it, when that replica scales down. This setting does not affect what happens to a persistent volume when a node is removed. See [PersistentVolumeClaim retention][7] for more information.
+
+See [Persistence and pod scheduling][8] for recommended `podManagementPolicy` settings when you use persistent volumes.
 
 ## Buffer metrics
 
@@ -108,3 +132,10 @@ Use these metrics to analyze buffer performance. All metrics are emitted on a on
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+[2]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/observability-pipelines-worker/values.yaml
+[4]: https://kubernetes.io/docs/concepts/storage/storage-classes/
+[5]: https://docs.aws.amazon.com/eks/latest/userguide/storage.html
+[6]: https://kubernetes-csi.github.io/docs/drivers.html
+[7]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+[8]: /observability_pipelines/configuration/install_the_worker/?platform=kubernetes#persistence-and-pod-scheduling
