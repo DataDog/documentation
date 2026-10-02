@@ -107670,6 +107670,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         createdAt:
           description: When the rule was created, timestamp in milliseconds.
           format: int64
@@ -108505,6 +108510,11 @@ components:
           items:
             $ref: "#/components/schemas/SecurityMonitoringRuleCase"
           type: array
+        compatibleVersion:
+          description: The version of the rule at which its detection logic last changed. Updates that only change the name, message, tags, or notifications do not change this value.
+          example: 1
+          format: int64
+          type: integer
         complianceSignalOptions:
           $ref: "#/components/schemas/CloudConfigurationRuleComplianceSignalOptions"
         createdAt:
