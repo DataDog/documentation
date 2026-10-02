@@ -58,7 +58,7 @@ To instrument only .NET applications running on IIS:
 
    **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 
-1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
+1. Recycle the IIS application pools for the applications you want instrumented. See [Restart your applications](#restart-your-applications).
 
 The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
@@ -92,7 +92,7 @@ To instrument Java and .NET applications across your entire Windows host:
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-1. Restart the services you want instrumented.
+1. [Restart the applications you want instrumented](#restart-your-applications).
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 
@@ -117,6 +117,8 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
 1. In the {{< ui >}}Configure SDKs Installation{{< /ui >}} screen, click {{< ui >}}Yes{{< /ui >}} to automatically install the SDKs. Select {{< ui >}}Use latest version{{< /ui >}}, or uncheck to specify individual SDK versions.
 
+   **Note**: The SDK installation dialog can list languages that SSI does not support on Windows. Select only SDKs for the [supported Windows runtimes][8].
+
    {{< img src="tracing/trace_collection/configure-sdks-installation.png" alt="The Configure SDKs Installation screen in Fleet Automation, with options to enable automatic SDK installation and select versions" style="width:60%;" >}}
 
 1. Click {{< ui >}}Next{{< /ui >}}.
@@ -125,7 +127,25 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
+1. Wait for the deployment to complete, then [restart your applications](#restart-your-applications).
+
+### Restart your applications
+
+After installing the SDKs and applying the instrumentation configuration, restart each supported application so SSI can load the SDK into its process:
+
+| Application type | Restart action |
+| --- | --- |
+| IIS-hosted application | Recycle the relevant IIS application pool. You do not need to restart the entire IIS server. |
+| Windows Service | Restart the specific Windows Service that runs the application. |
+| Standalone application | Stop and start the application process. |
+
+If IIS proxies traffic to a separate service, restart that service separately. Restarting IIS does not restart it.
+
+After a successful SSI deployment, you do not need to reboot the Windows host or restart the Datadog Agent. Restarting the Agent does not replace restarting your applications.
+
 ## Verify the installation
+
+Follow these steps to check Agent health and confirm that your applications send traces to APM.
 
 1. From an administrator PowerShell session, confirm the Agent is healthy and the APM Agent is running:
 
@@ -135,7 +155,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Check the **APM Agent** section of the output.
 
-1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. Generate traffic to your applications, open each service on the [APM Services page][7], and confirm that traces appear. If a service or its traces don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
@@ -248,3 +268,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
 [7]: https://app.datadoghq.com/apm/services
+[8]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment

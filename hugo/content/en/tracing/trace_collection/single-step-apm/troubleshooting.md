@@ -13,7 +13,15 @@ further_reading:
 
 ## Overview
 
-Single Step Instrumentation (SSI) helps instrument applications by automatically loading application processes with the Datadog SDKs. SSI works for applications running on Linux hosts, in container environments such as Kubernetes and Docker, and for .NET applications served by Windows IIS—without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+Single Step Instrumentation (SSI) instruments applications by automatically loading Datadog SDKs into application processes. SSI supports Linux hosts, Kubernetes, Docker, and Windows without requiring changes to application dependencies or images. If you encounter issues enabling APM with SSI, use this guide to troubleshoot and resolve common problems. For further assistance, contact [Datadog Support][1].
+
+## No traces appear after enabling SSI on Windows
+
+If your applications do not send traces after you enable SSI:
+
+1. Check the supported runtimes and requirements for [Windows IIS][16] or [Windows host-wide instrumentation (Preview)][14].
+1. [Restart your applications][15] using the instructions for each application type.
+1. Follow the [verification steps][17] to check Agent health, generate application traffic, and confirm that traces appear for each service in APM.
 
 ## Troubleshooting methods
 
@@ -514,3 +522,8 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [11]: /tracing/guide/injectors/
 [12]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
 [13]: /tracing/troubleshooting/tracer_debug_logs/
+
+[14]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowshostwidepreview#compatibility-by-application-environment
+[15]: /tracing/trace_collection/single-step-apm/windows/#restart-your-applications
+[16]: /tracing/trace_collection/single-step-apm/compatibility/?tab=windowsiis#compatibility-by-application-environment
+[17]: /tracing/trace_collection/single-step-apm/windows/#verify-the-installation
