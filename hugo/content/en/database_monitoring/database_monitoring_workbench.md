@@ -90,9 +90,9 @@ curl -X POST "{{< region-param key="dd_api" >}}/api/unstable/databases/workbench
 
 | Parameter | Description |
 | --------- | ----------- |
-| <span class="text-nowrap">`database_instance`</span> | The name of the instance in Database Monitoring. |
-| <span class="text-nowrap">`database_name`</span> | The name of the logical database inside the `database_instance`. |
-| <span class="text-nowrap">`populate`</span> | Set to `false` to create the instance without generated data. To load your own data, see [Connecting with a SQL client](#connecting-with-a-sql-client). |
+| <code style="white-space: nowrap;">database_instance</code> | The name of the instance in Database Monitoring. |
+| <code style="white-space: nowrap;">database_name</code> | The name of the logical database inside the `database_instance`. |
+| <code style="white-space: nowrap;">populate</code> | Set to `false` to create the instance without generated data. To load your own data, see [Connecting with a SQL client](#connecting-with-a-sql-client). |
 
 The request returns `202 Accepted` with the instance ID, its status, and a Postgres connection string:
 
