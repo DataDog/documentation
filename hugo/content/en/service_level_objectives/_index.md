@@ -329,7 +329,7 @@ The 90-day limits per SLO are as follows:
 
 You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26]. To create a tag-based correction with the API, set the `slo_query` attribute instead of `slo_id`.
 
-<!-- TBD: Confirm whether the Terraform resource supports tag-based corrections (slo_query). -->
+To create a tag-based correction with the API or Terraform, set the `slo_query` attribute instead of `slo_id`.
 
 #### Tag-based corrections
 
