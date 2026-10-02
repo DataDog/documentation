@@ -93,6 +93,8 @@ content/en/integrations/guide/amazon_cloudformation.md
 !content/en/integrations/syslog_ng.md
 !content/en/integrations/uwsgi.md
 !content/en/integrations/vmware_tanzu_application_service.md
+!content/en/integrations/amazon_cloudhsm.md
+!content/en/integrations/carbon_black.md
 
 # Ignore the marketplace images that get pulled
 static/images/marketplace
