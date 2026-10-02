@@ -1,6 +1,6 @@
 ---
 title: Lighthouse Audits
-description: "Run Google Lighthouse audits in browser Synthetic tests and view the Performance, Accessibility, Best Practices, SEO, and Agentic Browsing scores on your RUM views."
+description: "Run Google Lighthouse audits in browser Synthetic tests and view the Performance, Accessibility, Best Practices, SEO, and Agentic scores on your RUM views."
 further_reading:
   - link: "/synthetics/browser_tests/"
     tag: "Documentation"
@@ -13,6 +13,8 @@ further_reading:
     text: "Monitor Core Web Vitals with Datadog RUM and Synthetic Monitoring"
 ---
 
+<div class="alert alert-info">Lighthouse audits in RUM are in Preview.</div>
+
 ## Overview
 
 A [browser Synthetic test][1] can run a [Google Lighthouse][2] audit against the page it tests and attach the results to the matching RUM view. While Core Web Vitals and other RUM data reflect what real users experience in the field, Lighthouse scores give you a consistent lab measurement from a controlled Datadog location, so you can track frontend quality on a schedule and catch regressions before they reach users.
@@ -23,7 +25,7 @@ Each audit reports five category scores from 0 to 100:
 - **Accessibility**
 - **Best Practices**
 - **SEO**
-- **Agentic Browsing**
+- **Agentic**: reflects how well AI agents can understand, navigate, and interact with the page.
 
 Because the audit runs inside a browser test, it reuses the test's session. This allows Lighthouse to score authenticated pages behind a login, measuring the same pages your users see.
 
@@ -39,32 +41,39 @@ There are two ways to create a browser test that collects Lighthouse data.
 
 ### From a RUM application
 
-1. On the [Optimization page][5] of your RUM application, start creating a browser Synthetic test for the page you want to audit.
-2. Lighthouse data collection is selected automatically, and the test is linked to the RUM application.
+1. On the [Optimization page][5] of your RUM application, open the **Lighthouse** panel and select **Create a Synthetics test**.
+2. RUM data collection and the Lighthouse audit are enabled automatically, and the test is linked to the RUM application.
 3. Finish configuring and save the test.
 
 ### From Synthetic Monitoring
 
 1. Create a [browser test][1] in Synthetic Monitoring.
 2. In the recorder, enable [RUM data collection][4] and select your RUM application.
-3. Enable **Run Lighthouse Audit**.
+3. Enable **Run Lighthouse audit**. (This option is available only when RUM data collection is enabled.)
 4. Record the steps that reach the page you want to audit, then save the test.
 
 ## View Lighthouse results
 
-After the test runs, open the RUM view for that run to see:
+After the test runs, Lighthouse results appear in two places in RUM, both under [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}}][5]:
 
-- **Category scores**: the Performance, Accessibility, Best Practices, SEO, and Agentic Browsing gauges (0 to 100).
-- **Failed audits**: the individual Lighthouse audits the page did not pass.
-- **Lab metrics**: the lab performance metrics Lighthouse measured during the audit.
+- On the **Optimization page**, the **Lighthouse** panel shows the latest audit for the selected view: the five category score gauges, the lab metrics Lighthouse measured, the failed audits, and a trend of scores over time. From the panel, you can open the full Lighthouse report, download the raw report as JSON, or open the Synthetic test result.
+- In the browser performance side panel of a RUM view, the **Lighthouse** tab shows a *Lighthouse scores by view* table, with a percentile selector to compare scores across views.
 
 Lighthouse data is collected on **scheduled** executions and on **on-demand** runs of a **saved** test. Previewing an unsaved test from the recorder, and runs triggered from CI, do not collect Lighthouse data.
 
 ## Metrics and attributes
 
-Each audited RUM view carries the `@synthetics.lighthouse_audited:true` attribute, along with a per-category score attribute under `@synthetics.lighthouse.<category>` (for example, `@synthetics.lighthouse.performance`).
+Each audited RUM view carries the `@synthetics.lighthouse_audited:true` attribute, so you can filter RUM views down to those covered by a Lighthouse audit.
 
-The same scores are available as metrics named `rum.synthetics.lighthouse.<category>`, so you can graph them on dashboards and alert on regressions with monitors.
+The category scores are available as metrics, so you can graph them on dashboards and alert on regressions with monitors:
+
+- `rum.synthetics.lighthouse.performance`
+- `rum.synthetics.lighthouse.accessibility`
+- `rum.synthetics.lighthouse.best_practices`
+- `rum.synthetics.lighthouse.seo`
+- `rum.synthetics.lighthouse.agentic`
+
+These metrics are tagged with `application.id` and `view.name`.
 
 ## Limitations
 
