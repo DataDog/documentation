@@ -5525,12 +5525,6 @@
     "request_description": "",
     "request_schema_description": "Request body for the aggregated long tasks endpoint."
   },
-  "QueryAggregatedSignalsProblems": {
-    "description": "Get aggregated performance signals and problem detections for a RUM view, sampled across multiple view instances.",
-    "summary": "Query aggregated signals and problems",
-    "request_description": "",
-    "request_schema_description": "Request body for the aggregated signals and problems endpoint."
-  },
   "QueryAggregatedWaterfall": {
     "description": "Get aggregated network resource waterfall data for a RUM view, sampled across multiple view instances.",
     "summary": "Query aggregated waterfall",
