@@ -83,8 +83,6 @@ Client certificates (mTLS), bearer tokens, and OAuth are not supported.
 
 A server is {{< ui >}}Healthy{{< /ui >}} when at least one of its collections is healthy, {{< ui >}}Error{{< /ui >}} when none are healthy and at least one has an error, and {{< ui >}}Pending{{< /ui >}} otherwise.
 
-Each collection's row also shows its {{< ui >}}Last successful poll{{< /ui >}} time, or {{< ui >}}Never{{< /ui >}} before its first successful poll.
-
 ## Disable or enable polling
 
 Use the toggle in the {{< ui >}}Poll{{< /ui >}} column for the collection. Disabling stops polling and removes the collection's indicators from Cloud SIEM enrichment, but keeps the indicators and the polling position. Enabling resumes from where polling stopped and restores enrichment. Enabled collections count toward the limit of 20.
