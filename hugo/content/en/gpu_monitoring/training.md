@@ -59,7 +59,7 @@ After you apply this configuration, GPU metrics are tagged with `training_run_id
 
 ### 2. Configure GPU tracing
 
-Merge the following configuration into the existing `DatadogAgent` resource:
+To enable GPU tracing and add the training run and group identifiers to traces, merge the following configuration into the existing DatadogAgent resource:
 
 ```yaml
 spec:
