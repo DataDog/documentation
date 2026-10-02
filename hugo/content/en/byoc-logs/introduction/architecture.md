@@ -52,7 +52,7 @@ The BYOC Logs engine runs in your environment. In Kubernetes deployments, the `d
 : Provides access to index metadata, including the locations of splits in object storage. The metastore persists this metadata in PostgreSQL.
 
 **Control plane**
-: Schedules indexing jobs called *indexing pipelines* on indexers. This component runs in your environment and is not part of the Datadog platform.
+: Schedules indexing jobs called *indexing pipelines* on indexers.
 
 **Janitor**
 : Performs maintenance tasks, applying retention policies, garbage collecting expired splits, and running delete query jobs.
