@@ -1,6 +1,43 @@
 import { describe, it, expect } from "vitest";
 import { buildCurlCommand } from "@lib/api/curlBuilder";
 
+const securitySchemes = {
+  AuthZ: { type: "oauth2", "x-env-name": "DD_BEARER_TOKEN" },
+  apiKeyAuth: {
+    type: "apiKey",
+    in: "header",
+    name: "DD-API-KEY",
+    "x-env-name": "DD_API_KEY",
+  },
+  apiKeyAuthQuery: {
+    type: "apiKey",
+    in: "query",
+    name: "api_key",
+    "x-env-name": "DD_API_KEY",
+  },
+  appKeyAuth: {
+    type: "apiKey",
+    in: "header",
+    name: "DD-APPLICATION-KEY",
+    "x-env-name": "DD_APP_KEY",
+  },
+  appKeyAuthQuery: {
+    type: "apiKey",
+    in: "query",
+    name: "application_key",
+    "x-env-name": "DD_APP_KEY",
+  },
+  bearerAuth: {
+    type: "http",
+    scheme: "bearer",
+    "x-env-name": "DD_BEARER_TOKEN",
+  },
+};
+
+const bearerExport =
+  'export DD_BEARER_TOKEN="<PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"';
+const bearerHeader = '-H "Authorization: Bearer ${DD_BEARER_TOKEN}"';
+
 describe("buildCurlCommand", () => {
   it("generates a simple GET request", () => {
     const result = buildCurlCommand({
@@ -109,5 +146,108 @@ describe("buildCurlCommand", () => {
 
     expect(result).toContain("DD-API-KEY");
     expect(result).not.toContain("DD-APPLICATION-KEY");
+  });
+
+  describe("bearer token auth", () => {
+    it("uses a bearer token when a requirement is AuthZ alone", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v1/dashboard",
+        security: [
+          { apiKeyAuth: [], appKeyAuth: [] },
+          { AuthZ: ["dashboards_read"] },
+        ],
+        securitySchemes,
+      });
+
+      expect(result).toContain(
+        "# Use a Personal Access Token or Service Access Token",
+      );
+      expect(result).toContain(bearerExport);
+      expect(result).toContain(bearerHeader);
+      expect(result).not.toContain("DD_API_KEY");
+      expect(result).not.toContain("DD-APPLICATION-KEY");
+    });
+
+    it("does not use a bearer token when AuthZ is combined with other schemes", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v1/dashboard",
+        security: [{ apiKeyAuth: [], AuthZ: [] }],
+        securitySchemes,
+      });
+
+      expect(result).not.toContain("DD_BEARER_TOKEN");
+      expect(result).toContain('-H "DD-API-KEY: ${DD_API_KEY}"');
+    });
+
+    it("falls back to global security when the operation has none", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v1/dashboard",
+        globalSecurity: [{ apiKeyAuth: [], appKeyAuth: [] }, { AuthZ: [] }],
+        securitySchemes,
+      });
+
+      expect(result).toContain(bearerHeader);
+    });
+
+    it("prefers operation security over global security", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v1/validate",
+        security: [{ apiKeyAuth: [] }],
+        globalSecurity: [{ apiKeyAuth: [], appKeyAuth: [] }, { AuthZ: [] }],
+        securitySchemes,
+      });
+
+      expect(result).not.toContain("DD_BEARER_TOKEN");
+      expect(result).toContain('-H "DD-API-KEY: ${DD_API_KEY}"');
+      expect(result).not.toContain("DD-APPLICATION-KEY");
+    });
+  });
+
+  describe("auth from security schemes", () => {
+    it("renders query-param auth instead of headers", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v1/dashboard",
+        queryParams: [{ name: "filter", example: "active" }],
+        security: [{ apiKeyAuthQuery: [], appKeyAuthQuery: [] }],
+        securitySchemes,
+      });
+
+      expect(result).toContain(
+        "/api/v1/dashboard?filter=active&api_key=${DD_API_KEY}&application_key=${DD_APP_KEY}",
+      );
+      expect(result).toContain('export DD_API_KEY="<DD_API_KEY>"');
+      expect(result).not.toContain("DD-API-KEY:");
+    });
+
+    it("renders an http bearer scheme as an Authorization header", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v2/example",
+        security: [{ bearerAuth: [] }, { apiKeyAuth: [] }],
+        securitySchemes,
+      });
+
+      expect(result).toContain(bearerHeader);
+      expect(result).toContain('export DD_BEARER_TOKEN="<DD_BEARER_TOKEN>"');
+      expect(result).not.toContain("DD-API-KEY");
+    });
+
+    it("omits auth when the operation declares no security", () => {
+      const result = buildCurlCommand({
+        method: "GET",
+        path: "/api/v2/oauth2/.well-known/sites",
+        security: [],
+        globalSecurity: [{ apiKeyAuth: [], appKeyAuth: [] }],
+        securitySchemes,
+      });
+
+      expect(result).not.toContain("DD_API_KEY");
+      expect(result).not.toContain("Authorization");
+    });
   });
 });
