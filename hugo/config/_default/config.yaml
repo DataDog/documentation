@@ -157,6 +157,10 @@ module:
       target: "assets/node_modules/datadog-rum.js"
     - source: "./node_modules/@datadog/browser-logs/bundle/datadog-logs.js"
       target: "assets/node_modules/datadog-logs.js"
+    # v7 bundle lazy-loads Session Replay/Profiler via dynamic import() relative
+    # to its own URL (./chunks/<file>); those chunk files must ship alongside it
+    - source: "./node_modules/@datadog/browser-rum/bundle/chunks"
+      target: "assets/node_modules/chunks"
     - source: _vendor/content/en
       target: content
       lang: en
