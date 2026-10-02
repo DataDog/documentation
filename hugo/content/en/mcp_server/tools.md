@@ -134,7 +134,7 @@ Lists and searches Datadog notebooks with filtering by author, tags, and content
 ### `delete_datadog_notebook`
 *Toolsets: **core**, **notebooks***\
 *Permissions Required: `Notebooks Write`*\
-Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within the deleted-notebook retention window.
+Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to restore it within 30 days of deletion.
 
 - Delete notebook 12345678.
 - Delete the notebook with ID 12345678 that I created for testing.
@@ -142,7 +142,7 @@ Soft-deletes a notebook by its numeric ID. Use `recover_datadog_notebook` to res
 ### `recover_datadog_notebook`
 *Toolsets: **core**, **notebooks***\
 *Permissions Required: `Notebooks Write`*\
-Restores a soft-deleted notebook by its numeric ID. The notebook must be deleted and within the deleted-notebook retention window.
+Restores a soft-deleted notebook by its numeric ID. The notebook can be restored only within 30 days of deletion.
 
 - Recover notebook 12345678.
 - Restore the notebook with ID 12345678 that I deleted by mistake.
