@@ -2396,6 +2396,112 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: The server cannot process the request because it contains invalid data.
   schemas:
+    AIImpactUserActivityAttributes:
+      additionalProperties: false
+      description: |-
+        Daily AI coding tool activity for a single user. Each entry reports whether the user was
+        active on a given day and which AI tools and models they used.
+      properties:
+        day:
+          description: The day the activity refers to, in `YYYY-MM-DD` format.
+          example: "2026-05-26"
+          format: date
+          type: string
+        is_active:
+          description: Whether the user actively used the listed AI tools on that day.
+          example: true
+          type: boolean
+        models:
+          $ref: "#/components/schemas/AIImpactUserActivityModels"
+        tools:
+          $ref: "#/components/schemas/AIImpactUserActivityTools"
+        user_email:
+          description: |-
+            The email address of the user. It is case-insensitive and is matched against the
+            email addresses of commit authors.
+          example: user@example.com
+          type: string
+      required:
+        - user_email
+        - is_active
+        - day
+        - tools
+      type: object
+    AIImpactUserActivityData:
+      description: A single daily AI tool activity entry.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AIImpactUserActivityAttributes"
+        type:
+          $ref: "#/components/schemas/AIImpactUserActivityType"
+      required:
+        - type
+        - attributes
+      type: object
+    AIImpactUserActivityDataArray:
+      description: |-
+        A batch of daily AI tool activity entries. A batch must contain between 1 and 1000 entries.
+      example:
+        - attributes:
+            day: "2026-05-26"
+            is_active: true
+            models:
+              - claude-sonnet-4.5
+              - gpt-5
+            tools:
+              - Claude Code
+              - Cursor
+            user_email: user@example.com
+          type: ai_impact_user_activity
+      items:
+        $ref: "#/components/schemas/AIImpactUserActivityData"
+      maxItems: 1000
+      minItems: 1
+      type: array
+    AIImpactUserActivityModels:
+      description: |-
+        The AI models the user used on that day, for example `claude-sonnet-4.5` or `gpt-5`.
+        Values are lowercased and duplicates are removed.
+      example:
+        - claude-sonnet-4.5
+        - gpt-5
+      items:
+        description: The name of an AI model.
+        example: claude-sonnet-4.5
+        type: string
+      type: array
+    AIImpactUserActivityRequest:
+      description: Request to send daily AI tool activity for one or more users.
+      properties:
+        data:
+          $ref: "#/components/schemas/AIImpactUserActivityDataArray"
+      required:
+        - data
+      type: object
+    AIImpactUserActivityTools:
+      description: |-
+        The AI coding tools the user used on that day, for example `Claude Code`, `Cursor`, or
+        `GitHub Copilot`. Known tools are normalized to a canonical name (`claude_code`, `cursor`,
+        `copilot`), and other values are converted to snake case. Entries must not be empty.
+      example:
+        - Claude Code
+        - Cursor
+      items:
+        description: The name of an AI coding tool.
+        example: Claude Code
+        minLength: 1
+        type: string
+      minItems: 1
+      type: array
+    AIImpactUserActivityType:
+      default: ai_impact_user_activity
+      description: JSON:API type for AI Impact user activity entries.
+      enum:
+        - ai_impact_user_activity
+      example: ai_impact_user_activity
+      type: string
+      x-enum-varnames:
+        - AI_IMPACT_USER_ACTIVITY
     APIErrorResponse:
       description: API error response.
       properties:
@@ -135822,6 +135928,61 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_findings_read
+  /api/v2/ai_impact/user_activity:
+    post:
+      description: |-
+        Send daily AI coding tool activity for one or more users. Each entry records whether a
+        user was active on a given day, along with the AI tools and models they used. An entry
+        is stored once per tool, and sending the same user, day, and tool again overwrites the
+        previous value.
+      operationId: CreateAIImpactUserActivity
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    - attributes:
+                        day: "2026-05-26"
+                        is_active: true
+                        models:
+                          - claude-sonnet-4.5
+                          - gpt-5
+                        tools:
+                          - Claude Code
+                          - Cursor
+                        user_email: user@example.com
+                      type: ai_impact_user_activity
+            schema:
+              $ref: "#/components/schemas/AIImpactUserActivityRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+      summary: Send AI tool user activity
+      tags:
+        - AI Impact
+      x-codegen-request-body-name: body
+      x-menu-order: 1
   /api/v2/annotation:
     get:
       description: Returns a flat list of annotations matching the given page, time window, and optional widget filter.
@@ -236621,6 +236782,9 @@ servers:
         default: api
         description: The subdomain where the API is deployed.
 tags:
+  - description: |-
+      Send AI coding tool usage data to measure the impact of AI tools on software delivery.
+    name: AI Impact
   - description: |-
       Configure your API endpoints through the Datadog API.
     name: API Management
