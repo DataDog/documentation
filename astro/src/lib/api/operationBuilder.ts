@@ -106,6 +106,10 @@ export function extractOauthScopes(
   return undefined;
 }
 
+function isJsonMediaType(mediaType: string): boolean {
+  return /[/+]json\b/.test(mediaType);
+}
+
 /**
  * Extract request body schema and examples from the operation.
  */
@@ -123,20 +127,37 @@ export function extractRequestBody(
   const content = resolved.content;
   if (!content) return undefined;
 
-  const jsonContent = content["application/json"];
-  if (!jsonContent) return undefined;
+  // Hugo renders a body whatever its content type. Prefer JSON, then fall
+  // back to the first declared type (e.g. `text/json`, `multipart/form-data`).
+  const mediaType =
+    "application/json" in content
+      ? "application/json"
+      : Object.keys(content)[0];
+  if (!mediaType) return undefined;
+  const bodyContent = content[mediaType];
 
   // Read-only fields are omitted from request bodies: a client cannot send
   // them. Responses keep theirs, so the filter belongs here rather than in
   // `topLevelSchemaToFields`.
-  const schema = jsonContent.schema
-    ? stripReadOnlyFields(topLevelSchemaToFields(spec, jsonContent.schema))
+  const schema = bodyContent.schema
+    ? stripReadOnlyFields(topLevelSchemaToFields(spec, bodyContent.schema))
     : [];
 
   const examples: Array<{ name: string; value: string }> = [];
 
-  if (jsonContent.examples && typeof jsonContent.examples === "object") {
-    for (const [name, exampleObj] of Object.entries(jsonContent.examples)) {
+  // A JSON example would misrepresent a non-JSON body (and feed a JSON `-d`
+  // into the generated curl command), so those bodies show the schema only.
+  if (!isJsonMediaType(mediaType)) {
+    return {
+      required: resolved.required === true,
+      description: resolved.description || undefined,
+      schema,
+      examples,
+    };
+  }
+
+  if (bodyContent.examples && typeof bodyContent.examples === "object") {
+    for (const [name, exampleObj] of Object.entries(bodyContent.examples)) {
       const resolvedExample: OpenAPIV3.ExampleObject = isReference(exampleObj)
         ? (resolveRef(spec, exampleObj.$ref) ?? exampleObj)
         : exampleObj;
@@ -148,15 +169,15 @@ export function extractRequestBody(
         });
       }
     }
-  } else if (jsonContent.example !== undefined) {
+  } else if (bodyContent.example !== undefined) {
     examples.push({
       name: "Example",
-      value: JSON.stringify(jsonContent.example, null, 2),
+      value: JSON.stringify(bodyContent.example, null, 2),
     });
   }
 
-  if (examples.length === 0 && jsonContent.schema) {
-    const generated = generateExampleFromSchema(spec, jsonContent.schema);
+  if (examples.length === 0 && bodyContent.schema) {
+    const generated = generateExampleFromSchema(spec, bodyContent.schema);
     if (generated !== undefined) {
       examples.push({
         name: "Example",

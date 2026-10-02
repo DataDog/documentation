@@ -1,5 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+// @ts-ignore — Preact renderer is registered for SSR of nested ApiSchemaTable islands.
+import preactRenderer from "@astrojs/preact/server.js";
 import ApiEndpoint from "../ApiEndpoint.astro";
 import { getAllowedRegions } from "@config/regions";
 
@@ -119,5 +121,49 @@ describe("ApiEndpoint permissions and OAuth scopes", () => {
     expect(html).toMatch(
       /authorization <a href="\/api\/latest\/scopes\/#dashboards">scope<\/a> to access this endpoint\./,
     );
+  });
+});
+
+describe("ApiEndpoint argument tables", () => {
+  const field = (name: string) => ({
+    name,
+    type: "string",
+    required: true,
+    deprecated: false,
+    readOnly: false,
+    description: `The ${name}.`,
+  });
+
+  async function renderEndpoint(overrides: Record<string, unknown>) {
+    const container = await AstroContainer.create();
+    container.addServerRenderer({
+      renderer: preactRenderer,
+      name: "@astrojs/preact",
+    });
+    return container.renderToString(ApiEndpoint, {
+      props: {
+        data: JSON.stringify({ ...endpointWithTwoRegions, ...overrides }),
+      },
+    });
+  }
+
+  it("titles each argument table by parameter location, as Hugo does", async () => {
+    const html = await renderEndpoint({
+      pathParams: [field("app_id")],
+      queryParams: [field("version")],
+      headerParams: [field("x_header")],
+    });
+
+    expect(html).toMatch(
+      /<h4[^>]*>Path Parameters<\/h4>[\s\S]*data-field-name="app_id"[\s\S]*<h4[^>]*>Query Strings<\/h4>[\s\S]*data-field-name="version"[\s\S]*<h4[^>]*>Header Parameters<\/h4>[\s\S]*data-field-name="x_header"/,
+    );
+  });
+
+  it("omits the title for a parameter location with no parameters", async () => {
+    const html = await renderEndpoint({ pathParams: [field("app_id")] });
+
+    expect(html).toContain("Path Parameters");
+    expect(html).not.toContain("Query Strings");
+    expect(html).not.toContain("Header Parameters");
   });
 });

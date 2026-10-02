@@ -145,4 +145,26 @@ describe("apiEndpointNodes", () => {
     expect(out).toContain("- `apps_write`");
     expect(out).toContain("- `workflows_run`");
   });
+
+  it("titles each argument table by parameter location", () => {
+    const param = {
+      name: "version",
+      type: "string",
+      required: true,
+      deprecated: false,
+      readOnly: false,
+      description: "The version.",
+    };
+    const out = render({
+      ...baseEndpoint,
+      queryParams: [param],
+      headerParams: [{ ...param, name: "x_header" }],
+    });
+    const pathAt = out.indexOf("#### Path Parameters");
+    const queryAt = out.indexOf("#### Query Strings");
+    const headerAt = out.indexOf("#### Header Parameters");
+    expect(pathAt).toBeGreaterThan(-1);
+    expect(queryAt).toBeGreaterThan(pathAt);
+    expect(headerAt).toBeGreaterThan(queryAt);
+  });
 });

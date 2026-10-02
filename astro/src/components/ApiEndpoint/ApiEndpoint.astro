@@ -186,13 +186,22 @@ const hasParams =
         <div class={cl("api-endpoint__section")}>
           <h3>{translate("arguments")}</h3>
           {ep.pathParams && ep.pathParams.length > 0 && (
-            <ApiSchemaTable fields={ep.pathParams} />
+            <ApiSchemaTable
+              fields={ep.pathParams}
+              title={translate("path_parameters")}
+            />
           )}
           {ep.queryParams && ep.queryParams.length > 0 && (
-            <ApiSchemaTable fields={ep.queryParams} />
+            <ApiSchemaTable
+              fields={ep.queryParams}
+              title={translate("query_strings")}
+            />
           )}
           {ep.headerParams && ep.headerParams.length > 0 && (
-            <ApiSchemaTable fields={ep.headerParams} />
+            <ApiSchemaTable
+              fields={ep.headerParams}
+              title={translate("header_parameters")}
+            />
           )}
         </div>
       )}
