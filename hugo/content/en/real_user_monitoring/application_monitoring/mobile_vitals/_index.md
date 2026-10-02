@@ -164,12 +164,14 @@ The following telemetry provide insight into your mobile application's performan
 ## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance timeseries is in Preview.
+Performance timeseries is in Preview, and collection is off by default. To enable it, join the Preview. Datadog sends setup instructions to participating customers.
 {{< /callout >}}
 
 Performance timeseries is available on the iOS and Android SDKs.
 
 Standard mobile vitals report memory utilization averaged over the lifetime of the view. Performance timeseries captures memory and CPU usage every second for the length of the session, and displays the results on an interactive graph in the session, view, and operation [side panels][3].
+
+{{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
 
 After collection is enabled, timeseries are captured for all sessions.
 
@@ -177,10 +179,6 @@ Two series are collected:
 
 - **CPU usage**: the percentage of the device's total CPU capacity across all cores consumed by your application. This differs from the CPU ticks per second reported for a view.
 - **Memory**: the same value the SDK already collects for view memory vitals. See [view memory collection on iOS][4] and [on Android][5].
-
-### Enable performance timeseries
-
-Collection is off by default. During the Preview, Datadog provides setup instructions to participating customers. To get access, [join the Preview][6].
 
 ## Further Reading
 
@@ -191,5 +189,4 @@ Collection is off by default. During the Preview, Datadog provides setup instruc
 [3]: /real_user_monitoring/explorer/events/#performance-timeseries
 [4]: /real_user_monitoring/application_monitoring/ios/data_collected/#view-memory-collection
 [5]: /real_user_monitoring/application_monitoring/android/data_collected/#view-memory-collection
-[6]: https://www.datadoghq.com/product-preview/rum-timeseries/
 

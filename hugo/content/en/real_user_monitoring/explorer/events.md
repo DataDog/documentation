@@ -64,7 +64,7 @@ Click on events in the waterfall to access related data:
 ## Performance timeseries
 
 {{< callout url="https://www.datadoghq.com/product-preview/rum-timeseries/" btn_hidden="false" header="Join the Preview!">}}
-Performance timeseries is in Preview.
+Performance timeseries is in Preview, and collection is off by default. To enable it, join the Preview. Datadog sends setup instructions to participating customers.
 {{< /callout >}}
 
 {{< img src="real_user_monitoring/mobile_vitals/timeseries-panel.png" alt="The Performance Timeseries section of a RUM side panel, showing an interactive Memory and CPU graph over the length of a session" style="width:100%;" >}}
