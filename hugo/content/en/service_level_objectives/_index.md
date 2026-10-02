@@ -299,16 +299,20 @@ Status corrections allow you to exclude specific time periods from SLO status an
 - Ensure that temporary issues caused by deployments do not negatively impact your SLOs
 
 When you apply a correction, the time period you specify is dropped from the SLO's calculation.
-- For monitor-based SLOs, the correction time window is not counted.
 - For metric-based SLOs, all good and bad events in the correction window are not counted.
-- For Time Slice SLOs, the correction time window is treated as uptime.
+- For time slice SLOs, the correction time window is treated as uptime.
+- For monitor-based SLOs, the correction time window is not counted.
 
-You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, and `UNTIL`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
+Each correction applies to either a single SLO or to all SLOs that match a tag query:
+- **By SLO name**: The correction applies to one SLO.
+- **By tags**: The correction applies to every SLO whose tags match a query, such as `env:prod service:checkout`. This includes SLOs that you create or tag after you create the correction. For more information, see [Tag-based corrections](#tag-based-corrections).
+
+You have the option to create one-time corrections for ad hoc adjustments, or recurring corrections for predictable adjustments that occur on a regular cadence. One-time corrections require a start and end time, while recurring corrections require a start time, duration, and interval. Recurring corrections are based on [iCalendar RFC 5545's RRULE specification][24]. The supported rules are `FREQ`, `INTERVAL`, `COUNT`, `UNTIL`, and `BYDAY`. Specifying an end date for recurring corrections is optional in case you need the correction to repeat indefinitely.
 
 For either type of correction, you must select a correction category that states why the correction is being made. The available categories are {{< ui >}}Scheduled Maintenance{{< /ui >}}, {{< ui >}}Outside Business Hours{{< /ui >}}, {{< ui >}}Deployment{{< /ui >}}, and {{< ui >}}Other{{< /ui >}}. You can optionally include a description to provide additional context if necessary.
 
 Each SLO has a maximum limit of corrections that can be configured to ensure query performance. These limits only apply to the past 90 days per SLO, so corrections for time periods before the past 90 days do not count towards your limit. This means that:
-- If the end time of a one-time correction is before the past 90 days, it does count towards your limit.
+- If the end time of a one-time correction is before the past 90 days, it does not count towards your limit.
 - If the end time of the final repetition of a recurring correction is before the past 90 days, it does not count towards your limit.
 
 The 90-day limits per SLO are as follows:
@@ -320,23 +324,60 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting {{< ui >}}Correct status{{< /ui >}} in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
+<!-- TBD: Confirm whether a yearly recurring limit (20 per SLO) is user-facing. If so, add a "Yearly recurring" row. -->
+<!-- TBD: Confirm whether tag-based corrections have their own limits, and add them here if they do. -->
+
+You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26]. To create a tag-based correction with the API, set the `slo_query` attribute instead of `slo_id`.
+
+To create a tag-based correction with the API or Terraform, set the `slo_query` attribute instead of `slo_id`.
+
+#### Tag-based corrections
+
+A tag-based correction uses a query to select SLOs by their tags, so you can apply one correction across many SLOs. For example, use a tag-based correction to cover scheduled maintenance for every SLO owned by a team, or every SLO in an environment.
+
+Tag-based corrections are evaluated when the SLO status is calculated, so the correction applies to all SLOs that match the query at that time. If you create a new SLO or add tags to an existing SLO that match the query, the correction applies to that SLO as well.
+
+Queries use the [Events search syntax][29], and each term is matched against SLO tags. You can combine terms with `AND`, `OR`, and `NOT` (or `-`), group terms with parentheses, and use `*` as a wildcard. Terms separated by a space are combined with `AND`.
+
+| Query                          | Matches SLOs                                            |
+| ------------------------------ | ------------------------------------------------------- |
+| `env:prod`                     | Tagged `env:prod`                                       |
+| `team:payments -env:staging`   | Tagged `team:payments` and not tagged `env:staging`     |
+| `team:(payments OR checkout)`  | Tagged `team:payments` or `team:checkout`               |
+| `service:web-*`                | With a `service` tag whose value starts with `web-`     |
+
+A query cannot be empty or consist only of `*`.
+
+#### Manage corrections across your organization
+
+The {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. From this page, you can create corrections and edit or delete existing ones.
+
+<!-- TBD: The Corrections tab shows a Preview badge in the UI. Confirm whether the page is GA or in Preview, and add a callout if needed. -->
+<!-- TBD: Add a screenshot of the Corrections page. -->
 
 #### Access in the UI
 
-To access SLO status corrections in the UI:
+To create a status correction in the UI:
 
-1. Create a new SLO or click on an existing one.
-2. Navigate to an SLO's details side panel view.
-3. Under the gear icon, select {{< ui >}}Correct status{{< /ui >}} to open the correction creation modal.
-4. Select a {{< ui >}}Correction Category{{< /ui >}}.
-5. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
-6. Optionally add {{< ui >}}Notes{{< /ui >}}.
-7. Click {{< ui >}}Apply Correction{{< /ui >}}.
+1. Open the correction form in one of the following ways:
+   - On the {{< ui >}}Corrections{{< /ui >}} tab of the [SLO manage page][2], click {{< ui >}}New Correction{{< /ui >}}.
+   - In an SLO's details side panel, under the gear icon, select {{< ui >}}Correct status{{< /ui >}}. The form opens with that SLO selected.
+2. Under {{< ui >}}Select SLOs and category{{< /ui >}}, choose the correction scope:
+   - {{< ui >}}By Tags{{< /ui >}}: Enter a tag query. The form displays the SLOs that match the query.
+   - {{< ui >}}By SLO Name{{< /ui >}}: Search for and select a single SLO.
+3. Select a {{< ui >}}Category{{< /ui >}}.
+4. Under {{< ui >}}Select time window{{< /ui >}}, choose {{< ui >}}One-Time{{< /ui >}} or {{< ui >}}Recurring{{< /ui >}}, and specify the time period to correct. For recurring corrections, use the {{< ui >}}Basic{{< /ui >}} tab to set a schedule, or the {{< ui >}}Advanced{{< /ui >}} tab to enter an RRULE.
+5. Optionally, add notes under {{< ui >}}Add any notes{{< /ui >}}.
+6. Click {{< ui >}}Apply{{< /ui >}}.
 
+<!-- TBD: Replace slo-corrections-ui.png with a screenshot of the current correction form. -->
 {{< img src="service_level_objectives/slo-corrections-ui.png" alt="SLO correction UI" style="width:80%;">}}
 
-To view, edit, and delete existing status corrections, click on the {{< ui >}}Corrections{{< /ui >}} tab at the top of an SLO's detailed side panel view.
+**Note**: After you create a correction, you cannot change its scope or switch it between one-time and recurring.
+
+To view, edit, and delete existing status corrections, use the {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2], or the {{< ui >}}Corrections{{< /ui >}} tab in an SLO's details side panel.
+
+<!-- TBD: Confirm whether the side panel Corrections tab includes tag-based corrections that match the SLO. If not, direct users to the Corrections page for tag-based corrections. -->
 
 #### Visualizing status corrections
 
@@ -382,3 +423,4 @@ The SLO Calendar View is available on the [SLO manage page][2]. On the top right
 [26]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/slo_correction
 [27]: /events/explorer/
 [28]: /monitors/types/event/
+[29]: /events/explorer/searching/
