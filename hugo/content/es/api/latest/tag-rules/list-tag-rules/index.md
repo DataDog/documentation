@@ -1,3 +1,3 @@
 ---
-title: Listar reglas de etiqueta
+title: Liste las reglas de etiqueta
 ---

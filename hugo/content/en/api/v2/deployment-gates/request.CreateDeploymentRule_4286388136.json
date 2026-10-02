@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "dry_run": false,
+      "name": "Query monitor deployment rule",
+      "options": {
+        "query": "service:transaction-backend env:production"
+      },
+      "type": "monitor"
+    },
+    "type": "deployment_rule"
+  }
+}

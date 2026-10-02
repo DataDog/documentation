@@ -32,4 +32,5 @@ cascade:
 
 {{< whatsnext desc="ClickHouse guides:" >}}
     {{< nextlink href="database_monitoring/setup_clickhouse" >}}Setting Up Database Monitoring for ClickHouse{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/clickhouse_agent_upgrade" >}}Upgrading the ClickHouse integration from Agent versions earlier than 7.84{{< /nextlink >}}
 {{< /whatsnext >}}

@@ -43,14 +43,14 @@ You may create a test using one of the following options:
    - **Create a test from a template**:
    
      1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Request Details{{< /ui >}}, {{< ui >}}Assertions{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, and {{< ui >}}Monitor Settings{{< /ui >}}. 
-     2. Click {{< ui >}}+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     2. Click {{< ui >}}\+ Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
      3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test. <br /><br>
 
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
   - **Build a test from scratch**:
     
-     1. To build a test from scratch, click the {{< ui >}}+ Start from scratch{{< /ui >}} template, then select the `HTTP` request type and specify the {{< ui >}}URL{{< /ui >}} to query. 
+     1. To build a test from scratch, click the {{< ui >}}\+ Start from scratch{{< /ui >}} template, then select the `HTTP` request type and specify the {{< ui >}}URL{{< /ui >}} to query. 
         Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 
         <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
@@ -145,7 +145,7 @@ Define variables for your HTTP API tests with JavaScript:
 
 {{< img src="synthetics/api_tests/http_javascript.png" alt="Define HTTP API test with Javascript" style="width:90%;" >}}
 
-<div class="alert alert-info">JavaScript capabilities are not supported for API tests in Windows private locations.</div>
+This script runs before Datadog sends the HTTP request. To read or assert on the response body, use [Define assertions > JavaScript](#define-assertions) instead.
 
    {{% /tab %}}
 
@@ -194,11 +194,12 @@ Use JavaScript assertions when standard response assertions don't meet your vali
 
 When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
 
+JavaScript assertions run after Datadog receives the HTTP response. To set variables before the request is sent, such as headers or signatures, use {{< ui >}}Variable From Script{{< /ui >}} under [Advanced Options > Javascript](#advanced-options).
+
 {{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
 
 <div class="alert alert-info">
   <ul>
-    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
     <li>If a failed JavaScript assertion's error message might include sensitive data, under {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Privacy{{< /ui >}}, enable {{< ui >}}Do not save response body{{< /ui >}}. This truncates the assertion error message.</li>
   </ul>
 </div>
@@ -366,6 +367,10 @@ The {{< ui >}}Summary{{< /ui >}} panel identifies unique issues causing failures
 
 For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
+## Launch a Bits Investigation
+
+To identify the root cause of a failing Synthetic HTTP test, launch a [Bits Investigation][18]. Bits Investigation analyzes test results, traces, logs, and metrics to surface a root cause and flag if the failure is a regression or a misconfiguration.
+
 ## Permissions
 
 By default, only users with the [Datadog Admin and Datadog Standard roles][13] can create, edit, and delete Synthetic HTTP tests. To get create, edit, and delete access to Synthetic HTTP tests, upgrade your user to one of those two [default roles][13].
@@ -394,3 +399,4 @@ If you are using the [custom role feature][14], add your user to any custom role
 [15]: /account_management/rbac/#create-a-custom-role
 [16]: /synthetics/api_tests/errors/#http-errors
 [17]: /api_catalog
+[18]: /bits_ai/bits_investigation/investigate_issues/#from-the-synthetic-test-details-page

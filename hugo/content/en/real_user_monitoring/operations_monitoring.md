@@ -20,12 +20,9 @@ further_reading:
 In Datadog Real User Monitoring (RUM), a [journey][9] represents a major user-facing area of your application like checkout, login, or search. Each journey includes operations, which are the critical technical steps that make the experience work.
 
 - Business teams use **journeys** to track and improve user conversion.
-- Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments.
-
-You can create operations with the RUM SDK APIs, directly in Datadog, or programmatically with the Datadog API.
+- Engineering teams use **operations** to monitor and minimize technical failures that impact key moments in the journey.
 
 For example, the checkout experience of an ecommerce platform is a journey. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After you create operations, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your journey.
-
 
 The following table shows additional example journeys and their associated journey operations by industry.
 
@@ -35,6 +32,8 @@ The following table shows additional example journeys and their associated journ
 | Ecommerce      | Checkout | Users can enter payment details <br> Users can save their payment method <br> Users can pay                                      |
 | Streaming      | Search   | Users can find results for their search <br> Users can load the description of a title <br> Users can start watching the trailer |
 | CRM            | Quote    | Users can start a new quote <br> Users can add line items to the quote <br> Users can send a quote to recipients                 |
+
+You can create operations with the RUM SDK APIs, directly in Datadog, through the Datadog MCP (Model Context Protocol) Server, or programmatically with the Datadog API.
 
 ## Prerequisites
 
@@ -357,6 +356,10 @@ Each operation must have a condition for ending in a failure:
 
 <div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog through the UI or API.</div>
 
+## Create operations with the Datadog MCP
+
+Operations can also be created through the [Datadog MCP][13].
+
 ## Create operations with the Datadog API
 
 Operations can also be created through the [Datadog API][10].
@@ -421,3 +424,5 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [10]: /api/latest/rum-operations/
 [11]: /real_user_monitoring/rum_without_limits/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters/
+[13]: /mcp_server/tools/#rum
+

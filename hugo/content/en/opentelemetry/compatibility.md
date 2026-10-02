@@ -13,20 +13,20 @@ Datadog offers multiple setup options to accommodate various use cases, from ful
 
 ## Setups
 
-Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the collector used to process and forward telemetry data.
+Datadog supports several configurations for using OpenTelemetry. The primary difference between these setups is the choice of SDK (OpenTelemetry or Datadog) and the Collector or Agent used to process and forward telemetry data.
 
 | Setup Type                                           | API                     | SDK         | Collector/Agent                               |
 |------------------------------------------------------|-------------------------|-------------|-----------------------------------------------|
 | [**Datadog SDK + DDOT (Recommended)**][29]           | Datadog API or OTel API | Datadog SDK | Datadog Distribution of OTel Collector (DDOT) |
 | [**OTel SDK + DDOT**][29]                            | OTel API                | OTel SDK    | Datadog Distribution of OTel Collector (DDOT) |
-| [**OTel SDK + OTLP OTel Collector**][7]         | OTel API                | OTel SDK    | OTLP OTel Collector                      |
+| [**OTel SDK + Upstream OpenTelemetry Collector**][7] | OTel API                | OTel SDK    | OpenTelemetry Collector Contrib               |
 | [**Direct OTLP Ingest**][28]                         | OTel API                | OTel SDK    | N/A (Direct to Datadog endpoint)              |
 
 ## Feature compatibility
 
 The following table shows feature compatibility across different setups:
 
-| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + OTLP OTel Collector | Direct OTLP Ingest |
+| Feature | Datadog SDK + DDOT (Recommended) | OTel SDK + DDOT | OTel SDK + Upstream OpenTelemetry Collector | Direct OTLP Ingest |
 |---|---|---|---|---|
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces, Metrics, Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
@@ -49,6 +49,7 @@ The following table shows feature compatibility across different setups:
 | [Real User Monitoring][22] (RUM) | {{< X >}} | | | |
 | [Source code integration][24] | {{< X >}} | | | |
 
+
 ## API support
 
 Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs APIs across various languages. Find your language in the table below for setup guides and support details.
@@ -61,7 +62,7 @@ Datadog SDKs provide support for the OpenTelemetry Traces, Metrics, and Logs API
 | [Java][34] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Go][35] | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Ruby][36] | {{< X >}} | Alpha | {{< X >}} |
-| [PHP][37] | {{< X >}} | {{< X >}} | *Not Yet Supported* |
+| [PHP][37] | {{< X >}} | {{< X >}} | {{< X >}} |
 
 ## More details
 

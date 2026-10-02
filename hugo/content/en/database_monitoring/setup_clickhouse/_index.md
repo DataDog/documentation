@@ -5,6 +5,9 @@ disable_sidebar: true
 aliases:
   - /database_monitoring/guide/clickhouse/
 further_reading:
+- link: "/database_monitoring/guide/clickhouse_agent_upgrade"
+  tag: "Documentation"
+  text: "Upgrading the ClickHouse integration from Agent versions earlier than 7.84" 
 - link: "https://www.datadoghq.com/blog/database-monitoring-for-clickhouse/"
   tag: "Blog"
   text: "Monitor ClickHouse query performance with Datadog Database Monitoring"
@@ -16,11 +19,12 @@ This feature is in preview and requires Datadog Agent v7.78 or later. Customers 
 
 ### ClickHouse versions supported
 
-|                              | Self-hosted | ClickHouse Cloud |
-| ---------------------------- | ----------- | ---------------- |
-| ClickHouse 23.x              | {{< X >}}   | {{< X >}}        |
-| ClickHouse 24.x              | {{< X >}}   | {{< X >}}        |
-| ClickHouse 25.x              | {{< X >}}   | {{< X >}}        |
+|                              | Self-hosted | ClickHouse Cloud | Note |
+| ---------------------------- | ----------- | ---------------- | ---- |
+| ClickHouse 23.x              | {{< X >}}   | {{< X >}}        |      |
+| ClickHouse 24.x              | {{< X >}}   | {{< X >}}        |      |
+| ClickHouse 25.x              | {{< X >}}   | {{< X >}}        |      |
+| ClickHouse 26.3              | {{< X >}}   | {{< X >}}        | Requires Datadog Agent 7.84+. |
 
 ### Setup instructions by hosting type
 

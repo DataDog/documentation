@@ -1,7 +1,7 @@
 ---
 aliases:
 - /ja/getting_started/tracing/distributed-tracing
-description: アプリケーションパフォーマンスモニタリング (APM) を設定して、ボトルネックを特定し、問題をトラブルシューティングし、Datadog
+description: Application Performance Monitoring (APM) を設定してボトルネックを特定し、問題をトラブルシューティングし、Datadog
   にトレースを送信します。
 further_reading:
 - link: /tracing/
@@ -12,39 +12,46 @@ further_reading:
   text: ランタイムメトリクスの有効化
 - link: /tracing/guide/#enabling-tracing-tutorials
   tag: ガイド
-  text: トレースを有効にするための様々な方法のチュートリアル
+  text: トレースを有効にするためのさまざまな方法のチュートリアル
 - link: https://learn.datadoghq.com/courses/intro-to-apm
   tag: ラーニングセンター
   text: Application Performance Monitoring の紹介
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: APM の理解を深めるためのインタラクティブセッションに参加しましょう
+  text: APM の理解を深めるためのインタラクティブセッションに参加する
 title: APM トレーシングの概要
 ---
 ## 概要 {#overview}
 
-Datadog Application Performance Monitoring (APM) は、アプリケーションを詳細に可視化することで、パフォーマンスのボトルネックを特定し、問題をトラブルシューティングし、サービスを最適化することを可能にします。
+Datadog Application Performance Monitoring (APM) は、アプリケーションを詳細に可視化することで、パフォーマンスのボトルネックの特定、問題のトラブルシューティング、サービスの最適化を可能にします。
 
-このガイドでは、APM の始め方と最初のトレースを Datadog に送信する方法を説明します。
+このガイドでは、APM を使い始め、最初のトレースを Datadog に送信する方法を説明します。
 
 1. Datadog APM をセットアップして、Datadog にトレースを送信します。
 1. アプリケーションを実行してデータを生成します。
 1. 収集したデータを Datadog で確認します。
 
+{{< skill-callout
+    title="agent を使用して APM をセットアップする"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
+
 ## 前提条件 {#prerequisites}
 
 このガイドの手順を実行するには、以下の準備が必要です。
 
-1. [Datadog アカウントの作成][1]をまだ行っていない場合は、作成します。
-1. [Datadog API キー][2]を検索または作成します。
+1. [Datadog アカウントの作成][1] をまだ行っていない場合は、作成します。
+1. [Datadog API キー][2] を検索または作成します。
 1. Linux ホストまたは VM を起動します。
 
-## アプリケーションの作成 {#create-an-application}
+## アプリケーションを作成する {#create-an-application}
 
-Datadog で観測するアプリケーションを作成するには
+Datadog で観測するアプリケーションを作成するには、次のようにします。
 
-1. Linux ホストまたは VM 上で、`hello.py` という名前の Python アプリケーションを新規作成します。例えば、`nano hello.py` とします。
-1. 以下のコードを `hello.py` に追加します。
+1. Linux ホストまたは VM 上で、`hello.py` という名前の Python アプリケーションを新規作成します。たとえば、`nano hello.py` とします。
+1. 次のコードを `hello.py` に追加します。
 
     {{< code-block lang="python" filename="hello.py" collapsible="true" disable_copy="false" >}}
   from flask import Flask
@@ -69,10 +76,10 @@ Datadog で観測するアプリケーションを作成するには
 
 ## Datadog APM を設定する {#set-up-datadog-apm}
 
-アプリケーションのコードやデプロイプロセスを変更せずに Datadog APM を設定するには、Single Step APM Instrumentation を使用します。あるいは、[Datadog トレーシング][8]ライブラリを使用して APM を設定することもできます。
+アプリケーションのコードやデプロイプロセスを変更せずに Datadog APM を設定するには、Single Step APM Instrumentation を使用します。あるいは、[Datadog トレーシング][8] ライブラリを使用して APM を設定することもできます。
 
 
-1. インストールコマンドを実行します。
+1. 次のインストールコマンドを実行します。
 
    ```shell
     DD_API_KEY=<YOUR_DD_API_KEY> DD_SITE="<YOUR_DD_SITE>" DD_APM_INSTRUMENTATION_ENABLED=host DD_APM_INSTRUMENTATION_LIBRARIES=python:4 DD_ENV=<AGENT_ENV> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
@@ -80,28 +87,28 @@ Datadog で観測するアプリケーションを作成するには
  
     Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2], `<YOUR_DD_SITE>` with your [Datadog site][7], and `<AGENT_ENV>` with the environment your Agent is installed on (for example, `development`).
 
-1. ホストまたは VM のサービスを再起動します。
+1. ホストまたは VM 上のサービスを再起動します。
 1. Agent が実行されていることを確認します。
 
     ```shell
    sudo datadog-agent status
    ```
 
-この方法では、Datadog Agent を自動的にインストールし、Datadog APM を有効にし、実行時にアプリケーションをインスツルメントします。
+この方法では、Datadog Agent を自動的にインストールし、Datadog APM を有効にし、実行時にアプリケーションを [インスツルメント][5] します。
 
-## アプリケーションの実行 {#run-the-application}
+## アプリケーションを実行する {#run-the-application}
 
 Datadog APM を Single Step Instrumentation でセットアップすると、Datadog は実行時にアプリケーションを自動的にインスツルメントします。
 
-`hello.py`を実行するには:
+`hello.py`を実行するには、次のようにします。
 
-1. カレントディレクトリに Python 仮想環境を作成します。
+1. 現在のディレクトリに Python 仮想環境を作成します。
 
    ```shell
    python3 -m venv ./venv
    ```
 
-1. `venv` 仮想環境をアクティブにします。
+1. `venv` 仮想環境を有効化します。
 
    ```shell
    source ./venv/bin/activate
@@ -121,7 +128,7 @@ Datadog APM を Single Step Instrumentation でセットアップすると、Dat
    python3 hello.py
    ```
 
-## アプリケーションのテスト {#test-the-application}
+## アプリケーションをテストする {#test-the-application}
 
 Datadog にトレースを送信するアプリケーションをテストします。
 
@@ -139,26 +146,26 @@ Datadog にトレースを送信するアプリケーションをテストしま
 
 ## Datadog でトレースを調べる {#explore-traces-in-datadog}
 
-1. Datadog の [**APM** > **Services**][3] に移動します。`hello` という名前の Python サービスが表示されるはずです。
+1. Datadog で、[{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][3] (サービス) に移動します。`hello` という名前の Python サービスが表示されるはずです。
 
-   {{< img src="/getting_started/apm/service-catalog.png" alt="Software Catalog に新しい Python サービスが表示されます。" style="width:100%;" >}}
+   {{< img src="/getting_started/apm/service-catalog.png" alt="カタログに新しい Python サービスが表示されています。" style="width:100%;" >}}
 
 1. サービスを選択して、レイテンシー、スループット、エラー率などのパフォーマンスメトリクスを表示します。
-1. [**APM** > **Traces**][4] に移動します。`hello` サービスのトレースが表示されるはずです。
+1. [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4] (トレース) に移動します。`hello` サービスのトレースが表示されるはずです。
 
-   {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace Explorer に hello サービスのトレースが表示されます。" style="width:100%;" >}}
+   {{< img src="/getting_started/apm/trace-explorer.png" alt="Trace Explorer に hello サービスのトレースが表示されています。" style="width:100%;" >}}
 
 1. トレースを選択すると、パフォーマンスのボトルネックを特定するのに役立つフレームグラフを含む詳細が表示されます。
 
 ## 高度な APM セットアップ {#advanced-apm-setup}
 
-ここまでの間、Single Step インスツルメンテーションを使用して、Datadog によって `hello.py` アプリケーションが自動的にインスツルメンテーションされるようにしました。このアプローチは、コードに手を加えたりライブラリを手動でインストールしたりせずに、一般的なライブラリや言語全体で重要なトレースをキャプチャしたい場合に推奨されます。
+ここまでは、Single Step Instrumentation を使用して、Datadog によって `hello.py` アプリケーションが自動的にインスツルメンテーションされるようにしてきました。このアプローチは、コードに手を加えたりライブラリを手動でインストールしたりせずに、一般的なライブラリや言語全体で主要なトレースを収集したい場合に推奨されます。
 
-しかし、カスタムコードからトレースを収集する必要がある場合や、より細かい制御が必要な場合は、[カスタムインスツルメンテーション][6]を追加することができます。
+ただし、カスタムコードからトレースを収集する必要がある場合や、より細かい制御が必要な場合は、[カスタムインスツルメンテーション][6] を追加することができます。
 
 これを説明するために、Datadog Python SDK を `hello.py` にインポートし、カスタムスパンとスパンタグを作成します。
 
-カスタムインスツルメンテーションを追加するには
+カスタムインスツルメンテーションを追加するには、次のようにします。
 
 1. Datadog SDK をインストールします。
 
@@ -200,25 +207,25 @@ Datadog にトレースを送信するアプリケーションをテストしま
    ```shell
    curl http://0.0.0.0:5050/
    ```
-1. Datadog の [**APM** > **Traces**][4] に移動します。
-1.  **hello** トレースを選択します。
+1. Datadog で、[{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][4] (トレース) に移動します。
+1. トレース `hello` を選択します。
 1. フレームグラフで新しいカスタム `get_quote` スパンを見つけ、その上にカーソルを合わせます。
 
    {{< img src="/getting_started/apm/custom-instrumentation.png" alt="get_quote カスタムスパンがフレームグラフに表示されます。カーソルを合わせると、quote スパンタグが表示されます。" style="width:100%;" >}}
 
-1. カスタム `quote` スパンタグが **Info** タブに表示されていることに注目してください。
+1. カスタム `quote` スパンタグが [{{< ui >}}Info{{< /ui >}}] (情報) タブに表示されていることに注目してください。
 
 ## 次のステップ{#whats-next}
 
-トレーシングを設定し、アプリケーションが Datadog にデータを送信した後、追加の APM 機能を確認します。
+トレーシングを設定し、アプリケーションから Datadog へのデータ送信が開始されたら、その他の APM 機能を確認します。
 
-### Software Catalog {#software-catalog}
+### カタログ {#catalog}
 
-[Software Catalog][9] は、所有権メタデータ、パフォーマンスインサイト、セキュリティ分析、およびコスト配分を 1 か所に統合し、サービスの統合ビューを提供します。タグ、注釈、または `service.datadog.yaml` ファイルを使用して[サービスメタデータ][10]を構成し、所有権情報、ランブック、およびドキュメントリンクでサービスを充実させます。
+[カタログ][9] は、オーナーシップのメタデータ、パフォーマンスのインサイト、セキュリティ分析、およびコスト配分を 1 か所に統合し、サービスをまとめて表示します。タグ、アノテーション、または `service.datadog.yaml` ファイルを使用して [サービスメタデータ][10] を構成し、オーナーシップ情報、ランブック、およびドキュメントリンククなどを追加できます。
 
-### トレースの取り込みと保存 {#trace-ingestion-and-retention}
+### トレースの取り込みと保持{#trace-ingestion-and-retention}
 
-[取り込みのコントロール][11]と[保持フィルター][12]を構成することで、コストを管理し、データ量を制御します。ingestion controls により、Datadog Agent または SDK レベルでサンプリングレートをカスタマイズでき、retention filters は検索および分析のためにインデックスされるスパンを決定します。
+[取り込み制御][11] と [保持フィルター][12] を構成することで、コストを管理し、データ量を制御します。取り込み制御により、Datadog Agent または SDK レベルでサンプリングレートをカスタマイズできます。保持フィルターは、検索および分析のためにインデックス化するスパンを決定します。
 
 ## 参考資料 {#further-reading}
 
@@ -232,7 +239,7 @@ Datadog にトレースを送信するアプリケーションをテストしま
 [6]: /ja/tracing/trace_collection/custom_instrumentation/
 [7]: /ja/getting_started/site/
 [8]: /ja/tracing/trace_collection/automatic_instrumentation/dd_libraries/
-[9]: /ja/internal_developer_portal/software_catalog/
-[10]: /ja/internal_developer_portal/software_catalog/entity_model/
+[9]: /ja/internal_developer_portal/catalog/
+[10]: /ja/internal_developer_portal/catalog/entity_model/
 [11]: /ja/tracing/trace_pipeline/ingestion_controls/
 [12]: /ja/tracing/trace_pipeline/trace_retention/

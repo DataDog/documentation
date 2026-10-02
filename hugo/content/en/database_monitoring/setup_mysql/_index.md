@@ -6,16 +6,20 @@ disable_sidebar: true
 
 ### MySQL versions supported
 
-|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL with >16GB RAM | Azure |
-|--|------------|---------|------------|------------------|---------|
+|  | Self-hosted | Amazon RDS | Amazon Aurora | Google Cloud SQL with >16GB RAM | Azure | Note |
+|--|------------|---------|------------|------------------|---------|------|
 | MySQL 5.6     | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | MySQL 5.7     | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | MySQL 8.0     | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| MariaDB 10.5  | {{< X >}} | {{< X >}} |  |  |  |
-| MariaDB 10.6  | {{< X >}} | {{< X >}} |  |  |  |
-| MariaDB 10.11 | {{< X >}} | {{< X >}} |  |  |  |
-| MariaDB 11.4  | {{< X >}} |  |  |  |  |
+| MySQL 9       | {{< X >}} |  |  |  |  | Requires Datadog Agent 7.84+. |
+| MariaDB 10.5  | {{< X >}} | {{< X >}} |  |  |  |  |
+| MariaDB 10.6  | {{< X >}} | {{< X >}} |  |  |  |  |
+| MariaDB 10.11 | {{< X >}} | {{< X >}} |  |  |  |  |
+| MariaDB 11.4  | {{< X >}} |  |  |  |  |  |
+| MariaDB 12    | {{< X >}} |  |  |  |  | Requires Datadog Agent 7.84+. |
+| MariaDB 13    | {{< X >}} |  |  |  |  | Requires Datadog Agent 7.84+. |
 
+**Note**: If you use MariaDB, see [Setting Up MariaDB][1] instead.
 
 For setup instructions, select your hosting type:
 
@@ -26,3 +30,5 @@ For setup instructions, select your hosting type:
   {{< image-card href="/database_monitoring/setup_mysql/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
   {{< image-card href="/database_monitoring/setup_mysql/azure" src="integrations_logos/azure_db_for_mysql.png" alt="MySQL" >}}
 {{< /card-grid >}}
+
+[1]: /database_monitoring/setup_mariadb/

@@ -10,6 +10,8 @@ further_reading:
 
 Database Monitoring provides deep visibility into your MySQL databases by exposing query metrics, query samples, explain plans, connection data, system metrics, and telemetry for the InnoDB storage engine.
 
+**Note**: If you use MariaDB, see [Setting Up MariaDB][15] instead.
+
 The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your MySQL database:
 
 1. [Configure database parameters](#configure-mysql-settings)
@@ -19,10 +21,10 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported MySQL versions
-: 5.6, 5.7, or 8.0+
+: 5.6, 5.7, 8.0+, or 9 (MySQL 9 requires Agent 7.84+)
 
 Supported MariaDB versions
-: 10.5, 10.6, 10.11, or 11.1 <br/><br/>
+: 10.5, 10.6, 10.11, 11.1, 12, or 13 (MariaDB 12 and 13 require Agent 7.84+) <br/><br/>
 Database Monitoring for MariaDB is supported with [known limitations][13].
 
 Supported Agent versions
@@ -311,5 +313,5 @@ If you have installed and configured the integrations and Agent as described and
 [10]: /agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /database_monitoring/troubleshooting/?tab=mysql
-[13]: /database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
 [14]: /database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas
+[15]: /database_monitoring/setup_mariadb/

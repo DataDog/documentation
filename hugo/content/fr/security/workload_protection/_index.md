@@ -29,6 +29,12 @@ cascade:
 description: Détectez et répondez aux menaces à l'exécution sur vos hosts, conteneurs
   et charges de travail serverless avec Datadog Workload Protection.
 further_reading:
+- link: https://learn.datadoghq.com/courses/workload-protection-detect-compromises
+  tag: Centre d'apprentissage
+  text: Détectez les compromissions de hosts et de conteneurs avec Workload Protection
+- link: https://learn.datadoghq.com/courses/workload-protection-enable-manage
+  tag: Centre d'apprentissage
+  text: Activez et gérez Workload Protection
 - link: https://www.datadoghq.com/blog/workload-protection-investigation/
   tag: Blog
   text: Transformez des signaux d'exécution fragmentés en scénarios d'attaque cohérents
@@ -37,12 +43,6 @@ further_reading:
   tag: Blog
   text: Identifiez et corrigez les problèmes de posture à l'exécution avec Workload
     Protection Findings
-- link: https://learn.datadoghq.com/courses/workload-protection-detect-compromises
-  tag: Centre d'apprentissage
-  text: Détectez les compromissions de hosts et de conteneurs avec Workload Protection
-- link: https://learn.datadoghq.com/courses/workload-protection-enable-manage
-  tag: Centre d'apprentissage
-  text: Activez et gérez Workload Protection
 title: Workload Protection
 ---
 Datadog Workload Protection offre une visibilité et une défense en temps réel pour votre infrastructure en surveillant en continu l'activité des fichiers, du réseau et des processus dans vos environnements. Il détecte les menaces au moment où elles surviennent, générant des signaux de sécurité et des constatations. Utilisez-les pour identifier, enquêter et arrêter les comportements malveillants avant qu'ils n'impactent vos charges de travail.
@@ -53,11 +53,11 @@ Workload Protection fait partie de la plateforme Datadog Security. Les signaux s
 
 Workload Protection ne se limite pas à la détection des menaces à l'exécution. De nombreuses organisations l'utilisent dans divers cas d'utilisation opérationnels et de sécurité :
 
-- **Validation de la conformité :** Workload Protection vous aide à valider la conformité avec des cadres réglementaires tels que PCI, FedRAMP et SOC 2 en surveillant en continu l'activité à l'exécution pour détecter les violations de politiques, les configurations risquées et les changements non autorisés.
+- **Validation de la conformité :** Workload Protection vous aide à valider la conformité avec des cadres réglementaires tels que PCI, FedRAMP et SOC 2 en surveillant en continu l'activité à l'exécution pour détecter les violations de politiques, les configurations risquées et les changements non autorisés.
 
-- **Posture de sécurité à l'exécution :** Workload Protection améliore votre posture de sécurité en identifiant les pratiques d'exécution non sécurisées et les dérives de configuration sensibles, vous aidant à détecter les faiblesses avant qu'elles ne puissent être exploitées.
+- **Posture de sécurité à l'exécution :** Workload Protection améliore votre posture de sécurité en identifiant les pratiques d'exécution non sécurisées et les dérives de configuration sensibles, vous aidant à détecter les faiblesses avant qu'elles ne puissent être exploitées.
 
-- **Surveillance de l'infrastructure :** Workload Protection suit tout type de comportement à l'exécution, qu'il soit lié à la sécurité ou non. Du débogage de charges de travail personnalisées à la surveillance des processus au niveau du système et des sessions utilisateur à distance, il offre une visibilité en temps réel sur le fonctionnement de vos environnements.
+- **Infrastructure Monitoring :** Workload Protection suit tout type de comportement à l'exécution, qu'il soit lié à la sécurité ou non. Du débogage de charges de travail personnalisées à la surveillance des processus au niveau du système et des sessions utilisateur à distance, il offre une visibilité en temps réel sur le fonctionnement de vos environnements.
 
 {{< img src="security/workload_protection/k8s_remote_access.png" alt="Répartition des sessions utilisateur à distance Kubernetes" width="100%">}}
 
@@ -151,3 +151,7 @@ Utilisez [Coverage][5] pour obtenir une vue unifiée et en temps réel de la pos
 [14]: /fr/security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [15]: /fr/actions/workflows/
 [16]: /fr/security/workload_protection/investigate_and_triage/security_signals/actions
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

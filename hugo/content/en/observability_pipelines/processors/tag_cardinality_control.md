@@ -12,11 +12,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="#"
- btn_hidden="true" header="Join the Preview!">}}
-The Tag Cardinality Control processor is in Preview. Contact your account manager to request access.
-{{< /callout >}}
-
 ## Overview
 
 The Tag Cardinality Control processor limits the number of tag values for each metric. For example, a metric with unbounded tag keys, such as `userID`, can cause the metric's cardinality to spike and impact ingestion and indexing costs. To prevent these unexpected spikes, use the processor to set a cardinality limit for metrics that match the filter query, and either drop metrics received after the limit is reached or drop the tags for those metrics.

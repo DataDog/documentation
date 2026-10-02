@@ -26,7 +26,7 @@ further_reading:
   text: Cloud Cost Management におけるタグについて
 - link: /cloud_cost_management/cloud_cost_skill/
   tag: ドキュメント
-  text: Bits Chat で Cloud Cost スキルを使用してください
+  text: Bits Chat で Cloud Cost スキルを使用する
 - link: https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/
   tag: ブログ
   text: Datadog Cloud Cost Management でクラウドコストの可視化とコントロールを実現する
@@ -56,14 +56,17 @@ further_reading:
   text: Cloud Cost Management により年間 150 万ドルを節約した方法
 - link: https://www.datadoghq.com/blog/cloud-cost-management-oci/
   tag: ブログ
-  text: Datadog Cloud Cost Management を使用して、OCI コストを管理および最適化する
+  text: Datadog Cloud Cost Management を使用して OCI コストを管理および最適化する
 - link: https://www.datadoghq.com/blog/cambia-health-cost-optimization
   tag: ブログ
   text: Cambia Health Solutions が Cloud Cost Management と Datadog Resource Catalog
     を使用して月額 30,000 ドルを節約した方法
+- link: https://www.datadoghq.com/blog/flexible-sheets-cloud-cost-management/
+  tag: ブログ
+  text: Datadog Sheetsの柔軟なスプレッドシートを使用して、Cloud Costを分析します。
 title: Cloud Cost Management
 ---
-{{< learning-center-callout header="エンゲージメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
+{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Cloud+Cost+Management">}}
   クラウドプロバイダーのコストを調査し、リアルタイムのテレメトリデータと相関付けます。クラウドコストの発生源、変動、最適化の機会についての具体的なインサイトとアラートを得ることができます。
 {{< /learning-center-callout >}}
 
@@ -71,7 +74,7 @@ title: Cloud Cost Management
 
 Cloud Cost Management は、エンジニアリングチームや財務チームに、インフラストラクチャーの変更がコストに与える影響を理解し、組織全体の支出を割り当て、非効率性を特定するためのインサイトを提供します。
 
-{{< img src="cloud_cost/summary.png" alt="Datadog の Cloud Cost Summary ページで、クラウドプロバイダーのコストと使用状況をすべて把握することができます" style="width:100%;" >}}
+{{< img src="cloud_cost/summary.png" alt="Datadog の Cloud Cost Summary ページでクラウドプロバイダーのコストと使用状況をすべて把握" style="width:100%;" >}}
 
 Datadog はクラウドコストデータを取り込み、[**エクスプローラー**ページ][1]の検索クエリで使用可能なメトリクスに変換します。コスト上昇時には、その上昇を使用量メトリクスと相関付けて根本原因を特定することができます。
 
@@ -115,13 +118,13 @@ Datadog の日々の費用と関連する利用メトリクスを 15 か月間�
 
 ## コストモニターの作成 {#create-a-cost-monitor}
 
-[Cloud Cost モニター][3]を作成して、クラウド支出を積極的に管理・最適化しましょう。クラウド費用を監視するために、{{< ui >}}Cost Changes{{< /ui >}} または {{< ui >}}Cost Threshold{{< /ui >}} を選択できます。
+[Cloud Cost モニター][3]を作成して、クラウド支出を積極的に管理および最適化します。{{< ui >}}Cost Changes{{< /ui >}}、{{< ui >}}Cost Anomalies{{< /ui >}}、{{< ui >}}Cost Threshold{{< /ui >}}、{{< ui >}}Cost Forecast{{< /ui >}}、または{{< ui >}}Budget{{< /ui >}}のモニターから選択します。各タイプの詳細については、[Cloud Cost Monitors][3]を参照してください。
 
-{{< img src="cloud_cost/monitor.png" alt="コストの変動をアラートする Cloud Cost モニターの作成" style="width:100%;" >}}
+{{< img src="cloud_cost/monitor-2.png" alt="コストの変動をアラートする Cloud Cost モニターの作成" style="width:100%;" >}}
 
 ## コストの割り当て {#allocate-costs}
 
-[コンテナコスト割り当てメトリクス][4]を活用して、Kubernetes、AWS ECS、Azure、Google Cloud 全体のクラスターやワークロードに関連するコストを把握しましょう。ポッドレベルのコストを可視化し、アイドルリソースのコストを特定し、リソースタイプ別にコストを分析することができます。
+[コンテナコスト割り当てメトリクス][4]を活用して、Kubernetes、AWS ECS、Azure、Google Cloud 全体のクラスターやワークロードに関連するコストを把握します。ポッドレベルのコストを可視化し、アイドルリソースのコストを特定し、リソースタイプ別にコストを分析することができます。
 
 ## 権限 {#permissions}
 
@@ -129,7 +132,7 @@ Cloud Cost Management は、コストデータおよびほとんどの CCM 構�
 - `cloud_cost_management_read`
 - `cloud_cost_management_write`
 
-ページごとの要件の詳細な内訳については、[アクセス許可][9]を参照してください。
+ページごとの要件の詳細な内訳については、[権限][9]を参照してください。
 
 ## データ履歴のレビュー {#review-data-history}
 
@@ -137,18 +140,20 @@ Cloud Cost Management は、コストデータおよびほとんどの CCM 構�
 
 {{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Data History{{< /ui >}}ページでクラウドコストデータの新鮮さと処理ステータスをモニターします。
 
-- {{< ui >}}Last Bill Received{{< /ui >}}: クラウドまたは SaaS プロバイダーが CCM に表示される請求データを生成した場合。
-- {{< ui >}}Last Processed{{< /ui >}}: Datadogがクラウドプロバイダーから請求データを最後に処理した場合。以下が含まれます。
+- {{< ui >}}Last Bill Received{{< /ui >}}: DatadogがクラウドまたはSaaSプロバイダーから最後に請求データを受信した日時です。このタイムスタンプは、そのデータ内の最新の利用日やコスト発生日を示すものではありません。
+- {{< ui >}}Last Processed{{< /ui >}}: Datadog がクラウドプロバイダーから請求データを最後に処理した場合。以下が含まれます。
   - タグパイプラインルール (デフォルトで最大 3 か月の履歴データを遡って処理します)
   - コスト配分ルール (デフォルトで最大 1 か月の履歴データを遡って処理します)
 
 このページを使用してデータの遅延をトラブルシューティングしたり、最近のタグパイプラインやコスト配分の変更が適用されたことを確認したりします。
 
+Cloud Costデータは、プロバイダーから提供されたデータと同じ時点までしか反映されません。予期した日付のコストが欠落している場合は、プロバイダーの請求書またはエクスポートとCCMを比較してください。収集するデータに予期した日付のコストが含まれていない場合は、プロバイダーにお問い合わせください。収集するデータにコストが含まれているにもかかわらずCCMに表示されない場合は、[Datadog Support][11]にお問い合わせください。
+
 ## コスト分析に AI を使用する {#use-ai-for-cost-analysis}
 
-[Bits Chat の Cloud Cost スキル][10]を使用して、コストの変化を調査し、可能性のある所有者を特定し、予算に対する支出を比較し、コストと可観測性メトリクスを相関させ、エンジニアリングチーム向けの引き継ぎノートブックを作成します。
+[Bits Chat の Cloud Cost スキル][10]を使用して、コストの変化を調査し、可能性のある所有者を特定し、予算に対する支出を比較し、コストと監視可能性メトリクスを相関させ、エンジニアリングチームのための引き継ぎノートブックを作成します。
 
-{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Chat の調査サマリーに初期分析が表示されています。" style="width:60%;" >}}
+{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="初期分析が示されている Bits Chat による調査の要約。" style="width:60%;" >}}
 
 ## 参考資料 {#further-reading}
 
@@ -164,3 +169,4 @@ Cloud Cost Management は、コストデータおよびほとんどの CCM 構�
 [8]: /ja/cloud_cost_management/datadog_costs
 [9]: /ja/cloud_cost_management/setup/permissions
 [10]: /ja/cloud_cost_management/cloud_cost_skill/
+[11]: /ja/help/

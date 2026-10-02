@@ -105,10 +105,6 @@ Setting a 100% target means having an error budget of 0% since error budget is e
 
 [Metric-based SLOs][9]: Up to three decimal places are allowed for all targets.
 
-## Edit an SLO
-
-To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
-
 ## Permissions
 
 ### Role based access
@@ -127,7 +123,7 @@ Restrict access to individual SLOs by specifying a list of [roles][10] that are 
 1. Click the cog icon in the upper right of the panel.
 1. Select {{< ui >}}Permissions{{< /ui >}}.
 1. Click {{< ui >}}Restrict Access{{< /ui >}}.
-1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
+1. The dialog box updates to show that everyone in your organization has full access by default.
 1. Use the drop-down to select one or more roles, teams, or users that may edit the SLO.
 1. Click {{< ui >}}Add{{< /ui >}}.
 1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
@@ -136,6 +132,10 @@ Restrict access to individual SLOs by specifying a list of [roles][10] that are 
 To maintain your edit access to the SLO, the system requires you to include at least one role that you are a member of before saving. Users on the access control list can add roles and can only remove roles other than their own.
 
 **Note**: Users can create SLOs on any monitor even if they do not have write permissions to the monitor. Similarly, users can create SLO alerts even if they do not have write permissions to the SLO. For more information on RBAC permissions for Monitors, see the [RBAC documentation][12] or the [guide on how to set up RBAC for Monitors][13].
+
+## Editing an SLO
+
+To edit an SLO, hover over the SLO's row in the list view and click the edit pencil icon that appears at the right of the row, or click on the row to open the details side panel and select the edit button from the cog icon in the top right of the panel.
 
 ## Searching SLOs
 
@@ -151,13 +151,25 @@ Advanced search lets you query SLOs by any combination of SLO attributes:
 
 To run a search, use the facet checkboxes on the left and the search bar at the top. When you check the boxes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write one from scratch), the checkboxes update to reflect the change. Query results update in real-time as you edit the query; there's no 'Search' button to click.
 
+## Recovering deleted SLOs
+
+<div class="alert alert-warning">Auto-generated SLOs for <a href="/synthetics/test_suites/#service-level-objectives">Synthetic test suites</a> cannot be restored.</div>
+
+Deleted SLOs are retained for 30 days before being permanently deleted. To restore a recently deleted SLO:
+
+1. On the [SLO manage page][2], click the **Settings** gear icon in the top right corner.
+1. Select the SLO(s) you want to restore.
+1. Click {{< ui >}}Restore{{< /ui >}}.
+
+**Note**: Deleted SLO status corrections cannot be restored. This recovery process applies only to deleted SLOs.
+
 ## Viewing SLOs
 
 Group your SLOs by *any* tag to get a summary view of your data. You can quickly analyze how many SLOs are in each state (breached, warning, OK, and no data), grouped by service, team, user journey, tier, or any other tag set on your SLOs.
 
 {{< img src="service_level_objectives/slo_group_by_new.png" alt="Summary view of SLOs grouped by Team" style="width:100%;" >}}
 
-Sort SLOs by the {{< ui >}}status{{< /ui >}} and {{< ui >}}error budget{{< /ui >}} columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
+Sort SLOs by the {{< ui >}}status{{< /ui >}} and {{< ui >}}Error Budget Left{{< /ui >}} columns to prioritize which SLOs need your attention. The SLO list displays the details of SLOs over the primary time window selected in your [configuration](#configuration). All other configuration time windows are available to view in the individual side panel. Open the SLO details side panel by clicking the respective table row.
 
 **Note**: You can view your SLOs from your mobile device home screen by downloading the [Datadog Mobile App][14], available on the [Apple App Store][15] and [Google Play Store][16].
 
@@ -210,12 +222,12 @@ After you query for a subset of SLOs on the list view, you can add that query as
 To add a saved view:
 
 1. Query for your SLOs.
-2. Click {{< ui >}}Save View +{{< /ui >}} at the top left of the page.
+2. Click {{< ui >}}Save{{< /ui >}} at the top left of the page.
 3. Name your view and save.
 
 #### Load a saved view
 
-To load a saved view, open the {{< ui >}}Saved Views{{< /ui >}} panel by pressing the {{< ui >}}Show Views{{< /ui >}} button at the top left of the page and select a saved view from the list. You can also search for saved views in the {{< ui >}}Filter Saved Views{{< /ui >}} search box at the top of that same {{< ui >}}Saved Views{{< /ui >}} panel.
+To load a saved view, open the {{< ui >}}Saved Views{{< /ui >}} panel by pressing the {{< ui >}}Views{{< /ui >}} button at the top left of the page and select a saved view from the list. You can also search for saved views in the {{< ui >}}Filter Saved Views{{< /ui >}} search box at the top of that same {{< ui >}}Saved Views{{< /ui >}} panel.
 
 #### Share a saved view
 
@@ -272,10 +284,6 @@ With [Event Monitors][28], you can set up notifications to track SLO audit event
 
 ## SLO widgets
 
-{{< learning-center-callout header="Try Creating Business-Critical Insights Using Dashboards and SLOs in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/dashboards-slos">}}
-  Learn without cost on real cloud compute capacity and a Datadog trial account. Enroll today to learn more about building Dashboards to track SLOs.
-{{< /learning-center-callout >}}
-
 After creating your SLO, you can visualize the data through Dashboards and widgets.
   - Use the SLO widget to visualize the status of a single SLO
   - Use the SLO List widget to visualize a set of SLOs
@@ -312,7 +320,7 @@ The 90-day limits per SLO are as follows:
 | Weekly recurring  | 3             |
 | Monthly recurring | 5             |
 
-You may configure status corrections through the UI by selecting {{< ui >}}Correct Status{{< /ui >}} in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
+You may configure status corrections through the UI by selecting {{< ui >}}Correct status{{< /ui >}} in your SLO's side panel, the [SLO status corrections API][25], or a [Terraform resource][26].
 
 #### Access in the UI
 
@@ -320,9 +328,9 @@ To access SLO status corrections in the UI:
 
 1. Create a new SLO or click on an existing one.
 2. Navigate to an SLO's details side panel view.
-3. Under the gear icon, select {{< ui >}}Correct Status{{< /ui >}} to access the {{< ui >}}Status Corrections{{< /ui >}} creation modal.
-4. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
-5. Select a {{< ui >}}Correction Type{{< /ui >}}.
+3. Under the gear icon, select {{< ui >}}Correct status{{< /ui >}} to open the correction creation modal.
+4. Select a {{< ui >}}Correction Category{{< /ui >}}.
+5. Choose between {{< ui >}}One-Time{{< /ui >}} and {{< ui >}}Recurring{{< /ui >}} in the {{< ui >}}Select the Time Correction Window{{< /ui >}}, and specify the time period you wish to correct.
 6. Optionally add {{< ui >}}Notes{{< /ui >}}.
 7. Click {{< ui >}}Apply Correction{{< /ui >}}.
 
@@ -332,7 +340,7 @@ To view, edit, and delete existing status corrections, click on the {{< ui >}}Co
 
 #### Visualizing status corrections
 
-For Metric-based and Time Slice SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the {{< ui >}}History{{< /ui >}} section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
+For SLOs with status corrections, there is a toggle in the SLO detail view that lets you enable or disable corrections in the UI. The toggle controls the charts and data in the {{< ui >}}Performance{{< /ui >}} section of the SLO detail view. **Note:** Your overall SLO status and error budget will always take status corrections into consideration.
 
 {{< img src="service_level_objectives/correction-toggle.png" alt="SLO correction UI" style="width:100%;">}}
 

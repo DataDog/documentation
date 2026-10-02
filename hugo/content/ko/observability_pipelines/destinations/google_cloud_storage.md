@@ -86,6 +86,12 @@ Datadog Log Archives를 설정하려면 Datadog의 [Google Cloud Platform 통합
 1. {{< ui >}}Add Header{{< /ui >}}를 클릭하여 메타데이터를 추가합니다.
 1. 헤더 이름과 값을 입력합니다.
 
+#### 압축 {#compression}
+
+1.  {{< ui >}}Compression - Algorithm{{< /ui >}} 드롭다운 메뉴에서 아카이브된 로그에 대한 압축 알고리즘을 선택하십시오({{< ui >}}gzip{{< /ui >}} 또는 {{< ui >}}zstd{{< /ui >}}).
+    - **참고**: 압축 알고리즘을 지정하지 않으면 압축 수준이 `6`인 gzip이 사용됩니다.
+1.  {{< ui >}}Compression - Level {{< /ui >}} 필드에 압축 수준을 입력해야 합니다. Datadog은 gzip의 경우 `6`, zstd의 경우 `3`을 권장합니다.
+
 #### 버퍼링 {#buffering}
 
 {{% observability_pipelines/destination_buffer %}}

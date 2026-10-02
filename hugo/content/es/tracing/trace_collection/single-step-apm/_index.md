@@ -6,65 +6,78 @@ aliases:
 further_reading:
 - link: /tracing/metrics/runtime_metrics/
   tag: Documentación
-  text: Habilitar métricas en tiempo de ejecución
+  text: Habilitar métricas de tiempo de ejecución
 - link: /tracing/guide/injectors
   tag: Documentación
-  text: Comprendiendo el comportamiento del inyector con la instrumentación de un
-    solo paso
+  text: Comprender el comportamiento del inyector con la instrumentación de un solo
+    paso
 - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
   tag: Documentación
-  text: Solucionando problemas de APM de un solo paso
-- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
-  tag: Centro de aprendizaje
-  text: Solucionando problemas de la instrumentación de APM en un servidor
+  text: Solución de problemas de APM de un solo paso
 - link: /tracing/guide/local_sdk_injection
   tag: Documentación
-  text: Instrumenta tus aplicaciones utilizando inyección de SDK local
+  text: Instrumente sus aplicaciones mediante la inyección de SDK local
+- link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+  tag: Centro de aprendizaje
+  text: Solución de problemas de instrumentación de APM en un servidor
 - link: https://www.datadoghq.com/blog/datadog-csi-driver/
   tag: Blog
-  text: Lleva la observabilidad de alto rendimiento a entornos de Kubernetes seguros
+  text: Lleve la observabilidad de alto rendimiento a entornos seguros de Kubernetes
     con el controlador CSI de Datadog
 - link: https://www.datadoghq.com/blog/rum-apm-single-step
   tag: Blog
   text: Habilite la visibilidad de extremo a extremo en sus aplicaciones Java con
     un solo comando
+- link: https://www.datadoghq.com/blog/single-step-instrumentation-rules/
+  tag: Blog
+  text: Administre el rastreo de servicios entre servidores con reglas de instrumentación
+    de un solo paso
+- link: https://www.datadoghq.com/blog/choosing-apm-instrumentation/
+  tag: Blog
+  text: 'De cero a trazas: elegir el método de instrumentación de APM adecuado para
+    su stack'
 title: Instrumentación de APM de un solo paso
 ---
 ## Descripción general {#overview}
 
-La instrumentación de un solo paso (SSI) instala automáticamente los SDK de Datadog sin requerir configuración adicional, reduciendo el tiempo de incorporación de días a minutos.
+La instrumentación de un solo paso (SSI) instala automáticamente los SDK de Datadog sin necesidad de configuración adicional, lo que reduce el tiempo de incorporación de días a minutos.
 
-Para aprender más sobre cómo funciona, consulte la [guía del inyector para la instrumentación de un solo paso][8].
+Para obtener más información sobre cómo funciona, consulte la [guía del inyector para la instrumentación de un solo paso][8].
+
+{{< skill-callout
+    title="Configurar APM con un Agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Requisitos previos {#prerequisites}
 
-1. Elimine cualquier código de instrumentación personalizado de su aplicación y reiníciela. SSI se desactiva automáticamente si se detecta instrumentación personalizada.
-1. Confirme la compatibilidad del entorno revisando la [guía de compatibilidad de SSI][18] para lenguajes, sistemas operativos y arquitecturas soportadas.
+1. Elimine cualquier código de instrumentación personalizado de su aplicación y reiníciela. SSI se deshabilita automáticamente si se detecta instrumentación personalizada.
+1. Confirme la compatibilidad del entorno revisando la [guía de compatibilidad de SSI][18] para conocer los lenguajes, sistemas operativos y arquitecturas compatibles.
 
-## Instrumente SDKs en sus aplicaciones {#instrument-sdks-across-applications}
+## Instrumentar SDKs en aplicaciones {#instrument-sdks-across-applications}
 
-Cuando [instale o actualice el Agente de Datadog][1] con **instrumentación de APM** habilitada, el Agente instrumenta sus aplicaciones cargando el SDK de Datadog en procesos soportados. Esto permite el seguimiento distribuido al capturar y enviar datos de traza desde sus servicios sin requerir cambios en el código.
+Cuando [instala o actualiza el Datadog Agent][1] con {{< ui >}}APM Instrumentation{{< /ui >}} habilitado, el Agent instrumenta sus aplicaciones cargando el Datadog SDK en los procesos compatibles. Esto permite el rastreo distribuido al capturar y enviar datos de traza desde sus servicios sin requerir cambios en el código.
 
 Después de la instrumentación, puede opcionalmente:
-- [Configure Etiquetas de Servicio Unificadas (UST)][14]
-- Habilite productos y características adicionales dependientes del SDK, como Continuous Profiler o Application Security Monitoring
+- [configurar etiquetas de servicio unificado (UST, por sus siglas en inglés)][14]
+- habilite productos y funciones adicionales que dependen del SDK, como Continuous Profiler o Application Security Monitoring
 
 Haga clic en uno de los siguientes mosaicos para aprender cómo configurar SSI para su tipo de implementación:
 
 {{< card-grid card_width="170px" image_width="200" >}}
-  {{< image-card href="linux/" src="integrations_logos/linux.png" alt="linux" >}}
-  {{< image-card href="docker/" src="integrations_logos/docker.png" alt="docker" >}}
-  {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="kubernetes" >}}
-  {{< image-card href="windows/" src="integrations_logos/windows.png" alt="windows" >}}
+  {{< image-card href="linux/" src="integrations_logos/linux.png" alt="Linux" >}}
+  {{< image-card href="docker/" src="integrations_logos/docker.png" alt="Docker" >}}
+  {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="Kubernetes" >}}
+  {{< image-card href="windows/" src="integrations_logos/windows.png" alt="Windows" >}}
 {{< /card-grid >}}
-
-<br>
 
 ## Solución de problemas {#troubleshooting}
 
 Si encuentra problemas al habilitar APM con SSI, consulte la [guía de solución de problemas de SSI][15].
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

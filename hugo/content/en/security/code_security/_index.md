@@ -91,6 +91,7 @@ Secret Scanning identifies and validates exposed credentials, API keys, and othe
 - Pre-commit hooks to block secrets from being committed locally before they ever reach your repository
 - Pull-request gates to block leaked secrets from reaching your default branch
 - Third-party validation to confirm whether a detected secret is active and exploitable, reducing noise from rotated or invalid credentials
+- [Git history scanning][22] to find secrets that were removed from code but can still be recovered from earlier commits
 
 Scans can run through your CI/CD pipelines or directly in Datadog with hosted scanning. See [Secret Scanning setup][9] to get started.
 
@@ -111,7 +112,7 @@ Join the Supply Chain Firewall preview.
 
 Supply Chain Firewall (SCFW) prevents malicious open source packages from entering your development environments at the point of installation, before they reach your repositories or CI/CD pipelines.
 
-Unlike SCA, which scans dependencies already in your codebase, SCFW intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they're installed. See [Supply Chain Firewall][22] to get started.
+Unlike SCA, which scans dependencies already in your codebase, SCFW intercepts package manager commands (`npm`, `pip`, `poetry`) in real time and blocks malicious or recently published packages before they're installed. See [Supply Chain Firewall][20] to get started.
 
 ## Code Security MCP Server (Preview)
 The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) server that brings SAST, secrets detection, SCA, IaC scanning, and SBOM generation directly into AI coding assistants such as Cursor, Claude Desktop, and VS Code. Read the [MCP Server documentation][17] to get started.
@@ -138,4 +139,5 @@ The [Code Security MCP Server][19] is a local Model Context Protocol (MCP) serve
 [17]: /security/code_security/iac_security/setup/?tab=github
 [18]: /security/cloud_security_management/
 [19]: /security/code_security/dev_tool_int/mcp_server/
-[22]: /security/code_security/software_composition_analysis/supply_chain_firewall/
+[20]: /security/code_security/software_composition_analysis/supply_chain_firewall/
+[22]: /security/code_security/secret_scanning/#detect-secrets-in-git-history

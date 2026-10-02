@@ -3,12 +3,6 @@ title: Managing Account Theft with AAP
 disable_toc: false
 ---
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection is in Preview on Datadog Government site US1-FED.
-</div>
-{{< /site-region >}}
-
 Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
 
 Datadog App and API Protection (AAP) provides [built-in][1] detection and protection capabilities to help you manage this threat. 
@@ -171,7 +165,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App and API Protection{{< /ui >}}.
+3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App & API Protection{{< /ui >}}.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  

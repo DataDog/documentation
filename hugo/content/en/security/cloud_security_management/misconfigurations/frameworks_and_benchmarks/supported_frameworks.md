@@ -51,9 +51,9 @@ Cloud Security Misconfigurations comes with more than 1,000 out-of-the-box compl
 | [Digital Operational Resilience Act (DORA)][35] | C(2024) 1532                   | `dora`                              | Cloud                    |
 | [Essential Cloud Security Controls][33]         | v2                             | `essential-cloud-security-controls` | Cloud                    |
 | [EU Cyber Resilience Act][43]                   | 2024                           | `cyber-resilience-act`              | Cloud                    |
-| [FedRAMP High][36] (Preview)                    | v5                             | `fedramp-high`                      | Cloud                    |
-| [FedRAMP Moderate][36] (Preview)                | v5                             | `fedramp-moderate`                  | Cloud                    |
-| [FedRAMP Low][36] (Preview)                     | v5                             | `fedramp-low`                       | Cloud                    |
+| [FedRAMP High][36]                              | v5                             | `fedramp-high`                      | Cloud                    |
+| [FedRAMP Moderate][36]                          | v5                             | `fedramp-moderate`                  | Cloud                    |
+| [FedRAMP Low][36]                               | v5                             | `fedramp-low`                       | Cloud                    |
 | [GDPR][10]                                      | 2016/679                       | `gdpr`                              | Cloud                    |
 | [HIPAA][9]                                      | 800-66-r2                      | `hipaa`                             | Cloud                    |
 | [ISO/IEC 27001][8]                              | 2022, 2013                     | `iso-27001`                         | Cloud                    |

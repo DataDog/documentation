@@ -8,17 +8,17 @@ aliases:
 attributes:
 - data_type: '- **Errores**: 15 días
 
-    - **Tramos indexados**: 15 o 30 días, determinado por el plan del cliente
+    - **Spans indexados**: 15 o 30 días, determinado por el plan del cliente
 
     - **Estadísticas de servicios/recursos**: 30 días
 
-    - **Trazas vistas**: Se conservan durante la duración de la cuenta
+    - **Trazas visualizadas**: Se conservan durante la duración de la cuenta
 
     '
   product: APM
 - data_type: '- **Señales de seguridad**: 15 meses
 
-    - **Tramos**: 90 días
+    - **Spans**: 90 días
 
     '
   product: App and API Protection
@@ -49,7 +49,7 @@ attributes:
 - data_type: '- **Incidencias**: Se conservan durante la duración de la cuenta
 
     '
-  product: Case Management
+  product: Work Management
 - data_type: '- **Implementaciones**: 30 días
 
     '
@@ -161,9 +161,7 @@ attributes:
   product: Agent Observability
 - data_type: '- **Registros**: Determinado por el plan del cliente
 
-    - **Registros de ejemplo de Sensitive Data Scanner**: <span class="d-none site-region-container"
-    data-region="us,us3,us5,eu,ap1,ap2,uk1">3 días</span><span class="d-none site-region-container"
-    data-region="gov,gov2">7 días</span>
+    - **Registros de ejemplo del Sensitive Data Scanner**: 7 días
 
     '
   product: Log Management
@@ -268,6 +266,6 @@ further_reading:
 title: Períodos de retención de datos
 type: data_retention_periods
 ---
-### Lecturas Adicionales {#further-reading}
+### Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

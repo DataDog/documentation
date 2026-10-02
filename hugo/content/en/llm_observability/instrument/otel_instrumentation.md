@@ -29,6 +29,12 @@ For information on using Prompt Tracking with OpenTelemetry spans, see [Prompt T
 
 You can use OpenTelemetry spans inside [Agent Observability Experiments](/llm_observability/improve/experiments/setup#using-opentelemetry-spans-inside-experiments). By setting `DD_TRACE_OTEL_ENABLED=1`, OTel spans created inside an experiment task automatically appear as children of the experiment span.
 
+### Multimodal support
+
+Audio and images on OpenTelemetry messages are rendered in the trace view. Datadog extracts media from message parts that follow the OpenTelemetry GenAI semantic conventions, as described in [Media in messages](#media-in-messages).
+
+Only media carried inline as base64 bytes is rendered. A remote URL is recorded as a text reference and is never fetched. For the fields, formats, and size limits that apply once media reaches a span, see [Multimodal Support](/llm_observability/instrument/multimodal/).
+
 ### Span links
 
 Use [OpenTelemetry span links][9] on your GenAI spans to express non-parent-child relationships, such as when one span's output feeds another span's input. When two linked spans are in the same trace, the link appears as an edge in that trace's **Execution Graph**, so you can see how data flows between sibling spans (for example, a tool's output feeding a downstream LLM call).
@@ -158,9 +164,12 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
 | [OpenAI][40] | [`@opentelemetry/instrumentation-openai`][41] | >= 4.19.0 |
+| [Cloudflare Agents][42] | Native ([Workers Observability][43]) | `agents` >= 0.2.0 |
 
 [40]: https://platform.openai.com/docs/api-reference/introduction
 [41]: https://www.npmjs.com/package/@opentelemetry/instrumentation-openai
+[42]: https://developers.cloudflare.com/agents/
+[43]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
 {{% /tab %}}
 {{% tab "Java" %}}
 | Framework | Instrumentation | Supported Versions |
@@ -402,9 +411,66 @@ provider.force_flush(timeout_millis=5000)
 
 After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
 
+### Using Cloudflare Agents
+
+[Cloudflare Agents][15] running on Workers emit spans that follow the GenAI semantic conventions through [Workers Observability][16]. Because Workers export telemetry through a destination configured in the Cloudflare dashboard, you set the Datadog OTLP endpoint and headers on that destination instead of with `OTEL_EXPORTER_OTLP_*` environment variables.
+
+1. Enable tracing in your Worker configuration (`wrangler.jsonc`), pointing at a named destination:
+   ```jsonc
+   {
+     "observability": {
+       "traces": {
+         "enabled": true,
+         "destinations": ["datadog-agent-observability"]
+       }
+     }
+   }
+   ```
+2. Create the destination in the Cloudflare dashboard under **Workers & Pages** > **Observability** > **Telemetry**. Add a **traces** destination whose name matches the one in your Worker configuration, and set:
+   | Field | Value |
+   |-------|-------|
+   | Destination URL | `{{< region-param key="otlp_trace_endpoint" code="true" >}}` |
+   | Header | `dd-api-key`: `<YOUR_API_KEY>` |
+   | Header | `dd-otlp-source`: `llmobs` |
+   
+   The `dd-otlp-source=llmobs` header routes the spans to Agent Observability. Replace `<YOUR_API_KEY>` with your [Datadog API key][2].
+3. Instrument model calls. Cloudflare instruments its supported agent frameworks automatically. If you call the [Vercel AI SDK][17] (`generateText`, `streamText`, `generateObject`, `streamObject`) directly, wrap it with `wrapAISDK()` so that model calls produce `chat` and `invoke_agent` spans with the required `gen_ai.*` attributes:
+   ```typescript
+   import { Agent } from "agents";
+   import * as ai from "ai";
+   import { wrapAISDK } from "agents/observability/ai";
+   import { createWorkersAI } from "workers-ai-provider";
+
+   // storeMessages/storeTools capture gen_ai.input.messages, gen_ai.output.messages,
+   // and tool call payloads. They are off by default.
+   const { generateText } = wrapAISDK(ai, { storeMessages: true, storeTools: true });
+
+   export class MyAgent extends Agent<Env> {
+     async onRequest(request: Request): Promise<Response> {
+       const workersai = createWorkersAI({ binding: this.env.AI });
+       const { text } = await generateText({
+         model: workersai("@cf/meta/llama-3.3-70b-instruct-fp8-fast"),
+         prompt: "What is distributed tracing?",
+       });
+       return Response.json({ text });
+     }
+   }
+   ```
+   After you deploy the Worker and it serves traffic, the traces appear on the [Agent Observability Traces page][3]. Search by the `ml_app` attribute, which is set to your Worker's service name.
+
 ## Attribute mapping reference
 
 This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
+
+
+Agent Observability requires at least one of these attributes on a span. If no span in a trace has one, the whole trace is dropped before reaching Agent Observability:
+- gen_ai.operation.name
+- gen_ai.provider.name
+- openinference.span.kind
+- langfuse.observation.type
+- gen_ai.system (deprecated)
+
+Spans without any `gen_ai.*` attribute are also dropped individually, even in a trace that qualifies.
 
 If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
 
@@ -520,6 +586,23 @@ Input and output messages are extracted from the following sources, in priority 
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (others) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (others) | |
 | `gen_ai.system_instructions` | Prepended to input | Added as system role messages |
+
+##### Media in messages
+
+Message parts that carry media are extracted into the typed `audio_parts` and `image_parts` fields on the message:
+
+| Part type | Behavior |
+|-----------|----------|
+| `blob` with `mime_type` and inline bytes | Extracted to `image_parts` or `audio_parts`. When the part omits `modality`, it is inferred from the MIME type. |
+| `uri` carrying a base64 image data URI, such as `data:image/png;base64,...` | Extracted to `image_parts`. |
+| `uri` carrying a remote URL | Recorded as the text reference `[<modality>: <uri>]`. The URL is not fetched. |
+| `file` with a `file_id` | Recorded as the text reference `[<modality> file: <file_id>]`. |
+
+A positional marker such as `[image blob: image/png]` is also added to the message text so that media keeps its place among the other parts.
+
+Audio reaches `audio_parts` through `blob` parts only. An audio data URI on a `uri` part is recorded as text, and the conventions specify `blob` as the part type for inline base64 data, so prefer `blob` for both audio and images.
+
+For the formats the trace view renders and the size limits that apply, see [Multimodal Support](/llm_observability/instrument/multimodal/).
 
 ##### Embedding spans
 
@@ -953,3 +1036,6 @@ with tracer.start_as_current_span("my-span") as span:
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
 [13]: https://langfuse.com/integrations/native/opentelemetry
 [14]: /llm_observability/instrument/agent_observability_and_apm/
+[15]: https://developers.cloudflare.com/agents/
+[16]: https://developers.cloudflare.com/agents/runtime/operations/observability/tracing/
+[17]: https://sdk.vercel.ai/

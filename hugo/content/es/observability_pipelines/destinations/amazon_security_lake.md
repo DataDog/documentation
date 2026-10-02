@@ -1,5 +1,5 @@
 ---
-description: Aprenda a enviar registros a Amazon Security Lake usando el Observability
+description: Aprenda a enviar registros a Amazon Security Lake utilizando Observability
   Pipelines Worker.
 disable_toc: false
 products:
@@ -12,7 +12,7 @@ title: Destino de Amazon Security Lake
 
 ## Descripción general {#overview}
 
-Use el destino de Amazon Security Lake de Observability Pipelines para enviar registros a Amazon Security Lake.
+Utilice el destino de Amazon Security Lake de Observability Pipelines para enviar registros a Amazon Security Lake.
 
 ## Requisitos previos {#prerequisites}
 
@@ -22,13 +22,13 @@ Debe hacer lo siguiente antes de configurar el destino de Amazon Security Lake:
 
 ## Configuración {#setup}
 
-Configure el destino de Amazon Security Lake cuando [configure una canalización][6]. Puede configurar una canalización en el [UI][1], usando la [API][7] o con [Terraform][8]. Los pasos de esta sección se configuran en el UI.
+Configure el destino de Amazon Security Lake cuando [configure un pipeline][6]. Puede configurar un pipeline en la [UI][1], utilizando la [API][7] o con [Terraform][8]. Los pasos en esta sección se configuran en la interfaz de usuario.
 
 **Notas**:
 - Cuando agrega el destino de Amazon Security Lake, el procesador OCSF se agrega automáticamente para que pueda convertir sus registros a Parquet antes de que se envíen a Amazon Security Lake. Consulte la [documentación de Remap to OCSF][3] para obtener instrucciones de configuración.
 - Solo los registros formateados por el procesador OCSF se convierten a Parquet.
 
-Después de seleccionar el destino de Amazon Security Lake en el UI de la canalización:
+Después de seleccionar el destino de Amazon Security Lake en la interfaz de usuario del pipeline:
 
 1. Ingrese el nombre de su bucket de S3.
 1. Ingrese la región de AWS.
@@ -44,7 +44,7 @@ Después de seleccionar el destino de Amazon Security Lake en el UI de la canali
 
 ##### Habilitar TLS {#enable-tls}
 
-<div class="alert alert-danger">Para la administración de secretos: solo ingrese el identificador para la frase de contraseña de la clave TLS. No <b>ingrese</b> el valor real.</div>
+<div class="alert alert-danger">Para la administración de secretos: solo ingrese el identificador de la frase de contraseña de la clave TLS. <b>No</b> ingrese el valor real.</div>
 
 {{% observability_pipelines/tls_settings %}}
 
@@ -54,14 +54,14 @@ Después de seleccionar el destino de Amazon Security Lake en el UI de la canali
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Valores predeterminados de secretos {#secret-defaults}
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
-{{% tab "Administración de secretos" %}}
+{{% tab "Gestión de secretos" %}}
 
-- Identificador de frase de contraseña TLS de Amazon Security Lake (cuando TLS está habilitado):
+- Identificador de la frase de contraseña TLS de Amazon Security Lake (cuando TLS está habilitado):
 	- El identificador predeterminado es `DESTINATION_AWS_SECURITY_LAKE_KEY_PASS`.
 
 {{% /tab %}}
@@ -79,13 +79,13 @@ Después de seleccionar el destino de Amazon Security Lake en el UI de la canali
 
 {{% observability_pipelines/aws_authentication/instructions %}}
 
-#### Permisos{#permissions}
+#### Permisos {#permissions}
 
 {{% observability_pipelines/aws_authentication/amazon_security_lake/permissions %}}
 
 ### Procesamiento por lotes de eventos {#event-batching}
 
-Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Procesamiento por lotes de eventos de destinos][2] para obtener más información.
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Agrupamiento de eventos de destino][2] para obtener más información.
 
 | Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
 |----------------|-------------------|---------------------|
