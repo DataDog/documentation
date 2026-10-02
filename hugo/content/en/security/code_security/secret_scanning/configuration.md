@@ -12,7 +12,7 @@ The rules, scanning groups, and custom rules described on this page are configur
 There are two scanning groups that configure Secret Scanning rules.
 ### Managed scanning group
 {{< callout url="https://www.datadoghq.com/product-preview/generic-secret-scanning-in-code/" header="Find Generic Secrets in Your Code" >}}
-Generic Secret Scanning is in Preview. It looks for internal tokens and passwords that do not match a provider pattern. To enroll, click <b>Request Access</b>.
+Generic Secret Scanning is in Preview. It looks for internal tokens and passwords that do not match a provider pattern.
 {{< /callout >}}
 
 The managed scanning group is managed by Datadog's security team. It automatically receives new rules and updates to rules, and is enabled by default for all organizations.
