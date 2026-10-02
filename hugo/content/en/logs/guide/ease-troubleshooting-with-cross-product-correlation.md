@@ -206,7 +206,7 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
 [11]: /logs/log_collection/javascript/
 [12]: /account_management/billing/rum/#how-do-you-view-logs-from-the-browser-collector-in-rum
-[13]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[13]: /real_user_monitoring/setup/install/?platform=browser
 [14]: https://app.datadoghq.com/apm/traces
 [15]: https://app.datadoghq.com/rum/explorer
 [16]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/

@@ -300,9 +300,9 @@ This means that even if users open your application while offline, no data is lo
 [2]: /error_tracking/frontend/mobile/flutter/
 [3]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration-class.html
 [4]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/ViewInfoExtractor.html
-[5]: /real_user_monitoring/error_tracking/flutter
+[5]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/flutter/
 [6]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[7]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries/
+[7]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [8]: https://pub.dev/packages?q=go_router
 [9]: https://pub.dev/packages/auto_route
 [10]: https://pub.dev/packages/beamer

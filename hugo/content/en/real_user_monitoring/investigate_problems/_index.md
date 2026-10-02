@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-After Datadog retains your RUM sessions, use the RUM Explorer to investigate performance issues, navigate user sessions, and troubleshoot application errors.
+After Datadog retains your RUM sessions, explore them in the RUM Explorer, triage errors and crashes with Error Tracking, and run AI investigations to find root causes.
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/investigate_problems/explore_retained_data/" >}}

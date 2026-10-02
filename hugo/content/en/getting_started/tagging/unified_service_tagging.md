@@ -378,7 +378,7 @@ To form a single point of configuration for all telemetry emitted directly from 
 
 
 [1]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
+[2]: /real_user_monitoring/setup/install/?platform=browser
    {{% /tab %}}
 
    {{% tab "Synthetics" %}}

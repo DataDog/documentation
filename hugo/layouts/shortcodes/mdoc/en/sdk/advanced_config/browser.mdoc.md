@@ -922,7 +922,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 
 [2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/application_monitoring/browser/setup/
+[4]: /real_user_monitoring/setup/install/?platform=browser
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -939,5 +939,5 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
-[24]: /real_user_monitoring/rum_without_limits/
+[24]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=browser

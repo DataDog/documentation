@@ -26,7 +26,6 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 **Notes**:
 - The {{< ui >}}Default{{< /ui >}} cardinality set in the table below includes the following dimensions: environment, app name, app ID, app version, service, OS name, OS version, browser name, and country.
 - All queries for the below metrics include `@session.type:user`.
-- If you need performance metrics beyond the ones listed below, you can create [custom metrics][2] from your RUM events. Both OOTB and custom metrics are computed based on 100% of the traffic ingested.
 - Some metrics are captured when a session or view is first detected. Others are captured when it becomes inactive. Comparing these metrics over short time windows can produce unexpected ratios. See [When metrics are computed](#when-metrics-are-computed).
 
 | Metric Name | Description | Dimensions | Platform |
@@ -44,12 +43,13 @@ Datadog provides the below out-of-the-box metrics for a comprehensive overview o
 | `rum.measure.session.frustration` | Count of frustration signals | Default | Mobile & Browser |
 | `rum.measure.session.inactive` | Count of inactive sessions | Default | Mobile & Browser |
 | `rum.measure.session.time_spent` | Session duration | Default, Percentiles breakdown | Mobile & Browser |
+| `rum.measure.usage.quota_blocked_sessions` | Count of sessions blocked after a [retention quota][3] is reached | Default | Mobile & Browser |
 | `rum.measure.view` | Count of views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.cpu_ticks_per_second` | CPU ticks per second | Default, View Name | Mobile only |
-| `rum.measure.view.crash_free` | Crash-free session rate | Default, View Name | Mobile only |
+| `rum.measure.view.crash_free` | Count of crash-free sessions | Default, View Name | Mobile only |
 | `rum.measure.view.cumulative_layout_shift` | Cumulative Layout Shift | Default, Percentiles breakdown, View Name | Browser only |
-| `rum.measure.view.loading_time` | Time until the page is ready and no network request or DOM mutation is currently occurring. | Default, Percentiles breakdown, View Name | Mobile & Browser |
-| `rum.measure.view.error_free` | Count of error free sessions | Default, View Name | Mobile & Browser |
+| `rum.measure.view.loading_time` | Time until the page is ready and no network request or DOM mutation is occurring. | Default, Percentiles breakdown, View Name | Mobile & Browser |
+| `rum.measure.view.error_free` | Count of error-free views | Default, View Name | Mobile & Browser |
 | `rum.measure.view.first_contentful_paint` | Time when the browser first renders any text, image (including background images), non-white canvas, or SVG | Default, Percentiles breakdown, View Name | Browser only |
 | `rum.measure.view.frozen_frame` | Count of frozen frames | Default, View Name | Mobile only |
 | `rum.measure.view.frozen_frame_free` | Count of views without frozen frames | Default | Mobile only |
@@ -76,9 +76,9 @@ For example, if many sessions from the previous day are still active and end dur
 
 **Recommendation**: When computing ratios that combine on-detection and on-inactivity metrics, use a time window large enough to capture both the start and end of most sessions (for example, one week or more).
 
-## API
+## Next step
 
-Metrics can be managed through [APIs][3] or Datadog's dedicated [Terraform modules][4].
+If you need performance metrics beyond the ones listed above, [create custom metrics][2] from your RUM events. Both out-of-the-box and custom metrics are computed based on 100% of the ingested traffic.
 
 ## Further reading
 
@@ -86,5 +86,4 @@ Metrics can be managed through [APIs][3] or Datadog's dedicated [Terraform modul
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics/
-[3]: /api/latest/rum-metrics/
-[4]: https://registry.terraform.io/providers/DataDog/datadog/3.60.0/docs/resources/rum_metric
+[3]: /real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/

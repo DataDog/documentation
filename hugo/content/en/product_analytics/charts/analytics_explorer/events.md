@@ -3,7 +3,7 @@ title: Events Side Panel
 aliases:
 - /product_analytics/analytics_explorer/events
 further_reading:
-- link: "/real_user_monitoring/explorer/search/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"
   text: "Search for your events"
 ---

@@ -4,7 +4,7 @@ description: "Manage RUM dashboards, monitors, permissions, and correlations wit
 aliases:
   - /real_user_monitoring/platform/
 further_reading:
-- link: '/real_user_monitoring/explorer/'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 ---
@@ -15,8 +15,8 @@ After you start collecting data for your RUM applications, use these capabilitie
 
 {{< whatsnext desc=" " >}}
     {{< nextlink href="/real_user_monitoring/administer_and_extend_rum/dashboards/" >}}
-    <h3>Create Dashboards</h3>
-    Use out-of-the-box and custom dashboards to track, analyze, and display key performance and usage metrics.
+    <h3>Use RUM Dashboards</h3>
+    Use out-of-the-box dashboards to track, analyze, and display key performance and usage metrics.
     {{< /nextlink >}}
     {{< nextlink href="/monitors/types/real_user_monitoring/" >}}
     <h3>Set Up Monitors</h3>
@@ -28,7 +28,7 @@ After you start collecting data for your RUM applications, use these capabilitie
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/" >}}
     <h3>Correlate RUM with Other Telemetry</h3>
-    Connect RUM events with logs, traces, profiles, and Synthetic tests.
+    Connect RUM events with Agent Observability, logs, and Synthetic tests.
     {{< /nextlink >}}
 {{< /whatsnext >}}
 

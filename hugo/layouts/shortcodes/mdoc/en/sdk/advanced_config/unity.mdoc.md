@@ -50,7 +50,7 @@ For setup steps, see [Add Custom Context](/real_user_monitoring/enrich_rum_data/
 For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable_rum/manage_data_collection/?platform=unity).
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/unity/setup/
+[2]: /real_user_monitoring/setup/install/?platform=unity
 [3]: /real_user_monitoring/setup/data_collected/?platform=unity
 [4]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=unity
 [5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=unity

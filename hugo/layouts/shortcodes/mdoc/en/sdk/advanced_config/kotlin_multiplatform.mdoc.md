@@ -298,7 +298,7 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
 [6]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor
 [7]: /real_user_monitoring/setup/data_collected/?platform=kotlin_multiplatform
-[8]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[8]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures
 [9]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#sending-data-when-device-is-offline
 [10]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
 [11]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=kotlin_multiplatform

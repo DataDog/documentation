@@ -7,10 +7,10 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/'
       tag: 'Blog'
       text: 'Introducing Datadog Real User Monitoring'
-    - link: '/real_user_monitoring/explorer/'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
       tag: 'Documentation'
       text: 'Explore your views within Datadog'
-    - link: '/real_user_monitoring/explorer/visualize/'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/visualize/'
       tag: 'Documentation'
       text: 'Apply visualizations on your events'
     - link: '/real_user_monitoring/administer_and_extend_rum/dashboards/'
@@ -25,7 +25,7 @@ algolia:
 
 ## Overview
 
-Browser Monitoring automatically detects user interactions performed during a user journey and provides insights into your users' behavior without requiring you to manually instrument every single click in your application.
+Browser Monitoring automatically detects user interactions performed during a user session and provides insights into your users' behavior without requiring you to manually instrument every single click in your application.
 
 You can accomplish the following objectives:
 
@@ -143,7 +143,7 @@ The Datadog Browser SDK uses the following strategies to compute click action na
 
 ## Send custom actions
 
-To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user session.
 
 For more information, see [Send Custom Actions][8].
 
@@ -160,10 +160,10 @@ As a best practice, if you expect a high volume of user actions, consider adjust
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/browser/troubleshooting/
+[1]: /real_user_monitoring/reference/troubleshooting/?platform=browser
 [2]: /data_security/real_user_monitoring/#mask-action-names
 [3]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
-[4]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
+[4]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 [5]: /real_user_monitoring/setup/data_collected/?platform=browser#default-attributes
 [6]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-page-activity-is-calculated
 [7]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2160

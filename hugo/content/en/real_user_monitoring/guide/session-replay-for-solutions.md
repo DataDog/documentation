@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-You can enable your technical solutions and support teams to better troubleshoot customer issues using [Session Replay][1]. With RUM & Session Replay, you can locate specific user sessions, observe user journeys, and access developer tools to see events, logs, errors, and attributes. 
+You can enable your technical solutions and support teams to better troubleshoot customer issues using [Session Replay][1]. With RUM & Session Replay, you can locate specific user sessions, observe user behavior, and access developer tools to see events, logs, errors, and attributes. 
 
 This guide describes a workflow that organizations can replicate and use as an asset for solutions teams to integrate into their workflows.
 
@@ -36,7 +36,7 @@ The Technical Solutions team may try to understand the following questions:
 
 ## Investigate the root cause
 
-If there were a way to view the customer's user journey in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
+If there were a way to view the customer's session in Datadog and see associated backend requests, the Technical Solutions team would have a better understanding of what may be causing this issue.
 
 {{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
 
@@ -48,7 +48,7 @@ For more information, see [Connect RUM and Traces][3].
 
 The Technical Solutions team may have internal tools that connect a support platform, like Zendesk, with Datadog products, such as RUM & Session Replay. For example, a contextual link in Zendesk can redirect you to the [RUM Explorer][4] and autofill the user ID in the search query. Filter for individual user sessions from the event list.
 
-The Technical Solutions team can use Session Replay to view a replica of the user journey in Datadog and use Browser Dev Tools to access additional errors that may appear in the frontend. With access to frontend errors and backend traces, your Technical Solutions team is empowered to use the RUM & Session Replay and APM integration to help troubleshoot customer issues.
+The Technical Solutions team can use Session Replay to view a replica of the user session in Datadog and use Browser Dev Tools to access additional errors that may appear in the frontend. With access to frontend errors and backend traces, your Technical Solutions team is empowered to use the RUM & Session Replay and APM integration to help troubleshoot customer issues.
 
 Click on a user session with a replay recording to observe the user's behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking {{< ui >}}Save{{< /ui >}} in the UI triggers the backend call to save the test's configuration.
 

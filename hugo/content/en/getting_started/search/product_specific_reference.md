@@ -129,7 +129,7 @@ service:database @db.statement:"SELECT *" @db.row_count:>1000
   {{< nextlink href="/observability_pipelines/processors/filter" >}}Observability Pipelines Filter Processor: Query syntax for filtering pipeline data{{< /nextlink >}}
   {{< nextlink href="/product_analytics/analytics_explorer/search_syntax" >}}Product Analytics Explorer Search: Search user interactions and product analytics events{{< /nextlink >}}
   {{< nextlink href="/quality_gates/explorer/search_syntax" >}}Quality Gates Explorer Syntax: Query quality gate rules and evaluation results{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/explorer/search_syntax" >}}RUM Explorer Search: Search user sessions, views, actions, and errors{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/" >}}RUM Explorer Search: Search user sessions, views, actions, and errors{{< /nextlink >}}
   {{< nextlink href="/security/sensitive_data_scanner/scanning_rules/custom_rules" >}}Sensitive Data Scanner Custom Rules: Regex patterns and matching syntax for scanning sensitive data{{< /nextlink >}}
   {{< nextlink href="/events/explorer/searching" >}}Service Management Events Search: Query and filter service management events{{< /nextlink >}}
   {{< nextlink href="/ddsql_reference" >}}SQL Reference for Logs: SQL syntax for advanced log analysis{{< /nextlink >}}

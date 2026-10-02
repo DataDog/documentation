@@ -21,10 +21,10 @@ further_reading:
 - link: "/real_user_monitoring/setup/data_collected/?platform=browser"
   tag: "Documentation"
   text: "RUM browser data collected"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
-- link: "/real_user_monitoring/explorer/visualize/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/visualize/"
   tag: "Documentation"
   text: "Apply visualizations on your events"
 - link: "/logs/log_configuration/attributes_naming_convention"
@@ -1618,7 +1618,7 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [1]: /real_user_monitoring/setup/data_collected/?platform=browser
 [2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser
 [3]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2170
-[4]: /real_user_monitoring/application_monitoring/browser/setup/
+[4]: /real_user_monitoring/setup/install/?platform=browser
 [5]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md#v2130
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Event
@@ -1638,5 +1638,5 @@ The `service` and `version` tags representing each micro frontend can also be fo
 [21]: https://module-federation.io/
 [22]: https://github.com/DataDog/build-plugins?tab=readme-ov-file#usage
 [23]: https://github.com/DataDog/build-plugins
-[24]: /real_user_monitoring/rum_without_limits/
+[24]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [25]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser

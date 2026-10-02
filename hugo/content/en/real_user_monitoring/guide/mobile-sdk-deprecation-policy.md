@@ -2,7 +2,7 @@
 title: RUM Mobile SDKs Deprecation Policy
 description: "Understand Datadog's mobile SDK deprecation policy including timelines, support periods, and migration guidance for RUM SDKs."
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
 - link: '/real_user_monitoring/guide/mobile-sdk-upgrade'

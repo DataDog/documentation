@@ -95,7 +95,7 @@ bufferedClient = Client(
 For additional information on sampling rate, distributed tracing, and adding custom attributes to tracked RUM resources, see [Advanced Configuration > Automatically track network requests][4].
 
 [1]: https://github.com/Alamofire/Alamofire
-[2]: /real_user_monitoring/application_monitoring/ios/setup
+[2]: /real_user_monitoring/setup/install/?platform=ios
 [3]: https://github.com/apollographql/apollo-ios
 [4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#automatically-track-network-requests
 [5]: https://github.com/SDWebImage/SDWebImage

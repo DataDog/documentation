@@ -12,10 +12,16 @@ further_reading:
 - link: "/real_user_monitoring/setup/data_collected/"
   tag: "Documentation"
   text: "Data collected by the RUM SDKs"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
 ---
+
+## Overview
+
+The RUM SDKs let you modify attributes of RUM events, or drop events entirely, before they're sent to Datadog. These changes happen client-side, in your application.
+
+To control which sessions Datadog retains server-side, use [retention filters][1]. To redact sensitive data server-side, use [Sensitive Data Scanner][2].
 
 Select your SDK for platform-specific instructions on modifying or dropping RUM events before they're sent to Datadog.
 
@@ -58,7 +64,7 @@ Select your SDK for platform-specific instructions on modifying or dropping RUM 
 <!-- C / C++ -->
 
 {% if equals($platform, "cpp") %}
-{% partial file="sdk/modify_or_drop_rum_events/cpp.mdoc.md" /%}
+{% partial file="sdk/modify_or_drop_rum_events/unavailable.mdoc.md" /%}
 {% /if %}
 
 <!-- .NET MAUI -->
@@ -70,11 +76,14 @@ Select your SDK for platform-specific instructions on modifying or dropping RUM 
 <!-- Roku -->
 
 {% if equals($platform, "roku") %}
-{% partial file="sdk/modify_or_drop_rum_events/roku.mdoc.md" /%}
+{% partial file="sdk/modify_or_drop_rum_events/unavailable.mdoc.md" /%}
 {% /if %}
 
 <!-- Unity -->
 
 {% if equals($platform, "unity") %}
-{% partial file="sdk/modify_or_drop_rum_events/unity.mdoc.md" /%}
+{% partial file="sdk/modify_or_drop_rum_events/unavailable.mdoc.md" /%}
 {% /if %}
+
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[2]: /security/sensitive_data_scanner/

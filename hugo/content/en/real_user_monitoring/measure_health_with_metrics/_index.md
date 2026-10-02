@@ -9,9 +9,7 @@ further_reading:
 
 ## Overview
 
-RUM computes metrics over 100% of your ingested traffic, even when you retain only a subset of sessions with retention filters. Use these metrics to monitor the health of your frontend applications over time, track trends, and power dashboards and monitors.
-
-After you have metrics, use them to visualize and alert on the health of your application:
+RUM computes metrics over 100% of your ingested traffic, even when you retain only a subset of sessions with retention filters. Use these metrics to track the health of your frontend applications over time:
 
 - [Create dashboards][1] to build visualizations on top of your RUM metrics
 - [Set up monitors][2] to get alerted when metrics cross thresholds

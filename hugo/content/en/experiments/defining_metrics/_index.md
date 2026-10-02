@@ -56,9 +56,9 @@ To create a metric for your experiment:
 
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [3]: /real_user_monitoring/#get-started
-[4]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
-[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swift-package-manager--spm
-[6]: /real_user_monitoring/application_monitoring/browser/setup/client/?tab=npm
+[4]: /real_user_monitoring/setup/install/?platform=android
+[5]: /real_user_monitoring/setup/install/?platform=ios
+[6]: /real_user_monitoring/setup/install/?platform=browser
 [7]: /real_user_monitoring/application_monitoring/react_native/setup/?platform=react_native
 
 ### Add filters

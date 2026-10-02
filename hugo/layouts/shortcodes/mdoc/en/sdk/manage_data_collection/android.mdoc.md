@@ -1,4 +1,4 @@
-The Android SDK first stores events and only uploads events when the [intake specifications](/real_user_monitoring/application_monitoring/android/setup/#sending-data-when-device-is-offline) conditions are met.
+The Android SDK first stores events and only uploads events when the [intake specifications](/real_user_monitoring/setup/install/?platform=android) conditions are met.
 
 ### Clear all data
 

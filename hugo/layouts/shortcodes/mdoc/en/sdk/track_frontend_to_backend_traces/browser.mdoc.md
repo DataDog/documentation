@@ -127,5 +127,11 @@ End-to-end tracing is available for requests fired after the Browser SDK is init
       - `b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-[1]: /real_user_monitoring/application_monitoring/browser/
+### Allow tracing headers on cross-origin requests
+
+The tracing HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][3] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][4] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
+
+[1]: /real_user_monitoring/setup/install/?platform=browser
 [2]: /tracing/trace_pipeline/ingestion_mechanisms/#head-based-sampling
+[3]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
+[4]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request

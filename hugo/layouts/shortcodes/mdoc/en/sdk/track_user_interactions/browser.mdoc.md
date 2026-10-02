@@ -31,7 +31,7 @@ With the `actionNameAttribute` initialization parameter, you can specify a custo
 
 ## Send custom actions
 
-To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user journey.
+To extend the collection of user interactions, send your custom actions using the `addAction` API. These custom actions send information relative to an event that occurs during a user session.
 
 For more information, see [Send Custom Actions][2].
 

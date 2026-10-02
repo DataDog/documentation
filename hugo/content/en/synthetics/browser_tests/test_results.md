@@ -256,7 +256,7 @@ Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >
 [3]: https://web.dev/cls/
 [4]: https://web.dev/fid/
 [5]: /real_user_monitoring/
-[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
+[6]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [7]: /tracing/trace_explorer/trace_view/
 [8]: /synthetics/settings/?tab=specifyvalue#apm-integration-for-browser-tests
 [9]: /synthetics/browser_tests/advanced_options/?tab=requestoptions#user-specified-locator
@@ -272,7 +272,7 @@ Alerts from your Synthetic test monitors appear on the timeline in the [{{< ui >
 [19]: /continuous_testing/cicd_integrations
 [20]: /synthetics/browser_tests/?tab=requestoptions#define-alert-conditions
 [21]: /logs/guide/ease-troubleshooting-with-cross-product-correlation/#leverage-trace-correlation-to-troubleshoot-synthetic-tests
-[22]: /real_user_monitoring/explorer
+[22]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [23]: /real_user_monitoring/session_replay
 [24]: /synthetics/browser_tests/?tab=requestoptions#fast-retry
 [25]: /synthetics/guide/step-duration/

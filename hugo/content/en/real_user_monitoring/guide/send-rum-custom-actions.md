@@ -7,7 +7,7 @@ description: Learn how to send custom actions to extend your collection of user 
 aliases:
 - /real_user_monitoring/guide/send-custom-user-actions/
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the RUM Explorer'
 - link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
@@ -107,4 +107,4 @@ The following example displays the average cart value per country in the last tw
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=browser&tab=useraction#action-attributes
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#replace-global-context
-[3]: /real_user_monitoring/explorer
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/

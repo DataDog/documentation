@@ -3,10 +3,10 @@ title: Feature Flag Tracking
 description: "Track feature flag usage and performance impact in RUM to maintain release safety and optimize user experience with controlled rollouts."
 disable_toc: false
 further_reading:
-- link: "/real_user_monitoring/feature_flag_tracking/setup/"
+- link: "/real_user_monitoring/enrich_rum_data/track_feature_flags/"
   tag: "Documentation"
   text: "Set up Feature Flag data collection"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Learn about the RUM Explorer"
 - link: "https://www.datadoghq.com/blog/feature-flag-tracking/"
@@ -42,17 +42,17 @@ Create and track feature flags directly in Datadog, or track feature flags from 
 
 {{< card-grid card_width="200" >}}
   {{< image-card href="/feature_flags" src="integrations_logos/datadog_large.svg" alt="datadog" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#amplitude-integration" src="integrations_logos/amplitude_large.svg" alt="amplitude" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#configcat-integration" src="integrations_logos/configcat_large.svg" alt="custom" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#custom-feature-flag-management" src="integrations_logos/docs_custom_feature_flag_systems_card.png" alt="custom" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#devcycle-integration" src="integrations_logos/devcycle_large.svg" alt="devcycle" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#eppo-integration" src="integrations_logos/eppo_large.svg" alt="eppo" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#flagsmith-integration" src="integrations_logos/flagsmith_large.svg" alt="flagsmith" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/#growthbook-integration" src="integrations_logos/growthbook_large.svg" alt="growthbook" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#kameleoon-integration" src="integrations_logos/kameleoon.png" alt="kameleoon" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#launchdarkly-integration" src="integrations_logos/launchdarkly_large.svg" alt="launchdarkly" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#split-integration" src="integrations_logos/split_large.svg" alt="split" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#statsig-integration" src="integrations_logos/statsig_large.svg" alt="statsig" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#amplitude-integration" src="integrations_logos/amplitude_large.svg" alt="amplitude" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#configcat-integration" src="integrations_logos/configcat_large.svg" alt="custom" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#custom-feature-flag-management" src="integrations_logos/docs_custom_feature_flag_systems_card.png" alt="custom" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#devcycle-integration" src="integrations_logos/devcycle_large.svg" alt="devcycle" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#eppo-integration" src="integrations_logos/eppo_large.svg" alt="eppo" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#flagsmith-integration" src="integrations_logos/flagsmith_large.svg" alt="flagsmith" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#growthbook-integration" src="integrations_logos/growthbook_large.svg" alt="growthbook" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#kameleoon-integration" src="integrations_logos/kameleoon.png" alt="kameleoon" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#launchdarkly-integration" src="integrations_logos/launchdarkly_large.svg" alt="launchdarkly" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#split-integration" src="integrations_logos/split_large.svg" alt="split" >}}
+  {{< image-card href="/real_user_monitoring/enrich_rum_data/track_feature_flags/#statsig-integration" src="integrations_logos/statsig_large.svg" alt="statsig" >}}
 {{< /card-grid >}}
 
 ## Start using feature flags
@@ -60,13 +60,13 @@ Create and track feature flags directly in Datadog, or track feature flags from 
 To get started with feature flags, set up feature flag tracking for the browser SDK or mobile SDK, then start collecting data using one of Datadog's integration partners or a custom feature flag management solution.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/feature_flag_tracking/setup">}}<u>Setup</u>: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/feature_flag_tracking/using_feature_flags">}}<u>Use your feature flags</u>: Learn how to view and analyze your feature flag's health and usage.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_feature_flags/">}}<u>Setup</u>: Learn how to set up RUM to capture feature flag data and analyze the performance in Datadog.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_feature_flags/">}}<u>Use your feature flags</u>: Learn how to view and analyze your feature flag's health and usage.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/real_user_monitoring/feature_flag_tracking/setup/
+[1]: https://docs.datadoghq.com/real_user_monitoring/enrich_rum_data/track_feature_flags/
 [2]: /real_user_monitoring/setup/?tab=npm#custom-feature-flag-management

@@ -4,7 +4,7 @@ description: "Monitor real user data and frontend performance with Datadog RUM B
 aliases:
   - /real_user_monitoring/browser/
 further_reading:
-- link: '/real_user_monitoring/explorer/'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 - link: '/logs/log_collection/javascript/'
@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user activity of your application's individual users.
 
 {{< skill-callout
     title="Set up RUM with an agent"
@@ -44,8 +44,8 @@ To get started with RUM for Browser, create an application and configure the Bro
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/monitoring_resource_performance">}}<u>Monitoring Resource Performance</u>: Monitor browser resource performance and link RUM data with backend traces for full end-to-end visibility.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/collecting_browser_errors">}}<u>Collecting Browser Errors</u>: Learn how to collect and track frontend errors from multiple sources using RUM Browser SDK, including manual error collection and React error boundaries.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/browser/tracking_user_actions">}}<u>Tracking User Actions</u>: Track and analyze user interactions in your browser application with automatic click detection and action performance insights.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/frustration_signals">}}<u>Frustration Signals</u>: Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/browser/troubleshooting">}}<u>Troubleshooting</u>: Common troubleshooting Browser SDK issues.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser">}}<u>Frustration Signals</u>: Identify user friction points with RUM frustration signals (including rage clicks, dead clicks, and error clicks) to improve user experience and reduce abandonment.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/reference/troubleshooting/?platform=browser">}}<u>Troubleshooting</u>: Common troubleshooting Browser SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

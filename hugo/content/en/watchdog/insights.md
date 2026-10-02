@@ -5,7 +5,7 @@ further_reading:
 - link: "/logs/explorer/watchdog_insights/"
   tag: "Documentation"
   text: "Watchdog Insights for Logs"
-- link: "/real_user_monitoring/explorer/watchdog_insights/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/watchdog_insights/"
   tag: "Documentation"
   text: "Watchdog Insights for RUM"
 - link: "https://www.datadoghq.com/blog/datadog-watchdog-insights-log-management/"
@@ -256,8 +256,8 @@ In the full side panel, you can see a timeseries graph about the performance met
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 
-[1]: /real_user_monitoring/explorer/search/#facets
-[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#facets
+[2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [3]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#view-loading-time
 {{% /tab %}}
 {{% tab "Synthetic Monitoring" %}}

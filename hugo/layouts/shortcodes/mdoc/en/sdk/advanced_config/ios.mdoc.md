@@ -932,7 +932,7 @@ For setup steps, see [Manage Data Collection](/real_user_monitoring/setup/enable
 [6]: /real_user_monitoring/setup/data_collected/?platform=ios&tab=session#default-attributes
 [7]: https://www.ntppool.org/en/
 [8]: /error_tracking/frontend/mobile/ios/#add-app-hang-reporting
-[9]: /real_user_monitoring/application_monitoring/ios/setup
+[9]: /real_user_monitoring/setup/install/?platform=ios
 [10]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=ios
 [11]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios
 [12]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios

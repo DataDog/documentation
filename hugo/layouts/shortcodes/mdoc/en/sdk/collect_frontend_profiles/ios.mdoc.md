@@ -94,8 +94,8 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 {% img src="real_user_monitoring/ios/ios-profiling-operation.png" alt="iOS profiling data in an operation event." style="width:90%;" /%}
 
 [1]: https://developer.apple.com/documentation/kernel/mach
-[2]: /real_user_monitoring/rum_without_limits/
+[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [3]: /real_user_monitoring/application_monitoring/ios
-[4]: /real_user_monitoring/application_monitoring/ios/setup?tab=swift-package-manager--spm
+[4]: /real_user_monitoring/setup/install/?platform=ios
 [5]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 [6]: /real_user_monitoring/setup/data_collected/?platform=ios#error-attributes

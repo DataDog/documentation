@@ -3,7 +3,7 @@ title: Export Product Analytics Events and Graphs
 aliases:
 - /product_analytics/analytics_explorer/export
 further_reading:
-- link: "/real_user_monitoring/explorer/search/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/"
   tag: "Documentation"
   text: "Search for your events"
 - link: "/dashboards"

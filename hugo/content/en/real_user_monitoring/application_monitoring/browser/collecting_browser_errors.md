@@ -288,7 +288,7 @@ Get visibility into cross-origin scripts by following these two steps:
 [1]: /real_user_monitoring/setup/data_collected/?platform=browser
 [2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/
 [3]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error
-[4]: /real_user_monitoring/error_tracking
+[4]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [5]: https://legacy.reactjs.org/docs/error-boundaries.html
 [6]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs#upload-your-source-maps
 [7]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -298,9 +298,9 @@ Get visibility into cross-origin scripts by following these two steps:
 [11]: /real_user_monitoring/guide/upload-javascript-source-maps/?tab=webpackjs
 [12]: https://github.com/DataDog/rum-events-format/blob/69147431d689b3e59bff87e15bb0088a9bb319a9/lib/esm/generated/rum.d.ts#L185-L203
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/cause
-[14]: /real_user_monitoring/explorer/search/#event-types
-[15]: /real_user_monitoring/rum_without_limits/retention_filters
-[16]: /real_user_monitoring/rum_without_limits/metrics
+[14]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#event-types
+[15]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[16]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
 [17]: /error_tracking/manage_data_collection
 [18]: /error_tracking/issue_states#excluding-an-issue
 [19]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#discard-a-frontend-error

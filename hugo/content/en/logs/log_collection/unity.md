@@ -111,7 +111,7 @@ logger.RemoveAttribute("user-status")
 
 
 [1]: https://github.com/DataDog/unity-package
-[2]: /real_user_monitoring/application_monitoring/unity/setup
+[2]: /real_user_monitoring/setup/install/?platform=unity
 [3]: /getting_started/tagging/
 [4]: https://www.newtonsoft.com/json/help/html/m_newtonsoft_json_jsonconvert_serializeobject.htm
 [6]: https://pub.dev/packages/logger

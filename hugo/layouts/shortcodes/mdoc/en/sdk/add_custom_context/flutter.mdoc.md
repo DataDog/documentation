@@ -93,6 +93,6 @@ DatadogSdk.instance.rum?.addError("This is an error message.");
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=flutter
 [2]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
-[3]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=measures#setup-facets-and-measures
 [4]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [5]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/

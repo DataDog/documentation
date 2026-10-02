@@ -93,8 +93,8 @@ See [Symbol upload troubleshooting][11] for the full diagnostic list.
 
 [1]: https://github.com/DataDog/dd-sdk-maui/issues
 [2]: /help/
-[3]: /real_user_monitoring/application_monitoring/maui/setup/#initialize-the-datadog-sdk
-[4]: /real_user_monitoring/application_monitoring/maui/setup/#set-tracking-consent-gdpr-compliance
+[3]: /real_user_monitoring/setup/install/?platform=maui
+[4]: /real_user_monitoring/setup/install/?platform=maui
 [5]: https://app.datadoghq.com/rum/application/create
 [6]: /real_user_monitoring/application_monitoring/maui/error_tracking/#get-symbolicated-stack-traces
 [7]: /real_user_monitoring/application_monitoring/maui/error_tracking/#managed-c-stack-traces

@@ -478,8 +478,8 @@ module.exports = {
 This example uses webpack. The configuration object is identical across all supported bundlers. See [Installation](#installation) for installation instructions for your bundler.
 {% /alert %}
 
-[1]: /real_user_monitoring/application_monitoring/browser/setup/client
-[2]: /real_user_monitoring/error_tracking
+[1]: /real_user_monitoring/setup/install/?platform=browser
+[2]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [3]: /real_user_monitoring/
 [4]: /real_user_monitoring/guide/upload-javascript-source-maps
 [5]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions#mask-all-action-names

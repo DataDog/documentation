@@ -15,7 +15,7 @@ further_reading:
  - link: "/real_user_monitoring"
    tag: "Documentation"
    text: "Learn how to explore your RUM data"
- - link: "/real_user_monitoring/error_tracking/ios/"
+ - link: "/real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/ios/"
    tag: "Documentation"
    text: "Learn how to track iOS errors"
  - link: "/real_user_monitoring/ios/swiftui/"
@@ -106,11 +106,11 @@ The Datadog RUM SDK depends on the following third-party library:
 
 [1]: https://developer.apple.com/xcode/
 [2]: https://developer.apple.com/news/?id=fxu2qp7b
-[3]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[4]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
-[6]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#alamofire
-[7]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#apollo-graphql
-[8]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#sdwebimage
-[9]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#openapi-generator
+[3]: /real_user_monitoring/setup/install/?platform=ios
+[4]: /real_user_monitoring/setup/install/?platform=ios
+[5]: /real_user_monitoring/setup/install/?platform=ios
+[6]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#alamofire
+[7]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#apollo-graphql
+[8]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#sdwebimage
+[9]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#openapi-generator
 [10]: https://github.com/kstenerud/KSCrash

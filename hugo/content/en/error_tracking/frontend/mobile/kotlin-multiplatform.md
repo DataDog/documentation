@@ -7,10 +7,10 @@ type: multi-code-lang
 code_lang: kotlin-multiplatform
 code_lang_weight: 50
 further_reading:
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 ---
@@ -443,7 +443,7 @@ To update the tracking consent value after the SDK is initialized, call `Datadog
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup
+[3]: /real_user_monitoring/setup/install/?platform=kotlin_multiplatform
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/features/rum
 [5]: https://app.datadoghq.com/error-tracking/settings/setup/client
 [6]: /real_user_monitoring/kotlin_multiplatform/data_collected/

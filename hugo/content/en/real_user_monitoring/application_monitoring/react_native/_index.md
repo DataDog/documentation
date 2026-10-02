@@ -17,7 +17,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user activity of your application's individual users.
 
 ## Start monitoring React Native applications
 
@@ -30,8 +30,8 @@ To get started with RUM for React Native, create an application and configure th
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=react_native">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your React Native application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=react_native">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/integrated_libraries">}}
+  {{< nextlink href="/real_user_monitoring/reference/integrated_libraries/?platform=react_native">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your React Native applications.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/react_native/troubleshooting">}}
+  {{< nextlink href="/real_user_monitoring/reference/troubleshooting/?platform=react_native">}}
   <u>Troubleshooting</u>: Common troubleshooting React Native SDK issues.{{< /nextlink >}}
 {{< /whatsnext >}}

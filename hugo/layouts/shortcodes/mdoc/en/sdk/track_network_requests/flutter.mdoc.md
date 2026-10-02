@@ -29,5 +29,5 @@ If the request fails, use `stopResourceWithErrorInfo` instead.
 For header capture and custom resource attributes, see [Flutter Advanced Configuration][3].
 
 [1]: https://pub.dev/packages/datadog_tracking_http_client
-[2]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[2]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter#automatically-track-resources

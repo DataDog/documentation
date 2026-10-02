@@ -76,5 +76,5 @@ You can begin your investigation for the root cause of a performance issue in th
 [1]: /watchdog/insights/
 [2]: /real_user_monitoring/investigate_problems/explore_retained_data
 [3]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#facets
-[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [5]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#view-loading-time

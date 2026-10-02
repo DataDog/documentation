@@ -195,9 +195,9 @@ DdTrace.Enable(new DdTraceConfiguration
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/maui/setup
+[2]: /real_user_monitoring/setup/install/?platform=maui
 [3]: /real_user_monitoring/setup/data_collected/?platform=maui
-[4]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[4]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=maui
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=maui
 [7]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=maui

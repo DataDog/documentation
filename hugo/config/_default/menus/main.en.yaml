@@ -9491,22 +9491,22 @@ menu:
       parent: rum
       identifier: rum_terms_and_concepts
       weight: 1
-    - name: Setup RUM
+    - name: Set Up RUM
       url: real_user_monitoring/setup/
       parent: rum
       identifier: rum_setup
       weight: 2
-    - name: Create a RUM App
+    - name: Create a RUM Application
       url: real_user_monitoring/setup/create_application/
       parent: rum_setup
       identifier: rum_setup_create_application
       weight: 201
-    - name: Install the DD SDK
+    - name: Install the Datadog SDK
       url: real_user_monitoring/setup/install/
       parent: rum_setup
       identifier: rum_setup_install
       weight: 202
-    - name: Enable the DD RUM Module
+    - name: Enable the Datadog RUM Module
       url: real_user_monitoring/setup/enable_rum/
       parent: rum_setup
       identifier: rum_setup_enable
@@ -9791,32 +9791,32 @@ menu:
       url: real_user_monitoring/administer_and_extend_rum/
       parent: rum
       weight: 9
-    - name: Create Dashboards
+    - name: Use RUM Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/
       parent: rum_administer_and_extend_rum
       identifier: rum_administer_and_extend_rum_dashboards
       weight: 901
-    - name: Performance
+    - name: Performance Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/performance
       parent: rum_administer_and_extend_rum_dashboards
       identifier: rum_administer_and_extend_rum_dashboards_performance
       weight: 101
-    - name: Testing and Deployment
+    - name: Testing and Deployment Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/testing_and_deployment
       parent: rum_administer_and_extend_rum_dashboards
       identifier: rum_administer_and_extend_rum_dashboards_testing_and_deployment
       weight: 102
-    - name: Usage
+    - name: Usage Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/usage
       parent: rum_administer_and_extend_rum_dashboards
       identifier: rum_administer_and_extend_rum_dashboards_usage
       weight: 103
-    - name: Errors
+    - name: Error Dashboards
       url: real_user_monitoring/administer_and_extend_rum/dashboards/errors
       parent: rum_administer_and_extend_rum_dashboards
       identifier: rum_administer_and_extend_rum_dashboards_errors
       weight: 104
-    - name: Setup Monitors
+    - name: Set Up Monitors
       url: /monitors/types/real_user_monitoring
       parent: rum_administer_and_extend_rum
       identifier: rum_administer_and_extend_rum_monitors
@@ -9831,7 +9831,7 @@ menu:
       parent: rum_administer_and_extend_rum
       identifier: rum_administer_and_extend_rum_correlate_with_other_telemetry
       weight: 904
-    - name: LLM Observability
+    - name: Agent Observability
       url: real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/llm_observability
       parent: rum_administer_and_extend_rum_correlate_with_other_telemetry
       identifier: rum_administer_and_extend_rum_correlate_with_other_telemetry_llm

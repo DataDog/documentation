@@ -1,8 +1,3 @@
-Adding user information to your RUM sessions helps you to:
-* Follow the journey of a given user
-* Know which users are the most impacted by errors
-* Monitor performance for your most important users
-
 {% img src="real_user_monitoring/browser/advanced_configuration/user-api.png" alt="User API in RUM UI" /%}
 
 | Attribute   | Type   | Description                                                                     |
@@ -14,5 +9,5 @@ Adding user information to your RUM sessions helps you to:
 To identify user sessions, use the `setUserInfo` API, for example:
 
 ```kotlin
-Datadog.setUserInfo('1234', 'John Doe', 'john@doe.com')
+Datadog.setUserInfo("1234", "John Doe", "john@doe.com")
 ```

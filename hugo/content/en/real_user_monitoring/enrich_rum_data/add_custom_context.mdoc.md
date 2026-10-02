@@ -12,7 +12,7 @@ further_reading:
 - link: "/real_user_monitoring/setup/data_collected/"
   tag: "Documentation"
   text: "Data collected by the RUM SDKs"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Explore your views within Datadog"
 - link: "/logs/log_configuration/attributes_naming_convention"

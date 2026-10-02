@@ -11,7 +11,7 @@ further_reading:
 - link: '/real_user_monitoring/administer_and_extend_rum/dashboards/usage#frustration-signals'
   tag: 'Documentation'
   text: 'Frustration Signals Dashboard'
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 - link: '/session_replay/'

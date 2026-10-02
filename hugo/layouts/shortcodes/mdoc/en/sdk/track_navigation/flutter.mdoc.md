@@ -63,7 +63,7 @@ var observer = DatadogNavigationObserver(
 );
 ```
 
-[1]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries/
+[1]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [2]: https://pub.dev/packages?q=go_router
 [3]: https://pub.dev/packages/auto_route
 [4]: https://pub.dev/packages/beamer

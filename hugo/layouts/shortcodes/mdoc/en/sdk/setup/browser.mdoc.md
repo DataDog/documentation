@@ -386,5 +386,5 @@ To request support for a web server that is not listed here, [fill out this form
 [7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser#user-tracking-consent
 [8]: /integrations/content_security_policy_logs/
 [9]: /agentic_onboarding/setup/
-[10]: /real_user_monitoring/application_monitoring/browser/setup/client
+[10]: /real_user_monitoring/setup/install/?platform=browser
 [11]: /private-beta/rum-sdk-auto-injection/

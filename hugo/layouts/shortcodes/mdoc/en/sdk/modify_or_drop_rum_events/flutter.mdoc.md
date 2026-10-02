@@ -7,11 +7,11 @@ final config = DatadogConfiguration(
     // other configuration...
     rumConfiguration: DatadogRumConfiguration(
         applicationId: '<YOUR_APPLICATION_ID>',
-        rumViewEventMapper = (event) => event,
-        rumActionEventMapper = (event) => event,
-        rumResourceEventMapper = (event) => event,
-        rumErrorEventMapper = (event) => event,
-        rumLongTaskEventMapper = (event) => event,
+        rumViewEventMapper: (event) => event,
+        rumActionEventMapper: (event) => event,
+        rumResourceEventMapper: (event) => event,
+        rumErrorEventMapper: (event) => event,
+        rumLongTaskEventMapper: (event) => event,
     ),
 );
 ```
@@ -21,11 +21,10 @@ Each mapper is a function with a signature of `(T) -> T?`, where `T` is a concre
 For example, to redact sensitive information in a RUM Resource's `url`, implement a custom `redacted` function and use it in `rumResourceEventMapper`:
 
 ```dart
-    rumResourceEventMapper = (event) {
-        var resourceEvent = resourceEvent
-        resourceEvent.resource.url = redacted(resourceEvent.resource.url)
-        return resourceEvent
-    }
+    rumResourceEventMapper: (event) {
+        event.resource.url = redacted(event.resource.url);
+        return event;
+    },
 ```
 
 Returning `null` from the error, resource, or action mapper drops the event entirely; the event is not sent to Datadog. The value returned from the view event mapper must not be `null`.

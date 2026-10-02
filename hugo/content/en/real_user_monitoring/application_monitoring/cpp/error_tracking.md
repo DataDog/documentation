@@ -2,10 +2,10 @@
 title: C / C++ Crash Reporting and Error Tracking
 description: Set up Error Tracking for your C and C++ applications.
 further_reading:
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 ---
@@ -116,9 +116,9 @@ RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/error_tracking/
+[1]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/cpp/setup
+[3]: /real_user_monitoring/setup/install/?platform=cpp
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
 [6]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=cpp

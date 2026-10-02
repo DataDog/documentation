@@ -98,5 +98,5 @@
       - `.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-[1]: /real_user_monitoring/ios/
+[1]: /real_user_monitoring/setup/install/?platform=ios
 [2]: https://developer.apple.com/documentation/foundation/url_loading_system/analyzing_http_traffic_with_instruments

@@ -72,6 +72,6 @@
       - `.B3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `.B3MULTI`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
-[1]: /real_user_monitoring/android/
+[1]: /real_user_monitoring/setup/install/?platform=android
 [2]: /tracing/trace_collection/dd_libraries/android/?tab=kotlin
 [3]: https://developer.android.com/studio/debug/network-profiler#network-inspector-overview

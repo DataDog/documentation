@@ -5,7 +5,7 @@ further_reading:
 - link: "/real_user_monitoring/setup/"
   tag: "Documentation"
   text: "Set up RUM for your application"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Explore your RUM data"
 - link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
@@ -28,15 +28,15 @@ For additional definitions and descriptions of general Datadog terms, see the [m
 | Concept                                | Description                                                                                                                        |
 |-----------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | [RUM application](#rum-application)     | The application or environment a set of RUM data is grouped under, identified by an Application ID and Client Token.                |
-| [Session](#session)                     | A user journey on your application, made up of the views, actions, resources, errors, and other events generated during that visit. |
+| [Session](#session)                     | The activity of a single user on your application, made up of the views, actions, resources, errors, and other events they generate.     |
 | [View](#view)                           | A web page, mobile screen, or hybrid view a user visits during a session.                                                            |
 | [Action](#action)                       | A discrete user interaction, such as a click, tap, or custom action defined in your code.                                            |
 | [Resource](#resource)                   | A network request made by your application, such as an XHR, fetch, or asset load.                                                    |
 | [Error](#error)                         | A frontend error, unhandled exception, or crash captured during a session.                                                           |
-| [Long task](#long-task)                 | A task that blocks the main thread long enough to affect the responsiveness of your application.                                     |
+| [Long task](#long-task)                 | A task that blocks the main thread for longer than a threshold, affecting the responsiveness of your application.                     |
 | [Vitals](#vitals)                       | Performance scores, such as Core Web Vitals or Mobile Vitals, that measure the quality of the user experience.                       |
 | [Frustration signals](#frustration-signals) | A user behavior, such as a rage click or error click, that indicates a poor experience.                                           |
-| [Session Replay](#session-replay)       | A visual, replayable recording of a user's browsing session.                                                                         |
+| [Session Replay](#session-replay)       | A visual, replayable recording of a user's session in your web or mobile application.                                                |
 | [Sampling](#sampling)                   | The rate at which sessions or replays are collected and sent to Datadog.                                                             |
 | [Retention filters and quotas](#retention-filters-and-quotas) | Controls that determine which sessions Datadog retains and how many are retained per day.                        |
 | [Context](#context)                     | Custom or global attributes attached to RUM events to add business or user-specific information.                                     |
@@ -47,7 +47,7 @@ A RUM application represents a single web or mobile application, or one environm
 
 ## Session
 
-A session is a user journey on your web or mobile application. A session includes all related navigation events (views), user actions, network requests (resources), crashes and errors, and other events and signals that collectively produce a faithful representation of the user experience.
+A session groups the activity of a single user on your web or mobile application. A session includes all related navigation events (views), user actions, network requests (resources), crashes and errors, and other events and signals that collectively produce a faithful representation of the user experience.
 
 A session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
 
@@ -57,7 +57,7 @@ For more information, see [Session Definition][3].
 
 A view represents a web page, mobile screen, or hybrid web view that a user visits. Views track metrics like load time, [Core Web Vitals or Mobile Vitals](#vitals), and the actions, resources, and errors that occur while the view is active.
 
-To learn more, see [Track Views][4].
+To learn more, see [Track Navigation][4].
 
 ## Action
 
@@ -73,7 +73,7 @@ An error is a frontend JavaScript error, unhandled promise rejection, mobile cra
 
 ## Long task
 
-A long task is a task that blocks the browser's main thread for an extended period of time, preventing the application from responding to user input. Long tasks are a common cause of poor [UI latency vitals](#vitals).
+A long task is a task that blocks the main thread for longer than a threshold (50 ms on Browser, configurable on mobile), preventing the application from responding to user input. Long tasks are a common cause of poor [UI latency vitals](#vitals).
 
 ## Vitals
 
@@ -85,7 +85,7 @@ Frustration signals are user behaviors that indicate a poor experience, such as 
 
 ## Session Replay
 
-Session Replay allows you to capture and visually replay the browsing experience of your users. Combined with RUM performance data, Session Replay is useful for error identification, reproduction, and resolution.
+Session Replay allows you to capture and visually replay the user experience in your web or mobile application. Combined with RUM performance data, Session Replay is useful for error identification, reproduction, and resolution.
 
 To learn more, see [Session Replay][10].
 
@@ -101,7 +101,7 @@ To learn more, see [Retain and Recover Valuable Sessions][12].
 
 ## Context
 
-Context is custom or global information attached to RUM events, such as a user's ID, subscription plan, or feature flags. Adding context lets you segment and filter your RUM data by business-relevant attributes.
+Context is custom or global information attached to RUM events, such as a user's ID, subscription plan, or [feature flags][14]. Adding context lets you segment and filter your RUM data by business-relevant attributes.
 
 To learn more, see [Enrich RUM Data][13].
 
@@ -115,10 +115,11 @@ To learn more, see [Enrich RUM Data][13].
 [4]: /real_user_monitoring/setup/enable_rum/track_navigation/
 [5]: /real_user_monitoring/setup/enable_rum/track_user_interactions/
 [6]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[7]: /real_user_monitoring/error_tracking/
-[8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
-[9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
+[7]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
+[8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
+[9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/
 [10]: /session_replay/
-[11]: /real_user_monitoring/rum_without_limits/
+[11]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [12]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [13]: /real_user_monitoring/enrich_rum_data/
+[14]: /real_user_monitoring/enrich_rum_data/track_feature_flags/

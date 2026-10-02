@@ -1,6 +1,6 @@
 ---
-title: Explore a Preview of RUM Features in Synthetics
-description: Users without RUM can now preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
+title: Correlate RUM and Synthetic Tests
+description: Users without RUM can preview RUM data, sessions, and errors from their Synthetic browser test results with no additional cost. 
 aliases:
 - /real_user_monitoring/correlate_with_other_telemetry/synthetics/
 further_reading:

@@ -308,8 +308,8 @@ dd_core_destroy(core);
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/cpp/setup
-[3]: /real_user_monitoring/operations_monitoring/
+[2]: /real_user_monitoring/setup/install/?platform=cpp
+[3]: /real_user_monitoring/track_critical_operations/
 [4]: /getting_started/site/
 [5]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=cpp
 [6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=cpp

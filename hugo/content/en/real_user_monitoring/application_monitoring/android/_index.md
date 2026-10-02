@@ -1,6 +1,6 @@
 ---
 title: Android and Android TV Monitoring
-description: "Monitor Android and Android TV applications with RUM to visualize user journeys, track performance, and analyze real-time user experiences."
+description: "Monitor Android and Android TV applications with RUM to visualize user activity, track performance, and analyze real-time user experiences."
 aliases:
   - /real_user_monitoring/mobile_and_tv_monitoring/android
 further_reading:
@@ -16,7 +16,7 @@ further_reading:
 ---
 ## Overview
 
-Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user journeys of your application's individual users.
+Datadog Real User Monitoring (RUM) enables you to visualize and analyze the real-time performance and user activity of your application's individual users.
 
 The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV. It works for Android apps written using Java or Kotlin.
 
@@ -25,17 +25,17 @@ The Datadog Android SDK supports Android 6.0+ (API level 23) and Android TV. It 
 To get started with RUM for Android, create an application and configure the Android SDK.
 
 {{< whatsnext desc="This section includes the following topics:">}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/android/setup">}}<u>Setup</u>: Learn how to set up the Android SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/setup/install/?platform=android">}}<u>Setup</u>: Learn how to set up the Android SDK, track background events, and send data when devices are offline.{{< /nextlink >}}
   {{< nextlink href="/error_tracking/frontend/mobile/android">}}<u>Crash Reporting</u>: Add ANR detection and crash reporting, get deobfuscated stack traces, then test your implementation.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/application_launch_monitoring">}}<u>Application Launch Monitoring</u>: Measure Android mobile application launch performance, including the time to initial display and time to full display.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android">}}<u>Track UI Latency</u>: Monitor view timings and mobile vitals to understand your app's performance from a user's perspective.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Android application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/android/integrated_libraries">}}
+  {{< nextlink href="/real_user_monitoring/reference/integrated_libraries/?platform=android">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Android and Android TV applications.{{< /nextlink >}}
-  {{< nextlink href="/real_user_monitoring/application_monitoring/android/troubleshooting">}}
+  {{< nextlink href="/real_user_monitoring/reference/troubleshooting/?platform=android">}}
   <u>Troubleshooting</u>: Common troubleshooting Android SDK issues.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/jetpack_compose_instrumentation">}}<u>Jetpack Compose Instrumentation</u>: Instrument Jetpack Compose manually or automatically using the Datadog Gradle Plugin. {{< /nextlink >}}
-{{< nextlink href="/real_user_monitoring/application_monitoring/android/sdk_performance_impact">}}<u>SDK Performance Impact</u>: Learn about how the SDK impacts performance of your application. {{< /nextlink >}}
+{{< nextlink href="/real_user_monitoring/reference/sdk_performance_impact/?platform=android">}}<u>SDK Performance Impact</u>: Learn about how the SDK impacts performance of your application. {{< /nextlink >}}
 {{< /whatsnext >}}

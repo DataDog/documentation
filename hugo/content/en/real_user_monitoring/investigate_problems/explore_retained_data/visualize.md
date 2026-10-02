@@ -88,7 +88,7 @@ The RUM Analytics geomap shows the 75th percentile of the **Largest Contentful P
 
 ## Funnels
 
-Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user journeys. Specifically, you can:
+Funnel analysis helps you track conversion rates across key workflows to identify and address any bottlenecks in end-to-end user workflows. Specifically, you can:
 
 - See if customers drop off at a certain point due to poor website performance
 - Track how the conversion rate changes over time as new features are built

@@ -2,12 +2,12 @@
 title: Upgrade the RUM Browser SDK
 description: "Upgrade guide for migrating between major versions of RUM Browser SDK with breaking changes, new features, and compatibility updates."
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
 - link: "https://www.datadoghq.com/blog/session-replay-datadog/"
   tag: "Blog"
-  text: "Use Datadog Session Replay to view real-time user journeys"
+  text: "Use Datadog Session Replay to view real-time user sessions"
 ---
 
 ## Overview

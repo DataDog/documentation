@@ -40,7 +40,7 @@ Values are captured up to the point of backgrounding; they are not discarded if 
 
 ### Troubleshooting missing core web vitals
 
-If a Core Web Vital is missing from a view in the [RUM Explorer](/real_user_monitoring/explorer/), check the following:
+If a Core Web Vital is missing from a view in the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/), check the following:
 
 | Symptom | Likely cause |
 |---|---|
@@ -53,7 +53,7 @@ To check that the SDK is collecting vitals:
 
 1. Open your browser's developer tools and run `window.DD_RUM.getInternalContext()` to confirm the SDK loaded.
 2. In the {% ui %}Network{% /ui %} tab, look for view events being sent to the Datadog intake.
-3. In the [RUM Explorer](/real_user_monitoring/explorer/), open the view event in question and confirm it has the expected `@view.*` attributes.
+3. In the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/), open the view event in question and confirm it has the expected `@view.*` attributes.
 
 ### Diagnose Core Web Vitals with subparts
 
@@ -221,7 +221,7 @@ document.addEventListener("scroll", function handler() {
 });
 ```
 
-After the timing is sent, it is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure](/real_user_monitoring/explorer/search/#setup-facets-and-measures) before creating a visualization in the RUM Explorer or in your dashboards.
+After the timing is sent, it is accessible in nanoseconds as `@view.custom_timings.<timing_name>`, for example: `@view.custom_timings.first_scroll`. You must [create a measure](/real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures) before creating a visualization in the RUM Explorer or in your dashboards.
 
 For single-page applications, the `addTiming` API issues a timing relative to the start of the current RUM view. For example, if a user lands on your application (initial load), then goes on a different page after 5 seconds (route change) and finally triggers `addTiming` after 8 seconds, the timing is equal to `8-5 = 3` seconds.
 

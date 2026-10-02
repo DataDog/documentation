@@ -84,17 +84,17 @@ This example monitor warns when INP exceeds 200 milliseconds and alerts when INP
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/rum_without_limits
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [2]: https://app.datadoghq.com/monitors/create/rum
 [3]: https://app.datadoghq.com/monitors/templates?q=real%20user%20monitoring&origination=installed&p=1
 [4]: /monitors/types/real_user_monitoring/#create-a-rum-monitor
 [5]: https://app.datadoghq.com/rum/explorer
 [6]: /real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
-[7]: /real_user_monitoring/explorer/export/
+[7]: /real_user_monitoring/investigate_problems/explore_retained_data/export/
 [8]: /monitors/notify/
 [9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
 [10]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#all-performance-telemetry
 [11]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
 [12]: https://app.datadoghq.com/rum/performance-monitoring
-[13]: /real_user_monitoring/rum_without_limits/metrics
-[14]: /real_user_monitoring/explorer/events/
+[13]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
+[14]: /real_user_monitoring/investigate_problems/explore_retained_data/events/

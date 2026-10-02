@@ -103,6 +103,6 @@ In addition to the default attributes captured by the SDK automatically, you can
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/roku/setup
+[2]: /real_user_monitoring/setup/install/?platform=roku
 [3]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=roku
 [4]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=roku

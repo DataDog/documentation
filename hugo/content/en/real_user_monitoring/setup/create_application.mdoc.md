@@ -1,5 +1,5 @@
 ---
-title: Create a RUM App
+title: Create a RUM Application
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -8,7 +8,7 @@ content_filters:
 
 ## Overview
 
-Create a RUM application in Datadog to generate the `applicationId` and `clientToken` that the Datadog SDK uses to associate collected data with your application. Select your SDK, then follow the steps below.
+Create a RUM application in Datadog to generate the application ID and client token that the Datadog SDK uses to associate collected data with your application. Select your SDK, then follow the steps below.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}

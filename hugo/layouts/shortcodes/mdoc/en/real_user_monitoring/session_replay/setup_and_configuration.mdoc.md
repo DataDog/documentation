@@ -869,12 +869,12 @@ See [Connect Session Replay to your third-party tools][30].
 [25]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=react_native#instrument-your-web-views
 [26]: /session_replay/setup_and_configuration/?platform=browser#setup
 [27]: https://reactnative.dev/architecture/landing-page
-[28]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum
+[28]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=flutter
 [29]: https://pub.dev/packages/datadog_session_replay
 [30]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
 [30]: /real_user_monitoring/browser/setup/
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
-[34]: /real_user_monitoring/application_monitoring/maui/setup
+[34]: /real_user_monitoring/setup/install/?platform=maui
 [35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products

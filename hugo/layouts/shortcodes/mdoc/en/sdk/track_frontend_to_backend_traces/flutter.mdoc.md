@@ -4,7 +4,7 @@
 
 1. Set up [RUM Flutter Monitoring][1].
 
-2. Follow the instructions under [Automatically track resources][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
+2. Follow the instructions in [Track Network Requests][2] to include the Datadog Tracking HTTP Client package and enable HTTP tracking. This includes the following changes to your initialization to add a list of internal, first-party origins called by your Flutter application:
     ```dart
     final configuration = DatadogConfiguration(
       // ...
@@ -44,6 +44,6 @@
       - `TracingHeaderType.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
 [1]: /real_user_monitoring/setup/install/?platform=flutter
-[2]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=flutter#automatically-track-resources
+[2]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
 [3]: https://docs.flutter.dev/tools/devtools/overview
 [4]: https://docs.flutter.dev/tools/devtools/network

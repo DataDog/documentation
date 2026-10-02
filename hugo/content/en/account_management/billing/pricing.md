@@ -121,6 +121,6 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [7]: /help/
 [8]: mailto:sales@datadoghq.com
 [9]: mailto:success@datadoghq.com
-[10]: /real_user_monitoring/rum_without_limits/
+[10]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
 [12]: /account_management/billing/metric_name_pricing/

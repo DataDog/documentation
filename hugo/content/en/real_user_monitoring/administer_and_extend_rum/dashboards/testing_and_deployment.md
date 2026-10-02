@@ -41,7 +41,7 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 
 ## Web deployment tracking
 
-The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, make sure that you [add RUM versions to your application][4]. This dashboard shows:
+The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, [add RUM versions to your application][4]. This dashboard shows:
 
 - {{< ui >}}Core web vitals{{< /ui >}}:
   For all views, three browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
@@ -56,7 +56,7 @@ Compare performance telemetry like loading time, sessions, errors, and load time
 
 The RUM Mobile App Deployment Tracking dashboard helps you to identify when a recent deployment or release is causing performance issues or new errors within your mobile application. If you need to directly compare versions, use the RUM summary page deployment tracking section.
 
-To use deployment tracking, make sure to specify an app version when you initialize the **Datadog SDK**.
+To use deployment tracking, specify an app version when you [initialize the Datadog SDK][9].
 
 This dashboard shows:
 
@@ -69,17 +69,18 @@ This dashboard shows:
 
 {{< img src="real_user_monitoring/dashboards/dashboard-deployment-mobile.png" alt="Out-of-the-box mobile deployment dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see our documentation for each platform: [iOS RUM][5], [Android RUM][6], [React Native RUM][7], and [Flutter RUM][8].
+For more information about the data displayed, see the documentation for each platform: [iOS RUM][5], [Android RUM][6], [React Native RUM][7], and [Flutter RUM][8].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
 [2]: /real_user_monitoring/setup/data_collected/?platform=browser
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
-[5]: /real_user_monitoring/ios/data_collected/
-[6]: /real_user_monitoring/android/data_collected/
-[7]: /real_user_monitoring/reactnative/data_collected/
+[4]: /real_user_monitoring/setup/install/?platform=browser
+[5]: /real_user_monitoring/setup/data_collected/?platform=ios
+[6]: /real_user_monitoring/setup/data_collected/?platform=android
+[7]: /real_user_monitoring/setup/data_collected/?platform=react_native
 [8]: /real_user_monitoring/setup/data_collected/?platform=flutter
+[9]: /real_user_monitoring/setup/install/

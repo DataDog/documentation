@@ -126,14 +126,14 @@ implementation "com.datadoghq:dd-sdk-android-webview"
 
 Initialize the SDK on the native side. See the official [Android][1] documentation for instructions.
 
-[1]: /real_user_monitoring/application_monitoring/android/setup/?tab=kotlin
+[1]: /real_user_monitoring/setup/install/?platform=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 Initialize the SDK on the native side. See the official [iOS][1] documentation for instructions.
 
-[1]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods
+[1]: /real_user_monitoring/setup/install/?platform=ios
 
 {{% /tab %}}
 {{< /tabs >}}

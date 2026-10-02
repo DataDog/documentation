@@ -6,7 +6,7 @@ further_reading:
     - link: '/tracing/guide/configure_an_apdex_for_your_traces_with_datadog_apm'
       tag: 'Documentation'
       text: 'Configure Apdex score by service'
-    - link: '/real_user_monitoring/explorer'
+    - link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
       tag: 'Documentation'
       text: 'RUM Dashboards'
     - link: '/real_user_monitoring/setup/data_collected/?platform=browser'

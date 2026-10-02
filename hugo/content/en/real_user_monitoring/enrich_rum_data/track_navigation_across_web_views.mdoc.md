@@ -1,6 +1,6 @@
 ---
 title: Track Navigation Across Web Views
-description: "Track user journeys across web and native components in hybrid mobile applications with RUM Web View Tracking."
+description: "Track user activity across web and native components in hybrid mobile applications with RUM Web View Tracking."
 content_filters:
   - trait_id: platform
     option_group_id: client_sdk_platform_options
@@ -35,6 +35,21 @@ further_reading:
 - link: "/account_management/billing/rum/"
   tag: "Documentation"
   text: "RUM & Session Replay Billing"
+- link: "https://github.com/DataDog/dd-sdk-android"
+  tag: "Source Code"
+  text: "Source code for dd-sdk-android"
+- link: "https://github.com/DataDog/dd-sdk-ios"
+  tag: "Source Code"
+  text: "Source code for dd-sdk-ios"
+- link: "https://github.com/DataDog/dd-sdk-flutter"
+  tag: "Source Code"
+  text: "Source code for dd-sdk-flutter"
+- link: "https://github.com/DataDog/dd-sdk-reactnative"
+  tag: "Source Code"
+  text: "Source code for dd-sdk-reactnative"
+- link: "https://github.com/DataDog/dd-sdk-kotlin-multiplatform"
+  tag: "Source Code"
+  text: "Source code for dd-sdk-kotlin-multiplatform"
 ---
 
 Select your SDK for platform-specific instructions on tracking navigation across web views embedded in your hybrid mobile applications.
@@ -42,7 +57,7 @@ Select your SDK for platform-specific instructions on tracking navigation across
 <!-- Browser -->
 
 {% if equals($platform, "browser") %}
-{% partial file="sdk/track_navigation_across_web_views/unavailable.mdoc.md" /%}
+{% partial file="sdk/track_navigation_across_web_views/browser.mdoc.md" /%}
 {% /if %}
 
 <!-- Android -->

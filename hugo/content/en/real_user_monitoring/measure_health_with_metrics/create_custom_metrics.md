@@ -5,13 +5,13 @@ aliases:
 - /real_user_monitoring/generate_metrics/
 - /real_user_monitoring/platform/generate_metrics/
 further_reading:
-- link: "/real_user_monitoring/"
+- link: "/real_user_monitoring/setup/"
   tag: "Documentation"
   text: "Learn how to capture RUM events from your browser and mobile applications"
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Learn how to create queries in the RUM Explorer"
-- link: "/real_user_monitoring/explorer/search/#event-types"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/search/#event-types"
   tag: "Documentation"
   text: "Learn about RUM event types"
 - link: "/logs/log_configuration/logs_to_metrics/"
@@ -24,11 +24,9 @@ further_reading:
 
 ## Overview
 
-Real User Monitoring (RUM) allows you to capture events that occur in your browser and mobile applications using the Datadog RUM SDKs and collect data from events at a [sample rate][1]. Datadog retains this event data in the [RUM Explorer][2], where you can create search queries and visualizations.
+RUM-based custom metrics are computed over all ingested sessions, regardless of retention. Even when [retention filters][16] keep only a subset of your sessions in the [RUM Explorer][2], your metrics reflect 100% of the traffic the Datadog SDKs send. To control how many sessions the SDKs send in the first place, see [Manage Sessions][1].
 
 RUM-based custom metrics are a cost-efficient option to summarize the data from your set of RUM events. You can visualize trends and anomalies across your RUM data at a granular level for up to 15 months. After you create a custom metric, see [Create Charts with RUM Custom Metrics][17] to add it to a dashboard.
-
-**Note:** Custom metrics are computed based on 100% of the ingested RUM traffic, not only the data retained in the RUM Explorer. This helps ensure accurate metrics even when using [RUM without Limits][16] retention filters that may retain only a subset of your sessions.
 
 **Billing Note:** Metrics created from RUM events are billed as [Custom Metrics][3].
 
@@ -47,8 +45,8 @@ To create a custom metric from a search query in the [RUM Explorer][5], click th
 3. Create a search query that filters your RUM events using the RUM Explorer's [search syntax][8] such as `@session.type:user`. 
 4. Choose a field to track from the dropdown menu next to {{< ui >}}Count{{< /ui >}}. 
 
-   - Select `*` to generate a count of all RUM events that match your search query. 
-   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or `distribution` metric. 
+   - Select `*` to generate a count metric of all RUM events that match your search query. 
+   - Optionally, enter an event attribute such as `@action.target` to aggregate a numeric value and create a corresponding `count` or [`distribution`][11] metric of a numeric value contained in RUM events, such as the request duration. 
 
    If the RUM attribute facet is a measure, the metric value is the RUM attribute value.
 
@@ -84,8 +82,6 @@ Sessions and views are considered active when there is ongoing application or us
 
 ## Manage RUM-based custom metrics
 
-You can generate a count metric of RUM events that match a query or a [distribution metric][11] of a numeric value contained in RUM events, such as the request duration.
-
 ### Update a RUM-based custom metric
 
 To update a metric, hover over a metric and click the {{< ui >}}Edit{{< /ui >}} icon to the right hand corner.
@@ -113,14 +109,14 @@ You can use RUM-based custom metrics for the following actions:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/guide/sampling-browser-plans
+[1]: /real_user_monitoring/setup/enable_rum/manage_sessions/
 [2]: https://app.datadoghq.com/rum/explorer
 [3]: /metrics/custom_metrics/
 [4]: https://app.datadoghq.com/rum/generate-metrics
-[5]: /real_user_monitoring/explorer/
+[5]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [6]: /metrics/custom_metrics/#naming-custom-metrics
-[7]: /real_user_monitoring/explorer/search/#event-types
-[8]: /real_user_monitoring/explorer/search_syntax/
+[7]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#event-types
+[8]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/
 [9]: /dashboards/
 [10]: /monitors/
 [11]: /metrics/distributions/
@@ -128,5 +124,5 @@ You can use RUM-based custom metrics for the following actions:
 [13]: /monitors/types/anomaly/
 [14]: /monitors/types/forecasts/
 [15]: /service_level_objectives/metric/
-[16]: /real_user_monitoring/rum_without_limits/
+[16]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
 [17]: /real_user_monitoring/guide/create-charts-with-rum-custom-metrics

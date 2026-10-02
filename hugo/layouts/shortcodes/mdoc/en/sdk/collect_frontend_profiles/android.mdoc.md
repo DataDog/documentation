@@ -102,10 +102,10 @@ Android profiling data is attached to operations events in a RUM session. You ca
 {% img src="real_user_monitoring/android/android-profiling-operation.png" alt="Android profiling data for an operation." style="width:90%;" /%}
 
 [1]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[2]: /real_user_monitoring/rum_without_limits/
+[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [3]: /real_user_monitoring/application_monitoring/android
-[4]: /real_user_monitoring/operations_monitoring/?tab=browser
-[5]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#sample-session-rates-2
+[4]: /real_user_monitoring/track_critical_operations/?tab=browser
+[5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=android
 [6]: https://developer.android.com/topic/performance/tracing/profiling-manager/will-my-profile-always-be-collected#how-rate-limiting-works
 [7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
 [8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin

@@ -1,4 +1,4 @@
-The iOS SDK first stores events locally and only uploads events when the [intake specifications](/real_user_monitoring/application_monitoring/ios/setup) conditions are met.
+The iOS SDK first stores events locally and only uploads events when the [intake specifications](/real_user_monitoring/setup/install/?platform=ios) conditions are met.
 
 ### Clear all data
 

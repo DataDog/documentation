@@ -2,11 +2,11 @@
 This partial contains SDK performance impact content for the Android SDK.
 -->
 
-When integrating any SDK into your Android application, understanding its performance impact is crucial for maintaining a smooth user experience. The Datadog RUM SDK is designed with performance in mind and provides transparent measurements to help you make informed decisions.
+Use these benchmarks to evaluate the SDK's impact on your application's CPU, memory, startup time, and size.
 
 ### Performance impact benchmarks
 
-To simulate the typical usage of the Datadog SDK, it was integrated into the [Docile-Alligator/Infinity-For-Reddit][1] application and typical user behavior (in other words, scrolling the feed, browsing subreddits) was simulated.
+To simulate the typical usage of the Datadog SDK, it was integrated into the [Docile-Alligator/Infinity-For-Reddit][1] application and typical user behavior (scrolling the feed, browsing subreddits) was simulated.
 
 The following SDK modules were added to the application:
 
@@ -18,7 +18,7 @@ The following SDK modules were added to the application:
 
 The SDK was set up with default settings.
 
-Below are the results of the measurements.
+The following table shows the results.
 
 | Measurement       | with SDK                       | without SDK    |
 |-------------------|---------------------------------|----------------|
@@ -28,11 +28,11 @@ Below are the results of the measurements.
 | Apk size          | 11566506 bytes                 | 11044045 bytes |
 | Network usage     | 72.5 KB sent, 22.9 KB received | n/a            |
 
-You can read the following [page][2] for more details about these benchmarks.
+For details on these benchmarks, see the [SDK performance documentation][2].
 
 ### Continuous benchmarks
 
-Datadog has an internal infrastructure of continuous benchmarking. There is an internal set of UI tests that run on a special benchmark application for every change made to the SDK. This way Datadog is able to detect performance regression early to ensure that they are prevented from reaching production releases.
+Datadog has an internal infrastructure of continuous benchmarking. There is an internal set of UI tests that run on a special benchmark application for every change made to the SDK. This way Datadog is able to detect performance regression early and prevent them from reaching production releases.
 
 See the [benchmark app source code][3].
 

@@ -14,10 +14,10 @@ further_reading:
 - link: https://github.com/DataDog/dd-sdk-android
   tag: "Source Code"
   text: Source code for dd-sdk-android
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 
@@ -929,7 +929,7 @@ val inputStream = context.getRawResAsRumResource(id)
 [1]: /error_tracking/
 [2]: https://app.datadoghq.com/rum/error-tracking
 [3]: https://app.datadoghq.com/rum/application/create
-[4]: /real_user_monitoring/application_monitoring/android/setup/#setup
+[4]: /real_user_monitoring/setup/install/?platform=android
 [5]: https://github.com/DataDog/dd-sdk-android/tree/develop/features/dd-sdk-android-rum
 [6]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [7]: https://app.datadoghq.com/error-tracking/settings/setup/client
@@ -950,4 +950,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [22]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 [24]: https://app.datadoghq.com/source-code/setup/rum
-[25]: /real_user_monitoring/application_monitoring/android/setup/#track-background-events
+[25]: /real_user_monitoring/setup/install/?platform=android

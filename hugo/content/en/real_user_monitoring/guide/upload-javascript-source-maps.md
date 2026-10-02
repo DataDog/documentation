@@ -2,10 +2,10 @@
 title: Upload JavaScript Source Maps
 description: "Upload JavaScript source maps to enhance error tracking with readable stack traces and better debugging for minified code."
 further_reading:
-- link: '/real_user_monitoring/error_tracking'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize your Error Tracking data in the Explorer'
 - link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
@@ -444,5 +444,5 @@ On the other hand, an unminified stack trace provides you with all the context y
 [5]: https://app.datadoghq.com/source-code/setup/rum
 [6]: https://app.datadoghq.com/organization-settings/api-keys
 [8]: /real_user_monitoring/setup/additional_plugins/#source-maps
-[9]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[9]: /real_user_monitoring/setup/install/?platform=browser
 [10]: /logs/log_collection/javascript/#initialization-parameters

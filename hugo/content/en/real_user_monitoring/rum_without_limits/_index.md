@@ -2,16 +2,16 @@
 title: RUM Without Limits
 description: Keep only the RUM data you need while maintaining full visibility of performance metrics for your applications.
 further_reading:
-  - link: '/real_user_monitoring/rum_without_limits/retention_filters'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/'
     tag: Documentation
     text: Retain Data with Retention Filters
   - link: '/real_user_monitoring/guide/retention_filter_best_practices/'
     tag: Guide
     text: Retention Filter Best Practices
-  - link: '/real_user_monitoring/rum_without_limits/metrics'
+  - link: '/real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/'
     tag: Documentation
     text: Analyze Performance with Metrics
-  - link: '/real_user_monitoring/rum_without_limits/retention_quotas'
+  - link: '/real_user_monitoring/retain_and_recover_valuable_sessions/control_volumes_with_quotas/'
     tag: Documentation
     text: Control Costs with Retention Quotas
   - link: 'https://www.datadoghq.com/blog/rum-without-limits/'
@@ -104,10 +104,10 @@ Create and configure [retention filters][6].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/rum_without_limits/metrics
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
-[3]: /real_user_monitoring/platform/connect_rum_and_traces/
+[1]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
+[2]: /real_user_monitoring/setup/install/?platform=browser
+[3]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
 [4]: https://app.datadoghq.com/rum/list
 [5]: /real_user_monitoring/guide/retention_filter_best_practices/
-[6]: /real_user_monitoring/rum_without_limits/retention_filters
+[6]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
 [7]: https://app.datadoghq.com/rum/performance-monitoring

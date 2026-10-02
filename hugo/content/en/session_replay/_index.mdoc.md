@@ -31,7 +31,7 @@ further_reading:
 - link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
   tag: 'Blog'
   text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
 - link: '/product_analytics/analytics_explorer'

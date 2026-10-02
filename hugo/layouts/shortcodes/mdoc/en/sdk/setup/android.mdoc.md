@@ -732,7 +732,7 @@ See [Advanced Configuration][7].
 [5]: https://github.com/DataDog/dd-sdk-android-gradle-plugin
 [6]: /getting_started/tagging/using_tags/#rum--session-replay
 [7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters
-[8]: /real_user_monitoring/error_tracking/android/#upload-your-mapping-file
+[8]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/android/#upload-your-mapping-file
 [9]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#automatically-track-views
 [10]: /tracing/trace_collection/dd_libraries/android/
 [11]: https://square.github.io/okhttp/features/interceptors/

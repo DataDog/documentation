@@ -153,7 +153,7 @@ The **Optimization page** surfaces profiling data in several contexts:
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiler_event_waterfall.png" alt="Browser profiling event waterfall example within the Optimization page." style="width:100%;" /%}
 
 [1]: /real_user_monitoring/guide/browser-sdk-upgrade/#collect-long-animation-frames-as-long-tasks
-[2]: /real_user_monitoring/application_monitoring/browser/setup/
+[2]: /real_user_monitoring/setup/install/?platform=browser
 [3]: /real_user_monitoring/guide/proxy-rum-data
 [4]: /integrations/content_security_policy_logs
 [5]: /real_user_monitoring/#supported-endpoints-for-sdk-domains

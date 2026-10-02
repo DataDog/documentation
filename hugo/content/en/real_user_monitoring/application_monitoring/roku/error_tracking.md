@@ -4,10 +4,10 @@ description: Set up Error Tracking for your Roku channels.
 aliases:
 - /real_user_monitoring/mobile_and_tv_monitoring/roku/error_tracking
 further_reading:
-- link: '/real_user_monitoring/error_tracking/'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/'
   tag: 'Documentation'
   text: 'Get started with Error Tracking'
-- link: '/real_user_monitoring/error_tracking/explorer'
+- link: '/real_user_monitoring/investigate_problems/triage_errors_and_crashes/explorer/'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
 site_support_id: rum_roku
@@ -58,7 +58,7 @@ To test your implementation:
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/
+[3]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=roku
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 [6]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=roku

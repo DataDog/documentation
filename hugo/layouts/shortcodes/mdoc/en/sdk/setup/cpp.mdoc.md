@@ -430,6 +430,6 @@ After running your app, navigate to the [RUM Explorer][7] to see sessions from y
 [2]: https://github.com/DataDog/dd-sdk-cpp/releases
 [3]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
 [4]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#instrument-your-application
-[5]: /real_user_monitoring/rum_without_limits/
+[5]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=cpp#diagnostic-logging
-[7]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/investigate_problems/explore_retained_data/

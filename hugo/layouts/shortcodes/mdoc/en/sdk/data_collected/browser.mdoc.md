@@ -16,7 +16,7 @@ There are additional [attributes specific to a given event type](#event-specific
 | Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a web page. It includes detailed loading timing information.                                                                                                              |
 | Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
 | Error     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
-| Action    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
+| Action    | 30 days   | RUM action events track user interactions during a user session and can also be manually sent to monitor custom user actions.                                                                                                                                 |
 
 The following diagram illustrates the RUM event hierarchy:
 

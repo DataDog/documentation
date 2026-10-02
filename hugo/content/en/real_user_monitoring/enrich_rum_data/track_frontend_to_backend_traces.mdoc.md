@@ -1,6 +1,6 @@
 ---
 title: Track Frontend-to-Backend Traces
-description: "Connect frontend RUM data with backend APM traces for end-to-end visibility across your application stack and user journey."
+description: "Connect frontend RUM data with backend APM traces for end-to-end visibility across your application stack."
 aliases:
 - /real_user_monitoring/correlate_with_other_telemetry/apm/
 content_filters:
@@ -15,15 +15,13 @@ further_reading:
   text: "Data collected by the RUM SDKs"
 ---
 
-Select your SDK for platform-specific instructions on connecting frontend RUM data to backend APM traces.
-
-{% img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM and Traces" style="width:100%;" /%}
-
 ## Overview
 
 The APM integration with Real User Monitoring allows you to link requests from your web and mobile applications to their corresponding backend traces. This combination enables you to see your full frontend and backend data through one lens.
 
 Use frontend data from RUM, as well as backend, infrastructure, and log information from trace ID injection to pinpoint issues anywhere in your stack and understand what your users are experiencing.
+
+{% img src="real_user_monitoring/connect_rum_and_traces/rum-trace-tab.png" alt="RUM and Traces" style="width:100%;" /%}
 
 ## Prerequisites
 
@@ -32,6 +30,8 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 - Your HTTP servers use [a library that supports distributed tracing](#supported-libraries).
 - You have configured your allowed tracing URLs or first-party hosts, depending on your SDK. See the setup instructions for your platform below.
 - You have a corresponding trace for requests to your allowed tracing URLs or first-party hosts.
+
+Select your SDK for platform-specific instructions on connecting frontend RUM data to backend APM traces.
 
 <!-- Browser -->
 
@@ -97,9 +97,7 @@ Use frontend data from RUM, as well as backend, infrastructure, and log informat
 
 {% img src="real_user_monitoring/connect_rum_and_traces/rum-trace-apm-link.png" alt="RUM and Traces" style="width:100%;" /%}
 
-To view traces from the RUM Explorer:
-
-1. Navigate to your [list of sessions][2] and click on a session that has traces available. You can also query for resources with traces by using `@_dd.trace_id:*`.
+To view traces from the RUM Explorer, navigate to your [list of sessions][2] and click a session that has traces available. You can also query for resources with traces by using `@_dd.trace_id:*`.
 
 When you select a session, the session panel appears with a request duration breakdown, a flame graph for each span, and a {% ui %}View Trace in APM{% /ui %} link.
 
@@ -190,17 +188,24 @@ Example for b3 multiple headers:
 {% /tab %}
 {% /tabs %}
 
-These HTTP headers are not CORS-safelisted, so you need to [configure Access-Control-Allow-Headers][17] on your server handling requests that the SDK is set up to monitor. The server must also accept [preflight requests][18] (OPTIONS requests), which are made by the browser prior to every request when tracing is allowed on cross-site URLs.
+On Browser, these headers also require a CORS configuration on your servers. See the Browser setup instructions above.
 
 ## Trace retention
 
-Ingested traces are available for 15 minutes in the [Live Search][19] explorer. To retain the traces for a longer period of time, [create APM retention filters][20]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
+Ingested traces are available for 15 minutes in the [Live Search][17] explorer. To retain the traces for a longer period of time, [create APM retention filters][18]. Scope these retention filters on any span tag to retain traces for critical pages and user actions.
 
-If using RUM Without Limits, you can also use [cross-product retention filters][21] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][22] at no additional cost.
+If using RUM Without Limits, you can also use [cross-product retention filters][19] to retain APM traces associated to specific RUM sessions, optimizing the correlation between your frontend and your backend. By default 1% of RUM [sessions and their traces are automatically retained][20] at no additional cost.
 
 ## Effect on APM quotas
 
-Connecting RUM and traces may significantly increase the APM-ingested volumes. Use the initialization parameter `traceSampleRate` to control a share of the backend traces starting from browser and mobile requests to ingest.
+Connecting RUM and traces may significantly increase the APM-ingested volumes. Use your SDK's trace sample rate setting to control the share of backend traces that start from browser and mobile requests and are ingested:
+
+| SDK | Setting |
+| --- | ------- |
+| Browser, Android, Kotlin Multiplatform | `traceSampleRate` |
+| iOS | `sampleRate` |
+| React Native | `resourceTracingSamplingRate` |
+| Unity | {% ui %}Tracing Sampling Rate{% /ui %} |
 
 Configuring cross-product retention filters may also increase the APM-indexed volumes. Use the retention rate of the cross-product retention filters to control the share of the backend traces to index.
 
@@ -220,9 +225,7 @@ Configuring cross-product retention filters may also increase the APM-indexed vo
 [14]: https://github.com/DataDog/dd-trace-php/releases/tag/0.33.0
 [15]: /tracing/trace_collection/dd_libraries/dotnet-core/
 [16]: https://github.com/DataDog/dd-trace-dotnet/releases/tag/v1.18.2
-[17]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Access-Control-Allow-Headers
-[18]: https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request
-[19]: /tracing/trace_explorer/#live-search-for-15-minutes
-[20]: /tracing/trace_pipeline/trace_retention/#retention-filters
-[21]: /real_user_monitoring/rum_without_limits/retention_filters/#cross-product-retention-filters
-[22]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
+[17]: /tracing/trace_explorer/#live-search-for-15-minutes
+[18]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[19]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#cross-product-retention-filters
+[20]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling

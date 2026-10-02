@@ -13,7 +13,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 | Event Type | Retention | Description                         |
 |------------|-----------|-------------------------------------|
-| Session    | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background.|
+| Session    | 30 days   | A session represents a real user's activity on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background.|
 | View       | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `viewDidAppear(animated:)` and `viewDidDisappear(animated:)` callbacks on the `UIViewController` class are notified. Individual `UIViewControllers` are classified as distinct views. While a user stays on a view, RUM event attributes (Errors, Resources, Actions) get attached to the view with a unique `view.id`.                           |
 | Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                       |
 | Error      | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                                                                        |
@@ -355,7 +355,7 @@ The Datadog RUM SDK depends on the following third-party library:
 [1]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#custom-actions
 [2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
 [3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios&tab=swift#automatically-track-views
-[4]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#instrument-views
+[4]: /real_user_monitoring/setup/install/?platform=ios
 [5]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#track-background-events
 [6]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#enrich-user-sessions
 [7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=ios#track-user-sessions
@@ -364,11 +364,11 @@ The Datadog RUM SDK depends on the following third-party library:
 [10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
 [11]: https://developer.apple.com/xcode/
 [12]: https://developer.apple.com/news/?id=fxu2qp7b
-[13]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[14]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[15]: /real_user_monitoring/application_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
-[16]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#alamofire
-[17]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#apollo-graphql
-[18]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#sdwebimage
-[19]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#openapi-generator
+[13]: /real_user_monitoring/setup/install/?platform=ios
+[14]: /real_user_monitoring/setup/install/?platform=ios
+[15]: /real_user_monitoring/setup/install/?platform=ios
+[16]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#alamofire
+[17]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#apollo-graphql
+[18]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#sdwebimage
+[19]: /real_user_monitoring/reference/integrated_libraries/?platform=ios#openapi-generator
 [20]: https://github.com/kstenerud/KSCrash

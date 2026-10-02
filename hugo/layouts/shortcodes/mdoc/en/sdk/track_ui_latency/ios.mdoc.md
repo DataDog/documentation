@@ -80,7 +80,7 @@ RUMMonitor.shared().addTiming(name: "hero_image")
 {% /tab %}
 {% /tabs %}
 
-To [create a measure](/real_user_monitoring/explorer/search/#setup-facets-and-measures) from a custom timing in the RUM Explorer, use the `@view.custom_timings.<timing_name>` attribute.
+To [create a measure](/real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures) from a custom timing in the RUM Explorer, use the `@view.custom_timings.<timing_name>` attribute.
 
 ## Understanding performance timings
 

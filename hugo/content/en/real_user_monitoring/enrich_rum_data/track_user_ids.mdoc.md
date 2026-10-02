@@ -8,7 +8,7 @@ content_filters:
 
 ## Overview
 
-Add user information to your RUM sessions to follow the journey of a given user, know which users are the most impacted by errors, and monitor performance for your most important users. Select your SDK for platform-specific instructions.
+Add user information to your RUM sessions to follow the activity of a given user, know which users are the most impacted by errors, and monitor performance for your most important users. Select your SDK for platform-specific instructions.
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}

@@ -69,7 +69,7 @@ Whenever you perform an operation that might throw an exception, you can forward
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/roku/setup/
+[3]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=roku
 [4]: https://github.com/DataDog/dd-sdk-roku
 [5]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/android/advanced_configuration/?tabs=kotlin#initialization-parameters
 

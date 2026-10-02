@@ -205,5 +205,5 @@ This means that even if users open your application while offline, no data is lo
 [8]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
 [9]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/tree/develop/integrations/ktor
 [10]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#custom-views
-[11]: /real_user_monitoring/error_tracking/kotlin_multiplatform/
-[12]: /real_user_monitoring/explorer/
+[11]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/mobile/kotlin-multiplatform/
+[12]: /real_user_monitoring/investigate_problems/explore_retained_data/

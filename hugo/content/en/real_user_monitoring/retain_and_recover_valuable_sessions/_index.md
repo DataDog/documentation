@@ -2,12 +2,12 @@
 title: Retain and Recover Valuable Sessions
 description: "Learn how to control which RUM sessions are retained, cap retention volumes, and recover sessions that weren't originally retained."
 further_reading:
-- link: "/real_user_monitoring/enrich_rum_data/"
+- link: "/real_user_monitoring/measure_health_with_metrics/"
   tag: "Documentation"
-  text: "Enrich RUM data"
-- link: "/real_user_monitoring/investigate_problems/"
-  tag: "Documentation"
-  text: "Investigate Problems"
+  text: "Measure Health with Metrics"
+- link: "/real_user_monitoring/guide/retention_filter_best_practices/"
+  tag: "Guide"
+  text: "Retention Filter Best Practices"
 ---
 
 ## Overview

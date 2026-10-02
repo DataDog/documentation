@@ -7,5 +7,5 @@ Server-side auto-instrumentation has the following limitations. If your use case
   - **Disable content compression** on the upstream server.
   - **Enable TLS origination** on the web server.
 
-[101]: /real_user_monitoring/application_monitoring/browser/setup/client
+[101]: /real_user_monitoring/setup/install/?platform=browser
 [102]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=browser

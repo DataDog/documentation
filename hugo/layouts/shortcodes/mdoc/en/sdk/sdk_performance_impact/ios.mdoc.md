@@ -2,7 +2,7 @@
 This partial contains SDK performance impact content for the iOS SDK.
 -->
 
-When integrating any SDK into your Apple platform application, understanding its performance impact is crucial for maintaining a smooth user experience. The Datadog RUM SDK is designed with minimal performance overhead. Use these benchmarks to evaluate whether the SDK fits your app's performance budget and plan your integration accordingly.
+Use these benchmarks to evaluate the SDK's impact on your application's CPU, memory, startup time, and size.
 
 ### Performance impact benchmarks
 
@@ -13,7 +13,7 @@ The SDK features used:
 2. Logging
 3. Tracing
 
-Below are the results of the measurements.
+The following table shows the results.
 
 | Measurement       | with SDK                        | without SDK |
 |-------------------|---------------------------------|-------------|
@@ -23,11 +23,11 @@ Below are the results of the measurements.
 | Bundle size       | 23.6 MB                         | 22.2 MB     |
 | Network usage     | 21.88 KB sent, 1.68 KB received | n/a         |
 
-See the [SDK performance details on GitHub][2] for more information.
+For details on these benchmarks, see the [SDK performance documentation][2].
 
 ### Continuous benchmarks
 
-Datadog has an internal infrastructure of continuous benchmarking. UI tests run automatically on a benchmark application for every SDK change. This enables Datadog to detect performance regressions early to ensure that they are prevented from reaching production releases.
+Datadog has an internal infrastructure of continuous benchmarking. UI tests run automatically on a benchmark application for every SDK change. This enables Datadog to detect performance regressions early and prevent them from reaching production releases.
 
 See the [benchmark app's source code on GitHub][3].
 

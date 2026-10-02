@@ -1,8 +1,3 @@
-Adding user information to your RUM sessions makes it possible to:
-* Follow the journey of a given user.
-* Know which users are the most impacted by errors.
-* Monitor performance for your most important users.
-
 | Attribute   | Type   | Description                                                                     |
 | ----------- | ------ | ------------------------------------------------------------------------------- |
 | `usr.id`    | String | (Required) Unique user identifier.                                              |

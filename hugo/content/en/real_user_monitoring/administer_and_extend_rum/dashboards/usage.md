@@ -1,5 +1,5 @@
 ---
-title: RUM Usage Dashboard
+title: Usage Dashboards
 description: "Track user engagement and behavior with dashboards showing user sessions, frustration signals, and application usage patterns."
 aliases:
   - '/real_user_monitoring/dashboards/frustration_signals_dashboard'
@@ -8,7 +8,7 @@ aliases:
   - '/real_user_monitoring/platform/dashboards/user_sessions_dashboard'
   - '/real_user_monitoring/platform/dashboards/usage'
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 ---
@@ -21,7 +21,7 @@ The RUM Web App Usage dashboard provides insights about how your customers are u
 - **Application usage**:
   See graphs of the average session duration, pageviews per sessions, actions per session, and errors per session. The tables below list usage metrics based on the first and last visited pages.
 - **User journeys**:
-  See what pages your users are spending the most time on, and see where they start and end their journey across your application.
+  See what pages your users are spending the most time on, and see where their sessions start and end in your application.
 - **Engagement matrix**:
   See what portion of your users are performing which actions.
 - **User demographics**:
@@ -37,17 +37,17 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 The RUM Mobile App Usage dashboard provides insights about how your customers are using your application.
 
 - **Application usage**:
-  Get a better picture of your users by understanding what application version, Datadog SDK, and browser they are running. Compare this week's and last week's sessions. See overall bounce rate.
+  Get a better picture of your users by understanding what application version, Datadog SDK version, and device they are using. Compare this week's and last week's sessions. See overall bounce rate.
 - **User journeys**:
-  See what pages your users are spending the most time on, and see where they start and end their journey across your application.
+  See what screens your users are spending the most time on, and see where their sessions start and end in your application.
 - **Engagement matrix**:
   See what portion of your users are performing which actions.
 - **User demographics**:
-  Observe the number of sessions by country and the top countries, devices, and operating systems for your application. You can also view a graph of the top browser usage shares.
+  Observe the number of sessions by country and the top countries, devices, and operating systems for your application. You can also view a graph of the top device usage shares.
 
 {{< img src="real_user_monitoring/dashboards/dashboard-usage-mobile-app.png" alt="Out-of-the-box RUM mobile app usage dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see our documentation for each platform: [iOS RUM][2], [Android RUM][3], [React Native RUM][4], and [Flutter RUM][5].
+For more information about the data displayed, see the documentation for each platform: [iOS RUM][2], [Android RUM][3], [React Native RUM][4], and [Flutter RUM][5].
 
 ## User demographics
 
@@ -61,7 +61,7 @@ The RUM User Demographics dashboard gives you insight into geographic adoption o
 
 {{< img src="real_user_monitoring/dashboards/dashboard-usage-user-demographics.png" alt="Out-of-the-box RUM user demographics dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see [Real User Monitoring Data Security][6].
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
 ## Frustration signals
 
@@ -77,9 +77,9 @@ The RUM Frustration Signals dashboard gives you insight into where your users ar
 
 {{< img src="real_user_monitoring/dashboards/dashboard-usage-frustration-signals.png" alt="Out-of-the-box RUM frustration signals dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see [Real User Monitoring Data Security][6].
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -88,4 +88,3 @@ For more information about the data displayed, see [Real User Monitoring Data Se
 [3]: /real_user_monitoring/setup/data_collected/?platform=android
 [4]: /real_user_monitoring/setup/data_collected/?platform=react_native
 [5]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[6]: /data_security/real_user_monitoring/

@@ -43,7 +43,7 @@ See [Monitor hybrid React Native applications][19].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
+[11]: /real_user_monitoring/reference/integrated_libraries/?platform=react_native
 [12]: https://github.com/react-navigation/react-navigation
 [13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
 [19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications

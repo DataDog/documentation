@@ -961,7 +961,7 @@ To disable watchdog terminations reporting, update the initialization snippet an
 [6]: /account_management/api-app-keys/#client-tokens
 [7]: /getting_started/tagging/using_tags/#rum--session-replay
 [8]: /real_user_monitoring/ios/advanced_configuration/#initialization-parameters
-[9]: /real_user_monitoring/explorer/
+[9]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [10]: /logs/log_collection/ios
 [12]: https://appstoreconnect.apple.com/
 [13]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations

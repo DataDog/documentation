@@ -1,6 +1,6 @@
-Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications. You can track user journeys across web and native components, scope the root cause of latency to web pages or native components, and support users that have difficulty loading web pages on mobile devices.
+Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications. You can track user activity across web and native components, scope the root cause of latency to web pages or native components, and support users that have difficulty loading web pages on mobile devices.
 
-You can also record the entire user journey across both web and native views and watch it in a single Session Replay. See [Web View Instrumentation][1] to learn more.
+You can also record the entire session across both web and native views and watch it in a single Session Replay. See [Web View Instrumentation][1] to learn more.
 
 ### Prerequisites
 
@@ -103,7 +103,7 @@ To access your web views:
    - The web component using `service`
    - The platform using `source`
 
-   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source: flutter`.
+   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source:browser`.
 3. Click a session. A side panel with a list of events in the session appears. Any service with the web icon indicates a web view.
 
 From here, you can hover over a session event and click {% ui %}Open View waterfall{% /ui %} to navigate from the session to a resource waterfall visualization in the view's {% ui %}Performance{% /ui %} tab.
@@ -113,7 +113,7 @@ From here, you can hover over a session event and click {% ui %}Open View waterf
 See [RUM & Session Replay Billing][8] for details on how web views in mobile applications impact session recordings and billing.
 
 [1]: /session_replay/setup_and_configuration/#web-view-instrumentation
-[2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
+[2]: /real_user_monitoring/setup/install/?platform=browser
 [3]: https://pub.dev/packages/webview_flutter
 [4]: https://pub.dev/packages/flutter_inappwebview
 [5]: https://pub.dev/packages/datadog_webview_tracking

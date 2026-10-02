@@ -111,7 +111,7 @@ Datadog.addUserExtraInfo(extraInfo)
 [2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=kotlin_multiplatform
 [3]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#automatically-track-views
 [4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=kotlin_multiplatform
-[5]: /real_user_monitoring/explorer/search/#setup-facets-and-measures
+[5]: /real_user_monitoring/investigate_problems/explore_retained_data/search/#setup-facets-and-measures
 [6]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=kotlin_multiplatform
 [7]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=kotlin_multiplatform#initialization-parameters
 [8]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/#initialize-rum-ktor-plugin-to-track-network-events-made-with-ktor

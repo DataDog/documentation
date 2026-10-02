@@ -6,9 +6,15 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "/real_user_monitoring/setup/data_collected/?platform=browser"
+- link: "/real_user_monitoring/setup/"
   tag: "Documentation"
-  text: "RUM Browser Data Collected"
+  text: "Set Up RUM"
+- link: "/real_user_monitoring/rum_terms_and_concepts/"
+  tag: "Documentation"
+  text: "RUM Terms and Concepts"
+- link: "/real_user_monitoring/setup/data_collected/"
+  tag: "Documentation"
+  text: "RUM Data Collected"
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"
   tag: "Learning Center"
   text: "Intro to Real User Monitoring (RUM)"
@@ -80,12 +86,12 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your frontend code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
-* **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
+* **Analytics / Usage**: Understand who is using your application (country, device, OS), follow individual users across sessions, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
 ### Session definition
 
-A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
+A user session groups the activity of a single user on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
 
 A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
 
@@ -118,15 +124,15 @@ Select an application type to start collecting RUM data:
 
 {{< card-grid card_width="210" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/browser/" src="integrations_logos/javascript_large.svg" alt="browser" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=android" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=ios" src="integrations_logos/ios_large.svg" alt="ios" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup" src="integrations_logos/react-native_large.svg" alt="react native" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/flutter/setup" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=flutter" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=android" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=ios" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=roku" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=unity" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
+  {{< image-card href="/real_user_monitoring/setup/install/?platform=kotlin_multiplatform" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
 {{< /card-grid >}}
 
 ### Capabilities and platform support
@@ -183,13 +189,13 @@ When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to de
 | AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
 | UK1  | `https://quota.browser-intake-uk1-datadoghq.com`         |
 
-If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
+If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], allow these `quota.` domains as well. See the [Browser Profiling setup][19] page for details.
 
 ## Explore Datadog RUM
 
 Access RUM by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][1].
 
-Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
+Select an application from the top navigation, or follow the [setup instructions][15] to add your first application.
 
 {{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="Select a RUM application" >}}
 
@@ -262,11 +268,11 @@ Access triggered logs, errors, and performance information when troubleshooting 
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
 [2]: /real_user_monitoring/administer_and_extend_rum/dashboards/
-[3]: /real_user_monitoring/explorer/visualize/
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/visualize/
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
-[6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#core-web-vitals
+[6]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
+[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
 [8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
 [9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
 [10]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios
@@ -274,9 +280,8 @@ Access triggered logs, errors, and performance information when troubleshooting 
 [12]: /session_replay/browser/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
-[15]: /real_user_monitoring/application_monitoring/browser/setup/
-[16]: /real_user_monitoring/application_monitoring/
+[15]: /real_user_monitoring/setup/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
-[19]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/profiling
+[19]: /real_user_monitoring/enrich_rum_data/collect_frontend_profiles/
 [20]: /real_user_monitoring/guide/proxy-rum-data
 [21]: /integrations/content_security_policy_logs

@@ -92,19 +92,19 @@ To modify the **head-based** sampling rate for mobile SDKs, redeploy your applic
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy/#sessions
-[2]: /real_user_monitoring/rum_without_limits/
+[2]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [3]: /real_user_monitoring/guide/sampling-browser-plans/#overview
 [4]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#initialization-parameters
-[5]: /real_user_monitoring/application_monitoring/ios/setup/#sample-session-rates
-[6]: /real_user_monitoring/application_monitoring/flutter/setup/#sample-session-rates
-[7]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/setup/?tab=rum#sample-rum-sessions
+[5]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=ios
+[6]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
+[7]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=kotlin_multiplatform
 [8]: /real_user_monitoring/reactnative/#initialize-the-library-with-application-context
-[9]: /real_user_monitoring/application_monitoring/roku/setup/#step-3---initialize-the-library
-[10]: /real_user_monitoring/application_monitoring/unity/setup#sample-rum-sessions
+[9]: /real_user_monitoring/setup/install/?platform=roku
+[10]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=unity
 [11]: /data_security/data_retention_periods/
-[12]: /real_user_monitoring/rum_without_limits/retention_filters
-[13]: /real_user_monitoring/rum_without_limits/metrics
+[12]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[13]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
 [14]: /real_user_monitoring/guide/retention_filter_best_practices/
-[15]: /real_user_monitoring/rum_without_limits/retention_filters#modifying-filters
+[15]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/#modifying-filters
 [16]: /real_user_monitoring/measure_health_with_metrics/create_custom_metrics
 [17]: /real_user_monitoring/application_monitoring/browser/setup/server/

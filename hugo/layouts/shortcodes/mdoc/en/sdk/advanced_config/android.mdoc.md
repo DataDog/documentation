@@ -508,13 +508,13 @@ GlobalRumMonitor.get().getCurrentSessionId { sessionId ->
 [5]: #initialization-parameters
 [6]: #automatically-track-network-requests
 [7]: /real_user_monitoring/android/data_collected/#event-specific-attributes
-[8]: /real_user_monitoring/application_monitoring/android/setup/#sending-data-when-device-is-offline
+[8]: /real_user_monitoring/setup/install/?platform=android
 [9]: https://github.com/DataDog/dd-sdk-android/blob/eaa15cd344d1723fafaf179fcebf800d6030c6bb/sample/kotlin/src/main/kotlin/com/datadog/android/sample/SampleApplication.kt#L279
 [10]: https://github.com/DataDog/dd-sdk-android/tree/master/sample/kotlin/src/main/kotlin/com/datadog/android/sample/widget
 [11]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#time-to-network-settled
 [12]: https://square.github.io/okhttp/features/events/
 [13]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#interaction-to-next-view
-[14]: /real_user_monitoring/application_monitoring/android/setup?tab=kotlin#setup
+[14]: /real_user_monitoring/setup/install/?platform=android
 [15]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=android
 [16]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android
 [17]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android

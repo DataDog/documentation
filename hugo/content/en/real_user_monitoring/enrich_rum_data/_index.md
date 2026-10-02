@@ -22,7 +22,7 @@ RUM SDKs automatically track attributes such as user activity, views, errors, an
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/" >}}
     <h3>Track navigation across web views</h3>
-    Track user journeys across web and native components in hybrid mobile applications.
+    Track users across web and native components in hybrid mobile applications.
     {{< /nextlink >}}
     {{< nextlink href="/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/" >}}
     <h3>Track frontend-to-backend traces</h3>

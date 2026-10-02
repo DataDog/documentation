@@ -223,7 +223,7 @@ RUM is enabled automatically when you initialize the SDK. No further action is n
 As a next step, [configure retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control which sessions RUM without Limits retains.
 
 {% if equals($platform, "browser") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
@@ -254,42 +254,42 @@ After running your app, look for output similar to the following in the Xcode de
 
 #### View your data in Datadog
 
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application. You should see session data within a few minutes.
+After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application. You should see session data within a few minutes.
 
 To view crash reports and iOS errors, navigate to [Error Tracking](/error_tracking/). For more details on crash analysis with symbolicated stack traces, see [iOS Crash Reporting and Error Tracking](/error_tracking/frontend/mobile/ios).
 {% /if %}
 {% if equals($platform, "kotlin_multiplatform") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "maui") %}
-After running your app, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After running your app, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "flutter") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "react_native") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "cpp") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "roku") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}
 {% if equals($platform, "unity") %}
-After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/explorer/) to see sessions from your application.
+After initializing the SDK, navigate to the [RUM Explorer](/real_user_monitoring/investigate_problems/explore_retained_data/) to see sessions from your application.
 
 Your application appears as pending on the Applications page until Datadog starts receiving data.
 {% /if %}

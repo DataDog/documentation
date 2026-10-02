@@ -1,5 +1,5 @@
 ---
-title: RUM Performance Overview Dashboards
+title: Performance Dashboards
 description: "Visualize application performance with dashboards covering Core Web Vitals, loading times, resource performance, and mobile metrics."
 aliases:
 - '/real_user_monitoring/dashboards/performance_overview_dashboard/'
@@ -11,7 +11,7 @@ aliases:
 - '/real_user_monitoring/platform/dashboards/performance'
 
 further_reading:
-- link: '/real_user_monitoring/explorer'
+- link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
 ---
@@ -43,9 +43,9 @@ The mobile app performance dashboard gives an overview of RUM mobile application
 - **Crashes and errors**:
   Identify where crashes and errors can surface in your application.
 
-{{< img src="real_user_monitoring/dashboards/dashboard-performance -mobile-app.png" alt="Out-of-the-box RUM Web App Performance Overview Dashboard" style="width:100%" >}}
+{{< img src="real_user_monitoring/dashboards/dashboard-performance -mobile-app.png" alt="Out-of-the-box RUM Mobile App Performance Overview Dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see our documentation for each platform: [iOS RUM][2], [Android RUM][3], [React Native RUM][4], and [Flutter RUM][5].
+For more information about the data displayed, see the documentation for each platform: [iOS RUM][2], [Android RUM][3], [React Native RUM][4], and [Flutter RUM][5].
 
 ## Resources
 
@@ -61,17 +61,16 @@ The RUM resources dashboard helps you identify which resources have the heaviest
 - **3rd party resources**:
   Understand which of your 3rd party resources are having the most impact on your application.
 
-{{< img src="real_user_monitoring/dashboards/dashboard-performance-resources.png" alt="Out-of-the-box RUM Web App Performance Overview Dashboard" style="width:100%" >}}
+{{< img src="real_user_monitoring/dashboards/dashboard-performance-resources.png" alt="Out-of-the-box RUM Resources Dashboard" style="width:100%" >}}
 
-For more information about the data displayed, see [Real User Monitoring Data Security][6].
+For more information about the data displayed, see [RUM Browser Data Collected][1].
 
-## Further Reading
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/setup/data_collected/?platform=browser
-[2]: /real_user_monitoring/ios/data_collected/
-[3]: /real_user_monitoring/android/data_collected/
-[4]: /real_user_monitoring/reactnative/data_collected/
+[2]: /real_user_monitoring/setup/data_collected/?platform=ios
+[3]: /real_user_monitoring/setup/data_collected/?platform=android
+[4]: /real_user_monitoring/setup/data_collected/?platform=react_native
 [5]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[6]: /data_security/real_user_monitoring/

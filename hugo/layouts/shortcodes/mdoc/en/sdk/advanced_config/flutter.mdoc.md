@@ -400,27 +400,27 @@ if (DatadogSdk.instance.isFirstPartyHost(host)){
 ```
 
 [1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/flutter/setup/
-[3]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries/
+[2]: /real_user_monitoring/setup/install/?platform=flutter
+[3]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [4]: /getting_started/tagging/#defining-tags
 [5]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
 [7]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
-[9]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
+[9]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
 [10]: https://pub.dev/packages/datadog_tracking_http_client
 [11]: https://api.flutter.dev/flutter/dart-io/HttpOverrides/current.html
 [12]: https://pub.dev/documentation/datadog_tracking_http_client/latest/datadog_tracking_http_client/DatadogTrackingHttpOverrides-class.html
 [13]: /serverless/aws_lambda/distributed_tracing/
 [14]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[15]: /real_user_monitoring/explorer/?tab=measures#setup-facets-and-measures
+[15]: /real_user_monitoring/investigate_problems/explore_retained_data/?tab=measures#setup-facets-and-measures
 [16]: https://github.com/DataDog/dd-sdk-flutter/tree/main/packages/datadog_tracking_http_client
 [17]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/
 [18]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter#mobile-vitals
 [19]: https://pub.dev/packages/datadog_grpc_interceptor
 [20]: https://pub.dev/packages/datadog_gql_link
 [21]: https://pub.dev/packages/datadog_dio
-[22]: /real_user_monitoring/application_monitoring/flutter/integrated_libraries
+[22]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
 [23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
 [24]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter
 [25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter

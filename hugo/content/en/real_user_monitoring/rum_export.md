@@ -3,10 +3,10 @@ title: Export Pipelines
 description: Forward your RUM and Product Analytics events to your own cloud storage for warehouse loading or long-term retention.
 private: true
 further_reading:
-- link: "/real_user_monitoring/explorer/"
+- link: "/real_user_monitoring/investigate_problems/explore_retained_data/"
   tag: "Documentation"
   text: "Learn about the RUM Explorer"
-- link: "/real_user_monitoring/rum_without_limits/"
+- link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
   tag: "Documentation"
   text: "Learn about RUM without Limits"
 - link: "/product_analytics/"
