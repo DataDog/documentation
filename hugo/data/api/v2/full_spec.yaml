@@ -288,7 +288,7 @@ components:
       schema:
         type: string
     CaseCustomAttributeIDPathParameter:
-      description: Case Custom attribute's UUID
+      description: Work item custom attribute's UUID.
       example: "f98a5a5b-e0ff-45d4-b2f5-afe6e74de505"
       in: path
       name: custom_attribute_id
@@ -296,7 +296,7 @@ components:
       schema:
         type: string
     CaseCustomAttributeKeyPathParameter:
-      description: Case Custom attribute's key
+      description: Work item custom attribute's key.
       example: "aws_region"
       in: path
       name: custom_attribute_key
@@ -304,7 +304,7 @@ components:
       schema:
         type: string
     CaseIDPathParameter:
-      description: Case's UUID or key
+      description: Work item's UUID or key
       example: "f98a5a5b-e0ff-45d4-b2f5-afe6e74de504"
       in: path
       name: case_id
@@ -319,7 +319,7 @@ components:
       schema:
         $ref: "#/components/schemas/CaseSortableField"
     CaseTypeIDPathParameter:
-      description: The UUID of the case type.
+      description: The UUID of the work item type.
       example: "f98a5a5b-e0ff-45d4-b2f5-afe6e74de505"
       in: path
       name: case_type_id
@@ -1115,7 +1115,7 @@ components:
         minimum: 1
         type: integer
     LinkIDPathParameter:
-      description: "The UUID of the case link."
+      description: "The UUID of the work item link."
       in: path
       name: link_id
       required: true
@@ -2190,7 +2190,7 @@ components:
       schema:
         type: string
     ViewIDPathParameter:
-      description: The UUID of the case view.
+      description: The UUID of the work item view.
       example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
       in: path
       name: view_id
@@ -12005,7 +12005,7 @@ components:
       x-enum-varnames:
         - AUTHN_MAPPINGS
     AutoCloseInactiveCases:
-      description: Auto-close inactive cases settings.
+      description: Auto-close inactive work items settings.
       properties:
         enabled:
           description: Whether auto-close is enabled.
@@ -12016,14 +12016,14 @@ components:
           type: integer
       type: object
     AutoTransitionAssignedCases:
-      description: Auto-transition assigned cases settings.
+      description: Auto-transition assigned work items settings.
       properties:
         auto_transition_assigned_cases_on_self_assigned:
-          description: Whether to auto-transition cases when self-assigned.
+          description: Whether to auto-transition work items when self-assigned.
           type: boolean
       type: object
     AutomationRule:
-      description: An automation rule that executes an action (such as running a Datadog workflow or assigning an AI agent) when a specified case event occurs within a project.
+      description: An automation rule that executes an action (such as running a Datadog workflow or assigning an AI agent) when a specified work item event occurs within a project.
       properties:
         attributes:
           $ref: "#/components/schemas/AutomationRuleAttributes"
@@ -12058,7 +12058,7 @@ components:
           description: The type of AI agent to assign. Required when the action type is `ASSIGN_AGENT`.
           type: string
         assigned_agent_id:
-          description: The identifier of the AI agent to assign to the case. Required when the action type is `ASSIGN_AGENT`.
+          description: The identifier of the AI agent to assign to the work item. Required when the action type is `ASSIGN_AGENT`.
           type: string
         handle:
           description: The handle of the Datadog workflow to execute. Required when the action type is `EXECUTE_WORKFLOW`.
@@ -12066,7 +12066,7 @@ components:
           type: string
       type: object
     AutomationRuleActionType:
-      description: The type of automated action to perform when the rule triggers. `EXECUTE_WORKFLOW` runs a Datadog workflow; `ASSIGN_AGENT` assigns an AI agent to the case.
+      description: The type of automated action to perform when the rule triggers. `EXECUTE_WORKFLOW` runs a Datadog workflow; `ASSIGN_AGENT` assigns an AI agent to the work item.
       enum:
         - EXECUTE_WORKFLOW
         - ASSIGN_AGENT
@@ -12219,7 +12219,7 @@ components:
         - finding_types
       type: object
     AutomationRuleTrigger:
-      description: Defines when the rule activates. Combines a trigger type (the case event to listen for) with optional trigger data (conditions that narrow when the trigger fires).
+      description: Defines when the rule activates. Combines a trigger type (the work item event to listen for) with optional trigger data (conditions that narrow when the trigger fires).
       properties:
         data:
           $ref: "#/components/schemas/AutomationRuleTriggerData"
@@ -12238,7 +12238,7 @@ components:
           description: "The kind of attribute change to match. Allowed values: `VALUE_ADDED`, `VALUE_DELETED`, `ANY_CHANGES`. Used with `ATTRIBUTE_VALUE_CHANGED` triggers."
           type: string
         field:
-          description: The case attribute field name to monitor for changes. Used with `ATTRIBUTE_VALUE_CHANGED` triggers.
+          description: The work item attribute field name to monitor for changes. Used with `ATTRIBUTE_VALUE_CHANGED` triggers.
           type: string
         from_status_name:
           description: The originating status name. Used with `STATUS_TRANSITIONED` triggers to match transitions from this status.
@@ -12248,7 +12248,7 @@ components:
           type: string
       type: object
     AutomationRuleTriggerType:
-      description: The case event that activates the automation rule.
+      description: The work item event that activates the automation rule.
       enum:
         - CASE_CREATED
         - STATUS_TRANSITIONED
@@ -15973,12 +15973,12 @@ components:
           $ref: "#/components/schemas/DataDeletionResponseMeta"
       type: object
     Case:
-      description: A case
+      description: A work item
       properties:
         attributes:
           $ref: "#/components/schemas/CaseAttributes"
         id:
-          description: Case's identifier
+          description: Work item's identifier
           example: "aeadc05e-98a8-11ec-ac2c-da7ad0900001"
           type: string
         relationships:
@@ -15992,7 +15992,7 @@ components:
       type: object
     Case3rdPartyTicketStatus:
       default: IN_PROGRESS
-      description: Case status
+      description: Work item status
       enum:
         - IN_PROGRESS
         - COMPLETED
@@ -16012,7 +16012,7 @@ components:
           example: "OPEN"
           type: string
         value:
-          description: The count of cases in this group.
+          description: The count of work items in this group.
           example:
             - 42.0
           items:
@@ -16024,7 +16024,7 @@ components:
         - value
       type: object
     CaseAggregateGroupBy:
-      description: Configuration for grouping aggregated results by one or more case fields.
+      description: Configuration for grouping aggregated results by one or more work item fields.
       properties:
         groups:
           description: Fields to group by.
@@ -16044,7 +16044,7 @@ components:
         - limit
       type: object
     CaseAggregateRequest:
-      description: Request payload for aggregating case counts with grouping. Use this to get faceted breakdowns of cases (for example, count of cases grouped by priority and status).
+      description: Request payload for aggregating work item counts with grouping. Use this to get faceted breakdowns of work items (for example, count of work items grouped by priority and status).
       properties:
         data:
           $ref: "#/components/schemas/CaseAggregateRequestData"
@@ -16057,7 +16057,7 @@ components:
         group_by:
           $ref: "#/components/schemas/CaseAggregateGroupBy"
         query_filter:
-          description: "A search query to filter which cases are included in the aggregation. Uses the same syntax as the Case Management search bar."
+          description: "A search query to filter which work items are included in the aggregation. Uses the same syntax as the Work Management search bar."
           example: "service:case-api"
           type: string
       required:
@@ -16076,7 +16076,7 @@ components:
         - type
       type: object
     CaseAggregateResourceType:
-      description: JSON:API resource type for case aggregation requests.
+      description: JSON:API resource type for work item aggregation requests.
       enum:
         - aggregate
       example: aggregate
@@ -16084,7 +16084,7 @@ components:
       x-enum-varnames:
         - AGGREGATE
     CaseAggregateResponse:
-      description: Response containing aggregated case counts grouped by the requested fields.
+      description: Response containing aggregated work item counts grouped by the requested fields.
       properties:
         data:
           $ref: "#/components/schemas/CaseAggregateResponseData"
@@ -16100,7 +16100,7 @@ components:
             $ref: "#/components/schemas/CaseAggregateGroup"
           type: array
         total:
-          description: Total count of aggregated cases.
+          description: Total count of aggregated work items.
           example: 100.0
           format: double
           type: number
@@ -16127,7 +16127,7 @@ components:
         - attributes
       type: object
     CaseAssign:
-      description: Case assign
+      description: Work item assign
       properties:
         attributes:
           $ref: "#/components/schemas/CaseAssignAttributes"
@@ -16138,7 +16138,7 @@ components:
         - type
       type: object
     CaseAssignAttributes:
-      description: Case assign attributes
+      description: Work item assign attributes
       properties:
         assignee_id:
           description: Assignee's UUID
@@ -16148,7 +16148,7 @@ components:
         - assignee_id
       type: object
     CaseAssignRequest:
-      description: Case assign request
+      description: Work item assign request
       properties:
         data:
           $ref: "#/components/schemas/CaseAssign"
@@ -16156,10 +16156,10 @@ components:
         - data
       type: object
     CaseAttributes:
-      description: Case resource attributes
+      description: Work item resource attributes
       properties:
         archived_at:
-          description: Timestamp of when the case was archived
+          description: Timestamp of when the work item was archived
           format: date-time
           nullable: true
           readOnly: true
@@ -16167,20 +16167,20 @@ components:
         attributes:
           $ref: "#/components/schemas/CaseObjectAttributes"
         closed_at:
-          description: Timestamp of when the case was closed
+          description: Timestamp of when the work item was closed
           format: date-time
           nullable: true
           readOnly: true
           type: string
         created_at:
-          description: Timestamp of when the case was created
+          description: Timestamp of when the work item was created
           format: date-time
           readOnly: true
           type: string
         custom_attributes:
           additionalProperties:
             $ref: "#/components/schemas/CustomAttributeValue"
-          description: Case custom attributes
+          description: Work item custom attributes
           type: object
         description:
           description: Description
@@ -16192,7 +16192,7 @@ components:
           example: "CASEM-4523"
           type: string
         modified_at:
-          description: Timestamp of when the case was last modified
+          description: Timestamp of when the work item was last modified
           format: date-time
           nullable: true
           readOnly: true
@@ -16214,13 +16214,13 @@ components:
         type:
           $ref: "#/components/schemas/CaseType"
         type_id:
-          description: Case type UUID
+          description: Work item type UUID
           example: "3b010bde-09ce-4449-b745-71dd5f861963"
           type: string
       type: object
     CaseAutomationRuleResourceType:
       default: rule
-      description: JSON:API resource type for case automation rules.
+      description: JSON:API resource type for work item automation rules.
       enum:
         - rule
       example: rule
@@ -16228,7 +16228,7 @@ components:
       x-enum-varnames:
         - RULE
     CaseAutomationRuleState:
-      description: Whether the automation rule is active. Enabled rules trigger on matching case events; disabled rules are inactive but preserve their configuration.
+      description: Whether the automation rule is active. Enabled rules trigger on matching work item events; disabled rules are inactive but preserve their configuration.
       enum:
         - ENABLED
         - DISABLED
@@ -16264,7 +16264,7 @@ components:
         - LINEAR
         - UPDATE_PROJECT
     CaseBulkResourceType:
-      description: JSON:API resource type for bulk case operations.
+      description: JSON:API resource type for bulk work item operations.
       enum:
         - bulk
       example: bulk
@@ -16272,7 +16272,7 @@ components:
       x-enum-varnames:
         - BULK
     CaseBulkUpdateRequest:
-      description: Request payload for applying a single action (such as changing priority, status, or assignment) to multiple cases at once.
+      description: Request payload for applying a single action (such as changing priority, status, or assignment) to multiple work items at once.
       properties:
         data:
           $ref: "#/components/schemas/CaseBulkUpdateRequestData"
@@ -16280,10 +16280,10 @@ components:
         - data
       type: object
     CaseBulkUpdateRequestAttributes:
-      description: Attributes for the bulk update, specifying which cases to update and the action to apply.
+      description: Attributes for the bulk update, specifying which work items to update and the action to apply.
       properties:
         case_ids:
-          description: An array of case identifiers to apply the bulk action to.
+          description: An array of work item identifiers to apply the bulk action to.
           example:
             - "case-id-1"
             - "case-id-2"
@@ -16315,7 +16315,7 @@ components:
         - type
       type: object
     CaseComment:
-      description: Case comment
+      description: Work item comment
       properties:
         attributes:
           $ref: "#/components/schemas/CaseCommentAttributes"
@@ -16326,7 +16326,7 @@ components:
         - type
       type: object
     CaseCommentAttributes:
-      description: Case comment attributes
+      description: Work item comment attributes
       properties:
         comment:
           description: The `CaseCommentAttributes` `message`.
@@ -16336,7 +16336,7 @@ components:
         - comment
       type: object
     CaseCommentRequest:
-      description: Case comment request
+      description: Work item comment request
       properties:
         data:
           $ref: "#/components/schemas/CaseComment"
@@ -16344,7 +16344,7 @@ components:
         - data
       type: object
     CaseCountGroup:
-      description: A facet group containing counts broken down by the distinct values of a case field (for example, status or priority).
+      description: A facet group containing counts broken down by the distinct values of a work item field (for example, status or priority).
       properties:
         group:
           description: "The name of the field being grouped on (for example, `status` or `priority`)."
@@ -16360,10 +16360,10 @@ components:
         - group_values
       type: object
     CaseCountGroupValue:
-      description: A single value within a count group, representing the number of cases with that specific field value.
+      description: A single value within a count group, representing the number of work items with that specific field value.
       properties:
         count:
-          description: Count of cases for this value.
+          description: Count of work items for this value.
           example: 42
           format: int64
           type: integer
@@ -16376,7 +16376,7 @@ components:
         - count
       type: object
     CaseCountResponse:
-      description: Response containing the total number of cases matching a query, optionally grouped by specified fields.
+      description: Response containing the total number of work items matching a query, optionally grouped by specified fields.
       properties:
         data:
           $ref: "#/components/schemas/CaseCountResponseData"
@@ -16413,7 +16413,7 @@ components:
         - attributes
       type: object
     CaseCreate:
-      description: Case creation data
+      description: Work item creation data
       properties:
         attributes:
           $ref: "#/components/schemas/CaseCreateAttributes"
@@ -16426,12 +16426,12 @@ components:
         - type
       type: object
     CaseCreateAttributes:
-      description: Case creation attributes
+      description: Work item creation attributes
       properties:
         custom_attributes:
           additionalProperties:
             $ref: "#/components/schemas/CustomAttributeValue"
-          description: Case custom attributes
+          description: Work item custom attributes
           type: object
         description:
           description: Description
@@ -16445,7 +16445,7 @@ components:
           example: "Security breach investigation"
           type: string
         type_id:
-          description: Case type UUID
+          description: Work item type UUID
           example: "3b010bde-09ce-4449-b745-71dd5f861963"
           type: string
       required:
@@ -16453,7 +16453,7 @@ components:
         - type_id
       type: object
     CaseCreateRelationships:
-      description: Relationships formed with the case on creation
+      description: Relationships formed with the work item on creation
       properties:
         assignee:
           $ref: "#/components/schemas/NullableUserRelationship"
@@ -16463,7 +16463,7 @@ components:
         - project
       type: object
     CaseCreateRequest:
-      description: Case create request
+      description: Work item create request
       properties:
         data:
           $ref: "#/components/schemas/CaseCreate"
@@ -16480,7 +16480,7 @@ components:
       x-enum-varnames:
         - CASES
     CaseEmpty:
-      description: Case empty request data
+      description: Work item empty request data
       properties:
         type:
           $ref: "#/components/schemas/CaseResourceType"
@@ -16488,7 +16488,7 @@ components:
         - type
       type: object
     CaseEmptyRequest:
-      description: Case empty request
+      description: Work item empty request
       properties:
         data:
           $ref: "#/components/schemas/CaseEmpty"
@@ -16496,7 +16496,7 @@ components:
         - data
       type: object
     CaseInsight:
-      description: A reference to an external Datadog resource that provides investigative context for a case, such as a security signal, monitor alert, error tracking issue, or incident.
+      description: A reference to an external Datadog resource that provides investigative context for a work item, such as a security signal, monitor alert, error tracking issue, or incident.
       properties:
         ref:
           description: "The URL path or deep link to the insight resource within Datadog (for example, `/monitors/12345?q=total`)."
@@ -16514,7 +16514,7 @@ components:
         - resource_id
       type: object
     CaseInsightType:
-      description: The type of Datadog resource linked to the case as contextual evidence. Each type corresponds to a different Datadog product signal (for example, a security finding, a monitor alert, or an incident).
+      description: The type of Datadog resource linked to the work item as contextual evidence. Each type corresponds to a different Datadog product signal (for example, a security finding, a monitor alert, or an incident).
       enum:
         - SECURITY_SIGNAL
         - MONITOR
@@ -16552,10 +16552,10 @@ components:
         - SCM_URL
         - PROFILING_DOWNSIZING_EXPERIMENT
     CaseInsightsAttributes:
-      description: Attributes for adding or removing insights from a case.
+      description: Attributes for adding or removing insights from a work item.
       properties:
         insights:
-          description: Array of insights to add to or remove from a case.
+          description: Array of insights to add to or remove from a work item.
           items:
             $ref: "#/components/schemas/CaseInsight"
           maxItems: 100
@@ -16592,7 +16592,7 @@ components:
           type: string
       type: object
     CaseInsightsRequest:
-      description: Request payload for adding or removing case insights.
+      description: Request payload for adding or removing work item insights.
       properties:
         data:
           $ref: "#/components/schemas/CaseInsightsData"
@@ -16600,12 +16600,12 @@ components:
         - data
       type: object
     CaseLink:
-      description: "A directional link representing a relationship between two entities. At least one entity must be a case."
+      description: "A directional link representing a relationship between two entities. At least one entity must be a work item."
       properties:
         attributes:
           $ref: "#/components/schemas/CaseLinkAttributes"
         id:
-          description: "The case link identifier."
+          description: "The work item link identifier."
           example: "804cd682-55f6-4541-ab00-b608b282ea7d"
           type: string
         type:
@@ -16616,7 +16616,7 @@ components:
         - attributes
       type: object
     CaseLinkAttributes:
-      description: "Attributes describing a directional relationship between two entities (cases, incidents, or pages)."
+      description: "Attributes describing a directional relationship between two entities (work items, incidents, or pages)."
       properties:
         child_entity_id:
           description: "The UUID of the child (target) entity in the relationship."
@@ -16646,7 +16646,7 @@ components:
         - child_entity_type
       type: object
     CaseLinkCreate:
-      description: "Data object for creating a case link."
+      description: "Data object for creating a work item link."
       properties:
         attributes:
           $ref: "#/components/schemas/CaseLinkAttributes"
@@ -16665,7 +16665,7 @@ components:
         - data
       type: object
     CaseLinkResourceType:
-      description: "JSON:API resource type for case links."
+      description: "JSON:API resource type for work item links."
       enum:
         - link
       example: link
@@ -16673,7 +16673,7 @@ components:
       x-enum-varnames:
         - LINK
     CaseLinkResponse:
-      description: "Response containing a single case link."
+      description: "Response containing a single work item link."
       properties:
         data:
           $ref: "#/components/schemas/CaseLink"
@@ -16681,10 +16681,10 @@ components:
         - data
       type: object
     CaseLinksResponse:
-      description: "Response containing a list of case links."
+      description: "Response containing a list of work item links."
       properties:
         data:
-          description: "A list of case links."
+          description: "A list of work item links."
           items:
             $ref: "#/components/schemas/CaseLink"
           type: array
@@ -16722,7 +16722,7 @@ components:
       x-enum-varnames:
         - PROJECTS
     CaseNotificationRule:
-      description: A notification rule for case management
+      description: A notification rule for Work Management
       properties:
         attributes:
           $ref: "#/components/schemas/CaseNotificationRuleAttributes"
@@ -16744,7 +16744,7 @@ components:
           description: Whether the notification rule is enabled
           type: boolean
         query:
-          description: Query to filter cases for this notification rule
+          description: Query to filter work items for this notification rule
           type: string
         recipients:
           description: List of notification recipients
@@ -16776,7 +16776,7 @@ components:
           description: Whether the notification rule is enabled
           type: boolean
         query:
-          description: Query to filter cases for this notification rule
+          description: Query to filter work items for this notification rule
           type: string
         recipients:
           description: List of notification recipients
@@ -16933,11 +16933,11 @@ components:
           description: An attribute value.
           type: string
         type: array
-      description: Key-value pairs of case attributes. Each key maps to an array of string values, used for flexible metadata such as labels or tags.
+      description: Key-value pairs of work item attributes. Each key maps to an array of string values, used for flexible metadata such as labels or tags.
       type: object
     CasePriority:
       default: NOT_DEFINED
-      description: Case priority
+      description: Work item priority
       enum:
         - NOT_DEFINED
         - P1
@@ -16955,7 +16955,7 @@ components:
         - P4
         - P5
     CaseRelationships:
-      description: Resources related to a case
+      description: Resources related to a work item
       properties:
         assignee:
           $ref: "#/components/schemas/NullableUserRelationship"
@@ -16968,7 +16968,7 @@ components:
       type: object
     CaseResourceType:
       default: case
-      description: JSON:API resource type for cases.
+      description: JSON:API resource type for work items.
       enum:
         - case
       example: case
@@ -16976,13 +16976,13 @@ components:
       x-enum-varnames:
         - CASE
     CaseResponse:
-      description: Case response
+      description: Work item response
       properties:
         data:
           $ref: "#/components/schemas/Case"
       type: object
     CaseSortableField:
-      description: Case field that can be sorted on
+      description: Work item field that can be sorted on
       enum:
         - created_at
         - priority
@@ -16995,7 +16995,7 @@ components:
         - STATUS
     CaseStatus:
       deprecated: true
-      description: Deprecated way of representing the case status, which only supports OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
+      description: Deprecated way of representing the work item status, which only supports OPEN, IN_PROGRESS, and CLOSED statuses. Use `status_name` instead.
       enum:
         - OPEN
         - IN_PROGRESS
@@ -17007,7 +17007,7 @@ components:
         - IN_PROGRESS
         - CLOSED
     CaseStatusGroup:
-      description: Status group of the case.
+      description: Status group of the work item.
       enum:
         - SG_OPEN
         - SG_IN_PROGRESS
@@ -17019,7 +17019,7 @@ components:
         - SG_IN_PROGRESS
         - SG_CLOSED
     CaseStatusName:
-      description: Status of the case. Must be one of the existing statuses for the case's type.
+      description: Status of the work item. Must be one of the existing statuses for the work item's type.
       example: "Open"
       type: string
     CaseTrigger:
@@ -17040,7 +17040,7 @@ components:
       type: object
     CaseType:
       deprecated: true
-      description: Case type
+      description: Work item type
       enum:
         - STANDARD
       example: STANDARD
@@ -17048,7 +17048,7 @@ components:
       x-enum-varnames:
         - STANDARD
     CaseTypeCreate:
-      description: Data object for creating a case type.
+      description: Data object for creating a work item type.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseTypeResourceAttributes"
@@ -17059,7 +17059,7 @@ components:
         - type
       type: object
     CaseTypeCreateRequest:
-      description: Request payload for creating a case type.
+      description: Request payload for creating a work item type.
       properties:
         data:
           $ref: "#/components/schemas/CaseTypeCreate"
@@ -17067,36 +17067,36 @@ components:
         - data
       type: object
     CaseTypeResource:
-      description: A case type that defines a classification category for cases. Each case type can have its own custom attributes, statuses, and automation rules.
+      description: A work item type that defines a classification category for work items. Each work item type can have its own custom attributes, statuses, and automation rules.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseTypeResourceAttributes"
         id:
-          description: Case type's identifier
+          description: Work item type's identifier
           example: "aeadc05e-98a8-11ec-ac2c-da7ad0900001"
           type: string
         type:
           $ref: "#/components/schemas/CaseTypeResourceType"
       type: object
     CaseTypeResourceAttributes:
-      description: "Attributes of a case type, which define a classification category for cases. Organizations use case types to model different workflows (for example, Security Incident, Bug Report, Change Request)."
+      description: "Attributes of a work item type, which define a classification category for work items. Organizations use work item types to model different workflows (for example, Security Incident, Bug Report, Change Request)."
       properties:
         deleted_at:
-          description: Timestamp when the case type was marked as deleted. A null value indicates the case type is active.
+          description: Timestamp when the work item type was marked as deleted. A null value indicates the work item type is active.
           format: date-time
           nullable: true
           readOnly: true
           type: string
         description:
-          description: A detailed description explaining when this case type should be used.
+          description: A detailed description explaining when this work item type should be used.
           example: "Investigations done in case management"
           type: string
         emoji:
-          description: An emoji icon representing the case type in the UI.
+          description: An emoji icon representing the work item type in the UI.
           example: "🕵🏻‍♂️"
           type: string
         name:
-          description: The display name of the case type, shown in the Case Management UI when creating or viewing cases.
+          description: The display name of the work item type, shown in the Work Management UI when creating or viewing work items.
           example: "Investigation"
           type: string
       required:
@@ -17104,7 +17104,7 @@ components:
       type: object
     CaseTypeResourceType:
       default: case_type
-      description: JSON:API resource type for case types.
+      description: JSON:API resource type for work item types.
       enum:
         - case_type
       example: case_type
@@ -17112,13 +17112,13 @@ components:
       x-enum-varnames:
         - CASE_TYPE
     CaseTypeResponse:
-      description: Response containing a single case type.
+      description: Response containing a single work item type.
       properties:
         data:
           $ref: "#/components/schemas/CaseTypeResource"
       type: object
     CaseTypeUpdate:
-      description: Data object for updating a case type.
+      description: Data object for updating a work item type.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseTypeResourceAttributes"
@@ -17128,7 +17128,7 @@ components:
         - type
       type: object
     CaseTypeUpdateRequest:
-      description: Request payload for updating a case type.
+      description: Request payload for updating a work item type.
       properties:
         data:
           $ref: "#/components/schemas/CaseTypeUpdate"
@@ -17136,16 +17136,16 @@ components:
         - data
       type: object
     CaseTypesResponse:
-      description: Response containing a list of case types.
+      description: Response containing a list of work item types.
       properties:
         data:
-          description: List of case types
+          description: List of work item types
           items:
             $ref: "#/components/schemas/CaseTypeResource"
           type: array
       type: object
     CaseUpdateAttributes:
-      description: Case update attributes
+      description: Work item update attributes
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateAttributesAttributes"
@@ -17156,7 +17156,7 @@ components:
         - type
       type: object
     CaseUpdateAttributesAttributes:
-      description: Case update attributes attributes
+      description: Work item update attributes.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseObjectAttributes"
@@ -17164,7 +17164,7 @@ components:
         - attributes
       type: object
     CaseUpdateAttributesRequest:
-      description: Case update attributes request
+      description: Work item update attributes request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateAttributes"
@@ -17172,7 +17172,7 @@ components:
         - data
       type: object
     CaseUpdateComment:
-      description: Data object for updating a case comment.
+      description: Data object for updating a work item comment.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateCommentAttributes"
@@ -17193,7 +17193,7 @@ components:
         - comment
       type: object
     CaseUpdateCommentRequest:
-      description: Request payload for updating a comment on a case timeline.
+      description: Request payload for updating a comment on a work item timeline.
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateComment"
@@ -17201,7 +17201,7 @@ components:
         - data
       type: object
     CaseUpdateCustomAttribute:
-      description: Case update custom attribute
+      description: Work item update custom attribute
       properties:
         attributes:
           $ref: "#/components/schemas/CustomAttributeValue"
@@ -17212,7 +17212,7 @@ components:
         - type
       type: object
     CaseUpdateCustomAttributeRequest:
-      description: Case update custom attribute request
+      description: Work item update custom attribute request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateCustomAttribute"
@@ -17220,7 +17220,7 @@ components:
         - data
       type: object
     CaseUpdateDescription:
-      description: Case update description
+      description: Work item update description
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateDescriptionAttributes"
@@ -17231,17 +17231,17 @@ components:
         - type
       type: object
     CaseUpdateDescriptionAttributes:
-      description: Case update description attributes
+      description: Work item update description attributes
       properties:
         description:
-          description: Case new description
+          description: Work item new description
           example: "Seeing some weird memory increase... We shouldn't ignore this"
           type: string
       required:
         - description
       type: object
     CaseUpdateDescriptionRequest:
-      description: Case update description request
+      description: Work item update description request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateDescription"
@@ -17249,7 +17249,7 @@ components:
         - data
       type: object
     CaseUpdateDueDate:
-      description: Data object for updating a case's due date.
+      description: Data object for updating a work item's due date.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateDueDateAttributes"
@@ -17260,17 +17260,17 @@ components:
         - type
       type: object
     CaseUpdateDueDateAttributes:
-      description: Attributes for setting or clearing a case's due date.
+      description: Attributes for setting or clearing a work item's due date.
       properties:
         due_date:
-          description: "The target resolution date for the case, in `YYYY-MM-DD` format. Set to `null` to clear the due date."
+          description: "The target resolution date for the work item, in `YYYY-MM-DD` format. Set to `null` to clear the due date."
           example: "2026-12-31"
           type: string
       required:
         - due_date
       type: object
     CaseUpdateDueDateRequest:
-      description: Request payload for updating a case's due date.
+      description: Request payload for updating a work item's due date.
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateDueDate"
@@ -17278,7 +17278,7 @@ components:
         - data
       type: object
     CaseUpdatePriority:
-      description: Case priority status
+      description: Work item priority status
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdatePriorityAttributes"
@@ -17289,7 +17289,7 @@ components:
         - type
       type: object
     CaseUpdatePriorityAttributes:
-      description: Case update priority attributes
+      description: Work item update priority attributes
       properties:
         priority:
           $ref: "#/components/schemas/CasePriority"
@@ -17297,7 +17297,7 @@ components:
         - priority
       type: object
     CaseUpdatePriorityRequest:
-      description: Case update priority request
+      description: Work item update priority request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdatePriority"
@@ -17305,7 +17305,7 @@ components:
         - data
       type: object
     CaseUpdateResolvedReason:
-      description: Data object for updating a case's resolved reason.
+      description: Data object for updating a work item's resolved reason.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateResolvedReasonAttributes"
@@ -17316,17 +17316,17 @@ components:
         - type
       type: object
     CaseUpdateResolvedReasonAttributes:
-      description: Attributes for setting the resolution reason on a security case.
+      description: Attributes for setting the resolution reason on a security work item.
       properties:
         security_resolved_reason:
-          description: "The reason the security case was resolved (for example, `FALSE_POSITIVE`, `TRUE_POSITIVE`, `BENIGN_POSITIVE`)."
+          description: "The reason the security work item was resolved (for example, `FALSE_POSITIVE`, `TRUE_POSITIVE`, `BENIGN_POSITIVE`)."
           example: "FALSE_POSITIVE"
           type: string
       required:
         - security_resolved_reason
       type: object
     CaseUpdateResolvedReasonRequest:
-      description: Request payload for updating the resolution reason on a closed security case.
+      description: Request payload for updating the resolution reason on a closed security work item.
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateResolvedReason"
@@ -17334,7 +17334,7 @@ components:
         - data
       type: object
     CaseUpdateStatus:
-      description: Case update status
+      description: Work item update status
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateStatusAttributes"
@@ -17345,7 +17345,7 @@ components:
         - type
       type: object
     CaseUpdateStatusAttributes:
-      description: Case update status attributes
+      description: Work item update status attributes
       properties:
         status:
           $ref: "#/components/schemas/CaseStatus"
@@ -17354,7 +17354,7 @@ components:
           $ref: "#/components/schemas/CaseStatusName"
       type: object
     CaseUpdateStatusRequest:
-      description: Case update status request
+      description: Work item update status request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateStatus"
@@ -17362,7 +17362,7 @@ components:
         - data
       type: object
     CaseUpdateTitle:
-      description: Case update title
+      description: Work item update title
       properties:
         attributes:
           $ref: "#/components/schemas/CaseUpdateTitleAttributes"
@@ -17373,17 +17373,17 @@ components:
         - type
       type: object
     CaseUpdateTitleAttributes:
-      description: Case update title attributes
+      description: Work item update title attributes
       properties:
         title:
-          description: Case new title
+          description: Work item new title
           example: "Memory leak investigation on API"
           type: string
       required:
         - title
       type: object
     CaseUpdateTitleRequest:
-      description: Case update title request
+      description: Work item update title request
       properties:
         data:
           $ref: "#/components/schemas/CaseUpdateTitle"
@@ -17391,7 +17391,7 @@ components:
         - data
       type: object
     CaseView:
-      description: A saved case view that provides a filtered, reusable list of cases matching a specific query. Views act as persistent dashboards for monitoring case subsets.
+      description: A saved work item view that provides a filtered, reusable list of work items matching a specific query. Views act as persistent dashboards for monitoring work item subsets.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseViewAttributes"
@@ -17409,7 +17409,7 @@ components:
         - attributes
       type: object
     CaseViewAttributes:
-      description: Attributes of a case view, including the filter query and optional notification rule.
+      description: Attributes of a work item view, including the filter query and optional notification rule.
       properties:
         created_at:
           description: Timestamp when the view was created.
@@ -17423,14 +17423,14 @@ components:
           readOnly: true
           type: string
         name:
-          description: A human-readable name for the view, displayed in the Case Management UI.
+          description: A human-readable name for the view, displayed in the Work Management UI.
           example: Open bugs
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching cases.
+          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
           type: string
         query:
-          description: "The search query that determines which cases appear in this view. Uses the same syntax as the Case Management search bar (for example, `status:open priority:P1`)."
+          description: "The search query that determines which work items appear in this view. Uses the same syntax as the Work Management search bar (for example, `status:open priority:P1`)."
           example: "status:open type:bug"
           type: string
       required:
@@ -17439,7 +17439,7 @@ components:
         - created_at
       type: object
     CaseViewCreate:
-      description: Data object for creating a case view.
+      description: Data object for creating a work item view.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseViewCreateAttributes"
@@ -17450,21 +17450,21 @@ components:
         - attributes
       type: object
     CaseViewCreateAttributes:
-      description: Attributes required to create a case view.
+      description: Attributes required to create a work item view.
       properties:
         name:
           description: The name of the view.
           example: Open bugs
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching cases.
+          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
           type: string
         project_id:
           description: The UUID of the project this view belongs to. Views are scoped to a single project.
           example: e555e290-ed65-49bd-ae18-8acbfcf18db7
           type: string
         query:
-          description: The query used to filter cases in this view.
+          description: The query used to filter work items in this view.
           example: "status:open type:bug"
           type: string
       required:
@@ -17473,7 +17473,7 @@ components:
         - project_id
       type: object
     CaseViewCreateRequest:
-      description: Request payload for creating a case view.
+      description: Request payload for creating a work item view.
       properties:
         data:
           $ref: "#/components/schemas/CaseViewCreate"
@@ -17481,7 +17481,7 @@ components:
         - data
       type: object
     CaseViewRelationships:
-      description: Related resources for the case view, including the creator, last modifier, and associated project.
+      description: Related resources for the work item view, including the creator, last modifier, and associated project.
       properties:
         created_by:
           $ref: "#/components/schemas/NullableUserRelationship"
@@ -17492,7 +17492,7 @@ components:
       type: object
     CaseViewResourceType:
       default: view
-      description: "JSON:API resource type for case views."
+      description: "JSON:API resource type for work item views."
       enum:
         - view
       example: view
@@ -17500,7 +17500,7 @@ components:
       x-enum-varnames:
         - VIEW
     CaseViewResponse:
-      description: Response containing a single case view.
+      description: Response containing a single work item view.
       properties:
         data:
           $ref: "#/components/schemas/CaseView"
@@ -17508,7 +17508,7 @@ components:
         - data
       type: object
     CaseViewUpdate:
-      description: Data object for updating a case view.
+      description: Data object for updating a work item view.
       properties:
         attributes:
           $ref: "#/components/schemas/CaseViewUpdateAttributes"
@@ -17518,20 +17518,20 @@ components:
         - type
       type: object
     CaseViewUpdateAttributes:
-      description: Attributes that can be updated on a case view. All fields are optional; only provided fields are changed.
+      description: Attributes that can be updated on a work item view. All fields are optional; only provided fields are changed.
       properties:
         name:
           description: The name of the view.
           type: string
         np_rule_id:
-          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching cases.
+          description: The identifier of a notification rule linked to this view. When set, users subscribed to the view receive alerts for matching work items.
           type: string
         query:
-          description: The query used to filter cases in this view.
+          description: The query used to filter work items in this view.
           type: string
       type: object
     CaseViewUpdateRequest:
-      description: Request payload for updating a case view.
+      description: Request payload for updating a work item view.
       properties:
         data:
           $ref: "#/components/schemas/CaseViewUpdate"
@@ -17539,10 +17539,10 @@ components:
         - data
       type: object
     CaseViewsResponse:
-      description: Response containing a list of case views.
+      description: Response containing a list of work item views.
       properties:
         data:
-          description: A list of case views.
+          description: A list of work item views.
           items:
             $ref: "#/components/schemas/CaseView"
           type: array
@@ -17550,10 +17550,10 @@ components:
         - data
       type: object
     CaseWatcher:
-      description: Represents a user who is subscribed to notifications for a case. Watchers receive updates when the case's status, priority, assignee, or comments change.
+      description: Represents a user who is subscribed to notifications for a work item. Watchers receive updates when the work item's status, priority, assignee, or comments change.
       properties:
         id:
-          description: The primary identifier of the case watcher.
+          description: The primary identifier of the work item watcher.
           example: "8146583c-0b5f-11ec-abf8-da7ad0900001"
           type: string
         relationships:
@@ -17566,7 +17566,7 @@ components:
         - relationships
       type: object
     CaseWatcherRelationships:
-      description: Relationships for a case watcher, linking to the underlying user resource.
+      description: Relationships for a work item watcher, linking to the underlying user resource.
       properties:
         user:
           $ref: "#/components/schemas/CaseWatcherUserRelationship"
@@ -17575,7 +17575,7 @@ components:
       type: object
     CaseWatcherResourceType:
       default: watcher
-      description: JSON:API resource type for case watchers.
+      description: JSON:API resource type for work item watchers.
       enum:
         - watcher
       example: watcher
@@ -17583,7 +17583,7 @@ components:
       x-enum-varnames:
         - WATCHER
     CaseWatcherUserRelationship:
-      description: The user relationship for a case watcher.
+      description: The user relationship for a work item watcher.
       properties:
         data:
           $ref: "#/components/schemas/UserRelationshipData"
@@ -17591,10 +17591,10 @@ components:
         - data
       type: object
     CaseWatchersResponse:
-      description: Response containing the list of users watching a case.
+      description: Response containing the list of users watching a work item.
       properties:
         data:
-          description: List of case watchers.
+          description: List of work item watchers.
           items:
             $ref: "#/components/schemas/CaseWatcher"
           type: array
@@ -17602,10 +17602,10 @@ components:
         - data
       type: object
     CasesResponse:
-      description: Response with cases
+      description: Response with work items
       properties:
         data:
-          description: Cases response data
+          description: Work items response data
           items:
             $ref: "#/components/schemas/Case"
           type: array
@@ -17613,7 +17613,7 @@ components:
           $ref: "#/components/schemas/CasesResponseMeta"
       type: object
     CasesResponseMeta:
-      description: Cases response metadata
+      description: Work items response metadata
       properties:
         page:
           $ref: "#/components/schemas/CasesResponseMetaPagination"
@@ -17626,7 +17626,7 @@ components:
           format: int64
           type: integer
         size:
-          description: Number of cases in current page
+          description: Number of work items in current page
           format: int64
           type: integer
         total:
@@ -27768,7 +27768,7 @@ components:
         - meta
       type: object
     CustomAttributeConfig:
-      description: "A custom attribute configuration that defines an organization-specific metadata field on cases. Custom attributes are scoped to a case type and can hold text, URLs, numbers, or predefined select options."
+      description: "A custom attribute configuration that defines an organization-specific metadata field on work items. Custom attributes are scoped to a work item type and can hold text, URLs, numbers, or predefined select options."
       properties:
         attributes:
           $ref: "#/components/schemas/CustomAttributeConfigResourceAttributes"
@@ -27787,7 +27787,7 @@ components:
           example: "AWS Region, must be a valid region supported by AWS"
           type: string
         display_name:
-          description: The human-readable label shown in the Case Management UI for this custom attribute.
+          description: The human-readable label shown in the Work Management UI for this custom attribute.
           example: "AWS Region"
           type: string
         is_multi:
@@ -27826,10 +27826,10 @@ components:
         - data
       type: object
     CustomAttributeConfigResourceAttributes:
-      description: "Attributes of a custom attribute configuration, defining an organization-specific metadata field that can be added to cases of a given type."
+      description: "Attributes of a custom attribute configuration, defining an organization-specific metadata field that can be added to work items of a given type."
       properties:
         case_type_id:
-          description: The UUID of the case type this custom attribute belongs to.
+          description: The UUID of the work item type this custom attribute belongs to.
           example: "aeadc05e-98a8-11ec-ac2c-da7ad0900001"
           type: string
         description:
@@ -27837,7 +27837,7 @@ components:
           example: "AWS Region, must be a valid region supported by AWS"
           type: string
         display_name:
-          description: The human-readable label shown in the Case Management UI for this custom attribute.
+          description: The human-readable label shown in the Work Management UI for this custom attribute.
           example: "AWS Region"
           type: string
         is_multi:
@@ -27890,7 +27890,7 @@ components:
           example: "Updated description."
           type: string
         display_name:
-          description: The human-readable label shown in the Case Management UI for this custom attribute.
+          description: The human-readable label shown in the Work Management UI for this custom attribute.
           example: "AWS Region"
           type: string
         map_from:
@@ -27913,7 +27913,7 @@ components:
       description: Response containing a list of custom attribute configurations.
       properties:
         data:
-          description: List of custom attribute configs of case type
+          description: List of custom attribute configs of work item type
           items:
             $ref: "#/components/schemas/CustomAttributeConfig"
           type: array
@@ -27972,7 +27972,7 @@ components:
           type: array
       type: object
     CustomAttributeValue:
-      description: A typed value for a custom attribute on a specific case.
+      description: A typed value for a custom attribute on a specific work item.
       properties:
         is_multi:
           description: If true, value must be an array
@@ -56733,7 +56733,7 @@ components:
           description: Whether incident integration is enabled.
           type: boolean
         field_mappings:
-          description: List of mappings between incident fields and case fields.
+          description: List of mappings between incident fields and work item fields.
           items:
             $ref: "#/components/schemas/IntegrationIncidentFieldMappingsItems"
           type: array
@@ -56744,22 +56744,22 @@ components:
           $ref: "#/components/schemas/IntegrationIncidentSeverityConfig"
       type: object
     IntegrationIncidentFieldMappingsItems:
-      description: Mapping between an incident user-defined field and a case field.
+      description: Mapping between an incident user-defined field and a work item field.
       properties:
         case_field:
-          description: The case field to map the incident field value to.
+          description: The work item field to map the incident field value to.
           type: string
         incident_user_defined_field_id:
           description: The identifier of the incident user-defined field to map from.
           type: string
       type: object
     IntegrationIncidentSeverityConfig:
-      description: Severity configuration for mapping incident priorities to case priorities.
+      description: Severity configuration for mapping incident priorities to work item priorities.
       properties:
         priority_mapping:
           additionalProperties:
             type: string
-          description: Mapping of incident severity values to case priority values.
+          description: Mapping of incident severity values to work item priority values.
           type: object
       type: object
     IntegrationJira:
@@ -56776,14 +56776,14 @@ components:
           $ref: "#/components/schemas/IntegrationJiraSync"
       type: object
     IntegrationJiraAutoCreation:
-      description: Auto-creation settings for Jira issues from cases.
+      description: Auto-creation settings for Jira issues from work items.
       properties:
         enabled:
           description: Whether automatic Jira issue creation is enabled.
           type: boolean
       type: object
     IntegrationJiraMetadata:
-      description: Metadata for connecting a case management project to a Jira project.
+      description: Metadata for connecting a Work Management project to a Jira project.
       properties:
         account_id:
           description: The Jira account identifier.
@@ -56792,7 +56792,7 @@ components:
           description: The Jira issue type identifier to use when creating issues.
           type: string
         project_id:
-          description: The Jira project identifier to associate with this case project.
+          description: The Jira project identifier to associate with this Work Management project.
           type: string
       type: object
     IntegrationJiraSync:
@@ -56861,7 +56861,7 @@ components:
           description: Whether auto-resolve is enabled.
           type: boolean
         case_type_id:
-          description: Case type ID for monitor integration.
+          description: Work item type ID for monitor integration.
           type: string
         enabled:
           description: Whether monitor integration is enabled.
@@ -56880,13 +56880,13 @@ components:
           description: Whether On-Call integration is enabled.
           type: boolean
         escalation_queries:
-          description: List of escalation queries for routing cases to on-call responders.
+          description: List of escalation queries for routing work items to on-call responders.
           items:
             $ref: "#/components/schemas/IntegrationOnCallEscalationQueriesItems"
           type: array
       type: object
     IntegrationOnCallEscalationQueriesItems:
-      description: An On-Call escalation query entry used to route cases to on-call responders.
+      description: An On-Call escalation query entry used to route work items to on-call responders.
       properties:
         enabled:
           description: Whether this escalation query is enabled.
@@ -56895,7 +56895,7 @@ components:
           description: Unique identifier of the escalation query.
           type: string
         query:
-          description: The query used to match cases for escalation.
+          description: The query used to match work items for escalation.
           type: string
         target:
           $ref: "#/components/schemas/IntegrationOnCallEscalationQueriesItemsTarget"
@@ -56931,7 +56931,7 @@ components:
           $ref: "#/components/schemas/IntegrationServiceNowSyncConfig"
       type: object
     IntegrationServiceNowAutoCreation:
-      description: Auto-creation settings for ServiceNow incidents from cases.
+      description: Auto-creation settings for ServiceNow incidents from work items.
       properties:
         enabled:
           description: Whether automatic ServiceNow incident creation is enabled.
@@ -56962,7 +56962,7 @@ components:
         impact_mapping:
           additionalProperties:
             type: string
-          description: Mapping of case priority values to ServiceNow impact values.
+          description: Mapping of work item priority values to ServiceNow impact values.
           type: object
         sync_type:
           description: The type of synchronization to apply for priority.
@@ -56970,7 +56970,7 @@ components:
         urgency_mapping:
           additionalProperties:
             type: string
-          description: Mapping of case priority values to ServiceNow urgency values.
+          description: Mapping of work item priority values to ServiceNow urgency values.
           type: object
       type: object
     IntegrationType:
@@ -58871,7 +58871,7 @@ components:
         - account
       type: object
     JiraIssue:
-      description: Jira issue attached to case
+      description: Jira issue attached to work item
       nullable: true
       properties:
         result:
@@ -70312,7 +70312,7 @@ components:
         - id
       type: object
     MaintenanceWindow:
-      description: A maintenance window that defines a scheduled time period during which case-related notifications and automation rules are suppressed. Each maintenance window applies to cases matching a specified query.
+      description: A maintenance window that defines a scheduled time period during which notifications and automation rules related to work items are suppressed. Each maintenance window applies to work items matching a specified query.
       properties:
         attributes:
           $ref: "#/components/schemas/MaintenanceWindowAttributes"
@@ -70328,7 +70328,7 @@ components:
         - attributes
       type: object
     MaintenanceWindowAttributes:
-      description: Attributes of a maintenance window, including its schedule and the query that determines which cases are affected.
+      description: Attributes of a maintenance window, including its schedule and the query that determines which work items are affected.
       properties:
         created_by:
           description: The UUID of the user who created this maintenance window. Read-only.
@@ -70344,7 +70344,7 @@ components:
           example: "Weekly maintenance"
           type: string
         query:
-          description: A case search query that determines which cases are affected during the maintenance window. Uses the same syntax as the Case Management search bar.
+          description: A work item search query that determines which work items are affected during the maintenance window. Uses the same syntax as the Work Management search bar.
           example: "project:SEC"
           type: string
         start_at:
@@ -70386,7 +70386,7 @@ components:
           example: "Weekly maintenance"
           type: string
         query:
-          description: The query to filter event management cases for this maintenance window.
+          description: The query to filter event management work items for this maintenance window.
           example: "project:SEC"
           type: string
         start_at:
@@ -70446,7 +70446,7 @@ components:
           description: The name of the maintenance window.
           type: string
         query:
-          description: The query to filter event management cases for this maintenance window.
+          description: The query to filter event management work items for this maintenance window.
           type: string
         start_at:
           description: The start time of the maintenance window.
@@ -91766,9 +91766,9 @@ components:
         columns_config:
           $ref: "#/components/schemas/ProjectColumnsConfig"
         enabled_custom_case_types:
-          description: List of enabled custom case type IDs.
+          description: List of enabled custom work item type IDs.
           items:
-            description: A custom case type identifier.
+            description: A custom work item type identifier.
             type: string
           type: array
         key:
@@ -91832,9 +91832,9 @@ components:
       description: Project creation attributes.
       properties:
         enabled_custom_case_types:
-          description: List of enabled custom case type IDs.
+          description: List of enabled custom work item type IDs.
           items:
-            description: A custom case type identifier.
+            description: A custom work item type identifier.
             type: string
           type: array
         key:
@@ -91861,7 +91861,7 @@ components:
         - data
       type: object
     ProjectFavorite:
-      description: Represents a case project that the current user has bookmarked for quick access. Favorited projects appear prominently in the Case Management UI.
+      description: Represents a Work Management project that the current user has bookmarked for quick access. Favorited projects appear prominently in the Work Management UI.
       properties:
         id:
           description: The UUID of the favorited project.
@@ -91907,25 +91907,25 @@ components:
           description: Whether notifications are enabled.
           type: boolean
         notify_on_case_assignment:
-          description: Whether to send a notification when a case is assigned.
+          description: Whether to send a notification when a work item is assigned.
           type: boolean
         notify_on_case_closed:
-          description: Whether to send a notification when a case is closed.
+          description: Whether to send a notification when a work item is closed.
           type: boolean
         notify_on_case_comment:
-          description: Whether to send a notification when a comment is added to a case.
+          description: Whether to send a notification when a comment is added to a work item.
           type: boolean
         notify_on_case_comment_mention:
-          description: Whether to send a notification when a user is mentioned in a case comment.
+          description: Whether to send a notification when a user is mentioned in a work item comment.
           type: boolean
         notify_on_case_priority_change:
-          description: Whether to send a notification when a case's priority changes.
+          description: Whether to send a notification when a work item's priority changes.
           type: boolean
         notify_on_case_status_change:
-          description: Whether to send a notification when a case's status changes.
+          description: Whether to send a notification when a work item's status changes.
           type: boolean
         notify_on_case_unassignment:
-          description: Whether to send a notification when a case is unassigned.
+          description: Whether to send a notification when a work item is unassigned.
           type: boolean
       type: object
     ProjectRelationship:
@@ -92008,9 +92008,9 @@ components:
         columns_config:
           $ref: "#/components/schemas/ProjectColumnsConfig"
         enabled_custom_case_types:
-          description: List of enabled custom case type IDs.
+          description: List of enabled custom work item type IDs.
           items:
-            description: A custom case type identifier.
+            description: A custom work item type identifier.
             type: string
           type: array
         name:
@@ -111779,7 +111779,7 @@ components:
         - data
       type: object
     ServiceNowTicket:
-      description: ServiceNow ticket attached to case
+      description: ServiceNow ticket attached to work item
       nullable: true
       properties:
         result:
@@ -125489,7 +125489,7 @@ components:
         - restrictions
       type: object
     TimelineCell:
-      description: "Attributes of a timeline cell, representing a single event in a case's chronological activity log (for example, a comment, status change, or assignment update)."
+      description: "Attributes of a timeline cell, representing a single event in a work item's chronological activity log (for example, a comment, status change, or assignment update)."
       properties:
         author:
           $ref: "#/components/schemas/TimelineCellAuthor"
@@ -125561,7 +125561,7 @@ components:
           type: string
       type: object
     TimelineCellResource:
-      description: A timeline cell resource representing a single entry in a case's activity timeline.
+      description: A timeline cell resource representing a single entry in a work item's activity timeline.
       properties:
         attributes:
           $ref: "#/components/schemas/TimelineCell"
@@ -125594,7 +125594,7 @@ components:
       x-enum-varnames:
         - COMMENT
     TimelineResponse:
-      description: Response containing the chronological list of timeline cells for a case.
+      description: Response containing the chronological list of timeline cells for a work item.
       properties:
         data:
           description: The `TimelineResponse` `data`.
@@ -139635,7 +139635,7 @@ paths:
   /api/v2/cases:
     get:
       description: >-
-        Search cases.
+        Search work items.
       operationId: SearchCases
       parameters:
         - $ref: "#/components/parameters/PageSize"
@@ -139703,6 +139703,7 @@ paths:
       summary: Search cases
       tags:
         - Case Management
+      x-displayName: Search work items
       x-menu-order: 9
       x-pagination:
         limitParam: page[size]
@@ -139710,7 +139711,7 @@ paths:
         pageStart: 1
         resultsPath: data
     post:
-      description: Create a Case
+      description: Create a work item
       operationId: CreateCase
       requestBody:
         content:
@@ -139736,7 +139737,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseCreateRequest"
-        description: Case payload
+        description: Work item payload
         required: true
       responses:
         "201":
@@ -139781,10 +139782,11 @@ paths:
       summary: Create a case
       tags:
         - Case Management
+      x-displayName: Create a work item
       x-menu-order: 8
   /api/v2/cases/aggregate:
     post:
-      description: Performs an aggregation query over cases, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.
+      description: Performs an aggregation query over work items, grouping results by specified fields and returning counts per group along with a total. Useful for dashboards and analytics.
       operationId: AggregateCases
       requestBody:
         content:
@@ -139802,7 +139804,7 @@ paths:
                     type: aggregate
             schema:
               $ref: "#/components/schemas/CaseAggregateRequest"
-        description: Case aggregate request payload.
+        description: Work item aggregate request payload.
         required: true
       responses:
         "200":
@@ -139841,10 +139843,11 @@ paths:
       summary: Aggregate cases
       tags:
         - Case Management
+      x-displayName: Aggregate work items
       x-menu-order: 27
   /api/v2/cases/bulk:
     post:
-      description: Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.
+      description: Applies a single action (such as changing priority, status, assignment, or archiving) to multiple work items at once. The list of work item IDs and the action type with its payload are specified in the request body.
       operationId: BulkUpdateCases
       requestBody:
         content:
@@ -139863,7 +139866,7 @@ paths:
                     type: bulk
             schema:
               $ref: "#/components/schemas/CaseBulkUpdateRequest"
-        description: Case bulk update request payload.
+        description: Work item bulk update request payload.
         required: true
       responses:
         "200":
@@ -139886,13 +139889,14 @@ paths:
       summary: Bulk update cases
       tags:
         - Case Management
+      x-displayName: Bulk update work items
       x-menu-order: 29
   /api/v2/cases/count:
     get:
-      description: Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.
+      description: Returns work item counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.
       operationId: CountCases
       parameters:
-        - description: Filter query for cases.
+        - description: Filter query for work items.
           in: query
           name: query_filter
           required: false
@@ -139949,13 +139953,14 @@ paths:
       summary: Count cases
       tags:
         - Case Management
+      x-displayName: Count work items
       x-menu-order: 28
   /api/v2/cases/link:
     get:
-      description: Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.
+      description: Returns all links associated with a work item. Links define relationships (for example, BLOCKS) between work items. Requires entity_type and entity_id query parameters.
       operationId: ListCaseLinks
       parameters:
-        - description: "The entity type to look up links for. Use `CASE` to find links for a specific case."
+        - description: "The entity type to look up links for. Use `CASE` to find links for a specific work item."
           in: query
           name: entity_type
           required: true
@@ -140013,9 +140018,10 @@ paths:
       summary: List case links
       tags:
         - Case Management
+      x-displayName: List work item links
       x-menu-order: 35
     post:
-      description: Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.
+      description: Creates a directional link between two work items (for example, work item A blocks work item B). The parent and child work items and their relationship type must be specified.
       operationId: CreateCaseLink
       requestBody:
         content:
@@ -140033,7 +140039,7 @@ paths:
                     type: link
             schema:
               $ref: "#/components/schemas/CaseLinkCreateRequest"
-        description: "Case link create request."
+        description: "Work item link create request."
         required: true
       responses:
         "201":
@@ -140072,10 +140078,11 @@ paths:
       summary: Create a case link
       tags:
         - Case Management
+      x-displayName: Create a work item link
       x-menu-order: 36
   /api/v2/cases/link/{link_id}:
     delete:
-      description: Deletes an existing link between cases by link ID.
+      description: Deletes an existing link between work items by link ID.
       operationId: DeleteCaseLink
       parameters:
         - $ref: "#/components/parameters/LinkIDPathParameter"
@@ -140100,6 +140107,7 @@ paths:
       summary: Delete a case link
       tags:
         - Case Management
+      x-displayName: Delete a work item link
       x-menu-order: 37
   /api/v2/cases/projects:
     get:
@@ -140196,7 +140204,7 @@ paths:
       x-menu-order: 46
   /api/v2/cases/projects/favorites:
     get:
-      description: Returns the list of case projects that the current authenticated user has marked as favorites.
+      description: Returns the list of Work Management projects that the current authenticated user has marked as favorites.
       operationId: ListUserCaseProjectFavorites
       responses:
         "200":
@@ -140354,7 +140362,7 @@ paths:
       x-menu-order: 50
   /api/v2/cases/projects/{project_id}/favorites:
     delete:
-      description: Removes a case project from the current user's favorites list.
+      description: Removes a Work Management project from the current user's favorites list.
       operationId: UnfavoriteCaseProject
       parameters:
         - $ref: "#/components/parameters/ProjectIDPathParameter"
@@ -140381,7 +140389,7 @@ paths:
         - Case Management
       x-menu-order: 32
     post:
-      description: Marks a case project as a favorite for the current authenticated user.
+      description: Marks a Work Management project as a favorite for the current authenticated user.
       operationId: FavoriteCaseProject
       parameters:
         - $ref: "#/components/parameters/ProjectIDPathParameter"
@@ -140621,7 +140629,7 @@ paths:
       x-menu-order: 44
   /api/v2/cases/projects/{project_id}/rules:
     get:
-      description: Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by case events like creation, status transitions, or attribute changes.
+      description: Returns all automation rules configured for a project. Automation rules allow automatic actions to be triggered by work item events like creation, status transitions, or attribute changes.
       operationId: ListCaseAutomationRules
       parameters:
         - description: The UUID of the project that owns the automation rules.
@@ -140674,7 +140682,7 @@ paths:
         - Case Management
       x-menu-order: 1
     post:
-      description: Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.
+      description: Creates an automation rule for a project. The rule defines a trigger event (for example, work item created, status transitioned) and an action to execute.
       operationId: CreateCaseAutomationRule
       parameters:
         - description: The UUID of the project that owns the automation rules.
@@ -140909,7 +140917,7 @@ paths:
       x-menu-order: 4
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/disable:
     post:
-      description: Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.
+      description: Disables an automation rule so it no longer triggers on work item events. The rule configuration is preserved.
       operationId: DisableCaseAutomationRule
       parameters:
         - description: The UUID of the project that owns the automation rules.
@@ -140964,7 +140972,7 @@ paths:
       x-menu-order: 7
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/enable:
     post:
-      description: Enables a previously disabled automation rule so it triggers on matching case events.
+      description: Enables a previously disabled automation rule so it triggers on matching work item events.
       operationId: EnableCaseAutomationRule
       parameters:
         - description: The UUID of the project that owns the automation rules.
@@ -141019,7 +141027,7 @@ paths:
       x-menu-order: 6
   /api/v2/cases/types:
     get:
-      description: Get all case types
+      description: Get all work item types
       operationId: GetAllCaseTypes
       responses:
         "200":
@@ -141047,9 +141055,10 @@ paths:
       summary: Get all case types
       tags:
         - Case Management Type
+      x-displayName: Get all work item types
       x-menu-order: 1
     post:
-      description: Create a Case Type
+      description: Create a work item type.
       operationId: CreateCaseType
       requestBody:
         content:
@@ -141065,7 +141074,7 @@ paths:
                     type: case_type
             schema:
               $ref: "#/components/schemas/CaseTypeCreateRequest"
-        description: Case type payload
+        description: Work item type payload
         required: true
       responses:
         "201":
@@ -141095,6 +141104,7 @@ paths:
       summary: Create a case type
       tags:
         - Case Management Type
+      x-displayName: Create a work item type
       x-menu-order: 2
   /api/v2/cases/types/custom_attributes:
     get:
@@ -141132,7 +141142,7 @@ paths:
       x-menu-order: 1
   /api/v2/cases/types/{case_type_id}:
     delete:
-      description: Delete a case type
+      description: Delete a work item type
       operationId: DeleteCaseType
       parameters:
         - $ref: "#/components/parameters/CaseTypeIDPathParameter"
@@ -141148,9 +141158,10 @@ paths:
       summary: Delete a case type
       tags:
         - Case Management Type
+      x-displayName: Delete a work item type
       x-menu-order: 3
     put:
-      description: Updates the name, emoji, or description of an existing case type.
+      description: Updates the name, emoji, or description of an existing work item type.
       operationId: UpdateCaseType
       parameters:
         - $ref: "#/components/parameters/CaseTypeIDPathParameter"
@@ -141168,7 +141179,7 @@ paths:
                     type: case_type
             schema:
               $ref: "#/components/schemas/CaseTypeUpdateRequest"
-        description: Case type payload.
+        description: Work item type payload.
         required: true
       responses:
         "200":
@@ -141205,10 +141216,11 @@ paths:
       summary: Update a case type
       tags:
         - Case Management Type
+      x-displayName: Update a work item type
       x-menu-order: 4
   /api/v2/cases/types/{case_type_id}/custom_attributes:
     get:
-      description: Get all custom attribute config of case type
+      description: Get custom attribute configurations for a work item type.
       operationId: GetAllCustomAttributeConfigsByCaseType
       parameters:
         - $ref: "#/components/parameters/CaseTypeIDPathParameter"
@@ -141243,9 +141255,10 @@ paths:
       summary: Get all custom attributes config of case type
       tags:
         - Case Management Attribute
+      x-displayName: Get custom attribute configs for work item type
       x-menu-order: 2
     post:
-      description: Create custom attribute config for a case type
+      description: Create a custom attribute configuration for a work item type.
       operationId: CreateCustomAttributeConfig
       parameters:
         - $ref: "#/components/parameters/CaseTypeIDPathParameter"
@@ -141300,6 +141313,7 @@ paths:
       summary: Create custom attribute config for a case type
       tags:
         - Case Management Attribute
+      x-displayName: Create custom attribute config for work item type
       x-menu-order: 3
   /api/v2/cases/types/{case_type_id}/custom_attributes/{custom_attribute_id}:
     delete:
@@ -141324,7 +141338,7 @@ paths:
         - Case Management Attribute
       x-menu-order: 4
     put:
-      description: Updates the display name, description, type, or options of an existing custom attribute configuration for a case type.
+      description: Updates the display name, description, type, or options of an existing custom attribute configuration for a work item type.
       operationId: UpdateCustomAttributeConfig
       parameters:
         - $ref: "#/components/parameters/CaseTypeIDPathParameter"
@@ -141385,7 +141399,7 @@ paths:
       x-menu-order: 5
   /api/v2/cases/views:
     get:
-      description: Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.
+      description: Returns all saved work item views for a given project. Views are saved search queries that allow quick access to filtered lists of work items.
       operationId: ListCaseViews
       parameters:
         - description: Filter views by project identifier.
@@ -141430,9 +141444,10 @@ paths:
       summary: List case views
       tags:
         - Case Management
+      x-displayName: List work item views
       x-menu-order: 59
     post:
-      description: Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.
+      description: Creates a new saved work item view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.
       operationId: CreateCaseView
       requestBody:
         content:
@@ -141448,7 +141463,7 @@ paths:
                     type: view
             schema:
               $ref: "#/components/schemas/CaseViewCreateRequest"
-        description: Case view payload.
+        description: Work item view payload.
         required: true
       responses:
         "201":
@@ -141485,10 +141500,11 @@ paths:
       summary: Create a case view
       tags:
         - Case Management
+      x-displayName: Create a work item view
       x-menu-order: 60
   /api/v2/cases/views/{view_id}:
     delete:
-      description: Permanently deletes a saved case view.
+      description: Permanently deletes a saved work item view.
       operationId: DeleteCaseView
       parameters:
         - $ref: "#/components/parameters/ViewIDPathParameter"
@@ -141513,9 +141529,10 @@ paths:
       summary: Delete a case view
       tags:
         - Case Management
+      x-displayName: Delete a work item view
       x-menu-order: 63
     get:
-      description: Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.
+      description: Returns a single saved work item view identified by its UUID, including its query, associated project, and timestamps.
       operationId: GetCaseView
       parameters:
         - $ref: "#/components/parameters/ViewIDPathParameter"
@@ -141554,9 +141571,10 @@ paths:
       summary: Get a case view
       tags:
         - Case Management
+      x-displayName: Get a work item view
       x-menu-order: 61
     put:
-      description: Updates the name, query, or notification rule of an existing case view.
+      description: Updates the name, query, or notification rule of an existing work item view.
       operationId: UpdateCaseView
       parameters:
         - $ref: "#/components/parameters/ViewIDPathParameter"
@@ -141572,7 +141590,7 @@ paths:
                     type: view
             schema:
               $ref: "#/components/schemas/CaseViewUpdateRequest"
-        description: Case view payload.
+        description: Work item view payload.
         required: true
       responses:
         "200":
@@ -141609,11 +141627,12 @@ paths:
       summary: Update a case view
       tags:
         - Case Management
+      x-displayName: Update a work item view
       x-menu-order: 62
   /api/v2/cases/{case_id}:
     get:
       description: >-
-        Get the details of case by `case_id`
+        Get the details of a work item by `case_id`.
       operationId: GetCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141660,10 +141679,11 @@ paths:
       summary: Get the details of a case
       tags:
         - Case Management
+      x-displayName: Get the details of a work item
       x-menu-order: 10
   /api/v2/cases/{case_id}/archive:
     post:
-      description: Archive case
+      description: Archive work item
       operationId: ArchiveCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141677,7 +141697,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseEmptyRequest"
-        description: Archive case payload
+        description: Archive work item payload
         required: true
       responses:
         "200":
@@ -141722,10 +141742,11 @@ paths:
       summary: Archive case
       tags:
         - Case Management
+      x-displayName: Archive work item
       x-menu-order: 17
   /api/v2/cases/{case_id}/assign:
     post:
-      description: Assign case to a user
+      description: Assign work item to a user
       operationId: AssignCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141741,7 +141762,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseAssignRequest"
-        description: Assign case payload
+        description: Assign work item payload
         required: true
       responses:
         "200":
@@ -141786,10 +141807,11 @@ paths:
       summary: Assign case
       tags:
         - Case Management
+      x-displayName: Assign work item
       x-menu-order: 15
   /api/v2/cases/{case_id}/attributes:
     post:
-      description: Update case attributes
+      description: Update work item attributes
       operationId: UpdateAttributes
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141812,7 +141834,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateAttributesRequest"
-        description: Case attributes update payload
+        description: Work item attributes update payload
         required: true
       responses:
         "200":
@@ -141857,10 +141879,11 @@ paths:
       summary: Update case attributes
       tags:
         - Case Management
+      x-displayName: Update work item attributes
       x-menu-order: 19
   /api/v2/cases/{case_id}/comment:
     post:
-      description: Comment case
+      description: Add a comment to a work item.
       operationId: CommentCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141876,7 +141899,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseCommentRequest"
-        description: Case comment payload
+        description: Work item comment payload
         required: true
       responses:
         "200":
@@ -141909,10 +141932,11 @@ paths:
       summary: Comment case
       tags:
         - Case Management
+      x-displayName: Add a comment to a work item
       x-menu-order: 20
   /api/v2/cases/{case_id}/comment/{cell_id}:
     delete:
-      description: Delete case comment
+      description: Delete work item comment
       operationId: DeleteCaseComment
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141933,9 +141957,10 @@ paths:
       summary: Delete case comment
       tags:
         - Case Management
+      x-displayName: Delete work item comment
       x-menu-order: 22
     put:
-      description: Updates the text content of an existing comment on a case timeline. The comment is identified by its cell ID.
+      description: Updates the text content of an existing comment on a work item timeline. The comment is identified by its cell ID.
       operationId: UpdateCaseComment
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -141952,7 +141977,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateCommentRequest"
-        description: Case update comment payload.
+        description: Work item update comment payload.
         required: true
       responses:
         "200":
@@ -141975,10 +142000,11 @@ paths:
       summary: Update case comment
       tags:
         - Case Management
+      x-displayName: Update work item comment
       x-menu-order: 21
   /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
     delete:
-      description: Delete custom attribute from case
+      description: Delete custom attribute from work item
       operationId: DeleteCaseCustomAttribute
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142024,9 +142050,10 @@ paths:
       summary: Delete custom attribute from case
       tags:
         - Case Management
+      x-displayName: Delete custom attribute from work item
       x-menu-order: 24
     post:
-      description: Update case custom attribute
+      description: Update work item custom attribute
       operationId: UpdateCaseCustomAttribute
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142045,7 +142072,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateCustomAttributeRequest"
-        description: Update case custom attribute payload
+        description: Update work item custom attribute payload
         required: true
       responses:
         "200":
@@ -142090,10 +142117,11 @@ paths:
       summary: Update case custom attribute
       tags:
         - Case Management
+      x-displayName: Update work item custom attribute
       x-menu-order: 23
   /api/v2/cases/{case_id}/description:
     post:
-      description: Update case description
+      description: Update work item description
       operationId: UpdateCaseDescription
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142109,7 +142137,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateDescriptionRequest"
-        description: Case description update payload
+        description: Work item description update payload
         required: true
       responses:
         "200":
@@ -142154,10 +142182,11 @@ paths:
       summary: Update case description
       tags:
         - Case Management
+      x-displayName: Update work item description
       x-menu-order: 12
   /api/v2/cases/{case_id}/due_date:
     post:
-      description: Sets or updates the due date for a case. The due date is a calendar date (without a time component) indicating when the case should be resolved.
+      description: Sets or updates the due date for a work item. The due date is a calendar date (without a time component) indicating when the work item should be resolved.
       operationId: UpdateCaseDueDate
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142173,7 +142202,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateDueDateRequest"
-        description: Case due date update payload.
+        description: Work item due date update payload.
         required: true
       responses:
         "200":
@@ -142218,10 +142247,11 @@ paths:
       summary: Update case due date
       tags:
         - Case Management
+      x-displayName: Update work item due date
       x-menu-order: 25
   /api/v2/cases/{case_id}/insights:
     delete:
-      description: Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.
+      description: Removes one or more previously added insights from a work item by specifying their type and resource identifier in the request body.
       operationId: RemoveCaseInsights
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142240,7 +142270,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseInsightsRequest"
-        description: Case insights request.
+        description: Work item insights request.
         required: true
       responses:
         "200":
@@ -142301,10 +142331,11 @@ paths:
       summary: Remove insights from a case
       tags:
         - Case Management
+      x-displayName: Remove insights from a work item
       x-menu-order: 34
     put:
       description: >-
-        Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.
+        Adds one or more insights to a work item. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.
       operationId: AddCaseInsights
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142323,7 +142354,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseInsightsRequest"
-        description: Case insights request.
+        description: Work item insights request.
         required: true
       responses:
         "200":
@@ -142384,10 +142415,11 @@ paths:
       summary: Add insights to a case
       tags:
         - Case Management
+      x-displayName: Add insights to a work item
       x-menu-order: 33
   /api/v2/cases/{case_id}/priority:
     post:
-      description: Update case priority
+      description: Update work item priority
       operationId: UpdatePriority
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142403,7 +142435,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdatePriorityRequest"
-        description: Case priority update payload
+        description: Work item priority update payload
         required: true
       responses:
         "200":
@@ -142448,10 +142480,11 @@ paths:
       summary: Update case priority
       tags:
         - Case Management
+      x-displayName: Update work item priority
       x-menu-order: 14
   /api/v2/cases/{case_id}/relationships/incidents:
     post:
-      description: Link an incident to a case
+      description: Link an incident to a work item
       operationId: LinkIncident
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142520,10 +142553,11 @@ paths:
       summary: Link incident to case
       tags:
         - Case Management
+      x-displayName: Link incident to work item
       x-menu-order: 52
   /api/v2/cases/{case_id}/relationships/jira_issues:
     delete:
-      description: Remove the link between a Jira issue and a case
+      description: Remove the link between a Jira issue and a work item
       operationId: UnlinkJiraIssue
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142564,9 +142598,10 @@ paths:
       summary: Remove Jira issue link from case
       tags:
         - Case Management
+      x-displayName: Remove Jira issue link from work item
       x-menu-order: 55
     patch:
-      description: Link an existing Jira issue to a case
+      description: Link an existing Jira issue to a work item
       operationId: LinkJiraIssueToCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142627,9 +142662,10 @@ paths:
       summary: Link existing Jira issue to case
       tags:
         - Case Management
+      x-displayName: Link existing Jira issue to work item
       x-menu-order: 54
     post:
-      description: Create a new Jira issue and link it to a case
+      description: Create a new Jira issue and link it to a work item
       operationId: CreateCaseJiraIssue
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142687,10 +142723,11 @@ paths:
       summary: Create Jira issue for case
       tags:
         - Case Management
+      x-displayName: Create Jira issue for work item
       x-menu-order: 53
   /api/v2/cases/{case_id}/relationships/notebook:
     post:
-      description: Create a new investigation notebook and link it to a case
+      description: Create a new investigation notebook and link it to a work item
       operationId: CreateCaseNotebook
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142743,10 +142780,11 @@ paths:
       summary: Create investigation notebook for case
       tags:
         - Case Management
+      x-displayName: Create investigation notebook for work item
       x-menu-order: 57
   /api/v2/cases/{case_id}/relationships/project:
     patch:
-      description: Update the project associated with a case
+      description: Update the project associated with a work item
       operationId: MoveCaseToProject
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142815,10 +142853,11 @@ paths:
       summary: Update case project
       tags:
         - Case Management
+      x-displayName: Update work item project
       x-menu-order: 51
   /api/v2/cases/{case_id}/relationships/servicenow_tickets:
     post:
-      description: Create a new ServiceNow incident ticket and link it to a case
+      description: Create a new ServiceNow incident ticket and link it to a work item
       operationId: CreateCaseServiceNowTicket
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142874,10 +142913,11 @@ paths:
       summary: Create ServiceNow ticket for case
       tags:
         - Case Management
+      x-displayName: Create ServiceNow ticket for work item
       x-menu-order: 56
   /api/v2/cases/{case_id}/resolved_reason:
     post:
-      description: Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.
+      description: Sets the resolved reason for a security work item (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type work items.
       operationId: UpdateCaseResolvedReason
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142893,7 +142933,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateResolvedReasonRequest"
-        description: Case resolved reason update payload.
+        description: Work item resolved reason update payload.
         required: true
       responses:
         "200":
@@ -142938,10 +142978,11 @@ paths:
       summary: Update case resolved reason
       tags:
         - Case Management
+      x-displayName: Update work item resolved reason
       x-menu-order: 26
   /api/v2/cases/{case_id}/status:
     post:
-      description: Update case status
+      description: Update work item status
       operationId: UpdateStatus
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -142958,7 +142999,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateStatusRequest"
-        description: Case status update payload
+        description: Work item status update payload
         required: true
       responses:
         "200":
@@ -143003,10 +143044,11 @@ paths:
       summary: Update case status
       tags:
         - Case Management
+      x-displayName: Update work item status
       x-menu-order: 13
   /api/v2/cases/{case_id}/timelines:
     get:
-      description: Returns the timeline of events for a case, including comments, status changes, and other activity. Supports pagination and sort order.
+      description: Returns the timeline of events for a work item, including comments, status changes, and other activity. Supports pagination and sort order.
       operationId: ListCaseTimeline
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143069,10 +143111,11 @@ paths:
       summary: Get case timeline
       tags:
         - Case Management
+      x-displayName: Get work item timeline
       x-menu-order: 58
   /api/v2/cases/{case_id}/title:
     post:
-      description: Update case title
+      description: Update work item title
       operationId: UpdateCaseTitle
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143088,7 +143131,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseUpdateTitleRequest"
-        description: Case title update payload
+        description: Work item title update payload
         required: true
       responses:
         "200":
@@ -143133,10 +143176,11 @@ paths:
       summary: Update case title
       tags:
         - Case Management
+      x-displayName: Update work item title
       x-menu-order: 11
   /api/v2/cases/{case_id}/unarchive:
     post:
-      description: Unarchive case
+      description: Unarchive work item
       operationId: UnarchiveCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143150,7 +143194,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseEmptyRequest"
-        description: Unarchive case payload
+        description: Unarchive work item payload
         required: true
       responses:
         "200":
@@ -143195,10 +143239,11 @@ paths:
       summary: Unarchive case
       tags:
         - Case Management
+      x-displayName: Unarchive work item
       x-menu-order: 18
   /api/v2/cases/{case_id}/unassign:
     post:
-      description: Unassign case
+      description: Unassign work item
       operationId: UnassignCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143212,7 +143257,7 @@ paths:
                     type: case
             schema:
               $ref: "#/components/schemas/CaseEmptyRequest"
-        description: Unassign case payload
+        description: Unassign work item payload
         required: true
       responses:
         "200":
@@ -143257,10 +143302,11 @@ paths:
       summary: Unassign case
       tags:
         - Case Management
+      x-displayName: Unassign work item
       x-menu-order: 16
   /api/v2/cases/{case_id}/watchers:
     get:
-      description: Returns the list of users who are watching a case. Watchers receive notifications about updates to the case.
+      description: Returns the list of users who are watching a work item. Watchers receive notifications about updates to the work item.
       operationId: ListCaseWatchers
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143300,10 +143346,11 @@ paths:
       summary: List case watchers
       tags:
         - Case Management
+      x-displayName: List work item watchers
       x-menu-order: 64
   /api/v2/cases/{case_id}/watchers/{user_uuid}:
     delete:
-      description: Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.
+      description: Removes a user from the watchers list of a work item. The user no longer receives notifications about updates to the work item.
       operationId: UnwatchCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143329,9 +143376,10 @@ paths:
       summary: Unwatch a case
       tags:
         - Case Management
+      x-displayName: Unwatch a work item
       x-menu-order: 66
     post:
-      description: Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.
+      description: Adds a user (identified by their UUID) as a watcher of a work item. The user receives notifications about subsequent updates to the work item.
       operationId: WatchCase
       parameters:
         - $ref: "#/components/parameters/CaseIDPathParameter"
@@ -143357,6 +143405,7 @@ paths:
       summary: Watch a case
       tags:
         - Case Management
+      x-displayName: Watch a work item
       x-menu-order: 65
   /api/v2/catalog/entity:
     get:
@@ -184451,7 +184500,7 @@ paths:
           - logs_read_data
   /api/v2/maintenance_windows:
     get:
-      description: Returns all configured maintenance windows for event management cases. Maintenance windows define time periods during which case notifications and automation rules are suppressed for cases matching a given query.
+      description: Returns all configured maintenance windows for event management work items. Maintenance windows define time periods during which work item notifications and automation rules are suppressed for work items matching a given query.
       operationId: ListMaintenanceWindows
       responses:
         "200":
@@ -184491,7 +184540,7 @@ paths:
         - Case Management
       x-menu-order: 38
     post:
-      description: Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).
+      description: Creates a maintenance window for event management work items with a name, work item filter query, and time range (start and end).
       operationId: CreateMaintenanceWindow
       requestBody:
         content:
@@ -236847,17 +236896,17 @@ tags:
       **Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using.
     name: "CSM Threats"
   - description: >-
-      **Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.
-
-
-      View and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/).
+      View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/).
     name: Case Management
+    x-displayName: Work Management
   - description: >-
-      View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
+      View and configure custom attributes within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information.
     name: Case Management Attribute
+    x-displayName: Work Management Attribute
   - description: >-
-      View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
+      View and configure work item types within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information.
     name: Case Management Type
+    x-displayName: Work Management Type
   - description: >-
       View and manage change requests within Change Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information.
     name: Change Management

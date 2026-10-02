@@ -1,3 +1,3 @@
 ---
-title: Unarchive case
+title: Unarchive work item
 ---

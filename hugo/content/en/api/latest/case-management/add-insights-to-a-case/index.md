@@ -1,3 +1,3 @@
 ---
-title: Add insights to a case
+title: Add insights to a work item
 ---
