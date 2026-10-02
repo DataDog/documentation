@@ -5,6 +5,9 @@ description: "Display an aggregated value for a given metric query"
 aliases:
 - /graphing/widgets/query_value/
 further_reading:
+- link: "/dashboards/guide/health_status_with_query_value_and_wildcard/"
+  tag: "Guide"
+  text: "Build an Accessible Health-Status Tile"
 - link: "/dashboards/graphing_json/"
   tag: "Documentation"
   text: "Building Dashboards using JSON"

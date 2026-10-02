@@ -3,6 +3,9 @@ title: Wildcard Widget
 description: Build custom visualizations using Vega-Lite grammar for advanced charting and data representation beyond standard widgets.
 widget_type: wildcard
 further_reading:
+- link: "/dashboards/guide/health_status_with_query_value_and_wildcard/"
+  tag: "Guide"
+  text: "Build an Accessible Health-Status Tile"
 - link: "dashboards/guide/getting_started_with_wildcard_widget/"
   tag: "Guide"
   text: "Getting Started with the Wildcard Widget Tutorial"
@@ -176,4 +179,3 @@ Avoid using Wildcard widgets for the following scenarios:
 [17]: /dashboards/graphing_json/widget_json/
 [18]: /dashboards/functions/
 [19]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/dashboard_json
-
