@@ -46,7 +46,7 @@ Datadog skips other indicator types. Patterns, expiration (`valid_until`), and r
 - The Integrations Manage permission to add, change, or delete TAXII servers and collections. The Integrations Read permission is enough to view them.
 - From your provider: the server's API root URL, credentials if the server requires them, and the ID (a UUID) of each collection you want to ingest.
 
-Each organization can have up to 20 collections with polling enabled. TAXII collections do not count toward the [limit of 10 threat intelligence reference tables][5] that Cloud SIEM enriches with.
+Each organization can have up to 20 TAXII collections with polling enabled.
 
 ## Add a TAXII server
 
