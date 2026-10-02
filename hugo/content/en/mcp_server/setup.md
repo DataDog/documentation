@@ -888,7 +888,7 @@ For security, use a scoped API key and application key from a [service account][
 
 ### Adding OAuth clients
 
-You can allow-list your redirect URLs in [{{< ui >}}MCP Server{{< /ui >}}][80] under {{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}.
+To allow-list a redirect URL, open [{{< ui >}}MCP OAuth Redirect URLs{{< /ui >}}][80] in Organization Settings, enter the URL, and select {{< ui >}}Add URL{{< /ui >}}.
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 
