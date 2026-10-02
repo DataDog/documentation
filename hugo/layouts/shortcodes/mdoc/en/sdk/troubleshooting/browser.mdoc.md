@@ -141,18 +141,18 @@ A warning appears when deobfuscation fails for a stack trace. If the stack trace
 
 [1]: /help
 [2]: https://github.com/DataDog/browser-sdk/blob/main/CHANGELOG.md
-[3]: /real_user_monitoring/application_monitoring/browser/setup/#npm
+[3]: /real_user_monitoring/setup/install/?platform=browser
 [4]: /real_user_monitoring/guide/proxy-rum-data/
 [5]: /integrations/content_security_policy_logs/#use-csp-with-real-user-monitoring-and-session-replay
-[6]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#override-default-rum-view-names
-[7]: /real_user_monitoring/application_monitoring/browser/data_collected/?tab=session
+[6]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=browser#manually-track-views
+[7]: /real_user_monitoring/setup/data_collected/?platform=browser&tab=session
 [8]: https://bugs.chromium.org/p/chromium/issues/detail?id=1255707
 [9]: /real_user_monitoring/guide/sampling-browser-plans/
-[10]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[11]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
-[12]: /real_user_monitoring/feature_flag_tracking/setup/?tab=browser
-[13]: /real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
+[10]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=browser#add-global-attributes
+[11]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
+[12]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
+[13]: /real_user_monitoring/setup/install/?platform=browser
 [14]: https://app.datadoghq.com/source-code/setup/rum
 [15]: /real_user_monitoring/guide/debug-symbols
-[16]: /real_user_monitoring/#technical-limitations
-[17]: /real_user_monitoring/rum_without_limits/retention_filters
+[16]: /real_user_monitoring/rum_terms_and_concepts/#technical-limitations
+[17]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/

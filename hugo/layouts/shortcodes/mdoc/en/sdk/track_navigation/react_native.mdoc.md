@@ -1,18 +1,17 @@
-### Manually track RUM views
+Because React Native offers a wide range of libraries to create screen navigation, view tracking isn't automatic by default. To see RUM or Error Tracking sessions populate in Datadog, set up view tracking with one of the following methods.
 
-To manually track RUM Views, provide a `view key`, `view name`, and `action name` at initialization. Depending on your needs, you can choose one of the following strategies:
+## Automatically track views
 
-```javascript
-DdRum.startView('<view-key>', 'View Name', {}, Date.now());
-//…
-DdRum.stopView('<view-key>', { custom: 42 }, Date.now());
-```
+Use one of Datadog's integrations to automatically track views for the following libraries:
 
-## Track view navigation
+-   If you use the [`react-native-navigation`][1] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][2].
+-   If you use the [`react-navigation`][3] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][2].
 
-Because React Native offers a wide range of libraries to create screen navigation, only manual view tracking is supported by default. To see RUM or Error tracking sessions populate in Datadog, you need to implement view tracking.
+If you experience any issues setting up view tracking with `@datadog/mobile-react-navigation`, see this Datadog [example application][4] as a reference.
 
-You can manually start and stop a view using the following `startView()` and `stopView` methods.
+## Manually track views
+
+You can manually start and stop a view using the following `startView()` and `stopView()` methods. Provide a unique view key, a view name, and optional attributes:
 
 ```js
 import {
@@ -30,20 +29,15 @@ DdRum.startView(
 DdRum.stopView('<view-key>', { 'custom.bar': 42 }, Date.now());
 ```
 
-Use one of Datadog's integrations to automatically track views for the following libraries:
-
--   If you use the [`react-native-navigation`][10] library, then add the `@datadog/mobile-react-native-navigation` package and follow the [setup instructions][11].
--   If you use the [`react-navigation`][12] library, then add the `@datadog/mobile-react-navigation` package and follow the [setup instructions][11].
-
-If you experience any issues setting up View tracking with `@datadog/mobile-react-navigation` you can see this Datadog [example application][13] as a reference.
-
 ## Hybrid app monitoring
 
-See [Monitor hybrid React Native applications][19].
+See [Monitor hybrid React Native applications][5].
 
-[1]: https://app.datadoghq.com/rum/application/create
-[10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/react-navigation/react-navigation
-[13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+For the attributes collected for views, see [Data Collected][6].
+
+[1]: https://github.com/wix/react-native-navigation
+[2]: /real_user_monitoring/reference/integrated_libraries/?platform=react_native
+[3]: https://github.com/react-navigation/react-navigation
+[4]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
+[5]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
+[6]: /real_user_monitoring/setup/data_collected/?platform=react_native

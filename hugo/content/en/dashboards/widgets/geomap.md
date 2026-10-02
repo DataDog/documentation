@@ -48,7 +48,7 @@ The Geomap widget visualizes geographic data with shaded regions or points. It c
   [3]: /logs/search_syntax/
   [4]: /logs/logs_to_metrics/
   [5]: /dashboards/querying/
-  [6]: /real_user_monitoring/explorer/search_syntax/
+  [6]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/
   [7]: /service_level_objectives/#searching-slos
   {{% /tab %}}
 
@@ -64,7 +64,7 @@ The Geomap widget visualizes geographic data with shaded regions or points. It c
   [1]: /logs/log_configuration/processors/geoip_parser/
   [2]: /getting_started/tagging/#define-tags
   [3]: /logs/search_syntax/
-  [4]: /real_user_monitoring/explorer/search_syntax/
+  [4]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/
   {{% /tab %}}
   {{< /tabs >}}
 
@@ -107,7 +107,7 @@ This widget can be used with the **[Dashboards API][8]**. See the following tabl
 [3]: /logs/search_syntax/
 [4]: /logs/logs_to_metrics/
 [5]: /dashboards/querying/
-[6]: /real_user_monitoring/explorer/search_syntax/
+[6]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/
 [7]: /dashboards/guide/context-links/
 [8]: /api/latest/dashboards/
 [9]: /dashboards/graphing_json/widget_json/

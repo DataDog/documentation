@@ -7,5 +7,5 @@ Auto-instrumentation for this server has the following limitations. If your use 
   - **Disable content compression** on the upstream server.
   - **Enable TLS origination** on the web server.
 
-[101]: /real_user_monitoring/application_monitoring/browser/setup/client
+[101]: /real_user_monitoring/setup/install/?platform=browser
 [102]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/

@@ -81,7 +81,7 @@ Add the most popular sections of your application to a new or existing browser t
 
 [1]: https://app.datadoghq.com/synthetics/test-coverage/browser
 [2]: /synthetics/guide/explore-rum-through-synthetics/
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=browser
 [4]: /synthetics/browser_tests/
 [5]: /real_user_monitoring/guide/send-rum-custom-actions/
 [6]: /synthetics/metrics/

@@ -842,7 +842,7 @@ See [Connect Session Replay to your third-party tools][30].
 {% /if %}
 <!-- end Browser -->
 
-[1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
+[1]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios
 [2]: /session_replay/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
 [4]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
@@ -861,20 +861,20 @@ See [Connect Session Replay to your third-party tools][30].
 [17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
-[20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
+[20]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android#instrument-your-web-views
 [21]: /session_replay/setup_and_configuration/?platform=browser#setup
 [22]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
-[23]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
-[24]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
-[25]: /real_user_monitoring/application_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
+[23]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios#instrument-your-web-views
+[24]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=kotlin_multiplatform#instrument-your-web-views
+[25]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=react_native#instrument-your-web-views
 [26]: /session_replay/setup_and_configuration/?platform=browser#setup
 [27]: https://reactnative.dev/architecture/landing-page
-[28]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum
+[28]: https://docs.datadoghq.com/real_user_monitoring/setup/install/?platform=flutter
 [29]: https://pub.dev/packages/datadog_session_replay
 [30]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
 [30]: /real_user_monitoring/browser/setup/
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
-[34]: /real_user_monitoring/application_monitoring/maui/setup
+[34]: /real_user_monitoring/setup/install/?platform=maui
 [35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products

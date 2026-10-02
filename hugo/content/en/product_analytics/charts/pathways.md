@@ -56,6 +56,6 @@ You can refine a pathways chart in various ways to zero in on the paths you want
 ## Further reading
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/search_syntax/#wildcards
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/search_syntax/#wildcards
 [2]: /product_analytics/charts/funnel_analysis/
 

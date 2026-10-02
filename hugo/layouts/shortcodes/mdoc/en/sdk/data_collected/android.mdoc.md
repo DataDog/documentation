@@ -13,7 +13,7 @@ There are additional [attributes that are specific to a given event type](#event
 
 | Event Type     | Retention | Description     |
 |----------------|-----------|-------------------|
-| Session  | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background. |
+| Session  | 30 days   | A session represents a real user's activity on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background. |
 | View     | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `onActivityResumed` and `onActivityPaused` callbacks are called through the `ActivityLifecycleCallbacks` interface. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                     |
 | Resource  | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                           |
 | Error     | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                            |
@@ -277,17 +277,17 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 
 **Note:** If your application supports [Direct Boot mode][13], data captured before the device is unlocked won't be captured, since the credential encrypted storage won't be available yet.
 
-[1]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#custom-actions
-[2]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#automatically-track-views
-[3]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#custom-views
-[4]: /real_user_monitoring/application_monitoring/android/setup?tab=rum#track-background-events
-[5]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#automatically-track-views
-[6]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#enrich-user-sessions
-[7]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#track-custom-global-attributes
+[1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=android#manually-track-actions-and-send-custom-events
+[2]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#manually-track-views
+[4]: /real_user_monitoring/setup/install/?platform=android
+[5]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=android#automatically-track-views
+[6]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android
+[7]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=android#add-global-attributes
 [8]: /getting_started/tagging/unified_service_tagging/
 [9]: /data_security/real_user_monitoring/#geolocation
-[10]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#track-user-sessions
+[10]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=android
 [11]: /data_security/real_user_monitoring/#ip-address
 [12]: https://source.android.com/security/app-sandbox
 [13]: https://developer.android.com/training/articles/direct-boot
-[14]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
+[14]: /real_user_monitoring/setup/enable_rum/advanced_configuration/?platform=android#initialization-parameters

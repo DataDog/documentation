@@ -16,7 +16,7 @@ There are additional [attributes specific to a given event type](#event-specific
 | Resource  | 15 days   | A resource event is generated for images, XHR, Fetch, CSS, or JS libraries loaded on a web page. It includes detailed loading timing information.                                                                                                              |
 | Long Task | 15 days   | A long task event is generated for any task in the browser that blocks the main thread for more than 50ms.                                                                                                                                                    |
 | Error     | 30 days   | RUM collects every frontend error emitted by the browser.                                                                                                                                                                                                     |
-| Action    | 30 days   | RUM action events track user interactions during a user journey and can also be manually sent to monitor custom user actions.                                                                                                                                 |
+| Action    | 30 days   | RUM action events track user interactions during a user session and can also be manually sent to monitor custom user actions.                                                                                                                                 |
 
 The following diagram illustrates the RUM event hierarchy:
 
@@ -211,7 +211,7 @@ Source errors include code-level information about the error. For more informati
 [1]: /standard-attributes/?product=browser
 [2]: /data_security/real_user_monitoring/#ip-address
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#how-loading-time-is-calculated
+[4]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#how-loading-time-is-calculated
 [5]: https://www.w3.org/TR/paint-timing/#sec-terminology
 [6]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceTiming/domInteractive
 [7]: https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event

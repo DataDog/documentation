@@ -1,20 +1,36 @@
 ---
 title: RUM & Session Replay
-description: "Visualize, observe, and analyze the performance of your front-end applications as seen by your users."
+description: "Visualize, observe, and analyze the performance of your frontend applications as seen by your users."
 disable_sidebar: true
 aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
+  - /real_user_monitoring/rum_without_limits/
 further_reading:
-- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+- link: "/real_user_monitoring/setup/"
   tag: "Documentation"
-  text: "RUM Browser Data Collected"
+  text: "Set Up RUM"
+- link: "/real_user_monitoring/rum_terms_and_concepts/"
+  tag: "Documentation"
+  text: "RUM Terms and Concepts"
+- link: "/real_user_monitoring/setup/data_collected/"
+  tag: "Documentation"
+  text: "RUM Data Collected"
+- link: "/real_user_monitoring/guide/retention_filter_best_practices/"
+  tag: "Guide"
+  text: "Retention Filter Best Practices"
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"
   tag: "Learning Center"
   text: "Intro to Real User Monitoring (RUM)"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to gain insights through Real User Monitoring"
+- link: "https://learn.datadoghq.com/courses/rum-retention-filters"
+  tag: "Learning Center"
+  text: "Interactive Lab: RUM Retention Filters"
+- link: "https://www.datadoghq.com/blog/rum-without-limits/"
+  tag: "Blog"
+  text: "Introducing RUM without Limits™: Capture everything, keep what matters"
 - link: "https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/"
   tag: "Blog"
   text: "Understand session replays faster with AI summaries and smart chapters"
@@ -80,116 +96,95 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 
 * **Performance**: Track the performance of web pages, mobile application screens, user actions, network requests, and your frontend code.
 * **Error Management**: Monitor the ongoing bugs and issues and track them over time and versions.
-* **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
+* **Analytics / Usage**: Understand who is using your application (country, device, OS), follow individual users across sessions, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-### Session definition
-
-A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
-
-A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
-
-### Technical limitations
-
-| Property                                   | Limitation               |
-| ------------------------------------------ | ------------------------ |
-| Maximum duration of a session              | 4 hours                  |
-| Timeout of a session                       | 15 minutes of inactivity |
-| Maximum number of events per session       | 10 million              |
-| Maximum number of attributes per event     | 1,000                    |
-| Maximum attribute depth per event          | 20                       |
-| Maximum event size                         | 1 MB                     |
-| Maximum intake payload size                | 5 MB                     |
-| Maximum source maps and mapping files size | 500 MB per file          |
-| Maximum dSYM files size                    | 2 GB per file            |
-| Maximum delay at ingestion                 | 24 hours                 |
-
-If an event goes beyond any of the technical limitations listed above, it is rejected by the Datadog intake.
+For definitions of sessions, views, actions, and other RUM concepts, and for the technical limits that apply to RUM data, see [RUM Terms and Concepts][22].
 
 ## What is Session Replay?
 
-Datadog's *Session Replay* allows you to capture and visually replay the web browsing experience of your users.
+Datadog's *Session Replay* allows you to capture and visually replay the user experience in your web or mobile application.
 
-Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your web application's usage patterns and design pitfalls.
+Combined with RUM performance data, Session Replay is beneficial for error identification, reproduction, and resolution, and provides insights into your application's usage patterns and design pitfalls.
 
-## Get started
+## RUM without Limits
 
-Select an application type to start collecting RUM data:
+{{< img src="real_user_monitoring/rum_without_limits/rum-without-limits-overview.png" alt="Estimated usage metrics details side panel" style="width:90%" >}}
 
-{{< card-grid card_width="210" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/browser/" src="integrations_logos/javascript_large.svg" alt="browser" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/ios_large.svg" alt="ios" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup" src="integrations_logos/react-native_large.svg" alt="react native" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/flutter/setup" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
-  {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
-{{< /card-grid >}}
+<div class="alert alert-info">RUM without Limits is automatically enabled for customers with non-committed RUM plans. Reach out to your account team or <a href="/help/">Datadog support</a> to enable this feature.</div>
 
-### Capabilities and platform support
+RUM without Limits gives you flexibility over your RUM session volumes by decoupling session data ingestion from retention. This enables you to:
 
-**Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.
+- Dynamically set [retention filters][23] from the Datadog UI without up-front sampling decisions or code changes
+- Retain sessions with errors or performance issues and discard less significant ones, such as ones with few user interactions
 
-The following table shows which RUM capabilities are supported on each platform:
+Even if you retain only a fraction of your sessions, Datadog provides [performance metrics][24] for all ingested sessions. This gives you an accurate, long-term overview of application health and performance.
 
-| Feature                               | Browser | Android | iOS |   Flutter   | React Native | Roku | KMP | Unity |  Notes |
-| ------------------------------------- | --------|---------|---------|---------|--------------|------|-----|-------|--------|
-| Send logs to Datadog  | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Distributed tracing of network requests | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - **Roku** is only able to track some types of HTTP requests.<br> - **Unity** uses a wrapper around `UnityWebRequest` to perform request tracking. |
-| Track Views and Actions (RUM) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | - All actions tracked in **Flutter Web** are recorded as `custom`. <br> - **Roku** and **Unity** support only manual action tracking. |
-| Feature Flags tracking and release tracking | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
-| Error tracking and source mapping | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  |
-| Crash tracking, symbolication, and deobfuscation | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |  |
-| Stop sessions (Kiosk Monitoring) | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}}  |  |
-| Track Events in WebViews |  | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
-| Monitor platform-specific vitals | {{< X >}} | {{< X >}}  | {{< X >}}  | {{< X >}} | {{< X >}} |  | {{< X >}} |  |  |
-| Global context/attribute tracking in Logs  | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} | {{< X >}} |  |
-| Client side tracing |  | {{< X >}} |  {{< X >}}|  |  |  |  |  |  |  |
-| Session Replay | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | {{< X >}} |  | **Flutter** Session Replay is in Preview. |
-| Frustration signals | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |  | Only partially supported for all **mobile** and **Roku** devices. |
+**Note**: In RUM without Limits mode, you can only use default filters on the [Performance Monitoring Summary page][1]. This lets you see the entire dataset and prevents skewed performance metrics, because the data is sampled and there are fewer tags available than event attributes.
 
-## Supported endpoints for SDK domains
+To start collecting RUM data, follow the [setup instructions][15].
 
-All Datadog SDKs traffic is transmitted over SSL (default 443) to the following domains:
+### Set up RUM without Limits for new applications
 
-| Site | Site URL                                      |
-|------|-----------------------------------------------|
-| US1  | `https://browser-intake-datadoghq.com`        |
-| US3  | `https://browser-intake-us3-datadoghq.com`    |
-| US5  | `https://browser-intake-us5-datadoghq.com`    |
-| EU1  | `https://browser-intake-datadoghq.eu`         |
-| US1-FED  | `https://browser-intake-ddog-gov.com`     |
-| US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
-| AP1  | `https://browser-intake-ap1-datadoghq.com`    |
-| AP2  | `https://browser-intake-ap2-datadoghq.com`    |
-| UK1  | `https://browser-intake-uk1-datadoghq.com`    |
+When you [install the SDK][25]:
 
-### Additional endpoints for Browser Profiling
+1. Set `sessionSampleRate` to 100%. Datadog recommends this rate for optimal visibility and metrics accuracy.
+2. Choose a `sessionReplaySampleRate` that meets your observability needs.
+3. For applications with [APM integration enabled][5], configure the percentage of sessions for which backend traces are ingested with `traceSampleRate` (Browser), `traceSampler` (Android), or `sampleRate` (iOS).
+4. Enable `traceContextInjection: sampled` to allow backend SDKs to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
 
-When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
+   <div class="alert alert-danger">Steps 1, 3, and 4 may impact your APM trace ingestion. To keep ingested span volumes stable, set <code>traceSampleRate</code> to the previously configured <code>sessionSampleRate</code>. For example, if you had <code>sessionSampleRate</code> set to 10% and you increase it to 100% for RUM without Limits, decrease <code>traceSampleRate</code> from 100% to 10% to ingest the same amount of traces.</div>
 
-| Site | Quota API URL                                             |
-|------|-----------------------------------------------------------|
-| US1  | `https://quota.browser-intake-datadoghq.com`             |
-| US3  | `https://quota.browser-intake-us3-datadoghq.com`         |
-| US5  | `https://quota.browser-intake-us5-datadoghq.com`         |
-| EU1  | `https://quota.browser-intake-datadoghq.eu`              |
-| US1-FED  | `https://quota.browser-intake-ddog-gov.com`          |
-| US2-FED  | `https://quota.browser-intake-us2-ddog-gov.com`      |
-| AP1  | `https://quota.browser-intake-ap1-datadoghq.com`         |
-| AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
-| UK1  | `https://quota.browser-intake-uk1-datadoghq.com`         |
+5. Deploy your application to apply the configuration.
 
-If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
+### Set up RUM without Limits for existing applications
+
+Existing RUM users must redeploy applications to fully use RUM without Limits. Set the session sample rate to 100% for all applications.
+
+#### Step 1: Adjust sample rates
+
+If you already collect replays, increasing the session sample rate requires reducing the replay sample rate to collect the same number of replays. The replay sample rate is applied on top of the session sample rate.
+
+Before:
+
+```javascript
+   sessionSampleRate: 20,
+   sessionReplaySampleRate: 10,
+```
+
+After:
+
+```javascript
+   sessionSampleRate: 100,
+   sessionReplaySampleRate: 2,
+```
+
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][26].
+1. Click the application you want to migrate.
+1. Click the {{< ui >}}SDK Configuration{{< /ui >}} tab.
+1. Set `sessionSampleRate` to 100%.
+1. Set `sessionReplaySampleRate` to a rate that results in the same number of replays as before you increased the session sample rate.
+1. Use the generated code snippet to update your source code, and redeploy your applications to apply the new configuration.
+
+#### Step 2: Adjust tracing
+
+Increasing `sessionSampleRate` can increase the number of ingested APM spans, because the RUM SDK can override the sampling decisions of backend traces to correlate them with sessions.
+
+To avoid this, set `traceSampleRate` to a percentage below 100% (the previously set `sessionSampleRate`), and set `traceContextInjection: sampled` to allow backend SDKs to make their own sampling decisions for sessions where the RUM SDK decides not to keep the trace.
+
+#### Step 3: Create retention filters
+
+On mobile applications, many versions can be in use at the same time. Older versions don't necessarily send 100% of sessions, so creating new retention filters reduces the data available in Datadog for those versions.
+
+Datadog recommends creating the same retention filters for all application versions, whether or not their SDK sample rate is set to 100%. All valuable sessions are still retained, even if some sessions from older versions aren't ingested.
+
+For suggested retention filters and use cases, see [Retention Filter Best Practices][27].
 
 ## Explore Datadog RUM
 
 Access RUM by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][1].
 
-Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
+Select an application from the top navigation, or follow the [setup instructions][15] to add your first application.
 
 {{< img src="real_user_monitoring/rum-performance-application-selector.png" alt="Select a RUM application" >}}
 
@@ -256,51 +251,29 @@ Watch [browser recordings][12] of real users interacting with your website and s
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
 
 
-## Permissions
-
-By default, all users can change an application's RUM configuration.
-
-Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
-1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
-1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
-1. Click {{< ui >}}Restrict Access{{< /ui >}}.
-1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
-1. Click {{< ui >}}Add{{< /ui >}}.
-1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
-1. Click {{< ui >}}Save{{< /ui >}}.
-
-**Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
-
-You must have edit access to restore general access to a restricted application. Complete the following steps:
-1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
-1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
-1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
-1. Click {{< ui >}}Save{{< /ui >}}.
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/rum/performance-monitoring
-[2]: /real_user_monitoring/platform/dashboards/
-[3]: /real_user_monitoring/explorer/visualize/
+[2]: /real_user_monitoring/administer_and_extend_rum/dashboards/
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/visualize/
 [4]: /monitors/types/real_user_monitoring/
-[5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
-[6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
-[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
-[12]: /session_replay/
+[5]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/
+[6]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
+[7]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=browser#event-timings-and-core-web-vitals
+[8]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=ios#mobile-vitals
+[9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=android#mobile-vitals
+[10]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=ios
+[11]: /real_user_monitoring/enrich_rum_data/track_navigation_across_web_views/?platform=android
+[12]: /session_replay/browser/
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
-[15]: /real_user_monitoring/application_monitoring/browser/setup/
-[16]: /real_user_monitoring/application_monitoring/
+[15]: /real_user_monitoring/setup/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
-[18]: /account_management/rbac/
-[19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
-[20]: /real_user_monitoring/guide/proxy-rum-data
-[21]: /integrations/content_security_policy_logs
+[22]: /real_user_monitoring/rum_terms_and_concepts/
+[23]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[24]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
+[25]: /real_user_monitoring/setup/install/?platform=browser
+[26]: https://app.datadoghq.com/rum/list
+[27]: /real_user_monitoring/guide/retention_filter_best_practices/

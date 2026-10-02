@@ -119,14 +119,10 @@ With respect to URLs, you have the option to track pageviews manually to remove 
 You can also transmit all RUM events through your own (proxy) server so that end user devices never directly communicate with Datadog.
 
 #### IP address
-After you've initialized your RUM application, you can choose whether or not you want to include IP or geolocation data from the {{< ui >}}User Data Collection{{< /ui >}} tab:
-
-{{< img src="data_security/data-security-rum-privacy-compliance-user-data-collection-1.png" alt="You can include or exclude geolocation and client IP data from the RUM application management page" style="width:100%;" >}}
-
-After you disable the collection of IP data, the change is applied immediately. Any events collected prior to disabling does not remove the IP data. It is performed on the backend, which means the Browser SDK is still sending data, but IP addresses are omitted by Datadog backend pipelines and dropped at processing time.
+{{< partial name="real_user_monitoring/geoip_enrichment.html" >}}
 
 #### Geolocation
-In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the {{< ui >}}Collect geolocation data{{< /ui >}} box, the change is applied immediately. Any events collected prior to disabling does not remove corresponding geolocation data. Data omission is done at the backend level, which means the Browser SDK is still sending data, but geolocation data is omitted by Datadog backend pipelines and dropped at processing time.
+In addition to removing client IPs, you can also choose to disable the collection of geolocation (country, city, county), or GeoIP, from all future collected data. If you uncheck the {{< ui >}}Collect geolocation data{{< /ui >}} box, the change is applied immediately. Disabling it doesn't remove geolocation data from events collected before the change. Data omission is done at the backend level, which means the SDK is still sending data, but geolocation data is omitted by Datadog backend pipelines and dropped at processing time.
 
 ### Proactively search for sensitive data with Sensitive Data Scanner
 [Sensitive Data Scanner][17] allows you to proactively search and scrub sensitive data upon ingestion by Datadog. RUM events are scanned on the stream before any data is stored within Datadog. The tool has the power to scrub, hash, or partially redact PII data before it is stored. It works by applying out-of-the-box or customer-developed pattern matching rules. If you've enabled this feature, you can find it on the [{{< ui >}}Manage Sensitive Data{{< /ui >}} page][18].
@@ -139,18 +135,18 @@ See [privacy options specific to Session Replay][19]. Masking in Session Replay 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://www.datadoghq.com/privacy/
-[2]: /real_user_monitoring/application_monitoring/browser/setup/#configuration
+[2]: /real_user_monitoring/setup/install/?platform=browser
 [3]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [4]: /real_user_monitoring/guide/identify-bots-in-the-ui/#filter-out-bot-sessions-on-intake
-[5]: /real_user_monitoring/explorer/search/
+[5]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [6]: /real_user_monitoring/application_monitoring/browser/tracking_user_actions/#declare-a-name-for-click-actions
 [7]: /real_user_monitoring/guide/enrich-and-control-rum-data/?tab=event#event-and-context-structure
-[8]: /real_user_monitoring/ios/advanced_configuration/?tab=swift#modify-or-drop-rum-events
-[9]: /real_user_monitoring/application_monitoring/android/advanced_configuration/?tab=kotlin#modify-or-drop-rum-events
-[10]: /real_user_monitoring/application_monitoring/flutter/advanced_configuration/#modify-or-drop-rum-events
-[11]: /real_user_monitoring/reactnative/advanced_configuration/#modify-or-drop-rum-events
+[8]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios#modify-rum-events
+[9]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=android#modify-rum-events
+[10]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=flutter#modify-rum-events
+[11]: /real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=react_native#modify-rum-events
 [12]: /real_user_monitoring/guide/proxy-rum-data/?tab=npm
-[13]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#user-session
+[13]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
 [14]: /help/
 [15]: /account_management/rbac/permissions/#real-user-monitoring
 [16]: /session_replay/privacy_options?platform=browser#override-an-html-element

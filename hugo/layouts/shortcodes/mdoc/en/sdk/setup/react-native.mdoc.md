@@ -4,7 +4,7 @@ React Native setup instructions.
 
 {% stepper %}
 
-{% step title="Install the SDK" %}
+{% step title="Add the dependencies" %}
 
 To install with npm, run:
 
@@ -47,24 +47,7 @@ The Datadog React Native SDK requires you to have `compileSdkVersion = 31` or hi
 
 {% /step %}
 
-{% step title="Specify application details in the UI" %}
-
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][7].
-2. Choose `react-native` as the application type.
-3. Provide an application name to generate a unique Datadog application ID and client token.
-4. To disable automatic user data collection for client IP or geolocation data, uncheck the boxes for those settings.
-
-{% alert level="info" %}
-If you've purchased Error Tracking as a standalone product (without RUM), navigate to [**Error Tracking** > **Settings** > **Browser and Mobile** > **Add an Application**][8] instead.
-{% /alert %}
-
-For data security, you must use a client token. If you used only [Datadog API keys][9] to configure the `@datadog/mobile-react-native` library, they would be exposed client-side in the React Native application's code.
-
-For more information about setting up a client token, see the [Client Token documentation][10].
-
-{% /step %}
-
-{% step title="Initialize the library with application context" %}
+{% step title="Initialize the SDK" %}
 
 {% site-region region="us" %}
 
@@ -99,8 +82,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -172,8 +155,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -245,8 +228,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -318,8 +301,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -391,8 +374,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -464,8 +447,8 @@ const config = new DatadogProviderConfiguration(
             trackResources: true,
             // Track errors
             trackErrors: true,
-            // Optional: Sample sessions, for example: 80% of sessions are sent to Datadog. Default is 100%.
-            sessionSampleRate: 80,
+            // Optional: Session sample rate. Default is 100 (all sessions).
+            sessionSampleRate: 100,
             // Optional: Enable or disable native crash reports.
             nativeCrashReportEnabled: true,
             // Optional: Sample tracing integrations for network calls between your app and your backend
@@ -504,11 +487,11 @@ export default function App() {
 
 {% /site-region %}
 
-#### Sample session rates
+You can adjust the session sample rate with the `sessionSampleRate` parameter, but Datadog recommends using [retention filters](/real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/) to control retained volume. For details, see [Manage Sessions](/real_user_monitoring/setup/enable_rum/manage_sessions/?platform=react_native).
 
-To control the data your application sends to Datadog RUM, you can specify a sampling rate for RUM sessions while [initializing the RUM React Native SDK](#step-3--initialize-the-library-with-application-context) as a percentage between 0 and 100. You can specify the rate with the `config.sessionSamplingRate` parameter.
+{% /step %}
 
-#### Set tracking consent (GDPR compliance)
+{% step title="Configure tracking consent (GDPR compliance)" %}
 
 To be compliant with the GDPR regulation, the React Native SDK requires the tracking consent value at initialization.
 
@@ -526,47 +509,25 @@ For example, if the current tracking consent is `.PENDING`:
 - If you change the value to `.NOTGRANTED`, the React Native SDK wipes all current data and does not collect future data.
 
 {% /step %}
+
+{% step title="Enable RUM to start sending data" %}
+
+RUM is enabled when you pass a `rumConfiguration` to the SDK configuration. To configure what RUM collects, such as views, user interactions, and network requests, continue to [Enable the Datadog RUM Module](/real_user_monitoring/setup/enable_rum/?platform=react_native).
+
+{% /step %}
 {% /stepper %}
 
-### User interactions tracking
+## CodePush integration (optional)
 
-The preferred way to set up interaction tracking is by using the Datadog React Native Babel Plugin (`@datadog/mobile-react-native-babel-plugin`). This plugin automatically enriches React components with contextual metadata, improving interaction tracking accuracy and enabling a range of configuration options.
+If you're deploying updates with [CodePush][1], see the [CodePush setup documentation][2] for additional configuration steps.
 
-#### Installation
+## Sending data when device is offline
 
-To install with npm, run:
+The React Native SDK helps make data available when your user device is offline. In cases of low-network areas, or when the device battery is too low, all events are first stored on the local device in batches. They are sent as soon as the network is available, and the battery is high enough so the React Native SDK does not impact the end user's experience. If the network is not available with your application running in the foreground, or if an upload of data fails, the batch is kept until it can be sent successfully.
 
-```shell
-npm install @datadog/mobile-react-native-babel-plugin
-```
+This means that even if users open your application while offline, no data is lost.
 
-To install with Yarn, run:
+**Note**: The data on the disk is automatically deleted if it gets too old so the React Native SDK does not use too much disk space.
 
-```shell
-yarn add @datadog/mobile-react-native-babel-plugin
-```
-
-#### Configure Babel
-
-Add the plugin to your Babel configuration file (`babel.config.js`, `.babelrc`, or similar):
-
-```javascript
-module.exports = {
-  presets: ['module:@react-native/babel-preset'],
-  plugins: ['@datadog/mobile-react-native-babel-plugin']
-};
-```
-
-After the plugin is installed and configured, it automatically tracks interactions on standard React Native components. No additional code changes are required for basic usage.
-
-### CodePush integration (optional)
-
-If you're deploying updates with [CodePush][11], see the [CodePush setup documentation][12] for additional configuration steps.
-
-[7]: https://app.datadoghq.com/rum/application/create
-[8]: https://app.datadoghq.com/error-tracking/settings/setup/client/
-[9]: /account_management/api-app-keys/#api-keys
-[10]: /account_management/api-app-keys/#client-tokens
-[11]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
-[12]: /real_user_monitoring/application_monitoring/react_native/setup/codepush
-
+[1]: https://docs.microsoft.com/en-us/appcenter/distribution/codepush/
+[2]: /real_user_monitoring/application_monitoring/react_native/setup/codepush

@@ -2,9 +2,7 @@
 title: React Native Crash Reporting and Error Tracking
 description: Set up Error Tracking for your React Native projects.
 aliases:
-- /real_user_monitoring/error_tracking/reactnative
 - /real_user_monitoring/mobile_and_tv_monitoring/reactnative/error_tracking
-- /real_user_monitoring/error_tracking/mobile/reactnative/
 - /real_user_monitoring/mobile_and_tv_monitoring/react_native/error_tracking
 further_reading:
 - link: real_user_monitoring/error_tracking/
@@ -40,27 +38,7 @@ Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 If you have not set up the React Native SDK yet, follow the [in-app setup instructions][2] or see the [React Native setup documentation][3].
 
-### Add Crash Reporting
-
-Update your initialization snippet to enable native JavaScript crash reporting:
-
-```javascript
-const config = new DatadogProviderConfiguration(
-    '<CLIENT_TOKEN>',
-    '<ENVIRONMENT_NAME>',
-    {
-        rumConfiguration: {
-            applicationId: '<APPLICATION_ID>',
-            trackInteractions: true,
-            trackResources: true,
-            trackErrors: true, // <-- Enable JavaScript Crash Reporting
-            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
-        },
-        logsConfiguration: {},
-        traceConfiguration: {}
-    }
-);
-```
+To enable JavaScript and native crash reporting, see [Track errors and crashes][19].
 
 ## Get deobfuscated stack traces
 
@@ -517,3 +495,4 @@ if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
 [16]: https://app.datadoghq.com/source-code/setup/rum
 [17]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/react-native#inject-debug-id
 [18]: /error_tracking/frontend/mobile/expo/
+[19]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=react_native

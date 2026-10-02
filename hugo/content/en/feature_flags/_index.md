@@ -45,7 +45,7 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 Feature flags enable you to toggle features on and off, conduct A/B/n testing, gradually roll out new functionality, and personalize user experiences without the need for extensive code deployments. With feature flags, you can empower your team to make dynamic changes, iterate rapidly, and deliver enhanced user experiences.
 
-If your flags are managed by LaunchDarkly, Split, ConfigCat, or another provider and you only want Datadog to record evaluated variants in RUM, see [RUM Feature Flag Tracking](/real_user_monitoring/feature_flag_tracking/) instead.
+If your flags are managed by LaunchDarkly, Split, ConfigCat, or another provider and you only want Datadog to record evaluated variants in RUM, see [RUM Feature Flag Tracking](/real_user_monitoring/enrich_rum_data/track_feature_flags/) instead.
 
 Use a client-side SDK when the flag is evaluated in a browser, mobile app, or game client. Use a server-side SDK when the flag is evaluated in a backend service. Supported server SDK versions receive configuration directly from Datadog by default or through Agent Remote Configuration when explicitly selected. See [Server SDK Configuration Sources][1].
 

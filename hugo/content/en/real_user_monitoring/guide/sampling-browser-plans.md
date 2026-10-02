@@ -1,5 +1,5 @@
 ---
-title: Configure Your Setup For Browser RUM and Browser RUM & Session Replay Sampling
+title: Configure Your Setup for Browser RUM and Browser RUM & Session Replay Sampling
 
 description: Learn how to customize your Browser RUM and Browser RUM & Session Replay sampling configuration.
 aliases:

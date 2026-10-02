@@ -1,53 +1,10 @@
-### Custom actions
+## Automatically track user interactions
 
-In addition to [tracking actions automatically](#automatically-track-user-actions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
-
-To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your `UIViewController`:
-
-let rum = RUMMonitor.shared()
-
-@IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
-    rum.addAction(
-        type: .tap,
-        name: sender.currentTitle ?? ""
-    )
-}
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-- (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
-    NSString *name = sender.currentTitle ? sender.currentTitle : @"";
-    [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
-}
-```
-
-{% /tab %}
-{% /tabs %}
-
-**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Automatically track user actions
-
-#### UIKit
+### UIKit
 
 To automatically track user tap actions with UIKit, set the `uiKitActionsPredicate` option when enabling RUM.
 
-#### SwiftUI
+### SwiftUI
 
 To automatically track user tap actions in SwiftUI, enable the `swiftUIActionsPredicate` option when enabling RUM.
 
@@ -102,7 +59,7 @@ DDDefaultSwiftUIRUMActionsPredicate *swiftUIActionsPredicate = [[DDDefaultSwiftU
 {% /tab %}
 {% /tabs %}
 
-#### Action reporting by iOS version
+### Action reporting by iOS version
 
 The table below shows how iOS 17 and iOS 18 report different user interactions.
 
@@ -113,5 +70,74 @@ The table below shows how iOS 17 and iOS 18 report different user interactions.
 | Menu             | SwiftUI_Menu (and its items as _UIContextMenuCell)| SwiftUI_Menu (and its items as _UIContextMenuCell) |
 | Link             | SwiftUI_Button                                    | SwiftUI_Unidentified_Element         |
 
-[1]: https://app.datadoghq.com/rum/application/create
-[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
+## Manually track actions and send custom events
+
+In addition to [tracking actions automatically](#automatically-track-user-interactions), you can track specific custom user actions (taps, clicks, and scrolls) with the `addAction(type:name:)` API.
+
+To manually register instantaneous RUM actions such as `.tap` on `RUMMonitor.shared()`, use `.addAction(type:name:)`. For continuous RUM actions such as `.scroll`, use `.startAction(type:name:)` or `.stopAction(type:)`.
+
+For example:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogRUM
+
+// in your `UIViewController`:
+
+let rum = RUMMonitor.shared()
+
+@IBAction func didTapDownloadResourceButton(_ sender: UIButton) {
+    rum.addAction(
+        type: .tap,
+        name: sender.currentTitle ?? ""
+    )
+}
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+- (IBAction)didTapDownloadResourceButton:(UIButton *)sender {
+    NSString *name = sender.currentTitle ? sender.currentTitle : @"";
+    [[DDRUMMonitor shared] addActionWithType:DDRUMActionTypeTap name:name attributes:@{}];
+}
+```
+
+{% /tab %}
+{% /tabs %}
+
+**Note**: When using `.startAction(type:name:)` and `.stopAction(type:)`, the action `type` must be the same. This is necessary for the RUM iOS SDK to match an action start with its completion.
+
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
+
+### Instrument SwiftUI tap actions
+
+You can also instrument tap actions of `SwiftUI` applications manually. The instrumentation also works with hybrid `UIKit` and `SwiftUI` applications.
+
+{% alert level="warning" %}
+Using `.trackRUMTapAction(name:)` for `SwiftUI` controls inside a `List` can break its default gestures. For example, it may disable the `Button` action or break `NavigationLink`. To track taps in a `List` element, use the `addAction(type:name:)` API described above instead.
+{% /alert %}
+
+To instrument a tap action on a `SwiftUI.View`, add the following method to your view declaration:
+
+```swift
+import SwiftUI
+import DatadogRUM
+
+struct BarView: View {
+
+    var body: some View {
+        Button("BarButton") {
+            // Your button action here
+        }
+        .trackRUMTapAction(name: "Bar")
+    }
+}
+```
+
+For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=ios#action-attributes).
+
+[1]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift

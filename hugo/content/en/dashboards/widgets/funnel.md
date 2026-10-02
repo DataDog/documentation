@@ -44,7 +44,7 @@ This widget can be used with the [Dashboards API][3]. See the following table fo
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/explorer/search/
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/search/
 [2]: /product_analytics/journeys/funnel_analysis
 [3]: /api/latest/dashboards/
 [4]: /dashboards/graphing_json/widget_json/

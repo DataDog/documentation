@@ -69,7 +69,7 @@ For details, see the product-specific Error Tracking documentation:
 
 [1]: /tracing/error_tracking#setup
 [2]: /logs/error_tracking#setup
-[3]: /real_user_monitoring/error_tracking#setup
+[3]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/#setup
 [4]: /error_tracking/backend/exception_replay
 [5]: /error_tracking/explorer
 [6]: /error_tracking/frontend/browser

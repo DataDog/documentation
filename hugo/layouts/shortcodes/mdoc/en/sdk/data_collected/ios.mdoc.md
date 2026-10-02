@@ -13,7 +13,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 | Event Type | Retention | Description                         |
 |------------|-----------|-------------------------------------|
-| Session    | 30 days   | A session represents a real user journey on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background.|
+| Session    | 30 days   | A session represents a real user's activity on your mobile application. It begins when the user launches the application, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the application is killed by the OS, you can reset the session while the application is in the background.|
 | View       | 30 days   | A view represents a unique screen (or screen segment) on your mobile application. A view starts and stops when the `viewDidAppear(animated:)` and `viewDidDisappear(animated:)` callbacks on the `UIViewController` class are notified. Individual `UIViewControllers` are classified as distinct views. While a user stays on a view, RUM event attributes (Errors, Resources, Actions) get attached to the view with a unique `view.id`.                           |
 | Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your mobile application. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                       |
 | Error      | 30 days   | An error represents an exception or crash emitted by the mobile application attached to the view it is generated in.                                                                                                                                                                                        |
@@ -46,7 +46,7 @@ By default, RUM collects common attributes for all events and event-specific att
 |------------------|---------|------------------------------------------------------------------------------------|
 | `date`           | integer | Start of the event in milliseconds from epoch.                                               |
 | `type`           | string  | The type of the event (for example, `view` or `resource`).                         |
-| `service`        | string  | The [unified service name][7] for this application used to correlate user sessions. |
+| `service`        | string  | The [unified service name][11] for this application used to correlate user sessions. |
 | `application.id` | string  | The Datadog application ID.                                                        |
 | `application.name` | string  | The Datadog application name.                                                        |
 
@@ -273,14 +273,13 @@ Network errors include information about failing HTTP requests. The following fa
 
 Before data is uploaded to Datadog, it is stored in cleartext in the cache directory (`Library/Caches`) of your [application sandbox][10], which can't be read by any other app installed on the device.
 
-[1]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#custom-actions
-[2]: https://developer.apple.com/documentation/uikit/app_and_environment/responding_to_the_launch_of_your_app/about_the_app_launch_sequence
-[3]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/?tab=swift#automatically-track-views
-[4]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#instrument-views
-[5]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#track-background-events
-[6]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#enrich-user-sessions
-[7]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#track-user-sessions
+[1]: /real_user_monitoring/setup/enable_rum/track_user_interactions/?platform=ios#manually-track-actions-and-send-custom-events
+[3]: /real_user_monitoring/setup/enable_rum/track_navigation/?platform=ios#automatically-track-views
+[4]: /real_user_monitoring/setup/install/?platform=ios
+[5]: /real_user_monitoring/setup/enable_rum/track_background_events/?platform=ios
+[6]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=ios
+[7]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=ios
 [8]: /data_security/real_user_monitoring/#geolocation
 [9]: /data_security/real_user_monitoring/#ip-address
 [10]: https://support.apple.com/guide/security/security-of-runtime-process-sec15bfe098e/web
-[11]: /real_user_monitoring/application_monitoring/ios/advanced_configuration/#rum-configuration
+[11]: /getting_started/tagging/unified_service_tagging/

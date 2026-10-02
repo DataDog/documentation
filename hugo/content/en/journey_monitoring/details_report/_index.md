@@ -94,8 +94,8 @@ Click on **View Test Suite** to visit the journey's test suite and edit it direc
 [4]: /session_replay/
 [5]: /journey_monitoring/details_report/variants/
 [6]: /product_analytics/charts/funnel_analysis/
-[7]: /real_user_monitoring/operations_monitoring/
+[7]: /real_user_monitoring/track_critical_operations/
 [8]: /internal_developer_portal/catalog/
 [9]: /error_tracking/
 [10]: /journey_monitoring/uptime/
-[11]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum
+[11]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=browser

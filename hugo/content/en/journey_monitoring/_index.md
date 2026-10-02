@@ -106,7 +106,7 @@ Each journey and its variants have the following performance metrics:
 [2]: /synthetics/
 [3]: /product_analytics/
 [4]: /session_replay/
-[5]: /real_user_monitoring/rum_without_limits/
+[5]: /real_user_monitoring/retain_and_recover_valuable_sessions/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
 [8]: /product_analytics/
@@ -114,7 +114,7 @@ Each journey and its variants have the following performance metrics:
 [10]: /journey_monitoring/uptime/
 [11]: /journey_monitoring/map/suggested_journeys/
 [12]: /journey_monitoring/details_report/
-[13]: /real_user_monitoring/operations_monitoring/
+[13]: /real_user_monitoring/track_critical_operations/
 [14]: /synthetics/test_suites/#service-level-objectives
 
 ## Further reading

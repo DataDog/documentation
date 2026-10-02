@@ -1,7 +1,6 @@
 ---
 description: Learn how to track Unity errors with Error Tracking.
 aliases:
-- /real_user_monitoring/error_tracking/unity
 - /real_user_monitoring/mobile_and_tv_monitoring/unity/error_tracking
 further_reading:
 - link: https://github.com/DataDog/dd-sdk-unity
@@ -22,15 +21,7 @@ Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup instructions][2] or see the [Unity setup documentation][3].
 
-### Forward uncaught exceptions from Unity logs
-
-Unity forwards all uncaught exceptions to its logger using `Debug.LogException`. To report these exceptions to Datadog, check the option in Datadog's project settings labeled {{< ui >}}Forward Unity Logs{{< /ui >}}.
-
-### Native crash reporting
-
-Native crash reporting is enabled for all Datadog Unity SDK projects.
-
-If your application suffers a fatal crash, the Datadog Unity SDK uploads a crash report to Datadog *after* your application restarts. For non-fatal errors or exceptions, the Datadog Unity SDK uploads these errors with other RUM data.
+To enable crash and error reporting, see [Track errors and crashes][7].
 
 ## Get deobfuscated and symbolicated stack traces
 
@@ -107,7 +98,8 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/application/create
-[3]: /real_user_monitoring/application_monitoring/unity/setup/#setup
+[3]: /real_user_monitoring/setup/install/?platform=unity
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=unity

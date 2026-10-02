@@ -1,5 +1,5 @@
 ---
-title: Alerting With Conversion Rates
+title: Alerting with Conversion Rates
 private: true
 description: Guide for creating alerts on conversion rates.
 further_reading:

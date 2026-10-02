@@ -68,4 +68,4 @@ The RUM session has all the data that [RUM normally collects][3] so you can debu
 
 [1]: /tests/setup/
 [2]: /real_user_monitoring/application_monitoring/browser/
-[3]: /real_user_monitoring/application_monitoring/browser/data_collected/
+[3]: /real_user_monitoring/setup/data_collected/?platform=browser

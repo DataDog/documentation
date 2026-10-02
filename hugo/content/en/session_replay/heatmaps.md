@@ -250,7 +250,7 @@ User information is not collected by default. Heatmaps use the user information 
 
 [1]: /session_replay/
 [2]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/package.json
-[3]: /real_user_monitoring/explorer/
+[3]: /real_user_monitoring/investigate_problems/explore_retained_data/
 [4]: /product_analytics/charts/analytics_explorer/
 [5]: /session_replay/privacy_options?platform=browser#privacy-options
 [6]: https://chromewebstore.google.com/detail/datadog-test-recorder/kkbncfpddhdmkfmalecgnphegacgejoa

@@ -183,4 +183,4 @@ The following sampling rate parameters control different aspects of data collect
 [9]: /real_user_monitoring/flutter/
 [10]: /real_user_monitoring/kotlin_multiplatform/
 [11]: /real_user_monitoring/unity/
-[12]: /real_user_monitoring/correlate_with_other_telemetry/
+[12]: /real_user_monitoring/administer_and_extend_rum/correlate_with_other_telemetry/

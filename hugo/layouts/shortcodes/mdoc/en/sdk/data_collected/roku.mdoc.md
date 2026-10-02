@@ -13,7 +13,7 @@ There are additional [attributes specific to a given event type](#event-specific
 
 | Event Type | Retention | Description                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 | ---------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Session    | 30 days   | A session represents a real user journey on your Roku channel. It begins when the user launches the channel, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the channel crashes or is killed by the Roku OS, it will reset the session. |
+| Session    | 30 days   | A session represents a real user's activity on your Roku channel. It begins when the user launches the channel, and the session remains live as long as the user stays active. During the user journey, all RUM events generated as part of the session will share the same `session.id` attribute. **Note:** The session resets after 15 minutes of inactivity. If the channel crashes or is killed by the Roku OS, it will reset the session. |
 | View       | 30 days   | A view represents a unique screen (or screen segment) on your Roku channel. A view starts when you call the `startView` function and stops when a new view is started. Each occurrence is classified as a distinct view. While a user stays on a view, RUM event attributes (Errors, Resources, and Actions) get attached to the view with a unique `view.id`.                                                                               |
 | Resource   | 15 days   | A resource represents network requests to first-party hosts, APIs, and third-party providers in your Roku channel. All requests generated during a user session are attached to the view with a unique `resource.id`.                                                                                                                                                                                                                        |
 | Error      | 30 days   | An error represents an exception or crash emitted by the Roku channel attached to the view it is generated in.                                                                                                                                                                                                                                                                                                                               |
@@ -188,9 +188,9 @@ Before data is uploaded to Datadog, it is stored in cleartext in your channel's 
 
 **Note**: The OS can evict the data at any time, which could result in data loss in some rare cases.
 
-[2]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#enrich-user-sessions
+[2]: /real_user_monitoring/enrich_rum_data/add_custom_context/?platform=roku
 [4]: /getting_started/tagging/unified_service_tagging/
-[5]: /real_user_monitoring/application_monitoring/roku/advanced_configuration/#identifying-your-users
+[5]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=roku
 [6]: https://developer.roku.com/fr-fr/docs/developer-program/getting-started/architecture/file-system.md#cachefs
 [8]: /data_security/real_user_monitoring/#ip-address
 [9]: /data_security/real_user_monitoring/#geolocation

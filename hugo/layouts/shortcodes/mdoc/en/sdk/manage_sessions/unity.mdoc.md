@@ -1,11 +1,7 @@
-## Clear all data
+## Configure the session sample rate
 
-Use `ClearAllData` to clear all data that has not been sent to Datadog.
+The session sample rate controls the percentage of RUM sessions sent to Datadog. Set the {% ui %}Session Sample Rate{% /ui %} to a value between 0 and 100 in the Datadog section of your {% ui %}Project Settings{% /ui %} in Unity. A value of 100 keeps all sessions.
 
-```csharp
-DatadogSdk.instance.ClearAllData();
-```
+You can adjust the session sample rate, but Datadog recommends using [retention filters][1] to control retained volume.
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/unity/setup/
-[3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+[1]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/

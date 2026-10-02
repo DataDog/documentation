@@ -1,5 +1,7 @@
 ## Overview
 
+For setup steps, see [Track frustration signals][2].
+
 Frustration signals identify points of user friction in your mobile application by capturing patterns like error taps.
 
 Mobile RUM collects the following type of frustration signal:
@@ -21,4 +23,5 @@ Frustration Type
 Frustration Count
 : Find sessions and views where any frustration signal occurred. For example, to find sessions or views with at least one frustration signal, add `session.frustration.count:>1` or `view.frustration.count:>1` to the search query.
 
-[1]: /real_user_monitoring/explorer/
+[1]: /real_user_monitoring/investigate_problems/explore_retained_data/
+[2]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/

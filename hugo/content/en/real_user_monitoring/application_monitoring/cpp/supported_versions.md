@@ -51,6 +51,6 @@ When built with `DD_CRASH_MODE=crashpad`, the SDK's Crash Reporting functionalit
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/application_monitoring/cpp/setup
+[1]: /real_user_monitoring/setup/install/?platform=cpp
 [2]: https://github.com/DataDog/dd-sdk-cpp/blob/main/LICENSE-3rdparty.csv
 [3]: /real_user_monitoring/application_monitoring/cpp/error_tracking

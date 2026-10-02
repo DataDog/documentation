@@ -1,62 +1,8 @@
-### Custom resources
-
-In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
-
-- `.startResource(resourceKey:request:)`
-- `.stopResource(resourceKey:response:)`
-- `.stopResourceWithError(resourceKey:error:)`
-- `.stopResourceWithError(resourceKey:message:)`
-
-For example:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-// in your network client:
-
-let rum = RUMMonitor.shared()
-
-rum.startResource(
-    resourceKey: "resource-key",
-    request: request
-)
-
-rum.stopResource(
-    resourceKey: "resource-key",
-    response: response
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-// in your network client:
-
-[[DDRUMMonitor shared] startResourceWithResourceKey:@"resource-key"
-                                            request:request
-                                         attributes:@{}];
-
-[[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
-                                          response:response
-                                        attributes:@{}];
-```
-
-{% /tab %}
-{% /tabs %}
-
-**Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
-
-For more details and available options, see [`RUMMonitorProtocol` in GitHub][4].
-
-### Automatically track network requests
+## Automatically track network requests
 
 Network requests are automatically tracked after you enable RUM with the `urlSessionTracking` configuration.
 
-#### (Optional) Enable detailed timing breakdown
+### (Optional) Enable detailed timing breakdown
 
 To get detailed timing breakdown (DNS resolution, SSL handshake, time to first byte, connection time, and download duration), enable `URLSessionInstrumentation` for your delegate type:
 
@@ -93,9 +39,11 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 {% /tabs %}
 
 **Notes**:
+- `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, [manually track network requests](#manually-track-network-requests).
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
-- To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
+- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
+- To exclude URLs from tracking, use `disallowList` (see [Exclude URLs from RUM Resource tracking](#exclude-urls-from-rum-resource-tracking)). To modify or drop resource events with custom logic, use `resourceEventMapper` (see [Modify or Drop RUM Events](/real_user_monitoring/enrich_rum_data/modify_or_drop_rum_events/?platform=ios)).
+- When a resource is served from the device's local cache, it is reported with `resource.local_cache_hit: true` (see [Resource attributes](/real_user_monitoring/setup/data_collected/?platform=ios#resource-attributes)). This signal is available only in registered-delegate instrumentation mode, not when using automatic instrumentation with completion-handler swizzling.
 
 {% alert level="info" %}
 Be mindful of delegate retention.
@@ -107,6 +55,8 @@ To avoid memory leaks, make sure to invalidate any `URLSession` instances you no
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
+
+Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
@@ -141,7 +91,7 @@ let session = URLSession(
 )
 ```
 
-This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](https://docs.datadoghq.com/real_user_monitoring/correlate_with_other_telemetry/apm?tab=browserrum).
+This tracks all requests sent with the instrumented `session`. Requests matching the `example.com` domain are marked as "first party" and tracing information is sent to your backend to [connect the RUM resource with its Trace](/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=ios).
 {% /tab %}
 {% tab label="Objective-C" %}
 
@@ -179,7 +129,11 @@ RUM.enable(
 )
 ```
 
-#### Capture resource headers
+**Note**: `data` can be `nil` for reasons unrelated to response size, such as tasks without a completion handler (for example, async/await) or download tasks. In registered-delegate mode (when using `URLSessionInstrumentation.enableDurationBreakdown`), `data` is additionally `nil` in these cases:
+- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`): the body is never buffered.
+- Responses of other types whose body exceeds 512 KB—the buffered data is discarded entirely, not truncated.
+
+### Capture resource headers
 
 When [tracking network requests automatically](#automatically-track-network-requests), you can capture HTTP request and response headers on RUM Resources by setting `trackResourceHeaders` on `RUM.Configuration.URLSessionTracking`. This option is disabled by default.
 
@@ -242,13 +196,32 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 {% /tab %}
 {% /tabs %}
 
-#### Apollo instrumentation
+### Exclude URLs from RUM Resource tracking
+
+When [tracking network requests automatically](#automatically-track-network-requests), you can exclude specific URLs from RUM Resource tracking by setting `disallowList` on `RUM.Configuration.URLSessionTracking`. Use this parameter to exclude noisy or low-value endpoints, such as health checks or polling requests.
+
+The SDK matches each pattern against the full request URL, including the query string. A pattern with no `*` must match the URL exactly. A pattern can include one or more `*` wildcards. Each `*` matches any sequence of characters, including `/`, so a pattern is not limited to a single path segment.
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        disallowList: ["https://api.example.com/health", "https://example.com/api/*/status"]
+    )
+  )
+)
+```
+
+**Note**: The SDK does not create a RUM Resource for a URL that matches a pattern in `disallowList`. It also does not reconstruct an APM span from that resource. If a URL matches both `disallowList` and `firstPartyHostsTracing`, `disallowList` takes precedence.
+
+### Apollo instrumentation
 
 Instrumenting Apollo in your iOS application gives RUM visibility into GraphQL errors and performance. Because GraphQL requests all go to a single endpoint and often return 200 OK even on errors, default HTTP instrumentation lacks context. It lets RUM capture the operation name, operation type, and variables (and optionally the payload). This provides more detailed context for each network request.
 
 This integration supports both Apollo iOS 1.0+ and Apollo iOS 2.0+. Follow the instructions for the Apollo iOS version you have below.
 
-1. [Set up][2] RUM monitoring with Datadog iOS RUM.
+1. [Set up](/real_user_monitoring/setup/install/?platform=ios) RUM monitoring with Datadog iOS RUM.
 
 2. Add the following to your application's `Package.swift` file:
 
@@ -355,6 +328,60 @@ This lets Datadog RUM extract the operation type, name, variables, and payloads 
   
 {% /alert %}
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/ios
-[4]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift
+## Manually track network requests
+
+In addition to [tracking resources automatically](#automatically-track-network-requests), you can also track specific custom resources such as network requests or third-party provider APIs. This is the recommended approach for third-party libraries that don't expose a `URLSession` delegate. Use the following methods on `RUMMonitor.shared()` to manually collect RUM resources:
+
+- `.startResource(resourceKey:request:)`
+- `.stopResource(resourceKey:response:)`
+- `.stopResourceWithError(resourceKey:error:)`
+- `.stopResourceWithError(resourceKey:message:)`
+
+For example:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogRUM
+
+// in your network client:
+
+let rum = RUMMonitor.shared()
+
+rum.startResource(
+    resourceKey: "resource-key",
+    request: request
+)
+
+rum.stopResource(
+    resourceKey: "resource-key",
+    response: response
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+// in your network client:
+
+[[DDRUMMonitor shared] startResourceWithResourceKey:@"resource-key"
+                                            request:request
+                                         attributes:@{}];
+
+[[DDRUMMonitor shared] stopResourceWithResourceKey:@"resource-key"
+                                          response:response
+                                        attributes:@{}];
+```
+
+{% /tab %}
+{% /tabs %}
+
+**Note**: The `String` used for `resourceKey` in both calls must be unique for the resource you are calling. This is necessary for the RUM iOS SDK to match a resource's start with its completion.
+
+For more details and available options, see [`RUMMonitorProtocol` in GitHub][1].
+
+For the attributes collected, see [Data Collected](/real_user_monitoring/setup/data_collected/?platform=ios#resource-attributes).
+
+[1]: https://github.com/DataDog/dd-sdk-ios/blob/master/DatadogRUM/Sources/RUMMonitorProtocol.swift

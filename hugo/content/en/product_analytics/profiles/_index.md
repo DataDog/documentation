@@ -183,11 +183,11 @@ You can filter these custom attributes throughout the product analytics platform
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[2]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-user-session
-[3]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#identify-account
+[2]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-user-information
+[3]: https://docs.datadoghq.com/real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#set-account-information
 [4]: https://app.datadoghq.com/product-analytics/integrations
 [5]: https://app.datadoghq.com/product-analytics/integrations/custom-attributes
 [6]: https://app.datadoghq.com/product-analytics/segments
 [7]: https://app.datadoghq.com/product-analytics/profiles
 [8]: https://app.datadoghq.com/product-analytics/profiles/accounts
-[9]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/#track-unauthenticated-users
+[9]: /real_user_monitoring/enrich_rum_data/track_user_ids/?platform=browser#track-unauthenticated-users

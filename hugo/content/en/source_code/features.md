@@ -8,7 +8,7 @@ further_reading:
 - link: "/logs/error_tracking/"
   tag: "Documentation"
   text: "Learn about Error Tracking for Logs"
-- link: "/real_user_monitoring/error_tracking/"
+- link: "/real_user_monitoring/investigate_problems/triage_errors_and_crashes/"
   tag: "Documentation"
   text: "Learn about Error Tracking for RUM"
 - link: "/profiler/"
@@ -72,12 +72,12 @@ Source code integration is supported for the following RUM platforms when source
 
 {{< img src="source_code_integration/error-tracking-panel-full.png" alt="A view repository button with options to view the file, blame, and commit available on the right side of a RUM error stack trace in Error Tracking, along with inline code snippets" style="width:100%;">}}
 
-[1]: /real_user_monitoring/error_tracking/
+[1]: /real_user_monitoring/investigate_problems/triage_errors_and_crashes/
 [2]: https://app.datadoghq.com/rum/error-tracking
 [3]: /real_user_monitoring/guide/upload-javascript-source-maps/
 [4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
 [5]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
-[6]: /real_user_monitoring/application_monitoring/android/error_tracking/
+[6]: /error_tracking/frontend/mobile/android/
 
 {{% /tab %}}
 {{% tab "Continuous Profiler" %}}
