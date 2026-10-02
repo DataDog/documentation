@@ -39,7 +39,7 @@ To begin monitoring your training workloads, you must first meet the following c
 
 ### 1. Connect training runs to GPU hardware
 
-Your Kubernetes workloads may have labels or annotations that identify a training run or a group of runs. You can add those identifiers to GPU metrics and spans. This ties training run data directly to the GPU hardware it ran on.
+Your Kubernetes workloads may have labels or annotations that identify a training run or a group of runs. In this step, you add those identifiers to GPU metrics as tags, which ties training run data directly to the GPU hardware it ran on. Step 2 adds the same identifiers to traces.
 
 The following examples use the `company.name/run-id` and `company.name/group-id` pod annotations. Replace them with the annotations your workloads use.
 
@@ -56,7 +56,7 @@ spec:
 
 To use pod labels instead of annotations, use `kubernetesResourcesLabelsAsTags` for metrics.
 
-After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and spans are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
+After you apply this configuration, GPU metrics are tagged with `training_run_id` and `training_group_id`.
 
 ### 2. Configure GPU tracing
 
@@ -93,7 +93,7 @@ spec:
 
 To use pod labels instead of annotations, use `metadata.labels['<LABEL_KEY>']` as the `fieldPath` for traces.
 
-Apply the configuration and wait for the `DatadogAgent` rollout to complete.
+Apply the configuration and wait for the `DatadogAgent` rollout to complete. With this configuration, traces from the workloads you label in [Step 3](#3-label-the-gpu-workload) are tagged with `training.run_id` and `training.group_id`.
 
 ### 3. Label the GPU workload
 
@@ -124,6 +124,8 @@ kubectl exec <NEW_GPU_POD> -n <GPU_WORKLOAD_NAMESPACE> -- sh -c \
 ```
 
 **No setup containers?** Confirm the label is on the pod template, the pod is new, and the workload is outside the Agent namespace. Then check the Cluster Agent logs.
+
+After you complete setup, GPU metrics are tagged with `training_run_id` and `training_group_id`, and traces are tagged with `training.run_id` and `training.group_id`. Use these tags to filter GPU metrics and traces for the same training run.
 
 ## Further reading
 
