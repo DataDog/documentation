@@ -50,7 +50,7 @@ To create a Goal-Based test manually:
 
 ### Supported locations
 
-Goal-Based tests run only from the Datadog managed locations listed in [Run Bits Testing][4].
+Goal-Based tests run from the same locations as Bits Testing, including private locations using remote execution. See [Run Bits Testing][4].
 
 ## Evaluate a test run
 
