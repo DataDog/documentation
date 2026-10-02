@@ -96,16 +96,16 @@
     "description": "Workload Protection monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. See [Workload Protection](https://docs.datadoghq.com/security/workload_protection/) for more information on setting up Workload Protection.\n\n**Note**: These endpoints are split based on whether you are using the US1-FED site or not. Please reference the specific resource for the site you are using."
   },
   "case-management": {
-    "name": "Case Management",
-    "description": "**Note**: Work Management is the UI name for Case Management. These API endpoints and permissions use `case` terminology.\n\nView and manage work items and projects within Work Management. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
+    "name": "Work Management",
+    "description": "View and manage work items and projects within Work Management. API paths, resource types, and permissions retain `case` terminology. For more information, see [Work Management](https://docs.datadoghq.com/incident_response/work_management/)."
   },
   "case-management-attribute": {
-    "name": "Case Management Attribute",
-    "description": "View and configure custom attributes within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Attribute",
+    "description": "View and configure custom attributes within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "case-management-type": {
-    "name": "Case Management Type",
-    "description": "View and configure case types within Case Management. See the [Case Management page](https://docs.datadoghq.com/service_management/case_management/) for more information."
+    "name": "Work Management Type",
+    "description": "View and configure work item types within Work Management. See the [Work Management page](https://docs.datadoghq.com/incident_response/work_management/) for more information."
   },
   "change-management": {
     "name": "Change Management",

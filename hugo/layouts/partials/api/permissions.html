@@ -36,6 +36,6 @@
 
 
 {{ with $authZ }}
-  {{ $slug := (replaceRE " " "-" ($tag.name | humanize | lower)) }}
+  {{ $slug := (replaceRE " " "-" ((index $tag "x-docs-original-name" | default $tag.name) | humanize | lower)) }}
   <p>OAuth apps require the <code>{{ delimit . ", "}}</code> authorization <a href="{{ "api/latest/scopes/" | absLangURL }}#{{ $slug }}">scope</a> to access this endpoint.</p>
 {{ end }}

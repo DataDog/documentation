@@ -28,6 +28,16 @@
 {{- end -}}
 {{- $authData := dict "requirement" $authRequirement "useBearerToken" $useBearerToken -}}
 {{- $codeExampleLookup := (index (index $context.Site.Data.api $version) "CodeExamples") -}}
+{{- if eq $context.Page.Lang "en" -}}
+  {{- with index $endpoint.action "x-docs-original-summary" -}}
+    {{- $originalSummary := . -}}
+    {{- $items := slice -}}
+    {{- range index $codeExampleLookup $operationid -}}
+      {{- $items = $items | append (merge . (dict "description" (replace .description $originalSummary $endpoint.action.summary))) -}}
+    {{- end -}}
+    {{- $codeExampleLookup = merge $codeExampleLookup (dict $operationid $items) -}}
+  {{- end -}}
+{{- end -}}
 
 <h3 class="mb-2">{{ i18n "code_example" }}</h3>
 <div class="programming-lang-wrapper js-code-snippet-wrapper" >
