@@ -18,6 +18,10 @@ further_reading:
 </div>
 {{% /site-region %}}
 
+{{< callout url="https://www.datadoghq.com/product-preview/generic-secret-scanning-in-code/" header="Find Generic Secrets in Your Code" >}}
+Generic Secret Scanning is in Preview. It looks for internal tokens and passwords that do not match a provider pattern. To enroll, click <b>Request Access</b>.
+{{< /callout >}}
+
 Datadog Secret Scanning scans code to find exposed secrets. Datadog also attempts to validate secrets and surface their status (valid, invalid) to help you prioritize secrets remediation.
 
 ## Set up Secret Scanning
