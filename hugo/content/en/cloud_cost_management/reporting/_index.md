@@ -121,6 +121,8 @@ After you've created and customized your report, you can save and share it from 
 
 ## Permissions
 
+The following permissions are required to view and manage reports:
+
 | Action | Required Permission |
 |---------|---------------|
 | View Reports | Cloud Cost Management read |
