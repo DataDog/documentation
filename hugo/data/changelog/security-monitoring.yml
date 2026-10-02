@@ -1,0 +1,23 @@
+entries:
+  - change_type: added
+    date: '2026-09-10'
+    link: https://github.com/DataDog/documentation/pull/39838
+    operations:
+      - ListSecurityFindingsAutomationInboxRules
+      - CreateSecurityFindingsAutomationInboxRule
+      - GetSecurityFindingsAutomationInboxRule
+      - UpdateSecurityFindingsAutomationInboxRule
+      - DeleteSecurityFindingsAutomationInboxRule
+      - ReorderSecurityFindingsAutomationInboxRules
+      - ListSecurityFindingsAutomationDefaultInboxRules
+      - GetSecurityFindingsAutomationDefaultInboxRule
+      - EnableSecurityFindingsAutomationDefaultInboxRule
+      - DisableSecurityFindingsAutomationDefaultInboxRule
+    title: 'Security findings default and regular inbox rules API spec'
+  - change_type: modified
+    date: '2026-09-08'
+    link: https://github.com/DataDog/documentation/pull/39765
+    operations:
+      - CreateSecurityFindingsAutomationTicketCreationRule
+      - UpdateSecurityFindingsAutomationTicketCreationRule
+    title: 'Accept the Linear ticket creation target in security pipelines automation'

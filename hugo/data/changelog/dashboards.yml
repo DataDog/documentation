@@ -1,0 +1,9 @@
+entries:
+  - change_type: modified
+    date: '2026-09-08'
+    link: https://github.com/DataDog/documentation/pull/39776
+    operations:
+      - CreateDashboard
+      - UpdateDashboard
+      - GetDashboard
+    title: 'Add embedded app widgets to the Dashboard API'

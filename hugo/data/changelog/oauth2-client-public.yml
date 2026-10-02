@@ -1,0 +1,7 @@
+entries:
+  - change_type: added
+    date: '2026-09-11'
+    link: https://github.com/DataDog/documentation/pull/39877
+    operations:
+      - GetOIDCDiscoveryDocument
+    title: 'Document OAuth v2 OIDC discovery endpoint'

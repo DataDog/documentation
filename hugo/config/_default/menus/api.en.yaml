@@ -4,6 +4,10 @@ menu:
       url: /api/latest/
       identifier: API overview
       weight: -10
+    - name: Changelog
+      url: /api/changelog/
+      identifier: API changelog
+      weight: -9
     - name: Using the API
       url: /api/latest/using-the-api/
       parent: API overview

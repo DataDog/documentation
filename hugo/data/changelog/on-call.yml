@@ -1,0 +1,7 @@
+entries:
+  - change_type: added
+    date: '2026-09-09'
+    link: https://github.com/DataDog/documentation/pull/39798
+    operations:
+      - ListOnCallSchedules
+    title: 'Promote GET /api/v2/on-call/schedules to a public ListOnCallSchedules operation'

@@ -1,0 +1,10 @@
+entries:
+  - change_type: modified
+    date: '2026-09-15'
+    link: https://github.com/DataDog/documentation/pull/39956
+    operations:
+      - CreateWorkflow
+      - UpdateWorkflow
+      - GetWorkflow
+      - ListWorkflows
+    title: 'Add sensitivePrivileges field to Workflow Automation spec'

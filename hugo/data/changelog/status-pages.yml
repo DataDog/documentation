@@ -1,0 +1,7 @@
+entries:
+  - change_type: modified
+    date: '2026-09-09'
+    link: https://github.com/DataDog/documentation/pull/39792
+    operations:
+      - ListStatusPages
+    title: 'Add documentation for name filter query parameter in ListStatusPages'
