@@ -278,7 +278,7 @@
                   </div>
                   <div class="schema-table__table _schema-table__table_d7636a">
                     <div class="schema-table__columns _schema-table__columns_d7636a">
-                      <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                      <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                       <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                       <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                         Description
@@ -304,7 +304,9 @@
                         <span class="schema-table__type _schema-table__type_d7636a">object</span>
                       </div>
                       <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                        <span>Incident data for a create request.</span>
+                        <div class="schema-table__description _schema-table__description_d7636a">
+                          <p>Incident data for a create request.</p>
+                        </div>
                       </div>
                     </div>
                     <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -315,7 +317,7 @@
                       >
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 20px)"
+                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                         >
                           <button
                             type="button"
@@ -337,7 +339,9 @@
                           <span class="schema-table__type _schema-table__type_d7636a">object</span>
                         </div>
                         <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                          <span>The incident&#39;s attributes for a create request.</span>
+                          <div class="schema-table__description _schema-table__description_d7636a">
+                            <p>The incident&#39;s attributes for a create request.</p>
+                          </div>
                         </div>
                       </div>
                       <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -348,7 +352,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a"
@@ -360,10 +364,12 @@
                             <span class="schema-table__type _schema-table__type_d7636a">string</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span
-                              >Required if <code>customer_impacted:&quot;true&quot;</code>. A summary of the impact
-                              customers experienced during the incident.</span
-                            >
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>
+                                Required if <code>customer_impacted:&quot;true&quot;</code>. A summary of the impact
+                                customers experienced during the incident.
+                              </p>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -373,7 +379,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">customer_impacted</code
@@ -386,7 +392,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span>A flag indicating whether the incident caused customer impact.</span>
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>A flag indicating whether the incident caused customer impact.</p>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -396,7 +404,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">fields</code></span
@@ -406,9 +414,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">object</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span
-                              >A condensed view of the user-defined fields for which to create initial selections.</span
-                            >
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>A condensed view of the user-defined fields for which to create initial selections.</p>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -418,7 +426,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a"
@@ -430,10 +438,12 @@
                             <span class="schema-table__type _schema-table__type_d7636a">string</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span
-                              >A unique identifier that represents an incident type. The default incident type will be
-                              used if this property is not provided.</span
-                            >
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>
+                                A unique identifier that represents an incident type. The default incident type will be
+                                used if this property is not provided.
+                              </p>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -443,7 +453,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <button
                               type="button"
@@ -462,10 +472,12 @@
                             <span class="schema-table__type _schema-table__type_d7636a">[&lt;oneOf&gt;]</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span
-                              >An array of initial timeline cells to be placed at the beginning of the incident
-                              timeline.</span
-                            >
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>
+                                An array of initial timeline cells to be placed at the beginning of the incident
+                                timeline.
+                              </p>
+                            </div>
                           </div>
                         </div>
                         <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -476,7 +488,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 60px)"
+                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                             >
                               <button
                                 type="button"
@@ -503,7 +515,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">object</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Timeline cell data for Markdown timeline cells for a create request.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Timeline cell data for Markdown timeline cells for a create request.</p>
+                              </div>
                             </div>
                           </div>
                           <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -514,7 +528,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 80px)"
+                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">cell_type</code
@@ -527,8 +541,10 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Type of the Markdown timeline cell.</span
-                                ><span class="schema-table__default _schema-table__default_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Type of the Markdown timeline cell.</p>
+                                </div>
+                                <span class="schema-table__default _schema-table__default_d7636a">
                                   Default: <code>markdown</code></span
                                 >
                                 <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -543,7 +559,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 80px)"
+                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -576,7 +592,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The Markdown timeline cell contents.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The Markdown timeline cell contents.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -587,7 +605,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 100px)"
+                                  style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">content</code></span
@@ -597,7 +615,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The Markdown content of the cell.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The Markdown content of the cell.</p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -608,7 +628,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 80px)"
+                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">important</code></span
@@ -618,10 +638,12 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span
-                                  >A flag indicating whether the timeline cell is important and should be
-                                  highlighted.</span
-                                ><span class="schema-table__default _schema-table__default_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>
+                                    A flag indicating whether the timeline cell is important and should be highlighted.
+                                  </p>
+                                </div>
+                                <span class="schema-table__default _schema-table__default_d7636a">
                                   Default: <code>false</code></span
                                 >
                               </div>
@@ -635,7 +657,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">is_test</code></span
@@ -645,7 +667,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span>A flag indicating whether the incident is a test incident.</span>
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>A flag indicating whether the incident is a test incident.</p>
+                            </div>
                           </div>
                         </div>
                         <div
@@ -655,7 +679,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <button
                               type="button"
@@ -676,7 +700,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span>Notification handles that will be notified of the incident at creation.</span>
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>Notification handles that will be notified of the incident at creation.</p>
+                            </div>
                           </div>
                         </div>
                         <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -687,7 +713,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 60px)"
+                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                             >
                               <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                 ><code class="schema-table__name _schema-table__name_d7636a">display_name</code></span
@@ -697,7 +723,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">string</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>The name of the notified handle.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>The name of the notified handle.</p>
+                              </div>
                             </div>
                           </div>
                           <div
@@ -707,7 +735,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 60px)"
+                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                             >
                               <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                 ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -717,17 +745,19 @@
                               <span class="schema-table__type _schema-table__type_d7636a">string</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span
-                                >The handle used for the notification. This includes an email address, Slack channel, or
-                                workflow.</span
-                              >
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>
+                                  The handle used for the notification. This includes an email address, Slack channel,
+                                  or workflow.
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
                         <div class="schema-table__row _schema-table__row_d7636a" data-field-name="title" data-depth="2">
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <span class="schema-table__name-group _schema-table__name-group_d7636a"
                               ><code class="schema-table__name _schema-table__name_d7636a">title</code
@@ -740,7 +770,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">string</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span>The title of the incident, which summarizes what happened.</span>
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>The title of the incident, which summarizes what happened.</p>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -751,7 +783,7 @@
                       >
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 20px)"
+                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                         >
                           <button
                             type="button"
@@ -770,7 +802,9 @@
                           <span class="schema-table__type _schema-table__type_d7636a">object</span>
                         </div>
                         <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                          <span>The relationships the incident will have with other resources once created.</span>
+                          <div class="schema-table__description _schema-table__description_d7636a">
+                            <p>The relationships the incident will have with other resources once created.</p>
+                          </div>
                         </div>
                       </div>
                       <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -781,7 +815,7 @@
                         >
                           <div
                             class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                            style="padding-left: calc(var(--space-md) + 40px)"
+                            style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                           >
                             <button
                               type="button"
@@ -803,7 +837,9 @@
                             <span class="schema-table__type _schema-table__type_d7636a">object</span>
                           </div>
                           <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                            <span>Relationship to user.</span>
+                            <div class="schema-table__description _schema-table__description_d7636a">
+                              <p>Relationship to user.</p>
+                            </div>
                           </div>
                         </div>
                         <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -814,7 +850,7 @@
                           >
                             <div
                               class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                              style="padding-left: calc(var(--space-md) + 60px)"
+                              style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                             >
                               <button
                                 type="button"
@@ -842,7 +878,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">object</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Relationship to user object.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Relationship to user object.</p>
+                              </div>
                             </div>
                           </div>
                           <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -853,7 +891,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 80px)"
+                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -866,7 +904,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">string</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>A unique identifier that represents the user.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>A unique identifier that represents the user.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -876,7 +916,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 80px)"
+                                style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -889,8 +929,10 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Users resource type.</span
-                                ><span class="schema-table__default _schema-table__default_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Users resource type.</p>
+                                </div>
+                                <span class="schema-table__default _schema-table__default_d7636a">
                                   Default: <code>users</code></span
                                 >
                                 <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -904,7 +946,7 @@
                       <div class="schema-table__row _schema-table__row_d7636a" data-field-name="type" data-depth="1">
                         <div
                           class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                          style="padding-left: calc(var(--space-md) + 20px)"
+                          style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                         >
                           <span class="schema-table__name-group _schema-table__name-group_d7636a"
                             ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -917,8 +959,10 @@
                           <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                         </div>
                         <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                          <span>Incident resource type.</span
-                          ><span class="schema-table__default _schema-table__default_d7636a">
+                          <div class="schema-table__description _schema-table__description_d7636a">
+                            <p>Incident resource type.</p>
+                          </div>
+                          <span class="schema-table__default _schema-table__default_d7636a">
                             Default: <code>incidents</code></span
                           >
                           <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -1121,6 +1165,9 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Response with an incident.</p>
+                      </div>
                       <div id="schema-table-X39" class="schema-table">
                         <div class="schema-table__toolbar _schema-table__toolbar_d7636a">
                           <button
@@ -1140,7 +1187,7 @@
                         </div>
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -1178,7 +1225,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">object</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Incident data from a response.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Incident data from a response.</p>
+                              </div>
                             </div>
                           </div>
                           <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -1189,7 +1238,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -1219,7 +1268,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The incident&#39;s attributes from a response.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The incident&#39;s attributes from a response.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -1230,7 +1281,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">archived</code></span
@@ -1240,7 +1291,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp of when the incident was archived.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp of when the incident was archived.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1250,7 +1303,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">case_id</code></span
@@ -1260,7 +1313,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The incident case id.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The incident case id.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1270,7 +1325,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">created</code></span
@@ -1280,7 +1335,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when the incident was created.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when the incident was created.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1290,7 +1347,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1302,11 +1359,12 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >Length of the incident&#39;s customer impact in seconds. Equals the difference
-                                    between <code>customer_impact_start</code> and
-                                    <code>customer_impact_end</code>.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      Length of the incident&#39;s customer impact in seconds. Equals the difference
+                                      between <code>customer_impact_start</code> and <code>customer_impact_end</code>.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1316,7 +1374,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1328,7 +1386,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when customers were no longer impacted by the incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when customers were no longer impacted by the incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1338,7 +1398,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1350,7 +1410,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A summary of the impact customers experienced during the incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A summary of the impact customers experienced during the incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1360,7 +1422,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1372,7 +1434,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when customers began being impacted by the incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when customers began being impacted by the incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1382,7 +1446,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1394,7 +1458,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A flag indicating whether the incident caused customer impact.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A flag indicating whether the incident caused customer impact.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1404,7 +1470,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">declared</code></span
@@ -1414,7 +1480,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when the incident was declared.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when the incident was declared.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1424,7 +1492,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -1456,7 +1524,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Incident&#39;s non Datadog creator.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Incident&#39;s non Datadog creator.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -1467,7 +1537,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1479,7 +1549,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Non Datadog creator <code>48px</code> image.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Non Datadog creator <code>48px</code> image.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -1489,7 +1561,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -1499,7 +1571,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Non Datadog creator name.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Non Datadog creator name.</p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1510,7 +1584,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1522,7 +1596,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>UUID of the user who declared the incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>UUID of the user who declared the incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1532,7 +1608,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">detected</code></span
@@ -1542,7 +1618,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when the incident was detected.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when the incident was detected.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1552,7 +1630,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">fields</code></span
@@ -1562,7 +1640,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A condensed view of the user-defined fields attached to incidents.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A condensed view of the user-defined fields attached to incidents.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1572,7 +1652,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1584,7 +1664,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A unique identifier that represents an incident type.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A unique identifier that represents an incident type.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1594,7 +1676,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">is_test</code></span
@@ -1604,7 +1686,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A flag indicating whether the incident is a test incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A flag indicating whether the incident is a test incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1614,7 +1698,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">modified</code></span
@@ -1624,7 +1708,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Timestamp when the incident was last modified.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Timestamp when the incident was last modified.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1634,7 +1720,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -1666,7 +1752,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Incident&#39;s non Datadog creator.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Incident&#39;s non Datadog creator.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -1677,7 +1765,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1689,7 +1777,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Non Datadog creator <code>48px</code> image.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Non Datadog creator <code>48px</code> image.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -1699,7 +1789,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -1709,7 +1799,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Non Datadog creator name.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Non Datadog creator name.</p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1720,7 +1812,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -1752,7 +1844,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Notification handles that will be notified of the incident during update.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Notification handles that will be notified of the incident during update.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -1763,7 +1857,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1775,7 +1869,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>The name of the notified handle.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>The name of the notified handle.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -1785,7 +1881,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -1795,10 +1891,12 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span
-                                      >The handle used for the notification. This includes an email address, Slack
-                                      channel, or workflow.</span
-                                    >
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>
+                                        The handle used for the notification. This includes an email address, Slack
+                                        channel, or workflow.
+                                      </p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -1809,7 +1907,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">public_id</code></span
@@ -1819,7 +1917,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The monotonically increasing integer ID for the incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The monotonically increasing integer ID for the incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1829,7 +1929,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">resolved</code></span
@@ -1839,10 +1939,12 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >Timestamp when the incident&#39;s state was last changed from active or stable to
-                                    resolved or completed.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      Timestamp when the incident&#39;s state was last changed from active or stable to
+                                      resolved or completed.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1852,7 +1954,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">severity</code></span
@@ -1862,7 +1964,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The incident severity.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The incident severity.</p>
+                                  </div>
                                   <div class="schema-table__enum _schema-table__enum_d7636a">
                                     Allowed enum values: <code>UNKNOWN, SEV-0, SEV-1, SEV-2, SEV-3, SEV-4, SEV-5</code>
                                   </div>
@@ -1875,7 +1979,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">state</code></span
@@ -1885,7 +1989,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The state incident.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The state incident.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1895,7 +2001,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1907,10 +2013,12 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >The amount of time in seconds to detect the incident. Equals the difference between
-                                    <code>customer_impact_start</code> and <code>detected</code>.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      The amount of time in seconds to detect the incident. Equals the difference
+                                      between <code>customer_impact_start</code> and <code>detected</code>.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1920,7 +2028,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1932,10 +2040,12 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >The amount of time in seconds to call incident after detection. Equals the
-                                    difference of <code>detected</code> and <code>created</code>.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      The amount of time in seconds to call incident after detection. Equals the
+                                      difference of <code>detected</code> and <code>created</code>.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1945,7 +2055,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1957,11 +2067,13 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >The amount of time in seconds to resolve customer impact after detecting the issue.
-                                    Equals the difference between <code>customer_impact_end</code> and
-                                    <code>detected</code>.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      The amount of time in seconds to resolve customer impact after detecting the
+                                      issue. Equals the difference between <code>customer_impact_end</code> and
+                                      <code>detected</code>.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1971,7 +2083,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a"
@@ -1983,10 +2095,12 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span
-                                    >The amount of time in seconds to resolve the incident after it was created. Equals
-                                    the difference between <code>created</code> and <code>resolved</code>.</span
-                                  >
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>
+                                      The amount of time in seconds to resolve the incident after it was created. Equals
+                                      the difference between <code>created</code> and <code>resolved</code>.
+                                    </p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -1996,7 +2110,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">title</code
@@ -2009,7 +2123,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The title of the incident, which summarizes what happened.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The title of the incident, which summarizes what happened.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -2019,7 +2135,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">visibility</code></span
@@ -2029,7 +2145,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The incident visibility status.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The incident visibility status.</p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -2040,7 +2158,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2053,7 +2171,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">string</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The incident&#39;s ID.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The incident&#39;s ID.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -2063,7 +2183,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -2095,7 +2215,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The incident&#39;s relationships from a response.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The incident&#39;s relationships from a response.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2106,7 +2228,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2138,7 +2260,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A relationship reference for attachments.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A relationship reference for attachments.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2149,7 +2273,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2182,7 +2306,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>An array of incident attachments.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>An array of incident attachments.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2193,7 +2319,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2206,7 +2332,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the attachment.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the attachment.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2216,7 +2344,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2229,8 +2357,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The incident attachment resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The incident attachment resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>incident_attachments</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -2247,7 +2377,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2279,7 +2409,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to user.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to user.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2290,7 +2422,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2323,7 +2455,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to user object.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to user object.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2334,7 +2468,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2347,7 +2481,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the user.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the user.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2357,7 +2493,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2370,8 +2506,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Users resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Users resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>users</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -2388,7 +2526,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2420,7 +2558,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to user.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to user.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2431,7 +2571,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2464,7 +2604,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to user object.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to user object.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2475,7 +2617,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2488,7 +2630,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the user.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the user.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2498,7 +2642,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2511,8 +2655,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Users resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Users resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>users</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -2529,7 +2675,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2561,7 +2707,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to user.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to user.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2572,7 +2720,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2605,7 +2753,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to user object.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to user object.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2616,7 +2766,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2629,7 +2779,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the user.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the user.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2639,7 +2791,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2652,8 +2804,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Users resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Users resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>users</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -2670,7 +2824,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2700,7 +2854,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to impacts.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to impacts.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2711,7 +2867,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2744,7 +2900,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>An array of incident impacts.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>An array of incident impacts.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2755,7 +2913,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2768,7 +2926,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the impact.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the impact.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2778,7 +2938,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2791,7 +2951,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The incident impacts type.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The incident impacts type.</p>
+                                      </div>
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
                                         Allowed enum values: <code>incident_impacts</code>
                                       </div>
@@ -2806,7 +2968,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2838,7 +3000,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>A relationship reference for multiple integration metadata objects.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>A relationship reference for multiple integration metadata objects.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2849,7 +3013,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -2882,7 +3046,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Integration metadata relationship array</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Integration metadata relationship array</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2893,7 +3059,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -2906,7 +3072,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the integration metadata.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the integration metadata.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -2916,7 +3084,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -2929,8 +3097,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Integration metadata resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Integration metadata resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>incident_integrations</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -2947,7 +3117,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -2979,7 +3149,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to user.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to user.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -2990,7 +3162,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -3023,7 +3195,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to user object.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to user object.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3034,7 +3208,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3047,7 +3221,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the user.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the user.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -3057,7 +3233,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3070,8 +3246,10 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Users resource type.</span
-                                      ><span class="schema-table__default _schema-table__default_d7636a">
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Users resource type.</p>
+                                      </div>
+                                      <span class="schema-table__default _schema-table__default_d7636a">
                                         Default: <code>users</code></span
                                       >
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -3088,7 +3266,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -3118,7 +3296,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to incident responders.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to incident responders.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3129,7 +3309,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -3162,7 +3342,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>An array of incident responders.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>An array of incident responders.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3173,7 +3355,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3186,7 +3368,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the responder.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the responder.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -3196,7 +3380,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3209,7 +3393,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The incident responders type.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The incident responders type.</p>
+                                      </div>
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
                                         Allowed enum values: <code>incident_responders</code>
                                       </div>
@@ -3224,7 +3410,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -3256,7 +3442,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Relationship to incident user defined fields.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Relationship to incident user defined fields.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3267,7 +3455,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -3300,7 +3488,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>An array of user defined fields.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>An array of user defined fields.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3311,7 +3501,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3324,7 +3514,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>A unique identifier that represents the responder.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>A unique identifier that represents the responder.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -3334,7 +3526,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3347,7 +3539,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The incident user defined fields type.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The incident user defined fields type.</p>
+                                      </div>
                                       <div class="schema-table__enum _schema-table__enum_d7636a">
                                         Allowed enum values: <code>user_defined_field</code>
                                       </div>
@@ -3363,7 +3557,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -3376,8 +3570,10 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Incident resource type.</span
-                                ><span class="schema-table__default _schema-table__default_d7636a">
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Incident resource type.</p>
+                                </div>
+                                <span class="schema-table__default _schema-table__default_d7636a">
                                   Default: <code>incidents</code></span
                                 >
                                 <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -3415,7 +3611,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[&lt;oneOf&gt;]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Included related resources that the user requested.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Included related resources that the user requested.</p>
+                              </div>
                             </div>
                           </div>
                           <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3426,7 +3624,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -3458,7 +3656,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>User object returned by the API.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>User object returned by the API.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3469,7 +3669,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -3499,7 +3699,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Attributes of user object returned by the API.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Attributes of user object returned by the API.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3510,7 +3712,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">email</code></span
@@ -3520,7 +3722,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Email of the user.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Email of the user.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -3530,7 +3734,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -3540,7 +3744,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Handle of the user.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Handle of the user.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -3550,7 +3756,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">icon</code></span
@@ -3560,7 +3766,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>URL of the user&#39;s icon.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>URL of the user&#39;s icon.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -3570,7 +3778,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -3580,7 +3788,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Name of the user.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Name of the user.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div
@@ -3590,7 +3800,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">uuid</code></span
@@ -3600,7 +3810,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>UUID of the user.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>UUID of the user.</p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -3611,7 +3823,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">id</code></span
@@ -3621,7 +3833,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>ID of the user.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>ID of the user.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -3631,7 +3845,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
@@ -3641,8 +3855,10 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Users resource type.</span
-                                  ><span class="schema-table__default _schema-table__default_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Users resource type.</p>
+                                  </div>
+                                  <span class="schema-table__default _schema-table__default_d7636a">
                                     Default: <code>users</code></span
                                   >
                                   <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -3658,7 +3874,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -3690,7 +3906,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Attachment data from a response.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Attachment data from a response.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3701,7 +3919,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -3734,7 +3952,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The attachment&#39;s attributes.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The attachment&#39;s attributes.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3745,7 +3965,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -3777,7 +3997,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>The attachment object.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>The attachment object.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3788,7 +4010,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a"
@@ -3800,7 +4022,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The URL of the attachment.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The URL of the attachment.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div
@@ -3810,7 +4034,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                         ><code class="schema-table__name _schema-table__name_d7636a">title</code></span
@@ -3820,7 +4044,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>The title of the attachment.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>The title of the attachment.</p>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -3831,7 +4057,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a"
@@ -3843,7 +4069,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>The type of the attachment.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>The type of the attachment.</p>
+                                    </div>
                                     <div class="schema-table__enum _schema-table__enum_d7636a">
                                       Allowed enum values: <code>postmortem, link</code>
                                     </div>
@@ -3856,7 +4084,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                       ><code class="schema-table__name _schema-table__name_d7636a">modified</code></span
@@ -3866,7 +4094,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Timestamp when the attachment was last modified.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Timestamp when the attachment was last modified.</p>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -3877,7 +4107,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -3890,7 +4120,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The unique identifier of the attachment.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The unique identifier of the attachment.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -3900,7 +4132,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <button
                                     type="button"
@@ -3933,7 +4165,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The attachment&#39;s resource relationships.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The attachment&#39;s resource relationships.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3944,7 +4178,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -3974,7 +4208,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to incident.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to incident.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -3985,7 +4221,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <button
                                         type="button"
@@ -4018,7 +4254,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Relationship to incident object.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Relationship to incident object.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -4029,7 +4267,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 100px)"
+                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -4044,7 +4282,9 @@
                                       <div
                                         class="schema-table__cell-description _schema-table__cell-description_d7636a"
                                       >
-                                        <span>A unique identifier that represents the incident.</span>
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>A unique identifier that represents the incident.</p>
+                                        </div>
                                       </div>
                                     </div>
                                     <div
@@ -4054,7 +4294,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 100px)"
+                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -4069,8 +4309,10 @@
                                       <div
                                         class="schema-table__cell-description _schema-table__cell-description_d7636a"
                                       >
-                                        <span>Incident resource type.</span
-                                        ><span class="schema-table__default _schema-table__default_d7636a">
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>Incident resource type.</p>
+                                        </div>
+                                        <span class="schema-table__default _schema-table__default_d7636a">
                                           Default: <code>incidents</code></span
                                         >
                                         <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -4087,7 +4329,7 @@
                                 >
                                   <div
                                     class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                    style="padding-left: calc(var(--space-md) + 60px)"
+                                    style="padding-left: calc(var(--space-md) + 3 * (30px + var(--space-xs)))"
                                   >
                                     <button
                                       type="button"
@@ -4119,7 +4361,9 @@
                                     <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                   </div>
                                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                    <span>Relationship to user.</span>
+                                    <div class="schema-table__description _schema-table__description_d7636a">
+                                      <p>Relationship to user.</p>
+                                    </div>
                                   </div>
                                 </div>
                                 <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -4130,7 +4374,7 @@
                                   >
                                     <div
                                       class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                      style="padding-left: calc(var(--space-md) + 80px)"
+                                      style="padding-left: calc(var(--space-md) + 4 * (30px + var(--space-xs)))"
                                     >
                                       <button
                                         type="button"
@@ -4163,7 +4407,9 @@
                                       <span class="schema-table__type _schema-table__type_d7636a">object</span>
                                     </div>
                                     <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                      <span>Relationship to user object.</span>
+                                      <div class="schema-table__description _schema-table__description_d7636a">
+                                        <p>Relationship to user object.</p>
+                                      </div>
                                     </div>
                                   </div>
                                   <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -4174,7 +4420,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 100px)"
+                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">id</code
@@ -4189,7 +4435,9 @@
                                       <div
                                         class="schema-table__cell-description _schema-table__cell-description_d7636a"
                                       >
-                                        <span>A unique identifier that represents the user.</span>
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>A unique identifier that represents the user.</p>
+                                        </div>
                                       </div>
                                     </div>
                                     <div
@@ -4199,7 +4447,7 @@
                                     >
                                       <div
                                         class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                        style="padding-left: calc(var(--space-md) + 100px)"
+                                        style="padding-left: calc(var(--space-md) + 5 * (30px + var(--space-xs)))"
                                       >
                                         <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                           ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -4214,8 +4462,10 @@
                                       <div
                                         class="schema-table__cell-description _schema-table__cell-description_d7636a"
                                       >
-                                        <span>Users resource type.</span
-                                        ><span class="schema-table__default _schema-table__default_d7636a">
+                                        <div class="schema-table__description _schema-table__description_d7636a">
+                                          <p>Users resource type.</p>
+                                        </div>
+                                        <span class="schema-table__default _schema-table__default_d7636a">
                                           Default: <code>users</code></span
                                         >
                                         <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -4233,7 +4483,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">type</code
@@ -4246,8 +4496,10 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">enum</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>The incident attachment resource type.</span
-                                  ><span class="schema-table__default _schema-table__default_d7636a">
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>The incident attachment resource type.</p>
+                                  </div>
+                                  <span class="schema-table__default _schema-table__default_d7636a">
                                     Default: <code>incident_attachments</code></span
                                   >
                                   <div class="schema-table__enum _schema-table__enum_d7636a">
@@ -4426,10 +4678,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>API error response.</p>
+                      </div>
                       <div id="schema-table-X41" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -4452,7 +4707,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>A list of errors.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>A list of errors.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -4537,10 +4794,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>API error response.</p>
+                      </div>
                       <div id="schema-table-X43" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -4563,7 +4823,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>A list of errors.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>A list of errors.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -4648,10 +4910,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>API error response.</p>
+                      </div>
                       <div id="schema-table-X45" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -4674,7 +4939,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>A list of errors.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>A list of errors.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -4759,10 +5026,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>API error response.</p>
+                      </div>
                       <div id="schema-table-X47" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -4785,7 +5055,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>A list of errors.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>A list of errors.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -4870,10 +5142,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>API error response.</p>
+                      </div>
                       <div id="schema-table-X49" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -4896,7 +5171,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>A list of errors.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>A list of errors.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
