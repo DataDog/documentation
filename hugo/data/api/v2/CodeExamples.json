@@ -357,7 +357,7 @@
     {
       "group": "csm_threats",
       "suffix": "",
-      "description": "Create a Workload Protection policy returns \"OK\" response"
+      "description": "Create a Workload Protection policy returns \"Created\" response"
     }
   ],
   "UpdateCloudWorkloadSecurityAgentRule": [
