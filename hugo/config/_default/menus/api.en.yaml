@@ -18,6 +18,11 @@ menu:
       parent: API overview
       weight: 7
       identifier: rate-limits
+    - name: API versioning
+      url: /api/versions/
+      parent: API overview
+      weight: 8
+      identifier: api-versioning
     - name: AWS Integration
       url: /api/latest/aws-integration/
       identifier: aws-integration
