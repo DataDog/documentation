@@ -222,6 +222,7 @@ Para monitores que utilizan el método de detección {{< ui >}}Anomalies{{< /ui 
 | {{< ui >}}Alert after N consecutive anomalies{{< /ui >}} | La cantidad de evaluaciones fallidas consecutivas antes de que el monitor envíe una alerta. Configure este ajuste para suprimir picos aislados. |
 | {{< ui >}}Minimum upper bound size{{< /ui >}} | Restringe qué tan estrictamente el modelo rastrea sus datos en el extremo superior. |
 | {{< ui >}}Minimum lower bound size{{< /ui >}} | Restringe qué tan estrictamente el modelo rastrea sus datos en el extremo inferior. |
+| {{< ui >}}Sensitivity{{< /ui >}} | Controle el ancho de los límites esperados. Mueva el control deslizante hacia {{< ui >}}Fewer alerts{{< /ui >}} para límites más anchos, o hacia {{< ui >}}More alerts{{< /ui >}} para límites más estrechos. Los tamaños mínimos de los límites configurados aún se aplican. |
 
 ### Programación del monitor {#monitor-schedule}
 

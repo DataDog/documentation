@@ -3510,6 +3510,19 @@ menu:
           - ListSecurityMonitoringRules
         unstable: []
         order: 73
+    - name: Get signals matching an event
+      url: /api/latest/security-monitoring/get-signals-matching-an-event/
+      identifier: security-monitoring-get-signals-matching-an-event
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMatchingSignals
+        unstable:
+          - v2
+        order: 174
     - name: Get a single entity context
       url: /api/latest/security-monitoring/get-a-single-entity-context/
       identifier: security-monitoring-get-a-single-entity-context
@@ -3523,6 +3536,19 @@ menu:
         unstable:
           - v2
         order: 132
+    - name: Get recently updated entity context
+      url: /api/latest/security-monitoring/get-recently-updated-entity-context/
+      identifier: security-monitoring-get-recently-updated-entity-context
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntityContextRecentlyUpdated
+        unstable:
+          - v2
+        order: 175
     - name: Get entity context
       url: /api/latest/security-monitoring/get-entity-context/
       identifier: security-monitoring-get-entity-context
@@ -13031,6 +13057,75 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: Databricks Integration
+      url: /api/latest/databricks-integration/
+      identifier: databricks-integration
+      generated: true
+    - name: Update a Databricks integration account
+      url: /api/latest/databricks-integration/update-a-databricks-integration-account/
+      identifier: databricks-integration-update-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get a Databricks integration account
+      url: /api/latest/databricks-integration/get-a-databricks-integration-account/
+      identifier: databricks-integration-get-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a Databricks integration account
+      url: /api/latest/databricks-integration/delete-a-databricks-integration-account/
+      identifier: databricks-integration-delete-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create a Databricks integration account
+      url: /api/latest/databricks-integration/create-a-databricks-integration-account/
+      identifier: databricks-integration-create-a-databricks-integration-account
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDatabricksIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List Databricks integration accounts
+      url: /api/latest/databricks-integration/list-databricks-integration-accounts/
+      identifier: databricks-integration-list-databricks-integration-accounts
+      parent: databricks-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatabricksIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Datasets
       url: /api/latest/datasets/
       identifier: datasets
@@ -16066,6 +16161,36 @@ menu:
         unstable:
           - v2
         order: 7
+    - name: Logs Archive Searches
+      url: /api/latest/logs-archive-searches/
+      identifier: logs-archive-searches
+      generated: true
+    - name: Get an Archive Search
+      url: /api/latest/logs-archive-searches/get-an-archive-search/
+      identifier: logs-archive-searches-get-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetArchiveSearch
+        unstable:
+          - v2
+        order: 2
+    - name: Create an Archive Search
+      url: /api/latest/logs-archive-searches/create-an-archive-search/
+      identifier: logs-archive-searches-create-an-archive-search
+      parent: logs-archive-searches
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateArchiveSearch
+        unstable:
+          - v2
+        order: 1
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -18594,19 +18719,6 @@ menu:
         unstable:
           - v2
         order: 1
-    - name: Query aggregated signals and problems
-      url: /api/latest/rum-insights/query-aggregated-signals-and-problems/
-      identifier: rum-insights-query-aggregated-signals-and-problems
-      parent: rum-insights
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - QueryAggregatedSignalsProblems
-        unstable:
-          - v2
-        order: 3
     - name: Query aggregated long tasks
       url: /api/latest/rum-insights/query-aggregated-long-tasks/
       identifier: rum-insights-query-aggregated-long-tasks
@@ -18663,9 +18775,9 @@ menu:
         unstable:
           - v2
         order: 5
-    - name: Update a RUM operation strong link
-      url: /api/latest/rum-operations/update-a-rum-operation-strong-link/
-      identifier: rum-operations-update-a-rum-operation-strong-link
+    - name: Update a RUM operation link
+      url: /api/latest/rum-operations/update-a-rum-operation-link/
+      identifier: rum-operations-update-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18676,9 +18788,9 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: Delete a RUM operation strong link
-      url: /api/latest/rum-operations/delete-a-rum-operation-strong-link/
-      identifier: rum-operations-delete-a-rum-operation-strong-link
+    - name: Delete a RUM operation link
+      url: /api/latest/rum-operations/delete-a-rum-operation-link/
+      identifier: rum-operations-delete-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18689,9 +18801,9 @@ menu:
         unstable:
           - v2
         order: 9
-    - name: Create a RUM operation strong link
-      url: /api/latest/rum-operations/create-a-rum-operation-strong-link/
-      identifier: rum-operations-create-a-rum-operation-strong-link
+    - name: Create a RUM operation link
+      url: /api/latest/rum-operations/create-a-rum-operation-link/
+      identifier: rum-operations-create-a-rum-operation-link
       parent: rum-operations
       generated: true
       params:
@@ -18702,9 +18814,9 @@ menu:
         unstable:
           - v2
         order: 8
-    - name: List RUM operation strong links
-      url: /api/latest/rum-operations/list-rum-operation-strong-links/
-      identifier: rum-operations-list-rum-operation-strong-links
+    - name: List RUM operation links
+      url: /api/latest/rum-operations/list-rum-operation-links/
+      identifier: rum-operations-list-rum-operation-links
       parent: rum-operations
       generated: true
       params:
