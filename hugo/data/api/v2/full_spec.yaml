@@ -129485,7 +129485,7 @@ components:
           type: array
       type: object
     UsageQuotaBulkResultAttributes:
-      description: Attributes of a usage quota bulk write result. On success, all fields except `error` are present. On failure, only `error` is present and the other fields are omitted.
+      description: Attributes of a usage quota bulk write result. On success, quota fields are present as applicable, and pending fields are present only when a change is scheduled. On failure, only `error` is present and the other fields are omitted.
       properties:
         enforced:
           description: Whether usage above the limit is actively blocked instead of only tracked or alerted on. Omitted if this item failed to write.
@@ -129499,6 +129499,16 @@ components:
           description: The public ID of the organization that owns the quota. Omitted if this item failed to write.
           example: abcdef12345
           type: string
+        pending_effective_from:
+          description: The future UTC month when the scheduled limit takes effect, formatted as `YYYY-MM`, starting at 00:00 UTC on its first day. Present only together with `pending_usage_limit` and omitted when no change is scheduled or this item failed to write.
+          example: "2026-11"
+          pattern: '^\d{4}-\d{2}$'
+          type: string
+        pending_usage_limit:
+          description: The usage limit scheduled for the organization-wide quota in the usage units defined by the quota namespace. A value of `0` is valid. At the start of the effective month, this value becomes `usage_limit` and both pending fields are omitted. Omitted when no change is scheduled or this item failed to write.
+          example: 50000
+          format: double
+          type: number
         scope:
           $ref: "#/components/schemas/UsageQuotaResponseScope"
         usage_limit:
@@ -129514,7 +129524,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaBulkResultAttributes"
         id:
           description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -129529,23 +129539,30 @@ components:
         $ref: "#/components/schemas/UsageQuotaBulkResultData"
       type: array
     UsageQuotaCreateAttributes:
-      description: Attributes for creating or updating a usage quota by scope.
+      description: Attributes for creating or updating a usage quota by scope. Each item must provide `usage_limit`, `pending_usage_limit`, or both. Providing only `pending_usage_limit` updates an existing organization-wide quota, never creates one, requires `enforced` to be omitted, and fails if the quota does not exist.
+      example:
+        enforced: true
+        pending_usage_limit: 100000
+        usage_limit: 600000
       properties:
         enforced:
-          description: Whether to actively block usage above the limit instead of only tracking or alerting on it.
+          description: Whether to actively block usage above `usage_limit` instead of only tracking or alerting on it. Required when `usage_limit` is provided and must be omitted when only `pending_usage_limit` is provided.
           example: true
           type: boolean
+        pending_usage_limit:
+          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`. Cancel a scheduled change only by deleting the quota's `/pending` sub-resource.
+          example: 50000
+          format: int64
+          minimum: 0
+          type: integer
         scope:
           $ref: "#/components/schemas/UsageQuotaRequestScope"
         usage_limit:
-          description: The quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than the usage already recorded in the current period.
+          description: The non-negative, whole-number quota limit to set in the usage units defined by the quota namespace. For an organization-wide quota (scope omitted), the limit must be greater than usage already recorded in the current period. When this field is provided, `enforced` is required.
           example: 100000
           format: int64
           minimum: 0
           type: integer
-      required:
-        - usage_limit
-        - enforced
       type: object
     UsageQuotaCreateData:
       description: A usage quota resource to create or update by scope.
@@ -129593,6 +129610,19 @@ components:
           description: The public ID of the organization that owns the quota.
           example: abcdef12345
           type: string
+        pending_effective_from:
+          description: The future UTC month when the scheduled limit takes effect, formatted as `YYYY-MM`, starting at 00:00 UTC on its first day. Present only together with `pending_usage_limit` and omitted when no change is scheduled.
+          example: "2026-11"
+          pattern: '^\d{4}-\d{2}$'
+          type: string
+        pending_usage_limit:
+          description: |-
+            The usage limit scheduled for the organization-wide quota in the usage units defined by the quota namespace.
+            A value of `0` is valid. At the start of the effective month, this value becomes `usage_limit` and both pending
+            fields are omitted. Omitted when no change is scheduled.
+          example: 50000
+          format: double
+          type: number
         scope:
           $ref: "#/components/schemas/UsageQuotaResponseScope"
         usage_limit:
@@ -129612,7 +129642,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaResponseAttributes"
         id:
           description: An opaque usage quota identifier. Clients must pass this value back verbatim in update and delete requests and must not infer any structure from it.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -129645,13 +129675,20 @@ components:
       x-enum-varnames:
         - QUOTAS
     UsageQuotaUpdateAttributes:
-      description: Attributes to update on a usage quota. Omitting a property leaves its current value unchanged.
+      description: Attributes to update on a usage quota. At least one of `usage_limit`, `enforced`, or `pending_usage_limit` must be provided. Omitting a property leaves its current value unchanged.
       properties:
         enforced:
           description: Whether to actively block usage above the limit. Omit this field to leave the current enforcement setting unchanged.
           example: false
           nullable: true
           type: boolean
+        pending_usage_limit:
+          description: The non-negative, whole-number limit to schedule for the organization-wide quota in the usage units defined by the quota namespace. It is not checked against current usage. Each write schedules the value for 00:00 UTC on the first day of the next calendar month and replaces any previously scheduled change; the server computes `pending_effective_from`. Omit this field to leave any scheduled change unchanged, including when raising `usage_limit`; use `DELETE /api/v2/usage/quotas/{quota_namespace}/{id}/pending` to cancel one.
+          example: 50000
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
         usage_limit:
           description: The new quota limit in the usage units defined by the quota namespace. For an organization-wide quota (empty scope), the limit must be greater than the usage already recorded in the current period. Omit this field to leave the current limit unchanged.
           example: 120000
@@ -129667,7 +129704,7 @@ components:
           $ref: "#/components/schemas/UsageQuotaUpdateAttributes"
         id:
           description: The opaque usage quota identifier, which must match the identifier in the request path.
-          example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+          example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
           type: string
         type:
           $ref: "#/components/schemas/UsageQuotaType"
@@ -233982,7 +234019,15 @@ paths:
                           scope:
                             user_handle: jane@example.com
                           usage_limit: 100000
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
+                        type: quotas
+                      - attributes:
+                          enforced: true
+                          org_public_id: abcdef12345
+                          pending_effective_from: "2026-11"
+                          pending_usage_limit: 100000
+                          usage_limit: 600000
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                         type: quotas
                     meta:
                       page:
@@ -234030,7 +234075,11 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated; otherwise, a new quota is created. Requires the `billing_edit` permission.
+        Creates or updates one or more usage quotas by scope. If a quota already exists for a supplied scope, it is updated.
+        Otherwise, a quota is created only when `usage_limit` and `enforced` are provided.
+        For the organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period and can
+        accompany an immediate limit or update an existing quota by itself.
+        Scheduled changes follow `include_descendants` like the other fields. Requires the `billing_edit` permission.
       operationId: CreateQuotas
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -234067,6 +234116,15 @@ paths:
                           user_handle: "*"
                         usage_limit: 250000
                       type: quotas
+              schedule_reduction:
+                summary: Set a limit and schedule a reduction
+                value:
+                  data:
+                    - attributes:
+                        enforced: true
+                        pending_usage_limit: 100000
+                        usage_limit: 600000
+                      type: quotas
             schema:
               $ref: "#/components/schemas/UsageQuotasCreateRequest"
         description: The usage quotas to create or update.
@@ -234085,11 +234143,11 @@ paths:
                           scope:
                             user_handle: jane@example.com
                           usage_limit: 100000
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOmphbmVAZXhhbXBsZS5jb20"
                         type: quotas
                       - attributes:
                           error: usage_limit is out of range
-                        id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTp1c2VyQGV4YW1wbGUuY29t"
+                        id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOnVzZXJAZXhhbXBsZS5jb20"
                         type: quotas
               schema:
                 $ref: "#/components/schemas/UsageQuotasBulkResponse"
@@ -234099,7 +234157,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request
+          description: Bad Request. Returned if the request is malformed, including when an item sets `pending_usage_limit` on a scoped quota, provides `enforced` without `usage_limit`, or provides neither limit. A pending-only item for a quota that does not exist is reported in that item's `error`; when only the caller's organization is targeted, this failure returns `400`.
         "403":
           content:
             application/json:
@@ -234148,7 +234206,7 @@ paths:
           name: id
           required: true
           schema:
-            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
             type: string
       responses:
         "204":
@@ -234185,7 +234243,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: |-
-        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+        Updates the supplied fields on a usage quota and leaves omitted fields unchanged. For an organization-wide quota, `pending_usage_limit` schedules a limit for the next usage period. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
       operationId: UpdateQuota
       parameters:
         - description: The product-specific namespace whose usage quotas are being managed.
@@ -234200,7 +234258,7 @@ paths:
           name: id
           required: true
           schema:
-            example: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
             type: string
       requestBody:
         content:
@@ -234212,7 +234270,7 @@ paths:
                     attributes:
                       enforced: false
                       usage_limit: 120000
-                    id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                    id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                     type: quotas
             schema:
               $ref: "#/components/schemas/UsageQuotaUpdateRequest"
@@ -234229,10 +234287,8 @@ paths:
                       attributes:
                         enforced: false
                         org_public_id: abcdef12345
-                        scope:
-                          user_handle: jane@example.com
                         usage_limit: 120000
-                      id: "MjAfYWlfY3JlZGl0c1911c2VyX2hhbmRsZTpfX0FMTF9f"
+                      id: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
                       type: quotas
               schema:
                 $ref: "#/components/schemas/UsageQuotaResponse"
@@ -234242,7 +234298,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Bad Request. Returned if the request is malformed, or if the `id` in the request body does not match the `id` in the request path.
+          description: Bad Request. Returned if the request is malformed, if the `id` in the request body does not match the `id` in the request path, if none of `usage_limit`, `enforced`, or `pending_usage_limit` is provided, or if `pending_usage_limit` is set on a scoped quota.
         "403":
           content:
             application/json:
@@ -234266,6 +234322,65 @@ paths:
       tags:
         - Usage Metering
       x-menu-order: 16
+      "x-permission":
+        operator: OR
+        permissions:
+          - billing_edit
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/usage/quotas/{quota_namespace}/{id}/pending:
+    delete:
+      description: |-
+        Cancels the limit change scheduled to take effect at the start of the next usage period, leaving the usage quota and its current limit unchanged. Returns `404` when the quota does not exist, has no scheduled change, or its scheduled change has already taken effect; in every case the quota is left unchanged. The quota must belong to the caller's organization or one of its descendants, and its opaque identifier must belong to the requested quota namespace. Requires the `billing_edit` permission.
+      operationId: DeletePendingQuota
+      parameters:
+        - description: The product-specific namespace whose usage quotas are being managed.
+          in: path
+          name: quota_namespace
+          required: true
+          schema:
+            example: ai_credits
+            type: string
+        - description: The opaque quota identifier returned by a previous list or create request. Clients must pass this value verbatim.
+          in: path
+          name: id
+          required: true
+          schema:
+            example: "MTIzNB9haV9jcmVkaXRzH3VzZXJfaGFuZGxlOl9fQUxMX18"
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request. Returned if the `id` is malformed or does not belong to the requested quota namespace.
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - billing_edit
+      summary: Cancel a scheduled usage quota limit
+      tags:
+        - Usage Metering
+      x-menu-order: 18
       "x-permission":
         operator: OR
         permissions:

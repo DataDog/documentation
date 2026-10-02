@@ -6433,6 +6433,19 @@ menu:
           - GetUsageSummaryAvailableFields
         unstable: []
         order: 13
+    - name: Cancel a scheduled usage quota limit
+      url: /api/latest/usage-metering/cancel-a-scheduled-usage-quota-limit/
+      identifier: usage-metering-cancel-a-scheduled-usage-quota-limit
+      parent: usage-metering
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeletePendingQuota
+        unstable:
+          - v2
+        order: 18
     - name: Update a usage quota
       url: /api/latest/usage-metering/update-a-usage-quota/
       identifier: usage-metering-update-a-usage-quota
