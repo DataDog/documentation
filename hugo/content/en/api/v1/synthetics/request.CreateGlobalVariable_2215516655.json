@@ -1,0 +1,6 @@
+{
+  "name": "PERSISTENT_EMAIL_EXAMPLESYNTHETIC",
+  "description": "Persistent email variable",
+  "tags": [],
+  "is_email": true
+}
