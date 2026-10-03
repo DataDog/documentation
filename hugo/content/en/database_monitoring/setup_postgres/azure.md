@@ -93,22 +93,7 @@ CREATE USER datadog WITH password '<PASSWORD>';
 
 
 {{< tabs >}}
-{{% tab "Postgres ≥ 16" %}}
-
-Create the following schema **in every database**:
-
-```SQL
-CREATE SCHEMA datadog;
-GRANT USAGE ON SCHEMA datadog TO datadog;
-GRANT USAGE ON SCHEMA public TO datadog;
-GRANT pg_read_all_settings TO datadog;
-GRANT pg_read_all_stats TO datadog;
-CREATE EXTENSION IF NOT EXISTS pg_stat_statements;
-```
-
-{{% /tab %}}
-
-{{% tab "Postgres 15" %}}
+{{% tab "Postgres ≥ 15" %}}
 
 Create the following schema **in every database**:
 
