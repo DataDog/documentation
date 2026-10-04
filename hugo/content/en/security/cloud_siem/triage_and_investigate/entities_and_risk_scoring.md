@@ -75,7 +75,7 @@ The {{< ui >}}What Happened{{< /ui >}} and {{< ui >}}Risk Contributors{{< /ui >}
 
 ### Triage and mitigate threats in bulk
 
-The {{< ui >}}Risk Contributors{{< /ui >}} section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks. Select the items you want to act on, then use the inline actions to set a triage state, assign an item, create a security case, declare an incident, or create a suppression.
+The {{< ui >}}Risk Contributors{{< /ui >}} section of the entity side panel includes the available mitigation steps. Select the items you want to act on, then use the inline actions to set a triage state, assign an item, create a security case, declare an incident, or create a suppression.
 
 ## Configure notifications for Entity Risks
 
