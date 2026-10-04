@@ -167,7 +167,7 @@ Use [Case Management][5] to track signals that require further analysis. View ac
 
 ### Entity Risks
 
-{{< img src="security/security_monitoring/landing/03_risk_insights.png" alt="" style="width:100%;" >}}
+{{< img src="security/security_monitoring/landing/03_entity_risks.png" alt="The Entity Risks section of the Cloud SIEM Overview page, showing the top risky entities, a breakdown by entity type, and entity counts by risk severity" style="width:100%;" >}}
 
 Review the risky entities in your environment.
 
