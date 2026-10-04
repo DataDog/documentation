@@ -45,7 +45,7 @@ With Entity Risks, you can:
 
 On the [Entity Risks][4] page, you can view all entities that have a non-zero risk score associated to them.
 
-{{< img src="security/entities/entities-explorer3.png" alt="A list of entities and their risk scores in Entity Risks" style="width:100%;" >}}
+{{< img src="security/entities/entities-explorer4.png" alt="The Entity Risks page listing risks and their scores, with one user identity row expanded to show the entities beneath it" style="width:100%;" >}}
 
 ### Risk grouped by user identity
 
