@@ -90,8 +90,8 @@ You can configure Datadog to send you notifications as soon as it detects new th
    - In Datadog, go to the [Entity Risks][4] page, then click {{< ui >}}Create Notification Rule{{< /ui >}}.
    - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Entity Risks{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
 1. Under {{< ui >}}Group risk by{{< /ui >}}, choose what the rule measures:
-   - {{< ui >}}Individual entity{{< /ui >}}: The rule evaluates each entity's own risk score. This is the default. Individual entity scores typically range from 0 to 500.
-   - {{< ui >}}User identity{{< /ui >}}: The rule evaluates a user identity's rolled-up risk score, which sums the scores of every entity resolved to that person. Rolled-up scores are unbounded, so they need higher thresholds than individual entity rules. This option is available after you configure an Entity Pack and user identities are syncing. See [Notify on rolled-up user identity risk](#notify-on-rolled-up-user-identity-risk).
+   - {{< ui >}}Individual entity{{< /ui >}}: The rule evaluates each entity's own risk score.
+   - {{< ui >}}User identity{{< /ui >}}: The rule evaluates a user identity's rolled-up risk score, which sums the scores of every entity resolved to that person. This option is available after you configure an Entity Pack and user identities are syncing. See [Notify on rolled-up user identity risk](#notify-on-rolled-up-user-identity-risk).
 
    <div class="alert alert-warning">You cannot change a rule's grouping after you create the rule. To use a different grouping, create another rule.</div>
 1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays the entities that match your criteria.
