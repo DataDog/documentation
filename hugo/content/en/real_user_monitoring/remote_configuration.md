@@ -106,6 +106,10 @@ Remote configuration does not override any SDK settings by default. To manage a 
 2. Configure the setting by selecting a state, changing its sampling rate, or adding data.
 3. Save your changes.
 
+## View changes in Audit Trail
+
+Changes to RUM remote configurations appear in [Datadog Audit Trail][3], where you can review who made each change and when.
+
 ## Configurable settings
 
 {{< tabs >}}
@@ -242,3 +246,4 @@ Remote configuration does not override any SDK settings by default. To manage a 
 
 [1]: /account_management/rbac/permissions/#real-user-monitoring
 [2]: /remote_configuration/
+[3]: /account_management/audit_trail/
