@@ -65,7 +65,7 @@ To investigate a user identity:
 
 Click an entity in [Entity Risks][4] to open the entity side panel.
 
-{{< img src="security/entities/entity-side-panel3.png" alt="The side panel for an entity" style="width:90%;" >}}
+{{< img src="security/entities/entity-side-panel4.png" alt="The side panel for an entity, showing the What Happened summary and the Risk Contributors list" style="width:90%;" >}}
 
 The {{< ui >}}What Happened{{< /ui >}} section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
 
