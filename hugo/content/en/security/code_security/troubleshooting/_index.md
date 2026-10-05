@@ -329,7 +329,7 @@ After the initial Git history scan, scans analyze only the latest commit and do 
 ## How committers are calculated for Code Security
 A **committer** is an active Git contributor identified by the `author_email` field in Git commit metadata.
 
-A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
+A committer is counted toward billing if they make **at least three commits in a calendar month**, counted across all repositories where Code Security is enabled. For example, two commits in one repository and one commit in another repository count as three commits. Each Code Security product counts committers separately, for the repositories where that product is enabled.
 
 Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
@@ -339,6 +339,8 @@ Committers are identified based on the normalized `author_email` value in Git co
 Commits finalized by known GitHub system accounts such as `noreply@github.com` and `actions@github.com` are not counted.
 
 Commits using `@users.noreply.github.com` are not automatically excluded. These addresses are commonly used by developers who choose to hide their public email in GitHub. If the commit can be attributed to an individual developer, it is counted.
+
+Commits whose author email uses a noreply address from a Git provider other than GitHub, such as `@users.noreply.gitlab.com`, are not counted.
 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
@@ -350,6 +352,34 @@ For repositories hosted on GitHub, Datadog can map each Git author email to the 
 This mapping is available for GitHub repositories only. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not deduplicated.
 
 If your committer count looks higher than expected for GitHub repositories, check that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
+
+### Estimating committers before enabling Code Security
+
+To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
+
+Run this command in a Bash-compatible shell, such as Terminal on macOS or a Linux shell. On Windows, use Git Bash (included with Git for Windows) or Windows Subsystem for Linux (WSL). The command does not run in PowerShell or Command Prompt.
+
+```bash
+SINCE=$(( $(date +%s) - 30*86400 ))
+for repo in */; do
+  git -C "$repo" log --all --format='%ct%x09%ae%x09%ce'
+done | awk -F'\t' -v since="$SINCE" '
+  $1 < since { next }
+  { a = tolower($2); c = tolower($3) }
+  a ~ /@users\.noreply\.github\.com$/ && (c == "noreply@github.com" || c == "actions@github.com") { next }
+  a ~ /@users\.noreply\./ && a !~ /@users\.noreply\.github\.com$/ { next }
+  { print a }' | sort | uniq -c | awk '$1 >= 3' | wc -l
+```
+
+To reduce clone time and disk usage, use `git clone --bare --filter=tree:0 <REPOSITORY_URL>`. This downloads commit history without file contents.
+
+This is an estimate. Your billed committer count can differ because:
+
+- Billing uses calendar months, not a rolling 30-day window.
+- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once.
+- Each Code Security product counts committers separately, for the repositories where it is enabled.
+
+After you enable Code Security, you can track your actual committer count with the [estimated usage metrics][33].
 
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
@@ -426,3 +456,4 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [30]: /bits_ai/bits_code/setup/#configure-internet-access
 [31]: /security/code_security/secret_scanning/#mute-findings
 [32]: /security/code_security/software_composition_analysis/setup_static/?tab=github#scan-in-ci-pipelines
+[33]: /account_management/billing/usage_metrics/
