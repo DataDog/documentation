@@ -54,11 +54,6 @@ Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
 
 ### Connect
 
-Choose remote authentication when possible. Use local binary authentication if your environment blocks the remote OAuth flow.
-
-{{< tabs >}}
-{{% tab "Remote authentication" %}}
-
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Remote authentication uses the MCP specification's [Streamable HTTP][1] transport.
 
@@ -93,51 +88,6 @@ After adding the configuration, run `codex mcp login datadog` to complete the OA
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
-
-{{% /tab %}}
-
-{{% tab "Local binary authentication" %}}
-
-Local binary authentication uses the MCP specification's [stdio][2] transport. Use this method if remote authentication is unavailable.
-
-1. Install the Datadog MCP Server binary:
-
-    ```bash
-    curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-    ```
-
-    The binary installs to `~/.local/bin/datadog_mcp_cli`.
-
-2. Complete the OAuth login flow:
-
-    ```bash
-    datadog_mcp_cli login
-    ```
-
-3. Configure your AI client. For Claude Code, add the following to `~/.claude.json`, replacing `<USERNAME>` in the command path:
-
-    ```json
-    {
-      "mcpServers": {
-        "datadog": {
-          "type": "stdio",
-          "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-          "args": [],
-          "env": {}
-        }
-      }
-    }
-    ```
-
-    Alternatively, add the server with the Claude Code CLI:
-
-    ```bash
-    claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli
-    ```
-
-[2]: https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#stdio
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Authenticate with API keys
 
