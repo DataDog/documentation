@@ -19,7 +19,9 @@ Datadog proporciona puntos de conexión de ingesta OTLP dedicados para plataform
 
 Utilice esta opción cuando ejecute cargas de trabajo en una plataforma administrada donde no sea factible instalar un [Datadog Agent][1] o un [OpenTelemetry Collector][2]. Si su plataforma no se encuentra en la tabla a continuación y usted ejecuta en cómputo sin servidor de AWS, Azure o GCP, consulte [Serverless][5].
 
-<div class="alert alert-danger">Los metadatos de host enviados a los puntos de conexión de plataformas administradas no completan la <a href="/infrastructure/list/">Lista de hosts de infraestructura</a>.</div>
+<div class="alert alert-danger">Los metadatos de servidor enviados a los puntos de conexión de plataformas administradas no completan la <a href="/infrastructure/list/">Lista de hosts de infraestructura</a>.</div>
+
+Para obtener recomendaciones de nombre de host para la ingesta directa de OTLP, consulte [Hostname and Tagging][19].
 
 Cada punto de conexión admite las siguientes rutas de señal:
 
@@ -88,7 +90,7 @@ Para habilitar la exportación OTLP desde una plataforma administrada que no apa
 
 ### Sin enriquecimiento de metadatos {#no-metadata-enrichment}
 
-Sin un Collector o Agent, la telemetría no se enriquece con metadatos de host. Las funciones que dependen de estos metadatos (por ejemplo, la [Lista de hosts de infraestructura][8]) no están disponibles. Consulte la [lista de compatibilidad de OpenTelemetry][4] para ver la lista completa de funciones afectadas.
+Sin un Collector o Agent, la telemetría no se enriquece con metadatos de servidor. Las funciones que dependen de estos metadatos (por ejemplo, la [Lista de servidores de infraestructura][8]) no están disponibles. Consulte la [lista de compatibilidad de OpenTelemetry][4] para ver la lista completa de funciones afectadas.
 
 ### Normalización limitada {#limited-normalization}
 
@@ -122,3 +124,4 @@ Los controles de muestreo disponibles en el Collector (muestreo basado en el seg
 [16]: https://docs.retool.com/apps/guides/observability/performance-monitoring
 [17]: https://www.rwx.com/docs/observability/datadog
 [18]: https://vercel.com/marketplace/datadog
+[19]: /es/opentelemetry/config/hostname_tagging/#direct-otlp-intake-without-a-collector

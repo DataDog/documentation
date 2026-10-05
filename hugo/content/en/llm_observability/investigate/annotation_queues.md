@@ -244,6 +244,7 @@ Transfer annotated traces to datasets for experiment evaluation:
 5. Set the dataset's {{< ui >}}expected output{{< /ui >}}:
    - {{< ui >}}From interaction{{< /ui >}}: use each trace's actual output. For experiment traces, you can also pick {{< ui >}}Expected output{{< /ui >}} to use the original expected output from the experiment's source dataset.
    - {{< ui >}}From annotation label{{< /ui >}}: use the values the annotators applied. Pick one or more labels. The record's `expected_output` is built from your selection.
+   - {{< ui >}}From final score{{< /ui >}}: use the final score recorded for each label instead of values aggregated across annotators. Pick one or more labels. The record's `expected_output` is a JSON object keyed by the selected label names. Traces without a final score for a selected label are still exported, with `null` for that label.
 6. Choose an existing dataset, or create a dataset.
 
 When **expected output** is built from annotation labels, the exported value is a JSON object keyed by label name, for example `{ "is_harmful": false, "tone": ["neutral"], "topics": ["safety", "policy"] }`. The same shape applies whether you select one label or multiple labels. Categorical labels are always exported as arrays of selected options, whether the label is single-select or multi-select.
@@ -296,7 +297,7 @@ Raw per-annotator values are preserved in each record's metadata, along with ann
 
 {{% /collapse-content %}}
 
-Labels not selected as expected output are also included with each trace as metadata.
+Labels not selected as expected output are also included with each trace as metadata, along with any final scores and their assessment and reasoning.
 
 See [Datasets][3] for more information about using datasets in experiments.
 

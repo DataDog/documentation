@@ -82,6 +82,8 @@ Después de configurar el comportamiento de las etiquetas, la vista previa muest
 
 {{< img src="metrics/guide/tag_indexing_rules/preview_affected_metrics.png" alt="El panel de vista previa de métricas afectadas que muestra una lista de métricas que coinciden con el contexto de la regla." style="width:80%;">}}
 
+> De forma predeterminada, cada Nueva regla se añade al final de su conjunto de reglas actual.
+
 ### Limitaciones {#limitations}
 
 - {{< ui >}}Exclude{{< /ui >}} Las reglas entran en vigor después de que Datadog observa una etiqueta en una métrica.
@@ -108,7 +110,7 @@ Elimine las reglas que ya no sean necesarias. Cuando elimina una regla, Datadog 
 
 ### Sobrescribir reglas para una métrica específica {#override-rules-for-a-specific-metric}
 
-Para eximir a una métrica de las reglas de etiquetas, abra el panel lateral de detalles de la métrica en el Resumen de métricas, seleccione {{< ui >}}Configure This Metric Individually{{< /ui >}} y configure la métrica para conservar todas las etiquetas. Conservar todas las etiquetas omite todas las reglas de etiquetas para esa métrica sin modificar las reglas en sí.
+Para eximir a una métrica de las reglas de etiquetas, abra el panel lateral de detalles de la métrica en el Metrics Summary, seleccione {{< ui >}}Configure This Metric Individually{{< /ui >}} y configure la métrica para conservar todas las etiquetas. Conservar todas las etiquetas omite todas las reglas de etiquetas para esa métrica sin modificar las reglas en sí.
 
 Para volver a aplicar las reglas, restaure la configuración predeterminada de la métrica desde el mismo panel.
 
@@ -179,7 +181,7 @@ Etiquetas iniciales:
 
 **Información clave**: Las reglas de inclusión múltiple con comportamiento {{< ui >}}Merge{{< /ui >}}, aplicadas después de una regla de exclusión con comportamiento {{< ui >}}Override{{< /ui >}}, son aditivas (una métrica que coincide con dos prefijos de excepción obtiene ambos conjuntos de etiquetas restaurados).
 
-## Metrics without Limits™ compatibility {#metrics-without-limits-compatibility}
+## Compatibilidad de Metrics without Limits™ {#metrics-without-limits-compatibility}
 
 Las configuraciones existentes por métrica de [Metrics without Limits™][2] (MWL) tienen prioridad sobre las reglas de indexación de etiquetas y actúan como exenciones. Mientras una exención permanezca activa, la métrica no se verá afectada por ninguna regla de indexación de etiquetas.
 
@@ -189,6 +191,62 @@ Puede revisar y eliminar estas exenciones desde la página de Reglas de indexaci
 - **Necesita revisión**: Eliminar la exención puede afectar el uso de sus métricas personalizadas, o es posible que sus reglas de indexación de etiquetas no conserven todas las etiquetas incluidas en la configuración de MWL existente. Revise estas exenciones cuidadosamente para evitar interrumpir paneles, monitores u otros activos que dependan de esas etiquetas.
 
 Las exenciones se aplican a toda la cuenta, no a reglas de indexación de etiquetas individuales. Eliminar la exención de una métrica de una regla la elimina automáticamente de todas las reglas de indexación de etiquetas en su cuenta. La métrica se evalúa entonces frente a sus reglas de indexación de etiquetas según su orden actual.
+
+## Mejores prácticas {#best-practices}
+
+Utilice las Reglas de indexación de etiquetas como la forma predeterminada de controlar las etiquetas indexadas en grupos de métricas personalizadas. Utilice Metrics without Limits™ cuando una métrica individual requiera una excepción deliberada a la política más amplia.
+
+### Cree primero la Regla de oro {#create-the-golden-rule-first}
+
+La Regla de oro debe ser la primera Regla de indexación de etiquetas creada y debe permanecer en primer lugar en el orden de las reglas. Esto la establece como la política de referencia antes de que usted añada reglas más específicas o excepciones a nivel de métrica.
+
+La Regla de oro es:
+> Desindexe todas las claves de etiqueta que no se hayan consultado en los últimos 30, 60 o 90 días y que no se utilicen en ningún recurso de Datadog, como paneles, monitores, SLOs o cuadernos.
+
+
+Para configurar la Regla de oro:
+
+1. Cree la regla antes de crear cualquier otra Regla de indexación de etiquetas. Si ya existen reglas, mueva la Regla de oro a la primera posición.
+2. Seleccione {{< ui >}}Exclude tags{{< /ui >}} y luego {{< ui >}}By tag usage{{< /ui >}}.
+3. Establezca la ventana de consulta en 30, 60 o 90 días.
+4. Exija que las claves de etiqueta no se utilicen en los recursos de Datadog.
+5. Aplique la regla a todas las métricas personalizadas usando `*`.
+
+Las claves de etiqueta enviadas recientemente reciben un período de gracia de 15 días antes de que la regla evalúe su uso. Esto les da tiempo a los equipos para consultar una nueva etiqueta o usarla en un recurso de Datadog antes de que pueda ser desindexada.
+
+Después de establecer la Regla de oro, cree reglas más específicas para las métricas que difieran de este valor predeterminado.
+
+{{< img src="metrics/guide/tag_indexing_rules/golden_rule.png" alt="Una Regla de indexación de etiquetas configurada como la Regla de oro, que excluye las claves de etiqueta no consultadas en todas las métricas personalizadas." style="width:100%;">}}
+
+### Elija entre Reglas de indexación de etiquetas y Metrics without Limits™ {#choose-between-tag-indexing-rules-and-metrics-without-limits}
+
+Las Reglas de indexación de etiquetas son políticas dinámicas que pueden aplicarse a una sola métrica, a un espacio de nombres, a varios prefijos o a todas las métricas personalizadas. Las nuevas métricas personalizadas se evalúan automáticamente con respecto a las reglas existentes a medida que llegan. Cualquier métrica que coincida con una regla se administra sin necesidad de una configuración individual.
+
+Las configuraciones de Metrics without Limits son estáticas y se aplican una métrica a la vez. Utilícelas cuando una métrica específica requiera un conjunto diferente de etiquetas indexadas.
+
+Las configuraciones existentes de Metrics without Limits™ tienen prioridad sobre las Reglas de indexación de etiquetas. Mientras una configuración de Metrics without Limits™ esté activa, la métrica se trata como una excepción y no se rige por las Reglas de indexación de etiquetas.
+
+| Incidencia | Control recomendado |
+|---|---|
+| Establezca la política de indexación predeterminada para todas las métricas personalizadas | Reglas de indexación de etiquetas: Regla de oro |
+| Aplique la misma política de etiqueta en un espacio de nombres o conjunto de prefijos | Reglas de indexación de etiquetas |
+| Administre automáticamente las nuevas métricas y claves de etiqueta que coincidan con una política existente | Reglas de indexación de etiquetas |
+| Desindexe las etiquetas que no se consultan y que no se utilizan en los recursos de Datadog | Reglas de indexación de etiquetas |
+| Elimine las etiquetas conocidas de alta cardinalidad en varias métricas | Reglas de indexación de etiquetas |
+| Conserve solo un conjunto aprobado de etiquetas en varias métricas | Reglas de indexación de etiquetas |
+| Configure un conjunto diferente de etiquetas indexadas para una métrica | Metrics without Limits™ |
+
+### Defina intencionalmente el contexto de reglas adicionales {#scope-additional-rules-intentionally}
+
+Después de crear la Regla de oro, agregue reglas más específicas solo cuando un grupo de métricas tenga requisitos que difieran de los predeterminados:
+
+- Utilice un espacio de nombres o prefijo para las métricas que pertenecen al mismo servicio, aplicación o equipo.
+- Utilice varios prefijos cuando la misma política se aplique a grupos relacionados de métricas.
+- Utilice `*` solo cuando una política deba aplicarse a todas las métricas personalizadas.
+
+Defina contextos de reglas claros y evite superposiciones innecesarias. Esto facilita comprender qué política rige cada métrica y quién es responsable de sus cambios.
+
+A medida que se agreguen nuevas reglas, verifique que la Regla de Oro permanezca en la primera posición.
 
 ## Lecturas adicionales {#further-reading}
 
