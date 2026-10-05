@@ -149,7 +149,7 @@ Monitors and dashboards with the Skipped status cannot be published, and a trans
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
 2. Delete the original batch if you want to reuse its name.
-3. Import the corrected file as a new import.
+3. Upload the corrected file as a new import.
 
 ## Translation gaps
 
