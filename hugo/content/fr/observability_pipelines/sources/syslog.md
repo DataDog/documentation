@@ -12,9 +12,11 @@ title: Source Syslog
 
 ## Présentation {#overview}
 
-Utilisez rsyslog ou syslog-ng d'Observability Pipelines pour recevoir les logs envoyés à rsyslog ou syslog-ng.
+Utilisez rsyslog ou syslog-ng d'Observability Pipelines pour recevoir les logs envoyés à rsyslog or syslog-ng.
 
 Vous pouvez également [transférer des logs tiers vers syslog](#forward-third-party-logs-to-syslog) puis les envoyer à l'Observability Pipelines Worker.
+
+Si vos logs utilisent un format que la source Syslog ne prend pas en charge, consultez [Parsing](#parsing).
 
 ## Prérequis {#prerequisites}
 
@@ -22,13 +24,13 @@ Vous pouvez également [transférer des logs tiers vers syslog](#forward-third-p
 
 ## Configuration {#setup}
 
-<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement les identifiants de l'adresse syslog et, le cas échéant, de la passphrase de la clé TLS. Ne <b>saisissez pas</b> les valeurs réelles.</div>
+<div class="alert alert-danger">Pour la gestion des secrets : saisissez uniquement les identifiants de l'adresse syslog et, le cas échéant, la phrase secrète de la clé TLS. Ne <b>saisissez pas</b> les valeurs réelles.</div>
 
 Configurez cette source lorsque vous [configurez un pipeline][1]. Vous pouvez configurer un pipeline dans l'[UI][7], en utilisant l'[API][8] ou avec [Terraform][9]. Les instructions de cette section concernent la configuration de la source dans l'UI.
 
 Après avoir sélectionné la source Syslog dans l'interface utilisateur du pipeline :
 
-1. Saisissez l'identifiant de votre adresse syslog. Si vous le laissez vide, le [default](#secret-defaults) est utilisé.
+1. Saisissez l'identifiant de votre adresse syslog. Si vous le laissez vide, la [valeur par défaut](#secret-defaults) est utilisée.
 1. Dans le menu déroulant {{< ui >}}Socket Type{{< /ui >}}, sélectionnez le protocole de communication que vous souhaitez utiliser : {{< ui >}}TCP{{< /ui >}} ou {{< ui >}}UDP{{< /ui >}}.
 
 {{% observability_pipelines/secrets_env_var_note %}}
@@ -38,6 +40,26 @@ Après avoir sélectionné la source Syslog dans l'interface utilisateur du pipe
 {{% observability_pipelines/tls_settings %}}
 
 {{% observability_pipelines/tls_settings_mtls %}}
+
+## Parsing {#parsing}
+
+L'Observability Pipelines Worker s'efforce d'analyser les formats syslog suivants :
+
+- [RFC 6587][10]
+- [RFC 5424][11]
+- [RFC 3164][12]
+- Autres variantes courantes, telles que le style syslog NGINX
+
+Si le Worker ne peut pas analyser un log, une erreur est enregistrée.
+
+### Analyser les formats syslog non pris en charge {#parse-unsupported-syslog-formats}
+
+Si vos logs utilisent un format que la source Syslog ne prend pas en charge, ou si le parsing échoue souvent :
+
+1. Utilisez la [source Socket][13] au lieu de la source Syslog pour recevoir les logs.
+1. Ajoutez un [processeur personnalisé][14] au pipeline pour analyser les logs avec VRL. Par exemple :
+    - Utilisez `parse_regex` pour écrire vos propres règles de parsing.
+    - Utilisez `parse_syslog` et gérez vous-même les erreurs de parsing.
 
 ## Valeurs par défaut des secrets {#secret-defaults}
 
@@ -49,7 +71,7 @@ Après avoir sélectionné la source Syslog dans l'interface utilisateur du pipe
 - Identifiant de l'adresse rsyslog ou syslog-ng :
 	- Référence l'adresse de liaison, telle que `0.0.0.0:9997`, sur laquelle l'Observability Pipelines Worker écoute pour recevoir les logs du Syslog forwarder.
 	- L'identifiant par défaut est `SOURCE_SYSLOG_ADDRESS`.
-- Identifiant de la passphrase TLS rsyslog ou syslog-ng (lorsque TLS est activé) :
+- Identifiant de la phrase secrète TLS rsyslog ou syslog-ng (lorsque TLS est activé) :
 	- L'identifiant par défaut est `SOURCE_SYSLOG_KEY_PASS`.
 
 {{% /tab %}}
@@ -61,7 +83,7 @@ Après avoir sélectionné la source Syslog dans l'interface utilisateur du pipe
 {{% /tab %}}
 {{< /tabs >}}
 
-## Envoyez des logs à l'Observability Pipelines Worker via syslog {#send-logs-to-the-observability-pipelines-worker-over-syslog}
+## Envoyez des logs à l'Observability Pipelines Worker via syslog{#send-logs-to-the-observability-pipelines-worker-over-syslog}
 
 {{% observability_pipelines/log_source_configuration/syslog %}}
 
@@ -85,3 +107,8 @@ Syslog est un protocole de journalisation largement utilisé pour envoyer des lo
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /fr/api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: https://datatracker.ietf.org/doc/html/rfc6587
+[11]: https://datatracker.ietf.org/doc/html/rfc5424
+[12]: https://datatracker.ietf.org/doc/html/rfc3164
+[13]: /fr/observability_pipelines/sources/socket/
+[14]: /fr/observability_pipelines/processors/custom_processor/

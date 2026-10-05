@@ -3,9 +3,13 @@ aliases:
 - /es/bits_ai/bits_ai_sre/help_bits_learn/
 - /es/bits_ai/bits_investigation/help_bits_learn/
 - /es/bits_ai/bits_ai_sre/knowledge_sources/
+further_reading:
+- link: /bits_ai/bits_investigation/improve_accuracy/
+  tag: Documentación
+  text: Mejore la precisión de Bits Investigation
 title: Fuentes de conocimiento
 ---
-Bits Investigation mejora con el tiempo al combinar tres fuentes distintas de conocimiento:
+Bits Investigation mejora con el tiempo al combinar las siguientes fuentes de conocimiento:
 - [**Runbooks:**](#runbooks) Guía de solución de problemas paso a paso
 - [**bits.md:**](#bitsmd) Contexto sobre su entorno
 - [**Comentarios y memorias:**](#feedback-and-memories) Aprendizajes de las investigaciones
@@ -114,6 +118,10 @@ Si la conclusión fue inexacta, proporcione a Bits la causa raíz correcta, dest
 Todos los comentarios positivos, así como cualquier comentario negativo que incluya detalles proporcionados en el chat de Bits, crean una **memoria**. Bits selecciona dinámicamente qué memorias utilizar en futuras investigaciones para mejorar su rendimiento. Aplica correcciones pasadas en contextos similares, reutiliza consultas efectivas y refina cómo prioriza los pasos de investigación. Con el tiempo, esto permite que Bits se adapte a su entorno, volviéndose más preciso y eficiente con cada investigación.
 
 Para administrar las memorias, incluyendo verlas y eliminarlas, vaya a la columna {{< ui >}}Memories{{< /ui >}} de la página [Monitor Management][1].
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
