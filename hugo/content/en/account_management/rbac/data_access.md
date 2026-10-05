@@ -102,7 +102,7 @@ A telemetry type must have at least one Restricted Dataset before you can set it
 
 Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >}} and {{< ui >}}Restricted{{< /ui >}} settings. Each dataset belongs to one setting.
 
-**Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, verify which data for that telemetry type is _not_ in a Restricted Dataset. That data is hidden after you save the change. Review the {{< ui >}}Restricted Datasets{{< /ui >}} table on the [Data Access Control][7] page to confirm coverage.
+**Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, identify any data for that telemetry type that is _not_ in a Restricted Dataset. After you save the change, that data is hidden from users without [unrestricted access](#unrestricted-user-groups). Review the {{< ui >}}Restricted Datasets{{< /ui >}} table on the [Data Access Control][7] page to confirm coverage.
 
 To change the setting for a telemetry type, you must have the [`user_access_manage` permission][5].
 
