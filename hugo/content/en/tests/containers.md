@@ -300,13 +300,11 @@ For a comprehensive list of environment variables set by Jenkins for every build
 | `TEAMCITY_VERSION`           | The version of the TeamCity server.                                                                        |
 | `TEAMCITY_BUILDCONF_NAME`    | The name of the build configuration the current build belongs to.                                           |
 | `BUILD_URL`                  | The link to the current build.                                                                             |
-| `DATADOG_BUILD_ID`           | Custom variable set by the [Datadog TeamCity Integration][102].                                             |
 
 For a comprehensive list of environment variables set by TeamCity for every build, see the [official TeamCity documentation][101].
 
 
 [101]: https://www.jetbrains.com/help/teamcity/predefined-build-parameters.html
-[102]: https://plugins.jetbrains.com/plugin/20852-datadog-ci-integration
 
 {{% /tab %}}
 {{% tab "Travis CI" %}}
