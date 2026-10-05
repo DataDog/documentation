@@ -307,13 +307,15 @@ For **internal** status pages, the subscription process is the same, but users m
 
 Two settings control email subscriptions:
 
-- **Notify subscribers**: Sends email for notices published with **Notify subscribers** enabled. When disabled, notices still go to other subscription types, such as Slack.
+- **Notify subscribers**: Sends an email to all subscribers when new updates are published. When disabled, notices still go to other subscription types, such as Slack.
 - **Show subscribe option to visitors**: Adds a **Subscribe** option to the published page.
 
 1. From your status page, click **Settings**, then select **Email** under **Subscriptions**.
 2. Enable **Notify subscribers**.
 3. (Optional) Enable **Show subscribe option to visitors**. This option requires **Notify subscribers**.
 4. (Optional) Under **Email Header Image**, upload an image to display at the top of notification emails.
+
+{{< img src="incident_response/status_pages/status_pages_enable_email.png" alt="Status page email subscription settings showing the Notify subscribers and Show subscribe option to visitors toggles" style="width:80%;" >}}
 
 Turn off **Show subscribe option to visitors** to control who receives updates, such as when migrating from another status page, retiring a page, or limiting updates to a private audience. Admins can still [add or import subscribers](#add-or-import-subscribers), and existing subscribers keep receiving notifications.
 
