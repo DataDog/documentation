@@ -133,6 +133,8 @@ To review a summary from the incident timeline:
 
 Approving or editing a summary records who took the action. After a summary is edited, it can't be approved — the edited version takes precedence. Dismissing a summary removes it from the timeline and can't be undone.
 
+If the summary was broadcast to the incident chat channel, you can take the same actions from the message using the **Approve**, **Edit**, or **Dismiss** buttons.
+
 Reviewing a summary requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7].
 
 #### Re-inviting the transcriber
