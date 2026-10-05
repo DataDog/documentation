@@ -83,7 +83,30 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
 2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
 3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
 
-If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match, the user falls back to the org default role (Standard), and unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
+If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. Unmatched roles are logged to Audit Trail. If none match, the user gets the role set in {{< ui >}}Assign Role to auto-created users{{< /ui >}} on the [SAML login methods][10] page. If that setting is empty, the user gets no role. For more details, see [SCIM][1].
+
+#### Assign multiple roles to a user
+
+The `roles.^[primary==true].value` filter sends one role per update, so it can't assign several roles to a user or group at once. To give a user more than one role, create one role slot attribute for each role a user can hold at the same time. Each slot sends one role, and Datadog provisions the role from every slot. This works with both direct user assignment and group assignment.
+
+1. In {{< ui >}}Directory{{< /ui >}} > {{< ui >}}Profile Editor{{< /ui >}}, select the user profile for the application configured for Datadog SCIM, then click {{< ui >}}Add Attribute{{< /ui >}}. Create the first slot with the same settings as the `roles` attribute in the previous section, except for these fields:
+    - {{< ui >}}Display name{{< /ui >}}: **Datadog Role 1**
+    - {{< ui >}}Variable name{{< /ui >}}: **datadogRole1**
+    - {{< ui >}}External name{{< /ui >}}: `roles.^[type=='slot1'].value`
+    - {{< ui >}}Attribute type{{< /ui >}}: **Group** if you assign the app through Okta groups, or **Personal** if you assign users directly.
+2. Repeat the previous step for each extra slot, and increase the number each time. For example, the second slot uses **datadogRole2** and `roles.^[type=='slot2'].value`. Each slot needs a distinct `slot<N>` value in its external name. Create as many slots as the maximum number of roles a single user can hold.
+3. If you created the single `roles` attribute, leave it empty or remove it to avoid sending a conflicting role.
+4. In the Okta app's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, check that each slot attribute is mapped to Datadog.
+5. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign the roles:
+    - **Group assignment**: Edit each Okta group and select a role in one slot. Give each role-granting group its own slot. For example, the `dd-admins` group sets the Datadog Admin Role in **Datadog Role 1**, and the `dd-org-managers` group sets a custom role in **Datadog Role 2**. A user in both groups gets both roles.
+    - **Direct assignment**: Edit the user's assignment and select one role in each slot.
+6. In Datadog, go to [Organization Settings > Users][11] and confirm that the user has every expected role. Test with one user before a wide rollout.
+
+**Notes**:
+- If two groups set the same slot, only one value reaches Datadog.
+- Okta adds attribute changes instead of replacing them. If you change or clear a slot, the previous role can stay on the user. After you move users between groups or offboard them, check their roles in Datadog and remove extra roles.
+- To add a new Datadog role, add it to the enum list of every slot.
+- Keep each slot as a **string** attribute. If you set the data type to string array, Datadog rejects the request with the error `'roles' should be object`.
 
 ## Configure automatic team provisioning
 
@@ -161,3 +184,5 @@ This procedure allows you to manage team membership in Datadog instead of Okta a
 [7]: https://app.datadoghq.com/teams
 [8]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2
 [9]: https://app.datadoghq.com/organization-settings/roles
+[10]: https://app.datadoghq.com/organization-settings/login-methods/saml
+[11]: https://app.datadoghq.com/organization-settings/users
