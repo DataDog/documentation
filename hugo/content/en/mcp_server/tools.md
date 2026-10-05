@@ -188,24 +188,6 @@ Aggregates APM spans to compute counts, sums, averages, minimums, maximums, card
 - Show me request counts for the payments service in 5-minute buckets over the last day.
 - Count errors grouped by endpoint and status code for `service:web-store`.
 
-### `analyze_datadog_logs`
-*Toolset: **core***\
-*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
-Analyze Datadog logs using SQL queries for counting, aggregations, and numerical analysis. Use this for statistical analysis.
-
-- Count error logs by service in the last hour.
-- Show me the top 10 HTTP status codes with their counts.
-- Which services were logging the most during that time period?
-
-### `search_datadog_logs`
-*Toolset: **core***\
-*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
-Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
-
-- Show me error logs from the nginx service in the last hour.
-- Find logs containing 'connection timeout' from our API service.
-- Get all 500 status code logs from production.
-
 ### `search_datadog_rum_events`
 *Toolset: **core**, **rum***\
 *Permissions Required: `RUM Apps Read`*\
@@ -1713,6 +1695,28 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 - Disable all logpoints in session `session-12345`.
 - Stop all the logpoints in this debugging session.
+
+## Logs
+
+Tools for searching and analyzing [logs][90]. These tools are part of the default `core` toolset. To manage log pipelines, indexes, and archives, see [Logs Configuration](#logs-configuration).
+
+### `analyze_datadog_logs`
+*Toolset: **core***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `Timeseries`*\
+Analyze Datadog logs using SQL queries for counting, aggregations, and numerical analysis. Use this for statistical analysis.
+
+- Count error logs by service in the last hour.
+- Show me the top 10 HTTP status codes with their counts.
+- Which services were logging the most during that time period?
+
+### `search_datadog_logs`
+*Toolset: **core***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Searches logs with filters (time, query, service, host, storage tier, and so on) and returns log details. Renamed from `get_logs`.
+
+- Show me error logs from the nginx service in the last hour.
+- Find logs containing 'connection timeout' from our API service.
+- Get all 500 status code logs from production.
 
 ## Logs Configuration
 
@@ -3325,6 +3329,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [87]: /logs/log_configuration/pipelines/
 [88]: /logs/log_configuration/indexes/
 [89]: /logs/log_configuration/archives/
+[90]: /logs/
 
 ## Further reading
 
