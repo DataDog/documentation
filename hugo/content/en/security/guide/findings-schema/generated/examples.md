@@ -1579,7 +1579,6 @@ build:
 ```json
 {
   "base_severity": "medium",
-  "description": "A CI pipeline log for the checkout-service contains an unredacted credit card number identified by Sensitive Data Scanner.",
   "detection_changed_at": 1738575599859,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
   "finding_type": "sensitive_data",
@@ -1589,7 +1588,7 @@ build:
   "metadata": {
     "schema_version": "2"
   },
-  "resource_id": "service:checkout-service",
+  "resource_id": "abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890",
   "resource_name": "checkout-service",
   "resource_type": "logs",
   "rule": {
