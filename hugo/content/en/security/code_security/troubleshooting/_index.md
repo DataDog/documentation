@@ -355,7 +355,7 @@ If your committer count looks higher than expected for GitHub repositories, chec
 
 ### Estimating committers before enabling Code Security
 
-To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
+To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command reads your local clones, so it works for repositories hosted on any Git provider, including GitHub, GitLab, Azure DevOps, and Bitbucket. It counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
 
 Run this command in a Bash-compatible shell, such as Terminal on macOS or a Linux shell. On Windows, use Git Bash (included with Git for Windows) or Windows Subsystem for Linux (WSL). The command does not run in PowerShell or Command Prompt.
 
