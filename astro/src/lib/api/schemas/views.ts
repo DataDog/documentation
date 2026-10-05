@@ -43,6 +43,7 @@ export const ResponseDataSchema = z
   .object({
     statusCode: z.string(),
     description: z.string(),
+    schemaDescription: z.string().optional(),
     schema: z.array(SchemaFieldSchema).optional(),
     examples: z.array(ExampleSchema).optional(),
   })
@@ -71,7 +72,9 @@ export const EndpointDataSchema = z
     unstableMessage: z.string().optional(),
     newerVersionUrl: z.string().optional(),
     permissions: z.array(z.string()).optional(),
+    permissionsMatch: z.enum(["any", "all"]).optional(),
     oauthScopes: z.array(z.string()).optional(),
+    oauthScopesAnchor: z.string().optional(),
     regionUrls: z.record(z.string(), z.string()).optional(),
     pathParams: z.array(SchemaFieldSchema).optional(),
     queryParams: z.array(SchemaFieldSchema).optional(),

@@ -120,4 +120,38 @@ describe("ApiResponse (astro)", () => {
 
     expect(html).toContain("Hello <em>world</em>");
   });
+
+  it("labels the schema table's first column Field, as Hugo does", async () => {
+    const html = await renderComponent({ responses });
+
+    expect(html).toMatch(/schema-table__columns-name[^>]*>Field</);
+  });
+
+  it("renders the schema description above the table in the Model panel", async () => {
+    const html = await renderComponent({
+      responses: [
+        { ...responses[0], schemaDescription: "Dashboard summary response." },
+      ],
+    });
+
+    expect(html).toMatch(
+      /api-response__schema-description[^>]*>(<p>)?Dashboard summary response\.(<\/p>)?[\s\S]*schema-table__table/,
+    );
+  });
+
+  it("renders the schema description when there are no inner tabs", async () => {
+    const html = await renderComponent({
+      responses: [
+        {
+          statusCode: "200",
+          description: "",
+          schema: responses[0].schema,
+          schemaDescription: "Dashboard summary response.",
+        },
+      ],
+    });
+
+    expect(html).toContain("api-response__schema-description");
+    expect(html).toContain("Dashboard summary response.");
+  });
 });

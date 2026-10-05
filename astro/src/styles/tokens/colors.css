@@ -51,16 +51,16 @@
   --color-bg-hover: rgba(0, 0, 0, 0.02);
 
   /* Colors — Named (badge/indicator pairs) */
-  --color-teal: #26759c;
-  --color-teal-tint: #ebf5fa;
-  --color-forest: #297a3f;
-  --color-forest-tint: #d9f3e0;
+  --color-teal: #1d6e95;
+  --color-teal-tint: #dfeaf0;
+  --color-forest: #24753b;
+  --color-forest-tint: #d2efda;
   --color-plum: #5f3b83;
-  --color-plum-tint: #d6c9e3;
-  --color-amber: #906623;
-  --color-amber-tint: #fff0d4;
+  --color-plum-tint: #f2e3ff;
+  --color-amber: #895f1b;
+  --color-amber-tint: #f8e6c6;
   --color-crimson: #b72a3a;
-  --color-crimson-tint: #fbd6db;
+  --color-crimson-tint: #ffe1e7;
   --color-gray-lightest: #f6f6f6;
 
   /* Colors — Semantic */

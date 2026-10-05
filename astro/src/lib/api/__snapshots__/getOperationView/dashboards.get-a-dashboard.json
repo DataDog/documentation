@@ -19,6 +19,7 @@
       "oauthScopes": [
         "dashboards_read"
       ],
+      "oauthScopesAnchor": "dashboards",
       "regionUrls": {
         "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
         "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
@@ -42,6 +43,7 @@
         {
           "statusCode": "200",
           "description": "OK",
+          "schemaDescription": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
           "schema": [
             {
               "name": "author_handle",
@@ -3858,6 +3860,7 @@
         {
           "statusCode": "403",
           "description": "Authentication Error",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -3878,6 +3881,7 @@
         {
           "statusCode": "404",
           "description": "Item Not Found",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -3898,6 +3902,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",

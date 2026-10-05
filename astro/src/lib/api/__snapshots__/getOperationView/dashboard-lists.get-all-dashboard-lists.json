@@ -19,6 +19,7 @@
       "oauthScopes": [
         "dashboards_read"
       ],
+      "oauthScopesAnchor": "dashboard-lists",
       "regionUrls": {
         "us": "https://api.datadoghq.com/api/v1/dashboard/lists/manual",
         "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual",
@@ -32,6 +33,7 @@
         {
           "statusCode": "200",
           "description": "OK",
+          "schemaDescription": "Information on your dashboard lists.",
           "schema": [
             {
               "name": "dashboard_lists",
@@ -144,6 +146,7 @@
         {
           "statusCode": "403",
           "description": "Forbidden",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -164,6 +167,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",

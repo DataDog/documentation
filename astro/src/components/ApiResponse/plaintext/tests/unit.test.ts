@@ -83,4 +83,30 @@ describe("apiResponseNode", () => {
     expect(node?.type).toBe("tag");
     expect(node?.tag).toBe("tabs");
   });
+
+  it("puts the schema description before the table in the Model tab", () => {
+    const out = render([
+      { ...responses[0], schemaDescription: "Dashboard summary response." },
+    ]);
+    const modelTab = out.slice(out.indexOf('label="Model"'));
+    expect(modelTab.indexOf("Dashboard summary response.")).toBeGreaterThan(-1);
+    expect(modelTab.indexOf("Dashboard summary response.")).toBeLessThan(
+      modelTab.indexOf("| Parent field"),
+    );
+  });
+
+  it("puts the schema description before the table when there are no inner tabs", () => {
+    const out = render([
+      {
+        statusCode: "200",
+        description: "OK",
+        schema: responses[0].schema,
+        schemaDescription: "Dashboard summary response.",
+      },
+    ]);
+    expect(out.indexOf("Dashboard summary response.")).toBeGreaterThan(-1);
+    expect(out.indexOf("Dashboard summary response.")).toBeLessThan(
+      out.indexOf("| Parent field"),
+    );
+  });
 });

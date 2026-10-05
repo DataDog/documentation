@@ -83,10 +83,6 @@
   font-style: italic;
 }
 
-.schema-table__row--deprecated {
-  opacity: 0.6;
-}
-
 .schema-table__cell-name {
   flex: 0 0 33.33%;
   display: flex;
@@ -156,6 +152,14 @@
 .schema-table__type {
   font-family: var(--font-family-mono);
   font-size: var(--font-size-xs);
+}
+
+.schema-table__description > p {
+  margin: 0;
+}
+
+.schema-table__description > p + p {
+  margin-top: var(--space-xs);
 }
 
 .schema-table__deprecated-label {

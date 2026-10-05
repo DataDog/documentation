@@ -71,7 +71,19 @@ function permissionsNodes(ep: EndpointData): MarkdocNode[] {
   if (!ep.permissions || ep.permissions.length === 0) {
     return NO_CONTENT;
   }
-  return nodesFromMd(`**Permissions:** \`${ep.permissions.join("`, `")}\``);
+  if (ep.permissions.length === 1) {
+    return nodesFromMd(
+      `This endpoint requires the \`${ep.permissions[0]}\` permission.`,
+    );
+  }
+  const list = ep.permissions.map((permission) => `- \`${permission}\``);
+  return nodesFromMd(
+    [
+      `This endpoint requires ${ep.permissionsMatch ?? "all"} of the following permissions:`,
+      "",
+      ...list,
+    ].join("\n"),
+  );
 }
 
 function oauthScopesNodes(ep: EndpointData): MarkdocNode[] {
@@ -129,29 +141,28 @@ function regionTableNodes(ep: EndpointData): MarkdocNode[] {
 }
 
 function argumentsNodes(ep: EndpointData): MarkdocNode[] {
-  const tables: MarkdocNode[] = [];
-  if (ep.pathParams && ep.pathParams.length > 0) {
-    const t = apiSchemaTableNode(ep.pathParams);
-    if (t) {
-      tables.push(t);
-    }
-  }
-  if (ep.queryParams && ep.queryParams.length > 0) {
-    const t = apiSchemaTableNode(ep.queryParams);
-    if (t) {
-      tables.push(t);
-    }
-  }
-  if (ep.headerParams && ep.headerParams.length > 0) {
-    const t = apiSchemaTableNode(ep.headerParams);
-    if (t) {
-      tables.push(t);
-    }
-  }
+  const tables: MarkdocNode[] = [
+    ...titledTableNodes("Path Parameters", ep.pathParams),
+    ...titledTableNodes("Query Strings", ep.queryParams),
+    ...titledTableNodes("Header Parameters", ep.headerParams),
+  ];
   if (tables.length === 0) {
     return NO_CONTENT;
   }
   return [heading(3, "Arguments"), ...tables];
+}
+
+// A parameter-location heading followed by its schema table, matching the
+// `<h4>` titles the Astro component renders.
+function titledTableNodes(
+  title: string,
+  fields: EndpointData["pathParams"],
+): MarkdocNode[] {
+  if (!fields || fields.length === 0) {
+    return NO_CONTENT;
+  }
+  const table = apiSchemaTableNode(fields);
+  return table ? [heading(4, title), table] : NO_CONTENT;
 }
 
 function requestBodyNodes(ep: EndpointData): MarkdocNode[] {

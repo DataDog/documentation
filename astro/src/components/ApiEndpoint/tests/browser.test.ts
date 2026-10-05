@@ -104,4 +104,66 @@ test.describe("ApiEndpoint region switching", () => {
     const usVariant = codeExample.locator('[data-region="us"]').first();
     await expect(usVariant).toBeHidden();
   });
+
+  test("renders the OAuth scopes sentence in the body font, as Hugo does", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/api-endpoint");
+    const oauthScopes = page.locator(".api-endpoint__oauth-scopes").first();
+    await expect(oauthScopes).toBeVisible();
+
+    const [scopesStyle, bodyStyle] = await oauthScopes.evaluate((el) => {
+      const pick = (style: CSSStyleDeclaration) => ({
+        fontSize: style.fontSize,
+        color: style.color,
+      });
+      return [
+        pick(getComputedStyle(el)),
+        pick(getComputedStyle(document.body)),
+      ];
+    });
+    expect(scopesStyle).toEqual(bodyStyle);
+  });
+
+  test("renders the permissions sentence in the body font, as Hugo does", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/api-endpoint");
+    const permissions = page.locator(".api-endpoint__permissions").first();
+    await expect(permissions).toBeVisible();
+
+    const [permissionsStyle, bodyStyle] = await permissions.evaluate((el) => {
+      const pick = (style: CSSStyleDeclaration) => ({
+        fontSize: style.fontSize,
+        color: style.color,
+      });
+      return [
+        pick(getComputedStyle(el)),
+        pick(getComputedStyle(document.body)),
+      ];
+    });
+    expect(permissionsStyle).toEqual(bodyStyle);
+  });
+
+  test("leaves only the heading margin between Overview and the description", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/api-endpoint");
+    const overviewHeading = page
+      .locator(".api-endpoint__overview-heading")
+      .first();
+    await expect(overviewHeading).toBeVisible();
+
+    // Measure the rendered gap, not just the heading's margin: a top margin
+    // on the description collapses with it and can widen the gap.
+    const { gap, headingMarginBottom } = await overviewHeading.evaluate(
+      (heading) => ({
+        gap:
+          heading.nextElementSibling!.getBoundingClientRect().top -
+          heading.getBoundingClientRect().bottom,
+        headingMarginBottom: parseFloat(getComputedStyle(heading).marginBottom),
+      }),
+    );
+    expect(gap).toBeCloseTo(headingMarginBottom, 0);
+  });
 });
