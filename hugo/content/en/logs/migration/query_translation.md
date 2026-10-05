@@ -23,7 +23,7 @@ Query Translation, part of the Migration App, translates Splunk Processing Langu
 | Tool | Use case |
 |------|-----------|
 | [Single Translation][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
-| [Batch Migration][3] | Import batches of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
+| [Bulk Migration][3] | Import bulk export files of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
 
 Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
@@ -48,9 +48,9 @@ The page returns:
 - {{< ui >}}Translated SPL{{< /ui >}}: your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
 - {{< ui >}}How did we translate?{{< /ui >}}: an explanation of which SPL command maps to which part of the Datadog query.
 
-## Migrate assets in batch
+## Migrate assets in bulk
 
-The Batch Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named batch. It translates the queries in each asset to Datadog syntax and builds the matching Datadog monitor or dashboard. You review each result, then publish it to create the asset in Datadog. The following resource types are supported:
+The Bulk Migration tool migrates many Splunk assets at once. You upload your Splunk inventory as CSV files, and the tool groups them into a named import. It translates the queries in each asset to Datadog syntax and builds the matching Datadog monitor or dashboard. You review each result, then publish it to create the asset in Datadog. The following resource types are supported:
 
 | Splunk resource | Datadog equivalent | Notes |
 |-----------------|--------------------|-------|
@@ -117,39 +117,39 @@ The same instructions, with screenshots of the Splunk UI, are available in the i
 
 ### Import your assets into Datadog
 
-1. Go to [Logs > Batch Migration][3] and click {{< ui >}}Start Batch Migration{{< /ui >}}.
+1. Go to [Logs > Bulk Migration][3] and click {{< ui >}}Get Started{{< /ui >}}.
 2. In {{< ui >}}Upload your assets from Splunk{{< /ui >}}, add your alert and dashboard CSV files. Upload as many files as you need, but leave the macros file out of this step.
 3. In {{< ui >}}Macros file{{< /ui >}}, upload the macros CSV, if you have one.
-4. In {{< ui >}}Name your import{{< /ui >}}, give the batch a name that identifies it later.
+4. In {{< ui >}}Name your import{{< /ui >}}, give the import a name that identifies it later.
 5. Click {{< ui >}}Import{{< /ui >}}.
 
 {{< img src="logs/migration/import-wizard.png" alt="The Import page, with steps for uploading assets from Splunk, uploading a macros file, and naming the import." style="width:100%;" >}}
 
-Translation starts as soon as the batch is created and runs in the background. You can close the page and come back to it.
+Translation starts as soon as the import is created and runs in the background. You can close the page and come back to it.
 
 ### Review and publish
 
-Open a batch to see every resource it contains and the state of its translation:
+Open an import to see every resource it contains and the state of its translation:
 
 | Status | Meaning |
 |--------|---------|
 | Pending | The resource is queued for translation. |
 | In progress | The resource is being translated. |
 | Translated | A Datadog equivalent is ready to review and publish. |
-| Published | The resource exists in Datadog. The batch links to it. |
+| Published | The resource exists in Datadog. The import links to it. |
 | Skipped | The resource could not be translated. |
 
 Click a resource to see its original SPL, the translated query, and the explanation of the translation. A translated query is not guaranteed to return the same results as the Splunk original. Review each translation before you publish the monitor or dashboard.
 
 A dashboard shows a status for each of its widgets and publishes as a single dashboard. Open it to see which widgets were translated and which returned an error.
 
-{{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in a batch, showing a summary of three translated widgets and two errors, above a table listing the status of each widget." style="width:100%;" >}}
+{{< img src="logs/migration/dashboard-widget-review.png" alt="A translated dashboard in an import, showing a summary of three translated widgets and two errors, above a table listing the status of each widget." style="width:100%;" >}}
 
 Monitors and dashboards with the Skipped status cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a skipped resource, or a dashboard widget that returned an error, fix it at the source and import it again:
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
 2. Delete the original batch if you want to reuse its name.
-3. Import the corrected file as a new batch.
+3. Import the corrected file as a new import.
 
 ## Translation gaps
 
