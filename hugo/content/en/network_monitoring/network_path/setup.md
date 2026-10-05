@@ -568,6 +568,19 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
+#### Basic Dynamic Tests
+
+Basic Dynamic Tests are available for all Datadog users. Basic Dynamic Tests discover up to five representative high-volume network paths per Agent, running each test once through the existing Network Path execution pipeline. To enable Basic Dynamic Tests, add the below to `/etc/datadog-agent/datadog.yaml`:
+
+```yaml
+network_path:
+  # ...
+  connections_monitoring:
+    basic_tests_enabled: true
+```
+
+To use Basic Dynamic Tests, you must be on Datadog Agent 7.84 or later, and have [Cloud Network Monitoring][1] enabled. `network_path.connections_monitoring.enabled` must be set to `false`.
+
 ### Dynamic Tests for NetFlow (Experimental)
 
 <div class="alert alert-info">Dynamic Tests for NetFlow are experimental and require Agent <code>v7.81+</code>. To enable this feature, contact Datadog Support or your account team.</div>
