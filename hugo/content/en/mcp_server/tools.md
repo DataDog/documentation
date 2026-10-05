@@ -1783,7 +1783,7 @@ Creates an index or updates an existing index with the specified name. Updates p
 ### `delete_datadog_log_index`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Modify Indexes`*\
-Permanently removes an index from your organization. The index name cannot be reused. Incoming logs are then evaluated against the remaining indexes.
+Permanently removes an index from your organization. The index name cannot be reused. Logs that would have matched the deleted index go to the next index in evaluation order whose filter matches them. Logs that match no remaining index are not indexed.
 
 - Delete the `obsolete-staging` index.
 
