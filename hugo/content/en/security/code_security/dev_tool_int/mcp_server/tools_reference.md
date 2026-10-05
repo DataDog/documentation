@@ -157,7 +157,7 @@ Requires `DD_API_KEY` and `DD_APP_KEY`.
 | Parameter     | Type            | Required | Description                                                                 |
 | ------------- | --------------- | :------: | --------------------------------------------------------------------------- |
 | `libraries`   | `array[object]` |   Yes    | Libraries to scan. Each object uses the fields in the table below.         |
-| `working_dir` | `string`        |    No    | Working directory for git context detection (defaults to the current directory) |
+| `working_dir` | `string`        |    No    | Working directory for Git context detection (defaults to the current directory) |
 
 Each entry in `libraries`:
 
