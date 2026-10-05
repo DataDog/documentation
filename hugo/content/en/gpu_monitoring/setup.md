@@ -552,6 +552,12 @@ The Kueue integration requires a configuration change to the Cluster Agent to co
 
 ### Inference
 
+{{< beta-callout url="#" btn_hidden="true" header="Preview" >}}
+Inference is in preview.
+{{< /beta-callout >}}
+
+The Inference feature of GPU Monitoring allows you to see your current inference capacity and how fast the models are serving the tokens. Depending on the inference framework being used, the configuration required to ingest the data may vary.
+
 {{< tabs >}}
 {{% tab "NVIDIA Dynamo" %}}
 
