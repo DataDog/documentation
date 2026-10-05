@@ -724,6 +724,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `feature-flags`: Tools for managing [feature flags][35], including creating, listing, and updating flags and their environments.
 - `kubernetes`: Tools for searching and describing [Kubernetes][51] resources and retrieving manifests across all clusters.
 - `llmobs`: Tools for searching and analyzing [Agent Observability][36] spans and experiments.
+- `logs-configuration`: Tools for viewing, creating, updating, deleting, and reordering [log pipelines][81], [indexes][82], and [archives][83].
 - `networks`: Tools for [Cloud Network Monitoring][37] analysis and [Network Device Monitoring][38].
 - `notebooks`: Extended tools for [notebooks][54], beyond the notebook tools included in the `core` toolset.
 - `onboarding`: Agentic onboarding tools for guided Datadog setup and configuration.
@@ -1030,3 +1031,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [78]: /account_management/governance_console/
 [79]: ]https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
+[81]: /logs/log_configuration/pipelines/
+[82]: /logs/log_configuration/indexes/
+[83]: /logs/log_configuration/archives/
