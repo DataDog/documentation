@@ -69,6 +69,8 @@ Use the [Datadog MCP server][2] to create and manage Workbench instances from a 
 
 After the agent creates an instance, it can read your schema, run statements, read query plans, add an index, and read the plan again. It works against your real schema, indexes, and row counts.
 
+{{< img src="database_monitoring/database_monitoring_workbench/workbench_mcp_index_demo.mp4" alt="A coding agent creates a Workbench sandbox through the Datadog MCP server, loads production row counts, adds an index that turns a sequential scan into an index scan, and deletes the sandbox" video="true" >}}
+
 ### Connecting with the API
 
 Use the Workbench API to create a Workbench instance from a script or CI job.
