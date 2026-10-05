@@ -59,6 +59,17 @@ Sensitive headers, such as tokens and API keys, are filtered out automatically, 
 
 While the [Datadog Tracking HTTP Client][1] can track most common network calls in Flutter, Datadog supplies packages for integration into specific networking libraries, including gRPC, GraphQL, and Dio. For more information about these libraries, see [Flutter Integrated Libraries][6].
 
+### Check first party hosts
+
+To determine whether a specific host is a first party host, use `isFirstPartyHost`:
+
+```dart
+var host = 'example.com';
+if (DatadogSdk.instance.isFirstPartyHost(host)) {
+  print('$host is a first party host.');
+}
+```
+
 ## Manual resource collection
 
 In addition to tracking resources automatically, you can track specific custom resources such as network requests or third-party provider APIs using the [following methods][7]:

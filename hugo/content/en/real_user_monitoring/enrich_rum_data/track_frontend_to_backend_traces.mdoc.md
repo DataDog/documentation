@@ -13,6 +13,9 @@ further_reading:
 - link: "/real_user_monitoring/setup/data_collected/"
   tag: "Documentation"
   text: "Data collected by the RUM SDKs"
+- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
+  tag: "Blog"
+  text: "Unify APM and RUM data for full-stack visibility"
 ---
 
 ## Overview
@@ -212,6 +215,10 @@ Configuring cross-product retention filters may also increase the APM-indexed vo
 ## Next step
 
 Continue to [Collect Frontend Profiles](/real_user_monitoring/enrich_rum_data/collect_frontend_profiles/).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing
 [2]: https://app.datadoghq.com/rum/explorer

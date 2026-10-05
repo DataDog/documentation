@@ -8,6 +8,12 @@ further_reading:
 - link: "/real_user_monitoring/guide/"
   tag: "Documentation"
   text: "RUM Guides"
+- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
+  tag: "Blog"
+  text: "Best practices for monitoring static web applications"
+- link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
+  tag: "Blog"
+  text: "Best practices for monitoring progressive web applications"
 ---
 
 {{< learning-center-callout header="Try \"Intro to Real User Monitoring (RUM)\" in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/intro-to-rum" hide_image="false" >}}

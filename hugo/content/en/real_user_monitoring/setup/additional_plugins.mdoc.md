@@ -54,6 +54,9 @@ further_reading:
 - link: '/real_user_monitoring/guide/debug-symbols'
   tag: 'Documentation'
   text: 'Debug Symbols'
+- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
+  tag: "Blog"
+  text: "Get better RUM data with our custom React components"
 ---
 
 ## Overview
@@ -128,3 +131,7 @@ Select your SDK for platform-specific instructions.
 ## Next step
 
 Continue to [Data Collected](/real_user_monitoring/setup/data_collected/).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

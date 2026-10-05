@@ -1,15 +1,7 @@
-Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications. You can track user activity across web and native components, scope the root cause of latency to web pages or native components, and support users that have difficulty loading web pages on mobile devices.
+## Instrument your web views
 
-You can also record the entire session across both web and native views and watch it in a single Session Replay. See [Web View Instrumentation][1] to learn more.
-
-### Prerequisites
-
-Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][2].
-
-### Instrument your web views
-
-1. If you want to forward RUM events coming from web pages, download the [latest version][3] of RUM Android SDK and set up RUM following the [dedicated guide][4].
-2. If you want to forward Log events coming from web pages, download the [latest version][5] of Logs Android SDK and set up Logs following the [dedicated guide][6].
+1. If you want to forward RUM events coming from web pages, download the [latest version][1] of RUM Android SDK and set up RUM following the [dedicated guide][2].
+2. If you want to forward Log events coming from web pages, download the [latest version][3] of Logs Android SDK and set up Logs following the [dedicated guide][4].
 3. Add the Gradle dependency by declaring the `dd-sdk-android-webview` library as a dependency in the module-level `build.gradle` file:
 
    ```groovy
@@ -32,32 +24,7 @@ Set up the RUM Browser SDK for the web page you want rendered on your mobile app
 webView.settings.javaScriptEnabled = true
 ```
 
-### Access your web views
-
-Your web views appear in the [RUM Explorer][7] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform, such as Android.
-
-To access your web views:
-
-1. Navigate to {% ui %}Digital Experiences{% /ui %} > {% ui %}Real User Monitoring{% /ui %} > {% ui %}(Sessions) Explorer{% /ui %}.
-2. Create a query to filter on the following:
-   - Your Android and Android TV applications using either `application.id` or `application.name`
-   - The web component using `service`
-   - The platform using `source`
-
-   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source:browser`.
-3. Click a session. A side panel with a list of events in the session appears. Any service with the web icon indicates a web view.
-
-From here, you can hover over a session event and click {% ui %}Open View waterfall{% /ui %} to navigate from the session to a resource waterfall visualization in the view's {% ui %}Performance{% /ui %} tab.
-
-### Billing implications
-
-See [RUM & Session Replay Billing][8] for details on how web views in mobile applications impact session recordings and billing.
-
-[1]: /session_replay/setup_and_configuration/#web-view-instrumentation
-[2]: /real_user_monitoring/setup/install/?platform=browser
-[3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
-[4]: /real_user_monitoring/setup/install/?platform=android
-[5]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
-[6]: /logs/log_collection/android/?tab=kotlin#setup
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[1]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-rum
+[2]: /real_user_monitoring/setup/install/?platform=android
+[3]: https://search.maven.org/artifact/com.datadoghq/dd-sdk-android-logs
+[4]: /logs/log_collection/android/?tab=kotlin#setup

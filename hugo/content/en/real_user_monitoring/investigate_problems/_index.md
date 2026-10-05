@@ -5,6 +5,9 @@ further_reading:
 - link: "/real_user_monitoring/retain_and_recover_valuable_sessions/"
   tag: "Documentation"
   text: "Retain and recover valuable sessions"
+- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
+  tag: "Blog"
+  text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
 ---
 
 ## Overview

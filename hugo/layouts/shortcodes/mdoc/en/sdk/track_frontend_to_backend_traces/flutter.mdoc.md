@@ -22,6 +22,8 @@
 
 ### OpenTelemetry support
 
+All of Datadog's automatic network tracking packages ([Datadog Tracking HTTP Client][5], [gRPC Interceptor][6], [GQL Link][7], and [Dio Interceptor][8]) support distributed traces through both automatic header generation and header ingestion.
+
 1. Set up RUM to connect with APM as described above.
 
 2. Use `firstPartyHostsWithTracingHeaders` instead of `firstPartyHosts` as follows:
@@ -43,7 +45,25 @@
       - `TracingHeaderType.b3`: [B3 single header](https://github.com/openzipkin/b3-propagation#single-header) (`b3`)
       - `TracingHeaderType.b3multi`: [B3 multiple headers](https://github.com/openzipkin/b3-propagation#multiple-headers) (`X-B3-*`)
 
+    You can specify different header types for different hosts. For example, to send `b3` headers to `example.com` and `tracecontext` headers to `myapi.names`:
+
+    ```dart
+    final configuration = DatadogConfiguration(
+      // ...
+      firstPartyHostsWithTracingHeaders: {
+        'example.com': { TracingHeaderType.b3 },
+        'myapi.names': { TracingHeaderType.tracecontext },
+      },
+    )..enableHttpTracking()
+    ```
+
+    This information is merged with any hosts set in `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog tracing headers by default.
+
 [1]: /real_user_monitoring/setup/install/?platform=flutter
 [2]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
 [3]: https://docs.flutter.dev/tools/devtools/overview
 [4]: https://docs.flutter.dev/tools/devtools/network
+[5]: https://pub.dev/packages/datadog_tracking_http_client
+[6]: https://pub.dev/packages/datadog_grpc_interceptor
+[7]: https://pub.dev/packages/datadog_gql_link
+[8]: https://pub.dev/packages/datadog_dio

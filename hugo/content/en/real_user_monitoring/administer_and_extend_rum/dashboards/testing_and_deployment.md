@@ -82,9 +82,9 @@ Continue to [Usage Dashboards](/real_user_monitoring/administer_and_extend_rum/d
 [1]: https://app.datadoghq.com/dash/integration/30697/synthetics---browser-test-performance
 [2]: /real_user_monitoring/setup/data_collected/?platform=browser
 [3]: /synthetics/browser_tests/
-[4]: /real_user_monitoring/setup/install/?platform=browser
+[4]: /real_user_monitoring/setup/install/?platform=browser#initialize-the-sdk
 [5]: /real_user_monitoring/setup/data_collected/?platform=ios
 [6]: /real_user_monitoring/setup/data_collected/?platform=android
 [7]: /real_user_monitoring/setup/data_collected/?platform=react_native
 [8]: /real_user_monitoring/setup/data_collected/?platform=flutter
-[9]: /real_user_monitoring/setup/install/
+[9]: /real_user_monitoring/setup/install/#initialize-the-sdk

@@ -3,7 +3,7 @@ This partial contains advanced configuration instructions for the Flutter SDK.
 It can be included directly in language-specific pages or wrapped in conditionals.
 -->
 
-If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](#opentelemetry-setup). For additional manual instrumentation functions, such as automatic view tracking, see [Flutter Libraries for RUM][3].
+If you have not set up the Datadog Flutter SDK for RUM yet, follow the [in-app setup instructions][1] or see the [RUM Flutter setup documentation][2]. Learn how to set up [OpenTelemetry with RUM Flutter](/real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=flutter#opentelemetry-support). For integrations with other Flutter libraries, see [Additional Plugins and Integrations][3].
 
 ## Initialization parameters
 
@@ -187,69 +187,20 @@ void _backgroundWork(SendPort port) async {
 
 If you are using [Datadog Tracking HTTP Client][10] to [automatically track resources][23], `attachToBackgroundIsolate` automatically starts tracking resources from the calling isolate. However, using `Client` from the `http` package or `Dio` requires you to re-initialize HTTP tracking for those packages from the background isolate.
 
-## Flutter-specific performance metrics
-
-To enable the collection of Flutter-specific performance metrics, set `reportFlutterPerformance: true` in `DatadogRumConfiguration`. Widget build and raster times are displayed in [Mobile Vitals][18].
-
-## OpenTelemetry setup
-
-All of Datadog's automatic network tracking packages ([Datadog Tracking HTTP Client][10], [gRPC Interceptor][19], [GQL Link][20], and [Dio Interceptor][21]) support distributed traces through both automatic header generation and header ingestion. This section describes how to use OpenTelemetry with RUM Flutter.
-
-### Datadog header generation
-
-When configuring your tracking client or gRPC Interceptor, you can specify the types of tracing headers you want Datadog to generate. For example, if you want to send `b3` headers to `example.com` and `tracecontext` headers for `myapi.names`, you can do so with the following code:
-
-```dart
-final hostHeaders = {
-    'example.com': { TracingHeaderType.b3 },
-    'myapi.names': { TracingHeaderType.tracecontext}
-};
-```
-
-You can use this object during initial configuration:
-
-```dart
-// For default Datadog HTTP tracing:
-final configuration = DatadogConfiguration(
-    // configuration
-    firstPartyHostsWithTracingHeaders: hostHeaders,
-);
-```
-
-You can then enable tracing as usual.
-
-This information is merged with any hosts set on `DatadogConfiguration.firstPartyHosts`. Hosts specified in `firstPartyHosts` generate Datadog Tracing Headers by default.
-
-## Check first party hosts
-
-To determine if a specific URI is a first party host, use `isFirstPartyHost`.
-
-For example:
-```dart
-var host = 'example.com'
-if (DatadogSdk.instance.isFirstPartyHost(host)){
- print('$host is a first party host.');
-}
-```
-
 ## Enrich RUM data
 
 To add global attributes, track users and accounts, or modify and drop events, see [Enrich RUM Data][27].
 
 [1]: https://app.datadoghq.com/rum/application/create
 [2]: /real_user_monitoring/setup/install/?platform=flutter
-[3]: /real_user_monitoring/reference/integrated_libraries/?platform=flutter
+[3]: /real_user_monitoring/setup/additional_plugins/?platform=flutter
 [4]: /getting_started/tagging/#defining-tags
-[5]: /real_user_monitoring/connect_rum_and_traces/?tab=browserrum#how-are-rum-resources-linked-to-traces
+[5]: /real_user_monitoring/enrich_rum_data/track_frontend_to_backend_traces/?platform=flutter#how-rum-resources-are-linked-to-traces
 [6]: https://github.com/openzipkin/b3-propagation#single-headers
 [7]: https://github.com/openzipkin/b3-propagation#multiple-headers
 [8]: https://www.w3.org/TR/trace-context/#tracestate-header
-[9]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=browser
+[9]: /real_user_monitoring/setup/enable_rum/track_frustration_signals/?platform=flutter
 [10]: https://pub.dev/packages/datadog_tracking_http_client
-[18]: /real_user_monitoring/setup/enable_rum/track_ui_latency/?platform=flutter#mobile-vitals
-[19]: https://pub.dev/packages/datadog_grpc_interceptor
-[20]: https://pub.dev/packages/datadog_gql_link
-[21]: https://pub.dev/packages/datadog_dio
 [23]: /real_user_monitoring/setup/enable_rum/track_network_requests/?platform=flutter
 [25]: /real_user_monitoring/setup/enable_rum/manage_sessions/?platform=flutter
 [27]: /real_user_monitoring/enrich_rum_data/

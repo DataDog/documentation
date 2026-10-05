@@ -37,3 +37,7 @@ The following telemetry provides insight into your application's performance. Mo
 | Memory utilization | High memory usage can lead to [out-of-memory crashes](https://docs.flutter.dev/perf/best-practices#build-and-display-frames-in-16ms), which causes a poor user experience. RUM tracks the amount of physical memory used by your application in bytes for each view, over the course of a session. The recommended range is <200MB for good and <400MB for moderate. |
 | Widget build time | This is the duration of time taken to build the frame on the UI thread. For smooth animations, this should not exceed 16ms for 60 FPS, and 8ms for 120 FPS. High values here mean you need to look into optimizing your build methods for this view. See [Control Build Cost](https://docs.flutter.dev/perf/best-practices#control-build-cost) in the Flutter documentation. |
 | Raster time | This is the duration of time taken to rasterize the frame on the raster thread. For smooth animations, this should not exceed 16ms for 60 FPS, and 8ms for 120 FPS. High values here may mean your view is complex to render. See [Identifying Problems in the GPU Graph](https://docs.flutter.dev/perf/ui-performance#identifying-problems-in-the-gpu-graph) in the Flutter documentation. |
+
+### Enable Flutter-specific performance metrics
+
+Widget build time and raster time are collected only when you set `reportFlutterPerformance: true` in `DatadogRumConfiguration`.

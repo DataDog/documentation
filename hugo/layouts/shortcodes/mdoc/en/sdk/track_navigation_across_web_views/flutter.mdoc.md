@@ -1,18 +1,10 @@
-Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications. You can track user activity across web and native components, scope the root cause of latency to web pages or native components, and support users that have difficulty loading web pages on mobile devices.
+## Instrument your web views
 
-You can also record the entire session across both web and native views and watch it in a single Session Replay. See [Web View Instrumentation][1] to learn more.
+The RUM Flutter SDK provides APIs for you to control web view tracking when using the [`webview_flutter`][1] or the [`flutter_inappwebview`][2] package.
 
-### Prerequisites
+### Web view Flutter package (`webview_flutter`)
 
-Set up the RUM Browser SDK on the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][2].
-
-### Instrument your web views
-
-The RUM Flutter SDK provides APIs for you to control web view tracking when using the [`webview_flutter`][3] or the [`flutter_inappwebview`][4] package.
-
-#### Web view Flutter package (`webview_flutter`)
-
-To add Web View Tracking when using `webview_flutter`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][5] plugin:
+To add Web View Tracking when using `webview_flutter`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_webview_tracking`][3] plugin:
 
 ```yaml
 dependencies:
@@ -37,9 +29,9 @@ webViewController = WebViewController()
 
 `JavaScriptMode.unrestricted` is required for tracking to work on Android. `allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
 
-#### Flutter InAppWebView package
+### Flutter InAppWebView package
 
-To add Web View Tracking when using `flutter_inappwebview`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_inappwebview_tracking`][6] plugin:
+To add Web View Tracking when using `flutter_inappwebview`, add the following to your `pubspec.yaml` with the most recent version of the [`datadog_inappwebview_tracking`][4] plugin:
 
 ```yaml
 dependencies:
@@ -91,32 +83,7 @@ _browser = MyInAppBrowser(
 
 The `allowedHosts` parameter of `DatadogInAppWebViewUserScript` matches the given hosts and their subdomain. No regular expression is allowed.
 
-### Access your web views
-
-Your web views appear in the [RUM Explorer][7] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform.
-
-To access your web views:
-
-1. Navigate to {% ui %}Digital Experiences{% /ui %} > {% ui %}Real User Monitoring{% /ui %} > {% ui %}(Sessions) Explorer{% /ui %}.
-2. Create a query to filter on the following:
-   - Your Flutter applications using either `application.id` or `application.name`
-   - The web component using `service`
-   - The platform using `source`
-
-   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source:browser`.
-3. Click a session. A side panel with a list of events in the session appears. Any service with the web icon indicates a web view.
-
-From here, you can hover over a session event and click {% ui %}Open View waterfall{% /ui %} to navigate from the session to a resource waterfall visualization in the view's {% ui %}Performance{% /ui %} tab.
-
-### Billing implications
-
-See [RUM & Session Replay Billing][8] for details on how web views in mobile applications impact session recordings and billing.
-
-[1]: /session_replay/setup_and_configuration/#web-view-instrumentation
-[2]: /real_user_monitoring/setup/install/?platform=browser
-[3]: https://pub.dev/packages/webview_flutter
-[4]: https://pub.dev/packages/flutter_inappwebview
-[5]: https://pub.dev/packages/datadog_webview_tracking
-[6]: https://pub.dev/packages/datadog_inappwebview_tracking
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[1]: https://pub.dev/packages/webview_flutter
+[2]: https://pub.dev/packages/flutter_inappwebview
+[3]: https://pub.dev/packages/datadog_webview_tracking
+[4]: https://pub.dev/packages/datadog_inappwebview_tracking

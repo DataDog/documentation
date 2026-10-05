@@ -8,6 +8,12 @@ further_reading:
 - link: '/real_user_monitoring/investigate_problems/explore_retained_data/'
   tag: 'Documentation'
   text: 'Learn about the RUM Explorer'
+- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
+  tag: "Blog"
+  text: "Use geomaps to visualize your app data by location"
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
 ---
 
 ## Overview

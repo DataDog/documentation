@@ -38,6 +38,19 @@ aliases:
   - /real_user_monitoring/browser/setup/client
   - /real_user_monitoring/kotlin-multiplatform
   - /real_user_monitoring/kotlin_multiplatform
+further_reading:
+- link: '/real_user_monitoring/setup/create_application/'
+  tag: 'Documentation'
+  text: 'Create a RUM Application'
+- link: '/real_user_monitoring/setup/enable_rum/'
+  tag: 'Documentation'
+  text: 'Enable the Datadog RUM Module'
+- link: '/real_user_monitoring/remote_configuration/'
+  tag: 'Documentation'
+  text: 'Remote Configuration'
+- link: '/real_user_monitoring/setup/data_collected/'
+  tag: 'Documentation'
+  text: 'Data Collected'
 ---
 
 {{< include-markdown "client_sdks/setup" >}}
@@ -45,3 +58,7 @@ aliases:
 ## Next step
 
 Continue to [Enable the Datadog RUM Module](/real_user_monitoring/setup/enable_rum/).
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

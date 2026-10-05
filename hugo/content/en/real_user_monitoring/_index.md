@@ -34,42 +34,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/"
   tag: "Blog"
   text: "Understand session replays faster with AI summaries and smart chapters"
-- link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
-  tag: "Blog"
-  text: "Introducing Datadog Real User Monitoring"
-- link: "https://www.datadoghq.com/blog/datadog-mobile-rum/"
-  tag: "Blog"
-  text: "Improve mobile user experience with Datadog Mobile Real User Monitoring"
 - link: "https://www.datadoghq.com/blog/mobile-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring mobile app performance"
-- link: "https://www.datadoghq.com/blog/error-tracking/"
-  tag: "Blog"
-  text: "Make sense of application issues with Datadog Error Tracking"
-- link: "https://www.datadoghq.com/blog/unify-apm-rum-datadog/"
-  tag: "Blog"
-  text: "Unify APM and RUM data for full-stack visibility"
-- link: "https://www.datadoghq.com/blog/datadog-geomaps/"
-  tag: "Blog"
-  text: "Use geomaps to visualize your app data by location"
-- link: "https://www.datadoghq.com/blog/datadog-rum-react-components/#tune-up-your-react-data-collection"
-  tag: "Blog"
-  text: "Get better RUM data with our custom React components"
-- link: "https://www.datadoghq.com/blog/hybrid-app-monitoring/"
-  tag: "Blog"
-  text: "Monitor your hybrid mobile applications with Datadog"
-- link: "https://www.datadoghq.com/blog/how-datadogs-tech-solutions-team-rum-session-replay/"
-  tag: "Blog"
-  text: "How Datadog's Technical Solutions team uses RUM, Session Replay, and Error Tracking to resolve customer issues"
-- link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
-  tag: "Blog"
-  text: "Best practices for monitoring static web applications"
-- link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
-  tag: "Blog"
-  text: "Best practices for monitoring progressive web applications"
-- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
-  tag: "Blog"
-  text: "Design effective executive dashboards with Datadog"
 - link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
   tag: "Blog"
   text: "From performance to impact: Bridging frontend teams through shared context"
@@ -250,6 +217,10 @@ Watch [browser recordings][12] of real users interacting with your website and s
 
 Access triggered logs, errors, and performance information when troubleshooting application issues using [Browser Dev Tools][14].
 
+
+## Next step
+
+Continue to [RUM Terms and Concepts](/real_user_monitoring/rum_terms_and_concepts/).
 
 ## Further reading
 

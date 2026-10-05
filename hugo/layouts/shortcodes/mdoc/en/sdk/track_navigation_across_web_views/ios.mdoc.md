@@ -1,19 +1,11 @@
-Real User Monitoring allows you to monitor web views and eliminate blind spots in your hybrid mobile applications. You can track user activity across web and native components, scope the root cause of latency to web pages or native components, and support users that have difficulty loading web pages on mobile devices.
+## Declare `DatadogWebViewTracking` as a dependency
 
-You can also record the entire session across both web and native views and watch it in a single Session Replay. See [Web View Instrumentation][1] to learn more.
-
-### Prerequisites
-
-Set up the RUM Browser SDK for the web page you want rendered on your mobile application. For more information, see [RUM Browser Monitoring][2].
-
-### Declare `DatadogWebViewTracking` as a dependency
-
-1. Enable [RUM][3], [Logs][4], or both.
+1. Enable [RUM][1], [Logs][2], or both.
 2. Add the `DatadogWebViewTracking` library according to your dependency manager.
 3. Update your initialization snippet by declaring `DatadogWebViewTracking` as a dependency, as shown below.
 
 {% collapse-content title="CocoaPods" level="h4" %}
-You can use [CocoaPods][5] to install `dd-sdk-ios`:
+You can use [CocoaPods][3] to install `dd-sdk-ios`:
 ```
 pod 'DatadogWebViewTracking'
 ```
@@ -33,7 +25,7 @@ DatadogWebViewTracking
 {% /collapse-content %}
 
 {% collapse-content title="Carthage" level="h4" %}
-You can use [Carthage][6] to install `dd-sdk-ios`:
+You can use [Carthage][4] to install `dd-sdk-ios`:
 ```
 github "DataDog/dd-sdk-ios"
 ```
@@ -44,7 +36,7 @@ DatadogWebViewTracking.xcframework
 ```
 {% /collapse-content %}
 
-### Instrument your web views
+## Instrument your web views
 
 The RUM iOS SDK provides APIs for you to control web view tracking. To enable Web View Tracking, provide the `WKWebView` instance.
 
@@ -64,32 +56,7 @@ WebViewTracking.disable(webView: webView)
 
 `hosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
-### Access your web views
-
-Your web views appear in the [RUM Explorer][7] with associated `service` and `source` attributes. The `service` attribute indicates the web component the web view is generated from, and the `source` attribute denotes the mobile application's platform.
-
-To access your web views:
-
-1. Navigate to {% ui %}Digital Experiences{% /ui %} > {% ui %}Real User Monitoring{% /ui %} > {% ui %}(Sessions) Explorer{% /ui %}.
-2. Create a query to filter on the following:
-   - Your iOS applications using either `application.id` or `application.name`
-   - The web component using `service`
-   - The platform using `source`
-
-   **Note**: If you see unrecognized version numbers reporting in your mobile app, they might belong to the Browser SDK version. In that case, you can filter out the Browser platform session, for example, `source:browser`.
-3. Click a session. A side panel with a list of events in the session appears. Any service with the web icon indicates a web view.
-
-From here, you can hover over a session event and click {% ui %}Open View waterfall{% /ui %} to navigate from the session to a resource waterfall visualization in the view's {% ui %}Performance{% /ui %} tab.
-
-### Billing implications
-
-See [RUM & Session Replay Billing][8] for details on how web views in mobile applications impact session recordings and billing.
-
-[1]: /session_replay/setup_and_configuration/#web-view-instrumentation
-[2]: /real_user_monitoring/setup/install/?platform=browser
-[3]: /real_user_monitoring/setup/install/?platform=ios
-[4]: https://docs.datadoghq.com/logs/log_collection/ios
-[5]: https://cocoapods.org/
-[6]: https://github.com/Carthage/Carthage
-[7]: https://app.datadoghq.com/rum/explorer
-[8]: /account_management/billing/rum/#how-do-webviews-in-mobile-applications-impact-session-recordings-and-billing
+[1]: /real_user_monitoring/setup/install/?platform=ios
+[2]: https://docs.datadoghq.com/logs/log_collection/ios
+[3]: https://cocoapods.org/
+[4]: https://github.com/Carthage/Carthage

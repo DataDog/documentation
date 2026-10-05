@@ -67,16 +67,19 @@ Update your web application to include the RUM Session ID in every call to your 
 Modify your server-side code to extract the session ID and pass it to the Agent Observability SDK. For detailed Agent Observability setup, see the [Agent Observability Setup Guide][5].
 
 ```python
-# Read the session_id sent by the web application
-message_data = json.loads(request_body)
-session_id = message_data.get("session_id")
+import json
 
-# Pass the session_id to your AI agent
-await agent_loop(
-    message=message_data.get("message", ""),
-    session_id=session_id,
-    # Other arguments your agent needs
-)
+async def handle_message(request_body):
+    # Read the session_id sent by the web application
+    message_data = json.loads(request_body)
+    session_id = message_data.get("session_id")
+
+    # Pass the session_id to your AI agent
+    return await agent_loop(
+        message=message_data.get("message", ""),
+        session_id=session_id,
+        # Other arguments your agent needs
+    )
 ```
 
 Use the Agent Observability SDK to instrument your agent and tools, and pass it the `session_id`.
