@@ -1,5 +1,6 @@
 ---
 title: Live Call Routing
+description: Connect phone calls to your On-Call Team using direct call or voicemail routing, with configurable keypad menus and escalation handling.
 aliases:
 - /service_management/on-call/triggering_pages/live_call_routing/
 - /incident_response/on-call/triggering_pages/live_call_routing/
@@ -13,15 +14,14 @@ further_reading:
 Live call routing is provisioned by Datadog. To enable it for your organization, contact <a href="mailto:support@datadoghq.com">Datadog Support</a>. Include your use case and the desired country code (for example, <code>+33</code> for France).
 </div>
 
-
 ## Overview
 
 Live call routing connects phone calls to your On-Call Team. When someone calls your dedicated number, the system handles the call according to your configuration.
 
 Datadog On-Call supports two routing types:
 
-- **Direct call routing**: Connects the caller to an active responder, following the escalation policy for the On-Call Team. Enables real-time coordination during critical incidents.
-- **Voicemail routing**: Prompts the caller to leave a voicemail, then converts the voice message to a Page for the On-Call Team. Useful for non-technical callers or third-party vendors who need to report issues without a live conversation.
+- [**Direct call routing**](#direct-call-routing): Connects the caller to an active responder, following the escalation policy for the On-Call Team. Enables real-time coordination during critical incidents.
+- [**Voicemail routing**](#voicemail-routing): Prompts the caller to leave a voicemail, then converts the voice message to a Page for the On-Call Team. Useful for non-technical callers or third-party vendors who need to report issues without a live conversation.
 
 ## Configuration
 
@@ -43,6 +43,12 @@ You can configure up to nine options per route. Each option maps a key (1-9) to 
 - Use option 1 for the most critical team or escalation path.
 - Group related teams under adjacent keys.
 - Keep menu prompts concise and clear.
+
+### Number type and regional availability
+
+- **Toll-free vs. local**: Most regions provision a local number. India and UAE are the exception, only toll-free numbers are available there.
+- **Area code or location**: For US numbers, you can request a specific area code or ZIP code.
+- **Persistence**: After a number is provisioned, it is dedicated to that route and does not change or rotate.
 
 ## Routing types
 
@@ -131,5 +137,11 @@ If a voicemail is left but no Page is created:
 - Verify the On-Call Team assigned to the route has an active escalation policy.
 - Confirm that team members have notification preferences configured to receive Pages.
 - Check that the voicemail recording completed successfully. Callers who hang up before the beep may not leave a recording that the system can process.
+
+### Calls not connecting from outside the number's country
+
+If callers outside a specific country can't reach your routing number:
+- **India numbers**: Only reachable by callers located in India, using the local `000 800…` prefix. They are not reachable by dialing the full international format.
+- **UAE numbers**: Only reachable by callers located in the UAE. They do not work internationally.
 
 [1]: /help/
