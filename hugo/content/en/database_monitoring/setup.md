@@ -1,5 +1,5 @@
 ---
-title: Get Started with DBM
+title: Set Up DBM
 description: Choose a setup architecture and set up Database Monitoring for your database.
 ---
 
