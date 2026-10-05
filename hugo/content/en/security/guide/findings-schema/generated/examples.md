@@ -1578,59 +1578,50 @@ build:
 
 ```json
 {
-  "base_severity": "critical",
-  "cloud_resource": {
-    "account": {
-      "account": "Main production account",
-      "account_id": "123456789012"
-    },
-    "cloud_provider": "AWS",
-    "cloud_provider_url": "https://s3.console.aws.amazon.com/s3/buckets/my-app-customer-exports",
-    "display_name": "my-app-customer-exports",
-    "key": "arn:aws:s3:::my-app-customer-exports"
-  },
-  "description": "An Amazon S3 bucket contains objects with unredacted credit card numbers detected by Sensitive Data Scanner.",
+  "base_severity": "medium",
+  "description": "A CI pipeline log for the checkout-service contains an unredacted credit card number identified by Sensitive Data Scanner.",
   "detection_changed_at": 1738575599859,
-  "exposure_time_seconds": 300,
   "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
   "finding_type": "sensitive_data",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
+  "last_detected_at": 1738624280889,
   "last_seen_at": 1738624280889,
   "metadata": {
     "schema_version": "2"
   },
-  "origin": [
-    "agentless-scanner"
+  "related_services": [
+    "checkout-service"
   ],
-  "resource_id": "arn:aws:s3:::my-app-customer-exports",
-  "resource_name": "my-app-customer-exports",
-  "resource_type": "aws_s3_bucket",
+  "resource_id": "service:checkout-service",
+  "resource_name": "checkout-service",
+  "resource_type": "logs",
   "rule": {
-    "default_rule_id": "def-000-abc",
-    "id": "def-000-sds",
-    "name": "S3 bucket contains unredacted credit card numbers",
-    "type": "sensitive_data_exposure",
-    "version": 3
+    "id": "sds-001-ccn",
+    "name": "Credit Card Number Scanner",
+    "type": "sensitive_data"
   },
   "sensitive_data": {
     "match_action_type": "redact"
   },
-  "severity": "critical",
+  "service": {
+    "name": "checkout-service"
+  },
+  "severity": "medium",
   "severity_details": {
     "adjusted": {
-      "score": 9.8,
-      "value": "Critical",
-      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+      "score": 5.5,
+      "value": "Medium",
+      "value_id": 7
     },
     "base": {
-      "score": 9.8,
-      "value": "Critical",
-      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+      "score": 5.5,
+      "value": "Medium",
+      "value_id": 7
     }
   },
   "status": "open",
-  "title": "S3 bucket contains unredacted credit card numbers",
+  "title": "Credit card number detected in CI pipeline logs",
   "workflow": {
     "auto_closed_at": 1738575600859,
     "automations": {
@@ -1694,8 +1685,8 @@ build:
     }
   },
   "tags": [
-    "origin:agentless-scanner",
-    "source:vulnerability_management"
+    "origin:logs",
+    "source:sensitive_data_scanner"
   ]
 }
 ```
