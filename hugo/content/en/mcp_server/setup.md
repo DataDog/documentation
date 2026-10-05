@@ -114,7 +114,6 @@ If the plugin is not available to you, point Claude Code at the MCP Server endpo
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -283,8 +282,6 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
 1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-<div class="alert alert-info">If remote authentication is not available, use <a href="#local-binary-authentication">local binary authentication</a> instead.</div>
 
 [1]: /getting_started/site/
 {{< /site-region >}}
@@ -593,7 +590,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Other" %}}
 
-For most other [supported clients](#supported-clients), use these instructions for remote authentication. For Cline or when remote authentication is unreliable or not available, use [local binary authentication](#local-binary-authentication).
+For most other [supported clients](#supported-clients), use these instructions for remote authentication.
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
@@ -726,7 +723,7 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Kiro][9], [Kiro CLI][10] | Amazon Web Services | |
 | [Goose][8] | Agentic AI Foundation | |
 | [OpenCode][52] | SST | Datadog [OpenCode plugin][53] recommended. |
-| [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. Use local binary authentication for Cline if remote authentication is unreliable. |
+| [Cline][11] | Various | See the {{< ui >}}Other{{< /ui >}} tab above. |
 
 <div class="alert alert-info">The Datadog MCP Server is under significant development, and additional supported clients may become available.</div>
 
@@ -819,46 +816,6 @@ You can allow-list your redirect URLs in [{{< ui >}}Organization Preferences{{< 
 
 If you are a partner or vendor adding Datadog to an MCP directory for your AI agent platform, submit your interest through Datadog's [Technology Partner Signup][61].
 
-### Local binary authentication
-
-Local authentication is recommended for Cline and when remote authentication is unreliable or not available. After installation, you typically do not need to update the local binary to benefit from MCP Server updates, as the tools are remote.
-
-{{% collapse-content title="Set up Datadog MCP Server local binary" level="h4" expanded=false id="mcp-local-binary" %}}
-
-1. Install the Datadog MCP Server binary (macOS and Linux):
-   ```bash
-   curl -sSL https://coterm.datadoghq.com/mcp-cli/install.sh | bash
-   ```
-   This installs the binary to `~/.local/bin/datadog_mcp_cli`.
-
-   For Windows, download the [Windows version][20].
-
-2. Run `datadog_mcp_cli login` manually to walk through the OAuth login flow and choose a [Datadog site][21].
-
-3. Configure your AI client to use the stdio transport with `datadog_mcp_cli` as the command. For example, in macOS (replace `<USERNAME>` with your OS username):
-   ```json
-   {
-     "mcpServers": {
-       "datadog": {
-         "type": "stdio",
-         "command": "/Users/<USERNAME>/.local/bin/datadog_mcp_cli",
-         "args": [],
-         "env": {}
-       }
-     }
-   }
-   ```
-
-   For other operating systems, replace the `command` path with the location of the downloaded binary:
-   - Linux: `/home/<USERNAME>/.local/bin/datadog_mcp_cli`
-   - Windows: `<USERNAME>\bin\datadog_mcp_cli.exe`
-
-   <div class="alert alert-tip">For Claude Code, you can instead run:
-   <pre><code>claude mcp add datadog --scope user -- ~/.local/bin/datadog_mcp_cli</code></pre></div>
-
-4. Fully restart your AI client to apply the configuration and load the MCP Server.
-{{% /collapse-content %}}
-
 ## Test access to the MCP Server
 
 1. Install the [MCP inspector][2], a developer tool for testing and debugging MCP servers.
@@ -897,8 +854,6 @@ Local authentication is recommended for Cline and when remote authentication is 
 [17]: /getting_started/site/#navigate-the-datadog-documentation-by-site
 [18]: /ide_plugins/idea/
 [19]: https://claude.ai
-[20]: https://coterm.datadoghq.com/mcp-cli/datadog_mcp_cli.exe
-[21]: /getting_started/site/
 [22]: /account_management/rbac/permissions/#mcp
 [23]: /account_management/rbac/?tab=datadogapplication#custom-roles
 [24]: /account_management/rbac/permissions/#monitors
