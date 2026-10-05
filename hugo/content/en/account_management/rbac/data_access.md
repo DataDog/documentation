@@ -93,8 +93,8 @@ Each telemetry type has a setting that controls who can view data outside a Rest
 {{< ui >}}Restricted{{< /ui >}}
 : Data outside a Restricted Dataset is visible only to users with explicit access. Users can view data for that telemetry type only if they have access to a Restricted Dataset or have [unrestricted access](#unrestricted-user-groups).
 
-The {{< ui >}}Restricted{{< /ui >}} setting is useful for especially sensitive data, when:
-- Telemetry tagging is inconsistent, so the {{< ui >}}Unrestricted{{< /ui >}} setting risks leaving sensitive records uncovered.
+The {{< ui >}}Restricted{{< /ui >}} setting helps protect sensitive data when:
+- Inconsistent telemetry tagging could leave sensitive records visible under the {{< ui >}}Unrestricted{{< /ui >}} setting.
 - New tag values are added frequently, and you cannot guarantee that an existing Restricted Dataset matches every new value.
 - Compliance posture requires a default-deny stance for a telemetry type.
 
