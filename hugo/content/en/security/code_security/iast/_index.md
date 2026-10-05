@@ -104,7 +104,7 @@ Because IAST detects vulnerabilities in your first-party code, findings do not h
 
 The vulnerability side panel shows the runtime context factors as indicators, so you can see at a glance why a finding's score was adjusted:
 
-- **{{< ui >}}Service In Production{{< /ui >}}**: Corresponds to the **Production runtime context** factor. Datadog determines whether a service is running in production from its `env` and `environment` tags. If the affected service is not running in production, the Datadog Severity Score is decreased.
+- **{{< ui >}}Service In Production{{< /ui >}}**: Corresponds to the **Production runtime context** factor. Datadog determines whether a service is running in production from its `env` and `environment` tags. If the affected service is not running in production, the Datadog Severity Score decreases.
 - **{{< ui >}}Exposed to Attacks{{< /ui >}}**: Corresponds to the **Under attack** factor. A service is flagged as exposed to attacks if a security signal has been detected on it in the last 15 days. If no attack activity is observed, the panel shows {{< ui >}}Not Exposed to Attacks{{< /ui >}} and the Datadog Severity Score decreases.
 
 To see how each indicator affected a specific finding, open the {{< ui >}}Datadog Severity Breakdown{{< /ui >}} tab in the side panel. For more information about how these risks are evaluated across Datadog Security, see [Security Inbox][19].
