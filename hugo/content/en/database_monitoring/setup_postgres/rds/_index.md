@@ -33,7 +33,7 @@ With Quick Install, you specify a few options and Datadog generates a CloudForma
 
 <div class="alert alert-info">Datadog does not store the admin credentials. They are only used temporarily to connect the Agent, and no data is retained after the process is completed.</div>
 
-### Install with Quick Install
+### Install the Agent
 
 1. Navigate to the [Database Monitoring Setup][19] page.
 1. On the {{< ui >}}Unmonitored Hosts{{< /ui >}} tab, click {{< ui >}}Add Agent{{< /ui >}} for the RDS instance where you want to install the Agent.

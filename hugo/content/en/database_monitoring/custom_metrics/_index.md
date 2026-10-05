@@ -26,7 +26,7 @@ Add `custom_queries` to your integration's `conf.yaml` file. Each entry in the l
 | --- | --- | --- |
 | `metric_prefix` | Yes | All metrics emitted by this query begin with this prefix. |
 | `query` | Yes | The SQL to execute. All returned rows are evaluated. Use the pipe character (`\|`) for multi-line queries. |
-| `columns` | Yes | A list of columns in the same order as your `SELECT`. Each column requires a `name` and a `type`. Set `type` to one of the [column types](#column-types) to emit a metric, or `tag` to apply the column value as a tag on every metric from this query. |
+| `columns` | Yes | A list of columns in the same order as your `SELECT`. Each column requires a `name` and a `type`. Set `type` to one of the [column types](#column-types) to emit a metric. Set it to `tag` to apply the column value as a tag on every metric from this query. |
 | `tags` | No | A list of static tags applied to every metric from this query. |
 | `collection_interval` | No | How often, in seconds, the Agent runs the query. Defaults to every 15 seconds. |
 
@@ -221,13 +221,13 @@ postgres
 
 ## Explore custom metrics in Database Monitoring
 
-The {{< ui >}}Custom Metrics{{< /ui >}} section of the database instance detail page displays a timeseries graph for each metric column in your custom queries, scoped to that instance. This lets you monitor business-specific or environment-specific metrics alongside the standard Database Monitoring metrics. The section is hidden if no custom queries are configured.
+The {{< ui >}}Custom Metrics{{< /ui >}} section of the database instance detail page displays a timeseries graph for each metric column in your custom queries. The graphs are scoped to that instance. This lets you monitor business-specific or environment-specific metrics alongside the standard Database Monitoring metrics. The section is hidden if no custom queries are configured.
 
 Metrics are named `<metric_prefix>.<column_name>`. For example, the PostgreSQL example above produces `postgresql.employee.employee_age` and `postgresql.employee.employee_salary`, each tagged by `name` and `address`.
 
 - **Aggregation**: `count` and `monotonic_count` columns are aggregated as `sum`. All other metric types are aggregated as `avg`.
 - **Source SQL**: Click {{< ui >}}View SQL query{{< /ui >}} in the top-right corner of a graph to see the SQL statement that produces the metric.
-- **Collection interval**: The section subtitle shows how often the metrics are collected (for example, "collected every 15s"). If your custom queries use different intervals, the range is shown (for example, "collected every 15s–60s").
+- **Collection interval**: The section subtitle shows how often the metrics are collected (for example, "collected every 15s"). If your custom queries use different intervals, the subtitle shows the range of intervals.
 
 ## Further Reading
 
