@@ -56,7 +56,7 @@ Sensitive data is mixed in with non-sensitive data from the same source and tele
 
 Sensitive Data Scanner is useful as a defense-in-depth measure alongside Data Access Control, especially when you cannot guarantee that sensitive data is tagged consistently at ingestion.
 
-## Choosing the setting for data outside Restricted Datasets
+## Choosing the access setting for data outside Restricted Datasets
 
 Use the default **Unrestricted** setting to apply restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
 
