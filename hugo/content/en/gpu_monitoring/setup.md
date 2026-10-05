@@ -27,7 +27,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 #### Minimum version requirements
 
 - **Datadog Agent**: v7.80
-  - (Preferred version: the [most recent Agent version][2]). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics. 
+  - (Preferred version: the [most recent Agent version][2]). Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics.
 - **Operating system**: Linux
 - **Linux kernel**: 5.8 and above
 - **NVIDIA driver**: version 450.51
@@ -468,6 +468,107 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
 {{% /tab %}}
 {{< /tabs >}}
 
+## Integrations for GPU Monitoring
+
+Some features of the GPU Monitoring product require additional configuration. See the following sections for more information.
+
+### Capacity planning
+
+{{< beta-callout url="#" btn_hidden="true" header="Preview" >}}
+Capacity Planning is in preview.
+{{< /beta-callout >}}
+
+The Capacity Planning feature of GPU Monitoring allows you to see your current GPU capacity, how it is shared across your teams and used by your workloads. You can also use it to understand job scheduling and utilization.
+
+{{< tabs >}}
+{{% tab "Kueue" %}}
+
+[Kueue][15] is a Kubernetes workload queueing system. Datadog can collect metrics from Kueue to power the Capacity Planning feature, including linking queues and resource flavors to GPU hardware, and linking workloads to the pods and hosts they ran on.
+
+The Kueue integration requires a configuration change to the Cluster Agent to collect the cluster-level Kueue objects. Then, the Kueue pod should be changed to ensure the Datadog Agent can collect its metrics.
+
+1. Enable Kueue metadata collection in the Cluster Agent by changing your `DatadogAgent` resource to add the following:
+
+   ```yaml
+   spec:
+     override:
+       clusterAgent:
+         env:
+           - name: DD_CLUSTER_AGENT_KUEUE_ENABLED
+             value: "true"
+   ```
+
+2. Grant the Cluster Agent permission to collect Kueue resources:
+
+   ```yaml
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRole
+   metadata:
+     name: datadog-kueue-read
+   rules:
+     - apiGroups:
+         - kueue.x-k8s.io
+       resources:
+         - clusterqueues
+         - localqueues
+         - resourceflavors
+         - workloads
+       verbs:
+         - get
+         - list
+         - watch
+   ---
+   apiVersion: rbac.authorization.k8s.io/v1
+   kind: ClusterRoleBinding
+   metadata:
+     name: datadog-kueue-read
+   roleRef:
+     apiGroup: rbac.authorization.k8s.io
+     kind: ClusterRole
+     name: datadog-kueue-read
+   subjects:
+     - kind: ServiceAccount
+       name: <CLUSTER_AGENT_SERVICE_ACCOUNT>
+       namespace: <DATADOG_NAMESPACE>
+   ```
+
+3. Configure the Kueue metrics service as a cluster check. Add the following Autodiscovery annotation to the service:
+
+   ```yaml
+   ad.datadoghq.com/endpoints.checks: |
+     {
+       "kueue": {
+         "instances": [
+           {
+             "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics"
+           }
+         ]
+       }
+     }
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+### Inference
+
+{{< tabs >}}
+{{% tab "NVIDIA Dynamo" %}}
+
+NVIDIA Dynamo metrics are collected only when GPU Monitoring is enabled. Configure the Dynamo check with the frontend metrics endpoint and, if needed, a backend worker metrics endpoint:
+
+```yaml
+init_config:
+instances:
+  - openmetrics_endpoint: http://<DYNAMO_FRONTEND_HOST>:8000/metrics
+  - openmetrics_endpoint: http://<DYNAMO_WORKER_HOST>:<DYN_SYSTEM_PORT>/metrics
+```
+
+The backend worker endpoint is optional. See the [sample Dynamo configuration][14] for all configuration options.
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -485,3 +586,5 @@ To set up GPU Monitoring on a mixed cluster with Helm, create two Helm deploymen
 [11]: /getting_started/integrations/azure/?tab=createanappregistration
 [12]: /getting_started/integrations/oci/
 [13]: /infrastructure/process?tab=linuxwindows#installation
+[14]: https://github.com/DataDog/integrations-core/blob/master/dynamo/datadog_checks/dynamo/data/conf.yaml.example
+[15]: https://kueue.sigs.k8s.io/
