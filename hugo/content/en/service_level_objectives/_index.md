@@ -327,7 +327,7 @@ The 90-day limits per SLO are as follows:
 <!-- TBD: Confirm whether a yearly recurring limit (20 per SLO) is user-facing. If so, add a "Yearly recurring" row. -->
 <!-- TBD: Confirm whether tag-based corrections have their own limits, and add them here if they do. -->
 
-You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26]. To create a tag-based correction with the API, set the `slo_query` attribute instead of `slo_id`.
+You can configure status corrections in the UI, with the [SLO status corrections API][25], or with a [Terraform resource][26].
 
 To create a tag-based correction with the API or Terraform, set the `slo_query` attribute instead of `slo_id`.
 
@@ -352,8 +352,21 @@ A query cannot be empty or consist only of `*`.
 
 The {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. From this page, you can create corrections and edit or delete existing ones.
 
-<!-- TBD: The Corrections tab shows a Preview badge in the UI. Confirm whether the page is GA or in Preview, and add a callout if needed. -->
+<!-- TBD: The Corrections tab shows a Preview badge in the UI, but the feature is GA. Confirm whether the badge is expected. -->
 <!-- TBD: Add a screenshot of the Corrections page. -->
+
+#### Create corrections from monitor downtimes
+
+When you schedule a new [monitor downtime][30] by monitor tags, Datadog checks for SLOs that have the same tags. If any SLOs match, the downtime editor displays a card with the number of matching SLOs. To create a correction for the same time window:
+
+1. On the card, click {{< ui >}}Preview SLO Correction{{< /ui >}}. The correction form opens with {{< ui >}}By Tags{{< /ui >}} selected, the downtime's monitor tags as the query, and the downtime's schedule and message filled in.
+2. Review the query and the SLOs that match it, select a {{< ui >}}Category{{< /ui >}}, and click {{< ui >}}Apply{{< /ui >}}.
+3. Save the downtime. Datadog creates the SLO correction when you save the downtime.
+
+**Note**: The card does not appear when you edit an existing downtime.
+
+<!-- TBD: Confirm whether users need the slos_corrections permission for the correction to be created from a downtime, and add a note if so. -->
+<!-- TBD: Add a screenshot of the downtime card. -->
 
 #### Access in the UI
 
@@ -375,9 +388,7 @@ To create a status correction in the UI:
 
 **Note**: After you create a correction, you cannot change its scope or switch it between one-time and recurring.
 
-To view, edit, and delete existing status corrections, use the {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2], or the {{< ui >}}Corrections{{< /ui >}} tab in an SLO's details side panel.
-
-<!-- TBD: Confirm whether the side panel Corrections tab includes tag-based corrections that match the SLO. If not, direct users to the Corrections page for tag-based corrections. -->
+To view, edit, and delete existing status corrections, use the {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2], or the {{< ui >}}Corrections{{< /ui >}} tab in an SLO's details side panel. The side panel tab includes tag-based corrections that apply to the SLO.
 
 #### Visualizing status corrections
 
@@ -424,3 +435,4 @@ The SLO Calendar View is available on the [SLO manage page][2]. On the top right
 [27]: /events/explorer/
 [28]: /monitors/types/event/
 [29]: /events/explorer/searching/
+[30]: /monitors/downtimes/
