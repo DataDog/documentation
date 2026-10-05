@@ -1050,7 +1050,7 @@ Local authentication is recommended for Cline and when remote authentication is 
 [76]: /mcp_server/code_execution/ 
 [77]: /tracing/live_debugger/
 [78]: /account_management/governance_console/
-[79]: ]https://app.datadoghq.com/personal-settings/apps
+[79]: https://app.datadoghq.com/personal-settings/apps
 [80]: https://app.datadoghq.com/organization-settings/mcp#mcp-oauth-redirect-urls
 [81]: /logs/log_configuration/pipelines/
 [82]: /logs/log_configuration/indexes/
