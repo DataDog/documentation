@@ -98,7 +98,7 @@ The {{< ui >}}Restricted{{< /ui >}} setting is useful for especially sensitive d
 - New tag values are added frequently, and you cannot guarantee that an existing Restricted Dataset matches every new value.
 - Compliance posture requires a default-deny stance for a telemetry type.
 
-A telemetry type must have at least one Restricted Dataset before you can set it to {{< ui >}}Restricted{{< /ui >}}. This prevents unintentional loss of access. If you delete all Restricted Datasets from a telemetry type set to {{< ui >}}Restricted{{< /ui >}}, only teams and roles with [unrestricted access](#unrestricted-user-groups) keep access. Other users get access again after you create a new dataset or set the telemetry type back to {{< ui >}}Unrestricted{{< /ui >}}.
+A telemetry type must have at least one Restricted Dataset before you can set it to {{< ui >}}Restricted{{< /ui >}}. This prevents unintentional loss of access. If you delete all Restricted Datasets for a telemetry type set to {{< ui >}}Restricted{{< /ui >}}, only teams and roles with [unrestricted access](#unrestricted-user-groups) retain access. To restore access for other users, grant them access through a new Restricted Dataset or set the telemetry type back to {{< ui >}}Unrestricted{{< /ui >}}.
 
 Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >}} and {{< ui >}}Restricted{{< /ui >}} settings. Each dataset belongs to one setting.
 
