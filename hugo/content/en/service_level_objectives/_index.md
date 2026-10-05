@@ -352,7 +352,6 @@ A query cannot be empty or consist only of `*`.
 
 The {{< ui >}}Corrections{{< /ui >}} tab on the [SLO manage page][2] lists all status corrections in your organization, including single-SLO and tag-based corrections. Use the search bar and the facets on the left to filter corrections by {{< ui >}}Category{{< /ui >}}, {{< ui >}}Creator{{< /ui >}}, {{< ui >}}Frequency{{< /ui >}}, and {{< ui >}}SLO Tags{{< /ui >}}. From this page, you can create corrections and edit or delete existing ones.
 
-<!-- TBD: The Corrections tab shows a Preview badge in the UI, but the feature is GA. Confirm whether the badge is expected. -->
 <!-- TBD: Add a screenshot of the Corrections page. -->
 
 #### Create corrections from monitor downtimes
