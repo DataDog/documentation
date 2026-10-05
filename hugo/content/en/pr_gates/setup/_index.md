@@ -31,20 +31,22 @@ To create a PR Gates rule in Datadog:
    - {{< ui >}}Secret Scanning{{< /ui >}}
    - {{< ui >}}New Flaky Tests{{< /ui >}}
 
-1. Under {{< ui >}}Define condition{{< /ui >}}, set the conditions that will cause the rule to fail. Each rule type has its own condition options, and you can use the existing default condition settings when you select a rule type.
-
 1. Under {{< ui >}}Define scope{{< /ui >}}, set which repositories the rule should evaluate:
    - {{< ui >}}All repositories{{< /ui >}}: The rule evaluates all repositories configured for the rule type.
    - {{< ui >}}Selected repositories{{< /ui >}}: The rule evaluates only the repositories you specify. Use `IN` to include only specified repositories, or `NOT IN` to evaluate all configured repositories _except_ the ones you specify.
+
+1. Under {{< ui >}}Define condition{{< /ui >}}, set the conditions that will cause the rule to fail. Each rule type has its own condition options, and you can use the existing default condition settings when you select a rule type.
 
    The following example illustrates a Static Code Analysis (SAST) rule that fails when a pull request introduces at least one Static Code Analysis code vulnerability violation with at least `Critical` severity. The rule evaluates all repositories configured for Static Code Analysis:
 
    {{< img src="pr_gates/setup/static_analysis_4.png" alt="A Static Code Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-1. Under {{< ui >}}Preview checks{{< /ui >}}, select your source code management provider to preview the status check to be added to pull requests. To set the check so it blocks PRs when it fails, follow your provider's instructions for making a status check _required_:
+1. Under {{< ui >}}Preview checks{{< /ui >}}, select your source code management provider to preview the status check to be added to pull requests. To set the check so it blocks PRs when it fails, follow your provider's instructions to ensure required PR Gates are passing before a PR can be merged:
 
    - [GitHub][2]
+   - [GitLab][9]
    - [Azure DevOps][3]
+   - [Bitbucket Cloud][10]
 
    Non-blocking rules can be helpful when you roll out a new rule and want to verify its behavior before making it blocking.
 
@@ -56,16 +58,18 @@ To create a PR Gates rule in Datadog:
 
 ### Manage PR checks
 
-PR Gates automatically create PR checks in [GitHub][4] or [Azure DevOps][5] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog.
+PR Gates automatically create PR checks in [GitHub][4], [GitLab][11], [Azure DevOps][5], or [Bitbucket Cloud][12] pull requests for each rule type evaluated. The check contains additional information about the rule evaluation, such as the failure reason and the matching events in Datadog. In GitLab, PR Gates will also use your Datadog Service Account to approve a merge request.
 
 <div class="alert alert-info"><strong>Note</strong>: Re-running a check in the pull request UI does not re-run the corresponding PR Gates rule.</div>
 
-To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6] or [Azure DevOps Source Code][7] integration documentation to set one up.
+To ensure PR Gates are able to create PR checks, you must install the integration for your SCM provider. If you do not have the integration installed, follow the [GitHub][6], [GitLab Source Code][13], [Azure DevOps Source Code][7], or [Bitbucket Cloud Source Code][14] integration documentation to set one up.
 
 To make these checks blocking, they must be set as required in the branch policies of your source code management provider:
 
 - [GitHub][2]
+- [GitLab][9]
 - [Azure DevOps][3]
+- [Bitbucket Cloud][10]
 
 ## Manage rules
 
@@ -91,3 +95,9 @@ For more information, see the [RBAC Permissions documentation][8].
 [6]: /integrations/github/
 [7]: /integrations/azure-devops-source-code/
 [8]: /account_management/rbac/permissions
+[9]: https://docs.gitlab.com/user/project/merge_requests/approvals/rules/
+[10]: https://support.atlassian.com/bitbucket-cloud/docs/suggest-or-require-checks-before-a-merge/
+[11]: https://docs.gitlab.com/ci/ci_cd_for_external_repos/external_commit_statuses/
+[12]: https://support.atlassian.com/bitbucket-cloud/docs/check-build-status-in-a-pull-request/
+[13]: /integrations/gitlab-source-code/
+[14]: /integrations/bitbucket-source-code/
