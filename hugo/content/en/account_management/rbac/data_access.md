@@ -85,7 +85,7 @@ The following are available as a Preview upon request:
 
 ### Data not in a Restricted Dataset {#strict-mode}
 
-Each telemetry type has a setting that controls who can see data that is not in a Restricted Dataset. The {{< ui >}}Data not in dataset{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table shows the setting for each telemetry type.
+Each telemetry type has a setting that controls who can view data outside a Restricted Dataset. This setting appears in the {{< ui >}}Data not in dataset{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table.
 
 {{< ui >}}Unrestricted{{< /ui >}} (default)
 : Data that is not in a Restricted Dataset, and untagged data, are visible to all users with appropriate permissions.
