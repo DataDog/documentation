@@ -80,10 +80,10 @@ Before you create an experiment metric from Agent Observability data:
 
 - [Instrument your LLM application with Agent Observability][14] and send traces to Datadog.
 - To use cost or token data, make sure your traces include token usage. Datadog uses token usage, model, and provider information to calculate [estimated costs][15].
-- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a numeric `score` value.
+- To use an evaluation, submit or configure a custom [Agent Observability evaluation][16] with a `pass` or `fail` assessment. You can also measure the raw numeric value of a score evaluation.
 - Tag each trace or evaluation with the subject identifier that you use to assign experiment variants. For setup instructions, see [Run an Online Experiment on an LLM Application][17].
 
-<div class="alert alert-warning"><strong>Supported evaluation type</strong>: Experiment metrics support only Agent Observability evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types are not available in the metric picker.</div>
+Evaluations of every type are available in the picker. Pass rate measures their assessments, independently of the evaluation result type.
 
 ### Create a metric from Agent Observability data
 
@@ -112,13 +112,16 @@ The cost and token templates default to {{< ui >}}Average of{{< /ui >}} their co
 
 Select the {{< ui >}}Evaluations{{< /ui >}} tab, then:
 
-1. Search for and select the custom score evaluation you want to measure.
+1. Search for and select the evaluation you want to measure.
 1. Review the evaluation details, such as its ML application, scope, prompt, and model.
-1. Configure the aggregation and any filters. Evaluation metrics default to the average score.
+1. Configure the aggregation and any filters. Evaluation metrics default to **Average of Assessment score**, which measures pass rate.
 
-The picker lists score evaluations received by Agent Observability during the selected time range. If an evaluation does not appear, confirm that your application has submitted at least one score value for it.
+The picker lists evaluations received by Agent Observability during the selected time range, including evaluations without an assessment. Datadog derives `assessment_score` from the assessment: `pass` is `1`, `fail` is `0`, and a missing assessment has no value. Pass rate is the average of these values, between 0 and 1. Evaluations without an assessment are excluded from both the numerator and denominator.
 
-{{< img src="/product_analytics/experiment/exp_create_metric_agent_observability_evaluations.png" alt="The Create Metric event picker with Evaluations selected, showing custom score evaluations, with the relevance evaluation selected and its score type displayed." style="width:90%;" >}}
+If the pass-rate preview is empty, submit evaluations with pass or fail assessments within the selected time range. Historical evaluations are not backfilled with `assessment_score`.
+
+For score evaluations, select **Score value** to measure the raw score instead. Existing metrics that use score values retain their configuration.
+
 
 After you configure either source:
 
