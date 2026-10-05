@@ -794,9 +794,12 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 
 ### Organization-wide access
 
-MCP Server tools also require global, organization-wide {{< ui >}}MCP Access{{< /ui >}} and {{< ui >}}MCP Write Access{{< /ui >}} capabilities, which are managed by organization administrators in [Organization Settings][27].
+MCP Server tools also require global, organization-wide MCP access and write capabilities, which organization administrators manage in [Organization Settings][27]. Enable these settings to allow access to the Datadog MCP Server and its tools:
 
-When {{< ui >}}MCP Write Access{{< /ui >}} is disabled for an organization, write tools are hidden for all users, regardless of individual user role permissions. See [Troubleshooting](#write-tools-are-missing) for more information.
+| Organization Setting | Description |
+|---------|-------------|
+| {{< ui >}}MCP Access{{< /ui >}} | Enable to allow access to the Datadog MCP Server. When disabled, users cannot access any MCP functionality, regardless of individual role permissions. This allows organizations to completely opt out of the MCP Server. |
+| {{< ui >}}MCP Write Access{{< /ui >}} | Enable to allow access to MCP Server tools that create or modify resources, such as `create_datadog_monitor`. When disabled, the MCP Server hides write tools from all users, regardless of individual role permissions. See [Troubleshooting](#write-tools-are-missing) for more information. |
 
 ### Restrict network access
 

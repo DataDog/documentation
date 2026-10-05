@@ -81,6 +81,13 @@ If your application does not have an existing Datadog integration, and you don't
 
 Learn how to access and control [Synthetic Monitoring Settings][13].
 
+### MCP Server
+
+Manage how AI agents and tools access your organization's Datadog data through the [Datadog MCP Server][18]:
+
+- Enable or disable [organization-wide access][19] to the MCP Server and its tools.
+- Configure [redirect URLs][20] for OAuth authentication with the MCP Server.
+
 ## Security
 
 ### Safety Center
@@ -137,16 +144,6 @@ When enabled, users with `Modify Index` permission can choose any of the 3-, 7-,
 
 **Note**: Using out-of-contract retention periods incur on-demand charges. If an out-of-contract retention period is often used, Datadog recommends that customers contact their account manager to have it added to their contract.
 
-#### MCP access and write access
-
-Use these settings to enable or disable access to the [Datadog MCP Server][18] for your organization:
-
-- {{< ui >}}MCP Access{{< /ui >}}: When this setting is disabled, users cannot access any MCP functionality, regardless of individual role permissions. This allows organizations to completely opt out of the MCP Server.
-
-- {{< ui >}}MCP Write Access{{< /ui >}}: Enable or disable MCP Server tools that create or modify resources, such as `create_datadog_monitor`. When this setting is disabled, the MCP Server hides write tools from all users, regardless of individual role permissions. 
-
-Users also need the `mcp_read` or `mcp_write` role permission to use MCP Server tools, and the required permissions for the Datadog resources they want to access. See [MCP Server required permissions][19].
-
 #### Max session duration configuration
 
 Users with the `Org Management` permission can set a maximum session duration for their organization. The duration applies to all new web sessions created after you change it, for all users, regardless of their role in the organization. It doesn't apply to Datadog mobile application sessions.
@@ -186,3 +183,4 @@ Users with the `Org Management` permission can enable or disable the idle time s
 [17]: /account_management/org_settings/smtp_configuration
 [18]: /mcp_server/
 [19]: /mcp_server/setup/#required-permissions
+[20]: /mcp_server/setup/#adding-oauth-clients
