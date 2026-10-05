@@ -25,11 +25,6 @@ Embed [Datadog Apps][2] in other Datadog products to place operational tools dir
 
 - A Datadog App that has been built, uploaded, and published
 - Permission to use the app and edit the destination surface
-- The [`@datadog/apps-frontend`][1] package installed in the app:
-
-```shell
-npm install @datadog/apps-frontend
-```
 
 For information about building, uploading, and publishing an app, see [Datadog Apps][2].
 
@@ -48,6 +43,12 @@ To embed an app in Datadog:
 1. Save your changes and [verify the app](#verify-the-app) to confirm that it loads and behaves as expected.
 
 ## Customize the embedded experience
+
+If you haven't already, install the  [`@datadog/apps-frontend`][1] package in the app:
+
+```shell
+npm install @datadog/apps-frontend
+```
 
 To make an embedded app respond to its Datadog host, keep `DatadogAppProvider` at the application root. The provider establishes communication with the Datadog host, makes host inputs available to hooks, and preserves the app's URL state in shared Datadog links.
 
