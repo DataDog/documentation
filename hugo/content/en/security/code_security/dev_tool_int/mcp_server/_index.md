@@ -112,7 +112,7 @@ The MCP server calls the following Datadog security binaries to perform scans. I
 | `datadog-security-cli`    | SCA           | `brew install --cask datadog-security-cli`    |
 | `datadog-iac-scanner`     | IaC           | [GitHub releases][11]                         |
 
-<div class="alert alert-info"><code>datadog-sbom-generator</code> and <code>datadog-security-cli</code> are not available on Windows. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
+<div class="alert alert-info"><code>datadog-security-cli</code> is not available on Windows, so SCA scans are not supported there. <code>datadog-iac-scanner</code> is not available on macOS <code>amd64</code>.</div>
 
 ### Configure your client
 
