@@ -100,6 +100,15 @@ Because IAST detects vulnerabilities in your first-party code, findings do not h
 | Production runtime context | Whether the affected service is running in a production environment. | Decreased if the service is not running in production. |
 | Under attack | Evidence of active attack activity targeting the service. | Decreased if there is no observed attack activity. |
 
+#### Runtime indicators
+
+The vulnerability side panel shows the runtime context factors as indicators, so you can see at a glance why a finding's score was adjusted:
+
+- **{{< ui >}}Service In Production{{< /ui >}}**: Corresponds to the **Production runtime context** factor. Datadog determines whether a service is running in production from its `env` and `environment` tags. If the affected service is not running in production, the Datadog Severity Score is decreased.
+- **{{< ui >}}Exposed to Attacks{{< /ui >}}**: Corresponds to the **Under attack** factor. A service is flagged as exposed to attacks if a security signal has been detected on it in the last 15 days. If no attack activity is observed, the panel shows {{< ui >}}Not Exposed to Attacks{{< /ui >}} and the Datadog Severity Score is decreased.
+
+To see how each indicator affected a specific finding, open the {{< ui >}}Datadog Severity Breakdown{{< /ui >}} tab in the side panel. For more information about how these risks are evaluated across Datadog Security, see [Security Inbox][19].
+
 ### Remediate a code vulnerability
 
 Click any finding in the [Vulnerabilities Explorer for IAST][1] to open the vulnerability side panel, which gives developers and security engineers the full context needed to fix the issue.
@@ -170,6 +179,7 @@ For information on disabling IAST, see [Disabling Code Security][12].
 [7]: /integrations/github/
 [8]: /integrations/gitlab/
 [18]: /integrations/azure_devops/
+[19]: /security/security_inbox/#what-appears-in-security-inbox
 [9]: /security/code_security/iast/setup/
 [10]: https://app.datadoghq.com/security/configuration/code-security/setup
 [11]: https://www.datadoghq.com/support/
