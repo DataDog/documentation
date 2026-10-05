@@ -76,7 +76,7 @@ Most often, one of:
 - **Forward-only**: the rule only acts on traces arriving after you saved it. Wait for new traces, or check that traffic actually matches the filter.
 - **Sampling**: a 1% sampling rate routes 1 in 100 matching traces. Confirm the rate is high enough for your match volume.
 - **Destination is full**: annotation queues cap at 1,000 records and pause; datasets cap at 20,000.
-- **Missing queue access**: a rule adds traces to an annotation queue with its author's access, so the author must have access to the queue and permission to add annotation tasks to it. If a rule stops populating a restricted queue, check the queue and project access settings, and confirm the author still has access and their account was not removed or deleted.
+- **Missing queue access**: a rule uses its author's permissions to add traces to an annotation queue. The author must have access to the queue and permission to add annotation tasks to it. If a rule stops populating a restricted queue, check the queue and project access settings, and confirm the author still has access and their account was not removed or deleted.
 
 **The Automate Query button is disabled despite a valid Trace Explorer filter.**
 
