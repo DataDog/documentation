@@ -1,6 +1,6 @@
 ---
 title: Provision Datadog Teams with ServiceNow
-description: Create, link, and keep Datadog Teams in sync with ServiceNow assignment groups.
+description: Create, link, and keep Datadog Teams in-sync with ServiceNow assignment groups.
 further_reading:
     - link: '/integrations/servicenow/'
       tag: 'Documentation'
@@ -19,7 +19,7 @@ If your organization already maintains assignment groups in ServiceNow, you can 
 
 - Creating Datadog Teams from your ServiceNow assignment groups.
 - Linking existing Datadog Teams to ServiceNow assignment groups, for example to route On-Call and Incidents by ServiceNow group.
-- Keeping team membership in sync with ServiceNow, on a one-time or recurring schedule.
+- Keeping team membership in-sync with ServiceNow, on a one-time or recurring schedule.
 
 Existing Datadog Teams are linked, not duplicated, when a Datadog team name matches a ServiceNow assignment group name exactly. All other existing Datadog Teams, and their permissions, are not affected.
 
@@ -84,7 +84,7 @@ If a user's email address changes, for example after a domain migration, update 
 
 ## Renaming assignment groups
 
-Datadog identifies each ServiceNow assignment group by its unique ID, so renaming a group in ServiceNow does not create a new Datadog team. The Datadog team handle never changes, which keeps telemetry and dashboards tagged with that handle linked to the team.
+Datadog identifies each ServiceNow assignment group by its unique ID, so renaming a group in ServiceNow does not create a Datadog team. The Datadog team handle never changes, which keeps telemetry and dashboards tagged with that handle linked to the team.
 
 The Datadog team name follows the ServiceNow rename only when all of the following are true:
 
@@ -101,7 +101,7 @@ When an assignment group falls out of the sync, for example because you narrowed
 To remove the empty teams:
 
 1. Go to [Teams][2].
-2. Filter the {{< ui >}}Created via{{< /ui >}} column on `ServiceNow`.
+2. Filter the {{< ui >}}Connection{{< /ui >}} facet to `ServiceNow`.
 3. Select the teams to remove and delete them.
 
 Changes made by the sync cannot be rolled back automatically. [Audit Trail][5] records each change, which you can use to restore a previous state manually.
