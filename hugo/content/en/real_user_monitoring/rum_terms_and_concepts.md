@@ -101,7 +101,7 @@ To learn more, see [Session Replay][10].
 
 RUM provides two complementary ways to control data volume:
 
-- **Head-based, client-side sample rates** are configured in the SDK and decide, when a session starts, how much data is sent to Datadog. Separate sample rates apply to different dimensions, such as sessions, Session Replay recordings, backend traces, and profiles. To learn more, see [Manage Sessions][15].
+- **Head-based, client-side sample rates** are configured in the SDK and decide, when a session starts, how much data is sent to Datadog. Separate sample rates apply to different dimensions, such as sessions, Session Replay recordings, backend traces, and profiles. To learn more, see [Manage Sessions][14].
 - **Tail-based, server-side controls** apply after Datadog ingests the data, and let you selectively retain the sessions that matter most. See [Retention filters and quotas](#retention-filters-and-quotas).
 
 Datadog recommends sending 100% of sessions and using retention filters to control which sessions are retained. Metrics computed from ingested sessions remain accurate regardless of how many sessions are retained.
@@ -110,13 +110,13 @@ Datadog recommends sending 100% of sessions and using retention filters to contr
 
 Retention filters and quotas are part of [RUM without Limits][11], and determine which sessions Datadog retains for further investigation. Retention filters use deterministic rules, based on event attributes and tags, to keep the sessions that matter most to your business, while retention quotas cap the number of sessions retained per application per day.
 
-To learn more, see [Retain and Recover Valuable Sessions][12].
+To learn more, see [Retain and Recover Valuable Sessions][11].
 
 ## Context
 
-Context is custom or global information attached to RUM events, such as a user's ID, subscription plan, or [feature flags][14]. Adding context lets you segment and filter your RUM data by business-relevant attributes.
+Context is custom or global information attached to RUM events, such as a user's ID, subscription plan, or [feature flags][13]. Adding context lets you segment and filter your RUM data by business-relevant attributes.
 
-To learn more, see [Enrich RUM Data][13].
+To learn more, see [Enrich RUM Data][12].
 
 ## Technical limitations
 
@@ -154,7 +154,6 @@ Continue to [Set Up RUM](/real_user_monitoring/setup/).
 [9]: /real_user_monitoring/setup/enable_rum/track_ui_latency/
 [10]: /session_replay/
 [11]: /real_user_monitoring/retain_and_recover_valuable_sessions/
-[12]: /real_user_monitoring/retain_and_recover_valuable_sessions/
-[13]: /real_user_monitoring/enrich_rum_data/
-[14]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
-[15]: /real_user_monitoring/setup/enable_rum/manage_sessions/
+[12]: /real_user_monitoring/enrich_rum_data/
+[13]: /real_user_monitoring/enrich_rum_data/track_feature_flags/
+[14]: /real_user_monitoring/setup/enable_rum/manage_sessions/
