@@ -46,8 +46,8 @@ You can configure up to nine options per route. Each option maps a key (1-9) to 
 
 ### Number type and regional availability
 
-- **Toll-free vs. local**: Most regions provision a local number. India and UAE are the exception, only toll-free numbers are available there.
-- **Area code or location**: For US numbers, you can request a specific area code or ZIP code.
+- **Toll-free vs. local**: Most regions provision a local number. India and UAE are the exception; only toll-free numbers are available there.
+- **Area code or location**: For US numbers, you can request a specific area code.
 - **Persistence**: After a number is provisioned, it is dedicated to that route and does not change or rotate.
 
 ## Routing types
