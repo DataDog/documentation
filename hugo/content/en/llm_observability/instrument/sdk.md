@@ -27,7 +27,7 @@ further_reading:
 
 Agent Observability SDKs provide automatic instrumentation as well as manual instrumentation APIs to provide observability and insights into your LLM applications.
 
-SDKs are available for Python, Node.js, and Java. Feature coverage varies by language: sections that do not show a tab for your language are not supported by that SDK.
+SDKs are available for Python, Node.js, Java, and Go (experimental). Feature coverage varies by language: sections that do not show a tab for your language are not supported by that SDK.
 
 The Go SDK is **experimental** and is not yet generally available. It provides manual instrumentation only, because `dd-trace-go` has no LLM provider integrations. Its API may change in a future release.
 
@@ -392,7 +392,7 @@ func main() {
 ##### Options
 
 `tracer.WithLLMObsEnabled`
-: required - _bool_
+: optional - _bool_
 <br />Toggle to enable submitting data to Agent Observability. If not provided, this defaults to the value of `DD_LLMOBS_ENABLED`.
 
 `tracer.WithLLMObsMLApp`
@@ -4159,7 +4159,7 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 	if sctx, err := tracer.Extract(tracer.HTTPHeadersCarrier(r.Header)); err == nil {
 		opts = append(opts, tracer.ChildOf(sctx))
 	}
-	// if extraction fails, the span simply starts a new trace
+	// if extraction fails, the span starts a new trace
 
 	apmSpan, ctx := tracer.StartSpanFromContext(r.Context(), "http.handler", opts...)
 	defer apmSpan.Finish()
@@ -4357,7 +4357,7 @@ defer span.Finish()
 
 ### Force flushing before exit
 
-The tracer flushes spans in the background. Call `tracer.Stop()` before your process exits so buffered LLMObs spans are submitted. In short-lived processes and serverless handlers, `defer tracer.Stop()` in `main` is the simplest way to guarantee this.
+The tracer flushes spans in the background. Call `tracer.Stop()` before your process exits so buffered LLMObs spans are submitted. In short-lived processes and serverless handlers, use `defer tracer.Stop()` in `main` to guarantee this.
 
 {{< code-block lang="go">}}
 func main() {
