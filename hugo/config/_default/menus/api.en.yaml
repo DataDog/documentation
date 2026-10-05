@@ -18598,7 +18598,7 @@ menu:
           - ListOrgGroupPolicySuggestions
         unstable:
           - v2
-        order: 21
+        order: 24
     - name: Update an org group policy override
       url: /api/latest/org-groups/update-an-org-group-policy-override/
       identifier: org-groups-update-an-org-group-policy-override
@@ -18611,7 +18611,7 @@ menu:
           - UpdateOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 18
+        order: 21
     - name: Get an org group policy override
       url: /api/latest/org-groups/get-an-org-group-policy-override/
       identifier: org-groups-get-an-org-group-policy-override
@@ -18624,7 +18624,7 @@ menu:
           - GetOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 16
+        order: 19
     - name: Delete an org group policy override
       url: /api/latest/org-groups/delete-an-org-group-policy-override/
       identifier: org-groups-delete-an-org-group-policy-override
@@ -18637,7 +18637,7 @@ menu:
           - DeleteOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 19
+        order: 22
     - name: Create an org group policy override
       url: /api/latest/org-groups/create-an-org-group-policy-override/
       identifier: org-groups-create-an-org-group-policy-override
@@ -18650,7 +18650,7 @@ menu:
           - CreateOrgGroupPolicyOverride
         unstable:
           - v2
-        order: 17
+        order: 20
     - name: List org group policy overrides
       url: /api/latest/org-groups/list-org-group-policy-overrides/
       identifier: org-groups-list-org-group-policy-overrides
@@ -18663,7 +18663,7 @@ menu:
           - ListOrgGroupPolicyOverrides
         unstable:
           - v2
-        order: 15
+        order: 18
     - name: List org group policy configs
       url: /api/latest/org-groups/list-org-group-policy-configs/
       identifier: org-groups-list-org-group-policy-configs
@@ -18676,7 +18676,7 @@ menu:
           - ListOrgGroupPolicyConfigs
         unstable:
           - v2
-        order: 20
+        order: 23
     - name: Update an org group policy
       url: /api/latest/org-groups/update-an-org-group-policy/
       identifier: org-groups-update-an-org-group-policy
@@ -18689,7 +18689,7 @@ menu:
           - UpdateOrgGroupPolicy
         unstable:
           - v2
-        order: 13
+        order: 16
     - name: Get an org group policy
       url: /api/latest/org-groups/get-an-org-group-policy/
       identifier: org-groups-get-an-org-group-policy
@@ -18702,7 +18702,7 @@ menu:
           - GetOrgGroupPolicy
         unstable:
           - v2
-        order: 11
+        order: 14
     - name: Delete an org group policy
       url: /api/latest/org-groups/delete-an-org-group-policy/
       identifier: org-groups-delete-an-org-group-policy
@@ -18715,7 +18715,7 @@ menu:
           - DeleteOrgGroupPolicy
         unstable:
           - v2
-        order: 14
+        order: 17
     - name: Create an org group policy
       url: /api/latest/org-groups/create-an-org-group-policy/
       identifier: org-groups-create-an-org-group-policy
@@ -18728,7 +18728,7 @@ menu:
           - CreateOrgGroupPolicy
         unstable:
           - v2
-        order: 12
+        order: 15
     - name: List org group policies
       url: /api/latest/org-groups/list-org-group-policies/
       identifier: org-groups-list-org-group-policies
@@ -18741,7 +18741,7 @@ menu:
           - ListOrgGroupPolicies
         unstable:
           - v2
-        order: 10
+        order: 13
     - name: Update an org group membership
       url: /api/latest/org-groups/update-an-org-group-membership/
       identifier: org-groups-update-an-org-group-membership
@@ -18754,7 +18754,7 @@ menu:
           - UpdateOrgGroupMembership
         unstable:
           - v2
-        order: 8
+        order: 9
     - name: Get an org group membership
       url: /api/latest/org-groups/get-an-org-group-membership/
       identifier: org-groups-get-an-org-group-membership
@@ -18767,7 +18767,33 @@ menu:
           - GetOrgGroupMembership
         unstable:
           - v2
-        order: 7
+        order: 8
+    - name: Delete an org group membership
+      url: /api/latest/org-groups/delete-an-org-group-membership/
+      identifier: org-groups-delete-an-org-group-membership
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgGroupMembership
+        unstable:
+          - v2
+        order: 10
+    - name: Bulk delete org group memberships
+      url: /api/latest/org-groups/bulk-delete-org-group-memberships/
+      identifier: org-groups-bulk-delete-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - BulkDeleteOrgGroupMemberships
+        unstable:
+          - v2
+        order: 12
     - name: Bulk update org group memberships
       url: /api/latest/org-groups/bulk-update-org-group-memberships/
       identifier: org-groups-bulk-update-org-group-memberships
@@ -18780,7 +18806,20 @@ menu:
           - BulkUpdateOrgGroupMemberships
         unstable:
           - v2
-        order: 9
+        order: 11
+    - name: Create org group memberships
+      url: /api/latest/org-groups/create-org-group-memberships/
+      identifier: org-groups-create-org-group-memberships
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOrgGroupMemberships
+        unstable:
+          - v2
+        order: 7
     - name: List org group memberships
       url: /api/latest/org-groups/list-org-group-memberships/
       identifier: org-groups-list-org-group-memberships

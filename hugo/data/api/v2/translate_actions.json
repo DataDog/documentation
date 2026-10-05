@@ -4863,11 +4863,27 @@
     "description": "List organization group memberships. Filter by org group ID or org UUID. At least one of `filter[org_group_id]` or `filter[org_uuid]` must be provided. When filtering by org UUID, returns a single-item list with the membership for that org.",
     "summary": "List org group memberships"
   },
+  "CreateOrgGroupMemberships": {
+    "description": "Add a batch of organizations to an existing org group. This is an atomic operation: either all organizations are added or none are. Between 1 and 100 organizations may be provided per request. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization. The requesting organization must own the org group.",
+    "summary": "Create org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to add organizations to an org group."
+  },
   "BulkUpdateOrgGroupMemberships": {
-    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Maximum 100 orgs per request.",
+    "description": "Move a batch of organizations from one org group to another. This is an atomic operation. Between 1 and 100 organizations may be provided per request. Each organization must be identified by a unique `org_uuid` and `org_site` pair, and must be in the same site as the requesting organization.",
     "summary": "Bulk update org group memberships",
     "request_description": "",
     "request_schema_description": "Request to bulk update org group memberships."
+  },
+  "BulkDeleteOrgGroupMemberships": {
+    "description": "Delete a batch of memberships from an org group. The memberships to delete are provided as membership resource identifiers, and the org group they belong to must be provided with `filter[org_group_id]`. Between 1 and 100 unique membership IDs may be provided per request, and the requesting organization must own the org group. Membership IDs that were already deleted, do not exist, or do not belong to the org group do not cause the request to fail.",
+    "summary": "Bulk delete org group memberships",
+    "request_description": "",
+    "request_schema_description": "Request to delete a batch of org group memberships."
+  },
+  "DeleteOrgGroupMembership": {
+    "description": "Remove an organization from an org group by deleting its membership. The org group the membership belongs to must be provided with `filter[org_group_id]`, and the requesting organization must own that org group. Returns `404` if the membership does not exist, was already removed, or does not belong to the org group.",
+    "summary": "Delete an org group membership"
   },
   "GetOrgGroupMembership": {
     "description": "Get a specific organization group membership by its ID.",
