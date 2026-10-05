@@ -355,7 +355,7 @@ If your committer count looks higher than expected for GitHub repositories, chec
 
 ### Estimating committers before enabling Code Security
 
-To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command reads your local clones, so it works for repositories hosted on any Git provider, including GitHub, GitLab, Azure DevOps, and Bitbucket. It counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
+To estimate your committer count before you enable Code Security, run the following command from a directory that contains clones of the repositories you plan to scan. The command reads your local clones, so it works for repositories hosted on any Git provider, including GitHub, GitLab, Azure DevOps, and Bitbucket. Some of the email exclusions it applies are specific to GitHub, as noted in the comments in the command. It counts Git author emails with at least three commits in the last 30 days, across all branches and all repositories, and applies the same email exclusions described above.
 
 Run this command in a Bash-compatible shell, such as Terminal on macOS or a Linux shell. On Windows, use Git Bash (included with Git for Windows) or Windows Subsystem for Linux (WSL). The command does not run in PowerShell or Command Prompt.
 
@@ -366,7 +366,9 @@ for repo in */; do
 done | awk -F'\t' -v since="$SINCE" '
   $1 < since { next }
   { a = tolower($2); c = tolower($3) }
+  # GitHub only: skip web UI commits by developers who hide their email
   a ~ /@users\.noreply\.github\.com$/ && (c == "noreply@github.com" || c == "actions@github.com") { next }
+  # Other Git providers: skip noreply addresses, such as @users.noreply.gitlab.com
   a ~ /@users\.noreply\./ && a !~ /@users\.noreply\.github\.com$/ { next }
   { print a }' | sort | uniq -c | awk '$1 >= 3' | wc -l
 ```
@@ -376,7 +378,7 @@ To reduce clone time and disk usage, use `git clone --bare --filter=tree:0 <REPO
 This is an estimate. Your billed committer count can differ because:
 
 - Billing uses calendar months, not a rolling 30-day window.
-- For GitHub repositories with the Datadog GitHub App installed, multiple emails that belong to the same developer are counted once.
+- **GitHub only**: if the Datadog GitHub App is installed on your repositories, multiple emails that belong to the same developer are counted once. The command cannot detect this, so your billed count can be lower than the estimate.
 - Each Code Security product counts committers separately, for the repositories where it is enabled.
 
 After you enable Code Security, you can track your actual committer count with the [estimated usage metrics][33].
