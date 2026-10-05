@@ -1,6 +1,8 @@
 ---
 title: Setting Up Database Monitoring for Amazon RDS managed Postgres
 description: Install and configure Database Monitoring for Postgres on Amazon RDS.
+aliases:
+- /database_monitoring/setup_postgres/rds/quick_install
 further_reading:
 - link: "/integrations/postgres/"
   tag: "Documentation"
@@ -18,17 +20,37 @@ further_reading:
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-The Agent collects telemetry directly from the database by logging in as a read-only user. Do the following setup to enable Database Monitoring with your Postgres database:
+## Quick Install
+
+<div class="alert alert-info">RDS Quick Install is recommended for smaller environments (for example, up to 20 database hosts) or if you are new to Database Monitoring. For large fleets, or to manage the Agent with your own automation, use the <a href="#standard-installation">standard installation</a>.</div>
+
+With Quick Install, you specify a few options and Datadog generates a CloudFormation template. The template configures your instance for monitoring and uses Amazon ECS to deploy the Agent with the recommended Database Monitoring configuration.
+
+### Prerequisites
+
+- A security group must be configured on the instance to allow incoming connections from the instance's VPC and outgoing connections to the internet.
+- The RDS instance's admin access username and password must be stored in an AWS Secret within AWS Secrets Manager. Note the Amazon Resource Name (ARN) of this secret. Datadog uses it to access the credentials during setup and operation.
+
+<div class="alert alert-info">Datadog does not store the admin credentials. They are only used temporarily to connect the Agent, and no data is retained after the process is completed.</div>
+
+### Install with Quick Install
+
+1. Navigate to the [Database Monitoring Setup][19] page.
+1. On the {{< ui >}}Unmonitored Hosts{{< /ui >}} tab, click {{< ui >}}Add Agent{{< /ui >}} for the RDS instance where you want to install the Agent.
+1. If you don't have an ECS cluster installed for your account and region, click {{< ui >}}Create Cluster{{< /ui >}}.
+1. Select a security group from the {{< ui >}}Security Group{{< /ui >}} dropdown list.
+1. Click {{< ui >}}Select API Key{{< /ui >}}, select an API key from the list, and then click {{< ui >}}Use API Key{{< /ui >}}.
+1. Click {{< ui >}}Launch CloudFormation Stack in AWS Console{{< /ui >}}. A new page opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the configuration required to deploy the Agent to monitor your RDS instance.
+
+## Standard installation
+
+To install and manage the Agent yourself, complete the following steps. The Agent collects telemetry directly from the database by logging in as a read-only user.
 
 1. [Configure the AWS integration](#configure-the-aws-integration)
 1. [Configure database parameters](#configure-postgres-settings)
 1. [Grant the Agent access to the database](#grant-the-agent-access)
 1. [Install and configure the Agent](#install-and-configure-the-agent)
 1. [Install the RDS integration](#install-the-rds-integration)
-
-<div class="alert alert-info">
-<a href="/database_monitoring/setup_postgres/rds/quick_install">RDS Quick Install</a> is our recommended installation method for smaller environments (for example 20 database hosts) or those new to DBM and want to try it out quickly. For those managing large fleets of databases where deploying the agent via UI doesn't scale as well we recommend the standard installation, to manually manage the agent yourself or integrate with your automation practices.
-</div>
 
 ## Before you begin
 
@@ -688,3 +710,4 @@ If you have installed and configured the integrations and Agent as described and
 [16]: https://www.postgresql.org/docs/current/auto-explain.html
 [17]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.overview.parameter-groups.html
 [18]: /integrations/amazon-rds/?tab=standard#log-collection
+[19]: https://app.datadoghq.com/databases/setup
