@@ -1,6 +1,6 @@
 ---
 title: Run an Online Experiment on an LLM Application
-description: Compare variants of an LLM application and measure their effect with Agent Observability evaluation scores.
+description: Compare variants of an LLM application and measure their effect with Agent Observability evaluations.
 further_reading:
 - link: "/getting_started/feature_flags/"
   tag: "Documentation"
@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each experiment subject to a variant, and an Agent Observability evaluation score measures the outcome.
+Use a Datadog online experiment to compare two versions of an LLM application on live traffic. Datadog Feature Flags assigns each experiment subject to a variant, and an Agent Observability evaluation pass rate measures the outcome.
 
 <div class="alert alert-info"><strong>Alpha</strong>: Online experiments for Agent Observability are available only to Alpha participants. Contact your Datadog representative to request access. Datadog must enable the feature for your organization before you can follow this guide.</div>
 
@@ -23,8 +23,8 @@ This guide covers the LLM-specific configuration for the following workflow:
 
 1. Create a Datadog feature flag.
 1. Evaluate the flag in your application and run the assigned variant.
-1. Report a numeric Agent Observability evaluation score.
-1. Link the feature flag and evaluation score to a Datadog experiment.
+1. Report an Agent Observability evaluation with a pass or fail assessment.
+1. Link the feature flag and evaluation to a Datadog experiment.
 1. Run the experiment and review the results.
 
 ## Prerequisites
@@ -33,7 +33,7 @@ Before you begin:
 
 - [Instrument your LLM application with Agent Observability][1].
 - Install and initialize a [Datadog Feature Flags SDK][2] in the application.
-- Choose the application behavior you want to compare and a numeric evaluation score that measures the outcome.
+- Choose the application behavior you want to compare and an evaluation whose pass or fail assessment measures the outcome.
 - Confirm that you have the permissions listed in [Plan and Launch Experiments][3].
 
 <div class="alert alert-info"><strong>Using an AI coding agent?</strong> Datadog organizations allow read-only MCP tools by default. To let an agent create feature flags and experiments, an organization administrator must enable MCP write access, and your role must have the <code>mcp_write</code> permission. See <a href="/mcp_server/setup/#required-permissions">Required permissions</a> for the Datadog MCP Server.</div>
@@ -64,18 +64,18 @@ Set the Feature Flags evaluation context `targetingKey` to a stable identifier f
 - For an application with a human user, use a stable user identifier.
 - For an autonomous workflow without a human user, generate a UUID at the start of the run and retain it for the entire run.
 
-You use this same value as the `subject_identifier` when you report the evaluation score in [Step 3](#step-3-report-an-evaluation-score). If the values do not match, Datadog cannot associate the score with the subject's experiment exposure. For more information, see [The targeting key][6].
+You use this same value as the `subject_identifier` when you report the evaluation in [Step 3](#step-3-report-an-evaluation). If the values do not match, Datadog cannot associate the score with the subject's experiment exposure. For more information, see [The targeting key][6].
 
 <div class="alert alert-info">
-  <strong>Use an AI coding agent</strong>: Ask the agent to implement the feature flag in your application and preserve one stable subject identifier across the flag evaluation and evaluation score. For React applications, the agent can also use <code>check_datadog_flag_implementation</code> to review the implementation.<br><br>
+  <strong>Use an AI coding agent</strong>: Ask the agent to implement the feature flag in your application and preserve one stable subject identifier across the flag evaluation and evaluation. For React applications, the agent can also use <code>check_datadog_flag_implementation</code> to review the implementation.<br><br>
   <strong>Example prompt</strong>: <code>Implement the Datadog feature flag &lt;FLAG_NAME&gt; in this application. Run the control behavior when the flag is false and the treatment behavior when it is true. Use the user ID as the targetingKey. If there is no user, generate one UUID at the start of the workflow and reuse it for the entire run.</code>
 </div>
 
 <!-- TODO: Add a screenshot of the feature flag implementation instructions. -->
 
-## Step 3: Report an evaluation score
+## Step 3: Report an evaluation
 
-<div class="alert alert-warning"><strong>Supported evaluation type</strong>: Online experiments for Agent Observability support only evaluations with a <code>score</code> metric type. Boolean, categorical, and other evaluation types cannot be used as experiment metrics.</div>
+Online experiments support the pass rate of evaluations of any type. Datadog derives `assessment_score` from the assessment (`pass` = `1`, `fail` = `0`); the experiment metric defaults to the average of this field. Evaluations without an assessment are excluded. You can still select the raw **Score value** for score evaluations.
 
 Choose one of the following methods.
 
@@ -125,13 +125,13 @@ with LLMObs.workflow(name="my_workflow") as span:
   <strong>Example prompt</strong>: <code>Add an Agent Observability score evaluation named &lt;EVALUATION_NAME&gt; to this workflow. Use the same subject identifier that the feature flag passes as targetingKey, and include it as the subject_identifier tag on the evaluation or evaluated span. Do not use a Boolean, categorical, or JSON evaluation.</code>
 </div>
 
-<!-- TODO: Add a screenshot of an evaluation score with its subject_identifier tag. -->
+<!-- TODO: Add a screenshot of an evaluation with its subject_identifier tag. -->
 
 ## Step 4: Create and launch the experiment
 
 Follow [Plan and Launch Experiments][3] to create an experiment and configure it with the following values:
 
-- Select the Agent Observability evaluation score from Step 3 as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
+- Select the Agent Observability evaluation from Step 3 and use its pass rate as the primary metric. If you have not created the experiment metric, follow [Create a metric from Agent Observability data][11].
 - Add the feature flag from Step 1.
 - Configure how traffic is split between the control and treatment variants.
 - Start the experiment.
@@ -147,21 +147,21 @@ Follow [Plan and Launch Experiments][3] to create an experiment and configure it
 
 Starting the experiment adds the experiment targeting rule to the selected flag and begins recording exposures. For details about how feature flag assignments become experiment exposures, see [Feature Flags and Experiments][9].
 
-<!-- TODO: Add a screenshot of the experiment configured with an Agent Observability evaluation score and feature flag. -->
+<!-- TODO: Add a screenshot of the experiment configured with an Agent Observability evaluation and feature flag. -->
 
 ## Step 5: Run the experiment and review results
 
-Send traffic through the application. For each subject, the application must evaluate the feature flag and report an evaluation score with the same subject identifier.
+Send traffic through the application. For each subject, the application must evaluate the feature flag and report an evaluation with the same subject identifier.
 
-As exposures and evaluation scores arrive, Datadog populates the experiment results. Follow [Reading Experiment Results][10] to interpret the metric scorecard and compare the variants.
+As exposures and evaluations arrive, Datadog populates the experiment results. Follow [Reading Experiment Results][10] to interpret the metric scorecard and compare the variants.
 
 If the experiment reports missing metric data, confirm that:
 
 - The application evaluated the experiment's feature flag for the subject.
-- The evaluation has a numeric `score` value.
+- The evaluation has a `pass` or `fail` assessment and was ingested after pass-rate support became available. Historical evaluations are not backfilled. If you selected **Score value** instead, verify that the evaluation has a numeric score.
 - The evaluation's `subject_identifier` exactly matches the feature flag evaluation's `targetingKey`.
 
-<!-- TODO: Add a screenshot of the experiment results populated with the evaluation score. -->
+<!-- TODO: Add a screenshot of the experiment results populated with the evaluation. -->
 
 ## Further reading
 
