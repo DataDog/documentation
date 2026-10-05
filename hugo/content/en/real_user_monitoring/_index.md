@@ -66,7 +66,7 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), follow individual users across sessions, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-For definitions of sessions, views, actions, and other RUM concepts, and for the technical limits that apply to RUM data, see [RUM Terms and Concepts][22].
+For definitions of sessions, views, actions, and other RUM concepts, and for the technical limits that apply to RUM data, see [RUM Terms and Concepts][17].
 
 ## What is Session Replay?
 
@@ -82,10 +82,10 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 RUM without Limits gives you flexibility over your RUM session volumes by decoupling session data ingestion from retention. This enables you to:
 
-- Dynamically set [retention filters][23] from the Datadog UI without up-front sampling decisions or code changes
+- Dynamically set [retention filters][18] from the Datadog UI without up-front sampling decisions or code changes
 - Retain sessions with errors or performance issues and discard less significant ones, such as ones with few user interactions
 
-Even if you retain only a fraction of your sessions, Datadog provides [performance metrics][24] for all ingested sessions. This gives you an accurate, long-term overview of application health and performance.
+Even if you retain only a fraction of your sessions, Datadog provides [performance metrics][19] for all ingested sessions. This gives you an accurate, long-term overview of application health and performance.
 
 **Note**: In RUM without Limits mode, you can only use default filters on the [Performance Monitoring Summary page][1]. This lets you see the entire dataset and prevents skewed performance metrics, because the data is sampled and there are fewer tags available than event attributes.
 
@@ -93,7 +93,7 @@ To start collecting RUM data, follow the [setup instructions][15].
 
 ### Set up RUM without Limits for new applications
 
-When you [install the SDK][25]:
+When you [install the SDK][20]:
 
 1. Set `sessionSampleRate` to 100%. Datadog recommends this rate for optimal visibility and metrics accuracy.
 2. Choose a `sessionReplaySampleRate` that meets your observability needs.
@@ -126,7 +126,7 @@ After:
    sessionReplaySampleRate: 2,
 ```
 
-1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][26].
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][21].
 1. Click the application you want to migrate.
 1. Click the {{< ui >}}SDK Configuration{{< /ui >}} tab.
 1. Set `sessionSampleRate` to 100%.
@@ -145,7 +145,7 @@ On mobile applications, many versions can be in use at the same time. Older vers
 
 Datadog recommends creating the same retention filters for all application versions, whether or not their SDK sample rate is set to 100%. All valuable sessions are still retained, even if some sessions from older versions aren't ingested.
 
-For suggested retention filters and use cases, see [Retention Filter Best Practices][27].
+For suggested retention filters and use cases, see [Retention Filter Best Practices][22].
 
 ## Explore Datadog RUM
 
@@ -169,7 +169,7 @@ The [RUM Performance Monitoring summary][1] page provides relevant and actionabl
 - **Monitor application health** through familiar KPIs, such as Core Web Vitals for web apps or hang rate for iOS, to assess app reliability
 - **Dive into investigations directly** from interactive widgets without leaving the page
 
-For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][17] page.
+For **web apps**, use the search bar to filter data, identify slow pages, and follow the UI to the [RUM Optimization Inspect][16] page.
 
 For **mobile apps**, review recent crashes at the bottom of the page and use the [Error Tracking][6] side panel for troubleshooting.
 
@@ -241,10 +241,10 @@ Continue to [RUM Terms and Concepts](/real_user_monitoring/rum_terms_and_concept
 [13]: /session_replay/privacy_options?platform=browser
 [14]: /session_replay/dev_tools
 [15]: /real_user_monitoring/setup/
-[17]: https://app.datadoghq.com/rum/optimization/inspect
-[22]: /real_user_monitoring/rum_terms_and_concepts/
-[23]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
-[24]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
-[25]: /real_user_monitoring/setup/install/?platform=browser
-[26]: https://app.datadoghq.com/rum/list
-[27]: /real_user_monitoring/guide/retention_filter_best_practices/
+[16]: https://app.datadoghq.com/rum/optimization/inspect
+[17]: /real_user_monitoring/rum_terms_and_concepts/
+[18]: /real_user_monitoring/retain_and_recover_valuable_sessions/configure_retention_filters/
+[19]: /real_user_monitoring/measure_health_with_metrics/out_of_the_box_metrics/
+[20]: /real_user_monitoring/setup/install/?platform=browser
+[21]: https://app.datadoghq.com/rum/list
+[22]: /real_user_monitoring/guide/retention_filter_best_practices/
