@@ -22,7 +22,7 @@ All findings share a common schema that enables unified querying and analysis ac
 
 ## Examples
 
-There are eleven different categories for security findings. Click on a category to view a sample security finding belonging to that category.
+There are thirteen different categories for security findings. Click on a category to view a sample security finding belonging to that category.
 
 {{< include-markdown "security/guide/findings-schema/generated/examples" >}}
 

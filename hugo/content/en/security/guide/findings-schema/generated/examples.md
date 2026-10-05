@@ -1574,6 +1574,133 @@ build:
 ```
 
 {{% /tab %}}
+{{% tab "Sensitive Data" %}}
+
+```json
+{
+  "base_severity": "critical",
+  "cloud_resource": {
+    "account": {
+      "account": "Main production account",
+      "account_id": "123456789012"
+    },
+    "cloud_provider": "AWS",
+    "cloud_provider_url": "https://s3.console.aws.amazon.com/s3/buckets/my-app-customer-exports",
+    "display_name": "my-app-customer-exports",
+    "key": "arn:aws:s3:::my-app-customer-exports"
+  },
+  "description": "An Amazon S3 bucket contains objects with unredacted credit card numbers detected by Sensitive Data Scanner.",
+  "detection_changed_at": 1738575599859,
+  "exposure_time_seconds": 300,
+  "finding_id": "AbCdEfGhIjKlMnOpQrStUvWx",
+  "finding_type": "sensitive_data",
+  "first_seen_at": 1738575592659,
+  "is_in_security_inbox": false,
+  "last_seen_at": 1738624280889,
+  "metadata": {
+    "schema_version": "2"
+  },
+  "origin": [
+    "agentless-scanner"
+  ],
+  "resource_id": "arn:aws:s3:::my-app-customer-exports",
+  "resource_name": "my-app-customer-exports",
+  "resource_type": "aws_s3_bucket",
+  "rule": {
+    "default_rule_id": "def-000-abc",
+    "id": "def-000-sds",
+    "name": "S3 bucket contains unredacted credit card numbers",
+    "type": "sensitive_data_exposure",
+    "version": 3
+  },
+  "sensitive_data": {
+    "match_action_type": "redact"
+  },
+  "severity": "critical",
+  "severity_details": {
+    "adjusted": {
+      "score": 9.8,
+      "value": "Critical",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    },
+    "base": {
+      "score": 9.8,
+      "value": "Critical",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H/RC:C"
+    }
+  },
+  "status": "open",
+  "title": "S3 bucket contains unredacted credit card numbers",
+  "workflow": {
+    "auto_closed_at": 1738575600859,
+    "automations": {
+      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "rule_name": "mute misconfigs with free text query",
+      "rule_type": "mute"
+    },
+    "due_date": {
+      "due_at": 1738575599859,
+      "is_overdue": false,
+      "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+    },
+    "integrations": {
+      "cases": {
+        "assignee": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        },
+        "created_at": 1738575599859,
+        "created_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        },
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "jira_issue": {
+          "key": "PROJ-12345",
+          "status": "To Do",
+          "url": "https://your-org.atlassian.net/browse/PROJ-12345"
+        },
+        "key": "CASE-42",
+        "status": "open",
+        "updated_at": 1738575599859,
+        "updated_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        }
+      }
+    },
+    "mute": {
+      "description": "Free text",
+      "expire_at": 1738575599859,
+      "is_muted": false,
+      "is_muted_by_rule": false,
+      "muted_at": 1738575599859,
+      "muted_by": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice"
+      },
+      "reason": "Resource deleted"
+    },
+    "triage": {
+      "assignee": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Alice",
+        "updated_at": 1738575600859,
+        "updated_by": {
+          "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "name": "Alice"
+        }
+      }
+    }
+  },
+  "tags": [
+    "origin:agentless-scanner",
+    "source:vulnerability_management"
+  ]
+}
+```
+
+{{% /tab %}}
 {{% tab "Static Code Vulnerability" %}}
 
 ```json
