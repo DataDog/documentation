@@ -59,19 +59,19 @@ You can configure PR Gates rules for the following categories. Please note that 
 | --- | ----------- |
 | [**Static Code Analysis (SAST)**][1] | - Code vulnerabilities<br/> - Code quality violations |
 | [**Software Composition Analysis**][2] | - Library vulnerabilities<br/> - Library license violations |
-| [**Code Coverage**][3] | - Total code coverage<br/> - Patch code coverage |
+| [**Code Coverage**][3] | - Overall code coverage<br/> - Patch code coverage |
 | [**Infrastructure as Code Scanning**][4] | - IaC vulnerabilities |
 | [**Secret Scanning**][10] | - Leaked secrets |
 | [**New Flaky Tests**][11] | - New flaky tests |
 
-After creating PR Gates rules, Datadog automatically creates checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
+After creating PR Gates rules, Datadog automatically creates checks on your pull requests using the [GitHub][5], [GitLab Source Code][13], [Azure DevOps Source Code][6], or [Bitbucket Cloud Source Code][14] integrations. Set those checks as required in GitHub, GitLab, Azure DevOps, or Bitbucket Cloud when you are ready to enforce them.
 
 PR Gates also enable emoji reactions (similar to [PR Comments][12]). Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Gates is still waiting for results to arrive. After all results have arrived:
   * If all results are positive, the reaction is changed to 👍.
   * If there is at least one finding, the 👀 reaction is removed because the Summary Comment includes details on the findings instead.
 
 <div class="alert alert-warning">
-  PR Gates are not supported in pull requests in public repositories, or on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository). PR Gates can not be set as required on GitHub repositories using a merge queue.
+  PR Gates are not supported on pull requests targeting a destination branch in a different repository from the source branch (that is, forked repositories trying to merge into the main repository). PR Gates can not be set as required on GitHub repositories using a merge queue.
 </div>
 
 ## Rule types
@@ -154,3 +154,5 @@ You can see all of the rules defined by the organization.
 [10]: /security/code_security/secret_scanning/
 [11]: /tests/flaky_tests/
 [12]: /source_code/features/#pr-comments
+[13]: /integrations/gitlab-source-code/
+[14]: /integrations/bitbucket-source-code/
