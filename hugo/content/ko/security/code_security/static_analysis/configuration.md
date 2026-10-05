@@ -26,6 +26,7 @@ AI 네이티브 SAST가 활성화되면 리포지토리에서 감지된 지원 �
 | 언어 | 규칙 세트 |
 | --- | --- |
 | C# | `csharp-ai_sast` |
+| C++ | `cpp-ai_sast` |
 | Dart | `dart-ai_sast` |
 | Elixir | `elixir-ai_sast` |
 | Go | `go-ai_sast` |
@@ -38,6 +39,8 @@ AI 네이티브 SAST가 활성화되면 리포지토리에서 감지된 지원 �
 | Rust | `rust-ai_sast` |
 | Swift | `swift-ai_sast` |
 | TypeScript | `typescript-ai_sast` |
+
+AI 네이티브 SAST 규칙 ID는 `datadog/<rule-name>` 형식을 사용합니다(예: `datadog/typescript-promptinjection`). `rule-configs` 또는 `no-dd-sa` 주석에서 특정 AI 네이티브 SAST 규칙을 지정하려면, `datadog/` 접두사가 포함된 전체 규칙 ID를 사용하십시오.
 
 `use-default-rulesets` 설정은 기존 SAST 및 AI 네이티브 SAST 규칙 세트 모두에 적용됩니다. `use-default-rulesets: false`를 설정하는 경우, 실행하려는 모든 기존 및 AI 네이티브 SAST 규칙 세트를 포함하세요. 예를 들어, 다음 구성은 Ruby Security 및 AI 네이티브 SAST 규칙 세트를 실행합니다.
 

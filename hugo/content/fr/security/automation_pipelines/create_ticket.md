@@ -8,7 +8,7 @@ further_reading:
   text: Intégrations de tickets
 - link: /incident_response/work_management
   tag: Documentation
-  text: Case Management
+  text: Work Management
 products:
 - icon: cloud-security-management
   name: Cloud Security
@@ -27,7 +27,13 @@ title: Règles de création de tickets
 ---
 {{< product-availability >}}
 
-Configurez les règles de création de tickets pour créer automatiquement des tickets dans Jira ou Case Management lorsque de nouveaux résultats sont découverts. Cette approche permet de suivre les problèmes de sécurité dans vos workflows d'ingénierie existants sans triage manuel, aidant ainsi les équipes à réagir rapidement aux nouvelles menaces à grande échelle. Pour plus d'informations sur les intégrations de tickets avec les résultats de sécurité, consultez [Ticketing Integrations][3].
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+Configurez des règles de création de tickets pour créer automatiquement des tickets dans Jira, Linear ou Work Management lorsque de nouvelles découvertes sont détectées. Cette approche permet de suivre les problèmes de sécurité dans vos workflows d'ingénierie existants sans triage manuel, aidant ainsi les équipes à réagir rapidement aux nouvelles menaces à grande échelle. Pour plus d'informations sur les intégrations de tickets avec les résultats de sécurité, consultez [Ticketing Integrations][3].
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+Configurez des règles de création de tickets pour créer automatiquement des tickets dans Jira ou Work Management lorsque de nouvelles découvertes sont détectées. Cette approche permet de suivre les problèmes de sécurité dans vos workflows d'ingénierie existants sans triage manuel, aidant ainsi les équipes à réagir rapidement aux nouvelles menaces à grande échelle. Pour plus d'informations sur les intégrations de tickets avec les résultats de sécurité, consultez [Ticketing Integrations][3].
+{{< /site-region >}}
 
 ## Créer une règle de création de ticket {#create-a-ticket-creation-rule}
 
@@ -50,16 +56,52 @@ Configurez les règles de création de tickets pour créer automatiquement des t
     - **L'un de ces tags ou attributs** : Les tags ou attributs de ressource qui doivent correspondre pour que la règle s'applique.
 1. Pour ajouter des critères de gravité à la règle, cliquez sur **Add Severity**.
 1. Sélectionnez le système de tickets et configurez la destination du ticket :
-   - **Jira**
-     - **Jira Account** : Sélectionnez l'instance Atlassian à utiliser.
-     - **Space** : Sélectionnez le projet Jira. Vérifiez que ce Space est ajouté au [Jira Webhook][5].
-     - **Ticket Type** : Sélectionnez le type de Jira issue à créer, par exemple, **Task**.
-     - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les tickets créés automatiquement.
-     - Pour ajouter d'autres champs au ticket Jira créé par Datadog, utilisez **Add Optional Field**.
-     - Développez **Data Sync Settings** pour examiner ou mettre à jour le projet Case Management lié et la configuration de la synchronisation bidirectionnelle.
-   - **Case Management**
-     - **Case Management Project** : Sélectionnez un projet Case Management existant ou créez-en un.
-     - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cases créés automatiquement.
+  {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+  {{< tabs >}}
+  {{% tab "Jira" %}}
+  - **Jira Account** : Sélectionnez l'instance Atlassian à utiliser. Vérifiez que ce compte dispose du [Jira Webhook][5] configuré.
+  - **Space** : Sélectionnez le projet Jira.
+  - **Ticket Type** : Sélectionnez le type de Jira issue à créer, par exemple, **Task**.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les tickets créés automatiquement.
+  - Pour ajouter d'autres champs au ticket Jira créé par Datadog, utilisez **Add Optional Field**.
+  - Développez **Paramètres de synchronisation des données** pour examiner ou mettre à jour le projet Work Management lié et la configuration de la synchronisation bidirectionnelle.
+
+  [5]: /integrations/jira/#configure-a-jira-webhook
+  {{% /tab %}}
+  {{% tab "Linear" %}}
+  - **Compte Linear** : Sélectionnez le compte Linear à utiliser. Vérifiez que ce compte dispose du [Linear Webhook][6] configuré.
+  - **Équipe** : Sélectionnez l'équipe Linear dans laquelle vous souhaitez créer des issues.
+  - **Projet** (facultatif) : Sélectionnez le projet Linear à associer aux issues créées automatiquement.
+  - **Labels** (facultatif) : Sélectionnez les étiquettes à appliquer aux issues créées automatiquement.
+  - **Assignee** (facultatif) : Indiquez un utilisateur auquel attribuer les issues créées automatiquement.
+  - Développez **Paramètres de synchronisation des données** pour examiner ou mettre à jour le projet Work Management lié et la configuration de la synchronisation bidirectionnelle.
+
+  [6]: /integrations/linear/#configure-a-linear-webhook
+  {{% /tab %}}
+  {{% tab "Work Management" %}}
+  - **Projet Work Management** : Sélectionnez un projet Work Management existant ou créez-en un.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cases créés automatiquement.
+  {{% /tab %}}
+  {{< /tabs >}}
+  {{< /site-region >}}
+  {{< site-region region="gov,gov2" >}}
+  {{< tabs >}}
+  {{% tab "Jira" %}}
+  - **Jira Account** : Sélectionnez l'instance Atlassian à utiliser. Vérifiez que ce compte dispose du [Jira Webhook][5] configuré.
+  - **Space** : Sélectionnez le projet Jira.
+  - **Ticket Type** : Sélectionnez le type de Jira issue à créer, par exemple, **Task**.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les tickets créés automatiquement.
+  - Pour ajouter d'autres champs au ticket Jira créé par Datadog, utilisez **Add Optional Field**.
+  - Développez **Paramètres de synchronisation des données** pour examiner ou mettre à jour le projet Work Management lié et la configuration de la synchronisation bidirectionnelle.
+
+  [5]: /integrations/jira/#configure-a-jira-webhook
+  {{% /tab %}}
+  {{% tab "Work Management" %}}
+  - **Projet Work Management** : Sélectionnez un projet Work Management existant ou créez-en un.
+  - **Assignee** (facultatif) : Spécifiez un utilisateur auquel attribuer les cases créés automatiquement.
+  {{% /tab %}}
+  {{< /tabs >}}
+  {{< /site-region >}}
 1. Sous **Rate limit**, saisissez le [nombre maximal de tickets](#daily-ticket-limit) que cette règle peut créer par jour UTC.
 1. Pour tester la règle avant de l'enregistrer, cliquez sur **Test Rule**, sélectionnez un résultat correspondant, puis cliquez sur **Run Test**. Une fois le test terminé, vous pouvez afficher le ticket créé ou détacher le ticket de test du résultat.
 1. Cliquez sur **Enregistrer**. La règle s'applique uniquement aux nouveaux résultats. Il peut s'écouler jusqu'à quelques minutes après la détection d'un résultat pour créer le ticket correspondant.
@@ -68,7 +110,7 @@ Configurez les règles de création de tickets pour créer automatiquement des t
 
 ## Identifier les tickets créés automatiquement {#identify-automatically-created-tickets}
 
-{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Fenêtre contextuelle de ticket Case Management montrant un cas créé par une règle d'automatisation, indiqué par une icône en forme d'éclair, et un lien pour afficher tous les résultats avec des tickets créés à partir de la même règle" style="width:60%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_lightning_indicator.png" alt="Fenêtre contextuelle de ticket Work Management affichant un cas créé par une règle d'automatisation, indiqué par une icône d'éclair, et un lien pour afficher toutes les découvertes avec des tickets créés à partir de la même règle" style="width:60%;" >}}
 
 Les tickets créés par une règle sont marqués d'un indicateur en forme d'éclair dans le panneau latéral des résultats et dans les vues de l'Explorer. Le survol de l'indicateur affiche l'Automation Rule responsable du ticket et fournit un lien vers celle-ci.
 
@@ -84,7 +126,7 @@ Chaque règle dispose d'une limite quotidienne de tickets configurable qui est r
 
 Si une erreur de configuration de projet empêche la création de ticket (par exemple, si le projet Jira connecté n'est plus valide), Datadog désactive automatiquement la règle et la marque comme rompue.
 
-{{< img src="security/automation_pipelines/ticket_creation_broken_rule.png" alt="Liste des Automation Pipelines affichant une ticket creation rule avec une info-bulle d'avertissement indiquant « Rule auto-disabled due to a ticketing integration error »" style="width:100%;" >}}
+{{< img src="security/automation_pipelines/ticket_creation_broken_rule.png" alt="Liste des Automation Pipelines affichant une règle de création de ticket avec une info-bulle d'avertissement indiquant « Rule auto-disabled due to a ticketing integration error »" style="width:100%;" >}}
 
 Pour reprendre la création automatique de tickets, corrigez la configuration du projet et réactivez la règle.
 
@@ -98,4 +140,3 @@ Lorsque vous désactivez ou supprimez une règle de création de ticket, les tic
 
 [2]: https://app.datadoghq.com/security/configuration/findings-automation?opened-sections=create_ticket
 [3]: /fr/security/ticketing_integrations/
-[5]: /fr/integrations/jira/#configure-a-jira-webhook

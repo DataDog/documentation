@@ -54,7 +54,7 @@ Exception Replay는 Python, Java, .NET, PHP를 지원하며 APM 기반 예외만
 |---|---|---|---|
 | **활성화 방법** | 기본적으로 활성화됨| 설정 페이지| 환경 변수|
 | **Agent 버전** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **트레이서 최소 버전** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
+| **최소 트레이서 버전** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration 필요 여부** | 예 | 예 | 아니요 |
 
 인앱에서 Exception Replay를 활성화하려면 Error Tracking의 Exception Replay {{< ui >}}Settings{{< /ui >}} 페이지로 이동하여,

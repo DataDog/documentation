@@ -1,148 +1,154 @@
 ---
 aliases:
 - /es/getting_started/application/monitors
-description: Crea monitores de métricas con alertas de umbral y notificaciones personalizadas
-  para realizar un rastreo proactivo del estado del sistema y los problemas de rendimiento.
+description: Cree monitores de métricas con alertas de umbral y notificaciones personalizadas
+  para hacer un seguimiento proactivo del estado del sistema y de los problemas de
+  rendimiento.
 further_reading:
-- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
-  tag: Blog
-  text: 'Inicio a la monitorización: alertar sobre lo importante'
-- link: https://learn.datadoghq.com/courses/introduction-to-observability
-  tag: Centro de aprendizaje
-  text: Introducción a la observabilidad
 - link: /monitors/types/metric/
   tag: Documentación
   text: Monitores de métricas
 - link: /monitors/notify/
   tag: Documentación
-  text: Notificaciones de monitor
+  text: Notifications de monitores
+- link: https://learn.datadoghq.com/courses/introduction-to-observability
+  tag: Centro de aprendizaje
+  text: Introducción a la observabilidad
 - link: https://dtdg.co/fe
-  tag: Habilitación de los fundamentos
-  text: Participa en una sesión interactiva sobre la creación de monitores eficaces
-title: Empezando con los monitores
+  tag: Foundation Enablement
+  text: Únase a una sesión interactiva sobre la creación de monitores eficaces
+- link: https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/
+  tag: blog
+  text: Cómo auditar y limpiar monitores de manera eficaz
+- link: https://www.datadoghq.com/blog/monitoring-101-alerting/
+  tag: blog
+  text: 'Monitoreo 101: Alerting sobre lo que importa'
+title: Primeros pasos con monitores
 ---
+## Descripción general {#overview}
 
-## Información general
+Con las alertas de Datadog, tiene la capacidad de crear monitores que verifican activamente métricas, disponibilidad de integraciones, puntos finales de red y más. Utilice los monitores para llamar la atención sobre los sistemas que requieren observación, inspección e intervención.
 
-Con la función de alertas de Datadog, tienes la capacidad de crear monitores que comprueben forma activa las métricas, la disponibilidad de la integración y los endpoints de red, entre otros. Utiliza monitores para alertar sobre los sistemas que requieren observación, inspección e intervención.
+Esta página es una introducción a los monitores y describe las instrucciones para configurar un monitor de métricas. Un [monitor de métricas][1] proporciona alertas y notificaciones si una métrica específica está por encima o por debajo de un cierto umbral. Por ejemplo, un monitor de métricas puede alertarle cuando el espacio en disco sea bajo.
 
-Esta page (página) es una introducción a los monitores y describe las instrucciones para configurar un monitor (noun) de métrica. Un [monitor (noun) de métrica][1] proporciona alertas y notificaciones si una métrica específica está por encima o por debajo de un determinado umbral. Por ejemplo, un monitor (noun) de métrica puede alertarte cuando el espacio en disco es bajo.
-
-Esta guía aborda lo siguiente:
+Esta guía cubre:
 - Creación y configuración de monitores
-- Configuración de alertas de monitores
-- Personalización de los mensajes de notificación 
-- Permisos de monitores
+- Configuración de alertas de monitor
+- Personalización de mensajes de notificación
+- Permisos de monitor
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-Antes de comenzar, necesitas una cuenta de Datadog vinculada a un host con el Datadog Agent instalado. Para obtener más información sobre el Agent, consulta la [guía Empezando con el Agent][2], o accede a **[Integration > Agent][3]**  (Integraciones > Agent) para ver las instrucciones de instalación.
+Antes de comenzar, necesita una cuenta de Datadog vinculada a un servidor con el Datadog Agent instalado. Para obtener más información sobre el Agent, consulte la [guía de primeros pasos con el Agent][2], o navegue a [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][3] para visualizar las instrucciones de instalación.
 
-Para verificar que el Datadog Agent se está ejecutando, comprueba que la [lista de infraestructuras][4] en Datadog contiene información.
+Para verificar que el Datadog Agent se esté ejecutando, compruebe que su [Lista de infraestructura][4] en Datadog esté poblada.
 
-## Monitorización instantánea para nuevas organizaciones
+## Monitoreo instantáneo para nuevas organizaciones {#instant-monitoring-for-new-organizations}
 
-<div class="alert alert-info">Los monitores automáticos están disponibles para las <strong>nuevas</strong> organizaciones y se activan después de que se instala el Datadog Agent.</div>
+<div class="alert alert-info">Los monitores automáticos están disponibles para <strong>nuevas</strong> organizaciones y se activan después de instalar el Datadog Agent.</div>
 
-Cuando instalas el Datadog Agent, Datadog detecta automáticamente tu stack tecnológico y crea un conjunto personalizado de **monitores de línea de base**. Esto te proporciona una cobertura instantánea sin necesidad de instalación.
+Cuando instala el Datadog Agent, Datadog detecta automáticamente su pila y crea un conjunto personalizado de **monitores de referencia**. Esto le brinda cobertura instantánea sin necesidad de configuración.
 
 Los monitores automáticos pueden incluir:
 - Monitores a nivel de host (utilización de CPU y memoria)
-- Monitores de Kubernetes (reinicios de pods, estado de los nodos)
+- Monitores de Kubernetes (reinicio de pods, estado del nodo)
 - Monitores de APM (tasas de error o latencia por servicio)
 
-Puedes ver estos monitores inmediatamente en la page (página) [**Monitors**][17] de Datadog.
-Desde allí, puedes editarlos, clonarlos o desactivarlos como cualquier otro monitor (noun).
+Puede visualizar estos monitores inmediatamente en la página [{{< ui >}}Monitors{{< /ui >}}][17] de Datadog.
+Desde allí, puede editarlos, clonarlos o deshabilitarlos como cualquier otro monitor.
 
-## Crear un monitor
+## Crear un monitor {#create-a-monitor}
 
-Para crear un monitor, ve a **[Monitors > New Monitor][5]** (Monitores > Nuevo monitor) y selecciona **Metric** (Métrica).
+Para crear un monitor, navegue a [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][5] y seleccione {{< ui >}}Metric{{< /ui >}}.
 
-## Configurar
+## Configure {#configure}
 
-Los principales ajustes de la configuración de un monitor son:
+Los componentes principales de la configuración de un monitor son:
 
-- **Choose the detection method** (Elegir el método de detección): ¿Cómo vas a medir lo que se va a alertar? ¿Te preocupa que un valor de métrica supere un umbral, que un cambio en un valor supere un umbral, un valor anómalo u otra cosa?
-- **Definir la métrica**: ¿Qué valor vas a monitorizar para enviar alertas? ¿El espacio en disco de tu sistema? ¿El número de errores en los inicios de sesión?
-- **Configurar las condiciones de alerta**: ¿Cuándo hay que despertar a un ingeniero?
-- **Configure notifications and automations** (Configurar notificaciones y automatizaciones): ¿Qué información debe figurar en la alerta?
-- **Define permissions and audit notifications** (Definir los permisos y notificaciones de auditoría): ¿Quién tiene acceso a estas alertas y quién debe ser notificado si se modifica la alerta?
+- **Elija el método de detección**: ¿Cómo mide aquello sobre lo que se generará una alerta? ¿Le preocupa que el valor de una métrica supere un umbral, que un cambio en un valor supere un umbral, un valor anómalo o alguna otra cosa?
+- **Defina la métrica**: ¿Qué valor está monitoreando para enviar una alerta? ¿El espacio en disco de su sistema? ¿La cantidad de errores encontrados en los inicios de sesión?
+- **Establezca las condiciones de alerta**: ¿Cuándo es necesario despertar a un ingeniero?
+- **Configure notificaciones y automatizaciones**: ¿Qué información debe incluir la alerta?
+- **Defina permisos y notificaciones de auditoría**: ¿Quién tiene acceso a estas alertas y a quién se debe notificar si se modifica la alerta?
 
-### Elegir el método de detección
+### Elija el método de detección {#choose-the-detection-method}
 
-Al crear un monitor de métricas, se selecciona automáticamente **Threshold Alert** (Alerta de umbral) como método de detección. Una alerta de umbral compara los valores de la métrica con los umbrales definidos por el usuario. El objetivo de este monitor es alertar sobre un umbral estático, por lo que no es necesario realizar ningún cambio.
+Cuando crea un monitor de métricas, {{< ui >}}Threshold Alert{{< /ui >}} se selecciona automáticamente como el método de detección. Una alerta de umbral compara los valores de las métricas con los umbrales definidos por el usuario. El objetivo de este monitor es alertar sobre un umbral estático, por lo que no es necesario realizar cambios.
 
-### Definir la métrica
+### Defina la métrica {#define-the-metric}
 
-Para obtener una alerta de poco espacio en disco, utiliza la métrica `system.disk.in_use` de la [integración del disco][6] y promedia la métrica sobre el `host` y `device`:
+Para recibir una alerta sobre poco espacio en disco, utilice la métrica `system.disk.in_use` de la [integración de disco][6] y calcule el promedio de la métrica durante `host` y `device`:
 
-{{< img src="getting_started/monitors/monitor_query.png" alt="Definir la métrica para system.disk.in_use avg por host y dispositivo" style="width:100%" >}}
+{{< img src="getting_started/monitors/monitor_query.png" alt="Defina la métrica para system.disk.in_use avg por servidor y dispositivo" style="width:100%" >}}
 
-### Definir condiciones de alerta
+### Establecer condiciones de alerta {#set-alert-conditions}
 
-Según la [documentación de integración del disco][6], `system.disk.in_use` es *la cantidad de espacio de disco en uso respecto al total*. Así, cuando esta métrica tiene un valor de `0.7`, significa que un 70 % del espacio del disco está lleno.
+De acuerdo con la [documentación de integración de disco][6], `system.disk.in_use` es *la cantidad de espacio en disco en uso como una fracción del total*. Por lo tanto, cuando esta métrica informa un valor de `0.7`, el dispositivo está lleno al 70%.
 
-Para alertar sobre poco espacio en disco, el monitor debe activarse cuando la métrica esté por encima (`above`) el umbral. Los valores del umbral se basan en tus preferencias. Para esta métrica, los valores entre `0` y `1` son apropiados:
+Para recibir una alerta sobre poco espacio en disco, el monitor debe activarse cuando la métrica esté `above` del umbral. Los valores de umbral se basan en su preferencia. Para esta métrica, los valores entre `0` y `1` son adecuados:
 
-Establece los siguientes umbrales:
+Establezca los siguientes umbrales:
+
 ```
-Umbral de alerta: > 0.9
-Umbral de alerta: > 0.8
+Alert threshold: > 0.9
+Warning threshold: > 0.8
 ```
 
-En este ejemplo, deja los demás ajustes de esta sección en los valores predeterminados. Consulta más detalles en la documentación [Monitores de métricas][7].
+Para este ejemplo, deje las otras configuraciones en esta sección con los valores predeterminados. Para obtener más detalles, consulte la documentación de [Metric Monitors][7].
 
-{{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Establecer los umbrales de alerta y advertencia para que el monitor active alertas" style="width:80%" >}}
+{{< img src="getting_started/monitors/monitor_alerting_conditions.png" alt="Establezca los umbrales de alerta y advertencia para que el monitor active alertas" style="width:80%" >}}
 
-### Notificaciones y automatizaciones
+### Notifications y automatizaciones {#notifications-and-automations}
 
-Cuando se activa este monitor para alertar, se envía un mensaje de notificación. En este mensaje se pueden incluir valores condicionales, instrucciones para la resolución o un resumen de lo que es la alerta. Como mínimo, una notificación debe tener un título y un mensaje.
+Cuando este monitor se activa para alertar, se envía una notificación. En esta notificación, puede incluir valores condicionales, instrucciones para la resolución o un resumen de lo que es la alerta. Como mínimo, una notificación debe tener un título y un mensaje.
 
-#### Título
+#### Título de la notificación {#notification-title}
 
-El título debe ser único para cada monitor. Dado que se trata de un monitor con varias alertas, los nombres están disponibles para cada elemento del grupo (`host` y `device`) con las variables de plantilla de mensaje:
+El título debe ser único para cada monitor. Dado que este es un monitor de alertas múltiples, los nombres están disponibles para cada elemento del grupo (`host` y `device`) con variables de plantilla de mensaje:
+
 ```text
-Hay poco espacio en disco en {{device.name}} / {{host.name}}
+Disk space is low on {{device.name}} / {{host.name}}
 ```
 
-#### Mensaje
+#### Mensaje de notificación {#notification-message}
 
-Utiliza el mensaje para indicar a tu equipo cómo resolver el problema, por ejemplo:
+Use el mensaje para decirle a su equipo cómo resolver el problema, por ejemplo:
+
 ```text
-Pasos para liberar espacio en disco:
-1. Eliminar los paquetes que no utilices
-2. Borrar la caché de APT
-3. Desinstalar aplicaciones innecesarias
-4. Eliminar archivos duplicados
+Steps to free up disk space:
+1. Remove unused packages
+2. Clear APT cache
+3. Uninstall unnecessary applications
+4. Remove duplicate files
 ```
 
-Para añadir mensajes condicionales basados en umbrales de alerta o advertencia, consulta las [variables de notificación][8] disponibles que puedes incluir en tu mensaje.
+Para agregar mensajes condicionales basados en umbrales de alerta frente a advertencia, consulte las [variables de notificaciones][8] disponibles que puede incluir en su mensaje.
 
-#### Notificar a servicios y a personas de tu equipo
+#### Notifique a sus servicios y a los miembros de su equipo {#notify-your-services-and-your-team-members}
 
-Envía notificaciones a tu equipo a través de correo electrónico, Slack, PagerDuty, etc. Puedes buscar los miembros del equipo y las cuentas conectadas con el cuadro desplegable.
+Envíe notificaciones a su equipo a través de correo electrónico, Slack, PagerDuty y más. Puede buscar miembros del equipo y cuentas conectadas con el cuadro desplegable.
 
-{{< img src="getting_started/monitors/monitor_notification.png" alt="Añadir un mensaje de monitor y automatizaciones a tu notificación de alerta" style="width:100%;" >}}
+{{< img src="getting_started/monitors/monitor_notification.png" alt="Agregue un mensaje de monitor y automatizaciones a su notificación de alerta" style="width:100%;" >}}
 
-Para añadir un flujo de trabajo de [automatización de flujos de trabajo][14] o un caso de [gestión de casos][15] a la notificación de alerta, haz clic en **Add Workflow** (Añadir flujo de trabajo) o **Add Case** (Añadir caso). También puedes etiquetar a miembros del [equipo de Datadog][16] utilizando el identificador `@team`.
+Para agregar un flujo de trabajo de [Workflow Automation][14] o un elemento de trabajo de [Work Management][15] a la notificación de alerta, haga clic en {{< ui >}}Add Workflow{{< /ui >}} o {{< ui >}}Add Work Item{{< /ui >}}. También puede etiquetar a los miembros del [Datadog Team][16] usando el identificador `@team`.
 
-Deja las demás secciones como están. Para obtener más información sobre lo que hace cada ajuste, consulta la documentación de  [Configuración de monitores][9].
+Deje las otras secciones tal como están. Para obtener más información sobre lo que hace cada opción de configuración, consulte la documentación de [Configuración del monitor][9].
 
-### Permisos
+### Permisos{#permissions}
 
-Haz clic en **Edit Access** (Editar acceso de edición) para restringir la edición de tu monitor a su creador, equipos, usuarios, grupos o a funciones específicas de tu organización. Si lo deseas, selecciona `Notify` para recibir una alerta cuando se modifique el monitor.
+Haga clic en {{< ui >}}Edit Access{{< /ui >}} para restringir la edición de su monitor a su creador, equipos, usuarios, grupos o a roles específicos en su organización. Opcionalmente, seleccione {{< ui >}}Notify{{< /ui >}} para recibir una alerta cuando se modifique el monitor.
 
-{{< img src="getting_started/monitors/monitor_permissions.png" alt="Establecer permisos de acceso para un monitor y opciones para notificaciones de auditoría" style="width:80%;" >}}
+{{< img src="getting_started/monitors/monitor_permissions.png" alt="Establezca permisos de acceso para un monitor y opciones para notificaciones de auditoría" style="width:80%;" >}}
 
-Para más información, consulta [Control de acceso detallado][10].
+Para obtener más información, consulte [Granular Access Control][10].
 
-## Ver monitores y alertas de triaje en el móvil
+## Visualice monitores y clasifique alertas en dispositivos móviles {#view-monitors-and-triage-alerts-on-mobile}
 
-Puedes consultar las vistas guardadas de monitores desde la pantalla de inicio de tu móvil o ver y silenciar monitores al descargar la [aplicación móvil de Datadog][11], disponible en el [App Store de Apple][12] y [Google Play Store][13]. Esto te ayudará a clasificar los mensajes cuando no tengas a mano tu ordenador portátil o sobremesa.
+Puede ver las Saved Views de monitores desde la pantalla de inicio de su dispositivo móvil o visualizar y silenciar monitores descargando la [aplicación móvil de Datadog][11], disponible en [Apple App Store][12] y [Google Play Store][13]. Esto ayuda con la clasificación cuando no se encuentra frente a su laptop o computadora de escritorio.
 
-{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidencias en la aplicación móvil">}}
+{{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidentes en la aplicación móvil">}}
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -159,7 +165,7 @@ Puedes consultar las vistas guardadas de monitores desde la pantalla de inicio d
 [11]: /es/mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
-[14]: /es/service_management/workflows/
-[15]: /es/service_management/case_management/
+[14]: /es/actions/workflows/
+[15]: /es/incident_response/work_management/
 [16]: /es/account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

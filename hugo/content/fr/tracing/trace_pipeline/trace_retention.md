@@ -5,9 +5,6 @@ aliases:
 description: Découvrez comment contrôler la rétention des traces grâce aux filtres
   de rétention.
 further_reading:
-- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
-  tag: Blog
-  text: Unifiez et corrélez les données frontend et backend avec des filtres de rétention
 - link: /tracing/trace_pipeline/ingestion_mechanisms
   tag: Documentation
   text: Mécanismes d'ingestion
@@ -20,6 +17,12 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/apm-rate-limit-retention
   tag: Centre d'apprentissage
   text: 'Limitation du débit et rétention APM :'
+- link: https://www.datadoghq.com/blog/rum-apm-retention-filters
+  tag: Blog
+  text: Unifiez et corrélez les données frontend et backend avec des filtres de rétention
+- link: https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/
+  tag: Blog
+  text: Tracez les fonctions Lambda AWS durables avec Datadog
 - link: https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/
   tag: Architecture Center
   text: 'Maîtriser le traçage distribué : défis liés au volume de données et approche
@@ -135,7 +138,7 @@ Par exemple, vous pouvez créer des filtres pour conserver toutes les traces cor
 
 Lorsque vous indexez un span à l'aide d'un filtre de rétention :
 
-- **Recherchabilité** : Le span indexé peut être trouvé dans Trace Explorer, dashboards et surveillé pendant 15 jours.
+- **Facilité de recherche** : Le span indexé peut être trouvé dans Trace Explorer, dashboards et surveillé pendant 15 jours.
 
 - **Contexte de visualisation** : Lorsque vous cliquez sur un span indexé dans Trace Explorer, vous voyez toujours son contexte de trace complet (tous les spans parents et enfants) dans une vue flamegraph ou waterfall, que ces autres spans aient été indexés ou non.
 

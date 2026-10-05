@@ -1,22 +1,32 @@
 ---
 aliases:
 - /es/code_analysis/ide_plugins/
-description: Aprende a configurar los complementos del entorno de desarrollo integrado
-  (IDE) de Datadog para mejorar la seguridad del código y la garantía de calidad en
-  tu entorno de desarrollo.
+description: Aprenda a configurar Datadog IDE Plugins para mejorar Code Security y
+  la garantía de calidad en su entorno de desarrollo.
 disable_toc: false
-title: Complementos del IDE de Datadog para la seguridad del código
+title: Datadog IDE Plugins para Code Security
 ---
+## Descripción general {#overview}
 
-## Información general
+[Code Security][1] se integra con VS Code, Cursor e IDEs de JetBrains para proporcionar retroalimentación en tiempo real sobre Code Security y calidad. La compatibilidad varía según el IDE:
 
-[Code Security][1] se integra directamente con las herramientas del entorno de desarrollo integrado (IDE) para proporcionar información en tiempo real sobre la calidad y la seguridad del código de origen a medida que se escribe.
+| Capacidad | Visual Studio Code y Cursor | IDEs de JetBrains |
+|---|---|---|
+| [Static Code Analysis (SAST)][2] | Compatible | Compatible |
+| [Software Composition Analysis (SCA)][3] | Compatible | Compatible |
+| [Runtime Code Analysis (IAST)][4] | Compatible | Compatible |
+| [Secret Scanning][5] | Compatible | Compatible |
+| [Infrastructure as Code (IaC) Scanning][6] | Compatible | No compatible |
 
-{{< whatsnext desc="Consulta la documentación para ver información sobre las siguientes integraciones:">}}
-    {{< nextlink href="developers/ide_plugins/idea/#static-analysis" >}}<u>IDE de JetBrains</u>: IntelliJ IDEA, GoLand, PyCharm, WebStorm, and PhpStorm{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}<u>Visual Studio</u>{{< /nextlink >}}
+{{< whatsnext desc="Consulte la documentación para obtener información sobre las siguientes integraciones:">}}
+    {{< nextlink href="ide_plugins/idea/" >}}<u>IDEs de JetBrains</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm y PhpStorm{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/" >}}<u>Visual Studio Code y Cursor</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
 [1]: /es/security/code_security/
+[2]: /es/security/code_security/static_analysis/
+[3]: /es/security/code_security/software_composition_analysis/
+[4]: /es/security/code_security/iast/
+[5]: /es/security/code_security/secret_scanning/
+[6]: /es/security/code_security/iac_security/

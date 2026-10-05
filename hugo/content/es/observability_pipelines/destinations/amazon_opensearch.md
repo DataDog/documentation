@@ -12,50 +12,50 @@ title: Destino de Amazon OpenSearch
 
 ## Descripción general {#overview}
 
-Utilice el destino de Amazon OpenSearch de Observability Pipelines para enviar registros a Amazon OpenSearch.
+Utilice el destino Amazon OpenSearch de Observability Pipelines para enviar registros a Amazon OpenSearch.
 
 ## Configuración {#setup}
 
-<div class="alert alert-danger">Para la gestión de secretos: Solo ingrese los identificadores para la URL del punto de conexión de Amazon OpenSearch y, si corresponde, el nombre de usuario y la contraseña. <b>No</b> ingrese los valores reales.</div>
+<div class="alert alert-danger">Para la gestión de secretos: Solo introduzca los identificadores para la URL del punto de conexión de Amazon OpenSearch y, si corresponde, el nombre de usuario y la contraseña. <b>No</b> ingrese los valores reales.</div>
 
-Configure el destino de Amazon OpenSearch cuando [configure una canalización][6]. Puede configurar una canalización en la [interfaz de usuario][1], utilizando la [API][7] o con [Terraform][8]. Los pasos en esta sección se configuran en la interfaz de usuario.
+Configure el destino de Amazon OpenSearch cuando [configure un pipeline][6]. Puede configurar un pipeline en la [UI][1], utilizando la [API][7] o con [Terraform][8]. Los pasos de esta sección se configuran en la interfaz de usuario.
 
-Después de seleccionar el destino de Amazon OpenSearch en la interfaz de usuario de la canalización:
+Después de seleccionar el destino de Amazon OpenSearch en la UI del pipeline:
 
-1. Ingrese el identificador para su URL de punto de conexión de Amazon OpenSearch. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+1. Introduzca el identificador para la URL de su punto de conexión de Amazon OpenSearch. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
 1. En el menú desplegable {{< ui >}}Mode{{< /ui >}}, seleccione {{< ui >}}Bulk{{< /ui >}} o {{< ui >}}Data streams{{< /ui >}}.
 	- {{< ui >}}Bulk{{< /ui >}} modo
 		- Utiliza la [Bulk API][4] de Amazon OpenSearch para enviar eventos por lotes directamente a un índice estándar.
-		- Elija este modo cuando desee un control directo sobre la nomenclatura de índices y la gestión del ciclo de vida. Los datos se añaden al índice que especifique, y usted es responsable de manejar los rollovers, eliminaciones y mapeos.
+		- Elija este modo cuando desee un control directo sobre la nomenclatura de índices y la gestión del ciclo de vida. Los datos se añaden al índice que especifique, y usted es responsable de manejar rollovers, eliminaciones y mapeos.
 		- Para configurar el modo {{< ui >}}Bulk{{< /ui >}}:
-			- En el campo {{< ui >}}Index{{< /ui >}}, ingrese opcionalmente el nombre del índice de Amazon OpenSearch. Puede usar [template syntax][3] para enrutar dinámicamente los registros a diferentes índices según campos específicos en sus registros, por ejemplo `logs-{{service}}`.
-	- {{< ui >}}Data streams{{< /ui >}} modo
+			- En el campo {{< ui >}}Index{{< /ui >}}, introduzca opcionalmente el nombre del índice de Amazon OpenSearch. Puede utilizar [sintaxis de plantilla][3] para enrutar dinámicamente los registros a diferentes índices según campos específicos en sus registros, por ejemplo `logs-{{service}}`.
+	- {{< ui >}}Data streams{{< /ui >}}modo
 		- Uses [Amazon OpenSearch Data Streams][5] for log storage. Data streams automatically manage backing indexes and rollovers, making them ideal for timeseries log data.
 		- Choose this mode when you want Amazon OpenSearch to manage the index lifecycle for you. Data streams ensures smooth rollovers, Index Lifecycle Management (ILM) compatibility, and optimized handling of time-based data.
-		- To configure {{< ui >}}Data streams{{< /ui >}} modo, opcionalmente defina el nombre del flujo de datos (el predeterminado es `logs-generic-default`) by entering the following information:
-			- In the {{< ui >}}Type{{< /ui >}} campo, ingrese la categoría de los datos que se están ingiriendo, por ejemplo `logs`.
-			- In the {{< ui >}}Dataset{{< /ui >}} campo, especifique el formato o la fuente de datos que describe la estructura, por ejemplo `apache`.
-			- In the {{< ui >}}Namespace{{< /ui >}} campo, ingrese la agrupación para organizar sus flujos de datos, por ejemplo `production`.
+		- To configure {{< ui >}}Data streams{{< /ui >}}modo, defina opcionalmente el nombre del flujo de datos (el predeterminado es `logs-generic-default`) by entering the following information:
+			- In the {{< ui >}}Type{{< /ui >}}campo, ingrese la categoría de los datos que se están ingiriendo, por ejemplo `logs`.
+			- In the {{< ui >}}Dataset{{< /ui >}}campo, especifique el formato o la fuente de datos que describe la estructura, por ejemplo `apache`.
+			- In the {{< ui >}}Namespace{{< /ui >}}campo, ingrese la agrupación para organizar sus flujos de datos, por ejemplo `production`.
 			- You can use [template syntax][3] for the {{< ui >}}Type{{< /ui >}}, {{< ui >}}Dataset{{< /ui >}} y {{< ui >}}Namespace{{< /ui >}} campos para construir dinámicamente el nombre del flujo de datos según campos específicos en sus registros.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
-1. Opcionalmente, ingrese el nombre del índice de Amazon OpenSearch. Consulte [template syntax][3] si desea enrutar registros a diferentes índices según campos específicos en sus registros.
+1. Opcionalmente, ingrese el nombre del índice de Amazon OpenSearch. Consulte la [sintaxis de plantilla][3] si desea enrutar registros a diferentes índices según campos específicos en sus registros.
 1. Seleccione una estrategia de autenticación, {{< ui >}}Basic{{< /ui >}} o {{< ui >}}AWS{{< /ui >}}. Si seleccionó:
 	- {{< ui >}}Basic{{< /ui >}}:
-		- Ingrese el identificador de su nombre de usuario de Amazon OpenSearch. Si lo deja en blanco, se usa el [predeterminado](#secret-defaults).
-		- Ingrese el identificador de su contraseña de Amazon OpenSearch. Si lo deja en blanco, se usa el [predeterminado](#secret-defaults).
+		- Ingrese el identificador para su nombre de usuario de Amazon OpenSearch. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+		- Ingrese el identificador para su contraseña de Amazon OpenSearch. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
 	- {{< ui >}}AWS{{< /ui >}}:
 		1. Ingrese la región de AWS.
 		1. (Opcional) Seleccione una opción de autenticación de AWS. La opción {{< ui >}}Assume role{{< /ui >}} solo debe usarse si el usuario o rol que creó anteriormente necesita asumir un rol diferente para acceder al recurso de AWS específico y ese permiso debe definirse explícitamente.<br>Si selecciona {{< ui >}}Assume role{{< /ui >}}:
 			1. Ingrese el ARN del rol de IAM que desea asumir.
-			1. Opcionalmente, ingrese el nombre de sesión del rol asumido y el ID externo.
+			1. Opcionalmente, ingrese el nombre de la sesión del rol asumido y el ID externo.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
-#### Búfer opcional {#optional-buffering}
+#### Almacenamiento en búfer opcional {#optional-buffering}
 
 {{% observability_pipelines/destination_buffer %}}
 
-## Valores predeterminados de secretos {#secret-defaults}
+## Valores predeterminados de Secret {#secret-defaults}
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -78,15 +78,15 @@ Después de seleccionar el destino de Amazon OpenSearch en la interfaz de usuari
 {{% /tab %}}
 {{< /tabs >}}
 
-## Métricas de estado {#health-metrics}
+## Métricas de salud {#health-metrics}
 
-Para [métricas de componente][9] y [métricas de búfer de destino][10] emitidas por todos los destinos, consulte la documentación de [Pipelines Usage Metrics][11]. Para filtrar o agrupar por métricas de destino de Elasticsearch, use la etiqueta `component_type:elasticsearch`.
+Para [métricas de componentes][9] y [métricas de búfer de destino][10] emitidas por todos los destinos, consulte la documentación de [Métricas de uso de Pipelines][11]. Para filtrar o agrupar por métricas de destino de Elasticsearch, utilice la etiqueta `component_type:elasticsearch`.
 
 ## Cómo funciona el destino {#how-the-destination-works}
 
 ### Procesamiento por lotes de eventos {#event-batching}
 
-Un lote de eventos se envía cuando se cumple uno de estos parámetros. Consulte [Procesamiento por lotes de eventos de destinos][2] para obtener más información.
+Un lote de eventos se vacía cuando se cumple uno de estos parámetros. Consulte [Agrupamiento de eventos de destino][2] para obtener más información.
 
 | Máximo de eventos | Tamaño máximo (MB) | Tiempo de espera (segundos)   |
 |----------------|-------------------|---------------------|

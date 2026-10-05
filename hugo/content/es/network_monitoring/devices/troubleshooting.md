@@ -4,22 +4,24 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-snmp-with-datadog/
   tag: Blog
-  text: Monitorización de SNMP con Datadog
-title: Solucionar problemas de NDM
+  text: Hacer un seguimiento de SNMP con Datadog
+- link: /network_monitoring/devices/glossary
+  tag: Doc
+  text: Términos y conceptos de NDM
+title: Solución de problemas de NDM
 ---
+## Descripción general {#overview}
 
-## Información general
+Utilice la información a continuación para solucionar problemas de Datadog Network Device Monitoring. Si necesita ayuda adicional, comuníquese con el [soporte de Datadog][1].
 
-Utiliza la siguiente información para solucionar problemas de Network Device Monitoring de Datadog. Si necesitas más ayuda, ponte en contacto con el [servicio de asistencia de Datadog][1].
+## Dispositivo no visible en Datadog {#device-not-visible-in-datadog}
 
-## Dispositivo no visible en Datadog
+Lo siguiente asume que está ejecutando Datadog Agent v7.61.0+.
 
-La siguiente explicación supone que estás ejecutando el Datadog Agent v7.61.0 o posterior.
+Si su dispositivo no es visible en la página [Devices][2]:
 
-Si tu dispositivo no está visible en la página [Dispositivos][2]:
-
-1. Ejecuta el comando [datadog-agent status][3] y busca la sección snmp, que contiene la IP de monitorización de tu dispositivo. Después de iniciar el Agent, NDM puede tardar hasta un minuto en detectar los dispositivos configurados individualmente. Si tu Agent está configurado para analizar un gran número de dispositivos, puede tardar más tiempo.
-El resultado debería ser similar al siguiente:
+1. Ejecute el comando [datadog-agent status][3] y busque la sección snmp, que contiene la IP de monitoreo de su dispositivo. Después de iniciar el Agent, puede tomar hasta un minuto para que NDM descubra los dispositivos configurados individualmente. Si su Agent está configurado para escanear una gran cantidad de dispositivos, puede tomar más tiempo.
+El resultado debería verse similar a lo siguiente:
 
    ```
    snmp
@@ -38,9 +40,9 @@ El resultado debería ser similar al siguiente:
      No traceback
    ```
 
-2. Si tu dispositivo no aparece en la lista y estás utilizando Autodiscovery, probablemente significa que el Agent no pudo conectarse a tu dispositivo.
+2. Si su dispositivo no aparece en la lista y está utilizando Autodiscovery, es probable que el Agent no haya podido conectarse a su dispositivo.
 
-   - Ejecuta el comando `datadog-agent status` y espera a que la sección `autodiscovery` informe de que se analizaron todas las IP de dispositivos posibles. En redes grandes, esto puede tardar varios minutos. El resultado debe ser similar al siguiente:
+   - Ejecute el comando `datadog-agent status` y espere a que la sección `autodiscovery` informe que se han escaneado todas las IP de dispositivo posibles. En redes grandes, esto puede tomar varios minutos. El resultado debería verse similar a lo siguiente:
 
     ```
     Autodiscovery
@@ -55,40 +57,68 @@ El resultado debería ser similar al siguiente:
     No IPs found in the subnet.
     ```
 
-    Si Autodiscovery finalizó y tu dispositivo sigue sin aparecer en la página [Dispositivos][2], significa que el Agent no pudo conectarse a tu dispositivo.
+    If Autodiscovery completed and your device is still not appearing on the [Devices][2] page, it means the Agent could not connect to your device.
 
-   - Ejecuta un `snmp walk` en la IP de administrador del dispositivo para determinar por qué el Agent no puede conectarse a tu dispositivo.
+   - Ejecute un `snmp walk` en la IP de administración del dispositivo para determinar por qué el Agent no puede conectarse a su dispositivo.
 
-   **Nota**: Proporciona tus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intentará localizarlas en los archivos de configuración del Agent que se estén ejecutando.
+      **Nota**: Proporcione sus credenciales directamente en la CLI. Si no se proporcionan las credenciales, el Agent intenta localizarlas en los archivos de configuración del Agent en ejecución. 
+      
+      Consulte la documentación específica de su proveedor para obtener información adicional sobre la ejecución de estos comandos.
 
-   **Linux**: <br />
-     SNMP v2:
-     ```
-     sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
-     ```
-     SNMP v3:
-      ```
-      sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
-      ```
-      **Windows**:
-      ```
-      agent snmp walk <IP Address>[:Port]
+      {{< tabs >}}
+      {{% tab "Linux" %}}
 
-      Example:
-      agent.exe snmp walk  10.143.50.30 1.3.6
-      ```
+   SNMP v2:
 
-    Consulta la documentación específica de tu proveedor para obtener información adicional sobre la ejecución de estos comandos.
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -C <COMMUNITY_STRING>
+   ```
 
-## Solucionar errores SNMP
+   SNMP v3:
 
-Si el estado de SNMP o el recorrido del Agent muestran un error, podría indicar uno de los siguientes problemas:
+   ```shell
+   sudo -u dd-agent datadog-agent snmp walk <IP Address> -A <AUTH_KEY> -a <AUTH_PROTOCOL> -X <PRIV_KEY> -x <PRIV_PROTOCOL>
+   ```
 
-### Permiso denegado
+      {{% /tab %}}
+      {{% tab "Windows" %}}
 
-Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, el número de puerto que has indicado puede requerir permisos superiores. Para vincularte a un número de puerto inferior a 1024, consulta [Uso del puerto de trampas predeterminado 162 de SNMP][8].
+   Navegue al directorio de instalación del Agent:
 
-### Dispositivo inalcanzable o mal configurado:
+   ```shell
+   cd "c:\Program Files\Datadog\Datadog Agent\bin"
+   ```
+
+   Para SNMP v2, ejecute:
+
+   ```shell
+   "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 2 -C <community-string> <IP-Address>:<port>
+   ```
+
+   Para SNMP v3, ejecute:
+
+   ```shell
+   "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 3 -u <USER> -a <AUTH-PROTOCOL> -A <AUTH-KEY> -x <PRIV-PROTOCOL> -X <PRIV-KEY> <IP-Address>:<port>
+   ```
+
+   **Nota**: Ejecute el comando como administrador desde el directorio de instalación del Agent para evitar el siguiente error:
+
+   ```shell
+   Error: unable to read artifact: open C:\ProgramData\Datadog\auth_token: Access is denied.
+   ```
+
+      {{% /tab %}}
+      {{< /tabs >}}
+
+## Solución de problemas de errores SNMP {#troubleshooting-snmp-errors}
+
+Si el estado de SNMP o el walk del Agent muestran un error, podría indicar uno de los siguientes problemas:
+
+### Permiso denegado {#permission-denied}
+
+Si ve un error de permiso denegado durante la vinculación de puertos en los registros del Agent, es posible que el número de puerto que indicó requiera permisos elevados. Para vincular a un número de puerto inferior a 1024, consulte [Uso del puerto SNMP Trap predeterminado 162][8].
+
+### Dispositivo inalcanzable o mal configurado: {#unreachable-or-misconfigured-device}
 
    **Error**:
    ```plaintext
@@ -97,22 +127,22 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
    **Solución**:
 
-   1. Inicia sesión en tu dispositivo y asegúrate de que SNMP está activado y expuesto en el puerto 161.
-   2. Comprueba que tu cortafuegos del recopilador permite la salida.
+   1. Inicie sesión en su dispositivo y asegúrese de que SNMP esté habilitado y expuesto en el puerto 161.
+   2. Verifique que el firewall de su recopilador permita el tráfico de salida.
 
-   3. Opcionalmente, sólo para Linux:
+   3. Opcionalmente, solo para Linux:
 
-      Ejecuta `iptables -L OUTPUT` y asegúrate de que no hay ninguna regla de denegación:
+      Ejecute `iptables -L OUTPUT` y asegúrese de que no haya ninguna regla de denegación:
 
-      ```
+      ```shell
       vagrant@agent-dev-ubuntu-22:~$ sudo iptables -L OUTPUT
       Chain OUTPUT (policy ACCEPT)
       target     prot opt source               destination
       DROP       all  --  anywhere             10.4.5.6
       ```
-   3. Asegúrate de que tu cadena comunitaria coincide.
+   3. Asegúrese de que su cadena de comunidad coincida.
 
-### Credenciales de SNMPv2 incorrectas
+### Credenciales SNMPv2 incorrectas {#incorrect-snmpv2-credentials}
 
    **Error**:
    ```
@@ -121,9 +151,9 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
    **Solución**:
 
-   Si utilizas SNMPv2, asegúrate de que se establece una cadena de comunidad.
+   Si utiliza SNMPv2, asegúrese de que haya una cadena de comunidad configurada.
 
-### Protocolo de privacidad de SNMPv3 incorrecto
+### Protocolo de privacidad SNMPv3 incorrecto {#incorrect-snmpv3-privacy-protocol}
 
    **Error**:
    ```
@@ -138,40 +168,40 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
    **Solución**:
 
-   Comprueba que los siguientes parámetros de configuración de SNMPv3 son correctos:
+   Verifique que los siguientes parámetros de configuración de SNMPv3 sean correctos:
    - usuario
    - authKey
    - authProtocol
    - privKey
    - privProtocol
 
-### No se reciben trampas o flujos en absoluto
+### Traps o Flows no se reciben en absoluto {#traps-or-flows-not-being-received-at-all}
 
-Si faltan trampas SNMP o tráfico NetFlow, una causa común son las reglas del cortafuegos que bloquean los paquetes UDP antes de que lleguen al Agent. Tanto las trampas SNMP como el tráfico NetFlow dependen de UDP y utilizan los puertos definidos en tu configuración de [datadog.yaml][9].
+Si faltan tramas SNMP o tráfico NetFlow, una causa común es que las reglas del firewall bloqueen los paquetes UDP antes de que lleguen al Agent. Tanto las tramas SNMP como NetFlow dependen de UDP y utilizan los puertos definidos en su configuración [datadog.yaml][9].
 
-<div class="alert alert-info">Los firewalls locales como Uncomplicated Firewall (UFW) pueden bloquear el tráfico incluso cuando están configurados con parámetros permisivos. Comprueba los logs del sistema en busca de entradas de paquetes bloqueados, que suelen indicar que el tráfico llegó a la interfaz de red pero se bloqueó antes de llegar al sistema operativo.</div>
+<div class="alert alert-info">Los firewalls locales como Uncomplicated Firewall (UFW) pueden bloquear el tráfico incluso cuando están configurados con ajustes permisivos. Revise los registros del sistema en busca de entradas de paquetes bloqueados, lo que normalmente indica que el tráfico llegó a la interfaz de red pero fue bloqueado antes de llegar al sistema operativo.</div>
 
-Utiliza los siguientes comandos específicos de la plataforma para buscar reglas de cortafuegos que puedan estar bloqueando el tráfico y evitando que llegue al Agent.
+Utilice los siguientes comandos específicos de la plataforma para verificar si hay reglas de firewall que puedan estar impidiendo que el tráfico llegue al Agent.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-Linux dispone de varios tipos de cortafuegos, como `iptables`, `nftables` o `ufw`. Dependiendo de cuál esté en uso, se pueden utilizar los siguientes comandos:
+Linux tiene varios tipos de firewalls, como `iptables`, `nftables` o `ufw`. Dependiendo de cuál esté en uso, se pueden utilizar los siguientes comandos:
 
 - `sudo iptables -S`
 
-- `sudo nft lista ruleset`
+- `sudo nft list ruleset`
 
 - `sudo ufw status`
 
-Busca si hay reglas que bloquean el tráfico UDP en los puertos configurados.
+Busque reglas que bloqueen el tráfico UDP en los puertos configurados.
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-A partir de la versión `7.67`, el comando `Datadog-Agent diagnose` del Agent busca automáticamente reglas de bloqueo del cortafuegos y muestra advertencias si encuentra alguna.
+A partir de la versión `7.67`, el comando `agent.exe diagnose` del Agent verifica automáticamente si hay reglas de firewall que bloqueen el tráfico y muestra advertencias si encuentra alguna.
 
-Para inspeccionar manualmente las reglas del cortafuegos:
+Para inspeccionar manualmente las reglas de firewall:
 
 ```powershell
 Get-NetFirewallRule -Action Block | ForEach-Object {
@@ -186,52 +216,52 @@ Get-NetFirewallRule -Action Block | ForEach-Object {
 } | Format-Table -AutoSize
 ```
 
-Busca normas donde:
+Busque reglas donde:
 - **Dirección** es entrante
-- **El protocolo** es UDP
-- **LocalPort** coincide con uno de tus puertos configurados
+- **Protocolo** es UDP
+- **PuertoLocal** coincide con uno de sus puertos configurados
 
 {{% /tab %}}
-{{% tab "MacOS" %}}
+{{% tab "macOS" %}}
 
-Ejecuta el siguiente comando para revisar las reglas de Packet Filter (pf):
+Ejecute el siguiente comando para revisar las reglas de Packet Filter (pf):
 
 ```shell
 sudo pfctl -sr
 ```
 
-Busca cualquier regla que bloquee el tráfico UDP en los puertos configurados. Por ejemplo:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
+Busque cualquier regla que bloquee el tráfico UDP en sus puertos configurados. Por ejemplo:`block drop in proto udp from any to any port = <CONFIG_PORT>`.
 {{% /tab %}}
 {{< /tabs >}}
 
-### No se reciben trampas para los dispositivos
+### Traps no se reciben para los dispositivos {#traps-not-being-received-for-devices}
 
-1. Comprueba el archivo de Datadog `agent.log` para asegurarte de que puedes enlazarte al puerto de trampas. El siguiente error indica que no te puedes enlazar con el puerto de trampas:
+1. Verifique el archivo `agent.log` de Datadog para asegurarse de que puede vincularse al puerto de traps. El siguiente error indica que no puede vincularse al puerto de tramas:
 
    ```
    Failed to start snmp-traps server: error happened when listening for SNMP Traps: listen udp 0.0.0.0:162: bind: permission denied
    ```
 
    **Solución**:
-   Añade una capacidad de enlace de red al binario del Agent, que permite al Agent vincularse a puertos reservados:
+   Agregue una capacidad de vinculación de red (net bind) al binario del Agent, lo que permite que el Agent se vincule a puertos reservados:
 
-   ```
+   ```shell
    sudo setcap 'cap_net_bind_service=+ep' /opt/datadog-agent/bin/agent/agent
    ```
 
-### Trampas con formato incorrecto
+### Traps con formato incorrecto {#traps-incorrectly-formatted}
 
-1. Ve al dashboard para solucionar problemas en NDM:
+1. Navegue al Dashboard de solución de problemas en NDM:
 
-   {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="La página de Network Device Monitoring muestra el menú desplegable de Dashboard con el dashboard Solucionar problemas de NDM resaltado." style="width:80%;" >}}
+   {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="La página de Network Device Monitoring que muestra el menú desplegable del Dashboard con el NDM Troubleshooting Dashboard resaltado." style="width:80%;" >}}
 
-2. Desplázate hasta el widget Trampas y observa el gráfico **Trampas incorrectamente formateadas**. Si es distinto de cero, probablemente significa que la autenticación en el recopilador NDM y el dispositivo no coinciden.
+2. Desplácese hacia abajo hasta el widget de Traps y observe el gráfico {{< ui >}}Traps incorrectly formatted{{< /ui >}}. Si esto no es cero, probablemente significa que la autenticación en el recopilador de NDM y el dispositivo no coinciden.
 
-   {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="El dashboard de Solucionar problemas de NDM qemuestra la sección del widget Trampas." style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="El dashboard de resolución de problemas de NDM que muestra la sección del widget de tramas." style="width:100%;" >}}
 
    **Solución**:
 
-     Comprueba que las siguientes configuraciones del archivo `datadog.yaml` coinciden con las configuraciones de las trampas de los dispositivos de los que faltan trampas:
+     Verify that the following configurations in the `datadog.yaml` file align with the trap settings on the devices from which traps are missing:
 
    ```
     ## @param community_strings - list of strings - required
@@ -265,7 +295,7 @@ Busca cualquier regla que bloquee el tráfico UDP en los puertos configurados. P
     #   privProtocol: <PRIVACY_PROTOCOL>
     ```
 
-## Referencias adicionales
+## Further Reading 
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -13,6 +13,9 @@ further_reading:
 - link: "mcp_server/setup"
   tag: "Documentation"
   text: "Set Up the Datadog MCP Server"
+- link: "mcp_server/code_execution"
+  tag: "Documentation"
+  text: "Code Execution with the MCP Server"
 - link: "https://www.datadoghq.com/blog/datadog-mcp-apps/"
   tag: "Blog"
   text: "Datadog MCP Apps: Interactive experiences in AI workflows"
@@ -21,7 +24,9 @@ further_reading:
 The following tools are available in the Datadog MCP Server. Each entry includes the required toolset, permissions, and example prompts. Tools are grouped by [toolsets][1], which allow you to use only the tools you need, saving valuable context window space.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
+To enable product-specific tools, include the `toolsets` query parameter at the end of the endpoint URL you use to connect to the Datadog MCP Server. Use `toolsets=all` to enable all generally available toolsets (best for clients that support tool filtering to reduce context window usage).
+
+For example, based on your selected [Datadog site][2] ({{< region-param key="dd_site_name" >}}), this URL enables _only_ APM and Agent Observability tools:
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -153,23 +158,17 @@ Lists available metrics, with options for filtering and metadata.
 - List CPU-related metrics for our infrastructure.
 - Find metrics tagged with `service:api`.
 
-### `search_datadog_services`
+### `search_datadog_entities`
 *Toolset: **core***\
 *Permissions Required: `Service Catalog Read`*\
-Lists services in Datadog's Catalog with details and team information.
+Searches Datadog's Catalog for service identity, ownership and upstream and downstream dependencies.
 
-- Show me all services in our microservices architecture.
-- List services owned by the platform team.
 - Find services related to payment processing.
-
-### `search_datadog_service_dependencies`
-*Toolset: **core***\
-*Permissions Required: `APM Read` and `Service Catalog Read` and `Teams Read`*\
-Retrieves service dependencies (upstream/downstream) and services owned by a team.
-
+- List services owned by the platform team.
 - Show me all upstream services that call the checkout service.
 - What downstream services does the payment API depend on?
-- List all services owned by the platform team.
+
+<div class="alert alert-info"><code>search_datadog_services</code> and <code>search_datadog_service_dependencies</code> tools are deprecated, use <code>search_datadog_entities</code> instead.</div>
 
 ### `search_datadog_spans`
 *Toolset: **core***\
@@ -179,6 +178,15 @@ Retrieves spans from APM traces with filters such as service, time, resource, an
 - Show me spans with errors from the checkout service.
 - Find slow database queries in the last 30 minutes.
 - Get spans for failed API requests to our payment service.
+
+### `aggregate_spans`
+*Toolset: **core***\
+*Permissions Required: `APM Read`*\
+Aggregates APM spans to compute counts, sums, averages, minimums, maximums, cardinality, and percentiles (p50 to p99). Group results by fields such as service or resource, or set `group_by.interval` in milliseconds to return a timeseries.
+
+- What is the p95 duration by resource for the checkout service over the last hour?
+- Show me request counts for the payments service in 5-minute buckets over the last day.
+- Count errors grouped by endpoint and status code for `service:web-store`.
 
 ### `analyze_datadog_logs`
 *Toolset: **core***\
@@ -289,27 +297,19 @@ Finds monitoring gaps and coverage for services or hosts. Returns which signals 
 
 ## APM
 
-Tools for in-depth [APM][50] trace analysis, span search, Watchdog insights, and performance investigation.
+Tools for in-depth [APM][50] trace analysis, service health, performance investigation, recommendations, and managing sampling and service remapping rules.
 
 <div class="alert alert-info">The <code>apm</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/apm-mcp-toolset/">Sign up for access.</a></div>
-
-### `apm_search_spans`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Searches for spans using APM query syntax, with support for pagination and tag filtering.
-
-- Show me spans with errors from the checkout service in the last hour.
-- Find slow database queries taking more than 2 seconds.
-- Search for spans with `service:payments` and `status:error`.
 
 ### `apm_query_trace`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Queries a trace's span data to filter, aggregate, or rank spans, such as finding the highest self-time spans or tracing an error to its origin service.
+Runs a read-only SQL query against a trace's spans to answer a specific question, such as ranking spans by self-time or isolating one span's attributes. Complements `get_datadog_trace`, which shows a trace's overall shape.
 
-- Find the top 5 spans by self-time in trace `abc123`.
-- Show all error messages and their originating services in trace `abc123`.
-- Which database calls in this trace took longer than 500ms?
+- Which service accounted for the most self-time in trace `abc123`?
+- Get the attributes for span `xyz789` along with the root span's attributes.
+- How many database calls happened in this trace, and which one took the longest?
+- Which of the child spans under span `xyz789` was slowest?
 
 ### `apm_discover_span_tags`
 *Toolset: **apm***\
@@ -326,20 +326,13 @@ Retrieves the primary tag keys configured for the organization.
 
 - What are my organization's primary tag keys?
 
-### `apm_search_watchdog_stories`
+### `apm_get_service_health`
 *Toolset: **apm***\
 *Permissions Required: `APM Read`*\
-Searches for Watchdog anomaly detection stories for a service within a time range, providing AI-powered insights into latency, error rate, and traffic anomalies.
+Retrieves the current health status (ok/warning/critical) for one or more APM services plus the signals driving it (paging monitors, incidents, Watchdog anomalies, DBM regressions). Returns present state only; no historical trends.
 
-- Show me Watchdog anomalies for the checkout service in the last 24 hours.
-- Are there any latency anomalies detected for my API service?
-
-### `apm_get_watchdog_story`
-*Toolset: **apm***\
-*Permissions Required: `APM Read`*\
-Retrieves detailed information about a specific Watchdog story by its ID.
-
-- Get the details of Watchdog story `abc123`.
+- Check the health of the checkout and payment services in staging.
+- We rolled out a fix to the checkout service in prod. Show me the current status.
 
 ### `apm_latency_bottleneck_summary`
 *Toolset: **apm***\
@@ -349,22 +342,6 @@ Analyzes latency bottlenecks across traces in an anomaly period using self-time 
 - Summarize the latency bottlenecks for the checkout service between 2pm and 3pm today.
 - What is consuming the most self-time in the payments service during this latency spike?
 - Identify which endpoints are the top bottlenecks for `service:api` between 10:00 and 10:30.
-
-### `get_change_stories`
-*Toolset: **apm***\
-Retrieves change stories from the Change Tracking API for APM services. Use this to identify what changed (deployments, feature flags, configuration updates, and infrastructure events) during a time range and correlate changes with performance issues or incidents.
-
-- Show me recent deployments and changes for the payments service.
-- What infrastructure changes happened around the time of this latency spike?
-- Find feature flag and configuration changes for the checkout service in the last hour.
-
-### `semantic_search_change_stories`
-*Toolset: **apm***\
-Searches change stories using natural language and AI-powered semantic search. Use this to find feature flag or deployment changes related to a behavior, a user-reported issue, or a part of the product you are investigating.
-
-- What changed recently that could affect dashboard loading for trial users?
-- Which flags might impact authentication in the billing settings page?
-- Find changes related to missing telemetry data in the last week.
 
 ### `apm_search_recommendations`
 *Toolset: **apm***\
@@ -380,6 +357,106 @@ Searches for APM recommendations from Datadog.
 Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
+
+### `search_apm_sampling_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read`*\
+Lists remote sampling rules that set a fixed sample rate for spans matching a service, environment, and resource. Filter by service, environment, or both.
+
+- Show me the sampling rules for the checkout service in prod.
+- List all remote sampling rules in my organization.
+
+### `create_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Creates a remote [sampling rule][82] that sets a sample rate for a service, environment, and resource, with no redeploy needed. A low rate can drop most of a service's traces. If a rule already exists for that target, use `update_apm_sampling_rule` instead. The tool requires explicit confirmation before it creates the rule.
+
+- Sample 10% of `GET /health` spans for the checkout service in prod.
+- Keep all traces for the `POST /payments` resource on the payments service in staging.
+
+### `update_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Changes the sample rate of an existing remote sampling rule, identified by its service, environment, and resource. To change the rule's target, delete the rule and create a new one. The tool requires explicit confirmation before it applies changes.
+
+- Raise the sample rate for `GET /api/orders` on the orders service in prod to 50%.
+- Lower the sample rate for the checkout service's health check endpoint to 1%.
+
+### `delete_apm_sampling_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Remote Configuration Read` and `APM Remote Configuration Write`*\
+Permanently deletes a remote sampling rule, identified by its service, environment, and resource. Matching spans fall back to the next applicable sampling mechanism. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Remove the sampling rule for `GET /health` on the checkout service in prod.
+
+### `search_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read`*\
+Lists the organization's service remapping rules in evaluation order, or retrieves one rule by ID. Each result includes the rule's filter, new name, and current version.
+
+- List all service remapping rules in my organization.
+- Which remapping rule renames the `postgres` inferred service?
+
+### `create_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Creates a [service remapping rule][81] that renames services or inferred entities on matching spans, which changes how they appear across APM, monitors, and dashboards. New rules are evaluated after existing rules. You can also specify a different tag for the rule to rewrite. The tool requires explicit confirmation before it creates the rule.
+
+- Rename the inferred database service `postgres` to `orders-db` for spans from the orders service.
+- Create a remapping rule that renames `web-store-v2` to `web-store`.
+
+### `update_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Updates an existing service remapping rule's name, filter, the name it assigns to matching services or inferred entities, or the tag it rewrites (`service` or `peer.service` by default). The rule type cannot be changed, and rules with multiple rewrite mappings must be edited in Datadog instead. The tool requires explicit confirmation before it applies changes.
+
+- Update the `orders-db` remapping rule to also match spans from the fulfillment service.
+- Update the `web-store` remapping rule to rename matching services to `storefront`.
+
+### `reorder_apm_service_remapping_rules`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Sets the evaluation order of all service remapping rules. The first matching rule applies, so order determines which rule wins when a span matches more than one. The tool requires explicit confirmation before it applies changes.
+
+- Move the `orders-db` remapping rule ahead of the generic database rule.
+
+### `delete_apm_service_remapping_rule`
+*Toolset: **apm***\
+*Permissions Required: `APM Read` and `APM Service Remapping Write`*\
+Permanently deletes a service remapping rule by ID. New spans that matched the rule keep their original service name. Data that's already indexed doesn't change. The tool requires explicit confirmation before it deletes the rule. This operation is idempotent.
+
+- Delete the `web-store` service remapping rule.
+
+## Assistant
+
+Tools for interacting with [Bits Chat][75], the AI-powered companion that helps you search and act across Datadog using natural language.
+
+**Note**: The `assistant` toolset does not support mutating actions, such as creating, editing, or deleting Datadog resources. To perform those actions, use the specific product toolset instead, for example `dashboards` or `alerting`.
+
+### `send_message_to_assistant`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Sends a message to the Datadog Assistant and returns its response. Optionally continues an existing conversation by providing a `conversation_id`.
+
+- Ask the assistant what's causing the latency spike on the checkout service.
+- Continue conversation `abc-123-def` and ask the assistant for next steps.
+- Ask the assistant to summarize open P1 incidents, with debug mode enabled.
+
+### `get_assistant_conversation_history`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Retrieves the full conversation history for a specific assistant conversation by its ID.
+
+- Get the full conversation history for conversation `abc-123-def`.
+- Show me everything the assistant said in my last conversation about the payment outage.
+
+### `list_assistant_conversations`
+*Toolset: **assistant***\
+*Permissions Required: `Bits Chat Access`*\
+Lists all Datadog Assistant conversations for the current user.
+
+- List all my past conversations with the Datadog Assistant.
+- Show me my most recent assistant conversations.
 
 ## Audit Trail
 
@@ -412,23 +489,25 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+
+Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
 <div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Work Management][38] work items (cases) with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open cases assigned to me.
+- Show me all open work items assigned to me.
 - Are there any open P1 cases in the Security Reviews project?
 - Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific work item (case) by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
 - Who's working on this case and what progress has been made so far?
@@ -436,16 +515,16 @@ Retrieves detailed information about a specific case by ID or key, including tit
 
 ### `create_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
-Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a new [Work Management][38] work item (case) with a title, project, and optional fields like description, priority, and assignee. The project can be given as a project key, a project name, or a project ID.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
 - Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
 - Mark the database migration case as resolved.
@@ -454,9 +533,9 @@ Updates an existing case's fields such as status, priority, title, description, 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a case's timeline. Comments support markdown formatting.
+Adds a comment to a work item (case) timeline. Comments support markdown formatting.
 
-- Add a note to the case summarizing what we found in the logs and traces.
+- Add a note to the work item summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
@@ -470,22 +549,22 @@ Adds a comment to a case's timeline. Comments support markdown formatting.
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Case Management][38] projects with optional filtering by name or key.
+Lists available [Work Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Case Management?
-- Is there a project related to security in Case Management?
+- What projects are available in Work Management?
+- Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific case project by ID.
+Retrieves details for a specific project by ID.
 
-- What project is this case part of?
+- What project is this work item part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -506,20 +585,27 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 
 ## Code Execution
 
-A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call.
-
-<div class="alert alert-info">The <code>code-exec</code> toolset is in Preview. <a href="https://www.datadoghq.com/product-preview/mcp-codexec/">Sign up</a> for the preview or contact <a href="/help">Datadog support</a> to request access.</div>
+Tools for running agent-authored JavaScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call. See [Code Execution with the MCP Server][77] for more information on how this toolset works and when to use it.
 
 Code executed by this toolset runs against your Datadog APIs using your own user identity. The sandbox applies your existing [role permissions][56] to every API call, so an agent can only read or modify data that you can already access in Datadog.
 
 ### `execute_code`
 *Toolset: **code-exec***\
 *Permissions Required: Any product-specific role permissions needed to access the underlying Datadog resources the executed code interacts with (for example, `Logs Read` to read logs).*\
-Executes AI agent-authored TypeScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
+Executes AI agent-authored JavaScript in a Datadog-managed sandbox. The code receives a `dd.*` namespace with helpers for querying logs, metrics, traces, services, change events, incidents, monitors, dashboards, and other Datadog APIs, and returns a structured value back to the agent. This can reduce the number of round-trips needed for multi-signal investigations and ad-hoc data exploration.
 
 - For the `checkout-api` service in the last two hours, pull error logs, latency metrics, and recent deployments together and tell me which deployment lines up with the error spike.
 - Compare error-span counts, monitor alerts, and config changes for the `payments` service over the last day, and identify anything that moved at the same time.
 - For `auth-service`, correlate the top error patterns in logs with CPU and memory metrics from the last hour to see whether errors track resource pressure.
+
+### `search_datadog_sdk`
+*Toolset: **code-exec***\
+*Permissions Required: None*\
+Looks up the SDK functions, types, and API methods available for writing `execute_code` scripts. Call this before writing a script to confirm which methods exist and their signatures.
+
+- What SDK methods are available for querying logs in a script?
+- Show me the available methods for aggregating spans.
+- What does the `dd.time` namespace provide?
 
 ## Dashboards
 
@@ -783,6 +869,15 @@ Runs health checks to surface potential PostgreSQL issues such as CPU saturation
 - Check database health around the incident time frame.
 - What signals explain the regression on the payments database?
 
+### `get_datadog_database_instance_settings`
+*Toolset: **dbm***\
+*Permissions Required: `Database Monitoring Read`*\
+Retrieves collected PostgreSQL configuration settings for a Database Monitoring instance, the same values shown on the Configuration tab. Returns parameters that affect performance and behavior, including memory (`shared_buffers`, `work_mem`), connections (`max_connections`), autovacuum, logging, WAL, and query planner settings. Filter by setting name to narrow results.
+
+- Show autovacuum settings for `db-prod-1`.
+- What logging settings are enabled on the payments PostgreSQL instance?
+- What is `shared_buffers` set to on `db-prod-1`?
+
 ### `get_datadog_database_query_performance`
 *Toolset: **dbm***\
 *Permissions Required: `Database Monitoring Read`*\
@@ -896,6 +991,29 @@ Generates a Datadog UI link to the [DDSQL Editor][41] with a given query pre-pop
 - Generate a DDSQL Editor link for this query.
 - Create a shareable link to the DDSQL Editor with my infrastructure query.
 
+### `ddsql_search_saved_queries`
+*Toolset: **ddsql***\
+Searches saved DDSQL queries by name or description and returns their SQL text and metadata, sorted by most recently modified. Supports optional text filtering and pagination. Multiple filter words are ANDed together.
+
+- Find saved DDSQL queries about Kubernetes.
+- List the organization's most recently updated saved queries.
+- Search saved queries for CPU usage.
+
+### `ddsql_read_saved_query`
+*Toolset: **ddsql***\
+Gets a saved DDSQL query by its query ID, including its name, SQL text, columns, description, and author metadata.
+
+- Show the SQL for this saved query.
+- Get the details of the saved query with this ID.
+
+### `ddsql_upsert_saved_query`
+*Toolset: **ddsql***\
+Creates or updates a saved DDSQL query. To create a query, provide a name and SQL text and omit the query ID. To update a query, provide its query ID and a new name, SQL text, or both. If the name or SQL text is omitted from an update, its existing value is preserved.
+
+- Save this query as "CPU usage by host".
+- Rename this saved query to "Production hosts".
+- Update the SQL in this saved query to include only production hosts.
+
 ## Error Tracking
 
 Tools for interacting with Datadog [Error Tracking][49].
@@ -944,6 +1062,15 @@ Adds, updates, or deletes a comment on a Datadog Error Tracking Issue.
 - Add a comment to Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000` saying "Investigating this now".
 - Update the comment we just added to say "Fixed in version 2.3.1".
 - Delete the comment we just added from that issue.
+
+### `manage_datadog_error_tracking_issue_links`
+*Toolset: **error-tracking***\
+*Permissions Required: `Cases Read`, `Cases Write`, `Error Tracking Read`, and `Error Tracking Write`*\
+Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an Error Tracking Issue.
+
+- File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
+- Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
+- Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
 ## Experiments
 
@@ -1190,6 +1317,190 @@ Copies an existing form, including its latest definition, into a new form with a
 
 - Clone my incident review form to create a template for next quarter.
 
+## Governance
+
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+
+<div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
+
+The write tools in this toolset require explicit confirmation. The first call returns confirmation text that describes the exact change and its effects. Your AI client shows this text to you, and the tool applies the change only after you approve that exact text. If any value in the request changes, the tool asks for confirmation again.
+
+### `list_governance_insights`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` or `Metrics Read` or `Events Read` or `Audit Trail Read`*\
+Retrieves governance health insights for your organization, such as the number of unused API keys or the percentage of monitors with team tags. Supports filtering by product and includes computed values and trends by default.
+
+- What are the governance insights for my organization?
+- Show me the governance insights for Monitors.
+- How many unused API keys do we have?
+
+### `list_governance_controls`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the governance [controls][80] for your organization, including each control's detection type, severity, category, detection counts, and mitigation options.
+
+- List all governance controls.
+- Which governance controls have the most active detections?
+
+### `get_governance_control`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance [control][80] by detection type, including its configuration, detection parameters, available mitigations, notification settings, and detection counts.
+
+- Show me the configuration of the `unused_api_keys` control.
+- Which mitigations are available for the `monitors_without_team_tag` control?
+
+### `list_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists the detections for a governance control. A detection is a resource that violates the control, such as an unused API key. Supports filtering by state (`active`, `exception`, or `mitigated`) and searching by resource ID or name.
+
+- List the active detections for the `unused_api_keys` control.
+- Which monitors are missing a team tag?
+- Show me the detections marked as exceptions for the `unused_api_keys` control.
+
+### `get_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Retrieves details for a governance detection, including its state, resource details, assignment, mitigation deadline, and notification history.
+
+- Show me the details of detection `abc123` for the `unused_api_keys` control.
+- When is detection `abc123` scheduled for automatic mitigation?
+
+### `list_governance_limits`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists your organization's rate limits and resource limits, with current usage compared to each limit. Use this tool to find resources that are close to or over their limits.
+
+- Which of my rate limits are close to being exceeded?
+- Show me my organization's resource limits and current usage.
+
+### `list_governance_best_practices`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read`*\
+Lists recommended governance best practices, each with a description, expected impact, priority, and a link to the relevant page in Datadog. Supports filtering by category (`access_governance`, `security`, `compliance`, or `operational_hygiene`) and keyword search.
+
+- What governance best practices should my organization follow?
+- List the security best practices for my organization.
+
+### `list_tag_rules`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Lists your organization's tag rules. A tag rule flags telemetry that is missing a required tag or has a tag value that does not match an allowed pattern. Rules apply to logs, spans, metrics, RUM events, or feed events. Supports filtering by source and including disabled or deleted rules.
+
+- List all tag rules for logs.
+- Show me the disabled tag rules.
+
+### `get_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Read` or `Metrics Read`*\
+Retrieves a tag rule by ID, including the tag key it governs, its allowed value patterns, its scope, and whether it is enabled.
+
+- Show me the details of tag rule `abc123`.
+
+### `mitigate_governance_detections`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Runs a mitigation on up to 25 detections for a control, such as revoking unused API keys. You must specify the mitigation type. Use `get_governance_control` to see the mitigations available for a control. Each mitigation also requires the permissions to change the affected resources. Some mitigations cannot be undone. The tool requires explicit confirmation before it runs the mitigation.
+
+- Revoke the unused API keys from detections `abc123` and `def456`.
+- Mitigate all active detections for the `unused_api_keys` control.
+
+### `update_governance_detection`
+*Toolset: **governance***\
+*Permissions Required: `Governance Console Read` and `MCP Write`*\
+Updates a governance detection. Use this tool to mark a detection as an exception, reactivate it, assign it to a user or team, or change its automatic mitigation deadline. The tool requires explicit confirmation before it applies changes.
+
+- Mark detection `abc123` as an exception.
+- Assign detection `abc123` to the Platform team.
+- Delay automatic mitigation of detection `abc123` until the end of the month.
+
+### `create_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Creates a tag rule. Rules created with this tool only flag non-compliant telemetry; they do not block it. New rules are disabled unless you ask for the rule to be enabled. The tool requires explicit confirmation before it creates the rule.
+
+- Create a tag rule that requires the `team` tag on all logs.
+- Create a tag rule that allows only `prod`, `staging`, and `dev` as values of the `env` tag on spans.
+
+### `update_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
+
+- Enable tag rule `abc123`.
+- Add `qa` to the allowed values for tag rule `abc123`.
+
+### `delete_tag_rule`
+*Toolset: **governance***\
+*Permissions Required: `Telemetry Rules Create`*\
+Deletes a tag rule. By default, the rule is soft-deleted and can be recovered. To delete the rule permanently, ask for a hard delete. The tool requires explicit confirmation before it deletes the rule.
+
+- Delete tag rule `abc123`.
+- Permanently delete tag rule `abc123`.
+
+## Investigations
+
+Tools for triggering, searching, and steering [Bits Investigation][76] investigations for monitor alerts, incidents, and general troubleshooting.
+
+<div class="alert alert-info">The <code>investigator</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `trigger_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation for a monitor alert. This starts an automated investigation that analyzes the alert context and provides findings and conclusions. Use `get_bits_ai_investigation` to retrieve results.
+
+- Investigate why monitor `12345` fired at event `abc123`.
+- Kick off a Bits Investigation for the CPU alert on the checkout service.
+
+### `trigger_general_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation from a text description. For best results, scope the investigation with a `service:<name>` or `host:<name>` tag. Use `get_bits_ai_investigation` to poll for results after triggering.
+
+- Investigate the latency spike on `service:checkout` since 2pm today.
+- Start an investigation into elevated error rates on `host:web-01`.
+
+### `trigger_incident_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Triggers a Bits Investigation scoped to a Datadog incident. The investigation analyzes the incident timeline and context to provide findings and conclusions. Use `get_investigations_from_incident_id` to check for existing investigations first.
+
+- Trigger an investigation for incident `1234` to help find the root cause.
+- Start a Bits Investigation scoped to the ongoing checkout incident.
+
+### `search_investigations`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Searches Bits AI investigations by keyword or query. Returns matching investigations with their IDs, status, and summaries.
+
+- Find investigations related to the checkout service.
+- Show me all completed investigations from this week.
+
+### `get_investigations_from_incident_id`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves Bits AI investigations linked to a specific Datadog incident.
+
+- What investigations have been triggered for incident `1234`?
+- List investigation IDs linked to the payments incident.
+
+### `get_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Read`*\
+Retrieves the status, findings, and conclusions of a Bits AI investigation.
+
+- Get the findings for investigation `abc-123-def`.
+- What did the investigation conclude about the outage?
+
+### `steer_bits_ai_investigation`
+*Toolset: **investigator***\
+*Permissions Required: `Bits Investigations Write`*\
+Sends a steering message to a running Bits AI investigation to correct, redirect, or add context. Use `get_bits_ai_investigation` first to confirm the investigation is still active.
+
+- Tell the running investigation to focus on the database layer instead.
+- Redirect investigation `abc-123-def` to also check recent deployments.
+
 ## Kubernetes
 
 Tools for searching and describing [Kubernetes][55] resources, retrieving manifests, and analyzing Deployment rollouts across all clusters.
@@ -1233,9 +1544,156 @@ Retrieves the YAML manifest for a specific [Kubernetes][55] resource. Use this t
 - Show me the container ports for deployment `api-server` in namespace `default`, cluster `staging`.
 - Get the container images from the manifest of pod `my-app`.
 
+## Metrics Governance
+
+Tools for analyzing metric timeseries volume and tag cardinality and managing Metrics without Limits™ tag configurations and indexing rules.
+
+### `estimate_datadog_metric_cardinality`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Estimates a metric's timeseries cardinality for a proposed allowlist of tag keys. Use this tool to evaluate how keeping or removing tags could affect indexed volume.
+
+- Estimate the cardinality of `custom.checkout.requests` if I keep only `env`, `service`, and `region`.
+- How many timeseries would `custom.api.latency` have with no tags retained?
+- Compare the existing tag configuration for `custom.orders.count` with an allowlist of `env` and `team`.
+
+### `get_metric_cardinality_profile`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Identifies the tag-level drivers of a metric's indexed timeseries volume, including tag cardinality, query activity from the past 30 days, active aggregations, and the direct tag configuration. The profile describes observed data and does not estimate the combined effect of changing multiple tags.
+
+- Profile the cardinality drivers for `custom.checkout.requests` over the last day.
+- Which high-cardinality tags on `custom.api.latency` have not been queried in the past 30 days?
+- Show the indexed and ingested volume, active tags, and tag configuration for `custom.orders.count`.
+
+### `get_metric_governance_status`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the Metrics without Limits™ governance status for up to 20 metrics, including direct tag configurations, exemptions, and optionally the first matching tag indexing rule.
+
+- Show the governance status for `custom.checkout.requests`.
+- Which tag indexing rule applies to `custom.api.latency`?
+- Check whether `custom.orders.count` and `custom.payments.count` have exemptions.
+
+### `get_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves the direct Metrics without Limits™ tag configuration for up to 20 metrics. The result identifies whether each configuration is an allowlist or denylist; a metric without a configuration might still be governed by a tag indexing rule.
+
+- Which tags are enabled for `custom.checkout.requests`?
+- Is the tag configuration for `custom.api.latency` an allowlist or a denylist?
+- Compare the direct tag configurations for `custom.orders.count` and `custom.payments.count`.
+
+### `get_metric_tags`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves indexed and ingested tag keys for a metric over the last four hours, with one observed sample value for each key.
+
+- List the indexed and ingested tags for `custom.checkout.requests`.
+- Which tags were observed on `custom.api.latency` in the last four hours?
+- Show a sample value for each tag on `custom.orders.count`.
+
+### `get_metric_volume`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Retrieves series volume for up to 20 metrics. Custom metrics return indexed and ingested volume, while standard metrics return distinct volume. Supports windows from four hours to two weeks.
+
+- Show the indexed and ingested volume for `custom.checkout.requests`.
+- Compare the volume of `custom.orders.count` and `custom.payments.count` over the last week.
+- Get the distinct volume for `system.cpu.user`.
+
+### `get_tag_indexing_rules`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Read`*\
+Lists Metrics without Limits™ tag indexing rules in priority order. The first rule that matches a metric determines its tag configuration.
+
+- List all tag indexing rules in priority order.
+- Which rules match metrics with the `custom.checkout.*` naming pattern?
+- Show the next page of tag indexing rules.
+
+### `manage_metric_tag_configuration`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, or deletes a direct Metrics without Limits™ tag configuration for a metric. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create an allowlist with `env`, `service`, and `region` for `custom.checkout.requests`.
+- Update `custom.api.latency` to exclude the `request_id` tag.
+- Delete the direct tag configuration for `custom.orders.count`.
+
+### `manage_tag_indexing_rule`
+*Toolset: **metrics-governance***\
+*Permissions Required: `Metrics Write`*\
+Creates, updates, deletes, or reorders Metrics without Limits™ tag indexing rules and manages metric exemptions. The tool provides a preview and requires explicit confirmation before applying changes.
+
+- Create a rule for `custom.checkout.*` that keeps `env`, `service`, and `region`.
+- Move the checkout metrics rule to the highest priority.
+- Add an exemption for `custom.checkout.debug` with a reason.
+
+## Live Debugger
+
+Tools for debugging running applications with [Live Debugger][78] logpoints, which instrument code to capture runtime variables and execution state without a redeployment.
+
+<div class="alert alert-info">The <code>live-debugger</code> toolset is in Preview. Contact <a href="/help">Datadog support</a> to request access.</div>
+
+### `discover_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Discovers the deployment environments where a service runs [Live Debugger][78] and the features it supports, such as `message_templates`, `conditions`, and `capture_expressions`. Call this tool before `create_datadog_logpoint`.
+
+- Which environments can I debug for the checkout service?
+- What Live Debugger features are available for `service:web-store`?
+
+### `enable_live_debugger`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Enables [Live Debugger][78] for a service in an environment where it is supported but not yet enabled. This tool may block for a few minutes to confirm enablement. Run `discover_datadog_logpoint` again to confirm logpoint readiness.
+
+- Enable Live Debugger for the checkout service in `staging`.
+- Turn on dynamic instrumentation for `service:payments` in the `qa` environment.
+
+### `create_debugger_session`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [Live Debugger][78] session. Use the returned `session_id` to create, list, and disable logpoints.
+
+- Create a debugging session so I can add logpoints to the checkout service.
+- Start a Live Debugger session to investigate a null pointer error in the payments service.
+
+### `create_datadog_logpoint`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Creates a [logpoint][78] to capture runtime data unavailable in existing logs, metrics, or traces. Call `discover_datadog_logpoint` first to confirm the environment supports logpoints. Logpoints take up to a minute to propagate before they begin capturing data.
+
+- Add a logpoint at line 42 of `src/cart.py` in the checkout service to capture the cart contents.
+- Add a logpoint to `Handler.GetData` in `staging` to capture its arguments and return value.
+
+### `list_datadog_session_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read`*\
+Lists the logpoints in a [Live Debugger][78] session, with the service, source location, message template, and enabled state for each.
+
+- Show me all active logpoints in this session.
+- Which logpoints are enabled for the checkout service in this session?
+
+### `get_datadog_debugger_snapshot`
+*Toolset: **live-debugger***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Retrieves captured variables from a [Live Debugger][78] snapshot. Use `variable_path` to select a nested value and `depth` to control how many levels it expands. To aggregate the same captured value across multiple snapshots, pass the node's `extra_columns` block, when present, to `analyze_datadog_logs`.
+
+- Show me the captured variables from snapshot event `abc123`.
+- Expand the nested `order` object in that snapshot to a depth of 3.
+
+### `disable_datadog_logpoints`
+*Toolset: **live-debugger***\
+*Permissions Required: `Live Debugger Read` and `Live Debugger Write`*\
+Disables all logpoints in a [Live Debugger][78] session. The session stays active so new logpoints can be added.
+
+- Disable all logpoints in session `session-12345`.
+- Stop all the logpoints in this debugging session.
+
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1270,6 +1728,40 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
+
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues in the last hour?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
+### `run_network_path`
+*Toolset: **networks***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
 ## Onboarding
 
@@ -1389,7 +1881,7 @@ Runs retention queries on Product Analytics data as a cohort grid, retention cur
 - What's the day-7 retention rate for users who joined in January?
 
 ## Profiling
-Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
+Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][52] data across services, runtimes, and traces.
 
 ### `get_profiling_profile_types`
 *Toolset: **profiling***\
@@ -1588,6 +2080,14 @@ Returns aggregated insights for RUM Views: waterfall, long tasks, vital distribu
 - For the `/checkout` view in the "shop" application, show me the aggregated resource waterfall over the last hour.
 - Break down INP distribution by device type for the home page.
 
+### `get_rum_view_waterfall`
+*Toolset: **rum***\
+*Permissions Required: `RUM Apps Read`*\
+Reconstructs the chronological load timeline for a single RUM view occurrence on web or mobile. Returns every resource, long task, error, and user interaction during that view, ordered by start time. Use this to investigate one concrete page load or screen. For the aggregated, cross-session view, use `get_rum_insight`.
+
+- Show the full waterfall for the RUM view with ID `AwAAc3dhcmV`.
+- Why did the checkout page load with view UUID `d64b1e7c-8f2a-4c3b-9e1d-5a6b7c8d9e0f` take 12 seconds?
+
 ### `search_rum_operations`
 *Toolset: **rum***\
 *Permissions Required: `RUM Apps Read` or `Timeseries`*\
@@ -1670,7 +2170,7 @@ Lists retention filters configured on a RUM application. Read-only; available fo
 
 ### `append_new_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Creates a RUM retention filter, appended to the end of the evaluation order. Retention filters control which RUM events are indexed and retained, which affects billing. Confirm the change before applying.
 
 - Create a retention filter on "checkout-web" that retains 100% of error events.
@@ -1678,7 +2178,7 @@ Creates a RUM retention filter, appended to the end of the evaluation order. Ret
 
 ### `update_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Updates an existing RUM retention filter's attributes in place, such as its name, event type, query, sample rate, or enabled state. Confirm the change before applying.
 
 - Increase the sample rate on the "checkout errors" retention filter to 100%.
@@ -1686,7 +2186,7 @@ Updates an existing RUM retention filter's attributes in place, such as its name
 
 ### `reorder_rum_retention_filters`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Read` and `RUM Retention Filters Write`*\
 Sets the full evaluation order of a RUM application's retention filters. Filters are evaluated top-down and each event stops at the first match, so order determines which sample rate applies. Confirm the new order before applying.
 
 - Move the "checkout errors" retention filter above the catch-all filter on "checkout-web".
@@ -1694,7 +2194,7 @@ Sets the full evaluation order of a RUM application's retention filters. Filters
 
 ### `delete_rum_retention_filter`
 *Toolset: **rum***\
-*Permissions Required: `RUM Retention Filters Write` or `Product Analytics Apps Write`*\
+*Permissions Required: `RUM Retention Filters Write`*\
 Permanently deletes a RUM retention filter by ID. Confirm the deletion before applying. This operation is idempotent.
 
 - Delete the "legacy sessions" retention filter from "checkout-web".
@@ -1702,7 +2202,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2073,6 +2573,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
 
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
+
 ## Session Replay
 
 Tools for searching [Session Replay][69] recordings and summarizing session activity.
@@ -2092,6 +2651,63 @@ Generates an AI-powered, time-based play-by-play of what a user did during a spe
 
 - Summarize what happened in session `abc-123-def`.
 - Give me a play-by-play of the replay for the user who reported a checkout error.
+
+## Sheets
+
+Tools for creating, reading, updating, and deleting [Datadog spreadsheets][74].
+
+### `upsert_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and `Sheets Write`*\
+Creates or updates a Datadog spreadsheet's tables, sheets, and pivots in a single call.
+
+- Create a logs table in a spreadsheet with columns for service, status, host, timestamp, and message — filter to errors only.
+- Create a pivot table with average duration by `db.statement` and service for queries over 1 second.
+- Create a spreadsheet showing monthly cloud spend broken down by provider and service, with month-over-month percentage change.
+
+### `get_datadog_spreadsheet_reference`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Returns reference documentation for building inputs to `upsert_datadog_spreadsheet`. Call this before creating or updating a spreadsheet.
+
+- Show me how to build a Datadog spreadsheet.
+- Show me how to build a tab that imports log data into a Datadog spreadsheet.
+- Show me how to format cells in a tab in a Datadog spreadsheet.
+
+### `search_datadog_spreadsheets`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Searches Datadog spreadsheets by name or owner. Returns a paginated list of spreadsheets with their IDs and names.
+
+- List the last 10 created spreadsheets.
+- List 10 spreadsheets whose name starts with "ABC".
+- Show me the last spreadsheet that I updated.
+
+### `get_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read`*\
+Retrieves a Datadog spreadsheet by ID. Returns tables (`tables[].id`), pivots (`pivots[].id`), and sheets (`sheets[].id`) with their configurations. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Show me the details of spreadsheet "ABC".
+- Show me the spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
+
+### `get_datadog_spreadsheet_tab_data`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Read` and the read permission for the underlying data source (for example, `Logs Read Data` for log-backed tables)*\
+Retrieves paginated data from a table, sheet, or legacy pivot tab in a Datadog spreadsheet. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Get the first 10 rows for table "Table 1" in spreadsheet "ABC".
+- Get the data for tab "Pivot 1" in spreadsheet "ABC".
+- Get the cell data for sheet "Sheet 1" in spreadsheet "ABC".
+
+### `delete_datadog_spreadsheet`
+*Toolset: **sheets***\
+*Permissions Required: `Sheets Write`*\
+Permanently deletes a Datadog spreadsheet by ID. This action cannot be undone. Use `search_datadog_spreadsheets` first to find spreadsheet IDs.
+
+- Delete spreadsheet "ABC".
+- Remove my last created spreadsheet.
+- Remove spreadsheet with ID "abee1403-badb-445f-acd5-38a2b8e17f78".
 
 ## Software Delivery
 
@@ -2249,6 +2865,74 @@ Preview and create Datadog Synthetics HTTP API Tests.
 - Create Synthetics tests on every endpoint defined in this code file.
 - Create a Synthetics test on `/path/to/endpoint`.
 - Create a Synthetics test that checks if my domain `mycompany.com` stays up.
+
+## Watchdog
+
+Tools for [Watchdog][79] anomaly investigation, metric change analysis, external provider outage checks, jump detection, and timeseries forecasting.
+
+### `search_watchdog_stories`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog stories for anomalies and root cause analyses across APM, infrastructure, and logs. Returns story summaries and keys to use with `get_watchdog_story`.
+
+- Show Watchdog stories for the checkout service in the last 24 hours.
+- Find Watchdog stories about increased error rates in production.
+
+### `get_watchdog_story`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read` and `Built-in Features`*\
+Retrieves a Watchdog story by its key, including insight details, the timeline, and available root cause analysis. Use a story key returned by `search_watchdog_stories`.
+
+- Get the details of the Watchdog story returned by that search.
+- Show the timeline and root cause analysis for this Watchdog story.
+
+### `search_watchdog_insights`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Searches Watchdog insights for a product context and time range, including anomalies, outliers, recommendations, and correlations. Supports contexts such as APM, logs, RUM, Kubernetes, and Database Monitoring.
+
+- Find Watchdog insights for the checkout service in production over the last hour.
+- Show Watchdog insights for logs from the payments service in the last 24 hours.
+
+### `get_influential_tags`
+*Toolset: **watchdog***\
+*Permissions Required: `Metrics`*\
+Identifies tag dimensions associated with a spike, drop, or other change in a metric. Provide a metric query and a time range. Include the anomaly start time when known, to compare behavior before and after the change.
+
+- Explain what's causing the spike in `avg:system.cpu.user{env:prod}` that started 15 minutes ago.
+- Find the hosts or regions contributing to this metric change over the last hour.
+
+### `get_external_provider_status`
+*Toolset: **watchdog***\
+*Permissions Required: `Built-in Features`*\
+Retrieves external provider outages, including their status and impacted regions. Filter by provider, affected service, or time range, and optionally include resolved outages and impacted services.
+
+- Check for external provider outages affecting the checkout service.
+- Show AWS outages from the last 24 hours, including resolved outages.
+
+### `find_new_jumps`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Detects sudden changes in an APM timeseries for latency, error rate, or throughput. Provide a signal query and analysis window. Latency and error-rate analysis also require a request-count query.
+
+- Find sudden latency changes for the checkout service over the last four hours.
+- Check for sudden drops in throughput for the payments service over the last six hours.
+
+### `update_jump_state`
+*Toolset: **watchdog***\
+*Permissions Required: `APM Read`*\
+Reanalyzes an ongoing jump returned by `find_new_jumps` over a new time window to determine whether it is ongoing, resolved, expired, or invalidated. Reuse the returned jump state and original signal queries. This tool computes an updated result without modifying stored data.
+
+- Recheck the ongoing latency jump from the previous analysis using the latest data.
+- Check whether the throughput drop returned by `find_new_jumps` has resolved.
+
+### `forecast_timeseries`
+*Toolset: **watchdog***\
+*Permissions Required: No specific permissions required.*\
+Forecasts future values from supplied historical timestamps and values, with optional confidence bounds. Provide at least 64 historical points per series. To forecast a Datadog metric, retrieve its history with a metrics query tool first.
+
+- Forecast the next 24 hourly values from these historical timestamps and values.
+- Use this timeseries to forecast the next 12 values with 95% confidence bounds.
 
 ## Widgets
 
@@ -2471,16 +3155,16 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [49]: /error_tracking/
 [50]: /tracing/
 [51]: /feature_flags/
+[52]: /getting_started/profiler/
 [53]: /security/threats/security_signals/
 [54]: /security/misconfigurations/findings/
 [55]: /containers/monitoring/kubernetes_explorer/
-[60]: /security/detection_rules/
-[61]: /security/suppressions/
-[62]: /getting_started/profiler/
 [56]: /account_management/rbac/permissions/
 [57]: /notebooks/
 [58]: /real_user_monitoring/
 [59]: /real_user_monitoring/rum_without_limits/
+[60]: /security/detection_rules/
+[61]: /security/suppressions/
 [62]: /experiments/
 [63]: /agent/guide/rshell/
 [64]: /cloud_cost_management/
@@ -2493,6 +3177,18 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [71]: /account_management/audit_trail/
 [72]: /actions/forms/
 [73]: /real_user_monitoring/operations_monitoring/
+[74]: /sheets/
+[75]: /bits_ai/bits_chat/
+[76]: /bits_ai/bits_investigation/
+[77]: /mcp_server/code_execution/
+[78]: /tracing/live_debugger/
+[79]: /watchdog/
+[80]: /account_management/governance_console/controls/
+[81]: /tracing/services/service_remapping_rules/
+[82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
 
 ## Further reading
 

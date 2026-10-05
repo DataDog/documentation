@@ -328,7 +328,8 @@ multifiltersearch:
   - category: Downsize
     cloud_provider: AWS
     recommendation_description: Instancias de RDS que utilizan menos del 80% de las
-      IOPS aprovisionadas durante las últimas dos semanas.
+      IOPS aprovisionadas durante las últimas dos semanas. No es aplicable a las instancias
+      de Amazon Aurora, que no disponen de una opción configurable de IOPS aprovisionadas.
     recommendation_prerequisites: ''
     recommendation_type: Downsize RDS Instance Provisioned IOPS
     resource_type: RDS Instance
@@ -364,7 +365,7 @@ multifiltersearch:
     cloud_provider: AWS
     recommendation_description: Un bucket de S3 con costos de almacenamiento mínimos
       y sin uso significativo de la API de objetos (actividad de Get, Put, Copy, Head
-      o carga multipart).
+      o carga multipartes).
     recommendation_prerequisites: '[Cloud Cost Management](https://www.datadoghq.com/product/cloud-cost-management)
       or [Storage Management](https://www.datadoghq.com/product/storage-management)'
     recommendation_type: Delete S3 Bucket
@@ -379,7 +380,7 @@ multifiltersearch:
     resource_type: S3 Bucket
   - category: Terminate
     cloud_provider: AWS
-    recommendation_description: Buckets de S3 con cargas multipart incompletas de
+    recommendation_description: Buckets de S3 con cargas multipartes incompletas de
       más de 7 días de antigüedad que consumen espacio de almacenamiento.
     recommendation_prerequisites: '[Storage Lens](/integrations/amazon_s3_storage_lens/)'
     recommendation_type: Delete abandoned S3 multipart uploads
@@ -510,6 +511,14 @@ multifiltersearch:
     recommendation_prerequisites: ''
     recommendation_type: Delete Container Registry
     resource_type: Container Registry
+  - category: Configure
+    cloud_provider: Azure
+    recommendation_description: Identifica cuentas de Azure Foundry que ya utilizan
+      la caché de prompts por debajo de la tasa de aciertos objetivo y recomienda
+      mejorar la configuración de caché para reducir los costos de tokens de entrada.
+    recommendation_prerequisites: ''
+    recommendation_type: Optimize Prompt Caching
+    resource_type: Foundry Account
   - category: Terminate
     cloud_provider: Azure
     recommendation_description: Un clúster se considera no utilizado y detenido si
@@ -802,21 +811,21 @@ multifiltersearch:
     resource_type: Kubernetes Cluster
   - category: Downsize
     cloud_provider: AWS
-    recommendation_description: Los contenedores están utilizando solo una fracción
+    recommendation_description: Los containers están utilizando solo una fracción
       de su CPU o memoria solicitada.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: Azure
-    recommendation_description: Los contenedores están utilizando solo una fracción
+    recommendation_description: Los containers están utilizando solo una fracción
       de su CPU o memoria solicitada.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
     resource_type: Kubernetes Deployment
   - category: Downsize
     cloud_provider: GCP
-    recommendation_description: Los contenedores están utilizando solo una fracción
+    recommendation_description: Los containers están utilizando solo una fracción
       de su CPU o memoria solicitada.
     recommendation_prerequisites: '[Datadog Agent](/agent/)'
     recommendation_type: Downsize Deployment
@@ -856,7 +865,7 @@ multifiltersearch:
     name: Requisitos previos de la recomendación
 title: Recomendaciones de Cloud Cost
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
 [Cloud Cost Recommendations][1] proporciona recomendaciones sobre cómo reducir su gasto en la nube y en IA optimizando el uso de sus recursos en la nube y el uso de la API de IA/LLM. Datadog genera un conjunto de recomendaciones combinando sus datos de observabilidad con los datos de facturación de su proveedor subyacente para identificar recursos en la nube huérfanos, heredados o sobreaprovisionados, así como el uso no optimizado de IA.
 

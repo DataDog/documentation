@@ -29,6 +29,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-experimentation-autoresearch/"
     tag: "Blog"
     text: "How we made a SQL query optimization agent 59% more accurate using autoresearch and Agent Observability"
+  - link: "https://www.datadoghq.com/blog/from-traces-to-experiments-a-loop-for-improving-ai-agents/"
+    tag: "Blog"
+    text: "From traces to experiments: A loop for improving AI agents"
 ---
 
 {{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
