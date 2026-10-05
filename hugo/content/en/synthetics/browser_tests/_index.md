@@ -97,6 +97,13 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * {{< ui >}}Disable CORS{{< /ui >}}: Select to prevent the cross-origin resource sharing (CORS) policy from blocking your test.
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
    * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
+
+     **When capturing HTTP Payloads**, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.
+
+     Select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} for a [local][4] or [global][5] variable used by the test to hide its value in test results. If you cannot edit the variable, ask its owner or your Datadog administrator.
+
+     Captured HTTP payloads follow the [Synthetic Monitoring data retention period][6].
+
    * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
    * {{< ui >}}HTTP Authentication{{< /ui >}}: Authenticate through HTTP Basic, Digest, or NTLM with a username and a password. Your credentials are used in every step of your browser test. **Note**: Authentication through HTTP Basic can be used for websites that request user credentials through a browser system prompt.
@@ -107,6 +114,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
 [1]: /synthetics/guide/identify_synthetics_bots/?tab=apitests
 [2]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Set-Cookie
 [3]: /synthetics/browser_tests/test_results#resources
+[4]: /synthetics/browser_tests/#create-local-variables
+[5]: /synthetics/platform/settings/#global-variables
+[6]: /data_security/data_retention_periods/
    {{% /tab %}}
 
    {{% tab "Certificate" %}}
