@@ -28,24 +28,26 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 |:-----------------|:------------|
 | `full` | Sends full trace information to the database, allowing you to investigate individual traces within DBM. This is the recommended solution for most integrations. |
 | `service` | Sends the service name, allowing you to understand which services contribute to database load. |
+| `dynamic_service` | Sends the service name and a low-cardinality hash based on application attributes, such as container tags. This preserves accurate service attribution when service names change dynamically, especially in containerized environments. |
 | `disabled` | Disables propagation and does not send any information from applications. |
 
+**Note**: Like `service` mode, `dynamic_service` does not propagate trace IDs, so it does not support investigating individual traces from DBM. Use `full` mode if you need per-trace investigation.
 
 **Supported databases**
 
 {{< tabs >}}
 {{% tab "Postgres" %}}
 
-| Language | Min tracer version | Library/Framework | Mode |
-|:---------|:-------------------|:------------------|:-----|
-| **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [Npgsql](https://www.nuget.org/packages/npgsql) | `full`<br>`service` |
-| **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 3.17.0 | [postgres](https://node-postgres.com/) | `full`<br>`service` |
-| **PHP** | [dd-trace-php](https://github.com/DataDog/dd-trace-php) >= 0.86.0 | [pdo](https://www.php.net/manual/en/book.pdo.php) | `full`<br>`service` |
-| **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 1.9.0 | [psycopg2](https://www.psycopg.org/docs/index.html)<br>[psycopg](https://www.psycopg.org/psycopg3/) | `full`<br>`service` |
-| **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 2.9.0 | [asyncpg](https://pypi.org/project/asyncpg/) | `full`<br>`service` |
-| **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 1.8.0 | [pg](https://github.com/ged/ruby-pg) | `full`<br>`service` |
+| Language | Library/Framework | Supported modes (minimum tracer version) |
+|:---------|:------------------|:-----------------------------------------|
+| **Go**<br>[dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">v2</span></span> |
+| **Java**<br>[dd-trace-java](https://github.com/DataDog/dd-trace-java) | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.11.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.63.0</span></span> |
+| **.NET**<br>[dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) | [Npgsql](https://www.nuget.org/packages/npgsql) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 2.35.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 3.48.0</span></span> |
+| **Node.js**<br>[dd-trace-js](https://github.com/DataDog/dd-trace-js) | [postgres](https://node-postgres.com/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 3.17.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 5.105.0</span></span> |
+| **PHP**<br>[dd-trace-php](https://github.com/DataDog/dd-trace-php) | [pdo](https://www.php.net/manual/en/book.pdo.php) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 0.86.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.21.0</span></span> |
+| **Python**<br>[dd-trace-py](https://github.com/DataDog/dd-trace-py) | [psycopg2](https://www.psycopg.org/docs/index.html)<br>[psycopg](https://www.psycopg.org/psycopg3/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.9.0</span></span> |
+| **Python**<br>[dd-trace-py](https://github.com/DataDog/dd-trace-py) | [asyncpg](https://pypi.org/project/asyncpg/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 2.9.0</span></span> |
+| **Ruby**<br>[dd-trace-rb](https://github.com/dataDog/dd-trace-rb) | [pg](https://github.com/ged/ruby-pg) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.8.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 2.35.0</span></span> |
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for the .NET driver.
 
@@ -53,15 +55,15 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 {{% tab "MySQL" %}}
 
-| Language | Min tracer version | Library/Framework | Mode |
-|:---------|:-------------------|:------------------|:-----|
-| **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `full`<br>`service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [MySql.Data](https://www.nuget.org/packages/MySql.Data)<br>[MySqlConnector](https://www.nuget.org/packages/MySqlConnector) | `full`<br>`service` |
-| **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 3.17.0 | [mysql](https://github.com/mysqljs/mysql)<br>[mysql2](https://github.com/sidorares/node-mysql2) | `full`<br>`service` |
-| **PHP** | [dd-trace-php](https://github.com/DataDog/dd-trace-php) >= 0.86.0 | [pdo](https://www.php.net/manual/en/book.pdo.php)<br>[MySQLi](https://www.php.net/manual/en/book.mysqli.php) | `full`<br>`service` |
-| **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 2.9.0 | [aiomysql](https://pypi.org/project/aiomysql/)<br>[mysql-connector-python](https://pypi.org/project/mysql-connector-python/)<br>[mysqlclient](https://pypi.org/project/mysqlclient/)<br>[pymysql](https://github.com/PyMySQL/PyMySQL) | `full`<br>`service` |
-| **Ruby** | [dd-trace-rb](https://github.com/dataDog/dd-trace-rb) >= 1.8.0 | [mysql2](https://github.com/brianmario/mysql2) | `full`<br>`service` |
+| Language | Library/Framework | Supported modes (minimum tracer version) |
+|:---------|:------------------|:-----------------------------------------|
+| **Go**<br>[dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">v2</span></span> |
+| **Java**<br>[dd-trace-java](https://github.com/DataDog/dd-trace-java) | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.11.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.63.0</span></span> |
+| **.NET**<br>[dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) | [MySql.Data](https://www.nuget.org/packages/MySql.Data)<br>[MySqlConnector](https://www.nuget.org/packages/MySqlConnector) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 2.35.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 3.48.0</span></span> |
+| **Node.js**<br>[dd-trace-js](https://github.com/DataDog/dd-trace-js) | [mysql](https://github.com/mysqljs/mysql)<br>[mysql2](https://github.com/sidorares/node-mysql2) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 3.17.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 5.105.0</span></span> |
+| **PHP**<br>[dd-trace-php](https://github.com/DataDog/dd-trace-php) | [pdo](https://www.php.net/manual/en/book.pdo.php)<br>[MySQLi](https://www.php.net/manual/en/book.mysqli.php) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 0.86.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.21.0</span></span> |
+| **Python**<br>[dd-trace-py](https://github.com/DataDog/dd-trace-py) | [aiomysql](https://pypi.org/project/aiomysql/)<br>[mysql-connector-python](https://pypi.org/project/mysql-connector-python/)<br>[mysqlclient](https://pypi.org/project/mysqlclient/)<br>[pymysql](https://github.com/PyMySQL/PyMySQL) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 2.9.0</span></span> |
+| **Ruby**<br>[dd-trace-rb](https://github.com/dataDog/dd-trace-rb) | [mysql2](https://github.com/brianmario/mysql2) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.8.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 2.35.0</span></span> |
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for .NET drivers.
 
@@ -71,11 +73,11 @@ Datadog SDK integrations support a *Propagation Mode*, which controls the amount
 
 {{% tab "SQL Server" %}}
 
-| Language | Min tracer version | Library/Framework | Mode |
-|:---------|:-------------------|:------------------|:-----|
-| **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
-| **.NET** | [dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) >= 2.35.0 | [System.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server)<br>[Microsoft.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace) | `full`<br>`service` |
+| Language | Library/Framework | Supported modes (minimum tracer version) |
+|:---------|:------------------|:-----------------------------------------|
+| **Go**<br>[dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | <span class="d-flex justify-content-between" style="gap: 1rem;">`service`<span class="text-nowrap">v2</span></span> |
+| **Java**<br>[dd-trace-java](https://github.com/DataDog/dd-trace-java) | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.11.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.63.0</span></span> |
+| **.NET**<br>[dd-trace-dotnet](https://github.com/DataDog/dd-trace-dotnet) | [System.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/microsoft-ado-net-sql-server)<br>[Microsoft.Data.SqlClient](https://learn.microsoft.com/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 2.35.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 3.48.0</span></span> |
 
 **Note**: [CommandType.StoredProcedure](https://learn.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand.commandtype?view=dotnet-plat-ext-7.0#remarks:~:text=[…]%20should%20set) is not supported for .NET drivers.
 
@@ -93,10 +95,10 @@ For `full` mode with Java and .NET:
 
 {{% tab "Oracle" %}}
 
-| Language | Min tracer version | Library/Framework | Mode |
-|:---------|:-------------------|:------------------|:-----|
-| **Go** | [dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | `service` |
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.11.0 | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | `full`<br>`service` |
+| Language | Library/Framework | Supported modes (minimum tracer version) |
+|:---------|:------------------|:-----------------------------------------|
+| **Go**<br>[dd-trace-go v2](https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2) | [database/sql](https://pkg.go.dev/database/sql)<br>[sqlx](https://pkg.go.dev/github.com/jmoiron/sqlx) | <span class="d-flex justify-content-between" style="gap: 1rem;">`service`<span class="text-nowrap">v2</span></span> |
+| **Java**<br>[dd-trace-java](https://github.com/DataDog/dd-trace-java) | [jdbc](https://docs.oracle.com/javase/8/docs/technotes/guides/jdbc/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.11.0</span></span><span class="d-flex justify-content-between" style="gap: 1rem; border-top: 1px dotted #d9dce3; margin-top: 0.25rem; padding-top: 0.25rem;">`dynamic_service`<span class="text-nowrap">&gt;= 1.63.0</span></span> |
 
 For `full` mode with Java:
 - The instrumentation overwrites `V$SESSION.ACTION`.
@@ -106,11 +108,11 @@ For `full` mode with Java:
 
 {{% tab "MongoDB" %}}
 
-| Language | Min tracer version | Library/Framework | Mode |
-|:---------|:-------------------|:------------------|:-----|
-| **Java** | [dd-trace-java](https://github.com/DataDog/dd-trace-java) >= 1.58.0 | [mongo-java-driver](https://www.mongodb.com/docs/drivers/java/sync/current/) v3.8+ | `full`<br>`service` |
-| **Node.js** | [dd-trace-js](https://github.com/DataDog/dd-trace-js) >= 5.80.0 | [mongodb](https://github.com/mongodb/node-mongodb-native) | `full`<br>`service` |
-| **Python** | [dd-trace-py](https://github.com/DataDog/dd-trace-py) >= 3.5.0 | [pymongo](https://pymongo.readthedocs.io/en/stable/) | `full`<br>`service` |
+| Language | Library/Framework | Supported modes (minimum tracer version) |
+|:---------|:------------------|:-----------------------------------------|
+| **Java**<br>[dd-trace-java](https://github.com/DataDog/dd-trace-java) | [mongo-java-driver](https://www.mongodb.com/docs/drivers/java/sync/current/) v3.8+ | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 1.58.0</span></span> |
+| **Node.js**<br>[dd-trace-js](https://github.com/DataDog/dd-trace-js) | [mongodb](https://github.com/mongodb/node-mongodb-native) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 5.80.0</span></span> |
+| **Python**<br>[dd-trace-py](https://github.com/DataDog/dd-trace-py) | [pymongo](https://pymongo.readthedocs.io/en/stable/) | <span class="d-flex justify-content-between" style="gap: 1rem;"><span>`full`, `service`</span><span class="text-nowrap">&gt;= 3.5.0</span></span> |
 
 {{% /tab %}}
 
