@@ -122,6 +122,19 @@ Meeting summaries are generated for Microsoft Teams meetings attached to an inci
 
 When the meeting ends, a final post-meeting summary is posted to the same locations.
 
+#### Approving, editing, or dismissing a summary
+
+After a summary is posted, you can approve it, edit its text, or dismiss it from the timeline. You can take these actions from the incident timeline in Datadog, or from the incident chat channel if the summary was broadcast there.
+
+To review a summary from the incident timeline:
+
+1. Open the incident in Datadog and find the **Meeting Summary** entry on the timeline.
+2. Click the checkmark icon to approve the summary, the pencil icon to edit its text, or the dismiss icon to remove it from the timeline.
+
+Approving or editing a summary records who took the action. After a summary is edited, it can't be approved — the edited version takes precedence. Dismissing a summary removes it from the timeline and can't be undone.
+
+Reviewing a summary requires permission to edit the incident and, for organizations with seat-based billing, an [Incident Management or Incident Response seat][7].
+
 #### Re-inviting the transcriber
 
 If the Datadog Transcriber leaves a meeting, re-invite it to the same linked meeting to resume summarization:
