@@ -74,7 +74,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -118,7 +118,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -237,7 +237,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -281,7 +281,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -345,7 +345,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -389,7 +389,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -535,7 +535,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -579,7 +579,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -712,7 +712,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -756,7 +756,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -868,7 +868,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -912,7 +912,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1045,7 +1045,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1089,7 +1089,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1208,7 +1208,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1252,7 +1252,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1358,7 +1358,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1402,7 +1402,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1508,7 +1508,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1552,7 +1552,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1585,14 +1585,10 @@ build:
   "finding_type": "sensitive_data",
   "first_seen_at": 1738575592659,
   "is_in_security_inbox": false,
-  "last_detected_at": 1738624280889,
   "last_seen_at": 1738624280889,
   "metadata": {
     "schema_version": "2"
   },
-  "related_services": [
-    "checkout-service"
-  ],
   "resource_id": "service:checkout-service",
   "resource_name": "checkout-service",
   "resource_type": "logs",
@@ -1626,7 +1622,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1670,7 +1666,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1685,8 +1681,7 @@ build:
     }
   },
   "tags": [
-    "origin:logs",
-    "source:sensitive_data_scanner"
+    "origin:logs"
   ]
 }
 ```
@@ -1776,7 +1771,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1820,7 +1815,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
@@ -1899,7 +1894,7 @@ build:
     "auto_closed_at": 1738575600859,
     "automations": {
       "rule_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-      "rule_name": "mute misconfigs with free text query",
+      "rule_name": "Mute findings on test environment",
       "rule_type": "mute"
     },
     "due_date": {
@@ -1943,7 +1938,7 @@ build:
         "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
         "name": "Alice"
       },
-      "reason": "Resource deleted"
+      "reason": "risk_accepted"
     },
     "triage": {
       "assignee": {
