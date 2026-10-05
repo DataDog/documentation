@@ -493,7 +493,7 @@ Tools for [Work Management][38], including creating, searching, and updating wor
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. The <code>link_jira_issue_to_datadog_case</code> and <code>get_datadog_case_project</code> tools are in Preview and are not included in <code>toolsets=all</code>. To use them, request <code>cases</code> by name. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. The <code>link_jira_issue_to_datadog_case</code> and <code>get_datadog_case_project</code> tools are in Preview and are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
