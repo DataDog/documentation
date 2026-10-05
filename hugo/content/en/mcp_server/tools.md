@@ -1319,7 +1319,7 @@ Copies an existing form, including its latest definition, into a new form with a
 
 ## Governance
 
-Tools for [Governance Console][79], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
+Tools for [Governance Console][84], including governance insights, [controls][80], detections, mitigations, limits, best practices, and tag rules.
 
 <div class="alert alert-info">The <code>governance</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Contact <a href="/help">Datadog support</a> to request access, then add <code>governance</code> to the <code>toolsets</code> parameter, for example, <code>?toolsets=core,governance</code>.</div>
 
@@ -1426,7 +1426,7 @@ Creates a tag rule. Rules created with this tool only flag non-compliant telemet
 ### `update_tag_rule`
 *Toolset: **governance***\
 *Permissions Required: `Telemetry Rules Create` and (`Telemetry Rules Read` or `Metrics Read`)*\
-Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][79] instead. The tool requires explicit confirmation before it applies changes.
+Updates the fields you specify on a tag rule and leaves other fields unchanged. To change the source of a rule, delete the rule and create another one. You cannot update rules that block telemetry with this tool; use [Governance Console][84] instead. The tool requires explicit confirmation before it applies changes.
 
 - Enable tag rule `abc123`.
 - Add `qa` to the allowed values for tag rule `abc123`.
@@ -1693,7 +1693,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Networks
 
-Tools for [Cloud Network Monitoring][31] analysis and [Network Device Monitoring][32].
+Tools for [Cloud Network Monitoring][31] analysis, [Network Device Monitoring][32], and [Network Path][83].
 
 ### `analyze_cloud_network_monitoring`
 *Toolset: **networks***\
@@ -1728,6 +1728,40 @@ Retrieves all network interfaces for a specific device.
 
 - Show me all interfaces on device `device:abc123`.
 - List the interface statuses for my core router.
+
+### `get_network_path_test_runs`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Searches and retrieves [Network Path][83] test runs with hop-by-hop traceroute data, including a link to the path in the Network Path view.
+
+- Show me the latest Network Path test runs to `api.example.com`.
+- Which hops are adding the most latency on the path from `web-01` to `8.8.8.8`?
+- Find Network Path test runs with packet loss in the last hour.
+
+### `get_autonomous_system_status`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Checks the health of an Autonomous System (AS) using [Network Path][83] data, comparing latency, packet loss, and visibility against a 7-day baseline.
+
+- Is AS 15169 experiencing elevated latency compared to last week?
+- Check the health of the ISP that carries traffic to our `us-east-1` endpoints.
+
+### `list_autonomous_system_statuses`
+*Toolset: **networks***\
+*Permissions Required: `Network Path Data Read` and `Built-in Features`*\
+Lists degraded Autonomous Systems (ASes) using [Network Path][83] data, without requiring a specific AS number. An AS is degraded when its latency, packet loss, or visibility is worse than its own 7-day baseline. Results cover the highest-traffic ASes for the selected time frame, not every AS in your organization. To check one specific AS, use `get_autonomous_system_status`.
+
+- Are there any Autonomous System issues in the last hour?
+- Which ASes are degraded in the last 4 hours?
+- Show me the top three degraded ASes with packet loss.
+
+### `run_network_path`
+*Toolset: **networks***\
+*Permissions Required: `Connections Resolve` and `Private Action Runner Contribute`*\
+Runs a live [Network Path][83] traceroute test from a Datadog Agent host to a destination, through the Private Action Runner (PAR). Supports UDP (default), TCP, and ICMP. For TCP, specify the destination port. To retrieve historical results without running a new test, use `get_network_path_test_runs`.
+
+- Run a traceroute from host `prod-web-01` to `api.example.com`.
+- Run a TCP traceroute on port 443 from `db-replica-3` to `10.0.4.12`.
 
 ## Onboarding
 
@@ -2168,7 +2202,7 @@ Permanently deletes a RUM retention filter by ID. Confirm the deletion before ap
 
 ## Security
 
-Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], and analyzing [security findings][54].
+Tools for code security scanning, analyzing, searching, and triaging [security signals][53], investigating [IoC Explorer][67] indicators, managing [detection rules][60] and [suppressions][61], analyzing [security findings][54], and authoring [IaC custom rules][85].
 
 ### `datadog_secrets_scan`
 *Toolset: **security***\
@@ -2538,6 +2572,65 @@ Retrieves the organization-wide AAP blocking and denylist enforcement settings.
 - Is AAP blocking enabled for the organization?
 - Is the AAP denylist enforced?
 - Show me the AAP blocking configuration.
+
+### `get_datadog_security_iac_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Retrieves one Infrastructure as Code (IaC) [custom rule][85] by ID or lists the custom rules in your organization. Supports filtering by platform, provider, published state, or a text query. Listing returns the full custom ruleset without pagination.
+
+- List my published IaC custom rules for Terraform on AWS.
+- Get IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `get_datadog_security_iac_custom_rules_schema`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read`*\
+Returns the schema for IaC custom rules: allowed platforms, categories, severities, the rule ID format, and the fields each write tool accepts. Call this tool before generating, validating, or creating a rule.
+
+- What platforms and categories are supported for IaC custom rules?
+
+### `generate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Generates a Rego IaC custom rule from a natural-language description and validates it with the scanner. Does not save the rule.
+
+- Generate an IaC custom rule that flags S3 buckets without versioning enabled.
+- Draft a Terraform rule that requires encryption on GCP storage buckets.
+
+### `validate_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Checks that the Rego for an IaC custom rule compiles. When a sample file is provided, also evaluates the rule against it and requires at least one finding. Does not save the rule.
+
+- Validate this Rego rule against my sample Terraform file.
+
+### `create_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Creates a draft IaC custom rule. Rules are always created unpublished. To activate a rule for scans, publish it with `publish_datadog_security_iac_custom_rule`.
+
+- Create a draft IaC custom rule named "S3 bucket versioning required" from this Rego.
+
+### `update_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Creates a new revision of a draft or published IaC custom rule. Omitted fields keep their current values, including the published state. Can also publish or unpublish the rule.
+
+- Change the severity of rule "custom-terraform-aws-open-bucket" to high.
+- Unpublish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `publish_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Read` and `Vulnerability Management Write`*\
+Publishes a draft IaC custom rule so it becomes active for scans. To unpublish it later, use `update_datadog_security_iac_custom_rule`.
+
+- Publish IaC custom rule "custom-terraform-aws-open-bucket".
+
+### `delete_datadog_security_iac_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Vulnerability Management Write`*\
+Permanently deletes an IaC custom rule by ID. This action cannot be undone.
+
+- Delete IaC custom rule "custom-terraform-aws-open-bucket".
 
 ## Session Replay
 
@@ -3090,10 +3183,12 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [77]: /mcp_server/code_execution/
 [78]: /tracing/live_debugger/
 [79]: /watchdog/
-[79]: /account_management/governance_console/
 [80]: /account_management/governance_console/controls/
 [81]: /tracing/services/service_remapping_rules/
 [82]: /tracing/guide/resource_based_sampling/
+[83]: /network_monitoring/network_path/
+[84]: /account_management/governance_console/
+[85]: /security/code_security/iac_security/custom_rules/
 
 ## Further reading
 
