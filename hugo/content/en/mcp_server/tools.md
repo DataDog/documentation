@@ -1075,7 +1075,7 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 ### `get_datadog_error_tracking_analytics`
 *Toolset: **error-tracking***\
 *Permissions Required: `Error Tracking Read`*\
-Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day is a snapshot of Issue states at the end of that day.
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
 
 - Is the error backlog for the payments service growing or shrinking over the last 30 days?
 - How many new Error Tracking Issues were introduced compared to resolved last week?
