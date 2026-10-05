@@ -15,7 +15,7 @@ further_reading:
   text: "App Builder"
 - link: "/actions/app_builder/embedded_apps/"
   tag: "Documentation"
-  text: "Embedded Apps"
+  text: "Embed App Builder Apps"
 - link: "/actions/app_builder/access_and_auth/"
   tag: "Documentation"
   text: "Access and Authentication"
@@ -221,7 +221,7 @@ After a successful upload, the build output displays a URL where your app is acc
 
 ## Publish and manage your apps
 
-After you upload an app, it appears in your [App Builder][12] app list. From App Builder, you can:
+After you upload an app, it appears in your [App list][12]. From the App list, you can:
 
 - [Publish your app][13]
 - [Edit the app name and description][13]
@@ -229,7 +229,7 @@ After you upload an app, it appears in your [App Builder][12] app list. From App
 - [Embed the app][3] in dashboards, notebooks, and the Internal Developer Portal
 
 <div class="alert alert-danger">
-The following App Builder features are not available for locally-built apps:
+The following features are not available for locally-built apps:
 <ul>
 <li>UI editing with drag-and-drop components</li>
 <li>Variables, events, and expressions managed in the App Builder UI</li>
@@ -355,7 +355,7 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 
 [1]: /actions/app_builder/access_and_auth/
 [2]: /actions/app_builder/
-[3]: /actions/app_builder/embedded_apps/
+[3]: /actions/datadog_apps/embed_apps/
 [4]: /actions/actions_catalog/
 [5]: /account_management/api-app-keys/#actions-api-access
 [6]: /account_management/api-app-keys/

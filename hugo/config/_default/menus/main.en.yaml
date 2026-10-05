@@ -3055,7 +3055,7 @@ menu:
     - name: Embed Apps
       url: actions/datadog_apps/embed_apps/
       parent: datadog_apps
-      identifier: datadog_apps_embedß_apps
+      identifier: datadog_apps_embed_apps
       weight: 1
     - name: App Builder
       url: actions/app_builder/
@@ -3118,7 +3118,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embed App Builder Apps
+    - name: Embed Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps

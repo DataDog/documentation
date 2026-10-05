@@ -1,16 +1,16 @@
 ---
 title: Embed Apps
-description: Embed a published Datadog App in dashboards, notebooks, the Internal Developer Portal homepage, and the Service Catalog side panel.
+description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, and the Service Catalog side panel.
 further_reading:
 - link: "/actions/datadog_apps/"
   tag: "Documentation"
   text: "Datadog Apps"
 - link: "/actions/app_builder/embedded_apps/"
   tag: "Documentation"
-  text: "Embed App Builder apps in Datadog"
+  text: "Embed App Builder Apps"
 - link: "https://www.npmjs.com/package/@datadog/apps-frontend"
   tag: "External Site"
-  text: "@datadog/apps-frontend package"
+  text: "@datadog/apps-frontend package on npm"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/apps/" btn_hidden="false" header="Join the Preview!">}}
@@ -19,32 +19,66 @@ Datadog Apps is in Preview. Use this form to request access.
 
 ## Overview
 
-Embed [Datadog Apps][2] in other Datadog products to place operational tools directly in the Datadog surfaces where users investigate issues and take action. An embedded app can display its existing experience or respond to live context supplied by its host, such as a dashboard's time range and template variables.
+Embed [Datadog Apps][1] in other Datadog products to place operational tools directly in the surfaces where users investigate issues and take action. An embedded app can display its existing experience or respond to live context supplied by its host, such as a dashboard's time range and template variables.
 
 ## Prerequisites
 
-- A Datadog App that has been built, uploaded, and published
+- A built, uploaded, and published Datadog app
 - Permission to use the app and edit the destination surface
 
-For information about building, uploading, and publishing an app, see [Datadog Apps][2].
+For information about building, uploading, and publishing an app, see [Datadog Apps][1].
 
 ## Embed an app
 
-<div class="alert alert-info">An app can only be embedded through the Datadog site, AI coding agents cannot embed an app.</div>
+<div class="alert alert-info">You can only embed an app through Datadog. AI coding agents cannot embed apps.</div>
 
-After you upload and publish a Datadog App, you can add it to a supported Datadog surface without changing the app. Optionally, [configure the app](#customize-the-embedded-experience) to respond to its host's context, theme, or shared-link state.
+After you upload and publish an app, you can add it to a supported Datadog surface without changing the app.
 
-To embed an app in Datadog:
+You can embed an app from the app itself, or from the surface where you want it to appear.
 
-1. Open the dashboard, notebook, Internal Developer Portal homepage, or Service Catalog surface where you want the app to appear.
-1. Choose the option to add an app.
-1. Select the published app.
-1. Configure its placement and size, if applicable.
-1. Save your changes and [verify the app](#verify-the-app) to confirm that it loads and behaves as expected.
+### From the app
+
+1. In the [App list][2], open the published app you want to embed.
+1. At the top of the page, click **+ Add to Dashboard**, then select a destination type from the menu.
+1. Select the destination, then click **Save**.
+
+### From the destination
+
+{{< tabs >}}
+{{% tab "Dashboard" %}}
+
+1. Open the dashboard you want to add the app to.
+1. In the widget tray, find the **Apps** widget under **Actions and Remediations**, and drag it onto the dashboard.
+1. In the editor, choose the app from the **Select app** dropdown. To limit the list to apps you own, enable **My Apps Only**.
+1. Resize the widget, then save the dashboard.
+
+{{% /tab %}}
+{{% tab "Notebook" %}}
+
+1. Open the notebook you want to add the app to.
+1. Add a cell and select the **Apps** cell type.
+1. Choose the app from the dropdown.
+1. Save the notebook.
+
+The **Apps** cell has no per-cell time control. It reads the notebook's time range through the `datadogNotebook` input.
+
+{{% /tab %}}
+{{% tab "Service Catalog" %}}
+
+1. Navigate to [Service Catalog][1] and select a service.
+1. In the service's side panel, select the **+ Add App** tab.
+1. Choose the app from the dropdown. To limit the list to apps you own, enable **My Apps Only**.
+
+[1]: https://app.datadoghq.com/services
+
+{{% /tab %}}
+{{< /tabs >}}
+
+After you embed the app, [verify it](#verify-the-app). Optionally, [configure the app](#customize-the-embedded-experience) to respond to its host's context, theme, or shared-link state. An embedded app displays the most recently published version, so publish your changes before embedding.
 
 ## Customize the embedded experience
 
-If you haven't already, install the  [`@datadog/apps-frontend`][1] package in the app:
+If you haven't already, install the [`@datadog/apps-frontend`][3] package in the app:
 
 ```shell
 npm install @datadog/apps-frontend
@@ -68,7 +102,7 @@ The standard Datadog Apps scaffold includes this provider by default. Every `@da
 
 ### Read host inputs
 
-Host inputs are values and functions supplied by the Datadog product containing the app. For example, a dashboard can provide its current time range and template variables, while a service side panel can provide the service it is displaying.
+Host inputs are values and functions supplied by the Datadog product containing the app. For example, a dashboard can provide its current time range and template variables, while the Service Catalog side panel can provide the service it is displaying.
 
 Host values update automatically when the surrounding product context changes.
 
@@ -85,7 +119,7 @@ import {
 } from '@datadog/apps-frontend/inputs/schema';
 ```
 
-For the complete TypeScript definitions, see the [`@datadog/apps-frontend` package][3].
+For the complete TypeScript definitions, see the [`@datadog/apps-frontend` source on npm][4].
 
 #### Input states
 
@@ -103,7 +137,7 @@ function PanelHeader() {
     case 'pending':
       return <Spinner />;
     case 'unavailable':
-      return <p>Open this app from a service panel.</p>;
+      return <p>Open this app from a Service Catalog side panel.</p>;
     case 'failed':
       return <p>{panel.error.message}</p>;
     case 'ready':
@@ -240,7 +274,7 @@ const newPosition = await idp.fields.move({ delta: 1 });
 ```
 
 {{% /tab %}}
-{{% tab "Service panel" %}}
+{{% tab "Service Catalog side panel" %}}
 
 Use `datadogServicePanel` to identify the service displayed in the Service Catalog side panel.
 
@@ -262,25 +296,27 @@ Use `service` to scope the app's content to the selected service. Call `close()`
 {{% /tab %}}
 {{< /tabs >}}
 
-Do not assume that an input available on one product surface will be available on another. Request only the context the app needs and provide a useful experience when that context is absent.
+Do not assume that an input available on one product surface is available on another. Request only the context the app needs and provide a useful experience when that context is absent.
 
 ## Preserve state in shared links
 
-`DatadogAppProvider` preserves the app's query string and URL fragment in shared Datadog links. Store shareable state—such as selected services, filters, records, or in-app routes—in the URL. When another user opens the shared link, the embedded app can restore the same state. Deep links to a specific app state work without additional configuration, as long as the app remains wrapped in `DatadogAppProvider`.
+`DatadogAppProvider` preserves the app's query string and URL fragment in shared Datadog links. Store shareable state—such as selected services, filters, records, or in-app routes—in the URL. When another user opens the shared link, the embedded app can restore the same state. [Deep links][5] to a specific app state work without additional configuration, as long as the app remains wrapped in `DatadogAppProvider`.
 
 ## Verify the app
 
-After embedding the app, verify that it:
+After you embed the app, check the following on the surface where you embedded it:
 
-- Loads for its intended users
-- Works at the configured size
-- Responds to the expected host context
-- Preserves its state in shared links
+- **Access**: Open the surface as a user who has permission to use the app but did not embed it. The app renders instead of a permission error.
+- **Size**: Resize the app to the smallest size you expect users to configure. Content stays readable, without overflow or clipping.
+- **Host context**: Change the host's context, such as a dashboard's time range or a template variable value, and confirm that the app updates. If the app renders its `unavailable` fallback instead, it is reading an input that the surface does not provide.
+- **Shared links**: Change the state inside the app, copy the Datadog share link, and open it in a new browser session. The app restores the same state.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://www.npmjs.com/package/@datadog/apps-frontend
-[2]: /actions/datadog_apps/
-[3]: https://www.npmjs.com/package/@datadog/apps-frontend?activeTab=code
+[1]: /actions/datadog_apps/
+[2]: https://app.datadoghq.com/app-builder/apps/list
+[3]: https://www.npmjs.com/package/@datadog/apps-frontend
+[4]: https://www.npmjs.com/package/@datadog/apps-frontend?activeTab=code
+[5]: /actions/datadog_apps/#share-embedded-app-state-with-deep-links
