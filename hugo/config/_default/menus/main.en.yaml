@@ -5410,20 +5410,20 @@ menu:
       parent: dbm
       identifier: dbm_bits_database_optimization
       weight: 22
-    - name: Troubleshooting
-      url: database_monitoring/troubleshooting/
-      parent: dbm
-      identifier: dbm_troubleshooting
-      weight: 23
-    - name: Guides
-      url: database_monitoring/guide/
-      parent: dbm
-      identifier: dbm_guides
-      weight: 24
     - name: Database Monitoring Workbench
       url: database_monitoring/database_monitoring_workbench/
       parent: dbm
       identifier: dbm_workbench
+      weight: 23
+    - name: Troubleshooting
+      url: database_monitoring/troubleshooting/
+      parent: dbm
+      identifier: dbm_troubleshooting
+      weight: 24
+    - name: Guides
+      url: database_monitoring/guide/
+      parent: dbm
+      identifier: dbm_guides
       weight: 25
     - name: Data Streams Monitoring
       url: data_streams/

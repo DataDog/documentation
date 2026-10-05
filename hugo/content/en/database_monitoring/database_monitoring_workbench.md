@@ -22,7 +22,7 @@ Database Monitoring Workbench is in preview. Use this form to request access.
 
 ## Overview
 
-Database Monitoring Workbench is an ephemeral, production-like Postgres database that you can use to develop and test changes. It is built from the schema and statistics that Database Monitoring collects, so it matches your production tables, indexes, row counts, and major version. Datadog never copies or transmits the data in your tables. Workbench is automatically populated with synthetic data generated from the column and table statistics that Database Monitoring collects. If you prefer, you can manually populate it with your own data.
+Database Monitoring Workbench is an ephemeral, production-like Postgres database that you can use to develop and test changes. It is built from the schema and statistics that Database Monitoring collects, so it matches the shape of your production tables, indexes, row counts, and major version. Datadog never copies or transmits the data in your tables. Workbench is automatically populated with synthetic data generated from the column and table statistics that Database Monitoring collects. If you prefer, you can manually populate it with your own data.
 
 This page explains how to:
 
@@ -110,7 +110,7 @@ The request returns `202 Accepted` with the instance ID, its status, and a Postg
 
 Creating an instance is asynchronous. To check readiness, send `GET /api/unstable/databases/workbench/session/{id}` until `status` is `ready`. The response also includes `expires_at`.
 
-Instances expire after `ttl_seconds` seconds, 1,800 (30 minutes) by default. You cannot set the TTL in the request.
+Instances expire after the number of seconds set in `ttl_seconds`, which is 1,800 seconds (30 minutes) by default. You cannot set the TTL in the request.
 
 To delete an instance, send `DELETE /api/unstable/databases/workbench/session/{id}`. A successful request returns `204`.
 
@@ -123,11 +123,11 @@ Use the connection string from the MCP server or the API with any Postgres clien
 psql "postgres://workbench:<TOKEN>@<WORKBENCH_HOST>:5432/bench?sslmode=require"
 {{< /code-block >}}
 
-The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use the Workbench](#how-to-use-the-workbench). When the instance expires or you delete it, open connections close and in-flight queries can fail.
+The instance is writable, so you can create an index, re-run `EXPLAIN`, and compare the plans. For examples, see [How to use Workbench](#how-to-use-workbench). When the instance expires or you delete it, open connections close and in-flight queries can fail.
 
 By default, Workbench populates the instance with synthetic data. To use your own data instead, create the instance with `"populate": false` in the API request. Then load your data with `INSERT`, `COPY FROM STDIN`, or the `psql` `\copy` command, and run `ANALYZE` afterward. Instance resources and the TTL limit how much data you can load.
 
-## How to use the Workbench
+## How to use Workbench
 
 Create an instance with the [MCP server](#connecting-with-the-mcp-server) or the [API](#connecting-with-the-api), and connect to it with a [SQL client](#connecting-with-a-sql-client). Then use it for the tasks in this section.
 
@@ -171,7 +171,7 @@ EXPLAIN SELECT id, total FROM orders WHERE status = 'pending' ORDER BY created_a
 --  Seq Scan on orders  (cost=0.00..14200.00 rows=312 width=20)
 {{< /code-block >}}
 
-A query whose plan falls back to a sequential scan depends on the index. Bring those plans to your review instead of relying on "the index looks unused in the last 30 days." To test a new index instead, create it in the instance and re-plan your queries.
+A query whose plan falls back to a sequential scan depends on the index. Bring those plans to your review instead of relying on subjective, untested assumptions. To test a new index instead, create it in the instance and re-plan your queries.
 
 ### Test a migration before you deploy it
 
@@ -182,7 +182,7 @@ Migration problems often depend on table size and concurrent traffic, so a local
 
 To test a migration, run it against the instance with your migration tool, using the instance's connection string. While the DDL runs, query `pg_locks` to see which locks it takes. Afterward, re-plan your important queries to see how the new schema affects them.
 
-The migration does not take the same time as in production, but it produces the same structural outcome.
+A test migration takes less time than production, but produces the same structural outcome.
 
 ### Catch plan regressions in CI
 
@@ -201,7 +201,7 @@ Examples of invariants:
 
 - No new sequential scan on a large table.
 - No plan-shape change on a query in your critical path.
-- No index dropped that something still uses.
+- No index dropped that is still in use.
 
 The following script runs this flow in a CI job. It requires `curl`, `jq`, and `psql`, and these environment variables:
 
@@ -258,7 +258,7 @@ Workbench answers questions about schema, query plans, and relative cost. It doe
 - **Views, functions, triggers, roles, and grants are not reconstructed.** Changes that depend on them do not reproduce accurately.
 - **Instances are temporary.** Instances expire after 30 minutes by default, so re-create any that you need to keep. Schemas over a certain table count are not fully materialized.
 
-Use Workbench to check structure, query plans, and order-of-magnitude effects. It does not cover the rest.
+Use Workbench to check structure, query plans, and order-of-magnitude effects. It does not cover other effects.
 
 ## Further reading
 
