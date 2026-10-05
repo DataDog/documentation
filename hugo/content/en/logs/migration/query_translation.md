@@ -23,7 +23,7 @@ Query Translation, part of the Migration App, translates Splunk Processing Langu
 | Tool | Use case |
 |------|-----------|
 | [Single Translation][2] | Translate a single SPL query and see the Datadog equivalent with an explanation of the translation. |
-| [Bulk Migration][3] | Import bulk export files of Splunk alerts and dashboards, translate the queries to Datadog log search syntax, review the results, and create the corresponding Datadog monitors and dashboards. |
+| [Bulk Migration][3] | Import CSV exports of Splunk alerts and dashboards, and translate their queries to log search syntax. Review the results, then create the matching Datadog monitors and dashboards. |
 
 Query Translation supports only Splunk as a source platform. It parses and converts queries deterministically with translation libraries, not a large language model. Each query is translated into [log search syntax][1] when possible for use with the Log Explorer, log monitors, and dashboard widgets. Analytically complex queries that log search syntax cannot express fall back to [DDSQL][4].
 
@@ -43,10 +43,10 @@ Use Single Translation as a sandbox for SPL. It is designed for exploring transl
 
 The page returns:
 
-- **Translated query**: the Datadog query, in log search syntax or DDSQL, shown in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart.
-- {{< ui >}}Translation preview{{< /ui >}}: the data matching the translated query, over a time range you specify. Click {{< ui >}}View in Log Explorer{{< /ui >}} to continue in the [Log Explorer][6].
-- {{< ui >}}Translated SPL{{< /ui >}}: your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
-- {{< ui >}}How did we translate?{{< /ui >}}: an explanation of which SPL command maps to which part of the Datadog query.
+- **Translated query**: The Datadog query, in log search syntax or DDSQL, shown in the search bar above the {{< ui >}}Translation preview{{< /ui >}} chart.
+- {{< ui >}}Translation preview{{< /ui >}}: The data matching the translated query, over a time range you specify. Click {{< ui >}}View in Log Explorer{{< /ui >}} to continue in the [Log Explorer][6].
+- {{< ui >}}Translated SPL{{< /ui >}}: Your original SPL, annotated with anything the translator changed or could not translate, such as stripped indexes or unsupported commands.
+- {{< ui >}}How did we translate?{{< /ui >}}: An explanation of which SPL command maps to which part of the Datadog query.
 
 ## Migrate assets in bulk
 
@@ -156,13 +156,13 @@ Monitors and dashboards with the Skipped status cannot be published, and a trans
 Translation converts SPL to Datadog log search syntax but does not guarantee identical results. These gaps account for most of the differences:
 
 Logs have a different shape in each platform
-: Pipelines, processors, and log-shipping agents differ between the two platforms. As a result, the attributes available on a log differ. The translator preserves attribute names as written, except when mapping [standard attributes][9]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. Add [processors][10] to your Datadog pipelines that extract or remap the attribute, such as a Grok parser that parses it from the message or a remapper that renames an existing attribute.
+: Pipelines, processors, and log-shipping agents differ between the two platforms. As a result, the attributes available on a log differ. The translator preserves attribute names as written, except when mapping [standard attributes][9]. If a Datadog pipeline does not produce an attribute the Splunk query relies on, the translated query returns no results. To fix this, add [processors][10] to your Datadog pipelines that produce the attribute. For example, use a Grok parser to extract it from the message, or a remapper to rename an existing attribute.
 
 Indexes do not match
 : Splunk index names rarely map one-to-one to Datadog [log indexes][11]. An index filter that does not resolve results in a query error. The translator strips index terms that have no Datadog equivalent and flags them as a warning. Review the warning and scope the query with tags or attributes instead.
 
 There is not enough sample data
-: A query that runs against an index with little matching data returns an empty preview, which makes the translation hard to verify. Confirm that relevant logs are in Datadog before you assess a translation.
+: A query that runs against an index with little matching data returns an empty preview. An empty preview makes the translation hard to verify. Confirm that relevant logs are in Datadog before you assess a translation.
 
 The SPL command is not supported
 : Query Translation supports a wide range of SPL commands. When a command does not have a Datadog equivalent, the translator returns as much of the query as it can and flags the unsupported command.
