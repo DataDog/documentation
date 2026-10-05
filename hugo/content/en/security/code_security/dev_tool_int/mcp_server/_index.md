@@ -320,7 +320,7 @@ The local server scans the code on disk. To query Code Security findings Datadog
 2. When you connect, add `security` to the `toolsets` parameter.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-For your selected [Datadog site][12] ({{< region-param key="dd_site_name" >}}):
+For your selected [Datadog site](/getting_started/site/) ({{< region-param key="dd_site_name" >}}):
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=core,security</code></pre>
 {{< /site-region >}}
