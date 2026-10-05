@@ -110,4 +110,36 @@ describe("ApiCodeExample (astro)", () => {
     expect(html).toContain("us.example.com");
     expect(html).toContain("eu.example.com");
   });
+
+  it("renders run instructions with per-region commands", async () => {
+    const html = await renderComponent({
+      examples: [
+        {
+          language: "go",
+          label: "Go",
+          entries: [{ description: "Get", code: "package main", syntax: "go" }],
+          instructions: {
+            exampleFile: "main.go",
+            runCommandByRegion: {
+              us: 'DD_SITE="datadoghq.com" go run "main.go"',
+              eu: 'DD_SITE="datadoghq.eu" go run "main.go"',
+            },
+          },
+        },
+      ],
+    });
+
+    expect(html).toMatch(
+      /api-code-example__instructions-heading[^>]*>Instructions</,
+    );
+    expect(html).toContain('href="/api/latest/?code-lang=go"');
+    expect(html).toContain("<code>main.go</code>");
+    expect(html).toMatch(/data-region="us"[\s\S]*datadoghq\.com/);
+    expect(html).toMatch(/data-region="eu"[\s\S]*datadoghq\.eu/);
+  });
+
+  it("omits run instructions when a set has none", async () => {
+    const html = await renderComponent({ examples });
+    expect(html).not.toContain("api-code-example__instructions");
+  });
 });

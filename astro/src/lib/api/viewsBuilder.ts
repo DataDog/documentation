@@ -38,9 +38,13 @@ import {
   extractPermissions,
   extractOauthScopes,
   buildCurlByRegion,
+  buildRunCommandByRegion,
 } from "./operationBuilder";
 import { paramsToFields } from "./refResolver";
-import { getCodeExamplesForOperation } from "./codeExampleLoader";
+import {
+  getCodeExamplesForOperation,
+  getLanguageRunInfo,
+} from "./codeExampleLoader";
 import type { CodeExampleSet } from "./schemas/codeExamples";
 import type { ApiVersion } from "./schemas/version";
 import type { ActionTranslation } from "./schemas/translation";
@@ -687,7 +691,7 @@ function buildCodeExamplesForOperation(
     op.operation.operationId,
     op.version,
     op.categorySlug,
-  );
+  ).map((set) => withRunInstructions(spec, op.operation, set));
 
   return [
     {
@@ -704,4 +708,20 @@ function buildCodeExamplesForOperation(
     },
     ...sdkExamples,
   ];
+}
+
+function withRunInstructions(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  set: CodeExampleSet,
+): CodeExampleSet {
+  const runInfo = getLanguageRunInfo(set.language);
+  if (!runInfo) return set;
+  return {
+    ...set,
+    instructions: {
+      exampleFile: runInfo.exampleFile,
+      runCommandByRegion: buildRunCommandByRegion(spec, operation, runInfo),
+    },
+  };
 }

@@ -12,6 +12,8 @@ import {
   stripReadOnlyFields,
 } from "./refResolver";
 import { buildCurlCommand } from "./curlBuilder";
+import { buildRunCommand } from "./runCommandBuilder";
+import type { LanguageRunInfo } from "./codeExampleLoader";
 import { getRegions } from "./regionResolver";
 import type { SchemaField } from "./schemas/schemaField";
 import type { CurlParam, CurlSecurityScheme } from "./schemas/curl";
@@ -258,6 +260,25 @@ export function buildCurlByRegion(
       pathParams: toCurlParams(splitParams.path),
       queryParams: toCurlParams(splitParams.query),
       requestBodyJson,
+      security: operation.security,
+      globalSecurity: spec.security,
+      securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),
+    });
+  }
+  return result;
+}
+
+/** SDK run commands for the given operation, keyed by region like curl. */
+export function buildRunCommandByRegion(
+  spec: OpenAPIV3.Document,
+  operation: OpenAPIV3.OperationObject,
+  language: Pick<LanguageRunInfo, "runCommand" | "canUseBearerToken">,
+): Record<string, string> {
+  const result: Record<string, string> = {};
+  for (const region of getRegions(spec, operation)) {
+    result[region.key] = buildRunCommand({
+      site: region.site,
+      ...language,
       security: operation.security,
       globalSecurity: spec.security,
       securitySchemes: toCurlSecuritySchemes(spec.components?.securitySchemes),

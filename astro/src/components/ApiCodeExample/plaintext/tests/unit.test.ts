@@ -79,6 +79,28 @@ describe("apiCodeExampleNode", () => {
     expect(out).toContain("**With auth**");
   });
 
+  it("renders run instructions using the first region's command", () => {
+    const out = render([
+      {
+        ...examples[1],
+        instructions: {
+          exampleFile: "example.py",
+          runCommandByRegion: {
+            us: 'DD_SITE="datadoghq.com" python3 "example.py"',
+            eu: 'DD_SITE="datadoghq.eu" python3 "example.py"',
+          },
+        },
+      },
+    ]);
+    expect(out).toContain("Instructions");
+    expect(out).toContain(
+      "[install the library and its dependencies](/api/latest/?code-lang=python)",
+    );
+    expect(out).toContain("`example.py`");
+    expect(out).toContain('DD_SITE="datadoghq.com" python3 "example.py"');
+    expect(out).not.toContain("datadoghq.eu");
+  });
+
   it("builds a tabs tag node", () => {
     const node = apiCodeExampleNode(examples);
     expect(node?.type).toBe("tag");

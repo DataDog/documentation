@@ -113,26 +113,99 @@ const CODE_EXAMPLES: Record<"v1" | "v2", Record<string, CodeExampleMeta[]>> = {
  * language pushed to the end (`layouts/partials/code-lang-tabs.html`) — after
  * `viewsBuilder` prepends the Curl tab.
  */
-const LANGUAGES: ReadonlyArray<{
-  id: string;
-  label: string;
-  ext: string;
-  syntax: string;
-}> = [
-  { id: "go", label: "Go", ext: ".go", syntax: "go" },
-  { id: "java", label: "Java", ext: ".java", syntax: "java" },
-  { id: "python", label: "Python", ext: ".pybeta", syntax: "python" },
-  { id: "ruby", label: "Ruby", ext: ".rbbeta", syntax: "ruby" },
-  { id: "rust", label: "Rust", ext: ".rs", syntax: "rust" },
-  { id: "typescript", label: "TypeScript", ext: ".ts", syntax: "typescript" },
+export interface LanguageRunInfo {
+  exampleFile: string;
+  runCommand: string;
+  canUseBearerToken: boolean;
+}
+
+const LANGUAGES: ReadonlyArray<
+  {
+    id: string;
+    label: string;
+    ext: string;
+    syntax: string;
+  } & LanguageRunInfo
+> = [
+  {
+    id: "go",
+    label: "Go",
+    ext: ".go",
+    syntax: "go",
+    exampleFile: "main.go",
+    runCommand: 'go run "main.go"',
+    canUseBearerToken: true,
+  },
+  {
+    id: "java",
+    label: "Java",
+    ext: ".java",
+    syntax: "java",
+    exampleFile: "Example.java",
+    runCommand: 'java "Example.java"',
+    canUseBearerToken: true,
+  },
+  {
+    id: "python",
+    label: "Python",
+    ext: ".pybeta",
+    syntax: "python",
+    exampleFile: "example.py",
+    runCommand: 'python3 "example.py"',
+    canUseBearerToken: true,
+  },
+  {
+    id: "ruby",
+    label: "Ruby",
+    ext: ".rbbeta",
+    syntax: "ruby",
+    exampleFile: "example.rb",
+    runCommand: 'rb "example.rb"',
+    canUseBearerToken: true,
+  },
+  {
+    id: "rust",
+    label: "Rust",
+    ext: ".rs",
+    syntax: "rust",
+    exampleFile: "src/main.rs",
+    runCommand: "cargo run",
+    canUseBearerToken: false,
+  },
+  {
+    id: "typescript",
+    label: "TypeScript",
+    ext: ".ts",
+    syntax: "typescript",
+    exampleFile: "example.ts",
+    runCommand: 'tsc "example.ts"',
+    canUseBearerToken: true,
+  },
   {
     id: "python-legacy",
     label: "Python [legacy]",
     ext: ".py",
     syntax: "python",
+    exampleFile: "example.py",
+    runCommand: 'python "example.py"',
+    canUseBearerToken: false,
   },
-  { id: "ruby-legacy", label: "Ruby [legacy]", ext: ".rb", syntax: "ruby" },
+  {
+    id: "ruby-legacy",
+    label: "Ruby [legacy]",
+    ext: ".rb",
+    syntax: "ruby",
+    exampleFile: "example.rb",
+    runCommand: 'rb "example.rb"',
+    canUseBearerToken: false,
+  },
 ];
+
+export function getLanguageRunInfo(
+  languageId: string,
+): LanguageRunInfo | undefined {
+  return LANGUAGES.find((language) => language.id === languageId);
+}
 
 /* ------------------------------------------------------------------ */
 /*  Main export                                                        */
