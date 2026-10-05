@@ -105,20 +105,6 @@ This action requires a connected Datadog account and permission to edit the inci
 
 You can also re-invite the transcriber from the incident header in Datadog. For instructions, see the meeting summaries documentation for [Zoom][9], [Google Meet][10], or [Microsoft Teams][11].
 
-### Approving, editing, or dismissing meeting summaries
-
-When Datadog posts an AI-generated meeting summary to an incident Slack channel, you can review it directly from the message:
-
-- Click **Approve** to mark the summary as reviewed.
-- Click **Edit** to open a modal, revise the summary text, and save your changes.
-- Click **Dismiss** to remove the summary from the incident timeline.
-
-After a summary is edited, it can't be approved — the edited version takes precedence. Dismissing a summary can't be undone.
-
-This action requires a connected Datadog account and permission to edit the incident. For organizations with seat-based billing, it also requires an [Incident Management or Incident Response seat][8].
-
-You can also approve, edit, or dismiss a summary from the incident timeline in Datadog. For full details, see the meeting summaries documentation for [Zoom][9], [Google Meet][10], or [Microsoft Teams][11].
-
 ### Other incident channel configuration options
 
 Access all configuration options for Slack in Incident Management through the [**Incidents** > **Settings** > **Integrations**][3] page.
