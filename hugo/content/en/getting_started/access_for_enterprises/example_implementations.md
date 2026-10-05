@@ -49,7 +49,7 @@ A global financial services company with 15,000 Datadog users across retail bank
 | **Org structure** | Single org with Data Access Control for data segregation between divisions, preserving cross-division incident investigation capabilities. |
 | **Custom roles** | 5 roles: Read Only (auditors and compliance), Standard User (most engineers), Platform Admin, Restricted User (contractors), and Trading Floor (elevated Logs access for regulated data). Automatic Updates configured to follow the Standard role template. |
 | **Identity** | SCIM from Okta. Each division has its own Okta group mapped to a Datadog Team. Role assignment is based on Okta group membership, with quarterly access reviews driven by compliance. |
-| **Data restrictions** | Data Access Control datasets for trading data (`data_sensitivity:trading`) restricted to the Trading and Compliance teams. Separate dataset for PII-tagged data (`data_sensitivity:pii`) restricted to the Privacy team. Standard Data Access Control (not Strict Mode). |
+| **Data restrictions** | Data Access Control datasets for trading data (`data_sensitivity:trading`) restricted to the Trading and Compliance teams. Separate dataset for PII-tagged data (`data_sensitivity:pii`) restricted to the Privacy team. Data not in a Restricted Dataset stays **Unrestricted** (the default). |
 | **Asset protections** | All production Monitors and operational Dashboards restricted to the owning Team for Edit access. A "Platform Governance" team has override Edit access across all assets. |
 | **Keys and tokens** | Service accounts for each CI/CD pipeline. Application keys scoped to specific API endpoints. API keys per team. 90-day rotation cadence for application keys, enforced through Terraform. |
 | **Auditing** | Audit Trail enabled with alerts on role changes, key creation, and Data Access Control policy modifications. Quarterly access review reports generated for regulators. |
@@ -71,14 +71,14 @@ A multinational conglomerate with 8,000 Datadog users across 5 major divisions: 
 | **Org structure** | 12 child orgs. The defense division requires complete data isolation even for metadata, justifying a separate org. Other divisions share orgs by region and business function. Parent org used for centralized billing and executive dashboards through Cross-Org Visibility. |
 | **Custom roles** | Each child org has 4-5 custom roles tailored to its compliance requirements. The defense org uses a minimal custom role that strips all write permissions for non-engineering staff. The healthcare org has a dedicated HIPAA Analyst role with access to PHI-tagged data. |
 | **Identity** | SAML from Entra ID, with per-division Conditional Access policies. Defense division requires MFA and managed-device attestation. SCIM for team membership. |
-| **Data restrictions** | Defense org uses Data Access Control Strict Mode. All data is hidden by default, and users are explicitly granted access to specific datasets. Healthcare org uses standard Data Access Control with restricted datasets for PHI-tagged telemetry. Commercial divisions use standard Data Access Control for service-based data segregation. |
+| **Data restrictions** | Defense org sets data not in Restricted Datasets to **Restricted**. All data is hidden by default, and users are explicitly granted access to specific datasets. Healthcare org uses Data Access Control with the default **Unrestricted** setting and restricted datasets for PHI-tagged telemetry. Commercial divisions use Data Access Control with the default **Unrestricted** setting for service-based data segregation. |
 | **Asset protections** | Each org manages its own asset access policies. Production Monitors in the defense and healthcare orgs are restricted to Edit by the owning Team plus the division's security team. |
 | **Cross-org** | Parent org has Cross-Org Visibility enabled for executive dashboards showing system health across all divisions. Organization Groups (Preview) for centralizing policies across child orgs. |
 | **Keys and tokens** | All keys managed through Terraform. Defense org uses a hardened Terraform pipeline with approval gates for any key or role change. Service accounts used exclusively. No human-owned application keys. |
 
 ### Key takeaway
 
-Multi-org is justified here because of hard compliance boundaries. Regulations create strict data isolation and residency requirements. The defense division's use of Strict Mode reflects the default-deny requirement of its regulatory environment. Cross-Org Visibility keeps centralized reporting functional without compromising isolation.
+Multi-org is justified here because of hard compliance boundaries. Regulations create strict data isolation and residency requirements. The defense division's use of the **Restricted** setting reflects the default-deny requirement of its regulatory environment. Cross-Org Visibility keeps centralized reporting functional without compromising isolation.
 
 ## Template 3: Large Technology Company
 

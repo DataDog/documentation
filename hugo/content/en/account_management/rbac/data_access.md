@@ -28,14 +28,14 @@ Data Access Control relies on tags and attributes in your data that can be used 
 
 Data Access Control allows you to create a Restricted Dataset, specifying data that only users in designated teams or roles can access.
 
-To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Controls][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
+To view all of your Restricted Datasets, navigate to [Organization Settings][6], and select [Data Access Control][7] on the left, under the {{< ui >}}Access{{< /ui >}} heading.
 
 ### Datadog site
 
 Log in as a user assigned the Datadog Admin role, or any user with a role in your organization with the [`user_access_manage` permission][5].
 
 1. Navigate to [Organization Settings][6].
-1. On the left side of the page, select [Data Access Controls][7].
+1. On the left side of the page, select [Data Access Control][7].
 1. Click {{< ui >}}New Restricted Dataset{{< /ui >}}.
 
 In order to create a Restricted Dataset, identify the data to be restricted with a query.
@@ -57,7 +57,7 @@ You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider 
 
 After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. Enterprise customers using [Strict Mode](#strict-mode) may create up to 1,000 Restricted Datasets.
+You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) may create up to 1,000 Restricted Datasets.
 
 ### Supported telemetry types {#supported-telemetry}
 
@@ -83,32 +83,45 @@ The following are available as a Preview upon request:
 
 ## Advanced configuration
 
-### Strict Mode
+### Data not in a Restricted Dataset {#strict-mode}
 
-By default, Data Access Control operates in _Standard Mode_, which means any data outside a Restricted Dataset remains visible to users with appropriate permissions. _Strict Mode_ inverts this for a specific telemetry type: once enabled, users see no data for that telemetry type unless they are explicitly granted access through a Restricted Dataset.
+Each telemetry type has a setting that controls who can see data that is not in a Restricted Dataset. The {{< ui >}}Data not in dataset{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table shows the setting for each telemetry type.
 
-Strict Mode is useful for especially sensitive data, when:
-- Telemetry tagging is inconsistent, so a Standard Mode boundary risks leaving sensitive records uncovered.
-- New tag values are added frequently, and you cannot guarantee every new value is matched by an existing Restricted Dataset.
+{{< ui >}}Unrestricted{{< /ui >}} (default)
+: Data that is not in a Restricted Dataset, and untagged data, are visible to all users with appropriate permissions.
+
+{{< ui >}}Restricted{{< /ui >}}
+: Data that is not in a Restricted Dataset is visible only to users with explicit access. Users see no data for that telemetry type unless a Restricted Dataset or [unrestricted access](#unrestricted-user-groups) grants it to them.
+
+The {{< ui >}}Restricted{{< /ui >}} setting is useful for especially sensitive data, when:
+- Telemetry tagging is inconsistent, so the {{< ui >}}Unrestricted{{< /ui >}} setting risks leaving sensitive records uncovered.
+- New tag values are added frequently, and you cannot guarantee that an existing Restricted Dataset matches every new value.
 - Compliance posture requires a default-deny stance for a telemetry type.
 
-Strict Mode is configured per telemetry type. A telemetry type must have at least one Restricted Dataset before it can be switched to Strict Mode. This prevents unintentional loss of access. If all Restricted Datasets are later deleted from a telemetry type in Strict Mode, only [Unrestricted User Groups](#unrestricted-user-groups) retain access until new datasets are created or the mode is switched back to Standard.
+A telemetry type must have at least one Restricted Dataset before you can set it to {{< ui >}}Restricted{{< /ui >}}. This prevents unintentional loss of access. If you delete all Restricted Datasets from a telemetry type set to {{< ui >}}Restricted{{< /ui >}}, only teams and roles with [unrestricted access](#unrestricted-user-groups) keep access. Other users get access again after you create a new dataset or set the telemetry type back to {{< ui >}}Unrestricted{{< /ui >}}.
 
-Restricted Datasets cannot be shared between Standard and Strict modes (each dataset belongs to one mode).
+Restricted Datasets cannot be shared between the {{< ui >}}Unrestricted{{< /ui >}} and {{< ui >}}Restricted{{< /ui >}} settings. Each dataset belongs to one setting.
 
-**Before enabling Strict Mode**, verify what data is _not_ already in a Restricted Dataset for that telemetry type. That data is hidden once Strict Mode is enabled. Review the existing Restricted Datasets on the [Data Access Controls][7] page to confirm coverage.
+**Before you set a telemetry type to {{< ui >}}Restricted{{< /ui >}}**, verify which data for that telemetry type is _not_ in a Restricted Dataset. That data is hidden after you save the change. Review the {{< ui >}}Restricted Datasets{{< /ui >}} table on the [Data Access Control][7] page to confirm coverage.
 
-To change restriction mode for a telemetry type, navigate to [Data Access Controls][7]. Users must have the [`user_access_manage` permission][5] to change restriction modes.
+To change the setting for a telemetry type, you must have the [`user_access_manage` permission][5].
 
-### Unrestricted User Groups
+1. Navigate to [Data Access Control][7].
+1. In the {{< ui >}}Data Restrictions{{< /ui >}} table, hover over the row for the telemetry type, and click the edit (pencil) icon.
+1. Under the heading for data not in Restricted Datasets (for example, {{< ui >}}Logs data not in Restricted Datasets{{< /ui >}}), select {{< ui >}}Unrestricted{{< /ui >}} or {{< ui >}}Restricted{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+### Unrestricted access {#unrestricted-user-groups}
 
 Some users, such as high-privilege admins or central observability teams with access to data across the entire organization, need full visibility into a telemetry type regardless of any Restricted Datasets. Rather than adding these users to every Restricted Dataset individually, you can grant their team or role _unrestricted access_ for a specific telemetry type.
 
-A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or restriction mode. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
+A team or role with unrestricted access for a telemetry type sees all data for that telemetry type, regardless of Restricted Dataset boundaries or the setting for data not in a Restricted Dataset. Unrestricted access is granted to teams or roles (not individual users) and is configured per telemetry type. For example, a role can have unrestricted access to Logs without affecting access to RUM.
 
-Unrestricted User Groups pair especially well with Strict Mode because they let designated admins keep working without being added to every dataset.
+To grant unrestricted access, open the edit dialog for the telemetry type as described in [Data not in a Restricted Dataset](#strict-mode). Add the teams or roles to the unrestricted access field (for example, {{< ui >}}Roles and Teams with unrestricted access to all Logs data{{< /ui >}}), and click {{< ui >}}Save{{< /ui >}}. The {{< ui >}}Unrestricted Access{{< /ui >}} column of the {{< ui >}}Data Restrictions{{< /ui >}} table lists these teams and roles.
 
-**Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to users in Unrestricted User Groups.
+Unrestricted access pairs especially well with the {{< ui >}}Restricted{{< /ui >}} setting because it lets designated admins keep working without being added to every dataset.
+
+**Note:** Other access control methods (such as [Logs Restriction Queries][11] and [Permissions][3]) still apply to teams and roles with unrestricted access.
 
 ## Usage constraints
 

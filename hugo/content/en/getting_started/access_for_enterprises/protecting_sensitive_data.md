@@ -56,20 +56,20 @@ Sensitive data is mixed in with non-sensitive data from the same source and tele
 
 Sensitive Data Scanner is useful as a defense-in-depth measure alongside Data Access Control, especially when you cannot guarantee that sensitive data is tagged consistently at ingestion.
 
-## Standard Data Access Control vs. Strict Mode
+## Unrestricted vs. Restricted data outside datasets
 
-Use **standard Data Access Control** to apply restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
+Use the default **Unrestricted** setting to apply restrictions progressively: all data is visible by default, and you create restricted datasets to limit access to specific data. This model works well when sensitive data is the exception, not the rule.
 
-For organizations with hard regulatory requirements (for example, defense) or organizations that collaborate with multiple external business partners in the same Datadog tenant, Datadog offers **Data Access Control Strict Mode**. In Strict Mode, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
+For organizations with hard regulatory requirements (for example, defense) or organizations that collaborate with multiple external business partners in the same Datadog tenant, Datadog offers the [**Restricted** setting][6] for data not in Restricted Datasets. With this setting, data is hidden by default and users can only see data they have been explicitly granted access to. Instead of restricting the sensitive subset, you must explicitly allow access to everything.
 
-Strict Mode is the exception, not the rule. Use Strict Mode only if your regulatory or legal framework demands a default-deny model for telemetry access.
+The **Restricted** setting is the exception, not the rule. Use it only if your regulatory or legal framework demands a default-deny model for telemetry access.
 
 ## Recommendations
 
 - **Identify which pattern applies to you** before creating datasets. Many organizations use Pattern 2 (service-based restrictions) as their primary model, with Pattern 1 (type-based restrictions through roles) as a supplement.
 - **Use tags consistently.** Data Access Control restrictions are only as good as your tagging. Make sure that services, infrastructure, and data classifications are tagged consistently at ingestion. Work with your tagging strategy (see the [Administrator's Guide][5]) to help ensure the right tags are present.
 - **Start with your most sensitive data.** Don't try to create datasets for everything at once. Identify the top 3-5 most sensitive services or data classes and restrict those first.
-- **Use standard Data Access Control unless you have a regulatory reason for Strict Mode.** Default-deny creates significant operational overhead and should only be used when the regulatory environment demands it.
+- **Keep the default Unrestricted setting unless you have a regulatory reason to restrict data outside datasets.** Default-deny creates significant operational overhead and should only be used when the regulatory environment demands it.
 - **Combine Data Access Control with Sensitive Data Scanner** as a defense-in-depth measure, especially for Logs.
 
 ## Further reading
@@ -81,3 +81,4 @@ Strict Mode is the exception, not the rule. Use Strict Mode only if your regulat
 [3]: /getting_started/access_for_enterprises/permissions/#custom-roles
 [4]: /sensitive_data_scanner/
 [5]: /administrators_guide/plan/#resource-tagging
+[6]: /account_management/rbac/data_access/#strict-mode
