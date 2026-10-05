@@ -21,6 +21,8 @@ Datadog calculates your current estimated usage in near real-time. Estimated usa
 
 {{< img src="account_management/billing/usage-metrics-01.png" alt="Dashboard Example" >}}
 
+Use `sum` as the space aggregator (`sum by`) when querying estimated usage metrics. Many of these metrics are split into several timeseries, such as by tag or by child organization, and only `sum` adds them up to your total usage.
+
 ## Types of usage
 
 Estimated usage metrics are generally available for the following usage types:
