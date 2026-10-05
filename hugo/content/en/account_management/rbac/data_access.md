@@ -57,7 +57,7 @@ You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider 
 
 After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
 
-You may create a maximum of 100 Restricted Datasets under the Enterprise plan, and a maximum of 10 datasets otherwise. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) may create up to 1,000 Restricted Datasets.
+You can create up to 100 Restricted Datasets on the Enterprise plan and up to 10 on other plans. Enterprise customers that set a telemetry type to [Restricted](#strict-mode) can create up to 1,000 Restricted Datasets.
 
 ### Supported telemetry types {#supported-telemetry}
 
