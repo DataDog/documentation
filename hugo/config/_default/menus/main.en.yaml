@@ -5965,11 +5965,16 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
+    - name: Capacity Planning Page
+      url: gpu_monitoring/capacity_planning/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_capacity_planning
+      weight: 4
     - name: Training Page
       url: gpu_monitoring/training/
       parent: gpu_monitoring
       identifier: gpu_monitoring_training
-      weight: 4
+      weight: 5
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
