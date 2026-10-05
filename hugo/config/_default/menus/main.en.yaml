@@ -8051,6 +8051,11 @@ menu:
       parent: cloud_siem_open_cybersecurity_schema_framework
       identifier: cloud_siem_ocsf_processor
       weight: 10301
+    - name: Ingest TAXII Threat Intelligence
+      url: security/cloud_siem/ingest_and_enrich/taxii_threat_intelligence
+      parent: cloud_siem_ingest_and_enrich
+      identifier: cloud_siem_taxii_threat_intelligence
+      weight: 104
     - name: Detect and Monitor
       url: security/cloud_siem/detect_and_monitor/
       parent: cloud_siem
