@@ -493,7 +493,7 @@ Tools for [Work Management][38], including creating, searching, and updating wor
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. The <code>link_jira_issue_to_datadog_case</code> and <code>get_datadog_case_project</code> tools are in Preview and are not included in <code>toolsets=all</code>. To use them, request <code>cases</code> by name. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -523,7 +523,7 @@ Creates a new [Work Management][38] work item (case) with a title, project, and 
 
 ### `update_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
 Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -540,7 +540,7 @@ Adds a comment to a work item (case) timeline. Comments support markdown formatt
 - Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
@@ -555,7 +555,7 @@ Lists available [Work Management][38] projects with optional filtering by name o
 - Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Read`*\
 Retrieves details for a specific project by ID.
 
