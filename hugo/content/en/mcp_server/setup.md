@@ -590,7 +590,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 {{% tab "Other" %}}
 
-For most other [supported clients](#supported-clients), use these instructions for remote authentication.
+For most other [supported clients](#supported-clients), use these instructions.
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
