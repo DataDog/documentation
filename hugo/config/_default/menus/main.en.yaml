@@ -10745,6 +10745,11 @@ menu:
       url: account_management/teams/github/
       parent: account_management_teams
       weight: 902
+    - name: Provision with ServiceNow
+      identifier: account_management_provision_servicenow
+      url: account_management/teams/servicenow/
+      parent: account_management_teams
+      weight: 903
     - name: Governance Console
       identifier: account_management_governance_console
       url: account_management/governance_console/
