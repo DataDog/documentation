@@ -1086,6 +1086,15 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 - Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
 - Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
 
+### `get_datadog_error_tracking_analytics`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
+
+- Is the error backlog for the payments service growing or shrinking over the last 30 days?
+- How many new Error Tracking Issues were introduced compared to resolved last week?
+- Did regressions spike after last Tuesday's deploy?
+
 ## Experiments
 
 Tools for managing and analyzing [Experiments][62], including creating and concluding experiments, running diagnostics, and investigating metric movements.
