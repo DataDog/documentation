@@ -1722,6 +1722,8 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 
 Tools for managing the configuration of [log pipelines][87], [indexes][88], and [archives][89]. Pipelines parse and enrich incoming logs, indexes control indexing and retention, and archives route logs to your cloud storage.
 
+Tools that update, delete, or reorder an existing resource return a preview first and apply the change only after you confirm it. Creating a resource does not require confirmation.
+
 ### `list_datadog_log_pipelines`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Config`*\
