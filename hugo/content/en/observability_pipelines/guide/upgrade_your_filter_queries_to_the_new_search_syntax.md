@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-Worker versions 2.11 and newer use an updated search syntax. If you upgrade a pipeline from Worker version 2.10 or older to 2.11 or newer, you must update the pipeline's filter queries to the new syntax. This document covers the following:
+Worker versions 2.11 and newer use an updated search syntax. Pipelines upgraded from Worker 2.10 or older to version 2.11 or newer continue to use the old syntax for existing queries. To migrate those existing queries to a pipeline created with Worker 2.11 or newer, complete the following steps:
 
 - [Upgrade existing queries to the new syntax](#upgrade-queries-to-the-new-search-syntax)
 - Review [what's new in the updated search syntax](#whats-new-in-the-updated-search-syntax)
