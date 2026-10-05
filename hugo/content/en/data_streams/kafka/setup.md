@@ -29,7 +29,7 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 
 ## Setup
 
-Enable Kafka Console by setting `enable_kafka_console: true` in the [Kafka Consumer][12] integration. On agent versions 7.83 or older, the flag is named `enable_cluster_monitoring: true`.
+Enable Kafka Console by setting `enable_kafka_console: true` in the [Kafka Consumer][12] integration. On Agent versions 7.83 or older, the flag is named `enable_cluster_monitoring`.
 
 For additional environment-specific guidance on configuring the integration, go to the [Kafka Console setup page][1] and click {{< ui >}}Get Started{{< / ui >}}. Then choose your environment and follow the instructions.
 
