@@ -7,7 +7,7 @@ aliases:
   - /account_management/faq/what-data-from-my-sub-organizations-can-i-see-in-my-parent-account
   - /account_management/multi_organisations
 further_reading:
-- link: "https://docs.datadoghq.com/account_management/multi_organization/"
+- link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
   tag: "Blog"
   text: "Best practices for managing Datadog organizations at scale"
 - link: "/account_management/saml/"

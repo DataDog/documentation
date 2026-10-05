@@ -13658,6 +13658,586 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Experiments
+      url: /api/latest/experiments/
+      identifier: experiments
+      generated: true
+    - name: Get experiment traffic summary
+      url: /api/latest/experiments/get-experiment-traffic-summary/
+      identifier: experiments-get-experiment-traffic-summary
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperimentTrafficSummary
+        unstable: []
+        order: 19
+    - name: Start experiment
+      url: /api/latest/experiments/start-experiment/
+      identifier: experiments-start-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - StartExperiment
+        unstable: []
+        order: 18
+    - name: Refresh experiment results
+      url: /api/latest/experiments/refresh-experiment-results/
+      identifier: experiments-refresh-experiment-results
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RefreshExperimentResults
+        unstable: []
+        order: 17
+    - name: Get experiment results
+      url: /api/latest/experiments/get-experiment-results/
+      identifier: experiments-get-experiment-results
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperimentResults
+        unstable: []
+        order: 16
+    - name: Update experiment metric group
+      url: /api/latest/experiments/update-experiment-metric-group/
+      identifier: experiments-update-experiment-metric-group
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExperimentMetricGroup
+        unstable: []
+        order: 14
+    - name: Delete experiment metric group
+      url: /api/latest/experiments/delete-experiment-metric-group/
+      identifier: experiments-delete-experiment-metric-group
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExperimentMetricGroup
+        unstable: []
+        order: 13
+    - name: Create experiment metric group from collection
+      url: /api/latest/experiments/create-experiment-metric-group-from-collection/
+      identifier: experiments-create-experiment-metric-group-from-collection
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExperimentMetricGroupFromCollection
+        unstable: []
+        order: 15
+    - name: Create experiment metric group
+      url: /api/latest/experiments/create-experiment-metric-group/
+      identifier: experiments-create-experiment-metric-group
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExperimentMetricGroup
+        unstable: []
+        order: 12
+    - name: List experiment metric groups
+      url: /api/latest/experiments/list-experiment-metric-groups/
+      identifier: experiments-list-experiment-metric-groups
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentMetricGroups
+        unstable: []
+        order: 11
+    - name: Get experiment diagnostics
+      url: /api/latest/experiments/get-experiment-diagnostics/
+      identifier: experiments-get-experiment-diagnostics
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperimentDiagnostics
+        unstable: []
+        order: 10
+    - name: Conclude experiment
+      url: /api/latest/experiments/conclude-experiment/
+      identifier: experiments-conclude-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ConcludeExperiment
+        unstable: []
+        order: 9
+    - name: Cancel experiment
+      url: /api/latest/experiments/cancel-experiment/
+      identifier: experiments-cancel-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelExperiment
+        unstable: []
+        order: 8
+    - name: Update experiment analysis plan attributes
+      url: /api/latest/experiments/update-experiment-analysis-plan-attributes/
+      identifier: experiments-update-experiment-analysis-plan-attributes
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExperimentAnalysisPlanAttributes
+        unstable: []
+        order: 7
+    - name: Get experiment analysis plan
+      url: /api/latest/experiments/get-experiment-analysis-plan/
+      identifier: experiments-get-experiment-analysis-plan
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperimentAnalysisPlan
+        unstable: []
+        order: 6
+    - name: Patch experiment
+      url: /api/latest/experiments/patch-experiment/
+      identifier: experiments-patch-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchExperiment
+        unstable: []
+        order: 5
+    - name: Get experiment
+      url: /api/latest/experiments/get-experiment/
+      identifier: experiments-get-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperiment
+        unstable: []
+        order: 4
+    - name: Delete experiment
+      url: /api/latest/experiments/delete-experiment/
+      identifier: experiments-delete-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteExperiment
+        unstable: []
+        order: 3
+    - name: Set default subject type
+      url: /api/latest/experiments/set-default-subject-type/
+      identifier: experiments-set-default-subject-type
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SetDefaultSubjectType
+        unstable: []
+        order: 48
+    - name: Patch subject type
+      url: /api/latest/experiments/patch-subject-type/
+      identifier: experiments-patch-subject-type
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchSubjectType
+        unstable: []
+        order: 47
+    - name: Get subject type
+      url: /api/latest/experiments/get-subject-type/
+      identifier: experiments-get-subject-type
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetSubjectType
+        unstable: []
+        order: 46
+    - name: Delete subject type
+      url: /api/latest/experiments/delete-subject-type/
+      identifier: experiments-delete-subject-type
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteSubjectType
+        unstable: []
+        order: 45
+    - name: Create subject type
+      url: /api/latest/experiments/create-subject-type/
+      identifier: experiments-create-subject-type
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSubjectType
+        unstable: []
+        order: 44
+    - name: List subject types
+      url: /api/latest/experiments/list-subject-types/
+      identifier: experiments-list-subject-types
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListSubjectTypes
+        unstable: []
+        order: 43
+    - name: Refresh experiment results for org
+      url: /api/latest/experiments/refresh-experiment-results-for-org/
+      identifier: experiments-refresh-experiment-results-for-org
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RefreshExperimentResultsForOrg
+        unstable: []
+        order: 42
+    - name: Get experiment protocol
+      url: /api/latest/experiments/get-experiment-protocol/
+      identifier: experiments-get-experiment-protocol
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExperimentProtocol
+        unstable: []
+        order: 41
+    - name: List experiment protocols
+      url: /api/latest/experiments/list-experiment-protocols/
+      identifier: experiments-list-experiment-protocols
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperimentProtocols
+        unstable: []
+        order: 40
+    - name: Update metric
+      url: /api/latest/experiments/update-metric/
+      identifier: experiments-update-metric
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMetric
+        unstable: []
+        order: 39
+    - name: Get metric
+      url: /api/latest/experiments/get-metric/
+      identifier: experiments-get-metric
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetric
+        unstable: []
+        order: 38
+    - name: Delete metric
+      url: /api/latest/experiments/delete-metric/
+      identifier: experiments-delete-metric
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMetric
+        unstable: []
+        order: 37
+    - name: Create metric
+      url: /api/latest/experiments/create-metric/
+      identifier: experiments-create-metric
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMetric
+        unstable: []
+        order: 36
+    - name: List metrics
+      url: /api/latest/experiments/list-metrics/
+      identifier: experiments-list-metrics
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMetrics
+        unstable: []
+        order: 35
+    - name: Update metric SQL model
+      url: /api/latest/experiments/update-metric-sql-model/
+      identifier: experiments-update-metric-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMetricSQLModel
+        unstable: []
+        order: 34
+    - name: Get metric SQL model
+      url: /api/latest/experiments/get-metric-sql-model/
+      identifier: experiments-get-metric-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetricSQLModel
+        unstable: []
+        order: 33
+    - name: Create metric SQL model
+      url: /api/latest/experiments/create-metric-sql-model/
+      identifier: experiments-create-metric-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMetricSQLModel
+        unstable: []
+        order: 32
+    - name: List metric SQL models
+      url: /api/latest/experiments/list-metric-sql-models/
+      identifier: experiments-list-metric-sql-models
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMetricSQLModels
+        unstable: []
+        order: 31
+    - name: Update metric collection
+      url: /api/latest/experiments/update-metric-collection/
+      identifier: experiments-update-metric-collection
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMetricCollection
+        unstable: []
+        order: 30
+    - name: Get metric collection
+      url: /api/latest/experiments/get-metric-collection/
+      identifier: experiments-get-metric-collection
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMetricCollection
+        unstable: []
+        order: 29
+    - name: Delete metric collection
+      url: /api/latest/experiments/delete-metric-collection/
+      identifier: experiments-delete-metric-collection
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMetricCollection
+        unstable: []
+        order: 28
+    - name: Create metric collection
+      url: /api/latest/experiments/create-metric-collection/
+      identifier: experiments-create-metric-collection
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMetricCollection
+        unstable: []
+        order: 27
+    - name: List metric collections
+      url: /api/latest/experiments/list-metric-collections/
+      identifier: experiments-list-metric-collections
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMetricCollections
+        unstable: []
+        order: 26
+    - name: Unarchive exposure SQL model
+      url: /api/latest/experiments/unarchive-exposure-sql-model/
+      identifier: experiments-unarchive-exposure-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UnarchiveExposureSQLModel
+        unstable: []
+        order: 25
+    - name: Archive exposure SQL model
+      url: /api/latest/experiments/archive-exposure-sql-model/
+      identifier: experiments-archive-exposure-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ArchiveExposureSQLModel
+        unstable: []
+        order: 24
+    - name: Update exposure SQL model
+      url: /api/latest/experiments/update-exposure-sql-model/
+      identifier: experiments-update-exposure-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateExposureSQLModel
+        unstable: []
+        order: 23
+    - name: Get exposure SQL model
+      url: /api/latest/experiments/get-exposure-sql-model/
+      identifier: experiments-get-exposure-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetExposureSQLModel
+        unstable: []
+        order: 22
+    - name: Create exposure SQL model
+      url: /api/latest/experiments/create-exposure-sql-model/
+      identifier: experiments-create-exposure-sql-model
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExposureSQLModel
+        unstable: []
+        order: 21
+    - name: List exposure SQL models
+      url: /api/latest/experiments/list-exposure-sql-models/
+      identifier: experiments-list-exposure-sql-models
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExposureSQLModels
+        unstable: []
+        order: 20
+    - name: Create experiment
+      url: /api/latest/experiments/create-experiment/
+      identifier: experiments-create-experiment
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateExperiment
+        unstable: []
+        order: 2
+    - name: List experiments
+      url: /api/latest/experiments/list-experiments/
+      identifier: experiments-list-experiments
+      parent: experiments
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListExperiments
+        unstable: []
+        order: 1
     - name: Fastly Integration
       url: /api/latest/fastly-integration/
       identifier: fastly-integration
