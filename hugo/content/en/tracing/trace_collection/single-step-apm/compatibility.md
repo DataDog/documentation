@@ -101,11 +101,37 @@ Select your environment to see compatibility requirements and limitations:
 - **IIS only**: Only .NET applications running in IIS are supported.
 
 {{% /tab %}}
+
+{{% tab "Windows host-wide (Preview)" %}}
+
+### Compatibility
+
+- **Status**: Preview
+- **Supported runtimes**: Java and .NET only
+
+### Requirements
+
+- Enrollment in the [Windows host-wide SSI Preview][20]
+- For .NET applications outside IIS, an [instrumentation rule that allows instrumentation][21]
+
+### Limitations
+
+- **Other runtimes**: Python, Node.js, Ruby, and PHP are not supported by SSI on Windows.
+
+For setup and application restart instructions, see [Single Step APM Instrumentation on Windows][22].
+
+[20]: https://www.datadoghq.com/product-preview/single-step-instrumentation-on-windows-vms/
+[21]: /tracing/trace_collection/single-step-apm/windows/#define-instrumentation-rules
+[22]: /tracing/trace_collection/single-step-apm/windows/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Supported language runtimes
 
 SSI automatically instruments applications written in the following languages by [loading a compatible Datadog Language SDK][2] at runtime. Select your language to see minimum SDK versions, supported runtime versions, and any limitations.
+
+Language support depends on the [application environment](#compatibility-by-application-environment). The following language list does not imply support on every operating system.
 
 <div class="alert alert-info">
 
