@@ -19023,6 +19023,85 @@ components:
       type: string
       x-enum-varnames:
         - CLOUD_CONFIGURATION
+    CloudCostAccount:
+      description: A Cloud Cost Management account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CloudCostAccountAttributes"
+        id:
+          description: The Datadog cloud account ID used by the account filters API.
+          example: "534"
+          type: string
+        type:
+          $ref: "#/components/schemas/CloudCostAccountType"
+      required:
+        - attributes
+        - id
+        - type
+      type: object
+    CloudCostAccountAttributes:
+      description: Read-only status and identifiers for a cloud cost account.
+      properties:
+        account_id:
+          description: The cloud provider account identifier, such as an OCI tenancy OCID or AWS account ID.
+          example: "ocid1.tenancy.oc1..example"
+          type: string
+        cloud:
+          description: The cloud provider and cost report type. Currently supports `oci` and `aws_cur2`.
+          example: "oci"
+          type: string
+        created_at:
+          description: The timestamp when the cloud account was created.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+        error_messages:
+          description: Validation errors for the cloud account. Empty when there are no errors.
+          example: []
+          items:
+            description: An error message.
+            type: string
+          type: array
+        status:
+          description: The cloud account status, one of `active`, `warn`, `error`, or `disabled`.
+          example: "active"
+          type: string
+        status_updated_at:
+          description: The timestamp when the cloud account status was last updated.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+        updated_at:
+          description: The timestamp when the cloud account was last updated.
+          example: "2026-01-01T12:00:00Z"
+          type: string
+      required:
+        - account_id
+        - cloud
+        - created_at
+        - error_messages
+        - status
+        - status_updated_at
+        - updated_at
+      type: object
+    CloudCostAccountType:
+      default: cloud_account
+      description: Type of a cloud cost account.
+      enum:
+        - cloud_account
+      example: cloud_account
+      type: string
+      x-enum-varnames:
+        - CLOUD_ACCOUNT
+    CloudCostAccountsResponse:
+      description: List of cloud cost accounts.
+      properties:
+        data:
+          description: The cloud cost accounts matching the filter.
+          items:
+            $ref: "#/components/schemas/CloudCostAccount"
+          type: array
+      required:
+        - data
+      type: object
     CloudInventoryCloudProviderId:
       description: |-
         Cloud provider for this sync configuration (`aws`, `gcp`, or `azure`). For requests, must match the provider block supplied under `attributes`.
@@ -155543,6 +155622,82 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 33
+  /api/v2/cost/cloud_accounts:
+    get:
+      description: |-
+        List the OCI and AWS CUR 2.0 cloud accounts for your organization, including account IDs, status, and validation errors.
+        Use `filter[cloud]=oci` or `filter[cloud]=aws_cur2` to return a single cloud. When omitted or empty, both clouds are returned.
+        AWS CUR 1.0, Azure, and GCP accounts are available through their dedicated configuration endpoints.
+        Archived accounts are excluded. The response contains all matching accounts and is not paginated.
+
+        This endpoint replaces `GET /api/v2/cost/oci_config`. To migrate, use `filter[cloud]=oci` and update clients to accept
+        the `cloud_account` resource type instead of `oci_config`. Account IDs and the existing attributes are preserved;
+        each account also includes the `cloud` attribute.
+      operationId: ListCostCloudAccountsV2
+      parameters:
+        - description: Filter by cloud, either `oci` or `aws_cur2` (case insensitive). Omit or leave empty to return both.
+          example: oci
+          in: query
+          name: filter[cloud]
+          required: false
+          schema:
+            pattern: ^([oO][cC][iI]|[aA][wW][sS]_[cC][uU][rR]2)?(?![\s\S])
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account_id: "ocid1.tenancy.oc1..example"
+                          cloud: oci
+                          created_at: "2026-01-01T12:00:00Z"
+                          error_messages: []
+                          status: active
+                          status_updated_at: "2026-01-01T12:00:00Z"
+                          updated_at: "2026-01-01T12:00:00Z"
+                        id: "534"
+                        type: cloud_account
+              schema:
+                $ref: "#/components/schemas/CloudCostAccountsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                invalid_cloud:
+                  value:
+                    errors:
+                      - detail: 'attribute "filter[cloud]" must be one of: oci, aws_cur2'
+                        status: "400"
+                        title: Bad Request
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: List Cloud Cost Management cloud accounts
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 77
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
   /api/v2/cost/commitments/commitment-list:
     get:
       description: Get a list of individual cloud commitments (Reserved Instances or Savings Plans) with their utilization details. The response schema varies based on the provider, product, and commitment type.
@@ -156641,7 +156796,9 @@ paths:
     get:
       deprecated: true
       description: |-
-        **Note**: This endpoint is deprecated. View OCI accounts in Cloud Cost Settings in the Datadog web application instead.
+        **Note**: This endpoint is deprecated. Use [List Cloud Cost Management cloud accounts](https://docs.datadoghq.com/api/latest/cloud-cost-management/#list-cloud-cost-management-cloud-accounts)
+        with `filter[cloud]=oci` instead. Update clients to accept the `cloud_account` resource type instead of `oci_config`.
+        Account IDs and the existing attributes are preserved; each account also includes the `cloud` attribute.
 
         List the OCI configs.
       operationId: ListCostOCIConfigs
