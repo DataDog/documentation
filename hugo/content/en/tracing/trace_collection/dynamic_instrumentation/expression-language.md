@@ -18,7 +18,13 @@ Examples:
 - `any(post.tags, {@it == "debugger"})`
 - `@duration > 10 && len(p.data) < 100`
 
-Generally, the Expression Language supports:
+Examples:
+- `someVar.someField`
+- `request.headers["Host"]`
+- `any(post.tags, {@it == "debugger"})`
+- `@duration > 10 && len(p.data) < 100`
+
+Expression support depends on the runtime version and instrumentation location. Generally, the Expression Language supports:
 * Accessing local variables, method parameters, and deeply nested fields and attributes within objects.
 * Using comparison operators (`<`, `>`, `>=`, `<=`, `==`, `!=`, `instanceof`) to compare variables, fields, and constants in your conditions, for example: `localVar1.field1.field2 != 15`.
 * Using logical operators (`&&`, `||`, and `!` or `not(...)`) to build complex Boolean conditions, for example: `!isEmpty(user.email) && not(contains(user.name, "abc"))`.
