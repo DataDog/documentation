@@ -36,7 +36,7 @@ Bits Release does not modify your code, and it does not create permanent instrum
 2. **Impact analysis**: Bits Release reads the diff and queries production data for the affected service to determine the change type, the risk level, and the code paths involved.
 3. **Validation plan**: It produces a plan describing the expected impact of the change. Each item states either that a behavior must move, or that a behavior must stay stable. Items are labeled as an expected impact or an expected regression risk, so you can see what the change is supposed to do separately from what it might break.
 4. **Deploy detection**: The plan stays pending until Bits Release confirms your pull request is running in production.
-5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, comparing post-deploy behavior to the pre-deploy baseline it captured.
+5. **Evaluation**: After deployment, Bits Release evaluates the plan over a soak window, the period it watches production once your change is live, comparing post-deploy behavior to the pre-deploy baseline it captured.
 6. **Verdict**: It weighs the evidence from every source into a single verdict, delivered as a pull request comment, a Slack notification, and a full report in Datadog.
 
 Validation runs against your production environment.
@@ -60,12 +60,14 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 
 ## Verdicts
 
+Every validation ends in one of four verdicts. **Passed** and **Failed** are conclusions about your change. **Not enough data** and **Inconclusive** mean Bits Release reached no conclusion, so the change is worth a look of your own.
+
 | Verdict | Meaning |
 | ------- | ------- |
-| **Passed** | The change shipped and production behavior matched the expected impact, with no unexpected side effects on the service affected by the pull request. |
-| **Failed** | A clear problem. Production behavior contradicted the expected impact. |
-| **Not enough data** | The expected change could not be proven either way. For example, the affected code path saw too little traffic during the soak window. |
-| **Inconclusive** | Bits Release could not reach a verdict. Either the signals it collected contradicted each other, so no conclusion was supported, or validation did not complete, most commonly because the commit was never detected as deployed. |
+| **Passed** | The change was deployed, and production behavior matched the expected impact, with no unexpected side effects on the affected service. |
+| **Failed** | Production behavior clearly contradicted the expected impact. |
+| **Not enough data** | Too little relevant production data to assess the expected impact. For example, the affected code path received too little traffic during the soak window. |
+| **Inconclusive** | The signals collected conflicted, or validation did not complete. For example, the commit was never detected as deployed. |
 
 **A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
 
