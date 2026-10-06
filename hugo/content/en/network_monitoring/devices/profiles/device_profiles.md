@@ -64,10 +64,10 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 
 ## Configure metrics
 
-The recommended entry point for the SNMP Profile Manager is from a single device in NDM. Every device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version of that profile on your behalf, so you never need to create a profile from scratch.
+The recommended entry point for the SNMP Profile Manager is from a device monitored through SNMP in NDM. Each SNMP device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version of that profile on your behalf, so you never need to create a profile from scratch.
 
 1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Network Devices{{< /ui >}}][15].
-2. Click on a device to open the device side panel.
+2. Click a device monitored through SNMP to open the device side panel. Look for the **SNMP** label beneath the device name.
 3. Click {{< ui >}}View all metrics{{< /ui >}} to view the list of metrics being automatically collected for the device.
 
    {{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device side panel showing the Metrics section with the View all metrics button highlighted" style="width:90%;">}}
@@ -76,7 +76,7 @@ The recommended entry point for the SNMP Profile Manager is from a single device
 
    {{< img src="/network_device_monitoring/profile_onboarding/profile_manager_metrics_tab.png" alt="The NDM device Metrics tab showing metric graphs and a left sidebar with Alerting Metrics, Starred Metrics, Key Metrics, and Additional Metrics categories" style="width:90%;">}}
 
-5. To open the profile editor and manage which metrics are collected, click {{< ui >}}Configure Metrics{{< /ui >}}.
+5. To open the profile editor and manage which metrics are collected, click {{< ui >}}Configure metrics{{< /ui >}} in the left sidebar.
 
    This opens the profile editor in the {{< ui >}}Metrics{{< /ui >}} tab, containing the list of all available metrics for the devices covered by the profile, organized by name, MIB, OID, category, and compatibility. This is the primary view for controlling what data Datadog collects from your devices. You can filter the metric list by category or use the search bar to find specific metrics by name or OID.
 
