@@ -3904,6 +3904,11 @@ menu:
       parent: serverless_container_apps
       identifier: serverless_container_apps_manual
       weight: 1
+    - name: Managed OpenTelemetry Agent
+      url: serverless/azure_container_apps/otel_managed_agent
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_otel_managed_agent
+      weight: 2
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
