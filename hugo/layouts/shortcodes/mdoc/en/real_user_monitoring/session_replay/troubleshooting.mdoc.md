@@ -41,12 +41,12 @@ Assets may not be available at the time of replay for the following reasons:
 
 `<canvas>` elements appear blank in the replay unless [canvas recording][10] is enabled. If canvas recording is enabled and a canvas still appears blank, check the following:
 
-- The canvas is not masked by your privacy configuration. The `mask` and `hidden` privacy levels mask canvas contents. See [Privacy Options][11].
+- The privacy level applied to the canvas is `allow` or `mask-user-input`. All other privacy levels mask canvas contents. See [Privacy Options][11].
 - Any cross-origin content drawn to the canvas is served with [CORS enabled][12]. Cross-origin content taints the canvas otherwise, and browser security rules prevent the SDK from reading pixels from a tainted canvas.
 - The canvas is not drawn from a web worker. Canvas contents drawn through `OffscreenCanvas` and `transferControlToOffscreen` are not recorded.
 - The canvas is not in a web view instrumented through a mobile SDK, which does not support canvas recording. See [Web view instrumentation][13].
 
-A rapidly updating canvas is recorded, but some intermediate frames may be missing from the replay. To capture more detail, raise the [canvas recording quality][10].
+A rapidly updating canvas is recorded, but some intermediate frames may be missing from the replay. To capture more detail, raise the [canvas recording quality][14].
 
 ### CSS rules not properly applied/mouse hover not replayed
 
@@ -241,3 +241,4 @@ At any time during the lifetime of the host app, it's possible to change the tra
 [11]: /session_replay/privacy_options/?platform=browser#mask-mode
 [12]: https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/CORS_enabled_image
 [13]: /session_replay/setup_and_configuration/?platform=browser#web-view-instrumentation
+[14]: /session_replay/setup_and_configuration/?platform=browser#set-the-canvas-recording-quality
