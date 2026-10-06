@@ -3,6 +3,7 @@ import { codeToHtml } from "shiki";
 import datadogLight from "../../styles/shiki-light";
 import { CopyButton, type CopyButtonLabels } from "./CopyButton";
 import { CollapseToggle, type CollapseToggleLabels } from "./CollapseToggle";
+import { resolveShikiLanguage } from "./resolveShikiLanguage";
 import styles from "./CodeBlock.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
@@ -33,7 +34,7 @@ let highlightedCode = "";
 if (content) {
   try {
     highlightedCode = await codeToHtml(content, {
-      lang: language || "text",
+      lang: resolveShikiLanguage(language),
       theme: datadogLight,
     });
   } catch {
@@ -97,9 +98,9 @@ const collapseLabels: CollapseToggleLabels = {
       highlightedCode ? (
         <div class={cl("code-block__highlighted")} set:html={highlightedCode} />
       ) : (
-        <pre class={cl("code-block__pre")}>
-          <code class={cl("code-block__code")}>{content}</code>
-        </pre>
+        // Whitespace inside <pre> renders, so keep <pre><code> on one line.
+        // prettier-ignore
+        <pre class={cl("code-block__pre")}><code class={cl("code-block__code")}>{content}</code></pre>
       )
     }
   </div>
