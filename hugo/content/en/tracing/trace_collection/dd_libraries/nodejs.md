@@ -241,6 +241,8 @@ const compiler = webpack({
 
 #### Bundling with Next.js
 
+##### Webpack
+
 If you are using Next.js to bundle your application, add a declaration
 similar to the one for Webpack inside your `next.config.js` configuration file:
 
@@ -273,6 +275,24 @@ const nextConfig = {
 
 export default nextConfig;
 ```
+
+##### Turbopack
+
+For Next.js 15.5 or later applications that use Turbopack, wrap your existing configuration:
+
+```javascript
+const { withDatadogTurbopack } = require('dd-trace/next')
+
+const nextConfig = { reactStrictMode: true }
+
+module.exports = withDatadogTurbopack(nextConfig)
+```
+
+Preload `dd-trace/init` before the application loads. The wrapper instruments CommonJS dependencies and supported
+source-rewrite targets in Node.js bundles.
+
+The wrapper does not instrument client or edge bundles. It also excludes generic ESM export replacement, linked
+workspaces, Prisma clients outside `node_modules`, and Yarn Plug'n'Play packages.
 
 #### Unsupported Datadog features
 
