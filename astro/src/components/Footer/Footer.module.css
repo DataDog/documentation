@@ -356,8 +356,10 @@
 
 /* --- Nav: accordion caret ------------------------------------------------ */
 
-/* Upstream uses the `icon-angle-down-wui` icon font; here it is the inlined
-   SVG of the same glyph, so it needs an explicit box and fill. */
+/* Upstream's accordion headers are plain `<p>` elements with no affordance at
+   all; the caret is an addition here, to give the `<button>` headers a visible
+   open/closed state. The asset is websites-modules' own `angle-down-wui.svg`,
+   which is a bare path with no sizing, so it needs an explicit box and fill. */
 .footer__caret {
   display: block;
   flex: 0 0 auto;
