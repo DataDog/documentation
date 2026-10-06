@@ -11,7 +11,7 @@ aliases:
   - /product_analytics/session_replay/mobile/privacy_options
 content_filters:
   - trait_id: platform
-    option_group_id: rum_sdk_platform_options_v3
+    option_group_id: rum_session_replay_sdk_options
     label: "SDK"
 further_reading:
   - link: '/session_replay/'

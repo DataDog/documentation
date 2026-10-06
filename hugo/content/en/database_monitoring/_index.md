@@ -8,12 +8,12 @@ further_reading:
 - link: "/database_monitoring/troubleshooting/"
   tag: "Documentation"
   text: "Troubleshooting"
-- link: "https://dtdg.co/fe"
-  tag: "Foundation Enablement"
-  text: "Join an interactive session to level up your Database Monitoring"
 - link: "https://learn.datadoghq.com/courses/database-monitoring"
   tag: "Learning Center"
   text: "Monitoring a Postgres Database with Datadog DBM"
+- link: "https://dtdg.co/fe"
+  tag: "Foundation Enablement"
+  text: "Join an interactive session to level up your Database Monitoring"
 - link: "https://www.datadoghq.com/blog/map-postgresql-explain-plan-nodes-to-sql-with-datadog/"
   tag: "Blog"
   text: "Diagnose slow PostgreSQL queries faster with explain plan correlation"
@@ -57,7 +57,7 @@ Datadog Database Monitoring provides deep visibility into databases across all o
 
 ## Getting started
 
-Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
+Datadog Database Monitoring supports self-hosted and managed cloud versions of **Postgres**, **MySQL**, **MariaDB**, **Oracle**, **SQL Server**, **MongoDB**, **Amazon DocumentDB**, and **ClickHouse**. To get started with Datadog Database Monitoring, configure your database and install the Datadog Agent. For setup instructions, select your database technology:
 
 ### Postgres
 
@@ -81,6 +81,14 @@ Datadog Database Monitoring supports self-hosted and managed cloud versions of *
   {{< image-card href="/database_monitoring/setup_mysql/aurora" src="integrations_logos/aurora.png" alt="Aurora" >}}
   {{< image-card href="/database_monitoring/setup_mysql/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
   {{< image-card href="/database_monitoring/setup_mysql/azure" src="integrations_logos/azure_db_for_mysql.png" alt="MySQL" >}}
+{{< /card-grid >}}
+<p></p>
+
+### MariaDB
+
+{{< card-grid card_width="130px">}}
+  {{< image-card href="/database_monitoring/setup_mariadb/selfhosted" src="integrations_logos/mysql.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mariadb/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
 {{< /card-grid >}}
 <p></p>
 

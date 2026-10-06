@@ -36,11 +36,11 @@ title: Windows
 
 このページでは、Datadog Agent for Windows の基本的な機能について概説します。まだ Agent をインストールしていない場合は、下記のインストール手順を参照するか、[アプリ内の指示に従ってください][1]。
 
-サポートされている Windows バージョンの全一覧は、[サポートされているプラットフォーム][15]を参照してください。
+サポートされている Windows バージョンの全一覧は、[サポートされているプラットフォーム][15] を参照してください。
 
 ## インストール {#installation}
 
-Windows ホストに Datadog Agent をインストールするには、[Fleet Automation 内のガイド付きアプリ内フロー][16]に従い、インストールコマンドをコピーして実行してください。Datadog Agent は `ddagentuser` の下で実行されます。詳細については、[Datadog Windows Agent ユーザー][17]のドキュメントを参照してください。
+Windows ホストに Datadog Agent をインストールするには、[Fleet Automation 内のガイド付きアプリ内フロー][16] に従い、インストールコマンドをコピーして実行してください。Datadog Agent は `ddagentuser` の下で実行されます。詳細については、[Datadog Windows Agent ユーザー][17] のドキュメントを参照してください。
 
 
 {{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="Windows ホストの Datadog Agent のアプリ内インストール手順。" style="width:90%;">}}
@@ -52,9 +52,9 @@ Windows ホストに Datadog Agent をインストールするには、[Fleet Au
 
 <div class="alert alert-info">Agent のデフォルトのインストール先は <code>%ProgramFiles%\Datadog\Datadog Agent</code>です。カスタムインストール場所を使用する場合は、Datadog ファイルを収容する <code>Datadog</code> サブディレクトリを指定してください。</div>
 
-1. [Datadog Agent インストーラー][400]をダウンロードし、最新バージョンの Agent をインストールします。
+1. [Datadog Agent インストーラー][400] をダウンロードし、最新バージョンの Agent をインストールします。
 2. `datadog-agent-7-latest.amd64.msi`を開いてインストーラーを実行します。プロンプトが表示されたら、管理者の資格情報を入力します。
-3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][500]を入力します。
+3. プロンプトに従ってライセンス契約に同意し、[Datadog API キー][500] を入力します。
 
 インストールが終了したら、オプションから Datadog Agent Manager を起動できます。
 
@@ -112,7 +112,7 @@ Windows に Agent をインストールする際、下記の各構成オプシ�
 メイン Agent 構成ファイルは
 `C:\ProgramData\Datadog\datadog.yaml` にあります。このファイルは、API キー、選択した Datadog サイト、プロキシパラメーター、ホストタグ、ログレベルなどのホスト全体の設定に使用されます。
 
-同じディレクトリに `datadog.yaml.example` ファイルもあります。このファイルには、使用可能なすべての構成オプションを示すリファレンスがコメントとしてフルで付けられており、特定の構成を参照したりコピーしたりするのに便利です。
+同じディレクトリに `datadog.yaml.example` ファイルもあります。このファイルには、使用可能なすべての構成オプションを示すリファレンスがコメントとしてフルで付けられており、特定の構成を参照したりコピーしたりするのに便利です。または、GitHub上の[Windows用Agent設定ファイルの例][19]をご覧ください。
 
 
 インテグレーション用の構成ファイルは
@@ -177,7 +177,7 @@ Windows で Agent をアンインストールする方法は 2 つあります�
 
 ### プログラムの追加と削除 {#add-or-remove-programs}
 
-1. **CTRL**キーと**Esc**キーを押すか、Windowsキーで Windows Search を実行します。
+1. **CTRL**キーと**Esc**キーを押すか、Windows キーで Windows Search を実行します。
 1. `add`を検索し、{{< ui >}}Add or remove programs{{< /ui >}}をクリックします。
 1. `Datadog Agent`を検索し、{{< ui >}}Uninstall{{< /ui >}}をクリックします。
 
@@ -194,7 +194,7 @@ start-process msiexec -Wait -ArgumentList ('/log', 'C:\uninst.log', '/q', '/x', 
 
 ## トラブルシューティング {#troubleshooting}
 
-トラブルシューティング手順については、[Agent トラブルシューティングのドキュメント][18]を参照してください。
+トラブルシューティング手順については、[Agent トラブルシューティングのドキュメント][18] を参照してください。
 
 
 ### Agent のステータスと情報 {#agent-status-and-information}
@@ -203,7 +203,7 @@ Agent が実行中であることを確認するには、サービスパネル�
 
 Agent の状態に関する情報をさらに受け取るには、次のようにして Datadog Agent Manager を起動します。
 
-* Datadog Agentのシステムトレイアイコンを右クリックし、{{< ui >}}Configure{{< /ui >}} を選択します。または
+* Datadog Agent のシステムトレイアイコンを右クリックし、{{< ui >}}Configure{{< /ui >}} を選択します。または
 * **管理者特権 (管理者として実行)** コマンドラインから `launch-gui` コマンドを実行します
 	- PowerShell: `& "<PATH_TO_AGENT.EXE>" launch-gui`
 	- cmd: `"<PATH_TO_AGENT.EXE>" launch-gui`
@@ -245,17 +245,17 @@ cmd.exe では、次のようにします。
 
 また、インテグレーションを変更するたびに、Datadog サービスを再起動する必要があります。これは services.msc または UI サイドバーから行うことができます。
 
-サービスについて、Datadog はメトリクスを追跡せず、可用性のみを追跡します。(メトリクスの場合は、[Process](#monitoring-windows-processes) または [WMI][7] 統合を使用してください)。モニターを設定するには、[インテグレーションモニタータイプ][8]を選択し、{{< ui >}}Windows Service{{< /ui >}} を検索します。{{< ui >}}Integration Status{{< /ui >}} > {{< ui >}}Pick Monitor Scope{{< /ui >}} から、監視するサービスを選択します。
+サービスについて、Datadog はメトリクスを追跡せず、可用性のみを追跡します。(メトリクスの場合は、[Process](#monitoring-windows-processes) または [WMI][7] 統合を使用してください)。モニターを設定するには、[インテグレーションモニタータイプ][8] を選択し、{{< ui >}}Windows Service{{< /ui >}} を検索します。{{< ui >}}Integration Status{{< /ui >}} > {{< ui >}}Pick Monitor Scope{{< /ui >}} から、監視するサービスを選択します。
 
 ### Windows のシステム負荷のモニタリング {#monitoring-system-load-for-windows}
 
 Datadog Agent は、デフォルトで多数のシステムメトリクスを収集します。最も一般的に使用されるシステムメトリクスは `system.load.*` ですが、これらのメトリクスは **Unix** 特有です。
 
-Windows は `system.load.*` メトリクスを提供していませんが、デフォルトで利用可能な同等のオプションは `system.proc.queue.length` です。このメトリクスは、実行待ちのプロセッサ準備キューで遅延として観察されたスレッドの数を示します。
+Windows は `system.load.*` メトリクスを提供していませんが、デフォルトで利用可能な同等のオプションは `system.proc.queue.length` です。このメトリクスは、実行待ちのプロセッサー準備キューで遅延として観察されたスレッドの数を示します。
 
 ### Windows プロセスの監視 {#monitoring-windows-processes}
 
-[ライブプロセスのモニタリング][9]を使用して Windows プロセスをモニターできます。これを Windows で有効にするには、次のパラメーターを true に設定することにより、[Agent メイン構成ファイル][10]を編集します。
+[ライブプロセスのモニタリング][9] を使用して Windows プロセスをモニターできます。これを Windows で有効にするには、次のパラメーターを true に設定することにより、[Agent メイン構成ファイル][10] を編集します。
 
 `datadog.yaml`:
 
@@ -264,7 +264,7 @@ process_config:
   enabled: "true"
 ```
 
-構成が完了したら、[Agent を再起動][11]します。
+構成が完了したら、[Agent を再起動][11] します。
 
 ## 参考資料 {#further-reading}
 
@@ -289,5 +289,6 @@ process_config:
 [16]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [17]: /ja/agent/faq/windows-agent-ddagent-user/
 [18]: https://docs.datadoghq.com/ja/agent/troubleshooting/
+[19]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys

@@ -12,47 +12,50 @@ aliases:
 - /ja/logs/processing/parsing
 description: Grok プロセッサーを使用してログをパースする
 further_reading:
-- link: https://learn.datadoghq.com/courses/log-pipelines
-  tag: ラーニングセンター
-  text: ログパイプラインの構築と変更方法について
 - link: /logs/log_configuration/processors
   tag: ドキュメント
-  text: ログの処理方法
-- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
-  tag: ビデオ
-  text: 'Datadog のヒントとコツ: Grok パースを使用してログからフィールドを抽出する'
-- link: /logs/faq/how-to-investigate-a-log-parsing-issue/
-  tag: よくあるご質問
-  text: ログのパースに関する問題を調査する方法
-- link: /logs/guide/log-parsing-best-practice/
-  tag: よくあるご質問
-  text: ログのパース - ベストプラクティス
+  text: ログの処理方法を学ぶ
 - link: /logs/logging_without_limits/
   tag: ドキュメント
-  text: Datadog でインデックス化するログの量を制御します
+  text: Datadog によってインデックスされるログの量を制御する
+- link: /logs/faq/how-to-investigate-a-log-parsing-issue/
+  tag: FAQ
+  text: ログパースの問題を調査する方法
+- link: /logs/guide/log-parsing-best-practice/
+  tag: FAQ
+  text: ログパース – ベストプラクティス
+- link: https://learn.datadoghq.com/courses/log-pipelines
+  tag: ラーニングセンター
+  text: ログパイプラインの構築と変更方法を学ぶ
 - link: https://learn.datadoghq.com/courses/debugging-log-pipelines
   tag: ラーニングセンター
   text: ログパイプラインのデバッグ
+- link: https://www.datadoghq.com/blog/detect-http2-abuse-apache-web-server-logs/
+  tag: ブログ
+  text: Apache Web サーバーのログで HTTP/2 の不正利用を検出する方法
+- link: https://www.youtube.com/watch?v=AwW70AUmaaQ&list=PLdh-RwQzDsaM9Sq_fi-yXuzhmE7nOlqLE&index=3
+  tag: 動画
+  text: 'Datadog のヒントとテクニック: Grok パースを使用してログからフィールドを抽出する'
 title: パース
 ---
-{{< learning-center-callout header="学習センターで Grok パースを試す" btn_title="今すぐ登録" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
-  ログパイプラインの構築と修正を学び、Pipeline Scanner で管理し、一貫性を得られるよう処理されたログ全体で属性名を標準化します。
+{{< learning-center-callout header="ラーニングセンターで Grok パースを試す" btn_title="今すぐ登録する" btn_url="https://learn.datadoghq.com/courses/log-pipelines">}}
+  ログパイプラインの構築や変更方法、Pipeline Scanner による管理方法、そして処理済みログ全体で属性名を標準化して整合性を確保する方法を学びます。
 {{< /learning-center-callout >}}
 
-## 概要 {#overview}
+## 概要{#overview}
 
-Datadog は自動的に JSON 形式のログをパースします。他の形式については、Datadog で Grok Parser の助けを借りてログを強化することができます。
-Grok 構文により、純粋な正規表現よりも簡単にログをパースすることができます。Grok Parser を使用して、半構造化テキストメッセージから属性を抽出できます。
+Datadog は JSON 形式のログを自動的にパースします。他の形式の場合、Datadog では Grok Parser を使用してログをエンリッチできます。
+Grok 構文は、純粋な正規表現よりも簡単にログをパースする方法を提供します。Grok Parser を使用すると、半構造化テキストメッセージから属性を抽出することが可能です。
 
-Grok には、整数、IP アドレス、ホスト名などをパースするための再利用可能なパターンが付属しています。これらの値は文字列として grok パーサーに送られなければなりません。
+Grok には、整数、IP アドレス、ホスト名などを解析するための再利用可能なパターンが用意されています。これらの値は、文字列として Grok Parser に送信する必要があります。
 
-パースルールは、`%{MATCHER:EXTRACT:FILTER}` の構文で記述できます。
+パースルールは、`%{MATCHER:EXTRACT:FILTER}` という構文で記述できます。
 
-* **Matcher**: 期待する内容 (数値、単語、スペース以外など) を記述する規則 (または別のトークン規則への参照)
+* **Matcher**: 期待される内容 (数値、単語、notSpace など) を定義するルール (他のトークンルールへの参照を含む場合があります)。
 
-* **Extract** (オプション): *マッチャー*と一致するテキストをキャプチャする対象を表す識別子
+* **Extract** (オプション): *Matcher* によって一致したテキスト部分のキャプチャ先を表す識別子。
 
-* **Filter** (オプション): 一致したテキストを変換するためのポストプロセッサー
+* **Filter** (オプション): 一致した内容を変換するためのポストプロセッサー。
 
 典型的な非構造化ログの例:
 
@@ -60,13 +63,13 @@ Grok には、整数、IP アドレス、ホスト名などをパースするた
 john connected on 11/08/2017
 ```
 
-これに次のパース規則を使用します。
+以下のパースルールを使用する場合:
 
 ```text
 MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 ```
 
-処理後は、次のような構造化ログが生成されます。
+処理後、以下の構造化ログが生成されます。
 
 ```json
 {
@@ -77,74 +80,74 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 
 **注**:
 
-* 1 つの Grok パーサーに複数のパース規則がある場合:
-  * 特定のログに一致するルールは 1 つだけです。上から下の順で最初に一致するルールが、パースを行うルールになります。
-  * 各ルールは上記のリストに定義されたパースルールを参照します。
-* 同一の Grok パーサー内では同じ規則名を複数使用できません。
-* ルール名に含めることができるのは、英数字、`_`、および `.` だけです。英数字で始まる必要があります。
-* 値がヌルまたは空欄のプロパティは表示されません。
-* パーシング ルールはログ エントリ全体にマッチするよう定義する必要があります。各ルールはログの先頭から末尾まで適用されるためです。
-* 特定のログは大きな空白のギャップを生成することがあります。改行と空白には、それぞれ `\n` と `\s+` を使います。
+* 1 つの Grok Parser 内に複数のパースルールがある場合:
+  * 特定のログに対して一致するのは 1 つのルールのみです。上から順に確認し、最初に一致したルールがパースを行います。
+  * 各ルールは、リスト内でそれより上に定義されたパースルールを参照できます。
+* 同じ Grok Parser 内では、ルール名を一意にする必要があります。
+* ルール名には、英数字、`_`、`.` のみを使用できます。ルール名は英数字で始める必要があります。
+* 値が null または空のプロパティは表示されません。
+* 各ルールはログの先頭から末尾まで適用されるため、ログエントリ全体に一致するようにパースルールを定義する必要があります。
+* ログによっては、大きな空白が含まれる場合があります。改行や空白を適切に処理するには、`\n` と `\s+` を使用してください。
 
 ### マッチャーとフィルター{#matcher-and-filter}
 
-<div class="alert alert-danger">Grok パース機能は、<em>クエリ時</em> (<a href="/logs/explorer/calculated_fields/">ログエクスプローラー</a>内) で利用可能であり、限られたサブセットのマッチャー (<strong>data</strong>、<strong>integer</strong>、<strong>notSpace</strong>、<strong>number</strong>、および <strong>word</strong>) とフィルター (<strong>number</strong> と <strong>integer</strong>) をサポートしています。<br><br>
-次のフルセットのマッチャーとフィルターは、<em>取り込み時</em> <a href="/logs/log_configuration/processors/grok_parser/">Grok Parser</a> 機能に固有のものです。</div>
+<div class="alert alert-danger">Grok パース機能は、<em>query-time</em> (<a href="/logs/explorer/calculated_fields/">Log Explorer</a> 内) で利用可能で、限られたサブセットのマッチャー (<strong>data</strong>、<strong>integer</strong>、<strong>notSpace</strong>、<strong>number</strong>、および <strong>word</strong>) とフィルター (<strong>number</strong> および <strong>integer</strong>) をサポートしています。<br><br>
+以下のマッチャーとフィルターの完全なセットは、<em>ingest-time</em> の <a href="/logs/log_configuration/processors/grok_parser/">Grok パーサー</a>機能に固有のものです。</div>
 
-以下に、Datadog でネイティブに実装されるすべてのマッチャーとフィルターを示します。
+Datadog でネイティブに実装されているすべてのマッチャーとフィルターのリストは以下のとおりです。
 
 {{< tabs >}}
 {{% tab "マッチャー" %}}
 
-**クエリ時および取り込み時のマッチャー:**
+**query-time および ingest-time のマッチャー:**
 
-次のマッチャーは、クエリ時パース (ログエクスプローラー) と取り込み時パース (Grok Parser) の両方で利用可能です。
+query-time のパース (Log Explorer) と ingest-time のパース (Grok Parser) の両方で、以下のマッチャーが利用可能です。
 
 `word`
-: _単語_に一致します。つまり、単語境界で始まり、a-z、A-Z、0-9 の文字と `_` (アンダースコア) 文字を含み、単語境界で終わります。正規表現では `\b\w+\b` に相当します。
+: 単語の境界で始まり、a-z、A-Z、0-9、および`_` (アンダースコア) 文字を含み、単語の境界で終わる_単語_に一致します。正規表現の `\b\w+\b` に相当します。
 
 `notSpace`
-: 次のスペースまでの文字列に一致します。
+: 次のスペースまでの任意の文字列に一致します。
 
 `number`
-: 10 進浮動小数点数に一致し、それを倍精度数としてパースします。
+: 10 進浮動小数点数に一致し、倍精度浮動小数点数としてパースします。
 
 `integer`
-: 整数に一致し、それを整数としてパースします。
+: 整数に一致し、整数としてパースします。
 
 `data`
-: スペースと改行を含め、任意の文字列に一致します。正規表現では `.*` に相当します。上記のパターンがどれも該当しない場合に使用します。
+: スペースや改行を含む任意の文字列に一致します。正規表現の `.*` に相当します。上記のパターンがいずれも適切でない場合に使用します。
 
-**取り込み時専用のマッチャー:**
+**ingest-time にのみ使用可能なマッチャー:**
 
-次のマッチャーは、Grok Parser プロセッサーを使用した取り込み時パース専用であり、ログエクスプローラーでは使用できません。
+以下のマッチャーは、Grok Parser プロセッサーを使用した ingest-time のパースでのみ利用可能であり、Log Explorer では使用できません。
 
 `date("pattern"[, "timezoneId"[, "localeId"]])`
-: たパターンの日付に一致し、Unix タイムスタンプを生成するようにパースします。[日付マッチャーの例を参照してください](#parsing-dates)。
+: 指定されたパターンの日付に一致し、パースして Unix タイムスタンプを生成します。[date マッチャーの例を参照してください](#parsing-dates)。
 
 `regex("pattern")`
-: 正規表現に一致します。[正規表現マッチャーの例をチェックしてください](#regex)。
+: 正規表現に一致します。[regex マッチャーの例をチェックしてください](#regex)。
 
 `boolean("truePattern", "falsePattern")`
-: ブール値に一致してパースします。オプションとして、true と false のパターンを定義できます (デフォルトは `true` と `false`、大文字と小文字は区別されません)。
+: ブール値に一致してパースします。オプションで true と false のパターンを定義できます (デフォルトは `true` と `false` で、大文字と小文字は区別されません)。
 
 `numberStr`
-: 10 進浮動小数点数に一致し、それを文字列としてパースします。
+: 10 進浮動小数点数に一致し、文字列としてパースします。
 
 `numberExtStr`
-: (指数表記の) 浮動小数点数に一致し、それを文字列としてパースします。
+: 浮動小数点数 (指数表記を含む) に一致し、文字列としてパースします。
 
 `numberExt`
-: (指数表記の) 浮動小数点数に一致し、それを倍精度数としてパースします。
+: 浮動小数点数 (指数表記を含む) に一致し、倍精度浮動小数点数としてパースします。
 
 `integerStr`
-: 整数に一致し、それを文字列としてパースします。
+: 整数に一致し、文字列としてパースします。
 
 `integerExtStr`
-: (指数表記の) 整数に一致し、それを文字列としてパースします。
+: 整数 (指数表記を含む) に一致し、文字列としてパースします。
 
 `integerExt`
-: (指数表記の) 整数に一致し、それを整数としてパースします。
+: 整数 (指数表記を含む) に一致し、整数としてパースします。
 
 `doubleQuotedString`
 : 二重引用符で囲まれた文字列に一致します。
@@ -174,7 +177,7 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 : ホスト名に一致します。
 
 `ipOrHost`
-: ホスト名または IP に一致します。
+: ホスト名または IP アドレスにします。
 
 `port`
 : ポート番号に一致します。
@@ -182,85 +185,85 @@ MyParsingRule %{word:user} connected on %{date("MM/dd/yyyy"):date}
 {{% /tab %}}
 {{% tab "フィルター" %}}
 
-**クエリ時および取り込み時のフィルター:**
+**query-time および ingest-time のフィルター:**
 
-次のフィルターは、クエリ時パース (ログエクスプローラー) と取り込み時パース (Grok Parser) の両方で利用可能です。
+以下のフィルターは、query-time パース (Log Explorer) と ingest-time パース (Grok Parser) の両方で使用できます。
 
 `number`
-: 一致部分を倍精度数としてパースします。
+: 一致するものを倍精度浮動小数点数としてパースします。
 
 `integer`
-: 一致部分を整数としてパースします。
+: 一致するものを整数としてパースします。
 
-**取り込み時専用のフィルター:**
+**ingest-time のみのフィルター:**
 
-次のフィルターは、Grok Parser プロセッサーを使用した取り込み時パース専用であり、ログエクスプローラーでは使用できません。
+以下のフィルターは、Grok Parser を使用した ingest-time のパースでのみ利用可能で、Log Explorer では使用できません。
 
 `boolean`
-: 大文字と小文字を区別しないで、'true' および 'false' 文字列をブール値としてパースします。
+: 大文字と小文字を区別せずに、「true」および「false」文字列をブール値としてパースします。
 
 `nullIf("value")`
-: 一致部分が指定された値に等しい場合は null を返します。
+: 一致する値が指定された値と等しい場合、null を返します。
 
 `json`
 : 適切にフォーマットされた JSON をパースします。
 
 `rubyhash`
-: `{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}`など、適切な形式の Ruby ハッシュをパースします。
+: 適切にフォーマットされた Ruby ハッシュ (`{name => "John", "job" => {"company" => "Big Company", "title" => "CTO"}}` など) をパースします。
 
 `useragent([decodeuricomponent:true/false])`
-: user-agent をパースし、Agent によって表されるデバイス、OS、およびブラウザを含む JSON オブジェクトを返します。[User Agent プロセッサーをチェックしてください][1]。
+: ユーザーエージェントをパースし、Agent によって表されるデバイス、OS、およびブラウザを含む JSON オブジェクトを返します。[ユーザーエージェントをチェックする][1]。
 
 `querystring`
-: 一致する URL クエリ文字列内に含まれる、キーと値のペアすべてを抽出します (`?productId=superproduct&promotionCode=superpromo` など)。
+: 一致する URL クエリ文字列内のすべてのキーと値のペアを抽出します (例: `?productId=superproduct&promotionCode=superpromo`)。
 
 `decodeuricomponent`
-: URI コンポーネントをデコードします。たとえば、`%2Fservice%2Ftest` を `/service/test` に変換します。
+: URI コンポーネントをデコードします。たとえば、`%2Fservice%2Ftest` を`/service/test` に変換します。
 
 `lowercase`
-: 小文字に変換した文字列を返します。
+: 小文字の文字列を返します。
 
 `uppercase`
-: 大文字に変換した文字列を返します。
+: 大文字の文字列を返します。
 
 `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
-: キーと値のパターンを抽出して JSON オブジェクトを返します。[キーと値のフィルターの例](#key-value-or-logfmt) を参照してください。
+: キーと値のパターンを抽出し、JSON オブジェクトを返します。「[キーと値のフィルターの例](#key-value-or-logfmt)」を参照してください。
 
 `xml`
-: 適切な形式の XML をパースします。[XML フィルターの例](#parsing-xml) を参照してください。
+: 適切にフォーマットされた XML をパースします。「[XML フィルターの例](#parsing-xml)」を参照してください。
 
 `csv(headers[, separator[, quotingcharacter]])`
-: 適切にフォーマットされた CSV または TSV 行をパースします。[CSV フィルターの例](#parsing-csv) を参照してください。
+: 適切にフォーマットされた CSV または TSV 行をパースします。「[CSV フィルターの例](#parsing-csv)」を参照してください。
 
 `scale(factor)`
-: 抽出された数値を指定された係数で乗算します。
+: 期待される数値に指定された係数を掛けます。
 
 `array([[openCloseStr, ] separator][, subRuleOrFilter)`
-: トークンの文字列シーケンスをパースして、配列として返します。[リストを配列に](#list-to-array) の例を参照してください。
+: トークンの文字列シーケンスをパースし、配列として返します。「[リストから配列への変換](#list-to-array)」の例を参照してください。
 
 `url`
-: URL をパースし、トークン化されたすべてのメンバー (ドメイン、クエリパラメーター、ポートなど) を 1 つの JSON オブジェクトとして返します。[URL のパース方法を参照してください][2]。
+: URL をパースし、トークン化された各要素 (ドメイン、クエリパラメーター、ポートなど) を JSON オブジェクトとして返します。[URL のパース方法に関する詳細情報][2]。
 
 [1]: /ja/logs/log_configuration/processors/user_agent_parser/
 [2]: /ja/logs/log_configuration/processors/url_parser/
 {{% /tab %}}
 {{< /tabs >}}
 
-## 高度な設定 {#advanced-settings}
+## 詳細設定{#advanced-settings}
 
-Grok プロセッサの下部にある **高度な設定** セクションを使用して、デフォルトの `message` 属性ではなく特定の属性をパースするか、複数のパースルールで共通のパターンを再利用するヘルパールールを定義します。
+Grok プロセッサーの下部にある [{{< ui >}}Advanced Settings{{< /ui >}}] セクションを使用して、デフォルトの `message` 属性の代わりに特定の属性をパースしたり、複数のパースルール間で共通のパターンを再利用するためのヘルパールールを定義したりできます。
 
-### 特定のテキスト属性をパース {#parsing-a-specific-text-attribute}
+### 特定のテキスト属性のパース{#parsing-a-specific-text-attribute}
 
-**Extract from** フィールドを使用して、デフォルトの `message` 属性ではなく、指定されたテキスト属性に Grok プロセッサを適用します。
+[{{< ui >}}Extract from{{< /ui >}}] フィールドを使用して、デフォルトの `message` 属性の代わりに、指定したテキスト属性に対して Grok プロセッサーを適用できます。
 
-たとえば、キー-値としてパースする `command.line` 属性を含むログを考慮します。`command.line` から抽出して、その内容をパースし、そのコマンドデータから構造化された属性を作成します。
+たとえば、`command.line` 属性を含み、その内容をキーと値としてパースする必要があるログを考えてみましょう。`command.line` から抽出してその内容をパースし、コマンドデータから構造化された属性を作成することが可能になります。
 
-{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="command.line 属性から抽出する高度な設定の例" style="width:80%;">}}
+{{< img src="/logs/processing/parsing/grok_advanced_settings_extract.png" alt="command.line 属性からの抽出を含む詳細設定の例" style="width:80%;">}}
 
-### 共通パターンを再利用するためのヘルパールールの使用 {#using-helper-rules-to-reuse-common-patterns}
+### ヘルパールールを使用して共通パターンを再利用する{#using-helper-rules-to-reuse-common-patterns}
 
-**Helper Rules** フィールドを使用して、パースルールのトークンを定義します。ヘルパールールを使用すると、パースルール全体で共通する Grok パターンを再利用できます。これは、同じ Grok パーサー内にある複数のルールが同じトークンを使用する場合に便利です。
+[{{< ui >}}Helper Rules{{< /ui >}}] フィールドを使用して、パースルールのトークンを定義します。ヘルパールールを使用すると、共通の Grok パターンをパースルール全体で再利用できます。これは、同じ Grok パーサー内に同じトークンを使用するルールが複数ある場合に便利です。
 
 典型的な非構造化ログの例:
 
@@ -268,13 +271,13 @@ Grok プロセッサの下部にある **高度な設定** セクションを使
 john id:12345 connected on 11/08/2017 on server XYZ in production
 ```
 
-次のパース規則を使用します。
+次のパースルールを使用します。
 
 ```text
 MyParsingRule %{user} %{connection} %{server}
 ```
 
-次のヘルパーと組み合わせます。
+ヘルパールールは以下のとおりです。
 
 ```text
 user %{word:user.name} id:%{integer:user.id}
@@ -282,13 +285,13 @@ connection connected on %{date("MM/dd/yyyy"):connect_date}
 server on server %{notSpace:server.name} in %{notSpace:server.env}
 ```
 
-## 例 {#examples}
+## 例{#examples}
 
-以下に、パーサーの具体的な使用例をいくつか挙げます。
+パーサーの使用方法を示すいくつかの例:
 
-* [キー値または logfmt](#key-value-or-logfmt)
+* [キーと値または logfmt](#key-value-or-logfmt)
 * [日付のパース](#parsing-dates)
-* [交互パターン](#alternating-pattern)
+* [交互に現れるパターン](#alternating-pattern)
 * [オプションの属性](#optional-attribute)
 * [ネストされた JSON](#nested-json)
 * [正規表現](#regex)
@@ -297,18 +300,18 @@ server on server %{notSpace:server.name} in %{notSpace:server.env}
 * [XML](#parsing-xml)
 * [CSV](#parsing-csv)
 
-### キー値または logfmt {#key-value-or-logfmt}
+### キーと値または logfmt{#key-value-or-logfmt}
 
-これはキー-値コアフィルターです: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`。ここで:
+これはキーと値形式のコアフィルターで、その詳細を以下に示します: `keyvalue([separatorStr[, characterAllowList[, quotingStr[, delimiter]]]])`
 
-* `separatorStr`: キーと値を区切るセパレーターを定義します。デフォルトは `=` です。
-* `characterAllowList`: デフォルトの `\\w.\\-_@` に加えて、エスケープされない値の文字を追加で定義します。非引用符の値のみに使用されます (例: `key=@valueStr`)。
-* `quotingStr`: 引用符を定義し、デフォルトの引用符検出 `<>`、`""`、`''` を置き換えます。
-* `delimiter`: 異なるキー値ペアのセパレーターを定義します (例: `|` は `key1=value1|key2=value2` の区切り文字)。デフォルトは ` ` (通常のスペース)、`,` および `;` です。
+* `separatorStr`: キーと値の間の区切り文字を定義します。デフォルトは `=` です。
+* `characterAllowList`: デフォルトの `\\w.\\-_@` に加えて、エスケープせずに使用できる値の文字を定義します。引用符で囲まれていない値に対してのみ使用されます (例: `key=@valueStr`)。
+* `quotingStr`: 引用符を定義し、デフォルトの引用符検出である `<>`、`""`、`''` を置き換えます。
+* `delimiter`: 異なるキーと値のペア間の区切り文字を定義します (例: `key1=value1|key2=value2` の区切り文字は `|` です)。デフォルトは ` ` (通常のスペース)、`,`、および `;` です。
 
-**keyvalue** などのフィルターを使用すると、keyvalue または logfmt 形式の属性に文字列をより簡単にマップできます。
+`keyvalue` のようなフィルターを使用すると、keyvalue 形式や logfmt 形式の文字列を属性に簡単にマッピングできます。
 
-**ログ**:
+**ログ:**
 
 ```text
 user=john connect_date=11/08/2017 id=123 action=click
@@ -320,8 +323,8 @@ user=john connect_date=11/08/2017 id=123 action=click
 rule %{data::keyvalue}
 ```
 
-パラメーター名を指定する必要はありません。すでにログに含まれています。
-ルールパターンに **extract** の属性 `my_attribute` を追加すると、次のように表示されます。
+パラメーター名はすでにログに含まれているため、名前を指定する必要はありません。
+ルールパターンに **抽出** 属性の `my_attribute` を追加すると、次のように表示されます。
 
 ```json
 {
@@ -333,9 +336,9 @@ rule %{data::keyvalue}
 }
 ```
 
-`=` がキーと値の間のデフォルトのセパレーターでない場合は、セパレーターを指定してパースルールにパラメーターを追加してください。
+`=` がキーと値の間のデフォルトの区切り文字ではない場合は、パースルールに区切り文字を含むパラメーターを追加してください。
 
-**ログ**:
+**ログ:**
 
 ```text
 user: john connect_date: 11/08/2017 id: 123 action: click
@@ -347,9 +350,9 @@ user: john connect_date: 11/08/2017 id: 123 action: click
 rule %{data::keyvalue(": ")}
 ```
 
-ログに、URL の `/` のような特殊文字が属性値に含まれている場合は、それをパースルールの許可リストに追加してください:
+ログの属性値に、たとえば URL 内の `/` のような特殊文字が含まれている場合は、パースルールの許可リストに追加してください。
 
-**ログ**:
+**ログ:**
 
 ```text
 url=https://app.datadoghq.com/event/stream user=john
@@ -363,7 +366,7 @@ rule %{data::keyvalue("=","/:")}
 
 その他の例:
 
-| **生文字列**               | **パースルール**                                      | **結果**                            |
+| **生の文字列**               | **パースルール**                                      | **結果**                            |
 |:-----------------------------|:------------------------------------------------------|:--------------------------------------|
 | key=valueStr                 | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
 | key=\<valueStr>              | `%{data::keyvalue}`                                   | {"key": "valueStr"}                   |
@@ -375,8 +378,8 @@ rule %{data::keyvalue("=","/:")}
 | key1=value1\|key2=value2     | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 | key1="value1"\|key2="value2" | <code>%{data::keyvalue(&quot;=&quot;, &quot;&quot;, &quot;&quot;, &quot;&#124;&quot;)}</code> | {"key1": "value1", "key2": "value2"}  |
 
-**複数の引用文字列の例**: 複数の引用文字列が定義されている場合、デフォルトの動作は定義されている引用符文字に置き換えられます。
-キー値は、`quotingStr` に指定された内容に関係なく、引用符文字がない入力と常に一致します。引用符文字が使用されている場合、`characterAllowList` は無視され、引用符文字の間にあるすべてが抽出されます。
+**複数の QuotingString の例**: 複数の QuotingString が定義されている場合、デフォルトの動作が、定義された引用文字を使用する動作に置き換わります。
+キーと値は、`quotingStr` で何が指定されているかに関係なく、引用文字を含まない入力と常に一致します。引用文字が使用されている場合、引用文字で囲まれた部分がすべて抽出されるため、`characterAllowList` は無視されます。
 
 **ログ:**
 
@@ -398,15 +401,15 @@ rule %{data::keyvalue("=","/:")}
 
 **注**:
 
-* 空の値 (`key=`) または `null` 値 (`key=null`) は、出力 JSON に表示されません。
-* `data` オブジェクトで *keyvalue* フィルターを定義する場合にこのフィルターが一致しないなら、空の JSON `{}` が返されます (例: 入力: `key:=valueStr`、パースルール: `rule_test %{data::keyvalue("=")}`、出力: `{}`)。
-* `""` を `quotingStr` と定義すると、引用符のデフォルト設定が保持されます。
+* 空の値 (`key=`) または`null` 値 (`key=null`) は、出力 JSON には表示されません。
+* `data` オブジェクトに対して *keyvalue* フィルターを定義し、このフィルターに一致しなかった場合、空の JSON `{}` が返されます (例: 入力: `key:=valueStr`、パースルール: `rule_test %{data::keyvalue("=")}`、出力: `{}`)。
+* `""` を`quotingStr` として定義すると、引用のデフォルト設定が維持されます。
 
 ### 日付のパース{#parsing-dates}
 
-日付マッチャーは、タイムスタンプを EPOCH 形式 (**ミリ秒**計測単位) に変換します。
+日付マッチャーは、タイムスタンプを EPOCH 形式 (単位は**ミリ秒**) に変換します。
 
-| **生文字列**                       | **パースルール**                                          | **結果**              |
+| **生の文字列**                       | **パースルール**                                          | **結果**              |
 |:-------------------------------------|:----------------------------------------------------------|:------------------------|
 | 14:20:15                             | `%{date("HH:mm:ss"):date}`                                | {"date": 51615000}      |
 | 02:20:15 PM                          | `%{date("hh:mm:ss a"):date}`                              | {"date": 51615000}      |
@@ -422,19 +425,19 @@ rule %{data::keyvalue("=","/:")}
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","UTC+5"):date}`        | {"date": 1466047743000} |
 | Thu Jun 16 08:29:03 2016<sup>1</sup> | `%{date("EEE MMM dd HH:mm:ss yyyy","+3"):date}`           | {"date": 1466054943000} |
 
-<sup>1</sup> 独自のローカライズを実行し、タイムスタンプが UTC で_ない_場合は、`timezone` パラメーターを使用してください。
+<sup>1</sup> 独自のローカライズを実行しており、かつタイムスタンプが UTC では_ない_場合は、`timezone` パラメーターを使用します。
 サポートされているタイムゾーンの形式は次のとおりです。
 
-* `GMT`、`UTC`、`UT`、または`Z`
-* `+hh:mm`、`-hh:mm`、`+hhmm`、`-hhmm`。最大サポート範囲は +18:00 から 18:00 まで (両端を含む) です。
-* `UTC+`、`UTC-`、`GMT+`、`GMT-`、`UT+`、または `UT-` で始まるタイムゾーン。最大サポート範囲は +18:00 から 18:00 まで (両端を含む) です。
-* TZ データベースから取得したタイムゾーン ID。詳細については、[TZ データベース名][2]を参照してください。
+* `GMT`、`UTC`、`UT` または `Z`
+* `+hh:mm`、`-hh:mm`、`+hhmm`、`-hhmm`。サポートされている最大範囲は、+18:00 から -18:00 まで (両端を含む) です。
+* タイムゾーンは`UTC+`、`UTC-`、`GMT+`、`GMT-`、`UT+` または `UT-` で始まります。サポートされている最大範囲は、+18:00 から -18:00 まで (両端を含む) です。
+* TZ データベースから取得されたタイムゾーン ID。詳細については、「[TZ データベース名][2]」を参照してください。
 
-**注**: 日付をパースしても、その値がログの公式日付として設定されることは**ありません**。公式日付にするには、後続のプロセッサで[ログ日付リマッパー][3]を使用してください。
+**注**: 日付をパースしても、その値がログの公式な日付として**設定されるわけではありません**。これを行うには、後続のプロセッサーで[Log Date Remapper][3]を使用してください。
 
-### 交互パターン {#alternating-pattern}
+### 交互に現れるパターン{#alternating-pattern}
 
-ログの形式が 2 通りあり、1 つの属性だけで異なる場合は、交互に `(<REGEX_1>|<REGEX_2>)` を使用して 1 つのルールを設定します。このルールは、ブール OR に相当します。
+1 つの属性のみが異なる 2 種類の形式を持つログがある場合は、`(<REGEX_1>|<REGEX_2>)` を使用した交互パターンで単一のルールを設定します。このルールは、ブール演算の OR と同等です。
 
 **ログ**:
 
@@ -444,7 +447,7 @@ john connected on 11/08/2017
 ```
 
 **ルール**:
-"id" は整数であり、文字列ではないことに注意してください。
+「id」は文字列ではなく整数であることに注意してください。
 
 ```text
 MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("MM/dd/yyyy"):connect_date}
@@ -472,9 +475,9 @@ MyParsingRule (%{integer:user.id}|%{word:user.firstname}) connected on %{date("M
 }
 ```
 
-### オプションの属性 {#optional-attribute}
+### オプションの属性{#optional-attribute}
 
-一部のログには、常には表示されない値が含まれています。この場合、`()?` を使用して属性抽出をオプションにします。
+一部のログには、常に存在するわけではない値が含まれていることがあります。そのような場合は、`()?` を使用して属性抽出をオプションにします。
 
 **ログ**:
 
@@ -489,7 +492,7 @@ john connected on 11/08/2017
 MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("MM/dd/yyyy"):connect_date}
 ```
 
-**注**: 任意のセクションで先頭の単語の後ろにスペースを含めると、ルールは一致しません。
+**注**: オプションのセクションにある最初の単語の後にスペースを含めると、ルールは一致しません。
 
 **結果**:<br>
 `(%{integer:user.id} )?`
@@ -515,9 +518,9 @@ MyParsingRule %{word:user.firstname} (%{integer:user.id} )?connected on %{date("
 }
 ```
 
-### ネストされた JSON {#nested-json}
+### ネストされた JSON{#nested-json}
 
-生のテキストプレフィックスの後でネストされている JSON オブジェクトをパースするには、`json` フィルターを使用します。
+`json` フィルターを使用して、生のテキストのプレフィックスの後にネストされた JSON オブジェクトをパースします。
 
 **ログ**:
 
@@ -540,11 +543,16 @@ parsing_rule %{date("MMM dd HH:mm:ss"):timestamp} %{word:vm} %{word:app}\[%{numb
   "app": "program",
   "logger": {
     "thread_id": 123
-  }
+  },
+  "server": "server.1",
+  "method": "GET",
+  "status_code": 200,
+  "url": "https://app.datadoghq.com/logs/pipelines",
+  "duration": 123456
 }
 ```
 
-### 正規表現 {#regex}
+### 正規表現{#regex}
 
 **ログ**:
 
@@ -569,9 +577,9 @@ MyParsingRule %{regex("[a-z]*"):user.firstname}_%{regex("[a-zA-Z0-9]*"):user.id}
 }
 ```
 
-### リストから配列へ {#list-to-array}
+### リストから配列への変換{#list-to-array}
 
-`array([[openCloseStr, ] separator][, subRuleOrFilter)` フィルターを使い、リストを 1 つの属性の配列形式でリストを取り出します。`subRuleOrFilter` はオプションであり、これらの [フィルター][4] を受け入れます。
+`array([[openCloseStr, ] separator][, subRuleOrFilter)` フィルターを使用して、リストを単一の属性内の配列として抽出します。`subRuleOrFilter` はオプションであり、以下の[フィルター][4]を指定できます。
 
 **ログ**:
 
@@ -610,23 +618,23 @@ Users {John-Oliver-Marc-Tom} have been added to the database
 myParsingRule Users %{data:users:array("{}","-")} have been added to the database
 ```
 
-**ルールで使用するもの`subRuleOrFilter`**:
+**`subRuleOrFilter`**を使用したルール:
 
 ```text
 myParsingRule Users %{data:users:array("{}","-", uppercase)} have been added to the database
 ```
 
-### Glog 形式 {#glog-format}
+### Glog 形式{#glog-format}
 
-Kubernetes コンポーネントは時々 `glog` 形式でログを記録します。この例は、パイプラインライブラリの Kube Scheduler アイテムからのものです。
+Kubernetes コンポーネントは、`glog` 形式でログを出力することがあります。この例は、パイプラインライブラリの Kube Scheduler 項目からのものです。
 
-ログラインの例:
+ログ行の例:
 
 ```text
 W0424 11:47:41.605188       1 authorization.go:47] Authorization is disabled
 ```
 
-パースの例:
+パースルール:
 
 ```text
 kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+%{number:logger.thread_id} %{notSpace:logger.name}:%{number:logger.lineno}\] %{data:msg}
@@ -647,7 +655,7 @@ kube_scheduler %{regex("\\w"):level}%{date("MMdd HH:mm:ss.SSSSSS"):timestamp}\s+
 }
 ```
 
-### XML のパース {#parsing-xml}
+### XML のパース{#parsing-xml}
 
 XML パーサーは、XML 形式のメッセージを JSON に変換します。
 
@@ -685,25 +693,25 @@ rule %{data::xml}
 
 **注**:
 
-* XML の 2 つのタグの間に属性と文字列値の両方を持つタグが含まれている場合、`value` 属性が生成されます。たとえば、`<title lang="en">Harry Potter</title>` は `{"title": {"lang": "en", "value": "Harry Potter" } }` に変換されます。
-* 繰り返しタグは自動的に配列に変換されます。たとえば、`<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` は `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }` に変換されます。
+* XML に属性と文字列値の両方を持つタグが含まれている場合、`value` 属性が生成されます。例: `<title lang="en">Harry Potter</title>` は `{"title": {"lang": "en", "value": "Harry Potter" } }` に変換されます。
+* 繰り返しタグは自動的に配列に変換されます。例: `<bookstore><book>Harry Potter</book><book>Everyday Italian</book></bookstore>` は `{ "bookstore": { "book": [ "Harry Potter", "Everyday Italian" ] } }` に変換されます。
 
-### CSV のパース {#parsing-csv}
+### CSV のパース{#parsing-csv}
 
-**CSV** フィルターを使用して、文字列を属性に簡単にマップできます。対象のデータは任意の文字で区切る必要があります (デフォルトでは `,`)。
+`csv` フィルターを使用すると、特定の文字 (デフォルトは `,`) で区切られた文字列を属性に簡単にマッピングできます。
 
-CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` として定義されています。ここで、
+CSV フィルターは `csv(headers[, separator[, quotingcharacter]])` として定義され、その内容は以下のとおりです。
 
-* `headers`: キーの名前を `,` で区切って定義します。キー名はアルファベットで始まり、`_` に加えて任意の英数字を含むことができます。
-* `separator`: 異なる値を区切るために使用される区切り文字を定義します。1 文字のみが受け入れられます。デフォルト: `,`。**注**: TSV のタブ文字を表す `tab` を `separator` として使用します。
-* `quotingcharacter`: 引用符文字を定義します。1 文字のみが受け入れられます。デフォルト: `"`
+* `headers`: `,` で区切られたキー名を定義します。キー名は英字で始まる必要があり、英数字に加えて `_` を含めることができます。
+* `separator`: 各値を区切るための区切り文字を定義します。指定できる文字は 1 文字のみです。デフォルトは `,` です。**注**: TSV 形式のようにタブ文字を区切り文字として使用する場合は、`tab` に `separator` を使用してください。
+* `quotingcharacter`: 引用符を定義します。指定できる文字は 1 文字のみです。デフォルトは `"` です。
 
 **注**:
 
-* 区切り文字を含む値は引用符で囲む必要があります。
-* 引用符文字を含む引用された値は、引用符文字でエスケープする必要があります。たとえば、引用された値内にある `""` は `"` を表します。
-* ヘッダーに含まれるキー数と同じ個数の値がログに含まれていない場合、CSV パーサーは最初に出現する値とマッチさせます。
-* 整数と浮動小数点数は、可能な場合、自動的にキャストされます。
+* 区切り文字を含む値は、引用符で囲む必要があります。
+* 引用符で囲まれた値の中に引用符自体が含まれる場合は、その引用符を引用符文字でエスケープする必要があります。たとえば、引用符で囲まれた値の中にある `""` は `"` を表します。
+* ログに含まれる値の数がヘッダー内のキーの数と一致しない場合、CSV パーサーは先頭から順に値を対応付けます。
+* 整数および倍精度浮動小数点数は、可能な場合に自動的にキャストされます。
 
 **ログ**:
 
@@ -733,7 +741,7 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 
 その他の例:
 
-| **生文字列**               | **パースルール**                                                         | **結果**                                      |
+| **生の文字列**               | **パースルール**                                                         | **結果**                                      |
 |:-----------------------------|:-------------------------------------------------------------------------|:------------------------------------------------|
 | `John,Doe`                   | `%{data::csv("firstname,name")}`                                         | {"firstname": "John", "name":"Doe"}             |
 | `"John ""Da Man""",Doe`      | `%{data::csv("firstname,name")}`                                         | {"firstname": "John \"Da Man\"", "name":"Doe"}  |
@@ -744,9 +752,9 @@ myParsingRule %{data:user:csv("first_name,name,st_nb,st_name,city")}
 | `value1,,value3`             | `%{data::csv("key1,key2,key3")}`                                         | {"key1": "value1", "key3":"value3"}             |
 | <code>Value1&nbsp;&nbsp;&nbsp;&nbsp;Value2&nbsp;&nbsp;&nbsp;&nbsp;Value3</code> (TSV)      | `%{data::csv("key1,key2,key3","tab")}` | {"key1": "value1", "key2": "value2", "key3":"value3"} |
 
-### データマッチャーを使用して不要なテキストを破棄する {#use-data-matcher-to-discard-unneeded-text}
+### データマッチャーを使用して不要なテキストを破棄する{#use-data-matcher-to-discard-unneeded-text}
 
-ログに必要な部分を解析した後、その後のテキストが破棄しても安全であることがわかっている場合、データマッチャーを使用して破棄することができます。次のログの例では、`data` マッチャーを使用して、末尾の `%` を削除することができます。
+必要な情報のパースが完了し、それ以降のテキストを破棄しても問題ないと判断できるログがある場合、データマッチャーを使用してその部分を破棄することができます。以下のログの例では、`data` マッチャーを使用して末尾の `%` を破棄することが可能です。
 
 **ログ**:
 
@@ -769,11 +777,11 @@ MyParsingRule Usage\:\s+%{number:usage}%{data:ignore}
 }
 ```
 
-### ASCII 制御文字 {#ascii-control-characters}
+### ASCII 制御文字{#ascii-control-characters}
 
-ログに ASCII 制御文字が含まれている場合、それらは取り込み時にシリアライズされます。これらは、grok パーサー内でシリアライズされた値を明示的にエスケープすることで処理できます。
+ログに ASCII 制御文字が含まれている場合、それらは取り込み時にシリアル化されます。これらの文字は、Grok Parser 内でシリアル化された値を明示的にエスケープすることで処理できます。
 
-## 参考資料 {#further-reading}
+## 関連資料{#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

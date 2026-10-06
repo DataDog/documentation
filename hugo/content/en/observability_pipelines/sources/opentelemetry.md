@@ -172,7 +172,7 @@ Set the listener address environment variables to the following default values. 
 To send logs from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
 1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
-    1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
+    1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true` in case the log doesn't have the `source` field.
     1. When you install the Worker, for the OpenTelemetry source environment variables:
         1. Set your HTTP listener to `0.0.0.0:4318`.
         1. Set your gRPC listener to `0.0.0.0:4317`.

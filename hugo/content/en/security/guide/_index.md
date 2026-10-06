@@ -22,6 +22,7 @@ disable_toc: true
     {{< nextlink href="/security/cloud_siem/guide/azure-config-guide-for-cloud-siem/" >}}Azure Configuration Guide for Cloud SIEM{{< /nextlink >}}
     {{< nextlink href="security/cloud_siem/guide/monitor-authentication-logs-for-security-threats" >}}Monitor Authentication Logs for Security Threats{{< /nextlink >}}
     {{< nextlink href="/security/cloud_siem/guide/customize-which-logs-cloud-siem-analyzes/" >}}Customize which logs Cloud SIEM analyzes{{< /nextlink >}}
+    {{< nextlink href="/security/cloud_siem/guide/ingest-stix-threat-intelligence/" >}}Ingest STIX Threat Intelligence{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Code Security Guides:" >}}

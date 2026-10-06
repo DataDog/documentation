@@ -2,225 +2,136 @@
 title: Límites de tasa
 type: api
 ---
+{{< h2-with-copy-btn >}}Límites de tasa{{< /h2-with-copy-btn >}}
 
-{{< h2 >}}Límites de tasa{{< /h2 >}}
+Muchos puntos de conexión de la API tienen límites de tasa. Una vez que excede una cierta cantidad de solicitudes en un período específico, Datadog devuelve un error.
 
-Muchos endpoints de la API tienen un límite de tasa. Una vez que se supera un determinado número de solicitudes en un periodo específico, Datadog devuelve un error.
+Si se le aplica un límite de tasa, puede ver un 429 en el código de respuesta. Puede esperar el tiempo designado por el `X-RateLimit-Period` antes de realizar llamadas nuevamente, o cambiar a realizar llamadas a una frecuencia ligeramente mayor que el `X-RateLimit-Limit` o `X-RateLimit-Period`.
 
-Si tienes una tasa limitada, puedes ver un 429 en el código de respuesta. Puedes esperar el tiempo designado por `X-RateLimit-Period` antes de volver a realizar llamadas, o pasar a realizar llamadas a una frecuencia ligeramente mayor que `X-RateLimit-Limit` o `X-RateLimit-Period`.
+Los límites de tasa pueden aumentarse desde los valores predeterminados [contactando al equipo de soporte de Datadog][1].
 
-Puedes aumentar los límites de tasa a partir de los valores predeterminados [poniéndote en contacto con el equipo de soporte de Datadog][1].
+Con respecto a la política de límite de tasa de la API:
 
-En cuanto a la política de límite de tasa de API:
-
-- Datadog **no limita la tasa** de envío de puntos de datos/métricas (consulta la [sección de métricas][2] para más información sobre cómo se gestiona la tasa de envío de métricas). El cruce de límites depende de la cantidad de [métricas personalizadas][3] según tu acuerdo.
-- La API para el envío de logs no tiene un límite de tasa.
-- El límite de tasa de envío es de `250,000` eventos por minuto y organización.
-- Los límites de tasa para los endpoints varían y se incluyen en los encabezados que se detallan a continuación. Estos pueden ampliarse bajo demanda.
+- Datadog **no aplica límites de tasa** en el envío de puntos de datos/métricas (consulte la [sección de métricas][2] para obtener más información sobre cómo se maneja la tasa de envío de métricas). Los límites encontrados dependen de la cantidad de [métricas personalizadas][3] según su acuerdo.
+- La API para enviar logs no tiene límites de tasa.
+- El límite de tasa para el envío de eventos es de `250,000` eventos por minuto por organización.
+- Los límites de tasa para los puntos de conexión varían y se incluyen en los encabezados detallados a continuación. Estos pueden extenderse bajo demanda.
 
 <div class="alert alert-danger">
-La lista anterior no incluye todos los límites de velocidad de las APIs de Datadog. Si experimentas limitaciones de velocidad, ponte en contacto con <a href="https://www.datadoghq.com/support/">el servicio de asistencia</a> para obtener más información sobre las APIs que utilizas y sus límites.</div>
+La lista anterior no es exhaustiva de todos los límites de tasa en las Datadog API. Si está experimentando una limitación de tasa, comuníquese con <a href="https://www.datadoghq.com/support/">soporte</a> para obtener más información sobre las API que está utilizando y sus límites.</div>
 
-| Cabeceras de límites de tasa      | Descripción                                              |
+| Encabezados de límite de tasa      | Descripción                                              |
 | ----------------------- | -------------------------------------------------------- |
-| `X-RateLimit-Limit`     | Número de solicitudes permitidas en un periodo.             |
-| `X-RateLimit-Period`    | Duración en segundos de los reinicios (alineados con el calendario). |
-| `X-RateLimit-Remaining` | Número de solicitudes permitidas que quedan en el periodo actual.  |
-| `X-RateLimit-Reset`     | Tiempo en segundos hasta el próximo reinicio.                        |
-| `X-RateLimit-Name`      | Nombre del límite de tasa para solicitudes de aumento.            |
+| `X-RateLimit-Limit`     | número de solicitudes permitidas en un período de tiempo.             |
+| `X-RateLimit-Period`    | duración del tiempo en segundos para los restablecimientos (alineado al calendario). |
+| `X-RateLimit-Remaining` | número de solicitudes permitidas restantes en el período de tiempo actual.  |
+| `X-RateLimit-Reset`     | tiempo en segundos hasta el próximo restablecimiento.                        |
+| `X-RateLimit-Name`      | nombre del límite de tasa para solicitudes de aumento.            |
 
-### Métricas de uso de API Datadog
+### Métricas de uso de Datadog API {#datadog-api-usage-metrics}
 
-Todas las API de Datadog tienen un límite de uso durante un periodo de tiempo determinado. Las API pueden tener buckets de límite de tasa únicos y distintos o agruparse en un único bucket en función de los recursos que se utilicen. Por ejemplo, la API de estado del monitor tiene un límite de tasa que permite a un humano o a un script de automatización realizar consultas sólo una cantidad determinada de veces por minuto. El endpoint rechaza el exceso de solicitudes mediante un código de respuesta 429 y una sugerencia para que se detenga hasta que transcurra un periodo de recuperación. Las métricas de uso de API permiten a los usuarios de Datadog realizar el autoservicio y auditar el consumo del límite de tasa de API de los endpoints de la API (excluyendo los endpoints de envío de métricas, logs y eventos). Estas métricas proporcionan una imagen de las solicitudes permitidas y bloqueadas, y se proporcionan con las siguientes dimensiones y etiquetas (tags) disponibles:
+Todas las Datadog API tienen un límite de uso para un período de tiempo determinado. Las API pueden tener depósitos de límites de tasa únicos y distintos o agruparse en un solo depósito según el recurso o los recursos que se utilicen. Por ejemplo, la API de estado del monitor tiene un límite de tasa que permite a un humano o a un script de automatización realizar consultas solo una cantidad determinada de veces por minuto. El punto de conexión rechaza las solicitudes en exceso con un código de respuesta 429 y una sugerencia de esperar hasta que haya expirado un período de restablecimiento. Las métricas de uso de la API permiten a los usuarios de Datadog autoservirse y auditar el consumo del límite de tasa de la API para los puntos de conexión (excluyendo los puntos de conexión de envío de métricas, registros y eventos). Utilice el siguiente tablero, las métricas y las etiquetas para ver las solicitudes permitidas y bloqueadas.
 
-{{% site-region region="us" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://app.datadoghq.com/dash/integration/31668/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="eu1" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://app.datadoghq.eu/dash/integration/1386/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="us3" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://us3.datadoghq.com/dash/integration/2248/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="us5" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://us5.datadoghq.com/dash/integration/1421/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="ap1" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://ap1.datadoghq.com/dash/integration/2698/datadog-api-rate-limit-usage){{% /site-region %}}
-{{% site-region region="gov" %}}[Dashboard del uso del límite de tasa de la API Datadog](https://app.ddog-gov.com/dash/integration/1330/datadog-api-rate-limit-usage){{% /site-region %}}
+Consulte el [tablero de visibilidad del límite de tasa de la Datadog API][5] para obtener una vista preconfigurada de estas métricas. Seleccione su sitio de Datadog en el selector de sitios de esta página antes de abrir el tablero.
 
-#### Métricas disponibles
+#### Métricas de visibilidad del límite de tasa {#rate-limit-visibility-metrics}
 
-<table>
-  <thead>
-    <th>Dimensión</th>
-    <th>Métrica de uso</th>
-    <th>Descripción</th>
-    <th>Etiquetas disponibles</th>
-  </thead>
-  <tr>
-    <td rowspan="2"><strong>Organización</strong></td>
-    <td><code>datadog.apis.usage.per_org</code></td>
-    <td>Límite de tasa en toda la organización del número de solicitudes de API realizadas a un endpoint específico</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code></li>
-      <li><code>limit_name</code></li>
-      <li><code>limit_period</code></li>
-      <li><code>rate_limit_status</code></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>datadog.apis.usage.per_org_ratio</code></td>
-    <td>Proporción de solicitudes de API por dimensiones disponibles para un número total de solicitudes (<code>limit_count</code>) permitidas.</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code></li>
-      <li><code>limit_name</code></li>
-      <li><code>limit_period</code></li>
-      <li><code>rate_limit_status</code></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td rowspan="2"><strong>Usuario (UUID)</strong></td>
-    <td><code>datadog.apis.usage.per_user</code></td>
-    <td>Número de solicitudes de API realizadas para un endpoint de API específico cuya tasa está limitada por usuario único.</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code></li>
-      <li><code>limit_name</code></li>
-      <li><code>limit_period</code></li>
-      <li><code>rate_limit_status</code></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>datadog.apis.usage.per_user_ratio</code></td>
-    <td>Proporción de solicitudes de API por dimensiones disponibles para un número total de solicitudes (<code>limit_count</code>) permitidas.</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code><br /></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code><br /></li>
-      <li><code>limit_name</code><br /></li>
-      <li><code>limit_period</code><br /></li>
-      <li><code>rate_limit_status</code><br /></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td rowspan="2"><strong>API Key</strong></td>
-    <td><code>datadog.apis.usage.per_api_key</code></td>
-    <td>Número de solicitudes de API realizadas para un endpoint de API específico cuya tasa está limitada por clave de API única utilizada.</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code></li>
-      <li><code>limit_name</code></li>
-      <li><code>limit_period</code></li>
-      <li><code>rate_limit_status</code></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-  <tr>
-    <td><code>datadog.apis.usage.per_api_key_ratio</code></td>
-    <td>Proporción de solicitudes de API por dimensiones disponibles para un número total de solicitudes (<code>limit_count</code>) permitidas.</td>
-    <td>
-    <ul>
-      <li><code>app_key_id</code></li>
-      <li><code>child_org</code> (sólo en la principal)</li>
-      <li><code>limit_count</code></li>
-      <li><code>limit_name</code></li>
-      <li><code>limit_period</code></li>
-      <li><code>rate_limit_status</code></li>
-      <li><code>user_uuid</code></li>
-    </ul>
-    </td>
-  </tr>
-</table>
+Las métricas de visibilidad del límite de tasa utilizan el espacio de nombres `datadog.apis.rate_limit.usage.*`. El nombre de la métrica identifica el contexto del límite de tasa configurado:
 
+| Contexto | Solicitudes permitidas | Solicitudes bloqueadas | Utilización |
+|-------|------------------|------------------|-------------|
+| Organización | `datadog.apis.rate_limit.usage.per_org_count` | `datadog.apis.rate_limit.usage.per_org_blocked_count` | `datadog.apis.rate_limit.usage.per_org_pct` |
+| Usuario | `datadog.apis.rate_limit.usage.per_user_count` | `datadog.apis.rate_limit.usage.per_user_blocked_count` | `datadog.apis.rate_limit.usage.per_user_pct` |
+| Clave de API | `datadog.apis.rate_limit.usage.per_api_key_count` | `datadog.apis.rate_limit.usage.per_api_key_blocked_count` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
 
-#### Clave de etiqueta
+Las métricas de solicitudes permitidas cuentan las solicitudes que la API permitió. Las métricas de solicitudes bloqueadas cuentan las solicitudes que la API rechazó porque excedieron un límite de tasa. Las métricas `*_pct` informan el total de solicitudes intentadas (permitidas más bloqueadas) como un porcentaje del límite configurado, donde `100` representa la utilización completa. Los valores superiores a `100` indican que las solicitudes fueron bloqueadas porque se excedió el límite.
 
+Para los widgets del tablero, utilice un resumen `sum(60s)` a nivel de minuto para las métricas de solicitudes permitidas y solicitudes bloqueadas para mostrar las solicitudes por minuto. Utilice el valor `*_pct` máximo para el intervalo para mostrar la utilización máxima. Envuelva cada término en `default_zero()` al combinar métricas con `+`, como se muestra en los ejemplos de consulta a continuación.
 
-| Nombre de etiqueta            | Descripción                                                                                                               |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------|
-| `app_key_id`        | ID de la clave de aplicación utilizada por el cliente de la API. Puede ser `N/A` para usuarios web o móviles y endpoints abiertos.                      |
-| `child_org`         | Nombre de la organización secundaria, si se visualiza desde la organización principal. De lo contrario, se define en `N/A`. Esto sólo se aplica dentro del mismo centro de datos. |
-| `limit_count`       | Número de solicitudes disponibles para cada nombre de límite de tasa durante un periodo de solicitud.                                             |
-| `limit_name`        | Nombre del límite de tasa. Diferentes endpoints pueden compartir el mismo nombre.                                                          |
-| `limit_period`      | Tiempo en segundos para cada nombre de límite de tasa antes de que se reinicie el recuento de consumo.                                           |
-| `rate_limit_status` | `passed`: Solicitud no bloqueada.<br />`blocked` : La solicitud fue bloqueada debido a que se infringieron los límites de tasa.                       |
-| `user_uuid`         | UUID del usuario del consumo de API.                                                                                         |
+Los siguientes gauges informan el límite de solicitudes configurado para cada nombre de límite de tasa. El nombre de la métrica identifica el contexto:
 
-#### Rollup en widgets
+| Contexto | Límite de solicitudes configurado |
+|-------|--------------------------|
+| Organización | `datadog.apis.rate_limit.usage.per_org_limit_count` |
+| Usuario | `datadog.apis.rate_limit.usage.per_user_limit_count` |
+| Clave de API | `datadog.apis.rate_limit.usage.per_api_key_limit_count` |
 
-Por lo general, las visualizaciones de métricas deben resumirse al minuto utilizando sum(60s) para agregar el número total de solicitudes por minuto.
+##### Etiquetas disponibles {#available-tags}
 
-Las métricas de proporción ya están normalizadas con respecto al correspondiente `limit_period`.
+| Nombre de la etiqueta | Descripción | Disponibilidad |
+|----------|-------------|--------------|
+| `app_key_id` | ID de clave de aplicación asociado con la solicitud. La etiqueta está presente con un valor vacío cuando la solicitud no utiliza una clave de aplicación. | Métricas de recuento, recuento bloqueado y utilización |
+| `child_org_name` | Nombre para visualizar de la organización secundaria representada por una métrica copiada. | Todas las métricas con `org_scope:child_org` |
+| `limit_name` | Nombre del límite de tasa. Diferentes puntos de conexión pueden compartir el mismo nombre. | Todas las métricas |
+| `org_scope` | Relación entre la métrica y la organización que la visualiza: `current_org` para el propio tráfico de esa organización o `child_org` para una copia de la organización secundaria visible desde su organización raíz. | Todas las métricas |
+| `user_uuid` | UUID del usuario asociado con la solicitud. | Métricas de recuento, recuento bloqueado y utilización |
 
-##### Ejemplos de uso
+Cuando visualice métricas de una organización secundaria, sus propias métricas usarán `org_scope:current_org`. El valor `org_scope:child_org` y la etiqueta `child_org_name` aparecen solo en las copias adicionales enviadas a la organización raíz.
 
-Solicitudes por nombre de límite de tasa
-: Grafica la suma de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` y `datadog.apis.usage.per_api_key` por `limit_name`<br /><br />
-  **Ejemplo:** `default_zero(sum:datadog.apis.usage.per_org{*} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_user{*} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_api_key{*} by {limit_name})`
+##### Ejemplos de consulta {#query-examples}
 
-Bloqueado por nombre de límite de tasa
-: Grafica la suma de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` y `datadog.apis.usage.per_api_key` por `limit_name` con `rate_limit_status:blocked`<br /><br />
-  **Ejemplo:** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked} by {limit_name}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked} by {limit_name})`
+Solicitudes permitidas por nombre de límite de tasa
+: Grafique la suma de las tres métricas `*_count` por `limit_name`.<br /><br />
+  **Ejemplo:** `default_zero(sum:datadog.apis.rate_limit.usage.per_org_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_user_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_api_key_count{*} by {limit_name})`
 
-Endpoint bloqueado por usuario
-: Grafica la suma de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` y `datadog.apis.usage.per_api_key` por `user_uuid` con `rate_limit_status:blocked` y `limit_name:example`<br /><br />
-  **Ejemplo:** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked,limit_name:example} by {user_uuid}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked,limit_name:example} by {user_uuid}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked,limit_name:example} by {user_uuid})`
+Solicitudes bloqueadas por nombre de límite de tasa
+: Grafique la suma de las tres métricas `*_blocked_count` por `limit_name`.<br /><br />
+  **Ejemplo:** `default_zero(sum:datadog.apis.rate_limit.usage.per_org_blocked_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_user_blocked_count{*} by {limit_name}) + default_zero(sum:datadog.apis.rate_limit.usage.per_api_key_blocked_count{*} by {limit_name})`
 
-Endpoint bloqueado por ID de clave de aplicación
-: Grafica la suma de `datadog.apis.usage.per_org`, `datadog.apis.usage.per_user` y `datadog.apis.usage.per_api_key` por `app_key_id` con `rate_limit_status:blocked` y `limit_name:example`<br /><br />
-  **Ejemplo:** `default_zero(sum:datadog.apis.usage.per_org{rate_limit_status:blocked,limit_name:example} by {app_key_id}) + default_zero(sum:datadog.apis.usage.per_user{rate_limit_status:blocked,limit_name:example} by {app_key_id}) + default_zero(sum:datadog.apis.usage.per_api_key{rate_limit_status:blocked,limit_name:example} by {app_key_id})`
+#### Migrar desde métricas de uso heredadas {#migrate-from-legacy-usage-metrics}
 
-Proporción de límites de tasa utilizados por nombre de límite de tasa
-: Grafica la suma de `datadog.apis.usage.per_org_ratio`, `datadog.apis.usage.per_user_ratio` y `datadog.apis.usage.per_api_key_ratio` por `limit_name`<br /><br />
-  **Ejemplo:** `default_zero(max:datadog.apis.usage.per_org_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_user_ratio{*} by {limit_name}) + default_zero(max:datadog.apis.usage.per_api_key_ratio{*} by {limit_name})`
+Las métricas `datadog.apis.rate_limit.usage.*` reemplazan a las métricas `datadog.apis.usage.*`. Actualice los tableros y monitors con los siguientes reemplazos. Las consultas sobre las métricas heredadas `datadog.apis.usage.*` que no estaban filtradas por `rate_limit_status` contaban las solicitudes permitidas y bloqueadas juntas; para preservar ese total, agregue la métrica `*_blocked_count` correspondiente junto con el reemplazo `*_count`.
 
+| Métrica heredada | Métrica de reemplazo |
+|---------------|--------------------|
+| `datadog.apis.usage.per_org` | `datadog.apis.rate_limit.usage.per_org_count` |
+| `datadog.apis.usage.per_org_ratio` | `datadog.apis.rate_limit.usage.per_org_pct` |
+| `datadog.apis.usage.per_user` | `datadog.apis.rate_limit.usage.per_user_count` |
+| `datadog.apis.usage.per_user_ratio` | `datadog.apis.rate_limit.usage.per_user_pct` |
+| `datadog.apis.usage.per_api_key` | `datadog.apis.rate_limit.usage.per_api_key_count` |
+| `datadog.apis.usage.per_api_key_ratio` | `datadog.apis.rate_limit.usage.per_api_key_pct` |
 
-### Aumentar tu límite de tasa
-Puedes solicitar un aumento de los límites de tasa creando un ticket de asistencia con los siguientes detalles en **Ayuda** > **Nuevo ticket de asistencia**. Cuando recibimos una solicitud de aumento de límite de tasa, nuestro equipo de Ingeniería de soporte revisa la solicitud caso por caso y, si es necesario, trabaja junto a los recursos internos de Ingeniería para confirmar la viabilidad de la solicitud de aumento de límite de tasa.
+Las métricas de reemplazo difieren de las métricas heredadas de las siguientes maneras:
 
-    Título:
-        Solicitud de aumento de límite de tasa en endpoint: X
+- Las solicitudes permitidas y bloqueadas utilizan métricas separadas en lugar de la etiqueta `rate_limit_status`. Reemplace los filtros de estado heredados con la métrica de solicitud permitida o de solicitud bloqueada correspondiente. Las métricas de utilización combinan las solicitudes permitidas y bloqueadas.
+- Las etiquetas `org_scope` y `child_org_name` reemplazan a la etiqueta heredada `child_org`. Desde la organización raíz, filtre por `org_scope:child_org` y utilice `child_org_name` para filtrar o agrupar por el nombre para visualizar del hijo. Utilice `org_scope:current_org` para el tráfico propio de la organización que realiza la visualización.
+- Las etiquetas `limit_count` y `limit_period` no están incluidas. Utilice el gauge `*_limit_count` correspondiente para el límite de solicitudes configurado. Lea el período de límite de tasa del encabezado de respuesta `X-RateLimit-Period`.
 
-    Detalles:
-        Querríamos solicitar un aumento del límite de tasa para el endpoint de API: X
-        Ejemplo de casos de uso/consultas:
-            Ejemplo de llamada de API como cURL o como URL con carga útil de ejemplo
+### Aumente su límite de tasa {#increase-your-rate-limit}
+Puede solicitar límites de tasa aumentados creando un ticket de soporte con los detalles a continuación en **Ayuda** > **Nuevo ticket de soporte**. Tras recibir un aumento del límite de tasa, nuestro equipo de ingeniería de soporte revisa la solicitud caso por caso y, de ser necesario, trabaja con recursos de ingeniería internos para confirmar la viabilidad de la solicitud de aumento del límite de tasa.
 
-        Motivos para aumentar el límite de tasa:
-            Ejemplo: Nuestra organización utiliza este endpoint para dimensionar correctamente un contenedor antes de desplegarlo. Este despliegue tiene lugar cada X horas o hasta Y veces al día.
+    Title:
+        Request to increase rate limit on endpoint: X
 
-        Límite de tasa deseado:
-            Consejo: Tener en mente un aumento específico del límite o del porcentaje ayuda a ingeniería de soporte a agilizar la solicitud a los equipos internos de Ingeniería para su revisión.
+    Details:
+        We would like to request a rate limit increase for API endpoint: X
+        Example use cases/queries:
+            Example API call as cURL or as URL with example payload
 
-Una vez que el servicio de asistencia de Datadog revise y apruebe el caso de uso, podrá aplicar el aumento del límite de tasa entre bastidores. Ten en cuenta que existe un límite máximo para el aumento del límite de tasa debido a la naturaleza SaaS de Datadog. El servicio de asistencia de Datadog se reserva el derecho a rechazar aumentos del límite de tasa en función de los casos de uso y las recomendaciones del equipo de Ingeniería.
+        Motivation for increasing rate limit:
+            Example - Our organization uses this endpoint to right size a container before we deploy. This deployment takes place every X hours or up to Y times per day.
 
-### Logs de auditoría
-Las métricas de límite y uso de API proporcionan información sobre patrones de uso y solicitudes bloqueadas. Si necesitas más información, Audit Trail ofrece una visibilidad más detallada de la actividad de la API.
+        Desired target rate limit:
+            Tip - Having a specific limit increase or percentage increase in mind helps Support Engineering expedite the request to internal Engineering teams for review.
 
-Con Audit Trail, puedes ver datos como:
-* **Dirección IP y geolocalización** - Identifica dónde se originaron las solicitudes de API.
-* **Tipo de actor** - Distingue entre cuentas de servicio y cuentas de usuario.
-* **Autenticación mediante API frente a autenticación mediante clave de aplicación** - Descubre si las solicitudes se realizaron a través de una clave de API o directamente por un usuario.
-* **Eventos correlacionados** - Consulta otros eventos que ocurran al mismo tiempo, como cambios de configuración o acciones relacionadas con la seguridad.
+Después de que Datadog Support revisa y aprueba el caso de uso, pueden aplicar el aumento del límite de tasa internamente. Tenga en cuenta que existe un máximo para cuánto se puede aumentar un límite de tasa debido a la naturaleza SaaS de Datadog. El soporte de Datadog se reserva el derecho de rechazar aumentos de límites de tasa según los casos de uso y las recomendaciones de ingeniería.
 
-Audit Trail puede ayudar a los equipos de asistencia a solucionar problemas de límites de tasa al proporcionar más contexto sobre el consumo de API y las solicitudes bloqueadas. También permite realizar un seguimiento del uso de la API en toda la organización por motivos de seguridad y cumplimiento.
+### Registros de auditoría {#audit-logs}
+El límite de API y las métricas de uso proporcionan información sobre los patrones de uso y las solicitudes bloqueadas. Si necesita detalles adicionales, Audit Trail ofrece una visibilidad más granular de la actividad de la API.
 
-Para obtener una visibilidad más detallada de la actividad de la API, considera el uso de **[Audit Trail][4]**.
+Con Audit Trail, puede visualizar datos como:
+* **Dirección IP y geolocalización** – Identifique el origen de las solicitudes de API.
+* **Tipo de actor** – Distinga entre cuentas de servicio y cuentas de usuario.
+* **Autenticación de clave de API frente a clave de aplicación** – Visualice si las solicitudes se realizaron a través de una clave de API o directamente por un usuario.
+* **Eventos correlacionados** – Visualice otros eventos que ocurren al mismo tiempo, como cambios de configuración o acciones relacionadas con la seguridad.
+
+Audit Trail puede ayudar a los equipos a solucionar problemas de límites de tasa al proporcionar más contexto sobre el consumo de API y las solicitudes bloqueadas. También permite el seguimiento del uso de la API en toda la organización para fines de seguridad y cumplimiento.
+
+Para obtener una visibilidad más detallada de la actividad de la API, considere usar **[Audit Trail][4]**.
 
 
 [1]: /es/help/
 [2]: /es/api/v1/metrics/
 [3]: /es/metrics/custom_metrics/
 [4]: /es/account_management/audit_trail/events/
+[5]: https://app.datadoghq.com/dash/integration/datadog_api_rate_limit_visibility

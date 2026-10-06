@@ -18,7 +18,7 @@ A facet displays the distinct members of an attribute or a tag and provides basi
 
 ### Create a facet
 
-To add a facet, use the {{< ui >}}+ Add{{< /ui >}} in the left side panel.
+To add a facet, use the {{< ui >}}\+ Add{{< /ui >}} in the left side panel.
 
 After you add the facet, the value of this attribute is stored for all new views, and you can use it in facet side panels. You can also use it to group by in [pattern-based correlations][1], event monitors, and graph widgets.
 

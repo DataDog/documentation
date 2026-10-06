@@ -122,7 +122,7 @@ Click {{< ui >}}New Reference Table +{{< /ui >}}, then add a name, select {{< ui
 2. In the Azure Portal, select the storage account that stores your Reference Table files.
 3. Within your storage account, navigate to {{< ui >}}Access Control (IAM){{< /ui >}} and select {{< ui >}}Add{{< /ui >}} > {{< ui >}}Add Role Assignment{{< /ui >}}.
 4. Input and select the {{< ui >}}Storage Blob Data Reader{{< /ui >}} role. The [{{< ui >}}Storage Blob Data Reader{{< /ui >}} role][3] allows Datadog to read and list storage containers and blobs.
-5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
+5. In the {{< ui >}}Members{{< /ui >}} tab, click {{< ui >}}\+ Select members{{< /ui >}}. Select the app registration you created in Step 1.
 
    {{< img src="reference_tables/add_members.png" alt="The Members section in the Azure Portal where a member is selected and data filled in for the Name, Object ID, and Type" style="width:85%;">}}
 
@@ -267,7 +267,7 @@ To be alerted on errors encountered during imports, use [Event Monitors][4] for 
 You can create monitors from the {{< ui >}}Monitors{{< /ui >}} tab, or click on the Settings icon next to {{< ui >}}New Reference Table +{{< /ui >}} to generate a pre-filled monitor.
 
 ## Reference Table limits
-- A reference table can have up to 50 columns
+- A reference table can have up to 200 columns
 - A single row cannot be larger than 500KiB
 - The size of a reference table file uploaded through the UI can be up to 200 MB
 - The size of a reference table file uploaded through a cloud bucket file can be up to 200 MB

@@ -3,6 +3,9 @@ title: AWS Integration Multi-Account setup for AWS Organizations
 
 description: "Steps for setting up the Datadog AWS Integration for an AWS Organization"
 further_reading:
+- link: "https://www.datadoghq.com/architecture/a-guide-to-integrating-100-aws-accounts-with-datadog/"
+  tag: "Architecture Center"
+  text: "A Guide to Integrating 100+ AWS Accounts with Datadog"
 - link: "https://docs.datadoghq.com/integrations/guide/aws-integration-troubleshooting/"
   tag: "Guide"
   text: "Troubleshooting the AWS integration" 

@@ -75,7 +75,7 @@ Here's an example of before and after of a JSON monitor with those fields:
 }  
 {{< /highlight >}}
 
-## SLO monitors
+## Monitor-based SLOs
 
 SLOs treat uptime and downtime according to this mapping:
 

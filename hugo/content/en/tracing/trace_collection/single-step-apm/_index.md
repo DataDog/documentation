@@ -39,7 +39,12 @@ Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with n
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
-{{% dd-apm-skill %}}
+{{< skill-callout
+    title="Set up APM with an agent"
+    text="Install the `dd-apm` skill in your AI coding agent for guided APM setup."
+    action_name="copy_dd_apm_skill_install_cmd" >}}
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+{{< /skill-callout >}}
 
 ## Prerequisites
 

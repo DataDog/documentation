@@ -10,16 +10,16 @@ algolia:
 description: APM Recommendations로 애플리케이션 성능과 안정성을 최적화하는 방법 알아보기.
 further_reading:
 - link: /tracing/
-  tag: 설명서
+  tag: 문서
   text: Application Performance Monitoring(APM)이란?
 - link: /tracing/guide/apm_dashboard/
-  tag: 설명서
+  tag: 문서
   text: APM 대시보드 가이드
 - link: /cloud_cost_management/recommendations/
-  tag: 설명서
+  tag: 문서
   text: Cloud Cost Recommendations
 - link: /database_monitoring/recommendations/
-  tag: 설명서
+  tag: 문서
   text: DBM Recommendations
 - link: https://www.datadoghq.com/blog/proactive-app-recommendations/
   tag: 블로그
@@ -75,48 +75,6 @@ multifiltersearch:
       응답 속도가 너무 느려 요청 실패를 유발하고, 최종 사용자에게 영향을 미치며 업스트림으로 연쇄 장애가 발생할 위험을 높이기 때문입니다.
     recommendation_prerequisite: APM + RUM
     recommendation_type: Dependency Timeouts
-    scope: Backend services
-  - category: Performance
-    recommendation_description: 서비스가 요청 경로에서 비용이 많이 드는 반복 작업을 수행하고 있습니다. 이를 단기 캐시에서
-      처리하면 테일링 지연 시간과 다운스트림 부하를 줄일 수 있습니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Missing Cache
-    scope: Backend services
-  - category: Performance
-    recommendation_description: 서비스가 임계 경로상의 느린 다운스트림 스팬으로 인해 과도한 테일링 지연 시간을 보이고 있습니다.
-      이는 주로 제한 없는 종속성 레이턴시나 병렬로 실행할 수 있는 순차적 호출 때문입니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Tail Latency
-    scope: Backend services
-  - category: Performance
-    recommendation_description: 서비스가 CPU 집약적인 직렬화 또는 구문 분석 작업에 요청 시간의 상당 부분을 소비하여
-      불필요한 지연 시간과 CPU 오버헤드를 추가하고 있습니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Excessive Serialization
-    scope: Backend services
-  - category: Performance
-    recommendation_description: 서비스가 크기나 범위 제한 없이 요청 매개변수를 허용하여 과도하게 큰 입력값이 비용이 많이
-      드는 다운스트림 작업, 테일링 지연 시간 및 타임아웃을 유발하도록 방치하고 있습니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Unbounded Payload
-    scope: Backend services
-  - category: Performance
-    recommendation_description: 요청 처리가 동기화 기본 요소나 장시간 실행되는 임계 영역 뒤에서 직렬화되어 동시성 환경에서
-      테일링 지연 시간을 유발합니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Resource Contention
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: 서비스가 다운스트림 종속성에 대한 연결 풀을 반복적으로 소진하여 요청을 대기시키고, 부하
-      발생 시 지연 시간 급증이나 실패를 유발합니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Connection Pool Exhaustion
-    scope: Backend services
-  - category: Reliability
-    recommendation_description: 서비스가 예상된 결과를 APM에서 오류로 표시하여 엔드포인트 오류율을 부풀리고 실제 안정성
-      저하를 가리고 있습니다.
-    recommendation_prerequisite: APM + AI Recs (Preview)
-    recommendation_type: Error Misclassification
     scope: Backend services
   headers:
   - filter_by: true

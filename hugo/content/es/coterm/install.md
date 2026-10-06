@@ -1,34 +1,35 @@
 ---
+description: Instale CoTerm en macOS y Linux, configure la autorización con Datadog
+  y establezca sus ajustes de configuración de CoTerm.
 further_reading:
 - link: /coterm
-  tag: Documentación
+  tag: documentación
   text: Datadog CoTerm
 - link: /coterm/usage
-  tag: Documentación
+  tag: documentación
   text: Uso de CoTerm
 - link: /coterm/rules
-  tag: Documentación
+  tag: documentación
   text: Reglas de configuración de CoTerm
 title: Instalar Datadog CoTerm
 ---
-
 CoTerm es compatible con macOS y Linux.
 
-1. Instala Datadog CoTerm con Homebrew o curl:
+1. Instale Datadog CoTerm con Homebrew o curl:
 
-   **brew** (sólo macOS)
+   **brew** (solo macOS)
    ```shell
    brew install coterm
    ```
-
+  
    **curl**
    ```shell
    curl --tlsv1.2 --proto '=https' -sSf 'https://coterm.datadoghq.com/install-ddcoterm.sh' | bash
    ```
+   
+   Este comando descarga la última versión de CoTerm a `.ddcoterm/bin/ddcoterm` y actualiza su PATH en `.bashrc` y `.zshrc`. Reinicie su terminal o ejecute 'fuente' en su perfil. Si está utilizando un shell que no sea Bash o Zsh, agregue `path/to/.ddcoterm/bin` a su PATH manualmente.
 
-   Este comando descarga la última versión de CoTerm en `.ddcoterm/bin/ddcoterm` y actualiza tu PATH en `.bashrc` y `.zshrc`. Reinicia tu terminal o crea tu perfil. Si utilizas un shell distinto de Bash o Zsh, añade manualmente `path/to/.ddcoterm/bin` a tu PATH.
-
-2. Si tu [sitio de Datadog][6] no es `https://app.datadoghq.com`, configura tu sitio en `.ddcoterm/config.yaml` bajo `connection_config.host`:
+2. Si su [sitio de Datadog][6] no es `https://app.datadoghq.com`, establezca su sitio en `.ddcoterm/config.yaml` bajo `connection_config.host`:
    ```yaml
    ...
    connection_config:
@@ -36,60 +37,60 @@ CoTerm es compatible con macOS y Linux.
    ...
    ```
 
-3. Inicializa tu archivo de configuración ejecutando:
+3. Initialize your configuration file by running:
 
    ```shell
    ddcoterm init
    ```
 
-   Selecciona tu configuración. Puedes cambiar estos ajustes en el [archivo`~/.ddcoterm/config.yaml` ](#configure-your-coterm-settings).
+   Seleccione sus ajustes. Puede cambiar estos ajustes en el archivo [`~/.ddcoterm/config.yaml`](#configure-your-coterm-settings).
 
-## Autorizar a CoTerm a conectarse a Datadog
+## Autorice a CoTerm para conectarse a Datadog {#authorize-coterm-to-connect-to-datadog}
 
-Durante la inicialización, puedes elegir una de las siguientes formas de autorizar a CoTerm a acceder a tu cuenta de Datadog:
-- **OAuth**: abre un navegador para que puedas iniciar sesión con OAuth.
-- **Clave API + Clave de aplicación**: te pide que configures tu [clave de API de Datadog][1] y [clave de aplicación][2] en `~/.ddcoterm/config.yaml`.
-- **Sólo clave de API**: te pide que introduzcas tu clave de API de Datadog en `~/.ddcoterm/config.yaml`.
+Durante la inicialización, puede elegir una de las siguientes formas para autorizar a CoTerm a acceder a su cuenta de Datadog:
+- {{< ui >}}OAuth{{< /ui >}}: Abre un navegador para que inicie sesión con OAuth.
+- {{< ui >}}API Key + App Key{{< /ui >}}: Le solicita que establezca su [clave de API de Datadog][1] y su [clave de aplicación][2] en `~/.ddcoterm/config.yaml`.
+- {{< ui >}}API Key Only{{< /ui >}}: Le solicita que establezca su clave de API de Datadog en `~/.ddcoterm/config.yaml`.
 
-<div class="alert alert-info">Si seleccionas la opción <strong>Sólo clave de API</strong>, no podrás <a href="/coterm/usage/#require-approval-for-commands">requerir aprobaciones con Case Management</a>.</div>
+<div class="alert alert-info">Si selecciona la opción <strong>API Key Only</strong>, no puede <a href="/coterm/usage/#require-approval-for-commands">requerir aprobaciones con Work Management</a>.</div>
 
-## Configurar tus ajustes de CoTerm
+## Configure sus ajustes de CoTerm {#configure-your-coterm-settings}
 
-El archivo `~/.ddcoterm/config.yaml` contiene las configuraciones de CoTerm:
+El `~/.ddcoterm/config.yaml` archivo contiene sus configuraciones de CoTerm:
 
 `process_config`
-: configura CoTerm para actuar como un linter y realizar ciertas acciones cuando intercepta un comando que coincide con una regla. Consulta [Reglas de configuración de CoTerm][4].
+: Configure CoTerm para que actúe como un linter y realice ciertas acciones cuando intercepte un comando que coincida con una regla. Consulte [Reglas de configuración de CoTerm][4].
 
 `enable_telemetry`
-: activa o desactiva el envío de telemetría a Datadog. Por defecto es `false`.
+: Habilite o deshabilite el envío de telemetría a Datadog. El valor predeterminado es `false`.
 
 `enable_ptrace`
-: activa o desactiva la monitorización del proceso basado en `ptrace` experimental en Linux. Por defecto es `false`.
+: Habilite o deshabilite la supervisión de procesos experimental basada en `ptrace` en Linux. El valor predeterminado es `false`.
 
 `connection_config`
 : 
   `host`
-  : host para conectarse a Datadog. Por defecto es `https://app.datadoghq.com`.
+  : Servidor para conectarse a Datadog. El valor predeterminado es `https://app.datadoghq.com`.
 
   `port`
-  : puerto para conectarse a Datadog. Por defecto es `443`.
+  : Puerto para conectarse a Datadog. El valor predeterminado es `443`.
 
   `api_key`
-  : si no estás utilizando OAuth, tu [clave de API de Datadog][1]. Si has activado OAuth, CoTerm utiliza por defecto OAuth e ignora `api_key`.
+  : Si no está utilizando OAuth, su [clave de API de Datadog][1]. Si ha habilitado OAuth, CoTerm utiliza OAuth de forma predeterminada e ignora `api_key`.
 
   `app_key`
-  : si no utilizas OAuth, tu [clave de aplicación de Datadog][2]. <br/>**Nota**: Para [requerir aprobaciones con Case Management][5], debes utilizar OAuth _o_ especificar tanto tu clave de API como tu clave de aplicación en este archivo.
+  : Si no está utilizando OAuth, su [clave de aplicación de Datadog][2]. <br/>**Nota**: Para [requerir aprobaciones con Work Management][5], debe usar OAuth _o_ especificar tanto su clave de API como su clave de aplicación en este archivo.
 
-## Siguientes pasos
+## Próximos pasos {#next-steps}
 
-- Ejecuta `ddcoterm` para iniciar una sesión de terminal grabada.
-- Más información sobre [el uso de CoTerm][3].
+- Ejecute `ddcoterm` para iniciar una sesión de terminal grabada.
+- Obtenga más información sobre [cómo usar CoTerm][3].
 
-## Desinstalar
+## Desinstalar {#uninstall}
 
-Para desinstalar CoTerm, elimina la carpeta `.ddcoterm`.
+Para desinstalar CoTerm, elimine la carpeta `.ddcoterm`.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

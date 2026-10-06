@@ -55,7 +55,7 @@ below for details.
 |---|---|---|---|
 | **How to Enable** | Enabled by default | Settings page | Environment variables |
 | **Agent Version** | v7.49.0+ | v7.49.0+ | v7.49.0+ |
-| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
+| **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.19.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0<br>[PHP][11] ≥ 1.14.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
 To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
@@ -142,6 +142,7 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 - Logs with `source:dd_debugger` missing due to [Log Index][6] retention settings or [Exclusion Filters][7] in preceding indexes
 - Exception Replay is not available in the FedRAMP region
 - Java: On JDK 18 and below, classes compiled with the `-parameters` flag may not be supported. Spring 6+, Spring Boot 3+, and Scala use this flag by default.
+- .NET: On FIPS-enabled hosts, tracer versions before 3.55.0 do not support Exception Replay. On Linux, the application can crash. Upgrade to tracer 3.55.0 or later to use Exception Replay. On earlier versions, set `DD_EXCEPTION_REPLAY_ENABLED=false` to avoid the crash.
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.

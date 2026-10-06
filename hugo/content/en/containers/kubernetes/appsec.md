@@ -29,10 +29,6 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
-{{< learning-center-callout header="App and API Protection for Kubernetes is in Preview" btn_title="Join the preview" hide_image="true" btn_url="https://www.datadoghq.com/product-preview/kubernetes-gateway-security-injector/">}}
-  App and API Protection for Kubernetes automatically configures supported Kubernetes ingress proxies and gateways. Try it today!
-{{< /learning-center-callout >}}
-
 This page describes how to set up [App and API Protection][11] for Kubernetes to automatically configure supported Kubernetes ingress proxies and gateways to run API discovery, threat detection, and inline blocking at the edge of the infrastructure.
 
 ## Overview

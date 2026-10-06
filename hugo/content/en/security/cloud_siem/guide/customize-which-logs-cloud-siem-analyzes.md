@@ -101,11 +101,11 @@ The {{< ui >}}Security Filters Configuration{{< /ui >}} section lists every Secu
 
 1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > [**Settings**][4].
 1. Scroll to the **Security Filters Configuration** section and click it to expand it.
-1. In the **Security Filters Configuration** section, click {{< ui >}}+ New Security Filter{{< /ui >}}. The {{< ui >}}New Security Filter{{< /ui >}} window opens.
+1. In the **Security Filters Configuration** section, click {{< ui >}}\+ New Security Filter{{< /ui >}}. The {{< ui >}}New Security Filter{{< /ui >}} window opens.
 1. In the **New Security Filter** window, enter:
    - **Name:** A short, descriptive name (for example, `AWS CloudTrail`).
    - **Query:** The log query that selects the logs Cloud SIEM should analyze (for example, `source:cloudtrail`).
-   - **Exclusion filters** (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click {{< ui >}}+ New Exclusion Filter{{< /ui >}} and enter an exclusion query.
+   - **Exclusion filters** (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click {{< ui >}}\+ New Exclusion Filter{{< /ui >}} and enter an exclusion query.
    - **Filter status:** Set to {{< ui >}}Active{{< /ui >}} to enable the filter on save.
 1. Review the **Preview** pane to confirm the filter matches the logs you expect.
 1. Click {{< ui >}}Save{{< /ui >}}.

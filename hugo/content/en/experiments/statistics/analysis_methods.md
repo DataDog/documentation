@@ -20,6 +20,9 @@ further_reading:
 - link: "/experiments/statistics/multiple_testing_correction"
   tag: "Documentation"
   text: "Multiple Testing Correction"
+- link: "https://www.datadoghq.com/blog/two-ways-to-measure-cumulative-impact/"
+  tag: "Blog"
+  text: "Two ways to measure the cumulative impact of experiments"
 ---
 
 ## Overview

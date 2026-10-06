@@ -12,49 +12,48 @@ further_reading:
   text: Código fuente de la integración de Envoy
 - link: /security/default_rules/?category=cat-application-security
   tag: Documentación
-  text: Reglas predefinidas de App and API Protection
+  text: Reglas de protección de aplicaciones y API listas para usar
 - link: /security/application_security/troubleshooting
   tag: Documentación
-  text: Solución de problemas de App and API Protection
-title: Activación de App and API Protection para Envoy
+  text: Solución de problemas de protección de aplicaciones y API
+title: Habilitación de App y API Protection para Envoy
 ---
+Puede habilitar App y API Protection para el proxy Envoy. La integración de Datadog Envoy cuenta con soporte para la detección y el bloqueo de amenazas.
 
-Puedes activar App and API Protection para el proxy Envoy. La integración de Datadog y Envoy admite la detección y el bloqueo de amenazas.
+## Requisitos previos {#prerequisites}
 
-## Requisitos previos
+- El [Datadog Agent][1] está instalado y configurado para el sistema operativo o contenedor, la nube o el entorno virtual de su aplicación.
+- [Configure el Agent con Remote Configuration][2] para bloquear a los atacantes mediante la interfaz de usuario de Datadog.
 
-- El [Datadog Agent ][1] está instalado y configurado para el sistema operativo o contenedor, nube o entorno virtual de tu aplicación.
-- [Configura el Agent con configuración remota][2] para bloquear a los atacantes que utilizan la interfaz de usuario Datadog.
+## Habilitación de la detección de amenazas {#enabling-threat-detection}
+### Comience {#get-started}
 
-## Habilitación de la detección de amenazas
-### Para empezar
+La integración de App y API Protection para Envoy utiliza el filtro de procesamiento externo de Envoy.
 
-La integración de Envoy y App and API Protection utiliza el filtro de procesamiento externo de Envoy.
+1. Implemente un nuevo contenedor con la imagen de Docker del Datadog External Processor. La imagen está disponible en el [Datadog GitHub Registry][5].
 
-1. Despliega un nuevo contenedor con la imagen de Docker de Datadog External Processor. La imagen está disponible en [Datadog GitHub Registry][5].
-
-   Este servicio es un servidor gRPC con el que Envoy se comunica para que las solicitudes y respuestas sean analizadas por App and API Protection.
+   Este servicio es un servidor gRPC con el que Envoy se comunica para que App and API Protection analice las solicitudes y respuestas.
 
    El Datadog External Processor expone algunos ajustes:
    | Variable de entorno                      | Valor predeterminado       | Descripción                                                                                                                              |
    |-------------------------------------------|---------------------|------------------------------------------------------------------------------------------------------------------------------------------|
-   | `DD_SERVICE_EXTENSION_HOST` | `0.0.0.0` | Dirección de escucha del servidor gRPC.                                                                                                           |
-   | `DD_SERVICE_EXTENSION_PORT` | `443` | Puerto del servidor gRPC.                                                                                                                        |
-   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT` | `80` | Puerto del servidor HTTP para checks de estado.                                                                                                      |
-   | `DD_APPSEC_BODY_PARSING_SIZE_LIMIT` | `0` | Tamaño máximo de los cuerpos a procesar en bytes. Si se establece en `0`, los cuerpos no se procesan. El valor recomendado es `10000000` (10MB). (Para habilitar completamente el procesamiento de cuerpos, la opción `allow_mode_override` también debe establecerse en la configuración del filtro External Processing (Procesamiento externo)) |
-   | `DD_SERVICE_EXTENSION_OBSERVABILITY_MODE` | `false` | Habilitar el análisis asíncrono. Esto también desactiva las capacidades de bloqueo. (Para habilitar completamente el modo de observabilidad, esta opción también debe establecerse en la configuración del filtro External Processing (Procesamiento externo) |
-   | `DD_SERVICE` | `serviceextensions` | Nombre del servicio mostrado en la interfaz de usuario de Datadog.                                                                                                    |
+   | `DD_SERVICE_EXTENSION_HOST`               | `0.0.0.0`           | Dirección de escucha del servidor gRPC.                                                                                                           |
+   | `DD_SERVICE_EXTENSION_PORT`               | `443`               | Puerto del servidor gRPC.                                                                                                                        |
+   | `DD_SERVICE_EXTENSION_HEALTHCHECK_PORT`   | `80`                | Puerto del servidor HTTP para comprobaciones de estado.                                                                                                      |
+   | `DD_APPSEC_BODY_PARSING_SIZE_LIMIT`       | `0`                 | Tamaño máximo de los cuerpos que se procesarán en bytes. Si se establece en `0`, los cuerpos no se procesan. El valor recomendado es `10000000` (10 MB). (Para habilitar completamente el procesamiento de cuerpos, también se debe configurar la opción `allow_mode_override` en la configuración del filtro de procesamiento externo) |
+   | `DD_SERVICE_EXTENSION_OBSERVABILITY_MODE` | `false`             | Habilite el análisis asíncrono. Esto también deshabilita las capacidades de bloqueo. (Para habilitar completamente el modo de observabilidad, esta opción también debe configurarse en la configuración del filtro de procesamiento externo) |
+   | `DD_SERVICE`                              | `serviceextensions` | Nombre del servicio que se muestra en la interfaz de usuario de Datadog.                                                                                                    |
 
-   Configura el Datadog Agent para recibir trazas del procesador externo utilizando las siguientes variables de entorno:
+   Configure el Datadog Agent para recibir trazas del procesador externo mediante las siguientes variables de entorno:
 
    | Variable de entorno                   | Valor predeterminado | Descripción                                                                      |
    |----------------------------------------|---------------|----------------------------------------------------------------------------------|
-   | `DD_AGENT_HOST` | `localhost` | Nombre de host o IP de tu Datadog Agent.                                            |
-   | `DD_TRACE_AGENT_PORT` | `8126` | Puerto del Datadog Agent para la recopilación de trazas.                                  |
+   | `DD_AGENT_HOST`                        | `localhost`   | Nombre de host o IP de su Datadog Agent.                                            |
+   | `DD_TRACE_AGENT_PORT`                  | `8126`        | Puerto del Datadog Agent para la recopilación de trazas.                                  |
 
-2. Actualiza tu configuración de Envoy para añadir el [filtro de procesamiento externo][3] a tu lista `http_filters`, y define el clúster gRPC correspondiente en tu sección `clusters`. Por ejemplo:
+2. Actualice su configuración de Envoy para añadir el [filtro de procesamiento externo][3] a su `http_filters` lista, y defina el clúster gRPC correspondiente en su `clusters` sección. Por ejemplo:
 
-   #### Sección de filtros http
+#### Sección de filtros HTTP
 
    ```yaml
    http_filters:
@@ -115,7 +114,7 @@ La integración de Envoy y App and API Protection utiliza el filtro de procesami
      # ... other filters
    ```
 
-   #### Sección de clústeres
+#### Sección de clústeres
 
    ```yaml
    clusters:
@@ -140,31 +139,31 @@ La integración de Envoy y App and API Protection utiliza el filtro de procesami
                          port_value: 443
    ```
 
-   **Nota**: Lee detenidamente la configuración de ejemplo proporcionada y adáptala a tu infraestructura y entorno. Puedes encontrar más opciones de configuración disponibles en la [documentación del procesador externo de Envoy][4].
+   **Nota**: Lea atentamente la configuración de ejemplo proporcionada y adáptela para que coincida con su infraestructura y entorno. Puede encontrar más opciones de configuración disponibles en la [documentación del procesador externo de Envoy][4].
 
 3. Validación.
 
 {{% appsec-getstarted-2-plusrisk %}}
 
-{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Vídeo que muestra el explorador de señales y detalles y el explorador de vulnerabilidades y detalles." video="true" >}}
+{{< img src="/security/application_security/appsec-getstarted-threat-and-vuln_2.mp4" alt="Video que muestra Signals explorer y detalles, y Vulnerabilities explorer y detalles." video="true" >}}
 
-## Integración de Datadog Go Tracer y Envoy
+## Integración de Datadog Go Tracer y Envoy {#datadog-go-tracer-and-envoy-integration}
 
-El External Processor está construido sobre el [Rastreador de Datadog Go][6] y hereda todas sus variables de entorno. Consulta [Configuración de la biblioteca de rastreo de Go][7] y [Configuración de la biblioteca de App and API Protection][8].
+El procesador externo está construido sobre el [Datadog Go Tracer][6] y hereda todas las variables de entorno del trazador. Consulte [Configuración del SDK de Go][7] y [Configuración de la biblioteca de protección de aplicaciones y API][8].
 
 <div class="alert alert-info">
-  <strong>Nota:</strong> Dado que el Datadog External Processor se basa en el rastreador de Datadog Go, generalmente sigue el mismo proceso de publicación que el rastreador, y sus imágenes de Docker se etiquetan con la versión correspondiente del rastreador (por ejemplo, <code>v2.2.2</code>). En algunos casos, pueden publicarse versiones tempranas entre las versiones oficiales del rastreador y estas imágenes se etiquetan con un sufijo como <code>-docker.1</code>.
+  <strong>Nota:</strong> Dado que el procesador externo de Datadog está construido sobre el Datadog Go Tracer, generalmente sigue el mismo proceso de lanzamiento que el trazador, y sus imágenes de Docker están etiquetadas con la versión del trazador correspondiente (por ejemplo, <code>v2.2.2</code>). En algunos casos, es posible que se publiquen versiones de lanzamiento anticipado entre los lanzamientos oficiales del trazador, y estas imágenes están etiquetadas con un sufijo como <code>-docker.1</code>.
 </div>
 
-## Limitaciones
+## Limitaciones {#limitations}
 
 La integración de Envoy tiene las siguientes limitaciones:
 
-* La inspección de los cuerpos de solicitud y respuesta es posible cuando se utiliza la imagen del Datadog External Processor versión `v2.2.2` o posterior.
+* La inspección de los cuerpos de solicitud y respuesta es compatible cuando se utiliza la versión de imagen de Datadog External Processor `v2.2.2` o posterior.
 
-Para obtener más información sobre las compatibilidades de integración de Envoy, consulta [la página de compatibilidad de la integración de Envoy][9].
+Para obtener detalles adicionales sobre las compatibilidades de la integración de Envoy, consulte la [página de compatibilidad de la integración de Envoy][9].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

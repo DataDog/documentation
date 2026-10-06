@@ -8,24 +8,23 @@ code_lang_weight: 60
 title: Configuración de Cloud Security en Kubernetes
 type: multi-code-lang
 ---
-
-Sigue las siguientes instrucciones para activar Misconfigurations y Vulnerability Management.
+Utilice las siguientes instrucciones para habilitar Misconfigurations y Vulnerability Management.
 
 {{< partial name="security-platform/CSW-billing-note.html" >}}
 
-## Requisitos previos
+## Requisitos previos {#prerequisites}
 
-- Versión más reciente del Datadog Agent. Para obtener instrucciones de instalación, consulta [Empezando con el Agent][5] o instala el Agent desde la [interfaz de usuario Datadog][6].
+- Última versión del Datadog Agent. Para obtener instrucciones de instalación, consulte [Primeros pasos con el Agent][5] o instale el Agent desde la [Datadog UI][6].
 
-**Nota**: La recopilación de SBOM no es compatible con la función de transmisión de imágenes en Google Kubernetes Engine (GKE). Para desactivarla, consulta la sección [Desactivar la transmisión de imágenes][7] de la documentación de GKE.
+**Nota**: La recopilación de SBOM no es compatible con la función de transmisión de imágenes en Google Kubernetes Engine (GKE). Para deshabilitarla, consulte la sección [Disable Image streaming][7] de la documentación de GKE.
 
-## Instalación
+## Instalación {#installation}
 
 {{< tabs >}}
 
-{{% tab "Datadog Operador" %}}
+{{% tab "Datadog Operator" %}}
 
-1. Añade lo siguiente a la sección `spec` del archivo `datadog-agent.yaml`:
+1. Agregue lo siguiente a la sección `spec` del archivo `datadog-agent.yaml`:
 
     ```yaml
     # datadog-agent.yaml file
@@ -35,27 +34,36 @@ Sigue las siguientes instrucciones para activar Misconfigurations y Vulnerabilit
       name: datadog
     spec:
       features:
+        # Enables Misconfigurations
         cspm:
           enabled: true
           hostBenchmarks:
             enabled: true
-        # Enables the image metadata collection and Software Bill of Materials (SBOM) collection
+
+        # Enables Software Bill of Materials (SBOM) collection
         sbom:
           enabled: true
+
           # Enables Container Vulnerability Management
-          # Image collection is enabled by default with Datadog Operator version `>= 1.3.0`
           containerImage:
             enabled: true
-
-            # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
-            # uncompressedLayersSupport: true
+            # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+            analyzers: ["os", "languages"]
 
           # Enables Host Vulnerability Management
           host:
             enabled: true
+            # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+            analyzers: ["os", "languages"]
+
+          # Enables runtime package prioritization (Agent 7.79+)
+          # See Runtime Package Prioritization section below.
+          enrichment:
+            usage:
+              enabled: true
     ```
 
-2. Aplica los cambios y reinicia el Agent.
+2. Aplique los cambios y reinicie el Agent.
 
 [2]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 
@@ -63,7 +71,7 @@ Sigue las siguientes instrucciones para activar Misconfigurations y Vulnerabilit
 
 {{% tab "Helm" %}}
 
-1. Añade lo siguiente a la sección `datadog` del archivo `datadog-values.yaml`:
+1. Agregue lo siguiente a la sección `datadog` del archivo `datadog-values.yaml`:
 
     ```yaml
     # datadog-values.yaml file
@@ -74,66 +82,199 @@ Sigue las siguientes instrucciones para activar Misconfigurations y Vulnerabilit
           enabled: true
           host_benchmarks:
             enabled: true
+
+      # Enables Software Bill of Materials (SBOM) collection
       sbom:
+        # Enables Container Vulnerability Management
         containerImage:
           enabled: true
-
-          # Uncomment the following line if you are using Google Kubernetes Engine (GKE) or Amazon Elastic Kubernetes (EKS)
-          # uncompressedLayersSupport: true
+          # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+          analyzers: ["os", "languages"]
 
         # Enables Host Vulnerability Management
         host:
           enabled: true
+          # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
+          analyzers: ["os", "languages"]
 
-        # Enables Container Vulnerability Management
-        # Image collection is enabled by default with Datadog Helm version `>= 3.46.0`
-        # containerImageCollection:
-        #   enabled: true
+        # Enables runtime package prioritization (Agent 7.79+)
+        # See Runtime Package Prioritization section below.
+        enrichment:
+          usage:
+            enabled: true
     ```
 
-2. Reinicia el Agent.
+2. Reinicie el Agent.
 
 {{% /tab %}}
 
 {{% tab "DaemonSet" %}}
 
-Añade la siguiente configuración a la sección `env` de `security-agent` y `system-probe` en el archivo `daemonset.yaml`:
+1. Agregue las siguientes variables de entorno a cada contenedor del Agent en el archivo `daemonset.yaml`, incluyendo `agent`, `security-agent` y `system-probe`. Estas variables habilitan Misconfigurations, Vulnerability Management, el escaneo de imágenes de contenedor basado en montaje y la priorización de paquetes en tiempo de ejecución.
 
-```bash
-  # Source: datadog/templates/daemonset.yaml
-  apiVersion:app/1
-  kind: DaemonSet
-  [...]
-  spec:
-  [...]
-  spec:
+    ```yaml
+    - name: DD_COMPLIANCE_CONFIG_ENABLED
+      value: "true"
+    - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
+      value: "true"
+    - name: DD_SBOM_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+      value: "true"
+    - name: DD_SBOM_HOST_ENABLED
+      value: "true"
+    - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
+      value: "true"
+    - name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+      value: "true"
+    - name: HOST_ROOT
+      value: /host/root
+    ```
+
+   Si su DaemonSet monta la raíz del servidor en una ruta diferente, establezca `HOST_ROOT` en esa ruta de montaje en cada contenedor del Agent.
+
+2. Establezca `hostPID: true` en la especificación del pod y agregue el siguiente `securityContext` al contenedor `agent`. Estos ajustes son necesarios para el escaneo de imágenes de contenedor basado en montaje con `DD_SBOM_CONTAINER_IMAGE_USE_MOUNT=true`.
+
+    ```yaml
+      # Source: datadog/templates/daemonset.yaml
+      apiVersion: apps/v1
+      kind: DaemonSet
       [...]
-        containers:
+      spec:
         [...]
-          - name: agent
-            [...]
-          - name: system-probe
-            [...]
-            env:
-              - name: DD_COMPLIANCE_CONFIG_ENABLED
-                value: "true"
-              - name: DD_COMPLIANCE_CONFIG_HOST_BENCHMARKS_ENABLED
-                value: "true"
-              - name: DD_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_ENABLED
-                value: "true"
-              - name: DD_SBOM_HOST_ENABLED
-                value: "true"
-              - name: DD_SBOM_CONTAINER_IMAGE_USE_MOUNT
-                value: "true"
+        template:
           [...]
-```
+          spec:
+            hostPID: true
+            containers:
+            [...]
+              - name: agent
+                [...]
+                securityContext:
+                  capabilities:
+                    add:
+                      - SYS_ADMIN
+                  readOnlyRootFilesystem: true
+                  appArmorProfile:
+                    type: Unconfined
+    ```
+
+3. Reinicie el Agent.
 
 {{% /tab %}}
+
 {{< /tabs >}}
+
+**Nota**: `enrichment.usage.enabled: true` requiere Datadog Agent **7.79.0 o posterior**. Consulte la sección [Runtime Package Prioritization](#runtime-package-prioritization) para conocer los requisitos.
+
+**Nota**: El `languages` analizador requiere Datadog Agent **7.70 o posterior**. Cuando está habilitado, detecta vulnerabilidades en las bibliotecas de aplicaciones administradas por los administradores de paquetes a continuación, además de los paquetes del sistema operativo. Cuando se omite el campo `analyzers`, Datadog solo escanea los paquetes del SO para las imágenes de contenedor.
+
+### Administradores de paquetes de bibliotecas de aplicaciones compatibles {#supported-application-library-package-managers}
+
+El analizador `languages` cubre los siguientes ecosistemas de paquetes:
+
+| Ecosistema | Gestor/formato de paquetes |
+|-----------|------------------------|
+| Ruby | Bundler, GemSpec |
+| Rust | Cargo, el binario de Rust |
+| PHP | Composer |
+| Java | Jar, Maven (pom.xml), bloqueo de Gradle, bloqueo de Sbt |
+| JavaScript | npm (package-lock.json), Yarn, pnpm, paquete de Node |
+| .NET | NuGet, .NET Core, PackagesProps |
+| Python | Paquete de Python (egg), pip, Pipenv, Poetry, uv, paquete de Conda, entorno de Conda |
+| Go | Go binario, módulos de Go |
+| C/C++ | Bloqueo de Conan |
+| Swift / Objective-C | CocoaPods, Swift |
+| Dart | Bloqueo de PubSpec |
+| Elixir | Bloqueo de Mix |
+| Julia | Julia |
+
+## Runtime Package Prioritization {#runtime-package-prioritization}
+
+Runtime Package Prioritization identifica qué paquetes en una imagen de contenedor se utilizan durante la ejecución, para que pueda priorizar las vulnerabilidades en el código que se ejecuta sobre las vulnerabilidades en paquetes que están instalados pero nunca se ejecutan.
+
+Cuando está habilitado, el Agent utiliza eBPF para observar el acceso a archivos en sus cargas de trabajo y agrega estas señales a los hallazgos de vulnerabilidades para esa imagen:
+
+| Señal | Qué le indica |
+|--------|-------------------|
+| El paquete se está ejecutando | Se observó que los archivos del paquete fueron accedidos por un proceso en ejecución. |
+| Accedido por proceso raíz | El paquete fue accedido por un proceso que se ejecuta como raíz (UID 0). |
+| Binario SUID presente | El paquete contiene un binario con el bit SUID establecido, lo que puede permitir la escalada de privilegios. |
+
+*El paquete se está ejecutando* alimenta la dimensión de **Reachability** del [Runtime Prioritization Engine][9]. Para consultar estas señales directamente, consulte [Filtrar hallazgos por señales de tiempo de ejecución][10].
+
+**Requisitos**:
+- Datadog Agent **7.79.0 o superior**. En Kubernetes, utilice **7.81.0 o superior** para obtener la cobertura de señales más completa.
+- Solo Linux (dependencia de eBPF). Consulte [Workload Protection setup][11] para conocer las distribuciones y versiones de kernel compatibles.
+
+Las señales de tiempo de ejecución se aplican a los paquetes instalados por un administrador de paquetes del sistema operativo (`apt`, `yum` o `apk`) en los hallazgos de vulnerabilidades de imágenes de contenedor.
+
+{{< tabs >}}
+
+{{% tab "Datadog Operator" %}}
+
+Agregue el bloque `enrichment` a la sección `sbom` de su archivo `datadog-agent.yaml`:
+
+```yaml
+spec:
+  features:
+    sbom:
+      enabled: true
+      containerImage:
+        enabled: true
+      # Enables runtime package prioritization (Agent 7.79+)
+      enrichment:
+        usage:
+          enabled: true
+```
+
+Aplique los cambios y reinicie el Agent.
+
+{{% /tab %}}
+
+{{% tab "Helm" %}}
+
+Agregue el bloque `enrichment` a la sección `sbom` de su archivo `datadog-values.yaml`:
+
+```yaml
+datadog:
+  sbom:
+    containerImage:
+      enabled: true
+    # Enables runtime package prioritization (Agent 7.79+)
+    enrichment:
+      usage:
+        enabled: true
+```
+
+Reinicie el Agent.
+
+{{% /tab %}}
+
+{{% tab "DaemonSet" %}}
+
+Establezca `hostPID: true` en la especificación del pod y agregue las siguientes variables de entorno a cada contenedor del Agent en su archivo `daemonset.yaml`, incluidos `agent`, `security-agent` y `system-probe`:
+
+```yaml
+# Pod spec
+hostPID: true
+
+# Add to each Agent container's env section.
+- name: DD_SBOM_ENABLED
+  value: "true"
+- name: DD_SBOM_CONTAINER_IMAGE_ENABLED
+  value: "true"
+- name: DD_SBOM_ENRICHMENT_USAGE_ENABLED
+  value: "true"
+```
+
+Reinicie el Agent.
+
+{{% /tab %}}
+
+{{< /tabs >}}
+
+Para verificar la configuración, filtre los hallazgos de vulnerabilidades por [señales de tiempo de ejecución][10].
 
 [1]: /es/security/cloud_security_management/misconfigurations/
 [2]: /es/security/threats
@@ -142,3 +283,7 @@ Añade la siguiente configuración a la sección `env` de `security-agent` y `sy
 [5]: /es/getting_started/agent
 [6]: https://app.datadoghq.com/account/settings/agent/latest
 [7]: https://cloud.google.com/kubernetes-engine/docs/how-to/image-streaming#disable
+[8]: /es/security/workload_protection/
+[9]: /es/security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
+[10]: /es/security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals
+[11]: /es/security/workload_protection/setup/

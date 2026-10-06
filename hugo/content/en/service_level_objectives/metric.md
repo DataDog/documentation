@@ -29,7 +29,7 @@ Metric-based SLOs are useful for a count-based stream of data where you are diff
 
 ## Setup
 
-On the [SLO status page][5], click {{< ui >}}+ New SLO{{< /ui >}}. Then select, [{{< ui >}}By Count{{< /ui >}}][6].
+On the [SLO status page][5], click {{< ui >}}\+ New SLO{{< /ui >}}. Then select, [{{< ui >}}By Count{{< /ui >}}][6].
 
 ### Define queries
 

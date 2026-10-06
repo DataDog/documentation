@@ -80,9 +80,9 @@ To run the calculation:
 1. Expand {{< ui >}}Calculation details{{< /ui >}}. Your primary and secondary metrics appear under {{< ui >}}Metrics{{< /ui >}}.
 1. Use the {{< ui >}}Entry point{{< /ui >}} dropdown to select the event that assigns users to the experiment, such as viewing a checkout page or clicking an add-to-cart button. Datadog uses this event to estimate traffic volume.
 1. (Optional) Under {{< ui >}}Filter entry point{{< /ui >}}, narrow the entry point's audience:
-   1. Click {{< ui >}}+ Filter{{< /ui >}} and select a property from the picker. If you do not see the property you need, type the property name in the {{< ui >}}Custom property{{< /ui >}} field and click {{< ui >}}Add{{< /ui >}}.
+   1. Click {{< ui >}}\+ Filter{{< /ui >}} and select a property from the picker. If you do not see the property you need, type the property name in the {{< ui >}}Custom property{{< /ui >}} field and click {{< ui >}}Add{{< /ui >}}.
    1. In the filter row that appears, modify the operator as needed and select a value from the dropdown.
-   1. (Optional) Click {{< ui >}}+ Filter{{< /ui >}} to add more rows. Between rows, use the dropdown to select {{< ui >}}or{{< /ui >}} or {{< ui >}}and{{< /ui >}} to set how filters combine.
+   1. (Optional) Click {{< ui >}}\+ Filter{{< /ui >}} to add more rows. Between rows, use the dropdown to select {{< ui >}}or{{< /ui >}} or {{< ui >}}and{{< /ui >}} to set how filters combine.
 1. Set the {{< ui >}}Number of variants{{< /ui >}} and {{< ui >}}Traffic exposure{{< /ui >}}.
 1. Expand {{< ui >}}Additional inputs{{< /ui >}}, then choose the statistical {{< ui >}}Power{{< /ui >}} and enter a {{< ui >}}Target experiment duration{{< /ui >}} in weeks.
    - The {{< ui >}}Target experiment duration{{< /ui >}} value must be 1 or an even number because the calculator estimates MDE values and expected user counts at 1-, 2-, 4-, 6-, and 8-week intervals.
@@ -148,7 +148,7 @@ In the {{< ui >}}Notifications{{< /ui >}} section, use the {{< ui >}}Recipients{
 
 Configure how Datadog calculates statistical significance for your experiment. For guidance on choosing a method, see [Analysis Methods][11].
 
-If your organization has configured default settings, a {{< ui >}}COMPANY DEFAULT{{< /ui >}} badge appears and Datadog pre-populates the settings.
+Datadog copies your organization's default statistical analysis settings when you create an experiment. If your organization has configured default settings, a {{< ui >}}COMPANY DEFAULT{{< /ui >}} badge appears. Later changes to your organization's defaults apply to newly created experiments and do not change existing experiments.
 
 To modify the statistical analysis plan:
 
@@ -159,7 +159,7 @@ To modify the statistical analysis plan:
 1. To disable [CUPED][12], toggle off {{< ui >}}CUPED calculation{{< /ui >}}. CUPED is enabled by default and uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity.
 1. To control the family-wise error rate, toggle on {{< ui >}}Multiple testing correction{{< /ui >}}. This setting adjusts for multiple metric and treatment-variant comparisons, producing more conservative results. For details, see [Multiple Testing Correction][13].
    - This setting is not available when you use the {{< ui >}}Bayesian{{< /ui >}} method.
-1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
+1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the statistical analysis defaults copied when the experiment was created, including any company defaults in effect at that time.
 
 ##### Add split-by exploration dimensions
 

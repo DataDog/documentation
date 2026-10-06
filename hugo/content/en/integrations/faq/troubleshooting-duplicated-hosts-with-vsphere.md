@@ -20,4 +20,4 @@ Note: The old host in the Infrastructure List takes time before disappearing.
 [1]: https://docs.datadoghq.com/integrations/vsphere/
 [2]: https://app.datadoghq.com/infrastructure
 [3]: https://github.com/DataDog/integrations-core/blob/21a90b00f603b00250c4baa6534e47ee5529ed3c/vsphere/datadog_checks/vsphere/data/conf.yaml.example#L301-L308
-[4]: https://github.com/DataDog/datadog-agent/blob/6ba10dc8cd0c1aa89adcebe6b5941571caf25d50/pkg/config/config_template.yaml#L56-L61
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

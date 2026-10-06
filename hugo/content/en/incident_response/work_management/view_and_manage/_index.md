@@ -4,12 +4,15 @@ aliases:
 - /service_management/case_management/view_and_manage/
 - /incident_response/case_management/view_and_manage/
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-risk-management"
-  tag: "Blog"
-  text: "How we centralize and remediate risks with Datadog Case Management"
 - link: "incident_response/work_management/settings"
   tag: "Documentation"
   text: "Work Management settings"
+- link: "https://www.datadoghq.com/blog/datadog-risk-management"
+  tag: "Blog"
+  text: "How we centralize and remediate risks with Datadog Case Management"
+- link: "https://www.datadoghq.com/blog/work-management/"
+  tag: "Blog"
+  text: "Centralize human and agentic work with Datadog Work Management"
 ---
 
 ## Overview

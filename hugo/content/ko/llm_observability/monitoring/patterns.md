@@ -19,6 +19,9 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: 학습 센터
   text: LLM 애플리케이션 추적
+- link: https://www.datadoghq.com/blog/patterns-agent-observability/
+  tag: 블로그
+  text: Agent Observability의 패턴을 통한 프로덕션 LLM 동작 이해
 title: 패턴
 ---
 ## 개요 {#overview}
@@ -38,7 +41,7 @@ title: 패턴
 3. 자체 호스팅 오픈 소스 모델을 사용하여 이러한 요약의 텍스트 임베딩을 계산합니다.
 4. 머신러닝(UMAP 및 HDBSCAN)을 사용하여 클러스터를 형성합니다.
 5. 각 클러스터를 검토하고 AI 생성 텍스트로 의미 있는 주제를 생성합니다.
-6. 각 상호작용을 단일 주제에 할당합니다.
+6. 각 상호작용을 단일 주제에 귀속시킵니다.
 7. 유사한 주제를 그룹화하여 AI를 사용해 계층 구조를 구축합니다.
 
 각 주제는 상호작용 볼륨과 전체 트래픽 점유율을 보여줍니다. 어떠한 클러스터에도 맞지 않는 상호작용은 이상치 그룹으로 수집됩니다.
@@ -48,8 +51,8 @@ title: 패턴
 1. Datadog에서 **AI Observability** > **Agent Observability** > [**Patterns**][4]로 이동합니다.
 1. **+ New Pattern**을 클릭합니다.
 1. **Name**을 입력합니다.
-1. **Select a model**을 클릭합니다. 모델 구성 창이 열리면 Agent Observability가 주제 이름, 요약, 주제 계층 구조를 생성하고 각 상호작용을 주제에 할당하는 데 사용하는 세부 정보를 추가할 수 있습니다.
-   - **LLM 공급자**: 지원되는 공급자는 OpenAI, Amazon Bedrock, Azure OpenAI입니다.
+1. **Select a model**을 클릭합니다. 모델 구성 창이 열리면 Agent Observability가 주제 이름, 요약, 주제 계층 구조를 생성하고 각 상호작용을 주제에 귀속시키는 데 사용하는 세부 정보를 추가할 수 있습니다.
+   - **LLM 공급자**: 지원되는 공급자는 OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI 및 Vertex AI입니다.
    - **계정**
    - **모델**
 1. **Confirm**을 클릭하여 변경 사항을 저장하고 창을 닫습니다.
@@ -63,36 +66,37 @@ title: 패턴
    - **On demand**(기본값): 패턴을 수동으로 실행합니다.
    - **Daily**, **Weekdays** 또는 **Weekly**: 선택한 시간(매주의 경우 요일 포함)에 자동으로 실행합니다.
    - **Custom**: 1~7일마다 자동으로 실행합니다.
-1. **Create and Run Pattern** 또는 **Create Pattern**을 클릭하여 실행하지 않고 생성합니다.
+1. (선택 사항) **Dataset coverage**에서 프로덕션 트래픽 커버리지를 측정할 때 기준으로 사용할 오프라인 평가 데이터세트를 하나 이상 선택합니다. 커버리지 격차를 자동으로 메우려면 **Automatic dataset curation** 토글을 활성화합니다. 활성화되면 Datadog은 관리형 프로젝트(`Patterns-coverage`)와 패턴별 데이터세트(`{pattern-name}-pattern-curated`)를 생성하여 각 실행 후 제안된 상호작용을 수신합니다. 이 토글은 새 패턴에 대해 기본적으로 **켜짐** 상태입니다.
+1. **Create and Run Pattern**을 클릭하여 패턴을 생성하고 실행하거나, **Create Pattern**을 클릭하여 실행하지 않고 생성합니다.
 
-## 패턴에 대해 알아보기 {#explore-your-patterns}
+## 패턴 탐색 {#explore-your-patterns}
 
 헤더의 드롭다운을 사용하여 명명된 패턴 간에 전환하세요. 각 패턴은 가장 최근 실행의 결과를 보여줍니다.
 
-### 요약 메트릭 읽기{#read-the-summary-metrics}
+### 요약 메트릭 읽기 {#read-the-summary-metrics}
 
 Patterns 페이지 상단에는 가장 최근 실행을 통한 세 가지 메트릭이 표시됩니다.
 - {{< ui >}}Total interactions{{< /ui >}}: 분석된 상호작용의 수
 - {{< ui >}}Identified topics{{< /ui >}}: 상위 및 하위 주제를 포함하여 발견된 총 고유 주제의 수
 - {{< ui >}}Classified{{< /ui >}}: 명명된 주제에 할당한 분석된 상호작용의 비율로, 이상치의 상호작용은 분류되지 않은 것으로 간주됨
 
-### 디멘션별 패턴 시각화{#visualize-patterns-by-dimension}
+### 차원별 패턴 시각화 {#visualize-patterns-by-dimension}
 
-주제 표 위에는 패턴을 서로 비교하는 산점도가 있습니다. 각 버블은 하나의 주제를 나타내며 Y축은 상호작용 수를, X축은 디멘션 드롭다운에서 선택한 메트릭(예: 총 오류 수)을 보여줍니다. 이 차트를 사용하여 이상치 즉, 볼륨에 비해 오류율이나 지연 시간이 예상보다 높게 나타나는 주제를 파악하세요.
+주제 표 위에는 패턴을 서로 비교하는 산점도가 있습니다. 각 버블은 하나의 주제를 나타내며 Y축은 상호작용 수를, X축은 Dimension 드롭다운에서 선택한 메트릭(예: 총 오류 수)을 보여줍니다. 이 차트를 사용하여 이상치 즉, 볼륨에 비해 오류율이나 지연 시간이 예상보다 높게 나타나는 주제를 파악하세요.
 
-{{< img src="llm_observability/patterns_landing_page.png" alt="주제당 하나의 버블이 있는 버블 차트를 보여주는 Patterns 페이지입니다. Y축은 상호작용 수를 나타내고 X축은 선택된 메트릭 디멘션을 나타냅니다." style="width:100%;" >}}
+{{< img src="llm_observability/patterns_landing_page.png" alt="주제당 하나의 버블이 있는 버블 차트를 보여주는 Patterns 페이지입니다. Y축은 상호작용 수를, X축은 선택된 메트릭 차원을 보여줍니다." style="width:100%;" >}}
 
 ### 주제 목록 탐색 {#navigate-the-topic-list}
 
 주제 표는 발견된 모든 주제의 계층 구조 보기를 제공합니다. 각 주제는 다음을 보여줍니다.
 
-- {{< ui >}}Pattern{{< /ui >}} — 클러스터 내 상호작용을 기반으로 자동 생성된 이름 및 설명
-- {{< ui >}}Interactions{{< /ui >}} — 전체 트래픽의 수 및 비율
-- {{< ui >}}Cost{{< /ui >}} — 해당 주제 내 상호작용의 예상 LLM 비용
-- {{< ui >}}Tokens{{< /ui >}} — 해당 주제 내 상호작용의 토큰 사용량
-- {{< ui >}}Errors{{< /ui >}} — 오류 수 및 비율
-- {{< ui >}}Latency{{< /ui >}} — 해당 주제 내 상호작용의 지연 시간 중앙값
-- {{< ui >}}Online Evals{{< /ui >}} — 온라인 평가가 구성된 경우의 평가 결과
+- {{< ui >}}Pattern{{< /ui >}} - 클러스터 내 상호작용을 기반으로 자동 생성된 이름 및 설명
+- {{< ui >}}Interactions{{< /ui >}} - 전체 트래픽의 수 및 비율
+- {{< ui >}}Cost{{< /ui >}} - 해당 주제 내 상호작용의 예상 LLM 비용
+- {{< ui >}}Tokens{{< /ui >}} - 해당 주제 내 상호작용의 토큰 사용량
+- {{< ui >}}Errors{{< /ui >}} - 오류 수 및 비율
+- {{< ui >}}Latency{{< /ui >}} - 해당 주제 내 상호작용의 지연 시간 중앙값
+- {{< ui >}}Online Evals{{< /ui >}} - 온라인 평가가 구성된 경우의 평가 결과
  
 
 상위 주제를 확장하여 하위 주제를 확인하고 애플리케이션 트래픽의 특정 영역을 검토하세요.
@@ -109,7 +113,7 @@ Patterns 페이지 상단에는 가장 최근 실행을 통한 세 가지 메트
 
 - **Download as CSV:** 상호작용을 CSV 파일로 내보냅니다.
 - **Add to Dataset:** 상호작용을 [데이터세트][2]로 전송하여 실제 프로덕션 트래픽에서 평가 테스트 케이스를 구축합니다.
-- **Add to Queue:** 상호작용을 [주석 대기열][3]로 전송하여 사람의 검토 및 레이블 지정을 받으세요.
+- **Add to Queue:** 사람의 검토 및 레이블 지정을 위해 상호작용을 [주석 대기열][3]로 전송합니다.
 
 ## 새로운 실행 트리거 {#trigger-a-new-run}
 
@@ -117,9 +121,9 @@ Patterns 페이지 상단에는 가장 최근 실행을 통한 세 가지 메트
 
 실행에 실패하면 모달 창에 원인과 취해야 할 조치의 설명이 표시됩니다. 실패한 실행이 헤더에 표시되는 동안 페이지에는 가장 최근의 성공적인 실행 결과가 계속 표시됩니다.
 
-## 주제를 사용하여 애플리케이션 개선{#use-topics-to-improve-your-application}
+## 주제를 사용하여 애플리케이션 개선 {#use-topics-to-improve-your-application}
 
-### 프로덕션 트래픽 이해하기{#understand-your-production-traffic}
+### 프로덕션 트래픽 이해하기 {#understand-your-production-traffic}
 
 주제 목록을 사용하여 사용자가 애플리케이션으로 실제로 어떤 작업을 하고 있는지 확인하세요.
 
@@ -127,11 +131,15 @@ Patterns 페이지 상단에는 가장 최근 실행을 통한 세 가지 메트
 
 ### 평가 커버리지 격차 찾기 {#find-evaluation-coverage-gaps}
 
-주제 분포를 핵심 데이터세트가 실제로 다루는 내용과 비교할 수 있습니다. 높은 프로덕션 볼륨을 나타내지만, 해당하는 평가 케이스가 없는 주제를 살펴보세요. 해당 주제는 테스트 커버리지에 격차가 있는 부분이며, 모델 회귀가 사용자에게 도달하기 전에 발견될 가능성이 가장 낮습니다.
+주제 분포를 핵심 데이터세트가 실제로 다루는 내용과 비교할 수 있습니다. 높은 프로덕션 볼륨을 나타내지만 해당하는 평가 케이스가 없는 주제를 살펴보세요. 해당 주제는 테스트 커버리지에 격차가 있는 부분이며, 모델 회귀가 사용자에게 도달하기 전에 발견될 가능성이 가장 낮습니다.
+
+### 평가 데이터세트 자동 선별 {#automatically-curate-evaluation-datasets}
+
+자동 데이터세트 선별이 활성화되면 각 패턴 실행 시 커버리지가 부족한 주제에 대해 제안된 상호작용이 관리형 데이터세트에 직접 추가됩니다(`Patterns-coverage` 프로젝트 내 `{pattern-name}-pattern-curated`). 실행이 완료되면 주제의 상세 보기를 열고 **Access dataset**를 클릭하여 선별된 레코드를 검토하고 이를 평가 테스트 케이스로 사용하세요.
 
 ### 실패 패턴 진단 {#diagnose-failure-patterns}
 
-패턴의 필터를 품질 점수가 낮거나 평가에 실패한 평가로 지정한 후 분석을 실행하세요. 결과로 생성된 주제 분류는 어떤 유형의 요청이 가장 많이 실패하는지 보여주어 트레이스를 일일이 디버깅하는 대신 구조화된 방식으로 수정 우선순위를 정할 수 있습니다.
+패턴의 필터를 품질 점수가 낮거나 실패한 평가로 지정한 다음 분석을 실행하세요. 결과로 생성된 주제 분류는 어떤 유형의 요청이 가장 많이 실패하는지 보여주어 트레이스를 일일이 디버깅하는 대신 구조화된 방식으로 수정 우선순위를 정할 수 있습니다.
 
 ### 트래픽의 변화 추적 {#track-how-traffic-evolves}
 
@@ -143,5 +151,5 @@ Patterns 페이지 상단에는 가장 최근 실행을 통한 세 가지 메트
 
 [1]: /ko/llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
 [2]: /ko/llm_observability/experiments/datasets/
-[3]: /ko/llm_observability/annotation_queues/
+[3]: /ko/llm_observability/evaluations/annotation_queues/
 [4]: https://app.datadoghq.com/llm/patterns

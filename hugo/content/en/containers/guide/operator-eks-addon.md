@@ -103,7 +103,7 @@ Follow the instructions to set up the Datadog Agent by using the `DatadogAgent` 
 
    For all configuration options, see the [Operator configuration spec][6].
 
-   **Note:** If access to IMDS v1 is blocked on the node, the Agent cannot resolve the cluster name, and certain features (for example, [Orchestrator Explorer][6]) do not work. Hence, Datadog recommends adding `spec.global.ClusterName` in the `DatadogAgent` manifest. See this [comment][8] on how to configure the Agent to request metadata using IMDS v2.
+   **Note:** If access to IMDS v1 is blocked on the node, the Agent cannot resolve the cluster name, and certain features (for example, [Orchestrator Explorer][6]) do not work. Hence, Datadog recommends adding `spec.global.ClusterName` in the `DatadogAgent` manifest. For how to configure the Agent to request metadata using IMDS v2, see the `ec2_prefer_imdsv2` parameter in the [example Agent configuration file][8].
 
 4. Deploy the Datadog Agent:
    ```bash
@@ -151,6 +151,6 @@ To delete the add-on, run:
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md
 [7]: https://docs.datadoghq.com/infrastructure/containers/orchestrator_explorer/?tab=datadogoperator
-[8]: https://github.com/DataDog/datadog-agent/blob/4896a45f586f74de1da2e985f98988f0181afc36/pkg/config/config_template.yaml#L407-L416
+[8]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example
 [9]: https://github.com/DataDog/datadog-operator/issues/654
 [10]: /integrations/eks_fargate/#setup

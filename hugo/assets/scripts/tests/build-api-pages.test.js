@@ -929,6 +929,31 @@ describe(`filterExampleJson`, () => {
     expect(actual).toEqual(expected);
   });
 
+  it('should hide writeonly fields on response json', () => {
+    const mockSchema = {
+      "description": "This is a test with writeonly",
+      "properties": {
+        "secret": {
+          "description": "This is a write only field",
+          "writeOnly": true,
+          "type": "string"
+        },
+        "metric": {
+          "description": "This is explicitly not writeonly",
+          "writeOnly": false,
+          "type": "string"
+        },
+        "length": {
+          "description": "This is implicitly by omission not writeonly",
+          "type": "string"
+        }
+      }
+    };
+    const actual = bp.filterExampleJson('response', mockSchema);
+    const expected = {'metric':'string', 'length': 'string'};
+    expect(actual).toEqual(expected);
+  });
+
   it('should show boolean without quotes', () => {
     const mockSchema = {
       "description": "A dashboard is Datadog’s tool for visually tracking, analyzing, and displaying\nkey performance metrics, which enable you to monitor the health of your infrastructure.",
@@ -2614,6 +2639,25 @@ describe(`descColumn`, () => {
 });
 
 describe(`rowRecursive`, () => {
+
+  it('should hide writeonly fields in response models', () => {
+    const mockData = {
+      "secretField": {
+        "type": "string",
+        "writeOnly": true
+      },
+      "visibleField": {
+        "type": "string"
+      }
+    };
+
+    const response = bp.rowRecursive("response", mockData, false);
+    const request = bp.rowRecursive("request", mockData, false);
+
+    expect(response).not.toContain('secretField');
+    expect(response).toContain('visibleField');
+    expect(request).toContain('secretField');
+  });
 
   it('should handle fields named required (properties->required)', () => {
     /*

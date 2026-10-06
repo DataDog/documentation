@@ -4,176 +4,171 @@ aliases:
 - /es/continuous_integration/guides/pull_request_comments
 - /es/continuous_integration/integrate_tests/developer_workflows
 - /es/continuous_integration/tests/developer_workflows
-description: Aprende a utilizar Datadog Test Optimization con funciones adicionales
-  de Datadog para acelerar tu proceso de desarrollo.
+description: Aprenda a usar Datadog Test Optimization con funciones adicionales de
+  Datadog para acelerar su proceso de desarrollo.
 further_reading:
 - link: https://www.datadoghq.com/blog/datadog-github-actions-ci-visibility/
   tag: Blog
-  text: Monitorizar tus flujos de trabajo de GitHub Actions con Datadog CI Visibility
+  text: Haga un seguimiento de sus flujos de trabajo de GitHub Actions con Datadog
+    CI Visibility
 - link: /integrations/github/
   tag: Documentación
-  text: Más información sobre la integración GitHub
+  text: Obtenga información sobre la integración con GitHub
 - link: /integrations/guide/source-code-integration
   tag: Documentación
-  text: Más información sobre la integración del código fuente
-- link: /service_management/case_management
+  text: Obtenga información sobre la integración de código fuente.
+- link: /incident_response/work_management
   tag: Documentación
-  text: Más información sobre Case Management
-title: Mejorar los flujos de trabajo de los desarrolladores con Datadog
+  text: Obtenga información sobre Work Management.
+title: Mejora de los flujos de trabajo de los desarrolladores con Datadog
 ---
+## Descripción general {#overview}
 
-## Información general
+[Test Optimization][5] se integra con otros productos de Datadog orientados a desarrolladores, así como con socios externos como GitHub, para optimizar los flujos de trabajo de los desarrolladores con funciones que incluyen la capacidad de:
 
-[Test Optimization][5] se integra con otros productos de Datadog orientados a desarrolladores, así como con socios externos como GitHub, para agilizar los flujos de trabajo de los desarrolladores con funciones que incluyen la posibilidad de:
+- [Habilite los resúmenes de prueba en los comentarios de las solicitudes de extracción de GitHub](#test-summaries-in-github-pull-requests)
+- [Cree y abra problemas de GitHub](#create-and-open-github-issues) 
+- [Cree problemas de Jira a través de Work Management](#create-jira-issues)
+- [Abra pruebas en GitHub y en su IDE](#open-tests-in-github-and-your-ide)
 
-- [Activar resúmenes de tests en los comentarios de las solicitudes de extracción de GitHub](#test-summaries-in-github-pull-requests)
-- Crear y abrir incidentes en GitHub](#create-and-open-github-issues) 
-- Crear incidentes en Jira a través de Case Management](#create-jira-issues)
-- Abrir tests en GitHub y en tu IDE](#open-tests-in-github-and-your-ide)
+Estas funciones están disponibles para todos los clientes de Test Optimization y no requieren el uso de la [Datadog GitHub integration][4].
 
-Estas funciones están disponibles para todos los clientes de Test Optimization y no requieren el uso de la [integración Datadog GitHub][4].
+## Resúmenes de prueba en solicitudes de extracción de GitHub {#test-summaries-in-github-pull-requests}
 
-## Resúmenes de tests en solicitudes de extracción de GitHub
+Test Optimization se integra con GitHub para mostrar resúmenes de los resultados de la prueba directamente en los comentarios de sus solicitudes de extracción. Cada resumen contiene una descripción general de las ejecuciones de pruebas, información sobre la inestabilidad y mensajes de error para las pruebas fallidas.
 
-Datadog se integra con GitHub para mostrar resúmenes de los resultados de tests directamente en los comentarios de tus solicitudes de extracción. Cada resumen contiene información general de la ejecución de los tests, información sobre fallos, mensajes de error de tests fallidos, regresiones de rendimiento y cambios en la cobertura del código.
+{{< img src="ci/github_comments_light.png" alt="Vista previa de comentarios de pull request de Datadog GitHub" style="width:100%;">}}
 
-{{< img src="ci/github_comments_light.png" alt="Vista previa de comentarios de solicitudes de extracción de GitHub" style="width:100%;">}}
+Con esta información, los desarrolladores obtienen comentarios instantáneos sobre los resultados de sus pruebas y pueden depurar cualquier prueba fallida o inestable sin salir de la pull request view.
 
-Con esta información, los desarrolladores obtienen información instantánea sobre los resultados de sus tests y pueden depurar cualquier tests fallido o defectuosa sin salir de la vista de la solicitud de extracción.
+<div class="alert alert-info">Esta integración solo está disponible para servicios de prueba alojados en `github.com`.</div>
 
-<div class="alert alert-info">Este integración sólo está disponible para servicios de tests alojados en `github.com`.</div>
+## Habilite los resúmenes de prueba {#enable-test-summaries}
 
-## Activar los resúmenes de los tests
+Puede habilitar los resúmenes de prueba en los pull requests con los siguientes pasos:
 
-Puedes activar los resúmenes de los tests en las solicitudes de extracción a través de los siguientes pasos:
+1. Instale la [Datadog GitHub integration][4]:
+   1. Navegue a la pestaña {{< ui >}}Configuration{{< /ui >}} en el [Datadog GitHub integration tile][6] y haga clic en {{< ui >}}+ Create GitHub App{{< /ui >}}.
+   1. Otorgue a la aplicación permisos de lectura y escritura para pull requests.
+1. Abra [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
+1. Elija dónde aplicar la configuración:
+   - Seleccione la pestaña {{< ui >}}Organization{{< /ui >}} para habilitar PR Comments para cada repositorio de forma predeterminada.
+   - Seleccione la pestaña {{< ui >}}Repository-specific{{< /ui >}} para habilitar PR Comments para un solo repositorio.
+1. En {{< ui >}}General{{< /ui >}}, active el {{< ui >}}PR Comments{{< /ui >}}.
 
-1. Instala la [integración GitHub][4]:
-   1. Ve a la pestaña **Configuración** en el [cuadro de la integración GitHub][6] y haz clic en **+ Create GitHub App** (+ Crear aplicación GitHub).
-   1. Concede a la aplicación permisos de lectura y escritura para solicitudes de extracción.
-1. Ve a la página [Configuración de Test Optimization][3].
-1. Selecciona el repositorio en el que quieres activar los resúmenes de los tests.
-1. Activa el conmutador **Comentarios GitHub**.
+{{< img src="ci/enable-settings-github-comments-1.png" alt="El toggle de PR Comments en la página de CI/CD Settings." style="width:100%;">}}
 
-{{< img src="ci/enable-settings-github-comments.png" alt="Pestaña Configuración de Test Optimization en Datadog con comentarios GitHub activados para un servicio de test" style="width:100%;">}}
+Los comentarios solo aparecen en pull requests que han ejecutado al menos una prueba para un repositorio habilitado.
 
-Los comentarios sólo aparecen en las solicitudes de extracción que se abrieron antes de la ejecución del test y que ejecutaron al menos un test de un repositorio habilitado.
+## Cree y abra problemas de GitHub {#create-and-open-github-issues}
 
-## Crear y abrir incidentes en GitHub
+Con Test Optimization, puede crear y abrir problemas de GitHub prellenados con contexto relevante en sus ejecuciones de prueba, así como enlaces directos a Datadog para flujos de trabajo de depuración más optimizados. Crear problemas directamente desde Test Optimization puede ayudarle a realizar un seguimiento y mantener la responsabilidad de las fallas de las pruebas y las pruebas inestables.
 
-Con Test Optimization, puedes crear y abrir incidentes de GitHub previamente rellenados con el contexto relevante de tus tests, así como enlaces profundos a Datadog para agilizar los flujos de trabajo de depuración. La creación de incidentes directamente desde Test Optimization puede ayudarte a realizar un seguimiento y mantener la responsabilidad de los fallos de tests y los tests defectuosos.
+### Puntos de entrada en la aplicación {#in-app-entry-points}
 
-### Puntos de entrada en la aplicación
+Puede crear problemas de GitHub prellenados desde tres áreas dentro de Test Optimization:
 
-Puedes crear incidentes de GitHub previamente rellenados desde tres áreas dentro de Test Optimization:
+- [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview) 
+- [Branch Overview page](#branch-overview)
+- [Test Details side panel](#test-details-view)
 
-- [Página de información general del commit (de la tabla **Commits**)](#commit-overview) 
-- [Página de información general de la rama](#branch-overview)
-- [Panel lateral de detalles del test](#test-details-view)
+#### Commit Overview {#commit-overview}
 
-#### Información general del commit
+La página overview de cualquier commit se puede descubrir a través de una branch en particular o desde cualquier test en particular. 
 
-La página de información general de cualquier commit se puede encontrar en una rama concreta o en un test concreto.
+{{< img src="ci/github_issues_commit_overview_updated.png" alt="Vista previa de problemas de GitHub en Datadog" style="width:100%;">}}
 
-{{< img src="ci/github_issues_commit_overview_updated.png" alt="Vista previa de incidentes de GitHub Datadog" style="width:100%;">}}
+Desde la página Commit Overview, haga clic en cualquier fila de las tablas `Failed Tests` o `New Flaky Tests` y seleccione {{< ui >}}Open issue in GitHub{{< /ui >}}. 
 
-En la página de información general del commit, haz clic en cualquier fila de las tablas `Failed Tests` o `New Flaky Tests` y selecciona **Abrir incidente en GitHub**. 
+#### Branch Overview {#branch-overview}
+Desde esta página, haga clic en cualquier fila de la tabla {{< ui >}}Flaky Tests{{< /ui >}} y seleccione {{< ui >}}Open issue in GitHub{{< /ui >}}.
 
-#### Información general de la rama
-En esta página, haz clic en cualquier fila de la tabla **Tests defectuosos** y selecciona **Abrir incidente en GitHub**.
+{{< img src="ci/github_issues_flaky_test_updated.png" alt="Vista previa de la tabla de pruebas inestables de problemas de GitHub en Datadog" style="width:100%;">}}
 
-{{< img src="ci/github_issues_flaky_test_updated.png" alt="Vista previa de la tabla de incidentes de tests defectuosos de Datadog GitHub" style="width:100%;">}}
+#### Test Details View {#test-details-view}
+Desde una ejecución de prueba específica, haga clic en el botón {{< ui >}}Actions{{< /ui >}} y seleccione {{< ui >}}Open issue in GitHub{{< /ui >}}. 
 
-#### Vista de los detalles de los tests
-Desde una ejecución de test específica, haz clic en el botón **Actions** (Acciones) y selecciona **Abrir incidente en GitHub**. 
+{{< img src="ci/github_issues_detail_light.png" alt="Vista previa de la Test Detail View de problemas de GitHub en Datadog." style="width:100%;">}}
 
-{{< img src="ci/github_issues_detail_light.png" alt="Vista previa de la vista de detalles de tests con incidentes de Datadog GitHub" style="width:100%;">}}
+También tiene la opción de copiar una descripción del problema en Markdown para pegar los detalles de la prueba en otro lugar. La descripción en Markdown contiene información como el enlace de ejecución de prueba, el servicio, la rama, el commit, el autor y el error. 
 
-También tienes la opción de copiar la descripción de un incidente en Markdown para pegar los detalles del test en otro lugar. La descripción en Markdown contiene información como enlace de ejecución del test, servicio, rama, commit, autor y error. 
+{{< img src="ci/github_issues_markdown.png" alt="Copiar descripción del problema en formato Markdown para problemas de GitHub" style="width:50%;">}}
 
-{{< img src="ci/github_issues_markdown.png" alt="Copiar una descripción de incidente de GitHub en formato Markdown" style="width:50%;">}}
+### Ejemplo de problema de GitHub{#sample-github-issue}
+A continuación se muestra cómo podría verse un problema de GitHub prellenado:
+{{< img src="ci/prefilled_github_issue.png" alt="Problema de GitHub prellenado" style="width:80%;">}}
 
-### Ejemplo de incidente en GitHub
-A continuación se muestra el aspecto que podría tener un incidente de GitHub previamente rellenado:
-{{< img src="ci/prefilled_github_issue.png" alt="Pre-filled GitHub issue" style="width:80%;">}}
+## Crear problemas de Jira{#create-jira-issues}
 
-## Crear incidentes en Jira
+Con [Work Management][8], puede crear y abrir problemas de Jira prellenados que contienen contexto relevante relacionado con sus ejecuciones de prueba, así como enlaces directos a Datadog para flujos de trabajo de depuración más optimizados. Crear problemas directamente desde Test Optimization puede ayudarle a realizar un seguimiento y mantener la responsabilidad de las fallas de las pruebas y las pruebas inestables. 
 
-Con [Case Management][8], puedes crear y abrir incidentes en GitHub previamente rellenados con el contexto relevante de tus tests, así como enlaces profundos a Datadog para agilizar los flujos de trabajo de depuración. La creación de incidentes directamente desde Test Optimization puede ayudarte a realizar un seguimiento y mantener la responsabilidad de los fallos de tests y los tests defectuosos.
+Cuando actualiza el estado de un problema de Jira, el estado en Work Management se actualiza y refleja el estado más reciente del elemento de trabajo.
 
-Cuando actualizas el estado de un incidente en Jira, el estado en Case Management se actualiza y refleja el estado del último caso.
+### In-app entry points {#in-app-entry-points-1}
 
-### Puntos de entrada en la aplicación
+Después de haber [configurado la Jira integration][7], puede crear elementos de trabajo desde tres áreas dentro de Test Optimization:
 
-Después de haber [configurado la integración Jira][7], puedes crear casos desde tres áreas dentro de Test Optimization:
+- [Commit Overview page (from the {{< ui >}}Commits{{< /ui >}} table)](#commit-overview-1) 
+- [Flaky Tests section](#branch-overview-1)
+- [Test Runs side panel](#test-runs-view)
 
-- [Página de información general del commit (de la tabla **Commits**)](#commit-overview-1)
-- Sección [Tests defectuosos](#branch-overview-1)
-- [Panel lateral de ejecuciones de tests](#test-runs-view)
+Puede crear manualmente un problema de Jira a partir de un elemento de trabajo en [Work Management][9] haciendo clic en `Shift + J`.
 
-Puedes crear manualmente un incidente en Jira a partir de un caso en [Case Management][9] haciendo clic en `Shift + J`.
+### Commit Overview {#commit-overview-1}
 
-### Información general del commit
+La página overview de cualquier commit se puede descubrir a través de una branch en particular o desde cualquier test en particular. 
 
-La página de información general de cualquier commit se puede encontrar en una rama concreta o en un test concreto.
+Desde la página Commit Overview, haga clic en cualquier fila de las tablas `Failed Tests` o `New Flaky Tests` y seleccione {{< ui >}}Create work item{{< /ui >}}.
 
-{{< img src="continuous_integration/case_failed_test.png" alt="Crear un incidente en Case Management en la página de información general del commit" style="width:100%;">}}
+#### Branch Overview {#branch-overview-1}
+Desde esta página, haga clic en cualquier fila de la tabla {{< ui >}}Flaky Tests{{< /ui >}} y seleccione {{< ui >}}Create work item{{< /ui >}}.
 
-En la página de información general del commit, haz clic en cualquier fila de las tablas `Failed Tests` o `New Flaky Tests` y selecciona **Crear caso**.
+#### Ver Test Runs {#test-runs-view}
+Desde una ejecución de prueba específica, haga clic en el botón {{< ui >}}Actions{{< /ui >}} y seleccione {{< ui >}}Create work item{{< /ui >}}.
 
-#### Información general de la rama
-En esta página, haz clic en cualquier fila de la tabla **Tests defectuosos** y selecciona **Crear caso**.
+Para obtener más información sobre cómo configurar la Jira integration, consulte la [Work Management documentation][7].
 
-{{< img src="continuous_integration/case_flaky_test.png" alt="Crear un incidente de Case Management en la lista de tests defectuosos" style="width:100%;">}}
+## Abra pruebas en GitHub y en su IDE {#open-tests-in-github-and-your-ide}
 
-#### Vista de ejecuciones de tests
-En una ejecución de test específica, haz clic en el botón **Actions** (Acciones) y selecciona **Crear caso**. 
+### In-app entry points {#in-app-entry-points-2}
 
-{{< img src="continuous_integration/case_test_runs.png" alt="Crear un incidente en Case Management en el panel lateral de ejecuciones de tests" style="width:100%;">}}
+Después de detectar una prueba fallida o inestable dentro de Datadog, tiene la opción de abrir esa prueba en GitHub o en su IDE para corregirla de inmediato.
 
-Para obtener más información sobre la configuración de la integración Jira, consulta la [documentación de Case Management][7].
+En la sección {{< ui >}}Error Message{{< /ui >}} de la pestaña {{< ui >}}Overview{{< /ui >}} de una ejecución de prueba, haga clic en el botón {{< ui >}}View Code{{< /ui >}} para ver las líneas de código relevantes para esa prueba dentro de Visual Studio Code, IntelliJ o GitHub.
 
-## Abrir tests en GitHub y en tu IDE
+{{< img src="continuous_integration/error_message_code.png" alt="Un fragmento de código en línea con un botón en el que puede hacer clic para ver el código fuente en GitHub o en un IDE" style="width:100%;">}}
 
-### Puntos de entrada en la aplicación
+El orden de las opciones en este menú desplegable cambia según el lenguaje en el que se haya escrito su prueba:
 
-Después de detectar un test fallido o defectuoso en Datadog, tienes la opción de abrir ese test en GitHub o en tu IDE para corregirlo inmediatamente.
+- IntelliJ tiene prioridad para las pruebas basadas en Java
+- Visual Studio Code tiene prioridad para las pruebas basadas en JavaScript y Python
 
-En la sección **Mensaje de error** de la pestaña **Información general** de una ejecución de test haz clic en el botón **View Code** (Ver código) para ver las líneas de código relevantes de ese test en Visual Studio Code, IntelliJ o GitHub.
+### Viewing source code in GitHub {#viewing-source-code-in-github}
 
-{{< img src="continuous_integration/error_message_code.png" alt="Fragmento de código en línea con un botón que puedes pulsar para ver el código fuente en GitHub o en un IDE" style="width:100%;">}}
+Opcionalmente, puede configurar la [Datadog GitHub integration][10] para abrir el código fuente de una prueba fallida o inestable en GitHub.
 
-El orden de las opciones de este desplegable cambia en función del lenguaje en el que se haya escrito tu test:
+En la sección {{< ui >}}Source Code{{< /ui >}} de la pestaña {{< ui >}}Overview{{< /ui >}} de una ejecución de prueba, haga clic en el botón {{< ui >}}View on GitHub{{< /ui >}} para ver las líneas de código relevantes para esa prueba dentro de GitHub.
 
-- IntelliJ tiene prioridad para los tests basados en Java
-- Visual Studio Code tiene prioridad para los tests basados en JavaScript y Python
+{{< img src="continuous_integration/source_code_integration.png" alt="Un fragmento de código en línea con un botón en el que puede hacer clic para ver el código fuente en GitHub o en un IDE" style="width:100%;">}}
 
-### Visualización del código fuente en GitHub
+### Installing IDE plugins {#installing-ide-plugins}
 
-También puedes configurar la [integración GitHub][10] para abrir el código fuente de un test fallido o defectuoso en GitHub.
+Se requieren plugins y extensiones de IDE para visualizar su prueba en su IDE. 
 
-En la sección **Código fuente** de la pestaña **Información general** de una ejecución de test haz clic en el botón **View on GitHub** (Ver en GitHub) para ver las líneas de código relevantes de ese test en GitHub.
+- Si no tiene instalada la extensión de VS Code, haga clic en {{< ui >}}View in VS Code{{< /ui >}} para abrir la extensión directamente en VS Code para su instalación.
+- Si no tiene instalado el plugin de IntelliJ, haga clic en {{< ui >}}View in IntelliJ{{< /ui >}} para instalar la extensión. Las versiones compatibles de Datadog se pueden encontrar en la [Plugin Versions page][2].
 
-{{< img src="continuous_integration/source_code_integration.png" alt="Fragmento de código en línea con un botón que puedes pulsar para ver el código fuente en GitHub o en un IDE" style="width:100%;">}}
-
-### Instalación de complementos IDE
-
-Los complementos y las extensiones IDE son necesarios para ver tu test en tu IDE. 
-
-- Si no tienes instalada la extensión VS Code, haz clic en **View in VS Code** (Ver en VS Code) para abrir la extensión directamente en VS Code para su instalación.
-- Si no tienes instalado el complemento de IntelliJ, haz clic en **View in IntelliJ** (Ver en IntelliJ) para obtener la instalación de la extensión. Puedes encontrar las versiones de Datadog compatibles en la [página Versiones de complementos][2].
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/continuous_integration/guides/pull_request_comments/
 [2]: https://plugins.jetbrains.com/plugin/19495-datadog/versions
-[3]: https://app.datadoghq.com/ci/settings/test-optimization
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /es/integrations/github/
 [5]: /es/continuous_integration/tests/
 [6]: https://app.datadoghq.com/integrations/github
-[7]: /es/service_management/case_management/settings/#jira
-[8]: /es/service_management/case_management/view_and_manage#take-action
-[9]: https://app.datadoghq.com/cases
+[7]: /es/incident_response/work_management/settings/#jira
+[8]: /es/incident_response/work_management/view_and_manage#take-action
+[9]: https://app.datadoghq.com/work
 [10]: /es/integrations/github/#link-a-repository-in-your-organization-or-personal-account
-[11]: https://app.datadoghq.com/ci/test-repositories

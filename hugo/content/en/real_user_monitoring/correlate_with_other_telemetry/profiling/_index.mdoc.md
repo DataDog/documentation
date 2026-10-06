@@ -192,10 +192,6 @@ The **Optimization page** surfaces profiling data in several contexts:
 <!-- Android -->
 {% if equals($platform, "android") %}
 
-{% callout header="Preview" btn_hidden="true" %}
-Android Profiling is in Preview.
-{% /callout %}
-
 {% img src="real_user_monitoring/android/android-profiling-ttid.png" alt="Android profiling data in a time to initial display vital event." style="width:90%;" /%}
 
 Android profiling helps you identify and optimize slow methods during important moments in user sessions. Android profiling is built on top of the [ProfilingManager Android API][4] and samples the device's CPU to collect method call stacks from the application's process.
@@ -208,7 +204,6 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 
 - Application launch profiling requires Android SDK version 3.6.0+.
 - Continuous profiling requires Android SDK version 3.12.0+.
-- [RUM without Limits][5] must be enabled in your organization.
 
 ## Preview quota system
 
@@ -305,10 +300,6 @@ Android profiling data is attached to operations events in a RUM session. You ca
 <!-- iOS -->
 {% if equals($platform, "ios") %}
 
-{% callout header="Preview" btn_hidden="true" %}
-iOS Profiling is in Preview.
-{% /callout %}
-
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
 iOS profiling helps you identify and optimize slow methods during important moments in user sessions. iOS profiling is built on top of the [mach Kernel API][9] and periodically samples all application threads to collect call stacks. 
@@ -317,7 +308,6 @@ iOS profiling helps you identify and optimize slow methods during important mome
 
 - Application launch profiling requires iOS SDK version 3.6.0+.
 - Continuous profiling requires iOS SDK version 3.14.0+.
-- [RUM without Limits][10] must be enabled in your organization.
 
 ## Preview quota system
 
@@ -412,12 +402,10 @@ iOS profiling data is attached to operations events in a RUM session. You can ac
 [2]: /real_user_monitoring/application_monitoring/browser/setup/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/JS_Self-Profiling_API
 [4]: https://developer.android.com/topic/performance/tracing/profiling-manager/overview
-[5]: /real_user_monitoring/rum_without_limits/ 
 [6]: /real_user_monitoring/application_monitoring/android
 [7]: https://developer.android.com/topic/performance/tracing/profiling-manager/debug-mode
 [8]: /real_user_monitoring/application_monitoring/android/application_launch_monitoring?tab=kotlin
 [9]: https://developer.apple.com/documentation/kernel/mach
-[10]: /real_user_monitoring/rum_without_limits/ 
 [11]: /real_user_monitoring/application_monitoring/ios
 [12]: /real_user_monitoring/application_monitoring/ios/application_launch_monitoring?tab=swift
 [13]: /real_user_monitoring/guide/proxy-rum-data

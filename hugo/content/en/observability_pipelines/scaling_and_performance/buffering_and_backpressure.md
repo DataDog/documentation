@@ -18,6 +18,9 @@ further_reading:
 - link: "observability_pipelines/destinations"
   tag: "Documentation"
   text: "Destinations"
+- link: "https://www.datadoghq.com/architecture/observability-pipelines-a-guide-to-sizing-scaling-and-performance/"
+  tag: "Architecture Center"
+  text: "Observability Pipelines: A Guide to Sizing, Scaling and Performance"
 ---
 
 ## Overview
@@ -58,7 +61,7 @@ This table compares the differences between the memory and disk buffer.
 
 | Property                                                 | Memory Buffer             | Disk Buffer                          |
 | -------------------------------------------------------- | ------------------------- | ------------------------------------ |
-| Default size                                             | Configurable<br>Minimum buffer size: 1 MB<br>Maximum buffer size: 128 GB | Configurable<br>Minimum buffer size: 256 MB<br> Maximum buffer size: 500 GB       |
+| Default size                                             | Configurable<br>Minimum buffer size: 1 MB<br>Maximum buffer size: 128 GB | Configurable<br>Minimum buffer size: 256 MB<br> Maximum buffer size: 5 TB<br>**Note**: For Worker versions older than 2.20.x, the maximum buffer size is 500 GB.       |
 | Performance                                              | Higher                    | Lower                                |
 | Durability through an unexpected Worker restart or crash | None                      | Events flushed to disk latest every 500 ms        |
 | Data loss due to an unexpected restart or crash          | All buffered data is lost | All buffered data is retained        |

@@ -235,5 +235,64 @@
             "{% /agent-only %}"
         ],
         "description": "Markdoc agent-only block for content intended for AI agents"
+    },
+
+    "Line break": {
+        "scope": "markdoc",
+        "prefix": ";;br",
+        "body": "{% br /%}",
+        "description": "Markdoc line break (self-closing)"
+    },
+
+    "Non-breaking space": {
+        "scope": "markdoc",
+        "prefix": ";;nbsp",
+        "body": "{% nbsp /%}",
+        "description": "Markdoc non-breaking space (self-closing)"
+    },
+
+    "Icon": {
+        "scope": "markdoc",
+        "prefix": ";;icon",
+        "body": "{% icon name=\"${1:icon-name}\" /%}",
+        "description": "Markdoc icon tag (self-closing) with a required name attribute"
+    },
+
+    "Keyboard key": {
+        "scope": "markdoc",
+        "prefix": ";;kbd",
+        "body": "{% kbd %}${1:Ctrl+C}{% /kbd %}",
+        "description": "Markdoc kbd tag for styling keyboard shortcuts"
+    },
+
+    "What's next": {
+        "scope": "markdoc",
+        "prefix": ";;whatsnext",
+        "body": [
+            "{% whatsnext desc=\"${1:Additional helpful documentation:}\" %}",
+            "{% nextlink href=\"${2:/path/to/page}\" %}${3:Link text}{% /nextlink %}",
+            "{% nextlink href=\"${4:/path/to/page}\" %}${5:Link text}{% /nextlink %}",
+            "{% /whatsnext %}"
+        ],
+        "description": "Markdoc whatsnext block with nextlink children"
+    },
+
+    "Glossary tooltip": {
+        "scope": "markdoc",
+        "prefix": ";;glossary-tooltip",
+        "body": "{% glossary-tooltip term=\"${1:term-id}\" /%}",
+        "description": "Markdoc glossary-tooltip that renders a term with its definition on hover"
+    },
+
+    "Card grid": {
+        "scope": "markdoc",
+        "prefix": ";;card-grid",
+        "body": [
+            "{% card-grid card_width=${1:300} %}",
+            "{% image-card href=\"${2:/path/to/page}\" src=\"${3:path/to/image.png}\" alt=\"${4:Alt text}\" title=\"${5:Card title}\" /%}",
+            "{% image-card href=\"${6:/path/to/page}\" src=\"${7:path/to/image.png}\" alt=\"${8:Alt text}\" title=\"${9:Card title}\" /%}",
+            "{% /card-grid %}"
+        ],
+        "description": "Markdoc card-grid with image-card children"
     }
 }

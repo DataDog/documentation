@@ -4,70 +4,36 @@ aliases:
 further_reading:
 - link: /opentelemetry/collector_exporter/
   tag: Documentación
-  text: Empezando con Collector
+  text: Primeros pasos con el Collector
 - link: /opentelemetry/guide/service_entry_spans_mapping/
   tag: Documentación
-  text: Asignación de las convenciones semánticas de OpenTelemetry a tramos de entrada
+  text: Asignación de convenciones semánticas de OpenTelemetry a spans de entrada
     de servicio
-title: Métricas de trazas
+title: Métricas de traza
 ---
-
-<div class="alert alert-info">
-<a href="/opentelemetry/guide/service_entry_spans_mapping/">La asignación de convenciones semánticas de OpenTelemetry a tramos (spans) de entrada de servicio</a> ya está en la fase beta pública, e incluye mejoras en las métricas de trazas (traces) generadas a partir de tramos de OpenTelemetry.
-</div>
-
-## Información general
+## Descripción general {#overview}
 
 {{< img src="/opentelemetry/collector_exporter/trace_metrics.png" alt="Métricas de APM de OpenTelemetry" style="width:100%;" >}}
 
-Para enviar estadísticas de APM como aciertos, errores y duración, configura el [Datadog Connector][1].
+Para enviar estadísticas de APM como hits, errores y duración, configure el [`span_metrics` conector][1]. Configure el conector para recibir todas las trazas antes de cualquier procesador de muestreo, de modo que las métricas de traza representen el tráfico no muestreado.
 
-Para más información, consulta la documentación del proyecto de OpenTelemetry para el [Datadog Connector][1].
+## Configuración {#setup}
 
-## Ajuste
+Seleccione su entorno en la [configuración recomendada del Collector][1] y utilice su bloque de conector `span_metrics` completo. Conserve todas sus dimensiones, que Datadog utiliza para derivar etiquetas de servidor, servicios pares, nombres de operaciones y nombres de recursos.
 
-Añade las siguientes líneas a tu configuración de Collector:
+## Datos recopilados {#data-collected}
 
-```yaml
-processors:
-  probabilistic_sampler:
-    sampling_percentage: 20
-connectors:
-    # añade la definición del "datadog" connector y otras configuraciones
-    datadog/connector:
-exporters:
-  datadog:
-    api:
-      key: ${env:DD_API_KEY}
-service:
-  pipelines:
-   traces:
-     receivers: [otlp]
-     processors: [batch]
-     exporters: [datadog/connector]
-   traces/2:
-     receivers: [datadog/connector]
-     processors: [batch, probabilistic_sampler]
-     exporters: [datadog]
-  metrics:
-    receivers: [datadog/connector]
-    processors: [batch]
-    exporters: [datadog]
-```
+Consulte [Métricas de traza][2].
 
-## Datos recopilados
+## Ejemplo de configuración completo {#full-example-configuration}
 
-Consulta [métricas de trazas][2].
+Para obtener archivos de ejemplo completos y funcionales, consulte el [`opentelemetry-examples` repositorio][5].
 
-## Ejemplo completo de configuración
-
-Para ver un ejemplo completo de configuración en funcionamiento con el exportador de Datadog, consulta [`trace-metrics.yaml`][2].
-
-## Lectura adicional
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 
-[1]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
+[1]: /es/opentelemetry/setup/collector_exporter/#span-metrics-connector
 [2]: /es/tracing/metrics/metrics_namespace/
-[3]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/trace-metrics.yaml
+[5]: https://github.com/DataDog/opentelemetry-examples/tree/be842bc1447337c32f2d6265612232932a6cdbfd/configurations/opentelemetry-collector

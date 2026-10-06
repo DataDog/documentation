@@ -25,19 +25,19 @@ aliases:
 - /ja/agent/basic_agent_usage/linux/
 further_reading:
 - link: /logs/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: ログの収集
 - link: /infrastructure/process/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: プロセスの収集
 - link: /tracing/
-  tag: よくあるご質問
+  tag: ドキュメント
   text: トレースの収集
 - link: /agent/architecture/#agent-architecture
-  tag: よくあるご質問
+  tag: ドキュメント
   text: Agent のアーキテクチャを詳しく見る
 - link: /agent/configuration/network#configure-ports
-  tag: よくあるご質問
+  tag: ドキュメント
   text: インバウンドポートの構成
 platform: Linux
 title: Linux
@@ -59,7 +59,7 @@ Datadog Agent 構成ファイルは `/etc/datadog-agent/datadog.yaml` にあり�
 - `proxy`: アウトバウンドトラフィック用の HTTP/HTTPS プロキシエンドポイント ([Datadog Agent プロキシ構成][8] を参照)
 - デフォルトのタグ、ログレベル、および Datadog 構成
 
-`/etc/datadog-agent/datadog.yaml.example` にある完全にコメント化されたリファレンスファイルには、比較やコピーアンドペーストに使用できるすべてのオプションがリストされています。または、サンプルの `config_template.yaml` ファイルで、利用可能なすべての構成オプションを参照してください。
+`/etc/datadog-agent/datadog.yaml.example` にある完全にコメント化されたリファレンスファイルには、比較やコピーアンドペーストに使用できるすべてのオプションがリストされています。または、GitHubにある[Linux用Agent設定ファイルの例][11]をご覧ください。
 
 ### インテグレーションファイル {#integration-files}
 インテグレーション用の構成ファイルは `/etc/datadog-agent/conf.d/` にあります。各インテグレーションにサブディレクトリ `<INTEGRATION>.d/` があり、次のものが含まれています。
@@ -162,3 +162,4 @@ Agent には `/opt/datadog-agent/embedded/` に埋め込まれた Python 環境�
 [8]: https://docs.datadoghq.com/ja/agent/configuration/proxy/
 [9]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/
 [10]: /ja/tracing/trace_collection/automatic_instrumentation/single-step-apm/linux
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_linux.yaml.example

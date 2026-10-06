@@ -1,90 +1,89 @@
 ---
 aliases:
 - /ja/containers/monitoring/autoscaling
-description: Datadog のメトリクスとインテリジェントなスケーリング推奨事項を使用して、Kubernetes ワークロードを自動的にスケールする
+cascade:
+  site_support_id: containers_autoscaling
+description: Datadog のメトリクスとインテリジェントなスケーリング推奨事項を使用して、Kubernetes ワークロードを自動的にスケールできます。
 further_reading:
 - link: /infrastructure/containers/kubernetes_resource_utilization
   tag: ドキュメント
-  text: Kubernetes リソース利用
+  text: Kubernetes のリソース使用状況
 - link: /account_management/rbac/permissions
   tag: ドキュメント
-  text: Datadog ロールのアクセス許可
+  text: Datadog のロール権限
 - link: /agent/remote_config/
   tag: ドキュメント
   text: Remote Configuration
 - link: https://www.datadoghq.com/blog/autoscaling-custom-metrics
   tag: ブログ
-  text: カスタムメトリクスに基づいた Kubernetes ワークロードのスケーリング
+  text: カスタムメトリクスによる Kubernetes ワークロードのスケーリング
 - link: https://www.datadoghq.com/blog/kubernetes-custom-query-autoscaling
   tag: ブログ
-  text: カスタムクエリスケーリングを使用して Kubernetes ワークロードを最適化する
+  text: カスタムクエリのスケーリングによる Kubernetes ワークロードの最適化
 - link: https://www.datadoghq.com/blog/ddot-gateway
   tag: ブログ
-  text: DDOT ゲートウェイを使用して、OpenTelemetry パイプラインを一元管理する
+  text: DDOT ゲートウェイを使用した OpenTelemetry パイプラインの一元化と管理
 - link: https://www.datadoghq.com/blog/datadog-kubernetes-autoscaling/
   tag: ブログ
-  text: Datadog Kubernetes Autoscaling を使用して、ワークロードのサイズを適切に調整し、コストを削減する
+  text: Datadog Kubernetes Autoscaling によるワークロードのサイズ適正化とコスト削減
+- link: https://www.datadoghq.com/architecture/kubernetes-workload-autoscaling-with-datadog/
+  tag: アーキテクチャセンター
+  text: Datadog による Kubernetes ワークロードの自動スケーリング
 title: Kubernetes Autoscaling
 ---
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">
-  この機能は、Datadog for Government ({{< region-param key="dd_datacenter" >}}) サイトでは利用できません。
-</div>
-{{< /site-region >}}
-
-Datadog Kubernetes Autoscaling は、Kubernetes リソースを継続的にモニターし、即時のスケーリング推奨事項と Kubernetes ワークロードの多次元オートスケーリングを提供します。Datadog のウェブインターフェースを通じて、または `DatadogPodAutoscaler` カスタムリソースを使用してオートスケーリングを展開できます。
+Datadog Kubernetes Autoscaling は、Kubernetes リソースを継続的に監視し、即時のスケーリング推奨事項を提供するとともに、Kubernetes ワークロードの多次元自動スケーリングに対応します。オーとスケーリングをデプロイするには、Datadog ウェブインターフェースまたは `DatadogPodAutoscaler` カスタムリソースを使用できます。
 
 ## 仕組み {#how-it-works}
-Datadog は、リアルタイムおよび過去の利用率メトリクスと既存の Datadog Agent からのイベントシグナルを使用して推奨事項を作成します。その後、これらの推奨事項を確認し、デプロイすることを選択できます。
+Datadog では、既存の Datadog Agent からのリアルタイムおよび履歴の利用状況メトリクスとイベントシグナルを使用して推奨事項を作成します。これらの推奨事項を確認し、デプロイするかどうかを選択できます。
 
-デフォルトで、Datadog Kubernetes Autoscaling は推定された CPU およびメモリコスト値を使用して、節約の機会と影響の見積もりを示します。Kubernetes Autoscaling を [Cloud Cost Management](#idle-cost-and-savings-estimates) と併用して、正確なインスタンスタイプコストに基づくレポートを取得することもできます。
+デフォルトでは、Datadog Kubernetes Autoscaling は CPU およびメモリコストの推定値を使用して、節約の機会と推定される効果を示します。また、[Cloud Cost Management](#idle-cost-and-savings-estimates) とともに Kubernetes Autoscaling を使用して、正確なインスタンスタイプのコストに基づくレポートを取得することもできます。
 
-自動ワークロードスケーリングは、ワークロードレベルでスケーリング動作を定義する `DatadogPodAutoscaler` カスタムリソースによって実現されています。Datadog Cluster Agent は、このカスタムリソースのコントローラーとして機能します。
+自動化されたワークロードのスケーリングには、ワークロードごとにスケーリング動作を定義する `DatadogPodAutoscaler` カスタムリソースが活用されます。Datadog Cluster Agent は、このカスタムリソースのコントローラーとして機能します。
 
-**注:** 各クラスターは、Datadog Kubernetes Autoscaling で最適化された最大 1000 のワークロードを持つことができます。
+**注:** 各クラスターで、Datadog Kubernetes Autoscaling を使用して最大 1,000 個のワークロードを最適化できます。
 
 ### 互換性 {#compatibility}
 
-- **ディストリビューション**: この機能は、Datadog の [サポートされている Kubernetes ディストリビューション][5]すべてと互換性があります。
-- **ワークロードオートスケーリング**: この機能は、Horizontal Pod Autoscaler (HPA) および Vertical Pod Autoscaler (VPA) の代替です。Datadog は、Datadog Kubernetes Autoscaling を有効にする際に、ワークロードから HPA または VPA を削除することを推奨します。これらのワークロードは、アプリケーション内で自動的に特定されます。
-**注:** HPA および/または VPA を保持しながら、`applyPolicy` セクションの `mode: Preview` で `DatadogPodAutoscaler` を作成することにより、Datadog Kubernetes Autoscaling を試すことができます。
+- **ディストリビューション**: この機能には、Datadog が [サポートするすべての Kubernetes ディストリビューション][5] との互換性があります。
+- **ワークロード自動スケーリング**: この機能は、Horizontal Pod Autoscaler (HPA) および Vertical Pod Autoscaler (VPA) の代替手段となります。Datadog Kubernetes Autoscaling を有効にしてワークロードを最適化する場合、Datadog ではそのワークロードから既存の HPA や VPA を削除することを推奨しています。これらのワークロードは、アプリケーション内で自動的に識別されます。
+**注:** `DatadogPodAutoscaler` セクションの `mode: Preview` を使用して `applyPolicy`を作成すると、HPA や VPA を維持したまま Datadog Kubernetes Autoscaling を試すことができます。
 
 ### 要件 {#requirements}
 
-- [Remote Configuration][1] は、組織レベルおよびターゲットクラスター内のエージェントの両方で有効にする必要があります。設定手順については、[Remote Configuration を有効にする][2]を参照してください。
-- [Helm][3]、Datadog Agent 更新用。
-- (Datadog Operator ユーザー向け) [`kubectl` CLI][4]、Datadog Agent 更新用。
-- ライブオートスケーリングを使用している場合、Datadog は最新の Datadog Agent バージョンの使用を推奨します。これにより、最新の改善と最適化の利用が確保されます。スケーリングの推奨事項を利用するには、[Kubernetes State Core][9] の統合を有効にする必要があります。<br/><br/>
+- 組織レベルとターゲットクラスター内の Agent の両方で、[Remote Configuration][1] を有効にする必要があります。セットアップ手順については、[Remote Configuration の有効化][2] を参照してください。
+- [Helm][3] (Datadog Agent を更新するために使用)。
+- (Datadog Operator ユーザーの場合) [`kubectl` CLI][4] (Datadog Agent を更新するために使用)。
+- ライブ自動スケーリングを使用する場合、Datadog では最新の Datadog Agent バージョンを使用することを推奨しています。これにより、最新の改善や最適化を利用できるようになります。スケーリングの推奨事項を利用するには、[Kubernetes State Core][9] インテグレーションを有効にする必要があります。<br/><br/>
 
-   | 機能 | 最小 Agent バージョン |
+   | 機能 | Agent の最小バージョン |
    |---------|----------------------|
-   | アプリ内ワークロードスケーリングの推奨事項 | 7.50+ |
-   | ライブワークロードスケーリング | 7.66.1+ |
-   | Argo Rollout の推奨事項とオートスケーリング | 7.71+ |
-   | クラスターオートスケーリング ([サインアップのプレビュー][10]) | 7.72+ |
-   | インプレースの垂直ポッドサイズ変更 (オプトイン) | 7.78+ |
-   | クラスタープロファイルのアクティベーション、ワークロードラベル | 7.78+ |
-   | クラスタープロファイルのアクティベーション、ネームスペースラベル | 7.79+ |
+   | アプリ内ワークロードスケーリングの推奨事項 | 7.50 以降 |
+   | ライブワークロードスケーリング | 7.66.1 以降 |
+   | Argo Rollout の推奨事項と自動スケーリング | 7.71 以降 |
+   | クラスターの自動スケーリング ([プレビュー登録][10]) | 7.72 以降 |
+   | インプレース垂直 Pod リサイズ (オプトイン) | 7.78 以降 |
+   | クラスタープロファイルの有効化、ワークロードラベル | 7.78 以降 |
+   | クラスタープロファイルの有効化、ネームスペースラベル | 7.79 以降 |
 
-- 以下のユーザー権限:
+- 次のユーザー権限:
    - 組織管理 (Remote Configuration に必要)
    - API キーの書き込み (Remote Configuration に必要)
    - ワークロードスケーリングの書き込み
-   - オートスケーリング管理
-- (推奨) Linux カーネル v5.19+ および cgroup v2
+   - 自動スケーリングの管理
+- (推奨) Linux カーネル v5.19 以降および cgroup v2
 
 ## セットアップ {#setup}
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-1. Datadog Operator v1.16.0+ を使用していることを確認します。Datadog Operator をアップグレードするには
+1. Datadog Operator v1.16.0 以降を使用していることを確認してください。Datadog Operator をアップグレードするには:
 
 ```shell
 helm upgrade datadog-operator datadog/datadog-operator
 ```
 
-2. `datadog-agent.yaml` 構成ファイルに次の内容を追加します。
+2. `datadog-agent.yaml` 設定ファイルに次の要素を追加します。
 
 ```yaml
 spec:
@@ -105,7 +104,7 @@ spec:
           value: "true"
 ```
 
-3. [Admission Controller][1] は、Datadog Operator でデフォルトで有効になっています。無効にした場合は、次の強調表示された行を `datadog-agent.yaml` に追加して再度有効にしてください。
+3. [Admission Controller][1] は、Datadog Operator でデフォルトで有効にされます。無効にしている場合は、次の強調表示された行を `datadog-agent.yaml` に追加して再度有効にしてください。
 
 {{< highlight yaml "hl_lines=4-5" >}}
 ...
@@ -116,7 +115,7 @@ spec:
 ...
 {{< /highlight >}}
 
-4. 更新された `datadog-agent.yaml` 構成を適用してください。
+4. 更新後の `datadog-agent.yaml` の設定を適用します。
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
@@ -127,7 +126,7 @@ kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-1. Agent および Cluster Agent v7.66.1+ を使用していることを確認します。`datadog-values.yaml` 構成ファイルに次の内容を追加します。
+1. Agent および Cluster Agent v7.66.1 以降を使用していることを確認してください。`datadog-values.yaml` 設定ファイルに次の要素を追加します。
 
 ```yaml
 datadog:
@@ -138,7 +137,7 @@ datadog:
     unbundleEvents: true
 ```
 
-2. [Admission Controller][1] は、Datadog Helm チャートでデフォルトで有効になっています。無効にした場合は、次の強調表示された行を `datadog-values.yaml` に追加して再度有効にします。
+2. [Admission Controller][1] は、Datadog Helm チャートでデフォルトで有効にされます。無効にしている場合は、次の強調表示された行を `datadog-values.yaml` に追加して再度有効にしてください。
 {{< highlight yaml "hl_lines=5-6" >}}
 ...
 clusterAgent:
@@ -153,7 +152,7 @@ clusterAgent:
 helm repo update
 ```
 
-4. 更新された `datadog-values.yaml` で Datadog Agent を再デプロイします。
+4. 更新後の `datadog-values.yaml` を使用して Datadog Agent を再デプロイします。
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
@@ -164,15 +163,15 @@ helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 {{% /tab %}}
 {{< /tabs >}}
 
-### アイドルコストと節約の見積もり {#idle-cost-and-savings-estimates}
+### アイドルコストと節約額の推定値 {#idle-cost-and-savings-estimates}
 
 {{< tabs >}}
-{{% tab "Cloud Cost Management を使用" %}}
-[Cloud Cost Management][1] が組織内で有効になっている場合、Datadog Kubernetes Autoscaling は、監視対象インスタンスの正確な請求コストに基づいてアイドルコストと節約の見積もりを表示します。
+{{% tab "Cloud Cost Management を使用する場合" %}}
+組織内で [Cloud Cost Management][1] が有効になっている場合、Datadog Kubernetes Autoscaling は監視対象の基盤となるインスタンスの実際の請求額に基づいて、アイドルコストと節約額の推定値を示します。
 
-[AWS][2]、[Azure][3]、または [Google Cloud][4] の Cloud Cost 設定手順を参照してください。
+[AWS][2]、[Azure][3]、または [Google Cloud][4] での Cloud Cost 設定手順を参照してください。
 
-Cloud Cost Management データは Kubernetes Autoscaling を強化しますが、必須ではありません。Datadog のすべてのワークロード推奨事項とオートスケーリングの決定は、Cloud Cost Management なしでも有効で、機能します。
+Cloud Cost Management のデータは Kubernetes Autoscaling を強化しますが、必須ではありません。Datadog によるワークロード推奨事項と自動スケーリングの決定のすべては、Cloud Cost Management を使用しなくても有効であり、機能します。
 
 [1]: /ja/cloud_cost_management
 [2]: /ja/cloud_cost_management/aws
@@ -181,16 +180,16 @@ Cloud Cost Management データは Kubernetes Autoscaling を強化しますが�
 {{% /tab %}}
 
 {{% tab "デフォルト" %}}
-Cloud Cost Management が**無効**の場合、Datadog Kubernetes Autoscaling は次の数式と固定値を使用してアイドルコストと節約の見積もりを表示します。
+Cloud Cost Management が**有効になっていない**場合、Datadog Kubernetes Autoscaling は、以下の計算式と固定値を使用して、アイドルコストと節約額の推定値を示します。
 
-**クラスターアイドル**:
+**クラスターのアイドル状態**:
 
 ```
   (cpu_capacity - max(cpu_usage, cpu_requests)) * core_rate_per_hour
 + (mem_capacity - max(mem_usage, mem_requests)) * memory_rate_per_hour
 ```
 
-**ワークロードアイドル**:
+**ワークロードのアイドル状態**:
 
 ```
   (max(cpu_usage, cpu_requests) - cpu_usage) * core_rate_per_hour
@@ -198,68 +197,68 @@ Cloud Cost Management が**無効**の場合、Datadog Kubernetes Autoscaling �
 ```
 
 **固定値**:
-- core_rate_per_hour = CPU コア時間あたり $0.0295
-- memory rate_per_hour = メモリ GB 時間あたり $0.0053
+- core_rate_per_hour = CPU コアあたり $0.0295/時間
+- memory rate_per_hour = メモリ GB あたり $0.0053/時間
 
 
-_固定コスト値は、時間の経過とともに微調整される可能性があります。_
+_コストの固定値は、時間の経過とともに調整される場合があります。_
 {{% /tab %}}
 {{< /tabs >}}
 
-## 使用方法 {#usage}
+## 使用量 {#usage}
 
-### リソースを特定して適切なサイズに調整する {#identify-resources-to-rightsize}
+### サイズを適正化すべきリソースを識別する{#identify-resources-to-rightsize}
 
-[オートスケーリング概要ページ][6]は、プラットフォームチームが組織全体の Kubernetes リソースの節約機会を理解し、主要なクラスターやネームスペースに絞り込むための出発点を提供します。
+プラットフォームチームが組織全体で Kubernetes リソースを節約する機会を把握し、主要なクラスターや名前空間に焦点を絞り込むには、[Autoscaling Summary ページ][6] が出発点となります。
 
-[セットアップページ][11]は、スケールする複数のワークロードを選択し、一括して最適化を管理するオプションを提供します。
+[Setup ページ][11] には、スケーリング対象の複数のワークロードを選択し、最適化を一括で管理するためのオプションが用意されています。
 
-[クラスターのスケーリングビュー][7]は、クラスターごとの合計アイドル CPU、合計アイドルメモリ、およびコストに関する情報を提供します。
+[Cluster Scaling ビュー][7] には、クラスターごとのアイドル CPU の合計、アイドルメモリの合計、およびコストに関する情報が提示されます。
 
-クラスターをクリックすると、詳細情報と推定節約額でソートされたクラスターのワークロードのテーブルが表示されます。個々のアプリケーションまたはサービスの所有者である場合は、[ワークロードスケーリングリストビュー][8]から直接チームまたはサービス名でフィルタリングすることもできます。
+クラスターをクリックすると、詳細情報と、推定節約額でソートされたクラスターのワークロードのテーブルが表示されます。個々のアプリケーションまたはサービスの所有者は、[Workload Scaling リストビュー][8] から直接、チーム名またはサービス名でフィルタリングすることもできます。
 
-これらのビューのいずれからでも、ワークロードの {{< ui >}}Optimize{{< /ui >}} をクリックしてスケーリングの推奨事項を確認し、その後、[ワークロードのオートスケーリングを有効にする](#enable-autoscaling-for-a-workload)へ進みます。
+これらのビューのいずれかで、ワークロードの {{< ui >}}Optimize{{< /ui >}} をクリックしてスケーリングの推奨事項を確認してから、[ワークロード自動スケーリングの有効化](#enable-autoscaling-for-a-workload)に進みます。
 
-### ワークロードのオートスケーリングを有効にする {#enable-autoscaling-for-a-workload}
+### ワークロード自動スケーリングの有効化 {#enable-autoscaling-for-a-workload}
 
-最適化するワークロードを特定した後、その {{< ui >}}Scaling Recommendation{{< /ui >}} を確認します。{{< ui >}}Configure Recommendation{{< /ui >}} をクリックして、有効にする前に制約を追加するかターゲット利用率レベルを調整します。
+最適化するワークロードを特定したら、その {{< ui >}}Scaling Recommendation{{< /ui >}} を確認します。有効化する前に、{{< ui >}}Configure Recommendation{{< /ui >}} をクリックして、制約を追加するか、目標の使用率レベルを調整します。
 
-ワークロードのオートスケーリングを有効にする方法は 3 つあります。現在のワークロードのデプロイ方法に合ったパスを選択してください。
+ワークロード自動スケーリングを有効にするには 3 つの方法があります。現在ワークロードをデプロイしている方法と一致するパスを選択してください。
 
-| パス | 最適 | 開始する場所 | 継続的な管理 |
+| パス | 最適な用途 | 開始場所 | 継続的な管理 |
 |------|----------|-----------------|--------------------|
-| **A. Datadog UI セットアップウィザード** | 迅速に開始し、即時の視覚的フィードバックで設定を反復するか、アプリケーションチームがより良いスケーリング構成の決定を行えるようにする | Datadog UI の[セットアップページ][11] | ワークロードの `DatadogPodAutoscaler` を UI またはクラスターから編集する |
-| **B. `DatadogPodAutoscaler`マニフェストを作成する** | シッピング Kubernetes マニフェストの既存のワークフロー (`kubectl`、Helm、ArgoCD、Terraform、または他の GitOps ツール) | 手書きまたはテンプレート化された YAML を既存のツールで適用する | マニフェストを編集し、同じツールで再適用する |
-| **C. [クラスタープロファイル](#cluster-profiles)ラベルを適用する** | 単一の共有ポリシーで多くのワークロードやネームスペースでオートスケーリングを有効にする | ワークロードまたはネームスペースにラベルを付ける: `autoscaling.datadoghq.com/profile` | プロファイルを編集して、管理するすべてのワークロードを更新するか、ラベルを変更することでワークロードをプロファイル間で移動する|
+| **A. Datadog UI セットアップウィザード** | 迅速に開始し、即時の視覚的フィードバックを得ながら設定を反復します。または、アプリケーションチームがより適切なスケーリング構成の決定を行えるよう支援します | Datadog UI の [Setup ページ][11] | UI またはクラスターからワークロードの `DatadogPodAutoscaler` を編集します |
+| **B. `DatadogPodAutoscaler`マニフェストを作成する** | Kubernetes マニフェストをデプロイするための既存のワークフロー (`kubectl`、Helm、ArgoCD、Terraform、またはその他の GitOps ツール) | 既存のツールで適用される手書きの YAML またはテンプレート化された YAML | マニフェストを編集し、同じツールを使用して再適用します |
+| **C. [クラスター プロファイル ](#cluster-profiles) ラベルを適用する** | 単一の共有ポリシーを使用して多数のワークロードまたは名前空間にわたって自動スケーリングを有効にします | ワークロードまたは名前空間に適用するラベル `autoscaling.datadoghq.com/profile` | プロファイルを編集して管理対象のすべてのワークロードを更新するか、ラベルを変更してプロファイル間でワークロードを移動します |
 
 #### パス A: Datadog UI {#path-a-datadog-ui}
 
-最も早い開始方法は、Datadog UI の[セットアップページ][11]です。ウィザードは次の 5 つのステップを案内します。クラスターの選択、Agent と権限の要件の確認、インストール方法の選択、スケーリングテンプレートの選択、デプロイ。ウィザードで利用可能なテンプレート:
+最も迅速に開始する方法は、Datadog UI の [Setup ページ][11] を使用することです。ウィザードが、クラスターの選択、Agent と権限の要件の確認、インストール方法の選択、スケーリングテンプレートの選択、デプロイという 5 つのステップを順を追って案内します。ウィザードで利用可能なテンプレート:
 
-- **コストを最適化する**: 高い CPU 利用率目標、積極的なスケールダウン、最低レプリカフロア。ステートレスでコスト要件が厳しいワークロードに最適です。
-- **バランスを最適化する**: 中程度の利用率目標、バランスの取れたスケールアップとスケールダウン。ほとんどのステートレスワークロードに最適です。
-- **パフォーマンスを最適化する**: 保守的な利用率目標、遅いスケールダウン、高いレプリカフロア。ステートフルまたは重要なサービスに最適です。
-- **カスタマイズ**: 上記のいずれかから開始し、CPU ターゲット、レプリカ、および安定化ウィンドウを自分で調整します。
+- **コストの最適化**: 高い CPU 使用率の目標、積極的なスケールダウン、最小限のレプリカ下限数。ステートレスでコスト重視のワークロードに最適です。
+- **バランスの最適化**: 中程度の使用率の目標、高速スケールアップ、バランスの取れたスケールダウン。ほとんどのステートレスワークロードに最適です。
+- **パフォーマンスの最適化**: 保守的な使用率の目標、高速スケールアップ、緩やかなスケールダウン、高めのレプリカ下限数。ステートフルなサービスや重要なサービスに最適です。
+- **カスタマイズ**: 上記のいずれかから開始し、CPU の目標、レプリカ数、安定化の時間枠を自分で調整します。
 
-セットアップウィザードは、単一のワークロードでオートスケーリングを試したり、推奨事項を実際に体験したり、小規模なワークロードのセットをオンボーディングするのに最適です。(`Workload Scaling Write` および `Autoscaling Manage` 権限が必要です。)
+単一のワークロードで自動スケーリングを試す場合、推奨設定を実際に適用する場合、または少数のワークロードをオンボーディングする場合には、Setup ウィザードが最適です。(`Workload Scaling Write` 権限と `Autoscaling Manage` 権限が必要です。)
 
 #### パス B: GitOps {#path-b-gitops}
 
-ワークロードをターゲットにする `DatadogPodAutoscaler` カスタムリソースを定義し、`kubectl apply`、Helm、ArgoCD、Terraform、または他の GitOps ツールであっても Kubernetes マニフェストを配信するためにすでに使用しているツールで適用します。マニフェストの作成は、配信メカニズムに関係なく同じです。コストの最適化、バランスの取れたスケーリング、垂直のみのサイズ変更、およびカスタムクエリの水平スケーリングをカバーする編集可能な開始点の[例の構成](#example-datadogpodautoscaler-configurations)を以下に示します。
+ワークロードをターゲットとする `DatadogPodAutoscaler` カスタムリソースを定義し、Kubernetes マニフェストのデプロイにすでに使用しているツール (`kubectl apply`、Helm、ArgoCD、Terraform、またはその他の GitOps ツールなど) を使用して、そのリソースを適用します。マニフェストの作成方法は、配信メカニズムに関係なく同じです。コスト最適化、バランスの取れたスケーリング、垂直方向のみのリサイズ、カスタムクエリによる水平スケーリングに対応する、すぐに編集できる開始点については、以下の[設定例](#example-datadogpodautoscaler-configurations)を参照してください。
 
-ツール固有のガイドについては、次を参照してください。
+ツール固有のガイドについては、以下を参照してください。
 
-- [ArgoCD を使用して DatadogPodAutoscaler を管理する][12]
-- [Terraform を使用して DatadogPodAutoscaler を管理する][13]
+- [ArgoCD で DatadogPodAutoscaler を管理する][12]
+- [Terraform で DatadogPodAutoscaler を管理する][13]
 
-### DatadogPodAutoscaler の構成例 {#example-datadogpodautoscaler-configurations}
+### DatadogPodAutoscaler の設定例 {#example-datadogpodautoscaler-configurations}
 
-以下の例は、さまざまなスケーリング戦略に対する一般的な `DatadogPodAutoscaler` 構成を示しています。これらを開始点として使用し、ワークロードの要件に合わせて値を調整します。UI でテンプレートを選択したい場合は、上記の [パス A](#path-a-datadog-ui-setup-wizard) に従います。
+以下の例は、さまざまなスケーリング戦略における一般的な `DatadogPodAutoscaler` 設定を示しています。これらを開始点として使用し、ワークロードの要件に合わせて値を調整してください。UI でテンプレートを選択する方法を選ぶ場合は、上記の[パス A](#path-a-datadog-ui-setup-wizard) に従ってください。
 
 {{< tabs >}}
 {{% tab "コストの最適化" %}}
 
-負荷が減少した場合にコントローラーが迅速にキャパシティを削除する必要がある、ステートレスでコスト要件が厳しいワークロードにはこのテンプレートを選択します。定義される設定は、高い CPU 利用率ターゲット (85%) と積極的なスケールダウンルール、および単一レプリカの最小値が組み合わさっています。
+コントローラーが負荷の低下に応じて迅速に容量を削除する必要がある、ステートレスでコストに敏感なワークロードには、このテンプレートを選択してください。高く設定された CPU 使用率の目標 (85%) と、積極的なスケールダウンルール、および最小レプリカ数 1 の組み合わせを特徴としています。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -287,7 +286,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 300
+            stabilizationWindowSeconds: 190
         update:
             strategy: Auto
     constraints:
@@ -307,7 +306,7 @@ spec:
 {{% /tab %}}
 {{% tab "バランスの最適化" %}}
 
-可用性を犠牲にせずに節約したい場合は、このテンプレートを選択します。これはほとんどのステートレスワークロードに適したデフォルトです。定義される設定は、中程度の CPU 利用率ターゲット (70%) で、保守的なスケールダウン (20% を 20 分ごと) と 2 つのレプリカの最小値が組み合わさっています。コントローラーは迅速にキャパシティを追加しますが、低速で削除します。
+可用性を犠牲にせずにコスト削減を実現したい場合は、このテンプレートを選択してください。これは、ほとんどのステートレスワークロードに妥当なデフォルト設定です。中程度に設定された CPU 使用率の目標 (70%) と、保守的なスケールダウン、および最小レプリカ数 2 の組み合わせを特徴としています。コントローラーは容量を迅速に追加しますが、削除はゆっくりと行います。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -335,7 +334,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         update:
             strategy: Auto
     constraints:
@@ -353,19 +352,19 @@ spec:
 ```
 
 {{% /tab %}}
-{{% tab "垂直 CPU およびメモリ" %}}
+{{% tab "CPU およびメモリの垂直リサイズ" %}}
 
-ワークロードが水平にスケールできない場合や、レプリカ数を変更せずに純粋なサイズ調整を行いたい場合は、このテンプレートを選択します。一般的なケースは、シングルトンサービス、ステートフルワークロード、およびリーダー選出コンポーネントです。定義される設定は `scaleDown.strategy: Disabled` および `scaleUp.strategy: Disabled` で、CPU およびメモリの推奨事項を適用するために `update.strategy: Auto` のみが残ります。
+ワークロードを水平方向にスケールできない場合や、レプリカ数を変更せずに純粋なサイズ適正化を行う場合は、このテンプレートを選択してください。一般的なケースとしては、シングルトンサービス、ステートフルなワークロード、リーダー選出コンポーネントなどが挙げられます。`scaleDown.strategy: Disabled` と `scaleUp.strategy: Disabled` の設定を特徴としています。つまり、`update.strategy: Auto` のみが有効にされて、CPU とメモリの推奨事項が適用されます。
 
-デフォルトでは、コントローラーがロールアウトをトリガーすることによって垂直推奨を適用します (Pod を対比させて再作成)。Cluster Agent **7.78+** は、再起動せずに Pod の CPU およびメモリのリクエストと制限を更新する **インプレース Pod サイズ変更**もサポートしています。インプレースのサイズ変更はオプトイン: Cluster Agent で `autoscaling.workload.in_place_vertical_scaling.enabled: true` を設定します (または、環境変数 `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true` を設定します)。
+デフォルトでは、コントローラーはロールアウト (Pod の退避と再作成) をトリガーすることで垂直方向の推奨事項を適用します。Cluster Agent **7.78 以降**は **インプレース Pod リサイズ**もサポートしており、Pod を再起動せずに CPU とメモリのリクエストおよび制限を更新します。インプレースリサイズはオプトインであり、これを使用するには Cluster Agent で `autoscaling.workload.in_place_vertical_scaling.enabled: true` を設定 (または環境変数 `DD_AUTOSCALING_WORKLOAD_IN_PLACE_VERTICAL_SCALING_ENABLED=true` を設定) する必要があります。
 
-クラスターは `pods/resize` サブリソースも公開する必要があります。これは Kubernetes 1.33 以降のデフォルトで、`InPlacePodVerticalScaling` 機能ゲートはベータ版です。Kubernetes 1.27 から 1.32 では、機能ゲートが `kube-apiserver` およびすべての `kubelet` で有効にされる必要があります。
+クラスターが `pods/resize` サブリソースを公開している必要もあります。これは、`InPlacePodVerticalScaling` フィーチャーゲートがベータ版となっている Kubernetes 1.33 以降のデフォルトです。Kubernetes 1.27 から 1.32 では、`kube-apiserver` とすべての `kubelet` でフィーチャーゲートを有効にする必要があります。
 
-両方の前提条件を満たしている場合:
+両方の前提条件が満たされている場合:
 
-- **デフォルト**: `applyPolicy.update.strategy: Auto` (デフォルト) を持つワークロードはインプレースでサイズ変更されます。
-- **フォールバック**: kubelet がサイズ変更を `Infeasible` として報告した場合、コントローラーはロールアウトにフォールバックします。
-- **オプトアウト**: クラスター設定に関係なく、常にロールアウトベースの垂直スケーリングを使用するようにワークロードを強制するには、`applyPolicy.update.strategy: TriggerRollout` をその `DatadogPodAutoscaler` に設定します。
+- **デフォルト**: `applyPolicy.update.strategy: Auto` (デフォルト) が設定されているワークロードはインプレースでリサイズされます。
+- **フォールバック**: kubelet がリサイズを `Infeasible` として報告した場合、コントローラーはロールアウトにフォールバックします。
+- **オプトアウト**: クラスターの設定に関係なく、ワークロードで常にロールアウトベースの垂直スケーリングを使用するように強制するには、その `applyPolicy.update.strategy: TriggerRollout` として`DatadogPodAutoscaler` を設定します。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -395,7 +394,7 @@ spec:
 {{% /tab %}}
 {{% tab "水平カスタムクエリ" %}}
 
-CPU とメモリが適切なスケーリングシグナルでない場合は、このテンプレートを選択します。例としては、バックログの深さでスケールするキューワーカーや、リクエストレイテンシーでスケールする API サービスが含まれます。定義する設定は `objectives` ブロックであり、これは利用率のパーセンテージの代わりに Datadog メトリクスクエリと `AbsoluteValue` ターゲットを参照します。例のクエリをワークロードに一致するものに置き換えます。
+CPU やメモリが適切なスケーリングシグナルではない場合は、このテンプレートを選択してください。該当する例としては、バックログの深さに基づいてスケールする必要があるキューワーカーや、リクエストのレイテンシに基づいてスケールする必要がある API サービスが挙げられます。`objectives` ブロックの設定で、Datadog メトリクスクエリと、使用率のパーセンテージではなく `AbsoluteValue` の目標を参照することを特徴としています。サンプルクエリを、実際のワークロードに一致するクエリに置き換えてください。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -422,7 +421,7 @@ spec:
                 - periodSeconds: 120
                   type: Percent
                   value: 50
-            stabilizationWindowSeconds: 600
+            stabilizationWindowSeconds: 130
         # Vertical updates disabled — horizontal only
         update:
             strategy: Disabled
@@ -467,19 +466,19 @@ spec:
 
 ### クラスタープロファイル {#cluster-profiles}
 
-`DatadogPodAutoscalerClusterProfile` は、`DatadogPodAutoscaler` テンプレートを保持するクラスタースコープのリソースです。Cluster Agent は、`autoscaling.datadoghq.com/profile` ラベルの `Deployment` および `StatefulSet` リソース (および 7.79 以降では、それらを含むネームスペース) をモニターし、一致するワークロードごとに管理された `DatadogPodAutoscaler` を作成します。1 つのプロファイルは多くのワークロードに適用されますが、1 つのワークロードは依然として 1 つの `DatadogPodAutoscaler` にマッピングされます。
+`DatadogPodAutoscalerClusterProfile` は、`DatadogPodAutoscaler` テンプレートを保持する、クラスターをスコープとするリソースです。Cluster Agent は `Deployment` および `StatefulSet` リソースで (および 7.79 以降では、これらのリソースを含む名前空間で) `autoscaling.datadoghq.com/profile` ラベルを監視し、一致するすべてのワークロードについてマネージド `DatadogPodAutoscaler` を作成します。1 つのプロファイルが多数のワークロードに適用されますが、各ワークロードがマッピングされる `DatadogPodAutoscaler` は 1 つのみです。
 
-クラスタープロファイルとワークロードレベルのラベルは、Datadog Cluster Agent 7.78.0 以降を必要とします。ネームスペースレベルのアクティベーション (ネームスペースにラベルを付けてすべてのサポートされているワークロードをプロファイルにオプトインさせる) は、Datadog Cluster Agent 7.79.0 以降を必要とします。古い Cluster Agent はプロファイルラベルを無視します。
+クラスタープロファイルとワークロードレベルのラベルを使用するには、Datadog Cluster Agent 7.78.0 以降が必要です。名前空間レベルで有効化する (名前空間にラベルを付けて、その名前空間内でサポートされているすべてのワークロードをプロファイルにオプトインさせる) には、Datadog Cluster Agent 7.79.0 以降が必要です。古い Cluster Agent はプロファイルラベルを無視します。
 
 #### 組み込みプロファイル {#built-in-profiles}
 
-Cluster Agent には 3 つの組み込みプロファイルが用意されており、起動時にそれらが再作成されるため、使用するために CRD YAML をコミットする必要はありません。名前は予約されています。
+Cluster Agent には 3 つの組み込みプロファイルが付属しており、Agent が起動時にこれらのプロファイルを再作成します。したがって、プロファイルを使用するために CRD YAML をコミットする必要はありません。これらのプロファイル名は予約されています。
 
-| プロファイル | CPU ターゲット | 最小レプリカ | 動作プロファイル |
+| プロファイル| CPU 使用率の目標| 最小レプリカ数| 動作のプロファイル|
 |---|---|---|---|
-| `datadog-optimize-cost` | 85% | 1 | ステートレスでコスト要件が厳しいワークロード。迅速なスケールアップとスケールダウン (5 分の安定化ウィンドウ、2 分ごとに 50% のステップ)。|
-| `datadog-optimize-balance` | 70% | 2 | ほとんどのステートレスワークロードのデフォルト。バランスの取れた 10 分の安定化ウィンドウ、保守的なスケールダウン (20 分ごとに 20% のステップ)。|
-| `datadog-optimize-performance` | 60% | 3 | ステートフルまたはレイテンシー要件が厳しいワークロード。非常に保守的なスケールダウン (15 分の安定化ウィンドウ、30 分ごとに 10% のステップ)。|
+| `datadog-optimize-cost` | 85% | 1 | 高い CPU 使用率の目標、積極的なスケールダウン、最小限のレプリカ下限数。ステートレスでコスト重視のワークロードに最適です。|
+| `datadog-optimize-balance` | 70% | 2 | 中程度の使用率の目標、高速スケールアップ、バランスの取れたスケールダウン。ほとんどのステートレスワークロードに最適です。|
+| `datadog-optimize-performance` | 60% | 3 | 保守的な使用率の目標、高速スケールアップ、穏やかなスケールダウン、高めのレプリカ下限値。ステートフルなサービスや重要なサービスに最適です。|
 
 単一のワークロードでプロファイルを有効にするには、ワークロードの `metadata.labels` にラベルを追加します。
 
@@ -495,7 +494,7 @@ spec:
   # ...rest of the Deployment spec
 ```
 
-ネームスペースでサポートされているすべてのワークロードでプロファイルを有効にするには、代わりにネームスペースにラベルを付けます (Cluster Agent 7.79.0 以降が必要です)。
+名前空間内のサポートされているすべてのワークロードでプロファイルを有効にするには、代わりに名前空間にラベルを付けます (Cluster Agent 7.79.0 以降が必要です)。
 
 ```yaml
 apiVersion: v1
@@ -508,7 +507,7 @@ metadata:
 
 #### カスタムプロファイル {#custom-profiles}
 
-組み込みプロファイルがスケーリングポリシーに一致しない場合は、`DatadogPodAutoscalerClusterProfile` を作成します。プロファイルはクラスタースコープ化されているため、`--namespace` フラグなしで適用するか、構成リポジトリのクラスターレベルのレイヤーに配置します。
+組み込みのプロファイルがスケーリングポリシーと一致しない場合は、`DatadogPodAutoscalerClusterProfile` を作成します。プロファイルのスコープはクラスターに設定されるため、`--namespace` フラグなしで適用します (または、設定リポジトリのクラスターレベルのレイヤーに配置します)。
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha2
@@ -520,7 +519,7 @@ spec:
     applyPolicy:
       mode: Apply
       scaleUp:
-        stabilizationWindowSeconds: 300
+        stabilizationWindowSeconds: 190
         rules:
           - type: Percent
             value: 50
@@ -542,7 +541,7 @@ spec:
             utilization: 85
 ```
 
-同じラベルを使用してワークロードまたはネームスペースからカスタムプロファイルを参照します。
+同じラベルを使用して、ワークロードまたは名前空間からカスタムプロファイルを参照します。
 
 ```yaml
 metadata:
@@ -550,14 +549,14 @@ metadata:
     autoscaling.datadoghq.com/profile: cost-optimized-strict-floor
 ```
 
-テンプレート本体は `DatadogPodAutoscaler` 仕様と同じフィールドを受け入れますが、`targetRef` は除きます (Cluster Agent が一致する各ワークロードにそれを埋めます)。`spec.template` の下に配置できるフィールドの完全な範囲については、上記の [ 例の構成 ](#example-datadogpodautoscaler-configurations) を参照してください。
+テンプレート本体は `DatadogPodAutoscaler` 仕様と同じフィールドを受け入れますが、`targetRef`は除外されます (これは、Cluster Agent が一致する各ワークロードに取り込みます)。`spec.template` 内に配置できるフィールドの全範囲については、上記の[設定例](#example-datadogpodautoscaler-configurations)を参照してください。
 
-#### アクティベーションの優先度 {#activation-precedence}
+#### 有効化の優先順位 {#activation-precedence}
 
-Cluster Agent 7.79.0 以降は、ネームスペースレベルのアクティベーション、`excluded` オプトアウト、およびそれらの間の優先度ルールを追加します。Cluster Agent 7.78.0 では、ワークロードレベルのラベルのみが読み取られます。ネームスペースや `excluded` の値に関する以下のルールは適用されません。
+Cluster Agent 7.79.0 以降では、名前空間レベルの有効化、`excluded` のオプトアウト、およびそれらの間の優先順位ルールが追加されています。Cluster Agent 7.78.0 では、ワークロードレベルのラベルのみが読み取られます。名前空間や`excluded`の値に関連する次のルールは適用されません。
 
-- **ワークロードラベルはネームスペースラベルよりも優先されます。**ネームスペースが `autoscaling.datadoghq.com/profile=ns-profile` とラベル付けされ、その内部のワークロードが `autoscaling.datadoghq.com/profile=workload-profile` とラベル付けされている場合、ワークロードは `workload-profile` を使用します。
-- **`excluded` でオプトアウトします。**ワークロードに `autoscaling.datadoghq.com/profile: excluded` を設定すると、そのネームスペースがラベル付けされている場合に免除されます。これは、オプトインされているネームスペース内でステートフルまたは重要なワークロードに役立ちます。
+- **ワークロードラベルは名前空間ラベルよりも優先されます。**名前空間に `autoscaling.datadoghq.com/profile=ns-profile` のラベルが付けられ、その名前空間内のワークロードに `autoscaling.datadoghq.com/profile=workload-profile` のラベルが付けられている場合、ワークロードは `workload-profile` を使用します。
+- **`excluded` でオプトアウトします。**ラベルが付けられた名前空間内にある特定のワークロードを除外するには、そのワークロードに `autoscaling.datadoghq.com/profile: excluded` を設定します。これは、オプトインされた名前空間内にあるステートフルなワークロードや重要なワークロードに役立ちます。
 
   ```yaml
   apiVersion: apps/v1
@@ -569,73 +568,73 @@ Cluster Agent 7.79.0 以降は、ネームスペースレベルのアクティ�
       autoscaling.datadoghq.com/profile: excluded
   ```
 
-- **不明なプロファイル名は無視されます。**ワークロードまたはネームスペースが存在しないプロファイルを参照する場合、Cluster Agent は管理された `DatadogPodAutoscaler` を作成せず、エラーを報告しません。調整は、その名前のプロファイルが作成されるとすぐに割り当てを取得します。
-- **調整は自動です。**ラベルの追加、変更、または削除は、数秒以内に管理された `DatadogPodAutoscaler` に伝播します。
+- **不明なプロファイル名は無視されます。**存在しないプロファイルがワークロードや名前空間で参照されている場合、Cluster Agent はマネージド `DatadogPodAutoscaler` を作成せず、エラーも報告しません。その名前のプロファイルが作成されるとすぐに、調整プロセスによって割り当てが反映されます。
+- **調整は自動的に行われます。**ラベルの追加、変更、または削除は、数秒以内にマネージド `DatadogPodAutoscaler` に反映されます。
 
 #### サポートされているワークロードの種類 {#supported-workload-kinds}
 
-プロファイルのアクティベーションは `Deployment` および `StatefulSet` をサポートします。他の種類 (例: Argo `Rollout`) については、[Path B: GitOps](#path-b-gitops) を使用して `DatadogPodAutoscaler` を直接作成します。
+プロファイルの有効化では、`Deployment` と `StatefulSet` をサポートしています。その他の種類 (例: Argo `Rollout`) については、[パス B: GitOps](#path-b-gitops) に従って `DatadogPodAutoscaler` を直接作成してください。
 
-### 手動で推奨事項をデプロイする {#deploy-recommendations-manually}
+### 推奨事項を手動でデプロイする {#deploy-recommendations-manually}
 
-オートスケーリングを有効にせずに Datadog の推奨事項を受け取りたい場合は、一度だけ手動で適用できます。Kubernetes のデプロイメントのためにリソースを構成する場合は、スケーリングの推奨事項で提案された値を使用します。{{< ui >}}Export Recommendation{{< /ui >}} をクリックして、生成された `kubectl patch` コマンドを見ることもできます。Datadog は推奨事項を継続的に更新しますが、クラスターが変更されるのは再適用する場合のみです。
+自動スケーリングを有効にせずに Datadog の推奨事項を確認する必要がある場合、それらを 1 回に限って手動で適用できます。Kubernetes デプロイメントのリソースを設定する際は、スケーリングの推奨事項で提案された値を使用してください。{{< ui >}}Export Recommendation{{< /ui >}} をクリックして、生成された `kubectl patch` コマンドを表示することもできます。Datadog は推奨事項を継続的に更新しますが、クラスターが変更されるのは、推奨事項を再適用した場合のみです。
 
 ## ワークロードを大規模に管理する {#manage-workloads-at-scale}
 
-ワークロードがオートスケーリングされた後、2 日目の操作は `DatadogPodAutoscaler` リソースと Datadog UI を組み合わせて管理されます。
+ワークロードが自動的にスケールされた後、2 日目以降の運用は、`DatadogPodAutoscaler` リソースと Datadog UI の組み合わせによって管理されます。
 
-- **スケーリングテンプレートを変更します。**ワークロードの `DatadogPodAutoscaler` 仕様 (CPU ターゲット、レプリカの範囲、スケールアップおよびスケールダウンのルール) を直接編集するか、[ワークロードスケーリングリストビュー][8]から別のテンプレートを選択します。変更内容は次回の調整時に反映されます。
-- **リソースを削除せずにオートスケーリングを一時停止します。**`applyPolicy.mode: Preview` を設定して、コントローラーが推奨事項を適用するのを防ぎながら `.status` で推奨事項を表示し続けます。これは、評価中に HPA または VPA と一緒に実行する場合に便利です。
-- **ロールアウトをモニターします。**ワークロードスケーリングリストビューは、各ワークロードの推奨事項、最後に適用されたアクション、および調整エラーのライブステータスを表示します。
-- **オートスケーリングをクリーンに削除します。**`DatadogPodAutoscaler` リソースを削除してオートスケーリングを停止します。既存の Pod リソースは最後に適用された値のままであり、ワークロードは次回のロールアウトで親コントローラー (デプロイメント、StatefulSet など) が指定するものに戻ります。
+- **スケーリングテンプレートを変更します。**ワークロードの `DatadogPodAutoscaler` 仕様 (CPU の目標、レプリカ数の上下限、スケールアップおよびスケールダウンのルール) を直接編集するか、[Workload Scaling リストビュー][8] で別のテンプレートを選択します。変更は次回の調整時に有効になります。
+- **リソースを削除せずに自動スケーリングを一時停止します。**`applyPolicy.mode: Preview` を設定すると、コントローラーによる適用を防ぎながら、`.status`で推奨事項を表示し続けることができます。これは、評価中に HPA や VPA と並行して実行する場合に便利です。
+- **ロールアウトを監視します。**[Workload Scaling リストビュー] には、各ワークロードの推奨事項、最後に適用されたアクション、および調整エラーのライブステータスが表示されます。
+- **自動スケーリングをクリーンに削除します。**`DatadogPodAutoscaler`リソースを削除して、自動スケーリングを停止します。既存の Pod リソースは最後に適用された値のままとなり、ワークロードは次のロールアウト時に親コントローラー (Deployment、StatefulSet など) で指定された値に戻ります。
 
 ## リファレンス {#reference}
 
-### 垂直の推奨事項の計算方法 {#how-vertical-recommendations-are-calculated}
+### 垂直方向の推奨値の計算方法{#how-vertical-recommendations-are-calculated}
 
-Datadog は、過去 8 日間のコンテナ使用データを分析することによって、CPU およびメモリの垂直スケーリング推奨事項を計算します。各リソースに使用される方法は、そのリソースのリクエストが制限と等しいかどうかに依存し、[Kubernetes のサービス品質 (QoS) クラス][14]の概念を反映しています。CPU とメモリは独立して評価されます。ワークロードは CPU に Burstable 方式を使用してメモリに Guaranteed 方式を使用することが可能で、その逆も可能です。
+Datadog は、過去 8 日間のコンテナ使用履歴データを分析することで、CPU とメモリの垂直スケーリングの推奨値を計算します。各リソースに使用される手法は、そのリソースのリクエストが制限と等しいかどうかによって異なり、[Kubernetes Quality of Service (QoS) クラス][14] の概念を反映しています。CPU とメモリは個別に評価されます。ワークロードでは、CPU には「バースト可能 (Burstable)」手法、メモリには「保証済み (Guaranteed)」手法 (またはその逆) を使用することができます。
 
-#### メモリの推奨事項 {#memory-recommendations}
+#### メモリの推奨値 {#memory-recommendations}
 
-**Burstable** (メモリリクエストがメモリ制限よりも低い):
+**Burstable** (メモリリクエストがメモリ制限より低い場合):
 
-| | 計算方法 |
+| | 計算方法|
 |---|---|
-| **リクエストの推奨事項** | 過去 8 日間のメモリ使用量の **p95** に基づき、古いサンプルに荷重減衰を適用して、最近の使用パターンが優先されるようにします。**10% の安全マージン**が追加されます。|
-| **制限の推奨事項** | 過去 8 日間に観測された**最大ピークメモリ使用量**に基づきます。**5% の安全マージン**が追加されます。|
+| **リクエストの推奨値** | 過去 8 日間のメモリ使用量の**p95**に基づきます。古いサンプルには減衰重みが適用されるため、最近の使用パターンが優先されます。その上で、**10% の安全マージン**が追加されます。|
+| **制限の推奨値** | 過去 8 日間に観測された**最大ピークメモリ使用量**に基づきます。その上で、**5% の安全マージン**が追加されます。|
 
-**Guaranteed** (メモリリクエストがメモリ制限に等しい):
+**Guaranteed** (メモリリクエストがメモリ制限と等しい場合):
 
-| | 計算方法 |
+| | 計算方法|
 |---|---|
-| **リクエストと制限の推奨事項** | 過去 8 日間に観測された**最大ピークメモリ使用量**に基づきます。**5% の安全マージン**が追加されます。**OOMKill** が検出された場合、将来メモリ不足が発生することを防ぐために追加の **20% の増加**が適用されます。|
+| **リクエストと制限の推奨値** | 過去 8 日間に観測された**最大ピークメモリ使用量**に基づきます。**5% の安全マージン**が追加されます。**OOMKill** が検出された場合、将来のメモリ不足イベントを防ぐために、さらに **20% の引き上げ**が適用されます。|
 
-**注:** ピークメモリ追跡は、8 日間のルックバックウィンドウ内に存在した任意のコンテナによって記録された最高メモリ使用量をキャプチャします。これは、ウィンドウの前にコンテナが開始された場合でもそのピーク使用量 (例: 起動時) が推奨事項で考慮されることを意味します。
+**注:** ピークメモリトラッキングは、8 日間のルックバックウィンドウ内に存在したすべてのコンテナによって記録された過去最大のメモリ使用量をキャプチャします。つまり、コンテナがそのウィンドウより前に開始された場合でも、そのピーク使用量 (起動時など) は推奨値に考慮されます。
 
-#### CPU の推奨事項 {#cpu-recommendations}
+#### CPU の推奨値 {#cpu-recommendations}
 
-**Burstable** (CPU リクエストが CPU 制限よりも低い):
+**Burstable** (CPU リクエストが CPU 制限より低い場合):
 
-| | 計算方法 |
+| | 計算方法|
 |---|---|
-| **リクエストの推奨事項** | 過去 8 日間の現在のリクエストに対する CPU 使用量の **p90** に基づき、古いサンプルに荷重減衰を適用して、最近の使用パターンが優先されるようにします。**10% の安全マージン**が追加されます。|
-| **制限の推奨事項** | 過去 8 日間の現在のリクエストに対する CPU 使用率の **p95** に基づきます。**5% の安全マージン**が追加されます。結果として得られたリクエストの推奨事項が制限の推奨事項を超える場合、リクエストの値が両方に使用されます。|
+| **リクエストの推奨値** | 現在のリクエストに対する過去 8 日間の CPU 使用量の **p90** に基づきます。古いサンプルには減衰重みが適用されるため、最近の使用パターンが優先されます。その上で、**10% の安全マージン**が追加されます。|
+| **制限の推奨値** | 現在のリクエストに対する過去 8 日間の CPU 使用量の **p95** に基づきます。その上で、**5% の安全マージン**が追加されます。結果として得られたリクエストの推奨値が制限の推奨値を超えた場合は、両方にリクエストの値が使用されます。|
 
-**Guaranteed** (CPU リクエストが CPU 制限に等しい):
+**Guaranteed** (CPU リクエストが CPU 制限と等しい場合):
 
-| | 計算方法 |
+| | 計算方法|
 |---|---|
-| **リクエストと制限の推奨事項** | は、過去 8 日間の現在のリクエストに対する CPU 使用率の **p95** に基づきます。**5% の安全マージン**が追加されます。|
+| **リクエストと制限の推奨値** | 現在のリクエストに対する過去 8 日間の CPU 使用量の **p95** に基づきます。その上で、**5% の安全マージン**が追加されます。|
 
 #### 主要な設計原則 {#key-design-principles}
 
-- **8 日間のルックバックウィンドウ**: すべての推奨事項は過去 8 日間の使用データを考慮し、週ごとのトラフィックパターンを捉えるのに十分な履歴を提供しつつ、変化に迅速に対応します。
-- **荷重減衰**: Burstable クラスのリクエストの推奨事項 (CPU またはメモリ) では、古いサンプルの重みが減衰するため、推奨事項は最近の使用の変化により早く適応します。
-- **安全マージン**: すべての推奨事項には、観測された使用量を上回る (5% から 10%) マージンが含まれており、予期しない使用量の急増に対してバッファを提供します。
-- **OOMKill 応答**: メモリが Guaranteed クラス (リクエストが制限に等しい) で OOMKill が発生した場合、再発の可能性を減らすために 20% の増加が適用されます。
-- **Guaranteed クラスの保存**: リソースのリクエストと制限が等しい場合、Datadog は両方に対してより保守的な (制限レベル) 計算を使用し、推奨事項がリクエストと制限の間にギャップを生じさせないようにします。
+- **8 日間のルックバックウィンドウ**: すべての推奨事項は過去 8 日間の使用データを考慮しており、週単位のトラフィックパターンを把握するのに十分な履歴を提供しつつ、変化に対して迅速に対応します。
+- **減衰重み付け**: Burstable クラスのリクエスト推奨値 (CPU またはメモリ) では、古いサンプルほど重みが小さくなるため、最近の使用パターンの変化に推奨値がより迅速に適応します。
+- **安全マージン**: すべての推奨事項には、予期しないスパイクに対するバッファとして、観測された使用量に一定の余裕 (5〜10%) が設けられています。
+- **OOMKill への対応**: メモリが Guaranteed クラス (リクエストと制限が等しい) である場合、OOMKill が発生すると、メモリ不足による障害の再発を減らすために 20% の引き上げが適用されます。
+- **Guaranteed クラスの維持**: リソースのリクエストと制限が等しい場合、Datadog は両方に対してより保守的な (制限レベルの) 計算を使用し、リクエストと制限の間にギャップが生じないようにします。
 
-## 参考資料 {#further-reading}
+## 参考文献 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -5,9 +5,6 @@ aliases:
 - /tracing/trace_retention/
 - /tracing/trace_queries/one_percent_flat_sampling/
 further_reading:
-- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
-  tag: "Blog"
-  text: "Unify and correlate frontend and backend data with retention filters"
 - link: "/tracing/trace_pipeline/ingestion_mechanisms"
   tag: "Documentation"
   text: "Ingestion Mechanisms"
@@ -20,6 +17,12 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/apm-rate-limit-retention"
   tag: "Learning Center"
   text: "APM Rate Limiting and Retention"
+- link: "https://www.datadoghq.com/blog/rum-apm-retention-filters"
+  tag: "Blog"
+  text: "Unify and correlate frontend and backend data with retention filters"
+- link: "https://www.datadoghq.com/blog/trace-aws-lambda-durable-functions/"
+  tag: "Blog"
+  text: "Trace AWS Lambda durable functions with Datadog"
 - link: "https://www.datadoghq.com/architecture/mastering-distributed-tracing-data-volume-challenges-and-datadogs-approach-to-efficient-sampling/"
   tag: "Architecture Center"
   text: "Mastering Distributed tracing: data volume challenges, and Datadog's approach to efficient sampling"

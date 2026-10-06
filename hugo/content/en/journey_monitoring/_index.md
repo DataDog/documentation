@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/journey-monitoring/"
   tag: "Blog"
   text: "Monitor critical user journeys with Datadog Journey Monitoring"
+- link: "https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/"
+  tag: "Blog"
+  text: "Coordinate product launches with Datadog"
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}

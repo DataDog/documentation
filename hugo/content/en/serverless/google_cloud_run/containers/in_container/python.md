@@ -94,6 +94,14 @@ logger.info("Hello world!")
 
 {{% svl-tracing-env %}}
 
+## Distributed tracing with Pub/Sub
+
+Set `DD_TRACE_INFERRED_PROXY_SERVICES_ENABLED=true`. This creates an inferred `gcp.pubsub.receive` span for the push request.
+
+Google Cloud Pub/Sub push subscription tracing requires `ddtrace` version 4.8.0 or later.
+
+{{% gcr-pubsub-push-tracing %}}
+
 ## Troubleshooting
 
 {{% serverless-init-troubleshooting productNames="Cloud Run services" in_container="true" %}}

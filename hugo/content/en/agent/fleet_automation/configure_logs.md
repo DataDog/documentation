@@ -45,7 +45,7 @@ Configuring custom logs on Agents in containerized workloads is not supported. F
 1. Choose {{< ui >}}Custom Logs{{< /ui >}}.
 1. Select an operation (for more information, see [How configuration changes are applied](#how-configuration-changes-are-applied)):
 
-    - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted. For an explanation of the log collection fields, see [Custom log collection][4]. Use the {{< ui >}}Tags{{< /ui >}} field to attach [tags][6] to the collected logs. Click {{< ui >}}+ Add Log Collection{{< /ui >}} to add more log collection settings.
+    - {{< ui >}}Add New{{< /ui >}}. Specify the filename for the new configuration file, and fill in the configuration as prompted. For an explanation of the log collection fields, see [Custom log collection][4]. Use the {{< ui >}}Tags{{< /ui >}} field to attach [tags][6] to the collected logs. Click {{< ui >}}\+ Add Log Collection{{< /ui >}} to add more log collection settings.
     - {{< ui >}}Edit & Replace{{< /ui >}}. Click {{< ui >}}Select a File{{< /ui >}} and choose the configuration file you want to replace, then update the log collection settings.
     - {{< ui >}}Delete{{< /ui >}}. Click {{< ui >}}Select a File to Delete{{< /ui >}}.
 

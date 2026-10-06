@@ -1,71 +1,72 @@
 ---
+description: Visualice y administre los eventos del monitor en la página de estado,
+  incluyendo acciones rápidas, detalles del evento y herramientas de solución de problemas.
 further_reading:
 - link: events/
   tag: Documentación
-  text: Gestión de eventos
-title: Status Events
+  text: Event Management
+title: Eventos de Estado
 ---
+<div class="alert alert-info">Eventos de Estado es parte de la <a href="/monitors/status/status_page">Página de Estado del Monitor provisional</a>. Si está utilizando la página de estado heredada, consulte la documentación de <a href="/monitors/status/status_legacy">Página de estado (heredada)</a>.</div>
 
-<div class="alert alert-info">Status Events forma parte de la <a href="/monitors/status/status_page">página de Monitor Status provisional</a>. Si utilizas la página de estado legacy, consulta la documentación de la <a href="/monitors/status/status_legacy">página de estado (legacy)</a>.</div>
+## Descripción general {#overview}
 
-## Información general
+{{< img src="/monitors/status/status_page_event_details.png" alt="Página de Estado del Monitor que muestra los detalles del evento" style="width:100%;" >}}
 
-{{< img src="/monitors/status/status_page_event_details.png" alt="Página de Monitor Status que muestra detalles de eventos" style="width:100%;" >}}
+Todos los eventos generados por su monitor aparecen en la Página de Estado del Monitor, mostrando el nombre de los grupos, el tipo de evento y la marca de tiempo. La línea de tiempo de eventos también incluye eventos de tiempo de inactividad y de registro de auditoría.
 
-Todos los eventos generados por tu monitor aparecen en la página de estado del monitor y muestran el nombre del grupo, el tipo de evento, la fecha y la hora. La línea de tiempo del evento también incluye eventos de tiempo de inactividad y de Audit Trail.
+Para cada evento, puede acceder a acciones rápidas y visualizar activos relacionados, como tableros y registros.
 
-Para cada evento, puedes acceder a acciones rápidas y ver recursos relacionados, como dashboards y logs.
+## Sección de detalles del evento {#event-details-section}
 
-## Sección de detalles de eventos
+Para explorar cada evento individual y obtener más información, incluyendo etiquetas y acciones asociadas:
 
-Para obtener más información sobre cada evento individual, incluyendo las etiquetas (tags) y las acciones asociadas:
+1. Desde la página de estado del monitor, desplácese hacia abajo hasta {{< ui >}}Event timeline{{< /ui >}}.
+2. Haga clic en un evento en la línea de tiempo para visualizar los detalles del evento.
 
-1. En la página de estado del monitor, desplázate a **Línea de tiempo del evento**.
-2. Haz clic en un evento en la línea de tiempo para ver los detalles del evento.
+Utilice los detalles del evento para comprender las alertas del monitor, e identificar las causas raíz. Esta información respalda los flujos de trabajo de los respondedores y le ayuda a mantenerse informado sobre las situaciones en curso.
 
-Utiliza los detalles del evento para comprender las alertas del monitor e identificar las causas de origen. Esta información respalda los flujos de trabajo de respuesta y te ayuda a mantenerte al tanto de las situaciones en curso.
+### Tome medidas para remediar {#take-action-to-remediate}
 
-### Tomar medidas correctivas
-
-Con Quick Actions, puedes tomar medidas sin salir de la página de estado. El personal de respuesta ahorra tiempo, ya que el contexto se añade automáticamente.
+Con las Acciones rápidas, puede tomar medidas sin salir de la página de estado. Los respondedores ahorran tiempo ya que el contexto se agrega automáticamente.
 
 | Acción | Descripción |
 | :---- | :---- |
-| Silenciar  | Crea un [tiempo de inactividad][1] para silenciar las alertas de monitor. |
-| Resolver | Define temporalmente el estado del monitor como `OK` hasta su próxima evaluación. |
-| Declarar un incidente | Escala las alertas de monitor con [Gestión de incidentes][2]. |
-| Crear un caso | Crea un [caso][3] para seguir la investigación de esta alerta sin salir de Datadog. |
-| Ejecutar un flujo de trabajo | Ejecuta [Workflow][4] Automation con fragmentos predefinidos para realizar acciones de mitigación. |
+| {{< ui >}}Mute{{< /ui >}}  | Cree un [tiempo de inactividad][1] para silenciar las alertas del monitor. |
+| {{< ui >}}Resolve{{< /ui >}} | Establezca temporalmente el estado del monitor en `OK` hasta su próxima evaluación. |
+| {{< ui >}}Declare Incident{{< /ui >}} | Escale las alertas del monitor con [Incident Management][2]. |
+| {{< ui >}}Create Work Item{{< /ui >}} | Cree un [elemento de trabajo][3] para realizar un seguimiento de esta investigación de alerta sin salir de Datadog. |
+| {{< ui >}}Run Workflow{{< /ui >}} | Ejecute la automatización de [Flujo de trabajo][4] con fragmentos predefinidos para ejecutar acciones de mitigación. |
 
-### Resolver
+### Resolver {#resolve}
 
-Puedes resolver una alerta de monitor desde el [encabezado][5] de la página de estado o desde la sección de detalles del evento. La resolución desde la sección de detalles del evento sólo afecta al grupo relacionado con el evento seleccionado, mientras que la resolución desde el encabezado resuelve todos los grupos de la alerta y define el estado del monitor como `OK` (todos los grupos).
+Puede resolver una alerta de monitor desde la página de estado [Header][5] o las secciones de detalles del evento. La resolución desde la sección de detalles del evento solo afecta al grupo relacionado con el evento seleccionado, mientras que la resolución desde el Header resuelve todos los grupos en la alerta y establece el estado del monitor en `OK` (todos los grupos).
 
-Si un monitor alerta porque sus datos actuales corresponden al estado de la `ALERT`, el uso de `resolve` hará que el estado cambie temporalmente de `ALERT` a `OK`, y luego de nuevo a `ALERT`. Por lo tanto, `resolve` no sirve para aceptar la alerta ni para indicar a Datadog que la ignore.
+Si un monitor está alertando debido a que sus datos actuales corresponden al estado `ALERT`, el uso de `resolve` hará que el estado cambie temporalmente de `ALERT` a `OK`, y luego vuelva a `ALERT`. Por lo tanto, `resolve` no está destinado a reconocer la alerta ni a indicar a Datadog que la ignore.
 
-Resolver manualmente un monitor es útil cuando los datos se comunican de forma intermitente. Por ejemplo, después de que se activa una alerta, el monitor puede dejar de recibir datos, lo que le impide evaluar las condiciones de alerta y recuperar el estado `OK`. En tales casos, la función `resolve` o `Automatically resolve monitor after X hours` cambian el monitor de nuevo a un estado `OK`.
+Resolver manualmente un monitor es útil cuando los datos se reportan de forma intermitente. Por ejemplo, después de que se activa una alerta, el monitor puede dejar de recibir datos, lo que impide que evalúe las condiciones de alerta y se recupere al estado `OK`. En tales casos, la función `resolve` o {{< ui >}}Automatically resolve monitor after X hours{{< /ui >}} cambia el monitor de nuevo a un estado `OK`.
 
-**Caso de uso típico**: monitor basado en métricas de errores que no se generan cuando no hay errores (`aws.elb.httpcode_elb_5xx` o cualquier contador DogStatsD en tu código informando sobre un error _sólo cuando hay un error_).
+**Caso de uso típico**: un monitor basado en métricas de error que no se generan cuando no hay errores (`aws.elb.httpcode_elb_5xx`, o cualquier contador de DogStatsD en su código que reporte un error _solo cuando hay un error_).
 
-## Sección de resolución de problemas en eventos
+## Sección de solución de problemas de eventos {#event-troubleshooting-section}
 
-{{< img src="/monitors/status/events/event_troubleshooting.png" alt="Resolución de problemas en eventos con un ejemplo de mapa de dependencias" style="width:100%;" >}}
+{{< img src="/monitors/status/events/event_troubleshooting.png" alt="Solución de problemas de eventos con un mapa de dependencias de ejemplo" style="width:100%;" >}}
 
-Para cada evento, accede a la información de resolución de problemas para ayudar al personal de respuesta a comprender rápidamente el contexto de la alerta.
+Para cada evento, acceda a la información de solución de problemas para ayudar a los respondedores a comprender rápidamente el contexto de la alerta.
 
-| Componente para la resolución de problemas     | Descripción    |
+| Componente de solución de problemas     | Descripción    |
 | ---  | ----------- |
-| Mapa de dependencias | Cuando una etiqueta de servicio está disponible, ya sea como etiqueta de monitor o en el grupo, puedes acceder a un mapa de dependencias que muestre el estado de tus dependencias. |
-| Seguimiento de cambios | Cuando una etiqueta de servicio está disponible, ya sea como etiqueta de monitor o en el grupo, puedes acceder a una lista de cambios relevantes de tu servicio y sus dependencias. Para obtener más detalles sobre los tipos específicos de cambios admitidos y los requisitos de configuración, consulta la documentación [Seguimiento de cambios][6]. |
+| {{< ui >}}Dependency Map{{< /ui >}} | Cuando una etiqueta de servicio está disponible, ya sea como etiqueta de monitor o en el grupo, puede acceder a un mapa de dependencias que muestra el estado de sus dependencias. |
+| {{< ui >}}Change Tracking{{< /ui >}} | Cuando una etiqueta de servicio está disponible, ya sea como etiqueta de monitor o en el grupo, puede acceder a una lista de cambios relevantes en su servicio y sus dependencias. Para obtener detalles sobre tipos específicos de cambios admitidos y requisitos de configuración, consulte la documentación de [Change Tracking][6]. |
 
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/monitors/downtimes/?tab=bymonitorname
-[2]: /es/service_management/incident_management/
-[3]: /es/service_management/case_management/
-[4]: /es/service_management/workflows/trigger/#trigger-a-workflow-from-a-monitor
+[2]: /es/incident_response/incident_management/
+[3]: /es/incident_response/work_management/
+[4]: /es/actions/workflows/trigger/#trigger-a-workflow-from-a-monitor
 [5]: /es/monitors/status/status_page/#header
 [6]: /es/change_tracking

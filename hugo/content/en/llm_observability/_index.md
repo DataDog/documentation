@@ -4,6 +4,9 @@ description: Overview of Agent Observability, a platform for monitoring, trouble
 aliases:
     - /tracing/llm_observability/
 further_reading:
+- link: "/llm_observability/data_governance/"
+  tag: "Documentation"
+  text: "Learn how long Agent Observability retains your data"
 - link: "https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications"
   tag: "Learning Center"
   text: "Tracing LLM Applications"
@@ -55,6 +58,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
   tag: "Blog"
   text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+- link: "https://www.datadoghq.com/pricing/?product=llm-observability#products"
+  tag: "Pricing"
+  text: "Agent Observability pricing"
 
 ---
 
@@ -102,18 +108,9 @@ Automatically scan and redact any sensitive data in your AI applications and ide
 
 {{< img src="llm_observability/prompt_injection.png" alt="An example of a prompt-injection attempt detected by Agent Observability" style="width:100%;" >}}
 
-## See anomalies highlighted as insights
+## Find agent problems with Insights
 
-Agent Observability Insights provides a monitoring experience that helps users identify anomalies in their operational metrics—such as duration and error rate—and their [out-of-the-box (OOTB) evaluations][9].
-
-Outlier detection is performed across key dimensions:
-- Span name
-- Workflow type
-- [Patterns input/output topics][10]
-
-These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
-
-{{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the Agent Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
+[Agent Observability Insights][12] automatically analyzes the traces Agent Observability receives from your applications to identify recurring cost and reliability problems. Each insight includes the root cause, impact, supporting evidence, and a recommended fix. Insights require no additional configuration.
 
 ## Use integrations with Agent Observability
 
@@ -122,6 +119,10 @@ The [Agent Observability SDK for Python][3] integrates with frameworks such as O
 <div class="alert alert-info">Datadog offers a variety of artificial intelligence (AI) and machine learning (ML) capabilities. The <a href="/integrations/#cat-aiml">AI/ML integrations on the Integrations page and the Datadog Marketplace</a> are platform-wide Datadog functionalities. <br><br> For example, APM offers a native integration with OpenAI for monitoring your OpenAI usage, while Infrastructure Monitoring offers an integration with NVIDIA DCGM Exporter for monitoring compute-intensive AI workloads. These integrations are different from the Agent Observability offering.</div>
 
 For more information, see the [Auto Instrumentation documentation][8].
+
+## Pricing
+
+Agent Observability is metered and billed on the number of LLM spans ingested. An LLM span represents a single request to an LLM provider, so one agent workflow can produce several LLM spans. For rates, see the [Agent Observability pricing page][11].
 
 ## Ready to start?
 
@@ -132,12 +133,13 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/llm/traces
-[2]: /llm_observability/terms
+[2]: /llm_observability/quickstart/terms
 [3]: /llm_observability/setup/sdk
 [4]: /llm_observability/setup/api
 [5]: /llm_observability/setup
 [6]: /llm_observability/quickstart
 [7]: https://app.datadoghq.com/dash/integration/llm_operational_insights
 [8]: /llm_observability/setup/auto_instrumentation
-[9]: /llm_observability/evaluations/managed_evaluations
-[10]: /llm_observability/monitoring/patterns
+[10]: /llm_observability/investigate/patterns
+[11]: https://www.datadoghq.com/pricing/?product=llm-observability#products
+[12]: /llm_observability/investigate/insights/

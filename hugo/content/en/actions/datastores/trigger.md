@@ -22,7 +22,7 @@ This page explains how to use and audit automation rules for datastores. With au
 To create a new automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}\+ New Automation Rule{{< /ui >}}. 
 1. Configure your new automation rule: 
     1. Choose if the rule will be triggered when new entries are added, a value has changed, or an entry is deleted.
     1. Choose the workflow that will be triggered when the event occurs. 
@@ -34,7 +34,7 @@ To create a new automation rule:
 To edit an automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}\+ New Automation Rule{{< /ui >}}. 
 1. Click the {{< ui >}}Edit{{< /ui >}} {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon.
 1. Make your changes. 
 1. Click {{< ui >}}Save Changes{{< /ui >}}.
@@ -44,7 +44,7 @@ To edit an automation rule:
 To delete an automation rule: 
 1. Navigate to the [Datastores page][1].
 1. Select a datastore. 
-1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}+ New Automation Rule{{< /ui >}}. 
+1. Click {{< ui >}}Automation Rules{{< /ui >}}, then {{< ui >}}\+ New Automation Rule{{< /ui >}}. 
 1. Click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon. 
 1. When prompted, confirm deletion.
 

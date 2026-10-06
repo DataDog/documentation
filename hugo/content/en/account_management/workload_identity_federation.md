@@ -32,7 +32,7 @@ Workload Identity Federation is available for the following:
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
 <ul>
 <li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
-<li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.</li>
+<li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys.</li>
 </ul>
 {{< /site-region >}}
 
@@ -100,7 +100,7 @@ To find the assumed-role ARN for your workload, run <code>aws sts get-caller-ide
 
 To create an identity mapping:
 
-1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+1. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
 3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/terraform-runner/*`).
 4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
@@ -261,21 +261,37 @@ The Terraform provider automatically uses your configured AWS credentials to aut
 
 ## Set up Workload Identity Federation for the Datadog Agent
 
-{{< callout url="/help/" header="Enterprise feature" >}}
-Workload Identity Federation for the Datadog Agent is available for customers on an enterprise plan only. Request access by contacting support.
-{{< /callout >}}
-
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Workload Identity Federation for the Datadog Agent is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
-**Requirements**:
-- Version `7.78.0` or later of the Datadog Agent.
-- The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
-- You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
-- Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+### Requirements
+
+- A supported Agent version and type based on how the Agent obtains AWS credentials. See [Supported Agent versions and AWS credentials](#supported-agent-versions-and-aws-credentials).
+- An Agent running in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, an ECS task, or an EKS pod).
+- A configured [Datadog-AWS integration][4] with your AWS account added. 
+- The `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+#### Supported Agent versions and AWS credentials
+
+Workload Identity Federation support depends on Agent version, Agent type, and how the Agent obtains AWS credentials.
+
+| How the Agent gets AWS credentials | Agent 7.78-7.81 | Agent 7.82 | Agent 7.83+ |
+|---|---|---|---|
+| Environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`) | All Agents | All Agents | All Agents |
+| EC2 instance metadata service (IMDS) role | Core Agents only | Core Agents only | All Agents |
+| EKS IRSA (`AWS_ROLE_ARN`, `AWS_WEB_IDENTITY_TOKEN_FILE`) | Not supported | Core Agents only | All Agents |
+| ECS task role or EKS Pod Identity (`AWS_CONTAINER_CREDENTIALS_*`) | Not supported | Core Agents only | All Agents |
+
+**Core Agents**: The Agent, Cluster Agent, Process Agent, Security Agent, System Probe, and the installer. 
+
+**All Agents**: Core Agents plus the Trace Agent, standalone DogStatsD, the Private Action Runner, the IoT Agent, and the Heroku Agent.
+
+The OpenTelemetry Collector (`otel-agent`) does not support Workload Identity Federation. AWS is the only supported cloud provider. Azure, Google Cloud, and generic OIDC providers are not supported.
+
+<div class="alert alert-info">For an unsupported Agent type, cloud provider, or way of supplying credentials, <a href="/help/">open a feature request with Datadog Support</a>.</div>
 
 Setting up Workload Identity Federation for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
@@ -304,7 +320,7 @@ To find the assumed-role ARN for your workload, run <code>aws sts get-caller-ide
 
 To create an intake mapping:
 
-1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
+1. Click {{< ui >}}\+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
 3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*`).
 4. Click {{< ui >}}Create Mapping{{< /ui >}}.

@@ -2,55 +2,55 @@
 aliases:
 - /es/logs/search-syntax
 - /es/logs/search_syntax/
-description: Busca en todos tus registros.
+description: Busque en todos sus registros.
 further_reading:
 - link: /getting_started/search/
   tag: Documentación
   text: Introducción a la búsqueda en Datadog
 - link: /logs/explorer/#visualize
   tag: Documentación
-  text: Aprende cómo visualizar registros
+  text: Aprenda a visualizar registros
 - link: /logs/explorer/#patterns
   tag: Documentación
-  text: Detecta patrones dentro de tus registros
+  text: Detecte patrones dentro de sus registros
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende cómo procesar tus registros
+  text: Aprenda a procesar sus registros
 - link: /logs/explorer/saved_views/
   tag: Documentación
-  text: Aprende sobre Saved Views
+  text: Obtenga información sobre Saved Views
 - link: /logs/explorer/calculated_fields/formulas
   tag: Documentación
-  text: Aprende más sobre Fórmulas de Campos Calculados
+  text: Obtenga más información sobre Calculated Fields Formulas
 - link: https://learn.datadoghq.com/courses/log-explorer
-  tag: Centro de Aprendizaje
+  tag: Centro de aprendizaje
   text: Introducción a Log Explorer
-title: Sintaxis de Búsqueda de Registros
+title: Sintaxis de búsqueda de registros
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
 Un filtro de consulta se compone de términos y operadores.
 
-Hay dos tipos de términos:
+Existen dos tipos de términos:
 
 * Un **término único** es una sola palabra como `test` o `hello`.
 
-* Una **secuencia** es un grupo de palabras rodeadas por comillas dobles, como `"hello dolly"`.
+* Una **secuencia** es un grupo de palabras entre comillas dobles, como `"hello dolly"`.
 
-Para combinar múltiples términos en una consulta compleja, puedes usar cualquiera de los siguientes operadores booleanos sensibles a mayúsculas y minúsculas:
+Para combinar varios términos en una consulta compleja, puede usar cualquiera de los siguientes operadores booleanos que distinguen entre mayúsculas y minúsculas:
 
 |              |                                                                                                        |                              |
 |--------------|--------------------------------------------------------------------------------------------------------|------------------------------|
 | **Operador** | **Descripción**                                                                                        | **Ejemplo**                  |
-| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se agrega nada, se toma AND por defecto) | autenticación AND fallo   |
-| `OR`         | **Unión**: cualquiera de los términos está contenido en los eventos seleccionados                                             | autenticación OR contraseña   |
-| `-`          | **Exclusión**: el siguiente término NO está en el evento (aplica a cada búsqueda de texto sin procesar individual)                                                  | autenticación AND -contraseña |
+| `AND`        | **Intersección**: ambos términos están en los eventos seleccionados (si no se agrega nada, se toma AND de forma predeterminada) | authentication AND failure   |
+| `OR`         | **Unión**: cualquiera de los términos está contenido en los eventos seleccionados                                             | authentication OR password   |
+| `-`          | **Exclusión**: el siguiente término NO está en el evento (se aplica a cada búsqueda de texto sin formato individual)                                                  | authentication AND -password |
 
 ## Búsqueda de texto completo {#full-text-search}
 
-<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en consultas de monitor, dashboard y notebook La sintaxis de búsqueda de texto completo no se puede utilizar para definir filtros de índice, filtros de archivo, filtros de canalización, filtros de rehidratación, o en Live Tail. </div>
+<div class="alert alert-danger">La función de búsqueda de texto completo solo está disponible en Log Management y funciona en consultas de monitor, dashboard y notebook. La sintaxis de búsqueda de texto completo no se puede utilizar para definir filtros de índice, filtros de archivo, filtros de canalización de registros, filtros de rehidratación, filtros de métricas basados en registros o en Live Tail. </div>
 
-Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de registro, incluyendo el mensaje de registro.
+Utilice la sintaxis `*:search_term` para realizar una búsqueda de texto completo en todos los atributos de registro, incluido el mensaje de registro.
 
 ### Ejemplo de término único {#single-term-example}
 
@@ -59,43 +59,43 @@ Utiliza la sintaxis `*:search_term` para realizar una búsqueda de texto complet
 | `*:hello`     | Texto completo   | Busca en todos los atributos de registro la cadena exacta `hello`. |
 | `hello`       | Texto libre   | Busca solo en los atributos `message`, `@title`, `@error.message` y `@error.stack` la cadena exacta `hello`.       |
 
-### Ejemplo de término de búsqueda con comodín {#search-term-with-wildcard-example}
+### Ejemplo de término de búsqueda con Wildcard {#search-term-with-wildcard-example}
 
 | Sintaxis de búsqueda | Tipo de búsqueda | Descripción                                                                                 |
 | ------------- | ----------- | ------------------------------------------------------------------------------------------- |
 | `*:hello`     | Texto completo   | Busca en todos los atributos de registro la cadena exacta `hello`.                                   |
-| `*:hello*`    | Texto completo   | Busca en todos los atributos de registro cadenas que comienzan con `hello`. Por ejemplo, `hello_world`.  |
+| `*:hello*`    | Texto completo   | Busca en todos los atributos de registro cadenas que comiencen con `hello`. Por ejemplo, `hello_world`.  |
 
-### Varios términos con ejemplo de coincidencia exacta {#multiple-terms-with-exact-match-example}
+### Ejemplo de términos múltiples con coincidencia exacta {#multiple-terms-with-exact-match-example}
 
 | Sintaxis de búsqueda       | Tipo de búsqueda | Descripción                                                                                        |
 | ------------------- | ----------- |--------------------------------------------------------------------------------------------------- |
-| `*:"hello world"`   | Texto completo   | Busca en todos los atributos de registro la cadena exacta `hello world`                                    |
-| `hello world`       | Texto libre   | Busca solo en el mensaje del registro las palabras `hello` y `world`. Por ejemplo `hello beautiful world`.  |
+| `*:"hello world"`   | Texto completo   | Busca en todos los atributos de registro la cadena exacta `hello world`.                                    |
+| `hello world`       | Texto libre   | Busca solo en el mensaje de registro las palabras `hello` y `world`. Por ejemplo `hello beautiful world`.  |
 
-## Escapar caracteres especiales y espacios {#escape-special-characters-and-spaces}
+## Escape caracteres especiales y espacios {#escape-special-characters-and-spaces}
 
-Los siguientes caracteres se consideran especiales y requieren ser escapados con el carácter `\`: `=` `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, y espacios.
+Los siguientes caracteres se consideran especiales y requieren escape con el carácter `\`: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#` y espacios.
 - `/` no se considera un carácter especial y no necesita ser escapado.
-- `@` no se puede usar en consultas de búsqueda dentro de Logs Explorer porque está reservado para [Attribute Search](#attributes-search).
+- `@` no se puede usar en consultas de búsqueda dentro de Log Explorer porque está reservado para [Attribute Search](#attributes-search).
 
-No se puede buscar caracteres especiales en un mensaje de registro. Se pueden buscar caracteres especiales cuando están dentro de un atributo.
+No puede buscar caracteres especiales en un mensaje de registro. Puede buscar caracteres especiales cuando están dentro de un atributo.
 
-Para buscar caracteres especiales, conviértelos en un atributo con el [Grok Parser][1], y busca registros que contengan ese atributo.
+Para buscar caracteres especiales, analícelos en un atributo con el [Grok Parser][1] y busque registros que contengan ese atributo.
 
-## Attribute Search {#attributes-search}
+## Búsqueda de atributos {#attributes-search}
 
-Para buscar en un atributo específico, agrega `@` para especificar que estás buscando en un atributo.
+Para buscar en un atributo específico, agregue `@` para especificar que está buscando en un atributo.
 
-Por ejemplo, si el nombre de tu atributo es **url** y deseas filtrar por el valor de **url**, ingresa:
+Por ejemplo, si el nombre de su atributo es **url** y desea filtrar por el valor **url** `www.datadoghq.com`, ingrese:
 
 ```
 @url:www.datadoghq.com
 ```
 
-### Reserved Attributes {#reserved-attributes}
+### Reserved attributes {#reserved-attributes}
 
-[Reserved Attributes][8] como `host`, `source`, `status`, `service`, `trace_id` y `message` no requieren el prefijo `@`. Puedes buscar estos atributos directamente:
+Los [Reserved attributes][8] como `host`, `source`, `status`, `service`, `trace_id` y `message` no requieren el prefijo `@`. Puede buscar estos atributos directamente:
 
 ```
 service:web-app
@@ -105,13 +105,13 @@ host:i-1234567890abcdef0
 
 **Notas**:
 
-1. No es **necesario** definir una faceta para buscar en atributos y etiquetas.
+1. No**es** necesario definir una faceta para buscar en atributos y etiquetas.
 
-2. Las búsquedas de atributos son sensibles a mayúsculas y minúsculas. Utiliza [búsqueda de texto completo](#full-text-search) para obtener resultados que no distingan entre mayúsculas y minúsculas. Otra opción es usar el filtro `lowercase` con tu analizador Grok mientras analizas para obtener resultados que no distingan entre mayúsculas y minúsculas durante la búsqueda.
+2. Las búsquedas de atributos distinguen entre mayúsculas y minúsculas. Use [búsqueda de texto completo](#full-text-search) para obtener resultados que no distingan entre mayúsculas y minúsculas. Otra opción es usar el filtro `lowercase` con su [Grok Parser] durante el parseo para obtener resultados que no distingan entre mayúsculas y minúsculas durante la búsqueda.
 
-3. Buscar un valor de atributo que contenga caracteres especiales requiere escapar o usar comillas dobles.
-    - Por ejemplo, para un atributo `my_attribute` con el valor `hello:world`, busca usando: `@my_attribute:hello\:world` o `@my_attribute:"hello:world"`.
-    - Para coincidir con un solo carácter especial o espacio, utiliza el Wildcard `?`. Por ejemplo, para un atributo `my_attribute` con el valor `hello world`, busca usando: `@my_attribute:hello?world`.
+3. La búsqueda de un valor de atributo que contiene caracteres especiales requiere escape o comillas dobles.
+    - Por ejemplo, para un atributo `my_attribute` con el valor `hello:world`, busque usando: `@my_attribute:hello\:world` o `@my_attribute:"hello:world"`.
+    - Para coincidir con un solo carácter especial o espacio, utilice el Wildcard `?`. Por ejemplo, para un atributo `my_attribute` con el valor `hello world`, realice la búsqueda utilizando: `@my_attribute:hello?world`.
 
 Ejemplos:
 
@@ -122,34 +122,34 @@ Ejemplos:
 | `@http.status_code:[200 TO 299] @http.url_details.path:/api\-v1/*` | Busca todos los registros que contengan un valor `http.status_code` entre 200 y 299, y que contengan un valor en el atributo `http.url_details.path` que comience con `/api-v1/` |
 | `-@http.status_code:*`                                                | Busca todos los registros que no contengan el atributo `http.status_code` |
 
-### Busca utilizando notación CIDR {#search-using-cidr-notation}
-El Enrutamiento Inter-Dominio Sin Clase (CIDR) es una notación que permite a los usuarios definir un rango de direcciones IP (también llamados bloques CIDR) de manera concisa. CIDR se utiliza comúnmente para definir una red (como una VPC) o una subred (como una subred pública/privada dentro de una VPC).
+### Realice la búsqueda utilizando la notación CIDR {#search-using-cidr-notation}
+El enrutamiento entre dominios sin clases (CIDR) es una notación que permite a los usuarios definir un rango de direcciones IP (también llamadas bloques CIDR) de forma sucinta. CIDR se utiliza más comúnmente para definir una red (como una VPC) o una subred (como una subred pública/privada dentro de una VPC).
 
-Los usuarios pueden utilizar la función `CIDR()` para consultar atributos en los registros utilizando notación CIDR. La función `CIDR()` necesita recibir un atributo de registro como parámetro para filtrar, seguido de uno o múltiples bloques CIDR.
+Los usuarios pueden utilizar la función `CIDR()` para consultar atributos en registros utilizando la notación CIDR. A la función `CIDR()` se le debe pasar un atributo de registro como parámetro para filtrar, seguido de uno o varios bloques CIDR.
 
 #### Ejemplos {#examples}
-- `CIDR(@network.client.ip,13.0.0.0/8)` coincide y filtra registros que tienen direcciones IP en el campo `network.client.ip` que caen bajo el bloque CIDR 13.0.0.0/8.
-- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` coincide y filtra registros que tienen cualquier dirección IP en un atributo de arreglo `network.ip.list` que caen bajo los bloques CIDR 13.0.0.0/8 o 15.0.0.0/8.
-- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` coincidiría y filtraría eventos de rechazo del firewall de Palo Alto que se originan en la subred 13.0.0.0/8
-- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` mostrará todos los registros de VPC que no se originan en la subred 13.0.0.0/8 pero están designados para la subred de destino 15.0.0.0/8 porque quieres analizar el tráfico de red en tus entornos entre subredes
+- `CIDR(@network.client.ip,13.0.0.0/8)` coincide y filtra los registros que tienen direcciones IP en el campo `network.client.ip` que se encuentran dentro del bloque CIDR 13.0.0.0/8.
+- `CIDR(@network.ip.list,13.0.0.0/8, 15.0.0.0/8)` coincide y filtra los registros que tienen cualquier dirección IP en un atributo de matriz `network.ip.list` que se encuentren dentro de los bloques CIDR 13.0.0.0/8 o 15.0.0.0/8.
+- `source:pan.firewall evt.name:reject CIDR(@network.client.ip, 13.0.0.0/8)` coincidiría y filtraría los eventos de rechazo del firewall de Palo Alto que se originan en la subred 13.0.0.0/8
+- `source:vpc NOT(CIDR(@network.client.ip, 13.0.0.0/8)) CIDR(@network.destination.ip, 15.0.0.0/8)` mostrará todos los registros de VPC que no se originen en la subred 13.0.0.0/8 pero que estén designados para la subred de destino 15.0.0.0/8 porque desea analizar el tráfico de red en sus entornos entre subredes
 
-La función `CIDR()` admite tanto notaciones CIDR IPv4 como IPv6 y funciona en Log Explorer, Live Tail, widgets de registro en Dashboards, monitores de registro y configuraciones de registro.
+La función `CIDR()` admite notaciones CIDR tanto de IPv4 como de IPv6 y funciona en Log Explorer, Live Tail, log widgets en Dashboards, log monitors y log configurations.
 
-## Wildcard {#wildcards}
+## Comodines {#wildcards}
 
-Puede utilizar Wildcards con búsqueda de texto libre. Sin embargo, solo busca términos en el mensaje del registro, el texto en la columna `content` en Log Explorer. Consulta [Búsqueda de texto completo](#full-text-search) si quieres buscar un valor en un atributo de registro.
+Puede usar Wildcards con la búsqueda de texto libre. Sin embargo, solo busca términos en el mensaje de registro, el texto en la columna `content` en Log Explorer. Consulte [Búsqueda de texto completo](#full-text-search) si desea buscar un valor en un atributo de registro.
 
 ### Multi-character Wildcard {#multi-character-wildcard}
 
-Para realizar una búsqueda con Wildcard de múltiples caracteres en el mensaje del registro (la columna `content` en Log Explorer), usa el símbolo `*` de la siguiente manera:
+Para realizar una búsqueda con Multi-character Wildcard en el mensaje de registro (la columna `content` en Log Explorer), utilice el símbolo `*` de la siguiente manera:
 
 * `service:web*` coincide con cada mensaje de registro que tiene un servicio que comienza con `web`.
 * `web*` coincide con todos los mensajes de registro que comienzan con `web`.
 * `*web` coincide con todos los mensajes de registro que terminan con `web`.
 
-**Nota**: Los Wildcards solo funcionan como Wildcards fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un registro que tiene la cadena `*test*` en su mensaje. `*test*` coincide con un registro que tiene la cadena test en cualquier parte de su mensaje.
+**Nota**: Wildcards solo funcionan como Wildcards fuera de las comillas dobles. Por ejemplo, `"*test*"` coincide con un registro que tiene la cadena `*test*` en su mensaje. `*test*` coincide con un registro que tiene la cadena test en cualquier parte de su mensaje.
 
-Las búsquedas Wildcard funcionan dentro de etiquetas y atributos (con o sin facetas) con esta sintaxis. Esta consulta devuelve todos los servicios que terminan con la cadena `mongo`:
+Las búsquedas con Wildcard funcionan dentro de tags y atributos (con faceta o sin ella) con esta sintaxis. Esta consulta devuelve todos los servicios que terminan con la cadena `mongo`:
 <p> </p>
 <p></p>
 
@@ -157,23 +157,23 @@ Las búsquedas Wildcard funcionan dentro de etiquetas y atributos (con o sin fac
 service:*mongo
 ```
 
-Las búsquedas Wildcard también se pueden usar para buscar en el texto plano de un registro que no es parte de un atributo de registro. Por ejemplo, esta consulta devuelve todos los registros con contenido (mensaje) que contienen la cadena `NETWORK`:
+Las búsquedas con Wildcard también se pueden usar para buscar en el texto sin formato de un registro que no sea parte de un atributo de registro. Por ejemplo, esta consulta devuelve todos los registros con contenido (mensaje) que contengan la cadena `NETWORK`:
 
 ```
 *NETWORK*
 ```
 
-Sin embargo, este término de búsqueda no devuelve registros que contienen la cadena `NETWORK` si está en un atributo de registro y no es parte del mensaje del registro.
+Sin embargo, este término de búsqueda no devuelve registros que contengan la cadena `NETWORK` si se encuentra en un atributo de registro y no forma parte del mensaje de registro.
 
-### Buscar Wildcard {#search-wildcard}
+### Wildcard de búsqueda {#search-wildcard}
 
-Al buscar un valor de atributo o etiqueta que contenga caracteres especiales o que requiera escape o comillas dobles, use el Wildcard `?` para coincidir con un solo carácter especial o espacio. Por ejemplo, para buscar un atributo `my_attribute` con el valor `hello world`: `@my_attribute:hello?world`.
+Al buscar un valor de atributo o etiqueta que contenga caracteres especiales o que requiera secuencias de escape o comillas dobles, utilice el Wildcard `?` para coincidir con un solo carácter especial o espacio. Por ejemplo, para buscar un atributo `my_attribute` con el valor `hello world`: `@my_attribute:hello?world`.
 <p> </p>
 
 ## Valores numéricos {#numerical-values}
 
-Para buscar en un atributo numérico, primero agrégalo como faceta. Luego puede usar operadores numéricos (`<`,`>`, `<=` o `>=`) para realizar una búsqueda en facetas numéricas.
-Por ejemplo, recupere todos los registros que tienen un tiempo de respuesta superior a 100 ms con:
+Para buscar en un atributo numérico, primero [agréguelo como faceta][2]. Luego puede usar operadores numéricos (`<`, `>`, `<=` o `>=`) para realizar una búsqueda en facetas numéricas.
+Por ejemplo, recupere todos los registros que tengan un tiempo de respuesta superior a 100ms con:
 <p> </p>
 
 ```
@@ -188,55 +188,55 @@ Puede buscar un atributo numérico dentro de un rango específico. Por ejemplo, 
 
 ## Etiquetas {#tags}
 
-Sus registros heredan etiquetas de [hosts][3] y [integrations][4] que las generan. Pueden ser utilizadas en la búsqueda y también como facetas:
+Sus registros heredan etiquetas de [hosts][3] e [integraciones][4] que los generan. También se pueden usar en la búsqueda y como facetas:
 
 * `test` está buscando la cadena "test".
-* `env:(prod OR test)` coincide con todos los registros que tienen la etiqueta `env:prod` o la etiqueta `env:test`
+* `env:(prod OR test)` coincide con todos los registros con la etiqueta `env:prod` o la etiqueta `env:test`
 * `(env:prod AND -version:beta)` coincide con todos los registros que contienen la etiqueta `env:prod` y que no contienen la etiqueta `version:beta`
 
-Si sus etiquetas no siguen [las mejores prácticas de etiquetas][5] y no utilizan la sintaxis `key:value`, use esta consulta de búsqueda:
+Si sus etiquetas no siguen las [mejores prácticas de etiquetas][5] y no utilizan la sintaxis `key:value`, utilice esta consulta de búsqueda:
 
 * `tags:<MY_TAG>`
 
-## Arreglos {#arrays}
+## Matrices {#arrays}
 
-En el siguiente ejemplo, al hacer clic en el valor `Peter` en la faceta, se devuelven todos los registros que contienen un atributo `users.names`, cuyo valor es `Peter` o un arreglo que contiene `Peter`:
+En el siguiente ejemplo, al hacer clic en el valor `Peter` en la faceta se devuelven todos los registros que contienen un atributo `users.names`, cuyo valor es `Peter` o una matriz que contiene `Peter`:
 
-{{< img src="logs/explorer/search/array_search.png" alt="Arreglo y Facetas" style="width:80%;">}}
+{{< img src="logs/explorer/search/array_search.png" alt="Matriz y facetas" style="width:80%;">}}
 
-**Nota**: La búsqueda también se puede utilizar en atributos de arreglo no facetados utilizando una sintaxis equivalente.
+**Nota**: La búsqueda también se puede utilizar en atributos de matriz que no son de faceta mediante una sintaxis equivalente.
 
-En el siguiente ejemplo, los registros de CloudWatch para Windows contienen un arreglo de objetos JSON bajo `@Event.EventData.Data`. No puede crear una faceta en un arreglo de objetos JSON, pero puede buscar utilizando la siguiente sintaxis.
+En el siguiente ejemplo, los registros de CloudWatch para Windows contienen una matriz de objetos JSON bajo `@Event.EventData.Data`. No puede crear una faceta en una matriz de objetos JSON, pero puede realizar búsquedas utilizando la siguiente sintaxis.
 
 * `@Event.EventData.Data.Name:ObjectServer` coincide con todos los registros con la clave `Name` y el valor `ObjectServer`.
 
-{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Consulta sin facetas en un arreglo de objetos JSON" style="width:80%;">}}
+{{< img src="logs/explorer/search/facetless_query_json_arrray2.png" alt="Consulta sin facetas en una matriz de objetos JSON" style="width:80%;">}}
 
-### Búsqueda de arreglo anidado {#nested-array-search}
+### Búsqueda de matriz anidada {#nested-array-search}
 
-Para buscar un campo anidado en un atributo de arreglo, utiliza el prefijo `@` con la ruta completa del atributo. El Explorador de registros coincide con cualquier elemento en el arreglo:
+Para buscar un campo anidado en un atributo de matriz, utilice el prefijo `@` con la ruta completa del atributo. Log Explorer coincide con cualquier elemento de la matriz:
 
-* `@network.ip.attributes.ip:2a02\:1810*` coincide con todos los registros donde al menos un elemento en el arreglo `network.ip.attributes` tiene un campo `ip` que comienza con `2a02:1810`.
+* `@network.ip.attributes.ip:2a02\:1810*` coincide con todos los registros donde al menos un elemento en la matriz `network.ip.attributes` tiene un campo `ip` que comienza con `2a02:1810`.
 
-Para buscar registros donde un arreglo contiene múltiples valores específicos, enumere los valores entre paréntesis:
+Para buscar coincidencias en registros donde una matriz contiene varios valores específicos, enumere los valores entre paréntesis:
 
-* `@user_perms:(4 6)` coincide con todos los registros donde el arreglo `user_perms` contiene tanto `4` como `6`.
+* `@user_perms:(4 6)` coincide con todos los registros donde la matriz `user_perms` contiene tanto `4` como `6`.
 
-Para buscar registros donde un arreglo contiene cualquier valor dentro de un rango, use una consulta de rango:
+Para buscar coincidencias en registros donde una matriz contiene cualquier valor dentro de un rango, utilice una consulta de rango:
 
-* `@user_perms:[2 TO 6]` coincide con todos los registros donde el arreglo `user_perms` contiene al menos un valor entre `2` y `6`.
+* `@user_perms:[2 TO 6]` coincide con todos los registros donde la matriz `user_perms` contiene al menos un valor entre `2` y `6`.
 
 ## Campos calculados {#calculated-fields}
 
-Los campos calculados funcionan como atributos de registro y pueden ser utilizados para búsqueda, agregación, visualización y definición de otros campos calculados. Utilice el prefijo `#` para referenciar los nombres de los campos calculados.
+Los campos calculados funcionan como atributos de registro y se pueden utilizar para búsquedas, agregaciones, visualizaciones y para definir otros campos calculados. Utilice el prefijo `#` para hacer referencia a los nombres de los campos calculados.
 
-{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration utilizado para filtrar resultados en el Explorador de registros" style="width:100%;" >}}
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration utilizado para filtrar resultados en Log Explorer" style="width:100%;" >}}
 
-## Saved Views {#saved-searches}
+## Búsquedas guardadas {#saved-searches}
 
-[Saved Views][6] contienen su consulta de búsqueda, columnas, horizonte temporal y faceta.
+Los [Saved Views][6] contienen su consulta de búsqueda, columnas, horizonte temporal y faceta.
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

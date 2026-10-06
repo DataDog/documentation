@@ -1,45 +1,69 @@
 ---
+description: Aprenda a recopilar registros de un agente Logstash usando el Observability
+  Pipelines Worker.
 disable_toc: false
-title: Origen de Logstash
+products:
+- icon: logs
+  name: Registros
+  url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+title: Fuente Logstash
 ---
+{{< product-availability >}}
 
-Utiliza el origen de Logstash de los pipelines de observabilidad para recibir logs de tu Agent de Logstash. Selecciona y configura este origen cuando [configures un pipeline][1].
+## Descripción general {#overview}
 
-## Requisitos previos
+Utilice la fuente Logstash de Observability Pipelines para recibir registros de su agente Logstash.
+
+También puede utilizar la fuente Logstash para [enviar registros a Observability Pipelines usando Filebeat][2].
+
+## Requisitos previos {#prerequisites}
 
 {{% observability_pipelines/prerequisites/logstash%}}
 
-## Configurar el origen en la interfaz de usuario del pipeline
+## Configuración {#setup}
 
-Selecciona y configura este origen cuando [configures pipeline][1]. La siguiente información se refiere a la configuración del origen en la interfaz de usuario del pipeline.
+<div class="alert alert-danger">Para la gestión de secretos: solo ingrese los identificadores para la dirección de Logstash y, si corresponde, la frase de contraseña de la clave TLS. <b>No</b> ingrese los valores reales.</div>
 
-{{% observability_pipelines/source_settings/logstash %}}
+Configure esta fuente cuando [configure una canalización][1]. Puede configurar un pipeline en la [UI][4], utilizando la [API][5] o con [Terraform][6]. Las instrucciones de esta sección son para configurar la fuente en la interfaz de usuario.
 
-## Enviar logs al worker de pipelines de observabilidad a través de Logstash
+Después de seleccionar la fuente Logstash en la pipeline UI, ingrese el identificador para su dirección de Logstash. Si lo deja en blanco, se utiliza el [predeterminado](#secret-defaults).
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+### Configuración de TLS opcional {#optional-tls-settings}
+
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
+
+## Valores predeterminados de Secret {#secret-defaults}
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Gestión de secretos" %}}
+
+- Identificador de dirección de Logstash:
+	- Hace referencia a la dirección en la que Observability Pipelines Worker escucha los mensajes de registro entrantes.
+	- El identificador predeterminado es `SOURCE_LOGSTASH_ADDRESS`.
+- Identificador de frase de contraseña TLS de Logstash (cuando TLS está habilitado):
+	- El identificador predeterminado es `SOURCE_LOGSTASH_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Variables de entorno" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Envíe registros al Observability Pipelines Worker a través de Logstash {#send-logs-to-the-observability-pipelines-worker-over-logstash}
 
 {{% observability_pipelines/log_source_configuration/logstash %}}
 
-## Enviar logs mediante Filebeat a pipelines de observabilidad
-
-Utiliza el origen de Logstash para enviar logs al worker de pipelines de observabilidad con Filebeat.
-
-1. [Configura Filebeat][2] si aún no lo has hecho.
-1. En el archivo `filebeat.yml`:
-    <br>a. Comenta la sección de configuración de Elasticsearch Output (Salida de Elasticsearch).
-    <br>b. Elimina los comentarios y configura la sección Logstash Output (Salida de Logstash):
-    ```
-    # ------------------------------ Logstash Output -------------------------------
-    output.logstash:
-    # The Logstash hosts
-    hosts: ["<OPW_HOST>:9997"]
-    ```
-    `<OPW_HOST>` es la dirección IP de host o la URL del equilibrador de carga asociada con el worker de pipelines de observabilidad.
-
-    Para las instalaciones de CloudFormation, utiliza la salida `LoadBalancerDNS` de CloudFormation para la URL.
-
-    Para las instalaciones de Kubernetes, puedes utilizar el registro DNS interno del servicio de worker de pipelines de observabilidad. Por ejemplo: `opw-observability-pipelines-worker.default.svc.cluster.local`.
-1. [Configura un pipeline][3] con el origen de Logstash.
-
-[1]: /es/observability_pipelines/set_up_pipelines/
-[2]: https://www.elastic.co/guide/en/beats/filebeat/current/setup-repositories.html
-[3]: /es/observability_pipelines/set_up_pipelines/
+[1]: /es/observability_pipelines/configuration/set_up_pipelines/
+[2]: /es/observability_pipelines/sources/filebeat/
+[4]: https://app.datadoghq.com/observability-pipelines
+[5]: /es/api/latest/observability-pipelines/
+[6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

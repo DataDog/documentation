@@ -10,60 +10,62 @@ further_reading:
 - link: /dashboards/querying/
   tag: Documentation
   text: Découvrir comment créer une requête de graphique
+- link: https://learn.datadoghq.com/courses/discovering-table-list-widgets
+  tag: Centre d'apprentissage
+  text: Découverte des widgets Tableau, Liste, SLO et Architecture
 title: Widget Tableau
 widget_type: query_table
 ---
+## Présentation {#overview}
 
-## Présentation
+La visualisation sous forme de tableau affiche des colonnes de données agrégées regroupées par clé de tag. Utilisez des tableaux pour comparer des valeurs entre de nombreux groupes de données et observer les tendances, les changements et les singularités.
 
-Les tableaux affichent au sein de leurs colonnes des données agrégées regroupées en fonction d'une clé de tag. Ils vous permettent de comparer les valeurs de différents groupes de données, ainsi que de visualiser des tendances, changements et singularités.
+{{< img src="/dashboards/widgets/table/table_conditional_formatting.png" alt="Widget de tableau avec formatage conditionnel" style="width:100%;">}}
 
-{{< img src="/dashboards/widgets/table/table_conditional_formatting.png" alt="Widget Tableau avec une mise en forme conditionnelle" style="width:100%;">}}
+## Configuration {#setup}
 
-## Configuration
+### Configuration {#configuration}
 
-### Configuration
+1. Choisissez les données à représenter graphiquement :
+    * Métrique : consultez la [documentation principale sur les graphiques][1] pour configurer une requête de métrique.
+    * Sources de données non métriques : consultez la [documentation sur la recherche de logs][2] pour configurer une requête d'événement.
 
-1. Choisissez les données à représenter :
-    * Métrique : consultez la [documentation principale sur les graphiques][1] pour configurer une requête de métrique.
-    * Sources de données sans métriques : consultez la section [Syntaxe de recherche de logs][2] pour configurer une requête d'événement.
+2. Ajoutez des colonnes supplémentaires au tableau en utilisant les boutons {{< ui >}}\+ Add Query{{< /ui >}} et {{< ui >}}\+ Add Formula{{< /ui >}}.
 
-2. Cliquez sur les boutons **+ Add Query** et **+ Add Formula** pour ajouter des colonnes supplémentaires au tableau.
+### Options {#options}
 
-### Options
+* Renommez les en-têtes de colonne en définissant des alias, cliquez sur le bouton {{< ui >}}as...{{< /ui >}}.
+* Configurez l'affichage ou non de la barre de recherche. {{< ui >}}Auto{{< /ui >}} est la valeur par défaut et affiche la barre de recherche en fonction de la taille du widget ; cela signifie que si votre écran devient trop petit, il donne la priorité à l'affichage des données sur le widget et masque la barre de recherche, qui reste toutefois disponible en mode plein écran.
 
-* Vous pouvez cliquer sur le bouton **as...** pour configurer des alias afin de renommer les en-têtes de vos colonnes.
-* Définissez si la barre de recherche doit s'afficher ou non. L'option **Auto**, appliquée par défaut, affiche la barre de recherche en fonction de la taille du widget. Ainsi, si la fenêtre devient trop petite, le widget affiche en priorité les données et masque la barre de recherche. Cette dernière continue à s'afficher en mode plein écran.
+#### Formatage de colonne {#column-formatting}
 
-#### Mise en forme des colonnes
+Personnalisez la visualisation des valeurs de cellule pour chaque colonne avec des règles de formatage de colonne. Créez des codes couleur pour vos données afin de visualiser les tendances et les changements.
+* Formatage par seuil : mettez en surbrillance les cellules avec des couleurs lorsque des plages de valeurs spécifiques sont atteintes.
+* Formatage par plage : codez par couleur les cellules avec une plage de valeurs.
+* Formatage de texte : remplacez les cellules par des valeurs de texte d'alias pour améliorer la lisibilité.
+* Informations sur les tendances : visualisez les requêtes de métriques et d'événements.
 
-Personnalisez l'affichage des valeurs des cellules pour chaque colonne grâce aux règles de mise en page des colonnes. Vous pouvez ainsi créer des codes couleur pour vos données afin de représenter des tendances et changements.
-* Mise en forme par seuil : mettre en évidence les cellules avec des couleurs lorsque des plages de valeurs spécifiques sont atteintes.
-* Mise en forme avec des plages : appliquez un code couleur à vos cellules en fonction d'une plage de valeurs.
-* Mise en forme de texte : remplacez des cellules par des alias de valeurs textuelles afin d'améliorer la lisibilité de vos données.
-* Informations sur les tendances : visualiser des requêtes de métriques et d'événements.
+{{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Widget de tableau affichant un formatage conditionnel avec des indicateurs de tendance" style="width:100%;" >}}
 
-{{< img src="/dashboards/widgets/table/conditional_formatting_trends.png" alt="Widget Table affichant une mise en forme conditionnelle avec des indicateurs de tendance" style="width:100%;" >}}
+#### Liens contextuels {#context-links}
 
-#### Liens de contexte
+Les [liens contextuels][10] sont activés par défaut et peuvent être activés ou désactivés. Les liens contextuels relient les widgets de dashboard à d'autres pages dans Datadog ou à des applications tierces.
 
-Les [liens de contexte][10] sont activés par défaut, mais vous pouvez les désactiver si vous le souhaitez. Ils relient les widgets du dashboard à d'autres pages dans Datadog ou sur des applications externes.
+## Valeurs N/A {#na-values}
 
-## Absence de valeurs
+Les colonnes du widget de tableau sont interrogées indépendamment les unes des autres. Les groupes qui se chevauchent avec des noms correspondants sont joints en temps réel pour former les lignes du tableau. En raison de ce processus, il peut y avoir des situations sans chevauchement total, affichant des cellules N/A. Pour atténuer cela :
+  * Augmentez la limite des requêtes à des nombres plus élevés, afin de maximiser le chevauchement entre les colonnes
+  * Triez les tableaux selon la colonne que vous pourriez considérer comme « moteur » de l'analyse
 
-Les colonnes d'un widget Tableau sont chacune interrogées indépendamment. Les groupes dont les données se recoupent et qui partagent le même nom sont fusionnés en temps réel. Ils représentent les lignes du tableau. Ainsi, il arrive qu'aucune donnée ne se chevauche, ce qui donne lieu à des cellules sans valeur. Pour y remédier, procédez comme suit :
-  * Autorisez un plus grand nombre de requêtes, afin de maximiser le chevauchement de données entre les colonnes.
-  * Triez les tableaux en fonction de la colonne qui contient les données centrales à votre analyse.
+## API {#api}
 
-## API
-
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][8] pour en savoir plus.
+Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation de l'API Dashboards][8] pour plus d'informations.
 
 Le [schéma JSON][9] utilisé pour le widget Tableau est le suivant :
 
 {{< dashboards-widgets-api >}}
 
-## Pour aller plus loin
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
