@@ -991,12 +991,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1023,12 +1022,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"us3.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.us3.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1055,12 +1053,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"us5.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.us5.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1087,12 +1084,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"datadoghq.eu"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.datadoghq.eu/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1119,12 +1115,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ap1.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.ap1.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1151,12 +1146,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ap2.datadoghq.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.ap2.datadoghq.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
@@ -1183,12 +1177,11 @@
                           tabindex="0"
                         ><code><span class="line"><span style="color:#177500"># Set your Datadog site and credentials</span></span>
 <span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_SITE=</span><span style="color:#C41A16">"ddog-gov.com"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_API_KEY=</span><span style="color:#C41A16">"&#x3C;DD_API_KEY>"</span></span>
-<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_APP_KEY=</span><span style="color:#C41A16">"&#x3C;DD_APP_KEY>"</span></span>
+<span class="line"><span style="color:#177500"># Use a Personal Access Token or Service Access Token</span></span>
+<span class="line"><span style="color:#A90D91">export</span><span style="color:#000000"> DD_BEARER_TOKEN=</span><span style="color:#C41A16">"&#x3C;PERSONAL_ACCESS_TOKEN OR SERVICE_ACCESS_TOKEN>"</span></span>
 <span class="line"></span>
 <span class="line"><span style="color:#000000">curl </span><span style="color:#C41A16">-X</span><span style="color:#C41A16"> GET</span><span style="color:#C41A16"> "https://api.ddog-gov.com/api/v1/dashboard/lists/manual"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-API-KEY: </span><span style="color:#000000">${DD_API_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
-<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"DD-APPLICATION-KEY: </span><span style="color:#000000">${DD_APP_KEY}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
+<span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Authorization: Bearer </span><span style="color:#000000">${DD_BEARER_TOKEN}</span><span style="color:#C41A16">"</span><span style="color:#C41A16"> \</span></span>
 <span class="line"><span style="color:#000000">-H </span><span style="color:#C41A16">"Accept: application/json"</span></span></code></pre>
                       </div>
                     </div>
