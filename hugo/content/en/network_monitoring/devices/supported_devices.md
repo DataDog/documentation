@@ -209,11 +209,9 @@ If a vendor or device type is supported, but the specific model isn't, you can:
 
 * Create new [profiles][2] to start monitoring new device models.
 
-* Contact [Datadog support][1] to put in a request to support your specific model.
+* Contact [Datadog Support][1] to request support for your device model or additional metrics from a vendor MIB. Run an [SNMP walk](#collect-device-data) from a host that can reach the device and include the output in your request.
 
-  **Note**: You can continue using NDM, as Datadog collects generic baseline metrics from all devices. If there are unsupported metrics from a vendor MIB, you can send a feature request to Datadog support with the following details: <br></br>
-
-  Run an [SNMP walk](#collect-device-data) from a host that can reach the device and send the output to Datadog Support.
+  You can continue using NDM with the generic baseline metrics available for your device.
 
 * Extend your profiles to support additional `sysobjectid` values.
 
