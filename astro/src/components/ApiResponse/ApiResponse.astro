@@ -4,7 +4,10 @@ import TabPanel from "@components/Tab/TabPanel.astro";
 import CodeBlock from "@components/CodeBlock/CodeBlock.astro";
 import ApiSchemaTable from "@components/ApiSchemaTable/ApiSchemaTable.astro";
 import type { SchemaField } from "@lib/api/schemas/schemaField";
-import { renderMarkdownInline } from "@lib/api/markdownRenderer";
+import {
+  renderMarkdown,
+  renderMarkdownInline,
+} from "@lib/api/markdownRenderer";
 import styles from "./ApiResponse.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
@@ -20,6 +23,7 @@ interface Example {
 export interface ResponseData {
   statusCode: string;
   description?: string;
+  schemaDescription?: string;
   schema?: SchemaField[];
   examples?: Example[];
 }
@@ -75,7 +79,16 @@ const innerPanelIds = responses.map((_, i) => [
                     panelIds={innerPanelIds[i]}
                   >
                     <TabPanel id={innerPanelIds[i][0]} isActive>
-                      <ApiSchemaTable fields={r.schema!} />
+                      {r.schemaDescription && (
+                        <div
+                          class={cl("api-response__schema-description")}
+                          set:html={renderMarkdown(r.schemaDescription)}
+                        />
+                      )}
+                      <ApiSchemaTable
+                        fields={r.schema!}
+                        nameColumnLabel="field"
+                      />
                     </TabPanel>
                     <TabPanel id={innerPanelIds[i][1]}>
                       {r.examples!.map((ex) => (
@@ -87,8 +100,15 @@ const innerPanelIds = responses.map((_, i) => [
                   </Tabs>
                 )}
 
+                {!showInnerTabs && hasSchema && r.schemaDescription && (
+                  <div
+                    class={cl("api-response__schema-description")}
+                    set:html={renderMarkdown(r.schemaDescription)}
+                  />
+                )}
+
                 {!showInnerTabs && hasSchema && (
-                  <ApiSchemaTable fields={r.schema!} />
+                  <ApiSchemaTable fields={r.schema!} nameColumnLabel="field" />
                 )}
 
                 {!showInnerTabs &&

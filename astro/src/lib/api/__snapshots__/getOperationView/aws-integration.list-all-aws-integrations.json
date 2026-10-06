@@ -39,6 +39,7 @@
         {
           "statusCode": "200",
           "description": "AWS Accounts List object",
+          "schemaDescription": "AWS Accounts response body.",
           "schema": [
             {
               "name": "data",
@@ -488,6 +489,7 @@
         {
           "statusCode": "403",
           "description": "Forbidden",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -508,6 +510,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "API error response.",
           "schema": [
             {
               "name": "errors",
@@ -753,6 +756,7 @@
         {
           "statusCode": "200",
           "description": "OK",
+          "schemaDescription": "List of enabled AWS accounts.",
           "schema": [
             {
               "name": "accounts",
@@ -875,6 +879,7 @@
         {
           "statusCode": "400",
           "description": "Bad Request",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -895,6 +900,7 @@
         {
           "statusCode": "403",
           "description": "Authentication Error",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",
@@ -915,6 +921,7 @@
         {
           "statusCode": "429",
           "description": "Too many requests",
+          "schemaDescription": "Error response object.",
           "schema": [
             {
               "name": "errors",

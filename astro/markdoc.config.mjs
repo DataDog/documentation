@@ -6,6 +6,7 @@ import {
 } from "@astrojs/markdoc/config";
 import schema from "./markdoc.schema.mjs";
 import { generateElementId } from "./src/lib/componentUtils/generateElementId.ts";
+import { syncKeyFromLabel } from "./src/components/Tabs/tabSync.ts";
 
 /**
  * Yield a tag's children, replacing any paragraph with the nodes inside it.
@@ -114,6 +115,8 @@ export default defineMarkdocConfig({
             id: groupId,
             labels,
             panelIds,
+            // Sync by label with Hugo's `?tab=` rule;
+            sync: { group: "tab", keys: labels.map(syncKeyFromLabel) },
           },
           panels,
         );

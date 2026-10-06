@@ -13,9 +13,17 @@ interface Props {
   fields: SchemaField[];
   title?: string;
   showExpandAll?: boolean;
+  /** i18n key for the first column's header. Hugo uses `field` for request
+   * body and response tables, and `name` for parameters. */
+  nameColumnLabel?: "name" | "field";
 }
 
-const { fields, title, showExpandAll = true } = Astro.props;
+const {
+  fields,
+  title,
+  showExpandAll = true,
+  nameColumnLabel = "name",
+} = Astro.props;
 const translate = useTranslations(Astro.currentLocale);
 
 const tableId = generateElementId("schema-table");
@@ -64,9 +72,9 @@ const showToolbar = showExpandAll && anyExpandable;
   }
   <div class={cl("schema-table__table")}>
     <div class={cl("schema-table__columns")}>
-      <div class={cl("schema-table__columns-name")}>{translate("name")}</div>{
-        " "
-      }
+      <div class={cl("schema-table__columns-name")}>
+        {translate(nameColumnLabel)}
+      </div>{" "}
       <div class={cl("schema-table__columns-type")}>{translate("type")}</div>{
         " "
       }

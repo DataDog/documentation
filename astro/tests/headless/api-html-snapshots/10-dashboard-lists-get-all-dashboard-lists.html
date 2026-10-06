@@ -212,13 +212,16 @@
               >Not supported in the US2-FED region</code
             >
           </div>
-          <h3>Overview</h3>
+          <h3 class="api-endpoint__overview-heading _api-endpoint__overview-heading_071384">Overview</h3>
           <p>Fetch all of your existing dashboard list definitions.</p>
           <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
-            <strong>Permissions: </strong><code>dashboards_read</code>
+            <p>This endpoint requires the <code>dashboards_read</code> permission.</p>
           </div>
-          <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
-            <p>OAuth apps require the <code>dashboards_read</code> authorization scope to access this endpoint.</p>
+          <div class="api-endpoint__oauth-scopes _api-endpoint__oauth-scopes_071384">
+            <p>
+              OAuth apps require the <code>dashboards_read</code> authorization
+              <a href="/api/latest/scopes/#dashboard-lists">scope</a> to access this endpoint.
+            </p>
           </div>
           <div class="api-response _api-response_d8cf04">
             <h3 class="api-response__heading _api-response__heading_d8cf04">Response</h3>
@@ -300,6 +303,9 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Information on your dashboard lists.</p>
+                      </div>
                       <div id="schema-table-X40" class="schema-table">
                         <div class="schema-table__toolbar _schema-table__toolbar_d7636a">
                           <button
@@ -319,7 +325,7 @@
                         </div>
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -356,7 +362,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[object]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>List of all your dashboard lists.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>List of all your dashboard lists.</p>
+                              </div>
                             </div>
                           </div>
                           <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -367,7 +375,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <button
                                   type="button"
@@ -397,7 +405,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">object</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Object describing the creator of the shared element.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Object describing the creator of the shared element.</p>
+                                </div>
                               </div>
                             </div>
                             <div class="schema-table__children _schema-table__children_d7636a" hidden>
@@ -408,7 +418,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">email</code></span
@@ -418,7 +428,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Email of the creator.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Email of the creator.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -428,7 +440,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">handle</code></span
@@ -438,7 +450,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Handle of the creator.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Handle of the creator.</p>
+                                  </div>
                                 </div>
                               </div>
                               <div
@@ -448,7 +462,7 @@
                               >
                                 <div
                                   class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                  style="padding-left: calc(var(--space-md) + 40px)"
+                                  style="padding-left: calc(var(--space-md) + 2 * (30px + var(--space-xs)))"
                                 >
                                   <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                     ><code class="schema-table__name _schema-table__name_d7636a">name</code></span
@@ -458,7 +472,9 @@
                                   <span class="schema-table__type _schema-table__type_d7636a">string</span>
                                 </div>
                                 <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                  <span>Name of the creator.</span>
+                                  <div class="schema-table__description _schema-table__description_d7636a">
+                                    <p>Name of the creator.</p>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -469,7 +485,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">created</code></span
@@ -479,7 +495,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Date of creation of the dashboard list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Date of creation of the dashboard list.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -489,7 +507,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a"
@@ -501,7 +519,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The number of dashboards in the list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The number of dashboards in the list.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -511,7 +531,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">id</code></span
@@ -521,7 +541,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">int64</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The ID of the dashboard list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The ID of the dashboard list.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -531,7 +553,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">is_favorite</code></span
@@ -541,7 +563,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">boolean</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Whether or not the list is in the favorites.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Whether or not the list is in the favorites.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -551,7 +575,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">modified</code></span
@@ -561,7 +585,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">date-time</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>Date of last edition of the dashboard list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>Date of last edition of the dashboard list.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -571,7 +597,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">name</code
@@ -584,7 +610,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">string</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The name of the dashboard list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The name of the dashboard list.</p>
+                                </div>
                               </div>
                             </div>
                             <div
@@ -594,7 +622,7 @@
                             >
                               <div
                                 class="schema-table__cell-name _schema-table__cell-name_d7636a"
-                                style="padding-left: calc(var(--space-md) + 20px)"
+                                style="padding-left: calc(var(--space-md) + 1 * (30px + var(--space-xs)))"
                               >
                                 <span class="schema-table__name-group _schema-table__name-group_d7636a"
                                   ><code class="schema-table__name _schema-table__name_d7636a">type</code></span
@@ -604,7 +632,9 @@
                                 <span class="schema-table__type _schema-table__type_d7636a">string</span>
                               </div>
                               <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                                <span>The type of dashboard list.</span>
+                                <div class="schema-table__description _schema-table__description_d7636a">
+                                  <p>The type of dashboard list.</p>
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -693,10 +723,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Error response object.</p>
+                      </div>
                       <div id="schema-table-X42" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -719,7 +752,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Array of errors returned by the API.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Array of errors returned by the API.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -804,10 +839,13 @@
                       role="tabpanel"
                       class="tabs__panel _tabs__panel_d3f7cd tabs__panel--active _tabs__panel--active_d3f7cd"
                     >
+                      <div class="api-response__schema-description _api-response__schema-description_d8cf04">
+                        <p>Error response object.</p>
+                      </div>
                       <div id="schema-table-X44" class="schema-table">
                         <div class="schema-table__table _schema-table__table_d7636a">
                           <div class="schema-table__columns _schema-table__columns_d7636a">
-                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
+                            <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Field</div>
                             <div class="schema-table__columns-type _schema-table__columns-type_d7636a">Type</div>
                             <div class="schema-table__columns-description _schema-table__columns-description_d7636a">
                               Description
@@ -830,7 +868,9 @@
                               <span class="schema-table__type _schema-table__type_d7636a">[string]</span>
                             </div>
                             <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                              <span>Array of errors returned by the API.</span>
+                              <div class="schema-table__description _schema-table__description_d7636a">
+                                <p>Array of errors returned by the API.</p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -896,6 +936,8 @@
                     aria-selected="true"
                     aria-controls="api-code-example-X46-panel-0"
                     data-tab-index="0"
+                    data-sync-group="code-lang"
+                    data-sync-key="curl"
                     class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
                   >
                     Curl</button
@@ -904,6 +946,8 @@
                     aria-selected="false"
                     aria-controls="api-code-example-X46-panel-1"
                     data-tab-index="1"
+                    data-sync-group="code-lang"
+                    data-sync-key="go"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
                     Go</button
@@ -912,6 +956,8 @@
                     aria-selected="false"
                     aria-controls="api-code-example-X46-panel-2"
                     data-tab-index="2"
+                    data-sync-group="code-lang"
+                    data-sync-key="python"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
                     Python

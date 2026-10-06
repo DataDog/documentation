@@ -8,7 +8,14 @@
 
 .api-response__description {
   margin: 0 0 var(--space-md);
-  font-size: var(--font-size-sm);
+}
+
+.api-response__schema-description {
+  margin-bottom: var(--space-md);
+}
+
+.api-response__schema-description > p {
+  margin: 0;
 }
 
 .api-response__example {

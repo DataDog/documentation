@@ -57,3 +57,19 @@ test.describe("ApiResponse component — visual", () => {
     await expect(response).toHaveScreenshot("api-response-example.png");
   });
 });
+
+test.describe("ApiResponse component — typography", () => {
+  test("response description uses the body font size, as Hugo does", async ({
+    page,
+  }) => {
+    await page.goto("/dd_e2e/components/api-response");
+    const description = page.locator(".api-response__description").first();
+    await expect(description).toBeVisible();
+
+    const [descriptionSize, bodySize] = await description.evaluate((el) => [
+      getComputedStyle(el).fontSize,
+      getComputedStyle(document.body).fontSize,
+    ]);
+    expect(descriptionSize).toBe(bodySize);
+  });
+});

@@ -36,6 +36,7 @@ import {
   extractRequestBody,
   extractResponses,
   extractPermissions,
+  extractPermissionsMatch,
   extractOauthScopes,
   buildCurlByRegion,
   buildRunCommandByRegion,
@@ -540,7 +541,11 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
       : undefined;
 
   const permissions = extractPermissions(op.operation);
+  const permissionsMatch = extractPermissionsMatch(op.operation);
   const oauthScopes = extractOauthScopes(op.operation.security);
+  // Hugo's scopes page anchors each API section by its raw tag name, not by
+  // the (possibly overridden) category slug.
+  const oauthScopesAnchor = oauthScopes ? toSlug(op.primaryTag) : undefined;
 
   const regionUrls = buildRegionUrlsForOperation(spec, op);
 
@@ -568,7 +573,9 @@ function buildEndpoint(op: RawOperation, lang: Locale): EndpointData {
     unstable,
     unstableMessage,
     permissions,
+    permissionsMatch,
     oauthScopes,
+    oauthScopesAnchor,
     regionUrls,
     pathParams: params.pathFields,
     queryParams: params.queryFields,

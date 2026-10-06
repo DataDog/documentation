@@ -126,9 +126,45 @@ describe("apiEndpointNodes", () => {
       permissions: ["things_read"],
       oauthScopes: ["things:read"],
     });
-    expect(out).toContain("Permissions:");
-    expect(out).toContain("things_read");
+    expect(out).toContain(
+      "This endpoint requires the `things_read` permission.",
+    );
     expect(out).toContain("OAuth apps");
     expect(out).toContain("things:read");
+  });
+
+  it("lists multiple permissions with their any/all match", () => {
+    const out = render({
+      ...baseEndpoint,
+      permissions: ["apps_write", "workflows_run"],
+      permissionsMatch: "all",
+    });
+    expect(out).toContain(
+      "This endpoint requires all of the following permissions:",
+    );
+    expect(out).toContain("- `apps_write`");
+    expect(out).toContain("- `workflows_run`");
+  });
+
+  it("titles each argument table by parameter location", () => {
+    const param = {
+      name: "version",
+      type: "string",
+      required: true,
+      deprecated: false,
+      readOnly: false,
+      description: "The version.",
+    };
+    const out = render({
+      ...baseEndpoint,
+      queryParams: [param],
+      headerParams: [{ ...param, name: "x_header" }],
+    });
+    const pathAt = out.indexOf("#### Path Parameters");
+    const queryAt = out.indexOf("#### Query Strings");
+    const headerAt = out.indexOf("#### Header Parameters");
+    expect(pathAt).toBeGreaterThan(-1);
+    expect(queryAt).toBeGreaterThan(pathAt);
+    expect(headerAt).toBeGreaterThan(queryAt);
   });
 });

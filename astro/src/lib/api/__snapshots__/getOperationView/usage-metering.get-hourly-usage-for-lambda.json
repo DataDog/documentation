@@ -19,6 +19,7 @@
       "oauthScopes": [
         "usage_read"
       ],
+      "oauthScopesAnchor": "usage-metering",
       "regionUrls": {
         "us": "https://api.datadoghq.com/api/v1/usage/aws_lambda",
         "us3": "https://api.us3.datadoghq.com/api/v1/usage/aws_lambda",

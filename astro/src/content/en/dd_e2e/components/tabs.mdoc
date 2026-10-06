@@ -86,3 +86,194 @@ Rust content
 Scala content
 {% /tab %}
 {% /tabs %}
+
+### Panels of different heights
+
+{% tabs %}
+{% tab label="Short" %}
+One line.
+{% /tab %}
+{% tab label="Tall" %}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+#### Heading in a tab
+
+A heading inside the Tall panel. Link to it with `#heading-in-a-tab` to open this tab.
+{% /tab %}
+{% /tabs %}
+
+### Synced tabs
+
+These two groups have the same labels. Select a tab in one group.
+
+{% tabs %}
+{% tab label="Linux" %}
+Linux instructions for the first group.
+{% /tab %}
+{% tab label="Windows" %}
+Windows instructions for the first group. This panel is taller than the others, so selecting Windows in the second group moves the second group down.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+{% /tab %}
+{% tab label="macOS" %}
+macOS instructions for the first group.
+{% /tab %}
+{% /tabs %}
+
+Text between the two groups.
+
+{% tabs %}
+{% tab label="Linux" %}
+Linux instructions for the second group.
+{% /tab %}
+{% tab label="Windows" %}
+Windows instructions for the second group.
+{% /tab %}
+{% tab label="macOS" %}
+macOS instructions for the second group.
+{% /tab %}
+{% /tabs %}
+
+## Content found in API docs tabs
+
+The API docs nest their content inside tabs. The examples below cover each type of content that the API spec puts inside a tab panel.
+
+### Headings and inline formatting
+
+{% tabs %}
+{% tab label="Headings" %}
+#### Metric alert query
+
+Example: `time_aggr(time_window):space_aggr:metric{tags} [by {key}] operator #`
+
+##### Query parameters
+
+The query uses a time aggregation and a space aggregation.
+{% /tab %}
+{% tab label="Inline" %}
+This endpoint requires **all** of the following permissions: `monitors_write` and `monitors_read`. The value is *optional* and defaults to `false`. For more information, see [Rate limits](/api/latest/rate-limits/).
+{% /tab %}
+{% /tabs %}
+
+### Lists
+
+{% tabs %}
+{% tab label="Unordered" %}
+This endpoint requires any of the following permissions:
+
+- `user_access_manage`
+- `user_app_keys`
+- `service_account_write`
+{% /tab %}
+{% tab label="Ordered" %}
+The upgrade process:
+
+1. Identifies all hosts that match the filter query.
+2. Validates that the specified version is available.
+3. Begins to roll out the package upgrade to the target hosts.
+{% /tab %}
+{% /tabs %}
+
+### Table
+
+{% tabs %}
+{% tab label="Table" %}
+The following resource types support restriction policies:
+
+| Resource type | Supported relations |
+|---------------|---------------------|
+| Dashboards | `viewer`, `editor` |
+| Notebooks | `viewer`, `editor` |
+| Powerpacks | `viewer`, `editor` |
+| Service Level Objectives | `viewer`, `editor` |
+{% /tab %}
+{% tab label="Text" %}
+A tab with plain text, next to a tab with a table.
+{% /tab %}
+{% /tabs %}
+
+### Code block and alert
+
+{% tabs %}
+{% tab label="Code block" %}
+The response has the following structure:
+
+```json
+{
+  "data": [...],
+  "meta": {
+    "page": { "after": "..." }
+  }
+}
+```
+
+Use the `after` value to request the next page.
+{% /tab %}
+{% tab label="Alert" %}
+{% alert level="warning" %}
+**Note**: This endpoint is in preview and is subject to change. If you have any feedback, contact [Datadog support](/help/).
+{% /alert %}
+
+Get the list of annotation queue interactions.
+{% /tab %}
+{% /tabs %}
+
+## Other Markdoc content
+
+Content that is common in Markdoc, but does not appear inside tabs in the API docs yet.
+
+### Nested list, blockquote, and horizontal rule
+
+{% tabs %}
+{% tab label="Nested list" %}
+- Top-level item
+  - Second-level item
+    - Third-level item
+- Another top-level item
+  1. Ordered child
+  2. Ordered child
+{% /tab %}
+{% tab label="Blockquote" %}
+> A blockquote inside a tab panel. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+---
+
+Text after a horizontal rule.
+{% /tab %}
+{% /tabs %}
+
+### Image
+
+{% tabs %}
+{% tab label="Image" %}
+{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" widthPercent=100 /%}
+{% /tab %}
+{% tab label="Text" %}
+A tab with text only, next to a tab with an image.
+{% /tab %}
+{% /tabs %}
+
+### Wide content
+
+{% tabs %}
+{% tab label="Wide table" %}
+| Parameter | Type | Required | Default | Description |
+|-----------|------|----------|---------|-------------|
+| `filter[query]` | string | No | `*` | A search query that filters the results. Lorem ipsum dolor sit amet, consectetur adipiscing elit. |
+| `page[size]` | integer | No | `10` | The number of results to return on each page. Sed do eiusmod tempor incididunt ut labore. |
+| `sort` | string | No | `-timestamp` | The sort order. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi. |
+{% /tab %}
+{% tab label="Long code" %}
+```shell
+curl -X GET "https://api.datadoghq.com/api/v2/security_monitoring/signals?filter[query]=security:attack%20status:high&filter[from]=2019-01-02T09:42:36.320Z&page[limit]=25" -H "Accept: application/json" -H "DD-API-KEY: ${DD_API_KEY}" -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+{% /tab %}
+{% /tabs %}

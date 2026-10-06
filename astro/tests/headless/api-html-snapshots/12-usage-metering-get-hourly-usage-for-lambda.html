@@ -215,7 +215,7 @@
               >Not supported in the US2-FED region</code
             >
           </div>
-          <h3>Overview</h3>
+          <h3 class="api-endpoint__overview-heading _api-endpoint__overview-heading_071384">Overview</h3>
           <p>
             Get hourly usage for Lambda. <strong>Note:</strong> This endpoint has been deprecated. Hourly usage data for
             all products is now available in the
@@ -228,14 +228,18 @@
             for the associated migration guide.
           </p>
           <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
-            <strong>Permissions: </strong><code>usage_read</code>
+            <p>This endpoint requires the <code>usage_read</code> permission.</p>
           </div>
-          <div class="api-endpoint__permissions _api-endpoint__permissions_071384">
-            <p>OAuth apps require the <code>usage_read</code> authorization scope to access this endpoint.</p>
+          <div class="api-endpoint__oauth-scopes _api-endpoint__oauth-scopes_071384">
+            <p>
+              OAuth apps require the <code>usage_read</code> authorization
+              <a href="/api/latest/scopes/#usage-metering">scope</a> to access this endpoint.
+            </p>
           </div>
           <div class="api-endpoint__section _api-endpoint__section_071384">
             <h3>Arguments</h3>
             <div id="schema-table-X32" class="schema-table">
+              <h4>Query Strings</h4>
               <div class="schema-table__table _schema-table__table_d7636a">
                 <div class="schema-table__columns _schema-table__columns_d7636a">
                   <div class="schema-table__columns-name _schema-table__columns-name_d7636a">Name</div>
@@ -255,10 +259,12 @@
                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                   </div>
                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                    <span
-                      >Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this
-                      hour.</span
-                    >
+                    <div class="schema-table__description _schema-table__description_d7636a">
+                      <p>
+                        Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage beginning at this
+                        hour.
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <div class="schema-table__row _schema-table__row_d7636a" data-field-name="end_hr" data-depth="0">
@@ -271,10 +277,12 @@
                     <span class="schema-table__type _schema-table__type_d7636a">string</span>
                   </div>
                   <div class="schema-table__cell-description _schema-table__cell-description_d7636a">
-                    <span
-                      >Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending
-                      <strong>before</strong> this hour.</span
-                    >
+                    <div class="schema-table__description _schema-table__description_d7636a">
+                      <p>
+                        Datetime in ISO-8601 format, UTC, precise to hour: [YYYY-MM-DDThh] for usage ending
+                        <strong>before</strong> this hour.
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -380,6 +388,8 @@
                     aria-selected="true"
                     aria-controls="api-code-example-X34-panel-0"
                     data-tab-index="0"
+                    data-sync-group="code-lang"
+                    data-sync-key="curl"
                     class="tabs__button _tabs__button_d3f7cd tabs__button--active _tabs__button--active_d3f7cd"
                   >
                     Curl</button
@@ -388,6 +398,8 @@
                     aria-selected="false"
                     aria-controls="api-code-example-X34-panel-1"
                     data-tab-index="1"
+                    data-sync-group="code-lang"
+                    data-sync-key="go"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
                     Go</button
@@ -396,6 +408,8 @@
                     aria-selected="false"
                     aria-controls="api-code-example-X34-panel-2"
                     data-tab-index="2"
+                    data-sync-group="code-lang"
+                    data-sync-key="python"
                     class="tabs__button _tabs__button_d3f7cd"
                   >
                     Python
