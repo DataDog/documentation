@@ -130,9 +130,9 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-The following table lists the source attributes for each peer tag in the [Datadog Agent mapping registry][6]. Supported source attributes depend on the Agent version. To check a specific version, select its release tag in the Agent repository.
+The following table lists the source attributes for each peer tag in the [Datadog Agent mapping registry][6]. Supported source attributes depend on the Agent version. To check a specific version, select its release tag in the Agent repository. Older releases, such as 7.60.0, store these mappings in `pkg/trace/config/peer_tags.ini` instead of `pkg/trace/semantics/mappings.json`.
 
-Source attributes are listed from highest to lowest precedence. For each peer tag, Datadog uses the first source attribute with a non-empty value. For example, `db.system` takes precedence over `db.type` when deriving `peer.db.system`. This differs from the [precedence between peer tags](#precedence-of-peer-tags) used to name an inferred entity.
+Multiple source attributes can map to the same peer tag. For example, `db.system` and `db.type` are both supported sources for `peer.db.system`. The [precedence of peer tags][7] determines which peer tag names an inferred entity.
 
 Peer tag | Source attributes
 --------------------|-------------------
@@ -152,7 +152,7 @@ Peer tag | Source attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-**Note**: Peer attribute values that match IPv4 or IPv6 address formats are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
+**Note**: The Agent replaces IPv4 and IPv6 addresses in peer attribute values with `blocked-ip-address` to reduce metric cardinality. Localhost and certain cloud-provider metadata addresses are exempt, and port numbers are preserved. As a result, `blocked-ip-address` can appear in the names of downstream dependencies.
 
 #### Precedence of peer tags
 
@@ -184,6 +184,7 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [4]: /tracing/guide/service_overrides
 [5]: /tracing/services/renaming_rules/
 [6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/trace/semantics/mappings.json
+[7]: #precedence-of-peer-tags
 
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
