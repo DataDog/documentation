@@ -35,10 +35,7 @@ To start sending Error Tracking data from your iOS or tvOS application to Datado
 
 ### Step 1 - Declare the iOS SDK as a dependency
 
-Declare the iOS library as a dependency depending on your package manager. Datadog recommends using Swift Package Manager (SPM).
-
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+Declare the iOS library as a dependency.
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -50,44 +47,6 @@ In your project, link the following libraries:
 DatadogCore
 DatadogRUM
 ```
-
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCore'
-pod 'DatadogRUM'
-```
-
-[1]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-
-You can use [Carthage][1] to install `dd-sdk-ios`:
-
-```
-github "DataDog/dd-sdk-ios"
-```
-
-**Note**: Datadog does not provide prebuilt Carthage binaries. This means Carthage builds the SDK from source.
-To build and integrate the SDK, run:
-```
-carthage bootstrap --use-xcframeworks --no-use-binaries
-```
-
-After building, add the following XCFrameworks to your Xcode project (in the "Frameworks, Libraries, and Embedded Content" section):
-```
-DatadogInternal.xcframework
-DatadogCore.xcframework
-DatadogRUM.xcframework
-```
-
-[1]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 
 ### Step 2 - Specify application details in the UI
 
@@ -425,10 +384,7 @@ For more information, see [Web View Tracking][3].
 
 Crash reporting captures fatal crashes when your app terminates unexpectedly, in addition to the errors that Error Tracking displays in a unified interface.
 
-To enable crash reporting, add the package according to your dependency manager and update your initialization snippet.
-
-{{< tabs >}}
-{{% tab "Swift Package Manager (SPM)" %}}
+To enable crash reporting, add the package and update your initialization snippet.
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -439,34 +395,6 @@ In your project, link the following libraries:
 ```
 DatadogCrashReporting
 ```
-
-{{% /tab %}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCrashReporting'
-```
-
-[1]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-
-You can use [Carthage][1] to install `dd-sdk-ios`:
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-DatadogCrashReporting.xcframework
-```
-
-[1]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 
 Update your initialization snippet to include Crash Reporting:
 

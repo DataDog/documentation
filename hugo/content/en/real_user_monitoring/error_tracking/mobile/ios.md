@@ -37,20 +37,7 @@ If you have not set up the iOS SDK yet, follow the [in-app setup instructions][2
 
 ### Add crash reporting 
 
-To enable Crash Reporting, make sure to also enable [RUM][3]. Then, add the package according to your dependency manager and update your initialize snippet.  
-
-{{< tabs >}}
-{{% tab "CocoaPods" %}}
-
-You can use [CocoaPods][1] to install `dd-sdk-ios`:
-```
-pod 'DatadogCrashReporting'
-```
-
-[1]: https://cocoapods.org/
-
-{{% /tab %}}
-{{% tab "Swift Package Manager (SPM)" %}}
+To enable Crash Reporting, make sure to also enable [RUM][3]. Then, add the package and update your initialize snippet.  
 
 To integrate using Apple's Swift Package Manager, add the following as a dependency to your `Package.swift`:
 ```swift
@@ -61,24 +48,6 @@ In your project, link the following libraries:
 ```
 DatadogCrashReporting
 ```
-
-{{% /tab %}}
-{{% tab "Carthage" %}}
-
-You can use [Carthage][1] to install `dd-sdk-ios`:
-```
-github "DataDog/dd-sdk-ios"
-```
-
-In Xcode, link the following frameworks:
-```
-DatadogCrashReporting.xcframework
-```
-
-[1]: https://github.com/Carthage/Carthage
-
-{{% /tab %}}
-{{< /tabs >}}
 
 Update your initialization snippet to include Crash Reporting:
 
@@ -472,19 +441,19 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/ios
 [4]: /logs/log_collection/ios
-[5]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
-[6]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#get-deobfuscated-stack-traces
+[5]: /real_user_monitoring/error_tracking/mobile/ios/#configure-the-app-hang-threshold
+[6]: /real_user_monitoring/error_tracking/mobile/ios/#get-deobfuscated-stack-traces
 [7]: https://appstoreconnect.apple.com/
 [8]: https://www.npmjs.com/package/@datadog/datadog-ci
 [9]: https://github.com/DataDog/datadog-fastlane-plugin
 [10]: https://github.com/marketplace/actions/datadog-upload-dsyms
 [11]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/dsyms/README.md
 [12]: https://developer.apple.com/documentation/xcode/addressing-watchdog-terminations
-[13]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-app-hang-reporting
+[13]: /real_user_monitoring/error_tracking/mobile/ios/#add-app-hang-reporting
 [14]: /real_user_monitoring/application_monitoring/mobile_vitals?tab=ios#telemetry
 [15]: https://developer.apple.com/documentation/xcode/analyzing-responsiveness-issues-in-your-shipping-app#View-your-apps-hang-rate
 [16]: https://developer.apple.com/documentation/metrickit/mxhangdiagnostic
 [17]: /real_user_monitoring/explorer/search/#facets
 [18]: /dashboards/widgets/timeseries
-[19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
+[19]: /real_user_monitoring/error_tracking/mobile/ios/#add-crash-reporting
 [20]: https://app.datadoghq.com/source-code/setup/rum

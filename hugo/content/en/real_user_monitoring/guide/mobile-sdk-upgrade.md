@@ -16,8 +16,21 @@ Follow this guide to migrate between major versions of the Mobile RUM, Logs, and
 
 
 **Most common migrations**:
+- [**v3 to v4**](#from-v3-to-v4): Swift Package Manager as the dependency manager for the iOS SDK
 - [**v2 to v3**](#from-v2-to-v3): Focus on Open Tracing removal and API updates
 - [**v1 to v2**](#from-v1-to-v2): Major architectural changes to modular design
+
+## From v3 to v4
+
+This migration applies to the iOS SDK.
+
+### Breaking changes
+
+#### Dependency managers
+
+Support for CocoaPods and Carthage has been discontinued. Swift Package Manager is the supported dependency manager for the iOS SDK.
+
+To install the SDK with CocoaPods or Carthage, you can keep using iOS SDK v3 or earlier.
 
 ## From v2 to v3
 {{< tabs >}}

@@ -66,8 +66,6 @@ The SDK is built using the most recent version of [Xcode][1], but is always back
 The iOS SDK supports the following dependency managers:
 
 - [Swift Package Manager][3]
-- [Cocoapods][4]
-- [Carthage][5]
 
 ### Languages
 
@@ -106,9 +104,7 @@ The Datadog RUM SDK depends on the following third-party library:
 
 [1]: https://developer.apple.com/xcode/
 [2]: https://developer.apple.com/news/?id=fxu2qp7b
-[3]: /real_user_monitoring/application_monitoring/ios/setup/?tab=swiftpackagemanagerspm#declare-the-sdk-as-a-dependency
-[4]: /real_user_monitoring/application_monitoring/ios/setup/?tab=cocoapods#declare-the-sdk-as-a-dependency
-[5]: /real_user_monitoring/application_monitoring/ios/setup/?tab=carthage#declare-the-sdk-as-a-dependency
+[3]: /real_user_monitoring/application_monitoring/ios/setup/
 [6]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#alamofire
 [7]: /real_user_monitoring/application_monitoring/ios/integrated_libraries/#apollo-graphql
 [8]: /real_user_monitoring/application_monitoring/ios/integrated_libraries#sdwebimage
