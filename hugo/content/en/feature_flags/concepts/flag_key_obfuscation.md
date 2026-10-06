@@ -40,14 +40,6 @@ The following versions are planning targets, not confirmed releases. Confirm SDK
 | Flutter | `datadog_flags_flutter` | `1.3.0` |
 | Unity | `com.datadoghq.unity` | `2.1.0` |
 
-React Native support is not included in this rollout. Updating its native iOS or Android dependency alone does not enable obfuscation.
-
-<!-- Draft targets: each repository package version plus one minor, checked 2026-10-06.
-Browser 2.0.0; iOS 3.19.0; Android 3.15.0-SNAPSHOT; Dart/Flutter Flags 1.2.0; Unity 2.0.0.
-The browser release must include the compatible @datadog/flagging-core release (planned 3.2.0, from 3.1.1).
-Replace planning language with confirmed minimum versions before publishing this page.
--->
-
 ## How flag key obfuscation works
 
 1. Datadog evaluates flags for the subject and context supplied by the SDK.
