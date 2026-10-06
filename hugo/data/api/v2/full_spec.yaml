@@ -50761,6 +50761,53 @@ components:
         page:
           $ref: "#/components/schemas/FleetAgentsV2Page"
       type: object
+    FleetConfigFileSchemaV2:
+      description: A configuration file's schema.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FleetConfigFileSchemaV2Attributes"
+        id:
+          description: An identifier for the resolved schema.
+          example: "datadog.json"
+          type: string
+        type:
+          $ref: "#/components/schemas/FleetConfigFileSchemaV2ResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FleetConfigFileSchemaV2Attributes:
+      description: Attributes for a configuration file's schema.
+      properties:
+        schema:
+          description: The schema for the requested configuration file.
+          type: object
+      required:
+        - schema
+      type: object
+    FleetConfigFileSchemaV2ResourceType:
+      default: config_file_schema
+      description: The type of the configuration file schema resource.
+      enum:
+        - config_file_schema
+      example: config_file_schema
+      type: string
+      x-enum-varnames:
+        - CONFIG_FILE_SCHEMA
+    FleetConfigFileSchemaV2Response:
+      description: Response containing the schema for a configuration file.
+      properties:
+        data:
+          $ref: "#/components/schemas/FleetConfigFileSchemaV2ResponseData"
+      required:
+        - data
+      type: object
+    FleetConfigFileSchemaV2ResponseData:
+      description: The schema resolved for the requested configuration file.
+      oneOf:
+        - $ref: "#/components/schemas/FleetIntegrationSchemaDetailV2"
+        - $ref: "#/components/schemas/FleetConfigFileSchemaV2"
     FleetConfigurationFileV2:
       description: A configuration file for an integration.
       properties:
@@ -51554,6 +51601,271 @@ components:
           example: "postgres"
           type: string
       type: object
+    FleetIntegrationSchemaDeprecationV2:
+      additionalProperties: {}
+      description: >-
+        Deprecation information for a configuration option. Currently carries no fields and is always emitted as an empty object or `null`.
+      nullable: true
+      type: object
+    FleetIntegrationSchemaDetailV2:
+      description: The detailed configuration schema for a single integration.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/FleetIntegrationSchemaDetailV2Attributes"
+        id:
+          description: The integration name used to look up the schema, echoed back from the request.
+          example: "postgres"
+          type: string
+        type:
+          $ref: "#/components/schemas/FleetIntegrationSchemaV2ResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    FleetIntegrationSchemaDetailV2Attributes:
+      description: Attributes for a single integration's configuration schema.
+      properties:
+        files:
+          description: >-
+            The configuration file specifications for the integration. Always present, returned as an empty array when there are none.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaFileSpecV2"
+          type: array
+        folder:
+          description: The integration folder key. Absent from the response when empty.
+          example: "postgres"
+          type: string
+        name:
+          description: The display name of the integration. Absent from the response when empty.
+          example: "PostgreSQL"
+          type: string
+        version:
+          description: The integration version. Absent from the response when empty.
+          example: "1.0.0"
+          type: string
+      required:
+        - files
+      type: object
+    FleetIntegrationSchemaFileSpecV2:
+      description: A configuration file specification for an integration.
+      properties:
+        example_name:
+          description: The name of the example configuration file.
+          example: "conf.yaml.example"
+          type: string
+        name:
+          description: The name of the configuration file.
+          example: "conf.yaml"
+          type: string
+        options:
+          description: The configuration options declared in the file.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecOptionV2"
+          type: array
+      required:
+        - name
+        - example_name
+        - options
+      type: object
+    FleetIntegrationSchemaSpecOptionV2:
+      description: A single configuration option within an integration's configuration file.
+      properties:
+        deprecation:
+          $ref: "#/components/schemas/FleetIntegrationSchemaDeprecationV2"
+          description: >-
+            Deprecation information for the option. Always present, though it currently carries no fields.
+        description:
+          description: A human-readable description of the option.
+          example: "The host to connect to."
+          type: string
+        display_priority:
+          description: The display order priority of the option relative to other options.
+          example: 1
+          format: int64
+          type: integer
+        enabled:
+          description: Whether the option is enabled by default.
+          example: true
+          type: boolean
+        example:
+          description: An example value for the option. Can be any JSON type. Absent from the response when not set.
+        hidden:
+          description: Whether the option is hidden from the default configuration UI.
+          example: false
+          type: boolean
+        metadata_tags:
+          description: >-
+            Metadata tags associated with the option. Returned as an empty array when the option has no tags.
+          example:
+            - "team:integrations"
+          items:
+            description: A metadata tag associated with the option.
+            example: "team:integrations"
+            type: string
+          type: array
+        multiple:
+          description: Whether the option accepts multiple values.
+          example: false
+          type: boolean
+        multiple_instances_defined:
+          description: Whether multiple instances of this option are defined in the configuration file.
+          example: false
+          type: boolean
+        name:
+          description: The option name.
+          example: "host"
+          type: string
+        options:
+          description: Nested options. Absent from the response when the option has no nested options.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecOptionV2"
+          type: array
+        prefill:
+          description: A prefill value for the option. Can be any JSON type. Absent from the response when not set.
+        required:
+          description: Whether the option is required.
+          example: true
+          type: boolean
+        secret:
+          description: >-
+            Whether the option is a secret that should be masked. Absent from the response when not set, distinct from being explicitly set to `false`.
+          type: boolean
+        value:
+          $ref: "#/components/schemas/FleetIntegrationSchemaSpecValueV2"
+          description: >-
+            The value specification for this option. Absent from the response when the option is not a leaf value.
+      required:
+        - name
+        - description
+        - required
+        - hidden
+        - enabled
+        - multiple
+        - multiple_instances_defined
+        - display_priority
+        - metadata_tags
+        - deprecation
+      type: object
+    FleetIntegrationSchemaSpecPropertyV2:
+      description: >-
+        A property of an object-typed configuration value. A `oneOf` keyword (an array of exclusive alternative value specifications this property can match) can appear directly on this object when alternatives apply.
+      properties:
+        additionalProperties:
+          description: >-
+            Whether, or which, additional properties are allowed on the object. Can be a boolean or a nested schema. Present only when `type` is `object`.
+        anyOf:
+          description: Alternative value specifications this property can match. Absent when none apply.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecValueV2"
+          type: array
+        items:
+          $ref: "#/components/schemas/FleetIntegrationSchemaSpecValueV2"
+          description: The value specification for array items. Present only when `type` is `array`.
+        name:
+          description: The property name.
+          example: "host"
+          type: string
+        properties:
+          description: >-
+            Nested properties. Present only when `type` is `object` and the object declares properties.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecPropertyV2"
+          type: array
+        type:
+          description: The JSON Schema type of the property, such as `string` or `boolean`. Absent when not set.
+          example: "string"
+          type: string
+      required:
+        - name
+      type: object
+    FleetIntegrationSchemaSpecValueV2:
+      description: |-
+        A JSON Schema-like specification for a configuration value.
+
+        Object-typed values always include a `properties` array, even when empty.
+        Non-object-typed values never include `properties`. Throughout this schema,
+        an empty array is meaningfully different from an absent field.
+
+        Three further JSON Schema keywords can appear directly on this object but are
+        not listed among its properties below to avoid clashing with this document's
+        own schema composition keywords: `enum` (an array of allowed values, present
+        only when there are enum constraints), `required` (an array of required
+        property names, present only when `type` is `object`), and `oneOf` (an array
+        of exclusive alternative value specifications this value can match, present
+        only when there are alternatives).
+      properties:
+        additionalProperties:
+          description: >-
+            Whether, or which, additional properties are allowed on the object. Can be a boolean or a nested schema. Present only when `type` is `object`.
+        anyOf:
+          description: Alternative value specifications this value can match. Absent when none apply.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecValueV2"
+          type: array
+        default:
+          description: The default value. Can be any JSON type. Absent when not set.
+        description:
+          description: A human-readable description of the value. Absent when not set.
+          type: string
+        display_default:
+          description: >-
+            A legacy, display-formatted representation of the default value. Can be any JSON type. Absent when not set.
+        example:
+          description: An example value. Can be any JSON type. Absent when not set.
+        exclusiveMaximum:
+          description: The maximum allowed numeric value, exclusive. Absent when not set.
+          format: double
+          type: number
+        exclusiveMinimum:
+          description: The minimum allowed numeric value, exclusive. Absent when not set.
+          format: double
+          type: number
+        items:
+          $ref: "#/components/schemas/FleetIntegrationSchemaSpecValueV2"
+          description: The value specification for array items. Present only when `type` is `array`.
+        maxLength:
+          description: The maximum allowed string length. Absent when not set.
+          format: int64
+          type: integer
+        maximum:
+          description: The maximum allowed numeric value, inclusive. Absent when not set.
+          format: double
+          type: number
+        minLength:
+          description: The minimum allowed string length. Absent when not set.
+          format: int64
+          type: integer
+        minimum:
+          description: The minimum allowed numeric value, inclusive. Absent when not set.
+          format: double
+          type: number
+        pattern:
+          description: A regular expression the string value must match. Absent when not set.
+          type: string
+        properties:
+          description: >-
+            The object's declared properties. Present when `type` is `object`, including as an empty array when the object declares no properties. Absent for non-object types.
+          items:
+            $ref: "#/components/schemas/FleetIntegrationSchemaSpecPropertyV2"
+          type: array
+        secret:
+          description: Whether the value is a secret that should be masked. Absent when not set.
+          type: boolean
+        type:
+          description: The JSON Schema type of the value, such as `string` or `object`. Absent when not set.
+          example: "string"
+          type: string
+      type: object
+    FleetIntegrationSchemaV2ResourceType:
+      default: integration_schema
+      description: The type of the integration schema resource.
+      enum:
+        - integration_schema
+      example: integration_schema
+      type: string
+      x-enum-varnames:
+        - INTEGRATION_SCHEMA
     FleetIntegrationsByStatusV2:
       description: Integrations organized by their status.
       properties:
@@ -172303,6 +172615,91 @@ paths:
       x-menu-order: 11
       "x-permission":
         operator: OR
+        permissions:
+          - hosts_read
+  /api/v2/fleet/schemas/config-file:
+    get:
+      description: |-
+        Retrieve the schema for a configuration file, identified by the file
+        path reported by the Datadog Agent. A schema describes the structure
+        and options of a configuration file. Works for both integration
+        configuration files and core Agent configuration files.
+
+        The schema defines which fields can be edited remotely from Fleet
+        Automation using `POST /api/v2/fleet/deployments/configure`.
+      operationId: GetFleetConfigFileSchemaV2
+      parameters:
+        - description: >-
+            The configuration file path reported by the Datadog Agent (for example, `conf.d/postgres.d/conf.yaml` or `datadog.yaml`).
+          example: "conf.d/postgres.d/conf.yaml"
+          in: query
+          name: file_path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        files:
+                          - example_name: "conf.yaml.example"
+                            name: "conf.yaml"
+                            options:
+                              - deprecation: {}
+                                description: "The host to connect to."
+                                display_priority: 1
+                                enabled: true
+                                hidden: false
+                                metadata_tags: []
+                                multiple: false
+                                multiple_instances_defined: false
+                                name: "host"
+                                required: true
+                                value:
+                                  description: "The host to connect to."
+                                  example: "localhost"
+                                  type: "string"
+                        folder: "postgres"
+                        name: "PostgreSQL"
+                        version: "1.0.0"
+                      id: "postgres"
+                      type: integration_schema
+              schema:
+                $ref: "#/components/schemas/FleetConfigFileSchemaV2Response"
+          description: OK
+        "400":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    errors:
+                      - detail: "file_path is required"
+                        status: "400"
+                        title: "Bad Request"
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a configuration file's schema by path
+      tags:
+        - Fleet Automation
+      x-menu-order: 17
+      "x-permission":
+        operator: AND
         permissions:
           - hosts_read
   /api/v2/forms:

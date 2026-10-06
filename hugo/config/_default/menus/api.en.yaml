@@ -14650,6 +14650,18 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Get a configuration file's schema by path
+      url: /api/latest/fleet-automation/get-a-configuration-files-schema-by-path/
+      identifier: fleet-automation-get-a-configuration-files-schema-by-path
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetConfigFileSchemaV2
+        unstable: []
+        order: 17
     - name: Get a schedule by ID
       url: /api/latest/fleet-automation/get-a-schedule-by-id/
       identifier: fleet-automation-get-a-schedule-by-id

@@ -2336,6 +2336,10 @@
     "description": "Retrieve detailed information about a specific schedule by its unique identifier.",
     "summary": "Get a schedule by ID"
   },
+  "GetFleetConfigFileSchemaV2": {
+    "description": "Retrieve the schema for a configuration file, identified by the file\npath reported by the Datadog Agent. A schema describes the structure\nand options of a configuration file. Works for both integration\nconfiguration files and core Agent configuration files.\n\nThe schema defines which fields can be edited remotely from Fleet\nAutomation using `POST /api/v2/fleet/deployments/configure`.",
+    "summary": "Get a configuration file's schema by path"
+  },
   "ListForms": {
     "description": "Get all forms for the authenticated user's organization.",
     "summary": "List forms"
