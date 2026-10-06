@@ -14,17 +14,13 @@ further_reading:
   text: "Network Path List View"
 ---
 
-<div class="alert alert-info">Basic dynamic tests are in Preview and require Agent <code>v7.84+</code>.</div>
+<div class="alert alert-info">Basic dynamic tests are in Preview.</div>
 
 ## Overview
 
 Basic dynamic tests give hosts with [Cloud Network Monitoring][1] (CNM) hop-by-hop [Network Path][2] visibility into their highest-traffic connections, without configuring individual destinations. Basic dynamic tests are included with CNM at no additional cost.
 
-On each Agent with basic dynamic tests enabled:
-
-1. The Agent tracks the traffic volume (bytes sent and received) of the outgoing connections to other hosts that CNM observes.
-2. Five minutes after the Agent starts, and then every hour, the Agent selects up to five paths with the most traffic.
-3. The Agent runs one Network Path test on each selected path.
+Every hour, each Agent selects up to five of its highest-traffic paths and runs one Network Path test on each. The first selection happens five minutes after the Agent starts.
 
 Basic dynamic tests provide representative coverage of your busiest paths, but don't guarantee that a specific connection is tested. For broader coverage of the paths that CNM observes, use [standard dynamic tests][3].
 
@@ -88,7 +84,6 @@ datadog:
     enabled: true
 
   ## Enable the traceroute module of the system-probe.
-  ## The Helm chart sets this value explicitly, so it must be set to true.
   traceroute:
     enabled: true
 
@@ -101,28 +96,23 @@ datadog:
 {{% /tab %}}
 {{< /tabs >}}
 
-On Linux, macOS, and Windows hosts, the Agent turns on the system-probe traceroute module automatically when CNM and basic dynamic tests are enabled. If `traceroute.enabled` is set to `false` in your `system-probe.yaml` file, basic dynamic tests don't run. Remove the setting or set it to `true`.
-
 To disable basic dynamic tests, set `basic_tests_enabled` to `false` and restart the Agent.
 
 ## View results
 
 After about five minutes, open [Network Path][5] and filter for `origin:network_traffic`. This filter shows paths from both basic and standard dynamic tests.
 
-Each selected path is tested once. A path that remains among the highest-traffic paths is tested again in the next selection.
-
 ## Basic and standard dynamic tests
 
-|                    | Basic dynamic tests                                       | Standard dynamic tests                          |
-|--------------------|-----------------------------------------------------------|-------------------------------------------------|
-| **Coverage**       | Up to five of the highest-traffic paths per Agent         | All eligible paths that CNM observes, up to `pathtest_contexts_limit` (default: 1000) |
-| **Test frequency** | Every hour, for the selected paths                        | Every `pathtest_interval` (default: 30 minutes) |
-| **Setting**        | `network_path.connections_monitoring.basic_tests_enabled` | `network_path.connections_monitoring.enabled`   |
-| **Best for**       | Trying Network Path on your busiest connections           | Broad, predictable coverage                     |
+|                    | Basic dynamic tests                               | Standard dynamic tests                        |
+|--------------------|---------------------------------------------------|-----------------------------------------------|
+| **Coverage**       | Up to five of the highest-traffic paths per Agent | Broad coverage of the paths that CNM observes |
+| **Test frequency** | Every hour, for the selected paths                | Every 30 minutes by default                   |
+| **Best for**       | Trying Network Path on your busiest connections   | Predictable coverage of your connections      |
 
-If both settings are enabled, standard dynamic tests take precedence and basic dynamic tests don't run.
+If standard dynamic tests are also enabled, they take precedence and basic dynamic tests don't run.
 
-Both types of dynamic tests apply the same [filters][6]. Basic dynamic tests only select paths to destinations that your filters allow.
+Basic dynamic tests only select destinations allowed by your [filters][6].
 
 ## Troubleshooting
 
@@ -130,12 +120,11 @@ Both types of dynamic tests apply the same [filters][6]. Basic dynamic tests onl
 
 If no paths with `origin:network_traffic` appear in [Network Path][5], verify the following:
 
-1. The Agent is version `7.84+`.
-2. CNM is enabled and shows connections from the host on the [CNM Analytics][7] page.
-3. `network_path.connections_monitoring.basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
-4. `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
-5. The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
-6. Your [filters][6] don't exclude the destinations you expect to see.
+1. The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
+2. CNM shows connections from the host on the [CNM Analytics][7] page.
+3. `traceroute.enabled` is not set to `false` in `system-probe.yaml`. For Helm, `datadog.traceroute.enabled` is set to `true`.
+4. The host has outgoing connections to destinations with a domain name. By default, dynamic tests skip destinations without a domain name. To include these destinations, set `network_path.collector.monitor_ip_without_domain` to `true`.
+5. Your [filters][6] don't exclude the destinations you expect to see.
 
 ## Further Reading
 
