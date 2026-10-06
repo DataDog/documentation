@@ -112,7 +112,7 @@ If you cannot see your traces, see [Troubleshooting][7].
 
 Logic Apps Standard workflows can export traces and logs with Azure's built-in OpenTelemetry support. The Logic App sends this telemetry directly to the [Datadog OTLP intake endpoint][8], without a Datadog Agent or OpenTelemetry Collector.
 
-OpenTelemetry and diagnostic logs capture different data, so you can use them together. For a comparison, see [Compare OpenTelemetry and diagnostic log traces](#compare-opentelemetry-and-diagnostic-log-traces).
+OpenTelemetry and diagnostic logs capture different data, so you can use them together.
 
 ### Requirements
 
@@ -180,20 +180,6 @@ Changing app settings restarts the Logic App.
 3. Open a trace and select the {{< ui >}}Logs{{< /ui >}} tab on the Logic App span to see the workflow's logs for that request.
 
 If the request that starts the workflow carries W3C trace context headers (`traceparent`), the Logic App span joins the caller's trace. HTTP actions in the workflow propagate trace context to the services they call, so a chain of instrumented services and workflows appears as a single distributed trace.
-
-### Compare OpenTelemetry and diagnostic log traces
-
-| | OpenTelemetry | Diagnostic logs |
-|---|---|---|
-| Spans per workflow run | One server span for the request that runs the workflow | One span for the workflow and one span for each action |
-| Resource name | HTTP method, for example `POST` | Workflow or action name |
-| Action names and durations | Not included | Included |
-| Error details | HTTP status code only | Error message for each failed action |
-| HTTP attributes | Method, status code, and user agent | Not included |
-| Connection to other services | Joins the caller's trace and propagates context through HTTP actions | Standalone trace for each workflow run |
-| Supported triggers | HTTP, Service Bus, and Event Hubs | All triggers |
-
-Use OpenTelemetry to follow requests end to end across services, and diagnostic logs to see which action in a workflow failed and how long each action took.
 
 ## Further Reading
 
