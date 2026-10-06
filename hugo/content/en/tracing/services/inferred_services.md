@@ -20,7 +20,7 @@ Datadog automatically discovers the dependencies for an instrumented service, su
 
 {{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 
-Explore inferred services in the [Catalog][1] by filtering entries by entity type, such as database, queue, or third-party API. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
+Explore inferred services in the [Catalog][1] by filtering entries by entity type, such as databases, queues, or third-party APIs. Each [service page][2] is tailored to the type of service you are investigating. For instance, database service pages show database-specific insights and include database monitoring data if you are using [Database Monitoring][3].
 
 ## Set up inferred services
 {{< tabs >}}
@@ -130,7 +130,11 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 ### Peer tags
 
-Peer Tag | Source Attributes
+The following table lists the source attributes for each peer tag in the [Datadog Agent mapping registry][6]. Supported source attributes depend on the Agent version. To check a specific version, select its release tag in the Agent repository.
+
+For example, `db.type` can supply the value for `peer.db.system` even when the span does not have a `db.system` attribute.
+
+Peer tag | Source attributes
 --------------------|-------------------
 `peer.aws.dynamodb.table` | `tablename`
 `peer.aws.kinesis.stream` | `streamname`
@@ -139,8 +143,8 @@ Peer Tag | Source Attributes
 `peer.cassandra.contact.points` | `db.cassandra.contact.points`
 `peer.couchbase.seed.nodes` | `db.couchbase.seed.nodes`
 `peer.db.name` | `db.name`, `mongodb.db`, `db.instance`, `cassandra.keyspace`, `db.namespace`
-`peer.db.system` | `db.system`
-`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`
+`peer.db.system` | `db.system.name`, `db.system`, `active_record.db.vendor`, `db.type`, `sequel.db.vendor`
+`peer.hostname` | `peer.hostname`, `hostname`, `net.peer.name`, `db.hostname`, `network.destination.name`, `grpc.host`, `http.host`, `server.address`, `http.server_name`, `out.host`, `dns.hostname`, `network.destination.ip`
 `peer.kafka.bootstrap.servers` | `messaging.kafka.bootstrap.servers`
 `peer.messaging.destination` | `topicname`, `messaging.destination`, `messaging.destination.name`, `messaging.rabbitmq.exchange`, `amqp.destination`, `amqp.queue`, `amqp.exchange`, `msmq.queue.path`, `aws.queue.name`
 `peer.messaging.system` | `messaging.system`
@@ -148,7 +152,7 @@ Peer Tag | Source Attributes
 `peer.rpc.system` | `rpc.system`
 `peer.service` | `peer.service`
 
-**Note**: Peer attribute values that match IP address formats are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
+**Note**: Peer attribute values that match IPv4 or IPv6 address formats are modified and redacted with `blocked-ip-address` to prevent unnecessary noise and tagging metrics with high-cardinality dimensions. As a result, you may encounter some `blocked-ip-address` services appearing as downstream dependencies of your instrumented services.
 
 #### Precedence of peer tags
 
@@ -156,8 +160,8 @@ To assign the name to inferred entities, Datadog uses a specific order of preced
 
 Entity type | Order of precedence
 -----------|----------------
-Database | `peer.db.name` > `peer.aws.s3.bucket` (For AWS S3) / `peer.aws.dynamodb.table` (For AWS DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
-Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for AWS SQS) / `peer.aws.kinesis.stream` (For AWS Kinesis) > `peer.messaging.system`
+Database | `peer.db.name` > `peer.aws.s3.bucket` (For Amazon S3) / `peer.aws.dynamodb.table` (For Amazon DynamoDB) / `peer.cassandra.contact.points` (For Cassandra) / `peer.couchbase.seed.nodes` (For Couchbase) > `peer.hostname` > `peer.db.system`
+Queue | `peer.messaging.destination` > `peer.kafka.bootstrap.servers` (for Kafka) / `peer.aws.sqs.queue` (for Amazon SQS) / `peer.aws.kinesis.stream` (For Amazon Kinesis) > `peer.messaging.system`
 Inferred service | `peer.service` > `peer.rpc.service` > `peer.hostname`
 
 If the highest priority tag, such as `peer.db.name`, is not captured as part of the instrumentation, Datadog uses the second highest priority tag, like `peer.hostname`, and continue in that order.
@@ -168,7 +172,7 @@ If the highest priority tag, such as `peer.db.name`, is not captured as part of 
 
 With inferred services, service dependencies are automatically detected from existing span attributes. As a result, changing service names (using the `service` tag) is not required to identify these dependencies. 
 
-Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to ensure no Datadog integration sets service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported SDK languages and integrations.
+Enable `DD_TRACE_REMOVE_INTEGRATION_SERVICE_NAMES_ENABLED` to prevent Datadog integrations from setting service names that are different from the default global service name. This also improves how service-to-service connections and inferred services are represented in Datadog visualizations, across all supported languages and integrations.
 
 <div class="alert alert-danger">Enabling this option may impact existing APM metrics, custom span metrics, trace analytics, retention filters, sensitive data scans, monitors, dashboards, or notebooks that reference the old service names. Update these assets to use the global default service tag (<code>service:&lt;DD_SERVICE&gt;</code>).</div>
 
@@ -179,10 +183,11 @@ For instructions on how to remove service overrides and migrate to inferred serv
 [3]: /database_monitoring/
 [4]: /tracing/guide/service_overrides
 [5]: /tracing/services/renaming_rules/
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/trace/semantics/mappings.json
 
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-info">The Inferred Services feature is not available by default in your datacenter. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
+<div class="alert alert-info">The Inferred Services feature is not available by default in your data center. Fill out this <a href="https://docs.google.com/forms/d/1imGm-4SfOPjwAr6fwgMgQe88mp4Y-n_zV0K3DcNW4UA" target="_blank">form</a> to request access.</div>
 
 {{< /site-region >}}
 
