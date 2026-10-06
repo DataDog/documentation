@@ -380,7 +380,7 @@ Consultez l'onglet [Manuel](?tab=manual#instrumentation) pour obtenir les descri
    Dans Azure, ajoutez les paires clé-valeur suivantes dans {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Environment Variables{{< /ui >}} > {{< ui >}}App Settings{{< /ui >}} :
 
 `DD_API_KEY`
-: **Valeur**: Votre clé Datadog API.<br>
+: **Valeur**: Votre clé d'API Datadog.<br>
 Consultez [Organization Settings > API Keys][301] dans Datadog.<br>
 
 `DD_SITE`
@@ -763,6 +763,8 @@ Assurez-vous d'activer {{< ui >}}App Service logs{{< /ui >}} pour recevoir les l
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Configuration d'Azure App Service : logs App Service, sous la section Monitoring des Paramètres dans l'interface utilisateur Azure. L'option 'Application logging' est définie sur 'File System'." style="width:100%;" >}}
 
 Partagez le contenu de {{< ui >}}Log stream{{< /ui >}} avec [Datadog Support][9].
+
+Si la mise à l'échelle automatique est activée sur le plan App Service et que vous voyez des traces sans rapport fusionnées, les sondes d'intégrité de la plateforme Azure (`User-Agent: HttpScaleManager`) pourraient transporter un contexte de trace W3C obsolète. Si tous les appelants de l'application sont instrumentés par Datadog, définissez `DD_TRACE_PROPAGATION_STYLE_EXTRACT=datadog` sur l'application concernée pour limiter l'extraction du contexte de trace au format de Datadog. Pour les applications dont les appelants ne sont pas instrumentés par Datadog, ce paramètre fait en sorte que Datadog ignore leur contexte de trace W3C, fragmentant ainsi ces requêtes en traces déconnectées au lieu de les fusionner avec la trace parente.
 
 ## Pour aller plus loin {#further-reading}
 

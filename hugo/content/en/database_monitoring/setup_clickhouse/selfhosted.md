@@ -16,11 +16,11 @@ further_reading:
   text: "Specifying a Database Identifier"
 - link: "/database_monitoring/guide/clickhouse_agent_upgrade"
   tag: "Documentation"
-  text: "Upgrading your agent to 7.84+"
+  text: "Upgrading the ClickHouse integration from Agent versions earlier than 7.84"
 ---
 
 <div class="alert alert-info">
-This feature is in preview and requires Datadog Agent v7.78 or later. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
+This feature is in preview and requires Datadog Agent v7.84 or later. If you set up Database Monitoring for ClickHouse with an Agent version earlier than 7.84, see <a href="/database_monitoring/guide/clickhouse_agent_upgrade/">Upgrading the ClickHouse integration</a> to grant the additional permissions before you upgrade. Customers who participate in the Datadog Database Monitoring for ClickHouse preview <strong>will not be charged</strong> for usage incurred during the preview period. No additional enablement is required; follow the setup instructions below to get started.
 </div>
 
 Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into your ClickHouse clusters by collecting query metrics, live query samples, and completed query records to help you resolve issues and optimize query performance across your entire fleet.
@@ -28,10 +28,10 @@ Datadog Database Monitoring (DBM) for ClickHouse provides deep visibility into y
 ## Before you begin
 
 Supported ClickHouse versions
-: 23.x and later (23.x, 24.x, 25.x). Recommended minimum: 23.8 LTS.
+: 23.x and later (23.x, 24.x, 25.x, 26.3). Recommended minimum: 23.8 LTS.
 
 Supported Agent versions
-: 7.78+
+: 7.84+
 
 ## Data collected
 

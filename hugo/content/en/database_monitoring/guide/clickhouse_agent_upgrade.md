@@ -16,6 +16,8 @@ further_reading:
 
 ## Overview
 
+Database Monitoring for ClickHouse requires Datadog Agent 7.84 or later. If you set up the integration with an earlier Agent version, follow this guide to upgrade.
+
 Starting with Agent version 7.84, Database Monitoring for ClickHouse shows which node in your cluster ran each query. Query metrics, query samples, completed queries, and query errors are tagged with the node that served them, so you can:
 
 - Compare the performance of the same query across nodes.

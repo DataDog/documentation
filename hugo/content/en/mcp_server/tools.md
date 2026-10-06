@@ -489,11 +489,11 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -523,7 +523,7 @@ Creates a new [Work Management][38] work item (case) with a title, project, and 
 
 ### `update_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
 Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -539,12 +539,51 @@ Adds a comment to a work item (case) timeline. Comments support markdown formatt
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
+### `attach_file_to_datadog_case`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Uploads a file of up to 10 MiB and attaches it to a work item (case). The attachment remains in processing while Work Management validates it.
+
+- Attach the incident timeline I exported to CASE-1234.
+- Upload this screenshot of the error to the checkout latency work item.
+
+### `get_datadog_case_attachment`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists the attachments on a work item (case), or retrieves the contents of a specific attachment by ID.
+
+- What files are attached to CASE-1234?
+- Show me the screenshot attached to the database migration case.
+
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
+
+### `link_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
+
+- Mark CASE-1234 as blocking CASE-5678.
+- CASE-910 duplicates CASE-1234. Link them.
+
+### `get_datadog_case_links`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
+
+- What other work items are linked to CASE-1234?
+- Is anything blocking the database migration case?
+
+### `unlink_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
+
+- CASE-1234 no longer blocks CASE-5678. Remove that link.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
@@ -555,11 +594,18 @@ Lists available [Work Management][38] projects with optional filtering by name o
 - Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Read`*\
 Retrieves details for a specific project by ID.
 
 - What project is this work item part of?
+
+### `create_datadog_case_project`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Creates a [Work Management][38] project with default settings, given a name and an uppercase key used as the prefix for work items in the project.
+
+- Create a Work Management project called Platform Reliability with the key PLAT.
 
 ### `search_datadog_users`
 *Toolset: **cases***\
@@ -582,6 +628,20 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - What are my top cloud cost-saving recommendations?
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
+
+## Cloud Resources
+
+Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+
+### `get_cloud_resource_details`
+*Toolset: **cloud-resources***\
+*Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+
+- Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
+- What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
+- Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
+- What tags are set on this resource, and is it owned by a team?
 
 ## Code Execution
 
@@ -1071,6 +1131,15 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 - File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
 - Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
 - Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+### `get_datadog_error_tracking_analytics`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
+
+- Is the error backlog for the payments service growing or shrinking over the last 30 days?
+- How many new Error Tracking Issues were introduced compared to resolved last week?
+- Did regressions spike after last Tuesday's deploy?
 
 ## Experiments
 
@@ -3189,6 +3258,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [83]: /network_monitoring/network_path/
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
+[86]: /infrastructure/resource_catalog/
 
 ## Further reading
 
