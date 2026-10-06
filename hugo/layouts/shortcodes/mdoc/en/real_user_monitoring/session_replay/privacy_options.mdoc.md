@@ -57,7 +57,7 @@ After updating your configuration, you can override elements of your HTML docume
 
 ### Mask mode
 
-Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, links and [`data-*` attributes][3]. Text on your application is replaced with `X`, rendering the page into a wireframe.
+Setting `defaultPrivacyLevel` to `mask` mode masks all HTML text, user input, images, canvas contents, links, and [`data-*` attributes][3]. Text on your application is replaced with `X`, rendering the page into a wireframe.
 
 {% img src="real_user_monitoring/session_replay/browser-privacy-mask-all.png" alt="Mask mode" style="width:100%;" /%}
 
