@@ -41,10 +41,9 @@ Use the {{< ui >}}Show On{{< /ui >}} dropdown to limit change overlays to releva
 
 To view additional details or take additional actions, click on a change overlay or change within the change timeline.
 
-### Scope deployments changes
+### Scope deployment changes
 
 For APM deployments, an `env` must be specified. If you have an `env` or `datacenter` template variable set in your dashboard, deployments are filtered to match the selection. Otherwise, the `env` defaults to `prod`. 
-
 
 ## Further Reading
 
