@@ -24,6 +24,9 @@ further_reading:
     - link: '/llm_observability/investigate/evaluations/end_user_feedback'
       tag: 'Documentation'
       text: 'Learn about submitting end-user feedback'
+    - link: "https://www.datadoghq.com/blog/jev-evals-agent-observability/"
+      tag: "Blog"
+      text: "Using TypeSafe’s Jev for evals in Datadog Agent Observability"
 ---
 
 ## Overview

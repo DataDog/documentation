@@ -32,6 +32,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
+- link: "https://www.datadoghq.com/blog/supply-chain-firewall-code-security/"
+  tag: "Blog"
+  text: "Block malicious packages across your organization with Supply Chain Firewall and Datadog Code Security"
 aliases:
 - /code_analysis/
 ---

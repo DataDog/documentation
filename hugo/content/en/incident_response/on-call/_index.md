@@ -15,6 +15,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
   tag: "Blog"
   text: "Unify remediation and communication with Datadog Incident Response"
+- link: "https://www.datadoghq.com/blog/monitor-warehouse-data-quality-beyond-pipeline-health/"
+  tag: "Blog"
+  text: "Monitor warehouse data quality beyond pipeline health"
 cascade:
     algolia:
         rank: 70

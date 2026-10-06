@@ -34,6 +34,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/oci-content-pack
   tag: Blog
   text: Monitor OCI Audit Logs with Datadog Cloud SIEM
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 ## Overview

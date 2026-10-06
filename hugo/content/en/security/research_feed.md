@@ -1,5 +1,9 @@
 ---
 title: Security Research Feed
+further_reading:
+- link: "https://www.datadoghq.com/blog/supply-chain-firewall-code-security/"
+  tag: "Blog"
+  text: "Block malicious packages across your organization with Supply Chain Firewall and Datadog Code Security"
 ---
 
 The Datadog Security Research Feed provides continuously updated security-related content to help organizations stay ahead of emerging threats and vulnerabilities. Managed by Datadog's Security Research and Detection Engineering teams, the feed delivers timely insights into critical security developments, including:
@@ -33,3 +37,7 @@ An emerging threat is a new or evolving attack campaign or supply-chain attack t
 - **Widespread impact**: The threat has already affected a large number of systems or organizations, either through broad, opportunistic attacks, or targeted campaigns.
 - **Imminent threat**: The threat has already caused impact or is expected to escalate, with near-term attacks likely to affect many organizations.
 - **Significant visibility**: The issue is widely discussed in security communities and mainstream news, increasing awareness and urgency.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

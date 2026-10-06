@@ -31,6 +31,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/openai-datadog-ai-devops-agent/"
   tag: "Blog"
   text: "Datadog + OpenAI: Codex CLI integration for AI‑assisted DevOps"
+- link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+  tag: "Blog"
+  text: "Teaching a 9B model to investigate production alerts"
 algolia:
   tags: ["mcp", "mcp server"]
   rank: 90

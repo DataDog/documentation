@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
     tag: "Blog"
     text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
+  - link: "https://www.datadoghq.com/blog/ai/investigate-production-alerts/"
+    tag: "Blog"
+    text: "Teaching a 9B model to investigate production alerts"
 cascade:
     site_support_id: bits_investigation
 ---

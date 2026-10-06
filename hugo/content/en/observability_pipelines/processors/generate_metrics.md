@@ -6,6 +6,10 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-exabeam-packs/"
+  tag: "Blog"
+  text: "Process and route critical security logs to Exabeam with Observability Pipelines"
 ---
 
 {{< product-availability >}}
@@ -143,3 +147,7 @@ For [component metrics][10] and [processor buffer metrics][11] emitted by all pr
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
