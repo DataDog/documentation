@@ -1,7 +1,7 @@
 /**
  * Builds the footer view model from the websites-modules menus YAML at build
- * time. Consumers (Footer.astro) get fully resolved, split-into-columns data
- * via `getFooterData(lang)` — no inline assembly in the component template.
+ * time. Consumers (Footer.astro) get fully resolved, structured data via
+ * `getFooterData(lang)` — no inline assembly in the component template.
  * The locale is passed in because this module has no render context of its own.
  *
  * URL resolution mirrors footer_link.html: absolute URLs pass through;
@@ -14,7 +14,10 @@ import menusRaw from "@websites-modules/config/_default/menus/menus.en.yaml?raw"
 import { CORP_ORIGIN } from "@config/origins";
 import { useTranslations } from "@lib/i18n/i18n";
 import type { Locale } from "@lib/i18n/locale";
-import { getFooterProductLinks } from "@lib/componentUtils/menuData";
+import {
+  getFooterProductCategories,
+  type FooterProductCategory,
+} from "@lib/componentUtils/menuData";
 
 // ---------------------------------------------------------------------------
 // Raw schema (internal)
@@ -53,20 +56,20 @@ export type FooterLink = {
 
 export type FooterSocialLink = FooterLink & { pre: string };
 
-export type AccordionSectionId = "product" | "resources" | "about" | "blog";
+/** The three plain-list accordion sections, in the order upstream renders them. */
+export type FooterLinkSectionId = "resources" | "blog" | "about";
 
-export type FooterSection = {
-  id: AccordionSectionId;
+export type FooterLinkSection = {
+  id: FooterLinkSectionId;
   title: string;
-  firstColumn: FooterLink[];
-  secondColumn: FooterLink[];
-  /** Whether sub-columns stack vertically at ≥992px (true for Resources/About/Blog). */
-  stackOnDesktop: boolean;
+  links: FooterLink[];
 };
 
 export type FooterData = {
-  /** Four accordion columns ready to pass to FooterAccordion. */
-  accordionSections: FooterSection[];
+  /** The product column: nested categories, each with its subcategory groups. */
+  product: { title: string; categories: FooterProductCategory[] };
+  /** Resources / Blog / About, each a flat list of links. */
+  linkSections: FooterLinkSection[];
   /** Bottom-row legal links (Privacy, Terms, …). */
   sub: FooterLink[];
   /** Bottom-row social icons. */
@@ -85,14 +88,6 @@ export function resolveFooterUrl(url: string, langPrefix = ""): string {
   return `${CORP_ORIGIN}/${langPrefix}${trimmed}`;
 }
 
-/** Split a list in half; the first half gets the extra item when the count is odd. */
-export function splitHalves<T>(items: T[]): { first: T[]; second: T[] } {
-  const len = items.length;
-  const secondLen = Math.floor(len / 2);
-  const firstLen = len - secondLen;
-  return { first: items.slice(0, firstLen), second: items.slice(firstLen) };
-}
-
 // ---------------------------------------------------------------------------
 // Internal helpers
 // ---------------------------------------------------------------------------
@@ -105,22 +100,6 @@ const byWeight = <T extends { weight: number }>(a: T, b: T) =>
 
 function toFooterLink(it: RawItem): FooterLink {
   return { label: it.name, href: resolveFooterUrl(it.url), target: it.target };
-}
-
-function toSection(
-  id: AccordionSectionId,
-  title: string,
-  links: FooterLink[],
-  stackOnDesktop: boolean,
-): FooterSection {
-  const { first, second } = splitHalves(links);
-  return {
-    id,
-    title,
-    firstColumn: first,
-    secondColumn: second,
-    stackOnDesktop,
-  };
 }
 
 function sortedLinks(items: RawItem[]): FooterLink[] {
@@ -142,31 +121,26 @@ export function getFooterData(lang: Locale): FooterData {
     }));
 
   return {
-    accordionSections: [
-      toSection(
-        "product",
-        translate("product"),
-        getFooterProductLinks(lang),
-        false,
-      ),
-      toSection(
-        "resources",
-        translate("resources"),
-        sortedLinks(menus.footer_resources),
-        true,
-      ),
-      toSection(
-        "about",
-        translate("about"),
-        sortedLinks(menus.footer_about),
-        true,
-      ),
-      toSection(
-        "blog",
-        translate("blog"),
-        sortedLinks(menus.footer_blog),
-        true,
-      ),
+    product: {
+      title: translate("product"),
+      categories: getFooterProductCategories(lang),
+    },
+    linkSections: [
+      {
+        id: "resources",
+        title: translate("resources"),
+        links: sortedLinks(menus.footer_resources),
+      },
+      {
+        id: "blog",
+        title: translate("blog"),
+        links: sortedLinks(menus.footer_blog),
+      },
+      {
+        id: "about",
+        title: translate("about"),
+        links: sortedLinks(menus.footer_about),
+      },
     ],
     sub: sortedLinks(menus.footer_sub),
     social,
