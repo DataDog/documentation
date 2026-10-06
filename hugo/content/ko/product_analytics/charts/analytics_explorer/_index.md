@@ -65,10 +65,10 @@ title: 분석
 
 6. 빗금 친 세그먼트는 아직 진행 중인 간격을 나타냅니다. 
 
-## 자세히 알아보기 {#learn-more}
+## 다음 단계 {#next-steps}
 {{< whatsnext desc="분석 이벤트를 검색, 그룹화 및 시각화하고 개별 이벤트를 내보내거나 확인하는 방법을 알아보세요." >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/search_syntax" >}}검색 구문{{< /nextlink >}}
-    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}} Events {{< /nextlink >}}
+    {{< nextlink href="product_analytics/charts/analytics_explorer/events" >}}Events{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/visualize" >}}시각화{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/group" >}}그룹{{< /nextlink >}}
     {{< nextlink href="product_analytics/charts/analytics_explorer/export" >}}내보내기{{< /nextlink >}}

@@ -655,6 +655,11 @@ menu:
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
       parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
+      parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
       identifier: agent_guides
@@ -1555,51 +1560,21 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits Investigation
-      url: bits_ai/bits_investigation
-      identifier: bits_ai_sre
+    - name: Bits Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
-    - name: Investigate Issues
-      url: bits_ai/bits_investigation/investigate_issues
-      identifier: bits_ai_sre_investigate_issues
-      parent: bits_ai_sre
-      weight: 101
-    - name: Bits Investigation Integrations and Settings
-      url: bits_ai/bits_investigation/configure
-      identifier: bits_ai_sre_configure
-      parent: bits_ai_sre
-      weight: 102
-    - name: Knowledge Sources
-      url: bits_ai/bits_investigation/knowledge_sources
-      identifier: bits_ai_sre_knowledge_sources
-      parent: bits_ai_sre
-      weight: 103
-    - name: Chat with Bits Investigation
-      url: bits_ai/bits_investigation/chat_bits_investigation
-      identifier: bits_ai_sre_chat
-      parent: bits_ai_sre
-      weight: 104
-    - name: Improve Bits Investigation Accuracy
-      url: bits_ai/bits_investigation/improve_accuracy
-      identifier: bits_ai_sre_improve_accuracy
-      parent: bits_ai_sre
-      weight: 105
-    - name: Bits Remediation
-      url: bits_ai/bits_remediation
-      identifier: bits_remediation
+    - name: Bits Chat
+      url: bits_ai/bits_chat
+      identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
-    - name: Bits Detection
-      url: bits_ai/bits_detection
-      identifier: bits_detection
-      parent: bits_ai
-      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 4
+      weight: 3
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1615,31 +1590,71 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_slack_code_channels
       weight: 303
-    - name: Bits Security Analyst
-      url: bits_ai/bits_security_analyst
-      identifier: bits_ai_bits_security_analyst
-      parent: bits_ai
-      weight: 5
-    - name: Bits Chat
-      url: bits_ai/bits_chat
-      identifier: bits_ai_bits_chat
-      parent: bits_ai
-      weight: 6
-    - name: Bits Agent Builder
-      url: actions/agents/
-      identifier: bits_ai_agent_builder
-      parent: bits_ai
-      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
+      weight: 4
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      identifier: bits_ai_database_optimization
+      parent: bits_ai
+      weight: 5
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
+      parent: bits_ai
+      weight: 6
+    - name: Bits Investigation
+      url: bits_ai/bits_investigation
+      identifier: bits_ai_sre
+      parent: bits_ai
+      weight: 7
+    - name: Investigate Issues
+      url: bits_ai/bits_investigation/investigate_issues
+      identifier: bits_ai_sre_investigate_issues
+      parent: bits_ai_sre
+      weight: 701
+    - name: Bits Investigation Integrations and Settings
+      url: bits_ai/bits_investigation/configure
+      identifier: bits_ai_sre_configure
+      parent: bits_ai_sre
+      weight: 702
+    - name: Knowledge Sources
+      url: bits_ai/bits_investigation/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
+      parent: bits_ai_sre
+      weight: 703
+    - name: Chat with Bits Investigation
+      url: bits_ai/bits_investigation/chat_bits_investigation
+      identifier: bits_ai_sre_chat
+      parent: bits_ai_sre
+      weight: 704
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 705
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger
+      identifier: bits_ai_live_debugger
+      parent: bits_ai
       weight: 8
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 9
+    - name: Bits Security Analyst
+      url: bits_ai/bits_security_analyst
+      identifier: bits_ai_bits_security_analyst
+      parent: bits_ai
+      weight: 10
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 9
+      weight: 11
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2744,10 +2759,10 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_transition_forms
       weight: 203
-    - name: Responder Types
-      url: incident_response/incident_management/setup_and_configuration/responder_types
+    - name: Responder Roles
+      url: incident_response/incident_management/setup_and_configuration/responder_roles
       parent: incidents_settings
-      identifier: incidents_settings_responder_types
+      identifier: incidents_settings_responder_roles
       weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations
@@ -3201,11 +3216,16 @@ menu:
       parent: actions_connections
       identifier: actions_google_workspace
       weight: 103
+    - name: GitHub App Connection
+      url: actions/connections/github_app/
+      parent: actions_connections
+      identifier: actions_github_app
+      weight: 104
     - name: Private Action Credentials
       url: actions/connections/private_action_credentials/
       parent: actions_connections
       identifier: private_actions_creds
-      weight: 104
+      weight: 105
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -5410,16 +5430,21 @@ menu:
       parent: dbm
       identifier: dbm_bits_database_optimization
       weight: 22
+    - name: Database Monitoring Workbench
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 23
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 23
+      weight: 24
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 24
+      weight: 25
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5441,11 +5466,6 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
-    - name: Data Collection
-      url: data_streams/kafka/data_collection
-      identifier: data_streams_kafka_data_collection
-      parent: data_streams_kafka
-      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
@@ -5950,6 +5970,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
+    - name: Training Page
+      url: gpu_monitoring/training/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_training
+      weight: 4
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -8247,16 +8272,21 @@ menu:
       url: /security/code_security/software_composition_analysis/configuration/
       parent: software_composition_analysis
       weight: 3
+    - name: Supply Chain Firewall (SCFW)
+      identifier: sca_supply_chain_firewall
+      url: /security/code_security/software_composition_analysis/supply_chain_firewall/
+      parent: software_composition_analysis
+      weight: 4
     - name: Library Inventory
       identifier: sca_library_inventory
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
-      weight: 4
+      weight: 5
     - name: CVE Explorer
       identifier: sca_cve_explorer
       url: /security/code_security/software_composition_analysis/cve_explorer/
       parent: software_composition_analysis
-      weight: 5
+      weight: 6
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
