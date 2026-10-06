@@ -100,7 +100,7 @@ To disable basic dynamic tests, set `basic_tests_enabled` to `false` and restart
 
 ## View results
 
-After about five minutes, open [Network Path][5] and filter for `origin:network_traffic`. This filter shows paths from both basic and standard dynamic tests.
+After about five minutes, open [Network Path][5] and filter for `test_run_type:dynamic`. This filter shows paths from all dynamic tests, including standard dynamic tests and Dynamic Tests for NetFlow.
 
 ## Basic and standard dynamic tests
 
@@ -118,7 +118,7 @@ Basic dynamic tests only select destinations allowed by your [filters][6].
 
 ### No paths from basic dynamic tests
 
-If no paths with `origin:network_traffic` appear in [Network Path][5], verify the following:
+If no paths with `test_run_type:dynamic` appear in [Network Path][5], verify the following:
 
 1. The [prerequisites](#prerequisites) are met, `basic_tests_enabled` is set to `true`, and at least five minutes have passed since the Agent restarted.
 2. CNM shows connections from the host on the [CNM Analytics][7] page.
