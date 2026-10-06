@@ -21,7 +21,7 @@ If your organization already maintains assignment groups in ServiceNow, you can 
 - Linking existing Datadog Teams to ServiceNow assignment groups, for example to route On-Call and Incidents by ServiceNow group.
 - Keeping team membership in-sync with ServiceNow, on a one-time or recurring schedule.
 
-Existing Datadog Teams are linked, not duplicated, when a Datadog team name matches a ServiceNow assignment group name exactly. All other existing Datadog Teams, and their permissions, are not affected.
+Existing Datadog Teams are linked, not duplicated, when a Datadog team [handle][7] matches a ServiceNow assignment group name. The match is case-insensitive and ignores whitespace differences. All other existing Datadog Teams, and their permissions, are not affected.
 
 Datadog has read-only access to ServiceNow assignment groups. It never writes to, creates, or modifies them.
 
@@ -58,6 +58,8 @@ The integration is configured per Datadog organization.
 ### Filter assignment groups
 
 By default, Datadog syncs every assignment group in the selected instances. To sync only a subset, add a filter in the [ServiceNow integration tile][3] using ServiceNow [encoded query syntax][4]. Datadog passes the filter to ServiceNow and receives only the matching assignment groups.
+
+Datadog imports up to 100,000 assignment groups per organization and up to 10,000 members per assignment group. If you have more, use a filter to import fewer assignment groups, or contact [Datadog Support][8] to request a higher limit.
 
 Common filters include:
 
@@ -116,3 +118,5 @@ Changes made by the sync cannot be rolled back automatically. [Audit Trail][5] r
 [4]: https://www.servicenow.com/docs/r/platform-user-interface/c_EncodedQueryStrings.html
 [5]: /account_management/audit_trail/
 [6]: https://app.datadoghq.com/organization-settings/teams/data-sources
+[7]: /account_management/teams/#team-handle
+[8]: /help/

@@ -81,16 +81,14 @@ A team that is managed externally from an identity provider displays a **Managed
 
 #### Teams connected to more than one source
 
-A team can be connected to more than one source, but only one source manages it at a time. The managing source controls the team's name, handle, and membership. Other sources stay connected, for example to route incidents from ServiceNow, but cannot change the team.
+A team can be connected to more than one source. How much control each source has depends on the source:
 
-When more than one source could manage a team, Datadog applies this order:
+- **Managing sources (SCIM, and SAML in SAML-only mode)**: A team is managed when SCIM provisions it or when your organization uses SAML-only provisioning. The source controls the team's name, handle, and membership. You cannot change them through Datadog or another source. Other sources can stay connected, for example to route incidents from [ServiceNow][12].
+- **Syncing sources ([GitHub][9], [ServiceNow][12], and SAML when it is not your only provisioning source)**: These sources sync a team without taking exclusive control. They set the team's name, handle, and membership. You can still connect other sources to the team, and change it from the Datadog UI, the [Teams API][10], or the [Terraform provider][11]. If more than one source syncs members to the same team, Datadog combines the members from each source.
 
-1. **SAML**: If SAML team mappings target a team, SAML manages it. If SAML is your organization's only provisioning source, you cannot provision teams from SCIM, GitHub, or ServiceNow.
-2. **Identity provider (SCIM)**: SCIM takes precedence over GitHub, ServiceNow, and Datadog. When SCIM starts managing a team that already syncs from GitHub or ServiceNow, the team stays connected to GitHub or ServiceNow, but SCIM controls the team's name, handle, and membership.
-3. **GitHub or ServiceNow, when it syncs membership**: A [GitHub][9] or [ServiceNow][12] connection with membership sync turned on manages the team, whether that source created the team or linked it to an existing one. The source also updates the team name, but only if it created the team with {{< ui >}}Import, create, and link teams{{< /ui >}}.
-4. **Datadog**: If no source manages a team, you manage it from the Datadog UI, the [Teams API][10], or the [Terraform provider][11].
+SCIM can start managing a team that already syncs from GitHub or ServiceNow. The team stays connected to that source, but SCIM controls its name, handle, and membership.
 
-GitHub and ServiceNow never change a team handle, even when they manage the team.
+GitHub and ServiceNow update a team's name only if no managing source controls the team. The source must also have created the team with {{< ui >}}Import, create, and link teams{{< /ui >}}. They never change a team handle after the team is created.
 
 
 ## Team hierarchies
