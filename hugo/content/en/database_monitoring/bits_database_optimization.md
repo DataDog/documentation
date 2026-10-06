@@ -16,7 +16,7 @@ further_reading:
   text: "How Bits Database Optimization proves a query rewrite is faster"
 ---
 
-<div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
+<div class="alert alert-info">Bits Database Optimization is only available for PostgreSQL and MySQL. To request support for another database management system, contact your Datadog representative or <a href="/help/">Datadog Support</a>.</div>
 
 ## Overview
 

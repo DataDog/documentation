@@ -95,7 +95,7 @@ If you are using Terraform or custom scripts using our public APIs to manage you
 
 Example:
 ```yaml
-error-tracking("{filter}").source("backend").new().rollup("count").by("@issue.id").last("1d") > 0
+error-tracking("{filter}").source("backend").new().rollup("count").by("issue.id").last("1d") > 0
 ```
 
 [1]: /error_tracking/issue_states
@@ -135,7 +135,7 @@ If you are using Terraform or custom scripts using our public APIs to manage you
 
 Example:
 ```yaml
-error-tracking("{filter}").source("browser").impact().rollup("count").by("@issue.id").last("1d") > 0
+error-tracking("{filter}").source("browser").impact().rollup("count").by("issue.id").last("1d") > 0
 ```
 
 [1]: /error_tracking/issue_states

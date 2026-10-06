@@ -3,35 +3,47 @@ algolia:
   tags:
   - static analysis
   - datadog static analysis
-  - コード品質
+  - code quality
   - SAST
 aliases:
 - /ja/code_analysis/static_analysis
 description: Datadog Static Code Analysis について学ぶことで、コードが本番環境に到達する前に、コードの品質問題やセキュリティ脆弱性をスキャンすることができます。
+further_reading:
+- link: https://www.datadoghq.com/blog/secure-your-github-ecosystem/
+  tag: ブログ
+  text: 'CI/CD Security: GitHub エコシステムを保護する方法'
+- link: https://www.datadoghq.com/blog/bitsai-dev-agent-code-security
+  tag: ブログ
+  text: Code Security 向け Bits Code のご紹介
+- link: https://www.datadoghq.com/blog/code-security-secret-scanning
+  tag: ブログ
+  text: Datadog Secret Scanning を使用して、公開された認証情報を検出およびブロックする
+- link: https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/
+  tag: ブログ
+  text: LLM を使用して Static Code Analysis から誤検知を除外する
 is_beta: false
 title: Static Code Analysis (SAST)
 ---
-
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
-    {{< region-param key="dd_site_name" >}} サイトでは Code Security をご利用いただけません。
+    Code Security は、このサイトでは利用できません。 {{< region-param key="dd_site_name" >}} Code Security は、このサイトでは利用できません。
 </div>
 {{% /site-region %}}
 
 
-## 概要
+## 概要{#overview}
 
-Static Code Analysis は、Datadog の Static Application Security Testing (SAST) 機能です。SAST は、プログラムを実行することなく本番前のコードを解析するクリアボックス型のソフトウェアテスト手法です。 
+Static Code Analysis は、Datadog の Static Application Security Testing (SAST) 機能です。SAST は、プログラムを実行することなく本番前のコードを解析するクリアボックス型のソフトウェアテスト手法です。
 
-Static Code Analysis は、ソフトウェア開発ライフサイクル (SDLC) の早い段階でセキュリティ脆弱性や保守性の問題を特定することで、最高品質かつ最も安全なコードだけが本番環境に到達するよう支援します。組織にも次のようなメリットをもたらします。 
+Static Code Analysis は、ソフトウェア開発ライフサイクル (SDLC) の早い段階でセキュリティ脆弱性や保守性の問題を特定することで、最高品質かつ最も安全なコードのみが本番環境に到達するよう支援します。組織にも次のようなメリットをもたらします。
 
-* アプリケーションが、本番環境にコードが到達する前に SAST スキャンによって新しい脆弱性を検出できるため、時間の経過とともにセキュリティ侵害に対してより強固になります。 
-* 組織のコード規約を守るための手探り作業を減らし、開発チームが開発速度を大きく損ねることなく、コンプライアンスを満たすコードを出荷できるようにします。 
-* Static Code Analysis により、組織は時間の経過とともにより可読性の高いコードベースを維持できるため、新たな開発者をより早くオンボードできます。 
+* アプリケーションが、本番環境にコードが到達する前に SAST スキャンによって新しい脆弱性を検出できるため、時間の経過とともにセキュリティ侵害に対してより強固になります。
+* 組織のコード規約を守るための手探り作業を減らし、開発チームが開発速度を大きく損ねることなく、コンプライアンスを満たすコードを出荷できるようにします。
+* Static Code Analysis により、組織は時間の経過とともにより可読性の高いコードベースを維持できるため、新たな開発者をより早くオンボードできます。
 
-## Static Code Analysis のセットアップ 
+## Static Code Analysis のセットアップ{#set-up-static-code-analysis}
 
-Static Code Analysis は、以下の言語や技術におけるセキュリティ脆弱性や不適切なコーディング慣行のスキャンをサポートします。 
+Static Code Analysis は、以下の言語や技術におけるセキュリティ脆弱性や不適切なコーディング慣行のスキャンをサポートします。
 
 {{< card-grid card_width="130px" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Python" src="integrations_logos/python_avatar.svg" alt="python" >}}
@@ -48,126 +60,113 @@ Static Code Analysis は、以下の言語や技術におけるセキュリテ�
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Elixir" src="integrations_logos/elixir.png" alt="elixir" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Apex" src="integrations_logos/salesforce_large.svg" alt="apex" >}}
   {{< image-card href="/security/code_security/static_analysis/static_analysis_rules?languages=Swift" src="integrations_logos/swift_large.svg" alt="swift" >}}
-  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="other" >}}
+  {{< image-card href="/security/code_security/static_analysis/setup/?tab=circleciorbs#upload-third-party-static-analysis-results-to-datadog" src="integrations_logos/datadog_avatar.svg" alt="その他" >}}
 {{< /card-grid >}}
 
-<!-- </br> -->
-スキャンは CI/CD パイプラインを介して、または Datadog 上でホストされたスキャン (GitHub 専用) として直接実行できます。
-始めるには、[**Code Security** セットアップページ][12]または[セットアップのドキュメント][9]を参照してください。
+スキャンは、CI/CD パイプライン経由で実行することも、Datadog のホスト型スキャンを使用して直接実行することもできます。 
+開始するには、[{{< ui >}}Code Security{{< /ui >}} セットアップページ][12]に移動するか、「[セットアップドキュメント][9]」を参照してください。
 
-## 開発ライフサイクルへの統合
+## 開発ライフサイクルにインテグレーションする{#integrate-into-the-development-lifecycle}
 
-### ソースコード管理
-{{< whatsnext desc="GitHub でコードレビューを行う際、Datadog はプルリクエストの関連する行にインラインレビューコメントを追加し、Static Code Analysis の違反を自動的にフラグ付けします。適用可能な場合、Datadog はプルリクエスト内で直接適用できる修正案も提示します。また、Datadog から直接プルリクエストを開き、脆弱性や品質に関する問題を修正することも可能です。" >}}
-    {{< nextlink href="static_analysis/github_pull_requests" >}}GitHub のプルリクエスト{{< /nextlink >}}
+### ソースコード管理{#source-code-management}
+{{< whatsnext desc="コードレビュー中、Datadog はプルリクエスト内の関連するコード行にインラインレビューコメントを追加することで、静的コード解析の違反を自動的にフラグ付けできます。これは、GitHub、GitLab、および Azure DevOps リポジトリ (クラウドホスト型) でサポートされています。該当する場合、Datadog はプルリクエスト内で直接適用できる修正案も提供します。" >}}
+    {{< nextlink href="static_analysis/github_pull_requests" >}}プルリクエスト{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### IDE
-{{< whatsnext desc="ファイルを統合開発環境 (IDE) で編集している際、リアルタイムでコードの脆弱性を特定できます。詳細については、以下のインテグレーション固有のドキュメントを参照してください:" >}}
-    {{< nextlink href="developers/ide_plugins/idea/" >}}Datadog プラグイン (JetBrains IDE 向け) {{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/vscode/#static-analysis" >}}Datadog 拡張機能 (Visual Studio Code 向け) {{< /nextlink >}}
-    {{< nextlink href="developers/ide_plugins/visual_studio/#static-analysis" >}}Datadog 拡張機能 (Visual Studio 向け) {{< /nextlink >}}
+### IDE{#ides}
+{{< whatsnext desc="統合開発環境 (IDE) でファイルを編集しながら、リアルタイムでコードの脆弱性を特定できます。詳細については、各統合機能のドキュメントを参照してください。">}}
+    {{< nextlink href="ide_plugins/idea/code_security/" >}}JetBrains IDE 用 Datadog プラグイン{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/code_security/" >}}Visual Studio Code および Cursor 用 Datadog 拡張機能{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## 結果の検索とフィルタリング
-Static Code Analysis を設定すると、スキャン対象のリポジトリへの各コミット時にスキャンが実行されます。違反は [**Code Security Repositories** ページ][1]でリポジトリごとに要約されます。リポジトリをクリックすると、Static Code Analysis による **Code Vulnerabilities** と **Code Quality** の結果を確認できます。
+## 結果を検索してフィルターする{#search-and-filter-results}
+Static Code Analysis をセットアップすると、対象リポジトリへのコミットごとにスキャンが実行されます。違反はリポジトリごとに [{{< ui >}}Code Security Repositories{{< /ui >}} ページ][1] にまとめられます。リポジトリをクリックすると、Static Code Analysis からの {{< ui >}}Code Vulnerabilities{{< /ui >}} および {{< ui >}}Code Quality{{< /ui >}} 結果を分析できます。
 
-* **Code Vulnerabilities** タブには、Datadog の [Security カテゴリ][2]で検出された違反が含まれます。
-* **Code Quality** タブには、Datadog の [Best Practices、Code Style、Error Prone、Performance カテゴリ][3]で検出された違反が含まれます。
+* [{{< ui >}}Code Vulnerabilities{{< /ui >}}] タブには、[Security カテゴリー][2]における Datadog のルールによって検出された違反が表示されます。
+[* {{< ui >}}Code Quality{{< /ui >}}] タブには、[Best Practices、Code Style、Error Prone、または Performance のカテゴリー][3]における Datadog のルールによって検出された違反が表示されます。
 
-結果をフィルタリングするには、リストの左側にあるファセットを使用するか、検索を行ってください。結果はサービスまたはチームのファセットで絞り込むことができます。結果が Datadog のサービスやチームにどのように関連付けられるかの詳細は、[Code Security を始める][11]を参照してください。
+結果を絞り込むには、リストの左側にあるファセットを使用するか、検索を行ってください。結果は[サービスまたはチームのファセットでフィルタリング][13]できます。
 
-各行は 1 件の違反を表します。違反は、ページ上部のフィルタで選択された特定のコミットおよびブランチに紐付けられます (デフォルトでは、表示しているリポジトリのデフォルトブランチ上の最新コミットが表示されます)。
+各行が 1 つの違反を表しています。それぞれの違反は、ページ上部のフィルターで選択された特定のコミットおよびブランチに関連付けられています (デフォルトでは、表示中のリポジトリのデフォルトブランチにおける最新コミットの結果が表示されます)。
 
-違反をクリックすると、違反の範囲や起点に関する情報を含むサイドパネルが開きます。
+違反をクリックすると、違反の範囲と発生場所に関する情報を含むサイドパネルが開きます。
 
-<!-- {{< img src="code_security/static_analysis/static-analysis-violation.png" alt="静的解析違反のサイドパネル" style="width:80%;">}} -->
+<!-- {{< img src="code_security/static_analysis/static-analysis-violation.png" alt="Static Analysis 違反のサイドパネル" style="width:80%;">}}  -->
 
-違反の内容は以下のタブで表示されます。
+違反の内容は以下のタブに表示されます。
 
-- **Details**: 違反の説明と原因となったコード行が表示されます。問題のあるコードスニペットを参照するには、[Datadog GitHub App][4] を設定してください。
-- **Remediation**: 違反を解消するための 1 つ以上の修正案と、その修正オプションが表示されます。
-- **Event**: 違反に関する JSON メタデータです。
+- {{< ui >}}Details{{< /ui >}}: 違反の説明と、その原因となったコード行。問題のあるコードスニペットを確認するには、ご利用のプロバイダー ([GitHub][4]、[GitLab][5]、Azure[6]) に合わせて適切なソースコード統合を設定してください。
+- {{< ui >}}Remediation{{< /ui >}}: 違反を解消するための 1 つ以上の修正案と、その修正オプションが表示されます。
+- {{< ui >}}Event{{< /ui >}}: 違反に関する JSON メタデータです。
 
-## カスタマイズ設定
+### 誤検知を除外する{#filter-out-false-positives}
+一部の SAST 脆弱性については、Bits AI がコンテキストを分析し、それが真の脆弱性か誤検知である可能性が高いかを判断するとともに、その理由を簡潔に説明します。
+
+詳細については、「[AI を活用した Static Code Analysis][17]」を参照してください。
+
+## 構成をカスタマイズする {#customize-your-configuration}
 リポジトリまたは組織全体で、どの Static Code Analysis ルールを設定するかをカスタマイズする場合は、[セットアップのドキュメント][8]を参照してください。
 
-## Link results to Datadog services and teams
+## Datadog のサービスとチームに検出結果をリンクする{#link-findings-to-datadog-services-and-teams}
+検出結果を Datadog サービスおよびチームにリンクする方法については、「[セットアップドキュメント][13]」を参照してください。
 
-### サービスへの結果の関連付け
-Datadog は、コードやライブラリのスキャン結果を関連するサービスに紐付けるために、以下の仕組みを利用します:
-
-1. [Software Catalog を用いてサービスに紐付くコードの場所を特定](#identifying-the-code-location-in-the-software-catalog)
-2. [追加の Datadog 製品内でのファイル使用パターンを検出する](#detecting-file-usage-patterns)
-3. [ファイルパスやリポジトリ名からサービス名を検索する](#detecting-service-name-in-paths-and-repository-names)
-
-いずれかの方法で成功すれば、それ以上のマッピングは行われません。各マッピング手法の詳細は以下をご覧ください。
-
-#### Software Catalog でコードの場所を特定する
-
-[Software Catalog のスキーマバージョン `v3`][12] 以降では、サービスに紐付くコードの場所を設定できます。`codeLocations` セクションで、コードを含むリポジトリの場所と関連するパスを指定します。
-
-`paths` 属性には、リポジトリ内のパスにマッチする glob のリストを指定します。
-
-{{< code-block lang="yaml" filename="entity.datadog.yaml" collapsible="true" >}}
-apiVersion: v3
-kind: service
-metadata:
-name: my-service
-datadog:
-codeLocations:
-- repositoryURL: https://github.com/myorganization/myrepo.git
-paths:
-- path/to/service/code/**
-{{< /code-block >}}
-
-
-## 修復
-
-### 提示された修正案を適用する
-<!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="静的コード解析違反に対する修正タブ" style="width:80%;" >}} -->
+## 提示された修正案を適用する{#apply-suggested-fixes}
+<!-- {{< img src="code_security/static_analysis/static-analysis-fixes.png" alt="Static Analysis 違反の [修正] タブ" style="width:80%;">}} -->
 
 Datadog Static Code Analysis には、次の 2 種類の修正案が存在します。
 
-1. **Deterministic Suggested Fix**: リンティング問題のような単純な違反に対しては、ルールアナライザがあらかじめ用意したテンプレート修正を自動的に提示します。
-2. **AI-suggested Fix:** 複雑な違反については、事前に修正案が用意されていないことが一般的です。その場合、OpenAI の GPT-4 を使用した AI ベースの修正案を利用できます。「Text」と「Unified Diff」のいずれかを選択すると、違反解消に向けた手順をテキストで提示するか、コード変更 (差分) を提示するかを選ぶことができます。*この機能はオプトインです。*
+1. **Deterministic Suggested Fix:** リンティング問題のような単純な違反に対しては、ルールアナライザがあらかじめ用意したテンプレート修正を自動的に提示します。
+2. **AI-suggested Fix:** 複雑な違反の場合、あらかじめ修正案が用意されていないことが一般的です。その代わりに、OpenAI の GPT-4 を使用して修正案を生成する AI-suggested Fix 機能を利用できます。修正案の形式として {{< ui >}}Text{{< /ui >}} と {{< ui >}}Unified Diff{{< /ui >}} を選択でき、それぞれ違反を解消するためのプレーンテキストによる手順、あるいはコード変更内容が出力されます。
 
-<!– {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="デフォルトの静的解析修正案を示すビジュアル" style="width:60%;" >}}
+<!-- {{< img src="code_security/static_analysis/static-analysis-default-fix.png" alt="デフォルトの Static Analysis 推奨修正の視覚的インジケーター" style="width:60%;">}}
 
-{{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="AI による静的解析修正案を示すビジュアル" style="width:60%;" >}} –>
+{{< img src="code_security/static_analysis/static-analysis-ai-fix.png" alt="AI Static Analysis 推奨修正の視覚的インジケーター" style="width:60%;">}} -->
 
-### Datadog から直接脆弱性や品質問題を修正する
+### Datadog から直接脆弱性や品質問題を修正する{#fix-a-vulnerability-or-quality-issue-directly-from-datadog}
 
-<!-- {{< img src="ci/sast_one_click_light.png" alt="Code Security のワンクリック修正例" style="width:90%;" >}} -->
+<!-- {{< img src="ci/sast_one_click_light.png" alt="Code Security のワンクリック修正の例" style="width:90%;" >}} -->
 
-Datadog 上で検出された Static Code Analysis の違反を修正するには、大きく 2 つの方法があります。
+GitHub をソースコードマネージャーとして使用している場合、2 つの方法で Datadog から直接 SAST の問題を修正するコード変更をプッシュできます。
 
-#### プルリクエストを開く
-
-GitHub アプリの **Pull Requests** 権限を Read & Write に設定している場合、利用可能な修正案がある全ての Static Code Analysis の検出結果においてワンクリック修正が可能です。GitHub インテグレーションの設定については [GitHub のプルリクエスト][10]を参照してください。
+#### プルリクエストを開く{#open-a-pull-request}
+GitHub アプリの {{< ui >}}Pull Requests{{< /ui >}} 権限が {{< ui >}}Read & Write{{< /ui >}} に設定されている場合、提案された修正があるすべての静的コード解析 (SAST) の結果でワンクリック修正が有効になります。
 
 脆弱性を修正し、プルリクエストを開くには次の手順に従います。
 1. Code Security で特定の SAST 結果を表示します。
-2. 結果のサイドパネルで **Fix Violation** をクリックします。
-3. **Open a Pull Request** を選択します。
+2. 結果のサイドパネルで {{< ui >}}Fix Violation{{< /ui >}} をクリックします。
+3. [{{< ui >}}Open a Pull Request{{< /ui >}}] を選択します。
 4. プルリクエストタイトルとコミットメッセージを入力します。
-5. **Create PR** をクリックします。
+5. [{{< ui >}}Create PR{{< /ui >}}] をクリックします。
 
-#### 現在のブランチに直接コミットする
+#### 現在のブランチに直接コミットする{#commit-directly-to-the-current-branch}
 違反が検出されたブランチに直接コミットを行うことで脆弱性を修正できます。
 
 提案修正をコミットするには
 
 1. Code Security で特定の SAST 結果を表示します。
-2. 結果のサイドパネルで **Fix Violation** をクリックします。
-3. **Commit to current branch** をクリックします。
+2. 結果のサイドパネルで {{< ui >}}Fix Violation{{< /ui >}} をクリックします。
+3. [{{< ui >}}Commit to current branch{{< /ui >}}] をクリックします。
 
-## 誤検知を報告する
-特定の違反が誤検知 (False Positive) だと考えられる場合は、「False Positive」として理由を添えてフラグを立てられます。この報告は直接 Datadog に送信され、定期的にレビューされてルールセットの品質向上に役立てられます。
+### Cursor で修正する{#fix-with-cursor}
+SAST の検出結果の修正を Cursor などの AI コーディングエージェントに引き継ぐことができます。
 
-<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Static Code Analysis の違反を誤検知として報告するためのボタン" style="width:60%;" >}} -->
+1. Code Security で特定の SAST 結果を表示します。
+2. サイドパネルの [{{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}}] セクションで、[{{< ui >}}Remediate with AI{{< /ui >}}] をクリックします。
+3. {{< ui >}}Coding agent{{< /ui >}} タブを選択します。
+4. {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}} で、{{< ui >}}Fix with Cursor{{< /ui >}} の横にある {{< ui >}}Open{{< /ui >}} をクリックします。Datadog は、その検出結果に対するカスタマイズされた修正プロンプトを使用して Cursor を開きます。変更をコミットする前に、提案された変更を確認します。
 
-<!-- ## その他の参考資料
+別の AI コーディングエージェントを使用するには、[{{< ui >}}Copy fix prompt{{< /ui >}}] の横に表示される [{{< ui >}}Copy{{< /ui >}}] をクリックし、そのプロンプトを選択したエージェントに貼り付けます。
+
+Cursor ディープリンクを処理するには、[VS Code および Cursor 用の Datadog 拡張機能](/ide_plugins/vscode/?tab=cursor)をインストールしてください。
+
+{{< img src="code_security/static_analysis/fix-with-cursor.png" alt="Cursor で修正するおよび修正プロンプトをコピーするオプションが表示されている、Coding エージェントタブが選択された Remediate with AI ダイアログ" style="width:100%;" >}}
+
+## 誤検知を報告する{#report-false-positives}
+特定の違反が誤検知であると思われる場合は、理由を添えて誤検知としてフラグを立てることができます。これにより、レポートが Datadog に直接送信されます。提出された内容は定期的にレビューされ、ルールセットの品質が継続的に向上します。
+
+<!-- {{< img src="code_security/static_analysis/flag-false-positive.png" alt="Static Code Analysis の違反を誤検知として報告するためのボタン" style="width:60%;">}} -->
+
+## <!-- 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}} -->
 
@@ -175,6 +174,7 @@ GitHub アプリの **Pull Requests** 権限を Read & Write に設定してい�
 [2]: /ja/security/code_security/static_analysis_rules?categories=Security
 [3]: /ja/security/code_security/static_analysis_rules?categories=Best+Practices&categories=Code+Style&categories=Error+Prone&categories=Performance
 [4]: /ja/integrations/github/
+[5]: /ja/integrations/gitlab-source-code/
 [6]: https://en.wikipedia.org/wiki/Camel_case
 [7]: https://en.wikipedia.org/wiki/Snake_case
 [8]: /ja/security/code_security/static_analysis/setup/#customize-your-configuration
@@ -182,3 +182,8 @@ GitHub アプリの **Pull Requests** 権限を Read & Write に設定してい�
 [10]: /ja/security/code_security/dev_tool_int/github_pull_requests/
 [11]: /ja/getting_started/code_security/
 [12]: https://app.datadoghq.com/security/configuration/code-security/setup
+[13]: /ja/security/code_security/static_analysis/setup/?tab=github#link-findings-to-datadog-services-and-teams
+[14]: /ja/account_management/teams/
+[15]: /ja/integrations/github/#connect-github-teams-to-datadog-teams
+[16]: /ja/integrations/azure-devops-source-code/
+[17]: /ja/security/code_security/static_analysis/ai_enhanced_sast/

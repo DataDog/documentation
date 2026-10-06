@@ -29,6 +29,12 @@ cascade:
 description: Detecte y responda a amenazas en tiempo de ejecución en sus servidores,
   contenedores y cargas de trabajo sin servidor con Datadog Workload Protection.
 further_reading:
+- link: https://learn.datadoghq.com/courses/workload-protection-detect-compromises
+  tag: Centro de aprendizaje
+  text: Detecte compromisos de servidores y contenedores con Workload Protection
+- link: https://learn.datadoghq.com/courses/workload-protection-enable-manage
+  tag: Centro de aprendizaje
+  text: Habilite y administre Workload Protection
 - link: https://www.datadoghq.com/blog/workload-protection-investigation/
   tag: Blog
   text: Convierta señales fragmentadas de tiempo de ejecución en historias de ataque
@@ -37,12 +43,6 @@ further_reading:
   tag: Blog
   text: Identifique y remedie problemas de postura en tiempo de ejecución con los
     hallazgos de Workload Protection
-- link: https://learn.datadoghq.com/courses/workload-protection-detect-compromises
-  tag: Centro de aprendizaje
-  text: Detecte compromisos de servidores y contenedores con Workload Protection
-- link: https://learn.datadoghq.com/courses/workload-protection-enable-manage
-  tag: Centro de aprendizaje
-  text: Habilite y administre Workload Protection
 title: Workload Protection
 ---
 Datadog Workload Protection proporciona visibilidad y defensa en tiempo real para su infraestructura mediante el monitoreo continuo de la actividad de archivos, red y procesos en sus entornos. Detecta amenazas a medida que ocurren, generando señales de seguridad y hallazgos. Úselos para identificar, investigar y detener comportamientos maliciosos antes de que afecten sus cargas de trabajo.
@@ -88,13 +88,13 @@ En Linux y Windows, Workload Protection cubre más de 40 tipos de eventos, que a
 Las reglas del Agent realizan un filtrado ligero para que se ejecuten de manera eficiente en cada servidor. Datadog evalúa las correlaciones más complejas a través del tiempo y los procesos:
 
 1. Las [reglas del Agent][6] evalúan la actividad del sistema en el servidor del Agent.
-2. Cuando la actividad coincide con una expresión de regla del Agent, el Agent genera un [agent event][7] y lo envía a Datadog.
-3. Datadog evalúa los agent events frente a [detection rules][8] y [finding rules][9].
-4. Si una regla de detección coincide, se genera una señal y se muestra en [Signals][10]. Si un atributo de agent event coincide con un [threat intelligence indicator][13], también se muestra el indicador correspondiente.
-5. Si una finding rule coincide, se genera un hallazgo y se muestra en [Findings][11].
-6. Se activan todas las [notification rules][12] que coincidan con la gravedad, el tipo de regla, las etiquetas y los atributos de la señal.
+2. Cuando la actividad coincide con una expresión de regla del Agent, el Agent genera un [evento de Agent][7] y lo envía a Datadog.
+3. Datadog evalúa los eventos de Agents frente a [reglas de detection][8] y [reglas de hallazgos][9].
+4. Si una regla de detección coincide, se genera una señal y se muestra en [Signals][10]. Si un atributo de evento de Agent coincide con un [indicador de inteligencia de amenazas][13], también se muestra el indicador correspondiente.
+5. Si una regla de hallazgo coincide, se genera un hallazgo y se muestra en [Findings][11].
+6. Se activan todas las [reglas de notificación][12] que coincidan con la gravedad, el tipo de regla, las etiquetas y los atributos de la señal.
 
-Workload Protection se entrega con más de 350 Agent rules y 200 detection rules, que cubren la mayoría de las tácticas y técnicas de MITRE ATT&CK. También puede escribir las suyas propias, incluidas máquinas de estado en el Agent que alertan solo sobre indicadores de compromiso complejos.
+Workload Protection se entrega con más de 350 Agent rules y 200 reglas de detección, que cubren la mayoría de las tácticas y técnicas de MITRE ATT&CK. También puede escribir las suyas propias, incluidas máquinas de estado en el Agent que alertan solo sobre indicadores de compromiso complejos.
 
 ### Responder a amenazas {#responding-to-threats}
 
@@ -103,19 +103,19 @@ Las acciones de respuesta se ejecutan en el Agent. El Agent puede terminar un pr
 - **Automated response** adjunta una acción a una Agent rule, de modo que el Agent actúa tan pronto como la regla coincide.
 - **Manual response** le permite actuar a partir de una señal después de que se genera.
 
-Ambas dependen de que la enforcement esté habilitada en el Agent. Consulte [Respond to Threats][4].
+Ambas dependen de que la aplicación esté habilitada en el Agent. Consulte [Respond to Threats][4].
 
-También puede responder desde Datadog en lugar del Agent. Active un [workflow][15] a partir de una señal, o integre señales con sus canalizaciones de respuesta existentes. Consulte [Signal actions][16].
+También puede responder desde Datadog en lugar del Agent. Active un [flujo de trabajo][15] a partir de una señal, o integre señales con sus canalizaciones de respuesta existentes. Consulte [Signal actions][16].
 
 ## Próximos pasos {#next-steps}
 
 ### Configuración {#setup}
 
-Comience con la guía de [Setup][1]. Cubre los entornos compatibles, cómo implementar el Agent y cómo experimentar con las funciones de Workload Protection utilizando los playground scripts.
+Comience con la guía de [Setup][1]. Cubre los entornos compatibles, cómo implementar el Agent y cómo experimentar con las funciones de Workload Protection utilizando los scripts de área de prueba.
 
 ### Detectar y hacer un seguimiento {#detect-and-monitor}
 
-Lea las páginas de [Detect and Monitor][2] para comprender cómo los agent events se traducen en señales y hallazgos de Workload Protection. Estas páginas le ayudan a explorar las detecciones integradas (OOTB) y a crear su propia lógica de detección.
+Lea las páginas de [Detect and Monitor][2] para comprender cómo los eventos de Agents se traducen en señales y hallazgos de Workload Protection. Estas páginas le ayudan a explorar las detecciones integradas (OOTB) y a crear su propia lógica de detección.
 
 ### Investigar y clasificar {#investigate-and-triage}
 
@@ -123,7 +123,7 @@ Consulte las páginas de [Investigate and Triage][3] para descubrir los explorad
 
 ### Responder a amenazas {#respond-to-threats}
 
-La página [Respond to Threats][4] explica cómo configurar la respuesta automatizada y manual. Cubre los requisitos de Agent enforcement, las acciones de respuesta disponibles y cómo interpretar sus resultados.
+La página [Respond to Threats][4] explica cómo configurar la respuesta automatizada y manual. Cubre los requisitos de aplicación de Agent, las acciones de respuesta disponibles y cómo interpretar sus resultados.
 
 ### Coverage {#coverage}
 
@@ -151,3 +151,7 @@ Utilice [Coverage][5] para obtener una vista unificada y en tiempo real de la po
 [14]: /es/security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [15]: /es/actions/workflows/
 [16]: /es/security/workload_protection/investigate_and_triage/security_signals/actions
+
+## Lecturas adicionales {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}

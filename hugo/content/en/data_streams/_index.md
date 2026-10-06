@@ -5,12 +5,6 @@ aliases:
 - /data_streams/data_pipeline_lineage
 - /data_streams/business_transaction_tracking
 further_reading:
-    - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
-      tag: 'Architecture Center'
-      text: 'Monitoring Financial Data Mesh on AWS using Datadog'
-    - link: 'https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/'
-      tag: 'Architecture Center'
-      text: 'Observability in Event-Driven Architectures'
     - link: '/integrations/kafka/'
       tag: 'Documentation'
       text: 'Kafka Integration'
@@ -41,6 +35,15 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/data-pipeline-monitoring/"
       tag: "Blog"
       text: "Data pipeline monitoring 101: Tracking health and performance across the data stack"
+    - link: "https://www.datadoghq.com/blog/kafka-console/"
+      tag: "Blog"
+      text: "Troubleshoot Kafka issues across every layer of your stack with Kafka Console"
+    - link: 'https://www.datadoghq.com/architecture/monitoring-financial-data-mesh-on-aws-using-datadog/'
+      tag: 'Architecture Center'
+      text: 'Monitoring Financial Data Mesh on AWS using Datadog'
+    - link: 'https://www.datadoghq.com/architecture/observability-in-event-driven-architecture/'
+      tag: 'Architecture Center'
+      text: 'Observability in Event-Driven Architectures'
 cascade:
     algolia:
         rank: 70

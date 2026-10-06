@@ -1,11 +1,14 @@
 ---
-id: remote_configuration
 core_product:
 - apm
 - appsec
-- 관측 가능성 파이프라인
+- workload protection
+- observability pipelines
+id: remote_configuration
+short_definition: Remote Configuration enables users to remotely configure and change
+  the behavior of Datadog components deployed in their environment.
 synonyms:
 - RC
-title: 원격 설정
+title: Remote Configuration
 ---
-원격 설정을 사용하면 사용자가 원격으로 환경에 배포된 Datadog 구성 요소(예: 에이전트, 추적 라이브러리, 통합 가시성 파이프라인 워커)의 동작을 설정 및 변경할 수 있습니다.
+Remote Configuration을 사용하면 사용자가 원격으로 환경에 배포된 Datadog 구성 요소(예: Agents, SDKs, Observability Pipelines Workers)의 동작을 구성 및 변경할 수 있습니다.

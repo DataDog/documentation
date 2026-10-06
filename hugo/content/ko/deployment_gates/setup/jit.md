@@ -4,14 +4,14 @@ description: 평가 요청에 규칙을 인라인으로 전송하여 Deployment 
 further_reading:
 - link: /deployment_gates/setup/preconfigured
   tag: 설명서
-  text: 사전 구성된 Deployment Gates 설정
+  text: 사전 구성된 Deployment Gates 설정하기
 - link: /deployment_gates/explore
   tag: 설명서
   text: Deployment Gates 탐색기에 대해 알아보기
 - link: /api/latest/deployment-gates
   tag: API 참조
   text: Deployment Gates API 참조
-title: JIT(Just-In-Time) Deployment Gates 설정
+title: JIT(Just-In-Time) Deployment Gates 설정하기
 ---
 {{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
 Deployment Gates는 미리 보기로 제공되고 있습니다. 이 기능에 관심이 있다면 양식을 작성하여 액세스 권한을 요청하세요.
@@ -60,20 +60,22 @@ Datadog UI, API 또는 Terraform에서 관리되는 영구 게이트가 필요�
 전체 스키마 및 사용 가능한 모든 옵션은 [Deployment Gates API 참조][4]를 참조하세요.
 
 {{< tabs >}}
-{{% tab "모니터링" %}}
-모니터링 규칙은 구성 가능한 기간 동안 모니터링 세트의 상태를 평가합니다. 평가 기간 중 언제든지 다음 상황이 발생하면 실패합니다.
+{{% tab "Monitor" %}}
+Monitor 규칙은 구성 가능한 기간 동안 모니터 집합의 상태를 평가합니다. `query` 또는 `monitor_ids` 중 하나를 사용하여 모니터를 선택합니다. 두 가지 옵션은 상호 배타적입니다. 평가 기간 중 언제든지 다음 상황이 발생하면 규칙 실패로 이어질 수 있습니다.
 
-- 쿼리와 일치하는 모니터링이 없습니다.
-- 50개 이상의 모니터링이 쿼리와 일치합니다.
-- 일치하는 모니터링이 `ALERT` 또는 `NO_DATA` 상태입니다.
+- 구성된 선택 항목과 일치하는 모니터 그룹이 존재하지 않습니다.
+- 명시적인 모니터 ID가 존재하지 않거나 조직에서 사용할 수 없습니다.
+- 구성된 선택 항목과 일치하는 모니터가 300개를 초과합니다.
+- 일치하는 모니터 그룹 중 하나라도 `ALERT` 또는 `NO_DATA` 상태입니다.
 
 **옵션**:
 
-- `query`: [모니터링 검색 구문][1]을 기반으로 하는 모니터링 검색 쿼리입니다. 다음과 같은 모니터링 태그를 기준으로 필터링할 수 있습니다.
-  - 모니터링 정적 태그: `service:transaction-backend`
-  - 모니터링 쿼리 내 태그: `scope:"service:transaction-backend"`
-  - [모니터링 그룹화][2] 내 태그: `group:"service:transaction-backend"`
-- `duration`: 일치하는 모니터링을 평가할 기간(초)입니다. 기본값은 0입니다(모니터링이 즉시 평가됨). 최댓값은 7,200초(2시간)입니다.
+- `query`: [모니터 검색 구문][1]을 기반으로 하는 모니터 검색 쿼리입니다. 다음 모니터 태그를 기준으로 필터링할 수 있습니다.
+  - 모니터 정적 태그: `service:transaction-backend`
+  - 모니터 쿼리 내 태그: `scope:"service:transaction-backend"`
+  - [모니터 그룹][2] 내 태그: `group:"service:transaction-backend"`
+- `monitor_ids`: 특정 모니터 목록입니다. 각 항목에는 10진수 모니터 `id`와 정확한 그룹 이름 `groups` 배열이 포함되어 있습니다. 비어 있는 `groups` 배열은 해당 모니터의 모든 그룹을 평가합니다.
+- `duration`: 선택한 모니터를 평가할 기간(초)입니다. 기본값은 0입니다. 이 경우 모니터가 즉시 평가됩니다. 최댓값은 7,200초(2시간)입니다.
 
 인라인 규칙 예시:
 
@@ -88,15 +90,30 @@ Datadog UI, API 또는 Terraform에서 관리되는 영구 게이트가 필요�
 }
 ```
 
+```json
+{
+  "type": "monitor",
+  "name": "Specific monitors",
+  "options": {
+    "monitor_ids": [
+      {"id": "12345678", "groups": []},
+      {"id": "87654321", "groups": ["service:api"]}
+    ],
+    "duration": 300
+  }
+}
+```
+
 **참고**:
-- `group` 필터는 일치하는 그룹만 평가합니다.
-- 음소거된 모니터링은 평가에서 자동으로 제외됩니다(쿼리에 항상 `muted:false`가 포함됨).
+- `group` 쿼리 필터와 `monitor_ids[].groups`는 일치하는 그룹만 평가합니다.
+- 명시적인 모니터 ID가 존재하지 않거나 조직에서 사용할 수 없는 경우 규칙 실패로 이어집니다. 모니터가 존재하지만 음소거 상태이거나 선택한 그룹에 데이터가 없어 제외되는 경우, 규칙은 일치하는 그룹 없음 동작을 적용합니다.
+- 음소거된 모니터는 두 가지 선택 모드에서 자동으로 제외됩니다.
 
 [1]: /ko/monitors/manage/search/
 [2]: /ko/monitors/manage/#triggered-monitors
 {{% /tab %}}
-{{% tab "APM 잘못된 배포 탐지" %}}
-이 규칙 유형은 Watchdog의 [APM 잘못된 배포 탐지][1] 분석을 사용하여 배포된 버전과 동일한 서비스의 이전 버전을 비교합니다. 분석을 통해 탐지되는 사항은 다음과 같습니다.
+{{% tab "APM Faulty Deployment Detection" %}}
+이 규칙 유형은 Watchdog의 [APM Faulty Deployment Detection][1] 분석을 사용하여 배포된 버전과 동일한 서비스의 이전 버전을 비교합니다. 분석을 통해 탐지되는 사항은 다음과 같습니다.
 
 - 새로운 유형의 오류
 - 이전 버전 대비 오류율의 상당한 증가
@@ -105,8 +122,8 @@ Datadog UI, API 또는 Terraform에서 관리되는 영구 게이트가 필요�
 
 **옵션**:
 
-- `duration`: 분석이 실행되는 시간(초)입니다. 최적의 분석 신뢰도를 위해 이 값은 배포 시작 후 900초(15분) 이상이어야 합니다. 최댓값은 7,200초(2시간)입니다.
-- `allowed_resources` (선택 사항): 분석에 포함할 [APM 리소스][2]입니다. 지정된 경우 나열된 리소스만 분석됩니다. `excluded_resources`와 상호 배타적입니다.
+- `duration`: 분석이 실행되는 시간(초)입니다. 최적의 분석 신뢰도를 위해 이 값은 배포 시작 후 900초(15분) 이상으로 설정하는 것이 좋습니다. 최댓값은 7,200초(2시간)입니다.
+- `allowed_resources` (선택 사항): 분석에 포함할 [APM 리소스][2]입니다. 지정된 경우 목록에 있는 리소스만 분석됩니다. `excluded_resources`와 상호 배타적입니다.
 - `excluded_resources` (선택 사항): 무시할 [APM 리소스][2]입니다(예: 낮은 볼륨 또는 낮은 우선순위 엔드포인트). `allowed_resources`와 상호 배타적입니다.
 
 인라인 규칙 예시:
@@ -171,22 +188,22 @@ datadog-ci deployment gate --service transaction-backend --env production --vers
 }
 ```
 
-명령:
+이 명령은 다음을 수행합니다.
 
-- 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 차단합니다.
-- 평가를 기다릴 시간에 대한 구성 가능한 제한 시간을 제공합니다.
+- 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 대기합니다.
+- 평가를 기다릴 최대 시간을 구성할 수 있습니다.
 - 오류에 대한 자동 재시도 기능이 내장되어 있습니다.
-- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `--fail-on-error`를 허용합니다.
+- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `--fail-on-error`를 지원합니다.
 
 `deployment gate` 명령은 datadog-ci 버전 v3.17.0 이상에서 사용할 수 있습니다. `--config` 플래그에는 버전 v5.19.0 이상이 필요합니다.
 
 **필수 환경 변수**:
 
-- `DD_API_KEY`: [API 키][2]입니다.
-- `DD_APP_KEY`: [애플리케이션 키][3]입니다.
+- `DD_API_KEY`: [API 키][2]
+- `DD_APP_KEY`: [애플리케이션 키][3]
 - `DD_BETA_COMMANDS_ENABLED=1`: `deployment gate` 명령은 미리 보기 명령입니다.
 
-전체 구성 옵션 및 사용 예시는 [`deployment gate` 명령 설명서][4]를 참조하세요.
+전체 구성 옵션 및 사용 예시는 [`deployment gate` 명령 문서][4]를 참조하세요.
 
 [1]: https://github.com/DataDog/datadog-ci
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -195,11 +212,11 @@ datadog-ci deployment gate --service transaction-backend --env production --vers
 
 {{% /tab %}}
 {{% tab "Argo Rollouts" %}}
-[AnalysisTemplate][1] 또는 [ClusterAnalysisTemplate][1]을 생성하여 Argo Rollouts Kubernetes 리소스에서 Deployment Gates를 호출하세요. 이 템플릿은 [datadog-ci 배포 게이트 명령][7]을 실행하여 Deployment Gates API와 상호작용합니다.
+Argo Rollouts Kubernetes 리소스에서 [AnalysisTemplate][1] 또는 [ClusterAnalysisTemplate][1]을 생성하여 Deployment Gates를 호출하세요. 이 템플릿은 [datadog-ci 배포 게이트 명령][7]을 실행하여 Deployment Gates API와 상호작용합니다.
 
 아래 템플릿을 시작점으로 사용하세요.
 
-- [Datadog 사이트 이름][2]으로 `<YOUR_DD_SITE>`를 바꿉니다(예: {{< region-param key="dd_site" code="true" >}}).
+- `<YOUR_DD_SITE>`를 [Datadog 사이트 이름][2]으로 바꿉니다(예: {{< region-param key="dd_site" code="true" >}}).
 - [API 키][5] 및 [애플리케이션 키][6]를 환경 변수로 정의합니다. 이 예시에서는 `api-key` 및 `app-key`라는 두 개의 데이터 값을 가진 `datadog`이라는 [Kubernetes 시크릿][3]을 사용합니다. `valueFrom` 대신 `value`를 사용하여 일반 텍스트로 값을 전달할 수도 있습니다.
 - `--config` 플래그를 지원하는 datadog-ci 이미지 버전(v5.19.0 이상)을 사용합니다.
 
@@ -283,9 +300,9 @@ spec:
                       name: gate-config
 ```
 
-- 분석 템플릿은 Rollout 리소스(`service`, `env`, `version`)로부터 인수를 받을 수 있습니다. 자세한 내용은 [공식 Argo Rollouts 설명서][4]를 참조하세요.
-- `ttlSecondsAfterFinished` 는 완료된 작업을 5분 후에 제거합니다.
-- `backoffLimit` 은 0으로 설정됩니다. 게이트 평가가 실패할 경우 작업이 재시도되어서는 안 되기 때문입니다.
+- 분석 템플릿은 Rollout 리소스(`service`, `env`, `version`)로부터 인수를 받을 수 있습니다. 자세한 내용은 [공식 Argo Rollouts 문서][4]를 참조하세요.
+- `ttlSecondsAfterFinished`는 완료된 작업을 5분 후에 제거합니다.
+- `backoffLimit`은 은 0으로 설정됩니다. 게이트 평가가 실패할 경우 작업이 재시도되어서는 안 되기 때문입니다.
 
 분석 템플릿을 생성한 후 Argo Rollouts 전략에서 이를 참조하세요.
 
@@ -395,17 +412,17 @@ jobs:
 }
 ```
 
-액션:
+이 액션은 다음을 수행합니다.
 
-- 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 차단합니다.
-- 평가를 기다릴 시간에 대한 구성 가능한 제한 시간을 제공합니다.
+- 게이트 평가를 시작하기 위한 요청을 전송하고 평가가 완료될 때까지 대기합니다.
+- 평가를 기다릴 최대 시간을 구성할 수 있습니다.
 - 오류에 대한 자동 재시도 기능이 내장되어 있습니다.
-- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `fail-on-error`를 허용합니다.
+- 예기치 않은 Datadog 오류 발생 시 동작을 사용자 지정하기 위해 `fail-on-error`를 지원합니다.
 
 **필수 환경 변수**:
 
-- `DD_API_KEY`: [API 키][2]입니다.
-- `DD_APP_KEY`: [애플리케이션 키][3]입니다.
+- `DD_API_KEY`: [API 키][2]
+- `DD_APP_KEY`: [애플리케이션 키][3]
 
 전체 구성 옵션 및 사용 예시는 [`DataDog/deployment-gate-github-action` 리포지토리][4]를 참조하세요.
 
@@ -419,11 +436,11 @@ jobs:
 
 이 스크립트를 시작점으로 사용하세요. 해당 스크립트는 인라인 JIT 규칙을 사용하여 게이트를 평가합니다.
 
-다음을 바꾸세요.
+다음 값을 바꾸세요.
 
-- `<YOUR_DD_SITE>`: [Datadog 사이트 이름][1]입니다(예: {{< region-param key="dd_site" code="true" >}}).
-- `<YOUR_API_KEY>`: [API 키][2]입니다.
-- `<YOUR_APP_KEY>`: [애플리케이션 키][3]입니다.
+- `<YOUR_DD_SITE>`: [Datadog 사이트 이름][1](예: {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: [API 키][2]
+- `<YOUR_APP_KEY>`: [애플리케이션 키][3]
 
 ```bash
 #!/bin/sh
@@ -561,22 +578,22 @@ while true; do
 done
 ```
 
-스크립트:
+이 스크립트는 다음을 수행합니다.
 
-- `service`, `environment`, `version` 등 세 가지 입력을 받습니다. 하나 이상의 APM 잘못된 배포 탐지 규칙이 평가되는 경우 `version`이 필요합니다.
-- 평가를 시작하기 위한 요청을 보내고 `evaluation_id`를 기록합니다. 다음과 같이 HTTP 응답 코드를 처리합니다.
-  - 5xx: 서버 오류, 지연 후 재시도합니다.
+- `service`, `environment`, `version` 세 가지 입력을 받습니다. 하나 이상의 APM Faulty Deployment Detection 규칙이 평가되는 경우 `version`이 필요합니다.
+- 평가를 시작하기 위한 요청을 보내고 `evaluation_id`를 기록합니다. HTTP 응답 코드는 다음과 같이 처리합니다.
+  - 5xx: 서버 오류, 일정 시간 후 재시도합니다.
   - 4xx: 클라이언트 오류, 평가에 실패합니다.
   - 2xx: 평가가 시작되었습니다.
-- 다음과 같이 평가가 완료될 때까지 `evaluation_id`로 평가 상태 엔드포인트를 폴링합니다.
-  - 5xx: 서버 오류, 지연 후 재시도합니다.
-  - 404: 평가가 아직 시작되지 않음, 지연 후 재시도합니다.
+- `evaluation_id`를 사용하여 평가가 완료될 때까지 평가 상태 엔드포인트를 폴링합니다.
+  - 5xx: 서버 오류, 일정 시간 후 재시도합니다.
+  - 404: 평가가 아직 시작되지 않음, 일정 시간 후 재시도합니다.
   - 4xx(404 제외): 클라이언트 오류, 평가에 실패합니다.
-  - 2xx: `gate_status`를 검사하고 완료되지 않은 경우 지연 후 재시도합니다.
+  - 2xx: `gate_status`를 검사하고 완료되지 않은 경우 일정 시간 후 재시도합니다.
 - 평가가 완료되거나 최대 폴링 시간(기본값: 10,800초 = 3시간)에 도달할 때까지 15초마다 폴링합니다.
-- 초기 요청에 대한 모든 재시도가 소진되면(5xx 응답) 스크립트는 API 실패에 유연하게 대응하기 위해 이를 성공으로 처리합니다.
+- 초기 요청에서 모든 재시도가 소진되면(5xx 응답) 스크립트는 API 오류에 유연하게 대응하기 위해 이를 성공으로 처리합니다.
 
-사용 사례에 맞게 스크립트를 조정하세요. 이 스크립트는 `curl`(요청 수행) 및 `jq`(반환된 JSON 처리)를 사용합니다. 이러한 명령을 사용할 수 없는 경우, 스크립트 시작 부분에 설치하세요(예: `apk add --no-cache curl jq` 사용).
+사용 사례에 맞게 스크립트를 조정하세요. 이 스크립트는 요청을 수행하는 데 `curl`을 사용하고, 반환된 JSON을 처리하는 데 `jq`를 사용합니다. 이러한 명령을 사용할 수 없는 경우, 스크립트 시작 부분에 설치하세요(예: `apk add --no-cache curl jq` 사용).
 
 [1]: /ko/getting_started/site/
 [2]: https://app.datadoghq.com/organization-settings/api-keys
@@ -588,13 +605,13 @@ done
 Deployment Gates 평가는 비동기식입니다. 평가를 트리거하면 백그라운드에서 시작되며, API는 진행 상황을 추적하는 데 사용할 수 있는 평가 ID를 반환합니다.
 
 - 먼저, Deployment Gates 평가를 요청하면 프로세스가 시작되고 평가 ID가 반환됩니다.
-- 그런 다음 평가 ID를 사용하여 주기적으로 평가 상태 엔드포인트를 폴링하여 평가 완료 시 결과를 검색합니다. 10~20초마다 폴링하는 것이 좋습니다.
+- 그런 다음 평가 ID를 사용하여 주기적으로 평가 상태 엔드포인트를 폴링하여 평가 완료 시 결과를 검색합니다. 10~20초마다 폴링하는 것을 권장합니다.
 
-다음을 바꾸세요.
+다음 값을 바꾸세요.
 
-- `<YOUR_DD_SITE>`: [Datadog 사이트 이름][1]입니다(예: {{< region-param key="dd_site" code="true" >}}).
-- `<YOUR_API_KEY>`: [API 키][2]입니다.
-- `<YOUR_APP_KEY>`: [애플리케이션 키][3]입니다.
+- `<YOUR_DD_SITE>`: [Datadog 사이트 이름][1](예: {{< region-param key="dd_site" code="true" >}})
+- `<YOUR_API_KEY>`: [API 키][2]
+- `<YOUR_APP_KEY>`: [애플리케이션 키][3]
 
 인라인 규칙과 함께 `configuration`을 전달하세요(API 경계에서 snake_case 사용).
 
@@ -652,9 +669,9 @@ EOF
 }
 ```
 
-`data.attributes.evaluation_id` 필드에는 이 게이트 평가에 대한 고유 식별자가 포함되어 있습니다.
+`data.attributes.evaluation_id` 필드에는 이 게이트 평가의 고유 식별자가 포함됩니다.
 
-평가 ID로 상태 엔드포인트를 폴링하여 게이트 평가 상태를 가져오세요.
+평가 ID를 사용하여 상태 엔드포인트를 폴링하여 게이트 평가 상태를 가져오세요.
 
 ```bash
 curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<evaluation_id>" \
@@ -690,7 +707,7 @@ curl -X GET "https://api.<YOUR_DD_SITE>/api/v2/deployments/gates/evaluation/<eva
 }
 ```
 
-`data.attributes.gate_status` 필드에는 다음 값 중 하나와 함께 평가 결과가 포함됩니다.
+`data.attributes.gate_status` 필드에는 평가 결과가 포함되며, 값은 다음 중 하나입니다.
 
 - `in_progress`: Deployment Gates 평가가 아직 진행 중입니다. 폴링을 계속하세요.
 - `pass`: Deployment Gates 평가가 통과되었습니다.

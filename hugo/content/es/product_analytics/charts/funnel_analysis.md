@@ -8,19 +8,11 @@ aliases:
 - /es/product_analytics/journeys/funnel_analysis/
 disable_toc: false
 further_reading:
-- link: /product_analytics/analytics_explorer/
-  tag: Documentación
-  text: Explorador de Analytics
-- link: /product_analytics/charts/journey_paths/
-  tag: Documentación
-  text: Análisis de trayectorias
 - link: https://learn.datadoghq.com/courses/getting-started-product-analytics
   tag: Centro de aprendizaje
   text: Introducción a Product Analytics
 title: Embudo
 ---
-## Descripción general {#overview}
-
 El análisis de embudo le ayuda a realizar un seguimiento de las tasas de conversión en flujos de trabajo clave para identificar y abordar cualquier cuello de botella en las rutas de recorrido de extremo a extremo. Específicamente, usted puede:
 
 - Ver si los clientes abandonan en un punto determinado debido al bajo rendimiento del sitio web
@@ -30,17 +22,13 @@ El análisis de embudo le ayuda a realizar un seguimiento de las tasas de conver
 - Filtrar eventos individuales en diferentes pasos de su embudo
 - Combinar múltiples eventos dentro de un paso determinado, ya que los usuarios finales pueden tener diferentes formas de lograr el mismo resultado a través de distintos flujos
 
+## Crear un gráfico de embudo {#create-a-funnel-chart}
 
-## Crear un embudo {#build-a-funnel}
+1. En {{< ui >}}Product Analytics{{< /ui >}}, seleccione {{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}.
 
-Para comenzar a crear un embudo, navegue a [{{< ui >}}Product Analytics{{< /ui >}}][1], luego seleccione [{{< ui >}}Create New{{< /ui >}} > {{< ui >}}Funnel{{< /ui >}}][2].
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_overview.png" alt="La opción de embudo resaltada en el cuadro de diálogo Crear nuevo en Product Analytics" style="width:100%;" >}}
-
-Seleccione los pasos del usuario que inician el embudo y use {{< ui >}}Add step{{< /ui >}} para agregar pasos adicionales. Arrastre y suelte los pasos para reordenarlos en el embudo.
+1. Seleccione los pasos del usuario que inician el embudo y use {{< ui >}}Add step{{< /ui >}} para agregar pasos adicionales. Arrastre y suelte los pasos para reordenarlos en el embudo.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_add_step_video.mp4" alt="Uso del botón Agregar paso para añadir un paso a un embudo existente, y uso de arrastrar y soltar para mover el nuevo paso al lugar correcto en el embudo." video=true >}}
-
 
 ### Agregar filtros {#add-filters}
 
@@ -117,60 +105,36 @@ Al calcular sus conversiones, seleccione cómo se cuentan las conversiones eligi
 
 - {{< ui >}}Total{{< /ui >}}: Cuenta una conversión cada vez que el mismo ID de sesión, usuario o cuenta completa el embudo definido. Usando el mismo ejemplo (`A, B, C, A, B, C`), este método cuenta **dos conversiones**. La configuración {{< ui >}}Total{{< /ui >}} cuenta flujos completos, no la cantidad de veces que se repite un paso intermedio.
 
-
 ## Cambiar la visualización {#change-the-visualization}
-Después de definir los eventos de paso y la medición de conversión, puede cambiar a una visualización diferente para comprender mejor las conversiones de usuario de su aplicación.
 
+De forma predeterminada, un embudo se muestra como pasos. Cambie la visualización para ver los mismos datos de conversión en un formato diferente.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_visualization_video.mp4" alt="Cambiar la visualización de Steps a Timeseries usando un menú desplegable." video=true >}}
+- Series temporales: Grafique la métrica de conversión a lo largo del tiempo.
 
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="Datos de conversión de un embudo mostrados como series temporales." style="width:90%;" >}}
 
-### Timeseries {#timeseries}
-Ver el embudo como timeseries puede ser útil para comprender las tendencias de conversión. Puede seleccionar el período de tiempo para graficar la conversión y puede visualizar las conversiones como un recuento absoluto o una tasa.
+- Valor de consulta: Muestre la métrica de conversión como un solo número.
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_timeseries_view.png" alt="La visualización series temporales, configurada para mostrar usuarios únicos convertidos diariamente durante la última semana." style="width:80%;" >}}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualización de valor de consulta, configurada para mostrar el número total de sesiones convertidas únicas durante la última semana." style="width:80%;" >}}
 
-### Query value{#query-value}
+- Lista principal: Clasifique la métrica de conversión por un desglose, como país o navegador.
 
-La visualización Query value muestra el valor actual de una métrica.
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="Datos de conversión de un embudo desglosados por país, mostrados como una lista principal." style="width:90%;" >}}
 
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_query_value.png" alt="La visualización Query value, configurada para mostrar el número total de sesiones convertidas únicas durante la última semana." style="width:80%;" >}}
+- Gráfico de barras: Compare la métrica de conversión entre los valores de un desglose, mostrados como columnas.
 
-### Lista principal {#top-list}
+  {{< img src="product_analytics/journeys/funnel_analysis/funnel_bar_chart.png" alt="Datos de conversión de un embudo desglosados por país, mostrados como un gráfico de barras." style="width:90%;" >}}
 
-La visualización de lista principal identifica los valores principales de una faceta según una medida elegida.
-
-{{< img src="product_analytics/journeys/funnel_analysis/funnel_top_list.png" alt="La visualización de lista principal, configurada para mostrar las cuatro fuentes de conversión principales por continente." style="width:80%;" >}}
+La lista principal y el gráfico de barras requieren un desglose. Agregue uno debajo de [Compare](#compare-data) si el embudo aún no tiene uno.
 
 ## Visualizar los impulsores de conversión {#view-conversion-drivers}
 
 Para obtener más contexto sobre las conversiones y los abandonos de los usuarios, haga clic en un paso del embudo para acceder al análisis de conversión.
 
-<div class="alert alert-info">El análisis de conversión está en Preview.</div>
-
 Visualizar los impulsores de conversión, los recorridos de usuario, las reproducciones de usuario disponibles para conversiones y abandonos, y los detalles del usuario.
 
 {{< img src="product_analytics/journeys/funnel_analysis/funnel_analysis_side_panel.png" alt="La vista del panel lateral después de hacer clic en un paso del embudo, que muestra los impulsores de conversión, las reproducciones disponibles y los usuarios convertidos." style="width:100%;" >}}
 
-## Compartir un embudo {#share-a-funnel}
-
-Los embudos se pueden compartir con sus equipos en [tableros][3] para analizar la conversión junto con otras métricas de telemetría, o en un [Notebook][4] para usarlos en informes.
-
-Puede compartir toda la visualización o widgets individuales.
-
-- Comparta toda la visualización en Notebooks y tableros:
-
-  {{< img src="product_analytics/journeys/funnel_analysis/funnels_share_export.png" alt="La opción Compartir de la visualización expandida, que muestra la opción adicional para Exportar a PNG " style="width:100%;" >}}
-
-- Comparta widgets individuales desde un tablero:
-
-  {{< img src="product_analytics/journeys/funnel_analysis/pana_funnel_share_dashboard.png" alt="Comparta un widget haciendo clic en el icono de exportación en la parte superior derecha del widget" style="width:100%;" >}}
-
 ## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: https://app.datadoghq.com/product-analytics/
-[2]: https://app.datadoghq.com/product-analytics/user-journey/funnel
-[3]: /es/product_analytics/dashboards/
-[4]: /es/notebooks/

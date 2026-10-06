@@ -1,8 +1,8 @@
 ---
 aliases:
 - /es/feature_flags/setup/android/
-description: Configure Datadog Feature Flags para aplicaciones Android y Android TV
-  utilizando la API estándar de OpenFeature.
+description: Configure los Feature Flags de Datadog para aplicaciones Android y Android
+  TV utilizando la API estándar de OpenFeature.
 further_reading:
 - link: /feature_flags/client/
   tag: Documentación
@@ -15,7 +15,7 @@ further_reading:
   text: Monitoreo de Android y Android TV
 - link: /feature_flags/guide/proxy_sdk_traffic/
   tag: Guía
-  text: Proxy de tráfico del SDK de Feature Flag
+  text: Proxy para el tráfico del SDK de Feature Flag
 title: Feature Flags para Android y Android TV
 ---
 ## Descripción general {#overview}
@@ -28,7 +28,7 @@ El SDK de Feature Flags de Datadog para Android está construido sobre [OpenFeat
 
 ## Primeros pasos {#getting-started}
 
-Aquí tiene un ejemplo mínimo para que las Feature Flags funcionen en su aplicación Android:
+Aquí tiene un ejemplo mínimo para que los Feature Flags funcionen en su aplicación Android:
 
 ```kotlin
 // 1. Add dependencies (see Installation section)
@@ -43,8 +43,12 @@ val configuration = Configuration.Builder(
     .build()
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 
-// 3. Enable Feature Flags
-Flags.enable()
+// 3. Enable Feature Flags with a bounded initialization timeout
+Flags.enable(
+    FlagsConfiguration.Builder()
+        .initializationTimeout(2_000L)
+        .build()
+)
 
 // 4. Create and set up the OpenFeature provider
 val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
@@ -95,19 +99,18 @@ val configuration = Configuration.Builder(
 Datadog.initialize(this, configuration, TrackingConsent.GRANTED)
 ```
 
-## Habilite Feature Flags {#enable-flags}
+## Habilitar marcadores {#enable-flags}
 
-Después de inicializar Datadog, habilite `Flags` para adjuntarlo a la instancia actual del SDK de Android de Datadog y prepararse para la creación del proveedor y la evaluación de Feature Flags:
+Después de inicializar Datadog, habilite `Flags` para adjuntarlo a la instancia actual del SDK de Datadog para Android y prepararse para la creación del proveedor y la evaluación de Feature Flags:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.Flags
-
 Flags.enable()
 {{< /code-block >}}
 
 También puede pasar un objeto de configuración; consulte [Configuración avanzada](#advanced-configuration).
 
-## Crear y configurar el proveedor {#create-and-configure-the-provider}
+## Cree y configure el proveedor {#create-and-configure-the-provider}
 
 Cree un `FlagsClient` y conviértalo en un proveedor de OpenFeature utilizando la extensión `asOpenFeatureProvider()`. Haga esto una vez durante el inicio de la aplicación:
 
@@ -123,13 +126,13 @@ val provider = FlagsClient.Builder().build().asOpenFeatureProvider()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
-<div class="alert alert-info">El proveedor de OpenFeature envuelve un Datadog <code>FlagsClient</code> internamente. Este es un detalle de implementación; una vez configurado, usted interactúa exclusivamente a través de la API estándar de OpenFeature.</div>
+<div class="alert alert-info">El proveedor de OpenFeature envuelve un Datadog <code>FlagsClient</code> internamente. Este es un detalle de implementación: una vez configurado, usted interactúa exclusivamente a través de la API estándar de OpenFeature.</div>
 
-<div class="alert alert-warning">El SDK de Kotlin de OpenFeature utiliza un único proveedor global y un contexto de evaluación. Si necesita múltiples contextos de evaluación independientes en la misma aplicación (por ejemplo, para diferentes usuarios en una aplicación multiusuario), consulte <a href="#direct-flagsclient-integration-advanced">Integración directa de FlagsClient</a>.</div>
+<div class="alert alert-warning">El SDK de OpenFeature para Kotlin utiliza un único proveedor global y un contexto de evaluación. Si necesita múltiples contextos de evaluación independientes en la misma aplicación (por ejemplo, para diferentes usuarios en una aplicación multiusuario), consulte <a href="#direct-flagsclient-integration-advanced">Integración directa de FlagsClient</a>.</div>
 
 ## Establezca el contexto de evaluación {#set-the-evaluation-context}
 
-Defina a quién o a qué se aplica la evaluación de las Feature Flags mediante un `ImmutableContext`. El contexto de evaluación incluye información del usuario o de la sesión utilizada para determinar qué variaciones de las Feature Flags deben devolverse. Establezca esto antes de evaluar las Feature Flags para ayudar a garantizar una segmentación adecuada.
+Defina a quién o a qué se aplica la evaluación de Feature Flags mediante un `ImmutableContext`. El contexto de evaluación incluye información del usuario o de la sesión utilizada para determinar qué variaciones de los marcadores deben devolverse. Establezca esto antes de evaluar los Feature Flags para ayudar a garantizar una segmentación adecuada.
 
 <div class="alert alert-warning">Datadog Feature Flags requiere que los atributos del contexto de evaluación sean valores primitivos planos: cadenas, números y booleanos. No pase objetos o arreglos anidados; no son compatibles y pueden causar que los datos de exposición se descarten.</div>
 
@@ -152,7 +155,7 @@ OpenFeatureAPI.setEvaluationContext(
 
 ## Evalúe marcadores {#evaluate-flags}
 
-Después de configurar su proveedor y contexto de evaluación, puede leer los valores de las Feature Flags en toda su aplicación. La evaluación de Feature Flags es _local e instantánea_: el SDK utiliza datos almacenados en caché localmente, por lo que no se producen solicitudes de red al evaluar Feature Flags. Esto hace que las evaluaciones sean seguras de realizar en el hilo principal.
+Después de configurar su proveedor y contexto de evaluación, puede leer los valores de los Feature Flags en toda su aplicación. La evaluación de marcadores es _local e instantánea_: el SDK utiliza datos almacenados en caché localmente, por lo que no se producen solicitudes de red al evaluar marcadores. Esto hace que las evaluaciones sean seguras para realizarse en el hilo principal.
 
 Cada Feature Flag se identifica mediante una _clave_ (una cadena única) y se puede evaluar con un método tipado que devuelve un valor del tipo esperado. Si el marcador no existe o no se puede evaluar, el SDK devuelve el valor predeterminado proporcionado.
 
@@ -198,7 +201,7 @@ when (theme) {
 }
 {{< /code-block >}}
 
-### Los Feature Flags de enteros y dobles {#integer-and-double-flags}
+### Marcadores de tipo entero y doble{#integer-and-double-flags}
 
 Los Feature Flags numéricos son apropiados cuando una funcionalidad depende de un parámetro numérico como un límite, porcentaje o multiplicador:
 
@@ -236,7 +239,7 @@ val fontSize = config.asStructure()?.get("fontSize")?.asInteger()
 
 ### Detalles de evaluación de marcadores {#flag-evaluation-details}
 
-Cuando necesite más que el valor de la Feature Flag, puede obtener metadatos de evaluación detallados, incluyendo el valor evaluado, el nombre de la variante, el motivo y cualquier código de error:
+Cuando necesite más que el valor de un Feature Flag, puede obtener metadatos de evaluación detallados, incluyendo el valor evaluado, el nombre de la variante, el motivo y cualquier código de error:
 
 {{< code-block lang="kotlin" >}}
 val details = client.getStringDetails(
@@ -254,11 +257,11 @@ Existen métodos de detalle similares para otros tipos: `getBooleanDetails()`, `
 
 Los detalles del marcador le ayudan a depurar el comportamiento de evaluación y a entender por qué un usuario recibió un valor determinado.
 
-## Observar eventos del proveedor {#observe-provider-events}
+## Observe eventos del proveedor {#observe-provider-events}
 
-<div class="alert alert-info">La observación de eventos del proveedor está disponible en <code>dd-sdk-android-flags-openfeature</code> 3.6.0 y versiones posteriores. Use la misma versión para <code>dd-sdk-android-flags</code>.</div>
+<div class="alert alert-info">La observación de eventos del proveedor está disponible en <code>dd-sdk-android-flags-openfeature</code> 3.6.0 y versiones posteriores. Utilice la misma versión para <code>dd-sdk-android-flags</code>.</div>
 
-Use `OpenFeatureAPI.observe()` para reaccionar a los cambios de estado del proveedor. El proveedor de OpenFeature de Datadog emite `ProviderReady`, `ProviderStale` y `ProviderError` según el estado del `FlagsClient` subyacente.
+Utilice `OpenFeatureAPI.observe()` para reaccionar a los cambios de estado del proveedor. El proveedor OpenFeature de Datadog emite `ProviderReady`, `ProviderStale` y `ProviderError` según el estado del `FlagsClient` subyacente.
 
 {{< code-block lang="kotlin" >}}
 import dev.openfeature.kotlin.sdk.OpenFeatureAPI
@@ -303,24 +306,32 @@ La API `Flags.enable()` acepta una configuración opcional con las opciones enum
 
 {{< code-block lang="kotlin" >}}
 val config = FlagsConfiguration.Builder()
-    // configure options here
+    .initializationTimeout(2_000L)
+    // configure additional options here
     .build()
 
 Flags.enable(config)
 {{< /code-block >}}
 
+`initializationTimeout(timeoutMs)`
+: Tiempo máximo, en milisegundos, para esperar a que el primer contexto de evaluación esté listo. El tiempo de espera cubre la carga de datos en caché, la obtención de asignaciones, la lectura y decodificación de la respuesta, el almacenamiento de asignaciones y la publicación del estado de listo. No cambia el tiempo de espera del cliente HTTP. La operación de asignación continúa después del tiempo de espera y puede mover al cliente a `Ready` cuando se completa.
+
+El tiempo de espera se aplica solo a la primera llamada `setEvaluationContext`. Esa llamada consume el tiempo de espera incluso si la operación falla o nunca comienza. Las llamadas posteriores no tienen temporizador de inicialización. El valor predeterminado es `5_000` milisegundos. Establézcalo en cero o en un valor negativo para desactivar el tiempo de espera. Cuando el tiempo de espera expira, el cliente se vuelve `Stale` si hay asignaciones almacenadas en caché disponibles. De lo contrario, se vuelve `Error`.
+
+<div class="alert alert-info"><code>initializationTimeout</code> está disponible en <code>dd-sdk-android-flags</code> 3.14.0 y versiones posteriores.</div>
+
 `trackExposures()`
-: Cuando `true` (predeterminado), el SDK registra automáticamente un _evento de exposición_ cuando se evalúa una Feature Flag. Estos eventos contienen metadatos sobre qué Feature Flag se accedió, qué variante se entregó y bajo qué contexto. Se envían a Datadog para que pueda analizar posteriormente la adopción de funcionalidades. Si solo necesita una evaluación local sin telemetría, puede desactivarla con: `trackExposures(false)`.
+: Cuando `true` (predeterminado), el SDK registra automáticamente un _evento de exposición_ cuando se evalúa un marcador. Estos eventos contienen metadatos sobre qué marcador se accedió, qué variante se entregó y bajo qué contexto. Se envían a Datadog para que el usuario pueda analizar posteriormente la adopción de funciones. Si solo necesita una evaluación local sin telemetría, puede desactivarla con : `trackExposures(false)`.
 
 `rumIntegrationEnabled()`
-: Cuando `true` (predeterminado), las evaluaciones de Feature Flags se rastrean en RUM, lo que permite correlacionarlas con las sesiones de usuario. Esto permite análisis como _¿Los usuarios en la variante B experimentan más errores?_. Si su aplicación no usa RUM, esta Feature Flag no tiene efecto y puede dejarse de forma segura en su valor predeterminado. Use `rumIntegrationEnabled(false)` para desactivar la integración de RUM.
+: Cuando `true` (predeterminado), las evaluaciones de marcadores se rastrean en RUM, lo que permite correlacionarlos con las sesiones de usuario. Esto permite análisis como _“¿Los usuarios en la variante B experimentan más errores?”_. Si su aplicación no utiliza RUM, este marcador no tiene efecto y puede dejarse de forma segura en su valor predeterminado. Use `rumIntegrationEnabled(false)` para desactivar la integración de RUM.
 
 `gracefulModeEnabled()`
-: Controla cómo el SDK maneja el uso incorrecto de la API; por ejemplo, crear un cliente antes de llamar a `Flags.enable()`, crear un cliente duplicado con el mismo nombre o recuperar un cliente que aún no se ha creado.
+: Controla cómo el SDK maneja el uso incorrecto de la API, por ejemplo, crear un cliente antes de llamar a `Flags.enable()`, crear un cliente duplicado con el mismo nombre o recuperar un cliente que aún no se ha creado.
 
-  El comportamiento exacto del Modo tolerante a fallos depende de la configuración de compilación:
+  El comportamiento exacto del Graceful Mode depende de su configuración de compilación:
 
-  * **Compilaciones de lanzamiento**: El SDK siempre aplica el Modo tolerante a fallos: cualquier uso incorrecto solo se registra internamente si `Datadog.setVerbosity()` está configurado.
+  * **Compilaciones de lanzamiento**: El SDK siempre aplica Graceful Mode: cualquier uso indebido solo se registra internamente si `Datadog.setVerbosity()` está configurado.
   * **Compilaciones de depuración** con `gracefulModeEnabled = true` (predeterminado): El SDK siempre registra advertencias en la consola.
   * **Compilaciones de depuración** con `gracefulModeEnabled = false`: El SDK genera `IllegalStateException` por el uso incorrecto de la API, lo que aplica un enfoque de falla rápida que ayuda a detectar errores de configuración a tiempo.
 
@@ -341,14 +352,14 @@ val provider = FlagsClient.Builder()
 OpenFeatureAPI.setProviderAndWait(provider)
 {{< /code-block >}}
 
-## Integración directa de FlagsClient (avanzado) {#direct-flagsclient-integration-advanced}
+## Integración de Direct FlagsClient (avanzado) {#direct-flagsclient-integration-advanced}
 
 Para la mayoría de las aplicaciones, la API de OpenFeature descrita anteriormente es el enfoque recomendado. Sin embargo, puede usar el `FlagsClient` de Datadog directamente si tiene requisitos específicos que la abstracción de OpenFeature no admite.
 
 **Utilice FlagsClient directamente solo si usted:**
 
 - Requiere **múltiples contextos de evaluación independientes** en la misma aplicación (por ejemplo, diferentes contextos para diferentes usuarios en una aplicación multiusuario)
-- Quiere trabajar con **tipos nativos de Kotlin** directamente (`JSONObject` en lugar de `Value.Structure`)
+- Desea trabajar con **tipos nativos de Kotlin** directamente (`JSONObject` en lugar de `Value.Structure`)
 - Necesita **control detallado** sobre el ciclo de vida del cliente y la configuración por instancia
 
 ### Instalación (FlagsClient) {#installation-flagsclient}
@@ -378,14 +389,14 @@ Recupere el mismo cliente en cualquier parte de su aplicación:
 val flagsClient = FlagsClient.get() // Retrieves the "default" client
 {{< /code-block >}}
 
-También puede crear y recuperar varios clientes proporcionando el parámetro `name`:
+También puede crear y recuperar múltiples clientes proporcionando el parámetro `name`:
 
 {{< code-block lang="kotlin" >}}
 FlagsClient.Builder("checkout").build()
 val flagsClient = FlagsClient.get("checkout")
 {{< /code-block >}}
 
-<div class="alert alert-info">Si ya existe un cliente con el nombre dado, se reutiliza la instancia existente.</div>
+<div class="alert alert-info">Si ya existe un cliente con el nombre proporcionado, se reutiliza la instancia existente.</div>
 
 ### Establezca el contexto de evaluación (FlagsClient) {#set-the-evaluation-context-flagsclient}
 
@@ -401,13 +412,13 @@ flagsClient.setEvaluationContext(
 )
 {{< /code-block >}}
 
-Este método obtiene las asignaciones de Feature Flags del servidor de forma asíncrona en segundo plano. La operación no es bloqueante y es segura para subprocesos. Las actualizaciones de Feature Flags están disponibles para evaluaciones posteriores una vez que se completa la operación en segundo plano.
+Este método obtiene las asignaciones de los Feature Flags del servidor de forma asíncrona, en segundo plano. La operación no es bloqueante y es segura para subprocesos. Las actualizaciones de los Feature Flags están disponibles para evaluaciones posteriores después de que se complete la operación en segundo plano.
 
-### Observe los cambios de estado del cliente directo {#observe-direct-client-state-changes}
+### Observar cambios en el estado del cliente directo {#observe-direct-client-state-changes}
 
-<div class="alert alert-info">La observación directa del estado del cliente con <code>flagsClient.state</code> está disponible en <code>dd-sdk-android-flags</code> 3.4.0 y versiones posteriores.</div>
+<div class="alert alert-info">Observación directa del estado del cliente con <code>flagsClient.state</code> está disponible en <code>dd-sdk-android-flags</code> 3.4.0 y versiones posteriores.</div>
 
-Use `flagsClient.state` para verificar el estado actual del cliente directo o registrar un oyente para los cambios de estado:
+Utilice `flagsClient.state` para verificar el estado actual del cliente directo o registrar un oyente para los cambios de estado:
 
 {{< code-block lang="kotlin" >}}
 import com.datadog.android.flags.FlagsStateListener
@@ -440,9 +451,9 @@ flagsClient.state.addListener(listener)
 val currentState = flagsClient.state.getCurrentState()
 {{< /code-block >}}
 
-El oyente recibe el estado actual cuando se registra y, posteriormente, recibe los cambios de estado futuros. Mantenga la devolución de llamada rápida y envíe el trabajo de larga duración a otro subproceso. Llame a `flagsClient.state.removeListener(listener)` cuando el componente de observación se detenga.
+El oyente recibe el estado actual cuando se registra, y luego recibe los cambios de estado futuros. Mantenga la devolución de llamada rápida y envíe el trabajo de larga duración a otro subproceso. Llame a `flagsClient.state.removeListener(listener)` cuando el componente de observación se detenga.
 
-### Evaluar Feature Flags (FlagsClient) {#evaluate-flags-flagsclient}
+### Evalúe los Feature Flags (FlagsClient) {#evaluate-flags-flagsclient}
 
 {{% collapse-content title="Feature Flags booleanos" level="h4" %}}
 {{< code-block lang="kotlin" >}}
@@ -462,7 +473,7 @@ val theme = flagsClient.resolveStringValue(
 {{< /code-block >}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Feature Flags de enteros y dobles" level="h4" %}}
+{{% collapse-content title="Feature Flags de tipo entero y doble" level="h4" %}}
 {{< code-block lang="kotlin" >}}
 val maxItems = flagsClient.resolveIntValue(
     flagKey = "cart.items.max",
@@ -512,14 +523,14 @@ Esta tabla destaca las diferencias clave entre las API de OpenFeature y `FlagsCl
 |---------|----------------|-----------------|
 | **Estándar de API** | OpenFeature (neutral respecto al proveedor) | Específico de Datadog |
 | **Contexto de evaluación** | Global/estático | Por instancia de cliente |
-| **Flags estructurados** | `Value.Structure` | `JSONObject` |
+| **Feature Flags estructurados** | `Value.Structure` | `JSONObject` |
 | **Seguridad de tipos** | Tipos de `Value`OpenFeature | Tipos nativos de Kotlin |
-| **Dependencia del proveedor** | Baja (neutral respecto al proveedor) | Más alta (específico de Datadog) |
+| **Dependencia del proveedor** | Baja (neutral respecto al proveedor) | Más alta (específica de Datadog) |
 | **Gestión de estado** | Observación basada en flujo | Registro manual de oyentes |
 
 ## Pruebas {#testing}
 
-Puede realizar pruebas en un entorno de prueba de Datadog dedicado con el proveedor real de Datadog, o cambiarlo por un `FeatureProvider` en memoria para controlar los valores de flags directamente en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. El SDK de OpenFeature para Kotlin ascendente no incluye un [`InMemoryProvider`][3], por lo que las pruebas utilizan un pequeño `FeatureProvider` personalizado. El ejemplo a continuación reemplaza el proveedor de `OpenFeatureAPI`: si su código de producción utiliza directamente el wrapper `FlagsClient` de Datadog, su prueba debe hacer aserciones a través del mismo cliente `OpenFeatureAPI` que utiliza el wrapper, no `FlagsClient`.
+Puede realizar pruebas en un entorno de prueba de Datadog dedicado con el proveedor real de Datadog, o cambiarlo por un `FeatureProvider` en memoria para controlar directamente los valores de los marcadores en el código de prueba. Esta sección muestra el enfoque en memoria, que mantiene las pruebas herméticas y sin conexión. El SDK de Kotlin de OpenFeature upstream no incluye un [`InMemoryProvider`][3], por lo que las pruebas utilizan un pequeño `FeatureProvider` personalizado. El siguiente ejemplo reemplaza el proveedor de `OpenFeatureAPI`: si su código de producción utiliza el wrapper `FlagsClient` de Datadog directamente, su prueba debe realizar aserciones a través del mismo cliente `OpenFeatureAPI` que utiliza el wrapper, no `FlagsClient`.
 
 Agregue `kotlinx-coroutines-test` a su configuración de prueba (el `initialize` del SDK es una función `suspend`):
 
@@ -582,7 +593,7 @@ class CheckoutFlagsTest {
 }
 {{< /code-block >}}
 
-`OpenFeatureAPI` es un singleton a nivel de proceso, así que reinícielo entre clases de prueba si las pruebas comparten una JVM. Envuelva `setProviderAndWait` en `runTest { ... }`; no se puede llamar desde un método `@Before` simple porque es `suspend`.
+`OpenFeatureAPI` es un singleton de todo el proceso, así que reinícielo entre clases de prueba si las pruebas comparten una JVM. Envuelva `setProviderAndWait` en `runTest { ... }`: no se puede llamar desde un método `@Before` simple porque es `suspend`.
 
 ## Lecturas adicionales {#further-reading}
 

@@ -20,9 +20,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/experiments
   tag: Blog
   text: Mida el impacto comercial de cada cambio de producto con Datadog Experiments
+- link: https://www.datadoghq.com/blog/coordinate-product-launches-with-datadog/
+  tag: Blog
+  text: Coordine los lanzamientos de productos con Datadog
+- link: https://www.datadoghq.com/blog/chatgpt-datadog-experiments/
+  tag: Blog
+  text: Analice sus experimentos en ChatGPT con el complemento Datadog Experiments
 title: Experimentos
 ---
-## Resumen {#overview}
+## Descripción general {#overview}
 
 Datadog Experiments es una plataforma componible para la experimentación de extremo a extremo. Un experimento en Datadog consta de dos componentes:
 
@@ -77,7 +83,7 @@ Esta ruta funciona cuando la aleatorización se ejecuta a través de [Datadog Fe
 
 Datadog aplica análisis estadístico para comparar variantes y estimar el incremento. Cuando configure un experimento, elija un [método de análisis][11] (frecuentista secuencial, frecuentista de muestra fija o bayesiano) y, opcionalmente, ejecute un [cálculo de tamaño de muestra][8] para estimar cuánto tiempo debe ejecutarse el experimento. Una vez obtenidos los resultados, utilice [Global Lift][19] para comprender cómo se traduce un incremento de experimento dirigido en un impacto en el total de métricas de toda su empresa, y [Cumulative Impact][12] para agregar efectos ajustados por ruido en muchos experimentos sobre la misma métrica.
 
-{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="La visualización de métricas de Experimentos que muestra métricas de negocio, de embudo y de rendimiento con valores de control y variante, además del incremento relativo para cada métrica. Se muestra un tooltip en la métrica Revenue que presenta los valores Non-CUPED para Revenue per User, Total Revenue y User Assignment Count en los grupos de control y variante." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/overview_metrics_view-1.png" alt="La visualización de métricas de Experimentos que muestra métricas de negocio, de embudo y de rendimiento con valores de control y variante, además del incremento relativo para cada métrica. Se muestra información sobre la herramienta en la métrica Revenue que presenta los valores Non-CUPED para Revenue per User, Total Revenue y User Assignment Count en los grupos de control y variante." style="width:90%;" >}}
 
 ## Lecturas adicionales {#further-reading}
 {{< partial name="whats-next/whats-next.html" >}}

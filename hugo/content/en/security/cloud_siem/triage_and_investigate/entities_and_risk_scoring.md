@@ -51,7 +51,9 @@ Click an entity in the [Explorer][4] to open the entity side panel.
 
 The {{< ui >}}What Happened{{< /ui >}} section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
 
-The {{< ui >}}What contributes to the score{{< /ui >}} section displays the list of fired signals, relevant misconfigurations, and identity risks.
+The {{< ui >}}Risk Contributors{{< /ui >}} section displays the list of fired signals, relevant misconfigurations, and identity risks.
+
+The {{< ui >}}What Happened{{< /ui >}} and {{< ui >}}Risk Contributors{{< /ui >}} sections include only the signals, misconfigurations, and identity risks that contribute points to the entity's risk score. To see all signals associated with the entity, including those that do not affect the score, click {{< ui >}}View All Related Signals{{< /ui >}}; for misconfigurations and identity risks, click {{< ui >}}View in Vulnerability Explorer{{< /ui >}}.
 
 ### Triage and mitigate threats in bulk
 

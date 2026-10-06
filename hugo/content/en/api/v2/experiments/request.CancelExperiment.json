@@ -1,0 +1,8 @@
+{
+  "data": {
+    "type": "cancel-experiment-request",
+    "attributes": {
+      "reason": "Cancel the test experiment"
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "pipeline_type": "metrics",
+        "destinations": [
+          {
+            "id": "datadog-metrics-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_metrics"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "*",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "enrichment-table-processor",
+                "include": "*",
+                "type": "enrichment_table",
+                "file": {
+                  "encoding": {
+                    "delimiter": ",",
+                    "type": "csv",
+                    "includes_headers": true
+                  },
+                  "key": {
+                    "column": "service",
+                    "source": {
+                      "type": "tag",
+                      "name": "service"
+                    }
+                  },
+                  "path": "/etc/enrichment/lookup.csv"
+                }
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Metrics Pipeline with Enrichment Table File Lookup"
+    },
+    "type": "pipelines"
+  }
+}

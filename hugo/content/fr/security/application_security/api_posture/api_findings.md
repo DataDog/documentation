@@ -3,13 +3,7 @@ description: Le triage a détecté des risques API dans les définitions, les pa
   et le trafic en direct.
 title: API Findings
 ---
-{{< site-region region="gov" >}}
-<div class="alert alert-info">
-App and API Protection est en préversion sur le site Datadog Government US1-FED.
-</div>
-{{< /site-region >}}
-
-L'explorateur [API Findings][1] fournit une vue de triage centralisée des risques API détectés dans vos définitions, passerelles et trafic en direct. Les règles par défaut détectent les vulnérabilités et les erreurs de configuration courantes. Vous pouvez également ajouter des [règles personnalisées][2] pour des cas d'utilisation spécifiques.
+L'Explorer [API Findings][1] fournit une vue de triage centralisée des risques API détectés dans vos définitions, passerelles et trafic en direct. Les règles par défaut détectent les vulnérabilités et les erreurs de configuration courantes. Vous pouvez également ajouter des [règles personnalisées][2] pour des cas d'utilisation spécifiques.
 
 Colonnes des **API Findings** :
 
@@ -27,7 +21,7 @@ Cliquez sur une découverte pour afficher ses détails et effectuer un workflow 
    - Examinez {{< ui >}}What Happened{{< /ui >}} et {{< ui >}}Detected In{{< /ui >}} pour confirmer que la détection est exacte (service, endpoint, méthode).
    - Dans {{< ui >}}Next Steps{{< /ui >}}, choisissez de {{< ui >}}Mute{{< /ui >}}, {{< ui >}}Create Ticket{{< /ui >}} ou {{< ui >}}Run Workflow{{< /ui >}} selon la propriété et l'impact.
 2. Enquêter:
-   - Utilisez l'onglet {{< ui >}}Context{{< /ui >}} pour examiner l'instantané et les attributs du endpoint (méthode, chemin, indicateurs d'authentification, balises).
+   - Utilisez l'onglet {{< ui >}}Context{{< /ui >}} pour examiner l'instantané et les attributs du endpoint (méthode, chemin, indicateurs d'authentification, tags).
    - {{< ui >}}Detected In{{< /ui >}} fournit des informations pour le routage de la propriété et de la remédiation.
    - Dans {{< ui >}}Detection Rule Query{{< /ui >}}, vous pouvez modifier une règle de découverte d'API en cliquant sur {{< ui >}}See Detection Rule{{< /ui >}}.
 3. Corriger: 

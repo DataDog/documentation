@@ -3,22 +3,20 @@ aliases:
 - /ja/security_platform/cloud_workload_security/guide/tuning-rules/
 - /ja/security_platform/cloud_security_management/guide/
 - /ja/security/cloud_security_management/guide/tuning-rules
-title: Fine-tuning Workload Protection Security Signals
+description: 検出カバレッジを損なうことなく、Workload Protectionのノイズを低減するシグナル抑制を構築するためのベストプラクティス。
+title: Workload Protection のセキュリティシグナルを調整するためのベストプラクティス
 ---
+Workload Protectionは、ワークロードレベルで発生する疑わしいアクティビティを監視します。しかし、ユーザー環境の特定の設定が原因で、良性のアクティビティが悪意のあるものとしてフラグが立てられる場合があります。良性の予期されたアクティビティがシグナルをトリガーしている場合、そのアクティビティに対するトリガーを抑制してノイズを制限できます。
 
-## 概要
+このガイドでは、シグナル抑制を微調整するためのベストプラクティスのための考察とステップを説明します。
 
-Workload Protection monitors suspicious activity occurring at the workload level. However, in some cases, benign activities are flagged as malicious because of particular settings in the user's environment. When a benign expected activity is triggering a signal, you can suppress the trigger on the activity to limit noise. 
+## 抑制戦略 {#suppression-strategy}
 
-このガイドでは、ベストプラクティスのための考察と、シグナル抑制を微調整するためのステップを説明します。
+良性のパターンを抑制する前に、検出アクティビティのタイプに基づいてシグナルの共通特性を特定してください。属性の組み合わせが具体的であればあるほど、抑制はより正確になります。
 
-## 抑制戦略
+リスク管理の観点からは、より少ない属性に基づいて抑制を行うと、実際の悪意のあるアクティビティを見逃す可能性が高まります。悪意のある動作のカバレッジを損なうことなく効果的に抑制を微調整するために、アクティビティタイプごとに分類された、以下の一般的な主要属性のリストを検討してください。
 
-良性パターンを抑制する前に、検出アクティビティの種類に基づいて、シグナルに共通する特性を特定します。属性の組み合わせが具体的であればあるほど、より正確な抑制が可能になります。
-
-リスクマネジメントの観点からは、より少ない属性に基づく抑制は、実際の悪意あるアクティビティを除外してしまう可能性が高くなります。悪意のある行動を見逃すことなく、効果的な微調整を行うには、一般的な主要属性をアクティビティの種類別に分類した以下のリストを参考にするとよいでしょう。
-
-### プロセスアクティビティ
+### プロセスアクティビティ {#process-activity}
 
 共通キー:
 - `@process.args`
@@ -34,7 +32,7 @@ Workload Protection monitors suspicious activity occurring at the workload level
 - `@process.ancestors.executable.path`
 - `@process.ancestors.executable.envs`
 
-To determine if a process is legitimate, review its parent process in the process tree. The process ancestry tree traces a process back to its origin, providing context for its execution flow. This helps in understanding the sequence of events leading up to the current process.
+プロセスが正当なものかどうかを判断するには、プロセスツリーでその親プロセスを確認してください。プロセスツリーは、プロセスをその起源まで遡り、実行フローのコンテキストを提供します。これは、現在のプロセスに至るまでの一連のイベントを理解するのに役立ちます。
 
 通常、親プロセスと不要なプロセスの属性の両方に基づいて抑制すれば十分です。
 
@@ -45,13 +43,13 @@ To determine if a process is legitimate, review its parent process in the proces
 - `@process.parent.executable.args`
 - `@process.user`
 
-広い時間軸で抑制することにした場合、値が変わると抑制が効かなくなるので、一時的な値を引数に持つ処理の使用は避けてください。
+広い時間軸で抑制する場合は、値が変わると抑制が効かなくなるため、一時的な値を引数に持つプロセスの使用は避けてください。
 
-例えば、再起動や実行時に特定のプログラムは一時ファイル (`/tmp`) を使用します。このような値に基づいて抑制を構築しても、同様のアクティビティが検出された場合には有効ではありません。
+例えば、特定のプログラムは、再起動時や実行時に一時ファイル（`/tmp`）を使用します。これらの値に基づいて抑制を構築しても、同様のアクティビティが検出された場合には効果がありません。
 
-例えば、コンテナ上の特定のアクティビティからのすべてのシグナルのノイズを完全に抑制したいとします。コンテナをスピンアップするプロセスを開始するプロセスツリー内のフルコマンドを選択します。実行中、プロセスは、コンテナが存在する限り、存在するファイルにアクセスします。対象とする動作がワークロードロジックと結びついている場合、エフェメラルプロセスインスタンスに基づく抑制定義は、他のコンテナ上の同様のアクティビティを調整するのに有効でなくなります。
+コンテナ上の特定のアクティビティから発生するすべてのシグナルのノイズを完全に抑制したいとします。コンテナを起動するプロセスを開始するプロセスツリー内の完全なコマンドを選択します。実行中、そのプロセスはコンテナが存在する限り存在するファイルにアクセスします。ターゲットとする動作がワークロードのロジックに関連している場合、一時的なプロセスインスタンスに基づく抑制定義は、他のコンテナでの同様のアクティビティを除外するための調整には効果がありません。
 
-### ファイルアクティビティ
+### ファイルアクティビティ {#file-activity}
 
 ワークロード、該当ファイル、ファイルにアクセスするプロセスに関する識別情報を反映した属性に基づいて、ファイルアクティビティ関連の抑制を絞り込むことができます。
 
@@ -72,11 +70,11 @@ To determine if a process is legitimate, review its parent process in the proces
   - `@process.parent.executable.path`
   - `@process.user`
 - ファイル:
-  - `@file.path` 
+  - `@file.path`
   - `@file.inode`
   - `@file.mode`
 
-シグナルの検査中に実際の悪意のあるアクティビティを判断するには、プロセスがファイルにアクセスし、変更する際のコンテキストが予想通りであるかどうかを検証します。インフラストラクチャー全体でファイルに対する意図的な動作を抑制することを避けるために、上記の共通キーから関連するすべてのコンテキスト情報を収集する組み合わせを常に持つ必要があります。
+シグナルを調査する際に実際の悪意のあるアクティビティを特定するには、プロセスがファイルにアクセスおよび変更しているコンテキストが予期されたものであるかを確認してください。インフラストラクチャー全体でファイルに対する意図した動作が抑制されるのを避けるため、常に上記にリストされている共通キーから関連するすべてのコンテキスト情報を収集する組み合わせを持つ必要があります。
 
 組み合わせ例:
   - `@process.args`
@@ -87,9 +85,9 @@ To determine if a process is legitimate, review its parent process in the proces
   - `host`
   - `kube_container_name`
 
-### ネットワーク DNS ベースのアクティビティ
+### ネットワーク DNS ベースのアクティビティ {#network-dns-based-activity}
 
-ネットワークアクティビティモニタリングは、DNS トラフィックをチェックし、サーバーのネットワークを危険にさらす可能性のある不審な行動を検出することを目的としています。特定の IP から DNS サーバーへのクエリをチェックしながら、プライベートネットワーク IP やクラウドネットワーク IP など、既知の IP アドレスからの良性アクセスに対してトリガーをかけることが可能です。
+ネットワークアクティビティ監視はDNSトラフィックをチェックし、サーバーネットワークを侵害する可能性のある不審な動作を検出することを目的としています。特定のIPからDNSサーバーへのクエリをチェックする際、プライベートネットワークIPやクラウドネットワークIPなど、既知のIPアドレスセットからの正常なアクセスに対してトリガーされる可能性があります。
 
 共通キー:
 - プロセス:
@@ -111,9 +109,9 @@ To determine if a process is legitimate, review its parent process in the proces
   - `@network.destination.ip/port`
   - `@dns.question.*`
 
-### カーネルアクティビティ
+### カーネルアクティビティ {#kernel-activity}
 
-カーネル関連のシグナルでは、ノイズは通常、ワークロードのロジックや特定のカーネルバージョンに関連する脆弱性から発生します。何を抑制するかを決定する前に、以下の属性を考慮してください。
+カーネル関連のシグナルでは、ノイズは通常、ワークロードのロジックや特定のカーネルバージョンに関連する脆弱性に起因します。何を抑制するかを決定する前に、以下の属性を検討してください。
 
 共通キー:
 - プロセス
@@ -130,60 +128,8 @@ To determine if a process is legitimate, review its parent process in the proces
 
 このタイプのアクティビティに対する組み合わせの定義は、ファイルまたはプロセスのアクティビティに似ていますが、攻撃に使用されるシステムコールに関連するいくつかの特異性が追加されています。
 
-例えば、Dirty Pipe の悪用は、特権昇格の脆弱性です。この攻撃を利用してローカルユーザーがシステム上で特権を拡大した場合、重大な事態になるため、ルートユーザーが期待するプロセスを実行することで発生するノイズを抑制することは理にかなっています。
+例えば、Dirty Pipeエクスプロイトは権限昇格の脆弱性です。この攻撃を使用してローカルユーザーがシステム上で権限を昇格させると重大な問題となるため、rootユーザーが予期されたプロセスを実行することによって発生するノイズを抑制することは理にかなっています。
 - `@process.executable.user`
 - `@process.executable.uid`
 
-さらに、一部のマシンでパッチが適用されたカーネルバージョン (例えば、Dirty Pipe 脆弱性のパッチが適用された Linux バージョン 5.16.11、5.15.25、5.10 など) を実行していても、シグナルが作成されることに気づくかもしれません。この場合、組み合わせに `host`、`kube_container_name`、`kube_service` などのワークロードレベルのタグを追加します。ただし、ワークロードレベルの属性やタグを使用する場合、広範囲の候補に適用されるため、検出対象範囲やカバレッジが減少することに注意してください。このような事態を防ぐには、ワークロードレベルのタグとプロセスまたはファイルベースの属性を常に組み合わせて、よりきめ細かい抑制基準を定義する必要があります。
-
-## シグナルから抑制を加える
-
-When you are in the process of investigating a potential threat reported by Workload Protection detection rules, you can encounter some signals that alert on known benign behaviors that are specific to your environment.  
-
-Java プロセスユーティリティの悪用について考えてみましょう。攻撃者は、Java プロセスを実行するアプリケーションコードの脆弱性を意図的に狙います。この種の攻撃は、独自の Java シェルユーティリティを生成することにより、アプリケーションへの永続的なアクセスを伴います。
-
-In some cases, Workload Protection rules might also detect expected activity, for example from your security team running a pentest session to evaluate the robustness of your applications. In this case, you can evaluate the accuracy of alerts reported and suppress noise.
-
-シグナルの詳細サイドパネルを開き、タブからタブに移動して、コマンドライン引数や環境変数キーなどの主要なプロセスメタデータを含むコンテキストを取得します。コンテナ化されたワークロードの場合、関連するイメージ、ポッド、Kubernetes クラスターなどの情報が含まれます。
-
-{{< img src="/security/cws/guide/cws-tuning-rules.png" alt="シグナルに関連するイベント、ログ、その他のデータを表示するシグナルのサイドパネルです。" width="75%">}}
-
-抑制条件を定義するには、任意の属性値をクリックし、**Never trigger signals for** を選択します。
-
-この例では、これらの環境変数の使用に先立って、プロセスの祖先ツリー内で特権をエスカレートさせるアクションが実際に行われたかどうかを評価します。タグは、インフラストラクチャー内のどこでアクションが発生したかを示し、その重大度を低減するのに役立ちます。これらの情報があれば、これらの環境変数を継承しているプロセスに対して、ルールを調整することを決定できます。
-
-ルールの調整を行う場合、シグナルの特定の属性を組み合わせることで、抑制の精度を向上させることができます。通常、抑制効果を高める以下の共通キーを使用するのが最適です。
-
-- `@process.parent.comm`: シグナルを担当したプロセスが呼び出されたときのコンテキスト。このキーは、その実行が予期されたものであるかどうかを評価するのに役立ちます。通常、親プロセスはその実行をコンテキスト化するので、類似の良性動作を調整する良い候補となります。
-- `@process.parent.path`: 同様に、親プロセスの対応するバイナリパスを追加すると、その場所を指定することで抑制が補完されます。
-- `host`: 当該ホストが脆弱な環境、例えばステージング環境で動作していない場合、そこからイベントが発生するたびにシグナルがトリガーされるのを抑制することができます。
-- `container.id`: ワークロードに関連する属性が混在している場合、抑制はより効率的になります。あるコンテナが良質のアクティビティ専用であることが分かっている場合、そのコンテナ名や ID を追加することでノイズを大幅に減らすことができます。
-- `@user.id`: あるユーザーを既知のメンバーとして識別した場合、そのユーザーに関連するアクティビティを抑制することができます。
-
-さらなる粒度のために、以下の属性は実行チェーンを再構築する際に過去のプロセスに関する情報を提供します。これらはプレフィックス `@process.ancestors.*` の下で見つけることができます。
-- `file.name`
-- `args`
-- `file.path`
-
-## ルールエディターから抑制を加える
-
-シグナルは、セキュリティアラート内の関連するコンテキストを表面化させます。イベントデータは抑制フィルターに活用できますが、検出ルールが構築される観測可能性データはより良い調整候補を提供する可能性があります。
-
-In Workload Protection, the runtime Agent logs are generated from collected kernel events. You can preview the logs from the signal side-panel without context switching. 
-
-1. 選択したシグナルの詳細サイドパネルで、[Events] タブをクリックします。
-2. **View in Log Explorer** をクリックして、ログ管理に移動し、このシグナルを発生させるログの完全なリストを表示します。
-   ログは多数存在するため、シグナルサイドパネルでは、これらのログとその共有属性を JSON 構造にまとめます。
-3. Go back to the Events tab and scroll to the end of the panel. Expand the JSON dropdown to access all log attributes contained in runtime Agent events.
-4. シグナルを抑制するキーと値のペアを、`@process.args`、`@process.group`、`@process.ancestors.comm`、または `@process.ancestors.args` などの共通のキーで特定することができるようになります。
-5. ルールエディターでルールを開き、**Exclude benign activity with suppression queries** (抑制クエリを使用した良性アクティビティを除外する) で 役に立つと特定したキーと値のペアのリストを追加します。
-
-例えば、`Java process spawned shell/utility` (Java プロセスが生成したシェル/ユーティリティ) というルールがあり、次のような属性の組み合わせで抑制したいとします。
-- `@process.args:+x`
-- `@process.executable.group:exec`
-- `@process.ancestors.executable.comm:root`
-- `@process.ancestors.executable.args:init`
-
-**This rule will not generate signal if there is match** (このルールは、一致がある場合、シグナルを発生させません) にこれらのキー値を入力し、不要なシグナルを抑制します。
-
-一方、正しい属性セットを識別して特定の条件でシグナルを発生させたい場合は、**Only generate a signal if there is a match** (一致がある場合、シグナルのみを発生させる) の組み合わせを指定します。
+さらに、一部のマシンがパッチ適用済みのカーネルバージョン（例えば、Dirty Pipeの脆弱性に対してパッチが適用されたLinuxバージョン5.16.11、5.15.25、および5.10）を実行している場合でも、シグナルが作成されることに気づくかもしれません。この場合、`host`、`kube_container_name`、または`kube_service`のようなワークロードレベルタグを組み合わせに追加してください。ただし、ワークロードレベルの属性やタグを使用する場合、それが広範囲の候補に適用され、検出対象範囲とカバレッジが減少することに注意してください。それを防ぐために、ワークロードレベルタグをプロセスベースまたはファイルベースの属性と常に組み合わせて、より詳細な抑制基準を定義してください。

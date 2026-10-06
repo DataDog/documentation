@@ -104,7 +104,7 @@ Span Input: {{span_input}}
    También puede usar el panel de la derecha ({{< ui >}}Filtered Spans{{< /ui >}} en el ámbito del tramo, {{< ui >}}Filtered Traces{{< /ui >}} en el ámbito de la traza, {{< ui >}}Filtered Sessions{{< /ui >}} en el contexto de la sesión) para agregar datos de tramo como una variable:
    1. Elija una cuenta y una aplicación para que los tramos, trazas o sesiones aparezcan a la derecha.
    2. Seleccione uno de los tramos a la derecha para ver su JSON.
-   3. Seleccione {{< ui >}}+{{< /ui >}} para agregar el JSON a su prompt de usuario.
+   3. Seleccione {{< ui >}}\+{{< /ui >}} para agregar el JSON a su mensaje de usuario.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="El contenido del menú de la visualización JSON en el panel derecho de configuración de evaluación personalizada, que muestra la opción para Agregar variable al mensaje." style="width:40%;" >}}
 
