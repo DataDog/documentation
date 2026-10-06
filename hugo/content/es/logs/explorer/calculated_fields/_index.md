@@ -1,107 +1,126 @@
 ---
 disable_toc: false
 further_reading:
-- link: /logs/explorer/calculated_fields/expression_language
+- link: https://www.datadoghq.com/blog/ai-powered-log-parsing
+  tag: Blog
+  text: Acelere las investigaciones con el parseo de registros impulsado por IA
+- link: /logs/explorer/calculated_fields/formulas
   tag: Documentación
-  text: Lenguaje de expresión de campos calculados
+  text: Fórmulas de campos calculados
+- link: /logs/explorer/calculated_fields/extractions
+  tag: Documentación
+  text: Parseo Grok de extracción
 - link: /logs/explorer/
   tag: Documentación
-  text: Log Explorer
+  text: Explorador de registros
 - link: https://www.datadoghq.com/blog/calculated-fields-log-management-datadog/
   tag: Blog
-  text: Transforma y enriquece tus logs en el tiempo de consulta con Campos calculados
+  text: Transforme y enriquezca sus registros en el momento de la consulta con campos
+    calculados
+- link: https://learn.datadoghq.com/courses/enhance-log-querying
+  tag: Centro de aprendizaje
+  text: Mejore las consultas y el análisis de registros con tablas de referencia,
+    subconsultas y campos calculados
 title: Campos calculados
 ---
+<div class="alert alert-info">Para conocer la sintaxis, los operadores y las funciones, consulte <a href="/logs/explorer/calculated_fields/formulas">Fórmulas</a></div>
+
+## Descripción general {#overview}
+
+Los campos calculados le permiten transformar y enriquecer sus datos de registro en el **momento de la consulta**. Se comporta como cualquier otro [atributo de registro][1] y puede utilizarse para búsquedas, agregaciones, visualizaciones o incluso para definir campos calculados adicionales.
+
+Existen dos tipos de campos calculados: **Extracciones** y **Fórmulas**. Ambos comparten las siguientes propiedades:
+
+- Son **temporales** y no persisten más allá de su sesión del explorador de registros.
+- Son **de ámbito de usuario** y solo usted puede verlos.
+- Son ideales para el **análisis retroactivo**, ya que pueden aplicarse a registros ya indexados.
+- Deben referenciarse con el prefijo `#` cuando se utilicen en consultas, agregaciones u otros campos calculados.
+- Puede definir hasta **cinco** campos calculados a la vez.
+
+## Cuándo usar campos calculados {#when-to-use-calculated-fields}
+
+Use campos calculados en los siguientes escenarios:
+
+- Cuando necesite un campo temporal para una investigación o análisis a corto plazo.
+- Cuando necesite analizar retroactivamente registros indexados (los cambios en las canalizaciones solo afectan a los registros ingeridos después de la actualización).
+- Cuando no tiene el permiso o la experiencia para modificar las canalizaciones de registros rápidamente.
+- Cuando desea que un campo calculado sea visible solo para usted, útil para una exploración rápida y una experimentación de bajo riesgo.
+
+Si descubre que un campo calculado es valioso a largo plazo, actualice sus [canalizaciones de registros][2] para que su equipo se beneficie del procesamiento automatizado.
+
+## Cree un campo calculado {#create-a-calculated-field}
+
+Puede crear un campo calculado desde dos puntos de entrada en el explorador de registros: desde el menú {{< ui >}}Add{{< /ui >}} o desde un evento de registro o atributo específico.
+
+### Desde el menú Agregar {#from-the-add-menu}
+
+1. Navegue al explorador de registros [5].
+1. Haga clic en el botón {{< ui >}}Add{{< /ui >}} junto a la barra de búsqueda.
+1. Seleccione {{< ui >}}Calculated field{{< /ui >}}.
+
+Esto es útil cuando ya está familiarizado con la estructura y el contenido de los registros y desea definir rápidamente una fórmula o regla de parseo.
+
+### Desde un evento de registro o atributo específico {#from-a-specific-log-event-or-attribute}
+
+1. Navegue al explorador de registros [5].
+1. Haga clic en un evento de registro para abrir el panel lateral.
+1. Seleccione un atributo JSON para abrir el menú contextual.
+1. Elija {{< ui >}}Create calculated from...{{< /ui >}}.
+
+{{< img src="/logs/explorer/calculated_fields/add_calculated_field_side_panel.png" alt="Creación de un campo calculado desde el panel lateral de registros en el Explorador de registros" style="width:70%;" >}}
+
+Este enfoque es útil para extracciones, ya que proporciona una muestra de registro concreta para crear una regla de parseo.
+
+## Tipos de campos calculados {#types-of-calculated-fields}
+
+### Fórmula {#formula}
+
+Los campos de fórmula utilizan fórmulas de campos calculados para calcular nuevos valores a partir de atributos existentes. Usted puede:
+- Manipule valores de texto.
+- Realice operaciones aritméticas en atributos numéricos.
+- Evalúe lógica condicional.
+
+Por ejemplo:
+
+```
+#latency_gap = @client_latency - @server_latency
+```
+
+Para obtener una lista completa de la sintaxis, los operadores y las funciones admitidos, consulte [Formulas][3].
+
+### Extracción {#extraction}
+
+La extracción captura valores de mensajes de registro sin procesar o atributos mediante un patrón Grok o un patrón regex. Puede usar Tap to Parse para generar cualquiera de ellos automáticamente, o definir manualmente su propio patrón Grok o regex. Utilice la extracción para:
+- Capturar valores de mensajes de registro sin procesar.
+- Extraiga atributos de forma retroactiva de registros ya indexados sin editar las canalizaciones.
+- Pruebe con registros de muestra.
+
+Por ejemplo, puede extraer las tres primeras palabras de un mensaje en campos separados:
+
+```
+%{word:first} %{word:second} %{word:third}
+```
+
+Las reglas de extracción se evalúan globalmente en todos los registros de su sesión. Para obtener más detalles y ejemplos de sintaxis, consulte [Extractions][4].
+
+## Uso de campos calculados {#using-calculated-fields}
+
+Después de crear un campo calculado, el Explorador de registros se actualiza al instante para mostrarle los nuevos datos y ofrecerle herramientas para interactuar con ellos. Los campos calculados funcionan como atributos de registro y se pueden utilizar para búsquedas, agregaciones, visualizaciones o para definir otros campos calculados. Utilice siempre el prefijo `#` al hacer referencia a un campo calculado.
+
+- **Fila de encabezado**: Aparece una nueva fila debajo de la barra de búsqueda, que muestra todos los campos calculados activos. Pase el cursor para visualizar la definición completa o utilice acciones rápidas para editar, filtrar por o agrupar por el campo.
+- **Visualización de lista**: En la lista [List][6], se agrega automáticamente una columna para el campo calculado.
+- **Panel lateral de registro**: Los campos calculados se agrupan en una sección dedicada cuando inspecciona un registro.
+
+{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration utilizado para filtrar resultados en Log Explorer" style="width:100%;" >}}
 
 
-<div class="alert alert-info">Para conocer la sintaxis, los operadores y funciones, consulta <a href="/logs/explorer/calculated_fields/expression_language">Lenguaje de expresión</a></div>
-
-## Información general
-
-Utiliza campos calculados para transformar y enriquecer tus datos de log en el momento de la consulta. Define [fórmulas](#formula) para:
-- [Manipular texto][1]
-- [Realizar aritmética][2]
-- [Evaluar la lógica condicional][3]
-
-Una vez definido, un campo calculado puede utilizarse como cualquier [atributo de log][5] para la búsqueda, agregación, visualización e incluso para definir otros campos calculados.
-
-**Notas**:
-- Puedes definir hasta cinco campos calculados a la vez.
-- Los campos calculados son temporales y no persisten más allá de una sesión determinada del Log Explorer. Si un campo calculado puede ser útil repetidamente, actualiza tus [pipelines de log][6] para codificar la información en tus logs cuando sean ingeridos y procesados.
-
-## Crear un campo calculado
-
-Hay dos puntos de entrada para crear un campo calculado en el Log Explorer: desde el menú **Add* (Añadir) o desde dentro de un evento de log o atributo específico.
-### Elegir un punto de partida para tu campo calculado
-
-#### En el menú Add (Añadir)
-
-1. Navega hasta el [Log Explorer][7].
-1. Haz clic en el botón **Add** (Añadir) situado junto a la barra de búsqueda.
-1. Selecciona **Calculated field** (Campo calculado).
-
-Esta es una forma rápida de crear un campo calculado cuando ya estás familiarizado con la estructura y el contenido de los logs que te interesan.
-
-#### Desde un evento de log o atributo específico
-
-1. Navega hasta el [Log Explorer][7].
-1. Haz clic en un evento de log de interés para abrir el panel lateral.
-1. Haz clic en un atributo JSON específico para abrir el menú contextual.
-1. Selecciona **Create calculated from...** (Crear calculado desde...).
-
-
-{{< img src="logs/explorer/calculated_fields/create_field.png" alt="El atributo de duración del panel del log con la opción para crear un campo calculado para ello." style="width:80%;" >}}
-
-Este enfoque te permite adaptarte rápidamente durante una investigación o explorar logs desconocidos. Por ejemplo, puede que desees multiplicar o concatenar dos valores y almacenar el resultado en un único campo para simplificar un gráfico o responder a una pregunta concreta.
-
-### Definir un campo calculado
-
-{{< img src="logs/explorer/calculated_fields/define_a_calculated_field.png" alt="Un campo calculado para el rendimiento, con una fórmula que concatena los atributos firstName y lastName" style="width:70%;" >}}
-
-#### Nombre
-
-Establece un nombre descriptivo que indique claramente la finalidad del campo calculado. Por ejemplo, si el objetivo es combinar los nombres y apellidos de los usuarios en un solo campo, puedes llamar al campo calculado `fullName`. 
-
-Para filtrar los logs desde un usuario llamado `Pinkie Smith`, incluye el nombre del campo calculado en tu consulta: `#fullName:"Pinkie Smith"`. **Nota:** Debes utilizar el prefijo `#` para referirse a campos calculados en búsquedas, agregaciones u otras definiciones de campos calculados.
-
-#### Fórmula
-
-La fórmula (o expresión) determina el resultado que debe calcularse y almacenarse como valor del campo calculado para cada evento de log. Los constructos válidos incluyen atributos de log, otros campos calculados y un conjunto de funciones y operadores admitidos. Los campos, funciones y operadores relevantes se sugieren automáticamente al escribir o editar la fórmula.
-
-Consulta [Lenguaje de expresión de campos calculados][4] para conocer los operadores y funciones disponibles.
-
-## Utilizar un campo calculado
-
-Una vez creado correctamente un campo calculado, el Log Explorer se actualiza para:
-- Mostrar los campos calculados activos en una nueva fila directamente debajo de la barra de búsqueda.
-    - Pasar el ratón por encima de un campo para ver su definición y utilizar acciones rápidas para editar, filtrar o agrupar por el campo.
-- Incluir una columna para el campo calculado en la visualización **[Lista][8]**. El título incluye el prefijo #.
-- Mostrar los campos calculados en una sección separada dentro del panel lateral del log.
-
-Los campos calculados función como atributos de log y pueden utilizarse para la búsqueda, agregación, visualización y definición de otros campos calculados. Recuerda utilizar el prefijo `#` cuando hagas referencia a nombres de campos calculados.
-
-{{< img src="logs/explorer/calculated_fields/calculated_field.png" alt="Un campo calculado llamado request_duration que se utiliza para filtrar resultados en el Log Explorer" style="width:100%;" >}}
-
-### Casos de uso
-
-Los campos calculados no sustituyen a los pipelines y procesadores de logs para el parseo a la hora de la ingesta, la normalización y el enriquecimiento de logs. Utiliza campos calculados en los siguientes casos:
-
-- Si necesitas realizar una investigación puntual o un análisis ad hoc que requiere un campo que no necesitas reutilizar a largo plazo.
-- Si necesitas actualizar retroactivamente logs indexados para responder a una determinada pregunta (los cambios en los pipelines sólo se aplican a logs ingeridos después de una actualización de pipeline).
-- Si careces de los permisos (o conocimientos) necesarios para modificar oportunamente los pipelines de log.
-  - Los campos calculados que creas sólo son visibles para ti, lo que los hace ideales para una exploración rápida y una experimentación sin preocupaciones.
-
-Si te das cuenta de que un campo calculado puede ser valioso a largo plazo, actualiza tus pipelines de log para que tu y el resto del equipo puedan beneficiarse del proceso automatizado.
-
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/logs/explorer/calculated_fields/expression_language/#string
-[2]: /es/logs/explorer/calculated_fields/expression_language/#arithmetic
-[3]: /es/logs/explorer/calculated_fields/expression_language/#logical
-[4]: /es/logs/explorer/calculated_fields/expression_language/
-[5]: /es/logs/log_configuration/attributes_naming_convention/
-[6]: /es/logs/log_configuration/pipelines/?tab=source
-[7]: https://app.datadoghq.com/logs
-[8]: /es/logs/explorer/visualize/#lists
+[1]: /es/logs/log_configuration/attributes_naming_convention/
+[2]: /es/logs/log_configuration/pipelines/?tab=source
+[3]: /es/logs/explorer/calculated_fields/formulas/
+[4]: /es/logs/explorer/calculated_fields/extractions
+[5]: https://app.datadoghq.com/logs
+[6]: /es/logs/explorer/visualize/#lists

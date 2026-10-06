@@ -41,8 +41,11 @@ further_reading:
   tag: API
   text: Definition API에 대해 알아보기
 - link: /integrations/github
-  tag: 문서
+  tag: 설명서
   text: GitHub 통합에 대해 알아보기
+- link: /integrations/gitlab-source-code/
+  tag: 설명서
+  text: GitLab 통합에 대해 알아보십시오.
 - link: https://www.datadoghq.com/blog/service-catalog-backstage-yaml/
   tag: 블로그
   text: Backstage YAML 파일을 Datadog으로 가져오기
@@ -57,6 +60,8 @@ title: 엔터티 모델
 ## 개요 {#overview}
 
 Catalog는 정의 스키마를 사용하여 엔터티와 관련된 메타데이터를 저장하고 표시합니다. 이 스키마에는 유효한 값만 허용되도록 보장하는 기본 제공 유효성 검사 규칙이 포함되어 있습니다. 선택한 서비스에 대해 Catalog 사이드 패널의 **Definition** 탭에서 경고를 조회할 수 있습니다.
+
+`links` 필드를 사용하여 GitHub 또는 GitLab 리포지토리에 대한 소스 링크를 추가하십시오.
 
 {{< img src="/tracing/internal_developer_portal/catalog/entity-model-flow-chart.png" alt="Catalog 구성 요소가 서로 연결되고 클라우드 환경과 연결되는 방식을 보여주는 흐름도 " style="width:100%;" >}}
 
@@ -313,7 +318,7 @@ inheritFrom:<entity_kind>:<name>
 - YAML 파일에 `inheritFrom:<entity_kind>:<name>` 절이 없는 경우
 
 ### v3.0으로 마이그레이션 {#migrating-to-v30}
-v3.0은 GitHub, API, Terraform, Backstage, ServiceNow 및 UI를 포함하여 이전 버전과 동일한 메타데이터 생성 방법을 지원합니다. 그러나 v3.0에 새로운 [API 엔드포인트][5]와 새로운 [Terraform 리소스][6]가 추가되었습니다.
+v3.0은 GitHub, GitLab, API, Terraform, Backstage, ServiceNow 및 UI를 포함하여 이전 버전과 동일한 메타데이터 생성 방법을 지원합니다. 그러나 v3.0에 새로운 [API 엔드포인트][5]와 새로운 [Terraform 리소스][6]가 추가되었습니다.
 
 기존 서비스 YAML 파일을 v1, v2, v2.1 또는 v2.2에서 v3로 마이그레이션하려면 [서비스 정의를 v3로 마이그레이션][7]을 참조하세요.
 

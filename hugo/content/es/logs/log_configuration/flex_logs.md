@@ -76,7 +76,7 @@ Utilice el espectro de tipos de registros que se muestra en la imagen a continua
 
 El cómputo es la capacidad de consulta para ejecutar consultas en Flex Logs. Se utiliza al consultar registros en el nivel de Flex Logs. No se utiliza para la ingesta ni cuando solo se buscan registros de Indexación Estándar. Los niveles de cómputo disponibles son:
 
-<div class="alert alert-danger">Los tamaños de cómputo disponibles para US3, US5, AP1, AP2, US1-FED y US2-FED son Starter, XS y S.</div>
+<div class="alert alert-danger">Los tamaños de cómputo disponibles para US3, US5, AP1, AP2, US1-FED y US2-FED son Starter, XS, XS+ y S.</div>
 
 - Starter
 - Extra pequeño (XS)

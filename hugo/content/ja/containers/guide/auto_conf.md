@@ -108,6 +108,19 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 {{% /tab %}}
 {{< /tabs >}}
 
+## 構成の検出 {#configuration-discovery}
+
+Agentバージョン7.82以降、いくつかの統合（例：[Pulsar][48]）は、`auto_conf.yaml`ファイルに`discovery`フィールドと空の`instances`リストを同梱しています。このような場合、Agentはサービスを調査することで、実行時にその統合のための有効な構成を作成しようとします。各統合は、独自の検出方法を定義します。例えば、統合はメトリクスエンドポイントのために公開されたコンテナポートを調査したり、コンテナ名を使用して同じイメージを共有するコンポーネントを区別したりできます。有効な構成が見つかった場合、Agentはチェックインスタンスをスケジュールします。
+
+メトリクスの重複を避けるため、以下の場合、Agentはその統合の構成検出をスキップします。
+- 同じコンテナまたはホストレベルに対して構成された、同じ統合のインスタンスが存在する場合
+- 同じコンテナに対して構成された、汎用OpenMetricsまたはPrometheusチェックのインスタンスが存在する場合
+- 統合と同じルート名前空間の下でメトリクスを出力する、汎用OpenMetricsまたはPrometheusチェックのホストレベルインスタンスが存在する場合
+
+さらに、Agentバージョン7.83以降、このメカニズムによって作成されたすべてのチェックインスタンスには、そのメトリクスにタグ`dd_config_discovery:true`が含まれます。クエリでこれらのメトリクスを識別または除外するには、このタグを使用してください。
+
+統合の構成検出を防ぐには、[自動構成を無効にしてください](#disable-auto-configuration)。
+
 ## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -159,3 +172,4 @@ DD_IGNORE_AUTOCONF="redisdb istio"
 [45]: /ja/containers/kubernetes/integrations/?tab=annotations#configuration
 [46]: /ja/containers/docker/integrations/
 [47]: /ja/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+[48]: https://github.com/DataDog/integrations-core/tree/master/pulsar/datadog_checks/pulsar/data/auto_conf.yaml
