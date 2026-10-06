@@ -231,7 +231,7 @@ If the Datadog Agent is installed, use its built-in `snmp walk` command to verif
 {{< tabs >}}
 {{% tab "Linux" %}}
 
-For SNMP v2c:
+For SNMP v2:
 
 ```shell
 sudo -u dd-agent datadog-agent snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
