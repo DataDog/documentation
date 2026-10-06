@@ -9684,6 +9684,22 @@ menu:
           - ListCIAppGitHubAccounts
         unstable: []
         order: 1
+    - name: CI Visibility Logs
+      url: /api/latest/ci-visibility-logs/
+      identifier: ci-visibility-logs
+      generated: true
+    - name: Send CI job logs
+      url: /api/latest/ci-visibility-logs/send-ci-job-logs/
+      identifier: ci-visibility-logs-send-ci-job-logs
+      parent: ci-visibility-logs
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - SubmitCILog
+        unstable: []
+        order: 1
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
