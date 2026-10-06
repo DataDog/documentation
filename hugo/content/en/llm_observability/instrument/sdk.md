@@ -29,7 +29,7 @@ Agent Observability SDKs provide automatic instrumentation as well as manual ins
 
 SDKs are available for Python, Node.js, Java, and Go (experimental). Feature coverage varies by language: sections that do not show a tab for your language are not supported by that SDK.
 
-The Go SDK is **experimental** and is not yet generally available. It provides manual instrumentation only, because `dd-trace-go` has no LLM provider integrations. Its API may change in a future release.
+The Go SDK is **experimental**. It provides manual instrumentation only, because `dd-trace-go` has no LLM provider integrations.
 
 ## Setup
 
@@ -61,13 +61,13 @@ The Go SDK is **experimental** and is not yet generally available. It provides m
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-<div class="alert alert-warning">The Go SDK is experimental and not yet generally available. Its API may change in a future release.</div>
+<div class="alert alert-warning">The Go SDK is experimental. Its API may change in a future release.</div>
 
 - The latest `dd-trace-go/v2` module is installed. The Agent Observability SDK is supported in `dd-trace-go` v2.3.0+ (v2.10.0+ recommended for the full feature set):
    ```shell
    go get github.com/DataDog/dd-trace-go/v2
    ```
-   **Note**: `dd-trace-go` v2.8.0 and later require Go 1.25+. v2.3.0 through v2.7.0 require Go 1.24+.
+   **Note**: `dd-trace-go` v2.8.0 and later require Go 1.25+. Versions v2.3.0 through v2.7.0 require Go 1.24+.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -200,7 +200,7 @@ You can supply the following parameters as environment variables (for example, `
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-The Go SDK has no command-line wrapper equivalent to `ddtrace-run`, because the tracer is started from your application code. Supply the parameters below as environment variables, then call `tracer.Start()` as shown in [in-code setup](#in-code-setup).
+The Go SDK has no command-line wrapper equivalent to `ddtrace-run`, because the tracer is started from your application code. Supply the following parameters as environment variables, then call `tracer.Start()`. See [In-code setup](#in-code-setup).
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -364,7 +364,7 @@ Set the following values as environment variables. They cannot be configured pro
 
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-Enable Agent Observability by passing the LLMObs options to `tracer.Start()`.
+Enable Agent Observability by passing the Agent Observability options to `tracer.Start()`.
 
 {{< code-block lang="go" >}}
 package main
@@ -702,7 +702,7 @@ defer span.Finish()
 
 ### Retrieving the active span
 
-`llmobs.SpanFromContext` returns the active LLMObs span as an `*llmobs.AnySpan`. Convert it to a concrete span kind with the `As*` methods to reach that kind's annotation method.
+`llmobs.SpanFromContext` returns the active Agent Observability span as an `*llmobs.AnySpan`. Convert it to a concrete span kind with the `As*` methods to reach that kind's annotation method.
 
 {{< code-block lang="go" >}}
 if span, ok := llmobs.SpanFromContext(ctx); ok {
@@ -2299,7 +2299,7 @@ public class MyJavaClass {
 [1]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-Each span kind exposes a typed method for annotating its input and output, and every span exposes a generic `Annotate` method that accepts the `llmobs.AnnotateOption` values below.
+Each span kind exposes a typed method for annotating its input and output, and every span exposes a generic `Annotate` method that accepts the following `llmobs.AnnotateOption` values.
 
 ### Annotating inputs and outputs
 
@@ -2885,7 +2885,7 @@ func llmCall(ctx context.Context, prompt string) string {
 }
 {{< /code-block >}}
 
-**Note**: `dd-trace-go` has no LLM provider integrations, so token counts are never captured automatically. Record them yourself on every manually instrumented `llm` and `embedding` span, otherwise Datadog cannot estimate cost.
+**Note**: `dd-trace-go` has no LLM provider integrations, so token counts are never captured automatically. Record them on every `llm` and `embedding` span; otherwise, Datadog cannot estimate cost.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -3397,7 +3397,7 @@ public class MyJavaClass {
 [1]: /getting_started/tagging/
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-The Go SDK provides two generic functions for submitting evaluations. Both infer the evaluation type from the Go type of `value`: `bool` becomes a `boolean` evaluation, `string` becomes `categorical`, and any numeric type becomes `score`.
+The Go SDK provides two functions for submitting evaluations. Both infer the evaluation type from the Go type of the value you pass: `bool` becomes a `boolean` evaluation, `string` becomes `categorical`, and any numeric type becomes `score`.
 
 **Note**: The Go SDK does not support `json` evaluations.
 
@@ -3464,7 +3464,7 @@ llmobs.SubmitEvaluationFromSpan("is_safe", true, span,
 )
 {{< /code-block >}}
 
-**Note**: These functions do not return an error. Failures are reported through the tracer's debug log. Enable `DD_TRACE_DEBUG=1` to surface them.
+**Note**: These functions do not return an error. Failures are reported through the tracer's debug log. Set `DD_TRACE_DEBUG=1` to surface them.
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -4117,7 +4117,7 @@ tracer.use('http', false) // disable the http integration
 [1]: /tracing/trace_collection/compatibility/nodejs/#web-framework-compatibility
 {{% /tab %}}
 {{% tab "Go (Experimental)" %}}
-LLMObs span context travels on the standard APM distributed tracing headers, so there is no LLMObs-specific inject or extract API. Propagate the APM context with `tracer.Inject` and `tracer.Extract`, or use an instrumented [HTTP integration][1]. LLMObs spans in the downstream service then attach to the upstream LLMObs parent automatically.
+Agent Observability span context travels on the standard APM distributed tracing headers, so there is no separate inject or extract API. Propagate the APM context with `tracer.Inject` and `tracer.Extract`, or use an instrumented [HTTP integration][1]. Agent Observability spans in the downstream service then attach to the upstream parent span automatically.
 
 ### Example
 
@@ -4164,13 +4164,13 @@ func serverHandler(w http.ResponseWriter, r *http.Request) {
 	apmSpan, ctx := tracer.StartSpanFromContext(r.Context(), "http.handler", opts...)
 	defer apmSpan.Finish()
 
-	// this span joins the distributed trace and the upstream LLMObs parent
+	// this span joins the distributed trace and the upstream parent span
 	span, _ := llmobs.StartTaskSpan(ctx, "process-request")
 	defer span.Finish()
 }
 {{< /code-block >}}
 
-**Note**: Extract the upstream context before starting any LLMObs spans in the downstream service. Spans started beforehand are not captured in the distributed trace.
+**Note**: Extract the upstream context before starting any Agent Observability spans in the downstream service. Spans started beforehand are not captured in the distributed trace.
 
 [1]: /tracing/trace_collection/compatibility/go/
 {{% /tab %}}
@@ -4357,7 +4357,7 @@ defer span.Finish()
 
 ### Force flushing before exit
 
-The tracer flushes spans in the background. Call `tracer.Stop()` before your process exits so buffered LLMObs spans are submitted. In short-lived processes and serverless handlers, use `defer tracer.Stop()` in `main` to guarantee this.
+The tracer flushes spans in the background. Call `tracer.Stop()` before your process exits so buffered spans are submitted. In short-lived processes and serverless handlers, use `defer tracer.Stop()` in `main` to guarantee this.
 
 {{< code-block lang="go">}}
 func main() {
