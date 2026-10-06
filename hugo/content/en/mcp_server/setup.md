@@ -267,41 +267,6 @@ Connect Devin to the Datadog MCP Server by enabling it from Devin's MCP Marketpl
 
 {{% /tab %}}
 
-{{% tab "Gemini CLI" %}}
-
-Point your AI agent to the MCP Server endpoint for your regional [Datadog site][1]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
-
-{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-param key="mcp_server_endpoint" >}}</code>.
-
-1. Run in terminal:
-    <pre><code>gemini mcp add --transport http datadog {{< region-param key="mcp_server_endpoint" >}}</code></pre>
-
-   Alternatively, add to `~/.gemini/settings.json`:
-    <pre><code>{
-      "mcpServers": {
-        "datadog": {
-          "httpUrl": "{{< region-param key="mcp_server_endpoint" >}}"
-        }
-      }
-    }</code></pre>
-
-1. To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
-
-   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
-
-1. Verify that you have the required [permissions](#required-permissions) for the Datadog resources you want to access.
-
-[1]: /getting_started/site/
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Datadog MCP Server is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
-
-[1]: /getting_started/site/
-{{% /tab %}}
-
 {{% tab "Goose" %}}
 
 Point your AI agent to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
@@ -360,7 +325,7 @@ Install the Datadog Plugin from the Grok Build Plugin Marketplace. The plugin pa
 
 {{% tab "JetBrains IDEs" %}}
 
-JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code, Codex, or Gemini CLI, alongside their IDE.
+JetBrains offers the [Junie][1] and [AI Assistant][2] plugins for their range of IDEs. GitHub offers the [Copilot][4] plugin. Alternatively, many developers use an agent CLI, such as Claude Code or Codex, alongside their IDE.
 
 Point your plugin to the MCP Server endpoint for your regional [Datadog site][3]. For the correct instructions, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this documentation page to select your site.
 
@@ -440,17 +405,15 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 {{% /collapse-content %}}
 
 {{% collapse-content title="Agent CLIs" level="h4" expanded=false id="jetbrains-agent-clis" %}}
-Many developers use an agent CLI such as Claude Code, Codex, or Gemini CLI alongside their JetBrains IDE. See the configuration for those CLI tools:
+Many developers use an agent CLI such as Claude Code or Codex alongside their JetBrains IDE. See the configuration for those CLI tools:
 - [Claude Code][4]
 - [Codex][5]
-- [Gemini CLI][6]
 
 The [Datadog plugin for JetBrains IDEs][3] integrates with these agent CLIs. For an uninterrupted experience, install the plugin at the same time as you configure the Datadog MCP Server.
 
 [3]: /ide_plugins/idea/
 [4]: /mcp_server/setup/?tab=claudecode
 [5]: /mcp_server/setup/?tab=codex
-[6]: /mcp_server/setup/?tab=geminicli
 {{% /collapse-content %}}
 {{< /site-region >}}
 
@@ -755,7 +718,6 @@ These toolsets are in Preview and are not included in the `all` alias; request t
 | [Claude][19] | Anthropic | Datadog [Claude Connector][56] recommended. Includes Claude Cowork. |
 | [Codex CLI][6] | OpenAI | |
 | [Copilot CLI][64] | Microsoft | Datadog [Copilot plugin][16] recommended. |
-| [Gemini CLI][50] | Google | |
 | [Grok Build][71] | SpaceXAI | Datadog [Grok Build plugin][72] recommended. |
 | [Warp][28] | Warp | |
 | [VS Code][7] | Microsoft | Datadog [Copilot plugin][16] recommended. |
@@ -955,7 +917,6 @@ If you are a partner or vendor adding Datadog to an MCP directory for your AI ag
 [47]: /help/
 [48]: /reference_tables/
 [49]: /mcp_server/tools
-[50]: https://github.com/google-gemini/gemini-cli
 [51]: /containers/monitoring/kubernetes_explorer/
 [52]: https://opencode.ai/
 [53]: https://github.com/datadog-labs/opencode-plugin
