@@ -98,9 +98,9 @@ When setting up a new Synthetic Monitoring browser test, use snippets to automat
    * {{< ui >}}Disable CSP{{< /ui >}}: Select to prevent the Content Security Policy (CSP) from blocking your test.
    * {{< ui >}}Capture HTTP payloads{{< /ui >}}: Select to collect request and response headers and bodies for Fetch and XHR resources in each test step. After you enable this option, click on any Fetch or XHR resource row in the [{{< ui >}}Resources{{< /ui >}} tab][3] of your test results to view request and response headers and body.
 
-     **When capturing HTTP Payloads**, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.
+     <div class="alert alert-warning">When capturing HTTP payloads, only variables marked as secret are redacted. Other sensitive data, including PII, may be captured in plain text and visible to anyone with access to the test.</div>
 
-     Captured HTTP payloads follow the [Synthetic Monitoring data retention period][4].
+     Captured HTTP payloads are retained for the same period as Synthetic Monitoring test results. For more information, see [Data Retention Periods][4].
 
    * {{< ui >}}Request Headers{{< /ui >}}: Define headers in the {{< ui >}}Name{{< /ui >}} and {{< ui >}}Value{{< /ui >}} fields to add to or override the default browser headers. For example, you can set the User Agent in the header to [identify Datadog scripts][1].
    * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to the default browser cookies. Enter one cookie per line, using the syntax of [`Set-Cookie`][2].
