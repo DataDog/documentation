@@ -10,14 +10,6 @@ aliases:
 
 [Live Debugger][1] and [Dynamic Instrumentation][2] use this expression language to read values from running code and define conditions, metrics, and span tags. The expression language supports access to local variables, method parameters, and nested object fields, along with comparison and logical operators. It borrows syntax from common programming languages but has its own rules.
 
-Expression support depends on the runtime version and instrumentation location.
-
-Examples:
-- `someVar.someField`
-- `request.headers["Host"]`
-- `any(post.tags, {@it == "debugger"})`
-- `@duration > 10 && len(p.data) < 100`
-
 Examples:
 - `someVar.someField`
 - `request.headers["Host"]`
