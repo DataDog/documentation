@@ -27,20 +27,6 @@ PRE-PUBLISH CHECKLIST — DELETE THIS BLOCK BEFORE COMMITTING
 Finalized 2026-10-04. The page body below is complete and needs no further
 drafting. The items under BLOCKERS and VERIFY are the only things outstanding.
 
-BLOCKERS — cross-page conflicts found 2026-10-04, both need a decision
-  [ ] 1. What the Entities count means. This page says the count "is the total
-         number of users synced from this directory, which makes it the figure
-         to compare against the size of your Okta directory."
-         google_workspace.md now says "the entity count reflects the users
-         synced within that range." Both cannot be true. The Google page is the
-         newer of the two, and if it is right then this page sends readers to
-         reconcile a range-scoped number against a directory headcount. Decide
-         which is correct and align both pages in one pass.
-  [ ] 2. Account Status capitalization. This page gives the normalized model as
-         ACTIVE, SUSPENDED, DELETED. google_workspace.md writes the same values
-         in title case — "other than Active, for example Suspended". The
-         source captures show upper case in the Entities table, which favors
-         this page, but the two must match before release.
 
 VERIFY WITH ENGINEERING — currently asserted
   [ ] Two rows of "The connection test fails" are inferences, not observed
@@ -55,61 +41,8 @@ VERIFY WITH ENGINEERING — currently asserted
       entity_pack_okta_pre-activation.png labels the y-axis "Minutes" while
       google_workspace.md documents the same widget in milliseconds; one is
       wrong, or the widget auto-scales, and this page deliberately states no
-      unit. The same capture shows Users Synced = 428 and Users by Credential =
-      428 for a single credential, which reads like a full-directory count
-      rather than the churn figure engineering described on 2026-10-02. Demo
-      data on a first sync would explain it — every user is new, so every user
-      is an update — but confirm, because the churn framing is the whole reason
-      this page sends readers to Entities for the total.
+      unit.
 
-SET CONSISTENCY — differences from the sibling pages, deliberate or not
-  [ ] This page has no "The sync succeeds but no users appear" section;
-      google_workspace.md does. The empty-directory fact now appears nowhere on
-      this page, having been cut from Prerequisites and from Troubleshooting.
-  [ ] This page omits the "To confirm that identity context is reaching your
-      signals, open a signal attributed to a synced user..." sentence that both
-      sibling pages carry at the end of Entities.
-  [ ] Overview reads "Roll up user risk by user"; google_workspace.md now reads
-      "Aggregate risk by user".
-  [ ] This page says the token is never returned "in the interface";
-      google_workspace.md says "in the UI". House style prefers "interface".
-  [ ] This page says "Read-only access is all that is needed";
-      google_workspace.md says "Datadog requests read-only access".
-  [ ] Troubleshooting still names example.oktapreview.com and
-      example.okta-emea.com, which the Okta domain section no longer
-      introduces. Either reinstate the variants above or drop the row.
-
-SETTLED — do not reopen
-  - No ceiling. Per google_workspace.md: no directory size limit is known and
-    none will be established before release. This page states no limit and must
-    not acquire one speculatively.
-  - No screenshots, by decision 2026-10-02. Every interface element is named in
-    prose or in the tables. If revisited, note that both Okta captures in
-    ../../source-material/ were taken in staging and show a Workday HRIS tile
-    that is not in the release, and that no post-activation Okta capture exists.
-  - Permissions follow entity_packs.md: SIEM Entities Admin to connect a
-    directory, SIEM Entities Read to see the context.
-  - One Okta org per credential, one API token per org. A token authenticates
-    only against the org that issued it, so there is no shared-credential case.
-  - Closed on review 2026-10-02: the API token is encrypted at rest; the Okta
-    crawler runs continuously; Datadog's IP ranges are published per site; Okta
-    statuses are normalized to the common status model.
-  - Closed by edit 2026-10-04: the Okta domain section is scoped to the sign-in
-    host only; the token-expiry "window before first use" paragraph, the
-    Okta-side token verification paragraph, and the no-users-appear
-    troubleshooting section were all cut.
-
-REPO CONVENTIONS — verify with a git grep, GitHub was unreachable when drafting
-  [ ] Whether the whats-next partial emits its own "Further reading" heading.
-      All three pages in this set author one above it. If the partial emits one,
-      remove the authored heading from all three pages together.
-  [ ] Frontmatter field set and ordering, and whether reference-style link
-      definitions are house convention.
-  [ ] Four paths here are unverified because the pages do not exist yet:
-      entity_packs/, entity_packs/google_workspace/,
-      entity_packs/microsoft_entra_id/, and
-      triage_and_investigate/user_inventory/. The sub-page slugs are owned by
-      entity_packs.md; if they change there, they change here.
 =========================================================================== -->
 
 {{< site-region region="gov" >}}
@@ -120,9 +53,9 @@ REPO CONVENTIONS — verify with a git grep, GitHub was unreachable when draftin
 
 The Okta Identity Entity Pack syncs your Okta user directory into Cloud SIEM. After you connect it, Cloud SIEM uses that directory to:
 
-- Populate the [User Inventory][9] with your Okta users.
-- Add a user pill to signals, so you can pivot from an event to the person behind it.
-- Roll up user risk by user in [Entity Risks][1].
+- Populate the [User Inventory][8] with your Entra ID users.
+- Embed a user pill in signals, so you can know who is behind the activity
+- Score risk for a user across all their accounts in [Entity Risks][1].
 
 For what Entity Packs provide in general, and the permissions they require, see [Entity Packs][10].
 
@@ -281,6 +214,11 @@ Okta applies API rate limits per org and returns `HTTP 429 Too Many Requests` on
 - Give Datadog its own token rather than reusing one that other integrations already call with.
 
 See Okta's [rate limits overview][11].
+
+### The sync succeeds but no users appear
+
+- Confirm that the **Domain** value matches the domain whose users you expect. A valid admin user in a different domain than the one you entered can produce an empty result.
+
 
 ### No user pill appears on signals
 

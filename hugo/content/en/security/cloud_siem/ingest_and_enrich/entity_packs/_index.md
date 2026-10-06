@@ -2,15 +2,24 @@
 title: Entity Packs
 description: Sync your user directory into Cloud SIEM to add identity context to signals, risks, and investigations.
 further_reading:
-- link: "/security/cloud_siem/ingest_and_enrich/content_packs/"
+- link: "/security/cloud_siem/ingest_and_enrich/entity_packs/okta/"
   tag: "Documentation"
-  text: "Learn more about Cloud SIEM Content Packs"
+  text: "Set up the Okta Identity Entity Pack"
+- link: "/security/cloud_siem/ingest_and_enrich/entity_packs/google_workspace/"
+  tag: "Documentation"
+  text: "Set up the Google Workspace Identity Entity Pack"
+- link: "/security/cloud_siem/ingest_and_enrich/entity_packs/microsoft_entra_id/"
+  tag: "Documentation"
+  text: "Set up the Microsoft Entra ID Entity Pack"
 - link: "/security/cloud_siem/triage_and_investigate/user_inventory/"
   tag: "Documentation"
   text: "Browse synced users in the User Inventory"
 - link: "/security/cloud_siem/triage_and_investigate/entities_and_risk_scoring/"
   tag: "Documentation"
-  text: "Explore entities and risk scoring with Risk Insights"
+  text: "Explore entities and risk scoring with Entity Risks"
+- link: "/security/cloud_siem/ingest_and_enrich/content_packs/"
+  tag: "Documentation"
+  text: "Learn more about Cloud SIEM Content Packs"
 - link: "/security/cloud_siem/investigator/"
   tag: "Documentation"
   text: "Learn more about the Investigator"
@@ -29,14 +38,12 @@ An Entity Pack is a type of [Cloud SIEM Content Pack][1] that syncs your user di
 
 When an Entity Pack is active, Cloud SIEM correlates directory users and their attributes with your logs and security signals. Each Entity Pack includes:
 
-- **Automated synchronization**: Cloud SIEM keeps the synced user directory up to date with your identity provider.
-- **[User Inventory][2]**: A searchable record of the users synced from your directory, including display name, principal ID, user type, and account status.
+- **Automated synchronization**: Cloud SIEM syncs users and their attributes from your identity provider so they remain up to date.
+- **[User Inventory][2]**: Browse, search, and filter the users synched to Cloud SIEM. View a user's attributes including display name, principal ID, user type, and account status. Investigate all signals, risks, and logs associated with your users.
 - **User pill in Signals**: Identity context attached directly to a security signal, so you can see who the signal involves while you triage it.
 - **User risk roll-up in [Entity Risks][8]**: Risk scores aggregated by user, so you can see a single user's total risk across signals instead of reading signals one at a time.
 
-Together, these let you pivot an investigation from an event to a person: start from a signal, identify the user, and review everything else associated with that user.
-
-<div class="alert alert-info">Entity Packs sync user directory data, which includes personal data such as names and email addresses. Review your organization's requirements before connecting a directory.</div>
+<div class="alert alert-info">Entity Packs sync user directory data, which includes personal data such as names and email addresses. Review your organization's privacy requirements before connecting a directory.</div>
 
 ## Available Entity Packs
 
@@ -60,6 +67,7 @@ Entity Packs use two permissions. A user with the [Datadog Admin Role][7] can gr
 |---|---|
 | **SIEM Entities Read** | View synced users in the User Inventory, see the user pill on signals and in Entity Risks, and open an Entity Pack side panel. |
 | **SIEM Entities Admin** | Everything **SIEM Entities Read** allows, plus connect a user directory, add and remove credentials, and enable or disable synchronization. |
+| **Integrations Manage** | Only needed for Microsoft EntraID so that the Azure subscription and resource collection can be configured. |
 
 Every user who works with identity context needs one of these permissions, not only the person who sets up the Entity Pack. Without either permission:
 
@@ -112,6 +120,8 @@ Setup steps differ by identity provider. Follow the guide for the directory you 
 - [Microsoft Entra ID Entity Pack][5]
 
 Each guide walks through creating the credential in your identity provider, adding it in Datadog, and testing the connection.
+
+## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 

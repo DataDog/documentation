@@ -33,9 +33,10 @@ further_reading:
 
 The Google Workspace Identity Entity Pack syncs your Google Workspace user directory into Cloud SIEM. After you connect it, Cloud SIEM uses that directory to:
 
-- Populate the [User Inventory][9] with your Google Workspace users.
-- Add a user pill to signals, so you can pivot from an event to the person behind it.
-- Aggregate risk by user in [Entity Risks][1].
+- Populate the [User Inventory][8] with your Entra ID users.
+- Embed a user pill in signals, so you can know who is behind the activity
+- Score risk for a user across all their accounts in [Entity Risks][1].
+
 
 For what Entity Packs provide in general, and the permissions they require, see [Entity Packs][10].
 
@@ -110,7 +111,7 @@ For more detail, see Google's [Delegate domain-wide authority to a service accou
    | **Domain** | The Google Workspace domain to sync, for example `example.com`. |
    | **Workspace Admin email** | The Google Workspace admin user the service account impersonates, for example `datadog-integration@example.com`. Do not use the service account email. |
 
-1. Click **Test Connection**. Datadog validates the credentials against Google Workspace before storing them, so a successful test both saves the credentials and activates the Entity Pack. If validation fails, see [Troubleshooting](#troubleshooting).
+1. Click **Test Connection**. Datadog validates the credentials against Google Workspace before storing them. A successful test gives you the ability to then save the credentials and activate the Entity Pack. If validation fails, see [Troubleshooting](#troubleshooting).
 
 Datadog stores the service account private key encrypted and does not return it in the Datadog interface or in API responses.
 
@@ -153,7 +154,7 @@ The per-credential widgets group by `credential_name`, a normalized form of the 
 
 ### Entities
 
-The **Entities** section lists the users this Entity Pack synced, with **Display Name**, **Principal ID**, **User Type** (for example `human` or `service_account`), and **Account Status**. The list is scoped to a time range, which you can change, and the entity count reflects the users synced within that range.
+The **Entities** section lists the users this Entity Pack synced, with **Display Name**, **Principal ID**, **User Type** (for example `human` or `service_account`), and **Account Status**.
 
 Use the entity count, not **Users Synced**, when you want to know how many users this Entity Pack has brought into Cloud SIEM. Click **View in User Inventory** to see the [full inventory][9].
 
@@ -203,10 +204,7 @@ The most common causes are changes on the Google side:
 
 ### The sync succeeds but no users appear
 
-- Confirm that the Google Workspace domain you connected contains users. An empty directory syncs successfully and produces an empty User Inventory.
 - Confirm that the **Domain** value matches the domain whose users you expect. A valid admin user in a different domain than the one you entered can produce an empty result.
-- Check the **Entities** count rather than **Users Synced**. **Users Synced** counts only users whose attributes a sync changed, so it reads low or zero on a stable directory even when the sync is healthy.
-- Accounts that are no longer active still sync, and appear with an **Account Status** other than **Active**, for example **Suspended**. If you are reconciling the entity count against a headcount, the total includes them.
 
 ### No user pill appears on signals
 
