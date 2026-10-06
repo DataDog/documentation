@@ -13,10 +13,10 @@ All issues in Error Tracking have a status to help you triage and prioritize iss
 - {{< ui >}}FOR REVIEW{{< /ui >}}: New or regressed issues that need attention.
 - {{< ui >}}REVIEWED{{< /ui >}}: Triaged issues that need to be fixed, now or later.
 - {{< ui >}}RESOLVED{{< /ui >}}: Issues that have been fixed and are no longer occurring.
-- {{< ui >}}IGNORED{{< /ui >}}: Issues that require no further investigation or action.
+- {{< ui >}}IGNORED{{< /ui >}}: Issues that require no further investigation or action. You can also [snooze](#snoozing-an-issue) an issue to ignore it until a condition is met.
 - {{< ui >}}EXCLUDED{{< /ui >}}: Issues that require no further investigation, stops collecting new errors, and no longer count towards usage or billing
 
-All issues start with a FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-an-error-status). You can also [view the history](#issue-history) of a given error's state changes.
+All issues start with a FOR REVIEW status. Error Tracking automatically updates the status in the cases described below, or you can [manually update the status](#updating-the-issue-status). You can also [view the history](#issue-history) of a given error's state changes.
 
 The diagram below shows how the Error Tracking states are updated automatically and manually:
 {{< img src="error_tracking/issue-states-diagram.png" alt="Error Tracking Issue States" style="width:75%;" >}}
@@ -59,6 +59,40 @@ To exclude an issue, click its status and choose {{< ui >}}EXCLUDED{{< /ui >}} i
 
 To resume collecting errors for an excluded issue, select any status other than {{< ui >}}EXCLUDED{{< /ui >}}.
 
+## Snoozing an issue
+
+Snoozing an issue moves it to {{< ui >}}IGNORED{{< /ui >}} until a condition you define is met. When the condition is met, Error Tracking moves the issue back to {{< ui >}}FOR REVIEW{{< /ui >}}. Use snoozing when you need more evidence before deciding whether an issue matters: the issue stays out of your inbox, but it comes back if its impact grows.
+
+For example, you can ignore an issue until it affects 10 distinct users.
+
+### Snooze conditions
+
+You can snooze an issue until one of the following conditions is met:
+
+- **Occurrences**: The issue reaches a number of new error occurrences.
+- **Affected users**: The issue affects a number of distinct users. This condition requires errors to have the `@usr.id` attribute.
+- **Elapsed time**: A duration passes after you snooze the issue.
+
+Occurrences and affected users are counted from the moment you snooze the issue. Errors that occurred before the snooze do not count toward the condition.
+
+To combine multiple conditions, or to count distinct values of any error attribute (e.g. `@account.id`), use the [`update_datadog_error_tracking_issue`][5] tool of the Datadog MCP Server. For example, you can ignore an issue until it affects 10 distinct users or a week passes, whichever comes first. This helps you clear your backlog while still catching the issues that become important.
+
+### Snooze an issue
+
+1. Click the status of an issue in the issues list or on the issue details panel.
+2. In the dropdown menu, hover over {{< ui >}}IGNORED{{< /ui >}}.
+3. Select one of the following options, then choose a value:
+   - {{< ui >}}For...{{< /ui >}} to snooze the issue for a duration.
+   - {{< ui >}}Until this occurs again...{{< /ui >}} to snooze the issue until it reaches a number of new occurrences.
+   - {{< ui >}}Until this affects an additional...{{< /ui >}} to snooze the issue until it affects a number of additional users.
+
+{{< img src="error_tracking/issue-snooze-selection.png" alt="Snooze options" style="width:70%;" >}}
+
+Snoozed issues appear in the {{< ui >}}IGNORED{{< /ui >}} tab.
+
+### Cancel a snooze
+
+To cancel a snooze, manually change the status of the issue. Selecting any status, including {{< ui >}}IGNORED{{< /ui >}}, cancels the active snooze and its conditions no longer apply.
 
 ## Issue history
 View a history of your issue activity with the {{< ui >}}Activity Timeline{{< /ui >}}. On the details panel of any Error Tracking issue, view the Activity Timeline by clicking the {{< ui >}}Activity{{< /ui >}} tab.
@@ -73,3 +107,4 @@ View a history of your issue activity with the {{< ui >}}Activity Timeline{{< /u
 [2]: /real_user_monitoring/guide/setup-rum-deployment-tracking/?tab=npm
 [3]: /getting_started/tagging/unified_service_tagging/
 [4]: /error_tracking/regression_detection/
+[5]: /mcp_server/tools/#update_datadog_error_tracking_issue
