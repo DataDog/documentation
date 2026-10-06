@@ -148,7 +148,7 @@ A dashboard shows a status for each of its widgets and publishes as a single das
 Monitors and dashboards with the Skipped status cannot be published, and a translation cannot be edited in Datadog before it is published. To correct a skipped resource, or a dashboard widget that returned an error, fix it at the source and import it again:
 
 1. Correct the asset in Splunk and export it again, or edit the exported CSV directly. Editing the CSV is often faster for a small fix, such as renaming an index or attribute to match the one in Datadog.
-2. Delete the original batch if you want to reuse its name.
+2. Delete the original import if you want to reuse its name.
 3. Upload the corrected file as a new import.
 
 ## Translation gaps
