@@ -66,6 +66,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
+| Databricks Mosaic AI     | [SaaS integration][5] |
 
 ## AI cost summary
 
