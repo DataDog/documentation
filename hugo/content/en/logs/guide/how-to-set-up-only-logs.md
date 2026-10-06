@@ -19,7 +19,7 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% tab "Host " %}}
 
 1. Open the [datadog.yaml configuration file][1].
-2. Add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
+2. Set `infrastructure_mode: none` to prevent [Infra checks from running](https://docs.datadoghq.com/agent/configuration/infrastructure-modes/?tab=linux), and add the `enable_payloads` with the following settings to prevent Infra metrics from being sent:
 
     ```yaml
     enable_payloads:
@@ -38,11 +38,12 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-If you're using the Docker containerized Agent, set the following environment variables to `false`:
-- `DD_ENABLE_PAYLOADS_EVENTS`
-- `DD_ENABLE_PAYLOADS_SERIES`
-- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS`
-- `DD_ENABLE_PAYLOADS_SKETCHES`
+If you're using the Docker containerized Agent, set the following environment variables:
+- `DD_ENABLE_PAYLOADS_EVENTS=false`
+- `DD_ENABLE_PAYLOADS_SERIES=false`
+- `DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false`
+- `DD_ENABLE_PAYLOADS_SKETCHES=false`
+- `DD_INFRASTRUCTURE_MODE=none`
 
 Here's an example of how you can include these settings in your Docker run command:
 
@@ -58,6 +59,7 @@ docker run -d --name datadog-agent \
            -e DD_ENABLE_PAYLOADS_SERIES=false \
            -e DD_ENABLE_PAYLOADS_SERVICE_CHECKS=false \
            -e DD_ENABLE_PAYLOADS_SKETCHES=false \
+           -e DD_INFRASTRUCTURE_MODE=none \
            -e DD_PROCESS_AGENT_ENABLED=false \
            -e DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED=false \
            -v /var/run/docker.sock:/var/run/docker.sock:ro \
@@ -91,6 +93,8 @@ datadog:
       value: "false"
     - name: DD_ENABLE_PAYLOADS_SKETCHES
       value: "false"
+    - name: DD_INFRASTRUCTURE_MODE
+      value: "none"
 ```
 
 {{% /tab %}}
