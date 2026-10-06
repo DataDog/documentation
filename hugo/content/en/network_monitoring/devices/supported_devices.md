@@ -248,7 +248,7 @@ sudo -u dd-agent datadog-agent snmp walk -v 3 -u <USER> -a <AUTH_PROTOCOL> -A <A
 
 Open Command Prompt as an administrator.
 
-For SNMP v2c:
+For SNMP v2:
 
 ```bat
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
