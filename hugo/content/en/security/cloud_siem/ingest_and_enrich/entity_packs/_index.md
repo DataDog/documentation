@@ -34,7 +34,9 @@ further_reading:
 
 ## Overview
 
-An Entity Pack is a type of [Cloud SIEM Content Pack][1] that syncs your user directory into Cloud SIEM. Content Packs bring in log-based security content such as detection rules and dashboards; Entity Packs bring in the identity records behind that activity, so Cloud SIEM can tell you *who* a signal is about, not only *what* happened.
+An Entity Pack is a type of [Cloud SIEM Content Pack][1] that syncs your user directory into Cloud SIEM.
+- **Content Packs** bring in log-based security content such as detection rules and dashboards.
+- **Entity Packs** bring in the identity records behind that activity, so Cloud SIEM can tell you *who* a signal is about, not only *what* happened.
 
 When an Entity Pack is active, Cloud SIEM correlates directory users and their attributes with your logs and security signals. Each Entity Pack includes:
 
@@ -55,7 +57,7 @@ Cloud SIEM supports the following Entity Packs:
 | [Google Workspace Identity][4] | Google Workspace users and their attributes | Service account JSON key file |
 | [Microsoft Entra ID][5] | Microsoft Entra ID users and their attributes | Azure app registration |
 
-To find them in Datadog, go to [Cloud SIEM > Content Packs][6] and filter by **Entity Pack**.
+To find them in Datadog, go to **Cloud SIEM** > [**Content Packs**][6]. Then, filter for entity packs, either by searching for `type:entityPack`, or clicking the **Entity Pack** filter.
 
 ## Prerequisites
 
@@ -69,13 +71,13 @@ Entity Packs use the following permissions. A user with the [Datadog Admin Role]
 | **SIEM Entities Admin** | Everything **SIEM Entities Read** allows, plus connect a user directory, add and remove credentials, and enable or disable synchronization. |
 | **Integrations Manage** | Required only for the Microsoft Entra ID Entity Pack, to configure the Azure subscription and resource collection. |
 
-Every user who works with identity context needs **SIEM Entities Read** or **SIEM Entities Admin**. Without one of these permissions:
+Every user who works with identity context needs **SIEM Entities Read** or **SIEM Entities Admin**. If a user lacks one of these permissions:
 
 - The User Inventory is blank, even when an Entity Pack is active and syncing.
 - The user pill does not appear on signals or in Entity Risks.
 - Entity Pack side panels do not open from the Content Packs interface.
 
-<div class="alert alert-info">Grant <strong>SIEM Entities Read</strong> to your analysts as part of rolling out an Entity Pack. Otherwise the directory syncs successfully but the identity context it provides stays invisible to the people investigating. If the User Inventory is empty, check permissions before you troubleshoot synchronization.</div>
+<div class="alert alert-info">Grant <strong>SIEM Entities Read</strong> to your analysts as part of rolling out an Entity Pack. Without that permission, even though the directory syncs successfully, analysts who lack that permission can't see the identity context it provides. If the User Inventory is empty, check permissions before you troubleshoot synchronization.</div>
 
 ### Identity provider access
 

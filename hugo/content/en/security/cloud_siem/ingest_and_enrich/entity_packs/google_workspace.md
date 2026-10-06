@@ -42,16 +42,14 @@ For what Entity Packs provide in general, and the permissions they require, see 
 
 Datadog reads your directory through the [Google Admin SDK Directory API][2] using a Google Cloud service account that you create and grant domain-wide delegation to. Datadog requests read-only access to user records; it does not write to your directory.
 
-You configure one set of credentials per Google Workspace domain. To sync more than one domain, see [Connect additional domains](#connect-additional-domains).
-
 ## Prerequisites
 
 Two different Google identities are involved in this setup, and both are commonly called a "service account" in conversation. They are not interchangeable:
 
 | Identity | What it is | Where you use it |
 | --- | --- | --- |
-| **Google Cloud service account** | The Google Cloud entity Datadog authenticates as. | You upload its JSON key file to Datadog. |
-| **Google Workspace admin user** | A Google Workspace user with admin privileges that the service account impersonates when calling the Directory API. | Entered in the **Workspace Admin email** field. |
+| **Google Cloud service account** | The Google Cloud entity Datadog authenticates as. | Upload its JSON key file to Datadog. |
+| **Google Workspace admin user** | A Google Workspace user with admin privileges that the service account impersonates when calling the Directory API. | Enter in the **Workspace Admin email** field. |
 
 The **Workspace Admin email** field requires the Google Workspace admin user, not the service account. If the address you are about to enter ends in `@<project-id>.iam.gserviceaccount.com`, it is the service account email and the connection fails.
 
@@ -65,6 +63,8 @@ Before you begin, make sure you have:
 Datadog recommends impersonating a generically named, shared admin account, such as `datadog-integration@example.com`, rather than an individual's account. If the integration depends on a named person's account and that person leaves the organization or loses admin privileges, the sync stops working and the cause is difficult to trace.
 
 ## Setup
+
+You can configure one set of credentials per Google Workspace domain. To sync more than one domain, see [Connect additional domains](#connect-additional-domains).
 
 ### Create a service account in Google Cloud
 
@@ -99,18 +99,16 @@ For more detail, see Google's [Delegate domain-wide authority to a service accou
 
 ### Add credentials in Datadog
 
-1. In Datadog, go to [Cloud SIEM > Content Packs][6].
+1. In Datadog, go to **Cloud SIEM** > [**Content Packs**][6].
 1. Filter by **Entity Pack**, then open the **Google Workspace Identity** Entity Pack. It is marked **Available** until you connect a directory.
 1. Click **Add Credentials**.
 1. In the **Add credentials and activate content pack** dialog, click **Browse files** and select the service account JSON key file you downloaded. Datadog extracts the `client_email`, `private_key`, and `project_id` values from the file.
 1. Complete the remaining fields:
-
    | Field | Description |
    | --- | --- |
    | **Name** | A display name for this set of credentials, for example `Production credentials`. Use a name that identifies the domain if you plan to connect more than one. |
    | **Domain** | The Google Workspace domain to sync, for example `example.com`. |
    | **Workspace Admin email** | The Google Workspace admin user the service account impersonates, for example `datadog-integration@example.com`. Do not use the service account email. |
-
 1. Click **Test Connection**. Datadog validates the credentials against Google Workspace before storing them. If validation fails, see [Troubleshooting](#troubleshooting).
 1. After the connection test succeeds, save the credentials to activate the Entity Pack.
 
@@ -131,7 +129,7 @@ The **Credentials** section lists each connected account. Expand an account to s
 | **Domain** | The Google Workspace domain this account syncs. |
 | **Status** | Whether synchronization is enabled or disabled for this account. Use the toggle to change it, or the overflow menu to remove the credential. |
 | **Last updated** | When the credential itself was last modified. |
-| **Sync status** | Whether the most recent sync completed, for example **Synced**. |
+| **Sync status** | Whether the most recent sync completed; for example, `Synced`. |
 | **Last synced** | How long ago the most recent sync ran. |
 | **Last sync duration** | How long that sync took. |
 
@@ -205,7 +203,7 @@ The most common causes are changes on the Google side:
 
 ### The sync succeeds but no users appear
 
-- Confirm that the **Domain** value matches the domain whose users you expect. A valid admin user in a different domain than the one you entered can produce an empty result.
+Confirm that the **Domain** value matches the domain whose users you expect. A valid admin user in a different domain than the one you entered can produce an empty result.
 
 ### No user pill appears on signals
 

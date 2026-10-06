@@ -40,8 +40,6 @@ Datadog reads your directory through the [Microsoft Graph API][2], authenticatin
 
 Unlike the other Entity Packs, Microsoft Entra ID builds on the [Datadog Azure integration][10] rather than on a credential you enter directly in Cloud SIEM. The app registration that backs the Entity Pack is the same one the Azure integration uses, and it must have resource collection enabled. If you already run the Azure integration, most of the setup is done; you are adding two Microsoft Graph permissions to an existing app registration.
 
-You configure one app registration per Entra ID tenant. To sync more than one tenant, see [Connect additional tenants](#connect-additional-tenants).
-
 ## Prerequisites
 
 Before you begin, make sure you have:
@@ -56,15 +54,17 @@ Before you begin, make sure you have:
   | **SIEM Entities Admin** | Connect a user directory and manage its credentials. See [Entity Packs][9]. |
   | **Integrations Manage** | Modify the Azure integration, through which this Entity Pack is configured. |
 
-  Analysts who need to see the identity context the Entity Pack provides require at least **SIEM Entities Read**.
+  To see the identity context the Entity Pack provides, analysts require at least **SIEM Entities Read**.
 
 ## Setup
+
+You can configure one app registration per Entra ID tenant. To sync more than one tenant, see [Connect additional tenants](#connect-additional-tenants).
 
 If you already have an Azure integration with resource collection enabled, skip to [Grant Microsoft Graph permissions](#grant-microsoft-graph-permissions).
 
 ### Set up the Azure integration
 
-1. In Datadog, go to [Integrations > Azure][3].
+1. In Datadog, go to **Integrations** > [**Azure**][3].
 1. If you do not have an Azure integration yet, follow [Getting Started with Azure][10]. You can set it up three ways:
    - **Quickstart**, which runs an install script in Azure Cloud Shell.
    - **Terraform**, for infrastructure-as-code workflows.
@@ -84,34 +84,30 @@ The app registration needs Microsoft Graph application permissions to read user 
 1. In the left sidebar, click **API permissions**.
 1. Click **Add a permission** > **Microsoft Graph** > **Application permissions**.
 1. Add the following permissions:
-
    | Permission | Required for | What it reads |
    | --- | --- | --- |
    | `User.Read.All` | User profiles | User attributes: email, name, department, job title, account status, and password change timestamps. |
    | `AuditLog.Read.All` | MFA status and sign-in activity | MFA registration status, authentication method details, and sign-in activity. |
 
    You can grant `Directory.Read.All` instead of `User.Read.All`. It is broader: it covers user data plus other directory objects. Grant `User.Read.All` unless your organization has a reason to prefer the wider scope.
-
-1. Click **Grant admin consent for \[your tenant name\]**. For more detail, see Microsoft's [Grant tenant-wide admin consent][4].
+1. Click **Grant admin consent for \<your tenant name\>**. For more detail, see Microsoft's [Grant tenant-wide admin consent][4].
 1. Confirm that both permissions show a green check mark in the **Status** column. Adding a permission is not the same as consenting to it, and this is the step most often missed.
 
 <div class="alert alert-info">Without <code>AuditLog.Read.All</code>, the directory still syncs and users still appear in the User Inventory, but their records do not include MFA status or sign-in activity.</div>
 
 ### Add an app registration in Datadog
 
-1. In Datadog, go to [Cloud SIEM > Content Packs][5].
+1. In Datadog, go to **Cloud SIEM** > [**Content Packs**][5].
 1. Filter by **Entity Pack**, then open the **Microsoft Entra ID** Entity Pack. It is marked **AVAILABLE** until you connect a directory.
 1. Click **Add Account**.
 1. In the **Add App Registration** dialog, select a setup method:
-
    | Method | Use it when |
    | --- | --- |
    | **Quickstart** | You want Datadog's install script to configure the integration for you through Azure Cloud Shell. |
    | **Terraform** | You manage Azure configuration as code. |
    | **Existing App Registration** | You already set up an app registration in Azure with the required permissions, which is the case if you followed the steps above. |
-
 1. The Entity Pack displays your Azure app registrations. Select the one you granted Microsoft Graph permissions to, and confirm it has resource collection enabled.
-1. If you see a warning such as **6 Azure applications have Resource Collection disabled.**, find the app registration you granted Microsoft Graph permissions to in the list below it. A red dot means resource collection is disabled. Click **Configure** next to it, or open the app registration in [Integrations > Azure][3], and turn on **Enable Resource Collection** on its **Resource Collection** tab.
+1. If you see a warning such as **6 Azure applications have Resource Collection disabled.**, find the app registration you granted Microsoft Graph permissions to in the list below it. A red dot means resource collection is disabled. Click **Configure** next to it, or open the app registration in **Integrations** > [**Azure**][3], and turn on **Enable Resource Collection** on its **Resource Collection** tab.
 
 ## Verify the sync
 
@@ -127,7 +123,7 @@ The **Credentials** section shows how many accounts are connected and lists each
 | --- | --- |
 | **Subscription** | The Azure subscription ID that identifies this account. |
 | **Created on** | When the account was connected. |
-| **Sync status** | Whether the most recent sync completed, for example **Synced**. |
+| **Sync status** | Whether the most recent sync completed; for example, `Synced`. |
 | **Last synced** | How long ago the most recent sync ran. |
 | **Last sync duration** | How long that sync took. |
 
@@ -173,9 +169,9 @@ Work through these causes in order:
 | Cause | How to confirm | Fix |
 | --- | --- | --- |
 | Not enough time has passed | You granted permissions or connected the app registration very recently | Wait and check again. Entra ID synchronization depends on Azure resource collection, so users do not appear immediately. |
-| Admin consent not granted | The **Status** column in **API permissions** does not show a green check mark for both permissions | Click **Grant admin consent for \[tenant\]** and confirm both check marks. Adding a permission without consenting to it does nothing. |
-| Resource collection disabled | In the **Credentials** section, the app registration you granted Microsoft Graph permissions to has a red dot | Click **Configure** next to the app registration, or open it in [Integrations > Azure][3], and turn on **Enable Resource Collection** on its **Resource Collection** tab. |
-| No subscription configured | In the **Credentials** section, or in the app registration list in [Integrations > Azure][3], the app registration shows **0 subscriptions** | Configure at least one subscription, even if you do not otherwise use it. |
+| Admin consent not granted | The **Status** column in **API permissions** does not show a green check mark for both permissions | Click **Grant admin consent for \<tenant\>** and confirm both check marks. Adding a permission without consenting to it does nothing. |
+| Resource collection disabled | In the **Credentials** section, the app registration you granted Microsoft Graph permissions to has a red dot | Click **Configure** next to the app registration, or open it in **Integrations** > [**Azure**][3], and turn on **Enable Resource Collection** on its **Resource Collection** tab. |
+| No subscription configured | In the **Credentials** section, or in the app registration list in **Integrations** > [**Azure**][3], the app registration shows **0 subscriptions** | Configure at least one subscription, even if you do not otherwise use it. |
 | Wrong app registration selected | The app registration selected in the Entity Pack is not the one you granted Graph permissions to | Select the app registration you granted permissions to, or grant the permissions on the one you selected. |
 | Directory is empty | The Entra ID tenant contains no users | Connect a tenant that has users. An empty directory syncs successfully and produces an empty User Inventory. |
 | Looking at the wrong number | **Users Synced** reads zero or very low | Check the **Entities** count instead. **Users Synced** counts only users whose attributes a sync changed, so it reads low on a stable directory even when the sync is healthy. |
@@ -197,7 +193,7 @@ The most common causes are changes on the Azure side:
 - The app registration was deleted, or its Microsoft Graph permissions or admin consent were revoked.
 - Resource collection was disabled on the app registration.
 
-For specific error messages, open the app registration in [Integrations > Azure][3] and check its **Issues** tab.
+For specific error messages, open the app registration in **Integrations** > [**Azure**][3] and check its **Issues** tab.
 
 ### No user pill appears on signals
 

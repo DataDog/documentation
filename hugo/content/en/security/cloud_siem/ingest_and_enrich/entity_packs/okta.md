@@ -61,8 +61,6 @@ For what Entity Packs provide in general, and the permissions they require, see 
 
 Datadog reads your directory through the [Okta Users API][2], authenticating with an Okta API token that you create. Read-only access is all that is needed. Datadog never writes to your directory.
 
-You configure one set of credentials per Okta org. To sync more than one, see [Connect additional Okta orgs](#connect-additional-okta-orgs).
-
 ## Prerequisites
 
 Setup takes three values: a **Name**, your **Okta Domain**, and an **API Token**. You enter all three in the Entity Pack; the token is created in Okta.
@@ -76,7 +74,7 @@ Before you begin, make sure you have:
 
 1. In the Okta Admin Console, go to **Security** > **API**.
 1. Click the **Tokens** tab, then click **Create token**.
-1. Name the token something that identifies Datadog as the consumer, for example `datadog-cloud-siem`.
+1. Name the token something that identifies Datadog as the consumer; for example, `datadog-cloud-siem`.
 1. From **API calls made with this token must originate from**, select **Any IP**. To restrict the token to Datadog's addresses instead, see [Network restrictions](#network-restrictions).
 1. Click **Create token**, then copy the token value immediately. Okta shows it only once and stores a hash of it afterward.
 
@@ -102,19 +100,19 @@ Enter the host you sign in to, without a scheme or path (for example, `example.o
 
 ## Setup
 
+You can configure one set of credentials per Okta org. To sync more than one, see [Connect additional Okta orgs](#connect-additional-okta-orgs).
+
 ### Add credentials in Datadog
 
-1. In Datadog, go to [Cloud SIEM > Content Packs][6].
+1. In Datadog, go to **Cloud SIEM** > [**Content Packs**][6].
 1. Filter by **Entity Pack**, then open the **Okta Identity** Entity Pack. It is marked **AVAILABLE** until you connect a directory.
 1. Click **Add Credentials**.
 1. In the **Add credentials and activate content pack** dialog, complete the three fields:
-
    | Field | Description |
    | --- | --- |
-   | **Name** | A display name for this set of credentials, for example `Production credentials`. Use a name that identifies the org if you plan to connect more than one. |
-   | **Okta Domain** | The Okta org to sync, for example `example.okta.com`. Enter the host only, with no scheme or path. |
+   | **Name** | A display name for this set of credentials; for example, `Production credentials`. Use a name that identifies the org if you plan to connect more than one. |
+   | **Okta Domain** | The Okta org to sync; for example, `example.okta.com`. Enter the host only, with no scheme or path. |
    | **API Token** | The token value you copied from Okta. Paste the value by itself, without the `SSWS` prefix used in raw API requests. |
-
 1. Click **Test Connection**. Datadog validates the credentials against Okta before saving them. If validation fails, see [Troubleshooting](#troubleshooting).
 1. When the connection test succeeds, save the credentials to activate the Entity Pack.
 
@@ -137,7 +135,7 @@ The **Credentials** section lists each connected account. Expand an account to s
 | **Domain** | The Okta org this account syncs. |
 | **Status** | Whether synchronization is **Enabled** or disabled for this account. Use the toggle to change it. |
 | **Last updated** | When the credential itself was last modified. |
-| **Sync status** | Whether the most recent sync completed, for example **Synced**. |
+| **Sync status** | Whether the most recent sync completed; for example, `Synced`. |
 | **Last synced** | How long ago the most recent sync ran. |
 | **Last sync duration** | How long that sync took. |
 
@@ -154,7 +152,7 @@ Through the API, a credential reports `initializing` after Datadog accepts it an
 
 The **Key Metrics** dashboard shows four widgets:
 
-- **Users Synced**: How many users a sync updated. This measures directory churn rather than directory size, so it normally reads far lower than your total user count. For the total, use the **Entities** section below.
+- **Users Synced**: How many users a sync updated. This measures directory churn rather than directory size, so it normally reads far lower than your total user count. For the total, use the [Entities](#entities) section below.
 - **Users by Credential**: The same count, broken out by connected account.
 - **Sync History by Credential**: Completed syncs over time. A gap means a sync failed or was skipped.
 - **Sync Duration by Credential**: How long each sync took. An occasional spike is normal. A sustained climb usually means the directory is growing, or that Okta is rate limiting the calls.
@@ -188,7 +186,7 @@ Work through these causes in order:
 | Cause | How to confirm | Fix |
 | --- | --- | --- |
 | Token value pasted with the `SSWS` prefix or surrounding whitespace | The value you pasted is longer than the token Okta displayed | Re-paste the token value by itself. |
-| Okta domain entered with a scheme or path | The **Okta Domain** value starts with `https://`, or ends in `/admin` or a trailing slash | Enter the host only, for example `example.okta.com`. |
+| Okta domain entered with a scheme or path | The **Okta Domain** value starts with `https://`, or ends in `/admin` or a trailing slash | Enter the host only; for example, `example.okta.com`. |
 | Wrong Okta org host | The value uses `example.okta.com` for a preview org, or omits the `-emea` suffix for an EMEA org | Use the host you sign in to: `example.oktapreview.com` or `example.okta-emea.com`. |
 | Token creator is not an admin, or cannot read users | The account that created the token has no admin role in the Okta Admin Console | Create the token from an account with **Read-only Administrator** or a broader admin role. |
 | Token creator was deactivated | The account that created the token is no longer active in Okta | Create a token from an active service account. Okta rejects tokens from deactivated users. |
