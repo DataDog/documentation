@@ -276,7 +276,7 @@ To edit the allowlist for a runner in the Datadog Agent:
 
 ### Automatic deletion of inactive runners
 
-To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only (ownerless) configuration after 35 days of inactivity. This automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
+To free up unused resources, Datadog automatically deletes inactive node Agent-based private action runners that use API-key-only (ownerless) configuration. A runner is considered inactive if it has not sent a health check to Datadog during 35 days. This automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
 
 If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
 
