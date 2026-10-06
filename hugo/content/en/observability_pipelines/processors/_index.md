@@ -52,6 +52,8 @@ These are the available processors:
 - [Tags][18]
 - [Throttle][19]
 
+**Note**: The Generate Metrics processor and the Quota processor with an overflow destination aren't available for [pre-processing](#pre-processing-for-multiple-sources).
+
 [1]: /observability_pipelines/processors/add_environment_variables/
 [2]: /observability_pipelines/processors/add_hostname/
 [3]: /observability_pipelines/processors/custom_processor/
@@ -96,9 +98,9 @@ These are the available processors:
 Pre-processors is in Preview. Contact your account manager to request access.
 {{< /callout >}}
 
-When you have multiple sources for a pipeline, you can add pre-processors to:
-- Pre-process logs from a specific source
-- Pre-process logs from all sources
+When you have multiple sources for a pipeline, you can add pre-processors for:
+- Logs from a specific source
+- Logs from all sources
 
 After pre-processing, the Worker sends logs to the processor groups for specific destinations.
 
@@ -123,7 +125,6 @@ The following are not available for pre-processing:
 - Generate Metrics processor
 - Quota processor with an overflow destination
 - Packs
-
 
 ## Processor groups
 
