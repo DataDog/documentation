@@ -99,7 +99,7 @@ Check these logs to get additional context on any issues with the plugin.
 
 ### Test runs are not linked to TeamCity jobs
 
-The Datadog CI Integration plugin does not currently correlate TeamCity pipeline or job executions with test runs in Test Optimization. Tests may appear in Test Optimization while the corresponding CI Visibility job shows **Test Runs: 0**.
+The Datadog CI Integration plugin does not correlate TeamCity pipeline or job executions with test runs in Test Optimization. Tests may appear in Test Optimization while the corresponding CI Visibility job shows **Test Runs: 0**.
 
 ## Further reading
 
