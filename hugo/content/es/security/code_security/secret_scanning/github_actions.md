@@ -1,17 +1,16 @@
 ---
-description: Utiliza Datadog y GitHub para detectar secretos expuestos en el código
+description: Utilice Datadog y GitHub para detectar secretos expuestos en el código
   en un pipeline de CI.
 is_beta: true
-title: Secret Scanning y acciones en GitHub
+title: Secret Scanning y GitHub Actions
 ---
+Ejecute un trabajo de [Datadog Secret Scanning][1] en sus flujos de trabajo de GitHub Actions. Esta acción envuelve el [Datadog Static Analyzer][8] (que escanea en busca de secretos), lo invoca contra su base de código y carga los resultados en Datadog.
 
-Ejecuta un trabajo de [Datadog Secret Scanning][1] en tus flujos de trabajo de acción de GitHub. Esta acción envuelve el [Datadog Static Analyzer][8] (que escanea los secretos), lo invoca contra tu código base, y sube los resultados a Datadog.
+## Flujo de trabajo {#workflow}
 
-## Flujo de trabajo
+Cree un archivo en `.github/workflows` para ejecutar un trabajo de Datadog Secret Scanning.
 
-Crea un archivo en `.github/workflows` para ejecutar un trabajo de Datadog Secret Scanning.
-
-A continuación, se muestra un ejemplo de archivo de flujo de trabajo.
+El siguiente es un archivo de flujo de trabajo de muestra.
 
 ```yaml
 on: [push]
@@ -36,36 +35,35 @@ jobs:
           secrets_enabled: true
 ```
 
-**Debes** establecer tus claves de API y de aplicación de Datadog como [secretos en tu repositorio de GitHub][4], ya sea a nivel de organización o de repositorio. Asegúrate de añadir el contexto `code_analysis_read` a tu clave de aplicación de Datadog. Para más información, consulta [claves de API y de aplicación][2].
+Usted **debe** establecer sus claves de Datadog API y de aplicación de Datadog como [secretos en su repositorio de GitHub][4], ya sea a nivel de organización o de repositorio. Asegúrese de agregar el contexto `code_analysis_read` a su clave de aplicación de Datadog. Para obtener más información, consulte [API and Application Keys][2].
 
-Asegúrate de sustituir `dd_site` por el sitio de Datadog que estés utilizando.
+Asegúrese de reemplazar `dd_site` con el sitio de Datadog que está utilizando.
 
-## Entradas
+## Entradas {#inputs}
 
-Puedes configurar los siguientes parámetros.
+Puede establecer los siguientes parámetros.
 
-| Nombre         | Descripción                                                                                                                                             | Obligatorio | Valor predeterminado         |
+| Nombre         | Descripción                                                                                                                                             | Requerido | Predeterminado         |
 |--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|----------|-----------------|
-| `dd_api_key` | Tu clave de API de Datadog. Esta clave la crea tu [organización de Datadog][2] y debe guardarse como [secreto][2].                                      | Sí     |                 |
-| `dd_app_key` | Tu clave de aplicación de Datadog. Esta clave la crea tu [organización de Datadog][2] y debe guardarse como [secreto][4].                              | Sí     |                 |
-| `dd_site`    | El [sitio de Datadog][3] al que enviar la información.                                                                                                           | No      | `datadoghq.com` |
-| `cpu_count`  | Establece el número de CPUs utilizadas por el analizador.                                                                                                         | No      | `2`             |
-| `enable_performance_statistics` | Obtén las estadísticas de tiempo de ejecución de los archivos analizados.                                                                                                   | No      | `false`         |
-| `debug`      | Permite al analizador imprimir logs adicionales útiles para la depuración. Para activarlo, establece `yes`.                                                                  | No      | `no`            |
+| `dd_api_key` | Su clave de Datadog API. Esta clave es creada por su [organización de Datadog][2] y debe almacenarse como un [secreto][2].                                      | Sí     |                 |
+| `dd_app_key` | Su clave de aplicación de Datadog. Esta clave es creada por su [organización de Datadog][2] y debe almacenarse como un [secreto][4].                              | Sí     |                 |
+| `dd_site`    | El [sitio de Datadog][3] al que se enviará la información.                                                                                                           | No      | `datadoghq.com` |
+| `cpu_count`  | Establezca el número de CPU que utilizará el analizador.                                                                                                         | No      | `2`             |
+| `enable_performance_statistics` | Obtenga las estadísticas de tiempo de ejecución de los archivos analizados.                                                                                                   | No      | `false`         |
+| `debug`      | Permite que el analizador imprima registros adicionales útiles para la depuración. Para habilitarlo, establézcalo en `yes`.                                                                  | No      | `no`            |
 
 
 
-<!-- ## Referencias adicionales
+<!-- ## Further Reading
 
-Documentación, enlaces y artículos útiles adicionales:
+Additional helpful documentation, links, and articles:
 
-- [Más información sobre Code Security][1] -->
+- [Learn about Code Security][1] -->
 
 [1]: /es/security/code_security/
 [2]: https://docs.datadoghq.com/es/account_management/api-app-keys/
 [3]: https://docs.datadoghq.com/es/getting_started/site/
 [4]: https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository
-[5]: https://github.com/DataDog/datadog-static-analyzer/blob/main/README.md#diff-aware-scanning
 [6]: /es/security/code_security/static_analysis/static_analysis_rules/
 [7]: https://github.com/DataDog/datadog-sca-github-action
 [8]: https://github.com/DataDog/datadog-static-analyzer

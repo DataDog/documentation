@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Feature Flags Java, Node.js, and Python SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
+The Datadog Feature Flags Java, Node.js, Python, and .NET SDKs can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source simplifies onboarding because it does not require a Datadog Agent for flag configuration. It also supports serverless applications that cannot connect to a Datadog Agent.
 
 After configuration is loaded, flag evaluation happens locally in the application. The SDK does not make a network request for each evaluation.
 
@@ -29,8 +29,11 @@ The following table shows the Feature Flags functionality available in each SDK 
 | Java `dd-openfeature` and `dd-java-agent` | 1.66.0 | Supported | Supported | Supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
 | Node.js `dd-trace` | 6.12.0 | Supported | Supported | Not supported | Prefer a compatible local telemetry relay; use direct fallback when unavailable |
 | Python `ddtrace` | 4.14.0 | Supported | Supported | Supported | Compatible local telemetry relay |
+| .NET `dd-trace-dotnet` and `Datadog.FeatureFlags.OpenFeature` | 3.54.0 and 2.3.1 | Supported | Supported with a compatible relay | Not supported | Compatible local telemetry relay; no direct fallback |
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. The Java runtime must support loading `dd-java-agent` with the `-javaagent` JVM option. You can pass this option in the Java command or through `JAVA_TOOL_OPTIONS`.
+
+.NET CDN delivery requires the Datadog .NET tracer to be loaded with [automatic instrumentation][12], alongside the OpenFeature provider. Installing the provider alone is not sufficient.
 
 The listed versions provide the capabilities shown in the table. Other server SDKs use Agent Remote Configuration for flag delivery.
 
@@ -38,10 +41,10 @@ Agentless delivery changes only the flag configuration source. Feature Flags eve
 
 ## Agentless architecture
 
-Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog. For Java, the runtime must also let you set the `-javaagent` JVM option:
+Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog. The runtime must support loading the language tracer:
 
 1. Use a [supported SDK version](#overview).
-2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][7] or [Cloud Run containers][8] for examples.
+2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][7] or [Cloud Run containers][8] for examples. For .NET, load the tracer with [automatic instrumentation][12].
 3. Configure the API key, Datadog site, and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
@@ -49,7 +52,7 @@ Use agentless delivery when the serverless runtime can make outbound HTTPS reque
    DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], or [Python][9] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
+4. Initialize or access the Datadog OpenFeature provider as described in the [Java][6], [Node.js][3], [Python][9], or [.NET][13] setup. This starts CDN polling. No Feature Flags enablement or source setting is required.
 5. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
@@ -70,6 +73,7 @@ Note the following behavior:
 
 - Experiment exposure events are emitted only for flags associated with an experiment.
 - Java and Python aggregate EVP flag evaluation events and send them by default.
+- .NET 3.54.0 sends experiment exposures through the configured Agent transport. It does not provide direct EVP fallback or aggregated EVP flag evaluation events. Without a compatible relay, exposures are not delivered.
 - To disable only the EVP flag evaluation event path, set `DD_FLAGGING_EVALUATION_COUNTS_ENABLED=false`.
 
 The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal. The standard `serverless-init` connection on port 8126 does not configure the OTLP endpoint for this metric. For no-Agent serverless environments, configure the serverless telemetry path for your platform before you enable this metric. See [Set Up Server-Side Flag Evaluation Metrics][10].
@@ -82,7 +86,7 @@ The `feature_flag.evaluations` metric is a separate OpenTelemetry (OTLP) signal.
    - Use `serverless-init` 1.9.13 or later. Earlier versions do not support the required EVP route.
    - Keep `DD_API_KEY` and `DD_SITE` in the application environment for agentless CDN configuration delivery. A sidecar also needs them for telemetry egress.
    - Do not configure an endpoint specific to Feature Flags. The SDK uses the standard tracer connection configured by the Serverless Monitoring setup.
-   - Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python sends supported EVP events to the same URL without this discovery request.
+   - Node.js and Java call `GET /info` on the tracer URL to discover the local EVP proxy. Python and .NET 3.54.0 send supported EVP events to the same URL without this discovery request.
 
 ### Verify telemetry egress
 
@@ -124,7 +128,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 - **API key ownership**: In agentless mode, the application owns `DD_API_KEY` for configuration. A `serverless-init` sidecar also needs the key for telemetry egress. In `remote_config` mode, the Agent owns the API key.
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
-- **Runtime support**: Java requires Java 11 or later. For Node.js and Python, check the tracer's runtime compatibility requirements.
+- **Runtime support**: Java requires Java 11 or later. For Node.js, Python, and .NET, check the tracer's runtime compatibility requirements. .NET runtimes must support loading the automatically instrumented tracer.
 - **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths. Evaluations then return caller-provided default values.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
@@ -159,7 +163,7 @@ Do not query Datadog APIs from each serverless invocation to evaluate flags. Use
 
 Before enabling Feature Flags in production:
 
-1. Confirm the application uses a [minimum supported SDK version](#overview). For Java, confirm that the JVM loads `dd-java-agent`.
+1. Confirm the application uses a [minimum supported SDK version](#overview). For Java, confirm that the JVM loads `dd-java-agent`. For .NET, confirm that automatic instrumentation loads the tracer.
 2. For agentless delivery, confirm the application has `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. For Agent Remote Configuration, confirm the Agent has its API key and Remote Configuration enabled.
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
@@ -181,3 +185,5 @@ Before enabling Feature Flags in production:
 [9]: /feature_flags/server/python/
 [10]: /feature_flags/guide/server_flag_evaluation_metrics/
 [11]: /serverless/
+[12]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/
+[13]: /feature_flags/server/dotnet/

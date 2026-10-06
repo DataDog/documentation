@@ -4,7 +4,7 @@ aliases:
 disable_toc: false
 further_reading:
 - link: /logs/explorer/calculated_fields/
-  tag: 설명서
+  tag: 문서
   text: 계산된 필드
 title: 수식
 ---
@@ -21,8 +21,8 @@ title: 수식
 | 계산된 필드 `field`                                            | `#field`(`#` 접두사 사용)                                                                                                          |
 | 문자열 리터럴(따옴표)<br>예: `text` 또는 `Quoted "text"`         | `"text"`<br> `"Quoted \"text\""`<br>(<a href="https://docs.datadoghq.com/logs/explorer/search_syntax/">로그 검색 구문</a> 적용)|
 | 숫자 리터럴(숫자)<br>예: `ten`                           | `10`                                                                                                                                 |
-| 함수 `func`, 포함 파라미터: `x` 및 `y`                         | `func(x, y)`                                                                                                                         |
-| 연산자<br>예: 피연산자 `x` 및 `y`를 사용하는 이항 연산자 `*` | `x*y`                                                                                                                                |
+| 파라미터 `x` 및 `y`                         | `func(x, y)`                                                                                                                         |을 사용하는 함수 `func`
+| 연산자<br>예시: 피연산자 `x` 및 `y`를 사용하는 이항 연산자 `*` | `x*y`                                                                                                                                |
 
 ## 연산자 {#operators}
 
@@ -46,6 +46,7 @@ title: 수식
 - [산술](#arithmetic)
 - [문자열](#string)
 - [논리](#logical)
+- [정규식](#regex)
 
 
 ### 산술 {#arithmetic}
@@ -65,7 +66,7 @@ title: 수식
 
 <h4>ceil(<i>num</i> value)</h4>
 
-숫자를 가장 가까운 정수로 반올림합니다.
+숫자를 가장 가까운 정수로 올림합니다.
 
 {{% collapse-content title="예시" level="h5" expanded=false %}}
 
@@ -78,7 +79,7 @@ title: 수식
 
 <h4>floor(<i>num</i> value)</h4>
 
-숫자를 가장 가까운 정수로 반내림합니다.
+숫자를 가장 가까운 정수로 내림합니다.
 
 {{% collapse-content title="예시" level="h5" expanded=false %}}
 
@@ -314,7 +315,49 @@ title: 수식
 
 {{% /collapse-content %}}
 
+---
+
+### 정규식 {#regex}
+
+정규식 함수는 정규식(regex)을 사용하여 값을 일치시키거나 변환합니다. 패턴은 리터럴, 문자 클래스, 수량자와 같이 [정규식 추출][1]과 동일한 정규식 구문을 지원합니다. 이스케이프 처리는 다릅니다. 추출 패턴은 단순 필드인 반면, 여기의 패턴은 큰따옴표로 묶인 문자열 인수입니다. 추출과 달리 여기서는 캡처 그룹에 이름이 필요하지 않습니다. `regexp_replace`는 `$1`부터 `$9`까지를 사용하여 이름 없는 그룹을 위치별로 참조할 수 있습니다. 동일한 [패턴 성능][2] 지침이 적용됩니다.
+
+<h4>regexp_like(<i>str</i> value, <i>str</i> pattern)</h4>
+
+패턴이 값의 어느 곳에서든 일치하면 `true`를 반환하고, 그렇지 않으면 `false`를 반환합니다.
+
+{{% collapse-content title="예시" level="h5" expanded=false %}}
+
+| 예시  | 수식 | 결과 |
+|----------|-------------|---------|
+| 로그 이벤트에는 다음과 같은 속성이 있습니다.<br>`message` = "connection timeout after 30s" | `#is_timeout = regexp_like(message, "timeout\|deadline exceeded")` | `#is_timeout` = "true" |
+
+{{% /collapse-content %}}
+
+
+<h4>regexp_replace(<i>str</i> input, <i>str</i> pattern, <i>str</i> replacement, [<i>int</i> start, <i>int</i> N])</h4>
+
+일치하는 텍스트가 대체된 `input`을 반환합니다. `replacement`에서 `$1`부터 `$9`까지 사용하여 캡처 그룹의 일치 항목을 삽입하거나, `${name}`을 사용하여 명명된 그룹의 일치 항목을 삽입하세요. 수식 인수는 큰따옴표로 묶인 문자열 리터럴이므로 백슬래시를 이스케이프 처리해야 합니다. 예를 들어, `pattern`의 약식 클래스에는 `"\d"` 대신 `"\\d"`을 작성하세요. `replacement`에 리터럴 `$`를 삽입하려면 `\$`로 특수 의미를 이스케이프 처리한 다음, 문자열 리터럴을 위해 해당 백슬래시를 다시 이스케이프 처리하세요. `"\\$"`
+
+| 인수 | 의미 |
+|---|---|
+| `input` | 변환할 텍스트 |
+| `pattern` | 일치시킬 정규식 패턴 |
+| `replacement` | 정규식 변환 패턴(주로 캡처 그룹 사용) |
+| `start` | 선택 사항입니다. 일치를 시작할 0 기반 문자 인덱스입니다. 기본값은 `0` |입니다.
+| `N` | 선택 사항입니다. 바꿀 최대 일치 항목 수입니다. 기본값은 `1`입니다. `0`은 일치하는 모든 항목을 바꿉니다 |
+
+{{% collapse-content title="예시" level="h5" expanded=false %}}
+
+| 예시  | 수식 | 결과 |
+|----------|-------------|---------|
+| 로그 이벤트에는 다음과 같은 속성이 있습니다.<br>`@path` = "/api/v1/orders" | `#resource = regexp_replace(@path, "^/api/v[0-9]+/(.*)$", "$1")` | `#resource` = "orders" |
+
+{{% /collapse-content %}}
+
 
 ## 추가 자료 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /ko/logs/explorer/calculated_fields/extractions/#regex
+[2]: /ko/logs/explorer/calculated_fields/extractions/#pattern-performance

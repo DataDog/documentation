@@ -67,6 +67,10 @@
     "name": "CI Visibility GitHub Accounts",
     "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
   },
+  "ci-visibility-logs": {
+    "name": "CI Visibility Logs",
+    "description": "Send CI job logs over HTTP for CI Visibility."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."
@@ -230,6 +234,10 @@
   "execution-policy": {
     "name": "Execution Policy",
     "description": "Execution policies control which actions Datadog Action Platform is allowed to run\nagainst your infrastructure, and where. Each policy pairs an effect (allow or deny)\nwith a pattern of actions, and can scope that decision to specific Kubernetes\nnamespaces, scripts, or remote shell paths."
+  },
+  "experiments": {
+    "name": "Experiments",
+    "description": "Create and manage experiments, metrics, subject types, SQL models, and protocols."
   },
   "fastly-integration": {
     "name": "Fastly Integration",

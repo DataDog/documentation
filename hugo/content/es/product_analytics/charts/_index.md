@@ -1,51 +1,45 @@
 ---
-description: Los distintos gráficos te ayudan a comprender el camino que siguen tus
-  usuarios cuando descubren tu producto, servicio o marca.
-further_reading:
-- link: /product_analytics/
-  tag: Documentación
-  text: Análisis de productos
+description: Los gráficos de Product Analytics le ayudan a comprender la ruta que
+  siguen sus usuarios a medida que descubren su producto, servicio o marca.
 title: Gráficos
 ---
+Utilice los gráficos de Product Analytics para visualizar los recorridos de los usuarios de extremo a extremo y descubrir las diferentes formas en que los usuarios navegan por su aplicación. Puede extraer datos para identificar puntos de fricción en el recorrido del usuario, medir el éxito de los cambios en la interfaz de usuario e informar las decisiones de diseño. 
 
-## Información general
+## Decidir qué gráfico utilizar {#deciding-which-chart-to-use}
 
-Utiliza los distintos gráficos para visualizar los recorridos de los usuarios de principio a fin y descubrir las distintas formas en que los usuarios navegan por tu aplicación. Puedes extraer los datos para identificar fricciones en el recorrido del usuario, medir el éxito de los cambios en la interfaz de usuario y fundamentar las decisiones de diseño de tu aplicación. 
+### Embudo {#funnel}
 
-## Decidir qué gráfico utilizar
+Los gráficos de [Funnel][2] le ayudan a comprender la conversión de extremo a extremo de un único flujo de trabajo esencial. Puede visualizar los detalles en el panel lateral para comprender por qué las tasas de conversión son las que son.
+Por ejemplo, puede determinar si hubo un problema de rendimiento que causó el abandono del usuario. ¿Están los clientes experimentando un error que ocurrió en una versión reciente? Vea una Session Replay de un usuario que realizó una conversión o abandonó para ver exactamente qué sucedió.
 
+{{< img src="/product_analytics/funnel_chart.png" alt="Comprenda las conversiones de extremo a extremo con el análisis de embudo.">}}
 
-### Diagrama de rutas
+### Rutas de recorrido {#journey-paths}
 
-{{< img src="/product_analytics/overview_pathways_ga.png" alt="Utiliza rutas para visualizar todos los recorridos de los usuarios por toda tu aplicación para analizar el camino crítico">}}
+Los diagramas de [Journey Paths][5] le permiten ver las rutas más comunes que siguen los usuarios entre eventos seleccionados, incluidos eventos de visualización y acción, tanto para usuarios que realizaron una conversión como para los que abandonaron.
 
-El [Diagrama de rutas][3] te permite visualizar todos los recorridos de los usuarios en tu aplicación para identificar las contribuciones más importantes a un flujo.
+{{< img src="product_analytics/journeys/journey_paths/pana_journey_paths_conversion_chart_2.png" alt="Un gráfico de Rutas de recorrido renderizado que muestra las rutas principales que siguen los usuarios entre dos visualizar." style="width:100%;" >}}
 
+### Pathways {#pathways}
 
-### Análisis del embudo
+Los diagramas de [Pathways][3] le permiten visualizar todos los recorridos de los usuarios a través de su aplicación para identificar las contribuciones más importantes a un flujo.
 
-{{< img src="/product_analytics/overview_funnel_ga.png" alt="Comprende las conversiones de principio a fin con el análisis del embudo.">}}
+{{< img src="/product_analytics/journeys/pathways/pathways_chart.png" alt="El diagrama de Pathways predeterminado para una aplicación." style="width:90%;" >}}
 
-Con el [análisis del embudo][2], puedes comprender la conversión de principio a fin de un único workflow (UI) / proceso (generic) esencial. Puedes ver los detalles en el panel lateral para comprender por qué las tasas de conversación son las que son.
-Por ejemplo, puedes determinar si hubo un problema de rendimiento que provocó la caída del usuario. ¿Están experimentando los clientes un error que se produjo en una versión reciente? Mira un Session Replay de un usuario que se convirtió o abandonó para ver exactamente lo que sucedió.
+### Retención {#retention}
 
-### Análisis de la retención
+Los gráficos de [Retention][4] visualizan con qué frecuencia los usuarios regresan exitosamente a una página o a una acción. Esta medida ofrece información sobre la satisfacción general del usuario con su aplicación. 
 
-{{< img src="/product_analytics/overview_retention_ga.png" alt="Comprende las conversiones de principio a fin con el análisis del embudo.">}}
+{{< img src="/product_analytics/retention/retention_chart.png" alt="Un ejemplo de gráfico de análisis de retención." style="width:90%;" >}}
 
-Con el [análisis de retención][4] puedes medir la frecuencia con la que los usuarios vuelven a la Page (página) o a una acción. Esta medida ofrece información sobre la satisfacción general del usuario con tu aplicación. 
+### Analytics {#analytics}
 
-### Analytic Explorer
+[Analytics][1] le permite explorar cómo se utiliza su producto. Puede analizar sesiones, eventos y perfiles de usuario, y luego desglosar, comparar y visualizar los datos en una variedad de tipos de gráficos.
 
-{{< img src="/product_analytics/overview_analytic_ga.png" alt="Comprende las conversiones de principio a fin con el análisis del embudo.">}}
-
-El [Analytics Explorer[1] contiene visualizaciones de agregación de datos para ayudarte a comprender cómo se está utilizando tu producto. Puedes crear un widget en un dashboard a partir de esa visualización y profundizar en subconjuntos de la lista de eventos en función de las interacciones que permita la visualización. 
-
-
-## Referencias adicionales
-{{< partial name="whats-next/whats-next.html" >}}
+{{< img src="/product_analytics/analytics/analytics_chart.png" alt="Un ejemplo de gráfico de Analytics." style="width:90%;" >}}
 
 [1]: /es/product_analytics/charts/analytics_explorer/
 [2]: /es/product_analytics/charts/funnel_analysis
 [3]: /es/product_analytics/charts/pathways
 [4]: /es/product_analytics/charts/retention_analysis
+[5]: /es/product_analytics/charts/journey_paths
