@@ -67,7 +67,7 @@ For advanced profile configuration, see [Build an NDM Profile][3].
 The recommended entry point for the SNMP Profile Manager is from an SNMP device in NDM. Each SNMP device matches to a profile, either a custom profile or a generic Datadog-provided one. Editing a profile from a device automatically creates a custom version, so you do not need to create a profile from scratch.
 
 1. Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Network Devices{{< /ui >}}][15].
-2. Click a device monitored through SNMP to open the device side panel. Look for the **SNMP** label beneath the device name.
+2. Click a device monitored through SNMP to open the device side panel. 
 3. Click {{< ui >}}View all metrics{{< /ui >}} to view the list of metrics being automatically collected for the device.
 
    {{< img src="/network_device_monitoring/profile_onboarding/ndm_view_all_metrics.png" alt="The NDM device side panel showing the Metrics section with the View all metrics button highlighted" style="width:90%;">}}
