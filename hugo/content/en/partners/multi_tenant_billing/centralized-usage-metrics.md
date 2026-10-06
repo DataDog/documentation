@@ -30,6 +30,8 @@ When building a dashboard widget or monitor:
 
 For usage metrics, filter by `child_org_name` to scope the query to one customer, or group by `child_org_name` to compare customers.
 
+{{< img src="partners/multi_tenant_billing/usage_source_infra_hosts.png" alt="Usage query source with Infra Hosts selected." style="width:100%;" >}}
+
 For estimated usage metrics, use the `child_org_name` tag to filter or group the query. For example, query estimated infrastructure host usage for every customer:
 
 ```
