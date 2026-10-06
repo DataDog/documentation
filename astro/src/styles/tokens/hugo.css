@@ -14,10 +14,12 @@
   --hugo-header-height-desktop-scrolled: 65px; /* ≥992px, after .main-nav-scrolled */
   --hugo-breakpoint-desktop: 992px; /* header height changes here */
   --hugo-breakpoint-tablet: 768px; /* footer padding changes here */
-  --hugo-footer-padding-y: 1rem; /* <768px (pt-3 pb-3) */
-  --hugo-footer-padding-y-tablet: 9rem; /* ≥768px (pt-md-36 pb-md-36) */
-  --hugo-footer-padding-top-desktop: 3rem; /* ≥992px (pt-lg-5) */
-  --hugo-footer-padding-bottom-desktop: 4rem; /* ≥992px (pb-lg-16) */
+  /* The footer pads only its bottom edge (`pb-3 pb-md-36 pb-xl-16`). The
+     upstream $spacers map is in 10px steps, so 3 = 30px, while the two-digit
+     keys are literal pixel values. */
+  --hugo-footer-padding-bottom: 30px; /* <768px (pb-3) */
+  --hugo-footer-padding-bottom-tablet: 36px; /* ≥768px (pb-md-36) */
+  --hugo-footer-padding-bottom-desktop: 16px; /* ≥1200px (pb-xl-16) */
   --hugo-header-shadow: 0 0 8px 8px rgba(0, 0, 0, 0.07);
   --hugo-header-z: 200;
   --hugo-banner-z: 1080;
@@ -89,7 +91,11 @@
   --hugo-footer-text: rgba(255, 255, 255, 0.5);
   --hugo-footer-text-strong: #ffffff;
   --hugo-footer-border-gray: #616161;
-  --hugo-footer-border-gray-darker: #2a1f30;
+  --hugo-footer-border-gray-darker: #323232;
+  --hugo-footer-border-translucent: rgba(255, 255, 255, 0.5);
+  --hugo-footer-accent: #b37bff;
+  --hugo-footer-link-muted: #969696;
+  --hugo-footer-menu-item: #e2e2e2;
   --hugo-footer-popup-bg: #323232;
   --hugo-footer-popup-hover: #616161;
   --hugo-footer-popup-secondary: #c7c7c7;
