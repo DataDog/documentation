@@ -63,7 +63,7 @@ You can launch a Bits investigation from several places in Real User Monitoring 
 
 - Recommendation cards on the RUM **Optimization** page and in Operations Monitoring. For details, see [Optimize Performance with Bits AI][19].
 - The **Anomaly · Investigate** button on a RUM vital chart. For details, see [Investigate Regressions and Alerts with Bits AI][20].
-- RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations).
+- RUM monitors, which support the same monitor-based entry points as other supported monitor types, including [automatic investigations](#enable-automatic-investigations). For details, see [Investigate Regressions and Alerts with Bits][20].
 
 ### General prompt
 

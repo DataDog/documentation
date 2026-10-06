@@ -10176,7 +10176,7 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: Bits AI in RUM
+    - name: Bits in RUM
       url: real_user_monitoring/bits_ai/
       parent: rum
       identifier: rum_bits_ai
@@ -10191,7 +10191,7 @@ menu:
       parent: rum_bits_ai
       identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Bits Chat
+    - name: Bits Chat in RUM
       url: real_user_monitoring/bits_ai/bits_chat/
       parent: rum_bits_ai
       identifier: rum_bits_ai_bits_chat

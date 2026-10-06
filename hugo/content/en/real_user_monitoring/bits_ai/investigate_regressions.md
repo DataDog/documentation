@@ -22,7 +22,7 @@ When a performance metric suddenly degrades, you can get to the root cause in tw
 
 ## Investigate an anomaly on a vital chart
 
-RUM runs anomaly detection on the Core Web Vitals charts of the RUM summary page for browser applications. When a vital degrades unexpectedly, RUM highlights the anomalous window in pink and displays an **Anomaly · Investigate** button below the chart.
+RUM runs anomaly detection on the Core Web Vitals charts of the RUM summary page for browser applications. When a vital degrades unexpectedly, RUM highlights the time range of the anomaly on the chart and displays an **Anomaly · Investigate** button below it.
 
 {{< img src="real_user_monitoring/bits_ai/anomaly-investigate.png" alt="A First Contentful Paint chart with an anomalous window highlighted in pink and an Anomaly · Investigate button below the chart." style="width:50%;" >}}
 
@@ -37,7 +37,7 @@ Bits Investigation supports [RUM monitors][1]. When you enable automatic investi
 To enable automatic investigations on a RUM monitor:
 
 1. Create or edit a [RUM monitor][2].
-2. Toggle **Investigate with Bits** to **Enabled**.
+2. Under **Configure notifications & automations**, toggle **Investigate with Bits** to **Enabled**.
 3. Save the monitor.
 
 {{< img src="real_user_monitoring/bits_ai/monitor-auto-investigate.png" alt="The Investigate with Bits setting in the monitor editor, toggled to Enabled to automatically investigate monitor alerts." style="width:100%;" >}}

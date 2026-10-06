@@ -1,5 +1,5 @@
 ---
-title: Bits AI in RUM
+title: Bits in RUM
 description: "Use Bits Investigation and Bits Chat from RUM to optimize your application's performance, find the root cause of regressions, and ask questions about your frontend."
 aliases:
   - /real_user_monitoring/ai_investigations/
@@ -27,7 +27,7 @@ You can use Bits AI in RUM in three ways:
 |---|---|---|
 | [Optimize performance][6] | Get recommendations on potential issues affecting your application's performance, and start an investigation on any of them. | Bits Investigation |
 | [Investigate regressions and alerts][7] | Investigate anomalies on your performance metrics, or enable automatic investigations on alerting monitors. | Bits Investigation |
-| [Ask questions and get tasks done][8] | Ask questions on any RUM page, such as "Why is this view slow?" or "Which pages have the worst INP?", and let Bits take action on your behalf. | Bits Chat |
+| [Ask questions and get tasks done][8] | Ask questions on any RUM page, such as `Why is this view slow?` or `Which pages have the worst INP?`, and let Bits take action on your behalf. | Bits Chat |
 
 ## Prerequisites
 

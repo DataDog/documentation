@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-[Bits Chat][1] is available on every RUM page. It knows which page you are on and what you are looking at, and it can query your RUM data alongside your traces, logs, and profiles. Use it to:
+[Bits Chat][1] is available on every RUM page. Bits Chat uses the page you're on and what you're viewing as context, and can query your RUM data alongside your traces, logs, and profiles. Use it to:
 
 - [Find out why a specific view is slow](#find-out-why-a-view-is-slow)
 - [Analyze a chart](#analyze-a-chart)
@@ -37,7 +37,7 @@ Bits Chat opens and investigates that specific page load. It reconstructs the vi
 | Server Side | Backend latency and server-side errors that affected the view, using [correlated APM traces][8]. |
 | Environment | The user's device and network conditions. |
 
-Bits returns ranked findings with links to the underlying events. You can then ask follow-up questions, such as "Is this happening to other users on this page?" or "Which backend endpoint is the slowest here?"
+Bits returns ranked findings with links to the underlying events. You can then ask follow-up questions, such as `Is this happening to other users on this page?` or `Which backend endpoint is the slowest here?`
 
 {{< img src="real_user_monitoring/bits_ai/ask-bits-view.png" alt="The view side panel with Bits Chat open after clicking Ask Bits, showing ranked findings for a slow page load." style="width:100%;" >}}
 
@@ -49,13 +49,13 @@ On the RUM summary page, click **Analyze with Bits AI** on a vital chart or on t
 
 ## Ask questions and complete tasks
 
-You can ask Bits Chat about your frontend in plain language from any RUM page, and have it act on RUM for you. For example:
+You can ask Bits Chat about your frontend in plain language from any RUM page, and ask it to complete RUM tasks for you. For example:
 
-- "Which pages in this application have the worst INP right now, and which interactions cause it?"
-- "Find sessions with 5xx errors on the checkout page in the last hour, grouped by error type." (On the RUM Explorer, Bits applies the query for you.)
-- "Which functions are slowing down my LCP?" from the RUM Profiling page.
-- "Create a retention filter that keeps 25% of sessions with errors."
-- "Create an operation that tracks checkout from the cart page to the order confirmation page."
+- `Which pages in this application have the worst INP right now, and which interactions cause it?`
+- `Find sessions with 5xx errors on the checkout page in the last hour, grouped by error type.` On the RUM Explorer, Bits applies the query for you.
+- `Which functions are slowing down my LCP?` Ask this on the RUM Profiling page.
+- `Create a retention filter that keeps 25% of sessions with errors.`
+- `Create an operation that tracks checkout from the cart page to the order confirmation page.`
 
 ## Further reading
 

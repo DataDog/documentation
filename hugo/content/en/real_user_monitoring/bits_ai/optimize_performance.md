@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-RUM analyzes your sessions and surfaces recommendation cards that point to the highest-impact improvements across your pages and your critical user journeys. From any card, you can start a [Bits Investigation][1] that analyzes the issue down to the code.
+RUM analyzes your sessions and surfaces recommendation cards that point to the highest-impact improvements across your pages and your critical user journeys. From any card, you can start a [Bits Investigation][1] that analyzes the issue, including the responsible code when the Source Code Integration is set up.
 
 You can start investigations from two places:
 
@@ -59,7 +59,7 @@ Bits compares slow page loads with fast ones and reconstructs what happened in t
 ### Start an investigation
 
 1. Go to [Operations Monitoring][5] and select an operation.
-2. On a recommendation card, click **Investigate**. (Alternatively, from the operations table, click **Investigate with Bits**.)
+2. On a recommendation card, click **Investigate**. You can also click **Investigate with Bits** in the operations table.
 
 The Bits Investigation opens in a new tab, scoped to the operation, the type of problem, and the time window of the card.
 
@@ -75,7 +75,7 @@ Bits adapts its analysis to the type of problem on the card:
 | Abandonment | How long users waited before giving up, which resources were still loading when they left, where they navigated next, and whether abandonment concentrates in one browser, device, country, or application version. |
 | Crashes | Stack traces from the affected sessions, and whether the crash is concentrated in a specific application version, device, or operating system. |
 | Slowness | A comparison of slow and fast runs to determine whether time is spent in the backend, the frontend, or resource loading, followed down to the backend trace or long task responsible. |
-| Timeouts | Whether the timeouts come from an instrumentation gap, such as an operation definition that no longer matches a renamed route or regrouped path. Bits rules this out before investigating a performance problem. |
+| Timeouts | Whether an instrumentation gap causes the timeouts, such as an operation definition that no longer matches a renamed route or regrouped path. Bits checks for this before investigating performance. |
 
 {{< img src="real_user_monitoring/bits_ai/operations-bits-investigation.png" alt="A Bits Investigation started from an Operations Monitoring recommendation card, concluding that an exhausted third-party payment API rate limit broke checkout, with its impact, a timeline, and suggested next steps." style="width:100%;" >}}
 
