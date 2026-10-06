@@ -264,6 +264,18 @@
       "description": "Edit an AuthN Mapping returns \"OK\" response"
     }
   ],
+  "SubmitCILog": [
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_4195490686",
+      "description": "Send batched CI job logs returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_logs",
+      "suffix": "_1818302850",
+      "description": "Send one CI job log returns \"Request accepted for processing\" response"
+    }
+  ],
   "AggregateCIAppPipelineEvents": [
     {
       "group": "ci_visibility_pipelines",
