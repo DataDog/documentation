@@ -23382,9 +23382,9 @@ menu:
           - CreateTeam
         unstable: []
         order: 21
-    - name: Get all teams
-      url: /api/latest/teams/get-all-teams/
-      identifier: teams-get-all-teams
+    - name: List all teams
+      url: /api/latest/teams/list-all-teams/
+      identifier: teams-list-all-teams
       parent: teams
       generated: true
       params:

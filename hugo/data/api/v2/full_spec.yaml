@@ -242750,7 +242750,7 @@ paths:
           appKeyAuth: []
         - AuthZ:
             - teams_read
-      summary: Get all teams
+      summary: List all teams
       tags:
         - Teams
       x-menu-order: 20
