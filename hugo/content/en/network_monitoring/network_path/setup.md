@@ -643,7 +643,7 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-The same `network_path.collector.filters` list applies to standard dynamic tests, basic dynamic tests, and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
+The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
 
 For Helm configuration, add the same filter list to `datadog.networkPath.collector.filters` in `values.yaml`.
 
