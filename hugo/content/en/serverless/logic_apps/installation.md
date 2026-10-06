@@ -127,7 +127,7 @@ For more information, see Microsoft's [Set up OpenTelemetry for performance moni
 
 In the `host.json` file at the root of your Logic App project, set `telemetryMode` to `OpenTelemetry`:
 
-```json
+```json {hl_lines=[3]}
 {
   "version": "2.0",
   "telemetryMode": "OpenTelemetry",
@@ -138,7 +138,7 @@ In the `host.json` file at the root of your Logic App project, set `telemetryMod
 }
 ```
 
-Deploy the updated `host.json` with your workflows. To edit the file on a deployed Logic App instead, open {{< ui >}}Development Tools{{< /ui >}} > {{< ui >}}Advanced Tools{{< /ui >}} in the Azure Portal and edit `site/wwwroot/host.json` from the Kudu console.
+Deploy the updated `host.json` with your workflows. To edit the file on a deployed Logic App instead, open {{< ui >}}Development Tools{{< /ui >}} > {{< ui >}}Advanced Tools{{< /ui >}} > {{< ui >}}Debug console{{< /ui >}} > {{< ui >}}CMD{{< /ui >}} in the Azure Portal and edit `site/wwwroot/host.json` from the Kudu console.
 
 ### 2. Configure the OTLP exporter
 
