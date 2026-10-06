@@ -16,6 +16,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/bits-threat-hunting/"
     tag: "Blog"
     text: "Automate threat hunting with Datadog Cloud SIEM"
+  - link: "/security/cloud_siem/ingest_and_enrich/muted_indicators/"
+    tag: "Documentation"
+    text: "Mute benign indicators in Cloud SIEM"
 
 products:
 - name: Cloud SIEM
@@ -124,6 +127,8 @@ Sources, categories, and intents are available as facets and filters on relevant
 | suspicious | Low reputation                               |
 | malicious  | Malicious reputation                         |
 
+In Cloud SIEM, you can change an indicator's intention to `benign` for your organization by muting it. Datadog also mutes a list of known-benign indicators for every organization. See [Muted Indicators][4].
+
 
 ## Entity types
 | Entity Type | Example | Use Cases |
@@ -142,3 +147,4 @@ Sources, categories, and intents are available as facets and filters on relevant
 [1]: /security/detection_rules/
 [2]: /integrations/guide/reference-tables
 [3]: /security/guide/byoti_guide
+[4]: /security/cloud_siem/ingest_and_enrich/muted_indicators/
