@@ -471,11 +471,11 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 ## Cases (Work Management)
 
-Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; linking work items to each other and to Jira issues; and managing attachments.
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -505,7 +505,7 @@ Creates a new [Work Management][38] work item (case) with a title, project, and 
 
 ### `update_datadog_case`
 *Toolset: **cases***\
-*Permissions Required: `Cases Write`*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
 Updates an existing work item (case): status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
@@ -521,12 +521,51 @@ Adds a comment to a work item (case) timeline. Comments support markdown formatt
 - Post an update that the hotfix has been deployed and we're monitoring.
 - Document the root cause analysis findings on this case.
 
+### `attach_file_to_datadog_case`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Uploads a file of up to 10 MiB and attaches it to a work item (case). The attachment remains in processing while Work Management validates it.
+
+- Attach the incident timeline I exported to CASE-1234.
+- Upload this screenshot of the error to the checkout latency work item.
+
+### `get_datadog_case_attachment`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists the attachments on a work item (case), or retrieves the contents of a specific attachment by ID.
+
+- What files are attached to CASE-1234?
+- Show me the screenshot attached to the database migration case.
+
 ### `link_jira_issue_to_datadog_case`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Write`*
 
 - Link the Jira ticket for the infrastructure migration to this case so we can track both together.
 - Connect PROJ-456 to the Datadog case so the engineering team has visibility.
+
+### `link_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write` and `Cases Read`*\
+Creates a directional link between two work items (cases). The relationship is stated from the parent's perspective, and can be `RELATES_TO`, `CAUSES`, `BLOCKS`, `DUPLICATES`, `PARENT_OF`, or `SUCCESSOR_OF`.
+
+- Mark CASE-1234 as blocking CASE-5678.
+- CASE-910 duplicates CASE-1234. Link them.
+
+### `get_datadog_case_links`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Read`*\
+Lists all links for a work item (case), including each link's ID, relationship type, and the work items on each side.
+
+- What other work items are linked to CASE-1234?
+- Is anything blocking the database migration case?
+
+### `unlink_datadog_cases`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Removes a link between two work items (cases) by link ID. Use `get_datadog_case_links` to find the link ID.
+
+- CASE-1234 no longer blocks CASE-5678. Remove that link.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
@@ -537,11 +576,18 @@ Lists available [Work Management][38] projects with optional filtering by name o
 - Is there a project related to security in Work Management?
 
 ### `get_datadog_case_project`
-*Toolset: **cases***\
+*Toolset: **cases** (Preview)*\
 *Permissions Required: `Cases Read`*\
 Retrieves details for a specific project by ID.
 
 - What project is this work item part of?
+
+### `create_datadog_case_project`
+*Toolset: **cases** (Preview)*\
+*Permissions Required: `Cases Write`*\
+Creates a [Work Management][38] project with default settings, given a name and an uppercase key used as the prefix for work items in the project.
+
+- Create a Work Management project called Platform Reliability with the key PLAT.
 
 ### `search_datadog_users`
 *Toolset: **cases***\

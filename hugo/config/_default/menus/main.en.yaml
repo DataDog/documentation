@@ -655,6 +655,11 @@ menu:
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
       parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
+      parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
       identifier: agent_guides
@@ -3062,6 +3067,11 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
+    - name: Embed Apps
+      url: actions/datadog_apps/embed_apps/
+      parent: datadog_apps
+      identifier: datadog_apps_embed_apps
+      weight: 1
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -3123,7 +3133,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embedded Apps
+    - name: Embed App Builder Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
@@ -5425,16 +5435,21 @@ menu:
       parent: dbm
       identifier: dbm_bits_database_optimization
       weight: 22
+    - name: Database Monitoring Workbench
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 23
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 23
+      weight: 24
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 24
+      weight: 25
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
