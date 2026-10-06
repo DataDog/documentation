@@ -4518,11 +4518,6 @@ menu:
       identifier: dyninst_explang
       parent: dyninst
       weight: 2043
-    - name: Sensitive Data Scrubbing
-      url: tracing/trace_collection/dynamic_instrumentation/sensitive-data-scrubbing
-      identifier: dyninst_sensitive_data_scrubbing
-      parent: dyninst
-      weight: 2044
     - name: Library Compatibility
       url: tracing/trace_collection/compatibility/
       parent: tracing_trace_collection
@@ -4813,6 +4808,11 @@ menu:
       identifier: live_debugger_bits_live_debugger
       parent: live_debugger
       weight: 1
+    - name: Sensitive Data Scrubbing
+      url: tracing/live_debugger/sensitive-data-scrubbing/
+      identifier: live_debugger_sensitive_data_scrubbing
+      parent: live_debugger
+      weight: 2
     - name: Error Tracking
       url: tracing/error_tracking/
       parent: tracing

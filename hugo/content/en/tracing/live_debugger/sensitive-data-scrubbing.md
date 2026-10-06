@@ -21,8 +21,8 @@ further_reading:
 The following redaction mechanisms help protect captured data:
 
 - **Identifier and type rules** redact matching values in your infrastructure, before upload.
-- **Live Debugger redaction modes** control which captured values are visible. See [mode-based redaction][7].
-- **Sensitive Data Scanner rules** redact matching data after it reaches Datadog. They are not a substitute for rules that prevent sensitive values from leaving your infrastructure.
+- **Live Debugger redaction modes** control which captured values are visible. See [mode-based redaction](#mode-based-redaction).
+- **Sensitive Data Scanner rules** redact matching data after it reaches Datadog. See [Sensitive Data Scanner](#redact-based-on-variable-values-with-sensitive-data-scanner). These rules are not a substitute for rules that prevent sensitive values from leaving your infrastructure.
 
 ## Mode-based redaction
 
@@ -74,5 +74,4 @@ Create, customize, or disable rules on the [Sensitive Data Scanner page][4]. Whe
 [3]: /security/sensitive_data_scanner/
 [4]: https://app.datadoghq.com/organization-settings/sensitive-data-scanner
 [5]: /tracing/live_debugger/
-[7]: #mode-based-redaction
 [8]: /tracing/live_debugger/bits-live-debugger/

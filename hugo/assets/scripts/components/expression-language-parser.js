@@ -181,22 +181,11 @@ class ExpressionLanguageParser {
       return this._getObjectProperties(objectName);
     }
 
-    // Add special operators
     const specialOperators = [
       {
         name: '@it',
         type: 'special',
         description: 'Current element in collection iteration'
-      },
-      {
-        name: '@key',
-        type: 'special',
-        description: 'Current key in object/map iteration'
-      },
-      {
-        name: '@value',
-        type: 'special',
-        description: 'Current value in object/map iteration'
       }
     ];
 
