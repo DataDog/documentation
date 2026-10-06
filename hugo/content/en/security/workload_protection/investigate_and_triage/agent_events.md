@@ -16,7 +16,7 @@ further_reading:
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
-With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, event tree, and raw JSON payload, and view triage and response instructions for the matching rule.
+With the [Agent Events Explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, event tree, remote access sessions, and raw JSON payload, and view triage and response instructions for the matching rule.
 
 ## Investigate Agent events
 
@@ -66,6 +66,19 @@ Expand a process entry to view its command, credentials, and executable metadata
 Use the {{< ui >}}Show infrastructure entries{{< /ui >}} toggle to show or hide the affected host, pod, and container.
 
 Use attributes such as executable path, arguments, PID, and user to filter for related Agent events. Select {{< ui >}}View in JSON{{< /ui >}} on a process or activity entry to open the corresponding location in the raw event JSON.
+
+### Remote access
+
+When an Agent event occurs inside a remote access session, the {{< ui >}}Remote Access{{< /ui >}} tab lets you pivot from that single event to the full session it belongs to. A session can be an SSH connection, a Kubernetes `kubectl exec` session, or both. For each one, the tab shows the connection metadata and related Agent events, so you can scope the full activity instead of one event in isolation.
+
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_remote_access.png" alt="Remote Access tab showing SSH session details, the host, and a timeline and table of Agent events in the session" width="100%">}}
+
+The tab supports the following session types:
+
+- {{< ui >}}SSH{{< /ui >}}: Interactive SSH sessions. Session details include the session ID, client IP, client port, authentication method, and authentication key.
+- {{< ui >}}Kubernetes{{< /ui >}}: `kubectl exec` sessions. Session details include the username, groups, session ID, and UID.
+
+For each session, the tab also shows the host it ran on, a timeline of its Agent events, and a table of those events. The timeline charts when the related events occurred, so you can spot bursts of activity across the session. Drag to select a range on the timeline to narrow the table to that window. Select an event in the table to open it in its own side panel and continue your investigation without leaving the session view.
 
 ### JSON
 
