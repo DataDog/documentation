@@ -15,14 +15,24 @@ jest.mock('../components/expression-language-parser', () => {
         }
       }),
       getAutocompleteSuggestions: jest.fn((input) => {
+        // Mock implementation for autocomplete suggestions
+        // This mock now needs to handle partial words at cursor position
         if (!input || input.trim() === '') {
           return [];
         }
 
         if (input.includes('@')) {
-          return '@it'.includes(input)
-            ? [{ name: '@it', type: 'special', description: 'Current element in collection iteration' }]
-            : [];
+          const specialOperators = [];
+          if ('@it'.includes(input)) {
+            specialOperators.push({ name: '@it', type: 'special', description: 'Current element in collection iteration' });
+          }
+          if ('@key'.includes(input)) {
+            specialOperators.push({ name: '@key', type: 'special', description: 'Current key in object/map iteration' });
+          }
+          if ('@value'.includes(input)) {
+            specialOperators.push({ name: '@value', type: 'special', description: 'Current value in object/map iteration' });
+          }
+          return specialOperators;
         } else if (input === 'len' || input.startsWith('len')) {
           return [
             { name: 'len', type: 'function', description: 'Returns the length of a string, array, or object' }
