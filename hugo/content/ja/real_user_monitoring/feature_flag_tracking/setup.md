@@ -7,10 +7,10 @@ description: RUM をセットアップして Feature Flag データをキャプ�
 disable_toc: false
 further_reading:
 - link: /real_user_monitoring/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: RUM エクスプローラーについて
 - link: https://www.datadoghq.com/blog/feature-flag-tracking/
-  tag: Blog
+  tag: ブログ
   text: Datadog RUM の Feature Flag Tracking によるリリースの安全性の確保
 title: Feature Flag Tracking の設定
 ---
@@ -18,62 +18,18 @@ Feature Flag データは、ユーザーエクスペリエンスおよびパフ�
 
 Feature Flag データで RUM データを強化することで、バグやパフォーマンス回帰を意図せず引き起こすことなく、機能が正しくリリースされることができます。この追加のインサイトにより、機能リリースとパフォーマンスを相関させ、特定のリリースに問題を絞り込み、迅速にトラブルシューティングできます。
 
-##RUM モニタリングの設定
+## UM モニタリングの設定 {#set-up-rum-monitoring}
 
-Feature Flag Trackingは、RUM Browser、iOS、Android、Flutter、React Native SDK で利用可能です。
+Feature Flag Tracking は、RUM Browser、iOS、Android、Flutter、React Native SDK で利用可能です。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
 Browser SDK の Feature Flag データ収集を有効にするには、以下の手順に従います。
 
-1. [RUM Browser Monitoring][1] を設定します。Browser RUM SDK バージョンは 4.25.0 以降である必要があります。
+1. [RUM ブラウザモニタリング][1] を設定します。Browser RUM SDK バージョンは 4.25.0 以降である必要があります。
 
-2. RUM SDK を初期化し、`enableExperimentalFeatures` 初期化パラメーターに`["feature_flags"]` を設定します。
-
-   <details open>
-     <summary>npm</summary>
-
-   ```javascript
-     import { datadogRum } from '@datadog/browser-rum';
-
-     // Initialize Datadog Browser SDK
-     datadogRum.init({
-       ...
-       enableExperimentalFeatures: ["feature_flags"],
-       ...
-   });
-   ```
-
-   </details>
-
-   <details>
-     <summary>CDN 非同期</summary>
-
-   ```javascript
-   window.DD_RUM.onReady(function() {
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   })
-   ```
-   </details>
-
-   <details>
-     <summary>CDN 同期</summary>
-
-   ```javascript
-   window.DD_RUM &&
-       window.DD_RUM.init({
-         ...
-         enableExperimentalFeatures: ["feature_flags"],
-         ...
-       })
-   ```
-   </details>
-   <br/>
+デフォルトでは、Feature Flag データはビューイベントとエラーイベントで収集されます。追加のイベントタイプで Feature Flag データを収集するには、`trackFeatureFlagsForEvents` 初期化パラメーターを `vital`、`action`、`long_task`、`resource` のいずれかを含むリストに設定します。
 
 [1]: /ja/real_user_monitoring/application_monitoring/browser#setup
 {{% /tab %}}
@@ -81,7 +37,7 @@ Browser SDK の Feature Flag データ収集を有効にするには、以下の
 
 iOS アプリケーションで Feature Flag データの収集を有効にするには、以下の手順に従います。
 
-1. [RUM iOS Monitoring][1] を設定します。iOS RUM SDK バージョンは 1.16.0 以降である必要があります。
+1. [RUM iOS モニタリング][1] を設定します。iOS RUM SDK バージョンは 1.16.0 以降である必要があります。
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/ios/?tab=swift
 {{% /tab %}}
@@ -89,7 +45,7 @@ iOS アプリケーションで Feature Flag データの収集を有効にす�
 
 Android アプリケーションで Feature Flag データの収集を有効にするには、以下の手順に従います。
 
-1. [RUM Android Monitoring][1] を設定します。Android RUM SDK バージョンは 1.18.0 以降である必要があります。
+1. [RUM Android モニタリング][1] を設定します。Android RUM SDK バージョンは 1.18.0 以降である必要があります。
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/android/?tab=kotlin
 {{% /tab %}}
@@ -97,7 +53,7 @@ Android アプリケーションで Feature Flag データの収集を有効に�
 
 Flutter アプリケーションで Feature Flag データの収集を有効にするには、以下の手順に従います。
 
-1. [RUM Flutter Monitoring][1] を設定します。Flutter プラグインのバージョンは 1.3.2 以降である必要があります。
+1. [RUM Flutter モニタリング][1] を設定します。Flutter プラグインのバージョンは 1.3.2 以降である必要があります。
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/application_monitoring/flutter/setup
 {{% /tab %}}
@@ -105,19 +61,19 @@ Flutter アプリケーションで Feature Flag データの収集を有効に�
 
 React Native アプリケーションで Feature Flag データ収集を有効にするには、以下の手順に従います。
 
-1. [RUM React Native Monitoring][1] を設定します。React Native RUM SDK のバージョンは 1.7.0 以降である必要があります。
+1. [RUM React Native モニタリング][1] を設定します。React Native RUM SDK のバージョンは 1.7.0 以降である必要があります。
 
 [1]: https://docs.datadoghq.com/ja/real_user_monitoring/reactnative/
 {{% /tab %}}
 {{< /tabs >}}
 
-##Feature Flag インテグレーションの設定
+## Feature Flag インテグレーションの設定 {#set-up-a-feature-flag-integration}
 
-[カスタム Feature Flag 管理ソリューション](#customfeatureflagmanagement) を使用するか、以下に示す Datadog のインテグレーションパートナーのいずれかを使用して Feature Flag データの収集を開始できます。
+[カスタム Feature Flag 管理ソリューション](#custom-feature-flag-management)を使用するか、以下に示す Datadog のインテグレーションパートナーのいずれかを使用して、Feature Flag データの収集を開始できます。
 
 <div class="alert alert-danger">
 
-**注意**: Feature Flag Tracking には次の特殊文字はサポートされていません: `.`、`:`、`+`、``、`=`、`&amp;&amp;`、`||`、`>`、`&lt;`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`“`、`”`、`~`、`*`、`?`、`\`。Datadog は、可能な限りこれらの文字を Feature Flag 名に使用しないことを推奨します。これらの文字のいずれかを使用する必要がある場合は、データを Datadog に送信する前にその文字を置き換えてください。たとえば、以下のとおりです。
+**注**: Feature Flag Tracking には次の特殊文字はサポートされていません。`.`、`:`、`+`、`-`、`=`、`&&`、`||`、`>`、`<`、`!`、`(`、`)`、`{`、`}`、`[`、`]`、`^`、`"`、`“`、`”`、`~`、`*`、`?`、`\`。Datadog は、可能な限りこれらの文字を Feature Flag 名に使用しないことを推奨します。これらの文字のいずれかを使用する必要がある場合は、データを Datadog に送信する前にその文字を置き換えてください。たとえば、次のようになります。
 
   ```javascript
   datadogRum.addFeatureFlagEvaluation(key.replaceAll(':', '_'), value);
@@ -128,23 +84,21 @@ React Native アプリケーションで Feature Flag データ収集を有効�
 {{< card-grid card_width="200" >}}
   {{< image-card href="/feature_flags" src="integrations_logos/datadog_large.svg" alt="datadog" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#amplitude-integration" src="integrations_logos/amplitude_large.svg" alt="amplitude" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#configcat-integration" src="integrations_logos/configcat_large.svg" alt="custom" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#custom-feature-flag-management" src="integrations_logos/docs_custom_feature_flag_systems_card.png" alt="custom" >}}
+  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#configcat-integration" src="integrations_logos/configcat_large.svg" alt="カスタム" >}}
+  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#custom-feature-flag-management" src="integrations_logos/docs_custom_feature_flag_systems_card.png" alt="カスタム" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#devcycle-integration" src="integrations_logos/devcycle_large.svg" alt="devcycle" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=browser#eppo-integration" src="integrations_logos/eppo_large.svg" alt="eppo" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#flagsmith-integration" src="integrations_logos/flagsmith_large.svg" alt="flagsmith" >}}
-  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/#growthbook-integration" src="integrations_logos/growthbook_large.svg" alt="growthbook" >}}
+  {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/#growthbook-integration" src="integrations_logos/growthbook_large.svg" alt="GrowthBook" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#kameleoon-integration" src="integrations_logos/kameleoon.png" alt="kameleoon" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#launchdarkly-integration" src="integrations_logos/launchdarkly_large.svg" alt="launchdarkly" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#split-integration" src="integrations_logos/split_large.svg" alt="split" >}}
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#statsig-integration" src="integrations_logos/statsig_large.svg" alt="statsig" >}}
 {{< /card-grid >}}
 
-</br>
+### Amplitude インテグレーション {#amplitude-integration}
 
-### Amplitude インテグレーション
-
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -165,7 +119,7 @@ Amplitude の SDK の初期化については、[Amplitude の JavaScript SDK �
 ```
 
 
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascriptsdk/
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/javascript-sdk/
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -190,7 +144,7 @@ Amplitude の SDK の初期化については、[Amplitude の iOS SDK ドキュ
     .build()
 ```
 
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/iossdk/
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/ios-sdk/
 
 
 {{% /tab %}}
@@ -217,7 +171,7 @@ val config = ExperimentConfig.Builder()
     .build()
 ```
 
-[1]: https://www.docs.developers.amplitude.com/experiment/sdks/androidsdk/
+[1]: https://www.docs.developers.amplitude.com/experiment/sdks/android-sdk/
 
 
 {{% /tab %}}
@@ -229,9 +183,9 @@ Amplitude はこのインテグレーションをサポートしていません�
 {{% /tab %}}
 {{< /tabs >}}
 
-###ConfigCat インテグレーション
+### ConfigCat インテグレーション {#configcat-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -253,7 +207,7 @@ const configCatClient = configcat.getClient(
 
 ConfigCat JavaScript SDK の初期化については、[ConfigCat の JavaScript SDK ドキュメント][1] を参照してください。
 
-[1]: https://configcat.com/docs/sdkreference/js
+[1]: https://configcat.com/docs/sdk-reference/js
 
 
 {{% /tab %}}
@@ -271,7 +225,7 @@ ConfigCat Swift iOS SDK を初期化する際は、`flagEvaluated` イベント�
 
 ConfigCat Swift (iOS) SDK の初期化については、[ConfigCat の Swift iOS SDK ドキュメント][1] を参照してください。
 
-[1]: https://configcat.com/docs/sdkreference/ios
+[1]: https://configcat.com/docs/sdk-reference/ios
 
 
 {{% /tab %}}
@@ -289,7 +243,7 @@ ConfigCatClient client = ConfigCatClient.get("#YOUR-SDK-KEY#", options -> {
 
 ConfigCat Android SDK の初期化については、[ConfigCat の Android SDK ドキュメント][1] を参照してください。
 
-[1]: https://configcat.com/docs/sdkreference/android
+[1]: https://configcat.com/docs/sdk-reference/android
 
 
 {{% /tab %}}
@@ -313,7 +267,7 @@ ConfigCat Dart SDK を初期化する際は、`flagEvaluated` イベントにサ
 
 ConfigCat Dart (Flutter) SDK の初期化については、[ConfigCat の Dart SDK ドキュメント][1] を参照してください。
 
-[1]: https://configcat.com/docs/sdkreference/dart
+[1]: https://configcat.com/docs/sdk-reference/dart
 
 
 {{% /tab %}}
@@ -321,7 +275,7 @@ ConfigCat Dart (Flutter) SDK の初期化については、[ConfigCat の Dart S
 
 {{% tab "React Native" %}}
 
-ConfigCat React SDK を初期化する際は、`flagEvaluated` イベントに登録し、Feature Flag の評価を Datadog に報告してください。
+ConfigCat React SDK を初期化する際は、`flagEvaluated` イベントにサブスクライブし、Datadog に Feature Flag の評価を報告してください。
 
 ```typescript
 <ConfigCatProvider
@@ -340,14 +294,14 @@ ConfigCat React SDK を初期化する際は、`flagEvaluated` イベントに�
 
 ConfigCat React SDK の初期化についての詳細は、ConfigCat の [React SDK ドキュメント][1] を参照してください。
 
-[1]: https://configcat.com/docs/sdkreference/react
+[1]: https://configcat.com/docs/sdk-reference/react
 
 {{% /tab %}}
 {{< /tabs >}}
 
-###カスタム Feature Flag 管理
+### カスタム Feature Flag 管理 {#custom-feature-flag-management}
 
-カスタム Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+カスタム Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -396,14 +350,14 @@ Feature Flag が評価されるたびに、以下の関数を追加して、Feat
 {{% /tab %}}
 {{< /tabs >}}
 
-### DevCycle インテグレーション
+### DevCycle インテグレーション {#devcycle-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-DevCycle の SDK を初期化し、`variableEvaluated` イベントに登録します。すべての変数評価 `variableEvaluated:*` に登録することも、特定の変数評価 `variableEvaluated:myvariablekey` に登録することもできます。
+DevCycle の SDK を初期化し、`variableEvaluated` イベントに登録します。すべての変数評価 `variableEvaluated:*` に登録することも、特定の変数評価 `variableEvaluated:my-variable-key` に登録することもできます。
 
 DevCycle の SDK の初期化についての詳細は、[DevCycle の JavaScript SDK ドキュメント][5] を参照し、DevCycle のイベントシステムについての詳細は、[DevCycle の SDK イベントドキュメント][6] を参照してください。
 
@@ -430,42 +384,42 @@ dvcClient.subscribe(
 ```
 
 
-[5]: https://docs.devcycle.com/sdk/clientsidesdks/javascript/javascriptinstall
-[6]: https://docs.devcycle.com/sdk/clientsidesdks/javascript/javascriptusage#subscribingtosdkevents
+[5]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-install
+[6]: https://docs.devcycle.com/sdk/client-side-sdks/javascript/javascript-usage#subscribing-to-sdk-events
 {{% /tab %}}
 {{% tab "iOS" %}}
 
 DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするために、[DevCycle][1] にチケットを作成してください。
 
-[1]: https://devcycle.com/contact/requestsupport
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Android" %}}
 
 DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするために、[DevCycle][1] にチケットを作成してください。
 
-[1]: https://devcycle.com/contact/requestsupport
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
 DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするために、[DevCycle][1] にチケットを作成してください。
 
-[1]: https://devcycle.com/contact/requestsupport
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{% tab "React Native" %}}
 
 DevCycle はこのインテグレーションをサポートしていません。この機能をリクエストするために、[DevCycle][1] にチケットを作成してください。
 
-[1]: https://devcycle.com/contact/requestsupport
+[1]: https://devcycle.com/contact/request-support
 
 {{% /tab %}}
 {{< /tabs >}}
 
-### Eppo インテグレーション
+### Eppo インテグレーション {#eppo-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -487,7 +441,7 @@ await eppoInit({
 });
 ```
 
-[1]: https://docs.geteppo.com/sdks/clientsdks/javascript
+[1]: https://docs.geteppo.com/sdks/client-sdks/javascript
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -503,7 +457,7 @@ func IAssignmentLogger(assignment: Assignment) {
 let eppoClient = EppoClient(apiKey: "mock-api-key", assignmentLogger: IAssignmentLogger)
 ```
 
-[1]: https://docs.geteppo.com/sdks/clientsdks/ios
+[1]: https://docs.geteppo.com/sdks/client-sdks/ios
 
 {{% /tab %}}
 {{% tab "Android" %}}
@@ -528,7 +482,7 @@ EppoClient eppoClient = new EppoClient.Builder()
 ```
 
 
-[1]: https://docs.geteppo.com/sdks/clientsdks/android
+[1]: https://docs.geteppo.com/sdks/client-sdks/android
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -557,19 +511,19 @@ await eppoInit({
 });
 ```
 
-[1]: https://docs.geteppo.com/sdks/clientsdks/reactnative
+[1]: https://docs.geteppo.com/sdks/client-sdks/react-native
 
 {{% /tab %}}
 {{< /tabs >}}
 
-###Flagsmith インテグレーション
+### Flagsmith インテグレーション {#flagsmith-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
 
-Flagsmith の SDK に `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に Feature Flag の評価を報告することができるようになります。
+Flagsmith の SDK を `datadogRum` オプションを付けて初期化すると、以下に示すコードのスニペットを使用して Datadog に Feature Flag の評価を報告することができるようになります。
 
    必要に応じて、Flagsmith の特性を `datadogRum.setUser()` を使って Datadog に送信するようにクライアントを構成できます。Flagsmith の SDK の初期化については、[Flagsmith の JavaScript SDK ドキュメント][1] をご確認ください。
 
@@ -610,7 +564,7 @@ Flagsmith は現在このインテグレーションをサポートしていま�
 {{% /tab %}}
 {{< /tabs >}}
 
-###GrowthBook インテグレーション
+### GrowthBook インテグレーション {#growthbook-integration}
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -630,7 +584,7 @@ const gb = new GrowthBook({
 gb.init();
 ```
 
-[1]: https://docs.growthbook.io/lib/js#step1configureyourapp
+[1]: https://docs.growthbook.io/lib/js#step-1-configure-your-app
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -640,7 +594,7 @@ GrowthBook はこのインテグレーションをサポートしていません
 {{% /tab %}}
 {{% tab "Android" %}}
 
-GrowthBook SDK を初期化する際は、`setFeatureUsageCallback` を呼び出して、Datadog に Feature Flag の評価を報告してください。
+GrowthBook SDK を初期化する際には、`setFeatureUsageCallback` を呼び出して、Datadog に Feature Flag の評価を報告してください。
 
 GrowthBook の SDK の初期化については、[GrowthBook の Android SDK ドキュメント][1] を参照してください。
 
@@ -654,12 +608,12 @@ gbBuilder.setFeatureUsageCallback { featureKey, result ->
 val gb = gbBuilder.initialize()
 ```
 
-[1]: https://docs.growthbook.io/lib/kotlin#quickusage
+[1]: https://docs.growthbook.io/lib/kotlin#quick-usage
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
-GrowthBook SDK を初期化する際は、`setFeatureUsageCallback` を呼び出して、Datadog に Feature Flag の評価を報告してください。
+GrowthBook SDK を初期化する際には、`setFeatureUsageCallback` を呼び出して、Datadog に Feature Flag の評価を報告してください。
 
 GrowthBook の SDK の初期化については、[GrowthBook の Flutter SDK ドキュメント][1] を参照してください。
 
@@ -671,7 +625,7 @@ gbBuilder.setFeatureUsageCallback((featureKey, result) {
 final gb = await gbBuilder.initialize();
 ```
 
-[1]: https://docs.growthbook.io/lib/flutter#quickusage
+[1]: https://docs.growthbook.io/lib/flutter#quick-usage
 
 {{% /tab %}}
 {{% tab "React Native" %}}
@@ -691,14 +645,14 @@ const gb = new GrowthBook({
 gb.init();
 ```
 
-[1]: https://docs.growthbook.io/lib/reactnative#step1configureyourapp
+[1]: https://docs.growthbook.io/lib/react-native#step-1-configure-your-app
 
 {{% /tab %}}
 {{< /tabs >}}
 
-###Kameleoon インテグレーション
+### Kameleoon インテグレーション {#kameleoon-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -713,7 +667,7 @@ client.onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 });
 ```
 
-[1]: https://developers.kameleoon.com/featuremanagementandexperimentation/websdks/jssdk
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/js-sdk
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -744,13 +698,13 @@ onEvent(EventType.Evaluation, ({ featureKey, variation }) => {
 });
 ```
 
-[1]: https://developers.kameleoon.com/featuremanagementandexperimentation/websdks/reactjssdk
+[1]: https://developers.kameleoon.com/feature-management-and-experimentation/web-sdks/react-js-sdk
 {{% /tab %}}
 {{< /tabs >}}
 
-###LaunchDarkly インテグレーション
+### LaunchDarkly インテグレーション {#launchdarkly-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -774,7 +728,7 @@ const client = LDClient.initialize("<CLIENT_SIDE_ID>", "<CONTEXT>", {
 ```
 
 
-[1]: https://docs.launchdarkly.com/sdk/clientside/javascript#initializingtheclient
+[1]: https://docs.launchdarkly.com/sdk/client-side/javascript#initializing-the-client
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -803,9 +757,9 @@ LaunchDarkly は現在このインテグレーションをサポートしてい�
 {{< /tabs >}}
 
 
-###Split インテグレーション
+### Split インテグレーション {#split-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -835,7 +789,7 @@ const client = factory.client();
 ```
 
 
-[1]: https://help.split.io/hc/enus/articles/360020448791JavaScriptSDK#2instantiatethesdkandcreateanewsplitclient
+[1]: https://help.split.io/hc/en-us/articles/360020448791-JavaScript-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
 {{% tab "iOS" %}}
 
@@ -855,7 +809,7 @@ Split の SDK の初期化については、[Split の iOS SDK ドキュメン�
 ```
 
 
-[1]: https://help.split.io/hc/enus/articles/360020401491iOSSDK
+[1]: https://help.split.io/hc/en-us/articles/360020401491-iOS-SDK
 {{% /tab %}}
 {{% tab "Android" %}}
 
@@ -884,7 +838,7 @@ val config = SplitClientConfig.builder()
 ```
 
 
-[1]: https://help.split.io/hc/enus/articles/360020343291AndroidSDK
+[1]: https://help.split.io/hc/en-us/articles/360020343291-Android-SDK
 {{% /tab %}}
 {{% tab "Flutter" %}}
 
@@ -904,7 +858,7 @@ Split の SDK の初期化については、[Split の Flutter プラグイン�
 ```
 
 
-[1]: https://help.split.io/hc/enus/articles/8096158017165Flutterplugin
+[1]: https://help.split.io/hc/en-us/articles/8096158017165-Flutter-plugin
 {{% /tab %}}
 {{% tab "React Native" %}}
 
@@ -933,13 +887,13 @@ const client = factory.client();
 ```
 
 
-[1]: https://help.split.io/hc/enus/articles/4406066357901ReactNativeSDK#2instantiatethesdkandcreateanewsplitclient
+[1]: https://help.split.io/hc/en-us/articles/4406066357901-React-Native-SDK#2-instantiate-the-sdk-and-create-a-new-split-client
 {{% /tab %}}
 {{< /tabs >}}
 
-###Statsig インテグレーション
+### Statsig インテグレーション {#statsig-integration}
 
-この Feature Flag インテグレーションを初期化する前に、[RUM Monitoring をセットアップしてください](#setuprummonitoring)。
+この Feature Flag インテグレーションを初期化する前に、[RUM モニタリングをセットアップ](#set-up-rum-monitoring)してください。
 
 {{< tabs >}}
 {{% tab "Browser" %}}
@@ -947,8 +901,7 @@ const client = factory.client();
 Statsig の SDK を `statsig.initialize` で初期化します。
 
 1. ブラウザ RUM SDK バージョン 4.25.0 以降に更新します。
-2. RUM SDK を初期化し、`enableExperimentalFeatures` 初期化パラメーターを `["feature_flags"]` で構成します。
-3. Statsig の SDK (`v4.34.0 以降`) を初期化し、以下のように `gateEvaluationCallback` オプションを実装します。
+2. Statsig の SDK (`>= v4.34.0`) を初期化し、以下に示すように `gateEvaluationCallback` オプションを実装します。
 
    ```javascript
     await statsig.initialize('client-<STATSIG CLIENT KEY>',
@@ -985,11 +938,11 @@ Statsig は現在このインテグレーションをサポートしていませ
 {{% /tab %}}
 {{< /tabs >}}
 
-###次のステップ
+### 次のステップ {#next-steps}
 
 Feature Flag の [表示と分析][1]。
 
-##参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

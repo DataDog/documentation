@@ -3,9 +3,13 @@ aliases:
 - /fr/bits_ai/bits_ai_sre/help_bits_learn/
 - /fr/bits_ai/bits_investigation/help_bits_learn/
 - /fr/bits_ai/bits_ai_sre/knowledge_sources/
+further_reading:
+- link: /bits_ai/bits_investigation/improve_accuracy/
+  tag: Documentation
+  text: Améliorez la précision de Bits Investigation
 title: Sources de connaissances
 ---
-Bits Investigation s'améliore avec le temps en combinant trois sources de connaissances distinctes :
+Bits Investigation s'améliore avec le temps en combinant les sources de connaissances suivantes :
 - [**Runbooks :**](#runbooks) Conseils de dépannage étape par étape
 - [**bits.md :**](#bitsmd) Contexte sur votre environnement
 - [**Retours et souvenirs :**](#feedback-and-memories) Apprentissages issus des investigations
@@ -19,9 +23,9 @@ Vous pouvez soit ajouter des instructions de dépannage étape par étape direct
 
 Comme ces liens sont définis par l'utilisateur, vous avez le contrôle sur ce que Bits examine, ce qui garantit qu'il se concentre sur les mêmes données que vous, et vous donne la flexibilité d'adapter les investigations aux workflows de votre équipe.
 
-- **Notebooks** : Les monitors peuvent renvoyer vers des notebooks contenant des instructions sur la façon de dépanner le monitor ou le service associé. Les notebooks prennent en charge le markdown ainsi que les requêtes Datadog, donnant à l'agent des instructions sur la meilleure façon d'effectuer une analyse des causes profondes.
+- **Notebooks** : Les monitors peuvent renvoyer vers des notebooks contenant des instructions sur la façon de dépanner le monitor ou le service associé. Les Notebooks prennent en charge le markdown ainsi que les requêtes Datadog, donnant à l'agent des instructions sur la meilleure façon d'effectuer une analyse des causes profondes.
 
-- **Confluence integration** : Si vos runbooks se trouvent dans Confluence, liez les pages pertinentes dans le message du monitor. Lors d'une investigation, Bits lit la page, extrait les liens de télémétrie, suit les étapes de dépannage documentées lorsque cela est possible et intègre les conseils de remédiation dans ses recommandations.
+- **Intégration Confluence** : Si vos runbooks se trouvent dans Confluence, liez les pages pertinentes dans le message du monitor. Lors d'une investigation, Bits lit la page, extrait les liens de télémétrie, suit les étapes de dépannage documentées lorsque cela est possible et intègre les conseils de remédiation dans ses recommandations.
 
 Pour maximiser la valeur de cette intégration, documentez en détail les services, les dépendances et les systèmes impliqués, et fournissez des instructions claires et étape par étape pour résoudre le problème. Des runbooks bien structurés et spécifiques permettent à Bits de mener des investigations plus précises et efficaces.
 
@@ -114,6 +118,10 @@ Si la conclusion était inexacte, fournissez à Bits la cause profonde correcte,
 Tous les retours positifs, ainsi que tout retour négatif incluant des détails fournis dans le chat de Bits, créent une **mémoire**. Bits sélectionne dynamiquement les mémoires à utiliser lors des futures investigations pour améliorer ses performances. Il applique les corrections passées dans des contextes similaires, réutilise les requêtes efficaces et affine la façon dont il hiérarchise les étapes d'investigation. Au fil du temps, cela permet à Bits de s'adapter à votre environnement, devenant plus précis et efficace à chaque investigation.
 
 Pour gérer les mémoires, notamment pour les consulter et les supprimer, accédez à la colonne {{< ui >}}Memories{{< /ui >}} de la page [Monitor Management][1].
+
+## Pour aller plus loin {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/bits-ai/monitors/supported
 [2]: https://app.datadoghq.com/bits-ai/settings/bits-md
