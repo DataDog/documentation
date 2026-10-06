@@ -111,7 +111,7 @@ If no traces appear in Datadog, check each step from your app to the managed age
 
 3. **Confirm the OTLP endpoint is set.** Check that `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL=grpc` are present in your running container. If the endpoint variable is missing, the Datadog SDK sends traces to its default endpoint (`http://localhost:4318/v1/traces`), where nothing listens, and traces are dropped without errors.
 
-   Azure documents `OTEL_EXPORTER_OTLP_ENDPOINT` as injected automatically ([environment variables reference][1]). If it is missing in your container, set it to the managed agent's base URL. To get the base URL, copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable in your container. Then remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
+   Azure injects `OTEL_EXPORTER_OTLP_ENDPOINT` automatically. See [Environment variables][13] in the Azure documentation. If it is missing in your container, set it to the managed agent's base URL. To get the base URL, copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable in your container. Then remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
 
    Use the hostname from your own container's variables, not from documentation examples. Set either `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, not both.
 
@@ -140,3 +140,4 @@ For limitations of the managed OpenTelemetry agent itself, see the [Azure docume
 [10]: https://learn.microsoft.com/en-us/azure/container-apps/log-monitoring
 [11]: /tracing/trace_collection/dd_libraries/java/
 [12]: /getting_started/tagging/unified_service_tagging/
+[13]: https://learn.microsoft.com/en-us/azure/container-apps/opentelemetry-agents#environment-variables
