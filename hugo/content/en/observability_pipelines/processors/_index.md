@@ -94,7 +94,8 @@ These are the available processors:
 
 <div class="alert alert-info">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
 
-{{< img src="observability_pipelines/processors/processor_groups.png" alt="Your image description" style="width:100%;" >}}
+{{< img src="observability_pipelines/processors/processor_groups.png" alt="A pipeline with a Splunk HEC source sending logs to three processor groups, each with its own filter and processors, which then send logs to Microsoft Sentinel and Splunk HEC destinations
+" style="width:100%;" >}}
 
 You can organize your processors into logical groups to help you manage them. Each processor group has a Group Filter so that those processors are only applied to specific events. For example, if you want the group processors to only process events coming from `vpc`, then use the group filter `source:vpc`. You can also add filters for each individual processor.
 
