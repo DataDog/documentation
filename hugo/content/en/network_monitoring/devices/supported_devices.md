@@ -213,11 +213,7 @@ If a vendor or device type is supported, but the specific model isn't, you can:
 
   **Note**: You can continue using NDM, as Datadog collects generic baseline metrics from all devices. If there are unsupported metrics from a vendor MIB, you can send a feature request to Datadog support with the following details: <br></br>
 
-  Run an `snmpwalk` from the requested device and send the following output:
-
-  ```
-  snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
-  ```
+  Run an [SNMP walk](#collect-device-data) from a host that can reach the device and send the output to Datadog Support.
 
 * Extend your profiles to support additional `sysobjectid` values.
 
@@ -229,6 +225,51 @@ If a vendor or device type is supported, but the specific model isn't, you can:
 
   **Note**: If you do not know the `sysobjectid` of your device, run an `snmpwalk` on a host that can reach your device. Use the output to list the profile to match against
 
+
+### Collect device data
+
+If the Datadog Agent is installed, use its built-in `snmp walk` command to verify connectivity and collect output for a device profile request. Run the command on the Agent host, replacing the placeholders with the device's SNMP credentials, address, and port.
+
+{{< tabs >}}
+{{% tab "Linux" %}}
+
+For SNMP v2c:
+
+```shell
+sudo -u dd-agent datadog-agent snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
+```
+
+For SNMP v3 with authentication and privacy:
+
+```shell
+sudo -u dd-agent datadog-agent snmp walk -v 3 -u <USER> -a <AUTH_PROTOCOL> -A <AUTH_KEY> -x <PRIV_PROTOCOL> -X <PRIV_KEY> <IP_ADDRESS>:<PORT> 1.3.6
+```
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+Open Command Prompt as an administrator.
+
+For SNMP v2c:
+
+```bat
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
+```
+
+For SNMP v3 with authentication and privacy:
+
+```bat
+"%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 3 -u <USER> -a <AUTH_PROTOCOL> -A <AUTH_KEY> -x <PRIV_PROTOCOL> -X <PRIV_KEY> <IP_ADDRESS>:<PORT> 1.3.6
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Alternatively, if you have Net-SNMP installed, run:
+
+```shell
+snmpwalk -O bentU -v 2c -c <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
+```
 
 [1]: /network_monitoring/devices/troubleshooting#what-do-i-do-if-datadog-supports-a-vendor-or-device-type-but-my-specific-model-isnt-supported
 [2]: /network_monitoring/devices/profiles/
