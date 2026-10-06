@@ -24,7 +24,7 @@ You can triage a signal by assigning it to a user for further investigation. The
 ## Create a case
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Case Management is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Use [Case Management][4] to track, triage, and investigate security signals.

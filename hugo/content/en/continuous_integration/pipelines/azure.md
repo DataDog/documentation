@@ -14,7 +14,7 @@ further_reading:
       text: "Extend Pipeline Visibility by adding custom tags and measures"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Azure DevOps Server is not officially supported.
 </div>
 
@@ -67,7 +67,7 @@ After the Azure App is created and installed, enable CI Visibility for the organ
 
 Pipelines appear in Datadog immediately after CI Visibility is enabled for an organization or project.
 
-<div class="alert alert-danger">If you previously configured Azure Pipelines using Service Hook Subscriptions, disable that integration before enabling CI Visibility for the same projects. Running both integrations simultaneously does not incur additional costs, but it creates duplicate data.</div>
+<div class="alert alert-caution">If you previously configured Azure Pipelines using Service Hook Subscriptions, disable that integration before enabling CI Visibility for the same projects. Running both integrations simultaneously does not incur additional costs, but it creates duplicate data.</div>
 
 [1]: /integrations/azure-devops-source-code/#setup
 [2]: https://app.datadoghq.com/ci/setup/pipeline?provider=azurepipelines

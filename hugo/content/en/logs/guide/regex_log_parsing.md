@@ -96,7 +96,7 @@ You can include regex in two places:
 | Outside the matcher syntax `%{}` | Raw regex embedded in the rule |
 | Inside the matcher syntax `%{}` | Using the regex matcher: `%{regex("<pattern>")}` |
 
-<div class="alert alert-danger">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with <code>^ ... $</code>. This means you must account for everything before and after the content you want to extract.</div>
+<div class="alert alert-caution">A Grok rule must match the <strong>entire log line</strong>. Conceptually, every rule is wrapped with <code>^ ... $</code>. This means you must account for everything before and after the content you want to extract.</div>
 
 ### Escaping inside the regex matcher
 

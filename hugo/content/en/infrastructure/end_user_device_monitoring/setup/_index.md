@@ -13,7 +13,7 @@ End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>
 
 Set up the Datadog Agent on employee desktops and laptops to collect [End User Device Monitoring data][11].
 
-<div class="alert alert-danger">You must receive confirmation of Preview access before data appears in Datadog. After submitting your request, wait for an access confirmation before completing the setup steps below.</div>
+<div class="alert alert-caution">You must receive confirmation of Preview access before data appears in Datadog. After submitting your request, wait for an access confirmation before completing the setup steps below.</div>
 
 ## Supported platforms
 

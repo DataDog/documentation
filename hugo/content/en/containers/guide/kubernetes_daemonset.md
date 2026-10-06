@@ -7,7 +7,7 @@ further_reading:
   text: "Install the Datadog Agent on Kubernetes"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   Datadog discourages using DaemonSets to deploy the Datadog Agent because the manual process is prone to errors. Datadog recommends that you <a href="/containers/kubernetes/installation">use Datadog Operator or Helm</a> to install the Agent on Kubernetes.
 </div>
 

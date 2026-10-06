@@ -10,7 +10,7 @@ further_reading:
 ---
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Resource Changes is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/recent-changes-tab/" >}}

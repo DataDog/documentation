@@ -19,7 +19,7 @@ When Bits Detection flags an issue, it points to the affected endpoint and relat
 
 ## Enable Bits Detection
 
-<div class="alert alert-danger">Bits Detection is in Preview. Contact your Datadog representative to request access.</div>
+<div class="alert alert-caution">Bits Detection is in Preview. Contact your Datadog representative to request access.</div>
 
 After you enable Bits Detection, it initializes monitoring for the 100 most critical services in your environment, based on service telemetry, dependencies, ownership metadata, recent changes, and user impact signals. Coverage is supported for APM-instrumented HTTP and gRPC services, prioritizing monitoring at the edge of your application. To request coverage for additional resource types, contact [Datadog Support][1].
 

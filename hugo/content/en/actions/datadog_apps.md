@@ -228,7 +228,7 @@ After you upload an app, it appears in your [App Builder][12] app list. From App
 - Manage [permissions][14]
 - [Embed the app][3] in dashboards, notebooks, and the Internal Developer Portal
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 The following App Builder features are not available for locally-built apps:
 <ul>
 <li>UI editing with drag-and-drop components</li>

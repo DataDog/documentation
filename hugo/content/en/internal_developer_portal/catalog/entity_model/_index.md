@@ -67,7 +67,7 @@ Use the `links` field to add source code links to GitHub or GitLab repositories.
 ## Supported versions
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 Datadog supports four versions of the definition schema:
@@ -104,7 +104,7 @@ For detailed information about each version, including full schemas and example 
 {{% tab "v3.0" %}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">Entity Model schema v3.0 is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 ### Key features

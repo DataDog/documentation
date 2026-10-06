@@ -8,7 +8,7 @@ further_reading:
   text: "Learn more about Audit Trail"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Audit Event Forwarding is in Preview.
 </div>
 

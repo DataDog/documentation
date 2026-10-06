@@ -101,6 +101,7 @@ $baseImgURL: '{{.Site.Params.img_url}}';
   content: '{{ i18n "alert_warning" }}';
 }
 
+.alert-caution::after,
 .alert-danger::after {
   content: '{{ i18n "alert_caution" }}';
 }

@@ -26,7 +26,7 @@ Monitor Custom Schedules are supported on events, logs, and metrics monitors wit
 
 Click {{< ui >}}Add Custom Schedule{{< /ui >}} to configure your evaluation frequency.
 
-<div class="alert alert-danger">When a custom schedule is enabled on a monitor, the custom schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation. The {{< ui >}}Remove non-reporting groups{{< /ui >}} setting is unavailable. To work around this, create a new monitor without custom schedules.
+<div class="alert alert-caution">When a custom schedule is enabled on a monitor, the custom schedule cannot be disabled. Custom schedules can only be added or removed during monitor creation. The {{< ui >}}Remove non-reporting groups{{< /ui >}} setting is unavailable. To work around this, create a new monitor without custom schedules.
 </div>
 
 {{< tabs >}}

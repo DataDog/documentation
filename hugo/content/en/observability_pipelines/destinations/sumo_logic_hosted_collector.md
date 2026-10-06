@@ -16,7 +16,7 @@ Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Lo
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the endpoint URL. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the endpoint URL. Do <b>not</b> enter the actual value.</div>
 
 Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 

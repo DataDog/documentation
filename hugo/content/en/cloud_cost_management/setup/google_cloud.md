@@ -33,7 +33,7 @@ You can setup using the [API][18], [Terraform][19], or directly in Datadog by fo
 ### Configure the Google Cloud Platform integration
 Navigate to [Setup & Configuration][3], add a Google Cloud Platform account and follow the steps to configure the Google Cloud Platform integration.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 The Datadog Google Cloud Platform integration allows Cloud Costs to automatically monitor all projects this service account has access to.
 To limit infrastructure monitoring hosts for these projects, apply tags to the hosts. Then define whether the tags should be included or excluded from monitoring in the {{< ui >}}Limit Metric Collection Filters{{< /ui >}} section of the integration page.
 </div>

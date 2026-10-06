@@ -33,7 +33,7 @@ Under {{< ui >}}Region{{< /ui >}}, select the regions you want to scan. By defau
 
 After you make your selections, regions are scanned automatically and the number of resources found is displayed next to the region name. You can click the {{< ui >}}Sync{{< /ui >}} button above the {{< ui >}}Region{{< /ui >}} section to trigger a manual scan of all selected regions.
 
-<div class="alert alert-danger">Selecting many regions may impact performance of the live scanning process.</div>
+<div class="alert alert-caution">Selecting many regions may impact performance of the live scanning process.</div>
 
 ## Filter resources
 

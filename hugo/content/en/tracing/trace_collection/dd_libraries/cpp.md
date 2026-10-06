@@ -26,7 +26,7 @@ further_reading:
   text: "Configure and manage the APM SDK for your applications"
 ---
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note:</strong> C++ does not provide integrations for automatic instrumentation, but it's used by Proxy tracing such as <a href="/tracing/setup/envoy/">Envoy</a> and <a href="/tracing/setup/nginx/">Nginx</a>.
 </div>
 

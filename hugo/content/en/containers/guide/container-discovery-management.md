@@ -38,7 +38,7 @@ Use the environment variables in the table below to configure container filterin
 - container image name (`image`)
 - Kubernetes namespace (`kube_namespace`)
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 
 The `name` parameter only applies to container names, not pod names, even if the container runs in a Kubernetes pod.
 
@@ -275,7 +275,7 @@ The `cel_workload_exclude` configuration option is structured as a list of rule 
 
 The `products` field accepts `metrics`, `logs`, and `global` (exclude container from all listed products).
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 If the configuration contains structural errors or CEL syntax issues, the Agent exits with an error to prevent collecting unintended telemetry that could impact billing.
 </div>
 

@@ -29,7 +29,7 @@ Configure the BYOC Logs destination when you [set up a pipeline][4]. You can set
 
 #### Enable TLS
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifiers for the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 {{% observability_pipelines/tls_settings %}}
 - (Optional) Enter the server name for TLS certificate verification.

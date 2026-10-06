@@ -60,7 +60,7 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 | Maximum scanners per account per region | 4 (hard cap; cloud providers like AWS limit concurrent snapshots to 100 per account per region) |
 | Scan interval | Every 12 hours |
 
-<div class="alert alert-danger">Do not increase the Autoscaling Group (ASG) desired count beyond four scanners per region. Additional scanners cannot create snapshots due to cloud providers' concurrent snapshot limit.</div>
+<div class="alert alert-caution">Do not increase the Autoscaling Group (ASG) desired count beyond four scanners per region. Additional scanners cannot create snapshots due to cloud providers' concurrent snapshot limit.</div>
 
 {{% /tab %}}
 {{% tab "Multiple accounts" %}}
@@ -98,7 +98,7 @@ Each scanner has throughput limits governed by cloud provider API quotas:
 | Maximum scanners per account per region | 4 (hard cap; cloud providers like AWS limit concurrent snapshots to 100 per account per region) |
 | Scan interval | Every 12 hours |
 
-<div class="alert alert-danger">Do not increase the Autoscaling Group (ASG) desired count beyond four scanners per region. Additional scanners cannot create snapshots due to cloud providers' concurrent snapshot limit.</div>
+<div class="alert alert-caution">Do not increase the Autoscaling Group (ASG) desired count beyond four scanners per region. Additional scanners cannot create snapshots due to cloud providers' concurrent snapshot limit.</div>
 
 [1]: /security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
 

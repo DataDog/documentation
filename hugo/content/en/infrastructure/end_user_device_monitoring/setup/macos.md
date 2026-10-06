@@ -21,7 +21,7 @@ There are two ways to deploy the Datadog Agent on macOS devices for End User Dev
 
 Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
-<div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
+<div class="alert alert-caution">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
 {{< tabs >}}
 {{% tab "Manual install" %}}

@@ -21,7 +21,7 @@ further_reading:
   text: "What we learned about AI agent security by monitoring our agents"
 ---
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
 {{< /site-region >}}
 
 {{< callout url="" btn_hidden="true" header="Get access to AI Guard!">}}

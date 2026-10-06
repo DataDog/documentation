@@ -50,11 +50,11 @@ Security Inbox answers three questions:
 {{< img src="security/security_inbox_8.png" alt="The Security Inbox shows prioritized security findings with severity, triage status, and remediation SLA summaries" width="100%">}}
 
 {{% site-region region="gov" %}}
-<div class="alert alert-danger">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security findings do not reach the inbox, and Linear is unavailable for ticketing.</div>
+<div class="alert alert-caution">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security findings do not reach the inbox, and Linear is unavailable for ticketing.</div>
 {{% /site-region %}}
 
 {{% site-region region="gov2" %}}
-<div class="alert alert-danger">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security and App and API Protection findings do not reach the inbox. Linear ticketing, Datadog Case Management, and assignee management are also unavailable.</div>
+<div class="alert alert-caution">Some of the products that feed Security Inbox are not available on this site ({{< region-param key="dd_site_name" >}}). Code Security and App and API Protection findings do not reach the inbox. Linear ticketing, Datadog Case Management, and assignee management are also unavailable.</div>
 {{% /site-region %}}
 
 ## What appears in Security Inbox

@@ -64,7 +64,7 @@ To use the Datadog MCP server option, connect the Agent Observability MCP server
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 All skills detect the MCP server automatically at startup and use it throughout.

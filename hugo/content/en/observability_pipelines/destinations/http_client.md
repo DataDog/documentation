@@ -19,7 +19,7 @@ Use Observability Pipelines' HTTP Client destination to send logs to an HTTP cli
 
 ## Set up destination
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifiers for the HTTP Client URI and, if applicable, username and password for basic authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
 Configure the HTTP Client destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 

@@ -52,7 +52,7 @@ Use this guide to manually set up the Datadog [AWS Integration][1].
 To set up the AWS integration manually, create an IAM policy and IAM role in your AWS account, and configure the role with an AWS External ID generated in your Datadog account. This allows Datadog's AWS account to query AWS APIs on your behalf, and pull data into your Datadog account. The sections below detail the steps for creating each of these components, and then completing the setup in your Datadog account.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <em>Setting up S3 Log Archives using Role Delegation is in limited availability. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request this feature in your Datadog for Government account</em>.
 </div>
 {{< /site-region >}}
@@ -158,7 +158,7 @@ To check whether a permissions boundary is attached to your integration role:
 
 To resolve the issue, coordinate with your IAM or security team to ensure the boundary policy includes the required Datadog integration actions.
 
-<div class="alert alert-danger">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
+<div class="alert alert-caution">If there is a <code>Datadog is not authorized to perform sts:AssumeRole</code> error, follow the troubleshooting steps recommended in the UI, or read the <a href="https://docs.datadoghq.com/integrations/guide/error-datadog-not-authorized-sts-assume-role/" target="_blank">troubleshooting guide</a>.</div>
 
 \*{{% mainland-china-disclaimer %}}
 

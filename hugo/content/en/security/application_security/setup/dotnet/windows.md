@@ -74,7 +74,7 @@ net start w3svc
 {{% /tab %}}
 {{% tab "Standalone apps *(.NET Framework)*" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 
@@ -87,7 +87,7 @@ Set the following required environment variables for automatic instrumentation t
 {{% /tab %}}
 {{% tab "Standalone apps *(.NET Core)*" %}}
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   <strong>Note:</strong> The .NET runtime tries to load the .NET library into <em>any</em> .NET process that is started with these environment variables set. You should limit instrumentation to only the applications that need to be instrumented. <strong>Don't set these environment variables globally as this causes <em>all</em> .NET processes on the host to be instrumented.</strong>
 </div>
 

@@ -191,7 +191,7 @@ You can delete metric filtering policies from the [Metrics Settings page][1].
 
 ## Manage metric filtering policies through the API
 
-<div class="alert alert-danger">These endpoints are subject to change while Agent-side filtering for custom metrics is in Preview.</div>
+<div class="alert alert-caution">These endpoints are subject to change while Agent-side filtering for custom metrics is in Preview.</div>
 
 These endpoints require a valid Datadog API key and application key. See [Getting started][8] in the API Reference for more information.
 

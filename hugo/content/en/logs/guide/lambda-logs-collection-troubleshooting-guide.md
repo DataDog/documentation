@@ -31,7 +31,7 @@ Verify the forwarder's policy by running the following command:
 
 This command returns a resource-based policy that specifies which AWS services and resources (like specific S3 buckets) are allowed to invoke the forwarder function.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 The Action and Resource elements in the policy document **must exactly match** the specifications in the <a href="/logs/guide/forwarder/?tab=cloudformation#permissions">Datadog Forwarder permissions</a>.
 </div>
 

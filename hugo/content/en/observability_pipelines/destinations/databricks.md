@@ -94,7 +94,7 @@ See Databricks' [Add service principals to your account][4] and [Grant permissio
 
 ## Setup
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-caution">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
 Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 

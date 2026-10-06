@@ -58,7 +58,7 @@ As your organization grows, the number of roles can increase rapidly. Organizati
 - **Name roles descriptively.** Use a naming convention that indicates the role's purpose and scope (for example, `team-payments-lead` or `contractor-readonly`).
 - **Limit role creation.** Only users with the `user_access_manage` permission should be able to create new roles. Review new role requests to avoid duplication.
 
-<div class="alert alert-danger">The <code>user_access_manage</code> permission is one of the most sensitive in the platform. It allows a user to manage other users' roles and permissions, including granting themselves additional permissions. Guard this permission carefully and limit it to trusted administrators.</div>
+<div class="alert alert-caution">The <code>user_access_manage</code> permission is one of the most sensitive in the platform. It allows a user to manage other users' roles and permissions, including granting themselves additional permissions. Guard this permission carefully and limit it to trusted administrators.</div>
 
 ## Recommended starter roles
 

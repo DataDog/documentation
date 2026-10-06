@@ -150,7 +150,7 @@ claude mcp list | grep datadog-code-security
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -179,7 +179,7 @@ Add the following to your Claude Desktop configuration file:
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -205,7 +205,7 @@ Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}
@@ -233,7 +233,7 @@ Add the following to your VS Code settings (`.vscode/settings.json` or user sett
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 {{% /tab %}}

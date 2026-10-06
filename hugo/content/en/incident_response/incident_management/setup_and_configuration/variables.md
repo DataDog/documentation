@@ -102,7 +102,7 @@ Channel name templates support a different, smaller set of variables than notifi
 **Note**: Because Slack, Microsoft Teams, and Google Chat enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
 
 ## AI variables
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-caution"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 AI variables are available in notification and postmortem templates. Your organization must have AI enabled.
 

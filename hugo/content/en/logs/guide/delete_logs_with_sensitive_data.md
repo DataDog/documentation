@@ -49,7 +49,7 @@ Use [Sensitive Data Scanner][5] to limit the risk of storing sensitive data in D
 
 ## Submit a request for log deletion
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
 Only a Datadog Admin can request log deletion. If you are not an Admin, make sure to include an Admin on the request so they can confirm the deletion request.
 </div>
 

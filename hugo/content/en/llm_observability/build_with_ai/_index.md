@@ -28,7 +28,7 @@ Connect the MCP server to your Claude Code session:
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+<div class="alert alert-caution">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 For the full setup, including authentication options and the available tools, see [MCP Server][2].

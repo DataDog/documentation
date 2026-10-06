@@ -161,7 +161,7 @@ To get a captured node, use the `captures` attribute of the first argument of th
  - `end`: end position of the node. The position contains `line` and `col` attributes.
  - `text`: the content of the node.
 
-<div class="alert alert-danger"><code>line</code> and <code>col</code> attributes start at 1. Any result with <code>line</code> or <code>col</code> set to 0 is ignored.</div>
+<div class="alert alert-caution"><code>line</code> and <code>col</code> attributes start at 1. Any result with <code>line</code> or <code>col</code> set to 0 is ignored.</div>
 
 ```javascript
 function visit(node, filename, code) {

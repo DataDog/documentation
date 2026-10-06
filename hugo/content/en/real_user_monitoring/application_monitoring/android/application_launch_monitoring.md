@@ -30,7 +30,7 @@ With this feature, you can:
 
 During initialization, the RUM Android SDK creates a view called `ApplicationLaunch`. This view’s start time matches the start of the Android process. The `ApplicationLaunch` view includes any logs, actions, and resources created before your first call to `startView`. 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   The <code>application_start</code> action is not collected in Android SDK versions 3.5.0+. The <code>rum.measure.app.startup_time metric</code> is marked as deprecated but continues to report data from devices running app versions that use older SDK versions.
 </div>
 
@@ -80,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
 
 If you use `reportFullyDrawn` to identify the moment of full display, you can use [getFullyDrawnReporter][7] to subscribe to `reportFullyDrawn` and call `GlobalRumMonitor.get().reportAppFullyDisplayed()`. 
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   If the time to full display is not defined, the Android SDK only collects the TTID.
 </div>
 
@@ -112,7 +112,7 @@ The time to initial display and time to full display are calculated as metrics:
 
 These metrics contain the `@vital.startup_type` attribute to specify the launch type for accurate monitoring.
 
-<div class="alert alert-danger">
+<div class="alert alert-caution">
   The <code>rum.measure.app.startup_to_full_display</code> metric is not calculated if the time to full display is undefined. 
 </div>
 
