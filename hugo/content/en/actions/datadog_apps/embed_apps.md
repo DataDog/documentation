@@ -37,7 +37,7 @@ You can embed an app from the app itself, or from the surface where you want it 
 ### Embed from the app
 
 1. In the [App list][2], open the published app you want to embed.
-1. At the top of the page, click **+ Add to Dashboard**, then select a destination type from the menu.
+1. At the top of the page, click **+ Add to Dashboard**, or click the down arrow next to it and select a destination type from the menu.
 1. Select the destination, then click **Save**.
 
 ### Embed from the destination
