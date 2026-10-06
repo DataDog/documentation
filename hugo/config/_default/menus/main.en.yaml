@@ -3118,7 +3118,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embed Apps
+    - name: Embed App Builder Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps

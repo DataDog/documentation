@@ -17,8 +17,6 @@ further_reading:
 Datadog Apps is in Preview. Use this form to request access.
 {{< /callout >}}
 
-## Overview
-
 Embed [Datadog Apps][1] in other Datadog products to place operational tools directly in the surfaces where users investigate issues and take action. An embedded app can display its existing experience or respond to live context supplied by its host, such as a dashboard's time range and template variables.
 
 ## Prerequisites
@@ -36,18 +34,18 @@ After you upload and publish an app, you can add it to a supported Datadog surfa
 
 You can embed an app from the app itself, or from the surface where you want it to appear.
 
-### From the app
+### Embed from the app
 
 1. In the [App list][2], open the published app you want to embed.
 1. At the top of the page, click **+ Add to Dashboard**, then select a destination type from the menu.
 1. Select the destination, then click **Save**.
 
-### From the destination
+### Embed from the destination
 
 {{< tabs >}}
 {{% tab "Dashboard" %}}
 
-1. Open the dashboard you want to add the app to.
+1. Open the dashboard where you want to add the app.
 1. In the widget tray, find the **Apps** widget under **Actions and Remediations**, and drag it onto the dashboard.
 1. In the editor, choose the app from the **Select app** dropdown. To limit the list to apps you own, enable **My Apps Only**.
 1. Resize the widget, then save the dashboard.
@@ -55,12 +53,12 @@ You can embed an app from the app itself, or from the surface where you want it 
 {{% /tab %}}
 {{% tab "Notebook" %}}
 
-1. Open the notebook you want to add the app to.
+1. Open the notebook where you want to add the app.
 1. Add a cell and select the **Apps** cell type.
 1. Choose the app from the dropdown.
 1. Save the notebook.
 
-The **Apps** cell has no per-cell time control. It reads the notebook's time range through the `datadogNotebook` input.
+The **Apps** cell uses the notebook's time range. To read the time range in the app, use the `datadogNotebook` input.
 
 {{% /tab %}}
 {{% tab "Service Catalog" %}}
