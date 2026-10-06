@@ -310,8 +310,6 @@ check_runners: <NUMBER_OF_WORKERS>
 
 Configure standard dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic. You don't need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
 
-To test only the highest-traffic paths from each Agent at no additional cost, use [basic dynamic tests][7] instead.
-
 {{< tabs >}}
 {{% tab "Linux" %}}
 
