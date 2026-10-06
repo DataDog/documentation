@@ -75,15 +75,74 @@
         opts='{"name":"LanguageSelector","value":true}'
         await-children
         ><div class="language-selector _language-selector_edb83c">
-          <label for="language-select" class="language-selector__label _language-selector__label_edb83c">Language</label
-          ><span class="select _select_d4facd"
-            ><select id="language-select" class="select__control _select__control_d4facd">
-              <option selected value="en">English</option>
-              <option value="fr">Français</option>
-              <option value="ja">日本語</option>
-              <option value="ko">한국어</option>
-              <option value="es">Español</option>
-            </select></span
+          <span id="language-select-label" class="language-selector__label _language-selector__label_edb83c"
+            >Language</span
+          ><span data-value="en" class="select _select_d4facd"
+            ><button
+              id="language-select"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="language-select-listbox"
+              aria-labelledby="language-select-label language-select"
+              class="select__button _select__button_d4facd"
+            >
+              English
+            </button>
+            <ul
+              id="language-select-listbox"
+              role="listbox"
+              tabindex="-1"
+              aria-labelledby="language-select-label"
+              hidden
+              class="select__menu _select__menu_d4facd"
+            >
+              <li
+                id="language-select-option-en"
+                role="option"
+                aria-selected="true"
+                data-value="en"
+                class="select__option _select__option_d4facd select__option--selected _select__option--selected_d4facd"
+              >
+                English
+              </li>
+              <li
+                id="language-select-option-fr"
+                role="option"
+                aria-selected="false"
+                data-value="fr"
+                class="select__option _select__option_d4facd"
+              >
+                Français
+              </li>
+              <li
+                id="language-select-option-ja"
+                role="option"
+                aria-selected="false"
+                data-value="ja"
+                class="select__option _select__option_d4facd"
+              >
+                日本語
+              </li>
+              <li
+                id="language-select-option-ko"
+                role="option"
+                aria-selected="false"
+                data-value="ko"
+                class="select__option _select__option_d4facd"
+              >
+                한국어
+              </li>
+              <li
+                id="language-select-option-es"
+                role="option"
+                aria-selected="false"
+                data-value="es"
+                class="select__option _select__option_d4facd"
+              >
+                Español
+              </li>
+            </ul></span
           >
         </div>
         <!--astro:end--></astro-island
@@ -96,8 +155,8 @@
         await-children
         ><div class="region-selector _region-selector_4de5ea">
           <span class="region-selector__heading _region-selector__heading_4de5ea"
-            ><label for="region-select" class="region-selector__label _region-selector__label_4de5ea"
-              >Datadog site</label
+            ><span id="region-select-label" class="region-selector__label _region-selector__label_4de5ea"
+              >Datadog site</span
             ><a
               href="http://localhost:1313/getting_started/site/"
               aria-label="Site help"
@@ -107,18 +166,108 @@
                   d="M224 32C100.258 32 0 132.258 0 256s100.258 224 224 224 224-100.258 224-224S347.742 32 224 32zm33.347 363.99a8.956 8.956 0 0 1-9.4 9.4h-55.893a8.958 8.958 0 0 1-9.4-9.4V340.1a8.958 8.958 0 0 1 9.4-9.4h55.891a8.956 8.956 0 0 1 9.4 9.4zm71.04-172.376a59.981 59.981 0 0 1-8.358 17.76 81.518 81.518 0 0 1-13.058 14.1 99.527 99.527 0 0 1-13.059 9.924q-5.224 3.135-14.626 8.358a52.4 52.4 0 0 0-15.67 14.626q-6.268 8.88-6.269 14.1a8.955 8.955 0 0 1-9.4 9.4h-55.893a8.956 8.956 0 0 1-9.4-9.4v-10.44q-.522-19.326 15.148-36.564t33.953-25.073q14.1-6.268 19.849-13.059t5.746-17.76q0-9.4-10.969-17.237a42.052 42.052 0 0 0-25.073-7.836q-15.149 0-25.073 7.313-9.4 6.791-25.072 26.64a8.474 8.474 0 0 1-7.313 3.657 7.088 7.088 0 0 1-5.224-2.09L119.969 181.3q-6.791-5.746-2.089-12.536 37.086-62.16 108.126-62.16a109.7 109.7 0 0 1 49.624 12.014 111.185 111.185 0 0 1 40.22 33.953q16.194 21.939 16.193 47.534a95.058 95.058 0 0 1-3.656 23.509z"
                 />
               </svg> </a></span
-          ><span class="select _select_d4facd"
-            ><select id="region-select" class="select__control _select__control_d4facd">
-              <option selected value="us">US1</option>
-              <option value="us3">US3</option>
-              <option value="us5">US5</option>
-              <option value="eu">EU</option>
-              <option value="ap1">AP1</option>
-              <option value="ap2">AP2</option>
-              <option value="uk1">UK1</option>
-              <option value="gov">US1-FED</option>
-              <option value="gov2">US2-FED</option>
-            </select></span
+          ><span data-value="us" class="select _select_d4facd"
+            ><button
+              id="region-select"
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-controls="region-select-listbox"
+              aria-labelledby="region-select-label region-select"
+              class="select__button _select__button_d4facd"
+            >
+              US1
+            </button>
+            <ul
+              id="region-select-listbox"
+              role="listbox"
+              tabindex="-1"
+              aria-labelledby="region-select-label"
+              hidden
+              class="select__menu _select__menu_d4facd"
+            >
+              <li
+                id="region-select-option-us"
+                role="option"
+                aria-selected="true"
+                data-value="us"
+                class="select__option _select__option_d4facd select__option--selected _select__option--selected_d4facd"
+              >
+                US1
+              </li>
+              <li
+                id="region-select-option-us3"
+                role="option"
+                aria-selected="false"
+                data-value="us3"
+                class="select__option _select__option_d4facd"
+              >
+                US3
+              </li>
+              <li
+                id="region-select-option-us5"
+                role="option"
+                aria-selected="false"
+                data-value="us5"
+                class="select__option _select__option_d4facd"
+              >
+                US5
+              </li>
+              <li
+                id="region-select-option-eu"
+                role="option"
+                aria-selected="false"
+                data-value="eu"
+                class="select__option _select__option_d4facd"
+              >
+                EU
+              </li>
+              <li
+                id="region-select-option-ap1"
+                role="option"
+                aria-selected="false"
+                data-value="ap1"
+                class="select__option _select__option_d4facd"
+              >
+                AP1
+              </li>
+              <li
+                id="region-select-option-ap2"
+                role="option"
+                aria-selected="false"
+                data-value="ap2"
+                class="select__option _select__option_d4facd"
+              >
+                AP2
+              </li>
+              <li
+                id="region-select-option-uk1"
+                role="option"
+                aria-selected="false"
+                data-value="uk1"
+                class="select__option _select__option_d4facd"
+              >
+                UK1
+              </li>
+              <li
+                id="region-select-option-gov"
+                role="option"
+                aria-selected="false"
+                data-value="gov"
+                class="select__option _select__option_d4facd"
+              >
+                US1-FED
+              </li>
+              <li
+                id="region-select-option-gov2"
+                role="option"
+                aria-selected="false"
+                data-value="gov2"
+                class="select__option _select__option_d4facd"
+              >
+                US2-FED
+              </li>
+            </ul></span
           >
         </div>
         <!--astro:end--></astro-island

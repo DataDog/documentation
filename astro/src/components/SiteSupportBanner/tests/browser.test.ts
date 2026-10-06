@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { chooseSelectOption } from "../../Select/tests/chooseSelectOption";
 
 /**
  * Browser coverage for the parts the unit tests cannot reach: that the banner
@@ -49,7 +50,7 @@ test.describe("SiteSupportBanner", () => {
     await expect(
       page.locator('.region-selector[data-hydrated="true"]').first(),
     ).toBeVisible();
-    await page.locator(".region-selector .select__control").selectOption("gov");
+    await chooseSelectOption(page.locator(".region-selector"), "gov");
 
     const banner = page.locator('.site-support-banner[data-region="gov"]');
     await expect(banner).toBeVisible();
@@ -66,7 +67,7 @@ test.describe("SiteSupportBanner", () => {
     await expect(
       page.locator('.region-selector[data-hydrated="true"]').first(),
     ).toBeVisible();
-    await page.locator(".region-selector .select__control").selectOption("gov");
+    await chooseSelectOption(page.locator(".region-selector"), "gov");
     await expect(
       page.locator('.site-support-banner[data-region="gov"]'),
     ).toContainText("US1-FED");
@@ -79,7 +80,7 @@ test.describe("SiteSupportBanner", () => {
       page.locator('.region-selector[data-hydrated="true"]').first(),
     ).toBeVisible();
     const before = await page.evaluate(() => performance.now());
-    await page.locator(".region-selector .select__control").selectOption("gov");
+    await chooseSelectOption(page.locator(".region-selector"), "gov");
     await expect(
       page.locator('.site-support-banner[data-region="gov"]'),
     ).toBeVisible();

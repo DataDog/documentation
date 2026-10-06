@@ -18,7 +18,22 @@ function getContainer() {
   return document.querySelector<HTMLElement>(".region-selector")!;
 }
 function getSelect() {
-  return document.querySelector<HTMLSelectElement>(".select__control")!;
+  return document.querySelector<HTMLElement>(".select")!;
+}
+function getSelectButton() {
+  return document.querySelector<HTMLButtonElement>(".select__button")!;
+}
+function getSelectOptions() {
+  return Array.from(document.querySelectorAll<HTMLElement>(".select__option"));
+}
+async function chooseRegion(
+  user: ReturnType<typeof userEvent.setup>,
+  regionKey: string,
+) {
+  await user.click(getSelectButton());
+  await user.click(
+    getSelectOptions().find((option) => option.dataset.value === regionKey)!,
+  );
 }
 
 beforeEach(() => {
@@ -42,9 +57,8 @@ describe("RegionSelector — static render", () => {
   it("renders an option for every allowed region", () => {
     render(h(RegionSelectorComponent, regionProps));
 
-    const select = getSelect();
-    const optionValues = Array.from(select.options).map((o) => o.value);
-    const optionLabels = Array.from(select.options).map((o) => o.textContent);
+    const optionValues = getSelectOptions().map((o) => o.dataset.value);
+    const optionLabels = getSelectOptions().map((o) => o.textContent);
 
     for (const r of regions) {
       expect(optionValues).toContain(r.key);
@@ -52,14 +66,16 @@ describe("RegionSelector — static render", () => {
     }
   });
 
-  it('binds the "Datadog site" label to the select', () => {
+  it('labels the select button with the "Datadog site" label', () => {
     render(h(RegionSelectorComponent, regionProps));
 
-    const label = screen.getByText("Datadog site") as HTMLLabelElement;
-    const select = getSelect();
+    const label = screen.getByText("Datadog site");
+    const button = getSelectButton();
 
-    expect(label.getAttribute("for")).toBe("region-select");
-    expect(select.getAttribute("id")).toBe("region-select");
+    expect(button.getAttribute("id")).toBe("region-select");
+    expect(button.getAttribute("aria-labelledby")).toBe(
+      `${label.id} region-select`,
+    );
   });
 });
 
@@ -73,7 +89,7 @@ describe("RegionSelector — BEM class state", () => {
 
     expect(container.classList.contains("region-selector")).toBe(true);
     expect(label.classList.contains("region-selector__label")).toBe(true);
-    expect(select.classList.contains("select__control")).toBe(true);
+    expect(select.classList.contains("select")).toBe(true);
   });
 });
 
@@ -81,32 +97,30 @@ describe("RegionSelector — interactivity", () => {
   it("defaults to the US region on initial render", () => {
     render(h(RegionSelectorComponent, regionProps));
 
-    expect(getSelect().value).toBe("us");
+    expect(getSelect().dataset.value).toBe("us");
   });
 
   it("selecting a region updates the select value and the BEM-identified element reflects it", async () => {
     const user = userEvent.setup();
     render(h(RegionSelectorComponent, regionProps));
 
-    const select = getSelect();
     const targetRegion = regions.find((r) => r.key !== "us");
     expect(targetRegion).toBeTruthy();
 
-    await user.selectOptions(select, targetRegion!.key);
+    await chooseRegion(user, targetRegion!.key);
 
     // BEM-classed select reflects the new value
-    expect(select.classList.contains("select__control")).toBe(true);
-    expect(select.value).toBe(targetRegion!.key);
+    expect(getSelect().dataset.value).toBe(targetRegion!.key);
+    expect(getSelectButton().textContent).toBe(targetRegion!.label);
   });
 
   it("selecting a region syncs the active region to the <html> data attribute", async () => {
     const user = userEvent.setup();
     render(h(RegionSelectorComponent, regionProps));
 
-    const select = getSelect();
     const targetRegion = regions.find((r) => r.key !== "us");
 
-    await user.selectOptions(select, targetRegion!.key);
+    await chooseRegion(user, targetRegion!.key);
 
     expect(document.documentElement.getAttribute("data-active-region")).toBe(
       targetRegion!.key,
@@ -116,7 +130,6 @@ describe("RegionSelector — interactivity", () => {
   it("reacts to external region changes dispatched on document", async () => {
     render(h(RegionSelectorComponent, regionProps));
 
-    const select = getSelect();
     const targetRegion = regions.find((r) => r.key !== "us")!;
 
     // Simulate another island changing the region
@@ -130,7 +143,7 @@ describe("RegionSelector — interactivity", () => {
 
     // Re-query (value is a prop bound to the signal / state)
     await Promise.resolve();
-    expect(select.value).toBe(targetRegion.key);
+    expect(getSelect().dataset.value).toBe(targetRegion.key);
   });
 });
 

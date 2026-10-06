@@ -1,5 +1,5 @@
 import { useEffect, useState } from "preact/hooks";
-import type { JSX, TargetedEvent } from "preact";
+import type { JSX } from "preact";
 import styles from "./LanguageSelector.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { Select } from "@components/Select/Select";
@@ -25,8 +25,7 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
     setHydrated(true);
   }, []);
 
-  const handleChange = (e: TargetedEvent<HTMLSelectElement>) => {
-    const code = e.currentTarget.value;
+  const handleChange = (code: string) => {
     setSelected(code);
     const opt = options.find((o) => o.code === code);
     if (opt) window.location.href = opt.href;
@@ -37,18 +36,21 @@ export function LanguageSelector({ options, currentCode }: Props): JSX.Element {
       class={cl("language-selector")}
       data-hydrated={hydrated ? "true" : undefined}
     >
-      <label class={cl("language-selector__label")} for="language-select">
+      <span id="language-select-label" class={cl("language-selector__label")}>
         {/* TODO: replace with i18n() once the helper exposes the singular form
             of the `language` key in i18n/en.json (currently returns plural). */}
         Language
-      </label>
-      <Select id="language-select" value={selected} onChange={handleChange}>
-        {options.map((opt) => (
-          <option key={opt.code} value={opt.code}>
-            {opt.label}
-          </option>
-        ))}
-      </Select>
+      </span>
+      <Select
+        id="language-select"
+        labelledBy="language-select-label"
+        options={options.map((option) => ({
+          value: option.code,
+          label: option.label,
+        }))}
+        value={selected}
+        onChange={handleChange}
+      />
     </div>
   );
 }
