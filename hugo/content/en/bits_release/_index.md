@@ -60,16 +60,20 @@ A source Bits Release cannot read is a source it cannot validate against. A back
 
 ## Verdicts
 
-Every validation ends in one of four verdicts. **Passed** and **Failed** are conclusions about your change. **Not enough data** and **Inconclusive** mean Bits Release reached no conclusion, so the change is worth a look of your own.
+A validation ends in one of four verdicts. **Passed** and **Failed** are conclusions about your change. **Not enough data** and **Inconclusive** mean Bits Release could not reach one, so the change is worth a look of your own.
 
 | Verdict | Meaning |
 | ------- | ------- |
-| **Passed** | The change was deployed, and production behavior matched the expected impact, with no unexpected side effects on the affected service. |
-| **Failed** | Production behavior clearly contradicted the expected impact. |
-| **Not enough data** | Too little relevant production data to assess the expected impact. For example, the affected code path received too little traffic during the soak window. |
-| **Inconclusive** | The signals collected conflicted, or validation did not complete. For example, the commit was never detected as deployed. |
+| **Passed** | Your service is healthy after the deploy. If the plan expected your change to make something happen, Bits Release also saw at least one of those things happen. A healthy service on its own is not enough to pass a change that was supposed to have a visible effect. For a change with nothing specific to look for, a healthy service is enough. |
+| **Failed** | Bits Release has clear evidence that something is wrong: your change caused a regression, or the changed code ran and the effect you wanted is missing or went the wrong way. For example, the bug you fixed still happens, the latency or error rate you meant to improve did not improve, or a new feature is throwing errors. |
+| **Not enough data** | Production did not give Bits Release enough to judge. Either no relevant telemetry arrived, or too few requests reached the changed code to draw a conclusion. This also covers a healthy service where nothing confirmed the expected effect, for example because your change shipped during quiet hours, sits behind a feature flag that is still off, or serves a path that saw no traffic while Bits Release was watching. |
+| **Inconclusive** | There was enough data, but it points in different directions, or it cannot be confidently pinned on your change rather than on something else happening at the same time. |
 
-**A failed verdict does not always mean your change broke something.** It also covers the case where a change was supposed to fix a problem and the problem is still there: you are no worse off, but you are not better off either. Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
+While a validation is still running, it shows as **Pending**. Bits Release may already have a provisional answer and be holding it back because the watch window is still short or a signal it needs has not arrived. It keeps watching and reports when it has more.
+
+**Code that never ran is never a failure.** If the changed code path was not exercised in production, Bits Release returns **Not enough data** rather than **Failed**. A change is not called broken on the grounds that nobody reached it.
+
+Bits Release reports what production is doing, not which line to change. From there, the context it gathered while validating (the expected impact, the evidence behind the verdict, and the telemetry it read) becomes the starting point for a fix. Hand the verdict to [Bits Code][1] to investigate and open a pull request, or take that context into your own AI coding tools and work the fix wherever you already do.
 
 ## Preview scope and fit
 
