@@ -81,7 +81,7 @@ A team that is managed externally from an identity provider displays a **Managed
 
 #### Teams connected to more than one source
 
-A team can be connected to more than one source, but only one source manages it at a time. The managing source controls the team's name and membership. Other sources stay connected, for example to route incidents from ServiceNow, but cannot change the team.
+A team can be connected to more than one source, but only one source manages it at a time. The managing source controls the team's name, handle, and membership. Other sources stay connected, for example to route incidents from ServiceNow, but cannot change the team.
 
 When more than one source could manage a team, Datadog applies this order:
 
