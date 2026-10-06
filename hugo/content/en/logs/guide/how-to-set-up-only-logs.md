@@ -19,9 +19,10 @@ To disable payloads, you must be running Agent v6.4+. This disables metric data 
 {{% tab "Host " %}}
 
 1. Open the [datadog.yaml configuration file][1].
-2. Add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings:
+2. Set `infrastructure_mode: none` to prevent [Infra checks from running](https://docs.datadoghq.com/agent/configuration/infrastructure-modes/?tab=linux), and add the `enable_payloads` as a top-level attribute anywhere in the configuration file with the following settings to prevent Infra metrics from being sent:
 
     ```yaml
+    infrastructure_mode: none
     enable_payloads:
         series: false
         events: false
