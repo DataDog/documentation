@@ -93,7 +93,23 @@ Set `OTEL_RESOURCE_ATTRIBUTES` with the following required attributes:
 cloud.provider=azure,cloud.platform=azure.container_apps,cloud.resource_id=/subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP>/providers/Microsoft.App/containerApps/<APP_NAME>
 ```
 
-You don't need to set `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure injects it into your container and points it at the managed agent. If traces don't arrive, see [Troubleshooting](#troubleshooting).
+{% /step %}
+{% step title="Confirm the OTLP endpoint" %}
+The Datadog SDK sends traces to the URL in `OTEL_EXPORTER_OTLP_ENDPOINT`. Azure documents this variable as injected automatically (see [Environment variables][13] in the Azure documentation), but it may be missing from your container. If it is missing, the SDK sends traces to its default endpoint (`http://localhost:4318/v1/traces`), where nothing listens, and traces are dropped without errors.
+
+After you deploy, list the environment variables in your running container:
+
+```shell
+az containerapp exec --resource-group <RESOURCE_GROUP> --name <APP_NAME> --command "printenv"
+```
+
+If `OTEL_EXPORTER_OTLP_ENDPOINT` is missing, set it to the managed agent's base URL:
+
+1. Copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable from the output.
+2. Remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
+3. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to that value on your container app.
+
+Use the hostname from your own container's variables, not from documentation examples. Set either `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, not both.
 {% /step %}
 {% /stepper %}
 
@@ -109,11 +125,7 @@ If no traces appear in Datadog, check each step from your app to the managed age
 
 2. **Confirm spans are created.** Set `DD_TRACE_DEBUG=true`, send requests, and look for `Started span` and `Finished span (WRITTEN)` lines in the console logs. If you see these lines but no traces in Datadog, spans are not reaching the managed agent. Remove `DD_TRACE_DEBUG` after you finish.
 
-3. **Confirm the OTLP endpoint is set.** Check that `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL=grpc` are present in your running container. If the endpoint variable is missing, the Datadog SDK sends traces to its default endpoint (`http://localhost:4318/v1/traces`), where nothing listens, and traces are dropped without errors.
-
-   Azure injects `OTEL_EXPORTER_OTLP_ENDPOINT` automatically. See [Environment variables][13] in the Azure documentation. If it is missing in your container, set it to the managed agent's base URL. To get the base URL, copy the value of any `CONTAINERAPP_OTEL_*_GRPC_ENDPOINT` variable in your container. Then remove the trailing signal path (for example, `/v1/traces`). The result looks like `http://<AGENT_HOST>:4317`.
-
-   Use the hostname from your own container's variables, not from documentation examples. Set either `OTEL_EXPORTER_OTLP_ENDPOINT` or `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT`, not both.
+3. **Confirm the OTLP endpoint is set.** Check that `OTEL_EXPORTER_OTLP_ENDPOINT` and `OTEL_EXPORTER_OTLP_PROTOCOL=grpc` are present in your running container. If the endpoint is missing, traces are dropped without errors. To check and set it, see the [Confirm the OTLP endpoint](#setup) step in Setup.
 
 4. **Confirm the Datadog destination.** Verify that the Datadog site and API key are configured on the Container Apps environment (Step 1).
 
