@@ -163583,7 +163583,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ: []
-      summary: Patch a deployment event by version
+      summary: Mark a deployment as failed by version
       tags: ["DORA Metrics"]
       x-codegen-request-body-name: body
       x-menu-order: 11
@@ -163591,9 +163591,6 @@ paths:
         operator: OR
         permissions:
           - dora_metrics_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Use this API endpoint to get a list of deployment events.
