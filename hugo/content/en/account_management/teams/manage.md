@@ -86,7 +86,7 @@ A team can be connected to more than one source, but only one source manages it 
 When more than one source could manage a team, Datadog applies this order:
 
 1. **SAML**: If SAML team mappings target a team, SAML manages it. If SAML is your organization's only provisioning source, you cannot provision teams from SCIM, GitHub, or ServiceNow.
-2. **Identity provider (SCIM)**: SCIM takes precedence over GitHub, ServiceNow, and Datadog. When SCIM starts managing a team that already syncs from GitHub or ServiceNow, SCIM replaces the team's membership and the GitHub or ServiceNow connection becomes inactive.
+2. **Identity provider (SCIM)**: SCIM takes precedence over GitHub, ServiceNow, and Datadog. When SCIM starts managing a team that already syncs from GitHub or ServiceNow, the team stays connected to GitHub or ServiceNow, but SCIM controls the team's name, handle, and membership.
 3. **GitHub or ServiceNow, when it syncs membership**: A [GitHub][9] or ServiceNow connection with membership sync turned on manages the team, whether that source created the team or linked it to an existing one. The source also updates the team name, but only if it created the team with {{< ui >}}Import, create, and link teams{{< /ui >}}.
 4. **Datadog**: If no source manages a team, you manage it from the Datadog UI, the [Teams API][10], or the [Terraform provider][11].
 
