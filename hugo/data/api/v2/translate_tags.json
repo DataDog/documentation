@@ -301,7 +301,7 @@
   },
   "logs-archive-searches": {
     "name": "Logs Archive Searches",
-    "description": "Search the logs stored in a Logs Archive without reindexing them, and optionally rehydrate\nthe matches into a retained historical view.\n\nSee the [Rehydrating from Archives](https://app.datadoghq.com/logs/pipelines/historical-views)\npage for the searches currently running in Datadog."
+    "description": "Archive Search queries logs directly from long-term storage archives without prior\nrehydration and charges only for the data scanned.\n\nA search runs in one of two modes. By default it scans the archive and retains up to\n100,000 matching logs for 24 hours on a dedicated results page. Include a `rehydration`\nobject to run a Search & Rehydration instead, which retains the matches for a custom\nretention period and makes them available in Log Explorer, Dashboards, and Notebooks.\n\nA search requires the `logs_write_historical_view` or `logs_write_archive_search`\npermission. Rehydration requires `logs_write_historical_view`."
   },
   "logs-archives": {
     "name": "Logs Archives",
