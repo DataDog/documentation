@@ -77,7 +77,7 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.84+` and Helm chart `v3.109.1+` are required.
+Agent `v7.84+` and Helm chart `v3.124.0+` are required.
 
 Add the following to your `values.yaml` file, then upgrade your Helm release:
 
