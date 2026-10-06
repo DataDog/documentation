@@ -10,96 +10,67 @@ further_reading:
   text: "Coordinate product launches with Datadog"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Journey Monitoring is in Preview.
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-warning">Journey Monitoring is not available for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
-## Overview
+## What is Journey Monitoring?
 
-**Journey Monitoring** lets you track the health of critical user flows such as login, checkout, or media streaming, all from a single place. For any given flow, you can answer:
-- Are users experiencing friction?
-- How fast and reliable is performance?
-- Are issues coming from the frontend, network, or backend?
+Journey Monitoring combines user behavior and technical performance data for critical user flows, such as sign-in, product browsing, and checkout. Use it to:
 
-A *journey* is a user flow defined by a start event and an end event. For example, a checkout journey captures the experience from a user landing on the checkout page to completing the checkout process. Journey Monitoring pulls in data from [Real User Monitoring][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] to show traffic, conversion rates, uptime, and errors for each journey in one report.
+- Identify where users abandon a flow
+- Measure [traffic and conversion KPIs][10] and [journey uptime][15]
+- Investigate [frontend errors][17] and the performance of critical [RUM operations][11]
+- Compare real user behavior with [Synthetic test coverage][16]
 
-This gives engineering, product, and developer operations teams a shared view of journey health without switching between tools.
+A *journey* represents a user flow from a defined start to a defined end. Journey Monitoring combines data from [Real User Monitoring (RUM)][1], [Synthetic Monitoring & Testing][2], [Product Analytics][3], and [Session Replay][4] in a shared view for engineering, product, and operations teams.
 
-{{< img src="journey_monitoring/journey-monitoring-map-2.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
-
-## Capabilities
-
-For each journey, you can:
-- Measure the journey's inbound traffic, conversion rate, and time to completion
-- Track the journey's availability using an uptime SLO based on its [Synthetic test suite][10]
-- Identify where users drop off and investigate individual sessions with [Session Replay][4]
-- Measure the performance of critical steps in the journey with [RUM operations][13]
-- Share a unified view of journey health across engineering, product, and developer operations teams
+{{< img src="journey_monitoring/journey-monitoring-map-3.png" alt="The Journey Monitoring map showing a catalog of journeys on the left with traffic and conversion metrics, and a visual flow map on the right displaying user paths between application views and actions." style="width:100%;" >}}
 
 ## Prerequisites
 
-Journey Monitoring requires **at least one** of the following products to be enabled in frontend applications, each contributing different data to your journeys:
+Journey Monitoring requires an active trial or paid subscription to at least one of the following products:
 
-- **[RUM without Limits][5]**: Frontend errors and performance tracking through RUM operations.
-- **[Product Analytics][8]**: Traffic, conversion rate, and time-to-convert metrics.
-- **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Uptime tracking through the journey's automatically created test suite.
+- **Product Analytics**: Provides starts volume, conversion volume, conversion rate, and average time to convert.
+- **[RUM without Limits™][5]**: Provides frontend errors and performance data from RUM operations.
+- **[Synthetic Browser Tests][6] or [Synthetic Mobile Tests][7]**: Provides uptime data from a [Synthetic test suite][12].
 
-## Journey structure
+<div class="alert alert-info">RUM-enabled applications receive Product Analytics Preview by default. Preview retains Product Analytics events for a rolling 30-day window. Disabling Product Analytics also disables Product Analytics Preview. For questions, contact Datadog Support at <a href="mailto:support@datadoghq.com">support@datadoghq.com</a>.</div>
 
-The start and end of a journey can be either action or view events from [Real User Monitoring][1].
+## How journeys are structured
 
-Each journey can have one or more variants. A variant is a specific sequence of intermediate steps a user takes between the journey's start and end. Different users naturally take different paths. For example, some may skip optional steps while others take detours before completing the journey.
+### RUM and Product Analytics
+
+If RUM is enabled and the organization has Preview, trial, or paid access to Product Analytics, define the journey with action or view events. A journey can include [variants][8] that represent specific sequences of intermediate events between its start and end.
 
 {{< img src="journey_monitoring/journey-monitoring-explainer-diagram-final.png" alt="Diagram of a journey with a start event, end event, and three variants, monitored by RUM and Product Analytics in the Live Environment and by Synthetic tests in the Synthetic Environment." style="width:100%;" >}}
 
-## Setup
+### Synthetics only
 
-Define a journey by selecting its start and end events, then extend coverage with data from your other Digital Experience products.
+If RUM and Product Analytics are not enabled, Synthetic test suites appear automatically as journeys. In this configuration, the test suite defines the journey. Create another test suite to add a journey.
 
-### Step 1 - Create a journey
+## Get started
 
-1. Navigate to **Digital Experience > Journey Monitoring**.
-2. Click **New Journey** or select a [suggested journey][11].
+Follow [Configure journeys][13] to define an event-based journey, add variants, link RUM operations, and add Synthetic test coverage. Create a journey manually or start from a [suggested journey][9].
 
-### Step 2 - Specify journey details
+## Key performance indicators
 
-1. Select a frontend application.
-2. Add a journey name.
-3. Select one or more start events.
-4. Select one or more end events.
-5. Click **Save Journey**.
+Event-based journeys report starts volume, conversion volume, conversion rate, and time to convert. Journeys with Synthetic coverage also report uptime. Product access determines each KPI's data source, retention period, and calculation.
 
-The right-hand funnel chart updates automatically based on the selected start and end events. The funnel shows volume, conversion rate, and average completion time for each step.
+## API
 
-**Note**: Mandatory fields are pre-populated if you start from a suggested journey.
-
-You can also add a description, attribute filters, team ownership, tags, and [variants][9]. Clicking **Save Journey** creates the journey and redirects you to the journey's [details report][12]. The details report includes metrics on the journey's volume, conversion rate, and average time to completion.
-
-### Step 3 - Add coverage from other products
-
-In the journey's details report, you can extend monitoring coverage based on the products you have:
-
-- Create [RUM operations][13] to monitor the performance of critical steps in the journey in your real user environment
-- Add Synthetic tests to the journey's [test suite][14] to start tracking uptime
-
-If you already have pre-created RUM operations or Synthetic tests that cover the journey, Datadog surfaces the operation or test in the journey's details report.
-
-## Metrics
-
-Each journey and its variants have the following performance metrics:
-- **Traffic**: Total number of journey attempts across user sessions. Based on the `rum.measure.journey` metric.
-- **Conversion**: Percentage of journey attempts that were completed. Based on the `rum.measure.journey` metric.
-- **Time to convert**: Average time to complete the journey across all user sessions. Based on the `rum.measure.journey.duration` metric.
-- **Uptime**: Availability of the journey based on its [Synthetic test suite][14] uptime.
+Use the [Journey Monitoring API][14] to query, create, update, and delete journeys.
 
 ## What's next
 
 {{< whatsnext desc="Explore Journey Monitoring:" >}}
-   {{< nextlink href="/journey_monitoring/map/" >}}<strong>Map</strong>: Visualize all your journeys and their traffic and conversion metrics.{{< /nextlink >}}
-   {{< nextlink href="/journey_monitoring/map/suggested_journeys/" >}}<strong>Suggested Journeys</strong>: Get automatically generated journey suggestions based on real user behavior in your application.{{< /nextlink >}}
-   {{< nextlink href="/journey_monitoring/details_report/" >}}<strong>Details Report</strong>: Analyze a journey's traffic, conversion, errors, and uptime in a unified report.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/configuring_journeys/" >}}<strong>Configure Journeys</strong>: Define a journey and add technical coverage.{{< /nextlink >}}
    {{< nextlink href="/journey_monitoring/details_report/variants/" >}}<strong>Variants</strong>: Track and compare different paths users take through a journey.{{< /nextlink >}}
-   {{< nextlink href="/journey_monitoring/uptime/" >}}<strong>Uptime</strong>: Measure a journey's availability with an automatically created Synthetic test suite.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/overview/" >}}<strong>Journey Overview</strong>: Understand a journey's health and its relationships to upstream and downstream journeys.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/map/" >}}<strong>Map</strong>: Visualize all your journeys and their traffic and conversion metrics.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/suggested_journeys/" >}}<strong>Suggested Journeys</strong>: Get automatically generated journey suggestions based on real user behavior in your application.{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/status/" >}}<strong>Status</strong>: Understand a journey's technical health based on RUM operation and Synthetic test suite service level objectives (SLOs).{{< /nextlink >}}
+   {{< nextlink href="/journey_monitoring/details_report/" >}}<strong>Details Report</strong>: Analyze a journey's traffic, conversion, errors, and uptime in a unified report.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /real_user_monitoring/
@@ -109,13 +80,16 @@ Each journey and its variants have the following performance metrics:
 [5]: /real_user_monitoring/rum_without_limits/
 [6]: /synthetics/browser_tests/
 [7]: /synthetics/mobile_app_testing/
-[8]: /product_analytics/
-[9]: /journey_monitoring/details_report/variants/
-[10]: /journey_monitoring/uptime/
-[11]: /journey_monitoring/map/suggested_journeys/
-[12]: /journey_monitoring/details_report/
-[13]: /real_user_monitoring/operations_monitoring/
-[14]: /synthetics/test_suites/#service-level-objectives
+[8]: /journey_monitoring/details_report/variants/
+[9]: /journey_monitoring/suggested_journeys/
+[10]: /journey_monitoring/details_report/#traffic-and-conversion-trends
+[11]: /real_user_monitoring/operations_monitoring/
+[12]: /synthetics/test_suites/
+[13]: /journey_monitoring/configuring_journeys/
+[14]: /api/latest/dem/
+[15]: /journey_monitoring/details_report/#test-suite-and-journey-coverage
+[16]: /journey_monitoring/configuring_journeys/#step-3-add-synthetic-test-coverage
+[17]: /error_tracking/
 
 ## Further reading
 
