@@ -237,7 +237,7 @@ For SNMP v2:
 sudo -u dd-agent datadog-agent snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 ```
 
-For SNMP v3 with authentication and privacy:
+For SNMP v3:
 
 ```shell
 sudo -u dd-agent datadog-agent snmp walk -v 3 -u <USER> -a <AUTH_PROTOCOL> -A <AUTH_KEY> -x <PRIV_PROTOCOL> -X <PRIV_KEY> <IP_ADDRESS>:<PORT> 1.3.6
@@ -254,7 +254,7 @@ For SNMP v2:
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 2 -C <COMMUNITY_STRING> <IP_ADDRESS>:<PORT> 1.3.6
 ```
 
-For SNMP v3 with authentication and privacy:
+For SNMP v3:
 
 ```bat
 "%ProgramFiles%\Datadog\Datadog Agent\bin\agent.exe" snmp walk -v 3 -u <USER> -a <AUTH_PROTOCOL> -A <AUTH_KEY> -x <PRIV_PROTOCOL> -X <PRIV_KEY> <IP_ADDRESS>:<PORT> 1.3.6
