@@ -396,7 +396,7 @@ Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and reque
 
 **Note**: [Bits Live Debugger][23] requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
 
-### Use Live Debugger through MCP {% #use-live-debugger-through-mcp %}
+### Using Live Debugger through MCP {% #use-live-debugger-through-mcp %}
 
 {% alert %}
 The Live Debugger toolset for the Datadog Model Context Protocol (MCP) server is in Preview. See the [Datadog MCP Server documentation][39] for setup and access requirements.
