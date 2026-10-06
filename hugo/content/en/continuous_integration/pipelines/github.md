@@ -29,10 +29,10 @@ Set up CI Visibility for GitHub Actions to track the execution of your workflows
 |---|---|---|
 | [Running pipelines][2] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Running jobs][28] | Running jobs | View job executions that are currently running. |
-| [CI jobs failure analysis][23] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][23] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Partial retries][3] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][27] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log storage](#store-job-logs). |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [Logs Storage](#logs-storage). |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][4] for GitHub jobs. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Queue time][8] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
@@ -93,19 +93,21 @@ To disable the CI Visibility GitHub Actions integration:
 
 ### Manage job logs
 
-CI jobs failure analysis uses LLM models to analyze failed CI jobs based on relevant logs coming from GitHub Actions.
+#### Logs Analysis
 
-For a full explanation, see the guide on [using CI jobs failure analysis][23].
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from GitHub Actions.
 
-Log Analysis is enabled by default in Datadog. To manage Log Analysis settings, go to [CI/CD Repository settings][29], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+For a full explanation, see the guide on [using Logs Analysis][23].
+
+Logs Analysis is enabled by default in Datadog. To manage Logs Analysis settings, go to [CI/CD Repository settings][29], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][26].
 
-#### Store job logs
+#### Logs Storage
 
-To enable Log Storage, go to [CI/CD Repository settings][29], and enable Log Storage at the Datadog organization level or for the desired repositories.
+To enable Logs Storage, go to [CI/CD Repository settings][29], and enable Logs Storage at the Datadog organization level or for the desired repositories.
 
-Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for GitHub jobs can be identified by the `datadog.product:cipipeline` and `source:github` tags.
 
 Job logs are collected in [Log Management][15] and, once stored, are automatically correlated with the GitHub Actions workflow in CI Visibility. Log files larger than one GiB are truncated.
 

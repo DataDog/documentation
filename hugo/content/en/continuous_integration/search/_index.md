@@ -12,7 +12,7 @@ further_reading:
   text: "Identify CI Jobs on the Critical Path to reduce the Pipeline Duration"
 - link: "/continuous_integration/guides/use_ci_jobs_failure_analysis/"
   tag: "Documentation"
-  text: "Use CI jobs failure analysis to identify root causes in failed jobs"
+  text: "Use Logs Analysis to identify root causes in failed jobs"
 ---
 
 ## Overview
@@ -71,9 +71,9 @@ Click the CI provider link (`gitlab-ci gitlab.pipeline > documentation` in the f
 
 ### Explore connections to logs
 
-If Log Storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
+If Logs Storage is supported and enabled for the CI provider, related log events can be found in the {{< ui >}}Logs{{< /ui >}} tab of the pipeline execution view.
 
-Log Storage is supported for the following providers:
+Logs Storage is supported for the following providers:
 
 - [AWS CodePipeline][8]
 - [Azure][9]
@@ -83,25 +83,25 @@ Log Storage is supported for the following providers:
 - [GitLab][4]
 - [Jenkins][5]
 
-### CI jobs failure analysis based on relevant logs
+### Logs Analysis based on relevant logs
 
 CI Visibility uses an LLM model to generate enhanced error messages and categorize them with a domain and subdomain, based on the relevant logs collected from every failed CI job.
 
-Use [CI jobs failure analysis][12] to identify the most common root causes of failure for your CI jobs.
+Use [Logs Analysis][12] to identify the most common root causes of failure for your CI jobs.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pipelines
-[3]: /continuous_integration/pipelines/github/#store-job-logs
-[4]: /continuous_integration/pipelines/gitlab/#store-job-logs
+[3]: /continuous_integration/pipelines/github/#logs-storage
+[4]: /continuous_integration/pipelines/gitlab/#logs-storage
 [5]: /continuous_integration/pipelines/jenkins#enable-job-log-collection
 [6]: /account_management/teams/
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /continuous_integration/pipelines/awscodepipeline/#collect-job-logs
-[9]: /continuous_integration/pipelines/azure/#store-job-logs
-[10]: /continuous_integration/pipelines/circleci/#store-job-logs
+[9]: /continuous_integration/pipelines/azure/#logs-storage
+[10]: /continuous_integration/pipelines/circleci/#logs-storage
 [11]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path
 [12]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
-[13]: /continuous_integration/pipelines/buildkite/#store-job-logs
+[13]: /continuous_integration/pipelines/buildkite/#logs-storage

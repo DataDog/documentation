@@ -28,8 +28,8 @@ Set up CI Visibility for CircleCI to optimize the performance of your pipelines,
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
 | [Partial retries][12] | Partial pipelines | View partially retried pipeline executions. |
-| [CI jobs failure analysis][20] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
-| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log storage][10]. |
+| [Logs Analysis][20] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [Logs Storage][10]. |
 | [Custom spans][13] | Custom spans | Configure custom spans for your pipelines. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][6] to all generated pipeline and job spans. |
 | [Custom tags][14] [and measures at runtime][15] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
@@ -106,17 +106,19 @@ To display and filter the teams associated with your pipelines, add `team:<your-
 
 ### Manage job logs
 
-CI jobs failure analysis uses LLM models to compute the analysis for failed CI jobs based on relevant logs coming from CircleCI.
+#### Logs Analysis
 
-For a full explanation, see the guide on [using CI jobs failure analysis][20].
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from CircleCI.
 
-Log Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Log Analysis settings, go to [CI/CD Repository settings][21], and configure Log Analysis at the Datadog organization level or for the desired repositories.
+For a full explanation, see the guide on [using Logs Analysis][20].
 
-#### Store job logs
+Logs Analysis is enabled by default in Datadog. To receive CircleCI job logs for analysis, install and configure the integration as described in the [CircleCI integration documentation][11]. To manage Logs Analysis settings, go to [CI/CD Repository settings][21], and configure Logs Analysis at the Datadog organization level or for the desired repositories.
 
-To enable Log Storage, go to [CI/CD Repository settings][21], and enable Log Storage at the Datadog organization level or for the desired repositories.
+#### Logs Storage
 
-Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
+To enable Logs Storage, go to [CI/CD Repository settings][21], and enable Logs Storage at the Datadog organization level or for the desired repositories.
+
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][16]. Logs for CircleCI jobs can be identified by the `datadog.product:cipipeline` and `source:circleci` tags.
 
 ## Visualize pipeline data in Datadog
 
@@ -137,7 +139,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [7]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [8]: /account_management/teams/
 [9]: https://raw.githubusercontent.com/DataDog/ci-visibility-circle-ci/main/service_hooks.py
-[10]: /continuous_integration/pipelines/circleci/#store-job-logs
+[10]: /continuous_integration/pipelines/circleci/#logs-storage
 [11]: /integrations/circleci/#setup
 [12]: /glossary/#partial-retry
 [13]: /glossary/#custom-span

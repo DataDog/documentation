@@ -26,13 +26,13 @@ Set up CI Visibility for GitLab to collect data on your pipeline executions, ana
 |---|---|---|
 | [Running pipelines][24] | Running pipelines | View pipeline executions that are running. Queued or waiting pipelines show with status "Running" on Datadog. |
 | [Running jobs][32] | Running jobs | View job executions that are currently running. |
-| [CI jobs failure analysis][28] | CI jobs failure analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
+| [Logs Analysis][28] | Logs Analysis | Uses LLM models on relevant logs to analyze the root cause of failed CI jobs. |
 | [Filter CI Jobs on the critical path][29] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
 | [Partial retries][19] | Partial pipelines | View partially retried pipeline executions. |
 | [Automatic job retries][31] | Automatic job retries | Datadog retries failed jobs classified as transient by its AI error model. |
 | [Manual steps][20] | Manual steps | View manually triggered pipelines. |
 | [Queue time][21] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
-| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [job log storage][12]. |
+| Logs correlation | Logs correlation | Correlate pipeline spans to logs and enable [Logs Storage][12]. |
 | Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][14] for self-hosted GitLab runners. |
 | Custom pre-defined tags | Custom pre-defined tags | Set [custom tags][10] to all generated pipeline, stages, and job spans. |
 | [Custom tags][15] [and measures at runtime][16] | Custom tags and measures at runtime | Configure [custom tags and measures][13] at runtime. |
@@ -385,11 +385,13 @@ The following table describes the message and domain correlated with each error 
 
 ### Manage job logs
 
-CI jobs failure analysis uses LLM models to analyze failed CI jobs based on relevant logs coming from GitLab.
+#### Logs Analysis
 
-For a full explanation, see the guide on [using CI jobs failure analysis][28].
+Logs Analysis uses LLM models to classify job failures by root cause based on relevant logs coming from GitLab.
 
-Log Analysis is enabled by default in Datadog, but requires job log forwarding to be configured, as described below.
+For a full explanation, see the guide on [using Logs Analysis][28].
+
+Logs Analysis is enabled by default in Datadog, but requires job log forwarding to be configured, as described below.
 
 You can also add job failure analysis to a PR comment. See the guide on [using PR comments][30].
 
@@ -430,11 +432,11 @@ The <a href="https://docs.gitlab.com/ee/administration/object_storage.html#amazo
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Store job logs
+#### Logs Storage
 
-After completing the steps for your GitLab version, go to [CI/CD Repository settings][35] and enable Log Storage at the Datadog organization level or for the desired repositories.
+After completing the steps for your GitLab version, go to [CI/CD Repository settings][35] and enable Logs Storage at the Datadog organization level or for the desired repositories.
 
-Log Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
+Logs Storage is billed separately from CI Visibility. Log retention, exclusion, and indexes are configured in [Log Management][6]. Logs for GitLab jobs can be identified by the `datadog.product:cipipeline` and `source:gitlab` tags.
 
 Job logs are collected in [Log Management][9] and are automatically correlated with the GitLab pipeline in CI Visibility. Log files larger than one GiB are truncated.
 
@@ -477,7 +479,7 @@ The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default b
 [9]: /logs/
 [10]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#set-custom-tags
 [11]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#partial-and-downstream-pipelines
-[12]: /continuous_integration/pipelines/gitlab/#store-job-logs
+[12]: /continuous_integration/pipelines/gitlab/#logs-storage
 [13]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
 [14]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#correlate-infrastructure-metrics-to-jobs
 [15]: /continuous_integration/pipelines/gitlab/?tab=gitlabcom#view-error-messages-for-pipeline-failures
