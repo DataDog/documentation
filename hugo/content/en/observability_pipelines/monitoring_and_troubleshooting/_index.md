@@ -10,8 +10,11 @@ After setting up pipelines and scaling Workers:
 - You can track the status of your pipelines and components with health graphs and out-of-the-box monitors. See [Monitoring Pipelines][2] for more information.
 - You can also create your monitors, dashboards, and notebooks to monitor your pipelines. See [Pipeline Usage Metrics][3] for a list of metrics.
 - If you run into issues with Observability Pipelines, see [Troubleshooting][4].
+- Observability Pipelines groups your logs into [patterns][5] and uses [Watchdog to detect log anomalies][6] before it sends logs to any destination.
 
 [1]: /observability_pipelines/monitoring_and_troubleshooting/worker_cli_commands/
 [2]: /observability_pipelines/monitoring_and_troubleshooting/monitoring_pipelines/
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [4]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/
+[5]: /observability_pipelines/monitoring_and_troubleshooting/log_patterns/
+[6]: /observability_pipelines/monitoring_and_troubleshooting/log_anomaly_detection/
