@@ -493,7 +493,7 @@ Tools for [Work Management][38], including creating, searching, and updating wor
 
 Work items are also called cases. The tool names, the `case_id` argument, and the keys these tools return (for example, `CASE-1234`) all use *case*. You can refer to either term in your prompts.
 
-<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, request <code>cases</code> by name. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. Add <code>cases</code> to the <code>toolsets</code> parameter (for example, <code>?toolsets=core,cases</code>) or use <code>toolsets=all</code>. Tools marked <em>Preview</em> are not included in <code>toolsets=all</code>. To use them, explicitly add <code>cases</code> to the <code>toolsets</code> parameter. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
@@ -628,6 +628,20 @@ Lists an organization's Cloud Cost Management cost-saving recommendations, ranke
 - What are my top cloud cost-saving recommendations?
 - How much could I save per day, and how many open recommendations do I have?
 - Which of our Kubernetes cluster optimizations does the team already have underway?
+
+## Cloud Resources
+
+Tools for looking up a cloud resource in the [Resource Catalog][86] by its cloud resource ID, across AWS, Azure, Google Cloud, and OCI.
+
+### `get_cloud_resource_details`
+*Toolset: **cloud-resources***\
+*Permissions Required: `Hosts Read` or `DDSQL Editor Read`*\
+Gets the configuration and metadata that Datadog records for a single cloud resource. Identify the resource by its cloud resource ID: an AWS ARN, an Azure resource ID, a Google Cloud resource name, or an OCID. Returns the resource's account, region, tags, and provider configuration. Use this tool when you have a cloud resource ID and need the details behind it. To find resources by attribute, use a search tool instead. If the resource is not in the [Resource Catalog][86], the tool reports that it was not found. This can mean the resource was deleted, was never ingested, or is not a supported type.
+
+- Which team owns `arn:aws:rds:us-east-1:123456789012:db:payments-primary`?
+- What account and region is this resource in: `arn:aws:ec2:us-east-1:123456789012:instance/i-0abc123def4567890`?
+- Show me the configuration of this Azure resource: `/subscriptions/0000/resourceGroups/prod/providers/Microsoft.Compute/virtualMachines/web-01`.
+- What tags are set on this resource, and is it owned by a team?
 
 ## Code Execution
 
@@ -1117,6 +1131,15 @@ Creates, links, or unlinks a Jira ticket, Linear ticket, or Datadog case for an 
 - File a Jira ticket for Error Tracking Issue `550e8400-e29b-41d4-a716-446655440000`.
 - Link Error Tracking Issue `a3c8f5d2-1b4e-4c9a-8f7d-2e6b9a1c3d5f` to Case `CTS-203`.
 - Unlink the Linear ticket from Error Tracking Issue `7b2d4f6e-9c1a-4e3b-8d5f-1a7c9e2b4d6f`.
+
+### `get_datadog_error_tracking_analytics`
+*Toolset: **error-tracking***\
+*Permissions Required: `Error Tracking Read`*\
+Retrieves daily Error Tracking Issue counts broken down by state and category, for a set of services or teams. Each day's count is a snapshot of issue states at end of day.
+
+- Is the error backlog for the payments service growing or shrinking over the last 30 days?
+- How many new Error Tracking Issues were introduced compared to resolved last week?
+- Did regressions spike after last Tuesday's deploy?
 
 ## Experiments
 
@@ -3235,6 +3258,7 @@ Cancels a running workflow execution instance. Invoke this tool only when the us
 [83]: /network_monitoring/network_path/
 [84]: /account_management/governance_console/
 [85]: /security/code_security/iac_security/custom_rules/
+[86]: /infrastructure/resource_catalog/
 
 ## Further reading
 
