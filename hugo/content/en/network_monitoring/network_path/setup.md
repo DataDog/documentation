@@ -25,7 +25,7 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 <div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
 
-Datadog provides four Agent-based collection methods. You can use one method on its own or combine multiple methods:
+Datadog provides the following Agent-based collection methods. You can use one method on its own or combine multiple methods:
 
 | Method | When to use |
 |--------|-------------|
