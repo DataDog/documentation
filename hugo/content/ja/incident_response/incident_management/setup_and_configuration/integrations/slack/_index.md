@@ -18,7 +18,7 @@ further_reading:
   text: アプリ内の Slack インテグレーションタイル
 title: Datadog Incident Management に Slack を統合する
 ---
-## 概要{#overview}
+## 概要 {#overview}
 
 Slack は、チームがリアルタイムでコミュニケーションをとるために広く利用されているメッセージングおよびコラボレーションプラットフォームです。Datadog Slack インテグレーションは Incident Response ワークフローを Slack に直接接続するので、チームはチャット環境を離れることなくインシデントを宣言、管理、解決できます。
 
@@ -36,7 +36,7 @@ Slack インテグレーションのドキュメントは、Incident Management 
 4. [**グローバル通知の構成**](#global-slack-notifications): 自動更新によって組織全体に情報を共有します。
 5. **[Slack 構成オプション](#additional-slack-configurations)および[Slack コマンド](#slack-incident-commands)**の参照: 詳細な構成オプションを確認し、利用可能な Slack コマンドの全リストを参照して、Incident Response ワークフローを調整および効率化します。
 
-## 前提条件{#prerequisites}
+## 前提条件 {#prerequisites}
 
 適切な [OAuth スコープ][6] を指定して、[Slack インテグレーションタイル][1] からインテグレーションをインストールしてください。詳しくは、[Slack インテグレーション][2] ドキュメントを参照してください。
 
@@ -93,6 +93,16 @@ Incident Management を構成して、定義した基準を満たす各インシ
 インシデントの Slack チャンネルで、Slack コマンドを実行して、インシデントのステータスや重大度の変更、対応者の割り当て、オンコールチームのページングなどを行うことができます。
 
 Slack コマンドの全リストについては、[Slack コマンド](#slack-commands)を参照してください。
+
+### 会議の文字起こし担当者を再招待する {#re-inviting-a-meeting-transcriber}
+
+Datadog文字起こし担当者がリンクされたZoom、Google Meet、またはMicrosoft Teamsの会議から退出した場合、会議カードのスレッドに再招待のプロンプトが表示されることがあります。これは、待機室のタイムアウト後、誰も参加しない場合、全員が退出した後、または誰かが文字起こし担当者を削除した場合に発生する可能性があります。
+
+**はい**を選択して文字起こし担当者を再招待するか、**いいえ**を選択してプロンプトを閉じます。必要に応じて、会議のロビーまたは待機室から文字起こし担当者を入室させてください。
+
+この操作には、接続されたDatadogアカウントと、インシデントを編集する権限が必要です。シートベースの課金を採用している組織の場合、[Incident ManagementまたはIncident Response seat][8]も必要です。会議の要約設定および除外条件は引き続き適用されます。
+
+Datadogのインシデントヘッダーから文字起こし担当者を再招待することもできます。手順については、[Zoom][9]、[Google Meet][10]、または[Microsoft Teams][11]の会議要約に関するドキュメントを参照してください。
 
 ### その他のインシデントチャンネル構成オプション{#other-incident-channel-configuration-options}
 
@@ -202,3 +212,7 @@ Datadog は、ステータスが変更されるとインシデントの Slack �
 [5]: /ja/incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /ja/integrations/slack/?tab=datadogforslack#permissions
 [7]: /ja/incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /ja/account_management/billing/incident_response/#allocate-seats
+[9]: /ja/integrations/zoom-incident-management/#meeting-summaries
+[10]: /ja/integrations/google-meet-incident-management/#meeting-summaries
+[11]: /ja/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries

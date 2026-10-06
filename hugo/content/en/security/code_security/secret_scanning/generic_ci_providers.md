@@ -15,6 +15,8 @@ algolia:
 
 If you don't use [GitHub Actions][5] to set up Secret Scanning, you can run the [Datadog CI][4] CLI directly in your CI pipeline platform and upload Static Analysis Results Interchange Format (SARIF) reports to Datadog.
 
+<div class="alert alert-info"><a href="/security/code_security/secret_scanning/#detect-secrets-in-git-history">Git history scanning</a> is available with hosted scanning only. CI-based scans analyze the checked-out commit.</div>
+
 Prerequisites:
 
 - unzip

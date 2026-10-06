@@ -8,7 +8,10 @@ further_reading:
   text: Datadog Agent Observability を使用してコーディングエージェントから AI アプリをデバッグおよび評価する
 title: セットアップと使用
 ---
-このページでは、Python SDK を使用して Agent Observability Experiments をセットアップし、使用する方法について説明します。
+このページでは、Python または Node.js SDK を使用して Agent Observability Experiments をセットアップし、使用する方法について説明します。
+
+{{< tabs >}}
+{{% tab "Python" %}}
 
 ## Agent Observability のセットアップ{#set-up-agent-observability}
 
@@ -33,7 +36,7 @@ Agent Observability をまだセットアップしていない場合は、次の
    )
    ```
 
-   <div class="alert alert-warning"> <code>api_key</code> および <code>app_key</code>の両方を指定する必要があります。</div>
+   <div class="alert alert-warning"> <code>api_key</code> と <code>app_key</code>の両方を指定する必要があります。</div>
 
 ### APM トレース相関 {#apm-trace-correlation}
 
@@ -68,9 +71,9 @@ _データセット_とは、Agent のテストを行うシナリオを表す_�
 
 - **入力** (必須): エージェントがタスク内でアクセスできるすべての情報を表します。
 - **期待される出力** (オプション): _グラウンドトゥルース_とも呼ばれ、エージェントが出力すべき理想的な回答を表します。_期待される出力_を使用して、アプリの実際の出力や評価する中間結果を保存できます。
-- **メタデータ** (オプション): レコードを分類し、その後の分析に使用するための有用な情報が含まれます。たとえばトピック、タグ、説明、メモなどです。
+- **メタデータ** (オプション): レコードを分類し、その後の分析に使用するための有用な情報が含まれます。たとえば、トピック、タグ、説明、メモなどです。
 
-CSV ファイルからデータセットを作成するには、`LLMObs.create_dataset_from_csv()`を使用します。
+CSV ファイルからデータセットを作成するには、`LLMObs.create_dataset_from_csv()` を使用します。
 
 ```python
 # Create dataset from CSV
@@ -190,7 +193,7 @@ _実験_を使用すると、データセットの一連のシナリオで Agent
    Datadog は、評価器の以下の戻り値型をサポートしています。
    - **Boolean**: true または false を返します。
    - **score**: 数値 (浮動小数点数) を返します
-   - **categorical**: ラベル付けされたカテゴリ (文字列) を返します。
+   - **categorical**: ラベル付けされたカテゴリー (文字列) を返します。
    - **json**: 構造化データ (dict) を返します
 
    以下を返すこともできます。
@@ -290,7 +293,7 @@ _実験_を使用すると、データセットの一連のシナリオで Agent
    Datadog は、サマリー評価器の以下の戻り値型をサポートしています。
    - **Boolean**: true または false を返します。
    - **score**: 数値 (浮動小数点数) を返します
-   - **categorical**: ラベル付けされたカテゴリ (文字列) を返します。
+   - **categorical**: ラベル付けされたカテゴリー (文字列) を返します。
    - **json**: 構造化データ (dict) を返します
 
 ### 5. 実験を作成して実行する {#5-create-and-run-the-experiment}
@@ -341,14 +344,148 @@ _実験_を使用すると、データセットの一連のシナリオで Agent
    print(f"View experiment: {experiment.url}")
    ```
 
-注: LLM 実験のトレースは 90 日間保持されます。
-
 [1]: /ja/llm_observability/improve/datasets
 [2]: /ja/llm_observability/instrument/custom_instrumentation?tab=decorators#trace-an-llm-application
 [3]: /ja/llm_observability/instrument/auto_instrumentation?tab=python
 [4]: /ja/llm_observability/investigate/evaluations/evaluation_developer_guide
 [5]: /ja/llm_observability/instrument/agent_observability_and_apm/
 [6]: /ja/llm_observability/instrument/otel_instrumentation
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+## Agent Observability のセットアップ{#set-up-agent-observability-1}
+
+Agent Observability をまだセットアップしていない場合は、次のようにします。
+
+1. Agent Observability Node.js SDK をインストールします。
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. API キー、アプリケーションキー、および Datadog サイトを設定します。
+
+   ```shell
+   export DD_API_KEY="<YOUR_API_KEY>"
+   export DD_APP_KEY="<YOUR_APP_KEY>"
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Initialize the tracer with the ML application and Experiments project names:
+
+   ```javascript
+   const tracer = require('dd-trace').init({
+     llmobs: {
+       mlApp: 'capitals-app',
+       projectName: 'capitals-project'
+     }
+   })
+   ```
+
+   <div class="alert alert-warning"> <code>DD_API_KEY</code> と <code>DD_APP_KEY</code>の両方を指定する必要があります。</div>
+
+## プロジェクトの作成 {#create-a-project-1}
+
+プロジェクトには、データセットと実験が含まれます。SDK は、構成された Experiments プロジェクト名を使用し、
+プロジェクトが存在しない場合は作成します。
+
+トレーサーの初期化中に `llmobs.projectName` を設定します。`DD_LLMOBS_PROJECT_NAME` を設定することもできます。どちらの値も設定されていない場合、
+SDK は `default-project` を使用します。
+
+## データセットの作成 {#create-a-dataset-1}
+
+`tracer.llmobs.experiments` API を使用してデータセットを作成します。
+
+```javascript
+const { experiments } = tracer.llmobs
+
+const dataset = experiments.createDataset('capitals-of-the-world', {
+  description: 'Questions and expected capital cities',
+  records: [
+    {
+      inputData: { question: 'What is the capital of China?' },
+      expectedOutput: 'Beijing',
+      metadata: { difficulty: 'medium' }
+    },
+    {
+      inputData: { question: 'What is the capital of Japan?' },
+      expectedOutput: 'Tokyo',
+      metadata: { difficulty: 'medium' }
+    }
+  ]
+})
+```
+
+SDK は実験の開始時にデータセットをプッシュします。既存のデータセットを使用するには、
+`await experiments.pullDataset('<DATASET_NAME>')` を呼び出します。
+
+## 実験の作成 {#create-an-experiment-1}
+
+実験では、データセットの各レコードに対してタスクを実行し、それぞれの結果を評価します。
+
+### 1. タスクを定義する {#1-define-a-task}
+
+タスクはレコード入力を受け取ります。また、実験の構成と、必要に応じてレコードのメタデータを受け取ることもできます。
+
+```javascript
+function task (inputData) {
+  const { question } = inputData
+
+  // Add the LLM or agent call to evaluate.
+  return question.includes('China') ? 'Beijing' : 'Tokyo'
+}
+```
+
+タスク内で[サポートされている Node.js インテグレーション](/llm_observability/instrument/auto_instrumentation?tab=nodejs)への呼び出しは、
+実験スパンの子としてトレースされます。
+
+### 2. 評価器を定義する {#2-define-evaluators}
+
+評価器は、レコードの入力、タスクの出力、および期待される出力を受け取ります。対応する評価メトリクスを作成するには、
+ブール値、数値、文字列、または JSON 値を返します。
+
+```javascript
+function exactMatch (_inputData, outputData, expectedOutput) {
+  return outputData === expectedOutput
+}
+```
+
+### 3. 実験を作成して実行する {#3-create-and-run-the-experiment}
+
+```javascript
+async function runExperiment () {
+  const experiment = experiments.experiment({
+    name: 'capital-cities-test',
+    dataset,
+    task,
+    evaluators: {
+      exact_match: exactMatch
+    },
+    description: 'Testing capital cities knowledge',
+    config: {
+      modelName: 'gpt-4',
+      version: '1.0'
+    }
+  })
+
+  const result = await experiment.run()
+  console.log(`View experiment: ${result.url}`)
+}
+
+runExperiment().catch((error) => {
+  console.error(error)
+  process.exitCode = 1
+})
+```
+
+結果には、各レコードの出力、評価器のスコア、エラー、および Datadog 内の実験への URL が含まれます。
+
+{{% /tab %}}
+{{< /tabs >}}
+
+注: LLM 実験のトレースは 90 日間保持されます。
 
 ## 参考資料 {#further-reading}
 

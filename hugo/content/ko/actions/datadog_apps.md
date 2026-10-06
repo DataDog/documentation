@@ -241,13 +241,49 @@ npm run upload
 앱의 UI나 로직을 변경하려면 로컬 프로젝트의 코드를 업데이트하고 다시 업로드합니다.
 </div>
 
+## 딥 링크를 사용하여 임베디드 앱 상태 공유 {#share-embedded-app-state-with-deep-links}
+
+앱이 [embedded][3] 상태일 때, 해당 앱의 URL 상태가 호스트 페이지의 URL로 반영됩니다. 여기에는 경로, 탭, 해시 값 및 쿼리 매개변수가 포함됩니다. 해당 호스트의 URL을 복사하여 공유하면 동일한 앱 내 상태로 앱이 열립니다.
+
+딥 링크는 `DatadogAppProvider` 래퍼를 통해 자동으로 지원됩니다. 앱에서 딥 링크가 작동하지 않으면 [`@datadog/apps-frontend`][25]를 설치하고 `DatadogAppProvider`에서 `main.tsx`로 앱을 감싸십시오:
+
+```shell
+npm install @datadog/apps-frontend@latest
+```
+
+```tsx
+import { DatadogAppProvider } from '@datadog/apps-frontend/embedding/react';
+
+function App() {
+  return (
+    <DatadogAppProvider>
+      {/* your app */}
+    </DatadogAppProvider>
+  );
+}
+```
+
+코드를 변경할 필요가 없습니다. 앱 내의 모든 `history.pushState`, `history.replaceState` 또는 해시 탐색은 호스트 페이지의 URL에 자동으로 반영됩니다.
+
+딥 링크를 끄려면 `disabledModules`에 `datadog.deep-links` 모듈을 전달하십시오:
+
+```tsx
+<DatadogAppProvider disabledModules={['datadog.deep-links']}>
+  {/* your app */}
+</DatadogAppProvider>
+```
+
+<div class="alert alert-info">
+딥 링크는 앱의 URL에 저장된 상태만 캡처합니다. React 컴포넌트 상태나 로컬 스토리지의 데이터는 캡처하지 않습니다.
+</div>
+
 ## GitHub Actions로 CI/CD 설정 {#set-up-cicd-with-github-actions}
 
 `main` 브랜치에 푸시할 때마다 앱을 자동으로 업로드하려면 [`DataDog/apps-github-action`][11] GitHub Action을 사용합니다. 이 작업은 앱을 빌드하고 Datadog에 업로드합니다.
 
 CI/CD 업로드에는 API 및 애플리케이션 키 인증이 필요합니다. [액션 API 액세스][5]가 활성화된 Datadog API 키와 애플리케이션 키를 만들고 GitHub 비밀로 저장합니다.
 
-조직이 US1(`datadoghq.com`)에 없으면 `vite.config.ts`의 `auth.site`를 [Datadog 사이트][15]로 설정합니다. 빌드는 앱을 업로드할 때 이 구성을 읽으므로 동일한 설정이 로컬 개발에도 적용됩니다. Datadog 사이트는 `{{< region-param key="dd_site" >}}`입니다.
+조직이 US1(`datadoghq.com`)에 없으면 `vite.config.ts`의 `auth.site`를 [Datadog 사이트][15]로 설정합니다. 빌드는 앱을 업로드할 때 이 구성을 읽으므로 동일한 설정이 로컬 개발에도 적용됩니다. Datadog 사이트는 `{{< region-param key="dd_site" >}}`.
 
 {{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
@@ -345,3 +381,4 @@ API 및 애플리케이션 키 인증을 사용하는 경우 인증 오류는 �
 [22]: https://github.com/vercel-labs/skills
 [23]: https://www.npmjs.com/package/@datadog/druids
 [24]: https://www.npmjs.com/package/@datadog/apps-backend
+[25]: https://www.npmjs.com/package/@datadog/apps-frontend
