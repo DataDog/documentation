@@ -138,11 +138,7 @@ In the `host.json` file at the root of your Logic App project, set `telemetryMod
 }
 ```
 
-Deploy the updated `host.json` with your workflows. To edit the file on a deployed Logic App instead, open {{< ui >}}Development Tools{{< /ui >}} > {{< ui >}}Advanced Tools{{< /ui >}} > {{< ui >}}Debug console{{< /ui >}} > {{< ui >}}CMD{{< /ui >}} in the Azure Portal and edit `site/wwwroot/host.json` from the Kudu console. After you save the file, restart the Logic App from its {{< ui >}}Overview{{< /ui >}} page, or run the following command:
-
-```shell
-az logicapp restart --name <LOGIC_APP_NAME> --resource-group <RESOURCE_GROUP>
-```
+Deploy the updated `host.json` with your workflows. To edit the file on a deployed Logic App instead, open {{< ui >}}Development Tools{{< /ui >}} > {{< ui >}}Advanced Tools{{< /ui >}} > {{< ui >}}Debug console{{< /ui >}} > {{< ui >}}CMD{{< /ui >}} in the Azure Portal and edit `site/wwwroot/host.json` from the Kudu console. After you save the file, restart the Logic App from its {{< ui >}}Overview{{< /ui >}} page.
 
 ### 2. Configure the OTLP exporter
 
