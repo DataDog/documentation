@@ -132,7 +132,7 @@ To determine the names and types of the inferred service dependencies, Datadog u
 
 The following table lists the source attributes for each peer tag in the [Datadog Agent mapping registry][6]. Supported source attributes depend on the Agent version. To check a specific version, select its release tag in the Agent repository.
 
-For example, `db.type` can supply the value for `peer.db.system` even when the span does not have a `db.system` attribute.
+Source attributes are listed from highest to lowest precedence. For each peer tag, Datadog uses the first source attribute with a non-empty value. For example, `db.system` takes precedence over `db.type` when deriving `peer.db.system`. This differs from the [precedence between peer tags](#precedence-of-peer-tags) used to name an inferred entity.
 
 Peer tag | Source attributes
 --------------------|-------------------
