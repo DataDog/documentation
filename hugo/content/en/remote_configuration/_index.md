@@ -51,6 +51,7 @@ The following diagram illustrates how Remote Configuration works:
 Remote Configuration works in environments where supported Datadog components are deployed. Supported Datadog components include:
 - Agents
 - Tracers (indirectly)
+- Browser, iOS, and Android RUM SDKs
 - Observability Pipeline Workers
 - Private action runners and serverless container cloud services such as AWS Fargate.
 
@@ -92,9 +93,13 @@ Private action runner
 Feature Flags
 : - Deliver flag configurations (targeting and assignment rules) to server-side SDKs for synchronous variant assignment based on evaluation context. See [Feature Flags][48] for more information.
 
+Real User Monitoring (RUM)
+: - Update supported Browser, iOS, and Android SDK settings from Datadog without deploying a new version of your application. See [RUM Remote Configuration][49] for more information.
+
 ## Security considerations
 
 Datadog implements the following safeguards to protect the confidentiality, integrity, and availability of configurations received and applied by your Datadog components:
+
 
 - Remote Configuration enabled Datadog components deployed in your infrastructure request configurations from Datadog.
   <div class="alert alert-info">Some components like private action runners are always remote configuration enabled. Others, like Agents, can be enabled or disabled using in-disk configuration options.</div>
@@ -105,6 +110,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
 - When Remote Configuration is enabled, components periodically perform a connectivity test to Datadog over TLS on port 8042/TCP. This is a raw TLS connection rather than HTTPS. This test is used for protocol development; it includes no customer data and no customer-identifying information. This connection is used only while Remote Configuration is enabled and can be safely blocked without affecting functionality.
 
+<div class="alert alert-info">RUM SDKs retrieve settings from a public CDN endpoint using a remote configuration ID instead of a Datadog API key. They do not use the infrastructure-based request flow or TLS connectivity test described above. For more information, see <a href="/real_user_monitoring/remote_configuration/">RUM Remote Configuration</a>.</div>
 ### Role-based access
 
 Enabling Remote Configuration impacts the following products. Each product defines a set of role-based access controls that need to be granted to their users. For general information on access management, see [Access Control][37].
@@ -123,6 +129,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
  | Container Autoscaling                  | `ORCHESTRATION_AUTOSCALING_MANAGE`<br>`ORCHESTRATION_WORKLOAD_SCALING_WRITE`<br>`ORCHESTRATION_WORKLOAD_SCALING_READ`                                                                                                                                                                          |
  | Serverless Lambda Auto-instrumentation | `SERVERLESS_AWS_INSTRUMENTATION_READ`<br>`SERVERLESS_AWS_INSTRUMENTATION_WRITE`<br><br>For more information, see [Serverless][46].                                                                                                                                                             |
  | Feature Flags                          | `FEATURE_FLAG_CONFIG_READ`<br>`FEATURE_FLAG_CONFIG_WRITE`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_READ`<br>`FEATURE_FLAG_ENVIRONMENT_CONFIG_WRITE`<br><br>For more information, see [Feature Flags][48].                                                                                           |
+ | Real User Monitoring                   | `RUM_APPS_WRITE`<br><br>For more information, see [Real User Monitoring permissions][50].                                                                                                                                                                                                  |
 
 ## Enable Remote Configuration
 
@@ -146,6 +153,7 @@ Consult the documentation below for instructions specific to the product you're 
 | Sensitive Data Scanner  | [Cloud storage](/security/sensitive_data_scanner/setup/cloud_storage/?tab=newawsaccount)                       |
 | Private Action Runner   | [Private Actions Overview](/actions/private_actions/)                                                          |
 | Feature Flags           | [Server-Side Feature Flags](/feature_flags/server/)                                                            |
+| Real User Monitoring    | [RUM Remote Configuration][49]                                                                                 |
 
 ## Best practices
 
@@ -211,3 +219,5 @@ Instead of disabling Remote Configuration globally, Datadog recommends opting ou
 [46]: /account_management/rbac/permissions/#serverless
 [47]: /containers/autoscaling
 [48]: /feature_flags/
+[49]: /real_user_monitoring/remote_configuration/
+[50]: /account_management/rbac/permissions/#real-user-monitoring
