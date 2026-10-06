@@ -6,8 +6,8 @@ import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
 import styles from "./ApiCodeExample.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { generateElementId } from "@lib/componentUtils/generateElementId";
+import ApiCodeInstructions from "@components/ApiCodeInstructions/ApiCodeInstructions.astro";
 import { useTranslations } from "@lib/i18n/i18n";
-import { localizedHref, resolveLocale } from "@lib/i18n/locale";
 import type { CodeExampleSet } from "@lib/api/schemas/codeExamples";
 
 export type {
@@ -23,7 +23,6 @@ interface Props {
 
 const { examples } = Astro.props;
 const translate = useTranslations(Astro.currentLocale);
-const lang = resolveLocale(Astro.currentLocale);
 
 const groupId = generateElementId("api-code-example");
 const labels = examples.map((ex) => ex.label);
@@ -108,36 +107,11 @@ const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
               ))
             )}
             {ex.instructions && (
-              <div class={cl("api-code-example__instructions")}>
-                {/* TODO: localize once Hugo has i18n keys for this text. */}
-                <h4 class={cl("api-code-example__instructions-heading")}>
-                  Instructions
-                </h4>
-                <p>
-                  First{" "}
-                  <a
-                    href={localizedHref(
-                      lang,
-                      `/api/latest/?code-lang=${ex.language}`,
-                    )}
-                  >
-                    install the library and its dependencies
-                  </a>{" "}
-                  and then save the example to{" "}
-                  <code>{ex.instructions.exampleFile}</code> and run following
-                  commands:
-                </p>
-                {Object.entries(ex.instructions.runCommandByRegion).map(
-                  ([regionKey, command]) => (
-                    <div
-                      data-region={regionKey}
-                      class={cl("api-code-example__code-block")}
-                    >
-                      <CodeBlock content={command} language="bash" />
-                    </div>
-                  ),
-                )}
-              </div>
+              <ApiCodeInstructions
+                language={ex.language}
+                exampleFile={ex.instructions.exampleFile}
+                runCommandByRegion={ex.instructions.runCommandByRegion}
+              />
             )}
           </TabPanel>
         ))}

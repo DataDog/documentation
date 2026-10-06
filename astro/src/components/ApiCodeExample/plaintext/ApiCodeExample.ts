@@ -16,11 +16,11 @@ import {
   bold,
   fence,
   inline,
-  nodesFromMd,
   paragraph,
   tag,
   plaintext,
 } from "@lib/plaintext/helpers";
+import { apiCodeInstructionsNodes } from "@components/ApiCodeInstructions/plaintext/ApiCodeInstructions";
 
 export function apiCodeExampleNode(
   examples: CodeExampleSet[],
@@ -43,23 +43,14 @@ function renderCodeExampleTab(set: CodeExampleSet): MarkdocNode[] {
     contents.push(...renderCodeExampleContent(entry, includeHeading));
   }
   if (set.instructions) {
-    contents.push(...renderInstructions(set.language, set.instructions));
+    contents.push(
+      ...apiCodeInstructionsNodes({
+        language: set.language,
+        ...set.instructions,
+      }),
+    );
   }
   return contents;
-}
-
-function renderInstructions(
-  language: string,
-  instructions: NonNullable<CodeExampleSet["instructions"]>,
-): MarkdocNode[] {
-  const [runCommand = ""] = Object.values(instructions.runCommandByRegion);
-  return [
-    boldParagraph("Instructions"),
-    ...nodesFromMd(
-      `First [install the library and its dependencies](/api/latest/?code-lang=${language}) and then save the example to \`${instructions.exampleFile}\` and run following commands:`,
-    ),
-    fence("bash", runCommand),
-  ];
 }
 
 function renderCodeExampleContent(

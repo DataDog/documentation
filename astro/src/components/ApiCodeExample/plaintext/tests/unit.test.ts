@@ -79,7 +79,7 @@ describe("apiCodeExampleNode", () => {
     expect(out).toContain("**With auth**");
   });
 
-  it("renders run instructions using the first region's command", () => {
+  it("appends run instructions when a set has them", () => {
     const out = render([
       {
         ...examples[1],
@@ -92,13 +92,8 @@ describe("apiCodeExampleNode", () => {
         },
       },
     ]);
-    expect(out).toContain("Instructions");
-    expect(out).toContain(
-      "[install the library and its dependencies](/api/latest/?code-lang=python)",
-    );
-    expect(out).toContain("`example.py`");
+    expect(out).toMatch(/from datadog_api_client[\s\S]*Instructions/);
     expect(out).toContain('DD_SITE="datadoghq.com" python3 "example.py"');
-    expect(out).not.toContain("datadoghq.eu");
   });
 
   it("builds a tabs tag node", () => {

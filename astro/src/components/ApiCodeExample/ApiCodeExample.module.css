@@ -10,10 +10,6 @@
   margin-bottom: var(--space-sm);
 }
 
-.api-code-example__instructions-heading {
-  margin: var(--space-md) 0 var(--space-xs);
-}
-
 .api-code-example__pre {
   background: var(--color-panel-bg);
   border: var(--border-width) solid var(--color-panel-border);

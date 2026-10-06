@@ -1,0 +1,39 @@
+---
+import CodeBlock from "@components/CodeBlock/CodeBlock.astro";
+import styles from "./ApiCodeInstructions.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { localizedHref, resolveLocale } from "@lib/i18n/locale";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  language: string;
+  exampleFile: string;
+  runCommandByRegion: Record<string, string>;
+}
+
+const { language, exampleFile, runCommandByRegion } = Astro.props;
+const lang = resolveLocale(Astro.currentLocale);
+---
+
+<div class={cl("api-code-instructions")}>
+  {/* TODO: add i18n keys for this text to shared/i18n. */}
+  <h4 class={cl("api-code-instructions__heading")}>Instructions</h4>
+  <p>
+    First{" "}
+    <a href={localizedHref(lang, `/api/latest/?code-lang=${language}`)}>
+      install the library and its dependencies
+    </a>{" "}
+    and then save the example to <code>{exampleFile}</code> and run following commands:
+  </p>
+  {
+    Object.entries(runCommandByRegion).map(([regionKey, command]) => (
+      <div
+        data-region={regionKey}
+        class={cl("api-code-instructions__code-block")}
+      >
+        <CodeBlock content={command} language="bash" />
+      </div>
+    ))
+  }
+</div>
