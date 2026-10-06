@@ -31,7 +31,7 @@ Supported providers:
 - Azure OpenAI
 - Amazon Bedrock
 - Vertex AI
-- AI Gateway
+- Custom Provider
 
 ## Test a prompt with arbitrary input
 

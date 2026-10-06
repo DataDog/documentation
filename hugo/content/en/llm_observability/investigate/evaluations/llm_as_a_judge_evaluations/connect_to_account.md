@@ -112,22 +112,21 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 [4]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 {{% /tab %}}
 
-{{% tab "AI Gateway" %}}
-<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to an AI Gateway that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
+{{% tab "Custom Provider" %}}
+<div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you only connect to a custom provider that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Your AI Gateway must be compatible with the [OpenAI API specification][2].
+Your custom provider endpoint must be compatible with the [OpenAI API specification][2].
 
-Connect your AI Gateway to Agent Observability with your base URL, API key, and headers.
+Connect your custom provider to Agent Observability with your base URL, API key, and headers.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
-1. Click the {{< ui >}}Configure{{< /ui >}} tab, then click {{< ui >}}New{{< /ui >}} to create a new gateway.
+1. Select the {{< ui >}}Custom Provider for Agent Observability{{< /ui >}} tile.
+1. Click the {{< ui >}}Configure{{< /ui >}} tab, then click {{< ui >}}New{{< /ui >}} to create a provider.
 1. Follow the instructions on the tile.
-   - Provide a name for your gateway.
+   - Provide a name for your provider.
    - Select your provider.
    - Provide your base URL.
    - Provide your API key and optionally any headers.
-
-{{< img src="llm_observability/configuration/ai-gateway-tile-3.png" alt="The AI Gateway configuration tile in Agent Observability. Lists instructions for configuring an ai gateway" style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://platform.openai.com/docs/api-reference/introduction
