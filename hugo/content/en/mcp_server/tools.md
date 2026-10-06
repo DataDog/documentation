@@ -1744,7 +1744,7 @@ Disables all logpoints in a [Live Debugger][78] session. The session stays activ
 
 ## Logs
 
-Tools for searching and analyzing [logs][90]. These tools are part of the default `core` toolset. To manage log pipelines, indexes, and archives, see [Logs Configuration](#logs-configuration).
+Tools for searching and analyzing [logs][90]. These tools are part of the default `core` toolset. To manage log pipelines, indexes, and archives, see the [Logs Configuration](#logs-configuration) section.
 
 ### `analyze_datadog_logs`
 *Toolset: **core***\
@@ -1766,7 +1766,11 @@ Searches logs with filters (time, query, service, host, storage tier, and so on)
 
 ## Logs Configuration
 
-Tools for managing the configuration of [log pipelines][87], [indexes][88], and [archives][89]. Pipelines parse and enrich incoming logs, indexes control indexing and retention, and archives route logs to your cloud storage.
+Tools for managing the configuration of [log pipelines][87], [indexes][88], and [archives][89]:
+
+- **Pipelines** parse and enrich incoming logs.
+- **Indexes** control indexing and retention.
+- **Archives** route logs to your cloud storage.
 
 Tools that update, delete, or reorder an existing resource return a preview first and apply the change only after you confirm it. Creating a resource does not require confirmation.
 
@@ -1780,14 +1784,14 @@ Lists your organization's [log pipelines][87] in evaluation order. Returns each 
 ### `get_datadog_log_pipeline`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Config`*\
-Retrieves a pipeline's complete configuration, including its ordered processors. Identify the pipeline by its ID.
+Retrieves a pipeline's complete configuration by ID, including its ordered processors.
 
 - Show the configuration and processors for pipeline `<PIPELINE_ID>`.
 
 ### `upsert_datadog_log_pipeline`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Write Pipelines` or `Logs Write Processors`*\
-Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updates preserve fields you omit. Integration-managed, read-only pipelines cannot be updated.
+Creates a pipeline or updates an existing pipeline's configuration. To update a pipeline, provide `pipeline_id`; omit it to create one. Updates preserve fields you omit. When you provide a list field, such as processors or tags, the new list replaces the existing one. Integration-managed, read-only pipelines cannot be updated.
 
 - Create a pipeline for `service:checkout` with a Grok parser for these sample logs.
 
@@ -1822,7 +1826,7 @@ Retrieves an index's complete configuration by name, including its filter query,
 ### `upsert_datadog_log_index`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Modify Indexes`*\
-Creates an index or updates an existing index with the specified name. Updates preserve fields you omit. Creating an index requires a filter query, and the index name cannot be changed after creation.
+Creates or updates an index by name. If an index with that name exists, the tool updates it; otherwise, it creates the index. Updates preserve fields you omit. When you provide a list field, such as exclusion filters or tags, the new list replaces the existing one. Creating an index requires a filter query, and the index name cannot be changed after creation.
 
 - Set the daily limit for the staging index to one million logs.
 
@@ -1843,7 +1847,7 @@ Places an index immediately before or after another index in the evaluation orde
 ### `list_datadog_log_archives`
 *Toolset: **logs-configuration***\
 *Permissions Required: `Logs Read Archives`*\
-Lists your organization's configured [log archives][89]. Returns each archive's ID, name, filter query, state, and destination type.
+Lists your organization's [log archives][89]. Returns each archive's ID, name, filter query, state, and destination type.
 
 - List my log archives and their destination types.
 
