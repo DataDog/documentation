@@ -4,7 +4,7 @@ description: "Start a Bits Investigation from an anomaly on a RUM vital chart, o
 further_reading:
   - link: "/real_user_monitoring/bits_ai/"
     tag: "Documentation"
-    text: "Bits AI in RUM"
+    text: "Bits in RUM"
   - link: "/bits_ai/bits_investigation/investigate_issues/"
     tag: "Documentation"
     text: "Investigate issues with Bits Investigation"

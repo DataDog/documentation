@@ -7,7 +7,7 @@ aliases:
 further_reading:
   - link: "/real_user_monitoring/bits_ai/"
     tag: "Documentation"
-    text: "Bits AI in RUM"
+    text: "Bits in RUM"
   - link: "/real_user_monitoring/application_monitoring/browser/optimizing_performance/"
     tag: "Documentation"
     text: "Optimizing performance"

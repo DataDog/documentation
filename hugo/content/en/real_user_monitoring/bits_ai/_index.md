@@ -21,7 +21,7 @@ Real User Monitoring (RUM) is integrated with [Bits AI][1]. You can start [Bits 
 
 Because these investigations run on Bits Investigation, every investigation you start from RUM is saved in the [Bits Investigations list][4], can be shared with your team, takes your past feedback into account, and can be sent to [Bits Code][5] to generate a fix.
 
-You can use Bits AI in RUM in three ways:
+You can use Bits in RUM in three ways:
 
 | Use case | Description | Bits capability |
 |---|---|---|

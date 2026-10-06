@@ -6,7 +6,7 @@ aliases:
 further_reading:
   - link: "/real_user_monitoring/bits_ai/"
     tag: "Documentation"
-    text: "Bits AI in RUM"
+    text: "Bits in RUM"
   - link: "/bits_ai/bits_chat/"
     tag: "Documentation"
     text: "Bits Chat"
