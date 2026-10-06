@@ -20,9 +20,19 @@ further_reading:
 
 Database Monitoring provides deep visibility into your Postgres databases by exposing query metrics, query samples, explain plans, database states, failovers, and events.
 
-## Quick Install
+<div class="alert alert-info">
 
-<div class="alert alert-info">RDS Quick Install is recommended for smaller environments (for example, up to 20 database hosts) or if you are new to Database Monitoring. For large fleets, or to manage the Agent with your own automation, use the <a href="#standard-installation">standard installation</a>.</div>
+If you're configuring Database Monitoring for a lightweight RDS instance, or you're new to the product, start with Quick Install. It works best when:
+
+- You're monitoring a small number of RDS for PostgreSQL instances
+- You want Datadog to deploy and maintain the Agent for you
+- You want monitoring that works out of the box, without custom settings
+
+Otherwise, skip to [Standard installation](#standard-installation).
+
+</div>
+
+## Quick Install
 
 With Quick Install, you specify a few options and Datadog generates a CloudFormation template. The template configures your instance for monitoring and uses Amazon ECS to deploy the Agent with the recommended Database Monitoring configuration.
 

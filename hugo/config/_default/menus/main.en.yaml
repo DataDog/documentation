@@ -5097,7 +5097,7 @@ menu:
       weight: 1
     - name: Agent Integration Overhead
       url: database_monitoring/agent_integration_overhead
-      parent: dbm
+      parent: dbm_setup
       identifier: dbm_agent_integration_overhead
       weight: 2
     - name: Setup Architectures
@@ -5109,7 +5109,7 @@ menu:
       url: database_monitoring/setup_postgres/
       parent: dbm_setup
       identifier: dbm_setup_postgres
-      weight: 2
+      weight: 3
     - name: Self-hosted
       url: database_monitoring/setup_postgres/selfhosted
       parent: dbm_setup_postgres
@@ -5169,7 +5169,7 @@ menu:
       url: database_monitoring/setup_mysql/
       parent: dbm_setup
       identifier: dbm_setup_mysql
-      weight: 3
+      weight: 4
     - name: Self-hosted
       url: database_monitoring/setup_mysql/selfhosted
       parent: dbm_setup_mysql
@@ -5209,7 +5209,7 @@ menu:
       url: database_monitoring/setup_mariadb/
       parent: dbm_setup
       identifier: dbm_setup_mariadb
-      weight: 4
+      weight: 5
     - name: Self-hosted
       url: database_monitoring/setup_mariadb/selfhosted
       parent: dbm_setup_mariadb
@@ -5234,7 +5234,7 @@ menu:
       url: database_monitoring/setup_sql_server/
       parent: dbm_setup
       identifier: dbm_setup_sql_server
-      weight: 5
+      weight: 6
     - name: Self-hosted
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
@@ -5264,7 +5264,7 @@ menu:
       url: database_monitoring/setup_oracle/
       parent: dbm_setup
       identifier: dbm_setup_oracle
-      weight: 6
+      weight: 7
     - name: Self-hosted
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
@@ -5299,7 +5299,7 @@ menu:
       url: database_monitoring/setup_mongodb/
       parent: dbm_setup
       identifier: dbm_setup_mongodb
-      weight: 7
+      weight: 8
     - name: Self-hosted
       url: database_monitoring/setup_mongodb/selfhosted
       parent: dbm_setup_mongodb
@@ -5319,7 +5319,7 @@ menu:
       url: database_monitoring/setup_clickhouse/
       parent: dbm_setup
       identifier: dbm_setup_clickhouse
-      weight: 8
+      weight: 9
     - name: Self-hosted
       url: database_monitoring/setup_clickhouse/selfhosted
       parent: dbm_setup_clickhouse
@@ -5334,12 +5334,12 @@ menu:
       url: database_monitoring/setup_agent_terraform/
       parent: dbm_setup
       identifier: dbm_setup_agent_terraform
-      weight: 10
+      weight: 11
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm_setup
       identifier: dbm_setup_documentdb
-      weight: 9
+      weight: 10
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/amazon_documentdb
       parent: dbm_setup_documentdb

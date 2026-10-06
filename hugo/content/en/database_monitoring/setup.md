@@ -7,6 +7,7 @@ To set up Database Monitoring, review the supported setup architectures, then fo
 
 {{< whatsnext desc="Plan your setup:" >}}
     {{< nextlink href="database_monitoring/architecture" >}}<strong>Setup Architectures</strong>: Learn how the Agent connects to self-hosted and managed databases.{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/agent_integration_overhead" >}}<strong>Agent Integration Overhead</strong>: Learn about the overhead of integrating the Datadog Agent with your database.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Set up your database:" >}}
