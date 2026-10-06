@@ -80,6 +80,7 @@ Bits AI can run investigations on the following Security log sources:\*
 - JumpCloud
 - Kubernetes
 - Microsoft 365
+- Microsoft Defender for EDR
 - Microsoft Entra ID
 - Okta
 - Salesforce
