@@ -1,6 +1,6 @@
 ---
 title: Embed Apps
-description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, and the Service Catalog side panel.
+description: Embed a published Datadog app in dashboards, notebooks, the Internal Developer Portal homepage, and the Catalog side panel.
 further_reading:
 - link: "/actions/datadog_apps/"
   tag: "Documentation"
@@ -28,7 +28,7 @@ For information about building, uploading, and publishing an app, see [Datadog A
 
 ## Embed an app
 
-<div class="alert alert-info">You can only embed an app through Datadog. AI coding agents cannot embed apps.</div>
+<div class="alert alert-info">You can embed an app only in the Datadog UI. AI agents cannot embed apps.</div>
 
 After you upload and publish an app, you can add it to a supported Datadog surface without changing the app.
 
@@ -61,9 +61,9 @@ You can embed an app from the app itself, or from the surface where you want it 
 The **Apps** cell uses the notebook's time range. To read the time range in the app, use the `datadogNotebook` input.
 
 {{% /tab %}}
-{{% tab "Service Catalog" %}}
+{{% tab "Catalog" %}}
 
-1. Navigate to [Service Catalog][1] and select a service.
+1. Navigate to [Catalog][1] and select a service.
 1. In the service's side panel, select the **+ Add App** tab.
 1. Choose the app from the dropdown. To limit the list to apps you own, enable **My Apps Only**.
 
@@ -72,7 +72,7 @@ The **Apps** cell uses the notebook's time range. To read the time range in the 
 {{% /tab %}}
 {{< /tabs >}}
 
-After you embed the app, [verify it](#verify-the-app). Optionally, [configure the app](#customize-the-embedded-experience) to respond to its host's context, theme, or shared-link state. An embedded app displays the most recently published version, so publish your changes before embedding.
+After you embed the app, optionally [configure the app](#customize-the-embedded-experience) to respond to its host's context, theme, or shared-link state. Then [verify it](#verify-the-app). An embedded app displays the most recently published version, so publish your changes before embedding.
 
 ## Customize the embedded experience
 
@@ -100,7 +100,7 @@ The standard Datadog Apps scaffold includes this provider by default. Every `@da
 
 ### Read host inputs
 
-Host inputs are values and functions supplied by the Datadog product containing the app. For example, a dashboard can provide its current time range and template variables, while the Service Catalog side panel can provide the service it is displaying.
+Host inputs are values and functions supplied by the Datadog product containing the app. For example, a dashboard can provide its current time range and template variables, while the Catalog side panel can provide the service it is displaying.
 
 Host values update automatically when the surrounding product context changes.
 
@@ -135,7 +135,7 @@ function PanelHeader() {
     case 'pending':
       return <Spinner />;
     case 'unavailable':
-      return <p>Open this app from a Service Catalog side panel.</p>;
+      return <p>Open this app from a Catalog side panel.</p>;
     case 'failed':
       return <p>{panel.error.message}</p>;
     case 'ready':
@@ -170,7 +170,7 @@ When the status is `ready`, `fields` provides:
 
 The value updates when the user changes the Datadog theme.
 
-If the app uses Druids, you can use `DruidsEnvironmentWithThemeInput` to apply the host theme automatically:
+If the app uses [DRUIDS][1], you can use `DruidsEnvironmentWithThemeInput` to apply the host theme automatically:
 
 ```typescript
 import { DruidsEnvironmentWithThemeInput } from '@datadog/apps-frontend/druids/react';
@@ -181,6 +181,8 @@ import { DruidsEnvironmentWithThemeInput } from '@datadog/apps-frontend/druids/r
   </DruidsEnvironmentWithThemeInput>
 </DatadogAppProvider>
 ```
+
+[1]: /actions/datadog_apps/#ui-components
 
 {{% /tab %}}
 {{% tab "Dashboard" %}}
@@ -272,9 +274,9 @@ const newPosition = await idp.fields.move({ delta: 1 });
 ```
 
 {{% /tab %}}
-{{% tab "Service Catalog side panel" %}}
+{{% tab "Catalog side panel" %}}
 
-Use `datadogServicePanel` to identify the service displayed in the Service Catalog side panel.
+Use `datadogServicePanel` to identify the service displayed in the Catalog side panel.
 
 ```typescript
 const servicePanel = useDatadogAppInput(datadogServicePanel);

@@ -93,7 +93,7 @@ The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and 
 - `Upload and publish this Datadog App.`
 - `Set up CI/CD for this Datadog App.`
 - `Troubleshoot this Datadog App authentication error.`
-- `Add a table component to this Datadog App using Druids.`
+- `Add a table component to this Datadog App using DRUIDS.`
 
 ## Develop your app locally
 
@@ -175,7 +175,7 @@ export default App;
 
 ### UI components
 
-Use [`@datadog/druids`][23] to build your app's UI with the same React components used across Datadog products, such as tables, buttons, charts, and forms. Building with Druids helps your app match the look and feel of the rest of Datadog.
+Use [`@datadog/druids`][23] to build your app's UI with the same React components used across Datadog products, such as tables, buttons, charts, and forms. Building with DRUIDS helps your app match the look and feel of the rest of Datadog.
 
 Install the library:
 ```shell
@@ -187,10 +187,10 @@ Import components the same way you import any React component:
 import { Button } from '@datadog/druids';
 ```
 
-Druids requires React 18 or 19 as a peer dependency. For the set of available components, see the [package on npm][23].
+DRUIDS requires React 18 or 19 as a peer dependency. For the set of available components, see the [package on npm][23].
 
 <div class="alert alert-info">
-Druids components are for use in Datadog Apps and App Builder only. See the package's license for details.
+DRUIDS components are for use in Datadog Apps and App Builder only. See the package's license for details.
 </div>
 
 ## Build and upload your app
