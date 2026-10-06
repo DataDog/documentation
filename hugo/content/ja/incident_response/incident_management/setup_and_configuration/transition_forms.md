@@ -20,10 +20,10 @@ title: トランジションフォーム
 1. **Incident Types** で、編集するインシデントタイプを展開します。
 1. **Transition Forms** タブをクリックします。
 1. 設定するステータスを選択してください。
-1. フォームに表示するフィールドを選択してください。[プロパティフィールド][3]と[対応者タイプ][4]を追加できます。すべてのフィールドを必須または任意として指定できます。
+1. フォームに表示するフィールドを選択してください。[プロパティフィールド][3]と[対応者ロール][4]を追加できます。すべてのフィールドを必須または任意として指定できます。
 1. **Save** をクリックします。
 
 [1]: /ja/account_management/rbac/permissions/#case-and-incident-management
 [2]: https://app.datadoghq.com/incidents/settings
 [3]: /ja/incident_response/incident_management/setup_and_configuration/property_fields
-[4]: /ja/incident_response/incident_management/setup_and_configuration/responder_types
+[4]: /ja/incident_response/incident_management/setup_and_configuration/responder_roles
