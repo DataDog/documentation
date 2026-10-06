@@ -221,7 +221,7 @@ If a vendor or device type is supported, but the specific model isn't, you can:
   snmpwalk -v 2c -c [community string] [ip address] 1.3.6.1.2.1.1.2
   ```
 
-  **Note**: If you do not know the `sysobjectid` of your device, run an `snmpwalk` on a host that can reach your device. Use the output to list the profile to match against
+  **Note**: If you do not know your device’s `sysobjectid`, run an [SNMP walk](#collect-device-data) from a host that can reach the device. Find the value returned for OID `1.3.6.1.2.1.1.2.0` and add it to the profile’s `sysobjectid` list.
 
 
 ### Collect device data
