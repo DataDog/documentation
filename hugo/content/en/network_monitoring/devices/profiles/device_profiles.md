@@ -78,7 +78,7 @@ The recommended entry point for the SNMP Profile Manager is from an SNMP device 
 
 5. To open the profile editor and manage which metrics are collected, click {{< ui >}}Configure metrics{{< /ui >}} in the left sidebar.
 
-   {{< img src="/network_device_monitoring/profile_onboarding/ndm_metrics_tab.png" alt="The NDM device Metrics tab with Configure metrics highlighted in the left sidebar" style="width:90%;">}}
+   {{< img src="/network_device_monitoring/profile_onboarding/ndm_configure_metrics_2026_10.png" alt="The NDM device Metrics tab with Configure metrics highlighted in the left sidebar" style="width:90%;">}}
 
    This opens the profile editor in the {{< ui >}}Metrics{{< /ui >}} tab, containing the list of all available metrics for the devices covered by the profile, organized by name, MIB, OID, category, and compatibility. This is the primary view for controlling what data Datadog collects from your devices. You can filter the metric list by category or use the search bar to find specific metrics by name or OID.
 
