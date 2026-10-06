@@ -77,7 +77,7 @@ To enable CUD metadata export:
 2. Enable the [Committed Use Discounts Export][2]. Select a project and enter a new linked dataset name. Google Cloud creates the linked dataset.
 3. Select the {{< ui >}}Location Type{{< /ui >}} and the region or multi-region that matches your detailed usage cost export dataset. You cannot change the location after creating the dataset.
 4. Click {{< ui >}}Save{{< /ui >}}.
-5. Record the export {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}Linked Dataset Name{{< /ui >}}. You enter these as the {{< ui >}}CUD Metadata Project ID{{< /ui >}} and {{< ui >}}CUD Metadata Dataset ID{{< /ui >}} when you [configure Cloud Cost](#configure-cloud-cost).
+5. Record the export {{< ui >}}Project ID{{< /ui >}} and {{< ui >}}Linked Dataset Name{{< /ui >}}. Enter these as the {{< ui >}}CUD Metadata Project ID{{< /ui >}} and {{< ui >}}CUD Metadata Dataset ID{{< /ui >}} when you [configure Cloud Cost](#configure-cloud-cost).
 
 {{< img src="cloud_cost/commitments/cud_metadata_export.png" alt="Google Cloud CUD export configuration with project, linked dataset, location type, and multi-region fields highlighted." >}}
 
@@ -115,7 +115,7 @@ In the CCM Terraform setup UI, follow the instructions in the **Apply Terraform 
 
 {{% tab "Manual" %}}
 
-{{< img src="cloud_cost/setup/gcp_manual_setup.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
+{{< img src="cloud_cost/setup/gcp_manual_setup_cud_metadata.png" alt="Cloud Cost Management setup form in manual mode" style="width:100%" >}}
 
 #### Configure export project access
 [Add the service account as a principal on the export dataset project resource][7]:
