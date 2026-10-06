@@ -23,6 +23,7 @@ If your CI provider is not supported, you can send custom pipelines through HTTP
 
 | Pipeline Visibility | Platform | Definition |
 |---|---|---|
+| [Job log collection][18] | Job log collection | Send job log lines to Datadog and view them in the Logs tab for the associated job. |
 | [Running pipelines][15] | Running pipelines | View pipeline executions that are running. |
 | [Custom tags][5] [and measures at runtime][6] | Custom tags and measures at runtime | Configure [custom tags and measures][7] at runtime. |
 | [Manual steps][8] | Manual steps | View manually triggered pipelines. |
@@ -112,6 +113,61 @@ Job events can also be sent while a job is still running by setting the `status`
 
 A running job event does not require an `end` time. The `end` time is set when the final job event is sent.
 
+## Collect job logs
+
+Send log lines for a custom CI job to the [CI job logs intake API][19]. Use identifiers that match the pipeline and
+job events you send through the [CI Visibility Pipelines API][1]. Each log object requires a non-empty `message` and
+these fields:
+
+- `pipeline_unique_id`: Must match the pipeline event's `resource.unique_id` and the job event's
+  `resource.pipeline_unique_id`.
+- `job_id`: Must match the job event's `resource.id`.
+
+If provided, `provider_name` must match the pipeline event's `provider_name`. Datadog uses `custom` when the field is
+omitted from both the pipeline event and the log lines.
+
+You can stream log lines while the job runs or send them as a batch when it finishes. We recommend sending every line
+before submitting the completed job event. After you submit that event, Datadog closes the job log after 20 seconds
+without a new line. Lines received after it closes may not appear in the job's Logs tab.
+
+The following request sends two log lines for a job:
+
+{{< code-block lang="bash" >}}
+curl -X POST "https://http-intake.logs.{{< region-param key="dd_site" >}}/api/v2/cilogs" \
+-H "Content-Type: application/json" \
+-H "DD-API-KEY: <YOUR_API_KEY>" \
+-d @- << EOF
+[
+  {
+    "message": "Running go test ./...",
+    "status": "info",
+    "pipeline_unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
+    "job_id": "job-456",
+    "provider_name": "<YOUR_CI_PROVIDER>",
+    "line_number": 1,
+    "section_name": "tests",
+    "stream": "stdout"
+  },
+  {
+    "message": "Tests passed",
+    "status": "info",
+    "pipeline_unique_id": "b3262537-a573-44eb-b777-4c0f37912b05",
+    "job_id": "job-456",
+    "provider_name": "<YOUR_CI_PROVIDER>",
+    "line_number": 2,
+    "section_name": "tests",
+    "stream": "stdout"
+  }
+]
+EOF
+{{< /code-block >}}
+
+A request can contain up to 1,000 log lines and an uncompressed body of up to 5.1 MiB. For compression, retry
+guidance, optional attributes, and per-job limits, see the [Send CI job logs API reference][19].
+
+Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in
+[Log Management][20].
+
 ## Visualize pipeline data in Datadog
 
 The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines are accepted for processing.
@@ -139,3 +195,6 @@ The **CI Pipeline List** page shows data for only the default branch of each rep
 [15]: /glossary/#running-pipeline
 [16]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
 [17]: /glossary/#pipeline-execution-time
+[18]: #collect-job-logs
+[19]: /api/latest/ci-visibility-logs/send-ci-job-logs/
+[20]: /logs/
