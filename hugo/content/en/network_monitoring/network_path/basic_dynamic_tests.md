@@ -26,7 +26,7 @@ On each Agent with basic dynamic tests enabled:
 2. Five minutes after the Agent starts, and then every hour, the Agent selects up to five paths with the most traffic.
 3. The Agent runs one Network Path test on each selected path.
 
-Basic dynamic tests provide representative coverage of your busiest paths, but don't guarantee that a specific connection is tested. To test every eligible path that CNM observes, use [standard dynamic tests][3].
+Basic dynamic tests provide representative coverage of your busiest paths, but don't guarantee that a specific connection is tested. For broader coverage of the paths that CNM observes, use [standard dynamic tests][3].
 
 ## Prerequisites
 
@@ -77,7 +77,7 @@ Basic dynamic tests provide representative coverage of your busiest paths, but d
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Agent `v7.84+` and Helm chart `v3.124.0+` are required.
+Agent `v7.84+` and Helm chart `v3.109.1+` are required.
 
 Add the following to your `values.yaml` file, then upgrade your Helm release:
 
@@ -115,7 +115,7 @@ Each selected path is tested once. A path that remains among the highest-traffic
 
 |                    | Basic dynamic tests                                       | Standard dynamic tests                          |
 |--------------------|-----------------------------------------------------------|-------------------------------------------------|
-| **Coverage**       | Up to five of the highest-traffic paths per Agent         | Every eligible path that CNM observes           |
+| **Coverage**       | Up to five of the highest-traffic paths per Agent         | All eligible paths that CNM observes, up to `pathtest_contexts_limit` (default: 1000) |
 | **Test frequency** | Every hour, for the selected paths                        | Every `pathtest_interval` (default: 30 minutes) |
 | **Setting**        | `network_path.connections_monitoring.basic_tests_enabled` | `network_path.connections_monitoring.enabled`   |
 | **Best for**       | Trying Network Path on your busiest connections           | Broad, predictable coverage                     |
