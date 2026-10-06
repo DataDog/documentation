@@ -33,6 +33,7 @@ cascade:
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Widgets, Interactivity & Embedding" >}}
+  {{< nextlink href="/dashboards/guide/health_status_with_query_value_and_wildcard/" >}}Build an Accessible Health-Status Tile{{< /nextlink >}}
   {{< nextlink href="dashboards/guide/getting_started_with_wildcard_widget" >}}Getting started with the Wildcard Widget{{< /nextlink >}}
   {{< nextlink href="/dashboards/guide/using_vega_lite_in_wildcard_widgets/" >}}Using Vega-Lite with Wildcard Widgets in Datadog{{< /nextlink >}}
   {{< nextlink href="/dashboards/guide/wildcard_examples" >}}Wildcard Widget Examples{{< /nextlink >}}
