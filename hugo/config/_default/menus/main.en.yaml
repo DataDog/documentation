@@ -8810,11 +8810,6 @@ menu:
       identifier: ai_guard
       parent: security_platform_heading
       weight: 60000
-    - name: Get Started with AI Guard
-      url: /security/ai_guard/onboarding/
-      identifier: ai_guard_onboarding
-      parent: ai_guard
-      weight: 1
     - name: Set Up AI Guard
       url: /security/ai_guard/setup/
       identifier: ai_guard_setup

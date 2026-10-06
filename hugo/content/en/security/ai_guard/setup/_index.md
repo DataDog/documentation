@@ -1,12 +1,11 @@
 ---
 title: Set Up AI Guard
+aliases:
+- /security/ai_guard/onboarding/
 further_reading:
 - link: /security/ai_guard/
   tag: Documentation
   text: AI Guard
-- link: /security/ai_guard/onboarding/
-  tag: Documentation
-  text: Get Started with AI Guard
 ---
 
 {{< site-region region="gov" >}}<div class="alert alert-danger">AI Guard isn't available in the {{< region-param key="dd_site_name" >}} site.</div>
