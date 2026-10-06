@@ -116,7 +116,7 @@ OpenTelemetry and diagnostic logs capture different data, so you can use them to
 
 ### Requirements
 
-- A Logic Apps Standard resource that uses the Workflow Service Plan, App Service Environment v3, or Hybrid hosting option. Logic Apps Consumption is not supported.
+- A Logic Apps Standard resource that uses the Workflow Service Plan, App Service Environment v3, or Hybrid hosting option. OpenTelemetry export is available only for Standard logic apps.
 - Workflows that start with an **HTTP**, **Service Bus**, or **Event Hubs** trigger. Workflows with other triggers do not emit OpenTelemetry traces.
 
 Logic Apps does not export metrics over OpenTelemetry. For metrics, see [Azure Logic Apps metrics][9].
@@ -142,21 +142,27 @@ Deploy the updated `host.json` with your workflows. To edit the file on a deploy
 
 ### 2. Configure the OTLP exporter
 
-Add the following app settings to your Logic App. Before you run the command, set the `DD_API_KEY` environment variable in your shell to your [Datadog API key][11].
+1. In your shell, set the `DD_API_KEY` environment variable to your [Datadog API key][11]:
 
-```shell
-az logicapp config appsettings set \
-  --name <LOGIC_APP_NAME> \
-  --resource-group <RESOURCE_GROUP> \
-  --settings \
-    "OTEL_SERVICE_NAME=<SERVICE_NAME>" \
-    "OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=<ENV>,service.version=<VERSION>" \
-    "OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf" \
-    "OTEL_EXPORTER_OTLP_ENDPOINT=https://otlp.{{< region-param key="dd_site" >}}" \
-    "OTEL_EXPORTER_OTLP_HEADERS=dd-api-key=${DD_API_KEY}" \
-    "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" >}}" \
-    "OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
-```
+   ```shell
+   export DD_API_KEY=<DATADOG_API_KEY>
+   ```
+
+2. Add the following app settings to your Logic App:
+
+   ```shell
+   az logicapp config appsettings set \
+     --name <LOGIC_APP_NAME> \
+     --resource-group <RESOURCE_GROUP> \
+     --settings \
+       "OTEL_SERVICE_NAME=<SERVICE_NAME>" \
+       "OTEL_RESOURCE_ATTRIBUTES=deployment.environment.name=<ENV>,service.version=<VERSION>" \
+       "OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf" \
+       "OTEL_EXPORTER_OTLP_ENDPOINT=https://otlp.{{< region-param key="dd_site" >}}" \
+       "OTEL_EXPORTER_OTLP_HEADERS=dd-api-key=${DD_API_KEY}" \
+       "OTEL_EXPORTER_OTLP_TRACES_ENDPOINT={{< region-param key="otlp_trace_endpoint" >}}" \
+       "OTEL_EXPORTER_OTLP_TRACES_HEADERS=dd-api-key=${DD_API_KEY},dd-otlp-source=serverless,compute_stats=true"
+   ```
 
 | App setting | Description |
 |---|---|
