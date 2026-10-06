@@ -88,6 +88,17 @@ The Helm chart does not provision storage for you. Before you enable persistence
 
 To use a specific StorageClass, set `persistence.storageClassName` in the Helm chart's `values.yaml` file.
 
+#### Size the disk buffer
+
+To size the disk buffer, decide how long Workers need to retain events if a destination is unavailable. Then divide the expected backlog across the minimum number of Workers that remain running:
+
+1. **Total backlog**: `daily ingress × outage duration ÷ 24 hours`
+1. **Buffer per Worker**: `total backlog ÷ minimum number of Workers`
+
+For example, with 50 TB/day of ingress, 25 Workers, and a one-hour outage, the total backlog is about 2.08 TB, or about 83 GB per Worker. Rounding up to 100 GB per Worker leaves capacity for a longer outage or a higher ingress rate.
+
+Set the destination's buffer size to the per-Worker value. Then set `persistence.size` in the Helm chart larger than the buffer size to leave headroom. For example, use `120Gi` for a 100 GB buffer.
+
 #### Buffered data when a pod or node is replaced
 
 Whether buffered events persist when a Worker pod is rescheduled or a node is recycled depends on your StorageClass:
@@ -95,9 +106,37 @@ Whether buffered events persist when a Worker pod is rescheduled or a node is re
 - **Network-backed storage** (for example, Amazon EBS, Google Compute Engine Persistent Disk, or Azure Disk): The persistent volume generally persists when a node is removed. When Kubernetes reschedules the Worker pod, the volume reattaches to the new pod and the buffered events are retained.
 - **Node-local storage** (for example, local volumes): The persistent volume is tied to the node. If the node is removed, the buffered events on that volume are lost.
 
+#### Scaling and stranded persistent volumes
+
+Each Worker pod in the StatefulSet has an [ordinal index][9], such as `opw-observability-pipelines-worker-0`, `opw-observability-pipelines-worker-1`, and `opw-observability-pipelines-worker-2`. Each pod has its own PersistentVolumeClaim, and Kubernetes always reattaches a PersistentVolumeClaim to the pod with the same ordinal.
+
+- **Scale up**: Kubernetes creates pods with the next ordinals and a PersistentVolumeClaim for each new pod.
+- **Scale down**: Kubernetes removes the highest-ordinal pods. By default, their PersistentVolumeClaims and any events buffered on them are retained.
+
+Events that remain on a removed pod's persistent volume are not sent until the StatefulSet scales back up and creates a pod with that ordinal. If the StatefulSet never scales back up to that ordinal, those events can remain on the volume indefinitely. For example, this can happen after a one-time spike in log volume. To reduce the chance of stranded events, give Workers enough time to [drain their buffers before shutdown](#drain-buffers-before-shutdown).
+
 #### PersistentVolumeClaim retention
 
-By default, Kubernetes retains a StatefulSet's PersistentVolumeClaims when its pods scale down or the StatefulSet is deleted. To change this behavior, set `persistence.retentionPolicy` in the Helm chart. For example, `whenScaled: Delete` deletes a replica's persistent volume, and any events buffered on it, when that replica scales down. This setting does not affect what happens to a persistent volume when a node is removed. See [PersistentVolumeClaim retention][7] for more information.
+By default, Kubernetes retains a StatefulSet's PersistentVolumeClaims when its pods scale down or the StatefulSet is deleted. To change this behavior, set `persistence.retentionPolicy` in the Helm chart. For example, `whenScaled: Delete` deletes a replica's persistent volume, and any events buffered on it, when that replica scales down. With `whenScaled: Delete`, events are not stranded on a removed pod's volume, but they are lost. This setting does not affect what happens to a persistent volume when a node is removed. See [PersistentVolumeClaim retention][7] for more information.
+
+#### Drain buffers before shutdown
+
+When a Worker pod is scaled down or replaced during a rollout, the Worker stops accepting new events and sends its buffered events to the destination. If the Worker exits before its buffer is empty, the remaining events stay on its persistent volume. See [Scaling and stranded persistent volumes](#scaling-and-stranded-persistent-volumes) for more information.
+
+The Helm chart's `terminationGracePeriodSeconds` setting (default: `70`) controls how long Kubernetes waits before it terminates the pod. The Helm chart also uses this value to set the Worker's graceful shutdown limit (`DD_OP_GRACEFUL_SHUTDOWN_LIMIT_SECS`) to `terminationGracePeriodSeconds` minus 10 seconds.
+
+**Note**: Worker versions older than 2.19.0 always use a 60-second graceful shutdown limit.
+
+To estimate the termination grace period your Workers need, use the drain throughput you measure in your environment:
+
+- **Drain time**: `buffer size (MB) ÷ drain throughput (MB/s)`
+- **Termination grace period**: `drain time × safety factor`
+
+For example, a Worker draining a 100 GB buffer at 120 MB/s takes about 833 seconds. With a safety factor of 1.2, set `terminationGracePeriodSeconds` to about `1000`:
+
+```yaml
+terminationGracePeriodSeconds: 1000
+```
 
 See [Persistence and pod scheduling][8] for recommended `podManagementPolicy` settings when you use persistent volumes.
 
@@ -139,3 +178,4 @@ Use these metrics to analyze buffer performance. All metrics are emitted on a on
 [6]: https://kubernetes-csi.github.io/docs/drivers.html
 [7]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
 [8]: /observability_pipelines/configuration/install_the_worker/?platform=kubernetes#persistence-and-pod-scheduling
+[9]: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#ordinal-index
