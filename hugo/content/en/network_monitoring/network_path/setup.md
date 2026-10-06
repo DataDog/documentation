@@ -25,12 +25,13 @@ Setting up Network Path involves configuring your environment to monitor and tra
 
 <div class="alert alert-info">This page covers Network Path setup for Agent-based configuration in Network Monitoring. To create Network Path tests in Synthetic Monitoring, see <a href="/synthetics/network_path_tests/">Network Path Testing in Synthetic Monitoring</a>.</div>
 
-Datadog provides three Agent-based collection methods. You can use one method on its own or combine multiple methods:
+Datadog provides four Agent-based collection methods. You can use one method on its own or combine multiple methods:
 
 | Method | When to use |
 |--------|-------------|
 | **[Scheduled&nbsp;tests](#scheduled-tests)** | Monitor specific source-destination pairs that you define in the Agent configuration. Best for tracking a known set of endpoints, such as critical APIs or partner services. |
-| **[Dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
+| **[Standard&nbsp;dynamic&nbsp;tests](#dynamic-tests)** | Automatically discover and monitor paths based on traffic observed by [Cloud Network Monitoring][1]. Best for broad visibility without manually listing every destination. |
+| **[Basic&nbsp;dynamic&nbsp;tests][7]** | Automatically test up to five of the highest-traffic paths per Agent observed by [Cloud Network Monitoring][1], at no additional cost. Best for trying Network Path on your busiest connections. |
 | **[Dynamic&nbsp;Tests&nbsp;for&nbsp;NetFlow](#dynamic-tests-for-netflow-experimental)** | Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][6]. Best for adding hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations. |
 
 ### Scheduled tests
@@ -303,11 +304,13 @@ To increase the number of workers, add the following configuration to your `data
 check_runners: <NUMBER_OF_WORKERS>
 ```
 
-### Dynamic tests
+### Standard dynamic tests {#dynamic-tests}
 
 **Prerequisites**: [CNM][1] must be enabled.
 
-Configure dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic, eliminating the need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
+Configure standard dynamic tests to allow the Agent to automatically discover and monitor network paths based on actual network traffic. You don't need to manually configure individual endpoints. See [filter syntax](#filter-syntax) to include/exclude domain or IPs.
+
+To test only the highest-traffic paths from each Agent at no additional cost, use [basic dynamic tests][7] instead.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -642,7 +645,7 @@ Configure filters to include or exclude domains and IPs, allowing you to:
 - Focus on external traffic patterns
 - Exclude known infrastructure ranges that don't require monitoring
 
-The same `network_path.collector.filters` list applies to dynamic tests and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
+The same `network_path.collector.filters` list applies to standard dynamic tests, basic dynamic tests, and Dynamic Tests for NetFlow. For Dynamic Tests for NetFlow, use `match_ip` filters because Dynamic Tests for NetFlow target observed destination IP addresses.
 
 For Helm configuration, add the same filter list to `datadog.networkPath.collector.filters` in `values.yaml`.
 
@@ -732,7 +735,8 @@ If no data appears in the [Network Path][4] UI, the feature may not be fully ena
 2. At least one Network Path feature must be active, such as:
 
    - [Scheduled tests](#scheduled-tests) configured through the `conf.d/network_path.d` file.
-   - [Dynamic tests](#dynamic-tests) configured by enabling both `network_path.connections_monitoring.enabled` and [Cloud Network Monitoring][1].
+   - [Standard dynamic tests](#dynamic-tests) configured by enabling both `network_path.connections_monitoring.enabled` and [Cloud Network Monitoring][1].
+   - [Basic dynamic tests][7] configured by enabling both `network_path.connections_monitoring.basic_tests_enabled` and [Cloud Network Monitoring][1].
    - [Dynamic Tests for NetFlow](#dynamic-tests-for-netflow-experimental) configured by enabling `network_path.netflow_monitoring.enabled` and [NetFlow Monitoring][6].
 
 ### No Dynamic Tests for NetFlow data in the UI
@@ -771,4 +775,5 @@ If you encounter an error like the following:
 [4]: https://app.datadoghq.com/network/path
 [5]: https://github.com/DataDog/datadog-agent/blob/main/cmd/agent/dist/conf.d/network_path.d/conf.yaml.example
 [6]: /network_monitoring/netflow/
+[7]: /network_monitoring/network_path/basic_dynamic_tests/
 [15]: /synthetics/network_path_tests/

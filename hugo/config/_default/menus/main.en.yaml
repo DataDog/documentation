@@ -4150,6 +4150,11 @@ menu:
       parent: network_path
       identifier: network_path_setup
       weight: 502
+    - name: Basic Dynamic Tests
+      url: network_monitoring/network_path/basic_dynamic_tests/
+      parent: network_path_setup
+      identifier: network_path_basic_dynamic_tests
+      weight: 50201
     - name: List View
       url: network_monitoring/network_path/list_view/
       parent: network_path

@@ -11,6 +11,8 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 | Concept                                 | Description                                                                                                                                                                                      |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Network Path][6]**                        | Network Path provides hop-by-hop visibility into the route between a source and a destination, so you can identify where latency, packet loss, or routing changes occur. |
+| **[Standard dynamic tests][9]**             | A Network Path collection method that automatically tests every eligible path observed by Cloud Network Monitoring. |
+| **[Basic dynamic tests][10]**               | A Network Path collection method that automatically tests up to five of the highest-traffic paths per Agent observed by Cloud Network Monitoring. Included with CNM at no additional cost. |
 | **[Dynamic Tests for NetFlow][8]**          | An experimental Network Path collection method that runs Network Path tests from the Agent host to destination IPs observed in NetFlow traffic. |
 | **Origin**                                  | The source that triggered a Network Path test, such as network traffic, NetFlow, a scheduled Agent configuration, or Synthetic Monitoring. Use the `origin` facet to filter paths by collection method. |
 | **Autonomous System (AS / ASN)**        | A collection of IP routing prefixes managed by a single network operator. Network Path groups hop by Autonomous System (AS) or Autonomous System Number (ASN) to show routing domains along the path.      
@@ -45,3 +47,5 @@ Network Path provides hop-by-hop visibility into the route between a source and 
 [6]: /network_monitoring/network_path/
 [7]: /network_monitoring/network_path/path_view
 [8]: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+[9]: /network_monitoring/network_path/setup/#dynamic-tests
+[10]: /network_monitoring/network_path/basic_dynamic_tests/
