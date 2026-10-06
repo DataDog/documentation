@@ -32,6 +32,8 @@ Fleet Automation supports configuring out-of-the-box integrations that have a `c
 
 Custom checks are **not** supported.
 
+**Note**: Even for supported integrations, some configuration fields cannot be set through Fleet Automation. Fields are excluded for security or stability reasons, such as fields that store secrets or that control the Agent's connection to Datadog. If a deployment includes an excluded field, Fleet Automation marks the configuration `Invalid`, even if the field is valid in the integration's `conf.d` configuration file.
+
 ## Configure integrations across multiple Agents
 
 <div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</div>
