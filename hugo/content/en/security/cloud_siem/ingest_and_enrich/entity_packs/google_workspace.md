@@ -33,8 +33,8 @@ further_reading:
 
 The Google Workspace Identity Entity Pack syncs your Google Workspace user directory into Cloud SIEM. After you connect it, Cloud SIEM uses that directory to:
 
-- Populate the [User Inventory][8] with your Entra ID users.
-- Embed a user pill in signals, so you can know who is behind the activity
+- Populate the [User Inventory][8] with your Google Workspace users.
+- Attach a user pill to signals so you can see who is behind the activity.
 - Score risk for a user across all their accounts in [Entity Risks][1].
 
 
@@ -111,7 +111,8 @@ For more detail, see Google's [Delegate domain-wide authority to a service accou
    | **Domain** | The Google Workspace domain to sync, for example `example.com`. |
    | **Workspace Admin email** | The Google Workspace admin user the service account impersonates, for example `datadog-integration@example.com`. Do not use the service account email. |
 
-1. Click **Test Connection**. Datadog validates the credentials against Google Workspace before storing them. A successful test gives you the ability to then save the credentials and activate the Entity Pack. If validation fails, see [Troubleshooting](#troubleshooting).
+1. Click **Test Connection**. Datadog validates the credentials against Google Workspace before storing them. If validation fails, see [Troubleshooting](#troubleshooting).
+1. After the connection test succeeds, save the credentials to activate the Entity Pack.
 
 Datadog stores the service account private key encrypted and does not return it in the Datadog interface or in API responses.
 
@@ -119,7 +120,7 @@ Datadog stores the service account private key encrypted and does not return it 
 
 Synchronization is continuous. The first sync begins as soon as Datadog validates the credential, and each subsequent sync starts when the previous one finishes, so you never schedule or trigger a sync yourself. A **Last synced** time that is much older than usual for your account is worth investigating.
 
-Once a credential is validated, the Entity Pack is marked **Active**. From [Cloud SIEM > Content Packs][6], open the **Google Workspace Identity** tile to view its side panel, then check the following.
+After Datadog validates a credential, the Entity Pack is marked **Active**. From **Cloud SIEM** > [**Content Packs**][6], open the **Google Workspace Identity** tile to view its side panel, then check the following:
 
 ### Credentials
 
@@ -162,7 +163,7 @@ To confirm that identity context is reaching your signals, open a signal attribu
 
 ## Connect additional domains
 
-Each set of credentials syncs one Google Workspace domain. Once the Entity Pack is **Active**, the **Add Credentials** button is replaced by **Add account** in the **Credentials** section, which is where you connect each additional domain.
+Each set of credentials syncs one Google Workspace domain. After the Entity Pack is **Active**, use **Add account** in the **Credentials** section to connect each additional domain.
 
 For each additional domain:
 
@@ -170,7 +171,7 @@ For each additional domain:
 1. In the Entity Pack side panel, click **Add account** in the **Credentials** section.
 1. Complete the same fields described in [Add credentials in Datadog](#add-credentials-in-datadog), then click **Test Connection**.
 
-Two things to keep in mind when you run more than one domain:
+When you run more than one domain:
 
 - Give each account a **Name** that identifies its domain, so that **Users by Credential**, **Sync History by Credential**, and **Sync Duration by Credential** stay readable.
 - Make sure the **Workspace Admin email** belongs to the same domain as the **Domain** value. A mismatch causes the connection test to fail.
@@ -198,7 +199,7 @@ Google notes that delegation changes can take up to 24 hours to take effect, tho
 The most common causes are changes on the Google side:
 
 - The impersonated admin user was suspended, deleted, or lost its admin role. This is the usual failure when the integration is tied to an individual's account rather than a shared one.
-- The service account's JSON key was rotated, disabled, or deleted. Create a new key and upload it.
+- The service account's JSON key was rotated, disabled, or deleted. Create a key and upload it.
 - The service account itself was deleted, or the domain-wide delegation entry was removed.
 - The Admin SDK API was disabled in the Google Cloud project.
 

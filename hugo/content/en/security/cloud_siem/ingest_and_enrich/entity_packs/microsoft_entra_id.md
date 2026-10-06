@@ -31,7 +31,7 @@ further_reading:
 The Microsoft Entra ID Entity Pack syncs your Microsoft Entra ID user directory into Cloud SIEM. After you connect it, Cloud SIEM uses that directory to:
 
 - Populate the [User Inventory][8] with your Entra ID users.
-- Embed a user pill in signals, so you can know who is behind the activity.
+- Attach a user pill to signals so you can see who is behind the activity.
 - Score risk for a user across all their accounts in [Entity Risks][1].
 
 For what Entity Packs provide in general, and the permissions they require, see [Entity Packs][9].
@@ -95,7 +95,7 @@ The app registration needs Microsoft Graph application permissions to read user 
 1. Click **Grant admin consent for \[your tenant name\]**. For more detail, see Microsoft's [Grant tenant-wide admin consent][4].
 1. Confirm that both permissions show a green check mark in the **Status** column. Adding a permission is not the same as consenting to it, and this is the step most often missed.
 
-<div class="alert alert-info">Without <code>AuditLog.Read.All</code>, the directory still syncs and users still appear in the User Inventory, but MFA status and sign-in activity will be missing from their records.</div>
+<div class="alert alert-info">Without <code>AuditLog.Read.All</code>, the directory still syncs and users still appear in the User Inventory, but their records do not include MFA status or sign-in activity.</div>
 
 ### Add an app registration in Datadog
 
@@ -117,7 +117,7 @@ The app registration needs Microsoft Graph application permissions to read user 
 
 Entra ID synchronization depends on Azure resource collection, so users do not appear in Cloud SIEM immediately after you connect an app registration.
 
-Once an app registration is connected and validated, the Entity Pack is marked **ACTIVE**. Open its side panel in Cloud SIEM and check the following.
+After an app registration is connected and validated, the Entity Pack is marked **ACTIVE**. Open its side panel in Cloud SIEM and check the following:
 
 ### Credentials
 
@@ -141,10 +141,10 @@ Resource collection must be enabled on the app registration you granted Microsof
 
 The **Key Metrics** dashboard shows four widgets:
 
-- **Users Synced** — the number of users whose attributes a sync updated. This is a measure of directory churn, not of directory size, so it is normally much smaller than your total user count. Use the **Entities** section below for the total.
-- **Users by Credential** — the same updated-user count, broken out per connected account.
-- **Sync History by Credential** — completed syncs over time. Gaps indicate failed or skipped syncs.
-- **Sync Duration by Credential** — how long each sync took. Isolated spikes are normal; a sustained increase can indicate a growing directory or Microsoft Graph throttling on the Azure side.
+- **Users Synced**: The number of users whose attributes a sync updated. This is a measure of directory churn, not of directory size, so it is normally much smaller than your total user count. Use the **Entities** section below for the total.
+- **Users by Credential**: The same updated-user count, broken out per connected account.
+- **Sync History by Credential**: Completed syncs over time. Gaps indicate failed or skipped syncs.
+- **Sync Duration by Credential**: How long each sync took. Isolated spikes are normal; a sustained increase can indicate a growing directory or Microsoft Graph throttling on the Azure side.
 
 The per-credential widgets group by `credential_name`.
 

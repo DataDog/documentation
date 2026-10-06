@@ -53,8 +53,8 @@ VERIFY WITH ENGINEERING — currently asserted
 
 The Okta Identity Entity Pack syncs your Okta user directory into Cloud SIEM. After you connect it, Cloud SIEM uses that directory to:
 
-- Populate the [User Inventory][8] with your Entra ID users.
-- Embed a user pill in signals, so you can know who is behind the activity
+- Populate the [User Inventory][8] with your Okta users.
+- Attach a user pill to signals so you can see who is behind the activity.
 - Score risk for a user across all their accounts in [Entity Risks][1].
 
 For what Entity Packs provide in general, and the permissions they require, see [Entity Packs][10].
@@ -92,13 +92,13 @@ Okta API tokens are valid for 30 days, and every API request renews the token. A
 
 Selecting **Any IP** is the simplest option. If your organization requires a restricted token, scope it to an Okta IP zone containing Datadog's published IP ranges.
 
-Datadog publishes those ranges as JSON at a per-site endpoint. For the US1 site, that endpoint is `https://ip-ranges.datadoghq.com/`. Use the one that matches your own Datadog site, and refresh your zone whenever the ranges change — the response carries `version` and `modified` fields you can watch. For the full list of endpoints, see [IP Ranges][12].
+Datadog publishes those ranges as JSON at a per-site endpoint. For the US1 site, that endpoint is `https://ip-ranges.datadoghq.com/`. Use the one that matches your own Datadog site, and refresh your zone whenever the ranges change. The response includes `version` and `modified` fields you can watch. For the full list of endpoints, see [IP Ranges][12].
 
 Two Okta constraints apply if you take this route. SSWS tokens work only with IP-based zones, not dynamic ones, and they cannot be used with blocklist zones.
 
 ### Okta domain
 
-Enter the host you sign in to, without a scheme or path — for example, `example.okta.com`.
+Enter the host you sign in to, without a scheme or path (for example, `example.okta.com`).
 
 ## Setup
 
@@ -126,7 +126,7 @@ Synchronization is continuous. The first sync starts as soon as Datadog validate
 
 That makes **Last synced** a health check in its own right. A healthy account is always recently synced, so a **Last synced** time that stops advancing means something is wrong.
 
-Once a credential is validated, the Entity Pack is marked **ACTIVE**. Open its side panel in Cloud SIEM and check the following.
+After Datadog validates a credential, the Entity Pack is marked **ACTIVE**. Open its side panel in Cloud SIEM and check the following:
 
 ### Credentials
 
@@ -154,12 +154,12 @@ Through the API, a credential reports `initializing` after Datadog accepts it an
 
 The **Key Metrics** dashboard shows four widgets:
 
-- **Users Synced** — how many users a sync updated. This measures directory churn rather than directory size, so it normally reads far lower than your total user count. For the total, use the **Entities** section below.
-- **Users by Credential** — the same count, broken out by connected account.
-- **Sync History by Credential** — completed syncs over time. A gap means a sync failed or was skipped.
-- **Sync Duration by Credential** — how long each sync took. An occasional spike is normal. A sustained climb usually means the directory is growing, or that Okta is rate limiting the calls.
+- **Users Synced**: How many users a sync updated. This measures directory churn rather than directory size, so it normally reads far lower than your total user count. For the total, use the **Entities** section below.
+- **Users by Credential**: The same count, broken out by connected account.
+- **Sync History by Credential**: Completed syncs over time. A gap means a sync failed or was skipped.
+- **Sync Duration by Credential**: How long each sync took. An occasional spike is normal. A sustained climb usually means the directory is growing, or that Okta is rate limiting the calls.
 
-Both per-credential widgets group by `credential_name`, which is derived from the **Name** you entered.
+Each per-credential widget groups by `credential_name`, which is derived from the **Name** you entered.
 
 ### Entities
 
@@ -191,8 +191,8 @@ Work through these causes in order:
 | Okta domain entered with a scheme or path | The **Okta Domain** value starts with `https://`, or ends in `/admin` or a trailing slash | Enter the host only, for example `example.okta.com`. |
 | Wrong Okta org host | The value uses `example.okta.com` for a preview org, or omits the `-emea` suffix for an EMEA org | Use the host you sign in to: `example.oktapreview.com` or `example.okta-emea.com`. |
 | Token creator is not an admin, or cannot read users | The account that created the token has no admin role in the Okta Admin Console | Create the token from an account with **Read-only Administrator** or a broader admin role. |
-| Token creator was deactivated | The account that created the token is no longer active in Okta | Create a new token from an active service account. Okta rejects tokens from deactivated users. |
-| Token revoked or expired | The token is missing from the **Tokens** tab in Okta, or its last-used date is more than 30 days old | Create a new token and add it in Datadog. Okta permanently revokes tokens left unused for 30 days. |
+| Token creator was deactivated | The account that created the token is no longer active in Okta | Create a token from an active service account. Okta rejects tokens from deactivated users. |
+| Token revoked or expired | The token is missing from the **Tokens** tab in Okta, or its last-used date is more than 30 days old | Create a token and add it in Datadog. Okta permanently revokes tokens left unused for 30 days. |
 | Token restricted to network zones that exclude Datadog | The token's **Token can be used from** setting is anything other than **Any IP** | Set the token to **Any IP**, or confirm the IP zone covers Datadog's published ranges. See [Network restrictions](#network-restrictions). |
 
 ### Credentials were working and are now invalid

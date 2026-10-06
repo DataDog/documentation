@@ -20,7 +20,7 @@ further_reading:
 - link: "/security/cloud_siem/ingest_and_enrich/content_packs/"
   tag: "Documentation"
   text: "Learn more about Cloud SIEM Content Packs"
-- link: "/security/cloud_siem/investigator/"
+- link: "/security/cloud_siem/triage_and_investigate/investigator/"
   tag: "Documentation"
   text: "Learn more about the Investigator"
 - link: "/account_management/rbac/permissions/"
@@ -39,7 +39,7 @@ An Entity Pack is a type of [Cloud SIEM Content Pack][1] that syncs your user di
 When an Entity Pack is active, Cloud SIEM correlates directory users and their attributes with your logs and security signals. Each Entity Pack includes:
 
 - **Automated synchronization**: Cloud SIEM syncs users and their attributes from your identity provider so they remain up to date.
-- **[User Inventory][2]**: Browse, search, and filter the users synched to Cloud SIEM. View a user's attributes including display name, principal ID, user type, and account status. Investigate all signals, risks, and logs associated with your users.
+- **[User Inventory][2]**: Browse, search, and filter the users synced to Cloud SIEM. View a user's attributes including display name, principal ID, user type, and account status. Investigate all signals, risks, and logs associated with your users.
 - **User pill in Signals**: Identity context attached directly to a security signal, so you can see who the signal involves while you triage it.
 - **User risk roll-up in [Entity Risks][8]**: Risk scores aggregated by user, so you can see a single user's total risk across signals instead of reading signals one at a time.
 
@@ -61,15 +61,15 @@ To find them in Datadog, go to [Cloud SIEM > Content Packs][6] and filter by **E
 
 ### Permissions
 
-Entity Packs use two permissions. A user with the [Datadog Admin Role][7] can grant either permission to a user account.
+Entity Packs use the following permissions. A user with the [Datadog Admin Role][7] can grant them to a user account.
 
 | Permission | What it allows |
 |---|---|
 | **SIEM Entities Read** | View synced users in the User Inventory, see the user pill on signals and in Entity Risks, and open an Entity Pack side panel. |
 | **SIEM Entities Admin** | Everything **SIEM Entities Read** allows, plus connect a user directory, add and remove credentials, and enable or disable synchronization. |
-| **Integrations Manage** | Only needed for Microsoft EntraID so that the Azure subscription and resource collection can be configured. |
+| **Integrations Manage** | Required only for the Microsoft Entra ID Entity Pack, to configure the Azure subscription and resource collection. |
 
-Every user who works with identity context needs one of these permissions, not only the person who sets up the Entity Pack. Without either permission:
+Every user who works with identity context needs **SIEM Entities Read** or **SIEM Entities Admin**. Without one of these permissions:
 
 - The User Inventory is blank, even when an Entity Pack is active and syncing.
 - The user pill does not appear on signals or in Entity Risks.
@@ -99,7 +99,7 @@ Like other Content Packs, each Entity Pack appears as a tile in the Content Pack
 
 ### Available
 
-An Entity Pack you have not connected yet is marked **Available**. Its side panel shows what the Entity Pack provides once you enable it, and gives you a way to onboard your user directory. Click **Add Credentials** (or **Add Account** for Microsoft Entra ID) to begin setup. Connecting a directory requires the **SIEM Entities Admin** permission.
+An Entity Pack you have not connected yet is marked **Available**. Its side panel shows what the Entity Pack provides after you enable it, and lets you connect your user directory. Click **Add Credentials** (or **Add Account** for Microsoft Entra ID) to begin setup. Connecting a directory requires the **SIEM Entities Admin** permission.
 
 ### Active
 
