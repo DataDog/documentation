@@ -30,97 +30,244 @@ algolia:
 
 ## Overview
 
-This page outlines the basic features of the Datadog Agent for Windows. If you haven't installed the Agent yet, see the installation instructions below or [follow the instructions in the app][1].
+Use this page to install, configure, and run the Datadog Agent on Windows. To install the Agent, [follow the instructions in the app][1] or select an installation method below.
 
 See [Supported Platforms][15] for the complete list of supported Windows versions.
 
 ## Installation
 
-To install the Datadog Agent on your Windows hosts, follow the [guided in-app flow within Fleet Automation][16], then copy and run the installation command. The Datadog Agents run under the `ddagentuser`. See [Datadog Windows Agent User][17] documentation for more information.
-
+To install the Datadog Agent on Windows hosts, follow the [guided in-app flow in Fleet Automation][16], then copy and run the generated installation command. By default, the Agent runs under the local `ddagentuser` account. See [Datadog Windows Agent User][17] to learn more about this account and considerations for Active Directory domain environments.
 
 {{< img src="/agent/basic_agent_usage/windows_img2_july_25.png" alt="In-app installation steps for the Datadog Agent on a Windows host." style="width:90%;">}}
 
+### Planning your deployment
 
-## Alternative installation methods
+This overview highlights the topics to consider when planning an installation. Detailed guidance follows later on this page.
 
-### Install with the Agent Manager GUI
+1. **Choose an [installation method](#installation-methods).**
 
-<div class="alert alert-info">The default installation location for the Agent is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. If you choose to use a custom installation location, ensure that you specify a <code>Datadog</code> subdirectory for the Datadog files.</div>
+   Install the Agent directly with the executable or MSI installer. For centrally managed deployments, use [Ansible][28], [SCCM][29], the [Azure VM extension][30], or [AWS Systems Manager][31]. For all supported installation methods, [follow the instructions in the app][1].
 
-1. Download the [Datadog Agent installer][400] to install the latest version of the Agent.
-2. Run the installer by opening `datadog-agent-7-latest.amd64.msi`. When prompted, enter your Administrator credentials.
-3. Follow the prompts, accept the license agreement, and enter your [Datadog API key][500].
+2. **Choose an [Agent version][32].**
 
-When the install finishes, you are given the option to launch the Datadog Agent Manager.
+   Choose whether to install the latest Agent release or pin a specific version. To pin a version, use its download URL or use the executable installer's `DD_AGENT_MINOR_VERSION` install-time option.
 
+3. **Choose an [Agent account](#install-time-options).**
 
-#### Installation configuration options
+   The core Agent and integrations run as the selected Windows account. Choose the account based on host security policies and access requirements. For details, see [Datadog Windows Agent User][17].
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows. For additional Agent configuration options, see [more Agent configuration options](#more-agent-configuration-options).
+   {{< tabs >}}
+   {{% tab "Local account" %}}
 
+   By default, the installer creates a local `ddagentuser` account with a generated password. Choose a local account when the Agent does not require a domain identity.
 
-| Variable                                    | Type    | Description                                                                                                                                                                                                                         |
-|----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `APIKEY`                                    | String  | Adds the Datadog API KEY to the configuration file.                                                                                                                                                                                 |
-| `SITE`   | String  | Set the Datadog intake site, for example: `SITE=datadoghq.com`     |
-| `TAGS`                                      | String  | Comma-separated list of tags to assign in the configuration file. Example: `TAGS="key_1:val_1,key_2:val_2"`                                                                                                                         |
-| `HOSTNAME`                                  | String  | Configures the hostname reported by the Agent to Datadog (overrides any hostname calculated at runtime).                                                                                                                            |
-| `DDAGENTUSER_NAME`                          | String  | Override the default `ddagentuser` username used during Agent installation _(v6.11.0+)_. [Learn more about the Datadog Windows Agent User][3].                                                                                      |
-| `DDAGENTUSER_PASSWORD`                      | String  | Override the cryptographically secure password generated for the `ddagentuser` user during Agent installation _(v6.11.0+)_. Must be provided for installs on domain servers. [Learn more about the Datadog Windows Agent User][3].  |
-| `APPLICATIONDATADIRECTORY`                  | Path    | Override the directory to use for the configuration file directory tree. May only be provided on initial install; not valid for upgrades. Default: `C:\ProgramData\Datadog`. _(v6.11.0+)_                                           |
-| `PROJECTLOCATION`                           | Path    | Override the directory to use for the binary file directory tree. May only be provided on initial install; not valid for upgrades. Default: `%ProgramFiles%\Datadog\Datadog Agent`. _(v6.11.0+)_<br><br>If you choose to override the default directory, ensure that you specify a `Datadog` subdirectory for the Datadog files.                                    |
+   {{% /tab %}}
+   {{% tab "gMSA" %}}
 
-**Notes**
+   Choose a group Managed Service Account (gMSA) when the Agent needs a domain identity with automatic password management through Active Directory. Create the gMSA and authorize the host before installation; no password is required.
 
-- The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
-- Some Agent versions may cause a forced reboot. To prevent this, add the parameter: `REBOOT=ReallySuppress`.
-- Some Agent components require a kernel driver to collect data. To know if a kernel driver is required for your component, see its documentation page or search for `kernel driver` in the associated Agent configuration files.
-- If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
+   {{% /tab %}}
+   {{% tab "Domain account" %}}
 
-#### More Agent configuration options
+   Choose a dedicated domain account when the Agent needs a domain identity. Create the account before installation and provide its password.
 
-Each of the following configuration options can be added as a property to the command line when installing the Agent on Windows.
+   {{% /tab %}}
+   {{% tab "LocalSystem" %}}
 
-**Note**: If a valid `datadog.yaml` is found, that file takes precedence over all specified command line options.
+   Choose `LocalSystem` to avoid managing a separate local account or to comply with policies that prohibit local user accounts. With `LocalSystem`, the Agent and its integrations run with elevated local privileges. The Agent uses the computer account to access network resources.
 
+   {{% /tab %}}
+   {{< /tabs >}}
 
-| Variable                                    | Type    | Description                                                                                                                                                                                                                         |
-|----------------------------                 |---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `LOGS_ENABLED`                              | String  | Enable (`"true"`) or disable (`"false"`) the log collection feature in the configuration file. Logs are disabled by default.                                                                                                        |
-| `APM_ENABLED`                               | String  | Enable (`"true"`) or disable (`"false"`) the APM Agent in the configuration file. APM is enabled by default.                                                                                                                        |
-| `PROCESS_ENABLED`                           | String  | Enable (`"true"`) or disable (`"false"`) the Process Agent in the configuration file. The Process Agent is disabled by default.                                                                                                     |
-| `HOSTNAME_FQDN_ENABLED`                     | String  | Enable (`"true"`) or disable (`"false"`) the usage of FQDN for the Agent hostname. It is equivalent to set `hostname_fqdn` in the Agent configuration file. The usage of FQDN for the hostname is disabled by default. _(v6.20.0+)_ |
-| `CMD_PORT`                                  | Number  | A valid port number between 0 and 65534. The Datadog Agent exposes a command API on port 5001. If that port is already in use by another program, the default may be overridden here.                                               |
-| `PROXY_HOST`                                | String  | (If using a proxy) sets your proxy host. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_PORT`                                | Number  | (If using a proxy) sets your proxy port. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_USER`                                | String  | (If using a proxy) sets your proxy user. [Learn more about using a proxy with the Datadog Agent][4].                                                                                                                                 |
-| `PROXY_PASSWORD`                            | String  | (If using a proxy) sets your proxy password. For the process/container Agent, this variable is required for passing in an authentication password and cannot be renamed. [Learn more about using a proxy with the Datadog Agent][4]. |
-| `EC2_USE_WINDOWS_PREFIX_DETECTION`          | Boolean | Use the EC2 instance id for Windows hosts on EC2. _(v7.28.0+)_                                            |
+4. **Configure [network access](#agent-configuration-options).**
+
+   For hosts that connect through a proxy, pass the proxy settings to the installer. The installer uses the proxy when optional features require additional packages and writes the settings to `datadog.yaml` for Agent runtime traffic. For endpoints and allowlists, see [Network traffic][24].
+
+5. **Choose [Agent features](#configure-additional-features).**
+
+   Decide which Agent features to enable during installation. Use the in-app workflow to select features and generate the installation command, or use [Fleet Automation][33] to enable supported features on installed Agents.
+
+### Installation methods
+
+{{< tabs >}}
+{{% tab "Executable" %}}
+
+**When to use**
+
+Use the executable installer for most installations. It provides a simpler interface to the MSI installer, prevents automatic restarts, retains the MSI log, and displays relevant log entries when installation fails.
+
+**Network requirements**
+
+The executable installer requires network access to download the Agent MSI and optional packages. To use a proxy, set the executable installer proxy options.
+
+**Version selection**
+
+* **Latest Agent release**: `https://install.datadoghq.com/datadog-installer-x86_64.exe`
+* **Specific Agent release**: `https://install.datadoghq.com/datadog-installer-7.84.0-1-x86_64.exe`
+
+The first URL installs the latest Agent release. To pin a specific version, use its download URL or set the `DD_AGENT_MINOR_VERSION` install-time option.
+
+**Upgrades and downgrades**
+
+For upgrades and downgrades, the executable installer removes the installed Agent, preserves its configuration, and installs the requested version. The executable can install Agent 7.72 or later.
+
+{{% /tab %}}
+{{% tab "MSI" %}}
+
+**When to use**
+
+Use the MSI for partially offline installations, interactive installations, or deployment systems that require an MSI package.
+
+**Network requirements**
+
+The MSI contains the core Agent. Optional features can require network access to download additional packages.
+
+**Version selection**
+
+* **Latest Agent release**: `https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi`
+* **Specific Agent release**: `https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-7.84.0.msi`
+
+For links to all available MSI versions, see the [Windows installer manifest][25].
+
+Each MSI installs one Agent version. The latest-release URL provides the newest Agent available at download time. To pin a specific version, download that release's MSI.
+
+**Upgrades and downgrades**
+
+The MSI upgrades an installed Agent to a later version. To install an earlier version, uninstall the existing Agent first.
+
+**Installation behavior**
+
+Run the MSI with Windows Installer `msiexec.exe`, or open the file for an interactive installation:
+
+1. Download the [latest Datadog Agent MSI][400].
+1. Open `datadog-agent-7-latest.amd64.msi`.
+1. Accept the license agreement, enter the [Datadog API key][500], and configure the Agent account.
+
+<div class="alert alert-info">The default installation location is <code>%ProgramFiles%\Datadog\Datadog Agent</code>. When setting a custom location, include a <code>Datadog</code> subdirectory for the Datadog files.</div>
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Install-time options
+
+Install-time options control how the installer runs. Set them when running the installer; they cannot be changed later through the Agent configuration files.
+
+{{< tabs >}}
+{{% tab "Executable" %}}
+
+Set executable install-time options as environment variables before running the installer.
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `DD_AGENT_MINOR_VERSION` | String | Selects an Agent 7 minor or patch version. For example, `84` selects the latest 7.84 patch, and `84.0` selects 7.84.0. Windows executable installation supports Agent 7.72 or later. |
+| `DD_AGENT_USER_NAME` | String | Sets the Agent account. If unset, the installer creates the local `ddagentuser` account. See [Datadog Windows Agent User][3]. |
+| `DD_AGENT_USER_PASSWORD` | String | Sets the Agent account password. Domain accounts require a password; gMSAs and built-in service accounts do not. |
+| `DD_APPLICATIONDATADIRECTORY` | Path | Sets the configuration directory during an initial installation. Default: `C:\ProgramData\Datadog`. |
+| `DD_PROJECTLOCATION` | Path | Sets the binary directory during an initial installation. Default: `%ProgramFiles%\Datadog\Datadog Agent`. Include a `Datadog` subdirectory when overriding the default. |
+| `DD_INSTALL_ONLY` | Boolean | **Agent 7.85+**: Installs the Agent without starting its services. |
+| `DDAGENTUSER_KEEP_RIGHTS` | Boolean | **Agent 7.85+**: Preserves customized Agent account deny-logon rights during installation and upgrades. The installer still grants the log-on-as-a-service right. |
+
+{{% /tab %}}
+{{% tab "MSI" %}}
+
+Pass MSI install-time options as public properties on the `msiexec` command line.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `DDAGENTUSER_NAME` | String | Sets the Agent account. If unset, the installer creates the local `ddagentuser` account. See [Datadog Windows Agent User][3]. |
+| `DDAGENTUSER_PASSWORD` | String | Sets the Agent account password. Domain accounts require a password; gMSAs and built-in service accounts do not. |
+| `APPLICATIONDATADIRECTORY` | Path | Sets the configuration directory during an initial installation. Default: `C:\ProgramData\Datadog`. |
+| `PROJECTLOCATION` | Path | Sets the binary directory during an initial installation. Default: `%ProgramFiles%\Datadog\Datadog Agent`. Include a `Datadog` subdirectory when overriding the default. |
+| `DD_INSTALL_ONLY` | Boolean | **Agent 7.74+**: Installs the Agent without starting its services. |
+| `DDAGENTUSER_KEEP_RIGHTS` | Boolean | **Agent 7.85+**: Preserves customized Agent account deny-logon rights during installation and upgrades. The installer still grants the log-on-as-a-service right. |
 
 #### Installation log files
 
 Set the `/log <FILENAME>` msiexec option to configure an installation log file. If this option is not set, msiexec writes the log to `%TEMP%\MSI*.LOG` by default.
 
+**Notes**
+
+- The `/qn` option runs a quiet install. To see the GUI prompts, remove it.
+- To suppress automatic reboots, add `REBOOT=ReallySuppress`.
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Agent configuration options
+
+Provide these options to the installer to initialize Agent settings in configuration files such as `datadog.yaml`. After installation, change these settings in the Agent configuration files or through [Fleet Automation][33].
+
+{{< tabs >}}
+{{% tab "Executable" %}}
+
+Set initial Agent configuration as environment variables before running the executable installer.
+
+| Variable | Type | Description |
+|----------|------|-------------|
+| `DD_API_KEY` | String | Sets the Datadog API key. |
+| `DD_SITE` | String | Sets the Datadog site, for example, `datadoghq.com`. |
+| `DD_ENV` | String | Sets the Agent's global `env` tag. |
+| `DD_TAGS` | String | Sets a comma-separated list of host tags. |
+| `DD_EXTRA_TAGS` | String | Adds a comma-separated list of tags to every metric, event, log, trace, and service check. |
+| `DD_HOSTNAME` | String | Sets the hostname reported by the Agent. |
+| `DD_LOG_LEVEL` | String | Sets the Agent log level. |
+| `DD_LOGS_ENABLED` | Boolean | Enables or disables log collection. Default: `false`. |
+| `DD_INFRASTRUCTURE_MODE` | String | The monitoring mode the Agent is configured in. Each mode offers a different set of features. |
+| `DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED` | Boolean | Enables or disables [Live Process collection][21]. |
+| `DD_REMOTE_UPDATES` | Boolean | Enables or disables remote Agent upgrades through Fleet Automation. |
+| `DD_URL` | URL | Overrides the metrics intake URL. |
+| `DD_PROXY_HTTP` | URL | Sets the proxy URL for HTTP requests. |
+| `DD_PROXY_HTTPS` | URL | Sets the proxy URL for HTTPS requests. |
+| `DD_PROXY_NO_PROXY` | String | Sets a comma- or space-separated list of hosts that bypass the proxy. |
+
+{{% /tab %}}
+{{% tab "MSI" %}}
+
+Pass initial Agent configuration as public properties on the `msiexec` command line.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `APIKEY` | String | Sets the Datadog API key. |
+| `SITE` | String | Sets the Datadog site, for example, `datadoghq.com`. |
+| `TAGS` | String | Sets a comma-separated list of host tags. |
+| `HOSTNAME` | String | Sets the hostname reported by the Agent. |
+| `DD_LOG_LEVEL` | String | Sets the Agent log level. |
+| `LOGS_ENABLED` | Boolean | Enables or disables log collection. Default: `false`. |
+| `APM_ENABLED` | Boolean | Enables or disables the Trace Agent. Default: `true`. |
+| `PROCESS_ENABLED` | Boolean | Enables or disables [Live Process collection][21]. |
+| `DD_INFRASTRUCTURE_MODE` | String | The monitoring mode the Agent is configured in. Each mode offers a different set of features. |
+| `HOSTNAME_FQDN_ENABLED` | Boolean | Enables or disables using the fully qualified domain name as the Agent hostname. Default: `false`. |
+| `CMD_PORT` | Number | Sets the Agent command API port. Default: `5001`. |
+| `PROXY_HOST` | String | Sets the proxy host. |
+| `PROXY_PORT` | Number | Sets the proxy port. |
+| `PROXY_USER` | String | Sets the proxy username. |
+| `PROXY_PASSWORD` | String | Sets the proxy password. |
+| `EC2_USE_WINDOWS_PREFIX_DETECTION` | Boolean | Uses the EC2 instance ID for Windows hosts on EC2. |
+
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Configure additional features
+
+To configure additional features during installation, [follow the instructions in the app][1] to select features and generate an installation command. For installed Agents, use [Fleet Automation][33] to enable supported features remotely.
+
+Feature documentation—including [Single Step APM Instrumentation][22], the [DDOT Collector][23], [Private Action Runner][26], and [Cloud Security][27]—provides prerequisites and manual configuration options.
 
 ## Configuration
 
-The main Agent configuration file is located at
-`C:\ProgramData\Datadog\datadog.yaml`. This file is used for host-wide settings such as the API key, selected Datadog site, proxy parameters, host tags, and log level.
+The main Agent configuration file is `C:\ProgramData\Datadog\datadog.yaml`. Use this file to configure host-wide settings such as the API key, Datadog site, proxy settings, host tags, and log level.
 
-There is also a `datadog.yaml.example` file in the same directory, which is a fully commented reference with all available configuration options, useful for reference and copying specific settings. Alternatively, see the [example Agent configuration file for Windows][19] on GitHub.
+For a commented reference of all available settings, use `datadog.yaml.example` in the same directory or see the [example Agent configuration file for Windows][19] on GitHub.
 
-
-Configuration files for integrations are in:
-`C:\ProgramData\Datadog\conf.d\` There may also be an alternative legacy location: `C:\Documents and Settings\All Users\Application Data\Datadog\conf.d\`.
+Integration configuration files are located in `C:\ProgramData\Datadog\conf.d\`.
 
 Each integration has a subdirectory `<INTEGRATION>.d\` that contains:
-- `conf.yaml`: The active settings for the integration
-* `conf.yaml.example`: A sample file showing what configuration keys are supported
+- `conf.yaml`: The active integration configuration
+- `conf.yaml.example`: A commented reference of the available integration settings
 
-When making configuration changes, be sure to restart the Agent to ensure the changes take effect.
+Use the [Datadog Agent Manager GUI][6] to enable, disable, and configure checks.
 
-The [Datadog Agent Manager GUI][6] can be used to enable, disable, and configure checks. You must restart the Agent for your changes to take effect.
+Restart the Agent after changing configuration files or integration settings.
 
 **Note**: `ProgramData` is a hidden folder.
 
@@ -147,7 +294,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 | start           | Starts the Agent. (Being deprecated, but accepted. Use `run` as an alternative.) |
 | start-service   | Starts the Agent within the service control manager.                             |
 | status          | Print the current status.                                                        |
-| stopservice     | Stops the Agent within the service control manager.                              |
+| stop-service     | Stops the Agent within the service control manager.                              |
 | version         | Prints the version info.                                                         |
 
 **Examples**:
@@ -169,7 +316,7 @@ The execution of the Agent is controlled by the Windows Service Control Manager.
 
 ## Uninstall the Agent
 
-There are two different methods to uninstall the Agent on Windows. Both methods remove the Agent, but do not remove the `C:\ProgramData\Datadog` configuration folder on the host.
+Use Windows Settings for an interactive uninstall, or use PowerShell for a command-line uninstall. Uninstalling preserves the Agent configuration in `C:\ProgramData\Datadog`.
 
 ### Add or remove programs
 
@@ -178,8 +325,6 @@ There are two different methods to uninstall the Agent on Windows. Both methods 
 1. Search for `Datadog Agent` and click {{< ui >}}Uninstall{{< /ui >}}.
 
 ### PowerShell
-
-**Note:** Enable WinRM to use the commands below.
 
 Use the following PowerShell command to uninstall the Agent without rebooting:
 
@@ -257,7 +402,8 @@ You can monitor Windows processes with [Live Process Monitoring][9]. To enable t
 
 ```yaml
 process_config:
-  enabled: "true"
+  process_collection:
+    enabled: true
 ```
 
 After configuration is complete, [restart the Agent][11].
@@ -286,5 +432,18 @@ After configuration is complete, [restart the Agent][11].
 [17]: /agent/faq/windows-agent-ddagent-user/
 [18]: https://docs.datadoghq.com/agent/troubleshooting/
 [19]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/example/datadog-agent_windows.yaml.example
+[21]: /infrastructure/process/
+[22]: /tracing/trace_collection/single-step-apm/windows/
+[23]: /opentelemetry/setup/ddot_collector/install/windows/
+[24]: /agent/configuration/network/
+[25]: https://ddagent-windows-stable.s3.amazonaws.com/installers_v2.json
+[26]: /actions/private_actions/set_up_agent_based/
+[27]: /security/cloud_security_management/setup/agent/windows/
+[28]: https://github.com/ansible-collections/Datadog
+[29]: /agent/supported_platforms/sccm/
+[30]: /getting_started/integrations/azure/#install-the-agent-for-greater-visibility-into-your-application
+[31]: /integrations/guide/aws-agent-installation/#amazon-ec2-instances
+[32]: https://github.com/DataDog/datadog-agent/releases
+[33]: /agent/fleet_automation/configure_agents/
 [400]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [500]: https://app.datadoghq.com/organization-settings/api-keys
