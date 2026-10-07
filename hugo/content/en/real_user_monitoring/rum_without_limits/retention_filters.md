@@ -248,7 +248,9 @@ Datadog provides suggested retention filters for each RUM application. The sugge
 
 {{< img src="real_user_monitoring/rum_without_limits/suggested-retention-filters.png" alt="The Recommended Filters sidepanel, with suggested retention filters grouped by category and an Add Filter button for each." style="width:80%" >}}
 
-For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days. Datadog refreshes these thresholds every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
+<div class="alert alert-info">Performance-based suggestions require AI features to be enabled for your organization.</div>
+
+For performance-based suggestions, Datadog calculates thresholds from the 90th percentile of the application's view data over the previous 30 days and refreshes them every Monday at 06:00 UTC. The available suggestions depend on the application's platform.
 
 Datadog marks a suggestion as configured when a matching retention filter exists, including filters that existed before you opened the panel, so you can see which suggestion your configuration already covers.
 
