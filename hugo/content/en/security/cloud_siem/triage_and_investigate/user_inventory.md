@@ -1,6 +1,31 @@
 ---
 title: User Inventory
 description: Browse and investigate every user identity synced to Cloud SIEM, including account configuration, associated risks, and activity history.
+further_reading:
+- link: /security/cloud_siem/triage_and_investigate/entities_and_risk_scoring/
+  tag: Documentation
+  text: Entity Risks
+- link: /security/cloud_siem/ingest_and_enrich/entity_packs/
+  tag: Documentation
+  text: Entity Packs
+- link: /security/cloud_siem/ingest_and_enrich/entity_packs/microsoft_entra_id/
+  tag: Documentation
+  text: Microsoft Entra ID Entity Pack
+- link: /security/cloud_siem/ingest_and_enrich/entity_packs/okta/
+  tag: Documentation
+  text: Okta Identity Entity Pack
+- link: /security/cloud_siem/ingest_and_enrich/entity_packs/google_workspace/
+  tag: Documentation
+  text: Google Workspace Identity Entity Pack
+- link: /security/cloud_siem/investigator/
+  tag: Documentation
+  text: Investigator
+- link: /security/cloud_siem/investigate_security_signals/
+  tag: Documentation
+  text: Investigate Security Signals
+- link: /security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/
+  tag: Documentation
+  text: Open Cybersecurity Schema Framework (OCSF)
 ---
 
 <!-- ============================================================================
@@ -21,22 +46,20 @@ PRE-PUBLISH CHECKLIST — delete this block before merging.
    further_reading front matter key, move the list below into front matter.
 ============================================================================ -->
 
-# User Inventory
-
 ## Overview
 
-[Cloud SIEM's User Inventory](https://app.datadoghq.com/security/siem/user-inventory) is a synced, normalized copy of your user directory inside Cloud SIEM. It lists every user identity that Cloud SIEM has synced from your identity providers, whether or not that user has any associated activity, signals, or risks. When you need to know who a user is, what their account looks like, and how it has changed, you can answer the question in Cloud SIEM instead of pivoting to your identity provider.
+[Cloud SIEM's User Inventory][6] is a synced, normalized copy of your user directory inside Cloud SIEM. It lists every user identity that Cloud SIEM has synced from your identity providers, regardless of whether that user has any associated activity, signals, or risks. When you need to know who a user is, what their account looks like, and how it has changed, you can answer the question in Cloud SIEM instead of having to switch to your identity provider.
 
 With User Inventory, you can:
 
 - Browse every synced user identity and service account in one list.
 - Filter users by account status, job title, office location, principal ID, provider, and user type.
 - Search the inventory by name or principal ID.
-- Review a user's current configuration, including job title, department, office location, and MFA status.
+- Review a user's current configuration, including job title, department, office location, and multi-factor authentication (MFA) status.
 - See the risk score for each account associated with a user identity, along with how that score has changed.
 - Trace a user's signals, logins, MFA changes, password changes, configuration changes, and logs over time.
 
-User Inventory and [Entity Risks]({{TODO-LINK: entity-risks}}) answer different questions. User Inventory is the complete directory: every synced user, regardless of activity. Entity Risks is the prioritized view: user identities and other entities that have been scored and ranked by risk. Start in User Inventory when you know which user you want to understand. Start in Entity Risks when you want Datadog to tell you which users to look at first.
+User Inventory and [Entity Risks][1] answer different questions. User Inventory is the complete directory: every synced user, regardless of activity. Entity Risks is the prioritized view: user identities and other entities that have been scored and ranked by risk. Start in User Inventory when you know which user you want to understand. Start in Entity Risks when you want Datadog to tell you which users to look at first.
 
 ## Prerequisites
 
@@ -46,12 +69,10 @@ Two Cloud SIEM permissions apply to User Inventory:
 
 | Permission | What it grants |
 | ---------- | -------------- |
-| `SIEM Entities Read` | View the User Inventory Explorer and search it, open the user side panel, and see the correlated-user pill in the Signal side panel. Also grants read access to Entity Pack side panels in the Content Packs explorer. |
+| `SIEM Entities Read` | View the User Inventory Explorer and search it, open the user side panel, and see the correlated-user pill in the Signals side panel. Also grants read access to Entity Pack side panels in the Content Packs explorer. |
 | `SIEM Entities Admin` | Everything `SIEM Entities Read` grants, plus the ability to configure Entity Packs and other Entity Risks settings. Required to complete the Entity Packs prerequisite below. |
 
-Without `SIEM Entities Read`, the User Inventory page remains visible but returns no results.
-
-**Note:** An empty User Inventory with no filters applied has two possible causes: no Entity Packs are enabled, or you do not have the `SIEM Entities Read` permission. Confirm your Entity Pack configuration first, then confirm your permissions.
+<div class="alert alert-info">An empty User Inventory with no filters applied has two possible causes: no Entity Packs are enabled, or you do not have the <code>SIEM Entities Read</code> permission. Confirm your Entity Pack configuration first, then confirm your permissions.</div>
 
 ### Entity Packs
 
@@ -59,19 +80,19 @@ User Inventory is populated by Entity Packs, which sync user and identity contex
 
 Entity Packs are available for the following providers:
 
-- Microsoft Entra ID
-- Okta
-- Google Workspace
+- [Microsoft Entra ID][2]
+- [Okta][3]
+- [Google Workspace][4]
 
-Configuring an Entity Pack requires the `SIEM Entities Admin` permission. Entity Packs are configured from the Content Packs explorer. For setup instructions, see the Entity Packs documentation listed under [Further reading](#further-reading).
+Configuring an Entity Pack requires the `SIEM Entities Admin` permission. Entity Packs are configured from the Content Packs explorer. For setup instructions, see [Entity Packs][5].
 
 ### Recommended: OCSF pipelines
 
-An active Open Cybersecurity Schema Framework (OCSF) pipeline is not strictly required. Cloud SIEM can correlate some activity to a user identity using standard attributes alone. However, you get the most complete correlation from sources that have an active OCSF pipeline. If a user's activity looks sparser in Cloud SIEM than you expect, check whether the relevant sources have an OCSF pipeline configured.
+An active Open Cybersecurity Schema Framework (OCSF) pipeline is optional. Cloud SIEM can correlate some activity to a user identity using standard attributes alone. However, you get the most complete correlation from sources that have an active OCSF pipeline. If a user's activity looks sparser in Cloud SIEM than you expect, check whether the relevant sources have an OCSF pipeline configured.
 
-## Explore the user inventory
+## Explore the User Inventory
 
-To open User Inventory, go to **Cloud SIEM > Investigate > User Inventory**.
+To open User Inventory, go to **Cloud SIEM** > **Investigate** > [**User Inventory**][6].
 
 <!-- {{TODO-IMAGE}}
      Full-page User Inventory Explorer showing the filter bar, entity count, and user list.
@@ -79,7 +100,7 @@ To open User Inventory, go to **Cloud SIEM > Investigate > User Inventory**.
 
 ### Search and filter users
 
-To find a user by display name or principal ID, type your query in the search box and press Enter.
+To find a user by display name or principal ID, type your query in the search box and press <kbd>Enter</kbd>.
 
 To narrow the list by attribute, use the filter dropdowns. Each filter defaults to **All**.
 
@@ -88,7 +109,7 @@ To narrow the list by attribute, use the filter dropdowns. Each filter defaults 
 | Account Status | The status of the account in your identity provider, such as `ACTIVE`, `SUSPENDED`, or `DELETED`. |
 | Job Title | The user's job title, as reported by your identity provider. |
 | Office Location | The user's office location, as reported by your identity provider. |
-| Principal Id | The user's principal ID, as reported by your identity provider. |
+| Principal ID | The user's principal ID, as reported by your identity provider. |
 | Provider | The identity provider the user was synced from. |
 | User Type | The type of account: `human`, `service_account`, or `guest`. |
 
@@ -96,13 +117,10 @@ Job title, office location, and principal ID are passed through from your identi
 
 ### Browse users in SIEM
 
-The list loads more users as you scroll. The entity count at the top of the list shows how many users are loaded and how many match your current search and filters.
-
-The **Changes Detected** column counts the updates to a user identity over the last two weeks that included one or more attribute changes. It counts updates, not individual attributes, so a single update that changed three attributes counts once. Use it to spot users whose configuration has been modified recently, then open the user and go to the Entity changes tab to see what changed.
-
-To export the list as a CSV file, click the export icon above the table. The CSV file contains only the users currently loaded in the view, not every user synced to Cloud SIEM. To include more users in the export, scroll to load them first.
-
-To change which columns appear, click the column settings icon.
+- The list loads more users as you scroll. The entity count at the top of the list shows how many users are loaded and how many match your current search and filters.
+- The **Changes Detected** column counts the updates to a user identity over the last 14 days that included one or more attribute changes. It counts updates, not individual attributes, so a single update that changed three attributes counts once. Use it to spot users whose configuration has been modified recently, then open the user and go to the **Entity changes** tab to see what changed.
+- To export the list as a CSV file, click the export icon above the table. The CSV file contains only the users currently loaded in the view, not every user synced to Cloud SIEM. To include more users in the export, scroll to load them first.
+- To change which columns appear, click the column settings icon.
 
 ## Investigate a user identity
 
@@ -151,11 +169,11 @@ The **Risks** section lists the risk score for each account associated with this
 | Risk Change | How the account's risk score has changed over the last 14 days. |
 | Signals | The number of signals contributing to the account's score. |
 
-**Note:** Last Seen reflects signal activity only. An account with an old Last Seen value may still be generating logs — check the All logs tab in Activity History to see its most recent activity.
+<div class="alert alert-info">Last Seen reflects signal activity only. An account with an old Last Seen value may still be generating logs. Check the <strong>All logs</strong> tab in <strong>Activity History</strong> to see its most recent activity.</div>
 
 Risk Change always reflects a fixed 14-day lookback and does not follow the panel's time range selector.
 
-For how risk scores are calculated and how to customize them, see [Entity Risks]({{TODO-LINK: entity-risks}}).
+For how risk scores are calculated and how to customize them, see [Entity Risks][1].
 
 ## Explore activity history
 
@@ -166,7 +184,7 @@ The **Activity History** section traces what a user has done and how their accou
 
 Each tab shows a result count and a **See all** link that opens the underlying data in its own explorer, where you can query it further.
 
-The data in Activity History is mapped either to Datadog standard attributes or to Open Cybersecurity Schema Framework (OCSF) fields, so you can query it in the explorers using the same attribute names you use elsewhere in Cloud SIEM.
+The data in Activity History is mapped either to Datadog standard attributes or to OCSF fields, so you can query it in the explorers using the same attribute names you use elsewhere in Cloud SIEM.
 
 ### Signals
 
@@ -182,7 +200,7 @@ Shows a sequence of timestamps recording when the user's password was modified. 
 
 ### Entity changes
 
-Shows how the user's configuration has changed over time. Cloud SIEM checkpoints each version of a user identity, so you can compare any two versions and see exactly which attributes changed.
+Shows how the user's configuration has changed over time. Cloud SIEM saves each version of a user identity, so you can compare any two versions and see exactly which attributes changed.
 
 The tab header shows the number of changes made during the selected time period. Two views are available:
 
@@ -198,7 +216,7 @@ In the JSON view, select the versions to compare using the version dropdown abov
 
 Attributes tracked in the diff include the user's email, first and last name, job title, office location, principal ID, provider, and user type, along with authentication state such as `mfaEnrolled`, `mfaEnforced`, and `lastPasswordChange`.
 
-**Note:** At this time, only entity changes made in the last 14 days appear in this tab, regardless of the time range selected.
+<div class="alert alert-info">Only entity changes made in the last 14 days appear in this tab, regardless of the time range selected.</div>
 
 ### All logs
 
@@ -221,13 +239,11 @@ Two views do not follow the time range selector:
 
 ## Further reading
 
-Additional helpful documentation, links, and articles:
+{{< partial name="whats-next/whats-next.html" >}}
 
-- [Entity Risks]({{TODO-LINK: entity-risks}})
-- [Entity Packs Overview]({{TODO-LINK: entity-packs-overview}})
-- [Entity Pack for Microsoft Entra ID]({{TODO-LINK: entity-pack-entra-id}})
-- [Entity Pack for Okta]({{TODO-LINK: entity-pack-okta}})
-- [Entity Pack for Google Workspace]({{TODO-LINK: entity-pack-google-workspace}})
-- [Investigator](https://docs.datadoghq.com/security/cloud_siem/investigator/)
-- [Investigate Security Signals](https://docs.datadoghq.com/security/cloud_siem/investigate_security_signals/)
-- [Open Cybersecurity Schema Framework (OCSF)](https://docs.datadoghq.com/security/cloud_siem/ingest_and_enrich/open_cybersecurity_schema_framework/)
+[1]: /security/cloud_siem/triage_and_investigate/entities_and_risk_scoring/
+[2]: /security/cloud_siem/ingest_and_enrich/entity_packs/microsoft_entra_id/
+[3]: /security/cloud_siem/ingest_and_enrich/entity_packs/okta/
+[4]: /security/cloud_siem/ingest_and_enrich/entity_packs/google_workspace/
+[5]: /security/cloud_siem/ingest_and_enrich/entity_packs/
+[6]: https://app.datadoghq.com/security/siem/user-inventory
