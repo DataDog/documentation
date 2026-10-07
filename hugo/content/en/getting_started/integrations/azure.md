@@ -247,7 +247,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
 {{% collapse-content title="Migrate an existing app registration to Secretless Auth" level="h4" expanded=false id="secretless-migration-setup" %}}
 
-If you already connected an app registration using a client secret, you can migrate it to Secretless Auth in place. You don't need to recreate the app registration.
+If you already connected an app registration using a client secret, you can migrate it to Secretless Auth in place. You don't need to recreate the app registration. Secretless Auth does not support app registrations in Azure sovereign clouds. See [Authentication methods](#authentication-methods).
 
 1. In the [Azure integration tile][20], on the {{< ui >}}Configuration{{< /ui >}} tab, select the app registration you want to migrate.
 2. On the {{< ui >}}General{{< /ui >}} tab, under {{< ui >}}Authentication{{< /ui >}}, click {{< ui >}}Set Up Secretless Auth{{< /ui >}}.
