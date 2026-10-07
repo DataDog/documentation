@@ -2,6 +2,7 @@
 if (__CI_ENV__ === "live") return new Response(null, { status: 404 });
 
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { SelectDemo } from "@components/Select/SelectDemo";
 
 const title = "Select";
 ---
@@ -126,11 +127,23 @@ const title = "Select";
         </tbody>
       </table>
 
-      <h2>Live examples</h2>
+      <h2>Live example</h2>
 
-      <p>Two consumers render the component:</p>
+      <p>
+        The readout next to the dropdown shows the value passed to
+        <code>onChange</code>.
+      </p>
+
+      <div class="select-example">
+        <SelectDemo client:load />
+      </div>
+
+      <h2>Consumers</h2>
       <ul>
-        <li><code>LanguageSelector</code> — in the API toolbar.</li>
+        <li>
+          <code>LanguageSelector</code> — in the toolbar of every API page, for example
+          <a href="/api/latest/aws-integration/">AWS Integration</a>.
+        </li>
         <li>
           <code>RegionSelector</code> — see the <a
             href="/dd_e2e/components/region-selector/">Region Selector</a
@@ -155,5 +168,10 @@ const title = "Select";
 
   h2 {
     margin-top: var(--space-xl);
+  }
+
+  /* Room for the open menu, so it doesn't cover the next section. */
+  .select-example {
+    min-height: 12rem;
   }
 </style>

@@ -1,0 +1,16 @@
+.select-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xs);
+}
+
+.select-demo__label {
+  color: var(--color-text);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.select-demo__readout {
+  color: var(--color-text-muted);
+}

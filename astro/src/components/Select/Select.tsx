@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "preact/hooks";
+import { useEffect, useLayoutEffect, useRef, useState } from "preact/hooks";
 import type { JSX } from "preact";
 import styles from "./Select.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
@@ -47,7 +47,9 @@ export function Select({
   const listboxId = `${id}-listbox`;
   const optionId = (index: number) => `${id}-option-${options[index].value}`;
 
-  useEffect(() => {
+  // A layout effect, not useEffect: useEffect runs after paint, so keys typed
+  // right after opening would still reach the button and close the menu.
+  useLayoutEffect(() => {
     if (isOpen) menuRef.current?.focus();
   }, [isOpen]);
 
