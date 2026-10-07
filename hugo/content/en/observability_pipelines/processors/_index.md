@@ -106,9 +106,8 @@ For example, the log pipeline in this image has three sources: Datadog Agent, Am
 
 {{< img src="observability_pipelines/processors/multiple_sources_branches.png" alt="A pipeline with three sources sending logs to two processor groups, one for pipeline branch 1 and one for pipeline branch 2. Branch 1 sends logs to Datadog and Datadog Archives, and branch 2 sends logs to CrowdStrike NG-SIEM." style="width:100%;" >}}
 
-The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. Each branch has its own processor group and destinations.
+The Worker sends all logs in this pipeline to two different branches: branch 1 and branch 2. If you want to do the following:
 
-If you want to do the following in this example:
 - Sample all logs from the Datadog Agent source
 - Deduplicate logs from all sources
 
