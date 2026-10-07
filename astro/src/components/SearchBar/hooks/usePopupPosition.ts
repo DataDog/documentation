@@ -22,7 +22,14 @@ export function usePopupPosition(
     if (!active) return;
     const recompute = () => {
       const el = anchorRef.current;
-      if (!el) return;
+      // An anchor that isn't laid out (the hidden half of the 992px
+      // breakpoint pair) has no client rects, but `getBoundingClientRect`
+      // still reports a zeroed one — which would strand the popup at the
+      // top-left corner with zero width when the viewport crosses 992px.
+      if (!el || el.getClientRects().length === 0) {
+        setRect(null);
+        return;
+      }
       const r = el.getBoundingClientRect();
       setRect({ top: r.bottom, left: r.left, width: r.width });
     };

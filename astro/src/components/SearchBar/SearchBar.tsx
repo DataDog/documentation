@@ -21,6 +21,7 @@ import { useDebouncedSearch, type SearchFn } from "./hooks/useDebouncedSearch";
 import { usePopupPosition } from "./hooks/usePopupPosition";
 import { useGlobalSearchShortcuts } from "./hooks/useGlobalSearchShortcuts";
 import { useOutsideClick } from "./hooks/useOutsideClick";
+import { useSearchQuerySync } from "./hooks/useSearchQuerySync";
 
 export interface SearchBarLabels {
   Search: string;
@@ -76,10 +77,13 @@ export default function SearchBar({
   const trimmedQuery = query.trim();
   const hits = useDebouncedSearch(trimmedQuery, config, searchFn, DEBOUNCE_MS);
   // Don't show the popup for an empty/whitespace query — no hits to display.
-  const popupVisible = open && trimmedQuery.length > 0;
+  const popupRequested = open && trimmedQuery.length > 0;
   // Recalculates whenever the form moves (e.g. window resize) so the popup
   // stays anchored directly below the search bar.
-  const popupRect = usePopupPosition(formRef, popupVisible);
+  const popupRect = usePopupPosition(formRef, popupRequested);
+  // A null rect means the form isn't laid out — this island is the hidden half
+  // of the 992px breakpoint pair. Don't paint a popup for an invisible anchor.
+  const popupVisible = popupRequested && popupRect !== null;
 
   // `grouped` is used by SearchResultsPopup to render hits under category
   // headings. `flatHits` is the same hits in CATEGORY_ORDER sequence so that
@@ -113,11 +117,26 @@ export default function SearchBar({
     setHydrated(true);
   }, []);
 
+  // Keeps the two SearchBar islands and the `?s=` param in step. Both islands
+  // are mounted at every width, so whichever one the user types into owns the
+  // param, and the other mirrors the text.
+  const { publishQuery } = useSearchQuerySync({
+    setQuery,
+    setOpen,
+    anchorRef: formRef,
+    debounceMs: DEBOUNCE_MS,
+  });
+
+  const clearQuery = () => {
+    setQuery("");
+    publishQuery("");
+  };
+
   useGlobalSearchShortcuts({
     inputRef,
     wrapperRef,
     setOpen,
-    setQuery,
+    clearQuery,
     enabled: variant !== "mobile",
   });
   useOutsideClick([wrapperRef, popupRef], () => setOpen(false));
@@ -219,8 +238,10 @@ export default function SearchBar({
           aria-label={labels["Search documentation"]}
           value={query}
           onInput={(e) => {
-            setQuery((e.target as HTMLInputElement).value);
+            const value = (e.target as HTMLInputElement).value;
+            setQuery(value);
             setOpen(true);
+            publishQuery(value);
           }}
           onFocus={() => {
             if (trimmedQuery) {

@@ -5,7 +5,12 @@ interface Args {
   inputRef: { current: HTMLInputElement | null };
   wrapperRef: { current: HTMLElement | null };
   setOpen: Dispatch<StateUpdater<boolean>>;
-  setQuery: Dispatch<StateUpdater<string>>;
+  /**
+   * Clears the query. A callback rather than `setQuery` because clearing has
+   * to reach the other SearchBar island and the `?s=` param too, not just this
+   * instance's state.
+   */
+  clearQuery: () => void;
   /**
    * When false, the page-wide listener is not attached. Used by the mobile-nav
    * SearchBar: it shares the page with the API side-nav SearchBar, and only one
@@ -23,7 +28,7 @@ export function useGlobalSearchShortcuts({
   inputRef,
   wrapperRef,
   setOpen,
-  setQuery,
+  clearQuery,
   enabled = true,
 }: Args) {
   useEffect(() => {
@@ -49,7 +54,7 @@ export function useGlobalSearchShortcuts({
         const focusInsideBar =
           active === inputRef.current || wrapperRef.current?.contains(active);
         if (focusInsideBar) {
-          setQuery("");
+          clearQuery();
           setOpen(false);
           inputRef.current?.blur();
         }
@@ -57,5 +62,5 @@ export function useGlobalSearchShortcuts({
     };
     document.addEventListener("keydown", onKey);
     return () => document.removeEventListener("keydown", onKey);
-  }, [inputRef, wrapperRef, setOpen, setQuery, enabled]);
+  }, [inputRef, wrapperRef, setOpen, clearQuery, enabled]);
 }
