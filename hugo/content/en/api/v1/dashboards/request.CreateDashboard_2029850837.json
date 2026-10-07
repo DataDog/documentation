@@ -1,0 +1,38 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 36
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "log_stream",
+        "indexes": [
+          "main"
+        ],
+        "query": "",
+        "sort": {
+          "column": "time",
+          "order": "desc"
+        },
+        "columns": [
+          "host",
+          "service"
+        ],
+        "show_date_column": true,
+        "show_message_column": true,
+        "message_display": "expanded-md"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

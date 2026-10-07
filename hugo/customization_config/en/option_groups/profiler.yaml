@@ -1,0 +1,21 @@
+# Profiler option groups
+
+profiler_language_options:
+  - id: java
+    default: true
+  - id: python
+  - id: go
+  - id: ruby
+  - id: node_js
+  - id: dot_net
+  - id: php
+  - id: c
+  - id: cpp
+  - id: rust
+
+# Runtime option groups — only shown when Java is selected (via show_if)
+
+java_profiler_runtime_options:
+  - id: jvm
+    default: true
+  - id: graalvm_native_image

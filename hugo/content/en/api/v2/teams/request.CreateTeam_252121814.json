@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "handle": "test-handle-a0fc0297eb519635",
+      "name": "test-name-a0fc0297eb519635",
+      "avatar": "\ud83e\udd51",
+      "banner": 7,
+      "visible_modules": [
+        "m1",
+        "m2"
+      ],
+      "hidden_modules": [
+        "m3"
+      ]
+    },
+    "type": "team"
+  }
+}

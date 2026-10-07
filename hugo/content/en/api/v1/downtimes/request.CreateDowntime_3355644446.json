@@ -1,0 +1,9 @@
+{
+  "message": "Example-Downtime",
+  "start": 1636629071,
+  "timezone": "Etc/UTC",
+  "scope": [
+    "test:exampledowntime"
+  ],
+  "monitor_id": 7
+}

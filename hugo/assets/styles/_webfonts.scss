@@ -1,0 +1,70 @@
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Light.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Light.woff') format('woff'),
+  url('../fonts/NationalWeb-Light.eot') format('embedded-opentype');
+  font-weight: 200;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Book.woff2') format('woff2'),
+      url('../fonts/NationalWeb-Book.woff') format('woff'),
+      url('../fonts/NationalWeb-Book.eot') format('embedded-opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Medium.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Medium.woff') format('woff'),
+  url('../fonts/NationalWeb-Medium.eot') format('embedded-opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Semibold.woff2') format('woff2'),
+  url('../fonts/NationalWeb-Semibold.woff') format('woff'),
+  url('../fonts/NationalWeb-Semibold.eot') format('embedded-opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+}
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('../fonts/NationalWeb-Bold.woff2') format('woff2'),
+      url('../fonts/NationalWeb-Bold.woff') format('woff'),
+      url('../fonts/NationalWeb-Bold.eot') format('embedded-opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('../fonts/RobotoMono-Regular.eot') format('embedded-opentype'),
+  url('../fonts/RobotoMono-Regular.woff') format('woff'),
+  url('../fonts/RobotoMono-Regular.ttf')  format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+    font-family: 'Glyphter';
+    src: url('../fonts/Glyphter.woff') format('woff'),
+         url('../fonts/Glyphter.eot'),
+         url('../fonts/Glyphter.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Glyphter.ttf') format('truetype'),
+         url('../fonts/Glyphter.svg#Glyphter') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

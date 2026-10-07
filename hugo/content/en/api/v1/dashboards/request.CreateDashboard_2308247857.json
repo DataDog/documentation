@@ -1,0 +1,26 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "alert_graph",
+        "alert_id": "7",
+        "viz_type": "timeseries"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

@@ -1,0 +1,14 @@
+{
+  "name": "Example-Monitor",
+  "type": "log alert",
+  "query": "logs(\"service:foo AND type:error\").index(\"main\").rollup(\"count\").by(\"source\").last(\"5m\") > 2",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "priority": 3,
+  "restricted_roles": [
+    "string"
+  ]
+}

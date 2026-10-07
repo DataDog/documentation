@@ -1,0 +1,87 @@
+<!-- TrustArc -->
+<script type="text/javascript" src="https://consent.trustarc.com/v2/autoblockasset/core.min.js?cmId=ufocto"></script>
+<script type="text/javascript" src="https://consent.trustarc.com/v2/autoblock?cmId=ufocto"></script>
+
+{{ if .Params.header_scripts }}
+    {{ range $k, $v := .Params.header_scripts }}
+
+        {{ range $i, $tag := $v }}
+
+            {{ if eq $tag true }}
+
+                {{ $script_tag := $i | printf "head_scripts/%s"  }}
+
+                {{ partial $script_tag . }}
+
+            {{ end }}
+
+        {{ end }}
+
+    {{ end }}
+{{ end }}
+
+{{ $dot := . }}
+
+{{ range $k, $v := .Site.Params.header_scripts }}
+
+    {{ range $i, $tag := $v }}
+
+        {{ if eq $tag true }}
+
+            {{ $script_tag := $i | printf "head_scripts/%s"  }}
+
+            {{ partial $script_tag $dot }}
+
+        {{ end }}
+
+    {{ end }}
+
+{{ end }}
+
+<!--
+isProd is equivalent to preview, live environments
+hugo defaults to environment development with hugo server
+-->
+{{- $isProd := ne hugo.Environment "development" -}}
+{{- $CI_COMMIT_SHORT_SHA := (os.Getenv "CI_COMMIT_SHORT_SHA") | default "" -}}
+{{- $IA_SUBDOMAIN := (os.Getenv "IA_SUBDOMAIN") | default "" -}}
+{{- $defines := dict "process.env.NODE_ENV" `"development"` "CI_COMMIT_SHORT_SHA" (printf "\"%s\"" $CI_COMMIT_SHORT_SHA) "IA_SUBDOMAIN" (printf "\"%s\"" $IA_SUBDOMAIN) -}}
+{{- $sourcemap := cond $isProd "external" "inline" -}}
+
+{{/* inline datadog rum & logs libs, then load config after as config changes every builds due to version */}}
+{{ $dd_rum := resources.Get "node_modules/datadog-rum.js" }}
+{{ $dd_logs := resources.Get "node_modules/datadog-logs.js" }}
+{{ $dd_libs_js := slice $dd_rum $dd_logs | resources.Concat "static/dd-libs.js" }}
+{{ if $isProd }}
+  {{ $dd_libs_js = $dd_libs_js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $dd_libs_js.Permalink }}" {{ if $isProd }} integrity="{{ $dd_libs_js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
+
+
+{{ $opts := dict "targetPath" "static/dd-browser-logs-rum.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $js := resources.Get "scripts/components/dd-browser-logs-rum.js" | js.Build $opts }}
+<!-- intentionally skipping fingerprint --->
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous" defer></script>
+
+{{ if eq .Section "api" }}
+  {{ $opts := dict "targetPath" "static/api-redirect.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+  {{ $js := resources.Get "scripts/api-redirect.js" | js.Build $opts }}
+  {{ if $isProd }}
+    {{ $js = $js | fingerprint "sha512" }}
+  {{ end }}
+  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
+{{ end }}
+
+{{ $opts := dict "targetPath" "static/lang-redirects.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $js := resources.Get "scripts/lang-redirects.js" | js.Build $opts }}
+{{ if $isProd }}
+  {{ $js = $js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>
+
+{{ $opts := dict "targetPath" "static/region-redirects.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $js := resources.Get "scripts/region-redirects.js" | js.Build $opts }}
+{{ if $isProd }}
+  {{ $js = $js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }} crossorigin="anonymous"></script>

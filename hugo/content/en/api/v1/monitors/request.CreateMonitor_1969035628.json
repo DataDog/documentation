@@ -1,0 +1,46 @@
+{
+  "name": "Example-Monitor",
+  "type": "ci-tests alert",
+  "query": "formula(\"query1 / query2 * 100\").last(\"15m\") >= 0.8",
+  "message": "some message Notify: @hipchat-channel",
+  "tags": [
+    "test:examplemonitor",
+    "env:ci"
+  ],
+  "priority": 3,
+  "options": {
+    "thresholds": {
+      "critical": 0.8
+    },
+    "variables": [
+      {
+        "data_source": "ci_tests",
+        "name": "query1",
+        "search": {
+          "query": "@test.status:fail"
+        },
+        "indexes": [
+          "*"
+        ],
+        "compute": {
+          "aggregation": "count"
+        },
+        "group_by": []
+      },
+      {
+        "data_source": "ci_tests",
+        "name": "query2",
+        "search": {
+          "query": ""
+        },
+        "indexes": [
+          "*"
+        ],
+        "compute": {
+          "aggregation": "count"
+        },
+        "group_by": []
+      }
+    ]
+  }
+}

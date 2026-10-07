@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "resource_type": "kafka",
+      "tags": [
+        "myTag",
+        "myTag2:myValue"
+      ],
+      "enable_custom_metrics": false
+    },
+    "id": "exampleconfluentcloud",
+    "type": "confluent-cloud-resources"
+  }
+}

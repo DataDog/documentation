@@ -1,0 +1,506 @@
+---
+title: Tracing ECS Applications
+description: Configure APM trace collection for containerized applications running on Amazon ECS
+aliases:
+  - /agent/amazon_ecs/apm
+further_reading:
+    - link: "/agent/amazon_ecs/logs/"
+      tag: "Documentation"
+      text: "Collect your application logs"
+    - link: "/agent/amazon_ecs/tags/"
+      tag: "Documentation"
+      text: "Assign tags to all data emitted by a container"
+---
+
+## Overview
+
+To collect traces from your ECS containers, update the task definitions for both your Agent and your application container as described below. You can either modify the previously used [task definition file][3] and [register your updated task definition][4], or you can edit the task definition directly from the Amazon Web UI.
+
+Once enabled, the Datadog Agent container collects the traces emitted from the other application containers on the same host as itself.
+
+There are two options for APM connectivity: Unix Domain Socket (UDS) and the TCP/IP method of fetching the Host IP Address from the AWS Instance Metadata Service (IMDS). Datadog recommends using the UDS option as it is the most resource efficient, requires neither access to IMDS nor modifying your startup parameters, and has the same setup per language.
+
+The TCP/IP strategy should be used:
+- In Windows-based environments as UDS is not supported
+- If you change the `user` of the Datadog Agent container from the default root user
+- For security requirements if you cannot use [ECS Host Volumes][6] in your application containers
+
+## Configure the Datadog Agent to accept traces
+
+{{< tabs >}}
+{{% tab "Unix Domain Socket (UDS)" %}}
+### Unix domain socket (UDS)
+To collect all traces from your running ECS containers, update your Agent's task definition from the [original ECS Setup][1] with the configuration below.
+
+Use [datadog-agent-ecs-apm-uds.json][2] as a reference point for the required base configuration. In the task definition for Datadog Agent container, set the `mountPoints` and `volumes` to configure the `dd-sockets` mount. This mounts the source path of the underlying host `/var/run/datadog` into the Agent container.
+
+```json
+{
+    "containerDefinitions": [
+        {
+            "name": "datadog-agent",
+            "image": "public.ecr.aws/datadog/agent:latest",
+            ...
+            "mountPoints": [
+                ...
+                {
+                    "containerPath": "/var/run/datadog",
+                    "readOnly": false,
+                    "sourceVolume": "dd-sockets"
+                }
+            ]
+        }
+    ],
+    "volumes": [
+        ...
+        {
+            "host": {
+                "sourcePath": "/var/run/datadog"
+            },
+            "name": "dd-sockets"
+        }
+    ]
+}
+```
+The Datadog Agent will maintain socket files defaulting `/var/run/datadog/apm.socket` and `/var/run/datadog/dsd.socket` that will be used for APM and DogStatsD based communication.
+
+[1]: /containers/amazon_ecs/?tab=awscli#manual-setup
+[2]: /resources/json/datadog-agent-ecs-apm-uds.json
+{{% /tab %}}
+{{% tab "TCP" %}}
+
+### TCP/IP
+1. To collect all traces from your running ECS containers, update your Agent's task definition from the [original ECS Setup][1] with the configuration below.
+
+    Use [datadog-agent-ecs-apm.json][2] as a reference point for the required base configuration. In the task definition for Datadog Agent container, set the `portMappings` for a host to container port on `8126` with the protocol `tcp`.
+
+    ```json
+    {
+      "containerDefinitions": [
+        {
+          "name": "datadog-agent",
+          "image": "public.ecr.aws/datadog/agent:latest",
+          "cpu": 100,
+          "memory": 512,
+          "essential": true,
+          "portMappings": [
+            {
+              "hostPort": 8126,
+              "protocol": "tcp",
+              "containerPort": 8126
+            }
+          ],
+          (...)
+        }
+      ]
+    }
+    ```
+
+2. For **Agent v7.17 or lower**, add the following environment variables:
+    ```json
+    "environment": [
+      (...)
+      {
+        "name": "DD_APM_ENABLED",
+        "value": "true"
+      },
+      {
+        "name": "DD_APM_NON_LOCAL_TRAFFIC",
+        "value": "true"
+      }
+    ]
+    ```
+
+[1]: /containers/amazon_ecs/?tab=awscli#manual-setup
+[2]: /resources/json/datadog-agent-ecs-apm.json
+{{% /tab %}}
+{{< /tabs >}}
+
+
+If you are updating a local file for your Agent's task definition, [register your updated task definition][4]. This creates a new revision. You can then reference this updated revision in the daemon service for the Datadog Agent.
+
+## Configure your application container to submit traces to Datadog Agent
+
+### Install the SDK
+Follow the [setup instructions for installing the Datadog SDK][2] for your application's language. For ECS install the SDK into your application's container image.
+
+### Provide the UDS configuration
+
+The recommended strategy is to configure your application to communicate over the Unix Domain Socket (UDS) that the Datadog Agent is maintaining. If you are using the TCP/IP method instead, proceed to [Providing the Private IP Address](#provide-the-private-ip-address-for-the-ec2-instance).
+
+To configure this in your application's task definition:
+- Mirror the `dd-sockets` approach from the Datadog Agent.
+- Provide the environment variables `DD_TRACE_AGENT_URL` and `DD_DOGSTATSD_URL` to target the sockets.
+
+```json
+{
+  "family": "APM-Example",
+  "containerDefinitions": [
+    {
+      "name": "<CONTAINER_NAME>",
+      "image": "<CONTAINER_IMAGE>",
+      "environment": [
+        {
+          "name": "DD_TRACE_AGENT_URL",
+          "value": "unix:///var/run/datadog/apm.socket"
+        },
+        {
+          "name": "DD_DOGSTATSD_URL",
+          "value": "unix:///var/run/datadog/dsd.socket"
+        }
+      ],
+      "mountPoints": [
+        {
+          "containerPath": "/var/run/datadog",
+          "readOnly": true,
+          "sourceVolume": "dd-sockets"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/var/run/datadog"
+      },
+      "name": "dd-sockets"
+    }
+  ]
+}
+```
+
+**Note:** The `DD_DOGSTATSD_URL` is only necessary if you are submitting custom DogStatsD metrics or [Runtime Metrics][5].
+
+Once deployed, the Application container and Datadog Agent container will share the `sourcePath` typed volume at `/var/run/datadog` and can communicate through the sockets in this folder.
+
+### Provide the private IP address for the EC2 instance
+If you are not using UDS, provide the SDK with the private IP address of the underlying EC2 instance that the application container is running on. This address is the hostname of the SDK endpoint. The Datadog Agent container on the same host (with the host port enabled) receives these traces.
+
+Use one of the following methods to dynamically get the private IP address:
+
+{{< tabs >}}
+{{% tab "EC2 metadata endpoint" %}}
+
+The [Amazon's EC2 metadata endpoint (IMDSv1)][1] allows discovery of the private IP address. To get the private IP address for each host, curl the following URL:
+
+{{< code-block lang="curl" >}}
+curl http://169.254.169.254/latest/meta-data/local-ipv4
+{{< /code-block >}}
+
+If you are using Version 2 of the [Instance Metadata Service (IMDSv2)][2]:
+
+{{< code-block lang="curl" >}}
+TOKEN=$(curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600")
+curl http://169.254.169.254/latest/meta-data/local-ipv4 -H "X-aws-ec2-metadata-token: $TOKEN"
+{{< /code-block >}}
+
+[1]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html
+[2]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html
+{{% /tab %}}
+{{% tab "ECS container metadata file" %}}
+
+The [Amazon's ECS container metadata file][1] allows discovery of the private IP address without making a request to IMDS. To get the private IP address for each host, first turn on [Amazon ECS Container metadata][2]. Once enabled on your host, the containers will have access to the JSON formatted metadata file located at the path stored in the `ECS_CONTAINER_METADATA_FILE` environment variable.
+
+This file can be read, and the value of the `HostPrivateIPv4Address` can be used as the IP address.
+
+{{< code-block lang="curl" >}}
+cat $ECS_CONTAINER_METADATA_FILE | jq -r .HostPrivateIPv4Address
+{{< /code-block >}}
+    
+[1]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/container-metadata.html#metadata-file-format
+[2]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/enable-metadata.html
+{{% /tab %}}
+{{< /tabs >}}
+
+Provide the result of this request to the SDK by setting the `DD_AGENT_HOST` environment variable for each application container that sends traces.
+
+### Configure the Trace Agent endpoint
+
+In cases where variables on your ECS application are set at launch time (Java, .NET, and PHP), you **must** set the hostname of the SDK endpoint as an environment variable with `DD_AGENT_HOST` using one of the above methods. The examples below use the IMDSv1 metadata endpoint, but the configuration can be interchanged if needed. If you have a startup script as your entry point, include this call as part of the script, otherwise add it to the ECS Task Definition's `entryPoint`.
+
+For other supported languages (Python, JavaScript, Ruby, and Go) you can alternatively set the hostname in your application's source code.
+
+{{< programming-lang-wrapper langs="python,nodeJS,ruby,go,java,.NET,PHP" >}}
+
+{{< programming-lang lang="python" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Python Startup Command>`:
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
+]
+```
+For Python the startup command is generally `ddtrace-run python my_app.py` but may vary depending on the framework used, for example, using [uWSGI][1] or instrumenting your [code manually with `patch_all`][2].
+
+[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
+[2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
+{{< /programming-lang >}}
+
+{{< programming-lang lang="nodeJS" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Node.js Startup Command>`:
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Node.js Startup Command>"
+]
+```
+
+#### Code
+You can alternatively update your code to have the SDK set the hostname explicitly:
+
+```javascript
+const tracer = require('dd-trace').init();
+const axios = require('axios');
+
+(async () => {
+  const { data: hostname } = await axios.get('http://169.254.169.254/latest/meta-data/local-ipv4');
+  tracer.setUrl(`http://${hostname}:8126`);
+})();
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="ruby" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Ruby Startup Command>`:
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Ruby Startup Command>"
+]
+```
+
+#### Code
+You can alternatively update your code to have the SDK set the hostname explicitly:
+
+```ruby
+require 'datadog' # Use 'ddtrace' if you're using v1.x
+require 'net/http'
+
+Datadog.configure do |c|
+  c.agent.host = Net::HTTP.get(URI('http://169.254.169.254/latest/meta-data/local-ipv4'))
+end
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="go">}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Go Startup Command>`:
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Go Startup Command>"
+]
+```
+
+#### Code
+You can alternatively update your code to have the SDK set the hostname explicitly. {{% tracing-go-v2 %}}
+
+```go
+package main
+
+import (
+    "net/http"
+    "io/ioutil"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
+)
+
+func main() {
+    resp, err := http.Get("http://169.254.169.254/latest/meta-data/local-ipv4")
+    bodyBytes, err := ioutil.ReadAll(resp.Body)
+    host := string(bodyBytes)
+    if err == nil {
+        //set the output of the curl command to the DD_AGENT_HOST env
+        os.Setenv("DD_AGENT_HOST", host)
+        // tell the trace agent the host setting
+        tracer.Start(tracer.WithAgentAddr(host))
+        defer tracer.Stop()
+    }
+    //...
+}
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="java" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following, substituting your `<Java Startup Command>`:
+
+```java
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Java Startup Command>"
+]
+```
+The Java startup command should include your `-javaagent:/path/to/dd-java-agent.jar`, see the [Java tracing docs for adding the SDK to the JVM][1] for further examples.
+
+[1]: /tracing/trace_collection/dd_libraries/java/?tab=containers#add-the-java-sdk-to-the-jvm
+{{< /programming-lang >}}
+
+{{< programming-lang lang=".NET" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following. Substituting your `APP_PATH` if not set:
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); dotnet ${APP_PATH}"
+]
+```
+
+{{< /programming-lang >}}
+
+{{< programming-lang lang="PHP" >}}
+
+#### Launch time variable
+Update the Task Definition's `entryPoint` with the following:
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); php-fpm -F"
+]
+```
+
+#### Apache
+
+For Apache and `mod_php` in VirtualHost or server configuration file, use `PassEnv` to set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
+
+```
+PassEnv DD_AGENT_HOST
+PassEnv DD_SERVICE
+PassEnv DD_ENV
+PassEnv DD_VERSION
+```
+
+#### PHP fpm
+
+When the ini param is set as `clear_env=on`, in the pool workers file `www.conf` you must also configure environment variables to be read from the host. Use this to also set `DD_AGENT_HOST` and other environment variables, such as the variables for [Unified Service Tagging][1] like the below example:
+
+```
+env[DD_AGENT_HOST] = $DD_AGENT_HOST
+env[DD_SERVICE] = $DD_SERVICE
+env[DD_ENV] = $DD_ENV
+env[DD_VERSION] = $DD_VERSION
+```
+
+[1]: https://docs.datadoghq.com/getting_started/tagging/unified_service_tagging/
+{{< /programming-lang >}}
+
+{{< /programming-lang-wrapper >}}
+
+#### IMDSv2
+When using IMDSv2, the equivalent `entryPoint` configuration looks like the following. Substitute `<Startup Command>` with the appropriate command based on your language, as in the examples above.
+
+```json
+"entryPoint": [
+  "sh",
+  "-c",
+  "export TOKEN=$(curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\"); export DD_AGENT_HOST=$(curl -H \"X-aws-ec2-metadata-token: $TOKEN\" http://169.254.169.254/latest/meta-data/local-ipv4); <Startup Command>"
+]
+```
+
+### Windows containers
+
+Windows containers running on ECS do not have direct access to the EC2 instance metadata endpoint by default. Use one of the following methods to set `DD_AGENT_HOST` with the EC2 private IP address.
+
+#### ECS container metadata file
+
+The ECS container metadata file provides the host private IP address without additional network configuration. In the container's `entryPoint`, read the metadata file and set `DD_AGENT_HOST`. Substitute `<Windows Startup Command>` with your application's startup command:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$env:DD_AGENT_HOST = (Get-Content -Path $env:ECS_CONTAINER_METADATA_FILE -Raw | ConvertFrom-Json).HostPrivateIPv4Address; <Windows Startup Command>"
+]
+```
+
+For IIS applications using the .NET Framework tracer, write the value to a [`datadog.json` configuration file][7] and restart IIS. Adjust the `datadog.json` path to match your application's root directory:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$private_ip = (Get-Content -Path $env:ECS_CONTAINER_METADATA_FILE -Raw | ConvertFrom-Json).HostPrivateIPv4Address; Set-Content -Path 'C:\\inetpub\\wwwroot\\datadog.json' -Value \"{ `\"DD_AGENT_HOST`\": `\"$private_ip`\" }\"; net stop /y was; net start w3svc; C:\\ServiceMonitor.exe w3svc"
+]
+```
+
+#### Alternative: EC2 metadata endpoint
+
+If the ECS container metadata file is not available, configure network routes within the container to access the EC2 metadata endpoint (`169.254.169.254`) and the ECS credentials endpoint (`169.254.170.2`).
+
+Add the bootstrap script and `DD_AGENT_HOST` assignment to the container's `entryPoint`. Substitute `<Windows Startup Command>` with your application's startup command:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; $env:DD_AGENT_HOST = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; <Windows Startup Command>"
+]
+```
+
+For IIS applications using the .NET Framework tracer, write the value to a [`datadog.json` configuration file][7] and restart IIS. Adjust the `datadog.json` path to match your application's root directory:
+
+```json
+"entryPoint": [
+    "powershell",
+    "-Command",
+    "$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop; $ifIndex = (Get-NetAdapter -InterfaceDescription 'Hyper-V Virtual Ethernet*' | Sort-Object | Select ifIndex).ifIndex; New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue; $private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content; Set-Content -Path 'C:\\inetpub\\wwwroot\\datadog.json' -Value \"{ `\"DD_AGENT_HOST`\": `\"$private_ip`\" }\"; net stop /y was; net start w3svc; C:\\ServiceMonitor.exe w3svc"
+]
+```
+
+Alternatively, add the full startup logic to a `.ps1` file and reference it in your Dockerfile. The following example includes IIS configuration:
+
+```powershell
+$gateway = (Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Sort-Object RouteMetric | Select NextHop).NextHop
+$ifIndex = (Get-NetAdapter -InterfaceDescription "Hyper-V Virtual Ethernet*" | Sort-Object | Select ifIndex).ifIndex
+New-NetRoute -DestinationPrefix 169.254.170.2/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue
+New-NetRoute -DestinationPrefix 169.254.169.254/32 -InterfaceIndex $ifIndex -NextHop $gateway -PolicyStore ActiveStore -ErrorAction SilentlyContinue
+$private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4').Content
+Set-Content -Path "C:\inetpub\wwwroot\datadog.json" -Value "{ `"DD_AGENT_HOST`": `"$private_ip`" }"
+net stop /y was
+net start w3svc
+C:\ServiceMonitor.exe w3svc
+```
+
+```dockerfile
+ENTRYPOINT ["powershell.exe", "C:\\app\\startup.ps1"]
+```
+
+**Note**: The EC2 metadata endpoint examples use IMDSv1. If your instances require IMDSv2, replace the `Invoke-WebRequest` call with a token-based request:
+
+```powershell
+$token = (Invoke-WebRequest -UseBasicParsing -Method PUT -Uri 'http://169.254.169.254/latest/api/token' -Headers @{'X-aws-ec2-metadata-token-ttl-seconds'='21600'}).Content
+$private_ip = (Invoke-WebRequest -UseBasicParsing -Uri 'http://169.254.169.254/latest/meta-data/local-ipv4' -Headers @{'X-aws-ec2-metadata-token'=$token}).Content
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /container/amazon_ecs/
+[2]: /tracing/trace_collection/
+[3]: /containers/amazon_ecs/?tab=awscli#create-and-manage-the-task-definition-file
+[4]: /containers/amazon_ecs/?tab=awscli#register-the-task-definition
+[5]: /tracing/metrics/runtime_metrics
+[6]: https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/aws-properties-ecs-taskdefinition-hostvolumeproperties.html
+[7]: /tracing/trace_collection/library_config/dotnet-framework/#optional-configuration

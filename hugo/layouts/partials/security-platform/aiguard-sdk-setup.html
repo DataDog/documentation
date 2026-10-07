@@ -1,0 +1,100 @@
+{{- $target := .Get "target" -}}
+
+<h2>Set up the Datadog Agent</h2>
+
+<p>SDKs use the <a href="/agent/?tab=Host-based">Datadog Agent</a> to send AI Guard data to Datadog. The Agent must be running and accessible to your application.</p>
+
+<p>If you don't use the Datadog Agent, the AI Guard evaluator API still works, but you can't see AI Guard traces in Datadog.</p>
+
+<h2>Required environment variables</h2>
+
+<p>Set the following environment variables in your application:</p>
+
+{{ if eq $target "automatic" }}
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>DD_AI_GUARD_ENABLED</code></td>
+      <td><code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_API_KEY</code></td>
+      <td><code>&lt;YOUR_API_KEY&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_APP_KEY</code></td>
+      <td><code>&lt;YOUR_APPLICATION_KEY&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_ENV</code></td>
+      <td><code>&lt;YOUR_ENVIRONMENT&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_SERVICE</code></td>
+      <td><code>&lt;YOUR_SERVICE&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_TRACE_ENABLED</code></td>
+      <td><code>true</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>By default, automatic integrations follow the blocking configuration set in the AI Guard service settings. To disable blocking for a specific service, set <code>DD_AI_GUARD_BLOCK</code> to <code>false</code> (equivalent to the <code>block</code> option in the <a href="/security/ai_guard/setup/sdk/">SDK</a> and <a href="/security/ai_guard/setup/http_api/">REST API</a>):</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>DD_AI_GUARD_BLOCK</code></td>
+      <td><code>false</code></td>
+    </tr>
+  </tbody>
+</table>
+
+{{ else }}
+
+<table>
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>DD_AI_GUARD_ENABLED</code></td>
+      <td><code>true</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_API_KEY</code></td>
+      <td><code>&lt;YOUR_API_KEY&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_APP_KEY</code></td>
+      <td><code>&lt;YOUR_APPLICATION_KEY&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_ENV</code></td>
+      <td><code>&lt;YOUR_ENVIRONMENT&gt;</code></td>
+    </tr>
+    <tr>
+      <td><code>DD_SERVICE</code></td>
+      <td><code>&lt;YOUR_SERVICE&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+{{ end }}

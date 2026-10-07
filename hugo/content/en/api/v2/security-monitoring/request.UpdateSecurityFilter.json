@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "exclusion_filters": [],
+      "filtered_data_type": "logs",
+      "is_enabled": true,
+      "name": "Example-Security-Monitoring",
+      "query": "service:ExampleSecurityMonitoring",
+      "version": 1
+    },
+    "type": "security_filters"
+  }
+}

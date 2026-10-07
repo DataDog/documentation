@@ -1,0 +1,17 @@
+{{ $dot := . }}
+{{ $s := newScratch }}
+{{ $servers := index (.servers) 0 }}
+{{ $s.Set "regions" dict }}
+{{ $serverURL := ""}}
+
+{{ range $domain := $servers.variables.site.enum }}
+    {{ $serverURL = replace $servers.url "{subdomain}" $servers.variables.subdomain.default  }}
+    {{ $serverURL = replace $serverURL "{site}" $domain  }}
+    {{ range $allowedRegion := site.Params.allowedRegions }}
+        {{ if eq $allowedRegion.domain $domain }}
+            {{ $s.SetInMap "regions" $allowedRegion.value $serverURL }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return ($s.Get "regions") }}

@@ -1,0 +1,6 @@
+{{- /* Emits a hidden hint for AI agents pointing to the page's markdown twin (when available in pages.json) and the site's llms.txt index. Invoked from each baseof.html so coverage is consistent across page types. */ -}}
+{{- with partialCached "page-agent-hint.html" (dict "ctx" .) .RelPermalink -}}
+<div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0" class="exclude-from-md sr-only">For AI agents: A markdown version of this page is available at <a href="{{ . }}">{{ . }}</a>.
+A documentation index is available at <a href="/llms.txt">/llms.txt</a>.
+</div>
+{{- end -}}

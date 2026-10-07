@@ -1,0 +1,33 @@
+{{/*  
+    Calls the /locate endpoint to determine if the site visitor is logged into Datadog / has the global dogwebu cookie.
+    See more about the /locate endpoint here: https://datadoghq.atlassian.net/wiki/spaces/WEB/pages/2342257464/Geo-Signup-Corp+Function
+*/}}
+
+{{ $isDevEnv := eq hugo.Environment "development" }}
+<div 
+x-data="{ 
+    showContent: null,
+    isLoggedIn () {
+        // sets showContent to true if the user is logged into Datadog
+
+        const apiUrl = window.document.URL === 'docs.datadoghq.com'
+            ? 'https://www.datadoghq.com/locate'
+            : 'https://corpsite-staging.datadoghq.com/locate';
+
+        fetch(apiUrl, {credentials: 'include'})
+        .then(response => response.json())
+        .then(data => {
+            this.showContent = data.user_status;
+        }).catch(error => {
+            console.error('ERROR:', error);
+        });
+    }
+}"
+x-init="{{if not $isDevEnv }}isLoggedIn{{ end }}"
+>
+    <p x-show="showContent">{{.Inner | markdownify}}</p>
+    <div x-show="{{$isDevEnv}}" style="border: red 1px solid; padding: 8px">
+        <b style="color: rgb(137, 7, 7)">Local Development rendering of is_loggedin shortcode. Not checking if user is logged into Datadog</b>
+        <p style="margin: 0">{{.Inner | markdownify}}</p>
+    </div>
+</div>

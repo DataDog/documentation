@@ -1,0 +1,14 @@
+{
+  "data": {
+    "attributes": {
+      "forwarder_destination": {
+        "type": "splunk_hec",
+        "endpoint": "https://example.com",
+        "access_token": "my-access-token",
+        "sourcetype": "new-sourcetype"
+      }
+    },
+    "type": "custom_destination",
+    "id": "be5d7a69-d0c8-4d4d-8ee8-bba292d98139"
+  }
+}

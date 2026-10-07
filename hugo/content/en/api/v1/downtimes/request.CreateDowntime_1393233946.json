@@ -1,0 +1,24 @@
+{
+  "message": "Example-Downtime",
+  "recurrence": {
+    "period": 1,
+    "type": "weeks",
+    "until_occurrences": 3,
+    "week_days": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri"
+    ]
+  },
+  "scope": [
+    "*"
+  ],
+  "start": 1636629071,
+  "end": 1636632671,
+  "timezone": "Etc/UTC",
+  "monitor_tags": [
+    "tag0"
+  ]
+}

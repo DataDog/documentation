@@ -1,0 +1,5 @@
+{{ $anchorized := anchorize .Inner }}
+
+<h3 id="{{ $anchorized }}">
+  {{ .Inner }}
+</h3>

@@ -1,0 +1,7 @@
+{
+  "data": {
+    "attributes": {
+      "filter": "@severity:(critical OR high)"
+    }
+  }
+}

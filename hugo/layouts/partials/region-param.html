@@ -1,0 +1,9 @@
+{{ $dot := . }}
+{{- if  not ($dot.key) -}}{{ errorf "region-param shortcode error: Missing value for param 'key': %s" $dot.Position }}{{- end -}}
+{{- if eq ($dot.code) "true" -}}
+    <code class="js-region-param region-param" data-region-param="{{ $dot.key }}"></code>
+{{- else if eq ($dot.link) "true" -}}
+    <a class="js-region-param region-param" data-region-param="{{ $dot.key }}" href="">{{ $dot.text }}</a>
+{{- else -}}
+    <span class="js-region-param region-param" data-region-param="{{ $dot.key }}"></span>
+{{- end -}}

@@ -1,0 +1,18 @@
+{
+  "data": {
+    "attributes": {
+      "attribute_key": "member-of",
+      "attribute_value": "Development"
+    },
+    "id": "3653d3c6-0c75-11ea-ad28-fb5701eabc7d",
+    "relationships": {
+      "role": {
+        "data": {
+          "id": "string",
+          "type": "roles"
+        }
+      }
+    },
+    "type": "authn_mappings"
+  }
+}

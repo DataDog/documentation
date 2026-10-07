@@ -1,0 +1,21 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 18,
+        "height": 24
+      },
+      "definition": {
+        "type": "note",
+        "content": "# Example Note"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

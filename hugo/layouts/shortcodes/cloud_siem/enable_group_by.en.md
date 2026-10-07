@@ -1,0 +1,1 @@
+Toggle **Enable Optional Group By** section if you want to group events even when values are missing. If there is a missing value, a sample value is generated so that the log does not get excluded.

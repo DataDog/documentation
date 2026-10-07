@@ -1,0 +1,8 @@
+{
+  "dashboards": [
+    {
+      "id": "123-abc-456",
+      "type": "custom_timeboard"
+    }
+  ]
+}

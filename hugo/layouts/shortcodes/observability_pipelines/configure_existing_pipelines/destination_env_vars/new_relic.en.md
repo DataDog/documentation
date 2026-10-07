@@ -1,0 +1,4 @@
+- New Relic account ID:
+	- The default environment variable is `DD_OP_DESTINATION_NEW_RELIC_ACCOUNT_ID`.
+- New Relic license:
+	- The default environment variable is `DD_OP_DESTINATION_NEW_RELIC_LICENSE_KEY`.

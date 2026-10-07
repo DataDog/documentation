@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "exclusion_filters": [
+        {
+          "name": "Exclude staging",
+          "query": "source:staging"
+        }
+      ],
+      "filtered_data_type": "logs",
+      "is_enabled": true,
+      "name": "Example-Security-Monitoring",
+      "query": "service:ExampleSecurityMonitoring"
+    },
+    "type": "security_filters"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "notifications": [],
+      "condition": "a > 0"
+    }
+  ],
+  "hasExtendedTitle": true,
+  "isEnabled": true,
+  "message": "My security monitoring rule",
+  "name": "My security monitoring rule",
+  "options": {
+    "evaluationWindow": 1800,
+    "keepAlive": 1800,
+    "maxSignalDuration": 1800,
+    "detectionMethod": "threshold"
+  },
+  "queries": [
+    {
+      "query": "source:source_here",
+      "groupByFields": [
+        "@userIdentity.assumed_role"
+      ],
+      "distinctFields": [],
+      "aggregation": "count",
+      "name": ""
+    }
+  ],
+  "tags": [
+    "env:prod",
+    "team:security"
+  ],
+  "type": "log_detection"
+}

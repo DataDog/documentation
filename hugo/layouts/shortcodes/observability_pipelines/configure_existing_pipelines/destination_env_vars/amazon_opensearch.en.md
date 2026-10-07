@@ -1,0 +1,6 @@
+- Amazon OpenSearch authentication username:
+	- The default environment variable is `DD_OP_DESTINATION_AMAZON_OPENSEARCH_USERNAME`.
+- Amazon OpenSearch authentication password:
+	- The default environment variable is `DD_OP_DESTINATION_AMAZON_OPENSEARCH_PASSWORD`.
+- Amazon OpenSearch endpoint URL:
+	- The default environment variable is `DD_OP_DESTINATION_AMAZON_OPENSEARCH_ENDPOINT_URL`.

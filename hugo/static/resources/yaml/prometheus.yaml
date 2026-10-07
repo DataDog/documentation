@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prometheus-deployment
+  labels:
+    app: prometheus
+    purpose: example
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prometheus
+      purpose: example
+  template:
+    metadata:
+      labels:
+        app: prometheus
+        purpose: example
+      annotations:
+          ad.datadoghq.com/prometheus-example.check_names: |
+            ["openmetrics"]
+          ad.datadoghq.com/prometheus-example.init_configs: |
+            [{}]
+          ad.datadoghq.com/prometheus-example.instances: |
+            [
+              {
+                "openmetrics_endpoint": "http://%%host%%:%%port%%/metrics",
+                "namespace": "documentation_example_kubernetes",
+                "metrics": [
+                  {"promhttp_metric_handler_requests": "handler.requests"},
+                  {"promhttp_metric_handler_requests_in_flight": "handler.requests.in_flight"},
+                  "go_memory.*"
+                ]
+              }
+            ]
+    spec:
+      containers:
+      - name: prometheus-example
+        image: prom/prometheus
+        ports:
+          - containerPort: 9090
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: prometheus-example-service
+spec:
+  selector:
+    app: prometheus
+    purpose: example
+  ports:
+  - name: promui
+    protocol: TCP
+    port: 9090
+    targetPort: 9090

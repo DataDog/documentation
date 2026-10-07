@@ -1,0 +1,6 @@
+experiments_warehouse_options:
+  - id: bigquery
+    default: true
+  - id: databricks
+  - id: redshift
+  - id: snowflake

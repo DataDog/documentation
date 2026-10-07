@@ -1,0 +1,25 @@
+<aside class="sidenav sidenav-partners" id="navbar-example2">
+    <div class="row sticky">
+        <div class="col">
+
+            <a href="{{ "" | absLangURL  }}">
+                <p class="h4">{{ i18n "datadog_docs" }} <span class="font-semibold">Partners</span></p>
+            </a>
+
+            {{ $ContentBaseName := "" }}
+            {{ with .File }}
+              {{ $ContentBaseName = .ContentBaseName }}
+            {{ end }}
+
+            {{ if ne $ContentBaseName "search" }}
+                {{ partial "search.html" . }}
+            {{ else }}
+                <div id="async-searchbar-mount"></div>
+            {{ end}}
+
+            <div class="sidenav-nav sidenav-nav-js-load">
+                {{ partial "nav/left-nav-partners.html" . }}
+            </div>
+        </div>
+    </div>
+</aside>

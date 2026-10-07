@@ -1,0 +1,4 @@
+---
+title: ログ
+headless: true
+---

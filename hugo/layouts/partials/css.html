@@ -1,0 +1,15 @@
+{{- $options := (dict "enableSourceMap" true) -}}
+{{- $isLocalServer := hugo.IsServer -}}
+{{- $inputStyleFile := "styles/style.scss" -}}
+{{- $outputStyles := "" -}}
+
+{{- if $isLocalServer -}}
+    {{- $outputStyles = resources.Get $inputStyleFile | resources.ExecuteAsTemplate $inputStyleFile . | toCSS $options -}}
+{{- else -}}
+    {{- $outputStyles = resources.Get $inputStyleFile | resources.ExecuteAsTemplate $inputStyleFile . | toCSS $options | minify | fingerprint -}}
+    {{ if ne (path.Ext $outputStyles.Permalink) ".css" }}
+        {{ errorf "ERROR CSS File Not Found! %q" .Path }}
+    {{ end }}
+{{- end -}}
+
+<link rel="stylesheet" integrity="{{ $outputStyles.Data.Integrity }}" href="{{- $outputStyles.Permalink -}}" crossorigin="anonymous">

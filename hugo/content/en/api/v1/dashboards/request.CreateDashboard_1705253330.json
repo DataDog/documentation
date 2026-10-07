@@ -1,0 +1,23 @@
+{
+  "layout_type": "ordered",
+  "title": "Example-Dashboard with has_value_labels",
+  "widgets": [
+    {
+      "definition": {
+        "type": "timeseries",
+        "requests": [
+          {
+            "q": "avg:system.cpu.user{*} by {host}",
+            "style": {
+              "palette": "dog_classic",
+              "line_type": "solid",
+              "line_width": "normal",
+              "has_value_labels": true
+            },
+            "display_type": "line"
+          }
+        ]
+      }
+    }
+  ]
+}

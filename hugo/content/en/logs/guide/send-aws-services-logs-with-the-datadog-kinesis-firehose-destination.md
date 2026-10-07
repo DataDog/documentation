@@ -1,0 +1,210 @@
+---
+title: Send AWS Services Logs with the Datadog Amazon Data Firehose Destination
+further_reading:
+- link: "/logs/explorer/"
+  tag: "Documentation"
+  text: "Learn how to explore your logs"
+- link: "/logs/explorer/#visualize"
+  tag: "Documentation"
+  text: "Perform Log Analytics"
+- link: "/logs/log_configuration/processors"
+  tag: "Documentation"
+  text: "Learn how to process your logs"
+- link: https://www.datadoghq.com/blog/send-amazon-vpc-flow-logs-to-data-firehose-and-datadog/
+  tag: "Blog"
+  text: "Send Amazon VPC flow logs to Amazon Kinesis Data Firehose and Datadog"
+- link: "/logs/guide/reduce_data_transfer_fees"
+  tag: "Guide"
+  text: "How to send logs to Datadog while reducing data transfer fees"
+- link: "https://learn.datadoghq.com/courses/send-aws-logs"
+  tag: "Learning Center"
+  text: "Send AWS Logs"
+
+---
+
+## Overview
+
+You can forward your AWS service logs stored in CloudWatch Log groups to an Amazon Kinesis Data Stream, for subsequent delivery through Amazon Data Firehose to one or multiple destinations. Datadog is one of the default destinations for Amazon Data Firehose Delivery streams. 
+
+AWS fully manages Amazon Data Firehose, so you don't need to maintain any additional infrastructure or forwarding configurations for streaming logs. You can set up an Amazon Data Firehose delivery stream in the AWS Firehose console, or automatically set up the destination using a CloudFormation template.
+
+## Setup
+
+{{< tabs >}}
+{{% tab "Amazon Data Firehose Delivery stream" %}}
+
+<div class="alert alert-info">Datadog has an intake limit of <strong>65,536 events per batch</strong> and recommends setting the Kinesis buffer size to <strong>2 MiB</strong>. If your system exceeds this limit, some logs may be dropped.</div>
+
+Datadog recommends using a Kinesis Data Stream as input when using the Datadog destination with Amazon Data Firehose. It gives you the ability to forward your logs to multiple destinations, in case Datadog is not the only consumer for those logs. If Datadog is the only destination for your logs, or if you already have a Kinesis Data Stream with your logs, you can ignore step one.
+
+1. Optionally, use the [Create a Data Stream][1] section of the Amazon Kinesis Data Streams developer guide in AWS to create a new Kinesis data stream. Name the stream something descriptive, like `DatadogLogStream`.
+2. Go to [Amazon Data Firehose][2].  
+3. Click {{< ui >}}Create Firehose stream{{< /ui >}}.
+   1. Set the source: 
+      - `Amazon Kinesis Data Streams` if your logs are coming from a Kinesis Data Stream
+      - `Direct PUT` if your logs are coming directly from a CloudWatch log group
+   1. Set the destination as `Datadog`.  
+   1. Provide a name for the delivery stream.  
+   1. In the {{< ui >}}Destination settings{{< /ui >}}, choose the `Datadog logs` HTTP endpoint URL that corresponds to your [Datadog site][5].  
+   1. Paste your API key into the {{< ui >}}API key{{< /ui >}} field. You can get or create an API key from the [Datadog API Keys page][3]. If you prefer to use Secrets Manager authentication, add in your Datadog API key in the full JSON format in the value field as follows: `{"api_key":"<YOUR_API_KEY>"}`.
+   1. Optionally, configure the {{< ui >}}Retry duration{{< /ui >}}, the buffer settings, or add {{< ui >}}Parameters{{< /ui >}}, which are attached as tags to your logs.  
+   **Note**: Datadog has an intake limit of 65,536 events per batch and recommends setting the {{< ui >}}Buffer size{{< /ui >}} to `2 MiB` if the logs are single line messages.
+   1. In the {{< ui >}}Backup settings{{< /ui >}}, select an S3 backup bucket to receive any failed events that exceed the retry duration.  
+     **Note**: To ensure any logs that fail through the delivery stream are still sent to Datadog, set the Datadog Forwarder Lambda function to [forward logs][4] from this S3 bucket.  
+   1. Click {{< ui >}}Create Firehose stream{{< /ui >}}.
+
+[1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
+[2]: https://console.aws.amazon.com/firehose/
+[3]: https://app.datadoghq.com/organization-settings/api-keys
+[4]: /logs/guide/send-aws-services-logs-with-the-datadog-lambda-function/?tab=automaticcloudformation#collecting-logs-from-s3-buckets
+[5]: /getting_started/site/
+{{% /tab %}}
+
+{{% tab "CloudFormation template" %}}
+
+Customize the full [Kinesis CloudFormation template][1] and install it from the AWS Console. 
+
+[1]: /resources/json/kinesis-logs-cloudformation-template.json
+{{% /tab %}}
+{{< /tabs >}}
+
+## Send AWS logs to your Firehose stream
+
+CloudWatch Logs needs permission to put data into your Kinesis Data Stream or Amazon Data Firehose delivery stream, depending on which approach you're using. [Create an IAM role and policy](#create-an-iam-role-and-policy). Then subscribe your new Kinesis stream or Amazon Data Firehose delivery stream to the CloudWatch log groups you want to ingest into Datadog. Subscriptions can be created through the [AWS console](#console) or [CLI](#cli).  
+   **Note**: Each CloudWatch Log group can only have two subscriptions.
+
+### Create an IAM role and policy
+
+Create an IAM role and permissions policy to enable CloudWatch Logs to put data into your Kinesis stream. 
+  1. Ensure that `logs.amazonaws.com` or `logs.<region>.amazonaws.com` is configured as the service principal in the role's **Trust relationships**. For example:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Statement1",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logs.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+  2. Ensure that the role's attached permissions policy allows the `firehose:PutRecord` `firehose:PutRecordBatch`, `kinesis:PutRecord`, and `kinesis:PutRecords` actions. If you're using a Kinesis Data Stream, specify its ARN in the `Resource` field. If you're **not** using a Kinesis Data Stream, specify the ARN of your Amazon Data Firehose stream in the `Resource` field.  
+  For example:
+
+```
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "firehose:PutRecord",
+        "firehose:PutRecordBatch",
+        "kinesis:PutRecord",
+        "kinesis:PutRecords"
+      ],
+      "Resource": "arn:aws:kinesis:<REGION>:<ACCOUNT_ID>:stream/<DELIVERY_STREAM>
+    }
+  ]
+}
+```
+Use the [Subscription filters with Kinesis Data Streams][2] example (steps 3 to 6) for an example of setting this up with the AWS CLI.
+
+### Create a subscription filter
+
+#### CLI
+
+The following example creates a subscription filter through the AWS CLI:
+
+```
+  aws logs put-subscription-filter \
+    --log-group-name "<MYLOGGROUPNAME>" \
+    --filter-name "<MyFilterName>" \
+    --filter-pattern "" \
+    --destination-arn "<DESTINATIONARN> (data stream or delivery stream)" \
+    --role-arn "<MYROLEARN>"
+```
+
+#### Console
+
+Follow these steps to create a subscription filter through the AWS console. 
+
+1. Go to your log group in [CloudWatch][1] and click on the {{< ui >}}Subscription filters{{< /ui >}} tab, then {{< ui >}}Create{{< /ui >}}.
+   - If you are sending logs through a Kinesis Data Stream, select `Create Kinesis subscription filter`.
+   - If you are sending logs directly from your log group to your Amazon Data Firehose delivery stream, select `Create Amazon Data Firehose subscription filter`.
+
+2. Select the data stream or Firehose delivery stream as applicable, as well as the [IAM role](#create-an-iam-role-and-policy) previously created.
+
+3. Provide a name for the subscription filter, and click {{< ui >}}Start streaming{{< /ui >}}.
+
+**Important note**: The destination of the subscription filter must be in the same account as the log group, as described in the [Amazon CloudWatch Logs API Reference][3].
+
+### Validation
+
+Check the {{< ui >}}Subscription filters{{< /ui >}} tab of your log group's detail page in [CloudWatch][1] to confirm that the new Kinesis stream or Amazon Data Firehose stream is subscribed to your log group.
+
+### Find your logs in Datadog
+
+After you have set up the Amazon Data Firehose delivery stream, you can analyze the logs subscribed to your delivery stream in Datadog. 
+
+To populate all logs by ARN:
+
+1. Go to the [Log Explorer][5] in Datadog.
+2. In the search bar, type `@aws.firehose.arn:"<ARN>"`, replace `<ARN>` with your Amazon Data Firehose ARN, and press {{< ui >}}Enter{{< /ui >}} to see all of your subscribed logs.
+
+**Note**: A single Kinesis payload must not be more than 65,000 log messages. Log messages after that limit are dropped.
+
+## Set the source, service, and tags
+
+When logs arrive through Amazon Data Firehose, Datadog automatically determines the `source`, `service`, and tags for each log based on AWS metadata:
+
+1. **Source**: Detected from the CloudWatch log group name. For example, `/aws/lambda/my-function` sets `source:lambda`, and `/aws/rds/...` sets `source:rds`. If the log group does not match a known AWS service pattern, the log group name itself is used as the source.
+2. **Service**: Defaults to the same value as the detected source. For Lambda logs, the service is set to the function name.
+3. **Tags**: AWS metadata such as `region`, `aws_account`, and `sourcecategory:aws` are added automatically.
+
+### Overriding source, service, and tags
+
+There are two ways to override these auto-detected values:
+
+#### Firehose common attributes
+
+You can set `source`, `service`, and arbitrary tags through the **Parameters** section (Common Attributes) of your Amazon Data Firehose delivery stream configuration. These values apply to all logs flowing through that delivery stream and take priority over the auto-detected values.
+
+For example, setting `source: nodejs` and `env: production` in the Common Attributes adds those as the log source and as a tag, respectively.
+
+#### Reserved attributes in the log body
+
+<div class="alert alert-info">Parsing reserved attributes (<code>ddsource</code>, <code>service</code>, <code>ddtags</code>) from the log body is not enabled by default. To enable it for your organization, <a href="/help/">contact Datadog Support</a>.</div>
+
+If your application writes structured JSON logs that include `ddsource`, `service`, or `ddtags` at the top level of the JSON body, Datadog can use those values instead of the auto-detected ones. For example:
+
+```json
+{
+  "message": "request completed",
+  "ddsource": "nodejs",
+  "service": "my-app",
+  "ddtags": "env:production,version:1.2.3"
+}
+```
+
+When enabled, these fields take the highest priority, overriding both the auto-detected values and the Common Attributes:
+- `ddsource` overrides the log source.
+- `service` overrides the log service.
+- `ddtags` values are merged into the log's tags (for example, `env` and `version` become searchable tags).
+
+These fields are consumed during intake and do not appear as log attributes.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://console.aws.amazon.com/cloudwatch/home
+[2]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs//SubscriptionFilters.html#DestinationKinesisExample
+[3]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutSubscriptionFilter.html
+[4]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters.html#FirehoseExample
+[5]: /logs/explorer/

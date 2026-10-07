@@ -1,0 +1,50 @@
+name: Code-Freeze
+
+# Stop the current running job if a new push is made to the PR
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    types:
+      - labeled
+      - unlabeled
+      - opened
+      - reopened
+      - synchronize
+    branches:
+      # only target `master` branch
+      - master
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'Pull request number to check'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  check-code-freeze-status:
+    runs-on: ubuntu-latest
+    env:
+      FREEZE_ENABLED: ${{ vars.FREEZE_ENABLED }}
+      PR_NUMBER: ${{ github.event.inputs.pr_number || github.event.pull_request.number }}
+    steps:
+      - name: Check Status
+        run: |
+          if [ -n "$PR_NUMBER" ]; then
+            echo "Checking code freeze status for PR #$PR_NUMBER"
+          else
+            echo "Checking code freeze status"
+          fi
+          
+          if [ "$FREEZE_ENABLED" = "true" ]; then
+            echo "Code Freeze is enabled"
+            exit 1
+          else
+            echo "Code freeze is not enabled - check passed"
+            exit 0
+          fi

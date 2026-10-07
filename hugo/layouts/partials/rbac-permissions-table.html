@@ -1,0 +1,69 @@
+{{ $permission_group := .group }}
+{{ $permissions_data := .data }}
+
+{{ if ne $permissions_data nil }}
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{- range $permissions_data -}}
+        {{- if ne .attributes.name nil -}}
+        <tr>
+          <td>
+            {{- .attributes.display_name -}}<br>(<code>{{- .attributes.name -}}</code>)
+          </td>
+          <td>
+            {{- if ne .attributes.description_link nil -}}
+              <a href="{{- .attributes.description_link -}}" target="_blank">
+                {{- .attributes.description -}}
+              </a>
+            {{- else -}}
+              {{- .attributes.description -}}
+            {{- end -}}
+          </td>
+          <td class="text-nowrap">
+            {{- .role_name | default "None" -}}
+          </td>
+        </tr>
+        {{- end -}}
+      {{- end -}}
+    </tbody>
+  </table>
+
+  {{ if eq $permission_group "Log Management" }}
+  <p>Log Management RBAC also includes two legacy permissions, superseded by finer-grained and more extensive <code>logs_read_data</code> permission:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_live_tail">Logs Live Tail</a><br>
+          (<code>logs_live_tail</code>)
+        </td>
+        <td>Access the live tail feature</td>
+        <td class="text-nowrap">Datadog Read Only Role</td>
+      </tr>
+      <tr>
+        <td>
+          <a href="/logs/guide/logs-rbac-permissions/#logs_read_index_data">Logs Read Index Data</a>
+          (<code>logs_read_index_data</code>)
+        </td>
+        <td>Read a subset log data (index based)</td>
+        <td class="text-nowrap">Datadog Read Only Role</td>
+      </tr>
+    </tbody>
+  </table>
+  {{ end }}
+{{ end }}

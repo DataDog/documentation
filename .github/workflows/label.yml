@@ -1,0 +1,31 @@
+name: Labeler
+on: [pull_request]
+
+jobs:
+  label:
+    permissions:
+      pull-requests: write # to update pull request
+      contents: read # to read the contents of the repository
+      statuses: write # to set the status of the commit
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+    - name: Set documentation preview
+      if: github.event.pull_request.head.repo.fork == false && github.ref != 'refs/heads/guacbot/translation-pipeline'
+      uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          github.rest.repos.createCommitStatus({
+            "owner": context.repo.owner,
+            "repo": context.repo.repo,
+            "sha": context.payload.pull_request.head.sha,
+            "state": "success",
+            "context": "preview",
+            "description": `Check preview branch "${context.payload.pull_request.head.ref}"`,
+            "target_url": `https://docs-staging.datadoghq.com/${context.payload.pull_request.head.ref}`
+          })

@@ -1,0 +1,139 @@
+/* "fm" classes are mostly for imitating MathML in browsers without it; we try to roughly mimic
+	Firefox's MathML layout, which seems better than http://www.w3.org/TR/mathml-for-css/ */
+
+/* Cambria [Math]'s line height currently (2/11) is large in most non-Microsoft browsers: */
+fmath, .fm-math		{ font-family: STIXGeneral, 'DejaVu Serif', 'DejaVu Sans',
+    /* Cambria, 'Cambria Math', */ Times, 'Lucida Sans Unicode',
+    OpenSymbol, 'Standard Symbols L', serif; line-height: 1.2 }
+fmath mtext, .fm-math mtext
+{ line-height: normal }
+fmath mo, .fm-mo, .ma-sans-serif, fmath mi[mathvariant*=sans-serif],
+fmath mn[mathvariant*=sans-serif], fmath mtext[mathvariant*=sans-serif],
+fmath ms[mathvariant*=sans-serif]
+/* some (crossbrowsertesting/browsershots) IE7s require no line break before
+'Lucida Sans Unicode': */
+{ font-family: STIXGeneral, 'DejaVu Sans', 'DejaVu Serif', /* Cambria, 'Cambria Math', */ 'Lucida Sans Unicode',
+    'Arial Unicode MS', 'Lucida Grande', Times,
+    OpenSymbol, 'Standard Symbols L', sans-serif }
+.fm-mo-Luc	/* avoid extra space at character tops, especially when stretched */
+{ font-family: STIXGeneral, 'DejaVu Sans', 'DejaVu Serif', /* Cambria, 'Cambria Math', */ 'Lucida Sans Unicode',
+    'Lucida Grande', 'Arial Unicode MS', Times,
+    OpenSymbol, 'Standard Symbols L', sans-serif }
+* html fmath, * html .fm-math, * html fmath mo, * html .fm-mo, * html .IE6-LSU
+{ font-family: 'Lucida Sans Unicode' !important }	/* IE <=6 only */
+mo.fm-radic			{ font-family: 'Lucida Sans Unicode', 'Lucida Grande',
+    Verdana, sans-serif !important }
+.ma-script, fmath mi[mathvariant*=script], fmath mo[mathvariant*=script],
+fmath mn[mathvariant*=script], fmath mtext[mathvariant*=script], fmath ms[mathvariant*=script]
+{ font-family:
+    'England Hand DB', 'Embassy BT', 'Amazone BT', 'Bank Script D',
+    'URW Chancery L', 'Lucida Calligraphy', 'Apple Chancery',
+    'Monotype Corsiva', Corsiva,
+    'Vivaldi D', Gabriola, 'Segoe Script', cursive }
+.ma-fraktur, fmath mi[mathvariant*=fraktur], fmath mo[mathvariant*=fraktur],
+fmath mn[mathvariant*=fraktur], fmath mtext[mathvariant*=fraktur],
+fmath ms[mathvariant*=fraktur]
+{ font-family: UnifrakturMaguntia, Impact, fantasy }
+fmath mi[mathvariant*=monospace], fmath mo[mathvariant*=monospace],
+fmath mn[mathvariant*=monospace], fmath mtext[mathvariant*=monospace],
+fmath ms[mathvariant*=monospace]
+{ font-family: monospace }
+/* .ma-double-struck currently ignored */
+
+.fm-mi-length-1		{ font-style: italic }
+fmath mi[mathvariant]	{ font-style: normal }
+
+.ma-bold, fmath mi[mathvariant*=bold], fmath mo[mathvariant*=bold],
+fmath mn[mathvariant*=bold], fmath mtext[mathvariant*=bold], fmath ms[mathvariant*=bold]
+{ font-weight: bold }
+.ma-nonbold			{ font-weight: normal }
+.ma-upright			{ font-style: normal !important }
+.ma-italic, fmath mi[mathvariant*=italic], fmath mo[mathvariant*=italic],
+fmath mn[mathvariant*=italic], fmath mtext[mathvariant*=italic], fmath ms[mathvariant*=italic]
+{ font-style: italic }
+
+fmath.ma-block		{ display: block; text-align: center; text-indent: 0;
+    page-break-inside: avoid }
+
+/* note an operator might be 'mo' or "embellished": */
+.fm-separator		{ padding: 0 0.56ex 0 0 }
+.fm-infix-loose		{ padding: 0 0.56ex }	/* typically a relation */
+.fm-infix			{ padding: 0 0.44ex }
+.fm-prefix			{ padding: 0 0.33ex 0 0 }
+.fm-postfix			{ padding: 0 0 0 0.33ex }
+.fm-prefix-tight	{ padding: 0 0.11ex 0 0 }
+.fm-postfix-tight	{ padding: 0 0 0 0.11ex }
+.fm-quantifier		{ padding: 0 0.11ex 0 0.22ex }	/* to match MathML */
+/* fences should have no padding */
+.ma-non-marking		{ display: none }
+
+.fm-large-op		{ font-size: 1.3em }
+.fm-inline .fm-large-op	{ font-size: 1em }
+
+fmath mrow			{ white-space: nowrap }
+
+.fm-vert			{ display: inline-block; vertical-align: middle }
+
+fmath table, fmath tbody, fmath tr, fmath td	/* reset to default(?) styles */
+{ border: 0 !important; padding: 0 !important; margin: 0 !important;
+    outline: 0 !important }
+
+fmath table			{ border-collapse: collapse !important; text-align: center !important;
+    table-layout: auto !important; float: none !important }
+
+.fm-frac			{ padding: 0 1px !important }
+td.fm-den-frac		{ border-top: solid thin !important }
+
+.fm-root			{ font-size: 0.6em }
+.fm-radicand		{ padding: 0 1px 0 0; border-top: solid; margin-top: 0.1em }
+
+.fm-script			{ font-size: 0.71em }
+.fm-script .fm-script .fm-script	{ font-size: 1em }
+
+td.fm-underover-base	{ line-height: 1 !important }
+
+td.fm-mtd			{ padding: 0.5ex 0.4em !important; vertical-align: baseline !important }
+
+fmath mphantom		{ visibility: hidden }
+fmath menclose, menclose.fm-menclose
+{ display: inline-block }
+fmath menclose[notation=top], menclose.fm-menclose[notation=top]
+{ border-top: solid thin }
+fmath menclose[notation=right], menclose.fm-menclose[notation=right]
+{ border-right: solid thin }
+fmath menclose[notation=bottom], menclose.fm-menclose[notation=bottom]
+{ border-bottom: solid thin }
+fmath menclose[notation=left], menclose.fm-menclose[notation=left]
+{ border-left: solid thin }
+fmath menclose[notation=box], menclose.fm-menclose[notation=box]
+{ border: solid thin }
+fmath none			{ display: none }	/* probably unnecessary */
+
+mtd.middle, fmath td.middle	{ vertical-align: middle !important }
+
+fmath table[columnalign=left], fmath tr[columnalign=left], fmath td[columnalign=left]
+{ text-align: left !important }
+fmath table[columnalign=right], fmath tr[columnalign=right], fmath td[columnalign=right]
+{ text-align: right !important }
+fmath td[rowalign=top]
+{ vertical-align: top !important }
+fmath td[rowalign=bottom]
+{ vertical-align: bottom !important }
+fmath td[rowalign=center]
+{ vertical-align: middle !important }
+
+mtable.ma-join-align > mtr > mtd:first-child,
+fmath span.ma-join-align > table > tbody > tr > td:first-child
+{ text-align: right; padding-right: 0 !important }
+mtable.ma-join-align > mtr > mtd:first-child + mtd,
+fmath span.ma-join-align > table > tbody > tr > td:first-child + td
+{ text-align: left; padding-left: 0 !important }
+mtable.ma-join1-align > mtr > mtd:first-child,	/* e.g. for cases after a stretched { */
+fmath span.ma-join1-align > table > tbody > tr > td:first-child
+{ text-align: left; padding-left: 0 !important }
+
+mtable.ma-binom > mtr > mtd, fmath span.ma-binom > table > tbody > tr > td
+{ padding: 0 !important }
+mtable.ma-binom > mtr:first-child > mtd,
+fmath span.ma-binom > table > tbody > tr:first-child > td
+{ padding: 0 0 0.18em 0 !important }

@@ -1,0 +1,11 @@
+{{ if eq (substr .Params.external_redirect 0 4) "http"}}
+    {{ $.Scratch.Set "redurl" .Params.external_redirect}}
+{{ else }}
+    {{ if eq (substr .Params.external_redirect 0 1) "/"}}
+        {{ $.Scratch.Set "redurl" ((substr .Params.external_redirect 1) | absLangURL) }}
+    {{ else }}
+        {{ $.Scratch.Set "redurl" (.Params.external_redirect | absLangURL) }}
+    {{ end }}
+{{ end }}
+{{ $redurl := $.Scratch.Get "redurl" }}
+<meta http-equiv="refresh" content="0;url={{ $redurl }}">

@@ -1,0 +1,36 @@
+{
+  "queries": [
+    {
+      "aggregation": "geo_data",
+      "groupByFields": [
+        "@usr.id"
+      ],
+      "distinctFields": [],
+      "metric": "@network.client.geoip",
+      "query": "*"
+    }
+  ],
+  "cases": [
+    {
+      "name": "",
+      "status": "info",
+      "notifications": []
+    }
+  ],
+  "hasExtendedTitle": true,
+  "message": "test",
+  "isEnabled": true,
+  "options": {
+    "maxSignalDuration": 86400,
+    "evaluationWindow": 900,
+    "keepAlive": 3600,
+    "detectionMethod": "impossible_travel",
+    "impossibleTravelOptions": {
+      "baselineUserLocations": false
+    }
+  },
+  "name": "Example-Security-Monitoring",
+  "type": "log_detection",
+  "tags": [],
+  "filters": []
+}

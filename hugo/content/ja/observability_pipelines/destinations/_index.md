@@ -1,0 +1,180 @@
+---
+aliases:
+- /ja/observability_pipelines/destinations/datadog_apm/
+- /ja/observability_pipelines/destinations/opentelemetry/traces/
+- /ja/observability_pipelines/destinations/opentelemetry/metrics/
+- /ja/observability_pipelines/destinations/prometheus/
+description: Observability Pipelines Worker で利用可能な送信先について学びます。
+disable_toc: false
+further_reading:
+- link: logs/processing/pipelines
+  tag: ドキュメント
+  text: ログ処理パイプライン
+title: 送信先
+---
+## 概要 {#overview}
+
+Observability Pipelines Worker を使用して、処理済みのログおよびメトリクスをさまざまな宛先に送信します。ほとんどの Observability Pipelines の送信先は、イベントをバッチとして下流のインテグレーションに送信します。詳細については、[イベントのバッチ処理](#event-batching)を参照してください。一部の Observability Pipelines の送信先では、テンプレート構文をサポートするフィールドがあり、特定のフィールドの値に基づいてそれらを設定することができます。詳細については、[テンプレート構文](#template-syntax)を参照してください。
+
+**注**:
+- パイプラインには合計 20 個の送信先を追加できます。
+- パイプラインに同じタイプの送信先を複数追加する場合は、[Secrets Management][4] を使用する必要があります。たとえば、2 つの異なる HTTP クライアントに対して 2 つの HTTP クライアント送信先を追加する場合、HTTP クライアント URI にシークレット識別子を使用する必要があります。2 つの異なる HTTP クライアント URI を保存するために、デフォルトの `DESTINATION_HTTP_CLIENT_URI` を使用することはできません。
+
+## 送信先 {#destinations}
+
+以下が利用可能な送信先です。
+
+{{< tabs >}}
+{{% tab "ログ" %}}
+
+- [Amazon OpenSearch][1]
+- [Amazon S3][22]
+- [Amazon Security Lake][3]
+- [Azure Storage][4]
+- [ClickHouse][24]
+- [CrowdStrike Next-Gen SIEM][6]
+- [Databricks (Zerobus)][23]
+- [Datadog Archives][2]
+- [Datadog BYOC Logs][5]
+- [Datadog Logs][7]
+- [Elasticsearch][8]
+- [Google Cloud Storage][10]
+- [Google Pub/Sub][11]
+- [Google SecOps][9]
+- [HTTP Client][12]
+- [Kafka][13]
+- [Microsoft Sentinel][14]
+- [New Relic][15]
+- [OpenSearch][16]
+- [SentinelOne][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Sumo Logic Hosted Collector][20]
+- [Syslog][21]
+
+[1]: /ja/observability_pipelines/destinations/amazon_opensearch/
+[2]: /ja/observability_pipelines/destinations/datadog_archives/
+[3]: /ja/observability_pipelines/destinations/amazon_security_lake/
+[4]: /ja/observability_pipelines/destinations/azure_storage/
+[5]: /ja/observability_pipelines/destinations/datadog_byoc_logs/
+[6]: /ja/observability_pipelines/destinations/crowdstrike_ng_siem/
+[7]: /ja/observability_pipelines/destinations/datadog_logs/
+[8]: /ja/observability_pipelines/destinations/elasticsearch/
+[9]: /ja/observability_pipelines/destinations/google_secops/
+[10]: /ja/observability_pipelines/destinations/google_cloud_storage/
+[11]: /ja/observability_pipelines/destinations/google_pubsub/
+[12]: /ja/observability_pipelines/destinations/http_client/
+[13]: /ja/observability_pipelines/destinations/kafka/
+[14]: /ja/observability_pipelines/destinations/microsoft_sentinel/
+[15]: /ja/observability_pipelines/destinations/new_relic/
+[16]: /ja/observability_pipelines/destinations/opensearch/
+[17]: /ja/observability_pipelines/destinations/sentinelone/
+[18]: /ja/observability_pipelines/destinations/socket/
+[19]: /ja/observability_pipelines/destinations/splunk_hec/logs/
+[20]: /ja/observability_pipelines/destinations/sumo_logic_hosted_collector/
+[21]: /ja/observability_pipelines/destinations/syslog/
+[22]: /ja/observability_pipelines/destinations/amazon_s3/
+[23]: /ja/observability_pipelines/destinations/databricks/
+[24]: /ja/observability_pipelines/destinations/clickhouse/
+
+{{% /tab %}}
+
+{{% tab "メトリクス" %}}
+
+- [Datadog Metrics][1]
+- [Elasticsearch][2]
+- [HTTP/S Client][3]
+- [Splunk HEC][4]
+
+[1]: /ja/observability_pipelines/destinations/datadog_metrics/
+[2]: /ja/observability_pipelines/destinations/elasticsearch/
+[3]: /ja/observability_pipelines/destinations/http_client/
+[4]: /ja/observability_pipelines/destinations/splunk_hec/metrics
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## テンプレート構文 {#template-syntax}
+
+ログは、サービスや環境、または他のログ属性に基づいて、別々のインデックスに保存されることがよくあります。Observability Pipelines では、特定のログフィールドに基づいてログを異なるインデックスにルーティングするためにテンプレート構文を使用できます。
+
+Observability Pipelines Worker がテンプレート構文でフィールドを解決できない場合、Worker はその送信先に対して指定された動作をデフォルトで実行します。例: テンプレート `{{application_id}}` for the Datadog Archives destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` を使用しており、そこにログを公開する場合。
+
+次のテーブルは、テンプレート構文をサポートする送信先とフィールド、および Observability Pipelines Worker がフィールドを解決できない場合に何が起こるかを示しています。
+
+| 送信先       | テンプレート構文をサポートするフィールド                        | フィールドが解決できない場合の動作                                                                                 |
+|-------------------|--------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| Amazon Opensearch | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
+| Datadog Archives  | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
+| Azure Blob        | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
+| Elasticsearch     | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
+| Google Chronicle  | ログタイプ                            | デフォルトは `DATADOG` ログタイプです。                                                                                           |
+| Google Cloud      | プレフィックス                              | Worker は `OP_UNRESOLVED_TEMPLATE_LOGS/` という名前のフォルダーを作成し、そこにログを書き込みます。                               |
+| Opensearch        | インデックス (バルクモード)<br><br>タイプ、データセット、名前空間 (データストリームモード) | Worker はログを `datadog-op` インデックスに書き込みます。<br><br>これらのフィールドのいずれかが解決できない場合、Worker はログを破棄します。|
+| Prometheus*        | テナント ID                           | Worker はメトリクスを破棄します。 |
+| Splunk HEC        | インデックス<br>ソースタイプ                | Worker は Splunk で構成されたデフォルトのインデックスにログを送信します。<br>Worker のデフォルトは `httpevent` ソースタイプです。|
+
+*テンプレートには、`prefix-` のようなリテラルプレフィックスが必要です。{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}` は拒否されます。Worker はエラーをログに記録し、パイプラインは開始されません。
+
+#### 例 {#example}
+
+ログのアプリケーション ID フィールド (例: `application_id`) に基づいてログを Datadog Archives のリンク先にルーティングしたい場合は、**プレフィックスのイベントフィールド構文を使用してすべてのオブジェクトキー** フィールドに適用します。
+
+{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="イベントフィールド構文 /application_id={{ application_id }}/ を使用したプレフィックスフィールドの例を示す Datadog Archives のリンク先" style="width:40%;" >}}
+
+### 構文 {#syntax}
+
+#### イベントフィールド {#event-fields}
+
+Use `{{ <field_name> }}` を使用して個々のログイベントフィールドにアクセスします。たとえば、次のようにします。
+
+```
+{{ application_id }}
+```
+
+#### Strftime 指定子 {#strftime-specifiers}
+
+日付と時刻に [strftime 指定子][3]を使用します。たとえば、次のようにします。
+
+```
+year=%Y/month=%m/day=%d
+```
+
+#### エスケープ文字 {#escape-characters}
+
+文字の前に `\` を付けてその文字をエスケープします。この例ではイベントフィールド構文をエスケープします。
+
+```
+\{{ field_name }}
+```
+
+この例では strftime 指定子をエスケープします。
+
+```
+year=\%Y/month=\%m/day=\%d/
+```
+
+## イベントのバッチ処理 {#event-batching}
+
+Observability Pipelines の送信先は、イベントをバッチとして下流のインテグレーションに送信します。次のいずれかのパラメーターが満たされると、イベントのバッチがフラッシュされます。
+
+- イベントの最大数
+- バイトの最大数
+- タイムアウト (秒)
+
+例えば、送信先のパラメーターが次のようになっている場合:
+
+- イベントの最大数 = 2
+- バイトの最大数 = 100,000
+- タイムアウト (秒) = 5
+
+送信先が 5 秒の時間枠内に 1 つのイベントを受信した場合、5 秒のタイムアウト時にバッチがフラッシュされます。
+
+送信先が 2 秒以内に 3 つのイベントを受信した場合、2 つのイベントを含むバッチをフラッシュし、5 秒後に残りのイベントを含む 2 つ目のバッチをフラッシュします。送信先が 100,000 バイトを超える 1 つのイベントを受信した場合、このバッチを 1 つのイベントとともにフラッシュします。
+
+{{% observability_pipelines/destination_batching %}}
+
+[1]: /ja/observability_pipelines/configuration/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers
+[4]: /ja/observability_pipelines/configuration/secrets_management/

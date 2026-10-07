@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "feature-flags",
+    "attributes": {
+      "description": "Updated description for the feature flag",
+      "name": "Updated Test Feature Flag Example-Feature-Flag"
+    }
+  }
+}

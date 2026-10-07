@@ -1,0 +1,17 @@
+{
+  "compute": [
+    {
+      "aggregation": "count",
+      "interval": "5m",
+      "type": "timeseries"
+    }
+  ],
+  "filter": {
+    "from": "now-15m",
+    "indexes": [
+      "main"
+    ],
+    "query": "*",
+    "to": "now"
+  }
+}

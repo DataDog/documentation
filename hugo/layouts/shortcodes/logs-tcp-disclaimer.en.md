@@ -1,0 +1,2 @@
+<div class="alert alert-warning">TCP log collection is <strong>not supported</strong>. Datadog provides <strong>no delivery or reliability guarantees</strong> when using TCP, and log data may be lost without notice.
+For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For more information, see <a href="/logs/log_collection/?tab=host">Log Collection</a>.</div>

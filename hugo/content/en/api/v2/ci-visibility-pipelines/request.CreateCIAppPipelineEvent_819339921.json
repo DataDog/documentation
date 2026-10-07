@@ -1,0 +1,23 @@
+{
+  "data": {
+    "attributes": {
+      "provider_name": "example-provider",
+      "resource": {
+        "level": "pipeline",
+        "unique_id": "3eacb6f3-ff04-4e10-8a9c-46e6d054024a",
+        "name": "Deploy to AWS",
+        "url": "https://my-ci-provider.example/pipelines/my-pipeline/run/1",
+        "start": "2021-11-11T11:09:11+00:00",
+        "end": "2021-11-11T11:10:41+00:00",
+        "status": "success",
+        "partial_retry": false,
+        "git": {
+          "repository_url": "https://github.com/DataDog/datadog-agent",
+          "sha": "7f263865994b76066c4612fd1965215e7dcb4cd2",
+          "author_email": "john.doe@email.com"
+        }
+      }
+    },
+    "type": "cipipeline_resource_request"
+  }
+}

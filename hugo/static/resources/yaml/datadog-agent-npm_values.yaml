@@ -1,0 +1,19 @@
+datadog:
+  kubeStateMetricsEnabled: false
+  orchestratorExplorer:
+    enabled: false
+  logs:
+    enabled: false
+  apm:
+    socketEnabled: false
+    portEnabled: false
+  processAgent:
+    enabled: true
+  networkMonitoring:
+    enabled: true
+agents:
+  rbac:
+    create: false
+    serviceAccountName: datadog-agent
+clusterAgent:
+  enabled: false

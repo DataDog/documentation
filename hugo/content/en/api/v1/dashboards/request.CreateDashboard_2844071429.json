@@ -1,0 +1,33 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "sankey",
+        "requests": [
+          {
+            "query": {
+              "data_source": "rum",
+              "query_string": "@type:view",
+              "mode": "source"
+            },
+            "request_type": "sankey"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

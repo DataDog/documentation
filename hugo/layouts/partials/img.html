@@ -1,0 +1,37 @@
+{{/* Due to weird Hugo process with nested shortcodes/partials and markdown,
+there MUST NOT be an empty line at the end of this file */}}
+
+{{ if .img_param }}
+    {{ .root.Scratch.Set "img_param" .img_param }}
+{{ else }}
+    {{ .root.Scratch.Set "img_param" "?fit=max" }}
+{{ end }}
+{{ $img_param := .root.Scratch.Get "img_param" }}
+
+{{ $url := (print (.root.Site.Params.img_url) (printf "%s/%s" "images" .src)  ($img_param)) | safeURL }}
+
+{{ $image_type_arr := split .src "." }}
+{{ $image_ext := index $image_type_arr 1 }}
+{{ $img_width := .width }}
+{{ $img_height := .height }}
+{{ $img_style := .style }}
+{{ $img_class := .class }}
+{{ $img_alt := .alt }}
+{{ $disable_lazy := .disable_lazy }}
+
+<picture class="{{ if $img_class }} {{ $img_class }} {{ end }}">
+    <source srcset="{{ $url }}&auto=format&w=807 1x, {{ $url }}&auto=format&w=807&dpr=2 2x" media="(min-width: 1200px)">
+    <source srcset="{{ $url }}&auto=format&w=670 1x, {{ $url }}&auto=format&w=670&dpr=2 2x" media="(min-width: 992px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 759px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 630px)">
+    <source srcset="{{ $url }}&auto=format&w=496 1x, {{ $url }}&auto=format&w=496&dpr=2 2x" media="(min-width: 530px)">
+    <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 361px)">
+    <source srcset="{{ $url }}&auto=format&w=360 1x, {{ $url }}&auto=format&w=360&dpr=2 2x" media="(min-width: 0px)">
+    <img width="{{$img_width}}"
+         height="{{$img_height}}"
+         class="{{ if $img_class }}{{ $img_class }}{{ end }}"
+         srcset="{{ $url }}&auto=format&w=807"
+         style="{{ if $img_style }}{{ $img_style | safeCSS }}{{ end }}"
+         {{ if ne $disable_lazy "true" }}loading="lazy"{{ end }} {{/* This must be all in one line */}}
+         alt="{{ if $img_alt }}{{ $img_alt }}{{end}}">
+</picture>

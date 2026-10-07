@@ -1,0 +1,179 @@
+---
+title: Buildkite Setup for CI Visibility
+aliases:
+  - /continuous_integration/setup_pipelines/buildkite
+further_reading:
+    - link: "/continuous_integration/pipelines"
+      tag: "Documentation"
+      text: "Explore Pipeline Execution Results and Performance"
+    - link: "/continuous_integration/troubleshooting/"
+      tag: "Documentation"
+      text: "Troubleshooting CI Visibility"
+    - link: "/continuous_integration/pipelines/custom_tags_and_measures/"
+      tag: "Documentation"
+      text: "Extend Pipeline Visibility by adding custom tags and measures"
+---
+
+## Overview
+
+[Buildkite][1] is a continuous integration and deployment platform that allows you to run builds on your own infrastructure, providing you with full control over security and customizing your build environment while managing orchestration in the cloud.
+
+Set up CI Visibility for Buildkite to optimize your resource usage, reduce overhead, and improve the speed and quality of your software development lifecycle.
+
+### Compatibility
+
+| Pipeline Visibility | Platform | Definition |
+|---|---|---|
+| [Partial retries][9] | Partial pipelines | View partially retried pipeline executions. |
+| Infrastructure metric correlation | Infrastructure metric correlation | Correlate jobs to [infrastructure host metrics][6] for Buildkite agents. |
+| [Manual steps][12] | Manual steps | View manually triggered pipelines. |
+| [Queue time][13] | Queue time | View the amount of time pipeline jobs sit in the queue before processing. |
+| [Custom tags][10] [and measures at runtime][11] | Custom tags and measures at runtime | Configure [custom tags and measures][6] at runtime. |
+| [Custom spans][14] | Custom spans | Configure custom spans for your pipelines. |
+| [Filter CI Jobs on the critical path][17] | Filter CI Jobs on the critical path | Filter by jobs on the critical path. |
+| [Execution time][18] | Execution time  | View the amount of time pipelines have been running jobs. |
+| Logs correlation | Logs correlation | Correlate pipeline and job spans to logs and enable [job log collection][20]. |
+
+
+### Terminology
+
+This table shows the mapping of concepts between Datadog CI Visibility and Buildkite:
+
+| Datadog                    | Buildkite                       |
+|----------------------------|---------------------------------|
+| Pipeline                   | Build (execution of a pipeline) |
+| Job                        | Job (execution of a step)       |
+
+## Configure the Datadog integration
+
+To set up the Datadog integration for [Buildkite][1]:
+
+1. Go to {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Notification Services{{< /ui >}} in Buildkite and click the {{< ui >}}Add{{< /ui >}} button next to {{< ui >}}Datadog Pipeline Visibility{{< /ui >}}.
+2. Fill in the form with the following information:
+   * {{< ui >}}Description{{< /ui >}}: A description to help identify the integration in the future, such as `Datadog CI Visibility integration`.
+   * {{< ui >}}API key{{< /ui >}}: Your [Datadog API Key][2].
+   * {{< ui >}}Datadog site{{< /ui >}}: `{{< region-param key="dd_site" code="true" >}}`
+   * {{< ui >}}Pipelines{{< /ui >}}: Select all pipelines or the subset of pipelines you want to trace.
+   * {{< ui >}}Branch filtering{{< /ui >}}: Leave empty to trace all branches or select the subset of branches you want to trace.
+3. Click {{< ui >}}Add Datadog Pipeline Visibility Notification{{< /ui >}} to save the integration.
+
+### Collect job logs
+
+Export job logs from the Buildkite Agent as OpenTelemetry logs to the [Datadog OTLP Logs endpoint][23]. To enable the export, follow Buildkite's [OpenTelemetry job log export documentation][22].
+
+Datadog bills logs separately from CI Visibility. Configure log retention, exclusion filters, and indexes in [Log Management][21]. To scope these rules to Buildkite logs, filter on the `datadog.product:cipipeline` and `source:buildkite` tags.
+
+{{% collapse-content title="Datadog Buildkite integration (legacy)" level="h4" expanded=false id="legacy-buildkite-integration-job-log-collection" %}}
+
+The Datadog Buildkite integration is a legacy method for collecting job logs. If you cannot use OpenTelemetry, contact your Datadog representative.
+
+For installation and configuration instructions, see the [Buildkite integration documentation][19].
+
+<div class="alert alert-warning">This integration retrieves job logs through the Buildkite API. Collecting logs can consume a significant portion of your Buildkite API rate limit.</div>
+
+{{% /collapse-content %}}
+
+## Advanced configuration
+
+### Set custom tags
+
+Custom tags can be added to Buildkite traces by using the `buildkite-agent meta-data set` command.
+Any metadata tags with a key starting with `dd_tags.` are added to the job and pipeline spans. These
+tags can be used to create string facets to search and organize the pipelines.
+
+The YAML below illustrates a simple pipeline where tags for the team name and the Go version have
+been set.
+
+```yaml
+steps:
+  - command: buildkite-agent meta-data set "dd_tags.team" "backend"
+  - command: go version | buildkite-agent meta-data set "dd_tags.go.version"
+    label: Go version
+  - commands: go test ./...
+    label: Run tests
+```
+
+The following tags are shown in the root span as well as the relevant job span in Datadog.
+
+- `team: backend`
+- `go.version: go version go1.17 darwin/amd64` (output depends on the runner)
+
+The resulting pipeline looks like the following:
+
+{{< img src="ci/buildkite-custom-tags.png" alt="Buildkite pipeline trace with custom tags" style="width:100%;">}}
+
+Any metadata with a key starting with `dd-measures.` and containing a numerical value will be set as
+a metric tag that can be used to create numerical measures.
+
+You can use the `buildkite-agent meta-data set` command to create these tags.
+
+For example, you can measure the binary size in a pipeline with this command:
+
+```yaml
+steps:
+  - commands:
+    - go build -o dst/binary .
+    - ls -l dst/binary | awk '{print \$5}' | tr -d '\n' | buildkite-agent meta-data set "dd_measures.binary_size"
+    label: Go build
+```
+
+The resulting pipeline will have the tags shown below in the pipeline span:
+
+- `binary_size: 502` (output depends on the file size)
+
+In this example, you can use the value of `binary_size` to plot the change in the binary size over time.
+
+### Correlate infrastructure metrics to jobs
+
+If you are using Buildkite agents, you can correlate jobs with the infrastructure that is running them.
+For this feature to work, install the [Datadog Agent][7] in the hosts running the Buildkite agents.
+
+## View partial and downstream pipelines
+
+You can use the following filters to customize your search query in the [CI Visibility Explorer][15].
+
+{{< img src="ci/partial_retries_search_tags.png" alt="The Pipeline executions page with Partial Pipeline:retry entered in the search query" style="width:100%;">}}
+
+| Facet Name | Facet ID | Possible Values |
+|---|---|---|
+| Downstream Pipeline | `@ci.pipeline.downstream` | `true`, `false` |
+| Manually Triggered | `@ci.is_manual` | `true`, `false` |
+| Partial Pipeline | `@ci.partial_pipeline` | `retry`, `paused`, `resumed` |
+
+You can also apply these filters using the facet panel on the left hand side of the page.
+
+{{< img src="ci/partial_retries_facet_panel.png" alt="The facet panel with Partial Pipeline facet expanded and the value Retry selected, the Partial Retry facet expanded and the value true selected" style="width:20%;">}}
+
+## Visualize pipeline data in Datadog
+
+The [**CI Pipeline List**][3] and [**Executions**][4] pages populate with data after the pipelines finish.
+
+The {{< ui >}}CI Pipeline List{{< /ui >}} page shows data for only the default branch of each repository. For more information, see [Search and Manage CI Pipelines][16].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://buildkite.com
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/ci/pipelines
+[4]: https://app.datadoghq.com/ci/pipeline-executions
+[5]: /continuous_integration/pipelines/buildkite/#view-partial-and-downstream-pipelines
+[6]: /continuous_integration/pipelines/custom_tags_and_measures/?tab=linux
+[7]: /agent/
+[8]: /continuous_integration/pipelines/buildkite/#correlate-infrastructure-metrics-to-jobs
+[9]: /glossary/#partial-retry
+[10]: /glossary/#custom-tag
+[11]: /glossary/#custom-measure
+[12]: /glossary/#manual-step
+[13]: /glossary/#queue-time
+[14]: /glossary/#custom-span
+[15]: /continuous_integration/explorer
+[16]: /continuous_integration/search/#search-for-pipelines
+[17]: /continuous_integration/guides/identify_highest_impact_jobs_with_critical_path/
+[18]: /glossary/#pipeline-execution-time
+[19]: /integrations/buildkite/
+[20]: /continuous_integration/pipelines/buildkite/#collect-job-logs
+[21]: /logs/
+[22]: https://buildkite.com/docs/agent/self-hosted/monitoring-and-observability/tracing#exporting-job-logs-as-opentelemetry-logs
+[23]: /opentelemetry/setup/otlp_ingest/logs/

@@ -1,0 +1,3 @@
+- Dirección y puerto Logstash:
+    - El Worker de Observability Pipelines escucha en esta dirección, como por ejemplo `0.0.0.0:9997`, los mensajes de logs entrantes.
+    - Almacenado en la variable de entorno como: `DD_OP_SOURCE_LOGSTASH_ADDRESS`

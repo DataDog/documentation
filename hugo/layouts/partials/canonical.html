@@ -1,0 +1,10 @@
+{{ $dot := . }}
+{{ if isset $dot.Params "placeholder" }}
+    {{ range .Translations }}
+      {{ if eq .Lang "en" }}
+        <link rel="canonical" href="{{ .Permalink }}">
+      {{ end }}
+    {{ end }}
+{{ else }}
+    <link rel="canonical" href="{{ $dot.Permalink }}">
+{{ end }}

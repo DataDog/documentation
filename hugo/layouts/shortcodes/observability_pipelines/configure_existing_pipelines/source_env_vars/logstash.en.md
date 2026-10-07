@@ -1,0 +1,5 @@
+- Logstash address and port:
+    - The Observability Pipelines Worker listens on this address, such as `0.0.0.0:9997`, for incoming log messages.
+    - The default environment variable is `DD_OP_SOURCE_LOGSTASH_ADDRESS`
+- Logstash TLS passphrase:
+    - The default environment variable is `DD_OP_SOURCE_LOGSTASH_KEY_PASS`.

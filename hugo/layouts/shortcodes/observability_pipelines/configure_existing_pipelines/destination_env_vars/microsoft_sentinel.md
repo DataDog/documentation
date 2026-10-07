@@ -1,0 +1,6 @@
+- Data collection endpoint (DCE)
+	- The DCE endpoint URL is shown as the **Logs Ingestion Endpoint** or **Data Collection Endpoint** on the DCR Overview page. An example URL: `https://<DCE-ID>.ingest.monitor.azure.com`.
+	- The default environment variable is `DD_OP_DESTINATION_MICROSOFT_SENTINEL_DCE_URI`
+- Client secret
+	- This is the Azure AD application's client secret, such as `550e8400-e29b-41d4-a716-446655440000`.
+	- The default environment variable is `DD_OP_DESTINATION_MICROSOFT_SENTINEL_CLIENT_SECRET`

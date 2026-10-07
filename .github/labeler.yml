@@ -1,0 +1,30 @@
+Github:
+- .github/**/*
+
+Images:
+- hugo/static/images/**/*
+
+Architecture:
+- hugo/local/**/*
+- hugo/layouts/**/*
+- hugo/config/**/*
+- hugo/assets/**/*
+
+$1:
+- hugo/content/en/([^/]+)/.*
+
+FAQ:
+- hugo/content/en/*/faq/*
+
+Guide:
+- hugo/content/en/*/guide/*
+
+eci: 
+# Emerging Cloud Integrations team
+- integrations-internal-core/oracle_cloud_infrastructure/**/*
+
+cdocs:
+- hugo/customization_config/
+- hugo/content/en/**/*.mdoc.md
+- hugo/layouts/shortcodes/**/*.mdoc.md
+- hugo/content/.gitignore

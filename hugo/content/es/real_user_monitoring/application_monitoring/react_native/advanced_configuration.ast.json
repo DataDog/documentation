@@ -1,0 +1,77 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "04fdcc1192429274af1a0f78eee8e549": {
+            "string": "Configuración avanzada de React Native"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "778b6fc8a934f5ae45d17dd7ef70f1da": {
+            "string": "Conoce las opciones de configuración avanzada para tu configuración de React Native."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-reactnative",
+            "text": {
+              "itemTranslationData": {
+                "1417ef03a3dadc8ba63be06c6511da50": {
+                  "string": "Código fuente de dd-sdk-reactnative"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "51a8f7e6bf4837b35d750e426156c24b": {
+                  "string": "Código source (fuente)"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/real_user_monitoring/reactnative/",
+            "text": {
+              "itemTranslationData": {
+                "612f2ddd024956cdb4582b157b449f70": {
+                  "string": "Más información sobre la monitorización de React Native"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring/guide/monitor-hybrid-react-native-applications",
+            "text": {
+              "itemTranslationData": {
+                "f618a615520bdd0c68297c6a79748a14": {
+                  "string": "Monitorizar aplicaciones híbridas React Native"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "70aa5288b9ea1e893c1176b970cb43c2": {
+                  "string": "Documentation"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

@@ -1,0 +1,4 @@
+{
+  "title": "{{ .Title | htmlEscape }}",
+  {{- .Content | plainify | htmlUnescape | replaceRE "[“|”]" "\"" -}}
+}

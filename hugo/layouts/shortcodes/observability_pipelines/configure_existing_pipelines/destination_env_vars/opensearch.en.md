@@ -1,0 +1,6 @@
+- OpenSearch authentication username:
+	- The default environment variable is `DD_OP_DESTINATION_OPENSEARCH_USERNAME`.
+- OpenSearch authentication password:
+	- The default environment variable is `DD_OP_DESTINATION_OPENSEARCH_PASSWORD`.
+- OpenSearch endpoint URL:
+	- The default environment variable is `DD_OP_DESTINATION_OPENSEARCH_ENDPOINT_URL`.

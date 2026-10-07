@@ -1,0 +1,33 @@
+{{ $dot := .}}
+{{ $context := .context }}
+
+<ul class="nav nav-tabs border-none code-lang-list-container">
+    {{ $count := 0 }}
+    {{ $codeLangs := slice }}
+
+    {{ if eq .sort "name" }}
+        {{ $codeLangs = sort .codeLangs "value" "asc" }}
+    {{ else }}
+        {{ $codeLangs = .codeLangs }}
+    {{ end }}
+
+    <!-- Make sure lang[legacy] items are at the end -->
+    {{ $codeLangsWithoutLegacy := slice }}
+    {{ $legacy := slice }}
+    {{ range $codeLangs }}
+      {{ if in . "legacy" }}
+        {{ $legacy = $legacy | append . }}
+      {{ else }}
+        {{ $codeLangsWithoutLegacy = $codeLangsWithoutLegacy | append . }}
+      {{ end }}
+    {{ end }}
+    {{ $finalCodeLangs := ($codeLangsWithoutLegacy | append $legacy) }}
+
+    {{ range $finalCodeLangs }}
+        <li class="nav-item" style="margin-bottom: 6px;">
+            <a class="nav-link me-1 js-code-example-link" data-code-lang-trigger="{{ . }}" href="?code-lang={{ . }}#">{{ index site.Params.code_language_ids . }}</a>
+        </li>
+
+        {{ $count = add $count 1 }}
+    {{ end }}
+</ul>

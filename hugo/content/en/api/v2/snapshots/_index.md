@@ -1,0 +1,4 @@
+---
+title: Snapshots
+headless: true
+---

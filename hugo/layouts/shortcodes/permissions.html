@@ -1,0 +1,34 @@
+{{ $permissions_data := $.Site.Data.permissions }}
+{{ $single_permission_group := .Get "group" }}
+
+{{/* Passing a single permission group name allows us to render one set of permissions at a time.   Currently this is used to separate General from Advanced Permissions on the account_management/rbac/permissions page, but could be re-used elsewhere in the future. */}}
+
+{{ if ne $permissions_data nil }}
+  {{ if ne $single_permission_group nil }}
+    {{ $permissions_data := index $permissions_data $single_permission_group }}
+    {{ partial "rbac-permissions-table.html" (dict "data" $permissions_data "group" $single_permission_group) }}
+  {{ else }}
+    {{- range $group_name, $group_permissions_data := $permissions_data -}}
+      {{- $intro_text := print "Find below the list of permissions for the " (lower $group_name) " assets:" -}}
+
+      {{- if eq $group_name "Log Management" -}}
+        {{- $intro_text = "Find below the list of permissions for the log configuration assets and log data, along with the typical category of user you’d assign this permission to. See the recommendations on how to assign permissions to team members in the <a href='/logs/guide/logs-rbac'>Logs RBAC guide</a>." -}}
+      {{- end -}}
+
+      {{- if ne $group_name "General" -}}
+        <h2 id="{{ anchorize $group_name }}">
+          {{- $group_name -}}
+        </h2>
+        <p>{{ $intro_text | safeHTML }}</p>
+        {{ partial "rbac-permissions-table.html" (dict "data" $group_permissions_data "group" $group_name) }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else -}}
+  {{ if eq hugo.Environment "development" -}}
+    {{ warnf "Could not load RBAC permission set" }}
+  {{ else }}
+    {{ errorf "Could not load RBAC permission set" }}
+  {{ end }}
+{{- end -}}
+

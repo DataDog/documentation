@@ -1,0 +1,37 @@
+{
+  "data": {
+    "type": "custom_rule",
+    "attributes": {
+      "blocking": false,
+      "conditions": [
+        {
+          "operator": "match_regex",
+          "parameters": {
+            "inputs": [
+              {
+                "address": "server.request.query",
+                "key_path": [
+                  "id"
+                ]
+              }
+            ],
+            "regex": "badactor"
+          }
+        }
+      ],
+      "enabled": false,
+      "name": "test",
+      "path_glob": "/test",
+      "scope": [
+        {
+          "env": "test",
+          "service": "test"
+        }
+      ],
+      "tags": {
+        "category": "attack_attempt",
+        "type": "test"
+      }
+    }
+  }
+}

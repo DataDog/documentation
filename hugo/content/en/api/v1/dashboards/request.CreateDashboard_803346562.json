@@ -1,0 +1,31 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "distribution",
+        "requests": [
+          {
+            "apm_stats_query": {
+              "env": "prod",
+              "service": "cassandra",
+              "name": "cassandra.query",
+              "primary_tag": "datacenter:dc1",
+              "row_type": "service"
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

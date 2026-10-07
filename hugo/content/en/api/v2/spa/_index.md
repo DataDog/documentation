@@ -1,0 +1,4 @@
+---
+title: Spa
+headless: true
+---

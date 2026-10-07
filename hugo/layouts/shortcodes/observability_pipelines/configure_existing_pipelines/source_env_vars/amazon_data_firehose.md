@@ -1,0 +1,5 @@
+- Amazon Data Firehose address:
+    - The Observability Pipelines Worker listens to this socket address to receive logs from Amazon Data Firehose.
+    - The default environment variable is `DD_OP_SOURCE_AWS_DATA_FIREHOSE_ADDRESS`.
+- Amazon Data Firehose TLS passphrase (when enabled):
+    - The default environment variable is `DD_OP_SOURCE_AWS_DATA_FIREHOSE_KEY_PASS`.

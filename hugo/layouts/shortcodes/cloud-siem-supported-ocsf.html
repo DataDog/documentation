@@ -1,0 +1,24 @@
+ {{/*  
+ Displays the integrations that include support for OCSF pipelines ootb. 
+ */}}
+
+{{ $data := $.Site.Data.cloud_siem_content_packs }}
+
+{{ $s := newScratch }}
+{{ $s.Set "sorted_data" slice }}
+
+{{- if ne $data nil -}}
+    {{- range $category, $content_packs := $data -}}
+        {{- range $content_packs -}}
+            {{- if .ocsf_pipelines -}}
+                {{ $s.Add "sorted_data" .name }}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+
+    <ul>
+        {{- range sort ($s.Get "sorted_data") -}}
+            <li>{{ . }}</li>
+        {{- end -}}
+    </ul>
+{{- end -}}

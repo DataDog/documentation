@@ -1,0 +1,22 @@
+{
+  "data": {
+    "attributes": {
+      "data_definition": {
+        "description": "Welcome to the Engineering Experience Survey.",
+        "required": [],
+        "title": "Developer Experience Survey",
+        "type": "object"
+      },
+      "ui_definition": {
+        "ui:order": [],
+        "ui:theme": {
+          "primaryColor": "gray"
+        }
+      },
+      "upsert_params": {
+        "etag": "b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d"
+      }
+    },
+    "type": "form_versions"
+  }
+}

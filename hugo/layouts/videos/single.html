@@ -1,0 +1,25 @@
+{{ define "main" }}
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+    </div>
+
+<small>{{ i18n "tags" }}: {{ partial "related-groups" (dict "taxonomy" "video-categories" "terms" (index .Params "video-categories") ) }}</small>
+<br><br>
+{{ partial "video" .Params.wistiaid }}
+{{ .Content }}
+<br><br>
+<section>
+    <ul>
+        {{ $data := .Data }}
+        {{ range $key, $value := .Data.Terms }}
+        {{ $link := absLangURL (print $data.Plural "/" ($key | urlize) "/") }}
+        <li><a href="{{ $link }}">{{ $key }}</a> - ({{ len $value }})</li>
+        {{ end }}
+    </ul>
+</section>
+{{ end }}

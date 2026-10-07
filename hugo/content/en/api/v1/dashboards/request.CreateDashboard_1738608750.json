@@ -1,0 +1,24 @@
+{
+  "title": "Example-Dashboard",
+  "description": null,
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 24,
+        "height": 6
+      },
+      "definition": {
+        "type": "free_text",
+        "text": "Example free text",
+        "color": "#4d4d4d",
+        "font_size": "auto",
+        "text_align": "left"
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

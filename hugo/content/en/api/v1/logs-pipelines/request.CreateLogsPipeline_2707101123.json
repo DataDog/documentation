@@ -1,0 +1,17 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipeline",
+  "processors": [
+    {
+      "type": "span-id-remapper",
+      "is_enabled": true,
+      "name": "test_filter",
+      "sources": [
+        "dd.span_id"
+      ]
+    }
+  ],
+  "tags": []
+}

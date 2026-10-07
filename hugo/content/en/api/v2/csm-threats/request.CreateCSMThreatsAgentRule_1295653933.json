@@ -1,0 +1,29 @@
+{
+  "data": {
+    "attributes": {
+      "description": "My Agent rule with set action",
+      "enabled": true,
+      "expression": "exec.file.name == \"sh\"",
+      "filters": [],
+      "name": "examplecsmthreat",
+      "policy_id": "6517fcc1-cec7-4394-a655-8d6e9d085255",
+      "product_tags": [],
+      "actions": [
+        {
+          "set": {
+            "name": "test_set",
+            "value": "test_value",
+            "scope": "process",
+            "inherited": true
+          }
+        },
+        {
+          "hash": {
+            "field": "exec.file"
+          }
+        }
+      ]
+    },
+    "type": "agent_rule"
+  }
+}

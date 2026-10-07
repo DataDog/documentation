@@ -1,0 +1,52 @@
+{{ $data := $.Site.Data.cloud_siem_content_packs }}
+
+{{- if ne $data nil -}}
+<p>Content Packs are grouped into the following categories:</p>
+
+{{/* Content Packs Grouping Table */}}
+{{/* Dont fix indentation, Hugo will think it's a code block */}}
+<div class="whatsnext mb-2">
+    <ul class="list-group">
+        {{- range $category, $content_packs := $data -}}
+            {{- $content_packs_group := slice -}}
+
+            {{- range $content_packs -}}
+                {{- $content_packs_group = $content_packs_group | append .name -}}
+            {{- end -}}
+
+            <a class="list-group-item list-group-item-white list-group-item-action" href="#{{- (replace $category "-" "_") -}}">
+                <u>{{ (replace $category "_" " ") | title }}</u>: {{ delimit $content_packs_group ", " }}
+            </a>
+        {{- end -}}
+    </ul>
+</div>
+
+{{- range $category, $content_packs := $data -}}
+    {{- $id := (replace $category "-" "_") -}}
+    <h2 id="{{- $id -}}">
+        <a href="#{{- $id -}}">
+            {{ (replace $category "_" " ") | title }} Content Packs
+        </a>
+    </h2>
+
+    {{- range $content_packs -}}
+        <h3>{{- .name -}}</h3>
+        <p>{{- .description -}}</p>
+        <p><a href={{- .app_link -}}>{{- .name -}}</a> Content Pack includes:</p>
+
+{{/* Dont fix indentation, Hugo will think it's a code block */}}
+<ul>
+    {{- with .threat_detection -}}
+        {{- $ootb_link := (print "https://docs.datadoghq.com/security/default_rules/#" .) -}}
+        <li><a href="{{- $ootb_link -}}">Detection Rules</a></li>
+    {{- end -}}
+
+    {{- with .dashboard -}}<li>An interactive dashboard</li>{{- end -}}
+    {{- with .investigator -}}<li>{{ upper . }} Investigator</li>{{- end -}}
+    {{- with .workflow_automation -}}<li>Workflow Automation</li>{{- end -}}
+    {{- with .documentation_href -}}<li><a href="{{.}}">Configuration guide</a></li>{{- end -}}
+    {{- with .ocsf_pipelines -}}<li>OCSF pipelines</li>{{- end -}}
+</ul>
+{{- end -}}
+{{- end -}}
+{{- end -}}

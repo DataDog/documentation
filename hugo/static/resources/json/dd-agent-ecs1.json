@@ -1,0 +1,58 @@
+{
+  "containerDefinitions": [
+    {
+      "name": "dd-agent",
+      "image": "datadog/docker-dd-agent:latest",
+      "cpu": 10,
+      "memory": 256,
+      "essential": true,
+      "mountPoints": [
+        {
+          "containerPath": "/var/run/docker.sock",
+          "sourceVolume": "docker_sock"
+        },
+        {
+          "containerPath": "/host/sys/fs/cgroup",
+          "sourceVolume": "cgroup",
+          "readOnly": true
+        },
+        {
+          "containerPath": "/host/proc",
+          "sourceVolume": "proc",
+          "readOnly": true
+        }
+      ],
+      "environment": [
+        {
+          "name": "API_KEY",
+          "value": "INSERT_API_KEY"
+        },
+        {
+      	  "name": "SD_BACKEND",
+	  "value": "docker"
+        }
+      ]
+    }
+  ],
+  "volumes": [
+    {
+      "host": {
+        "sourcePath": "/var/run/docker.sock"
+      },
+      "name": "docker_sock"
+    },
+    {
+      "host": {
+        "sourcePath": "/proc/"
+      },
+      "name": "proc"
+    },
+    {
+      "host": {
+        "sourcePath": "/sys/fs/cgroup/"
+      },
+      "name": "cgroup"
+    }
+  ],
+  "family": "dd-agent-task"
+}

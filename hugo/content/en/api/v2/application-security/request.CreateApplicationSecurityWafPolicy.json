@@ -1,0 +1,28 @@
+{
+  "data": {
+    "attributes": {
+      "basedOn": "recommended",
+      "description": "Policy applied to internal web applications.",
+      "isDefault": false,
+      "name": "Internal Network Policy",
+      "protectionPresets": [
+        "attack-tools"
+      ],
+      "rules": [
+        {
+          "blocking": false,
+          "enabled": true,
+          "id": "rasp-001-002"
+        }
+      ],
+      "scope": [
+        {
+          "env": "prod",
+          "service": "billing-service"
+        }
+      ],
+      "version": 0
+    },
+    "type": "policy"
+  }
+}

@@ -1,0 +1,52 @@
+{{ $dot := . }}
+<div class="ref-tables-integrations">
+    <div class="container cards-dd">
+        <div class="row row-cols-2 row-cols-sm-4 g-2 g-xl-3 justify-content-sm-center">
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/integrations/databricks/#reference-table-configuration"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/databricks_large.svg" "class"
+                        "img-fluid" "alt" "databricks" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/integrations/salesforce/#enabling-ingestion-of-reference-tables"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/salesforce_large.svg" "class"
+                        "img-fluid" "alt" "salesforce" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+            <div class="col">
+             <a
+                 class="card h-100"
+                 href="/integrations/servicenow/#reference-tables"
+             >
+                 <div class="card-body text-center py-2 px-1">
+                     {{ partial "img.html" (dict "root" . "src" "integrations_logos/servicenow_large.svg" "class"
+                     "img-fluid" "alt" "servicenow" "width" "200") }}
+                 </div>
+             </a>
+         </div>
+            <div class="col">
+                <a
+                    class="card h-100"
+                    href="/integrations/snowflake_web/#reference-tables"
+                >
+                    <div class="card-body text-center py-2 px-1">
+                        {{ partial "img.html" (dict "root" . "src" "integrations_logos/snowflake_large.svg" "class"
+                        "img-fluid" "alt" "snowflake" "width" "200") }}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>

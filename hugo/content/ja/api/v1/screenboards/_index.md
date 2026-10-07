@@ -1,0 +1,4 @@
+---
+title: スクリーンボード
+headless: true
+---

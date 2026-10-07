@@ -1,0 +1,20 @@
+{
+  "data": {
+    "id": "rum.sessions.webui.count",
+    "type": "rum_metrics",
+    "attributes": {
+      "compute": {
+        "include_percentiles": false
+      },
+      "filter": {
+        "query": "@service:rum-config"
+      },
+      "group_by": [
+        {
+          "path": "@browser.version",
+          "tag_name": "browser_version"
+        }
+      ]
+    }
+  }
+}

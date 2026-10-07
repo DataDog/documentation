@@ -1,0 +1,6 @@
+1. (Opcional) En el menú desplegable **Count** (Contar), selecciona los atributos cuyos valores únicos quieres contar durante el periodo de tiempo especificado.
+1. (Opcional) En el menú desplegable **group by** (agrupar por), selecciona los atributos por los que quieres agrupar.
+    - El `group by` definido genera una señal para cada valor `group by`.
+    - Normalmente, `group by` es una entidad (como un usuario o una IP). `group by` también puede unir las consultas.
+    - La unión de registros que span (tramo) un marco temporal puede aumentar la confianza o la gravedad de la señal de seguridad. Por ejemplo, si se quiere detectar un ataque de fuerza bruta con éxito, se deben correlacionar los registros de autenticación con éxito y sin éxito de un usuario.
+    - La detección de anomalías inspecciona cómo se ha comportado el atributo `group by` en el pasado. Si un atributo `group by` se ve por primera vez (por ejemplo, la primera vez que una IP se comunica con tu sistema) y es anómalo, no genera una señal de seguridad porque el algoritmo de detección de anomalías no tiene datos históricos con los que comparar.

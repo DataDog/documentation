@@ -1,0 +1,49 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "heatmap",
+        "xaxis": {
+          "num_buckets": 75
+        },
+        "yaxis": {
+          "scale": "linear",
+          "min": "auto",
+          "max": "auto",
+          "include_zero": true
+        },
+        "markers": [
+          {
+            "display_type": "percentile",
+            "value": "50"
+          },
+          {
+            "display_type": "percentile",
+            "value": "99"
+          }
+        ],
+        "requests": [
+          {
+            "request_type": "histogram",
+            "query": {
+              "data_source": "metrics",
+              "name": "query1",
+              "query": "histogram:trace.servlet.request{*}"
+            }
+          }
+        ]
+      },
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 4,
+        "height": 4
+      }
+    }
+  ],
+  "layout_type": "ordered"
+}

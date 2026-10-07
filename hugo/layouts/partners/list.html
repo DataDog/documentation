@@ -1,0 +1,16 @@
+{{ define "main" }}
+    <div class="row">
+        <div class="col-12 order-1">
+            <h1 id="pagetitle">{{ .Title }}</h1>
+        </div>
+        <div class="col-12">
+            {{ partial "breadcrumbs.html" . }}
+        </div>
+        <div class="col-12">
+            {{ partial "partners/banner.html" . }}
+          </div>
+    </div>
+     
+    {{ partial "translate_status_banner/translate_status_banner.html" . }}
+    {{ .Content }}
+{{ end }}

@@ -1,0 +1,72 @@
+.chevron {
+    width: 8px;
+    height: 8px;
+    border: 2px solid $brand-primary;
+    display: inline-block;
+    border-top: none;
+    border-left: none;
+}
+
+.chevron-down {
+    transform: rotate(45deg);
+
+    &:lang(ja) {
+        margin-top: -1px;
+    }
+}
+
+.chevron-up {
+    transform: rotate(-135deg);
+    margin-top: 5px;
+}
+
+// Layout type
+@mixin layout-width($type) {
+    @if $type == 'small' {
+        max-width: 500px;
+        min-width: 400px;
+    }
+    @if $type == 'normal' {
+        max-width: 600px;
+        min-width: 500px;
+    }
+    @if $type == 'large' {
+        max-width: 800px;
+        min-width: 600px;
+    }
+    @if $type == 'full' {
+        width: 100%;
+    }
+    @if $type == 'datadog' {
+        max-width: 1000px;
+        min-width: 800px;
+        transform: translateX(-10px);
+    }
+    @media (max-width: 991px) {
+        @if $type == 'datadog' {
+            max-width: 660px;
+            min-width: 660px;
+        }
+    }
+    @media (max-width: 767px) {
+        @if $type == 'datadog' {
+            max-width: 508px;
+            min-width: 508px;
+            transform: translateX(-10px);
+        }
+    }
+    @media (max-width: 575px) {
+        @if $type == 'datadog' {
+            max-width: 95%;
+            min-width: 95%;
+            transform: translateX(-10px);
+        }
+    }
+    @media (max-width: 390px) {
+        @if $type == 'datadog' {
+            max-width: 95%;
+            min-width: 95%;
+            transform: translateX(-26px);
+        }
+    }
+}

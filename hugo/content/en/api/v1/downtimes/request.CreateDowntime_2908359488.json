@@ -1,0 +1,31 @@
+{
+  "message": "Example-Downtime",
+  "recurrence": {
+    "period": 1,
+    "type": "weeks",
+    "until_date": 1638443471,
+    "week_days": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri"
+    ]
+  },
+  "scope": [
+    "*"
+  ],
+  "start": 1636629071,
+  "end": 1636632671,
+  "timezone": "Etc/UTC",
+  "mute_first_recovery_notification": true,
+  "monitor_tags": [
+    "tag0"
+  ],
+  "notify_end_states": [
+    "alert"
+  ],
+  "notify_end_types": [
+    "canceled"
+  ]
+}

@@ -1,0 +1,67 @@
+<!--
+isProd is equivalent to preview, live environments
+hugo defaults to environment development with hugo server
+-->
+{{- $isProd := ne hugo.Environment "development" -}}
+{{- $defines := dict "process.env.NODE_ENV" `"development"` "process.env.RESET_APP_DATA_TIMER" "10" "global" "window" -}}
+{{- $sourcemap := cond $isProd "external" "inline" -}}
+
+{{- if .HasShortcode "jqmath-vanilla" -}}
+  {{- $opts := dict "targetPath" "static/jqmath.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
+  {{- $js := resources.Get "scripts/jqmath-vanilla.js" | js.Build $opts -}}
+  {{- $js = $js | fingerprint "sha512" -}}
+  <script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+{{- end -}}
+
+{{ $opts := dict "targetPath" "static/main-dd-js.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd }}
+{{ $js := resources.Get "scripts/main-dd-js.js" | js.Build $opts }}
+{{ if $isProd }}
+  {{ $js = $js | fingerprint "sha512" }}
+{{ end }}
+<script type="text/javascript" src="{{ $js.Permalink }}" {{ if $isProd }} integrity="{{ $js.Data.Integrity }}" {{ end }}></script>
+
+{{ if .Params.footer_scripts }}
+    {{ range $k, $v := .Params.footer_scripts }}
+
+        {{ range $i, $tag := $v }}
+
+            {{ if eq $tag true }}
+
+                {{ $script_tag := $i | printf "footer_scripts/%s"  }}
+
+                {{ partial $script_tag . }}
+
+            {{ end }}
+
+        {{ end }}
+
+    {{ end }}
+{{ end }}
+
+{{ $dot := . }}
+
+{{ range $k, $v := .Site.Params.footer_scripts }}
+
+    {{ range $i, $tag := $v }}
+
+        {{ if eq $tag true }}
+
+            {{ $script_tag := $i | printf "footer_scripts/%s"  }}
+
+            {{ partial $script_tag $dot }}
+
+        {{ end }}
+
+    {{ end }}
+
+{{ end }}
+
+{{- $tooltipOpts := dict "targetPath" "static/tooltip.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
+{{- $tooltipJs := resources.Get "scripts/components/tooltip.js" | js.Build $tooltipOpts -}}
+{{- $anePopupBannerOpts := dict "targetPath" "static/ane-popup-banner.js" "defines" $defines "sourceMap" $sourcemap "minify" $isProd -}}
+{{- $anePopupBannerJs := resources.Get "scripts/helpers/ane-popup-banner.js" | js.Build $anePopupBannerOpts -}}
+{{- if $isProd -}}
+  {{- $tooltipJs = $tooltipJs | fingerprint "sha512" -}}
+{{- end -}}
+<script type="text/javascript" src="{{ $tooltipJs.Permalink }}" {{ if $isProd }} integrity="{{ $tooltipJs.Data.Integrity }}" {{ end }}></script>
+<script type="text/javascript" src="{{ $anePopupBannerJs.Permalink }}" {{ if $isProd }} integrity="{{ $anePopupBannerJs.Data.Integrity }}" {{ end }}></script>

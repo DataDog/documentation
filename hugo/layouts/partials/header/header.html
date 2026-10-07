@@ -1,0 +1,12 @@
+{{ $dot := . }}
+{{ $base := "" | absLangURL }}
+{{ $announce := .Site.Params.announcement_banner }}
+{{ $btnClass := "btn btn-gradient knockout-around js-cta-topRight" }}
+{{ $SignUpClass := .Site.Params.SignUpClass }}
+{{ if $announce }}
+  {{ partial "announcement_banner" . }} {{/* imported from websites-modules */}}
+{{ end }}
+
+<div class="main-nav-wrapper">
+  {{ partialCached "nav/main-nav" . }} {{/* imported from websites-modules */}}
+</div>

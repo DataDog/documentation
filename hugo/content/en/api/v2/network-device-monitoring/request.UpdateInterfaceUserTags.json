@@ -1,0 +1,12 @@
+{
+  "data": {
+    "attributes": {
+      "tags": [
+        "tag:test",
+        "tag:testbis"
+      ]
+    },
+    "id": "example:1.2.3.4:1",
+    "type": "tags"
+  }
+}

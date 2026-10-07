@@ -1,0 +1,67 @@
+{{ $dot := . }}
+{{ $.Scratch.Add "meta_image" "" }}
+{{ $hash := "" }}
+
+{{ with .File }}
+    {{ $hash = .UniqueID }}
+{{ end }}
+
+{{ if $dot.Params.meta_image }}
+    {{ $.Scratch.Set "meta_image" $dot.Params.meta_image }}
+{{ else if $hash }}
+    {{ $numsonly := replaceRE `[A-Za-z]` "" $hash }}
+    {{ $lastnum := int (substr $numsonly 0 1) }}
+    {{ $defaults := slice "og-thumbnails-generic.png" "og-thumbnails-generic2.png" "og-thumbnails-generic3.png" "og-thumbnails-generic4.png" "og-thumbnails-generic5.png" "og-thumbnails-generic.png" "og-thumbnails-generic2.png" "og-thumbnails-generic3.png" "og-thumbnails-generic4.png" "og-thumbnails-generic5.png" }}
+    {{ $ogimage := index $defaults $lastnum }}
+    {{ $.Scratch.Set "meta_image" (print "og-default/" $ogimage)  }}
+{{ else }}
+    {{ $.Scratch.Set "meta_image" "og-default/og-thumbnails-generic5.png" }}
+{{ end }}
+{{ $meta_image := $.Scratch.Get "meta_image" }}
+
+{{ if $.Title }}
+    {{ $.Scratch.Add "meta_title" $.Title }}
+{{ else if $.Params.title }}
+    {{ $.Scratch.Add "meta_title" $.Params.title }}
+{{ else }}
+    {{ $.Scratch.Add "meta_title" .Site.Params.meta_title }}
+{{ end }}
+{{ $meta_title := $.Scratch.Get "meta_title" }}
+
+{{ if $.Description }}
+    {{ $.Scratch.Add "meta_desc" $.Description }}
+{{ else if $.Params.Description }}
+    {{ $.Scratch.Add "meta_desc" $.Params.description }}
+{{ else }}
+    {{ $.Scratch.Add "meta_desc" .Site.Params.meta_description }}
+{{ end }}
+{{ $meta_desc := $.Scratch.Get "meta_desc" }}
+
+
+<!-- Schema.org markup for Google+ -->
+<meta itemprop="name" content="{{ $meta_title | safeHTML }}">
+<meta itemprop="description" content="{{ $meta_desc | safeHTML }}">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="{{.Site.Params.img_url}}images/{{ $meta_image }}">
+<meta name="twitter:site" content="@datadoghq">
+<meta name="twitter:title" content="{{ $meta_title | safeHTML }}">
+<meta name="twitter:description" content="{{ $meta_desc | safeHTML }}">
+<meta name="twitter:creator" content="@datadoghq">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<meta name="twitter:image:src" content="{{.Site.Params.img_url}}images/{{ $meta_image }}">
+
+<!-- Open Graph data -->
+<meta property="og:title" content="{{ $meta_title }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{ $.Permalink }}"/>
+<meta property="og:image" content="{{.Site.Params.img_url}}images/{{ $meta_image }}"/>
+<meta property="og:description" content="{{ $meta_desc }}"/>
+<meta property="og:site_name" content="{{ .Site.Params.site_name }}"/>
+<meta property="article:author" content="Datadog"/>
+
+<!-- Address Bar Matches Brand Colors -->
+<meta name="theme-color" content="#774aa4"/>
+
+<!-- Meta description -->
+<meta name="description" content="{{ $meta_desc }}"/>

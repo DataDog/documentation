@@ -1,0 +1,549 @@
+---
+# Source: datadog/templates/secret-api-key.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: datadog
+  namespace: default
+  labels: {}
+type: Opaque
+data:
+  api-key: PUT_YOUR_BASE64_ENCODED_API_KEY_HERE
+---
+# Source: datadog/templates/cluster-agent-confd-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-cluster-agent-confd
+  namespace: default
+  labels: {}
+  annotations: {}
+data:
+  kubernetes_state_core.yaml.default: |-
+    init_config:
+    instances:
+      - collectors:
+        - secrets
+        - configmaps
+        - nodes
+        - pods
+        - services
+        - resourcequotas
+        - replicationcontrollers
+        - limitranges
+        - persistentvolumeclaims
+        - persistentvolumes
+        - namespaces
+        - endpoints
+        - daemonsets
+        - deployments
+        - replicasets
+        - statefulsets
+        - cronjobs
+        - jobs
+        - horizontalpodautoscalers
+        - poddisruptionbudgets
+        - storageclasses
+        - volumeattachments
+        - ingresses
+        labels_as_tags:
+          {}
+        annotations_as_tags:
+          {}
+  kubernetes_apiserver.yaml: |-
+    init_config:
+    instances:
+      -
+        filtering_enabled: false
+        unbundle_events: false
+---
+# Source: datadog/templates/install_info-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-installinfo
+  namespace: default
+  labels: {}
+  annotations: {}
+data:
+  install_info: |
+    ---
+    install_method:
+      tool: kubernetes sample manifests
+      tool_version: kubernetes sample manifests
+      installer_version: kubernetes sample manifests
+---
+# Source: datadog/templates/kpi-telemetry-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: datadog-kpi-telemetry-configmap
+  namespace: default
+  labels: {}
+data:
+  install_type: k8s_manual
+  install_id: "62c2b81a-ce28-4834-afe1-9dbd7f2653f8"
+  install_time: "1740515778"
+---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRole
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - secrets
+      - configmaps
+      - nodes
+      - pods
+      - services
+      - resourcequotas
+      - replicationcontrollers
+      - limitranges
+      - persistentvolumeclaims
+      - persistentvolumes
+      - namespaces
+      - endpoints
+      - events
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - extensions
+    resources:
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - apps
+    resources:
+      - statefulsets
+      - daemonsets
+      - deployments
+      - replicasets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - batch
+    resources:
+      - cronjobs
+      - jobs
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - autoscaling
+    resources:
+      - horizontalpodautoscalers
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - policy
+    resources:
+      - poddisruptionbudgets
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - networking.k8s.io
+    resources:
+      - ingresses
+    verbs:
+      - list
+      - watch
+  - apiGroups:
+      - apiextensions.k8s.io
+    resources:
+      - customresourcedefinitions
+    verbs:
+      - list
+      - watch
+---
+# Source: datadog/templates/kube-state-metrics-core-rbac.yaml
+apiVersion: "rbac.authorization.k8s.io/v1"
+kind: ClusterRoleBinding
+metadata:
+  labels: {}
+  name: datadog-ksm-core
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: datadog-ksm-core
+subjects:
+  - kind: ServiceAccount
+    name: datadog-cluster-agent
+    namespace: default
+---
+# Source: datadog/templates/daemonset.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: datadog
+  namespace: default
+  labels: {}
+spec:
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: datadog
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/enabled: "false"
+        app: datadog
+      name: datadog
+      annotations: {}
+    spec:
+      containers:
+        - name: agent
+          image: "gcr.io/datadoghq/agent:7.63.0"
+          imagePullPolicy: IfNotPresent
+          command: ["agent", "run"]
+          resources: {}
+          ports:
+            - containerPort: 8125
+              name: dogstatsdport
+              protocol: UDP
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog"
+                  key: api-key
+            - name: DD_REMOTE_CONFIGURATION_ENABLED
+              value: "true"
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LANGUAGE_DETECTION_ENABLED
+              value: "false"
+            - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
+              value: "false"
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "false"
+            - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
+              value: "false"
+            - name: DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED
+              value: "true"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "true"
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "false"
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_DOGSTATSD_PORT
+              value: "8125"
+            - name: DD_DOGSTATSD_NON_LOCAL_TRAFFIC
+              value: "true"
+            - name: DD_DOGSTATSD_TAG_CARDINALITY
+              value: "low"
+            - name: DD_LEADER_ELECTION
+              value: "true"
+            - name: DD_LEADER_ELECTION_DEFAULT_RESOURCE
+              value: "configmap"
+            - name: DD_COLLECT_KUBERNETES_EVENTS
+              value: "true"
+            - name: DD_APM_ENABLED
+              value: "true"
+            - name: DD_LOGS_ENABLED
+              value: "false"
+            - name: DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL
+              value: "false"
+            - name: DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE
+              value: "true"
+            - name: DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION
+              value: "false"
+            - name: DD_HEALTH_PORT
+              value: "5555"
+            - name: DD_IGNORE_AUTOCONF
+              value: "kubernetes_state"
+            - name: DD_CONTAINER_LIFECYCLE_ENABLED
+              value: "true"
+            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+              value: "false"
+            - name: DD_EXPVAR_PORT
+              value: "6000"
+            - name: DD_COMPLIANCE_CONFIG_ENABLED
+              value: "false"
+            - name: DD_CONTAINER_IMAGE_ENABLED
+              value: "true"
+            - name: DD_KUBELET_CORE_CHECK_ENABLED
+              value: "true"
+          volumeMounts:
+            - name: logdatadog
+              mountPath: C:/ProgramData/Datadog/logs
+              readOnly: false # Need RW to write logs
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+              readOnly: false # Need RW to mount to config path
+            - name: auth-token
+              mountPath: C:/ProgramData/Datadog/auth
+              readOnly: false # Need RW to write auth token
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /live
+              port: 5555
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          readinessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /ready
+              port: 5555
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+          startupProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /startup
+              port: 5555
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            successThreshold: 1
+            timeoutSeconds: 5
+        - name: trace-agent
+          image: "gcr.io/datadoghq/agent:7.63.0"
+          imagePullPolicy: IfNotPresent
+          command: ["trace-agent", "-foreground", "-config=C:/ProgramData/Datadog/datadog.yaml"]
+          resources: {}
+          ports:
+            - containerPort: 8126
+              hostPort: 8126
+              name: traceport
+              protocol: TCP
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog"
+                  key: api-key
+            - name: DD_REMOTE_CONFIGURATION_ENABLED
+              value: "true"
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LANGUAGE_DETECTION_ENABLED
+              value: "false"
+            - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
+              value: "false"
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "false"
+            - name: DD_CLUSTER_AGENT_ENABLED
+              value: "false"
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_APM_ENABLED
+              value: "true"
+            - name: DD_APM_NON_LOCAL_TRAFFIC
+              value: "true"
+            - name: DD_APM_RECEIVER_PORT
+              value: "8126"
+            - name: DD_INSTRUMENTATION_INSTALL_TIME
+              valueFrom:
+                configMapKeyRef:
+                  name: datadog-kpi-telemetry-configmap
+                  key: install_time
+            - name: DD_INSTRUMENTATION_INSTALL_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: datadog-kpi-telemetry-configmap
+                  key: install_id
+            - name: DD_INSTRUMENTATION_INSTALL_TYPE
+              valueFrom:
+                configMapKeyRef:
+                  name: datadog-kpi-telemetry-configmap
+                  key: install_type
+          volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+              readOnly: true
+            - name: logdatadog
+              mountPath: C:/ProgramData/Datadog/logs
+              readOnly: false # Need RW to write logs
+            - name: auth-token
+              mountPath: C:/ProgramData/Datadog/auth
+              readOnly: true
+          livenessProbe:
+            initialDelaySeconds: 15
+            periodSeconds: 15
+            tcpSocket:
+              port: 8126
+            timeoutSeconds: 5
+        - name: process-agent
+          image: "gcr.io/datadoghq/agent:7.63.0"
+          imagePullPolicy: IfNotPresent
+          command: ["process-agent", "-foreground", "--cfgpath=C:/ProgramData/Datadog/datadog.yaml"]
+          resources: {}
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog"
+                  key: api-key
+            - name: DD_REMOTE_CONFIGURATION_ENABLED
+              value: "true"
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LANGUAGE_DETECTION_ENABLED
+              value: "false"
+            - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
+              value: "false"
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "false"
+            - name: DD_CLUSTER_AGENT_ENABLED
+              value: "false"
+            - name: DD_PROCESS_CONFIG_PROCESS_COLLECTION_ENABLED
+              value: "false"
+            - name: DD_PROCESS_CONFIG_CONTAINER_COLLECTION_ENABLED
+              value: "true"
+            - name: DD_PROCESS_AGENT_DISCOVERY_ENABLED
+              value: "true"
+            - name: DD_STRIP_PROCESS_ARGS
+              value: "false"
+            - name: DD_LOG_LEVEL
+              value: "INFO"
+            - name: DD_SYSTEM_PROBE_ENABLED
+              value: "false"
+            - name: DD_ORCHESTRATOR_EXPLORER_ENABLED
+              value: "false"
+          volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+              readOnly: true
+            - name: logdatadog
+              mountPath: C:/ProgramData/Datadog/logs
+              readOnly: false # Need RW to write logs
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
+      initContainers:
+        - name: init-volume
+          image: "gcr.io/datadoghq/agent:7.63.0"
+          imagePullPolicy: IfNotPresent
+          command: ["pwsh", "-Command"]
+          args:
+            - |
+              Copy-Item -Recurse -Force C:/ProgramData/Datadog C:/Temp
+              Copy-Item -Force C:/Temp/install_info/install_info C:/Temp/Datadog/install_info
+          volumeMounts:
+            - name: config
+              mountPath: C:/Temp/Datadog
+              readOnly: false # Need RW for config path
+            - name: installinfo
+              mountPath: C:/Temp/install_info
+              readOnly: true
+          resources: {}
+        - name: init-config
+          image: "gcr.io/datadoghq/agent:7.63.0"
+          imagePullPolicy: IfNotPresent
+          command: ["pwsh", "-Command"]
+          args:
+            - Get-ChildItem 'entrypoint-ps1' | ForEach-Object { & $_.FullName if (-Not $?) { exit 1 } }
+          volumeMounts:
+            - name: config
+              mountPath: C:/ProgramData/Datadog
+              readOnly: false # Need RW for config path
+            - name: runtimesocket
+              mountPath: \\.\pipe\docker_engine
+            - name: containerdsocket
+              mountPath: \\.\pipe\containerd-containerd
+          env:
+            - name: DD_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: "datadog"
+                  key: api-key
+            - name: DD_REMOTE_CONFIGURATION_ENABLED
+              value: "true"
+            - name: DD_AUTH_TOKEN_FILE_PATH
+              value: C:/ProgramData/Datadog/auth/token
+            - name: KUBERNETES
+              value: "yes"
+            - name: DD_LANGUAGE_DETECTION_ENABLED
+              value: "false"
+            - name: DD_LANGUAGE_DETECTION_REPORTING_ENABLED
+              value: "false"
+            - name: DD_KUBERNETES_KUBELET_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DD_OTLP_CONFIG_LOGS_ENABLED
+              value: "false"
+          resources: {}
+      volumes:
+        - name: auth-token
+          emptyDir: {}
+        - name: installinfo
+          configMap:
+            name: datadog-installinfo
+        - name: config
+          emptyDir: {}
+        - hostPath:
+            path: \\.\pipe\docker_engine
+          name: runtimesocket
+        # If the CRI is not provided, try to mount the default containerd pipe.
+        # By default, "datadog.dockerOrCriSocketPath" mounts the Docker pipe.
+        # So with this additional hostPath, by default, both are mounted.
+        - hostPath:
+            path: \\.\pipe\containerd-containerd
+          name: containerdsocket
+        - name: logdatadog
+          emptyDir: {}
+      tolerations:
+        - effect: NoSchedule
+          key: node.kubernetes.io/os
+          value: windows
+          operator: Equal
+      affinity: {}
+      serviceAccountName: "datadog-agent"
+      nodeSelector:
+        kubernetes.io/os: windows
+  updateStrategy:
+    rollingUpdate:
+      maxUnavailable: 10%
+    type: RollingUpdate

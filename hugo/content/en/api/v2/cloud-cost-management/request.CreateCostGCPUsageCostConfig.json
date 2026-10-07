@@ -1,0 +1,13 @@
+{
+  "data": {
+    "attributes": {
+      "billing_account_id": "123456_A123BC_12AB34",
+      "bucket_name": "dd-cost-bucket",
+      "export_dataset_name": "billing",
+      "export_prefix": "datadog_cloud_cost_usage_export",
+      "export_project_name": "dd-cloud-cost-report",
+      "service_account": "dd-ccm-gcp-integration@my-environment.iam.gserviceaccount.com"
+    },
+    "type": "gcp_uc_config_post_request"
+  }
+}

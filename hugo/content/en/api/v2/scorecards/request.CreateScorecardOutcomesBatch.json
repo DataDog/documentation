@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "results": [
+        {
+          "remarks": "See: <a href=\"https://app.datadoghq.com/services\">Services</a>",
+          "rule_id": "q8MQxk8TCqrHnWkx",
+          "service_name": "my-service",
+          "state": "pass"
+        }
+      ]
+    },
+    "type": "batched-outcome"
+  }
+}

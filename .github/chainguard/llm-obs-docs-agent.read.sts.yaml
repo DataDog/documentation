@@ -1,0 +1,10 @@
+issuer: https://vault.us1.staging.dog/v1/identity/oidc
+
+subject: 8ea95a57-9481-842b-ea3c-163bdc22d84e
+
+claim_pattern:
+  email: "rapid-ml-observability.llm-obs-docs-agent@kubernetes.us1.staging.dog"
+
+permissions:
+  contents: read
+  pull_requests: read

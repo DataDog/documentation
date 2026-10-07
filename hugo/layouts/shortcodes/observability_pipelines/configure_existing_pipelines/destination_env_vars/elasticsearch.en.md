@@ -1,0 +1,6 @@
+- Elasticsearch authentication username:
+   - The default environment variable is `DD_OP_DESTINATION_ELASTICSEARCH_USERNAME`.
+- Elasticsearch authentication password:
+   - The default environment variable is `DD_OP_DESTINATION_ELASTICSEARCH_PASSWORD`.
+- Elasticsearch endpoint URL:
+   - The default environment variable is `DD_OP_DESTINATION_ELASTICSEARCH_ENDPOINT_URL`.

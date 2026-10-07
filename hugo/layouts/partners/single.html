@@ -1,0 +1,20 @@
+{{ define "main" }}
+  <div class="row">
+    <div class="col-12 order-1">
+        <h1 id="pagetitle">{{ .Title }}</h1>
+    </div>
+    <div class="col-12">
+      {{ if .File }}
+        {{ partial "breadcrumbs.html" . }}
+      {{ end }}
+    </div>
+    <div class="col-12">
+      {{ partial "partners/banner.html" . }}
+    </div>
+
+  </div>
+  {{ partial "translate_status_banner/translate_status_banner.html" . }} 
+
+  {{ $wrappedTable := printf "<div class=table-wrapper> ${1} </div>" }} 
+  {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+{{ end }}

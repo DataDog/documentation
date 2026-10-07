@@ -1,0 +1,44 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "updated-datadog-logs-destination-id",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "datadog-agent-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "status:error",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "datadog-agent-source",
+            "type": "datadog_agent"
+          }
+        ]
+      },
+      "name": "Updated Pipeline Name"
+    },
+    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "type": "pipelines"
+  }
+}

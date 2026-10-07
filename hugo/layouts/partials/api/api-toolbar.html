@@ -1,0 +1,7 @@
+{{ $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}
+{{ $.Scratch.Add "path" .Site.BaseURL }}
+
+<div class="api-toolbar pt-2 mb-lg-1 d-lg-flex justify-content-between">
+    {{ partial "breadcrumbs.html" . }}
+    {{ partial "language-region-select.html" . }}
+</div>

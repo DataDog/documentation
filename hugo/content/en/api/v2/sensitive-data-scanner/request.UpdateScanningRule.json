@@ -1,0 +1,26 @@
+{
+  "meta": {},
+  "data": {
+    "id": "string",
+    "type": "sensitive_data_scanner_rule",
+    "attributes": {
+      "name": "Example-Sensitive-Data-Scanner",
+      "pattern": "pattern",
+      "text_replacement": {
+        "type": "none"
+      },
+      "tags": [
+        "sensitive_data:true"
+      ],
+      "is_enabled": true,
+      "priority": 5,
+      "included_keyword_configuration": {
+        "keywords": [
+          "credit card",
+          "cc"
+        ],
+        "character_count": 35
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "data": {
+    "attributes": {
+      "description": "My agent policy",
+      "enabled": true,
+      "hostTagsLists": [
+        [
+          "env:test"
+        ]
+      ],
+      "name": "my_agent_policy_2"
+    },
+    "type": "policy"
+  }
+}

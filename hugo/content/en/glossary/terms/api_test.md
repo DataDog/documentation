@@ -1,0 +1,9 @@
+---
+id: api_test
+title: api test
+core_product:
+  - synthetic monitoring
+related_terms:
+  - multistep_api_test
+---
+In Datadog Synthetic Monitoring, an API test allows you to launch requests through individual network protocols. For more information, <a href="/synthetics/api_tests/">see the documentation</a>.

@@ -1,0 +1,182 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "d36bcd3cb15a0ddf8c169cfe6df65f6a": {
+            "string": "Configuración de la monitorización de iOS y tvOS"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "e8d7a83f562a6ab1a3dfaa25bf6e5562": {
+            "string": "Recopila datos de RUM de tus aplicaciones iOS y tvOS."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/real_user_monitoring/application_monitoring/ios/advanced_configuration",
+            "text": {
+              "itemTranslationData": {
+                "a242f67912917c7e3e98383f9217f562": {
+                  "string": "Configuración avanzada de RUM iOS"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "https://github.com/DataDog/dd-sdk-ios",
+            "text": {
+              "itemTranslationData": {
+                "62376bfe979623c0b45d9c7042cf9118": {
+                  "string": "Código fuente de dd-sdk-ios"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "8b3aa9bd6876eae15440cf30cc58eabb": {
+                  "string": "Código fuente"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/real_user_monitoring",
+            "text": {
+              "itemTranslationData": {
+                "8c80f5c8c8c715df0af43b80d665d2d0": {
+                  "string": "Aprender a explorar tus datos de RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "/real_user_monitoring/error_tracking/ios/",
+            "text": {
+              "itemTranslationData": {
+                "3516324bdf4e0d90a5e681f20efb65b0": {
+                  "string": "Aprender a rastrear los errores de iOS"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "4": {
+            "link": "/real_user_monitoring/ios/swiftui/",
+            "text": {
+              "itemTranslationData": {
+                "26b912637f60b61771ef3cf2c7935b5f": {
+                  "string": "Aprender a instrumentar aplicaciones SwiftUI"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "5": {
+            "link": "/real_user_monitoring/application_monitoring/ios/supported_versions",
+            "text": {
+              "itemTranslationData": {
+                "cdc32a4ec412e48b8cd557359a9cb6b4": {
+                  "string": "Versiones compatibles de la monitorización de RUM iOS y tvOS"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          },
+          "6": {
+            "link": "/real_user_monitoring/guide/mobile-sdk-upgrade",
+            "text": {
+              "itemTranslationData": {
+                "36650b6046f3649b548721cd807f9e8c": {
+                  "string": "Actualizar los SDKs móviles de RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e36b43da3ed5277767845b241e32454f": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "children": {
+          "listTranslationData": {
+            "0": {
+              "$$mdtype": "Node",
+              "inline": false,
+              "children": {
+                "listTranslationData": {
+                  "0": {
+                    "$$mdtype": "Node",
+                    "inline": true,
+                    "attributes": {
+                      "content": "Overview",
+                      "itemTranslationData": {
+                        "06dd0949a235b04960722cfff7a664f2": {
+                          "string": "Información general"
+                        }
+                      }
+                    },
+                    "type": "text",
+                    "location": "line 34-35"
+                  }
+                }
+              },
+              "type": "inline",
+              "location": "line 34-35"
+            }
+          }
+        },
+        "type": "heading",
+        "location": "line 34-35"
+      }}
+  },
+  "type": "document"}

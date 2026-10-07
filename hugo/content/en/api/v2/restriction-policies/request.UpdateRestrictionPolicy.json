@@ -1,0 +1,16 @@
+{
+  "data": {
+    "id": "dashboard:test-update",
+    "type": "restriction_policy",
+    "attributes": {
+      "bindings": [
+        {
+          "relation": "editor",
+          "principals": [
+            "org:00000000-0000-beef-0000-000000000000"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "assets": [
+    {
+      "category": "runbook",
+      "name": "Monitor Runbook",
+      "resource_key": "12345",
+      "resource_type": "notebook",
+      "url": "/notebooks/12345"
+    }
+  ],
+  "name": "Example-Monitor",
+  "type": "metric alert",
+  "query": "avg(current_1mo):avg:system.load.5{*} > 0.5",
+  "message": "some message Notify: @hipchat-channel",
+  "options": {
+    "thresholds": {
+      "critical": 0.5
+    },
+    "scheduling_options": {
+      "evaluation_window": {
+        "day_starts": "04:00",
+        "month_starts": 1
+      }
+    }
+  }
+}

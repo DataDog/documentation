@@ -1,0 +1,38 @@
+{
+  "name": "Example-Monitor",
+  "type": "query alert",
+  "query": "formula(\"query1\").rollup(\"sum\").last(\"5m\") > 100",
+  "message": "test message",
+  "options": {
+    "thresholds": {
+      "critical": 100
+    },
+    "variables": [
+      {
+        "data_source": "aggregate_filtered_query",
+        "name": "query1",
+        "base_query": {
+          "data_source": "metrics",
+          "name": "query1",
+          "query": "max:container.cpu.usage{*} by {kube_cluster_name}.rollup(max)"
+        },
+        "filter_query": {
+          "name": "filter_query",
+          "data_source": "reference_table",
+          "table_name": "test_table",
+          "columns": [
+            {
+              "name": "cluster_name"
+            }
+          ]
+        },
+        "filters": [
+          {
+            "base_attribute": "kube_cluster_name",
+            "filter_attribute": "cluster_name"
+          }
+        ]
+      }
+    ]
+  }
+}

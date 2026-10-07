@@ -1,0 +1,7 @@
+---
+id: cardinality
+core_product:
+- モニター
+title: カーディナリティ
+---
+Datadog では、カーディリティは、メトリクスのタグキーに関連するタグ値の数です。

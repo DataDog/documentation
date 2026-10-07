@@ -1,0 +1,37 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "sankey",
+        "requests": [
+          {
+            "query": {
+              "data_source": "network",
+              "query_string": "*",
+              "group_by": [
+                "source",
+                "destination"
+              ],
+              "limit": 100
+            },
+            "request_type": "netflow_sankey"
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}
