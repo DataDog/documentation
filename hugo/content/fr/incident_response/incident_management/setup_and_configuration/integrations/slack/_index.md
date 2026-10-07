@@ -39,7 +39,7 @@ La documentation de l'intégration Slack est organisée autour du cycle de vie t
 
 ## Prérequis {#prerequisites}
 
-Installez l'intégration via la [Slack Integration tile][1] avec les [OAuth scopes][6] appropriées. Pour plus d'informations, consultez la documentation sur l'[Slack integration][2].
+Installez l'intégration via la [Slack Integration tile][1] avec les [périmètres OAuth][6] appropriées. Pour plus d'informations, consultez la documentation sur l'[Slack integration][2].
 
 Une fois l'intégration installée, accédez à [**Incidents** > **Settings** > **Integrations**][3] pour activer les fonctionnalités Slack pour Incident Management.
 
@@ -59,16 +59,16 @@ Par défaut, seuls les utilisateurs Slack connectés à une organisation Datadog
 
 Pour permettre à tout utilisateur Slack de l'espace de travail de déclarer des incidents, activez **Allow Slack users to declare incidents without a connected Datadog account** dans les paramètres Incident Management.
 
-## Incident channels {#incident-channels}
+## Canaux d'incident {#incident-channels}
 
 Vous pouvez configurer Incident Management pour créer automatiquement un canal Slack dédié pour chaque incident répondant aux critères que vous définissez. Vos intervenants peuvent ensuite gérer l'incident directement dans Slack depuis le canal d'incident.
 
-Pour utiliser les incident channels, accédez à **[Incident Response > Incident Management > Settings > Integrations][3]** et activez **Create Slack channels for incidents**.
+Pour utiliser les canaux d'incident, accédez à **[Incident Response > Incident Management > Settings > Integrations][3]** et activez **Create Slack channels for incidents**.
 
-Le **channel name template** que vous définissez détermine comment Datadog nomme les canaux d'incident qu'il crée. Pour des descriptions complètes, consultez [Variables available only in channel name templates][7].
+Le **modèle de nom de canal** que vous définissez détermine comment Datadog nomme les canaux d'incident qu'il crée. Pour des descriptions complètes, consultez [Variables disponibles uniquement dans les modèles de noms de canaux][7].
 
 
-### Message syncing (Slack mirroring) {#message-syncing-slack-mirroring}
+### Synchronisation des messages (mise en miroir Slack) {#message-syncing-slack-mirroring}
 
 Après avoir activé la création automatique de canaux, vous pouvez configurer Incident Management pour synchroniser les messages entre un canal Slack d'incident et la chronologie de l'incident dans Datadog.
 
@@ -95,6 +95,16 @@ Dans un canal Slack d'incident, vous pouvez exécuter des commandes Slack pour m
 
 Pour obtenir la liste complète des commandes Slack, consultez les [commandes Slack](#slack-commands).
 
+### Réinviter un transcripteur de réunion {#re-inviting-a-meeting-transcriber}
+
+Si le transcripteur Datadog quitte une réunion liée à Zoom, Google Meet ou Microsoft Teams, un message de réinvitation peut apparaître dans le fil de discussion de la carte de réunion. Cela peut se produire après l'expiration du délai d'attente de la salle d'attente, lorsque personne ne rejoint la réunion, après le départ de tous les participants ou lorsque quelqu'un supprime le transcripteur.
+
+Sélectionnez **Oui** pour réinviter le transcripteur ou **Non** pour refuser l'invite. Si nécessaire, admettez le transcripteur depuis le lobby ou la salle d'attente de la réunion.
+
+Cette action nécessite un compte Datadog connecté et l'autorisation de modifier l'incident. Pour les organisations avec une facturation basée sur les sièges, cela nécessite également un [Incident Management or Incident Response seat][8]. Les paramètres de résumé de réunion et les conditions d'exclusion s'appliquent toujours.
+
+Vous pouvez également réinviter le transcripteur depuis l'en-tête de l'incident dans Datadog. Pour obtenir des instructions, consultez la documentation sur les résumés de réunion pour [Zoom][9], [Google Meet][10] ou [Microsoft Teams][11].
+
 ### Autres options de configuration du canal d'incidents {#other-incident-channel-configuration-options}
 
 Accédez à toutes les options de configuration de Slack dans Incident Management via la page [**Incidents** > **Settings** > **Integrations**][3].
@@ -110,7 +120,7 @@ Accédez à toutes les options de configuration de Slack dans Incident Managemen
 | **Automatically archive Slack channels after resolution** |  Archive les canaux Slack dédiés aux incidents une fois ceux-ci résolus. <br><br>Cela permet de réduire l'encombrement des canaux.                                             |
 | **Customize incident Slack actions**                       |  Personnalise les actions qui s'affichent dans la barre d'actions des incidents pour chaque statut. <br><br>Cela permet d'améliorer la visibilité des actions courantes.                      |
 
-## Global channel for incident updates {#global-channel-for-incident-updates}
+## Canal global pour les mises à jour des incidents {#global-channel-for-incident-updates}
 
 Vous pouvez configurer Incident Management pour publier automatiquement des mises à jour sur les incidents dans un canal Slack sélectionné. Pour activer ceci :
 
@@ -125,6 +135,8 @@ En coulisses, cette fonctionnalité est une [incident notification rule][5] int�
 ## Commandes Slack {#slack-commands}
 
 Vous pouvez consulter la liste complète des commandes Slack disponibles à tout moment en tapant `/datadog` (ou `/dd`) dans Slack pour ouvrir la fenêtre modale de commande afin de parcourir et d'exécuter toute action Datadog, ou `/dd help` pour afficher ces options sous forme de liste. Pour ouvrir le volet d'actions pour les actions courantes de gestion des incidents, tapez `/dd shortcuts`.
+
+Dans les commandes suivantes, vous pouvez utiliser `inc` comme raccourci pour `incident`.
 
 ### Commandes globales (exécutables partout) {#global-commands-run-anywhere}
 
@@ -147,8 +159,6 @@ Vous pouvez consulter la liste complète des commandes Slack disponibles à tout
 | `/datadog incident private` | Rendre l'incident privé (si les incidents privés sont activés). |
 | `/datadog incident public` | Rendre l'incident public. |
 | `/datadog incident responders` | Gérer l'équipe d'intervention de l'incident (ajouter des intervenants et attribuer des rôles d'intervention). |
-| `/datadog task` | Créer une tâche d'incident. |
-| `/datadog task list` | Lister les tâches d'incident existantes. |
 | `/datadog followup` | Créer un suivi pour l'incident. |
 | `/datadog followup list` | Afficher et gérer les suivis existants pour l'incident. |
 | `/datadog incident summary` | Obtenir un résumé de l'incident généré par IA qui n'est visible que par vous. |
@@ -164,13 +174,11 @@ Vous pouvez consulter la liste complète des commandes Slack disponibles à tout
 | `/datadog incident private` | Rendre l'incident privé (si les incidents privés sont activés). |
 | `/datadog incident public` | Rendre l'incident public. |
 | `/datadog incident responders` | Gérer l'équipe d'intervention de l'incident (ajouter des intervenants et attribuer des rôles d'intervention). |
-| `/datadog task` | Créer une tâche d'incident. |
-| `/datadog task list` | Lister les tâches d'incident existantes. |
 | `/datadog followup` | Créer un suivi pour l'incident. |
 | `/datadog followup list` | Afficher et gérer les suivis existants pour l'incident. |
 {{< /site-region >}}
 
-### Boutons du volet d’actions {#action-tray-buttons}
+### Boutons du volet d'actions {#action-tray-buttons}
 
 Datadog publie le volet d'actions directement dans le canal Slack de l'incident lors des changements de statut, afin que les intervenants puissent effectuer des actions courantes, telles que la mise à jour de la gravité ou du statut, sans avoir à taper une commande. Vous pouvez également ouvrir le volet d'actions en tapant `/dd shortcuts` dans Slack.
 
@@ -178,9 +186,9 @@ Les boutons suivants sont disponibles dans le volet d'actions. Les types d'incid
 
 | Bouton                              | Description                                                             | Par défaut actif | Par défaut stable | Par défaut résolu |
 |--------------------------------------|---------------------------------------------------------------------------|:---:|:---:|:---:|
-| ⚙️ **Modifier l'incident**                | Mettre à jour le statut, la gravité, l'impact et tous les autres attributs                 | {{< X >}} | {{< X >}} |   |
-| 🧑‍🚒 **Modifier les intervenants**             | Assigner des rôles et ajouter des coéquipiers à l'incident                            | {{< X >}} |   |   |
-| 🔍 **Voir toutes les actions**             | Ouvrir la liste complète des actions Slack disponibles pour cet incident           | {{< X >}} | {{< X >}} | {{< X >}} |
+| ⚙️ **Edit Incident**                | Mettre à jour le statut, la gravité, l'impact et tous les autres attributs                 | {{< X >}} | {{< X >}} |   |
+| 🧑‍🚒 **Edit Responders**             | Assigner des rôles et ajouter des coéquipiers à l'incident                            | {{< X >}} |   |   |
+| 🔍 **View All Actions**             | Ouvrir la liste complète des actions Slack disponibles pour cet incident           | {{< X >}} | {{< X >}} | {{< X >}} |
 | 🏠 **View Web App**                 | Ouvrir l'incident dans Datadog Incident Management                          | {{< X >}} | {{< X >}} | {{< X >}} |
 | ☎️ **Page On-Call**                 | Alerter une équipe au sujet de l'incident en cours en utilisant votre service préféré       | {{< X >}} |   |   |
 | 🔔 **Notify**                       | Notifier les parties prenantes d'un incident par e-mail, notification push ou services    |   | {{< X >}} | {{< X >}} |
@@ -194,7 +202,7 @@ Les boutons suivants sont disponibles dans le volet d'actions. Les types d'incid
 | 📋 **List Follow-Ups**              | Afficher et suivre les tâches de suivi pour l'incident                           |   |   | {{< X >}} |
 | 📝 **Create/View Postmortem**       | Créer ou voir le post-mortem de l'incident                            |   |   | {{< X >}} |
 
-## Lectures complémentaires {#further-reading}
+## Pour aller plus loin {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -205,3 +213,7 @@ Les boutons suivants sont disponibles dans le volet d'actions. Les types d'incid
 [5]: /fr/incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /fr/integrations/slack/?tab=datadogforslack#permissions
 [7]: /fr/incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates
+[8]: /fr/account_management/billing/incident_response/#allocate-seats
+[9]: /fr/integrations/zoom-incident-management/#meeting-summaries
+[10]: /fr/integrations/google-meet-incident-management/#meeting-summaries
+[11]: /fr/incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#meeting-summaries

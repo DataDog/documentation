@@ -20,69 +20,54 @@ further_reading:
 
 ## Overview
 
-Proper cluster sizing helps ensure optimal performance, cost efficiency, and reliability for your BYOC (Bring Your Own Cloud) Logs deployment. Your sizing requirements depend on several factors including log ingestion volume, query patterns, retention period, and the complexity of your log data.
+Size your BYOC (Bring Your Own Cloud) Logs cluster in three steps:
 
-The [sizing examples](#sizing-examples) below provide starting-point configurations for common daily log volumes. For deeper guidance on each component, see the sections that follow.
+1. Estimate your daily ingest volume in TB/day.
+2. Pick a [starter configuration](#starter-configurations) for that volume.
+3. Monitor the cluster and adjust replica counts and pod sizes.
 
-<div class="alert alert-tip">
-Use your expected daily log volume and peak ingestion rates as starting points, then monitor your cluster's performance and adjust sizing as needed.
-</div>
-
-## Sizing examples
-
-The following table provides baseline configurations for common daily log volumes. These recommendations are intended as starting points and should be adjusted based on observed resource utilization and query performance.
-
-As a starting point, plan for approximately:
-
-- 2 indexer vCPUs per TB of logs ingested per day
-- 1 compactor vCPU per 2 TB of logs ingested per day
-
-Searcher capacity depends on query concurrency, query complexity, and the amount of data scanned. It should therefore be sized based on the expected search workload rather than ingestion volume alone. Analytics-heavy workloads may require up to twice the baseline search capacity shown below.
+Searcher capacity depends on query concurrency, query complexity, and the amount of data scanned, not on ingest volume alone.
 
 These recommendations assume modern x86 CPUs, such as those used in AWS M6 instance types, or equivalent CPUs from other cloud providers. ARM-based CPUs, such as AWS Graviton, may provide better cost efficiency at comparable throughput.
 
-The following table shows the total vCPU capacity for each component.
+## Starter configurations
 
-|   Daily volume | Indexer total vCPUs | Compactor total vCPUs | Searcher total vCPUs |
-|---------------:|--------------------:|----------------------:|---------------------:|
-|   **1 TB/day** |                   2 |                   0.5 |                    4 |
-|  **10 TB/day** |                  20 |                     5 |                   40 |
-| **100 TB/day** |                 200 |                    50 |                  400 |
+Use these totals as a starting point:
 
-Use the following per-pod CPU and memory allocations as a starting point for distributing the total capacity across pods:
+- **Indexers:** 2 vCPUs per TB/day
+- **Compactors:** 1 vCPU per 2 TB/day
+- **Searchers:** about twice the indexer vCPU total. Analytics-heavy workloads may need up to twice the values shown in the table.
 
-| Daily volume    | Indexer per pod | Compactor per pod | Searcher per pod |
-|-----------------|----------------:|------------------:|-----------------:|
-| **Up to 30 TB/day** |  4 vCPUs, 16 GB |    4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
-| **Above 30 TB/day** |  8 vCPUs, 32 GB |    8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
+Object storage totals assume 30-day retention and a 6x compression ratio.
+
+|   Daily volume |  Indexers | Compactors |  Searchers | Object storage |
+|---------------:|----------:|-----------:|-----------:|---------------:|
+|   **1 TB/day** |   2 vCPUs |   0.5 vCPUs |    4 vCPUs |          ~5 TB |
+|  **10 TB/day** |  20 vCPUs |     5 vCPUs |   40 vCPUs |         ~50 TB |
+| **100 TB/day** | 200 vCPUs |    50 vCPUs |  400 vCPUs |        ~500 TB |
+
+Recommended size for each pod:
+
+| Daily volume        | Indexers        | Compactors      | Searchers        |
+|---------------------|----------------:|----------------:|-----------------:|
+| **Up to 30 TB/day** |  4 vCPUs, 16 GB |  4 vCPUs, 16 GB |  16 vCPUs, 64 GB |
+| **Above 30 TB/day** |  8 vCPUs, 32 GB |  8 vCPUs, 32 GB | 64 vCPUs, 256 GB |
 
 <div class="alert alert-info">
 <strong>Billing vs. provisioning:</strong> Provisioned vCPUs and billed vCPUs are different. A production cluster is intentionally overprovisioned to absorb ingestion and search spikes. Contact your Datadog representative for billing guidance.
 </div>
 
-## Indexers
+## Size each component
 
-Indexers receive logs from Datadog Agents, then process, index, and store them as index files (called _splits_) in object storage. Proper sizing is critical for maintaining ingestion throughput and ensuring your cluster can handle your log volume.
+Adjust the starter configuration component by component. For the role each component plays, see [Architecture][2].
 
-| Specification        | Recommendation                 | Notes                                                                                                                                                                                                                                                                                                                                                                  |
-|----------------------|--------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Performance**      | 8 MB/s per vCPU                | Baseline throughput to determine initial sizing. Actual performance depends on log characteristics (size, number of attributes, nesting level)                                                                                                                                                                                                                         |
-| **Memory**           | 4 GB RAM per vCPU              |                                                                                                                                                                                                                                                                                                                                                                        |
-| **Minimum Pod Size** | 2 vCPUs, 8 GB RAM              | Recommended minimum for indexer pods                                                                                                                                                                                                                                                                                                                                   |
-| **Storage Capacity** | At least 30 GB                 | Required for temporary data while creating and merging index files                                                                                                                                                                                                                                                                                                     |
-| **Storage Type**     | Network-attached block storage | For example: Amazon EBS gp3, Azure Managed Disks, or GCP Persistent Disk. Data is temporarily stored in a write-ahead log (WAL) before being uploaded to object storage. The WAL is not replicated, so using local (ephemeral) SSDs increases the risk of losing a few minutes of data if the disk fails. Network-attached block storage provides built-in redundancy. |
-| **Disk I/O**         | ~20 MB/s per vCPU              | Equivalent to 320 IOPS per vCPU for Amazon EBS (assuming 64 KB IOPS). For example, the default Amazon EBS gp3 throughput of 125 MiB/s is sufficient for a 4-vCPU indexer.                                                                                                                                                                                              |
+### Indexers
 
+- **Performance:** 2 vCPUs per TB/day
+- **Memory:** 4 GB RAM per vCPU
+- **Storage type:** Network-attached block storage for the write-ahead log. See [Configure persistent storage for indexers][3].
 
-{{% collapse-content title="Example: Sizing for 100 TB of logs per day" level="h3" expanded=false %}}
-To index 100 TB of logs per day (~1,160 MB/s), follow these steps:
-
-1. **Calculate vCPUs:** `1,160 MB/s ÷ 8 MB/s per vCPU ≈ 145 vCPUs`
-2. **Calculate RAM:** `145 vCPUs × 4 GB RAM per vCPU ≈ 580 GB RAM`
-3. **Add headroom:** Start with 50 indexer pods, each configured with **4 vCPUs, 16 GB RAM, and a 30 GB disk**. Adjust these values based on observed performance and redundancy needs.
-{{% /collapse-content %}}
-
-{{% collapse-content title="Sizing by event count" level="h3" expanded=false %}}
+{{% collapse-content title="Sizing by event count" level="h4" expanded=false %}}
 If you know your daily event count but not your byte volume, use this formula to estimate:
 
 $$\text"Daily volume (TB)" = {\text"events per day" × \text"average event size (bytes)"} / 10^{12}$$
@@ -94,27 +79,22 @@ For example, with 1 billion events/day at 1 KB average size:
 Typical log event sizes range from 500 bytes (short syslog) to 2-3 KB (JSON with Kubernetes tags). Measure a representative sample of your logs to get an accurate average.
 {{% /collapse-content %}}
 
-## Compactors
+### Compactors
 
-The compactor merges small index splits into larger ones to reduce fragmentation and improve search efficiency. It also removes obsolete splits to reclaim storage.
+- **Performance:** 1 vCPU per 2 TB/day
+- **Memory:** 4 GB RAM per vCPU
+- **Storage type:** Local SSD. Use instances with local SSDs, such as AWS M8gd.
 
-| Specification    | Recommendation      | Notes                                                        |
-|------------------|---------------------|--------------------------------------------------------------|
-| **Performance**  | 1 vCPU per 2 TB/day | Baseline for initial sizing                                  |
-| **Memory**       | 4 GB RAM per vCPU   |                                                              |
-| **Storage type** | Local SSD           | Instances with local SSDs, such as AWS M8gd, are recommended |
+### Searchers
 
-## Searchers
+Size searchers for the expected search workload, not ingest volume alone. A starting point is about twice the indexer vCPU total.
 
-Searchers handle search queries from the Datadog UI, reading metadata from the Metastore and fetching data from object storage.
+- **Performance:** Term queries (`status:error AND message:exception`) usually use less CPU than wildcard or whole-event searches. Aggregation queries need more CPU and memory.
+- **Memory:** 4 GB RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
 
-A general starting point is to provision roughly double the total number of vCPUs allocated to Indexers. See our sizing examples.
+If search latency is high, add searcher replicas or increase memory per pod. See [Scale searchers based on your query patterns][4].
 
-- **Performance:** Search performance depends heavily on the workload (query complexity, concurrency, amount of data scanned). For instance, term queries (`status:error AND message:exception`) are usually computationally less expensive than wildcard or whole event search queries.
-- **Memory:** 4 GB of RAM per searcher vCPU. Provision more RAM if you expect many concurrent aggregation requests.
-
-
-## Other services
+### Other services
 
 Allocate the following resources for these lightweight components:
 
@@ -124,73 +104,68 @@ Allocate the following resources for these lightweight components:
 | **Metastore** | 2 | 4 GB | 2 |
 | **Janitor** | 2 | 4 GB | 1 |
 
-## Object storage estimation
+### PostgreSQL database
 
-BYOC Logs compresses and indexes log data before storing it in object storage. The compression ratio depends on the log format, structure, and redundancy in your data.
+- **Instance size:** For most use cases, a PostgreSQL instance with 1 vCPU and 4 GB of RAM is sufficient.
+- **Amazon RDS recommendation:** On Amazon RDS, start with the `t4g.medium` instance type.
+- **High availability:** Enable Multi-AZ deployment with one standby replica.
 
-| Metric | Typical range |
-|--------|---------------|
-| **Compression ratio** | 5x to 8x (raw input to stored size) |
-| **Storage per TB/day ingested** | 125-200 GB/day on object storage |
+Enable automated backups on the metastore database. See [Enable automated backups on your metastore database][5].
 
-To estimate your object storage requirements:
+### Object storage
+
+BYOC Logs compresses and indexes log data before storing it in object storage. Compression is typically 5x to 8x, which translates to about 125-200 GB stored per TB ingested per day.
 
 $$\text"Stored data per day" = {\text"Daily volume"} / {\text"compression ratio"}$$
 
 $$\text"Total storage" = \text"Stored data per day" × \text"retention period (days)"$$
 
-The following examples assume a 30-day retention period and a 6x compression ratio:
+<div class="alert alert-info">
+Use standard-tier object storage (for example, S3 Standard or GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
+</div>
 
-|   Daily volume | Object storage |
-|---------------:|---------------:|
-|   **1 TB/day** |          ~5 TB |
-|  **10 TB/day** |         ~50 TB |
-| **100 TB/day** |        ~500 TB |
-
-{{% collapse-content title="Example: Storage for 10 TB/day with 30-day retention" level="h3" expanded=false %}}
-Assuming a 6x compression ratio:
-
-1. **Stored per day:** `10 TB / 6 ≈ 1.67 TB/day`
-2. **Total for 30 days:** `1.67 TB × 30 ≈ 50 TB`
-
-Use standard-tier object storage (for example, S3 Standard, GCS Standard) for active data. Lower-cost tiers such as S3 Infrequent Access or GCS Nearline are not validated for use with BYOC Logs.
-{{% /collapse-content %}}
-
-## PostgreSQL database
-
-- **Instance Size:** For most use cases, a PostgreSQL instance with 1 vCPU and 4 GB of RAM is sufficient
-- **AWS RDS Recommendation:** If using AWS RDS, the `t4g.medium` instance type is a suitable starting point
-- **High Availability:** Enable Multi-AZ deployment with one standby replica for high availability
+To estimate PUT request volume and cost, see [Object Storage Request Estimation][6].
 
 ## Helm chart sizing tiers
 
-The BYOC Logs Helm chart provides predefined resource tiers through the `indexer.podSize` and `searcher.podSize` parameters. `podSize` selects the pod's resource requirements and related Quickwit tuning parameters. The default `podSize` is `xlarge` for both components. Each preset is designed to leave room on a matching node for Kubernetes system components, DaemonSets, and add-ons.
+Set `indexer.podSize` and `searcher.podSize` to match the per-pod CPU and memory in the [starter configuration](#starter-configurations). The default is `xlarge`. Each preset also applies ingest queue and search cache sizes.
 
-The presets account for resources reserved for Kubernetes system components. The reservation amounts are based on the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations). An additional 250m CPU and 512Mi memory per node is reserved for DaemonSets and add-ons:
+| `podSize` | CPU | Memory |
+|---|---:|---:|
+| `large` | 2 | 8Gi |
+| `xlarge` | 4 | 16Gi |
+| `2xlarge` | 8 | 32Gi |
+| `4xlarge` | 16 | 64Gi |
+| `6xlarge` | 24 | 96Gi |
+| `8xlarge` | 32 | 128Gi |
+
+{{% collapse-content title="Actual Kubernetes requests" level="h3" expanded=false %}}
+Each `podSize` requests less than its nominal CPU and memory, to leave room for kube-system, DaemonSets, and add-ons. The reservation amounts follow the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations), plus 250m CPU and 512Mi memory per node for DaemonSets and add-ons.
+
+| `podSize` | Actual CPU request | Actual memory request/limit |
+|---|---:|---:|
+| `large` | 1600m | 5700Mi |
+| `xlarge` | 3600m | 13100Mi |
+| `2xlarge` | 7600m | 28500Mi |
+| `4xlarge` | 15600m | 59300Mi |
+| `6xlarge` | 23600m | 90100Mi |
+| `8xlarge` | 31600m | 120900Mi |
 
 ```text
 Actual CPU request = (nominal pod CPU - Kubernetes system CPU reservation - 250m), rounded down to the nearest 100m
 Actual memory request/limit = (nominal pod memory - Kubernetes system memory reservation - 512Mi), rounded down to the nearest 100Mi
 ```
+{{% /collapse-content %}}
 
-| `podSize` | Nominal CPU request | Actual CPU request | Nominal memory request/limit | Actual memory request/limit |
-|---|---:|---:|---:|---:|
-| `large` | 2 | 1600m | 8Gi | 5700Mi |
-| `xlarge` | 4 | 3600m | 16Gi | 13100Mi |
-| `2xlarge` | 8 | 7600m | 32Gi | 28500Mi |
-| `4xlarge` | 16 | 15600m | 64Gi | 59300Mi |
-| `6xlarge` | 24 | 23600m | 96Gi | 90100Mi |
-| `8xlarge` | 32 | 31600m | 128Gi | 120900Mi |
-
-The presets do not set a CPU limit, allowing a pod to use idle CPU on its node without being throttled. Memory requests and limits are equal to keep memory usage within the allocatable node capacity.
-
-Values defining the ingest queue sizes and search cache sizes are automatically applied for the selected tier. See the [Helm chart sizing map][1] for the complete configuration. For more details on each parameter, see the Quickwit documentation for [indexer parameters][2], [ingest API parameters][3], and [searcher parameters][4].
+See the [Helm chart sizing map][1] for the complete configuration.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml
-[2]: https://quickwit.io/docs/configuration/node-config#indexer-configuration
-[3]: https://quickwit.io/docs/configuration/node-config#ingest-api-configuration
-[4]: https://quickwit.io/docs/configuration/node-config#searcher-configuration
+[2]: /byoc-logs/introduction/architecture/
+[3]: /byoc-logs/operate/best_practices/#configure-persistent-storage-for-indexers
+[4]: /byoc-logs/operate/best_practices/#scale-searchers-based-on-your-query-patterns
+[5]: /byoc-logs/operate/best_practices/#enable-automated-backups-on-your-metastore-database
+[6]: /byoc-logs/operate/object_storage_requests/

@@ -13,7 +13,6 @@ further_reading:
 Bits Investigation improves over time by combining the following knowledge sources:
 - [**Runbooks:**](#runbooks) Step-by-step troubleshooting guidance
 - [**bits.md:**](#bitsmd) Context about your environment
-- [**Skills:**](#skills) Reusable procedures Bits can invoke during an investigation
 - [**Feedback and memories:**](#feedback-and-memories) Learnings from investigations
 
 ## Runbooks

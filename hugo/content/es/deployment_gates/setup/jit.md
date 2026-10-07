@@ -13,10 +13,6 @@ further_reading:
   text: Referencia de la API de Deployment Gates.
 title: Configure Just-In-Time (JIT) Deployment Gates.
 ---
-{{< callout url="http://datadoghq.com/product-preview/deployment-gates" >}}
-Deployment Gates están en vista previa. Si le interesa esta función, complete el formulario para solicitar acceso.
-{{< /callout >}}
-
 Con **Just-In-Time (JIT)** Deployment Gates, las reglas se definen en línea en la solicitud de evaluación. No es necesario que exista un Deployment Gate en Datadog de antemano, lo que hace que JIT sea una buena opción para reglas como código y flexibilidad por despliegue.
 
 ¿Busca Deployment Gates persistentes gestionados en la Datadog UI, API o Terraform? Consulte [Preconfigured Deployment Gates][5].

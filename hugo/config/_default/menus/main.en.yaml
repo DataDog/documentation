@@ -565,26 +565,31 @@ menu:
       url: agent/fleet_automation/configure_agents
       parent: agent_fleet_automation
       weight: 802
+    - name: Supported datadog.yaml Fields
+      identifier: supported_datadog_yaml_fields
+      url: agent/fleet_automation/supported_datadog_yaml_fields
+      parent: agent_fleet_automation
+      weight: 803
     - name: Configure Agent Integrations
       identifier: configure_integrations
       url: agent/fleet_automation/configure_integrations
       parent: agent_fleet_automation
-      weight: 803
+      weight: 804
     - name: Configure Custom Logs
       identifier: configure_logs
       url: agent/fleet_automation/configure_logs
       parent: agent_fleet_automation
-      weight: 804
+      weight: 805
     - name: Upgrade Agents
       identifier: upgrade_agents
       url: agent/fleet_automation/upgrade_agents
       parent: agent_fleet_automation
-      weight: 805
+      weight: 806
     - name: Upgrade SDKs
       identifier: upgrade_sdks
       url: agent/fleet_automation/upgrade_sdks
       parent: agent_fleet_automation
-      weight: 806
+      weight: 807
     - name: Troubleshooting
       url: agent/troubleshooting/
       parent: agent
@@ -649,6 +654,11 @@ menu:
       identifier: agent_troubleshooting_high_cpu_memory_consumption
       url: agent/troubleshooting/high_memory_usage/
       weight: 1012
+      parent: agent_troubleshooting
+    - name: Missing Log Bytes
+      identifier: agent_troubleshooting_missing_log_bytes
+      url: agent/troubleshooting/missing_log_bytes/
+      weight: 1013
       parent: agent_troubleshooting
     - name: Guides
       url: agent/guide/
@@ -1550,51 +1560,21 @@ menu:
       identifier: bits_ai
       parent: platform_heading
       weight: 100000
-    - name: Bits Investigation
-      url: bits_ai/bits_investigation
-      identifier: bits_ai_sre
+    - name: Bits Agent Builder
+      url: actions/agents/
+      identifier: bits_ai_agent_builder
       parent: bits_ai
       weight: 1
-    - name: Investigate Issues
-      url: bits_ai/bits_investigation/investigate_issues
-      identifier: bits_ai_sre_investigate_issues
-      parent: bits_ai_sre
-      weight: 101
-    - name: Bits Investigation Integrations and Settings
-      url: bits_ai/bits_investigation/configure
-      identifier: bits_ai_sre_configure
-      parent: bits_ai_sre
-      weight: 102
-    - name: Knowledge Sources
-      url: bits_ai/bits_investigation/knowledge_sources
-      identifier: bits_ai_sre_knowledge_sources
-      parent: bits_ai_sre
-      weight: 103
-    - name: Chat with Bits Investigation
-      url: bits_ai/bits_investigation/chat_bits_investigation
-      identifier: bits_ai_sre_chat
-      parent: bits_ai_sre
-      weight: 104
-    - name: Improve Bits Investigation Accuracy
-      url: bits_ai/bits_investigation/improve_accuracy
-      identifier: bits_ai_sre_improve_accuracy
-      parent: bits_ai_sre
-      weight: 105
-    - name: Bits Remediation
-      url: bits_ai/bits_remediation
-      identifier: bits_remediation
+    - name: Bits Chat
+      url: bits_ai/bits_chat
+      identifier: bits_ai_bits_chat
       parent: bits_ai
       weight: 2
-    - name: Bits Detection
-      url: bits_ai/bits_detection
-      identifier: bits_detection
-      parent: bits_ai
-      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 4
+      weight: 3
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1610,31 +1590,71 @@ menu:
       parent: bits_ai_dev_agent
       identifier: bits_ai_dev_agent_slack_code_channels
       weight: 303
-    - name: Bits Security Analyst
-      url: bits_ai/bits_security_analyst
-      identifier: bits_ai_bits_security_analyst
-      parent: bits_ai
-      weight: 5
-    - name: Bits Chat
-      url: bits_ai/bits_chat
-      identifier: bits_ai_bits_chat
-      parent: bits_ai
-      weight: 6
-    - name: Bits Agent Builder
-      url: actions/agents/
-      identifier: bits_ai_agent_builder
-      parent: bits_ai
-      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
+      weight: 4
+    - name: Bits Database Optimization
+      url: database_monitoring/bits_database_optimization
+      identifier: bits_ai_database_optimization
+      parent: bits_ai
+      weight: 5
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
+      parent: bits_ai
+      weight: 6
+    - name: Bits Investigation
+      url: bits_ai/bits_investigation
+      identifier: bits_ai_sre
+      parent: bits_ai
+      weight: 7
+    - name: Investigate Issues
+      url: bits_ai/bits_investigation/investigate_issues
+      identifier: bits_ai_sre_investigate_issues
+      parent: bits_ai_sre
+      weight: 701
+    - name: Bits Investigation Integrations and Settings
+      url: bits_ai/bits_investigation/configure
+      identifier: bits_ai_sre_configure
+      parent: bits_ai_sre
+      weight: 702
+    - name: Knowledge Sources
+      url: bits_ai/bits_investigation/knowledge_sources
+      identifier: bits_ai_sre_knowledge_sources
+      parent: bits_ai_sre
+      weight: 703
+    - name: Chat with Bits Investigation
+      url: bits_ai/bits_investigation/chat_bits_investigation
+      identifier: bits_ai_sre_chat
+      parent: bits_ai_sre
+      weight: 704
+    - name: Improve Bits Investigation Accuracy
+      url: bits_ai/bits_investigation/improve_accuracy
+      identifier: bits_ai_sre_improve_accuracy
+      parent: bits_ai_sre
+      weight: 705
+    - name: Bits Live Debugger
+      url: tracing/live_debugger/bits-live-debugger
+      identifier: bits_ai_live_debugger
+      parent: bits_ai
       weight: 8
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 9
+    - name: Bits Security Analyst
+      url: bits_ai/bits_security_analyst
+      identifier: bits_ai_bits_security_analyst
+      parent: bits_ai
+      weight: 10
     - name: Skills Library
       url: bits_ai/skills_library
       identifier: bits_ai_skills_library
       parent: bits_ai
-      weight: 9
+      weight: 11
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2739,10 +2759,10 @@ menu:
       parent: incidents_settings
       identifier: incidents_settings_transition_forms
       weight: 203
-    - name: Responder Types
-      url: incident_response/incident_management/setup_and_configuration/responder_types
+    - name: Responder Roles
+      url: incident_response/incident_management/setup_and_configuration/responder_roles
       parent: incidents_settings
-      identifier: incidents_settings_responder_types
+      identifier: incidents_settings_responder_roles
       weight: 204
     - name: Automations
       url: incident_response/incident_management/setup_and_configuration/automations
@@ -3047,6 +3067,11 @@ menu:
       identifier: datadog_apps
       parent: actions_heading
       weight: 35000
+    - name: Embed Apps
+      url: actions/datadog_apps/embed_apps/
+      parent: datadog_apps
+      identifier: datadog_apps_embed_apps
+      weight: 1
     - name: App Builder
       url: actions/app_builder/
       pre: app-builder
@@ -3108,7 +3133,7 @@ menu:
       parent: app_builder
       identifier: app_builder_expressions
       weight: 8
-    - name: Embedded Apps
+    - name: Embed App Builder Apps
       url: actions/app_builder/embedded_apps/
       parent: app_builder
       identifier: app_builder_embedded_apps
@@ -3196,11 +3221,16 @@ menu:
       parent: actions_connections
       identifier: actions_google_workspace
       weight: 103
+    - name: GitHub App Connection
+      url: actions/connections/github_app/
+      parent: actions_connections
+      identifier: actions_github_app
+      weight: 104
     - name: Private Action Credentials
       url: actions/connections/private_action_credentials/
       parent: actions_connections
       identifier: private_actions_creds
-      weight: 104
+      weight: 105
     - name: Private Actions
       url: actions/private_actions/
       parent: action_catalog
@@ -5205,11 +5235,36 @@ menu:
       parent: dbm_setup_mysql
       identifier: dbm_troubleshooting_mysql
       weight: 407
+    - name: Setting Up MariaDB
+      url: database_monitoring/setup_mariadb/
+      parent: dbm
+      identifier: dbm_setup_mariadb
+      weight: 6
+    - name: Self-hosted
+      url: database_monitoring/setup_mariadb/selfhosted
+      parent: dbm_setup_mariadb
+      identifier: dbm_setup_mariadb_selfhosted
+      weight: 451
+    - name: RDS
+      url: database_monitoring/setup_mariadb/rds
+      parent: dbm_setup_mariadb
+      identifier: dbm_setup_mariadb_rds
+      weight: 452
+    - name: Advanced Configuration
+      url: database_monitoring/setup_mariadb/advanced_configuration
+      parent: dbm_setup_mariadb
+      identifier: dbm_mariadb_advanced_configuration
+      weight: 453
+    - name: Troubleshooting
+      url: database_monitoring/setup_mariadb/troubleshooting/
+      parent: dbm_setup_mariadb
+      identifier: dbm_troubleshooting_mariadb
+      weight: 454
     - name: Setting Up SQL Server
       url: database_monitoring/setup_sql_server/
       parent: dbm
       identifier: dbm_setup_sql_server
-      weight: 6
+      weight: 7
     - name: Self-hosted
       url: database_monitoring/setup_sql_server/selfhosted/
       parent: dbm_setup_sql_server
@@ -5239,7 +5294,7 @@ menu:
       url: database_monitoring/setup_oracle/
       parent: dbm
       identifier: dbm_setup_oracle
-      weight: 7
+      weight: 8
     - name: Self-hosted
       url: database_monitoring/setup_oracle/selfhosted/
       parent: dbm_setup_oracle
@@ -5274,7 +5329,7 @@ menu:
       url: database_monitoring/setup_mongodb/
       parent: dbm
       identifier: dbm_setup_mongodb
-      weight: 8
+      weight: 9
     - name: Self-hosted
       url: database_monitoring/setup_mongodb/selfhosted
       parent: dbm_setup_mongodb
@@ -5294,7 +5349,7 @@ menu:
       url: database_monitoring/setup_clickhouse/
       parent: dbm
       identifier: dbm_setup_clickhouse
-      weight: 9
+      weight: 10
     - name: Self-hosted
       url: database_monitoring/setup_clickhouse/selfhosted
       parent: dbm_setup_clickhouse
@@ -5309,12 +5364,12 @@ menu:
       url: database_monitoring/setup_agent_terraform/
       parent: dbm
       identifier: dbm_setup_agent_terraform
-      weight: 10
+      weight: 11
     - name: Setting Up Amazon DocumentDB
       url: database_monitoring/setup_documentdb/
       parent: dbm
       identifier: dbm_setup_documentdb
-      weight: 8
+      weight: 12
     - name: Amazon DocumentDB
       url: database_monitoring/setup_documentdb/amazon_documentdb
       parent: dbm_setup_documentdb
@@ -5329,17 +5384,17 @@ menu:
       url: database_monitoring/connect_dbm_and_apm/
       parent: dbm
       identifier: dbm_connect_dbm_and_apm
-      weight: 10
+      weight: 13
     - name: Data Collected
       url: database_monitoring/data_collected
       parent: dbm
       identifier: dbm_data_collected
-      weight: 10
+      weight: 14
     - name: Collecting Custom Metrics
       url: database_monitoring/custom_metrics/
       parent: dbm
       identifier: dbm_custom_metrics
-      weight: 11
+      weight: 15
     - name: Exploring Custom Metrics
       url: database_monitoring/custom_metrics/exploring_custom_metrics
       parent: dbm_custom_metrics
@@ -5349,47 +5404,52 @@ menu:
       url: database_monitoring/database_hosts/
       parent: dbm
       identifier: dbm_database_hosts
-      weight: 12
+      weight: 16
     - name: Exploring Query Metrics
       url: database_monitoring/query_metrics/
       parent: dbm
       identifier: dbm_query_metrics
-      weight: 13
+      weight: 17
     - name: Exploring Query Samples
       url: database_monitoring/query_samples/
       parent: dbm
       identifier: dbm_query_samples
-      weight: 14
+      weight: 18
     - name: Exploring Database Schemas
       url: database_monitoring/schema_explorer
       parent: dbm
       identifier: dbm_schema_explorer
-      weight: 15
+      weight: 19
     - name: Exploring Recommendations
       url: database_monitoring/recommendations/
       parent: dbm
       identifier: dbm_recommendations
-      weight: 16
+      weight: 20
     - name: Database Investigations in Bits Chat
       url: database_monitoring/database_investigator/
       parent: dbm
       identifier: dbm_database_investigator
-      weight: 17
+      weight: 21
     - name: Bits Database Optimization
       url: database_monitoring/bits_database_optimization
       parent: dbm
       identifier: dbm_bits_database_optimization
-      weight: 18
+      weight: 22
+    - name: Database Monitoring Workbench
+      url: database_monitoring/database_monitoring_workbench/
+      parent: dbm
+      identifier: dbm_workbench
+      weight: 23
     - name: Troubleshooting
       url: database_monitoring/troubleshooting/
       parent: dbm
       identifier: dbm_troubleshooting
-      weight: 19
+      weight: 24
     - name: Guides
       url: database_monitoring/guide/
       parent: dbm
       identifier: dbm_guides
-      weight: 20
+      weight: 25
     - name: Data Streams Monitoring
       url: data_streams/
       pre: datastreams-monitoring
@@ -5411,11 +5471,6 @@ menu:
       identifier: data_streams_kafka_setup
       parent: data_streams_kafka
       weight: 1
-    - name: Data Collection
-      url: data_streams/kafka/data_collection
-      identifier: data_streams_kafka_data_collection
-      parent: data_streams_kafka
-      weight: 2
     - name: Monitors and Automation
       url: data_streams/kafka/monitors_and_automation
       identifier: data_streams_kafka_monitors_and_automation
@@ -5560,6 +5615,11 @@ menu:
       identifier: business_intelligence_integrations_powerbi
       parent: business_intelligence_integrations
       weight: 4000000
+    - name: Guides
+      url: data_observability/quality_monitoring/guides
+      identifier: quality_monitoring_guides
+      parent: quality_monitoring
+      weight: 300000
     - name: Jobs Monitoring
       url: data_observability/jobs_monitoring/
       pre: data-jobs-monitoring
@@ -5739,26 +5799,31 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_querying
       weight: 401
+    - name: Insights
+      url: llm_observability/investigate/insights
+      parent: llm_obs_monitoring
+      identifier: llm_obs_insights
+      weight: 402
     - name: Cost
       url: llm_observability/investigate/cost
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_cost
-      weight: 402
+      weight: 403
     - name: Metrics
       url: llm_observability/investigate/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 403
+      weight: 404
     - name: Patterns
       url: llm_observability/investigate/patterns/
       parent: llm_obs_monitoring
       identifier: llm_obs_patterns
-      weight: 404
+      weight: 405
     - name: Evaluations
       url: llm_observability/investigate/evaluations/
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations
-      weight: 405
+      weight: 406
     - name: Custom LLM-as-a-Judge
       url: llm_observability/investigate/evaluations/llm_as_a_judge_evaluations
       parent: llm_obs_evaluations
@@ -5798,12 +5863,12 @@ menu:
       url: llm_observability/investigate/annotation_queues
       parent: llm_obs_monitoring
       identifier: llm_obs_annotation_queues
-      weight: 406
+      weight: 407
     - name: Export API
       url: llm_observability/investigate/export_api
       parent: llm_obs_monitoring
       identifier: llm_obs_evaluations_export_api
-      weight: 407
+      weight: 408
     - name: Improve
       url: llm_observability/improve/
       parent: llm_obs
@@ -5864,11 +5929,16 @@ menu:
       parent: llm_obs_configure
       identifier: llm_obs_prompt_management
       weight: 601
+    - name: Prompt Experimentation
+      url: llm_observability/configure/prompt_experimentation
+      parent: llm_obs_configure
+      identifier: llm_obs_prompt_experimentation
+      weight: 602
     - name: Automation Rules
       url: llm_observability/configure/automation_rules
       parent: llm_obs_configure
       identifier: llm_obs_monitoring_automation_rules
-      weight: 602
+      weight: 603
     - name: Data Governance
       url: llm_observability/data_governance
       parent: llm_obs
@@ -5905,6 +5975,11 @@ menu:
       parent: gpu_monitoring
       identifier: gpu_monitoring_fleet
       weight: 3
+    - name: Training Page
+      url: gpu_monitoring/training/
+      parent: gpu_monitoring
+      identifier: gpu_monitoring_training
+      weight: 4
     - name: Agent Console
       url: ai_agents_console/
       pre: llm-observability
@@ -6704,6 +6779,11 @@ menu:
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_serverless
       weight: 502
+    - name: Browser Rules-Based Evaluation
+      url: feature_flags/implementation_patterns/browser_rules_based_evaluation
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_browser_rules_based_evaluation
+      weight: 503
     - name: Browser Developer Extension
       url: feature_flags/browser_developer_extension
       parent: feature_flags
@@ -8197,16 +8277,21 @@ menu:
       url: /security/code_security/software_composition_analysis/configuration/
       parent: software_composition_analysis
       weight: 3
+    - name: Supply Chain Firewall (SCFW)
+      identifier: sca_supply_chain_firewall
+      url: /security/code_security/software_composition_analysis/supply_chain_firewall/
+      parent: software_composition_analysis
+      weight: 4
     - name: Library Inventory
       identifier: sca_library_inventory
       url: /security/code_security/software_composition_analysis/library_inventory/
       parent: software_composition_analysis
-      weight: 4
+      weight: 5
     - name: CVE Explorer
       identifier: sca_cve_explorer
       url: /security/code_security/software_composition_analysis/cve_explorer/
       parent: software_composition_analysis
-      weight: 5
+      weight: 6
     - name: Secret Scanning
       identifier: sec_secret_scanning
       url: /security/code_security/secret_scanning/
@@ -9183,16 +9268,21 @@ menu:
       parent: synthetics_platform
       identifier: synthetics_platform_apm
       weight: 705
+    - name: Connect RUM
+      url: synthetics/platform/rum/
+      parent: synthetics_platform
+      identifier: synthetics_platform_rum
+      weight: 706
     - name: Settings
       identifier: synthetics_settings
       url: synthetics/platform/settings
       parent: synthetics_platform
-      weight: 706
+      weight: 707
     - name: Scheduled Downtime
       identifier: synthetics_platform_downtime
       url: synthetics/platform/downtime
       parent: synthetics_platform
-      weight: 707
+      weight: 708
     - name: Exploring Synthetics Data
       url: synthetics/explore/
       parent: synthetics
@@ -10121,25 +10211,25 @@ menu:
       parent: rum_error_tracking
       identifier: rum_error_tracking_troubleshooting
       weight: 809
-    - name: AI Investigations
-      url: real_user_monitoring/ai_investigations/
+    - name: Bits in RUM
+      url: real_user_monitoring/bits_ai/
       parent: rum
-      identifier: rum_ai_investigations
+      identifier: rum_bits_ai
       weight: 9
-    - name: Single-View AI Investigation
-      url: real_user_monitoring/ai_investigations/single_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_single_view
+    - name: Optimize Performance
+      url: real_user_monitoring/bits_ai/optimize_performance/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_optimize_performance
       weight: 901
-    - name: Multi-View AI Investigation
-      url: real_user_monitoring/ai_investigations/multi_view_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_multi_view
+    - name: Investigate Regressions
+      url: real_user_monitoring/bits_ai/investigate_regressions/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_investigate_regressions
       weight: 902
-    - name: Operation AI Investigation
-      url: real_user_monitoring/ai_investigations/operation_ai_investigation/
-      parent: rum_ai_investigations
-      identifier: rum_ai_investigations_operation
+    - name: Bits Chat in RUM
+      url: real_user_monitoring/bits_ai/bits_chat/
+      parent: rum_bits_ai
+      identifier: rum_bits_ai_bits_chat
       weight: 903
     - name: RUM Without Limits
       url: real_user_monitoring/rum_without_limits/
@@ -10237,6 +10327,31 @@ menu:
       parent: pa_charts
       identifier: pa_analytics_explorer
       weight: 106
+    - name: Search Syntax
+      url: product_analytics/charts/analytics_explorer/search_syntax
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_search_syntax
+      weight: 1061
+    - name: Group
+      url: product_analytics/charts/analytics_explorer/group
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_group
+      weight: 1062
+    - name: Visualize
+      url: product_analytics/charts/analytics_explorer/visualize
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_visualize
+      weight: 1063
+    - name: Events
+      url: product_analytics/charts/analytics_explorer/events
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_events
+      weight: 1064
+    - name: Export
+      url: product_analytics/charts/analytics_explorer/export
+      parent: pa_analytics_explorer
+      identifier: pa_analytics_explorer_export
+      weight: 1065
     - name: Dashboards
       url: product_analytics/dashboards
       parent: product_analytics
@@ -10540,6 +10655,11 @@ menu:
       parent: account_management_rbac
       identifier: account_management_rbac_data_access
       weight: 403
+    - name: Request Access
+      url: account_management/rbac/request_access
+      parent: account_management_rbac
+      identifier: account_management_rbac_request_access
+      weight: 404
     - name: SSO with SAML
       url: account_management/saml/
       identifier: account_management_saml
