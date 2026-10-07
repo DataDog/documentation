@@ -247,7 +247,7 @@ In later steps of your workflow, use `Source.slack_message` to reference the mes
 | `Source.slack_message.user_id` | The Slack ID of the user who posted the message, when present. |
 | `Source.slack_message.channel_id` | The Slack ID of the channel the message was posted in. |
 | `Source.slack_message.team_id` | The Slack ID of the workspace. |
-| `Source.slack_message.message_ts` | The timestamp of the message. |
+| `Source.slack_message.message_ts` | The Slack timestamp of the message. |
 | `Source.slack_message.thread_ts` | The Slack timestamp of the parent message, when the message is a thread reply. |
 | `Source.slack_message.app_id` | The Slack ID of the app that posted the message, when the message was posted by an app. |
 | `Source.slack_message.bot_id` | The Slack ID of the bot that posted the message, when the message was posted by a bot. |
