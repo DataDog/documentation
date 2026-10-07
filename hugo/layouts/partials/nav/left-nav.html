@@ -46,12 +46,17 @@
         <ul class="list-unstyled">
             {{ range .Children }}
                 {{/*  LEVEL 1  */}}
-                {{/* Levels 3-4 render only for the current page's top-level section, to avoid shipping every
+                {{/* Levels 2-4 render only for the current page's top-level section, to avoid shipping every
                      section's full sub-nav on every page. This menu is config-defined (plain url: strings, no
                      page front matter), so entries have no .Page and .IsMenuCurrent/.HasMenuCurrent never match
                      -- comparing URLs directly is what works. The match covers this entry's whole subtree, not
                      just its own URL -- see nav/flattened-menu.html for why. Keep in sync with
-                     nav/current-top-section.html, which computes the same matches for this partial's cache key. */}}
+                     nav/current-top-section.html, which computes the same matches for this partial's cache key.
+
+                     Omitting Level 2 for other sections is visually a no-op: the sidenav CSS already hides
+                     `ul li > ul` by default and only shows it via the `.open`/`.active` classes set on the
+                     current section, and clicking any nav item navigates (pjax) rather than expanding in place
+                     -- so another section's Level 2 was never visible without navigating into it first. */}}
                 {{ $isCurrentTopSection := in $currentTopSectionIDs .Identifier }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}
                 {{ if $isCurrentTopSection }}active{{ end }}">
@@ -64,6 +69,7 @@
                         <span>{{ .Name }}</span>
                         </div>
                     </a>
+                    {{ if (and .HasChildren $isCurrentTopSection) }}
                     <ul class="list-unstyled sub-menu {{ if (or (eq .Name "Guides") (eq .Name "Widget Types") (eq .Name "Monitor Types")) }} d-none {{ end }}">
                         {{/*  LEVEL 2  */}}
                         {{ range .Children }}
@@ -117,6 +123,7 @@
                             </li>
                         {{ end }}
                     </ul>
+                    {{ end }}
                 </li>
             {{ else }}
                 <li class="nav-top-level {{ if (not (or (in $excludeAsync .Identifier) (and (in .URL "api/") (not (in .URL "_api/")) (not (in .URL "-api/"))))) }} js-load {{ end }}">
