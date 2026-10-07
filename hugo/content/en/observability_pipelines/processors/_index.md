@@ -126,6 +126,8 @@ The following are not available for pre-processing:
 - Quota processor with an overflow destination
 - Packs
 
+**Note**: Processor groups for specific sources and for all sources count toward the 25 processor group limit per canvas.
+
 ## Processor groups
 
 <div class="alert alert-info">Configuring a pipeline with processor groups is only available for Worker versions 2.7 and later.</div>
