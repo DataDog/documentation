@@ -188,7 +188,7 @@ Datadog recommends running this drill at least annually and after any material c
 
 ## Fail over during an incident
 
-After completing and testing your DNS failover setup, you're ready to trigger a failover in the case of an incident. To fail over:
+After completing and testing your DNS failover setup, you can fail over during an incident. To fail over:
 
 1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). No coordination with Datadog is required to initiate DNS failover.
 1. **Cloud integrations (if applicable):** TODO
