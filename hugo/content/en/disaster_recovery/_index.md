@@ -173,7 +173,7 @@ To set up the two-step DNS delegation:
 
 {{% /collapse-content %}}
 
-### 4. Run a failover test
+{{% collapse-content title="3\. Test DNS failover" level="h4" %}}
 
 Datadog recommends validating your DNS failover setup with a scheduled drill before you need it in a real incident.
 
@@ -183,6 +183,18 @@ Datadog recommends validating your DNS failover setup with a scheduled drill bef
 1. Confirm that new telemetry resumes in your primary organization.
 
 Datadog recommends running this drill at least annually and after any material change to your DNS provider or telemetry pipeline.
+
+{{% /collapse-content %}}
+
+## Fail over during an incident
+
+After completing and testing your DNS failover setup, you're ready to trigger a failover in the case of an incident. To fail over:
+
+1. Update your DNS record to point to the secondary Datadog data center endpoint (for example, from `mrf.us5.datadoghq.com` to `mrf.us3.datadoghq.com`). No coordination with Datadog is required to initiate DNS failover.
+1. **Cloud integrations (if applicable):** TODO
+1. Confirm that new telemetry appears in your secondary organization.
+
+When the primary region is available and you're ready to return, restore your DNS record's original value. Confirm that new telemetry resumes in your primary organization.
 
 ## Further reading
 
