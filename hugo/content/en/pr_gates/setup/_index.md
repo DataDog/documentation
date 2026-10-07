@@ -41,7 +41,7 @@ To create a PR Gates rule in Datadog:
 
    {{< img src="pr_gates/setup/static_analysis_4.png" alt="A Static Code Analysis rule that runs on all repos and fails when a PR has at least one Static Code Analysis code vulnerability with at least `Critical` severity" style="width:100%" >}}
 
-1. Under {{< ui >}}Preview checks{{< /ui >}}, select your source code management provider to preview the status check to be added to pull requests. To set the check so it blocks PRs when it fails, follow your provider's instructions to ensure required PR Gates are passing before a PR can be merged:
+1. Under {{< ui >}}Preview checks{{< /ui >}}, select your source code management provider to preview the status check to be added to pull requests. To block PRs when a rule fails, follow your provider's instructions to require PR Gates to pass before merging. In GitHub, Azure DevOps, and Bitbucket Cloud this is done by setting PR Gates' checks as required. In GitLab, this is done by setting the Datadog service account you created when installing the GitLab Source Code integration as a required approver:
 
    - [GitHub][2]
    - [GitLab][9]
