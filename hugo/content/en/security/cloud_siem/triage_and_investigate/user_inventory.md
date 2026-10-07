@@ -47,14 +47,15 @@ User Inventory and [Entity Risks][1] answer different questions. User Inventory 
 
 ### Permissions
 
-Two Cloud SIEM permissions apply to User Inventory:
+The following Cloud SIEM permissions apply to User Inventory:
 
 | Permission | What it grants |
 | ---------- | -------------- |
-| `SIEM Entities Read` | View the User Inventory Explorer and search it, open the user side panel, and see the correlated-user pill in the Signals side panel. Also grants read access to Entity Pack side panels in the Content Packs explorer. |
-| `SIEM Entities Admin` | Everything `SIEM Entities Read` grants, plus the ability to configure Entity Packs and other Entity Risks settings. Required to complete the Entity Packs prerequisite below. |
+| **SIEM Entities Notifications** | Users with this permission can modify Entity Risk notifications. |
+| **SIEM Entities Read** | View the User Inventory Explorer and search it, open the user side panel, and see the correlated-user pill in the Signals side panel. Also grants read access to Entity Pack side panels in the Content Packs explorer. |
+| **SIEM Entities Admin** | Everything SIEM Entities Read grants, plus the ability to configure Entity Packs and other Entity Risks settings. Required to complete the Entity Packs prerequisite below. |
 
-<div class="alert alert-info">An empty User Inventory with no filters applied has two possible causes: no Entity Packs are enabled, or you do not have the <code>SIEM Entities Read</code> permission. Confirm your Entity Pack configuration first, then confirm your permissions.</div>
+<div class="alert alert-info">An empty User Inventory with no filters applied has two possible causes: no Entity Packs are enabled, or you do not have the <strong>SIEM Entities Read</strong> permission. Confirm your Entity Pack configuration first, then confirm your permissions.</div>
 
 ### Entity Packs
 
