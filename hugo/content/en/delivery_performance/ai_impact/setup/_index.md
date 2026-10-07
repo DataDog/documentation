@@ -17,9 +17,9 @@ further_reading:
 AI Impact is available to all Datadog customers in Preview.
 {{< /callout >}}
 
-[AI Impact][1] classifies each pull request as {{< ui >}}AI-assisted{{< /ui >}} or {{< ui >}}non-AI{{< /ui >}} based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit. 
+[AI Impact][1] classifies each pull request as {{< ui >}}AI-assisted{{< /ui >}} or {{< ui >}}non-AI{{< /ui >}} based on the sources it detects for your AI coding tools. A source is a signal that an AI coding tool contributed to a commit or PR. 
 
-Configure your AI coding tools and sources at [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}AI Impact{{< /ui >}}][2]. Datadog points you to the recommended source for the most accurate classification for each tool.
+Configure your AI coding tools and sources at [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Delivery Performance{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}AI Impact{{< /ui >}}][2]. Datadog points you to the recommended source for the most accurate classification for each coding assistant, and preset mapping rules help detect activity from common review agents and autonomous agents.
 
 ## Prerequisites
 
